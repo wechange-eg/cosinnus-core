@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.apis package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.core package" href="cosinnus.core.html" />
+    <link rel="prev" title="cosinnus.api_frontend.views package" href="cosinnus.api_frontend.views.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-apis-package">
+<h1>cosinnus.apis package<a class="headerlink" href="#cosinnus-apis-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.apis.bigbluebutton">
+<span id="cosinnus-apis-bigbluebutton-module"></span><h2>cosinnus.apis.bigbluebutton module<a class="headerlink" href="#module-cosinnus.apis.bigbluebutton" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.apis.bigbluebutton.</span></span><span class="sig-name descname"><span class="pre">BigBlueButtonAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_object</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is a wrapper for django-bigbluebutton.bbb</p>
+<p>Some features are not present in bbb.py; for instance a meeting creation with a <cite>max_attendees</cite> value.
+Therefore we create a create_verbose_meeting function, to address these properties of a BBBRoom 
+we need in the WeChange project.</p>
+<p>Functions that are not included in bbb.py are called <cite>manually</cite> via urllib.
+For a full documentation on BigBlueButton API parameters have a look at: <a class="reference external" href="https://docs.bigbluebutton.org/dev/api.html">https://docs.bigbluebutton.org/dev/api.html</a></p>
+<p>Checksum for API parameters is generated with SHA1 instead of SHA256 hash by default. Set the used hash algorithm in the 
+global settings in <cite>BBB_HASH_ALGORITHM</cite>.
+All wrapped functions from bbb.py are called with sha1, regardless of the <cite>BBB_HASH_ALGORITHM</cite> setting.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.RecordingAPIServerNotSetUp">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RecordingAPIServerNotSetUp</span></span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.RecordingAPIServerNotSetUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.api_auth_secret">
+<span class="sig-name descname"><span class="pre">api_auth_secret</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.api_auth_secret" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.api_auth_url">
+<span class="sig-name descname"><span class="pre">api_auth_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.api_auth_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.api_call">
+<span class="sig-name descname"><span class="pre">api_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.api_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.delete_recorded_meetings">
+<span class="sig-name descname"><span class="pre">delete_recorded_meetings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.delete_recorded_meetings" title="Permalink to this definition">¶</a></dt>
+<dd><p>This an implementation of the <cite>deleteRecordingsAnchor</cite> API call for BBB.
+Will delete a recording with the given id, if found.
+Note: this uses a seperate API url and auth from the regular BBB servers!</p>
+<p>See <a class="reference external" href="https://docs.bigbluebutton.org/dev/api.html#deleterecordings">https://docs.bigbluebutton.org/dev/api.html#deleterecordings</a></p>
+<p>&#64;param record_id: the str recordID of the BBB recording to delete.
+:return: True if the deletion was successful, False if not.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.end_meeting">
+<span class="sig-name descname"><span class="pre">end_meeting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.end_meeting" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a wrapper for the <cite>end_meeting</cite> function in bbb.py</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.get_meetings">
+<span class="sig-name descname"><span class="pre">get_meetings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.get_meetings" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a wrapper for the <cite>get_meetings</cite> function in bbb.py</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>XML representation of the API result</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>XML</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.get_recorded_meetings">
+<span class="sig-name descname"><span class="pre">get_recorded_meetings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.get_recorded_meetings" title="Permalink to this definition">¶</a></dt>
+<dd><p>This an implementation of the <cite>getRecordings</cite> API call for BBB.
+Will only retrieve recorded meetings with the meta tag assigning it to the current portal.
+Note: this uses a seperate API url and auth from the regular BBB servers!</p>
+<dl class="simple">
+<dt>&#64;param group_id: if supplied, will only return recorded meetings for the CosinnusGroup (conference)</dt><dd><p>with the given id.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a list of JSON objects for the recorded meetings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.is_running">
+<span class="sig-name descname"><span class="pre">is_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.is_running" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a wrapper for the <cite>is_running</cite> function in bbb.py</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>XML representation of the API result</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>XML</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.join_url">
+<span class="sig-name descname"><span class="pre">join_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_parameter_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.join_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the join api url with parameters and hash to join a conversation1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meeting_id</strong> – ID of the meeting to join</p></li>
+<li><p><strong>name</strong> – Name of the user to join</p></li>
+<li><p><strong>password</strong> – </p></li>
+<li><p><strong>extra_parameter_dict</strong> – Any extra parameters for the user join link.
+See <a class="reference external" href="https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join">https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p>:type dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>XML representation of the API result</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>XML</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.join_url_tokenized">
+<span class="sig-name descname"><span class="pre">join_url_tokenized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.join_url_tokenized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.meeting_info">
+<span class="sig-name descname"><span class="pre">meeting_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.meeting_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.recording_api_auth_secret">
+<span class="sig-name descname"><span class="pre">recording_api_auth_secret</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.recording_api_auth_secret" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.recording_api_auth_url">
+<span class="sig-name descname"><span class="pre">recording_api_auth_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.recording_api_auth_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moderator_password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attendee_password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voice_bridge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_meeting_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presentation_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.start" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>This function calls the BigBlueButton API directly to create a meeting with all available parameters available</dt><dd><p>in the cosinnus-core.BBBRoom model.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Human readable name for the meeting</p></li>
+<li><p><strong>meeting_id</strong> – Human readable ID for the meeting</p></li>
+<li><p><strong>moderator_password</strong> – Password for users to join with moderator privileges</p></li>
+<li><p><strong>attendee_password</strong> – Password for users to join with default attendee privileges</p></li>
+<li><p><strong>voice_bridge</strong> – Dial in PIN for telephone users</p></li>
+<li><p><strong>parent_meeting_id</strong> – Breaking room for a running conference</p></li>
+<li><p><strong>options</strong> – BBBRoom options according to the listed options in the BigBlueButton API</p></li>
+<li><p><strong>presentation_url</strong> – Publicly available URL of presentation file to be pre-uploaded as slides to BBB room</p></li>
+</ul>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>XML representation of the API result</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>XML</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.xml_join">
+<span class="sig-name descname"><span class="pre">xml_join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.xml_join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a XML representation of the join call. !! Use only in Testing !!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the user shown to other attendees in the conversation</p></li>
+<li><p><strong>meeting_id</strong> – Identifier of the meeting</p></li>
+<li><p><strong>password</strong> – Password for the user to join</p></li>
+</ul>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.apis.cleverreach">
+<span id="cosinnus-apis-cleverreach-module"></span><h2>cosinnus.apis.cleverreach module<a class="headerlink" href="#module-cosinnus.apis.cleverreach" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.apis.cleverreach.signup_user_to_cleverreach_group">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.apis.cleverreach.</span></span><span class="sig-name descname"><span class="pre">signup_user_to_cleverreach_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.cleverreach.signup_user_to_cleverreach_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does a signup to a cleverreach newsletter group for a given user (unless they have already signed up before).
+Settings <cite>COSINNUS_CLEVERREACH_BASE_URL</cite>, <cite>COSINNUS_CLEVERREACH_GROUP_IDS</cite>, <cite>COSINNUS_CLEVERREACH_ACCESS_TOKEN</cite> must be configured.
+If setting <cite>COSINNUS_CLEVERREACH_FORM_IDS</cite> is also configured, the user will be signed up</p>
+<blockquote>
+<div><p>to the newsletter group, then deactivated, then sent an activation mail via the signup form.
+This acts as if he had just signed up via the form himself, and thus, the confirmation mail
+and the subsequent welcome mails are triggered.</p>
+</div></blockquote>
+<p>We will also flag the user as signed up to the newsletter in his profile settings.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.apis.cleverreach.signup_user_to_cleverreach_group_receiver">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.apis.cleverreach.</span></span><span class="sig-name descname"><span class="pre">signup_user_to_cleverreach_group_receiver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.cleverreach.signup_user_to_cleverreach_group_receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a threaded cleverreach signup</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.apis">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.apis" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+      <li>Previous: <a href="cosinnus.api_frontend.views.html" title="previous chapter">cosinnus.api_frontend.views package</a></li>
+      <li>Next: <a href="cosinnus.core.html" title="next chapter">cosinnus.core package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.apis.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

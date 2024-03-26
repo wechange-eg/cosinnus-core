@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_note package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_note.api package" href="cosinnus_note.api.html" />
+    <link rel="prev" title="cosinnus_marketplace.utils package" href="cosinnus_marketplace.utils.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-note-package">
+<h1>cosinnus_note package<a class="headerlink" href="#cosinnus-note-package" title="Permalink to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_note.api.html">cosinnus_note.api package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.api.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.api.html#module-cosinnus_note.api.serializers">cosinnus_note.api.serializers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteCreatorSerializer"><code class="docutils literal notranslate"><span class="pre">NoteCreatorSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteCreatorSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">NoteCreatorSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteCreatorSerializer.get_avatar_thumbnail_url"><code class="docutils literal notranslate"><span class="pre">NoteCreatorSerializer.get_avatar_thumbnail_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteCreatorSerializer.get_avatar_url"><code class="docutils literal notranslate"><span class="pre">NoteCreatorSerializer.get_avatar_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteCreatorSerializer.get_id"><code class="docutils literal notranslate"><span class="pre">NoteCreatorSerializer.get_id()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteGroupSerializer"><code class="docutils literal notranslate"><span class="pre">NoteGroupSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteGroupSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">NoteGroupSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteListSerializer"><code class="docutils literal notranslate"><span class="pre">NoteListSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteListSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">NoteListSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteRetrieveSerializer"><code class="docutils literal notranslate"><span class="pre">NoteRetrieveSerializer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.api.html#module-cosinnus_note.api.views">cosinnus_note.api.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet"><code class="docutils literal notranslate"><span class="pre">NoteViewSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.MANAGED_TAGS_FILTER_ON_GROUP"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.MANAGED_TAGS_FILTER_ON_GROUP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.basename"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.basename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.description"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.detail"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.get_serializer_class"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.get_serializer_class()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.name"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.queryset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.suffix"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.suffix</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.api.html#module-cosinnus_note.api">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_note.tests.html">cosinnus_note.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.tests.html#module-cosinnus_note.tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_note.utils.html">cosinnus_note.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.utils.html#module-cosinnus_note.utils.renderer">cosinnus_note.utils.renderer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_note.utils.html#cosinnus_note.utils.renderer.NoteRenderer"><code class="docutils literal notranslate"><span class="pre">NoteRenderer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.utils.html#cosinnus_note.utils.renderer.NoteRenderer.model"><code class="docutils literal notranslate"><span class="pre">NoteRenderer.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.utils.html#cosinnus_note.utils.renderer.NoteRenderer.render"><code class="docutils literal notranslate"><span class="pre">NoteRenderer.render()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.utils.html#cosinnus_note.utils.renderer.NoteRenderer.template"><code class="docutils literal notranslate"><span class="pre">NoteRenderer.template</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.utils.html#cosinnus_note.utils.renderer.NoteRenderer.template_list"><code class="docutils literal notranslate"><span class="pre">NoteRenderer.template_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.utils.html#cosinnus_note.utils.renderer.NoteRenderer.template_single"><code class="docutils literal notranslate"><span class="pre">NoteRenderer.template_single</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.utils.html#cosinnus_note.utils.renderer.NoteRenderer.template_v2"><code class="docutils literal notranslate"><span class="pre">NoteRenderer.template_v2</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.utils.html#module-cosinnus_note.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_note.admin">
+<span id="cosinnus-note-admin-module"></span><h2>cosinnus_note.admin module<a class="headerlink" href="#module-cosinnus_note.admin" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.admin.NoteModelAdmin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.admin.</span></span><span class="sig-name descname"><span class="pre">NoteModelAdmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admin_site</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.admin.NoteModelAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.html#cosinnus.admin.BaseTaggableAdmin" title="cosinnus.admin.BaseTaggableAdmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTaggableAdmin</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.admin.NoteModelAdmin.list_display">
+<span class="sig-name descname"><span class="pre">list_display</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['title',</span> <span class="pre">'group',</span> <span class="pre">'creator',</span> <span class="pre">'created',</span> <span class="pre">'short_text']</span></em><a class="headerlink" href="#cosinnus_note.admin.NoteModelAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_note.admin.NoteModelAdmin.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_note.admin.NoteModelAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.admin.NoteModelAdmin.search_fields">
+<span class="sig-name descname"><span class="pre">search_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['title',</span> <span class="pre">'slug',</span> <span class="pre">'creator__first_name',</span> <span class="pre">'creator__last_name',</span> <span class="pre">'creator__email',</span> <span class="pre">'group__name',</span> <span class="pre">'text']</span></em><a class="headerlink" href="#cosinnus_note.admin.NoteModelAdmin.search_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_note.apps">
+<span id="cosinnus-note-apps-module"></span><h2>cosinnus_note.apps module<a class="headerlink" href="#module-cosinnus_note.apps" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.apps.CosinnusNoteAppConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.apps.</span></span><span class="sig-name descname"><span class="pre">CosinnusNoteAppConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.apps.CosinnusNoteAppConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.apps.CosinnusNoteAppConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note'</span></em><a class="headerlink" href="#cosinnus_note.apps.CosinnusNoteAppConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.apps.CosinnusNoteAppConfig.ready">
+<span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.apps.CosinnusNoteAppConfig.ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method in subclasses to run code when Django starts.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.apps.CosinnusNoteAppConfig.verbose_name">
+<span class="sig-name descname"><span class="pre">verbose_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Cosinnus</span> <span class="pre">Note'</span></em><a class="headerlink" href="#cosinnus_note.apps.CosinnusNoteAppConfig.verbose_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_note.cosinnus_app">
+<span id="cosinnus-note-cosinnus-app-module"></span><h2>cosinnus_note.cosinnus_app module<a class="headerlink" href="#module-cosinnus_note.cosinnus_app" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.cosinnus_app.register">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.cosinnus_app.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.cosinnus_app.register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_note.cosinnus_notifications">
+<span id="cosinnus-note-cosinnus-notifications-module"></span><h2>cosinnus_note.cosinnus_notifications module<a class="headerlink" href="#module-cosinnus_note.cosinnus_notifications" title="Permalink to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="cosinnus_note.cosinnus_notifications.following_note_comment_posted">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.cosinnus_notifications.</span></span><span class="sig-name descname"><span class="pre">following_note_comment_posted</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_note.cosinnus_notifications.following_note_comment_posted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notification definitions.
+These will be picked up by cosinnus_notfications automatically, as long as the 
+variable ‘notifications’ is present in the module ‘&lt;app_name&gt;/cosinnus_notifications.py’.</p>
+<dl class="simple">
+<dt>Both the mail and subject template will be provided with the following context items:</dt><dd><p>:receiver django.auth.User who receives the notification mail
+:sender django.auth.User whose action caused the notification to trigger
+:receiver_name Convenience, full name of the receiver
+:sender_name Convenience, full name of the sender
+:object The object that was created/changed/modified and which the notification is about.
+:object_url The url of the object, if defined by get_absolute_url()
+:object_name The title of the object (only available if it is a BaseTaggableObject)
+:group_name The name of the group the object is housed in (only available if it is a BaseTaggableObject)
+:site_name Current django site’s name
+:domain_url The complete base domain needed to prefix URLs. (eg: ‘<a class="reference external" href="http://sinnwerkstatt.com">http://sinnwerkstatt.com</a>’)
+:notification_settings_url The URL to the cosinnus notification settings page.
+:site Current django site
+:protocol Current portocol, ‘http’ or ‘https’</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_note.dashboard">
+<span id="cosinnus-note-dashboard-module"></span><h2>cosinnus_note.dashboard module<a class="headerlink" href="#module-cosinnus_note.dashboard" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.BaseNotesWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.dashboard.</span></span><span class="sig-name descname"><span class="pre">BaseNotesWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.dashboard.BaseNotesWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin" title="cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">MixReflectedObjectsMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin" title="cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReflectedObjectSelectMixin</span></code></a>, <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.dashboard.DashboardWidget" title="cosinnus.utils.dashboard.DashboardWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidget</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.BaseNotesWidget.app_name">
+<span class="sig-name descname"><span class="pre">app_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'note'</span></em><a class="headerlink" href="#cosinnus_note.dashboard.BaseNotesWidget.app_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.BaseNotesWidget.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.dashboard.BaseNotesWidget.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+if has_more == False, the receiving widget will assume no further data can be loaded.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.BaseNotesWidget.get_template_name">
+<span class="sig-name descname"><span class="pre">get_template_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.dashboard.BaseNotesWidget.get_template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.BaseNotesWidget.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.dashboard.BaseNotesWidget.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Note" title="cosinnus_note.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.BaseNotesWidget.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_note.dashboard.BaseNotesWidget.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.BaseNotesWidget.user_model_attr">
+<span class="sig-name descname"><span class="pre">user_model_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_note.dashboard.BaseNotesWidget.user_model_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.BaseNotesWidget.widget_template_name">
+<span class="sig-name descname"><span class="pre">widget_template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/widgets/base_news_widget.html'</span></em><a class="headerlink" href="#cosinnus_note.dashboard.BaseNotesWidget.widget_template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.dashboard.</span></span><span class="sig-name descname"><span class="pre">DetailedNotes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_note.dashboard.BaseNotesWidget" title="cosinnus_note.dashboard.BaseNotesWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseNotesWidget</span></code></a></p>
+<p>This widget acts as a combined group and user widget.
+Group widget: Contains a note-post form and the latest news
+User widget: Contains the latest news posts from all the user’s groups.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Note!: The user note widget need to get the base_widget.html template instead</dt><dd><p>of the fadedown_base_widget.html template as it contains no form!</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotes.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotes.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.dashboard.DetailedNotesForm" title="cosinnus_note.dashboard.DetailedNotesForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">DetailedNotesForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotes.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotes.render" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotes.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/widgets/detailed_news_content.html'</span></em><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotes.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotes.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Write</span> <span class="pre">a</span> <span class="pre">news</span> <span class="pre">post...'</span></em><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotes.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotes.widget_name">
+<span class="sig-name descname"><span class="pre">widget_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'detailed_news_list'</span></em><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotes.widget_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotesForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.dashboard.</span></span><span class="sig-name descname"><span class="pre">DetailedNotesForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotesForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.dashboard.DashboardWidgetForm" title="cosinnus.forms.dashboard.DashboardWidgetForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidgetForm</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotesForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'link_label':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_icon':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_title':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotesForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotesForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'link_label':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_icon':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_title':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotesForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotesForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotesForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_note.filters">
+<span id="cosinnus-note-filters-module"></span><h2>cosinnus_note.filters module<a class="headerlink" href="#module-cosinnus_note.filters" title="Permalink to this heading">¶</a></h2>
+<p>Created on 05.08.2014</p>
+<p>&#64;author: Sascha</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.filters.NoteFilter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.filters.</span></span><span class="sig-name descname"><span class="pre">NoteFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">queryset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.filters.NoteFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.filters.CosinnusFilterSet" title="cosinnus.views.mixins.filters.CosinnusFilterSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterSet</span></code></a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.filters.NoteFilter.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_note.filters.NoteFilter.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.filters.NoteFilter.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['creator',</span> <span class="pre">'o']</span></em><a class="headerlink" href="#cosinnus_note.filters.NoteFilter.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.filters.NoteFilter.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.filters.NoteFilter.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Note" title="cosinnus_note.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.filters.NoteFilter.base_filters">
+<span class="sig-name descname"><span class="pre">base_filters</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'creator':</span> <span class="pre">&lt;cosinnus.forms.filters.AllObjectsFilter</span> <span class="pre">object&gt;,</span> <span class="pre">'o':</span> <span class="pre">&lt;cosinnus.views.mixins.filters.CosinnusOrderingFilter</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_note.filters.NoteFilter.base_filters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.filters.NoteFilter.declared_filters">
+<span class="sig-name descname"><span class="pre">declared_filters</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'creator':</span> <span class="pre">&lt;cosinnus.forms.filters.AllObjectsFilter</span> <span class="pre">object&gt;,</span> <span class="pre">'o':</span> <span class="pre">&lt;cosinnus.views.mixins.filters.CosinnusOrderingFilter</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_note.filters.NoteFilter.declared_filters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_note.filters.NoteFilter.qs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">qs</span></span><a class="headerlink" href="#cosinnus_note.filters.NoteFilter.qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_note.forms">
+<span id="cosinnus-note-forms-module"></span><h2>cosinnus_note.forms module<a class="headerlink" href="#module-cosinnus_note.forms" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.forms.CommentForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.forms.</span></span><span class="sig-name descname"><span class="pre">CommentForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.forms.CommentForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.forms.CommentForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_note.forms.CommentForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.forms.CommentForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('text',)</span></em><a class="headerlink" href="#cosinnus_note.forms.CommentForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.forms.CommentForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.forms.CommentForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Comment" title="cosinnus_note.models.Comment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Comment</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.forms.CommentForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'text':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_note.forms.CommentForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.forms.CommentForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#cosinnus_note.forms.CommentForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_note.forms.CommentForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_note.forms.CommentForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.forms.NoteForm">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.forms.</span></span><span class="sig-name descname"><span class="pre">NoteForm</span></span><a class="headerlink" href="#cosinnus_note.forms.NoteForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>A django-multiform <code class="xref py py-class docutils literal notranslate"><span class="pre">MultiModelForm</span></code>. Includs support for <cite>group</cite> and
+<cite>attached_objects_querysets</cite> arguments being passed to the underlying main
+form (<code class="xref py py-class docutils literal notranslate"><span class="pre">_NoteForm</span></code>)</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_note.models">
+<span id="cosinnus-note-models-module"></span><h2>cosinnus_note.models module<a class="headerlink" href="#module-cosinnus_note.models" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.models.</span></span><span class="sig-name descname"><span class="pre">Comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created_on</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.created_on">
+<span class="sig-name descname"><span class="pre">created_on</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.created_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.creator">
+<span class="sig-name descname"><span class="pre">creator</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.creator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.creator_id">
+<span class="sig-name descname"><span class="pre">creator_id</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.creator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.get_absolute_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.get_delete_url">
+<span class="sig-name descname"><span class="pre">get_delete_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.get_delete_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.get_edit_url">
+<span class="sig-name descname"><span class="pre">get_edit_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.get_edit_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.get_icon">
+<span class="sig-name descname"><span class="pre">get_icon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.get_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the font-awesome icon specific to this object type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.get_next_by_created_on">
+<span class="sig-name descname"><span class="pre">get_next_by_created_on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created_on&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.get_next_by_created_on" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.get_notification_hash_id">
+<span class="sig-name descname"><span class="pre">get_notification_hash_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.get_notification_hash_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overrides the item hashing for notification alert hashing, so that
+he parent item is considered as “the same” item, instead of this comment</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.get_previous_by_created_on">
+<span class="sig-name descname"><span class="pre">get_previous_by_created_on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created_on&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.get_previous_by_created_on" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.grant_extra_read_permissions">
+<span class="sig-name descname"><span class="pre">grant_extra_read_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.grant_extra_read_permissions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comments inherit their visibility from their commented on parent</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.group">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">group</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Needed by the notifications system</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.is_user_following">
+<span class="sig-name descname"><span class="pre">is_user_following</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.is_user_following" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegates to parent object</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.note">
+<span class="sig-name descname"><span class="pre">note</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.note_id">
+<span class="sig-name descname"><span class="pre">note_id</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.note_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_note.models.Comment.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the parent object of this comment</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Comment.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current instance. Override this in a subclass if you want to
+control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Comment.text">
+<span class="sig-name descname"><span class="pre">text</span></span><a class="headerlink" href="#cosinnus_note.models.Comment.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.models.</span></span><span class="sig-name descname"><span class="pre">Note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.models.html#cosinnus.models.tagged.LikeableObjectMixin" title="cosinnus.models.tagged.LikeableObjectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">LikeableObjectMixin</span></code></a>, <a class="reference internal" href="cosinnus.models.mixins.html#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin" title="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">TranslateableFieldsModelMixin</span></code></a>, <a class="reference internal" href="cosinnus.models.mixins.html#cosinnus.models.mixins.tagged.RelayMessageMixin" title="cosinnus.models.mixins.tagged.RelayMessageMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RelayMessageMixin</span></code></a>, <a class="reference internal" href="cosinnus.models.html#cosinnus.models.tagged.BaseTaggableObjectModel" title="cosinnus.models.tagged.BaseTaggableObjectModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTaggableObjectModel</span></code></a></p>
+<p>Model for a news post.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cosinnus_note.models.Note.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.EMPTY_TITLE_PLACEHOLDER">
+<span class="sig-name descname"><span class="pre">EMPTY_TITLE_PLACEHOLDER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'---'</span></em><a class="headerlink" href="#cosinnus_note.models.Note.EMPTY_TITLE_PLACEHOLDER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cosinnus_note.models.Note.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.SORT_FIELDS_ALIASES">
+<span class="sig-name descname"><span class="pre">SORT_FIELDS_ALIASES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('title',</span> <span class="pre">'title'),</span> <span class="pre">('creator',</span> <span class="pre">'creator'),</span> <span class="pre">('created',</span> <span class="pre">'created')]</span></em><a class="headerlink" href="#cosinnus_note.models.Note.SORT_FIELDS_ALIASES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.attached_objects">
+<span class="sig-name descname"><span class="pre">attached_objects</span></span><a class="headerlink" href="#cosinnus_note.models.Note.attached_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.comments">
+<span class="sig-name descname"><span class="pre">comments</span></span><a class="headerlink" href="#cosinnus_note.models.Note.comments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.created">
+<span class="sig-name descname"><span class="pre">created</span></span><a class="headerlink" href="#cosinnus_note.models.Note.created" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.creator">
+<span class="sig-name descname"><span class="pre">creator</span></span><a class="headerlink" href="#cosinnus_note.models.Note.creator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.creator_id">
+<span class="sig-name descname"><span class="pre">creator_id</span></span><a class="headerlink" href="#cosinnus_note.models.Note.creator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.facebook_post_id">
+<span class="sig-name descname"><span class="pre">facebook_post_id</span></span><a class="headerlink" href="#cosinnus_note.models.Note.facebook_post_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_absolute_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_comment_post_url">
+<span class="sig-name descname"><span class="pre">get_comment_post_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_comment_post_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_current">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_current" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a queryset of the current upcoming events</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_current_for_portal">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_current_for_portal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_current_for_portal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a queryset of the current Notes for this portal</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_delete_url">
+<span class="sig-name descname"><span class="pre">get_delete_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_delete_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to get_absolute_url, this returns the URL for this object’s implemented delete view.
+Needs to be set by a specific implementation of BaseTaggableObjectModel</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_edit_url">
+<span class="sig-name descname"><span class="pre">get_edit_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_edit_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_facebook_post_url">
+<span class="sig-name descname"><span class="pre">get_facebook_post_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_facebook_post_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this post has been posted to facebook and its id is known, returns the URL to the facebook post. 
+&#64;return: A string URL to a facebook post or None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_icon">
+<span class="sig-name descname"><span class="pre">get_icon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the font-awesome icon specific to this object type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_message_text">
+<span class="sig-name descname"><span class="pre">get_message_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_message_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementing <cite>RelayMessageMixin</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_message_title">
+<span class="sig-name descname"><span class="pre">get_message_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_message_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementing <cite>RelayMessageMixin</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_next_by_created">
+<span class="sig-name descname"><span class="pre">get_next_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_next_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_next_by_last_action">
+<span class="sig-name descname"><span class="pre">get_next_by_last_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_action&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_next_by_last_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_next_by_last_modified">
+<span class="sig-name descname"><span class="pre">get_next_by_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_modified&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_next_by_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_previous_by_created">
+<span class="sig-name descname"><span class="pre">get_previous_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_previous_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_previous_by_last_action">
+<span class="sig-name descname"><span class="pre">get_previous_by_last_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_action&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_previous_by_last_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_previous_by_last_modified">
+<span class="sig-name descname"><span class="pre">get_previous_by_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_modified&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_previous_by_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.get_readable_title">
+<span class="sig-name descname"><span class="pre">get_readable_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_readable_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns either the title if set, or the text of this news post</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.group">
+<span class="sig-name descname"><span class="pre">group</span></span><a class="headerlink" href="#cosinnus_note.models.Note.group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.group_id">
+<span class="sig-name descname"><span class="pre">group_id</span></span><a class="headerlink" href="#cosinnus_note.models.Note.group_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#cosinnus_note.models.Note.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.last_action">
+<span class="sig-name descname"><span class="pre">last_action</span></span><a class="headerlink" href="#cosinnus_note.models.Note.last_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.last_action_user">
+<span class="sig-name descname"><span class="pre">last_action_user</span></span><a class="headerlink" href="#cosinnus_note.models.Note.last_action_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.last_action_user_id">
+<span class="sig-name descname"><span class="pre">last_action_user_id</span></span><a class="headerlink" href="#cosinnus_note.models.Note.last_action_user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.last_modified">
+<span class="sig-name descname"><span class="pre">last_modified</span></span><a class="headerlink" href="#cosinnus_note.models.Note.last_modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.likes">
+<span class="sig-name descname"><span class="pre">likes</span></span><a class="headerlink" href="#cosinnus_note.models.Note.likes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the one-to-many relation created
+by GenericRelation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">GenericRelation</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">post.comments</span></code> is a ReverseGenericManyToOneDescriptor instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.media_tag">
+<span class="sig-name descname"><span class="pre">media_tag</span></span><a class="headerlink" href="#cosinnus_note.models.Note.media_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Restaurant.place</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardOneToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.media_tag_id">
+<span class="sig-name descname"><span class="pre">media_tag_id</span></span><a class="headerlink" href="#cosinnus_note.models.Note.media_tag_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_note.models.Note.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current instance. Override this in a subclass if you want to
+control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><a class="headerlink" href="#cosinnus_note.models.Note.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.short_text">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">short_text</span></span><a class="headerlink" href="#cosinnus_note.models.Note.short_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.slug">
+<span class="sig-name descname"><span class="pre">slug</span></span><a class="headerlink" href="#cosinnus_note.models.Note.slug" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.text">
+<span class="sig-name descname"><span class="pre">text</span></span><a class="headerlink" href="#cosinnus_note.models.Note.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.timeline_template">
+<span class="sig-name descname"><span class="pre">timeline_template</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/v2/dashboard/timeline_item.html'</span></em><a class="headerlink" href="#cosinnus_note.models.Note.timeline_template" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#cosinnus_note.models.Note.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.translations">
+<span class="sig-name descname"><span class="pre">translations</span></span><a class="headerlink" href="#cosinnus_note.models.Note.translations" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.urls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">urls</span></span><a class="headerlink" href="#cosinnus_note.models.Note.urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all URLs contained in the note’s text</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.video">
+<span class="sig-name descname"><span class="pre">video</span></span><a class="headerlink" href="#cosinnus_note.models.Note.video" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.video_id">
+<span class="sig-name descname"><span class="pre">video_id</span></span><a class="headerlink" href="#cosinnus_note.models.Note.video_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the video id from a URL as such:
+<a class="reference external" href="http://www.youtube.com/watch?v=CENF14Iloxw&amp;hq=1">http://www.youtube.com/watch?v=CENF14Iloxw&amp;hq=1</a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_note.models.Note.video_thumbnail">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">video_thumbnail</span></span><a class="headerlink" href="#cosinnus_note.models.Note.video_thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_note.search_indexes">
+<span id="cosinnus-note-search-indexes-module"></span><h2>cosinnus_note.search_indexes module<a class="headerlink" href="#module-cosinnus_note.search_indexes" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.search_indexes.NoteIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.search_indexes.</span></span><span class="sig-name descname"><span class="pre">NoteIndex</span></span><a class="headerlink" href="#cosinnus_note.search_indexes.NoteIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.search.BaseTaggableObjectIndex" title="cosinnus.utils.search.BaseTaggableObjectIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTaggableObjectIndex</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Indexable</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.search_indexes.NoteIndex.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'boosted':</span> <span class="pre">&lt;haystack.fields.NgramField</span> <span class="pre">object&gt;,</span> <span class="pre">'created':</span> <span class="pre">&lt;cosinnus.utils.search.TimezoneAwareHaystackDateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'creator':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'group':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_members':</span> <span class="pre">&lt;haystack.fields.MultiValueField</span> <span class="pre">object&gt;,</span> <span class="pre">'location':</span> <span class="pre">&lt;haystack.fields.LocationField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_location':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_location_lat':</span> <span class="pre">&lt;haystack.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_location_lon':</span> <span class="pre">&lt;haystack.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_text_topics':</span> <span class="pre">&lt;cosinnus.utils.search.CommaSeperatedIntegerMultiValueField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_topics':</span> <span class="pre">&lt;cosinnus.utils.search.CommaSeperatedIntegerMultiValueField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_visibility':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'portal':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'rendered':</span> <span class="pre">&lt;cosinnus.utils.search.TemplateResolveCharField</span> <span class="pre">object&gt;,</span> <span class="pre">'text':</span> <span class="pre">&lt;cosinnus.utils.search.TemplateResolveNgramField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_note.search_indexes.NoteIndex.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.search_indexes.NoteIndex.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.search_indexes.NoteIndex.get_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return the <code class="docutils literal notranslate"><span class="pre">Model</span></code> class (not an instance) that the rest of the
+<code class="docutils literal notranslate"><span class="pre">SearchIndex</span></code> should use.</p>
+<p>This method is required &amp; you must override it to return the correct class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.search_indexes.NoteIndex.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;haystack.manager.SearchIndexManager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_note.search_indexes.NoteIndex.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_note.urls">
+<span id="cosinnus-note-urls-module"></span><h2>cosinnus_note.urls module<a class="headerlink" href="#module-cosinnus_note.urls" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_note.views">
+<span id="cosinnus-note-views-module"></span><h2>cosinnus_note.views module<a class="headerlink" href="#module-cosinnus_note.views" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">CommentCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentCreateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxFormsCommentCreateViewMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.forms.CommentForm" title="cosinnus_note.forms.CommentForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommentForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is valid, save the associated model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle GET requests: instantiate a blank version of the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.group_field">
+<span class="sig-name descname"><span class="pre">group_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'note__group'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.group_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual filter keyword used in the queryset’s <cite>filter</cite> function</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">comment</span> <span class="pre">was</span> <span class="pre">added</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Comment" title="cosinnus_note.models.Comment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Comment</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle POST requests: instantiate a form instance with the passed
+POST variables and then check if it’s valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/note_detail.html'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">CommentDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxFormsDeleteViewMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDeleteView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDeleteView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDeleteView.group_field">
+<span class="sig-name descname"><span class="pre">group_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'note__group'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView.group_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual filter keyword used in the queryset’s <cite>filter</cite> function</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDeleteView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">comment</span> <span class="pre">was</span> <span class="pre">deleted</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDeleteView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Comment" title="cosinnus_note.models.Comment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Comment</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDeleteView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDeleteView.template_name_suffix">
+<span class="sig-name descname"><span class="pre">template_name_suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_delete'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView.template_name_suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDetailView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">CommentDetailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentDetailView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SingleObjectMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDetailView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentDetailView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDetailView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.CommentDetailView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Comment" title="cosinnus_note.models.Comment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Comment</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentDetailView.permanent">
+<span class="sig-name descname"><span class="pre">permanent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_note.views.CommentDetailView.permanent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">CommentUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentUpdateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentUpdateView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_note.views.CommentUpdateView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.forms.CommentForm" title="cosinnus_note.forms.CommentForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommentForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentUpdateView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentUpdateView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentUpdateView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentUpdateView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentUpdateView.group_field">
+<span class="sig-name descname"><span class="pre">group_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'note__group'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentUpdateView.group_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual filter keyword used in the queryset’s <cite>filter</cite> function</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentUpdateView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.CommentUpdateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Comment" title="cosinnus_note.models.Comment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Comment</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentUpdateView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.CommentUpdateView.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle POST requests: instantiate a form instance with the passed
+POST variables and then check if it’s valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.CommentUpdateView.template_name_suffix">
+<span class="sig-name descname"><span class="pre">template_name_suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_update'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentUpdateView.template_name_suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">NoteCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteCreateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.facebook_integration.FacebookIntegrationViewMixin" title="cosinnus.views.facebook_integration.FacebookIntegrationViewMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FacebookIntegrationViewMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.GroupFormKwargsMixin" title="cosinnus.views.mixins.group.GroupFormKwargsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupFormKwargsMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.user.UserFormKwargsMixin" title="cosinnus.views.mixins.user.UserFormKwargsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserFormKwargsMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxFormsCreateViewMixin</span></code>, <a class="reference internal" href="cosinnus.views.html#cosinnus.views.attached_object.CreateViewAttachable" title="cosinnus.views.attached_object.CreateViewAttachable"><code class="xref py py-class docutils literal notranslate"><span class="pre">CreateViewAttachable</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.ajax_form_partial">
+<span class="sig-name descname"><span class="pre">ajax_form_partial</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/v2/note_form_core.html'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.ajax_form_partial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.ajax_result_partial">
+<span class="sig-name descname"><span class="pre">ajax_result_partial</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/v2/dashboard/timeline_item_ajax_partial.html'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.ajax_result_partial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">TaggableObjectForm</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.form_invalid">
+<span class="sig-name descname"><span class="pre">form_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.form_invalid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is invalid, we simply redirect to the success url, except if we come from the create view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is valid, save the associated model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.form_view">
+<span class="sig-name descname"><span class="pre">form_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'add'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.form_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">news</span> <span class="pre">post</span> <span class="pre">was</span> <span class="pre">added</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Note" title="cosinnus_note.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle POST requests: instantiate a form instance with the passed
+POST variables and then check if it’s valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/note_form.html'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">NoteDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxFormsDeleteViewMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteDeleteView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteDeleteView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteDeleteView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">news</span> <span class="pre">post</span> <span class="pre">was</span> <span class="pre">deleted</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteDeleteView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.NoteDeleteView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Note" title="cosinnus_note.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteDeleteView.template_name_suffix">
+<span class="sig-name descname"><span class="pre">template_name_suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_delete'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteDeleteView.template_name_suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteDetailView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">NoteDetailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteDetailView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.reflected_objects.ReflectedObjectRedirectNoticeMixin" title="cosinnus.views.mixins.reflected_objects.ReflectedObjectRedirectNoticeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReflectedObjectRedirectNoticeMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin" title="cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReflectedObjectSelectMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteDetailView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.NoteDetailView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Note" title="cosinnus_note.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteDetailView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/note_detail.html'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteDetailView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedCurrentPortalView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">NoteEmbedCurrentPortalView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteEmbedCurrentPortalView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_note.views.NoteEmbedGlobalView" title="cosinnus_note.views.NoteEmbedGlobalView"><code class="xref py py-class docutils literal notranslate"><span class="pre">NoteEmbedGlobalView</span></code></a></p>
+<p>Displays all notes in this Portal in an embeddable view, not just from a specific group</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedCurrentPortalView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteEmbedCurrentPortalView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only ever show public notes</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedGlobalView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">NoteEmbedGlobalView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteEmbedGlobalView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.pagination.PaginationTemplateMixin" title="cosinnus.utils.pagination.PaginationTemplateMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PaginationTemplateMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ListView</span></code></p>
+<p>Displays all notes in all Portals in an embeddable view, not just from a specific group</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedGlobalView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteEmbedGlobalView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only ever show public notes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedGlobalView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.NoteEmbedGlobalView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Note" title="cosinnus_note.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedGlobalView.per_page">
+<span class="sig-name descname"><span class="pre">per_page</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#cosinnus_note.views.NoteEmbedGlobalView.per_page" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedGlobalView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/note_embed.html'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteEmbedGlobalView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">NoteEmbedView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteEmbedView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.DipatchGroupURLMixin" title="cosinnus.views.mixins.group.DipatchGroupURLMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DipatchGroupURLMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin" title="cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">MixReflectedObjectsMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.pagination.PaginationTemplateMixin" title="cosinnus.utils.pagination.PaginationTemplateMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PaginationTemplateMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ListView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteEmbedView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only ever show public notes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.NoteEmbedView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Note" title="cosinnus_note.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedView.per_page">
+<span class="sig-name descname"><span class="pre">per_page</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#cosinnus_note.views.NoteEmbedView.per_page" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteEmbedView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/note_embed.html'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteEmbedView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteIndexView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">NoteIndexView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteIndexView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteIndexView.get_redirect_url">
+<span class="sig-name descname"><span class="pre">get_redirect_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteIndexView.get_redirect_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL redirect to. Keyword arguments from the URL pattern
+match generating the redirect request are provided as kwargs to this
+method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteIndexView.permanent">
+<span class="sig-name descname"><span class="pre">permanent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_note.views.NoteIndexView.permanent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">NoteListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.filters.CosinnusFilterMixin" title="cosinnus.views.mixins.filters.CosinnusFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin" title="cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">MixReflectedObjectsMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin" title="cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReflectedObjectSelectMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.pagination.PaginationTemplateMixin" title="cosinnus.utils.pagination.PaginationTemplateMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PaginationTemplateMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ListView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteListView.filterset_class">
+<span class="sig-name descname"><span class="pre">filterset_class</span></span><a class="headerlink" href="#cosinnus_note.views.NoteListView.filterset_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.filters.NoteFilter" title="cosinnus_note.filters.NoteFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">NoteFilter</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteListView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteListView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the context for this view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteListView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteListView.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter queryset for items which can be accessed by the user given their
+visibility tags</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteListView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.NoteListView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Note" title="cosinnus_note.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteListView.per_page">
+<span class="sig-name descname"><span class="pre">per_page</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#cosinnus_note.views.NoteListView.per_page" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">NoteUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin" title="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">EditViewWatchChangesMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.GroupFormKwargsMixin" title="cosinnus.views.mixins.group.GroupFormKwargsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupFormKwargsMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.user.UserFormKwargsMixin" title="cosinnus.views.mixins.user.UserFormKwargsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserFormKwargsMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.html#cosinnus.views.attached_object.UpdateViewAttachable" title="cosinnus.views.attached_object.UpdateViewAttachable"><code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateViewAttachable</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.changed_attr_watchlist">
+<span class="sig-name descname"><span class="pre">changed_attr_watchlist</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['title',</span> <span class="pre">'text',</span> <span class="pre">'get_attached_objects_hash',</span> <span class="pre">'get_tagged_persons_hash']</span></em><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.changed_attr_watchlist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">TaggableObjectForm</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is valid, save the associated model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.form_view">
+<span class="sig-name descname"><span class="pre">form_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'edit'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.form_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle GET requests: instantiate a blank version of the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">news</span> <span class="pre">post</span> <span class="pre">was</span> <span class="pre">edited</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_note.models.Note" title="cosinnus_note.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.on_save_changed_attrs">
+<span class="sig-name descname"><span class="pre">on_save_changed_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changed_attr_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.on_save_changed_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stub, implement this in your view 
+&#64;param obj: The newly saved object.
+&#64;param changed_attr_dict: k,v dict with k: changed attribue name, v: old value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle POST requests: instantiate a form instance with the passed
+POST variables and then check if it’s valid.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_note/note_form.html'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.comment_create">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">comment_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.comment_create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.comment_delete">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">comment_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.comment_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.comment_detail">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">comment_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.comment_detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.comment_update">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">comment_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.comment_update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.note_create">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">note_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.note_create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.note_delete">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">note_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.note_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.note_detail">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">note_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.note_detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.note_embed">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">note_embed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.note_embed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.note_embed_current_portal">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">note_embed_current_portal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.note_embed_current_portal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays all notes in this Portal in an embeddable view, not just from a specific group</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.note_embed_global">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">note_embed_global</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.note_embed_global" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays all notes in all Portals in an embeddable view, not just from a specific group</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.note_index">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">note_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.note_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.note_list">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">note_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.note_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.views.note_update">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.views.</span></span><span class="sig-name descname"><span class="pre">note_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.note_update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_note">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_note" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_note.get_version">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_note.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derives a PEP386-compliant version number from VERSION.</p>
+<p>Taken from django.utils.version.get_git_changeset at rev ce5e09353d</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+      <li>Previous: <a href="cosinnus_marketplace.utils.html" title="previous chapter">cosinnus_marketplace.utils package</a></li>
+      <li>Next: <a href="cosinnus_note.api.html" title="next chapter">cosinnus_note.api package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_note.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

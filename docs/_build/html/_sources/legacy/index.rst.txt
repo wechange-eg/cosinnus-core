@@ -1,12 +1,13 @@
-Welcome to Cosinnus' documentation!
-===================================
+Legacy Recipes
+==============
+
+Contains documentation of older code that still can be useful.
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
-    
-   initial_setup
+
    api
    attachments
    authentication
@@ -15,12 +16,3 @@ Contents:
    permissions
    templatetags
    ref/cosinnus
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-

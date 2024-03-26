@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.api.views package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.api_frontend package" href="cosinnus.api_frontend.html" />
+    <link rel="prev" title="cosinnus.api.serializers package" href="cosinnus.api.serializers.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-api-views-package">
+<h1>cosinnus.api.views package<a class="headerlink" href="#cosinnus-api-views-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.api.views.group">
+<span id="cosinnus-api-views-group-module"></span><h2>cosinnus.api.views.group module<a class="headerlink" href="#module-cosinnus.api.views.group" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.group.</span></span><span class="sig-name descname"><span class="pre">CosinnusProjectViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.api.views.group.CosinnusSocietyViewSet" title="cosinnus.api.views.group.CosinnusSocietyViewSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusSocietyViewSet</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet.basename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet.detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet.http_method_names">
+<span class="sig-name descname"><span class="pre">http_method_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['get']</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet.http_method_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api.views.mixins.ReadOnlyOrIsAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet.queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.api.serializers.html#cosinnus.api.serializers.group.CosinnusProjectSerializer" title="cosinnus.api.serializers.group.CosinnusProjectSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusProjectSerializer</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusProjectViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusProjectViewSet.suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.group.</span></span><span class="sig-name descname"><span class="pre">CosinnusSocietyViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin" title="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterQuerySetMixin</span></code></a>, <a class="reference internal" href="#cosinnus.api.views.mixins.PublicCosinnusGroupFilterMixin" title="cosinnus.api.views.mixins.PublicCosinnusGroupFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PublicCosinnusGroupFilterMixin</span></code></a>, <a class="reference internal" href="#cosinnus.api.views.mixins.GetForUserViewSetMixin" title="cosinnus.api.views.mixins.GetForUserViewSetMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">GetForUserViewSetMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelViewSet</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.basename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.http_method_names">
+<span class="sig-name descname"><span class="pre">http_method_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['get']</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.http_method_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.lookup_field">
+<span class="sig-name descname"><span class="pre">lookup_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'slug'</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.lookup_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.perform_create">
+<span class="sig-name descname"><span class="pre">perform_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serializer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.perform_create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api.views.mixins.ReadOnlyOrIsAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.api.serializers.html#cosinnus.api.serializers.group.CosinnusSocietySerializer" title="cosinnus.api.serializers.group.CosinnusSocietySerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusSocietySerializer</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.group.CosinnusSocietyViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.group.CosinnusSocietyViewSet.suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.api.views.i18n">
+<span id="cosinnus-api-views-i18n-module"></span><h2>cosinnus.api.views.i18n module<a class="headerlink" href="#module-cosinnus.api.views.i18n" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.i18n.Translations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.i18n.</span></span><span class="sig-name descname"><span class="pre">Translations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.i18n.Translations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">JSONCatalog</span></code></p>
+<p>Return locale and json catalog</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.i18n.Translations.domain">
+<span class="sig-name descname"><span class="pre">domain</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'djangojs'</span></em><a class="headerlink" href="#cosinnus.api.views.i18n.Translations.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.i18n.Translations.render_to_response">
+<span class="sig-name descname"><span class="pre">render_to_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">response_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.i18n.Translations.render_to_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.i18n.translations">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.i18n.</span></span><span class="sig-name descname"><span class="pre">translations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.i18n.translations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return locale and json catalog</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.api.views.mixins">
+<span id="cosinnus-api-views-mixins-module"></span><h2>cosinnus.api.views.mixins module<a class="headerlink" href="#module-cosinnus.api.views.mixins" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.mixins.</span></span><span class="sig-name descname"><span class="pre">CosinnusFilterQuerySetMixin</span></span><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.FILTER_CONDITION_MAP">
+<span class="sig-name descname"><span class="pre">FILTER_CONDITION_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'avatar':</span> <span class="pre">{'false':</span> <span class="pre">[&lt;Q:</span> <span class="pre">(AND:</span> <span class="pre">('avatar',</span> <span class="pre">''))&gt;],</span> <span class="pre">'true':</span> <span class="pre">[&lt;Q:</span> <span class="pre">(NOT</span> <span class="pre">(AND:</span> <span class="pre">('avatar',</span> <span class="pre">'')))&gt;]}}</span></em><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.FILTER_CONDITION_MAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.FILTER_DEFAULT_ORDER">
+<span class="sig-name descname"><span class="pre">FILTER_DEFAULT_ORDER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['-created']</span></em><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.FILTER_DEFAULT_ORDER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.FILTER_KEY_MAP">
+<span class="sig-name descname"><span class="pre">FILTER_KEY_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'tags':</span> <span class="pre">'media_tag__tags__name'}</span></em><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.FILTER_KEY_MAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.FILTER_VALUE_MAP">
+<span class="sig-name descname"><span class="pre">FILTER_VALUE_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'false':</span> <span class="pre">False,</span> <span class="pre">'true':</span> <span class="pre">True}</span></em><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.FILTER_VALUE_MAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.MANAGED_TAGS_FILTER_ON_GROUP">
+<span class="sig-name descname"><span class="pre">MANAGED_TAGS_FILTER_ON_GROUP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.MANAGED_TAGS_FILTER_ON_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.MANAGED_TAGS_KEY">
+<span class="sig-name descname"><span class="pre">MANAGED_TAGS_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'managed_tags'</span></em><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.MANAGED_TAGS_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optionally filter by group
+FIXME: Use generic filters here after upgrade to django-filter==0.15.0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusPaginateMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.mixins.</span></span><span class="sig-name descname"><span class="pre">CosinnusPaginateMixin</span></span><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusPaginateMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.CosinnusPaginateMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.mixins.CosinnusPaginateMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.GetForUserViewSetMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.mixins.</span></span><span class="sig-name descname"><span class="pre">GetForUserViewSetMixin</span></span><a class="headerlink" href="#cosinnus.api.views.mixins.GetForUserViewSetMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.GetForUserViewSetMixin.mine">
+<span class="sig-name descname"><span class="pre">mine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.mixins.GetForUserViewSetMixin.mine" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.PublicCosinnusGroupFilterMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.mixins.</span></span><span class="sig-name descname"><span class="pre">PublicCosinnusGroupFilterMixin</span></span><a class="headerlink" href="#cosinnus.api.views.mixins.PublicCosinnusGroupFilterMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.PublicCosinnusGroupFilterMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.mixins.PublicCosinnusGroupFilterMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.PublicTaggableObjectFilterMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.mixins.</span></span><span class="sig-name descname"><span class="pre">PublicTaggableObjectFilterMixin</span></span><a class="headerlink" href="#cosinnus.api.views.mixins.PublicTaggableObjectFilterMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.PublicTaggableObjectFilterMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.mixins.PublicTaggableObjectFilterMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.ReadOnlyOrIsAdminUser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.mixins.</span></span><span class="sig-name descname"><span class="pre">ReadOnlyOrIsAdminUser</span></span><a class="headerlink" href="#cosinnus.api.views.mixins.ReadOnlyOrIsAdminUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IsAdminUser</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.mixins.ReadOnlyOrIsAdminUser.has_permission">
+<span class="sig-name descname"><span class="pre">has_permission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.mixins.ReadOnlyOrIsAdminUser.has_permission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <cite>True</cite> if permission is granted, <cite>False</cite> otherwise.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.api.views.portal">
+<span id="cosinnus-api-views-portal-module"></span><h2>cosinnus.api.views.portal module<a class="headerlink" href="#module-cosinnus.api.views.portal" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.ConfigurationView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">ConfigurationView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.ConfigurationView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>An endpoint that returns all portal configuration settings. Sensitive data is obfuscated.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.ConfigurationView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.ConfigurationView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.ConfigurationView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.IsAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.ConfigurationView.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.FooterView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">FooterView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.FooterView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Returns navigation including styles to be included within Wordpress</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.FooterView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.FooterView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.HeaderView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">HeaderView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.HeaderView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Returns navigation including styles to be included within Wordpress</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.HeaderView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.HeaderView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SettingsView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SettingsView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SettingsView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Returns portal settings</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SettingsView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SettingsView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsRenderer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SimpleStatisticsBBBRoomVisitsRenderer</span></span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsRenderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CSVRenderer</span></code></p>
+<p>Renders the csv output with custom headers for BBB room visit statistics API endpoint</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsRenderer.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['datetime',</span> <span class="pre">'conference_name',</span> <span class="pre">'conference_slug',</span> <span class="pre">'conference_mtag_slugs',</span> <span class="pre">'conference_creator_email_language',</span> <span class="pre">'room_name',</span> <span class="pre">'room_source_type',</span> <span class="pre">'visitor_hashed_id',</span> <span class="pre">'visitor_mtag_slugs',</span> <span class="pre">'visitor_email_language',</span> <span class="pre">'visitor_location',</span> <span class="pre">'visitor_location_lat',</span> <span class="pre">'visitor_location_lon']</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsRenderer.header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SimpleStatisticsBBBRoomVisitsView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>API endpoint for BBB room visit statistics overview.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.finalize_response">
+<span class="sig-name descname"><span class="pre">finalize_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.finalize_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the csv output with custom headers for project storage report API endpoint</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.get_bbb_room_visit_statistics">
+<span class="sig-name descname"><span class="pre">get_bbb_room_visit_statistics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.get_bbb_room_visit_statistics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.utils.permissions.IsCosinnusAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.renderer_classes">
+<span class="sig-name descname"><span class="pre">renderer_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.JSONRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.BrowsableAPIRenderer'&gt;)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsBBBRoomVisitsView.renderer_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SimpleStatisticsConferenceStorageReportView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>API endpoint for conference storage report overview.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.finalize_response">
+<span class="sig-name descname"><span class="pre">finalize_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.finalize_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends Content-Disposition header to CSV requests and handles the file name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.get_conference_storage_report">
+<span class="sig-name descname"><span class="pre">get_conference_storage_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.get_conference_storage_report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.utils.permissions.IsCosinnusAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.renderer_classes">
+<span class="sig-name descname"><span class="pre">renderer_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api.views.portal.SimpleStatisticsGroupConferenceStorageReportRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.JSONRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.BrowsableAPIRenderer'&gt;)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsConferenceStorageReportView.renderer_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsGroupConferenceStorageReportRenderer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SimpleStatisticsGroupConferenceStorageReportRenderer</span></span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsGroupConferenceStorageReportRenderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CSVRenderer</span></code></p>
+<p>Renders the csv output with custom headers for group and conference storage report API endpoints</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsGroupConferenceStorageReportRenderer.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['urls',</span> <span class="pre">'member_count',</span> <span class="pre">'number_projects',</span> <span class="pre">'group_storage_mb',</span> <span class="pre">'group_and_projects_sum_mb']</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsGroupConferenceStorageReportRenderer.header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SimpleStatisticsGroupStorageReportView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>API endpoint for group storage report overview.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.finalize_response">
+<span class="sig-name descname"><span class="pre">finalize_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.finalize_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends Content-Disposition header to CSV requests and handles the file name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.get_group_storage_report">
+<span class="sig-name descname"><span class="pre">get_group_storage_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.get_group_storage_report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.utils.permissions.IsCosinnusAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.renderer_classes">
+<span class="sig-name descname"><span class="pre">renderer_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api.views.portal.SimpleStatisticsGroupConferenceStorageReportRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.JSONRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.BrowsableAPIRenderer'&gt;)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsGroupStorageReportView.renderer_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportRenderer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SimpleStatisticsProjectStorageReportRenderer</span></span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportRenderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CSVRenderer</span></code></p>
+<p>Renders the csv output with custom headers for project storage report API endpoint</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportRenderer.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['urls',</span> <span class="pre">'member_count',</span> <span class="pre">'project_storage_mb']</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportRenderer.header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SimpleStatisticsProjectStorageReportView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>API endpoint for conference project report overview.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.finalize_response">
+<span class="sig-name descname"><span class="pre">finalize_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.finalize_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the csv output with custom headers for project storage report API endpoint</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.get_project_storage_report">
+<span class="sig-name descname"><span class="pre">get_project_storage_report</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.get_project_storage_report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.utils.permissions.IsCosinnusAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.renderer_classes">
+<span class="sig-name descname"><span class="pre">renderer_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.JSONRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.BrowsableAPIRenderer'&gt;)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsProjectStorageReportView.renderer_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoRenderer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SimpleStatisticsUserActivityInfoRenderer</span></span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoRenderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CSVRenderer</span></code></p>
+<p>Renders the csv output with custom headers for user activity information API endpoint</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoRenderer.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['user-hashed-id',</span> <span class="pre">'projects-and-groups-count',</span> <span class="pre">'groups-only-count',</span> <span class="pre">'projects-only-count',</span> <span class="pre">'admin-of-projects-and-groups-count',</span> <span class="pre">'user-last-authentication-login-days',</span> <span class="pre">'current-tos-accepted',</span> <span class="pre">'registration-date',</span> <span class="pre">'events-attended']</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoRenderer.header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">SimpleStatisticsUserActivityInfoView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>API endpoint for user activity information overview.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.finalize_response">
+<span class="sig-name descname"><span class="pre">finalize_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.finalize_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the csv output with custom headers for project storage report API endpoint</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.get_user_activity_stats">
+<span class="sig-name descname"><span class="pre">get_user_activity_stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.get_user_activity_stats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.utils.permissions.IsCosinnusAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.renderer_classes">
+<span class="sig-name descname"><span class="pre">renderer_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.JSONRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.BrowsableAPIRenderer'&gt;)</span></em><a class="headerlink" href="#cosinnus.api.views.portal.SimpleStatisticsUserActivityInfoView.renderer_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsManagedTagFilteredView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">StatisticsManagedTagFilteredView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsManagedTagFilteredView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.api.views.portal.StatisticsView" title="cosinnus.api.views.portal.StatisticsView"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatisticsView</span></code></a></p>
+<p>Returns a JSON dict of common statistics for this portal, filtered for a managed tag</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_event_qs">
+<span class="sig-name descname"><span class="pre">get_event_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_event_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_note_qs">
+<span class="sig-name descname"><span class="pre">get_note_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_note_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_project_qs">
+<span class="sig-name descname"><span class="pre">get_project_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_project_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_society_qs">
+<span class="sig-name descname"><span class="pre">get_society_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_society_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_user_qs">
+<span class="sig-name descname"><span class="pre">get_user_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsManagedTagFilteredView.get_user_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsManagedTagFilteredView.tag_slug">
+<span class="sig-name descname"><span class="pre">tag_slug</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsManagedTagFilteredView.tag_slug" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">StatisticsView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Returns a JSON dict of common statistics for this portal</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsView.get_event_qs">
+<span class="sig-name descname"><span class="pre">get_event_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsView.get_event_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsView.get_note_qs">
+<span class="sig-name descname"><span class="pre">get_note_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsView.get_note_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsView.get_project_qs">
+<span class="sig-name descname"><span class="pre">get_project_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsView.get_project_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsView.get_society_qs">
+<span class="sig-name descname"><span class="pre">get_society_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsView.get_society_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.StatisticsView.get_user_qs">
+<span class="sig-name descname"><span class="pre">get_user_qs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.StatisticsView.get_user_qs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.config">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>An endpoint that returns all portal configuration settings. Sensitive data is obfuscated.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.footer">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">footer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.footer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns navigation including styles to be included within Wordpress</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.header">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns navigation including styles to be included within Wordpress</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.settings">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns portal settings</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.statictics_bbb_room_visits">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">statictics_bbb_room_visits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.statictics_bbb_room_visits" title="Permalink to this definition">¶</a></dt>
+<dd><p>API endpoint for BBB room visit statistics overview.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.statistics">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.statistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a JSON dict of common statistics for this portal</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.statistics_conference_storage_info">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">statistics_conference_storage_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.statistics_conference_storage_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>API endpoint for conference storage report overview.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.statistics_group_storage_info">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">statistics_group_storage_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.statistics_group_storage_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>API endpoint for group storage report overview.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.statistics_project_storage_info">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">statistics_project_storage_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.statistics_project_storage_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>API endpoint for conference project report overview.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.portal.statistics_user_activity_info">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.portal.</span></span><span class="sig-name descname"><span class="pre">statistics_user_activity_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.portal.statistics_user_activity_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>API endpoint for user activity information overview.</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.api.views.user">
+<span id="cosinnus-api-views-user-module"></span><h2>cosinnus.api.views.user module<a class="headerlink" href="#module-cosinnus.api.views.user" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.OAuthUserView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.user.</span></span><span class="sig-name descname"><span class="pre">OAuthUserView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.OAuthUserView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Used by Oauth2 authentication (Rocket.Chat) to retrieve user details</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.OAuthUserView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.OAuthUserView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.user.</span></span><span class="sig-name descname"><span class="pre">UserViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin" title="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterQuerySetMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelViewSet</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.FILTER_DEFAULT_ORDER">
+<span class="sig-name descname"><span class="pre">FILTER_DEFAULT_ORDER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['-date_joined']</span></em><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.FILTER_DEFAULT_ORDER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.basename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.create_or_update">
+<span class="sig-name descname"><span class="pre">create_or_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serializer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.create_or_update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.http_method_names">
+<span class="sig-name descname"><span class="pre">http_method_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['head',</span> <span class="pre">'post']</span></em><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.http_method_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.perform_create">
+<span class="sig-name descname"><span class="pre">perform_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serializer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.perform_create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.perform_update">
+<span class="sig-name descname"><span class="pre">perform_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serializer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.perform_update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.IsAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">UserCreateUpdateSerializer</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.UserViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api.views.user.UserViewSet.suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.current_user">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.user.</span></span><span class="sig-name descname"><span class="pre">current_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.current_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the current user by their JWT token, and return their data</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.oauth_current_user">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.user.</span></span><span class="sig-name descname"><span class="pre">oauth_current_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.oauth_current_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by Oauth2 authentication (Rocket.Chat) to retrieve user details</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.oauth_profile">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.user.</span></span><span class="sig-name descname"><span class="pre">oauth_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.oauth_profile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api.views.user.oauth_user">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api.views.user.</span></span><span class="sig-name descname"><span class="pre">oauth_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.views.user.oauth_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus.api.views">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.api.views" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+  <li><a href="cosinnus.api.html">cosinnus.api package</a><ul>
+      <li>Previous: <a href="cosinnus.api.serializers.html" title="previous chapter">cosinnus.api.serializers package</a></li>
+      <li>Next: <a href="cosinnus.api_frontend.html" title="next chapter">cosinnus.api_frontend package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.api.views.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -17,6 +17,8 @@ network and organize effectively without relying on commercial software with que
    components
    services
    settings
+   legacy/index
+   refs/modules
 
 Indices and tables
 ==================

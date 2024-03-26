@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.views.mixins package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_cloud package" href="cosinnus_cloud.html" />
+    <link rel="prev" title="cosinnus.views package" href="cosinnus.views.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-views-mixins-package">
+<h1>cosinnus.views.mixins package<a class="headerlink" href="#cosinnus-views-mixins-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.views.mixins.ajax">
+<span id="cosinnus-views-mixins-ajax-module"></span><h2>cosinnus.views.mixins.ajax module<a class="headerlink" href="#module-cosinnus.views.mixins.ajax" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.AjaxableFormMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.ajax.</span></span><span class="sig-name descname"><span class="pre">AjaxableFormMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.ajax.AjaxableFormMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to add AJAX support to a form.</p>
+<p>Must be used with an object-based FormView (e.g. CreateView)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.AjaxableFormMixin.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.ajax.AjaxableFormMixin.delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.AjaxableFormMixin.form_invalid">
+<span class="sig-name descname"><span class="pre">form_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.ajax.AjaxableFormMixin.form_invalid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.AjaxableFormMixin.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.ajax.AjaxableFormMixin.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.AjaxableFormMixin.is_ajax_request_url">
+<span class="sig-name descname"><span class="pre">is_ajax_request_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.views.mixins.ajax.AjaxableFormMixin.is_ajax_request_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is set via the context in urls.py and prevents accessing the
+JSONified version of the mixing view via a non-ajax-url path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.AjaxableFormMixin.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.ajax.AjaxableFormMixin.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.AjaxableFormMixin.render_to_json_response">
+<span class="sig-name descname"><span class="pre">render_to_json_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">response_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.ajax.AjaxableFormMixin.render_to_json_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.AjaxableFormMixin.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.mixins.ajax.AjaxableFormMixin.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Django restframework serializer class for the object of the form</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.ajax.</span></span><span class="sig-name descname"><span class="pre">BaseAjaxableResponseMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base mixin to add AJAX support to GET-ting views.</p>
+<p>Do not use this mixin directly, but rather the specialized mixins (e.g.
+<a class="reference internal" href="#cosinnus.views.mixins.ajax.ListAjaxableResponseMixin" title="cosinnus.views.mixins.ajax.ListAjaxableResponseMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ListAjaxableResponseMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.ajax.DetailAjaxableResponseMixin" title="cosinnus.views.mixins.ajax.DetailAjaxableResponseMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DetailAjaxableResponseMixin</span></code></a>)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin.is_ajax_request_url">
+<span class="sig-name descname"><span class="pre">is_ajax_request_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin.is_ajax_request_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is set via the context in urls.py and prevents accessing the
+JSONified version of the mixing view via a non-ajax-url path</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin.is_object_collection">
+<span class="sig-name descname"><span class="pre">is_object_collection</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin.is_object_collection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Django restframework serializer class for the object of the form</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.DetailAjaxableResponseMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.ajax.</span></span><span class="sig-name descname"><span class="pre">DetailAjaxableResponseMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.ajax.DetailAjaxableResponseMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin" title="cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAjaxableResponseMixin</span></code></a></p>
+<p>Mixin to add AJAX support to a DetailView.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.DetailAjaxableResponseMixin.get_serializable_content">
+<span class="sig-name descname"><span class="pre">get_serializable_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.ajax.DetailAjaxableResponseMixin.get_serializable_content" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.DetailAjaxableResponseMixin.is_object_collection">
+<span class="sig-name descname"><span class="pre">is_object_collection</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.views.mixins.ajax.DetailAjaxableResponseMixin.is_object_collection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.ListAjaxableResponseMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.ajax.</span></span><span class="sig-name descname"><span class="pre">ListAjaxableResponseMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.ajax.ListAjaxableResponseMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin" title="cosinnus.views.mixins.ajax.BaseAjaxableResponseMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAjaxableResponseMixin</span></code></a></p>
+<p>Mixin to add AJAX support to a ListView.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.ListAjaxableResponseMixin.get_serializable_content">
+<span class="sig-name descname"><span class="pre">get_serializable_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.ajax.ListAjaxableResponseMixin.get_serializable_content" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.ListAjaxableResponseMixin.is_object_collection">
+<span class="sig-name descname"><span class="pre">is_object_collection</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus.views.mixins.ajax.ListAjaxableResponseMixin.is_object_collection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.ajax.patch_body_json_data">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.ajax.</span></span><span class="sig-name descname"><span class="pre">patch_body_json_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.ajax.patch_body_json_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Patch the ajax-post body data into the POST field</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.avatar">
+<span id="cosinnus-views-mixins-avatar-module"></span><h2>cosinnus.views.mixins.avatar module<a class="headerlink" href="#module-cosinnus.views.mixins.avatar" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.avatar.AvatarFormMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.avatar.</span></span><span class="sig-name descname"><span class="pre">AvatarFormMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.avatar.AvatarFormMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mix this into your create/update views that contain forms with AvatarFields.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.avatar.AvatarFormMixin.avatar_field_name">
+<span class="sig-name descname"><span class="pre">avatar_field_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'avatar'</span></em><a class="headerlink" href="#cosinnus.views.mixins.avatar.AvatarFormMixin.avatar_field_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.avatar.AvatarFormMixin.form_invalid">
+<span class="sig-name descname"><span class="pre">form_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.avatar.AvatarFormMixin.form_invalid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.avatar.AvatarFormMixin.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.avatar.AvatarFormMixin.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.avatar.AvatarFormMixin.forms_invalid">
+<span class="sig-name descname"><span class="pre">forms_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inlines</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.avatar.AvatarFormMixin.forms_invalid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.avatar.AvatarFormMixin.forms_valid">
+<span class="sig-name descname"><span class="pre">forms_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inlines</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.avatar.AvatarFormMixin.forms_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.filters">
+<span id="cosinnus-views-mixins-filters-module"></span><h2>cosinnus.views.mixins.filters module<a class="headerlink" href="#module-cosinnus.views.mixins.filters" title="Permalink to this heading">¶</a></h2>
+<p>Created on 30.07.2014</p>
+<p>&#64;author: Sascha Narr</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusFilterMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.filters.</span></span><span class="sig-name descname"><span class="pre">CosinnusFilterMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusFilterMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FilterMixin</span></code></p>
+<p>A mixin that provides a way to show and handle a FilterSet in a request.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusFilterMixin.filterset_class">
+<span class="sig-name descname"><span class="pre">filterset_class</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusFilterMixin.filterset_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusFilterMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusFilterMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusFilterMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusFilterMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusFilterSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.filters.</span></span><span class="sig-name descname"><span class="pre">CosinnusFilterSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">queryset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusFilterSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FilterSet</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusFilterSet.base_filters">
+<span class="sig-name descname"><span class="pre">base_filters</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusFilterSet.base_filters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusFilterSet.declared_filters">
+<span class="sig-name descname"><span class="pre">declared_filters</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusFilterSet.declared_filters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusOrderingFilter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.filters.</span></span><span class="sig-name descname"><span class="pre">CosinnusOrderingFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusOrderingFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">OrderingFilter</span></code></p>
+<p>An ordering filter that supports a default ordering value if no orderin is chosen</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusOrderingFilter.default">
+<span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusOrderingFilter.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.filters.CosinnusOrderingFilter.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.filters.CosinnusOrderingFilter.filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.formsets">
+<span id="cosinnus-views-mixins-formsets-module"></span><h2>cosinnus.views.mixins.formsets module<a class="headerlink" href="#module-cosinnus.views.mixins.formsets" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.formsets.JsonFieldFormsetMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.formsets.</span></span><span class="sig-name descname"><span class="pre">JsonFieldFormsetMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.formsets.JsonFieldFormsetMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>View Mixin to provide formset handling for data that is stored in a JSON-field list.
+Usage:</p>
+<ol class="arabic">
+<li><p>Define a form that represents the data you want to store in the JSON-field list.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>class ExampleForm(forms.Form):</dt><dd><p>value1 = forms.CharField()
+value2 = forms.IntegerField()</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p>Define a formset for your form.</p>
+<blockquote>
+<div><p>Set “can_delete” if deletion should be allowed.
+Set “extra=0” if adding should be disabled or “extra=&lt;maximum&gt;” otherwise.</p>
+<blockquote>
+<div><p>ExampleFormSet = formset_factory(ExampleForm, extra=10, can_delete=True)</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>Include the JsonFieldFormsetMixin in your view and provide the configuration.</p>
+<blockquote>
+<div><blockquote>
+<div><dl>
+<dt>class ExampleView(…, JsonFieldFormsetMixin, FormView):</dt><dd><p>…
+json_field_formsets = {</p>
+<blockquote>
+<div><p>‘example_json_field’: ExampleFormSet,
+‘example_json_field2’: ExampleFormSet2,</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>For dynamic formsets get_get_json_field_formsets() can be used to return the definition.</p>
+</div></blockquote>
+</li>
+<li><p>Implement interface functions.</p>
+<blockquote>
+<div><p>The interface function ‘get_instance’ is required and should return the form instance if exists.
+The interface function ‘json_field_formset_initial’ is optional and should return a dict with initial values
+for each json-field formset and is used for its initialization if no instance is available.</p>
+<blockquote>
+<div><dl>
+<dt>class ExampleView(…, JsonFieldFormsetMixin, FormView):</dt><dd><p>…
+def get_instance(self):</p>
+<blockquote>
+<div><p>return instance</p>
+</div></blockquote>
+<dl>
+<dt>def json_field_formset_initial(self):</dt><dd><dl class="simple">
+<dt>return {</dt><dd><p>‘example_json_field’: [{‘value1’: ‘test’, ‘value2’: 1}, …],
+‘example_json_field2’: […],</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>Include the mixin hooks in your view logic.</p>
+<blockquote>
+<div><p>Include the json_field_formset_form_valid_hook() and json_field_formset_pre_save_hook() in the form_valid
+function. Also make sure, if you overwrite the form_invalid function to call super().</p>
+<blockquote>
+<div><dl>
+<dt>class ExampleView(…, JsonFieldFormsetMixin, FormView):</dt><dd><p>…
+def form_valid(self, form):</p>
+<blockquote>
+<div><p>json_field_formsets_valid = self.json_field_formset_form_valid_hook()
+if not json_field_formsets_valid:</p>
+<blockquote>
+<div><p>return self.form_invalid(form)</p>
+</div></blockquote>
+<p>…
+instance = form.save(commit=False)
+…
+self.json_field_formset_pre_save_hook(instance)
+instance.save()
+…</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>Define an inline template for the json-field form.</p>
+<blockquote>
+<div><p>example_inline_form.html:</p>
+<blockquote>
+<div><p>{% load i18n %}
+{% include ‘cosinnus/fields/default_field.html’ with field=inlineform.&lt;field1&gt; … %}
+{% include ‘cosinnus/fields/default_field.html’ with field=inlineform.&lt;field2&gt; … %}
+{{ inlineform.hidden_field }}</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>Include the formsets into the template.</p>
+<blockquote>
+<div><p>The inline_form is added automatically to the context and is named “&lt;json_field_name&gt;_formset”.</p>
+<blockquote>
+<div><p>{% include ‘cosinnus/fields/inlineform_field.html’ with inline_form=example_field_formset label=&lt;label&gt; content_template=&lt;inline_form_template&gt; unique_id=’&lt;id&gt;’ %}</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ol>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.form_invalid">
+<span class="sig-name descname"><span class="pre">form_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.form_invalid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrites form_invalid to re-initialize formsets with submitted data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds formsets to the view context. Initializes the formsets if not already initialized (on GET).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.get_instance">
+<span class="sig-name descname"><span class="pre">get_instance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.get_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the instance with the json fields if available. Used for initialization.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.get_json_field_formsets">
+<span class="sig-name descname"><span class="pre">get_json_field_formsets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.get_json_field_formsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the formsets dict. Can be overwritten for dynamic formsets.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.json_field_formset_form_valid_hook">
+<span class="sig-name descname"><span class="pre">json_field_formset_form_valid_hook</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.json_field_formset_form_valid_hook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook that should be included in form_valid.
+Initializes the formsets on POST and returns if the formsets are valid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.json_field_formset_initial">
+<span class="sig-name descname"><span class="pre">json_field_formset_initial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.json_field_formset_initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict with initial formset values for each json field.
+Used for initialization if no instance is available.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.json_field_formset_pre_save_hook">
+<span class="sig-name descname"><span class="pre">json_field_formset_pre_save_hook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.json_field_formset_pre_save_hook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the formset values in the json field. Should be called before saving the form instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.json_field_formsets">
+<span class="sig-name descname"><span class="pre">json_field_formsets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.mixins.formsets.JsonFieldFormsetMixin.json_field_formsets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.group">
+<span id="cosinnus-views-mixins-group-module"></span><h2>cosinnus.views.mixins.group module<a class="headerlink" href="#module-cosinnus.views.mixins.group" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.DipatchGroupURLMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">DipatchGroupURLMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.DipatchGroupURLMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to resolve a group object from its URL without requiring any access priviledges.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireAdminMixin" title="cosinnus.views.mixins.group.RequireAdminMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireAdminMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin" title="cosinnus.views.mixins.group.RequireCreateObjectsInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireCreateObjectsInMixin</span></code></a></p>
+</div>
+<dl class="simple">
+<dt>Note: Accessing an object with a slug or pk that is not found will always result in two seperate DB hits,</dt><dd><p>because we first do a complete filter for the object, including permissions, pk, group memberships.
+Then, if the object wasn’t found, we re-do the filter without permissions to check if that was the 
+cause, then redirect to a login page or a permission denied page. If the second query also fails to
+match anything, we let the Http404 bubble up.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.DipatchGroupURLMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.DipatchGroupURLMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.DipatchGroupURLMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.DipatchGroupURLMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.EndlessPaginationMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">EndlessPaginationMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.EndlessPaginationMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Support for views using el-pagination (django-el-pagination==2.0)
+Sets self.is_paginated = True if this view is a paginated reload.
+Required class properties:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">items_template</span></code> path to template for items that is split from the main view template.</dt><dd><p>See <a class="reference external" href="http://django-el-pagination.readthedocs.org/en/latest/twitter_pagination.html#split-the-template">http://django-el-pagination.readthedocs.org/en/latest/twitter_pagination.html#split-the-template</a></p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.EndlessPaginationMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.EndlessPaginationMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.EndlessPaginationMixin.is_paginated">
+<span class="sig-name descname"><span class="pre">is_paginated</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.views.mixins.group.EndlessPaginationMixin.is_paginated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.EndlessPaginationMixin.items_template">
+<span class="sig-name descname"><span class="pre">items_template</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.mixins.group.EndlessPaginationMixin.items_template" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.FilterGroupMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">FilterGroupMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.FilterGroupMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Filters the underlying queryset so that only models referring to the
+given group are returned.
+Also uses select_related on some of the BaseTaggableObjectModel’s attributes</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.FilterGroupMixin.get_group_attr">
+<span class="sig-name descname"><span class="pre">get_group_attr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.FilterGroupMixin.get_group_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.FilterGroupMixin.get_group_field">
+<span class="sig-name descname"><span class="pre">get_group_field</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.FilterGroupMixin.get_group_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.FilterGroupMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.FilterGroupMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.FilterGroupMixin.group_attr">
+<span class="sig-name descname"><span class="pre">group_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group'</span></em><a class="headerlink" href="#cosinnus.views.mixins.group.FilterGroupMixin.group_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <cite>group_attr</cite> of <code class="xref py py-func docutils literal notranslate"><span class="pre">require_read_access()</span></code> and similar for usage</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.FilterGroupMixin.group_field">
+<span class="sig-name descname"><span class="pre">group_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group'</span></em><a class="headerlink" href="#cosinnus.views.mixins.group.FilterGroupMixin.group_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual filter keyword used in the queryset’s <cite>filter</cite> function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupCanAccessRecordedMeetingsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">GroupCanAccessRecordedMeetingsMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupCanAccessRecordedMeetingsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>View mixin that makes it required for the view’s group to be able to show the recorded meetings page.
+If not, redirects to the group dashboard.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupCanAccessRecordedMeetingsMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupCanAccessRecordedMeetingsMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupFormKwargsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">GroupFormKwargsMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupFormKwargsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Works nicely together with <code class="xref py py-class docutils literal notranslate"><span class="pre">cosinnus.forms.GroupKwargModelFormMixin</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupFormKwargsMixin.get_form_kwargs">
+<span class="sig-name descname"><span class="pre">get_form_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupFormKwargsMixin.get_form_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupIsConferenceMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">GroupIsConferenceMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupIsConferenceMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>View mixin that makes it required for the view’s group to be a conference.
+If not, redirects to the group dashboard. 
+Needs to be in MRO <em>after</em> the group-applying <cite>RequireReadMixin</cite> (or similar).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupIsConferenceMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupIsConferenceMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupObjectCountMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">GroupObjectCountMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupObjectCountMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Adds an <code class="docutils literal notranslate"><span class="pre">object_counts</span></code> dict to the context containing the counts of all 
+BaseTaggableObjects in this view’s group. 
+Requires <code class="docutils literal notranslate"><span class="pre">self.group</span></code> to be set.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupObjectCountMixin.app_object_count_mappings">
+<span class="sig-name descname"><span class="pre">app_object_count_mappings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'cosinnus_cloud':</span> <span class="pre">True,</span> <span class="pre">'cosinnus_etherpad':</span> <span class="pre">'cosinnus_etherpad.models.Etherpad',</span> <span class="pre">'cosinnus_event':</span> <span class="pre">'cosinnus_event.models.Event',</span> <span class="pre">'cosinnus_file':</span> <span class="pre">'cosinnus_file.models.FileEntry',</span> <span class="pre">'cosinnus_marketplace':</span> <span class="pre">'cosinnus_marketplace.models.Offer',</span> <span class="pre">'cosinnus_note':</span> <span class="pre">'cosinnus_note.models.Note',</span> <span class="pre">'cosinnus_poll':</span> <span class="pre">'cosinnus_poll.models.Poll',</span> <span class="pre">'cosinnus_todo':</span> <span class="pre">'cosinnus_todo.models.TodoEntry'}</span></em><a class="headerlink" href="#cosinnus.views.mixins.group.GroupObjectCountMixin.app_object_count_mappings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupObjectCountMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupObjectCountMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.ModelInheritsGroupReadWritePermissionsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">ModelInheritsGroupReadWritePermissionsMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.ModelInheritsGroupReadWritePermissionsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin for models whose objects should inherit the read/write permissions
+from the group they are in (need a <cite>group</cite> ForeignKey).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.ModelInheritsGroupReadWritePermissionsMixin.grant_extra_read_permissions">
+<span class="sig-name descname"><span class="pre">grant_extra_read_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.ModelInheritsGroupReadWritePermissionsMixin.grant_extra_read_permissions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.ModelInheritsGroupReadWritePermissionsMixin.grant_extra_write_permissions">
+<span class="sig-name descname"><span class="pre">grant_extra_write_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.ModelInheritsGroupReadWritePermissionsMixin.grant_extra_write_permissions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireAdminMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireAdminMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireAdminMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to ease the use of <code class="xref py py-meth docutils literal notranslate"><span class="pre">require_admin_access()</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin" title="cosinnus.views.mixins.group.RequireCreateObjectsInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireCreateObjectsInMixin</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireAdminMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireAdminMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireAdminMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireAdminMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireCreateObjectsInMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireCreateObjectsInMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to ease the use of <code class="xref py py-meth docutils literal notranslate"><span class="pre">require_create_objects_in_access()</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireAdminMixin" title="cosinnus.views.mixins.group.RequireAdminMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireAdminMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireCreateObjectsInMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireCreateObjectsInMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireExtraDispatchCheckMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireExtraDispatchCheckMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireExtraDispatchCheckMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>View mixin that makes it required for the view’s group to be a conference.
+If not, redirects to the group dashboard. 
+Needs to be in MRO <em>after</em> the group-applying <cite>RequireReadMixin</cite> (or similar).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireExtraDispatchCheckMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireExtraDispatchCheckMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireExtraDispatchCheckMixin.extra_dispatch_check">
+<span class="sig-name descname"><span class="pre">extra_dispatch_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireExtraDispatchCheckMixin.extra_dispatch_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stub. Implement this in your view. If anything other than None is returned,
+the dispatch() function will return that value.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireLoggedInMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireLoggedInMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireLoggedInMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to ease the use of <code class="xref py py-meth docutils literal notranslate"><span class="pre">require_admin_access()</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin" title="cosinnus.views.mixins.group.RequireCreateObjectsInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireCreateObjectsInMixin</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireLoggedInMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireLoggedInMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequirePortalManagerMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequirePortalManagerMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequirePortalManagerMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to ease the use of <code class="xref py py-meth docutils literal notranslate"><span class="pre">require_portal_manager_access()</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin" title="cosinnus.views.mixins.group.RequireCreateObjectsInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireCreateObjectsInMixin</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequirePortalManagerMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequirePortalManagerMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireReadMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to ease the use of <code class="xref py py-meth docutils literal notranslate"><span class="pre">require_read_access()</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireAdminMixin" title="cosinnus.views.mixins.group.RequireAdminMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireAdminMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin" title="cosinnus.views.mixins.group.RequireCreateObjectsInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireCreateObjectsInMixin</span></code></a></p>
+</div>
+<dl class="simple">
+<dt>Note: Accessing an object with a slug or pk that is not found will always result in two seperate DB hits,</dt><dd><p>because we first do a complete filter for the object, including permissions, pk, group memberships.
+Then, if the object wasn’t found, we re-do the filter without permissions to check if that was the 
+cause, then redirect to a login page or a permission denied page. If the second query also fails to
+match anything, we let the Http404 bubble up.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadMixin.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadMixin.get_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter queryset for items which can be accessed by the user given their
+visibility tags</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadMixin.group_attr">
+<span class="sig-name descname"><span class="pre">group_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group'</span></em><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadMixin.group_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadMixin.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group'</span></em><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadMixin.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadOrRedirectMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireReadOrRedirectMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadOrRedirectMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a></p>
+<p>Works exactly as <a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, but offers additional actions when
+the permission requirements are not met.</p>
+<p>Set <cite>on_eror_redirect_url</cite> to an URL to redirect to on unmet permissions,
+or override <a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadOrRedirectMixin.on_error" title="cosinnus.views.mixins.group.RequireReadOrRedirectMixin.on_error"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_error()</span></code></a> to handle custom behaviour.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadOrRedirectMixin.check_read">
+<span class="sig-name descname"><span class="pre">check_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadOrRedirectMixin.check_read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadOrRedirectMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadOrRedirectMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadOrRedirectMixin.on_error">
+<span class="sig-name descname"><span class="pre">on_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadOrRedirectMixin.on_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadOrRedirectMixin.on_error_redirect_url">
+<span class="sig-name descname"><span class="pre">on_error_redirect_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadOrRedirectMixin.on_error_redirect_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadWriteHybridMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireReadWriteHybridMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadWriteHybridMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a></p>
+<dl class="simple">
+<dt>Combines the functionality of </dt><dd><p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a> for GET requests and
+<a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a> for POST requests</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireAdminMixin" title="cosinnus.views.mixins.group.RequireAdminMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireAdminMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin" title="cosinnus.views.mixins.group.RequireCreateObjectsInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireCreateObjectsInMixin</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireReadWriteHybridMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadWriteHybridMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireSuperuserMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireSuperuserMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireSuperuserMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to ease the use of <code class="xref py py-meth docutils literal notranslate"><span class="pre">require_admin_access()</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin" title="cosinnus.views.mixins.group.RequireCreateObjectsInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireCreateObjectsInMixin</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireSuperuserMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireSuperuserMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireVerifiedUserMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireVerifiedUserMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireVerifiedUserMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to ease the use of <code class="xref py py-meth docutils literal notranslate"><span class="pre">require_verified_user_access()</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireLoggedInMixin" title="cosinnus.views.mixins.group.RequireLoggedInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireLoggedInMixin</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireVerifiedUserMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireVerifiedUserMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireWriteGrouplessMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireWriteGrouplessMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireWriteGrouplessMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to ease the use of <code class="xref py py-meth docutils literal notranslate"><span class="pre">require_write_access_groupless()</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireWriteGrouplessMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireWriteGrouplessMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireWriteMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireWriteMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin to ease the use of <code class="xref py py-meth docutils literal notranslate"><span class="pre">require_write_access()</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireAdminMixin" title="cosinnus.views.mixins.group.RequireAdminMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireAdminMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireCreateObjectsInMixin" title="cosinnus.views.mixins.group.RequireCreateObjectsInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireCreateObjectsInMixin</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireWriteMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireWriteMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireWriteMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireWriteMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.hierarchy">
+<span id="cosinnus-views-mixins-hierarchy-module"></span><h2>cosinnus.views.mixins.hierarchy module<a class="headerlink" href="#module-cosinnus.views.mixins.hierarchy" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.hierarchy.</span></span><span class="sig-name descname"><span class="pre">HierarchicalListCreateViewMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.views.mixins.tagged.HierarchyTreeMixin" title="cosinnus.views.mixins.tagged.HierarchyTreeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HierarchyTreeMixin</span></code></a></p>
+<p>Hybrid view for hierarchic items.
+If allow_deep_hierarchy==True: Allows creation of folders inside other folders,
+else only allows creating them on the root level.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin.allow_deep_hierarchy">
+<span class="sig-name descname"><span class="pre">allow_deep_hierarchy</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin.allow_deep_hierarchy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin.strict_default_sort">
+<span class="sig-name descname"><span class="pre">strict_default_sort</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin.strict_default_sort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.media">
+<span id="cosinnus-views-mixins-media-module"></span><h2>cosinnus.views.mixins.media module<a class="headerlink" href="#module-cosinnus.views.mixins.media" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.FlickrEmbedFieldMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.media.</span></span><span class="sig-name descname"><span class="pre">FlickrEmbedFieldMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.media.FlickrEmbedFieldMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Extracts a Flickr user-id and gallery id from a field URL</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.FlickrEmbedFieldMixin.flickr_embed_template">
+<span class="sig-name descname"><span class="pre">flickr_embed_template</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/common/embed_flickr_field.html'</span></em><a class="headerlink" href="#cosinnus.views.mixins.media.FlickrEmbedFieldMixin.flickr_embed_template" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.FlickrEmbedFieldMixin.flickr_url_field_name">
+<span class="sig-name descname"><span class="pre">flickr_url_field_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'flickr_url'</span></em><a class="headerlink" href="#cosinnus.views.mixins.media.FlickrEmbedFieldMixin.flickr_url_field_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.FlickrEmbedFieldMixin.get_flickr_properties">
+<span class="sig-name descname"><span class="pre">get_flickr_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flickr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.media.FlickrEmbedFieldMixin.get_flickr_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict specific for the <code class="docutils literal notranslate"><span class="pre">media.html</span></code> widget that contains the properties
+required for an embed code, parsed from the given URL 
+&#64;param flickr: If supplied, will parse from this value instead of the flickr field of the class</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.FlickrEmbedFieldMixin.render_flickr_embed">
+<span class="sig-name descname"><span class="pre">render_flickr_embed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.media.FlickrEmbedFieldMixin.render_flickr_embed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.VideoEmbedFieldMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.media.</span></span><span class="sig-name descname"><span class="pre">VideoEmbedFieldMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.media.VideoEmbedFieldMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Extracts Video-Types and Video-Ids from a URL-Field so they can be embedded.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.VideoEmbedFieldMixin.get_video_properties">
+<span class="sig-name descname"><span class="pre">get_video_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">video</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.media.VideoEmbedFieldMixin.get_video_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict specific for the <code class="docutils literal notranslate"><span class="pre">media.html</span></code> widget that contains the properties
+required for an embed code, parsed from the given URL 
+&#64;param video: If supplied, will parse from this value instead of the video field of the class</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.VideoEmbedFieldMixin.is_video">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_video</span></span><a class="headerlink" href="#cosinnus.views.mixins.media.VideoEmbedFieldMixin.is_video" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.VideoEmbedFieldMixin.render_video_embed">
+<span class="sig-name descname"><span class="pre">render_video_embed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.media.VideoEmbedFieldMixin.render_video_embed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.VideoEmbedFieldMixin.video_embed_template">
+<span class="sig-name descname"><span class="pre">video_embed_template</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/common/embed_video_field.html'</span></em><a class="headerlink" href="#cosinnus.views.mixins.media.VideoEmbedFieldMixin.video_embed_template" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.media.VideoEmbedFieldMixin.video_url_field_name">
+<span class="sig-name descname"><span class="pre">video_url_field_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'video'</span></em><a class="headerlink" href="#cosinnus.views.mixins.media.VideoEmbedFieldMixin.video_url_field_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.reflected_objects">
+<span id="cosinnus-views-mixins-reflected-objects-module"></span><h2>cosinnus.views.mixins.reflected_objects module<a class="headerlink" href="#module-cosinnus.views.mixins.reflected_objects" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.reflected_objects.</span></span><span class="sig-name descname"><span class="pre">MixReflectedObjectsMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>For list_views and others defining <cite>get_queryset</cite> and have <cite>self.model</cite> and <cite>self.group</cite>.
+Mixes into the queryset all BaseTaggableObjectReflection objects applying to this group.
+Note: The Mixin MRO is <em>really</em> important here. You will want this to resolve (reading right to left)</p>
+<blockquote>
+<div><p>after group filters like <cite>FilterGroupMixin</cite>, but before permission and slicing mixins
+like <cite>CosinnusFilterMixin</cite> and <cite>RequireReadMixin</cite>!</p>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin.mix_queryset">
+<span class="sig-name descname"><span class="pre">mix_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.reflected_objects.MixReflectedObjectsMixin.mix_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function can be used independent of a view by just calling it on an instance of the mixin.
+Either param <cite>group</cite> or <cite>user</cite> must be supplied
+&#64;param group: Filters group into which objects are reflected
+&#64;param user: Filters on all groups the given user is a member of</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.reflected_objects.ReflectedObjectRedirectNoticeMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.reflected_objects.</span></span><span class="sig-name descname"><span class="pre">ReflectedObjectRedirectNoticeMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.reflected_objects.ReflectedObjectRedirectNoticeMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.reflected_objects.ReflectedObjectRedirectNoticeMixin.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.reflected_objects.ReflectedObjectRedirectNoticeMixin.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.reflected_objects.</span></span><span class="sig-name descname"><span class="pre">ReflectedObjectSelectMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mix this into your DetailView for BaseTaggableObject and add the template select modal
+so users will be able to pick projects/groups to reflect the DetailView.object into.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin.get_reflect_data">
+<span class="sig-name descname"><span class="pre">get_reflect_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.reflected_objects.ReflectedObjectSelectMixin.get_reflect_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.select2">
+<span id="cosinnus-views-mixins-select2-module"></span><h2>cosinnus.views.mixins.select2 module<a class="headerlink" href="#module-cosinnus.views.mixins.select2" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.select2.RequireGroupMember">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.select2.</span></span><span class="sig-name descname"><span class="pre">RequireGroupMember</span></span><a class="headerlink" href="#cosinnus.views.mixins.select2.RequireGroupMember" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.views.mixins.select2.RequireLoggedIn" title="cosinnus.views.mixins.select2.RequireLoggedIn"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireLoggedIn</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.select2.RequireGroupMember.check_all_permissions">
+<span class="sig-name descname"><span class="pre">check_all_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.select2.RequireGroupMember.check_all_permissions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.select2.RequireGroupMember.group_class">
+<span class="sig-name descname"><span class="pre">group_class</span></span><a class="headerlink" href="#cosinnus.views.mixins.select2.RequireGroupMember.group_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.models.html#cosinnus.models.group.CosinnusGroup" title="cosinnus.models.group.CosinnusGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusGroup</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.select2.RequireGroupMember.group_slug_field">
+<span class="sig-name descname"><span class="pre">group_slug_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group'</span></em><a class="headerlink" href="#cosinnus.views.mixins.select2.RequireGroupMember.group_slug_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.select2.RequireLoggedIn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.select2.</span></span><span class="sig-name descname"><span class="pre">RequireLoggedIn</span></span><a class="headerlink" href="#cosinnus.views.mixins.select2.RequireLoggedIn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.select2.RequireLoggedIn.check_all_permissions">
+<span class="sig-name descname"><span class="pre">check_all_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.select2.RequireLoggedIn.check_all_permissions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.tagged">
+<span id="cosinnus-views-mixins-tagged-module"></span><h2>cosinnus.views.mixins.tagged module<a class="headerlink" href="#module-cosinnus.views.mixins.tagged" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.BaseListMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">BaseListMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.tagged.BaseListMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectMixin</span></code></p>
+<p>A base view for displaying a list of objects.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.BaseListMixin.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.BaseListMixin.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.BaseListMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.BaseListMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the context for this view.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.DisplayTaggedObjectsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">DisplayTaggedObjectsMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.tagged.DisplayTaggedObjectsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.DisplayTaggedObjectsMixin.get_object_querysets">
+<span class="sig-name descname"><span class="pre">get_object_querysets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosinnus_apps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.DisplayTaggedObjectsMixin.get_object_querysets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all (still-lazy) querysets for BaseTaggableObjects in cosinnus apps.
+Can be filtered to be viewable by a certain user, or only publicly viewable,
+and can be filtered for a certain group only.
+&#64;param cosinnus_apps: Returns objects for these models, or for all registered models if None</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>example: [‘cosinnus_etherpad.Etherpad’, ‘cosinnus_event.Event’, ‘cosinnus_file.FileEntry’]</p></li>
+</ul>
+</div></blockquote>
+<p>&#64;param group: Filter the objects to belong to this group, or any group if None
+&#64;param user: Filter the objects to be viewable by this user, or an anonymous user if None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.DisplayTaggedObjectsMixin.sort_and_limit_querysets">
+<span class="sig-name descname"><span class="pre">sort_and_limit_querysets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">querysets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.DisplayTaggedObjectsMixin.sort_and_limit_querysets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a list of querysets of tagged objects (like generated by <code class="docutils literal notranslate"><span class="pre">`self.get_object_querysets()</span></code>
+and returns a single list of sorted items, with <code class="docutils literal notranslate"><span class="pre">item_limit</span></code> number of items</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.DisplayTaggedObjectsMixin.sort_and_limit_single_queryset">
+<span class="sig-name descname"><span class="pre">sort_and_limit_single_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.DisplayTaggedObjectsMixin.sort_and_limit_single_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">EditViewWatchChangesMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A mixin for an EditView that handles watching the object and alerting
+any changes to watched attributed after a successful save. 
+In your view, define <cite>changed_attr_watchlist</cite> and <cite>on_save_changed_attrs()</cite></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.changed_attr_watchlist">
+<span class="sig-name descname"><span class="pre">changed_attr_watchlist</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.changed_attr_watchlist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.edit_successful">
+<span class="sig-name descname"><span class="pre">edit_successful</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.edit_successful" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.form_invalid">
+<span class="sig-name descname"><span class="pre">form_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.form_invalid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.forms_invalid">
+<span class="sig-name descname"><span class="pre">forms_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inlines</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.forms_invalid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.forms_valid">
+<span class="sig-name descname"><span class="pre">forms_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inlines</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.forms_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.get_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.on_save_changed_attrs">
+<span class="sig-name descname"><span class="pre">on_save_changed_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changed_attr_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.on_save_changed_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stub, implement this in your view 
+&#64;param obj: The newly saved object.
+&#64;param changed_attr_dict: k,v dict with k: changed attribue name, v: old value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.watched_attr_vals">
+<span class="sig-name descname"><span class="pre">watched_attr_vals</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.watched_attr_vals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyDeleteMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">HierarchyDeleteMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyDeleteMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This mixin can be used in delete views. It deletes an object or container
+and all objects and containers inside.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyDeleteMixin.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyDeleteMixin.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyDeleteMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyDeleteMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">HierarchyPathMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This mixin can be used in a hybrid add item + add container view.
+Not recommended to use in edit/delete views.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.allow_deep_hierarchy">
+<span class="sig-name descname"><span class="pre">allow_deep_hierarchy</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.allow_deep_hierarchy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.container_form_class">
+<span class="sig-name descname"><span class="pre">container_form_class</span></span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.container_form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.hierarchy.AddContainerForm" title="cosinnus.forms.hierarchy.AddContainerForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">AddContainerForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.container_form_invalid">
+<span class="sig-name descname"><span class="pre">container_form_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container_form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.container_form_invalid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.container_form_prefix">
+<span class="sig-name descname"><span class="pre">container_form_prefix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'container'</span></em><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.container_form_prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.container_form_valid">
+<span class="sig-name descname"><span class="pre">container_form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container_form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.container_form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Form for adding hierarchy container objects.
+If the form is valid, we need to do the following:
+- Set instance’s is_container to True
+- Set the instance’s group
+- Set the path again once the slug has been established</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Form for adding model objects.
+If the form is valid, we need to do pass the path retrieved from the
+slug over to the non-editable field</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dual form splitting and initialization</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.get_container_form">
+<span class="sig-name descname"><span class="pre">get_container_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container_form_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.get_container_form" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.get_container_form_class">
+<span class="sig-name descname"><span class="pre">get_container_form_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.get_container_form_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.get_container_form_kwargs">
+<span class="sig-name descname"><span class="pre">get_container_form_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.get_container_form_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.get_initial">
+<span class="sig-name descname"><span class="pre">get_initial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.get_initial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supports calling /add under other objects,
+which creates a new object under the given object/container’s path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyPathMixin.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyPathMixin.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyTreeMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">HierarchyTreeMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyTreeMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This mixin can be used in apps’ list views to generate a tree-like object
+structure. It implements just one method get_tree which can be called with
+a list of objects as argument to be displayed as a tree.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.HierarchyTreeMixin.get_tree">
+<span class="sig-name descname"><span class="pre">get_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_containers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_leaves</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.HierarchyTreeMixin.get_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a node/children tree structure containing app objects. We
+assume that ALL (!) pathnames end with a ‘/’. A container has a
+pathname of <code class="docutils literal notranslate"><span class="pre">/path/to/container/containername/</span></code> the last path part is
+the container itself!
+&#64;param object_list: All model objects that should be included in the tree
+&#64;param root: The root path from which the tree should start out
+&#64;param include_containers: should the tree contain folders?
+&#64;param include_leaves: should the tree contain the model objects?
+&#64;param recursive: Should folder levels below the given root path be included?</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Note: Setting recursive=True and include_containers=False</dt><dd><p>really doesn’t make any sense, and will result in a 
+garbled nonsensical tree structure!</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.RecordLastVisitedMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">RecordLastVisitedMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.tagged.RecordLastVisitedMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin for views of models that use the <cite>LastVisitedMixin</cite>.
+While this view is used, any successful call to <cite>render_to_response</cite>
+will cause a LastVisited record to be created for the</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.RecordLastVisitedMixin.mark_visited">
+<span class="sig-name descname"><span class="pre">mark_visited</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.RecordLastVisitedMixin.mark_visited" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.RecordLastVisitedMixin.render_to_response">
+<span class="sig-name descname"><span class="pre">render_to_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.RecordLastVisitedMixin.render_to_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.TaggedListMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">TaggedListMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.tagged.TaggedListMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.TaggedListMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.TaggedListMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.TaggedListMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.TaggedListMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.TaggedListMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.TaggedListMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins.user">
+<span id="cosinnus-views-mixins-user-module"></span><h2>cosinnus.views.mixins.user module<a class="headerlink" href="#module-cosinnus.views.mixins.user" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.user.UserFormKwargsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.user.</span></span><span class="sig-name descname"><span class="pre">UserFormKwargsMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.user.UserFormKwargsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Works nicely together with <code class="xref py py-class docutils literal notranslate"><span class="pre">cosinnus.forms.GroupKwargModelFormMixin</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.mixins.user.UserFormKwargsMixin.get_form_kwargs">
+<span class="sig-name descname"><span class="pre">get_form_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.user.UserFormKwargsMixin.get_form_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.views.mixins">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.views.mixins" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+  <li><a href="cosinnus.views.html">cosinnus.views package</a><ul>
+      <li>Previous: <a href="cosinnus.views.html" title="previous chapter">cosinnus.views package</a></li>
+      <li>Next: <a href="cosinnus_cloud.html" title="next chapter">cosinnus_cloud package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.views.mixins.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

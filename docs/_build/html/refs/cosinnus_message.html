@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_message package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_message.api package" href="cosinnus_message.api.html" />
+    <link rel="prev" title="cosinnus_file.utils package" href="cosinnus_file.utils.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-message-package">
+<h1>cosinnus_message package<a class="headerlink" href="#cosinnus-message-package" title="Permalink to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_message.api.html">cosinnus_message.api package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.api.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.api.html#module-cosinnus_message.api.views">cosinnus_message.api.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.api.html#cosinnus_message.api.views.MessageExportView"><code class="docutils literal notranslate"><span class="pre">MessageExportView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.api.html#cosinnus_message.api.views.MessageExportView.format"><code class="docutils literal notranslate"><span class="pre">MessageExportView.format</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.api.html#cosinnus_message.api.views.MessageExportView.format_message"><code class="docutils literal notranslate"><span class="pre">MessageExportView.format_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.api.html#cosinnus_message.api.views.MessageExportView.get"><code class="docutils literal notranslate"><span class="pre">MessageExportView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.api.html#cosinnus_message.api.views.MessageExportView.make_archive"><code class="docutils literal notranslate"><span class="pre">MessageExportView.make_archive()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.api.html#module-cosinnus_message.api">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_message.management.html">cosinnus_message.management package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.management.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.management.commands.html">cosinnus_message.management.commands package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.fake_process_direct_reply_mails">cosinnus_message.management.commands.fake_process_direct_reply_mails module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.process_direct_reply_mails">cosinnus_message.management.commands.process_direct_reply_mails module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.rocket_create_missing_users">cosinnus_message.management.commands.rocket_create_missing_users module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.rocket_force_update_existing_users">cosinnus_message.management.commands.rocket_force_update_existing_users module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.rocket_migrate_dual_rooms_to_single">cosinnus_message.management.commands.rocket_migrate_dual_rooms_to_single module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.rocket_sync_default_notification_settings">cosinnus_message.management.commands.rocket_sync_default_notification_settings module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.rocket_sync_group_topics">cosinnus_message.management.commands.rocket_sync_group_topics module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.rocket_sync_groups">cosinnus_message.management.commands.rocket_sync_groups module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.rocket_sync_oauth_apps">cosinnus_message.management.commands.rocket_sync_oauth_apps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.rocket_sync_settings">cosinnus_message.management.commands.rocket_sync_settings module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands.rocket_sync_users">cosinnus_message.management.commands.rocket_sync_users module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.management.commands.html#module-cosinnus_message.management.commands">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.management.html#module-cosinnus_message.management">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_message.tests.html">cosinnus_message.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.tests.html#module-cosinnus_message.tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_message.utils.html">cosinnus_message.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.utils.html#module-cosinnus_message.utils.renderer">cosinnus_message.utils.renderer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.renderer.MessageRenderer"><code class="docutils literal notranslate"><span class="pre">MessageRenderer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.renderer.MessageRenderer.model"><code class="docutils literal notranslate"><span class="pre">MessageRenderer.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.renderer.MessageRenderer.render"><code class="docutils literal notranslate"><span class="pre">MessageRenderer.render()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.renderer.MessageRenderer.template"><code class="docutils literal notranslate"><span class="pre">MessageRenderer.template</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.renderer.MessageRenderer.template_list"><code class="docutils literal notranslate"><span class="pre">MessageRenderer.template_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.renderer.MessageRenderer.template_single"><code class="docutils literal notranslate"><span class="pre">MessageRenderer.template_single</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.utils.html#module-cosinnus_message.utils.utils">cosinnus_message.utils.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.utils.clean_reply_message_quotation"><code class="docutils literal notranslate"><span class="pre">clean_reply_message_quotation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.utils.get_rocketchat_group_embed_url_for_user"><code class="docutils literal notranslate"><span class="pre">get_rocketchat_group_embed_url_for_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.utils.get_rocketchat_mail_notification_setting_from_user_preference"><code class="docutils literal notranslate"><span class="pre">get_rocketchat_mail_notification_setting_from_user_preference()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.utils.process_direct_reply_messages"><code class="docutils literal notranslate"><span class="pre">process_direct_reply_messages()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.utils.reply_to_postman_message"><code class="docutils literal notranslate"><span class="pre">reply_to_postman_message()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.utils.save_rocketchat_mail_notification_preference_for_user_setting"><code class="docutils literal notranslate"><span class="pre">save_rocketchat_mail_notification_preference_for_user_setting()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.utils.send_direct_reply_error_mail"><code class="docutils literal notranslate"><span class="pre">send_direct_reply_error_mail()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.utils.update_mailboxes"><code class="docutils literal notranslate"><span class="pre">update_mailboxes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_message.utils.html#cosinnus_message.utils.utils.write_postman_message"><code class="docutils literal notranslate"><span class="pre">write_postman_message()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.utils.html#module-cosinnus_message.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_message.admin">
+<span id="cosinnus-message-admin-module"></span><h2>cosinnus_message.admin module<a class="headerlink" href="#module-cosinnus_message.admin" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.admin.CosinnusMailboxAdmin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.admin.</span></span><span class="sig-name descname"><span class="pre">CosinnusMailboxAdmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admin_site</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.admin.CosinnusMailboxAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelAdmin</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.admin.CosinnusMailboxAdmin.actions">
+<span class="sig-name descname"><span class="pre">actions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;function</span> <span class="pre">get_new_mail&gt;]</span></em><a class="headerlink" href="#cosinnus_message.admin.CosinnusMailboxAdmin.actions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.admin.CosinnusMailboxAdmin.list_display">
+<span class="sig-name descname"><span class="pre">list_display</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('name',</span> <span class="pre">'portal',</span> <span class="pre">'uri',</span> <span class="pre">'from_email',</span> <span class="pre">'active')</span></em><a class="headerlink" href="#cosinnus_message.admin.CosinnusMailboxAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_message.admin.CosinnusMailboxAdmin.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_message.admin.CosinnusMailboxAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_message.apps">
+<span id="cosinnus-message-apps-module"></span><h2>cosinnus_message.apps module<a class="headerlink" href="#module-cosinnus_message.apps" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.apps.CosinnusMessageAppConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.apps.</span></span><span class="sig-name descname"><span class="pre">CosinnusMessageAppConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.apps.CosinnusMessageAppConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.apps.CosinnusMessageAppConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_message'</span></em><a class="headerlink" href="#cosinnus_message.apps.CosinnusMessageAppConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.apps.CosinnusMessageAppConfig.ready">
+<span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.apps.CosinnusMessageAppConfig.ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method in subclasses to run code when Django starts.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.apps.CosinnusMessageAppConfig.verbose_name">
+<span class="sig-name descname"><span class="pre">verbose_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Cosinnus</span> <span class="pre">Message'</span></em><a class="headerlink" href="#cosinnus_message.apps.CosinnusMessageAppConfig.verbose_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_message.conf">
+<span id="cosinnus-message-conf-module"></span><h2>cosinnus_message.conf module<a class="headerlink" href="#module-cosinnus_message.conf" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageConf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.conf.</span></span><span class="sig-name descname"><span class="pre">CosinnusMessageConf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageConf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConf</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageConf.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageConf.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.conf.</span></span><span class="sig-name descname"><span class="pre">CosinnusMessageDefaultSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConf</span></code></p>
+<p>Settings without a prefix namespace to provide default setting values for other apps.
+These are settings used by default in cosinnus apps, such as avatar dimensions, etc.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_BASE_URL">
+<span class="sig-name descname"><span class="pre">COSINNUS_CHAT_BASE_URL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://chat.localhost'</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_BASE_URL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT">
+<span class="sig-name descname"><span class="pre">COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2592000</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_CONNECTION_TIMEOUT">
+<span class="sig-name descname"><span class="pre">COSINNUS_CHAT_CONNECTION_TIMEOUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_CONNECTION_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_CONSIDER_DOWN_TIMEOUT">
+<span class="sig-name descname"><span class="pre">COSINNUS_CHAT_CONSIDER_DOWN_TIMEOUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">300</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_CONSIDER_DOWN_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_PASSWORD">
+<span class="sig-name descname"><span class="pre">COSINNUS_CHAT_PASSWORD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_PASSWORD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_SETTINGS">
+<span class="sig-name descname"><span class="pre">COSINNUS_CHAT_SETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'API_Embed':</span> <span class="pre">False,</span> <span class="pre">'API_Enable_Rate_Limiter_Limit_Calls_Default':</span> <span class="pre">10000,</span> <span class="pre">'Accounts_AllowEmailChange':</span> <span class="pre">False,</span> <span class="pre">'Accounts_AllowPasswordChange':</span> <span class="pre">False,</span> <span class="pre">'Accounts_AllowRealNameChange':</span> <span class="pre">True,</span> <span class="pre">'Accounts_AllowUserAvatarChange':</span> <span class="pre">True,</span> <span class="pre">'Accounts_AllowUserProfileChange':</span> <span class="pre">False,</span> <span class="pre">'Accounts_AllowUsernameChange':</span> <span class="pre">False,</span> <span class="pre">'Accounts_Default_User_Preferences_sidebarGroupByType':</span> <span class="pre">True,</span> <span class="pre">'Accounts_Default_User_Preferences_sidebarShowUnread':</span> <span class="pre">True,</span> <span class="pre">'Accounts_RegistrationForm':</span> <span class="pre">'Disabled',</span> <span class="pre">'Accounts_RegistrationForm_LinkReplacementText':</span> <span class="pre">'',</span> <span class="pre">'Accounts_Registration_AuthenticationServices_Enabled':</span> <span class="pre">False,</span> <span class="pre">'Accounts_Send_Email_When_Activating':</span> <span class="pre">False,</span> <span class="pre">'Accounts_Send_Email_When_Deactivating':</span> <span class="pre">False,</span> <span class="pre">'Accounts_ShowFormLogin':</span> <span class="pre">True,</span> <span class="pre">'Accounts_TwoFactorAuthentication_By_Email_Enabled':</span> <span class="pre">False,</span> <span class="pre">'Accounts_TwoFactorAuthentication_Enabled':</span> <span class="pre">False,</span> <span class="pre">'Accounts_TwoFactorAuthentication_Enforce_Password_Fallback':</span> <span class="pre">False,</span> <span class="pre">'Custom_Script_Logged_In':</span> <span class="pre">'\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">const</span> <span class="pre">rcUid</span> <span class="pre">=</span> <span class="pre">document.cookie.split(&quot;;</span> <span class="pre">&quot;).find((row)</span> <span class="pre">=&gt;</span> <span class="pre">row.startsWith(&quot;rc_uid=&quot;))?.split(&quot;=&quot;)[1];\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">const</span> <span class="pre">rcToken</span> <span class="pre">=</span> <span class="pre">document.cookie.split(&quot;;</span> <span class="pre">&quot;).find((row)</span> <span class="pre">=&gt;</span> <span class="pre">row.startsWith(&quot;rc_token=&quot;))?.split(&quot;=&quot;)[1];\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">document.cookie</span> <span class="pre">=</span> <span class="pre">\'rc_session_uid=\'</span> <span class="pre">+</span> <span class="pre">rcUid</span> <span class="pre">+</span> <span class="pre">\';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/\';\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">document.cookie</span> <span class="pre">=</span> <span class="pre">\'rc_session_token=\'</span> <span class="pre">+</span> <span class="pre">rcToken</span> <span class="pre">+</span> <span class="pre">\';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/\';\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">',</span> <span class="pre">'Device_Management_Enable_Login_Emails':</span> <span class="pre">False,</span> <span class="pre">'Email_Changed_Email':</span> <span class="pre">&quot;You</span> <span class="pre">have</span> <span class="pre">successfully</span> <span class="pre">changed</span> <span class="pre">your</span> <span class="pre">email</span> <span class="pre">address</span> <span class="pre">to</span> <span class="pre">[email].</span> <span class="pre">If</span> <span class="pre">this</span> <span class="pre">change</span> <span class="pre">wasn't</span> <span class="pre">made</span> <span class="pre">by</span> <span class="pre">you</span> <span class="pre">or</span> <span class="pre">you</span> <span class="pre">think</span> <span class="pre">this</span> <span class="pre">was</span> <span class="pre">an</span> <span class="pre">error,</span> <span class="pre">please</span> <span class="pre">contact</span> <span class="pre">our</span> <span class="pre">support!&quot;,</span> <span class="pre">'Email_Changed_Email_Subject':</span> <span class="pre">'Your</span> <span class="pre">email</span> <span class="pre">address</span> <span class="pre">has</span> <span class="pre">been</span> <span class="pre">changed',</span> <span class="pre">'Email_Footer':</span> <span class="pre">'&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;!--</span> <span class="pre">/BODY</span> <span class="pre">--&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr</span> <span class="pre">style=&quot;margin:</span> <span class="pre">0;</span> <span class="pre">padding:</span> <span class="pre">0;&quot;&gt;&lt;td</span> <span class="pre">style=&quot;margin:</span> <span class="pre">0;</span> <span class="pre">padding:</span> <span class="pre">0;&quot;&gt;&lt;!--</span> <span class="pre">FOOTER</span> <span class="pre">--&gt;&lt;table</span> <span class="pre">class=&quot;wrap&quot;&gt;&lt;tr&gt;&lt;td</span> <span class="pre">class=&quot;container&quot;&gt;&lt;!--</span> <span class="pre">content</span> <span class="pre">--&gt;&lt;div</span> <span class="pre">class=&quot;content&quot;&gt;&lt;table</span> <span class="pre">width=&quot;100%%&quot;&gt;&lt;tr&gt;&lt;td</span> <span class="pre">align=&quot;center&quot;&gt;&lt;h6&gt;This</span> <span class="pre">email</span> <span class="pre">was</span> <span class="pre">sent</span> <span class="pre">to</span> <span class="pre">you</span> <span class="pre">from</span> <span class="pre">&lt;a</span> <span class="pre">href=&quot;https://%(COSINNUS_PORTAL_URL)s&quot;&gt;https://%(COSINNUS_PORTAL_URL)s&lt;/a&gt;&lt;/h6&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;!--</span> <span class="pre">/content</span> <span class="pre">--&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;!--</span> <span class="pre">/FOOTER</span> <span class="pre">--&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;',</span> <span class="pre">'Favorite_Rooms':</span> <span class="pre">True,</span> <span class="pre">'Hide_System_Messages':</span> <span class="pre">['uj',</span> <span class="pre">'ul',</span> <span class="pre">'ru',</span> <span class="pre">'subscription-role-added',</span> <span class="pre">'ut',</span> <span class="pre">'subscription-role-removed',</span> <span class="pre">'au'],</span> <span class="pre">'Iframe_Restrict_Access':</span> <span class="pre">False,</span> <span class="pre">'Layout_Home_Body':</span> <span class="pre">'&lt;p&gt;Willkommen</span> <span class="pre">beim</span> <span class="pre">%(COSINNUS_BASE_PAGE_TITLE_TRANS)s</span> <span class="pre">Rocket.Chat!&lt;/p&gt;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;p&gt;Schreibt</span> <span class="pre">private</span> <span class="pre">Nachrichten</span> <span class="pre">im</span> <span class="pre">Browser,</span> <span class="pre">per</span> <span class="pre">Smartphone-</span> <span class="pre">oder</span> <span class="pre">Desktop-App</span> <span class="pre">in</span> <span class="pre">Echtzeit</span> <span class="pre">an</span> <span class="pre">andere,</span> <span class="pre">in</span> <span class="pre">Projekten</span> <span class="pre">und</span> <span class="pre">Gruppen</span> <span class="pre">oder</span> <span class="pre">in</span> <span class="pre">eigenen</span> <span class="pre">Kanälen.&lt;/p&gt;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;p&gt;Wenn</span> <span class="pre">du</span> <span class="pre">die</span> <span class="pre">App</span> <span class="pre">nach</span> <span class="pre">der</span> <span class="pre">Installation</span> <span class="pre">&amp;ouml;ffnest,</span> <span class="pre">klicke</span> <span class="pre">auf</span> <span class="pre">&lt;strong&gt;Mit</span> <span class="pre">einem</span> <span class="pre">Server</span> <span class="pre">verbinden&lt;/strong&gt;.</span> <span class="pre">Gebe</span> <span class="pre">im</span> <span class="pre">nachfolgenden</span> <span class="pre">Fenster</span> <span class="pre">folgende&lt;strong&gt;</span> <span class="pre">Serveradresse</span> <span class="pre">ein&lt;/strong&gt;:</span> <span class="pre">&lt;a</span> <span class="pre">href=&quot;%(COSINNUS_CHAT_BASE_URL)s&quot;</span> <span class="pre">target=&quot;_blank&quot;</span> <span class="pre">rel=&quot;nofollow</span> <span class="pre">noopener</span> <span class="pre">noreferrer&quot;&gt;%(COSINNUS_CHAT_BASE_URL)s&lt;/a&gt;</span> <span class="pre">und</span> <span class="pre">klicke</span> <span class="pre">auf</span> <span class="pre">&lt;strong&gt;Verbinden&lt;/strong&gt;.</span> <span class="pre">Klicke</span> <span class="pre">auf</span> <span class="pre">&lt;strong&gt;Enter</span> <span class="pre">Chat&lt;/strong&gt;</span> <span class="pre">und</span> <span class="pre">gib</span> <span class="pre">deine</span> <span class="pre">%(COSINNUS_BASE_PAGE_TITLE_TRANS)s</span> <span class="pre">Zugangsdaten</span> <span class="pre">in</span> <span class="pre">das</span> <span class="pre">sich</span> <span class="pre">&amp;ouml;ffnende</span> <span class="pre">Fenster.&lt;/p&gt;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;p&gt;Die</span> <span class="pre">Rocket.Chat-Desktops-Apps</span> <span class="pre">für</span> <span class="pre">Windows,</span> <span class="pre">MacOS</span> <span class="pre">und</span> <span class="pre">Linux</span> <span class="pre">stehen</span> <span class="pre">&lt;a</span> <span class="pre">title=&quot;Rocket.Chat</span> <span class="pre">desktop</span> <span class="pre">apps&quot;</span> <span class="pre">href=&quot;https://rocket.chat/download&quot;</span> <span class="pre">target=&quot;_blank&quot;</span> <span class="pre">rel=&quot;noopener&quot;&gt;hier&lt;/a&gt;</span> <span class="pre">zum</span> <span class="pre">Download</span> <span class="pre">bereit..&lt;/p&gt;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;p&gt;Die</span> <span class="pre">native</span> <span class="pre">Mobile-App</span> <span class="pre">Rocket.Chat</span> <span class="pre">für</span> <span class="pre">Android</span> <span class="pre">und</span> <span class="pre">iOS</span> <span class="pre">ist</span> <span class="pre">bei</span> <span class="pre">&lt;a</span> <span class="pre">title=&quot;Rocket.Chat+</span> <span class="pre">on</span> <span class="pre">Google</span> <span class="pre">Play&quot;</span> <span class="pre">href=&quot;https://play.google.com/store/apps/details?id=chat.rocket.android&quot;</span> <span class="pre">target=&quot;_blank&quot;</span> <span class="pre">rel=&quot;noopener&quot;&gt;Google</span> <span class="pre">Play&lt;/a&gt;</span> <span class="pre">und</span> <span class="pre">im</span>&#160; <span class="pre">&lt;a</span> <span class="pre">title=&quot;Rocket.Chat+</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">App</span> <span class="pre">Store&quot;</span> <span class="pre">href=&quot;https://itunes.apple.com/app/rocket-chat/id1148741252&quot;</span> <span class="pre">target=&quot;_blank&quot;</span> <span class="pre">rel=&quot;noopener&quot;&gt;App</span> <span class="pre">Store&lt;/a&gt;</span> <span class="pre">erhältlich.&lt;/p&gt;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;p&gt;Weitere</span> <span class="pre">Informationen</span> <span class="pre">finden</span> <span class="pre">Sie</span> <span class="pre">in</span> <span class="pre">der</span> <span class="pre">&lt;a</span> <span class="pre">title=&quot;Rocket.Chat</span> <span class="pre">Documentation&quot;</span> <span class="pre">href=&quot;https://rocket.chat/docs/&quot;</span> <span class="pre">target=&quot;_blank&quot;</span> <span class="pre">rel=&quot;noopener&quot;&gt;Dokumentation&lt;/a&gt;.&lt;/p&gt;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">',</span> <span class="pre">'Layout_Home_Custom_Block_Visible':</span> <span class="pre">True,</span> <span class="pre">'Layout_Login_Terms':</span> <span class="pre">'',</span> <span class="pre">'Layout_Privacy_Policy':</span> <span class="pre">'&lt;a</span> <span class="pre">href=&quot;https://wechange.de/cms/datenschutz/&quot;&gt;Datenschutz&lt;/a&gt;',</span> <span class="pre">'Layout_Terms_of_Service':</span> <span class="pre">'&lt;a</span> <span class="pre">href=&quot;https://wechange.de/cms/datenschutz/&quot;&gt;Nutzungsbedingungen&lt;/a&gt;&lt;br&gt;&lt;a</span> <span class="pre">href=&quot;https://wechange.de/cms/datenschutz/&quot;&gt;Datenschutz&lt;/a&gt;',</span> <span class="pre">'NPS_survey_enabled':</span> <span class="pre">False,</span> <span class="pre">'Show_Setup_Wizard':</span> <span class="pre">False,</span> <span class="pre">'UI_Use_Real_Name':</span> <span class="pre">True,</span> <span class="pre">'UTF8_Channel_Names_Validation':</span> <span class="pre">'[0-9a-zA-Z-_.äÄöÖüÜß]+',</span> <span class="pre">'UTF8_User_Names_Validation':</span> <span class="pre">'[0-9a-zA-Z-_.äÄöÖüÜß]+',</span> <span class="pre">'theme-custom-css':</span> <span class="pre">'\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">h2[data-qa-id=&quot;homepage-welcome-text&quot;],\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">h2[data-qa-id=&quot;homepage-welcome-text&quot;]</span> <span class="pre">+</span> <span class="pre">h3,\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">h2[data-qa-id=&quot;homepage-welcome-text&quot;]</span> <span class="pre">+</span> <span class="pre">h3</span> <span class="pre">+</span> <span class="pre">div.rcx-grid__wrapper</span>&#160; <span class="pre">{\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">display:</span> <span class="pre">none;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">}\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">/*</span> <span class="pre">Increase</span> <span class="pre">logo</span> <span class="pre">size</span> <span class="pre">on</span> <span class="pre">login</span> <span class="pre">page</span> <span class="pre">*/\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">img[src=&quot;%(COSINNUS_CHAT_BASE_URL)s/assets/logo.png&quot;],\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">img[src=&quot;%(COSINNUS_CHAT_BASE_URL)s/assets/logo_dark.png&quot;]</span> <span class="pre">{\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">max-height:</span> <span class="pre">6rem</span> <span class="pre">!important;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">}\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">/*</span> <span class="pre">Hide</span> <span class="pre">&quot;Welcome</span> <span class="pre">to</span> <span class="pre">XYZ</span> <span class="pre">workspace&quot;</span> <span class="pre">and</span> <span class="pre">&quot;By</span> <span class="pre">proceeding</span> <span class="pre">you</span> <span class="pre">are</span> <span class="pre">agreeing</span> <span class="pre">to</span> <span class="pre">our</span> <span class="pre">Terms</span> <span class="pre">of</span> <span class="pre">Service,</span> <span class="pre">Privacy</span> <span class="pre">Policy</span> <span class="pre">and</span> <span class="pre">Legal</span> <span class="pre">Notice.</span> <span class="pre">-</span> <span class="pre">Switch</span> <span class="pre">to</span> <span class="pre">en&quot;</span> <span class="pre">on</span> <span class="pre">login</span> <span class="pre">page</span> <span class="pre">*/\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">#react-root</span> <span class="pre">&gt;</span> <span class="pre">div</span> <span class="pre">&gt;</span> <span class="pre">div</span> <span class="pre">&gt;</span> <span class="pre">div</span> <span class="pre">&gt;</span> <span class="pre">h1,</span> <span class="pre">#react-root</span> <span class="pre">&gt;</span> <span class="pre">div</span> <span class="pre">&gt;</span> <span class="pre">div</span> <span class="pre">&gt;</span> <span class="pre">div</span> <span class="pre">&gt;</span> <span class="pre">form</span> <span class="pre">+</span> <span class="pre">div</span> <span class="pre">{\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">display:</span> <span class="pre">none</span> <span class="pre">!important;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">}\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">'}</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_SETTINGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_SYNC_OAUTH_SETTINGS">
+<span class="sig-name descname"><span class="pre">COSINNUS_CHAT_SYNC_OAUTH_SETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Accounts_OAuth_Custom-%(portal_name_cap)s':</span> <span class="pre">True,</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-authorize_path':</span> <span class="pre">'/o/authorize/',</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-button_label_text':</span> <span class="pre">'Enter</span> <span class="pre">chat',</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-id':</span> <span class="pre">'%(oauth_id)s',</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-identity_path':</span> <span class="pre">'/o/me/',</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-merge_users':</span> <span class="pre">True,</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-scope':</span> <span class="pre">'read',</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-secret':</span> <span class="pre">'%(oauth_secret)s',</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-token_path':</span> <span class="pre">'/o/token/',</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-token_sent_via':</span> <span class="pre">'header',</span> <span class="pre">'Accounts_OAuth_Custom-%(portal_name_cap)s-url':</span> <span class="pre">'%(portal_domain)s'}</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_SYNC_OAUTH_SETTINGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_USER">
+<span class="sig-name descname"><span class="pre">COSINNUS_CHAT_USER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dummy-bot'</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_USER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_USER_CONNECTION_TIMEOUT">
+<span class="sig-name descname"><span class="pre">COSINNUS_CHAT_USER_CONNECTION_TIMEOUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_CHAT_USER_CONNECTION_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_POSTMAN_ARCHIVE_MODE">
+<span class="sig-name descname"><span class="pre">COSINNUS_POSTMAN_ARCHIVE_MODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_POSTMAN_ARCHIVE_MODE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_ENABLED">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_ENABLED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_EXPORT_ENABLED">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_EXPORT_ENABLED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_EXPORT_ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_GROUP_CONTACT_ROOM_INFO_MESSAGE">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_GROUP_CONTACT_ROOM_INFO_MESSAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Please</span> <span class="pre">post</span> <span class="pre">your</span> <span class="pre">request</span> <span class="pre">or</span> <span class="pre">question</span> <span class="pre">here.</span> <span class="pre">You</span> <span class="pre">can</span> <span class="pre">see</span> <span class="pre">the</span> <span class="pre">channel</span> <span class="pre">members</span> <span class="pre">by</span> <span class="pre">clicking</span> <span class="pre">the</span> <span class="pre">group</span> <span class="pre">icon</span> <span class="pre">at</span> <span class="pre">the</span> <span class="pre">top</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">channel.'</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_GROUP_CONTACT_ROOM_INFO_MESSAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_GROUP_ROOM_KEYS">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_GROUP_ROOM_KEYS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['general']</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_GROUP_ROOM_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_GROUP_ROOM_NAMES_MAP">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_GROUP_ROOM_NAMES_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'general':</span> <span class="pre">'%s'}</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_GROUP_ROOM_NAMES_MAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_GROUP_WIDGET_SHOW_ROADBLOCK">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_GROUP_WIDGET_SHOW_ROADBLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_GROUP_WIDGET_SHOW_ROADBLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_NEWS_BOT_EMOTE">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_NEWS_BOT_EMOTE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">':loud_sound:'</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_NEWS_BOT_EMOTE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_NEWS_BOT_EMOTE_EVENT">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_NEWS_BOT_EMOTE_EVENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">':date:'</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_NEWS_BOT_EMOTE_EVENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_NOTE_POST_RELAY_ROOM_KEY">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_NOTE_POST_RELAY_ROOM_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'general'</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_NOTE_POST_RELAY_ROOM_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_NOTE_POST_RELAY_TRUNCATE_WORD_COUNT">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_NOTE_POST_RELAY_TRUNCATE_WORD_COUNT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">60</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_NOTE_POST_RELAY_TRUNCATE_WORD_COUNT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB">
+<span class="sig-name descname"><span class="pre">COSINNUS_ROCKET_OPEN_IN_NEW_TAB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.Meta.prefix">
+<span class="sig-name descname"><span class="pre">prefix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.Meta.prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.POSTMAN_AUTO_MODERATE_AS">
+<span class="sig-name descname"><span class="pre">POSTMAN_AUTO_MODERATE_AS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.POSTMAN_AUTO_MODERATE_AS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.POSTMAN_DISALLOW_ANONYMOUS">
+<span class="sig-name descname"><span class="pre">POSTMAN_DISALLOW_ANONYMOUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.POSTMAN_DISALLOW_ANONYMOUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.conf.CosinnusMessageDefaultSettings.POSTMAN_SHOW_USER_AS">
+<span class="sig-name descname"><span class="pre">POSTMAN_SHOW_USER_AS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'username'</span></em><a class="headerlink" href="#cosinnus_message.conf.CosinnusMessageDefaultSettings.POSTMAN_SHOW_USER_AS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_message.cosinnus_app">
+<span id="cosinnus-message-cosinnus-app-module"></span><h2>cosinnus_message.cosinnus_app module<a class="headerlink" href="#module-cosinnus_message.cosinnus_app" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.cosinnus_app.register">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.cosinnus_app.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.cosinnus_app.register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_message.cron">
+<span id="cosinnus-message-cron-module"></span><h2>cosinnus_message.cron module<a class="headerlink" href="#module-cosinnus_message.cron" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.cron.ProcessDirectReplyMails">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.cron.</span></span><span class="sig-name descname"><span class="pre">ProcessDirectReplyMails</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.cron.ProcessDirectReplyMails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.html#cosinnus.cron.CosinnusCronJobBase" title="cosinnus.cron.CosinnusCronJobBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusCronJobBase</span></code></a></p>
+<p>Downloads all mail for mailboxes in this portal, then processes direct replies as answers.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.cron.ProcessDirectReplyMails.RUN_EVERY_MINS">
+<span class="sig-name descname"><span class="pre">RUN_EVERY_MINS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#cosinnus_message.cron.ProcessDirectReplyMails.RUN_EVERY_MINS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.cron.ProcessDirectReplyMails.cosinnus_code">
+<span class="sig-name descname"><span class="pre">cosinnus_code</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'message.process_direct_reply_mails'</span></em><a class="headerlink" href="#cosinnus_message.cron.ProcessDirectReplyMails.cosinnus_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.cron.ProcessDirectReplyMails.do">
+<span class="sig-name descname"><span class="pre">do</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.cron.ProcessDirectReplyMails.do" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.cron.ProcessDirectReplyMails.schedule">
+<span class="sig-name descname"><span class="pre">schedule</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django_cron.Schedule</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_message.cron.ProcessDirectReplyMails.schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_message.dashboard">
+<span id="cosinnus-message-dashboard-module"></span><h2>cosinnus_message.dashboard module<a class="headerlink" href="#module-cosinnus_message.dashboard" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.dashboard.</span></span><span class="sig-name descname"><span class="pre">EmbeddedRocketchatDashboardWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.dashboard.DashboardWidget" title="cosinnus.utils.dashboard.DashboardWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidget</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.app_name">
+<span class="sig-name descname"><span class="pre">app_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'message'</span></em><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.app_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.form_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+if has_more == False, the receiving widget will assume no further data can be loaded.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.model">
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_message/widgets/embedded_rocketchat_widget.html'</span></em><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Chat'</span></em><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.title_url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title_url</span></span><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.title_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.user_model_attr">
+<span class="sig-name descname"><span class="pre">user_model_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.user_model_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.widget_name">
+<span class="sig-name descname"><span class="pre">widget_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'embeddedchat'</span></em><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.widget_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.widget_template_name">
+<span class="sig-name descname"><span class="pre">widget_template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_message/widgets/message_widget.html'</span></em><a class="headerlink" href="#cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget.widget_template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_message.forms">
+<span id="cosinnus-message-forms-module"></span><h2>cosinnus_message.forms module<a class="headerlink" href="#module-cosinnus_message.forms" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.forms.ContactMessageForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.forms.</span></span><span class="sig-name descname"><span class="pre">ContactMessageForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.ContactMessageForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.forms.ContactMessageForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'contact_message':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_message.forms.ContactMessageForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.forms.ContactMessageForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'contact_message':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_message.forms.ContactMessageForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_message.forms.ContactMessageForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_message.forms.ContactMessageForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomReplyForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.forms.</span></span><span class="sig-name descname"><span class="pre">CustomReplyForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.CustomReplyForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_message.forms.CustomWriteForm" title="cosinnus_message.forms.CustomWriteForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomWriteForm</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomReplyForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'body':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'recipients':</span> <span class="pre">&lt;cosinnus.fields.UserSelect2MultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'subject':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_message.forms.CustomReplyForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomReplyForm.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.CustomReplyForm.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook for doing any extra form-wide cleaning after Field.clean() has been
+called on every field. Any ValidationError raised by this method will
+not be associated with a particular field; it will have a special-case
+association with the field named ‘__all__’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomReplyForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'recipients':</span> <span class="pre">&lt;cosinnus.fields.UserSelect2MultipleChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_message.forms.CustomReplyForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomReplyForm.exchange_filter">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exchange_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipients_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.CustomReplyForm.exchange_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure the users can interact with each other</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomReplyForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_message.forms.CustomReplyForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomReplyForm.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.CustomReplyForm.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save as many messages as there are recipients.</p>
+<p>Additional actions:
+- If it’s a reply, build a conversation
+- Call auto-moderators
+- Notify parties if needed</p>
+<p>Return False if one of the messages is rejected.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomWriteForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.forms.</span></span><span class="sig-name descname"><span class="pre">CustomWriteForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.CustomWriteForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseWriteForm</span></code></p>
+<p>The form for an authenticated user, to compose a message.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomWriteForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_message.forms.CustomWriteForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Meta</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomWriteForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('recipients',</span> <span class="pre">'subject',</span> <span class="pre">'body')</span></em><a class="headerlink" href="#cosinnus_message.forms.CustomWriteForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomWriteForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'body':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'recipients':</span> <span class="pre">&lt;cosinnus.fields.UserSelect2MultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'subject':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_message.forms.CustomWriteForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomWriteForm.clean_recipients">
+<span class="sig-name descname"><span class="pre">clean_recipients</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.CustomWriteForm.clean_recipients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check no filter prohibits the exchange.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomWriteForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'recipients':</span> <span class="pre">&lt;cosinnus.fields.UserSelect2MultipleChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_message.forms.CustomWriteForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomWriteForm.exchange_filter">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exchange_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipients_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.CustomWriteForm.exchange_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure the users can interact with each other</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomWriteForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_message.forms.CustomWriteForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.forms.CustomWriteForm.restricted_recipient_flag">
+<span class="sig-name descname"><span class="pre">restricted_recipient_flag</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_message.forms.CustomWriteForm.restricted_recipient_flag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.forms.user_write_permission_filter">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.forms.</span></span><span class="sig-name descname"><span class="pre">user_write_permission_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipients_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.user_write_permission_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure the users can interact with each other</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_message.hooks">
+<span id="cosinnus-message-hooks-module"></span><h2>cosinnus_message.hooks module<a class="headerlink" href="#module-cosinnus_message.hooks" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_message.models">
+<span id="cosinnus-message-models-module"></span><h2>cosinnus_message.models module<a class="headerlink" href="#module-cosinnus_message.models" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.models.CosinnusMailbox">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.models.</span></span><span class="sig-name descname"><span class="pre">CosinnusMailbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_polling</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mailbox_ptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">portal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.models.CosinnusMailbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Mailbox</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_message.models.CosinnusMailbox.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cosinnus_message.models.CosinnusMailbox.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_message.models.CosinnusMailbox.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cosinnus_message.models.CosinnusMailbox.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.models.CosinnusMailbox.mailbox_ptr">
+<span class="sig-name descname"><span class="pre">mailbox_ptr</span></span><a class="headerlink" href="#cosinnus_message.models.CosinnusMailbox.mailbox_ptr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Restaurant.place</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardOneToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.models.CosinnusMailbox.mailbox_ptr_id">
+<span class="sig-name descname"><span class="pre">mailbox_ptr_id</span></span><a class="headerlink" href="#cosinnus_message.models.CosinnusMailbox.mailbox_ptr_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.models.CosinnusMailbox.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_message.models.CosinnusMailbox.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.models.CosinnusMailbox.portal">
+<span class="sig-name descname"><span class="pre">portal</span></span><a class="headerlink" href="#cosinnus_message.models.CosinnusMailbox.portal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.models.CosinnusMailbox.portal_id">
+<span class="sig-name descname"><span class="pre">portal_id</span></span><a class="headerlink" href="#cosinnus_message.models.CosinnusMailbox.portal_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_message.postman_urls">
+<span id="cosinnus-message-postman-urls-module"></span><h2>cosinnus_message.postman_urls module<a class="headerlink" href="#module-cosinnus_message.postman_urls" title="Permalink to this heading">¶</a></h2>
+<p>If the default usage of the views suits you, simply use a line like
+this one in your root URLconf to set up the default URLs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^messages/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;postman.urls&#39;</span><span class="p">)),</span>
+</pre></div>
+</div>
+<p>Otherwise you may customize the behavior by passing extra parameters.</p>
+<section id="recipients-max">
+<h3>Recipients Max<a class="headerlink" href="#recipients-max" title="Permalink to this heading">¶</a></h3>
+<p>Views supporting the parameter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
+Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
+</pre></div>
+</div>
+<p>See also the <code class="docutils literal notranslate"><span class="pre">POSTMAN_DISALLOW_MULTIRECIPIENTS</span></code> setting</p>
+</section>
+<section id="user-filter">
+<h3>User filter<a class="headerlink" href="#user-filter" title="Permalink to this heading">¶</a></h3>
+<p>Views supporting a user filter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
+Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_user_filter</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">get_profile</span><span class="p">()</span><span class="o">.</span><span class="n">is_absent</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;is away&quot;</span>
+    <span class="k">return</span> <span class="kc">None</span>
+<span class="o">...</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">user_filter</span><span class="o">=</span><span class="n">my_user_filter</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
+</pre></div>
+</div>
+<p>function interface:
+In: a User instance
+Out: None, False, ‘’, ‘a reason’, or ValidationError</p>
+</section>
+<section id="exchange-filter">
+<h3>Exchange filter<a class="headerlink" href="#exchange-filter" title="Permalink to this heading">¶</a></h3>
+<p>Views supporting an exchange filter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
+Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_exchange_filter</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">recipients_list</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">recipient</span><span class="o">.</span><span class="n">relationships</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">RelationshipStatus</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">blocking</span><span class="p">()):</span>
+        <span class="k">return</span> <span class="s2">&quot;has blacklisted you&quot;</span>
+    <span class="k">return</span> <span class="kc">None</span>
+<span class="o">...</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">exchange_filter</span><span class="o">=</span><span class="n">my_exchange_filter</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
+</pre></div>
+</div>
+<p>function interface:
+In:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sender</span></code>: a User instance
+<code class="docutils literal notranslate"><span class="pre">recipient</span></code>: a User instance
+<code class="docutils literal notranslate"><span class="pre">recipients_list</span></code>: the full list of recipients</p>
+</div></blockquote>
+<p>Out: None, False, ‘’, ‘a reason’, or ValidationError</p>
+</section>
+<section id="auto-complete-field">
+<h3>Auto-complete field<a class="headerlink" href="#auto-complete-field" title="Permalink to this heading">¶</a></h3>
+<p>Views supporting an auto-complete parameter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
+Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">autocomplete_channels</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="s1">&#39;anonymous_ac&#39;</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">autocomplete_channels</span><span class="o">=</span><span class="s1">&#39;write_ac&#39;</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">autocomplete_channel</span><span class="o">=</span><span class="s1">&#39;reply_ac&#39;</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_reply&#39;</span><span class="p">),</span>
+</pre></div>
+</div>
+</section>
+<section id="auto-moderators">
+<h3>Auto moderators<a class="headerlink" href="#auto-moderators" title="Permalink to this heading">¶</a></h3>
+<p>Views supporting an <code class="docutils literal notranslate"><span class="pre">auto-moderators</span></code> parameter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
+Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mod1</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">None</span>
+<span class="k">def</span> <span class="nf">mod2</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">None</span>
+<span class="n">mod2</span><span class="o">.</span><span class="n">default_reason</span> <span class="o">=</span> <span class="s1">&#39;mod2 default reason&#39;</span>
+<span class="o">...</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">auto_moderators</span><span class="o">=</span><span class="p">(</span><span class="n">mod1</span><span class="p">,</span> <span class="n">mod2</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">auto_moderators</span><span class="o">=</span><span class="n">mod1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_reply&#39;</span><span class="p">),</span>
+</pre></div>
+</div>
+<p>function interface:
+In: <code class="docutils literal notranslate"><span class="pre">message</span></code>: a Message instance
+Out: rating or (rating, “reason”)</p>
+<blockquote>
+<div><p>with reting: None, 0 or False, 100 or True, 1..99</p>
+</div></blockquote>
+</section>
+<section id="others">
+<h3>Others<a class="headerlink" href="#others" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>Refer to documentation.</dt><dd><p>…View.as_view(form_classes=(MyCustomWriteForm, MyCustomAnonymousWriteForm)), name=’postman_write’),
+…View.as_view(form_class=MyCustomFullReplyForm), name=’postman_reply’),
+…View.as_view(form_class=MyCustomQuickReplyForm), name=’postman_view’),
+…View.as_view(template_name=’my_custom_view.html’), name=’postman_view’),
+…View.as_view(success_url=’postman_inbox’), name=’postman_reply’),
+…View.as_view(formatters=(format_subject, format_body)), name=’postman_reply’),
+…View.as_view(formatters=(format_subject, format_body)), name=’postman_view’),</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="module-cosinnus_message.rocket_chat">
+<span id="cosinnus-message-rocket-chat-module"></span><h2>cosinnus_message.rocket_chat module<a class="headerlink" href="#module-cosinnus_message.rocket_chat" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.rocket_chat.</span></span><span class="sig-name descname"><span class="pre">RocketChat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RocketChat</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChat.rooms_upload">
+<span class="sig-name descname"><span class="pre">rooms_upload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChat.rooms_upload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrite base method to allow filename and mimetye kwargs</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.rocket_chat.</span></span><span class="sig-name descname"><span class="pre">RocketChatConnection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dummy-bot'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://chat.localhost'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.ROCKET_CHAT_DOWN_ERROR">
+<span class="sig-name descname"><span class="pre">ROCKET_CHAT_DOWN_ERROR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'RocketChatDownException:</span> <span class="pre">a</span> <span class="pre">user</span> <span class="pre">action</span> <span class="pre">was</span> <span class="pre">canceled</span> <span class="pre">because</span> <span class="pre">the</span> <span class="pre">rocketchat</span> <span class="pre">service</span> <span class="pre">is</span> <span class="pre">unreachable.'</span></em><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.ROCKET_CHAT_DOWN_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE">
+<span class="sig-name descname"><span class="pre">ROCKET_CHAT_DOWN_USER_MESSAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'We</span> <span class="pre">are</span> <span class="pre">currently</span> <span class="pre">experiencing</span> <span class="pre">some</span> <span class="pre">technical</span> <span class="pre">difficulties</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">RocketChat</span> <span class="pre">service</span> <span class="pre">and</span> <span class="pre">some</span> <span class="pre">of</span> <span class="pre">your</span> <span class="pre">actions</span> <span class="pre">may</span> <span class="pre">not</span> <span class="pre">have</span> <span class="pre">had</span> <span class="pre">an</span> <span class="pre">effect.</span> <span class="pre">Please</span> <span class="pre">try</span> <span class="pre">again</span> <span class="pre">later.</span> <span class="pre">We</span> <span class="pre">apologize</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">inconveniences!'</span></em><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE">
+<span class="sig-name descname"><span class="pre">ROCKET_CHAT_EXCEPTION_USER_MESSAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'A</span> <span class="pre">technical</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">RocketChat</span> <span class="pre">service.</span> <span class="pre">Some</span> <span class="pre">of</span> <span class="pre">your</span> <span class="pre">actions</span> <span class="pre">may</span> <span class="pre">not</span> <span class="pre">have</span> <span class="pre">had</span> <span class="pre">an</span> <span class="pre">effect.</span> <span class="pre">We</span> <span class="pre">are</span> <span class="pre">working</span> <span class="pre">on</span> <span class="pre">resolving</span> <span class="pre">the</span> <span class="pre">issue.</span> <span class="pre">Please</span> <span class="pre">try</span> <span class="pre">again</span> <span class="pre">later.</span> <span class="pre">We</span> <span class="pre">apologize</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">inconveniences!'</span></em><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.add_member_to_room">
+<span class="sig-name descname"><span class="pre">add_member_to_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">room_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.add_member_to_room" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a member to a given room</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.add_moderator_to_room">
+<span class="sig-name descname"><span class="pre">add_moderator_to_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">room_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.add_moderator_to_room" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a moderator to a given room</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.check_user_account_status">
+<span class="sig-name descname"><span class="pre">check_user_account_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.check_user_account_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read-only check whether or not the user exists in rocket chat.
+&#64;return:   True if the user account exists.</p>
+<blockquote>
+<div><p>False if the user account definitely does not exist.
+None if another error occurred or was returned, or the service was unavailable.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.create_missing_users">
+<span class="sig-name descname"><span class="pre">create_missing_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_inactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_group_membership_sync</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.create_missing_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create missing user accounts in rocketchat (and verify that ones with an existing
+connection still exist in rocketchat properly).
+Inactive user accounts and ones that never logged in will also be created.
+Will never create accounts for users with __unverified__ emails.</p>
+<p>&#64;param skip_inactive: if True, will not create any accounts for inactive users
+&#64;param force_group_membership_sync: if True, will also re-do and sync all group</p>
+<blockquote>
+<div><p>memberships, for all users. (default: only sync memberships for users created 
+during this run)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.create_private_room">
+<span class="sig-name descname"><span class="pre">create_private_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moderator_user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">member_users</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_admin_users</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">room_topic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">greeting_message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.create_private_room" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a private group with a user as first member and moderator.
+&#64;param moderator_user: user who will become both a member and moderator
+&#64;param member_users: list of users who become members. may contain the moderator_user again
+&#64;param room_topic: if supplied, the topic will be set in the rocketchat room
+&#64;param greeting_message: if supplied, will post this message with an &#64;all ping in the newly</p>
+<blockquote>
+<div><p>created room</p>
+</div></blockquote>
+<p>&#64;return: the rocketchat room_id</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.delete_private_room">
+<span class="sig-name descname"><span class="pre">delete_private_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">room_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.delete_private_room" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a private room by room_id.
+&#64;param room_id: rocket chat room id</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.ensure_user_account_sanity">
+<span class="sig-name descname"><span class="pre">ensure_user_account_sanity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_group_membership_sync</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.ensure_user_account_sanity" title="Permalink to this definition">¶</a></dt>
+<dd><p>A helper function that can always be safely called on any user object.
+Checks if the user account exists.
+&#64;param force_group_membership_sync: if True, will also re-do group memberships for active users</p>
+<blockquote>
+<div><p>instead of only for freshly created accounts</p>
+</div></blockquote>
+<p>&#64;param return: True if the account was either healthy or was newly created. False (and causes logs) otherwise</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.force_redo_user_room_membership_for_group">
+<span class="sig-name descname"><span class="pre">force_redo_user_room_membership_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.force_redo_user_room_membership_for_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>A helper function that will re-do all room memberships by
+saving each user’s membership (and having the invite-room hooks trigger)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.force_redo_user_room_memberships">
+<span class="sig-name descname"><span class="pre">force_redo_user_room_memberships</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.force_redo_user_room_memberships" title="Permalink to this definition">¶</a></dt>
+<dd><p>A helper function that will re-do all room memberships by
+saving each user’s membership (and having the invite-room hooks trigger)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.format_message">
+<span class="sig-name descname"><span class="pre">format_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.format_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace WECHANGE formatting language with Rocket.Chat formatting language:
+Rocket.Chat:</p>
+<blockquote>
+<div><p>Bold: <em>Lorem ipsum dolor</em> ;
+Italic: _Lorem ipsum <a href="#id3"><span class="problematic" id="id4">dolor_</span></a> ;
+Strike: ~Lorem ipsum dolor~ ;
+Inline code: <cite>Lorem ipsum dolor</cite>;
+Image: ![Alt text](<a class="reference external" href="https://rocket.chat/favicon.ico">https://rocket.chat/favicon.ico</a>) ;
+Link: [Lorem ipsum dolor](<a class="reference external" href="https://www.rocket.chat/">https://www.rocket.chat/</a>) or &lt;<a class="reference external" href="https://www.rocket.chat/">https://www.rocket.chat/</a> <a href="#id1"><span class="problematic" id="id2">|</span></a>Lorem ipsum dolor&gt; ;</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.get_group_id">
+<span class="sig-name descname"><span class="pre">get_group_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">room_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_if_not_exists</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.get_group_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Rocket.Chat ID from group settings or Rocket.Chat API
+:param user:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.get_group_room_name">
+<span class="sig-name descname"><span class="pre">get_group_room_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">room_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.get_group_room_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the rocketchat room name for a CosinnusGroup, for use in any URLs.
+Creates a room for the group if it doesn’t exist yet</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.get_user_email_preference">
+<span class="sig-name descname"><span class="pre">get_user_email_preference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.get_user_email_preference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the user preference for email notifications
+Preference for emails is: ‘emailNotificationMode’: ‘mentions’|’default’|’nothing’
+&#64;return: one of the values of <cite>ROCKETCHAT_PREFERENCES_EMAIL_NOTIFICATION</cite> or None if</p>
+<blockquote>
+<div><p>no setting is set, it is of unknown value or an error occured</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.get_user_id">
+<span class="sig-name descname"><span class="pre">get_user_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.get_user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Rocket.Chat ID from user settings or Rocket.Chat API
+:param user:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.get_user_preferences">
+<span class="sig-name descname"><span class="pre">get_user_preferences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.get_user_preferences" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the given user’s rocketchat preferences.
+Note: the preference set is empty for preferences that have never been changed</p>
+<blockquote>
+<div><p>from the default!</p>
+</div></blockquote>
+<p>&#64;return: a dict of preferences. <cite>None</cite>, if there was an error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.group_set_topic_to_url">
+<span class="sig-name descname"><span class="pre">group_set_topic_to_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_room_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.group_set_topic_to_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the CosinnusGroup url as topic of the group’s room 
+&#64;param specific_room_keysspecific_room_keys: if set to a list, the topic will only be</p>
+<blockquote>
+<div><p>set for those specific room names, instead of for all rooms of that group</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_add_moderator">
+<span class="sig-name descname"><span class="pre">groups_add_moderator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">membership</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_add_moderator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add role to user in group
+:param group:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_archive">
+<span class="sig-name descname"><span class="pre">groups_archive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_room_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_room_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Archive channels for group or project
+:param group:
+:return: True if successful, False if there were any errors</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_create">
+<span class="sig-name descname"><span class="pre">groups_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create default channels for group or project, if they doesn’t exist yet:
+1. #slug-general: Private group with all members
+2. #slug-news: Private ready-only group with all members, new notes appear here.
+:param group:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_delete">
+<span class="sig-name descname"><span class="pre">groups_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete default channels for group or project
+:param group:
+:return: True if successful, False if there were any errors</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_invite">
+<span class="sig-name descname"><span class="pre">groups_invite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">membership</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_invite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create membership for default channels
+:param group:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_kick">
+<span class="sig-name descname"><span class="pre">groups_kick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">membership</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_kick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete membership for default channels
+:param group:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_remove_moderator">
+<span class="sig-name descname"><span class="pre">groups_remove_moderator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">membership</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_remove_moderator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove role from user in group
+:param group:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_rename">
+<span class="sig-name descname"><span class="pre">groups_rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update default channels for group or project
+:param group:
+:return: True if successful, False if there were any errors</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_request">
+<span class="sig-name descname"><span class="pre">groups_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_sync_membership</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the rocketchat channel name of group if user is member of CosinnusGroup <cite>group</cite>, 
+otherwise starts a contact request.</p>
+<p>For a contact request, this reates a new private channel with the 
+requesting user and the admins of that group, or joins the already existing channel for that user
+if that user has created a room before and it is set in their profile.
+The contact room will be unique for (user, CosinnusGroup).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> – </p></li>
+<li><p><strong>user</strong> – </p></li>
+<li><p><strong>force_sync_membership</strong> – if True, and the user is a member of the CosinnusGroup,
+the user will be added to the rocketchat group again (useful to make sure
+that users are <em>really</em> members of the group)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>group name or none if the group didn’t exist and create has been not given</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_sync">
+<span class="sig-name descname"><span class="pre">groups_sync</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync groups
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.groups_unarchive">
+<span class="sig-name descname"><span class="pre">groups_unarchive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_room_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_room_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.groups_unarchive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unarchive channels for group or project
+:param group:
+:return: True if successful, False if there were any errors</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.invite_or_kick_for_membership">
+<span class="sig-name descname"><span class="pre">invite_or_kick_for_membership</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">membership</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.invite_or_kick_for_membership" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a CosinnusGroupMembership, force do:
+either kick or invite and promote or demote a user depending on their status</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.logout_user_session">
+<span class="sig-name descname"><span class="pre">logout_user_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.logout_user_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logges out a user from an active session using the users user_id and auth_token</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.notes_attachments_update">
+<span class="sig-name descname"><span class="pre">notes_attachments_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.notes_attachments_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>** Currently disabled **
+Update attachments for note in default channel of group/project
+Unfortunately we cannot delete/update existing uploads, sincee rooms_upload doesn’t return the message ID yet
+:param group:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.oauth_sync">
+<span class="sig-name descname"><span class="pre">oauth_sync</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.oauth_sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: this requires an Oauth app having been created in rocketchat manually,
+by the name of the portal identifier name</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.relay_message_create">
+<span class="sig-name descname"><span class="pre">relay_message_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.relay_message_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create message for new objects implementing the RelayMessageMixin in default channel of group/project</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.relay_message_delete">
+<span class="sig-name descname"><span class="pre">relay_message_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.relay_message_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete message for objects implementing the RelayMessageMixin in default channel of group/project</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.relay_message_update">
+<span class="sig-name descname"><span class="pre">relay_message_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.relay_message_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update message for objects implementing the RelayMessageMixin in default channel of group/project</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.remove_member_from_room">
+<span class="sig-name descname"><span class="pre">remove_member_from_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">room_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.remove_member_from_room" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a member for a given room</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.remove_moderator_from_room">
+<span class="sig-name descname"><span class="pre">remove_moderator_from_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">room_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.remove_moderator_from_room" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a moderator for a given room</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.rocket">
+<span class="sig-name descname"><span class="pre">rocket</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.rocket" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.set_user_email_preference">
+<span class="sig-name descname"><span class="pre">set_user_email_preference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preference</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.set_user_email_preference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the user’s email preferences to be one of the values of <cite>ROCKETCHAT_PREFERENCES_EMAIL_NOTIFICATION</cite>
+&#64;return: True if successful, False if not</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.settings_update">
+<span class="sig-name descname"><span class="pre">settings_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">only_settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.settings_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync COSINNUS_CHAT_SETTINGS with rocketchat.
+&#64;param only_settings: If set only these settings are synced.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.stderr">
+<span class="sig-name descname"><span class="pre">stderr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.stderr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.stdout">
+<span class="sig-name descname"><span class="pre">stdout</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.stdout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.unread_messages">
+<span class="sig-name descname"><span class="pre">unread_messages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.unread_messages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get number of unread messages for user. 
+Throws exceptions that need to be handled, on error!
+:param user:
+:return:
+&#64;raise RocketConnectionException: on an error connecting to the rocketchat service
+&#64;raise Exception: on a general error</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.users_create">
+<span class="sig-name descname"><span class="pre">users_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.users_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create user with name, email address and avatar
+:return: A user object if the creation was done without errors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.users_create_or_update">
+<span class="sig-name descname"><span class="pre">users_create_or_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.users_create_or_update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.users_delete">
+<span class="sig-name descname"><span class="pre">users_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.users_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a user
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.users_disable">
+<span class="sig-name descname"><span class="pre">users_disable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.users_disable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set user to inactive
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.users_enable">
+<span class="sig-name descname"><span class="pre">users_enable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.users_enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set user to active
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.users_sync">
+<span class="sig-name descname"><span class="pre">users_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.users_sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync active users that have already been created in rocketchat.
+Will not create new users.
+&#64;param skip_update: if True, skips updating existing users
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.users_update">
+<span class="sig-name descname"><span class="pre">users_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_user_update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.users_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates user name, email address and avatar
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatConnection.users_update_username">
+<span class="sig-name descname"><span class="pre">users_update_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rocket_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatConnection.users_update_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates username
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.RocketChatDownException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.rocket_chat.</span></span><span class="sig-name descname"><span class="pre">RocketChatDownException</span></span><a class="headerlink" href="#cosinnus_message.rocket_chat.RocketChatDownException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception to indicate that rocketchat is considered down.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.close_rocket_chat_session">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.rocket_chat.</span></span><span class="sig-name descname"><span class="pre">close_rocket_chat_session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.close_rocket_chat_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the global rocket chat session. Closing the session resets its internal state.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.delete_cached_rocket_connection">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.rocket_chat.</span></span><span class="sig-name descname"><span class="pre">delete_cached_rocket_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rocket_username</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.delete_cached_rocket_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a cached rocketchat connection or creates a new one and caches it</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.get_cached_rocket_connection">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.rocket_chat.</span></span><span class="sig-name descname"><span class="pre">get_cached_rocket_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rocket_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.get_cached_rocket_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a cached rocketchat connection or creates a new one and caches it.
+&#64;param reset: Resets the cached connection and connects a fresh one immediately</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.get_rocket_chat_session">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.rocket_chat.</span></span><span class="sig-name descname"><span class="pre">get_rocket_chat_session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.get_rocket_chat_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the global requests session and initializes it, if it does not exist.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.is_rocket_down">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.rocket_chat.</span></span><span class="sig-name descname"><span class="pre">is_rocket_down</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.is_rocket_down" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check in the cached value, if rocketchat is considered down.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.rocket_chat.set_rocket_down">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.rocket_chat.</span></span><span class="sig-name descname"><span class="pre">set_rocket_down</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.rocket_chat.set_rocket_down" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store in cache that rocketchat is considered down.</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_message.urls">
+<span id="cosinnus-message-urls-module"></span><h2>cosinnus_message.urls module<a class="headerlink" href="#module-cosinnus_message.urls" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_message.views">
+<span id="cosinnus-message-views-module"></span><h2>cosinnus_message.views module<a class="headerlink" href="#module-cosinnus_message.views" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.ArchiveView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">ArchiveView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.ArchiveView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_message.views.UpdateMessageMixin" title="cosinnus_message.views.UpdateMessageMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateMessageMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>Mark messages/conversations as archived.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.ArchiveView.field_bit">
+<span class="sig-name descname"><span class="pre">field_bit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'archived'</span></em><a class="headerlink" href="#cosinnus_message.views.ArchiveView.field_bit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.ArchiveView.field_value">
+<span class="sig-name descname"><span class="pre">field_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus_message.views.ArchiveView.field_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.ArchiveView.success_msg">
+<span class="sig-name descname"><span class="pre">success_msg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Messages</span> <span class="pre">or</span> <span class="pre">conversations</span> <span class="pre">successfully</span> <span class="pre">archived.'</span></em><a class="headerlink" href="#cosinnus_message.views.ArchiveView.success_msg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.BaseRocketChatView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">BaseRocketChatView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.BaseRocketChatView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TemplateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.BaseRocketChatView.base_url">
+<span class="sig-name descname"><span class="pre">base_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://chat.localhost'</span></em><a class="headerlink" href="#cosinnus_message.views.BaseRocketChatView.base_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.BaseRocketChatView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.BaseRocketChatView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.BaseRocketChatView.get_rocket_chat_url">
+<span class="sig-name descname"><span class="pre">get_rocket_chat_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.BaseRocketChatView.get_rocket_chat_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.BaseRocketChatView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_message/rocket_chat.html'</span></em><a class="headerlink" href="#cosinnus_message.views.BaseRocketChatView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.CosinnusConversationView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">CosinnusConversationView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.CosinnusConversationView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ConversationView</span></code></p>
+<p>Display a conversation.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.CosinnusConversationView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.CosinnusConversationView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>clear the body text, do not quote the message when replying</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.CosinnusMessageView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">CosinnusMessageView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.CosinnusMessageView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MessageView</span></code></p>
+<p>Display one specific message.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.CosinnusMessageView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.CosinnusMessageView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>clear the body text, do not quote the message when replying</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.DeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">DeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.DeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_message.views.UpdateMessageMixin" title="cosinnus_message.views.UpdateMessageMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateMessageMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>Mark messages/conversations as deleted.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.DeleteView.field_bit">
+<span class="sig-name descname"><span class="pre">field_bit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'deleted_at'</span></em><a class="headerlink" href="#cosinnus_message.views.DeleteView.field_bit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.DeleteView.field_value">
+<span class="sig-name descname"><span class="pre">field_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(2024,</span> <span class="pre">3,</span> <span class="pre">26,</span> <span class="pre">9,</span> <span class="pre">26,</span> <span class="pre">53,</span> <span class="pre">126478,</span> <span class="pre">tzinfo=datetime.timezone.utc)</span></em><a class="headerlink" href="#cosinnus_message.views.DeleteView.field_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.DeleteView.success_msg">
+<span class="sig-name descname"><span class="pre">success_msg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Messages</span> <span class="pre">or</span> <span class="pre">conversations</span> <span class="pre">successfully</span> <span class="pre">deleted.'</span></em><a class="headerlink" href="#cosinnus_message.views.DeleteView.success_msg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.MarkAsReadView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">MarkAsReadView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.MarkAsReadView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_message.views.UpdateMessageMixin" title="cosinnus_message.views.UpdateMessageMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateMessageMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>Mark messages/conversations as read.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.MarkAsReadView.field_value">
+<span class="sig-name descname"><span class="pre">field_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(2024,</span> <span class="pre">3,</span> <span class="pre">26,</span> <span class="pre">9,</span> <span class="pre">26,</span> <span class="pre">53,</span> <span class="pre">126493,</span> <span class="pre">tzinfo=datetime.timezone.utc)</span></em><a class="headerlink" href="#cosinnus_message.views.MarkAsReadView.field_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.MarkAsReadView.recipient_only_field_bit">
+<span class="sig-name descname"><span class="pre">recipient_only_field_bit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'read_at'</span></em><a class="headerlink" href="#cosinnus_message.views.MarkAsReadView.recipient_only_field_bit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.MarkAsReadView.success_msg">
+<span class="sig-name descname"><span class="pre">success_msg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Messages</span> <span class="pre">were</span> <span class="pre">marked</span> <span class="pre">as</span> <span class="pre">read.'</span></em><a class="headerlink" href="#cosinnus_message.views.MarkAsReadView.success_msg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatIndexView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">RocketChatIndexView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatIndexView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_message.views.BaseRocketChatView" title="cosinnus_message.views.BaseRocketChatView"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRocketChatView</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupComposeView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">RocketChatWriteGroupComposeView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupComposeView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FormView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupComposeView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupComposeView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_message.forms.ContactMessageForm" title="cosinnus_message.forms.ContactMessageForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContactMessageForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupComposeView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupComposeView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is valid, redirect to the supplied URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupComposeView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupComposeView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle GET requests: instantiate a blank version of the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupComposeView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupComposeView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupComposeView.get_group_object">
+<span class="sig-name descname"><span class="pre">get_group_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupComposeView.get_group_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupComposeView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_message/contact_message.html'</span></em><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupComposeView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">RocketChatWriteGroupView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_message.views.BaseRocketChatView" title="cosinnus_message.views.BaseRocketChatView"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRocketChatView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupView.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupView.get_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupView.get_rocket_chat_url">
+<span class="sig-name descname"><span class="pre">get_rocket_chat_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupView.get_rocket_chat_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Rocket.Chat group URL with user is member of group,
+creates a new private group with group admins if not
+:return:</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteGroupView.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteGroupView.queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">RocketChatWriteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_message.views.BaseRocketChatView" title="cosinnus_message.views.BaseRocketChatView"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRocketChatView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.RocketChatWriteView.get_rocket_chat_url">
+<span class="sig-name descname"><span class="pre">get_rocket_chat_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.RocketChatWriteView.get_rocket_chat_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.UndeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">UndeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.UndeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_message.views.UpdateMessageMixin" title="cosinnus_message.views.UpdateMessageMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateMessageMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>Revert messages/conversations from marked as deleted.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.UndeleteView.field_bit">
+<span class="sig-name descname"><span class="pre">field_bit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'deleted_at'</span></em><a class="headerlink" href="#cosinnus_message.views.UndeleteView.field_bit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.UndeleteView.success_msg">
+<span class="sig-name descname"><span class="pre">success_msg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Messages</span> <span class="pre">or</span> <span class="pre">conversations</span> <span class="pre">successfully</span> <span class="pre">recovered.'</span></em><a class="headerlink" href="#cosinnus_message.views.UndeleteView.success_msg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_message.views.UpdateMessageMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">UpdateMessageMixin</span></span><a class="headerlink" href="#cosinnus_message.views.UpdateMessageMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Code common to the archive/delete/undelete actions.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">field_bit</span></code>: a part of the name of the field to update
+<code class="docutils literal notranslate"><span class="pre">success_msg</span></code>: the displayed text in case of success</p>
+</dd>
+<dt>Optional attributes:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">field_value</span></code>: the value to set in the field
+<code class="docutils literal notranslate"><span class="pre">success_url</span></code>: where to redirect to after a successful POST</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.UpdateMessageMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.UpdateMessageMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.UpdateMessageMixin.field_bit">
+<span class="sig-name descname"><span class="pre">field_bit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.views.UpdateMessageMixin.field_bit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.UpdateMessageMixin.field_value">
+<span class="sig-name descname"><span class="pre">field_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.views.UpdateMessageMixin.field_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.UpdateMessageMixin.http_method_names">
+<span class="sig-name descname"><span class="pre">http_method_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['post']</span></em><a class="headerlink" href="#cosinnus_message.views.UpdateMessageMixin.http_method_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_message.views.UpdateMessageMixin.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.UpdateMessageMixin.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.UpdateMessageMixin.recipient_only_field_bit">
+<span class="sig-name descname"><span class="pre">recipient_only_field_bit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.views.UpdateMessageMixin.recipient_only_field_bit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_message.views.UpdateMessageMixin.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_message.views.UpdateMessageMixin.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.views.index">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.views.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.views.index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_message">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_message" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_message.get_version">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_message.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derives a PEP386-compliant version number from VERSION.</p>
+<p>Taken from django.utils.version.get_git_changeset at rev ce5e09353d</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+      <li>Previous: <a href="cosinnus_file.utils.html" title="previous chapter">cosinnus_file.utils package</a></li>
+      <li>Next: <a href="cosinnus_message.api.html" title="next chapter">cosinnus_message.api package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_message.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_cloud package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_cloud.management package" href="cosinnus_cloud.management.html" />
+    <link rel="prev" title="cosinnus.views.mixins package" href="cosinnus.views.mixins.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-cloud-package">
+<h1>cosinnus_cloud package<a class="headerlink" href="#cosinnus-cloud-package" title="Permalink to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_cloud.management.html">cosinnus_cloud.management package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.management.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.management.commands.html">cosinnus_cloud.management.commands package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#module-cosinnus_cloud.management.commands.remove_nextcloud_user_emails">cosinnus_cloud.management.commands.remove_nextcloud_user_emails module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#module-cosinnus_cloud.management.commands.sync_nextcloud_group_members">cosinnus_cloud.management.commands.sync_nextcloud_group_members module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#module-cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names">cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#module-cosinnus_cloud.management.commands.sync_nextcloud_groups">cosinnus_cloud.management.commands.sync_nextcloud_groups module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#module-cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps">cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#module-cosinnus_cloud.management.commands.sync_nextcloud_settings">cosinnus_cloud.management.commands.sync_nextcloud_settings module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#module-cosinnus_cloud.management.commands.sync_nextcloud_users">cosinnus_cloud.management.commands.sync_nextcloud_users module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#module-cosinnus_cloud.management.commands.test_search">cosinnus_cloud.management.commands.test_search module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.management.commands.html#module-cosinnus_cloud.management.commands">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.management.html#module-cosinnus_cloud.management">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_cloud.utils.html">cosinnus_cloud.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.utils.html#module-cosinnus_cloud.utils.cosinnus">cosinnus_cloud.utils.cosinnus module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.cosinnus.is_cloud_enabled_for_group"><code class="docutils literal notranslate"><span class="pre">is_cloud_enabled_for_group()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.utils.html#module-cosinnus_cloud.utils.nextcloud">cosinnus_cloud.utils.nextcloud module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.OCSException"><code class="docutils literal notranslate"><span class="pre">OCSException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.OCSResponse"><code class="docutils literal notranslate"><span class="pre">OCSResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.OCSResponse.data"><code class="docutils literal notranslate"><span class="pre">OCSResponse.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.OCSResponse.message"><code class="docutils literal notranslate"><span class="pre">OCSResponse.message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.OCSResponse.ok"><code class="docutils literal notranslate"><span class="pre">OCSResponse.ok</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.OCSResponse.status"><code class="docutils literal notranslate"><span class="pre">OCSResponse.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.OCSResponse.statuscode"><code class="docutils literal notranslate"><span class="pre">OCSResponse.statuscode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.add_group_access_for_folder"><code class="docutils literal notranslate"><span class="pre">add_group_access_for_folder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.add_user_to_group"><code class="docutils literal notranslate"><span class="pre">add_user_to_group()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.apply_nextcloud_settings"><code class="docutils literal notranslate"><span class="pre">apply_nextcloud_settings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.create_group"><code class="docutils literal notranslate"><span class="pre">create_group()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.create_group_folder"><code class="docutils literal notranslate"><span class="pre">create_group_folder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.create_social_login_apps"><code class="docutils literal notranslate"><span class="pre">create_social_login_apps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.create_user"><code class="docutils literal notranslate"><span class="pre">create_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.delete_group"><code class="docutils literal notranslate"><span class="pre">delete_group()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.delete_groupfolder"><code class="docutils literal notranslate"><span class="pre">delete_groupfolder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.delete_user"><code class="docutils literal notranslate"><span class="pre">delete_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.disable_user"><code class="docutils literal notranslate"><span class="pre">disable_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.enable_user"><code class="docutils literal notranslate"><span class="pre">enable_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.files_search"><code class="docutils literal notranslate"><span class="pre">files_search()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.find_files"><code class="docutils literal notranslate"><span class="pre">find_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.find_newest_files"><code class="docutils literal notranslate"><span class="pre">find_newest_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.get_groupfiles_match_list"><code class="docutils literal notranslate"><span class="pre">get_groupfiles_match_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.get_groupfolder_name"><code class="docutils literal notranslate"><span class="pre">get_groupfolder_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.get_permalink_for_file_id"><code class="docutils literal notranslate"><span class="pre">get_permalink_for_file_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.list_all_users"><code class="docutils literal notranslate"><span class="pre">list_all_users()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.list_group_folder_files"><code class="docutils literal notranslate"><span class="pre">list_group_folder_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.parse_cloud_files_search_response"><code class="docutils literal notranslate"><span class="pre">parse_cloud_files_search_response()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.perform_fulltext_search"><code class="docutils literal notranslate"><span class="pre">perform_fulltext_search()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.remove_group_access_for_folder"><code class="docutils literal notranslate"><span class="pre">remove_group_access_for_folder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.remove_user_from_group"><code class="docutils literal notranslate"><span class="pre">remove_user_from_group()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.rename_group_and_group_folder"><code class="docutils literal notranslate"><span class="pre">rename_group_and_group_folder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.update_user_email"><code class="docutils literal notranslate"><span class="pre">update_user_email()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.nextcloud.update_user_name"><code class="docutils literal notranslate"><span class="pre">update_user_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.utils.html#module-cosinnus_cloud.utils.renderer">cosinnus_cloud.utils.renderer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.renderer.LinkedCloudFileRenderer"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFileRenderer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.renderer.LinkedCloudFileRenderer.model"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFileRenderer.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.renderer.LinkedCloudFileRenderer.render"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFileRenderer.render()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.renderer.LinkedCloudFileRenderer.render_list_for_user"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFileRenderer.render_list_for_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.renderer.LinkedCloudFileRenderer.template"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFileRenderer.template</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.renderer.LinkedCloudFileRenderer.template_list"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFileRenderer.template_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.renderer.LinkedCloudFileRenderer.template_single"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFileRenderer.template_single</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.renderer.LinkedCloudFileRenderer.template_v2"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFileRenderer.template_v2</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.utils.html#module-cosinnus_cloud.utils.text">cosinnus_cloud.utils.text module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_cloud.utils.html#cosinnus_cloud.utils.text.utf8_encode"><code class="docutils literal notranslate"><span class="pre">utf8_encode()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.utils.html#module-cosinnus_cloud.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_cloud.apps">
+<span id="cosinnus-cloud-apps-module"></span><h2>cosinnus_cloud.apps module<a class="headerlink" href="#module-cosinnus_cloud.apps" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.apps.CosinnusCloudAppConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.apps.</span></span><span class="sig-name descname"><span class="pre">CosinnusCloudAppConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.apps.CosinnusCloudAppConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.apps.CosinnusCloudAppConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_cloud'</span></em><a class="headerlink" href="#cosinnus_cloud.apps.CosinnusCloudAppConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.apps.CosinnusCloudAppConfig.ready">
+<span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.apps.CosinnusCloudAppConfig.ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method in subclasses to run code when Django starts.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.apps.CosinnusCloudAppConfig.verbose_name">
+<span class="sig-name descname"><span class="pre">verbose_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Cosinnus</span> <span class="pre">Cloud'</span></em><a class="headerlink" href="#cosinnus_cloud.apps.CosinnusCloudAppConfig.verbose_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.cosinnus_app">
+<span id="cosinnus-cloud-cosinnus-app-module"></span><h2>cosinnus_cloud.cosinnus_app module<a class="headerlink" href="#module-cosinnus_cloud.cosinnus_app" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.cosinnus_app.register">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.cosinnus_app.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.cosinnus_app.register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.cosinnus_notifications">
+<span id="cosinnus-cloud-cosinnus-notifications-module"></span><h2>cosinnus_cloud.cosinnus_notifications module<a class="headerlink" href="#module-cosinnus_cloud.cosinnus_notifications" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_cloud.dashboard">
+<span id="cosinnus-cloud-dashboard-module"></span><h2>cosinnus_cloud.dashboard module<a class="headerlink" href="#module-cosinnus_cloud.dashboard" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.Latest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.dashboard.</span></span><span class="sig-name descname"><span class="pre">Latest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.dashboard.Latest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.dashboard.DashboardWidget" title="cosinnus.utils.dashboard.DashboardWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidget</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.Latest.app_name">
+<span class="sig-name descname"><span class="pre">app_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cloud'</span></em><a class="headerlink" href="#cosinnus_cloud.dashboard.Latest.app_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.Latest.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_cloud.dashboard.Latest.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_cloud.dashboard.LatestCloudFilesForm" title="cosinnus_cloud.dashboard.LatestCloudFilesForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatestCloudFilesForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.Latest.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.dashboard.Latest.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+if has_more == False, the receiving widget will assume no further data can be loaded.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.Latest.model">
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.dashboard.Latest.model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.Latest.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Latest</span> <span class="pre">Cloud</span> <span class="pre">files'</span></em><a class="headerlink" href="#cosinnus_cloud.dashboard.Latest.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.Latest.title_url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title_url</span></span><a class="headerlink" href="#cosinnus_cloud.dashboard.Latest.title_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.Latest.user_model_attr">
+<span class="sig-name descname"><span class="pre">user_model_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.dashboard.Latest.user_model_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.Latest.widget_name">
+<span class="sig-name descname"><span class="pre">widget_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'latest'</span></em><a class="headerlink" href="#cosinnus_cloud.dashboard.Latest.widget_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.LatestCloudFilesForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.dashboard.</span></span><span class="sig-name descname"><span class="pre">LatestCloudFilesForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.dashboard.LatestCloudFilesForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.dashboard.DashboardWidgetForm" title="cosinnus.forms.dashboard.DashboardWidgetForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidgetForm</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.LatestCloudFilesForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'link_label':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_icon':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_title':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_cloud.dashboard.LatestCloudFilesForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.LatestCloudFilesForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'link_label':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_icon':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_title':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_cloud.dashboard.LatestCloudFilesForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_cloud.dashboard.LatestCloudFilesForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_cloud.dashboard.LatestCloudFilesForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.hooks">
+<span id="cosinnus-cloud-hooks-module"></span><h2>cosinnus_cloud.hooks module<a class="headerlink" href="#module-cosinnus_cloud.hooks" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.create_user_from_obj">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">create_user_from_obj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.create_user_from_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a nextcloud user from a django auth User object</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.disable_group_folder_for_group">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">disable_group_folder_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.disable_group_folder_for_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>For lack of a better way through the API, this 
+‘disables’ a group folder for a CosinnusGroup by removing the nextcloud group’s access
+to the group folder, when a CosinnusGroup is deactivated</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.enable_group_folder_for_group">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">enable_group_folder_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.enable_group_folder_for_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>For lack of a better way through the API, this 
+‘enables’ a group folder for a CosinnusGroup by removing the nextcloud group’s access
+to the group folder, when a CosinnusGroup is deactivated</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.generate_group_nextcloud_field">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">generate_group_nextcloud_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_generate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.generate_group_nextcloud_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>If one doesn’t yet exist, generates, saves and returns 
+a unique file-system-valid id that is used for both the 
+nextcloud group and group folder for this group. 
+Remove leading and trailing spaces; leave other spaces intact and remove 
+anything that is not an alphanumeric.
+&#64;param field: The field for which a unique nextcloud name should be generated. Usually</p>
+<blockquote>
+<div><p>either <cite>nextcloud_group_id</cite> or <cite>nextcloud_groupfolder_name</cite></p>
+</div></blockquote>
+<p>&#64;param save: If True, the group will be saved to DB after generation
+&#64;param force_generate: Generates a new id, even if one already exists</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.generate_group_nextcloud_groupfolder_name">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">generate_group_nextcloud_groupfolder_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_generate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.generate_group_nextcloud_groupfolder_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <cite>generate_group_nextcloud_field</cite></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.generate_group_nextcloud_id">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">generate_group_nextcloud_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_generate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.generate_group_nextcloud_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <cite>generate_group_nextcloud_field</cite></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.get_email_for_user">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">get_email_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.get_email_for_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>We currently set the user email to None, Nextcloud needs to send no emails anyways
+and this way it’s more secure.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.get_nc_user_id">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">get_nc_user_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.get_nc_user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.get_user_display_name">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">get_user_display_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.get_user_display_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.initialize_nextcloud_for_group">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">initialize_nextcloud_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.initialize_nextcloud_for_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a nextcloud groupfolder for a group.
+Safe to call on already initialized folders. If called on a pre-existing folder that is 
+“disabled” (group has no more access to it), the group’s access will be re-enabled for the folder.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.nc_req_callback">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">nc_req_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Future</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.nc_req_callback" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.submit_with_retry">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">submit_with_retry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.submit_with_retry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.hooks.update_user_from_obj">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">update_user_from_obj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.update_user_from_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when a user updates their account. Updates NC account infos.
+Beware, this is a really slow endpoint!</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.models">
+<span id="cosinnus-cloud-models-module"></span><h2>cosinnus_cloud.models module<a class="headerlink" href="#module-cosinnus_cloud.models" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.models.</span></span><span class="sig-name descname"><span class="pre">CloudFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.CloudFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A wrapper object for API-retrieved nextcloud file infos</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile.download_url">
+<span class="sig-name descname"><span class="pre">download_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.models.CloudFile.download_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile.folder">
+<span class="sig-name descname"><span class="pre">folder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.models.CloudFile.folder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile.get_icon">
+<span class="sig-name descname"><span class="pre">get_icon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.CloudFile.get_icon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile.icon">
+<span class="sig-name descname"><span class="pre">icon</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fa-cloud'</span></em><a class="headerlink" href="#cosinnus_cloud.models.CloudFile.icon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile.path">
+<span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.models.CloudFile.path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile.root_folder">
+<span class="sig-name descname"><span class="pre">root_folder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.models.CloudFile.root_folder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.models.CloudFile.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.models.CloudFile.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.CloudFile.url">
+<span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.models.CloudFile.url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.models.</span></span><span class="sig-name descname"><span class="pre">LinkedCloudFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">media_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_modified</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_action_user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nextcloud_file_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.models.html#cosinnus.models.tagged.BaseTaggableObjectModel" title="cosinnus.models.tagged.BaseTaggableObjectModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTaggableObjectModel</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.attached_objects">
+<span class="sig-name descname"><span class="pre">attached_objects</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.attached_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.created">
+<span class="sig-name descname"><span class="pre">created</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.created" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.creator">
+<span class="sig-name descname"><span class="pre">creator</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.creator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.creator_id">
+<span class="sig-name descname"><span class="pre">creator_id</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.creator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_absolute_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_attachable_objects_query_results">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_attachable_objects_query_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_attachable_objects_query_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>A droping for <cite>cosinnus.view.attached_object.AttachableObjectSelect2View</cite> to get attachable
+objects in a non-DB-based query.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_for_nextcloud_file_id_data_str">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_for_nextcloud_file_id_data_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_data_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_for_nextcloud_file_id_data_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates or retrieves a LinkedCloudFile for the given nextcloud file id.
+If the file link existed already, the data is re-synced.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_icon">
+<span class="sig-name descname"><span class="pre">get_icon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the font-awesome icon specific to this object type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_next_by_created">
+<span class="sig-name descname"><span class="pre">get_next_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_next_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_next_by_last_action">
+<span class="sig-name descname"><span class="pre">get_next_by_last_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_action&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_next_by_last_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_next_by_last_modified">
+<span class="sig-name descname"><span class="pre">get_next_by_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_modified&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_next_by_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_previous_by_created">
+<span class="sig-name descname"><span class="pre">get_previous_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_previous_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_previous_by_last_action">
+<span class="sig-name descname"><span class="pre">get_previous_by_last_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_action&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_previous_by_last_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.get_previous_by_last_modified">
+<span class="sig-name descname"><span class="pre">get_previous_by_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_modified&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.get_previous_by_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.group">
+<span class="sig-name descname"><span class="pre">group</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.group_id">
+<span class="sig-name descname"><span class="pre">group_id</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.group_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.last_action">
+<span class="sig-name descname"><span class="pre">last_action</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.last_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.last_action_user">
+<span class="sig-name descname"><span class="pre">last_action_user</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.last_action_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.last_action_user_id">
+<span class="sig-name descname"><span class="pre">last_action_user_id</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.last_action_user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.last_modified">
+<span class="sig-name descname"><span class="pre">last_modified</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.last_modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.media_tag">
+<span class="sig-name descname"><span class="pre">media_tag</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.media_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Restaurant.place</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardOneToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.media_tag_id">
+<span class="sig-name descname"><span class="pre">media_tag_id</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.media_tag_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.nextcloud_file_id">
+<span class="sig-name descname"><span class="pre">nextcloud_file_id</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.nextcloud_file_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.resolve_attachable_object_id">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resolve_attachable_object_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.resolve_attachable_object_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>For _unresolved_ IDs of an attachable object, get an attachable object 
+that belongs to that ID (usually an external object’s ID is given, and
+we return the local DB object that is attachable and is pointing to it)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current instance. Override this in a subclass if you want to
+control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.slug">
+<span class="sig-name descname"><span class="pre">slug</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.slug" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.sync_from_nextcloud_id_data_str">
+<span class="sig-name descname"><span class="pre">sync_from_nextcloud_id_data_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_data_str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.sync_from_nextcloud_id_data_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>So we don’t have to run multiple nextcloud API queries for attached files, we encode the 
+data found on the autocomplete search query as <cite>id_data_str</cite> and pass it through the form on POST.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.to_cloud_file">
+<span class="sig-name descname"><span class="pre">to_cloud_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.to_cloud_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts this to a CloudFile, that is used in templates</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.url">
+<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.url" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.SimpleCloudFile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.models.</span></span><span class="sig-name descname"><span class="pre">SimpleCloudFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.SimpleCloudFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Similar to CloudFile, but doesn’t provide download links, only id and name</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.SimpleCloudFile.dirname">
+<span class="sig-name descname"><span class="pre">dirname</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cosinnus_cloud.models.SimpleCloudFile.dirname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.SimpleCloudFile.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cosinnus_cloud.models.SimpleCloudFile.filename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.SimpleCloudFile.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cosinnus_cloud.models.SimpleCloudFile.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_cloud.models.SimpleCloudFile.title">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#cosinnus_cloud.models.SimpleCloudFile.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Proxy for <cite>build_attachment_field_result()</cite></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.urls">
+<span id="cosinnus-cloud-urls-module"></span><h2>cosinnus_cloud.urls module<a class="headerlink" href="#module-cosinnus_cloud.urls" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_cloud.views">
+<span id="cosinnus-cloud-views-module"></span><h2>cosinnus_cloud.views module<a class="headerlink" href="#module-cosinnus_cloud.views" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudFilesContentWidgetView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.views.</span></span><span class="sig-name descname"><span class="pre">CloudFilesContentWidgetView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.CloudFilesContentWidgetView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.user_dashboard.BasePagedOffsetWidgetView" title="cosinnus.views.user_dashboard.BasePagedOffsetWidgetView"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasePagedOffsetWidgetView</span></code></a></p>
+<p>Shows Nextcloud files retrieved via Webdav for the user</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudFilesContentWidgetView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.CloudFilesContentWidgetView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudFilesContentWidgetView.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.CloudFilesContentWidgetView.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudFilesContentWidgetView.get_items_from_dataset">
+<span class="sig-name descname"><span class="pre">get_items_from_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.CloudFilesContentWidgetView.get_items_from_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of converted item data from the ES result</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudFilesContentWidgetView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_cloud.views.CloudFilesContentWidgetView.model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudFilesContentWidgetView.show_recent">
+<span class="sig-name descname"><span class="pre">show_recent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_cloud.views.CloudFilesContentWidgetView.show_recent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudIndexView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.views.</span></span><span class="sig-name descname"><span class="pre">CloudIndexView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.CloudIndexView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudIndexView.get_redirect_url">
+<span class="sig-name descname"><span class="pre">get_redirect_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.CloudIndexView.get_redirect_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL redirect to. Keyword arguments from the URL pattern
+match generating the redirect request are provided as kwargs to this
+method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudIndexView.permanent">
+<span class="sig-name descname"><span class="pre">permanent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_cloud.views.CloudIndexView.permanent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudStubView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.views.</span></span><span class="sig-name descname"><span class="pre">CloudStubView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.CloudStubView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TemplateView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudStubView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.CloudStubView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.CloudStubView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_cloud/cloud_stub.html'</span></em><a class="headerlink" href="#cosinnus_cloud.views.CloudStubView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.OAuthView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.views.</span></span><span class="sig-name descname"><span class="pre">OAuthView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.OAuthView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Used by Oauth2 authentication of Nextcloud to retrieve user details</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.OAuthView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.OAuthView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.api_user_cloud_files_content">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.views.</span></span><span class="sig-name descname"><span class="pre">api_user_cloud_files_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.api_user_cloud_files_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows Nextcloud files retrieved via Webdav for the user</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.cloud_index_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.views.</span></span><span class="sig-name descname"><span class="pre">cloud_index_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.cloud_index_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.cloud_stub_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.views.</span></span><span class="sig-name descname"><span class="pre">cloud_stub_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.cloud_stub_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.get_nextcloud_group_folder_url">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.views.</span></span><span class="sig-name descname"><span class="pre">get_nextcloud_group_folder_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.get_nextcloud_group_folder_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the direct link to a groupfolder in nextcloud for a given group</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.views.oauth_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.views.</span></span><span class="sig-name descname"><span class="pre">oauth_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.views.oauth_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by Oauth2 authentication of Nextcloud to retrieve user details</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_cloud" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.get_version">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derives a PEP386-compliant version number from VERSION.</p>
+<p>Taken from django.utils.version.get_git_changeset at rev ce5e09353d</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+      <li>Previous: <a href="cosinnus.views.mixins.html" title="previous chapter">cosinnus.views.mixins package</a></li>
+      <li>Next: <a href="cosinnus_cloud.management.html" title="next chapter">cosinnus_cloud.management package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_cloud.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -13,6 +13,8 @@
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Authentication" href="authentication.html" />
+    <link rel="prev" title="API Integration" href="api.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -81,8 +83,8 @@ rendered, do it like this:</p>
 <p>To be able to attach other cosinnus objects, you need to modifiy your object’s
 form views (<code class="docutils literal notranslate"><span class="pre">MyModelCreateView</span></code>, <code class="docutils literal notranslate"><span class="pre">MyModelUpdateView</span></code>, etc.), so that objects
 can actually be attached</p>
-<p>Let your create views inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateViewAttachable</span></code> and your
-update views inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateViewAttachable</span></code>.</p>
+<p>Let your create views inherit from <a class="reference internal" href="../refs/cosinnus.views.html#cosinnus.views.attached_object.CreateViewAttachable" title="cosinnus.views.attached_object.CreateViewAttachable"><code class="xref py py-class docutils literal notranslate"><span class="pre">CreateViewAttachable</span></code></a> and your
+update views inherit from <a class="reference internal" href="../refs/cosinnus.views.html#cosinnus.views.attached_object.UpdateViewAttachable" title="cosinnus.views.attached_object.UpdateViewAttachable"><code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateViewAttachable</span></code></a>.</p>
 <p>To add the appropriate functionality to the underlying forms, make your model
 form inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">FormAttachable</span></code>.</p>
 </section>
@@ -171,17 +173,32 @@ your renderer to display objects of your model’s type!</p>
 
 <h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Legacy Recipes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api.html">API Integration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Attached Cosinnus Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authentication.html">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.html">Export Cosinnus App Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchy.html">Hierarchical Object Organisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permissions.html">Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags.html">Template Tags Bundled With Cosinnus</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/modules.html">Cosinnus Modules</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Legacy Recipes</a><ul>
+      <li>Previous: <a href="api.html" title="previous chapter">API Integration</a></li>
+      <li>Next: <a href="authentication.html" title="next chapter">Authentication</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
