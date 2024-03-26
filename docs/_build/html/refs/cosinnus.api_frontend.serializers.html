@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.api_frontend.serializers package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.api_frontend.views package" href="cosinnus.api_frontend.views.html" />
+    <link rel="prev" title="cosinnus.api_frontend.handlers package" href="cosinnus.api_frontend.handlers.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-api-frontend-serializers-package">
+<h1>cosinnus.api_frontend.serializers package<a class="headerlink" href="#cosinnus-api-frontend-serializers-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.api_frontend.serializers.dynamic_fields">
+<span id="cosinnus-api-frontend-serializers-dynamic-fields-module"></span><h2>cosinnus.api_frontend.serializers.dynamic_fields module<a class="headerlink" href="#module-cosinnus.api_frontend.serializers.dynamic_fields" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.dynamic_fields.</span></span><span class="sig-name descname"><span class="pre">CosinnusUserDynamicFieldsSerializerMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Dynamically adds serializer fields for the dynamic userprofile fields 
+to any DRF serializer. 
+(see <cite>UserCreationFormDynamicFieldsMixin</cite>)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.DYNAMIC_FIELD_SETTINGS">
+<span class="sig-name descname"><span class="pre">DYNAMIC_FIELD_SETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.DYNAMIC_FIELD_SETTINGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.all_fields_optional">
+<span class="sig-name descname"><span class="pre">all_fields_optional</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.all_fields_optional" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.filter_included_fields_by_option_name">
+<span class="sig-name descname"><span class="pre">filter_included_fields_by_option_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.filter_included_fields_by_option_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.save_dynamic_fields">
+<span class="sig-name descname"><span class="pre">save_dynamic_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validated_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">userprofile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.save_dynamic_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves any dynamic fields contained in the validated_data to the userprofile.
+To be called from within <cite>create()</cite> or <cite>update()</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate dynamic fields: we build a temporary formfield and use it to 
+run validation with the given data</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.api_frontend.serializers.portal">
+<span id="cosinnus-api-frontend-serializers-portal-module"></span><h2>cosinnus.api_frontend.serializers.portal module<a class="headerlink" href="#module-cosinnus.api_frontend.serializers.portal" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.portal.</span></span><span class="sig-name descname"><span class="pre">CosinnusManagedTagSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<p>Serializer for the User Login API endpoint</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('slug',</span> <span class="pre">'name',</span> <span class="pre">'default',</span> <span class="pre">'type',</span> <span class="pre">'description',</span> <span class="pre">'image',</span> <span class="pre">'url',</span> <span class="pre">'search_synonyms',</span> <span class="pre">'group_url')</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.models.html#cosinnus.models.managed_tags.CosinnusManagedTag" title="cosinnus.models.managed_tags.CosinnusManagedTag"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusManagedTag</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.Meta.read_only_fields">
+<span class="sig-name descname"><span class="pre">read_only_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('slug',</span> <span class="pre">'name',</span> <span class="pre">'default',</span> <span class="pre">'type',</span> <span class="pre">'description',</span> <span class="pre">'image',</span> <span class="pre">'url',</span> <span class="pre">'search_synonyms',</span> <span class="pre">'group_url')</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.Meta.read_only_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.get_default">
+<span class="sig-name descname"><span class="pre">get_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.get_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the default value to use when validating data if no input
+is provided for this field.</p>
+<p>If a default has not been set for this field then this will simply
+raise <cite>SkipField</cite>, indicating that no value should be set in the
+validated data for this field.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.get_image">
+<span class="sig-name descname"><span class="pre">get_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.get_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.portal.</span></span><span class="sig-name descname"><span class="pre">CosinnusManagedTagTypeSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<p>Serializer for the User Login API endpoint</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'name',</span> <span class="pre">'prefix_label',</span> <span class="pre">'color')</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.models.html#cosinnus.models.managed_tags.CosinnusManagedTagType" title="cosinnus.models.managed_tags.CosinnusManagedTagType"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusManagedTagType</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer.Meta.read_only_fields">
+<span class="sig-name descname"><span class="pre">read_only_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'name',</span> <span class="pre">'prefix_label',</span> <span class="pre">'color')</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer.Meta.read_only_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.api_frontend.serializers.user">
+<span id="cosinnus-api-frontend-serializers-user-module"></span><h2>cosinnus.api_frontend.serializers.user module<a class="headerlink" href="#module-cosinnus.api_frontend.serializers.user" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.user.</span></span><span class="sig-name descname"><span class="pre">CosinnusHybridUserSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TaggitSerializer</span></code>, <a class="reference internal" href="#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin" title="cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusUserDynamicFieldsSerializerMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
+<p>A serializer that accepts and returns user fields as unprefixed fields,
+no matter if they are in the User, UserProfile or CosinnusTagObject models,
+so that one doesn’t have to worry about database structures when changing user 
+profile values.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.DYNAMIC_FIELD_SETTINGS">
+<span class="sig-name descname"><span class="pre">DYNAMIC_FIELD_SETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.DYNAMIC_FIELD_SETTINGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.all_fields_optional">
+<span class="sig-name descname"><span class="pre">all_fields_optional</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.all_fields_optional" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.get_visibility">
+<span class="sig-name descname"><span class="pre">get_visibility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.get_visibility" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validated_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate dynamic fields: we build a temporary formfield and use it to 
+run validation with the given data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.validate_email">
+<span class="sig-name descname"><span class="pre">validate_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.validate_email" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserLoginSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.user.</span></span><span class="sig-name descname"><span class="pre">CosinnusUserLoginSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserLoginSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
+<p>Serializer for the User Login API endpoint</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserLoginSerializer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserLoginSerializer.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.user.</span></span><span class="sig-name descname"><span class="pre">CosinnusUserSignupSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.user.UserSignupFinalizeMixin" title="cosinnus.forms.user.UserSignupFinalizeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserSignupFinalizeMixin</span></code></a>, <a class="reference internal" href="#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin" title="cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusUserDynamicFieldsSerializerMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
+<p>Serializer for the User Registration API endpoint</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.DYNAMIC_FIELD_SETTINGS">
+<span class="sig-name descname"><span class="pre">DYNAMIC_FIELD_SETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.DYNAMIC_FIELD_SETTINGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validated_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new user as a signup via the API.
+TODO: should this all run in an atomic block?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.filter_included_fields_by_option_name">
+<span class="sig-name descname"><span class="pre">filter_included_fields_by_option_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'in_signup'</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.filter_included_fields_by_option_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>We run validation all in one method, because we do not want to
+give out any further validation details if the captcha is incorrect</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.validate_contact_info_pairs">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.user.</span></span><span class="sig-name descname"><span class="pre">validate_contact_info_pairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pairs_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.validate_contact_info_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates contact info JSON pairs for the frontend API.
+Used in field <cite>UserProfile.dynamic_fields[PROFILE_DYNAMIC_FIELDS_CONTACTS]</cite>
+example: [{type: “email|phone_number|url”, value: “<a class="reference external" href="mailto:mail&#37;&#52;&#48;mail&#46;com">mail<span>&#64;</span>mail<span>&#46;</span>com</a>”}, …]</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.api_frontend.serializers.utils">
+<span id="cosinnus-api-frontend-serializers-utils-module"></span><h2>cosinnus.api_frontend.serializers.utils module<a class="headerlink" href="#module-cosinnus.api_frontend.serializers.utils" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.utils.validate_managed_tag_slugs">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.utils.</span></span><span class="sig-name descname"><span class="pre">validate_managed_tag_slugs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">managed_tag_slugs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_least_one_tag_required</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.utils.validate_managed_tag_slugs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a given list of managed tag slugs is valid for saving in a form,
+checking missing, too many and valid managed tags.</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.api_frontend.serializers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.api_frontend.serializers" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+  <li><a href="cosinnus.api_frontend.html">cosinnus.api_frontend package</a><ul>
+      <li>Previous: <a href="cosinnus.api_frontend.handlers.html" title="previous chapter">cosinnus.api_frontend.handlers package</a></li>
+      <li>Next: <a href="cosinnus.api_frontend.views.html" title="next chapter">cosinnus.api_frontend.views package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.api_frontend.serializers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

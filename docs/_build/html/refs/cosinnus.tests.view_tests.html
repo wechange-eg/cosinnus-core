@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.tests.view_tests package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.trans package" href="cosinnus.trans.html" />
+    <link rel="prev" title="cosinnus.tests.util_tests.urls package" href="cosinnus.tests.util_tests.urls.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-tests-view-tests-package">
+<h1>cosinnus.tests.view_tests package<a class="headerlink" href="#cosinnus-tests-view-tests-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.tests.view_tests.test_add">
+<span id="cosinnus-tests-view-tests-test-add-module"></span><h2>cosinnus.tests.view_tests.test_add module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_add" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_add.</span></span><span class="sig-name descname"><span class="pre">AddGroupTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.test_get_logged_in">
+<span class="sig-name descname"><span class="pre">test_get_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.test_get_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 200 on GET when logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.test_get_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_get_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.test_get_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 403 on GET if not logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.test_post_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.test_post_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 302 to detail page on successful POST and have a todo
+with given title</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.test_post_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.test_post_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should redirect to login on POST if not logged in</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.tests.view_tests.test_api">
+<span id="cosinnus-tests-view-tests-test-api-module"></span><h2>cosinnus.tests.view_tests.test_api module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_api" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_api.</span></span><span class="sig-name descname"><span class="pre">AuthTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.view_tests.test_api.BaseApiTest" title="cosinnus.tests.view_tests.test_api.BaseApiTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseApiTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest.test_login_invalid_method">
+<span class="sig-name descname"><span class="pre">test_login_invalid_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest.test_login_invalid_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest.test_login_success">
+<span class="sig-name descname"><span class="pre">test_login_success</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest.test_login_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest.test_login_wrong_input">
+<span class="sig-name descname"><span class="pre">test_login_wrong_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest.test_login_wrong_input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest.test_logout">
+<span class="sig-name descname"><span class="pre">test_logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest.test_logout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.BaseApiTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_api.</span></span><span class="sig-name descname"><span class="pre">BaseApiTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.BaseApiTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.BaseApiTest.assertJsonEqual">
+<span class="sig-name descname"><span class="pre">assertJsonEqual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.BaseApiTest.assertJsonEqual" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.BaseApiTest.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.BaseApiTest.delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.BaseApiTest.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.BaseApiTest.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.BaseApiTest.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.BaseApiTest.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.BaseApiTest.put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.BaseApiTest.put" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.BaseApiTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.BaseApiTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.HelperTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_api.</span></span><span class="sig-name descname"><span class="pre">HelperTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.HelperTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleTestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.HelperTest.test_patch_body_json_data">
+<span class="sig-name descname"><span class="pre">test_patch_body_json_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.HelperTest.test_patch_body_json_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests for null values being converted to an empty string in
+JSON POST data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.HelperTest.test_patch_body_json_data_drop_dict">
+<span class="sig-name descname"><span class="pre">test_patch_body_json_data_drop_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.HelperTest.test_patch_body_json_data_drop_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests for dicts being removed if no <code class="docutils literal notranslate"><span class="pre">'id'</span></code> key exists</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.HelperTest.test_patch_body_json_data_replace_dict">
+<span class="sig-name descname"><span class="pre">test_patch_body_json_data_replace_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.HelperTest.test_patch_body_json_data_replace_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests for dicts being replaced by its <code class="docutils literal notranslate"><span class="pre">'id'</span></code> if present</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.tests.view_tests.test_edit">
+<span id="cosinnus-tests-view-tests-test-edit-module"></span><h2>cosinnus.tests.view_tests.test_edit module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_edit" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_edit.</span></span><span class="sig-name descname"><span class="pre">EditGroupTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.test_get_logged_in">
+<span class="sig-name descname"><span class="pre">test_get_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.test_get_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 200 on GET when logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.test_get_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_get_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.test_get_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return redirect to login GET if not logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.test_post_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.test_post_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 302 to detail page on successful POST and have a todo
+with given title</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.test_post_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.test_post_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return redirect to group page on POST if not logged in</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.tests.view_tests.test_export">
+<span id="cosinnus-tests-view-tests-test-export-module"></span><h2>cosinnus.tests.view_tests.test_export module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_export" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.CSVExportViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_export.</span></span><span class="sig-name descname"><span class="pre">CSVExportViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.CSVExportViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Only tests csv-specific output, other issues are already executed by
+JSONExportViewTest</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.CSVExportViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.CSVExportViewTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.CSVExportViewTest.test_get">
+<span class="sig-name descname"><span class="pre">test_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.CSVExportViewTest.test_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should have file prefix in response’s content-disposition and content-type text/csv</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.CSVExportViewTest.test_get_data">
+<span class="sig-name descname"><span class="pre">test_get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.CSVExportViewTest.test_get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should retrieve a certain CSV format with custom field specified</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.JSONExportViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_export.</span></span><span class="sig-name descname"><span class="pre">JSONExportViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.JSONExportViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.JSONExportViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.JSONExportViewTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_get">
+<span class="sig-name descname"><span class="pre">test_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should have file prefix in response’s content-disposition and content-type application/json</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_get_data">
+<span class="sig-name descname"><span class="pre">test_get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should retrieve a certain JSON format with custom field specified</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_get_data_no_fields">
+<span class="sig-name descname"><span class="pre">test_get_data_no_fields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_get_data_no_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should retrieve a certain JSON string even if no fields specified</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_get_data_two_rows">
+<span class="sig-name descname"><span class="pre">test_get_data_two_rows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_get_data_two_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should have two rows if there are two objects of that group in database</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_improperly_configured">
+<span class="sig-name descname"><span class="pre">test_improperly_configured</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_export.JSONExportViewTest.test_improperly_configured" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should raise an AttributeError if model is not specified.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.tests.view_tests.test_login_api">
+<span id="cosinnus-tests-view-tests-test-login-api-module"></span><h2>cosinnus.tests.view_tests.test_login_api module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_login_api" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_login_api.</span></span><span class="sig-name descname"><span class="pre">LoginViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_another_user_cannot_login_with_first_user_logged_in">
+<span class="sig-name descname"><span class="pre">test_another_user_cannot_login_with_first_user_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_another_user_cannot_login_with_first_user_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that no user can login with another user being already logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_user_cannot_login">
+<span class="sig-name descname"><span class="pre">test_deactivated_user_cannot_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_user_cannot_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user cannot login being not active / beind deactivated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_successful">
+<span class="sig-name descname"><span class="pre">test_login_successful</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_successful" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure we can login with given user data and the user gets authenticated after all</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_empty_data">
+<span class="sig-name descname"><span class="pre">test_login_with_empty_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_empty_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that the user login data cannot be empty</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_false_username">
+<span class="sig-name descname"><span class="pre">test_login_with_false_username</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_false_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user cannot login using false username</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_incorrect_password">
+<span class="sig-name descname"><span class="pre">test_login_with_incorrect_password</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_incorrect_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user cannot login using incorrect password</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_non_email_like_username">
+<span class="sig-name descname"><span class="pre">test_login_with_non_email_like_username</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_non_email_like_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user cannot login using false username which is not an email</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.tests.view_tests.test_navigation_api">
+<span id="cosinnus-tests-view-tests-test-navigation-api-module"></span><h2>cosinnus.tests.view_tests.test_navigation_api module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_navigation_api" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">AlertsViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin" title="cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestAlertsMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts">
+<span class="sig-name descname"><span class="pre">test_alerts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts_anonymous">
+<span class="sig-name descname"><span class="pre">test_alerts_anonymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts_anonymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts_mark_as_read">
+<span class="sig-name descname"><span class="pre">test_alerts_mark_as_read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts_mark_as_read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts_newer_then_param">
+<span class="sig-name descname"><span class="pre">test_alerts_newer_then_param</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts_newer_then_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts_offset_pagination">
+<span class="sig-name descname"><span class="pre">test_alerts_offset_pagination</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.AlertsViewTest.test_alerts_offset_pagination" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">BookmarksViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.test_bookmarks_anonymous">
+<span class="sig-name descname"><span class="pre">test_bookmarks_anonymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.test_bookmarks_anonymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.test_content_bookmarks">
+<span class="sig-name descname"><span class="pre">test_content_bookmarks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.test_content_bookmarks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.test_group_bookmarks">
+<span class="sig-name descname"><span class="pre">test_group_bookmarks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.test_group_bookmarks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.test_user_bookmarks">
+<span class="sig-name descname"><span class="pre">test_user_bookmarks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.BookmarksViewTest.test_user_bookmarks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.HelpViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">HelpViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.HelpViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.HelpViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.HelpViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.HelpViewTest.test_help">
+<span class="sig-name descname"><span class="pre">test_help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.HelpViewTest.test_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.LanguageMenuTestMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">LanguageMenuTestMixin</span></span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.LanguageMenuTestMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.LanguageMenuTestMixin.expected_language_menu_item">
+<span class="sig-name descname"><span class="pre">expected_language_menu_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expected_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Change</span> <span class="pre">Language'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_icon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fa-language'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.LanguageMenuTestMixin.expected_language_menu_item" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.MainNavigationViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">MainNavigationViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.MainNavigationViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.view_tests.test_navigation_api.LanguageMenuTestMixin" title="cosinnus.tests.view_tests.test_navigation_api.LanguageMenuTestMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">LanguageMenuTestMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<p>Note: Were not able to test with override_settings(COSINNUS_ROCKET_ENABLED=True). The util function reload_urlconf
+seems not to work as expected there. Will need to look into it in more detail.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.MainNavigationViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.MainNavigationViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.MainNavigationViewTest.test_main_navigation_anonymous">
+<span class="sig-name descname"><span class="pre">test_main_navigation_anonymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.MainNavigationViewTest.test_main_navigation_anonymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.MainNavigationViewTest.test_main_navigation_authenticated">
+<span class="sig-name descname"><span class="pre">test_main_navigation_authenticated</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.MainNavigationViewTest.test_main_navigation_authenticated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">ProfileViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.view_tests.test_navigation_api.LanguageMenuTestMixin" title="cosinnus.tests.view_tests.test_navigation_api.LanguageMenuTestMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">LanguageMenuTestMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.test_contribution">
+<span class="sig-name descname"><span class="pre">test_contribution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.test_contribution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.test_profile">
+<span class="sig-name descname"><span class="pre">test_profile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.test_profile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.test_profile_admin">
+<span class="sig-name descname"><span class="pre">test_profile_admin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.test_profile_admin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.test_profile_anoymous">
+<span class="sig-name descname"><span class="pre">test_profile_anoymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.ProfileViewTest.test_profile_anoymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">SpacesViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_community_space">
+<span class="sig-name descname"><span class="pre">test_community_space</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_community_space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_community_space_additional_links">
+<span class="sig-name descname"><span class="pre">test_community_space_additional_links</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_community_space_additional_links" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_community_space_from_managed_tags">
+<span class="sig-name descname"><span class="pre">test_community_space_from_managed_tags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_community_space_from_managed_tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_group_space">
+<span class="sig-name descname"><span class="pre">test_group_space</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_group_space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_group_space_anonymous">
+<span class="sig-name descname"><span class="pre">test_group_space_anonymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_group_space_anonymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_personal_space">
+<span class="sig-name descname"><span class="pre">test_personal_space</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_personal_space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_personal_space_anonymous">
+<span class="sig-name descname"><span class="pre">test_personal_space_anonymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.SpacesViewTest.test_personal_space_anonymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">TestAlertsMixin</span></span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin.create_test_alert">
+<span class="sig-name descname"><span class="pre">create_test_alert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin.create_test_alert" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin.setUp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">UnreadAlertsViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin" title="cosinnus.tests.view_tests.test_navigation_api.TestAlertsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestAlertsMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest.test_mark_as_read">
+<span class="sig-name descname"><span class="pre">test_mark_as_read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest.test_mark_as_read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest.test_unread_alerts_count">
+<span class="sig-name descname"><span class="pre">test_unread_alerts_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest.test_unread_alerts_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest.test_unread_alerts_count_anonymous">
+<span class="sig-name descname"><span class="pre">test_unread_alerts_count_anonymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.UnreadAlertsViewTest.test_unread_alerts_count_anonymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.UnreadMessagesViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">UnreadMessagesViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.UnreadMessagesViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.UnreadMessagesViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.UnreadMessagesViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.UnreadMessagesViewTest.test_unread_messages_count">
+<span class="sig-name descname"><span class="pre">test_unread_messages_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_unread_message_count_for_user_patch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.UnreadMessagesViewTest.test_unread_messages_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.UnreadMessagesViewTest.test_unread_messages_count_anonymous">
+<span class="sig-name descname"><span class="pre">test_unread_messages_count_anonymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.UnreadMessagesViewTest.test_unread_messages_count_anonymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">VersionHistoryPatchMixin</span></span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin.PATCHED_UPDATES">
+<span class="sig-name descname"><span class="pre">PATCHED_UPDATES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'1':</span> <span class="pre">{'datetime':</span> <span class="pre">datetime.datetime(2000,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">tzinfo=&lt;UTC&gt;),</span> <span class="pre">'full_text':</span> <span class="pre">'Test</span> <span class="pre">Full</span> <span class="pre">Description',</span> <span class="pre">'short_text':</span> <span class="pre">'Test</span> <span class="pre">Short</span> <span class="pre">Description',</span> <span class="pre">'title':</span> <span class="pre">'Test</span> <span class="pre">Title'}}</span></em><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin.PATCHED_UPDATES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin.patch_version_history">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">patch_version_history</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin.patch_version_history" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryUnreadCountViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">VersionHistoryUnreadCountViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryUnreadCountViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin" title="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">VersionHistoryPatchMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryUnreadCountViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryUnreadCountViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryUnreadCountViewTest.test_version_history_unread_count">
+<span class="sig-name descname"><span class="pre">test_version_history_unread_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryUnreadCountViewTest.test_version_history_unread_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryUnreadCountViewTest.test_version_history_unread_count_anonymous">
+<span class="sig-name descname"><span class="pre">test_version_history_unread_count_anonymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryUnreadCountViewTest.test_version_history_unread_count_anonymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_navigation_api.</span></span><span class="sig-name descname"><span class="pre">VersionHistoryViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin" title="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryPatchMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">VersionHistoryPatchMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest.test_version_history">
+<span class="sig-name descname"><span class="pre">test_version_history</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest.test_version_history" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest.test_version_history_anonymous">
+<span class="sig-name descname"><span class="pre">test_version_history_anonymous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest.test_version_history_anonymous" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest.test_version_history_mark_read">
+<span class="sig-name descname"><span class="pre">test_version_history_mark_read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_navigation_api.VersionHistoryViewTest.test_version_history_mark_read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.tests.view_tests.test_signup_api">
+<span id="cosinnus-tests-view-tests-test-signup-api-module"></span><h2>cosinnus.tests.view_tests.test_signup_api module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_signup_api" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_signup_api.</span></span><span class="sig-name descname"><span class="pre">SignupTestView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.portal">
+<span class="sig-name descname"><span class="pre">portal</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.portal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_count_users">
+<span class="sig-name descname"><span class="pre">test_count_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_count_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user was created and it has been reflected in the DB</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_dashboard_redirect_after_signup">
+<span class="sig-name descname"><span class="pre">test_dashboard_redirect_after_signup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_dashboard_redirect_after_signup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user will be redirected correctly to the dashboard page</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signed_up_users_cannot_signup">
+<span class="sig-name descname"><span class="pre">test_signed_up_users_cannot_signup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signed_up_users_cannot_signup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that user who has already signed up cannot use signup once again</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_login_admin_approved_portal">
+<span class="sig-name descname"><span class="pre">test_signup_login_admin_approved_portal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_login_admin_approved_portal" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Ensure the signup works correctly for all cases:</dt><dd><ul class="simple">
+<li><p>Closed portal with admin-approval required before login</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_login_open_portal">
+<span class="sig-name descname"><span class="pre">test_signup_login_open_portal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_login_open_portal" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Ensure the signup works correctly for all cases:</dt><dd><ul class="simple">
+<li><p>Open portal with instant login and no email verification</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_login_open_portal_email_validation_before_login">
+<span class="sig-name descname"><span class="pre">test_signup_login_open_portal_email_validation_before_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_login_open_portal_email_validation_before_login" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Ensure the signup works correctly for all cases:</dt><dd><ul class="simple">
+<li><p>Open portal with e-mail validation required before login</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_login_open_portal_email_verification">
+<span class="sig-name descname"><span class="pre">test_signup_login_open_portal_email_verification</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_login_open_portal_email_verification" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Ensure the signup works correctly for all cases:</dt><dd><ul class="simple">
+<li><p>Open portal with instant login and email verification active</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_with_valid_email">
+<span class="sig-name descname"><span class="pre">test_signup_with_valid_email</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_signup_with_valid_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user uses a valid email to signup</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_can_signup_successful">
+<span class="sig-name descname"><span class="pre">test_user_can_signup_successful</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_can_signup_successful" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure we can signup / create new user with the given user data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_can_signup_with_last_name">
+<span class="sig-name descname"><span class="pre">test_user_can_signup_with_last_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_can_signup_with_last_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user can signup with given user lastname</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_cannot_signup_with_missing_data">
+<span class="sig-name descname"><span class="pre">test_user_cannot_signup_with_missing_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_cannot_signup_with_missing_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user cannot signup with missing data: <cite>email</cite>, <cite>password</cite> or <cite>first_name</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_cannot_signup_with_same_email_twice">
+<span class="sig-name descname"><span class="pre">test_user_cannot_signup_with_same_email_twice</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_cannot_signup_with_same_email_twice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user cannot signup using an email which is already in use</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_cannot_signup_with_user_signup_disabled">
+<span class="sig-name descname"><span class="pre">test_user_cannot_signup_with_user_signup_disabled</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_signup_api.SignupTestView.test_user_cannot_signup_with_user_signup_disabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user cannot signup if <cite>COSINNUS_USER_SIGNUP_ENABLED</cite> setting is turned off</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.tests.view_tests.test_user_profile_onboarding_api">
+<span id="cosinnus-tests-view-tests-test-user-profile-onboarding-api-module"></span><h2>cosinnus.tests.view_tests.test_user_profile_onboarding_api module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_user_profile_onboarding_api" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_user_profile_onboarding_api.</span></span><span class="sig-name descname"><span class="pre">UserProfileTestView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APITestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_cannot_get_user_data_with_user_logged_out">
+<span class="sig-name descname"><span class="pre">test_cannot_get_user_data_with_user_logged_out</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_cannot_get_user_data_with_user_logged_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure we cannot get any user data with a non-logged in, i.e. anonymous user</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_get_user_data_with_user_logged_in">
+<span class="sig-name descname"><span class="pre">test_get_user_data_with_user_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_get_user_data_with_user_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure we can get all the user data with user logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_contact_infos">
+<span class="sig-name descname"><span class="pre">test_user_contact_infos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_contact_infos" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_location">
+<span class="sig-name descname"><span class="pre">test_user_location</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_location" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_profile_avatar">
+<span class="sig-name descname"><span class="pre">test_user_profile_avatar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_profile_avatar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_profile_description">
+<span class="sig-name descname"><span class="pre">test_user_profile_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_profile_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_tags">
+<span class="sig-name descname"><span class="pre">test_user_tags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_topics">
+<span class="sig-name descname"><span class="pre">test_user_topics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_topics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_visibility">
+<span class="sig-name descname"><span class="pre">test_user_visibility</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_user_profile_onboarding_api.UserProfileTestView.test_user_visibility" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.tests.view_tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.tests.view_tests" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+  <li><a href="cosinnus.tests.html">cosinnus.tests package</a><ul>
+      <li>Previous: <a href="cosinnus.tests.util_tests.urls.html" title="previous chapter">cosinnus.tests.util_tests.urls package</a></li>
+      <li>Next: <a href="cosinnus.trans.html" title="next chapter">cosinnus.trans package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.tests.view_tests.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

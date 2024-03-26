@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_cloud.management.commands package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_cloud.utils package" href="cosinnus_cloud.utils.html" />
+    <link rel="prev" title="cosinnus_cloud.management package" href="cosinnus_cloud.management.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-cloud-management-commands-package">
+<h1>cosinnus_cloud.management.commands package<a class="headerlink" href="#cosinnus-cloud-management-commands-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_cloud.management.commands.remove_nextcloud_user_emails">
+<span id="cosinnus-cloud-management-commands-remove-nextcloud-user-emails-module"></span><h2>cosinnus_cloud.management.commands.remove_nextcloud_user_emails module<a class="headerlink" href="#module-cosinnus_cloud.management.commands.remove_nextcloud_user_emails" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.remove_nextcloud_user_emails.Command">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.management.commands.remove_nextcloud_user_emails.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.remove_nextcloud_user_emails.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCommand</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.remove_nextcloud_user_emails.Command.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.remove_nextcloud_user_emails.Command.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual logic of the command. Subclasses must implement
+this method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.remove_nextcloud_user_emails.Command.help">
+<span class="sig-name descname"><span class="pre">help</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&quot;Updates</span> <span class="pre">all</span> <span class="pre">users'</span> <span class="pre">email</span> <span class="pre">addresses.</span> <span class="pre">Was</span> <span class="pre">used</span> <span class="pre">once</span> <span class="pre">to</span> <span class="pre">set</span> <span class="pre">all</span> <span class="pre">emails</span> <span class="pre">to</span> <span class="pre">empty.</span> <span class="pre">&quot;</span></em><a class="headerlink" href="#cosinnus_cloud.management.commands.remove_nextcloud_user_emails.Command.help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.management.commands.sync_nextcloud_group_members">
+<span id="cosinnus-cloud-management-commands-sync-nextcloud-group-members-module"></span><h2>cosinnus_cloud.management.commands.sync_nextcloud_group_members module<a class="headerlink" href="#module-cosinnus_cloud.management.commands.sync_nextcloud_group_members" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_group_members.Command">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.management.commands.sync_nextcloud_group_members.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_group_members.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCommand</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_group_members.Command.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_group_members.Command.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual logic of the command. Subclasses must implement
+this method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_group_members.Command.help">
+<span class="sig-name descname"><span class="pre">help</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Checks</span> <span class="pre">all</span> <span class="pre">active</span> <span class="pre">groups</span> <span class="pre">to</span> <span class="pre">create</span> <span class="pre">any</span> <span class="pre">missing</span> <span class="pre">nextcloud</span> <span class="pre">group</span> <span class="pre">membership</span> <span class="pre">associations</span> <span class="pre">for</span> <span class="pre">users'</span></em><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_group_members.Command.help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names">
+<span id="cosinnus-cloud-management-commands-sync-nextcloud-groupfolder-names-module"></span><h2>cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names module<a class="headerlink" href="#module-cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names.Command">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCommand</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names.Command.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names.Command.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual logic of the command. Subclasses must implement
+this method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names.Command.help">
+<span class="sig-name descname"><span class="pre">help</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&quot;Syncs</span> <span class="pre">the</span> <span class="pre">plattform's</span> <span class="pre">`groups.nextcloud_groupfolder_name`</span> <span class="pre">field</span> <span class="pre">entries</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">actual</span> <span class="pre">current</span> <span class="pre">remote</span> <span class="pre">folder</span> <span class="pre">names</span> <span class="pre">in</span> <span class="pre">nextcloud.</span> <span class="pre">Helpful</span> <span class="pre">to</span> <span class="pre">repair</span> <span class="pre">broken</span> <span class="pre">folder</span> <span class="pre">associations</span> <span class="pre">after</span> <span class="pre">the</span> <span class="pre">cloud</span> <span class="pre">folder</span> <span class="pre">rename</span> <span class="pre">bugfix.</span> <span class="pre">Won't</span> <span class="pre">change</span> <span class="pre">anything</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">nextcloud.&quot;</span></em><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_groupfolder_names.Command.help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.management.commands.sync_nextcloud_groups">
+<span id="cosinnus-cloud-management-commands-sync-nextcloud-groups-module"></span><h2>cosinnus_cloud.management.commands.sync_nextcloud_groups module<a class="headerlink" href="#module-cosinnus_cloud.management.commands.sync_nextcloud_groups" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_groups.Command">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.management.commands.sync_nextcloud_groups.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_groups.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCommand</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_groups.Command.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_groups.Command.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual logic of the command. Subclasses must implement
+this method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_groups.Command.help">
+<span class="sig-name descname"><span class="pre">help</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Checks</span> <span class="pre">all</span> <span class="pre">active</span> <span class="pre">groups</span> <span class="pre">to</span> <span class="pre">create</span> <span class="pre">any</span> <span class="pre">missing</span> <span class="pre">nextcloud</span> <span class="pre">groups</span> <span class="pre">and</span> <span class="pre">group</span> <span class="pre">folders'</span></em><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_groups.Command.help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps">
+<span id="cosinnus-cloud-management-commands-sync-nextcloud-oauth-apps-module"></span><h2>cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps module<a class="headerlink" href="#module-cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps.Command">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCommand</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps.Command.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps.Command.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual logic of the command. Subclasses must implement
+this method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps.Command.help">
+<span class="sig-name descname"><span class="pre">help</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Creates</span> <span class="pre">a</span> <span class="pre">wechange</span> <span class="pre">oauth</span> <span class="pre">provider</span> <span class="pre">app</span> <span class="pre">and</span> <span class="pre">a</span> <span class="pre">nextcloud</span> <span class="pre">social</span> <span class="pre">login</span> <span class="pre">client</span> <span class="pre">app.'</span></em><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_oauth_apps.Command.help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.management.commands.sync_nextcloud_settings">
+<span id="cosinnus-cloud-management-commands-sync-nextcloud-settings-module"></span><h2>cosinnus_cloud.management.commands.sync_nextcloud_settings module<a class="headerlink" href="#module-cosinnus_cloud.management.commands.sync_nextcloud_settings" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_settings.Command">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.management.commands.sync_nextcloud_settings.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_settings.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCommand</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_settings.Command.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_settings.Command.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual logic of the command. Subclasses must implement
+this method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_settings.Command.help">
+<span class="sig-name descname"><span class="pre">help</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Applies</span> <span class="pre">configured</span> <span class="pre">settings</span> <span class="pre">from</span> <span class="pre">conf</span> <span class="pre">`COSINNUS_CLOUD_NEXTCLOUD_SETTINGS`</span> <span class="pre">via</span> <span class="pre">OCS</span> <span class="pre">'</span></em><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_settings.Command.help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.management.commands.sync_nextcloud_users">
+<span id="cosinnus-cloud-management-commands-sync-nextcloud-users-module"></span><h2>cosinnus_cloud.management.commands.sync_nextcloud_users module<a class="headerlink" href="#module-cosinnus_cloud.management.commands.sync_nextcloud_users" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_users.Command">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.management.commands.sync_nextcloud_users.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_users.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCommand</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_users.Command.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_users.Command.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual logic of the command. Subclasses must implement
+this method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.sync_nextcloud_users.Command.help">
+<span class="sig-name descname"><span class="pre">help</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Checks</span> <span class="pre">all</span> <span class="pre">active</span> <span class="pre">users</span> <span class="pre">to</span> <span class="pre">create</span> <span class="pre">any</span> <span class="pre">missing</span> <span class="pre">nextcloud</span> <span class="pre">user</span> <span class="pre">accounts'</span></em><a class="headerlink" href="#cosinnus_cloud.management.commands.sync_nextcloud_users.Command.help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.management.commands.test_search">
+<span id="cosinnus-cloud-management-commands-test-search-module"></span><h2>cosinnus_cloud.management.commands.test_search module<a class="headerlink" href="#module-cosinnus_cloud.management.commands.test_search" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.test_search.Command">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.management.commands.test_search.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.test_search.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCommand</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.test_search.Command.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.management.commands.test_search.Command.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual logic of the command. Subclasses must implement
+this method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_cloud.management.commands.test_search.Command.help">
+<span class="sig-name descname"><span class="pre">help</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Checks</span> <span class="pre">all</span> <span class="pre">active</span> <span class="pre">groups</span> <span class="pre">to</span> <span class="pre">create</span> <span class="pre">any</span> <span class="pre">missing</span> <span class="pre">nextcloud</span> <span class="pre">groups</span> <span class="pre">and</span> <span class="pre">group</span> <span class="pre">folders'</span></em><a class="headerlink" href="#cosinnus_cloud.management.commands.test_search.Command.help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_cloud.management.commands">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_cloud.management.commands" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus_cloud.html">cosinnus_cloud package</a><ul>
+  <li><a href="cosinnus_cloud.management.html">cosinnus_cloud.management package</a><ul>
+      <li>Previous: <a href="cosinnus_cloud.management.html" title="previous chapter">cosinnus_cloud.management package</a></li>
+      <li>Next: <a href="cosinnus_cloud.utils.html" title="next chapter">cosinnus_cloud.utils package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_cloud.management.commands.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

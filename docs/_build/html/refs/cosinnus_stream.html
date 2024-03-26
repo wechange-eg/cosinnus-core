@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_stream package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="cosinnus_organization.views package" href="cosinnus_organization.views.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-stream-package">
+<h1>cosinnus_stream package<a class="headerlink" href="#cosinnus-stream-package" title="Permalink to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_stream.admin">
+<span id="cosinnus-stream-admin-module"></span><h2>cosinnus_stream.admin module<a class="headerlink" href="#module-cosinnus_stream.admin" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.admin.StreamAdmin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.admin.</span></span><span class="sig-name descname"><span class="pre">StreamAdmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admin_site</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.admin.StreamAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelAdmin</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.admin.StreamAdmin.list_display">
+<span class="sig-name descname"><span class="pre">list_display</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('title',</span> <span class="pre">'creator',</span> <span class="pre">'created')</span></em><a class="headerlink" href="#cosinnus_stream.admin.StreamAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_stream.admin.StreamAdmin.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_stream.admin.StreamAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.admin.StreamAdmin.search_fields">
+<span class="sig-name descname"><span class="pre">search_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('title',)</span></em><a class="headerlink" href="#cosinnus_stream.admin.StreamAdmin.search_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_stream.apps">
+<span id="cosinnus-stream-apps-module"></span><h2>cosinnus_stream.apps module<a class="headerlink" href="#module-cosinnus_stream.apps" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.apps.CosinnusStreamAppConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.apps.</span></span><span class="sig-name descname"><span class="pre">CosinnusStreamAppConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.apps.CosinnusStreamAppConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.apps.CosinnusStreamAppConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_stream'</span></em><a class="headerlink" href="#cosinnus_stream.apps.CosinnusStreamAppConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.apps.CosinnusStreamAppConfig.ready">
+<span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.apps.CosinnusStreamAppConfig.ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method in subclasses to run code when Django starts.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.apps.CosinnusStreamAppConfig.verbose_name">
+<span class="sig-name descname"><span class="pre">verbose_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Cosinnus</span> <span class="pre">Stream'</span></em><a class="headerlink" href="#cosinnus_stream.apps.CosinnusStreamAppConfig.verbose_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_stream.cosinnus_app">
+<span id="cosinnus-stream-cosinnus-app-module"></span><h2>cosinnus_stream.cosinnus_app module<a class="headerlink" href="#module-cosinnus_stream.cosinnus_app" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_stream.cosinnus_app.register">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_stream.cosinnus_app.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.cosinnus_app.register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_stream.dashboard">
+<span id="cosinnus-stream-dashboard-module"></span><h2>cosinnus_stream.dashboard module<a class="headerlink" href="#module-cosinnus_stream.dashboard" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.dashboard.</span></span><span class="sig-name descname"><span class="pre">MyStreamsForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.dashboard.DashboardWidgetForm" title="cosinnus.forms.dashboard.DashboardWidgetForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidgetForm</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'link_label':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_icon':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_title':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'link_label':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_icon':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_title':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.dashboard.</span></span><span class="sig-name descname"><span class="pre">MyStreamsWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.dashboard.DashboardWidget" title="cosinnus.utils.dashboard.DashboardWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidget</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.allow_on_user">
+<span class="sig-name descname"><span class="pre">allow_on_user</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.allow_on_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.app_name">
+<span class="sig-name descname"><span class="pre">app_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'stream'</span></em><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.app_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_stream.dashboard.MyStreamsForm" title="cosinnus_stream.dashboard.MyStreamsForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">MyStreamsForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+if has_more == False, the receiving widget will assume no further data can be loaded.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param skipFilter: If true, the filtering for user will be skipped, so it can be done at a later (MRO) time.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_stream.models.Stream" title="cosinnus_stream.models.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Activities'</span></em><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.title_url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title_url</span></span><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.title_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.user_model_attr">
+<span class="sig-name descname"><span class="pre">user_model_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'creator'</span></em><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.user_model_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.dashboard.MyStreamsWidget.widget_name">
+<span class="sig-name descname"><span class="pre">widget_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'my_streams'</span></em><a class="headerlink" href="#cosinnus_stream.dashboard.MyStreamsWidget.widget_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_stream.forms">
+<span id="cosinnus-stream-forms-module"></span><h2>cosinnus_stream.forms module<a class="headerlink" href="#module-cosinnus_stream.forms" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_stream.mixins">
+<span id="cosinnus-stream-mixins-module"></span><h2>cosinnus_stream.mixins module<a class="headerlink" href="#module-cosinnus_stream.mixins" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.mixins.StreamManagerMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.mixins.</span></span><span class="sig-name descname"><span class="pre">StreamManagerMixin</span></span><a class="headerlink" href="#cosinnus_stream.mixins.StreamManagerMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.mixins.StreamManagerMixin.get_stream_objects_for_user">
+<span class="sig-name descname"><span class="pre">get_stream_objects_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_public</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.mixins.StreamManagerMixin.get_stream_objects_for_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.mixins.StreamManagerMixin.unread_count">
+<span class="sig-name descname"><span class="pre">unread_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.mixins.StreamManagerMixin.unread_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_stream.models">
+<span id="cosinnus-stream-models-module"></span><h2>cosinnus_stream.models module<a class="headerlink" href="#module-cosinnus_stream.models" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.models.</span></span><span class="sig-name descname"><span class="pre">Stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">media_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_modified</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_action_user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_my_stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">portals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_seen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_special</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_groups</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_stream.mixins.StreamManagerMixin" title="cosinnus_stream.mixins.StreamManagerMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamManagerMixin</span></code></a>, <a class="reference internal" href="cosinnus.models.html#cosinnus.models.tagged.BaseTaggableObjectModel" title="cosinnus.models.tagged.BaseTaggableObjectModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTaggableObjectModel</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.attached_objects">
+<span class="sig-name descname"><span class="pre">attached_objects</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.attached_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.created">
+<span class="sig-name descname"><span class="pre">created</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.created" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.creator">
+<span class="sig-name descname"><span class="pre">creator</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.creator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.creator_id">
+<span class="sig-name descname"><span class="pre">creator_id</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.creator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream.get_absolute_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.get_next_by_created">
+<span class="sig-name descname"><span class="pre">get_next_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream.get_next_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.get_next_by_last_action">
+<span class="sig-name descname"><span class="pre">get_next_by_last_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_action&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream.get_next_by_last_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.get_next_by_last_modified">
+<span class="sig-name descname"><span class="pre">get_next_by_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_modified&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream.get_next_by_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.get_previous_by_created">
+<span class="sig-name descname"><span class="pre">get_previous_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream.get_previous_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.get_previous_by_last_action">
+<span class="sig-name descname"><span class="pre">get_previous_by_last_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_action&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream.get_previous_by_last_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.get_previous_by_last_modified">
+<span class="sig-name descname"><span class="pre">get_previous_by_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_modified&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream.get_previous_by_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.group">
+<span class="sig-name descname"><span class="pre">group</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.group_id">
+<span class="sig-name descname"><span class="pre">group_id</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.group_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.is_my_stream">
+<span class="sig-name descname"><span class="pre">is_my_stream</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.is_my_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.is_special">
+<span class="sig-name descname"><span class="pre">is_special</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.is_special" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.last_action">
+<span class="sig-name descname"><span class="pre">last_action</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.last_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.last_action_user">
+<span class="sig-name descname"><span class="pre">last_action_user</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.last_action_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.last_action_user_id">
+<span class="sig-name descname"><span class="pre">last_action_user_id</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.last_action_user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.last_modified">
+<span class="sig-name descname"><span class="pre">last_modified</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.last_modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.last_seen">
+<span class="sig-name descname"><span class="pre">last_seen</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.last_seen" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.last_seen_safe">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_seen_safe</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.last_seen_safe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.media_tag">
+<span class="sig-name descname"><span class="pre">media_tag</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.media_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Restaurant.place</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardOneToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.media_tag_id">
+<span class="sig-name descname"><span class="pre">media_tag_id</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.media_tag_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.models">
+<span class="sig-name descname"><span class="pre">models</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.models" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;cosinnus_stream.models.StreamManager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_stream.models.Stream.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.portal_list">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">portal_list</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.portal_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.portals">
+<span class="sig-name descname"><span class="pre">portals</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.portals" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.set_last_seen">
+<span class="sig-name descname"><span class="pre">set_last_seen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">when</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream.set_last_seen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the last seen datetime for this stream. 
+Sets the datetime to now() if no argument is passed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.slug">
+<span class="sig-name descname"><span class="pre">slug</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.slug" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.special_groups">
+<span class="sig-name descname"><span class="pre">special_groups</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.special_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#cosinnus_stream.models.Stream.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.Stream.update_cache">
+<span class="sig-name descname"><span class="pre">update_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.Stream.update_cache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.models.StreamManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.models.</span></span><span class="sig-name descname"><span class="pre">StreamManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.StreamManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Manager</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.StreamManager.get_my_stream_for_user">
+<span class="sig-name descname"><span class="pre">get_my_stream_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">portals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.StreamManager.get_my_stream_for_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.models.StreamManager.my_stream_unread_count">
+<span class="sig-name descname"><span class="pre">my_stream_unread_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.StreamManager.my_stream_unread_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_stream.models.create_special_streams_profile">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_stream.models.</span></span><span class="sig-name descname"><span class="pre">create_special_streams_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.models.create_special_streams_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates hardcoded special streams for a new user, taken from settings.</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_stream.urls">
+<span id="cosinnus-stream-urls-module"></span><h2>cosinnus_stream.urls module<a class="headerlink" href="#module-cosinnus_stream.urls" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_stream.views">
+<span id="cosinnus-stream-views-module"></span><h2>cosinnus_stream.views module<a class="headerlink" href="#module-cosinnus_stream.views" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">StreamCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamCreateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.user.UserFormKwargsMixin" title="cosinnus.views.mixins.user.UserFormKwargsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserFormKwargsMixin</span></code></a>, <a class="reference internal" href="#cosinnus_stream.views.StreamsMixin" title="cosinnus_stream.views.StreamsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamsMixin</span></code></a>, <a class="reference internal" href="#cosinnus_stream.views.StreamFormMixin" title="cosinnus_stream.views.StreamFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamCreateView.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamCreateView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamCreateView.form_view">
+<span class="sig-name descname"><span class="pre">form_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'add'</span></em><a class="headerlink" href="#cosinnus_stream.views.StreamCreateView.form_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamCreateView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">activity</span> <span class="pre">feed</span> <span class="pre">was</span> <span class="pre">added</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_stream.views.StreamCreateView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">StreamDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_stream.views.StreamFilterForUserMixin" title="cosinnus_stream.views.StreamFilterForUserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamFilterForUserMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDeleteView.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDeleteView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDeleteView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDeleteView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDeleteView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">activity</span> <span class="pre">feed</span> <span class="pre">was</span> <span class="pre">deleted</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_stream.views.StreamDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDeleteView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_stream.views.StreamDeleteView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_stream.models.Stream" title="cosinnus_stream.models.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">StreamDetailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.widget.DashboardWidgetMixin" title="cosinnus.views.widget.DashboardWidgetMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidgetMixin</span></code></a>, <a class="reference internal" href="#cosinnus_stream.views.StreamsMixin" title="cosinnus_stream.views.StreamsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamsMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.check_permissions">
+<span class="sig-name descname"><span class="pre">check_permissions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.check_permissions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.default_widget_order">
+<span class="sig-name descname"><span class="pre">default_widget_order</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['todo.mine',</span> <span class="pre">'event.upcoming']</span></em><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.default_widget_order" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.disallowed_widgets">
+<span class="sig-name descname"><span class="pre">disallowed_widgets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['stream.my_streams',</span> <span class="pre">'note.detailed_news_list',</span> <span class="pre">'etherpad.latest',</span> <span class="pre">'cosinnus.group_members']</span></em><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.disallowed_widgets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the single object into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.get_filter">
+<span class="sig-name descname"><span class="pre">get_filter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.get_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit the user id so queryset elements can be filtered for that user.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow queries without slug or pk</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_stream.models.Stream" title="cosinnus_stream.models.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamDetailView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_stream/stream_detail.html'</span></em><a class="headerlink" href="#cosinnus_stream.views.StreamDetailView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFilterForUserMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">StreamFilterForUserMixin</span></span><a class="headerlink" href="#cosinnus_stream.views.StreamFilterForUserMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Filters the queryset for only streams of the current user</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFilterForUserMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamFilterForUserMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFormMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">StreamFormMixin</span></span><a class="headerlink" href="#cosinnus_stream.views.StreamFormMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFormMixin.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_stream.views.StreamFormMixin.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">TaggableObjectForm</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFormMixin.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamFormMixin.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFormMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamFormMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFormMixin.get_form">
+<span class="sig-name descname"><span class="pre">get_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamFormMixin.get_form" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter the groups displayed to the user to be his groups/public groups.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFormMixin.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamFormMixin.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFormMixin.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_stream.views.StreamFormMixin.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_stream.models.Stream" title="cosinnus_stream.models.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamFormMixin.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_stream/stream_form.html'</span></em><a class="headerlink" href="#cosinnus_stream.views.StreamFormMixin.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">StreamUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamUpdateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.user.UserFormKwargsMixin" title="cosinnus.views.mixins.user.UserFormKwargsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserFormKwargsMixin</span></code></a>, <a class="reference internal" href="#cosinnus_stream.views.StreamFilterForUserMixin" title="cosinnus_stream.views.StreamFilterForUserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamFilterForUserMixin</span></code></a>, <a class="reference internal" href="#cosinnus_stream.views.StreamsMixin" title="cosinnus_stream.views.StreamsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamsMixin</span></code></a>, <a class="reference internal" href="#cosinnus_stream.views.StreamFormMixin" title="cosinnus_stream.views.StreamFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamUpdateView.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamUpdateView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamUpdateView.form_view">
+<span class="sig-name descname"><span class="pre">form_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'edit'</span></em><a class="headerlink" href="#cosinnus_stream.views.StreamUpdateView.form_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamUpdateView.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamUpdateView.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the object the view is displaying.</p>
+<p>Require <cite>self.queryset</cite> and a <cite>pk</cite> or <cite>slug</cite> argument in the URLconf.
+Subclasses can override this to return any object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamUpdateView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">activity</span> <span class="pre">feed</span> <span class="pre">was</span> <span class="pre">updated</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_stream.views.StreamUpdateView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">StreamsMixin</span></span><a class="headerlink" href="#cosinnus_stream.views.StreamsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_stream.views.StreamsMixin.get_streams">
+<span class="sig-name descname"><span class="pre">get_streams</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.StreamsMixin.get_streams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_stream.views.stream_create">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">stream_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.stream_create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_stream.views.stream_delete">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">stream_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.stream_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_stream.views.stream_detail">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">stream_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.stream_detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_stream.views.stream_update">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_stream.views.</span></span><span class="sig-name descname"><span class="pre">stream_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.views.stream_update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_stream">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_stream" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_stream.get_version">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_stream.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_stream.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derives a PEP386-compliant version number from VERSION.</p>
+<p>Taken from django.utils.version.get_git_changeset at rev ce5e09353d</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+      <li>Previous: <a href="cosinnus_organization.views.html" title="previous chapter">cosinnus_organization.views package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_stream.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

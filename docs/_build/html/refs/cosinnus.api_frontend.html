@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.api_frontend package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.api_frontend.handlers package" href="cosinnus.api_frontend.handlers.html" />
+    <link rel="prev" title="cosinnus.api.views package" href="cosinnus.api.views.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-api-frontend-package">
+<h1>cosinnus.api_frontend package<a class="headerlink" href="#cosinnus-api-frontend-package" title="Permalink to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus.api_frontend.handlers.html">cosinnus.api_frontend.handlers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#module-cosinnus.api_frontend.handlers.error_codes">cosinnus.api_frontend.handlers.error_codes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#module-cosinnus.api_frontend.handlers.exception_handlers">cosinnus.api_frontend.handlers.exception_handlers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#cosinnus.api_frontend.handlers.exception_handlers.cosinnus_error_code_exception_handler"><code class="docutils literal notranslate"><span class="pre">cosinnus_error_code_exception_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#module-cosinnus.api_frontend.handlers.exceptions">cosinnus.api_frontend.handlers.exceptions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#cosinnus.api_frontend.handlers.exceptions.CosinnusValidationError"><code class="docutils literal notranslate"><span class="pre">CosinnusValidationError</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#module-cosinnus.api_frontend.handlers.renderers">cosinnus.api_frontend.handlers.renderers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#cosinnus.api_frontend.handlers.renderers.CosinnusAPIFrontendJSONResponseRenderer"><code class="docutils literal notranslate"><span class="pre">CosinnusAPIFrontendJSONResponseRenderer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#cosinnus.api_frontend.handlers.renderers.CosinnusAPIFrontendJSONResponseRenderer.charset"><code class="docutils literal notranslate"><span class="pre">CosinnusAPIFrontendJSONResponseRenderer.charset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#cosinnus.api_frontend.handlers.renderers.CosinnusAPIFrontendJSONResponseRenderer.render"><code class="docutils literal notranslate"><span class="pre">CosinnusAPIFrontendJSONResponseRenderer.render()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.handlers.html#module-cosinnus.api_frontend.handlers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus.api_frontend.serializers.html">cosinnus.api_frontend.serializers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#module-cosinnus.api_frontend.serializers.dynamic_fields">cosinnus.api_frontend.serializers.dynamic_fields module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin"><code class="docutils literal notranslate"><span class="pre">CosinnusUserDynamicFieldsSerializerMixin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.DYNAMIC_FIELD_SETTINGS"><code class="docutils literal notranslate"><span class="pre">CosinnusUserDynamicFieldsSerializerMixin.DYNAMIC_FIELD_SETTINGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.all_fields_optional"><code class="docutils literal notranslate"><span class="pre">CosinnusUserDynamicFieldsSerializerMixin.all_fields_optional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.filter_included_fields_by_option_name"><code class="docutils literal notranslate"><span class="pre">CosinnusUserDynamicFieldsSerializerMixin.filter_included_fields_by_option_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.save_dynamic_fields"><code class="docutils literal notranslate"><span class="pre">CosinnusUserDynamicFieldsSerializerMixin.save_dynamic_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusUserDynamicFieldsSerializerMixin.validate"><code class="docutils literal notranslate"><span class="pre">CosinnusUserDynamicFieldsSerializerMixin.validate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#module-cosinnus.api_frontend.serializers.portal">cosinnus.api_frontend.serializers.portal module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer"><code class="docutils literal notranslate"><span class="pre">CosinnusManagedTagSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">CosinnusManagedTagSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.get_default"><code class="docutils literal notranslate"><span class="pre">CosinnusManagedTagSerializer.get_default()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagSerializer.get_image"><code class="docutils literal notranslate"><span class="pre">CosinnusManagedTagSerializer.get_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer"><code class="docutils literal notranslate"><span class="pre">CosinnusManagedTagTypeSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.portal.CosinnusManagedTagTypeSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">CosinnusManagedTagTypeSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#module-cosinnus.api_frontend.serializers.user">cosinnus.api_frontend.serializers.user module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer"><code class="docutils literal notranslate"><span class="pre">CosinnusHybridUserSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.DYNAMIC_FIELD_SETTINGS"><code class="docutils literal notranslate"><span class="pre">CosinnusHybridUserSerializer.DYNAMIC_FIELD_SETTINGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.all_fields_optional"><code class="docutils literal notranslate"><span class="pre">CosinnusHybridUserSerializer.all_fields_optional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.get_visibility"><code class="docutils literal notranslate"><span class="pre">CosinnusHybridUserSerializer.get_visibility()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.update"><code class="docutils literal notranslate"><span class="pre">CosinnusHybridUserSerializer.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.validate"><code class="docutils literal notranslate"><span class="pre">CosinnusHybridUserSerializer.validate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusHybridUserSerializer.validate_email"><code class="docutils literal notranslate"><span class="pre">CosinnusHybridUserSerializer.validate_email()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusUserLoginSerializer"><code class="docutils literal notranslate"><span class="pre">CosinnusUserLoginSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusUserLoginSerializer.validate"><code class="docutils literal notranslate"><span class="pre">CosinnusUserLoginSerializer.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer"><code class="docutils literal notranslate"><span class="pre">CosinnusUserSignupSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.DYNAMIC_FIELD_SETTINGS"><code class="docutils literal notranslate"><span class="pre">CosinnusUserSignupSerializer.DYNAMIC_FIELD_SETTINGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.create"><code class="docutils literal notranslate"><span class="pre">CosinnusUserSignupSerializer.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.filter_included_fields_by_option_name"><code class="docutils literal notranslate"><span class="pre">CosinnusUserSignupSerializer.filter_included_fields_by_option_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.validate"><code class="docutils literal notranslate"><span class="pre">CosinnusUserSignupSerializer.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.validate_contact_info_pairs"><code class="docutils literal notranslate"><span class="pre">validate_contact_info_pairs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#module-cosinnus.api_frontend.serializers.utils">cosinnus.api_frontend.serializers.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.utils.validate_managed_tag_slugs"><code class="docutils literal notranslate"><span class="pre">validate_managed_tag_slugs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#module-cosinnus.api_frontend.serializers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus.api_frontend.views.html">cosinnus.api_frontend.views package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.views.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.views.html#module-cosinnus.api_frontend.views.content">cosinnus.api_frontend.views.content module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView"><code class="docutils literal notranslate"><span class="pre">MainContentView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.build_data_response"><code class="docutils literal notranslate"><span class="pre">MainContentView.build_data_response()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.build_redirect_response"><code class="docutils literal notranslate"><span class="pre">MainContentView.build_redirect_response()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.content_html"><code class="docutils literal notranslate"><span class="pre">MainContentView.content_html</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.footer_html"><code class="docutils literal notranslate"><span class="pre">MainContentView.footer_html</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.get"><code class="docutils literal notranslate"><span class="pre">MainContentView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.group"><code class="docutils literal notranslate"><span class="pre">MainContentView.group</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.has_leftnav"><code class="docutils literal notranslate"><span class="pre">MainContentView.has_leftnav</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.main_menu_icon"><code class="docutils literal notranslate"><span class="pre">MainContentView.main_menu_icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.main_menu_image"><code class="docutils literal notranslate"><span class="pre">MainContentView.main_menu_image</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.main_menu_label"><code class="docutils literal notranslate"><span class="pre">MainContentView.main_menu_label</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">MainContentView.renderer_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.content.MainContentView.url"><code class="docutils literal notranslate"><span class="pre">MainContentView.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.views.html#module-cosinnus.api_frontend.views.navigation">cosinnus.api_frontend.views.navigation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView"><code class="docutils literal notranslate"><span class="pre">AlertsView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">AlertsView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.get"><code class="docutils literal notranslate"><span class="pre">AlertsView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.get_queryset"><code class="docutils literal notranslate"><span class="pre">AlertsView.get_queryset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.get_user_cache"><code class="docutils literal notranslate"><span class="pre">AlertsView.get_user_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.mark_as_read"><code class="docutils literal notranslate"><span class="pre">AlertsView.mark_as_read</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.newer_than_timestamp"><code class="docutils literal notranslate"><span class="pre">AlertsView.newer_than_timestamp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.offset_timestamp"><code class="docutils literal notranslate"><span class="pre">AlertsView.offset_timestamp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.page_size"><code class="docutils literal notranslate"><span class="pre">AlertsView.page_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.read_query_params"><code class="docutils literal notranslate"><span class="pre">AlertsView.read_query_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.AlertsView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">AlertsView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.BookmarksView"><code class="docutils literal notranslate"><span class="pre">BookmarksView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.BookmarksView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">BookmarksView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.BookmarksView.get"><code class="docutils literal notranslate"><span class="pre">BookmarksView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.BookmarksView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">BookmarksView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.CosinnusNavigationPortalLinks"><code class="docutils literal notranslate"><span class="pre">CosinnusNavigationPortalLinks</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.CosinnusNavigationPortalLinksBase"><code class="docutils literal notranslate"><span class="pre">CosinnusNavigationPortalLinksBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.CosinnusNavigationPortalLinksBase.modifiy_main_navigation"><code class="docutils literal notranslate"><span class="pre">CosinnusNavigationPortalLinksBase.modifiy_main_navigation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.HelpView"><code class="docutils literal notranslate"><span class="pre">HelpView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.HelpView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">HelpView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.HelpView.get"><code class="docutils literal notranslate"><span class="pre">HelpView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.HelpView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">HelpView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.LanguageMenuItemMixin"><code class="docutils literal notranslate"><span class="pre">LanguageMenuItemMixin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.LanguageMenuItemMixin.get_language_menu_item"><code class="docutils literal notranslate"><span class="pre">LanguageMenuItemMixin.get_language_menu_item()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.MainNavigationView"><code class="docutils literal notranslate"><span class="pre">MainNavigationView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.MainNavigationView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">MainNavigationView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.MainNavigationView.get"><code class="docutils literal notranslate"><span class="pre">MainNavigationView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.MainNavigationView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">MainNavigationView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.ProfileView"><code class="docutils literal notranslate"><span class="pre">ProfileView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.ProfileView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">ProfileView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.ProfileView.get"><code class="docutils literal notranslate"><span class="pre">ProfileView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.ProfileView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">ProfileView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.SpacesView"><code class="docutils literal notranslate"><span class="pre">SpacesView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.SpacesView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">SpacesView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.SpacesView.get"><code class="docutils literal notranslate"><span class="pre">SpacesView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.SpacesView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">SpacesView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.UnreadAlertsView"><code class="docutils literal notranslate"><span class="pre">UnreadAlertsView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.UnreadAlertsView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">UnreadAlertsView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.UnreadAlertsView.get"><code class="docutils literal notranslate"><span class="pre">UnreadAlertsView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.UnreadAlertsView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">UnreadAlertsView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.UnreadMessagesView"><code class="docutils literal notranslate"><span class="pre">UnreadMessagesView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.UnreadMessagesView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">UnreadMessagesView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.UnreadMessagesView.get"><code class="docutils literal notranslate"><span class="pre">UnreadMessagesView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.UnreadMessagesView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">UnreadMessagesView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.VersionHistoryUnreadCountView"><code class="docutils literal notranslate"><span class="pre">VersionHistoryUnreadCountView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.VersionHistoryUnreadCountView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">VersionHistoryUnreadCountView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.VersionHistoryUnreadCountView.get"><code class="docutils literal notranslate"><span class="pre">VersionHistoryUnreadCountView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.VersionHistoryUnreadCountView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">VersionHistoryUnreadCountView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.VersionHistoryView"><code class="docutils literal notranslate"><span class="pre">VersionHistoryView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.VersionHistoryView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">VersionHistoryView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.VersionHistoryView.get"><code class="docutils literal notranslate"><span class="pre">VersionHistoryView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.navigation.VersionHistoryView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">VersionHistoryView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.views.html#module-cosinnus.api_frontend.views.portal">cosinnus.api_frontend.views.portal module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalManagedTagsView"><code class="docutils literal notranslate"><span class="pre">PortalManagedTagsView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalManagedTagsView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">PortalManagedTagsView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalManagedTagsView.get"><code class="docutils literal notranslate"><span class="pre">PortalManagedTagsView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalManagedTagsView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">PortalManagedTagsView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalSettingsView"><code class="docutils literal notranslate"><span class="pre">PortalSettingsView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalSettingsView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">PortalSettingsView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalSettingsView.get"><code class="docutils literal notranslate"><span class="pre">PortalSettingsView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalSettingsView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">PortalSettingsView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalTagsView"><code class="docutils literal notranslate"><span class="pre">PortalTagsView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalTagsView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">PortalTagsView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalTagsView.get"><code class="docutils literal notranslate"><span class="pre">PortalTagsView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalTagsView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">PortalTagsView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalTopicsView"><code class="docutils literal notranslate"><span class="pre">PortalTopicsView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalTopicsView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">PortalTopicsView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalTopicsView.get"><code class="docutils literal notranslate"><span class="pre">PortalTopicsView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalTopicsView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">PortalTopicsView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsSignupView"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsSignupView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsSignupView.description"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsSignupView.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsSignupView.field_option_filter"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsSignupView.field_option_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsSignupView.permission_classes"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsSignupView.permission_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsView"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsView.DYNAMIC_FIELD_SETTINGS"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsView.DYNAMIC_FIELD_SETTINGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsView.description"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsView.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsView.field_option_filter"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsView.field_option_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsView.get"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.portal.PortalUserprofileDynamicFieldsView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">PortalUserprofileDynamicFieldsView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.views.html#module-cosinnus.api_frontend.views.user">cosinnus.api_frontend.views.user module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.CsrfExemptSessionAuthentication"><code class="docutils literal notranslate"><span class="pre">CsrfExemptSessionAuthentication</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.CsrfExemptSessionAuthentication.enforce_csrf"><code class="docutils literal notranslate"><span class="pre">CsrfExemptSessionAuthentication.enforce_csrf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LoginView"><code class="docutils literal notranslate"><span class="pre">LoginView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LoginView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">LoginView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LoginView.permission_classes"><code class="docutils literal notranslate"><span class="pre">LoginView.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LoginView.post"><code class="docutils literal notranslate"><span class="pre">LoginView.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LoginView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">LoginView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LogoutView"><code class="docutils literal notranslate"><span class="pre">LogoutView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LogoutView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">LogoutView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LogoutView.permission_classes"><code class="docutils literal notranslate"><span class="pre">LogoutView.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LogoutView.post"><code class="docutils literal notranslate"><span class="pre">LogoutView.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.LogoutView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">LogoutView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.SignupView"><code class="docutils literal notranslate"><span class="pre">SignupView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.SignupView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">SignupView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.SignupView.permission_classes"><code class="docutils literal notranslate"><span class="pre">SignupView.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.SignupView.post"><code class="docutils literal notranslate"><span class="pre">SignupView.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.SignupView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">SignupView.renderer_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.SignupView.throttle_classes"><code class="docutils literal notranslate"><span class="pre">SignupView.throttle_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserAuthInfoView"><code class="docutils literal notranslate"><span class="pre">UserAuthInfoView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserAuthInfoView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">UserAuthInfoView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserAuthInfoView.get"><code class="docutils literal notranslate"><span class="pre">UserAuthInfoView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserAuthInfoView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">UserAuthInfoView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserProfileView"><code class="docutils literal notranslate"><span class="pre">UserProfileView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserProfileView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">UserProfileView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserProfileView.get"><code class="docutils literal notranslate"><span class="pre">UserProfileView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserProfileView.get_data"><code class="docutils literal notranslate"><span class="pre">UserProfileView.get_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserProfileView.parser_classes"><code class="docutils literal notranslate"><span class="pre">UserProfileView.parser_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserProfileView.permission_classes"><code class="docutils literal notranslate"><span class="pre">UserProfileView.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserProfileView.post"><code class="docutils literal notranslate"><span class="pre">UserProfileView.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserProfileView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">UserProfileView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserSignupBaseThrottle"><code class="docutils literal notranslate"><span class="pre">UserSignupBaseThrottle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserSignupBaseThrottle.get_cache_key"><code class="docutils literal notranslate"><span class="pre">UserSignupBaseThrottle.get_cache_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserSignupBaseThrottle.scope"><code class="docutils literal notranslate"><span class="pre">UserSignupBaseThrottle.scope</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserSignupBaseThrottle.throttle_success"><code class="docutils literal notranslate"><span class="pre">UserSignupBaseThrottle.throttle_success()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserSignupThrottleBurst"><code class="docutils literal notranslate"><span class="pre">UserSignupThrottleBurst</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserSignupThrottleBurst.rate"><code class="docutils literal notranslate"><span class="pre">UserSignupThrottleBurst.rate</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserSignupThrottleSustained"><code class="docutils literal notranslate"><span class="pre">UserSignupThrottleSustained</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserSignupThrottleSustained.rate"><code class="docutils literal notranslate"><span class="pre">UserSignupThrottleSustained.rate</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.views.html#module-cosinnus.api_frontend.views">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-cosinnus.api_frontend">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.api_frontend" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+      <li>Previous: <a href="cosinnus.api.views.html" title="previous chapter">cosinnus.api.views package</a></li>
+      <li>Next: <a href="cosinnus.api_frontend.handlers.html" title="next chapter">cosinnus.api_frontend.handlers package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.api_frontend.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

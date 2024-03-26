@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_organization.views package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_stream package" href="cosinnus_stream.html" />
+    <link rel="prev" title="cosinnus_organization.api package" href="cosinnus_organization.api.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-organization-views-package">
+<h1>cosinnus_organization.views package<a class="headerlink" href="#cosinnus-organization-views-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_organization.views.group">
+<span id="cosinnus-organization-views-group-module"></span><h2>cosinnus_organization.views.group module<a class="headerlink" href="#module-cosinnus_organization.views.group" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">GroupSelectMixin</span></span><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.forms.CosinnusOrganizationGroupForm" title="cosinnus_organization.forms.CosinnusOrganizationGroupForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationGroupForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.get_form_kwargs">
+<span class="sig-name descname"><span class="pre">get_form_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.get_form_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.get_initial">
+<span class="sig-name descname"><span class="pre">get_initial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.get_initial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationGroup" title="cosinnus_organization.models.CosinnusOrganizationGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationGroup</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.slug_field">
+<span class="sig-name descname"><span class="pre">slug_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group__slug'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.slug_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.GroupSelectMixin.slug_url_kwarg">
+<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.GroupSelectMixin.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupAcceptView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">OrganizationGroupAcceptView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupAcceptView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_organization.views.group.OrganizationGroupWithdrawView" title="cosinnus_organization.views.group.OrganizationGroupWithdrawView"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationGroupWithdrawView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupAcceptView.confirm_action">
+<span class="sig-name descname"><span class="pre">confirm_action</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupAcceptView.confirm_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupAcceptView.membership_status">
+<span class="sig-name descname"><span class="pre">membership_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupAcceptView.membership_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupAcceptView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">project/group</span> <span class="pre">is</span> <span class="pre">now</span> <span class="pre">assigned</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">organization</span> <span class="pre">“%(name)s”.</span> <span class="pre">Welcome!'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupAcceptView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupDeclineView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">OrganizationGroupDeclineView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupDeclineView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_organization.views.group.OrganizationGroupWithdrawView" title="cosinnus_organization.views.group.OrganizationGroupWithdrawView"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationGroupWithdrawView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupDeclineView.confirm_action">
+<span class="sig-name descname"><span class="pre">confirm_action</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupDeclineView.confirm_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupDeclineView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'You</span> <span class="pre">have</span> <span class="pre">declined</span> <span class="pre">the</span> <span class="pre">invitation</span> <span class="pre">to</span> <span class="pre">organization</span> <span class="pre">“%(name)s”.'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupDeclineView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">OrganizationGroupDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireAdminMixin" title="cosinnus.views.mixins.group.RequireAdminMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireAdminMixin</span></code></a>, <a class="reference internal" href="#cosinnus_organization.views.group.GroupSelectMixin" title="cosinnus_organization.views.group.GroupSelectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupSelectMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupDeleteView.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupDeleteView.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the delete() method on the fetched object and then redirect to the
+success URL.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupDeleteView.group_attr">
+<span class="sig-name descname"><span class="pre">group_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupDeleteView.group_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupDeleteView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupDeleteView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupDeleteView.membership_status">
+<span class="sig-name descname"><span class="pre">membership_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupDeleteView.membership_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteSelect2View">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">OrganizationGroupInviteSelect2View</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteSelect2View" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Select2View</span></code></p>
+<p>This view is used as API backend to serve the suggestions for the group field.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteSelect2View.check_all_permissions">
+<span class="sig-name descname"><span class="pre">check_all_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteSelect2View.check_all_permissions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sub-classes can use this to raise exception on permission check failures,
+or these checks can be placed in <code class="docutils literal notranslate"><span class="pre">urls.py</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">login_required(SelectClass.as_view())</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpRequest</span></code>) – The Ajax request object.</p></li>
+<li><p><strong>args</strong> – The <code class="docutils literal notranslate"><span class="pre">*args</span></code> passed to <code class="xref py py-meth docutils literal notranslate"><span class="pre">django.views.generic.View.dispatch()</span></code>.</p></li>
+<li><p><strong>kwargs</strong> – The <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> passed to <code class="xref py py-meth docutils literal notranslate"><span class="pre">django.views.generic.View.dispatch()</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Sub-classes should override this. You really do not want random people making
+Http reqeusts to your server, be able to get access to sensitive information.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteSelect2View.get_results">
+<span class="sig-name descname"><span class="pre">get_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteSelect2View.get_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the result for the given search <code class="docutils literal notranslate"><span class="pre">term</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">django.http.HttpRequest</span></code>) – The Ajax request object.</p></li>
+<li><p><strong>term</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – The search term.</p></li>
+<li><p><strong>page</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>) – The page number. If in your last response you had signalled that there are more results,
+then when user scrolls more a new Ajax request would be sent for the same term but with next page
+number. (Page number starts at 1)</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> or None) – <p>Can be anything which persists across the lifecycle of queries for the same search term.
+It is reset to <code class="docutils literal notranslate"><span class="pre">None</span></code> when the term changes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently this is not used by <code class="docutils literal notranslate"><span class="pre">heavy_data.js</span></code>.</p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<p>Expected output is of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">has_more</span><span class="p">,</span> <span class="p">[</span><span class="n">results</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">])</span>
+</pre></div>
+</div>
+<p>When everything is fine then the <cite>err</cite> must be ‘nil’.
+<cite>has_more</cite> should be true if there are more rows.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteSelect2View.group_attr">
+<span class="sig-name descname"><span class="pre">group_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteSelect2View.group_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteSelect2View.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteSelect2View.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">OrganizationGroupInviteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireAdminMixin" title="cosinnus.views.mixins.group.RequireAdminMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireAdminMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">FormView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.group.MultiGroupSelectForm" title="cosinnus.forms.group.MultiGroupSelectForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiGroupSelectForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form is valid, redirect to the supplied URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle GET requests: instantiate a blank version of the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView.get_form_kwargs">
+<span class="sig-name descname"><span class="pre">get_form_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView.get_form_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the keyword arguments for instantiating the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView.group_attr">
+<span class="sig-name descname"><span class="pre">group_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView.group_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView.invite">
+<span class="sig-name descname"><span class="pre">invite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView.invite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupInviteView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/organization/groups.html'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupInviteView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupWithdrawView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">OrganizationGroupWithdrawView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupWithdrawView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_organization.views.group.OrganzationConfirmMixin" title="cosinnus_organization.views.group.OrganzationConfirmMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganzationConfirmMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupWithdrawView.confirm_action">
+<span class="sig-name descname"><span class="pre">confirm_action</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupWithdrawView.confirm_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupWithdrawView.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupWithdrawView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupWithdrawView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupWithdrawView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the supplied success URL.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupWithdrawView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">join</span> <span class="pre">request</span> <span class="pre">was</span> <span class="pre">withdrawn</span> <span class="pre">from</span> <span class="pre">organization</span> <span class="pre">“%(name)s”</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupWithdrawView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupWithdrawView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupWithdrawView.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupsView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">OrganizationGroupsView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupsView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupsView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupsView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the single object into the context dict.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupsView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupsView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupsView.slug_url_kwarg">
+<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupsView.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganizationGroupsView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/organization/groups.html'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganizationGroupsView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganzationConfirmMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">OrganzationConfirmMixin</span></span><a class="headerlink" href="#cosinnus_organization.views.group.OrganzationConfirmMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganzationConfirmMixin.confirm_action">
+<span class="sig-name descname"><span class="pre">confirm_action</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganzationConfirmMixin.confirm_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganzationConfirmMixin.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganzationConfirmMixin.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>We make the allowance to call this by GET if called with ?direct=1 param,
+so that user joins can be automated with a direct link (like after being recruited)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganzationConfirmMixin.get_error_url">
+<span class="sig-name descname"><span class="pre">get_error_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganzationConfirmMixin.get_error_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganzationConfirmMixin.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganzationConfirmMixin.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the supplied success URL.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganzationConfirmMixin.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.group.OrganzationConfirmMixin.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganzationConfirmMixin.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.OrganzationConfirmMixin.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganzationConfirmMixin.slug_url_kwarg">
+<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganzationConfirmMixin.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.OrganzationConfirmMixin.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/organizations/'</span></em><a class="headerlink" href="#cosinnus_organization.views.group.OrganzationConfirmMixin.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.organization_group_accept">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">organization_group_accept</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.organization_group_accept" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.organization_group_decline">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">organization_group_decline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.organization_group_decline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.organization_group_delete">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">organization_group_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.organization_group_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.organization_group_invite">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">organization_group_invite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.organization_group_invite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.organization_group_invite_select2">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">organization_group_invite_select2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.organization_group_invite_select2" title="Permalink to this definition">¶</a></dt>
+<dd><p>This view is used as API backend to serve the suggestions for the group field.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.organization_group_withdraw">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">organization_group_withdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.organization_group_withdraw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.group.organization_groups">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.group.</span></span><span class="sig-name descname"><span class="pre">organization_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.group.organization_groups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_organization.views.membership">
+<span id="cosinnus-organization-views-membership-module"></span><h2>cosinnus_organization.views.membership module<a class="headerlink" href="#module-cosinnus_organization.views.membership" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">CSRFExemptOrganizationJoinView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.CSRFExemptGroupJoinView" title="cosinnus.views.group.CSRFExemptGroupJoinView"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSRFExemptGroupJoinView</span></code></a>, <a class="reference internal" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin" title="cosinnus_organization.views.membership.OrganizationConfirmMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationConfirmMixin</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.membership_status">
+<span class="sig-name descname"><span class="pre">membership_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.membership_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/organizations/'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.CSRFExemptOrganizationJoinView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationConfirmMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationConfirmMixin</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupConfirmMixin" title="cosinnus.views.group.GroupConfirmMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupConfirmMixin</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationConfirmMixin.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>We make the allowance to call this by GET if called with ?direct=1 param,
+so that user joins can be automated with a direct link (like after being recruited)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationConfirmMixin.get_error_url">
+<span class="sig-name descname"><span class="pre">get_error_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin.get_error_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationConfirmMixin.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationConfirmMixin.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationConfirmMixin.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/organizations/'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersSelect2View">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationMembersSelect2View</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersSelect2View" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.select2.GroupMembersView" title="cosinnus.views.select2.GroupMembersView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupMembersView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersSelect2View.group_class">
+<span class="sig-name descname"><span class="pre">group_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersSelect2View.group_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersSelect2View.group_slug_field">
+<span class="sig-name descname"><span class="pre">group_slug_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersSelect2View.group_slug_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationMembersView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupDetailView" title="cosinnus.views.group.GroupDetailView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupDetailView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersView.invite_class">
+<span class="sig-name descname"><span class="pre">invite_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersView.invite_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusUnregisteredUserOrganizationInvite" title="cosinnus_organization.models.CosinnusUnregisteredUserOrganizationInvite"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusUnregisteredUserOrganizationInvite</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersView.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.api.html#cosinnus_organization.api.serializers.OrganizationSimpleSerializer" title="cosinnus_organization.api.serializers.OrganizationSimpleSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationSimpleSerializer</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationMembersView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/organization/organization_detail.html'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationMembersView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserDeleteView" title="cosinnus.views.group.GroupUserDeleteView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserDeleteView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserDeleteView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserDeleteView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserDeleteView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserDeleteView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserDeleteView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserDeleteView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserDeleteView.membership_status">
+<span class="sig-name descname"><span class="pre">membership_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserDeleteView.membership_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserDeleteView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserDeleteView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserInvitationAcceptView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserInvitationAcceptView" title="cosinnus.views.group.GroupUserInvitationAcceptView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserInvitationAcceptView</span></code></a>, <a class="reference internal" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin" title="cosinnus_organization.views.membership.OrganizationConfirmMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationConfirmMixin</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.membership_status">
+<span class="sig-name descname"><span class="pre">membership_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.membership_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.slug_url_kwarg">
+<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationAcceptView.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationDeclineView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserInvitationDeclineView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationDeclineView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserInvitationDeclineView" title="cosinnus.views.group.GroupUserInvitationDeclineView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserInvitationDeclineView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationDeclineView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationDeclineView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationDeclineView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationDeclineView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInvitationDeclineView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInvitationDeclineView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteMultipleView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserInviteMultipleView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteMultipleView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserInviteMultipleView" title="cosinnus.views.group.GroupUserInviteMultipleView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserInviteMultipleView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.membership_status">
+<span class="sig-name descname"><span class="pre">membership_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.membership_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/organization/organization_detail.html'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteMultipleView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserInviteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserInviteView" title="cosinnus.views.group.GroupUserInviteView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserInviteView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteView.membership_status">
+<span class="sig-name descname"><span class="pre">membership_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteView.membership_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserInviteView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/organization/organization_detail.html'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserInviteView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserJoinView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserJoinView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserJoinView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserJoinView" title="cosinnus.views.group.GroupUserJoinView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserJoinView</span></code></a>, <a class="reference internal" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin" title="cosinnus_organization.views.membership.OrganizationConfirmMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationConfirmMixin</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserJoinView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserJoinView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserJoinView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserJoinView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserJoinView.membership_status">
+<span class="sig-name descname"><span class="pre">membership_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserJoinView.membership_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserJoinView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserJoinView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserJoinView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserJoinView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserLeaveView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserLeaveView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserLeaveView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserLeaveView" title="cosinnus.views.group.GroupUserLeaveView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserLeaveView</span></code></a>, <a class="reference internal" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin" title="cosinnus_organization.views.membership.OrganizationConfirmMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationConfirmMixin</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserLeaveView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserLeaveView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserLeaveView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserLeaveView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserLeaveView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserLeaveView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserLeaveView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/organizations/'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserLeaveView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserListView" title="cosinnus.views.group.GroupUserListView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserListView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserListView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserListView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserListView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserListView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserListView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserListView.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.api.html#cosinnus_organization.api.serializers.OrganizationSimpleSerializer" title="cosinnus_organization.api.serializers.OrganizationSimpleSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationSimpleSerializer</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserListView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/organization/organization_user_list.html'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserListView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserUpdateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserUpdateView" title="cosinnus.views.group.GroupUserUpdateView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserUpdateView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserUpdateView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserUpdateView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserUpdateView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserUpdateView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserUpdateView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserUpdateView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserUpdateView.membership_status">
+<span class="sig-name descname"><span class="pre">membership_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserUpdateView.membership_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserUpdateView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserUpdateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserWithdrawView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">OrganizationUserWithdrawView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserWithdrawView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.GroupUserWithdrawView" title="cosinnus.views.group.GroupUserWithdrawView"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupUserWithdrawView</span></code></a>, <a class="reference internal" href="#cosinnus_organization.views.membership.OrganizationConfirmMixin" title="cosinnus_organization.views.membership.OrganizationConfirmMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationConfirmMixin</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserWithdrawView.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserWithdrawView.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserWithdrawView.membership_class">
+<span class="sig-name descname"><span class="pre">membership_class</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserWithdrawView.membership_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationMembership" title="cosinnus_organization.models.CosinnusOrganizationMembership"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationMembership</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserWithdrawView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserWithdrawView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.OrganizationUserWithdrawView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/organizations/'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.OrganizationUserWithdrawView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.UserOrganizationMemberInviteSelect2View">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">UserOrganizationMemberInviteSelect2View</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.UserOrganizationMemberInviteSelect2View" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.UserGroupMemberInviteSelect2View" title="cosinnus.views.group.UserGroupMemberInviteSelect2View"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserGroupMemberInviteSelect2View</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.UserOrganizationMemberInviteSelect2View.group_url_kwarg">
+<span class="sig-name descname"><span class="pre">group_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.membership.UserOrganizationMemberInviteSelect2View.group_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_members">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_members</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_members" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_members_select2">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_members_select2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_members_select2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_add">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_add_api">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_add_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_add_api" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_add_multiple">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_add_multiple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_add_multiple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_delete">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_delete_api">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_delete_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_delete_api" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_invitation_accept">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_invitation_accept</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_invitation_accept" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_invitation_decline">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_invitation_decline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_invitation_decline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_join">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_join" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_join_csrf_exempt">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_join_csrf_exempt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_join_csrf_exempt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_leave">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_leave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_leave" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_list">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_list_api">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_list_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_list_api" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_update">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_update_api">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_update_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_update_api" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.organization_user_withdraw">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">organization_user_withdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.organization_user_withdraw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.membership.user_organization_member_invite_select2">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.membership.</span></span><span class="sig-name descname"><span class="pre">user_organization_member_invite_select2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.membership.user_organization_member_invite_select2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_organization.views.organization">
+<span id="cosinnus-organization-views-organization-module"></span><h2>cosinnus_organization.views.organization module<a class="headerlink" href="#module-cosinnus_organization.views.organization" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.organization.</span></span><span class="sig-name descname"><span class="pre">CosinnusOrganizationFormMixin</span></span><a class="headerlink" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find out which type of CosinnusOrganization (project/society), we’re dealing with here.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.forms.CosinnusOrganizationForm" title="cosinnus_organization.forms.CosinnusOrganizationForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.forms_valid">
+<span class="sig-name descname"><span class="pre">forms_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inlines</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.forms_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.get_form_kwargs">
+<span class="sig-name descname"><span class="pre">get_form_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.get_form_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.inlines">
+<span class="sig-name descname"><span class="pre">inlines</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'cosinnus_organization.forms.CosinnusOrganizationLocationInlineFormset'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'cosinnus_organization.forms.CosinnusOrganizationSocialMediaInlineFormset'&gt;]</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.inlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/organization/organization_form.html'</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.organization.</span></span><span class="sig-name descname"><span class="pre">OrganizationCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationCreateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireLoggedInMixin" title="cosinnus.views.mixins.group.RequireLoggedInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireLoggedInMixin</span></code></a>, <a class="reference internal" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin" title="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationFormMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.avatar.AvatarFormMixin" title="cosinnus.views.mixins.avatar.AvatarFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AvatarFormMixin</span></code></a>, <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.mixins.AdditionalFormsMixin" title="cosinnus.forms.mixins.AdditionalFormsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdditionalFormsMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateWithInlinesView</span></code></p>
+<p>Create View for Organizations</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationCreateView.form_view">
+<span class="sig-name descname"><span class="pre">form_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'add'</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationCreateView.form_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationCreateView.forms_valid">
+<span class="sig-name descname"><span class="pre">forms_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inlines</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationCreateView.forms_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the form and formsets are valid, save the associated models.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationCreateView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationCreateView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationCreateView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationCreateView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationCreateView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Organization</span> <span class="pre">&quot;%(name)s&quot;</span> <span class="pre">was</span> <span class="pre">created</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationCreateView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationCreateView.slug_url_kwarg">
+<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationCreateView.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.organization.</span></span><span class="sig-name descname"><span class="pre">OrganizationDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteGrouplessMixin" title="cosinnus.views.mixins.group.RequireWriteGrouplessMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteGrouplessMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.html#cosinnus.views.group.SamePortalGroupMixin" title="cosinnus.views.group.SamePortalGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamePortalGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxFormsDeleteViewMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationDeleteView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationDeleteView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationDeleteView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">organization</span> <span class="pre">was</span> <span class="pre">deleted</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationDeleteView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationDeleteView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationDeleteView.slug_url_kwarg">
+<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationDeleteView.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationDetailView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.organization.</span></span><span class="sig-name descname"><span class="pre">OrganizationDetailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationDetailView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationDetailView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationDetailView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationDetailView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationDetailView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationDetailView.slug_url_kwarg">
+<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationDetailView.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationEditView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.organization.</span></span><span class="sig-name descname"><span class="pre">OrganizationEditView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationEditView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteGrouplessMixin" title="cosinnus.views.mixins.group.RequireWriteGrouplessMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteGrouplessMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.avatar.AvatarFormMixin" title="cosinnus.views.mixins.avatar.AvatarFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AvatarFormMixin</span></code></a>, <a class="reference internal" href="#cosinnus_organization.views.organization.CosinnusOrganizationFormMixin" title="cosinnus_organization.views.organization.CosinnusOrganizationFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationFormMixin</span></code></a>, <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.mixins.AdditionalFormsMixin" title="cosinnus.forms.mixins.AdditionalFormsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdditionalFormsMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateWithInlinesView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationEditView.form_view">
+<span class="sig-name descname"><span class="pre">form_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'edit'</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationEditView.form_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationEditView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationEditView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationEditView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationEditView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.OrganizationEditView.slug_url_kwarg">
+<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'organization'</span></em><a class="headerlink" href="#cosinnus_organization.views.organization.OrganizationEditView.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.organization_create">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.organization.</span></span><span class="sig-name descname"><span class="pre">organization_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.organization_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create View for Organizations</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.organization_delete">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.organization.</span></span><span class="sig-name descname"><span class="pre">organization_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.organization_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.organization_detail">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.organization.</span></span><span class="sig-name descname"><span class="pre">organization_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.organization_detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_organization.views.organization.organization_edit">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_organization.views.organization.</span></span><span class="sig-name descname"><span class="pre">organization_edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.views.organization.organization_edit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_organization.views">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_organization.views" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus_organization.html">cosinnus_organization package</a><ul>
+      <li>Previous: <a href="cosinnus_organization.api.html" title="previous chapter">cosinnus_organization.api package</a></li>
+      <li>Next: <a href="cosinnus_stream.html" title="next chapter">cosinnus_stream package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_organization.views.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

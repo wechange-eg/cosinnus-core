@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.utils.fabric package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.views package" href="cosinnus.views.html" />
+    <link rel="prev" title="cosinnus.utils package" href="cosinnus.utils.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-utils-fabric-package">
+<h1>cosinnus.utils.fabric package<a class="headerlink" href="#cosinnus-utils-fabric-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.utils.fabric.fabric_tasks">
+<span id="cosinnus-utils-fabric-fabric-tasks-module"></span><h2>cosinnus.utils.fabric.fabric_tasks module<a class="headerlink" href="#module-cosinnus.utils.fabric.fabric_tasks" title="Permalink to this heading">¶</a></h2>
+<p>Cosinnus fabric tasks definitions.</p>
+<p>How to use: define a <cite>fabfile.py</cite> in your project with one task per target server. Example fabfile.py:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+from fabric import task
+from cosinnus.utils.fabric.fabric_utils import CosinnusFabricConnection, setup_env
+from cosinnus.utils.fabric.fabric_tasks import *</p>
+<p>&#64;task
+def staging(_ctx):</p>
+<blockquote>
+<div><dl class="simple">
+<dt>env = setup_env(</dt><dd><p>portal_name=’my_portal’,
+domain=’my_portal.de’,
+pull_branch=’my_branch’,</p>
+</dd>
+</dl>
+<p>)</p>
+</div></blockquote>
+<p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
+<p>Then invoke any task defined in this file by calling <cite>fab</cite>. 
+Usually you want to only call the high level tasks, (see “Deployment tasks” below),
+unless you want to chain individual small tasks to perform a custom execution.</p>
+<p>Examples:</p>
+<p><cite>fab staging hotdeploy</cite> (fast deploy for small changes)</p>
+<p><cite>fab staging deploy</cite> (proper deploy with downtime banner)</p>
+<p><cite>fab staging pull restart</cite> (custom execution)</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.fabric.fabric_tasks.check_confirmation">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.fabric.fabric_tasks.</span></span><span class="sig-name descname"><span class="pre">check_confirmation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.fabric.fabric_tasks.check_confirmation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blocks execution with a shell confirmation prompt</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.utils.fabric.fabric_utils">
+<span id="cosinnus-utils-fabric-fabric-utils-module"></span><h2>cosinnus.utils.fabric.fabric_utils module<a class="headerlink" href="#module-cosinnus.utils.fabric.fabric_utils" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.utils.fabric.fabric_utils.CosinnusFabricConnection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.fabric.fabric_utils.</span></span><span class="sig-name descname"><span class="pre">CosinnusFabricConnection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gateway</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connect_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connect_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inline_ssh_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.fabric.fabric_utils.CosinnusFabricConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Connection</span></code></p>
+<p>Wrapper for the fabric Connection object that prints commands to stdout
+as they are being executed.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.fabric.fabric_utils.CosinnusFabricConnection.cd">
+<span class="sig-name descname"><span class="pre">cd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.fabric.fabric_utils.CosinnusFabricConnection.cd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context manager that keeps directory state when executing commands.</p>
+<p>Any calls to <cite>run</cite>, <cite>sudo</cite>, within the wrapped block will implicitly
+have a string similar to <code class="docutils literal notranslate"><span class="pre">&quot;cd</span> <span class="pre">&lt;path&gt;</span> <span class="pre">&amp;&amp;</span> <span class="pre">&quot;</span></code> prefixed in order to give
+the sense that there is actually statefulness involved.</p>
+<p>Because use of <cite>cd</cite> affects all such invocations, any code making use
+of the <cite>cwd</cite> property will also be affected by use of <cite>cd</cite>.</p>
+<p>Like the actual ‘cd’ shell builtin, <cite>cd</cite> may be called with relative
+paths (keep in mind that your default starting directory is your user’s
+<code class="docutils literal notranslate"><span class="pre">$HOME</span></code>) and may be nested as well.</p>
+<p>Below is a “normal” attempt at using the shell ‘cd’, which doesn’t work
+since all commands are executed in individual subprocesses – state is
+<strong>not</strong> kept between invocations of <cite>run</cite> or <cite>sudo</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;cd /var/www&#39;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above snippet will list the contents of the user’s <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">/var/www</span></code>. With <cite>cd</cite>, however, it will work as expected:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">cd</span><span class="p">(</span><span class="s1">&#39;/var/www&#39;</span><span class="p">):</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">)</span>  <span class="c1"># Turns into &quot;cd /var/www &amp;&amp; ls&quot;</span>
+</pre></div>
+</div>
+<p>Finally, a demonstration (see inline comments) of nesting:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">cd</span><span class="p">(</span><span class="s1">&#39;/var/www&#39;</span><span class="p">):</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">)</span> <span class="c1"># cd /var/www &amp;&amp; ls</span>
+    <span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">cd</span><span class="p">(</span><span class="s1">&#39;website1&#39;</span><span class="p">):</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">)</span>  <span class="c1"># cd /var/www/website1 &amp;&amp; ls</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Space characters will be escaped automatically to make dealing with
+such directory names easier.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.0.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.5: </span>Explicitly cast the <code class="docutils literal notranslate"><span class="pre">path</span></code> argument (the only argument) to a
+string; this allows any object defining <code class="docutils literal notranslate"><span class="pre">__str__</span></code> to be handed in
+(such as the various <code class="docutils literal notranslate"><span class="pre">Path</span></code> objects out there), and not just
+string literals.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.fabric.fabric_utils.CosinnusFabricConnection.prefix">
+<span class="sig-name descname"><span class="pre">prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.fabric.fabric_utils.CosinnusFabricConnection.prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prefix all nested <cite>run</cite>/<cite>sudo</cite> commands with given command plus <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code>.</p>
+<p>Most of the time, you’ll want to be using this alongside a shell script
+which alters shell state, such as ones which export or alter shell
+environment variables.</p>
+<p>For example, one of the most common uses of this tool is with the
+<code class="docutils literal notranslate"><span class="pre">workon</span></code> command from <a class="reference external" href="https://virtualenvwrapper.readthedocs.io/en/latest/">virtualenvwrapper</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">prefix</span><span class="p">(</span><span class="s1">&#39;workon myvenv&#39;</span><span class="p">):</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;./manage.py migrate&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the above snippet, the actual shell command run would be this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ workon myvenv &amp;&amp; ./manage.py migrate
+</pre></div>
+</div>
+<p>This context manager is compatible with <cite>cd</cite>, so if your virtualenv
+doesn’t <code class="docutils literal notranslate"><span class="pre">cd</span></code> in its <code class="docutils literal notranslate"><span class="pre">postactivate</span></code> script, you could do the
+following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">cd</span><span class="p">(</span><span class="s1">&#39;/path/to/app&#39;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">prefix</span><span class="p">(</span><span class="s1">&#39;workon myvenv&#39;</span><span class="p">):</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;./manage.py migrate&#39;</span><span class="p">)</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;./manage.py loaddata fixture&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Which would result in executions like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /path/to/app &amp;&amp; workon myvenv &amp;&amp; ./manage.py migrate
+$ cd /path/to/app &amp;&amp; workon myvenv &amp;&amp; ./manage.py loaddata fixture
+</pre></div>
+</div>
+<p>Finally, as alluded to above, <cite>prefix</cite> may be nested if desired, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">prefix</span><span class="p">(</span><span class="s1">&#39;workon myenv&#39;</span><span class="p">):</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">c</span><span class="o">.</span><span class="n">prefix</span><span class="p">(</span><span class="s1">&#39;source /some/script&#39;</span><span class="p">):</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;touch a_file&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ workon myenv &amp;&amp; ls
+$ workon myenv &amp;&amp; source /some/script &amp;&amp; touch a_file
+</pre></div>
+</div>
+<p>Contrived, but hopefully illustrative.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.fabric.fabric_utils.CosinnusFabricConnection.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.fabric.fabric_utils.CosinnusFabricConnection.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a shell command on the remote end of this connection.</p>
+<p>This method wraps an SSH-capable implementation of
+<cite>invoke.runners.Runner.run</cite>; see its documentation for details.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>There are a few spots where Fabric departs from Invoke’s default
+settings/behaviors; they are documented under
+<cite>.Config.global_defaults</cite>.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.0.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.fabric.fabric_utils.cosinnus_fabric_task">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.fabric.fabric_utils.</span></span><span class="sig-name descname"><span class="pre">cosinnus_fabric_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.fabric.fabric_utils.cosinnus_fabric_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for fabric.task that prints out the task about to execute to stdout.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.fabric.fabric_utils.get_env">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.fabric.fabric_utils.</span></span><span class="sig-name descname"><span class="pre">get_env</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.fabric.fabric_utils.get_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the env used for all cosinnus fabric connections</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.fabric.fabric_utils.setup_env">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.fabric.fabric_utils.</span></span><span class="sig-name descname"><span class="pre">setup_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">portal_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_branch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosinnus_pull_branch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confirm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_remote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'origin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosinnus_pull_remote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'origin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frontend_pull_branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frontend_pull_remote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'origin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legacy_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_requirements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'requirements-production.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_unit_commands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.fabric.fabric_utils.setup_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up the env with all variables needed to run cosinnus 
+fabric commands.
+&#64;param portal_name: the name for the user and portal instance
+&#64;param domain: the URL domain for the portal, for SSH connections and</p>
+<blockquote>
+<div><p>on-server paths</p>
+</div></blockquote>
+<p>&#64;param pull_branch: the branch that the main repo will be pulled from
+&#64;param cosinnus_pull_branch: the branch that the cosinnus repo will be pulled from on updates</p>
+<blockquote>
+<div><p>(see <cite>hotdeploy()</cite> for further explanations)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>&#64;param base_path: if the on-server file location path for the portal</dt><dd><p>is non-default, use this argument to override it</p>
+</dd>
+</dl>
+<p>&#64;param pull_remote: used to override non-origin git pulls
+&#64;param cosinnus_pull_remote: used to override non-origin git pulls for the cosinnus-core repo
+&#64;param legacy_mode: set this to True for deploys on portals that</p>
+<blockquote>
+<div><p>do not have the v3 redesign devops architecture yet (pip instead of poetry, etc)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>&#64;param special_requirements: if run in <cite>legacy_mode == True</cite>, this can be used to change</dt><dd><p>the requirements file</p>
+</dd>
+</dl>
+<p>&#64;param new_unit_commands: set to True to use the newer, unified configuration for unit commands.</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.utils.fabric">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.utils.fabric" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+  <li><a href="cosinnus.utils.html">cosinnus.utils package</a><ul>
+      <li>Previous: <a href="cosinnus.utils.html" title="previous chapter">cosinnus.utils package</a></li>
+      <li>Next: <a href="cosinnus.views.html" title="next chapter">cosinnus.views package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.utils.fabric.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_etherpad package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_etherpad.tests package" href="cosinnus_etherpad.tests.html" />
+    <link rel="prev" title="cosinnus_cloud.utils package" href="cosinnus_cloud.utils.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-etherpad-package">
+<h1>cosinnus_etherpad package<a class="headerlink" href="#cosinnus-etherpad-package" title="Permalink to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_etherpad.tests.html">cosinnus_etherpad.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.tests.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.tests.form_tests.html">cosinnus_etherpad.tests.form_tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.form_tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.form_tests.html#module-cosinnus_etherpad.tests.form_tests.test_etherpadform">cosinnus_etherpad.tests.form_tests.test_etherpadform module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.form_tests.html#module-cosinnus_etherpad.tests.form_tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.tests.manager_tests.html">cosinnus_etherpad.tests.manager_tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.manager_tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.manager_tests.html#module-cosinnus_etherpad.tests.manager_tests.test_etherpadmanager">cosinnus_etherpad.tests.manager_tests.test_etherpadmanager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.manager_tests.html#module-cosinnus_etherpad.tests.manager_tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.tests.model_tests.html">cosinnus_etherpad.tests.model_tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.model_tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.model_tests.html#module-cosinnus_etherpad.tests.model_tests.test_etherpad">cosinnus_etherpad.tests.model_tests.test_etherpad module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.model_tests.html#module-cosinnus_etherpad.tests.model_tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html">cosinnus_etherpad.tests.view_tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#module-cosinnus_etherpad.tests.view_tests.base">cosinnus_etherpad.tests.view_tests.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#cosinnus-etherpad-tests-view-tests-test-add-module">cosinnus_etherpad.tests.view_tests.test_add module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#cosinnus-etherpad-tests-view-tests-test-archive-module">cosinnus_etherpad.tests.view_tests.test_archive module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#cosinnus-etherpad-tests-view-tests-test-delete-module">cosinnus_etherpad.tests.view_tests.test_delete module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#cosinnus-etherpad-tests-view-tests-test-detail-module">cosinnus_etherpad.tests.view_tests.test_detail module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#cosinnus-etherpad-tests-view-tests-test-edit-module">cosinnus_etherpad.tests.view_tests.test_edit module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#cosinnus-etherpad-tests-view-tests-test-index-module">cosinnus_etherpad.tests.view_tests.test_index module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#cosinnus-etherpad-tests-view-tests-test-list-module">cosinnus_etherpad.tests.view_tests.test_list module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.tests.view_tests.html#module-cosinnus_etherpad.tests.view_tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.tests.html#module-cosinnus_etherpad.tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cosinnus_etherpad.utils.html">cosinnus_etherpad.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.utils.html#module-cosinnus_etherpad.utils.ethercalc_client">cosinnus_etherpad.utils.ethercalc_client module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc"><code class="docutils literal notranslate"><span class="pre">EtherCalc</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc.cells"><code class="docutils literal notranslate"><span class="pre">EtherCalc.cells()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc.command"><code class="docutils literal notranslate"><span class="pre">EtherCalc.command()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc.create"><code class="docutils literal notranslate"><span class="pre">EtherCalc.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc.export"><code class="docutils literal notranslate"><span class="pre">EtherCalc.export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc.get"><code class="docutils literal notranslate"><span class="pre">EtherCalc.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc.post"><code class="docutils literal notranslate"><span class="pre">EtherCalc.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc.put"><code class="docutils literal notranslate"><span class="pre">EtherCalc.put()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc.update"><code class="docutils literal notranslate"><span class="pre">EtherCalc.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.EtherCalc.verify"><code class="docutils literal notranslate"><span class="pre">EtherCalc.verify</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.is_number"><code class="docutils literal notranslate"><span class="pre">is_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.set"><code class="docutils literal notranslate"><span class="pre">set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.ethercalc_client.ss_to_xy"><code class="docutils literal notranslate"><span class="pre">ss_to_xy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.utils.html#module-cosinnus_etherpad.utils.etherpad_client">cosinnus_etherpad.utils.etherpad_client module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.etherpad_client.EtherpadException"><code class="docutils literal notranslate"><span class="pre">EtherpadException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.etherpad_client.EtherpadLiteClient"><code class="docutils literal notranslate"><span class="pre">EtherpadLiteClient</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.etherpad_client.utf8_encode"><code class="docutils literal notranslate"><span class="pre">utf8_encode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.etherpad_client.utf8_encode_dict_values"><code class="docutils literal notranslate"><span class="pre">utf8_encode_dict_values()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.utils.html#module-cosinnus_etherpad.utils.renderer">cosinnus_etherpad.utils.renderer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.renderer.EtherpadRenderer"><code class="docutils literal notranslate"><span class="pre">EtherpadRenderer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.renderer.EtherpadRenderer.model"><code class="docutils literal notranslate"><span class="pre">EtherpadRenderer.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.renderer.EtherpadRenderer.render"><code class="docutils literal notranslate"><span class="pre">EtherpadRenderer.render()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.renderer.EtherpadRenderer.render_list_for_user"><code class="docutils literal notranslate"><span class="pre">EtherpadRenderer.render_list_for_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.renderer.EtherpadRenderer.template"><code class="docutils literal notranslate"><span class="pre">EtherpadRenderer.template</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.renderer.EtherpadRenderer.template_list"><code class="docutils literal notranslate"><span class="pre">EtherpadRenderer.template_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.renderer.EtherpadRenderer.template_single"><code class="docutils literal notranslate"><span class="pre">EtherpadRenderer.template_single</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_etherpad.utils.html#cosinnus_etherpad.utils.renderer.EtherpadRenderer.template_v2"><code class="docutils literal notranslate"><span class="pre">EtherpadRenderer.template_v2</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.utils.html#module-cosinnus_etherpad.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_etherpad.admin">
+<span id="cosinnus-etherpad-admin-module"></span><h2>cosinnus_etherpad.admin module<a class="headerlink" href="#module-cosinnus_etherpad.admin" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.admin.EtherpadAdmin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.admin.</span></span><span class="sig-name descname"><span class="pre">EtherpadAdmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admin_site</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.admin.EtherpadAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.html#cosinnus.admin.BaseHierarchicalTaggableAdmin" title="cosinnus.admin.BaseHierarchicalTaggableAdmin"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHierarchicalTaggableAdmin</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.admin.EtherpadAdmin.list_display">
+<span class="sig-name descname"><span class="pre">list_display</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['title',</span> <span class="pre">'group',</span> <span class="pre">'creator',</span> <span class="pre">'created',</span> <span class="pre">'path',</span> <span class="pre">'is_container',</span> <span class="pre">'type']</span></em><a class="headerlink" href="#cosinnus_etherpad.admin.EtherpadAdmin.list_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.admin.EtherpadAdmin.list_filter">
+<span class="sig-name descname"><span class="pre">list_filter</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['group__portal',</span> <span class="pre">'is_container',</span> <span class="pre">'type']</span></em><a class="headerlink" href="#cosinnus_etherpad.admin.EtherpadAdmin.list_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_etherpad.admin.EtherpadAdmin.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_etherpad.admin.EtherpadAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.admin.EtherpadAdmin.reinit_pads">
+<span class="sig-name descname"><span class="pre">reinit_pads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.admin.EtherpadAdmin.reinit_pads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts this CosinnusGroup’s type</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.apps">
+<span id="cosinnus-etherpad-apps-module"></span><h2>cosinnus_etherpad.apps module<a class="headerlink" href="#module-cosinnus_etherpad.apps" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.apps.CosinnusEtherpadAppConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.apps.</span></span><span class="sig-name descname"><span class="pre">CosinnusEtherpadAppConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.apps.CosinnusEtherpadAppConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.apps.CosinnusEtherpadAppConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_etherpad'</span></em><a class="headerlink" href="#cosinnus_etherpad.apps.CosinnusEtherpadAppConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.apps.CosinnusEtherpadAppConfig.ready">
+<span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.apps.CosinnusEtherpadAppConfig.ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method in subclasses to run code when Django starts.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.apps.CosinnusEtherpadAppConfig.verbose_name">
+<span class="sig-name descname"><span class="pre">verbose_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Cosinnus</span> <span class="pre">Etherpad'</span></em><a class="headerlink" href="#cosinnus_etherpad.apps.CosinnusEtherpadAppConfig.verbose_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.conf">
+<span id="cosinnus-etherpad-conf-module"></span><h2>cosinnus_etherpad.conf module<a class="headerlink" href="#module-cosinnus_etherpad.conf" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.conf.CosinnusEtherpadConf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.conf.</span></span><span class="sig-name descname"><span class="pre">CosinnusEtherpadConf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.conf.CosinnusEtherpadConf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConf</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.conf.CosinnusEtherpadConf.API_KEY">
+<span class="sig-name descname"><span class="pre">API_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#cosinnus_etherpad.conf.CosinnusEtherpadConf.API_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.conf.CosinnusEtherpadConf.BASE_URL">
+<span class="sig-name descname"><span class="pre">BASE_URL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://pad.localhost/api'</span></em><a class="headerlink" href="#cosinnus_etherpad.conf.CosinnusEtherpadConf.BASE_URL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.conf.CosinnusEtherpadConf.ENABLE_ETHERCALC">
+<span class="sig-name descname"><span class="pre">ENABLE_ETHERCALC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus_etherpad.conf.CosinnusEtherpadConf.ENABLE_ETHERCALC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.conf.CosinnusEtherpadConf.ETHERCALC_BASE_URL">
+<span class="sig-name descname"><span class="pre">ETHERCALC_BASE_URL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://calc.localhost'</span></em><a class="headerlink" href="#cosinnus_etherpad.conf.CosinnusEtherpadConf.ETHERCALC_BASE_URL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.conf.CosinnusEtherpadConf.FILE_PATH">
+<span class="sig-name descname"><span class="pre">FILE_PATH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/etherpad'</span></em><a class="headerlink" href="#cosinnus_etherpad.conf.CosinnusEtherpadConf.FILE_PATH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.conf.CosinnusEtherpadConf.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_etherpad.conf.CosinnusEtherpadConf.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.conf.CosinnusEtherpadConf.PREFIX_TITLE">
+<span class="sig-name descname"><span class="pre">PREFIX_TITLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Etherpad:</span> <span class="pre">'</span></em><a class="headerlink" href="#cosinnus_etherpad.conf.CosinnusEtherpadConf.PREFIX_TITLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.cosinnus_app">
+<span id="cosinnus-etherpad-cosinnus-app-module"></span><h2>cosinnus_etherpad.cosinnus_app module<a class="headerlink" href="#module-cosinnus_etherpad.cosinnus_app" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.cosinnus_app.register">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.cosinnus_app.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.cosinnus_app.register" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.cosinnus_notifications">
+<span id="cosinnus-etherpad-cosinnus-notifications-module"></span><h2>cosinnus_etherpad.cosinnus_notifications module<a class="headerlink" href="#module-cosinnus_etherpad.cosinnus_notifications" title="Permalink to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="cosinnus_etherpad.cosinnus_notifications.followed_group_etherpad_created">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.cosinnus_notifications.</span></span><span class="sig-name descname"><span class="pre">followed_group_etherpad_created</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_etherpad.cosinnus_notifications.followed_group_etherpad_created" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notification definitions.
+These will be picked up by cosinnus_notfications automatically, as long as the 
+variable ‘notifications’ is present in the module ‘&lt;app_name&gt;/cosinnus_notifications.py’.</p>
+<dl class="simple">
+<dt>Both the mail and subject template will be provided with the following context items:</dt><dd><p>:receiver django.auth.User who receives the notification mail
+:sender django.auth.User whose action caused the notification to trigger
+:receiver_name Convenience, full name of the receiver
+:sender_name Convenience, full name of the sender
+:object The object that was created/changed/modified and which the notification is about.
+:object_url The url of the object, if defined by get_absolute_url()
+:object_name The title of the object (only available if it is a BaseTaggableObject)
+:group_name The name of the group the object is housed in (only available if it is a BaseTaggableObject)
+:site_name Current django site’s name
+:domain_url The complete base domain needed to prefix URLs. (eg: ‘<a class="reference external" href="http://sinnwerkstatt.com">http://sinnwerkstatt.com</a>’)
+:notification_settings_url The URL to the cosinnus notification settings page.
+:site Current django site
+:protocol Current portocol, ‘http’ or ‘https’</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.dashboard">
+<span id="cosinnus-etherpad-dashboard-module"></span><h2>cosinnus_etherpad.dashboard module<a class="headerlink" href="#module-cosinnus_etherpad.dashboard" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.dashboard.</span></span><span class="sig-name descname"><span class="pre">Latest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.dashboard.DashboardWidget" title="cosinnus.utils.dashboard.DashboardWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidget</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest.app_name">
+<span class="sig-name descname"><span class="pre">app_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'etherpad'</span></em><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.app_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.dashboard.LatestEtherpadsForm" title="cosinnus_etherpad.dashboard.LatestEtherpadsForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatestEtherpadsForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+if has_more == False, the receiving widget will assume no further data can be loaded.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Last</span> <span class="pre">accessed</span> <span class="pre">Etherpads'</span></em><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest.title_url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title_url</span></span><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.title_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest.user_model_attr">
+<span class="sig-name descname"><span class="pre">user_model_attr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.user_model_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest.widget_name">
+<span class="sig-name descname"><span class="pre">widget_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'latest'</span></em><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.widget_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.LatestEtherpadsForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.dashboard.</span></span><span class="sig-name descname"><span class="pre">LatestEtherpadsForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.dashboard.LatestEtherpadsForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.dashboard.DashboardWidgetForm" title="cosinnus.forms.dashboard.DashboardWidgetForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">DashboardWidgetForm</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.LatestEtherpadsForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'link_label':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_icon':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_title':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_etherpad.dashboard.LatestEtherpadsForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.LatestEtherpadsForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'link_label':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_icon':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'widget_title':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_etherpad.dashboard.LatestEtherpadsForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.LatestEtherpadsForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#cosinnus_etherpad.dashboard.LatestEtherpadsForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.filters">
+<span id="cosinnus-etherpad-filters-module"></span><h2>cosinnus_etherpad.filters module<a class="headerlink" href="#module-cosinnus_etherpad.filters" title="Permalink to this heading">¶</a></h2>
+<p>Created on 05.08.2014</p>
+<p>&#64;author: Sascha</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.filters.EtherpadFilter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.filters.</span></span><span class="sig-name descname"><span class="pre">EtherpadFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">queryset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.filters.EtherpadFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.filters.CosinnusFilterSet" title="cosinnus.views.mixins.filters.CosinnusFilterSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterSet</span></code></a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.filters.EtherpadFilter.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_etherpad.filters.EtherpadFilter.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.filters.EtherpadFilter.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['creator',</span> <span class="pre">'type',</span> <span class="pre">'o']</span></em><a class="headerlink" href="#cosinnus_etherpad.filters.EtherpadFilter.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.filters.EtherpadFilter.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.filters.EtherpadFilter.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.filters.EtherpadFilter.base_filters">
+<span class="sig-name descname"><span class="pre">base_filters</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'creator':</span> <span class="pre">&lt;cosinnus.forms.filters.AllObjectsFilter</span> <span class="pre">object&gt;,</span> <span class="pre">'o':</span> <span class="pre">&lt;cosinnus.views.mixins.filters.CosinnusOrderingFilter</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django_filters.filters.ChoiceFilter</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_etherpad.filters.EtherpadFilter.base_filters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.filters.EtherpadFilter.declared_filters">
+<span class="sig-name descname"><span class="pre">declared_filters</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'creator':</span> <span class="pre">&lt;cosinnus.forms.filters.AllObjectsFilter</span> <span class="pre">object&gt;,</span> <span class="pre">'o':</span> <span class="pre">&lt;cosinnus.views.mixins.filters.CosinnusOrderingFilter</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django_filters.filters.ChoiceFilter</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_etherpad.filters.EtherpadFilter.declared_filters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.forms">
+<span id="cosinnus-etherpad-forms-module"></span><h2>cosinnus_etherpad.forms module<a class="headerlink" href="#module-cosinnus_etherpad.forms" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_etherpad.hooks">
+<span id="cosinnus-etherpad-hooks-module"></span><h2>cosinnus_etherpad.hooks module<a class="headerlink" href="#module-cosinnus_etherpad.hooks" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_etherpad.managers">
+<span id="cosinnus-etherpad-managers-module"></span><h2>cosinnus_etherpad.managers module<a class="headerlink" href="#module-cosinnus_etherpad.managers" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.managers.EtherpadManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.managers.</span></span><span class="sig-name descname"><span class="pre">EtherpadManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.managers.EtherpadManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Manager</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.managers.EtherpadManager.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.managers.EtherpadManager.tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.models">
+<span id="cosinnus-etherpad-models-module"></span><h2>cosinnus_etherpad.models module<a class="headerlink" href="#module-cosinnus_etherpad.models" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.models.</span></span><span class="sig-name descname"><span class="pre">Ethercalc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">media_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_modified</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_action_user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_container</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_mapper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_accessed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad.DoesNotExist" title="cosinnus_etherpad.models.Etherpad.DoesNotExist"><code class="xref py py-class docutils literal notranslate"><span class="pre">DoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad.MultipleObjectsReturned" title="cosinnus_etherpad.models.Etherpad.MultipleObjectsReturned"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.PAD_MODEL_TYPE">
+<span class="sig-name descname"><span class="pre">PAD_MODEL_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.PAD_MODEL_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.content">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the content of the pad as HTML. 
+&#64;raise Exception: Thrown when the content could not be retrieved. The type of exception depends on the client used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.get_current">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.get_current" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a queryset of the current calcs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.get_icon">
+<span class="sig-name descname"><span class="pre">get_icon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.get_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the font-awesome icon specific to this object type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.get_pad_url">
+<span class="sig-name descname"><span class="pre">get_pad_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.get_pad_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.get_user_session_id">
+<span class="sig-name descname"><span class="pre">get_user_session_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.get_user_session_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.init_client">
+<span class="sig-name descname"><span class="pre">init_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.init_client" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.likes">
+<span class="sig-name descname"><span class="pre">likes</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.likes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the one-to-many relation created
+by GenericRelation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">GenericRelation</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">post.comments</span></code> is a ReverseGenericManyToOneDescriptor instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;cosinnus_etherpad.models.EthercalcManager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.reinit_pad">
+<span class="sig-name descname"><span class="pre">reinit_pad</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.reinit_pad" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Ethercalc.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allow_type_change</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Ethercalc.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current instance. Override this in a subclass if you want to
+control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EthercalcManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.models.</span></span><span class="sig-name descname"><span class="pre">EthercalcManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.EthercalcManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.managers.EtherpadManager" title="cosinnus_etherpad.managers.EtherpadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtherpadManager</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EthercalcManager.get_query_set">
+<span class="sig-name descname"><span class="pre">get_query_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.EthercalcManager.get_query_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new QuerySet object. Subclasses can override this method to
+customize the behavior of the Manager.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EthercalcManager.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.EthercalcManager.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new QuerySet object. Subclasses can override this method to
+customize the behavior of the Manager.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.models.</span></span><span class="sig-name descname"><span class="pre">Etherpad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.models.html#cosinnus.models.tagged.BaseHierarchicalTaggableObjectModel" title="cosinnus.models.tagged.BaseHierarchicalTaggableObjectModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHierarchicalTaggableObjectModel</span></code></a>, <a class="reference internal" href="cosinnus.models.html#cosinnus.models.tagged.LikeableObjectMixin" title="cosinnus.models.tagged.LikeableObjectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">LikeableObjectMixin</span></code></a></p>
+<p>Model representing an Etherpad pad.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.PAD_MODEL_TYPE">
+<span class="sig-name descname"><span class="pre">PAD_MODEL_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.PAD_MODEL_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.SORT_FIELDS_ALIASES">
+<span class="sig-name descname"><span class="pre">SORT_FIELDS_ALIASES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('title',</span> <span class="pre">'title')]</span></em><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.SORT_FIELDS_ALIASES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.attached_objects">
+<span class="sig-name descname"><span class="pre">attached_objects</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.attached_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.content">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the content of the pad as HTML. 
+&#64;raise Exception: Thrown when the content could not be retrieved. The type of exception depends on the client used.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.created">
+<span class="sig-name descname"><span class="pre">created</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.created" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.creator">
+<span class="sig-name descname"><span class="pre">creator</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.creator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.creator_id">
+<span class="sig-name descname"><span class="pre">creator_id</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.creator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_absolute_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_content">
+<span class="sig-name descname"><span class="pre">get_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Safe method to return the content of this pad. Will never throw an exception.
+&#64;return: None if an exception occured or the pad server could not be reached.</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">&lt;content&gt;:str</span></code> as content (at least ‘’ for an empty pad).</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_current">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_current" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a queryset of the current upcoming events</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_delete_url">
+<span class="sig-name descname"><span class="pre">get_delete_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_delete_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to get_absolute_url, this returns the URL for this object’s implemented delete view.
+Needs to be set by a specific implementation of BaseTaggableObjectModel</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_edit_url">
+<span class="sig-name descname"><span class="pre">get_edit_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_edit_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_icon">
+<span class="sig-name descname"><span class="pre">get_icon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the font-awesome icon specific to this object type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_next_by_created">
+<span class="sig-name descname"><span class="pre">get_next_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_next_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_next_by_last_accessed">
+<span class="sig-name descname"><span class="pre">get_next_by_last_accessed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_accessed&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_next_by_last_accessed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_next_by_last_action">
+<span class="sig-name descname"><span class="pre">get_next_by_last_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_action&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_next_by_last_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_next_by_last_modified">
+<span class="sig-name descname"><span class="pre">get_next_by_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_modified&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_next_by_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_pad_url">
+<span class="sig-name descname"><span class="pre">get_pad_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_pad_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_previous_by_created">
+<span class="sig-name descname"><span class="pre">get_previous_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_previous_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_previous_by_last_accessed">
+<span class="sig-name descname"><span class="pre">get_previous_by_last_accessed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_accessed&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_previous_by_last_accessed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_previous_by_last_action">
+<span class="sig-name descname"><span class="pre">get_previous_by_last_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_action&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_previous_by_last_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_previous_by_last_modified">
+<span class="sig-name descname"><span class="pre">get_previous_by_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">last_modified&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_previous_by_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_type_display">
+<span class="sig-name descname"><span class="pre">get_type_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.PositiveSmallIntegerField:</span> <span class="pre">type&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_type_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.get_user_session_id">
+<span class="sig-name descname"><span class="pre">get_user_session_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.get_user_session_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.grant_extra_read_permissions">
+<span class="sig-name descname"><span class="pre">grant_extra_read_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.grant_extra_read_permissions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group members may read etherpads if they are not private</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.group">
+<span class="sig-name descname"><span class="pre">group</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.group_id">
+<span class="sig-name descname"><span class="pre">group_id</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.group_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.group_mapper">
+<span class="sig-name descname"><span class="pre">group_mapper</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.group_mapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.init_client">
+<span class="sig-name descname"><span class="pre">init_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.init_client" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.is_container">
+<span class="sig-name descname"><span class="pre">is_container</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.is_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.last_accessed">
+<span class="sig-name descname"><span class="pre">last_accessed</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.last_accessed" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.last_action">
+<span class="sig-name descname"><span class="pre">last_action</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.last_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.last_action_user">
+<span class="sig-name descname"><span class="pre">last_action_user</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.last_action_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.last_action_user_id">
+<span class="sig-name descname"><span class="pre">last_action_user_id</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.last_action_user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.last_modified">
+<span class="sig-name descname"><span class="pre">last_modified</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.last_modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.likes">
+<span class="sig-name descname"><span class="pre">likes</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.likes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the one-to-many relation created
+by GenericRelation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">GenericRelation</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">post.comments</span></code> is a ReverseGenericManyToOneDescriptor instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.media_tag">
+<span class="sig-name descname"><span class="pre">media_tag</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.media_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a one-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Restaurant.place</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardOneToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.media_tag_id">
+<span class="sig-name descname"><span class="pre">media_tag_id</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.media_tag_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;cosinnus_etherpad.managers.EtherpadManager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.pad_id">
+<span class="sig-name descname"><span class="pre">pad_id</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.pad_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.reinit_pad">
+<span class="sig-name descname"><span class="pre">reinit_pad</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.reinit_pad" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current instance. Override this in a subclass if you want to
+control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.set_pad_type">
+<span class="sig-name descname"><span class="pre">set_pad_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pad_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.set_pad_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets this instance’s pad type, and corrects its __class__ to the proper Etherpad or Ethercalc class</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.slug">
+<span class="sig-name descname"><span class="pre">slug</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.slug" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.special_type">
+<span class="sig-name descname"><span class="pre">special_type</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.special_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.timeline_template">
+<span class="sig-name descname"><span class="pre">timeline_template</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_etherpad/v2/dashboard/timeline_item.html'</span></em><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.timeline_template" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.Etherpad.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#cosinnus_etherpad.models.Etherpad.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadNotSupportedByType">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.models.</span></span><span class="sig-name descname"><span class="pre">EtherpadNotSupportedByType</span></span><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadNotSupportedByType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ImproperlyConfigured</span></code></p>
+<p>Thrown when a method is called on a subclass of Etherpad that is not supported by that subclass</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadSpecific">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.models.</span></span><span class="sig-name descname"><span class="pre">EtherpadSpecific</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">media_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_modified</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_action_user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_container</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_mapper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_accessed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadSpecific" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadSpecific.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadSpecific.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad.DoesNotExist" title="cosinnus_etherpad.models.Etherpad.DoesNotExist"><code class="xref py py-class docutils literal notranslate"><span class="pre">DoesNotExist</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadSpecific.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadSpecific.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad.MultipleObjectsReturned" title="cosinnus_etherpad.models.Etherpad.MultipleObjectsReturned"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadSpecific.PAD_MODEL_TYPE">
+<span class="sig-name descname"><span class="pre">PAD_MODEL_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadSpecific.PAD_MODEL_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadSpecific.likes">
+<span class="sig-name descname"><span class="pre">likes</span></span><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadSpecific.likes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the one-to-many relation created
+by GenericRelation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">GenericRelation</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">post.comments</span></code> is a ReverseGenericManyToOneDescriptor instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadSpecific.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;cosinnus_etherpad.models.EtherpadSpecificManager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadSpecific.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadSpecificManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.models.</span></span><span class="sig-name descname"><span class="pre">EtherpadSpecificManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadSpecificManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.managers.EtherpadManager" title="cosinnus_etherpad.managers.EtherpadManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtherpadManager</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadSpecificManager.get_query_set">
+<span class="sig-name descname"><span class="pre">get_query_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadSpecificManager.get_query_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new QuerySet object. Subclasses can override this method to
+customize the behavior of the Manager.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.EtherpadSpecificManager.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.models.EtherpadSpecificManager.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new QuerySet object. Subclasses can override this method to
+customize the behavior of the Manager.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="cosinnus_etherpad.models.TYPE_CHOICES">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.models.</span></span><span class="sig-name descname"><span class="pre">TYPE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((0,</span> <span class="pre">'Pad'),</span> <span class="pre">(1,</span> <span class="pre">'Ethercalc'))</span></em><a class="headerlink" href="#cosinnus_etherpad.models.TYPE_CHOICES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Choices for <code class="xref py py-attr docutils literal notranslate"><span class="pre">visibility</span></code>: <code class="docutils literal notranslate"><span class="pre">(int,</span> <span class="pre">str)</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.notify">
+<span id="cosinnus-etherpad-notify-module"></span><h2>cosinnus_etherpad.notify module<a class="headerlink" href="#module-cosinnus_etherpad.notify" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_etherpad.search_indexes">
+<span id="cosinnus-etherpad-search-indexes-module"></span><h2>cosinnus_etherpad.search_indexes module<a class="headerlink" href="#module-cosinnus_etherpad.search_indexes" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.search_indexes.EthercalcIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.search_indexes.</span></span><span class="sig-name descname"><span class="pre">EthercalcIndex</span></span><a class="headerlink" href="#cosinnus_etherpad.search_indexes.EthercalcIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.search.BaseHierarchicalTaggableObjectIndex" title="cosinnus.utils.search.BaseHierarchicalTaggableObjectIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHierarchicalTaggableObjectIndex</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Indexable</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.search_indexes.EthercalcIndex.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'boosted':</span> <span class="pre">&lt;haystack.fields.NgramField</span> <span class="pre">object&gt;,</span> <span class="pre">'created':</span> <span class="pre">&lt;cosinnus.utils.search.TimezoneAwareHaystackDateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'creator':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'group':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_members':</span> <span class="pre">&lt;haystack.fields.MultiValueField</span> <span class="pre">object&gt;,</span> <span class="pre">'location':</span> <span class="pre">&lt;haystack.fields.LocationField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_location':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_location_lat':</span> <span class="pre">&lt;haystack.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_location_lon':</span> <span class="pre">&lt;haystack.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_text_topics':</span> <span class="pre">&lt;cosinnus.utils.search.CommaSeperatedIntegerMultiValueField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_topics':</span> <span class="pre">&lt;cosinnus.utils.search.CommaSeperatedIntegerMultiValueField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_visibility':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'portal':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'rendered':</span> <span class="pre">&lt;cosinnus.utils.search.TemplateResolveCharField</span> <span class="pre">object&gt;,</span> <span class="pre">'text':</span> <span class="pre">&lt;cosinnus.utils.search.TemplateResolveNgramField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_etherpad.search_indexes.EthercalcIndex.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.search_indexes.EthercalcIndex.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.search_indexes.EthercalcIndex.get_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return the <code class="docutils literal notranslate"><span class="pre">Model</span></code> class (not an instance) that the rest of the
+<code class="docutils literal notranslate"><span class="pre">SearchIndex</span></code> should use.</p>
+<p>This method is required &amp; you must override it to return the correct class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.search_indexes.EthercalcIndex.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;haystack.manager.SearchIndexManager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_etherpad.search_indexes.EthercalcIndex.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.search_indexes.EtherpadIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.search_indexes.</span></span><span class="sig-name descname"><span class="pre">EtherpadIndex</span></span><a class="headerlink" href="#cosinnus_etherpad.search_indexes.EtherpadIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.utils.html#cosinnus.utils.search.BaseHierarchicalTaggableObjectIndex" title="cosinnus.utils.search.BaseHierarchicalTaggableObjectIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHierarchicalTaggableObjectIndex</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Indexable</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.search_indexes.EtherpadIndex.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'boosted':</span> <span class="pre">&lt;haystack.fields.NgramField</span> <span class="pre">object&gt;,</span> <span class="pre">'created':</span> <span class="pre">&lt;cosinnus.utils.search.TimezoneAwareHaystackDateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'creator':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'group':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_members':</span> <span class="pre">&lt;haystack.fields.MultiValueField</span> <span class="pre">object&gt;,</span> <span class="pre">'location':</span> <span class="pre">&lt;haystack.fields.LocationField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_location':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_location_lat':</span> <span class="pre">&lt;haystack.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_location_lon':</span> <span class="pre">&lt;haystack.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_text_topics':</span> <span class="pre">&lt;cosinnus.utils.search.CommaSeperatedIntegerMultiValueField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_topics':</span> <span class="pre">&lt;cosinnus.utils.search.CommaSeperatedIntegerMultiValueField</span> <span class="pre">object&gt;,</span> <span class="pre">'mt_visibility':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'portal':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'rendered':</span> <span class="pre">&lt;cosinnus.utils.search.TemplateResolveCharField</span> <span class="pre">object&gt;,</span> <span class="pre">'text':</span> <span class="pre">&lt;cosinnus.utils.search.TemplateResolveNgramField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus_etherpad.search_indexes.EtherpadIndex.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.search_indexes.EtherpadIndex.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.search_indexes.EtherpadIndex.get_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return the <code class="docutils literal notranslate"><span class="pre">Model</span></code> class (not an instance) that the rest of the
+<code class="docutils literal notranslate"><span class="pre">SearchIndex</span></code> should use.</p>
+<p>This method is required &amp; you must override it to return the correct class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.search_indexes.EtherpadIndex.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;haystack.manager.SearchIndexManager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_etherpad.search_indexes.EtherpadIndex.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad.urls">
+<span id="cosinnus-etherpad-urls-module"></span><h2>cosinnus_etherpad.urls module<a class="headerlink" href="#module-cosinnus_etherpad.urls" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_etherpad.views">
+<span id="cosinnus-etherpad-views-module"></span><h2>cosinnus_etherpad.views module<a class="headerlink" href="#module-cosinnus_etherpad.views" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcCSVView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EthercalcCSVView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcCSVView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.views.EthercalcDownloadBaseView" title="cosinnus_etherpad.views.EthercalcDownloadBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">EthercalcDownloadBaseView</span></code></a></p>
+<p>Downloads a CSV file from the calc server and then serves it from this URL</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcCSVView.get_filename_header">
+<span class="sig-name descname"><span class="pre">get_filename_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcCSVView.get_filename_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcCSVView.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'csv'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcCSVView.suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcDownloadBaseView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EthercalcDownloadBaseView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcDownloadBaseView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<p>Downloads a CSV file from the calc server and then serves it from this URL</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcDownloadBaseView.get_filename_header">
+<span class="sig-name descname"><span class="pre">get_filename_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcDownloadBaseView.get_filename_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcDownloadBaseView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcDownloadBaseView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcDownloadBaseView.render_to_response">
+<span class="sig-name descname"><span class="pre">render_to_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">response_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcDownloadBaseView.render_to_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a response, using the <cite>response_class</cite> for this view, with a
+template rendered with the given context.</p>
+<p>Pass response_kwargs to the constructor of the response class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcDownloadBaseView.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcDownloadBaseView.suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcXLSXView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EthercalcXLSXView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcXLSXView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.views.EthercalcDownloadBaseView" title="cosinnus_etherpad.views.EthercalcDownloadBaseView"><code class="xref py py-class docutils literal notranslate"><span class="pre">EthercalcDownloadBaseView</span></code></a></p>
+<p>Downloads a CSV file from the calc server and then serves it from this URL</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EthercalcXLSXView.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'xlsx'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EthercalcXLSXView.suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadAddContainerView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadAddContainerView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadAddContainerView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.hierarchy.AddContainerView" title="cosinnus.views.hierarchy.AddContainerView"><code class="xref py py-class docutils literal notranslate"><span class="pre">AddContainerView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadAddContainerView.appname">
+<span class="sig-name descname"><span class="pre">appname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'etherpad'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadAddContainerView.appname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadAddContainerView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadAddContainerView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadArchiveDocumentView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadArchiveDocumentView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadArchiveDocumentView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.views.EtherpadArchiveMixin" title="cosinnus_etherpad.views.EtherpadArchiveMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtherpadArchiveMixin</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadArchiveDocumentView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadArchiveDocumentView.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadArchiveFileView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadArchiveFileView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadArchiveFileView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_etherpad.views.EtherpadArchiveMixin" title="cosinnus_etherpad.views.EtherpadArchiveMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtherpadArchiveMixin</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadArchiveFileView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadArchiveFileView.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadArchiveMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadArchiveMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadArchiveMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadArchiveMixin.get_redirect_url">
+<span class="sig-name descname"><span class="pre">get_redirect_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadArchiveMixin.get_redirect_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL redirect to. Keyword arguments from the URL pattern
+match generating the redirect request are provided as kwargs to this
+method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadArchiveMixin.get_title">
+<span class="sig-name descname"><span class="pre">get_title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_title</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadArchiveMixin.get_title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadArchiveMixin.permanent">
+<span class="sig-name descname"><span class="pre">permanent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadArchiveMixin.permanent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDeleteElementView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadDeleteElementView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDeleteElementView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.common.DeleteElementView" title="cosinnus.views.common.DeleteElementView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteElementView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDeleteElementView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDeleteElementView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.tagged.HierarchyDeleteMixin" title="cosinnus.views.mixins.tagged.HierarchyDeleteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HierarchyDeleteMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDeleteView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDeleteView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDeleteView.message_error">
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDeleteView.message_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDeleteView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDeleteView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDeleteView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDetailView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadDetailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDetailView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.tagged.RecordLastVisitedMixin" title="cosinnus.views.mixins.tagged.RecordLastVisitedMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecordLastVisitedMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDetailView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDetailView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the single object into the context dict.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDetailView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDetailView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDetailView.render_to_response">
+<span class="sig-name descname"><span class="pre">render_to_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">response_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDetailView.render_to_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a response, using the <cite>response_class</cite> for this view, with a
+template rendered with the given context.</p>
+<p>Pass response_kwargs to the constructor of the response class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadDetailView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_etherpad/etherpad_detail.html'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadDetailView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadEditView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadEditView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadEditView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus_etherpad.views.EtherpadFormMixin" title="cosinnus_etherpad.views.EtherpadFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtherpadFormMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.html#cosinnus.views.attached_object.AttachableViewMixin" title="cosinnus.views.attached_object.AttachableViewMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttachableViewMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadEditView.form_view">
+<span class="sig-name descname"><span class="pre">form_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'edit'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadEditView.form_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadEditView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadEditView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadEditView.render_to_response">
+<span class="sig-name descname"><span class="pre">render_to_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">response_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadEditView.render_to_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a response, using the <cite>response_class</cite> for this view, with a
+template rendered with the given context.</p>
+<p>Pass response_kwargs to the constructor of the response class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadEditView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_etherpad/etherpad_edit.html'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadEditView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadFormMixin</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.GroupFormKwargsMixin" title="cosinnus.views.mixins.group.GroupFormKwargsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupFormKwargsMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.user.UserFormKwargsMixin" title="cosinnus.views.mixins.user.UserFormKwargsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserFormKwargsMixin</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">TaggableObjectForm</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.form_invalid">
+<span class="sig-name descname"><span class="pre">form_invalid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.form_invalid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.message_error">
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">edited.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.message_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">edited</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadHybridListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadWriteHybridMixin" title="cosinnus.views.mixins.group.RequireReadWriteHybridMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadWriteHybridMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.tagged.HierarchyPathMixin" title="cosinnus.views.mixins.tagged.HierarchyPathMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HierarchyPathMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin" title="cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HierarchicalListCreateViewMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.filters.CosinnusFilterMixin" title="cosinnus.views.mixins.filters.CosinnusFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterMixin</span></code></a>, <a class="reference internal" href="#cosinnus_etherpad.views.EtherpadFormMixin" title="cosinnus_etherpad.views.EtherpadFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtherpadFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.filterset_class">
+<span class="sig-name descname"><span class="pre">filterset_class</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.filterset_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.filters.EtherpadFilter" title="cosinnus_etherpad.filters.EtherpadFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtherpadFilter</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Form for adding model objects.
+If the form is valid, we need to do pass the path retrieved from the
+slug over to the non-editable field</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.form_view">
+<span class="sig-name descname"><span class="pre">form_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'add'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.form_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dual form splitting and initialization</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.message_error">
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">added.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.message_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">added</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.message_success_folder">
+<span class="sig-name descname"><span class="pre">message_success_folder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Folder</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">created</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.message_success_folder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.strict_default_sort">
+<span class="sig-name descname"><span class="pre">strict_default_sort</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.strict_default_sort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_etherpad/etherpad_list.html'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadIndexView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadIndexView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadIndexView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadIndexView.get_redirect_url">
+<span class="sig-name descname"><span class="pre">get_redirect_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadIndexView.get_redirect_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL redirect to. Keyword arguments from the URL pattern
+match generating the redirect request are provided as kwargs to this
+method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadIndexView.permanent">
+<span class="sig-name descname"><span class="pre">permanent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadIndexView.permanent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.tagged.HierarchyTreeMixin" title="cosinnus.views.mixins.tagged.HierarchyTreeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HierarchyTreeMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ListView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadListView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadListView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadListView.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadListView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the context for this view.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadListView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadListView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadMoveElementView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadMoveElementView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadMoveElementView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.hierarchy.MoveElementView" title="cosinnus.views.hierarchy.MoveElementView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MoveElementView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadMoveElementView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadMoveElementView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_etherpad.models.Etherpad" title="cosinnus_etherpad.models.Etherpad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Etherpad</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadWriteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">EtherpadWriteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadWriteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireLoggedInMixin" title="cosinnus.views.mixins.group.RequireLoggedInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireLoggedInMixin</span></code></a>, <a class="reference internal" href="#cosinnus_etherpad.views.EtherpadDetailView" title="cosinnus_etherpad.views.EtherpadDetailView"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtherpadDetailView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadWriteView.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadWriteView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadWriteView.render_to_response">
+<span class="sig-name descname"><span class="pre">render_to_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">response_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadWriteView.render_to_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do not allow write access to pads owned by deactivated users.
+Also save last accessed on access</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadWriteView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_etherpad/etherpad_write.html'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadWriteView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.calc_csv_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">calc_csv_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.calc_csv_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads a CSV file from the calc server and then serves it from this URL</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.calc_xlsx_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">calc_xlsx_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.calc_xlsx_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads a CSV file from the calc server and then serves it from this URL</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.container_add_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">container_add_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.container_add_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.delete_element_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">delete_element_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.delete_element_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.index_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">index_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.index_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.list_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">list_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.list_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.move_element_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">move_element_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.move_element_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.pad_archive_document">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">pad_archive_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.pad_archive_document" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.pad_archive_file">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">pad_archive_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.pad_archive_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.pad_delete_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">pad_delete_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.pad_delete_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.pad_detail_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">pad_detail_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.pad_detail_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.pad_edit_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">pad_edit_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.pad_edit_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.pad_hybrid_list_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">pad_hybrid_list_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.pad_hybrid_list_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.views.pad_write_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.views.</span></span><span class="sig-name descname"><span class="pre">pad_write_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.views.pad_write_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cosinnus_etherpad">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_etherpad" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_etherpad.get_version">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_etherpad.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derives a PEP386-compliant version number from VERSION.</p>
+<p>Taken from django.utils.version.get_git_changeset at rev ce5e09353d</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+      <li>Previous: <a href="cosinnus_cloud.utils.html" title="previous chapter">cosinnus_cloud.utils package</a></li>
+      <li>Next: <a href="cosinnus_etherpad.tests.html" title="next chapter">cosinnus_etherpad.tests package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_etherpad.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

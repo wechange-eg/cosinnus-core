@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_event.tests.model_tests package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_event.tests.view_tests package" href="cosinnus_event.tests.view_tests.html" />
+    <link rel="prev" title="cosinnus_event.tests.manager_tests package" href="cosinnus_event.tests.manager_tests.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-event-tests-model-tests-package">
+<h1>cosinnus_event.tests.model_tests package<a class="headerlink" href="#cosinnus-event-tests-model-tests-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_event.tests.model_tests.base">
+<span id="cosinnus-event-tests-model-tests-base-module"></span><h2>cosinnus_event.tests.model_tests.base module<a class="headerlink" href="#module-cosinnus_event.tests.model_tests.base" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.base.ModelTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_event.tests.model_tests.base.</span></span><span class="sig-name descname"><span class="pre">ModelTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.base.ModelTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.base.ModelTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.base.ModelTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_event.tests.model_tests.test_event">
+<span id="cosinnus-event-tests-model-tests-test-event-module"></span><h2>cosinnus_event.tests.model_tests.test_event module<a class="headerlink" href="#module-cosinnus_event.tests.model_tests.test_event" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_event.tests.model_tests.test_event.</span></span><span class="sig-name descname"><span class="pre">EventTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_event.tests.model_tests.base.ModelTestCase" title="cosinnus_event.tests.model_tests.base.ModelTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_localize_custom_format">
+<span class="sig-name descname"><span class="pre">test_localize_custom_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_localize_custom_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Localize should return a certain localtime date_format when a
+custom format string is given</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_localize_datetime_format">
+<span class="sig-name descname"><span class="pre">test_localize_datetime_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_localize_datetime_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Localize should return a certain localtime date_format when a
+predefined format string is given</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_localize_no_format">
+<span class="sig-name descname"><span class="pre">test_localize_no_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_localize_no_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Localize should return a certain localtime date_format when no format
+string is given</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_period_other_day">
+<span class="sig-name descname"><span class="pre">test_period_other_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_period_other_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Period should be a certain string on different from and to dates</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_period_same_day">
+<span class="sig-name descname"><span class="pre">test_period_same_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_period_same_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Period should be same as from date on same day</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_public">
+<span class="sig-name descname"><span class="pre">test_public</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_public" title="Permalink to this definition">¶</a></dt>
+<dd><p>Public should be set to False per default</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_set_suggestion">
+<span class="sig-name descname"><span class="pre">test_set_suggestion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_set_suggestion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should set suggestion for an event</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_set_suggestion_none">
+<span class="sig-name descname"><span class="pre">test_set_suggestion_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_set_suggestion_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should not set suggestion if none is given to event</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_set_suggestion_other_event">
+<span class="sig-name descname"><span class="pre">test_set_suggestion_other_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_set_suggestion_other_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should not set suggestion for another event</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_single_day_different_day">
+<span class="sig-name descname"><span class="pre">test_single_day_different_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_single_day_different_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should not be single day event if from and to date are on different days</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_single_day_same_day">
+<span class="sig-name descname"><span class="pre">test_single_day_same_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_single_day_same_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should be single day event if from and to date are on the same day</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_string_repr_pending">
+<span class="sig-name descname"><span class="pre">test_string_repr_pending</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_string_repr_pending" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should have certain string representation if pending event</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_string_repr_scheduled_multi_day">
+<span class="sig-name descname"><span class="pre">test_string_repr_scheduled_multi_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_string_repr_scheduled_multi_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should have certain string representation if multi day event</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_event.EventTest.test_string_repr_scheduled_single_day">
+<span class="sig-name descname"><span class="pre">test_string_repr_scheduled_single_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_event.EventTest.test_string_repr_scheduled_single_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should have certain string representation if single day event</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_event.tests.model_tests.test_suggestion">
+<span id="cosinnus-event-tests-model-tests-test-suggestion-module"></span><h2>cosinnus_event.tests.model_tests.test_suggestion module<a class="headerlink" href="#module-cosinnus_event.tests.model_tests.test_suggestion" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_event.tests.model_tests.test_suggestion.</span></span><span class="sig-name descname"><span class="pre">SuggestionTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_event.tests.model_tests.base.ModelTestCase" title="cosinnus_event.tests.model_tests.base.ModelTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_single_day_different_day">
+<span class="sig-name descname"><span class="pre">test_single_day_different_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_single_day_different_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should not be single day suggestion if from and to date are on
+different days</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_single_day_same_day">
+<span class="sig-name descname"><span class="pre">test_single_day_same_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_single_day_same_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should be single day suggestion if from and to date are on the same day</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_string_repr_scheduled_multi_day">
+<span class="sig-name descname"><span class="pre">test_string_repr_scheduled_multi_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_string_repr_scheduled_multi_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should have certain string representation if multi day suggestion</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_string_repr_scheduled_single_day">
+<span class="sig-name descname"><span class="pre">test_string_repr_scheduled_single_day</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_string_repr_scheduled_single_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should have certain string representation if single day suggestion</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_update_vote_count">
+<span class="sig-name descname"><span class="pre">test_update_vote_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_suggestion.SuggestionTest.test_update_vote_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should update the vote count</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_event.tests.model_tests.test_vote">
+<span id="cosinnus-event-tests-model-tests-test-vote-module"></span><h2>cosinnus_event.tests.model_tests.test_vote module<a class="headerlink" href="#module-cosinnus_event.tests.model_tests.test_vote" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_vote.VoteTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_event.tests.model_tests.test_vote.</span></span><span class="sig-name descname"><span class="pre">VoteTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_vote.VoteTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_event.tests.model_tests.base.ModelTestCase" title="cosinnus_event.tests.model_tests.base.ModelTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_vote.VoteTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_vote.VoteTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_vote.VoteTest.test_post_vote_delete">
+<span class="sig-name descname"><span class="pre">test_post_vote_delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_vote.VoteTest.test_post_vote_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suggestion should have decreased count after vote has been deleted</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_vote.VoteTest.test_post_vote_save">
+<span class="sig-name descname"><span class="pre">test_post_vote_save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_vote.VoteTest.test_post_vote_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suggestion should have increased count after vote has been created</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.tests.model_tests.test_vote.VoteTest.test_string_repr">
+<span class="sig-name descname"><span class="pre">test_string_repr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.tests.model_tests.test_vote.VoteTest.test_string_repr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should have certain string representation</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_event.tests.model_tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_event.tests.model_tests" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus_event.html">cosinnus_event package</a><ul>
+  <li><a href="cosinnus_event.tests.html">cosinnus_event.tests package</a><ul>
+      <li>Previous: <a href="cosinnus_event.tests.manager_tests.html" title="previous chapter">cosinnus_event.tests.manager_tests package</a></li>
+      <li>Next: <a href="cosinnus_event.tests.view_tests.html" title="next chapter">cosinnus_event.tests.view_tests package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_event.tests.model_tests.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.dynamic_fields package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.formats package" href="cosinnus.formats.html" />
+    <link rel="prev" title="cosinnus.core.registries package" href="cosinnus.core.registries.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-dynamic-fields-package">
+<h1>cosinnus.dynamic_fields package<a class="headerlink" href="#cosinnus-dynamic-fields-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.dynamic_fields.dynamic_fields">
+<span id="cosinnus-dynamic-fields-dynamic-fields-module"></span><h2>cosinnus.dynamic_fields.dynamic_fields module<a class="headerlink" href="#module-cosinnus.dynamic_fields.dynamic_fields" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_fields.</span></span><span class="sig-name descname"><span class="pre">CosinnusDynamicField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Definition for a dynamic extra fields, e.g. for <cite>settings.COSINNUS_USERPROFILE_EXTRA_FIELDS</cite></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.choices">
+<span class="sig-name descname"><span class="pre">choices</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.choices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.default">
+<span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.display_required_field_names">
+<span class="sig-name descname"><span class="pre">display_required_field_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.display_required_field_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.function_string">
+<span class="sig-name descname"><span class="pre">function_string</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.function_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.hidden">
+<span class="sig-name descname"><span class="pre">hidden</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.hidden" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.in_signup">
+<span class="sig-name descname"><span class="pre">in_signup</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.in_signup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.is_group_header">
+<span class="sig-name descname"><span class="pre">is_group_header</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.is_group_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.label">
+<span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.legend">
+<span class="sig-name descname"><span class="pre">legend</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.legend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.max_length">
+<span class="sig-name descname"><span class="pre">max_length</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.max_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.multiple">
+<span class="sig-name descname"><span class="pre">multiple</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.multiple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.note">
+<span class="sig-name descname"><span class="pre">note</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.note" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.parent_group_field_name">
+<span class="sig-name descname"><span class="pre">parent_group_field_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.parent_group_field_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.placeholder">
+<span class="sig-name descname"><span class="pre">placeholder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.placeholder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.readonly">
+<span class="sig-name descname"><span class="pre">readonly</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.readonly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.required">
+<span class="sig-name descname"><span class="pre">required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.search_field_type">
+<span class="sig-name descname"><span class="pre">search_field_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'none'</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.search_field_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_fields.CosinnusDynamicField.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.dynamic_fields.dynamic_formfields">
+<span id="cosinnus-dynamic-fields-dynamic-formfields-module"></span><h2>cosinnus.dynamic_fields.dynamic_formfields module<a class="headerlink" href="#module-cosinnus.dynamic_fields.dynamic_formfields" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.AdminDefinedChoicesTextDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">AdminDefinedChoicesTextDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.AdminDefinedChoicesTextDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseSelect2DynamicFieldFormFieldGenerator</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.AdminDefinedChoicesTextDynamicFieldFormFieldGenerator.get_formfield_kwargs">
+<span class="sig-name descname"><span class="pre">get_formfield_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.AdminDefinedChoicesTextDynamicFieldFormFieldGenerator.get_formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.BooleanDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">BooleanDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.BooleanDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.BooleanDynamicFieldFormFieldGenerator.formfield_class">
+<span class="sig-name descname"><span class="pre">formfield_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.BooleanDynamicFieldFormFieldGenerator.formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanField</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.CountryDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">CountryDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.CountryDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.CountryDynamicFieldFormFieldGenerator.get_formfield_class">
+<span class="sig-name descname"><span class="pre">get_formfield_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.CountryDynamicFieldFormFieldGenerator.get_formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DateDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">DateDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DateDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DateDynamicFieldFormFieldGenerator.formfield_class">
+<span class="sig-name descname"><span class="pre">formfield_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DateDynamicFieldFormFieldGenerator.formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">DateField</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DateDynamicFieldFormFieldGenerator.get_widget">
+<span class="sig-name descname"><span class="pre">get_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DateDynamicFieldFormFieldGenerator.get_widget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DateDynamicFieldFormFieldGenerator.is_large_field">
+<span class="sig-name descname"><span class="pre">is_large_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DateDynamicFieldFormFieldGenerator.is_large_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicChoicesFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">DynamicChoicesFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicChoicesFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseSelect2DynamicFieldFormFieldGenerator</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicChoicesFieldFormFieldGenerator.get_formfield_kwargs">
+<span class="sig-name descname"><span class="pre">get_formfield_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicChoicesFieldFormFieldGenerator.get_formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">DynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base for the formfield generators that are used for the dynamic extra fields</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.form">
+<span class="sig-name descname"><span class="pre">form</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.form" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.formfield_class">
+<span class="sig-name descname"><span class="pre">formfield_class</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.formfield_kwargs">
+<span class="sig-name descname"><span class="pre">formfield_kwargs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_formfield">
+<span class="sig-name descname"><span class="pre">get_formfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_field_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_field_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_field_initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readonly_dynamic_fields_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_formfield" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_formfield_class">
+<span class="sig-name descname"><span class="pre">get_formfield_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_formfield_kwargs">
+<span class="sig-name descname"><span class="pre">get_formfield_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_is_large_field">
+<span class="sig-name descname"><span class="pre">get_is_large_field</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_is_large_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_new_initial_after_formfield_creation">
+<span class="sig-name descname"><span class="pre">get_new_initial_after_formfield_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_new_initial_after_formfield_creation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_widget">
+<span class="sig-name descname"><span class="pre">get_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.get_widget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.is_large_field">
+<span class="sig-name descname"><span class="pre">is_large_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.is_large_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.widget_class">
+<span class="sig-name descname"><span class="pre">widget_class</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator.widget_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.EmailDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">EmailDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.EmailDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.EmailDynamicFieldFormFieldGenerator.formfield_class">
+<span class="sig-name descname"><span class="pre">formfield_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.EmailDynamicFieldFormFieldGenerator.formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">EmailField</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.FreeChoicesTextDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">FreeChoicesTextDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.FreeChoicesTextDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseSelect2DynamicFieldFormFieldGenerator</span></code></p>
+<p>a select 2 tag field with space-tag support</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.FreeChoicesTextDynamicFieldFormFieldGenerator.get_formfield_kwargs">
+<span class="sig-name descname"><span class="pre">get_formfield_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.FreeChoicesTextDynamicFieldFormFieldGenerator.get_formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.FreeChoicesTextDynamicFieldFormFieldGenerator.get_widget">
+<span class="sig-name descname"><span class="pre">get_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.FreeChoicesTextDynamicFieldFormFieldGenerator.get_widget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.FreeChoicesTextDynamicFieldFormFieldGenerator.is_large_field">
+<span class="sig-name descname"><span class="pre">is_large_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.FreeChoicesTextDynamicFieldFormFieldGenerator.is_large_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.IntDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">IntDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.IntDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.IntDynamicFieldFormFieldGenerator.formfield_class">
+<span class="sig-name descname"><span class="pre">formfield_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.IntDynamicFieldFormFieldGenerator.formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">IntegerField</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.LanguageDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">LanguageDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.LanguageDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseSelect2DynamicFieldFormFieldGenerator</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.LanguageDynamicFieldFormFieldGenerator.get_formfield_kwargs">
+<span class="sig-name descname"><span class="pre">get_formfield_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.LanguageDynamicFieldFormFieldGenerator.get_formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">ManagedTagUserChoiceDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseSelect2DynamicFieldFormFieldGenerator</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator.get_formfield_class">
+<span class="sig-name descname"><span class="pre">get_formfield_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator.get_formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator.get_formfield_kwargs">
+<span class="sig-name descname"><span class="pre">get_formfield_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator.get_formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator.get_widget">
+<span class="sig-name descname"><span class="pre">get_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator.get_widget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator.is_large_field">
+<span class="sig-name descname"><span class="pre">is_large_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.ManagedTagUserChoiceDynamicFieldFormFieldGenerator.is_large_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicBoundField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">MultiAddressDynamicBoundField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicBoundField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BoundField</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicBoundField.get_subfields_name_and_label">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_subfields_name_and_label</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicBoundField.get_subfields_name_and_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of (subfield_name, subfield_label) pairs</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">MultiAddressDynamicField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></p>
+<p>A dynamic-field implementation for a multi value address field</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.MULTI_ADDRESS_SUBFIELD_MAP">
+<span class="sig-name descname"><span class="pre">MULTI_ADDRESS_SUBFIELD_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(('title',</span> <span class="pre">'Address</span> <span class="pre">Title'),</span> <span class="pre">('line1',</span> <span class="pre">'Address</span> <span class="pre">Line</span> <span class="pre">1'),</span> <span class="pre">('line2',</span> <span class="pre">'Address</span> <span class="pre">Line</span> <span class="pre">2'),</span> <span class="pre">('line3',</span> <span class="pre">'Address</span> <span class="pre">Line</span> <span class="pre">3'),</span> <span class="pre">('street',</span> <span class="pre">'Street</span> <span class="pre">and</span> <span class="pre">Number'),</span> <span class="pre">('city',</span> <span class="pre">'City'),</span> <span class="pre">('state',</span> <span class="pre">'State'),</span> <span class="pre">('country',</span> <span class="pre">'Country'),</span> <span class="pre">('phone',</span> <span class="pre">'Phone</span> <span class="pre">Number'),</span> <span class="pre">('mobile',</span> <span class="pre">'Mobile</span> <span class="pre">Phone</span> <span class="pre">Number'))</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.MULTI_ADDRESS_SUBFIELD_MAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.get_bound_field">
+<span class="sig-name descname"><span class="pre">get_bound_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.get_bound_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a BoundField instance that will be used when accessing the form
+field in a template.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.get_subfields_name_and_label">
+<span class="sig-name descname"><span class="pre">get_subfields_name_and_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.get_subfields_name_and_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field definition for subfields hardcoded right now</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.prepare_value">
+<span class="sig-name descname"><span class="pre">prepare_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.prepare_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.to_python">
+<span class="sig-name descname"><span class="pre">to_python</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField.to_python" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a python dictionary from all address subfields</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">MultiAddressDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator.formfield_class">
+<span class="sig-name descname"><span class="pre">formfield_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator.formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField" title="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicField"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiAddressDynamicField</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator.get_formfield_kwargs">
+<span class="sig-name descname"><span class="pre">get_formfield_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator.get_formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator.is_large_field">
+<span class="sig-name descname"><span class="pre">is_large_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator.is_large_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator.widget_class">
+<span class="sig-name descname"><span class="pre">widget_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.MultiAddressDynamicFieldFormFieldGenerator.widget_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Textarea</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.PhoneDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">PhoneDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.PhoneDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.PhoneDynamicFieldFormFieldGenerator.formfield_class">
+<span class="sig-name descname"><span class="pre">formfield_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.PhoneDynamicFieldFormFieldGenerator.formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">PhoneNumberField</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.PredefinedChoicesTextDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">PredefinedChoicesTextDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.PredefinedChoicesTextDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseSelect2DynamicFieldFormFieldGenerator</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.PredefinedChoicesTextDynamicFieldFormFieldGenerator.get_formfield_kwargs">
+<span class="sig-name descname"><span class="pre">get_formfield_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.PredefinedChoicesTextDynamicFieldFormFieldGenerator.get_formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.TextAreaDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">TextAreaDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.TextAreaDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.TextDynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.TextDynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextDynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.TextAreaDynamicFieldFormFieldGenerator.widget_class">
+<span class="sig-name descname"><span class="pre">widget_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.TextAreaDynamicFieldFormFieldGenerator.widget_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Textarea</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.TextDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">TextDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.TextDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.TextDynamicFieldFormFieldGenerator.formfield_class">
+<span class="sig-name descname"><span class="pre">formfield_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.TextDynamicFieldFormFieldGenerator.formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.TextDynamicFieldFormFieldGenerator.get_formfield_kwargs">
+<span class="sig-name descname"><span class="pre">get_formfield_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.TextDynamicFieldFormFieldGenerator.get_formfield_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.URLDynamicFieldFormFieldGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.dynamic_fields.dynamic_formfields.</span></span><span class="sig-name descname"><span class="pre">URLDynamicFieldFormFieldGenerator</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.URLDynamicFieldFormFieldGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator" title="cosinnus.dynamic_fields.dynamic_formfields.DynamicFieldFormFieldGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicFieldFormFieldGenerator</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.dynamic_fields.dynamic_formfields.URLDynamicFieldFormFieldGenerator.formfield_class">
+<span class="sig-name descname"><span class="pre">formfield_class</span></span><a class="headerlink" href="#cosinnus.dynamic_fields.dynamic_formfields.URLDynamicFieldFormFieldGenerator.formfield_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">URLField</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.dynamic_fields">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.dynamic_fields" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+      <li>Previous: <a href="cosinnus.core.registries.html" title="previous chapter">cosinnus.core.registries package</a></li>
+      <li>Next: <a href="cosinnus.formats.html" title="next chapter">cosinnus.formats package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.dynamic_fields.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

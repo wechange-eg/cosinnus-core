@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.core.decorators package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.core.middleware package" href="cosinnus.core.middleware.html" />
+    <link rel="prev" title="cosinnus.core package" href="cosinnus.core.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-core-decorators-package">
+<h1>cosinnus.core.decorators package<a class="headerlink" href="#cosinnus-core-decorators-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.core.decorators.views">
+<span id="cosinnus-core-decorators-views-module"></span><h2>cosinnus.core.decorators.views module<a class="headerlink" href="#module-cosinnus.core.decorators.views" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.dispatch_group_access">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">dispatch_group_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_url_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.dispatch_group_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that takes the group name from the kwargs of a
+dispatch function in CBVs and performs no priviledge checks</p>
+<p>Additionally this function populates the group instance to the view
+instance as attribute <cite>group_attr</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_url_kwarg</strong> (<em>str</em>) – The name of the key containing the group name.
+Defaults to <cite>‘group’</cite>.</p></li>
+<li><p><strong>group_attr</strong> (<em>str</em>) – The attribute name which can later be used to access
+the group from within an view instance (e.g. <cite>self.group</cite>). Defaults to
+<cite>‘group’</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.get_group_for_request">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">get_group_for_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fail_silently</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.get_group_for_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the proxy group object depending on the URL path regarding 
+the registered group models.
+A CosinnusGroup will not be returned if it is requested by an URL
+path with a different group_model_key than the one it got registered with.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.membership_required">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">membership_required</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.membership_required" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function decorator to assure a requesting user is an authenticated member</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.redirect_to_403">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">redirect_to_403</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.redirect_to_403" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a redirect to a permission-denied page with the same URL and an and an error message 
+&#64;param group: If supplied, the user will in most cases be redirected to the group’s micropage instead</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.redirect_to_error_page">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">redirect_to_error_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.redirect_to_error_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a redirect to an error page with the same URL and support for displaying error messages.
+You should always use <cite>messages.error/warning/info</cite> before calling this function, otherwise the page
+will be blank.
+&#64;param group: If supplied, the user will in most cases be redirected to the group’s micropage instead</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.redirect_to_not_logged_in">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">redirect_to_not_logged_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.redirect_to_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a redirect to the login page with a next-URL parameter and an error message 
+&#64;param group: If supplied, the user will in most cases be redirected to the group’s micropage instead</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.redirect_to_not_verified">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">redirect_to_not_verified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.redirect_to_not_verified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a redirect to an empty page with an error message, telling the user they need to verify
+their email address to continue.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_admin_access">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_admin_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_url_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_admin_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that takes the group name from the kwargs of a
+dispatch function in CBVs and checks that the requesting user is allowed to
+perform administrative operations.</p>
+<p>Additionally this function populates the group instance to the view
+instance as attribute <cite>group_attr</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_url_kwarg</strong> (<em>str</em>) – The name of the key containing the group name.
+Defaults to <cite>‘group’</cite>.</p></li>
+<li><p><strong>group_attr</strong> (<em>str</em>) – The attribute name which can later be used to access
+the group from within an view instance (e.g. <cite>self.group</cite>). Defaults to
+<cite>‘group’</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_admin_access_decorator">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_admin_access_decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_url_arg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_admin_access_decorator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_create_objects_in_access">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_create_objects_in_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_url_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_create_objects_in_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that takes the group name from the kwargs of a
+dispatch function in CBVs and checks that the requesting user is allowed to
+perform read operations.</p>
+<p>Additionally this function populates the group instance to the view
+instance as attribute <cite>group_attr</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_url_kwarg</strong> (<em>str</em>) – The name of the key containing the group name.
+Defaults to <cite>‘group’</cite>.</p></li>
+<li><p><strong>group_attr</strong> (<em>str</em>) – The attribute name which can later be used to access
+the group from within an view instance (e.g. <cite>self.group</cite>). Defaults to
+<cite>‘group’</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_logged_in">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that checks that the requesting user is logged in</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_portal_manager">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_portal_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_portal_manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that checks that the requesting user is a portal manager or superuser (admin or portal admin)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_read_access">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_read_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_url_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_read_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that takes the group name from the kwargs of a
+dispatch function in CBVs and checks that the requesting user is allowed to
+perform read operations.</p>
+<p>Additionally this function populates the group instance to the view
+instance as attribute <cite>group_attr</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_url_kwarg</strong> (<em>str</em>) – The name of the key containing the group name.
+Defaults to <cite>‘group’</cite>.</p></li>
+<li><p><strong>group_attr</strong> (<em>str</em>) – The attribute name which can later be used to access
+the group from within an view instance (e.g. <cite>self.group</cite>). Defaults to
+<cite>‘group’</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_superuser">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_superuser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_superuser" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that checks that the requesting user is a superuser (admin or portal admin)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_user_token_access">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_user_token_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_url_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_url_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_user_token_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that allows access only if the URL params
+<cite>user=999&amp;token=1234567</cite> are supplied, and if the token supplied matches
+the specific token (determined by :param <code class="docutils literal notranslate"><span class="pre">token_name</span></code>) in the supplied 
+user’s settings. Please only use different token_names for each specific purpose.</p>
+<p>Additionally this function populates the group instance to the view
+instance as attribute <cite>group_attr</cite> and the resolved token user as attribute <cite>user</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_url_kwarg</strong> (<em>str</em>) – The name of the key containing the group name.
+Defaults to <cite>‘group’</cite>.</p></li>
+<li><p><strong>group_attr</strong> (<em>str</em>) – The attribute name which can later be used to access
+the group from within an view instance (e.g. <cite>self.group</cite>). Defaults to
+<cite>‘group’</cite>.</p></li>
+<li><p><strong>id_url_kwarg</strong> (<em>str</em>) – The attribut id which can later be used to access
+the group or a project from within an view instance (e.g. <cite>team_id</cite>). Defaults to
+<cite>None</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_verified_user_access">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_verified_user_access</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_verified_user_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that checks that the requesting user has a verified email address</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_write_access">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_write_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_url_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_write_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that takes the group name from the kwargs of a
+dispatch function in CBVs and checks that the requesting user is allowed to
+perform write operations.</p>
+<p>Additionally this function populates the group instance to the view
+instance as attribute <cite>group_attr</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_url_kwarg</strong> (<em>str</em>) – The name of the key containing the group name.
+Defaults to <cite>‘group’</cite>.</p></li>
+<li><p><strong>group_attr</strong> (<em>str</em>) – The attribute name which can later be used to access
+the group from within an view instance (e.g. <cite>self.group</cite>). Defaults to
+<cite>‘group’</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.require_write_access_groupless">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_write_access_groupless</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_write_access_groupless" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method decorator that takes the requested object of i.e. an edit or delete view in the
+dispatch function and checks that the requesting user is allowed to
+perform write operations.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.staff_required">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">staff_required</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.staff_required" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function decorator to assure a requesting user is a staff user.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.core.decorators.views.superuser_required">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">superuser_required</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.superuser_required" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function decorator to assure a requesting user has the superuser flag</p>
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.core.decorators">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.core.decorators" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+  <li><a href="cosinnus.core.html">cosinnus.core package</a><ul>
+      <li>Previous: <a href="cosinnus.core.html" title="previous chapter">cosinnus.core package</a></li>
+      <li>Next: <a href="cosinnus.core.middleware.html" title="next chapter">cosinnus.core.middleware package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.core.decorators.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

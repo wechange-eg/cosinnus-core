@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_todo.tests.view_tests package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_todo.utils package" href="cosinnus_todo.utils.html" />
+    <link rel="prev" title="cosinnus_todo.tests.templatetag_tests package" href="cosinnus_todo.tests.templatetag_tests.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-todo-tests-view-tests-package">
+<h1>cosinnus_todo.tests.view_tests package<a class="headerlink" href="#cosinnus-todo-tests-view-tests-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_todo.tests.view_tests.base">
+<span id="cosinnus-todo-tests-view-tests-base-module"></span><h2>cosinnus_todo.tests.view_tests.base module<a class="headerlink" href="#module-cosinnus_todo.tests.view_tests.base" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.base.ViewTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_todo.tests.view_tests.base.</span></span><span class="sig-name descname"><span class="pre">ViewTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.base.ViewTestCase.add_user">
+<span class="sig-name descname"><span class="pre">add_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">credential</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase.add_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.base.ViewTestCase.execute_no_field">
+<span class="sig-name descname"><span class="pre">execute_no_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">urlname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase.execute_no_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a post to given urlname, which should be a view with no
+form fields, and then returns the modified Todo entry.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.base.ViewTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_todo.tests.view_tests.test_add">
+<span id="cosinnus-todo-tests-view-tests-test-add-module"></span><h2>cosinnus_todo.tests.view_tests.test_add module<a class="headerlink" href="#module-cosinnus_todo.tests.view_tests.test_add" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_add.AddTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_todo.tests.view_tests.test_add.</span></span><span class="sig-name descname"><span class="pre">AddTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_add.AddTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase" title="cosinnus_todo.tests.view_tests.base.ViewTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViewTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_add.AddTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_add.AddTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_add.AddTest.test_get_logged_in">
+<span class="sig-name descname"><span class="pre">test_get_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_add.AddTest.test_get_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 200 on GET when logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_add.AddTest.test_get_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_get_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_add.AddTest.test_get_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return a redirect on GET if not logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_add.AddTest.test_post_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_add.AddTest.test_post_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 302 to detail page on successful POST and have a todo
+with given title</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_add.AddTest.test_post_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_add.AddTest.test_post_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return a redirect on POST if not logged in</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_todo.tests.view_tests.test_delete">
+<span id="cosinnus-todo-tests-view-tests-test-delete-module"></span><h2>cosinnus_todo.tests.view_tests.test_delete module<a class="headerlink" href="#module-cosinnus_todo.tests.view_tests.test_delete" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_delete.DeleteTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_todo.tests.view_tests.test_delete.</span></span><span class="sig-name descname"><span class="pre">DeleteTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_delete.DeleteTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase" title="cosinnus_todo.tests.view_tests.base.ViewTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViewTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_delete.DeleteTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_delete.DeleteTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_delete.DeleteTest.test_post_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_delete.DeleteTest.test_post_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 302 to list page on successful POST and have todo deleted</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_delete.DeleteTest.test_post_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_delete.DeleteTest.test_post_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should redirect to login on POST if not logged in</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_todo.tests.view_tests.test_detail">
+<span id="cosinnus-todo-tests-view-tests-test-detail-module"></span><h2>cosinnus_todo.tests.view_tests.test_detail module<a class="headerlink" href="#module-cosinnus_todo.tests.view_tests.test_detail" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_detail.DetailTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_todo.tests.view_tests.test_detail.</span></span><span class="sig-name descname"><span class="pre">DetailTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_detail.DetailTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase" title="cosinnus_todo.tests.view_tests.base.ViewTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViewTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_detail.DetailTest.test_detail">
+<span class="sig-name descname"><span class="pre">test_detail</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_detail.DetailTest.test_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 200 and contain todo title</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_todo.tests.view_tests.test_edit">
+<span id="cosinnus-todo-tests-view-tests-test-edit-module"></span><h2>cosinnus_todo.tests.view_tests.test_edit module<a class="headerlink" href="#module-cosinnus_todo.tests.view_tests.test_edit" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_edit.EditTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_todo.tests.view_tests.test_edit.</span></span><span class="sig-name descname"><span class="pre">EditTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_edit.EditTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase" title="cosinnus_todo.tests.view_tests.base.ViewTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViewTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_edit.EditTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_edit.EditTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_edit.EditTest.test_assigned_to_invalid">
+<span class="sig-name descname"><span class="pre">test_assigned_to_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_edit.EditTest.test_assigned_to_invalid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_edit.EditTest.test_get_logged_in">
+<span class="sig-name descname"><span class="pre">test_get_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_edit.EditTest.test_get_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 200 on GET and have todo title set to readonly in form
+when logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_edit.EditTest.test_get_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_get_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_edit.EditTest.test_get_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should redirect on GET if not logged in</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_edit.EditTest.test_post_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_edit.EditTest.test_post_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 302 to detail page on successful POST and have tag
+saved to todo</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_edit.EditTest.test_post_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_post_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_edit.EditTest.test_post_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should redirect on POST if not logged in</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_todo.tests.view_tests.test_index">
+<span id="cosinnus-todo-tests-view-tests-test-index-module"></span><h2>cosinnus_todo.tests.view_tests.test_index module<a class="headerlink" href="#module-cosinnus_todo.tests.view_tests.test_index" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_index.IndexTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_todo.tests.view_tests.test_index.</span></span><span class="sig-name descname"><span class="pre">IndexTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_index.IndexTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase" title="cosinnus_todo.tests.view_tests.base.ViewTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViewTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_index.IndexTest.test_index">
+<span class="sig-name descname"><span class="pre">test_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_index.IndexTest.test_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should permanently redirect to list view</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_todo.tests.view_tests.test_list">
+<span id="cosinnus-todo-tests-view-tests-test-list-module"></span><h2>cosinnus_todo.tests.view_tests.test_list module<a class="headerlink" href="#module-cosinnus_todo.tests.view_tests.test_list" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_list.ListTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_todo.tests.view_tests.test_list.</span></span><span class="sig-name descname"><span class="pre">ListTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_list.ListTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_todo.tests.view_tests.base.ViewTestCase" title="cosinnus_todo.tests.view_tests.base.ViewTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViewTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_list.ListTest.test_list_logged_in_admin">
+<span class="sig-name descname"><span class="pre">test_list_logged_in_admin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_list.ListTest.test_list_logged_in_admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 200 and contain URL to add a todo entry</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_todo.tests.view_tests.test_list.ListTest.test_list_not_logged_in">
+<span class="sig-name descname"><span class="pre">test_list_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_todo.tests.view_tests.test_list.ListTest.test_list_not_logged_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return 200 and contain URL to add a todo entry</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_todo.tests.view_tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_todo.tests.view_tests" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus_todo.html">cosinnus_todo package</a><ul>
+  <li><a href="cosinnus_todo.tests.html">cosinnus_todo.tests package</a><ul>
+      <li>Previous: <a href="cosinnus_todo.tests.templatetag_tests.html" title="previous chapter">cosinnus_todo.tests.templatetag_tests package</a></li>
+      <li>Next: <a href="cosinnus_todo.utils.html" title="next chapter">cosinnus_todo.utils package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_todo.tests.view_tests.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

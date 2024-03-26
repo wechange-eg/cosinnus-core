@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus_organization.api package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus_organization.views package" href="cosinnus_organization.views.html" />
+    <link rel="prev" title="cosinnus_organization package" href="cosinnus_organization.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-organization-api-package">
+<h1>cosinnus_organization.api package<a class="headerlink" href="#cosinnus-organization-api-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus_organization.api.rdf_serializers">
+<span id="cosinnus-organization-api-rdf-serializers-module"></span><h2>cosinnus_organization.api.rdf_serializers module<a class="headerlink" href="#module-cosinnus_organization.api.rdf_serializers" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.api.rdf_serializers.</span></span><span class="sig-name descname"><span class="pre">ContactPointRDFSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RDFSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('email',</span> <span class="pre">'phone_number')</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta.prefixes">
+<span class="sig-name descname"><span class="pre">prefixes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'schema':</span> <span class="pre">Namespace('http://schema.org/')}</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta.prefixes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">rdflib.term.URIRef('http://schema.org/ContactPoint')</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.Meta.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.ContactPointRDFSerializer.get_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.api.rdf_serializers.</span></span><span class="sig-name descname"><span class="pre">CreativeWorkRDFSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RDFSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('about',</span> <span class="pre">'last_modified',</span> <span class="pre">'created',</span> <span class="pre">'license',</span> <span class="pre">'keywords',</span> <span class="pre">'identifier',</span> <span class="pre">'url',</span> <span class="pre">'description')</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta.prefixes">
+<span class="sig-name descname"><span class="pre">prefixes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'sdo':</span> <span class="pre">Namespace('http://schema.org/'),</span> <span class="pre">'wechange':</span> <span class="pre">Namespace('http://wechange.de')}</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta.prefixes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">rdflib.term.URIRef('http://schema.org/CreativeWork')</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.Meta.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_created">
+<span class="sig-name descname"><span class="pre">get_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_identifier">
+<span class="sig-name descname"><span class="pre">get_identifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_identifier" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_keywords">
+<span class="sig-name descname"><span class="pre">get_keywords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_keywords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_last_modified">
+<span class="sig-name descname"><span class="pre">get_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_license">
+<span class="sig-name descname"><span class="pre">get_license</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_license" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_url">
+<span class="sig-name descname"><span class="pre">get_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer.get_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.api.rdf_serializers.</span></span><span class="sig-name descname"><span class="pre">OrganizationRDFSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RDFSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('name',</span> <span class="pre">'legal_name',</span> <span class="pre">'url',</span> <span class="pre">'place',</span> <span class="pre">'contact_point')</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta.prefixes">
+<span class="sig-name descname"><span class="pre">prefixes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'sdo':</span> <span class="pre">Namespace('http://schema.org/'),</span> <span class="pre">'wechange':</span> <span class="pre">Namespace('http://wechange.de')}</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta.prefixes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">rdflib.term.URIRef('http://schema.org/Organization')</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.Meta.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.get_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.get_legal_name">
+<span class="sig-name descname"><span class="pre">get_legal_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.get_legal_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.get_url">
+<span class="sig-name descname"><span class="pre">get_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.OrganizationRDFSerializer.get_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.api.rdf_serializers.</span></span><span class="sig-name descname"><span class="pre">PlaceRDFSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RDFSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('location_lat',</span> <span class="pre">'location_lon')</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationLocation" title="cosinnus_organization.models.CosinnusOrganizationLocation"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationLocation</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta.prefixes">
+<span class="sig-name descname"><span class="pre">prefixes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'schema':</span> <span class="pre">Namespace('http://schema.org/')}</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta.prefixes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">rdflib.term.URIRef('http://schema.org/Place')</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.Meta.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PlaceRDFSerializer.get_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.api.rdf_serializers.</span></span><span class="sig-name descname"><span class="pre">PostalAddressRDFSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RDFSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('location',)</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganizationLocation" title="cosinnus_organization.models.CosinnusOrganizationLocation"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganizationLocation</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta.prefixes">
+<span class="sig-name descname"><span class="pre">prefixes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'sdo':</span> <span class="pre">Namespace('http://schema.org/')}</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta.prefixes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">rdflib.term.URIRef('http://schema.org/PostalAddress')</span></em><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.Meta.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.rdf_serializers.PostalAddressRDFSerializer.get_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_organization.api.serializers">
+<span id="cosinnus-organization-api-serializers-module"></span><h2>cosinnus_organization.api.serializers module<a class="headerlink" href="#module-cosinnus_organization.api.serializers" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationListSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.api.serializers.</span></span><span class="sig-name descname"><span class="pre">OrganizationListSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationListSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationListSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationListSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationListSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'url',</span> <span class="pre">'slug',</span> <span class="pre">'name',</span> <span class="pre">'description',</span> <span class="pre">'website',</span> <span class="pre">'admins',</span> <span class="pre">'locations',</span> <span class="pre">'timestamp',</span> <span class="pre">'topics',</span> <span class="pre">'tags',</span> <span class="pre">'image',</span> <span class="pre">'is_open_for_cooperation')</span></em><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationListSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationListSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationListSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationListSerializer.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationListSerializer.get_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationListSerializer.get_image">
+<span class="sig-name descname"><span class="pre">get_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationListSerializer.get_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationListSerializer.get_tags">
+<span class="sig-name descname"><span class="pre">get_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationListSerializer.get_tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationListSerializer.get_topics">
+<span class="sig-name descname"><span class="pre">get_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationListSerializer.get_topics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationRetrieveSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.api.serializers.</span></span><span class="sig-name descname"><span class="pre">OrganizationRetrieveSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationRetrieveSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_organization.api.serializers.OrganizationListSerializer" title="cosinnus_organization.api.serializers.OrganizationListSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrganizationListSerializer</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationSimpleSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.api.serializers.</span></span><span class="sig-name descname"><span class="pre">OrganizationSimpleSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationSimpleSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationSimpleSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationSimpleSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationSimpleSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'name',</span> <span class="pre">'slug',</span> <span class="pre">'description')</span></em><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationSimpleSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.serializers.OrganizationSimpleSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_organization.api.serializers.OrganizationSimpleSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus_organization.html#cosinnus_organization.models.CosinnusOrganization" title="cosinnus_organization.models.CosinnusOrganization"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusOrganization</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_organization.api.views">
+<span id="cosinnus-organization-api-views-module"></span><h2>cosinnus_organization.api.views module<a class="headerlink" href="#module-cosinnus_organization.api.views" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_organization.api.views.</span></span><span class="sig-name descname"><span class="pre">OrganizationViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.api.views.html#cosinnus.api.views.mixins.PublicCosinnusGroupFilterMixin" title="cosinnus.api.views.mixins.PublicCosinnusGroupFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PublicCosinnusGroupFilterMixin</span></code></a>, <a class="reference internal" href="cosinnus.api.views.html#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin" title="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterQuerySetMixin</span></code></a>, <a class="reference internal" href="cosinnus.api.views.html#cosinnus.api.views.mixins.GetForUserViewSetMixin" title="cosinnus.api.views.mixins.GetForUserViewSetMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">GetForUserViewSetMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RDFViewSetMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelViewSet</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.basename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.get_serializer_class">
+<span class="sig-name descname"><span class="pre">get_serializer_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.get_serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the class to use for the serializer.
+Defaults to using <cite>self.serializer_class</cite>.</p>
+<p>You may want to override this if you need to provide different
+serializations depending on the incoming request.</p>
+<p>(Eg. admins get full serialization, others get basic serialization)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.http_method_names">
+<span class="sig-name descname"><span class="pre">http_method_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['get']</span></em><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.http_method_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.lookup_field">
+<span class="sig-name descname"><span class="pre">lookup_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'slug'</span></em><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.lookup_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.lookup_url_kwarg">
+<span class="sig-name descname"><span class="pre">lookup_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'slug'</span></em><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.lookup_url_kwarg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api.views.mixins.ReadOnlyOrIsAdminUser'&gt;,)</span></em><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.queryset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.rdf_serializer_class">
+<span class="sig-name descname"><span class="pre">rdf_serializer_class</span></span><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.rdf_serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer" title="cosinnus_organization.api.rdf_serializers.CreativeWorkRDFSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CreativeWorkRDFSerializer</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_organization.api.views.OrganizationViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_organization.api.views.OrganizationViewSet.suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus_organization.api">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus_organization.api" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus_organization.html">cosinnus_organization package</a><ul>
+      <li>Previous: <a href="cosinnus_organization.html" title="previous chapter">cosinnus_organization package</a></li>
+      <li>Next: <a href="cosinnus_organization.views.html" title="next chapter">cosinnus_organization.views package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus_organization.api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

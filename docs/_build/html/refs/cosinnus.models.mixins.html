@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.models.mixins package &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.templatetags package" href="cosinnus.templatetags.html" />
+    <link rel="prev" title="cosinnus.models package" href="cosinnus.models.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cosinnus-models-mixins-package">
+<h1>cosinnus.models.mixins package<a class="headerlink" href="#cosinnus-models-mixins-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.models.mixins.images">
+<span id="cosinnus-models-mixins-images-module"></span><h2>cosinnus.models.mixins.images module<a class="headerlink" href="#module-cosinnus.models.mixins.images" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.images.ThumbnailableImageMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.mixins.images.</span></span><span class="sig-name descname"><span class="pre">ThumbnailableImageMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.images.ThumbnailableImageMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.images.ThumbnailableImageMixin.get_media_image_path">
+<span class="sig-name descname"><span class="pre">get_media_image_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_modifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.images.ThumbnailableImageMixin.get_media_image_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the unique path for each image file in the media directory</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.images.ThumbnailableImageMixin.image_attr_name">
+<span class="sig-name descname"><span class="pre">image_attr_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.models.mixins.images.ThumbnailableImageMixin.image_attr_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.images.ThumbnailableImageMixin.is_image">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_image</span></span><a class="headerlink" href="#cosinnus.models.mixins.images.ThumbnailableImageMixin.is_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>can be override to use with FileFields where it’s not sure if it is an image</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.images.ThumbnailableImageMixin.sourcefilename">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sourcefilename</span></span><a class="headerlink" href="#cosinnus.models.mixins.images.ThumbnailableImageMixin.sourcefilename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Must alwas return the original image’s filename.
+Can be overridden in case the original image was copied away.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.images.ThumbnailableImageMixin.static_image_original_url">
+<span class="sig-name descname"><span class="pre">static_image_original_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.images.ThumbnailableImageMixin.static_image_original_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function copies the image to its new path (if necessary) and
+returns the URL for the image to be displayed on the page. (Ex:
+‘/media/cosinnus_files/images/dca2b30b1e07ed135c24d7dbd928e37523b474bb.jpg’)</p>
+<p>It is a helper function to display cosinnus image files on the webpage.</p>
+<p>The image file is copied to a general image folder in cosinnus_files,
+so the true image path is not shown to the client.</p>
+<p>The image returned is the original, uncropped image.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.images.ThumbnailableImageMixin.static_image_url">
+<span class="sig-name descname"><span class="pre">static_image_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_modifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.images.ThumbnailableImageMixin.static_image_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function copies the image to its new path (if necessary) and
+returns the URL for the image to be displayed on the page. (Ex:
+‘/media/cosinnus_files/images/dca2b30b1e07ed135c24d7dbd928e37523b474bb.jpg’)</p>
+<p>It is a helper function to display cosinnus image files on the webpage.</p>
+<p>The image file is copied to a general image folder in cosinnus_files,
+so the true image path is not shown to the client.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.images.ThumbnailableImageMixin.static_image_url_thumbnail">
+<span class="sig-name descname"><span class="pre">static_image_url_thumbnail</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.images.ThumbnailableImageMixin.static_image_url_thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.models.mixins.indexes">
+<span id="cosinnus-models-mixins-indexes-module"></span><h2>cosinnus.models.mixins.indexes module<a class="headerlink" href="#module-cosinnus.models.mixins.indexes" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.indexes.IndexingUtilsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.mixins.indexes.</span></span><span class="sig-name descname"><span class="pre">IndexingUtilsMixin</span></span><a class="headerlink" href="#cosinnus.models.mixins.indexes.IndexingUtilsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Adds update/remove index util functions to a model</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.indexes.IndexingUtilsMixin.remove_index">
+<span class="sig-name descname"><span class="pre">remove_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.indexes.IndexingUtilsMixin.remove_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes self from the proper search index depending on model</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.indexes.IndexingUtilsMixin.signal_processor">
+<span class="sig-name descname"><span class="pre">signal_processor</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;haystack.signals.BaseSignalProcessor</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.models.mixins.indexes.IndexingUtilsMixin.signal_processor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.indexes.IndexingUtilsMixin.update_index">
+<span class="sig-name descname"><span class="pre">update_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.indexes.IndexingUtilsMixin.update_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates self in the proper search index depending on model</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.models.mixins.tagged">
+<span id="cosinnus-models-mixins-tagged-module"></span><h2>cosinnus.models.mixins.tagged module<a class="headerlink" href="#module-cosinnus.models.mixins.tagged" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.tagged.RelayMessageMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">RelayMessageMixin</span></span><a class="headerlink" href="#cosinnus.models.mixins.tagged.RelayMessageMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Utility function mixin for a BaseTaggableObject model relaying messages to Rocket Chat.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.tagged.RelayMessageMixin.get_message_emote">
+<span class="sig-name descname"><span class="pre">get_message_emote</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.tagged.RelayMessageMixin.get_message_emote" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.tagged.RelayMessageMixin.get_message_text">
+<span class="sig-name descname"><span class="pre">get_message_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.tagged.RelayMessageMixin.get_message_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.tagged.RelayMessageMixin.get_message_title">
+<span class="sig-name descname"><span class="pre">get_message_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.tagged.RelayMessageMixin.get_message_title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.models.mixins.translations">
+<span id="cosinnus-models-mixins-translations-module"></span><h2>cosinnus.models.mixins.translations module<a class="headerlink" href="#module-cosinnus.models.mixins.translations" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslatableFormsetJsonFieldMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.mixins.translations.</span></span><span class="sig-name descname"><span class="pre">TranslatableFormsetJsonFieldMixin</span></span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslatableFormsetJsonFieldMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Model mixin that adds a helper function to receive a translated version of a formset json field.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslatableFormsetJsonFieldMixin.get_translated_json_field">
+<span class="sig-name descname"><span class="pre">get_translated_json_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslatableFormsetJsonFieldMixin.get_translated_json_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.mixins.translations.</span></span><span class="sig-name descname"><span class="pre">TranslateableFieldsModelMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>translations are saved liked that:
+{“&lt;fieldname&gt;”:</p>
+<blockquote>
+<div><p>{“&lt;language_code”: “foo”},
+{“&lt;another language_code”: “bar”}</p>
+</div></blockquote>
+<p>}
+Special case - dynamic_fields:
+{“dynamic_fields”:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{“&lt;language_code&gt;”:</dt><dd><p>{“&lt;fieldname”: “foo”},
+{“&lt;another fieldname”: “bar”}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}
+Be aware: only fields with translations of dynamic_fields
+are added to the translations json.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.Meta.abstract">
+<span class="sig-name descname"><span class="pre">abstract</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.Meta.abstract" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.dynamic_fields_settings">
+<span class="sig-name descname"><span class="pre">dynamic_fields_settings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.dynamic_fields_settings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_dynamic_fields_with_translations">
+<span class="sig-name descname"><span class="pre">get_dynamic_fields_with_translations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_dynamic_fields_with_translations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets dynamic_fields from object and merges them
+with translations from translations json field</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_translateable_fields">
+<span class="sig-name descname"><span class="pre">get_translateable_fields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_translateable_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_translated_dynamic_field">
+<span class="sig-name descname"><span class="pre">get_translated_dynamic_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_translated_dynamic_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the translated value of a dynamic field.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_translated_model_field">
+<span class="sig-name descname"><span class="pre">get_translated_model_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_translated_model_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_translated_readonly_instance">
+<span class="sig-name descname"><span class="pre">get_translated_readonly_instance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.get_translated_readonly_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a translated readonly copy of this instance,
+where all translated fields are replaced with the final translated value.
+The save() and delete() functions are blocked to prevent accidental persisting of the fields.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.has_dynamic_field_translations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_dynamic_field_translations</span></span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.has_dynamic_field_translations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.languages">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">languages</span></span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.languages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.translatable_dynamic_fields">
+<span class="sig-name descname"><span class="pre">translatable_dynamic_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.translatable_dynamic_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.translateable_fields">
+<span class="sig-name descname"><span class="pre">translateable_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.translateable_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.translations">
+<span class="sig-name descname"><span class="pre">translations</span></span><a class="headerlink" href="#cosinnus.models.mixins.translations.TranslateableFieldsModelMixin.translations" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cosinnus.models.mixins">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.models.mixins" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legacy/index.html">Legacy Recipes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Cosinnus Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cosinnus.html">cosinnus package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_cloud.html">cosinnus_cloud package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_etherpad.html">cosinnus_etherpad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_exchange.html">cosinnus_exchange package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html">cosinnus_marketplace package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_note.html">cosinnus_note package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_oauth_client.html">cosinnus_oauth_client package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html">cosinnus_poll package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_todo.html">cosinnus_todo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_conference.html">cosinnus_conference package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html">cosinnus_event package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_file.html">cosinnus_file package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_message.html">cosinnus_message package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html">cosinnus_notifications package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_organization.html">cosinnus_organization package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cosinnus_stream.html">cosinnus_stream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Cosinnus Modules</a><ul>
+  <li><a href="cosinnus.html">cosinnus package</a><ul>
+  <li><a href="cosinnus.models.html">cosinnus.models package</a><ul>
+      <li>Previous: <a href="cosinnus.models.html" title="previous chapter">cosinnus.models package</a></li>
+      <li>Next: <a href="cosinnus.templatetags.html" title="next chapter">cosinnus.templatetags package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/refs/cosinnus.models.mixins.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
