@@ -17,15 +17,15 @@ UPDATES = {
         'short_text': _('Includes Django update, conference improvements and more.'),
         'full_text': _(
             'The update includes:\n'
-            '- Update our backend framework Django to version 4 for security fixes and improvements.\n'
-            '- Add support for multi-language welcome-emails, sending the user the welcome email in the users selected language (if the translation feature is enabled).\n'
-            '- Make conference application questions translatable (if the translation feature is enabled).\n'
-            '- Add subtitle field to (non compact) conferences for additional information.\n'
-            '- Show exact number of conference participants for events exceeding 99 participants.\n'
-            '- (Admin) Create logs for group and group membership changes.\n'
-            '- Remove workshop visibility label and order simultaneous workshops alphabetically on the compact conferences micro site.\n'
-            '- Fix map search filter for conferences and events considering ongoing events and exact event ranges.\n'
-            '- Fix embedded map page allowing to close selected elements.\n'
+            '- Updated the backend framework Django to version 4 for security fixes and improvements.\n'
+            '- Added support for multi-language welcome-emails, sending the user the welcome email in the users selected language (if the translation feature is enabled).\n'
+            '- Made conference application questions translatable (if the translation feature is enabled).\n'
+            '- Added subtitle field to conferences for additional information.\n'
+            '- Showing exact number of conference participants for events exceeding 99 participants.\n'
+            '- Improved map search filter for conferences and events considering ongoing events and exact event ranges.\n'
+            '- Improved display of workshops on the compact conferences micro site.\n'
+            '- Fixed embedded map page allowing to close selected elements.\n'
+            '- (Admin-Interface) Added logs for group and group membership changes.\n'
             '- Further security improvements and minor bugfixes.\n'
         ),
     },
