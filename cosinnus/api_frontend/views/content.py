@@ -121,7 +121,7 @@ class MainContentView(APIView):
         "css_urls": [],
         "meta": None,
         "styles": None,
-        "sub_navigation": {},  # can be None if no left navigation should be shown
+        "sub_navigation": None,  # can be None if no left navigation should be shown
         "main_menu": {
             "label": None,  # either <name of group>, "personal space", or "community"
             "icon": None,  # exclusive with `main_menu_image`, only one can be non-None!
@@ -478,23 +478,13 @@ class MainContentView(APIView):
             fa_class = ' '.join([subclass for subclass in fa_i.get('class') if not subclass.lower() in FONT_AWESOME_CLASS_FILTER])
         return fa_class
         
-    def _parse_leftnav_menu(self, html_soup):
-        """ Tries to parse from the leftnav all links to show in the left sub navigation.
-            Can return None"""
-        if not self.has_leftnav:
-            return None
-        leftnav = html_soup.find('div', class_='x-v3-leftnav')
-        if not leftnav:
-            self.has_leftnav = False
-            return None
-        
-        top = []
-        middle = []
-        bottom = []
-        
-        # extract appsmenu links (<a>) AND leftnav elements (<button>) from the leftnav,
-        # because the beautifulsoup filters apply to both
-        for leftnav_link in leftnav.find_all(['a', 'button']):
+    def _create_menu_items_from_html(self, html_soup):
+        """ Extracts a menu_item from all proper links contained in the given HTML soup,
+            with a heuristic for icons/labels """
+        if not html_soup:
+            return []
+        menu_items = []
+        for leftnav_link in html_soup.find_all(['a', 'button']):
             # skip link-less buttons (like the dropdown trigger)
             href = leftnav_link.get('href')
             if not href or href == '#':
@@ -503,20 +493,87 @@ class MainContentView(APIView):
             text_source = leftnav_link.find('div', class_='media-body') or leftnav_link
             if text_source:
                 link_label = text_source.text.strip().replace('/n', '')
+            
+            # a button counts as selected item if there is an `<i class="fa fa-caret-right"></i>` in it
+            selected = len([lnk for lnk in leftnav_link.find_all('i') if lnk.get('class') and 'fa-caret-right' in lnk.get('class')]) > 0
+            # we initialize a sub_item list for other buttons to be sorted in if the link is an <a.active> tag from the appsmenu
+            sub_items = None
+            if leftnav_link.name == 'a' and leftnav_link.parent and leftnav_link.parent.get('class') and \
+                    'active' in leftnav_link.parent.get('class'):
+                sub_items = []
+            
             # create menu item for the link
             menu_item = MenuItem(
                 link_label,
                 href,
                 icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
                 id='Sidebar-' + get_random_string(8),
+                sub_items=sub_items,
+                selected=selected
             )
-            # select the proper subnav for this menu to go to, by type of URL
-            target_subnav = middle
-            if any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_BOTTOM_SIDEBAR_URL_SUFFIXES):
-                target_subnav = bottom
-            elif any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES):
-                target_subnav = top
-            target_subnav.append(menu_item)
+            menu_items.append(menu_item)
+        return menu_items
+        
+    def _parse_leftnav_menu(self, html_soup):
+        """ Tries to parse from the leftnav all links to show in the left sub navigation.
+            Can return None if the sidebar should not be shown at all. """
+        if not self.has_leftnav:
+            return None
+        
+        leftnav = html_soup.find('div', class_='x-v3-leftnav')
+        leftnav_appsmenu = None
+        leftnav_buttons = None
+        if leftnav:
+            leftnav_appsmenu = leftnav.find('div', class_='x-v3-leftnav-appsmenu')
+            leftnav_buttons = leftnav.find('div', class_='x-v3-leftnav-buttons')
+        if not leftnav_appsmenu and not leftnav_buttons:
+            self.has_leftnav = False
+            return None
+        
+        # TODO: extract appsmenu buttons and detect which one is active, then extract the buttons-area buttons into
+        # that button as sub_items.
+        
+        top = []
+        middle = []
+        bottom = []
+        middle_from_buttons_area = []
+        
+        # extract appsmenu links (<a>) AND leftnav elements (<button>) from the leftnav,
+        # because the beautifulsoup filters apply to both
+        appsmenu_items = self._create_menu_items_from_html(leftnav_appsmenu)
+        buttons_items = self._create_menu_items_from_html(leftnav_buttons)
+        
+        # find the first appsmenu menu_item with sub_items initialized (the active menu item):
+        active_menu_item = next((item for item in appsmenu_items if item.get('sub_items') is not None), None)
+        # if no selected item has been marked in the buttons area items (the one carrying a caret-right),
+        # mark the active appsmenu item active if it exists
+        selected_menu_item = next((item for item in buttons_items if item.get('selected', False)), None)
+        if not selected_menu_item and active_menu_item:
+            active_menu_item['selected'] = True
+        
+        def _sort_menu_items(menu_items, default_target):
+            # picks a spot for the given items, with a given default target if no other rules apply
+            for menu_item in menu_items:
+                target_subnav = default_target
+                # select the proper subnav for this menu to go to, by type of URL
+                if any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_BOTTOM_SIDEBAR_URL_SUFFIXES):
+                    target_subnav = bottom
+                elif any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES):
+                    target_subnav = top
+                target_subnav.append(menu_item)
+        
+        # sort items from the two leftnav areas into the three v3 leftnav areas
+        _sort_menu_items(appsmenu_items, middle)
+        _sort_menu_items(buttons_items, middle_from_buttons_area)
+        
+        # special case: if we have an active navigation item in the appsmenu, we are in a subpage of that area,
+        #     so we sort all links from the leftnav buttons area as sub items for that navigation item
+        #     otherwise we just list them after the other middle items
+        if active_menu_item:
+            active_menu_item['sub_items'].extend(middle_from_buttons_area)
+        else:
+            middle.extend(middle_from_buttons_area)
+            
         
         # add sidebar third party tools if it exists in group data
         if self.group and self.group.third_party_tools:
@@ -532,6 +589,8 @@ class MainContentView(APIView):
                 except Exception as e:
                     logger.warning('Error converting a thirdparty group menu item to MenuItem', extra={'exc': e})
         
+        if not top and not middle and not bottom:
+            return None
         sub_nav = {
             "top": top,
             "middle": middle,

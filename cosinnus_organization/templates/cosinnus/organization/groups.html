@@ -15,9 +15,11 @@
 
 {% block override_leftnav %}
 <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav {% endif %}col-lg-3 col-md-3"><!-- left column -->
-	{% block leftnav %}
-		{% include "cosinnus/organization/leftnav_organization.html" with current_page="groups" %}
-	{% endblock leftnav %}
+    <div {% if COSINNUS_V3_API_CONTENT_ACTIVE %}class="x-v3-leftnav-buttons"{% endif %}>
+        {% block leftnav %}
+            {% include "cosinnus/organization/leftnav_organization.html" with current_page="groups" %}
+        {% endblock leftnav %}
+    </div>
 	<div class="clearfix regular-space"></div>
 </div><!-- left column -->
 {% endblock override_leftnav %}

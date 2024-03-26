@@ -27,8 +27,10 @@
         
 	        {% block override_leftnav %}
 	        <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav {% endif %}col-lg-4 col-md-4"><!-- left column -->
-	            {% include 'cosinnus_stream/leftnav.html' with streams=streams stream=stream %}
-	            <div class="clearfix regular-space"></div>
+                <div {% if COSINNUS_V3_API_CONTENT_ACTIVE %}class="x-v3-leftnav-buttons"{% endif %}>
+                    {% include 'cosinnus_stream/leftnav.html' with streams=streams stream=stream %}
+                    <div class="clearfix regular-space"></div>
+                </div>
 	        </div><!-- left column -->
 	        {% endblock override_leftnav %}
 	        

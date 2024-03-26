@@ -28,6 +28,7 @@
                 <span class="pull-left">
                     {% if running_polls_count %}
                         {{ running_polls_count }}
+                        <i class="fa fa-bar-chart" style="display:none;"></i>
                     {% else %}
                         <i class="fa fa-bar-chart"></i>
                     {% endif %}
@@ -51,6 +52,7 @@
                     {% comment %}  
                         {% if past_polls_count or past_polls_count%}
                             {{ past_polls_count }}
+                            <i class="fa fa-bar-chart" style="display:none;"></i>
                         {% else %}
                             <i class="fa fa-bar-chart"></i>
                         {% endif %}

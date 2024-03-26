@@ -185,7 +185,9 @@
                         {% if group %}
                             {% cosinnus_menu "cosinnus/appsmenu.html" %}
                         {% endif %}
-                        {% block leftnav %}{% endblock leftnav %}
+                        <div {% if COSINNUS_V3_API_CONTENT_ACTIVE %}class="x-v3-leftnav-buttons"{% endif %}>
+                            {% block leftnav %}{% endblock leftnav %}
+                        </div>
 <!--                        <div class="clearfix regular-space"></div>-->
                     </div><!-- left column -->
                     {% endblock override_leftnav %}
