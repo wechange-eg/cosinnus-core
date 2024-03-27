@@ -17,7 +17,8 @@ class FormTestCase(TestCase):
         self.group = CosinnusGroup.objects.create(name='testgroup')
         self.admin = User.objects.create_superuser(
             username='admin', email='admin@example.com', password=None, last_login=now())
-        self.admin.cosinnus_profile.settings['tos_accepted'] = True
+        self.admin.cosinnus_profile.tos_accepted = True
+        self.admin.cosinnus_profile.email_verified = True
         self.admin.cosinnus_profile.save()
         CosinnusGroupMembership.objects.create(user=self.admin,
             group=self.group, status=MEMBERSHIP_ADMIN)
