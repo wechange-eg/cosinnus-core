@@ -490,8 +490,8 @@ class NotificationsThread(Thread):
             return False
         if not user.last_login:
             return False
-        if not cosinnus_setting(user, 'tos_accepted'):
-            return False
+        if not user.cosinnus_profile.tos_accepted:
+                return False
         
         # user cannot be object's creator unless explicitly specified
         if hasattr(obj, 'creator'):
@@ -572,7 +572,7 @@ class NotificationsThread(Thread):
             return False
         if not user.last_login:
             return False
-        if not cosinnus_setting(user, 'tos_accepted'):
+        if not user.cosinnus_profile.tos_accepted:
             return False
         
         """
