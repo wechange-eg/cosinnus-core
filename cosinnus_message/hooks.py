@@ -127,25 +127,39 @@ if settings.COSINNUS_ROCKET_ENABLED:
         old_instance = get_object_or_None(type(instance), pk=instance.id) if instance.id else None
         try:
             rocket = RocketChatConnection()
-            if old_instance and rocket.get_group_id(instance, create_if_not_exists=False):
-                if instance.slug != old_instance.slug:
-                    # do a threaded call
-                    class CosinnusRocketGroupUpdateThread(Thread):
-                        def run(self):
-                            try:
-                                rocket.groups_rename(instance)
-                            except RocketChatDownException:
-                                logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                            except Exception as e:
-                                logger.exception(e)
-                    CosinnusRocketGroupUpdateThread().start()
-            else:
-                # Not a threaded call as group settings are updated
-                rocket.groups_create(instance)
+            if old_instance:
+                if rocket.get_group_id(instance, create_if_not_exists=False):
+                    if instance.slug != old_instance.slug:
+                        # do a threaded call
+                        class CosinnusRocketGroupUpdateThread(Thread):
+                            def run(self):
+                                try:
+                                    rocket.groups_rename(instance)
+                                except RocketChatDownException:
+                                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                                except Exception as e:
+                                    logger.exception(e)
+                        CosinnusRocketGroupUpdateThread().start()
+                else:
+                    # Not a threaded call as group settings are updated
+                    rocket.groups_create(instance)
         except RocketChatDownException:
             logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
         except Exception as e:
             logger.exception(e)
+
+    @receiver(post_save, sender=CosinnusSociety)
+    @receiver(post_save, sender=CosinnusProject)
+    def handle_cosinnus_group_created(sender, instance, created, **kwargs):
+        if created:
+            try:
+                # Not a threaded call as group settings are updated
+                rocket = RocketChatConnection()
+                rocket.groups_create(instance)
+            except RocketChatDownException:
+                logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+            except Exception as e:
+                logger.exception(e)
 
     def _group_is_conference_without_default_channel(rocket, group):
         """
