@@ -353,8 +353,7 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin,
                 workshop_username = profile.readable_workshop_user_name
                 email = member.email
                 has_logged_in, logged_in_date = self.get_last_login(member)
-                tos_accepted = 1 if profile.settings.get(
-                    'tos_accepted', False) else 0
+                tos_accepted = 1 if profile.tos_accepted else 0
                 row = [workshop_username, email, has_logged_in,
                        logged_in_date, tos_accepted]
                 rows.append(row)

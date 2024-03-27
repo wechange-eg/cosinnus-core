@@ -123,7 +123,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
         cur_language = translation.get_language()
         try:
             # only active users that have logged in before accepted the TOS get notifications
-            if not user.is_active or not user.last_login or not cosinnus_setting(user, 'tos_accepted'):
+            if not user.is_active or not user.last_login or not user.cosinnus_profile.tos_accepted:
                 continue
             
             # switch language to user's preference language so all i18n and date formats are in their language
