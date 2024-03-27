@@ -1196,7 +1196,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         main_navigation_items['right'] = right_navigation_items
         
         # allow portals to add links via a dropin defined in `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`
-        main_navigation_items = CosinnusNavigationPortalLinks().modifiy_main_navigation(main_navigation_items)
+        main_navigation_items = CosinnusNavigationPortalLinks().modifiy_main_navigation(main_navigation_items, request.user)
         
         return Response(main_navigation_items)
 
@@ -1331,7 +1331,7 @@ class CosinnusNavigationPortalLinksBase(object):
         `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`. The class can then modify the
         links returned by the API endpoints. """
     
-    def modifiy_main_navigation(self, main_navigation_items):
+    def modifiy_main_navigation(self, main_navigation_items, user=None):
         # noop, override this function in your portal's dropin
         return main_navigation_items
         
