@@ -11,9 +11,9 @@ UPDATES includes release notes for each version shown to the users with:
 """
 
 UPDATES = {
-    '1.20.1': {
+    '1.20.0': {
         'datetime': datetime(2024, 3, 25, tzinfo=pytz.utc),
-        'title': _('Version 1.20.1 released'),
+        'title': _('Version 1.20.0 released'),
         'short_text': _('Includes Django update, conference improvements and more.'),
         'full_text': _(
             'The update includes:\n'

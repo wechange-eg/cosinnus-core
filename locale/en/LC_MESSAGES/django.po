@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-26 14:22+0100\n"
+"POT-Creation-Date: 2024-03-27 09:44+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -8319,6 +8319,12 @@ msgstr ""
 msgid "Question about"
 msgstr ""
 
+msgid "Please enter your OTP token."
+msgstr ""
+
+msgid "Invalid token. Please make sure you have entered it correctly."
+msgstr ""
+
 msgid "The password must contain at least 1 digit, 0-9."
 msgstr ""
 
@@ -8347,7 +8353,7 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
-msgid "Version 1.20.1 released"
+msgid "Version 1.20.0 released"
 msgstr ""
 
 msgid "Includes Django update, conference improvements and more."

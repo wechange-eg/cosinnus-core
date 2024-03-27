@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 12:40+0100\n"
+"POT-Creation-Date: 2024-03-27 09:44+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1971,6 +1971,11 @@ msgstr "Podana po przecinku lista fraz, dla których autouzupełnianie, nawet cz
 
 msgid "Is Moderator"
 msgstr "Jest moderator"
+
+#, fuzzy
+#| msgid "ToS accepted?"
+msgid "ToS accepted"
+msgstr "ToS Zaakceptowane?"
 
 msgid "Language"
 msgstr "Język"
@@ -8495,6 +8500,14 @@ msgstr "Teraz"
 msgid "Question about"
 msgstr "Pytania"
 
+#, fuzzy
+#| msgid "Please enter a token!"
+msgid "Please enter your OTP token."
+msgstr "Proszę wpisać token!"
+
+msgid "Invalid token. Please make sure you have entered it correctly."
+msgstr ""
+
 msgid "The password must contain at least 1 digit, 0-9."
 msgstr "Hasło musi zawierać co najmniej 1 cyfrę od 0 do 9."
 
@@ -8521,6 +8534,26 @@ msgid "Please also provide an end date"
 msgstr ""
 
 msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
+msgid "Version 1.20.0 released"
+msgstr ""
+
+msgid "Includes Django update, conference improvements and more."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- Updated the backend framework Django to version 4 for security fixes and improvements.\n"
+"- Added support for multi-language welcome-emails, sending the user the welcome email in the users selected language (if the translation feature is enabled).\n"
+"- Made conference application questions translatable (if the translation feature is enabled).\n"
+"- Added subtitle field to conferences for additional information.\n"
+"- Showing exact number of conference participants for events exceeding 99 participants.\n"
+"- Improved map search filter for conferences and events considering ongoing events and exact event ranges.\n"
+"- Improved display of workshops on the compact conferences micro site.\n"
+"- Fixed embedded map page allowing to close selected elements.\n"
+"- (Admin-Interface) Added logs for group and group membership changes.\n"
+"- Further security improvements and minor bugfixes.\n"
 msgstr ""
 
 msgid "Version 1.19.6 released"
