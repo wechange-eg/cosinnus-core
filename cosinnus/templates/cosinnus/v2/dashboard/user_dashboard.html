@@ -24,6 +24,7 @@
 
 {% block main_page %}
 	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
+    {% include 'cosinnus/extra_body_header.html' %}
 
     {% comment %} Some settings for the dashboard are initialized in the extraheader, and passed in a router.js, and uses a lot of
                    the default settings defined in map.js.  
