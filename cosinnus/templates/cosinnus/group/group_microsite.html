@@ -48,6 +48,7 @@
             
 
 {% block main_page %}
+    {% include 'cosinnus/extra_body_header.html' %}
 
 	{% block teaser %}
 	    {% if user.is_authenticated and user.pk in group.admins %}
