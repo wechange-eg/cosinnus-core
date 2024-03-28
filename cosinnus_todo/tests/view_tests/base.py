@@ -23,7 +23,8 @@ class ViewTestCase(TestCase):
         self.credential = 'admin'
         self.admin = User.objects.create_superuser(
             username=self.credential, email='admin@example.com', password=self.credential, last_login=now())
-        self.admin.cosinnus_profile.settings['tos_accepted'] = True
+        self.admin.cosinnus_profile.tos_accepted = True
+        self.admin.cosinnus_profile.email_verified = True
         self.admin.cosinnus_profile.save()
         CosinnusGroupMembership.objects.create(user=self.admin,
             group=self.group, status=MEMBERSHIP_ADMIN)
