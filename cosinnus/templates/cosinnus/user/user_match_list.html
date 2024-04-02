@@ -8,7 +8,7 @@
     <div class="container user-match">
         <div class="row">
             
-            <div class="col-xs-12">
+            <div class="col-xs-12 ultra-space">
                 <div class="textfield transparent">
                     <p>
                         {% comment %} Sending this through |textfield allows markdown formatting {% endcomment %}
@@ -16,14 +16,14 @@
                         {{ trans_header|textfield }}
                     </p>
                 </div>
-                <hr class="invisible"/>
             </div>
-        
+            <div class="clearfix"></div>
+
             {% for scored_user_profile in scored_user_profiles %}
                 <!-- card -->
-                <div class="col-sm-4">
-                    <div class="card h-100 white-content" style="margin: 0 20px; padding: 25px;">
-                        <div class="card-img-top d-flex flex-column">
+                <div class="col-sm-4 large-space">
+                    <div class="card h-100 white-content">
+                        <div class="card-img-top">
                             {% with avatar=scored_user_profile.avatar %}
                                 {% if avatar %}
                                     {% include 'cosinnus/user/user_avatar_image.html' with user=scored_user_profile.user image_size="large" %}
@@ -34,18 +34,21 @@
                         </div>
                         
                         {% include "cosinnus/user/user_match_card.html" with scored_user_profile=scored_user_profile %}
-                        
+
+                        <div class="clearfix"></div>
                         <hr class="invisible"/>
-                        <form action="{% url 'cosinnus:user-match-match' %}" method="POST">
+
+                        <form action="{% url 'cosinnus:user-match-match' %}" method="POST" class="card-buttons">
                             {% csrf_token %}
                             <input type="hidden" name="user_id" value="{{ scored_user_profile.user.id }}">
-                            <button type="submit" class="rounded-button button-action button-star button-like-dislike-liked w100 regular-space" name="action" value="1">
+                            <button type="submit" class="rounded-button button-action button-action-like button-star button-like-dislike-liked regular-space" name="action" value="1">
                                 <i class="far fa-star"></i>
                                 {% trans 'Wonderful, we definitely have so much to discuss!' %}
                             </button>
-                            <button type="submit" class="rounded-button button-action button-star w100 regular-space" name="action" value="0">
+                            <button type="submit" class="rounded-button button-action button-action-dislike button-star regular-space" name="action" value="0">
                                 {% trans 'Looks like we share no common interests' %}
                             </button>
+                            <div class="clearfix"></div>
                         </form>
                     </div>        
                 </div>
