@@ -77,7 +77,7 @@ LOGIN_URLS = settings.COSINNUS_NEVER_REDIRECT_URLS + [
 # to complete the login
 EXEMPTED_URLS_FOR_2FA = [
     '/two_factor_auth/token_login/',
-    '/administration/login-2fa/'
+    '/administration/login-2fa/',
     '/logout/',
     '/admin/logout/'
 ]
@@ -162,7 +162,7 @@ class AdminOTPMiddleware(MiddlewareMixin):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if not user.is_verified():
                 next_url = urlencode(request.get_full_path())
-                return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
+                return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
         elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith('/admin/') and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
             # normal users will never be redirected to the admin area
             return redirect('cosinnus:user-dashboard')
