@@ -668,8 +668,48 @@ a.portal-inlink:hover img {
 /** User-matching */
 .user-match {
     .card {
+		margin: 0 20px;
+		padding: 25px;
+
         h5 {
             color: @color-dark-gray;
         }
+
+		.card-img-top {
+			text-align: center;
+
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
     }
+}
+
+@media (max-width: 767px) {
+	.user-match {
+		.card {
+			margin: 0;
+			padding: 0 20px 20px 20px;
+
+			.card-img-top {
+				float: left;
+				width: 50%;
+				padding: 20px 20px 10px 0;
+
+				img {
+					width: 100%;
+					height: auto;
+				}
+			}
+			.card-buttons {
+				button {
+					width: ~"calc(50% - 16px)";
+				}
+				.button-action-like {
+					float: right;
+				}
+			}
+		}
+	}
 }
