@@ -92,7 +92,7 @@ from cosinnus_message.views import CosinnusMessageView,\
     CosinnusConversationView, ArchiveView, DeleteView, UndeleteView,\
     MarkAsReadView
 
-from django.conf.urls import url
+from django.urls import re_path, path
 from django.views.generic.base import RedirectView
 
 from postman import OPTIONS
@@ -102,21 +102,21 @@ from cosinnus.views.user import UserSelect2View
 
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url='posteingang/', permanent=False), name='index'),
-    url(r'^ajax/userselect/$', UserSelect2View.as_view(), name='user_select2_view'),
+    path('', RedirectView.as_view(url='posteingang/', permanent=False), name='index'),
+    path('ajax/userselect/', UserSelect2View.as_view(), name='user_select2_view'),
 
-    url(r'^nachricht/(?P<message_id>[\d]+)/$', CosinnusMessageView.as_view(), name='view'),
-    url(r'^nachricht/t/(?P<thread_id>[\d]+)/$', CosinnusConversationView.as_view(), name='view_conversation'),
-    url(r'^archiv/$', ArchiveView.as_view(), name='archive'),
-    url(r'^loeschen/$', DeleteView.as_view(), name='delete'),
-    url(r'^wiederherstellen/$', UndeleteView.as_view(), name='undelete'),
-    url(r'^gelesen/$', MarkAsReadView.as_view(), name='markasread'),
+    path('nachricht/<int:message_id>/', CosinnusMessageView.as_view(), name='view'),
+    path('nachricht/t/<int:thread_id>/', CosinnusConversationView.as_view(), name='view_conversation'),
+    path('archiv/', ArchiveView.as_view(), name='archive'),
+    path('loeschen/', DeleteView.as_view(), name='delete'),
+    path('wiederherstellen/', UndeleteView.as_view(), name='undelete'),
+    path('gelesen/', MarkAsReadView.as_view(), name='markasread'),
 
-    url(r'^posteingang/(?:(?P<option>'+OPTIONS+')/)?$', InboxView.as_view(), name='inbox'),
-    url(r'^gesendet/(?:(?P<option>'+OPTIONS+')/)?$', SentView.as_view(), name='sent'),
-    url(r'^archives/(?:(?P<option>'+OPTIONS+')/)?$', ArchivesView.as_view(), name='archives'),
-    url(r'^papierkorb/(?:(?P<option>'+OPTIONS+')/)?$', TrashView.as_view(), name='trash'),
-    url(r'^antworten/(?P<message_id>[\d:]+)/$', ReplyView.as_view(form_class=CustomReplyForm), name='reply'),
-    url(r'^neu/(?:(?P<recipients>[^/]+)/)?$', WriteView.as_view(form_classes=(CustomWriteForm, CustomWriteForm)), name='write'),
-    url(r'^g/neu/(?:(?P<group_recipients>[^/]+)/)?$', WriteView.as_view(form_classes=(CustomWriteForm, CustomWriteForm)), name='write-group'),
+    re_path(r'^posteingang/(?:(?P<option>'+OPTIONS+')/)?$', InboxView.as_view(), name='inbox'),
+    re_path(r'^gesendet/(?:(?P<option>'+OPTIONS+')/)?$', SentView.as_view(), name='sent'),
+    re_path(r'^archives/(?:(?P<option>'+OPTIONS+')/)?$', ArchivesView.as_view(), name='archives'),
+    re_path(r'^papierkorb/(?:(?P<option>'+OPTIONS+')/)?$', TrashView.as_view(), name='trash'),
+    path('antworten/<int:message_id>/', ReplyView.as_view(form_class=CustomReplyForm), name='reply'),
+    re_path(r'neu/(?:(?P<recipients>[^/]+)/)?', WriteView.as_view(form_classes=(CustomWriteForm, CustomWriteForm)), name='write'),
+    re_path(r'g/neu/(?:(?P<group_recipients>[^/]+)/)?', WriteView.as_view(form_classes=(CustomWriteForm, CustomWriteForm)), name='write-group'),
 ]

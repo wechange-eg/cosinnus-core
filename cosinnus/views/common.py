@@ -10,13 +10,13 @@ from django.contrib.auth import get_user_model, logout
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.http.response import  HttpResponseNotFound, \
     HttpResponseForbidden, HttpResponseServerError, HttpResponseNotAllowed, \
     HttpResponseBadRequest, JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import RedirectView
 from django.views.generic.base import View, TemplateView
@@ -28,6 +28,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import LikeObject
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
 from cosinnus.utils.context_processors import settings as cosinnus_context_settings
+from cosinnus.utils.http import is_ajax
 from cosinnus.utils.permissions import check_object_write_access, \
     check_object_likefollowstar_access
 from cosinnus.utils.urls import safe_redirect
@@ -97,7 +98,10 @@ class SwitchLanguageView(RedirectView):
     def get(self, request, *args, **kwargs):
         language = kwargs.pop('language', None)
         response = super(SwitchLanguageView, self).get(request, *args, **kwargs)
-        
+        self.switch_language(language, request, response)
+        return response
+    
+    def switch_language(self, language, request, response):
         if not language or language not in list(dict(settings.LANGUAGES).keys()):
             messages.error(request, _('The language "%s" is not supported' % language))
         else:
@@ -111,7 +115,6 @@ class SwitchLanguageView(RedirectView):
                 httponly=settings.LANGUAGE_COOKIE_HTTPONLY,
                 samesite=settings.LANGUAGE_COOKIE_SAMESITE,
             )
-        return response
 
     def get_redirect_url(self, **kwargs):
         return safe_redirect(self.request.GET.get('next', self.request.META.get('HTTP_REFERER', '/')), self.request)
@@ -181,6 +184,20 @@ def cosinnus_logout(request, **kwargs):
         (this seems to only clear the value of the cookie and not completely delete it!).
         Will redirect to a "you have been logged out" page, that may perform additional 
         JS queries or redirects to log out from other services. """
+    
+    if not request.user.is_authenticated:
+        raise PermissionDenied()
+    
+    context = {}
+    next_redirect_url = safe_redirect(request.GET.get('next'), request, return_none_if_unsafe=True)
+    was_guest = request.user.is_authenticated and request.user.is_guest
+    context.update({
+        'user_was_guest': was_guest,
+        'run_logout_scripts': was_guest == False and (
+                settings.COSINNUS_V3_FRONTEND_ENABLED or settings.COSINNUS_CLOUD_ENABLED),
+        'next_redirect_url': next_redirect_url,
+    })
+    
     if settings.COSINNUS_ROCKET_ENABLED:
         user_rc_uid = request.COOKIES.get('rc_session_uid')
         user_rc_token = request.COOKIES.get('rc_session_token')
@@ -202,10 +219,13 @@ def cosinnus_logout(request, **kwargs):
                     'service is available again.'
                 )
                 messages.warning(request, msg)
+                
     response = LogoutView.as_view(**kwargs)(request) # logout(request, **kwargs)
+    
     if not request.user.is_authenticated:
         response.delete_cookie('wp_user_logged_in')
-    return render(request, 'cosinnus/registration/logged_out.html')
+        
+    return render(request, 'cosinnus/registration/logged_out.html', context)
 
 
 UNSPECIFIED = object()
@@ -289,7 +309,7 @@ def do_likefollowstar(request, **kwargs):
             If the LikeObject results in being liked=False, no matter the follow state, it will be deleted immediately
     """
     
-    if not request.is_ajax() and not request.method=='POST':
+    if not is_ajax(request) and not request.method=='POST':
         return HttpResponseNotAllowed('POST', content='This endpoint is for POST only.')
     if not request.user.is_authenticated:
         return HttpResponseForbidden('Not authenticated.')

@@ -6,6 +6,8 @@ from collections import OrderedDict
 import datetime
 import os
 import re
+from threading import Thread
+
 import six
 
 from django.db.models.fields.json import KeyTextTransform
@@ -13,13 +15,15 @@ from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.serializers.json import DjangoJSONEncoder
-from django.core.validators import RegexValidator, MaxLengthValidator
+from django.core.validators import RegexValidator, MaxLengthValidator, MinLengthValidator
 from django.db import models
 from django.db.models import Q, Max, Min, F
 from django.db.models.functions import Cast
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.crypto import get_random_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.membership import BaseMembership, MEMBERSHIP_ADMIN, \
@@ -445,6 +449,10 @@ class RelatedGroups(models.Model):
 
 
 class CosinnusGroupMembership(BaseMembership):
+    """
+    Membership relation between a user and a group giving the user permission in that group
+    depending on the group settings and the membership type.
+    """
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='memberships',
         on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -512,7 +520,7 @@ class CosinnusPortalMembership(BaseMembership):
 
 
 @six.python_2_unicode_compatible
-class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
+class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModelMixin, models.Model):
     _CURRENT_PORTAL_CACHE_KEY = 'cosinnus/core/portal/current'
     _ALL_PORTAL_CACHE_KEY = 'cosinnus/core/portal/all'
 
@@ -612,7 +620,10 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     # exact time when last digest was sent out for each of the period settings
     SAVED_INFO_LAST_DIGEST_SENT = 'last_digest_sent_for_period_%d'
     membership_class = CosinnusPortalMembership
-    
+
+    if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+        translateable_fields = ['welcome_email_text']
+
     @classmethod
     def get_current(cls):
         """ Cached, returns the current Portal (always the same since dependent on configured Site) """
@@ -701,6 +712,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
                           LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
                           CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin, BBBRoomMixin,
                           AttachableObjectModel):
+    """ Abstract base group model implementation. Provides common functionality for all groups. """
     
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
@@ -713,13 +725,13 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         (TYPE_CONFERENCE, _('Conference')),
     )
     
-    # the "normal" group join method - users request to be members, admin approve/decline them
+    #: the "normal" group join method - users request to be members, admin approve/decline them
     MEMBERSHIP_MODE_REQUEST = 0
-    # the "conference" method - users create an application, admins sort through them and
-    # accept/decline them with an optional reason
-    # Note: this replaces the old bool modelfield `use_conference_applications`
+    #: the "conference" method - users create an application, admins sort through them and
+    #: accept/decline them with an optional reason.
+    #: Note: this replaces the old bool modelfield `use_conference_applications`
     MEMBERSHIP_MODE_APPLICATION = 1
-    # the "everyone can join" method - users can become a member instantly without any approval system
+    #: the "everyone can join" method - users can become a member instantly without any approval system
     MEMBERSHIP_MODE_AUTOJOIN = 2
     
     # this can and will be overridden by the specific group models!
@@ -762,6 +774,8 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
 
+    subtitle = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Subtitle'),
+                                help_text=_('Subtitle used for conferences.'))
     description = models.TextField(verbose_name=_('Short Description'),
                                    help_text=_('Short Description. Internal, will not be shown publicly.'), blank=True)
     description_long = models.TextField(verbose_name=_('Detailed Description'),
@@ -1047,7 +1061,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
             # translatable fields are only enabled for conferences for now
             if self.__class__.__name__ == 'CosinnusConference':
-                return ['name', 'description_long']
+                return ['name', 'description_long', 'subtitle']
             else:
                 return []
         return []
@@ -1143,7 +1157,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     def has_premium_rights(self):
         return self.has_premium_blocks or self.is_premium_permanently
     
-    def add_member_to_group(self, user, membership_status):
+    def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER):
         """ "Makes the user a group member". 
             Safely adds a membership for the given user with the given status for this group.
             If the membership existed, does nothing. If it existed with a different status, will
@@ -1653,6 +1667,8 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
 
 
 class CosinnusGroup(CosinnusBaseGroup):
+    """ Swappable group model implementation. """
+
     class Meta(CosinnusBaseGroup.Meta):
         swappable = 'COSINNUS_GROUP_OBJECT_MODEL'
 
@@ -1950,6 +1966,71 @@ class CosinnusGroupCallToActionButton(models.Model):
     class Meta(object):
         verbose_name = _('CosinnusGroup CallToAction Button')
         verbose_name_plural = _('CosinnusGroup CallToAction Buttons')
+
+
+class UserGroupGuestAccess(models.Model):
+    """ A model that signifies that guest users can enter the portal using the token
+        of this object and gain read access to the related group, without signup up.
+        Deleting this for a group will mean all users will lose their guest access.
+        
+        A token for this object is generated automatically when saving the object,
+        if it hasn't been supplied. """
+    
+    group = models.OneToOneField(
+        settings.COSINNUS_GROUP_OBJECT_MODEL,
+        related_name='user_group_guest_access',
+        on_delete=models.CASCADE
+    )
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('Creator'),
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+'
+    )
+    token = models.SlugField(
+        _('Token'),
+        help_text=_('The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want.'),
+        validators=[MinLengthValidator(6), MaxLengthValidator(50)],
+        max_length=50,
+        null=False, blank=False,
+        unique=True,
+    )
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    
+    class Meta(object):
+        ordering = ('-created',)
+    
+    def __str__(self):
+        return f'<UserGroupGuestAccess: "{self.token}", Group: {self.group.id}>'
+        
+    def save(self, *args, **kwargs):
+        if not self.token:
+            self.token = get_random_string(8).lower().strip()
+        super().save(*args, **kwargs)
+
+
+@receiver(pre_delete, sender=UserGroupGuestAccess)
+def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
+    """ Instantaneously deactivate all guest user accounts that had this token
+        as guest access, when the token is being deleted. """
+    # do a threaded call but save the user ids so that the filter still works
+    from cosinnus.models import get_user_profile_model
+    user_ids = list(get_user_profile_model().objects.filter(guest_access_object=instance).values_list('user_id', flat=True))
+    if not user_ids:
+        return
+    class UserGroupGuestAccessDeleteThread(Thread):
+        def run(self):
+            from cosinnus.views.profile import delete_guest_user
+            for user in get_user_model().objects.filter(id__in=user_ids):
+                try:
+                    delete_guest_user(user, deactivate_only=True)
+                except Exception as e:
+                    logger.error(
+                        'An error occured during user deletion after group guest access token deletion. Exception in extra',
+                        extra={'exc': e}
+                    )
+    UserGroupGuestAccessDeleteThread().start()
 
 
 def replace_swapped_group_model():

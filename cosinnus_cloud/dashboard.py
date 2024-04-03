@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django import forms
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.utils.dashboard import DashboardWidget, DashboardWidgetForm
 
@@ -15,7 +15,7 @@ from cosinnus_cloud.hooks import get_nc_user_id
 from cosinnus.conf import settings
 
 import logging
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group
 logger = logging.getLogger('cosinnus')
 
@@ -54,7 +54,7 @@ class Latest(DashboardWidget):
                     page=offset/count + 1,
                 )
             except Exception as e:
-                logger.error('An error occured during Nextcloud widget data retrieval! Exception in extra.', extra={'exc_str': force_text(e), 'exception': e})
+                logger.error('An error occured during Nextcloud widget data retrieval! Exception in extra.', extra={'exc_str': force_str(e), 'exception': e})
                 had_error = True
                 
             if had_error:

@@ -16,7 +16,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy, ngettext
+from django.utils.translation import gettext_lazy as _, pgettext_lazy, ngettext
 from django.views.generic import (DetailView,
     ListView, TemplateView)
 from django.views.generic.base import View
@@ -353,8 +353,7 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin,
                 workshop_username = profile.readable_workshop_user_name
                 email = member.email
                 has_logged_in, logged_in_date = self.get_last_login(member)
-                tos_accepted = 1 if profile.settings.get(
-                    'tos_accepted', False) else 0
+                tos_accepted = 1 if profile.tos_accepted else 0
                 row = [workshop_username, email, has_logged_in,
                        logged_in_date, tos_accepted]
                 rows.append(row)
@@ -949,7 +948,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         return formsets
 
     def json_field_formset_initial(self):
-        return {'motivation_answers': self.participation_management.motivation_questions}
+        return {'motivation_answers': self.participation_management.get_translated_json_field('motivation_questions')}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1192,24 +1191,39 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         return result
 
     def get_motivation_question_strings(self):
-        current_questions = [question.get('question', '') for question in self.management.motivation_questions]
+        current_questions = [
+            question.get('question', '') for question in
+            self.management.get_translated_json_field('motivation_questions')
+        ]
+        current_questions_with_translations = []
+        for motivation_question in self.management.motivation_questions:
+            current_questions_with_translations.extend(motivation_question.values())
         previous_questions = []
         for application in self.applications:
             for answer in application.motivation_answers:
                 question = answer.get('question', '')
-                if question and question not in current_questions:
+                if question and question not in current_questions_with_translations:
                     previous_questions.append(question)
         questions = current_questions + previous_questions
         return questions
 
     def get_motivation_answers(self, application):
         answers = []
+        questions_with_translations = self.management.motivation_questions
         for question in self.get_motivation_question_strings():
             question_answered = False
             for answer in application.motivation_answers:
-                if answer.get('question') == question:
-                    answers.append(answer.get('answer', ''))
+                user_translated_question = answer.get('question')
+                if user_translated_question == question:
                     question_answered = True
+                else:
+                    for question_with_translations in questions_with_translations:
+                        if (question in question_with_translations.values()
+                                and user_translated_question in question_with_translations.values()):
+                            question_answered = True
+                            break
+                if question_answered:
+                    answers.append(answer.get('answer', ''))
                     break
             if not question_answered:
                 answers.append('')

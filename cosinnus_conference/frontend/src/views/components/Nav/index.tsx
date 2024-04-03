@@ -91,7 +91,9 @@ function NavConnector(props: NavProps) {
           </Hidden>
         )}
         <Typography component="h3">{conference.props.name}</Typography>
-        <Typography component="h4">{conference.props.description}</Typography>
+        {conference.props.subtitle && (
+          <Typography component="subtitle">{conference.props.subtitle}</Typography>
+        )}
         <Link
           className={classes.toggleMenuButton}
           href="#"
@@ -119,7 +121,7 @@ function NavConnector(props: NavProps) {
                   <FormattedMessage id="hidden" />
                 )}
               />
-              <Badge badgeContent={navRoom.props.count} className={classes.badge} />
+              <Badge badgeContent={navRoom.props.count} className={classes.badge} max={999} />
             </ListItem>
         ))}
         {(conference.props.managementUrls.manageConference || conference.props.managementUrls.manageRooms

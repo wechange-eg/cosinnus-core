@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 14:29+0100\n"
+"POT-Creation-Date: 2024-03-27 09:44+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -126,6 +126,12 @@ msgstr ""
 msgid "Email not verified"
 msgstr "ոչ ակտիվ"
 
+msgid "Is Guest"
+msgstr ""
+
+msgid "Is not a Guest"
+msgstr ""
+
 msgid "User Logged In"
 msgstr "Օգտատերը մուտք գործեց"
 
@@ -216,6 +222,11 @@ msgid "Recipients Send Count"
 msgstr "Ստացողներ"
 
 #, fuzzy
+#| msgid "Last accessed"
+msgid "Guest access URL"
+msgstr "Վերջին անգամ մուտք արված"
+
+#, fuzzy
 #| msgid "Comment"
 msgid "Community"
 msgstr "Մեկնաբանություն"
@@ -264,6 +275,11 @@ msgid "My Profile"
 msgstr "Իմ էջը"
 
 #, fuzzy
+#| msgid "Delete Account"
+msgid "My Guest Account"
+msgstr "Ջնջել Անձնական Էջը"
+
+#, fuzzy
 #| msgid "Edit Your Profile"
 msgid "Set up my Profile"
 msgstr "Խմբագրել ձեր էջը"
@@ -284,6 +300,11 @@ msgstr "Ադմինիստրացիա"
 
 msgid "Logout"
 msgstr "Ելք"
+
+#, fuzzy
+#| msgid "Last accessed"
+msgid "Leave guest access"
+msgstr "Վերջին անգամ մուտք արված"
 
 msgid "Home"
 msgstr "Գլխավոր էջ"
@@ -469,6 +490,11 @@ msgstr "Այս թիմն այլևս ներկայացված չէ ձեր մուտք
 msgid "This account is no longer active. You have been logged out."
 msgstr "Այս անձնական էջյ այլևս ակտիվ չէ: Դուք դուրս եք եկել համակարգից."
 
+#, fuzzy
+#| msgid "This account is no longer active. You have been logged out."
+msgid "Your guest access has expired. You have been logged out."
+msgstr "Այս անձնական էջյ այլևս ակտիվ չէ: Դուք դուրս եք եկել համակարգից."
+
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
 
@@ -477,6 +503,14 @@ msgstr ""
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
+
+msgid "The action you tried to perform is not allowed for guest accounts."
+msgstr ""
+
+#, fuzzy
+#| msgid "The page you requested is not available for this event at this time."
+msgid "The page you tried to visit is not available for guest accounts."
+msgstr "Ձեր հայցված էջն այս պահին հասանելի չէ այս իրադարձության համար."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1624,6 +1658,15 @@ msgstr ""
 msgid "Project Type"
 msgstr "Նախագծի տեսակը"
 
+#, fuzzy
+#| msgid "Untitled"
+msgid "Subtitle"
+msgstr "Անվերնագիր"
+
+#, fuzzy
+msgid "Subtitle used for conferences."
+msgstr "Մուտքագրեք անուն նախագծի համար."
+
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Կարճ Նկարագրություն. Ներքին բովանդակությունը, հրապարակայնորեն չի ցուցադրվելու."
 
@@ -1957,6 +2000,11 @@ msgstr ""
 msgid "Is Moderator"
 msgstr "Մոդերատոր է"
 
+#, fuzzy
+#| msgid "ToS accepted?"
+msgid "ToS accepted"
+msgstr "ToS ընդունվ՞ած է?"
+
 msgid "Language"
 msgstr "Լեզու"
 
@@ -1971,6 +2019,12 @@ msgstr ""
 
 msgid "Deletion triggered by self"
 msgstr ""
+
+msgid "Is guest user"
+msgstr ""
+
+msgid "(Deleted User)"
+msgstr "(Ջնջված օգտատեր)"
 
 msgid "Terms of Service"
 msgstr "Ծառայությունների մատուցման պայմաններ"
@@ -4283,6 +4337,11 @@ msgstr "Փակել"
 msgid "Report offensive content"
 msgstr "Հաղորդել վիրավորական բովանդակության մասին"
 
+#, fuzzy
+#| msgid "Your phone number is only visible for registered users"
+msgid "Sorry, this feature is only available for registered members."
+msgstr "Ձեր հեռախոսահամարը տեսանելի է միայն գրանցված օգտատերեր համար"
+
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "Խնդրում ենք մուտքագրել նկարագրություն, թե ինչու եք հաղորդում այս բովանդակության մասին!"
 
@@ -4313,6 +4372,12 @@ msgid "The content of the field above will be searchable in the plattform-wide s
 msgstr ""
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
+
+msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings."
 msgstr ""
 
 #, fuzzy
@@ -4597,6 +4662,11 @@ msgstr "Մերժել անդամին"
 msgid "There are no new membership requests."
 msgstr "Անդամակցության նոր հայտեր չկան."
 
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Guest user access"
+msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
 msgid "Current Members"
 msgstr "Ներկայիս անդամները"
 
@@ -4723,6 +4793,19 @@ msgstr ""
 msgid "Select Projects/Groups"
 msgstr "Ընտրել նմանատիպ Ծրագրեր / Խմբեր"
 
+#, fuzzy
+msgid "Conference subtitle"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+#| msgid "Enter a title for the new event."
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "Մուտքագրեք վերնագիր նոր իրադարձության համար."
+
+#, fuzzy
+msgid "Add a subtitle for the conference."
+msgstr "Մուտքագրեք վերնագիր նոր իրադարձության համար."
+
 msgid "Description and Infos"
 msgstr "Նկարագրություն և տեղեկություն"
 
@@ -4845,13 +4928,13 @@ msgstr ""
 msgid "Create invite token"
 msgstr "Ջնջել հրավերը"
 
-msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
 msgstr ""
 
 msgid "The current token is: "
@@ -6128,6 +6211,11 @@ msgstr "Լքել է համակարգը"
 msgid "You have been logged out. See you again soon!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "Վերաուղղորդել մուտք գործած օգտատերերին"
+
 msgid "Error while logging out"
 msgstr ""
 
@@ -7061,6 +7149,45 @@ msgstr "Մուտքագրեք թոքենը:"
 
 msgid "For example"
 msgstr "Օրինակ"
+
+msgid "Restricted Guest Access"
+msgstr ""
+
+#, fuzzy
+msgid "Access restricted for guest accounts"
+msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+msgid "You are currently using the platform with a guest account provided to you by a link."
+msgstr ""
+
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
+msgstr ""
+
+#, fuzzy
+msgid "You cannot customize your user profile either."
+msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
+
+msgid "Sign up now to create a fully featured account!"
+msgstr ""
+
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
+msgstr ""
+
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
+msgstr ""
+
+#, fuzzy
+msgid "Leave guest access and create an account"
+msgstr "ստեղծել է իրադարձություն"
+
+msgid "Guest User Signup"
+msgstr ""
+
+msgid "You may create a full account at any time by logging out of your guest account via the user menu on the top right and signup up."
+msgstr ""
+
+msgid "Join as a Guest"
+msgstr ""
 
 msgid "Edit Profile"
 msgstr "Խմբագրել Պրոֆիլը"
@@ -8103,9 +8230,6 @@ msgstr ""
 msgid "Nutzungsbedingungen"
 msgstr "Nutzungsbedingungen"
 
-msgid "(Deleted User)"
-msgstr "(Ջնջված օգտատեր)"
-
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i> Արտապատկերիչ %(model_name)s - ի համար չի գտնվել։</i>"
@@ -8199,6 +8323,23 @@ msgstr "Միացեք հիմա և համագործակցեք!"
 
 msgid "You have been invited to collaborate!"
 msgstr "Ձե՜զ հրավիրվել են համագործակցության!"
+
+msgid "You can access and browse the project that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this project yet."
+msgid "This is only visible to admins of this project."
+msgstr "Այս նախագծի համար դեռ նկարագրություն չկա."
+
+msgid "Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the project"
+msgstr ""
 
 #, fuzzy
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
@@ -8295,6 +8436,23 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr ""
 
 msgid "Type the names of files, events or pads from this group to attach..."
+msgstr ""
+
+msgid "You can access and browse the group that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this group yet."
+msgid "This is only visible to admins of this group."
+msgstr "Այս խմբի համար դեռ նկարագրություն չկա."
+
+msgid "Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the group"
 msgstr ""
 
 #, fuzzy
@@ -8421,6 +8579,22 @@ msgstr "Միացեք հիմա և համագործակցեք!"
 msgid "You have been invited to participate!"
 msgstr "Ձե՜զ հրավիրվել են համագործակցության!"
 
+msgid "You can access and participate in the conference that invited you"
+msgstr ""
+
+#, fuzzy
+msgid "This is only visible to admins of this conference."
+msgstr "Մուտքագրեք անուն նախագծի համար."
+
+msgid "Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the conference"
+msgstr ""
+
 #, fuzzy
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
 msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ապաակտիվացնել խմբերը: Կարող եք հաղորդագրություն գրել ադմինիստրատորներից որևէ մեկին, որպեսզի նա անջատի այն ձեզ համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
@@ -8464,6 +8638,14 @@ msgstr "Հիմա"
 msgid "Question about"
 msgstr "Հարց"
 
+#, fuzzy
+#| msgid "Please enter a token!"
+msgid "Please enter your OTP token."
+msgstr "Խնդրում ենք մուտքագրել թոքենը!"
+
+msgid "Invalid token. Please make sure you have entered it correctly."
+msgstr ""
+
 msgid "The password must contain at least 1 digit, 0-9."
 msgstr ""
 
@@ -8490,6 +8672,26 @@ msgid "Please also provide an end date"
 msgstr ""
 
 msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
+msgid "Version 1.20.0 released"
+msgstr ""
+
+msgid "Includes Django update, conference improvements and more."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- Updated the backend framework Django to version 4 for security fixes and improvements.\n"
+"- Added support for multi-language welcome-emails, sending the user the welcome email in the users selected language (if the translation feature is enabled).\n"
+"- Made conference application questions translatable (if the translation feature is enabled).\n"
+"- Added subtitle field to conferences for additional information.\n"
+"- Showing exact number of conference participants for events exceeding 99 participants.\n"
+"- Improved map search filter for conferences and events considering ongoing events and exact event ranges.\n"
+"- Improved display of workshops on the compact conferences micro site.\n"
+"- Fixed embedded map page allowing to close selected elements.\n"
+"- (Admin-Interface) Added logs for group and group membership changes.\n"
+"- Further security improvements and minor bugfixes.\n"
 msgstr ""
 
 msgid "Version 1.19.6 released"
@@ -8707,6 +8909,11 @@ msgstr ""
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s- ը հաջողությամբ փոխվել է."
 
+#, fuzzy
+#| msgid "Edit"
+msgid "Edited."
+msgstr "Խմբագրել"
+
 msgid "This action is not available directly!"
 msgstr "Այս գործողությունը ուղղակիորեն հասանելի չէ!"
 
@@ -8757,9 +8964,31 @@ msgstr "Հետևյալ Օգտատերերն ավելացվեցին այս պոր
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Invite unregistered users..."
+msgid "Invited user \"%(user)s\"."
+msgstr "Հրավիրել չգրանցված օգտատերերի..."
+
+msgid "You cannot promote a guest user account!"
+msgstr ""
+
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Դուք չեք կարող հեռացնել \"%(username)s\"-ին այս թիմից: Մնացել է ընդամենը մեկ ադմինիստրատոր."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "\"%(username)s\" օգտատերը այլևս անդամ չէ."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Made user \"%(user)s\" member."
+msgstr "\"%(username)s\" օգտատերը այլևս անդամ չէ."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8782,6 +9011,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr "\"%(username)s\" օգտատերը այլևս անդամ չէ."
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s- ը հաջողությամբ վերաակտիվացվել է!"
 
@@ -8797,6 +9030,16 @@ msgstr "Այս նախագիծը/ խումբն արդեն ակտիվ է!"
 
 msgid "This project/group is already inactive!"
 msgstr "Այս նախագիծը/ խումբն արդեն ակտիվ չէ!"
+
+#, fuzzy
+#| msgid "Activate"
+msgid "Activated."
+msgstr "Ակտիվացնել"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Deactivated."
+msgstr "Ապաակտիվացնել"
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr ""
@@ -8831,6 +9074,11 @@ msgstr "Այս հասցեներով մարդիկ արդեն ունեն գրան�
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Ինչպիսի Հաջողությու՜ն: Այժմ մենք հրավերներ ենք ուղարկում էլեկտրոնային փոստի այս հասցեներին։ %s"
+
+#, fuzzy, python-format
+#| msgid "Invited Members"
+msgid "Invited \"%(emails)s\"."
+msgstr "Հրավիրված անդամների"
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "Հրավերը ջնջելիս սխալ տեղի ունեցավ."
@@ -8910,6 +9158,10 @@ msgstr "%(numobjects)d այլ օբյեկտները ջնջվել են."
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Հարցմանը համապատասխանող %(verbose_name)s չի գտնվել"
+
+#, python-format
+msgid "User \"%s\" is a guest user and has no profile."
+msgstr ""
 
 msgid "Your profile was edited successfully."
 msgstr "Ձեր անձնական էջը հաջողությամբ խմբագրվել է."
@@ -9072,6 +9324,12 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr "Մենք հանեցինք ձեր էլ. հասցեն \"%(email)s\" մեր փոստային ցուցակից: Դուք այլևս էլ-նամակներ չեք ստանա մեզանից!"
 
 msgid "A new verification email has been sent."
+msgstr ""
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr ""
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
@@ -9505,6 +9763,11 @@ msgstr "ստեղցել է պահոց"
 
 msgid "There are no etherpads yet"
 msgstr "Դեռևս Etherpads-եր չկան"
+
+#, fuzzy
+#| msgid "This action is not permitted for this poll at this stage!"
+msgid "Editing is not permitted for guest accounts."
+msgstr "Այս գործողությունը այս փուլում թույլատրված չէ այս հարցման համար!"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -13955,6 +14218,34 @@ msgstr "\"%(title)s\" անելիքների ցանկը հնարավոր չէ ավ
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Դուք չեք կարող ջնջել այս թղթապանակը, քանի որ թույլտվություն չունեք ջնջել նրա միջի մեկ կամ մի քանի նյութերը!"
+
+#, fuzzy
+#| msgid "Add project"
+msgid "Add object"
+msgstr "Ավելացնել նախագիծ"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create container"
+msgstr "Ստեղծել բովանդակություն"
+
+msgid "ROOT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show all"
+msgid "Show"
+msgstr "Ցուցադրել բոլորը"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս թիմը?"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this object?"
+msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս թիմը?"
 
 #, fuzzy
 #~| msgid "Contact"

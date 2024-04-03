@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.urls import resolve, Resolver404, reverse
 from django.utils.formats import get_format
 from django.utils.translation import get_language
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings as SETTINGS
 from cosinnus.core.registries import app_registry
@@ -102,10 +102,15 @@ def cosinnus(request):
         pass  # current_app is not a cosinnus app
     except Resolver404:
         pass
+    
+    v3_api_content_active = bool(getattr(request, 'v3_api_content_active', None) == True)
 
     # version history
-    version_history, version_history_unread_count = get_version_history_for_user(request.user)
-
+    if v3_api_content_active:
+        version_history, version_history_unread_count = {}, 0
+    else:
+        version_history, version_history_unread_count = get_version_history_for_user(request.user)
+    
     return {
         'COSINNUS_BASE_URL': base_url,
         'COSINNUS_CURRENT_APP': current_app_name,
@@ -129,6 +134,7 @@ def cosinnus(request):
         'COSINNUS_USER_TIMEZONE': user.is_authenticated and user.cosinnus_profile.timezone.zone or None,
         'COSINNUS_VERSION_HISTORY': version_history,
         'COSINNUS_VERSION_HISTORY_UNREAD_COUNT': version_history_unread_count,
+        'COSINNUS_V3_API_CONTENT_ACTIVE': v3_api_content_active,
     }
 
 
@@ -159,14 +165,16 @@ def tos_check(request):
 
 
 def email_verified(request):
+    """ Add additional announcements to the context which are checked for in base.html. """
     context = dict()
     portal = CosinnusPortal.get_current()
     user = request.user
 
     if (user.is_authenticated and
-            portal.email_needs_verification and not
-            GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and not
-            check_user_verified(request.user)):
+            not user.is_guest and
+            portal.email_needs_verification and
+            not GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and
+            not check_user_verified(request.user)):
         url = reverse('cosinnus:resend-email-validation')
         url = '{}?next={}'.format(url, request.path)
         msg = _('Please verify your email address.')
@@ -180,5 +188,13 @@ def email_verified(request):
         context['email_not_verified_announcement'] = {
             'level': 'warning',
             'text': f'{msg} <a href="{url}">{link_label}</a>'
+        }
+    elif user.is_authenticated and user.is_guest and request.path != reverse('cosinnus:guest-user-not-allowed'):
+        msg = _('You are currently using the platform with a guest account provided to you by a link.')
+        url = reverse('cosinnus:guest-user-not-allowed')
+        link_label = _('More infos...')
+        context['user_guest_announcement'] = {
+            'level': 'info',
+            'text': f'{msg} <a href="{url}">{link_label}</a>',
         }
     return context

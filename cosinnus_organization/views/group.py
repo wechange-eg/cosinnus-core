@@ -12,11 +12,11 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, FormView
 from django_select2 import Select2View, NO_ERR_RESP
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.core import signals
 from cosinnus.forms.group import MultiGroupSelectForm
-from cosinnus.models import CosinnusPortal, force_text, group_aware_reverse
+from cosinnus.models import CosinnusPortal, force_str, group_aware_reverse
 from cosinnus.models.group_extra import ensure_group_type
 from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, \
     MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS
@@ -126,7 +126,7 @@ class OrganzationConfirmMixin(object):
         """
         if self.success_url:
             # Forcing possible reverse_lazy evaluation
-            url = force_text(self.success_url)
+            url = force_str(self.success_url)
         else:
             raise ImproperlyConfigured(
                 "No URL to redirect to. Provide a success_url.")

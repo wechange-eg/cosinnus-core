@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.utils.timezone import now
 
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership)
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
@@ -15,7 +16,10 @@ class FormTestCase(TestCase):
         super(FormTestCase, self).setUp(*args, **kwargs)
         self.group = CosinnusGroup.objects.create(name='testgroup')
         self.admin = User.objects.create_superuser(
-            username='admin', email=None, password=None)
+            username='admin', email='admin@example.com', password=None, last_login=now())
+        self.admin.cosinnus_profile.tos_accepted = True
+        self.admin.cosinnus_profile.email_verified = True
+        self.admin.cosinnus_profile.save()
         CosinnusGroupMembership.objects.create(user=self.admin,
             group=self.group, status=MEMBERSHIP_ADMIN)
         self.todo = TodoEntry.objects.create(
@@ -24,7 +28,7 @@ class FormTestCase(TestCase):
 
     def add_user(self, credential):
         self.user = User.objects.create_user(
-            username=credential, password=credential)
+            username=credential, password=credential, email=f'{credential}@example.com')
         CosinnusGroupMembership.objects.create(
             user=self.user,
             group=self.group,

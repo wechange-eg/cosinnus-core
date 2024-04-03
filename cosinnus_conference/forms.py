@@ -5,6 +5,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.model_fields import UserNameModelMultipleChoiceField
 from cosinnus.utils.user import filter_active_users
 from cosinnus_conference.utils import get_initial_template
+from cosinnus.forms.translations import TranslatableFormsetInlineFormMixin
 from cosinnus.models.conference import ParticipationManagement
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.conference import APPLICATION_STATES_VISIBLE
@@ -12,7 +13,7 @@ from cosinnus.models.conference import CosinnusConferencePremiumBlock
 from cosinnus.utils.html import render_html_with_variables
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from django.forms.widgets import SelectMultiple
 from django.forms import RadioSelect, formset_factory, modelformset_factory
@@ -199,8 +200,9 @@ class ConferenceParticipationManagement(forms.ModelForm):
             return [int(option) for option in self.cleaned_data['application_options']]
 
 
-class MotivationQuestionForm(forms.Form):
+class MotivationQuestionForm(TranslatableFormsetInlineFormMixin, forms.Form):
     question = forms.CharField(widget=forms.Textarea)
+    translatable_base_fields = ['question']
 
 MotivationQuestionFormSet = formset_factory(MotivationQuestionForm, extra=20, can_delete=True)
 

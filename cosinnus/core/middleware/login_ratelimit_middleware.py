@@ -21,7 +21,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.core.cache import cache
 from django.http.response import HttpResponseRedirect
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 import django.dispatch as dispatch
 from django.utils.text import get_valid_filename
@@ -61,7 +61,7 @@ logger = logging.getLogger(_get_setting('LOGIN_RATELIMIT_LOGGER_NAME'))
 
 
 """ Signal sent after reaching the rate limit after `LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT` attempts for a username. """
-login_ratelimit_triggered = dispatch.Signal(providing_args=['username', 'ip'])
+login_ratelimit_triggered = dispatch.Signal()  # providing_args=['username', 'ip']
 
 
 
@@ -109,6 +109,20 @@ def register_and_limit_failed_login_attempt(sender, credentials, **kwargs):
             # incur a rate limit and save it in cache
             expiry = now() + timedelta(seconds=increase_seconds)
             cache.set(_get_setting('LOGIN_RATELIMIT_LIMIT_ACTIVE_UNTIL_CACHE_KEY') % username, expiry)
+
+
+def check_user_login_ratelimit(username):
+    """ Checks whether a user with the given login credential may currently log in.
+        @return: None if the user may log in, `datetime` for the remaining ratelimit duration if they may not. """
+    username = get_valid_filename(username)
+    num_tries = cache.get(_get_setting('LOGIN_RATELIMIT_NUM_TRIES_CACHE_KEY') % username, 0)
+    if num_tries > 0:
+        limit_expires = cache.get(_get_setting('LOGIN_RATELIMIT_LIMIT_ACTIVE_UNTIL_CACHE_KEY') % username, None)
+        if limit_expires is not None:
+            duration = (limit_expires - now()).total_seconds()
+            if duration > 0:
+                return limit_expires
+    return None
 
 
 class LoginRateLimitMiddleware(MiddlewareMixin):
@@ -160,14 +174,11 @@ class LoginRateLimitMiddleware(MiddlewareMixin):
     def check_ratelimit_for_username(self, request, username):
         """ Check if an active rate limit is pending, and if so, send the user back to the
             originating URL and display a warning with the remaining rate limit duration. """
-        username = get_valid_filename(username)
-        num_tries = cache.get(_get_setting('LOGIN_RATELIMIT_NUM_TRIES_CACHE_KEY') % username, 0)
-        if num_tries > 0:
-            limit_expires = cache.get(_get_setting('LOGIN_RATELIMIT_LIMIT_ACTIVE_UNTIL_CACHE_KEY') % username, None)
-            if limit_expires is not None:
-                duration = (limit_expires - now()).total_seconds()
-                if duration > 0:
-                    messages.warning(request, _('You have tried to log in too many times. You may try to log in again in: %(duration)s.') % {'duration': naturaltime(limit_expires)})
-                    return HttpResponseRedirect(request.path)
+        limit_expires = check_user_login_ratelimit(username)
+        if limit_expires:
+            messages.warning(request, _('You have tried to log in too many times. You may try to log in again in: %(duration)s.') % {
+                         'duration': naturaltime(limit_expires)})
+            return HttpResponseRedirect(request.path)
         return
+
     

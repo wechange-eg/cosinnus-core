@@ -2,7 +2,7 @@ import logging
 import re
 
 from django import forms
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_clamd.validators import validate_file_infection as clamd_validate_file_infection
 
 from cosinnus.conf import settings

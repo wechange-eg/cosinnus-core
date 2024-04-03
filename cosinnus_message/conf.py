@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from builtins import object
 from django.conf import settings  # noqa
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from appconf import AppConf
 
@@ -106,6 +106,8 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Accounts_Registration_AuthenticationServices_Enabled': False,
         'Accounts_TwoFactorAuthentication_Enforce_Password_Fallback': False,
         'Accounts_TwoFactorAuthentication_Enabled': False,
+        'Device_Management_Enable_Login_Emails': False,
+        'Show_Setup_Wizard': False,
 
         # Layout
         'Layout_Home_Custom_Block_Visible': True,

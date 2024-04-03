@@ -22,7 +22,7 @@
 	        <meta name="title" content="{{ page_title }}">
 	        <meta name="description" content="{{ page_description }}">
 
-	        <meta name="lol" property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}">
+	        <meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}">
 	        <meta property="og:title"         content="{% block og_title %}{{ page_title }}{% endblock og_title %}">
 	        <meta property="og:image"         content="{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_logo_image_url }}{% endblock og_image %}">
 	        <meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}">
@@ -150,24 +150,30 @@
         {% endif %}>
     <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
 
-        {% include 'cosinnus/extra_body_header.html' %}
         {% block body_header %}{% endblock body_header %}
 
         {% block cosinnus_navbar %}
-        	{% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
-        		{% cosinnus_menu_v2 "cosinnus/v2/navbar/navbar.html" %}
-        	{% else %}
-        		{% cosinnus_menu "cosinnus/navbar.html" %}
-        	{% endif %}
+            {% if not COSINNUS_V3_API_CONTENT_ACTIVE %}
+                {% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
+                    {% cosinnus_menu_v2 "cosinnus/v2/navbar/navbar.html" %}
+                {% else %}
+                    {% cosinnus_menu "cosinnus/navbar.html" %}
+                {% endif %}
+            {% endif %}
         {% endblock cosinnus_navbar %}
 
 
-		{% include 'announcements/announcements.html' %}
-        {% if email_not_verified_announcement %}
-        {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
+        {% if not COSINNUS_V3_API_CONTENT_ACTIVE %}
+		    {% include 'announcements/announcements.html' %}
+
+            {% if email_not_verified_announcement %}
+                {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
+            {% elif user_guest_announcement %}
+                {% include 'announcements/announcement.html' with announcement=user_guest_announcement %}
+            {% endif %}
         {% endif %}
 
-        <div class="x-v3-container {% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
+        <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-container {% endif %}{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
 
             {% block main_page_header %}{% endblock main_page_header %}
 
@@ -175,7 +181,7 @@
                 <div class="row d-sm-flex">
 
                     {% block override_leftnav %}
-                    <div class="x-v3-leftnav col-lg-3 col-md-3"><!-- left column -->
+                    <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav {% endif %}col-lg-3 col-md-3"><!-- left column -->
                         {% if group %}
                             {% cosinnus_menu "cosinnus/appsmenu.html" %}
                         {% endif %}
@@ -201,7 +207,8 @@
                         </div>
 
                         <div class="row">
-                            <div class="x-v3-content col-xs-12">
+                            <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-content {% endif %}col-xs-12">
+                                {% include 'cosinnus/extra_body_header.html' %}
                                 {% include 'cosinnus/messages.html' %}
                                 {% block content %}{% endblock content %}
                             </div><!-- col -->
@@ -214,7 +221,7 @@
             {% include 'cosinnus/feedback/report_modal.html' %}
         </div><!-- main container -->
 
-        <div class="x-v3-footer">
+        <div {% if COSINNUS_V3_API_CONTENT_ACTIVE %}class="x-v3-footer"{% endif %}>
             {% block footer %}
                 {% include 'cosinnus/v2/footer.html' %}
             {% endblock footer %}

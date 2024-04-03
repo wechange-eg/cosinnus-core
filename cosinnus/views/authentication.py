@@ -5,7 +5,7 @@ from functools import partial
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
 from django.shortcuts import redirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_otp.forms import OTPTokenForm
 from two_factor.views import (ProfileView, SetupView, SetupCompleteView, 
   DisableView, BackupTokensView, QRGeneratorView)

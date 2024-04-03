@@ -153,16 +153,15 @@ def make_xlsx_response(rows, row_names=[], file_name=None):
     return response
 
 
-def remove_url_param(url, param_key, param_value=None):
-    """ Given a full URL, this returns the same url without the given GET parameter, if present.
-        If a `param_value` is given, will only remove the param if `param_value` matches its value. """
+def add_url_param(url, param_key, param_value):
+    """ Given a full URL, this returns the same url with the given GET parameter added,
+        or the parameter's value replaced if present. """
     parsed = urlparse(url)
     query = parsed.query
     dic = QueryDict(query)
     dic._mutable = True
-    if dic.get(param_key, None) and (not param_value or dic.get(param_key, None) == '3'):
-        del dic[param_key]
-        query = dic.urlencode()
+    dic[param_key] = param_value
+    query = dic.urlencode()
     url = urlunparse((
         parsed.scheme,
         parsed.netloc,
@@ -172,3 +171,35 @@ def remove_url_param(url, param_key, param_value=None):
         parsed.fragment
     ))
     return url
+
+
+def remove_url_param(url, param_key=None, param_value=None):
+    """ Given a full URL, this returns the same url without the given GET parameter, if present.
+        If a `param_value` is given, will only remove the param if `param_value` matches its value.
+        If no `param_key` is given, will remove *all* params. """
+    parsed = urlparse(url)
+    query = parsed.query
+    dic = QueryDict(query)
+    dic._mutable = True
+    if dic.get(param_key, None) and (param_value is None or dic.get(param_key, None) == param_value):
+        del dic[param_key]
+        query = dic.urlencode()
+    url = urlunparse((
+        parsed.scheme,
+        parsed.netloc,
+        parsed.path,
+        parsed.params,
+        query if param_key else "",
+        parsed.fragment
+    ))
+    return url
+
+
+def is_ajax(request):
+    """
+    Checks if the request is an ajax request.
+    Copy of the deprecated Django request attribute.
+    Deprecation note: method is deprecated as it relied on a jQuery-specific way of signifying AJAX calls, while current
+    usage tends to use the JavaScript Fetch API.
+    """
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'

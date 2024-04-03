@@ -30,6 +30,7 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
     tags = serializers.SerializerMethodField()
     locations = serializers.SerializerMethodField()
     related = serializers.SerializerMethodField()
+    child_projects = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
     
     def get_description(self, obj):
@@ -57,17 +58,20 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
                 'url': location.location_url
             })
         return locations
-
+    
     def get_related(self, obj):
         qs = RelatedGroups.objects
         slugs = set(qs.filter(from_group=obj).exclude(to_group=obj).values_list('to_group__slug', flat=True))
         slugs.update(set(qs.filter(to_group=obj).exclude(from_group=obj).values_list('from_group__slug', flat=True)))
         return slugs
+    
+    def get_child_projects(self, obj):
+        return [project.slug for project in obj.get_children()]
 
     class Meta(object):
         model = CosinnusSociety
         fields = ('url', 'name', 'slug', 'description', 'description_long', 'contact_info', 'avatar', 'website',
-                  'related', 'topics', 'tags', 'locations', 'created', 'is_open_for_cooperation')
+                  'related', 'child_projects', 'topics', 'tags', 'locations', 'created', 'is_open_for_cooperation')
 
 
 class CosinnusProjectSerializer(CosinnusSocietySerializer):

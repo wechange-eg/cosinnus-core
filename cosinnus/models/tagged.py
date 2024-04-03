@@ -8,10 +8,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.db.models import Q
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.apps import apps
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from taggit.managers import TaggableManager
 
@@ -86,10 +86,18 @@ class CosinnusTopicCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):
 
 @six.python_2_unicode_compatible
 class BaseTagObject(models.Model):
+    """ Basic tags that are linked to a model via BaseTaggableObjectModel. """
 
-    VISIBILITY_USER = 0 # for Users, this setting means: "Only Group Members can see me"
-    VISIBILITY_GROUP = 1 # for Users, this setting means: "Only Logged in Users can see me"
-    VISIBILITY_ALL = 2 # for Users, this setting means: "Everyone can see me"
+    #: Only the user can see this model instance.
+    #: For Users, this setting means: "Only Group Members can see me".
+    VISIBILITY_USER = 0
+    #: Only team members can see this model instance.
+    #: For Users, this setting means: "Only Logged in Users can see me".
+    VISIBILITY_GROUP = 1
+    #: All platform users can see this model instance, or even unauthenticated users depending on the
+    #: COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN setting.
+    #: For Users, this setting means: "Everyone can see me"
+    VISIBILITY_ALL = 2
 
     #: Choices for :attr:`visibility`: ``(int, str)``
     _VISIBILITY_CHOICES = (
@@ -191,7 +199,7 @@ class BaseTagObject(models.Model):
         return []
     
     def get_topics_rendered(self):
-        ret = ', '.join([force_text(t) for t in self.get_topics()])
+        ret = ', '.join([force_str(t) for t in self.get_topics()])
         return ret 
     
     def get_topics(self):
@@ -357,7 +365,7 @@ class LastVisitedMixin(object):
             visit.save()
             return visit
         except Exception as e:
-            logger.exception('An unknown error occured while saving the last_visited visit! Exception in extra.', extra={'exception': force_text(e)})
+            logger.exception('An unknown error occured while saving the last_visited visit! Exception in extra.', extra={'exception': force_str(e)})
             return None
 
     def delete_mark_visited(self):

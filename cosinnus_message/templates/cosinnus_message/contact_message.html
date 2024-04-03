@@ -6,6 +6,7 @@
 {% endblock page_title %}
 
 {% block main_page %}
+    {% include 'cosinnus/extra_body_header.html' %}
 
     {% captureas label %}
         {% block description %}
@@ -20,7 +21,7 @@
 
         {% block contact_message_field %}
             {% if form %}
-                <form action="" method="POST">
+                <form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="POST">
                     {% csrf_token %}
                     {% trans "What is your message?" as contact_message_form_label %}
                     {% trans "Write it here" as contact_message_form_placeholder %}

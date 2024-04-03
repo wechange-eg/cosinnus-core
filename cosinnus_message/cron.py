@@ -8,7 +8,7 @@ from django_cron import CronJobBase, Schedule
 from cosinnus.cron import CosinnusCronJobBase
 from cosinnus_message.utils.utils import update_mailboxes,\
     process_direct_reply_messages
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 logger = logging.getLogger('cosinnus')
 
@@ -25,5 +25,5 @@ class ProcessDirectReplyMails(CosinnusCronJobBase):
         try:
             process_direct_reply_messages()
         except Exception as e:
-            logger.error('Process_direct_reply_messages() threw an exception! (in extra)', extra={'exception': force_text(e)})
+            logger.error('Process_direct_reply_messages() threw an exception! (in extra)', extra={'exception': force_str(e)})
             

@@ -11,10 +11,10 @@ from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils import translation, timezone
 from django.utils.html import strip_tags
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
@@ -123,7 +123,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
         cur_language = translation.get_language()
         try:
             # only active users that have logged in before accepted the TOS get notifications
-            if not user.is_active or not user.last_login or not cosinnus_setting(user, 'tos_accepted'):
+            if not user.is_active or not user.last_login or not user.cosinnus_profile.tos_accepted:
                 continue
             
             # switch language to user's preference language so all i18n and date formats are in their language
@@ -200,7 +200,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                     header_context = {
                         'group_body_html': '', # empty on purpose as a header has no body
                         'group_image_url': portal.get_domain() + get_image_url_for_icon(cat_icon, large=True),
-                        'group_url': reverse(cat_url_rev),
+                        'group_url': portal.get_domain() + reverse(cat_url_rev),
                         'group_name': cat_label,
                     }
                     category_header_html = render_to_string('cosinnus/html_mail/summary_group.html', context=header_context)
@@ -299,7 +299,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
         except Exception as e:
             # we never want this subroutine to just die, we need the final saves at the end to ensure
             # the same items do not get into digests twice
-            logger.error('An error occured while doing a digest for a user! Exception was: %s' % force_text(e), 
+            logger.error('An error occured while doing a digest for a user! Exception was: %s' % force_str(e), 
                          extra={'exception': e, 'trace': traceback.format_exc(), 'user_mail': user.email, 'digest_setting': digest_setting})
             if settings.DEBUG:
                 raise

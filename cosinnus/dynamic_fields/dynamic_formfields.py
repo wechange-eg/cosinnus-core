@@ -12,7 +12,7 @@ from django.contrib.auth import get_user_model
 from django.forms.boundfield import BoundField
 from django.urls.base import reverse, reverse_lazy
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from phonenumber_field.formfields import PhoneNumberField
 
 from cosinnus.conf import settings

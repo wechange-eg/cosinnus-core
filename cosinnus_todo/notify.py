@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.urls import reverse
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.notify.actions import send_notification
 

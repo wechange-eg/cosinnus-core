@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import logging
 
 from django.http.response import JsonResponse, HttpResponseBadRequest
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView, RedirectView
 from rest_framework.views import APIView
 
@@ -23,7 +23,7 @@ from cosinnus.utils.permissions import check_ug_membership
 from django.core.exceptions import PermissionDenied
 from django_select2.views import Select2View, NO_ERR_RESP
 from django.template.loader import render_to_string
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 logger = logging.getLogger("cosinnus")
 
@@ -72,7 +72,7 @@ class OAuthView(APIView):
     """
 
     def get(self, request, **kwargs):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and not request.user.is_guest:
             user = request.user
             avatar_url = user.cosinnus_profile.avatar.url if user.cosinnus_profile.avatar else ""
             if avatar_url:
@@ -128,7 +128,7 @@ class CloudFilesContentWidgetView(BasePagedOffsetWidgetView):
         try:
             dataset = nextcloud.find_newest_files(userid=get_nc_user_id(self.request.user), page=page, page_size=self.page_size)
         except Exception as e:
-            logger.error('An error occured during Nextcloud widget data retrieval! Exception in extra.', extra={'exc_str': force_text(e), 'exception': e})
+            logger.error('An error occured during Nextcloud widget data retrieval! Exception in extra.', extra={'exc_str': force_str(e), 'exception': e})
             had_error = True
             
         if had_error:

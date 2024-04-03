@@ -16,8 +16,9 @@ from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusGroup
 from django.templatetags.static import static
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.translation import gettext_lazy as _, get_language
 from django.template.loader import render_to_string
+from django.template.defaultfilters import linebreaksbr
 from django.template.context import Context
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from django.template.defaultfilters import date as date_format
@@ -68,6 +69,7 @@ class ConferenceRoomSerializer(TranslateableModelSerializer):
     type = serializers.SerializerMethodField()
     count = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
+    show_chat = serializers.SerializerMethodField()
     description_html = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
 
@@ -103,8 +105,19 @@ class ConferenceRoomSerializer(TranslateableModelSerializer):
             return result_group.get_absolute_url() + result_group.settings.get('conference_result_group_iframe_url', '')
         else:
             # we need to use the untranslated instance, because this function might save the instance
+            user = self.context['request'].user
+            if not user.is_authenticated or user.is_guest:
+                return None
             return self.untranslated_instance.get_rocketchat_room_url()
-
+    
+    def get_show_chat(self, obj):
+        """ Returns true if the show chat checkboxes on the room are set
+            and the room has a rocketchat url """
+        user = self.context['request'].user
+        if not user.is_authenticated or user.is_guest:
+            return False
+        return bool(obj.show_chat and self.untranslated_instance.get_rocketchat_room_url())
+    
     def get_management_urls(self, obj):
         user = self.context['request'].user
         if check_ug_admin(user, obj.group) or check_user_superuser(user):
@@ -139,7 +152,8 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     class Meta(object):
         model = CosinnusGroup
         fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates', 'avatar',
-                  'wallpaper', 'images', 'header_notification', 'managed_tags', 'url', 'from_date', 'to_date')
+                  'wallpaper', 'images', 'header_notification', 'managed_tags', 'url', 'from_date', 'to_date',
+                  'subtitle')
     
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -231,7 +245,7 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     
     def get_theme_color(self, obj):
         return obj.conference_theme_color or settings.COSINNUS_CONFERENCES_DEFAULT_THEME_COLOR
-    
+
 
 class ConferenceParticipant(TranslateableModelSerializer):
     organization = serializers.SerializerMethodField()
@@ -375,11 +389,17 @@ class ConferenceEventSerializer(TranslateableModelSerializer):
     def get_show_chat(self, obj):
         """ Returns true if the show chat checkboxes on the event and its room are set
             and the room as a rocketchat url """
+        user = self.context['request'].user
+        if not user.is_authenticated or user.is_guest:
+            return False
         return bool(obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url())
     
     def get_chat_url(self, obj):
         """ Returns the event room's URL if the show chat checkboxes on the event and its room are set
             and the room as a rocketchat url """
+        user = self.context['request'].user
+        if not user.is_authenticated or user.is_guest:
+            return None
         return obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url()
 
     def get_user_is_admin(self, obj):

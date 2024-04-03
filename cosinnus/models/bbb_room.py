@@ -15,7 +15,7 @@ from django.test import RequestFactory
 from django.template.defaultfilters import linebreaksbr
 from django.urls.base import reverse
 from django.utils import translation
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 from cosinnus.templatetags.cosinnus_tags import full_name
@@ -29,7 +29,7 @@ from cosinnus.models.group import CosinnusPortal
 from django.core.exceptions import ImproperlyConfigured
 from cosinnus.utils.functions import clean_single_line_text
 from django.template.defaultfilters import truncatechars
-from cosinnus.models.membership import MEMBERSHIP_MEMBER, MANAGER_STATUS
+from cosinnus.models.membership import MANAGER_STATUS, MEMBER_STATUS
 from cosinnus.models.conference import CosinnusConferenceSettings
 from copy import copy
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -229,7 +229,7 @@ class BBBRoom(models.Model):
         """ Automatically joins all members of the given group into the room,
             with priviledges depending on their membership status """
         for membership in group.memberships.all():
-            if membership.status in MEMBERSHIP_MEMBER:
+            if membership.status in MEMBER_STATUS:
                 self.join_user(membership.user, as_moderator=bool(membership.status in MANAGER_STATUS))
 
     @property
@@ -529,7 +529,8 @@ class BBBRoom(models.Model):
             extra_join_parameters = self.build_extra_join_parameters(user)
             # if the user is joining via a guest link, set the password to empty string and add `guest=true` to params
             user_bbb_guest_token = getattr(user, self.BBB_USER_GUEST_TOKEN_ATTR, None)
-            if user_bbb_guest_token and user_bbb_guest_token == self.guest_token:
+            user_is_portal_guest = bool(user.is_authenticated and user.is_guest)
+            if (user_bbb_guest_token and user_bbb_guest_token == self.guest_token) or user_is_portal_guest:
                 extra_join_parameters.update({
                     'guest': 'true',
                 })
@@ -716,8 +717,8 @@ class BBBRoomVisitStatistics(models.Model):
             user_managed_tags = user.cosinnus_profile.get_managed_tags()
             if user_managed_tags:
                 data.update({
-                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_IDS: [tag.id for tag in user_managed_tags],
-                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS: [tag.slug for tag in user_managed_tags],
+                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_IDS: [tag.id for tag in user_managed_tags if tag],
+                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS: [tag.slug for tag in user_managed_tags if tag],
                 })
         if group:
             data.update({

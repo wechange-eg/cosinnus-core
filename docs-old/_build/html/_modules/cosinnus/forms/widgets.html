@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cosinnus.forms.widgets &#8212; Cosinnus 1.19.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=436d026a"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.forms.widgets</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for cosinnus.forms.widgets</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">widgets</span>
+<span class="kn">from</span> <span class="nn">django.utils.formats</span> <span class="kn">import</span> <span class="n">get_format</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">get_language</span>
+
+<span class="kn">from</span> <span class="nn">bootstrap3_datetime.widgets</span> <span class="kn">import</span> <span class="n">DateTimePicker</span>
+
+<span class="kn">from</span> <span class="nn">cosinnus.utils.dates</span> <span class="kn">import</span> <span class="n">datetime_format_js2py</span>
+<span class="kn">from</span> <span class="nn">django.forms.widgets</span> <span class="kn">import</span> <span class="n">SplitDateTimeWidget</span><span class="p">,</span> <span class="n">DateInput</span><span class="p">,</span> <span class="n">TimeInput</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">_is_number</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="BaseL10NPicker"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.BaseL10NPicker">[docs]</a><span class="k">class</span> <span class="nc">BaseL10NPicker</span><span class="p">(</span><span class="n">DateTimePicker</span><span class="p">):</span>
+    <span class="n">js_format_key</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="BaseL10NPicker.render"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.BaseL10NPicker.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">renderer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">js_format_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">:</span>
+            <span class="n">js_format_string</span> <span class="o">=</span> <span class="n">get_format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">js_format_key</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="n">js_format_string</span><span class="p">,</span>
+                <span class="s1">&#39;language&#39;</span><span class="p">:</span> <span class="n">get_language</span><span class="p">(),</span>
+            <span class="p">})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">datetime_format_js2py</span><span class="p">(</span><span class="n">js_format_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">BaseL10NPicker</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_format_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">js_format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">datetime_format_js2py</span><span class="p">(</span><span class="n">js_format</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">BaseL10NPicker</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_format_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DateTimeL10nPicker"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.DateTimeL10nPicker">[docs]</a><span class="k">class</span> <span class="nc">DateTimeL10nPicker</span><span class="p">(</span><span class="n">BaseL10NPicker</span><span class="p">):</span>
+    <span class="n">js_format_key</span> <span class="o">=</span> <span class="s1">&#39;COSINNUS_DATETIMEPICKER_DATETIME_FORMAT&#39;</span></div>
+
+
+<div class="viewcode-block" id="DateL10nPicker"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.DateL10nPicker">[docs]</a><span class="k">class</span> <span class="nc">DateL10nPicker</span><span class="p">(</span><span class="n">BaseL10NPicker</span><span class="p">):</span>
+    <span class="n">js_format_key</span> <span class="o">=</span> <span class="s1">&#39;COSINNUS_DATETIMEPICKER_DATE_FORMAT&#39;</span></div>
+
+
+<div class="viewcode-block" id="TimeL10nPicker"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.TimeL10nPicker">[docs]</a><span class="k">class</span> <span class="nc">TimeL10nPicker</span><span class="p">(</span><span class="n">BaseL10NPicker</span><span class="p">):</span>
+    <span class="n">js_format_key</span> <span class="o">=</span> <span class="s1">&#39;COSINNUS_DATETIMEPICKER_TIME_FORMAT&#39;</span></div>
+
+
+<div class="viewcode-block" id="EasyFormatTimeInput"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.EasyFormatTimeInput">[docs]</a><span class="k">class</span> <span class="nc">EasyFormatTimeInput</span><span class="p">(</span><span class="n">TimeInput</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; TimeInput widget that allows very freeform time input and assumes sensible times:</span>
+<span class="sd">        Short numbers without colons are considered hours, longer number without colons</span>
+<span class="sd">        are considered hours and minutes. The rest is handled through regular validation.</span>
+<span class="sd">        Examples:</span>
+<span class="sd">            &#39;7&#39; --&gt; &#39;7:00&#39;</span>
+<span class="sd">            &#39;1730&#39; --&gt; &#39;17:30&#39;</span>
+<span class="sd">            &#39;132&#39; --&gt; &#39;1:32&#39; </span>
+<span class="sd">            &#39;22222222&#39; --&gt; &#39;22222222&#39;</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="EasyFormatTimeInput.value_from_datadict"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.EasyFormatTimeInput.value_from_datadict">[docs]</a>    <span class="k">def</span> <span class="nf">value_from_datadict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">raw_time</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">raw_time</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">_is_number</span><span class="p">(</span><span class="n">raw_time</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_time</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">raw_time</span> <span class="o">+</span> <span class="s2">&quot;:00&quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_time</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">raw_time</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">raw_time</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">EasyFormatTimeInput</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">value_from_datadict</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="CosinnusSplitDateTimeWidget"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.CosinnusSplitDateTimeWidget">[docs]</a><span class="k">class</span> <span class="nc">CosinnusSplitDateTimeWidget</span><span class="p">(</span><span class="n">SplitDateTimeWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Widget that splits datetime input into two &lt;input type=&quot;text&quot;&gt; boxes.</span>
+<span class="sd">    </span>
+<span class="sd">    Use like this: `forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time=&#39;00:00&#39;))`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">default_time</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">default_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">(</span><span class="n">DateInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">date_format</span><span class="p">),</span>
+                   <span class="n">EasyFormatTimeInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">time_format</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_time</span> <span class="o">=</span> <span class="n">default_time</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SplitDateTimeWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">widgets</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="CosinnusSplitDateTimeWidget.value_from_datadict"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.CosinnusSplitDateTimeWidget.value_from_datadict">[docs]</a>    <span class="k">def</span> <span class="nf">value_from_datadict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; If no time value is given, patch in the default time if it is given &quot;&quot;&quot;</span>
+        <span class="n">date_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_0&quot;</span> <span class="o">%</span> <span class="n">name</span>
+        <span class="n">time_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_1&quot;</span> <span class="o">%</span> <span class="n">name</span>
+        <span class="c1"># set a default time if a date is set</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_time</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">date_name</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">time_name</span><span class="p">):</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">_mutable</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">time_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_time</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">CosinnusSplitDateTimeWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">value_from_datadict</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div></div>
+    
+    
+<div class="viewcode-block" id="SplitHiddenDateWidget"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.SplitHiddenDateWidget">[docs]</a><span class="k">class</span> <span class="nc">SplitHiddenDateWidget</span><span class="p">(</span><span class="n">CosinnusSplitDateTimeWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Widget that splits datetime input into a hidden date input and a shown time input.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">is_hidden</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">default_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SplitHiddenDateWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">attrs</span><span class="p">,</span> <span class="n">date_format</span><span class="p">,</span> <span class="n">time_format</span><span class="p">,</span> <span class="n">default_time</span><span class="o">=</span><span class="n">default_time</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">widgets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">input_type</span> <span class="o">=</span> <span class="s1">&#39;hidden&#39;</span></div>
+        
+        
+<div class="viewcode-block" id="PrettyJSONWidget"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.PrettyJSONWidget">[docs]</a><span class="k">class</span> <span class="nc">PrettyJSONWidget</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Textarea</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A pretty-printed JSON widget.</span>
+<span class="sd">        From https://stackoverflow.com/a/52627264/1407929 &quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="PrettyJSONWidget.format_value"><a class="viewcode-back" href="../../../ref/cosinnus.forms.html#cosinnus.forms.widgets.PrettyJSONWidget.format_value">[docs]</a>    <span class="k">def</span> <span class="nf">format_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># these lines will try to adjust size of TextArea to fit to content</span>
+            <span class="n">row_lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;rows&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row_lengths</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">30</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;cols&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">row_lengths</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="mi">120</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">value</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">PrettyJSONWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">format_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.forms.widgets</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2013 - 2014, Sinnwerkstatt Medienagentur GmbH.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    </div>
+  </body>
+</html>

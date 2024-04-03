@@ -18,7 +18,7 @@
     
     <div class="row app-main">
         <!-- start with left navigation -->
-        <div class="x-v3-leftnav col-lg-3 col-md-3"><!-- left column -->
+        <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav {% endif %}col-lg-3 col-md-3"><!-- left column -->
             {% if group %}
                 {% cosinnus_menu "cosinnus/appsmenu.html" %}
             {% endif %}
@@ -344,7 +344,7 @@
 	                    
                     </h2>
                     
-                    {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+                    {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
                         <div>
                             {% if group.type == 0 %}
                                 {% trans "You will now receive notifications whenever public content is posted in this project." as follow_success_message %}
@@ -392,7 +392,7 @@
                                         {{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME }}:
 	                                    {% for tag in managed_tags %}
 	                                        <a target="_blank" href="{{ tag.get_absolute_url }}" {% if not tag.get_absolute_url %}disabled{% endif %}>
-	                                            {{ tag.name }}</b>{% if not forloop.last %}, {% endif %}
+	                                            <b>{{ tag.name }}</b>{% if not forloop.last %}, {% endif %}
 	                                        </a>
 	                                    {% endfor %}
                                     </p>
@@ -428,6 +428,7 @@
             
 
 {% block main_page %}
+    {% include 'cosinnus/extra_body_header.html' %}
     <div class="row" id="dashboard">
         <div class="col-xs-12 hidden" id="dashboard-unsorted">
         {% for widget in widgets %}

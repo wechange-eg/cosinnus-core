@@ -15,7 +15,7 @@
  <div class="pm_body">{{ message.body|linebreaksbr }}</div>
 </div>
 {% if forloop.last %}
-<form action="" method="post">{% csrf_token %}
+<form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post">{% csrf_token %}
 <input type="hidden" {% if pm_messages|length > 1 and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %} />
 <a href="{{ next_url }}">{% trans "Back" %}</a>
 <span id="pm_buttons">

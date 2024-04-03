@@ -43,7 +43,7 @@
         
         {% if user|can_create_objects_in:group %}
 		    {% with obj_form=form.forms.obj %}
-		    <form action="" method="post" class="form-horizontal" autocomplete="off">{% csrf_token %}
+		    <form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" class="form-horizontal" autocomplete="off">{% csrf_token %}
 			    {{ obj_form.non_field_errors }}
 				<div type="button" class="btn btn-default w100 large-space">
 				    <ul class="media-list">

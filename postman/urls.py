@@ -88,7 +88,7 @@ Refer to documentation.
 """
 from __future__ import unicode_literals
 
-from django.conf.urls import url  # django 1.4
+from django.urls import re_path, path
 from django.views.generic.base import RedirectView
 
 from . import OPTIONS
@@ -98,16 +98,16 @@ from .views import (InboxView, SentView, ArchivesView, TrashView,
 
 
 urlpatterns = [
-    url(r'^inbox/(?:(?P<option>'+OPTIONS+')/)?$', InboxView.as_view(), name='inbox'),
-    url(r'^sent/(?:(?P<option>'+OPTIONS+')/)?$', SentView.as_view(), name='sent'),
-    url(r'^archives/(?:(?P<option>'+OPTIONS+')/)?$', ArchivesView.as_view(), name='archives'),
-    url(r'^trash/(?:(?P<option>'+OPTIONS+')/)?$', TrashView.as_view(), name='trash'),
-    url(r'^write/(?:(?P<recipients>[^/#]+)/)?$', WriteView.as_view(), name='write'),
-    url(r'^reply/(?P<message_id>[\d]+)/$', ReplyView.as_view(), name='reply'),
-    url(r'^view/(?P<message_id>[\d]+)/$', MessageView.as_view(), name='view'),
-    url(r'^view/t/(?P<thread_id>[\d]+)/$', ConversationView.as_view(), name='view_conversation'),
-    url(r'^archive/$', ArchiveView.as_view(), name='archive'),
-    url(r'^delete/$', DeleteView.as_view(), name='delete'),
-    url(r'^undelete/$', UndeleteView.as_view(), name='undelete'),
-    (r'^$', RedirectView.as_view(url='inbox/', permanent=True)),
+    re_path(r'^inbox/(?:(?P<option>'+OPTIONS+')/)?$', InboxView.as_view(), name='inbox'),
+    re_path(r'^sent/(?:(?P<option>'+OPTIONS+')/)?$', SentView.as_view(), name='sent'),
+    re_path(r'^archives/(?:(?P<option>'+OPTIONS+')/)?$', ArchivesView.as_view(), name='archives'),
+    re_path(r'^trash/(?:(?P<option>'+OPTIONS+')/)?$', TrashView.as_view(), name='trash'),
+    re_path(r'^write/(?:(?P<recipients>[^/#]+)/)?$', WriteView.as_view(), name='write'),
+    path('reply/<int:message_id>/', ReplyView.as_view(), name='reply'),
+    path('view/<int:message_id>/', MessageView.as_view(), name='view'),
+    path('view/t/<int:thread_id>/', ConversationView.as_view(), name='view_conversation'),
+    path('archive/', ArchiveView.as_view(), name='archive'),
+    path('delete/', DeleteView.as_view(), name='delete'),
+    path('undelete/', UndeleteView.as_view(), name='undelete'),
+    path('', RedirectView.as_view(url='inbox/', permanent=True)),
 ]

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -26,7 +26,7 @@ from cosinnus_note import cosinnus_notifications
 from cosinnus.utils.urls import group_aware_reverse, safe_redirect
 from cosinnus.utils.pagination import PaginationTemplateMixin
 from cosinnus.views.facebook_integration import FacebookIntegrationViewMixin
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin,\

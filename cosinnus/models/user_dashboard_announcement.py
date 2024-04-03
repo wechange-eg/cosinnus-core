@@ -6,7 +6,7 @@ import logging
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls.base import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
@@ -162,5 +162,4 @@ def get_hidden_user_dashboard_announcements_for_user(user):
     if not user.is_authenticated:
         return []
     ui_prefs = get_ui_prefs_for_user(user)
-    # TODO: need to convert to actual int?
     return ui_prefs[UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS]

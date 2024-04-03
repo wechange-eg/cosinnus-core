@@ -1,10 +1,13 @@
-from django.utils.encoding import force_text
+from copy import copy
+
+from django.utils.encoding import force_str
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
@@ -55,8 +58,8 @@ class PortalTopicsView(APIView):
         topic_data = []
         for topic_id, topic_label in settings.COSINNUS_TOPIC_CHOICES:
             topic_data.append({
-                'value': force_text(topic_id),
-                'title': force_text(topic_label)
+                'value': force_str(topic_id),
+                'title': force_str(topic_label)
             })
         return Response(topic_data)
 
@@ -367,4 +370,9 @@ class PortalSettingsView(APIView):
         )}
     )
     def get(self, request):
-        return Response(settings.COSINNUS_V3_PORTAL_SETTINGS)
+        settings_dict = copy(settings.COSINNUS_V3_PORTAL_SETTINGS)
+        settings_dict.update({
+            'COSINNUS_CLOUD_ENABLED': settings.COSINNUS_CLOUD_ENABLED,
+            'COSINNUS_CLOUD_NEXTCLOUD_URL': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
+        })
+        return Response(settings_dict)

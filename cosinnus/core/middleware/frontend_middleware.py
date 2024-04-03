@@ -17,12 +17,16 @@ class FrontendMiddleware(MiddlewareMixin):
     """
     param_key = "v"
     param_value = "3"
-
+    
     def process_request(self, request):
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # only ever redirect GET methods
+            if request.method != 'GET':
+                return
+            
             request_tokens = request.build_absolute_uri().split('/')
             if not request.GET.get(self.param_key, None) == self.param_value:
-                # if the workaround language-prefix request from the frontend has arrived at the server, 
+                # if the workaround language-prefix request from the frontend has arrived at the server,
                 # strip the prefixed language
                 if settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES and request_tokens[3] in settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES:
                     del request_tokens[3]
@@ -36,8 +40,8 @@ class FrontendMiddleware(MiddlewareMixin):
             
             # check if v3 redirects are disabled specifically for this user
             if request.user.is_authenticated and \
-                request.user.cosinnus_profile.settings.get(
-                    USERPROFILE_SETTING_FRONTEND_DISABLED, False):
+                    request.user.cosinnus_profile.settings.get(
+                        USERPROFILE_SETTING_FRONTEND_DISABLED, False):
                 return
             
             # do not redirect the user to the login page if they are already logged in

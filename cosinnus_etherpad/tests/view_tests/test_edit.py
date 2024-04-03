@@ -4,14 +4,14 @@ from __future__ import unicode_literals
 from django.urls import reverse
 
 from cosinnus_etherpad.models import Etherpad
-from tests.view_tests.base import ViewTestCase
+from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
 class EditTest(ViewTestCase):
 
     def setUp(self, *args, **kwargs):
         super(EditTest, self).setUp(*args, **kwargs)
-        self.pad = Etherpad.objects.create(group=self.group, title='testpad')
+        self.pad = Etherpad.objects.create(group=self.group, title='testpad', creator=self.admin)
         self.kwargs = {'group': self.group.slug, 'slug': self.pad.slug}
         self.url = reverse('cosinnus:etherpad:pad-edit', kwargs=self.kwargs)
 
@@ -22,11 +22,11 @@ class EditTest(ViewTestCase):
 
     def test_get_not_logged_in(self):
         """
-        Should return 403 on GET if not logged in
+        Should return a redirect on GET if not logged in
         """
         self.client.logout()
         response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_get_logged_in(self):
         """
@@ -39,11 +39,11 @@ class EditTest(ViewTestCase):
 
     def test_post_not_logged_in(self):
         """
-        Should return 403 on POST if not logged in
+        Should return a redirect on POST if not logged in
         """
         self.client.logout()
         response = self.client.post(self.url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_post_logged_in(self):
         """
@@ -54,16 +54,17 @@ class EditTest(ViewTestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
-        tag = 'foo'
+        edited_description = 'Edited Description'
+        self.assertNotEqual(self.pad.description, edited_description)
         params = {
             'title': self.pad.title,
-            'tags': tag,
+            'description': edited_description,
         }
         response = self.client.post(self.url, params)
         self.assertEqual(response.status_code, 302)
-        kwargs = {'group': self.group.slug}
+        kwargs = {'group': self.group.slug, 'slug': self.pad.slug}
         self.assertIn(
-            reverse('cosinnus:etherpad:list', kwargs=kwargs),
+            reverse('cosinnus:etherpad:pad-write', kwargs=kwargs),
             response.get('location'))
-        num_tags = len(self.pad.tags.filter(name=tag))
-        self.assertEqual(num_tags, 1)
+        self.pad.refresh_from_db()
+        self.assertEqual(self.pad.description, edited_description)

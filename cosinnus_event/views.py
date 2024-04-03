@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponseNotAllowed
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
@@ -47,6 +47,7 @@ from cosinnus.core.decorators.views import require_user_token_access, dispatch_g
 from django.contrib.sites.shortcuts import get_current_site
 from cosinnus.utils.functions import ensure_list_of_ints, unique_aware_slugify, is_number
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.http import is_ajax
 from django.views.decorators.csrf import csrf_protect
 from django.http.response import HttpResponseBadRequest
 from annoying.functions import get_object_or_None
@@ -55,7 +56,7 @@ from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin,\
 from cosinnus.utils.permissions import check_object_write_access
 
 import logging
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.contrib.auth.models import AnonymousUser
 from datetime import timedelta
@@ -243,14 +244,9 @@ class EntryFormMixin(RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin,
         self.form_view = kwargs.get('form_view', None)
         if self.form_view != 'add':
             obj = self.get_object()
-            if obj.state == Event.STATE_ARCHIVED_DOODLE and not self.form_view == 'delete':
+            if obj.state == Event.STATE_ARCHIVED_DOODLE:
                 messages.warning(request, _('The page you requested is not available for this event at this time.'))
                 return HttpResponseRedirect(obj.get_absolute_url())
-            if self.form_view == 'delete':
-                if obj.state == Event.STATE_VOTING_OPEN:
-                    self.success_url_list = 'cosinnus:event:doodle-list'
-                elif obj.state == Event.STATE_ARCHIVED_DOODLE:
-                    self.success_url_list = 'cosinnus:event:doodle-list-archived'
         return super(EntryFormMixin, self).dispatch(request, *args, **kwargs)
 
     def get_form_kwargs(self):
@@ -420,21 +416,25 @@ class DoodleEditView(EditViewWatchChangesMixin, DoodleFormMixin, AttachableViewM
         return super(DoodleEditView, self).forms_valid(form, inlines)
 
 
-class EntryDeleteView(EntryFormMixin, DeleteView):
+class EntryDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+    model = Event
     message_success = _('Event "%(title)s" was deleted successfully.')
     message_error = _('Event "%(title)s" could not be deleted.')
 
     def get_success_url(self):
-        urlname = getattr(self, 'success_url_list', 'cosinnus:event:list')
+        urlname = 'cosinnus:event:list'
         return redirect_next_or(self.request, group_aware_reverse(urlname, kwargs={'group': self.group}))
 
 
-class DoodleDeleteView(EntryFormMixin, DeleteView):
+class DoodleDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+    model = Event
     message_success = _('Unscheduled event "%(title)s" was deleted successfully.')
     message_error = _('Unscheduled event "%(title)s" could not be deleted.')
 
     def get_success_url(self):
-        urlname = getattr(self, 'success_url_list', 'cosinnus:event:doodle-list')
+        urlname = 'cosinnus:event:doodle-list'
+        if self.object.state == Event.STATE_ARCHIVED_DOODLE:
+            urlname = 'cosinnus:event:doodle-list-archived'
         return group_aware_reverse(urlname, kwargs={'group': self.group})
 
 
@@ -1115,7 +1115,7 @@ def assign_attendance_view(request, group, slug):
         POST param: ``target_state``: Numerical for EventAttendance::ATTENDANCE_STATES.
             Pass '-1' to remove the attending object, i.e. the 'no choice selected' state.  """
     
-    if not request.is_ajax():
+    if not is_ajax(request):
         return HttpResponseBadRequest("This can only be called via Ajax.")
     user = request.user
     if not user.is_authenticated:
@@ -1291,9 +1291,18 @@ class ConferenceEventEditView(ConferenceEventFormMixin, AttachableViewMixin, Upd
     form_view = 'edit'
 
 
-class ConferenceEventDeleteView(ConferenceEventFormMixin, DeleteView):
+class ConferenceEventDeleteView(RequireWriteMixin, FilterGroupMixin, FilterConferenceRoomMixin, DeleteView):
+    model = ConferenceEvent
     message_success = _('Event "%(title)s" was deleted successfully.')
     message_error = _('Event "%(title)s" could not be deleted.')
+
+    def get_success_url(self):
+        # redirect to room, except in compact mode where we redirect to the conference event list
+        if settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
+            url = group_aware_reverse('cosinnus:event:conference-event-list', kwargs={'group': self.group})
+        else:
+            url = self.room.get_absolute_url()
+        return redirect_next_or(self.request, url)
 
 
 def event_api_update(request, pk):

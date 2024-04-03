@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 14:29+0100\n"
+"POT-Creation-Date: 2024-03-27 09:44+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -117,6 +117,12 @@ msgstr "E-Mail-Adresse verifiziert"
 msgid "Email not verified"
 msgstr "E-Mail ist nicht verifiziert"
 
+msgid "Is Guest"
+msgstr "Ist Gast"
+
+msgid "Is not a Guest"
+msgstr "Ist kein Gast"
+
 msgid "User Logged In"
 msgstr "Jemals eingeloggt"
 
@@ -199,6 +205,9 @@ msgstr "Anzahl der Empfänger"
 msgid "Recipients Send Count"
 msgstr "Anzahl versandter Mails an Empfänger"
 
+msgid "Guest access URL"
+msgstr "Gastzugangs-URL"
+
 msgid "Community"
 msgstr "Community"
 
@@ -235,6 +244,10 @@ msgstr "Sprache ändern"
 msgid "My Profile"
 msgstr "Mein Profil"
 
+#
+msgid "My Guest Account"
+msgstr "Mein Gastkonto"
+
 msgid "Set up my Profile"
 msgstr "Richte dein Profil ein"
 
@@ -252,6 +265,9 @@ msgstr "Administration"
 
 msgid "Logout"
 msgstr "Abmelden"
+
+msgid "Leave guest access"
+msgstr "Gastzugang verlassen"
 
 msgid "Home"
 msgstr "Startseite"
@@ -423,6 +439,9 @@ msgstr "Die Gruppe oder das Projekt liegt nicht länger unter der URL die du ein
 msgid "This account is no longer active. You have been logged out."
 msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
+msgid "Your guest access has expired. You have been logged out."
+msgstr "Dein Gastzugang ist abgelaufen. Du wurdest ausgeloggt."
+
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E-Mails geklickt hast. Als Vorsichtsmaßnahme verlinken wir nicht direkt auf externe Webseiten aus unseren E-Mails. Bitte klicke den Link unten erneut wenn du die Seite besuchen möchtest."
 
@@ -431,6 +450,12 @@ msgstr "Zurzeit können sich nur die Portal-Administrator_innen einloggen."
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr "Du kannst nicht auf den Admin-Bereich zugreifen, weil dir die Berechtigung “Mitarbeiter” fehlt, obwohl du ein Superuser bist. Bitte einen anderen Administrator, dir dieses Recht zu erteilen."
+
+msgid "The action you tried to perform is not allowed for guest accounts."
+msgstr "Die Aktion, die du versucht hast auszuführen, ist für Gastkonten nicht gestattet."
+
+msgid "The page you tried to visit is not available for guest accounts."
+msgstr "Die Seite die du aufgerufen hast ist für Gastkonten nicht verfügbar."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Du wurdest automatisch abgemeldet, nachdem du für einige Zeit inaktiv warst."
@@ -1530,6 +1555,12 @@ msgstr "Jeder kann beitreten"
 msgid "Project Type"
 msgstr "Gruppentyp"
 
+msgid "Subtitle"
+msgstr "Untertitel"
+
+msgid "Subtitle used for conferences."
+msgstr "Untertitel für Tagungen"
+
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Kurze Beschreibung. Intern - wird nur Gruppen/projektmitgliedern angezeigt."
 
@@ -1839,6 +1870,9 @@ msgstr "Durch Kommata getrennte Liste von Phrasen, für die die automatische Ver
 msgid "Is Moderator"
 msgstr "Ist Moderator"
 
+msgid "ToS accepted"
+msgstr "ToS angenommen"
+
 msgid "Language"
 msgstr "Sprache"
 
@@ -1853,6 +1887,12 @@ msgstr "Der Zeitpunkt, zu dem die Löschung dieses Profils geplant ist. Die Lös
 
 msgid "Deletion triggered by self"
 msgstr "Löschung wurde selbst veranlasst"
+
+msgid "Is guest user"
+msgstr "Ist Gast"
+
+msgid "(Deleted User)"
+msgstr "(Gelöschter Nutzer)"
 
 msgid "Terms of Service"
 msgstr "Nutzungsbedingungen"
@@ -2831,7 +2871,7 @@ msgid "next"
 msgstr "Weiter"
 
 msgid "Update User"
-msgstr "Benutzer aktualisieren"
+msgstr "Benutzer/in aktualisieren"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn vor dem Speichern!"
@@ -3824,7 +3864,7 @@ msgid "New password"
 msgstr "Neues Passwort"
 
 msgid "Answer"
-msgstr "Antworten"
+msgstr "Antwort"
 
 msgid "Question"
 msgstr "Frage"
@@ -4012,6 +4052,9 @@ msgstr "Schließen"
 msgid "Report offensive content"
 msgstr "Anstößigen Inhalt melden"
 
+msgid "Sorry, this feature is only available for registered members."
+msgstr "Tut uns leid, diese Funktion ist nur für registrierte Mitglieder verfügbar."
+
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "Bitte beschreibe warum du diesen Inhalt meldest!"
 
@@ -4042,6 +4085,12 @@ msgstr "Der Inhalt des obigen Feldes wird im Rahmen der Plattform-Suche auffindb
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
 msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt. Sie sind nicht in der Suche auffindbar."
+
+msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
+msgstr "Der Inhalt des obigen Feldes wird angezeigt wenn er nicht anhand von einer bestimmten Übersetzung (unten) überschrieben wird."
+
+msgid "If present, the translations below will be shown according to the users' local language settings."
+msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt."
 
 msgid "If you would like to change your email address, you can do it here:"
 msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
@@ -4213,7 +4262,7 @@ msgid "Enter a user name or email to find users to invite..."
 msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
 
 msgid "Invite users"
-msgstr "Benutzer einladen"
+msgstr "Benutzer/in einladen"
 
 msgid "Invited Members"
 msgstr "Eingeladene Mitglieder"
@@ -4303,6 +4352,10 @@ msgstr "Mitglied ablehnen"
 
 msgid "There are no new membership requests."
 msgstr "Es gibt aktuell keine neuen Mitglieder-Anträge."
+
+#
+msgid "Guest user access"
+msgstr "Gastzugang"
 
 msgid "Current Members"
 msgstr "Aktuelle Mitglieder"
@@ -4428,11 +4481,20 @@ msgstr "In welchen Projekt- oder Gruppenkalendern soll die Tagung angezeigt werd
 msgid "Select Projects/Groups"
 msgstr "Projekte/Gruppen auswählen"
 
+msgid "Conference subtitle"
+msgstr "Untertitel der Tagung"
+
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "Die Untertitel werden in der Tagung und der Microseite angezeigt."
+
+msgid "Add a subtitle for the conference."
+msgstr "Gib einen Untertitel für die Tagung ein."
+
 msgid "Description and Infos"
 msgstr "Beschreibung und Infos"
 
 msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
-msgstr "Dies ist eine portalweite Beschreibung die auf der Microseite angezeigt wird und von jedem/r Portalbenutzer*in gesehen werden kann."
+msgstr "Dies ist eine portalweite Beschreibung die auf der Microsite angezeigt wird und von jedem/r Portalbenutzer*in gesehen werden kann."
 
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Dies ist eine öffentliche Beschreibung die auf der Microseite angezeigt wird und von jedem im Internet gesehen werden kann."
@@ -4539,14 +4601,14 @@ msgstr "Öffentliche Anzeige aktivieren"
 msgid "Create invite token"
 msgstr "Einladungstoken erstellen"
 
-msgid "Check this to generate an invite token which allows a user to join the group directly."
-msgstr "Wähle dies aus, um einen direkten Einladungstoken zu erstellen, mit dem man der Gruppe direkt beitreten kann."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
+msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Gruppe direkt beitreten kann."
 
-msgid "Check this to generate an invite token which allows a user to join the project directly."
-msgstr "Wähle dies aus, um einen direkten Einladungstoken zu erstellen, mit dem man dem Projekt direkt beitreten kann."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
+msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder dem Projekt direkt beitreten kann."
 
-msgid "Check this to generate an invite token which allows a user to join the conference directly."
-msgstr "Wähle dies aus, um einen direkten Einladungstoken zu erstellen, mit dem man der Tagung direkt beitreten kann."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
+msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Tagung direkt beitreten kann."
 
 msgid "The current token is: "
 msgstr "Der aktuelle Token ist: "
@@ -5353,7 +5415,7 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Benutzer \"%(sender_name)s\" hat die Einladung zu %(team_name)s akzeptiert.\n"
+"Benutzer/in \"%(sender_name)s\" hat die Einladung zu %(team_name)s akzeptiert.\n"
 "\n"
 "Du hast diese E-Mail bekommen, weil du ein Gruppen-/Projektadministrator bist.\n"
 "\n"
@@ -5377,7 +5439,7 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Benutzer \"%(sender_name)s\" hat die Einladung zu %(team_name)s abgelehnt.\n"
+"Benutzer/in \"%(sender_name)s\" hat die Einladung zu %(team_name)s abgelehnt.\n"
 "\n"
 "Du hast diese E-Mail bekommen, weil du ein Gruppen-/Projektadministrator bist.\n"
 "\n"
@@ -5446,7 +5508,7 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Benutzer \"%(sender_name)s\" möchte %(team_name)s beitreten.\n"
+"Benutzer/in \"%(sender_name)s\" möchte %(team_name)s beitreten.\n"
 "\n"
 "Bitte besuche die folgende Seite um die Anfrage anzunehmen oder abzulehnen:\n"
 "%(domain_url)s%(group_page_url)s\n"
@@ -5813,6 +5875,9 @@ msgstr "Abgemeldet"
 
 msgid "You have been logged out. See you again soon!"
 msgstr "Du wurdest ausgeloggt. Bis bald!"
+
+msgid "Redirecting you in 3 seconds..."
+msgstr "Weiterleitung in 3 Sekunden..."
 
 msgid "Error while logging out"
 msgstr "Es gab einen Fehler bei der Abmeldung"
@@ -6715,6 +6780,42 @@ msgstr "Gib ein Einladungs-Token ein:"
 msgid "For example"
 msgstr "Zum Beispiel"
 
+msgid "Restricted Guest Access"
+msgstr "Eingeschränkter Gastzugriff"
+
+msgid "Access restricted for guest accounts"
+msgstr "Zugang für Gastkonten eingeschränkt"
+
+msgid "You are currently using the platform with a guest account provided to you by a link."
+msgstr "Du nutzt die Website derzeit mit einem Gastkonto, das du über einen Link erhalten hast."
+
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
+msgstr "Als Gast stehen dir viele Funktionen dieser Website nicht zur Verfügung, z. B. das Erstellen von Inhalten, das Hochladen von Dateien oder das Versenden von Nachrichten an andere Benutzer/innen."
+
+msgid "You cannot customize your user profile either."
+msgstr "Du kannst dein Benutzerprofil auch nicht anpassen."
+
+msgid "Sign up now to create a fully featured account!"
+msgstr "Registriere dich jetzt um ein vollwertiges Benutzerkonto zu erstellen!"
+
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
+msgstr "Wenn du dich als Mitglied anmeldest, kannst du mit anderen zusammenarbeiten, dein Profil individuell gestalten und alle Funktionen der Website nutzen."
+
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
+msgstr "Beachte, dass du nach der Anmeldung Antrag auf Mitgliedschaft in Projekten, Gruppen oder Tagungen stellen oder eingeladen werden musst. Die Mitgliedschaften deines Gastkontos werden nicht übernommen."
+
+msgid "Leave guest access and create an account"
+msgstr "Gastzugriff beenden und Konto registrieren"
+
+msgid "Guest User Signup"
+msgstr "Anmeldung als Gast"
+
+msgid "You may create a full account at any time by logging out of your guest account via the user menu on the top right and signup up."
+msgstr "Du kannst jederzeit ein vollwertiges Konto erstellen, indem du dich über das Benutzermenü oben rechts von deinem Gastkonto abmeldest und dich dann registrierst."
+
+msgid "Join as a Guest"
+msgstr "Als Gast beitreten"
+
 msgid "Edit Profile"
 msgstr "Profil bearbeiten"
 
@@ -7182,7 +7283,7 @@ msgid "If the user still has not hidden their introduction-message on the dashbo
 msgstr "Wenn ein Benutzer die \"Willkommen!\"-Einleitungstext auf dem Dashboard noch nicht weggeklickt hat, wird er keine Ankündigung sehen."
 
 msgid "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown."
-msgstr "Benutzer kann eine Ankündigungen wegklicken, woraufhin sie verschwindet und dem Benutzer nie wieder angezeigt wird. Beim nächsten Besuch des Dashboards wird die nächste Ankündigung angezeigt, falls es noch welche gibt, die der Benutzer nicht weggeklickt hat."
+msgstr "Benutzer/in kann eine Ankündigungen wegklicken, woraufhin sie verschwindet und dem Benutzer nie wieder angezeigt wird. Beim nächsten Besuch des Dashboards wird die nächste Ankündigung angezeigt, falls es noch welche gibt, die der Benutzer nicht weggeklickt hat."
 
 msgid "There are no announcements yet."
 msgstr "Noch keine Ankündigungen vorhanden."
@@ -7712,9 +7813,6 @@ msgstr ""
 msgid "Nutzungsbedingungen"
 msgstr "Nutzungsbedingungen"
 
-msgid "(Deleted User)"
-msgstr "(Gelöschter Nutzer)"
-
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
@@ -7786,7 +7884,7 @@ msgid "Project members only"
 msgstr "Nur Projektmitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
-msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren des Projekts angenommen oder abgelehnt werden kann."
+msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren des Projekts angenommen oder abgelehnt werden kann."
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus diesem Projekt, um sie anzuhängen..."
@@ -7799,6 +7897,21 @@ msgstr "Jetzt anmelden und mitgestalten!"
 
 msgid "You have been invited to collaborate!"
 msgstr "Du wurdest zum Mitmachen eingeladen!"
+
+msgid "You can access and browse the project that invited you"
+msgstr "Du kannst das Projekt, zu dem du eingeladen wurdest, aufrufen und dessen Inhalte anschauen"
+
+msgid "This is only visible to admins of this project."
+msgstr "Dies ist nur für Admins dieses Projekts sichtbar."
+
+msgid "Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project."
+msgstr "Der Zugang für Gastnutzer wurde für dieses Projekt aktiviert. Die Projektadministrator/innen können einen speziellen Link freigeben, der es nicht registrierten Menschen ermöglicht, der Plattform sofort beizutreten und Lesezugriff auf dieses Projekt zu erhalten. Bitte beachte dies, wenn du sensible Informationen innerhalb dieses Projekts teilst."
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project"
+msgstr "Du kannst nicht registrierte Menschen einladen, der Plattform sofort beizutreten, indem du den folgenden Link teilst. Auf diese Art eingeladene Menschen treten als Gast bei und brauchen sich nicht zu registrieren. Sie müssen lediglich ihren Namen eingeben und erhalten dann Lesezugriff auf dieses Projekt"
+
+msgid "You are joining as a guest and will get read-only access to the project"
+msgstr "Du trittst als Gast bei und erhältst Lesezugriff auf das Projekt"
 
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator_innen."
@@ -7879,10 +7992,25 @@ msgid "Group members only"
 msgstr "Nur Gruppen-Mitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
-msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren der Gruppe angenommen oder abgelehnt werden kann."
+msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren der Gruppe angenommen oder abgelehnt werden kann."
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Gruppe, um sie anzuhängen..."
+
+msgid "You can access and browse the group that invited you"
+msgstr "Du kannst die Gruppe, zu der du eingeladen wurdest, aufrufen und deren Inhalte anschauen"
+
+msgid "This is only visible to admins of this group."
+msgstr "Dies ist nur für Admins dieser Gruppe sichtbar."
+
+msgid "Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group."
+msgstr "Der Zugang für Gastnutzer wurde für diese Gruppe aktiviert. Die Gruppenadministrator/innen können einen speziellen Link freigeben, der es nicht registrierten Menschen ermöglicht, der Plattform sofort beizutreten und Lesezugriff auf diese Gruppe zu erhalten. Bitte beachte dies, wenn du sensible Informationen innerhalb dieser Gruppe teilst."
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group"
+msgstr "Du kannst nicht registrierte Menschen einladen, der Plattform sofort beizutreten, indem du den folgenden Link teilst. Auf diese Art eingeladene Menschen treten als Gast bei und brauchen sich nicht zu registrieren. Sie müssen lediglich ihren Namen eingeben und erhalten dann Lesezugriff auf diese Gruppe"
+
+msgid "You are joining as a guest and will get read-only access to the group"
+msgstr "Du trittst als Gast bei und erhältst Lesezugriff auf die Gruppe"
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator_innen."
@@ -7973,7 +8101,7 @@ msgid "Conference members only"
 msgstr "Nur Tagungsmitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
-msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Veranstalter der Tagung angenommen oder abgelehnt werden kann."
+msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Veranstalter der Tagung angenommen oder abgelehnt werden kann."
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Tagung um sie anzuhängen..."
@@ -7986,6 +8114,21 @@ msgstr "Jetzt anmelden und teilnehmen!"
 
 msgid "You have been invited to participate!"
 msgstr "Du wurdest eingeladen, teilzunehmen!"
+
+msgid "You can access and participate in the conference that invited you"
+msgstr "Du kannst die Tagung, zu der du eingeladen wurdest, aufrufen und deren Inhalte anschauen"
+
+msgid "This is only visible to admins of this conference."
+msgstr "Dies ist nur für Admins dieser Tagung sichtbar."
+
+msgid "Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference."
+msgstr "Der Zugang für Gastnutzer wurde für diese Tagung aktiviert. Die Tagungsadministrator/innen können einen speziellen Link freigeben, der es nicht registrierten Menschen ermöglicht, der Plattform sofort beizutreten und Lesezugriff auf diese Tagung zu erhalten. Bitte beachte dies, wenn du sensible Informationen innerhalb dieser Tagung teilst."
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference"
+msgstr "Du kannst nicht registrierte Menschen einladen, der Plattform sofort beizutreten, indem du den folgenden Link teilst. Auf diese Art eingeladene Menschen treten als Gast bei und brauchen sich nicht zu registrieren. Sie müssen lediglich ihren Namen eingeben und erhalten dann Lesezugriff auf diese Tagung"
+
+msgid "You are joining as a guest and will get read-only access to the conference"
+msgstr "Du trittst als Gast bei und erhältst Lesezugriff auf die Tagung"
 
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
 msgstr "Entschuldige, nur Portal-Administrator_innen können Tagungen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Tagung für dich erstellen. Unten findest du eine Liste aller Administrator_innen."
@@ -8025,6 +8168,12 @@ msgstr "Jetzt"
 msgid "Question about"
 msgstr "Frage zu"
 
+msgid "Please enter your OTP token."
+msgstr "Bitte gib dein OTP-Token ein."
+
+msgid "Invalid token. Please make sure you have entered it correctly."
+msgstr "Ungültiges Token. Bitte stell sicher, dass du es korrekt eingegeben hast."
+
 msgid "The password must contain at least 1 digit, 0-9."
 msgstr "Das Passwort muss mindestens 1 Ziffer enthalten, 0-9."
 
@@ -8052,6 +8201,37 @@ msgstr "Bitte gib auch ein Enddatum an"
 
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
+
+msgid "Version 1.20.0 released"
+msgstr "Version 1.20.0 veröffentlicht"
+
+msgid "Includes Django update, conference improvements and more."
+msgstr "Enthält ein Update des Django-Frameworks, Verbesserungen für Tagungen und mehr."
+
+msgid ""
+"The update includes:\n"
+"- Updated the backend framework Django to version 4 for security fixes and improvements.\n"
+"- Added support for multi-language welcome-emails, sending the user the welcome email in the users selected language (if the translation feature is enabled).\n"
+"- Made conference application questions translatable (if the translation feature is enabled).\n"
+"- Added subtitle field to conferences for additional information.\n"
+"- Showing exact number of conference participants for events exceeding 99 participants.\n"
+"- Improved map search filter for conferences and events considering ongoing events and exact event ranges.\n"
+"- Improved display of workshops on the compact conferences micro site.\n"
+"- Fixed embedded map page allowing to close selected elements.\n"
+"- (Admin-Interface) Added logs for group and group membership changes.\n"
+"- Further security improvements and minor bugfixes.\n"
+msgstr ""
+"Das Update enthält:\n"
+"- Update des Django-Backend-Frameworks auf Version 4 für Sicherheitsupdates and weitere Verbesserungen.\n"
+"- Unterstützung für mehrsprachige Willkommens-Emails, die dadurch in der Nutzersprache verschickt werden (falls das Übersetzungs-Feature aktiviert ist).\n"
+"- Möglichkeit zur Übersetzung von Teilnahme-Motivations-Fragen von Tagungen (falls das Übersetzungs-Feature aktiviert ist).\n"
+"- Untertitel-Feld zu Tagungen für zusätzliche Information hinzugefügt.\n"
+"- Die Anzahl von Tagungs-Teilnehmern wird jetzt auch bei Veranstaltungen mir mehr als 99 Teilnehmern dargestellt.\n"
+"- Verbesserung des Suchfilters von Tagungen und Veranstaltungen in der Kartenansicht, damit alle Veranstaltungen aus den gewählten Zeiträumen korrekt dargestellt werden.\n"
+"- Verbesserung der Darstellung von Workshops auf der Tagungs-Microseite.\n"
+"- Fehler auf eingebetteten Kartenseiten behoben, der verhinderte, dass ausgewählte Elemente geschlossen werden konnten.\n"
+"- (Admin-Oberfläche) Protokollierung von Änderungen an Gruppen und Gruppen-Mitgliedschaften hinzugefügt.\n"
+"- Weitere Sicherheitsupdates und kleine Fehlerbehebungen.\n"
 
 msgid "Version 1.19.6 released"
 msgstr "Version 1.19.6 veröffentlicht"
@@ -8287,6 +8467,9 @@ msgstr "Dieses Team hast keine konfigurierte Videokonferenz."
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s wurde erfolgreich geändert."
 
+msgid "Edited."
+msgstr "Bearbeitet."
+
 msgid "This action is not available directly!"
 msgstr "Diese Aktion ist nicht direkt verfügbar!"
 
@@ -8324,11 +8507,11 @@ msgstr "Ich habe dich eingeladen, %(team_name)s beizutreten!"
 
 #, python-format
 msgid "User %(username)s had already requested membership and has now been made a member immediately!"
-msgstr "Benutzer \"%(username)s\" hatte bereits einen Antrag auf Mitgliedschaft gestellt und wurde deshalb sofort zum Mitglied gemacht!"
+msgstr "Benutzer/in \"%(username)s\" hatte bereits einen Antrag auf Mitgliedschaft gestellt und wurde deshalb sofort zum Mitglied gemacht!"
 
 #, python-format
 msgid "User %(username)s was successfully invited!"
-msgstr "Benutzer %(username)s wurde erfolgreich eingeladen!"
+msgstr "Benutzer/in %(username)s wurde erfolgreich eingeladen!"
 
 #, python-format
 msgid "The following users were invited to apply: %s"
@@ -8338,8 +8521,27 @@ msgid "All members of groups/projects you selected had already been invited or h
 msgstr "Alle Mitglieder/innen der ausgewählten Gruppen/Projekte wurden bereits eingeladen oder haben sich bereits angemeldet. Es wurden keine neuen Einladungen verschickt."
 
 #, python-format
+msgid "Invited user \"%(user)s\"."
+msgstr "Benutzer/in \"%(user)s\" eingeladen."
+
+msgid "You cannot promote a guest user account!"
+msgstr "Du kannst einen Gast nicht befördern!"
+
+#, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der einzig übrige Administrator."
+
+#, python-format
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "Benutzer/in \"%(user)s\" als Mitglied akzeptiert."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr "Benutzer/in \"%(user)s\" zum Admin gemacht."
+
+#, python-format
+msgid "Made user \"%(user)s\" member."
+msgstr "Benutzer/in \"%(user)s\" zum Mitglied gemacht."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8359,7 +8561,11 @@ msgstr "Deine Einladung an Benutzer \"%(username)s\" wurde erfolgreich zurückge
 
 #, python-format
 msgid "User \"%(username)s\" is no longer a member."
-msgstr "Benutzer \"%(username)s\" ist jetzt kein Mitglied mehr."
+msgstr "Benutzer/in \"%(username)s\" ist jetzt kein Mitglied mehr."
+
+#, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr "Mitgliedschaft für Benutzer/in \"%(user)s\" entfernt."
 
 #, python-format
 msgid "%(team_name)s was re-activated successfully!"
@@ -8380,6 +8586,12 @@ msgstr "Dieses Projekt/Gruppe ist bereits aktiv!"
 
 msgid "This project/group is already inactive!"
 msgstr "Dieses Projekt/Gruppe ist bereits inaktiv!"
+
+msgid "Activated."
+msgstr "Aktiviert."
+
+msgid "Deactivated."
+msgstr "Deaktiviert."
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr "Du bist kein Mitglied, aber hast Zugriff, weil du Administratorenrechte besitzt."
@@ -8414,6 +8626,10 @@ msgstr "Die Leute mit diesem E-Mail Adressen haben schon ein Benutzerkonto und w
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Super! Wir schicken jetzt die Einladungen an folgende E-Mail Adressen: %s"
+
+#, python-format
+msgid "Invited \"%(emails)s\"."
+msgstr "\"%(emails)s\" eingeladen."
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "Es gab einen Fehler beim Löschen der Einladung."
@@ -8493,6 +8709,10 @@ msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Kein passender %(verbose_name)s für die Anfrage gefunden"
 
+#, python-format
+msgid "User \"%s\" is a guest user and has no profile."
+msgstr "Benutzer/in \"%s\" ist ein Gast und hat kein Profil."
+
 msgid "Your profile was edited successfully."
 msgstr "Dein Profil wurde erfolgreich bearbeitet."
 
@@ -8544,7 +8764,7 @@ msgstr "Dein Benutzerkonto \"%(user)s\" wurde erfolgreich registriert. Willkomme
 
 #, python-format
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
-msgstr "Benutzer \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto muss noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. Wir senden dir eine E-Mail an \"%(email)s\" wenn es soweit ist."
+msgstr "Benutzer/in \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto muss noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. Wir senden dir eine E-Mail an \"%(email)s\" wenn es soweit ist."
 
 #, python-format
 msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
@@ -8609,7 +8829,7 @@ msgid "The link you supplied for the email confirmation is no longer valid!"
 msgstr "Dieser Bestätigungslink ist nicht länger gültig!"
 
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
-msgstr "Die E-Mail-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem andern Benutzer registriert worden!"
+msgstr "Die E-Mail-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem anderen Benutzer registriert worden!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed!"
@@ -8653,6 +8873,12 @@ msgstr "Wir haben deine E-Mail-Adresse \"%(email)s\" von unserer Mailingliste en
 
 msgid "A new verification email has been sent."
 msgstr "Eine neue Verifizierungsmail wurde versandt."
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr "Du bist derzeit eingeloggt. Der Gastzugang kann nur genutzt werden, wenn du nicht eingeloggt bist."
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
+msgstr "Wir konnten dich zu diesem Zeitpunkt nicht als Gast anmelden. Bitte versuche es später noch einmal!"
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Willkommen! Du wurdest bereits in folgende Projekte und Gruppen eingeladen. Bitte klicke den Ausklappen-Button der Einladungen, die du annehmen oder ablehnen möchtest!"
@@ -8810,7 +9036,7 @@ msgid "Successfully updated accounts."
 msgstr "Nutzerkonten erfolgreich aktualisiert."
 
 msgid "User was not created"
-msgstr "Benutzer wurde nicht erstellt"
+msgstr "Benutzer/in wurde nicht erstellt"
 
 msgid "The room was created successfully."
 msgstr "Raum erfolgreich erstellt."
@@ -9037,6 +9263,9 @@ msgstr "hat ein Pad erstellt"
 
 msgid "There are no etherpads yet"
 msgstr "Es wurden noch keine Pads erstellt"
+
+msgid "Editing is not permitted for guest accounts."
+msgstr "Das Bearbeiten ist für Gastkonten nicht gestattet."
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -11413,7 +11642,7 @@ msgid "Multi Notification Preferences"
 msgstr "Multi Notification Preferences"
 
 msgid "User who caused this notification event"
-msgstr "Benutzer der das Event ausgelöst hat"
+msgstr "Benutzer/in der das Event ausgelöst hat"
 
 msgid "Audience"
 msgstr "Publikum"
@@ -13363,6 +13592,24 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
 
+msgid "Add object"
+msgstr "Objekt hinzufügen"
+
+msgid "Create container"
+msgstr "Erzeuge Zusammenstellung"
+
+msgid "ROOT"
+msgstr "WURZEL"
+
+msgid "Show"
+msgstr "Anzeigen"
+
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen willst?"
+
+msgid "Are you sure you want to delete this object?"
+msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
 #~ msgid "Newsletter sent."
 #~ msgstr "Der Newsletter wurde abgeschickt."
 
@@ -13466,7 +13713,7 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 #~ msgstr "Projekte/Gruppen CSV-Datei"
 
 #~ msgid "User CSV File"
-#~ msgstr "Benutzer CSV-Datei"
+#~ msgstr "Benutzer/in CSV-Datei"
 
 #~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
 #~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
@@ -13603,9 +13850,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "Active"
 #~ msgstr "Aktiv"
-
-#~ msgid "Restricted"
-#~ msgstr "Eingeschränkt"
 
 #~ msgid "Whether the microphone is active when entering the BBB room"
 #~ msgstr "Ob das Mikrofon aktiviert ist, wenn man den BBB-Raum betritt"
@@ -13787,7 +14031,7 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 #~ msgstr "Das Benutzerkonto wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
 
 #~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-#~ msgstr "Benutzer \"%(email)s\" wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
+#~ msgstr "Benutzer/in \"%(email)s\" wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
 
 #~ msgid "Is premium"
 #~ msgstr "Ist Premium"
@@ -14072,9 +14316,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 #~ msgid "Export (PDF)"
 #~ msgstr "Exportieren (PDF)"
 
-#~ msgid "Are you sure you want to delete this container and all etherpads in it?"
-#~ msgstr "Sind Sie sicher, dass Sie diese Zusammenstellung und alle Dokumente darin löschen wollen?"
-
 #~ msgid "Are you sure you want to delete this etherpad?"
 #~ msgstr "Sind Sie sicher, dass Sie dieses Dokument löschen wollen?"
 
@@ -14098,15 +14339,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "Add etherpad"
 #~ msgstr "Dokument hinzufügen"
-
-#~ msgid "Create container"
-#~ msgstr "Erzeuge Zusammenstellung"
-
-#~ msgid "ROOT"
-#~ msgstr "WURZEL"
-
-#~ msgid "Show"
-#~ msgstr "Anzeigen"
 
 #~ msgid "Etherpad \"%(title)s\" was deleted successfully."
 #~ msgstr "Dokument „%(title)s“ wurde erfolgreich gelöscht."

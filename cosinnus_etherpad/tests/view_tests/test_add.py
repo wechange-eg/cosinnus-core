@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.urls import reverse
 
 from cosinnus_etherpad.models import Etherpad
-from tests.view_tests.base import ViewTestCase
+from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
 class AddTest(ViewTestCase):
@@ -12,15 +12,15 @@ class AddTest(ViewTestCase):
     def setUp(self, *args, **kwargs):
         super(AddTest, self).setUp(*args, **kwargs)
         self.kwargs = {'group': self.group.slug}
-        self.url = reverse('cosinnus:etherpad:pad-add', kwargs=self.kwargs)
+        self.url = reverse('cosinnus:etherpad:list', kwargs=self.kwargs)
 
     def test_get_not_logged_in(self):
         """
-        Should return 403 on GET if not logged in
+        Should return a redirect on GET if not logged in
         """
         self.client.logout()
         response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_get_logged_in(self):
         """
@@ -32,15 +32,15 @@ class AddTest(ViewTestCase):
 
     def test_post_not_logged_in(self):
         """
-        Should return 403 on POST if not logged in
+        Should return a redirect on POST if not logged in
         """
         self.client.logout()
         response = self.client.post(self.url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_post_logged_in(self):
         """
-        Should return 302 to detail page on successful POST and have a pad
+        Should return 302 to pad detail on successful POST and have a pad
         with given title
         """
         self.client.login(username=self.credential, password=self.credential)
@@ -56,9 +56,9 @@ class AddTest(ViewTestCase):
 
         # do not catch exception here
         pad = Etherpad.objects.get(title=title)
-        kwargs = {'group': self.group.slug}
+        kwargs = {'group': self.group.slug, 'slug': pad.slug}
         self.assertIn(
-            reverse('cosinnus:etherpad:list', kwargs=kwargs),
+            reverse('cosinnus:etherpad:pad-edit', kwargs=kwargs),
             response.get('location'))
 
         # explicitly need to delete object, otherwise signals won't be fired

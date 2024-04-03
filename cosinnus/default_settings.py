@@ -17,7 +17,7 @@ import random
 import string
 import sys
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import environ
 
 from cosinnus import VERSION as COSINNUS_VERSION
@@ -28,6 +28,12 @@ from django.conf.global_settings import *
 # PASSWORD_RESET_TIMEOUT_DAYS is deprecated however and will be deleted in a future django version
 if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
     del globals()['PASSWORD_RESET_TIMEOUT_DAYS']
+
+# DEFAULT_FILE_STORAGE/STATICFILES_STORAGE are deprecated and mutually exclusive with STORAGES.
+if 'DEFAULT_FILE_STORAGE' in globals():
+    del globals()['DEFAULT_FILE_STORAGE']
+if 'STATICFILES_STORAGE' in globals():
+    del globals()['STATICFILES_STORAGE']
 
 
 # WARNING: do not add any settings on this level! 
@@ -163,6 +169,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+        "allauth.account.middleware.AccountMiddleware",
         
         'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
@@ -231,11 +238,22 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     CSRF_USE_SESSIONS = False
     # use session based CSRF cookies
     CSRF_COOKIE_AGE = None
+    CSRF_TRUSTED_ORIGINS = [f'https://*.{project_settings["COSINNUS_PORTAL_URL"]}']
+    
+    # Cookie settings. We will let cookies expire browser-session-based for anonymous users, and keep them
+    # for 90 days for logged in users
+    SESSION_EXPIRE_AT_BROWSER_CLOSE = True
     # session cookie name
     SESSION_COOKIE_DOMAIN = project_settings["COSINNUS_PORTAL_URL"]
     SESSION_COOKIE_NAME = f"{project_settings['COSINNUS_PORTAL_NAME']}-sessionid"
     # session expiry in seconds
-    SESSION_COOKIE_AGE = 60*60*24*90 # 90 days
+    SESSION_COOKIE_AGE = 60 * 60 * 24 * 90  # 90 days
+    LANGUAGE_COOKIE_AGE = SESSION_COOKIE_AGE
+    COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS = SESSION_COOKIE_AGE
+    
+    # leave this on for production, but may want to disable for dev
+    #SESSION_COOKIE_SECURE = True
+
     
     
     """ --------------- DATE AND TIME ---------------- """
@@ -364,7 +382,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'rest_framework',
         'drf_yasg',
         'taggit',
-        'django_bigbluebutton',
         'django_clamd',
         'rest_framework_simplejwt.token_blacklist',
     ]    
@@ -431,8 +448,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # memcached
     CACHES = {
         'default': {
-            # todo: Switch to PyMemcache
-            'BACKEND': "django.core.cache.backends.memcached.MemcachedCache",
+            'BACKEND': "django.core.cache.backends.memcached.PyMemcacheCache",
             'LOCATION':  env("WECHANGE_MEMCACHED_LOCATION", default=f"unix:/srv/http/{project_settings['COSINNUS_PORTAL_URL']}/run/memcached.socket"),
         }
     }
@@ -456,12 +472,12 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         EMAIL_USE_TLS = env("WECHANGE_EMAIL_USE_TLS", cast=bool, default=False)
 
     # Etherpad config.
-    COSINNUS_ETHERPAD_BASE_URL = f"https://pad.{project_settings['COSINNUS_PORTAL_URL']}/api"
+    COSINNUS_ETHERPAD_BASE_URL = env("WECHANGE_COSINNUS_ETHERPAD_BASE_URL", default=f"https://pad.{project_settings['COSINNUS_PORTAL_URL']}/api")
     COSINNUS_ETHERPAD_API_KEY = env("WECHANGE_COSINNUS_ETHERPAD_API_KEY", default="")
     
     # Ethercalc config
     COSINNUS_ETHERPAD_ENABLE_ETHERCALC = True
-    COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = f"https://calc.{project_settings['COSINNUS_PORTAL_URL']}"
+    COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = env("WECHANGE_COSINNUS_ETHERPAD_ETHERCALC_BASE_URL", default=f"https://calc.{project_settings['COSINNUS_PORTAL_URL']}")
     
     # Rocketchat
     COSINNUS_ROCKET_ENABLED = False
@@ -608,10 +624,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # detect testing mode
     TESTING = 'test' in sys.argv
     
-    
-    # leave this on for production, but may want to disable for dev
-    #SESSION_COOKIE_SECURE = True
-    
     # wagtail
     WAGTAIL_SITE_NAME = 'Wechange'
     WAGTAIL_ENABLE_UPDATE_CHECK = False
@@ -658,12 +670,13 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.cron.SwitchGroupPremiumFeatures',
         'cosinnus.cron.DeleteTemporaryData',
         'cosinnus.cron.SendQueuedMassMails',
+        'cosinnus.cron.DeleteOldGuestUsers',
         'cosinnus_conference.cron.SendConferenceReminders',
         'cosinnus_event.cron.TriggerBBBStreamers',
         'cosinnus_exchange.cron.PullData',
         'cosinnus_marketplace.cron.DeactivateExpiredOffers',
         'cosinnus_message.cron.ProcessDirectReplyMails',
-        #'cosinnus_notifications.cron.DeleteOldNotificationAlerts', # disabled until manual cleanup of old Alerts
+        'cosinnus_notifications.cron.DeleteOldNotificationAlerts',
     ]
     # delete cronjob logs older than 30 days
     DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
@@ -780,11 +793,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # PIWIK settings. set individually for each portal. won't load if PIWIK_SITE_ID is not set
     PIWIK_SERVER_URL = '//stats.wechange.de/'
     PIWIK_SITE_ID = None
-
-    # Cookie settings. We will let cookies expire browser-session-based for anonymous users, and keep them
-    # for 30 days for logged in users
-    SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-    COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS = 30 * 60 * 24 * 60 # 30 days
     
     # honeypot field name shouldn't be too obvious, but also not trigger browsers' autofill
     HONEYPOT_FIELD_NAME = 'phnoenumber_8493'
@@ -833,6 +841,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     SIMPLE_JWT = {
         'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
         'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+        'TOKEN_OBTAIN_SERIALIZER': 'cosinnus.utils.jwt.TwoFactorTokenObtainPairSerializer',
     }
     
     # enables the read-only mode for the legacy postman messages system if True
@@ -845,7 +854,12 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     SOCIALACCOUNT_AUTO_SIGNUP = False
     SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
     SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
-    
+
+    # django-oauth-toolkit settings
+    OAUTH2_PROVIDER = {
+        'PKCE_REQUIRED': False,
+    }
+
     # Organizations
     COSINNUS_ORGANIZATIONS_ENABLED = False
     

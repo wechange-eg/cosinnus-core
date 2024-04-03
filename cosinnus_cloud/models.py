@@ -3,7 +3,7 @@
 from annoying.functions import get_object_or_None
 from dataclasses import dataclass
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import six
 
 from cosinnus.conf import settings

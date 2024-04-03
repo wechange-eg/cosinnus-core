@@ -22,13 +22,14 @@ from cosinnus.views.user import _send_user_welcome_email_if_enabled
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
 from cosinnus.views.profile import UserProfileUpdateView
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.utils.http import is_ajax
 from cosinnus.core.mail import send_html_mail
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.mail import QueuedMassMail
@@ -50,11 +51,14 @@ class AdministrationView(RequirePortalManagerMixin, TemplateView):
 administration = AdministrationView.as_view()
 
 
-class UserWelcomeEmailEditView(FormView):
-    
+class UserWelcomeEmailEditView(UpdateView):
+    model = CosinnusPortal
     form_class = UserWelcomeEmailForm
     template_name = 'cosinnus/administration/welcome_email.html'
-    
+
+    def get_object(self, queryset=None):
+        return CosinnusPortal.get_current()
+
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
             raise PermissionDenied('You do not have permission to access this page.')
@@ -64,29 +68,15 @@ class UserWelcomeEmailEditView(FormView):
             messages.success(self.request, _('Test email sent!'))
             return redirect(self.get_success_url())
         return super(UserWelcomeEmailEditView, self).dispatch(request, *args, **kwargs)
-    
-    def get_initial(self, *args, **kwargs):
-        initial = super(UserWelcomeEmailEditView, self).get_initial(*args, **kwargs)
-        initial.update({
-            'is_active': self.portal.welcome_email_active,
-            'email_text': self.portal.welcome_email_text,
-        })
-        return initial
-    
+
     def get_context_data(self, *args, **kwargs):
         context = super(UserWelcomeEmailEditView, self).get_context_data(*args, **kwargs)
+        translated_welcome_email_text = self.portal['welcome_email_text']
         context.update({
-            'email_text': render_html_with_variables(self.request.user, self.portal.welcome_email_text),
+            'email_text': render_html_with_variables(self.request.user, translated_welcome_email_text),
         })
         return context
-    
-    def form_valid(self, form):
-        self.form = form
-        self.portal.welcome_email_active = form.cleaned_data.get('is_active', False)
-        self.portal.welcome_email_text = form.cleaned_data.get('email_text', '')
-        self.portal.save(update_fields=['welcome_email_active', 'welcome_email_text'])
-        return super(UserWelcomeEmailEditView, self).form_valid(form)
-    
+
     def get_success_url(self):
         return reverse('cosinnus:administration-welcome-email')
     
@@ -392,7 +382,7 @@ class UserListView(ListView):
                 user_id = self.request.POST.get('send_login_token')
                 user = get_user_model().objects.get(id=user_id)
                 self.send_login_token(user)
-                if self.request.is_ajax():
+                if is_ajax(self.request):
                     data = {
                         'ajax_form_id': self.request.POST.get('ajax_form_id'),
                     }

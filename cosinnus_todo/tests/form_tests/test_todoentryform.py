@@ -6,7 +6,7 @@ from django.forms import ValidationError
 
 from cosinnus_todo.forms import TodoEntryForm
 from cosinnus_todo.models import TodoEntry
-from tests.form_tests.base import FormTestCase
+from cosinnus_todo.tests.form_tests.base import FormTestCase
 
 
 class TodoEntryFormTest(FormTestCase):
@@ -17,7 +17,7 @@ class TodoEntryFormTest(FormTestCase):
         fields = [
             # "normal" fields
             'title', 'due_date', 'assigned_to', 'completed_by',
-            'completed_date', 'priority', 'note', 'tags'
+            'completed_date', 'priority', 'note', 'attached_objects'
             # no media_tag fields
         ]
         form = TodoEntryForm(group=self.group)

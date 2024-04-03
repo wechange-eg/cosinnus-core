@@ -12,7 +12,7 @@ from django.forms.widgets import SelectMultiple
 from django.http.request import QueryDict
 from django.urls import reverse
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.fields import UserSelect2MultipleChoiceField
 from cosinnus.forms.group import GroupKwargModelFormMixin

@@ -16,7 +16,7 @@ from django.template.defaultfilters import date
 from django.templatetags.static import static
 from django.utils.html import escape
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal

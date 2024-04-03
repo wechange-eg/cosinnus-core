@@ -18,6 +18,7 @@ from django.http.response import Http404
 from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.utils.functions import resolve_class
+from cosinnus.utils.http import is_ajax
 from django.contrib.auth.models import AnonymousUser
 
 
@@ -357,6 +358,7 @@ class GroupObjectCountMixin(object):
                 # only for counting the objects, we use a fake superuser, so we get the actual 
                 # counts of the contents, and not the visible ones for current user
                 fake_admin = AnonymousUser()
+                setattr(fake_admin, 'is_internal_superuser', True)
                 fake_admin.is_superuser = True
                 object_counts[app_name] = model.get_current(self.group, fake_admin).count()
         context.update({
@@ -379,7 +381,7 @@ class EndlessPaginationMixin(object):
         if not self.items_template:
             raise ImproperlyConfigured('You must supply an ``items_template`` template path for the items that are loaded in pagination.')
         # enable el-pagination items-only rendering
-        if request.is_ajax():
+        if is_ajax(request):
             self.template_name = self.items_template
             self.is_paginated = True
         return super(EndlessPaginationMixin, self).dispatch( request, *args, **kwargs)

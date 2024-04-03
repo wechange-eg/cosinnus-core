@@ -5,7 +5,7 @@ from cosinnus.conf import settings
 from cosinnus.cron import CosinnusCronJobBase
 from cosinnus_exchange.backends import ExchangeBackend
 import logging
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ class PullData(CosinnusCronJobBase):
                 setattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', False)
                 backend.pull()
             except Exception as e:
-                logger.error('An error occured during pulling data from an exchange backend! Exception in extra.', extra={'backend': str(backend), 'exc_str': force_text(e), 'exception': e})
+                logger.error('An error occured during pulling data from an exchange backend! Exception in extra.', extra={'backend': str(backend), 'exc_str': force_str(e), 'exception': e})
                 if settings.DEBUG:
                     raise
             finally:

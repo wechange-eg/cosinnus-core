@@ -18,4 +18,6 @@ class CosinnusAppConfig(AppConfig):
             from cosinnus import init_celery_app
             init_celery_app()
 
-        from cosinnus.api import hooks
+        from cosinnus.api import hooks # noqa
+        from cosinnus import hooks # noqa
+        

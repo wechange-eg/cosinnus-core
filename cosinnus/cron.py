@@ -2,9 +2,11 @@
 from __future__ import unicode_literals
 
 import logging
+from datetime import timedelta
 
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django_cron import CronJobBase, Schedule
 
@@ -16,12 +18,11 @@ from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.storage import TemporaryData
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.views.profile import delete_userprofile
 from cosinnus_conference.utils import update_conference_premium_status
-from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_event.models import Event
-
 
 logger = logging.getLogger('cosinnus')
 
@@ -66,7 +67,7 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
                 delete_userprofile(profile.user)
                 logger.info('delete_userprofile() cronjob: profile was deleted completely after 30 days', extra={'user_id': user_id})
             except Exception as e:
-                logger.error('delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)', extra={'exception': force_text(e)})
+                logger.error('delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)', extra={'exception': force_str(e)})
             
 
 class UpdateConferencePremiumStatus(CosinnusCronJobBase):
@@ -183,3 +184,26 @@ class SendQueuedMassMails(CosinnusCronJobBase):
         if queued_mails_count > 0:
             return f'Send {queued_mails_count} mass mails with {send_mail_count} mails.'
         return 'No mass mails to send.'
+
+
+class DeleteOldGuestUsers(CosinnusCronJobBase):
+    """ Deletes guest user accounts that are older than DELETE_GUEST_USERS_AFTER_DAYS days,
+        no matter if they are active or inactive. """
+
+    RUN_EVERY_MINS = 60*24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    
+    cosinnus_code = 'cosinnus.delete_old_guest_users'
+    
+    def do(self):
+        deletion_horizon = now() - timedelta(days=settings.COSINNUS_USER_GUEST_ACCOUNTS_DELETE_AFTER_DAYS)
+        guest_users_to_delete = get_user_model().objects.filter(
+            date_joined__lt=deletion_horizon,
+            cosinnus_profile___is_guest=True
+        )
+        if guest_users_to_delete.exists():
+            count = guest_users_to_delete.count()
+            guest_users_to_delete.delete()
+            return f'Deleted {count} guest users.'
+        return 'No guest users to delete.'
+
