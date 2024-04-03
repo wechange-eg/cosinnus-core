@@ -200,7 +200,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                     header_context = {
                         'group_body_html': '', # empty on purpose as a header has no body
                         'group_image_url': portal.get_domain() + get_image_url_for_icon(cat_icon, large=True),
-                        'group_url': reverse(cat_url_rev),
+                        'group_url': portal.get_domain() + reverse(cat_url_rev),
                         'group_name': cat_label,
                     }
                     category_header_html = render_to_string('cosinnus/html_mail/summary_group.html', context=header_context)
