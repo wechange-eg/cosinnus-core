@@ -35,10 +35,22 @@ export function EventButtons(props: EventButtonsProps) {
   }
   function copyInvitationToClipboard(e, guest: boolean) {
     const apiUrl = `/api/v2/conferences/invitation/?object_type=conference_event&object_id=${event.props.id}&guest=${guest === true}`;
+    const fetchPromise = fetch(apiUrl).then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        console.error("Conference invitation API call failed.")
+      }
+    }).then(data => {
+      if (data.invitation && data.alert_text) {
+        return data
+      } else {
+        console.error("Conference invitation API call returned invalid data.")
+      }
+    })
     if(typeof ClipboardItem && navigator.clipboard.write) {
       // Use ClipboardItem if supported by browser. Pass api fetch as promise to ClipboardItem to fix permissions
       // on Safari, that does not allow to have a async function copying to clipboard.
-      const fetchPromise = fetch(apiUrl).then(response => response.json())
       const text = new ClipboardItem({
         "text/plain": fetchPromise.then(data => new Blob([data.invitation], {type: "text/plain"}))
       })
@@ -48,14 +60,12 @@ export function EventButtons(props: EventButtonsProps) {
       }))
     } else {
       // Use wirteText on Firefox that does not support ClipboardItem and allows async access to clipboard.
-      fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-            navigator.clipboard.writeText(data.invitation).then(() => {
-              setInvitationDialogText(data.alert_text);
-              setInvitationDialogOpen(true)
-            })
-          })
+      fetchPromise.then(data => {
+        navigator.clipboard.writeText(data.invitation).then(() => {
+          setInvitationDialogText(data.alert_text);
+          setInvitationDialogOpen(true)
+        })
+      })
     }
   }
   return (
