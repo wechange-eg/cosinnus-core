@@ -75,7 +75,7 @@ module.exports = ContentControlView.extend({
         enableDetailSelection: true,
         
         // shall we cluster close markers together
-        clusteringEnabled: false,
+        clusteringEnabled: util.ifundef(COSINNUS_MAP_OPTIONS.clustering_enabled,  false),
         clusterZoomThreshold: 5,
         maxClusterRadius: 15,
         
