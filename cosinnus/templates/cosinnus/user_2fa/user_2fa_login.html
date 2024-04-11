@@ -24,7 +24,7 @@
         <div class="col-md-8 col-md-offset-2">
             {% include 'cosinnus/messages.html' %}
 
-		    <form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+		    <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
 		        {% csrf_token %}
 		        
 		        <div class="content-box">
