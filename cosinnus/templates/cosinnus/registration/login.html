@@ -28,7 +28,7 @@
 	{% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 	
 		<div class="ultra-space clearfix">
-		    <form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" class="cosinnus-form form-horizontal " role="form">
+		    <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" class="cosinnus-form form-horizontal " role="form">
 		        {% csrf_token %}
 		        {{ form.non_field_errors }}
 		        
