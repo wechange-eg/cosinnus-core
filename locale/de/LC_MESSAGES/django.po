@@ -56,17 +56,17 @@ msgstr "Mitgliedschaften in den Status \"Mitglied\" umwandeln"
 
 #, python-format
 msgid "%d Users' rocketchat room memberships were re-done."
-msgstr "%d Die Rocketchat-Raummitgliedschaften der Benutzer wurden neu erstellt."
+msgstr "%d Die Rocketchat-Raummitgliedschaften der Benutzer/innen wurden neu erstellt."
 
 msgid "Rocket: Fix missing RocketChat room membership for users"
-msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaft für Benutzer beheben"
+msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaft für Benutzer/innen beheben"
 
 #, python-format
 msgid "%d Users' nextcloud folder memberships were re-done."
 msgstr "%d Nextcloud-Gruppenordnerzugehörigkeiten von Benutzer/innen wurden neu erstellt."
 
 msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
-msgstr "Nextcloud: Fehlende Nextcloud-Gruppenordnerzugehörigkeiten für Benutzer beheben"
+msgstr "Nextcloud: Fehlende Nextcloud-Gruppenordnerzugehörigkeiten für Benutzer/innen beheben"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr "Ein token mit dem selben Code existiert bereits. Bitte wähle eine andere Zeichenfolge für das Token."
@@ -170,34 +170,34 @@ msgstr "Reaktiviere Benutzerkontos"
 
 #, python-format
 msgid "%(count)d Users' group memberships were refreshed."
-msgstr "%(count)d Gruppenmitgliedschaften der Benutzer wurden aktualisiert."
+msgstr "%(count)d Gruppenmitgliedschaften der Benutzer/innen wurden aktualisiert."
 
 msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
 msgstr "Die Zugehörigkeit zu Benutzergruppen (z. B. bei Problemen mit dem Cache oder Nextcloud-Ordnern) aktualisieren"
 
 #, python-format
 msgid "%d Users were synchronized successfully."
-msgstr "%d Benutzer wurden erfolgreich synchronisiert."
+msgstr "%d Benutzer/innen wurden erfolgreich synchronisiert."
 
 msgid "Rocket: Re-synchronize RocketChat user-account connection (will log users out of RocketChat!)"
-msgstr "Rocket: RocketChat-Benutzer-Account-Verbindung neu synchronisieren (meldet Benutzer aus RocketChat ab!)"
+msgstr "Rocket: RocketChat-Benutzer-Account-Verbindung neu synchronisieren (meldet Benutzer/in aus RocketChat ab!)"
 
 #, python-format
 msgid "%d Users were made RocketChat admins."
-msgstr "%d Benutzer wurden zu RocketChat-Admins gemacht."
+msgstr "%d Benutzer/innen wurden zu RocketChat-Admins gemacht."
 
 msgid "Rocket: Make user RocketChat admin"
-msgstr "Rocket: Benutzer zum RocketChat-Admin machen"
+msgstr "Rocket: Benutzer/in zum RocketChat-Admin machen"
 
 #, python-format
 msgid "%d Users rocketchat accounts were checked."
 msgstr "%d RocketChat-Benutzerkonten wurden überprüft."
 
 msgid "Rocket: Repair/create missing users' rocketchat accounts"
-msgstr "Rocket: Reparieren/Erstellen von fehlenden Rocketchat-Konten von Benutzern"
+msgstr "Rocket: Reparieren/Erstellen von fehlenden Rocketchat-Konten von Benutzer/innen"
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
-msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaften für Benutzer beheben"
+msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaften für Benutzer/innen beheben"
 
 msgid "Recipients Count"
 msgstr "Anzahl der Empfänger"
@@ -232,7 +232,7 @@ msgid "Groups and Projects"
 msgstr "Gruppen und Projekte"
 
 msgid "Users"
-msgstr "Benutzer_innen"
+msgstr "Benutzer/innen"
 
 msgctxt "navigation bookmarks header"
 msgid "Content"
@@ -307,7 +307,7 @@ msgstr "Alle anzeigen"
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
-msgstr "Hallo %(user)s! Deine Registrierung war erfolgreich. Du wirst in den nächsten Tagen von unseren Administrator_innen freigeschaltet. Wenn dein Account freigeschaltet ist, erhältst du eine E-Mail auf %(email)s."
+msgstr "Hallo %(user)s! Deine Registrierung war erfolgreich. Du wirst in den nächsten Tagen von unseren Administrator/innen freigeschaltet. Wenn dein Account freigeschaltet ist, erhältst du eine E-Mail auf %(email)s."
 
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
 msgstr "Du musst deine Email-Adresse verifizieren bevor du dich einloggen kannst. Eine Email mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang: wenn du keine Email von uns erhalten hast, überprüfe bitte deinen Spamordner."
@@ -421,7 +421,7 @@ msgid "You need to verify your email before you can use this part of the site! P
 msgstr "Um diesen Teil der Webseite zu benutzen, muss deine E-Mail-Adresse erst verifiziert werden! Bitte prüfen deine eingehenden E-Mails und klicke dann auf den Link in der Verifikations-E-Mail, die du von uns erhalten hast. Alternativ kannst du eine neue Verifikations-E-Mail anfordern, indem du den Link unten klickst."
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
-msgstr "Nur registrierte Benutzer  können diesen Inhalt sehen! Log dich ein oder erstelle jetzt ein Benutzerkonto!"
+msgstr "Nur registrierte Benutzer/innen  können diesen Inhalt sehen! Log dich ein oder erstelle jetzt ein Benutzerkonto!"
 
 msgid "Please log in to access this page."
 msgstr "Bitte melde dich an, um auf diese Seite zugreifen zu können."
@@ -446,10 +446,10 @@ msgid "You have been redirected here because you clicked a link in one of our ma
 msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E-Mails geklickt hast. Als Vorsichtsmaßnahme verlinken wir nicht direkt auf externe Webseiten aus unseren E-Mails. Bitte klicke den Link unten erneut wenn du die Seite besuchen möchtest."
 
 msgid "Sorry, only admin accounts may log in at this time."
-msgstr "Zurzeit können sich nur die Portal-Administrator_innen einloggen."
+msgstr "Zurzeit können sich nur die Portal-Administrator/innen einloggen."
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
-msgstr "Du kannst nicht auf den Admin-Bereich zugreifen, weil dir die Berechtigung “Mitarbeiter” fehlt, obwohl du ein Superuser bist. Bitte einen anderen Administrator, dir dieses Recht zu erteilen."
+msgstr "Du kannst nicht auf den Admin-Bereich zugreifen, weil dir die Berechtigung “Mitarbeiter” fehlt, obwohl du ein Superuser bist. Bitte eine/n andere/n Administrator/in, dir dieses Recht zu erteilen."
 
 msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr "Die Aktion, die du versucht hast auszuführen, ist für Gastkonten nicht gestattet."
@@ -474,11 +474,11 @@ msgstr "%(sender_name)s möchte Mitglied werden"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other requested to become a member"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others requested to become a member"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer möchten Mitglied werden"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer möchten Mitglied werden"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in möchten Mitglied werden"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen möchten Mitglied werden"
 
 msgid "You are an admin of this team"
-msgstr "Du bist Administrator dieser Gruppe / dieses Projekts"
+msgstr "Du bist Administrator/in dieser Gruppe / dieses Projekts"
 
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
@@ -518,8 +518,8 @@ msgstr "%(sender_name)s hat die Einladung angenommen"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Einladung angenommen"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Einladung angenommen"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben die Einladung angenommen"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben die Einladung angenommen"
 
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
@@ -535,8 +535,8 @@ msgstr "%(sender_name)s hat die Einladung abgelehnt"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others declined the invitation"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Einladung abgelehnt"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Einladung abgelehnt"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben die Einladung abgelehnt"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben die Einladung abgelehnt"
 
 #, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
@@ -567,22 +567,22 @@ msgid "Your participation application for %(team_name)s was waitlisted!"
 msgstr "Dein Teilnahmeantrag für %(team_name)s wurde auf die Warteliste gesetzt!"
 
 msgid "You were made an admin of this team"
-msgstr "Du wurdest in dieser Gruppe/Projekt zum Administrator befördert"
+msgstr "Du wurdest in dieser Gruppe/Projekt zum/zur Administrator/in befördert"
 
 #, python-format
 msgid "%(sender_name)s made you an admin"
-msgstr "%(sender_name)s hat dich zum Administrator befördert"
+msgstr "%(sender_name)s hat dich zum/zur Administrator/in befördert"
 
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s hat dich zu einem Administrator gemacht von %(team_name)s auf %(portal_name)s!"
+msgstr "%(sender_name)s hat dich zu einem/r Administrator/in gemacht von %(team_name)s auf %(portal_name)s!"
 
 msgid "Your admin status for this team was revoked"
 msgstr "Dein Admin-Status wurde entzogen für"
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status"
-msgstr "%(sender_name)s hat deinen Administrator-Status widerrufen"
+msgstr "%(sender_name)s hat deinen Administrator/in-Status widerrufen"
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
@@ -1057,7 +1057,7 @@ msgid "Portal"
 msgstr "Portal"
 
 msgid "this user will enter the BBB presenter mode for this conversation"
-msgstr "Dieser Benutzer wird die Unterhaltung im BBB-Präsentatoren-Modus beginnen"
+msgstr "Diese/r Benutzer/in wird die Unterhaltung im BBB-Präsentatoren-Modus beginnen"
 
 msgid "room name or title"
 msgstr "Name oder Titel des Raumes"
@@ -1437,10 +1437,10 @@ msgid "Team memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
 msgid "Team Invite for Unregistered User"
-msgstr "Gruppen/Projekt-Einladung für nicht registrierte Benutzer"
+msgstr "Gruppen/Projekt-Einladung für nicht registrierte Benutzer/innen"
 
 msgid "Team Invites for Unregistered Users"
-msgstr "Gruppen/Projekt-Einladungen für nicht registrierte Benutzer"
+msgstr "Gruppen/Projekt-Einladungen für nicht registrierte Benutzer/innen"
 
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
@@ -1459,7 +1459,7 @@ msgid "Support Email"
 msgstr "Support E-Mail"
 
 msgid "This email is shown to users as contact address on many pages"
-msgstr "Diese E-Mail wird den Benutzern als Kontakt und Support-Adresse auf vielen Seiten angezeigt"
+msgstr "Diese E-Mail wird den Benutzer/innen als Kontakt und Support-Adresse auf vielen Seiten angezeigt"
 
 msgid "Website"
 msgstr "Webseite"
@@ -1471,7 +1471,7 @@ msgid "Welcome-Email Text"
 msgstr "Willkommens-E-Mail Text"
 
 msgid "If set and enabled, this text will be sent to all new users after their registration is complete."
-msgstr "Wenn gesetzt und aktiviert, wird dieser Text an jeden neuen Benutzer geschickt, wenn dessen Registrierung abgeschlossen ist."
+msgstr "Wenn gesetzt und aktiviert, wird dieser Text an jede/n neue/n Benutzer/in geschickt, wenn dessen Registrierung abgeschlossen ist."
 
 msgid "Public"
 msgstr "Öffentlich"
@@ -1483,16 +1483,16 @@ msgid "Http/Https Protocol (overrides settings)"
 msgstr "Http/Https Protokoll (overrides settings)"
 
 msgid "Users Need Activation"
-msgstr "Bestätigung für neue Benutzer"
+msgstr "Bestätigung für neue Benutzer/innen"
 
 msgid "If activated, newly registered users need to be approved by a portal admin before being able to log in."
-msgstr "Wenn gewählt müssen neue Benutzerkonten nach dem Regisitrieren durch einen Portaladminstrator bestätigt werden bevor sich der Benutzer einloggen kann."
+msgstr "Wenn gewählt müssen neue Benutzerkonten nach dem Registrieren durch einen Portaladminstrator bestätigt werden bevor sich der/die Benutzer/in einloggen kann."
 
 msgid "Emails Need Verification"
 msgstr "Benutzermails müssen verifiziert werden"
 
 msgid "If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them."
-msgstr "Wenn aktiv, müssen neu registrierte Benutzer oder die, die ihre E-Mail ändern, einen Bestätigungslink klicken den sie per E-Mail erhalten, um ihre E-Mail-Adresse zu bestätigen."
+msgstr "Wenn aktiv, müssen neu registrierte Benutzer/innen oder die, die ihre E-Mail ändern, einen Bestätigungslink klicken den sie per E-Mail erhalten, um ihre E-Mail-Adresse zu bestätigen."
 
 msgid "ToS Version"
 msgstr "AGB Version"
@@ -1708,7 +1708,7 @@ msgid "Token"
 msgstr "Token"
 
 msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
-msgstr "Die Token-Zeichenfolge. Es wird so angezeigt wie es ist, aber wenn ein Benutzer es eingibt, ist Groß- und Kleinschreibung egal. Das Token kann Buchstaben und Zahlen enthalten, aber keine Leerzeichen. Es kann beliebig lang oder kurz sein."
+msgstr "Die Token-Zeichenfolge. Es wird so angezeigt wie es ist, aber wenn ein/e Benutzer/in es eingibt, ist Groß- und Kleinschreibung egal. Das Token kann Buchstaben und Zahlen enthalten, aber keine Leerzeichen. Es kann beliebig lang oder kurz sein."
 
 msgid "Short Description (optional). Will be shown on the token page."
 msgstr "Kurze Beschreibung (optional). Wird auf der Einladungs-Token-Seite angezeigt."
@@ -1859,7 +1859,7 @@ msgid "Paired Group"
 msgstr "Gekoppelte Gruppe"
 
 msgid "A paired group will automatically be joined by all users assigned to this object."
-msgstr "Einer gepaarten Gruppe werden automatisch alle Benutzer beigetreten, die diesem Objekt zugewiesen sind."
+msgstr "Einer gepaarten Gruppe werden automatisch alle Benutzer/innen beigetreten, die diesem Objekt zugewiesen sind."
 
 msgid "Search Synonyms"
 msgstr "Synonyme suchen"
@@ -1892,7 +1892,7 @@ msgid "Is guest user"
 msgstr "Ist Gast"
 
 msgid "(Deleted User)"
-msgstr "(Gelöschter Nutzer)"
+msgstr "(Gelöschte/r Nutzer/in)"
 
 msgid "Terms of Service"
 msgstr "Nutzungsbedingungen"
@@ -1939,7 +1939,7 @@ msgstr "ignoriert"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "User"
-msgstr "Benutzer_in"
+msgstr "Benutzer/in"
 
 msgid "Match subject"
 msgstr "Betreff"
@@ -2133,10 +2133,10 @@ msgid "Import Report HTML"
 msgstr "HTML Bericht importieren"
 
 msgid "Cosinnus User Import"
-msgstr "User Import"
+msgstr "Benutzer/innen Import"
 
 msgid "Cosinnus User Imports"
-msgstr "User Importe"
+msgstr "Benutzer/innen Importe"
 
 #, python-format
 msgid "CSV row did not contain data for required columns: \"%(fields)s\""
@@ -2236,10 +2236,10 @@ msgid "Show Register Button"
 msgstr "Registrieren Button anzeigen"
 
 msgid "Redirect Logged in Users"
-msgstr "Eingeloggte Benutzer weiterleiten"
+msgstr "Eingeloggte Benutzer/innen weiterleiten"
 
 msgid "If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page."
-msgstr "Wenn aktiv, sehen diese Seite nur Benutzer die nicht eingeloggt sind. Alle eingeloggten Benutzer werden direkt auf die Aktivitäten-Seite weitergeleitet."
+msgstr "Wenn aktiv, sehen diese Seite nur Benutzer/innen die nicht eingeloggt sind. Alle eingeloggten Benutzer/innen werden direkt auf die Aktivitäten-Seite weitergeleitet."
 
 msgid "Left banner (top)"
 msgstr "Linkes banner (oben)"
@@ -2341,7 +2341,7 @@ msgid "Widget configurations"
 msgstr "Widget Konfigurationen"
 
 msgid "Either team or user must be defined."
-msgstr "Es muss entweder ein Projekt oder ein/eine Benutzer_in ausgewählt sein."
+msgstr "Es muss entweder ein Projekt oder ein/eine Benutzer/in ausgewählt sein."
 
 msgid "key"
 msgstr "Schlüssel"
@@ -2474,7 +2474,7 @@ msgid "However, it will not be deleted, because it is still active."
 msgstr "Es wird jedoch nicht gelöscht, da es noch aktiv ist."
 
 msgid "This user account is disabled. The user cannot log in or use the account."
-msgstr "Dieses Benutzerkonto ist deaktiviert. Der Benutzer kann sich nicht anmelden oder das Konto verwenden."
+msgstr "Dieses Benutzerkonto ist deaktiviert. Der/Die Benutzer/in kann sich nicht anmelden oder das Konto verwenden."
 
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr "Um dieses Benutzerkonto zu löschen, gehe bitte zurück zur Liste der Benutzerkonten, suche nach dem Namen oder der E-Mail-Adresse des Kontos, und überprüfe den Eintrag in der Liste. Verwende dann die Aktion aus dem Dropdown-Menü:"
@@ -2709,10 +2709,10 @@ msgid "User Management"
 msgstr "Benutzermanagement"
 
 msgid "User Import"
-msgstr "Benutzer-Import"
+msgstr "Benutzer/innen-Import"
 
 msgid "User Export"
-msgstr "Benutzer-Export"
+msgstr "Benutzer/innen-Export"
 
 msgid "User Profile Field Choices"
 msgstr "Benutzerprofil-Feldwerte"
@@ -2721,7 +2721,7 @@ msgid "User Dashboard Announcements"
 msgstr "Benutzerdashboard-Ankündigungen"
 
 msgid "User Welcome Email"
-msgstr "Willkommens-E-Mail für neue Benutzer"
+msgstr "Willkommens-E-Mail für neue Benutzer/innen"
 
 msgid "Conference Overview"
 msgstr "Tagungs-Überblick"
@@ -2801,7 +2801,7 @@ msgid "User Administration"
 msgstr "Benutzerverwaltung"
 
 msgid "send login token to all inactive users"
-msgstr "Login-Token an alle uneingeladenen Benutzer verschicken"
+msgstr "Login-Token an alle uneingeladenen Benutzer/innen verschicken"
 
 msgid "Search for email, firstname or lastname"
 msgstr "Suche nach E-Mail, Vorname oder Nachname"
@@ -2823,11 +2823,11 @@ msgid_plural ""
 "                "
 msgstr[0] ""
 "\n"
-"Gefundene %(total)s Benutzer mit einer E-Mail, die enthält: '%(search_string)s'\n"
+"Gefundene %(total)s Benutzer/in mit einer E-Mail, die enthält: '%(search_string)s'\n"
 "                 "
 msgstr[1] ""
 "\n"
-"                Gefundene %(total)s Benutzer mit einer E-Mail, die enthält: '%(search_string)s' "
+"                Gefundene %(total)s Benutzer/innen mit einer E-Mail, die enthält: '%(search_string)s' "
 
 msgid "clear search"
 msgstr "Suche löschen"
@@ -2836,7 +2836,7 @@ msgid "Last Login"
 msgstr "Letzer Login"
 
 msgid "User token"
-msgstr "Benutzer-Token"
+msgstr "Benutzer/in-Token"
 
 msgid "Account deactivated"
 msgstr "Account deaktiviert"
@@ -2856,10 +2856,10 @@ msgstr "Login-Token wurde an %(email)s gesendet."
 
 #, python-format
 msgid "Could not find any users with an email that contains '%(search_string)s.'"
-msgstr "Es konnten keine Benutzer mit einer E-Mail gefunden werden, die '%(search_string)s' enthält."
+msgstr "Es konnten keine Benutzer/innen mit einer E-Mail gefunden werden, die '%(search_string)s' enthält."
 
 msgid "There are no users yet."
-msgstr "Es gibt noch keine Nutzer."
+msgstr "Es gibt noch keine Nutzer/innen."
 
 msgid "to first page"
 msgstr "zur ersten Seite"
@@ -3105,15 +3105,15 @@ msgstr "Hier kannst Du Dein Dokument bearbeiten, indem Du Dinge in das Pad eintr
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_12_projectadministration"
-msgstr "Die Administration von Projekten beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deinem Projekt beitreten darf und wer Administrator sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deinem Projekt zu registrieren"
+msgstr "Die Administration von Projekten beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deinem Projekt beitreten darf und wer Administrator/in sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deinem Projekt zu registrieren"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
-msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deiner Gruppe beitreten darf und wer Administrator sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deiner Gruppe zu registrieren"
+msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deiner Gruppe beitreten darf und wer Administrator/in sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deiner Gruppe zu registrieren"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
-msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deiner Gruppe beitreten darf und wer Administrator sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deiner Gruppe zu registrieren"
+msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deiner Gruppe beitreten darf und wer Administrator/in sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deiner Gruppe zu registrieren"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_16_twofactorauth"
@@ -3149,7 +3149,7 @@ msgstr ""
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_52_profilelastname"
-msgstr "Wir respektieren deinen Wunsch, anonym zu bleiben – du musst deinen Nachnamen nicht angeben. Aber bedenke dass es so auch für Nutzer die dich kennen schwer ist dich zu finden, wenn sie dich z.B. zur Zusammenarbeit in einem Projekt einladen möchten"
+msgstr "Wir respektieren deinen Wunsch, anonym zu bleiben – du musst deinen Nachnamen nicht angeben. Aber bedenke dass es so auch für Nutzer/innen die dich kennen schwer ist dich zu finden, wenn sie dich z.B. zur Zusammenarbeit in einem Projekt einladen möchten"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest, der Plattform beizutreten."
@@ -3201,7 +3201,7 @@ msgid "Edit your application for"
 msgstr "Deine Anmeldung bearbeiten für"
 
 msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
-msgstr "Bitte fülle die folgenden Felder aus, um deine Anmeldung einzureichen. Bitte beachte, dass die Organisator:innen dein Profil bei der Bearbeitung deiner Bewerbung berücksichtigen können. Stelle also sicher, dass deine Profilseite gut gepflegt ist. Du kannst deine Profilseite hier einsehen und bearbeiten:"
+msgstr "Bitte fülle die folgenden Felder aus, um deine Anmeldung einzureichen. Bitte beachte, dass die Organisator/innen dein Profil bei der Bearbeitung deiner Bewerbung berücksichtigen können. Stelle also sicher, dass deine Profilseite gut gepflegt ist. Du kannst deine Profilseite hier einsehen und bearbeiten:"
 
 msgid "Your profile"
 msgstr "Dein Profil"
@@ -3240,7 +3240,7 @@ msgid "I accept the conditions in order to submit my application"
 msgstr "Ich akzeptiere die Bedingungen, um Teilnahme zu beantragen"
 
 msgid "I can be contacted via email by conference administration regardless of my notification settings"
-msgstr "Ich kann von den Tagungsorganisator:innen per E-Mail kontaktiert werden, unabhängig von meinen Benachrichtigungseinstellungen"
+msgstr "Ich kann von den Tagungsorganisator/innen per E-Mail kontaktiert werden, unabhängig von meinen Benachrichtigungseinstellungen"
 
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr "Bitte verifiziere zunächst deine E-Mail Adresse. Andernfalls kannst du einige wichtige Konferenzbenachrichtigungen verpassen."
@@ -3383,11 +3383,11 @@ msgid_plural ""
 "                        "
 msgstr[0] ""
 "\n"
-"                        Ja, sofort an eine_n Benutzer_in schicken.\n"
+"                        Ja, sofort an eine/n Benutzer/in schicken.\n"
 "                        "
 msgstr[1] ""
 "\n"
-"                        Ja, sofort an %(count)s Benutzer_innen schicken.\n"
+"                        Ja, sofort an %(count)s Benutzer/innen schicken.\n"
 "                        "
 
 msgid "No, do not send"
@@ -3469,7 +3469,7 @@ msgid "Options for participation"
 msgstr "Möglichkeiten zur Teilnahme"
 
 msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
-msgstr "Wähle eine oder mehr Bedingungen die auf dem Anmeldeformular angezeigt werden sollen. Benutzer können bei der Antragsstellung aus diesen Optionen Beliebige auswählen."
+msgstr "Wähle eine oder mehr Bedingungen die auf dem Anmeldeformular angezeigt werden sollen. Benutzer/innen können bei der Antragsstellung aus diesen Optionen Beliebige auswählen."
 
 msgid "Define additional custom options."
 msgstr "Zusätzliche Optionen hinzufügen."
@@ -3490,13 +3490,13 @@ msgid "Conditions for participation"
 msgstr "Bedingungen für die Teilnahme"
 
 msgid "If set, applicants will have to agree to these conditions by checking a checkbox"
-msgstr "Wenn ein Text hinterlegt wird, muss dieser von allen Benutzern bei der Antragsstellung per Häkchen akzeptiert werden"
+msgstr "Wenn ein Text hinterlegt wird, muss dieser von allen Benutzer/innen bei der Antragsstellung per Häkchen akzeptiert werden"
 
 msgid "(no conditions selected)"
 msgstr "(keine Bedingungen ausgewählt)"
 
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
-msgstr "Wenn eine Datei mit Bedingungen hochgeladen wird, müssen diese von allen Benutzern bei der Antragsstellung per Häkchen akzeptiert werden"
+msgstr "Wenn eine Datei mit Bedingungen hochgeladen wird, müssen diese von allen Benutzer/innen bei der Antragsstellung per Häkchen akzeptiert werden"
 
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
 msgstr "Die Meetings- Aufzeichnungen sind für diesen Server momentan leider nicht verfügbar!"
@@ -3656,7 +3656,7 @@ msgid "Delete room"
 msgstr "Raum löschen"
 
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
-msgstr "Deine Tagung befindet sich gerade noch im Probe-Modus. Du hast Zugriff auf alle Features, aber kannst diese nur mit wenigen Leuten uneingeschränkt nutzen. Um dir bei deiner Umsetzung mit mehreren Nutzer*innen die volle Leistung zu sichern, buche hier kostenlos ausreichend Kapazitäten:"
+msgstr "Deine Tagung befindet sich gerade noch im Probe-Modus. Du hast Zugriff auf alle Features, aber kannst diese nur mit wenigen Leuten uneingeschränkt nutzen. Um dir bei deiner Umsetzung mit mehreren Nutzer/innen die volle Leistung zu sichern, buche hier kostenlos ausreichend Kapazitäten:"
 
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr "Es gibt verschiedene Arten von Tagungsräumen, jeder mit einem anderen Design und Funktionalität. Indem du verschiedene Räume erstellst und in der gewünschten Reihenfolge anordnest, kannst du das Aussehen und die Atmosphäre deiner Tagung individuell gestalten."
@@ -3668,7 +3668,7 @@ msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
 
 msgid "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting."
-msgstr "BBB-Meetings können direkt von Gästen besucht werden - sowohl von registrierten als auch von nicht registrierten Benutzern. Der Gast-Link wird allen Moderator/innen in der Begrüßungsnachricht des BBB-Meetings angezeigt."
+msgstr "BBB-Meetings können direkt von Gästen besucht werden - sowohl von registrierten als auch von nicht registrierten Benutzer/innen. Der Gast-Link wird allen Moderator/innen in der Begrüßungsnachricht des BBB-Meetings angezeigt."
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr "Beachte: Änderung an einigen dieser Einstellungen kann den Neustart des Meetings fordern bevor die Änderung wirksam wird!"
@@ -3743,7 +3743,7 @@ msgid "Password changed"
 msgstr "Passwort geändert"
 
 msgid "Changed password for User"
-msgstr "Passwort für Nutzer geändert"
+msgstr "Passwort für Nutzer/in geändert"
 
 msgid "Remove all Users"
 msgstr "Alle Teilnehmer*innen entfernen"
@@ -3800,7 +3800,7 @@ msgid "deactivate user accounts"
 msgstr "Deaktiviere Benutzerkonten"
 
 msgid "reset/delete all users"
-msgstr "Alle Benutzer zurücksetzen/löschen"
+msgstr "Alle Benutzer/innen zurücksetzen/löschen"
 
 msgid "Once the conference is over you can remove all ausers. This cannot be reversed."
 msgstr "Sobald die Konferenz beendet ist, können Sie alle Benutzerkonten entfernen. Dies kann nicht rückgängig gemacht werden."
@@ -4084,13 +4084,13 @@ msgid "The content of the field above will be searchable in the plattform-wide s
 msgstr "Der Inhalt des obigen Feldes wird im Rahmen der Plattform-Suche auffindbar. Er wird angezeigt wenn er nicht anhand von einer bestimmten Übersetzung (unten) überschrieben wird."
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
-msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt. Sie sind nicht in der Suche auffindbar."
+msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des/der Benutzers/in angezeigt. Sie sind nicht in der Suche auffindbar."
 
 msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
 msgstr "Der Inhalt des obigen Feldes wird angezeigt wenn er nicht anhand von einer bestimmten Übersetzung (unten) überschrieben wird."
 
 msgid "If present, the translations below will be shown according to the users' local language settings."
-msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt."
+msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des/der Benutzers/in angezeigt."
 
 msgid "If you would like to change your email address, you can do it here:"
 msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
@@ -4223,7 +4223,7 @@ msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Mitglieder"
 
 msgid "Invite users directly via the following link: "
-msgstr "Lade die Benutzer*innen über diesen Link direkt ein: "
+msgstr "Lade die Benutzer/innen über diesen Link direkt ein: "
 
 msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr "Hinweis: Detaillierte Mitgliederlisten für plattformweite Inhalte werden nicht angezeigt."
@@ -4250,10 +4250,10 @@ msgid "Invited group/project members"
 msgstr "Eingeladene Gruppen/Projektmitglieder/innen"
 
 msgid "Invite registered users to apply..."
-msgstr "Registrierte Benutzer zur Antragsstellung einladen..."
+msgstr "Registrierte Benutzer/innen zur Antragsstellung einladen..."
 
 msgid "Invite registered users..."
-msgstr "Registrierte Benutzer einladen..."
+msgstr "Registrierte Benutzer/innen einladen..."
 
 msgid "Invite a member"
 msgstr "Mitglied einladen"
@@ -4284,7 +4284,7 @@ msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgstr "Möchtest du „%(name)s“'s Einladung wirklich zurückziehen?"
 
 msgid "Revoke Invitation for Member"
-msgstr "Einladung für Benutzer zurückziehen"
+msgstr "Einladung für Benutzer/in zurückziehen"
 
 msgid "Do you really want to decline the invitation?"
 msgstr "Möchtest du die Einladung wirklich ablehnen?"
@@ -4293,10 +4293,10 @@ msgid "There are no pending invitations."
 msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
 
 msgid "Invite unregistered users to apply..."
-msgstr "Nicht registrierte Benutzer zur Antragsstellung einladen..."
+msgstr "Nicht registrierte Benutzer/innen zur Antragsstellung einladen..."
 
 msgid "Invite unregistered users..."
-msgstr "Nicht registrierte Benutzer einladen..."
+msgstr "Nicht registrierte Benutzer/innen einladen..."
 
 msgid "Invite People to Register and Join"
 msgstr "Lade Leute zum Registrieren und Beitreten ein"
@@ -4371,7 +4371,7 @@ msgid "Send Message"
 msgstr "Nachricht schicken"
 
 msgid "Admin"
-msgstr "Administrator"
+msgstr "Administrator/in"
 
 msgid "Member"
 msgstr "Mitglied"
@@ -4390,14 +4390,14 @@ msgstr "Als Admin"
 
 #, python-format
 msgid "Do you really want to demote administrator „%(name)s“ to member?"
-msgstr "Möchtest du Administrator „%(name)s“ wirklich zur/zum Mitglied herabstufen?"
+msgstr "Möchtest du Administrator/in „%(name)s“ wirklich zur/zum Mitglied herabstufen?"
 
 msgid "Demote Admin"
 msgstr "Projektadministrator herabstufen"
 
 #, python-format
 msgid "Do you really want to promote member „%(name)s“ to administrator?"
-msgstr "Möchtest du Mitglied „%(name)s“ wirklich zur/zum Administrator_in befördern?"
+msgstr "Möchtest du Mitglied „%(name)s“ wirklich zur/zum Administrator/in befördern?"
 
 msgid "Promote Member"
 msgstr "Mitglied befördern"
@@ -4411,11 +4411,11 @@ msgstr "Mitglied entfernen"
 
 #, python-format
 msgid "And %(hidden_count)s private users..."
-msgstr "Und %(hidden_count)s weitere versteckte Benutzer_innen..."
+msgstr "Und %(hidden_count)s weitere versteckte Benutzer/innen..."
 
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
-msgstr "Zeige die restlichen %(more_count)s Benutzer..."
+msgstr "Zeige die restlichen %(more_count)s Benutzer/innen..."
 
 #, python-format
 msgid "Export Team “%(team_name)s”"
@@ -4494,7 +4494,7 @@ msgid "Description and Infos"
 msgstr "Beschreibung und Infos"
 
 msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
-msgstr "Dies ist eine portalweite Beschreibung die auf der Microsite angezeigt wird und von jedem/r Portalbenutzer*in gesehen werden kann."
+msgstr "Dies ist eine portalweite Beschreibung die auf der Microsite angezeigt wird und von jedem/r Portalbenutzer/in gesehen werden kann."
 
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Dies ist eine öffentliche Beschreibung die auf der Microseite angezeigt wird und von jedem im Internet gesehen werden kann."
@@ -4593,7 +4593,7 @@ msgid "Group/Project is publicly visible"
 msgstr "Gruppe/Projekt öffentlich sichtbar"
 
 msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr "Soll deine Gruppe / dein Projekt auch für nicht eingeloggte Benutzer auffindbar sein? Die Microsite ist dann im Internet auffindbar und über die Suche im Portal."
+msgstr "Soll deine Gruppe / dein Projekt auch für nicht eingeloggte Benutzer/innen auffindbar sein? Die Microsite ist dann im Internet auffindbar und über die Suche im Portal."
 
 msgid "Enable the public visibility of your group/project"
 msgstr "Öffentliche Anzeige aktivieren"
@@ -4636,16 +4636,16 @@ msgid "This project will be set to be publicly visible!"
 msgstr "Dieses Projekt wird auf öffentlich sichtbar eingestellt!"
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)."
-msgstr "Das bedeutet, dass jeder registrierte Benutzer darauf zugreifen kann, auch wenn nur dessen Mitglieder Inhalte erstellen können. Zusätzlich werden alle Inhalte standardmäßig als portalweit sichtbar eingestellt (diese Einstellung kann für jeden Inhalt bei der Erstellung geändert werden)."
+msgstr "Das bedeutet, dass jede/r registrierte Benutzer/in darauf zugreifen kann, auch wenn nur dessen Mitglieder Inhalte erstellen können. Zusätzlich werden alle Inhalte standardmäßig als portalweit sichtbar eingestellt (diese Einstellung kann für jeden Inhalt bei der Erstellung geändert werden)."
 
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!"
-msgstr "Als Administrator einer Gruppe oder eines Projekts unterliegt es deiner Verantwortung sicherzustellen, dass die Inhalte von Mitgliedern weder Urheberrechte verletzen noch gegen Gesetze verstoßen. Bitte sei dir dessen besonders bewusst wenn du die Sichtbarkeitseinstellung auf portalweit sichtbar einstellst!"
+msgstr "Als Administrator/in einer Gruppe oder eines Projekts unterliegt es deiner Verantwortung sicherzustellen, dass die Inhalte von Mitgliedern weder Urheberrechte verletzen noch gegen Gesetze verstoßen. Bitte sei dir dessen besonders bewusst wenn du die Sichtbarkeitseinstellung auf portalweit sichtbar einstellst!"
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
-msgstr "Das bedeutet, dass jeder registrierte Benutzer darauf zugreifen kann, auch wenn nur dessen Mitglieder Inhalte erstellen können. Zusätzlich werden alle Inhalte standardmäßig als öffentlich sichtbar eingestellt (diese Einstellung kann für jeden Inhalt bei der Erstellung geändert werden). Öffentlich sichtbare Inhalte können von JEDEM im Internet gesehen werden und können potentiell von Suchmaschinen erfasst und angezeigt werden!"
+msgstr "Das bedeutet, dass jede/r registrierte Benutzer/in darauf zugreifen kann, auch wenn nur dessen Mitglieder Inhalte erstellen können. Zusätzlich werden alle Inhalte standardmäßig als öffentlich sichtbar eingestellt (diese Einstellung kann für jeden Inhalt bei der Erstellung geändert werden). Öffentlich sichtbare Inhalte können von JEDEM im Internet gesehen werden und können potentiell von Suchmaschinen erfasst und angezeigt werden!"
 
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
-msgstr "Als Administrator einer Gruppe oder eines Projekts unterliegt es deiner Verantwortung sicherzustellen, dass die Inhalte von Mitgliedern weder Urheberrechte verletzen noch gegen Gesetze verstoßen. Bitte sei dir dessen besonders bewusst wenn du die Sichtbarkeitseinstellung auf öffentlich sichtbar einstellst!"
+msgstr "Als Administrator/in einer Gruppe oder eines Projekts unterliegt es deiner Verantwortung sicherzustellen, dass die Inhalte von Mitgliedern weder Urheberrechte verletzen noch gegen Gesetze verstoßen. Bitte sei dir dessen besonders bewusst wenn du die Sichtbarkeitseinstellung auf öffentlich sichtbar einstellst!"
 
 msgid "If you do not wish this, you can change the visibility setting above."
 msgstr "Wenn du das nicht möchtest, kannst du oben die Sichtbarkeitseinstellung anpassen."
@@ -4687,7 +4687,7 @@ msgid "Display contact form."
 msgstr "Kontaktformular anzeigen."
 
 msgid "A public contact form, which non-registered users can use to contact group admins of this group."
-msgstr "Ein öffentliches Kontaktformular, das von den nicht-registrierten Benutzern zwecks Kontaktaufnahme mit den Gruppen-Administrator_innen benutzt werden kann."
+msgstr "Ein öffentliches Kontaktformular, das von den nicht-registrierten Benutzer/innen zwecks Kontaktaufnahme mit den Gruppen-Administrator/innen benutzt werden kann."
 
 msgid "Contact Form"
 msgstr "Kontaktformular"
@@ -4708,7 +4708,7 @@ msgid "https://www.youtube.com/watch?v=example-video"
 msgstr "https://www.youtube.com/watch?v=example-video"
 
 msgid "Twitter: Embedded User Timeline"
-msgstr "Twitter: Eingebetteter Benutzer-Feed"
+msgstr "Twitter: Eingebetteter Benutzer/in-Feed"
 
 msgid "Twitter Username (example: @username)"
 msgstr "Twitter-Benutzername (Beispiel: @username)"
@@ -4902,7 +4902,7 @@ msgid "Contact Conference Admins"
 msgstr "Tagungsadministratoren kontaktieren"
 
 msgid "Email the group administrators"
-msgstr "E-Mail an die Gruppen-Administrator_innen schicken"
+msgstr "E-Mail an die Gruppen-Administrator/innen schicken"
 
 msgid "Your email address"
 msgstr "Deine E-Mail-Adresse"
@@ -4987,16 +4987,16 @@ msgstr "Du bist Administrator/in, aber da du diese Tagung erstellt hast, hast du
 
 #, python-format
 msgid "Users in team %(group)s"
-msgstr "Benutzer_in in Projekt %(group)s"
+msgstr "Benutzer/in in Projekt %(group)s"
 
 msgid "There are no visible users."
-msgstr "Es gibt keine sichtbaren Benutzer_innen."
+msgstr "Es gibt keine sichtbaren Benutzer/innen."
 
 msgid "All users"
 msgstr "Alle Menschen"
 
 msgid "Portal Administrators"
-msgstr "Portal-Administrator_innen"
+msgstr "Portal-Administrator/innen"
 
 msgid "All Conferences"
 msgstr "Alle Tagungen"
@@ -5236,7 +5236,7 @@ msgid "Conference starts soon: [[name]]"
 msgstr "Tagung findet gleich statt: [[name]]"
 
 msgid "Message to conference participants"
-msgstr "Nachricht an die Tagungsteilnehmer_innen"
+msgstr "Nachricht an die Tagungsteilnehmer/innen"
 
 msgid ""
 "The conference [[name]] starts in a week.\n"
@@ -5316,7 +5316,7 @@ msgstr ""
 "Deine Antwort kannst du auf diese E-Mail schicken:\n"
 "%(email)s\n"
 "\n"
-"(Du hast diese E-Mail bekommen, weil du ein Portal-Administrator bist.)\n"
+"(Du hast diese E-Mail bekommen, weil du ein/e Portal-Administrator/in bist.)\n"
 "\n"
 "\n"
 "Dein %(site_name)s Team"
@@ -5345,9 +5345,9 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Benutzer_in \"%(sender_name)s\" hat gemeldet, dass \"%(object_name)s\" anstößige Inhalte enthält.\n"
+"Benutzer/in \"%(sender_name)s\" hat gemeldet, dass \"%(object_name)s\" anstößige Inhalte enthält.\n"
 "\n"
-"Die Gründe für die Meldung, laut Reporter_in:\n"
+"Die Gründe für die Meldung, laut Reporter/in:\n"
 "\"%(report_text)s\"\n"
 "\n"
 "\n"
@@ -5358,7 +5358,7 @@ msgstr ""
 "%(domain_url)s%(report_admin_url)s\n"
 "\n"
 "\n"
-"(Du hast diese E-Mail bekommen, weil du Portal-Administrator_in auf diesem Portal bist.)\n"
+"(Du hast diese E-Mail bekommen, weil du Portal-Administrator/in auf diesem Portal bist.)\n"
 "\n"
 "\n"
 "Dein %(site_name)s Team"
@@ -5492,7 +5492,7 @@ msgstr ""
 "Tut uns leid, dein Mitgliedsantrag in %(team_name)s wurde leider abgelehnt."
 
 msgid "If you feel this is unfair, we suggest you contact one of the team's administrators for further information:"
-msgstr "Wenn das Gefühl hast, dass diese Entscheidung ungerechtfertig ist,kontaktiere am besten einen der Projektadminastrator_innen:"
+msgstr "Wenn das Gefühl hast, dass diese Entscheidung ungerechtfertig ist,kontaktiere am besten einen der Projektadminastrator/innen:"
 
 #, python-format
 msgid ""
@@ -5542,9 +5542,9 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Benutzer_in \"%(user_name)s\" (%(user_mail)s) hat eine Registrierungsanfrage für %(site_name)s gestellt.\n"
+"Benutzer/in \"%(user_name)s\" (%(user_mail)s) hat eine Registrierungsanfrage für %(site_name)s gestellt.\n"
 "\n"
-"Der/die Benutzer_in kann sich erst einloggen, wenn du oder ein anderer Portal-Administrator die Anfrage akzeptiert.\n"
+"Der/die Benutzer/in kann sich erst einloggen, wenn du oder ein/e andere/r Portal-Administrator/in die Anfrage akzeptiert.\n"
 "\n"
 "Wenn du die Registrierung akzeptieren möchtest, klicke folgenden Link:\n"
 "%(domain_url)s%(user_approve_url)s\n"
@@ -5553,7 +5553,7 @@ msgstr ""
 "Klicke hier um die Registrierung abzulehnen: %(domain_url)s%(user_deny_url)s\n"
 "\n"
 "\n"
-"Du hast diese E-Mail bekommen, weil du ein Portal-Administrator bist. \n"
+"Du hast diese E-Mail bekommen, weil du ein/e Portal-Administrator/in bist. \n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
@@ -5600,7 +5600,7 @@ msgid ""
 msgstr ""
 "Deine Registrierung bei %(site_name)s wurde abgelehnt.\n"
 "\n"
-"Bei Rückfragen kannst du unsere Portaladministrator_innen kontaktieren.\n"
+"Bei Rückfragen kannst du unsere Portaladministrator/innen kontaktieren.\n"
 "\n"
 "Dein %(site_name)s Team:"
 
@@ -5619,7 +5619,7 @@ msgid ""
 msgstr ""
 "Hallo %(user_name)s! Deine Registrierung war erfolgreich. \n"
 "\n"
-"Du wirst in den nächsten Tagen von unseren Administrator_innen freigeschaltet. Wenn dein Account freigeschaltet ist, erhältst du eine E-Mail auf %(user_mail)s.\n"
+"Du wirst in den nächsten Tagen von unseren Administrator/innen freigeschaltet. Wenn dein Account freigeschaltet ist, erhältst du eine E-Mail auf %(user_mail)s.\n"
 "\n"
 "Mit besten Grüßen\n"
 "das Team von %(site_name)s"
@@ -5751,7 +5751,7 @@ msgid "Where do you live?"
 msgstr "Wo lebst du?"
 
 msgid "Set your location to let other users find your profile on the map (as long as your privacy setting permits it). You will also start out there when you open the map."
-msgstr "Gib deinen Standort an, damit dich andere Benutzer auf der Karte finden können (wenn es deine Sichtbarkeitseinstellungen erlauben). Deine Karte wird auf deinen Standort zentriert sein, wenn du sie öffnest."
+msgstr "Gib deinen Standort an, damit dich andere Benutzer/innen auf der Karte finden können (wenn es deine Sichtbarkeitseinstellungen erlauben). Deine Karte wird auf deinen Standort zentriert sein, wenn du sie öffnest."
 
 msgid "Which topics are you interested in?"
 msgstr "An welchen Themen bist du interessiert?"
@@ -5852,7 +5852,7 @@ msgid "No anonymous access!"
 msgstr "Kein anonymer Zugriff erlaubt!"
 
 msgid "This website allows no anonymous access."
-msgstr "Diese Webseite gestattet keinen Zugang für nicht eingeloggte Benutzer."
+msgstr "Diese Webseite gestattet keinen Zugang für nicht eingeloggte Benutzer/innen."
 
 msgid "Log in..."
 msgstr "Einloggen..."
@@ -5920,7 +5920,7 @@ msgid "Sorry, but your account is associated with an integrated Portal! This mea
 msgstr "Entschuldige, aber dein Benuterkonto wurde über ein integriertes Portal erstellt. Das bedeutet dass du weder deine E-Mail-Adresse, noch dein Passwort ändern kannst."
 
 msgid "Please contact an administrator if this is an issue for you."
-msgstr "Bitte kontaktiere einen Administrator wenn das ein Problem für dich darstellt."
+msgstr "Bitte kontaktiere eine/n Administrator/in wenn das ein Problem für dich darstellt."
 
 msgid "Sorry, we can't reset your password!"
 msgstr "Entschuldige, wir können dein Passwort nicht zurücksetzen!"
@@ -5993,13 +5993,13 @@ msgstr "Falls du keine E-Mail erhältst, stelle bitte sicher dass du die E-Mail-
 
 #, python-format
 msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
-msgstr "Sie erhalten diese E-Mail weil sie eine Passwortänderung ihres Benutzer_innenkontos auf der Seite %(site_name)s beantragt haben."
+msgstr "Sie erhalten diese E-Mail weil sie eine Passwortänderung ihres Benutzer/innenkontos auf der Seite %(site_name)s beantragt haben."
 
 msgid "Please go to the following page and choose a new password:"
 msgstr "Bitte klicke auf diesen Link und wähle ein neues Passwort:"
 
 msgid "Your username, in case you've forgotten:"
-msgstr "Ihr Benutzer_innen-Name:"
+msgstr "Ihr Benutzer/innen-Name:"
 
 msgid "Thanks for using our site!"
 msgstr "Danke dass sie unsere Webseite benutzen!"
@@ -6076,7 +6076,7 @@ msgid "Repeat Password"
 msgstr "Passwort wiederholen"
 
 msgid "This name will be displayed to other users on the site"
-msgstr "Dieser Name wird anderen Benutzern auf der Plattform angezeigt"
+msgstr "Dieser Name wird anderen Benutzer/innen auf der Plattform angezeigt"
 
 msgid "First name"
 msgstr "Vorname"
@@ -6127,7 +6127,7 @@ msgid "Other Projects and Groups"
 msgstr "Andere Projekte und Gruppen"
 
 msgid "Search for Users"
-msgstr "Nach Benutzern suchen"
+msgstr "Nach Benutzer/innen suchen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "External contents"
@@ -6186,7 +6186,7 @@ msgid "User statistics (min 1x logged in)"
 msgstr "Benutzerstatistiken (mind. 1x eingeloggt)"
 
 msgid "User domains (min 1x logged in)"
-msgstr "Benutzer-Domains (mind. 1x eingeloggt)"
+msgstr "Benutzer/innen-Domains (mind. 1x eingeloggt)"
 
 msgid "BBB Room Visits"
 msgstr "BBB Raumbesuche"
@@ -6195,7 +6195,7 @@ msgid "E-Mails of all newsletter subcribers"
 msgstr "E-Mails aller Newsletter-Abonnenten"
 
 msgid "E-Mails of ALL active users"
-msgstr "E-Mails ALLER aktiven Benutzer"
+msgstr "E-Mails ALLER aktiven Benutzer/innen"
 
 msgid "Select the date range for which you would like statistics"
 msgstr "Wähle einen Zeitraum, für den du den Überblick bekommen möchtest"
@@ -6204,7 +6204,7 @@ msgid "The WE-Cloud is here!"
 msgstr "Die WE-Cloud ist da!"
 
 msgid "With the Cloud, we offer your team a new file repository with extensive office functions to work together on documents, tables and presentations. It is based on Nextcloud and OnlyOffice. So you have two apps at your disposal with which you can use the cloud on the road and synchronize files with your desktop! As administrator you can activate the cloud for your project/group and transfer data from files and pads."
-msgstr "Mit der Cloud bieten wir eurem Team eine neue Dateiablage mit umfangreichen Office-Funktionen, um gemeinsam an Dokumenten, Tabellen und Präsentationen zu arbeiten. Sie basiert auf Nextcloud und OnlyOffice. So stehen euch zwei Apps zur Verfügung, mit denen ihr die Cloud auch unterwegs nutzen und Dateien mit dem Desktop synchronisieren könnt! Du kannst als Administrator die Cloud für dein Projekt/Gruppe aktivieren und die Daten aus Dateien und Pads übertragen."
+msgstr "Mit der Cloud bieten wir eurem Team eine neue Dateiablage mit umfangreichen Office-Funktionen, um gemeinsam an Dokumenten, Tabellen und Präsentationen zu arbeiten. Sie basiert auf Nextcloud und OnlyOffice. So stehen euch zwei Apps zur Verfügung, mit denen ihr die Cloud auch unterwegs nutzen und Dateien mit dem Desktop synchronisieren könnt! Du kannst als Administrator/in die Cloud für dein Projekt/Gruppe aktivieren und die Daten aus Dateien und Pads übertragen."
 
 msgid "Learn more"
 msgstr "Mehr erfahren"
@@ -6226,7 +6226,7 @@ msgstr "Microsite jetzt ansehen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
-msgstr "Meine Benutzer_innen"
+msgstr "Meine Benutzer/innen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Events"
@@ -6238,7 +6238,7 @@ msgstr "Meine Cloud-Dateien"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Users"
-msgstr "Alle Benutzer_innen"
+msgstr "Alle Benutzer/innen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Events"
@@ -6513,15 +6513,15 @@ msgstr "Keine Informationen."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Administrator"
-msgstr "Administrator"
+msgstr "Administrator/in"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Administrators"
-msgstr "Administratoren"
+msgstr "Administrator/innen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Administrators unknown"
-msgstr "Administratoren unbekannt"
+msgstr "Administrator/innen unbekannt"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No description yet."
@@ -6604,11 +6604,11 @@ msgstr "Du wirst jetzt Benachrichtigungen für Kommentare erhalten und wenn dies
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
-msgstr "Versteckte Benutzer"
+msgstr "Versteckte Benutzer/innen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Hidden User"
-msgstr "Versteckter Benutzer"
+msgstr "Versteckter Benutzer/in"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "This group is open for further partner organizations."
@@ -6843,7 +6843,7 @@ msgid "Delete profile"
 msgstr "Profil löschen"
 
 msgid "User overview"
-msgstr "Benutzer_innen-Übersicht"
+msgstr "Benutzer/innen-Übersicht"
 
 msgid "Change your email address"
 msgstr "Deine E-Mail Adresse ändern"
@@ -6909,7 +6909,7 @@ msgid "Find a Match"
 msgstr "Finde einen Match"
 
 msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
-msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer:innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner:innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer:innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
+msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer/innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner/innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer/innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
 
 msgid "Wonderful, we definitely have so much to discuss!"
 msgstr "Wunderbar, wir haben so viel zu besprechen!"
@@ -6927,19 +6927,19 @@ msgid "Everybody (public profile)"
 msgstr "Jeder (Profil öffentlich sichtbar)"
 
 msgid "Delete user profile"
-msgstr "Benutzerinnen_innen-Profil löschen"
+msgstr "Benutzer/innen-Profil löschen"
 
 msgid "Delete Profile"
 msgstr "Profil löschen"
 
 msgid "You are about to delete your user account from the site!"
-msgstr "Du bist dabei dein Benutzer_innen-Profil von dieser Webseite zu löschen!"
+msgstr "Du bist dabei dein Benutzer/innen-Profil von dieser Webseite zu löschen!"
 
 msgid "By clicking the button below, you will irrevocably delete your user account, profile and personal information from this site."
-msgstr "Indem du auf den Button unten klickst, werden dein gesamtes Benutzer_innen-Konto, Benutzer_innen-Profil und deine persönlichen Informationen unwiderruflich gelöscht."
+msgstr "Indem du auf den Button unten klickst, werden dein gesamtes Benutzer/innen-Konto, Benutzer/innen-Profil und deine persönlichen Informationen unwiderruflich gelöscht."
 
 msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
-msgstr "Deine Pads, Neuigkeiten, hochgeladenen Dateien und anderer Inhalt wird weiter auf der Webseite verbleiben. Dein Name wird jedoch nicht mehr als Ersteller_in angezeigt werden und dein Profil wird nicht mehr mit dem Inhalt verknüpft sein."
+msgstr "Deine Pads, Neuigkeiten, hochgeladenen Dateien und anderer Inhalt wird weiter auf der Webseite verbleiben. Dein Name wird jedoch nicht mehr als Ersteller/in angezeigt werden und dein Profil wird nicht mehr mit dem Inhalt verknüpft sein."
 
 msgid "On Rocket Chat, your profile direct messages will be deleted, but within discussions and channels, the content will remain."
 msgstr "Auf Rocket-Chat werden Deine Profil-Direktnachrichten gelöscht, innerhalb von Diskussionen und Kanälen bleiben die Inhalte aber weiter bestehen."
@@ -6958,15 +6958,15 @@ msgid "Delete Account"
 msgstr "Konto löschen"
 
 msgid "I have understood that any content created by me will be retained on the website. I wish to irrevocably delete my user account:"
-msgstr "Ich habe verstanden dass alle Inhalte, die von mir erstellt wurden, nach dem Löschen meines Kontos weiterhin auf der Webseite verbleiben. Ich will hiermit unwiderruflich mein Benutzer_innen-Konto löschen:"
+msgstr "Ich habe verstanden dass alle Inhalte, die von mir erstellt wurden, nach dem Löschen meines Kontos weiterhin auf der Webseite verbleiben. Ich will hiermit unwiderruflich mein Benutzer/innen-Konto löschen:"
 
 #
 msgid "Delete user account"
-msgstr "Benutzer_innen-Konto löschen"
+msgstr "Benutzer/innen-Konto löschen"
 
 #, python-format
 msgid "User profile: %(username)s"
-msgstr "Benutzer_innen-Profil: %(username)s"
+msgstr "Benutzer/innen-Profil: %(username)s"
 
 msgid "Cooperation requests"
 msgstr "Kooperationsanfragen"
@@ -7017,7 +7017,7 @@ msgid "Cooperation requests for you"
 msgstr "Kooperationsanfragen an dich"
 
 msgid "Signals your willingness to be contacted by other users who wish to collaborate with you"
-msgstr "Signalisiert deine Bereitschaft, von anderen Benutzern kontaktiert zu werden, wenn sie mit dir zusammenarbeiten möchten"
+msgstr "Signalisiert deine Bereitschaft, von anderen Benutzer/innen kontaktiert zu werden, wenn sie mit dir zusammenarbeiten möchten"
 
 msgid "I am open for cooperation requests"
 msgstr "Ich bin offen für Kooperationsanfragen"
@@ -7277,40 +7277,40 @@ msgid "An announcement will only appear during its valid-time frame."
 msgstr "Eine Ankündigung erscheint nur während dem angegebenen Zeitrahmen."
 
 msgid "Only one announcement at a time will ever be shown to a user."
-msgstr "Nur eine Ankündigung wird jeweils dem Benutzer angezeigt."
+msgstr "Nur eine Ankündigung wird jeweils dem/r Benutzer/in angezeigt."
 
 msgid "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements."
-msgstr "Wenn ein Benutzer die \"Willkommen!\"-Einleitungstext auf dem Dashboard noch nicht weggeklickt hat, wird er keine Ankündigung sehen."
+msgstr "Wenn ein/e Benutzer/in die \"Willkommen!\"-Einleitungstext auf dem Dashboard noch nicht weggeklickt hat, wird er keine Ankündigung sehen."
 
 msgid "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown."
-msgstr "Benutzer/in kann eine Ankündigungen wegklicken, woraufhin sie verschwindet und dem Benutzer nie wieder angezeigt wird. Beim nächsten Besuch des Dashboards wird die nächste Ankündigung angezeigt, falls es noch welche gibt, die der Benutzer nicht weggeklickt hat."
+msgstr "Benutzer/in kann eine Ankündigungen wegklicken, woraufhin sie verschwindet und dem/r Benutzer/in nie wieder angezeigt wird. Beim nächsten Besuch des Dashboards wird die nächste Ankündigung angezeigt, falls es noch welche gibt, die der/die Benutzer/in nicht weggeklickt hat."
 
 msgid "There are no announcements yet."
 msgstr "Noch keine Ankündigungen vorhanden."
 
 msgid "Start user export"
-msgstr "Benutzer-Export starten"
+msgstr "Benutzer/innen-Export starten"
 
 msgid "You can start a user export. As soon as the export is finished it will be available here."
-msgstr "Benutzer-Export kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+msgstr "Benutzer/innen-Export kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
 
 msgid "The export is currently running..."
-msgstr "Benutzer-Export läuft gerade..."
+msgstr "Benutzer/innen-Export läuft gerade..."
 
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
-msgstr "Der Benutzer-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
 
 msgid "User export finished"
-msgstr "Benutzer-Export abgeschlossen"
+msgstr "Benutzer/innen-Export abgeschlossen"
 
 msgid "You can download the latest user export data."
-msgstr "Der zuletzt erstellte Benutzer-Export kann heruntergeladen werden."
+msgstr "Der zuletzt erstellte Benutzer/innen-Export kann heruntergeladen werden."
 
 msgid "Download user exports from"
-msgstr "Benutzer-Export herunterladen vom"
+msgstr "Benutzer/innen-Export herunterladen vom"
 
 msgid "Download user export as"
-msgstr "Benutzer-Export herunterladen als"
+msgstr "Benutzer/innen-Export herunterladen als"
 
 msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
 msgstr "Achtung: Aus Sicherheitsgründen sind die Export-Daten nur temporär verfügbar und werden automatisch nach einer gewissen Zeit gelöscht."
@@ -7319,22 +7319,22 @@ msgid "An error has occurred"
 msgstr "Ein Fehler ist aufgetreten."
 
 msgid "Sorry, an error occurred during the user export. Please try again later."
-msgstr "Leider ist bei dem Benutzer-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
+msgstr "Leider ist bei dem Benutzer/innen-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
 
 msgid "Delete export data and start new user export"
-msgstr "Export-Daten löschen und neuen Benutzer-Export starten"
+msgstr "Export-Daten löschen und neuen Benutzer/innen-Export starten"
 
 msgid "Retry user export"
-msgstr "Benutzer-Export erneut starten"
+msgstr "Benutzer/innen-Export erneut starten"
 
 msgid "Delete exported data"
 msgstr "Export-Daten löschen"
 
 msgid "User Import Archive"
-msgstr "User Import Archiv"
+msgstr "Benutzer/in Import Archiv"
 
 msgid "Archived User Import Entry"
-msgstr "Archivierter Benutzer-Import-Eintrag"
+msgstr "Archivierter Benutzer/innen-Import-Eintrag"
 
 msgid "Do you really want to delete this Archived User Import Entry?"
 msgstr "Möchtest du diesen archivierten Benutzerimport-Eintrag wirklich löschen?"
@@ -7349,7 +7349,7 @@ msgid "Delete uploaded data and upload a new CSV file"
 msgstr "Hochgeladene Daten löschen und eine neue CSV-Datei hochladen"
 
 msgid "Upload a user CSV file to import user profiles"
-msgstr "Hochladen einer Benutzer-CSV-Datei zum Importieren von Benutzerprofilen"
+msgstr "Hochladen einer Benutzer/innen-CSV-Datei zum Importieren von Benutzerprofilen"
 
 msgid "Please upload a CSV with the following columns (in any order)"
 msgstr "Bitte lade eine CSV-Datei mit den folgenden Spalten hoch (in beliebiger Reihenfolge)"
@@ -7549,7 +7549,7 @@ msgid "You can connect your projects and groups to a Facebook Group. Once connec
 msgstr "Du kannst deine Projekte und Gruppen mit einer Facebook-Gruppe verbinden. Solange sie verbunden sind, können ihre Mitglieder auf Wunsch die Neuigkeiten, die sie auf %(site_name)s schreiben, gleich mit auf der Facebook-Gruppe veröffentlichen. (Sie müssen dazu auch ihr Benutzerkonto mit Facebook verbunden haben!)"
 
 msgid "Please be aware that users can only post to your Group if they would also be permitted post in it on Facebook!"
-msgstr "Bitte beachte dass Benutzer nur auf die Facebook-Gruppe posten können wenn sie das auch auf Facebook könnten!"
+msgstr "Bitte beachte dass Benutzer/innen nur auf die Facebook-Gruppe posten können wenn sie das auch auf Facebook könnten!"
 
 msgid "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook."
 msgstr "Die Facebook Gruppen-ID findest du auf der Info-Seite im \"Über\"-Tab der Gruppe auf Facebook."
@@ -7565,13 +7565,13 @@ msgstr "Facebook-Fan-Seite verbinden"
 
 #, python-format
 msgid "You can connect your projects and groups to a Facebook Fan-Page. Once connected, you can publish the posts you write on %(site_name)s directly on that Fan-Page, if you are one of its administrators on Facebook."
-msgstr "Du kannst deine Projekte und Gruppen mit einer Fan-Seite verbinden. Solange sie verbunden sind, kannst du Neuigkeiten, die du auf %(site_name)s schreibst, gleich direkt mit auf der Facebook Fan-Seite veröffentlichen. Dazu musst du einer der Administratoren oder Editoren der Fan-Seite sein."
+msgstr "Du kannst deine Projekte und Gruppen mit einer Fan-Seite verbinden. Solange sie verbunden sind, kannst du Neuigkeiten, die du auf %(site_name)s schreibst, gleich direkt mit auf der Facebook Fan-Seite veröffentlichen. Dazu musst du einer der Administrator/inen oder Editoren der Fan-Seite sein."
 
 msgid "All other members of your project/group can publish their posts as visitor's posts on the Fan-Page. (They need to connect their accounts to Facebook, as well!)"
 msgstr "Alle anderen Mitglieder deines Projekts/Gruppe können ihre Posts als Gastbeiträge auf der Fan-Seite veröffentlichen. (Sie müssen dazu auch ihr Benutzerkonto mit Facebook verbunden haben!)"
 
 msgid "If you wish for other members to be able to post directly to the Fan-Page, you can make them co-administrators of your project/group (and you must make them Editors of the Fan-Page on Facebook!). They will be asked to confirm their Editor access of the Fan-Page, and then will be able to publish to it."
-msgstr "Wenn du möchtest dass andere Mitglieder direkt auf die Fan-Seite posten können, kannst du sie zu Co-Administratoren deines Projektes/Gruppe machen (sie müssen ebenfalls Bearbeiter der Fan-Seite auf Facebook sein!). Nachdem sie ihre Zugriffsrechte auf die Fan-Seite bestätitgt haben, können sie dann dorthin posten."
+msgstr "Wenn du möchtest dass andere Mitglieder direkt auf die Fan-Seite posten können, kannst du sie zu Co-Administrator/innen deines Projektes/Gruppe machen (sie müssen ebenfalls Bearbeiter der Fan-Seite auf Facebook sein!). Nachdem sie ihre Zugriffsrechte auf die Fan-Seite bestätitgt haben, können sie dann dorthin posten."
 
 msgid "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)"
 msgstr "Der Kennungsname deiner Fan-Seite ist der Name der Fan-Seite in der URL auf Facebook (Beispiel: https://www.facebook.com/meinefanseite/)"
@@ -7598,10 +7598,10 @@ msgid "Select one of your Facebook pages to connect to"
 msgstr "Wähle eine deiner Facebook Seiten zum Verbinden"
 
 msgid "You do not seem to be Editor or Admin of any pages."
-msgstr "Es scheint als wärst du kein Administrator oder Bearbeiter von einer Facebook Seite."
+msgstr "Es scheint als wärst du kein/ Administrator/in oder Bearbeiter/in von einer Facebook Seite."
 
 msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
-msgstr "Wir konnten aufgrund eines Fehlers deine Gruppen nicht von Facebook lesen. Bitte kontaktiere einen Administrator!"
+msgstr "Wir konnten aufgrund eines Fehlers deine Gruppen nicht von Facebook lesen. Bitte kontaktiere eine/n Administrator/in!"
 
 msgid "Are you sure you want to delete the item?"
 msgstr "Bist du sicher dass du diesen Inhalt löschen willst?"
@@ -7651,7 +7651,7 @@ msgid "Continue reading"
 msgstr "Weiterlesen"
 
 msgid "What's the latest news that you would like to share with all users of the platform?"
-msgstr "Was gibt's Neues, das du mit allen anderen Nutzer*innen der Plattform teilen möchtest?"
+msgstr "Was gibt's Neues, das du mit allen anderen Nutzer/innen der Plattform teilen möchtest?"
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr "Hier findest du in Zukunft eine Übersicht über die von dir zuletzt genutzten Pads, Dateien, Termine, Aufgaben und andere Inhalte aus deinen Projekten und Gruppen."
@@ -7808,7 +7808,7 @@ msgid ""
 msgstr ""
 "Hallo %(admin_name)s,\n"
 "\n"
-"De/dier Benutzer_in %(user_name)s möchte dem Projekt %(team_name)s beitreten."
+"Der/die Benutzer/in %(user_name)s möchte dem Projekt %(team_name)s beitreten."
 
 msgid "Nutzungsbedingungen"
 msgstr "Nutzungsbedingungen"
@@ -7860,13 +7860,13 @@ msgid ""
 msgstr ""
 "Du bist dabei dieses Projekt zu deaktivieren. Wenn Dein Projekt deaktiviert ist, ist es nicht mehr zugänglich und wird von der Website entfernt. Allerdings bleiben Deine Daten weiterhin bestehen.\n"
 "\n"
-"Bitte melde Dich bei den Administratoren des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann das Projekt durch dich und alle anderen Projektadministrator/innen wieder aktiviert werden."
+"Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann das Projekt durch dich und alle anderen Projektadministrator/innen wieder aktiviert werden."
 
 msgid "Convert selected items to Projects"
 msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 
 msgid "Project administrator"
-msgstr "Projekt-Administrator"
+msgstr "Projekt-Administrator/in"
 
 msgid "You are now in a private channel with the admins of this project."
 msgstr "Du bist jetzt in einem privaten Chat-Kanal mit den Administrator/innen dieses Projekts."
@@ -7884,7 +7884,7 @@ msgid "Project members only"
 msgstr "Nur Projektmitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
-msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren des Projekts angenommen oder abgelehnt werden kann."
+msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administrator/innen des Projekts angenommen oder abgelehnt werden kann."
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus diesem Projekt, um sie anzuhängen..."
@@ -7905,7 +7905,7 @@ msgid "This is only visible to admins of this project."
 msgstr "Dies ist nur für Admins dieses Projekts sichtbar."
 
 msgid "Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project."
-msgstr "Der Zugang für Gastnutzer wurde für dieses Projekt aktiviert. Die Projektadministrator/innen können einen speziellen Link freigeben, der es nicht registrierten Menschen ermöglicht, der Plattform sofort beizutreten und Lesezugriff auf dieses Projekt zu erhalten. Bitte beachte dies, wenn du sensible Informationen innerhalb dieses Projekts teilst."
+msgstr "Der Zugang für Gastnutzer/innen wurde für dieses Projekt aktiviert. Die Projektadministrator/innen können einen speziellen Link freigeben, der es nicht registrierten Menschen ermöglicht, der Plattform sofort beizutreten und Lesezugriff auf dieses Projekt zu erhalten. Bitte beachte dies, wenn du sensible Informationen innerhalb dieses Projekts teilst."
 
 msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project"
 msgstr "Du kannst nicht registrierte Menschen einladen, der Plattform sofort beizutreten, indem du den folgenden Link teilst. Auf diese Art eingeladene Menschen treten als Gast bei und brauchen sich nicht zu registrieren. Sie müssen lediglich ihren Namen eingeben und erhalten dann Lesezugriff auf dieses Projekt"
@@ -7914,10 +7914,10 @@ msgid "You are joining as a guest and will get read-only access to the project"
 msgstr "Du trittst als Gast bei und erhältst Lesezugriff auf das Projekt"
 
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
-msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator_innen."
+msgstr "Entschuldige, nur Portal-Administrator/innen können Gruppen erstellen! Du kannst den Administrator/innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator/innen."
 
 msgid "Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
-msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktivieren! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Gruppe für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
+msgstr "Entschuldige, nur Portal-Administrator/innen können Gruppen deaktivieren! Du kannst den Administrator/innen eine Nachricht schreiben, damit sie die Gruppe für dich deaktiveren. Unten findest du eine Liste aller Administrator/innen."
 
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieses Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
@@ -7968,13 +7968,13 @@ msgid ""
 msgstr ""
 "Du bist dabei diese Gruppe zu deaktivieren. Wenn Deine Gruppe deaktiviert ist, ist sie nicht mehr zugänglich und wird von der Website entfernt. Allerdings bleiben Deine Daten weiterhin bestehen.\n"
 "\n"
-"Bitte melde Dich bei den Administratoren des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann die Gruppe durch dich und alle anderen Gruppenaministrator/innen wieder aktiviert werden."
+"Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann die Gruppe durch dich und alle anderen Gruppenaministrator/innen wieder aktiviert werden."
 
 msgid "Convert selected items to Groups"
 msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 
 msgid "Group administrator"
-msgstr "Gruppen-Administrator"
+msgstr "Gruppen-Administrator/in"
 
 msgid "You are now in a private channel with the admins of this group."
 msgstr "Du bist jetzt in einem privaten Chat-Kanal mit den Administrator/innen dieser Gruppe."
@@ -7992,7 +7992,7 @@ msgid "Group members only"
 msgstr "Nur Gruppen-Mitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
-msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren der Gruppe angenommen oder abgelehnt werden kann."
+msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administrator/innen der Gruppe angenommen oder abgelehnt werden kann."
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Gruppe, um sie anzuhängen..."
@@ -8004,7 +8004,7 @@ msgid "This is only visible to admins of this group."
 msgstr "Dies ist nur für Admins dieser Gruppe sichtbar."
 
 msgid "Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group."
-msgstr "Der Zugang für Gastnutzer wurde für diese Gruppe aktiviert. Die Gruppenadministrator/innen können einen speziellen Link freigeben, der es nicht registrierten Menschen ermöglicht, der Plattform sofort beizutreten und Lesezugriff auf diese Gruppe zu erhalten. Bitte beachte dies, wenn du sensible Informationen innerhalb dieser Gruppe teilst."
+msgstr "Der Zugang für Gastnutzer/innen wurde für diese Gruppe aktiviert. Die Gruppenadministrator/innen können einen speziellen Link freigeben, der es nicht registrierten Menschen ermöglicht, der Plattform sofort beizutreten und Lesezugriff auf diese Gruppe zu erhalten. Bitte beachte dies, wenn du sensible Informationen innerhalb dieser Gruppe teilst."
 
 msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group"
 msgstr "Du kannst nicht registrierte Menschen einladen, der Plattform sofort beizutreten, indem du den folgenden Link teilst. Auf diese Art eingeladene Menschen treten als Gast bei und brauchen sich nicht zu registrieren. Sie müssen lediglich ihren Namen eingeben und erhalten dann Lesezugriff auf diese Gruppe"
@@ -8013,10 +8013,10 @@ msgid "You are joining as a guest and will get read-only access to the group"
 msgstr "Du trittst als Gast bei und erhältst Lesezugriff auf die Gruppe"
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator_innen."
+msgstr "Entschuldige, nur Portal-Administrator/innen können Gruppen erstellen! Du kannst den Administrator/innen eine Nachricht schreiben, damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste aller Administrator/innen."
 
 msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
-msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktivieren! Du kannst den Administrator_innen eine Nachricht schreiben damit sie die Gruppe für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
+msgstr "Entschuldige, nur Portal-Administrator/innen können Gruppen deaktivieren! Du kannst den Administrator/innen eine Nachricht schreiben damit sie die Gruppe für dich deaktiveren. Unten findest du eine Liste aller Administrator/innen."
 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
@@ -8070,7 +8070,7 @@ msgid ""
 msgstr ""
 "Du bist dabei diese Tagung zu deaktivieren. Wenn Deine Tagung deaktiviert ist, ist sie nicht mehr zugänglich und wird von der Website entfernt. Allerdings bleiben Deine Daten weiterhin bestehen.\n"
 "\n"
-"Bitte melde Dich bei den Administratoren des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann die Tagung durch dich und alle anderen Tagungsveranstalter/innen wieder aktiviert werden."
+"Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann die Tagung durch dich und alle anderen Tagungsveranstalter/innen wieder aktiviert werden."
 
 msgid "Convert selected items to Conferences"
 msgstr "Ausgewählte Elemente in Tagungen umwandeln"
@@ -8122,7 +8122,7 @@ msgid "This is only visible to admins of this conference."
 msgstr "Dies ist nur für Admins dieser Tagung sichtbar."
 
 msgid "Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference."
-msgstr "Der Zugang für Gastnutzer wurde für diese Tagung aktiviert. Die Tagungsadministrator/innen können einen speziellen Link freigeben, der es nicht registrierten Menschen ermöglicht, der Plattform sofort beizutreten und Lesezugriff auf diese Tagung zu erhalten. Bitte beachte dies, wenn du sensible Informationen innerhalb dieser Tagung teilst."
+msgstr "Der Zugang für Gastnutzer/innen wurde für diese Tagung aktiviert. Die Tagungsadministrator/innen können einen speziellen Link freigeben, der es nicht registrierten Menschen ermöglicht, der Plattform sofort beizutreten und Lesezugriff auf diese Tagung zu erhalten. Bitte beachte dies, wenn du sensible Informationen innerhalb dieser Tagung teilst."
 
 msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference"
 msgstr "Du kannst nicht registrierte Menschen einladen, der Plattform sofort beizutreten, indem du den folgenden Link teilst. Auf diese Art eingeladene Menschen treten als Gast bei und brauchen sich nicht zu registrieren. Sie müssen lediglich ihren Namen eingeben und erhalten dann Lesezugriff auf diese Tagung"
@@ -8131,10 +8131,10 @@ msgid "You are joining as a guest and will get read-only access to the conferenc
 msgstr "Du trittst als Gast bei und erhältst Lesezugriff auf die Tagung"
 
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
-msgstr "Entschuldige, nur Portal-Administrator_innen können Tagungen erstellen! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Tagung für dich erstellen. Unten findest du eine Liste aller Administrator_innen."
+msgstr "Entschuldige, nur Portal-Administrator/innen können Tagungen erstellen! Du kannst den Administrator/innen eine Nachricht schreiben, damit sie die Tagung für dich erstellen. Unten findest du eine Liste aller Administrator/innen."
 
 msgid "Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
-msgstr "Entschuldige, nur Portal-Administrator_innen können Tagungen deaktivieren! Du kannst den Administrator_innen eine Nachricht schreiben, damit sie die Tagung für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
+msgstr "Entschuldige, nur Portal-Administrator/innen können Tagungen deaktivieren! Du kannst den Administrator/innen eine Nachricht schreiben, damit sie die Tagung für dich deaktiveren. Unten findest du eine Liste aller Administrator/innen."
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
@@ -8364,7 +8364,7 @@ msgid "Invalid guest token."
 msgstr "Ungültiges Gast-Token."
 
 msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
-msgstr "Beim Versuch, dich zum BBB-Raum weiterzuleiten, ist ein Fehler aufgetreten. Bitte kontaktiere einen Administrator!"
+msgstr "Beim Versuch, dich zum BBB-Raum weiterzuleiten, ist ein Fehler aufgetreten. Bitte kontaktiere eine/n Administrator/in!"
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -8424,7 +8424,7 @@ msgid "Your news post was also posted in the Facebook Group."
 msgstr "Deine Neuigkeit wurde auch auf der Facebook Gruppe veröffentlicht."
 
 msgid "We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least \"Friends\". If you are trying to post as a Fan-Page, make sure you accept the necessary permissions for us to post there, and make sure you are an Editor of the Fan-Page! If this doesn't work, contact this project/group's administrator!"
-msgstr "Wir konnten deine Neuigkeit nicht auf der Facebook Gruppe/Fan-Seite posten. Wenn dieses Problem bestehen bleibt, versuche dein Facebook-Konto zu trennen und erneut zu verbinden und stelle sicher dass du uns die Post-Berechtigung mit Sichtbarkeit von mindestens \\\"Freunde\\\" erteilst! Wenn du versuchst direkt auf eine Fan-Seite zu posten, stell sicher dass du uns die Berechtigungen dafür erteilt hast, und dass du ein Bearbeiter der Fan-Seite auf Facebook bist! Wenn dass nicht funktioniert, kontaktiere bitte den Administrator dieses Projekts/Gruppe!"
+msgstr "Wir konnten deine Neuigkeit nicht auf der Facebook Gruppe/Fan-Seite posten. Wenn dieses Problem bestehen bleibt, versuche dein Facebook-Konto zu trennen und erneut zu verbinden und stelle sicher dass du uns die Post-Berechtigung mit Sichtbarkeit von mindestens \\\"Freunde\\\" erteilst! Wenn du versuchst direkt auf eine Fan-Seite zu posten, stell sicher dass du uns die Berechtigungen dafür erteilt hast, und dass du ein Bearbeiter der Fan-Seite auf Facebook bist! Wenn dass nicht funktioniert, kontaktiere bitte den/die Administrator/in dieses Projekts/Gruppe!"
 
 msgid "You can only connect to either a Facebook Group or a Fan-Page, but not both!"
 msgstr "Du kannst nur entweder eine Facebook Gruppe oder Fan-Seite verbinden, aber nicht beides!"
@@ -8436,7 +8436,7 @@ msgid "The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make
 msgstr "Die Facebook Fan-Seiten-ID oder Gruppen-ID konnte nicht auf Facebook gefunden werden! Bitte stell sicher, dass du die richtige ID für deine  Gruppe/Fan-Seite eingegeben hast!"
 
 msgid "We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!"
-msgstr "Wir konnten keine Zugriffsrechte von deinem Facebook-Account auf die Fan-Seite feststellen. Bitte stell sicher dass du den Fan-Seiten-Namen richtig eingegeben hast und dass du ein Bearbeiter oder Administrator der Fan-Seite bist!"
+msgstr "Wir konnten keine Zugriffsrechte von deinem Facebook-Account auf die Fan-Seite feststellen. Bitte stell sicher dass du den Fan-Seiten-Namen richtig eingegeben hast und dass du ein/e Bearbeiter/in oder Administrator/in der Fan-Seite bist!"
 
 msgid "This group does not have a Facebook Fan-Page associated with it!"
 msgstr "Diese Gruppe hat keine Facebook Fan-Seite zugewiesen!"
@@ -8445,13 +8445,13 @@ msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
 msgstr "Deine Bearbeiter-Zugriffsrechte für die verbundene Facebook Fan-Seite wurden bestätigt!"
 
 msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
-msgstr "Beim Versuch dein Facebook-Konto zu trennen ist ein Fehler aufgetreten. Bitte kontaktiere einen Administrator!"
+msgstr "Beim Versuch dein Facebook-Konto zu trennen ist ein Fehler aufgetreten. Bitte kontaktiere eine/n Administrator/in!"
 
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr "Dein Facebook-Konto wurde erfolgreich von deinem Benutzerprofil getrennt."
 
 msgid "Sorry, only portal administrators can create projects and groups!"
-msgstr "Tut uns leid, aber nur Portal-Administratoren können Projekte und Gruppen anlegen!"
+msgstr "Tut uns leid, aber nur Portal-Administrator/innen können Projekte und Gruppen anlegen!"
 
 #, python-format
 msgid "%(team_type)s \"%(group)s\" was created successfully."
@@ -8491,7 +8491,7 @@ msgstr "Du bist jetzt nicht mehr Mitglied von %(team_type)s “%(team_name)s”.
 
 #, python-format
 msgid "You cannot leave this %(team_type)s. You are the only administrator left."
-msgstr "Sie können diese(s) %(team_type)s nicht verlassen, da sie der einzig übrige Administrator sind."
+msgstr "Sie können diese(s) %(team_type)s nicht verlassen, da sie der/die einzig übrige Administrator/in sind."
 
 #, python-format
 msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
@@ -8529,7 +8529,7 @@ msgstr "Du kannst einen Gast nicht befördern!"
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
-msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der einzig übrige Administrator."
+msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der einzig übrige Administrator/in."
 
 #, python-format
 msgid "Accepted user \"%(user)s\" as  member."
@@ -8549,7 +8549,7 @@ msgstr "Sie können sich nicht selbst von eine(r/m) %(team_type)s entfernen."
 
 #, python-format
 msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
-msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der einzig übrige Administrator."
+msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der/die einzig übrige Administrator/in."
 
 #, python-format
 msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
@@ -8557,7 +8557,7 @@ msgstr "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zur�
 
 #, python-format
 msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgstr "Deine Einladung an Benutzer \"%(username)s\" wurde erfolgreich zurückgezogen."
+msgstr "Deine Einladung an Benutzer/in \"%(username)s\" wurde erfolgreich zurückgezogen."
 
 #, python-format
 msgid "User \"%(username)s\" is no longer a member."
@@ -8726,7 +8726,7 @@ msgid "Sorry, something went wrong while saving your profile!"
 msgstr "Entschuldigung, etwas ist beim Speichern deines Profils schief gelaufen!"
 
 msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
-msgstr "Dein Benutzer_innen-Profil wurde deaktiviert und wird in 30 Tagen gelöscht. Schade dass du nicht länger bei uns bist."
+msgstr "Dein Benutzer/innen-Profil wurde deaktiviert und wird in 30 Tagen gelöscht. Schade dass du nicht länger bei uns bist."
 
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "Du bist der/die letzte Administrator/in in diesen Projekten, Gruppen oder Tagungen. Bitte deaktiviere sie zuerst oder wähle vor dem Löschen deines Profils eine/n andere/n Administrator/in aus:"
@@ -8744,13 +8744,13 @@ msgid "Information about the deletion of your user account"
 msgstr "Informationen zur Löschung deines Benutzer/innen-Kontos"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
-msgstr "Entschuldige, wir konnten aufgrund eines internen Fehlers dein Benutzerkonto nicht einloggen. Bitte kontaktiere einen Administrator!"
+msgstr "Entschuldige, wir konnten aufgrund eines internen Fehlers dein Benutzerkonto nicht einloggen. Bitte kontaktiere eine/n Administrator/in!"
 
 msgid "Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!"
-msgstr "Entschuldige, wir konnten dein Benutzerkonto nicht einloggen, weil wir Benutzerinformationen nicht auslesen konnten. Bitte kontaktiere einen Administrator!"
+msgstr "Entschuldige, wir konnten dein Benutzerkonto nicht einloggen, weil wir Benutzerinformationen nicht auslesen konnten. Bitte kontaktiere eine/n Administrator/in!"
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
-msgstr "Entschuldige, du kannst dich nicht einloggen, weil dein Benutzerkonto gesperrt wurde. Bitte kontaktiere einen Administrator!"
+msgstr "Entschuldige, du kannst dich nicht einloggen, weil dein Benutzerkonto gesperrt wurde. Bitte kontaktiere eine/n Administrator/in!"
 
 msgid "You are already logged in. This function is only available to set up your account for the first time!"
 msgstr "Du bist bereits eingeloggt. Diese Funktion ist nur verfügbar wenn du dein Benutzerkonto zum ersten mal einrichtest!"
@@ -8806,11 +8806,11 @@ msgstr "Das Benutzerkonto wurde bereits freigeschaltet, aber trotzdem vielen Dan
 
 #, python-format
 msgid "Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site."
-msgstr "Danke für das Freischalten von %(username)s (%(email)s)! Eine Willkommens-Mail wurde an die Benutzer_in gesandt und er/sie kann sich jetzt auf dem Portal einloggen."
+msgstr "Danke für das Freischalten von %(username)s (%(email)s)! Eine Willkommens-Mail wurde an die Benutzer/in gesandt und er/sie kann sich jetzt auf dem Portal einloggen."
 
 #, python-format
 msgid "The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface."
-msgstr "Das Benutzerkonto %(username)s (%(email)s) wurde schon freigeschaltet, also kannst du die Registrierung nicht ablehnen! Wenn das ein Problem darstellt kannst du möglicherweise den Benutzer per Hand im Admin-Bereich deaktivieren."
+msgstr "Das Benutzerkonto %(username)s (%(email)s) wurde schon freigeschaltet, also kannst du die Registrierung nicht ablehnen! Wenn das ein Problem darstellt kannst du möglicherweise den/die Benutzer/in per Hand im Admin-Bereich deaktivieren."
 
 #, python-format
 msgid "You have denied the join request of %(username)s (%(email)s)! An email was sent to let them know."
@@ -8829,7 +8829,7 @@ msgid "The link you supplied for the email confirmation is no longer valid!"
 msgstr "Dieser Bestätigungslink ist nicht länger gültig!"
 
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
-msgstr "Die E-Mail-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem anderen Benutzer registriert worden!"
+msgstr "Die E-Mail-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem/r anderen Benutzer/in registriert worden!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed!"
@@ -8837,7 +8837,7 @@ msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Willkommen!
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
-msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings ist dein Konto noch nicht aktiv und muss von einem Administrator bestätigt werden bevor du dich einloggen kannst. Wir schicken dir eine E-Mail sobald das passiert!"
+msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings ist dein Konto noch nicht aktiv und muss von einem/r Administrator/in bestätigt werden bevor du dich einloggen kannst. Wir schicken dir eine E-Mail sobald das passiert!"
 
 #, python-format
 msgid "Please verify your email address for %(site_name)s!"
@@ -8923,7 +8923,7 @@ msgid "The import was successfully archived."
 msgstr "Der Import wurde erfolgreich archiviert."
 
 msgid "User id should be an integer and it should not be None."
-msgstr "Die Benutzer-ID muss eine ganze Zahl sein und darf nicht None sein."
+msgstr "Die Benutzer/in-ID muss eine ganze Zahl sein und darf nicht None sein."
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
@@ -9012,7 +9012,7 @@ msgid "Successfully activated user account"
 msgstr "Erfolgreich Benutzerkonto aktiviert"
 
 msgid "Successfully removed user"
-msgstr "Nutzer erfolgreich entfernt"
+msgstr "Nutzer/in erfolgreich entfernt"
 
 msgid "Successfully removed all user"
 msgstr "Nutzerkonten erfolgreich entfernt"
@@ -9192,7 +9192,7 @@ msgid "Delete Etherpad"
 msgstr "Pad löschen"
 
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
-msgstr "Das Pad kann nicht angezeigt werden weil der Etherpad-Service nicht erreichbar ist. Bitte kontaktiere einen Administrator!"
+msgstr "Das Pad kann nicht angezeigt werden weil der Etherpad-Service nicht erreichbar ist. Bitte kontaktiere eine/n Administrator/in!"
 
 msgid "This document is empty"
 msgstr "Dieses Pad ist leer"
@@ -9292,10 +9292,10 @@ msgid "Etherpad with name \"%(name)s\" already exists on pad server. Please use 
 msgstr "Ein Pad mit dem Namen „%(name)s“ existiert bereits auf dem Pad-Server. Bitte einen anderen Namen benutzen."
 
 msgid "The document could not be created because the etherpad service is misconfigured. Please contact an administrator!"
-msgstr "Das Pad konnte nicht erstellt werden weil der Etherpad-Service falsch konfiguriert ist. Bitte kontaktiere einen Administrator!"
+msgstr "Das Pad konnte nicht erstellt werden weil der Etherpad-Service falsch konfiguriert ist. Bitte kontaktiere eine/n Administrator/in!"
 
 msgid "The document could not be created because the etherpad server could not be reached. Please contact an administrator!"
-msgstr "Das Pad konnte nicht erstellt werden weil der Etherpad-Service nicht erreichbar ist. Bitte kontaktiere einen Administrator!"
+msgstr "Das Pad konnte nicht erstellt werden weil der Etherpad-Service nicht erreichbar ist. Bitte kontaktiere eine/n Administrator/in!"
 
 #, python-format
 msgid "Pad has been archived as Document: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
@@ -9361,8 +9361,8 @@ msgstr "%(sender_name)s hat deine Veranstaltung %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your event %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your event %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben deine Veranstaltung %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben deine Veranstaltung %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben deine Veranstaltung %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben deine Veranstaltung %(object_name)s kommentiert"
 
 #, python-format
 msgid "%(sender_name)s commented on your event"
@@ -9382,8 +9382,8 @@ msgstr "%(sender_name)s hat die Veranstaltung %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the event %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the event %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Veranstaltung %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Veranstaltung %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben die Veranstaltung %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben die Veranstaltung %(object_name)s kommentiert"
 
 msgid "You were tagged in this event"
 msgstr "Du wurdest in dieser Veranstaltung getaggt"
@@ -9510,8 +9510,8 @@ msgstr "%(sender_name)s hat in der Terminumfrage %(object_name)s abgestimmt"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other voted in the event poll %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event poll %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben in der Terminumfrage %(object_name)s abgestimmt"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben in der Terminumfrage %(object_name)s abgestimmt"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben in der Terminumfrage %(object_name)s abgestimmt"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben in der Terminumfrage %(object_name)s abgestimmt"
 
 #, python-format
 msgid "%(sender_name)s voted in an event poll you are following"
@@ -10716,7 +10716,7 @@ msgid "Offer \"%(object_name)s\" has expired."
 msgstr "Inserat  \"%(object_name)s\" ist abgelaufen."
 
 msgid "A user commented on one of your offers"
-msgstr "Ein Benutzer hat eines deiner Inserate kommentiert"
+msgstr "Ein/e Benutzer/in hat eines deiner Inserate kommentiert"
 
 #, python-format
 msgid "%(sender_name)s commented on your offer %(object_name)s"
@@ -10725,8 +10725,8 @@ msgstr "%(sender_name)s hat dein Inserat %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben dein Inserat %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben dein Inserat %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben dein Inserat %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben dein Inserat %(object_name)s kommentiert"
 
 #, python-format
 msgid "%(sender_name)s commented on your offer"
@@ -10746,8 +10746,8 @@ msgstr "%(sender_name)s hat das Inserat %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben das Inserat %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben dein Inserat %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben das Inserat %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben dein Inserat %(object_name)s kommentiert"
 
 msgid "You were tagged in this offer"
 msgstr "Du wurdest in diesem Inserat getaggt"
@@ -10903,7 +10903,7 @@ msgid "Phone number"
 msgstr "Mobilnummer"
 
 msgid "Your phone number is only visible for registered users"
-msgstr "Deine Telefonnummer ist nur für registrierte Benutzer sichtbar"
+msgstr "Deine Telefonnummer ist nur für registrierte Benutzer/innen sichtbar"
 
 msgid "Check all categories that fit your offer"
 msgstr "Markiere alle Kategorien, die auf dein Inserat zutreffen"
@@ -11020,7 +11020,7 @@ msgid "Chat"
 msgstr "Chat"
 
 msgid "Only Administrators may send a message to this project/group!"
-msgstr "Nur Administratoren dürfen Nachrichten an dieses Projekt/Gruppe schicken!"
+msgstr "Nur Administrator/innen dürfen Nachrichten an dieses Projekt/Gruppe schicken!"
 
 msgid "Additional Recipients"
 msgstr "Zusätzliche Empfänger"
@@ -11057,7 +11057,7 @@ msgstr "Bitte hier angeben"
 
 #, python-format
 msgid "Contact the administration of %(group_name)s:"
-msgstr "Die Administratoren von %(group_name)s kontaktieren:"
+msgstr "Die Administrator/innen von %(group_name)s kontaktieren:"
 
 #, python-format
 msgid ""
@@ -11118,7 +11118,7 @@ msgstr "Hallo,"
 
 #, python-format
 msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
-msgstr "Am %(date)s wolltest du die Nachricht an Benutzer_in ‘%(recipient)s’ schicken."
+msgstr "Am %(date)s wolltest du die Nachricht an Benutzer/in ‘%(recipient)s’ schicken."
 
 msgid "Your message has been rejected by the moderator"
 msgstr "Deine Nachricht wurde von dem Moderator abgelehnt"
@@ -11168,7 +11168,7 @@ msgstr "Als Erinnerung: Unten findest du den Inhalt deiner Nachricht."
 
 #, python-format
 msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
-msgstr "Am %(date)s, hast du eine Nachricht an Benutzer_in '%(sender_first)s %(sender_last)s' geschrieben."
+msgstr "Am %(date)s, hast du eine Nachricht an Benutzer/in '%(sender_first)s %(sender_last)s' geschrieben."
 
 msgid "Please find below the answer from your correspondent."
 msgstr "Unten findest du die Antwort deines Gesprächspartners."
@@ -11180,7 +11180,7 @@ msgid "For more comfort, we encourage you to open an account on the site."
 msgstr "Für mehr Benutzungskomfort empfählen wir dir einen Account auf der Webseite zu erstellen."
 
 msgid "The site administrator"
-msgstr "Siteadministrator_in"
+msgstr "Siteadministrator/in"
 
 msgid "Inbox"
 msgstr "Posteingang"
@@ -11286,8 +11286,8 @@ msgstr "%(sender_name)s hat deine Neuigkeit %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben deine Neuigkeit %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben deine Neuigkeit %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben deine Neuigkeit %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben deine Neuigkeit %(object_name)s kommentiert"
 
 #, python-format
 msgid "%(sender_name)s commented on your news post"
@@ -11307,8 +11307,8 @@ msgstr "%(sender_name)s hat die Neuigkeit %(object_name)s kommentiert, die du ko
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Neuigkeit %(object_name)s kommentiert, die du kommentiert hast"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Neuigkiet %(object_name)s kommentiert, die du kommentiert hast"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben die Neuigkeit %(object_name)s kommentiert, die du kommentiert hast"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben die Neuigkiet %(object_name)s kommentiert, die du kommentiert hast"
 
 #, python-format
 msgid "%(sender_name)s commented on a news post you commented in"
@@ -11372,8 +11372,8 @@ msgstr "%(sender_name)s hat die Neuigkeit %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Neuigkeit %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Neuigkeit %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben die Neuigkeit %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben die Neuigkeit %(object_name)s kommentiert"
 
 #, python-format
 msgid "%(sender_name)s commented on a news posts you are following"
@@ -11627,7 +11627,7 @@ msgid "Weekly"
 msgstr "Wöchentlich"
 
 msgid "Notification Preference for User"
-msgstr "Benachrichtigungseinstellung für Benutzer"
+msgstr "Benachrichtigungseinstellung für Benutzer/in"
 
 msgid "Notification Preference"
 msgstr "Benachrichtigungseinstellung"
@@ -11654,7 +11654,7 @@ msgid "Alert Reason key"
 msgstr "Meldungsgrund-Schlüssel"
 
 msgid "Last user who caused this notification event"
-msgstr "Letzter Benutzer, der das Event ausgelöst hat"
+msgstr "Letzte/r Benutzer/in, der das Event ausgelöst hat"
 
 msgid "Alert State"
 msgstr "Meldungsstatus"
@@ -11675,10 +11675,10 @@ msgid "You are getting this notification because you are subscribed to these kin
 msgstr "Du erhältst diese Benachrichtigung, weil du angegeben hast, dass du diese Art von Benachrichtigungen erhalten möchtest."
 
 msgid "You are getting this notification because you are an administrator of this project or group."
-msgstr "Du erhältst diese Benachrichtigung, weil du ein Administrator dieses Projektes oder dieser Gruppe bist."
+msgstr "Du erhältst diese Benachrichtigung, weil du ein/e Administrator/in dieses Projektes oder dieser Gruppe bist."
 
 msgid "You are getting this notification because you are an administrator of this portal."
-msgstr "Du erhältst diese Benachrichtigung, weil du ein Administrator dieses Portals bist."
+msgstr "Du erhältst diese Benachrichtigung, weil du ein/e Administrator/in dieses Portals bist."
 
 msgid "You are getting this email because you are subscribed to one or more daily notifications."
 msgstr "Du erhältst diese Benachrichtigung, weil du eine oder mehrere tägliche Benachrichtigungen abonniert hast."
@@ -11727,13 +11727,13 @@ msgid "Receive notification emails in this language"
 msgstr "Benachrichtigungs-Emails in dieser Sprache empfangen"
 
 msgid "Moderator Status (Portal-Admins only)"
-msgstr "Moderator-Status (nur für Portal-Administratoren)"
+msgstr "Moderator-Status (nur für Portal-Administrator/innen)"
 
 msgid "I wish to be a Moderator for this portal"
 msgstr "Ich möchte Moderator für dieses Portal sein"
 
 msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
-msgstr "Als Moderator erhältst du eine sofortige Email-Benachrichtigung für JEDEN öffentlich sichtbaren Inhalt, der auf diesem Portal erstellt wird. Da du auch Portal-Administrator bist, kannst du den Inhalt dann löschen, falls er offensiv oder bedenklich ist. Um ihn zu löschen, besuche die Inhaltsseite auf der Webseite, während du mit diesem Benutzerkonto eingeloggt bist."
+msgstr "Als Moderator erhältst du eine sofortige Email-Benachrichtigung für JEDEN öffentlich sichtbaren Inhalt, der auf diesem Portal erstellt wird. Da du auch Portal-Administrator/in bist, kannst du den Inhalt dann löschen, falls er offensiv oder bedenklich ist. Um ihn zu löschen, besuche die Inhaltsseite auf der Webseite, während du mit diesem Benutzerkonto eingeloggt bist."
 
 msgid "Additionally, you have opted in to receive emails from organizers from these conferences. <br/> You may opt out by revoking your application or by leaving the conference:"
 msgstr "Außerdem hast du dich dafür entschieden, E-Mails von den Organisatoren dieser Konferenzen zu erhalten. Du kannst dich abmelden, indem du deine Anmeldung widerrufst oder die Konferenz verlässt:"
@@ -12017,10 +12017,10 @@ msgid "Organization memberships"
 msgstr "Organisations-Admins"
 
 msgid "Organization Invite for Unregistered User"
-msgstr "Organisations-Einladung für nicht registrierte Benutzer*innen"
+msgstr "Organisations-Einladung für nicht registrierte Benutzer/innen"
 
 msgid "Organization Invites for Unregistered Users"
-msgstr "Organisations-Einladungen für nicht registrierte Benutzer*innen"
+msgstr "Organisations-Einladungen für nicht registrierte Benutzer/innen"
 
 msgid "Civil society organization"
 msgstr "zivilgesellschaftliche Organisation"
@@ -12233,7 +12233,7 @@ msgid "Project/group \"%(name)s\" is no longer assigned."
 msgstr "Projekt/Gruppe \"%(name)s\" ist nicht mehr zugeordnet."
 
 msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
-msgstr "Tut uns leid, nur Portal-Administratoren können Organisationen erstellen! Du kannst entweder ein Projekt erstelleen oder eine Nachricht an einen der Administratoren schreiben, um eine Organisation für dich anzulegen. Unten finden Sie eine Liste aller Administratoren."
+msgstr "Tut uns leid, nur Portal-Administrator/innen können Organisationen erstellen! Du kannst entweder ein Projekt erstelleen oder eine Nachricht an eine/n der Administrator/innen schreiben, um eine Organisation für dich anzulegen. Unten finden Sie eine Liste aller Administrator/innen."
 
 #, python-format
 msgid "Organization \"%(name)s\" was created successfully."
@@ -12294,8 +12294,8 @@ msgstr "%(sender_name)s hat deine Umfrage %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben deine Umfrage %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben deine Umfrage %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben deine Umfrage %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben deine Umfrage %(object_name)s kommentiert"
 
 #, python-format
 msgid "%(sender_name)s commented on your poll"
@@ -12315,8 +12315,8 @@ msgstr "%(sender_name)s hat die Umfrage %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Umfrage %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Umfrage %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben die Umfrage %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben die Umfrage %(object_name)s kommentiert"
 
 msgid "You were tagged in this poll"
 msgstr "Du wurdest in dieser Umfrage getaggt"
@@ -12417,13 +12417,13 @@ msgid "Multiple options votable"
 msgstr "Mehrere Optionen stimmbar"
 
 msgid "Does this poll allow users to vote on multiple options or just decide for one?"
-msgstr "Können Benutzer in dieser Umfrage für mehrere Optionen abstimmen oder sich nur für eine entscheiden?"
+msgstr "Können Benutzer/innen in dieser Umfrage für mehrere Optionen abstimmen oder sich nur für eine entscheiden?"
 
 msgid "\"Maybe\" option enabled"
 msgstr "\"Vielleicht\"-Auswahl erlaubt"
 
 msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
-msgstr "Dürfen Benutzer \"Vielleicht\" auswählen? Wird ignoriert und als False behandelt wenn ``multiple_votes==False``"
+msgstr "Dürfen Benutzer/innen \"Vielleicht\" auswählen? Wird ignoriert und als False behandelt wenn ``multiple_votes==False``"
 
 msgid "Anyone can vote"
 msgstr "Jeder kann abstimmen"
@@ -12435,7 +12435,7 @@ msgid "Show voters"
 msgstr "Abstimmer anzeigen"
 
 msgid "If true, display a list of which user voted for each option."
-msgstr "Wenn ausgewählt, zeigt an, welcher Benutzer wie für jede Option abgestimmt hat."
+msgstr "Wenn ausgewählt, zeigt an, welche/r Benutzer/in wie für jede Option abgestimmt hat."
 
 msgid "Winning Option"
 msgstr "Sieger-Option"
@@ -12718,19 +12718,19 @@ msgid "Multiple Votes"
 msgstr "Mehrere Stimmen"
 
 msgid "If disabled, users can only vote for one option"
-msgstr "Wenn deaktiviert können Benutzer nur für eine Option stimmen"
+msgstr "Wenn deaktiviert können Benutzer/innen nur für eine Option stimmen"
 
 msgid "In addition to \"Yes\" and \"No\""
 msgstr "Zusätzlich zu \"Ja\" und \"Nein\""
 
 msgid "Lists how every voter voted for each option."
-msgstr "Listet für jede Option auf, welcher Benutzer dafür abgestimmt hat."
+msgstr "Listet für jede Option auf, welche/r Benutzer/in dafür abgestimmt hat."
 
 msgid "Public voting"
 msgstr "Öffentliches Abstimmen"
 
 msgid "Any logged in user who can see this poll can vote on it. If disabled, only group/project members can vote on it."
-msgstr "Jeder eingeloggte Benutzer, der die Umfrage sehen kann, kann in ihr Abstimmen. Wenn deaktiviert, können nur Gruppen/Projektmitglieder abstimmen."
+msgstr "Jede/r eingeloggte Benutzer/in, der/die die Umfrage sehen kann, kann in ihr Abstimmen. Wenn deaktiviert, können nur Gruppen/Projektmitglieder abstimmen."
 
 msgid "Archived Polls"
 msgstr "Archivierte Umfragen"
@@ -13019,8 +13019,8 @@ msgstr "%(sender_name)s hat deine Aufgabe %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben deine Aufgabe %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben deine Aufgabe %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben deine Aufgabe %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben deine Aufgabe %(object_name)s kommentiert"
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
@@ -13040,8 +13040,8 @@ msgstr "%(sender_name)s hat die Aufgabe %(object_name)s kommentiert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Aufgabe %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Aufgabe %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben die Aufgabe %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben die Aufgabe %(object_name)s kommentiert"
 
 msgid "You were tagged in this todo"
 msgstr "Du wurdest in dieser Aufgabe getaggt"
@@ -13064,8 +13064,8 @@ msgstr "%(sender_name)s hat die die zugewiesene Aufgabe %(object_name)s kommenti
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die dir zugewiesene Aufgabe %(object_name)s kommentiert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die dir zugewiesene Aufgabe %(object_name)s kommentiert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben die dir zugewiesene Aufgabe %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben die dir zugewiesene Aufgabe %(object_name)s kommentiert"
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
@@ -13085,8 +13085,8 @@ msgstr "%(sender_name)s hat die Aufgabe %(object_name)s geändert"
 #, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Aufgabe %(object_name)s geändert"
-msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Aufgabe %(object_name)s geändert"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weitere/r Benutzer/in haben die Aufgabe %(object_name)s geändert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer/innen haben die Aufgabe %(object_name)s geändert"
 
 msgid "You are following this todo"
 msgstr "Du folgst dieser Aufgabe"
@@ -13496,7 +13496,7 @@ msgid "You have no assigned tasks"
 msgstr "Keine aktuellen Aufgaben"
 
 msgid "Tasks are shown only for logged in users"
-msgstr "Aufgaben werden nur für eingeloggte Benutzer_innen angezeigt"
+msgstr "Aufgaben werden nur für eingeloggte Benutzer/innen angezeigt"
 
 #, python-format
 msgid "Todo \"%(title)s\" was added successfully."
