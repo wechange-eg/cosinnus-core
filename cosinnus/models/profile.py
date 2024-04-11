@@ -227,9 +227,11 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         """ Returns the font-awesome icon specific to this object type """
         return 'fa-user'
     
-    def get_full_name(self):
+    def get_full_name(self, force=False):
+        """ Print the full user name, or an "inactive" placeholder for inactive users.
+            @param force: if True, will always print the user name, even if they are inactive. """
         user = self.user
-        if not user.is_active:
+        if not user.is_active and not force:
             return str(_("(Deleted User)"))
         full_name = '%s %s' % (user.first_name, user.last_name)
         full_name = full_name.strip()

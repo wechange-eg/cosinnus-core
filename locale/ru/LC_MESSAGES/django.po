@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-27 09:44+0100\n"
+"POT-Creation-Date: 2024-04-11 14:26+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6002,11 +6002,6 @@ msgstr "Вы вышли из системы"
 msgid "You have been logged out. See you again soon!"
 msgstr "Был произведен выход из твоей учётной записи. До скорой встречи снова!"
 
-#, fuzzy
-#| msgid "Redirect Logged in Users"
-msgid "Redirecting you in 3 seconds..."
-msgstr "Перенаправление зарегистрированных пользователей"
-
 msgid "Error while logging out"
 msgstr "Ошибка при выходе из учётной записи"
 
@@ -8380,6 +8375,17 @@ msgstr "Пожалуйста, укажите дату конца"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Убедись, что твоё имя не содержит недопустимые символы."
 
+msgid "Version 1.20.1 released"
+msgstr ""
+
+msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed an issue where users were not correctly redirected after logging in, making it seem like the login had failed.\n"
+"- Further minor bugfixes.\n"
+msgstr ""
+
 msgid "Version 1.20.0 released"
 msgstr ""
 
@@ -8401,9 +8407,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 1.19.6 released"
-msgstr ""
-
-msgid "This update includes several bugfixes:"
 msgstr ""
 
 msgid ""
@@ -13793,6 +13796,11 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Вы уверены, что хотите удалить этот проект?"
+
+#, fuzzy
+#~| msgid "Redirect Logged in Users"
+#~ msgid "Redirecting you in 3 seconds..."
+#~ msgstr "Перенаправление зарегистрированных пользователей"
 
 #~ msgid "Your match with %(sender_name)s has just been established!"
 #~ msgstr "Твоё совпадение с %(sender_name)s было установлено!"
