@@ -215,7 +215,7 @@ def full_name_force(value):
     """ Like ``full_name()``, this tag will always print the user name, even if the user is inactive """
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
-        return value.get_full_name() or value.get_username()
+        return value.get_full_name(force=True) or value.get_username()
     return ""
 
 @register.filter

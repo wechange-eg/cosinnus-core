@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 
 
-def get_full_name_extended(self):
+def get_full_name_extended(self, force=False):
     """
         Extend the user model's get_full_name function so that it uses the UserProfile's get_full_name function
         if a profile exists.
@@ -9,7 +9,7 @@ def get_full_name_extended(self):
         use the same code in determining the user's displayed name, if the user is a proper one with a profile.
     """
     if hasattr(self, 'cosinnus_profile') and self.cosinnus_profile:
-        return self.cosinnus_profile.get_full_name()
+        return self.cosinnus_profile.get_full_name(force=force)
     # fall back to django's default function
     full_name = '%s %s' % (self.first_name, self.last_name)
     return full_name.strip()
