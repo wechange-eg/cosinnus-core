@@ -48,12 +48,24 @@
 
 	        <link href="{% static 'css/vendor/lightbox.css' %}" rel="stylesheet">
             <link href="{% static 'css/vendor/simplebar.css' %}" rel="stylesheet">
+
+
 	        {% if SETTINGS.DEBUG or request.GET.live_less_compile == "1" %}
-			<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
-			<script src="{% static "js/vendor/less.min.js" %}"></script>
+                {% if COSINNUS_V3_API_CONTENT_ACTIVE %}
+                    <link rel="stylesheet/less" href="{% static "less/cosinnus-v3-scoped.less" %}">
+                {% else %}
+                    <link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
+                {% endif %}
+                <script src="{% static "js/vendor/less.min.js" %}"></script>
 			{% else %}
-		    <link href="{% static 'css/cosinnus.css' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
+                {% if COSINNUS_V3_API_CONTENT_ACTIVE %}
+                    <link href="{% static 'css/cosinnus-v3-scoped.css' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
+                {% else %}
+		            <link href="{% static 'css/cosinnus.css' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
+                {% endif %}
 			{% endif %}
+
+
 	        <link href="{% static 'css/cosinnus_portal_style.css' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
 	        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
         {% endblock csshead %}

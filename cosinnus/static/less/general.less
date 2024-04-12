@@ -15,7 +15,7 @@ html {
 	height: 100%;
 }
 
-body {
+body, .x-v3-container {
 	min-height: 100%;
 	position: relative;
 }
@@ -24,24 +24,26 @@ body {
 }
 
 // spaces below full width elements
-body .fine-space,
-body .fine-space.form-control {
-    border-bottom: 1px solid @app-neutral-color-light;
-}
-body .form-control-heavy {
-    border: 1px solid @app-neutral-color-light;
-}
-body .small-space {
-    margin-bottom: 4px;
-}
-body .regular-space {
-	margin-bottom: 7px;
-}
-body .large-space {
-	margin-bottom: 12px;
-}
-body .ultra-space {
-	margin-bottom: 30px;
+.body, .x-v3-container {
+	.fine-space,
+	.fine-space.form-control {
+		border-bottom: 1px solid @app-neutral-color-light;
+	}
+	.form-control-heavy {
+		border: 1px solid @app-neutral-color-light;
+	}
+	.small-space {
+		margin-bottom: 4px;
+	}
+	.regular-space {
+		margin-bottom: 7px;
+	}
+	.large-space {
+		margin-bottom: 12px;
+	}
+	.ultra-space {
+		margin-bottom: 30px;
+	}
 }
 
 

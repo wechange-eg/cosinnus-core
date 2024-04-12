@@ -287,6 +287,9 @@ def compileless(_ctx):
         c.run(
             f'{env.lessc_binary} --clean-css ./static-collected/less/cosinnus.less ./static-collected/css/cosinnus.css'
         )
+        c.run(
+            f'{env.lessc_binary} --clean-css ./static-collected/less/cosinnus-v3-scoped.less ./static-collected/css/cosinnus-v3-scoped.css'
+        )
         for less_file in env.portal_additional_less_to_compile:
             c.run(f'{env.lessc_binary} --clean-css ./static-collected/less/{less_file}.less ./static-collected/css/{less_file}.css')
 
