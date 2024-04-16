@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 09:44+0100\n"
+"POT-Creation-Date: 2024-04-16 17:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4778,15 +4778,6 @@ msgstr ""
 msgid "You may still override these options in each conference room and in individual events."
 msgstr ""
 
-msgid "Group/Project is publicly visible"
-msgstr ""
-
-msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr ""
-
-msgid "Enable the public visibility of your group/project"
-msgstr ""
-
 #, fuzzy
 msgid "Create invite token"
 msgstr "There are no groups."
@@ -4844,12 +4835,6 @@ msgid "Platform-wide (visible for all members of the platform)"
 msgstr ""
 
 msgid "Visibility on other platforms"
-msgstr ""
-
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgstr ""
-
-msgid "This project shall be made publicly findable via other platforms."
 msgstr ""
 
 msgid "Is your project open to other partner organizations?"
@@ -5934,6 +5919,9 @@ msgid "Logged out"
 msgstr ""
 
 msgid "You have been logged out. See you again soon!"
+msgstr ""
+
+msgid "Redirecting you in 3 seconds..."
 msgstr ""
 
 msgid "Error while logging out"
@@ -7936,6 +7924,13 @@ msgstr ""
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr ""
 
+#, python-format
+msgid "Click here to view external image \"%(image_name)s\""
+msgstr ""
+
+msgid "Click here to view external image"
+msgstr ""
+
 msgid "You are not currently in any Projects"
 msgstr ""
 
@@ -8008,6 +8003,16 @@ msgid "Where is the project active?"
 msgstr ""
 
 #, fuzzy
+msgid "Project is publicly visible"
+msgstr "Public project"
+
+msgid "Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your project"
+msgstr ""
+
+#, fuzzy
 msgid "Project members only"
 msgstr "Project Type"
 
@@ -8015,6 +8020,12 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr ""
 
 msgid "Type the names of files, events or pads from this project to attach..."
+msgstr ""
+
+msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr ""
+
+msgid "This project shall be made publicly findable via other platforms."
 msgstr ""
 
 msgid "Collaborate!"
@@ -8124,6 +8135,15 @@ msgstr "Enter a name for the project."
 msgid "Where is the group active?"
 msgstr ""
 
+msgid "Group is publicly visible"
+msgstr ""
+
+msgid "Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your group"
+msgstr ""
+
 msgid "Group members only"
 msgstr ""
 
@@ -8131,6 +8151,12 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr ""
 
 msgid "Type the names of files, events or pads from this group to attach..."
+msgstr ""
+
+msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr ""
+
+msgid "This group shall be made publicly findable via other platforms."
 msgstr ""
 
 msgid "You can access and browse the group that invited you"
@@ -8245,6 +8271,16 @@ msgstr "Describe the project in a few sentences."
 msgid "Where is the conference active?"
 msgstr "Create Project"
 
+#, fuzzy
+msgid "Conference is publicly visible"
+msgstr "Create Project"
+
+msgid "Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your conference"
+msgstr ""
+
 msgid "Conference members only"
 msgstr ""
 
@@ -8252,6 +8288,12 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr ""
 
 msgid "Type the names of files, events or pads from this conference to attach..."
+msgstr ""
+
+msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr ""
+
+msgid "This conference shall be made publicly findable via other platforms."
 msgstr ""
 
 msgid "Participate!"
@@ -13619,10 +13661,6 @@ msgstr "Are you sure you want to delete this prject?"
 #, fuzzy
 #~ msgid "All societies"
 #~ msgstr "All projects"
-
-#, fuzzy
-#~ msgid "Browse this public team"
-#~ msgstr "Public project"
 
 #, fuzzy
 #~ msgid "Conference Dashboard"
