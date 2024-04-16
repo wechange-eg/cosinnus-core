@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-16 14:26+0200\n"
+"POT-Creation-Date: 2024-04-16 17:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4589,15 +4589,6 @@ msgstr "Dies wird die Standardeinstellungen für alle Tagungseinstellungen."
 msgid "You may still override these options in each conference room and in individual events."
 msgstr "Du kannst immer noch diese Optionen in jedem Tagungsraum und einzelner Veranstaltung überschreiben."
 
-msgid "Group/Project is publicly visible"
-msgstr "Gruppe/Projekt öffentlich sichtbar"
-
-msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr "Soll deine Gruppe / dein Projekt auch für nicht eingeloggte Benutzer/innen auffindbar sein? Die Microsite ist dann im Internet auffindbar und über die Suche im Portal."
-
-msgid "Enable the public visibility of your group/project"
-msgstr "Öffentliche Anzeige aktivieren"
-
 msgid "Create invite token"
 msgstr "Einladungstoken erstellen"
 
@@ -4655,12 +4646,6 @@ msgstr "Portalweit (sichtbar für alle Mitglieder des Portales)"
 
 msgid "Visibility on other platforms"
 msgstr "Sichtbarkeit auf anderen Plattformen"
-
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deinem Projekt, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr "Dieses Projekt soll über andere Plattformen öffentlich auffindbar gemacht werden."
 
 msgid "Is your project open to other partner organizations?"
 msgstr "Ist dein Projekt für die andere Partnerorganisationen offen?"
@@ -5875,6 +5860,9 @@ msgstr "Abgemeldet"
 
 msgid "You have been logged out. See you again soon!"
 msgstr "Du wurdest ausgeloggt. Bis bald!"
+
+msgid "Redirecting you in 3 seconds..."
+msgstr "Weiterleitung in 3 Sekunden..."
 
 msgid "Error while logging out"
 msgstr "Es gab einen Fehler bei der Abmeldung"
@@ -7814,6 +7802,13 @@ msgstr "Nutzungsbedingungen"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 
+#, python-format
+msgid "Click here to view external image \"%(image_name)s\""
+msgstr "Klicke hier, um das externe Bild \"%(image_name)s\" zu öffnen"
+
+msgid "Click here to view external image"
+msgstr "Klicke hier, um das externe Bild zu öffnen"
+
 msgid "You are not currently in any Projects"
 msgstr "Du bist noch in keinen Projekten Mitglied"
 
@@ -7877,6 +7872,15 @@ msgstr "Gib einen Namen für das Projekt ein."
 msgid "Where is the project active?"
 msgstr "Wo ist das Projekt aktiv?"
 
+msgid "Project is publicly visible"
+msgstr "Projekt öffentlich sichtbar"
+
+msgid "Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr "Soll dein Projekt auch für nicht eingeloggte Benutzer/innen auffindbar sein? Die Microsite ist dann im Internet auffindbar und über die Suche im Portal."
+
+msgid "Enable the public visibility of your project"
+msgstr "Öffentliche Anzeige aktivieren"
+
 msgid "Project members only"
 msgstr "Nur Projektmitglieder"
 
@@ -7885,6 +7889,12 @@ msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus diesem Projekt, um sie anzuhängen..."
+
+msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deinem Projekt, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
+
+msgid "This project shall be made publicly findable via other platforms."
+msgstr "Dieses Projekt soll über andere Plattformen öffentlich auffindbar gemacht werden."
 
 msgid "Collaborate!"
 msgstr "Mitmachen!"
@@ -7985,6 +7995,15 @@ msgstr "Gib einen Namen für die Gruppe ein."
 msgid "Where is the group active?"
 msgstr "Wo ist die Gruppe aktiv?"
 
+msgid "Group is publicly visible"
+msgstr "Gruppe öffentlich sichtbar"
+
+msgid "Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr "Soll deine Gruppe auch für nicht eingeloggte Benutzer/innen auffindbar sein? Die Microsite ist dann im Internet auffindbar und über die Suche im Portal."
+
+msgid "Enable the public visibility of your group"
+msgstr "Öffentliche Anzeige aktivieren"
+
 msgid "Group members only"
 msgstr "Nur Gruppen-Mitglieder"
 
@@ -7993,6 +8012,12 @@ msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Gruppe, um sie anzuhängen..."
+
+msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deiner Gruppe, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
+
+msgid "This group shall be made publicly findable via other platforms."
+msgstr "Diese Gruppe soll über andere Plattformen öffentlich auffindbar gemacht werden."
 
 msgid "You can access and browse the group that invited you"
 msgstr "Du kannst die Gruppe, zu der du eingeladen wurdest, aufrufen und deren Inhalte anschauen"
@@ -8094,6 +8119,15 @@ msgstr "Beschreibe die Tagung in ein paar Sätzen."
 msgid "Where is the conference active?"
 msgstr "Wo ist die Tagung aktiv?"
 
+msgid "Conference is publicly visible"
+msgstr "Tagung öffentlich sichtbar"
+
+msgid "Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr "Soll deine Tagung auch für nicht eingeloggte Benutzer/innen auffindbar sein? Die Microsite ist dann im Internet auffindbar und über die Suche im Portal."
+
+msgid "Enable the public visibility of your conference"
+msgstr "Öffentliche Anzeige aktivieren"
+
 msgid "Conference members only"
 msgstr "Nur Tagungsmitglieder"
 
@@ -8102,6 +8136,12 @@ msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Tagung um sie anzuhängen..."
+
+msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deiner Tagung, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
+
+msgid "This conference shall be made publicly findable via other platforms."
+msgstr "Diese Tagung soll über andere Plattformen öffentlich auffindbar gemacht werden."
 
 msgid "Participate!"
 msgstr "Teilnehmen!"
@@ -13616,9 +13656,6 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
-
-#~ msgid "Redirecting you in 3 seconds..."
-#~ msgstr "Weiterleitung in 3 Sekunden..."
 
 #~ msgid "Newsletter sent."
 #~ msgstr "Der Newsletter wurde abgeschickt."
