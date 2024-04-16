@@ -5,10 +5,12 @@ from builtins import str
 from collections import defaultdict
 
 import dateutil.parser
+import re
 import six
 from django.utils import dateparse
 from six.moves.urllib.parse import parse_qsl
 from copy import copy, deepcopy
+from urllib.parse import urlparse
 
 from django import template
 from django.contrib.auth import get_user_model
@@ -960,8 +962,24 @@ def textfield(text, arg=''):
             text = linebreaksbr(text)
         except Exception as e2:
             logger.warning('Even linebreaksbr crashed attempting to parse a given text with exception: %s' % e2, extra={'faulty_text': text, 'exception': e2})
-         
-    
+
+    # replace external images with links
+    image_re = r'<img src="(.*?)" alt="\s*(.*?)" />'
+    for m in reversed([it for it in re.finditer(image_re, text)]):
+        image_url = m.group(1)
+        image_domain = urlparse(image_url).hostname
+        if (
+                image_domain and image_domain != settings.COSINNUS_PORTAL_URL
+                and not image_domain.endswith(f'.{settings.COSINNUS_PORTAL_URL}')
+        ):
+            image_name = m.group(2)
+            if image_name:
+                link_label = _('Click here to view external image "%(image_name)s"') % {'image_name': image_name}
+            else:
+                link_label = _('Click here to view external image')
+            image_link = f'<a href="{image_url}" target="_blank">{link_label}&nbsp;<i class="fa fa-external-link"></i></a>'
+            text = text[:m.start()] + image_link + text[m.end():]
+
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
     return mark_safe(text)
