@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-27 09:44+0100\n"
+"POT-Creation-Date: 2024-04-11 14:26+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -5876,9 +5876,6 @@ msgstr "Abgemeldet"
 msgid "You have been logged out. See you again soon!"
 msgstr "Du wurdest ausgeloggt. Bis bald!"
 
-msgid "Redirecting you in 3 seconds..."
-msgstr "Weiterleitung in 3 Sekunden..."
-
 msgid "Error while logging out"
 msgstr "Es gab einen Fehler bei der Abmeldung"
 
@@ -8202,6 +8199,19 @@ msgstr "Bitte gib auch ein Enddatum an"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 
+msgid "Version 1.20.1 released"
+msgstr "Version 1.20.1 veröffentlicht"
+
+msgid "This update includes several bugfixes:"
+msgstr "Das Update enthält mehrere Bugfixes:"
+
+msgid ""
+"- Fixed an issue where users were not correctly redirected after logging in, making it seem like the login had failed.\n"
+"- Further minor bugfixes.\n"
+msgstr ""
+"- Ein Problem beim Login wurde behoben, bei dem die Weiterleitung fehlschlagen konnte und es so aussah, als ob der Login fehlgeschlagen sei.\n"
+"- Weitere kleine Bugfixes.\n"
+
 msgid "Version 1.20.0 released"
 msgstr "Version 1.20.0 veröffentlicht"
 
@@ -8235,9 +8245,6 @@ msgstr ""
 
 msgid "Version 1.19.6 released"
 msgstr "Version 1.19.6 veröffentlicht"
-
-msgid "This update includes several bugfixes:"
-msgstr "Das Update enthält mehrere Bugfixes:"
 
 msgid ""
 "- Users whose profile visibility is set to \"group/project members only\" are now also visible to members of groups/projects they are applying to, instead of being hidden until their membership has been accepted\n"
@@ -13609,6 +13616,9 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
+#~ msgid "Redirecting you in 3 seconds..."
+#~ msgstr "Weiterleitung in 3 Sekunden..."
 
 #~ msgid "Newsletter sent."
 #~ msgstr "Der Newsletter wurde abgeschickt."

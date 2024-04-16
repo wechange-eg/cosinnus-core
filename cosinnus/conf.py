@@ -302,7 +302,7 @@ class CosinnusConf(AppConf):
     
     # default rocketchat notification mails are on
     # (see `GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES`)
-    DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING = 0
+    DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING = 1
     
     # default setting for notifications for followed objects
     DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2 # SETTING_DAILY = 2

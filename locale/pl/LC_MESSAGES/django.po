@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-27 09:44+0100\n"
+"POT-Creation-Date: 2024-04-11 14:26+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6139,11 +6139,6 @@ msgstr "Wylogowany/a"
 msgid "You have been logged out. See you again soon!"
 msgstr ""
 
-#, fuzzy
-#| msgid "Redirect Logged in Users"
-msgid "Redirecting you in 3 seconds..."
-msgstr "Przekieruj Zalogowanych Użytkowników"
-
 msgid "Error while logging out"
 msgstr ""
 
@@ -8536,6 +8531,17 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 1.20.1 released"
+msgstr ""
+
+msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed an issue where users were not correctly redirected after logging in, making it seem like the login had failed.\n"
+"- Further minor bugfixes.\n"
+msgstr ""
+
 msgid "Version 1.20.0 released"
 msgstr ""
 
@@ -8557,9 +8563,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 1.19.6 released"
-msgstr ""
-
-msgid "This update includes several bugfixes:"
 msgstr ""
 
 msgid ""
@@ -14141,6 +14144,11 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Czy na pewno chcesz usunąć ten zespół?"
+
+#, fuzzy
+#~| msgid "Redirect Logged in Users"
+#~ msgid "Redirecting you in 3 seconds..."
+#~ msgstr "Przekieruj Zalogowanych Użytkowników"
 
 #~ msgid "Pre-filled content for the information field"
 #~ msgstr "Wstępnie wypełnione treścią pola informacji"
