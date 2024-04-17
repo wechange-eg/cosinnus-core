@@ -14,7 +14,7 @@
 
 {% block extrahead %}
     {{ block.super }}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.welcome_email_text.id_for_label translation_form=form translated_field_name=form.welcome_email_text.html_name %}
 {% endblock %}
 
 

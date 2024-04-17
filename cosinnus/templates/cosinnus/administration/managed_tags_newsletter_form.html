@@ -24,7 +24,7 @@
 
 {% block extrahead %}
 	{{ block.super }}
-	{% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
+	{% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.body.id_for_label %}
 	
     {% comment %} Hides the "Send" button on any change to the newsletter {% endcomment %}
     <script type="text/javascript">
