@@ -633,6 +633,7 @@ class CosinnusConf(AppConf):
         'filter_panel_default_visible': False, # whether the dropdown filter panel should be visible on load
         'ignore_location_default_activated': False, # whether the "In map area" button should be off on load
         'exchange_default_activated': True, # whether the "also show external contents" button should be off on load
+        'clustering_enabled': False, # whether to use Leaflets markercluster
     }
     
     # how many results per map results page are shown,

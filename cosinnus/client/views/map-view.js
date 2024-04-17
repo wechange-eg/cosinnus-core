@@ -75,8 +75,7 @@ module.exports = ContentControlView.extend({
         enableDetailSelection: true,
         
         // shall we cluster close markers together
-        clusteringEnabled: false,
-        clusterZoomThreshold: 5,
+        clusteringEnabled: util.ifundef(COSINNUS_MAP_OPTIONS.clustering_enabled,  false),
         maxClusterRadius: 15,
         
         // should drag and zoom options that disrupt page UX on mobile be disabled
@@ -131,8 +130,6 @@ module.exports = ContentControlView.extend({
             // the curren Leaflet layer object
             currentLayer: null,
 
-            // are we currently seeing clustered markers?
-            currentlyClustering: false,
             // the current open spider cluster handle, or null if no spider open
             currentSpiderfied: null,
             
@@ -149,7 +146,6 @@ module.exports = ContentControlView.extend({
         // this calls self.applyUrlSearchParameters()
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
-        self.state.currentlyClustering = self.options.clusteringEnabled;
         self.state.mobileSafeInteractions = self.options.mobileSafeInteractions;
         
         Backbone.mediator.subscribe('change:bounds', self.fitBounds, self);
@@ -221,7 +217,7 @@ module.exports = ContentControlView.extend({
     // --------------
     
     /**
-     * 
+     * Note: The clusterLevel and clusterCoords parameters are ignored when Leaflets clustering is used.
      * @param result: Result model
      * @param isLargeMarker: (optional) bool. make this marker icon large?
      * @param clusterLevel: (optional) int. if supplied, the result is considered in a cluster, at this rank. 0 means base cluster-marker
@@ -240,17 +236,25 @@ module.exports = ContentControlView.extend({
         if (result.id in this.markers) {
             this.markerRemove(result);
         }
-        
-        // for clustered markers, every marker but the base marker becomes a stacked marker.
-        var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0, clusterLevel == 0);
+
+        var markerIcon;
         var coords = clusterCoords ? clusterCoords : [result.get('lat'), result.get('lon')];
-        var isPointedMarker = isLargeMarker || typeof clusterLevel !== 'undefined' || clusterLevel == 0;
+        var isPointedMarker = false;
         var clusterOffset = 0;
-        
-        // add clusterLevel as offset
-        if (typeof clusterLevel !== 'undefined' && clusterLevel > 0) {
-            clusterOffset = this.options.MARKER_STACK_PX_OFFSET_BASE + (this.options.MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL * clusterLevel);
+        if (!this.options.clusteringEnabled) {
+            // for clustered markers, every marker but the base marker becomes a stacked marker.
+            markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0, clusterLevel == 0);
+            isPointedMarker = isLargeMarker || typeof clusterLevel !== 'undefined' || clusterLevel == 0;
+
+            // add clusterLevel as offset
+            if (typeof clusterLevel !== 'undefined' && clusterLevel > 0) {
+                clusterOffset = this.options.MARKER_STACK_PX_OFFSET_BASE + (this.options.MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL * clusterLevel);
+            }
+        } else {
+            // When using Leaflets marker cluster we use a stacked marker and no clusterOffset.
+            markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, true, false);
         }
+
         //util.log('adding marker at coords ' + JSON.stringify(coords))
         
         var marker = L.marker(coords, {
@@ -287,9 +291,9 @@ module.exports = ContentControlView.extend({
             self.App.controlView.setHoveredResult(null);
         });
         
-        
+
         if (!this.options.keepOpenMarkersAfterResultChange || (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker))) {
-            if (this.state.currentlyClustering) {
+            if (this.options.clusteringEnabled) {
                 this.clusteredMarkers.addLayer(marker);
             } else {
                 marker.addTo(this.leaflet);
@@ -338,7 +342,7 @@ module.exports = ContentControlView.extend({
         if (result.id in this.markers) {
             var marker = this.markers[result.id];
             
-            if (this.state.currentlyClustering) {
+            if (this.options.clusteringEnabled) {
                 this.clusteredMarkers.removeLayer(marker);
             } else {
                 this.leaflet.removeLayer(marker);
@@ -559,7 +563,6 @@ module.exports = ContentControlView.extend({
             });
             this.clusteredMarkers.on('spiderfied', this.handleSpiderfied, this);
             this.leaflet.addLayer(this.clusteredMarkers);
-            this.setClusterState();
         }
         
         // if an initial location was defined, set that location and zoom as initial viewport
@@ -626,14 +629,6 @@ module.exports = ContentControlView.extend({
         this.state.zoom = this.leaflet._zoom;
     },
 
-    setClusterState: function () {
-        if (this.options.clusteringEnabled) {
-            // Set clustering state: cluster only when zoomed in enough.
-            var zoom = this.leaflet.getZoom();
-            this.state.currentlyClustering = zoom > this.options.clusterZoomThreshold;
-        }
-    },
-    
     /** Gets a dict of {iconUrl: <str>, iconWidth: <int>, iconHeight: <int>}
      *  for a given type corresponding to model Result.type. */
     getMarkerIconForType: function(resultType, isLargeMarker, isStackedMarker, isBaseMarker) {
@@ -722,7 +717,6 @@ module.exports = ContentControlView.extend({
     */
 
     handleViewportChange: function () {
-        this.setClusterState();
         this.updateBounds();
         this.updateClusterDistances();
         Backbone.mediator.publish('app:stale-results', {reason: 'viewport-changed'});
