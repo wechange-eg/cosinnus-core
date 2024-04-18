@@ -21,7 +21,7 @@
 
         {% block contact_message_field %}
             {% if form %}
-                <form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="POST">
+                <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="POST">
                     {% csrf_token %}
                     {% trans "What is your message?" as contact_message_form_label %}
                     {% trans "Write it here" as contact_message_form_placeholder %}

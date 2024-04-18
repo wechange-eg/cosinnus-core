@@ -3,7 +3,7 @@
 
 {% block extrahead %}
     {{ block.super }}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.form.obj.description.id_for_label %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
 {% endblock %}
 
 {% block page_title %}
@@ -41,7 +41,7 @@
     </div>
 {% endif %}
     
-<form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="cosinnus-form form-horizontal" enctype="multipart/form-data">{% csrf_token %}
+<form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" class="cosinnus-form form-horizontal" enctype="multipart/form-data">{% csrf_token %}
     
     {{ form.forms.obj.media }}
     {{ form.forms.obj.non_field_errors }}

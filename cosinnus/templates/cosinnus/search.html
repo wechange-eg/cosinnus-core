@@ -8,7 +8,7 @@
 {% block main_page %}
     {% include 'cosinnus/extra_body_header.html' %}
     <div class="row">
-        <form method="get" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" role="form">
+        <form method="get" action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" role="form">
         
           {% if request.GET.models %}
               <input type="hidden" name="models" value="{{ request.GET.models }}" />

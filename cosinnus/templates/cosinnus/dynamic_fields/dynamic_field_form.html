@@ -54,7 +54,7 @@
     <h3>WIP: Diese Felder sind aktuell semikolon-getrennt, werden bald aber richtige Multi-auswahlfelder sein!</h3>
 
 	{% for form in forms %}
-	    <form id="{{form.id}}" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" class="cosinnus-form form-horizontal" role="form">
+	    <form id="{{form.id}}" action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" class="cosinnus-form form-horizontal" role="form">
 	      {% csrf_token %}
 	
 	        <!-- a box with semi transparent background -->

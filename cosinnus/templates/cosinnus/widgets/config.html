@@ -22,7 +22,7 @@
     
     <div id="widget_forms_{{ widget_data.0.form_id }}">
         {% for widget in widget_data %}
-            <form id="{{ widget.form_id }}" data-widget-app="{{ widget.app_name }}" data-widget-widget="{{ widget.widget_name }}" {% if not widget.form_active or widget.form_active != True %}style="display:none;"{% endif %} action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="POST" class="form-horizontal" role="form">
+            <form id="{{ widget.form_id }}" data-widget-app="{{ widget.app_name }}" data-widget-widget="{{ widget.widget_name }}" {% if not widget.form_active or widget.form_active != True %}style="display:none;"{% endif %} action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="POST" class="form-horizontal" role="form">
                 {% csrf_token %}
                 {{ widget.form_content|safe }}
             </form>

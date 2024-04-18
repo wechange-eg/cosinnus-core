@@ -11,6 +11,15 @@ UPDATES includes release notes for each version shown to the users with:
 """
 
 UPDATES = {
+    '1.20.2': {
+        'datetime': datetime(2024, 4, 18, tzinfo=pytz.utc),
+        'title': _('Version 1.20.2 released'),
+        'short_text': _('This update includes several bugfixes:'),
+        'full_text': _(
+            '- Fixed an issue with the Markdown text editor in some forms.\n'
+            '- Fixed an issue where certain login or signup flows were sometimes not redirecting properly.\n'
+        ),
+    },
     '1.20.1': {
         'datetime': datetime(2024, 4, 11, tzinfo=pytz.utc),
         'title': _('Version 1.20.1 released'),
