@@ -19,7 +19,7 @@
 	
         {% if form_view == "import-ready" or form_view == "invalid" or form_view == "failed" %}
             <div class="large-space">
-		        <form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" enctype="multipart/form-data">
+		        <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" enctype="multipart/form-data">
 	                {% csrf_token %}
 	                
 	                <input type="hidden" name="action" value="scrap" />
@@ -41,7 +41,7 @@
 	        </div>
 	    {% endif %}
 	
-		<form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" enctype="multipart/form-data">
+		<form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" enctype="multipart/form-data">
 		    {% csrf_token %}
             {{ form.non_field_errors }}
 		    

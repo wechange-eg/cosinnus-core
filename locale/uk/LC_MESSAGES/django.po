@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-11 14:26+0200\n"
+"POT-Creation-Date: 2024-04-18 21:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4800,16 +4800,6 @@ msgid "You may still override these options in each conference room and in indiv
 msgstr ""
 
 #, fuzzy
-msgid "Group/Project is publicly visible"
-msgstr "Цей проєкт має бути налаштований як загальнодоступна!"
-
-msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr ""
-
-msgid "Enable the public visibility of your group/project"
-msgstr ""
-
-#, fuzzy
 #| msgid "Delete invitation"
 msgid "Create invite token"
 msgstr "Видалити запрошення"
@@ -4877,12 +4867,6 @@ msgstr ""
 
 msgid "Visibility on other platforms"
 msgstr "Видимість на інших платформах"
-
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgstr "Тут ви можете контролювати, чи публічна інформація про ваш проєкт, наприклад, назва та адреса, буде передана на  <a href=\"#\" target=\"_blank\">партнерські платформи через </a>WECHANGE."
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr "Цей проект має бути доступним для пошуку через інші платформи."
 
 msgid "Is your project open to other partner organizations?"
 msgstr ""
@@ -6109,6 +6093,11 @@ msgstr "Здійснено вихід із системи"
 
 msgid "You have been logged out. See you again soon!"
 msgstr ""
+
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "Перенаправити зареєстрованих користувачів"
 
 msgid "Error while logging out"
 msgstr ""
@@ -8101,6 +8090,13 @@ msgstr "Умови користування"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Візуалізатора для %(model_name)s не знайдено</i>!"
 
+#, python-format
+msgid "Click here to view external image \"%(image_name)s\""
+msgstr ""
+
+msgid "Click here to view external image"
+msgstr ""
+
 msgid "You are not currently in any Projects"
 msgstr "Тебе ще немає в жодній Групі або Проєкті"
 
@@ -8164,6 +8160,16 @@ msgstr "Уведіть назву для проєкту."
 msgid "Where is the project active?"
 msgstr "У якій сфері проєкт буде активний?"
 
+#, fuzzy
+msgid "Project is publicly visible"
+msgstr "Цей проєкт має бути налаштований як загальнодоступна!"
+
+msgid "Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your project"
+msgstr ""
+
 msgid "Project members only"
 msgstr "Тільки члени команди"
 
@@ -8172,6 +8178,14 @@ msgstr "Користувачі можуть приєднатися, надісл
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr "Введіть назви файлів, подій або педів цього проєкту, щоб додати ..."
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Тут ви можете контролювати, чи публічна інформація про ваш проєкт, наприклад, назва та адреса, буде передана на  <a href=\"#\" target=\"_blank\">партнерські платформи через </a>WECHANGE."
+
+msgid "This project shall be made publicly findable via other platforms."
+msgstr "Цей проект має бути доступним для пошуку через інші платформи."
 
 msgid "Collaborate!"
 msgstr "Співпрацювати!"
@@ -8276,6 +8290,18 @@ msgstr "Уведіть назву для групи."
 msgid "Where is the group active?"
 msgstr "У якій сфері група активна?"
 
+#, fuzzy
+msgid "Group is publicly visible"
+msgstr "Цей проєкт має бути налаштований як загальнодоступна!"
+
+msgid "Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide public items outside of your groups"
+msgid "Enable the public visibility of your group"
+msgstr "Приховати публічні дописи, що не стосуються ваших груп"
+
 msgid "Group members only"
 msgstr "Тільки члени команди"
 
@@ -8284,6 +8310,16 @@ msgstr "Користувачі можуть приєднатися, надісл
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr "Введіть назви файлів, подій або педів із цієї групи, щоб додати ..."
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Тут ви можете контролювати, чи публічна інформація про ваш проєкт, наприклад, назва та адреса, буде передана на  <a href=\"#\" target=\"_blank\">партнерські платформи через </a>WECHANGE."
+
+#, fuzzy
+#| msgid "This project shall be made publicly findable via other platforms."
+msgid "This group shall be made publicly findable via other platforms."
+msgstr "Цей проект має бути доступним для пошуку через інші платформи."
 
 msgid "You can access and browse the group that invited you"
 msgstr ""
@@ -8389,6 +8425,16 @@ msgstr "Опишіть конференцію кількома реченням�
 msgid "Where is the conference active?"
 msgstr "У якій сфері конференція активно працює?"
 
+#, fuzzy
+msgid "Conference is publicly visible"
+msgstr "Цей проєкт має бути налаштований як загальнодоступна!"
+
+msgid "Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your conference"
+msgstr ""
+
 msgid "Conference members only"
 msgstr "Лише для членів конференції"
 
@@ -8397,6 +8443,16 @@ msgstr "Користувачі можуть приєднатися, подавш
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr "Введіть назви файлів, подій або блоків із цієї конференції, щоб додати ..."
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Тут ви можете контролювати, чи публічна інформація про ваш проєкт, наприклад, назва та адреса, буде передана на  <a href=\"#\" target=\"_blank\">партнерські платформи через </a>WECHANGE."
+
+#, fuzzy
+#| msgid "This project shall be made publicly findable via other platforms."
+msgid "This conference shall be made publicly findable via other platforms."
+msgstr "Цей проект має бути доступним для пошуку через інші платформи."
 
 msgid "Participate!"
 msgstr "Взяти участь!"
@@ -8501,10 +8557,18 @@ msgstr "Вкажіть також дату завершення"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
-msgid "Version 1.20.1 released"
+msgid "Version 1.20.2 released"
 msgstr ""
 
 msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed an issue with the Markdown text editor in some forms.\n"
+"- Fixed an issue where certain login or signup flows were sometimes not redirecting properly.\n"
+msgstr ""
+
+msgid "Version 1.20.1 released"
 msgstr ""
 
 msgid ""
@@ -14119,11 +14183,6 @@ msgstr "Ви справді бажаєте видалити цю команду?
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Ви справді бажаєте видалити цю команду?"
-
-#, fuzzy
-#~| msgid "Redirect Logged in Users"
-#~ msgid "Redirecting you in 3 seconds..."
-#~ msgstr "Перенаправити зареєстрованих користувачів"
 
 #~ msgid "Pre-filled content for the information field"
 #~ msgstr "Попередньо заповнені змістом інформаційні поля"

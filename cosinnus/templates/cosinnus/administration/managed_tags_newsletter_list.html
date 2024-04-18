@@ -17,11 +17,6 @@
     </li>
 {% endblock %}
 
-{% block extrahead %}
-    {{ block.super }}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
-{% endblock %}
-
 {% block content %}
 	<div class="content-box">
 	    <h2>

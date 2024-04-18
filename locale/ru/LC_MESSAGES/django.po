@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-11 14:26+0200\n"
+"POT-Creation-Date: 2024-04-18 21:27+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4701,15 +4701,6 @@ msgstr "Эти настройки станут настройками по ум�
 msgid "You may still override these options in each conference room and in individual events."
 msgstr "Вы можете переписать эти опции для каждой конференции и для каждого мероприятия."
 
-msgid "Group/Project is publicly visible"
-msgstr "Общедоступность группы/проекта"
-
-msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr "Должны ли Ваша группа / Ваш проект быть доступны для анонимных пользователей? Микросайт может быть найден через поиск Интернета и внутренний поиск портала."
-
-msgid "Enable the public visibility of your group/project"
-msgstr "Сделать группу/проект общедоступным"
-
 msgid "Create invite token"
 msgstr "Создать гостевой токен"
 
@@ -4772,12 +4763,6 @@ msgstr "Публичный доступ для пользователей пор
 
 msgid "Visibility on other platforms"
 msgstr "Видимость на других платформах"
-
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
 
 msgid "Is your project open to other partner organizations?"
 msgstr "Проект открыт для иных партнерских организаций?"
@@ -6001,6 +5986,11 @@ msgstr "Вы вышли из системы"
 
 msgid "You have been logged out. See you again soon!"
 msgstr "Был произведен выход из твоей учётной записи. До скорой встречи снова!"
+
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "Перенаправление зарегистрированных пользователей"
 
 msgid "Error while logging out"
 msgstr "Ошибка при выходе из учётной записи"
@@ -7976,6 +7966,15 @@ msgstr "Условия пользования сайтом"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Невозможно провести рендеринг для %(model_name)s!</i>"
 
+#, python-format
+msgid "Click here to view external image \"%(image_name)s\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Click here to send the validation link again."
+msgid "Click here to view external image"
+msgstr "Нажмите сюда, чтобы повторить отправку ссылки на валидацию."
+
 msgid "You are not currently in any Projects"
 msgstr "Тебя пока нет ни в одном проекте"
 
@@ -8039,6 +8038,21 @@ msgstr "Введите название проекта."
 msgid "Where is the project active?"
 msgstr "Где Вы проводите свой проект?"
 
+#, fuzzy
+#| msgid "Group/Project is publicly visible"
+msgid "Project is publicly visible"
+msgstr "Общедоступность группы/проекта"
+
+#, fuzzy
+#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgid "Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr "Должны ли Ваша группа / Ваш проект быть доступны для анонимных пользователей? Микросайт может быть найден через поиск Интернета и внутренний поиск портала."
+
+#, fuzzy
+#| msgid "Enable the public visibility of your group/project"
+msgid "Enable the public visibility of your project"
+msgstr "Сделать группу/проект общедоступным"
+
 msgid "Project members only"
 msgstr "Только для членов проекта или группы"
 
@@ -8047,6 +8061,14 @@ msgstr "Пользователи могут присоединиться к пр
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr "Напишите название файла, события или пада проекта, чтобы приложить…"
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
+
+msgid "This project shall be made publicly findable via other platforms."
+msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
 
 msgid "Collaborate!"
 msgstr "Давайте сотрудничать!"
@@ -8151,6 +8173,21 @@ msgstr "Введите название группы."
 msgid "Where is the group active?"
 msgstr "Где Вы проводите свой проект?"
 
+#, fuzzy
+#| msgid "Group/Project is publicly visible"
+msgid "Group is publicly visible"
+msgstr "Общедоступность группы/проекта"
+
+#, fuzzy
+#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgid "Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr "Должны ли Ваша группа / Ваш проект быть доступны для анонимных пользователей? Микросайт может быть найден через поиск Интернета и внутренний поиск портала."
+
+#, fuzzy
+#| msgid "Enable the public visibility of your group/project"
+msgid "Enable the public visibility of your group"
+msgstr "Сделать группу/проект общедоступным"
+
 msgid "Group members only"
 msgstr "Только для членов проекта или группы"
 
@@ -8159,6 +8196,16 @@ msgstr "Пользователи могут присоединиться пут�
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr "Напишите название файла, события или пада проекта, чтобы приложить…"
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
+
+#, fuzzy
+#| msgid "This project shall be made publicly findable via other platforms."
+msgid "This group shall be made publicly findable via other platforms."
+msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
 
 msgid "You can access and browse the group that invited you"
 msgstr ""
@@ -8264,6 +8311,21 @@ msgstr "Описать проект в нескольких предложени
 msgid "Where is the conference active?"
 msgstr "Где Вы проводите свой проект?"
 
+#, fuzzy
+#| msgid "Group/Project is publicly visible"
+msgid "Conference is publicly visible"
+msgstr "Общедоступность группы/проекта"
+
+#, fuzzy
+#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgid "Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr "Должны ли Ваша группа / Ваш проект быть доступны для анонимных пользователей? Микросайт может быть найден через поиск Интернета и внутренний поиск портала."
+
+#, fuzzy
+#| msgid "Enable the public visibility of your group/project"
+msgid "Enable the public visibility of your conference"
+msgstr "Сделать группу/проект общедоступным"
+
 msgid "Conference members only"
 msgstr "Цвет темы конференции"
 
@@ -8272,6 +8334,16 @@ msgstr "Пользователи могут присоединиться пут�
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr "Напишите название файла, события или пада проекта, чтобы приложить…"
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
+
+#, fuzzy
+#| msgid "This project shall be made publicly findable via other platforms."
+msgid "This conference shall be made publicly findable via other platforms."
+msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
 
 msgid "Participate!"
 msgstr "Присоединиться!"
@@ -8375,10 +8447,18 @@ msgstr "Пожалуйста, укажите дату конца"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Убедись, что твоё имя не содержит недопустимые символы."
 
-msgid "Version 1.20.1 released"
+msgid "Version 1.20.2 released"
 msgstr ""
 
 msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed an issue with the Markdown text editor in some forms.\n"
+"- Fixed an issue where certain login or signup flows were sometimes not redirecting properly.\n"
+msgstr ""
+
+msgid "Version 1.20.1 released"
 msgstr ""
 
 msgid ""
@@ -13796,11 +13876,6 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Вы уверены, что хотите удалить этот проект?"
-
-#, fuzzy
-#~| msgid "Redirect Logged in Users"
-#~ msgid "Redirecting you in 3 seconds..."
-#~ msgstr "Перенаправление зарегистрированных пользователей"
 
 #~ msgid "Your match with %(sender_name)s has just been established!"
 #~ msgstr "Твоё совпадение с %(sender_name)s было установлено!"

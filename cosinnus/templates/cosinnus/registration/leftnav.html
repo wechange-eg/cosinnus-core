@@ -10,12 +10,12 @@
     {% captureas is_reset_password %}True{% endcaptureas %}
 {% endif %}
 
-{% captureas href %}{% url "login" %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}{% if request.GET.mtag %}?mtag={{ request.GET.mtag }}{% endif %}{% endcaptureas %}
+{% captureas href %}{% url "login" %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}{% if request.GET.mtag %}?mtag={{ request.GET.mtag }}{% endif %}{% endcaptureas %}
 {% captureas label %}{% trans "Log in" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_login extra_classes="fine-space" icon="fa-hand-o-right" label=label href=href  %}
 
 {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
-	{% captureas href %}{% url "cosinnus:user-add" %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}{% if request.GET.mtag %}?mtag={{ request.GET.mtag }}{% endif %}{% endcaptureas %}
+	{% captureas href %}{% url "cosinnus:user-add" %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}{% if request.GET.mtag %}?mtag={{ request.GET.mtag }}{% endif %}{% endcaptureas %}
 	{% captureas label %}{% trans "Register" %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_signup extra_classes="large-space" icon="fa-user" label=label href=href  %}
 {% endif %}

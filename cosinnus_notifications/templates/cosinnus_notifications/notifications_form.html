@@ -40,7 +40,7 @@
         </div>
     {% endif %}
 
-    <form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">{% csrf_token %}
+    <form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">{% csrf_token %}
         
         <div class="content-box large-space">
             <div class="row">

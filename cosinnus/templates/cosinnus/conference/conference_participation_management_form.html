@@ -13,7 +13,7 @@
 {% endblock leftnav %}
 
 {% block content %}
-    <form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" enctype="multipart/form-data" class="cosinnus-form" >
+    <form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" enctype="multipart/form-data" class="cosinnus-form" >
         {% csrf_token %}
         {{ form.media }}
 	    {{ form.non_field_errors }}

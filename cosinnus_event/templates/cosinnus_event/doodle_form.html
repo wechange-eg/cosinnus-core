@@ -3,7 +3,7 @@
 
 {% block extrahead %}
     {{ block.super }}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.form.obj.note.id_for_label %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.note.id_for_label %}
 {% endblock %}
 
 {% block page_title %}
@@ -44,7 +44,7 @@
     {{ form.forms.obj.non_field_errors }}
     {{ form.forms.media_tag.non_field_errors }}
 
-    <form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" id="form-event" class="cosinnus-form form-horizontal">{% csrf_token %}
+    <form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" id="form-event" class="cosinnus-form form-horizontal">{% csrf_token %}
 	    <div class="content-box">
 	        {% for formset in inlines %}
 	            {{ formset.management_form }}

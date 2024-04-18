@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-11 14:26+0200\n"
+"POT-Creation-Date: 2024-04-18 21:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4805,15 +4805,6 @@ msgstr "Ce sera le paramètre par défaut pour tout contenu créé par les membr
 msgid "You may still override these options in each conference room and in individual events."
 msgstr ""
 
-msgid "Group/Project is publicly visible"
-msgstr "Le groupe/projet est visible publiquement"
-
-msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr "Votre groupe/projet doit-il être visible pour les utilisateurs anonymes ? Le microsite peut être trouvé via Internet et le portail de recherche."
-
-msgid "Enable the public visibility of your group/project"
-msgstr "Activer la visibilité publique de votre groupe/projet"
-
 #, fuzzy
 #| msgid "Delete invitation"
 msgid "Create invite token"
@@ -4882,12 +4873,6 @@ msgstr ""
 
 msgid "Visibility on other platforms"
 msgstr "Visibilité sur d'autres plateformes"
-
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
 
 msgid "Is your project open to other partner organizations?"
 msgstr ""
@@ -6122,6 +6107,11 @@ msgstr "Déconnecté"
 
 msgid "You have been logged out. See you again soon!"
 msgstr ""
+
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "Rediriger les utilisateurs connectés"
 
 msgid "Error while logging out"
 msgstr ""
@@ -8120,6 +8110,13 @@ msgstr "Conditions d'utilisation"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Rendu pour %(model_name)s introuvable !</i>"
 
+#, python-format
+msgid "Click here to view external image \"%(image_name)s\""
+msgstr ""
+
+msgid "Click here to view external image"
+msgstr ""
+
 msgid "You are not currently in any Projects"
 msgstr "Tu n’es actuellement dans aucun projet"
 
@@ -8181,6 +8178,21 @@ msgstr "Entre un nom pour le projet."
 msgid "Where is the project active?"
 msgstr "Où le projet est-il actif ?"
 
+#, fuzzy
+#| msgid "Group/Project is publicly visible"
+msgid "Project is publicly visible"
+msgstr "Le groupe/projet est visible publiquement"
+
+#, fuzzy
+#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgid "Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr "Votre groupe/projet doit-il être visible pour les utilisateurs anonymes ? Le microsite peut être trouvé via Internet et le portail de recherche."
+
+#, fuzzy
+#| msgid "Enable the public visibility of your group/project"
+msgid "Enable the public visibility of your project"
+msgstr "Activer la visibilité publique de votre groupe/projet"
+
 msgid "Project members only"
 msgstr "Membres du projet seulement"
 
@@ -8189,6 +8201,14 @@ msgstr "Les utilisateurs peuvent se joindre en soumettant une demande d’adhés
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
+
+msgid "This project shall be made publicly findable via other platforms."
+msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
 
 msgid "Collaborate!"
 msgstr "Collabore !"
@@ -8290,6 +8310,21 @@ msgstr "Entre un nom pour le groupe."
 msgid "Where is the group active?"
 msgstr "Où le groupe est-il actif?"
 
+#, fuzzy
+#| msgid "Group/Project is publicly visible"
+msgid "Group is publicly visible"
+msgstr "Le groupe/projet est visible publiquement"
+
+#, fuzzy
+#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgid "Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr "Votre groupe/projet doit-il être visible pour les utilisateurs anonymes ? Le microsite peut être trouvé via Internet et le portail de recherche."
+
+#, fuzzy
+#| msgid "Enable the public visibility of your group/project"
+msgid "Enable the public visibility of your group"
+msgstr "Activer la visibilité publique de votre groupe/projet"
+
 msgid "Group members only"
 msgstr "Membres du groupe seulement"
 
@@ -8298,6 +8333,16 @@ msgstr "Les utilisateurs peuvent se joindre en soumettant une demande d’adhés
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
+
+#, fuzzy
+#| msgid "This project shall be made publicly findable via other platforms."
+msgid "This group shall be made publicly findable via other platforms."
+msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
 
 msgid "You can access and browse the group that invited you"
 msgstr ""
@@ -8398,6 +8443,21 @@ msgstr "Décris la conférence en quelques phrases."
 msgid "Where is the conference active?"
 msgstr "Où la conférence est-elle active ?"
 
+#, fuzzy
+#| msgid "Group/Project is publicly visible"
+msgid "Conference is publicly visible"
+msgstr "Le groupe/projet est visible publiquement"
+
+#, fuzzy
+#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgid "Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr "Votre groupe/projet doit-il être visible pour les utilisateurs anonymes ? Le microsite peut être trouvé via Internet et le portail de recherche."
+
+#, fuzzy
+#| msgid "Enable the public visibility of your group/project"
+msgid "Enable the public visibility of your conference"
+msgstr "Activer la visibilité publique de votre groupe/projet"
+
 msgid "Conference members only"
 msgstr "Membres de la conférence seulement"
 
@@ -8406,6 +8466,16 @@ msgstr "Les utilisateurs peuvent se joindre en soumettant une demande d’adhés
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
+
+#, fuzzy
+#| msgid "This project shall be made publicly findable via other platforms."
+msgid "This conference shall be made publicly findable via other platforms."
+msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
 
 msgid "Participate!"
 msgstr "Participe !"
@@ -8509,10 +8579,18 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
-msgid "Version 1.20.1 released"
+msgid "Version 1.20.2 released"
 msgstr ""
 
 msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed an issue with the Markdown text editor in some forms.\n"
+"- Fixed an issue where certain login or signup flows were sometimes not redirecting properly.\n"
+msgstr ""
+
+msgid "Version 1.20.1 released"
 msgstr ""
 
 msgid ""
@@ -14107,11 +14185,6 @@ msgstr "Veux-tu vraiment supprimer cette équipe ?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Veux-tu vraiment supprimer cette équipe ?"
-
-#, fuzzy
-#~| msgid "Redirect Logged in Users"
-#~ msgid "Redirecting you in 3 seconds..."
-#~ msgstr "Rediriger les utilisateurs connectés"
 
 #~ msgid "Pre-filled content for the information field"
 #~ msgstr "Contenu pré-rempli pour le domaine de l’information"

@@ -26,7 +26,7 @@
 	        </div>
 	    </div>
 	{% else %}
-		<form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="cosinnus-form">
+		<form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" class="cosinnus-form">
 		    {% csrf_token %}
 		    {{ form.media }}
 		    {{ form.non_field_errors }}

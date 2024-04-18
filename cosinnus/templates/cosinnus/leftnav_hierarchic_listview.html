@@ -30,7 +30,7 @@
 {% endfor %}
 
 {% if user|can_create_objects_in:group %}
-	<form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" name="container_form" method="post"class="form-horizontal" autocomplete="off">{% csrf_token %}
+	<form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" name="container_form" method="post"class="form-horizontal" autocomplete="off">{% csrf_token %}
 	    <div type="button" class="btn btn-default w100">
 	        <ul class="media-list">
 	            <li class="media">

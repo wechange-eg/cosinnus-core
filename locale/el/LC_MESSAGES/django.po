@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-11 14:26+0200\n"
+"POT-Creation-Date: 2024-04-18 21:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4802,16 +4802,6 @@ msgid "You may still override these options in each conference room and in indiv
 msgstr ""
 
 #, fuzzy
-msgid "Group/Project is publicly visible"
-msgstr "Αυτό το έργο θα οριστεί να είναι δημόσια ορατό!"
-
-msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr ""
-
-msgid "Enable the public visibility of your group/project"
-msgstr ""
-
-#, fuzzy
 #| msgid "Delete invitation"
 msgid "Create invite token"
 msgstr "Διαγραφή πρόσκλησης"
@@ -4879,12 +4869,6 @@ msgstr ""
 
 msgid "Visibility on other platforms"
 msgstr "Ορατότητα σε άλλες πλατφόρμες"
-
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgstr "Εδώ μπορείτε να ελέγξετε εάν οι δημόσια ορατές πληροφορίες σχετικά με το έργο σας, όπως όνομα και διεύθυνση, αποστέλλονται σε <a href=\"#\" target=\"_blank\">partner platforms</a> μέσω WECHANGE."
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr "Αυτό το έργο θα είναι δυνατόν να βρεθεί δημόσια μέσω άλλης πλατφόρμας."
 
 msgid "Is your project open to other partner organizations?"
 msgstr ""
@@ -6113,6 +6097,11 @@ msgstr "Αποσυνδεδεμένος"
 
 msgid "You have been logged out. See you again soon!"
 msgstr ""
+
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "Ανακατεύθυνση Συνδεδεμένων Χρηστών"
 
 msgid "Error while logging out"
 msgstr ""
@@ -8108,6 +8097,13 @@ msgstr ""
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Δεν βρέθηκε απόδοση %(model_name)s!</i>"
 
+#, python-format
+msgid "Click here to view external image \"%(image_name)s\""
+msgstr ""
+
+msgid "Click here to view external image"
+msgstr ""
+
 msgid "You are not currently in any Projects"
 msgstr "Δεν είστε αυτή τη στιγμή σε κάποιο Έργο"
 
@@ -8169,6 +8165,16 @@ msgstr "Εισάγετε όνομα για το έργο."
 msgid "Where is the project active?"
 msgstr "Πού είναι ενεργό το έργο;"
 
+#, fuzzy
+msgid "Project is publicly visible"
+msgstr "Αυτό το έργο θα οριστεί να είναι δημόσια ορατό!"
+
+msgid "Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your project"
+msgstr ""
+
 msgid "Project members only"
 msgstr "Μόνο μέλη του έργου"
 
@@ -8177,6 +8183,14 @@ msgstr "Οι χρήστες μπορούν να συμμετάσχουν υπο�
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Εδώ μπορείτε να ελέγξετε εάν οι δημόσια ορατές πληροφορίες σχετικά με το έργο σας, όπως όνομα και διεύθυνση, αποστέλλονται σε <a href=\"#\" target=\"_blank\">partner platforms</a> μέσω WECHANGE."
+
+msgid "This project shall be made publicly findable via other platforms."
+msgstr "Αυτό το έργο θα είναι δυνατόν να βρεθεί δημόσια μέσω άλλης πλατφόρμας."
 
 msgid "Collaborate!"
 msgstr "Συνεργαστείτε!"
@@ -8277,6 +8291,18 @@ msgstr "Εισάγετε όνομα για την ομάδα."
 msgid "Where is the group active?"
 msgstr "Πού είναι ενεργή η ομάδα;"
 
+#, fuzzy
+msgid "Group is publicly visible"
+msgstr "Αυτό το έργο θα οριστεί να είναι δημόσια ορατό!"
+
+msgid "Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+#, fuzzy
+#| msgid "Hide public items outside of your groups"
+msgid "Enable the public visibility of your group"
+msgstr "Αποκρύψτε δημόσια στοιχεία εκτός των ομάδων σας"
+
 msgid "Group members only"
 msgstr "Μόνο μέλη ομάδας"
 
@@ -8285,6 +8311,16 @@ msgstr "Οι χρήστες μπορούν να συμμετάσχουν υπο�
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Εδώ μπορείτε να ελέγξετε εάν οι δημόσια ορατές πληροφορίες σχετικά με το έργο σας, όπως όνομα και διεύθυνση, αποστέλλονται σε <a href=\"#\" target=\"_blank\">partner platforms</a> μέσω WECHANGE."
+
+#, fuzzy
+#| msgid "This project shall be made publicly findable via other platforms."
+msgid "This group shall be made publicly findable via other platforms."
+msgstr "Αυτό το έργο θα είναι δυνατόν να βρεθεί δημόσια μέσω άλλης πλατφόρμας."
 
 msgid "You can access and browse the group that invited you"
 msgstr ""
@@ -8385,6 +8421,16 @@ msgstr "Περιγράψετε τη σύσκεψη με λίγες προτάσ�
 msgid "Where is the conference active?"
 msgstr "Πού είναι ενεργή η σύσκεψη;"
 
+#, fuzzy
+msgid "Conference is publicly visible"
+msgstr "Αυτό το έργο θα οριστεί να είναι δημόσια ορατό!"
+
+msgid "Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your conference"
+msgstr ""
+
 msgid "Conference members only"
 msgstr "Μόνο μέλη σύσκεψης"
 
@@ -8393,6 +8439,16 @@ msgstr "Οι χρήστες μπορούν να συμμετάσχουν υπο�
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
+
+#, fuzzy
+#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+msgstr "Εδώ μπορείτε να ελέγξετε εάν οι δημόσια ορατές πληροφορίες σχετικά με το έργο σας, όπως όνομα και διεύθυνση, αποστέλλονται σε <a href=\"#\" target=\"_blank\">partner platforms</a> μέσω WECHANGE."
+
+#, fuzzy
+#| msgid "This project shall be made publicly findable via other platforms."
+msgid "This conference shall be made publicly findable via other platforms."
+msgstr "Αυτό το έργο θα είναι δυνατόν να βρεθεί δημόσια μέσω άλλης πλατφόρμας."
 
 msgid "Participate!"
 msgstr "Λάβετε μέρος!"
@@ -8496,10 +8552,18 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
-msgid "Version 1.20.1 released"
+msgid "Version 1.20.2 released"
 msgstr ""
 
 msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed an issue with the Markdown text editor in some forms.\n"
+"- Fixed an issue where certain login or signup flows were sometimes not redirecting properly.\n"
+msgstr ""
+
+msgid "Version 1.20.1 released"
 msgstr ""
 
 msgid ""
@@ -14097,11 +14161,6 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την ομάδα;"
-
-#, fuzzy
-#~| msgid "Redirect Logged in Users"
-#~ msgid "Redirecting you in 3 seconds..."
-#~ msgstr "Ανακατεύθυνση Συνδεδεμένων Χρηστών"
 
 #~ msgid "Pre-filled content for the information field"
 #~ msgstr "Περιεχόμενο εκ των προτέρων συμπληρωμένο για το πεδίο πληροφοριών"
