@@ -221,7 +221,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-content {% endif %}col-xs-12">
+                            <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-content {{ cosinnus_css_class }} {% endif %}col-xs-12">
                                 {% include 'cosinnus/extra_body_header.html' %}
                                 {% include 'cosinnus/messages.html' %}
                                 {% block content %}{% endblock content %}
