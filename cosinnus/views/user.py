@@ -182,7 +182,7 @@ class SetInitialPasswordView(TemplateView):
 
         if user and not request.user.is_authenticated and not user.password:
             form = self.form_class(user=user)
-            return render(request, template_name=self.template_name, context={'form': form})
+            return render(request, template_name=self.template_name, context={'form': form, 'token': token})
         elif request.user.is_authenticated:
             messages.warning(request, _('You are already logged in. This function is only available to set up your account for the first time!'))
             raise PermissionDenied()
@@ -233,7 +233,7 @@ class SetInitialPasswordView(TemplateView):
                 # redirect to login page 
                 #(which will redirect to whatever the portal settings for logged in users are)
                 return redirect('login')
-            return render(request, template_name=self.template_name, context={'form': form})
+            return render(request, template_name=self.template_name, context={'form': form, 'token': token})
         else:
             raise PermissionDenied()
 
