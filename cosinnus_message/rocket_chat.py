@@ -728,7 +728,7 @@ class RocketChatConnection:
         rocket_username = self._get_unique_username(profile)
         if not rocket_username:
             return
-        if force_user_update or user_data.get('name') != rocket_username or rocket_email != profile.rocket_user_email:
+        if force_user_update or user_data.get('username') != rocket_username or rocket_email != profile.rocket_user_email:
             data = {
                 'username': rocket_username,
                 'name': profile.get_external_full_name(),
