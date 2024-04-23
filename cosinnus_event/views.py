@@ -677,6 +677,16 @@ class DoodleCompleteView(RequireWriteMixin, FilterGroupMixin, UpdateView):
         return HttpResponseRedirect(self.object.get_absolute_url())
 
 
+class DoodlePollUrlRedirectView(RedirectView):
+    """ Redirect deprecated "event/doodle/" URLs to "event/poll/". """
+    permanent = False
+    query_string = True
+
+    def get_redirect_url(self, **kwargs):
+        event_url_name = 'cosinnus:event:' + kwargs.pop('event_url_name')
+        return group_aware_reverse(event_url_name, kwargs=kwargs)
+
+
 class BaseEventFeed(ICalFeed):
     """ A simple event calender feed. """
     
@@ -1338,6 +1348,7 @@ doodle_delete_view = DoodleDeleteView.as_view()
 entry_detail_view = EntryDetailView.as_view()
 doodle_vote_view = DoodleVoteView.as_view()
 doodle_complete_view = DoodleCompleteView.as_view()
+doodle_poll_redirect_view = DoodlePollUrlRedirectView.as_view()
 user_token_group_event_feed = UserTokenGroupEventFeed()
 user_token_team_event_feed = UserTokenTeamEventFeed()
 public_group_event_feed = PublicGroupEventFeed()
