@@ -15,13 +15,22 @@ cosinnus_group_patterns = [
     # deprecated URL, see 'team-feed-entry' for the new URL. left as backwards compatibility for old ical imports. 
     re_path(r'^feed/(?P<slug>[^/]+)/$', views.event_ical_feed_single, name='feed-entry'),
 
-    re_path(r'^doodle/list/$', views.doodle_list_view,  name='doodle-list'),
-    re_path(r'^doodle/add/$', views.doodle_add_view, {'form_view': 'add'}, name='doodle-add'),
-    re_path(r'^doodle/(?P<slug>[^/]+)/$', views.doodle_vote_view, {'form_view': 'vote'}, name='doodle-vote'),
-    re_path(r'^doodle/(?P<slug>[^/]+)/archived/$', views.doodle_vote_view, {'form_view': 'archived'}, name='doodle-archived'),
-    re_path(r'^doodle/(?P<slug>[^/]+)/edit/$', views.doodle_edit_view, {'form_view': 'edit'}, name='doodle-edit'),
-    re_path(r'^doodle/(?P<slug>[^/]+)/delete/$', views.doodle_delete_view, {'form_view': 'delete'}, name='doodle-delete'),
-    re_path(r'^doodle/(?P<slug>[^/]+)/complete/(?P<suggestion_id>\d+)/$', views.doodle_complete_view, name='doodle-complete'),
+    re_path(r'^poll/list/$', views.doodle_list_view,  name='doodle-list'),
+    re_path(r'^poll/add/$', views.doodle_add_view, {'form_view': 'add'}, name='doodle-add'),
+    re_path(r'^poll/(?P<slug>[^/]+)/$', views.doodle_vote_view, {'form_view': 'vote'}, name='doodle-vote'),
+    re_path(r'^poll/(?P<slug>[^/]+)/archived/$', views.doodle_vote_view, {'form_view': 'archived'}, name='doodle-archived'),
+    re_path(r'^poll/(?P<slug>[^/]+)/edit/$', views.doodle_edit_view, {'form_view': 'edit'}, name='doodle-edit'),
+    re_path(r'^poll/(?P<slug>[^/]+)/delete/$', views.doodle_delete_view, {'form_view': 'delete'}, name='doodle-delete'),
+    re_path(r'^poll/(?P<slug>[^/]+)/complete/(?P<suggestion_id>\d+)/$', views.doodle_complete_view, name='doodle-complete'),
+
+    # deprecated URLs, redirecting to poll/
+    re_path(r'^doodle/list/$', views.doodle_poll_redirect_view, {'event_url_name': 'doodle-list'}, name='doodle-poll-redirect'),
+    re_path(r'^doodle/add/$', views.doodle_poll_redirect_view, {'event_url_name': 'doodle-add'}, name='doodle-poll-redirect'),
+    re_path(r'^doodle/(?P<slug>[^/]+)/$', views.doodle_poll_redirect_view, {'event_url_name': 'doodle-vote'}, name='doodle-poll-redirect'),
+    re_path(r'^doodle/(?P<slug>[^/]+)/archived/$', views.doodle_poll_redirect_view, {'event_url_name': 'doodle-archived'}, name='doodle-poll-redirect'),
+    re_path(r'^doodle/(?P<slug>[^/]+)/edit/$', views.doodle_poll_redirect_view, {'event_url_name': 'doodle-edit'}, name='doodle-poll-redirect'),
+    re_path(r'^doodle/(?P<slug>[^/]+)/delete/$', views.doodle_poll_redirect_view, {'event_url_name': 'doodle-delete'}, name='doodle-poll-redirect'),
+    re_path(r'^doodle/(?P<slug>[^/]+)/complete/(?P<suggestion_id>\d+)/$', views.doodle_poll_redirect_view, {'event_url_name': 'doodle-complete'}, name='doodle-poll-redirect'),
 
     re_path(r'^list/$', views.detailed_list_view, name='list_detailed'),
     re_path(r'^list/past/$', views.past_events_list_view, name='list_past'),
