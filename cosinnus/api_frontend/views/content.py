@@ -550,7 +550,19 @@ class MainContentView(APIView):
         selected_menu_item = next((item for item in buttons_items if item.get('selected', False)), None)
         if not selected_menu_item and active_menu_item:
             active_menu_item['selected'] = True
+            
+        # deduplicate menu items by removing all elements beyond the first that have the same label+href
+        label_href_hashes = []
+        def _check_unique_and_remember(menu_item):
+            hash = menu_item['label'] + '|' + menu_item['url']
+            if hash in label_href_hashes:
+                return False
+            label_href_hashes.append(hash)
+            return True
+        appsmenu_items = [item for item in appsmenu_items if _check_unique_and_remember(item)]
+        buttons_items = [item for item in buttons_items if _check_unique_and_remember(item)]
         
+        # sort items from the two leftnav areas into the three v3 leftnav areas
         def _sort_menu_items(menu_items, default_target):
             # picks a spot for the given items, with a given default target if no other rules apply
             for menu_item in menu_items:
@@ -561,8 +573,6 @@ class MainContentView(APIView):
                 elif any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES):
                     target_subnav = top
                 target_subnav.append(menu_item)
-        
-        # sort items from the two leftnav areas into the three v3 leftnav areas
         _sort_menu_items(appsmenu_items, middle)
         _sort_menu_items(buttons_items, middle_from_buttons_area)
         
