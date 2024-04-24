@@ -287,20 +287,18 @@ class RocketChatConnection:
                 'User %i/%i. Success: %s \t %s' % (i, count, str(result), user.email),
             )
 
-    def _get_rocket_users_list(self, filter_query):
+    def _get_rocket_users_list(self):
         """
         Get complete Rocket.Chat user list.
-        @param filter_query: query passed to the users_list api call (See https://developer.rocket.chat/reference/api/rest-api#query-parameters)
         @return:
-            - A list of rocketchat user respones if users were found for the query.
-            - An empty list of no users were found for the query.
-            - `None` if an error retrieving the users occured.
+            - A list of all rocketchat users
+            - `None` if an error retrieving the users occurred.
         """
         rocket_users = []
         count = 100
         offset = 0
         while True:
-            response = self.rocket.users_list(count=count, offset=offset, query=filter_query).json()
+            response = self.rocket.users_list(count=count, offset=offset).json()
             if not response.get('success'):
                 self.stderr.write(':_get_rocket_users_list:' + str(response), response)
                 # setting the users list to None to avoid working with incomplete user lists
@@ -319,7 +317,7 @@ class RocketChatConnection:
         :return:
         """
         # Get existing rocket users
-        rocket_users_list = self._get_rocket_users_list(filter_query='')
+        rocket_users_list = self._get_rocket_users_list()
         if rocket_users_list is None:
             # An error occurred fetching the user list.
             return
@@ -472,8 +470,7 @@ class RocketChatConnection:
         username = profile.get_new_rocket_username()
 
         # get existing rocket users matching the username.
-        filter_query = json.dumps({'username': {'$regex': username}})
-        rocket_users = self._get_rocket_users_list(filter_query=filter_query)
+        rocket_users = self._get_rocket_users_list()
         if rocket_users is None:
             # An error occurred fetching the user list.
             return
