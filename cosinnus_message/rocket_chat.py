@@ -728,22 +728,27 @@ class RocketChatConnection:
         rocket_username = self._get_unique_username(profile)
         if not rocket_username:
             return
-        if force_user_update or user_data.get('username') != rocket_username or rocket_email != profile.rocket_user_email:
+        username_changed = user_data.get('username') != rocket_username
+        email_changed = rocket_email != profile.rocket_user_email
+        active_changed = user_data.get('active') != user.is_active
+        if force_user_update or username_changed or email_changed or active_changed:
             data = {
                 'username': rocket_username,
                 'name': profile.get_external_full_name(),
                 'bio': profile.get_absolute_url(),
-                'active': user.is_active,
                 'verified': True,  # we keep verified at True always and provide a fake email for unverified accounts, since rocket is broken and still sends emails to unverified accounts # noqa
                 'requirePasswordChange': False,
             }
             # Update email only if it has changed to avoid rate limiting by the RocketChat server.
-            if rocket_email != profile.rocket_user_email:
-                data.update(
-                    {
-                        'email': profile.rocket_user_email,
-                    }
-                )
+            if email_changed:
+                data.update({
+                    "email": profile.rocket_user_email,
+                })
+            # Update active only if it has changed
+            if active_changed:
+                data.update({
+                    "active": user.is_active,
+                })
             # updating the password invalidates existing user sessions, so use it only
             # when actually needed
             if update_password:
