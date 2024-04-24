@@ -465,6 +465,12 @@ class RocketChatConnection:
         else:
             return self.users_create(user, request)
 
+    def has_username_changed(self, profile, rocket_user_name):
+        """ Check it username needs to be updated in RocketChat. """
+        username = profile.get_new_rocket_username()
+        username_match = re.match(rf'^{username}\d*$', rocket_user_name)
+        return username_match is None
+
     def _get_unique_username(self, profile):
         """Generates a unique username considering existing Rocket.Chat users."""
         username = profile.get_new_rocket_username()
@@ -724,11 +730,13 @@ class RocketChatConnection:
         # Update name, email address, password, verified status if they have changed
         profile = user.cosinnus_profile
         rocket_email = user_data.get('emails', [{}])[0].get('address', None)
-        # rocket_mail_verified = user_data.get('emails', [{}])[0].get('verified', None)
-        rocket_username = self._get_unique_username(profile)
-        if not rocket_username:
-            return
-        username_changed = user_data.get('username') != rocket_username
+        #rocket_mail_verified = user_data.get('emails', [{}])[0].get('verified', None)
+        rocket_username = user_data.get('username')
+        username_changed = rocket_username is None or self.has_username_changed(profile,  rocket_username)
+        if username_changed:
+            rocket_username = self._get_unique_username(profile)
+            if not rocket_username:
+                return
         email_changed = rocket_email != profile.rocket_user_email
         active_changed = user_data.get('active') != user.is_active
         if force_user_update or username_changed or email_changed or active_changed:
