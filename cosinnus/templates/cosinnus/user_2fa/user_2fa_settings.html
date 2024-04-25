@@ -19,7 +19,7 @@
 
         {% if user|user_has_otp_device %}
             <div class="content-box">
-                    <h4>{% trans "Backup Tokens" %}</h4>
+                    <h3>{% trans "Backup Tokens" %}</h3>
                     <p class="textfield transparent">{% blocktrans trimmed %}If you don't have any device with you, you can access
                         your account using backup tokens.{% endblocktrans %}
                         {% blocktrans trimmed count counter=backup_tokens %}
@@ -49,7 +49,7 @@
             {% endcomment %}
 
             <div class="content-box">
-                    <h4>{% trans "Disable Two-Factor Authentication" %}</h4>
+                    <h3>{% trans "Disable Two-Factor Authentication" %}</h3>
                     <p class="textfield transparent">{% blocktrans trimmed %}
                         However we strongly discourage you to do so, you can
                         also disable two-factor authentication for your account.
@@ -73,7 +73,7 @@
 
             <div class="content-box">
 
-                    <h4>{% trans "Two-Factor Authentication Settings" %}</h4>
+                    <h3>{% trans "Two-Factor Authentication Settings" %}</h3>
                     <p class="textfield transparent">{% blocktrans trimmed %}Two-factor authentication is not enabled for your
                         account. <br> Enable two-factor authentication for enhanced account security.
                         {% endblocktrans %}
