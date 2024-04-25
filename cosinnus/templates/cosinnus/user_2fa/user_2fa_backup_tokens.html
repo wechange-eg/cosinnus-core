@@ -30,7 +30,7 @@
         {% endif %}
     </div>
 
-    <form method="post">{% csrf_token %}{{ form }}
+    <form action="{% url 'cosinnus:two-factor-auth-backup-tokens' %}" method="post">{% csrf_token %}{{ form }}
         <button type="submit" class="btn btn-emphasized btn-autosize">
             <ul class="media-list">
                 <li class="media">

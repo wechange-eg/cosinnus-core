@@ -9,7 +9,7 @@
 
 {% block content %}
 
-    <form method="post" class="cosinnus-form">
+    <form action="{% url 'cosinnus:two-factor-auth-disable' %}" method="post" class="cosinnus-form">
         {% csrf_token %}
         
 	    <div class="content-box">
