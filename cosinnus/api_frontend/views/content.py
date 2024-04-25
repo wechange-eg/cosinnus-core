@@ -278,6 +278,7 @@ class MainContentView(APIView):
         sub_navigation = self._parse_leftnav_menu(html_soup)
         
         html_soup = self._filter_html_view_specific(html_soup, resolved_url)
+        # this sets self.content_html and self.footer_html
         self._parse_html_content(html_soup) # this will destroy the soup, so use it last or on a new soup!
         
         data = copy(self._data_proto)

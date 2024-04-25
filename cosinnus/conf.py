@@ -970,6 +970,7 @@ class CosinnusConf(AppConf):
         "^/housekeeping/",
         "^/account/", # user account service functions
         "^/fb-integration/",
+        "^/two_factor_auth/qrcode/", # QR code image generator
         # API URLs that are not route-namespaced under "/api/":
         "^/select2/",
         "^/likefollowstar/",
