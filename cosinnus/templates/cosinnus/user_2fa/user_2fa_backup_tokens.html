@@ -10,7 +10,7 @@
 {% block content %}
 
     <div class="content-box">
-        <h4>{% block title %}{% trans "Backup Tokens" %}{% endblock %}</h4>
+        <h3>{% block title %}{% trans "Backup Tokens" %}{% endblock %}</h3>
         <p class="textfield transparent">{% blocktrans trimmed %}Backup tokens can be used when your primary and backup
             phone numbers aren't available. The backup tokens below can be used
             for login verification. <br> If you've used up all your backup tokens, you
@@ -30,7 +30,7 @@
         {% endif %}
     </div>
 
-    <form method="post">{% csrf_token %}{{ form }}
+    <form action="{% url 'cosinnus:two-factor-auth-backup-tokens' %}" method="post">{% csrf_token %}{{ form }}
         <button type="submit" class="btn btn-emphasized btn-autosize">
             <ul class="media-list">
                 <li class="media">
