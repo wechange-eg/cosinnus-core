@@ -69,8 +69,6 @@ class MainContentView(APIView):
         * `styles`: a list of strings of literal inline styles to be inserted before the HTML content is inserted
       * `script_constants`: a list of literal inline JS code that has JS global definitions that need to be loaded before the `js_urls` are inserted (but can be loaded after `js_vendor_urls` are inserted)
       * `scripts`: a list of strings of literal inline JS script code to be executed before (after?) the HTML content is inserted
-      * `head_scripts` a list of strings of mixed content of either a single URL of a src JS file (starting with "http") or inline JS code (from within the <head>)
-      * `body_scripts` a list of strings of mixed content of either a single URL of a src JS file (starting with "http") or inline JS code (from within the <body>)
       * `sub_navigation`: sidebar content, includes 3 lists: `"sub_navigation" {"top": [...], "middle": [...], "bottom": [...]}`
         * middle is list of the apps that are enabled for the current space
         * each list contains the usual menu items
@@ -110,14 +108,10 @@ class MainContentView(APIView):
         "status_code": 0,
         "content_html": None,
         "footer_html": None,
-        # TODO: decide to keep the following 4 params to deliver JS content or ...
         "js_vendor_urls": [],
         "js_urls": [],
         "script_constants": [],
         "scripts": [],
-        # ... or the following 2 params
-        "head_scripts": [],
-        "body_scripts": [],
         "css_urls": [],
         "meta": None,
         "styles": None,
@@ -167,14 +161,6 @@ class MainContentView(APIView):
                         ],
                         "script_constants": "var cosinnus_base_url = \"http://localhost:8000/\";\nvar cosinnus_active_group = \"a-mein-bbb-projekt\";\n ...",
                         "scripts": "Backbone.mediator.publish('init:module-full-routed', ...",
-                        "head_scripts": [
-                            "/static/js/vendor/less.min.js",
-                            "var cosinnus_base_url = \"http://localhost:8000/\";\nvar cosinnus_active_group = \"a-mein-bbb-projekt\";\n ..."
-                        ],
-                        "body_scripts": [
-                            "http://localhost:8000/static/js/cosinnus.js?v=1.9.3",
-                            "Backbone.mediator.publish('init:module-full-routed', ...",
-                        ],
                         "meta": "<meta charset=\"utf-8\"/><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"/><meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"/> ...",
                         "styles": ".my-contribution-badge {min-width: 50px;border-radius: 20px;color: #FFF;font-size: 12px;padding: 2px 6px; margin-left: 5px;}.my-contribution-badge.red {background-color: rgb(245, 85, 0);} ...",
                         "sub_navigation": {
@@ -291,13 +277,8 @@ class MainContentView(APIView):
         styles = self._parse_inline_tag_contents(html_soup, 'style')
         sub_navigation = self._parse_leftnav_menu(html_soup)
         
-        head_scripts = self._parse_js_scripts_and_inlines(html_soup, 'head')
-        body_scripts = self._parse_js_scripts_and_inlines(html_soup)
-        # filtering the body scripts by the 'body' tag seems to not find all scripts, so we
-        # instead find *all* scripts and subtract the ones found in the header
-        body_scripts = [body_script for body_script in body_scripts if not body_script in head_scripts]
-        
         html_soup = self._filter_html_view_specific(html_soup, resolved_url)
+        # this sets self.content_html and self.footer_html
         self._parse_html_content(html_soup) # this will destroy the soup, so use it last or on a new soup!
         
         data = copy(self._data_proto)
@@ -306,14 +287,10 @@ class MainContentView(APIView):
         data["status_code"] = response.status_code
         data["content_html"] = self.content_html
         data["footer_html"] = self.footer_html
-        # TODO: decide to keep the following 4 params to deliver JS content or ...
         data["js_vendor_urls"] = js_vendor_urls
         data["js_urls"] = js_urls
         data["script_constants"] = script_constants
         data["scripts"] = scripts
-        # ... or the following 2 params
-        data["head_scripts"] = head_scripts
-        data["body_scripts"] = body_scripts
         data["css_urls"] = css_urls
         data["meta"] = meta
         data["styles"] = styles
@@ -550,7 +527,19 @@ class MainContentView(APIView):
         selected_menu_item = next((item for item in buttons_items if item.get('selected', False)), None)
         if not selected_menu_item and active_menu_item:
             active_menu_item['selected'] = True
+            
+        # deduplicate menu items by removing all elements beyond the first that have the same label+href
+        label_href_hashes = []
+        def _check_unique_and_remember(menu_item):
+            hash = menu_item['label'] + '|' + menu_item['url']
+            if hash in label_href_hashes:
+                return False
+            label_href_hashes.append(hash)
+            return True
+        appsmenu_items = [item for item in appsmenu_items if _check_unique_and_remember(item)]
+        buttons_items = [item for item in buttons_items if _check_unique_and_remember(item)]
         
+        # sort items from the two leftnav areas into the three v3 leftnav areas
         def _sort_menu_items(menu_items, default_target):
             # picks a spot for the given items, with a given default target if no other rules apply
             for menu_item in menu_items:
@@ -561,8 +550,6 @@ class MainContentView(APIView):
                 elif any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES):
                     target_subnav = top
                 target_subnav.append(menu_item)
-        
-        # sort items from the two leftnav areas into the three v3 leftnav areas
         _sort_menu_items(appsmenu_items, middle)
         _sort_menu_items(buttons_items, middle_from_buttons_area)
         
@@ -627,27 +614,6 @@ class MainContentView(APIView):
         liss = [tag.decode_contents().strip() for tag in tags]
         tag_contents = '\n'.join(liss)
         return tag_contents
-    
-    def _parse_js_scripts_and_inlines(self, html_soup, container_tag_name=None):
-        """ Parses from the given soup both script sources and inline scripts.
-            @param container_tag_name: if given, searches for scripts only within this tag name (e.g. "body")
-            @return a list of strings, mixed content of either:
-                - a single URL of a src JS file (starting with "http") or
-                - inline JS code
-        """
-        js_list = []
-        container_tag = html_soup.find(container_tag_name) if container_tag_name else html_soup
-        script_elements = container_tag.find_all('script')
-        for tag in script_elements:
-            js_link = tag.get('src')
-            if js_link:
-                # we have a JS file link by src
-                js_list.append(self._format_static_link(js_link))
-            else:
-                # we have an inline script
-                inline_script_content = tag.decode_contents().strip()
-                js_list.append(inline_script_content)
-        return js_list
     
     def _format_static_link(self, link):
         domain = CosinnusPortal.get_current().get_domain()

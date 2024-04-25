@@ -32,7 +32,8 @@ from cosinnus.models import CosinnusPortal
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import IsNotAuthenticated, AllowNone
 from cosinnus.utils.urls import redirect_with_next
-from cosinnus.views.common import LoginViewAdditionalLogicMixin
+from cosinnus.views.common import LoginViewAdditionalLogicMixin, cosinnus_pre_logout_actions, \
+    cosinnus_post_logout_actions
 from cosinnus.views.user import UserSignupTriggerEventsMixin
 
 
@@ -204,13 +205,19 @@ class LogoutView(APIView):
             except TokenError:
                 pass # token was either already blacklisted or didn't exist anymore
             success_msg = 'logged out and invalidated refresh token'
+            
         # session logout
+        cosinnus_pre_logout_actions(request)
         logout(request)
         
         data = {
             'success': success_msg,
         }
-        return Response(data, status=status.HTTP_205_RESET_CONTENT)
+        response = Response(data, status=status.HTTP_205_RESET_CONTENT)
+        
+        cosinnus_post_logout_actions(request, response)
+        
+        return response
 
 
 class UserAuthInfoView(LoginViewAdditionalLogicMixin, APIView):
