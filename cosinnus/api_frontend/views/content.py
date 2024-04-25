@@ -45,7 +45,8 @@ V3_CONTENT_BOTTOM_SIDEBAR_URL_SUFFIXES = [
     '/members/',
     '/edit/',
     '/delete/',
-    '/password_change/'
+    '/password_change/',
+    '#',
 ]
 
 
@@ -463,8 +464,9 @@ class MainContentView(APIView):
         menu_items = []
         for leftnav_link in html_soup.find_all(['a', 'button']):
             # skip link-less buttons (like the dropdown trigger)
+            # TODO: we should keep some buttons without links! (help button on group members page for example)
             href = leftnav_link.get('href')
-            if not href or href == '#':
+            if not href:
                 continue
             link_label = '(Link)'
             text_source = leftnav_link.find('div', class_='media-body') or leftnav_link
@@ -561,7 +563,6 @@ class MainContentView(APIView):
         else:
             middle.extend(middle_from_buttons_area)
             
-        
         # add sidebar third party tools if it exists in group data
         if self.group and self.group.third_party_tools:
             for third_party_tool in self.group.third_party_tools:
