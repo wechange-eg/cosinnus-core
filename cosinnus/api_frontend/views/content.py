@@ -5,9 +5,11 @@ from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
-from django.http import QueryDict, HttpResponseRedirect
-from django.urls import reverse
+from django.core.cache import cache
+from django.http import QueryDict
+from django.template.response import TemplateResponse
 from django.utils.crypto import get_random_string
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -19,14 +21,14 @@ from rest_framework.views import APIView
 from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
+from cosinnus.conf import settings
 from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
+from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 from cosinnus.utils.functions import uniquify_list
 from cosinnus.utils.http import remove_url_param, add_url_param
-from cosinnus.conf import settings
-from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 
 logger = logging.getLogger('cosinnus')
 
@@ -228,7 +230,9 @@ class MainContentView(APIView):
 
         # check if the target URL is one exempted for v3 frontend resolution - we do not accept those
         matched_exemption = False
-        target_url_path = urlparse(self.url).path
+        _parsed = urlparse(self.url)
+        target_url_path = _parsed.path
+        target_url_query = QueryDict(_parsed.query)
         # append slash since with a missing resolver it wouldn't be auto appended and might miss matches
         if not target_url_path.endswith('/'):
             target_url_path += '/'
@@ -238,11 +242,20 @@ class MainContentView(APIView):
                 break
         if matched_exemption:
             return self.build_redirect_response(self.url, response=None)
-
-        # resolve the response, including redirects
-        # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
-        v3_exempted_url = add_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
-        response = self._resolve_url_via_query(v3_exempted_url, django_request, allow_redirects=False)
+        
+        # check if we have a redirected request where `FrontendMiddleware` saved the response
+        cached_response = self._get_valid_cached_response(django_request, target_url_path, target_url_query)
+        if cached_response:
+            # use the response from the cache key
+            response = cached_response
+            # pipe some response attributes of TemplateResponse so they can be accessed like a requests response
+            if type(response) is TemplateResponse:
+                setattr(response, 'url', self.url)
+                setattr(response, 'text', response.content)
+        else:
+            # resolve the response by querying with a request, including redirects
+            response = self._resolve_url_via_query(self.url, django_request, allow_redirects=False)
+        
         # if we have been redirected, return an empty data package with a redirect target url!
         if response.status_code in [301, 302]:
             # remove the v3-exempt parameter from the resolved URL again
@@ -263,7 +276,7 @@ class MainContentView(APIView):
         # determine group for request
         self._resolve_request_group(resolved_url, django_request)
         # parse the response's html
-        html = self._clean_response_html(str(response.text))
+        html = self._clean_response_html(force_str(response.text))
 
         # TODO compress html? or do server-side request compression?
         
@@ -325,13 +338,37 @@ class MainContentView(APIView):
         data["status_code"] = resolved_response.status_code
         return self.build_data_response(data, resolved_response)
     
-    def _resolve_url_via_query(self, url, request, allow_redirects=True):
+    def _get_valid_cached_response(self, request, target_url_path, target_url_query):
+        """ Checks if there is a cache id in the GET params, and if the cache packet exists and it is a valid one and
+            it matches the request's target URL, return"""
+        # we accept the cache id as param attached to both the v3 main content api or the target url
+        cache_id = request.GET.get(FrontendMiddleware.cached_content_key, None)
+        if not cache_id:
+            cache_id = target_url_query.get(FrontendMiddleware.cached_content_key, None)
+        if not cache_id:
+            return None
+        cached_response_packet = cache.get(FrontendMiddleware.FRONTEND_V3_POST_CONTENT_CACHE_KEY % cache_id)
+        if not cached_response_packet:
+            return None
+        # check validity: must match session_key and url path
+        if not cached_response_packet['session_key'] == request.session.session_key:
+            return None
+        if not cached_response_packet['target_url_path'] == target_url_path:
+            return None
+        # delete cache entry, we can only use a response once
+        cache.delete(FrontendMiddleware.FRONTEND_V3_POST_CONTENT_CACHE_KEY % cache_id)
+        return cached_response_packet['response']
+    
+    def _resolve_url_via_query(self, url, request, allow_redirects=False):
         """ Resolves the URL via a requests get().
             Cookies from all redirect steps are passed along collectively. """
+        # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
+        v3_exempted_url = add_url_param(url, FrontendMiddleware.param_key_exempt,
+                                        FrontendMiddleware.param_value_exempt)
         session = requests.Session()
         session.headers.update(dict(request.headers))
         session.cookies.update(request.COOKIES)
-        response = session.get(url, allow_redirects=allow_redirects)
+        response = session.get(v3_exempted_url, allow_redirects=allow_redirects)
         for history_response in response.history:
             response.cookies.update(history_response.cookies)
         return response

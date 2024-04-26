@@ -133,7 +133,9 @@ def redirect_with_next(url, request_with_next, additional_param_str=None):
         Otherwise, returns `url`
         @param additional_param_str: if given, this string will be appended as a param as well,
             either with ? or &, depending if params are already present """
-    next_param = urlencode(request_with_next.GET.get('next', None))
+    next_param = request_with_next.GET.get('next', None)
+    if next_param:
+        next_param = urlencode(next_param)
     if not next_param or not url_has_allowed_host_and_scheme(next_param, allowed_hosts=[request_with_next.get_host()]):
         if additional_param_str:
             return f"{url}?{additional_param_str}"
