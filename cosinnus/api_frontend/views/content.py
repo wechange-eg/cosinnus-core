@@ -241,7 +241,7 @@ class MainContentView(APIView):
                 matched_exemption = True
                 break
         if matched_exemption:
-            return self.build_redirect_response(self.url, response=None)
+            return self.build_redirect_response(self.url)
         
         # check if we have a redirected request where `FrontendMiddleware` saved the response
         cached_response = self._get_valid_cached_response(django_request, target_url_path, target_url_query)
@@ -335,7 +335,7 @@ class MainContentView(APIView):
         data = copy(self._data_proto)
         data["resolved_url"] = target_url
         data["redirect"] = True
-        data["status_code"] = resolved_response.status_code
+        data["status_code"] = resolved_response.status_code if resolved_response else 302
         return self.build_data_response(data, resolved_response)
     
     def _get_valid_cached_response(self, request, target_url_path, target_url_query):
