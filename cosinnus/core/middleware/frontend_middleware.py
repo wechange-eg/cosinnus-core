@@ -8,7 +8,7 @@ from django.utils.crypto import get_random_string
 from django.utils.deprecation import MiddlewareMixin
 
 from cosinnus.conf import settings
-from cosinnus.utils.http import add_url_param
+from cosinnus.utils.http import add_url_param, is_ajax
 from cosinnus.views.common import SwitchLanguageView
 
 USERPROFILE_SETTING_FRONTEND_DISABLED = "frontend_disabled"
@@ -140,8 +140,9 @@ class FrontendMiddleware(MiddlewareMixin):
         #   - when the frontend then accesses the main content api, `MainContentView` then recognizes the
         #      `FrontendMiddleware.cached_content_key` cache key, does some validation for authenticity, and
         #      then uses the cached response's HTML for itself instead of performing a request to that URL by itself
+        #   - we never filter out AJAX requests and those to exempted views with this method.
         if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
-            if request.method == 'POST' and response.status_code != 302:
+            if request.method == 'POST' and response.status_code != 302 and not is_ajax(request):
                 # do not redirect the POST if it was an ecempted frontend URL (API or necesseray direct calls)
                 for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
                     if re.match(url_pattern, request.path):
