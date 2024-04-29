@@ -3,9 +3,3 @@
 {% load static %}
 
 {% block page_title %}@ {{ group.name }} | {% trans "Todo" %}{% endblock page_title %}
-
-{% block extrahead %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static 'css/vendor/select2.css' %}">
-    <link rel="stylesheet" href="{% static 'css/cosinnus_todo/cosinnus_todo.css' %}">
-{% endblock extrahead %}
