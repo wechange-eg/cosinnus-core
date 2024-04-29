@@ -39,16 +39,18 @@ V3_CONTENT_COMMUNITY_URL_PREFIXES = [
     '/user_match/'
 ]
 # url suffixes for links from the leftnav that should be sorted into the top sidebar list
-V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES = [
-    '/microsite/'
+V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS = [
+    '.*/microsite/$'
 ]
 # url suffixes for links from the leftnav that should be sorted into the bottom sidebar list
-V3_CONTENT_BOTTOM_SIDEBAR_URL_SUFFIXES = [
-    '/members/',
-    '/edit/',
-    '/delete/',
-    '/password_change/',
-    '#',
+V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS = [
+    '.*/members/$',
+    '.*/edit/$',
+    '.*/delete/$',
+    '.*/password_change/$',
+    '^/account/deactivate/',
+    '^/account/activate/',
+    '^#$',
 ]
 
 
@@ -501,11 +503,18 @@ class MainContentView(APIView):
             return []
         menu_items = []
         for leftnav_link in html_soup.find_all(['a', 'button']):
-            # skip link-less buttons (like the dropdown trigger)
-            # TODO: we should keep some buttons without links! (help button on group members page for example)
+            attributes = {}
+            # detect bootstrap-modal attribues
+            if leftnav_link.get('data-toggle') and leftnav_link.get('data-target'):
+                attributes.update({
+                    'data-toggle': leftnav_link.get('data-toggle'),
+                    'data-target': leftnav_link.get('data-target')
+                })
+            # skip link-less buttons (like the dropdown trigger), unless they have modal data attributes
             href = leftnav_link.get('href')
-            if not href:
+            if not href and not attributes:
                 continue
+            # ignore some links depending on their class
             if leftnav_link.get('class') and any([blacklisted_class in leftnav_link.get('class')
                     for blacklisted_class in ['fadedown-clickarea']]):
                 continue
@@ -532,11 +541,12 @@ class MainContentView(APIView):
             # create menu item for the link
             menu_item = MenuItem(
                 link_label,
-                href,
+                url=href if href else None,
                 icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
                 id='Sidebar-' + get_random_string(8),
                 sub_items=sub_items,
-                selected=selected
+                selected=selected,
+                attributes=attributes if attributes else None
             )
             menu_items.append(menu_item)
         return menu_items
@@ -581,7 +591,7 @@ class MainContentView(APIView):
         # deduplicate menu items by removing all elements beyond the first that have the same label+href
         label_href_hashes = []
         def _check_unique_and_remember(menu_item):
-            hash = menu_item['label'] + '|' + menu_item['url']
+            hash = menu_item['label'] + '|' + (menu_item.get('url') or '-')
             if hash in label_href_hashes:
                 return False
             label_href_hashes.append(hash)
@@ -595,9 +605,11 @@ class MainContentView(APIView):
             for menu_item in menu_items:
                 target_subnav = default_target
                 # select the proper subnav for this menu to go to, by type of URL
-                if any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_BOTTOM_SIDEBAR_URL_SUFFIXES):
+                if not menu_item['url']:
                     target_subnav = bottom
-                elif any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES):
+                elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS):
+                    target_subnav = bottom
+                elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS):
                     target_subnav = top
                 target_subnav.append(menu_item)
         _sort_menu_items(appsmenu_items, middle)
