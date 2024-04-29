@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 .legacy-content-wrapper {
-    @import "cosinnus" ;
-    @import "v3_main_content_patches";
+    :not(.conference) {
+        @import "cosinnus" ;
+        @import "v3_main_content_patches";
+    }
 }

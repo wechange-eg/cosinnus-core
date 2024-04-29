@@ -985,6 +985,7 @@ class CosinnusConf(AppConf):
         "/.*/.*/group-invite-select2/",
         # extra exemptions for views that do not work well with v3
         "^/map/embed/",
+        "^/.*/.*/note/embed/",
         "^/two_factor_auth/token_login/",
         
     ] + NEVER_REDIRECT_URLS # any other defined never-to-redirect-urls
