@@ -1154,7 +1154,14 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                     services_navigation_items.append(
                         MenuItem( _('Messages'), reverse('postman:inbox'), icon='messages', id='Messages')
                     )
-
+        
+        # add "Discover" link to services for all logged in users and additionally for non-logged-in users on open portals
+        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or \
+                (request.user.is_authenticated and not request.user.is_guest):
+            services_navigation_items.insert(0,
+                MenuItem(_('Discover'), reverse('cosinnus:map'), icon=None, is_external=False, id='Map')
+            )
+        
         # right part
         right_navigation_items = []
 
@@ -1186,15 +1193,6 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 right_navigation_items.append(
                     MenuItem(_('Register'), reverse('cosinnus:user-add'),  id='Register')
                 )
-        
-        # add "Discover" link for all logged in users and additionally for non-logged-in users on open portals
-        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or \
-                (request.user.is_authenticated and not request.user.is_guest):
-            # "Discover" is prepended to the right items for anonymous users and to services for logged in users
-            place_to_add = services_navigation_items if request.user.is_authenticated else right_navigation_items
-            place_to_add.insert(0,
-                MenuItem(_('Discover'), reverse('cosinnus:map'), icon=None, is_external=False, id='Map')
-            )
         
         main_navigation_items['left'] = left_navigation_items
         main_navigation_items['middle'] = middle_navigation_items

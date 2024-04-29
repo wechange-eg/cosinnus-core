@@ -531,9 +531,10 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                     MenuItem('Spaces', id='Spaces'),
                 ],
                 'middle': [],
-                'services': [],
-                'right': [
+                'services': [
                     MenuItem('Discover', reverse('cosinnus:map'), icon=None, is_external=False, id='Map'),
+                ],
+                'right': [
                     MenuItem('Help', icon='fa-question', id='Help'),
                     self.expected_language_menu_item(expected_label='EN', expected_icon=None),
                     MenuItem('Login', '/login/', id='Login'),
