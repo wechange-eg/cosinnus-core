@@ -506,10 +506,20 @@ class MainContentView(APIView):
             href = leftnav_link.get('href')
             if not href:
                 continue
+            if leftnav_link.get('class') and any([blacklisted_class in leftnav_link.get('class')
+                    for blacklisted_class in ['fadedown-clickarea']]):
+                continue
             link_label = '(Link)'
             text_source = leftnav_link.find('div', class_='media-body') or leftnav_link
             if text_source:
-                link_label = text_source.text.strip().replace('/n', '')
+                parsed_label = text_source.text.strip().replace('/n', '')
+                if not parsed_label:
+                    # check for an additional span within the media-body
+                    parsed_label = text_source.get('title')
+                    if parsed_label:
+                        parsed_label = parsed_label.strip().replace('/n', '')
+                if parsed_label:
+                    link_label = parsed_label
             
             # a button counts as selected item if there is an `<i class="fa fa-caret-right"></i>` in it
             selected = len([lnk for lnk in leftnav_link.find_all('i') if lnk.get('class') and 'fa-caret-right' in lnk.get('class')]) > 0
