@@ -173,15 +173,17 @@
         {% endblock cosinnus_navbar %}
 
 
-        {% if not COSINNUS_V3_API_CONTENT_ACTIVE %}
-		    {% include 'announcements/announcements.html' %}
+        {% block announcements %}
+            {% if not COSINNUS_V3_API_CONTENT_ACTIVE %}
+                {% include 'announcements/announcements.html' %}
 
-            {% if email_not_verified_announcement %}
-                {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
-            {% elif user_guest_announcement %}
-                {% include 'announcements/announcement.html' with announcement=user_guest_announcement %}
+                {% if email_not_verified_announcement %}
+                    {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
+                {% elif user_guest_announcement %}
+                    {% include 'announcements/announcement.html' with announcement=user_guest_announcement %}
+                {% endif %}
             {% endif %}
-        {% endif %}
+        {% endblock announcements %}
 
         <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-container {% endif %}{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
 
