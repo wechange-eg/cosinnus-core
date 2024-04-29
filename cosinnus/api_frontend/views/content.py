@@ -482,6 +482,16 @@ class MainContentView(APIView):
             content = content.decode_contents()
             self.has_leftnav = False
         self.content_html = str(content or '').strip()
+        
+        # add any modal boxes from the leftnav to the main content html
+        if self.has_leftnav:
+            leftnav = soup.find('div', class_='x-v3-leftnav')
+            if leftnav:
+                popup_modals = [pop for pop in leftnav.find_all('div') if pop.get('class') and 'modal' in pop.get('class')]
+                for popup_modal in popup_modals:
+                    self.content_html += '\n' + str(popup_modal)
+        
+        # parse footer
         footer = soup.find('div', class_='x-v3-footer')
         if footer:
             self.footer_html = str(footer.decode_contents()).strip()
