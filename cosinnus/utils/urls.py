@@ -142,5 +142,13 @@ def redirect_with_next(url, request_with_next, additional_param_str=None):
         return url
     if additional_param_str:
         return f"{url}?next={next_param}&{additional_param_str}" 
-    return f"{url}?next={next_param}" 
-    
+    return f"{url}?next={next_param}"
+
+
+def check_url_v3_everywhere_exempt(url_path):
+    """ Returns True if the given url_path matches an exempted URL from
+        `COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS`, False if not. """
+    for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
+        if re.match(url_pattern, url_path):
+            return True
+    return False

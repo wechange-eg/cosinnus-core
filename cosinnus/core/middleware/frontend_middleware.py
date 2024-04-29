@@ -9,11 +9,11 @@ from django.utils.deprecation import MiddlewareMixin
 
 from cosinnus.conf import settings
 from cosinnus.utils.http import add_url_param, is_ajax
+from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 from cosinnus.views.common import SwitchLanguageView
 
 USERPROFILE_SETTING_FRONTEND_DISABLED = "frontend_disabled"
 REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE = "v3_api_content_active"
-
 
 
 class FrontendMiddleware(MiddlewareMixin):
@@ -59,7 +59,10 @@ class FrontendMiddleware(MiddlewareMixin):
                     # with the v3 main content context active for the cached response HTML
                     # (see the "200 POST solution") in `FrontendMiddleware.process_response` and
                     # `MainContentView._get_valid_cached_response`
-                    setattr(request, REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE, True)
+                    
+                    # but do not change the POST v3 context if it was an ecempted frontend URL
+                    if not check_url_v3_everywhere_exempt(request.path):
+                        setattr(request, REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE, True)
                 return
             
             # do not redirect if the redirect exempt api call value is specifically set,
@@ -96,11 +99,7 @@ class FrontendMiddleware(MiddlewareMixin):
             matched = False
             if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
                 # in everywhere-enabled blacklist mode, we check if we *shouldn't* redirect to the v3 frontend
-                matched = True
-                for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
-                    if re.match(url_pattern, request.path):
-                        matched = False
-                        break
+                matched = not check_url_v3_everywhere_exempt(request.path)
             else:
                 # in the whitelist mode, check only if the URL matches any of the v3 redirectable URLs
                 for url_pattern in settings.COSINNUS_V3_FRONTEND_URL_PATTERNS:
@@ -144,9 +143,8 @@ class FrontendMiddleware(MiddlewareMixin):
         if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
             if request.method == 'POST' and response.status_code != 302 and not is_ajax(request):
                 # do not redirect the POST if it was an ecempted frontend URL (API or necesseray direct calls)
-                for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
-                    if re.match(url_pattern, request.path):
-                        return response
+                if check_url_v3_everywhere_exempt(request.path):
+                    return response
                 
                 # save response to cache and redirect with the cache
                 if hasattr(response, "_is_rendered") and not response._is_rendered:

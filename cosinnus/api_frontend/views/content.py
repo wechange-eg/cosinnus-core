@@ -29,6 +29,7 @@ from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
 from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 from cosinnus.utils.functions import uniquify_list
 from cosinnus.utils.http import remove_url_param, add_url_param
+from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 
 logger = logging.getLogger('cosinnus')
 
@@ -231,18 +232,13 @@ class MainContentView(APIView):
             self.url = CosinnusPortal.get_current().get_domain() + self.url
 
         # check if the target URL is one exempted for v3 frontend resolution - we do not accept those
-        matched_exemption = False
         _parsed = urlparse(self.url)
         target_url_path = _parsed.path
         target_url_query = QueryDict(_parsed.query)
         # append slash since with a missing resolver it wouldn't be auto appended and might miss matches
         if not target_url_path.endswith('/'):
             target_url_path += '/'
-        for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
-            if re.match(url_pattern, target_url_path):
-                matched_exemption = True
-                break
-        if matched_exemption:
+        if check_url_v3_everywhere_exempt(target_url_path):
             return self.build_redirect_response(self.url)
         
         # check if we have a redirected request where `FrontendMiddleware` saved the response
