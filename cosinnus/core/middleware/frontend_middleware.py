@@ -118,14 +118,35 @@ class FrontendMiddleware(MiddlewareMixin):
                     return redirect(redirect_to)
 
     def process_response(self, request, response):
+        # perform the switch language for the response
         if self.switch_language_to:
             SwitchLanguageView().switch_language(self.switch_language_to, request, response)
+        # remove the v3 context from the request again
         if hasattr(request, REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE):
             delattr(request, REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE)
         
-        # solution for reponse 200 POST requests that do not redirect but contain content
+        # Solution for reponse 200 POST requests that do not redirect but contain content:
+        # These POSTs would render the old frontend even if the v3-everywhere frontend is enabled. This happens for
+        # example when form views have validation error and render out the bound forms. If we would simply redirect
+        # to the v3 frontend, the POST data would be lost and the form could not be displayed with its already
+        # entered bound data and validation errors.
+        #
+        # To properly display this rendered content in the v3 frontend, we:
+        #   - detect when a client POST request resulted in a rendered-content 200 response instead of a django-like
+        #       302 redirect-success
+        #   - for those, save the response containing rendered HTML content and some metadata in a (short-lived)
+        #       cache entry
+        #   - return a redirect to the v3 frontend with an added use-cache URL param with the cache key as value
+        #   - when the frontend then accesses the main content api, `MainContentView` then recognizes the
+        #      `FrontendMiddleware.cached_content_key` cache key, does some validation for authenticity, and
+        #      then uses the cached response's HTML for itself instead of performing a request to that URL by itself
         if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
             if request.method == 'POST' and response.status_code != 302:
+                # do not redirect the POST if it was an ecempted frontend URL (API or necesseray direct calls)
+                for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
+                    if re.match(url_pattern, request.path):
+                        return response
+                
                 # save response to cache and redirect with the cache
                 if hasattr(response, "_is_rendered") and not response._is_rendered:
                     response.render()

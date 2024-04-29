@@ -979,6 +979,7 @@ class CosinnusConf(AppConf):
         "^/widgets/",
         "^/widget/",
         "^/user_match_assign/",
+        "/.*/.*/event/.*/assign_attendance/",
         "/.*/.*/attachmentselect/",
         "/.*/.*/users/member-invite-select2/",
         "/.*/.*/group-invite-select2/",

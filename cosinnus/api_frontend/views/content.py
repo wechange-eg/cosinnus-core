@@ -340,7 +340,8 @@ class MainContentView(APIView):
     
     def _get_valid_cached_response(self, request, target_url_path, target_url_query):
         """ Checks if there is a cache id in the GET params, and if the cache packet exists and it is a valid one and
-            it matches the request's target URL, return"""
+            it matches the request's target URL, return the cached response instead.
+            For infos on what this does, check the explanation in `FrontendMiddleware.process_response`. """
         # we accept the cache id as param attached to both the v3 main content api or the target url
         cache_id = request.GET.get(FrontendMiddleware.cached_content_key, None)
         if not cache_id:
