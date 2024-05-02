@@ -480,8 +480,23 @@ a.pull-left {
 	}
 }
 
+.fadedown.open > .btn.button-with-title-image,
 .btn.button-with-title-image:hover {
-    color: @app-neutral-color-white;
+	color: @app-neutral-color-white;
+	> ul.media-list {
+		> li.media {
+			> a.pull-right,
+			> span.pull-left,
+			> span.pull-right {
+				color: @app-neutral-color-white;
+			}
+			> div.media-body {
+				> span, a {
+					color: @app-neutral-color-white;
+				}
+			}
+		}
+	}
 }
 .button-with-title-image {
 	position: relative;
@@ -520,9 +535,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 			> a.pull-right,
 			> span.pull-right {
 				background-color: transparent;
+				color: @app-main-color-light;
 			}
 			> div.media-body {
 				background-color: transparent;
+				> span, a {
+					color: @app-main-color-light;
+				}
 			}
 		}
 	}
