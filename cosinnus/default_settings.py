@@ -161,7 +161,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.cosinnus_middleware.MovedTemporarilyRedirectFallbackMiddleware',
         
         'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'cosinnus.core.middleware.frontend_middleware.FrontendMiddleware',
         'django_otp.middleware.OTPMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.AdminOTPMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware',
@@ -179,6 +178,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
         'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
         'cosinnus.core.middleware.time_zone_middleware.TimezoneMiddleware',
+        
+        'cosinnus.core.middleware.frontend_middleware.FrontendMiddleware',
     ]
     
     TEMPLATES = [

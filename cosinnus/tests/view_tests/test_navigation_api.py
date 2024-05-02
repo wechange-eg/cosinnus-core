@@ -506,6 +506,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                     MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'),
                 ],
                 'services': [
+                    MenuItem('Discover', reverse('cosinnus:map'), icon=None, is_external=False, id='Map'),
                     MenuItem('Cloud', 'http://cloud.example.com', 'fa-cloud', is_external=True, id='Cloud'),
                     MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
                 ],
@@ -529,10 +530,10 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                     MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
                     MenuItem('Spaces', id='Spaces'),
                 ],
-                'middle': [
-                    MenuItem('Search', '/map/', 'fa-magnifying-glass', id='MapSearch'),
+                'middle': [],
+                'services': [
+                    MenuItem('Discover', reverse('cosinnus:map'), icon=None, is_external=False, id='Map'),
                 ],
-                'services': [],
                 'right': [
                     MenuItem('Help', icon='fa-question', id='Help'),
                     self.expected_language_menu_item(expected_label='EN', expected_icon=None),

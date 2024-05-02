@@ -9,11 +9,11 @@
 
 {% block content %}
 
-    <form method="post" class="cosinnus-form">
+    <form action="{% url 'cosinnus:two-factor-auth-disable' %}" method="post" class="cosinnus-form">
         {% csrf_token %}
         
 	    <div class="content-box">
-	        <h4>{% block title %}{% trans "Disable Two-Factor Authentication" %}{% endblock %}</h4>
+	        <h3>{% block title %}{% trans "Disable Two-Factor Authentication" %}{% endblock %}</h3>
 	        <p class="textfield transparent">{% blocktrans trimmed %}You are about to disable two-factor authentication. This
 	        weakens your account security, are you sure?{% endblocktrans %}</p>
 	        

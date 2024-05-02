@@ -79,7 +79,13 @@ EXEMPTED_URLS_FOR_2FA = [
     '/two_factor_auth/token_login/',
     '/administration/login-2fa/',
     '/logout/',
-    '/admin/logout/'
+    '/admin/logout/',
+    '/api/v1/user/me/',
+    '/api/v3/login',
+    '/api/v3/logout',
+    '/api/v3/authinfo',
+    '/api/v3/portal/settings',
+    '/api/v3/content/main',
 ]
 
 # list of url patterns that are not permitted to be accessed during guest login

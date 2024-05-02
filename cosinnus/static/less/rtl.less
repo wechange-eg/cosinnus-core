@@ -135,6 +135,12 @@ html[dir="rtl"] {
         .onoffswitch-text-label {
             padding-right: 5px;
         }
+
+        .widget-dropdown {
+		    position: absolute;
+            right: unset;
+            left: 16px;
+        }
     }
 
     .v2-navbar {
@@ -148,5 +154,12 @@ html[dir="rtl"] {
     .v2-navbar .nav-flyout.nav-flyout-right {
         left: inherit;
         right: initial;
+    }
+
+    .v2-dropdown {
+        ul.dropdown-menu {
+            left: 0;
+		    right: unset;
+        }
     }
 }

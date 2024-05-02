@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+/** LESS-ified init-styles/vendor CSS files that we added to the LESS scope and should be loaded before our LESS stylesheets */
+@import "bootstrap3-cosinnus";
+
+/** Regular LESS stylesheets */
 @import "variables";
 @import "v2/variables";
 @import "extra_design_variables";
@@ -29,7 +33,13 @@
 @import "v2/dashboard";
 @import "v2/navbar";
 @import "v2/content";
+@import "cosinnus_event";
+@import "cosinnus_notifications";
+@import "cosinnus_poll";
+@import "cosinnus_todo";
 @import "announcement";
 @import "rtl";
 @import "extra_design";
 @import "extra_less";
+/** LESS-ified vendor CSS files that we added here to keep them in the cosinnus-scoped views */
+@import "vendor/easymde";

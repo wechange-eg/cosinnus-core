@@ -5,9 +5,11 @@ from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
-from django.http import QueryDict, HttpResponseRedirect
-from django.urls import reverse
+from django.core.cache import cache
+from django.http import QueryDict
+from django.template.response import TemplateResponse
 from django.utils.crypto import get_random_string
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -19,14 +21,15 @@ from rest_framework.views import APIView
 from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
+from cosinnus.conf import settings
 from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
+from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 from cosinnus.utils.functions import uniquify_list
 from cosinnus.utils.http import remove_url_param, add_url_param
-from cosinnus.conf import settings
-from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
+from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 
 logger = logging.getLogger('cosinnus')
 
@@ -37,15 +40,18 @@ V3_CONTENT_COMMUNITY_URL_PREFIXES = [
     '/user_match/'
 ]
 # url suffixes for links from the leftnav that should be sorted into the top sidebar list
-V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES = [
-    '/microsite/'
+V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS = [
+    '.*/microsite/$'
 ]
 # url suffixes for links from the leftnav that should be sorted into the bottom sidebar list
-V3_CONTENT_BOTTOM_SIDEBAR_URL_SUFFIXES = [
-    '/members/',
-    '/edit/',
-    '/delete/',
-    '/password_change/'
+V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS = [
+    '.*/members/$',
+    '.*/edit/$',
+    '.*/delete/$',
+    '.*/password_change/$',
+    '^/account/deactivate/',
+    '^/account/activate/',
+    '^#$',
 ]
 
 
@@ -69,8 +75,6 @@ class MainContentView(APIView):
         * `styles`: a list of strings of literal inline styles to be inserted before the HTML content is inserted
       * `script_constants`: a list of literal inline JS code that has JS global definitions that need to be loaded before the `js_urls` are inserted (but can be loaded after `js_vendor_urls` are inserted)
       * `scripts`: a list of strings of literal inline JS script code to be executed before (after?) the HTML content is inserted
-      * `head_scripts` a list of strings of mixed content of either a single URL of a src JS file (starting with "http") or inline JS code (from within the <head>)
-      * `body_scripts` a list of strings of mixed content of either a single URL of a src JS file (starting with "http") or inline JS code (from within the <body>)
       * `sub_navigation`: sidebar content, includes 3 lists: `"sub_navigation" {"top": [...], "middle": [...], "bottom": [...]}`
         * middle is list of the apps that are enabled for the current space
         * each list contains the usual menu items
@@ -110,14 +114,10 @@ class MainContentView(APIView):
         "status_code": 0,
         "content_html": None,
         "footer_html": None,
-        # TODO: decide to keep the following 4 params to deliver JS content or ...
         "js_vendor_urls": [],
         "js_urls": [],
         "script_constants": [],
         "scripts": [],
-        # ... or the following 2 params
-        "head_scripts": [],
-        "body_scripts": [],
         "css_urls": [],
         "meta": None,
         "styles": None,
@@ -167,14 +167,6 @@ class MainContentView(APIView):
                         ],
                         "script_constants": "var cosinnus_base_url = \"http://localhost:8000/\";\nvar cosinnus_active_group = \"a-mein-bbb-projekt\";\n ...",
                         "scripts": "Backbone.mediator.publish('init:module-full-routed', ...",
-                        "head_scripts": [
-                            "/static/js/vendor/less.min.js",
-                            "var cosinnus_base_url = \"http://localhost:8000/\";\nvar cosinnus_active_group = \"a-mein-bbb-projekt\";\n ..."
-                        ],
-                        "body_scripts": [
-                            "http://localhost:8000/static/js/cosinnus.js?v=1.9.3",
-                            "Backbone.mediator.publish('init:module-full-routed', ...",
-                        ],
                         "meta": "<meta charset=\"utf-8\"/><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"/><meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"/> ...",
                         "styles": ".my-contribution-badge {min-width: 50px;border-radius: 20px;color: #FFF;font-size: 12px;padding: 2px 6px; margin-left: 5px;}.my-contribution-badge.red {background-color: rgb(245, 85, 0);} ...",
                         "sub_navigation": {
@@ -240,22 +232,28 @@ class MainContentView(APIView):
             self.url = CosinnusPortal.get_current().get_domain() + self.url
 
         # check if the target URL is one exempted for v3 frontend resolution - we do not accept those
-        matched_exemption = False
-        target_url_path = urlparse(self.url).path
+        _parsed = urlparse(self.url)
+        target_url_path = _parsed.path
+        target_url_query = QueryDict(_parsed.query)
         # append slash since with a missing resolver it wouldn't be auto appended and might miss matches
         if not target_url_path.endswith('/'):
             target_url_path += '/'
-        for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
-            if re.match(url_pattern, target_url_path):
-                matched_exemption = True
-                break
-        if matched_exemption:
-            return self.build_redirect_response(self.url, response=None)
-
-        # resolve the response, including redirects
-        # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
-        v3_exempted_url = add_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
-        response = self._resolve_url_via_query(v3_exempted_url, django_request, allow_redirects=False)
+        if check_url_v3_everywhere_exempt(target_url_path):
+            return self.build_redirect_response(self.url)
+        
+        # check if we have a redirected request where `FrontendMiddleware` saved the response
+        cached_response = self._get_valid_cached_response(django_request, target_url_path, target_url_query)
+        if cached_response:
+            # use the response from the cache key
+            response = cached_response
+            # pipe some response attributes of TemplateResponse so they can be accessed like a requests response
+            if type(response) is TemplateResponse:
+                setattr(response, 'url', self.url)
+                setattr(response, 'text', response.content)
+        else:
+            # resolve the response by querying with a request, including redirects
+            response = self._resolve_url_via_query(self.url, django_request, allow_redirects=False)
+        
         # if we have been redirected, return an empty data package with a redirect target url!
         if response.status_code in [301, 302]:
             # remove the v3-exempt parameter from the resolved URL again
@@ -276,7 +274,7 @@ class MainContentView(APIView):
         # determine group for request
         self._resolve_request_group(resolved_url, django_request)
         # parse the response's html
-        html = self._clean_response_html(str(response.text))
+        html = self._clean_response_html(force_str(response.text))
 
         # TODO compress html? or do server-side request compression?
         
@@ -291,13 +289,8 @@ class MainContentView(APIView):
         styles = self._parse_inline_tag_contents(html_soup, 'style')
         sub_navigation = self._parse_leftnav_menu(html_soup)
         
-        head_scripts = self._parse_js_scripts_and_inlines(html_soup, 'head')
-        body_scripts = self._parse_js_scripts_and_inlines(html_soup)
-        # filtering the body scripts by the 'body' tag seems to not find all scripts, so we
-        # instead find *all* scripts and subtract the ones found in the header
-        body_scripts = [body_script for body_script in body_scripts if not body_script in head_scripts]
-        
         html_soup = self._filter_html_view_specific(html_soup, resolved_url)
+        # this sets self.content_html and self.footer_html
         self._parse_html_content(html_soup) # this will destroy the soup, so use it last or on a new soup!
         
         data = copy(self._data_proto)
@@ -306,14 +299,10 @@ class MainContentView(APIView):
         data["status_code"] = response.status_code
         data["content_html"] = self.content_html
         data["footer_html"] = self.footer_html
-        # TODO: decide to keep the following 4 params to deliver JS content or ...
         data["js_vendor_urls"] = js_vendor_urls
         data["js_urls"] = js_urls
         data["script_constants"] = script_constants
         data["scripts"] = scripts
-        # ... or the following 2 params
-        data["head_scripts"] = head_scripts
-        data["body_scripts"] = body_scripts
         data["css_urls"] = css_urls
         data["meta"] = meta
         data["styles"] = styles
@@ -344,16 +333,41 @@ class MainContentView(APIView):
         data = copy(self._data_proto)
         data["resolved_url"] = target_url
         data["redirect"] = True
-        data["status_code"] = resolved_response.status_code
+        data["status_code"] = resolved_response.status_code if resolved_response else 302
         return self.build_data_response(data, resolved_response)
     
-    def _resolve_url_via_query(self, url, request, allow_redirects=True):
+    def _get_valid_cached_response(self, request, target_url_path, target_url_query):
+        """ Checks if there is a cache id in the GET params, and if the cache packet exists and it is a valid one and
+            it matches the request's target URL, return the cached response instead.
+            For infos on what this does, check the explanation in `FrontendMiddleware.process_response`. """
+        # we accept the cache id as param attached to both the v3 main content api or the target url
+        cache_id = request.GET.get(FrontendMiddleware.cached_content_key, None)
+        if not cache_id:
+            cache_id = target_url_query.get(FrontendMiddleware.cached_content_key, None)
+        if not cache_id:
+            return None
+        cached_response_packet = cache.get(FrontendMiddleware.FRONTEND_V3_POST_CONTENT_CACHE_KEY % cache_id)
+        if not cached_response_packet:
+            return None
+        # check validity: must match session_key and url path
+        if not cached_response_packet['session_key'] == request.session.session_key:
+            return None
+        if not cached_response_packet['target_url_path'] == target_url_path:
+            return None
+        # delete cache entry, we can only use a response once
+        cache.delete(FrontendMiddleware.FRONTEND_V3_POST_CONTENT_CACHE_KEY % cache_id)
+        return cached_response_packet['response']
+    
+    def _resolve_url_via_query(self, url, request, allow_redirects=False):
         """ Resolves the URL via a requests get().
             Cookies from all redirect steps are passed along collectively. """
+        # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
+        v3_exempted_url = add_url_param(url, FrontendMiddleware.param_key_exempt,
+                                        FrontendMiddleware.param_value_exempt)
         session = requests.Session()
         session.headers.update(dict(request.headers))
         session.cookies.update(request.COOKIES)
-        response = session.get(url, allow_redirects=allow_redirects)
+        response = session.get(v3_exempted_url, allow_redirects=allow_redirects)
         for history_response in response.history:
             response.cookies.update(history_response.cookies)
         return response
@@ -464,6 +478,16 @@ class MainContentView(APIView):
             content = content.decode_contents()
             self.has_leftnav = False
         self.content_html = str(content or '').strip()
+        
+        # add any modal boxes from the leftnav to the main content html
+        if self.has_leftnav:
+            leftnav = soup.find('div', class_='x-v3-leftnav')
+            if leftnav:
+                popup_modals = [pop for pop in leftnav.find_all('div') if pop.get('class') and 'modal' in pop.get('class')]
+                for popup_modal in popup_modals:
+                    self.content_html += '\n' + str(popup_modal)
+        
+        # parse footer
         footer = soup.find('div', class_='x-v3-footer')
         if footer:
             self.footer_html = str(footer.decode_contents()).strip()
@@ -485,14 +509,32 @@ class MainContentView(APIView):
             return []
         menu_items = []
         for leftnav_link in html_soup.find_all(['a', 'button']):
-            # skip link-less buttons (like the dropdown trigger)
+            attributes = {}
+            # detect bootstrap-modal attribues
+            if leftnav_link.get('data-toggle') and leftnav_link.get('data-target'):
+                attributes.update({
+                    'data-toggle': leftnav_link.get('data-toggle'),
+                    'data-target': leftnav_link.get('data-target')
+                })
+            # skip link-less buttons (like the dropdown trigger), unless they have modal data attributes
             href = leftnav_link.get('href')
-            if not href or href == '#':
+            if not href and not attributes:
+                continue
+            # ignore some links depending on their class
+            if leftnav_link.get('class') and any([blacklisted_class in leftnav_link.get('class')
+                    for blacklisted_class in ['fadedown-clickarea']]):
                 continue
             link_label = '(Link)'
             text_source = leftnav_link.find('div', class_='media-body') or leftnav_link
             if text_source:
-                link_label = text_source.text.strip().replace('/n', '')
+                parsed_label = text_source.text.strip().replace('/n', '')
+                if not parsed_label:
+                    # check for an additional span within the media-body
+                    parsed_label = text_source.get('title')
+                    if parsed_label:
+                        parsed_label = parsed_label.strip().replace('/n', '')
+                if parsed_label:
+                    link_label = parsed_label
             
             # a button counts as selected item if there is an `<i class="fa fa-caret-right"></i>` in it
             selected = len([lnk for lnk in leftnav_link.find_all('i') if lnk.get('class') and 'fa-caret-right' in lnk.get('class')]) > 0
@@ -505,11 +547,12 @@ class MainContentView(APIView):
             # create menu item for the link
             menu_item = MenuItem(
                 link_label,
-                href,
+                url=href if href else None,
                 icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
                 id='Sidebar-' + get_random_string(8),
                 sub_items=sub_items,
-                selected=selected
+                selected=selected,
+                attributes=attributes if attributes else None
             )
             menu_items.append(menu_item)
         return menu_items
@@ -550,19 +593,31 @@ class MainContentView(APIView):
         selected_menu_item = next((item for item in buttons_items if item.get('selected', False)), None)
         if not selected_menu_item and active_menu_item:
             active_menu_item['selected'] = True
+            
+        # deduplicate menu items by removing all elements beyond the first that have the same label+href
+        label_href_hashes = []
+        def _check_unique_and_remember(menu_item):
+            hash = menu_item['label'] + '|' + (menu_item.get('url') or '-')
+            if hash in label_href_hashes:
+                return False
+            label_href_hashes.append(hash)
+            return True
+        appsmenu_items = [item for item in appsmenu_items if _check_unique_and_remember(item)]
+        buttons_items = [item for item in buttons_items if _check_unique_and_remember(item)]
         
+        # sort items from the two leftnav areas into the three v3 leftnav areas
         def _sort_menu_items(menu_items, default_target):
             # picks a spot for the given items, with a given default target if no other rules apply
             for menu_item in menu_items:
                 target_subnav = default_target
                 # select the proper subnav for this menu to go to, by type of URL
-                if any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_BOTTOM_SIDEBAR_URL_SUFFIXES):
+                if not menu_item['url']:
                     target_subnav = bottom
-                elif any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES):
+                elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS):
+                    target_subnav = bottom
+                elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS):
                     target_subnav = top
                 target_subnav.append(menu_item)
-        
-        # sort items from the two leftnav areas into the three v3 leftnav areas
         _sort_menu_items(appsmenu_items, middle)
         _sort_menu_items(buttons_items, middle_from_buttons_area)
         
@@ -574,7 +629,6 @@ class MainContentView(APIView):
         else:
             middle.extend(middle_from_buttons_area)
             
-        
         # add sidebar third party tools if it exists in group data
         if self.group and self.group.third_party_tools:
             for third_party_tool in self.group.third_party_tools:
@@ -627,27 +681,6 @@ class MainContentView(APIView):
         liss = [tag.decode_contents().strip() for tag in tags]
         tag_contents = '\n'.join(liss)
         return tag_contents
-    
-    def _parse_js_scripts_and_inlines(self, html_soup, container_tag_name=None):
-        """ Parses from the given soup both script sources and inline scripts.
-            @param container_tag_name: if given, searches for scripts only within this tag name (e.g. "body")
-            @return a list of strings, mixed content of either:
-                - a single URL of a src JS file (starting with "http") or
-                - inline JS code
-        """
-        js_list = []
-        container_tag = html_soup.find(container_tag_name) if container_tag_name else html_soup
-        script_elements = container_tag.find_all('script')
-        for tag in script_elements:
-            js_link = tag.get('src')
-            if js_link:
-                # we have a JS file link by src
-                js_list.append(self._format_static_link(js_link))
-            else:
-                # we have an inline script
-                inline_script_content = tag.decode_contents().strip()
-                js_list.append(inline_script_content)
-        return js_list
     
     def _format_static_link(self, link):
         domain = CosinnusPortal.get_current().get_domain()

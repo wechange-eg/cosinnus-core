@@ -1119,23 +1119,18 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         # spaces
         left_navigation_items.append(MenuItem('Spaces', id='Spaces'))
 
-        main_navigation_items['left'] = left_navigation_items
-
         # middle part
         middle_navigation_items = []
 
         # search
         if request.user.is_authenticated:
-            search_item = MenuItem(_('Search'), reverse('cosinnus:search'), 'fa-magnifying-glass', id='Search')
-        else:
-            search_item = MenuItem(_('Search'), reverse('cosinnus:map'), 'fa-magnifying-glass', id='MapSearch')
-        middle_navigation_items.append(search_item)
+            middle_navigation_items.append(
+                MenuItem(_('Search'), reverse('cosinnus:search'), 'fa-magnifying-glass', id='Search')
+            )
 
         if request.user.is_authenticated:
             # bookmarks
             middle_navigation_items.append(MenuItem(_('Bookmarks'), icon='fa-bookmark', id='Bookmarks'))
-
-        main_navigation_items['middle'] = middle_navigation_items
 
         # services part
         services_navigation_items = []
@@ -1159,8 +1154,14 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                     services_navigation_items.append(
                         MenuItem( _('Messages'), reverse('postman:inbox'), icon='messages', id='Messages')
                     )
-        main_navigation_items['services'] = services_navigation_items
-
+        
+        # add "Discover" link to services for all logged in users and additionally for non-logged-in users on open portals
+        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or \
+                (request.user.is_authenticated and not request.user.is_guest):
+            services_navigation_items.insert(0,
+                MenuItem(_('Discover'), reverse('cosinnus:map'), icon=None, is_external=False, id='Map')
+            )
+        
         # right part
         right_navigation_items = []
 
@@ -1192,7 +1193,10 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 right_navigation_items.append(
                     MenuItem(_('Register'), reverse('cosinnus:user-add'),  id='Register')
                 )
-
+        
+        main_navigation_items['left'] = left_navigation_items
+        main_navigation_items['middle'] = middle_navigation_items
+        main_navigation_items['services'] = services_navigation_items
         main_navigation_items['right'] = right_navigation_items
         
         # allow portals to add links via a dropin defined in `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`
