@@ -964,9 +964,6 @@ class CosinnusConf(AppConf):
         "^/language/",
         ".*/api/.*", # any paths with api calls
         "^/o/", # any oauth paths
-        "^/administration/", # the entire administration area
-        "^/conference_administration/",
-        "^/statistics/simple/",
         "^/housekeeping/",
         "^/account/", # user account service functions
         "^/fb-integration/",

@@ -4,6 +4,19 @@
 {% block page_title %}{% trans "Simple Statistics" %}{% endblock %}
 
 {% block leftnav %}
+    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:administration' %}">
+	    <ul class="media-list">
+	        <li class="media">
+	           <span class="pull-left">
+	                <i class="fa fa-reply"></i>
+	            </span>
+	            <div class="media-body">
+                    {% trans "Administration" %}
+	            </div>
+	        </li>
+	    </ul>
+	</button>
+
 	<button type="button" class="btn w100 btn-emphasized large-space" href="#">
 	    <ul class="media-list">
 	        <li class="media">

@@ -2,7 +2,7 @@
 
 {% if request.user|is_superuser %}
     {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED %}
-        <div type="button" class="btn w100 btn-emphasized {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}fine-space{% else %}regular-space{% endif %}" 
+        <button type="button" class="btn w100 btn-emphasized {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}fine-space{% else %}regular-space{% endif %}"
                 href="{% url 'cosinnus:administration-managed-tags-newsletter' %}">
             <ul class="media-list">
                 <li class="media">
@@ -17,11 +17,11 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </button>
     {% endif %}
 
     {% if SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
-        <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-groups-newsletter' %}">
+        <button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-groups-newsletter' %}">
             <ul class="media-list">
                 <li class="media">
                 <span class="pull-left">
@@ -35,11 +35,11 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </button>
     {% endif %}
 
     {% if SETTINGS.COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES %}
-    <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:administration-users' %}">
+    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:administration-users' %}">
         <ul class="media-list">
             <li class="media">
             <span class="pull-left">
@@ -50,11 +50,11 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </button>
     {% endif %}
 
     {% if SETTINGS.COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED %}
-        <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:administration-user-import' %}">
+        <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:administration-user-import' %}">
             <ul class="media-list">
                 <li class="media">
                 <span class="pull-left">
@@ -65,11 +65,11 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </button>
     {% endif %}
 
     {% if SETTINGS.COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED %}
-        <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:administration-user-export' %}">
+        <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:administration-user-export' %}">
             <ul class="media-list">
                 <li class="media">
                 <span class="pull-left">
@@ -80,12 +80,12 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </button>
     {% endif %}
 
 
     {% if SETTINGS.COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED %}
-    <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-dynamic-fields' %}">
+    <button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-dynamic-fields' %}">
         <ul class="media-list">
             <li class="media">
             <span class="pull-left">
@@ -96,13 +96,13 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </button>
     {% endif %}
 
 
 
 
-    <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:user-dashboard-announcement-list' %}">
+    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:user-dashboard-announcement-list' %}">
         <ul class="media-list">
             <li class="media">
             <span class="pull-left">
@@ -113,9 +113,9 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </button>
 
-    <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-welcome-email' %}">
+    <button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-welcome-email' %}">
         <ul class="media-list">
             <li class="media">
             <span class="pull-left">
@@ -126,13 +126,13 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </button>
 {% endif %}
 
 
 {% if request.user|is_portal_manager or request.user|is_superuser %}
     {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
-        <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:conference-administration-overview" %}">
+        <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:conference-administration-overview" %}">
             <ul class="media-list">
                 <li class="media">
                     <span class="pull-left">
@@ -143,9 +143,9 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </button>
         
-        <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:conference-administration-overview-premium" %}">
+        <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:conference-administration-overview-premium" %}">
             <ul class="media-list">
                 <li class="media">
                     <span class="pull-left">
@@ -156,9 +156,9 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </button>
         
-        <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:conference-administration-overview-nonstandard" %}">
+        <button type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:conference-administration-overview-nonstandard" %}">
             <ul class="media-list">
                 <li class="media">
                     <span class="pull-left">
@@ -169,11 +169,11 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </button>
     {% endif %}
 
 
-    <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:simple-statistics" %}">
+    <button type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:simple-statistics" %}">
         <ul class="media-list">
             <li class="media">
                 <span class="pull-left">
@@ -184,5 +184,5 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </button>
 {% endif %}
