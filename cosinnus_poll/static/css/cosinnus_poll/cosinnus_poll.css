@@ -41,6 +41,10 @@
     display: inline;
 }
 
+.poll-text {
+    white-space: normal !important;
+}
+
 .vote-control {
     display: inline-block;
     width: auto;
