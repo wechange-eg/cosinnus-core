@@ -371,7 +371,11 @@ if settings.COSINNUS_CLOUD_ENABLED:
                 new_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
                 # rename the folder if the name would be a different one
                 if new_nextcloud_groupfolder_name != old_nextcloud_groupfolder_name:
-                    result = rename_group_and_group_folder(group.nextcloud_groupfolder_id, new_nextcloud_groupfolder_name)
+                    result = False
+                    try:
+                        result = rename_group_and_group_folder(group.nextcloud_groupfolder_id, new_nextcloud_groupfolder_name)
+                    except Exception as e:
+                        logger.warning('Could not rename Nextcloud group folder.', extra={'exc': e})
                     # if the rename was successful, save the new group folder name.
                     # otherwise, reload it to discard the newly generated folder name on the object
                     if result is True:
