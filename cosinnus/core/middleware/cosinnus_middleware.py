@@ -102,6 +102,11 @@ GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS = [
     r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/(?P<event_slug>[^/]+)/assign_attendance/",  # event attendance
     r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/poll/(?P<poll_slug>[^/]+)/",  # poll votes
 ]
+ICAL_FEED_URL_PATTERNS = [
+    "^/events/team/.*/feed/",
+    "^/events/team/.*/feed/",
+    "^/events/team/.*/conference/feed/",
+]
 
 # if any of these URLs was requested, auto-redirects in the user's profile settings won't trigger
 NO_AUTO_REDIRECTS = (
@@ -373,6 +378,10 @@ class GroupResolvingMiddlewareMixin(object):
                     return True
             except:
                 pass
+        # additional check for additional feed urls (root patterns)
+        for url_pattern in ICAL_FEED_URL_PATTERNS:
+            if re.match(url_pattern, request.path):
+                return True
         return False
     
     def is_anonymous_block_exempted_group_url(self, request):
