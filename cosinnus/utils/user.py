@@ -515,8 +515,9 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
 
         # set the user's tos_accepted flag to true and date to now
         accept_user_tos_for_portal(user, save=False)
-        
-        # make user a member of the guest access' group
+    
+    # make user a member of the guest access' group
+    with transaction.atomic():
         group.add_member_to_group(user)
     
     # log the user in
