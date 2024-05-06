@@ -445,8 +445,10 @@ class TodoEntryCompleteMeView(TodoEntryEditView):
     message_error = _('Todo "%(title)s" could not be completed by You.')
 
     def form_valid(self, form):
+        form.instance.is_completed = True
         form.instance.completed_by = self.request.user
         form.instance.completed_date = now()
+        form.instance.save(update_fields=['is_completed', 'completed_by', 'completed_date'])
         
         session_id = uuid1().int
         # send notification of completion to creator of todo
@@ -457,7 +459,9 @@ class TodoEntryCompleteMeView(TodoEntryEditView):
         followers_except_self = get_user_model().objects.filter(id__in=followers_except_self)
         cosinnus_notifications.following_todo_completed.send(sender=self, user=self.request.user, obj=form.instance, audience=followers_except_self, session_id=session_id, end_session=True)
         
-        return super(TodoEntryCompleteMeView, self).form_valid(form)
+        # workaround for super's form_valid being called here deleting the instance media_tag
+        messages.success(self.request, self.message_success % {'title': form.instance.title})
+        return redirect(self.get_success_url())
 
 entry_complete_me_view = TodoEntryCompleteMeView.as_view()
 entry_complete_me_view_api = TodoEntryCompleteMeView.as_view(is_ajax_request_url=True)
@@ -501,9 +505,13 @@ class TodoEntryIncompleteView(TodoEntryEditView):
     message_error = _('Todo "%(title)s" could not be set to incomplete.')
 
     def form_valid(self, form):
+        form.instance.is_completed = False
         form.instance.completed_by = None
         form.instance.completed_date = None
-        return super(TodoEntryIncompleteView, self).form_valid(form)
+        form.instance.save(update_fields=['is_completed', 'completed_by', 'completed_date'])
+        # workaround for super's form_valid being called here deleting the instance media_tag
+        messages.success(self.request, self.message_success % {'title': form.instance.title})
+        return redirect(self.get_success_url())
 
 entry_incomplete_view = TodoEntryIncompleteView.as_view()
 entry_incomplete_view_api = TodoEntryIncompleteView.as_view(is_ajax_request_url=True)
