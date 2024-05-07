@@ -17,6 +17,7 @@ UPDATES = {
         'short_text': _('This update includes several bugfixes:'),
         'full_text': _(
             '- Fixed an issue where directly invited users could not enter their initial password.\n'
+            '- Fixed an issue where the password reset link would not work in some cases.\n'
             '- Fixed an issue with users were not correctly redirected to the user dashboard after signing up.\n'
             '- Fixed an issue where iCal feeds were sometimes not accessible from external calendar apps.\n'
             '- Fixed an issue where accessing shared pad URLs directly would display an error.\n'

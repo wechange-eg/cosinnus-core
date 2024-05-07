@@ -409,7 +409,10 @@ class RedirectAnonymousUserToLoginMiddleware(GroupResolvingMiddlewareMixin, Midd
 
     def process_request(self, request):
         if not request.user.is_authenticated:
-            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]) \
+            path = request.path
+            if path and not path.endswith('/'):
+                path += '/'
+            if not any([path.startswith(prefix) for prefix in LOGIN_URLS]) \
                     and not self.is_anonymous_block_exempted_group_url(request):
                 return redirect_to_not_logged_in(request)
 
@@ -421,9 +424,12 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(GroupResolvingMiddleware
 
     def process_request(self, request):
         if not request.user.is_authenticated:
-            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]) \
+            path = request.path
+            if path and not path.endswith('/'):
+                path += '/'
+            if not any([path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]) \
                     and not self.is_anonymous_block_exempted_group_url(request):
-                if request.path.startswith('/api/') and 'Authorization' in request.headers:
+                if path.startswith('/api/') and 'Authorization' in request.headers:
                     # attempt to login with header token to accept token-authenticated API requests
                     try:
                         if JWTAuthentication().authenticate(request):
