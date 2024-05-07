@@ -108,6 +108,11 @@ GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS = [
     r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/(?P<event_slug>[^/]+)/assign_attendance/",  # event attendance
     r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/poll/(?P<poll_slug>[^/]+)/",  # poll votes
 ]
+ICAL_FEED_URL_PATTERNS = [
+    "^/events/team/.*/feed/",
+    "^/events/team/.*/feed/",
+    "^/events/team/.*/conference/feed/",
+]
 
 # if any of these URLs was requested, auto-redirects in the user's profile settings won't trigger
 NO_AUTO_REDIRECTS = (
@@ -379,6 +384,10 @@ class GroupResolvingMiddlewareMixin(object):
                     return True
             except:
                 pass
+        # additional check for additional feed urls (root patterns)
+        for url_pattern in ICAL_FEED_URL_PATTERNS:
+            if re.match(url_pattern, request.path):
+                return True
         return False
     
     def is_anonymous_block_exempted_group_url(self, request):
@@ -406,7 +415,10 @@ class RedirectAnonymousUserToLoginMiddleware(GroupResolvingMiddlewareMixin, Midd
 
     def process_request(self, request):
         if not request.user.is_authenticated:
-            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]) \
+            path = request.path
+            if path and not path.endswith('/'):
+                path += '/'
+            if not any([path.startswith(prefix) for prefix in LOGIN_URLS]) \
                     and not self.is_anonymous_block_exempted_group_url(request):
                 return redirect_to_not_logged_in(request)
 
@@ -418,9 +430,12 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(GroupResolvingMiddleware
 
     def process_request(self, request):
         if not request.user.is_authenticated:
-            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]) \
+            path = request.path
+            if path and not path.endswith('/'):
+                path += '/'
+            if not any([path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]) \
                     and not self.is_anonymous_block_exempted_group_url(request):
-                if request.path.startswith('/api/') and 'Authorization' in request.headers:
+                if path.startswith('/api/') and 'Authorization' in request.headers:
                     # attempt to login with header token to accept token-authenticated API requests
                     try:
                         if JWTAuthentication().authenticate(request):
