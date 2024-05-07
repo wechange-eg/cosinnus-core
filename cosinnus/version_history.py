@@ -11,6 +11,21 @@ UPDATES includes release notes for each version shown to the users with:
 """
 
 UPDATES = {
+    '1.20.4': {
+        'datetime': datetime(2024, 5, 6, tzinfo=pytz.utc),
+        'title': _('Version 1.20.4 released'),
+        'short_text': _('This update includes several bugfixes:'),
+        'full_text': _(
+            '- Fixed an issue where directly invited users could not enter their initial password.\n'
+            '- Fixed an issue where the password reset link would not work in some cases.\n'
+            '- Fixed an issue with users were not correctly redirected to the user dashboard after signing up.\n'
+            '- Fixed an issue where iCal feeds were sometimes not accessible from external calendar apps.\n'
+            '- Fixed an issue where accessing shared pad URLs directly would display an error.\n'
+            '- Fixed an issue where guest accounts could not access video conferences (if enabled).\n'
+            '- Fixed an issue in the legacy messaging system where the autocomplete function would never finish when entering a recipient.\n'
+            '- Fixed an issue where attached images and metadata of todo entries would be removed if completing them from the detail page.\n'
+        ),
+    },
     '1.20.2': {
         'datetime': datetime(2024, 4, 18, tzinfo=pytz.utc),
         'title': _('Version 1.20.2 released'),

@@ -149,7 +149,7 @@ class EtherpadWriteView(RequireLoggedInMixin, EtherpadDetailView):
     
     def dispatch(self, request, *args, **kwargs):
         # redirect guest users to read-only view unless soft edits are enabled
-        if request.user.is_guest and not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
+        if request.user.is_authenticated and request.user.is_guest and not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
             messages.info(request, _('Editing is not permitted for guest accounts.'))
             return redirect(group_aware_reverse('cosinnus:etherpad:pad-detail', kwargs=kwargs))
         return super().dispatch(request, *args, **kwargs)

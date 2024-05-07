@@ -52,7 +52,7 @@ from cosinnus.views.mixins.group import EndlessPaginationMixin,\
 from cosinnus.utils.user import filter_active_users, \
     get_newly_registered_user_email, accept_user_tos_for_portal, \
     get_user_query_filter_for_search_terms, get_user_select2_pills, \
-    get_group_select2_pills, get_user_from_set_password_token, create_guest_user_and_login
+    get_group_select2_pills, get_user_from_set_password_token, create_guest_user_and_login, get_user_by_email_safe
 from uuid import uuid1, uuid4
 from django.utils.encoding import force_str
 from cosinnus.core import signals
@@ -1105,6 +1105,9 @@ class UserSelect2View(Select2View):
     """
     This view is used as API backend to serve the suggestions for the message recipient field.
     """
+    
+    HARD_USER_LIMIT = 50
+    HARD_GROUP_LIMIT = 20
 
     def check_all_permissions(self, request, *args, **kwargs):
         user = request.user
@@ -1115,19 +1118,29 @@ class UserSelect2View(Select2View):
         terms = term.strip().lower().split(' ')
         q = get_user_query_filter_for_search_terms(terms)
         
-        users = filter_active_users(get_user_model().objects.filter(q).exclude(id__exact=request.user.id))
+        users = get_user_model().objects.filter(q).exclude(id__exact=request.user.id)
+        users = filter_active_users(users)
+        # hard limit user count that we search for so we don't die on very short fuzzy searches,
+        # and do this before the expensive visibility checks
+        users = users[:self.HARD_USER_LIMIT]
         # as a last filter, remove all users that that have their privacy setting to "only members of groups i am in",
         # if they aren't in a group with the user
         users = [user for user in users if check_user_can_see_user(request.user, user)]
         
+        # check for a direct email match for users to always find a user like that
+        direct_email_user = get_user_by_email_safe(term)
+        if direct_email_user and check_user_can_see_user(request.user, direct_email_user):
+            users.append(direct_email_user)
         
         # | Q(username__icontains=term))
         # Filter all groups the user is a member of, and all public groups for
         # the term.
         # Use CosinnusGroup.objects.get_cached() to search in all groups
         # instead
-        groups = set(get_cosinnus_group_model().objects.get_for_user(request.user)).union(
-            get_cosinnus_group_model().objects.public())
+        groups = list(set(get_cosinnus_group_model().objects.get_for_user(request.user)).union(
+            get_cosinnus_group_model().objects.public()))
+        # hard limit user count that we search for so we don't die on very short fuzzy searches
+        groups = groups[:self.HARD_GROUP_LIMIT]
         
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         groups = [group for group in groups if all([term.lower() in group.name.lower() for term in terms]) and (check_user_superuser(request.user) or group.slug != forum_slug)]
@@ -1139,7 +1152,6 @@ class UserSelect2View(Select2View):
         #               for group in groups])
         
         # sort results
-        
         users = sorted(users, key=lambda useritem: full_name(useritem).lower())
         groups = sorted(groups, key=lambda groupitem: groupitem.name.lower())
         
