@@ -2,6 +2,7 @@ from django.db.models import Q
 from rest_framework import permissions
 from rest_framework.decorators import action
 
+from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal, BaseTagObject
 
 
@@ -13,6 +14,13 @@ class PublicCosinnusGroupFilterMixin(object):
         queryset = queryset.filter(portal=CosinnusPortal.get_current())
         # Filter visibility
         queryset = queryset.filter(is_active=True)
+        # Filter by 'publicly_visible'
+        if settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN:
+            # Filter by field value if the option is shown
+            queryset = queryset.filter(publicly_visible=True)
+        elif settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE is False:
+            # Return empty queryset if the option is not shown and the default value is False.
+            queryset = queryset.none()
         return queryset
 
 
