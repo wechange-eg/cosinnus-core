@@ -875,10 +875,15 @@ class GlobalFeed(BaseEventFeed):
 
     def items(self, request):
         qs = Event.get_current_for_portal()
-        qs = qs.filter(group__publicly_visible=True)
         qs = filter_tagged_object_queryset_for_user(qs, AnonymousUser())
         qs = qs.filter(state=Event.STATE_SCHEDULED, from_date__isnull=False, to_date__isnull=False).order_by(
             '-from_date')
+        if settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN:
+            # Filter by field value if the option is shown
+            qs = qs.filter(group__publicly_visible=True)
+        elif settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE is False:
+            # Return empty queryset if the option is not shown and the default value is False.
+            qs = qs.none()
         return qs
 
 
