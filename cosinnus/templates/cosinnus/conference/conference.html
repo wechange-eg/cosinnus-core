@@ -4,9 +4,12 @@
 
 {% block page_title %}{% if room and room.title %}{{ room.title }} - {% endif %}{{ group.name }}{% endblock page_title %}
 
-{% block extrahead %}
-  <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
-{% endblock extrahead %}
+{% block csshead %}
+    {# do not load in any CSS stylesheets for the conference area when the v3 main content is being rendered out #}
+    {% if not COSINNUS_V3_API_CONTENT_ACTIVE %}
+        {{ block.super }}
+    {% endif %}
+{% endblock csshead %}
 
 {% block og_meta_attributes %}
 	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}
