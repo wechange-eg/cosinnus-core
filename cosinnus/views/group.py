@@ -623,7 +623,6 @@ class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
             'meeting_name': self.group.name,
             'group': self.group,
         })
-        print(f'>< context {context}')
         return context
 
 
