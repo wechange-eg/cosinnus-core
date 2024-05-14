@@ -3532,6 +3532,9 @@ msgstr "There are no groups."
 msgid "Copy guest invitation"
 msgstr "There are no groups."
 
+msgid "There was an error."
+msgstr ""
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 

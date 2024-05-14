@@ -391,3 +391,6 @@ msgstr "Einladung kopieren"
 
 msgid "Copy guest invitation"
 msgstr "Gäste-Einladung kopieren"
+
+msgid "There was an error."
+msgstr "Ein Fehler ist aufgetreten."

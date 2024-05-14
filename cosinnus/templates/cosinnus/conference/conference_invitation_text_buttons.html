@@ -52,12 +52,18 @@
             const text = new ClipboardItem({
                 "text/plain": fetchPromise.then(data => new Blob([data.invitation], {type: "text/plain"}))
             })
-            navigator.clipboard.write([text]).then(() => fetchPromise.then(data => window.alert(data.alert_text)))
+            navigator.clipboard.write([text]).then(() => {
+                fetchPromise.then(data => window.alert(data.alert_text))
+            }).catch(err => {
+                window.alert('{% trans "There was an error." %}')
+            });
         } else {
             // Use wirteText on Firefox that does not support ClipboardItem and allows async access to clipboard.
             fetchPromise.then(data => {
                 navigator.clipboard.writeText(data.invitation).then(() => window.alert(data.alert_text))
-            })
+            }).catch(err => {
+                window.alert('{% trans "There was an error." %}')
+            });
         }
     }
     $('.copy-invitation').click(function(){

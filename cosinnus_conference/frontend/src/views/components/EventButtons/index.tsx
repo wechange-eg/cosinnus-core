@@ -57,7 +57,10 @@ export function EventButtons(props: EventButtonsProps) {
       navigator.clipboard.write([text]).then(() => fetchPromise.then(data => {
         setInvitationDialogText(data.alert_text);
         setInvitationDialogOpen(true)
-      }))
+      })).catch(err => {
+        setInvitationDialogText("There was an error.");
+        setInvitationDialogOpen(true)
+      });
     } else {
       // Use wirteText on Firefox that does not support ClipboardItem and allows async access to clipboard.
       fetchPromise.then(data => {
@@ -65,7 +68,10 @@ export function EventButtons(props: EventButtonsProps) {
           setInvitationDialogText(data.alert_text);
           setInvitationDialogOpen(true)
         })
-      })
+      }).catch(err => {
+        setInvitationDialogText("There was an error.");
+        setInvitationDialogOpen(true)
+      });
     }
   }
   return (

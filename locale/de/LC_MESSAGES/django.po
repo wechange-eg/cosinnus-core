@@ -3403,6 +3403,9 @@ msgstr "Einladung kopieren"
 msgid "Copy guest invitation"
 msgstr "Gäste-Einladung kopieren"
 
+msgid "There was an error."
+msgstr "Ein Fehler ist aufgetreten."
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr "Diese Sitzung kann von den Veranstaltern aufgezeichnet werden. Indem du fortfährst, erklärst du dich damit einverstanden, aufgezeichnet zu werden. Dazu gehören Audio, Video, Chat, gemeinsame Notizen und Whiteboard-Aktivitäten. Die Aufzeichnung kann durch die Veranstalter weitergegeben werden."
 
