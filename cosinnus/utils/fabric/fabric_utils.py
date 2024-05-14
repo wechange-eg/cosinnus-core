@@ -149,6 +149,8 @@ def setup_env(portal_name, domain, pull_branch,
         env.start_command = f'sudo /bin/systemctl start portal-{portal_name}-django.service'
         env.memcached_restart_command = f'sudo /bin/systemctl restart portal-{portal_name}-memcached.service'
         env.frontend_restart_command = f'sudo /bin/systemctl restart portal-{portal_name}-frontend.service'
+        # or maybe this, even newer?
+        #env.frontend_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-node-frontend.service'
     else:
         env.reload_command = f'sudo systemctl restart unit-config.service'
         env.stop_command = f'sudo systemctl stop unit-config.service' # there is no stop for the unit-config, only for the config-service
