@@ -467,16 +467,22 @@ class RocketChatConnection:
             rocket_users = filter(lambda user: user['_id'] != users_rocket_chat_id, rocket_users)
 
         rocket_usernames = [user.get('username') for user in rocket_users if 'username' in user]
-
+        
+        def _is_username_free(username, profile):
+            # checks if no user in the DB already has the given rocket_chat_username set (except self)
+            filter_query = {f'settings__{PROFILE_SETTING_ROCKET_CHAT_USERNAME}': username}
+            queryset = get_user_profile_model().objects.filter(**filter_query).exclude(pk=profile.pk)
+            return queryset.count() == 0
+        
         # generate unique username
         unique_username = username
         i = 1
         while True:
-            if unique_username not in rocket_usernames:
+            if unique_username not in rocket_usernames and _is_username_free(unique_username, profile):
                 break
-            unique_username = f'{username}{i}'
+            unique_username = f'{username}-{i}'
             i += 1
-            if i > 1000:
+            if i > 10000:
                 raise Exception('Name is very popular')
 
         return unique_username
