@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import json
 import csv
+import json
 
 from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase
 from django.utils.encoding import force_str
 
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.views.export import JSONExportView, CSVExportView
-
 from cosinnus.tests.models import ChoicesTestModel
+from cosinnus.views.export import CSVExportView, JSONExportView
 
 
 class JSONExportViewTest(TestCase):
-
     def setUp(self):
         self.group = CosinnusGroup.objects.create(name='Group 1')
 
@@ -64,6 +62,7 @@ class JSONExportViewTest(TestCase):
             model = ChoicesTestModel
             group = self.group
             fields = ['slug', 'state']
+
         view = ExportView()
         content = force_str(view.get_response().content)
         data = json.loads(content)
@@ -82,6 +81,7 @@ class JSONExportViewTest(TestCase):
         class ExportView(JSONExportView):
             model = ChoicesTestModel
             group = self.group
+
         view = ExportView()
         content = force_str(view.get_response().content)
         data = json.loads(content)
@@ -98,6 +98,7 @@ class JSONExportViewTest(TestCase):
             model = ChoicesTestModel
             group = self.group
             file_prefix = 'file_prefix'
+
         view = ExportView()
         response = view.get(self, None)
         self.assertIn('content-disposition', response)
@@ -129,6 +130,7 @@ class CSVExportViewTest(TestCase):
             model = ChoicesTestModel
             group = self.group
             fields = ['slug', 'state']
+
         view = ExportView()
         content = force_str(view.get_response().content)
         reader = csv.reader(content.split('\n'))
@@ -151,6 +153,7 @@ class CSVExportViewTest(TestCase):
         class ExportView(CSVExportView):
             model = ChoicesTestModel
             group = self.group
+
         view = ExportView()
         response = view.get(self, None)
         self.assertIn('content-disposition', response)

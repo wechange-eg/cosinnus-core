@@ -3,19 +3,17 @@ from __future__ import unicode_literals
 
 import json
 
+from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.utils.decorators import method_decorator
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.generic.base import TemplateView
-from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
-from cosinnus.views.map_api import get_searchresult_by_itemid
-from cosinnus.utils.functions import is_number, get_int_or_None,\
-    get_float_or_None
 from cosinnus.models.managed_tags import CosinnusManagedTag
-from annoying.functions import get_object_or_None
-
+from cosinnus.utils.functions import get_float_or_None, get_int_or_None, is_number
+from cosinnus.views.map_api import get_searchresult_by_itemid
 
 USER_MODEL = get_user_model()
 
@@ -47,20 +45,18 @@ def _generate_type_settings(types=[]):
     if settings.COSINNUS_CLOUD_ENABLED:
         options['availableFilters']['cloudfiles'] = 'cloudfiles' in types
         options['activeFilters']['cloudfiles'] = 'cloudfiles' in types
-    
+
     return options
-        
-    
+
 
 class BaseMapView(TemplateView):
-    
     template_name = 'cosinnus/map/map_page.html'
-    
+
     def get_page_title(self):
-        """ Stub for overriding the HTML page title.
-            @return: String or None for default. """
+        """Stub for overriding the HTML page title.
+        @return: String or None for default."""
         return None
-    
+
     def collect_map_options(self):
         return {
             'basePageUrl': self.request.path,
@@ -74,101 +70,116 @@ class BaseMapView(TemplateView):
         }
         item = self.request.GET.get('item', None)
         if item:
-            ctx.update({
-                'item': get_searchresult_by_itemid(item)
-            })
+            ctx.update({'item': get_searchresult_by_itemid(item)})
         return ctx
 
 
 class MapView(BaseMapView):
-
     def collect_map_options(self, **kwargs):
         options = super(MapView, self).collect_map_options(**kwargs)
         # for areas without a region, on the default map view, if the user has a location set up in his profile,
         # zoom them into their location-region to start out at
         map_settings = options.get('settings', {})
-        if not self.request.user.is_anonymous\
-                and not any([arg_check in self.request.GET for arg_check in ['ne_lat', 'ne_lon', 'sw_lat', 'sw_lon']])\
-                and not getattr(settings, 'COSINNUS_MAP_OPTIONS', {}).get('geojson_region', None) :
+        if (
+            not self.request.user.is_anonymous
+            and not any([arg_check in self.request.GET for arg_check in ['ne_lat', 'ne_lon', 'sw_lat', 'sw_lon']])
+            and not getattr(settings, 'COSINNUS_MAP_OPTIONS', {}).get('geojson_region', None)
+        ):
             mt = self.request.user.cosinnus_profile.media_tag
             if mt.location_lat and mt.location_lon:
-                map_settings.update({
-                    'map': {
-                        'location': [mt.location_lat, mt.location_lon],
-                        'zoom': 9,
+                map_settings.update(
+                    {
+                        'map': {
+                            'location': [mt.location_lat, mt.location_lon],
+                            'zoom': 9,
+                        }
                     }
-                })
+                )
         # apply GET params that are settings parameters and are
         # set once and then discarded (unlike the map/search query parameters)
-        map_settings.update({
-            'searchResultLimit': get_int_or_None(self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE)),
-        })
+        map_settings.update(
+            {
+                'searchResultLimit': get_int_or_None(
+                    self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE)
+                ),
+            }
+        )
         filter_group = get_int_or_None(self.request.GET.get('filter_group', None))
         if filter_group:
-            map_settings.update({
-                'filterGroup': filter_group,
-            })
-        options.update({
-            'settings': map_settings,
-        })
+            map_settings.update(
+                {
+                    'filterGroup': filter_group,
+                }
+            )
+        options.update(
+            {
+                'settings': map_settings,
+            }
+        )
         return options
+
 
 map_view = MapView.as_view()
 
 
 class TileView(BaseMapView):
-    
     show_mine = False
     types = []
-    
+
     def dispatch(self, request, *args, **kwargs):
         self.show_mine = kwargs.pop('show_mine', self.show_mine)
         self.types = kwargs.pop('types', self.types)
         return super(TileView, self).dispatch(request, *args, **kwargs)
-    
+
     def collect_map_options(self, **kwargs):
         options = super(TileView, self).collect_map_options(**kwargs)
-        
+
         _settings = _generate_type_settings(types=self.types)
-        _settings.update({
-            'showMine': self.show_mine,
-        })
+        _settings.update(
+            {
+                'showMine': self.show_mine,
+            }
+        )
         if 'cloudfiles' in self.types:
-            _settings.update({
-                'hideTopics': True,
-            })
-        options.update({
-            'settings': _settings,
-            'display': {
-                'showMap': False,
-                'showTiles': True,
-                'tilesFullscreen': True,
-                'showControls': True,
-                'fullscreen': True,
-                'routeNavigation': True
-           }
-        })
+            _settings.update(
+                {
+                    'hideTopics': True,
+                }
+            )
+        options.update(
+            {
+                'settings': _settings,
+                'display': {
+                    'showMap': False,
+                    'showTiles': True,
+                    'tilesFullscreen': True,
+                    'showControls': True,
+                    'fullscreen': True,
+                    'routeNavigation': True,
+                },
+            }
+        )
         return options
-    
+
     def get_page_title(self):
-        """ Depends on what types and/or "mine" page we show. """
+        """Depends on what types and/or "mine" page we show."""
         if self.types == ['projects']:
-            if self.show_mine: 
+            if self.show_mine:
                 return _('My Projects')
             else:
                 return _('Projects')
         if self.types == ['groups']:
-            if self.show_mine: 
+            if self.show_mine:
                 return _('My Groups')
             else:
                 return _('Groups')
         if self.types == ['ideas']:
-            if self.show_mine: 
+            if self.show_mine:
                 return _('My Ideas')
             else:
                 return _('Ideas')
         if self.types == ['organizations']:
-            if self.show_mine: 
+            if self.show_mine:
                 return _('My Organizations')
             else:
                 return _('Organizations')
@@ -176,60 +187,67 @@ class TileView(BaseMapView):
             return _('People')
         if self.types == ['cloudfiles']:
             return _('Cloud Files')
-        
+
         return None
-    
+
+
 tile_view = TileView.as_view()
 
 
 class MapEmbedView(TemplateView):
-    """ An embeddable, resizable Map view without any other elements than the map.
-        
-        Example param usage: /map/embed/?search_result_limit=50&location_lat=48.574790&location_lon=-4.326955&zoom=5
+    """An embeddable, resizable Map view without any other elements than the map.
+
+    Example param usage: /map/embed/?search_result_limit=50&location_lat=48.574790&location_lon=-4.326955&zoom=5
     """
-    
+
     template_name = 'cosinnus/universal/map/map_embed.html'
-    
+
     @method_decorator(xframe_options_exempt)
     def dispatch(self, *args, **kwargs):
         return super(MapEmbedView, self).dispatch(*args, **kwargs)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-        limit = get_int_or_None(self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE))
+
+        limit = get_int_or_None(
+            self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE)
+        )
         map_settings = {
-            "searchResultLimit": limit and is_number(limit) and int(limit) or settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE,
-            "mobileSafeInteractions": True,
+            'searchResultLimit': limit
+            and is_number(limit)
+            and int(limit)
+            or settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE,
+            'mobileSafeInteractions': True,
         }
         filter_group = get_int_or_None(self.request.GET.get('filter_group', None))
         if filter_group:
-            map_settings.update({
-                'filterGroup': filter_group,
-            })
+            map_settings.update(
+                {
+                    'filterGroup': filter_group,
+                }
+            )
         if self.request.GET.get('managed_tag', None):
             mtag = get_object_or_None(CosinnusManagedTag, slug=self.request.GET.get('managed_tag', None))
             if mtag:
-                map_settings.update({
-                    "filterManagedTag": mtag.id
-                })
-        
+                map_settings.update({'filterManagedTag': mtag.id})
+
         zoom = self.request.GET.get('zoom', None)
-        if get_float_or_None(self.request.GET.get('location_lat', None)) and \
-                get_float_or_None(self.request.GET.get('location_lon', None)):
-            map_settings.update({
-                "map": {
-                    "location": [
-                        get_float_or_None(self.request.GET.get('location_lat', None)), 
-                        get_float_or_None(self.request.GET.get('location_lon', None))
-                    ],
-                    "zoom": zoom and is_number(zoom) and int(zoom) or 9
+        if get_float_or_None(self.request.GET.get('location_lat', None)) and get_float_or_None(
+            self.request.GET.get('location_lon', None)
+        ):
+            map_settings.update(
+                {
+                    'map': {
+                        'location': [
+                            get_float_or_None(self.request.GET.get('location_lat', None)),
+                            get_float_or_None(self.request.GET.get('location_lon', None)),
+                        ],
+                        'zoom': zoom and is_number(zoom) and int(zoom) or 9,
+                    }
                 }
-            })
-        context.update({
-            'map_settings': map_settings
-        })
+            )
+        context.update({'map_settings': map_settings})
         return context
 
-map_embed_view = MapEmbedView.as_view()
 
+map_embed_view = MapEmbedView.as_view()

@@ -2,19 +2,32 @@ from __future__ import unicode_literals
 
 import logging
 
-from django.urls import reverse
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 
 from cosinnus.models import MEMBERSHIP_ADMIN
+from cosinnus.views.group import (
+    CSRFExemptGroupJoinView,
+    GroupConfirmMixin,
+    GroupDetailView,
+    GroupUserDeleteView,
+    GroupUserInvitationAcceptView,
+    GroupUserInvitationDeclineView,
+    GroupUserInviteMultipleView,
+    GroupUserInviteView,
+    GroupUserJoinView,
+    GroupUserLeaveView,
+    GroupUserListView,
+    GroupUserUpdateView,
+    GroupUserWithdrawView,
+    UserGroupMemberInviteSelect2View,
+)
 from cosinnus.views.select2 import GroupMembersView
 from cosinnus_organization.api.serializers import OrganizationSimpleSerializer
-from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationMembership, \
-    CosinnusUnregisteredUserOrganizationInvite
-from cosinnus.views.group import GroupDetailView, GroupUserListView, GroupConfirmMixin, \
-    GroupUserJoinView, CSRFExemptGroupJoinView, GroupUserLeaveView, GroupUserWithdrawView, \
-    GroupUserInvitationDeclineView, GroupUserInvitationAcceptView, GroupUserInviteView, GroupUserInviteMultipleView, \
-    GroupUserUpdateView, GroupUserDeleteView, UserGroupMemberInviteSelect2View
-
+from cosinnus_organization.models import (
+    CosinnusOrganization,
+    CosinnusOrganizationMembership,
+    CosinnusUnregisteredUserOrganizationInvite,
+)
 
 logger = logging.getLogger('cosinnus')
 

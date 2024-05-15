@@ -16,16 +16,19 @@ for e in events:
         subject='New {0} at Our School: {1}'.format(e.type, e.title),
         body=e.description)
 """
+
 from __future__ import unicode_literals
 
 from django.contrib.sites.models import Site
+
 try:
     from django.utils.timezone import now  # Django 1.4 aware datetimes
 except ImportError:
     from datetime import datetime
+
     now = datetime.now
 
-from postman.models import Message, STATUS_PENDING, STATUS_ACCEPTED
+from postman.models import STATUS_ACCEPTED, STATUS_PENDING, Message
 
 
 def _get_site():
@@ -44,9 +47,15 @@ def pm_broadcast(sender, recipients, subject, body='', skip_notification=False):
     Optional argument:
         ``skip_notification``: if the normal notification event is not wished
     """
-    message = Message(subject=subject, body=body, sender=sender,
-        sender_archived=True, sender_deleted_at=now(),
-        moderation_status=STATUS_ACCEPTED, moderation_date=now())
+    message = Message(
+        subject=subject,
+        body=body,
+        sender=sender,
+        sender_archived=True,
+        sender_deleted_at=now(),
+        moderation_status=STATUS_ACCEPTED,
+        moderation_date=now(),
+    )
     if not isinstance(recipients, (tuple, list)):
         recipients = (recipients,)
     for recipient in recipients:
@@ -57,8 +66,16 @@ def pm_broadcast(sender, recipients, subject, body='', skip_notification=False):
             message.notify_users(STATUS_PENDING, _get_site())
 
 
-def pm_write(sender, recipient, subject, body='', skip_notification=False,
-        auto_archive=False, auto_delete=False, auto_moderators=None):
+def pm_write(
+    sender,
+    recipient,
+    subject,
+    body='',
+    skip_notification=False,
+    auto_archive=False,
+    auto_delete=False,
+    auto_moderators=None,
+):
     """
     Write a message to a User.
     Contrary to pm_broadcast(), the message is archived and/or deleted on

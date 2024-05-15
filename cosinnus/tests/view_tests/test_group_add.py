@@ -2,14 +2,13 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
-from django.urls import reverse
 from django.test import TestCase
+from django.urls import reverse
 
 from cosinnus.models.group import CosinnusGroup
 
 
 class AddGroupTest(TestCase):
-
     def setUp(self, *args, **kwargs):
         self.credential = 'admin'
         self.admin = User.objects.create_superuser(

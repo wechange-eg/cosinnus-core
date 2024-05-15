@@ -19,4 +19,7 @@ except ImportError:
 
 from collections import OrderedDict
 
-__all__ = ('atomic', 'OrderedDict', )
+__all__ = (
+    'atomic',
+    'OrderedDict',
+)

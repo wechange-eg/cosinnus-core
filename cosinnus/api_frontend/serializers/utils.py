@@ -1,14 +1,17 @@
 from rest_framework.exceptions import ValidationError
 
+from cosinnus.api_frontend.handlers.error_codes import (
+    ERROR_SIGNUP_MTAG_REQUIRED,
+    ERROR_SIGNUP_MTAG_UNKNOWN,
+    ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED,
+)
 from cosinnus.conf import settings
-from cosinnus.api_frontend.handlers.error_codes import ERROR_SIGNUP_MTAG_REQUIRED, ERROR_SIGNUP_MTAG_UNKNOWN,\
-    ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED
 from cosinnus.models.managed_tags import CosinnusManagedTag
 
 
 def validate_managed_tag_slugs(managed_tag_slugs, at_least_one_tag_required):
-    """ Check if a given list of managed tag slugs is valid for saving in a form,
-        checking missing, too many and valid managed tags. """
+    """Check if a given list of managed tag slugs is valid for saving in a form,
+    checking missing, too many and valid managed tags."""
     if not managed_tag_slugs and at_least_one_tag_required:
         raise ValidationError(ERROR_SIGNUP_MTAG_REQUIRED)
     if len(managed_tag_slugs) > 1 and not settings.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED:

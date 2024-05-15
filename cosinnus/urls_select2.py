@@ -13,7 +13,7 @@ urlpatterns = []
 for url_key in group_model_registry:
     prefix = group_model_registry.get_url_name_prefix(url_key, '')
     urlpatterns += [
-        path(f'{url_key}/<str:group>/members/', select2.group_members, name=prefix+'group-members'),
+        path(f'{url_key}/<str:group>/members/', select2.group_members, name=prefix + 'group-members'),
     ]
 
 # IMPORTANT: this must be the last URLs matched, otherwise they will cover the group-specific ones

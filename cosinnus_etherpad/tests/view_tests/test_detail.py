@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from builtins import str
+
 from django.conf import settings
 from django.urls import reverse
 
@@ -10,7 +11,6 @@ from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
 class DetailTest(ViewTestCase):
-
     def test_detail(self):
         """
         Should return 200, contain pad title and cookie for etherpad server
@@ -31,9 +31,7 @@ class DetailTest(ViewTestCase):
         # should set cookie for etherpad server session
         self.assertIn('sessionID', response.cookies)
         # cookie domain should be part of etherpad base url
-        self.assertIn(
-            response.cookies['sessionID']['domain'],
-            settings.COSINNUS_ETHERPAD_BASE_URL)
+        self.assertIn(response.cookies['sessionID']['domain'], settings.COSINNUS_ETHERPAD_BASE_URL)
 
         # be nice to remote server and delete pad also there
         pad.delete()

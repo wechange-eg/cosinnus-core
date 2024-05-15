@@ -10,7 +10,6 @@ from cosinnus_event.tests.view_tests.base import ViewTestCase
 
 
 class DetailTest(ViewTestCase):
-
     def test_detail(self):
         """
         Should return 200 and contain event title
@@ -21,7 +20,8 @@ class DetailTest(ViewTestCase):
             title='testevent',
             from_date=now(),
             to_date=now(),
-            state=Event.STATE_SCHEDULED)
+            state=Event.STATE_SCHEDULED,
+        )
         event.media_tag.visibility = 2
         event.media_tag.save()
         kwargs = {'group': self.group.slug, 'slug': event.slug}

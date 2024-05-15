@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from datetime import timedelta
+
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 
@@ -10,11 +11,9 @@ from cosinnus_event.tests.model_tests.base import ModelTestCase
 
 
 class SuggestionTest(ModelTestCase):
-
     def setUp(self):
         super(SuggestionTest, self).setUp()
-        self.suggestion = Suggestion.objects.create(
-            from_date=self.now, to_date=self.now, event=self.event)
+        self.suggestion = Suggestion.objects.create(from_date=self.now, to_date=self.now, event=self.event)
 
     def test_string_repr_scheduled_single_day(self):
         """

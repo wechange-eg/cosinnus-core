@@ -6,7 +6,6 @@ from cosinnus_todo.tests.form_tests.base import FormTestCase
 
 
 class TodoEntryAssignFormTest(FormTestCase):
-
     def test_fields(self):
         """
         Should have certain fields in form

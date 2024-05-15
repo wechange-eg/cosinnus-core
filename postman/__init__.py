@@ -1,11 +1,12 @@
 """
 A messaging application for Django
 """
+
 from __future__ import unicode_literals
 
 # following PEP 386: N.N[.N]+[{a|b|c|rc}N[.N]+][.postN][.devN]
-from builtins import str
-from builtins import map
+from builtins import map, str
+
 VERSION = (3, 3, 1)
 PREREL = ()
 POST = 0
@@ -21,9 +22,10 @@ def get_version():
     if PREREL:
         version += PREREL[0] + '.'.join(map(str, PREREL[1:]))
     if POST:
-        version += ".post" + str(POST)
+        version += '.post' + str(POST)
     if DEV:
-        version += ".dev" + str(DEV)
+        version += '.dev' + str(DEV)
     return version
+
 
 __version__ = get_version()

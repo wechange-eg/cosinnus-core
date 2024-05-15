@@ -15,14 +15,17 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
-from cosinnus.models.group import get_cosinnus_group_model, CosinnusPortal, get_domain_for_portal
+from cosinnus.models.group import CosinnusPortal, get_cosinnus_group_model, get_domain_for_portal
 from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.user_dashboard import DashboardItem, MenuItem
 from cosinnus.trans.group import CosinnusConferenceTrans, CosinnusProjectTrans, CosinnusSocietyTrans
 from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetime
 from cosinnus.utils.functions import resolve_class
-from cosinnus.utils.permissions import check_user_can_create_conferences, check_user_can_create_groups, \
-    check_user_portal_manager
+from cosinnus.utils.permissions import (
+    check_user_can_create_conferences,
+    check_user_can_create_groups,
+    check_user_portal_manager,
+)
 from cosinnus.utils.user import get_unread_message_count_for_user
 from cosinnus.utils.version_history import get_version_history_for_user, mark_version_history_as_read
 from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
@@ -41,7 +44,10 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     image url (optional), badge (optional), selected.
     """
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -50,123 +56,125 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": {
-                        "personal": {
-                          "header": "My Personal Space",
-                          "items": [
-                            {
-                              "id": "PersonalDashboard",
-                              "label": "Personal Dashboard",
-                              "url": "/dashboard/",
-                              "is_external": False,
-                              "icon": None,
-                              "image": "http://localhost:8000/media/image.png",
-                              "badge": None,
-                              "selected": False
-                            }
-                          ],
-                          "actions": []
-                        },
-                        "groups": {
-                          "header": "My Groups and Projects",
-                          "items": [
-                            {
-                              "id": "CosinnusSociety70",
-                              "label": "Test Group",
-                              "url": "/group/test-group/",
-                              "is_external": False,
-                              "icon": None,
-                              "image": "http://localhost:8000/media/image.png",
-                              "badge": None,
-                              "selected": False
-                            }
-                          ],
-                          "actions": [
-                            {
-                              "id": "CreateGroup",
-                              "label": "Create a Group",
-                              "url": "/groups/add/",
-                              "is_external": False,
-                              "icon": None,
-                              "image": None,
-                              "badge": None,
-                              "selected": False
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'personal': {
+                                'header': 'My Personal Space',
+                                'items': [
+                                    {
+                                        'id': 'PersonalDashboard',
+                                        'label': 'Personal Dashboard',
+                                        'url': '/dashboard/',
+                                        'is_external': False,
+                                        'icon': None,
+                                        'image': 'http://localhost:8000/media/image.png',
+                                        'badge': None,
+                                        'selected': False,
+                                    }
+                                ],
+                                'actions': [],
                             },
-                            {
-                              "id": "CreateProject",
-                              "label": "Create a Project",
-                              "url": "/projects/add/",
-                              "is_external": False,
-                              "icon": None,
-                              "image": None,
-                              "badge": None,
-                              "selected": False
-                            }
-                          ]
-                        },
-                        "community": {
-                          "header": "WECHANGE Community",
-                          "items": [
-                            {
-                              "id": "Forum",
-                              "label": "Forum",
-                              "url": "/group/forum/",
-                              "is_external": False,
-                              "icon": "fa-sitemap",
-                              "image": None,
-                              "badge": None,
-                              "selected": False
+                            'groups': {
+                                'header': 'My Groups and Projects',
+                                'items': [
+                                    {
+                                        'id': 'CosinnusSociety70',
+                                        'label': 'Test Group',
+                                        'url': '/group/test-group/',
+                                        'is_external': False,
+                                        'icon': None,
+                                        'image': 'http://localhost:8000/media/image.png',
+                                        'badge': None,
+                                        'selected': False,
+                                    }
+                                ],
+                                'actions': [
+                                    {
+                                        'id': 'CreateGroup',
+                                        'label': 'Create a Group',
+                                        'url': '/groups/add/',
+                                        'is_external': False,
+                                        'icon': None,
+                                        'image': None,
+                                        'badge': None,
+                                        'selected': False,
+                                    },
+                                    {
+                                        'id': 'CreateProject',
+                                        'label': 'Create a Project',
+                                        'url': '/projects/add/',
+                                        'is_external': False,
+                                        'icon': None,
+                                        'image': None,
+                                        'badge': None,
+                                        'selected': False,
+                                    },
+                                ],
                             },
-                            {
-                              "id": "Map",
-                              "label": "Map",
-                              "url": "/map/",
-                              "is_external": False,
-                              "icon": "fa-group",
-                              "image": None,
-                              "badge": None,
-                              "selected": False
-                            }
-                          ],
-                          "actions": []
+                            'community': {
+                                'header': 'WECHANGE Community',
+                                'items': [
+                                    {
+                                        'id': 'Forum',
+                                        'label': 'Forum',
+                                        'url': '/group/forum/',
+                                        'is_external': False,
+                                        'icon': 'fa-sitemap',
+                                        'image': None,
+                                        'badge': None,
+                                        'selected': False,
+                                    },
+                                    {
+                                        'id': 'Map',
+                                        'label': 'Map',
+                                        'url': '/map/',
+                                        'is_external': False,
+                                        'icon': 'fa-group',
+                                        'image': None,
+                                        'badge': None,
+                                        'selected': False,
+                                    },
+                                ],
+                                'actions': [],
+                            },
+                            'conference': {
+                                'header': 'My Conferences',
+                                'items': [
+                                    {
+                                        'id': 'CosinnusSociety70',
+                                        'label': 'Test Conference',
+                                        'url': '/conference/test-conference/',
+                                        'is_external': False,
+                                        'icon': 'fa-television',
+                                        'image': None,
+                                        'badge': None,
+                                        'selected': False,
+                                    }
+                                ],
+                                'actions': [
+                                    {
+                                        'id': 'CreateConference',
+                                        'label': 'Create a Conference',
+                                        'url': '/conferences/add/',
+                                        'is_external': False,
+                                        'icon': None,
+                                        'image': None,
+                                        'badge': None,
+                                        'selected': False,
+                                    }
+                                ],
+                            },
                         },
-                        "conference": {
-                          "header": "My Conferences",
-                          "items": [
-                            {
-                              "id": "CosinnusSociety70",
-                              "label": "Test Conference",
-                              "url": "/conference/test-conference/",
-                              "is_external": False,
-                              "icon": "fa-television",
-                              "image": None,
-                              "badge": None,
-                              "selected": False
-                            }
-                          ],
-                          "actions": [
-                            {
-                              "id": "CreateConference",
-                              "label": "Create a Conference",
-                              "url": "/conferences/add/",
-                              "is_external": False,
-                              "icon": None,
-                              "image": None,
-                              "badge": None,
-                              "selected": False
-                            }
-                          ]
-                        }
-                      },
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
     )
     def get(self, request):
         spaces = {}
@@ -176,8 +184,11 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         if request.user.is_authenticated:
             personal_space_items = [
                 MenuItem(
-                    _('Personal Dashboard'), reverse('cosinnus:user-dashboard'), 'fa-user',
-                    request.user.cosinnus_profile.avatar_url, id='PersonalDashboard',
+                    _('Personal Dashboard'),
+                    reverse('cosinnus:user-dashboard'),
+                    'fa-user',
+                    request.user.cosinnus_profile.avatar_url,
+                    id='PersonalDashboard',
                 )
             ]
             personal_space = {
@@ -194,13 +205,15 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         if request.user.is_authenticated:
             group_space_items = [
                 dashboard_item.as_menu_item()
-                for cluster in self.get_group_clusters(request.user) for dashboard_item in cluster
+                for cluster in self.get_group_clusters(request.user)
+                for dashboard_item in cluster
             ]
-        if not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED \
-                or check_user_can_create_groups(request.user):
+        if not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED or check_user_can_create_groups(
+            request.user
+        ):
             group_space_actions = [
-                MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add'), id="CreateGroup"),
-                MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add'), id="CreateProject"),
+                MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add'), id='CreateGroup'),
+                MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add'), id='CreateProject'),
             ]
         if group_space_items or group_space_actions:
             group_space = {
@@ -215,38 +228,51 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if forum_slug:
-            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug,
-                                             portal=CosinnusPortal.get_current())
+            forum_group = get_object_or_None(
+                get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current()
+            )
             if forum_group:
-                if (settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
-                        and request.user.is_authenticated):
+                if (
+                    settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
+                    and request.user.is_authenticated
+                ):
                     # Add paired_groups of managed tags to community space.
                     managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
                     if managed_tags:
                         for tag in managed_tags:
                             if tag.paired_group and tag.paired_group != forum_group:
                                 community_space_items.append(
-                                    MenuItem(tag.paired_group.name, tag.paired_group.get_absolute_url(),
-                                             'fa-group', id=f'Forum{tag.paired_group.id}')
+                                    MenuItem(
+                                        tag.paired_group.name,
+                                        tag.paired_group.get_absolute_url(),
+                                        'fa-group',
+                                        id=f'Forum{tag.paired_group.id}',
+                                    )
                                 )
                 if settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
                     community_space_items.append(
-                        MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum_group.get_absolute_url(),
-                                 'fa-sitemap', id='Forum')
+                        MenuItem(
+                            settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL,
+                            forum_group.get_absolute_url(),
+                            'fa-sitemap',
+                            id='Forum',
+                        )
                     )
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
                 MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-group', id='Map')
             )
         if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
-            community_space_items.extend([
-                MenuItem(label, url, icon, id=id)
-                for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
-            ])
+            community_space_items.extend(
+                [
+                    MenuItem(label, url, icon, id=id)
+                    for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
+                ]
+            )
         if community_space_items:
             community_space_actions = [
-                MenuItem(CosinnusSocietyTrans.BROWSE_ALL, reverse('cosinnus:group__group-list'), id="BrowseGroups"),
-                MenuItem(CosinnusProjectTrans.BROWSE_ALL, reverse('cosinnus:group-list'), id="BrowseProjects"),
+                MenuItem(CosinnusSocietyTrans.BROWSE_ALL, reverse('cosinnus:group__group-list'), id='BrowseGroups'),
+                MenuItem(CosinnusProjectTrans.BROWSE_ALL, reverse('cosinnus:group-list'), id='BrowseProjects'),
             ]
             community_space = {
                 'header': f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
@@ -263,13 +289,21 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             if request.user.is_authenticated:
                 conferences = CosinnusConference.objects.get_for_user(request.user)
                 conference_space_items = [DashboardItem(conference).as_menu_item() for conference in conferences]
-            if not settings.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED \
-                    or check_user_can_create_conferences(request.user):
+            if (
+                not settings.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED
+                or check_user_can_create_conferences(request.user)
+            ):
                 conference_space_actions = [
-                    MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add'),
-                             id='CreateConference'),
-                    MenuItem(CosinnusConferenceTrans.BROWSE_ALL, reverse('cosinnus:conference__group-list'),
-                             id="BrowseConferenes"),
+                    MenuItem(
+                        CosinnusConferenceTrans.CREATE_NEW,
+                        reverse('cosinnus:conference__group-add'),
+                        id='CreateConference',
+                    ),
+                    MenuItem(
+                        CosinnusConferenceTrans.BROWSE_ALL,
+                        reverse('cosinnus:conference__group-list'),
+                        id='BrowseConferenes',
+                    ),
                 ]
             if conference_space_items or conference_space_actions:
                 conference_space = {
@@ -290,7 +324,10 @@ class BookmarksView(APIView):
     image url (optional), badge (optional), selected.
     """
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -299,56 +336,58 @@ class BookmarksView(APIView):
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": {
-                        "groups": {
-                            "header": "Groups and Projects",
-                            "items": {
-                                "id": "CosinnusGroup70",
-                                "label": "Test Group",
-                                "url": "/group/test-group/",
-                                "is_external": False,
-                                "icon": None,
-                                "image": "http://localhost:8000/media/image.png",
-                                "badge": None,
-                                "selected": False
-                            }
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'groups': {
+                                'header': 'Groups and Projects',
+                                'items': {
+                                    'id': 'CosinnusGroup70',
+                                    'label': 'Test Group',
+                                    'url': '/group/test-group/',
+                                    'is_external': False,
+                                    'icon': None,
+                                    'image': 'http://localhost:8000/media/image.png',
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                            },
+                            'users': {
+                                'header': 'Users',
+                                'items': {
+                                    'id': 'UserProfile4',
+                                    'label': 'Test User',
+                                    'url': '/user/2/',
+                                    'is_external': False,
+                                    'icon': 'fa-user',
+                                    'image': None,
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                            },
+                            'content': {
+                                'header': 'Content',
+                                'items': {
+                                    'id': 'CosinnusIdea2',
+                                    'label': 'Test Idea',
+                                    'url': '/map/?item=1.ideas.test-idea',
+                                    'is_external': False,
+                                    'icon': 'fa-lightbulb-o',
+                                    'image': None,
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                            },
                         },
-                        "users": {
-                            "header": "Users",
-                            "items": {
-                                "id": "UserProfile4",
-                                "label": "Test User",
-                                "url": "/user/2/",
-                                "is_external": False,
-                                "icon": "fa-user",
-                                "image": None,
-                                "badge": None,
-                                "selected": False
-                            }
-                        },
-                        "content": {
-                            "header": "Content",
-                            "items": {
-                                "id": "CosinnusIdea2",
-                                "label": "Test Idea",
-                                "url": "/map/?item=1.ideas.test-idea",
-                                "is_external": False,
-                                "icon": "fa-lightbulb-o",
-                                "image": None,
-                                "badge": None,
-                                "selected": False
-                            }
-                        }
-                    },
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
     )
     def get(self, request):
         bookmarks = None
@@ -376,15 +415,18 @@ class BookmarksView(APIView):
                     'content': {
                         'header': pgettext('navigation bookmarks header', 'Content'),
                         'items': content_items,
-                    }
+                    },
                 }
         return Response(bookmarks)
 
 
 class UnreadMessagesView(APIView):
-    """ An endpoint that returns the user unread message count for the main navigation. """
+    """An endpoint that returns the user unread message count for the main navigation."""
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -393,18 +435,18 @@ class UnreadMessagesView(APIView):
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": {
-                        "count": 10
-                    },
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {'count': 10},
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
     )
     def get(self, request):
         unread_message_count = 0
@@ -417,9 +459,12 @@ class UnreadMessagesView(APIView):
 
 
 class UnreadAlertsView(APIView):
-    """ An endpoint that returns the user unseen alerts count for the main navigation. """
+    """An endpoint that returns the user unseen alerts count for the main navigation."""
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -428,18 +473,18 @@ class UnreadAlertsView(APIView):
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": {
-                        "count": 10
-                    },
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {'count': 10},
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
     )
     def get(self, request):
         alerts_count = 0
@@ -447,9 +492,7 @@ class UnreadAlertsView(APIView):
             alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
             unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
             alerts_count = unseen_aggr.get('seen_count', 0)
-        unread_alerts = {
-            'count': alerts_count
-        }
+        unread_alerts = {'count': alerts_count}
         return Response(unread_alerts)
 
 
@@ -471,7 +514,10 @@ class AlertsView(APIView):
     Additionally, the retrieved alerts can be marked as read/seen using the "mark_as_read=true" query parameter.
     """
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -488,112 +534,122 @@ class AlertsView(APIView):
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter(
-                'newer_than_timestamp', openapi.IN_QUERY, required=False,
+                'newer_than_timestamp',
+                openapi.IN_QUERY,
+                required=False,
                 description='Return alerts newer then this timestamp. Used to receive new alerts since the last poll',
-                type=openapi.FORMAT_FLOAT
+                type=openapi.FORMAT_FLOAT,
             ),
             openapi.Parameter(
-                'offset_timestamp', openapi.IN_QUERY, required=False,
-                description='Return alerts older then this timestamp. Used for pagination.', type=openapi.FORMAT_FLOAT
+                'offset_timestamp',
+                openapi.IN_QUERY,
+                required=False,
+                description='Return alerts older then this timestamp. Used for pagination.',
+                type=openapi.FORMAT_FLOAT,
             ),
             openapi.Parameter(
-                'mark_as_read', openapi.IN_QUERY, required=False,
-                description='Mark unread alerts as read.', type=openapi.TYPE_BOOLEAN
+                'mark_as_read',
+                openapi.IN_QUERY,
+                required=False,
+                description='Mark unread alerts as read.',
+                type=openapi.TYPE_BOOLEAN,
             ),
         ],
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": {
-                        "items": [
-                            {
-                                "text": "<b>User 2</b> requested to become a member.",
-                                "id": "Alert3",
-                                "url": "/group/test-group/members/",
-                                "item_icon": "fa-sitemap",
-                                "item_image": None,
-                                "user_icon": None,
-                                "user_image": "/static/images/jane-doe-small.png",
-                                "group": "Test Group",
-                                "group_icon": "fa-sitemap",
-                                "action_datetime": "2023-06-08T08:49:49.965634+00:00",
-                                "is_emphasized": True,
-                                "alert_reason": "You are an admin of this team",
-                                "sub_items": [],
-                                "is_multi_user_alert": False,
-                                "is_bundle_alert": False
-                            },
-                            {
-                                "text": "<b>User 3</b> und 1 other requested to become a member.",
-                                "id": "Alert2",
-                                "url": "/group/test-project/members/",
-                                "item_icon": "fa-group",
-                                "item_image": None,
-                                "user_icon": None,
-                                "user_image": "/static/images/jane-doe-small.png",
-                                "group": "Test Project",
-                                "group_icon": "fa-group",
-                                "action_datetime": "2023-05-20T16:04:36.501003+00:00",
-                                "is_emphasized": False,
-                                "alert_reason": "You are an admin of this team",
-                                "sub_items": [
-                                    {
-                                        "title": "User 3",
-                                        "url": "/user/4/",
-                                        "icon": None,
-                                        "image": "/static/images/jane-doe-small.png",
-                                    },
-                                    {
-                                        "title": "User 4",
-                                        "url": "/user/5/",
-                                        "icon": None,
-                                        "image": "/static/images/jane-doe-small.png",
-                                    }
-                                ],
-                                "is_multi_user_alert": True,
-                                "is_bundle_alert": False
-                            },
-                            {
-                                "text": "<b>User 2</b> created 2 news posts.",
-                                "id": "Alert1",
-                                "url": "/group/test-group/note/1401481714/",
-                                "item_icon": "fa-quote-right",
-                                "item_image": None,
-                                "user_icon": None,
-                                "user_image": "/static/images/jane-doe-small.png",
-                                "group": "Test Group",
-                                "group_icon": "fa-sitemap",
-                                "action_datetime": "2023-05-24T08:44:50.570918+00:00",
-                                "is_emphasized": True,
-                                "alert_reason": "You are following this content or its Project or Group",
-                                "sub_items": [
-                                    {
-                                        "title": "test2",
-                                        "url": "/group/test-group/note/1455745550/",
-                                        "icon": "fa-quote-right",
-                                        "image": None,
-                                    },
-                                    {
-                                        "title": "test",
-                                        "url": "/group/test-group/note/1401481714/",
-                                        "icon": "fa-quote-right",
-                                        "image": None,
-                                    }
-                                ],
-                                "is_multi_user_alert": False,
-                                "is_bundle_alert": True
-                            }
-                        ],
-                        "has_more": False,
-                        "offset_timestamp": 1684917890.570918,
-                        "newest_timestamp": 1686664282.772708
-                    },
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )},
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'items': [
+                                {
+                                    'text': '<b>User 2</b> requested to become a member.',
+                                    'id': 'Alert3',
+                                    'url': '/group/test-group/members/',
+                                    'item_icon': 'fa-sitemap',
+                                    'item_image': None,
+                                    'user_icon': None,
+                                    'user_image': '/static/images/jane-doe-small.png',
+                                    'group': 'Test Group',
+                                    'group_icon': 'fa-sitemap',
+                                    'action_datetime': '2023-06-08T08:49:49.965634+00:00',
+                                    'is_emphasized': True,
+                                    'alert_reason': 'You are an admin of this team',
+                                    'sub_items': [],
+                                    'is_multi_user_alert': False,
+                                    'is_bundle_alert': False,
+                                },
+                                {
+                                    'text': '<b>User 3</b> und 1 other requested to become a member.',
+                                    'id': 'Alert2',
+                                    'url': '/group/test-project/members/',
+                                    'item_icon': 'fa-group',
+                                    'item_image': None,
+                                    'user_icon': None,
+                                    'user_image': '/static/images/jane-doe-small.png',
+                                    'group': 'Test Project',
+                                    'group_icon': 'fa-group',
+                                    'action_datetime': '2023-05-20T16:04:36.501003+00:00',
+                                    'is_emphasized': False,
+                                    'alert_reason': 'You are an admin of this team',
+                                    'sub_items': [
+                                        {
+                                            'title': 'User 3',
+                                            'url': '/user/4/',
+                                            'icon': None,
+                                            'image': '/static/images/jane-doe-small.png',
+                                        },
+                                        {
+                                            'title': 'User 4',
+                                            'url': '/user/5/',
+                                            'icon': None,
+                                            'image': '/static/images/jane-doe-small.png',
+                                        },
+                                    ],
+                                    'is_multi_user_alert': True,
+                                    'is_bundle_alert': False,
+                                },
+                                {
+                                    'text': '<b>User 2</b> created 2 news posts.',
+                                    'id': 'Alert1',
+                                    'url': '/group/test-group/note/1401481714/',
+                                    'item_icon': 'fa-quote-right',
+                                    'item_image': None,
+                                    'user_icon': None,
+                                    'user_image': '/static/images/jane-doe-small.png',
+                                    'group': 'Test Group',
+                                    'group_icon': 'fa-sitemap',
+                                    'action_datetime': '2023-05-24T08:44:50.570918+00:00',
+                                    'is_emphasized': True,
+                                    'alert_reason': 'You are following this content or its Project or Group',
+                                    'sub_items': [
+                                        {
+                                            'title': 'test2',
+                                            'url': '/group/test-group/note/1455745550/',
+                                            'icon': 'fa-quote-right',
+                                            'image': None,
+                                        },
+                                        {
+                                            'title': 'test',
+                                            'url': '/group/test-group/note/1401481714/',
+                                            'icon': 'fa-quote-right',
+                                            'image': None,
+                                        },
+                                    ],
+                                    'is_multi_user_alert': False,
+                                    'is_bundle_alert': True,
+                                },
+                            ],
+                            'has_more': False,
+                            'offset_timestamp': 1684917890.570918,
+                            'newest_timestamp': 1686664282.772708,
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
     )
     def get(self, request):
         response = {
@@ -610,7 +666,7 @@ class AlertsView(APIView):
             response['has_more'] = queryset.count() > self.page_size
 
             # paginate
-            queryset = queryset[:self.page_size]
+            queryset = queryset[: self.page_size]
             alerts = list(queryset)
 
             # mark as read
@@ -664,7 +720,7 @@ class AlertsView(APIView):
         self.offset_timestamp = request.query_params.get('offset_timestamp')
         if self.offset_timestamp:
             try:
-                self.offset_timestamp= float(self.offset_timestamp)
+                self.offset_timestamp = float(self.offset_timestamp)
             except Exception:
                 raise ValidationError({'offset_timestamp': 'Float timestamp expected'})
         self.mark_as_read = request.query_params.get('mark_as_read') == 'true'
@@ -686,7 +742,7 @@ class AlertsView(APIView):
         return user_cache
 
     def _use_relative_url(self, serialized_alert):
-        """ Replace url with relative url. """
+        """Replace url with relative url."""
         url = serialized_alert.get('url')
         if url:
             domain = get_domain_for_portal(CosinnusPortal.get_current())
@@ -694,7 +750,7 @@ class AlertsView(APIView):
                 serialized_alert['url'] = url.replace(domain, '')
 
     def _split_icon_or_image_url(self, serialized_alert, key_prefix=''):
-        """ Replace icon_or_image_url items with separate icon and image items. Use absolute url for images. """
+        """Replace icon_or_image_url items with separate icon and image items. Use absolute url for images."""
         icon_or_image_url = serialized_alert.pop(key_prefix + 'icon_or_image_url')
         if not icon_or_image_url:
             serialized_alert[key_prefix + 'icon'] = None
@@ -717,7 +773,10 @@ class HelpView(APIView):
     image url (optional), badge (optional), selected.
     """
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -726,37 +785,39 @@ class HelpView(APIView):
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": [
-                        {
-                            "id": "FAQ",
-                            "label": "<b>FAQ</b> (Frequently asked questions)",
-                            "url": "https://localhost/cms/faq/",
-                            "is_external": True,
-                            "icon": "fa-question-circle",
-                            "image": None,
-                            "badge": None,
-                            "selected": False
-                        },
-                        {
-                            "id": "Support",
-                            "label": "<b>Support-Channel</b> (Chat)",
-                            "url": "https://localhost/cms/support/",
-                            "is_external": True,
-                            "icon": "fa-life-ring",
-                            "image": None,
-                            "badge": None,
-                            "selected": False
-                        }
-                    ],
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': [
+                            {
+                                'id': 'FAQ',
+                                'label': '<b>FAQ</b> (Frequently asked questions)',
+                                'url': 'https://localhost/cms/faq/',
+                                'is_external': True,
+                                'icon': 'fa-question-circle',
+                                'image': None,
+                                'badge': None,
+                                'selected': False,
+                            },
+                            {
+                                'id': 'Support',
+                                'label': '<b>Support-Channel</b> (Chat)',
+                                'url': 'https://localhost/cms/support/',
+                                'is_external': True,
+                                'icon': 'fa-life-ring',
+                                'image': None,
+                                'badge': None,
+                                'selected': False,
+                            },
+                        ],
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
     )
     def get(self, request):
         help_items = [
@@ -767,21 +828,25 @@ class HelpView(APIView):
 
 
 class LanguageMenuItemMixin:
-
     def get_language_menu_item(self, request, current_language_as_label=False):
         language_item_label = request.LANGUAGE_CODE.upper() if current_language_as_label else _('Change Language')
         language_item_icon = None if current_language_as_label else 'fa-language'
         language_item = MenuItem(language_item_label, icon=language_item_icon, id='ChangeLanguage')
         if settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES:
-            language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES,
-                                    settings.LANGUAGES)
+            language_selection = filter(
+                lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES
+            )
         else:
             language_selection = settings.LANGUAGES
         language_subitems = []
         for code, language in language_selection:
             selected = code == request.LANGUAGE_CODE
-            language_subitem = MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
-                                        id=f'ChangeLanguageItem{code.upper()}', selected=selected)
+            language_subitem = MenuItem(
+                language,
+                reverse('cosinnus:switch-language', kwargs={'language': code}),
+                id=f'ChangeLanguageItem{code.upper()}',
+                selected=selected,
+            )
             language_subitems.append(language_subitem)
         language_item['sub_items'] = language_subitems
         return language_item
@@ -796,7 +861,10 @@ class ProfileView(LanguageMenuItemMixin, APIView):
     image url (optional), badge (optional), selected.
     """
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -805,115 +873,117 @@ class ProfileView(LanguageMenuItemMixin, APIView):
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": [
-                        {
-                            "id": "Profile",
-                            "label": "My Profile",
-                            "url": "/profile/",
-                            "is_external": False,
-                            "icon": "fa-circle-user",
-                            "image": None,
-                            "badge": None,
-                            "selected": False
-                        },
-                        {
-                            "id": "SetupProfile",
-                            "label": "Set up my Profile",
-                            "url": "/profile/edit/",
-                            "is_external": False,
-                            "icon": "fa-pen",
-                            "image": None,
-                            "badge": None,
-                            "selected": False
-                        },
-                        {
-                            "id": "EditProfile",
-                            "label": "Edit my Profile",
-                            "url": "/profile/edit/",
-                            "is_external": False,
-                            "icon": "fa-gear",
-                            "image": None,
-                            "badge": None,
-                            "selected": False
-                        },
-                        {
-                            "id": "NotificationPreferences",
-                            "label": "Notification Preferences",
-                            "url": "/profile/notifications/",
-                            "is_external": False,
-                            "icon": "fa-envelope",
-                            "image": None,
-                            "badge": None,
-                            "selected": False
-                        },
-                        {
-                            "id": "ChangeLanguage",
-                            "icon": "fa-language",
-                            "label": "Change Language",
-                            "url": None,
-                            "image": None,
-                            "is_external": False,
-                            "badge": None,
-                            "sub_items": [
-                                {
-                                    "id": "ChangeLanguageItemDE",
-                                    "label": "Deutsch",
-                                    "url": "/language/de/",
-                                    "is_external": False,
-                                    "icon": None,
-                                    "image": None,
-                                    "badge": None,
-                                    "selected": False
-                                },
-                                {
-                                    "id": "ChangeLanguageItemEN",
-                                    "label": "English",
-                                    "url": "/language/en/",
-                                    "is_external": False,
-                                    "icon": None,
-                                    "image": None,
-                                    "badge": None,
-                                    "selected": True
-                                }
-                            ]
-                        },
-                        {
-                            "id": "Contribution",
-                            "label": "Your Contribution",
-                            "url": "/account/contribution/",
-                            "is_external": False,
-                            "icon": "fa-hand-holding-hart",
-                            "image": None,
-                            "badge": None,
-                            "selected": False
-                        },
-                        {
-                            "id": "Logout",
-                            "label": "Logout",
-                            "url": "/logout/",
-                            "is_external": False,
-                            "icon": "fa-right-from-bracket",
-                            "image": None,
-                            "badge": None,
-                            "selected": False
-                        }
-                    ],
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': [
+                            {
+                                'id': 'Profile',
+                                'label': 'My Profile',
+                                'url': '/profile/',
+                                'is_external': False,
+                                'icon': 'fa-circle-user',
+                                'image': None,
+                                'badge': None,
+                                'selected': False,
+                            },
+                            {
+                                'id': 'SetupProfile',
+                                'label': 'Set up my Profile',
+                                'url': '/profile/edit/',
+                                'is_external': False,
+                                'icon': 'fa-pen',
+                                'image': None,
+                                'badge': None,
+                                'selected': False,
+                            },
+                            {
+                                'id': 'EditProfile',
+                                'label': 'Edit my Profile',
+                                'url': '/profile/edit/',
+                                'is_external': False,
+                                'icon': 'fa-gear',
+                                'image': None,
+                                'badge': None,
+                                'selected': False,
+                            },
+                            {
+                                'id': 'NotificationPreferences',
+                                'label': 'Notification Preferences',
+                                'url': '/profile/notifications/',
+                                'is_external': False,
+                                'icon': 'fa-envelope',
+                                'image': None,
+                                'badge': None,
+                                'selected': False,
+                            },
+                            {
+                                'id': 'ChangeLanguage',
+                                'icon': 'fa-language',
+                                'label': 'Change Language',
+                                'url': None,
+                                'image': None,
+                                'is_external': False,
+                                'badge': None,
+                                'sub_items': [
+                                    {
+                                        'id': 'ChangeLanguageItemDE',
+                                        'label': 'Deutsch',
+                                        'url': '/language/de/',
+                                        'is_external': False,
+                                        'icon': None,
+                                        'image': None,
+                                        'badge': None,
+                                        'selected': False,
+                                    },
+                                    {
+                                        'id': 'ChangeLanguageItemEN',
+                                        'label': 'English',
+                                        'url': '/language/en/',
+                                        'is_external': False,
+                                        'icon': None,
+                                        'image': None,
+                                        'badge': None,
+                                        'selected': True,
+                                    },
+                                ],
+                            },
+                            {
+                                'id': 'Contribution',
+                                'label': 'Your Contribution',
+                                'url': '/account/contribution/',
+                                'is_external': False,
+                                'icon': 'fa-hand-holding-hart',
+                                'image': None,
+                                'badge': None,
+                                'selected': False,
+                            },
+                            {
+                                'id': 'Logout',
+                                'label': 'Logout',
+                                'url': '/logout/',
+                                'is_external': False,
+                                'icon': 'fa-right-from-bracket',
+                                'image': None,
+                                'badge': None,
+                                'selected': False,
+                            },
+                        ],
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
     )
     def get(self, request):
         profile_menu = None
 
         if request.user.is_authenticated:
             profile_menu = []
-            
+
             profile_label = _('My Profile')
             if request.user.is_guest:
                 profile_label = _('My Guest Account')
@@ -924,15 +994,24 @@ class ProfileView(LanguageMenuItemMixin, APIView):
             if not request.user.is_guest:
                 if settings.COSINNUS_V3_FRONTEND_ENABLED:
                     profile_menu_items.append(
-                        MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
-                                 id='SetupProfile'),
+                        MenuItem(
+                            _('Set up my Profile'),
+                            reverse('cosinnus:v3-frontend-setup-profile'),
+                            'fa-pen',
+                            id='SetupProfile',
+                        ),
                     )
-                profile_menu_items.extend([
-                    MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
-                    MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
-                             id='NotificationPreferences'),
-    
-                ])
+                profile_menu_items.extend(
+                    [
+                        MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
+                        MenuItem(
+                            _('Notification Preferences'),
+                            reverse('cosinnus:notifications'),
+                            'fa-envelope',
+                            id='NotificationPreferences',
+                        ),
+                    ]
+                )
             profile_menu.extend(profile_menu_items)
 
             # language
@@ -941,20 +1020,34 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 profile_menu.append(language_item)
 
             # payments
-            if not request.user.is_guest and settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
-                    and request.user.is_superuser:
+            if (
+                not request.user.is_guest
+                and settings.COSINNUS_PAYMENTS_ENABLED
+                or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY
+                and request.user.is_superuser
+            ):
                 from wechange_payments.models import Subscription
+
                 current_subscription = Subscription.get_current_for_user(request.user)
                 contribution = int(current_subscription.amount) if current_subscription else 0
                 contribution_badge = f'{contribution} €'
-                payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
-                                         'fa-hand-holding-hart', badge=contribution_badge, id='Contribution')
+                payments_item = MenuItem(
+                    _('Your Contribution'),
+                    reverse('wechange-payments:overview'),
+                    'fa-hand-holding-hart',
+                    badge=contribution_badge,
+                    id='Contribution',
+                )
                 profile_menu.append(payments_item)
 
             # administration
             if request.user.is_superuser or check_user_portal_manager(request.user):
-                administration_item = MenuItem(_('Administration'), reverse('cosinnus:administration'),
-                                               'fa-screwdriver-wrench', id='Administration')
+                administration_item = MenuItem(
+                    _('Administration'),
+                    reverse('cosinnus:administration'),
+                    'fa-screwdriver-wrench',
+                    id='Administration',
+                )
                 profile_menu.append(administration_item)
 
             # logout
@@ -975,7 +1068,10 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
     non-authenticated users.
     """
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -984,115 +1080,117 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": {
-                        "left": [
-                            {
-                                "id": "Home",
-                                "label": "Home",
-                                "url": "/cms/?noredir=1",
-                                "is_external": False,
-                                "icon": None,
-                                "image": "http://localhost:8000/static/img/logo-icon.png",
-                                "badge": None,
-                                "selected": False
-                            },
-                            {
-                                "id": "Spaces",
-                                "label": "Spaces",
-                                "url": None,
-                                "is_external": False,
-                                "icon": None,
-                                "image": None,
-                                "badge": None,
-                                "selected": False
-                            }
-                        ],
-                        "middle": [
-                            {
-                                "id": "Search",
-                                "label": "Search",
-                                "url": "/search/",
-                                "is_external": False,
-                                "icon": "fa-magnifying-glass",
-                                "image": None,
-                                "badge": None,
-                                "selected": False
-                            },
-                            {
-                                "id": "Bookmarks",
-                                "label": "Bookmarks",
-                                "url": None,
-                                "is_external": False,
-                                "icon": "fa-bookmark",
-                                "image": None,
-                                "badge": None,
-                                "selected": False
-                            }
-                        ],
-                        "services": [
-                            {
-                                "id": "Cloud",
-                                "label": "Cloud",
-                                "url": "https://cloud.localhost/",
-                                "is_external": True,
-                                "icon": "fa-cloud",
-                                "image": None,
-                                "badge": None,
-                                "selected": False
-                            },
-                            {
-                                "id": "Chat",
-                                "label": "Rocket.Chat",
-                                "url": "/messages/",
-                                "is_external": False,
-                                "icon": "messages",
-                                "image": None,
-                                "badge": None,
-                                "selected": False
-                            }
-                        ],
-                        "right": [
-                            {
-                                "id": "Help",
-                                "label": "Help",
-                                "url": None,
-                                "is_external": False,
-                                "icon": "fa-question",
-                                "image": None,
-                                "badge": None,
-                                "selected": False
-                            },
-                            {
-                                "id": "Alerts",
-                                "label": "Alerts",
-                                "url": None,
-                                "is_external": False,
-                                "icon": "fa-bell",
-                                "image": None,
-                                "badge": None,
-                                "selected": False
-                            },
-                            {
-                                "id": "Profile",
-                                "label": "Profile",
-                                "url": None,
-                                "is_external": False,
-                                "icon": None,
-                                "image": "http://localhost:8000/media/image.png",
-                                "badge": None,
-                                "selected": False
-                            }
-                        ]
-                    },
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'left': [
+                                {
+                                    'id': 'Home',
+                                    'label': 'Home',
+                                    'url': '/cms/?noredir=1',
+                                    'is_external': False,
+                                    'icon': None,
+                                    'image': 'http://localhost:8000/static/img/logo-icon.png',
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                                {
+                                    'id': 'Spaces',
+                                    'label': 'Spaces',
+                                    'url': None,
+                                    'is_external': False,
+                                    'icon': None,
+                                    'image': None,
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                            ],
+                            'middle': [
+                                {
+                                    'id': 'Search',
+                                    'label': 'Search',
+                                    'url': '/search/',
+                                    'is_external': False,
+                                    'icon': 'fa-magnifying-glass',
+                                    'image': None,
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                                {
+                                    'id': 'Bookmarks',
+                                    'label': 'Bookmarks',
+                                    'url': None,
+                                    'is_external': False,
+                                    'icon': 'fa-bookmark',
+                                    'image': None,
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                            ],
+                            'services': [
+                                {
+                                    'id': 'Cloud',
+                                    'label': 'Cloud',
+                                    'url': 'https://cloud.localhost/',
+                                    'is_external': True,
+                                    'icon': 'fa-cloud',
+                                    'image': None,
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                                {
+                                    'id': 'Chat',
+                                    'label': 'Rocket.Chat',
+                                    'url': '/messages/',
+                                    'is_external': False,
+                                    'icon': 'messages',
+                                    'image': None,
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                            ],
+                            'right': [
+                                {
+                                    'id': 'Help',
+                                    'label': 'Help',
+                                    'url': None,
+                                    'is_external': False,
+                                    'icon': 'fa-question',
+                                    'image': None,
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                                {
+                                    'id': 'Alerts',
+                                    'label': 'Alerts',
+                                    'url': None,
+                                    'is_external': False,
+                                    'icon': 'fa-bell',
+                                    'image': None,
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                                {
+                                    'id': 'Profile',
+                                    'label': 'Profile',
+                                    'url': None,
+                                    'is_external': False,
+                                    'icon': None,
+                                    'image': 'http://localhost:8000/media/image.png',
+                                    'badge': None,
+                                    'selected': False,
+                                },
+                            ],
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
     )
     def get(self, request):
         main_navigation_items = {
@@ -1109,11 +1207,13 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         current_portal = CosinnusPortal.get_current()
         home_image = current_portal.get_logo_image_url()
         if settings.COSINNUS_V3_MENU_HOME_LINK:
-            home_item = MenuItem(_('Home'), settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-home', image=home_image,
-                                 id='Home')
+            home_item = MenuItem(
+                _('Home'), settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-home', image=home_image, id='Home'
+            )
         else:
-            home_item = MenuItem(_('Dashboard'), reverse('cosinnus:user-dashboard'), icon='fa-home', image=home_image,
-                                 id='HomeDashboard')
+            home_item = MenuItem(
+                _('Dashboard'), reverse('cosinnus:user-dashboard'), icon='fa-home', image=home_image, id='HomeDashboard'
+            )
         left_navigation_items.append(home_item)
 
         # spaces
@@ -1139,29 +1239,40 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
                 services_navigation_items.append(
-                    MenuItem(_('Cloud'), settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='fa-cloud',
-                             is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB, id='Cloud')
+                    MenuItem(
+                        _('Cloud'),
+                        settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
+                        icon='fa-cloud',
+                        is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB,
+                        id='Cloud',
+                    )
                 )
 
             # messages
             if 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 if settings.COSINNUS_ROCKET_ENABLED:
                     services_navigation_items.append(
-                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='messages',
-                                 is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB, id='Chat')
+                        MenuItem(
+                            'Rocket.Chat',
+                            reverse('cosinnus:message-global'),
+                            icon='messages',
+                            is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB,
+                            id='Chat',
+                        )
                     )
                 else:
                     services_navigation_items.append(
-                        MenuItem( _('Messages'), reverse('postman:inbox'), icon='messages', id='Messages')
+                        MenuItem(_('Messages'), reverse('postman:inbox'), icon='messages', id='Messages')
                     )
-        
+
         # add "Discover" link to services for all logged in users and additionally for non-logged-in users on open portals
-        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or \
-                (request.user.is_authenticated and not request.user.is_guest):
-            services_navigation_items.insert(0,
-                MenuItem(_('Discover'), reverse('cosinnus:map'), icon=None, is_external=False, id='Map')
+        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or (
+            request.user.is_authenticated and not request.user.is_guest
+        ):
+            services_navigation_items.insert(
+                0, MenuItem(_('Discover'), reverse('cosinnus:map'), icon=None, is_external=False, id='Map')
             )
-        
+
         # right part
         right_navigation_items = []
 
@@ -1169,7 +1280,6 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         right_navigation_items.append(MenuItem(_('Help'), icon='fa-question', id='Help'))
 
         if request.user.is_authenticated:
-
             # alerts
             if not request.user.is_guest:
                 right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
@@ -1179,7 +1289,6 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 MenuItem(_('Profile'), icon='fa-user', image=request.user.cosinnus_profile.avatar_url, id='Profile')
             )
         else:
-
             # language
             if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
                 language_item = self.get_language_menu_item(request, current_language_as_label=True)
@@ -1190,18 +1299,18 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
 
             # register
             if settings.COSINNUS_USER_SIGNUP_ENABLED:
-                right_navigation_items.append(
-                    MenuItem(_('Register'), reverse('cosinnus:user-add'),  id='Register')
-                )
-        
+                right_navigation_items.append(MenuItem(_('Register'), reverse('cosinnus:user-add'), id='Register'))
+
         main_navigation_items['left'] = left_navigation_items
         main_navigation_items['middle'] = middle_navigation_items
         main_navigation_items['services'] = services_navigation_items
         main_navigation_items['right'] = right_navigation_items
-        
+
         # allow portals to add links via a dropin defined in `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`
-        main_navigation_items = CosinnusNavigationPortalLinks().modifiy_main_navigation(main_navigation_items, request.user)
-        
+        main_navigation_items = CosinnusNavigationPortalLinks().modifiy_main_navigation(
+            main_navigation_items, request.user
+        )
+
         return Response(main_navigation_items)
 
 
@@ -1213,7 +1322,10 @@ class VersionHistoryView(APIView):
     The parameter "mark_as_read=true" can be passed to mark the unread version notes as read.
     """
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -1224,43 +1336,47 @@ class VersionHistoryView(APIView):
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter(
-                'mark_as_read', openapi.IN_QUERY, required=False,
-                description='Mark unread versions as read.', type=openapi.TYPE_BOOLEAN
+                'mark_as_read',
+                openapi.IN_QUERY,
+                required=False,
+                description='Mark unread versions as read.',
+                type=openapi.TYPE_BOOLEAN,
             ),
         ],
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": {
-                        "versions": [
-                            {
-                                "id": "Version123",
-                                "version": "1.2.3",
-                                "title": "Version 1.2.3 released",
-                                "text": "Adds some nice features.",
-                                "url": "/whats_new/#123",
-                                "read": False
-                            }
-                        ],
-                        "show_all": {
-                            "id": "ShowAll",
-                            "label": "Show all",
-                            "url": "/whats_new/",
-                            "is_external": False,
-                            "icon": None,
-                            "image": None,
-                            "badge": None,
-                            "selected": False
-                        }
-                    },
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'versions': [
+                                {
+                                    'id': 'Version123',
+                                    'version': '1.2.3',
+                                    'title': 'Version 1.2.3 released',
+                                    'text': 'Adds some nice features.',
+                                    'url': '/whats_new/#123',
+                                    'read': False,
+                                }
+                            ],
+                            'show_all': {
+                                'id': 'ShowAll',
+                                'label': 'Show all',
+                                'url': '/whats_new/',
+                                'is_external': False,
+                                'icon': None,
+                                'image': None,
+                                'badge': None,
+                                'selected': False,
+                            },
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
     )
-
     def get(self, request):
         version_history = None
         if request.user.is_authenticated:
@@ -1294,9 +1410,12 @@ class VersionHistoryView(APIView):
 
 
 class VersionHistoryUnreadCountView(APIView):
-    """ An endpoint that returns the user unseen version history elements count for the main navigation. """
+    """An endpoint that returns the user unseen version history elements count for the main navigation."""
 
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -1305,18 +1424,18 @@ class VersionHistoryUnreadCountView(APIView):
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": {
-                        "count": 2
-                    },
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {'count': 2},
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
     )
     def get(self, request):
         unread_versions_count = 0
@@ -1329,19 +1448,18 @@ class VersionHistoryUnreadCountView(APIView):
 
 
 class CosinnusNavigationPortalLinksBase(object):
-    """ A class that modifies or provides additional navbar links returned in
-        various navigation API endpoints.
-        Used by defining an extending class in a portal and specifying that class for
-        `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`. The class can then modify the
-        links returned by the API endpoints. """
-    
+    """A class that modifies or provides additional navbar links returned in
+    various navigation API endpoints.
+    Used by defining an extending class in a portal and specifying that class for
+    `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`. The class can then modify the
+    links returned by the API endpoints."""
+
     def modifiy_main_navigation(self, main_navigation_items, user=None):
         # noop, override this function in your portal's dropin
         return main_navigation_items
-        
+
 
 # allow dropin of extending class
 CosinnusNavigationPortalLinks = CosinnusNavigationPortalLinksBase
 if getattr(settings, 'COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN', None):
     CosinnusNavigationPortalLinks = resolve_class(settings.COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN)
-    

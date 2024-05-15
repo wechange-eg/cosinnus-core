@@ -2,12 +2,15 @@
 Utilities for tests.py usage.
 
 """
+
 from __future__ import unicode_literals
 
-
 from builtins import object
+
+
 class UserRepresentation(object):
     "POSTMAN_SHOW_USER_AS = 'postman.module_for_tests.UserRepresentation'"
+
     def __init__(self, user):
         self.user = user
 

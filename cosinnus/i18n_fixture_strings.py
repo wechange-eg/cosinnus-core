@@ -8,7 +8,6 @@ They are included here to be seen by the parser anyways (this file is loaded fro
 
 from django.utils.translation import gettext_lazy as _
 
-
 _('My Dashboard')
 _('Wrong file format. Try .jpg, .jpeg, .png, or .gif instead.')
 
@@ -16,4 +15,4 @@ _('Wrong file format. Try .jpg, .jpeg, .png, or .gif instead.')
 # use the following pattern to have the strings be included as JS translations:
 
 ## Translators: __INCLUDE_JS_PO__
-#_('A JS string')
+# _('A JS string')

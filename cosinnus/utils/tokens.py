@@ -9,16 +9,17 @@ from django.utils.http import base36_to_int, int_to_base36
 class EmailBlacklistTokenGenerator(object):
     """
     Strategy object used to generate and check tokens for the list-unsubscribe email blacklist mechanism.
-    
-    Taken and modified from `django.contrib.auth.tokens.PasswordResetTokenGenerator`. 
-    Note: This does not actually use any information that isn't accessible to the user 
+
+    Taken and modified from `django.contrib.auth.tokens.PasswordResetTokenGenerator`.
+    Note: This does not actually use any information that isn't accessible to the user
     (only the timestamp and email are used for token generation), so this is *not* a secure token!
-    
+
     However since we use it only as a permission to blacklist an email, *and* it needs to be available
     for non-registered users, and we do not want to persist tokens for this in the DB,
     we think it is an acceptable compromise as an alternative to having a "naked" unsubscribe URL,
     where anyone could unsubscribe an email at their leisure.
     """
+
     def make_token(self, email):
         """
         Returns a token that can be forever to do a password reset
@@ -32,7 +33,7 @@ class EmailBlacklistTokenGenerator(object):
         """
         # Parse the token
         try:
-            ts_b36, hash = token.split("-")
+            ts_b36, hash = token.split('-')
         except ValueError:
             return False
 
@@ -58,11 +59,11 @@ class EmailBlacklistTokenGenerator(object):
         # last_login will also change), we produce a hash that will be
         # invalid as soon as it is used.
         # We limit the hash to 20 chars to keep URL short
-        key_salt = "cosinnus.core.utils.tokens.EmailBlacklistTokenGenerator"
+        key_salt = 'cosinnus.core.utils.tokens.EmailBlacklistTokenGenerator'
 
-        value = (email + six.text_type(timestamp))
+        value = email + six.text_type(timestamp)
         hash = salted_hmac(key_salt, value).hexdigest()[::2]
-        return "%s-%s" % (ts_b36, hash)
+        return '%s-%s' % (ts_b36, hash)
 
     def _num_days(self, dt):
         return (dt - date(2001, 1, 1)).days

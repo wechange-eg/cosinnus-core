@@ -1,7 +1,9 @@
 """
 Custom fields.
 """
+
 from __future__ import unicode_literals
+
 from importlib import import_module
 
 from django.conf import settings
@@ -23,13 +25,14 @@ class BasicCommaSeparatedUserField(CharField):
     to benefit from the auto-complete fonctionality if available.
 
     """
+
     default_error_messages = {
-        'unknown': _("Some usernames are unknown or no longer active: {users}."),
-        'max': _("Ensure this value has at most {limit_value} distinct items (it has {show_value})."),
-        'min': _("Ensure this value has at least {limit_value} distinct items (it has {show_value})."),
-        'filtered': _("Some usernames are rejected: {users}."),
-        'filtered_user': _("{username}"),
-        'filtered_user_with_reason': _("{username} ({reason})"),
+        'unknown': _('Some usernames are unknown or no longer active: {users}.'),
+        'max': _('Ensure this value has at most {limit_value} distinct items (it has {show_value}).'),
+        'min': _('Ensure this value has at least {limit_value} distinct items (it has {show_value}).'),
+        'filtered': _('Some usernames are rejected: {users}.'),
+        'filtered_user': _('{username}'),
+        'filtered_user_with_reason': _('{username} ({reason})'),
     }
 
     def __init__(self, max=None, min=None, user_filter=None, *args, **kwargs):
@@ -85,9 +88,9 @@ class BasicCommaSeparatedUserField(CharField):
                     if reason is not None:
                         users.remove(u)
                         filtered_names.append(
-                            self.error_messages[
-                                'filtered_user_with_reason' if reason else 'filtered_user'
-                            ].format(username=get_user_name(u), reason=reason)
+                            self.error_messages['filtered_user_with_reason' if reason else 'filtered_user'].format(
+                                username=get_user_name(u), reason=reason
+                            )
                         )
                 except ValidationError as e:
                     users.remove(u)
@@ -97,6 +100,7 @@ class BasicCommaSeparatedUserField(CharField):
         if errors:
             raise ValidationError(errors)
         return users
+
 
 d = getattr(settings, 'POSTMAN_AUTOCOMPLETER_APP', {})
 app_name = d.get('name', 'ajax_select')
@@ -115,7 +119,7 @@ if app_name in settings.INSTALLED_APPS and arg_default:
     class CommaSeparatedUserField(BasicCommaSeparatedUserField, auto_complete_field):
         def __init__(self, *args, **kwargs):
             if not args and arg_name not in kwargs:
-                kwargs.update([(arg_name,arg_default)])
+                kwargs.update([(arg_name, arg_default)])
             super(CommaSeparatedUserField, self).__init__(*args, **kwargs)
 
         def set_arg(self, value):

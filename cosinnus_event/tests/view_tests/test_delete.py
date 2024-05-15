@@ -9,7 +9,6 @@ from cosinnus_event.tests.view_tests.base import ViewTestCase
 
 
 class DeleteTest(ViewTestCase):
-
     def setUp(self, *args, **kwargs):
         super(DeleteTest, self).setUp(*args, **kwargs)
         self.event = Event.objects.create(
@@ -19,7 +18,8 @@ class DeleteTest(ViewTestCase):
             title='testevent',
             from_date=now(),
             to_date=now(),
-            state=Event.STATE_SCHEDULED)
+            state=Event.STATE_SCHEDULED,
+        )
         self.kwargs = {'group': self.group.slug, 'slug': self.event.slug}
         self.url = reverse('cosinnus:event:event-delete', kwargs=self.kwargs)
 
@@ -40,7 +40,5 @@ class DeleteTest(ViewTestCase):
         response = self.client.post(self.url)
         self.assertEqual(response.status_code, 302)
         kwargs = {'group': self.group.slug}
-        self.assertIn(
-            reverse('cosinnus:event:list', kwargs=kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:event:list', kwargs=kwargs), response.get('location'))
         self.assertEqual(len(Event.objects.all()), 0)

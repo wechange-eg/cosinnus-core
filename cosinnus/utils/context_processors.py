@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import resolve, Resolver404, reverse
+import json
+import logging
+from datetime import timedelta
+
+from django.template.defaultfilters import date
+from django.urls import Resolver404, resolve, reverse
+from django.utils import timezone
 from django.utils.formats import get_format
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
+from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.conf import settings as SETTINGS
 from cosinnus.core.registries import app_registry
-from cosinnus.api.serializers.user import UserSerializer
-import json
-from cosinnus.models.group import CosinnusPortal
 from cosinnus.forms.user import TermsOfServiceFormFields
-from cosinnus.models.profile import GlobalBlacklistedEmail
-
-import logging
-from cosinnus.utils.user import get_user_tos_accepted_date,\
-    check_user_has_accepted_portal_tos
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import CosinnusManagedTag
+from cosinnus.models.profile import GlobalBlacklistedEmail
 from cosinnus.trans.group import get_group_trans_by_type
 from cosinnus.utils.permissions import check_user_verified
+from cosinnus.utils.user import check_user_has_accepted_portal_tos, get_user_tos_accepted_date
 from cosinnus.utils.version_history import get_version_history_for_user
-from datetime import timedelta
-from django.utils import timezone
-from django.template.defaultfilters import date
+
 logger = logging.getLogger('cosinnus')
 
 
@@ -48,25 +48,25 @@ def cosinnus(request):
     ``COSINNUS_DATE_FORMAT``
 
     ``COSINNUS_DATETIME_FORMAT``
-    
+
     ``COSINNUS_TIME_FORMAT``
-    
+
     ``COSINNUS_DJANGO_DATETIME_FORMAT``
-    
+
     ``COSINNUS_DJANGO_DATE_FORMAT``
-    
+
     ``COSINNUS_DJANGO_DATE_SHORT_FORMAT``
-    
+
     ``COSINNUS_COSINNUS_DJANGO_DATE_SHORT_CLEAR_FORMAT``
-    
+
     ``COSINNUS_DJANGO_TIME_FORMAT``
-    
+
     ``COSINNUS_USER``
         If ``request.user`` is logged in, its a serialized version of
         :class:`~cosinnus.api.serializers.user.UserSerializer`. If
         not authenticated it is ``False``. Both serialized to JSON.
     """
-    base_url = CosinnusPortal.get_current().get_domain() 
+    base_url = CosinnusPortal.get_current().get_domain()
     base_url += '' if base_url[-1] == '/' else '/'
 
     user = request.user
@@ -74,21 +74,24 @@ def cosinnus(request):
         user_json = json.dumps(UserSerializer(user).data)
     else:
         user_json = json.dumps(False)
-    
+
     # we only need these expensive metrics for the old-style navbar
-    if user.is_authenticated and not \
-            (getattr(SETTINGS, 'COSINNUS_USE_V2_DASHBOARD', False) or \
-                (getattr(SETTINGS, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False) and user.is_superuser)):
+    if user.is_authenticated and not (
+        getattr(SETTINGS, 'COSINNUS_USE_V2_DASHBOARD', False)
+        or (getattr(SETTINGS, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False) and user.is_superuser)
+    ):
         if getattr(SETTINGS, 'COSINNUS_ROCKET_ENABLED', False):
             unread_count = 0
             stream_unseen_count = 0
             # since this is a locking request, we do not use rocketchat unread counters on page load
-            #from cosinnus_message.rocket_chat import RocketChatConnection
-            #unread_count = RocketChatConnection().unread_messages(user)
+            # from cosinnus_message.rocket_chat import RocketChatConnection
+            # unread_count = RocketChatConnection().unread_messages(user)
         else:
-            from cosinnus_stream.models import Stream # noqa
+            from cosinnus_stream.models import Stream  # noqa
+
             stream_unseen_count = Stream.objects.my_stream_unread_count(user)
-            from postman.models import Message # noqa
+            from postman.models import Message  # noqa
+
             unread_count = Message.objects.inbox_unread_count(user)
     else:
         unread_count = 0
@@ -102,7 +105,7 @@ def cosinnus(request):
         pass  # current_app is not a cosinnus app
     except Resolver404:
         pass
-    
+
     v3_api_content_active = bool(getattr(request, 'v3_api_content_active', None) == True)
 
     # version history
@@ -110,7 +113,7 @@ def cosinnus(request):
         version_history, version_history_unread_count = {}, 0
     else:
         version_history, version_history_unread_count = get_version_history_for_user(request.user)
-    
+
     return {
         'COSINNUS_BASE_URL': base_url,
         'COSINNUS_CURRENT_APP': current_app_name,
@@ -139,25 +142,27 @@ def cosinnus(request):
 
 
 def tos_check(request):
-    """ Checks if the portal's ToS version is higher than those that the user
-        has accepted, and if so, renders the `updated_tos_form` into the context.
-        Currently, `extra_body_header.html` (from `base.html`) checks if the form
-        is present and renders a modal popup with it. """
-        
+    """Checks if the portal's ToS version is higher than those that the user
+    has accepted, and if so, renders the `updated_tos_form` into the context.
+    Currently, `extra_body_header.html` (from `base.html`) checks if the form
+    is present and renders a modal popup with it."""
+
     portal = CosinnusPortal.get_current()
     user = request.user
     if user.is_authenticated:
         try:
             tos_accepted_date = get_user_tos_accepted_date(user)
-            tos_were_updated = portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date)
-            # if a portal's tos_date has never moved beyond the default, we don't check the tos_accepted_date, 
+            tos_were_updated = portal.tos_date.year > 2000 and (
+                tos_accepted_date is None or tos_accepted_date < portal.tos_date
+            )
+            # if a portal's tos_date has never moved beyond the default, we don't check the tos_accepted_date,
             # to maintain backwards compatibility with users who have only the `settings.tos_accepted` boolean
             if tos_were_updated or not check_user_has_accepted_portal_tos(user):
-                updated_tos_form = TermsOfServiceFormFields(initial={
-                    'newsletter_opt_in': user.cosinnus_profile.settings.get('newsletter_opt_in', False)
-                })
+                updated_tos_form = TermsOfServiceFormFields(
+                    initial={'newsletter_opt_in': user.cosinnus_profile.settings.get('newsletter_opt_in', False)}
+                )
                 return {
-                    'updated_tos_form': updated_tos_form, 
+                    'updated_tos_form': updated_tos_form,
                 }
         except Exception as e:
             logger.error('Error in `context_processory.tos_check`: %s' % e, extra={'exception': e})
@@ -165,29 +170,33 @@ def tos_check(request):
 
 
 def email_verified(request):
-    """ Add additional announcements to the context which are checked for in base.html. """
+    """Add additional announcements to the context which are checked for in base.html."""
     context = dict()
     portal = CosinnusPortal.get_current()
     user = request.user
 
-    if (user.is_authenticated and
-            not user.is_guest and
-            portal.email_needs_verification and
-            not GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and
-            not check_user_verified(request.user)):
+    if (
+        user.is_authenticated
+        and not user.is_guest
+        and portal.email_needs_verification
+        and not GlobalBlacklistedEmail.is_email_blacklisted(request.user.email)
+        and not check_user_verified(request.user)
+    ):
         url = reverse('cosinnus:resend-email-validation')
         url = '{}?next={}'.format(url, request.path)
         msg = _('Please verify your email address.')
         # show ultimatum date until the nag-popup begins
         if SETTINGS.COSINNUS_USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS > 0:
             target_date = user.date_joined + timedelta(days=SETTINGS.COSINNUS_USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS)
-            msg = _('Please verify your email address by %(date_string)s.') % {'date_string': date(timezone.localtime(target_date), 'SHORT_DATE_FORMAT')}
-        
+            msg = _('Please verify your email address by %(date_string)s.') % {
+                'date_string': date(timezone.localtime(target_date), 'SHORT_DATE_FORMAT')
+            }
+
         msg += ' ' + _('Make sure your email address "%(email_address)s" is correct.') % {'email_address': user.email}
         link_label = _('Click here to receive an email with a verification link.')
         context['email_not_verified_announcement'] = {
             'level': 'warning',
-            'text': f'{msg} <a href="{url}">{link_label}</a>'
+            'text': f'{msg} <a href="{url}">{link_label}</a>',
         }
     elif user.is_authenticated and user.is_guest and request.path != reverse('cosinnus:guest-user-not-allowed'):
         msg = _('You are currently using the platform with a guest account provided to you by a link.')

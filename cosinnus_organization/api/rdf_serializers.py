@@ -2,9 +2,8 @@ from rdflib import URIRef
 from rdflib.namespace import Namespace
 from rest_framework.reverse import reverse
 
-from rest_framework_rdf.serializers import RDFSerializer, RDFField, RDFSerializerMethodField
-
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationLocation
+from rest_framework_rdf.serializers import RDFField, RDFSerializer, RDFSerializerMethodField
 
 WECHANGE = Namespace('http://wechange.de')
 SDO = Namespace('http://schema.org/')
@@ -83,8 +82,7 @@ class CreativeWorkRDFSerializer(RDFSerializer):
 
     class Meta:
         model = CosinnusOrganization
-        fields = ('about', 'last_modified', 'created', 'license', 'keywords',
-                  'identifier', 'url', 'description')
+        fields = ('about', 'last_modified', 'created', 'license', 'keywords', 'identifier', 'url', 'description')
         type = SDO.CreativeWork
         prefixes = {
             'wechange': WECHANGE,
@@ -93,7 +91,7 @@ class CreativeWorkRDFSerializer(RDFSerializer):
 
     def get_id(self, instance):
         url = reverse('cosinnus:api:organization-detail', kwargs={'slug': instance.slug})
-        return URIRef(self.context["request"].build_absolute_uri(url))
+        return URIRef(self.context['request'].build_absolute_uri(url))
 
     def get_license(self, obj):
         return 'CC0-1.0'

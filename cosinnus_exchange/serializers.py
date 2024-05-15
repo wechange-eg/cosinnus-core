@@ -25,7 +25,7 @@ class ExchangeSerializerMixin(serializers.Serializer):
 
     def get_source(self, obj):
         return self._source
-    
+
     def get_external_id(self, obj):
         return obj.get('url') or obj.get('id')
 
@@ -58,8 +58,10 @@ class ExchangeGroupSerializer(ExchangeSerializerMixin, serializers.Serializer):
             return obj['locations'][0].get('lon', None)
         return None
 
+
 class ExchangeOrganizationSerializer(ExchangeGroupSerializer):
     pass
+
 
 class ExchangeEventSerializer(ExchangeSerializerMixin, serializers.Serializer):
     from_date = serializers.CharField()

@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from __future__ import print_function
-
-from django.core.mail import get_connection, EmailMessage
-from django.template.loader import render_to_string
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_str
-from django.utils.translation import gettext_lazy as _
-
-from cosinnus.conf import settings
+from __future__ import print_function, unicode_literals
 
 import logging
 import sys
-import html2text
 from threading import Thread
+
+import html2text
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage, get_connection
 from django.core.mail.message import EmailMultiAlternatives
-from cosinnus.utils.user import get_list_unsubscribe_url
-from cosinnus.models.group import CosinnusPortal
+from django.template.loader import render_to_string
 from django.templatetags.static import static
-from django.utils.safestring import mark_safe
+from django.utils.encoding import force_str
 from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
+
+from cosinnus.conf import settings
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.html import replace_non_portal_urls
+from cosinnus.utils.user import get_list_unsubscribe_url
+
 logger = logging.getLogger('cosinnus')
 
 __all__ = ['send_mail']
@@ -31,26 +31,33 @@ if settings.COSINNUS_USE_CELERY:
 
 
 def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
-    """ From django.core.mail, extended with bcc 
-        Note: ``template`` can be None, if so we are looking for a ``content`` key in ``data`` to fill the email message."""
-    
+    """From django.core.mail, extended with bcc
+    Note: ``template`` can be None, if so we are looking for a ``content`` key in ``data`` to fill the email message."""
+
     if from_email is None:
-        portal_name =  force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
+        portal_name = force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
         # add from-email readable name (yes, this is how this works)
-        from_email = '%(portal_name)s <%(from_email)s>' % {'portal_name': portal_name, 'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL}
-        
+        from_email = '%(portal_name)s <%(from_email)s>' % {
+            'portal_name': portal_name,
+            'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL,
+        }
+
     if data and 'unsubscribe_url' in data:
         unsubscribe_url = data.get('unsubscribe_url')
     else:
         unsubscribe_url = get_list_unsubscribe_url(to)
         data['unsubscribe_url'] = unsubscribe_url
-        
+
     if template is not None:
         message = render_to_string(template, data)
     else:
-        if not 'content' in data:
+        if 'content' not in data:
             import traceback
-            logger.error('Could not send email because of missing template/content parameters. Detail in extra.', extra={'to': to, 'trace': traceback.format_exc()})
+
+            logger.error(
+                'Could not send email because of missing template/content parameters. Detail in extra.',
+                extra={'to': to, 'trace': traceback.format_exc()},
+            )
             return
         message = data['content']
 
@@ -61,6 +68,7 @@ def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=Fa
     # if celery is active, delay the actual delivery
     if settings.COSINNUS_USE_CELERY:
         from cosinnus.tasks import deliver_mail_task
+
         deliver_mail_task.delay(to, subject, message, from_email, bcc, is_html=is_html, headers=headers)
         ret = None
     else:
@@ -70,19 +78,19 @@ def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=Fa
         try:
             from cosinnus.models.feedback import CosinnusSentEmailLog
             from cosinnus.models.group import CosinnusPortal
+
             if settings.COSINNUS_USE_CELERY:
-                subject = '[CELERY-DELEGATED] %s' % subject 
+                subject = '[CELERY-DELEGATED] %s' % subject
             CosinnusSentEmailLog.objects.create(email=to, title=subject, portal=CosinnusPortal.get_current())
         except Exception as e:
             logger.error('Error while trying to log a sent email!', extra={'exception': force_str(e)})
-        
 
     return ret
 
 
 def deliver_mail(to, subject, message, from_email, bcc=None, is_html=False, headers=None):
-    """ The actual delivery of the mail.
-        This may be called from inside a celery task as well! """     
+    """The actual delivery of the mail.
+    This may be called from inside a celery task as well!"""
     if headers is None:
         headers = {}
 
@@ -97,11 +105,11 @@ def deliver_mail(to, subject, message, from_email, bcc=None, is_html=False, head
         ret = mail.send()
 
     return ret
-        
+
 
 def convert_html_to_plaintext(html_message):
-    """ Converts a cosinnus HTML rendered message to useful plaintext """
-    
+    """Converts a cosinnus HTML rendered message to useful plaintext"""
+
     htmler = html2text.HTML2Text()
     htmler.ignore_images = True
     htmler.body_width = 0
@@ -119,38 +127,38 @@ def convert_html_to_plaintext(html_message):
 
 
 def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=False):
-    """ DEBUG ONLY """
+    """DEBUG ONLY"""
     if settings.DEBUG:
-        print(">> Mail printing:")
+        print('>> Mail printing:')
         if is_html:
-            print(">> (HTML)")
-        print((">> To: ", to))
-        print((">> Subject: ", force_str(subject)))
-        print(">> Body:")
+            print('>> (HTML)')
+        print(('>> To: ', to))
+        print(('>> Subject: ', force_str(subject)))
+        print('>> Body:')
         print(render_to_string(template, data))
-    
+
+
 def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     # remove newlines from header
     subject = subject.replace('\n', ' ').replace('\r', ' ')
-    
+
     try:
         send_mail(to, subject, template, data, from_email, bcc, is_html)
-            
+
         extra = {'to_user': to, 'subject': subject}
         logger.info('Cosinnus.core.mail: Successfully sent mail on site "%d".' % settings.SITE_ID, extra=extra)
     except Exception as e:
         # fail silently. log this, though
         extra = {'to_user': to, 'subject': subject, 'exception': force_str(e), 'exc_reason': e}
-        try: 
+        try:
             extra.update({'sys_except': sys.exc_info()[0]})
         except:
             extra.update({'sys_except': 'could not print'})
         logger.warn('Cosinnus.core.mail: Failed to send mail!', extra=extra)
         if settings.DEBUG:
-            print((">> extra:", extra)) 
+            print(('>> extra:', extra))
             raise
             _mail_print(to, subject, template, data, from_email, bcc, is_html)
-
 
 
 def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc=None, is_html=False):
@@ -165,44 +173,48 @@ def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc
 
 
 def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None, threaded=False):
-    """ Sends out a pretty html to an email-address.
-        The given `html_content` will be placed inside the notification html template,
-        and the style will be a "from-portal" style (instead of a "from-group" style.
-        @param topic_instead_of_subject: If given, will set the topic line after "Hello, <user", 
-            in the mail body to a different text than the email-subject. Set this to "" to completely 
-            remove the header line. """
-    
+    """Sends out a pretty html to an email-address.
+    The given `html_content` will be placed inside the notification html template,
+    and the style will be a "from-portal" style (instead of a "from-group" style.
+    @param topic_instead_of_subject: If given, will set the topic line after "Hello, <user",
+        in the mail body to a different text than the email-subject. Set this to "" to completely
+        remove the header line."""
+
     template = '/cosinnus/html_mail/notification.html'
-    data = get_html_mail_data(to_user, topic_instead_of_subject if topic_instead_of_subject is not None else subject, html_content)
+    data = get_html_mail_data(
+        to_user, topic_instead_of_subject if topic_instead_of_subject is not None else subject, html_content
+    )
     if threaded:
         send_mail_func = send_mail_or_fail_threaded
     else:
         send_mail_func = send_mail_or_fail
     send_mail_func(to_user.email, subject, template, data, is_html=True)
-    
+
+
 def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_subject=None):
     send_html_mail(to_user, subject, html_content, topic_instead_of_subject=topic_instead_of_subject, threaded=True)
 
+
 def render_html_mail(to_user, subject, html_content):
-    """ Renders the HTML that would be used to send an email given the content.
-        Can be used for testing an email. """
-    
+    """Renders the HTML that would be used to send an email given the content.
+    Can be used for testing an email."""
+
     template = '/cosinnus/html_mail/notification.html'
     data = get_html_mail_data(to_user, subject, html_content)
     return render_to_string(template, data)
 
 
 def render_notification_item_html_mail(to_user, subject, notification_item_html):
-    """ Renders the HTML that would be used to send an email given the content.
-        Can be used for testing an email. """
-    
+    """Renders the HTML that would be used to send an email given the content.
+    Can be used for testing an email."""
+
     template = '/cosinnus/html_mail/notification.html'
     data = get_html_mail_data(to_user, subject, notification_item_html, use_notification_item_html=True)
     return render_to_string(template, data)
 
 
 def get_html_mail_data(to_user, subject, html_content, use_notification_item_html=False):
-    """ Collects all data needed to fill the HTML email template """
+    """Collects all data needed to fill the HTML email template"""
     portal = CosinnusPortal.get_current()
     domain = portal.get_domain()
     portal_image_url = '%s%s' % (domain, static('img/email-header.png'))
@@ -213,17 +225,15 @@ def get_html_mail_data(to_user, subject, html_content, use_notification_item_htm
         'portal_url': domain,
         'portal_image_url': portal_image_url,
         'portal_name': portal.name,
-        'receiver': to_user, 
-        'addressee': mark_safe(strip_tags(to_user.first_name)), 
+        'receiver': to_user,
+        'addressee': mark_safe(strip_tags(to_user.first_name)),
         'topic': subject,
         'prefs_url': None,
         'notification_reason': None,
-        
         'origin_name': portal.name,
         'origin_url': domain,
         'origin_image_url': portal_image_url,
-
-        'notification_raw_html': None, # this is raw-html pastable section
+        'notification_raw_html': None,  # this is raw-html pastable section
         'notification_item_html': None,
     }
     if use_notification_item_html:
@@ -234,7 +244,7 @@ def get_html_mail_data(to_user, subject, html_content, use_notification_item_htm
 
 
 def get_common_mail_context(request, group=None, user=None):
-    """ Collects common context variables for Email templates """
+    """Collects common context variables for Email templates"""
     portal = CosinnusPortal.get_current()
     protocol = portal.protocol or getattr(settings, 'COSINNUS_SITE_PROTOCOL', 'http')
     site = portal.site
@@ -246,21 +256,25 @@ def get_common_mail_context(request, group=None, user=None):
         'portal': portal,
     }
     if group:
-        context.update({
-            'team_name': group.name,
-            'group': group,
-        })
+        context.update(
+            {
+                'team_name': group.name,
+                'group': group,
+            }
+        )
     if user:
         from cosinnus.templatetags.cosinnus_tags import full_name_force
-        context.update({
-            'user_name': full_name_force(user),
-            'user': user,
-        })
+
+        context.update(
+            {
+                'user_name': full_name_force(user),
+                'user': user,
+            }
+        )
     return context
 
 
 class MailThread(Thread):
-    
     def __init__(self, *args, **kwargs):
         self.to = []
         self.subject = []
@@ -270,8 +284,7 @@ class MailThread(Thread):
         self.bcc = []
         self.is_html = []
         super(MailThread, self).__init__(*args, **kwargs)
-        
-    
+
     def add_mail(self, to, subject, template, data, from_email=None, bcc=None, is_html=False):
         self.to.append(to)
         self.subject.append(subject)
@@ -280,7 +293,15 @@ class MailThread(Thread):
         self.from_email.append(from_email)
         self.is_html.append(is_html)
         self.bcc.append(bcc)
-        
+
     def run(self):
         for i, to in enumerate(self.to):
-            send_mail_or_fail(to, self.subject[i], self.template[i], self.data[i], self.from_email[i], self.bcc[i], is_html=self.is_html[i])
+            send_mail_or_fail(
+                to,
+                self.subject[i],
+                self.template[i],
+                self.data[i],
+                self.from_email[i],
+                self.bcc[i],
+                is_html=self.is_html[i],
+            )

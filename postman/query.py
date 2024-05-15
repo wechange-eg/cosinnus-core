@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
-import six
+
 from builtins import object
 from types import MethodType
 
+import six
 from django import VERSION
 from django.db.models.sql.query import Query
-
 
 
 class Proxy(object):
@@ -71,7 +71,8 @@ class CompilerProxy(Proxy):
         new_sql = [
             sql[:index],
             ' {0} ({1}) {2} ON ({3}.{4} = {2}.{5})'.format(
-                inner_join, extra_table, self.query.pm_alias_prefix, qn(alias), qn2('id'), qn2('id')),
+                inner_join, extra_table, self.query.pm_alias_prefix, qn(alias), qn2('id'), qn2('id')
+            ),
         ]
         if index < len(sql):
             new_sql.append(sql[index:])
@@ -95,6 +96,7 @@ class PostmanQuery(Query):
     """
     A custom SQL query.
     """
+
     pm_alias_prefix = 'PM'
 
     # @Override

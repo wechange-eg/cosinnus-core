@@ -8,7 +8,6 @@ from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
 class DeleteTest(ViewTestCase):
-
     def setUp(self, *args, **kwargs):
         super(DeleteTest, self).setUp(*args, **kwargs)
         self.pad = Etherpad.objects.create(group=self.group, title='testpad', creator=self.admin)
@@ -37,9 +36,7 @@ class DeleteTest(ViewTestCase):
         response = self.client.post(self.url)
         self.assertEqual(response.status_code, 302)
         kwargs = {'group': self.group.slug}
-        self.assertIn(
-            reverse('cosinnus:etherpad:list', kwargs=kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:etherpad:list', kwargs=kwargs), response.get('location'))
         pad_exists = Etherpad.objects.filter(slug=self.pad.slug).exists()
         self.assertFalse(pad_exists)
         self.pad = None

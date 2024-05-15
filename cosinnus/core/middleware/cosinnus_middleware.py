@@ -1,60 +1,62 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
 import re
 from builtins import object
 from functools import partial as curry
-import logging
 
-from django.contrib import messages
-from django.core.exceptions import MiddlewareNotUsed
-from django.urls import reverse, NoReverseMatch
-from django.db.models import signals
+from annoying.functions import get_object_or_None
 from django.apps import apps
+from django.contrib import messages
+from django.contrib.auth import logout
+from django.contrib.redirects.middleware import RedirectFallbackMiddleware
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.core.exceptions import MiddlewareNotUsed
+from django.db.models import signals
 from django.http.response import HttpResponseRedirect
+from django.shortcuts import redirect
+from django.template.defaultfilters import urlencode
 from django.template.response import TemplateResponse
+from django.urls import NoReverseMatch, reverse
+from django.utils.deprecation import MiddlewareMixin
 from django.utils.encoding import force_str
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
+from django_otp import user_has_device
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
-from django.contrib.auth import logout
-from django_otp import user_has_device
-from django.shortcuts import redirect
-from django.utils.deprecation import MiddlewareMixin
-from django.utils.http import url_has_allowed_host_and_scheme
-from django.contrib.redirects.middleware import RedirectFallbackMiddleware
-from cosinnus.utils.urls import redirect_next_or, group_aware_reverse
-from django.contrib.sessions.middleware import SessionMiddleware
-from cosinnus.utils.permissions import check_user_superuser, check_ug_membership,\
-    check_ug_admin
-from annoying.functions import get_object_or_None
-from cosinnus.core.decorators.views import redirect_to_not_logged_in,\
-    get_group_for_request
+from cosinnus.core.decorators.views import get_group_for_request, redirect_to_not_logged_in
+from cosinnus.utils.permissions import check_ug_admin, check_ug_membership, check_user_superuser
+from cosinnus.utils.urls import group_aware_reverse, redirect_next_or
 from cosinnus.views.user import send_user_email_to_verify
-from django.template.defaultfilters import urlencode
-
 
 logger = logging.getLogger('cosinnus')
 
 # delegate import to avoid cyclic dependencies
 _CosinnusPortal = None
 
+
 def CosinnusPortal():
     global _CosinnusPortal
-    if _CosinnusPortal is None: 
+    if _CosinnusPortal is None:
         _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
     return _CosinnusPortal
+
 
 # delegate import to avoid cyclic dependencies
 _CosinnusPermanentRedirect = None
 
+
 def CosinnusPermanentRedirect():
     global _CosinnusPermanentRedirect
-    if _CosinnusPermanentRedirect is None: 
+    if _CosinnusPermanentRedirect is None:
         _CosinnusPermanentRedirect = apps.get_model('cosinnus', 'CosinnusPermanentRedirect')
     return _CosinnusPermanentRedirect
+
 
 # a list of urls that should always be openly accessible as they are required for user logins
 LOGIN_URLS = settings.COSINNUS_NEVER_REDIRECT_URLS + [
@@ -90,28 +92,28 @@ EXEMPTED_URLS_FOR_2FA = [
 
 # list of url patterns that are not permitted to be accessed during guest login
 GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
-    r"^/login/$",
-    r"^/signup/$",
-    r"^/profile/(?!$)", # anything below the profile-detail page
-    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/cloud/", # group cloud direct link
-    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/conference/apply/",
-    r"^/messages/", # any type of messages, rocketchat etc
-    r"^/nachrichten/",  # any type of postman messages
-    r".*/add/.*", # any type of create view
-    r"^/account/", # PAYL and other account views
+    r'^/login/$',
+    r'^/signup/$',
+    r'^/profile/(?!$)',  # anything below the profile-detail page
+    r'^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/cloud/',  # group cloud direct link
+    r'^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/conference/apply/',
+    r'^/messages/',  # any type of messages, rocketchat etc
+    r'^/nachrichten/',  # any type of postman messages
+    r'.*/add/.*',  # any type of create view
+    r'^/account/',  # PAYL and other account views
 ]
 GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS = [
-    r"^/dashboard/api/save_ui_prefs/", # save ui prefs
+    r'^/dashboard/api/save_ui_prefs/',  # save ui prefs
 ]
 GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS = [
-    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/doodle/(?P<doodle_slug>[^/]+)/", # event poll votes
-    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/(?P<event_slug>[^/]+)/assign_attendance/",  # event attendance
-    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/poll/(?P<poll_slug>[^/]+)/",  # poll votes
+    r'^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/doodle/(?P<doodle_slug>[^/]+)/',  # event poll votes
+    r'^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/(?P<event_slug>[^/]+)/assign_attendance/',  # event attendance
+    r'^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/poll/(?P<poll_slug>[^/]+)/',  # poll votes
 ]
 ICAL_FEED_URL_PATTERNS = [
-    "^/events/team/.*/feed/",
-    "^/events/team/.*/feed/",
-    "^/events/team/.*/conference/feed/",
+    '^/events/team/.*/feed/',
+    '^/events/team/.*/feed/',
+    '^/events/team/.*/conference/feed/',
 ]
 
 # if any of these URLs was requested, auto-redirects in the user's profile settings won't trigger
@@ -119,6 +121,7 @@ NO_AUTO_REDIRECTS = (
     reverse('cosinnus:invitations'),
     reverse('cosinnus:welcome-settings'),
 )
+
 
 def initialize_cosinnus_after_startup():
     cosinnus_signals.all_cosinnus_apps_loaded.send(sender=None)
@@ -128,11 +131,12 @@ def initialize_cosinnus_after_startup():
 
 startup_middleware_inited = False
 
+
 class StartupMiddleware(MiddlewareMixin):
-    """ This middleware will be run exactly once, after server startup, when all django
-        apps are fully loaded. It is used to dispatch the all_cosinnus_apps_loaded signal.
+    """This middleware will be run exactly once, after server startup, when all django
+    apps are fully loaded. It is used to dispatch the all_cosinnus_apps_loaded signal.
     """
-    
+
     def __init__(self, get_response=None):
         # check using a global var because this gets executed twice otherwise
         global startup_middleware_inited
@@ -140,82 +144,127 @@ class StartupMiddleware(MiddlewareMixin):
         if not startup_middleware_inited:
             startup_middleware_inited = True
             initialize_cosinnus_after_startup()
-           
+
         raise MiddlewareNotUsed
 
 
 class AdminOTPMiddleware(MiddlewareMixin):
     """
-        If setting `COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED` is True, this middleware 
-        will restrict all access to the django admin area to accounts with a django-otp
-        2-factor authentication device set up, by redirecting the otp validation view.
-        Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this!
+    If setting `COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED` is True, this middleware
+    will restrict all access to the django admin area to accounts with a django-otp
+    2-factor authentication device set up, by redirecting the otp validation view.
+    Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this!
     """
+
     def process_request(self, request):
         if not getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED', False):
             return None
-        
+
         # regular mode covers only the admin backend
         filter_path = '/admin/'
         # semi-strict mode covers the django-admin and administration area
-        if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_INCLUDE_ADMINISTRATION_AREA', False) or \
-                getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
+        if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_INCLUDE_ADMINISTRATION_AREA', False) or getattr(
+            settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False
+        ):
             filter_path = '/admin'
         # strict mode covers the entire page
         if getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE', False):
             filter_path = '/'
-        
+
         user = getattr(request, 'user', None)
-        
+
         # check if the user is a superuser and they attempted to access a covered url
-        if user and check_user_superuser(user) and request.path.startswith(filter_path) and \
-                not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
+        if (
+            user
+            and check_user_superuser(user)
+            and request.path.startswith(filter_path)
+            and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA])
+        ):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if not user.is_verified():
                 next_url = urlencode(request.get_full_path())
-                return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
-        elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith('/admin/') and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
+                return redirect(
+                    reverse('cosinnus:login-2fa')
+                    + (
+                        ('?next=%s' % next_url)
+                        if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()])
+                        else ''
+                    )
+                )
+        elif (
+            user
+            and user.is_authenticated
+            and not check_user_superuser(user)
+            and request.path.startswith('/admin/')
+            and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA])
+        ):
             # normal users will never be redirected to the admin area
             return redirect('cosinnus:user-dashboard')
-        
+
         return None
 
-    
+
 class UserOTPMiddleware(MiddlewareMixin):
     """
-        If setting `COSINNUS_USER_2_FACTOR_AUTH_ENABLED` is True, this middleware
-        will restrict all access to the entire portal to accounts with the enabled 2fa-feature
-        for non-admin users, by redirecting the token validation view.
-        Set up at least one device at <host>/two_factor_auth/settings/setup/ before activating this! 
+    If setting `COSINNUS_USER_2_FACTOR_AUTH_ENABLED` is True, this middleware
+    will restrict all access to the entire portal to accounts with the enabled 2fa-feature
+    for non-admin users, by redirecting the token validation view.
+    Set up at least one device at <host>/two_factor_auth/settings/setup/ before activating this!
     """
 
     def process_request(self, request):
         if not getattr(settings, 'COSINNUS_USER_2_FACTOR_AUTH_ENABLED', False):
             return None
-        
+
         filter_path = '/'
         user = getattr(request, 'user', None)
-        
+
         # check if the user is authenticated and they attempted to access a covered url
-        if user and user.is_authenticated and request.path.startswith(filter_path) and \
-                not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
+        if (
+            user
+            and user.is_authenticated
+            and request.path.startswith(filter_path)
+            and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA])
+        ):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if user_has_device(user) and not user.is_verified():
                 next_url = urlencode(request.get_full_path())
-                return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
+                return redirect(
+                    reverse('cosinnus:two-factor-auth-token')
+                    + (
+                        ('?next=%s' % next_url)
+                        if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()])
+                        else ''
+                    )
+                )
 
         return None
 
+
 """Adds the request to the instance of a Model that is being saved (created or modified)
    Taken from https://github.com/Atomidata/django-audit-log/blob/master/audit_log/middleware.py  and modified """
+
+
 class AddRequestToModelSaveMiddleware(MiddlewareMixin):
     def process_request(self, request):
-        if not request.method in ('GET', 'HEAD', 'OPTIONS', 'TRACE'):
+        if request.method not in ('GET', 'HEAD', 'OPTIONS', 'TRACE'):
             mark_request = curry(self.mark_request, request)
-            signals.pre_save.connect(mark_request,  dispatch_uid = (self.__class__, request,), weak = False)
+            signals.pre_save.connect(
+                mark_request,
+                dispatch_uid=(
+                    self.__class__,
+                    request,
+                ),
+                weak=False,
+            )
 
     def process_response(self, request, response):
-        signals.pre_save.disconnect(dispatch_uid =  (self.__class__, request,))
+        signals.pre_save.disconnect(
+            dispatch_uid=(
+                self.__class__,
+                request,
+            )
+        )
         return response
 
     def mark_request(self, request, sender, instance, **kwargs):
@@ -224,75 +273,117 @@ class AddRequestToModelSaveMiddleware(MiddlewareMixin):
 
 GROUP_TYPES = None
 
+
 class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
-    """ This middleware checks if the group that is being accessed has an entry in the PermaRedirect
-        table. If so, it redirects to the new group URL.
-        This is used to make group URIs permanent after their type, slug, or portal changed.
-        This table needs to be checked for unique_aware_slugify to prevent new groups re-taking old
-        group slugs, effictively hiding the new groups under this redirect.
+    """This middleware checks if the group that is being accessed has an entry in the PermaRedirect
+    table. If so, it redirects to the new group URL.
+    This is used to make group URIs permanent after their type, slug, or portal changed.
+    This table needs to be checked for unique_aware_slugify to prevent new groups re-taking old
+    group slugs, effictively hiding the new groups under this redirect.
     """
-    
+
     def process_request(self, request):
         # pokemon exception handling
         try:
             global GROUP_TYPES
             if GROUP_TYPES is None:
                 from cosinnus.core.registries.group_models import group_model_registry
+
                 GROUP_TYPES = [url_key for url_key in group_model_registry]
-            
+
             # split URL into non-empty parts
             request_tokens = request.build_absolute_uri().split('/')
             request_tokens = [token for token in request_tokens if token and not token.startswith('?')]
-            
+
             # if URL might be a link to a group
-            if len(request_tokens) >= 4: 
+            if len(request_tokens) >= 4:
                 group_type = request_tokens[2]
                 group_slug = request_tokens[3]
                 if group_type in GROUP_TYPES:
                     # check permanent redirects to a group
-                    to_group = CosinnusPermanentRedirect().get_group_for_pattern(CosinnusPortal().get_current(), group_type, group_slug)
+                    to_group = CosinnusPermanentRedirect().get_group_for_pattern(
+                        CosinnusPortal().get_current(), group_type, group_slug
+                    )
                     if to_group:
                         # redirect to the redirect with HttpResponsePermanentRedirect
                         redirect_url = ''.join((to_group.get_absolute_url(), '/'.join(request_tokens[4:])))
                         if not getattr(settings, 'COSINNUS_PERMANENT_REDIRECT_HIDE_USER_MESSAGE', False):
-                            messages.success(request, _('This team no longer resides under the URL you entered. You have been redirected automatically to the current location.'))
+                            messages.success(
+                                request,
+                                _(
+                                    'This team no longer resides under the URL you entered. You have been redirected automatically to the current location.'
+                                ),
+                            )
                         return HttpResponseRedirect(redirect_url)
-                    
+
                     # check user-specific redirects (forcing users out of certain group urls
                     if request.user.is_authenticated:
                         from cosinnus.core.registries.group_models import group_model_registry
-                        target_group_cls = group_model_registry.get(group_type) 
+
+                        target_group_cls = group_model_registry.get(group_type)
                         portal = CosinnusPortal().get_current()
                         target_group = get_object_or_None(target_group_cls, portal=portal, slug=group_slug)
-                        
+
                         # *** Conferences: redirect most URLs to conference page ***
                         # if the group is a conference group, and the user is only a member, not an admin:
                         if target_group and target_group.group_is_conference:
-                            is_admin = check_ug_admin(request.user, target_group) or check_user_superuser(request.user, portal)
-                            
+                            is_admin = check_ug_admin(request.user, target_group) or check_user_superuser(
+                                request.user, portal
+                            )
+
                             if settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
-                                # in a special setting, normal users are locked to the microsite, 
+                                # in a special setting, normal users are locked to the microsite,
                                 # except for the conference application view and any event views
-                                if len(request_tokens) > 4 and not (is_admin or \
-                                                                    (len(request_tokens) >= 6 and request_tokens[5] in ['apply',]) or \
-                                                                    (len(request_tokens) >= 5 and request_tokens[4] in ['members', 'event', 'join', 'decline', 'accept', 'withdraw', 'leave']) or \
-                                                                    (len(request_tokens) >= 7 and request_tokens[4] in ['file',] and request_tokens[6] in ['save', 'download',])):
+                                if len(request_tokens) > 4 and not (
+                                    is_admin
+                                    or (
+                                        len(request_tokens) >= 6
+                                        and request_tokens[5]
+                                        in [
+                                            'apply',
+                                        ]
+                                    )
+                                    or (
+                                        len(request_tokens) >= 5
+                                        and request_tokens[4]
+                                        in ['members', 'event', 'join', 'decline', 'accept', 'withdraw', 'leave']
+                                    )
+                                    or (
+                                        len(request_tokens) >= 7
+                                        and request_tokens[4]
+                                        in [
+                                            'file',
+                                        ]
+                                        and request_tokens[6]
+                                        in [
+                                            'save',
+                                            'download',
+                                        ]
+                                    )
+                                ):
                                     return HttpResponseRedirect(target_group.get_absolute_url())
                             elif check_ug_membership(request.user, target_group):
                                 # normal users only have access to the conference page of a conference group (and the management views)
-                                if len(request_tokens) <= 4 or (request_tokens[4] not in ['conference', 'members', 'leave'] and not is_admin):
+                                if len(request_tokens) <= 4 or (
+                                    request_tokens[4] not in ['conference', 'members', 'leave'] and not is_admin
+                                ):
                                     # bounce user to the conference start page (admins get bounced on index page)
-                                    return HttpResponseRedirect(group_aware_reverse('cosinnus:conference:index', kwargs={'group': target_group}))
-                        
+                                    return HttpResponseRedirect(
+                                        group_aware_reverse('cosinnus:conference:index', kwargs={'group': target_group})
+                                    )
+
         except Exception as e:
             if settings.DEBUG:
                 raise
-            logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_str(e)})
+            logger.error(
+                'cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!',
+                extra={'exception', force_str(e)},
+            )
 
 
 class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
-    """ This middleware will force-logout a user if his account has been disabled, or a force-logout flag is set. """
-    
+    """This middleware will force-logout a user if his account has been disabled, or a force-logout flag is set."""
+
     def process_request(self, request):
         # TODO: FIXME: optimize this, this might be an extra query during EVERY (!) logged in request!
         if request.user.is_authenticated:
@@ -300,55 +391,76 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
             if not request.user.is_active:
                 messages.error(request, _('This account is no longer active. You have been logged out.'))
                 do_logout = True
-            if request.user.is_guest and (not request.user.cosinnus_profile.guest_access_object
-                    or not request.user.cosinnus_profile.guest_access_object.group
-                    or not request.user.cosinnus_profile.guest_access_object.group.is_active):
+            if request.user.is_guest and (
+                not request.user.cosinnus_profile.guest_access_object
+                or not request.user.cosinnus_profile.guest_access_object.group
+                or not request.user.cosinnus_profile.guest_access_object.group.is_active
+            ):
                 # if a guest account's access token has been deleted or the group for that token is deactivated
                 # or doesn't exist any more, log the user out
                 messages.error(request, _('Your guest access has expired. You have been logged out.'))
                 do_logout = True
-            elif settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN \
-                    and CosinnusPortal().get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
+            elif (
+                settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN
+                and CosinnusPortal().get_current().email_needs_verification
+                and not request.user.cosinnus_profile.email_verified
+            ):
                 send_user_email_to_verify(request.user, request.user.email, request)
-                messages.warning(request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+                messages.warning(
+                    request,
+                    _(
+                        "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+                    ),
+                )
                 do_logout = True
-            elif hasattr(request.user, 'cosinnus_profile') and request.user.cosinnus_profile.settings.get('force_logout_next_request', False):
+            elif hasattr(request.user, 'cosinnus_profile') and request.user.cosinnus_profile.settings.get(
+                'force_logout_next_request', False
+            ):
                 # if the user has a force-logout flag set, remove the flag and log him out,
                 # unless he is currently trying to log in
                 del request.user.cosinnus_profile.settings['force_logout_next_request']
                 request.user.cosinnus_profile.save()
                 if request.path not in LOGIN_URLS:
                     do_logout = True
-                
+
             if do_logout:
                 try:
                     next_page = reverse('login')
                 except NoReverseMatch:
                     next_page = '/'
                 logout(request)
-                return redirect(next_page) 
+                return redirect(next_page)
 
 
 class ExternalEmailLinkRedirectNoticeMiddleware(MiddlewareMixin):
-    """ Shows a warning message for external links clicked from an email
-         if any request URL contains the `external_link_redirect` flag. """
+    """Shows a warning message for external links clicked from an email
+    if any request URL contains the `external_link_redirect` flag."""
 
     def process_request(self, request):
         if request.GET.get('external_link_redirect', None) == '1':
-            messages.warning(request, _('You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it.'))
+            messages.warning(
+                request,
+                _(
+                    'You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it.'
+                ),
+            )
 
 
 class GroupResolvingMiddlewareMixin(object):
-    """ Mixin for middleware that needs to resolve a possibly existing CosinnusGroup from the URL """
-    
+    """Mixin for middleware that needs to resolve a possibly existing CosinnusGroup from the URL"""
+
     def get_group(self, request):
-        """ Glean the requested group from the URL, only once """
+        """Glean the requested group from the URL, only once"""
         if not hasattr(request, '_middleware_resolved_group'):
             try:
                 # get group name from URL, might already fail and except out on short URLs
-                group_name = request.path.split('/')[2] 
+                group_name = request.path.split('/')[2]
                 try:
-                    setattr(request, '_middleware_resolved_group', get_group_for_request(group_name, request, fail_silently=True))
+                    setattr(
+                        request,
+                        '_middleware_resolved_group',
+                        get_group_for_request(group_name, request, fail_silently=True),
+                    )
                 except Exception as e:
                     if settings.DEBUG:
                         raise e
@@ -357,9 +469,9 @@ class GroupResolvingMiddlewareMixin(object):
             if not hasattr(request, '_middleware_resolved_group'):
                 setattr(request, '_middleware_resolved_group', None)
         return getattr(request, '_middleware_resolved_group')
-    
+
     def is_url_for_publicly_visible_group_microsite(self, request):
-        """ Is this a URL for a valid group that is publicly visible? """
+        """Is this a URL for a valid group that is publicly visible?"""
         if self.get_group(request) and self.get_group(request).is_publicly_visible:
             try:
                 # check if the URL matches a microsite for this publicly visible group
@@ -373,9 +485,9 @@ class GroupResolvingMiddlewareMixin(object):
             except:
                 pass
         return False
-    
+
     def is_url_for_group_ical_token_feed(self, request):
-        """ Is this a URL for a valid group and an ical feed inside that group? """
+        """Is this a URL for a valid group and an ical feed inside that group?"""
         if self.get_group(request):
             try:
                 # check if the URL matches an iCal feed URL for cosinnus_event
@@ -389,52 +501,57 @@ class GroupResolvingMiddlewareMixin(object):
             if re.match(url_pattern, request.path):
                 return True
         return False
-    
+
     def is_anonymous_block_exempted_group_url(self, request):
-        """ Is this a URL for a valid group, that can always be accessed by 
-            anonymous users, even if the portal is blocked from anonymous access? """
-        return self.is_url_for_publicly_visible_group_microsite(request) or self.is_url_for_group_ical_token_feed(request)
+        """Is this a URL for a valid group, that can always be accessed by
+        anonymous users, even if the portal is blocked from anonymous access?"""
+        return self.is_url_for_publicly_visible_group_microsite(request) or self.is_url_for_group_ical_token_feed(
+            request
+        )
 
 
 class DenyAnonymousAccessMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
-    """ Middlware for blocking out anonymous users completely.
-        This middleware will show an error page on any anonymous request,
-        unless the request is directed at a login URL. """
-    
+    """Middlware for blocking out anonymous users completely.
+    This middleware will show an error page on any anonymous request,
+    unless the request is directed at a login URL."""
+
     def process_request(self, request):
         if not request.user.is_authenticated:
-            if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS]) \
-                    and not self.is_anonymous_block_exempted_group_url(request):
+            if not any(
+                [request.path.startswith(prefix) for prefix in LOGIN_URLS]
+            ) and not self.is_anonymous_block_exempted_group_url(request):
                 return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html').render()
 
 
 class RedirectAnonymousUserToLoginMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
-    """ Middlware for blocking anonymous users and letting them log in.
-        This middleware will show an error message for any anonymous request,
-        and redirect to the login page, unless the request is directed at a login URL. """
+    """Middlware for blocking anonymous users and letting them log in.
+    This middleware will show an error message for any anonymous request,
+    and redirect to the login page, unless the request is directed at a login URL."""
 
     def process_request(self, request):
         if not request.user.is_authenticated:
             path = request.path
             if path and not path.endswith('/'):
                 path += '/'
-            if not any([path.startswith(prefix) for prefix in LOGIN_URLS]) \
-                    and not self.is_anonymous_block_exempted_group_url(request):
+            if not any(
+                [path.startswith(prefix) for prefix in LOGIN_URLS]
+            ) and not self.is_anonymous_block_exempted_group_url(request):
                 return redirect_to_not_logged_in(request)
 
 
 class RedirectAnonymousUserToLoginAllowSignupMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
-    """ Middlware for blocking anonymous users and letting them log in or register.
-        This middleware will show an error message for any anonymous request,
-        and redirect to the login page, unless the request is directed at a login or signup URL. """
+    """Middlware for blocking anonymous users and letting them log in or register.
+    This middleware will show an error message for any anonymous request,
+    and redirect to the login page, unless the request is directed at a login or signup URL."""
 
     def process_request(self, request):
         if not request.user.is_authenticated:
             path = request.path
             if path and not path.endswith('/'):
                 path += '/'
-            if not any([path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]) \
-                    and not self.is_anonymous_block_exempted_group_url(request):
+            if not any(
+                [path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]
+            ) and not self.is_anonymous_block_exempted_group_url(request):
                 if path.startswith('/api/') and 'Authorization' in request.headers:
                     # attempt to login with header token to accept token-authenticated API requests
                     try:
@@ -446,8 +563,8 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(GroupResolvingMiddleware
 
 
 class AllowOnlyAdminLoginsMiddleware(MiddlewareMixin):
-    """ This middleware will allow only superuser/portal-admin accounts to log in
-        to the plattform. Anonymous user have access as usual """
+    """This middleware will allow only superuser/portal-admin accounts to log in
+    to the plattform. Anonymous user have access as usual"""
 
     def process_request(self, request):
         if request.user.is_authenticated and not check_user_superuser(request.user):
@@ -456,21 +573,20 @@ class AllowOnlyAdminLoginsMiddleware(MiddlewareMixin):
             return redirect_to_not_logged_in(request)
 
 
-
 class ConditionalRedirectMiddleware(MiddlewareMixin):
-    """ A collection of redirects based on some requirements we want to put it,
-        usually to force some routing behaviour, like logged-in users being redirected off /login """
-    
+    """A collection of redirects based on some requirements we want to put it,
+    usually to force some routing behaviour, like logged-in users being redirected off /login"""
+
     def process_request(self, request):
         if any([request.path.startswith(never_path) for never_path in settings.COSINNUS_NEVER_REDIRECT_URLS]):
             return
-        
+
         # close off the rest-framework login/logout as it would circumvent our login restrictions
         if request.path.startswith('/api-auth/login'):
             return redirect('login')
         if request.path.startswith('/api-auth/logout'):
             return redirect('logout')
-        
+
         user = request.user
         if user.is_authenticated:
             # hiding login and signup pages for logged in users
@@ -479,12 +595,19 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                 if request.GET.get('next', '').startswith('/admin/') and not user.is_staff:
                     # additional explanation for superusers trying to access the admin area but someone forgot to make them staff as well
                     if user.is_superuser:
-                        messages.warning(request, _('You cannot access the admin area because you are missing the "Staff" permission even though you are a superuser. Please ask another admin to grant it to you.'))
+                        messages.warning(
+                            request,
+                            _(
+                                'You cannot access the admin area because you are missing the "Staff" permission even though you are a superuser. Please ask another admin to grant it to you.'
+                            ),
+                        )
                     return redirect('cosinnus:profile-detail')
-                redirect_url = redirect_next_or(request, getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None))
+                redirect_url = redirect_next_or(
+                    request, getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)
+                )
                 if redirect_url:
                     return HttpResponseRedirect(redirect_url)
-                
+
             if not request.path.startswith('/api/'):
                 if 'next_redirect_pending' in request.session:
                     del request.session['next_redirect_pending']
@@ -497,7 +620,7 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                         if settings_redirect[1]:
                             messages.success(request, _(settings_redirect[1]))
                         return HttpResponseRedirect(settings_redirect[0])
-            
+
             # guest account site-lockoff logic
             if user.is_guest:
                 # check if the URL matches any of the guest-account-locked URLs
@@ -525,29 +648,34 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                             break
                 if locked:
                     if request.method == 'POST':
-                        messages.warning(request, _('The action you tried to perform is not allowed for guest accounts.'))
+                        messages.warning(
+                            request, _('The action you tried to perform is not allowed for guest accounts.')
+                        )
                     else:
                         messages.warning(request, _('The page you tried to visit is not available for guest accounts.'))
                     return redirect('cosinnus:guest-user-not-allowed')
-            
-            
-                
+
+
 class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):
-    """ The default django redirect middleware, but using 302 Temporary instead
-        of 301 Permanent redirects. """
-    
+    """The default django redirect middleware, but using 302 Temporary instead
+    of 301 Permanent redirects."""
+
     response_redirect_class = HttpResponseRedirect
 
 
 class PreventAnonymousUserCookieSessionMiddleware(SessionMiddleware):
-    """ Replace this with django's SessionMiddleware to prevent anonymous users
-        from receiving a session cookie. """
+    """Replace this with django's SessionMiddleware to prevent anonymous users
+    from receiving a session cookie."""
 
     def process_response(self, request, response):
         response = super(PreventAnonymousUserCookieSessionMiddleware, self).process_response(request, response)
         # exempt the password reset views, as they require an anonymous user session to work
-        if not request.path.startswith('/reset/') and not request.path.startswith('/password_reset/') \
-                and not request.path.startswith('/administration/') and not request.path.startswith('/accounts/'):
+        if (
+            not request.path.startswith('/reset/')
+            and not request.path.startswith('/password_reset/')
+            and not request.path.startswith('/administration/')
+            and not request.path.startswith('/accounts/')
+        ):
             if not request.user.is_authenticated and settings.SESSION_COOKIE_NAME in response.cookies:
                 del response.cookies[settings.SESSION_COOKIE_NAME]
         return response

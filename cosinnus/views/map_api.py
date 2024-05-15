@@ -1,45 +1,48 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import str
 import json
 import logging
 import re
+from builtins import str
 
+import six
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
-from django.db.models import Q
-from django.http.response import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
-from django.utils.encoding import force_str
-from haystack.query import SearchQuerySet
-from haystack.inputs import AutoQuery
-from haystack.backends import SQ
 from django.contrib.gis.geos import Point
-import six
+from django.db.models import Q
+from django.http.response import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound
+from django.utils.encoding import force_str
+from django.utils.html import escape
+from haystack.backends import SQ
+from haystack.inputs import AutoQuery
+from haystack.query import SearchQuerySet
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from cosinnus.conf import settings
-from cosinnus.forms.search import filter_searchqueryset_for_read_access, \
-    filter_searchqueryset_for_portal
+from cosinnus.forms.search import filter_searchqueryset_for_portal, filter_searchqueryset_for_read_access
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
-from cosinnus.models.map import CloudfileMapCard, HaystackMapResult, \
-    SEARCH_MODEL_NAMES, SEARCH_MODEL_NAMES_REVERSE, \
-    SEARCH_RESULT_DETAIL_TYPE_MAP, \
-    SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS, \
-    filter_event_searchqueryset_by_upcoming, \
-    filter_event_or_conference_happening_during, EXCHANGE_SEARCH_MODEL_NAMES, build_date_time
+from cosinnus.models.map import (
+    EXCHANGE_SEARCH_MODEL_NAMES,
+    SEARCH_MODEL_NAMES,
+    SEARCH_MODEL_NAMES_REVERSE,
+    SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS,
+    SEARCH_RESULT_DETAIL_TYPE_MAP,
+    CloudfileMapCard,
+    HaystackMapResult,
+    build_date_time,
+    filter_event_or_conference_happening_during,
+    filter_event_searchqueryset_by_upcoming,
+)
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.utils.functions import is_number, ensure_list_of_ints
+from cosinnus.utils.functions import ensure_list_of_ints, is_number
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.permissions import check_object_read_access
-from django.utils.html import escape
-from cosinnus.utils.group import get_cosinnus_group_model,\
-    get_default_user_group_slugs
-
 
 try:
-    from cosinnus_event.models import Event #noqa
+    from cosinnus_event.models import Event  # noqa
 except:
     Event = None
 
@@ -50,7 +53,7 @@ SERVER_SIDE_SEARCH_LIMIT = 200
 
 
 def _better_json_loads(s):
-    """ Can pass pure string values and None through without exception """
+    """Can pass pure string values and None through without exception"""
     if s is None:
         return None
     try:
@@ -61,20 +64,21 @@ def _better_json_loads(s):
         else:
             raise
 
+
 # supported map search query parameters, and their default values (as python data after a json.loads()!) if not present
 MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
-    'q': '', # search query, wildcard if empty
-    'sw_lat': -90, # SW latitude, max southwest
-    'sw_lon': -180, # SW longitude, max southwest
-    'ne_lat': 90, # NE latitude, max northeast
-    'ne_lon': 180, # NE latitude, max northeast
-    'limit': 20, # result count limit, integer or None
+    'q': '',  # search query, wildcard if empty
+    'sw_lat': -90,  # SW latitude, max southwest
+    'sw_lon': -180,  # SW longitude, max southwest
+    'ne_lat': 90,  # NE latitude, max northeast
+    'ne_lon': 180,  # NE latitude, max northeast
+    'limit': 20,  # result count limit, integer or None
     'page': 0,
     'topics': None,
     'text_topics': None,
     'item': None,
-    'ignore_location': False, # if True, we completely ignore locs, and even return results without location
-    'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
+    'ignore_location': False,  # if True, we completely ignore locs, and even return results without location
+    'mine': False,  # if True, we only show items of the current user. ignored if user not authenticated
     'external': bool(settings.COSINNUS_EXCHANGE_ENABLED),
     'fromDate': None,
     'fromTime': None,
@@ -92,29 +96,41 @@ MAP_CONTENT_TYPE_SEARCH_PARAMETERS = {
 }
 
 if settings.COSINNUS_MANAGED_TAGS_ENABLED:
-    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
-        'managed_tags': None,
-    })
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update(
+        {
+            'managed_tags': None,
+        }
+    )
 if settings.COSINNUS_ENABLE_SDGS:
-    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
-        'sdgs': None,
-    })
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update(
+        {
+            'sdgs': None,
+        }
+    )
 if settings.COSINNUS_IDEAS_ENABLED:
-    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
-        'ideas': True,
-    })
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update(
+        {
+            'ideas': True,
+        }
+    )
 if settings.COSINNUS_ORGANIZATIONS_ENABLED:
-    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
-        'organizations': True,
-    })
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update(
+        {
+            'organizations': True,
+        }
+    )
 if settings.COSINNUS_CONFERENCES_ENABLED:
-    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
-        'conferences': True,
-    })
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update(
+        {
+            'conferences': True,
+        }
+    )
 if settings.COSINNUS_CLOUD_ENABLED:
-    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update({
-        'cloudfiles': True,
-    })
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update(
+        {
+            'cloudfiles': True,
+        }
+    )
 
 # supported map search query parameters, and their default values (as python data after a json.loads()!) if not present
 MAP_SEARCH_PARAMETERS = {}
@@ -123,7 +139,6 @@ MAP_SEARCH_PARAMETERS.update(MAP_CONTENT_TYPE_SEARCH_PARAMETERS)
 
 
 class SearchQuerySetMixin:
-    
     search_parameters = MAP_SEARCH_PARAMETERS
 
     def dispatch(self, request, *args, **kwargs):
@@ -144,8 +159,8 @@ class SearchQuerySetMixin:
         return super().dispatch(request, *args, **kwargs)
 
     def _collect_parameters(self, param_dict, parameter_list):
-        """ For a GET/POST dict, collects all attributes listes as keys in ``parameter_list``.
-            If not present in the GET/POST dict, the value of the key in ``parameter_list`` will be used. """
+        """For a GET/POST dict, collects all attributes listes as keys in ``parameter_list``.
+        If not present in the GET/POST dict, the value of the key in ``parameter_list`` will be used."""
         results = {}
         for key, value in list(parameter_list.items()):
             if key in param_dict:
@@ -155,18 +170,19 @@ class SearchQuerySetMixin:
         return results
 
     def get_queryset(self, filter_group_id=None):
-        """ Search using haystack search results.
+        """Search using haystack search results.
 
-            @params: collected query params, see ``MAP_SEARCH_PARAMETERS``
-            @param user: User object
-            @param filter_group_id: Will filter all items by group relation, where applicable
-                    (i.e. users are filtered by group memberships for that group, events as events in that group)
-            @param extra_filter: Optional function to apply further query filtering
+        @params: collected query params, see ``MAP_SEARCH_PARAMETERS``
+        @param user: User object
+        @param filter_group_id: Will filter all items by group relation, where applicable
+                (i.e. users are filtered by group memberships for that group, events as events in that group)
+        @param extra_filter: Optional function to apply further query filtering
         """
         user = self.request.user
         query = self.params['q']
         implicit_ignore_location = not any(
-            [loc_param in self.params for loc_param in ['sw_lon', 'sw_lat', 'ne_lon', 'ne_lat']])
+            [loc_param in self.params for loc_param in ['sw_lon', 'sw_lat', 'ne_lon', 'ne_lat']]
+        )
 
         if not settings.COSINNUS_EXCHANGE_ENABLED:
             self.params['exchange'] = False
@@ -176,23 +192,32 @@ class SearchQuerySetMixin:
         prefer_own_portal = getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False)
 
         # filter for requested model types
-        model_list = [klass for klass, param_name in list(SEARCH_MODEL_NAMES.items()) if self.params.get(param_name, False)]
+        model_list = [
+            klass for klass, param_name in list(SEARCH_MODEL_NAMES.items()) if self.params.get(param_name, False)
+        ]
         if settings.COSINNUS_EXCHANGE_ENABLED:
-            model_list += [klass for klass, param_name in list(EXCHANGE_SEARCH_MODEL_NAMES.items()) if self.params.get(param_name, False)]
+            model_list += [
+                klass
+                for klass, param_name in list(EXCHANGE_SEARCH_MODEL_NAMES.items())
+                if self.params.get(param_name, False)
+            ]
 
         sqs = SearchQuerySet().models(*model_list)
 
         # filter for map bounds (Points are constructed ith (lon, lat)!!!)
         if not self.params['ignore_location'] and not implicit_ignore_location:
-            sqs = sqs.within('location', Point(self.params['sw_lon'], self.params['sw_lat']),
-                             Point(self.params['ne_lon'], self.params['ne_lat']))
+            sqs = sqs.within(
+                'location',
+                Point(self.params['sw_lon'], self.params['sw_lat']),
+                Point(self.params['ne_lon'], self.params['ne_lat']),
+            )
         # filter for user's own content
         if self.params['mine'] and user.is_authenticated:
             user_id = user.id
             sqs = sqs.filter_and(Q(creator=user_id) | Q(user_id=user_id) | Q(group_members=user_id))
         # filter for search terms
         if query:
-            # specifically include the boosted field into the autoquery so that results 
+            # specifically include the boosted field into the autoquery so that results
             # matching a query word in the boost field get assigned a higher result.score
             sqs = sqs.filter(SQ(boosted=AutoQuery(query)) | SQ(text=AutoQuery(query)))
 
@@ -223,8 +248,9 @@ class SearchQuerySetMixin:
             if managed_tags:
                 sqs = sqs.filter_and(managed_tags__in=managed_tags)
         # filter for portal visibility
-        sqs = filter_searchqueryset_for_portal(sqs, restrict_multiportals_to_current=prefer_own_portal,
-                                               exchange=self.params.get('exchange', False))
+        sqs = filter_searchqueryset_for_portal(
+            sqs, restrict_multiportals_to_current=prefer_own_portal, exchange=self.params.get('exchange', False)
+        )
         # filter for read access by this user
         sqs = filter_searchqueryset_for_read_access(sqs, user)
 
@@ -257,14 +283,22 @@ class SearchQuerySetMixin:
 
         # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
         if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
-            sqs = sqs.exclude(is_group_model="true", slug__in=get_default_user_group_slugs())
+            sqs = sqs.exclude(is_group_model='true', slug__in=get_default_user_group_slugs())
 
         prefer_own_portal = getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False)
         # if we have no query-boosted results, use *only* our custom sorting (haystack's is very random)
         if not query:
             # order groups, projects and conferences alphabetically
-            if any([self.params.get(checktype, None) for checktype in settings.COSINNUS_ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE]) and len(model_list) == 1:
-                # sort by slug instead of title because haystack doesn't support 
+            if (
+                any(
+                    [
+                        self.params.get(checktype, None)
+                        for checktype in settings.COSINNUS_ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE
+                    ]
+                )
+                and len(model_list) == 1
+            ):
+                # sort by slug instead of title because haystack doesn't support
                 # case-insensitive ordering
                 sort_args = ['sort_field', 'title']
                 self.skip_score_sorting = True
@@ -293,17 +327,21 @@ class SearchQuerySetMixin:
         prefer_own_portal = getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False)
         # sort results into one list per model
         total_count = len(sqs)
-        sqs = sqs[limit * page:limit * (page + 1)]
+        sqs = sqs[limit * page : limit * (page + 1)]
         results = []
         for i, result in enumerate(sqs):
             if self.skip_score_sorting:
                 # if we skip score sorting and only rely on the natural ordering, we make up fake high scores
-                result.score = 100000 - (limit*page) - i
-                
+                result.score = 100000 - (limit * page) - i
+
             elif not query:
                 # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
                 result.score = result.local_boost
-                if prefer_own_portal and is_number(result.portal) and int(result.portal) == CosinnusPortal.get_current().id:
+                if (
+                    prefer_own_portal
+                    and is_number(result.portal)
+                    and int(result.portal) == CosinnusPortal.get_current().id
+                ):
                     result.score += 100.0
             results.append(HaystackMapResult(result, user=self.request.user))
 
@@ -327,19 +365,17 @@ class SearchQuerySetMixin:
                 'has_next': total_count > (limit * (page + 1)),
                 'has_previous': page > 0,
             }
-        return {
-            "results": results,
-            "page": page_obj
-        }
+        return {'results': results, 'page': page_obj}
 
 
 class MapSearchView(SearchQuerySetMixin, APIView):
-    """ Maps API search endpoint using haystack search results. For parameters see ``MAP_SEARCH_PARAMETERS``
-        returns JSON with the contents of type ``HaystackMapResult``
+    """Maps API search endpoint using haystack search results. For parameters see ``MAP_SEARCH_PARAMETERS``
+    returns JSON with the contents of type ``HaystackMapResult``
 
-        @param filter_group_id: Will filter all items by group relation, where applicable
-                (i.e. users are filtered by group memberships for that group, events as events in that group)
+    @param filter_group_id: Will filter all items by group relation, where applicable
+            (i.e. users are filtered by group memberships for that group, events as events in that group)
     """
+
     search_parameters = MAP_SEARCH_PARAMETERS
 
     def get(self, request, filter_group_id=None):
@@ -355,14 +391,15 @@ class MapSearchView(SearchQuerySetMixin, APIView):
 
 
 class MapMatchingView(SearchQuerySetMixin, APIView):
-    """ Maps API matching endpoint using haystack search results. For parameters see ``MAP_SEARCH_PARAMETERS``.
-        Returns JSON with the contents of type ``HaystackMapResult`` for all projects/groups/organizations, which are
-        open for cooperation (is_open_for_cooperation). Sorting is based upon matching fields with object specified by
-        parameter ``matching`` and settings COSINNUS_MATCHING_FIELDS/COSINNUS_MATCHING_DYNAMIC_FIELDS
+    """Maps API matching endpoint using haystack search results. For parameters see ``MAP_SEARCH_PARAMETERS``.
+    Returns JSON with the contents of type ``HaystackMapResult`` for all projects/groups/organizations, which are
+    open for cooperation (is_open_for_cooperation). Sorting is based upon matching fields with object specified by
+    parameter ``matching`` and settings COSINNUS_MATCHING_FIELDS/COSINNUS_MATCHING_DYNAMIC_FIELDS
 
-        @param filter_group_id: Will filter all items by group relation, where applicable
-                (i.e. users are filtered by group memberships for that group, events as events in that group)
+    @param filter_group_id: Will filter all items by group relation, where applicable
+            (i.e. users are filtered by group memberships for that group, events as events in that group)
     """
+
     def get(self, request, filter_group_id=None):
         matching_result = self.get_matching_result()
         if matching_result:
@@ -370,10 +407,7 @@ class MapMatchingView(SearchQuerySetMixin, APIView):
             sqs += list(self.get_queryset_not_matching(matching_result, filter_group_id=filter_group_id))
             data = self.search(sqs)
             return Response(data)
-        return Response({
-            "results": [],
-            "page": None
-        })
+        return Response({'results': [], 'page': None})
 
     def get_matching_result(self):
         """Return result described with matching parameter (e. g. project.<slug>)"""
@@ -407,13 +441,15 @@ class MapMatchingView(SearchQuerySetMixin, APIView):
         """Filter open projects, groups and organizations, excluding matching candidate itself"""
         sqs = super().get_queryset(filter_group_id=filter_group_id)
         # filter content types: project, group or organization
-        sqs = sqs.filter(django_ct__in=(
-            'cosinnus.cosinnusproject',
-            'cosinnus.cosinnussociety',
-            'cosinnus_organization.cosinnusorganization',
-        ))
+        sqs = sqs.filter(
+            django_ct__in=(
+                'cosinnus.cosinnusproject',
+                'cosinnus.cosinnussociety',
+                'cosinnus_organization.cosinnusorganization',
+            )
+        )
         # filter only candidates which are open for cooperation
-        sqs = sqs.filter(is_open_for_cooperation="true")
+        sqs = sqs.filter(is_open_for_cooperation='true')
         # exclude matching candidate itself
         sqs = sqs.exclude(_id=matching_result.id)
         return sqs
@@ -433,8 +469,9 @@ class MapMatchingView(SearchQuerySetMixin, APIView):
 
 class MapCloudfilesView(SearchQuerySetMixin, APIView):
     def get(self, request):
-        from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
         from cosinnus_cloud.hooks import get_nc_user_id
+        from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
+
         query = force_str(self.params['q'])
         limit = self.params['limit']
         page = self.params['page']
@@ -442,7 +479,7 @@ class MapCloudfilesView(SearchQuerySetMixin, APIView):
         if self.params.get('cloudfiles', False):
             return MapCloudfilesView.as_view()(request)
 
-        result = perform_fulltext_search(get_nc_user_id(request.user), query, page=page+1, page_size=limit)
+        result = perform_fulltext_search(get_nc_user_id(request.user), query, page=page + 1, page_size=limit)
 
         if result['documents']:
             total_count = result['meta']['total']
@@ -459,24 +496,22 @@ class MapCloudfilesView(SearchQuerySetMixin, APIView):
         else:
             page_obj = None
 
-        data = {
-            "results": [CloudfileMapCard(doc, query) for doc in result["documents"]],
-            "page": page_obj
-        }
+        data = {'results': [CloudfileMapCard(doc, query) for doc in result['documents']], 'page': page_obj}
         return Response(data)
 
 
 MAP_DETAIL_PARAMETERS = {
-    'portal': -1, # portal id, < 0 means current
-    'slug': '',# object slug
-    'type': '', # item type, as defined in `SEARCH_MODEL_NAMES`
+    'portal': -1,  # portal id, < 0 means current
+    'slug': '',  # object slug
+    'type': '',  # item type, as defined in `SEARCH_MODEL_NAMES`
 }
 
 
 class MapDetailView(SearchQuerySetMixin, APIView):
-    """ Maps API object detail endpoint using pSQL results. For parameters see ``MAP_DETAIL_PARAMETERS``
-        returns JSON with the contents of type ``DetailedMapResult``
+    """Maps API object detail endpoint using pSQL results. For parameters see ``MAP_DETAIL_PARAMETERS``
+    returns JSON with the contents of type ``DetailedMapResult``
     """
+
     search_parameters = MAP_DETAIL_PARAMETERS
 
     def get(self, request):
@@ -488,7 +523,7 @@ class MapDetailView(SearchQuerySetMixin, APIView):
             return HttpResponseBadRequest('``portal`` param must be a positive number!')
         if not slug:
             return HttpResponseBadRequest('``slug`` param must be supplied!')
-        slug = force_str(slug) # stringify is necessary for number-only slugs
+        slug = force_str(slug)  # stringify is necessary for number-only slugs
         if not model_type or not isinstance(model_type, six.string_types):
             return HttpResponseBadRequest('``type`` param must be supplied and be a string!')
 
@@ -512,15 +547,23 @@ class MapDetailView(SearchQuerySetMixin, APIView):
             else:
                 obj = get_object_or_None(model, portal__id=portal, slug=slug)
             if obj is None:
-                return HttpResponseNotFound('No item found that matches the requested type and slug (obj: %s, %s, %s).' % (escape(force_str(model)), portal, slug))
+                return HttpResponseNotFound(
+                    'No item found that matches the requested type and slug (obj: %s, %s, %s).'
+                    % (escape(force_str(model)), portal, slug)
+                )
 
             # check read permission
-            if not model_type in SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS and not check_object_read_access(obj, request.user):
+            if model_type not in SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS and not check_object_read_access(
+                obj, request.user
+            ):
                 return HttpResponseForbidden('You do not have permission to access this item.')
             # get the basic result data from the search index (as it is already prepared and faster to access there)
             haystack_result = get_searchresult_by_args(portal, model_type, slug)
             if not haystack_result:
-                return HttpResponseNotFound('No item found that matches the requested type and slug (index: %s, %s, %s).' % (portal, model_type, slug))
+                return HttpResponseNotFound(
+                    'No item found that matches the requested type and slug (index: %s, %s, %s).'
+                    % (portal, model_type, slug)
+                )
             # format data
             result_model = SEARCH_RESULT_DETAIL_TYPE_MAP[model_type]
             result = result_model(haystack_result, obj, request.user, request=request)
@@ -528,7 +571,10 @@ class MapDetailView(SearchQuerySetMixin, APIView):
             # for external, api based objects:
             haystack_result = get_searchresult_by_args(portal, model_type, slug)
             if not haystack_result:
-                return HttpResponseNotFound('No item found that matches the requested type and slug (external: %s, %s, %s).' % (portal, model_type, slug))
+                return HttpResponseNotFound(
+                    'No item found that matches the requested type and slug (external: %s, %s, %s).'
+                    % (portal, model_type, slug)
+                )
             result = HaystackMapResult(haystack_result, request.user, request=request)
 
         data = {
@@ -543,16 +589,17 @@ def get_searchresult_by_itemid(itemid, user=None):
 
 
 def get_searchresult_by_args(portal, model_type, slug, user=None):
-    """ Retrieves a HaystackMapResult just as the API would, for a given shortid
-        in the form of `<classid>.<instanceid>` (see `itemid_from_searchresult()`). """
-    
+    """Retrieves a HaystackMapResult just as the API would, for a given shortid
+    in the form of `<classid>.<instanceid>` (see `itemid_from_searchresult()`)."""
+
     # if the portal id is COSINNUS_EXCHANGE_PORTAL_ID, we have an external item, so look up the external models
     if settings.COSINNUS_EXCHANGE_ENABLED and portal == settings.COSINNUS_EXCHANGE_PORTAL_ID:
         from cosinnus.models.map import EXCHANGE_SEARCH_MODEL_NAMES_REVERSE
+
         model = EXCHANGE_SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
     else:
         model = SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
-    
+
     if model_type == 'people':
         sqs = SearchQuerySet().models(model).filter_and(slug=slug)
     elif model_type == 'events' and '*' in slug:
@@ -563,19 +610,22 @@ def get_searchresult_by_args(portal, model_type, slug, user=None):
     if user:
         # filter for read access by this user
         sqs = filter_searchqueryset_for_read_access(sqs, user)
-    
-    # hack: haystack seems to be unable to filter *exact* on `slug` (even when using __exact). 
+
+    # hack: haystack seems to be unable to filter *exact* on `slug` (even when using __exact).
     # this affects slugs like `my-slug` vs `my-slug-2`.
     # so we manually post-filter on slug to get an exact match
     if len(sqs) > 1:
         sqs = [result for result in sqs if result.slug == slug]
-    
+
     if len(sqs) != 1:
-        logger.warn('Got a DetailMap request where %d indexed results were found!' % len(sqs), extra={
-            'portal': portal,
-            'model': model,
-            'slug': slug,
-        })
+        logger.warn(
+            'Got a DetailMap request where %d indexed results were found!' % len(sqs),
+            extra={
+                'portal': portal,
+                'model': model,
+                'slug': slug,
+            },
+        )
         return None
     return sqs[0]
 

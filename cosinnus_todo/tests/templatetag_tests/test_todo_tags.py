@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from datetime import timedelta
+
 from django.test import TestCase
 from django.utils.timezone import now
 

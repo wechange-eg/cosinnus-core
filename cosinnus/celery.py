@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from celery import Celery
 
+from celery import Celery
 
 # set the default Django settings module for the 'celery' program.
 # NOTE: THIS SET IN THE FOUND IN MAIN project's celery.py!
-#import os
-#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'neww.settings')
-
+# import os
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'neww.settings')
 from django.conf import settings
 
 CELERY_NAME = settings.COSINNUS_PORTAL_NAME
@@ -22,4 +21,3 @@ app.config_from_object('cosinnus.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
-

@@ -1,7 +1,6 @@
-from geopy.geocoders import Nominatim
-
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
+from geopy.geocoders import Nominatim
 
 from cosinnus.models import TagObject
 
@@ -13,7 +12,7 @@ class GeoException(Exception):
 
 
 class Command(BaseCommand):
-    help = "This command sets the coordinates of all users which have a location but no coordinates given"
+    help = 'This command sets the coordinates of all users which have a location but no coordinates given'
 
     geolocator = None
 
@@ -21,15 +20,17 @@ class Command(BaseCommand):
         parser.add_argument('geolocator', type=str, help='The address of a nominatim server')
 
     def handle(self, *args, **kwargs):
-        self.geolocator = Nominatim(domain=kwargs['geolocator'], user_agent="wechange")
-        queryset = User.objects.filter(cosinnus_profile__media_tag__location_lat__isnull=True,
-                                       cosinnus_profile__media_tag__location_lon__isnull=True,
-                                       cosinnus_profile__media_tag__location__isnull=False)
+        self.geolocator = Nominatim(domain=kwargs['geolocator'], user_agent='wechange')
+        queryset = User.objects.filter(
+            cosinnus_profile__media_tag__location_lat__isnull=True,
+            cosinnus_profile__media_tag__location_lon__isnull=True,
+            cosinnus_profile__media_tag__location__isnull=False,
+        )
 
         count = 0
         errors = []
         for i, user in enumerate(queryset[:100]):
-            self.stdout.write(f"Find user {i}/{queryset.count()}", ending='\r')
+            self.stdout.write(f'Find user {i}/{queryset.count()}', ending='\r')
             self.stdout.flush()
             try:
                 result = self.set_user_location(user)
@@ -62,11 +63,7 @@ class Command(BaseCommand):
             return False
         location = self._find_address(address)
         if isinstance(location, (tuple, list)):
-            tag_object = TagObject(
-                location=location[0],
-                location_lat=location[1],
-                location_lon=location[2]
-            )
+            tag_object = TagObject(location=location[0], location_lat=location[1], location_lon=location[2])
             if not dry_run:
                 tag_object.save()
             profile = user.cosinnus_profile
@@ -74,7 +71,7 @@ class Command(BaseCommand):
             if not dry_run:
                 profile.save()
         elif isinstance(location, str):
-            raise GeoException(f"{location}. Skipping user.")
+            raise GeoException(f'{location}. Skipping user.')
         else:
             address_string = ', '.join(address)
             raise GeoException(f"Coudn't find address: {address_string}. Skipping user.")

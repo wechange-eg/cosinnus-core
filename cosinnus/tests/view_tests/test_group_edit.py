@@ -2,28 +2,26 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
-from django.urls import reverse
 from django.test import TestCase
+from django.urls import reverse
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.urls import group_aware_reverse
 
-
 TagObject = get_tag_object_model()
 
 
 class EditGroupTest(TestCase):
-
     def setUp(self, *args, **kwargs):
         self.group = CosinnusGroup.objects.create(name='Fäñæü ñáµé', slug='fancy-name', public=True)
         self.media_tag = TagObject.objects.create(group=self.group, location='Some Location', public=True)
         self.credential = 'admin'
-        self.admin = User.objects.create_superuser(username=self.credential, email='admin@example.com',
-                                                   password=self.credential)
+        self.admin = User.objects.create_superuser(
+            username=self.credential, email='admin@example.com', password=self.credential
+        )
         self.client.login(username=self.credential, password=self.credential)
-        self.url = group_aware_reverse('cosinnus:group-edit',
-                           kwargs={'group': self.group})
+        self.url = group_aware_reverse('cosinnus:group-edit', kwargs={'group': self.group})
 
     def test_get_not_logged_in(self):
         """

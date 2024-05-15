@@ -9,7 +9,6 @@ from cosinnus_event.tests.view_tests.base import ViewTestCase
 
 
 class EditTest(ViewTestCase):
-
     def setUp(self, *args, **kwargs):
         super(EditTest, self).setUp(*args, **kwargs)
         self.event = Event.objects.create(
@@ -19,7 +18,8 @@ class EditTest(ViewTestCase):
             title='testevent',
             from_date=now(),
             to_date=now(),
-            state=Event.STATE_SCHEDULED)
+            state=Event.STATE_SCHEDULED,
+        )
         self.kwargs = {'group': self.group.slug, 'slug': self.event.slug}
         self.url = reverse('cosinnus:event:event-edit', kwargs=self.kwargs)
 
@@ -71,9 +71,7 @@ class EditTest(ViewTestCase):
         }
         response = self.client.post(self.url, params)
         self.assertEqual(response.status_code, 302)
-        self.assertIn(
-            reverse('cosinnus:event:event-detail', kwargs=self.kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:event:event-detail', kwargs=self.kwargs), response.get('location'))
 
         # re-get edited event from database
         self.event = Event.objects.get(pk=self.event.pk)

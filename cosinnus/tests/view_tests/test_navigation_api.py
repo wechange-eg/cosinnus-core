@@ -1,6 +1,7 @@
-import pytz
 from datetime import datetime
 from unittest.mock import patch
+
+import pytz
 from django.contrib.auth import get_user_model
 from django.template.defaultfilters import date
 from django.urls import reverse
@@ -11,33 +12,26 @@ from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models.tagged import LikeObject
 from cosinnus.models.user_dashboard import MenuItem
 from cosinnus.tests.utils import reload_urlconf
-from cosinnus.trans.group import CosinnusSocietyTrans, CosinnusProjectTrans
+from cosinnus.trans.group import CosinnusProjectTrans, CosinnusSocietyTrans
 from cosinnus.utils.dates import timestamp_from_datetime
 from cosinnus_notifications.models import NotificationAlert
-
 
 User = get_user_model()
 
 
-TEST_USER_DATA = {
-    'username': '1',
-    'email': 'testuser@example.com',
-    'first_name': 'Test',
-    'last_name': 'User'
-}
+TEST_USER_DATA = {'username': '1', 'email': 'testuser@example.com', 'first_name': 'Test', 'last_name': 'User'}
 
 
 class SpacesViewTest(APITestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-spaces")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-spaces')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
 
     def test_personal_space(self):
@@ -48,11 +42,9 @@ class SpacesViewTest(APITestCase):
             response.data['personal'],
             {
                 'header': 'My Personal Space',
-                'items': [
-                    MenuItem('Personal Dashboard', '/dashboard/', 'fa-user', id='PersonalDashboard')
-                ],
-                'actions': []
-            }
+                'items': [MenuItem('Personal Dashboard', '/dashboard/', 'fa-user', id='PersonalDashboard')],
+                'actions': [],
+            },
         )
 
     def test_personal_space_anonymous(self):
@@ -70,14 +62,12 @@ class SpacesViewTest(APITestCase):
             response.data['groups'],
             {
                 'header': 'My Groups and Projects',
-                'items': [
-                    MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusSociety{group.pk}')
-                ],
+                'items': [MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusSociety{group.pk}')],
                 'actions': [
                     MenuItem('Create new Group', '/groups/add/', id='CreateGroup'),
-                    MenuItem('Create new Project', '/projects/add/', id='CreateProject')
-                 ]
-            }
+                    MenuItem('Create new Project', '/projects/add/', id='CreateProject'),
+                ],
+            },
         )
 
     def test_group_space_anonymous(self):
@@ -92,9 +82,9 @@ class SpacesViewTest(APITestCase):
                 'items': [],
                 'actions': [
                     MenuItem('Create new Group', '/groups/add/', id='CreateGroup'),
-                    MenuItem('Create new Project', '/projects/add/', id='CreateProject')
-                ]
-            }
+                    MenuItem('Create new Project', '/projects/add/', id='CreateProject'),
+                ],
+            },
         )
 
     def test_community_space(self):
@@ -106,23 +96,29 @@ class SpacesViewTest(APITestCase):
             {
                 'header': settings.COSINNUS_PORTAL_NAME.upper() + ' Community',
                 'items': [
-                    MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-sitemap', id='Forum'),
+                    MenuItem(
+                        settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-sitemap', id='Forum'
+                    ),
                     MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, '/map/', 'fa-group', id='Map'),
                 ],
                 'actions': [
-                    MenuItem(CosinnusSocietyTrans.BROWSE_ALL, reverse('cosinnus:group__group-list'), id="BrowseGroups"),
-                    MenuItem(CosinnusProjectTrans.BROWSE_ALL, reverse('cosinnus:group-list'), id="BrowseProjects"),
-                ]
-            }
+                    MenuItem(CosinnusSocietyTrans.BROWSE_ALL, reverse('cosinnus:group__group-list'), id='BrowseGroups'),
+                    MenuItem(CosinnusProjectTrans.BROWSE_ALL, reverse('cosinnus:group-list'), id='BrowseProjects'),
+                ],
+            },
         )
 
-    @override_settings(COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS=[('ExternalID', 'External', 'https://example.com/', 'fa-group')])
+    @override_settings(
+        COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS=[
+            ('ExternalID', 'External', 'https://example.com/', 'fa-group')
+        ]
+    )
     def test_community_space_additional_links(self):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.data['community']['items'][1],
-            MenuItem('External', 'https://example.com/', 'fa-group', id='ExternalID')
+            MenuItem('External', 'https://example.com/', 'fa-group', id='ExternalID'),
         )
 
     @override_settings(COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS=True)
@@ -137,16 +133,15 @@ class SpacesViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.data['community']['items'][0],
-            MenuItem(tag_group.name, tag_group.get_absolute_url(), 'fa-group', id=f'Forum{tag_group.pk}')
+            MenuItem(tag_group.name, tag_group.get_absolute_url(), 'fa-group', id=f'Forum{tag_group.pk}'),
         )
 
 
 class BookmarksViewTest(APITestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-bookmarks")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-bookmarks')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
 
     def test_group_bookmarks(self):
@@ -159,8 +154,8 @@ class BookmarksViewTest(APITestCase):
             response.data['groups'],
             {
                 'header': 'Groups and Projects',
-                'items': [MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusGroup{group.pk}')]
-            }
+                'items': [MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusGroup{group.pk}')],
+            },
         )
 
     def test_user_bookmarks(self):
@@ -174,8 +169,8 @@ class BookmarksViewTest(APITestCase):
             response.data['users'],
             {
                 'header': 'Users',
-                'items': [MenuItem('Test User2', '/user/2/', 'fa-user', id=f'UserProfile{user2.cosinnus_profile.pk}')]
-            }
+                'items': [MenuItem('Test User2', '/user/2/', 'fa-user', id=f'UserProfile{user2.cosinnus_profile.pk}')],
+            },
         )
 
     def test_content_bookmarks(self):
@@ -190,9 +185,8 @@ class BookmarksViewTest(APITestCase):
                 'header': 'Content',
                 'items': [
                     MenuItem('Test Idea', '/map/?item=1.ideas.test-idea', 'fa-lightbulb-o', id=f'CosinnusIdea{idea.pk}')
-                ]
-
-            }
+                ],
+            },
         )
 
     def test_bookmarks_anonymous(self):
@@ -202,11 +196,10 @@ class BookmarksViewTest(APITestCase):
 
 
 class UnreadMessagesViewTest(APITestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-unread-messages")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-unread-messages')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
 
     @patch('cosinnus.api_frontend.views.navigation.get_unread_message_count_for_user', return_value=10)
@@ -229,18 +222,21 @@ class TestAlertsMixin:
 
     def create_test_alert(self, seen=False):
         alert = NotificationAlert.objects.create(
-            user=self.test_user, notification_id='note__note_created', portal=self.portal,
-            target_object=self.group, seen=seen, action_user=self.test_user
+            user=self.test_user,
+            notification_id='note__note_created',
+            portal=self.portal,
+            target_object=self.group,
+            seen=seen,
+            action_user=self.test_user,
         )
         return alert
 
 
 class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-unread-alerts")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-unread-alerts')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
@@ -264,7 +260,7 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 1})
 
-        mark_as_read_url = reverse("cosinnus:frontend-api:api-navigation-alerts") + '?mark_as_read=true'
+        mark_as_read_url = reverse('cosinnus:frontend-api:api-navigation-alerts') + '?mark_as_read=true'
         response = self.client.get(mark_as_read_url)
         self.assertEqual(response.status_code, 200)
         response = self.client.get(self.api_url)
@@ -273,11 +269,10 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
 
 
 class AlertsViewTest(TestAlertsMixin, APITestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-alerts")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-alerts')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
@@ -307,13 +302,13 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
                         'alert_reason': 'You are following this content or its Project or Group',
                         'sub_items': [],
                         'is_multi_user_alert': False,
-                        'is_bundle_alert': False
-                     }
+                        'is_bundle_alert': False,
+                    }
                 ],
                 'has_more': False,
                 'offset_timestamp': alert_timestamp,
                 'newest_timestamp': alert_timestamp,
-            }
+            },
         )
 
     def test_alerts_offset_pagination(self):
@@ -378,16 +373,15 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
                 'has_more': False,
                 'offset_timestamp': None,
                 'newest_timestamp': None,
-            }
+            },
         )
 
 
 class HelpViewTest(APITestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-help")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-help')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
@@ -397,12 +391,11 @@ class HelpViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data,
-            [MenuItem('FAQ', 'https://example.com/faq/', 'fa-question-circle', is_external=True, id='faqID')]
+            [MenuItem('FAQ', 'https://example.com/faq/', 'fa-question-circle', is_external=True, id='faqID')],
         )
 
 
 class LanguageMenuTestMixin:
-
     def expected_language_menu_item(self, expected_label='Change Language', expected_icon='fa-language'):
         if settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES:
             languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
@@ -410,8 +403,9 @@ class LanguageMenuTestMixin:
             languages = settings.LANGUAGES
         expected_language_sub_items = []
         for code, language in languages:
-            language_sub_item = MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}',
-                                         selected=(code == 'en'))
+            language_sub_item = MenuItem(
+                language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}', selected=(code == 'en')
+            )
             expected_language_sub_items.append(language_sub_item)
         expected_language_menu_item = MenuItem(expected_label, icon=expected_icon, id='ChangeLanguage')
         expected_language_menu_item['sub_items'] = expected_language_sub_items
@@ -419,11 +413,10 @@ class LanguageMenuTestMixin:
 
 
 class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
-    
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-profile")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-profile')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
@@ -437,10 +430,12 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
                 MenuItem('My Profile', '/profile/', 'fa-circle-user', id='Profile'),
                 MenuItem('Set up my Profile', '/setup/profile/', 'fa-pen', id='SetupProfile'),
                 MenuItem('Edit my Profile', '/profile/edit/', 'fa-gear', id='EditProfile'),
-                MenuItem('Notification Preferences', '/profile/notifications/', 'fa-envelope', id='NotificationPreferences'),
+                MenuItem(
+                    'Notification Preferences', '/profile/notifications/', 'fa-envelope', id='NotificationPreferences'
+                ),
                 self.expected_language_menu_item(),
-                MenuItem('Logout', '/logout/', 'fa-right-from-bracket', id='Logout')
-            ]
+                MenuItem('Logout', '/logout/', 'fa-right-from-bracket', id='Logout'),
+            ],
         )
 
     def test_profile_admin(self):
@@ -450,23 +445,29 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(
             response.data[5],
-            MenuItem('Administration', '/administration/', 'fa-screwdriver-wrench', id='Administration')
+            MenuItem('Administration', '/administration/', 'fa-screwdriver-wrench', id='Administration'),
         )
 
     @override_settings(COSINNUS_PAYMENTS_ENABLED=True)
     def test_contribution(self):
-        from wechange_payments.models import Subscription, Payment
+        from wechange_payments.models import Payment, Subscription
+
         payment = Payment.objects.create(user=self.test_user)
         Subscription.objects.create(
-            user=self.test_user, amount=100, state=Subscription.STATE_2_ACTIVE, last_payment=payment,
-            reference_payment=payment
+            user=self.test_user,
+            amount=100,
+            state=Subscription.STATE_2_ACTIVE,
+            last_payment=payment,
+            reference_payment=payment,
         )
         reload_urlconf()
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(
             response.data[5],
-            MenuItem('Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €', id='Contribution')
+            MenuItem(
+                'Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €', id='Contribution'
+            ),
         )
 
     def test_profile_anoymous(self):
@@ -484,7 +485,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-main")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-main')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
@@ -514,8 +515,8 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                     MenuItem('Help', icon='fa-question', id='Help'),
                     MenuItem('Alerts', icon='fa-bell', id='Alerts'),
                     MenuItem('Profile', icon='fa-user', id='Profile'),
-                ]
-            }
+                ],
+            },
         )
 
     @override_settings(COSINNUS_CLOUD_ENABLED=True)
@@ -539,13 +540,12 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                     self.expected_language_menu_item(expected_label='EN', expected_icon=None),
                     MenuItem('Login', '/login/', id='Login'),
                     MenuItem('Register', '/signup/', id='Register'),
-                ]
-            }
+                ],
+            },
         )
 
 
 class VersionHistoryPatchMixin:
-
     PATCHED_UPDATES = {
         '1': {
             'datetime': datetime(2000, 1, 1, tzinfo=pytz.utc),
@@ -558,15 +558,15 @@ class VersionHistoryPatchMixin:
     @classmethod
     def patch_version_history(cls):
         from cosinnus.utils import version_history
+
         version_history.version_history.UPDATES = cls.PATCHED_UPDATES
 
 
 class VersionHistoryViewTest(VersionHistoryPatchMixin, APITestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-version-history")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-version-history')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
         cls.patch_version_history()
@@ -590,7 +590,7 @@ class VersionHistoryViewTest(VersionHistoryPatchMixin, APITestCase):
                     },
                 ],
                 'show_all': MenuItem('Show all', version_history_page_url, id='ShowAll'),
-            }
+            },
         )
 
     def test_version_history_anonymous(self):
@@ -612,11 +612,10 @@ class VersionHistoryViewTest(VersionHistoryPatchMixin, APITestCase):
 
 
 class VersionHistoryUnreadCountViewTest(VersionHistoryPatchMixin, APITestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-unread-version-history")
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-unread-version-history')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
         cls.patch_version_history()
@@ -636,4 +635,3 @@ class VersionHistoryUnreadCountViewTest(VersionHistoryPatchMixin, APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, {'count': 0})
-

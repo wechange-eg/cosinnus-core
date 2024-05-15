@@ -8,6 +8,7 @@ from cosinnus.utils.functions import resolve_class
 
 class AdditionalFormsMixin(object):
     """Check additional forms and save them into JSON field"""
+
     dynamic_forms_setting = 'COSINNUS_PROJECT_ADDITIONAL_FORMS'
     dynamic_forms_field = 'dynamic_fields'
 
@@ -41,19 +42,20 @@ class AdditionalFormsMixin(object):
             self.instance.save()
             self.save_m2m()
         return self.instance
-    
+
 
 class PasswordValidationFormMixin(forms.Form):
     """
     A form mixin that improves security by only validating if the user enters their
     password correctly.
     """
+
     password = forms.CharField(
-        label=_("Your password"),
+        label=_('Your password'),
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True}),
     )
-    
+
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super().__init__(*args, **kwargs)
@@ -62,10 +64,10 @@ class PasswordValidationFormMixin(forms.Form):
         """
         Validate that the password field is correct.
         """
-        password = self.cleaned_data["password"]
+        password = self.cleaned_data['password']
         if not self.user.check_password(password):
             raise ValidationError(
-                _("Your password was entered incorrectly. Please enter it again."),
+                _('Your password was entered incorrectly. Please enter it again.'),
                 code='password_incorrect',
             )
         return password

@@ -1,29 +1,25 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 
 from builtins import object
 
-from django.apps import apps
-from django.core.cache import cache
-from django.db.models import Count
-from django.template import loader, Context
-from django.utils.dateparse import parse_datetime
-from haystack import indexes
-from haystack.exceptions import SearchFieldError
 import numpy
 import pytz
 import six
+from django.apps import apps
+from django.core.cache import cache
+from django.db.models import Count
+from django.template import Context, loader
+from django.utils.dateparse import parse_datetime
+from haystack import indexes
+from haystack.exceptions import SearchFieldError
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.files import image_thumbnail_url
-from cosinnus.utils.functions import ensure_list_of_ints, \
-    normalize_within_stddev
-from cosinnus.utils.group import get_cosinnus_group_model, \
-    get_default_user_group_slugs
+from cosinnus.utils.functions import ensure_list_of_ints, normalize_within_stddev
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.import_utils import import_from_settings
-
 
 _CosinnusPortal = None
 
@@ -34,18 +30,17 @@ BOOSTED_FIELD_BOOST = 1.5
 DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE = 0.7
 
 
-
 class CommaSeperatedIntegerMultiValueField(indexes.MultiValueField):
-    """ Custom SearchField, to use with a model's `CommaSeparatedIntegerField` """
-    
+    """Custom SearchField, to use with a model's `CommaSeparatedIntegerField`"""
+
     def convert(self, value):
         return ensure_list_of_ints(value)
-    
+
 
 class TimezoneAwareHaystackDateTimeField(indexes.DateTimeField):
-    """ A timezone-aware replacement for indexes.DateTimeField (which currently
-        drops the timezone in reading the index and reconstructing the object) """
-        
+    """A timezone-aware replacement for indexes.DateTimeField (which currently
+    drops the timezone in reading the index and reconstructing the object)"""
+
     def convert(self, value):
         if value is None:
             return None
@@ -53,13 +48,16 @@ class TimezoneAwareHaystackDateTimeField(indexes.DateTimeField):
             try:
                 value = parse_datetime(value).astimezone(pytz.utc)
             except:
-                raise SearchFieldError("Datetime provided to '%s' field doesn't appear to be a valid datetime string: '%s'" % (self.instance_name, value))
+                raise SearchFieldError(
+                    "Datetime provided to '%s' field doesn't appear to be a valid datetime string: '%s'"
+                    % (self.instance_name, value)
+                )
         return value
 
 
 class DefaultTagObjectIndex(indexes.SearchIndex):
-    #mt_location_place = indexes.CharField(model_attr='media_tag__location_place', null=True)
-    #mt_people_name = indexes.CharField(model_attr='media_tag__people_name', null=True)
+    # mt_location_place = indexes.CharField(model_attr='media_tag__location_place', null=True)
+    # mt_people_name = indexes.CharField(model_attr='media_tag__people_name', null=True)
     mt_public = indexes.BooleanField(model_attr='media_tag__public', null=True)
 
 
@@ -67,7 +65,7 @@ class TagObjectIndex(indexes.SearchIndex):
     mt_location = indexes.CharField(model_attr='media_tag__location', null=True)
     mt_location_lat = indexes.FloatField(model_attr='media_tag__location_lat', null=True)
     mt_location_lon = indexes.FloatField(model_attr='media_tag__location_lon', null=True)
-    #mt_approach = indexes.CharField(model_attr='media_tag__approach', null=True) # approach hidden for now
+    # mt_approach = indexes.CharField(model_attr='media_tag__approach', null=True) # approach hidden for now
     mt_topics = CommaSeperatedIntegerMultiValueField(model_attr='media_tag__topics', null=True)
     mt_text_topics = CommaSeperatedIntegerMultiValueField(null=True)
     mt_visibility = indexes.IntegerField(model_attr='media_tag__visibility', null=True)
@@ -77,7 +75,7 @@ class TagObjectIndex(indexes.SearchIndex):
         if obj.media_tag:
             text_topic_ids = [text_topic.id for text_topic in obj.media_tag.text_topics.all()]
         return text_topic_ids
-    
+
 
 def get_tag_object_index():
     """
@@ -85,21 +83,22 @@ def get_tag_object_index():
     :data:`settings.COSINNUS_TAG_OBJECT_SEARCH_INDEX`
     """
     from django.core.exceptions import ImproperlyConfigured
+
     from cosinnus.conf import settings
-    
+
     # if the setting points at the TagObjectIndex defined here, link it directly,
     # otherwise we will get circular import problems
     if getattr(settings, 'COSINNUS_TAG_OBJECT_SEARCH_INDEX', None) == '%s.TagObjectIndex' % __name__:
         index_class = TagObjectIndex
     else:
         index_class = import_from_settings('COSINNUS_TAG_OBJECT_SEARCH_INDEX')
-    
-    
+
     if not issubclass(index_class, indexes.SearchIndex):
-        raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_SEARCH_INDEX refers to "
-                                   "index '%s' that does not exist or is not a "
-                                   "valid haystack SearchIndex." %
-            settings.COSINNUS_TAG_OBJECT_SEARCH_INDEX)
+        raise ImproperlyConfigured(
+            'COSINNUS_TAG_OBJECT_SEARCH_INDEX refers to '
+            "index '%s' that does not exist or is not a "
+            'valid haystack SearchIndex.' % settings.COSINNUS_TAG_OBJECT_SEARCH_INDEX
+        )
     return index_class
 
 
@@ -107,7 +106,6 @@ TagObjectSearchIndex = get_tag_object_index()
 
 
 class TemplateResolveMixin(object):
-
     def prepare_template(self, obj):
         """
         Does the same as :func:`haystack.fields.CharField.prepare_template`,
@@ -115,10 +113,12 @@ class TemplateResolveMixin(object):
         and ``{field_name}`` with the respective values on the given path(s).
         """
         if self.instance_name is None and self.template_name is None:
-            raise SearchFieldError("This field requires either its "
-                                   "instance_name variable to be populated or "
-                                   "an explicit template_name in order to "
-                                   "load the correct template.")
+            raise SearchFieldError(
+                'This field requires either its '
+                'instance_name variable to be populated or '
+                'an explicit template_name in order to '
+                'load the correct template.'
+            )
 
         if self.template_name is not None:
             template_names = self.template_name
@@ -137,25 +137,25 @@ class TemplateResolveMixin(object):
         return t.render({'object': obj})
 
 
-
 class TemplateResolveCharField(TemplateResolveMixin, indexes.CharField):
     pass
+
 
 class TemplateResolveNgramField(TemplateResolveMixin, indexes.NgramField):
     pass
 
 
 class StoredDataIndexMixin(indexes.SearchIndex):
-    """ Stored field data, used when the rendered search result is not appropriate (e.g. in map search).
-        Override the prepare_<field> method for different implementing Models where the field sources differ!
-     """
-    
+    """Stored field data, used when the rendered search result is not appropriate (e.g. in map search).
+    Override the prepare_<field> method for different implementing Models where the field sources differ!
+    """
+
     title = indexes.CharField(stored=True, indexed=False)
     # slug for linking
     slug = indexes.CharField(stored=True, indexed=True)
     # for alphanumeric lowercase sorting
     sort_field = indexes.CharField(stored=True, indexed=False)
-    
+
     url = indexes.CharField(stored=True, indexed=False)
     description = indexes.CharField(stored=True, indexed=False)
     # the small icon image, should be a 144x144 image
@@ -174,85 +174,86 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     member_count = indexes.IntegerField(stored=True, indexed=False)
     # groups/projects: number of upcoming events
     content_count = indexes.IntegerField(stored=True, indexed=False)
-    
+
     def prepare_participant_count(self, obj):
-        """ Stub, overridden by individual indexes """
+        """Stub, overridden by individual indexes"""
         return -1
-    
+
     def prepare_member_count(self, obj):
-        """ Stub, overridden by individual indexes """
+        """Stub, overridden by individual indexes"""
         return -1
-    
+
     def prepare_content_count(self, obj):
-        """ Stub, overridden by individual indexes """
+        """Stub, overridden by individual indexes"""
         return -1
-    
+
     def prepare_group_slug(self, obj):
-        """ Stub, overridden by individual indexes """
+        """Stub, overridden by individual indexes"""
         return None
-    
+
     def prepare_group_name(self, obj):
-        """ Stub, overridden by individual indexes """
+        """Stub, overridden by individual indexes"""
         return None
-    
+
     def prepare_title(self, obj):
         return obj.title
-    
+
     def prepare_slug(self, obj):
         return obj.slug
-    
+
     def prepare_sort_field(self, obj):
         return obj.slug
-    
+
     def prepare_url(self, obj):
         return obj.get_absolute_url()
-    
+
     def get_image_field_for_icon(self, obj):
-        """ Stub: Overrride this and return one of:
-            - an image field to be resized (preferred)
-            - a string URL for a direct image that won't be resized
-            - None """
+        """Stub: Overrride this and return one of:
+        - an image field to be resized (preferred)
+        - a string URL for a direct image that won't be resized
+        - None"""
         return None
-    
+
     def get_image_field_for_background(self, obj):
-        """ Stub: Overrride this and return one of:
-            - an image field to be resized (preferred)
-            - a string URL for a direct image that won't be resized
-            - None """
+        """Stub: Overrride this and return one of:
+        - an image field to be resized (preferred)
+        - a string URL for a direct image that won't be resized
+        - None"""
         return None
-    
+
     def prepare_icon_image_url(self, obj):
-        """ This should not be overridden """
+        """This should not be overridden"""
         image = self.get_image_field_for_icon(obj)
         if image and isinstance(image, six.string_types):
             return image
         return image_thumbnail_url(image, (144, 144))
-    
+
     def prepare_background_image_small_url(self, obj):
-        """ This should not be overridden """
+        """This should not be overridden"""
         image = self.get_image_field_for_background(obj)
         if image and isinstance(image, six.string_types):
             return image
         return image_thumbnail_url(image, (500, 275))
-    
+
     def prepare_background_image_large_url(self, obj):
-        """ This should not be overridden """
+        """This should not be overridden"""
         image = self.get_image_field_for_background(obj)
         if image and isinstance(image, six.string_types):
             return image
         return image_thumbnail_url(image, (1000, 350))
-    
+
     def prepare_description(self, obj):
         return obj.description
 
+
 class LocalCachedIndexMixin(object):
-    """ If an index caches attributes locally on object instances,
-        this mixin takes care of resetting them before a fresh update for that index.
-        
-        Define `local_cached_attrs` in the implementing class! """
-    
+    """If an index caches attributes locally on object instances,
+    this mixin takes care of resetting them before a fresh update for that index.
+
+    Define `local_cached_attrs` in the implementing class!"""
+
     local_cached_attrs = []
-    
+
     def update_object(self, instance, **kwargs):
         # remove the local cache
         for attr in self.local_cached_attrs:
@@ -260,27 +261,36 @@ class LocalCachedIndexMixin(object):
                 delattr(instance, attr)
         return super(LocalCachedIndexMixin, self).update_object(instance, **kwargs)
 
+
 class DocumentBoostMixin(object):
-    """ Handles standardized document boosting and exposes an index-specific
-        `boost_model()` method to be implemented by each extending SearchIndex """
-    
+    """Handles standardized document boosting and exposes an index-specific
+    `boost_model()` method to be implemented by each extending SearchIndex"""
+
     local_boost = indexes.FloatField(default=0.0, indexed=False)
-    
+
     def get_mean_and_stddev(self, qs_or_func, count_property, non_annotated_property=False):
-        """ For a given QS or function that returns one, and the countable property
-            to be annotated, return mean and stddev for the population of counts.
-            Mean and Stddev are cached.
-            @param non_annotated_property: If true, the given property is considered a literal number
-                and will not be Count() aggregated """
-        
+        """For a given QS or function that returns one, and the countable property
+        to be annotated, return mean and stddev for the population of counts.
+        Mean and Stddev are cached.
+        @param non_annotated_property: If true, the given property is considered a literal number
+            and will not be Count() aggregated"""
+
         global _CosinnusPortal
-        if _CosinnusPortal is None: 
+        if _CosinnusPortal is None:
             _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
         portal_id = _CosinnusPortal.get_current().id
-        
-        INDEX_POP_COUNT_MEAN = 'cosinnus/core/portal/%d/users/%s/%s/mean' % (portal_id, self.__class__.__name__, count_property)
-        INDEX_POP_COUNT_STDDEV = 'cosinnus/core/portal/%d/users/%s/%s/stddev' % (portal_id, self.__class__.__name__, count_property)
-        
+
+        INDEX_POP_COUNT_MEAN = 'cosinnus/core/portal/%d/users/%s/%s/mean' % (
+            portal_id,
+            self.__class__.__name__,
+            count_property,
+        )
+        INDEX_POP_COUNT_STDDEV = 'cosinnus/core/portal/%d/users/%s/%s/stddev' % (
+            portal_id,
+            self.__class__.__name__,
+            count_property,
+        )
+
         mean = cache.get(INDEX_POP_COUNT_MEAN)
         stddev = cache.get(INDEX_POP_COUNT_STDDEV)
         if mean is None or stddev is None:
@@ -289,36 +299,35 @@ class DocumentBoostMixin(object):
             if non_annotated_property:
                 count_population = qs.values_list(count_property, flat=True)
             else:
-                ann = qs.annotate(
-                    pop_property_count=Count(count_property)
-                )
+                ann = qs.annotate(pop_property_count=Count(count_property))
                 count_population = ann.values_list('pop_property_count', flat=True)
             mean = numpy.mean(count_population)
             stddev = numpy.std(count_population)
-            cache.set(INDEX_POP_COUNT_MEAN , mean, 60*60*12)
-            cache.set(INDEX_POP_COUNT_STDDEV, stddev, 60*60*12)
+            cache.set(INDEX_POP_COUNT_MEAN, mean, 60 * 60 * 12)
+            cache.set(INDEX_POP_COUNT_STDDEV, stddev, 60 * 60 * 12)
         return mean, stddev
-    
-    
+
     def boost_model(self, obj, indexed_data):
-        """ Model specific boost for an instance given it and its indexed data.
-            Stub, implement this in your SearchIndex to customize boosting for that model.
-            @return: NOTE: Please normalize all return values to a range of [0.0..1.0]!
+        """Model specific boost for an instance given it and its indexed data.
+        Stub, implement this in your SearchIndex to customize boosting for that model.
+        @return: NOTE: Please normalize all return values to a range of [0.0..1.0]!
         """
         return 1.0
-    
+
     def apply_boost_penalty(self, obj, indexed_data):
-        """ Model-instance specific penalty, multiplied onto the boost calculated with `boost_model()`.
-            Can be used for example to penalize contents with no preview image.
-            Stub, implement this in your SearchIndex to customize boosting for that model.
-            @return: 1.0 for no penalty, a float in range [0.0..1.0] for a penalty
+        """Model-instance specific penalty, multiplied onto the boost calculated with `boost_model()`.
+        Can be used for example to penalize contents with no preview image.
+        Stub, implement this in your SearchIndex to customize boosting for that model.
+        @return: 1.0 for no penalty, a float in range [0.0..1.0] for a penalty
         """
         return 1.0
-        
+
     def prepare(self, obj):
-        """ Boost all objects of this type """
+        """Boost all objects of this type"""
         data = super(DocumentBoostMixin, self).prepare(obj)
-        global_boost = getattr(settings, 'COSINNUS_HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS', {}).get(data['django_ct'], 1.0)
+        global_boost = getattr(settings, 'COSINNUS_HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS', {}).get(
+            data['django_ct'], 1.0
+        )
         global_offset = getattr(settings, 'COSINNUS_HAYSTACK_GLOBAL_MODEL_BOOST_OFFSET', {}).get(data['django_ct'], 0.0)
         model_boost = self.boost_model(obj, data)
         model_boost = model_boost * self.apply_boost_penalty(obj, data)
@@ -327,12 +336,12 @@ class DocumentBoostMixin(object):
         # this tells haystack to boost the ._score
         data['boost'] = data['local_boost']
         return data
-    
+
 
 class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearchIndex):
     text = TemplateResolveNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
-    
+
     boosted = indexes.NgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
 
     creator = indexes.IntegerField(null=True)
@@ -341,22 +350,22 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
     group_members = indexes.MultiValueField(indexed=False)
     location = indexes.LocationField(null=True)
     created = TimezoneAwareHaystackDateTimeField(model_attr='created')
-    
+
     local_cached_attrs = ['_group_members']
-    
+
     def prepare_creator(self, obj):
-        """ Returning this without using model_attr because of a haystack bug resolving lazy objects """
+        """Returning this without using model_attr because of a haystack bug resolving lazy objects"""
         return obj.creator_id
-    
+
     def prepare_group_slug(self, obj):
         return obj.group.slug
-    
+
     def prepare_group_name(self, obj):
         # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
         if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) and obj.group.slug in get_default_user_group_slugs():
             return None
         return obj.group.name
-    
+
     def prepare_group_members(self, obj):
         if not hasattr(obj, '_group_members'):
             # during threaded indexing we should not use cached properties and should not write to the cache.
@@ -365,50 +374,50 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
             else:
                 obj._group_members = obj.group.members
         return obj._group_members
-    
+
     def prepare_member_count(self, obj):
-        """ Group member count for taggable objects """
+        """Group member count for taggable objects"""
         return len(self.prepare_group_members(obj))
-    
+
     def prepare_location(self, obj):
         if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
             # this expects (lat,lon)!
-            return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
+            return '%s,%s' % (obj.media_tag.location_lat, obj.media_tag.location_lon)
         return None
 
     def prepare_description(self, obj):
         return None
-    
+
     def get_image_field_for_icon(self, obj):
         return obj.group.get_image_field_for_icon()
-    
+
     def index_queryset(self, using=None):
         model_cls = self.get_model()
-        app_name = model_cls.__module__.split('.')[0] # eg 'cosinnus_etherpad'
+        app_name = model_cls.__module__.split('.')[0]  # eg 'cosinnus_etherpad'
         excluded_groups_for_app = [group.id for group in CosinnusGroup.objects.with_deactivated_app(app_name)]
         # TODO: check if this works properly
         qs = model_cls.objects.exclude(group__id__in=excluded_groups_for_app)
         # don't index inactive group's items
         qs = qs.filter(group__is_active=True)
         return qs.select_related('media_tag').select_related('group').all()
-    
+
     def boost_model(self, obj, indexed_data):
-        """ We boost by number of members the tagged objects's group has, normalized over
-            the mean/stddev of the member count of all groups in this portal (excluded the Forum!), 
-            in a range of [0.0..1.0].
-            Special case: Events in the Forum always return 0.5! (Because everyone is in the Forum
-            so it should be average. """
+        """We boost by number of members the tagged objects's group has, normalized over
+        the mean/stddev of the member count of all groups in this portal (excluded the Forum!),
+        in a range of [0.0..1.0].
+        Special case: Events in the Forum always return 0.5! (Because everyone is in the Forum
+        so it should be average."""
         group = obj.group
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if group.slug == forum_slug:
             return 0.5
-        
+
         def qs_func():
             qs = get_cosinnus_group_model().objects.all_in_portal()
             if forum_slug:
                 qs = qs.exclude(slug=forum_slug)
             return qs
-        
+
         mean, stddev = self.get_mean_and_stddev(qs_func, 'memberships')
         # during threaded indexing we should not use cached properties and should not write to the cache.
         if getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True):
@@ -420,7 +429,6 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
 
 
 class BaseHierarchicalTaggableObjectIndex(BaseTaggableObjectIndex):
-    
     def index_queryset(self, using=None):
         qs = super(BaseHierarchicalTaggableObjectIndex, self).index_queryset(using=using)
         return qs.filter(is_container=False)

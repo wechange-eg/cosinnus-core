@@ -2,7 +2,6 @@
 
 from django.apps import apps
 from django.template import Origin, TemplateDoesNotExist
-
 from django.template.loaders.base import Loader as BaseLoader
 
 try:
@@ -12,7 +11,6 @@ except ImportError:
 
 
 class EggOrigin(Origin):
-
     def __init__(self, app_name, pkg_name, *args, **kwargs):
         self.app_name = app_name
         self.pkg_name = pkg_name
@@ -20,10 +18,9 @@ class EggOrigin(Origin):
 
 
 class Loader(BaseLoader):
-
     def __init__(self, engine):
         if resource_string is None:
-            raise RuntimeError("Setuptools must be installed to use the egg loader")
+            raise RuntimeError('Setuptools must be installed to use the egg loader')
         super(Loader, self).__init__(engine)
 
     def get_contents(self, origin):
@@ -41,7 +38,7 @@ class Loader(BaseLoader):
             yield EggOrigin(
                 app_name=app_config.name,
                 pkg_name=pkg_name,
-                name="egg:%s:%s" % (app_config.name, pkg_name),
+                name='egg:%s:%s' % (app_config.name, pkg_name),
                 template_name=template_name,
                 loader=self,
             )

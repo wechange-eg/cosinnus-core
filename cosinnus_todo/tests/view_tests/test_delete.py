@@ -8,7 +8,6 @@ from cosinnus_todo.tests.view_tests.base import ViewTestCase
 
 
 class DeleteTest(ViewTestCase):
-
     def setUp(self, *args, **kwargs):
         super(DeleteTest, self).setUp(*args, **kwargs)
         self.url = reverse('cosinnus:todo:entry-delete', kwargs=self.kwargs)
@@ -30,7 +29,5 @@ class DeleteTest(ViewTestCase):
         response = self.client.post(self.url)
         self.assertEqual(response.status_code, 302)
         kwargs = {'group': self.group.slug}
-        self.assertIn(
-            reverse('cosinnus:todo:list', kwargs=kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:todo:list', kwargs=kwargs), response.get('location'))
         self.assertEqual(len(TodoEntry.objects.all()), 0)

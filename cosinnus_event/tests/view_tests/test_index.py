@@ -7,7 +7,6 @@ from cosinnus_event.tests.view_tests.base import ViewTestCase
 
 
 class IndexTest(ViewTestCase):
-
     def test_index(self):
         """
         Should redirect to list view
@@ -19,6 +18,4 @@ class IndexTest(ViewTestCase):
 
         # should redirect to list view
         self.assertEqual(response.status_code, 302)
-        self.assertIn(
-            reverse('cosinnus:event:list', kwargs=kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:event:list', kwargs=kwargs), response.get('location'))

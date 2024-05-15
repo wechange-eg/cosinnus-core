@@ -13,13 +13,17 @@ from cosinnus.conf import settings
 from cosinnus.forms.group import AsssignPortalMixin, MultiSelectForm
 from cosinnus.forms.mixins import AdditionalFormsMixin
 from cosinnus.forms.tagged import get_form
-from cosinnus.models import CosinnusPortal, MEMBERSHIP_MEMBER
+from cosinnus.models import MEMBERSHIP_MEMBER, CosinnusPortal
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus_organization.fields import OrganizationSelect2MultipleChoiceField
-from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationLocation, \
-    CosinnusOrganizationSocialMedia, CosinnusOrganizationGroup
-from cosinnus_organization.utils import get_organization_select2_pills
 from cosinnus.utils.validators import validate_file_infection
+from cosinnus_organization.fields import OrganizationSelect2MultipleChoiceField
+from cosinnus_organization.models import (
+    CosinnusOrganization,
+    CosinnusOrganizationGroup,
+    CosinnusOrganizationLocation,
+    CosinnusOrganizationSocialMedia,
+)
+from cosinnus_organization.utils import get_organization_select2_pills
 
 
 class CosinnusOrganizationSocialMediaForm(forms.ModelForm):
@@ -40,7 +44,12 @@ class CosinnusOrganizationSocialMediaInlineFormset(InlineFormSetFactory):
 class CosinnusOrganizationLocationForm(forms.ModelForm):
     class Meta(object):
         model = CosinnusOrganizationLocation
-        fields = ('organization', 'location', 'location_lat', 'location_lon',)
+        fields = (
+            'organization',
+            'location',
+            'location_lat',
+            'location_lon',
+        )
         widgets = {
             'location_lat': forms.HiddenInput(),
             'location_lon': forms.HiddenInput(),
@@ -57,16 +66,28 @@ class CosinnusOrganizationLocationInlineFormset(InlineFormSetFactory):
 
 
 class _CosinnusOrganizationForm(AsssignPortalMixin, AdditionalFormsMixin, forms.ModelForm):
-
     dynamic_forms_setting = 'COSINNUS_ORGANIZATION_ADDITIONAL_FORMS'
 
-    avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
-                      disable_preview=True, validators=[validate_file_infection])
-    
+    avatar = avatar_forms.AvatarField(
+        required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False),
+        disable_preview=True,
+        validators=[validate_file_infection],
+    )
+
     class Meta(object):
         model = CosinnusOrganization
-        fields = ['name', 'type', 'type_other', 'description', 'avatar', 'wallpaper', 'website', 'email',
-                  'phone_number', 'is_open_for_cooperation']
+        fields = [
+            'name',
+            'type',
+            'type_other',
+            'description',
+            'avatar',
+            'wallpaper',
+            'website',
+            'email',
+            'phone_number',
+            'is_open_for_cooperation',
+        ]
 
     def __init__(self, instance, *args, **kwargs):
         if 'request' in kwargs:
@@ -75,12 +96,12 @@ class _CosinnusOrganizationForm(AsssignPortalMixin, AdditionalFormsMixin, forms.
 
 
 class MultiOrganizationSelectForm(MultiSelectForm):
-    """ The form to select organizations in a select2 field """
+    """The form to select organizations in a select2 field"""
 
     select_field = 'organizations'
 
     # specify help_text only to avoid the possible default 'Enter text to search.' of ajax_select v1.2.5
-    organizations = OrganizationSelect2MultipleChoiceField(label=_("Groups"), data_url='/stub/')
+    organizations = OrganizationSelect2MultipleChoiceField(label=_('Groups'), data_url='/stub/')
 
     class Meta(object):
         fields = ('organizations',)
@@ -117,9 +138,11 @@ class CosinnusOrganizationForm(get_form(_CosinnusOrganizationForm, attachable=Fa
 
 
 class CosinnusOrganizationGroupForm(forms.ModelForm):
-
     class Meta(object):
-        fields = ('group', 'status',)
+        fields = (
+            'group',
+            'status',
+        )
         model = CosinnusOrganizationGroup
 
     def __init__(self, *args, **kwargs):

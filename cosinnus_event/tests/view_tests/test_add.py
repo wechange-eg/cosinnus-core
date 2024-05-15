@@ -8,7 +8,6 @@ from cosinnus_event.tests.view_tests.base import ViewTestCase
 
 
 class AddTest(ViewTestCase):
-
     def setUp(self, *args, **kwargs):
         super(AddTest, self).setUp(*args, **kwargs)
         self.kwargs = {'group': self.group.slug}
@@ -62,9 +61,7 @@ class AddTest(ViewTestCase):
         # do not catch exception here
         event = Event.objects.get(title=title)
         kwargs = {'group': self.group.slug, 'slug': event.slug}
-        self.assertIn(
-            reverse('cosinnus:event:event-detail', kwargs=kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:event:event-detail', kwargs=kwargs), response.get('location'))
         # set by EntryAddView.form_valid
         self.assertEqual(event.creator, self.admin)
         self.assertEqual(event.group, self.group)

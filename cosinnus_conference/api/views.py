@@ -1,23 +1,26 @@
+from copy import copy
+
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets, pagination
-from rest_framework.response import Response
-
-from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus_conference.api.serializers import ConferenceSerializer, ConferenceEventSerializer, \
-    ConferenceParticipantSerializer, ConferenceEventParticipantsSerializer
-from cosinnus_event.models import ConferenceEvent, ConferenceEventAttendanceTracking, Event
-
+from django.db.models import Q
+from django.utils.timezone import now
+from rest_framework import pagination, viewsets
 
 # FIXME: Make this pagination class default in REST_FRAMEWORK setting
 from rest_framework.decorators import action
-from cosinnus.utils.permissions import check_user_superuser, check_object_write_access, check_object_read_access
-from cosinnus.utils.urls import group_aware_reverse
+from rest_framework.response import Response
+
+from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin, CosinnusPaginateMixin, PublicCosinnusGroupFilterMixin
 from cosinnus.models.group_extra import CosinnusConference, CosinnusGroup
-from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin,\
-    PublicCosinnusGroupFilterMixin, CosinnusPaginateMixin
-from copy import copy
-from django.utils.timezone import now
-from django.db.models import Q
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.permissions import check_object_read_access, check_object_write_access, check_user_superuser
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_conference.api.serializers import (
+    ConferenceEventParticipantsSerializer,
+    ConferenceEventSerializer,
+    ConferenceParticipantSerializer,
+    ConferenceSerializer,
+)
+from cosinnus_event.models import ConferenceEvent, ConferenceEventAttendanceTracking, Event
 
 
 class DefaultPageNumberPagination(pagination.PageNumberPagination):
@@ -27,7 +30,6 @@ class DefaultPageNumberPagination(pagination.PageNumberPagination):
 
 
 class RequireGroupReadMixin(object):
-
     def get_queryset(self):
         queryset = self.queryset
         if not check_user_superuser(self.request.user):
@@ -37,7 +39,6 @@ class RequireGroupReadMixin(object):
 
 
 class RequireEventReadMixin(object):
-
     def get_queryset(self):
         queryset = self.queryset
         if not check_user_superuser(self.request.user):
@@ -49,24 +50,19 @@ class RequireEventReadMixin(object):
 class BaseConferenceViewSet(CosinnusFilterQuerySetMixin, viewsets.ReadOnlyModelViewSet):
     queryset = CosinnusConference.objects.filter(is_active=True)
     serializer_class = ConferenceSerializer
-    
-    FILTER_CONDITION_MAP = copy(CosinnusFilterQuerySetMixin.FILTER_CONDITION_MAP)
-    FILTER_CONDITION_MAP.update({
-        'upcoming': {
-            'true': [Q(to_date__gte=now())]
-        }
-    })
-    FILTER_DEFAULT_ORDER = ['from_date', ]
-    
 
-class PublicConferenceViewSet(CosinnusPaginateMixin, PublicCosinnusGroupFilterMixin,
-                             BaseConferenceViewSet):
-    
+    FILTER_CONDITION_MAP = copy(CosinnusFilterQuerySetMixin.FILTER_CONDITION_MAP)
+    FILTER_CONDITION_MAP.update({'upcoming': {'true': [Q(to_date__gte=now())]}})
+    FILTER_DEFAULT_ORDER = [
+        'from_date',
+    ]
+
+
+class PublicConferenceViewSet(CosinnusPaginateMixin, PublicCosinnusGroupFilterMixin, BaseConferenceViewSet):
     pass
-        
+
 
 class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
-
     @action(detail=True, methods=['get'])
     def events(self, request, pk=None):
         queryset = ConferenceEvent.objects
@@ -74,19 +70,21 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
         if room_id:
             queryset = queryset.filter(room=room_id)
         else:
-            queryset = queryset.filter(room__group=pk)\
-                .exclude(type__in=ConferenceEvent.TIMELESS_TYPES)\
+            queryset = (
+                queryset.filter(room__group=pk)
+                .exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
                 .filter(room__is_visible=True)
+            )
         queryset = queryset.order_by('from_date', 'title')
         page = self.paginate_queryset(queryset)
-        serializer = ConferenceEventSerializer(page, many=True, context={"request": request})
+        serializer = ConferenceEventSerializer(page, many=True, context={'request': request})
         return self.get_paginated_response(serializer.data)
 
     @action(detail=True, methods=['get'])
     def participants(self, request, pk=None):
         queryset = self.get_object().actual_members.order_by('first_name', 'last_name')
         page = self.paginate_queryset(queryset)
-        serializer = ConferenceParticipantSerializer(page, many=True, context={"request": request})
+        serializer = ConferenceParticipantSerializer(page, many=True, context={'request': request})
         return self.get_paginated_response(serializer.data)
 
     @action(detail=True, methods=['get'])
@@ -99,7 +97,7 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
             queryset = queryset.filter(room__group=pk).exclude(type__in=ConferenceEvent.TIMELESS_TYPES)
         queryset = queryset.order_by('from_date')
         page = self.paginate_queryset(queryset)
-        serializer = ConferenceEventParticipantsSerializer(page, many=True, context={"request": request})
+        serializer = ConferenceEventParticipantsSerializer(page, many=True, context={'request': request})
         return self.get_paginated_response({p['id']: p['participants_count'] for p in serializer.data})
 
     @action(detail=False, methods=['get'])
@@ -159,13 +157,14 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
 
     @action(detail=True, methods=['get'])
     def attend_event(self, request, pk=None):
-        """ Track user attendance via ConferenceEventAttendanceTracking. """
+        """Track user attendance via ConferenceEventAttendanceTracking."""
         event_id = self.request.GET.get('event_id')
         event = ConferenceEvent.objects.get(id=event_id)
         if not event:
             return Response(status=404)
         ConferenceEventAttendanceTracking.track_attendance(request.user, event)
         return Response(status=200)
+
 
 """
     @action(detail=True, methods=['get'])

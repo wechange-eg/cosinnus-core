@@ -3,42 +3,37 @@ from __future__ import unicode_literals
 
 import random
 
+from django import forms
+from django.contrib.auth import get_user_model
 from django.core.validators import MaxLengthValidator
 from django.db.models.fields import BLANK_CHOICE_DASH
-from django import forms
-from django.forms.widgets import CheckboxSelectMultiple
 from django.forms.models import ModelMultipleChoiceField
-from django.contrib.auth import get_user_model
-from django.utils.translation import ngettext
+from django.forms.widgets import CheckboxSelectMultiple
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext
 from django_select2.widgets import Select2MultipleWidget
 
 from cosinnus.forms.translations import TranslatedFieldsFormMixin
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import CosinnusManagedTag
-from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
-from cosinnus.utils.user import create_base_user
+from cosinnus.models.newsletter import GroupsNewsletter, Newsletter
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.user import create_base_user
 
 
 class UserWelcomeEmailForm(TranslatedFieldsFormMixin, forms.ModelForm):
-
     class Meta:
         model = CosinnusPortal
         fields = ['welcome_email_active', 'welcome_email_text']
 
 
 class CustomSelectMultiple(ModelMultipleChoiceField):
-
     def label_from_instance(self, obj):
         return obj.name
 
 
 class NewsletterForManagedTagsForm(forms.ModelForm):
-    managed_tags = CustomSelectMultiple(
-            queryset=CosinnusManagedTag.objects.all(),
-            widget=forms.CheckboxSelectMultiple
-        )
+    managed_tags = CustomSelectMultiple(queryset=CosinnusManagedTag.objects.all(), widget=forms.CheckboxSelectMultiple)
 
     class Meta(object):
         model = Newsletter
@@ -47,14 +42,13 @@ class NewsletterForManagedTagsForm(forms.ModelForm):
 
 class NewsletterForGroupsForm(forms.ModelForm):
     groups = forms.ModelMultipleChoiceField(
-        queryset=get_cosinnus_group_model().objects.none(), 
-        widget=Select2MultipleWidget
-        )
+        queryset=get_cosinnus_group_model().objects.none(), widget=Select2MultipleWidget
+    )
 
     class Meta(object):
         model = GroupsNewsletter
         fields = ['subject', 'body', 'groups']
-        
+
     def __init__(self, instance, *args, **kwargs):
         super().__init__(instance=instance, *args, **kwargs)
 
@@ -77,11 +71,9 @@ class UserAdminForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not self.instance.pk:
-            email_exists = get_user_model().objects.filter(
-                email__iexact=email).exists()
+            email_exists = get_user_model().objects.filter(email__iexact=email).exists()
         else:
-            email_exists = get_user_model().objects.filter(
-                email__iexact=email).exclude(pk=self.instance.pk).exists()
+            email_exists = get_user_model().objects.filter(email__iexact=email).exclude(pk=self.instance.pk).exists()
         if email_exists:
             raise forms.ValidationError(_('This email address already has a registered user!'))
         else:
@@ -97,4 +89,3 @@ class UserAdminForm(forms.ModelForm):
         else:
             user = super().save()
         return user
-

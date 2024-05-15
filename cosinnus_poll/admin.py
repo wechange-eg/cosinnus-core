@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from cosinnus_poll.models import Poll, Option, Vote
 from cosinnus.admin import BaseTaggableAdmin
+from cosinnus_poll.models import Option, Poll, Vote
 
 
 class VoteInlineAdmin(admin.TabularInline):
@@ -16,7 +16,11 @@ class VoteInlineAdmin(admin.TabularInline):
 class OptionAdmin(admin.ModelAdmin):
     inlines = (VoteInlineAdmin,)
     list_display = ('poll', 'count')
-    list_filter = ('poll__state', 'poll__creator', 'poll__group',)
+    list_filter = (
+        'poll__state',
+        'poll__creator',
+        'poll__group',
+    )
     readonly_fields = ('poll', 'count')
 
     def get_readonly_fields(self, request, obj=None):
@@ -35,9 +39,15 @@ class OptionInlineAdmin(admin.TabularInline):
 
 
 class PollAdmin(BaseTaggableAdmin):
-    inlines = BaseTaggableAdmin.inlines + [OptionInlineAdmin,]
-    list_display = BaseTaggableAdmin.list_display + ['state',]
-    list_filter = BaseTaggableAdmin.list_filter + ['state', ]
+    inlines = BaseTaggableAdmin.inlines + [
+        OptionInlineAdmin,
+    ]
+    list_display = BaseTaggableAdmin.list_display + [
+        'state',
+    ]
+    list_filter = BaseTaggableAdmin.list_filter + [
+        'state',
+    ]
     search_fields = BaseTaggableAdmin.search_fields + ['']
 
 

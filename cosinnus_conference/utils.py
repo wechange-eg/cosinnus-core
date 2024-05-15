@@ -1,29 +1,28 @@
-from datetime import datetime
 import re
+from datetime import datetime
 
 from django.conf import settings
-from django.template import Template, Context
+from django.contrib.auth.models import AnonymousUser
+from django.db.models import Q
+from django.template import Context, Template
+from django.template.defaultfilters import date
 from django.template.loader import get_template
-from django.utils import translation, timezone
+from django.utils import timezone, translation
 from django.utils.encoding import force_str
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+from uritemplate.api import variables
 
 from cosinnus.core.mail import get_common_mail_context
-from cosinnus.utils.files import get_image_url_for_icon
-from cosinnus.utils.mail import send_notification_item_html_threaded,\
-    send_notification_item_html
-from cosinnus.templatetags.cosinnus_tags import textfield
-from cosinnus.utils.user import filter_active_users
-from cosinnus.utils.permissions import check_user_can_receive_emails
-from uritemplate.api import variables
-from django.template.defaultfilters import date
-from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.group_extra import CosinnusConference
-from django.utils.timezone import now
-from django.db.models import Q
+from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.files import get_image_url_for_icon
+from cosinnus.utils.html import render_html_with_variables
+from cosinnus.utils.mail import send_notification_item_html, send_notification_item_html_threaded
+from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.urls import group_aware_reverse
-from django.contrib.auth.models import AnonymousUser
+from cosinnus.utils.user import filter_active_users
 
 
 def get_initial_template(field_name):
@@ -35,7 +34,7 @@ def get_initial_template(field_name):
     return template.render({})  # render to trigger translate
 
 
-def send_conference_reminder(group, recipients=None, field_name="week_before", update_setting=True):
+def send_conference_reminder(group, recipients=None, field_name='week_before', update_setting=True):
     """
     Send conference reminder email a week/day/hour/immediately before start
     """
@@ -43,7 +42,7 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
     # as they saw it before sending, and not in the language of the receiving user that we set later
     initial_template_subject = get_initial_template(f'{field_name}_subject')
     initial_template_content = get_initial_template(f'{field_name}_content')
-    
+
     def render_template(dynamic_fields, field_name, field_type, user, group):
         template = dynamic_fields.get(f'reminder_{field_name}_{field_type}')
         template = template or (initial_template_subject if field_type == 'subject' else initial_template_content)
@@ -53,21 +52,23 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
             'to_date': date(timezone.localtime(group.to_date), 'SHORT_DATETIME_FORMAT'),
         }
         return render_html_with_variables(user, template, variables)
-    
+
     # does not apply for `Send immediately`-`All applicants` case -> see the usage of `NoConferenceApplicantsFoundException` for further details
     if not recipients:
         recipients = group.actual_members
-    
-    # check if conference has the `Request application` method: 
+
+    # check if conference has the `Request application` method:
     # only in this case the email notification is allowed to ignore the `never` notification setting
     for recipient in recipients:
         ignore = False
-        if group.membership_mode == CosinnusConference.MEMBERSHIP_MODE_APPLICATION \
-            and CosinnusConferenceApplication.objects.filter(conference=group, may_be_contacted=True, user=recipient):
+        if (
+            group.membership_mode == CosinnusConference.MEMBERSHIP_MODE_APPLICATION
+            and CosinnusConferenceApplication.objects.filter(conference=group, may_be_contacted=True, user=recipient)
+        ):
             ignore = True
         if not check_user_can_receive_emails(recipient, ignore_user_notification_settings=ignore):
             continue
-        
+
         # switch language to user's preference language
         cur_language = translation.get_language()
         try:
@@ -80,7 +81,9 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
 
             portal_url = group.portal.get_domain()
             group_icon_url = portal_url + (group.get_avatar_thumbnail_url() or get_image_url_for_icon(group.get_icon()))
-            notification_reason = _('You are getting this notification because you are a member of this conference or have applied for membership.')
+            notification_reason = _(
+                'You are getting this notification because you are a member of this conference or have applied for membership.'
+            )
             context = {
                 'action_user_url': group.get_absolute_url(),
                 'user_image_url': group_icon_url,
@@ -107,22 +110,26 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
         if not group.settings:
             group.settings = {}
         group.settings[f'reminder_{field_name}_sent'] = force_str(datetime.now())
-        group.save(update_fields=['settings', ])
-        
+        group.save(
+            update_fields=[
+                'settings',
+            ]
+        )
 
-def update_conference_premium_status(conferences=None):        
-    """ Updates the premium status for all given conferences (default: all conferences in portal).
-        Depending on whether a CosinnusConferencePremiumBlock is active (current time lies within its
-        from-to-date range), will set the `CosinnusGroup.is_premium_currently` flag.
-        
-        Note: This will circumvent the conference's save() method and *not* trigger any signals!
-        
-        @param conferences: A list of CosinnusConference that should be updated, instead of all conferences
+
+def update_conference_premium_status(conferences=None):
+    """Updates the premium status for all given conferences (default: all conferences in portal).
+    Depending on whether a CosinnusConferencePremiumBlock is active (current time lies within its
+    from-to-date range), will set the `CosinnusGroup.is_premium_currently` flag.
+
+    Note: This will circumvent the conference's save() method and *not* trigger any signals!
+
+    @param conferences: A list of CosinnusConference that should be updated, instead of all conferences
     """
     check_conferences = CosinnusConference.objects.all_in_portal()
     if conferences:
         check_conferences = check_conferences.filter(id__in=[conf.id for conf in conferences])
-    
+
     _now = now()
     current_time_filter = {
         'conference_premium_blocks__from_date__lte': _now,
@@ -130,17 +137,17 @@ def update_conference_premium_status(conferences=None):
     }
     non_premium_to_activate = check_conferences.filter(is_premium_currently=False).filter(**current_time_filter)
     premium_to_deactivate = check_conferences.exclude(is_premium_currently=False).exclude(**current_time_filter)
-    
+
     non_premium_to_activate.update(is_premium_currently=True)
     premium_to_deactivate.update(is_premium_currently=False)
 
 
 class BBBGuestTokenAnonymousUser(AnonymousUser):
-    """ An anonymous user class that is used while an anonymous user
-        is accessing a BBB room via a guest_token URL link. """
-    
+    """An anonymous user class that is used while an anonymous user
+    is accessing a BBB room via a guest_token URL link."""
+
     is_bbb_guest_token_user = True
     bbb_user_name = 'BBB Guest User'
-    
+
     def get_full_name(self):
         return self.bbb_user_name

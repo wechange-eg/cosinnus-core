@@ -1,23 +1,24 @@
-from fabric import Connection, task
-from django.core.exceptions import ImproperlyConfigured
 import functools
+
+from django.core.exceptions import ImproperlyConfigured
+from fabric import Connection, task
 
 # the env used for all cosinnus fabric connections
 _env = None
 
 
 class CosinnusFabricConnection(Connection):
-    """ Wrapper for the fabric Connection object that prints commands to stdout
-        as they are being executed. """
-    
+    """Wrapper for the fabric Connection object that prints commands to stdout
+    as they are being executed."""
+
     def run(self, *args, **kwargs):
         print(f'>>> run\t {args[0]}\n')
         return super().run(*args, **kwargs)
-    
+
     def cd(self, *args, **kwargs):
         print(f'cd:\t {args[0]}')
         return super().cd(*args, **kwargs)
-    
+
     def prefix(self, *args, **kwargs):
         print(f'with:\t {args[0]}')
         return super().prefix(*args, **kwargs)
@@ -25,13 +26,15 @@ class CosinnusFabricConnection(Connection):
 
 def cosinnus_fabric_task(func, **kwargs):
     """
-        Wrapper for fabric.task that prints out the task about to execute to stdout.
+    Wrapper for fabric.task that prints out the task about to execute to stdout.
     """
     func_name = func.__name__
+
     @functools.wraps(func)
     def wrapper(ctx, **kwargs):
         print(f'\n##########  Task: {func_name}  ##########\n')
         return func(ctx, **kwargs)
+
     return task(wrapper, **kwargs)
 
 
@@ -58,6 +61,7 @@ class _AttributeDict(dict):
         'bar'
 
     """
+
     def __getattr__(self, key):
         try:
             return self[key]
@@ -76,44 +80,52 @@ class _AttributeDict(dict):
 
 
 def get_env():
-    """ Returns the env used for all cosinnus fabric connections """
+    """Returns the env used for all cosinnus fabric connections"""
     global _env
     if _env is None:
         _env = _AttributeDict({})
     return _env
 
 
-def setup_env(portal_name, domain, pull_branch, 
-              cosinnus_pull_branch, confirm=False, 
-              base_path=None, pull_remote='origin',
-              cosinnus_pull_remote='origin',
-              frontend_pull_branch='main', frontend_pull_remote='origin',
-              legacy_mode=False, special_requirements='requirements-production.txt',
-              new_unit_commands=False):
-    """ 
-        Sets up the env with all variables needed to run cosinnus 
-        fabric commands.
-        @param portal_name: the name for the user and portal instance
-        @param domain: the URL domain for the portal, for SSH connections and 
-            on-server paths
-        @param pull_branch: the branch that the main repo will be pulled from
-        @param cosinnus_pull_branch: the branch that the cosinnus repo will be pulled from on updates
-            (see `hotdeploy()` for further explanations)
-        @param base_path: if the on-server file location path for the portal
-            is non-default, use this argument to override it
-        @param pull_remote: used to override non-origin git pulls
-        @param cosinnus_pull_remote: used to override non-origin git pulls for the cosinnus-core repo
-        @param legacy_mode: set this to True for deploys on portals that 
-            do not have the v3 redesign devops architecture yet (pip instead of poetry, etc)
-        @param special_requirements: if run in `legacy_mode == True`, this can be used to change
-            the requirements file
-        @param new_unit_commands: set to True to use the newer, unified configuration for unit commands.
+def setup_env(
+    portal_name,
+    domain,
+    pull_branch,
+    cosinnus_pull_branch,
+    confirm=False,
+    base_path=None,
+    pull_remote='origin',
+    cosinnus_pull_remote='origin',
+    frontend_pull_branch='main',
+    frontend_pull_remote='origin',
+    legacy_mode=False,
+    special_requirements='requirements-production.txt',
+    new_unit_commands=False,
+):
+    """
+    Sets up the env with all variables needed to run cosinnus
+    fabric commands.
+    @param portal_name: the name for the user and portal instance
+    @param domain: the URL domain for the portal, for SSH connections and
+        on-server paths
+    @param pull_branch: the branch that the main repo will be pulled from
+    @param cosinnus_pull_branch: the branch that the cosinnus repo will be pulled from on updates
+        (see `hotdeploy()` for further explanations)
+    @param base_path: if the on-server file location path for the portal
+        is non-default, use this argument to override it
+    @param pull_remote: used to override non-origin git pulls
+    @param cosinnus_pull_remote: used to override non-origin git pulls for the cosinnus-core repo
+    @param legacy_mode: set this to True for deploys on portals that
+        do not have the v3 redesign devops architecture yet (pip instead of poetry, etc)
+    @param special_requirements: if run in `legacy_mode == True`, this can be used to change
+        the requirements file
+    @param new_unit_commands: set to True to use the newer, unified configuration for unit commands.
     """
     if not base_path and domain:
         base_path = f'/srv/http/{domain}'
-    #if not base_path:
+    # if not base_path:
     #    raise ImproperlyConfigured('`setup_env()` did not receive all necessary arguments!')
-    
+
     env = get_env()
     env.portal_name = portal_name
     env.username = portal_name
@@ -132,9 +144,9 @@ def setup_env(portal_name, domain, pull_branch,
     env.cosinnus_pull_remote = cosinnus_pull_remote
     env.frontend_pull_branch = frontend_pull_branch
     env.frontend_pull_remote = frontend_pull_remote
-    env.lessc_binary = f'~/node_modules/.bin/lessc'
+    env.lessc_binary = '~/node_modules/.bin/lessc'
     env.skip_compile_webpack = bool(not legacy_mode)
-    
+
     env.memcached_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-memcached.service'
     env.frontend_restart_command = f'sudo systemctl restart django-{portal_name}-node-frontend.service'
     if not legacy_mode:
@@ -150,22 +162,20 @@ def setup_env(portal_name, domain, pull_branch,
         env.memcached_restart_command = f'sudo /bin/systemctl restart portal-{portal_name}-memcached.service'
         env.frontend_restart_command = f'sudo /bin/systemctl restart portal-{portal_name}-frontend.service'
         # or maybe this, even newer?
-        #env.frontend_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-node-frontend.service'
+        # env.frontend_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-node-frontend.service'
     else:
-        env.reload_command = f'sudo systemctl restart unit-config.service'
-        env.stop_command = f'sudo systemctl stop unit-config.service' # there is no stop for the unit-config, only for the config-service
-        env.start_command = f'sudo systemctl restart unit-config.service' # this is why here we restart the unit config, so all gets restarted after stopping
-    
-    env.portal_additional_less_to_compile = [] # a list of django apps for which to compile extra less
+        env.reload_command = 'sudo systemctl restart unit-config.service'
+        env.stop_command = 'sudo systemctl stop unit-config.service'  # there is no stop for the unit-config, only for the config-service
+        env.start_command = 'sudo systemctl restart unit-config.service'  # this is why here we restart the unit config, so all gets restarted after stopping
+
+    env.portal_additional_less_to_compile = []  # a list of django apps for which to compile extra less
     env.db_name = portal_name
     env.db_username = portal_name
     env.confirm = confirm
     env.legacy_mode = False
-    
+
     if legacy_mode:
         env.legacy_mode = True
         env.virtualenv_path = f'{base_path}/venv'
         env.special_requirements = special_requirements
     return env
-
-

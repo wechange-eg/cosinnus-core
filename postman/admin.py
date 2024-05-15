@@ -1,21 +1,23 @@
 from __future__ import unicode_literals
 
 from builtins import object
+
 from django import forms
 from django.contrib import admin
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 
 from postman.models import Message, PendingMessage
 
 
 class MessageAdminForm(forms.ModelForm):
     # class Meta:
-        # model = Message
-        # Django 1.6: "... must also define the Meta.fields attribute (or the Meta.exclude attribute) ..."
-        # any version: "..., the easiest solution is to omit the Meta.model attribute, ..."
+    # model = Message
+    # Django 1.6: "... must also define the Meta.fields attribute (or the Meta.exclude attribute) ..."
+    # any version: "..., the easiest solution is to omit the Meta.model attribute, ..."
     class Media(object):
-        css = { "all": ("postman/css/admin.css",) }
+        css = {'all': ('postman/css/admin.css',)}
 
     def clean(self):
         """Check data validity and coherence."""
@@ -25,7 +27,7 @@ class MessageAdminForm(forms.ModelForm):
         email = cleaned_data.get('email')
         errors = []
         if not sender and not recipient:
-            errors.append(gettext("Sender and Recipient cannot be both undefined."))
+            errors.append(gettext('Sender and Recipient cannot be both undefined.'))
             if 'sender' in cleaned_data:
                 del cleaned_data['sender']
             if 'recipient' in cleaned_data:
@@ -43,17 +45,17 @@ class MessageAdminForm(forms.ModelForm):
         sent_at = cleaned_data.get('sent_at')
         read_at = cleaned_data.get('read_at')
         if read_at and read_at < sent_at:
-            errors.append(gettext("Reading date must be later than sending date."))
+            errors.append(gettext('Reading date must be later than sending date.'))
             if 'read_at' in cleaned_data:
                 del cleaned_data['read_at']
         sender_deleted_at = cleaned_data.get('sender_deleted_at')
         if sender_deleted_at and sender_deleted_at < sent_at:
-            errors.append(gettext("Deletion date by sender must be later than sending date."))
+            errors.append(gettext('Deletion date by sender must be later than sending date.'))
             if 'sender_deleted_at' in cleaned_data:
                 del cleaned_data['sender_deleted_at']
         recipient_deleted_at = cleaned_data.get('recipient_deleted_at')
         if recipient_deleted_at and recipient_deleted_at < sent_at:
-            errors.append(gettext("Deletion date by recipient must be later than sending date."))
+            errors.append(gettext('Deletion date by recipient must be later than sending date.'))
             if 'recipient_deleted_at' in cleaned_data:
                 del cleaned_data['recipient_deleted_at']
         replied_at = cleaned_data.get('replied_at')
@@ -61,15 +63,15 @@ class MessageAdminForm(forms.ModelForm):
         if replied_at:
             len_begin = len(errors)
             if replied_at < sent_at:
-                errors.append(gettext("Response date must be later than sending date."))
+                errors.append(gettext('Response date must be later than sending date.'))
             if not read_at:
-                errors.append(gettext("The message cannot be replied without having been read."))
+                errors.append(gettext('The message cannot be replied without having been read.'))
             elif replied_at < read_at:
-                errors.append(gettext("Response date must be later than reading date."))
+                errors.append(gettext('Response date must be later than reading date.'))
             if not obj.get_replies_count():
-                errors.append(gettext("Response date cannot be set without at least one reply."))
+                errors.append(gettext('Response date cannot be set without at least one reply.'))
             if not obj.thread_id:
-                errors.append(gettext("The message cannot be replied without being in a conversation."))
+                errors.append(gettext('The message cannot be replied without being in a conversation.'))
             if len(errors) > len_begin:
                 if 'replied_at' in cleaned_data:
                     del cleaned_data['replied_at']
@@ -85,32 +87,64 @@ class MessageAdmin(admin.ModelAdmin):
     form = MessageAdminForm
     search_fields = ('subject', 'body')
     date_hierarchy = 'sent_at'
-    list_display = ('subject', 'admin_sender', 'admin_recipient', 'sent_at', 'thread', 'multi_conversation', 'level', 'master_for_sender')
-    list_filter = ('moderation_status', )
+    list_display = (
+        'subject',
+        'admin_sender',
+        'admin_recipient',
+        'sent_at',
+        'thread',
+        'multi_conversation',
+        'level',
+        'master_for_sender',
+    )
+    list_filter = ('moderation_status',)
     fieldsets = (
-        (None, {'fields': (
-            ('sender', 'recipient', 'email'),
-            'sent_at',
-            )}),
-        (_('Message'), {'fields': (
-            'subject',
-            'body',
-            ('parent', 'thread'),
-            'direct_reply_hash',
-            )}),
-        (_('Dates'), {'classes': ('collapse', ), 'fields': (
-            ('read_at', 'replied_at'),
-            ('sender_archived', 'recipient_archived'),
-            ('sender_deleted_at', 'recipient_deleted_at'),
-            )}),
-        (_('Moderation'), {'fields': (
-            ('moderation_status', 'moderation_date', 'moderation_by'),
-            'moderation_reason',
-            )}),
+        (
+            None,
+            {
+                'fields': (
+                    ('sender', 'recipient', 'email'),
+                    'sent_at',
+                )
+            },
+        ),
+        (
+            _('Message'),
+            {
+                'fields': (
+                    'subject',
+                    'body',
+                    ('parent', 'thread'),
+                    'direct_reply_hash',
+                )
+            },
+        ),
+        (
+            _('Dates'),
+            {
+                'classes': ('collapse',),
+                'fields': (
+                    ('read_at', 'replied_at'),
+                    ('sender_archived', 'recipient_archived'),
+                    ('sender_deleted_at', 'recipient_deleted_at'),
+                ),
+            },
+        ),
+        (
+            _('Moderation'),
+            {
+                'fields': (
+                    ('moderation_status', 'moderation_date', 'moderation_by'),
+                    'moderation_reason',
+                )
+            },
+        ),
     )
     readonly_fields = (
-        'parent', 'thread',  # no reason to change, and anyway too many objects
-        'moderation_date', 'moderation_by',  # automatically set at status change
+        'parent',
+        'thread',  # no reason to change, and anyway too many objects
+        'moderation_date',
+        'moderation_by',  # automatically set at status change
     )
     radio_fields = {'moderation_status': admin.VERTICAL}
 
@@ -146,9 +180,9 @@ class MessageAdmin(admin.ModelAdmin):
 
 class PendingMessageAdminForm(forms.ModelForm):
     # class Meta:  # see MessageAdminForm comments
-        # model = PendingMessage
+    # model = PendingMessage
     class Media(object):
-        css = { "all": ("postman/css/admin.css",) }
+        css = {'all': ('postman/css/admin.css',)}
 
     def clean(self):
         """Set status according to the button used to submit."""
@@ -171,16 +205,26 @@ class PendingMessageAdmin(MessageAdmin):
     list_display = ('subject', 'admin_sender', 'admin_recipient', 'sent_at')
     list_filter = ()
     fieldsets = (
-        (None, {'fields': (
-            'admin_sender', 'admin_recipient', 'sent_at',
-            )}),
-        (_('Message'), {'fields': (
-            'subject',
-            'body',
-            )}),
-        (_('Moderation'), {'fields': (
-            'moderation_reason',
-            )}),
+        (
+            None,
+            {
+                'fields': (
+                    'admin_sender',
+                    'admin_recipient',
+                    'sent_at',
+                )
+            },
+        ),
+        (
+            _('Message'),
+            {
+                'fields': (
+                    'subject',
+                    'body',
+                )
+            },
+        ),
+        (_('Moderation'), {'fields': ('moderation_reason',)}),
     )
     readonly_fields = ('admin_sender', 'admin_recipient')
 
@@ -191,6 +235,7 @@ class PendingMessageAdmin(MessageAdmin):
     def has_delete_permission(self, request, obj=None):
         "Deleting is impossible"
         return False
+
 
 admin.site.register(Message, MessageAdmin)
 admin.site.register(PendingMessage, PendingMessageAdmin)

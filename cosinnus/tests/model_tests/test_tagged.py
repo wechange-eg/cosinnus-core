@@ -4,12 +4,10 @@ from __future__ import unicode_literals
 from django.test import TestCase
 
 from cosinnus.models.group import CosinnusGroup
-
 from cosinnus.tests.models import SlugTestModel
 
 
 class SlugTest(TestCase):
-
     def setUp(self):
         self.group = CosinnusGroup.objects.create(name='Group 1')
 

@@ -6,22 +6,19 @@ from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.utils.dashboard import DashboardWidget, DashboardWidgetForm
-
 from cosinnus_marketplace.models import Offer, current_offer_filter
 
 
 class CurrentOffersForm(DashboardWidgetForm):
-    amount = forms.IntegerField(label="Amount", initial=5, min_value=0,
-        help_text="0 means unlimited", required=False)
+    amount = forms.IntegerField(label='Amount', initial=5, min_value=0, help_text='0 means unlimited', required=False)
     template_name = 'cosinnus_marketplace/widgets/offer_widget_form.html'
-    
+
     def __init__(self, *args, **kwargs):
         kwargs.pop('group', None)
         super(CurrentOffersForm, self).__init__(*args, **kwargs)
 
 
 class CurrentOffers(DashboardWidget):
-
     app_name = 'marketplace'
     form_class = CurrentOffersForm
     model = Offer
@@ -29,20 +26,18 @@ class CurrentOffers(DashboardWidget):
     user_model_attr = None  # No filtering on user page
     widget_name = 'current'
     template_name = 'cosinnus_marketplace/widgets/current.html'
-    
+
     def get_data(self, offset=0):
-        """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
-            if has_more == False, the receiving widget will assume no further data can be loaded.
-         """
+        """Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+        if has_more == False, the receiving widget will assume no further data can be loaded.
+        """
         count = int(self.config['amount'])
-        all_current_offers = self.get_queryset().\
-                order_by('-created').\
-                select_related('group').all()
+        all_current_offers = self.get_queryset().order_by('-created').select_related('group').all()
         offers = all_current_offers
-        
+
         if count != 0:
-            offers = offers.all()[offset:offset+count]
-        
+            offers = offers.all()[offset : offset + count]
+
         data = {
             'offers': offers,
             'all_current_offers': all_current_offers,

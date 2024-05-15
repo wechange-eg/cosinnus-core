@@ -4,10 +4,19 @@ Created on 10.12.2013
 
 @author: Sascha Narr
 """
+
 from __future__ import unicode_literals
 
-import urllib.request, urllib.parse, urllib.error
+import urllib.error
+import urllib.parse
+import urllib.request
+
 
 def clean_filename(name):
-    return urllib.parse.quote(name.encode('utf-8', 'ignore')).replace('%28', '(').replace('%29', ')')\
-        .replace('%21', '!').replace('%27', "'")
+    return (
+        urllib.parse.quote(name.encode('utf-8', 'ignore'))
+        .replace('%28', '(')
+        .replace('%29', ')')
+        .replace('%21', '!')
+        .replace('%27', "'")
+    )

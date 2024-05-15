@@ -8,9 +8,7 @@ Using the portal-switches-and-settings.csv directly as a table resulted in a too
 wraps.
 """
 
-parser = argparse.ArgumentParser(
-    description='Converts a portal-switches-and-settings.csv file into a rst sections.'
-)
+parser = argparse.ArgumentParser(description='Converts a portal-switches-and-settings.csv file into a rst sections.')
 parser.add_argument('filename', help='portal-switches-and-settings.csv file location.')
 args = parser.parse_args()
 

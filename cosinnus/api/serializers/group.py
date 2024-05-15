@@ -3,22 +3,21 @@ from __future__ import unicode_literals
 
 from builtins import object
 from datetime import datetime
+
 import pytz
 from django.db.models import Q
 from rest_framework import serializers
 
-from cosinnus.models import MEMBERSHIP_ADMIN, get_cosinnus_group_model, RelatedGroups
+from cosinnus.models import MEMBERSHIP_ADMIN, RelatedGroups, get_cosinnus_group_model
 
 __all__ = ('GroupSimpleSerializer', 'CosinnusSocietySerializer', 'CosinnusProjectSerializer')
 
-from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
-
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 
 CosinnusGroup = get_cosinnus_group_model()
 
 
 class GroupSimpleSerializer(serializers.ModelSerializer):
-
     class Meta(object):
         model = CosinnusGroup
         fields = ('id', 'name', 'slug', 'public', 'description')
@@ -32,7 +31,7 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
     related = serializers.SerializerMethodField()
     child_projects = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
-    
+
     def get_description(self, obj):
         return obj.description_long or obj.description
 
@@ -51,28 +50,45 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
     def get_locations(self, obj):
         locations = []
         for location in obj.get_locations():
-            locations.append({
-                'location': location.location,
-                'lat': location.location_lat,
-                'lon': location.location_lon,
-                'url': location.location_url
-            })
+            locations.append(
+                {
+                    'location': location.location,
+                    'lat': location.location_lat,
+                    'lon': location.location_lon,
+                    'url': location.location_url,
+                }
+            )
         return locations
-    
+
     def get_related(self, obj):
         qs = RelatedGroups.objects
         slugs = set(qs.filter(from_group=obj).exclude(to_group=obj).values_list('to_group__slug', flat=True))
         slugs.update(set(qs.filter(to_group=obj).exclude(from_group=obj).values_list('from_group__slug', flat=True)))
         return slugs
-    
+
     def get_child_projects(self, obj):
         return [project.slug for project in obj.get_children()]
 
     class Meta(object):
         model = CosinnusSociety
-        fields = ('url', 'name', 'slug', 'description', 'description_long', 'contact_info', 'avatar', 'website',
-                  'related', 'child_projects', 'topics', 'tags', 'locations', 'created', 'last_modified',
-                  'is_open_for_cooperation')
+        fields = (
+            'url',
+            'name',
+            'slug',
+            'description',
+            'description_long',
+            'contact_info',
+            'avatar',
+            'website',
+            'related',
+            'child_projects',
+            'topics',
+            'tags',
+            'locations',
+            'created',
+            'last_modified',
+            'is_open_for_cooperation',
+        )
 
 
 class CosinnusProjectSerializer(CosinnusSocietySerializer):
@@ -80,7 +96,7 @@ class CosinnusProjectSerializer(CosinnusSocietySerializer):
 
     class Meta(CosinnusSocietySerializer.Meta):
         model = CosinnusProject
-        fields = CosinnusSocietySerializer.Meta.fields + ('parent', )
+        fields = CosinnusSocietySerializer.Meta.fields + ('parent',)
 
 
 class CosinnusLocationSerializer(serializers.HyperlinkedModelSerializer):
@@ -110,8 +126,19 @@ class CosinnusProjectGoodDBSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta(object):
         model = CosinnusProject
-        fields = ('id', 'createdAt', 'name', 'description', 'placeType', 'images', 'coordinates', 'address', 'contact',
-                  'categories', 'tags')
+        fields = (
+            'id',
+            'createdAt',
+            'name',
+            'description',
+            'placeType',
+            'images',
+            'coordinates',
+            'address',
+            'contact',
+            'categories',
+            'tags',
+        )
 
     def _get_unixtime(self, datetime_obj):
         epoch = datetime(1970, 1, 1, tzinfo=pytz.UTC)
@@ -166,9 +193,5 @@ class CosinnusProjectGoodDBSerializer(serializers.HyperlinkedModelSerializer):
     def get_images(self, obj):
         images = []
         if hasattr(obj, 'avatar'):
-            images = [{
-                'url':   obj.avatar.url,
-                'primary': True,
-                'title': obj.avatar.name
-            }]
+            images = [{'url': obj.avatar.url, 'primary': True, 'title': obj.avatar.name}]
         return images

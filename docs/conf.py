@@ -5,14 +5,16 @@
 
 # Initialize Django and cosinnus for autodoc
 import os
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'cosinnus.tests.settings.standalone_settings'
 os.environ['WECHANGE_SECRET_KEY'] = 'dummy-secret'
 os.environ['WECHANGE_DATABASE_URL'] = 'postgres://dummy:dummy@localhost/dummy'
 import django
+
 django.setup()
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
-initialize_cosinnus_after_startup()
 
+initialize_cosinnus_after_startup()
 
 
 # -- Project information -----------------------------------------------------
@@ -24,6 +26,7 @@ author = 'wechange eG'
 
 # version
 import cosinnus
+
 version = cosinnus.VERSION
 release = cosinnus.VERSION
 
@@ -37,7 +40,6 @@ extensions = [
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', '**migrations**']
-
 
 
 # -- Options for HTML output -------------------------------------------------

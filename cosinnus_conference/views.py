@@ -3,88 +3,101 @@ from __future__ import unicode_literals
 
 import csv
 import logging
-import requests
 from urllib.parse import quote
 
+import requests
+import six
+import xlsxwriter
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, JsonResponse
-from django.shortcuts import redirect, get_object_or_404
-from django.utils.text import slugify
-from django.utils.crypto import get_random_string
-from django.utils import timezone
-from django.utils.translation import gettext_lazy as _, pgettext_lazy, ngettext
-from django.views.generic import (DetailView,
-    ListView, TemplateView)
-from django.views.generic.base import View
-from django.views.generic.edit import FormView, CreateView, UpdateView,\
-    DeleteView
-from django.utils.dateparse import parse_datetime
-import six
-from cosinnus.core import signals
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist
+from django.db import transaction
 from django.db.models import Q
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect, JsonResponse
+from django.http.response import Http404, HttpResponseForbidden, HttpResponseNotFound
+from django.shortcuts import get_object_or_404, redirect
+from django.utils import timezone
+from django.utils.crypto import get_random_string
+from django.utils.dateparse import parse_datetime
+from django.utils.functional import cached_property
+from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext, pgettext_lazy
+from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic.base import View
+from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 
+from cosinnus import cosinnus_notifications
+from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
+from cosinnus.core import signals
+from cosinnus.core.decorators.views import redirect_to_error_page
+from cosinnus.forms.conference import CosinnusConferenceRoomForm
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
-from cosinnus.models.conference import CosinnusConferenceRoom,\
-    CosinnusConferenceApplication, APPLICATION_ACCEPTED, APPLICATION_WAITLIST,\
-    APPLICATION_STATES
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_ADMIN
+from cosinnus.models.conference import (
+    APPLICATION_ACCEPTED,
+    APPLICATION_STATES,
+    APPLICATION_WAITLIST,
+    CosinnusConferenceApplication,
+    CosinnusConferenceRoom,
+)
+from cosinnus.models.group import MEMBERSHIP_ADMIN, CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS
-from cosinnus.models.membership import MEMBERSHIP_MEMBER,\
-    MEMBERSHIP_INVITED_PENDING
-from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
-from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
-from cosinnus.models.profile import UserProfile
-from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.membership import MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_MEMBER
+from cosinnus.models.profile import (
+    PROFILE_SETTING_WORKSHOP_PARTICIPANT,
+    PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME,
+    UserProfile,
+    get_user_profile_model,
+)
+from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.functions import is_number
+from cosinnus.utils.http import make_xlsx_response
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+from cosinnus.utils.urls import group_aware_reverse, redirect_with_next
 from cosinnus.utils.user import create_base_user, filter_active_users
 from cosinnus.views.group import SamePortalGroupMixin
-from cosinnus.views.mixins.group import GroupIsConferenceMixin, FilterGroupMixin,\
-    RequireAdminMixin, RequireLoggedInMixin, GroupFormKwargsMixin,\
-    DipatchGroupURLMixin, RequireExtraDispatchCheckMixin, GroupCanAccessRecordedMeetingsMixin
-from cosinnus.views.mixins.group import RequireReadMixin, RequireWriteMixin
-from cosinnus.views.profile import delete_userprofile
-from cosinnus.utils.urls import group_aware_reverse, redirect_with_next
-from django.db import transaction
-from cosinnus.forms.conference import CosinnusConferenceRoomForm
-from django.contrib.contenttypes.models import ContentType
-from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
-from cosinnus_event.models import ConferenceEventAttendanceTracking
-from django.http.response import Http404, HttpResponseForbidden,\
-    HttpResponseNotFound
-
-from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS, CHOICE_APPLICANTS_AND_MEMBERS, CHOICE_INDIVIDUAL,
-                                       ConferenceRemindersForm,
-                                       ConferenceConfirmSendRemindersForm,
-                                       ConferenceParticipationManagement,
-                                       ConferenceApplicationForm,
-                                       PriorityFormSet,
-                                       ConferenceApplicationManagementFormSet,
-                                       AsignUserToEventForm,
-                                       MotivationQuestionFormSet,
-                                       MotivationAnswerFormSet,
-                                       AdditionalApplicationOptionsFormSet,
-                                       )
-from cosinnus_conference.utils import send_conference_reminder
-from cosinnus.templatetags.cosinnus_tags import full_name
-from cosinnus import cosinnus_notifications
-from django.utils.functional import cached_property
-import xlsxwriter
-from cosinnus.utils.http import make_xlsx_response
-from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
-from cosinnus.core.decorators.views import redirect_to_error_page
 from cosinnus.views.mixins.formsets import JsonFieldFormsetMixin
-from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
+from cosinnus.views.mixins.group import (
+    DipatchGroupURLMixin,
+    FilterGroupMixin,
+    GroupCanAccessRecordedMeetingsMixin,
+    GroupFormKwargsMixin,
+    GroupIsConferenceMixin,
+    RequireAdminMixin,
+    RequireExtraDispatchCheckMixin,
+    RequireLoggedInMixin,
+    RequireReadMixin,
+    RequireWriteMixin,
+)
+from cosinnus.views.profile import deactivate_user_and_mark_for_deletion, delete_userprofile
+from cosinnus_conference.forms import (
+    CHOICE_ALL_APPLICANTS,
+    CHOICE_ALL_MEMBERS,
+    CHOICE_APPLICANTS_AND_MEMBERS,
+    CHOICE_INDIVIDUAL,
+    AdditionalApplicationOptionsFormSet,
+    AsignUserToEventForm,
+    ConferenceApplicationForm,
+    ConferenceApplicationManagementFormSet,
+    ConferenceConfirmSendRemindersForm,
+    ConferenceParticipationManagement,
+    ConferenceRemindersForm,
+    MotivationAnswerFormSet,
+    MotivationQuestionFormSet,
+    PriorityFormSet,
+)
+from cosinnus_conference.utils import send_conference_reminder
+from cosinnus_event.models import ConferenceEventAttendanceTracking
 
 logger = logging.getLogger('cosinnus')
 
 
-class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin,
-                                  RequireExtraDispatchCheckMixin, FormView):
-
+class ConferenceTemporaryUserView(
+    SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, RequireExtraDispatchCheckMixin, FormView
+):
     template_name = 'cosinnus/conference/conference_temporary_users.html'
     form_class = CosinusWorkshopParticipantCSVImportForm
 
@@ -98,11 +111,13 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
 
     def get_temporary_users(self):
         temporary_users = self.group.conference_members
-        return [user for user in temporary_users if user.cosinnus_profile
-                and not user.cosinnus_profile.scheduled_for_deletion_at]
+        return [
+            user
+            for user in temporary_users
+            if user.cosinnus_profile and not user.cosinnus_profile.scheduled_for_deletion_at
+        ]
 
     def post(self, request, *args, **kwargs):
-
         if 'upload_file' in request.POST:
             form = self.get_form()
             if form.is_valid():
@@ -113,14 +128,12 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         if 'activateUsers' in request.POST:
             self.group.save()
             self.update_all_members_status(True)
-            messages.add_message(request, messages.SUCCESS,
-                                 _('successfully activated all user accounts.'))
+            messages.add_message(request, messages.SUCCESS, _('successfully activated all user accounts.'))
 
         elif 'deactivateUsers' in request.POST:
             self.group.save()
             self.update_all_members_status(False)
-            messages.add_message(request, messages.SUCCESS,
-                                 _('successfully deactivated all user accounts.'))
+            messages.add_message(request, messages.SUCCESS, _('successfully deactivated all user accounts.'))
 
         elif 'deactivate_member' in request.POST:
             user_id = int(request.POST.get('deactivate_member'))
@@ -146,13 +159,10 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             messages.add_message(request, messages.SUCCESS, _('Successfully removed all user'))
 
         elif 'downloadPasswords' in request.POST:
-            filename = '{}_participants_passwords'.format(
-                self.group.slug)
-            header = [_('Username'), _('First Name'),
-                      _('Last Name'), _('Email'), _('Password')]
+            filename = '{}_participants_passwords'.format(self.group.slug)
+            header = [_('Username'), _('First Name'), _('Last Name'), _('Email'), _('Password')]
             accounts = self.get_accounts_with_password()
-            return make_xlsx_response(accounts, row_names=header,
-                                      file_name=filename)
+            return make_xlsx_response(accounts, row_names=header, file_name=filename)
 
         elif 'change_password' in request.POST:
             user_id = int(request.POST.get('change_password'))
@@ -160,17 +170,9 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             pwd = get_random_string(length=12)
             user.set_password(pwd)
             user.save()
-            return JsonResponse(
-                {
-                    'email': user.email,
-                    'id': user.id,
-                    'password': pwd
-                }
-            )
+            return JsonResponse({'email': user.email, 'id': user.id, 'password': pwd})
 
-        return redirect(group_aware_reverse(
-            'cosinnus:conference:temporary-users',
-            kwargs={'group': self.group}))
+        return redirect(group_aware_reverse('cosinnus:conference:temporary-users', kwargs={'group': self.group}))
 
     def update_all_members_status(self, status):
         for member in self.get_temporary_users():
@@ -187,13 +189,15 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 pwd = get_random_string(length=12)
                 member.set_password(pwd)
                 member.save()
-            accounts.append([
-                member.cosinnus_profile.readable_workshop_user_name,
-                member.first_name,
-                member.last_name,
-                member.email,
-                pwd
-            ])
+            accounts.append(
+                [
+                    member.cosinnus_profile.readable_workshop_user_name,
+                    member.first_name,
+                    member.last_name,
+                    member.email,
+                    pwd,
+                ]
+            )
         return accounts
 
     def update_member_status(self, user_id, status):
@@ -216,8 +220,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
         context['members'] = self.get_temporary_users()
-        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(
-            group=self.group)
+        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
         context['download_passwords'] = self.get_blank_password_users_exist()
         return context
 
@@ -235,9 +238,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 'Successfully created %(created_count)d account. ',
                 'Successfully created  %(created_count)d accounts. ',
                 created_count,
-            ) % {
-                'created_count': created_count
-            }
+            ) % {'created_count': created_count}
 
         if updated_count:
             message = str(message) + str(_('Successfully updated accounts.'))
@@ -246,13 +247,9 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
     def form_valid(self, form):
         data = form.cleaned_data.get('participants')
         accounts_created, accounts_updated = self.process_data(data)
-        success_message = self.get_success_message(accounts_created,
-                                                   accounts_updated)
-        messages.add_message(
-            self.request, messages.SUCCESS, success_message)
-        return redirect(group_aware_reverse(
-            'cosinnus:conference:temporary-users',
-            kwargs={'group': self.group}))
+        success_message = self.get_success_message(accounts_created, accounts_updated)
+        messages.add_message(self.request, messages.SUCCESS, success_message)
+        return redirect(group_aware_reverse('cosinnus:conference:temporary-users', kwargs={'group': self.group}))
 
     def process_data(self, data):
         accounts_created_list = []
@@ -268,8 +265,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
 
     def get_unique_workshop_name(self, name):
         no_whitespace = name.replace(' ', '')
-        unique_name = '{}_{}__{}'.format(
-            self.group.portal.id, self.group.id, no_whitespace)
+        unique_name = '{}_{}__{}'.format(self.group.portal.id, self.group.id, no_whitespace)
         return unique_name
 
     def get_email_domain(self):
@@ -278,7 +274,6 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         return '{}.de'.format(slugify(settings.COSINNUS_PORTAL_NAME))
 
     def create_or_update_account(self, data):
-
         username = self.get_unique_workshop_name(data[0])
         first_name = data[1]
         last_name = data[2]
@@ -298,7 +293,9 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             return data + [user.email, ''], False
         except ObjectDoesNotExist:
             random_email = '{}@{}'.format(get_random_string(length=12), email_domain)
-            user = create_base_user(random_email, first_name=first_name, last_name=last_name, no_generated_password=True)
+            user = create_base_user(
+                random_email, first_name=first_name, last_name=last_name, no_generated_password=True
+            )
 
             if user:
                 profile = get_user_profile_model()._default_manager.get_for_user(user)
@@ -308,10 +305,11 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
 
                 profile.add_redirect_on_next_page(
                     redirect_with_next(
-                        group_aware_reverse(
-                            'cosinnus:group-dashboard',
-                            kwargs={'group': self.group}),
-                        self.request), message=None, priority=True)
+                        group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}), self.request
+                    ),
+                    message=None,
+                    priority=True,
+                )
                 profile.save()
 
                 unique_email = 'User{}.C{}@{}'.format(str(user.id), str(self.group.id), email_domain)
@@ -325,37 +323,29 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
                 return data + [_('User was not created'), '']
 
     def create_or_update_memberships(self, user):
-
         # Add user to the parent group
-        membership, created = CosinnusGroupMembership.objects.get_or_create(
-            group=self.group,
-            user=user
-        )
+        membership, created = CosinnusGroupMembership.objects.get_or_create(group=self.group, user=user)
         if created:
             membership.status = MEMBERSHIP_MEMBER
             membership.save()
 
 
-class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin,
-                                       GroupIsConferenceMixin, View):
-
+class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
     def get(self, request, *args, **kwars):
         members = self.group.conference_members
 
         filename = '{}_statistics'.format(self.group.slug)
         rows = []
-        header = ['username', 'email', 'has logged in',
-                  'last login date', 'Terms of service accepted']
+        header = ['username', 'email', 'has logged in', 'last login date', 'Terms of service accepted']
 
         for member in members:
-            if (member.cosinnus_profile and not member.cosinnus_profile.scheduled_for_deletion_at):
+            if member.cosinnus_profile and not member.cosinnus_profile.scheduled_for_deletion_at:
                 profile = member.cosinnus_profile
                 workshop_username = profile.readable_workshop_user_name
                 email = member.email
                 has_logged_in, logged_in_date = self.get_last_login(member)
                 tos_accepted = 1 if profile.tos_accepted else 0
-                row = [workshop_username, email, has_logged_in,
-                       logged_in_date, tos_accepted]
+                row = [workshop_username, email, has_logged_in, logged_in_date, tos_accepted]
                 rows.append(row)
         return make_xlsx_response(rows, row_names=header, file_name=filename)
 
@@ -364,20 +354,16 @@ class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin,
         last_login = timezone.localtime(member.last_login)
         logged_in_date = ''
         if member.last_login:
-            logged_in_date = last_login.strftime("%Y-%m-%d %H:%M")
+            logged_in_date = last_login.strftime('%Y-%m-%d %H:%M')
 
         return [has_logged_in, logged_in_date]
 
 
-class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
-                                             RequireWriteMixin,
-                                             GroupIsConferenceMixin, View):
-
+class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
     def get(self, request, *args, **kwars):
         filename = '{}_participants.csv'.format(self.group.slug)
         response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(
-            filename)
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
         writer = csv.writer(response, delimiter=';')
 
@@ -393,7 +379,6 @@ class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
 
 
 class ConferenceRoomManagementView(RequireAdminMixin, GroupIsConferenceMixin, ListView):
-    
     model = CosinnusConferenceRoom
     ordering = ('sort_index', 'title')
     template_name = 'cosinnus/conference/conference_room_management.html'
@@ -411,16 +396,15 @@ class ConferenceRoomManagementView(RequireAdminMixin, GroupIsConferenceMixin, Li
 
 
 class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView):
-    
     template_name = 'cosinnus/conference/conference.html'
-    
+
     def get(self, request, *args, **kwargs):
         # get room slug if one was in URL, else try finding the first sorted room
         # self.room can be None!
         self.room = None
         # discard the event_id kwarg, it is only for the frontend
         kwargs.pop('event_id', None)
-        if not 'slug' in kwargs:
+        if 'slug' not in kwargs:
             first_room = self.group.rooms.visible().first()
             if first_room:
                 return redirect(first_room.get_absolute_url())
@@ -430,21 +414,21 @@ class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView)
         if self.room and not self.room.is_visible:
             if not check_user_superuser(request.user) and not check_ug_admin(request.user, self.group):
                 return HttpResponseForbidden()
-        
+
         self.rooms = self.group.rooms.all()
         if self.rooms.count() == 0 and (check_ug_admin(request.user, self.group) or check_user_superuser(request.user)):
             # if no rooms have been created, redirect group admins to room management
             return redirect(group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': self.group}))
-        
+
         return super(ConferencePageView, self).get(request, *args, **kwargs)
-    
+
     def get_context_data(self, **kwargs):
         # hide invisible rooms from non-admins
         if not check_ug_admin(self.request.user, self.group):
             self.rooms = self.rooms.visible()
-        
+
         ctx = {
-            'slug': self.kwargs.get('slug'), # can be None
+            'slug': self.kwargs.get('slug'),  # can be None
             'group': self.group,
             'room': self.room,  # can be None
             'rooms': self.rooms,
@@ -454,70 +438,72 @@ class ConferencePageView(RequireReadMixin, GroupIsConferenceMixin, TemplateView)
 
 
 class ConferencePageMaintenanceView(ConferencePageView):
-    
     template_name = 'cosinnus/conference/conference_page.html'
-    
+
     def get(self, request, *args, **kwargs):
-        if not check_user_superuser(self.request.user):    
+        if not check_user_superuser(self.request.user):
             return HttpResponseForbidden()
         return super(ConferencePageMaintenanceView, self).get(request, *args, **kwargs)
 
 
 class CosinnusConferenceRoomFormMixin(object):
-    
     form_class = CosinnusConferenceRoomForm
     model = CosinnusConferenceRoom
     template_name = 'cosinnus/conference/conference_room_form.html'
-    
+
     def get_form_kwargs(self):
         kwargs = super(CosinnusConferenceRoomFormMixin, self).get_form_kwargs()
         kwargs['request'] = self.request
         kwargs['group'] = self.group
         kwargs['bbb_settings_parent'] = self.group
         return kwargs
-    
+
     def get_context_data(self, **kwargs):
         context = super(CosinnusConferenceRoomFormMixin, self).get_context_data(**kwargs)
-        context.update({
-            'group': self.group,
-        })
+        context.update(
+            {
+                'group': self.group,
+            }
+        )
         return context
-    
+
 
 class CosinnusConferenceRoomCreateView(RequireAdminMixin, CosinnusConferenceRoomFormMixin, CreateView):
-    """ Create View for CosinnusConferenceRooms """
-    
+    """Create View for CosinnusConferenceRooms"""
+
     form_view = 'add'
     message_success = _('The room was created successfully.')
-    
+
     def get_context_data(self, **kwargs):
         context = super(CosinnusConferenceRoomCreateView, self).get_context_data(**kwargs)
-        context.update({
-            'form_view': self.form_view,
-        })
+        context.update(
+            {
+                'form_view': self.form_view,
+            }
+        )
         return context
-    
+
     def form_valid(self, form):
         form.instance.creator = self.request.user
         ret = super(CosinnusConferenceRoomCreateView, self).form_valid(form)
         return ret
-    
+
     def get_success_url(self):
         messages.success(self.request, self.message_success)
         return group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': self.group})
 
 
 class CosinnusConferenceRoomEditView(RequireWriteMixin, CosinnusConferenceRoomFormMixin, FilterGroupMixin, UpdateView):
-
     form_view = 'edit'
     message_success = _('The room was saved successfully.')
-    
 
     def get_context_data(self, **kwargs):
         context = super(CosinnusConferenceRoomEditView, self).get_context_data(**kwargs)
-        context.update({
-            'form_view': self.form_view,
-        })
+        context.update(
+            {
+                'form_view': self.form_view,
+            }
+        )
         return context
 
     def get_success_url(self):
@@ -526,10 +512,9 @@ class CosinnusConferenceRoomEditView(RequireWriteMixin, CosinnusConferenceRoomFo
 
 
 class CosinnusConferenceRoomDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
-
     model = CosinnusConferenceRoom
     message_success = _('The room was deleted successfully.')
-    
+
     def get_success_url(self):
         messages.success(self.request, self.message_success)
         return group_aware_reverse('cosinnus:conference:room-management', kwargs={'group': self.group})
@@ -537,7 +522,7 @@ class CosinnusConferenceRoomDeleteView(RequireWriteMixin, FilterGroupMixin, Dele
 
 class FilterConferenceRoomMixin(object):
     """
-    Sets `self.room` as CosinnusConferenceRoom for the group already set during dispatch, 
+    Sets `self.room` as CosinnusConferenceRoom for the group already set during dispatch,
     pulled from the `kwargs['room_slug']`, 404s if not found. Excepcts `self.group` to be set.
     """
 
@@ -552,7 +537,6 @@ class FilterConferenceRoomMixin(object):
 
 
 class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
-
     template_name = 'cosinnus/conference/conference_reminders.html'
     form_class = ConferenceRemindersForm
     message_success = _('Conference reminder settings have been successfully updated.')
@@ -581,24 +565,27 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
         form.save()
         # Send test email to logged in user?
         if 'test' in form.data:
-            send_conference_reminder(self.group, recipients=[self.request.user],
-                                     field_name=form.data.get('test'), update_setting=False)
+            send_conference_reminder(
+                self.group, recipients=[self.request.user], field_name=form.data.get('test'), update_setting=False
+            )
             messages.success(self.request, _('A test email has been sent to your email address.'))
         if 'send' in form.data:
-            return HttpResponseRedirect(group_aware_reverse(
-                'cosinnus:conference:confirm_send_reminder',
-                kwargs={'group': self.group}))
+            return HttpResponseRedirect(
+                group_aware_reverse('cosinnus:conference:confirm_send_reminder', kwargs={'group': self.group})
+            )
         return super(ConferenceRemindersView, self).form_valid(form)
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group})
 
 
-class ConferenceRecordedMeetingsView(SamePortalGroupMixin, RequireWriteMixin, GroupCanAccessRecordedMeetingsMixin, TemplateView):
-    """ A list view that retrieves the recorded BBB meetings for this conference """
+class ConferenceRecordedMeetingsView(
+    SamePortalGroupMixin, RequireWriteMixin, GroupCanAccessRecordedMeetingsMixin, TemplateView
+):
+    """A list view that retrieves the recorded BBB meetings for this conference"""
 
     template_name = 'cosinnus/conference/conference_recorded_meetings.html'
-    
+
     def get_recorded_meetings(self):
         self._bbb_api = BigBlueButtonAPI(source_object=self.group)
         recording_list = self._bbb_api.get_recorded_meetings(group_id=self.group.id)
@@ -612,17 +599,18 @@ class ConferenceRecordedMeetingsView(SamePortalGroupMixin, RequireWriteMixin, Gr
             recorded_meetings = self.get_recorded_meetings()
         except BigBlueButtonAPI.RecordingAPIServerNotSetUp:
             recorded_meetings_not_set_up = True
-            
-        context.update({
-            'object_list': recorded_meetings,
-            'object': self.group,
-            'recorded_meetings_not_set_up': recorded_meetings_not_set_up,
-        })
+
+        context.update(
+            {
+                'object_list': recorded_meetings,
+                'object': self.group,
+                'recorded_meetings_not_set_up': recorded_meetings_not_set_up,
+            }
+        )
         return context
 
 
 class ConferenceRecordedMeetingDeleteView(ConferenceRecordedMeetingsView):
-    
     def post(self, request, *args, **kwargs):
         redirect_url = group_aware_reverse('cosinnus:conference:recorded-meetings', kwargs={'group': self.group})
         recording_id = kwargs.get('recording_id')
@@ -633,9 +621,13 @@ class ConferenceRecordedMeetingDeleteView(ConferenceRecordedMeetingsView):
         # find the recording we want to delete in the list of recordings for this group
         # this acts as a permission check to see if the user actually should be allowed to delete it
         matching_recordings = [rec for rec in recorded_meetings if rec['id'] == recording_id]
-        
+
         if len(matching_recordings) == 0:
-            messages.error(request, _('Recording %s was not found, has already been deleted, or you do not have permission to delete it.') % recording_id)
+            messages.error(
+                request,
+                _('Recording %s was not found, has already been deleted, or you do not have permission to delete it.')
+                % recording_id,
+            )
         else:
             recording = matching_recordings[0]
             recording_name = recording['name']
@@ -643,7 +635,9 @@ class ConferenceRecordedMeetingDeleteView(ConferenceRecordedMeetingsView):
             if success:
                 messages.success(request, _('Recording %s was successfully deleted.') % recording_name)
             else:
-                messages.error(request, _('Recording %s could not be deleted because of a server error.') % recording_name)
+                messages.error(
+                    request, _('Recording %s could not be deleted because of a server error.') % recording_name
+                )
         return redirect(redirect_url)
 
 
@@ -651,77 +645,102 @@ class NoRecipientsDefinedException(Exception):
     """
     Workaround exception to throw in case the `Recipients` field was left empty.
     """
+
     pass
 
 
 class NoConferenceApplicantsFoundException(Exception):
     """
-    Workaround exeption to throw in case there are no pending applications found. 
+    Workaround exeption to throw in case there are no pending applications found.
     """
+
     pass
 
 
-class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
-                                         RequireWriteMixin,
-                                         GroupIsConferenceMixin,
-                                         FormView):
-    template_name = \
-        'cosinnus/conference/conference_confirm_send_reminders.html'
+class ConferenceConfirmSendRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
+    template_name = 'cosinnus/conference/conference_confirm_send_reminders.html'
     form_class = ConferenceConfirmSendRemindersForm
-    message_success = _('Conference reminder settings '
-                        'have been successfully updated.')
+    message_success = _('Conference reminder settings ' 'have been successfully updated.')
 
     def dispatch(self, request, *args, **kwargs):
         try:
             return super().dispatch(request, *args, **kwargs)
         except NoRecipientsDefinedException:
             messages.error(self.request, _('Please supply one ore more recipients.'))
-            return redirect(group_aware_reverse('cosinnus:conference:reminders',
-                                   kwargs={'group': self.group}))
+            return redirect(group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group}))
         except NoConferenceApplicantsFoundException:
             messages.error(self.request, _('No conference applicants found at the moment.'))
-            return redirect(group_aware_reverse('cosinnus:conference:reminders',
-                                   kwargs={'group': self.group}))
+            return redirect(group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group}))
 
     def get_members(self):
         recipient_choice = self.group.dynamic_fields.get('reminder_recipients_choices', None)
 
         if recipient_choice is None or not is_number(recipient_choice):
-            logger.error('Invalid value for recipients in ConferenceConfirmSendRemindersView:get_members() function', extra={'recipient_choice': recipient_choice})
+            logger.error(
+                'Invalid value for recipients in ConferenceConfirmSendRemindersView:get_members() function',
+                extra={'recipient_choice': recipient_choice},
+            )
             raise NoRecipientsDefinedException()
         recipient_choice = int(recipient_choice)
 
         # handle diverse cases in accordance with the `recipients_choices` choice field
         if recipient_choice == CHOICE_APPLICANTS_AND_MEMBERS:
-            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
+            pending_application_qs = (
+                CosinnusConferenceApplication.objects.filter(conference=self.group)
+                .filter(may_be_contacted=True)
+                .pending_and_accepted()
+            )
             all_user_ids = pending_application_qs.values_list('user', flat=True)
-            members_user_ids = self.group.members # covers the current members of the group incl. admins
-            recipients_applicants_and_members = filter_active_users(get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
-            return recipients_applicants_and_members 
+            members_user_ids = self.group.members  # covers the current members of the group incl. admins
+            recipients_applicants_and_members = filter_active_users(
+                get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids))
+            )
+            return recipients_applicants_and_members
         elif recipient_choice == CHOICE_ALL_APPLICANTS:
-            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending()
+            pending_application_qs = (
+                CosinnusConferenceApplication.objects.filter(conference=self.group)
+                .filter(may_be_contacted=True)
+                .pending()
+            )
             all_user_ids = pending_application_qs.values_list('user', flat=True)
             recipients_all_applicants = filter_active_users(get_user_model().objects.filter(id__in=all_user_ids))
             if not recipients_all_applicants:
                 raise NoConferenceApplicantsFoundException()
             return recipients_all_applicants
         elif recipient_choice == CHOICE_ALL_MEMBERS:
-            members_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).accepted_in_past()
+            members_qs = (
+                CosinnusConferenceApplication.objects.filter(conference=self.group)
+                .filter(may_be_contacted=True)
+                .accepted_in_past()
+            )
             all_user_ids = members_qs.values_list('user', flat=True)
             members_user_ids = self.group.members
-            participants_all_members = filter_active_users(get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
+            participants_all_members = filter_active_users(
+                get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids))
+            )
             return participants_all_members
         elif recipient_choice == CHOICE_INDIVIDUAL:
-            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
+            pending_application_qs = (
+                CosinnusConferenceApplication.objects.filter(conference=self.group)
+                .filter(may_be_contacted=True)
+                .pending_and_accepted()
+            )
             all_user_ids = pending_application_qs.values_list('user', flat=True)
             members_user_ids = self.group.members
             required_user_ids = self.group.dynamic_fields.get('reminder_send_immediately_users', [])
             if not required_user_ids:
                 raise NoRecipientsDefinedException()
-            recipients_individual = filter_active_users(get_user_model().objects.filter(id__in=required_user_ids).filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
+            recipients_individual = filter_active_users(
+                get_user_model()
+                .objects.filter(id__in=required_user_ids)
+                .filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids))
+            )
             return recipients_individual
         else:
-            logger.error('Unknown choice for recipients in ConferenceConfirmSendRemindersView:get_members() function', extra={'recipient_choice': recipient_choice})
+            logger.error(
+                'Unknown choice for recipients in ConferenceConfirmSendRemindersView:get_members() function',
+                extra={'recipient_choice': recipient_choice},
+            )
             raise NoRecipientsDefinedException()
 
     def get_form_kwargs(self):
@@ -741,24 +760,20 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
     def form_valid(self, form):
         if 'send' in form.data:
             members = self.get_members()
-            send_conference_reminder(self.group, recipients=members,
-                                     field_name='send_immediately',
-                                     update_setting=False)
-            messages.success(self.request,
-                             _('The message was sent to the chosen participants.'))
+            send_conference_reminder(
+                self.group, recipients=members, field_name='send_immediately', update_setting=False
+            )
+            messages.success(self.request, _('The message was sent to the chosen participants.'))
             form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:conference:reminders',
-                                   kwargs={'group': self.group})
+        return group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group})
 
 
-class ConferenceParticipationManagementView(SamePortalGroupMixin,
-                                            RequireWriteMixin,
-                                            GroupIsConferenceMixin,
-                                            JsonFieldFormsetMixin,
-                                            FormView):
+class ConferenceParticipationManagementView(
+    SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, JsonFieldFormsetMixin, FormView
+):
     form_class = ConferenceParticipationManagement
     template_name = 'cosinnus/conference/conference_participation_management_form.html'
     json_field_formsets = {
@@ -769,9 +784,11 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({
-            'group': self.group,
-        })
+        context.update(
+            {
+                'group': self.group,
+            }
+        )
         return context
 
     def get_instance(self):
@@ -805,28 +822,33 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
 
 
 class ConferencePropertiesMixin(object):
-    """ Common properties accessed on conferences by application-related views. """
-        
+    """Common properties accessed on conferences by application-related views."""
+
     @property
     def events(self):
-        from cosinnus_event.models import ConferenceEvent # noqa
-        return ConferenceEvent.objects.filter(group=self.group, is_break=False)\
-                .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)\
-                .order_by('from_date')
+        from cosinnus_event.models import ConferenceEvent  # noqa
+
+        return (
+            ConferenceEvent.objects.filter(group=self.group, is_break=False)
+            .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)
+            .order_by('from_date')
+        )
 
     @property
     def participation_management(self):
         return self.group.participation_management.first()
 
 
-class ConferenceApplicationView(SamePortalGroupMixin,
-                                RequireLoggedInMixin,
-                                DipatchGroupURLMixin,
-                                GroupIsConferenceMixin,
-                                RequireExtraDispatchCheckMixin,
-                                ConferencePropertiesMixin,
-                                JsonFieldFormsetMixin,
-                                FormView):
+class ConferenceApplicationView(
+    SamePortalGroupMixin,
+    RequireLoggedInMixin,
+    DipatchGroupURLMixin,
+    GroupIsConferenceMixin,
+    RequireExtraDispatchCheckMixin,
+    ConferencePropertiesMixin,
+    JsonFieldFormsetMixin,
+    FormView,
+):
     form_class = ConferenceApplicationForm
     template_name = 'cosinnus/conference/conference_application_form.html'
 
@@ -875,8 +897,12 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                 self.json_field_formset_pre_save_hook(application)
                 application.save()
 
-                signals.user_group_join_requested.send(sender=self, obj=self.group, user=self.request.user, 
-                    audience=list(get_user_model()._default_manager.filter(id__in=self.group.admins)))
+                signals.user_group_join_requested.send(
+                    sender=self,
+                    obj=self.group,
+                    user=self.request.user,
+                    audience=list(get_user_model()._default_manager.filter(id__in=self.group.admins)),
+                )
                 messages.success(self.request, _('Your application has been submitted.'))
             else:
                 application = form.save()
@@ -884,9 +910,11 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                 self.json_field_formset_pre_save_hook(application)
                 application.save()
                 messages.success(self.request, _('Your application has been updated.'))
-            
+
             # delete any invitation on application submits
-            invitation = get_object_or_None(CosinnusGroupMembership, group=self.group, user=self.request.user, status=MEMBERSHIP_INVITED_PENDING)
+            invitation = get_object_or_None(
+                CosinnusGroupMembership, group=self.group, user=self.request.user, status=MEMBERSHIP_INVITED_PENDING
+            )
             if invitation:
                 invitation.delete()
             return HttpResponseRedirect(self.get_success_url())
@@ -895,9 +923,9 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 
     def get(self, request, *args, **kwargs):
         if not self._applications_are_active():
-            messages.error(self.request, self.participation_management.application_time_string )
+            messages.error(self.request, self.participation_management.application_time_string)
         if self.application and not self.application.status == 2:
-            messages.error(self.request, _('You cannot change your application anymore.') )
+            messages.error(self.request, _('You cannot change your application anymore.'))
         return self.render_to_response(self.get_context_data())
 
     def post(self, request, *args, **kwargs):
@@ -914,17 +942,13 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             else:
                 return self.form_invalid(form)
 
-
     def get_success_url(self):
         return self.group.get_absolute_url()
 
     def _get_initial_priorities(self):
         priorities = []
         for event in self.events:
-            priority = {
-                'event_id': event.id,
-                'event_name': event.title
-            }
+            priority = {'event_id': event.id, 'event_name': event.title}
             if self.application and self.application.priorities.get(str(event.id)):
                 priority['priority'] = self.application.priorities.get(str(event.id))
             priorities.append(priority)
@@ -943,7 +967,10 @@ class ConferenceApplicationView(SamePortalGroupMixin,
 
     def get_json_field_formsets(self):
         formsets = {}
-        if self.participation_management.information_field_enabled and self.participation_management.motivation_questions:
+        if (
+            self.participation_management.information_field_enabled
+            and self.participation_management.motivation_questions
+        ):
             formsets['motivation_answers'] = MotivationAnswerFormSet
         return formsets
 
@@ -958,35 +985,31 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                 if 'formset' in kwargs:
                     priority_formset = kwargs.pop('formset')
                 else:
-                    priority_formset = PriorityFormSet(
-                        initial = self._get_initial_priorities()
-                    )
+                    priority_formset = PriorityFormSet(initial=self._get_initial_priorities())
             else:
                 priority_formset = PriorityFormSet()
-            context.update({
-                'applications_are_active': True,
-                'group': self.group,
-                'participation_management': self.participation_management,
-                'priority_formset': priority_formset
-            })
+            context.update(
+                {
+                    'applications_are_active': True,
+                    'group': self.group,
+                    'participation_management': self.participation_management,
+                    'priority_formset': priority_formset,
+                }
+            )
         else:
-            context.update({
-                'is_active': False
-            })
+            context.update({'is_active': False})
         return context
 
 
-class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
-                                                        RequireWriteMixin,
-                                                        GroupIsConferenceMixin,
-                                                        ConferencePropertiesMixin,
-                                                        FormView):
+class ConferenceParticipationManagementApplicationsView(
+    SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, ConferencePropertiesMixin, FormView
+):
     form_class = ConferenceApplicationManagementFormSet
     template_name = 'cosinnus/conference/conference_application_management_form.html'
     # for printing out what happened to what users
-    _users_accepted = None # array
-    _users_declined = None # array
-    _users_waitlisted = None # array
+    _users_accepted = None  # array
+    _users_declined = None  # array
+    _users_waitlisted = None  # array
 
     @property
     def applications(self):
@@ -998,9 +1021,9 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
         return form_kwargs
 
     def _set_workshop_assignments(self):
-        """ Handle tagging the conference events with the participants selected """
-        from cosinnus_event.models import ConferenceEvent # noqa
-        
+        """Handle tagging the conference events with the participants selected"""
+        from cosinnus_event.models import ConferenceEvent  # noqa
+
         users = self._get_applicants_for_workshop()
         formset = AsignUserToEventForm(self.request.POST, prefix='assignment')
         for form in formset:
@@ -1014,26 +1037,26 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                 users = get_user_model().objects.filter(id__in=data.get('users'))
                 for user in users:
                     event.media_tag.persons.add(user)
-    
+
     def _handle_application_changed_for_status(self, application):
-        """ Performs all triggers for a given changed application (accepted, declined, etc), 
-            like sending mail, creating a group membership for the conference, etc. """
+        """Performs all triggers for a given changed application (accepted, declined, etc),
+        like sending mail, creating a group membership for the conference, etc."""
         notification_kwargs = {
             'sender': self,
-            'obj': application, 
+            'obj': application,
             'user': self.request.user,
             'audience': [application.user],
         }
         if application.status == APPLICATION_ACCEPTED:
             # add user to conference
-            if not application.user.pk in self.group.admins:
+            if application.user.pk not in self.group.admins:
                 # do not apply group membership changes to admins
                 self.group.add_member_to_group(application.user, MEMBERSHIP_MEMBER)
             self._users_accepted.append(application.user)
             cosinnus_notifications.user_conference_application_accepted.send(**notification_kwargs)
         else:
             # remove/leave user out of conference
-            if not application.user.pk in self.group.admins:
+            if application.user.pk not in self.group.admins:
                 # do not apply group membership changes to admins!
                 self.group.remove_member_from_group(application.user)
             if application.status == APPLICATION_WAITLIST:
@@ -1042,26 +1065,38 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
             else:
                 self._users_declined.append(application.user)
                 cosinnus_notifications.user_conference_application_declined.send(**notification_kwargs)
-    
+
     def form_valid(self, form):
         self._users_accepted = []
         self._users_declined = []
         self._users_waitlisted = []
-        
+
         for application_form in form:
             application_before = CosinnusConferenceApplication.objects.get(id=application_form.instance.id)
             application_form.save()
             if application_before.status != application_form.instance.status:
                 self._handle_application_changed_for_status(application_form.instance)
         self._set_workshop_assignments()
-        
+
         if len(self._users_accepted) > 0:
-            messages.success(self.request, _('The following users were accepted and added as members: %s') % ', '.join(full_name(user) for user in self._users_accepted))
+            messages.success(
+                self.request,
+                _('The following users were accepted and added as members: %s')
+                % ', '.join(full_name(user) for user in self._users_accepted),
+            )
         if len(self._users_waitlisted) > 0:
-            messages.success(self.request, _('The following users were put on the wait list: %s') % ', '.join(full_name(user) for user in self._users_waitlisted))
+            messages.success(
+                self.request,
+                _('The following users were put on the wait list: %s')
+                % ', '.join(full_name(user) for user in self._users_waitlisted),
+            )
         if len(self._users_declined) > 0:
-            messages.success(self.request, _('The following users were declined: %s') % ', '.join(full_name(user) for user in self._users_declined))
-        
+            messages.success(
+                self.request,
+                _('The following users were declined: %s')
+                % ', '.join(full_name(user) for user in self._users_declined),
+            )
+
         messages.success(self.request, _('Your changes were saved.'))
         return HttpResponseRedirect(self.get_success_url())
 
@@ -1076,22 +1111,21 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         users = self._get_applicants_for_workshop()
-        initial = [{
-            'event_id': event.id,
-            'event_name': event.title,
-            'users': self._get_users_for_event(event)
-            } for event in self.events]
+        initial = [
+            {'event_id': event.id, 'event_name': event.title, 'users': self._get_users_for_event(event)}
+            for event in self.events
+        ]
         assignment_formset = AsignUserToEventForm(initial=initial, prefix='assignment')
         for form in assignment_formset:
             form.fields['users'].choices = users
-        context.update({
-            'assignment_formset': assignment_formset
-        })
+        context.update({'assignment_formset': assignment_formset})
 
         if self.participation_management:
-            context.update({
-                'priority_choice_enabled': self.participation_management.priority_choice_enabled,
-            })
+            context.update(
+                {
+                    'priority_choice_enabled': self.participation_management.priority_choice_enabled,
+                }
+            )
 
             if self.participation_management.participants_limit:
                 places_left = 0
@@ -1099,35 +1133,33 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
                 if accepted_applications < self.participation_management.participants_limit:
                     places_left = self.participation_management.participants_limit - accepted_applications
 
-                context.update({
-                    'max_number': self.participation_management.participants_limit,
-                    'places_left': places_left,
-                })
+                context.update(
+                    {
+                        'max_number': self.participation_management.participants_limit,
+                        'places_left': places_left,
+                    }
+                )
         return context
 
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:conference:participation-management-applications',
-                                   kwargs={'group': self.group})
+        return group_aware_reverse(
+            'cosinnus:conference:participation-management-applications', kwargs={'group': self.group}
+        )
 
 
 class CSVDownloadMixin(object):
-
     @property
     def applications(self):
-        """ This view shows applications of *all* statuses """
-        return self.group.conference_applications.filter(status__in=[state for state, __ in APPLICATION_STATES])\
-                .order_by('created')
-                
+        """This view shows applications of *all* statuses"""
+        return self.group.conference_applications.filter(
+            status__in=[state for state, __ in APPLICATION_STATES]
+        ).order_by('created')
+
     def get(self, request, *args, **kwars):
-        response = HttpResponse(
-            content_type='application/vnd.openxmlformats-officedocument'
-                         '.spreadsheetml.sheet')
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument' '.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(self.get_filename())
 
-        workbook = xlsxwriter.Workbook(response, {
-            'in_memory': True,
-            'strings_to_formulas': False
-        })
+        workbook = xlsxwriter.Workbook(response, {'in_memory': True, 'strings_to_formulas': False})
         worksheet = workbook.add_worksheet()
 
         row = 0
@@ -1141,7 +1173,7 @@ class CSVDownloadMixin(object):
 
         row += 1
         col = 0
-        
+
         for application in self.applications:
             table_row = self.get_application_row(application)
             for cell in table_row:
@@ -1155,12 +1187,9 @@ class CSVDownloadMixin(object):
         return response
 
 
-class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
-                                                RequireWriteMixin,
-                                                GroupIsConferenceMixin,
-                                                CSVDownloadMixin,
-                                                View):
-    
+class ConferenceApplicantsDetailsDownloadView(
+    SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, CSVDownloadMixin, View
+):
     @cached_property
     def conference_options(self):
         selected_options = []
@@ -1192,8 +1221,8 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
 
     def get_motivation_question_strings(self):
         current_questions = [
-            question.get('question', '') for question in
-            self.management.get_translated_json_field('motivation_questions')
+            question.get('question', '')
+            for question in self.management.get_translated_json_field('motivation_questions')
         ]
         current_questions_with_translations = []
         for motivation_question in self.management.motivation_questions:
@@ -1218,8 +1247,10 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                     question_answered = True
                 else:
                     for question_with_translations in questions_with_translations:
-                        if (question in question_with_translations.values()
-                                and user_translated_question in question_with_translations.values()):
+                        if (
+                            question in question_with_translations.values()
+                            and user_translated_question in question_with_translations.values()
+                        ):
                             question_answered = True
                             break
                 if question_answered:
@@ -1238,21 +1269,17 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
 
     def get_header(self):
         header = [
-            _('First Name'), 
+            _('First Name'),
             _('Last Name'),
         ]
 
         header += [_('Status')]
 
-        if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
-            header += [
-                _('Contact E-Mail Address')
-            ]
-        if not 'contact_phone' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
-            header += [
-                _('Contact Phone Number')
-            ] 
-        if self.management and self.management.priority_choice_enabled:   
+        if 'contact_email' not in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
+            header += [_('Contact E-Mail Address')]
+        if 'contact_phone' not in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
+            header += [_('Contact Phone Number')]
+        if self.management and self.management.priority_choice_enabled:
             header += [
                 _('First Choice'),
                 _('Second Choice'),
@@ -1262,11 +1289,11 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
             header += self.get_motivation_question_strings()
         header += self.get_options_strings()
         return header
-    
+
     def get_extra_header(self):
-        """ Stub for overriding view in portals """
+        """Stub for overriding view in portals"""
         return []
-    
+
     def get_application_row(self, application):
         user = application.user
         row = [
@@ -1276,14 +1303,10 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
 
         row += [str(dict(APPLICATION_STATES).get(application.status))]
 
-        if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
-            row += [
-                application.contact_email
-            ]
-        if not 'contact_phone' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
-            row += [
-                application.contact_phone.as_international if application.contact_phone else ''
-            ]
+        if 'contact_email' not in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
+            row += [application.contact_email]
+        if 'contact_phone' not in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
+            row += [application.contact_phone.as_international if application.contact_phone else '']
         if self.management and self.management.priority_choice_enabled:
             row += [
                 application.first_priorities_string,
@@ -1294,9 +1317,9 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
             row += self.get_motivation_answers(application)
         row += self.get_application_options(application)
         return row
-    
+
     def get_extra_application_row(self, application):
-        """ Stub for overriding view in portals """
+        """Stub for overriding view in portals"""
         return []
 
     def get_filename(self):
@@ -1304,7 +1327,7 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
 
 
 class ConferenceAttendanceTrackingMixin:
-    """ Provide conference and event info and statistics using ConferenceEventAttendanceTracking. """
+    """Provide conference and event info and statistics using ConferenceEventAttendanceTracking."""
 
     def get_event_attendance_stats(self):
         """Provides attendance stats for each conference event using ConferenceEventAttendanceTracking."""
@@ -1336,10 +1359,12 @@ class ConferenceAttendanceTrackingMixin:
 
         # attendance
         attendance = ConferenceEventAttendanceTracking.get_attendance(self.group)
-        stats.update({
-            'number_of_attendees': attendance.get('num_attendees'),
-            'average_time_spent_per_attendee': attendance.get('avg_time_attendee'),
-        })
+        stats.update(
+            {
+                'number_of_attendees': attendance.get('num_attendees'),
+                'average_time_spent_per_attendee': attendance.get('avg_time_attendee'),
+            }
+        )
         return stats
 
 
@@ -1350,7 +1375,7 @@ class ConferenceUserDataStatisticsMixin:
     """
 
     def _get_field_value_display(self, field, value):
-        """ Returns the display name of a field value if defined in choices. """
+        """Returns the display name of a field value if defined in choices."""
         display_value = value
         field_choices = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[field].choices
         if field_choices:
@@ -1362,7 +1387,7 @@ class ConferenceUserDataStatisticsMixin:
         return display_value
 
     def get_portal_specific_user_data(self):
-        """ Returns a table of user data for each conference member. """
+        """Returns a table of user data for each conference member."""
 
         data = []
 
@@ -1408,12 +1433,14 @@ class ConferenceUserDataStatisticsMixin:
         return aggregated_data
 
 
-class ConferenceStatisticsDashboardView(RequireWriteMixin,
-                                        GroupIsConferenceMixin,
-                                        ConferencePropertiesMixin,
-                                        ConferenceAttendanceTrackingMixin,
-                                        ConferenceUserDataStatisticsMixin,
-                                        TemplateView):
+class ConferenceStatisticsDashboardView(
+    RequireWriteMixin,
+    GroupIsConferenceMixin,
+    ConferencePropertiesMixin,
+    ConferenceAttendanceTrackingMixin,
+    ConferenceUserDataStatisticsMixin,
+    TemplateView,
+):
     """
     Implements a simple conference statistics dashboard showing the data provided by the
     ConferenceAttendanceTrackingMixin and ConferenceUserDataStatisticsMixin as tables.
@@ -1435,24 +1462,30 @@ class ConferenceStatisticsDashboardView(RequireWriteMixin,
         stats = {}
         conference_stats = self.get_conference_attendance_stats()
         event_stats = self.get_event_attendance_stats()
-        stats.update({
-            'conference_stats': conference_stats,
-            'event_stats': event_stats,
-        })
+        stats.update(
+            {
+                'conference_stats': conference_stats,
+                'event_stats': event_stats,
+            }
+        )
         if settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS:
             user_data = self.get_aggregated_portal_specific_user_data()
             user_data_fields = self.get_portal_specific_user_data_labels()
-            stats.update({
-                'user_data_fields': user_data_fields,
-                'user_data': user_data,
-            })
+            stats.update(
+                {
+                    'user_data_fields': user_data_fields,
+                    'user_data': user_data,
+                }
+            )
         return stats
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({
-            'object': self.group,
-        })
+        context.update(
+            {
+                'object': self.group,
+            }
+        )
         if ConferenceEventAttendanceTracking.has_tracking(self.group):
             dashboard_stats = self.get_dashboard_stats()
             context.update(**dashboard_stats)
@@ -1461,20 +1494,18 @@ class ConferenceStatisticsDashboardView(RequireWriteMixin,
         return context
 
 
-class ConferenceStatisticsDownloadView(RequireWriteMixin,
-                                       GroupIsConferenceMixin,
-                                       ConferenceAttendanceTrackingMixin,
-                                       View):
-    """ Provide conference statistic from the ConferenceAttendanceTrackingMixin as XLSX download. """
+class ConferenceStatisticsDownloadView(
+    RequireWriteMixin, GroupIsConferenceMixin, ConferenceAttendanceTrackingMixin, View
+):
+    """Provide conference statistic from the ConferenceAttendanceTrackingMixin as XLSX download."""
 
     def get(self, request, *args, **kwars):
-
         header = [
             'conference_name',
             'number_invitations',
             'number_registrations',
             'number_of_attendees',
-            'average_time_spent_per_attendee'
+            'average_time_spent_per_attendee',
         ]
 
         filename = '{}_conference_statistics'.format(self.group.slug)
@@ -1484,15 +1515,12 @@ class ConferenceStatisticsDownloadView(RequireWriteMixin,
         return response
 
 
-class ConferenceEventStatisticsDownloadView(RequireWriteMixin,
-                                            GroupIsConferenceMixin,
-                                            ConferencePropertiesMixin,
-                                            ConferenceAttendanceTrackingMixin,
-                                            View):
-    """ Provide conference event statistic from the ConferenceAttendanceTrackingMixin as XLSX download. """
+class ConferenceEventStatisticsDownloadView(
+    RequireWriteMixin, GroupIsConferenceMixin, ConferencePropertiesMixin, ConferenceAttendanceTrackingMixin, View
+):
+    """Provide conference event statistic from the ConferenceAttendanceTrackingMixin as XLSX download."""
 
     def get(self, request, *args, **kwars):
-
         header = [
             'single_event_name',
             'single_event_room_type',
@@ -1509,15 +1537,12 @@ class ConferenceEventStatisticsDownloadView(RequireWriteMixin,
         return response
 
 
-class ConferenceUserDataDownloadView(RequireWriteMixin,
-                                     GroupIsConferenceMixin,
-                                     ConferencePropertiesMixin,
-                                     ConferenceUserDataStatisticsMixin,
-                                     View):
-    """ Provide conference user data from the ConferenceUserDataStatisticsMixin as XLSX download. """
+class ConferenceUserDataDownloadView(
+    RequireWriteMixin, GroupIsConferenceMixin, ConferencePropertiesMixin, ConferenceUserDataStatisticsMixin, View
+):
+    """Provide conference user data from the ConferenceUserDataStatisticsMixin as XLSX download."""
 
     def get(self, request, *args, **kwars):
-
         header = settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS
         filename = '{}_conference_user_data'.format(self.group.slug)
         rows = []
@@ -1533,7 +1558,6 @@ class ConferenceUserDataDownloadView(RequireWriteMixin,
                     value = ', '.join(str(subvalue) for subvalue in value)
                 row.append(value)
             rows.append(row)
-
 
         response = make_xlsx_response(rows, row_names=header, file_name=filename)
         return response

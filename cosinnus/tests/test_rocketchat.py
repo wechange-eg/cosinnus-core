@@ -1,14 +1,15 @@
+from threading import Thread
+
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from rest_framework.test import APITestCase
-from threading import Thread
 
-from cosinnus.conf import settings
-from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 import cosinnus_event
 import cosinnus_message
+from cosinnus.conf import settings
+from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
@@ -17,21 +18,20 @@ from cosinnus.views.profile import deactivate_user_and_mark_for_deletion, delete
 from cosinnus_message.rocket_chat import RocketChatConnection
 
 if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
-
     initialize_cosinnus_after_startup()
     User = get_user_model()
-
 
     # Patch threads as threads do not work with Django tests as they don't get the correct test database connection.
     class TestableThreadPatch(Thread):
         def start(self):
             self.run()
+
     cosinnus_message.hooks.Thread = TestableThreadPatch
     cosinnus_event.hooks.Thread = TestableThreadPatch
 
     @override_settings(COSINNUS_ROCKET_ENABLED=True)
     class RocketChatBaseTest(TestCase):
-        """ Base setup for RocketChat test providing a rocket_connection and portal. """
+        """Base setup for RocketChat test providing a rocket_connection and portal."""
 
         portal = None
         rocket_connection = None
@@ -45,9 +45,8 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             cls.portal.email_needs_verification = False
             cls.portal.save()
 
-
     class RocketChatTestUserMixin:
-        """ Adds a test user to RocketChat tests. """
+        """Adds a test user to RocketChat tests."""
 
         test_user = None
         test_user_id = None
@@ -57,7 +56,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             'username': '1',
             'email': 'rockettest@example.com',
             'first_name': 'Rocket',
-            'last_name': 'Test'
+            'last_name': 'Test',
         }
 
         def setUp(self):
@@ -71,21 +70,19 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
                 self.rocket_connection.users_delete(self.test_user)
 
         def _get_test_user_info(self):
-            """ Helper to get the test user info from the user list API endpoint. """
+            """Helper to get the test user info from the user list API endpoint."""
             return self.rocket_connection.rocket.users_info(user_id=self.test_user_id).json().get('user', None)
 
-
     class RocketChatConnectionTest(RocketChatBaseTest):
-        """ Testing the RocketChat setup. """
+        """Testing the RocketChat setup."""
 
         def test_bot_connection(self):
             res = self.rocket_connection.rocket.me()
             self.assertEqual(res.status_code, 200)
             self.assertEqual(res.json()['name'], settings.COSINNUS_CHAT_USER)
 
-
     class RocketChatUserCreateTest(RocketChatBaseTest):
-        """ Test user creation. """
+        """Test user creation."""
 
         test_user = None
 
@@ -93,7 +90,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             'username': '1',
             'email': 'rockettest@example.com',
             'first_name': 'Rocket',
-            'last_name': 'Test'
+            'last_name': 'Test',
         }
 
         def tearDown(self):
@@ -102,7 +99,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
                 self.rocket_connection.users_delete(self.test_user)
 
         def test_user_create(self):
-            #reload_urlconf('cosinnus_message.hooks')
+            # reload_urlconf('cosinnus_message.hooks')
             self.test_user = User.objects.create(**self.test_user_data)
             rocket_connection_user = self.rocket_connection._get_user_connection(self.test_user)
             profile = self.test_user.cosinnus_profile
@@ -121,7 +118,9 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             rocket_connection_user = self.rocket_connection._get_user_connection(self.test_user)
             profile = self.test_user.cosinnus_profile
             user_info = rocket_connection_user.me().json()
-            expected_email = f'unverified_rocketchat_{self.portal.slug}_{self.portal.id}_{self.test_user.id}@wechange.de'
+            expected_email = (
+                f'unverified_rocketchat_{self.portal.slug}_{self.portal.id}_{self.test_user.id}@wechange.de'
+            )
             self.assertEqual(user_info['emails'], [{'address': expected_email, 'verified': True}])
 
             # verify email
@@ -130,9 +129,8 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             user_info = rocket_connection_user.me().json()
             self.assertEqual(user_info['emails'], [{'address': self.test_user.email, 'verified': True}])
 
-
     class RocketChatUserTest(RocketChatTestUserMixin, RocketChatBaseTest):
-        """ Test existing user integration. """
+        """Test existing user integration."""
 
         def test_user_deactivate_reactivate(self):
             user_info = self._get_test_user_info()
@@ -165,11 +163,13 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.test_user.email = updated_email
             self.test_user.save()
             user_info = self.rocket_connection_user.me().json()
-            expected_email = f'unverified_rocketchat_{self.portal.slug}_{self.portal.id}_{self.test_user.id}@wechange.de'
+            expected_email = (
+                f'unverified_rocketchat_{self.portal.slug}_{self.portal.id}_{self.test_user.id}@wechange.de'
+            )
             self.assertEqual(user_info['emails'], [{'address': expected_email, 'verified': True}])
 
         def test_create_user_with_same_name(self):
-            """ Test that if a new user is created with the same name as an existing user a new RC user is created. """
+            """Test that if a new user is created with the same name as an existing user a new RC user is created."""
             test_user2_data = self.test_user_data.copy()
             test_user2_data.update({'username': 2, 'email': 'rockettest2@example.com'})
             test_user2 = User.objects.create(**test_user2_data)
@@ -181,24 +181,27 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
             self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
-            expected_unique_username = f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}1'.lower()
+            expected_unique_username = (
+                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}1'.lower()
+            )
             self.assertEqual(user_info['username'], expected_unique_username)
             self.rocket_connection.users_delete(test_user2)
 
         def test_user_update_with_same_name(self):
-            """ Test that updating a user does not change the RC username if a user with the same name also exists. """
+            """Test that updating a user does not change the RC username if a user with the same name also exists."""
             original_username = self.test_user.cosinnus_profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME]
             test_user2_data = self.test_user_data.copy()
             test_user2_data.update({'username': 2, 'email': 'rockettest2@example.com'})
             test_user2 = User.objects.create(**test_user2_data)
             self.test_user.email = 'changed@exmaple.com'
             self.test_user.save()
-            self.assertEqual(self.test_user.cosinnus_profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME], original_username)
+            self.assertEqual(
+                self.test_user.cosinnus_profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME], original_username
+            )
             self.rocket_connection.users_delete(test_user2)
 
-
     class RocketChatGroupTest(RocketChatTestUserMixin, RocketChatBaseTest):
-        """ Test group integration. """
+        """Test group integration."""
 
         test_group_name = 'TestGroup'
 
@@ -219,7 +222,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
                 self.rocket_connection.groups_delete(self.test_group)
 
         def _get_test_user_group_membership(self):
-            """ Helper to get the group membership status of the test user. """
+            """Helper to get the group membership status of the test user."""
             is_member = False
             is_moderator = False
             group_members = self.rocket_connection.rocket.groups_members(room_id=self.test_group_room_id).json()
@@ -228,7 +231,9 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
                     is_member = True
                     break
             if is_member:
-                group_moderators = self.rocket_connection.rocket.groups_moderators(room_id=self.test_group_room_id).json()
+                group_moderators = self.rocket_connection.rocket.groups_moderators(
+                    room_id=self.test_group_room_id
+                ).json()
                 for moderator in group_moderators['moderators']:
                     if moderator['_id'] == self.test_user_id:
                         is_moderator = True
@@ -300,21 +305,21 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertFalse(is_member)
             self.assertFalse(is_moderator)
 
-
     class RocketChatAPITest(APITestCase):
-        """ Test RocketChat integration via the API. """
+        """Test RocketChat integration via the API."""
 
-        signup_url = reverse("cosinnus:frontend-api:api-signup")
-        profile_url = reverse("cosinnus:frontend-api:api-user-profile")
+        signup_url = reverse('cosinnus:frontend-api:api-signup')
+        profile_url = reverse('cosinnus:frontend-api:api-user-profile')
 
         test_user_signup_data = {
-            "email": "apiuser@api.de", "first_name": "ApiUserFirst", "last_name": "ApIuserLast", "password": "pwd",
-            "newsletter_opt_in": "true"
+            'email': 'apiuser@api.de',
+            'first_name': 'ApiUserFirst',
+            'last_name': 'ApIuserLast',
+            'password': 'pwd',
+            'newsletter_opt_in': 'true',
         }
 
-        test_user_update_data = {
-            "first_name": "ApiUserFirstUpdated"
-        }
+        test_user_update_data = {'first_name': 'ApiUserFirstUpdated'}
 
         portal = None
         rocket_connection = None
@@ -337,7 +342,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
                 self.rocket_connection.groups_delete(self.test_forum)
 
         def test_user_create(self):
-            response = self.client.post(self.signup_url, self.test_user_signup_data, format="json")
+            response = self.client.post(self.signup_url, self.test_user_signup_data, format='json')
             self.assertEqual(response.status_code, 200)
             self.test_user = get_user_model().objects.last()
             profile = self.test_user.cosinnus_profile
@@ -352,11 +357,11 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
 
         def test_user_update(self):
             # Note: Not testing email change as it requires confirmation email processing.
-            response = self.client.post(self.signup_url, self.test_user_signup_data, format="json")
+            response = self.client.post(self.signup_url, self.test_user_signup_data, format='json')
             self.assertEqual(response.status_code, 200)
             self.test_user = get_user_model().objects.last()
             self.client.login(username=self.test_user.username, password=self.test_user_signup_data['password'])
-            response = self.client.post(self.profile_url, self.test_user_update_data, format="json")
+            response = self.client.post(self.profile_url, self.test_user_update_data, format='json')
             rocket_connection_user = self.rocket_connection._get_user_connection(self.test_user)
             user_info = rocket_connection_user.me().json()
             self.assertEqual(response.status_code, 200)
@@ -371,7 +376,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             ]
             group_members = self.rocket_connection.rocket.groups_members(room_id=room_id).json()
             group_members_count = len(group_members['members'])
-            response = self.client.post(self.signup_url, self.test_user_signup_data, format="json")
+            response = self.client.post(self.signup_url, self.test_user_signup_data, format='json')
             self.assertEqual(response.status_code, 200)
             self.test_user = get_user_model().objects.last()
             expected_members_count = group_members_count + 1

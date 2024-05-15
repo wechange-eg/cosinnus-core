@@ -8,7 +8,6 @@ from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
 class EditTest(ViewTestCase):
-
     def setUp(self, *args, **kwargs):
         super(EditTest, self).setUp(*args, **kwargs)
         self.pad = Etherpad.objects.create(group=self.group, title='testpad', creator=self.admin)
@@ -63,8 +62,6 @@ class EditTest(ViewTestCase):
         response = self.client.post(self.url, params)
         self.assertEqual(response.status_code, 302)
         kwargs = {'group': self.group.slug, 'slug': self.pad.slug}
-        self.assertIn(
-            reverse('cosinnus:etherpad:pad-write', kwargs=kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:etherpad:pad-write', kwargs=kwargs), response.get('location'))
         self.pad.refresh_from_db()
         self.assertEqual(self.pad.description, edited_description)

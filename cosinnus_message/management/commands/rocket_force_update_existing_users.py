@@ -1,12 +1,11 @@
 import logging
 
+from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
-from cosinnus_message.rocket_chat import RocketChatConnection
 from cosinnus.conf import settings
 from cosinnus.utils.user import filter_active_users, filter_portal_users
-from django.contrib.auth import get_user_model
-
+from cosinnus_message.rocket_chat import RocketChatConnection
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -16,13 +15,12 @@ class Command(BaseCommand):
     """
     Sync users with Rocket.Chat
     """
-    
+
     def handle(self, *args, **options):
-        
         if not settings.COSINNUS_CHAT_USER:
             return
         rocket = RocketChatConnection(stdout=self.stdout, stderr=self.stderr)
-        
+
         # Get existing rocket users
         rocket_users = {}
         rocket_emails_usernames = {}
@@ -43,7 +41,7 @@ class Command(BaseCommand):
                         continue
                     rocket_emails_usernames[email['address']] = rocket_user['username']
             offset += response['count']
-            
+
         # Check active users in DB
         users = filter_active_users(filter_portal_users(get_user_model().objects.all()))
         count = len(users)
@@ -52,12 +50,12 @@ class Command(BaseCommand):
             if not hasattr(user, 'cosinnus_profile'):
                 self.stdout.write('\tSkipped!')
                 return
-            
+
             profile = user.cosinnus_profile
             rocket_username = profile.rocket_username
 
             rocket_user = rocket_users.get(rocket_username)
-            
+
             # Username exists?
             if rocket_user:
                 rocket.users_update(user, force_user_update=True)

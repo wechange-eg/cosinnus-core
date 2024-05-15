@@ -1,5 +1,6 @@
-import pytz
 from datetime import datetime
+
+import pytz
 from django.utils.translation import gettext_lazy as _
 
 """
@@ -93,7 +94,9 @@ UPDATES = {
     '1.18.0': {
         'datetime': datetime(2023, 10, 23, tzinfo=pytz.utc),
         'title': _('Version 1.18.0 released'),
-        'short_text': _('Includes the "What\'s New" feature, a quick way to copy conference invitations, a security update, and more.'),
+        'short_text': _(
+            'Includes the "What\'s New" feature, a quick way to copy conference invitations, a security update, and more.'
+        ),
         'full_text': _(
             'The update includes:\n'
             '- A "What\'s new" page, showing the release notes for the platform.\n'

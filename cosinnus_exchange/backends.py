@@ -1,13 +1,13 @@
-from datetime import datetime
 import json
 import logging
+import urllib.parse
 from datetime import datetime, timedelta
 from importlib import import_module
-import requests
-import urllib.parse
-from cosinnus.conf import settings
 
+import requests
 from django.apps import apps
+
+from cosinnus.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +17,6 @@ class ExchangeError(Exception):
 
 
 class ExchangeBackend:
-
     url = None
     token_url = None
     username = None
@@ -113,7 +112,10 @@ class ExchangeBackend:
                     if settings.DEBUG:
                         print(f'>> pulled: {page_result.get("url")}')
                 except Exception as e:
-                    logger.warn('An external data object could not be pulled in for cosinnus exchange!', extra={'page_result': page_result, 'exception': str(e)})
+                    logger.warn(
+                        'An external data object could not be pulled in for cosinnus exchange!',
+                        extra={'page_result': page_result, 'exception': str(e)},
+                    )
                     if settings.DEBUG:
                         print(f'>> Error: {page_result.get("url")}')
                         raise

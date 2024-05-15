@@ -1,80 +1,92 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
+
+import json as _json
+import logging
+import re
 from builtins import str
 from collections import defaultdict
+from copy import copy, deepcopy
+from datetime import timedelta
+from urllib.parse import urlparse
+from uuid import uuid1
 
 import dateutil.parser
-import re
+import markdown2
 import six
-from django.utils import dateparse
-from six.moves.urllib.parse import parse_qsl
-from copy import copy, deepcopy
-from urllib.parse import urlparse
-
+from annoying.functions import get_object_or_None
 from django import template
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured
-from django.urls import resolve, reverse, Resolver404
+from django.core.serializers import serialize
+from django.db.models.functions import Lower
+from django.db.models.query import QuerySet
 from django.http import HttpRequest
-from django.template.defaulttags import URLNode, url as url_tag, url
+from django.template.base import TemplateSyntaxError
+from django.template.defaultfilters import linebreaksbr, pprint
+from django.template.defaulttags import URLNode, url
+from django.template.defaulttags import url as url_tag
 from django.template.loader import render_to_string
+from django.templatetags.i18n import BlockTranslateNode, TranslateNode, do_block_translate, do_translate
+from django.templatetags.static import static
+from django.urls import Resolver404, resolve, reverse
+from django.utils import dateparse
+from django.utils.encoding import force_str
+from django.utils.html import escape
 from django.utils.http import urlencode
-from django.utils.translation import gettext_lazy as _, get_language
+from django.utils.safestring import mark_safe
+from django.utils.text import normalize_newlines
+from django.utils.timezone import now
+from django.utils.translation import get_language
+from django.utils.translation import gettext_lazy as _
+from django_otp import user_has_device
+from six.moves.urllib.parse import parse_qsl
+from wagtail.core.templatetags.wagtailcore_tags import richtext
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
-from cosinnus.models.group import CosinnusBaseGroup, CosinnusGroup, CosinnusGroupInviteToken, CosinnusGroupManager,\
-    CosinnusPortal, get_cosinnus_group_model, CosinnusGroupMembership
-from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
-    check_ug_pending, check_object_write_access,
-    check_group_create_objects_access, check_object_read_access, get_user_token,
-    check_user_portal_admin, check_user_superuser,
-    check_object_likefollowstar_access, filter_tagged_object_queryset_for_user,
-    check_user_can_create_conferences, check_user_can_create_groups,
-    check_user_portal_manager)
-from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
-from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
-    LikeObject, CosinnusTopicCategory
-from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
-from django.core.cache import cache
-from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal,\
-    BETTER_URL_RE, BETTER_EMAIL_RE
-
-import logging
-import markdown2
-import json as _json
-from django.utils.encoding import force_str
-from django.utils.html import escape
-from django.utils.safestring import mark_safe
-from django.templatetags.static import static
-from django.template.defaultfilters import linebreaksbr, pprint
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
-    CosinnusConference
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.conference import CosinnusConferenceApplication, ParticipationManagement
-from wagtail.core.templatetags.wagtailcore_tags import richtext
-from uuid import uuid1
-from annoying.functions import get_object_or_None
-from django.utils.text import normalize_newlines
-from cosinnus.utils.functions import ensure_list_of_ints, convert_html_to_string
-from django.db.models.query import QuerySet
-from django.core.serializers import serialize
+from cosinnus.models.group import (
+    CosinnusBaseGroup,
+    CosinnusGroup,
+    CosinnusGroupInviteToken,
+    CosinnusGroupManager,
+    CosinnusGroupMembership,
+    CosinnusPortal,
+    get_cosinnus_group_model,
+)
+from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
-from django.db.models.functions import Lower
-from django.contrib.contenttypes.models import ContentType
-from cosinnus_organization.models import CosinnusOrganization
-
-from cosinnus.utils.user import check_user_has_accepted_portal_tos,\
-    is_user_active as utils_is_user_active
-from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
-from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
-from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
+from cosinnus.models.tagged import BaseTagObject, CosinnusTopicCategory, LikeObject, get_tag_object_model
+from cosinnus.utils.functions import convert_html_to_string, ensure_list_of_ints
+from cosinnus.utils.html import render_html_with_variables
+from cosinnus.utils.permissions import (
+    check_group_create_objects_access,
+    check_object_likefollowstar_access,
+    check_object_read_access,
+    check_object_write_access,
+    check_ug_admin,
+    check_ug_membership,
+    check_ug_pending,
+    check_user_can_create_conferences,
+    check_user_can_create_groups,
+    check_user_portal_admin,
+    check_user_portal_manager,
+    check_user_superuser,
+    filter_tagged_object_queryset_for_user,
+    get_user_token,
+)
+from cosinnus.utils.urls import BETTER_EMAIL_RE, BETTER_URL_RE, get_domain_for_portal, group_aware_reverse
+from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
+from cosinnus.utils.user import check_user_has_accepted_portal_tos
+from cosinnus.utils.user import is_user_active as utils_is_user_active
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
-from datetime import timedelta
-from django.utils.timezone import now
-from django_otp import user_has_device
+from cosinnus_organization.models import CosinnusOrganization
 
 logger = logging.getLogger('cosinnus')
 
@@ -111,6 +123,7 @@ def is_group_pending(user, group):
     """
     return check_ug_pending(user, group)
 
+
 @register.filter
 def has_read_access(user, obj):
     """
@@ -120,15 +133,17 @@ def has_read_access(user, obj):
     """
     return check_object_read_access(obj, user)
 
+
 @register.filter
 def has_write_access(user, obj):
     """
-    Template filter to check if a user can edit/update/delete an object 
+    Template filter to check if a user can edit/update/delete an object
     (either CosinnusGroup or BaseTaggableObject).
     If a CosinnusGroup is supplied, this will check if the user is a group admin or a site admin.
     This factors in all aspects of superusers and group memberships.
     """
     return check_object_write_access(obj, user)
+
 
 @register.filter
 def can_create_objects_in(user, group):
@@ -138,12 +153,14 @@ def can_create_objects_in(user, group):
     """
     return check_group_create_objects_access(group, user)
 
+
 @register.filter
 def can_create_groups(user):
     """
     Template filter to check if a user can create CosinnusGroups.
     """
     return user.is_authenticated
+
 
 @register.filter
 def can_likefollowstar(user, obj):
@@ -152,12 +169,14 @@ def can_likefollowstar(user, obj):
     """
     return user.is_authenticated and check_object_likefollowstar_access(obj, user)
 
+
 @register.filter
 def is_superuser(user):
     """
     Template filter to check if a user has admin priviledges or is a portal admin.
     """
     return check_user_superuser(user)
+
 
 @register.filter
 def is_portal_manager(user):
@@ -166,12 +185,14 @@ def is_portal_manager(user):
     """
     return check_user_portal_manager(user)
 
+
 @register.filter
 def is_portal_admin(user):
     """
     Template filter to check if a user is a portal admin.
     """
     return check_user_portal_admin(user)
+
 
 @register.filter
 def is_portal_admin_of(user, portal):
@@ -180,6 +201,7 @@ def is_portal_admin_of(user, portal):
     """
     return check_user_portal_admin(user, portal=portal)
 
+
 @register.filter
 def is_member_in_forum(user):
     """
@@ -187,14 +209,17 @@ def is_member_in_forum(user):
     """
     forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     if forum_slug:
-        forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+        forum_group = get_object_or_None(
+            get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current()
+        )
         if forum_group:
             return is_group_member(user, forum_group)
     return False
 
+
 @register.filter
 def full_name(value):
-    """ Template filter to get a readable name for the given user.
+    """Template filter to get a readable name for the given user.
         Note: since the auth.User model's get_full_name function is overridden, this templatetag
             is not strictly neccessary and using `user.get_full_name` is equivalent to `user|full_name`.
 
@@ -206,19 +231,23 @@ def full_name(value):
     :return: either the full user name or the login user name, or (Deleted User) if the user is inactive.
     """
     from django.contrib.auth.models import AbstractBaseUser
+
     if isinstance(value, AbstractBaseUser):
         if hasattr(value, 'cosinnus_profile') and value.cosinnus_profile:
             return value.cosinnus_profile.get_full_name()
         return value.get_full_name()
-    return ""
+    return ''
+
 
 @register.filter
 def full_name_force(value):
-    """ Like ``full_name()``, this tag will always print the user name, even if the user is inactive """
+    """Like ``full_name()``, this tag will always print the user name, even if the user is inactive"""
     from django.contrib.auth.models import AbstractBaseUser
+
     if isinstance(value, AbstractBaseUser):
         return value.get_full_name(force=True) or value.get_username()
-    return ""
+    return ''
+
 
 @register.filter
 def profile_url(value):
@@ -232,54 +261,61 @@ def profile_url(value):
     :return: the url to the user's profile
     """
     from django.contrib.auth.models import AbstractBaseUser
+
     if isinstance(value, AbstractBaseUser):
         if not value.is_active:
-            return "#"
+            return '#'
         return reverse('cosinnus:profile-detail', kwargs={'username': value.username})
-    return ""
+    return ''
+
 
 @register.filter
 def url_target_blank(link):
-    """ Template filter that turns any html link into a target="_blank" link. """
+    """Template filter that turns any html link into a target="_blank" link."""
     return mark_safe(link.replace('<a ', '<a target="_blank" rel="nofollow noopener noreferrer" '))
 
 
 @register.filter
 def multiply(value, arg):
-    """Template filter to multiply two numbers """
+    """Template filter to multiply two numbers"""
     return value * arg
+
 
 @register.filter
 def add_num(value, arg):
-    """Template filter to add two numbers """
+    """Template filter to add two numbers"""
     return value + arg
+
 
 @register.filter
 def subtract(value, arg):
-    """Template filter to subtract two numbers """
+    """Template filter to subtract two numbers"""
     return value - arg
+
 
 @register.filter
 def intify(value):
-    """Template filter to cast a value to int
-    """
+    """Template filter to cast a value to int"""
     return int(value)
+
 
 @register.filter
 def stringify(value):
-    """Template filter to stringify a value """
+    """Template filter to stringify a value"""
     return str(value)
+
 
 @register.filter
 def contains(iterable, item):
-    """Template filter to check if an iterable contains an item, just like the `in` keyword """
+    """Template filter to check if an iterable contains an item, just like the `in` keyword"""
     return bool(iterable is not None and item in iterable)
+
 
 @register.filter
 def negate(value):
-    """Template filter that returns the negation of the passed value
-    """
+    """Template filter that returns the negation of the passed value"""
     return not value
+
 
 @register.simple_tag(takes_context=True)
 def cosinnus_group_url_path(context, group=None):
@@ -293,15 +329,18 @@ def cosinnus_group_url_path(context, group=None):
 def _appsmenu_apps_sort_key(app_name):
     try:
         return settings.COSINNUS_APPS_MENU_ORDER.index(app_name)
-    except Exception as e:
+    except Exception:
         return 999
 
+
 @register.simple_tag(takes_context=True)
-def cosinnus_menu(context, template="cosinnus/navbar.html"):
+def cosinnus_menu(context, template='cosinnus/navbar.html'):
     if 'request' not in context:
-        raise ImproperlyConfigured("Current request missing in rendering "
+        raise ImproperlyConfigured(
+            'Current request missing in rendering '
             "context. Include 'django.core.context_processors.request' in the "
-            "TEMPLATE_CONTEXT_PROCESSORS.")
+            'TEMPLATE_CONTEXT_PROCESSORS.'
+        )
 
     request = context['request']
     user = request.user
@@ -315,7 +354,9 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
             context['my_ideas_count'] = CosinnusIdea.objects.all_in_portal().filter(creator=user).count()
         if settings.COSINNUS_ORGANIZATIONS_ENABLED:
             # TODO: cache
-            context['my_organizations_count'] = CosinnusOrganization.objects.all_in_portal().filter(creator=user).count()
+            context['my_organizations_count'] = (
+                CosinnusOrganization.objects.all_in_portal().filter(creator=user).count()
+            )
 
     try:
         current_app = resolve(request.path).app_name.replace(':', '_')
@@ -331,23 +372,27 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
                 continue
             if group.is_app_deactivated(app):
                 continue
-            
+
             url = group_aware_reverse('cosinnus:%s:index' % name, kwargs={'group': group})
             if app == current_app:
                 active_app = app
                 active_app_name = name
-            apps.append({
-                'active': app == current_app,
-                'label': label,
-                'url': url,
-                'app': app,
-            })
-            
+            apps.append(
+                {
+                    'active': app == current_app,
+                    'label': label,
+                    'url': url,
+                    'app': app,
+                }
+            )
+
         apps = sorted(apps, key=lambda x: _appsmenu_apps_sort_key(x['app']))
-        context.update({
-            'apps': apps,
-            'app_nav': True,
-        })
+        context.update(
+            {
+                'apps': apps,
+                'app_nav': True,
+            }
+        )
         if group.type == CosinnusGroup.TYPE_PROJECT:
             context['appsmenu_group'] = group
         elif group.type == CosinnusGroup.TYPE_SOCIETY:
@@ -355,71 +400,86 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
     else:
         context['app_nav'] = False
 
-    context.update({
-        'active_app': active_app,
-        'active_app_name': active_app_name,
-    })
+    context.update(
+        {
+            'active_app': active_app,
+            'active_app_name': active_app_name,
+        }
+    )
     return render_to_string(template, context.flatten())
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request=None):
-    """ Renders the new style navbar """
+def cosinnus_menu_v2(context, template='cosinnus/v2/navbar/navbar.html', request=None):
+    """Renders the new style navbar"""
     if 'request' not in context:
-        raise ImproperlyConfigured("Current request missing in rendering "
+        raise ImproperlyConfigured(
+            'Current request missing in rendering '
             "context. Include 'django.core.context_processors.request' in the "
-            "TEMPLATE_CONTEXT_PROCESSORS.")
+            'TEMPLATE_CONTEXT_PROCESSORS.'
+        )
 
     request = context['request']
     user = request.user
     if user.is_authenticated:
-        from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
         from cosinnus.models.user_dashboard import DashboardItem
-        
+        from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
+
         def _escape_quotes(text):
             return text.replace('\\', '\\\\').replace('"', '\\"').replace("'", "\\'")
-        
+
         if settings.COSINNUS_IDEAS_ENABLED:
             # "My Ideas"
             my_ideas = CosinnusIdea.objects.all_in_portal().filter(creator=user).order_by(Lower('title'))
             context['my_ideas_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(idea) for idea in my_ideas]))
             # "Followed Ideas"
             idea_content_type = ContentType.objects.get_for_model(CosinnusIdea)
-            my_followed_ids = LikeObject.objects.filter(content_type=idea_content_type, user=user, followed=True).values_list('object_id', flat=True)
-            my_followed_ideas = CosinnusIdea.objects.all_in_portal().filter(id__in=my_followed_ids).order_by(Lower('title'))
+            my_followed_ids = LikeObject.objects.filter(
+                content_type=idea_content_type, user=user, followed=True
+            ).values_list('object_id', flat=True)
+            my_followed_ideas = (
+                CosinnusIdea.objects.all_in_portal().filter(id__in=my_followed_ids).order_by(Lower('title'))
+            )
             my_followed_ideas = my_followed_ideas.exclude(creator=user)
-            context['followed_ideas_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(idea) for idea in my_followed_ideas]))
+            context['followed_ideas_json_encoded'] = _escape_quotes(
+                _json.dumps([DashboardItem(idea) for idea in my_followed_ideas])
+            )
 
         if settings.COSINNUS_ORGANIZATIONS_ENABLED:
             # "My Organizations"
             my_organizations = CosinnusOrganization.objects.all_in_portal().filter(creator=user).order_by(Lower('name'))
-            context['my_organizations_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(organization) for organization in my_organizations]))
-
+            context['my_organizations_json_encoded'] = _escape_quotes(
+                _json.dumps([DashboardItem(organization) for organization in my_organizations])
+            )
 
         # "My Groups and Projects"
-        context['group_clusters_json_encoded'] = _escape_quotes(_json.dumps(MyGroupsClusteredMixin().get_group_clusters(user)))
+        context['group_clusters_json_encoded'] = _escape_quotes(
+            _json.dumps(MyGroupsClusteredMixin().get_group_clusters(user))
+        )
         # "Invitations"
         societies_invited = CosinnusSociety.objects.get_for_user_invited(request.user)
         projects_invited = CosinnusProject.objects.get_for_user_invited(request.user)
         conferences_invited = CosinnusConference.objects.get_for_user_invited(request.user)
-        
+
         groups_invited = [DashboardItem(group) for group in societies_invited]
         groups_invited += [DashboardItem(group) for group in projects_invited]
         # for conferences, only show invites if becoming a member is currently possible
         groups_invited += [
-            DashboardItem(conference) 
-            for conference in conferences_invited 
+            DashboardItem(conference)
+            for conference in conferences_invited
             if conference.membership_applications_possible
         ]
 
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
 
-        # conferences    
+        # conferences
         my_conferences = CosinnusConference.objects.get_for_user(request.user)
         context['my_conference_groups'] = my_conferences
-        context['my_conferences_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(conference) for conference in my_conferences]))
-        
+        context['my_conferences_json_encoded'] = _escape_quotes(
+            _json.dumps([DashboardItem(conference) for conference in my_conferences])
+        )
+
         membership_requests = []
         membership_requests_count = 0
         admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(request.user)
@@ -428,9 +488,14 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
             pending_ids = CosinnusGroupMembership.objects.get_pendings(group=admined_group)
             if len(pending_ids) > 0:
                 membership_request_item = DashboardItem()
-                membership_request_item['icon'] = 'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_SOCIETY else 'fa-group'
+                membership_request_item['icon'] = (
+                    'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_SOCIETY else 'fa-group'
+                )
                 membership_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
-                membership_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '?requests=1#requests'
+                membership_request_item['url'] = (
+                    group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group})
+                    + '?requests=1#requests'
+                )
                 membership_requests.append(membership_request_item)
                 membership_requests_count += len(pending_ids)
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
@@ -444,42 +509,52 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
             pending_ids = CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
             if len(pending_ids) > 0:
                 conference_application_request_item = DashboardItem()
-                conference_application_request_item['icon'] = 'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_CONFERENCE else 'fa-group'
+                conference_application_request_item['icon'] = (
+                    'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_CONFERENCE else 'fa-group'
+                )
                 conference_application_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
-                conference_application_request_item['url'] = group_aware_reverse('cosinnus:conference:participation-management-applications', kwargs={'group': admined_group})
+                conference_application_request_item['url'] = group_aware_reverse(
+                    'cosinnus:conference:participation-management-applications', kwargs={'group': admined_group}
+                )
                 conference_application_requests.append(conference_application_request_item)
                 conference_application_requests_count += len(pending_ids)
         context['conference_requests_json_encoded'] = _escape_quotes(_json.dumps(conference_application_requests))
         context['conference_requests_count'] = conference_application_requests_count
-        
+
         attending_events = []
         try:
-            from cosinnus_event.models import Event, EventAttendance # noqa
-            my_attendances_ids = EventAttendance.objects.filter(user=user, state__gt=EventAttendance.ATTENDANCE_NOT_GOING).values_list('event_id', flat=True)
+            from cosinnus_event.models import Event, EventAttendance  # noqa
+
+            my_attendances_ids = EventAttendance.objects.filter(
+                user=user, state__gt=EventAttendance.ATTENDANCE_NOT_GOING
+            ).values_list('event_id', flat=True)
             attending_events = Event.get_current_for_portal().filter(id__in=my_attendances_ids)
             attending_events = filter_tagged_object_queryset_for_user(attending_events, user)
         except:
             if settings.DEBUG:
                 raise
-        context['attending_events_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(event) for event in attending_events]))
-        
+        context['attending_events_json_encoded'] = _escape_quotes(
+            _json.dumps([DashboardItem(event) for event in attending_events])
+        )
+
         # TODO cache the dumped JSON strings?
-        
+
     return render_to_string(template, context.flatten(), request=request)
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_footer_v2(context, template="cosinnus/v2/footer.html", request=None):
+def cosinnus_footer_v2(context, template='cosinnus/v2/footer.html', request=None):
     return render_to_string(template, context.flatten(), request=request)
 
 
 @register.simple_tag(takes_context=True)
 def cosinnus_render_widget(context, widget):
-    """ Renders a given widget config and passes all context on to its template """
+    """Renders a given widget config and passes all context on to its template"""
     flat = {}
     for d in context.dicts:
         flat.update(d)
     return mark_safe(widget.render(**flat))
+
 
 @register.simple_tag(takes_context=True)
 def cosinnus_render_attached_objects(context, source, filter=None, skipImages=True, v2Style=False):
@@ -497,7 +572,7 @@ def cosinnus_render_attached_objects(context, source, filter=None, skipImages=Tr
     """
     attached_objects = source.attached_objects.all()
     allowed_types = filter.replace(' ', '').split(',') if filter else []
-    
+
     typed_objects = defaultdict(list)
     for att in attached_objects:
         attobj = att.target_object
@@ -517,9 +592,7 @@ def cosinnus_render_attached_objects(context, source, filter=None, skipImages=Tr
             # pass the list to that manager and expect a rendered html string
             rendered_output.append(Renderer.render(context, objects, v2Style=v2Style, request=context['request']))
         elif settings.DEBUG:
-            rendered_output.append(_('<i>Renderer for %(model_name)s not found!</i>') % {
-                'model_name': model_name
-            })
+            rendered_output.append(_('<i>Renderer for %(model_name)s not found!</i>') % {'model_name': model_name})
 
     return mark_safe(''.join(rendered_output))
 
@@ -534,12 +607,12 @@ def cosinnus_render_single_object(context, object, *args, **kwargs):
     :param object: the source object to render
     """
     NAMED_ARGS = ['hide_group_name', 'no_space']
-    
+
     model_name = object.__class__.__module__.split('.')[0] + '.' + object.__class__.__name__
-    
+
     # find manager object for attached object type
     Renderer = attached_object_registry.get(model_name)  # Renderer is a class
-    
+
     rendered_output = ''
     if Renderer:
         for arg in NAMED_ARGS:
@@ -548,19 +621,14 @@ def cosinnus_render_single_object(context, object, *args, **kwargs):
         # pass the list to that manager and expect a rendered html string
         rendered_output = Renderer.render_single(context, object)
     elif settings.DEBUG:
-        rendered_output = _('<i>Renderer for %(model_name)s not found!</i>') % {
-            'model_name': model_name
-        }
+        rendered_output = _('<i>Renderer for %(model_name)s not found!</i>') % {'model_name': model_name}
 
     return rendered_output
 
 
 @register.inclusion_tag('cosinnus/autocomplete.html')
 def cosinnus_autocomplete(field, objects):
-    return {
-        'field': field,
-        'objects': objects
-    }
+    return {'field': field, 'objects': objects}
 
 
 class URLNodeOptional(URLNode):
@@ -571,6 +639,7 @@ class URLNodeOptional(URLNode):
 
     .. seealso:: http://code.djangoproject.com/ticket/9176
     """
+
     def render(self, context):
         self.kwargs = {k: v for k, v in six.iteritems(self.kwargs) if v.resolve(context)}
         return super(URLNodeOptional, self).render(context)
@@ -584,17 +653,17 @@ def url_optional(parser, token):
     in Django core where it belongs.
     """
     urlnode = url_tag(parser, token)
-    return URLNodeOptional(urlnode.view_name, urlnode.args, urlnode.kwargs,
-        urlnode.asvar)
-    
+    return URLNodeOptional(urlnode.view_name, urlnode.args, urlnode.kwargs, urlnode.asvar)
+
+
 @register.tag(name='captureas')
 def do_captureas(parser, token):
     """
-        Captures block content into template variables.
-        Source: https://djangosnippets.org/snippets/545/
-        Usage:
-            {% captureas label %}{% trans "Posteingang" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}{% endcaptureas %}
-            {% include "cosinnus/leftnav_button.html" label=label  %}
+    Captures block content into template variables.
+    Source: https://djangosnippets.org/snippets/545/
+    Usage:
+        {% captureas label %}{% trans "Posteingang" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" label=label  %}
     """
     try:
         tag_name, args = token.contents.split(None, 1)
@@ -613,8 +682,8 @@ class CaptureasNode(template.Node):
     def render(self, context):
         output = self.nodelist.render(context)
         context[self.varname] = output
-        return ""
-    
+        return ''
+
 
 @register.simple_tag(takes_context=True)
 def strip_params(context, qs, *keys):
@@ -626,6 +695,7 @@ def strip_params(context, qs, *keys):
         parsed = dict(parse_qsl(qs))
     elif isinstance(qs, HttpRequest):
         from copy import copy
+
         parsed = copy(qs.GET.dict())
     else:
         parsed = {}
@@ -656,18 +726,19 @@ def cosinnus_setting(user, setting):
     Retrieves a user setting's value or an empty string if the setting does not exist yet.
     """
     from django.contrib.auth.models import AbstractBaseUser
+
     if isinstance(user, AbstractBaseUser):
         value = user.cosinnus_profile.settings.get(setting, None)
         return value
-    raise ImproperlyConfigured("User setting tag got passed a non-user argument.")
-    
+    raise ImproperlyConfigured('User setting tag got passed a non-user argument.')
+
 
 @register.simple_tag(takes_context=True)
 def cosinnus_user_token(context, token_name, request=None):
     """
-    Returns URL params (`user=999&token=1234567`) for the current user and a 
-    permanent token specific to the token_name. If the user does not have a token 
-    for that token_name yet, one will be generated. 
+    Returns URL params (`user=999&token=1234567`) for the current user and a
+    permanent token specific to the token_name. If the user does not have a token
+    for that token_name yet, one will be generated.
     """
     if not request and 'request' in context:
         request = context['request']
@@ -680,7 +751,7 @@ def cosinnus_user_token(context, token_name, request=None):
 @register.simple_tag(takes_context=True)
 def cosinnus_cross_portal_token(context, portal):
     """
-    Returns a token that will force the URL group resolution 
+    Returns a token that will force the URL group resolution
     (``cosinnus.core.decorators.views.get_group_for_request()``) into another portal on POST requests,
     while still being able to post to the domain of the current portal.
     This is very useful to avoid CSRF failures when posting i.e. comments on Notes from another
@@ -694,81 +765,87 @@ def cosinnus_cross_portal_token(context, portal):
 
 
 def group_aware_url_name(view_name, group_or_group_slug, portal_id=None):
-    """ Modifies a URL name that points to a URL within a CosinnusGroup so that the URL
-        points to the correct sub-url of the type of the CosinnusGroup Model for the given
-        group slug.
-        
-        @return: A modified URL view name
+    """Modifies a URL name that points to a URL within a CosinnusGroup so that the URL
+    points to the correct sub-url of the type of the CosinnusGroup Model for the given
+    group slug.
+
+    @return: A modified URL view name
     """
     if not group_or_group_slug:
         return ''
-    
-    if not isinstance(group_or_group_slug, six.string_types) and \
-        (type(group_or_group_slug) is get_cosinnus_group_model() or issubclass(group_or_group_slug.__class__, get_cosinnus_group_model())):
+
+    if not isinstance(group_or_group_slug, six.string_types) and (
+        type(group_or_group_slug) is get_cosinnus_group_model()
+        or issubclass(group_or_group_slug.__class__, get_cosinnus_group_model())
+    ):
         group_type = group_or_group_slug.type
     else:
         # retrieve group type cached
-        group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_or_group_slug))
+        group_type = cache.get(
+            CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_or_group_slug)
+        )
         if group_type is None:
             group_type = get_cosinnus_group_model().objects.get(slug=group_or_group_slug, portal_id=portal_id).type
-            cache.set(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_or_group_slug), group_type,
-                      31536000) # 1 year cache
-        
+            cache.set(
+                CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY
+                % (CosinnusPortal.get_current().id, group_or_group_slug),
+                group_type,
+                31536000,
+            )  # 1 year cache
+
     # retrieve that type's prefix and add to URL viewname
     prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
-    if ":" in view_name:
-        view_name = (":%s" % prefix).join(view_name.rsplit(":", 1))
+    if ':' in view_name:
+        view_name = (':%s' % prefix).join(view_name.rsplit(':', 1))
     else:
         view_name = prefix + view_name
-    
+
     return view_name
 
 
-
 class GroupURLNode(URLNode):
-    """ This URL node will adjust its view name to the prefix-type of the CosinnusGroup type. 
-        Group type is found through the group slug, and looked up in the group-slug -> group-type cache.
-        Group types never change, so this cache won't need smart resetting.
-        ~Should~ be thread-safe.
-        
-        :param group: The group slug for the group's url you are targeting
-        :param portal_id: (optional) can override the portal used.
-        :ignoreErrors: (optional) if set to True, this tag will return silently '' instead of throwing a 
-            DoesNotExist exception when the targeted group is not found
+    """This URL node will adjust its view name to the prefix-type of the CosinnusGroup type.
+    Group type is found through the group slug, and looked up in the group-slug -> group-type cache.
+    Group types never change, so this cache won't need smart resetting.
+    ~Should~ be thread-safe.
+
+    :param group: The group slug for the group's url you are targeting
+    :param portal_id: (optional) can override the portal used.
+    :ignoreErrors: (optional) if set to True, this tag will return silently '' instead of throwing a
+        DoesNotExist exception when the targeted group is not found
     """
 
     def render(self, context):
-        
         if not hasattr(self, 'base_view_name'):
             self.base_view_name = copy(self.view_name)
         else:
             self.view_name = copy(self.base_view_name)
         view_name = self.view_name.resolve(context)
-        
+
         ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.pop('ignoreErrors').resolve(context) or False
-        
-        group_arg = self.kwargs["group"].resolve(context)
-        group_slug = ""
+
+        group_arg = self.kwargs['group'].resolve(context)
+        group_slug = ''
         foreign_portal = None
         portal_id = getattr(self, '_portal_id', None)
         force_local_domain = getattr(self, '_force_local_domain', False)
-        
+
         try:
             # the portal id if given to the tag can override the group's portal
-            self._portal_id = self.kwargs["portal_id"].resolve(context)
+            self._portal_id = self.kwargs['portal_id'].resolve(context)
             portal_id = self._portal_id
-            del self.kwargs["portal_id"]
+            del self.kwargs['portal_id']
         except KeyError:
             pass
-        
+
         try:
             # this will retain the local domain. useful for avoiding POSTs to cross-portal domains and CSRF-failing
-            self._force_local_domain = bool(self.kwargs["force_local_domain"].resolve(context))
+            self._force_local_domain = bool(self.kwargs['force_local_domain'].resolve(context))
             force_local_domain = self._force_local_domain
-            del self.kwargs["force_local_domain"]
+            del self.kwargs['force_local_domain']
         except KeyError:
             pass
-        
+
         patched_group_slug_arg = None
         actual_group = None
         # we accept a group object or a group slug
@@ -776,13 +853,13 @@ class GroupURLNode(URLNode):
             actual_group = group_arg
             # determine the portal from the group
             group_slug = group_arg.slug
-            
+
             # if not explicitly given, learn the portal id from the group
             if not portal_id:
                 portal_id = group_arg.portal_id
                 if not portal_id == CosinnusPortal.get_current().id:
                     foreign_portal = group_arg.portal
-                    
+
             # we patch the variable given to the tag here, to restore the regular slug-passed-url-resolver functionality
             patched_group_slug_arg = deepcopy(self.kwargs['group'])
             patched_group_slug_arg.token += '.slug'
@@ -792,13 +869,18 @@ class GroupURLNode(URLNode):
             if ignoreErrors:
                 return ''
             if not settings.DEBUG:
-                logger.error('TemplateSyntaxError: `group_url` tag requires a group kwarg that is a group or a slug! Returning empty URL.', extra={'group_arg': group_arg})
+                logger.error(
+                    'TemplateSyntaxError: `group_url` tag requires a group kwarg that is a group or a slug! Returning empty URL.',
+                    extra={'group_arg': group_arg},
+                )
                 return ''
-            raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? (You passed: 'group=%s')" % group_arg)
+            raise TemplateSyntaxError(
+                "'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? (You passed: 'group=%s')"
+                % group_arg
+            )
         else:
             group_slug = group_arg
-        
-            
+
         # make sure we have the foreign portal. we might not have yet retrieved it if we had a portal id explicitly set
         if portal_id and not portal_id == CosinnusPortal.get_current().id and not foreign_portal:
             foreign_portal = CosinnusPortal.objects.get(id=portal_id)
@@ -810,10 +892,13 @@ class GroupURLNode(URLNode):
                 # ignore errors if the group doesn't exist if it is inactive (return empty link)
                 if ignoreErrors or isinstance(group_arg, six.string_types) or (not group_arg.is_active):
                     return ''
-                
-                logger.error(u'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s' % (str(group_arg), view_name, group_slug, portal_id))
+
+                logger.error(
+                    'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s'
+                    % (str(group_arg), view_name, group_slug, portal_id)
+                )
                 raise
-            
+
             self.view_name.var = view_name
             self.view_name.token = "'%s'" % view_name
 
@@ -821,20 +906,20 @@ class GroupURLNode(URLNode):
             # super().render() call.
             self.view_name.is_var = False
 
-            # to retain django core code for rendering, we patch this node to look like a proper url node, 
+            # to retain django core code for rendering, we patch this node to look like a proper url node,
             # with a slug argument.
-            # and then restore it later, so that the node object can be reused for other group arguments 
+            # and then restore it later, so that the node object can be reused for other group arguments
             # if we didn't do that, this group node's group argument would have been replaced already, and
             # lost to other elements that use the group_url tag in a for-loop, for example
             # (we cannot store anything on the object itself, down that road madness lies)
             if patched_group_slug_arg:
                 self.kwargs['group'], patched_group_slug_arg = patched_group_slug_arg, self.kwargs['group']
-                
+
             ret_url = super(GroupURLNode, self).render(context)
             # swap back the patched arg for the original
             if patched_group_slug_arg:
                 self.kwargs['group'] = patched_group_slug_arg
-            
+
             if foreign_portal and not force_local_domain:
                 domain = get_domain_for_portal(foreign_portal)
                 # attach to either output or given "as" variable
@@ -842,14 +927,14 @@ class GroupURLNode(URLNode):
                     context[self.asvar] = domain + context[self.asvar]
                 else:
                     ret_url = domain + ret_url
-            
+
             return ret_url
         except:
             if ignoreErrors:
                 return ''
             else:
                 raise
-        
+
 
 @register.tag
 def group_url(parser, token):
@@ -857,15 +942,15 @@ def group_url(parser, token):
     A proxy wrapper for the Django 'url' tag for URLs pointing to pages within a CosinnusGroup.
     This tag is aware of which type of group is being pointed to and will automatically chose
     the correct URL path specific for the group type, as configured with group_model_registry.py.
-    
+
     Otherwise this uses the django 'url' tag definition.
     """
-    
+
     urlnode = url(parser, token)
-    
-    if not "group" in urlnode.kwargs:
+
+    if 'group' not in urlnode.kwargs:
         raise TemplateSyntaxError("'group_url' tag requires a group kwarg!")
-    
+
     return GroupURLNode(urlnode.view_name, urlnode.args, urlnode.kwargs, urlnode.asvar)
 
 
@@ -875,7 +960,7 @@ def cosinnus_report_object_action(context, obj=None, instantly_trigger=False):
         return ''
     if not obj:
         return ''
-    
+
     app_label = obj.__class__.__module__.split('.')[0]
     model_name = obj.__class__.__name__
     model_str = '%s.%s' % (app_label, model_name)
@@ -885,20 +970,20 @@ def cosinnus_report_object_action(context, obj=None, instantly_trigger=False):
         title = getattr(obj, 'title', getattr(obj, 'name', None))
     if not title:
         title = force_str(obj)
-    
+
     # mark_safe doesn't really seem to work here
     title = escape(title.replace('"', "'"))
     ret = '$.cosinnus.Feedback.cosinnus_report_object("%s", %d, "%s");' % (model_str, obj.id, title)
     if not instantly_trigger:
-         ret = ' onclick=\'%s\' ' % ret
+        ret = " onclick='%s' " % ret
     return mark_safe(ret)
 
 
 @register.simple_tag()
 def localized_js(path):
-    """ Acts like the {% static ... %} tag, but returns a javascript file
-        from the localized folder for the current language. 
-        We add a parameter so the client caches each language seperately """
+    """Acts like the {% static ... %} tag, but returns a javascript file
+    from the localized folder for the current language.
+    We add a parameter so the client caches each language seperately"""
     lang = get_language()
     return static('js/locale/%s/%s' % (lang, path)) + '?lang=%s' % lang
 
@@ -912,56 +997,78 @@ def addstr(arg1, arg2):
 
 @register.simple_tag()
 def is_integrated_portal():
-    """ Returns True if this portal is running in integrated mode for user auth """
+    """Returns True if this portal is running in integrated mode for user auth"""
     return getattr(settings, 'COSINNUS_IS_INTEGRATED_PORTAL', False)
 
 
 @register.simple_tag()
 def is_sso_portal():
-    """ Returns True if this portal is running in single external sign-on only mode for user auth """
+    """Returns True if this portal is running in single external sign-on only mode for user auth"""
     return getattr(settings, 'COSINNUS_IS_SSO_PORTAL', False)
 
 
 @register.filter
 def textfield(text, arg=''):
-    """ Renders any object's bodytext with markdown, and safely with escaping, but retains linebreaks 
-        and formats URLs as target="_blank" links.
-        Note: This will wrap any text in <p> tags! It may also return multiple paragraphs as sibling. 
-        @param arg: If supplied "simple", will purge all <p> tags. """
-        
+    """Renders any object's bodytext with markdown, and safely with escaping, but retains linebreaks
+    and formats URLs as target="_blank" links.
+    Note: This will wrap any text in <p> tags! It may also return multiple paragraphs as sibling.
+    @param arg: If supplied "simple", will purge all <p> tags."""
+
     if not text:
         return ''
     text = force_str(text)
-    
-    
+
     # shorten and wrap un-linked email addresses in markdown links
     for m in reversed([it for it in BETTER_EMAIL_RE.finditer(text)]):
-        if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.end() == len(text) or text[m.end():m.end()+2] != '](')\
-                and (text[m.start()-9:m.start()] != '](mailto:'):
+        if (
+            (m.start() == 0 or text[m.start() - 2 : m.start()] != '](')
+            and (m.end() == len(text) or text[m.end() : m.end() + 2] != '](')
+            and (text[m.start() - 9 : m.start()] != '](mailto:')
+        ):
             short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
-            text = text[:m.start()] + ('[%s](mailto:%s)' % (short, m.group())) + text[m.end():] 
-    
+            text = text[: m.start()] + ('[%s](mailto:%s)' % (short, m.group())) + text[m.end() :]
+
     # shorten and wrap un-linked URLs in markdown links unless they are part of an email
     for m in reversed([it for it in BETTER_URL_RE.finditer(text)]):
-        if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.start() == 0 or text[m.start()-1] != '@') and (m.end() == len(text) or text[m.end():m.end()+2] != ']('):
+        if (
+            (m.start() == 0 or text[m.start() - 2 : m.start()] != '](')
+            and (m.start() == 0 or text[m.start() - 1] != '@')
+            and (m.end() == len(text) or text[m.end() : m.end() + 2] != '](')
+        ):
             short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
-            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'https://' if not short.startswith('http') else '', m.group())) + text[m.end():]
-    
-    
+            text = (
+                text[: m.start()]
+                + ('[%s](%s%s)' % (short, 'https://' if not short.startswith('http') else '', m.group()))
+                + text[m.end() :]
+            )
+
     text = escape(text.strip())
-    
+
     # see https://github.com/trentm/python-markdown2/wiki/Extras for option parameters!
     # 'code-friendly-strict' is added on the wechange fork and means that intra-word
     # asterisks like `Benutzer*innen` will not be italicized
-    extras = {'strike': {}, 'break-on-newline': {}, 'cuddled-lists': {}, 'code-friendly-strict': {},  'nofollow': {}, 'target-blank-links': {}}
+    extras = {
+        'strike': {},
+        'break-on-newline': {},
+        'cuddled-lists': {},
+        'code-friendly-strict': {},
+        'nofollow': {},
+        'target-blank-links': {},
+    }
     try:
         text = markdown2.markdown(text, extras=extras)
     except Exception as e:
-        logger.warning('Markdown2 crashed attempting to parse a given text with exception: %s' % e, extra={'faulty_text': text, 'exception': e})
+        logger.warning(
+            'Markdown2 crashed attempting to parse a given text with exception: %s' % e,
+            extra={'faulty_text': text, 'exception': e},
+        )
         try:
             text = linebreaksbr(text)
         except Exception as e2:
-            logger.warning('Even linebreaksbr crashed attempting to parse a given text with exception: %s' % e2, extra={'faulty_text': text, 'exception': e2})
+            logger.warning(
+                'Even linebreaksbr crashed attempting to parse a given text with exception: %s' % e2,
+                extra={'faulty_text': text, 'exception': e2},
+            )
 
     # replace external images with links
     image_re = r'<img src="(.*?)" alt="\s*(.*?)" />'
@@ -969,16 +1076,19 @@ def textfield(text, arg=''):
         image_url = m.group(1)
         image_domain = urlparse(image_url).hostname
         if (
-                image_domain and image_domain != settings.COSINNUS_PORTAL_URL
-                and not image_domain.endswith(f'.{settings.COSINNUS_PORTAL_URL}')
+            image_domain
+            and image_domain != settings.COSINNUS_PORTAL_URL
+            and not image_domain.endswith(f'.{settings.COSINNUS_PORTAL_URL}')
         ):
             image_name = m.group(2)
             if image_name:
                 link_label = _('Click here to view external image "%(image_name)s"') % {'image_name': image_name}
             else:
                 link_label = _('Click here to view external image')
-            image_link = f'<a href="{image_url}" target="_blank">{link_label}&nbsp;<i class="fa fa-external-link"></i></a>'
-            text = text[:m.start()] + image_link + text[m.end():]
+            image_link = (
+                f'<a href="{image_url}" target="_blank">{link_label}&nbsp;<i class="fa fa-external-link"></i></a>'
+            )
+            text = text[: m.start()] + image_link + text[m.end() :]
 
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
@@ -987,7 +1097,7 @@ def textfield(text, arg=''):
 
 @register.filter
 def linebreaksoneline(text, arg=''):
-    """ Removes all linebreaks so the given text becomes a single line. """
+    """Removes all linebreaks so the given text becomes a single line."""
     if not text:
         return ''
     text = normalize_newlines(text).replace('\n', ' ')
@@ -996,13 +1106,13 @@ def linebreaksoneline(text, arg=''):
 
 @register.filter
 def add_domain(url):
-    """ Adds the current domain to a given URL, unless it already starts with http """
+    """Adds the current domain to a given URL, unless it already starts with http"""
     return url if url.startswith('http') else CosinnusPortal.get_current().get_domain() + url
 
 
 @register.filter
 def filter_domain(url):
-    """ Returns only the domain part of the given URL, with leading "https" but no path """
+    """Returns only the domain part of the given URL, with leading "https" but no path"""
     try:
         url = 'https://' + url.split('/')[2]
     except:
@@ -1011,12 +1121,12 @@ def filter_domain(url):
 
 
 @register.filter
-def tag_group_filtered(tag_object, group="None"):
+def tag_group_filtered(tag_object, group='None'):
     """
     Filters a media_tag for its group to not show attributes that are inherited from the group.
     Does no filtering if no group is supplied.
     """
-    if tag_object and group and group != "None":
+    if tag_object and group and group != 'None':
         group_tag = group.media_tag
         tag_object = copy(tag_object)
         # filter tags
@@ -1025,7 +1135,7 @@ def tag_group_filtered(tag_object, group="None"):
         # filter location
         if tag_object.location == group_tag.location:
             tag_object.location = None
-            
+
         """ Disabled for now - we want topics to always be displayed 
         # filter topics
         if tag_object.topics:
@@ -1036,43 +1146,47 @@ def tag_group_filtered(tag_object, group="None"):
     return tag_object
 
 
-
 @register.filter
 def richtext_or_stream(value):
-    """ A safer alternative to the wagtail filter |richtext, which will render a richtext if it got passed one,
-        or just render a streamfield with its innate function if it is one such. """
+    """A safer alternative to the wagtail filter |richtext, which will render a richtext if it got passed one,
+    or just render a streamfield with its innate function if it is one such."""
     if value and isinstance(value, six.string_types):
         return richtext(value)
     return value
 
+
 @register.filter
 def select_column_class(column_string, which_column):
-    """ Returns the ``which_column``'th item of a bootstrap-column string like '6-4-4' """
+    """Returns the ``which_column``'th item of a bootstrap-column string like '6-4-4'"""
     return column_string.split('-')[int(which_column)]
+
 
 @register.filter
 def add_uuid(value):
-    """ Returns a the given value with an appended uuid. """
+    """Returns a the given value with an appended uuid."""
     return '%s%d' % (value, uuid1())
+
 
 @register.filter
 def dict_lookup(dictionary, key):
-    """ Returns the value for a given key from a given dictionary.
-        If not found, returns '' """
+    """Returns the value for a given key from a given dictionary.
+    If not found, returns ''"""
     if not isinstance(dictionary, dict):
         return ''
     return dictionary.get(key, '')
 
+
 @register.filter
 def insert_current_language(input_string, following_string):
-    """ Appends to the given string the language code of the current locale """
+    """Appends to the given string the language code of the current locale"""
     lang = get_language()
     return (input_string or '') + lang + following_string
 
+
 @register.filter
 def is_app_deactivated(group, app_name):
-    """ Renders a textfield's text safely with escaping, but retains linebreaks 
-        and formats URLs as target="_blank" links. """
+    """Renders a textfield's text safely with escaping, but retains linebreaks
+    and formats URLs as target="_blank" links."""
     ret = False
     try:
         ret = group.is_app_deactivated(app_name)
@@ -1080,40 +1194,46 @@ def is_app_deactivated(group, app_name):
         pass
     return ret
 
+
 @register.filter
 def querydictlist(querydict, key):
-    """ Returns the ``getlist`` item of a querydict """
-    if not querydict or not key or not key in querydict:
+    """Returns the ``getlist`` item of a querydict"""
+    if not querydict or not key or key not in querydict:
         return []
     return querydict.getlist(key)
 
+
 @register.filter
 def makelist(splitstring):
-    """ Makes an impromptu list from comma-seperated values of a string
-        to get around not being able to form lists in templates """
+    """Makes an impromptu list from comma-seperated values of a string
+    to get around not being able to form lists in templates"""
     return splitstring.split(',')
+
 
 @register.filter
 def json(obj):
-    """ Returns the given object as JSON """
+    """Returns the given object as JSON"""
     if isinstance(obj, QuerySet):
         return serialize('json', obj)
     return _json.dumps(obj)
 
+
 @register.filter
 def pretty_json(obj):
-    """ Prints nicely readable JSON. Recommended to use a <pre> tag with this. """
+    """Prints nicely readable JSON. Recommended to use a <pre> tag with this."""
     return _json.dumps(obj, indent=4)
+
 
 @register.filter
 def get_membership_portals(user):
-    """ Returns all portals a user is a member of """
+    """Returns all portals a user is a member of"""
     return CosinnusPortal.objects.filter(id__in=user.cosinnus_portal_memberships.values_list('group_id', flat=True))
+
 
 @register.filter
 def truncatenumber(value, max=99):
-    """ Shortens large numbers to i.e. "99+"
-    Returns a string of the given number or "<max>+" if value > max """
+    """Shortens large numbers to i.e. "99+"
+    Returns a string of the given number or "<max>+" if value > max"""
     try:
         intval = int(value)
     except:
@@ -1122,6 +1242,7 @@ def truncatenumber(value, max=99):
         return '%d+' % max
     return force_str(intval)
 
+
 @register.simple_tag(takes_context=True)
 def debug_context(context, obj=None):
     if not settings.DEBUG:
@@ -1129,82 +1250,97 @@ def debug_context(context, obj=None):
     else:
         context = context
         logger.warn(context)
-        import ipdb; ipdb.set_trace();
+        import ipdb
+
+        ipdb.set_trace()
 
 
 @register.filter
 def debugthis(obj):
-    """ Debug-inspects a template element """
+    """Debug-inspects a template element"""
     if not settings.DEBUG:
         return ''
     else:
         obj = obj
-        import ipdb; ipdb.set_trace();
+        import ipdb
+
+        ipdb.set_trace()
 
 
 @register.filter
 def printthis(obj):
-    """ Debug-inspects a template element """
+    """Debug-inspects a template element"""
     if settings.DEBUG:
-        print(">> printing")
+        print('>> printing')
         print(obj)
     return obj
 
 
 @register.simple_tag()
 def render_cosinnus_topics(topics, seperator_word=None):
-    """ Renders a list of media-tag Topics as html <a> tags linking to the topics search page, 
-        with proper labels and seperators 
-        @param topics: A single int/str number or list or comma-seperated list of int/str numbers that are IDs 
-                        in ``BaseTagObject.TOPIC_CHOICES``
+    """Renders a list of media-tag Topics as html <a> tags linking to the topics search page,
+    with proper labels and seperators
+    @param topics: A single int/str number or list or comma-seperated list of int/str numbers that are IDs
+                    in ``BaseTagObject.TOPIC_CHOICES``
     """
     if not topics:
         return ''
     choices_dict = dict(BaseTagObject.TOPIC_CHOICES)
-    
+
     topics = ensure_list_of_ints(topics)
-    
+
     template = """<a href="%(url)s?topics=%(topic)d">%(label)s</a>"""
     search_url = reverse('cosinnus:search')
     seperator_word = ' %s ' % seperator_word if seperator_word else ', '
-    
-    rendered_topics = [template % {
+
+    rendered_topics = [
+        template
+        % {
             'url': search_url,
             'topic': topic,
             'label': choices_dict[topic],
-        } for topic in topics]
-    
+        }
+        for topic in topics
+    ]
+
     return mark_safe(seperator_word.join(rendered_topics))
-    
+
 
 @register.simple_tag()
 def render_cosinnus_topics_field(escape_html=None):
-    topics = CommaSeparatedSelect2MultipleChoiceField(choices=TAG_OBJECT.TOPIC_CHOICES, required=False, 
-            widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}))
+    topics = CommaSeparatedSelect2MultipleChoiceField(
+        choices=TAG_OBJECT.TOPIC_CHOICES,
+        required=False,
+        widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}),
+    )
     topics_field_name = 'topics'
     topics_field_value = None
-    topics_html = topics.widget.render(topics_field_name, topics_field_value, {'id': 'id_topics', 'placeholder': _('Topics')})
+    topics_html = topics.widget.render(
+        topics_field_name, topics_field_value, {'id': 'id_topics', 'placeholder': _('Topics')}
+    )
     topics_html = topics_html.replace('\r', '').replace('\n', '')
     if escape_html:
         topics_html = escape(topics_html)
     return topics_html
-    
+
 
 @register.simple_tag()
 def render_cosinnus_topics_json():
-    """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
+    """Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...}"""
     topic_choices = dict([(top_id, force_str(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return mark_safe(_json.dumps(topic_choices))
 
+
 @register.simple_tag()
 def render_cosinnus_text_topics_json():
-    """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
+    """Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...}"""
     text_topic_choices = dict([(top.id, force_str(top.name)) for top in CosinnusTopicCategory.objects.all()])
     return mark_safe(_json.dumps(text_topic_choices))
 
+
 @register.simple_tag()
 def render_managed_tags_json():
-    """ Returns all managed tags as JSON array of objects"""
+    """Returns all managed tags as JSON array of objects"""
     all_managed_tags = CosinnusManagedTag.objects.all_in_portal()
     if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS:
         type_ids = settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS
@@ -1220,7 +1356,8 @@ def render_managed_tags_json():
             'name': tag.name,
             'description': tag.description,
             'url': tag.url,
-        } for tag in all_managed_tags
+        }
+        for tag in all_managed_tags
     ]
     return mark_safe(_json.dumps(managed_tags_json))
 
@@ -1228,41 +1365,38 @@ def render_managed_tags_json():
 @register.simple_tag()
 def managed_tags_for_user(user):
     if hasattr(user, 'cosinnus_profile'):
-        profile_type = ContentType.objects.get(
-                        app_label='cosinnus', model='userprofile')
+        profile_type = ContentType.objects.get(app_label='cosinnus', model='userprofile')
         profile = user.cosinnus_profile
         assignments = CosinnusManagedTagAssignment.objects.filter(
-                        content_type=profile_type.id,
-                        object_id=profile.id).values_list(
-                            'managed_tag__slug', flat=True)
+            content_type=profile_type.id, object_id=profile.id
+        ).values_list('managed_tag__slug', flat=True)
 
         if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
-            predefined_slugs = \
-                settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
-            assignments = assignments.filter(
-                managed_tag__slug__in=predefined_slugs)
+            predefined_slugs = settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
+            assignments = assignments.filter(managed_tag__slug__in=predefined_slugs)
 
-        managed_tags = CosinnusManagedTag.objects.filter(
-            slug__in=assignments).distinct()
+        managed_tags = CosinnusManagedTag.objects.filter(slug__in=assignments).distinct()
         return managed_tags
 
 
 @register.simple_tag()
 def get_non_cms_root_url():
-    """ Returns the root URL for this portal that isn't the cms page """
+    """Returns the root URL for this portal that isn't the cms page"""
     return _get_non_cms_root_url()
+
 
 @register.filter
 def app_url_for_model(obj):
-    """ Returns the base URL fragment for the given cosinnus model's app.
-        Eg for an Etherpad, return 'cosinnus:etherpad' """
+    """Returns the base URL fragment for the given cosinnus model's app.
+    Eg for an Etherpad, return 'cosinnus:etherpad'"""
     if obj:
         return obj.__class__.__module__.split('.')[0].replace('_', ':')
     return ''
 
+
 @register.filter
 def has_accepted_portal_tos(user):
-    """ Checks if the user has accepted this portal's ToS """
+    """Checks if the user has accepted this portal's ToS"""
     if not user:
         return False
     return check_user_has_accepted_portal_tos(user)
@@ -1270,39 +1404,39 @@ def has_accepted_portal_tos(user):
 
 @register.simple_tag(takes_context=True)
 def render_announcement_html(context, announcement):
-    """ Renders the raw_html for a UserDashboardAnnouncement """
-    return render_embedded_html_with_variables(context, announcement.raw_html, variables={
-        'announcement_id': announcement.id
-    })
+    """Renders the raw_html for a UserDashboardAnnouncement"""
+    return render_embedded_html_with_variables(
+        context, announcement.raw_html, variables={'announcement_id': announcement.id}
+    )
 
 
 @register.simple_tag(takes_context=True)
 def render_embedded_html_with_variables(context, html, variables=None):
-    """ Renders any raw HTML with some request context variables """
+    """Renders any raw HTML with some request context variables"""
     return render_html_with_variables(context.request.user, html, variables=variables)
 
 
 class RenderContextIdMixin(object):
-
     def render(self, context, **kwargs):
         rendered_text = super(RenderContextIdMixin, self).render(context, **kwargs)
 
         request = context.get('request', None)
-        ids_enabled = bool(getattr(settings, 'COSINNUS_SHOW_TRANSLATED_CONTEXT_IDS', False) or \
-                           (request and request.GET.get('show_translation_ids', None) == '1'))
+        ids_enabled = bool(
+            getattr(settings, 'COSINNUS_SHOW_TRANSLATED_CONTEXT_IDS', False)
+            or (request and request.GET.get('show_translation_ids', None) == '1')
+        )
         if ids_enabled and self.message_context:
             message_context = self.message_context.resolve(context).strip()
             if message_context.startswith('(') and message_context.endswith(')'):
                 rendered_text += ' ' + message_context
         if self.asvar:
-            context[self.asvar] =  context[self.asvar] + rendered_text
+            context[self.asvar] = context[self.asvar] + rendered_text
             return ''
         else:
             return rendered_text
 
 
 class ContextIdTranslateNode(RenderContextIdMixin, TranslateNode):
-
     def __init__(self, translate_node):
         self.noop = translate_node.noop
         self.asvar = translate_node.asvar
@@ -1311,7 +1445,6 @@ class ContextIdTranslateNode(RenderContextIdMixin, TranslateNode):
 
 
 class ContextIdBlockTranslateNode(RenderContextIdMixin, BlockTranslateNode):
-
     def __init__(self, block_translate_node):
         self.extra_context = block_translate_node.extra_context
         self.singular = block_translate_node.singular
@@ -1323,20 +1456,21 @@ class ContextIdBlockTranslateNode(RenderContextIdMixin, BlockTranslateNode):
         self.asvar = block_translate_node.asvar
 
 
-@register.tag("trans")
+@register.tag('trans')
 def context_id_do_translate(parser, token):
-    """ Overwriting the original tag (if you load `cosinnus_tags` after `i18n`.
-        Adds in a settings switch to display an identifier if you include it in parentheses
-        as context for the translated string.
-        Example: {% trans "My String" context "(MS1)" %} renders as "My String [MS1] """
+    """Overwriting the original tag (if you load `cosinnus_tags` after `i18n`.
+    Adds in a settings switch to display an identifier if you include it in parentheses
+    as context for the translated string.
+    Example: {% trans "My String" context "(MS1)" %} renders as "My String [MS1]"""
     translate_node = do_translate(parser, token)
     return ContextIdTranslateNode(translate_node)
 
 
-@register.tag("blocktrans")
+@register.tag('blocktrans')
 def context_id_do_block_translate(parser, token):
     block_translate_node = do_block_translate(parser, token)
     return ContextIdBlockTranslateNode(block_translate_node)
+
 
 @register.filter
 def get_user_from_id(id):
@@ -1348,37 +1482,44 @@ def get_user_from_id(id):
 
 @register.filter
 def get_attr(obj, attr_name):
-    """ Returns the given attribute object instead of trying to resolve
-        it in the template using __getitem__ """
+    """Returns the given attribute object instead of trying to resolve
+    it in the template using __getitem__"""
     return getattr(obj, attr_name, None)
+
 
 @register.filter
 def get_item(obj, attr_name):
-    """ Returns the given attribute by trying to resolve
-        it in the template using __getitem__ """
+    """Returns the given attribute by trying to resolve
+    it in the template using __getitem__"""
     try:
         return obj[attr_name]
     except KeyError:
         return ''
 
+
 @register.filter
 def get_item_or_none(obj, attr_name):
-    """ Returns the given attribute by trying to resolve
-        it in the template using __getitem__ """
+    """Returns the given attribute by trying to resolve
+    it in the template using __getitem__"""
     ret = obj.get(attr_name, None)
     return ret
 
+
 @register.filter
 def get_country_name(country_code):
-    """ Returns the verbose country name for a ISO 3166-1 country code """
+    """Returns the verbose country name for a ISO 3166-1 country code"""
     from django_countries import countries
+
     return dict(countries).get(country_code, '(unknown)')
+
 
 @register.filter
 def get_language_name(language_code):
-    """ Returns the verbose language for a ISO 639-1 language code """
+    """Returns the verbose language for a ISO 639-1 language code"""
     import pycountry
+
     return _(pycountry.languages.get(alpha_2=language_code).name)
+
 
 @register.filter
 def get_dynamic_field_value(dynamic_field_key, dynamic_field_name):
@@ -1387,21 +1528,25 @@ def get_dynamic_field_value(dynamic_field_key, dynamic_field_name):
         if choice[0] == dynamic_field_key:
             return choice[1]
 
+
 @register.simple_tag
 def get_setting(name):
-    return getattr(settings, name, "")
-    
+    return getattr(settings, name, '')
+
+
 @register.filter
 def parse_datetime(value):
     return dateparse.parse_datetime(value)
+
 
 @register.filter
 def stringformat(value, args):
     try:
         return dateutil.parser.parse(value)
     except Exception as e:
-        logger.error(f'Exception in cosinnus_tags.py date `stringformat` filter: e', extra={'exception': e})
+        logger.error('Exception in cosinnus_tags.py date `stringformat` filter: e', extra={'exception': e})
         return None
+
 
 @register.filter
 def listformat(value):
@@ -1409,14 +1554,16 @@ def listformat(value):
         return ', '.join(value)
     return value
 
-# a map of {dynamic_field_names: [managed_tag_slugs,]} 
+
+# a map of {dynamic_field_names: [managed_tag_slugs,]}
 _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP = None
+
 
 @register.filter
 def has_managed_tag_requirement_for_dynamic_field(user, dynamic_field_name):
-    """ Will return True if a user has any of the managed tags assigned 
-        that are required to enable the given dynamic field, as defined in
-        setting `COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS` """
+    """Will return True if a user has any of the managed tags assigned
+    that are required to enable the given dynamic field, as defined in
+    setting `COSINNUS_USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS`"""
     global _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP
     if _DYNAMIC_FIELDS_TO_MANAGED_TAGS_REVERSE_MAP is None:
         field_map = defaultdict(list)
@@ -1434,7 +1581,7 @@ def has_managed_tag_requirement_for_dynamic_field(user, dynamic_field_name):
 
 @register.filter
 def get_ui_pref_for_user(user, ui_pref_name):
-    """ Returns for a user the value of the given ui pref """
+    """Returns for a user the value of the given ui pref"""
     return get_ui_prefs_for_user(user).get(ui_pref_name, None)
 
 
@@ -1446,51 +1593,60 @@ def conference_application(context, conference):
     if applications:
         return applications.first()
 
+
 @register.filter
 def is_user_active(user):
-    """ Returns for a user the value of the given ui pref """
+    """Returns for a user the value of the given ui pref"""
     return utils_is_user_active(user)
+
 
 @register.filter
 def user_can_create_groups(user):
-    """ Checks if a user has the necessary permissions to create a CosinnusGroup """
+    """Checks if a user has the necessary permissions to create a CosinnusGroup"""
     return check_user_can_create_groups(user)
+
 
 @register.filter
 def user_can_create_conferences(user):
-    """ Checks if a user has the necessary permissions to create a CosinnusConference """
+    """Checks if a user has the necessary permissions to create a CosinnusConference"""
     return check_user_can_create_conferences(user)
+
 
 @register.filter
 def next_day(datetime_obj):
-    """ Adds a timedelta day=1 to a date/datetime. Usefull for fullcalendars way
-        of considering a full-day event with the end-date on a day to span only to the end of the previous day. """
+    """Adds a timedelta day=1 to a date/datetime. Usefull for fullcalendars way
+    of considering a full-day event with the end-date on a day to span only to the end of the previous day."""
     return datetime_obj + timedelta(days=1)
+
 
 @register.filter
 def older_than_days(datetime_obj, num_days):
-    """ Checks if a given datetime is older than `num_days` than today's date. """
+    """Checks if a given datetime is older than `num_days` than today's date."""
     return (datetime_obj + timedelta(days=num_days)) <= now()
+
 
 @register.simple_tag()
 def get_admin_data():
-    """ Returns the portal administrators on the signup page """
+    """Returns the portal administrators on the signup page"""
     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
     return admins
 
+
 @register.filter
 def safe_text(text):
-    """ Returns JS-safe text, for use in form-elements that might get re-used in JS. """
+    """Returns JS-safe text, for use in form-elements that might get re-used in JS."""
     return convert_html_to_string(text)
+
 
 @register.filter
 def user_has_otp_device(user):
-    """ Templatefilter to check if the user has an OTP device """
+    """Templatefilter to check if the user has an OTP device"""
     return user_has_device(user)
+
 
 @register.simple_tag()
 def get_forum_group():
-    """ Returns the forum object """
+    """Returns the forum object"""
     forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
     return forum_group

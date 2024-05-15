@@ -1,23 +1,22 @@
 import csv
-from datetime import datetime
 import errno
 import os
 import re
 import shutil
 import zipfile
+from datetime import datetime
 
-from cosinnus.utils.urls import group_aware_reverse
-from django.db.models import Q, F
 from django.contrib.auth import get_user_model
+from django.db.models import F, Q
 from django.http.response import HttpResponse
 from django.template.defaultfilters import slugify
 from rest_framework.views import APIView
 
-from postman.models import Message, STATUS_ACCEPTED
+from cosinnus.utils.urls import group_aware_reverse
+from postman.models import STATUS_ACCEPTED, Message
 
 
 class MessageExportView(APIView):
-
     format = 'old'
 
     def _get_users(self, user_ids=None):
@@ -34,7 +33,9 @@ class MessageExportView(APIView):
             profile = user.cosinnus_profile
             if not profile:
                 continue
-            users.append([user.id, profile.rocket_username, profile.rocket_user_email, profile.get_external_full_name()])
+            users.append(
+                [user.id, profile.rocket_username, profile.rocket_user_email, profile.get_external_full_name()]
+            )
         return users
 
     def _get_channels(self, user_ids, format='old'):
@@ -46,24 +47,28 @@ class MessageExportView(APIView):
         channels, direct_messages = [], []
         qs = Message.objects.filter(
             sender__in=user_ids,
-            #sender_archived=False,
-            #recipient_archived=False,
+            # sender_archived=False,
+            # recipient_archived=False,
             moderation_status=STATUS_ACCEPTED,
             parent__isnull=True,
         )
         qs = qs.exclude(sender_deleted_at__isnull=False, recipient_deleted_at__isnull=False)
-        qs = qs.filter(Q(multi_conversation__isnull=True, thread__isnull=True) |
-                       Q(multi_conversation__isnull=True, thread_id=F('id')) |
-                       Q(multi_conversation__isnull=False, master_for_sender=True, thread__isnull=True) |
-                       Q(multi_conversation__isnull=False, master_for_sender=True, thread_id=F('id')))
+        qs = qs.filter(
+            Q(multi_conversation__isnull=True, thread__isnull=True)
+            | Q(multi_conversation__isnull=True, thread_id=F('id'))
+            | Q(multi_conversation__isnull=False, master_for_sender=True, thread__isnull=True)
+            | Q(multi_conversation__isnull=False, master_for_sender=True, thread_id=F('id'))
+        )
         for message in qs:
             if message.multi_conversation:
                 sender_profile = message.sender.cosinnus_profile
                 if not sender_profile:
                     continue
-                participants = ';'.join(str(u.cosinnus_profile.rocket_username)
-                                        for u in message.multi_conversation.participants.all()
-                                        if u.id in user_ids and u.cosinnus_profile)
+                participants = ';'.join(
+                    str(u.cosinnus_profile.rocket_username)
+                    for u in message.multi_conversation.participants.all()
+                    if u.id in user_ids and u.cosinnus_profile
+                )
                 if participants:
                     channel_name = f'{slugify(message.subject)}-{message.id}'
                     channels.append([message.id, channel_name, sender_profile.rocket_username, 'private', participants])
@@ -73,11 +78,19 @@ class MessageExportView(APIView):
                     continue
                 if format == 'old':
                     channel_name = slugify(f'{sender_profile.rocket_username} x {recipient_profile.rocket_username}')
-                    channels.append([message.id, channel_name, sender_profile.rocket_username, 'direct',
-                                     recipient_profile.rocket_username])
+                    channels.append(
+                        [
+                            message.id,
+                            channel_name,
+                            sender_profile.rocket_username,
+                            'direct',
+                            recipient_profile.rocket_username,
+                        ]
+                    )
                 else:
-                    direct_messages.append([message.id, sender_profile.rocket_username,
-                                            recipient_profile.rocket_username])
+                    direct_messages.append(
+                        [message.id, sender_profile.rocket_username, recipient_profile.rocket_username]
+                    )
 
         return channels, direct_messages
 
@@ -113,13 +126,12 @@ class MessageExportView(APIView):
         messages, attachments = [], []
         qs = Message.objects.filter(
             sender__in=user_ids,
-            #sender_archived=False,
-            #recipient_archived=False,
+            # sender_archived=False,
+            # recipient_archived=False,
             moderation_status=STATUS_ACCEPTED,
         )
         qs = qs.exclude(sender_deleted_at__isnull=False, recipient_deleted_at__isnull=False)
-        qs = qs.filter(Q(id=channel[0]) |
-                       Q(thread_id=channel[0]))
+        qs = qs.filter(Q(id=channel[0]) | Q(thread_id=channel[0]))
         if since:
             qs = qs.filter(sent_at__gte=since)
         qs = qs.order_by('sent_at')
@@ -127,7 +139,7 @@ class MessageExportView(APIView):
             text = self.format_message(message.body)
             # if message.thread_id == message.id and message.subject:
             if message.subject:
-                text = f"*{message.subject}*\n{text}"
+                text = f'*{message.subject}*\n{text}'
             timestamp = int(message.sent_at.timestamp() * 1000)
             sender_profile = message.sender.cosinnus_profile
             if not sender_profile:
@@ -144,15 +156,12 @@ class MessageExportView(APIView):
                 fileentry = att.target_object
                 if not fileentry:
                     continue
-                url = group_aware_reverse('cosinnus:file:rocket-download',
-                                          kwargs={'group': fileentry.group, 'slug': att.target_object.slug})
+                url = group_aware_reverse(
+                    'cosinnus:file:rocket-download', kwargs={'group': fileentry.group, 'slug': att.target_object.slug}
+                )
                 if not fileentry:
                     continue
-                attachments.append([
-                    sender_profile.rocket_username,
-                    timestamp,
-                    url
-                ])
+                attachments.append([sender_profile.rocket_username, timestamp, url])
         return messages, attachments
 
     def make_archive(self, file_list, archive, root):
@@ -245,8 +254,11 @@ class MessageExportView(APIView):
 
         # Return zip file
         zip_filename = 'export.zip'
-        file_list = [os.path.relpath(os.path.join(dp, f), 'export')
-                     for dp, dn, fn in os.walk(os.path.expanduser(path)) for f in fn]
+        file_list = [
+            os.path.relpath(os.path.join(dp, f), 'export')
+            for dp, dn, fn in os.walk(os.path.expanduser(path))
+            for f in fn
+        ]
         self.make_archive(file_list, zip_filename, path)
         response = HttpResponse(open(zip_filename, 'rb'), content_type='application/zip')
         response['Content-Disposition'] = f'attachment; filename="{zip_filename}"'

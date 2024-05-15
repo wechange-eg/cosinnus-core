@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 import six
-
 from django.db import models
 from django.utils.encoding import force_str
 
@@ -14,4 +13,4 @@ class CustomUserProfile(BaseUserProfile):
     dob = models.DateField('Date of birth', null=True)
 
     def __str__(self):
-        return "%s (%s)" % (force_str(self.user), force_str(self.dob))
+        return '%s (%s)' % (force_str(self.user), force_str(self.dob))

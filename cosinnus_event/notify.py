@@ -5,7 +5,6 @@ from django.urls import reverse
 
 from cosinnus_event.models import Event
 
-
 NOTIFY_MODELS = [Event]
 NOTIFY_POST_SUBSCRIBE_URLS = {
     'event.Event': {

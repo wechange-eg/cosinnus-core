@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+
 from cosinnus_stream.models import Stream
 
 
@@ -11,4 +12,3 @@ class StreamAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Stream, StreamAdmin)
-

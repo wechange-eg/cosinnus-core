@@ -1,14 +1,14 @@
 import os
 import sys
-import environ
 
+import environ
 from django.core.management import execute_from_command_line
 
 # test parameters
-TEST_ROCKET_CHAT_ARG = "--test-rocketchat"
-TEST_BBB_ARG = "--test-bbb"
-TEST_ETHERPAD_ARG = "--test-etherpad"
-TEST_PRINT_TIME_ARG = "--print-time"
+TEST_ROCKET_CHAT_ARG = '--test-rocketchat'
+TEST_BBB_ARG = '--test-bbb'
+TEST_ETHERPAD_ARG = '--test-etherpad'
+TEST_PRINT_TIME_ARG = '--print-time'
 
 # test apps
 TEST_APPS_BASE = ['cosinnus', 'cosinnus_event', 'cosinnus_todo']
@@ -30,12 +30,12 @@ TEST_REQUIRED_ENV_SETTINGS = {
         'WECHANGE_COSINNUS_ETHERPAD_BASE_URL',
         'WECHANGE_COSINNUS_ETHERPAD_ETHERCALC_BASE_URL',
         'WECHANGE_COSINNUS_ETHERPAD_API_KEY',
-    ]
+    ],
 }
 
 
 def _check_test_env_settings(env, service):
-    """ Checks that all required settings are set in .env.test for service tests. """
+    """Checks that all required settings are set in .env.test for service tests."""
     service_settings_valid = True
     for setting in TEST_REQUIRED_ENV_SETTINGS[service]:
         try:
@@ -66,10 +66,10 @@ def cosinnus_manage(base_path):
     args = list(sys.argv)
     env = environ.Env()
 
-    is_test_run = "test" in sys.argv
+    is_test_run = 'test' in sys.argv
 
     # read env file
-    env_file = ".env" if not is_test_run else ".env.test"
+    env_file = '.env' if not is_test_run else '.env.test'
     env_file_path = base_path(env_file)
     if not os.path.exists(env_file_path):
         print(f'Could not load env file {env_file_path}!')
@@ -79,46 +79,49 @@ def cosinnus_manage(base_path):
     if not is_test_run:
         # set the settings module.
         try:
-            settings_module = env("WECHANGE_DJANGO_SETTINGS_MODULE")
+            settings_module = env('WECHANGE_DJANGO_SETTINGS_MODULE')
         except environ.ImproperlyConfigured:
-            print("Misconfigured: The entrypoint settings module 'WECHANGE_DJANGO_SETTINGS_MODULE' was not found in'.env'! Example: 'WECHANGE_DJANGO_SETTINGS_MODULE=config.settings.staging'.")
+            print(
+                "Misconfigured: The entrypoint settings module 'WECHANGE_DJANGO_SETTINGS_MODULE' was not found in'.env'! Example: 'WECHANGE_DJANGO_SETTINGS_MODULE=config.settings.staging'."
+            )
             raise
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
 
     else:
         # Testing improvements
 
         # handle test parameters.
         custom_test = any('.tests.' in arg for arg in args)
-        settings_module = "cosinnus.tests.settings.test"
+        settings_module = 'cosinnus.tests.settings.test'
         if TEST_ROCKET_CHAT_ARG in args:
             _check_test_env_settings(env, 'RocketChat')
-            settings_module = "cosinnus.tests.settings.test_rocketchat"
+            settings_module = 'cosinnus.tests.settings.test_rocketchat'
             if not custom_test:
                 args.extend(TEST_APPS_ROCKET_CHAT)
             args.remove(TEST_ROCKET_CHAT_ARG)
         elif TEST_BBB_ARG in args:
             _check_test_env_settings(env, 'BBB')
-            settings_module = "cosinnus.tests.settings.test_bbb"
+            settings_module = 'cosinnus.tests.settings.test_bbb'
             custom_test = any('.tests.' in arg for arg in args)
             if not custom_test:
                 args.extend(TEST_APPS_BBB)
             args.remove(TEST_BBB_ARG)
         elif TEST_ETHERPAD_ARG in args:
             _check_test_env_settings(env, 'Etherpad')
-            settings_module = "cosinnus.tests.settings.test_etherpad"
+            settings_module = 'cosinnus.tests.settings.test_etherpad'
             custom_test = any('.tests.' in arg for arg in args)
             if not custom_test:
                 args.extend(TEST_APPS_ETHERPAD)
             args.remove(TEST_ETHERPAD_ARG)
         elif not custom_test:
             args.extend(TEST_APPS_BASE)
-        os.environ["DJANGO_SETTINGS_MODULE"] = settings_module
+        os.environ['DJANGO_SETTINGS_MODULE'] = settings_module
 
         if TEST_PRINT_TIME_ARG in args:
             # Print execution times of slow tests.
-            from django import test
             import time
+
+            from django import test
 
             def setUp(self):
                 self.startTime = time.time()
@@ -126,7 +129,7 @@ def cosinnus_manage(base_path):
             def tearDown(self):
                 total = time.time() - self.startTime
                 if total > 0.5:
-                    print("\n\t\033[91m%.3fs\t%s\033[0m" % (total, self._testMethodName))
+                    print('\n\t\033[91m%.3fs\t%s\033[0m' % (total, self._testMethodName))
 
             test.TestCase.setUp = setUp
             test.TestCase.tearDown = tearDown

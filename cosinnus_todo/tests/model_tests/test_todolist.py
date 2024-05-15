@@ -9,7 +9,6 @@ from cosinnus_todo.models import TodoEntry, TodoList
 
 
 class TodoListTest(TestCase):
-
     def setUp(self):
         super(TodoListTest, self).setUp()
         self.group = CosinnusGroup.objects.create(name='testgroup')

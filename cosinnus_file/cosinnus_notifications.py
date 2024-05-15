@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import gettext_lazy as _, ngettext_lazy
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext_lazy
 
 """ Cosinnus:Notifications configuration file. 
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
@@ -34,50 +35,46 @@ followed_group_file_created = dispatch.Signal()  # providing_args=["user", "obj"
         :protocol Current portocol, 'http' or 'https'
         
     
-""" 
+"""
 notifications = {
     'file_created': {
-        'label': _('A user uploaded a new file'), 
+        'label': _('A user uploaded a new file'),
         'mail_template': 'cosinnus_file/notifications/file_created.txt',
         'subject_template': 'cosinnus_file/notifications/file_created_subject.txt',
         'signals': [file_created],
         'default': True,
         'moderatable_content': True,
-        
         'alert_text': _('%(sender_name)s uploaded the file %(object_name)s'),
         'alert_text_multi': _('%(sender_name)s uploaded %(count)d files'),
         'alert_multi_type': 2,
-        
         'is_html': True,
         'event_text': _('%(sender_name)s created a new file'),
         'subject_text': _('A new file: "%(object_name)s" was created in %(team_name)s.'),
         'data_attributes': {
-            'object_name': 'title', 
-            'object_url': 'get_absolute_url', 
+            'object_name': 'title',
+            'object_url': 'get_absolute_url',
             'object_text': 'note',
             'image_url': 'static_image_url_thumbnail',
         },
-    },  
+    },
     'followed_group_file_created': {
-        'label': _('A user uploaded a new file in a team you are following'), 
+        'label': _('A user uploaded a new file in a team you are following'),
         'signals': [followed_group_file_created],
         'multi_preference_set': 'MULTI_followed_object_notification',
         'supercedes_notifications': ['file_created'],
         'requires_object_state_check': 'group.is_user_following',
         'hidden': True,
-        
         'alert_text': _('%(sender_name)s uploaded the file %(object_name)s'),
         'alert_text_multi': _('%(sender_name)s uploaded %(count)d files'),
         'alert_multi_type': 2,
-        
         'is_html': True,
         'event_text': _('%(sender_name)s created a new file in %(team_name)s (which you follow)'),
         'subject_text': _('A new file: "%(object_name)s" was created in %(team_name)s (which you follow).'),
         'data_attributes': {
-            'object_name': 'title', 
-            'object_url': 'get_absolute_url', 
+            'object_name': 'title',
+            'object_url': 'get_absolute_url',
             'object_text': 'note',
             'image_url': 'static_image_url_thumbnail',
         },
-    },         
+    },
 }

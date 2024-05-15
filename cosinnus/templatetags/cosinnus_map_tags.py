@@ -2,17 +2,18 @@
 from __future__ import unicode_literals
 
 import json
+
 from django import template
+from django.utils.safestring import mark_safe
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
-from django.utils.safestring import mark_safe
 
 register = template.Library()
 
 
 def get_cosinnus_portal_info():
-    """ Gets a dict of the most important portal infos by portal id """
+    """Gets a dict of the most important portal infos by portal id"""
     portals = CosinnusPortal.get_all()
     portal_info = {
         'current': CosinnusPortal.get_current().id,
@@ -24,8 +25,8 @@ def get_cosinnus_portal_info():
             'image_url': portal.get_logo_image_url(),
         }
     return portal_info
-    
+
+
 @register.simple_tag()
 def render_cosinnus_portal_info_json():
     return mark_safe(json.dumps(get_cosinnus_portal_info()))
-
