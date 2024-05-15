@@ -493,6 +493,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             username = '.'.join(filter(None, [slugify(user.first_name), slugify(user.last_name)]))
         else:
             username = str(user.id)
+        # always append the actual user id to always have a unique name
+        username += '-' + str(user.id)
         return username
 
     @property
