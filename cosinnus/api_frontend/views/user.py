@@ -29,6 +29,7 @@ from cosinnus.api_frontend.serializers.user import CosinnusUserLoginSerializer, 
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
 from cosinnus.models import CosinnusPortal
+from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import IsNotAuthenticated, AllowNone
 from cosinnus.utils.urls import redirect_with_next
@@ -354,7 +355,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
             access = user_tokens['access']
         if CosinnusPortal.get_current().users_need_activation:
             str_dict = {
-                'user': user.get_full_name(),
+                'user': full_name_force(user),
                 'email': user.email,
             }
             message = force_str(_('Hello "%(user)s"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at "%(email)s".')) % str_dict
