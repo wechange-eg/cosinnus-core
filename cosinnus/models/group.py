@@ -133,6 +133,12 @@ def group_name_validator(value):
     )(value)
 
 
+def chunked_set_many(data, timeout=settings.COSINNUS_GROUP_CACHE_TIMEOUT, chunk_size=50):
+    items = list(data.items())
+    for i in range(0, len(items), chunk_size):
+        chunk = dict(items[i:i + chunk_size])
+        cache.set_many(chunk, timeout)
+
 class CosinnusGroupQS(models.query.QuerySet):
     """ QuerySet for all cosinnus group models """
 
@@ -287,7 +293,7 @@ class CosinnusGroupManager(models.Manager):
                     
                     for group in query:
                         groups[self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug)] = group
-                    cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
+                    chunked_set_many(groups)
                 
                 # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
                 group_list = list(groups.values())
