@@ -326,11 +326,11 @@ def compilehtmlemails(_ctx):
     with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
         # ensure all directories exist
         c.run(f'mkdir -p {env.path}/html_emails_collected')
-        c.run(f'mkdir -p {env.path}/wechange/templates/cosinnus/html_mail')
+        c.run(f'mkdir -p {env.path}/apps/core/templates/cosinnus/html_mail')
         # copy cosinnus-core html emails npm project
         c.run(f'cp -R {env.cosinnus_src_path}/cosinnus/html_emails/* {env.path}/html_emails_collected/')
         # copy local repo overriding files for html emails npm project, overwriting files
-        result = c.run(f'cp -R {env.path}/wechange/html_emails/* {env.path}/html_emails_collected/', warn=True)
+        result = c.run(f'cp -R {env.path}/apps/core/html_emails/* {env.path}/html_emails_collected/', warn=True)
         if result.failed: 
             print('Project does not seem to specify overriding email templates/styles. Ignoring build and continuing fabfile.')
             return
@@ -343,7 +343,7 @@ def compilehtmlemails(_ctx):
                 c.run('npm install')
                 c.run('npm run build') # -->can also run 'npm run dev', but it stays in watch mode
             # copy the built email templates to our local repo template folder, where they path-replace the cosinnus-core ones
-            c.run('cp -R %(path)s/html_emails_collected/dist/{digest.html,notification.html,summary_group.html,summary_item.html}* %(path)s/wechange/templates/cosinnus/html_mail/' % env)
+            c.run('cp -R %(path)s/html_emails_collected/dist/{digest.html,notification.html,summary_group.html,summary_item.html}* %(path)s/apps/core/templates/cosinnus/html_mail/' % env)
 
 @task
 def backup(_ctx):
