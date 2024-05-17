@@ -29,8 +29,8 @@ from cosinnus.conf import settings
 from cosinnus.models.membership import BaseMembership, MEMBERSHIP_ADMIN, \
     MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS, MembersManagerMixin,\
     MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_MANAGER
-from cosinnus.utils.functions import unique_aware_slugify,\
-    clean_single_line_text, sort_key_strcoll_attr
+from cosinnus.utils.functions import unique_aware_slugify, \
+    clean_single_line_text, sort_key_strcoll_attr, chunked_set_many
 from cosinnus.utils.files import get_group_avatar_filename,\
     get_portal_background_image_filename, get_group_wallpaper_filename,\
     get_cosinnus_media_file_folder, get_group_gallery_image_filename,\
@@ -132,12 +132,6 @@ def group_name_validator(value):
         'invalid'
     )(value)
 
-
-def chunked_set_many(data, timeout=settings.COSINNUS_GROUP_CACHE_TIMEOUT, chunk_size=50):
-    items = list(data.items())
-    for i in range(0, len(items), chunk_size):
-        chunk = dict(items[i:i + chunk_size])
-        cache.set_many(chunk, timeout)
 
 class CosinnusGroupQS(models.query.QuerySet):
     """ QuerySet for all cosinnus group models """
@@ -293,7 +287,7 @@ class CosinnusGroupManager(models.Manager):
                     
                     for group in query:
                         groups[self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug)] = group
-                    chunked_set_many(groups)
+                    chunked_set_many(groups, timeout=settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 
                 # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
                 group_list = list(groups.values())
