@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-
 from django.forms import ValidationError
 
 from cosinnus_todo.forms import TodoEntryForm
@@ -16,8 +15,14 @@ class TodoEntryFormTest(FormTestCase):
         """
         fields = [
             # "normal" fields
-            'title', 'due_date', 'assigned_to', 'completed_by',
-            'completed_date', 'priority', 'note', 'attached_objects'
+            'title',
+            'due_date',
+            'assigned_to',
+            'completed_by',
+            'completed_date',
+            'priority',
+            'note',
+            'attached_objects',
             # no media_tag fields
         ]
         form = TodoEntryForm(group=self.group)
@@ -44,16 +49,13 @@ class TodoEntryFormTest(FormTestCase):
         assign
         """
         user = self.add_user('test')
-        todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', creator=self.admin)
+        todo = TodoEntry.objects.create(group=self.group, title='testtodo', creator=self.admin)
         form = TodoEntryForm(group=self.group, user=user, instance=todo)
-        self.assertEqual('disabled',
-            form.fields['assigned_to'].widget.attrs['disabled'])
+        self.assertEqual('disabled', form.fields['assigned_to'].widget.attrs['disabled'])
 
     def test_clean_assigned_to(self):
         user = self.add_user('test')
-        todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', creator=self.admin)
+        todo = TodoEntry.objects.create(group=self.group, title='testtodo', creator=self.admin)
 
         # should barf when user is not allowed to assign
         form = TodoEntryForm(group=self.group, user=user, instance=todo)
@@ -64,4 +66,3 @@ class TodoEntryFormTest(FormTestCase):
         form = TodoEntryForm(group=self.group, user=self.admin, instance=todo)
         form.cleaned_data = {'assigned_to': user}
         self.assertEqual(form.clean_assigned_to(), user)
-

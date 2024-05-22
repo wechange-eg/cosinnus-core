@@ -1,0 +1,30 @@
+[tool.ruff]
+# Set the maximum line length to 120.
+line-length = 120
+exclude = [
+    '.eggs',
+    '.git',
+    'migrations',
+    'node_modules',
+]
+force-exclude = true
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint.flake8-quotes]
+# Use single quotes
+inline-quotes = "single"
+multiline-quotes = "single"
+
+
+[tool.ruff.lint]
+# lint rules suggested by the ruff documentation
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # isort
+    "I",
+]

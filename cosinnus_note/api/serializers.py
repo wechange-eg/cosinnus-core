@@ -40,8 +40,7 @@ class NoteListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta(object):
         model = Note
-        fields = ('id', 'title', 'text', 'video', 'timestamp',
-                  'creator', 'group')
+        fields = ('id', 'title', 'text', 'video', 'timestamp', 'creator', 'group')
 
 
 class NoteRetrieveSerializer(NoteListSerializer):

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-07 17:45+0200\n"
+"POT-Creation-Date: 2024-05-22 13:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -297,6 +297,10 @@ msgid "Cloud"
 msgstr ""
 
 msgid "Messages"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
 msgstr ""
 
 msgid "Help"
@@ -1058,7 +1062,8 @@ msgstr ""
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr ""
 
-msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+#, python-format
+msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
 msgstr ""
 
 msgid "Some CSV headers did not have a name!"
@@ -6797,10 +6802,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__

@@ -2,7 +2,6 @@ import datetime
 import logging
 import pickle
 import zlib
-
 from threading import Thread
 
 from django.contrib.auth import get_user_model
@@ -46,7 +45,7 @@ class CosinnusUserExportProcessorBase(object):
     }
 
     # Timeout for the export data
-    EXPORT_CACHE_TIMEOUT = 60*60*24  # 1 day
+    EXPORT_CACHE_TIMEOUT = 60 * 60 * 24  # 1 day
 
     # Current export state
     EXPORT_STATE_CACHE_KEY = 'cosinnus/core/portal/%d/export/state'
@@ -72,15 +71,16 @@ class CosinnusUserExportProcessorBase(object):
         compressed_csv = zlib.compress(picked_csv)
         delete_csv_data_after = now() + datetime.timedelta(seconds=self.EXPORT_CACHE_TIMEOUT)
         temporary_data = TemporaryData.objects.create(
-            deletion_after=delete_csv_data_after,
-            description='User Export Data',
-            data=compressed_csv
+            deletion_after=delete_csv_data_after, description='User Export Data', data=compressed_csv
         )
-        cache.set(self.EXPORT_DATA_ID_CACHE_KEY % CosinnusPortal.get_current().id, temporary_data.id,
-                  self.EXPORT_CACHE_TIMEOUT)
+        cache.set(
+            self.EXPORT_DATA_ID_CACHE_KEY % CosinnusPortal.get_current().id,
+            temporary_data.id,
+            self.EXPORT_CACHE_TIMEOUT,
+        )
 
     def get_current_export_csv(self):
-        """ Get and decompress the exported CSV data. """
+        """Get and decompress the exported CSV data."""
         temporary_data_id = cache.get(self.EXPORT_DATA_ID_CACHE_KEY % CosinnusPortal.get_current().id)
         if temporary_data_id and TemporaryData.objects.filter(id=temporary_data_id).exists():
             temporary_data = TemporaryData.objects.get(id=temporary_data_id)
@@ -89,7 +89,9 @@ class CosinnusUserExportProcessorBase(object):
             return csv
 
     def set_current_export_timestamp(self, timestamp):
-        cache.set(self.EXPORT_TIMESTAMP_CACHE_KEY % CosinnusPortal.get_current().id, timestamp, self.EXPORT_CACHE_TIMEOUT)
+        cache.set(
+            self.EXPORT_TIMESTAMP_CACHE_KEY % CosinnusPortal.get_current().id, timestamp, self.EXPORT_CACHE_TIMEOUT
+        )
 
     def get_current_export_timestamp(self):
         return cache.get(self.EXPORT_TIMESTAMP_CACHE_KEY % CosinnusPortal.get_current().id)
@@ -101,20 +103,20 @@ class CosinnusUserExportProcessorBase(object):
         cache.delete(self.EXPORT_TIMESTAMP_CACHE_KEY % portal)
 
     def get_state(self):
-        """ Returns the current processor state. """
+        """Returns the current processor state."""
         export_state = self.get_current_export_state()
         state = export_state if export_state else self.STATE_EXPORT_READY
         return state
 
     def get_user_queryset(self):
-        """ User queryset used for the user export. """
+        """User queryset used for the user export."""
         qs = get_user_model().objects.all()
         qs = qs.select_related('cosinnus_profile').all()
         qs = qs.order_by('last_name', 'first_name')
         return qs
 
     def get_header(self):
-        """ Returns the export CSV header. Default: CSV_EXPORT_COLUMNS_TO_FIELD_MAP keys. """
+        """Returns the export CSV header. Default: CSV_EXPORT_COLUMNS_TO_FIELD_MAP keys."""
         return self.CSV_EXPORT_COLUMNS_TO_FIELD_MAP.keys()
 
     def format_dynamic_field_value(self, field, value):
@@ -130,7 +132,10 @@ class CosinnusUserExportProcessorBase(object):
         """
         formatted_value = ''
         field_type = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[field].type
-        if field_type in [dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT, dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT]:
+        if field_type in [
+            dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT,
+            dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT,
+        ]:
             multiple = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[field].multiple
             if multiple:
                 if len(value) > 1:
@@ -171,7 +176,7 @@ class CosinnusUserExportProcessorBase(object):
         return row
 
     def get_filename(self):
-        """ Returns the file name used in the cached CSV/XLSX response file. """
+        """Returns the file name used in the cached CSV/XLSX response file."""
         return 'user export'
 
     def _start_export(self, users):
@@ -197,7 +202,7 @@ class CosinnusUserExportProcessorBase(object):
             self.set_current_export_state(self.STATE_EXPORT_ERROR)
 
     def do_export(self, threaded=True):
-        """ Does a threaded user export. Threading can be disabled via the threaded parameter. """
+        """Does a threaded user export. Threading can be disabled via the threaded parameter."""
         users = list(self.get_user_queryset())
         if threaded:
             my_self = self
@@ -205,12 +210,13 @@ class CosinnusUserExportProcessorBase(object):
             class CosinnusUserExportProcessThread(Thread):
                 def run(self):
                     my_self._start_export(users)
+
             CosinnusUserExportProcessThread().start()
         else:
             self._start_export(users)
 
     def delete_export(self):
-        """ Deletes all export data. """
+        """Deletes all export data."""
         self.delete_export_cache()
 
 

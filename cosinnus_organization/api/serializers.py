@@ -17,8 +17,21 @@ class OrganizationListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta(object):
         model = CosinnusOrganization
-        fields = ('id', 'url', 'slug', 'name', 'description', 'website', 'admins', 'locations', 'timestamp', 'topics',
-                  'tags', 'image', 'is_open_for_cooperation')
+        fields = (
+            'id',
+            'url',
+            'slug',
+            'name',
+            'description',
+            'website',
+            'admins',
+            'locations',
+            'timestamp',
+            'topics',
+            'tags',
+            'image',
+            'is_open_for_cooperation',
+        )
 
     def get_id(self, obj):
         url = reverse('cosinnus:api:organization-detail', kwargs={'slug': obj.slug})

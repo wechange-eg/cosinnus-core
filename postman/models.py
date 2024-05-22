@@ -1,19 +1,20 @@
-from __future__ import unicode_literals
-from __future__ import division
-from builtins import str
-from builtins import object
-import hashlib
-from django.utils.crypto import get_random_string
-from cosinnus.models.tagged import AttachableObjectModel, LastVisitedMixin
-from importlib import import_module
-import six
+from __future__ import division, unicode_literals
 
-from cosinnus.conf import settings
+import hashlib
+from builtins import object, str
+from importlib import import_module
+
+import six
 from django.core.exceptions import ValidationError
-from django.urls import reverse
 from django.db import models
 from django.db.models.query import QuerySet
+from django.urls import reverse
+from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
+
+from cosinnus.conf import settings
+from cosinnus.models.tagged import AttachableObjectModel, LastVisitedMixin
+
 try:
     from django.utils.text import Truncator  # Django 1.4
 except ImportError:
@@ -22,16 +23,21 @@ try:
     from django.utils.timezone import now  # Django 1.4 aware datetimes
 except ImportError:
     from datetime import datetime
+
     now = datetime.now
-from django.utils.translation import gettext, gettext_lazy as _
+import uuid
+
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 
 from . import OPTION_MESSAGES
 from .query import PostmanQuery
 from .utils import email_visitor, notify_user
-import uuid
+
 
 def get_uuid():
     return uuid.uuid4().hex
+
 
 # moderation constants
 STATUS_PENDING = 'p'
@@ -60,12 +66,14 @@ def setup():
     except ImportError:
         from postman.future_1_5 import get_user_model
     name_user_as = getattr(settings, 'POSTMAN_NAME_USER_AS', get_user_model().USERNAME_FIELD)
-    ORDER_BY_FIELDS.update({
-        'f': 'sender__' + name_user_as,     # as 'from'
-        't': 'recipient__' + name_user_as,  # as 'to'
-        's': 'subject',  # as 'subject'
-        'd': 'sent_at',  # as 'date'
-    })
+    ORDER_BY_FIELDS.update(
+        {
+            'f': 'sender__' + name_user_as,  # as 'from'
+            't': 'recipient__' + name_user_as,  # as 'to'
+            's': 'subject',  # as 'subject'
+            'd': 'sent_at',  # as 'date'
+        }
+    )
 
 
 def get_order_by(query_dict):
@@ -97,7 +105,7 @@ def get_user_representation(user):
             mod_path, _, attr_name = show_user_as.rpartition('.')
             try:
                 return force_str(getattr(import_module(mod_path), attr_name)(user))
-            except:  # ImportError, AttributeError, TypeError (not callable)
+            except Exception:  # ImportError, AttributeError, TypeError (not callable)
                 pass
         else:
             attr = getattr(user, show_user_as, None)
@@ -108,7 +116,7 @@ def get_user_representation(user):
     elif callable(show_user_as):
         try:
             return force_str(show_user_as(user))
-        except:
+        except Exception:
             pass
     return force_str(user)  # default value, or in case of empty attribute or exception
 
@@ -124,33 +132,50 @@ def get_user_name(user):
 
 
 class MultiConversation(models.Model):
-    """ A model to reference to keep track of which conversation between multiple users a message belongs to """
-    
-    participants = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=False,
-        related_name='postman_multiconversations')
-    targetted_groups = models.ManyToManyField(settings.COSINNUS_GROUP_OBJECT_MODEL, blank=True,
-        related_name='+', help_text='Groups that the message has been sent to. This is kept for purely '
+    """A model to reference to keep track of which conversation between multiple users a message belongs to"""
+
+    participants = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, blank=False, related_name='postman_multiconversations'
+    )
+    targetted_groups = models.ManyToManyField(
+        settings.COSINNUS_GROUP_OBJECT_MODEL,
+        blank=True,
+        related_name='+',
+        help_text='Groups that the message has been sent to. This is kept for purely '
         'informative reasons, so we can show the user the involved groups, but will not be used for '
-        'something like keeping the participants list up to date')
-    
+        'something like keeping the participants list up to date',
+    )
+
     def __str__(self):
-        return 'MultiConv <%d>: %s' % (getattr(self, 'id', -1), ','.join([part.username for part in self.participants.all()]))
-    
+        return 'MultiConv <%d>: %s' % (
+            getattr(self, 'id', -1),
+            ','.join([part.username for part in self.participants.all()]),
+        )
+
 
 class MultiConversationModel(models.Model):
-    """ To be used by Message, models the functionality of many users sharing a messages through a thread,
-        even though each message has its own object for each of the participating users """
-    
+    """To be used by Message, models the functionality of many users sharing a messages through a thread,
+    even though each message has its own object for each of the participating users"""
+
     class Meta(object):
         abstract = True
-    
+
     multi_conversation = models.ForeignKey('postman.MultiConversation', null=True, blank=True, on_delete=models.CASCADE)
-    level = models.IntegerField(_(''), default=0, help_text='Used to identify the Message objects belonging '
-        'to a MultiConversation that belong to the same "physical" message. Unused for default 2-person conversations.')
-    master_for_sender = models.BooleanField(default=True, help_text='Since in a MultiConversation, for one message '
-        'there exist multiple Message objects with the same level and same sender, only one those exists with '
-        'master_for_sender==True. This is the one that is checked for info like `sender_archived` and `sender_deleted_at`')
-    
+    level = models.IntegerField(
+        _(''),
+        default=0,
+        help_text='Used to identify the Message objects belonging '
+        'to a MultiConversation that belong to the same "physical" message. Unused for default 2-person conversations.',
+    )
+    master_for_sender = models.BooleanField(
+        default=True,
+        help_text=(
+            'Since in a MultiConversation, for one message there exist multiple Message objects with the same level '
+            'and same sender, only one those exists with master_for_sender==True. This is the one that is checked for '
+            'info like `sender_archived` and `sender_deleted_at`'
+        ),
+    )
+
 
 class MessageManager(models.Manager):
     """The manager for Message."""
@@ -175,20 +200,33 @@ class MessageManager(models.Manager):
             # .extra(select={'count': 'SELECT 1'})
         else:
             qs = qs.extra(select={'count': '{0}.count'.format(qs.query.pm_alias_prefix)})
-            qs.query.pm_set_extra(table=(
-                # extra columns are always first in the SELECT query
-                # for tests with the version 2.4.1 of sqlite3 in py26, add to the select: , 'id': 'postman_message.id'
-                self.filter(lookups, thread_id__isnull=True).extra(select={'count': 0})\
-                    .values_list('id', 'count').order_by(),
-                # use separate annotate() to keep control of the necessary order
-                self.filter(lookups, thread_id__isnull=False).values('thread').annotate(count=models.Count('pk')).annotate(id=models.Max('pk'))\
-                    .values_list('id', 'count').order_by(),
-            ))
-        
+            qs.query.pm_set_extra(
+                table=(
+                    # extra columns are always first in the SELECT query
+                    # for tests with the version 2.4.1 of sqlite3 in py26, add to the select: , 'id':
+                    # 'postman_message.id'
+                    self.filter(lookups, thread_id__isnull=True)
+                    .extra(select={'count': 0})
+                    .values_list('id', 'count')
+                    .order_by(),
+                    # use separate annotate() to keep control of the necessary order
+                    self.filter(lookups, thread_id__isnull=False)
+                    .values('thread')
+                    .annotate(count=models.Count('pk'))
+                    .annotate(id=models.Max('pk'))
+                    .values_list('id', 'count')
+                    .order_by(),
+                )
+            )
+
         # for conversations messages where the user is the first sender (initiator), we filter so that
         # we only show him the master_for_sender messages (otherwise they would see duplicates)
-        qs = qs.filter(models.Q(thread__isnull=True) | ~models.Q(thread__sender=user) | (models.Q(thread__sender=user) & models.Q(master_for_sender=True)))
-        
+        qs = qs.filter(
+            models.Q(thread__isnull=True)
+            | ~models.Q(thread__sender=user)
+            | (models.Q(thread__sender=user) & models.Q(master_for_sender=True))
+        )
+
         return qs
 
     def inbox(self, user, related=True, **kwargs):
@@ -232,17 +270,20 @@ class MessageManager(models.Manager):
         Return messages belonging to a user and marked as archived.
         """
         related = ('sender', 'recipient')
-        filters = ({
-            'recipient': user,
-            'recipient_archived': True,
-            'recipient_deleted_at__isnull': True,
-            'master_for_sender': True,
-            'moderation_status': STATUS_ACCEPTED,
-        }, {
-            'sender': user,
-            'sender_archived': True,
-            'sender_deleted_at__isnull': True,
-        })
+        filters = (
+            {
+                'recipient': user,
+                'recipient_archived': True,
+                'recipient_deleted_at__isnull': True,
+                'master_for_sender': True,
+                'moderation_status': STATUS_ACCEPTED,
+            },
+            {
+                'sender': user,
+                'sender_archived': True,
+                'sender_deleted_at__isnull': True,
+            },
+        )
         return self._folder(related, filters, user, **kwargs)
 
     def trash(self, user, **kwargs):
@@ -250,25 +291,35 @@ class MessageManager(models.Manager):
         Return messages belonging to a user and marked as deleted.
         """
         related = ('sender', 'recipient')
-        filters = ({
-            'recipient': user,
-            'recipient_deleted_at__isnull': False,
-            'master_for_sender': True,
-            'moderation_status': STATUS_ACCEPTED,
-        }, {
-            'sender': user,
-            'sender_deleted_at__isnull': False,
-        })
+        filters = (
+            {
+                'recipient': user,
+                'recipient_deleted_at__isnull': False,
+                'master_for_sender': True,
+                'moderation_status': STATUS_ACCEPTED,
+            },
+            {
+                'sender': user,
+                'sender_deleted_at__isnull': False,
+            },
+        )
         return self._folder(related, filters, user, **kwargs)
 
     def thread(self, user, filter):
         """
         Return message/conversation for display.
         """
-        return self.select_related('sender', 'recipient').filter(
-            filter,
-            (models.Q(recipient=user) & models.Q(moderation_status=STATUS_ACCEPTED)) | models.Q(sender=user) | models.Q(multi_conversation__participants=user),
-        ).order_by('sent_at').distinct()
+        return (
+            self.select_related('sender', 'recipient')
+            .filter(
+                filter,
+                (models.Q(recipient=user) & models.Q(moderation_status=STATUS_ACCEPTED))
+                | models.Q(sender=user)
+                | models.Q(multi_conversation__participants=user),
+            )
+            .order_by('sent_at')
+            .distinct()
+        )
 
     def as_recipient(self, user, filter):
         """
@@ -289,7 +340,11 @@ class MessageManager(models.Manager):
         The user must be the recipient of the accepted, non-deleted, message
 
         """
-        return models.Q(recipient=user) & models.Q(moderation_status=STATUS_ACCEPTED) & models.Q(recipient_deleted_at__isnull=True)
+        return (
+            models.Q(recipient=user)
+            & models.Q(moderation_status=STATUS_ACCEPTED)
+            & models.Q(recipient_deleted_at__isnull=True)
+        )
 
     def set_read(self, user, filter):
         """
@@ -311,50 +366,85 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
 
     SUBJECT_MAX_LENGTH = 120
 
-    subject = models.CharField(_("subject"), max_length=SUBJECT_MAX_LENGTH)
-    body = models.TextField(_("body"), blank=True)
-    sender = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='sent_messages', null=True, blank=True, verbose_name=_("sender"), on_delete=models.CASCADE)
-    recipient = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='received_messages', null=True, blank=True, verbose_name=_("recipient"), on_delete=models.CASCADE)
-    email = models.EmailField(_("visitor"), blank=True)  # instead of either sender or recipient, for an AnonymousUser
-    parent = models.ForeignKey('self', related_name='next_messages', null=True, blank=True, verbose_name=_("parent message"), on_delete=models.CASCADE)
-    thread = models.ForeignKey('self', related_name='child_messages', null=True, blank=True, verbose_name=_("root message"), on_delete=models.CASCADE)
-    sent_at = models.DateTimeField(_("sent at"), default=now)
-    read_at = models.DateTimeField(_("read at"), null=True, blank=True)
-    replied_at = models.DateTimeField(_("replied at"), null=True, blank=True)
-    sender_archived = models.BooleanField(_("archived by sender"), default=False)
-    recipient_archived = models.BooleanField(_("archived by recipient"), default=False)
-    sender_deleted_at = models.DateTimeField(_("deleted by sender at"), null=True, blank=True)
-    recipient_deleted_at = models.DateTimeField(_("deleted by recipient at"), null=True, blank=True)
+    subject = models.CharField(_('subject'), max_length=SUBJECT_MAX_LENGTH)
+    body = models.TextField(_('body'), blank=True)
+    sender = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='sent_messages',
+        null=True,
+        blank=True,
+        verbose_name=_('sender'),
+        on_delete=models.CASCADE,
+    )
+    recipient = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='received_messages',
+        null=True,
+        blank=True,
+        verbose_name=_('recipient'),
+        on_delete=models.CASCADE,
+    )
+    email = models.EmailField(_('visitor'), blank=True)  # instead of either sender or recipient, for an AnonymousUser
+    parent = models.ForeignKey(
+        'self',
+        related_name='next_messages',
+        null=True,
+        blank=True,
+        verbose_name=_('parent message'),
+        on_delete=models.CASCADE,
+    )
+    thread = models.ForeignKey(
+        'self',
+        related_name='child_messages',
+        null=True,
+        blank=True,
+        verbose_name=_('root message'),
+        on_delete=models.CASCADE,
+    )
+    sent_at = models.DateTimeField(_('sent at'), default=now)
+    read_at = models.DateTimeField(_('read at'), null=True, blank=True)
+    replied_at = models.DateTimeField(_('replied at'), null=True, blank=True)
+    sender_archived = models.BooleanField(_('archived by sender'), default=False)
+    recipient_archived = models.BooleanField(_('archived by recipient'), default=False)
+    sender_deleted_at = models.DateTimeField(_('deleted by sender at'), null=True, blank=True)
+    recipient_deleted_at = models.DateTimeField(_('deleted by recipient at'), null=True, blank=True)
     # moderation fields
-    moderation_status = models.CharField(_("status"), max_length=1, choices=STATUS_CHOICES, default=STATUS_PENDING)
-    moderation_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='moderated_messages',
-        null=True, blank=True, verbose_name=_("moderator"), on_delete=models.CASCADE)
-    moderation_date = models.DateTimeField(_("moderated at"), null=True, blank=True)
-    moderation_reason = models.CharField(_("rejection reason"), max_length=120, blank=True)
-    
-    # used as a reply-address for a catchall mailbox to reply by email 
-    direct_reply_hash = models.CharField(max_length=50, verbose_name=_('Direct Reply Hash'),
-         blank=True, null=True)
+    moderation_status = models.CharField(_('status'), max_length=1, choices=STATUS_CHOICES, default=STATUS_PENDING)
+    moderation_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='moderated_messages',
+        null=True,
+        blank=True,
+        verbose_name=_('moderator'),
+        on_delete=models.CASCADE,
+    )
+    moderation_date = models.DateTimeField(_('moderated at'), null=True, blank=True)
+    moderation_reason = models.CharField(_('rejection reason'), max_length=120, blank=True)
+
+    # used as a reply-address for a catchall mailbox to reply by email
+    direct_reply_hash = models.CharField(max_length=50, verbose_name=_('Direct Reply Hash'), blank=True, null=True)
 
     objects = MessageManager()
 
     class Meta(object):
-        verbose_name = _("message")
-        verbose_name_plural = _("messages")
+        verbose_name = _('message')
+        verbose_name_plural = _('messages')
         ordering = ['-sent_at', '-id']
 
     def __str__(self):
-        return "{0}:: {1}>{2}:{3}".format(self.id, self.obfuscated_sender, self.obfuscated_recipient, Truncator(self.subject).words(5))
-    
+        return '{0}:: {1}>{2}:{3}'.format(
+            self.id, self.obfuscated_sender, self.obfuscated_recipient, Truncator(self.subject).words(5)
+        )
+
     def get_icon(self):
-        """ Returns the font-awesome icon specific to this object type """
+        """Returns the font-awesome icon specific to this object type"""
         return 'fa-envelope'
-    
+
     def save(self, *args, **kwargs):
         if not getattr(self, 'id', None):
             self.direct_reply_hash = get_random_string(32)
         super(Message, self).save(*args, **kwargs)
-    
+
     def get_absolute_url(self):
         "Usage is deprecated since v3.3.0, because it doesn't integrate well with the addition of namespaces."
         return reverse('postman:view', args=[self.pk])
@@ -362,9 +452,11 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
     def is_pending(self):
         """Tell if the message is in the pending state."""
         return self.moderation_status == STATUS_PENDING
+
     def is_rejected(self):
         """Tell if the message is in the rejected state."""
         return self.moderation_status == STATUS_REJECTED
+
     def is_accepted(self):
         """Tell if the message is in the accepted state."""
         return self.moderation_status == STATUS_ACCEPTED
@@ -378,10 +470,10 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
     def is_replied(self):
         """Tell if the recipient has written a reply to the message."""
         return self.replied_at is not None
-    
+
     @property
     def better_count(self):
-        """ Expensive, but conversation-accurate message count for this thread. """
+        """Expensive, but conversation-accurate message count for this thread."""
         if not self.thread_id:
             return 0
         return self._meta.model.objects.filter(thread_id=self.thread_id).count()
@@ -416,7 +508,8 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
             return str(self.sender)
         else:
             return '<{0}>'.format(self.email)
-    admin_sender.short_description = _("sender")
+
+    admin_sender.short_description = _('sender')
     admin_sender.admin_order_field = 'sender'
 
     # Give the sender either as a username or as a plain email.
@@ -440,7 +533,8 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
             return str(self.recipient)
         else:
             return '<{0}>'.format(self.email)
-    admin_recipient.short_description = _("recipient")
+
+    admin_recipient.short_description = _('recipient')
     admin_recipient.admin_order_field = 'recipient'
 
     # Give the recipient either as a username or as a plain email.
@@ -455,8 +549,9 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
             return self._obfuscated_email()
 
     def other_participants(self, user):
-        """ For a given message and the current user, returns all other participants of this conversation,
-        or a list with one element, the other person that isn't our user if the message is not part of a multi conversation """
+        """For a given message and the current user, returns all other participants of this conversation,
+        or a list with one element, the other person that isn't our user if the message is not part of a multi
+         conversation"""
         if not self.multi_conversation:
             return [self.sender if self.recipient == user else self.recipient]
         return [part for part in self.multi_conversation.participants.all() if not part == user]
@@ -467,7 +562,7 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
 
     def quote(self, format_subject, format_body=None):
         """Return a dictionary of quote values to initiate a reply."""
-        values = {'subject': format_subject(self.subject)[:self.SUBJECT_MAX_LENGTH]}
+        values = {'subject': format_subject(self.subject)[: self.SUBJECT_MAX_LENGTH]}
         if format_body:
             values['body'] = format_body(self.obfuscated_sender, self.body)
         return values
@@ -475,7 +570,7 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
     def clean(self):
         """Check some validity constraints."""
         if not (self.sender_id is not None or self.email):
-            raise ValidationError(gettext("Undefined sender."))
+            raise ValidationError(gettext('Undefined sender.'))
 
     def clean_moderation(self, initial_status, user=None):
         """Adjust automatically some fields, according to status workflow."""
@@ -522,10 +617,13 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
                 if parent and parent.replied_at == self.sent_at:
                     # rollback, but there may be some other valid replies
                     try:
-                        other_date = parent.next_messages\
-                            .exclude(pk=self.pk).filter(moderation_status=STATUS_ACCEPTED)\
-                            .values_list('sent_at', flat=True)\
-                            .order_by('sent_at')[:1].get()
+                        other_date = (
+                            parent.next_messages.exclude(pk=self.pk)
+                            .filter(moderation_status=STATUS_ACCEPTED)
+                            .values_list('sent_at', flat=True)
+                            .order_by('sent_at')[:1]
+                            .get()
+                        )
                         parent.replied_at = other_date
                     except Message.DoesNotExist:
                         parent.replied_at = None
@@ -573,15 +671,19 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
             moderators = (moderators,)
         for moderator in moderators:
             rating = moderator(self)
-            if rating is None: continue
+            if rating is None:
+                continue
             if isinstance(rating, tuple):
                 percent, reason = rating
             else:
                 percent = rating
                 reason = getattr(moderator, 'default_reason', '')
-            if percent is False: percent = 0
-            if percent is True: percent = 100
-            if not 0 <= percent <= 100: continue
+            if percent is False:
+                percent = 0
+            if percent is True:
+                percent = 100
+            if not 0 <= percent <= 100:
+                continue
             if percent == 0:
                 auto = False
                 final_reason = reason
@@ -623,8 +725,8 @@ class PendingMessage(Message):
     objects = PendingMessageManager()
 
     class Meta(object):
-        verbose_name = _("pending message")
-        verbose_name_plural = _("pending messages")
+        verbose_name = _('pending message')
+        verbose_name_plural = _('pending messages')
         proxy = True
 
     def set_accepted(self):

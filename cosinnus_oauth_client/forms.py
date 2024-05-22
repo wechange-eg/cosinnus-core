@@ -1,26 +1,24 @@
-import requests
 import tempfile
 
-from django.core import files
-
+import requests
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
-from cosinnus.models.profile import get_user_profile_model
-from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
-from cosinnus.conf import settings
-from cosinnus.utils.urls import redirect_with_next
-from cosinnus.models.tagged import BaseTagObject
-from cosinnus.utils.user import accept_user_tos_for_portal
-from django.urls import reverse
-from django.contrib import messages
 from django import forms
+from django.contrib import messages
+from django.core import files
 from django.template.loader import render_to_string
-from django.utils.translation import gettext_lazy as _, get_language
+from django.urls import reverse
+from django.utils.translation import get_language
+from django.utils.translation import gettext_lazy as _
 
-from cosinnus.core.mail import send_html_mail_threaded, get_common_mail_context
-from cosinnus.templatetags.cosinnus_tags import textfield
-
+from cosinnus.conf import settings
+from cosinnus.core.mail import get_common_mail_context, send_html_mail_threaded
 from cosinnus.forms.user import TermsOfServiceFormFields
-from cosinnus.models.profile import PROFILE_SETTING_COSINUS_OAUTH_LOGIN
+from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
+from cosinnus.models.profile import PROFILE_SETTING_COSINUS_OAUTH_LOGIN, get_user_profile_model
+from cosinnus.models.tagged import BaseTagObject
+from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.urls import redirect_with_next
+from cosinnus.utils.user import accept_user_tos_for_portal
 
 
 class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields):
@@ -31,11 +29,12 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
     copy_profile = forms.BooleanField(required=False)
 
     error_messages = {
-        'email_taken':
-        _("An account already exists with this e-mail address."
-          " To make sure that you are the owner of this account"
-          " please sign in to that account first, then connect"
-          " your {} account.")
+        'email_taken': _(
+            'An account already exists with this e-mail address.'
+            ' To make sure that you are the owner of this account'
+            ' please sign in to that account first, then connect'
+            ' your {} account.'
+        )
     }
 
     def __init__(self, *args, **kwargs):
@@ -62,18 +61,14 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
             base_profile.save()
 
         self.send_welcome_mail(user, request)
-        messages.add_message(request,
-                             messages.SUCCESS,
-                             _('Successfully signed in as {}.').format(user.get_full_name()))
+        messages.add_message(request, messages.SUCCESS, _('Successfully signed in as {}.').format(user.get_full_name()))
 
     def validate_unique_email(self, value):
         try:
             return super().validate_unique_email(value)
         except forms.ValidationError:
             provider = self.sociallogin.account.get_provider()
-            raise forms.ValidationError(
-                self.error_messages['email_taken'].format(provider.name)
-            )
+            raise forms.ValidationError(self.error_messages['email_taken'].format(provider.name))
 
     def setup_profile(self, user):
         if not user.cosinnus_profile:
@@ -87,10 +82,8 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
         profile.save(update_fields=['language'])
 
         copy_profile = self.cleaned_data.get('copy_profile')
-        welcome_page = '{}?copy_profile={}'.format(reverse('welcome_oauth'),
-                                                   copy_profile)
-        profile.add_redirect_on_next_page(redirect_with_next(welcome_page, request),
-            message=None, priority=True)
+        welcome_page = '{}?copy_profile={}'.format(reverse('welcome_oauth'), copy_profile)
+        profile.add_redirect_on_next_page(redirect_with_next(welcome_page, request), message=None, priority=True)
 
         # set visibility
         if settings.COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED:
@@ -113,14 +106,14 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
             user=user,
             defaults={
                 'status': 1,
-            })
+            },
+        )
 
     def update_media_tag(self, media_tag_dict, profile):
         media_tag = profile.media_tag
         for key, value in media_tag_dict.items():
             setattr(media_tag, key, value)
         media_tag.save()
-
 
     def download_and_save_avatar(self, url, profile):
         image_url = '{}{}'.format(settings.COSINNUS_OAUTH_SERVER_BASEURL, url)
@@ -150,10 +143,7 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
     def send_welcome_mail(self, user, request):
         data = get_common_mail_context(request)
         provider = self.sociallogin.account.provider
-        data.update({
-            'user': user,
-            'provider': provider
-        })
+        data.update({'user': user, 'provider': provider})
         subj_user = render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup_subj.txt', data)
         text = textfield(render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup.html', data))
         send_html_mail_threaded(user, subj_user, text)

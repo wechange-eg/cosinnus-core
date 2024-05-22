@@ -7,7 +7,6 @@ from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
 class IndexTest(ViewTestCase):
-
     def test_index(self):
         """
         Should permanently redirect to list view
@@ -19,6 +18,4 @@ class IndexTest(ViewTestCase):
 
         # should redirect to list view
         self.assertEqual(response.status_code, 302)
-        self.assertIn(
-            reverse('cosinnus:etherpad:list', kwargs=kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:etherpad:list', kwargs=kwargs), response.get('location'))

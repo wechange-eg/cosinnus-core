@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import reverse
-
-from cosinnus_file.models import FileEntry
 from cosinnus.utils.urls import group_aware_reverse
-
+from cosinnus_file.models import FileEntry
 
 NOTIFY_MODELS = [FileEntry]
 NOTIFY_POST_SUBSCRIBE_URLS = {

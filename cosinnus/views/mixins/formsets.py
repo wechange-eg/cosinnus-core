@@ -1,5 +1,3 @@
-
-
 class JsonFieldFormsetMixin:
     """
     View Mixin to provide formset handling for data that is stored in a JSON-field list.
@@ -79,16 +77,17 @@ class JsonFieldFormsetMixin:
         The inline_form is added automatically to the context and is named "<json_field_name>_formset".
 
             {% include 'cosinnus/fields/inlineform_field.html' with inline_form=example_field_formset label=<label> content_template=<inline_form_template> unique_id='<id>' %}
-    """
+    """  # noqa
+
     json_field_formsets = None
     _json_field_formset_instances = None
 
     def get_json_field_formsets(self):
-        """ Returns the formsets dict. Can be overwritten for dynamic formsets. """
+        """Returns the formsets dict. Can be overwritten for dynamic formsets."""
         return self.json_field_formsets
 
     def get_instance(self):
-        """ Returns the instance with the json fields if available. Used for initialization. """
+        """Returns the instance with the json fields if available. Used for initialization."""
         raise NotImplementedError
 
     def json_field_formset_initial(self):
@@ -107,30 +106,32 @@ class JsonFieldFormsetMixin:
         return self._validate_formsets()
 
     def get_context_data(self, *args, **kwargs):
-        """ Adds formsets to the view context. Initializes the formsets if not already initialized (on GET). """
+        """Adds formsets to the view context. Initializes the formsets if not already initialized (on GET)."""
         context = super(JsonFieldFormsetMixin, self).get_context_data(*args, **kwargs)
         if not self._json_field_formset_instances:
             self._init_formsets_on_get()
-        context.update({
-            json_field_name + '_formset': formset
-            for json_field_name, formset in self._json_field_formset_instances.items()
-        })
+        context.update(
+            {
+                json_field_name + '_formset': formset
+                for json_field_name, formset in self._json_field_formset_instances.items()
+            }
+        )
         return context
 
     def json_field_formset_pre_save_hook(self, instance):
-        """ Stores the formset values in the json field. Should be called before saving the form instance. """
+        """Stores the formset values in the json field. Should be called before saving the form instance."""
         for json_field_name, formset_instance in self._json_field_formset_instances.items():
             formset_as_json = self._formset_as_json(formset_instance)
             setattr(instance, json_field_name, formset_as_json)
 
     def form_invalid(self, form):
-        """ Overwrites form_invalid to re-initialize formsets with submitted data. """
+        """Overwrites form_invalid to re-initialize formsets with submitted data."""
         self._init_formsets_on_post()
         self._validate_formsets()
         return super(JsonFieldFormsetMixin, self).form_invalid(form)
 
     def _init_formsets_on_get(self):
-        """ Initialize the formsets on GET. """
+        """Initialize the formsets on GET."""
         instance = self.get_instance()
         if instance:
             # Initialize from instance
@@ -152,14 +153,14 @@ class JsonFieldFormsetMixin:
             self._json_field_formset_instances[json_field_name] = formset_instance
 
     def _init_formsets_on_post(self):
-        """ Initialize formsets on POST. """
+        """Initialize formsets on POST."""
         self._json_field_formset_instances = {}
         for json_field_name, formset in self.get_json_field_formsets().items():
             formset_instance = formset(self.request.POST, self.request.FILES, prefix=json_field_name)
             self._json_field_formset_instances[json_field_name] = formset_instance
 
     def _validate_formsets(self):
-        """ Validates all formsets. """
+        """Validates all formsets."""
         valid = True
         for formset_instance in self._json_field_formset_instances.values():
             formset_valid = formset_instance.is_valid()

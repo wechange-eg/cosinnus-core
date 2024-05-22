@@ -9,8 +9,7 @@ from cosinnus.utils.http import JSONResponse
 
 
 class JSONResponseTest(SimpleTestCase):
-
-    content_type='application/json'
+    content_type = 'application/json'
 
     def test_empty(self):
         r = JSONResponse({})
@@ -37,7 +36,7 @@ class JSONResponseTest(SimpleTestCase):
         self.assertEqual(r['content-type'], self.content_type)
 
     def test_status_code(self):
-        r = JSONResponse({'key': "val"}, status=404)
+        r = JSONResponse({'key': 'val'}, status=404)
         self.assertEqual(r.content, b'{\n "key": "val"\n}')
         self.assertEqual(r.status_code, 404)
         self.assertEqual(r['content-type'], self.content_type)

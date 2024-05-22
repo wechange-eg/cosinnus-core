@@ -2,21 +2,26 @@
 from __future__ import unicode_literals
 
 from unittest.mock import MagicMock
-from django.contrib.auth.models import User, AnonymousUser
+
+from django.contrib.auth.models import AnonymousUser, User
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse, Http404
+from django.http import Http404, HttpResponse
 from django.test import TestCase
 from django.test.client import RequestFactory
 from django.utils.encoding import force_str
 from django.views.generic import View
 
-from cosinnus.core.decorators.views import (require_admin_access,
-    require_read_access, require_write_access, staff_required,
-    superuser_required)
-from cosinnus.models.group import (CosinnusGroup as Group,
-                                   CosinnusGroupMembership as Membership)
+from cosinnus.core.decorators.views import (
+    require_admin_access,
+    require_read_access,
+    require_write_access,
+    staff_required,
+    superuser_required,
+)
+from cosinnus.models import MEMBERSHIP_ADMIN, MEMBERSHIP_PENDING
+from cosinnus.models.group import CosinnusGroup as Group
+from cosinnus.models.group import CosinnusGroupMembership as Membership
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
-from cosinnus.models import MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN
 
 
 class TestAdminView(View):
@@ -47,7 +52,6 @@ class TestWriteView(View):
 
 
 class TestViewPermissionDecorators(TestCase):
-
     def setUp(self):
         self.anon = AnonymousUser()
         self.nostaff = User.objects.create_user('nostaff', 'nostaff@localhost', 'pw')
@@ -67,18 +71,17 @@ class TestViewPermissionDecorators(TestCase):
         response = view(request)
         self.assertEqual(response.status_code, 302)
 
-        request.user= self.nostaff
+        request.user = self.nostaff
         response = view(request)
         self.assertEqual(response.status_code, 302)
 
-        request.user= self.staff
+        request.user = self.staff
         response = view(request)
         self.assertEqual(response.status_code, 200)
 
-        request.user= self.superuser
+        request.user = self.superuser
         response = view(request)
         self.assertEqual(response.status_code, 200)
-
 
     def test_superuser_required(self):
         @superuser_required
@@ -90,21 +93,20 @@ class TestViewPermissionDecorators(TestCase):
         response = view(request)
         self.assertEqual(response.status_code, 302)
 
-        request.user= self.nostaff
+        request.user = self.nostaff
         response = view(request)
         self.assertEqual(response.status_code, 302)
 
-        request.user= self.staff
+        request.user = self.staff
         response = view(request)
         self.assertEqual(response.status_code, 302)
 
-        request.user= self.superuser
+        request.user = self.superuser
         response = view(request)
         self.assertEqual(response.status_code, 200)
 
 
 class TestRequireAdminAccessDecorator(TestCase):
-
     def setUp(self):
         self.view = TestAdminView
         self.rf = RequestFactory()
@@ -128,6 +130,7 @@ class TestRequireAdminAccessDecorator(TestCase):
 
         # mock messages
         from cosinnus.core.decorators import views
+
         views.messages = MagicMock()
 
     def test_anonymous(self):
@@ -252,7 +255,6 @@ class TestRequireAdminAccessDecorator(TestCase):
 
 
 class TestRequireReadAccessDecorator(TestCase):
-
     def setUp(self):
         self.view = TestReadView
         self.rf = RequestFactory()
@@ -276,6 +278,7 @@ class TestRequireReadAccessDecorator(TestCase):
 
         # mock messages
         from cosinnus.core.decorators import views
+
         views.messages = MagicMock()
 
     def test_anonymous(self):
@@ -355,7 +358,7 @@ class TestRequireReadAccessDecorator(TestCase):
 
         request.user = self.user
         with self.assertRaises(Http404):
-            response = self.view.as_view()(request, group='other-group')
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.pending
         with self.assertRaises(Http404):
@@ -407,7 +410,6 @@ class TestRequireReadAccessDecorator(TestCase):
 
 
 class TestRequireWriteAccessDecorator(TestCase):
-
     def setUp(self):
         self.view = TestWriteView
         self.rf = RequestFactory()
@@ -431,6 +433,7 @@ class TestRequireWriteAccessDecorator(TestCase):
 
         # mock messages
         from cosinnus.core.decorators import views
+
         views.messages = MagicMock()
 
     def test_anonymous(self):

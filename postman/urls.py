@@ -86,22 +86,32 @@ Refer to documentation.
     ...View.as_view(formatters=(format_subject, format_body)), name='view'),
 
 """
+
 from __future__ import unicode_literals
 
-from django.urls import re_path, path
+from django.urls import path, re_path
 from django.views.generic.base import RedirectView
 
 from . import OPTIONS
-from .views import (InboxView, SentView, ArchivesView, TrashView,
-        WriteView, ReplyView, MessageView, ConversationView,
-        ArchiveView, DeleteView, UndeleteView)
-
+from .views import (
+    ArchivesView,
+    ArchiveView,
+    ConversationView,
+    DeleteView,
+    InboxView,
+    MessageView,
+    ReplyView,
+    SentView,
+    TrashView,
+    UndeleteView,
+    WriteView,
+)
 
 urlpatterns = [
-    re_path(r'^inbox/(?:(?P<option>'+OPTIONS+')/)?$', InboxView.as_view(), name='inbox'),
-    re_path(r'^sent/(?:(?P<option>'+OPTIONS+')/)?$', SentView.as_view(), name='sent'),
-    re_path(r'^archives/(?:(?P<option>'+OPTIONS+')/)?$', ArchivesView.as_view(), name='archives'),
-    re_path(r'^trash/(?:(?P<option>'+OPTIONS+')/)?$', TrashView.as_view(), name='trash'),
+    re_path(r'^inbox/(?:(?P<option>' + OPTIONS + ')/)?$', InboxView.as_view(), name='inbox'),
+    re_path(r'^sent/(?:(?P<option>' + OPTIONS + ')/)?$', SentView.as_view(), name='sent'),
+    re_path(r'^archives/(?:(?P<option>' + OPTIONS + ')/)?$', ArchivesView.as_view(), name='archives'),
+    re_path(r'^trash/(?:(?P<option>' + OPTIONS + ')/)?$', TrashView.as_view(), name='trash'),
     re_path(r'^write/(?:(?P<recipients>[^/#]+)/)?$', WriteView.as_view(), name='write'),
     path('reply/<int:message_id>/', ReplyView.as_view(), name='reply'),
     path('view/<int:message_id>/', MessageView.as_view(), name='view'),

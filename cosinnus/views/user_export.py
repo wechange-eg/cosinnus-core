@@ -14,12 +14,10 @@ from cosinnus.models.user_export import CosinnusUserExportProcessor
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
 from cosinnus.views.mixins.group import RequireSuperuserMixin
 
-
 logger = logging.getLogger('cosinnus')
 
 
 class CosinnusUserExportView(RequireSuperuserMixin, TemplateView):
-
     http_method_names = ['get', 'post']
     template_name = 'cosinnus/user_export/user_export.html'
     redirect_view = reverse_lazy('cosinnus:administration-user-export')
@@ -49,20 +47,22 @@ class CosinnusUserExportView(RequireSuperuserMixin, TemplateView):
             self.export_processor.delete_export()
 
         return redirect(self.redirect_view)
-    
+
     def get_context_data(self, **kwargs):
         context = super(CosinnusUserExportView, self).get_context_data(**kwargs)
-        context.update({
-            'export_state': self.export_state,
-            'export_timestamp': self.export_processor.get_current_export_timestamp(),
-        })
+        context.update(
+            {
+                'export_state': self.export_state,
+                'export_timestamp': self.export_processor.get_current_export_timestamp(),
+            }
+        )
         return context
+
 
 user_export_view = CosinnusUserExportView.as_view()
 
 
 class CosinnusUserExportDownloadBaseView(RequireSuperuserMixin, View):
-
     http_method_names = ['get']
     export_processor = CosinnusUserExportProcessor()
     export_response_function = None
@@ -78,7 +78,6 @@ class CosinnusUserExportDownloadBaseView(RequireSuperuserMixin, View):
 
 
 class CosinnusUserExportCSVDownloadView(CosinnusUserExportDownloadBaseView):
-
     export_response_function = make_csv_response
 
 
@@ -86,7 +85,6 @@ user_export_csv_download_view = CosinnusUserExportCSVDownloadView.as_view()
 
 
 class CosinnusUserExportXLSXDownloadView(CosinnusUserExportDownloadBaseView):
-
     export_response_function = make_xlsx_response
 
 

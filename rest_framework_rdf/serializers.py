@@ -1,6 +1,6 @@
-from rdflib import Literal, URIRef, RDF
+from rdflib import RDF, Literal, URIRef
 from rest_framework import serializers
-from rest_framework.fields import SerializerMethodField, Field
+from rest_framework.fields import Field, SerializerMethodField
 
 
 class RDFFieldMixin:
@@ -59,9 +59,9 @@ class RDFSerializer(serializers.ModelSerializer):
             elif resource:
                 resources.append(resource)
         return {
-            "type": (self.id, RDF.type, self.Meta.type),
-            "prefixes": prefixes,
-            "resources": resources,
+            'type': (self.id, RDF.type, self.Meta.type),
+            'prefixes': prefixes,
+            'resources': resources,
         }
 
     class Meta:

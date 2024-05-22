@@ -21,6 +21,6 @@ class BaseNewsletter(models.Model):
 class Newsletter(BaseNewsletter):
     managed_tags = models.ManyToManyField(CosinnusManagedTag)
 
-    
+
 class GroupsNewsletter(BaseNewsletter):
     groups = models.ManyToManyField(settings.COSINNUS_GROUP_OBJECT_MODEL, blank=True, related_name='+')

@@ -4,6 +4,7 @@ to define a customized version of 'submit_row' tag with a cutomized html templat
 
 In use in templates/admin/postman/pendingmessage/change_form.html.
 """
+
 from __future__ import unicode_literals
 
 from django import template

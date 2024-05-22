@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from cosinnus_event.models import Event, Suggestion, Vote, ConferenceEvent, ConferenceEventAttendanceTracking
 from cosinnus.admin import BaseTaggableAdmin, CosinnusConferenceSettingsInline
+from cosinnus_event.models import ConferenceEvent, ConferenceEventAttendanceTracking, Event, Suggestion, Vote
 
 
 def restart_bbb_rooms(modeladmin, request, queryset):
@@ -13,8 +13,10 @@ def restart_bbb_rooms(modeladmin, request, queryset):
         try:
             bbb_room = event.media_tag.bbb_room
             bbb_room.restart()
-        except:
+        except Exception:
             pass
+
+
 restart_bbb_rooms.short_description = _('Restart BBB rooms')
 
 
@@ -27,7 +29,11 @@ class VoteInlineAdmin(admin.TabularInline):
 class SuggestionAdmin(admin.ModelAdmin):
     inlines = (VoteInlineAdmin,)
     list_display = ('from_date', 'to_date', 'event', 'count')
-    list_filter = ('event__state', 'event__creator', 'event__group',)
+    list_filter = (
+        'event__state',
+        'event__creator',
+        'event__group',
+    )
     readonly_fields = ('event', 'count')
 
     def get_readonly_fields(self, request, obj=None):
@@ -44,25 +50,37 @@ class SuggestionInlineAdmin(admin.TabularInline):
     model = Suggestion
     readonly_fields = ('count',)
 
+
 admin.site.register(Suggestion, SuggestionAdmin)
 
 
 class EventAdmin(BaseTaggableAdmin):
-    list_display = BaseTaggableAdmin.list_display + ['id', 'from_date', 'to_date', 'group', 'state', 'is_hidden_group_proxy']
+    list_display = BaseTaggableAdmin.list_display + [
+        'id',
+        'from_date',
+        'to_date',
+        'group',
+        'state',
+        'is_hidden_group_proxy',
+    ]
     list_filter = BaseTaggableAdmin.list_filter + ['state', 'is_hidden_group_proxy']
     inlines = BaseTaggableAdmin.inlines + [SuggestionInlineAdmin, CosinnusConferenceSettingsInline]
-    actions = (restart_bbb_rooms, )
+    actions = (restart_bbb_rooms,)
+
 
 admin.site.register(Event, EventAdmin)
 
 
 class ConferenceEventAdmin(BaseTaggableAdmin):
     list_display = BaseTaggableAdmin.list_display + ['id', 'type', 'room', 'from_date', 'to_date', 'group', 'state']
-    list_filter = BaseTaggableAdmin.list_filter + ['type', ]
-    actions = (restart_bbb_rooms, )
+    list_filter = BaseTaggableAdmin.list_filter + [
+        'type',
+    ]
+    actions = (restart_bbb_rooms,)
     inlines = [CosinnusConferenceSettingsInline]
     raw_id_fields = BaseTaggableAdmin.raw_id_fields + ['presenters']
     inline_reverse = []
+
 
 admin.site.register(ConferenceEvent, ConferenceEventAdmin)
 
@@ -74,6 +92,7 @@ class ConferenceEventAttendanceTrackingAdmin(admin.ModelAdmin):
 
     def conference(self, obj):
         return obj.event.group
+
     conference.short_description = _('Conference')
 
     def has_add_permission(self, request):
@@ -81,5 +100,6 @@ class ConferenceEventAttendanceTrackingAdmin(admin.ModelAdmin):
 
     def has_change_permission(self, request, obj=None):
         return False
+
 
 admin.site.register(ConferenceEventAttendanceTracking, ConferenceEventAttendanceTrackingAdmin)

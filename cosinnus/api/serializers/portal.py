@@ -5,8 +5,8 @@ from builtins import object
 
 from django.templatetags.static import static
 from rest_framework import serializers
-from cosinnus.models import CosinnusPortal
 
+from cosinnus.models import CosinnusPortal
 
 __all__ = ('PortalSettingsSerializer',)
 

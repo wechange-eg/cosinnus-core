@@ -2,8 +2,8 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from cosinnus_message.rocket_chat import RocketChatConnection
 from cosinnus.conf import settings
+from cosinnus_message.rocket_chat import RocketChatConnection
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--only-settings",
+            '--only-settings',
             help='Sync only listed settings (format: Setting_1,Setting_2,Setting_3).',
         )
 

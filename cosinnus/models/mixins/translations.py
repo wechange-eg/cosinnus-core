@@ -1,3 +1,4 @@
+from copy import copy
 from functools import partial
 
 from django.core.exceptions import ImproperlyConfigured
@@ -6,11 +7,10 @@ from django.db import models
 from django.utils.translation import get_language
 
 from cosinnus.conf import settings
-from copy import copy
 
 
 class TranslateableFieldsModelMixin(models.Model):
-    """ translations are saved liked that:
+    """translations are saved liked that:
     {"<fieldname>":
         {"<language_code": "foo"},
         {"<another language_code": "bar"}
@@ -25,6 +25,7 @@ class TranslateableFieldsModelMixin(models.Model):
     Be aware: only fields with translations of dynamic_fields
     are added to the translations json.
     """
+
     translateable_fields = []
     translatable_dynamic_fields = []
     dynamic_fields_settings = {}
@@ -42,8 +43,11 @@ class TranslateableFieldsModelMixin(models.Model):
             # serializer.
             for dynamic_field in self.translatable_dynamic_fields:
                 for language_code, __ in settings.LANGUAGES:
-                    setattr(self, f'get_{dynamic_field}__{language_code}',
-                            partial(self.get_translated_dynamic_field, dynamic_field, language_code))
+                    setattr(
+                        self,
+                        f'get_{dynamic_field}__{language_code}',
+                        partial(self.get_translated_dynamic_field, dynamic_field, language_code),
+                    )
 
     @property
     def languages(self):
@@ -53,22 +57,22 @@ class TranslateableFieldsModelMixin(models.Model):
 
     @property
     def has_dynamic_field_translations(self):
-        return (len(self.translatable_dynamic_fields) > 0 and
-                len(self.dynamic_fields_settings.keys()) > 0 and
-                'dynamic_fields' in self.translateable_fields)
+        return (
+            len(self.translatable_dynamic_fields) > 0
+            and len(self.dynamic_fields_settings.keys()) > 0
+            and 'dynamic_fields' in self.translateable_fields
+        )
 
     def __getitem__(self, key):
-        """ Any getitem calls like `instance[field]` (or in template: `{{ instance.field }}`)
-            will return the translated field for this instance """
+        """Any getitem calls like `instance[field]` (or in template: `{{ instance.field }}`)
+        will return the translated field for this instance"""
         if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED and key in self.get_translateable_fields():
             current_laguage = get_language()
             translated = None
             if key == 'dynamic_fields':
-                translated = self.get_dynamic_fields_with_translations(
-                    current_laguage)
+                translated = self.get_dynamic_fields_with_translations(current_laguage)
             else:
-                translated = self.get_translated_model_field(
-                    key, current_laguage)
+                translated = self.get_translated_model_field(key, current_laguage)
             if translated:
                 return translated
         return getattr(self, key)
@@ -88,18 +92,16 @@ class TranslateableFieldsModelMixin(models.Model):
 
         if self.translatable_dynamic_fields:
             dynamic_fields = copy(getattr(self, 'dynamic_fields'))
-            dynamic_fields_translations = self.translations.get(
-                'dynamic_fields')
+            dynamic_fields_translations = self.translations.get('dynamic_fields')
             if dynamic_fields_translations:
-                translation = dynamic_fields_translations.get(
-                    language)
+                translation = dynamic_fields_translations.get(language)
                 if translation:
-                    clean_translation = {k:v for k,v in translation.items() if v != ''}
+                    clean_translation = {k: v for k, v in translation.items() if v != ''}
                     dynamic_fields.update(clean_translation)
                     return dynamic_fields
 
     def get_translated_dynamic_field(self, dynamic_field, language):
-        """ Return the translated value of a dynamic field. """
+        """Return the translated value of a dynamic field."""
         if self.has_dynamic_field_translations:
             dynamic_fields_translations = self.translations.get('dynamic_fields')
             if dynamic_fields_translations:
@@ -112,11 +114,15 @@ class TranslateableFieldsModelMixin(models.Model):
         return self.translateable_fields
 
     def get_translated_readonly_instance(self):
-        """ Return a translated readonly copy of this instance,
-            where all translated fields are replaced with the final translated value.
-            The save() and delete() functions are blocked to prevent accidental persisting of the fields. """
+        """Return a translated readonly copy of this instance,
+        where all translated fields are replaced with the final translated value.
+        The save() and delete() functions are blocked to prevent accidental persisting of the fields."""
+
         def _protected_func(*args, **kwargs):
-            raise ImproperlyConfigured('This function cannot be used on an instance converted with `get_translated_readonly_instance()`')
+            raise ImproperlyConfigured(
+                'This function cannot be used on an instance converted with `get_translated_readonly_instance()`'
+            )
+
         readonly_copy = copy(self)
         for field_name in self.get_translateable_fields():
             # set translated field value
@@ -128,7 +134,7 @@ class TranslateableFieldsModelMixin(models.Model):
 
 
 class TranslatableFormsetJsonFieldMixin:
-    """ Model mixin that adds a helper function to receive a translated version of a formset json field. """
+    """Model mixin that adds a helper function to receive a translated version of a formset json field."""
 
     def get_translated_json_field(self, field_name):
         json_field = getattr(self, field_name)

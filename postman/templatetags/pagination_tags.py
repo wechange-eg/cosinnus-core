@@ -9,9 +9,10 @@ as it may be the case for the test suite run in a minimal configuration.
 To deactivate this mock and use the real implementation, just make sure that 'pagination' is declared
 before 'postman' in the INSTALLED_APPS setting.
 """
+
 from __future__ import unicode_literals
 
-from django.template import Node, Library
+from django.template import Library, Node
 
 register = Library()
 

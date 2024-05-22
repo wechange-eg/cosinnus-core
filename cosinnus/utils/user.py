@@ -1,33 +1,31 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
+import hashlib
 import logging
 import random
 
+import pytz
+import six
+from dateutil import parser
+from django.apps import apps
+from django.contrib.auth import get_user_model, login
+from django.core.cache import cache
+from django.core.exceptions import MultipleObjectsReturned
 from django.db import transaction
+from django.db.models import Q
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django.utils.crypto import get_random_string
+from django.utils.html import escape
+from django.utils.timezone import is_naive, now
 
 from cosinnus.conf import settings
 from cosinnus.core.registries.widgets import widget_registry
-from cosinnus.utils.group import get_cosinnus_group_model,\
-    get_default_user_group_slugs
-from django.contrib.auth import get_user_model, login
-from django.core.exceptions import MultipleObjectsReturned
-from django.utils.crypto import get_random_string
-from django.db.models import Q
-import six
-from django.template.loader import render_to_string
-from django.utils.html import escape
-from django.apps import apps
-from django.urls import reverse
-from cosinnus.utils.urls import get_domain_for_portal
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.tokens import email_blacklist_token_generator
-from django.utils.timezone import now, is_naive
-from dateutil import parser
-import datetime
-import pytz
-from django.core.cache import cache
-import hashlib
-
+from cosinnus.utils.urls import get_domain_for_portal
 
 _CosinnusPortal = None
 
@@ -35,16 +33,16 @@ logger = logging.getLogger('cosinnus')
 
 
 def get_user_by_email_safe(email):
-    """ Gets a user by email from the DB. Works around the fact that we're using a non-unique email
-        field, but assume it should be unique.
-        
-        This method DOES NOT throw USER_MODEL.DoesNotExist! If no user was found, it returns None instead!
-        
-        If a user with the same 2 (case-insensitive) email addresses is found, we:
-            - keep the user with the most recent login date and lowercase his email-address
-            - set the older users inactive and change their email to '__deduplicate__<old-email>'
-            
-        @return: None if no user was found. A user object if found, even if it had a duplicated email.
+    """Gets a user by email from the DB. Works around the fact that we're using a non-unique email
+    field, but assume it should be unique.
+
+    This method DOES NOT throw USER_MODEL.DoesNotExist! If no user was found, it returns None instead!
+
+    If a user with the same 2 (case-insensitive) email addresses is found, we:
+        - keep the user with the most recent login date and lowercase his email-address
+        - set the older users inactive and change their email to '__deduplicate__<old-email>'
+
+    @return: None if no user was found. A user object if found, even if it had a duplicated email.
     """
     USER_MODEL = get_user_model()
     if not email:
@@ -62,34 +60,36 @@ def get_user_by_email_safe(email):
         else:
             newest = users.filter(last_login__isnull=False).latest('last_login')
         others = users.exclude(id=newest.id)
-        
+
         newest.email = newest.email.lower()
         newest.save()
-        
+
         for user in others:
             user.is_active = False
             user.email = '__deduplicate__%s' % user.email
             user.save()
-            
+
         # we re-retrieve the newest user here so we can fail early here if something went really wrong
         return USER_MODEL.objects.get(email__iexact=email)
-    
+
     except USER_MODEL.DoesNotExist:
         return None
-        
-        
+
+
 def ensure_user_widget(user, app_name, widget_name, config={}):
-    """ Makes sure if a widget exists for the given user, and if not, creates it """
+    """Makes sure if a widget exists for the given user, and if not, creates it"""
     from cosinnus.models.widget import WidgetConfig
+
     wqs = WidgetConfig.objects.filter(user_id=user.pk, app_name=app_name, widget_name=widget_name)
     if wqs.count() <= 0:
         widget_class = widget_registry.get(app_name, widget_name)
         widget = widget_class.create(None, group=None, user=user)
         widget.save_config(config)
 
-    
+
 def assign_user_to_default_auth_group(sender, **kwargs):
     from django.contrib.auth.models import Group
+
     user = kwargs.get('instance')
     for group_name in getattr(settings, 'NEWW_DEFAULT_USER_AUTH_GROUPS', []):
         try:
@@ -97,13 +97,15 @@ def assign_user_to_default_auth_group(sender, **kwargs):
         except Group.DoesNotExist:
             continue
         group.user_set.add(user)
-        
+
+
 def ensure_user_to_default_portal_groups(sender, created, **kwargs):
-    """ Whenever a portal membership changes, make sure the user is in the default groups for this Portal,
-        unless they are a guest account. """
+    """Whenever a portal membership changes, make sure the user is in the default groups for this Portal,
+    unless they are a guest account."""
     try:
         from cosinnus.models.group import CosinnusGroupMembership
         from cosinnus.models.membership import MEMBERSHIP_MEMBER
+
         membership = kwargs.get('instance')
         if membership.user.is_guest:
             return
@@ -111,76 +113,90 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
         for group_slug in get_default_user_group_slugs():
             try:
                 group = CosinnusGroup.objects.get(slug=group_slug, portal_id=membership.group.id)
-                CosinnusGroupMembership.objects.get_or_create(user=membership.user, group=group, defaults={'status': MEMBERSHIP_MEMBER})
+                CosinnusGroupMembership.objects.get_or_create(
+                    user=membership.user, group=group, defaults={'status': MEMBERSHIP_MEMBER}
+                )
             except CosinnusGroup.DoesNotExist:
                 continue
-            
-    except:
+
+    except Exception:
         # We fail silently, because we never want to 500 here unexpectedly
-        logger.error("Error while trying to add User Membership for newly created user.")
+        logger.error('Error while trying to add User Membership for newly created user.')
+
 
 def is_user_active(user):
-    """ Similar to `filter_active_users`, returns True if 
-        the user account is considered active in the portal and not a guest. """
-    return user.is_active and user.last_login and \
-            user.cosinnus_profile.tos_accepted and \
-            user.email and user.cosinnus_profile.email_verified and \
-            not user.email.startswith('__deleted_user__') and \
-            not user.is_guest
+    """Similar to `filter_active_users`, returns True if
+    the user account is considered active in the portal and not a guest."""
+    return (
+        user.is_active
+        and user.last_login
+        and user.cosinnus_profile.tos_accepted
+        and user.email
+        and user.cosinnus_profile.email_verified
+        and not user.email.startswith('__deleted_user__')
+        and not user.is_guest
+    )
+
 
 def filter_active_users(user_model_qs, filter_on_user_profile_model=False, filter_guests=True):
-    """ Filters a QS of ``get_user_model()`` so that all users are removed that are either of
-            - inactive
-            - have never logged in
-            - have not accepted the ToS
-            - are a guest account
-        @param filter_on_user_profile_model: Filter not on User, but on CosinnusUserProfile instead.
-        @param filter_guests: switch to disable the standard mode of considering guest accounts inactive,
-            which is done so that many permission checks do not apply to guests.
+    """Filters a QS of ``get_user_model()`` so that all users are removed that are either of
+        - inactive
+        - have never logged in
+        - have not accepted the ToS
+        - are a guest account
+    @param filter_on_user_profile_model: Filter not on User, but on CosinnusUserProfile instead.
+    @param filter_guests: switch to disable the standard mode of considering guest accounts inactive,
+        which is done so that many permission checks do not apply to guests.
     """
     if filter_on_user_profile_model:
-        filtered_qs = user_model_qs.exclude(user__is_active=False).\
-            exclude(user__last_login__exact=None).\
-            exclude(email_verified=False).\
-            filter(tos_accepted=True)
+        filtered_qs = (
+            user_model_qs.exclude(user__is_active=False)
+            .exclude(user__last_login__exact=None)
+            .exclude(email_verified=False)
+            .filter(tos_accepted=True)
+        )
         if filter_guests:
             filtered_qs = filtered_qs.exclude(_is_guest=True)
         return filtered_qs
     else:
-        filtered_qs = user_model_qs.exclude(is_active=False). \
-            exclude(last_login__exact=None). \
-            exclude(cosinnus_profile__email_verified=False). \
-            filter(cosinnus_profile__tos_accepted=True)
+        filtered_qs = (
+            user_model_qs.exclude(is_active=False)
+            .exclude(last_login__exact=None)
+            .exclude(cosinnus_profile__email_verified=False)
+            .filter(cosinnus_profile__tos_accepted=True)
+        )
         if filter_guests:
             filtered_qs = filtered_qs.exclude(cosinnus_profile___is_guest=True)
         return filtered_qs
-            
+
+
 def filter_portal_users(user_model_qs, portal=None):
-    """ Filters a QS of ``get_user_model()`` so that only users of this portal remain. """
+    """Filters a QS of ``get_user_model()`` so that only users of this portal remain."""
     if portal is None:
         global _CosinnusPortal
-        if _CosinnusPortal is None: 
+        if _CosinnusPortal is None:
             _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
         portal = _CosinnusPortal.get_current()
     return user_model_qs.filter(id__in=portal.members)
 
 
 def get_user_query_filter_for_search_terms(terms):
-    """ Returns a django Q filter for use on USER_MODEL that returns all users with matching
-        names, given an array of search terms. Each search term needs to be matched (AND)
-        on at least one of the user's name fields (OR). Case is insensitive.
-        User name fields are USER_MODEL.first_name, USER_MODEL.last_name, as well as any
-        additional fields defined in the user profile model (``ADDITIONAL_USERNAME_FIELDS``).
-        @param terms: An array of string search terms.
-        @return: A django Q object.
+    """Returns a django Q filter for use on USER_MODEL that returns all users with matching
+    names, given an array of search terms. Each search term needs to be matched (AND)
+    on at least one of the user's name fields (OR). Case is insensitive.
+    User name fields are USER_MODEL.first_name, USER_MODEL.last_name, as well as any
+    additional fields defined in the user profile model (``ADDITIONAL_USERNAME_FIELDS``).
+    @param terms: An array of string search terms.
+    @return: A django Q object.
     """
     from cosinnus.models.profile import get_user_profile_model
+
     ADDITIONAL_USERNAME_FIELDS = get_user_profile_model().ADDITIONAL_USERNAME_FIELDS
     first_term, other_terms = terms[0], terms[1:]
 
     # username is not used as filter for the term for now, might confuse
     # users why a search result is found
-    q = Q(first_name__icontains=first_term) | Q(last_name__icontains=first_term) 
+    q = Q(first_name__icontains=first_term) | Q(last_name__icontains=first_term)
     for field_name in ADDITIONAL_USERNAME_FIELDS:
         q |= Q(**{'cosinnus_profile__%s__icontains' % field_name: first_term})
     for other_term in other_terms:
@@ -188,22 +204,23 @@ def get_user_query_filter_for_search_terms(terms):
         for field_name in ADDITIONAL_USERNAME_FIELDS:
             add_q |= Q(**{'cosinnus_profile__%s__icontains' % field_name: first_term})
         q &= add_q
-        
-    return q
-        
 
-# very similar to create_user but uses UserCreateForm from django.contrib.auth as the one from cosinnus.forms.user requires a captcha
+    return q
+
+
+# very similar to create_user but uses UserCreateForm from django.contrib.auth as the one from cosinnus.forms.user
+# requires a captcha
 def create_base_user(email, username=None, password=None, first_name=None, last_name=None, no_generated_password=False):
-    """ :param no_generated_password: set password generation behaviour. If False Password will be kept with None
-        :type no_generated_password: bool | default False
+    """:param no_generated_password: set password generation behaviour. If False Password will be kept with None
+    :type no_generated_password: bool | default False
     """
 
-    from django.contrib.auth.forms import UserCreationForm
-    from cosinnus.models.profile import get_user_profile_model
-    from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
-    from cosinnus.models.membership import MEMBERSHIP_MEMBER
     from django.contrib.auth import get_user_model
+    from django.contrib.auth.forms import UserCreationForm
     from django.core.exceptions import ObjectDoesNotExist
+
+    from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
+    from cosinnus.models.membership import MEMBERSHIP_MEMBER
 
     try:
         user_model = get_user_model()
@@ -226,17 +243,16 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     else:
         password = get_random_string(length=12)
 
-        user_data = {
-            'username': username or get_random_string(length=12),
-            'password1': password,
-            'password2': password
-        }
+        user_data = {'username': username or get_random_string(length=12), 'password1': password, 'password2': password}
 
         form = UserCreationForm(user_data)
         if form.is_valid():
             user = form.save()
         else:
-            logger.warning('Manual user creation failed because of form errors!', extra={'data': user_data, 'form-errors': form.errors})
+            logger.warning(
+                'Manual user creation failed because of form errors!',
+                extra={'data': user_data, 'form-errors': form.errors},
+            )
             return False
 
     user.email = email
@@ -249,21 +265,22 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     user.backend = 'cosinnus.backends.EmailAuthBackend'
     user.save()
 
-    CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(),
-                                                   user=user, defaults={'status': MEMBERSHIP_MEMBER})
+    CosinnusPortalMembership.objects.get_or_create(
+        group=CosinnusPortal.get_current(), user=user, defaults={'status': MEMBERSHIP_MEMBER}
+    )
 
     return user
 
 
 def create_user(email, username=None, first_name=None, last_name=None):
-    """ Creates a user with a random password, and adds proper PortalMemberships for this portal.
-        @param email: Email is required because it's basically our pk
-        @param username: Can be left blank and will then be set to the user's id after creation.
-        @return: A <USER_MODEL> instance if creation successful, False if failed to create (was the username taken?)
+    """Creates a user with a random password, and adds proper PortalMemberships for this portal.
+    @param email: Email is required because it's basically our pk
+    @param username: Can be left blank and will then be set to the user's id after creation.
+    @return: A <USER_MODEL> instance if creation successful, False if failed to create (was the username taken?)
     """
     from cosinnus.forms.user import UserCreationForm
-    from cosinnus.models.profile import get_user_profile_model # leave here because of cyclic imports
-    
+    from cosinnus.models.profile import get_user_profile_model  # leave here because of cyclic imports
+
     pwd = get_random_string(length=12)
     data = {
         'username': username or get_random_string(length=12),
@@ -272,99 +289,122 @@ def create_user(email, username=None, first_name=None, last_name=None):
         'password2': pwd,
         'first_name': first_name,
         'last_name': last_name,
-        'tos_check': True, # needs to be True for form validation, may be reset later
+        'tos_check': True,  # needs to be True for form validation, may be reset later
     }
     # use Cosinnus' UserCreationForm to apply all usual user-creation-related effects
     form = UserCreationForm(data)
     if form.is_valid():
         user = form.save()
     else:
-        logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
+        logger.warning(
+            'Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors}
+        )
         return False
     # always retrieve this to make sure the profile was created, we had a Heisenbug here
     get_user_profile_model()._default_manager.get_for_user(user)
 
     # username is always its id
     user.username = user.id
-    
+
     user.backend = 'cosinnus.backends.EmailAuthBackend'
     user.save()
-    
+
     return user
 
 
 def get_newly_registered_user_email(user):
-    """ Safely gets a user object's email address, even if they have yet to veryify their email address
-        (in this case, the `user.email` field is scrambled.
-        See `cosinnus.views.user.send_user_email_to_verify()` """
+    """Safely gets a user object's email address, even if they have yet to veryify their email address
+    (in this case, the `user.email` field is scrambled.
+    See `cosinnus.views.user.send_user_email_to_verify()`"""
     from cosinnus.models.profile import PROFILE_SETTING_EMAIL_TO_VERIFY
+
     return user.cosinnus_profile.settings.get(PROFILE_SETTING_EMAIL_TO_VERIFY, user.email)
 
 
 def get_user_select2_pills(users, text_only=False):
     from cosinnus.templatetags.cosinnus_tags import full_name
-    return [(
-         "user:" + six.text_type(user.id), 
-         render_to_string('cosinnus/common/user_select2_pill.html', {'user': user}).replace('\n', '').replace('\r', '') if not text_only else escape(full_name(user)),
-         ) for user in users]
+
+    return [
+        (
+            'user:' + six.text_type(user.id),
+            render_to_string('cosinnus/common/user_select2_pill.html', {'user': user})
+            .replace('\n', '')
+            .replace('\r', '')
+            if not text_only
+            else escape(full_name(user)),
+        )
+        for user in users
+    ]
 
 
 def get_group_select2_pills(groups, text_only=False):
-    return [(
-         "group:" + six.text_type(group.id), 
-         render_to_string('cosinnus/common/group_select2_pill.html', {'text':escape(group.name)}).replace('\n', '').replace('\r', '') if not text_only else escape(group.name),
-         ) for group in groups]
+    return [
+        (
+            'group:' + six.text_type(group.id),
+            render_to_string('cosinnus/common/group_select2_pill.html', {'text': escape(group.name)})
+            .replace('\n', '')
+            .replace('\r', '')
+            if not text_only
+            else escape(group.name),
+        )
+        for group in groups
+    ]
 
 
 def get_list_unsubscribe_url(email):
-    """ Generates a URL to be used for a List-Unsubscribe header. Util function. """
+    """Generates a URL to be used for a List-Unsubscribe header. Util function."""
     global _CosinnusPortal
-    if _CosinnusPortal is None: 
+    if _CosinnusPortal is None:
         _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
     domain = get_domain_for_portal(_CosinnusPortal.get_current())
-    return domain + reverse('cosinnus:user-add-email-blacklist', kwargs={'email': email, 'token': email_blacklist_token_generator.make_token(email)})
+    return domain + reverse(
+        'cosinnus:user-add-email-blacklist',
+        kwargs={'email': email, 'token': email_blacklist_token_generator.make_token(email)},
+    )
 
 
 def accept_user_tos_for_portal(user, profile=None, portal=None, save=True):
-    """ Saves that the user has accepted this portal's ToS.
-        @param profile: if supplied, will use the given profile instance instead of querying it from the user. """
+    """Saves that the user has accepted this portal's ToS.
+    @param profile: if supplied, will use the given profile instance instead of querying it from the user."""
     if portal is None:
         from cosinnus.models.group import CosinnusPortal
+
         portal = CosinnusPortal.get_current()
-    
+
     # set the user's tos_accepted flag to true and date for this portal to now
     if profile is None:
         profile = user.cosinnus_profile
     profile.tos_accepted = True
-    
+
     # save the accepted date for this portal in a new dict, or update the dict for this portal
     # (the old style setting for this only had a datetime saved, now we use a dict)
     portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
-    if portal_dict_or_date is None or type(portal_dict_or_date) is not dict:
+    if portal_dict_or_date is None or not isinstance(portal_dict_or_date, dict):
         profile.settings['tos_accepted_date'] = {str(portal.id): now()}
     else:
         portal_dict_or_date[portal.id] = now()
         profile.settings['tos_accepted_date'] = portal_dict_or_date
-    
+
     if save:
         profile.save()
 
 
 def check_user_has_accepted_any_tos(user):
-    """ Checks if the user has accepted any ToS ever, of any portal """
+    """Checks if the user has accepted any ToS ever, of any portal"""
     return user.cosinnus_profile.tos_accepted
 
 
 def check_user_has_accepted_portal_tos(user):
-    """ Checks if the user has accepted the ToS of this portal before """
+    """Checks if the user has accepted the ToS of this portal before"""
     return check_user_has_accepted_any_tos(user) and (get_user_tos_accepted_date(user) is not None)
 
-    
+
 def get_user_tos_accepted_date(user):
-    """ Gets the datetime the user accepted this portals ToS, or None if they have not accepted it yet. 
-        @return: a Datetime object or None
+    """Gets the datetime the user accepted this portals ToS, or None if they have not accepted it yet.
+    @return: a Datetime object or None
     """
     from cosinnus.models.group import CosinnusPortal
+
     portal = CosinnusPortal.get_current()
     portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
     if portal_dict_or_date is None:
@@ -376,16 +416,16 @@ def get_user_tos_accepted_date(user):
             portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
         else:
             return None
-    if type(portal_dict_or_date) is not dict:
+    if not isinstance(portal_dict_or_date, dict):
         # the old style setting for this only had a datetime saved, convert it to the modern
         # dict version of {<portal_id>: datetime, ...}
         portal_dict_or_date = {str(portal.id): portal_dict_or_date}
         user.cosinnus_profile.settings['tos_accepted_date'] = portal_dict_or_date
         user.cosinnus_profile.save(update_fields=['settings'])
-    
+
     datetime_or_none = portal_dict_or_date.get(str(portal.id), None)
     if datetime_or_none is not None:
-        if not type(datetime_or_none) is datetime.datetime:
+        if type(datetime_or_none) is not datetime.datetime:
             datetime_or_none = parser.parse(datetime_or_none)
         # we had a phase where we had unaware default datetimes saved, so backport-make them aware
         if is_naive(datetime_or_none):
@@ -394,8 +434,8 @@ def get_user_tos_accepted_date(user):
 
 
 def get_unread_message_count_for_user(user):
-    """ Returns the unread message count for a user, independent of which internal
-        messaging system is being used (Postman, Rocketchat, etc) """
+    """Returns the unread message count for a user, independent of which internal
+    messaging system is being used (Postman, Rocketchat, etc)"""
     if not user.is_authenticated or user.is_guest:
         return 0
     if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
@@ -404,29 +444,31 @@ def get_unread_message_count_for_user(user):
         # for any reason, we impose a 5 minute break on retrieving it again, for this user
         # if the rocketchat service experiences timeouts because of high load, frequent
         # re-requesting on this connection has shown to finish it off for good, so we give it a break
-        paused_cache_key =  'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadtimeout' % {'user_id': user.id}
+        paused_cache_key = 'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadtimeout' % {'user_id': user.id}
         is_paused = cache.get(paused_cache_key)
         if not is_paused:
-            from cosinnus_message.rocket_chat import RocketChatConnection # noqa
+            from cosinnus_message.rocket_chat import RocketChatConnection  # noqa
+
             try:
                 # we also use caching for the rocketchat unread count itself
-                unread_cache_key =  'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadcount' % {'user_id': user.id}
+                unread_cache_key = 'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadcount' % {'user_id': user.id}
                 unread_count = cache.get(unread_cache_key)
                 if unread_count is None:
                     unread_count = RocketChatConnection().unread_messages(user)
                     cache.set(unread_cache_key, unread_count, settings.COSINNUS_NOTIFICATION_ALERTS_CACHE_TIMEOUT)
-            except:
+            except Exception:
                 # we do not care what caused an exception here, but we handle them by returning
                 # 0 unread messages and imposing a break for this user
-                cache.set(paused_cache_key, True, 60*5) # 5 minutes
+                cache.set(paused_cache_key, True, 60 * 5)  # 5 minutes
     else:
         from postman.models import Message
+
         unread_count = Message.objects.inbox_unread_count(user)
     return unread_count
 
 
 def get_user_from_set_password_token(token):
-    """ Checks if a token given as URL parameter for a user created without password is valid or not
+    """Checks if a token given as URL parameter for a user created without password is valid or not
 
     :param token: UUID4 send by mail as string
     :type token: str
@@ -441,55 +483,58 @@ def get_user_from_set_password_token(token):
     token_users = USER_MODEL.objects.filter(cosinnus_profile__settings__has_key='password_not_set')
 
     for user in token_users:
-        if user.cosinnus_profile.settings.get(PROFILE_SETTING_PASSWORD_NOT_SET, "") == token:
+        if user.cosinnus_profile.settings.get(PROFILE_SETTING_PASSWORD_NOT_SET, '') == token:
             return user
 
     return None
 
 
 def get_user_id_hash(user):
-    """ Get a short hash for a user that always stays the same and can be used for
-        identifying a user without using their user id. """
+    """Get a short hash for a user that always stays the same and can be used for
+    identifying a user without using their user id."""
     salted_id = f'{str(user.id)}_{settings.SECRET_KEY}'
     hasher = hashlib.sha1(salted_id.encode('utf-8'))
     short_digest = hasher.hexdigest()[:12]
     return short_digest
 
 
-def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, request=None) -> bool:
+def create_guest_user_and_login(guest_access, username, request=None):
     """
-        Creates a guest-type user account based on a UserGroupGuestAccess token with the given username
-        and if a request is given, logs the current session in as that guest user.
-        If a request is given, the current user may not already be logged in or this method will fail!
-        
-        @return: True if successful, False if not
+    Creates a guest-type user account based on a UserGroupGuestAccess token with the given username
+    and if a request is given, logs the current session in as that guest user.
+    If a request is given, the current user may not already be logged in or this method will fail!
+
+    @param guest_access: instance of `UserGroupGuestAccess`
+    @return: True if successful, False if not
     """
     if request and request.user.is_authenticated:
         return False
     if not guest_access or not guest_access.group:
         return False
     group = guest_access.group
-    
+
     # create and validate a random email for the guest user
     rnd_user_session = get_random_string(length=12)
     email = f'guestuser_{group.id}_{guest_access.id}_{group.portal.slug}_{rnd_user_session}@wechange.de'
     if get_user_model().objects.filter(email__iexact=email):
-        logger.error('User guest signup: Could not create a user because the email was already in use!', extra={'guest_access_id': guest_access.id, 'email': email})
+        logger.error(
+            'User guest signup: Could not create a user because the email was already in use!',
+            extra={'guest_access_id': guest_access.id, 'email': email},
+        )
         return False
     username = username.strip()
     if not username or len(username) < 2:
-        logger.error('User guest signup: Could not create a user because the username was too short!',
-                     extra={'guest_access_id': guest_access.id, 'username': username})
+        logger.error(
+            'User guest signup: Could not create a user because the username was too short!',
+            extra={'guest_access_id': guest_access.id, 'username': username},
+        )
         return False
-    
+
     # create user instance and cosinnus_profile
     with transaction.atomic():
         # add fake username first before we know the user id
         user = get_user_model()(
-            username=str(random.randint(100000000000, 999999999999)),
-            email=email,
-            first_name=username,
-            last_name=''
+            username=str(random.randint(100000000000, 999999999999)), email=email, first_name=username, last_name=''
         )
         # patch `user.initial_is_guest=True` onto the new user object before it is saved to
         # make sure the user objects knows it is a guest before a cosinnus_profile is created.
@@ -500,14 +545,15 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
         # set user id
         user.username = str(user.id)
         user.save()
-        
+
         # add guest nature to userprofile
         user.cosinnus_profile.is_guest = True
         user.cosinnus_profile.guest_access_object = guest_access
         user.cosinnus_profile.save()
-        
+
         # set user visibility to least viisble
         from cosinnus.models.tagged import BaseTagObject
+
         media_tag = user.cosinnus_profile.media_tag
         if not media_tag.visibility == BaseTagObject.VISIBILITY_USER:
             media_tag.visibility = BaseTagObject.VISIBILITY_USER
@@ -515,14 +561,13 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
 
         # set the user's tos_accepted flag to true and date to now
         accept_user_tos_for_portal(user, save=False)
-    
+
     # make user a member of the guest access' group
     with transaction.atomic():
         group.add_member_to_group(user)
-    
+
     # log the user in
     if request:
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         login(request, user)
     return True
-

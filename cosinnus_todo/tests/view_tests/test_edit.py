@@ -5,12 +5,11 @@ from django.urls import reverse
 from django.utils.timezone import now
 
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus_todo.models import TodoEntry, TodoList, PRIORITY_LOW
+from cosinnus_todo.models import PRIORITY_LOW, TodoEntry, TodoList
 from cosinnus_todo.tests.view_tests.base import ViewTestCase
 
 
 class EditTest(ViewTestCase):
-
     def setUp(self, *args, **kwargs):
         super(EditTest, self).setUp(*args, **kwargs)
         todo_list = TodoList.objects.first()
@@ -66,9 +65,7 @@ class EditTest(ViewTestCase):
         }
         response = self.client.post(self.url, params)
         self.assertEqual(response.status_code, 302)
-        self.assertIn(
-            reverse('cosinnus:todo:entry-detail', kwargs=self.kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:todo:entry-detail', kwargs=self.kwargs), response.get('location'))
 
         todo = TodoEntry.objects.get(pk=self.todo.pk)
         self.assertEqual(todo.priority, PRIORITY_LOW)

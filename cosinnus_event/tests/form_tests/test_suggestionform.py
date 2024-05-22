@@ -12,7 +12,6 @@ from cosinnus_event.models import Event, Suggestion
 
 
 class SuggestionFormTest(TestCase):
-
     def test_has_datetimepicker_widgets(self):
         """
         Should have CosinnusSplitDateTimeWidget widgets for from_date and to_date

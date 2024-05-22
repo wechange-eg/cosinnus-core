@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import zip
-from builtins import range
+from builtins import range, zip
+
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase
 
-from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
-                                   CosinnusGroupManager)
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager, CosinnusGroupMembership
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 
 _GROUP_CACHE_KEY = CosinnusGroupManager._GROUP_CACHE_KEY % (1, 'CosinnusGroupManager', '%s')
@@ -32,7 +31,6 @@ def create_multiple_groups():
 
 
 class CosinnusGroupSlugPKCacheTest(TestCase):
-
     def tearDown(self):
         cache.clear()
 
@@ -196,7 +194,6 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
 
 
 class CosinnusGroupGetCachedTest(TestCase):
-
     def tearDown(self):
         cache.clear()
 
@@ -231,7 +228,6 @@ class CosinnusGroupGetCachedTest(TestCase):
         self.assertEqual(cache.get(_GROUP_CACHE_KEY % ss[1]), gs[1])
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), None)
         self.assertEqual(cache.get(_GROUPS_PK_CACHE_KEY), None)
-
 
     def test_get_single_by_pk(self):
         groups, pks, slugs = create_multiple_groups()
@@ -273,7 +269,6 @@ class CosinnusGroupGetCachedTest(TestCase):
 
 
 class MembershipCacheTest(TestCase):
-
     def tearDown(self):
         cache.clear()
 

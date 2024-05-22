@@ -4,13 +4,15 @@ from __future__ import unicode_literals
 from django import forms
 from django.core import validators
 from django.core.exceptions import ValidationError
-
-from taggit.models import Tag
-
 from django_select2.fields import HeavySelect2FieldBaseMixin, ModelMultipleChoiceField
-from django_select2.widgets import Select2MultipleWidget, HeavySelect2TagWidget,\
-    HeavySelect2MultipleWidget, HeavySelect2Widget
 from django_select2.util import JSFunctionInContext
+from django_select2.widgets import (
+    HeavySelect2MultipleWidget,
+    HeavySelect2TagWidget,
+    HeavySelect2Widget,
+    Select2MultipleWidget,
+)
+from taggit.models import Tag
 
 
 class CommaSeparatedSelect2MultipleWidget(Select2MultipleWidget):
@@ -24,9 +26,7 @@ class CommaSeparatedSelect2MultipleWidget(Select2MultipleWidget):
         # rendering code expects a list (not a string)
         if value:
             value = value.split(',')
-        return super(CommaSeparatedSelect2MultipleWidget, self).render(
-            name, value, attrs=attrs, choices=choices
-        )
+        return super(CommaSeparatedSelect2MultipleWidget, self).render(name, value, attrs=attrs, choices=choices)
 
 
 class CommaSeparatedSelect2MultipleChoiceField(forms.MultipleChoiceField):
@@ -54,7 +54,6 @@ class CommaSeparatedSelect2MultipleChoiceField(forms.MultipleChoiceField):
 
 
 class TagSelect2Field(HeavySelect2FieldBaseMixin, ModelMultipleChoiceField):
-
     widget = HeavySelect2TagWidget
 
     def __init__(self, *args, **kwargs):
@@ -79,7 +78,7 @@ class TagSelect2Field(HeavySelect2FieldBaseMixin, ModelMultipleChoiceField):
             return []
         if not isinstance(value, (list, tuple)):
             raise ValidationError(self.error_messages['list'])
-        
+
         return_value = []
         for name in list(value):
             # limit tag to 100 chars:
@@ -99,24 +98,20 @@ class TagSelect2Field(HeavySelect2FieldBaseMixin, ModelMultipleChoiceField):
 
 
 class HeavySelect2FreeTextChoiceWidget(HeavySelect2Widget):
-    
     def init_options(self):
         super(HeavySelect2FreeTextChoiceWidget, self).init_options()
         self.options['minimumInputLength'] = 1
-        self.options['tokenSeparators'] = [","]
+        self.options['tokenSeparators'] = [',']
         self.options['createSearchChoice'] = JSFunctionInContext('django_select2.createSearchChoice')
         self.options['selectOnBlur'] = True
-        
+
 
 class HeavySelect2MultipleFreeTextChoiceWidget(HeavySelect2MultipleWidget):
-    
     def init_options(self):
         super(HeavySelect2MultipleFreeTextChoiceWidget, self).init_options()
         self.options.pop('closeOnSelect', None)
         self.options['minimumInputLength'] = 1
         self.options['tags'] = True
-        self.options['tokenSeparators'] = [","]
+        self.options['tokenSeparators'] = [',']
         self.options['createSearchChoice'] = JSFunctionInContext('django_select2.createSearchChoice')
         self.options['selectOnBlur'] = True
-        
-        

@@ -2,9 +2,9 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import gettext_lazy as _, ngettext_lazy
+from django.utils.translation import gettext_lazy as _
 
-""" Cosinnus:Notifications configuration etherpad. 
+""" Cosinnus:Notifications configuration etherpad.
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
 """
 
@@ -15,9 +15,9 @@ followed_group_etherpad_created = dispatch.Signal()  # providing_args=["user", "
 
 
 """ Notification definitions.
-    These will be picked up by cosinnus_notfications automatically, as long as the 
+    These will be picked up by cosinnus_notfications automatically, as long as the
     variable 'notifications' is present in the module '<app_name>/cosinnus_notifications.py'.
-    
+
     Both the mail and subject template will be provided with the following context items:
         :receiver django.auth.User who receives the notification mail
         :sender django.auth.User whose action caused the notification to trigger
@@ -32,50 +32,46 @@ followed_group_etherpad_created = dispatch.Signal()  # providing_args=["user", "
         :notification_settings_url The URL to the cosinnus notification settings page.
         :site Current django site
         :protocol Current portocol, 'http' or 'https'
-        
-    
-""" 
+
+
+"""
 notifications = {
     'etherpad_created': {
-        'label': _('A user created a new etherpad'), 
+        'label': _('A user created a new etherpad'),
         'mail_template': 'cosinnus_etherpad/notifications/etherpad_created.txt',
         'subject_template': 'cosinnus_etherpad/notifications/etherpad_created_subject.txt',
         'signals': [etherpad_created],
         'default': True,
         'moderatable_content': True,
-        
         'alert_text': _('%(sender_name)s created the pad %(object_name)s'),
         'alert_text_multi': _('%(sender_name)s created %(count)d pads'),
         'alert_multi_type': 2,
-        
         'is_html': True,
         'event_text': _('%(sender_name)s created a new etherpad'),
         'subject_text': _('A new etherpad: "%(object_name)s" was created in %(team_name)s.'),
         'data_attributes': {
-            'object_name': 'title', 
-            'object_url': 'get_absolute_url', 
+            'object_name': 'title',
+            'object_url': 'get_absolute_url',
             'object_text': 'description',
         },
-    },  
+    },
     'followed_group_etherpad_created': {
-        'label': _('A user created a new etherpad in a team you are following'), 
+        'label': _('A user created a new etherpad in a team you are following'),
         'signals': [followed_group_etherpad_created],
         'multi_preference_set': 'MULTI_followed_object_notification',
         'supercedes_notifications': ['etherpad_created'],
         'requires_object_state_check': 'group.is_user_following',
         'hidden': True,
-        
         'alert_text': _('%(sender_name)s created the pad %(object_name)s'),
         'alert_text_multi': _('%(sender_name)s created %(count)d pads'),
         'alert_multi_type': 2,
-        
         'is_html': True,
         'event_text': _('%(sender_name)s created a new etherpad in %(team_name)s (which you follow)'),
         'subject_text': _('A new etherpad: "%(object_name)s" was created in %(team_name)s (which you follow).'),
         'data_attributes': {
-            'object_name': 'title', 
-            'object_url': 'get_absolute_url', 
+            'object_name': 'title',
+            'object_url': 'get_absolute_url',
             'object_text': 'description',
         },
-    },               
+    },
 }

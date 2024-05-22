@@ -1,22 +1,21 @@
 from __future__ import unicode_literals
-import datetime
-import six
 
+import datetime
+
+import six
 from django import VERSION
+
 try:
     from django.contrib.auth import get_user_model  # Django 1.5
 except ImportError:
     from postman.future_1_5 import get_user_model
 from django.http import QueryDict
-from django.template import Node
-from django.template import TemplateSyntaxError
-from django.template import Library
+from django.template import Library, Node, TemplateSyntaxError
 from django.template.defaultfilters import date
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
-from postman.models import ORDER_BY_KEY, ORDER_BY_MAPPER, Message,\
-    get_user_representation
+from postman.models import ORDER_BY_KEY, ORDER_BY_MAPPER, Message, get_user_representation
 
 register = Library()
 
@@ -31,6 +30,8 @@ def sub(value, arg):
         return int(value) - int(arg)
     except (ValueError, TypeError):
         return value
+
+
 sub.is_safe = True
 
 
@@ -71,6 +72,7 @@ def compact_date(value, arg):
 #######
 class OrderByNode(Node):
     "For use in the postman_order_by tag"
+
     def __init__(self, code):
         self.code = code
 
@@ -92,11 +94,12 @@ class OrderByNode(Node):
             code = None
         if self.code:
             gets[ORDER_BY_KEY] = self.code if self.code != code else self.code.upper()
-        return '?'+gets.urlencode() if gets else ''
+        return '?' + gets.urlencode() if gets else ''
 
 
 class InboxCountNode(Node):
     "For use in the postman_unread tag"
+
     def __init__(self, asvar=None):
         self.asvar = asvar
 
@@ -136,8 +139,10 @@ def postman_order_by(parser, token):
         raise TemplateSyntaxError("'{0}' tag requires a single argument".format(token.contents.split()[0]))
     except KeyError:
         raise TemplateSyntaxError(
-            "'{0}' is not a valid argument to '{1}' tag."
-            " Must be one of: {2}".format(field_name, tag_name, list(ORDER_BY_MAPPER.keys())))
+            "'{0}' is not a valid argument to '{1}' tag." ' Must be one of: {2}'.format(
+                field_name, tag_name, list(ORDER_BY_MAPPER.keys())
+            )
+        )
     return OrderByNode(field_code)
 
 
@@ -164,11 +169,11 @@ def postman_unread(parser, token):
         return InboxCountNode(bits[2])
     else:
         return InboxCountNode()
-    
+
+
 @register.filter
 def get_other_participants(message, user):
-    """ For a given message and the current user, returns all other participants of this conversation,
-        or a list with one element, the other person that isn't our user if the message is not part of a multi conversation """
+    """For a given message and the current user, returns all other participants of this conversation,
+    or a list with one element, the other person that isn't our user if the message is not part of a multi conversation
+    """
     return message.other_participants(user)
-
-    

@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from cosinnus.core import signals
-from cosinnus.models.bbb_room import BBBRoom
-from django.dispatch.dispatcher import receiver
-from cosinnus.conf import settings
-from cosinnus_event.models import Event, ConferenceEvent
-from threading import Thread
-from cosinnus.models.group import MEMBER_STATUS, MEMBERSHIP_ADMIN
-from django.db.models.signals import post_save
-from annoying.functions import get_object_or_None
-from cosinnus.models.group_extra import CosinnusConference
-from django.contrib.contenttypes.models import ContentType
-from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject
+
 import logging
+from threading import Thread
+
+from annoying.functions import get_object_or_None
+from django.contrib.contenttypes.models import ContentType
+from django.dispatch.dispatcher import receiver
+
+from cosinnus.conf import settings
+from cosinnus.core import signals
+from cosinnus.models.group import MEMBER_STATUS
+from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject
 from cosinnus.utils.functions import unique_aware_slugify
+from cosinnus_event.models import Event
 
 logger = logging.getLogger('cosinnus')
 
 
 def update_bbb_room_memberships(group_membership, deleted):
-    """ Apply membership permission changes to BBBRoom of all events and
-        conference events in this group and the BBB room for the group itself. """
+    """Apply membership permission changes to BBBRoom of all events and
+    conference events in this group and the BBB room for the group itself."""
     group = group_membership.group
     events_in_group = Event.objects.filter(group=group).exclude(media_tag__bbb_room=None)
     bbb_room_source_objects = list(events_in_group) + [group]
@@ -39,22 +39,24 @@ def update_bbb_room_memberships(group_membership, deleted):
 
 @receiver(signals.group_membership_has_changed)
 def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
-    """ Called after a CosinusGroupMembership is changed, to threaded apply membership permission
-        changes to BBBRoom of all events in this group """
+    """Called after a CosinusGroupMembership is changed, to threaded apply membership permission
+    changes to BBBRoom of all events in this group"""
     if settings.COSINNUS_CONFERENCES_ENABLED:
+
         class CreateBBBRoomUpdateThread(Thread):
             def run(self):
                 update_bbb_room_memberships(instance, deleted)
+
         CreateBBBRoomUpdateThread().start()
 
 
 @receiver(signals.group_saved_in_form)
 def sync_hidden_conference_proxy_event(sender, group, user, **kwargs):
-    """ For conferences that have a from_date and to_date set, create and keep in sync a single 
-        event with `is_hidden_group_proxy=True`, that has the same name and datetime as the 
-        conference itself. This event can be used in all normal views and querysets to display
-        and handle the conference as proxy. Set related_groups in the conference to have
-        the conference's proxy-event be displayed as one of those related_group's own event. """
+    """For conferences that have a from_date and to_date set, create and keep in sync a single
+    event with `is_hidden_group_proxy=True`, that has the same name and datetime as the
+    conference itself. This event can be used in all normal views and querysets to display
+    and handle the conference as proxy. Set related_groups in the conference to have
+    the conference's proxy-event be displayed as one of those related_group's own event."""
     try:
         if group.pk and group.group_is_conference:
             proxy_event = get_object_or_None(Event, group=group, is_hidden_group_proxy=True)
@@ -72,7 +74,7 @@ def sync_hidden_conference_proxy_event(sender, group, user, **kwargs):
                 )
             else:
                 return
-            
+
             # sync and save if proxy event and group differ in key attributes
             sync_attributes = [('name', 'title'), ('from_date', 'from_date'), ('to_date', 'to_date')]
             if any(getattr(proxy_event, attr[1]) != getattr(group, attr[0]) for attr in sync_attributes):
@@ -83,12 +85,12 @@ def sync_hidden_conference_proxy_event(sender, group, user, **kwargs):
                     unique_aware_slugify(proxy_event, 'title', 'slug', group=proxy_event.group)
                     proxy_event.slug = '__proxy__-' + proxy_event.slug
                 proxy_event.save()
-            
+
             # set proxy event to visible everywhere (since groups are visible anywhere as well)
             if not proxy_event.media_tag.visibility == BaseTagObject.VISIBILITY_ALL:
                 proxy_event.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
                 proxy_event.media_tag.save()
-            
+
             # for each related_group in the conference, reflect the proxy event into that group
             # and delete stale reflections
             ct = ContentType.objects.get_for_model(Event)
@@ -106,16 +108,18 @@ def sync_hidden_conference_proxy_event(sender, group, user, **kwargs):
                     del previous_reflections[existing_reflection.id]
                 else:
                     # create new reflection
-                    attrs.update({
-                        'creator': user,
-                    })
+                    attrs.update(
+                        {
+                            'creator': user,
+                        }
+                    )
                     BaseTaggableObjectReflection.objects.create(**attrs)
-            # delete all stale reflections 
+            # delete all stale reflections
             # (the ones that exist but their groups are no longer tagged as related_group)
             for stale_reflection in previous_reflections.values():
                 stale_reflection.delete()
-        
+
     except Exception as e:
-        logger.error('An error in cosinnus_event.hooks prevented saving the conference proxy events!',
-                     extra={'exception': e})
-            
+        logger.error(
+            'An error in cosinnus_event.hooks prevented saving the conference proxy events!', extra={'exception': e}
+        )

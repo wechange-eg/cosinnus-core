@@ -22,10 +22,5 @@ def render_sdg_json(context):
     lang = request.LANGUAGE_CODE
     sgd_json = []
     for sdg in SDG_CHOICES:
-        sgd_json.append(
-            {'id': sdg[0],
-             'icon': '/static/{}'.format(get_sdg_image(lang, sdg[0])),
-             'name': str(sdg[1])
-             }
-        )
+        sgd_json.append({'id': sdg[0], 'icon': '/static/{}'.format(get_sdg_image(lang, sdg[0])), 'name': str(sdg[1])})
     return mark_safe(json.dumps(sgd_json))

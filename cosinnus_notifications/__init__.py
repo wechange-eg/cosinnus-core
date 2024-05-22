@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-
 from builtins import str
+
 VERSION = (0, 6, 0, 'alpha', 0)
 
 
@@ -20,11 +20,16 @@ def get_version(full=True):
         import datetime
         import subprocess
         from os.path import abspath, dirname
+
         repo_dir = dirname(dirname(abspath(__file__)))
         git_log = subprocess.Popen(
             'git log --pretty=format:%ct --quiet -1 HEAD',
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-            shell=True, cwd=repo_dir, universal_newlines=True)
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True,
+            cwd=repo_dir,
+            universal_newlines=True,
+        )
         timestamp = git_log.communicate()[0]
         try:
             timestamp = datetime.datetime.utcfromtimestamp(int(timestamp))

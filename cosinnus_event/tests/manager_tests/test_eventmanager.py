@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from datetime import timedelta
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils.timezone import now
@@ -11,15 +12,13 @@ from cosinnus_event.models import Event
 
 
 class EventManagerTest(TestCase):
-
     def setUp(self):
         super(EventManagerTest, self).setUp()
         self.group = CosinnusGroup.objects.create(name='testgroup')
-        self.admin = User.objects.create_superuser(
-            username='admin', email=None, password=None)
-        self.event = Event.objects.create(group=self.group,
-            creator=self.admin, public=True, state=Event.STATE_SCHEDULED,
-            title='testevent')
+        self.admin = User.objects.create_superuser(username='admin', email=None, password=None)
+        self.event = Event.objects.create(
+            group=self.group, creator=self.admin, public=True, state=Event.STATE_SCHEDULED, title='testevent'
+        )
 
     def test_public(self):
         """

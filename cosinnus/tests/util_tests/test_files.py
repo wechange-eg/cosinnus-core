@@ -2,17 +2,15 @@
 from __future__ import unicode_literals
 
 import os
-
 from builtins import object
+
 from django.test import TestCase
 
 from cosinnus.utils.files import get_avatar_filename
 
 
 class AvatarTest(TestCase):
-
     def test_get_avatar_filename(self):
-
         class Profile(object):
             user_id = 1337
 

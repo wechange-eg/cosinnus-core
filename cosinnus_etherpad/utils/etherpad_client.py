@@ -1,6 +1,6 @@
-from builtins import str
-from builtins import object
+from builtins import object, str
 from functools import partial
+
 try:
     from urllib.parse import urlencode
 except ImportError:
@@ -16,13 +16,12 @@ def utf8_encode_dict_values(d):
     return {k: utf8_encode(v) for k, v in list(d.items())}
 
 
-class EtherpadException(Exception): pass
+class EtherpadException(Exception):
+    pass
 
 
 class EtherpadLiteClient(object):
-
-    def __init__(self, base_params={}, base_url='http://localhost:9001/api',
-                       api_version='1', timeout=20, verify=True):
+    def __init__(self, base_params={}, base_url='http://localhost:9001/api', api_version='1', timeout=20, verify=True):
         self.api_version = api_version
         self.base_params = utf8_encode_dict_values(base_params)
         self.base_url = base_url
@@ -38,7 +37,7 @@ class EtherpadLiteClient(object):
             r = resp.json()
         except Exception as e:
             raise EtherpadException('Error communicating with the Pad Server: %s' % str(e))
-        
+
         if not r or not isinstance(r, dict):
             raise EtherpadException('API returned: %s' % r)
         if r.get('code') != 0:

@@ -1,27 +1,25 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from collections import OrderedDict, defaultdict
+from importlib import import_module
+
 import six
 
 from cosinnus.conf import settings
-
-from collections import defaultdict, OrderedDict
-
-from importlib import import_module
-
 from cosinnus.core.registries.base import DictBaseRegistry
 
 
 class WidgetRegistry(DictBaseRegistry):
-
     _unresolved = defaultdict(set)
 
     def register(self, app_name, widget):
         if isinstance(widget, six.string_types):
             self._unresolved[app_name].add(widget)
             return
-        
+
         from cosinnus.utils.dashboard import DashboardWidget
+
         if issubclass(widget, DashboardWidget):
             widget_name = widget.get_widget_name()
             if app_name in self:
@@ -33,7 +31,7 @@ class WidgetRegistry(DictBaseRegistry):
 
     def get(self, app_name, widget, default=None):
         # compatibility mode for legacy widget naming convention
-        widget = widget.replace(" ", "_")
+        widget = widget.replace(' ', '_')
         if app_name in self._unresolved:
             self._resolve(app_name)
         if app_name in self and widget in self[app_name]:
@@ -48,8 +46,7 @@ class WidgetRegistry(DictBaseRegistry):
             cls = getattr(module, klass, None)
             if cls is None:
                 del self._unresolved[app_name]
-                raise ImportError("Cannot import cosinnus widget %s from %s" % (
-                    klass, widget))
+                raise ImportError('Cannot import cosinnus widget %s from %s' % (klass, widget))
             else:
                 self.register(app_name, cls)
 
@@ -60,10 +57,11 @@ class WidgetRegistry(DictBaseRegistry):
         for app_name, widgets in six.iteritems(self._storage):
             yield (app_name, list(widgets.keys()))
 
+
 widget_registry = WidgetRegistry()
 
 
-__all__ = ('widget_registry', )
+__all__ = ('widget_registry',)
 
 
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupDescriptionWidget')

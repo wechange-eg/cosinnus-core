@@ -8,7 +8,6 @@ from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
 class AddTest(ViewTestCase):
-
     def setUp(self, *args, **kwargs):
         super(AddTest, self).setUp(*args, **kwargs)
         self.kwargs = {'group': self.group.slug}
@@ -57,9 +56,7 @@ class AddTest(ViewTestCase):
         # do not catch exception here
         pad = Etherpad.objects.get(title=title)
         kwargs = {'group': self.group.slug, 'slug': pad.slug}
-        self.assertIn(
-            reverse('cosinnus:etherpad:pad-edit', kwargs=kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:etherpad:pad-edit', kwargs=kwargs), response.get('location'))
 
         # explicitly need to delete object, otherwise signals won't be fired
         # and pad on server will persist

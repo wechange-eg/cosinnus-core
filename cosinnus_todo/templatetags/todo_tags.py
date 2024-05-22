@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.utils.timezone import now
-
 from django import template
+from django.utils.timezone import now
 
 register = template.Library()
 

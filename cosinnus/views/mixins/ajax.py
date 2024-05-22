@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import object
 import json
-import six
+from builtins import object
 
+import six
 from django.contrib.messages.api import get_messages
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseBadRequest, QueryDict
 from django.utils.encoding import force_str
 
 from cosinnus.utils.http import JSONResponse, is_ajax
-
 
 # FIXME: the AJAX mixins are deprecated as part of the v1 API and should be deleted once we are sure they are not used.
 
@@ -51,6 +50,7 @@ class BaseAjaxableResponseMixin(object):
     Do not use this mixin directly, but rather the specialized mixins (e.g.
     :class:`ListAjaxableResponseMixin`, :class:`DetailAjaxableResponseMixin`)
     """
+
     #: This is set via the context in urls.py and prevents accessing the
     #: JSONified version of the mixing view via a non-ajax-url path
     is_ajax_request_url = False
@@ -65,7 +65,7 @@ class BaseAjaxableResponseMixin(object):
         if self.is_ajax_request_url:
             # Prevent access to ajaxible paths from non-ajax requests
             if not is_ajax(request):
-                return HttpResponseBadRequest("API calls do not supported direct access.")
+                return HttpResponseBadRequest('API calls do not supported direct access.')
 
             response = super(BaseAjaxableResponseMixin, self).get(request, *args, **kwargs)
 
@@ -76,22 +76,23 @@ class BaseAjaxableResponseMixin(object):
                 )
 
             context = {'request': self.request}
-            serializer = self.serializer_class(self.get_serializable_content(),
-                                               many=self.is_object_collection,
-                                               context=context)
+            serializer = self.serializer_class(
+                self.get_serializable_content(), many=self.is_object_collection, context=context
+            )
             return JSONResponse(serializer.data, status=response.status_code)
 
         else:
             return super(BaseAjaxableResponseMixin, self).get(request, *args, **kwargs)
 
         def get_serializable_content(self):
-            raise NotImplementedError("Subclasses must implement this method")
+            raise NotImplementedError('Subclasses must implement this method')
 
 
 class ListAjaxableResponseMixin(BaseAjaxableResponseMixin):
     """
     Mixin to add AJAX support to a ListView.
     """
+
     is_object_collection = True
 
     def get_serializable_content(self):
@@ -102,6 +103,7 @@ class DetailAjaxableResponseMixin(BaseAjaxableResponseMixin):
     """
     Mixin to add AJAX support to a DetailView.
     """
+
     is_object_collection = False
 
     def get_serializable_content(self):
@@ -114,6 +116,7 @@ class AjaxableFormMixin(object):
 
     Must be used with an object-based FormView (e.g. CreateView)
     """
+
     #: This is set via the context in urls.py and prevents accessing the
     #: JSONified version of the mixing view via a non-ajax-url path
     is_ajax_request_url = False

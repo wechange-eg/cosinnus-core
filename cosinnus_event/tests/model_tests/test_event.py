@@ -2,17 +2,17 @@
 from __future__ import unicode_literals
 
 from datetime import timedelta
+
 from django.utils import dateformat
 from django.utils.encoding import force_str
 from django.utils.formats import date_format
-from django.utils.timezone import now, localtime
+from django.utils.timezone import localtime, now
 
 from cosinnus_event.models import Event, Suggestion, localize
 from cosinnus_event.tests.model_tests.base import ModelTestCase
 
 
 class EventTest(ModelTestCase):
-
     def test_string_repr_scheduled_single_day(self):
         """
         Should have certain string representation if single day event
@@ -57,8 +57,7 @@ class EventTest(ModelTestCase):
         """
         Should set suggestion for an event
         """
-        suggestion = Suggestion.objects.create(
-            event=self.event, from_date=now(), to_date=now())
+        suggestion = Suggestion.objects.create(event=self.event, from_date=now(), to_date=now())
         self.event.set_suggestion(sugg=suggestion)
         self.assertEqual(self.event.suggestion, suggestion)
 
@@ -66,13 +65,8 @@ class EventTest(ModelTestCase):
         """
         Should not set suggestion for another event
         """
-        event = Event.objects.create(
-            group=self.group,
-            creator=self.admin,
-            public=True,
-            title='testevent')
-        suggestion = Suggestion.objects.create(
-            event=event, from_date=now(), to_date=now())
+        event = Event.objects.create(group=self.group, creator=self.admin, public=True, title='testevent')
+        suggestion = Suggestion.objects.create(event=event, from_date=now(), to_date=now())
         self.event.set_suggestion(sugg=suggestion)
         self.assertEqual(self.event.suggestion, None)
 
@@ -109,8 +103,7 @@ class EventTest(ModelTestCase):
         self.event.from_date = now()
         self.event.to_date = self.event.from_date + timedelta(days=1)
         self.event.save()
-        expected = '%s - %s' % (localize(self.event.from_date, 'd.m.'),
-            localize(self.event.to_date, 'd.m.Y'))
+        expected = '%s - %s' % (localize(self.event.from_date, 'd.m.'), localize(self.event.to_date, 'd.m.Y'))
         self.assertEqual(expected, self.event.get_period())
 
     def test_localize_no_format(self):

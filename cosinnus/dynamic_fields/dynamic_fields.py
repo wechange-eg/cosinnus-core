@@ -58,14 +58,14 @@ DYNAMIC_FIELD_TYPES = [
     DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD,
     DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT,
     DYNAMIC_FIELD_TYPE_MULTI_ADDRESS,
-    DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES
+    DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES,
 ]
 
 # field will not be included in search
 DYNAMIC_FIELD_SEARCH_FIELD_TYPE_NONE = 'none'
 # field value will be included in the main search document, but have no own search field
 DYNAMIC_FIELD_SEARCH_FIELD_TYPE_MAIN_SEARCH = 'main_search'
-# field will have their own search index entry and will be shown as a facetted search 
+# field will have their own search index entry and will be shown as a facetted search
 # field in the search form
 DYNAMIC_FIELD_SEARCH_FIELD_TYPE_FACETTED = 'facetted'
 
@@ -76,9 +76,10 @@ DYNAMIC_FIELD_SEARCH_FIELD_TYPES = [
     DYNAMIC_FIELD_SEARCH_FIELD_TYPE_FACETTED,
 ]
 
+
 class CosinnusDynamicField(object):
-    """ Definition for a dynamic extra fields, e.g. for `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
-    
+    """Definition for a dynamic extra fields, e.g. for `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`"""
+
     # type of the dynamic field (affects both model and form)
     # see <str type of `DYNAMIC_FIELD_TYPES`>,
     type = None
@@ -123,15 +124,20 @@ class CosinnusDynamicField(object):
     note = None
     # pass path to function as string for dynamic choices
     function_string = None
-    
+
     def __init__(self, **kwargs):
         for name, value in kwargs.items():
             if hasattr(self, name):
                 setattr(self, name, value)
             else:
-                raise ImproperlyConfigured(f'Unknown parameter {name} passed to `CosinnusDynamicField` on initialization')
+                raise ImproperlyConfigured(
+                    f'Unknown parameter {name} passed to `CosinnusDynamicField` on initialization'
+                )
         # sanity check
-        if not self.type or not self.type in DYNAMIC_FIELD_TYPES:
-            raise ImproperlyConfigured(f'`CosinnusDynamicField` was initialized with no or unknown type "{self.type}" {self.__dict__} ++ {str(kwargs.items())})')
+        if not self.type or self.type not in DYNAMIC_FIELD_TYPES:
+            raise ImproperlyConfigured(
+                f'`CosinnusDynamicField` was initialized with no or unknown type "{self.type}" {self.__dict__} '
+                f'++ {str(kwargs.items())})'
+            )
         if self.placeholder is None:
             self.placeholder = self.label

@@ -4,30 +4,31 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied, ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.db.transaction import atomic
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, FormView
-from django_select2 import Select2View, NO_ERR_RESP
 from django.utils.translation import gettext_lazy as _
+from django.views.generic import DeleteView, DetailView, FormView
+from django_select2 import NO_ERR_RESP, Select2View
 
 from cosinnus.core import signals
 from cosinnus.forms.group import MultiGroupSelectForm
 from cosinnus.models import CosinnusPortal, force_str, group_aware_reverse
-from cosinnus.models.group_extra import ensure_group_type
-from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, \
-    MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS
-from cosinnus.utils.group import get_group_query_filter_for_search_terms, get_cosinnus_group_model
-from cosinnus.utils.permissions import check_object_read_access, check_user_superuser
+from cosinnus.models.membership import (
+    MEMBER_STATUS,
+    MEMBERSHIP_INVITED_PENDING,
+    MEMBERSHIP_MEMBER,
+    MEMBERSHIP_PENDING,
+)
+from cosinnus.utils.group import get_cosinnus_group_model, get_group_query_filter_for_search_terms
+from cosinnus.utils.permissions import check_object_read_access
 from cosinnus.utils.user import get_group_select2_pills
-from cosinnus.views.group import SamePortalGroupMixin
-from cosinnus.views.mixins.group import RequireReadMixin, RequireAdminMixin
+from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 from cosinnus_organization.forms import CosinnusOrganizationGroupForm
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationGroup
-from cosinnus_organization.utils import get_organization_select2_pills
 
 logger = logging.getLogger('cosinnus')
 
@@ -40,12 +41,14 @@ class OrganizationGroupsView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(OrganizationGroupsView, self).get_context_data(**kwargs)
         queryset = self.object.groups
-        context.update({
-            'invited': queryset.filter(status=MEMBERSHIP_INVITED_PENDING),
-            'pendings': queryset.filter(status=MEMBERSHIP_PENDING),
-            'members': queryset.filter(status__in=MEMBER_STATUS),
-            'invite_form': MultiGroupSelectForm(organization=self.object),
-        })
+        context.update(
+            {
+                'invited': queryset.filter(status=MEMBERSHIP_INVITED_PENDING),
+                'pendings': queryset.filter(status=MEMBERSHIP_PENDING),
+                'members': queryset.filter(status__in=MEMBER_STATUS),
+                'invite_form': MultiGroupSelectForm(organization=self.object),
+            }
+        )
         return context
 
 
@@ -57,7 +60,9 @@ class OrganizationGroupInviteView(RequireAdminMixin, FormView):
 
     def get(self, *args, **kwargs):
         messages.error(self.request, _('This action is not available directly!'))
-        return redirect(reverse('cosinnus:organization-detail', kwargs={'organization': kwargs.get('organization', '<NOORGKWARG>')}))
+        return redirect(
+            reverse('cosinnus:organization-detail', kwargs={'organization': kwargs.get('organization', '<NOORGKWARG>')})
+        )
 
     def get_success_url(self):
         return reverse('cosinnus:organization-groups', kwargs={'organization': self.organization.slug})
@@ -83,18 +88,22 @@ class OrganizationGroupInviteView(RequireAdminMixin, FormView):
                 # update index for the group
                 # typed_group = ensure_group_type(self.organization)
                 # typed_group.update_index()
-                signals.organization_group_request_accepted.send(sender=self, organization=self.organization, group=group)
-                messages.success(self.request,_(
-                    'Project/group %(name)s had already requested and has now been accepted.') % {
-                                     'name': group.name})
+                signals.organization_group_request_accepted.send(
+                    sender=self, organization=self.organization, group=group
+                )
+                messages.success(
+                    self.request,
+                    _('Project/group %(name)s had already requested and has now been accepted.') % {'name': group.name},
+                )
                 # trigger signal for accepting that user's join request
             return HttpResponseRedirect(self.get_success_url())
         except CosinnusOrganizationGroup.DoesNotExist:
-            CosinnusOrganizationGroup.objects.create(organization=self.organization, group=group, status=MEMBERSHIP_INVITED_PENDING)
+            CosinnusOrganizationGroup.objects.create(
+                organization=self.organization, group=group, status=MEMBERSHIP_INVITED_PENDING
+            )
             signals.organization_group_invited.send(sender=self, organization=self.organization, group=group)
 
-            messages.success(self.request,
-                             _('Project/group %(name)s was successfully invited.') % {'name': group.name})
+            messages.success(self.request, _('Project/group %(name)s was successfully invited.') % {'name': group.name})
             return HttpResponseRedirect(self.get_success_url())
 
 
@@ -104,8 +113,8 @@ class OrganzationConfirmMixin(object):
     success_url = reverse_lazy('cosinnus:organization-list')
 
     def get(self, *args, **kwargs):
-        """ We make the allowance to call this by GET if called with ?direct=1 param,
-            so that user joins can be automated with a direct link (like after being recruited) """
+        """We make the allowance to call this by GET if called with ?direct=1 param,
+        so that user joins can be automated with a direct link (like after being recruited)"""
         if not self.request.GET.get('direct', None) == '1':
             messages.error(self.request, _('This action is not available directly!'))
             return redirect(self.get_error_url(**kwargs))
@@ -128,8 +137,7 @@ class OrganzationConfirmMixin(object):
             # Forcing possible reverse_lazy evaluation
             url = force_str(self.success_url)
         else:
-            raise ImproperlyConfigured(
-                "No URL to redirect to. Provide a success_url.")
+            raise ImproperlyConfigured('No URL to redirect to. Provide a success_url.')
         return url
 
     def get_error_url(self, **kwargs):
@@ -140,7 +148,6 @@ class OrganzationConfirmMixin(object):
 
 
 class OrganizationGroupWithdrawView(OrganzationConfirmMixin, DetailView):
-
     message_success = _('Your join request was withdrawn from organization “%(name)s” successfully.')
 
     @method_decorator(login_required)
@@ -160,9 +167,7 @@ class OrganizationGroupWithdrawView(OrganzationConfirmMixin, DetailView):
     def confirm_action(self):
         try:
             membership = CosinnusOrganizationGroup.objects.get(
-                organization=self.object,
-                group__slug=self.kwargs.get('group'),
-                status=MEMBERSHIP_PENDING
+                organization=self.object, group__slug=self.kwargs.get('group'), status=MEMBERSHIP_PENDING
             )
             membership.delete()
         except CosinnusOrganizationGroup.DoesNotExist:
@@ -170,15 +175,12 @@ class OrganizationGroupWithdrawView(OrganzationConfirmMixin, DetailView):
 
 
 class OrganizationGroupDeclineView(OrganizationGroupWithdrawView):
-
     message_success = _('You have declined the invitation to organization “%(name)s”.')
 
     def confirm_action(self):
         try:
             membership = CosinnusOrganizationGroup.objects.get(
-                organization=self.object,
-                group__slug=self.kwargs.get('group'),
-                status=MEMBERSHIP_INVITED_PENDING
+                organization=self.object, group__slug=self.kwargs.get('group'), status=MEMBERSHIP_INVITED_PENDING
             )
             group = membership.group
             membership.delete()
@@ -194,13 +196,13 @@ class OrganizationGroupAcceptView(OrganizationGroupWithdrawView):
     def confirm_action(self):
         try:
             membership = CosinnusOrganizationGroup.objects.get(
-                organization=self.object,
-                group__slug=self.kwargs.get('group'),
-                status=MEMBERSHIP_INVITED_PENDING
+                organization=self.object, group__slug=self.kwargs.get('group'), status=MEMBERSHIP_INVITED_PENDING
             )
             membership.status = MEMBERSHIP_MEMBER
             membership.save()
-            signals.organization_group_request_accepted.send(sender=self, organization=self.object, group=membership.group)
+            signals.organization_group_request_accepted.send(
+                sender=self, organization=self.object, group=membership.group
+            )
         except CosinnusOrganizationGroup.DoesNotExist:
             self._had_error = True
 
@@ -218,7 +220,10 @@ class GroupSelectMixin(object):
     def get(self, *args, **kwargs):
         messages.error(self.request, _('This action is not available directly!'))
         return redirect(
-            reverse('cosinnus:organization-groups', kwargs={'organization': kwargs.get('organization', '<NOGROUPKWARG>')}))
+            reverse(
+                'cosinnus:organization-groups', kwargs={'organization': kwargs.get('organization', '<NOGROUPKWARG>')}
+            )
+        )
 
     def get_form_kwargs(self):
         kwargs = super(GroupSelectMixin, self).get_form_kwargs()
@@ -256,15 +261,17 @@ class OrganizationGroupDeleteView(RequireAdminMixin, GroupSelectMixin, DeleteVie
 
         if status == MEMBERSHIP_PENDING:
             signals.organization_group_invitation_declined.send(sender=self, organization=org, group=group)
-            messages.success(self.request,
-                             _('Your request was withdrawn from organization "%(name)s" successfully.') % {
-                                 'name': org.name})
+            messages.success(
+                self.request,
+                _('Your request was withdrawn from organization "%(name)s" successfully.') % {'name': org.name},
+            )
         if status == MEMBERSHIP_INVITED_PENDING:
-            messages.success(self.request, _('Your invitation to project/group "%(name)s" was withdrawn successfully.') % {
-                'name': group.name})
+            messages.success(
+                self.request,
+                _('Your invitation to project/group "%(name)s" was withdrawn successfully.') % {'name': group.name},
+            )
         if status == self.membership_status:
-            messages.success(self.request,
-                             _('Project/group "%(name)s" is no longer assigned.') % {'name': group.name})
+            messages.success(self.request, _('Project/group "%(name)s" is no longer assigned.') % {'name': group.name})
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -272,6 +279,7 @@ class OrganizationGroupInviteSelect2View(RequireReadMixin, Select2View):
     """
     This view is used as API backend to serve the suggestions for the group field.
     """
+
     group_url_kwarg = 'organization'
     group_attr = 'organization'
 

@@ -6,5 +6,6 @@ from cosinnus.forms.mixins import PasswordValidationFormMixin
 
 
 class DisableFormWithPasswordValidation(PasswordValidationFormMixin, DisableForm):
-    """ The 2-fa disable form, with added password validation logic """
+    """The 2-fa disable form, with added password validation logic"""
+
     pass

@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import re_path, path
+from django.urls import path, re_path
+
 from cosinnus_note import views
 
 app_name = 'note'
 
-cosinnus_root_patterns = [ 
+cosinnus_root_patterns = [
     path('notes/embed/all/', views.note_embed_global, name='embed-global'),
     path('notes/embed/', views.note_embed_current_portal, name='embed-current-portal'),
 ]
-    
+
 cosinnus_group_patterns = [
     re_path(r'^$', views.note_index, name='index'),
     re_path(r'^list/$', views.note_list, name='list'),

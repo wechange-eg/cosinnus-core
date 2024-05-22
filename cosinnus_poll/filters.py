@@ -1,21 +1,21 @@
-'''
+"""
 Created on 05.08.2014
 
 @author: Sascha
-'''
+"""
+
 from builtins import object
+
 from django.utils.translation import gettext_lazy as _
 
-from cosinnus.views.mixins.filters import CosinnusFilterSet,\
-    CosinnusOrderingFilter
-from cosinnus.forms.filters import AllObjectsFilter, SelectCreatorWidget,\
-    DropdownChoiceWidget
+from cosinnus.forms.filters import AllObjectsFilter, DropdownChoiceWidget, SelectCreatorWidget
+from cosinnus.views.mixins.filters import CosinnusFilterSet, CosinnusOrderingFilter
 from cosinnus_poll.models import Poll
 
 
 class PollFilter(CosinnusFilterSet):
     creator = AllObjectsFilter(label=_('Created By'), widget=SelectCreatorWidget)
-    
+
     o = CosinnusOrderingFilter(
         fields=(
             ('created', 'created'),
@@ -26,10 +26,9 @@ class PollFilter(CosinnusFilterSet):
             ('title', _('Title')),
         ),
         default='-created',
-        widget=DropdownChoiceWidget
+        widget=DropdownChoiceWidget,
     )
-    
+
     class Meta(object):
         model = Poll
         fields = ['creator', 'o']
-    

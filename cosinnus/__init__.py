@@ -6,6 +6,7 @@ VERSION = '2.0.0'
 
 celery_app = None
 
+
 def init_celery_app():
     try:
         global celery_app
@@ -15,5 +16,5 @@ def init_celery_app():
     except ImportError:
         pass
 
-__all__ = ('celery_app', 'VERSION')
 
+__all__ = ('celery_app', 'VERSION')

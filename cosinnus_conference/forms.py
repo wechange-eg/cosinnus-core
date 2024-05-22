@@ -1,31 +1,28 @@
 from django import forms
-from django.utils import timezone
-
-from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.model_fields import UserNameModelMultipleChoiceField
-from cosinnus.utils.user import filter_active_users
-from cosinnus_conference.utils import get_initial_template
-from cosinnus.forms.translations import TranslatableFormsetInlineFormMixin
-from cosinnus.models.conference import ParticipationManagement
-from cosinnus.models.conference import CosinnusConferenceApplication
-from cosinnus.models.conference import APPLICATION_STATES_VISIBLE
-from cosinnus.models.conference import CosinnusConferencePremiumBlock
-from cosinnus.utils.html import render_html_with_variables
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.utils.translation import gettext_lazy as _
-
-from django.forms.widgets import SelectMultiple
-from django.forms import RadioSelect, formset_factory, modelformset_factory
-from django.template.defaultfilters import date
-from django_select2.widgets import Select2MultipleWidget
-from cosinnus.forms.widgets import SplitHiddenDateWidget
-
-from cosinnus.utils.validators import validate_file_infection,\
-    CleanFromToDateFieldsMixin
-from uritemplate.api import variables
 from django.db.models import Q
+from django.forms import RadioSelect, formset_factory, modelformset_factory
+from django.forms.widgets import SelectMultiple
+from django.template.defaultfilters import date
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+from django_select2.widgets import Select2MultipleWidget
 
+from cosinnus.forms.translations import TranslatableFormsetInlineFormMixin
+from cosinnus.forms.widgets import SplitHiddenDateWidget
+from cosinnus.models.conference import (
+    APPLICATION_STATES_VISIBLE,
+    CosinnusConferenceApplication,
+    CosinnusConferencePremiumBlock,
+    ParticipationManagement,
+)
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.html import render_html_with_variables
+from cosinnus.utils.model_fields import UserNameModelMultipleChoiceField
+from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.validators import CleanFromToDateFieldsMixin, validate_file_infection
+from cosinnus_conference.utils import get_initial_template
 
 CHOICE_APPLICANTS_AND_MEMBERS = 1
 CHOICE_ALL_APPLICANTS = 2
@@ -33,15 +30,14 @@ CHOICE_ALL_MEMBERS = 3
 CHOICE_INDIVIDUAL = 4
 
 recipient_choices = (
-        (CHOICE_APPLICANTS_AND_MEMBERS, _('Applicants and members')), 
-        (CHOICE_ALL_APPLICANTS, _('All applicants')), 
-        (CHOICE_ALL_MEMBERS, _('All members')), 
-        (CHOICE_INDIVIDUAL, _('Individual choice'))
-    )
+    (CHOICE_APPLICANTS_AND_MEMBERS, _('Applicants and members')),
+    (CHOICE_ALL_APPLICANTS, _('All applicants')),
+    (CHOICE_ALL_MEMBERS, _('All members')),
+    (CHOICE_INDIVIDUAL, _('Individual choice')),
+)
 
 
 class ConferenceRemindersForm(forms.ModelForm):
-
     week_before = forms.BooleanField(widget=forms.CheckboxInput, required=False)
     week_before_subject = forms.CharField(required=False)
     week_before_content = forms.CharField(widget=forms.Textarea, required=False)
@@ -58,37 +54,38 @@ class ConferenceRemindersForm(forms.ModelForm):
     send_immediately_content = forms.CharField(widget=forms.Textarea, required=False)
 
     send_immediately_users = UserNameModelMultipleChoiceField(
-        queryset=filter_active_users(get_user_model().objects.none()),
-        widget=Select2MultipleWidget,
-        required=False)
+        queryset=filter_active_users(get_user_model().objects.none()), widget=Select2MultipleWidget, required=False
+    )
 
-    recipients_choices = forms.ChoiceField(
-        choices = recipient_choices,
-        initial=3,
-        widget=RadioSelect,
-        required=False)
+    recipients_choices = forms.ChoiceField(choices=recipient_choices, initial=3, widget=RadioSelect, required=False)
 
     class Meta:
         model = get_cosinnus_group_model()
-        fields = ('dynamic_fields', )
+        fields = ('dynamic_fields',)
 
     def __init__(self, instance, *args, **kwargs):
         super().__init__(instance=instance, *args, **kwargs)
         if 'send_immediately_users' in self.fields:
-            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=instance).filter(may_be_contacted=True).pending_and_accepted() # instance = self.group
+            pending_application_qs = (
+                CosinnusConferenceApplication.objects.filter(conference=instance)
+                .filter(may_be_contacted=True)
+                .pending_and_accepted()
+            )  # instance = self.group
             all_user_ids = list(pending_application_qs.values_list('user', flat=True))
-            members_user_ids = instance.actual_members # covers the current members of the group incl. admins
-            pending_and_accepted_users = get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids))
+            members_user_ids = instance.actual_members  # covers the current members of the group incl. admins
+            pending_and_accepted_users = get_user_model().objects.filter(
+                Q(id__in=all_user_ids) | Q(id__in=members_user_ids)
+            )
             active_users = filter_active_users(pending_and_accepted_users)
 
             self.fields['send_immediately_users'] = UserNameModelMultipleChoiceField(
                 queryset=active_users,
                 widget=Select2MultipleWidget,
                 initial=self.fields['send_immediately_users'].initial,
-                required=False
+                required=False,
             )
-            if kwargs.get("data", {}).get("send", None) == "send_immediately":
-                self.fields['send_immediately_users'].required == True
+            if kwargs.get('data', {}).get('send', None) == 'send_immediately':
+                self.fields['send_immediately_users'].required = True  # fix: had not been set correctly for a while
 
     def get_initial_for_field(self, field, field_name):
         dynamic_fields = self.instance.dynamic_fields
@@ -125,7 +122,7 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
 
     class Meta:
         model = get_cosinnus_group_model()
-        fields = ('dynamic_fields', )
+        fields = ('dynamic_fields',)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -136,12 +133,8 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
     def get_variables(self):
         return {
             'name': self.instance.name,
-            'from_date': date(
-                timezone.localtime(self.instance.from_date),
-                'SHORT_DATETIME_FORMAT'),
-            'to_date': date(
-                timezone.localtime(self.instance.to_date),
-                'SHORT_DATETIME_FORMAT'),
+            'from_date': date(timezone.localtime(self.instance.from_date), 'SHORT_DATETIME_FORMAT'),
+            'to_date': date(timezone.localtime(self.instance.to_date), 'SHORT_DATETIME_FORMAT'),
         }
 
     def get_initial_for_field(self, field, field_name):
@@ -150,10 +143,8 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
             dynamic_fields = self.instance.dynamic_fields
         if field_name == 'subject' or field_name == 'content':
             field_name = 'send_immediately_{}'.format(field_name)
-            field_value = dynamic_fields.get('reminder_{}'.format(field_name),
-                                           get_initial_template(field_name))
-            return render_html_with_variables(
-                self.user, field_value, self.get_variables())
+            field_value = dynamic_fields.get('reminder_{}'.format(field_name), get_initial_template(field_name))
+            return render_html_with_variables(self.user, field_value, self.get_variables())
 
     def save(self, commit=True):
         now = timezone.now()
@@ -170,16 +161,13 @@ class ConferenceFileUploadWidget(forms.ClearableFileInput):
 class ConferenceParticipationManagement(forms.ModelForm):
     if hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
         application_options = forms.MultipleChoiceField(
-            choices=settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS,
-            required=False)
-    application_start = forms.SplitDateTimeField(required=False,
-                                                 widget=SplitHiddenDateWidget(default_time='00:00'))
-    application_end = forms.SplitDateTimeField(required=False,
-                                               widget=SplitHiddenDateWidget(default_time='23:59'))
-    application_conditions_upload = forms.FileField(required=False,
-                                                    widget=ConferenceFileUploadWidget,
-                                                    validators=[validate_file_infection])
-    
+            choices=settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS, required=False
+        )
+    application_start = forms.SplitDateTimeField(required=False, widget=SplitHiddenDateWidget(default_time='00:00'))
+    application_end = forms.SplitDateTimeField(required=False, widget=SplitHiddenDateWidget(default_time='23:59'))
+    application_conditions_upload = forms.FileField(
+        required=False, widget=ConferenceFileUploadWidget, validators=[validate_file_infection]
+    )
 
     class Meta:
         model = ParticipationManagement
@@ -204,21 +192,23 @@ class MotivationQuestionForm(TranslatableFormsetInlineFormMixin, forms.Form):
     question = forms.CharField(widget=forms.Textarea)
     translatable_base_fields = ['question']
 
+
 MotivationQuestionFormSet = formset_factory(MotivationQuestionForm, extra=20, can_delete=True)
 
 
 class AdditionalApplicationOptionsForm(forms.Form):
     option = forms.CharField()
 
+
 AdditionalApplicationOptionsFormSet = formset_factory(AdditionalApplicationOptionsForm, extra=20, can_delete=True)
 
 
 class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
     conditions_accepted = forms.BooleanField(required=True)
-    
+
     from_date_field_name = 'application_start'
     to_date_field_name = 'application_end'
-    
+
     class Meta:
         model = CosinnusConferenceApplication
         exclude = ['conference', 'user', 'status', 'priorities', 'motivation_answers']
@@ -241,37 +231,42 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
         if 'participation_management' in kwargs:
             self.participation_management = kwargs.pop('participation_management')
         super().__init__(*args, **kwargs)
-        self.fields['options'] = forms.MultipleChoiceField(
-            choices=self.get_options(),
-            required=False)
+        self.fields['options'] = forms.MultipleChoiceField(choices=self.get_options(), required=False)
 
         for field in list(self.fields.values()):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
 
-        if (not hasattr(self, 'participation_management')
-            or (not self.participation_management.application_conditions
-            and not self.participation_management.application_conditions_upload) or
-            self.instance.id):
+        if (
+            not hasattr(self, 'participation_management')
+            or (
+                not self.participation_management.application_conditions
+                and not self.participation_management.application_conditions_upload
+            )
+            or self.instance.id
+        ):
             del self.fields['conditions_accepted']
-        if (not hasattr(self, 'participation_management') or not (
-                self.participation_management.application_options
-                or self.participation_management.additional_application_options)):
+        if not hasattr(self, 'participation_management') or not (
+            self.participation_management.application_options
+            or self.participation_management.additional_application_options
+        ):
             del self.fields['options']
-        if (not hasattr(self, 'participation_management')
-            or not self.participation_management.may_be_contacted_field_enabled):
+        if (
+            not hasattr(self, 'participation_management')
+            or not self.participation_management.may_be_contacted_field_enabled
+        ):
             self.fields['may_be_contacted'].required = False
         else:
             self.fields['may_be_contacted'].required = True
             self.fields['may_be_contacted'].disabled = True
-        # even though the model field `may_be_contacted` is default=False, the formfield is default=True 
+        # even though the model field `may_be_contacted` is default=False, the formfield is default=True
         self.fields['may_be_contacted'].initial = True
 
         # exclude some optional fields for this portal
         for field_name in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             if field_name in self.fields:
                 del self.fields[field_name]
-        
+
     def clean_options(self):
         if self.cleaned_data['options'] and len(self.cleaned_data) > 0:
             options = []
@@ -284,15 +279,18 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
                     options.append(option)
             return options
 
+
 class RadioSelectInTableRowWidget(forms.RadioSelect):
     input_type = 'radio'
     template_name = 'cosinnus/conference/radio_buttons_table_row.html'
     option_template_name = 'cosinnus/conference/radio_option.html'
 
+
 class RadioSelectInRowWidget(forms.RadioSelect):
     input_type = 'radio'
     template_name = 'cosinnus/conference/radio_buttons_line.html'
     option_template_name = 'cosinnus/conference/radio_option.html'
+
 
 class ConferenceApplicationEventPrioForm(forms.Form):
     event_id = forms.CharField(widget=forms.HiddenInput())
@@ -300,8 +298,9 @@ class ConferenceApplicationEventPrioForm(forms.Form):
     priority = forms.ChoiceField(
         required=True,
         initial=2,
-        choices=[(1, _('First Choice')), (2, _('Second Choice'))], #(0, _('No Interest')),removed
-        widget=RadioSelectInTableRowWidget)
+        choices=[(1, _('First Choice')), (2, _('Second Choice'))],  # (0, _('No Interest')),removed
+        widget=RadioSelectInTableRowWidget,
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -319,11 +318,11 @@ class MotivationAnswerForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.fields['question'].widget.attrs['readonly'] = True
 
+
 MotivationAnswerFormSet = formset_factory(MotivationAnswerForm, extra=0)
 
 
 class ConferenceApplicationManagementForm(forms.ModelForm):
-
     class Meta:
         model = CosinnusConferenceApplication
         exclude = ['options', 'priorities', 'may_be_contacted']
@@ -339,7 +338,9 @@ class ConferenceApplicationManagementForm(forms.ModelForm):
             setattr(self, 'created', kwargs['instance'].created)
 
 
-ConferenceApplicationManagementFormSet = modelformset_factory(CosinnusConferenceApplication, form=ConferenceApplicationManagementForm, extra=0)
+ConferenceApplicationManagementFormSet = modelformset_factory(
+    CosinnusConferenceApplication, form=ConferenceApplicationManagementForm, extra=0
+)
 
 
 class AsignUserToEventForm(forms.Form):
@@ -349,6 +350,7 @@ class AsignUserToEventForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
 
 AsignUserToEventForm = formset_factory(AsignUserToEventForm, extra=0)
 
@@ -363,8 +365,7 @@ class ConferencePremiumBlockForm(CleanFromToDateFieldsMixin, forms.ModelForm):
 
 
 class BBBGuestAccessForm(forms.Form):
-    """ Used for having guests enter their username and ToS accept """
-    
+    """Used for having guests enter their username and ToS accept"""
+
     username = forms.CharField(max_length=50)
     tos_check = forms.BooleanField(label='tos_check', required=True)
-    

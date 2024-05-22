@@ -9,7 +9,6 @@ from cosinnus_todo.models import TodoEntry, TodoList
 
 
 class TodoListTest(TestCase):
-
     def setUp(self):
         super(TodoListTest, self).setUp()
         self.group = CosinnusGroup.objects.create(name='testgroup')
@@ -17,19 +16,19 @@ class TodoListTest(TestCase):
 
     def test_delete_no_todos(self):
         initial_count = TodoList.objects.all().count()
-        l = TodoList.objects.create(title='List 1', group=self.group)
+        todolist = TodoList.objects.create(title='List 1', group=self.group)
         self.assertEqual(TodoList.objects.all().count(), initial_count + 1)
-        l.delete()
+        todolist.delete()
         self.assertEqual(TodoList.objects.all().count(), initial_count)
 
     def test_delete(self):
         initial_count = TodoList.objects.all().count()
         self.assertEqual(TodoEntry.objects.all().count(), 0)
-        l = TodoList.objects.create(title='List 2', group=self.group)
-        TodoEntry.objects.create(title='TD 1', group=self.group, creator=self.user, todolist=l)
-        TodoEntry.objects.create(title='TD 2', group=self.group, creator=self.user, todolist=l)
+        todolist = TodoList.objects.create(title='List 2', group=self.group)
+        TodoEntry.objects.create(title='TD 1', group=self.group, creator=self.user, todolist=todolist)
+        TodoEntry.objects.create(title='TD 2', group=self.group, creator=self.user, todolist=todolist)
         self.assertEqual(TodoList.objects.all().count(), initial_count + 1)
         self.assertEqual(TodoEntry.objects.all().count(), 2)
-        l.delete()
+        todolist.delete()
         self.assertEqual(TodoList.objects.all().count(), initial_count)
         self.assertEqual(TodoEntry.objects.all().count(), 0)

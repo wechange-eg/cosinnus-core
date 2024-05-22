@@ -3,11 +3,10 @@ from rest_framework import permissions
 from rest_framework.decorators import action
 
 from cosinnus.conf import settings
-from cosinnus.models import CosinnusPortal, BaseTagObject
+from cosinnus.models import BaseTagObject, CosinnusPortal
 
 
 class PublicCosinnusGroupFilterMixin(object):
-
     def get_queryset(self):
         queryset = super().get_queryset()
         # filter for current portal
@@ -25,7 +24,6 @@ class PublicCosinnusGroupFilterMixin(object):
 
 
 class PublicTaggableObjectFilterMixin(object):
-
     def get_queryset(self):
         queryset = self.queryset
         # filter for current portal
@@ -38,18 +36,17 @@ class PublicTaggableObjectFilterMixin(object):
 class CosinnusFilterQuerySetMixin(object):
     FILTER_CONDITION_MAP = {
         'avatar': {
-            'true': [~Q(avatar="")],
-            'false': [Q(avatar="")],
+            'true': [~Q(avatar='')],
+            'false': [Q(avatar='')],
         }
     }
     FILTER_KEY_MAP = {
         'tags': 'media_tag__tags__name',
     }
-    FILTER_VALUE_MAP = {
-        'false': False,
-        'true': True
-    }
-    FILTER_DEFAULT_ORDER = ['-created', ]
+    FILTER_VALUE_MAP = {'false': False, 'true': True}
+    FILTER_DEFAULT_ORDER = [
+        '-created',
+    ]
     MANAGED_TAGS_KEY = 'managed_tags'
     # if true, filter managed tags on the group of the object, not on the object itself
     MANAGED_TAGS_FILTER_ON_GROUP = False
@@ -70,14 +67,13 @@ class CosinnusFilterQuerySetMixin(object):
             mtag_filter_prefix = 'group__' if self.MANAGED_TAGS_FILTER_ON_GROUP else ''
             mtag_filter = {
                 f'{mtag_filter_prefix}managed_tag_assignments__managed_tag__slug__in': managed_tags,
-                f'{mtag_filter_prefix}managed_tag_assignments__approved': True
+                f'{mtag_filter_prefix}managed_tag_assignments__approved': True,
             }
             queryset = queryset.filter(**mtag_filter)
             query_params.pop(self.MANAGED_TAGS_KEY)
         # Overwrite ugly but commonly used filters
         for key, value in list(query_params.items()):
-            if key in (self.pagination_class.limit_query_param,
-                       self.pagination_class.offset_query_param):
+            if key in (self.pagination_class.limit_query_param, self.pagination_class.offset_query_param):
                 continue
             if key in self.FILTER_CONDITION_MAP:
                 VALUE_MAP = self.FILTER_CONDITION_MAP.get(key)
@@ -96,7 +92,6 @@ class CosinnusFilterQuerySetMixin(object):
 
 
 class CosinnusPaginateMixin(object):
-
     def get_queryset(self):
         queryset = super().get_queryset()
         page = self.paginate_queryset(queryset)
@@ -109,11 +104,10 @@ class ReadOnlyOrIsAdminUser(permissions.IsAdminUser):
 
 
 class GetForUserViewSetMixin(object):
-
     @action(detail=False, methods=['get'])
     def mine(self, request):
         queryset = self.queryset.model
         queryset = queryset.objects.get_for_user(self.request.user)
         page = self.paginate_queryset(queryset)
-        serializer = self.get_serializer_class()(page, many=True, context={"request": request})
+        serializer = self.get_serializer_class()(page, many=True, context={'request': request})
         return self.get_paginated_response(serializer.data)

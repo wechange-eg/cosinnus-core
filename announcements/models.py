@@ -1,12 +1,12 @@
+from django.core.exceptions import FieldDoesNotExist
 from django.db import models
-from django.utils.translation import gettext_lazy as _, get_language
+from django.utils.translation import get_language
+from django.utils.translation import gettext_lazy as _
 
 from .managers import AnnouncementManager
-from django.core.exceptions import FieldDoesNotExist
 
 
 class Announcement(models.Model):
-
     LEVEL_DEBUG = 'debug'
     LEVEL_INFO = 'info'
     LEVEL_SUCCESS = 'success'
@@ -22,7 +22,7 @@ class Announcement(models.Model):
 
     is_active = models.BooleanField(_('Is active'))
     level = models.CharField('Level', max_length=10, choices=LEVEL_CHOICES, default=LEVEL_INFO)
-    
+
     text = models.TextField('Text', help_text='Default text. Markdown for styling is enabled!')
 
     text_de = models.TextField('Text (DE only)', blank=True, null=True, help_text='Markdown for styling is enabled!')
@@ -37,14 +37,14 @@ class Announcement(models.Model):
     class Meta:
         verbose_name = _('Announcement')
         verbose_name_plural = _('Announcements')
-    
+
     def _has_field(self, name):
         try:
             self._meta.get_field(name)
             return True
         except FieldDoesNotExist:
             return False
-    
+
     def _get_translated_field(self, key):
         value = None
         lang = get_language()
@@ -57,4 +57,3 @@ class Announcement(models.Model):
     @property
     def translated_text(self):
         return self._get_translated_field('text')
-    

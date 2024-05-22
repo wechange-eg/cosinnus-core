@@ -12,5 +12,6 @@ from django.contrib.auth.models import User
 User.USERNAME_FIELD = 'username'
 User.get_username = lambda self: self.username
 
+
 def get_user_model():
     return User

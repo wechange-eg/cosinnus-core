@@ -1,5 +1,6 @@
 from rdflib import Graph
 from rest_framework.settings import api_settings
+
 from rest_framework_rdf.renderers import TurtleRenderer
 from rest_framework_rdf.serializers import RDFSerializer
 
@@ -24,13 +25,15 @@ class TextTurtleRenderer(TurtleRenderer):
                 g.add(data['type'])
             for resource_triple in data.get('resources', []):
                 g.add(resource_triple)
-            return g.serialize(format="turtle")
+            return g.serialize(format='turtle')
         else:
             return bytes()
 
 
 class RDFViewSetMixin:
-    rdf_renderer_classes = [TextTurtleRenderer, ]
+    rdf_renderer_classes = [
+        TextTurtleRenderer,
+    ]
     rdf_renderer_media_types = list(r.media_type for r in rdf_renderer_classes)
     rdf_serializer_class = RDFSerializer
 

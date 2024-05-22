@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import six
-
 from importlib import import_module
+
+import six
 
 from cosinnus.conf import settings
 from cosinnus.core.registries.base import DictBaseRegistry
 
 
 class AttachedObjectRegistry(DictBaseRegistry):
-
     def register(self, model, renderer):
         self[model] = renderer
 
@@ -30,15 +29,15 @@ class AttachedObjectRegistry(DictBaseRegistry):
             cls = getattr(module, klass, None)
             if cls is None:
                 del self[model]
-                raise ImportError("Cannot import cosinnus renderer %s from %s" % (
-                    klass, renderer))
+                raise ImportError('Cannot import cosinnus renderer %s from %s' % (klass, renderer))
             else:
                 self.register(model, cls)
                 return cls
         else:
             return renderer
 
+
 attached_object_registry = AttachedObjectRegistry()
 
 
-__all__ = ('attached_object_registry', )
+__all__ = ('attached_object_registry',)

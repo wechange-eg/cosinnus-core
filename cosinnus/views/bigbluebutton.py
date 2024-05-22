@@ -1,5 +1,6 @@
-from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
+
 from cosinnus.models import BBBRoom
 
 
@@ -15,6 +16,6 @@ def join_meeting(request, meeting_id):
             redirect_url = room.get_join_url(request.user)
             return redirect_url
         except ObjectDoesNotExist:
-            return HttpResponse("Room not found")
+            return HttpResponse('Room not found')
     else:
-        return HttpResponse("Insufficient user rights.")
+        return HttpResponse('Insufficient user rights.')

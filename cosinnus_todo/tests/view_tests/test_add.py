@@ -3,12 +3,11 @@ from __future__ import unicode_literals
 
 from django.urls import reverse
 
-from cosinnus_todo.models import TodoEntry, PRIORITY_LOW
+from cosinnus_todo.models import PRIORITY_LOW, TodoEntry
 from cosinnus_todo.tests.view_tests.base import ViewTestCase
 
 
 class AddTest(ViewTestCase):
-
     def setUp(self, *args, **kwargs):
         super(AddTest, self).setUp(*args, **kwargs)
         self.kwargs = {'group': self.group.slug, 'listslug': 'general'}
@@ -60,9 +59,7 @@ class AddTest(ViewTestCase):
         # do not catch exception here
         todo = TodoEntry.objects.get(title=title)
         kwargs = {'group': self.group.slug, 'listslug': 'general', 'todoslug': todo.slug}
-        self.assertIn(
-            reverse('cosinnus:todo:todo-in-list-list', kwargs=kwargs),
-            response.get('location'))
+        self.assertIn(reverse('cosinnus:todo:todo-in-list-list', kwargs=kwargs), response.get('location'))
         self.assertEqual(todo.priority, PRIORITY_LOW)
         self.assertEqual(todo.creator, self.admin)
         self.assertEqual(todo.group, self.group)

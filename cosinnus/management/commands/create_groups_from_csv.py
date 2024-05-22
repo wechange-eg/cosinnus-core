@@ -1,18 +1,18 @@
 import csv
 import logging
-import requests
 import time
 
+import requests
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
+
 from cosinnus.core.registries import app_registry
 from cosinnus.models.group import CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_ADMIN
 from cosinnus.utils.group import get_cosinnus_group_model
-
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -39,8 +39,9 @@ class Command(BaseCommand):
 
         # parameter for 3rd party tool link
         parser.add_argument(
-            '--third-party-tool-name', type=str,
-            help=f'If set, importing the links in column 6 as third_party_tools with the given name.'
+            '--third-party-tool-name',
+            type=str,
+            help='If set, importing the links in column 6 as third_party_tools with the given name.',
         )
 
     def handle(self, *args, **options):
@@ -54,7 +55,6 @@ class Command(BaseCommand):
         with open(csv_file_name, newline='') as csv_file:
             reader = csv.reader(csv_file, delimiter=delimiter)
             for row in reader:
-
                 # skip empty rows (e.g. empty line at the end of the file)
                 if not row:
                     continue
@@ -123,7 +123,6 @@ class Command(BaseCommand):
                 if third_party_tool_name:
                     third_party_tool_link = self._get_optional_value(row[self.COL_THIRD_PARTY_LINK])
 
-
                 # create group
                 group = self._create_group(group_cls, group_name, admins, parent=parent_group)
 
@@ -143,14 +142,14 @@ class Command(BaseCommand):
                 time.sleep(5)
                 self.stdout.write(self.style.SUCCESS(f'{count} groups successfully created.'))
             else:
-                self.stdout.write(self.style.WARNING(f'No groups created'))
+                self.stdout.write(self.style.WARNING('No groups created'))
 
     def _get_optional_value(self, value):
-        """ Read an optional values considering '-' as None. """
+        """Read an optional values considering '-' as None."""
         return value if value and value != '-' else None
 
     def _get_default_deactivated_apps(self):
-        """ Returns default deactivated apps for a group. """
+        """Returns default deactivated apps for a group."""
         deactivated_apps = []
         for app_name in app_registry:
             if not app_registry.is_active_by_default(app_name) and app_registry.is_deactivatable(app_name):
@@ -158,7 +157,7 @@ class Command(BaseCommand):
         return ','.join(deactivated_apps)
 
     def _get_default_microsite_public_apps(self):
-        """ Returns default microsite apps for a group. """
+        """Returns default microsite apps for a group."""
         microsite_apps = []
         for app_name in app_registry:
             app_disabled = app_name in settings.COSINNUS_GROUP_APPS_WIDGETS_MICROSITE_DISABLED
@@ -167,11 +166,14 @@ class Command(BaseCommand):
         return ','.join(microsite_apps)
 
     def _create_group(self, group_cls, name, admins, parent=None):
-        """ Creates a group and memberships for admins. """
+        """Creates a group and memberships for admins."""
         deactivated_apps = self._get_default_deactivated_apps()
         microsite_public_apps = self._get_default_microsite_public_apps()
         group = group_cls.objects.create(
-            name=name, parent=parent, deactivated_apps=deactivated_apps, microsite_public_apps=microsite_public_apps,
+            name=name,
+            parent=parent,
+            deactivated_apps=deactivated_apps,
+            microsite_public_apps=microsite_public_apps,
         )
         for admin in admins:
             CosinnusGroupMembership.objects.create(group=group, user=admin, status=MEMBERSHIP_ADMIN)
@@ -179,7 +181,7 @@ class Command(BaseCommand):
         return group
 
     def _set_avatar(self, group, avatar_url):
-        """ Setting avatar from url. Errors are ignored. """
+        """Setting avatar from url. Errors are ignored."""
         try:
             image_ext = avatar_url.split('.')[-1]
             image = ContentFile(requests.get(avatar_url).content)

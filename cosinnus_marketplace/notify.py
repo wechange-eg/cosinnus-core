@@ -5,7 +5,6 @@ from django.urls import reverse
 
 from cosinnus_marketplace.models import Offer
 
-
 NOTIFY_MODELS = [Offer]
 NOTIFY_POST_SUBSCRIBE_URLS = {
     'marketplace.Offer': {

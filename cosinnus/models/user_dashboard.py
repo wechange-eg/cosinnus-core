@@ -3,19 +3,17 @@ from __future__ import unicode_literals
 
 import inspect
 import logging
-from cosinnus.models.cloud import NextcloudFileProxy
+
+from django.urls.base import reverse
+from django.utils.html import escape
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.tagged import BaseTaggableObjectModel
-from cosinnus.utils.group import get_cosinnus_group_model, \
-    get_default_user_group_slugs
-
 from cosinnus.models import CosinnusPortal, get_domain_for_portal
+from cosinnus.models.cloud import NextcloudFileProxy
 from cosinnus.models.idea import CosinnusIdea
-from django.urls.base import reverse
 from cosinnus.models.profile import BaseUserProfile
-from django.utils.html import escape
+from cosinnus.models.tagged import BaseTaggableObjectModel
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus_organization.models import CosinnusOrganization
 
 logger = logging.getLogger('cosinnus')
@@ -33,14 +31,14 @@ class DashboardItem(dict):
     NextcloudFileProxy, postman.Message, UserProfile and BaseTaggableObjectModel.
     Used by DashboardWidgets and in the v3 navigation API.
     """
-    
+
     icon = None
     text = None
     url = None
     subtext = None
     is_emphasized = False
-    group = None # group name of item if it has one
-    group_icon = None # group type icon
+    group = None  # group name of item if it has one
+    group_icon = None  # group type icon
     avatar = None
 
     def __init__(self, obj=None, is_emphasized=False, user=None):
@@ -48,8 +46,9 @@ class DashboardItem(dict):
             # Support for `TranslateableFieldsModelMixin
             if hasattr(obj, 'get_translated_readonly_instance'):
                 obj = obj.get_translated_readonly_instance()
-            
+
             from cosinnus.templatetags.cosinnus_tags import full_name
+
             if hasattr(obj, 'id'):
                 self['id'] = f'{obj.__class__.__name__}{obj.id}'
             if is_emphasized:
@@ -73,19 +72,27 @@ class DashboardItem(dict):
                 self['text'] = obj.name
                 self['url'] = obj.url
                 self['subtext'] = obj.excerpt
-            elif obj._meta.model.__name__ == 'Message' and not settings.COSINNUS_ROCKET_ENABLED and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+            elif (
+                obj._meta.model.__name__ == 'Message'
+                and not settings.COSINNUS_ROCKET_ENABLED
+                and 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS
+            ):
                 self['icon'] = 'fa-envelope'
                 self['text'] = escape(obj.subject)
-                self['url'] = reverse('postman:view_conversation', kwargs={'thread_id': obj.thread_id}) if obj.thread_id else obj.get_absolute_url()
-                self['subtext'] = escape(', '.join([full_name(participant) for participant in obj.other_participants(user)]))
+                self['url'] = (
+                    reverse('postman:view_conversation', kwargs={'thread_id': obj.thread_id})
+                    if obj.thread_id
+                    else obj.get_absolute_url()
+                )
+                self['subtext'] = escape(
+                    ', '.join([full_name(participant) for participant in obj.other_participants(user)])
+                )
             elif issubclass(obj.__class__, BaseUserProfile):
                 self['icon'] = obj.get_icon()
                 self['text'] = escape(full_name(obj.user))
                 self['url'] = obj.get_absolute_url()
                 self['avatar'] = obj.avatar_url
             elif BaseTaggableObjectModel in inspect.getmro(obj.__class__):
-                
-                
                 self['icon'] = 'fa-question'
                 self['text'] = escape(obj.get_readable_title())
                 self['url'] = obj.get_absolute_url()
@@ -113,17 +120,28 @@ class DashboardItem(dict):
 
 
 class MenuItem(dict):
-    """ Dictionary used as a representation and API serializer of menu links. Used in the v3 navigation API. """
+    """Dictionary used as a representation and API serializer of menu links. Used in the v3 navigation API."""
 
-    def __init__(self, label, url=None, icon=None, image=None, badge=None, is_external=False, id=None,
-                 selected=False, attributes=None, sub_items=None):
+    def __init__(
+        self,
+        label,
+        url=None,
+        icon=None,
+        image=None,
+        badge=None,
+        is_external=False,
+        id=None,
+        selected=False,
+        attributes=None,
+        sub_items=None,
+    ):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
         if not is_external and url and url.startswith(domain):
             url = url.replace(domain, '')
         if image and image.startswith('/'):
             image = domain + image
         if image and icon:
-            icon=None
+            icon = None
         self['id'] = id
         self['label'] = label
         self['url'] = url

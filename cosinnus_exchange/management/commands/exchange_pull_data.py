@@ -1,4 +1,5 @@
 from __future__ import print_function
+
 import logging
 
 from django.core.management.base import BaseCommand
@@ -10,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 class Command(BaseCommand):
-    """Pulls data from all backends defined in COSINNUS_EXCHANGE_BACKENDS """
+    """Pulls data from all backends defined in COSINNUS_EXCHANGE_BACKENDS"""
 
     def handle(self, *args, **options):
         p = PullData()

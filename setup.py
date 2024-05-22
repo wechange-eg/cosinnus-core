@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
-import os
 import codecs
-from setuptools import setup, find_packages
+import os
+
+from setuptools import find_packages, setup
 
 from cosinnus import VERSION as COSINNUS_VERSION
 
@@ -28,7 +29,6 @@ def fullsplit(path, result=None):
     return fullsplit(head, [tail] + result)
 
 
-
 # Compile the list of packages available, because setuptools doesn't have
 # an easy way to do this. Taken from Django.
 data_files = []
@@ -37,42 +37,44 @@ if root_dir != '':
     os.chdir(root_dir)
 
 packages = [
-    "ajax_forms",
-    "announcements",
-    "cosinnus",
-    "cosinnus_cloud",
-    "cosinnus_conference",
-    "cosinnus_etherpad",
-    "cosinnus_event",
-    "cosinnus_exchange",
-    "cosinnus_file",
-    "cosinnus_marketplace",
-    "cosinnus_message",
-    "cosinnus_note",
-    "cosinnus_notifications",
-    "cosinnus_oauth_client",
-    "cosinnus_organization",
-    "cosinnus_poll",
-    "cosinnus_stream",
-    "cosinnus_todo",
-    "cosinnus_frontend",
-    "postman",
-    "rest_framework_rdf",
-    "suit_overextends",
-    "wagtail_overextends",
-    "locale",
+    'ajax_forms',
+    'announcements',
+    'cosinnus',
+    'cosinnus_cloud',
+    'cosinnus_conference',
+    'cosinnus_etherpad',
+    'cosinnus_event',
+    'cosinnus_exchange',
+    'cosinnus_file',
+    'cosinnus_marketplace',
+    'cosinnus_message',
+    'cosinnus_note',
+    'cosinnus_notifications',
+    'cosinnus_oauth_client',
+    'cosinnus_organization',
+    'cosinnus_poll',
+    'cosinnus_stream',
+    'cosinnus_todo',
+    'cosinnus_frontend',
+    'postman',
+    'rest_framework_rdf',
+    'suit_overextends',
+    'wagtail_overextends',
+    'locale',
 ]
 
 for package in packages:
     for dirpath, dirnames, filenames in os.walk(package):
         # Ignore PEP 3147 cache dirs and those whose names start with '.'
         dirnames[:] = [d for d in dirnames if not d.startswith('.') and d != '__pycache__']
-        data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames if not f.endswith(".py")]])
+        data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames if not f.endswith('.py')]])
 
-data_files.extend([
-    "nunjucks.config.js",
-    "package.json",
-])
+data_files.extend(
+    [
+        'nunjucks.config.js',
+        'package.json',
+    ]
+)
 
 setup(
     name='cosinnus',
@@ -81,7 +83,7 @@ setup(
     long_description=read('README'),
     author='wechange eG',
     author_email='support@wechange.de',
-    packages=find_packages(exclude=["tests"]),
+    packages=find_packages(exclude=['tests']),
     data_files=data_files,
     install_requires=[
         'Django>=4.2.11,<4.3',
@@ -89,7 +91,6 @@ setup(
         'Pillow==10.2.0',
         'celery==5.2.7',
         'dataclasses',
-        
         'beautifulsoup4==4.8.1',
         'chardet==3.0.4',
         'django-allauth==0.60.0',
@@ -159,16 +160,15 @@ setup(
         'XlsxWriter==1.3.7',
         'django-cors-headers<3.11.0',
         'phonenumbers==8.13.28',
-
         # wagtail
         'django-compressor==3.1',
-        
         # virus file scan validator
         'clamd==1.0.2',
-
         # requirements for documentation
         'sphinx==7.1.2',
-
+        # dev requirements
+        'ruff==0.4.4',
+        'pre-commit==3.5.0',
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django-update-4-2#egg=django-awesome-avatar',
         'django-filer @ git+https://github.com/wechange-eg/django-filer.git@django-update-4-2#egg=django-filer',
@@ -195,5 +195,5 @@ setup(
         'Framework :: Django',
     ],
     zip_safe=False,
-    include_package_data=True
+    include_package_data=True,
 )

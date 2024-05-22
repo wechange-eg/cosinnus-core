@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from builtins import str
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils.encoding import force_str
@@ -17,10 +18,8 @@ class TodoEntryTest(TestCase):
     def setUp(self):
         super(TodoEntryTest, self).setUp()
         self.group = CosinnusGroup.objects.create(name='testgroup')
-        self.admin = User.objects.create_superuser(
-            username='admin', email=None, password=None)
-        self.todo = TodoEntry.objects.create(
-            group=self.group, title=self.todo_title, creator=self.admin)
+        self.admin = User.objects.create_superuser(username='admin', email=None, password=None)
+        self.todo = TodoEntry.objects.create(group=self.group, title=self.todo_title, creator=self.admin)
 
     def test_string_repr(self):
         """

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.urls import path
+
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal
 from cosinnus_stream import views
 

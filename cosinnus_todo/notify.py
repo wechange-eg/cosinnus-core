@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import reverse
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.notify.actions import send_notification
-
-from cosinnus_todo.models import TodoEntry
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_todo.models import TodoEntry
 
 NOTIFY_MODELS = [TodoEntry]
 NOTIFY_POST_SUBSCRIBE_URLS = {

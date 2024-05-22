@@ -7,6 +7,7 @@ class TurtleRenderer(BaseRenderer):
     """
     Renderer which serializes to JSON.
     """
+
     media_type = 'application/x-turtle'
     format = 'turtle'
     encoder_class = encoders.JSONEncoder
@@ -29,6 +30,6 @@ class TurtleRenderer(BaseRenderer):
                 g.add(data['type'])
             for resource_triple in data.get('resources', []):
                 g.add(resource_triple)
-            return g.serialize(format="turtle")
+            return g.serialize(format='turtle')
         else:
             return bytes()

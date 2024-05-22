@@ -1,16 +1,18 @@
 from __future__ import unicode_literals
-from cosinnus.models.group import CosinnusPortal
-from cosinnus.utils.permissions import check_user_can_receive_emails
-from cosinnus.core.mail import send_mail_or_fail_threaded
-from importlib import import_module
+
 import re
-import sys
+from importlib import import_module
 from textwrap import TextWrapper
 
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.encoding import force_str
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
+
+from cosinnus.core.mail import send_mail_or_fail_threaded
+from cosinnus.models.group import CosinnusPortal
+from cosinnus.utils.permissions import check_user_can_receive_emails
 
 # make use of a favourite notifier app such as django-notification
 # but if not installed or not desired, fallback will be to do basic emailing
@@ -27,7 +29,7 @@ name = getattr(settings, 'POSTMAN_MAILER_APP', 'mailer')
 if name and name in settings.INSTALLED_APPS:
     send_mail = import_module(name).send_mail
 else:
-    from django.core.mail import send_mail
+    from django.core.mail import send_mail  # noqa
 
 # to disable email notification to users
 DISABLE_USER_EMAILING = getattr(settings, 'POSTMAN_DISABLE_USER_EMAILING', False)
@@ -36,7 +38,7 @@ DISABLE_USER_EMAILING = getattr(settings, 'POSTMAN_DISABLE_USER_EMAILING', False
 WRAP_WIDTH = 55
 
 
-def format_body(sender, body, indent=_("> "), width=WRAP_WIDTH):
+def format_body(sender, body, indent=_('> '), width=WRAP_WIDTH):
     """
     Wrap the text and prepend lines with a prefix.
 
@@ -51,8 +53,10 @@ def format_body(sender, body, indent=_("> "), width=WRAP_WIDTH):
     indent = force_str(indent)  # join() doesn't work on lists with lazy translation objects ; nor startswith()
     wrapper = TextWrapper(width=width, initial_indent=indent, subsequent_indent=indent)
     # rem: TextWrapper doesn't add the indent on an empty text
-    quote = '\n'.join([line.startswith(indent) and indent+line or wrapper.fill(line) or indent for line in body.splitlines()])
-    return gettext("\n\n{sender} wrote:\n{body}\n").format(sender=sender, body=quote)
+    quote = '\n'.join(
+        [line.startswith(indent) and indent + line or wrapper.fill(line) or indent for line in body.splitlines()]
+    )
+    return gettext('\n\n{sender} wrote:\n{body}\n').format(sender=sender, body=quote)
 
 
 def format_subject(subject, old_style=False):
@@ -62,13 +66,14 @@ def format_subject(subject, old_style=False):
     Matching is case-insensitive.
 
     """
-    
+
     if old_style:
-        str = gettext("Re: {subject}")
+        str = gettext('Re: {subject}')
         pattern = '^' + str.replace('{subject}', '.*') + '$'
         return subject if re.match(pattern, subject, re.IGNORECASE) else str.format(subject=subject)
     else:
         return subject
+
 
 def email(subject_template, message_template, recipient_list, object, action, site):
     """Compose and send an email."""
@@ -76,33 +81,39 @@ def email(subject_template, message_template, recipient_list, object, action, si
     subject = render_to_string(subject_template, ctx_dict)
     # Email subject *must not* contain newlines
     subject = ''.join(subject.splitlines())
-    # check if we have a connected mailbox for direct replies, and if so, set the sender to a specified email, so that users
-    # can directly reply to them
+    # check if we have a connected mailbox for direct replies, and if so, set the sender to a specified email, so that
+    # users can directly reply to them
     hash_vars = {
         'portal_name': force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)),
         'default_from': settings.DEFAULT_FROM_EMAIL,
     }
     if CosinnusPortal.get_current().mailboxes.filter(active=True).count() > 0:
-        hash_vars.update({
-            'domain': settings.DEFAULT_FROM_EMAIL.split('@')[1],
-            'portal_id': CosinnusPortal.get_current().id,
-            'hash': object.direct_reply_hash,
-        })
+        hash_vars.update(
+            {
+                'domain': settings.DEFAULT_FROM_EMAIL.split('@')[1],
+                'portal_id': CosinnusPortal.get_current().id,
+                'hash': object.direct_reply_hash,
+            }
+        )
         sender = '%(portal_name)s <directreply@%(domain)s>' % hash_vars
         hash_code = 'directreply+%(portal_id)d+%(hash)s+%(domain)s' % hash_vars
-        ctx_dict.update({
-            'direct_reply_enabled': True,
-            'hash_code': hash_code,
-        })
+        ctx_dict.update(
+            {
+                'direct_reply_enabled': True,
+                'hash_code': hash_code,
+            }
+        )
     else:
         sender = '%(portal_name)s <%(default_from)s>' % hash_vars
-        
-    #message = render_to_string(message_template, ctx_dict)
-    # during the development phase, consider using the setting: EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    #send_mail(subject, message, sender, recipient_list, fail_silently=True)
-    
+
+    # message = render_to_string(message_template, ctx_dict)
+    # during the development phase, consider using the setting:
+    #   EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # send_mail(subject, message, sender, recipient_list, fail_silently=True)
+
     # now sending through our system
     send_mail_or_fail_threaded(recipient_list[0], subject, message_template, ctx_dict, sender, is_html=False)
+
 
 def email_visitor(object, action, site):
     """Email a visitor."""

@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 from django.urls import re_path
-from cosinnus_etherpad import views 
+
+from cosinnus_etherpad import views
 
 app_name = 'etherpad'
 
@@ -17,12 +18,11 @@ cosinnus_group_patterns = [
     re_path(r'^(?P<slug>[^/]+)/$', views.pad_detail_view, name='pad-detail'),
     re_path(r'^(?P<slug>[^/]+)/csv/$', views.calc_csv_view, name='calc-csv'),
     re_path(r'^(?P<slug>[^/]+)/xlsx/$', views.calc_xlsx_view, name='calc-xlsx'),
-    
-    #re_path(r'^add-container/$', container_add_view', name='container-add'),
+    # re_path(r'^add-container/$', container_add_view', name='container-add'),
     re_path(r'^(?P<slug>[^/]+)/delete/$', views.pad_delete_view, name='pad-delete'),
     re_path(r'^(?P<slug>[^/]+)/archive/document/$', views.pad_archive_document, name='pad-archive-document'),
     re_path(r'^(?P<slug>[^/]+)/archive/file/$', views.pad_archive_file, name='pad-archive-file'),
-    #re_path(r'^(?P<slug>[^/]+)/add-container/$',
+    # re_path(r'^(?P<slug>[^/]+)/add-container/$',
     #    'container_add_view', name='container-add'),
 ]
 

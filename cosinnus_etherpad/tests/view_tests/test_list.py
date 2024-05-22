@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from builtins import str
+
 from django.urls import reverse
 
 from cosinnus_etherpad.models import Etherpad
@@ -9,7 +10,6 @@ from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
 class ListTest(ViewTestCase):
-
     def test_list_not_logged_in(self):
         """
         Should return redirect to login if not logged in
@@ -33,8 +33,8 @@ class ListTest(ViewTestCase):
         self.assertEqual(response.status_code, 200)
         kwargs = {'group': self.group.slug, 'slug': pad.slug}
         self.assertIn(
-            reverse('cosinnus:etherpad:pad-detail', kwargs=kwargs),
-            str(response.content))  # type byte in Python3.3
+            reverse('cosinnus:etherpad:pad-detail', kwargs=kwargs), str(response.content)
+        )  # type byte in Python3.3
 
         # be nice to remote server and delete pad also there
         pad.delete()

@@ -5,7 +5,6 @@ from django.urls import reverse
 
 from cosinnus_poll.models import Poll
 
-
 NOTIFY_MODELS = [Poll]
 NOTIFY_POST_SUBSCRIBE_URLS = {
     'poll.Poll': {

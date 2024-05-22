@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from builtins import str
 from datetime import timedelta
+
 from django.urls import reverse
 from django.utils.timezone import now
 
@@ -12,7 +13,6 @@ from cosinnus_event.tests.view_tests.base import ViewTestCase
 
 
 class ListTest(ViewTestCase):
-
     def test_list_not_logged_in(self):
         """
         Should return 200
@@ -34,8 +34,8 @@ class ListTest(ViewTestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(
-            reverse('cosinnus:event:event-add', kwargs=kwargs),
-            str(response.content))  # type byte in Python3.3
+            reverse('cosinnus:event:event-add', kwargs=kwargs), str(response.content)
+        )  # type byte in Python3.3
 
     def test_list_future_events(self):
         """
@@ -47,7 +47,8 @@ class ListTest(ViewTestCase):
             title='future testevent',
             from_date=now() + timedelta(days=1),
             to_date=now() + timedelta(days=1),
-            state=Event.STATE_SCHEDULED)
+            state=Event.STATE_SCHEDULED,
+        )
         event.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
         event.media_tag.save()
         kwargs = {'group': self.group.slug}

@@ -1,11 +1,10 @@
 import random
 import string
-
 import xml.etree.ElementTree as ET
 
 
 def xml_to_json(xml_data):
-    """ converts a xml representation of a response to json"""
+    """converts a xml representation of a response to json"""
     result = {}
     if xml_data:
         for x in xml_data:
@@ -23,25 +22,23 @@ def parse_xml(response):
             # TODO add logging statement
             message_key = xml.find('messageKey').text
             message = xml.find('message').text
-            raise Exception("[{code}]: {key} - {message}".format(
-                code=code, key=message_key, message=message
-            ))
-    except:
+            raise Exception('[{code}]: {key} - {message}'.format(code=code, key=message_key, message=message))
+    except Exception:
         return None
 
 
 def random_meeting_id():
-    """ generates a random meeting_id to identify the meeting at BigBlueButton """
-    return "room-" + random_password()
+    """generates a random meeting_id to identify the meeting at BigBlueButton"""
+    return 'room-' + random_password()
 
 
 def random_password(length=5):
-    """ generates a random moderator password for a BBBRoom  with lowercase ASCII characters """
+    """generates a random moderator password for a BBBRoom  with lowercase ASCII characters"""
     return ''.join(random.choice(string.ascii_lowercase) for i in range(length))
 
 
 def random_voice_bridge():
-    """ generates a random voice bridge dial in PIN between 10000 and 99999 that is unique within all BBB-Rooms
+    """generates a random voice bridge dial in PIN between 10000 and 99999 that is unique within all BBB-Rooms
 
     :return: random integer in the range of 10000 - 99999
     :rtype: int

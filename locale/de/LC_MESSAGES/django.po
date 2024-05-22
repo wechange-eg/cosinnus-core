@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-07 17:45+0200\n"
+"POT-Creation-Date: 2024-05-22 13:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -286,6 +286,10 @@ msgstr "Cloud"
 
 msgid "Messages"
 msgstr "Nachrichten"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Entdecken"
 
 msgid "Help"
 msgstr "Hilfe"
@@ -996,8 +1000,8 @@ msgstr "Neue E-Mail Adresse"
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "Einige erforderliche Spalten sind in der CSV nicht vorhanden: {missing_headers}!"
 
-msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
-msgstr "Zeilen auf diesen Zeilennummern hatten nicht die gleiche Anzahl von Elementen ({len( verarbeitete_kopfzeile)}) wie die Kopfzeile: {\", \".join(ungleiche_Zeilen}) }!"
+msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
+msgstr "Zeilen auf diesen Zeilennummern hatten nicht die gleiche Anzahl von Elementen (%(header_length)s) wie die Kopfzeile: %(mismatched_rows)s!"
 
 msgid "Some CSV headers did not have a name!"
 msgstr "Einige CSV-Header hatten keinen Namen!"
@@ -6707,10 +6711,6 @@ msgstr "Hier findest du in Zukunft eine Übersicht über Ideen, die dir gefallen
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
 msgstr "Du kannst eigene Ideen über den '+'-Button im Header anlegen oder bestehende Ideen hier entdecken"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Entdecken"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Filter"

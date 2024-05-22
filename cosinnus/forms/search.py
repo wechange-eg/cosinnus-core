@@ -1,26 +1,24 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
+
 from django import forms
 from django.apps import apps
 from django.utils.translation import gettext_lazy as _
-
 from haystack.backends import SQ
 from haystack.forms import SearchForm
+from haystack.inputs import AutoQuery
+from haystack.query import EmptySearchQuerySet
 
 from cosinnus.conf import settings
-from cosinnus.models.tagged import BaseTagObject
-from cosinnus.utils.permissions import check_user_superuser
-from cosinnus.models.profile import get_user_profile_model
-from cosinnus.utils.group import get_cosinnus_group_model
-from haystack.inputs import AutoQuery
-from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,\
-    CommaSeparatedSelect2MultipleWidget
-from haystack.query import EmptySearchQuerySet
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.functions import ensure_list_of_ints
-
-import logging
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.permissions import check_user_superuser
 
 logger = logging.getLogger('cosinnus')
 
@@ -49,9 +47,11 @@ def filter_searchqueryset_for_read_access(sqs, user):
     result set to only include elements with read access.
     """
     public_node = (
-        SQ(public__exact="true") |  # public on the object itself (applicable for groups)
-        SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL) |  # public via "everyone can see me" visibility meta attribute
-        SQ(always_visible__exact="true") # special marker for indexed objects that should always show up in search
+        SQ(public__exact='true')  # public on the object itself (applicable for groups)
+        | SQ(
+            mt_visibility__exact=BaseTagObject.VISIBILITY_ALL
+        )  # public via "everyone can see me" visibility meta attribute
+        | SQ(always_visible__exact='true')  # special marker for indexed objects that should always show up in search
     )
 
     if user.is_authenticated:
@@ -59,39 +59,41 @@ def filter_searchqueryset_for_read_access(sqs, user):
             pass
         else:
             logged_in_user_visibility = (
-                SQ(user_visibility_mode__exact="true") & # for UserProfile search index objects
-                SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
+                SQ(user_visibility_mode__exact='true')  # for UserProfile search index objects
+                & SQ(
+                    mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP
+                )  # logged in users can see users who are visible
             )
-            my_item = (
-                 SQ(creator__exact=user.id)
-            )
-            visible_for_all_authenticated_users = (
-                SQ(visible_for_all_authenticated_users="true")
-            )
+            my_item = SQ(creator__exact=user.id)
+            visible_for_all_authenticated_users = SQ(visible_for_all_authenticated_users='true')
             # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
             # of an items group. New members of a group won't be able to find old indexed items if the index
             # is not refreshed regularly
-            group_visible_and_in_my_group = (
-                 SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) &
-                 SQ(group_members__contains=user.id)
+            group_visible_and_in_my_group = SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) & SQ(
+                group_members__contains=user.id
             )
-            
-            ored_query = public_node | group_visible_and_in_my_group | my_item \
-                 | logged_in_user_visibility | visible_for_all_authenticated_users
-            
+
+            ored_query = (
+                public_node
+                | group_visible_and_in_my_group
+                | my_item
+                | logged_in_user_visibility
+                | visible_for_all_authenticated_users
+            )
+
             users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
             if True:
                 group_member_user_visibility = (
-                    SQ(user_visibility_mode__exact="true") & # for UserProfile search index objects
-                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
-                    SQ(membership_groups__in=users_group_ids)
+                    SQ(user_visibility_mode__exact='true')  # for UserProfile search index objects
+                    & SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER)  # team mambers can see this user
+                    & SQ(membership_groups__in=users_group_ids)
                 )
                 ored_query = ored_query | group_member_user_visibility
-            
+
             sqs = sqs.filter_and(ored_query)
     else:
         sqs = sqs.filter_and(public_node)
-        
+
     return sqs
 
 
@@ -105,19 +107,19 @@ def get_visible_portal_ids():
 
 
 def filter_searchqueryset_for_portal(sqs, portals=None, restrict_multiportals_to_current=False, exchange=False):
-    """ Filters a searchqueryset by which portal the objects belong to.
-        @param portals: If not provided, will default to this portal and all foreign portals allowed in settings 
-            ([current-portal] + settings.COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS)
-        @param restrict_multiportals_to_current: if True, will force objects with multiple portals to
-            definitely be in the current portal  
-        @param exchange: should we include external API content? """
-            
+    """Filters a searchqueryset by which portal the objects belong to.
+    @param portals: If not provided, will default to this portal and all foreign portals allowed in settings
+        ([current-portal] + settings.COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS)
+    @param restrict_multiportals_to_current: if True, will force objects with multiple portals to
+        definitely be in the current portal
+    @param exchange: should we include external API content?"""
+
     if portals is None:
         portals = get_visible_portal_ids()
     if exchange:
         # if enabled, add the non-existing 9999-id portal, for external portals
         portals = [settings.COSINNUS_EXCHANGE_PORTAL_ID] + portals
-    
+
     if portals and restrict_multiportals_to_current:
         sqs = sqs.filter_and(SQ(portal__in=portals) | SQ(portals__in=[CosinnusPortal.get_current().id]))
     elif portals:
@@ -131,29 +133,37 @@ class TaggableModelSearchForm(SearchForm):
     it limits the choices to models that are a subclasses of the
     :class:`~cosinnus.models.BaseTaggableObjectModel`.
     """
-    
+
     MAX_RESULTS = 200
 
-    groups = forms.ChoiceField(label=_('Limit to teams'), required=False, initial='all',
+    groups = forms.ChoiceField(
+        label=_('Limit to teams'),
+        required=False,
+        initial='all',
         choices=(('all', _('All')), ('mine', _('My teams')), ('others', _('Other teams'))),
-        widget=forms.RadioSelect)
+        widget=forms.RadioSelect,
+    )
     models = forms.MultipleChoiceField(required=False)
-    topics = CommaSeparatedSelect2MultipleChoiceField(required=False, choices=BaseTagObject.TOPIC_CHOICES,
-            widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}))
+    topics = CommaSeparatedSelect2MultipleChoiceField(
+        required=False,
+        choices=BaseTagObject.TOPIC_CHOICES,
+        widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}),
+    )
     exchange = forms.BooleanField(required=False, initial=True)
 
     location = forms.CharField(required=False)
     valid_start = forms.DateField(required=False)
     valid_end = forms.DateField(required=False)
-    
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         super(TaggableModelSearchForm, self).__init__(*args, **kwargs)
         self.fields['models'].choices = list(MODEL_ALIASES.items())
 
     def get_models(self):
-        """ Return the models of types user has selected to filter search on """
+        """Return the models of types user has selected to filter search on"""
         from cosinnus.models.map import EXCHANGE_SEARCH_MODEL_NAMES_REVERSE
+
         search_models = []
 
         if self.is_valid():
@@ -175,13 +185,16 @@ class TaggableModelSearchForm(SearchForm):
                         try:
                             model = apps.get_model(*model_string.split('.'))
                         except LookupError as e:
-                            logger.error('Search: Lookup error during search for cosinnus app model %s' % model_string, extra={'exception': e})
+                            logger.error(
+                                'Search: Lookup error during search for cosinnus app model %s' % model_string,
+                                extra={'exception': e},
+                            )
                             continue
                     search_models.append(model)
                 # Add exchange model if activated
                 if exchange and f'{model_alias}s' in EXCHANGE_SEARCH_MODEL_NAMES_REVERSE:
                     search_models.append(EXCHANGE_SEARCH_MODEL_NAMES_REVERSE[f'{model_alias}s'])
-        
+
         return search_models
 
     def search(self):
@@ -197,11 +210,11 @@ class TaggableModelSearchForm(SearchForm):
                 sqs = self._boost_search_query(sqs)
             if self.request.GET.get('o', None) == 'newest':
                 sqs = sqs.order_by('-created', '-_score')
-        ret = sqs[:self.MAX_RESULTS]
+        ret = sqs[: self.MAX_RESULTS]
         return ret
-    
+
     def no_query_found(self):
-        """ Overriding default behaviour to allow topic searches without textual query. """
+        """Overriding default behaviour to allow topic searches without textual query."""
         if hasattr(self, 'cleaned_data') and self.cleaned_data.get('topics', None):
             return self.searchqueryset.all()
         return EmptySearchQuerySet()

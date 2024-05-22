@@ -1,27 +1,28 @@
-from django.contrib.auth.views import PasswordResetView
-from django.shortcuts import reverse, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import reverse
 from django.urls import resolve
-from cosinnus.views.user import SetInitialPasswordView
-from django.http import HttpResponse, HttpResponseRedirect
+
 from cosinnus.models.profile import PROFILE_SETTING_PASSWORD_NOT_SET
+from cosinnus.views.user import SetInitialPasswordView
 
 
 class SetPasswordMiddleware:
-    """ This middleware checks if a user is created without a password, and will redirect the user to the set
-        initial password view, if the token for setting the password was provided.
-        When a user tries to leave the set password view without setting a password the token will be saved in
-        request.COOKIES helping identifying the user in the redirection.
+    """This middleware checks if a user is created without a password, and will redirect the user to the set
+    initial password view, if the token for setting the password was provided.
+    When a user tries to leave the set password view without setting a password the token will be saved in
+    request.COOKIES helping identifying the user in the redirection.
 
-        Display of 403 or 404 pages respectively is provided by the set_password view.
+    Display of 403 or 404 pages respectively is provided by the set_password view.
 
-        Logout view will not be redirected,
-        """
+    Logout view will not be redirected,
+    """
+
     def __init__(self, get_repsonse):
         self.get_response = get_repsonse
 
     def requested_initial_password(self, func):
-        """ Checks if the view function of the resolved request path matches the view meant to set the initial
-            password for a user without an initial password
+        """Checks if the view function of the resolved request path matches the view meant to set the initial
+        password for a user without an initial password
         """
 
         if not hasattr(func, 'view_class'):
@@ -32,7 +33,9 @@ class SetPasswordMiddleware:
 
     def __call__(self, request):
         func, args, kwargs = resolve(request.path)
-        token = kwargs.get('token', '') if 'token' in kwargs else request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET, '')
+        token = (
+            kwargs.get('token', '') if 'token' in kwargs else request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET, '')
+        )
 
         if not request.user.is_authenticated:
             # section for anonymous users

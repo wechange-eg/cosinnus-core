@@ -5,10 +5,10 @@ from django.dispatch import receiver
 from cosinnus.api.serializers.user import UserCreateUpdateSerializer
 from cosinnus.core import signals
 
-
 HOOKS = getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('hooks', {})
 
 if HOOKS.get('user.activated'):
+
     @receiver(signals.user_activated)
     def user_activated(sender, user, **kwargs):
         data = {'signal': 'user.activated'}
@@ -18,6 +18,7 @@ if HOOKS.get('user.activated'):
 
 
 if HOOKS.get('user.deactivated'):
+
     @receiver(signals.user_deactivated)
     def user_deactivated(sender, user, **kwargs):
         data = {'signal': 'user.deactivated'}

@@ -2,12 +2,13 @@
 from __future__ import unicode_literals
 
 from builtins import object
+
 from rest_framework import serializers
 
-from cosinnus_todo.models import TodoEntry, TodoList
 from cosinnus.api.serializers.base import DateTimeL10nField
 from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.api.serializers.user import UserSerializer
+from cosinnus_todo.models import TodoEntry, TodoList
 
 
 class TodoListSerializer(serializers.ModelSerializer):
@@ -24,7 +25,7 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     created = DateTimeL10nField()
     creator = UserSerializer(many=False)
 
-    #tags = TagListSerializer()
+    # tags = TagListSerializer()
 
     todolist = TodoListSerializer(many=False, required=False)
 
@@ -37,8 +38,18 @@ class TodoEntrySerializer(serializers.ModelSerializer):
     class Meta(object):
         model = TodoEntry
         fields = (
-            'id', 'slug', 'title', 'group', 'created', 'creator',
-            'note', 'priority', 'todolist',
-            'assigned_to', 'due_date',
-            'is_completed', 'completed_by', 'completed_date',
+            'id',
+            'slug',
+            'title',
+            'group',
+            'created',
+            'creator',
+            'note',
+            'priority',
+            'todolist',
+            'assigned_to',
+            'due_date',
+            'is_completed',
+            'completed_by',
+            'completed_date',
         )

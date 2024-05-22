@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import requests
-
 from builtins import str
+from uuid import uuid4
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.test import TestCase
-from uuid import uuid4
 
 from cosinnus.models import CosinnusGroup
 from cosinnus_etherpad.models import Etherpad
@@ -30,7 +29,7 @@ class EtherpadTest(TestCase):
         super(EtherpadTest, self).tearDown()
 
     def test_pad_created(self):
-        """ Check via the Etherpad API that the pad has been created. """
+        """Check via the Etherpad API that the pad has been created."""
         # an alternate test to listing all pad ids would be requesting the text for the created pad:
         # self.pad.client.getText(padID=self.pad.pad_id)
         all_pads = self.pad.client.listAllPads()
@@ -49,7 +48,7 @@ class EtherpadTest(TestCase):
         pad_url = self.pad.get_pad_url()
         # pad URL should contain base URL and pad title
         base_url = settings.COSINNUS_ETHERPAD_BASE_URL
-        base_url = base_url[:base_url.rfind('/api')]
+        base_url = base_url[: base_url.rfind('/api')]
         self.assertIn(base_url, pad_url)
         self.assertIn(self.pad_title, pad_url)
 

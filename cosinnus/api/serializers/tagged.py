@@ -2,12 +2,11 @@
 from __future__ import unicode_literals
 
 from builtins import map
-import six
 
+import six
 from rest_framework import serializers
 
-
-__all__ = ('TagListSerializer', )
+__all__ = ('TagListSerializer',)
 
 
 class TagListSerializer(serializers.ReadOnlyField):
@@ -26,7 +25,7 @@ class TagListSerializer(serializers.ReadOnlyField):
             return ', '.join(map(self._quote_string, data))
         elif isinstance(data, six.text_type):
             return data
-        raise ValueError("Expected a list of data")
+        raise ValueError('Expected a list of data')
 
     def to_native(self, obj):
         """
