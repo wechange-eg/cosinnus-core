@@ -28,6 +28,3 @@ select = [
     # isort
     "I",
 ]
-# Disbale fixing unused imports as it breaks our code
-fixable = ["ALL"]
-unfixable = ["F401"]

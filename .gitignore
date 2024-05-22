@@ -16,7 +16,6 @@ dist/
 
 !.coveragerc
 !.gitignore
-!.editorconfig
 _old_static
 _old_templates
 
