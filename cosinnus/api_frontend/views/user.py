@@ -390,7 +390,9 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
             message = (
                 force_str(
                     _(
-                        'Hello "%(user)s"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at "%(email)s".'
+                        'Hello "%(user)s"! Your registration was successful. Within the next few days you will be '
+                        'activated by our administrators. When your account is activated, you will receive an e-mail '
+                        'at "%(email)s".'
                     )
                 )
                 % str_dict
@@ -400,7 +402,9 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
         if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
             message = (message or '') + force_str(
                 _(
-                    "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+                    'You need to verify your email before logging in. We have just sent you an email with a '
+                    "verifcation link. Please check your inbox, and if you haven't received an email, please check "
+                    'your spam folder.'
                 )
             )
             do_login = False

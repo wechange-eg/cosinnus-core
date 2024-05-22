@@ -17,7 +17,6 @@ from django.views.generic import FormView
 from django.views.generic.base import RedirectView, TemplateView
 from django.views.generic.edit import UpdateView
 
-from cosinnus.conf import settings
 from cosinnus.models.conference import (
     CosinnusConferencePremiumBlock,
     CosinnusConferencePremiumCapacityInfo,

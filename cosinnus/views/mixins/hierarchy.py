@@ -19,7 +19,7 @@ from cosinnus.views.mixins.tagged import HierarchyTreeMixin
 
 try:
     locale.setlocale(locale.LC_ALL, ('de_DE', 'utf8'))
-except:
+except Exception:
     locale.setlocale(locale.LC_ALL, '')
 
 
@@ -103,7 +103,7 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
                 current_folder = obj
 
             """ Collect a JSON list of all folders for this group
-                Format: [{ "id" : "slug1", "parent" : "#", "text" : "Simple root node" }, 
+                Format: [{ "id" : "slug1", "parent" : "#", "text" : "Simple root node" },
                         { "id" : "slug2", "parent" : "slug1", "text" : "Child 1" },] """
 
             # TODO: this needs optimization (caching, or fold the DB call into the main folder-get call)

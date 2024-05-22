@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.urls import reverse
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.tagged import get_tag_object_model

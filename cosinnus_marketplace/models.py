@@ -6,6 +6,7 @@ from builtins import object
 from collections import defaultdict
 from uuid import uuid1
 
+import django
 import six
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -103,7 +104,7 @@ class Offer(LikeableObjectMixin, BaseTaggableObjectModel):
         return 'fa-exchange-alt'
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(Offer, self).save(*args, **kwargs)
 
         if created and self.is_active:
@@ -146,7 +147,7 @@ class Offer(LikeableObjectMixin, BaseTaggableObjectModel):
 
     @property
     def has_expired(self):
-        return self.is_active == False and self.created < now() - datetime.timedelta(
+        return self.is_active is False and self.created < now() - datetime.timedelta(
             days=settings.COSINNUS_MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS
         )
 
@@ -228,7 +229,7 @@ class Comment(models.Model):
         return self.offer.is_user_following(user)
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(Comment, self).save(*args, **kwargs)
         if created:
             session_id = uuid1().int
@@ -309,8 +310,6 @@ def get_categories_grouped(category_qs):
 
     return category_groups
 
-
-import django
 
 if django.VERSION[:2] < (1, 7):
     from cosinnus_marketplace import cosinnus_app

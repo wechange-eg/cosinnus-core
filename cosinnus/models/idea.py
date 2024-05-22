@@ -7,7 +7,6 @@ from collections import OrderedDict
 
 import six
 from annoying.functions import get_object_or_None
-from django.contrib.contenttypes.fields import GenericRelation
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -19,7 +18,7 @@ from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
-from cosinnus.models.tagged import LikeableObjectMixin, LikeObject
+from cosinnus.models.tagged import LikeableObjectMixin
 from cosinnus.utils.files import get_idea_image_filename, image_thumbnail, image_thumbnail_url
 from cosinnus.utils.functions import clean_single_line_text, sort_key_strcoll_attr, unique_aware_slugify
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -28,7 +27,7 @@ from cosinnus.utils.urls import get_domain_for_portal
 # this reads the environment and inits the right locale
 try:
     locale.setlocale(locale.LC_ALL, ('de_DE', 'utf8'))
-except:
+except Exception:
     locale.setlocale(locale.LC_ALL, '')
 
 
@@ -172,7 +171,8 @@ class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
     slug = models.SlugField(
         _('Slug'),
         help_text=_(
-            'Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'
+            'Be extremely careful when changing this slug manually! There can be many side-effects '
+            '(redirects breaking e.g.)!'
         ),
         max_length=50,
     )

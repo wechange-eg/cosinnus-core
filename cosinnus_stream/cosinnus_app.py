@@ -12,7 +12,7 @@ def register():
     from django.utils.translation import gettext_lazy as _
     from django.utils.translation import pgettext_lazy
 
-    from cosinnus.core.registries import app_registry, attached_object_registry, url_registry, widget_registry
+    from cosinnus.core.registries import app_registry, url_registry, widget_registry
 
     app_registry.register('cosinnus_stream', 'stream', _('Stream'))
     # attached_object_registry.register('cosinnus_file.FileEntry',
@@ -21,4 +21,4 @@ def register():
     widget_registry.register('stream', 'cosinnus_stream.dashboard.MyStreamsWidget')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'stream')
+    name = pgettext_lazy('the_app', 'stream')  # noqa

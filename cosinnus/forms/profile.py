@@ -39,7 +39,7 @@ class UserProfileFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
                 # save dynamic field unless it is disabled
                 if field_name in self.fields and not self.fields[field_name].disabled:
                     cleaned_value = self.cleaned_data.get(field_name, None)
-                    if type(cleaned_value) is list:
+                    if isinstance(cleaned_value, list):
                         # do not persist empty values in lists
                         cleaned_value = [val for val in cleaned_value if val is None or val != '']
 

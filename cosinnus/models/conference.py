@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import locale
 import logging
 from builtins import object
 from copy import copy, deepcopy
@@ -27,7 +26,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.mixins.translations import TranslatableFormsetJsonFieldMixin, TranslateableFieldsModelMixin
-from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.files import get_conference_conditions_filename, get_presentation_filename
 from cosinnus.utils.functions import clean_single_line_text, unique_aware_slugify, update_dict_recursive
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -116,26 +114,41 @@ class CosinnusConferenceSettings(models.Model):
         blank=False,
         default=SETTING_INHERIT,
         choices=BBB_SERVER_CHOICES_WITH_INHERIT,
-        help_text='The default chosen BBB-Server/Cluster setting for the generic object. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!',
+        help_text=(
+            'The default chosen BBB-Server/Cluster setting for the generic object. WARNING: changing this will cause '
+            'new meeting connections to use the new server, even for ongoing meetings on the old server, essentially '
+            'splitting a running meeting in two!'
+        ),
     )
     bbb_server_choice_premium = models.PositiveSmallIntegerField(
         _('BBB Server for Premium Conferences'),
         blank=False,
         default=SETTING_INHERIT,
         choices=BBB_SERVER_CHOICES_WITH_INHERIT,
-        help_text='The chosen BBB-Server/Cluster setting for the generic object, that will be used when the group of that object is currently in its premium state. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!',
+        help_text=(
+            'The chosen BBB-Server/Cluster setting for the generic object, that will be used when the group of that '
+            'object is currently in its premium state. WARNING: changing this will cause new meeting connections to '
+            'use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting '
+            'in two!'
+        ),
     )
     bbb_server_choice_recording_api = models.PositiveSmallIntegerField(
         _('BBB Recording API server'),
         blank=False,
         default=SETTING_INHERIT,
         choices=BBB_SERVER_CHOICES_WITH_INHERIT,
-        help_text='The chosen BBB-Server/Cluster setting for connections to the recording API server. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!',
+        help_text=(
+            'The chosen BBB-Server/Cluster setting for connections to the recording API server. WARNING: changing this '
+            'will cause new meeting connections to use the new server, even for ongoing meetings on the old server, '
+            'essentially splitting a running meeting in two!'
+        ),
     )
 
     bbb_presentation_file = models.FileField(
         _('Presentation file'),
-        help_text="The presentation file (e.g. PDF) will be pre-uploaded to the BBB rooms inherited in this object's chain.",
+        help_text=(
+            "The presentation file (e.g. PDF) will be pre-uploaded to the BBB rooms inherited in this object's chain."
+        ),
         null=True,
         blank=True,
         upload_to=get_presentation_filename,
@@ -147,7 +160,10 @@ class CosinnusConferenceSettings(models.Model):
         blank=True,
         encoder=DjangoJSONEncoder,
         verbose_name=_('BBB API Parameters'),
-        help_text='Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited objects.',
+        help_text=(
+            'Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited '
+            'objects.'
+        ),
     )
 
     # The nature (str or None) set through the source object for this config object.
@@ -219,7 +235,8 @@ class CosinnusConferenceSettings(models.Model):
         """
         if source_object is None:
             logger.warn(
-                '`CosinnusConferenceSettings.get_for_object` called with None as `source_object`! This should not happen!'
+                '`CosinnusConferenceSettings.get_for_object` called with None as `source_object`! This should not '
+                'happen!'
             )
             return None
 
@@ -252,11 +269,13 @@ class CosinnusConferenceSettings(models.Model):
                     parent_settings_object = cls.get_for_object(parent_object, recursed=True)
                     if parent_settings_object:
                         # if we have a higher parent settings object, merge it into ours to inherit the values
-                        # we make our settings object a readonly copy now, as it should never be saved in the merged state
+                        # we make our settings object a readonly copy now, as it should never be saved in the merged
+                        # state
                         setting_obj = setting_obj.get_readonly_copy()
                         setting_obj.merge_in_inherited_settings_object(parent_settings_object)
             elif setting_obj == 'UNSET' and (no_traversal or type(obj) is CosinnusPortal):
-                # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be configured anywhere)
+                # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be
+                # configured anywhere)
                 setting_obj = None
             elif setting_obj == 'UNSET':
                 # no settings found; check next object in chain:
@@ -289,7 +308,8 @@ class CosinnusConferenceSettings(models.Model):
         # safety type check
         if not (type(self) is CosinnusConferenceSettings and type(inherit_target) is CosinnusConferenceSettings):
             raise ImproperlyConfigured(
-                f'Programming Error: `merge_in_inherited_settings_object()` got passed mismatching types {type(self)} and {type(inherit_target)}'
+                f'Programming Error: `merge_in_inherited_settings_object()` got passed mismatching types {type(self)} '
+                f'and {type(inherit_target)}'
             )
         for field_name in self.INHERITABLE_FIELDS:
             if getattr(self, field_name, 'UNSET') == self.SETTING_INHERIT:
@@ -380,7 +400,8 @@ class CosinnusConferenceSettings(models.Model):
                 # if the settings object has no set value, the portal default value is used
                 if matched_value == self.SETTING_INHERIT and not no_defaults:
                     logger.warning(
-                        f'BBB option parameter building: A portal default value for "{field_name}" was not set in `BBB_PARAM_PORTAL_DEFAULTS`! Assuming "no" for this value.'
+                        f'BBB option parameter building: A portal default value for "{field_name}" was not set in '
+                        f'`BBB_PARAM_PORTAL_DEFAULTS`! Assuming "no" for this value.'
                     )
                     matched_value = self.SETTING_NO
                 value_choices_dict[field_name] = matched_value
@@ -454,7 +475,7 @@ class CosinnusConferenceSettings(models.Model):
             if api_name_key not in call_keys:
                 bbb_params[api_name_key] = api_name_val
                 continue
-            if type(api_name_val) is dict:
+            if isinstance(api_name_val, dict):
                 for param_key, param_val in api_name_val.items():
                     if param_key not in call_keys[api_name_key]:
                         # we do not know this key in the second level of params, so save them
@@ -598,7 +619,8 @@ class CosinnusConferenceRoom(
     slug = models.SlugField(
         _('Slug'),
         help_text=_(
-            'Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'
+            'Be extremely careful when changing this slug manually! There can be many side-effects '
+            '(redirects breaking e.g.)!'
         ),
         max_length=50,
     )
@@ -682,7 +704,6 @@ class CosinnusConferenceRoom(
         return 'Conference Room %s (Group %s)' % (self.title, self.group.slug)
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []
         self.title = clean_single_line_text(self.title)
 
@@ -860,7 +881,10 @@ class ParticipationManagement(TranslatableFormsetJsonFieldMixin, models.Model):
 
     may_be_contacted_field_enabled = models.BooleanField(
         _('Request contact option'),
-        help_text='If active, conference applicants will be required to enable the option to be contacted by conference admins',
+        help_text=(
+            'If active, conference applicants will be required to enable the option to be contacted by conference '
+            'admins'
+        ),
         default=False,
     )
 
@@ -1161,7 +1185,8 @@ class CosinnusConferencePremiumBlock(models.Model):
         verbose_name=_('Conference participants'),
         default=0,
         help_text=_(
-            'The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins.'
+            'The number of BBB participants that have been declared will take part in the conference during this time. '
+            'This is only a guideline for portal admins.'
         ),
     )
 
@@ -1204,7 +1229,8 @@ class CosinnusConferencePremiumCapacityInfo(models.Model):
         verbose_name=_('Maximum BBB participants'),
         default=0,
         help_text=_(
-            'The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins.'
+            'The maximum number of BBB participants that should be allowed for all premium conferences. This is only '
+            'a guideline for portal admins.'
         ),
     )
 

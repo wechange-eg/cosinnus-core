@@ -23,7 +23,7 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         for bbb_room in queryset.all():
             try:
                 bbb_room.restart()
-            except:
+            except Exception:
                 pass
 
     restart_bbb_rooms.short_description = _('Restart')

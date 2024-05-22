@@ -3,12 +3,8 @@ from __future__ import unicode_literals
 
 from builtins import object
 
-from django import forms
-from django.urls import reverse_lazy
-
 from cosinnus.forms.attached_object import FormAttachableMixin
 from cosinnus.forms.group import GroupKwargModelFormMixin
-from cosinnus.forms.select2 import TagSelect2Field
 from cosinnus.forms.tagged import BaseTaggableObjectForm, get_form
 from cosinnus.forms.user import UserKwargModelFormMixin
 from cosinnus_etherpad.models import Etherpad

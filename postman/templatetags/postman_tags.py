@@ -174,5 +174,6 @@ def postman_unread(parser, token):
 @register.filter
 def get_other_participants(message, user):
     """For a given message and the current user, returns all other participants of this conversation,
-    or a list with one element, the other person that isn't our user if the message is not part of a multi conversation"""
+    or a list with one element, the other person that isn't our user if the message is not part of a multi conversation
+    """
     return message.other_participants(user)

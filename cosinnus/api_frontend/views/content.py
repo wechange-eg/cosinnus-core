@@ -21,7 +21,6 @@ from rest_framework.views import APIView
 from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.conf import settings
 from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
@@ -54,23 +53,33 @@ class MainContentView(APIView):
     """v3_content_main
 
     An endpoint that returns HTML content for any legacy view on the portal.
-    Will not work on URL targets that match exemptions defined in `COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS`
+    Will not work on URL targets that match exemptions defined in
+    `COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS`
 
     Return values:
-      * `resolved_url`: the resolved URL of the queried `url` parameter where the content HTML is delivered from, or if `redirect==True`, the target URL to redirect to
-      * `redirect": (bool) whether the target URL was resolved and HTML content is returned in this data package, or, if True, the data package is empty and a redirect should be performed to `resolved_url`
+      * `resolved_url`: the resolved URL of the queried `url` parameter where the content HTML is delivered from,
+        or if `redirect==True`, the target URL to redirect to
+      * `redirect": (bool) whether the target URL was resolved and HTML content is returned in this data package,
+        or, if True, the data package is empty and a redirect should be performed to `resolved_url`
       * `status_code`: (int), HTTP status code of the response for the request sent to the `resolved_url`
       * `content_html`: html from the `<div class="container">` frame to be inserted
       * `footer_html`: html from the footer, to be inserted after the content html
       * `head`: object with sub-entries for all content belonging in the head:
-        * `js_vendor_urls`: list of vendor JS file URLs to be loaded in, basically all vendor `<script src="..."` from the `<head>` tag of that page
-        * `js_urls`: list of JS file URLs to be loaded in, basically all non-vendor `<script src="..."` from the `<head>` tag of that page. these should be loaded third, after first the `js_vendor_urls``, and then the `scripts` JS have been loaded
-        * `css_urls`: list of CSS file URLs to be loaded in, basically all stylesheets from the `<head>` tag of that page
+        * `js_vendor_urls`: list of vendor JS file URLs to be loaded in, basically all vendor `<script src="..."`
+            from the `<head>` tag of that page
+        * `js_urls`: list of JS file URLs to be loaded in, basically all non-vendor `<script src="..."` from the
+            `<head>` tag of that page. these should be loaded third, after first the `js_vendor_urls``, and then the
+            `scripts` JS have been loaded
+        * `css_urls`: list of CSS file URLs to be loaded in, basically all stylesheets from the `<head>` tag of that
+            page
         * `meta`: add all meta tags from the head
         * `styles`: a list of strings of literal inline styles to be inserted before the HTML content is inserted
-      * `script_constants`: a list of literal inline JS code that has JS global definitions that need to be loaded before the `js_urls` are inserted (but can be loaded after `js_vendor_urls` are inserted)
-      * `scripts`: a list of strings of literal inline JS script code to be executed before (after?) the HTML content is inserted
-      * `sub_navigation`: sidebar content, includes 3 lists: `"sub_navigation" {"top": [...], "middle": [...], "bottom": [...]}`
+      * `script_constants`: a list of literal inline JS code that has JS global definitions that need to be loaded
+        before the `js_urls` are inserted (but can be loaded after `js_vendor_urls` are inserted)
+      * `scripts`: a list of strings of literal inline JS script code to be executed before (after?) the HTML content
+        is inserted
+      * `sub_navigation`: sidebar content, includes 3 lists:
+        `"sub_navigation" {"top": [...], "middle": [...], "bottom": [...]}`
         * middle is list of the apps that are enabled for the current space
         * each list contains the usual menu items
           * title (will be in current language)
@@ -84,7 +93,8 @@ class MainContentView(APIView):
         * `image`: image of the main menu dropdown, exclusive vs. `main_menu_icon`
       * `announcements`: list of objects that contain data for the announcement banner, if one is active
         * `[]` if None active, else a list `[{"text": "'"<str> Announcement text", "level": "<str> level-code"}, ...]`
-        * `level` can take the following values: "debug", "info", "success", "warning", "error". these levels are usually reflected in the color of the announcement background
+        * `level` can take the following values: "debug", "info", "success", "warning", "error". these levels are
+            usually reflected in the color of the announcement background
     """
 
     renderer_classes = (
@@ -152,7 +162,9 @@ class MainContentView(APIView):
                             'resolved_url': '/project/a-mein-bbb-projekt/?force_payment_popup=1',
                             'redirect': False,
                             'status_code': 200,
-                            'content_html': '<div class="x-v3-container container"> <div class="row app-main"> ... </div></div>',
+                            'content_html': (
+                                '<div class="x-v3-container container"> <div class="row app-main"> ... </div></div>'
+                            ),
                             'footer_html': '<div class="footer"> ... </div>',
                             'js_vendor_urls': [
                                 '/static/js/vendor/less.min.js',
@@ -166,10 +178,20 @@ class MainContentView(APIView):
                                 '/static/css/select2.css',
                                 '/static/css/extra.css',
                             ],
-                            'script_constants': 'var cosinnus_base_url = "http://localhost:8000/";\nvar cosinnus_active_group = "a-mein-bbb-projekt";\n ...',
+                            'script_constants': (
+                                'var cosinnus_base_url = "http://localhost:8000/";\n'
+                                'var cosinnus_active_group = "a-mein-bbb-projekt";\n ...'
+                            ),
                             'scripts': "Backbone.mediator.publish('init:module-full-routed', ...",
-                            'meta': '<meta charset="utf-8"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><meta content="width=device-width, initial-scale=1" name="viewport"/> ...',
-                            'styles': '.my-contribution-badge {min-width: 50px;border-radius: 20px;color: #FFF;font-size: 12px;padding: 2px 6px; margin-left: 5px;}.my-contribution-badge.red {background-color: rgb(245, 85, 0);} ...',
+                            'meta': (
+                                '<meta charset="utf-8"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/>'
+                                '<meta content="width=device-width, initial-scale=1" name="viewport"/> ...'
+                            ),
+                            'styles': (
+                                '.my-contribution-badge {min-width: 50px;border-radius: 20px;color: #FFF;font-size: '
+                                '12px;padding: 2px 6px; margin-left: 5px;}.my-contribution-badge.red '
+                                '{background-color: rgb(245, 85, 0);} ...'
+                            ),
                             'sub_navigation': {
                                 'top': [
                                     {
@@ -208,7 +230,9 @@ class MainContentView(APIView):
                             'main_menu': {
                                 'label': 'A Mein BBB Projekt',
                                 'icon': None,
-                                'image': '/media/cosinnus_portals/portal_saschas_local_dev/avatars/group/xj1VxzF3viA4.jpg',
+                                'image': (
+                                    '/media/cosinnus_portals/portal_saschas_local_dev/avatars/group/xj1VxzF3viA4.jpg'
+                                ),
                             },
                             'announcements': [{'text': 'This is an example announcement', 'level': 'warning'}],
                         },
@@ -408,7 +432,7 @@ class MainContentView(APIView):
             # resolve the group if the requested view is part of one
             group_name = url.split('/')[2]
             self.group = get_group_for_request(group_name, request, fail_silently=True)
-        except:
+        except Exception:
             # this catches short URLs and the Http404 that `get_group_for_request` raised when no group is found
             self.group = None
 
@@ -435,7 +459,7 @@ class MainContentView(APIView):
         """Will alter the given html soup by specific, hardcoded view/url/page rules,
         for fine-grained control on hiding/modifying elements when displayed in the main content view"""
         # remove params from url for matching
-        url = remove_url_param(self.url, None, None)
+        url = remove_url_param(self.url, None, None)  # noqa
         if self.group:
             # hide appsmenu on specific group pages
             hide_appsmenu_patterns = [
@@ -555,7 +579,8 @@ class MainContentView(APIView):
                 )
                 > 0
             )
-            # we initialize a sub_item list for other buttons to be sorted in if the link is an <a.active> tag from the appsmenu
+            # we initialize a sub_item list for other buttons to be sorted in if the link is an <a.active> tag from the
+            # appsmenu
             sub_items = None
             if (
                 leftnav_link.name == 'a'

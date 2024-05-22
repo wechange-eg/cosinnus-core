@@ -76,7 +76,7 @@ class BaseChoiceWidget(forms.Widget):
             option_label = self.format_label_value(option_label)
         data = self.data.copy()
         data[name] = option_value
-        selected = data == self.data or option_value in selected_choices
+        selected = data == self.data or option_value in selected_choices  # noqa
         try:
             url = data.urlencode()
         except AttributeError:

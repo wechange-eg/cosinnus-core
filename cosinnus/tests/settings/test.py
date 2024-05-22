@@ -1,4 +1,4 @@
-from config.settings.base import *
+from config.settings.base import *  # noqa
 
 SITE_ID = 1
 COSINNUS_PORTAL_URL = 'localhost'
@@ -6,7 +6,7 @@ COSINNUS_PORTAL_URL = 'localhost'
 # import the settings from this project's "config.base"
 # the settings hierarchy is:
 # (.env file) --> config.test.py --> config.base.py --> cosinnus.default_settings.py (in cosinnus-core)
-vars().update(define_cosinnus_project_settings(vars()))
+vars().update(define_cosinnus_project_settings(vars()))  # noqa
 
 
 """ ------ Define all other custom environment ("test") settings from here: ------ """
@@ -39,7 +39,7 @@ TESTING = True
 TEMPLATE_DEBUG = False
 
 # add test app
-INSTALLED_APPS += ['cosinnus.tests']
+INSTALLED_APPS += ['cosinnus.tests']  # noqa
 
 # disable services
 COSINNUS_CLOUD_ENABLED = False

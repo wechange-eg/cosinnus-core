@@ -111,7 +111,8 @@ class BaseDashboardPage(Page):
     redirect_if_logged_in = models.BooleanField(
         _('Redirect Logged in Users'),
         help_text=_(
-            'If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page.'
+            'If active, this page will only be visible to non-logged-in users. All others will be redirected to the '
+            'activities page.'
         ),
         default=False,
     )
@@ -310,7 +311,8 @@ class BaseStreamDashboardPage(Page):
     redirect_if_logged_in = models.BooleanField(
         _('Redirect Logged in Users'),
         help_text=_(
-            'If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page.'
+            'If active, this page will only be visible to non-logged-in users. All others will be redirected to the '
+            'activities page.'
         ),
         default=False,
     )
@@ -506,7 +508,8 @@ class StreamStartPage(Page):
     redirect_if_logged_in = models.BooleanField(
         _('Redirect Logged in Users'),
         help_text=_(
-            'If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page.'
+            'If active, this page will only be visible to non-logged-in users. All others will be redirected to the '
+            'activities page.'
         ),
         default=False,
     )

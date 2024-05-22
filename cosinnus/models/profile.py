@@ -170,7 +170,9 @@ class BaseUserProfile(
         blank=True,
         encoder=DjangoJSONEncoder,
         verbose_name=_('Dynamic extra fields'),
-        help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`',
+        help_text=(
+            'Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`'
+        ),
     )
     scheduled_for_deletion_at = models.DateTimeField(
         _('Scheduled for Deletion at'),
@@ -178,7 +180,8 @@ class BaseUserProfile(
         blank=True,
         null=True,
         help_text=_(
-            'The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)'
+            'The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user '
+            'account is set to inactive!)'
         ),
     )
     deletion_triggered_by_self = models.BooleanField(_('Deletion triggered by self'), default=False, editable=False)
@@ -682,7 +685,7 @@ if django.VERSION[:2] < (1, 7):
         from django.contrib.auth import get_user_model
 
         post_save.connect(create_user_profile, sender=get_user_model(), dispatch_uid='cosinnus_user_profile_post_save')
-    except:
+    except Exception:
         if settings.DEBUG:
             from traceback import print_exc
 
@@ -822,7 +825,9 @@ class GlobalUserNotificationSetting(models.Model):
     setting = models.PositiveSmallIntegerField(
         choices=SETTING_CHOICES,
         default=settings.COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING,
-        help_text='Determines if the user wants no mail, immediate mails,s aggregated mails, or group specific settings',
+        help_text=(
+            'Determines if the user wants no mail, immediate mails,s aggregated mails, or group specific settings'
+        ),
     )
     rocketchat_setting = models.PositiveSmallIntegerField(
         choices=ROCKETCHAT_SETTING_CHOICES,
@@ -902,9 +907,6 @@ class GlobalBlacklistedEmail(models.Model):
 
 def _make_country_formfield(**kwargs):
     return CountryField(blank=True, blank_label=_('--- No country selected ---')).formfield(**kwargs)
-
-
-from cosinnus.utils.permissions import check_user_superuser
 
 
 class UserMatchObject(models.Model):
@@ -988,6 +990,8 @@ class UserMatchObject(models.Model):
         return _(f'You and {self.from_user.get_full_name()} matched!')
 
     def grant_extra_read_permissions(self, user):
+        from cosinnus.utils.permissions import check_user_superuser
+
         return check_user_superuser(user) or user == self.from_user or user == self.to_user
 
     def special_alert_check(self, user):
@@ -1022,8 +1026,10 @@ class UserMatchObject(models.Model):
                     "person's profile? What are you working on right now? What are your current topics of interest?"
                 )
                 greeting_message += (
-                    f'\n{self.from_user.get_full_name()} {_("Profile")}: {self.from_user.cosinnus_profile.get_absolute_url()}'
-                    f'\n{self.to_user.get_full_name()} {_("Profile")}: {self.to_user.cosinnus_profile.get_absolute_url()}'
+                    f'\n{self.from_user.get_full_name()} {_("Profile")}: '
+                    f'{self.from_user.cosinnus_profile.get_absolute_url()}'
+                    f'\n{self.to_user.get_full_name()} {_("Profile")}: '
+                    f'{self.to_user.cosinnus_profile.get_absolute_url()}'
                 )
                 try:
                     rocket = RocketChatConnection()

@@ -2,11 +2,8 @@
 from __future__ import unicode_literals
 
 import logging
-import traceback
 
-from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
-from django.utils.encoding import force_str
 
 from cosinnus.conf import settings
 from cosinnus.core.middleware.cosinnus_middleware import (
@@ -14,7 +11,6 @@ from cosinnus.core.middleware.cosinnus_middleware import (
 )
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_cloud.hooks import (
-    create_user_from_obj,
     generate_group_nextcloud_groupfolder_name,
     generate_group_nextcloud_id,
     get_nc_user_id,
@@ -119,11 +115,13 @@ class Command(BaseCommand):
                             self.stdout.write('Error (add user to group): Exception: ' + str(e))
                             logger.error('Error (nextcloud group user add): Exception: ' + str(e), extra={'exc': e})
                 self.stdout.write(
-                    f'{counter}/{total_groups} groups processed, {created} groups created, {folders_created} group folders created, {users_added} groups members added ({errors} Errors)',
+                    f'{counter}/{total_groups} groups processed, {created} groups created, {folders_created} group '
+                    f'folders created, {users_added} groups members added ({errors} Errors)',
                 )
 
             self.stdout.write(
-                f'Done! {counter}/{total_groups} groups processed, {created} groups created, {folders_created} group folders created, {users_added} groups members added ({errors} Errors).'
+                f'Done! {counter}/{total_groups} groups processed, {created} groups created, {folders_created} group '
+                f'folders created, {users_added} groups members added ({errors} Errors).'
             )
         except Exception:
             if settings.DEBUG:

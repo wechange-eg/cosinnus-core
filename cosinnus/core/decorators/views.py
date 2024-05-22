@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 import functools
 import logging
-from builtins import str
 
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
@@ -38,7 +37,8 @@ logger = logging.getLogger('cosinnus')
 
 
 MSG_USER_NOT_VERIFIED = _(
-    'You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above.'
+    'You need to verify your email before you can use this part of the site! Please check your emails and click the '
+    'link in the verification email you received from us, or request a new email by clicking the link above.'
 )
 
 
@@ -148,8 +148,13 @@ def get_group_for_request(group_name, request, fail_silently=False):
                     },
                 )
         except group_class.DoesNotExist:
-            # logger.warn('Cosinnus.core.decorators: Failed to retrieve group! The exception was: "%s"' % str(e),
-            #         extra={'team_name': group_name, 'url': request.path, 'group_class': group_class, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
+            # logger.warn(
+            #   'Cosinnus.core.decorators: Failed to retrieve group! The exception was: "%s"' % str(e),
+            #   extra={
+            #       'team_name': group_name, 'url': request.path, 'group_class': group_class,
+            #       'refered': request.META.get('HTTP_REFERER', 'N/A')
+            #   }
+            # )
             # this happens during a regular 404 when users navigate to a group URL that no longer exists
             pass
     elif not fail_silently:
@@ -191,7 +196,8 @@ def _check_deactivated_app_access(view, group, request):
         messages.error(
             request,
             _(
-                "The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app."
+                'The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. '
+                "If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app."
             )
             % {'team_type': group._meta.verbose_name},
         )
@@ -211,14 +217,14 @@ def require_admin_access_decorator(group_url_arg='group'):
             user = request.user
 
             if not user.is_authenticated:
-                return redirect_to_not_logged_in(request, view=self, group=group)
+                return redirect_to_not_logged_in(request, view=self, group=group)  # noqa
 
             if check_object_write_access(group, user):
                 kwargs['group'] = group
                 return function(request, *args, **kwargs)
 
             # Access denied, redirect to 403 page and and display an error message
-            return redirect_to_403(request, self, group=group)
+            return redirect_to_403(request, self, group=group)  # noqa
 
         return wrapper
 
@@ -283,7 +289,9 @@ def require_superuser():
 
 
 def require_portal_manager():
-    """A method decorator that checks that the requesting user is a portal manager or superuser (admin or portal admin)"""
+    """
+    A method decorator that checks that the requesting user is a portal manager or superuser (admin or portal admin)
+    """
 
     def decorator(function):
         @functools.wraps(function)

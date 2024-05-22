@@ -16,8 +16,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from cosinnus.conf import settings
 from cosinnus.core.decorators.views import redirect_to_403
 from cosinnus.core.registries import attached_object_registry as aor
-from cosinnus.models import MEMBER_STATUS
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal, CosinnusPortalMembership
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.templatetags.cosinnus_tags import has_write_access
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 from cosinnus.views.widget import DashboardWidgetMixin
@@ -153,7 +152,9 @@ class StreamFormMixin(object):
         group_qs = group_qs.filter(portal=CosinnusPortal.get_current())
 
         # enable this to show groups from all portals the user is a member in!
-        # user_portals = list(CosinnusPortalMembership.objects.filter(user=self.request.user, status__in=MEMBER_STATUS).values_list('group__id', flat=True))
+        # user_portals = list(CosinnusPortalMembership.objects.filter(
+        #   user=self.request.user, status__in=MEMBER_STATUS
+        # ).values_list('group__id', flat=True))
         # group_qs = group_qs.filter(portal__id__in=user_portals)
 
         form.forms['obj'].fields['group'].queryset = group_qs

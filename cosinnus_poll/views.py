@@ -1,33 +1,25 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from collections import defaultdict
-
 from annoying.exceptions import Redirect
 from annoying.functions import get_object_or_None
-from django import forms
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.contrib.sites.models import Site
-from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import RedirectView
-from django.views.generic.detail import DetailView, SingleObjectMixin
+from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-from django_ical.views import ICalFeed
 from extra_views import CreateWithInlinesView, FormSetView, InlineFormSetFactory, UpdateWithInlinesView
 
 from ajax_forms.ajax_forms import AjaxFormsCommentCreateViewMixin, AjaxFormsDeleteViewMixin
-from cosinnus.core.decorators.views import require_read_access, require_user_token_access
-from cosinnus.templatetags.cosinnus_tags import has_write_access
+from cosinnus.core.decorators.views import require_read_access
 from cosinnus.utils.permissions import (
     check_object_read_access,
     check_ug_membership,
-    filter_tagged_object_queryset_for_user,
 )
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.attached_object import AttachableViewMixin

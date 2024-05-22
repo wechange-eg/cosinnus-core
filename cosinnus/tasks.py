@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from cosinnus.celery import app as celery_app
-from cosinnus.conf import settings
 from cosinnus.core.mail import deliver_mail
 
 

@@ -78,7 +78,7 @@ def _decode_id_data_str(id_data_str):
         filename = ''.join([chr(int(charcode)) for charcode in filename_enc.split('-')])
         path = ''.join([chr(int(charcode)) for charcode in path_enc.split('-')])
         return (int(nextcloud_file_id), filename, path)
-    except:
+    except Exception:
         if settings.DEBUG:
             raise
         return None

@@ -25,4 +25,4 @@ def register():
     url_registry.register_urlconf('cosinnus_organization', 'cosinnus_organization.urls')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'organization')
+    name = pgettext_lazy('the_app', 'organization')  # noqa

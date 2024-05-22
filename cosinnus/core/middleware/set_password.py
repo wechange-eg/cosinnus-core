@@ -1,6 +1,5 @@
-from django.contrib.auth.views import PasswordResetView
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import reverse
 from django.urls import resolve
 
 from cosinnus.models.profile import PROFILE_SETTING_PASSWORD_NOT_SET

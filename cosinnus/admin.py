@@ -378,8 +378,9 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
                 converted_names.append(group.name)
                 CosinnusPermanentRedirect.create_for_pattern(group.portal, old_type, group.slug, group)
                 if old_type == CosinnusGroup.TYPE_SOCIETY:
-                    # all projects that had this group as parent, get set their parent=None and set this as related project
-                    # and all of those former child projects are also added as related to this newly-converted project
+                    # all projects that had this group as parent, get set their parent=None and set this as related
+                    # project and all of those former child projects are also added as related to this newly-converted
+                    # project
                     for project in get_cosinnus_group_model().objects.filter(parent=group):
                         project.parent = None
                         project.save(update_fields=['parent'])
@@ -402,7 +403,12 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             if converted_typed_group:
                 converted_typed_group.update_index()
             else:
-                message_error = f'There seems to have been a problem converting: "{group.slug}" from "{type(group)}" to "{to_group_klass}". Please check if it has been converted in the admin. If it has, it may not appear converted until the cache is refreshed. You can do this by saving it in the admin again now.'
+                message_error = (
+                    f'There seems to have been a problem converting: "{group.slug}" from "{type(group)}" to '
+                    f'"{to_group_klass}". Please check if it has been converted in the admin. If it has, it may not '
+                    f'appear converted until the cache is refreshed. You can do this by saving it in the admin again '
+                    f'now.'
+                )
                 self.message_user(request, message_error, messages.ERROR)
 
         if converted_names:
@@ -479,7 +485,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             # delete all other portal memberships because users were supposed to be moved
             CosinnusPortalMembership.objects.filter(user__in=users).delete()
         else:
-            # just add them, that means that pending statuses will be removed to be replaced by members statuses in a second
+            # just add them, that means that pending statuses will be removed to be replaced by members statuses in a
+            # second
             CosinnusPortalMembership.objects.filter(
                 status=MEMBERSHIP_PENDING, group=CosinnusPortal.get_current(), user__in=users
             ).delete()
@@ -487,7 +494,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             membership, __ = CosinnusPortalMembership.objects.get_or_create(
                 group=CosinnusPortal.get_current(), user=user, defaults={'status': MEMBERSHIP_MEMBER}
             )
-            # this ensures that join-signals for all members really arrive (for putting new portal members into the Blog, etc)
+            # this ensures that join-signals for all members really arrive (for putting new portal members into the
+            # Blog, etc)
             post_save.send(sender=CosinnusPortalMembership, instance=membership, created=True)
             member_names.append('%s %s (%s)' % (user.first_name, user.last_name, user.email))
 

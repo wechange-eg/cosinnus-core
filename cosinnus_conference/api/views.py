@@ -1,6 +1,5 @@
 from copy import copy
 
-from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.utils.timezone import now
 from rest_framework import pagination, viewsets
@@ -208,7 +207,12 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
             {
                 "id": 1,
                 "name": "Organization 1",
-                "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                "description": (
+                    "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+                    amet."
+                ),
                 "topics": ["One", "Two", "Three"],
                 "location": "Location",
                 "image_url": "/path/to/image.png",
@@ -216,7 +220,12 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
             {
                 "id": 2,
                 "name": "Organization 2",
-                "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                "description": (
+                    "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+                    amet."
+                ),
                 "topics": ["One", "Two", "Three"],
                 "location": "Location",
                 "image_url": "/path/to/image.png",
@@ -224,7 +233,12 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
             {
                 "id": 3,
                 "name": "Organization 3",
-                "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                "description": (
+                    "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+                    amet."
+                ),
                 "topics": ["One", "Two", "Three"],
                 "location": "Location",
                 "image_url": "/path/to/image.png",

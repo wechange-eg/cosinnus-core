@@ -10,7 +10,6 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
-from django.db.models import Q
 from django.template.defaultfilters import date
 from django.templatetags.static import static
 from django.utils.html import escape
@@ -56,7 +55,10 @@ class BaseUserNotificationPreference(models.Model):
         choices=SETTING_CHOICES,
         db_index=True,
         default=SETTING_NOW,
-        help_text='Determines if the mail for this notification should be sent out at all, immediately, or aggregated (if so, every how often)',
+        help_text=(
+            'Determines if the mail for this notification should be sent out at all, immediately, or aggregated '
+            '(if so, every how often)'
+        ),
     )
 
     date = models.DateTimeField(auto_now_add=True, editable=False)
@@ -86,14 +88,14 @@ class UserNotificationPreference(BaseUserNotificationPreference):
 
     def __str__(self):
         return (
-            '<User notification preference: %(user)s, group: %(group)s, notification_id: %(notification_id)s, setting: %(setting)d>'
-            % {
-                'user': self.user,
-                'notification_id': self.notification_id,
-                'setting': self.setting,
-                'group': self.group,
-            }
-        )
+            '<User notification preference: %(user)s, group: %(group)s, notification_id: %(notification_id)s, '
+            'setting: %(setting)d>'
+        ) % {
+            'user': self.user,
+            'notification_id': self.notification_id,
+            'setting': self.setting,
+            'group': self.group,
+        }
 
 
 @six.python_2_unicode_compatible
@@ -129,13 +131,13 @@ class UserMultiNotificationPreference(BaseUserNotificationPreference):
 
     def __str__(self):
         return (
-            '<User multi notification preference: %(user)s, multi_notification_id: %(multi_notification_id)s, setting: %(setting)d>'
-            % {
-                'user': self.user,
-                'multi_notification_id': self.multi_notification_id,
-                'setting': self.setting,
-            }
-        )
+            '<User multi notification preference: %(user)s, multi_notification_id: %(multi_notification_id)s, '
+            'setting: %(setting)d>'
+        ) % {
+            'user': self.user,
+            'multi_notification_id': self.multi_notification_id,
+            'setting': self.setting,
+        }
 
     @classmethod
     def get_setting_for_user(cls, user, multi_notification_id, portal=None):
@@ -175,7 +177,10 @@ class NotificationEvent(models.Model):
     audience = models.TextField(
         verbose_name=_('Audience'),
         blank=False,
-        help_text='This is a pseudo comma-seperated integer field, which always starts and ends with a comma for faster queries',
+        help_text=(
+            'This is a pseudo comma-seperated integer field, which always starts and ends with a comma for faster '
+            'queries'
+        ),
     )
 
     date = models.DateTimeField(auto_now_add=True, editable=False)
@@ -309,15 +314,21 @@ class NotificationAlert(models.Model):
         null=True,
         blank=True,
         encoder=DjangoJSONEncoder,
-        help_text='Only filled if type==TYPE_MULTI_USER_ALERT, None else.'
-        + 'Contains a list of objects for referenced users [{"user_id", "title" (username), "url", "icon_or_image_url"}, ...]',
+        help_text=(
+            'Only filled if type==TYPE_MULTI_USER_ALERT, None else.'
+            'Contains a list of objects for referenced users [{"user_id", "title" (username), "url", '
+            '"icon_or_image_url"}, ...]'
+        ),
     )
     bundle_list = models.JSONField(
         null=True,
         blank=True,
         encoder=DjangoJSONEncoder,
-        help_text='Only filled if type==TYPE_BUNDLE_ALERT, None else.'
-        + 'Contains a list of objects for referenced content objects [{"object_id", "title", "url", "icon_or_image_url"}, ...]',
+        help_text=(
+            'Only filled if type==TYPE_BUNDLE_ALERT, None else.'
+            'Contains a list of objects for referenced content objects [{"object_id", "title", "url", '
+            '"icon_or_image_url"}, ...]'
+        ),
     )
 
     def initialize(self, user, target_object, group, action_user, notification_id):
@@ -465,14 +476,14 @@ class NotificationAlert(models.Model):
 
     def __str__(self):
         return (
-            '<NotificationAlert: %(user)s, group: %(group)s, item_hash: %(item_hash)s, last_event_at: %(last_event_at)s>'
-            % {
-                'user': self.user,
-                'group': str(self.group),
-                'item_hash': self.item_hash,
-                'last_event_at': str(self.last_event_at),
-            }
-        )
+            '<NotificationAlert: %(user)s, group: %(group)s, item_hash: %(item_hash)s, last_event_at: '
+            '%(last_event_at)s>'
+        ) % {
+            'user': self.user,
+            'group': str(self.group),
+            'item_hash': self.item_hash,
+            'last_event_at': str(self.last_event_at),
+        }
 
 
 class SerializedNotificationAlert(DashboardItem):
@@ -500,7 +511,8 @@ class SerializedNotificationAlert(DashboardItem):
             action_user = alert.action_user
         if not action_user_profile:
             logger.warn(
-                '>>>>>>>> No action_user_profile supplied for `SerializedNotificationAlert`, retrieving with singular query!'
+                '>>>>>>>> No action_user_profile supplied for `SerializedNotificationAlert`, retrieving with singular '
+                'query!'
             )
             action_user_profile = action_user.cosinnus_profile
 

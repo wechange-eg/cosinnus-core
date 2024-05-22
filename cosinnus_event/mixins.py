@@ -7,7 +7,6 @@ from django.db import models, transaction
 from django.urls import reverse
 
 from cosinnus_event.conf import settings
-from cosinnus_event.utils.bbb_streaming import trigger_streamer_status_changes
 
 logger = logging.getLogger('cosinnus')
 

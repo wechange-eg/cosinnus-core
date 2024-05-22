@@ -1,4 +1,4 @@
-from .test import *
+from .test import *  # noqa
 
 # enabled rocket chat
 COSINNUS_ROCKET_ENABLED = True

@@ -25,7 +25,7 @@ from django.db.models.functions import Lower
 from django.db.models.query import QuerySet
 from django.http import HttpRequest
 from django.template.base import TemplateSyntaxError
-from django.template.defaultfilters import linebreaksbr, pprint
+from django.template.defaultfilters import linebreaksbr
 from django.template.defaulttags import URLNode, url
 from django.template.defaulttags import url as url_tag
 from django.template.loader import render_to_string
@@ -49,11 +49,9 @@ from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, CommaSeparatedSelect2MultipleWidget
-from cosinnus.models.conference import CosinnusConferenceApplication, ParticipationManagement
+from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.group import (
-    CosinnusBaseGroup,
     CosinnusGroup,
-    CosinnusGroupInviteToken,
     CosinnusGroupManager,
     CosinnusGroupMembership,
     CosinnusPortal,
@@ -530,7 +528,7 @@ def cosinnus_menu_v2(context, template='cosinnus/v2/navbar/navbar.html', request
             ).values_list('event_id', flat=True)
             attending_events = Event.get_current_for_portal().filter(id__in=my_attendances_ids)
             attending_events = filter_tagged_object_queryset_for_user(attending_events, user)
-        except:
+        except Exception:
             if settings.DEBUG:
                 raise
         context['attending_events_json_encoded'] = _escape_quotes(
@@ -664,7 +662,7 @@ def do_captureas(parser, token):
     Usage:
         {% captureas label %}{% trans "Posteingang" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}{% endcaptureas %}
         {% include "cosinnus/leftnav_button.html" label=label  %}
-    """
+    """  # noqa
     try:
         tag_name, args = token.contents.split(None, 1)
     except ValueError:
@@ -870,12 +868,18 @@ class GroupURLNode(URLNode):
                 return ''
             if not settings.DEBUG:
                 logger.error(
-                    'TemplateSyntaxError: `group_url` tag requires a group kwarg that is a group or a slug! Returning empty URL.',
+                    (
+                        'TemplateSyntaxError: `group_url` tag requires a group kwarg that is a group or a slug! '
+                        'Returning empty URL.'
+                    ),
                     extra={'group_arg': group_arg},
                 )
                 return ''
             raise TemplateSyntaxError(
-                "'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? (You passed: 'group=%s')"
+                (
+                    "'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? "
+                    "(You passed: 'group=%s')"
+                )
                 % group_arg
             )
         else:
@@ -894,7 +898,10 @@ class GroupURLNode(URLNode):
                     return ''
 
                 logger.error(
-                    'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s'
+                    (
+                        'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, '
+                        'group_slug: %s, portal_id: %s'
+                    )
                     % (str(group_arg), view_name, group_slug, portal_id)
                 )
                 raise
@@ -929,7 +936,7 @@ class GroupURLNode(URLNode):
                     ret_url = domain + ret_url
 
             return ret_url
-        except:
+        except Exception:
             if ignoreErrors:
                 return ''
             else:
@@ -1115,7 +1122,7 @@ def filter_domain(url):
     """Returns only the domain part of the given URL, with leading "https" but no path"""
     try:
         url = 'https://' + url.split('/')[2]
-    except:
+    except Exception:
         pass
     return url
 
@@ -1136,7 +1143,7 @@ def tag_group_filtered(tag_object, group='None'):
         if tag_object.location == group_tag.location:
             tag_object.location = None
 
-        """ Disabled for now - we want topics to always be displayed 
+        """ Disabled for now - we want topics to always be displayed
         # filter topics
         if tag_object.topics:
             tag_object.topics = copy(tag_object.topics)
@@ -1190,7 +1197,7 @@ def is_app_deactivated(group, app_name):
     ret = False
     try:
         ret = group.is_app_deactivated(app_name)
-    except:
+    except Exception:
         pass
     return ret
 
@@ -1236,7 +1243,7 @@ def truncatenumber(value, max=99):
     Returns a string of the given number or "<max>+" if value > max"""
     try:
         intval = int(value)
-    except:
+    except Exception:
         return value
     if intval > max:
         return '%d+' % max

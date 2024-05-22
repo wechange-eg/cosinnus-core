@@ -7,7 +7,6 @@ from uuid import uuid4
 from django.test import TestCase
 
 from cosinnus.models import CosinnusGroup
-from cosinnus_etherpad.managers import EtherpadManager
 from cosinnus_etherpad.models import Etherpad
 
 

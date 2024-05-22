@@ -1,4 +1,4 @@
-from .test import *
+from .test import *  # noqa
 
 # enabled BBB
 COSINNUS_CONFERENCES_ENABLED = True

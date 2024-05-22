@@ -101,7 +101,7 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
                     '10. Newly Created Events in this period': created_event_count,
                 }
             )
-        except:
+        except Exception:
             pass
 
         try:
@@ -115,7 +115,7 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
                     '11. Newly Created News in this period': created_note_count,
                 }
             )
-        except:
+        except Exception:
             pass
         statistics = sorted(statistics.items())
         return statistics

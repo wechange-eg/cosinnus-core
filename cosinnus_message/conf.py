@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# ruff: noqa :E501
 from __future__ import unicode_literals
 
 from builtins import object
@@ -114,13 +115,13 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Layout_Home_Body': """<p>Willkommen beim %(COSINNUS_BASE_PAGE_TITLE_TRANS)s Rocket.Chat!</p>
 
         <p>Schreibt private Nachrichten im Browser, per Smartphone- oder Desktop-App in Echtzeit an andere, in Projekten und Gruppen oder in eigenen Kanälen.</p>
-        
+
         <p>Wenn du die App nach der Installation &ouml;ffnest, klicke auf <strong>Mit einem Server verbinden</strong>. Gebe im nachfolgenden Fenster folgende<strong> Serveradresse ein</strong>: <a href="%(COSINNUS_CHAT_BASE_URL)s" target="_blank" rel="nofollow noopener noreferrer">%(COSINNUS_CHAT_BASE_URL)s</a> und klicke auf <strong>Verbinden</strong>. Klicke auf <strong>Enter Chat</strong> und gib deine %(COSINNUS_BASE_PAGE_TITLE_TRANS)s Zugangsdaten in das sich &ouml;ffnende Fenster.</p>
-        
+
             <p>Die Rocket.Chat-Desktops-Apps für Windows, MacOS und Linux stehen <a title="Rocket.Chat desktop apps" href="https://rocket.chat/download" target="_blank" rel="noopener">hier</a> zum Download bereit..</p>
             <p>Die native Mobile-App Rocket.Chat für Android und iOS ist bei <a title="Rocket.Chat+ on Google Play" href="https://play.google.com/store/apps/details?id=chat.rocket.android" target="_blank" rel="noopener">Google Play</a> und im  <a title="Rocket.Chat+ on the App Store" href="https://itunes.apple.com/app/rocket-chat/id1148741252" target="_blank" rel="noopener">App Store</a> erhältlich.</p>
             <p>Weitere Informationen finden Sie in der <a title="Rocket.Chat Documentation" href="https://rocket.chat/docs/" target="_blank" rel="noopener">Dokumentation</a>.</p>
-            
+
         """,
         'Layout_Terms_of_Service': '<a href="https://wechange.de/cms/datenschutz/">Nutzungsbedingungen</a><br><a href="https://wechange.de/cms/datenschutz/">Datenschutz</a>',
         'Layout_Login_Terms': '',
@@ -132,13 +133,13 @@ class CosinnusMessageDefaultSettings(AppConf):
             h2[data-qa-id="homepage-welcome-text"] + h3 + div.rcx-grid__wrapper  {
                 display: none;
             }
-            
+
             /* Increase logo size on login page */
             img[src="%(COSINNUS_CHAT_BASE_URL)s/assets/logo.png"],
             img[src="%(COSINNUS_CHAT_BASE_URL)s/assets/logo_dark.png"] {
                 max-height: 6rem !important;
             }
-            
+
             /* Hide "Welcome to XYZ workspace" and "By proceeding you are agreeing to our Terms of Service, Privacy Policy and Legal Notice. - Switch to en" on login page */
             #react-root > div > div > div > h1, #react-root > div > div > div > form + div {
                 display: none !important;

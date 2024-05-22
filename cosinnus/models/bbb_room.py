@@ -1,10 +1,6 @@
 import logging
-import random
-import string
 from builtins import issubclass
-from copy import copy
 from datetime import timedelta
-from urllib import request
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -15,9 +11,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Q
-from django.http.response import HttpResponseForbidden
 from django.template.defaultfilters import linebreaksbr, truncatechars
-from django.test import RequestFactory
 from django.urls.base import reverse
 from django.utils import translation
 from django.utils.crypto import get_random_string
@@ -148,7 +142,10 @@ class BBBRoom(models.Model):
         default=dict,
         editable=False,
         encoder=DjangoJSONEncoder,
-        help_text="The parameters used for the last create call. Serves as a record only, new create params are derived from the source object's options!",
+        help_text=(
+            'The parameters used for the last create call. Serves as a record only, new create params are derived from '
+            "the source object's options!"
+        ),
     )
 
     objects = models.Manager()
@@ -343,7 +340,8 @@ class BBBRoom(models.Model):
 
         create_params = self.build_extra_create_parameters()
 
-        # BBB guest access: append the `moderatorOnlyMessage` param by this BBB room's guest_token URL, if the message param exists
+        # BBB guest access: append the `moderatorOnlyMessage` param by this BBB room's guest_token URL, if the message
+        # param exists
         guest_token = self.get_guest_token()
         create_params = self.__class__.add_guest_link_moderator_only_message_to_params(create_params, guest_token)
 
@@ -397,7 +395,8 @@ class BBBRoom(models.Model):
         :param presentation_url: Publicly available URL of presentation file to be pre-uploaded as slides to BBB room
         :type: str
 
-        :param source_object: The object the room is attached to. Check `CosinnusConferenceSettings.get_for_object()` for valid arguments.
+        :param source_object: The object the room is attached to. Check `CosinnusConferenceSettings.get_for_object()`
+            for valid arguments.
 
         :type: dict
         """
@@ -427,7 +426,8 @@ class BBBRoom(models.Model):
             source_object, meeting_id=meeting_id, meeting_name=name
         )
 
-        # BBB guest access: append the `moderatorOnlyMessage` param by this BBB room's guest_token URL, if the message param exists
+        # BBB guest access: append the `moderatorOnlyMessage` param by this BBB room's guest_token URL, if the message
+        # param exists
         guest_token = cls._generate_guest_token(source_object)
         create_params = cls.add_guest_link_moderator_only_message_to_params(create_params, guest_token)
 

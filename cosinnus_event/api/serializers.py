@@ -1,6 +1,3 @@
-from datetime import datetime
-
-import pytz
 from rest_framework import serializers
 
 from cosinnus_event.models import Event

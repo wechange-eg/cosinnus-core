@@ -11,7 +11,6 @@ import six
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
-from django.db.models import Q
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 from oauth2_provider.models import Application
@@ -23,7 +22,7 @@ from cosinnus.conf import settings
 from cosinnus.models import MEMBERSHIP_ADMIN
 from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
-from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
+from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_PENDING
 from cosinnus.models.profile import (
     PROFILE_SETTING_ROCKET_CHAT_CONTACT_GROUP_ROOM,
     PROFILE_SETTING_ROCKET_CHAT_ID,
@@ -107,7 +106,7 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
             close_rocket_chat_session()
             logger.exception(e)
             raise RocketChatDownException()
-        except:
+        except Exception:
             pass
         if not alive:
             cache.delete(cache_key)
@@ -529,7 +528,7 @@ class RocketChatConnection:
             'username': rocket_username,
             'bio': profile.get_absolute_url(),
             'active': user.is_active,
-            'verified': True,  # we keep verified at True always and provide a fake email for unverified accounts, since rocket is broken and still sends emails to unverified accounts
+            'verified': True,  # we keep verified at True always and provide a fake email for unverified accounts, since rocket is broken and still sends emails to unverified accounts  # noqa
             'requirePasswordChange': False,
         }
         response = self.rocket.users_create(**data).json()
@@ -550,8 +549,8 @@ class RocketChatConnection:
         user.cosinnus_profile = profile
 
         # Update the user's email preferences based on the portal default
-        # Hack: since the user object might have a null password on creation, we give the user object a temporary password,
-        # because otherwise the rocket user connection would not be able to log in.
+        # Hack: since the user object might have a null password on creation, we give the user object a temporary
+        # password, because otherwise the rocket user connection would not be able to log in.
         # Note: the user should not be saved in between this! if it it ever does,
         # we have to re-save the user afterwards with the original password
         user.password = rocket_user_password
@@ -622,7 +621,10 @@ class RocketChatConnection:
                 return False
             else:
                 logger.info(
-                    'Rocketchat check_user_account_status: users_info response returned a status code or error message we could not interpret.',
+                    (
+                        'Rocketchat check_user_account_status: users_info response returned a status code or error '
+                        'message we could not interpret.'
+                    ),
                     extra={'response-text': response.text, 'response_code': response.status_code},
                 )
                 return None
@@ -662,7 +664,8 @@ class RocketChatConnection:
                 return False
         elif status is None:
             logger.error(
-                'RocketChat: ensure_user_account_sanity was called, but could not do anything as `check_user_account_status` received an unknown status code.'
+                'RocketChat: ensure_user_account_sanity was called, but could not do anything as '
+                '`check_user_account_status` received an unknown status code.'
             )
             return False
 
@@ -728,7 +731,7 @@ class RocketChatConnection:
                 'name': profile.get_external_full_name(),
                 'bio': profile.get_absolute_url(),
                 'active': user.is_active,
-                'verified': True,  # we keep verified at True always and provide a fake email for unverified accounts, since rocket is broken and still sends emails to unverified accounts
+                'verified': True,  # we keep verified at True always and provide a fake email for unverified accounts, since rocket is broken and still sends emails to unverified accounts # noqa
                 'requirePasswordChange': False,
             }
             # Update email only if it has changed to avoid rate limiting by the RocketChat server.
@@ -907,7 +910,10 @@ class RocketChatConnection:
                     return room_name, room_id
                 return None, None
             logger.error(
-                'RocketChat: _find_or_create_private_channel_for_user_and_group: create new unique room: max tries exceeded!',
+                (
+                    'RocketChat: _find_or_create_private_channel_for_user_and_group: create new unique room: max tries '
+                    'exceeded!'
+                ),
                 extra={'group_id': group.id, 'user_id': user.id},
             )
         return None, None

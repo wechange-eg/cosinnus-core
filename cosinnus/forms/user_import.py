@@ -38,11 +38,13 @@ class CosinusUserImportCSVForm(forms.Form):
         if mismatched_rows:
             raise forms.ValidationError(
                 _(
-                    f'Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {", ".join(mismatched_rows)}!'
+                    f'Rows on these line numbers did not have the same number of items ({len(processed_header)}) as '
+                    f'the header: {", ".join(mismatched_rows)}!'
                 )
             )
 
-        # make a datadict, combining the headers with each row, ignoring any columns not found in KNOWN_CSV_IMPORT_COLUMNS_HEADERS
+        # make a datadict, combining the headers with each row, ignoring any columns not found in
+        # KNOWN_CSV_IMPORT_COLUMNS_HEADERS
         data_dict_list, ignored_columns = self.make_data_dict_list(processed_header, rows)
 
         return {
@@ -92,7 +94,10 @@ class CosinusUserImportCSVForm(forms.Form):
             raise forms.ValidationError(_("CSV could not be parsed. Please use ',' or ';' as delimiter."))
 
     def make_data_dict_list(self, header, rows):
-        """Makes a datadict, combining the headers with each row, ignoring any columns not found in KNOWN_CSV_IMPORT_COLUMNS_HEADERS"""
+        """
+        Makes a datadict, combining the headers with each row, ignoring any columns not found in
+        KNOWN_CSV_IMPORT_COLUMNS_HEADERS
+        """
         lowercase_known_columns = [
             col.strip().lower() for col in CosinnusUserImportProcessor.KNOWN_CSV_IMPORT_COLUMNS_HEADERS
         ]

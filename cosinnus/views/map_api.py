@@ -23,7 +23,6 @@ from rest_framework.views import APIView
 from cosinnus.conf import settings
 from cosinnus.forms.search import filter_searchqueryset_for_portal, filter_searchqueryset_for_read_access
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.map import (
     EXCHANGE_SEARCH_MODEL_NAMES,
     SEARCH_MODEL_NAMES,
@@ -43,7 +42,7 @@ from cosinnus.utils.permissions import check_object_read_access
 
 try:
     from cosinnus_event.models import Event  # noqa
-except:
+except Exception:
     Event = None
 
 USER_MODEL = get_user_model()
@@ -87,7 +86,8 @@ MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'exchange': False,
     'matching': '',
 }
-# supported map search query parameters for selecting content models, and their default values (as python data after a json.loads()!) if not present
+# supported map search query parameters for selecting content models, and their default values (as python data after a
+# json.loads()!) if not present
 MAP_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'people': True,
     'events': True,
@@ -281,7 +281,8 @@ class SearchQuerySetMixin:
                 # filter events by upcoming status and exclude hidden proxies
                 sqs = filter_event_searchqueryset_by_upcoming(sqs)
 
-        # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
+        # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't
+        # shown)
         if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
             sqs = sqs.exclude(is_group_model='true', slug__in=get_default_user_group_slugs())
 
@@ -314,7 +315,7 @@ class SearchQuerySetMixin:
             if params.get('conferences', False) and sum([1 if params.get(content_key, False) else 0 for content_key in MAP_CONTENT_TYPE_SEARCH_PARAMETERS.keys()]) == 1:
                 sort_args = ['-from_date'] + sort_args
                 skip_score_sorting = True
-            """
+            """  # noqa
 
         return sqs
 

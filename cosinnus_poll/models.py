@@ -1,23 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import datetime
 from builtins import object, str
-from os.path import join
 from uuid import uuid1
 
+import django
 import six
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import Q
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
-from django.urls import reverse
-from django.utils import dateformat
 from django.utils.encoding import force_str
-from django.utils.formats import date_format
 from django.utils.functional import cached_property
-from django.utils.timezone import localtime, now
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext_lazy
 
@@ -118,7 +113,7 @@ class Poll(LikeableObjectMixin, BaseTaggableObjectModel):
         return 'fa-bar-chart'
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(Poll, self).save(*args, **kwargs)
 
         session_id = uuid1().int
@@ -343,7 +338,7 @@ class Comment(models.Model):
         return self.poll.is_user_following(user)
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(Comment, self).save(*args, **kwargs)
         session_id = uuid1().int
         if created:
@@ -428,8 +423,6 @@ def past_poll_filter(queryset):
     or have an end date before today."""
     return queryset.filter(state=Poll.STATE_ARCHIVED)
 
-
-import django
 
 if django.VERSION[:2] < (1, 7):
     from cosinnus_poll import cosinnus_app

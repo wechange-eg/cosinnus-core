@@ -4,7 +4,7 @@ from __future__ import print_function, unicode_literals
 from builtins import str
 from uuid import uuid4
 
-from django.db.models.signals import post_delete, post_save, pre_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from cosinnus.conf import settings

@@ -119,7 +119,7 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
             except CosinnusGroup.DoesNotExist:
                 continue
 
-    except:
+    except Exception:
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error('Error while trying to add User Membership for newly created user.')
 
@@ -208,7 +208,8 @@ def get_user_query_filter_for_search_terms(terms):
     return q
 
 
-# very similar to create_user but uses UserCreateForm from django.contrib.auth as the one from cosinnus.forms.user requires a captcha
+# very similar to create_user but uses UserCreateForm from django.contrib.auth as the one from cosinnus.forms.user
+# requires a captcha
 def create_base_user(email, username=None, password=None, first_name=None, last_name=None, no_generated_password=False):
     """:param no_generated_password: set password generation behaviour. If False Password will be kept with None
     :type no_generated_password: bool | default False
@@ -220,7 +221,6 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
 
     from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
     from cosinnus.models.membership import MEMBERSHIP_MEMBER
-    from cosinnus.models.profile import get_user_profile_model
 
     try:
         user_model = get_user_model()
@@ -379,7 +379,7 @@ def accept_user_tos_for_portal(user, profile=None, portal=None, save=True):
     # save the accepted date for this portal in a new dict, or update the dict for this portal
     # (the old style setting for this only had a datetime saved, now we use a dict)
     portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
-    if portal_dict_or_date is None or type(portal_dict_or_date) is not dict:
+    if portal_dict_or_date is None or not isinstance(portal_dict_or_date, dict):
         profile.settings['tos_accepted_date'] = {str(portal.id): now()}
     else:
         portal_dict_or_date[portal.id] = now()
@@ -416,7 +416,7 @@ def get_user_tos_accepted_date(user):
             portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
         else:
             return None
-    if type(portal_dict_or_date) is not dict:
+    if not isinstance(portal_dict_or_date, dict):
         # the old style setting for this only had a datetime saved, convert it to the modern
         # dict version of {<portal_id>: datetime, ...}
         portal_dict_or_date = {str(portal.id): portal_dict_or_date}
@@ -456,7 +456,7 @@ def get_unread_message_count_for_user(user):
                 if unread_count is None:
                     unread_count = RocketChatConnection().unread_messages(user)
                     cache.set(unread_cache_key, unread_count, settings.COSINNUS_NOTIFICATION_ALERTS_CACHE_TIMEOUT)
-            except:
+            except Exception:
                 # we do not care what caused an exception here, but we handle them by returning
                 # 0 unread messages and imposing a break for this user
                 cache.set(paused_cache_key, True, 60 * 5)  # 5 minutes
@@ -498,7 +498,7 @@ def get_user_id_hash(user):
     return short_digest
 
 
-def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, request=None) -> bool:
+def create_guest_user_and_login(guest_access, username, request=None):
     """
     Creates a guest-type user account based on a UserGroupGuestAccess token with the given username
     and if a request is given, logs the current session in as that guest user.

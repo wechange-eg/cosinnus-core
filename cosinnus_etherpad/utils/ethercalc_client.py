@@ -46,7 +46,7 @@ def ss_to_xy(s):
     """convert spreadsheet coordinates to zero-index xy coordinates.
     return None if input is invalid"""
     result = re.match(r'\$*([A-Z]+)\$*([0-9]+)', s, re.I)
-    if result == None:
+    if result is None:
         return None
     xstring = result.group(1).upper()
     multiplier = 1
@@ -93,7 +93,7 @@ class EtherCalc(object):
 
     def cells(self, page, coord=None):
         api = '/%s/cells' % page
-        if coord != None:
+        if coord is not None:
             api = api + '/' + coord
         return self.get(api).json()
 
@@ -103,7 +103,7 @@ class EtherCalc(object):
         return r.json()
 
     def create(self, data, format='python', id=None):
-        if id == None:
+        if id is None:
             id = ''
         else:
             id = '/' + id
@@ -119,7 +119,7 @@ class EtherCalc(object):
             return self.post(id, data, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
     def update(self, data, format='python', id=None):
-        if id == None:
+        if id is None:
             sid = ''
         else:
             sid = '/' + id
@@ -130,7 +130,7 @@ class EtherCalc(object):
         elif format == 'csv':
             return self.put(sid, data, 'text/csv')
         elif format == 'socialcalc':
-            if id == None:
+            if id is None:
                 upload = {'snapshot': data}
             else:
                 upload = {'room': id, 'snapshot': data}

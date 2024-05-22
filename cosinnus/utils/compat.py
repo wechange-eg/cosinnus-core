@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from collections import OrderedDict
+
 """
 .. warning::
 
@@ -9,15 +11,11 @@ from __future__ import unicode_literals
     we may use functions from here.
 """
 
-import warnings
-
 try:
     from django.db.transaction import atomic
 except ImportError:
     from django.db.transaction import commit_on_success as atomic  # noqa
 
-
-from collections import OrderedDict
 
 __all__ = (
     'atomic',

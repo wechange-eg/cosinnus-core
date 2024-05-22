@@ -90,8 +90,10 @@ class BaseMembershipManager(models.Manager):
             query = self.filter(group_id=group_id).filter_membership_status(status)
             uids = list(query.values_list('user_id', flat=True).all())
             cache.set(key, uids, settings.COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT)
-            """ TODO: FIXME: bc of some bug, this cache key is often reset/cleared and read in again on each query!! 
-                            The cache on this key seems not to get cleared from code, so no clue what's going on here. """
+            """
+            TODO: FIXME: bc of some bug, this cache key is often reset/cleared and read in again on each query!!
+                         The cache on this key seems not to get cleared from code, so no clue what's going on here.
+            """
         return uids
 
     def _get_users_for_multiple_groups(self, group_ids, cache_key, status):
@@ -305,7 +307,10 @@ class MembersManagerMixin(object):
 
     @property
     def actual_members(self):
-        """Returns a QS of users that are members of this group (admins and members) and are actually active and visible on the site"""
+        """
+        Returns a QS of users that are members of this group (admins and members) and are actually active and visible
+        on the site
+        """
         qs = get_user_model().objects.filter(id__in=self.members)
         qs = filter_active_users(qs)
         return qs
@@ -338,7 +343,9 @@ class MembersManagerMixin(object):
 
     @property
     def actual_pendings(self):
-        """Returns a QS of users that have a pending status on this group and are actually active and visible on the site"""
+        """
+        Returns a QS of users that have a pending status on this group and are actually active and visible on the site
+        """
         qs = get_user_model().objects.filter(id__in=self.pendings)
         qs = filter_active_users(qs)
         return qs
@@ -355,7 +362,10 @@ class MembersManagerMixin(object):
 
     @property
     def actual_invited_pendings(self):
-        """Returns a QS of users that have a pending invitation on this group and are actually active and visible on the site"""
+        """
+        Returns a QS of users that have a pending invitation on this group and are actually active and visible on the
+        site
+        """
         qs = get_user_model().objects.filter(id__in=self.invited_pendings)
         qs = filter_active_users(qs)
         return qs

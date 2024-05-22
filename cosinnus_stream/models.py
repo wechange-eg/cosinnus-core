@@ -5,6 +5,7 @@ import datetime
 import logging
 from builtins import str
 
+import django
 from django.core.cache import cache
 from django.core.validators import validate_comma_separated_integer_list
 from django.db import models as django_models
@@ -160,8 +161,6 @@ post_save.connect(
     dispatch_uid='cosinnus_user_profile_post_save_streams',
 )
 
-
-import django
 
 if django.VERSION[:2] < (1, 7):
     from cosinnus_stream import cosinnus_app

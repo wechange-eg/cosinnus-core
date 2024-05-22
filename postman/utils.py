@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 import re
-import sys
 from importlib import import_module
 from textwrap import TextWrapper
 
@@ -30,7 +29,7 @@ name = getattr(settings, 'POSTMAN_MAILER_APP', 'mailer')
 if name and name in settings.INSTALLED_APPS:
     send_mail = import_module(name).send_mail
 else:
-    from django.core.mail import send_mail
+    from django.core.mail import send_mail  # noqa
 
 # to disable email notification to users
 DISABLE_USER_EMAILING = getattr(settings, 'POSTMAN_DISABLE_USER_EMAILING', False)
@@ -82,8 +81,8 @@ def email(subject_template, message_template, recipient_list, object, action, si
     subject = render_to_string(subject_template, ctx_dict)
     # Email subject *must not* contain newlines
     subject = ''.join(subject.splitlines())
-    # check if we have a connected mailbox for direct replies, and if so, set the sender to a specified email, so that users
-    # can directly reply to them
+    # check if we have a connected mailbox for direct replies, and if so, set the sender to a specified email, so that
+    # users can directly reply to them
     hash_vars = {
         'portal_name': force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)),
         'default_from': settings.DEFAULT_FROM_EMAIL,
@@ -108,7 +107,8 @@ def email(subject_template, message_template, recipient_list, object, action, si
         sender = '%(portal_name)s <%(default_from)s>' % hash_vars
 
     # message = render_to_string(message_template, ctx_dict)
-    # during the development phase, consider using the setting: EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # during the development phase, consider using the setting:
+    #   EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     # send_mail(subject, message, sender, recipient_list, fail_silently=True)
 
     # now sending through our system

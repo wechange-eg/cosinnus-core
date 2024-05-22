@@ -131,7 +131,8 @@ def merge_new_alert_into_multi_alert(new_alert, multi_alert):
 
     # If the new alert's action_user is any of the action_users in the old alert, we only bump this alert to most recent
     #     and make it unseen. this is case like a user editing or liking/unliking an item multiple times,
-    #     but we're not gonna try to be a "smart" here, and hide the alert from the user at risk of omitting important events
+    #     but we're not gonna try to be a "smart" here, and hide the alert from the user at risk of omitting important
+    #     events
     # Else, for non-repeated alerts (alert from a new user), we bump the counter and add the user to the list
     if not is_repeat_alert:
         multi_alert.counter += 1
@@ -151,9 +152,10 @@ def merge_new_alert_into_bundle_alert(new_alert, bundle_alert):
         )
         return
 
-    # If the new alert's target_object is any of the bundle objects in the old alert, we only bump this alert to most recent
-    # and make it unseen. this is case like users editing items multiple times in a short time frame
-    # but we're not gonna try to be a "smart" here, and hide the alert from the user at risk of omitting important events
+    # If the new alert's target_object is any of the bundle objects in the old alert, we only bump this alert to most
+    # recent and make it unseen. this is case like users editing items multiple times in a short time frame
+    # but we're not gonna try to be a "smart" here, and hide the alert from the user at risk of omitting important
+    # events
     if new_alert.target_object == bundle_alert.target_object or any(
         [bundle_item['object_id'] == new_alert.object_id for bundle_item in bundle_alert.bundle_list]
     ):

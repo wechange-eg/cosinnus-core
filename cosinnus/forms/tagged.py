@@ -84,7 +84,8 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin, forms
             self.data.setlist('media_tag-topics', self.group.media_tag.topics.split(','))
 
         if self.group and not self.instance.pk:
-            # for new TaggableObjects (not groups), set the default visibility corresponding to the group's public status
+            # for new TaggableObjects (not groups), set the default visibility corresponding to the group's public
+            # status
             self.fields['visibility'].initial = get_inherited_visibility_from_group(self.group)
 
         if self.group:
@@ -93,7 +94,9 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin, forms
             data_url = reverse('cosinnus:select2:all-members')
 
         # override the default persons field with select2
-        # self.fields['persons'] = HeavySelect2MultipleChoiceField(label=_("Persons"), help_text='', required=False, data_url=data_url)
+        # self.fields['persons'] = HeavySelect2MultipleChoiceField(
+        #   label=_("Persons"), help_text='', required=False, data_url=data_url
+        # )
         self.fields['persons'] = UserSelect2MultipleChoiceField(
             label=_('Persons'), help_text='', required=False, data_url=data_url
         )
@@ -174,8 +177,10 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin, forms
 
         if commit:
             self.instance.save()
-            # For future reference: we skip the call to `save_m2m` here, because the django-multiform `MultiModelForm` already calls it!
-            # This should be safe, but maybe in a bug corner case it could cause the `save_m2m` call to be skipped entirely
+            # For future reference: we skip the call to `save_m2m` here, because the django-multiform `MultiModelForm`
+            # already calls it!
+            # This should be safe, but maybe in a bug corner case it could cause the `save_m2m` call to be skipped
+            # entirely
             # self.save_m2m()
         return self.instance
 
@@ -308,8 +313,10 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
                 # Some forms might contain m2m data. We need to save them
                 # explicitly since we called save() with commit=False before.
 
-                # For future reference: we skip the call to `save_m2m` here, because the django-multiform `MultiModelForm` already calls it!
-                # This should be safe, but maybe in a bug corner case it could cause the `save_m2m` call to be skipped entirely
+                # For future reference: we skip the call to `save_m2m` here, because the django-multiform
+                # `MultiModelForm` already calls it!
+                # This should be safe, but maybe in a bug corner case it could cause the `save_m2m` call to be skipped
+                # entirely
                 # self.save_m2m()
 
                 # compare tagged persons, and if there are new ones, trigger notifications

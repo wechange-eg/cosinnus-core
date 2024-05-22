@@ -3,17 +3,16 @@ from __future__ import unicode_literals
 
 import hashlib
 import os
-import shutil
 import uuid
 from os.path import exists, isfile, join
 from uuid import uuid1
 
+import django
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch.dispatcher import receiver
-from django.urls import reverse
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -146,7 +145,7 @@ class FileEntry(
             self.path += '/'
         if len(self.mimetype) > 50:
             self.mimetype = self.mimetype[:50]
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         # mark as URL filetype if not file but a URL is given
         if self.url and not self.file:
             self.is_url = True
@@ -249,8 +248,6 @@ def post_file_delete(sender, instance, **kwargs):
         if exists(path) and isfile(path):
             instance.file.delete(False)
 
-
-import django
 
 if django.VERSION[:2] < (1, 7):
     from cosinnus_file import cosinnus_app

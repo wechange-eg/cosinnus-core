@@ -21,6 +21,6 @@ def register():
     widget_registry.register('todo', 'cosinnus_todo.dashboard.MyTodos')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'todo')
+    name = pgettext_lazy('the_app', 'todo')  # noqa
 
-    import cosinnus_todo.hooks
+    import cosinnus_todo.hooks  # noqa

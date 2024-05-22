@@ -22,4 +22,4 @@ def register():
     widget_registry.register('note', 'cosinnus_note.dashboard.DetailedNotes')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'note')
+    name = pgettext_lazy('the_app', 'note')  # noqa

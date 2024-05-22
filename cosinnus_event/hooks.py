@@ -6,17 +6,14 @@ from threading import Thread
 
 from annoying.functions import get_object_or_None
 from django.contrib.contenttypes.models import ContentType
-from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
-from cosinnus.models.bbb_room import BBBRoom
-from cosinnus.models.group import MEMBER_STATUS, MEMBERSHIP_ADMIN
-from cosinnus.models.group_extra import CosinnusConference
+from cosinnus.models.group import MEMBER_STATUS
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject
 from cosinnus.utils.functions import unique_aware_slugify
-from cosinnus_event.models import ConferenceEvent, Event
+from cosinnus_event.models import Event
 
 logger = logging.getLogger('cosinnus')
 

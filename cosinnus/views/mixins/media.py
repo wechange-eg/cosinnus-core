@@ -43,7 +43,7 @@ class VideoEmbedFieldMixin(object):
                 if match:
                     return {'youtubeid': match.groups()[0]}
                 return {'error': video}
-        except:
+        except Exception:
             """ Pokemon exception handling """
             if settings.DEBUG:
                 raise
@@ -88,7 +88,7 @@ class FlickrEmbedFieldMixin(object):
                 }
                 return data
             return {'error': flickr}
-        except:
+        except Exception:
             """ Pokemon exception handling """
             if settings.DEBUG:
                 raise

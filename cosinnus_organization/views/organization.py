@@ -62,7 +62,9 @@ class CosinnusOrganizationFormMixin(object):
                     messages.warning(
                         self.request,
                         _(
-                            'Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators.'
+                            'Sorry, only portal administrators can create Organizations! You can either create a '
+                            'Project, or write a message to one of the administrators to create a Organization for '
+                            'you. Below you can find a listing of all administrators.'
                         ),
                     )
                     redirect_url = reverse('cosinnus:portal-admin-list')

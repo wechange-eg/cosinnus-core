@@ -12,7 +12,7 @@ from os.path import basename
 from django.contrib import messages
 from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect, StreamingHttpResponse
 from django.http.response import HttpResponseNotAllowed
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 from django.utils.crypto import get_random_string
 from django.utils.datastructures import MultiValueDict
@@ -156,7 +156,7 @@ class FileDeleteView(RequireWriteMixin, FilterGroupMixin, HierarchyDeleteMixin, 
             # if possible, redirect to the object's parent folder list view
             parent_folder = self.object.__class__.objects.get(is_container=True, path=self.object.path)
             kwargs.update({'slug': parent_folder.slug})
-        except:
+        except Exception:
             pass
         return '%s%s' % (
             group_aware_reverse('cosinnus:file:list', kwargs=kwargs),
@@ -413,10 +413,12 @@ class FolderDownloadView(RequireReadMixin, FilterGroupMixin, DetailView):
             # filter for specific files
             if file_filter_ids and sub_file.id not in file_filter_ids:
                 continue
-            # if only one file is requested, redirect to the single file download view so we don't send a silly 1-file zip
-            # appearently, this is really confusing for users, so disable this and always download a folder!
+            # if only one file is requested, redirect to the single file download view so we don't send a silly 1-file
+            # zip appearently, this is really confusing for users, so disable this and always download a folder!
             # if len(file_filter_ids) == 1 and file_filter_ids[0] == sub_file.id:
-            #    return redirect(group_aware_reverse('cosinnus:file:save', kwargs={'group': sub_file.group, 'slug': sub_file.slug}))
+            #    return redirect(group_aware_reverse(
+            #       'cosinnus:file:save', kwargs={'group': sub_file.group, 'slug': sub_file.slug})
+            #    )
             # check read access for each file. expensive, but secure
             if not check_object_read_access(sub_file, self.request.user):
                 continue
@@ -464,7 +466,7 @@ class FolderDownloadView(RequireReadMixin, FilterGroupMixin, DetailView):
         try:
             for temp_file_path in temp_file_paths:
                 os.remove(temp_file_path)
-        except:
+        except Exception:
             pass
 
         return response
@@ -492,7 +494,8 @@ def _create_folders_for_path_string(base_folder_object, relative_path_string):
     starting from the base folder object. Will not create any folders if the path exists.
 
     @param base_folder_object: A FileEntry (is_container=True) object
-    @param relative_path_string: a path string, eg 'my folder/another sub folder/'. Leading/traling slashes are sanitized.
+    @param relative_path_string: a path string, eg 'my folder/another sub folder/'. Leading/traling slashes are
+        sanitized.
     @return: The last created sub folder object in the path."""
 
     relative_path_string = relative_path_string[1:] if relative_path_string.startswith('/') else relative_path_string
@@ -571,7 +574,10 @@ def file_upload_inline(request, group):
                 # sanity check, file name in file info must match FILES file name
                 if not name == dict_file._name:
                     logger.warn(
-                        "File upload sanity check failed: File order of file with relative path info and FILES list did not match! (Upload may have sorted the user's file in the wrong folder)",
+                        (
+                            'File upload sanity check failed: File order of file with relative path info and FILES '
+                            "list did not match! (Upload may have sorted the user's file in the wrong folder)"
+                        ),
                         extra={'file_info': file_info_array, 'FILES_list': request.FILES.getlist('file')},
                     )
                 upload_folder = _create_folders_for_path_string(base_upload_folder, relative_path)

@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.db import transaction
-from django.db.models import Case, Count, Q, When
+from django.db.models import Case, Count, When
 from django.http.response import (
     HttpResponse,
     HttpResponseBadRequest,
@@ -129,12 +129,13 @@ class NotificationPreferenceView(ListView):
                         messages.warning(
                             request,
                             _(
-                                'Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!'
+                                'Your rocketchat setting could not be saved. If this error persists, please configure '
+                                'the setting in the rocketchat user preferences manually!'
                             ),
                         )
                 setting_obj.save()
 
-            """ TODO: 
+            """ TODO:
                 * initial setting on user rocketchat account creation, by their setting or portal default setting
                 * manage.py command to sync settings later on
             """
@@ -372,7 +373,8 @@ class AlertsRetrievalView(BasePagedOffsetWidgetView):
 
     def get_queryset(self):
         alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
-        # retrieve number of unseen alerts from ALL alerts (before pagination) unless we're loading "more..." paged items
+        # retrieve number of unseen alerts from ALL alerts (before pagination) unless we're loading "more..." paged
+        # items
         self.unseen_count = -1
         if not self.offset_timestamp:
             unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))

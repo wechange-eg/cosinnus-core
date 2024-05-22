@@ -72,7 +72,10 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
                 )
             except Exception as e:
                 logger.error(
-                    'delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)',
+                    (
+                        'delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles '
+                        'cronjob! (in extra)'
+                    ),
                     extra={'exception': force_str(e)},
                 )
 

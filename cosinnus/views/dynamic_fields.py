@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
 

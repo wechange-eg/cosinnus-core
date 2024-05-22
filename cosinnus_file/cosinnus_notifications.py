@@ -3,9 +3,8 @@ from __future__ import unicode_literals
 
 import django.dispatch as dispatch
 from django.utils.translation import gettext_lazy as _
-from django.utils.translation import ngettext_lazy
 
-""" Cosinnus:Notifications configuration file. 
+""" Cosinnus:Notifications configuration file.
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
 """
 
@@ -16,9 +15,9 @@ followed_group_file_created = dispatch.Signal()  # providing_args=["user", "obj"
 
 
 """ Notification definitions.
-    These will be picked up by cosinnus_notfications automatically, as long as the 
+    These will be picked up by cosinnus_notfications automatically, as long as the
     variable 'notifications' is present in the module '<app_name>/cosinnus_notifications.py'.
-    
+
     Both the mail and subject template will be provided with the following context items:
         :receiver django.auth.User who receives the notification mail
         :sender django.auth.User whose action caused the notification to trigger
@@ -33,8 +32,8 @@ followed_group_file_created = dispatch.Signal()  # providing_args=["user", "obj"
         :notification_settings_url The URL to the cosinnus notification settings page.
         :site Current django site
         :protocol Current portocol, 'http' or 'https'
-        
-    
+
+
 """
 notifications = {
     'file_created': {

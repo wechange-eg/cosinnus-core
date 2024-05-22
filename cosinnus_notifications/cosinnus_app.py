@@ -26,7 +26,7 @@ def register():
     url_registry.register_urlconf('cosinnus_notifications', 'cosinnus_notifications.urls')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'notifications')
+    name = pgettext_lazy('the_app', 'notifications')  # noqa
 
 
 @receiver(all_cosinnus_apps_loaded)

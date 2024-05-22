@@ -1,4 +1,3 @@
-import copy
 import logging
 
 from django.contrib.messages.api import get_messages

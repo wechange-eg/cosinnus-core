@@ -6,7 +6,6 @@ import json
 from django import template
 from django.utils.safestring import mark_safe
 
-from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 
 register = template.Library()

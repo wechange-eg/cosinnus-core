@@ -37,7 +37,7 @@ def delete_old_notification_alerts(do_per_user=False):
     count = queryset.count()
     if do_per_user:
         for user in get_user_model().objects.all():
-            result = queryset.filter(user=user).delete()
+            queryset.filter(user=user).delete()
     else:
-        result = queryset.delete()
+        queryset.delete()
     return count

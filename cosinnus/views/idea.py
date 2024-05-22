@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 import logging
 from builtins import object
 
-from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -11,7 +10,6 @@ from django.views.generic import CreateView, DeleteView, UpdateView
 
 from ajax_forms.ajax_forms import AjaxFormsDeleteViewMixin
 from cosinnus.forms.idea import CosinnusIdeaForm
-from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.tagged import LikeObject
 from cosinnus.views.group import SamePortalGroupMixin

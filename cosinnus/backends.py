@@ -11,7 +11,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.core.mail.backends.smtp import EmailBackend
 from django.core.mail.message import sanitize_address
-from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from elasticsearch.exceptions import TransportError
@@ -53,21 +52,24 @@ class EmailAuthBackend(ModelBackend):
             ):
                 message_parts = force_str(
                     _(
-                        'The email address for the account you are trying to use needs to be activated before you can log in.'
+                        'The email address for the account you are trying to use needs to be activated before you can '
+                        'log in.'
                     )
                 )
                 support_email = CosinnusPortal.get_current().support_email
                 if support_email:
                     message_parts += ' ' + force_str(
                         _(
-                            'If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!'
+                            'If you have not received an activation email yet, please try signing up again or contact '
+                            'our support at %(email)s!'
                         )
                         % {'email': support_email}
                     )
                 else:
                     message_parts += ' ' + force_str(
                         _(
-                            'If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!'
+                            'If you have not received an activation email from %(portal_name)s within a few minutes '
+                            'please look in your spam folder or try signing up again!'
                         )
                         % {'portal_name': CosinnusPortal.get_current().name}
                     )
@@ -118,7 +120,10 @@ def threaded_execution_and_catch_error(f):
                 return f(my_self, *args, **kwargs)
             except (TransportError, ProtocolError, ConnectionError) as e:
                 logger.error(
-                    'Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.',
+                    (
+                        'Could not connect to the ElasticSearch backend for indexing! The search function will not '
+                        'work and saving objects on the site will be terribly slow! Exception in extra.'
+                    ),
                     extra={'exception': force_str(e)},
                 )
             except Exception as e:

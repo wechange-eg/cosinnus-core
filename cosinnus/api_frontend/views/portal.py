@@ -2,7 +2,6 @@ from copy import copy
 
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
-from django.http.response import Http404
 from django.utils.encoding import force_str
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -169,7 +168,10 @@ class PortalManagedTagsView(APIView):
                                         'color': '123455',
                                     },
                                     'description': 'short description here',
-                                    'image': '/media/cosinnus_portals/portal_wechange/managed_tag_images/images/7e80af5f985f59bd9c186e892782cea4940b9e90.jpg',
+                                    'image': (
+                                        '/media/cosinnus_portals/portal_wechange/managed_tag_images/images/'
+                                        '7e80af5f985f59bd9c186e892782cea4940b9e90.jpg'
+                                    ),
                                     'url': 'https://openstreetmap.org',
                                     'search_synonyms': 'wow,cool,awesome',
                                     'group_url': 'http://127.0.0.1:8000/project/exch/',
@@ -230,7 +232,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
         A list of objects containing the field name, meta info and "choices":
         a list of tuples of acceptable key/value pairs (or null if all values are acceptable)
         for each dynamic userprofile field for this portal.
-        
+
         Field attributes:
         - "name": str, field name
         - "in_signup": bool, whether to show up in the signup form
@@ -246,7 +248,8 @@ class PortalUserprofileDynamicFieldsView(APIView):
         - "parent_group_field_name": if this field belongs to a checkbox group, this refers to the parent checkbox \
                 field of that group, which needs to have `is_group_header=True`
         - "display_required_field_names": if this field should only be shown if either one of a list of checkbox \
-                fields is checked, this is the list field names of checkbox fields of which one is required to be checked
+                fields is checked, this is the list field names of checkbox fields of which one is required to be \
+                checked
         - "choices": list or null, the choice tuples of (value, label) for choice fields
     """
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
@@ -317,7 +320,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
                     )
                     choices = getattr(formfield, 'choices', None)
             # remove the empty choice from choices for multiple fields, as our frontend doesn't need it
-            if choices and field_options.multiple == True:
+            if choices and field_options.multiple is True:
                 choices = [(k, v) for (k, v) in choices if k]
 
             # check if multilanguage is enabled

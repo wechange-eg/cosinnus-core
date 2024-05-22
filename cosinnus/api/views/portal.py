@@ -1,4 +1,3 @@
-from copy import copy
 from operator import itemgetter
 
 from django.contrib.auth import get_user_model
@@ -63,7 +62,7 @@ class StatisticsView(APIView):
                     'events_upcoming': self.get_event_qs().count(),
                 }
             )
-        except:
+        except Exception:
             pass
 
         try:
@@ -72,7 +71,7 @@ class StatisticsView(APIView):
                     'notes': self.get_note_qs().count(),
                 }
             )
-        except:
+        except Exception:
             pass
 
         return Response(data)

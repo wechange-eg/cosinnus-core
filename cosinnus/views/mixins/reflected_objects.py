@@ -45,7 +45,8 @@ class MixReflectedObjectsMixin(object):
                 'MixReflectedObjectsMixin.mix_queryset: need to supply either a `group` or `user` parameter!'
             )
         reflected_qs = model.objects.filter(id__in=reflected_obj_ids)
-        # need to distinctify, in case base_queryset was being made distinct somewhere else (cannot combine distinct + non-distinct)
+        # need to distinctify, in case base_queryset was being made distinct somewhere else (cannot combine distinct +
+        # non-distinct)
         queryset = (queryset.distinct() | reflected_qs.distinct()).distinct()
         return queryset
 
@@ -73,7 +74,8 @@ class ReflectedObjectSelectMixin(object):
                 'may_reflect': may_reflect,
             }
         if may_reflect:
-            # find all groups the user can reflect into (for the forum: all of theirs, for other groups, the subprojects)
+            # find all groups the user can reflect into (for the forum: all of theirs, for other groups, the
+            # subprojects)
             if reflect_is_forum:
                 target_groups = get_cosinnus_group_model().objects.get_for_user(request.user)
             else:
@@ -111,7 +113,8 @@ class ReflectedObjectRedirectNoticeMixin(object):
                 mark_safe(
                     _(
                         ''
-                        'You are now located in %(group_name)s. You were redirected here from another project or group that links to this item.'
+                        'You are now located in %(group_name)s. You were redirected here from another project or group '
+                        'that links to this item.'
                     )
                     % {'group_name': '"%s"' % escape(self.group.name)}
                 ),

@@ -8,7 +8,6 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
 from django.dispatch.dispatcher import receiver
 from django.template.loader import render_to_string
-from django.urls import reverse
 from django.utils.decorators import classonlymethod
 from django.utils.translation import gettext_lazy as _
 
@@ -67,7 +66,9 @@ class DashboardWidget(object):
         raise NotImplementedError('Subclasses need to implement this method.')
 
     def get_queryset(self, skipFilter=False):
-        """@param skipFilter: If true, the filtering for user will be skipped, so it can be done at a later (MRO) time."""
+        """
+        @param skipFilter: If true, the filtering for user will be skipped, so it can be done at a later (MRO) time.
+        """
         if not self.model:
             raise ImproperlyConfigured('%s must define a model', self.__class__.__name__)
         qs = self.model._default_manager.filter(**self.get_queryset_filter())

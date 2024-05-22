@@ -23,7 +23,7 @@ def parse_xml(response):
             message_key = xml.find('messageKey').text
             message = xml.find('message').text
             raise Exception('[{code}]: {key} - {message}'.format(code=code, key=message_key, message=message))
-    except:
+    except Exception:
         return None
 
 

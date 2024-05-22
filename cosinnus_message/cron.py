@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import logging
 
 from django.utils.encoding import force_str
-from django_cron import CronJobBase, Schedule
+from django_cron import Schedule
 
 from cosinnus.cron import CosinnusCronJobBase
 from cosinnus_message.utils.utils import process_direct_reply_messages, update_mailboxes

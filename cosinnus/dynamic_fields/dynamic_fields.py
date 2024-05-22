@@ -136,7 +136,8 @@ class CosinnusDynamicField(object):
         # sanity check
         if not self.type or self.type not in DYNAMIC_FIELD_TYPES:
             raise ImproperlyConfigured(
-                f'`CosinnusDynamicField` was initialized with no or unknown type "{self.type}" {self.__dict__} ++ {str(kwargs.items())})'
+                f'`CosinnusDynamicField` was initialized with no or unknown type "{self.type}" {self.__dict__} '
+                f'++ {str(kwargs.items())})'
             )
         if self.placeholder is None:
             self.placeholder = self.label

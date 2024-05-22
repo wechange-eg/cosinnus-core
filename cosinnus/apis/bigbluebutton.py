@@ -8,11 +8,10 @@ from django.core.exceptions import ImproperlyConfigured
 
 from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal, get_domain_for_portal
-from cosinnus.models.conference import CosinnusConferenceSettings, get_parent_object_in_conference_setting_chain
+from cosinnus.models.conference import CosinnusConferenceSettings
 from cosinnus.utils import bigbluebutton as bbb_utils
 from cosinnus.utils.dates import datetime_from_timestamp
 from cosinnus.utils.functions import get_int_or_None, is_number
-from cosinnus.utils.group import get_cosinnus_group_model
 
 logger = logging.getLogger('cosinnus')
 
@@ -28,8 +27,8 @@ class BigBlueButtonAPI(object):
     Functions that are not included in bbb.py are called `manually` via urllib.
     For a full documentation on BigBlueButton API parameters have a look at: https://docs.bigbluebutton.org/dev/api.html
 
-    Checksum for API parameters is generated with SHA1 instead of SHA256 hash by default. Set the used hash algorithm in the
-    global settings in `BBB_HASH_ALGORITHM`.
+    Checksum for API parameters is generated with SHA1 instead of SHA256 hash by default. Set the used hash algorithm in
+    the global settings in `BBB_HASH_ALGORITHM`.
     All wrapped functions from bbb.py are called with sha1, regardless of the `BBB_HASH_ALGORITHM` setting.
     """
 
@@ -96,7 +95,10 @@ class BigBlueButtonAPI(object):
                     self.recording_api_auth_secret = recording_api_auth_pair[1]
             except Exception as e:
                 logger.error(
-                    'Misconfigured: Either COSINNUS_BBB_SERVER_CHOICES or COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS are not properly set up!',
+                    (
+                        'Misconfigured: Either COSINNUS_BBB_SERVER_CHOICES or '
+                        'COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS are not properly set up!'
+                    ),
                     extra={'exception': e},
                 )
                 if settings.DEBUG:
@@ -132,8 +134,9 @@ class BigBlueButtonAPI(object):
         options=None,
         presentation_url='',
     ):
-        """This function calls the BigBlueButton API directly to create a meeting with all available parameters available
-            in the cosinnus-core.BBBRoom model.
+        """
+        This function calls the BigBlueButton API directly to create a meeting with all available parameters available
+        in the cosinnus-core.BBBRoom model.
 
         :param name: Human readable name for the meeting
         :type: str
@@ -385,7 +388,8 @@ class BigBlueButtonAPI(object):
         if group_id is not None:
             # NOTE: currently, ScaleLite can only OR query terms, not AND them, so we cannot filter for recordings
             # by querying for the meta tags for portal and group.
-            # that's why we use this combined portal+group-id metatag "meta_we-portal-group-id" to filter with only one query
+            # that's why we use this combined portal+group-id metatag "meta_we-portal-group-id" to filter with only one
+            # query
             query_params = [
                 ('meta_we-portal-group-id', f'{portal_slug}-{group_id}'),
             ]
@@ -484,7 +488,10 @@ class BigBlueButtonAPI(object):
             success = xml_content.find('returncode').text == 'SUCCESS'
             if not success:
                 logger.error(
-                    'BBB Room error: Server request `deleteRecordings` returned status 200, but the request was not successful.',
+                    (
+                        'BBB Room error: Server request `deleteRecordings` returned status 200, but the request was '
+                        'not successful.'
+                    ),
                     extra={
                         'response_status_code': response.status_code,
                         'result': response.text,

@@ -105,7 +105,7 @@ def get_user_representation(user):
             mod_path, _, attr_name = show_user_as.rpartition('.')
             try:
                 return force_str(getattr(import_module(mod_path), attr_name)(user))
-            except:  # ImportError, AttributeError, TypeError (not callable)
+            except Exception:  # ImportError, AttributeError, TypeError (not callable)
                 pass
         else:
             attr = getattr(user, show_user_as, None)
@@ -116,7 +116,7 @@ def get_user_representation(user):
     elif callable(show_user_as):
         try:
             return force_str(show_user_as(user))
-        except:
+        except Exception:
             pass
     return force_str(user)  # default value, or in case of empty attribute or exception
 
@@ -169,9 +169,11 @@ class MultiConversationModel(models.Model):
     )
     master_for_sender = models.BooleanField(
         default=True,
-        help_text='Since in a MultiConversation, for one message '
-        'there exist multiple Message objects with the same level and same sender, only one those exists with '
-        'master_for_sender==True. This is the one that is checked for info like `sender_archived` and `sender_deleted_at`',
+        help_text=(
+            'Since in a MultiConversation, for one message there exist multiple Message objects with the same level '
+            'and same sender, only one those exists with master_for_sender==True. This is the one that is checked for '
+            'info like `sender_archived` and `sender_deleted_at`'
+        ),
     )
 
 
@@ -201,7 +203,8 @@ class MessageManager(models.Manager):
             qs.query.pm_set_extra(
                 table=(
                     # extra columns are always first in the SELECT query
-                    # for tests with the version 2.4.1 of sqlite3 in py26, add to the select: , 'id': 'postman_message.id'
+                    # for tests with the version 2.4.1 of sqlite3 in py26, add to the select: , 'id':
+                    # 'postman_message.id'
                     self.filter(lookups, thread_id__isnull=True)
                     .extra(select={'count': 0})
                     .values_list('id', 'count')
@@ -547,7 +550,8 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
 
     def other_participants(self, user):
         """For a given message and the current user, returns all other participants of this conversation,
-        or a list with one element, the other person that isn't our user if the message is not part of a multi conversation"""
+        or a list with one element, the other person that isn't our user if the message is not part of a multi
+         conversation"""
         if not self.multi_conversation:
             return [self.sender if self.recipient == user else self.recipient]
         return [part for part in self.multi_conversation.participants.all() if not part == user]

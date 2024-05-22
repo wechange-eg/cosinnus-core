@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import locale
 import logging
 import os
 import re
@@ -28,18 +29,17 @@ from django.db.models.fields.json import KeyTextTransform
 from django.db.models.functions import Cast
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
-from django.template.defaultfilters import date as django_date_filter
 from django.template.loader import render_to_string
 from django.templatetags.static import static
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
-from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
+from osm_field.fields import LatitudeField, LongitudeField, OSMField
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
@@ -82,11 +82,9 @@ from cosinnus_event.mixins import BBBRoomMixin  # noqa
 logger = logging.getLogger('cosinnus')
 
 # this reads the environment and inits the right locale
-import locale
-
 try:
     locale.setlocale(locale.LC_ALL, ('de_DE', 'utf8'))
-except:
+except Exception:
     locale.setlocale(locale.LC_ALL, '')
 
 
@@ -163,11 +161,11 @@ class CosinnusGroupManager(models.Manager):
     """These caches are the directories of which groups are active and displayed in each portal.
     They are typed by the Groups' Manager (!) so that one can be sure to always receive the correct Model instantiation.
     This also means that when called on the base CosinnusGroupManager, one will receive cached CosinnusGroups and not
-    either CosinnusProject or CosinnusSociety. This works as intended, as often functions wish to explicitly get a set of
-    both of these (membership queries, BaseTaggableObject displays in Stream, etc)"""
+    either CosinnusProject or CosinnusSociety. This works as intended, as often functions wish to explicitly get a set
+    of both of these (membership queries, BaseTaggableObject displays in Stream, etc)"""
 
     # list of all group slugs and the pk mapped to each slug
-    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs'  # portal_id, self.__class__.__name__  --> list ( slug (str), pk (int) )
+    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs'  # portal_id, self.__class__.__name__  --> list ( slug (str), pk (int) )  # noqa
     # list of all group pks and the slug mapped to each pk
     _GROUPS_PK_CACHE_KEY = (
         'cosinnus/core/portal/%d/group/%s/pks'  # portal_id, self.__class__.__name__   --> list ( pk (int), slug (str) )
@@ -176,7 +174,8 @@ class CosinnusGroupManager(models.Manager):
     _GROUP_CACHE_KEY = (
         'cosinnus/core/portal/%d/group/%s/%s'  # portal_id, self.__class__.__name__, slug   --> group (obj)
     )
-    # group slug to Model type cache, for when only a group slug is known but not the specific CosinnusGroup sub model type
+    # group slug to Model type cache, for when only a group slug is known but not the specific CosinnusGroup sub
+    # model type
     _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/portal/%d/group_slug_type/%s'  # portal_id, group_slug  --> type (int)
     # cache for the children ids of a cosinnus group
     _GROUP_CHILDREN_PK_CACHE_KEY = (
@@ -649,7 +648,8 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
     email_needs_verification = models.BooleanField(
         _('Emails Need Verification'),
         help_text=_(
-            'If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them.'
+            'If activated, newly registered users and users who change their email address will need to confirm their '
+            'email by clicking a link in a mail sent to them.'
         ),
         default=True,
     )
@@ -660,7 +660,11 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
     tos_date = models.DateTimeField(
         _('ToS Version'),
         default=datetime.datetime(1999, 1, 1, 13, 37, 0),
-        help_text='This is used to determine the date the newest ToS have been released, that users have acceppted. When a portal`s ToS update, set this to a newer date to have a popup come up for all users whose `settings.tos_accepted_date` is not after this date.',
+        help_text=(
+            'This is used to determine the date the newest ToS have been released, that users have acceppted. When a '
+            'portal`s ToS update, set this to a newer date to have a popup come up for all users whose '
+            '`settings.tos_accepted_date` is not after this date.'
+        ),
     )
 
     # css fields for custom portal styles
@@ -711,7 +715,9 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
         blank=True,
         null=True,
         help_text=_(
-            'For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended.'
+            'For old-style events meeting popups only! If entered, will enable Jitsi-like video conference '
+            'functionality across the site. Needs to be a URL up to the point where any random room name can be '
+            'appended.'
         ),
     )
 
@@ -720,7 +726,10 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
         verbose_name=_('Dynamic choice field choices'),
         blank=True,
         encoder=DjangoJSONEncoder,
-        help_text='A dict storage for all choice lists for the dynamic fields of type `DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`',
+        help_text=(
+            'A dict storage for all choice lists for the dynamic fields of type '
+            '`DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`'
+        ),
     )
 
     userprofile_default_description = models.TextField(
@@ -796,7 +805,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
         if settings.DEBUG:
             try:
                 os.makedirs(os.path.join(settings.STATIC_ROOT, 'css'))
-            except:
+            except Exception:
                 pass
         custom_css = render_to_string('cosinnus/css/portal_custom_styles.css', {'portal': self})
         css_path = os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)
@@ -898,7 +907,8 @@ class CosinnusBaseGroup(
     slug = models.SlugField(
         _('Slug'),
         help_text=_(
-            'Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'
+            'Be extremely careful when changing this slug manually! There can be many side-effects '
+            '(redirects breaking e.g.)!'
         ),
         max_length=50,
     )
@@ -967,7 +977,8 @@ class CosinnusBaseGroup(
         null=True,
         editable=settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED,
         help_text=_(
-            'Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)'
+            'Enter the date until group admins may make premium choices here (only if group/project and event BBB '
+            'rooms require a premium booking)'
         ),
     )
 
@@ -1055,7 +1066,10 @@ class CosinnusBaseGroup(
         blank=True,
         null=True,
         validators=[MaxLengthValidator(250)],
-        help_text='The literal groupfolder name. This is initially the same as the group id, but can differ later. Set before the groupfolder is created.',
+        help_text=(
+            'The literal groupfolder name. This is initially the same as the group id, but can differ later. '
+            'Set before the groupfolder is created.'
+        ),
     )
     nextcloud_groupfolder_id = models.PositiveIntegerField(
         _('Nextcloud Groupfolder ID'),
@@ -1068,7 +1082,10 @@ class CosinnusBaseGroup(
     # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(
         _('Is conference'),
-        help_text='Note: DEPRECATED, use group.type=2 now. Delete once all portals have been migrated and checked. If a group is marked as conference it is possible to auto-generate accounts for workshop participants',
+        help_text=(
+            'Note: DEPRECATED, use group.type=2 now. Delete once all portals have been migrated and checked. If a '
+            'group is marked as conference it is possible to auto-generate accounts for workshop participants'
+        ),
         default=False,
     )
 
@@ -1088,7 +1105,9 @@ class CosinnusBaseGroup(
     )
     is_premium_currently = models.BooleanField(
         _('Conference is currrently premium'),
-        help_text='Flag whether this is currently in premium mode because of a booking, changed automatically by the system.',
+        help_text=(
+            'Flag whether this is currently in premium mode because of a booking, changed automatically by the system.'
+        ),
         default=False,
         editable=False,
     )
@@ -1096,7 +1115,11 @@ class CosinnusBaseGroup(
     # note: this overrides `is_premium_currently` in all functionalities
     is_premium_permanently = models.BooleanField(
         _('Conference is permanently premium'),
-        help_text='If enabled, this will always be in premium mode, independent of any bookings. WARNING: changing this may (depending on the event/conference/portal settings) cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!',
+        help_text=(
+            'If enabled, this will always be in premium mode, independent of any bookings. WARNING: changing this may '
+            '(depending on the event/conference/portal settings) cause new meeting connections to use the new server, '
+            'even for ongoing meetings on the old server, essentially splitting a running meeting in two!'
+        ),
         default=False,
     )
 
@@ -1200,7 +1223,9 @@ class CosinnusBaseGroup(
                 group_id, portal_id = group_id_portal_id
                 if (
                     group_id != self.id
-                ):  # or portal_id != self.portal_id: # we had this earlier, but unmatching portals with same id is not a conflict!
+                    # or portal_id != self.portal_id
+                    # we had this earlier, but unmatching portals with same id is not a conflict!
+                ):
                     return True
             return False
 
@@ -1270,7 +1295,8 @@ class CosinnusBaseGroup(
             messages.info(
                 self.request,
                 _(
-                    'The URL for this team has changed. A redirect from all existing URLs has automatically been created!'
+                    'The URL for this team has changed. A redirect from all existing URLs has automatically been '
+                    'created!'
                 ),
             )
 
@@ -1483,7 +1509,10 @@ class CosinnusBaseGroup(
 
     @property
     def conference_members(self):
-        """Returns a User QS of *AUTO-INVITED* (!) conference member accounts of this group if it is a conference, an empty QS else"""
+        """
+        Returns a User QS of *AUTO-INVITED* (!) conference member accounts of this group if it is a conference,
+        an empty QS else
+        """
         from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
 
         if self.group_is_conference:
@@ -1581,7 +1610,8 @@ class CosinnusBaseGroup(
             keys.append(CosinnusGroupManager._GROUP_LOCATIONS_CACHE_KEY % (CosinnusPortal.get_current().id, group.id))
         cache.delete_many(keys)
 
-        # if this has been called on the model-ignorant CosinnusGroupManager, as a precaution, also run this for the sub-models
+        # if this has been called on the model-ignorant CosinnusGroupManager, as a precaution, also run this for the
+        # sub-models
         if self.objects.__class__.__name__ == CosinnusGroupManager.__name__:
             for url_key in group_model_registry:
                 group_class = group_model_registry.get(url_key)
@@ -1819,10 +1849,12 @@ class CosinnusBaseGroup(
         return None
 
     def get_children(self, for_parent_id=None):
+        """
+        Returns all CosinnusGroups that have this group as parent.
+        @param for_parent_id: If supplied, will get the children for another CosinnusGroup id instead of for this group
+        """
         from cosinnus.models.group_extra import CosinnusProject
 
-        """ Returns all CosinnusGroups that have this group as parent.
-            @param for_parent_id: If supplied, will get the children for another CosinnusGroup id instead of for this group """
         for_parent_id = for_parent_id or self.id
         children_cache_key = CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (
             CosinnusPortal.get_current().id,
@@ -1974,7 +2006,8 @@ class CosinnusGroupInviteToken(models.Model):
     token = models.SlugField(
         _('Token'),
         help_text=_(
-            'The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want.'
+            'The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. '
+            'Can contain letters and numbers, but no spaces, and can be as long or short as you want.'
         ),
         max_length=50,
         null=False,
@@ -2186,7 +2219,10 @@ class CosinnusPermanentRedirect(models.Model):
             import traceback
 
             logger.error(
-                'Prevented a bad redirect-loop from saving itself! Deleted the loop, but TODO: find the cause! Traceback in extra. ',
+                (
+                    'Prevented a bad redirect-loop from saving itself! Deleted the loop, but TODO: find the cause! '
+                    'Traceback in extra. '
+                ),
                 extra={'trace': traceback.format_exc()},
             )
             self.delete()
@@ -2218,9 +2254,6 @@ class CosinnusPermanentRedirect(models.Model):
         ):
             return False
         return True
-
-
-from osm_field.fields import LatitudeField, LongitudeField, OSMField
 
 
 class CosinnusLocation(models.Model):
@@ -2310,7 +2343,8 @@ class UserGroupGuestAccess(models.Model):
     token = models.SlugField(
         _('Token'),
         help_text=_(
-            'The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want.'
+            'The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. '
+            'Can contain letters and numbers, but no spaces, and can be as long or short as you want.'
         ),
         validators=[MinLengthValidator(6), MaxLengthValidator(50)],
         max_length=50,
@@ -2354,7 +2388,10 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
                     delete_guest_user(user, deactivate_only=True)
                 except Exception as e:
                     logger.error(
-                        'An error occured during user deletion after group guest access token deletion. Exception in extra',
+                        (
+                            'An error occured during user deletion after group guest access token deletion. Exception '
+                            'in extra'
+                        ),
                         extra={'exc': e},
                     )
 

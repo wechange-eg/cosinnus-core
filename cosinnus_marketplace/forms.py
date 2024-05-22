@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from builtins import object
 
 from django import forms
-from django.utils.translation import gettext_lazy as _
 
 from cosinnus.forms.attached_object import FormAttachableMixin
 from cosinnus.forms.group import GroupKwargModelFormMixin

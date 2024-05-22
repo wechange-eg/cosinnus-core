@@ -64,7 +64,8 @@ class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
         if objects.count() > 0:
             if objects.count() > 1:
                 logger.warn(
-                    'CosinnusUserImport: Accessed the import form with more than 1 import object of non-archived state present!'
+                    'CosinnusUserImport: Accessed the import form with more than 1 import object of non-archived state '
+                    'present!'
                 )
                 if settings.DEBUG:
                     raise Exception('Too many Import objects!')

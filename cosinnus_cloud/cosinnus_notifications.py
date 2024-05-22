@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import django.dispatch as dispatch
-from django.utils.translation import gettext_lazy as _
-
-""" Cosinnus:Notifications configuration file. 
+""" Cosinnus:Notifications configuration file.
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
 """
 
@@ -13,9 +10,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 """ Notification definitions.
-    These will be picked up by cosinnus_notfications automatically, as long as the 
+    These will be picked up by cosinnus_notfications automatically, as long as the
     variable 'notifications' is present in the module '<app_name>/cosinnus_notifications.py'.
-    
+
     Both the mail and subject template will be provided with the following context items:
         :receiver django.auth.User who receives the notification mail
         :sender django.auth.User whose action caused the notification to trigger
@@ -30,7 +27,7 @@ from django.utils.translation import gettext_lazy as _
         :notification_settings_url The URL to the cosinnus notification settings page.
         :site Current django site
         :protocol Current portocol, 'http' or 'https'
-        
-    
+
+
 """
 notifications = {}

@@ -8,7 +8,6 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.urls import reverse
-from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
@@ -68,7 +67,9 @@ class CosinnusReportedObject(models.Model):
         return None
 
     def get_target_model_name(self):
-        """This will return the correct specific cosinnus group model (instead of base group) if we are targeting a group"""
+        """
+        This will return the correct specific cosinnus group model (instead of base group) if we are targeting a group
+        """
         if (
             self.content_type.model == 'cosinnusgroup'
             or self.content_type.model == settings.COSINNUS_GROUP_OBJECT_MODEL.lower().split('.')[-1]
@@ -84,7 +85,7 @@ class CosinnusReportedObject(models.Model):
                 'admin:%s_%s_change' % (self.content_type.app_label, self.get_target_model_name()),
                 args=(self.target_object.id,),
             )
-        except:
+        except Exception:
             return ''
 
     def get_target_delete_url(self):
@@ -93,7 +94,7 @@ class CosinnusReportedObject(models.Model):
                 'admin:%s_%s_delete' % (self.content_type.app_label, self.get_target_model_name()),
                 args=(self.target_object.id,),
             )
-        except:
+        except Exception:
             return ''
 
 

@@ -108,5 +108,8 @@ class UserGuestAccessTest(TestCase):
         self.assertNotIn(
             guest_user,
             filter_active_users(User.objects.all()),
-            'a guest user is not listed as active portal user (important so they cannot be invited, messaged, log in on their own, etc)',
+            (
+                'a guest user is not listed as active portal user (important so they cannot be invited, messaged, log '
+                'in on their own, etc)'
+            ),
         )

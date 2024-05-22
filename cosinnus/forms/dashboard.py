@@ -3,8 +3,6 @@ from __future__ import unicode_literals
 
 import six
 from django import forms
-from django.forms.fields import ChoiceField
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.utils.urls import group_aware_reverse

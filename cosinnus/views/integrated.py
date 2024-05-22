@@ -4,12 +4,6 @@ from __future__ import unicode_literals
 import logging
 
 import requests
-
-from cosinnus.utils.urls import safe_redirect
-from cosinnus.utils.user import accept_user_tos_for_portal
-
-logger = logging.getLogger('cosinnus')
-
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
@@ -27,6 +21,10 @@ from django.views.decorators.debug import sensitive_post_parameters
 from cosinnus.forms.user import UserCreationForm
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.http import JSONResponse
+from cosinnus.utils.urls import safe_redirect
+from cosinnus.utils.user import accept_user_tos_for_portal
+
+logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
 
@@ -167,11 +165,17 @@ def create_user_integrated(request):
                 # as it would switch the user on the cosinnus side!)
             except USER_MODEL.DoesNotExist:
                 logger.error(
-                    'Cosinnus integration tried to retrieve a previously connected user, but user with username "%s" could not be found! Aborting user integration!'
+                    (
+                        'Cosinnus integration tried to retrieve a previously connected user, but user with username '
+                        '"%s" could not be found! Aborting user integration!'
+                    )
                     % existing_username
                 )
                 return HttpResponseBadRequest(
-                    'Cosinnus integration tried to retrieve a previously connected user, but user with username "%s" could not be found! Aborting user integration!'
+                    (
+                        'Cosinnus integration tried to retrieve a previously connected user, but user with username '
+                        '"%s" could not be found! Aborting user integration!'
+                    )
                     % existing_username
                 )
 

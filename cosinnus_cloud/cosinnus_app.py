@@ -27,6 +27,6 @@ def register():
     widget_registry.register('cloud', 'cosinnus_cloud.dashboard.Latest')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'cloud')
+    name = pgettext_lazy('the_app', 'cloud')  # noqa
 
     import cosinnus_cloud.hooks  # noqa

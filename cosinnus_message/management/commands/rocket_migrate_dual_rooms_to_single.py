@@ -32,12 +32,15 @@ class Command(BaseCommand):
         # sanity checks
         if len(settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS) > 1:
             self.stdout.write(
-                '*Aborting*: there seems to be more than one rocketchat channel configured in `COSINNUS_ROCKET_GROUP_ROOM_KEYS`. This migration can only be run to go from a dual-room ("general" and "news" as it was) to a single-room configuration.'
+                '*Aborting*: there seems to be more than one rocketchat channel configured in '
+                '`COSINNUS_ROCKET_GROUP_ROOM_KEYS`. This migration can only be run to go from a dual-room ("general" '
+                'and "news" as it was) to a single-room configuration.'
             )
             return
         if len(settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS) == 0:
             self.stdout.write(
-                '*Aborting*: there seems to be no rocketchat configured in `COSINNUS_ROCKET_GROUP_ROOM_KEYS`. This would archive *all* the rocketchat channels!'
+                '*Aborting*: there seems to be no rocketchat configured in `COSINNUS_ROCKET_GROUP_ROOM_KEYS`. This '
+                'would archive *all* the rocketchat channels!'
             )
             return
 
@@ -54,7 +57,8 @@ class Command(BaseCommand):
             for setting_key, setting_value in group.settings.items():
                 if setting_key.startswith(f'{PROFILE_SETTING_ROCKET_CHAT_ID}_'):
                     room_key = setting_key.replace(f'{PROFILE_SETTING_ROCKET_CHAT_ID}_', '', 1)
-                    # if the room key no longer exists in the settings, *archive* the room and remove the key from the settings
+                    # if the room key no longer exists in the settings, *archive* the room and remove the key from the
+                    # settings
                     if room_key not in settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS:
                         # go by direct room ids, because the room key is not configured any more
                         if not rocket.groups_archive(group, specific_room_ids=[setting_value]):
@@ -84,5 +88,6 @@ class Command(BaseCommand):
 
             count += 1
             self.stdout.write(
-                f'Processed group {count}/{total} ({errors} Errors) ("{group.slug}"): {"**Error!**" if error else ""} Delete channels: {deleted_keys}. Trigger rename: {renamed} '
+                f'Processed group {count}/{total} ({errors} Errors) ("{group.slug}"): {"**Error!**" if error else ""} '
+                f'Delete channels: {deleted_keys}. Trigger rename: {renamed} '
             )

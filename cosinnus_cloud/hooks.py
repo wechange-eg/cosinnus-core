@@ -186,7 +186,7 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
         counter += 1
 
     setattr(group, field, unique_name)
-    if save == True:
+    if save is True:
         group.save()
     return unique_name
 
@@ -330,7 +330,8 @@ if settings.COSINNUS_CLOUD_ENABLED:
 
     @receiver(signals.group_apps_deactivated)
     def group_cloud_app_deactivated_sub(sender, group, apps, **kwargs):
-        # note: cannot use `is_cloud_enabled_for_group(group)` here, as it would fail since the app is already deactivated
+        # note: cannot use `is_cloud_enabled_for_group(group)` here, as it would fail since the app is already
+        # deactivated
         if 'cosinnus_cloud' in apps and settings.COSINNUS_CLOUD_ENABLED:
             disable_group_folder_for_group(group)
 
@@ -344,7 +345,8 @@ if settings.COSINNUS_CLOUD_ENABLED:
                 and group.nextcloud_groupfolder_name
                 and group.nextcloud_groupfolder_id
             ):
-                # just softly generate a new folder name first, and see if it has to be changed (because of a group rename)
+                # just softly generate a new folder name first, and see if it has to be changed (because of a group
+                # rename)
                 old_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
                 generate_group_nextcloud_groupfolder_name(group, save=False, force_generate=True)
                 new_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
@@ -418,7 +420,8 @@ if settings.COSINNUS_CLOUD_ENABLED:
         """Trigger to completely delete a group folder when a group is deleted.
         We have CosinnusConference in here as backwards compatibility, because for some conferences,
         folders might have been created."""
-        # note: cannot use `is_cloud_enabled_for_group(group)` here, as it would fail since the app is already deactivated
+        # note: cannot use `is_cloud_enabled_for_group(group)` here, as it would fail since the app is already
+        # deactivated
         group = instance
         if group.nextcloud_group_id and group.nextcloud_groupfolder_id and group.nextcloud_groupfolder_name:
             extra = {

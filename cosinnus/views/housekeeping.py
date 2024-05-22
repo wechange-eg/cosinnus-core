@@ -10,7 +10,6 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from builtins import FileNotFoundError, range, str
-from operator import itemgetter
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -54,7 +53,6 @@ from cosinnus.utils.settings import get_obfuscated_settings_strings
 from cosinnus.utils.user import (
     accept_user_tos_for_portal,
     filter_active_users,
-    get_user_tos_accepted_date,
     is_user_active,
 )
 from cosinnus.views.profile import delete_userprofile
@@ -121,7 +119,10 @@ def delete_spam_users(request):
             delete_userprofile(user)
 
     if not request.GET.get('commit', False) == 'true':
-        ret = ' **********   THIS IS A FAKE DELETION ONLY! user param ?commit=true to really delete the users! ***********'
+        ret = (
+            ' **********   THIS IS A FAKE DELETION ONLY! user param ?commit=true to really delete the users! '
+            '***********'
+        )
 
     ret += '<br/><br/><br/>Deleted %d Users<br/><br/>' % deleted_user_count + user_csv
     return HttpResponse(ret)
@@ -180,7 +181,7 @@ def fillcache(request, number):
 
     try:
         number = int(number)
-    except:
+    except Exception:
         return HttpResponse('Argument given in URL must be a number!')
 
     content = ['XXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXx' for num in range(number)]
@@ -311,7 +312,8 @@ def user_statistics(request=None):
                             raise Found
         except Found:
             pass
-    # group_locs = CosinnusGroup.objects.filter(locations__gt=0).values_list('id', 'media_tag__location_lat', 'media_tag__location_lon')
+    # group_locs = CosinnusGroup.objects.filter(locations__gt=0).values_list(
+    #   'id', 'media_tag__location_lat', 'media_tag__location_lon')
 
     # user_locs_str = [str(x) for x in results]
     # group_locs_str = [str(y) for y in group_locs]
@@ -320,7 +322,10 @@ def user_statistics(request=None):
 
 
 def create_map_test_entities(request=None, count=1):
-    """Creates <count> CosinnusProjects, CosinnusSocieties, Users and Events (in the created group), all with random coordinates"""
+    """
+    Creates <count> CosinnusProjects, CosinnusSocieties, Users and Events (in the created group), all with random
+    coordinates
+    """
     if not settings.DEBUG or (request and not request.user.is_superuser):
         return HttpResponseForbidden('Not allowed. System needs to be in DEBUG mode and you need to be admin!')
 
@@ -412,9 +417,9 @@ def reset_user_tos_flags(request=None):
     if not request.GET.get('confirm', False) == '1':
         active_users = filter_active_users(get_user_model().objects.all())
         ret = (
-            "********** This will reset all %d active users' ToS accepted flag! Use param ?confirm=1 to delete the flags! ***********"
-            % active_users.count()
-        )
+            "********** This will reset all %d active users' ToS accepted flag! Use param ?confirm=1 to delete the "
+            'flags! ***********'
+        ) % active_users.count()
     else:
         count = 0
         active_users = filter_active_users(get_user_model().objects.all())
@@ -542,8 +547,8 @@ def print_settings(request):
     if not request:
         return setts
     return HttpResponse(
-        f'Portal {settings.COSINNUS_PORTAL_NAME} is running cosinnus version {settings.COSINNUS_VERSION}. Configured settings are:<br/><br/>'
-        + setts
+        f'Portal {settings.COSINNUS_PORTAL_NAME} is running cosinnus version {settings.COSINNUS_VERSION}. '
+        f'Configured settings are:<br/><br/>' + setts
     )
 
 
@@ -616,7 +621,7 @@ def newsletter_users(
     for user in users:
         if includeOptedOut or (
             check_user_can_receive_emails(user)
-            and user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True
+            and user.cosinnus_profile.settings.get('newsletter_opt_in', False) is True
         ):
             if never_logged_in_only or is_user_active(user):
                 row = [
@@ -671,7 +676,7 @@ def group_admin_emails(request, slugs):
     for membership in memberships:
         user = membership.user
         if check_user_can_receive_emails(user) and (
-            includeOptedOut or user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True
+            includeOptedOut or user.cosinnus_profile.settings.get('newsletter_opt_in', False) is True
         ):
             user_mails.append(user.email)
     user_mails = list(set(user_mails))

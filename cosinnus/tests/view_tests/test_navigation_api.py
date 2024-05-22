@@ -357,7 +357,7 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
 
     def test_alerts_mark_as_read(self):
         self.client.force_login(self.test_user)
-        alert = self.create_test_alert()
+        self.create_test_alert()
         response = self.client.get(self.api_url)
         self.assertTrue(response.data['items'][0]['is_emphasized'])
         response = self.client.get(self.api_url + '?mark_as_read=true')
@@ -398,7 +398,9 @@ class HelpViewTest(APITestCase):
 class LanguageMenuTestMixin:
     def expected_language_menu_item(self, expected_label='Change Language', expected_icon='fa-language'):
         if settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES:
-            languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
+            languages = filter(
+                lambda lang: lang[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES
+            )
         else:
             languages = settings.LANGUAGES
         expected_language_sub_items = []

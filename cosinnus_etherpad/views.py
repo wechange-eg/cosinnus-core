@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import sys
 from builtins import str
 from urllib.error import HTTPError, URLError
 
 import requests
-import six
 from django.core.exceptions import ImproperlyConfigured
 from django.http.response import Http404, HttpResponse
 from django.shortcuts import redirect
@@ -51,7 +49,7 @@ from cosinnus.views.mixins.tagged import (
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 from cosinnus_etherpad.conf import settings
 from cosinnus_etherpad.forms import EtherpadForm
-from cosinnus_etherpad.models import TYPE_ETHERCALC, Ethercalc, Etherpad, EtherpadNotSupportedByType
+from cosinnus_etherpad.models import TYPE_ETHERCALC, Etherpad, EtherpadNotSupportedByType
 from cosinnus_etherpad.utils.etherpad_client import EtherpadException
 
 if 'cosinnus_document' in settings.INSTALLED_APPS:
@@ -152,7 +150,8 @@ class EtherpadDetailView(RequireReadMixin, RecordLastVisitedMixin, FilterGroupMi
             messages.error(
                 self.request,
                 _(
-                    'The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!'
+                    'The document can not be accessed because the etherpad server could not be reached. Please contact '
+                    'an administrator!'
                 ),
             )
         except EtherpadNotSupportedByType:
@@ -288,7 +287,8 @@ class EtherpadHybridListView(
                 messages.error(
                     self.request,
                     _(
-                        'The document could not be created because the etherpad service is misconfigured. Please contact an administrator!'
+                        'The document could not be created because the etherpad service is misconfigured. Please '
+                        'contact an administrator!'
                     ),
                 )
                 return self.form_invalid(form)
@@ -300,7 +300,8 @@ class EtherpadHybridListView(
             messages.error(
                 self.request,
                 _(
-                    'The document could not be created because the etherpad server could not be reached. Please contact an administrator!'
+                    'The document could not be created because the etherpad server could not be reached. Please '
+                    'contact an administrator!'
                 ),
             )
             return self.form_invalid(form)
@@ -364,7 +365,8 @@ class EtherpadEditView(RequireWriteMixin, EtherpadFormMixin, AttachableViewMixin
             messages.error(
                 self.request,
                 _(
-                    'The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!'
+                    'The document can not be accessed because the etherpad server could not be reached. Please contact '
+                    'an administrator!'
                 ),
             )
         except EtherpadNotSupportedByType:
@@ -387,7 +389,7 @@ class EtherpadDeleteView(RequireWriteMixin, FilterGroupMixin, HierarchyDeleteMix
             # if possible, redirect to the object's parent folder list view
             parent_folder = self.object.__class__.objects.get(is_container=True, path=self.object.path)
             kwargs.update({'slug': parent_folder.slug})
-        except:
+        except Exception:
             pass
         return group_aware_reverse('cosinnus:etherpad:list', kwargs=kwargs)
 
@@ -418,7 +420,8 @@ class EthercalcDownloadBaseView(RequireReadMixin, FilterGroupMixin, DetailView):
             messages.error(
                 self.request,
                 _(
-                    'The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!'
+                    'The document can not be accessed because the etherpad server could not be reached. Please contact '
+                    'an administrator!'
                 ),
             )
             return redirect(

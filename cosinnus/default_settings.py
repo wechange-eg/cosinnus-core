@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# ruff: noqa: F841
 
 """
 Django settings for cosinnus projects.
@@ -18,12 +19,13 @@ import sys
 from os.path import dirname, join, realpath
 
 import environ
-from django.conf.global_settings import *
+from django.conf.global_settings import *  # noqa
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus import VERSION as COSINNUS_VERSION
 
-# `django.core.exceptions.ImproperlyConfigured: PASSWORD_RESET_TIMEOUT_DAYS/PASSWORD_RESET_TIMEOUT are mutually exclusive.`
+# `django.core.exceptions.ImproperlyConfigured:
+#   PASSWORD_RESET_TIMEOUT_DAYS/PASSWORD_RESET_TIMEOUT are mutually exclusive.`
 # because django.conf.global_settings is being imported directly to be able to modify pre-existing default values.
 # PASSWORD_RESET_TIMEOUT_DAYS is deprecated however and will be deleted in a future django version
 if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
@@ -545,7 +547,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
             extra={'bbb_str': bbb_str},
         )
         print(
-            f'Exception: Malformed PAYMENTS_ADDITIONAL_INVOICES_BACKENDS .env variable input! Exception: {e}. Input string was: {bbb_str}'
+            f'Exception: Malformed PAYMENTS_ADDITIONAL_INVOICES_BACKENDS .env variable input! Exception: {e}. '
+            f'Input string was: {bbb_str}'
         )
         PAYMENTS_INVOICE_BACKEND_AUTH_DATA = {}
         PAYMENTS_ADDITIONAL_INVOICES_BACKENDS = []
@@ -606,12 +609,12 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     WAGTAIL_ENABLE_UPDATE_CHECK = False
 
     """ Default non-cosinnus specific settings i.e. for third-party apps.
-        
+
         These *MUST* be imported in the settings.py of the app using cosinnus!
-    
+
         Unless you have a good reason and plan to implement replacement solutions
         you should probably leave these as they are.
-        
+
         For cosinnus-specific internal default settings, check cosinnus/conf.py!
     """
 
@@ -679,7 +682,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # default from-email:
     DEFAULT_FROM_EMAIL = COSINNUS_DEFAULT_FROM_EMAIL
 
-    # settings for email-dkim signing. you can follow this guide for creating a key https://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/ (point 2)
+    # settings for email-dkim signing. you can follow this guide for creating a key
+    # https://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/ (point 2)
     DKIM_DOMAIN = None  # e.g. 'example.com'
     DKIM_SELECTOR = None  # e.g. 'selector' if using selector._domainkey.example.com
     DKIM_PRIVATE_KEY = None  # full private key string, including """-----BEGIN RSA PRIVATE KEY-----""", etc
@@ -745,7 +749,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # these groups will accept members instantly after requesting membership
     COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS = NEWW_DEFAULT_USER_GROUPS
 
-    # the resident "Events" group for this portal. set this to thhe `NEWW_FORUM_GROUP_SLUG` if there isn't a seperate group!
+    # the resident "Events" group for this portal. set this to thhe `NEWW_FORUM_GROUP_SLUG` if there isn't a seperate
+    # group!
     NEWW_EVENTS_GROUP_SLUG = NEWW_FORUM_GROUP_SLUG
 
     # if enabled, group admins will see a "rearrange" button and can re-order the widgets.

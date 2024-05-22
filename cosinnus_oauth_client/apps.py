@@ -7,4 +7,4 @@ class CosinnusOauthClientAppConfig(AppConfig):
     verbose_name = 'Cosinnus Oauth Client'
 
     def ready(self):
-        from . import listeners
+        from . import listeners  # noqa

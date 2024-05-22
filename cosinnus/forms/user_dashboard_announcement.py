@@ -4,9 +4,7 @@ from __future__ import unicode_literals
 from builtins import object
 
 from django import forms
-from django.utils.translation import gettext_lazy as _
 
-from cosinnus.conf import settings
 from cosinnus.forms.group import AsssignPortalMixin
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement
@@ -33,9 +31,10 @@ class UserDashboardAnnouncementForm(AsssignPortalMixin, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UserDashboardAnnouncementForm, self).__init__(*args, **kwargs)
-        self.fields[
-            'text'
-        ].initial = '# Enter your\n# Big Headline here\n\nDear Community,\n\nExample text.\n\n## Secondary Headline\n\nMore text'
+        self.fields['text'].initial = (
+            '# Enter your\n# Big Headline here\n\nDear Community,\n\nExample text.\n\n## Secondary Headline\n\n'
+            'More text'
+        )
         self.fields['raw_html'].initial = """
 Paste your raw HTML here. Use one of these button codes as "Do not show this again"-Button:
 
@@ -45,7 +44,7 @@ Paste your raw HTML here. Use one of these button codes as "Do not show this aga
     <i class="fas fa-close"></i>
 </a>
 
-or 
+or
 
 <h2>
 <a class="pale-color pale-bold pale-with-highlight"

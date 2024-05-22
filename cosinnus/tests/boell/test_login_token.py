@@ -1,9 +1,6 @@
-import json
-
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied
 from django.shortcuts import reverse
-from django.test import Client, RequestFactory, TestCase, modify_settings, override_settings
+from django.test import Client, TestCase, modify_settings
 
 from cosinnus.models.profile import PROFILE_SETTING_PASSWORD_NOT_SET
 from cosinnus.utils.user import create_base_user

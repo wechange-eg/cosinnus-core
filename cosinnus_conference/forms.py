@@ -8,7 +8,6 @@ from django.template.defaultfilters import date
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django_select2.widgets import Select2MultipleWidget
-from uritemplate.api import variables
 
 from cosinnus.forms.translations import TranslatableFormsetInlineFormMixin
 from cosinnus.forms.widgets import SplitHiddenDateWidget
@@ -86,7 +85,7 @@ class ConferenceRemindersForm(forms.ModelForm):
                 required=False,
             )
             if kwargs.get('data', {}).get('send', None) == 'send_immediately':
-                self.fields['send_immediately_users'].required == True
+                self.fields['send_immediately_users'].required = True
 
     def get_initial_for_field(self, field, field_name):
         dynamic_fields = self.instance.dynamic_fields

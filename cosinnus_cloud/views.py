@@ -4,21 +4,16 @@ from __future__ import unicode_literals
 import logging
 import urllib.parse
 
-from django.core.exceptions import PermissionDenied
-from django.http.response import HttpResponseBadRequest, JsonResponse
-from django.template.loader import render_to_string
+from django.http.response import JsonResponse
 from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import RedirectView, TemplateView
-from django_select2.views import NO_ERR_RESP, Select2View
 from rest_framework.views import APIView
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.user_dashboard import DashboardItem
-from cosinnus.utils.permissions import check_ug_membership
-from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import RequireReadMixin
 from cosinnus.views.user_dashboard import BasePagedOffsetWidgetView
 from cosinnus_cloud.hooks import get_email_for_user, get_nc_user_id

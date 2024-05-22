@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from collections import defaultdict
 
-import six
 from django import forms
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _

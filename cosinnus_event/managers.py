@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from datetime import timedelta
 
-import pytz
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.db import models

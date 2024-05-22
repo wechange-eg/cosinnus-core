@@ -3,12 +3,10 @@ from __future__ import unicode_literals
 
 from collections import defaultdict
 
-from billiard.five import items
 from django.contrib import messages
 from django.contrib.auth.models import AnonymousUser
 from django.http.response import Http404, HttpResponseRedirect
 from django.template.loader import render_to_string
-from django.urls.base import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 

@@ -9,7 +9,6 @@ from importlib import import_module
 from threading import Thread
 
 import sentry_sdk
-import six
 from _collections import defaultdict
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
@@ -22,10 +21,9 @@ from django.templatetags.static import static
 from django.urls import reverse
 from django.utils import formats, timezone, translation
 from django.utils.encoding import force_str
-from django.utils.html import escape, strip_tags, urlize
+from django.utils.html import escape, strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.timezone import localtime
-from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
@@ -34,9 +32,8 @@ from cosinnus.core.registries.apps import app_registry
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import GlobalUserNotificationSetting
-from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
-from cosinnus.templatetags.cosinnus_tags import cosinnus_setting, full_name, textfield
-from cosinnus.utils.context_processors import cosinnus
+from cosinnus.models.tagged import BaseTaggableObjectModel
+from cosinnus.templatetags.cosinnus_tags import full_name, textfield
 from cosinnus.utils.files import get_image_url_for_icon
 from cosinnus.utils.functions import ensure_dict_keys, resolve_attributes
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
@@ -95,13 +92,14 @@ MULTI_NOTIFICATION_LABELS = {
 
 NOTIFICATION_REASONS = {
     'default': _(
-        'You are getting this notification because you are subscribed to these kinds of events in your project or group.'
+        'You are getting this notification because you are subscribed to these kinds of events in your project or '
+        'group.'
     ),
     'admin': _('You are getting this notification because you are an administrator of this project or group.'),
     'portal_admin': _('You are getting this notification because you are an administrator of this portal.'),
     'daily_digest': _('You are getting this email because you are subscribed to one or more daily notifications.'),
     'weekly_digest': _('You are getting this email because you are subscribed to one or more weekly notifications.'),
-    'moderator_alert': 'This is a Portal Moderator notification. Filter your mails using this token: PORTALMODERATORALERT.',  # this is untranslated so that moderators can filter their mails for it
+    'moderator_alert': 'This is a Portal Moderator notification. Filter your mails using this token: PORTALMODERATORALERT.',  # this is untranslated so that moderators can filter their mails for it # noqa
     'none': None,  # the entire lower section won't be shown
 }
 
@@ -201,10 +199,12 @@ NOTIFICATIONS_DEFAULTS = {
     # should the follow button be shown?
     'show_follow_button': False,
     # if set, an action button is shown with this label.
-    # mutually exclusive with like/follow buttons. its URL will be either data_attributes[action_button_url] if set, or origin url
+    # mutually exclusive with like/follow buttons. its URL will be either data_attributes[action_button_url] if set, or
+    # origin url
     'action_button_text': None,
     # if set, a grey, alternate looking action button is shown with this label.
-    # mutually exclusive with like/follow buttons. its URL will be either data_attributes[action_button_alternate_url] if set, or origin url
+    # mutually exclusive with like/follow buttons. its URL will be either data_attributes[action_button_alternate_url]
+    # if set, or origin url
     'action_button_alternate_text': None,
     # object attributes to fille the snippet template with.
     # these will be looked up on the object as attribute or functions with no params
@@ -216,10 +216,11 @@ NOTIFICATIONS_DEFAULTS = {
         'object_url': 'get_absolute_url',  # URL of the object
         'object_icon': 'get_icon',  # icon for the object, also sets 'object_icon_url'
         'object_text': None,  # further excerpt text of the object, for example for Event descriptions. if None: ignored
-        'image_url': None,  # image URL for the item. default if omitted is None. the user creator's avatar can be found under user_image_url
+        'image_url': None,  # image URL for the item. default if omitted is None. the user creator's avatar can be found under user_image_url  # noqa
         'alert_image_url': None,  # if given, prefers this image/icon for alerts
         'event_meta': None,  # a small addendum to the grey event text where object data like datetimes can be displayed
-        # TODO: in sub_object notifications, swap the `object_name` and `sub_object_text` and add a new `sub_object_icon`!
+        # TODO: in sub_object notifications, swap the `object_name` and `sub_object_text` and add a new
+        #   `sub_object_icon`!
         # TODO: `event_text` now has to contain %(sender_name)s
         # TODO: `notification_text` has been replaced by `topic`, but only show this if you want the intro section!
         # TODO: add `display_object_name: False` if the object name should not appear (usually for comments)
@@ -229,10 +230,11 @@ NOTIFICATIONS_DEFAULTS = {
         'sub_object_icon': None,  # icon for the sub object, also sets 'sub_object_icon_url'
         'like_button_url': 'get_absolute_like_url',  # url for the like button
         'follow_button_url': 'get_absolute_follow_url',  # url for the follow button
-        'action_button_url': None,  # url for the action button, if options['action_button_text'] is set. can also be hardcoded 'http*' url.
-        'action_button_alternate_url': None,  # same as `action_button_url`, only for the secondary, passivle looking button
+        'action_button_url': None,  # url for the action button, if options['action_button_text'] is set. can also be hardcoded 'http*' url. # noqa
+        'action_button_alternate_url': None,  # same as `action_button_url`, only for the secondary, passivle looking button # noqa
     },
-    # can be used to suffix the origin URL (group url for originating group) with parameters to take different actions when clicked
+    # can be used to suffix the origin URL (group url for originating group) with parameters to take different actions
+    # when clicked
     'origin_url_suffix': '',
 }
 
@@ -515,7 +517,8 @@ class NotificationsThread(Thread):
 
         # the first and foremost global check if we should ever send a mail at all
         #   as well as
-        # check if user receives an instant email notification of being invited to a group even if his/her notification settings say otherwise (never)
+        # check if user receives an instant email notification of being invited to a group even if his/her notification
+        # settings say otherwise (never)
         if not check_user_can_receive_emails(user) and not notification_invite_special:
             return False
         # anonymous authors count as YES, used for recruiting users
@@ -543,7 +546,8 @@ class NotificationsThread(Thread):
         ):
             return False
 
-        # check if user receives an instant email notification of being invited to a group even if his/her notification settings say otherwise (daily/ weekly)
+        # check if user receives an instant email notification of being invited to a group even if his/her notification
+        # settings say otherwise (daily/ weekly)
         if notification_invite_special:
             return True
 
@@ -568,7 +572,8 @@ class NotificationsThread(Thread):
             ):
                 return True
             else:
-                # we actually return False here, because this setting is on a different category than the other notifications
+                # we actually return False here, because this setting is on a different category than the other
+                # notifications
                 return False
 
         # global settings check, blanketing the finer grained checks
@@ -600,7 +605,8 @@ class NotificationsThread(Thread):
                 UserNotificationPreference.SETTING_WEEKLY,
             ],
         ):
-            # user wants all notifications for this group, but daily/weekly (the event itself will be saved into an object elsewhere)!
+            # user wants all notifications for this group, but daily/weekly (the event itself will be saved into an
+            # object elsewhere)!
             return False
         elif self.is_notification_active(
             notification_id,
@@ -611,7 +617,8 @@ class NotificationsThread(Thread):
                 UserNotificationPreference.SETTING_WEEKLY,
             ],
         ):
-            # user wants this notification for this group, but daily/weekly (the event itself will be saved into an object elsewhere)!
+            # user wants this notification for this group, but daily/weekly (the event itself will be saved into an
+            # object elsewhere)!
             return False
         else:
             # the individual setting for this notification type and group is in effect:
@@ -773,7 +780,7 @@ class NotificationsThread(Thread):
                     context.update({'object_name': self.obj.title})
                 try:
                     context.update({'object_url': self.obj.get_absolute_url()})
-                except:
+                except Exception:
                     pass
                 subject = render_to_string(subj_template, context)
 
@@ -795,7 +802,8 @@ class NotificationsThread(Thread):
                     'portal_name': portal_name,
                     'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL,
                 }
-                # Workaround: django 2.x does not support non-ascii chars in the from_email, so strip all non-ascii chars!
+                # Workaround: django 2.x does not support non-ascii chars in the from_email, so strip all non-ascii
+                # chars!
                 from_email = from_email.encode('ascii', errors='ignore').decode()
             send_mail_or_fail(receiver.email, subject, template, context, from_email=from_email, is_html=is_html)
 
@@ -834,8 +842,9 @@ class NotificationsThread(Thread):
             self.group = self.obj.group
         else:
             raise ImproperlyConfigured(
-                "A signal for a notification was received, but the supplied object's group could not be determined. \
-                If your object is not a CosinnusGroup or a BaseTaggableObject, you can fix this by patching a ``notification_target_group`` attribute onto it."
+                "A signal for a notification was received, but the supplied object's group could not be determined. "
+                'If your object is not a CosinnusGroup or a BaseTaggableObject, you can fix this by patching a '
+                '``notification_target_group`` attribute onto it.'
             )
 
         # we wrap the info in a (non-persisted) NotificationEvent to be compatible with the rendering method
@@ -876,7 +885,8 @@ class NotificationsThread(Thread):
                     self.send_instant_notification(notification_event, receiver)
                     self.already_emailed_user_emails.append(receiver.email)
 
-        # for moderatable notifications, also always mix in portal admins into audience, because they might be portal moderators
+        # for moderatable notifications, also always mix in portal admins into audience, because they might be portal
+        # moderators
         if self.options['moderatable_content']:
             portal_admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
             for admin in portal_admins:
@@ -890,7 +900,7 @@ class NotificationsThread(Thread):
             # create a new NotificationEvent that saves this event for digest re-generation
             # no need to worry about de-duplicating events here, the digest generation handles it
             content_type = ContentType.objects.get_for_model(self.obj.__class__)
-            notifevent = NotificationEvent.objects.create(
+            NotificationEvent.objects.create(
                 content_type=content_type,
                 object_id=self.obj.id,
                 group=self.group,
@@ -922,7 +932,10 @@ def render_digest_item_for_notification_event(
         # stub for missing notification for this digest
         if not options.get('is_html', False) and not only_compile_alert_data:
             logger.exception(
-                'Missing HTML snippet configuration for digest encountered for notification setting "%s". Skipping this notification type in this digest!'
+                (
+                    'Missing HTML snippet configuration for digest encountered for notification setting "%s". Skipping '
+                    'this notification type in this digest!'
+                )
                 % notification_event.notification_id
             )
             return ''
@@ -983,7 +996,8 @@ def render_digest_item_for_notification_event(
         # 2) TODO: i18n
 
         # on full-page item displays (where the main object isn't a subtexted item, like a comment),
-        # we display additional data for that item, if defined in the Model's `render_additional_notification_content_rows()`
+        # we display additional data for that item, if defined in the Model's
+        # `render_additional_notification_content_rows()`
         content_rows = []
         render_func = getattr(obj, 'render_additional_notification_content_rows', None)
         if callable(render_func):
@@ -1223,7 +1237,8 @@ def notification_receiver(sender, user, obj, audience, session_id=None, end_sess
         copy_options.update(kwargs['extra'])
         options = copy_options
 
-    # sanity check: only send to active users that have an email set (or is anonymous, so we can send emails to non-users)
+    # sanity check: only send to active users that have an email set (or is anonymous, so we can send emails to
+    # non-users)
     audience = [
         aud_user for aud_user in audience if ((aud_user.is_active or not aud_user.is_authenticated) and aud_user.email)
     ]

@@ -6,11 +6,8 @@ import random
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxLengthValidator
-from django.db.models.fields import BLANK_CHOICE_DASH
 from django.forms.models import ModelMultipleChoiceField
-from django.forms.widgets import CheckboxSelectMultiple
 from django.utils.translation import gettext_lazy as _
-from django.utils.translation import ngettext
 from django_select2.widgets import Select2MultipleWidget
 
 from cosinnus.forms.translations import TranslatedFieldsFormMixin
@@ -18,7 +15,6 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import CosinnusManagedTag
 from cosinnus.models.newsletter import GroupsNewsletter, Newsletter
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.user import create_base_user
 
 
 class UserWelcomeEmailForm(TranslatedFieldsFormMixin, forms.ModelForm):

@@ -7,7 +7,6 @@ from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.db.models import Q
-from django.http import HttpResponseForbidden
 from rest_framework.permissions import BasePermission, IsAdminUser
 
 from cosinnus.models import MEMBER_STATUS, MEMBERSHIP_ADMIN, MEMBERSHIP_PENDING
@@ -125,7 +124,8 @@ def check_object_read_access(obj, user):
 
 
 def check_object_write_access(obj, user, fields=None):
-    """Checks write permissions for either a CosinnusGroup and BaseTaggableObject or any object with a creator attribute.
+    """
+    Checks write permissions for either a CosinnusGroup and BaseTaggableObject or any object with a creator attribute.
     For CosinnusGroups, check if the user can edit/update/delete the group iself:
         returns ``True`` if the user is either admin, staff member or group admin
     For BaseTaggableObjects, check if the user can edit/update/delete the item iself:
@@ -325,7 +325,7 @@ def check_user_can_receive_emails(user, ignore_user_notification_settings=False)
             if not notification_setting_check:
                 return False
 
-        verified_check = (CosinnusPortal.get_current().email_needs_verification == False) or check_user_verified(user)
+        verified_check = (CosinnusPortal.get_current().email_needs_verification is False) or check_user_verified(user)
         return user.is_active and verified_check and not user.is_guest
 
 

@@ -358,7 +358,7 @@ class TestRequireReadAccessDecorator(TestCase):
 
         request.user = self.user
         with self.assertRaises(Http404):
-            response = self.view.as_view()(request, group='other-group')
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.pending
         with self.assertRaises(Http404):

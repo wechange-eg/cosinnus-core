@@ -6,10 +6,8 @@ from builtins import object
 
 from django import forms
 from django.forms.widgets import HiddenInput
-from django.urls.base import reverse
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
-from multiform.forms import InvalidArgument
 
 from cosinnus.conf import settings
 from cosinnus.fields import UserSelect2MultipleChoiceField
@@ -179,7 +177,9 @@ class _ConferenceEventBaseForm(_EventForm):
         # Disabled until we can figure out how to keep the kwargs getting passed to the MultiModelForm first
         # self.room = kwargs.pop('room')
         # if 'max_participants' in self.fields:
-        #    self.fields['max_participants'].validators = [MinValueValidator(2), MaxValueValidator(self.room.max_coffeetable_participants)]
+        #    self.fields['max_participants'].validators = [
+        #       MinValueValidator(2), MaxValueValidator(self.room.max_coffeetable_participants)
+        #    ]
 
     def after_save(self, obj):
         # again sync the bbb members so m2m changes are taken into account properly

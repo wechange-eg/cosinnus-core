@@ -4,13 +4,12 @@ from __future__ import unicode_literals
 import logging
 from builtins import object
 
-import six
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.http.response import Http404
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import TemplateView
 from django.views.generic.base import View

@@ -1,7 +1,7 @@
 import json
 import logging
 import urllib.parse
-from datetime import datetime, timedelta
+from datetime import datetime
 from importlib import import_module
 
 import requests

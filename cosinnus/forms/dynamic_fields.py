@@ -112,7 +112,8 @@ class _DynamicFieldsBaseFormMixin(object):
     # (passed in kwargs) if set to True, hidden dynamic fields will be shown, e.g. to display them to admins
     hidden_dynamic_fields_shown = False
 
-    # (passed in kwargs) if set to True, enable readonly dynamic fields will be enabled instead of disabled, e.g. to display them to admins
+    # (passed in kwargs) if set to True, enable readonly dynamic fields will be enabled instead of disabled, e.g. to
+    # display them to admins
     readonly_dynamic_fields_enabled = False
 
     def __init__(self, *args, **kwargs):
@@ -148,7 +149,8 @@ class _DynamicFieldsBaseFormMixin(object):
                 )
             if field_options.type not in EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS:
                 raise ImproperlyConfigured(
-                    f'DYNAMIC_FIELD_SETTINGS: {field_name}\'s "type" attribute was not found in {self.__class__.__name__}.EXTRA_FIELD_TYPE_FORMFIELDS!'
+                    f'DYNAMIC_FIELD_SETTINGS: {field_name}\'s "type" attribute was not found in '
+                    f'{self.__class__.__name__}.EXTRA_FIELD_TYPE_FORMFIELDS!'
                 )
             # filter by whether a given option is set
             if self.filter_included_fields_by_option_name and not getattr(

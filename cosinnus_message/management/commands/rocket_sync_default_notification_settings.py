@@ -4,9 +4,7 @@ from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.profile import PROFILE_SETTING_ROCKET_CHAT_USERNAME, GlobalUserNotificationSetting
-from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.user import filter_portal_users
 from cosinnus_message.rocket_chat import RocketChatConnection
@@ -45,7 +43,8 @@ class Command(BaseCommand):
         users = filter_portal_users(users)  # from this portal
         users = users.exclude(email__startswith='__unverified__')
         users = users.exclude(password__exact='').exclude(password=None)  # with a password
-        # note, we do include users with a real mail, but unverified flag, as their setting will be relevant once they verify
+        # note, we do include users with a real mail, but unverified flag, as their setting will be relevant once they #
+        # verify
         count = 0
         errors = 0
         total = len(users)

@@ -11,13 +11,12 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.http.request import QueryDict
-from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
-from django.views.generic.base import RedirectView, View
+from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
@@ -669,7 +668,8 @@ class TodoListDeleteView(AjaxableFormMixin, RequireWriteMixin, FilterGroupMixin,
             messages.error(
                 self.request,
                 _(
-                    'You cannot delete this folder because you do not have permission to delete one or more items it contains!'
+                    'You cannot delete this folder because you do not have permission to delete one or more items it '
+                    'contains!'
                 ),
             )
             return HttpResponseRedirect(todolist.get_absolute_url())

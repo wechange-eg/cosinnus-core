@@ -22,4 +22,4 @@ def register():
     # widget_registry.register('conference', 'cosinnus_conference.dashboard.Conference')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'conference')
+    name = pgettext_lazy('the_app', 'conference')  # noqa

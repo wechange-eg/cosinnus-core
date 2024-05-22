@@ -22,9 +22,10 @@ class StreamManagerMixin(object):
         """Returns all (still-lazy) querysets for models that will appear
         in the current stream. Only works for classes inheriting BaseTaggableObjectModel."""
         querysets = []
-        # [u'cosinnus_etherpad.Etherpad', u'cosinnus_event.Event', u'cosinnus_file.FileEntry', 'cosinnus_todo.TodoEntry']
+        # [u'cosinnus_etherpad.Etherpad', u'cosinnus_event.Event', u'cosinnus_file.FileEntry',
+        # 'cosinnus_todo.TodoEntry']
         for registered_model in aor:
-            Renderer = aor[registered_model]
+            Renderer = aor[registered_model]  # noqa
 
             # filter out unwanted model types if set in the Stream
             if stream and stream.models and registered_model not in stream.models.split(','):

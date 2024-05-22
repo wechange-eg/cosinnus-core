@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 import logging
 from builtins import object
-from collections import OrderedDict
 
 import six
 from annoying.functions import get_object_or_None
@@ -166,7 +165,10 @@ class CosinnusManagedTagAssignment(models.Model):
         settings.AUTH_USER_MODEL,
         related_name='managed_tag_assignments',
         blank=True,
-        help_text='A list of people who suggested making this assignment. Can be empty, and can beignored once `approved` is True.',
+        help_text=(
+            'A list of people who suggested making this assignment. Can be empty, and can beignored once `approved` '
+            'is True.'
+        ),
     )
     approved = models.BooleanField(verbose_name=_('Approved'), default=False)
     last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
@@ -181,13 +183,13 @@ class CosinnusManagedTagAssignment(models.Model):
 
     def __str__(self):
         return (
-            '<managed tag assignment: %(managed_tag)s, content_type: %(content_type)s, target_object_id: %(target_object_id)d>'
-            % {
-                'managed_tag': getattr(self, 'managed_tag', None),
-                'content_type': getattr(self, 'content_type', None),
-                'target_object_id': getattr(self, 'object_id', None),
-            }
-        )
+            '<managed tag assignment: %(managed_tag)s, content_type: %(content_type)s, '
+            'target_object_id: %(target_object_id)d>'
+        ) % {
+            'managed_tag': getattr(self, 'managed_tag', None),
+            'content_type': getattr(self, 'content_type', None),
+            'target_object_id': getattr(self, 'object_id', None),
+        }
 
     @classmethod
     def update_assignments_for_object(cls, obj, tag_slugs_to_assign=None):
@@ -316,7 +318,8 @@ class CosinnusManagedTag(models.Model):
     slug = models.SlugField(
         _('Slug'),
         help_text=_(
-            'Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'
+            'Be extremely careful when changing this slug manually! There can be many side-effects '
+            '(redirects breaking e.g.)!'
         ),
         max_length=250,
     )
@@ -442,7 +445,10 @@ class CosinnusManagedTag(models.Model):
         )
         if existing_tag or existing_tag_by_slug:
             logger.info(
-                '`create_managed_tag_and_paired_group` Did not create a new managed tag because an existing tag has the same name or slug',
+                (
+                    '`create_managed_tag_and_paired_group` Did not create a new managed tag because an existing tag '
+                    'has the same name or slug'
+                ),
                 extra={'new_tag_name': name},
             )
             return existing_tag or existing_tag_by_slug

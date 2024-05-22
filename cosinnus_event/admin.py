@@ -13,7 +13,7 @@ def restart_bbb_rooms(modeladmin, request, queryset):
         try:
             bbb_room = event.media_tag.bbb_room
             bbb_room.restart()
-        except:
+        except Exception:
             pass
 
 

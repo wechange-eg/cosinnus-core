@@ -3,15 +3,12 @@ from __future__ import unicode_literals
 
 import logging
 
-from django import forms
 from django.template.loader import render_to_string
 from django.urls.base import reverse
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.utils.dashboard import DashboardWidget
-from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
-from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
 from cosinnus_message.utils.utils import get_rocketchat_group_embed_url_for_user
 

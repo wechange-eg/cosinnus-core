@@ -13,7 +13,7 @@ from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
-from django.db.models.query_utils import Q
+from django.db.models import Q
 from django.http.response import HttpResponseBadRequest, HttpResponseForbidden, JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
@@ -22,11 +22,11 @@ from django.views.generic import TemplateView
 from django.views.generic.base import View
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
+from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
-from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.membership import MEMBER_STATUS
 from cosinnus.models.tagged import (
     BaseHierarchicalTaggableObjectModel,
     BaseTaggableObjectModel,
@@ -82,7 +82,7 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
                 from cosinnus_note.forms import NoteForm
 
                 note_form = NoteForm(group=forum_group)
-            except:
+            except Exception:
                 if settings.DEBUG:
                     raise
 
@@ -125,7 +125,7 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             ).values_list('event_id', flat=True)
             attending_events = Event.get_current_for_portal().filter(id__in=my_attendances_ids)
             attending_events = filter_tagged_object_queryset_for_user(attending_events, user)
-        except:
+        except Exception:
             if settings.DEBUG:
                 raise
         if attending_events:
@@ -419,7 +419,7 @@ class ModelRetrievalMixin(object):
                 ):
                     # if this portal cannot select the group visibility and the default is not visible, return no groups
                     if not settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN:
-                        if settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE == False:
+                        if settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE is False:
                             queryset = queryset.none()
                     else:
                         queryset = queryset.filter(publicly_visible=True)
@@ -544,12 +544,6 @@ class BasePagedOffsetWidgetView(BaseUserDashboardWidgetView):
         }
 
 
-from django.db.models import Q
-
-from cosinnus.models.group import CosinnusGroupMembership
-from cosinnus.models.membership import MEMBER_STATUS
-
-
 class TypedContentWidgetView(ModelRetrievalMixin, BasePagedOffsetWidgetView):
     """Shows BaseTaggable content for the user"""
 
@@ -582,7 +576,8 @@ class TypedContentWidgetView(ModelRetrievalMixin, BasePagedOffsetWidgetView):
                 content_type=ct, user=self.request.user, portal=CosinnusPortal.get_current()
             )
 
-            # filter data in the way it shows only those entries which are related to the current user via his/her `CosinnusGroupMembership`
+            # filter data in the way it shows only those entries which are related to the current user via his/her
+            # `CosinnusGroupMembership`
             if issubclass(
                 self.model, BaseTaggableObjectModel
             ):  # consider only those objects which have `group` FK-relation (i.e. not `messages`)

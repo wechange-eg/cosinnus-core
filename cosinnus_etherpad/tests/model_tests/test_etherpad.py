@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from builtins import str
 from uuid import uuid4
 
-import requests
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.test import TestCase

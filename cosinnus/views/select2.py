@@ -9,7 +9,6 @@ from django.http import Http404
 from django_select2 import NO_ERR_RESP, Select2View
 from taggit.models import Tag
 
-from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.profile import get_user_profile_model
@@ -17,7 +16,6 @@ from cosinnus.utils.group import get_cosinnus_group_model, prioritize_suggestion
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.user import filter_active_users, get_user_query_filter_for_search_terms, get_user_select2_pills
 from cosinnus.views.mixins.select2 import RequireGroupMember, RequireLoggedIn
-from cosinnus.views.user import UserSelect2View
 
 
 class GroupMembersView(RequireGroupMember, Select2View):

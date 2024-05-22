@@ -3,15 +3,13 @@ from __future__ import unicode_literals
 
 from annoying.functions import get_object_or_None
 from django.core.exceptions import ImproperlyConfigured
-from django.http.response import HttpResponse, HttpResponseBadRequest, HttpResponseServerError, JsonResponse
+from django.http.response import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
 from django.views.generic.base import View
 
 from cosinnus.forms.hierarchy import AddContainerForm
-from cosinnus.templatetags.cosinnus_tags import has_write_access
 from cosinnus.utils.permissions import check_object_write_access
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import FilterGroupMixin, RequireCreateObjectsInMixin, RequireWriteMixin

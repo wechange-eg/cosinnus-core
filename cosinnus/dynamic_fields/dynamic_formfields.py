@@ -169,7 +169,7 @@ class MultiAddressDynamicField(forms.Field):
         if self.form.is_bound:
             return self.to_python(value)
         # Sanity-check: make sure address dict is well-formed
-        if not value or type(value) is not dict or not ('current_address' in value and 'addresses' in value):
+        if not value or not isinstance(value, dict) or not ('current_address' in value and 'addresses' in value):
             value = {}
         return value
 
@@ -357,7 +357,8 @@ EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS = {
     dynamic_fields.DYNAMIC_FIELD_TYPE_URL: URLDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT: PredefinedChoicesTextDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT: AdminDefinedChoicesTextDynamicFieldFormFieldGenerator,
-    # (TODO: add managed-tag-dependent-filter!) a choice field of user id of a user list given by the managed tag chosen by admins
+    # (TODO: add managed-tag-dependent-filter!) a choice field of user id of a user list given by the managed tag chosen
+    #   by admins
     dynamic_fields.DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD: ManagedTagUserChoiceDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: FreeChoicesTextDynamicFieldFormFieldGenerator,
     # TODO: make this a custom field with value parsing and template

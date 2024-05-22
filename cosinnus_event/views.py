@@ -18,7 +18,6 @@ from django.core.exceptions import ImproperlyConfigured, PermissionDenied, Valid
 from django.http import HttpResponseNotAllowed, HttpResponseRedirect, JsonResponse
 from django.http.response import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
-from django.utils.encoding import force_str
 from django.utils.text import slugify
 from django.utils.timezone import localtime, now
 from django.utils.translation import gettext_lazy as _
@@ -30,7 +29,7 @@ from django.views.generic.list import ListView
 from django_ical.views import ICalFeed
 from extra_views import CreateWithInlinesView, FormSetView, InlineFormSetFactory, UpdateWithInlinesView
 
-from ajax_forms.ajax_forms import AjaxFormsCommentCreateViewMixin, AjaxFormsCreateViewMixin, AjaxFormsDeleteViewMixin
+from ajax_forms.ajax_forms import AjaxFormsCommentCreateViewMixin, AjaxFormsDeleteViewMixin
 from cosinnus.core.decorators.views import (
     dispatch_group_access,
     get_group_for_request,
@@ -1215,7 +1214,7 @@ def assign_attendance_view(request, group, slug):
     target_state = request.POST.get('target_state', None)
     try:
         target_state = int(target_state)
-    except:
+    except Exception:
         pass
     if target_state != -1 and target_state not in list(dict(EventAttendance.ATTENDANCE_STATES).keys()):
         target_state = None

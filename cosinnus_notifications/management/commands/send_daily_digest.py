@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import logging
 import traceback
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.utils.encoding import force_str
 
 from cosinnus.conf import settings

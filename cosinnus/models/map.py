@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 import datetime
-import json
 import re
 from copy import copy
 
@@ -10,11 +9,10 @@ import pytz
 from django.db.models import Q
 from django.template.defaultfilters import date as django_date_filter
 from django.template.defaultfilters import linebreaksbr
-from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import escape
-from django.utils.timezone import is_naive, now
+from django.utils.timezone import now
 from haystack.query import SearchQuerySet
 
 from cosinnus.conf import settings
@@ -158,7 +156,8 @@ class HaystackConferenceMapCard(HaystackMapCard):
         humanized_datetime_obj = HumanizedEventTimeObject(result.from_date, result.to_date)
         kwargs.update(
             {
-                'dataSlot1': humanized_datetime_obj.get_humanized_event_time_html(),  # time and date in a user-localized version
+                # time and date in a user-localized version
+                'dataSlot1': humanized_datetime_obj.get_humanized_event_time_html(),
                 'dataSlot2': result.participant_count,  # group member count
             }
         )
@@ -175,7 +174,8 @@ class HaystackEventMapCard(HaystackMapCard):
         humanized_datetime_obj = HumanizedEventTimeObject(result.from_date, result.to_date)
         kwargs.update(
             {
-                'dataSlot1': humanized_datetime_obj.get_humanized_event_time_html(),  # time and date in a user-localized version
+                # time and date in a user-localized version
+                'dataSlot1': humanized_datetime_obj.get_humanized_event_time_html(),
                 'dataSlot2': None,
             }
         )
@@ -187,7 +187,6 @@ class BaseMapResult(DictResult):
 
     fields = {
         'id': REQUIRED,
-        'type': REQUIRED,
         'title': REQUIRED,
         'slug': REQUIRED,
         'lat': None,
@@ -349,7 +348,8 @@ class DetailedMapResult(HaystackMapResult):
         )
         """
         if self.background_image_field:
-            kwargs['backgroundImageLargeUrl'] = self.prepare_background_image_large_url(getattr(obj, self.background_image_field))
+            kwargs['backgroundImageLargeUrl'] = self.prepare_background_image_large_url(
+                getattr(obj, self.background_image_field))
         """
 
         return super(DetailedMapResult, self).__init__(haystack_result, user=user, *args, **kwargs)
@@ -468,7 +468,8 @@ class DetailedConferenceMapResult(DetailedBaseGroupMapResult):
         humanized_datetime_obj = HumanizedEventTimeObject(haystack_result.from_date, haystack_result.to_date)
         kwargs.update(
             {
-                'time_html': humanized_datetime_obj.get_humanized_event_time_html(),  # time and date in a user-localized version
+                # time and date in a user-localized version
+                'time_html': humanized_datetime_obj.get_humanized_event_time_html(),
                 'participants_limit_count': haystack_result.participants_limit_count,
             }
         )
@@ -750,7 +751,7 @@ try:
             'events': DetailedEventResult,
         }
     )
-except:
+except Exception:
     Event = None
 
 if settings.COSINNUS_IDEAS_ENABLED:
@@ -789,7 +790,7 @@ try:
     # SEARCH_RESULT_DETAIL_TYPE_MAP.update({
     #    'pads': NYI,
     # })
-except:
+except Exception:
     Etherpad = None
 
 try:
@@ -808,7 +809,7 @@ try:
     # SEARCH_RESULT_DETAIL_TYPE_MAP.update({
     #    'pads': NYI,
     # })
-except:
+except Exception:
     FileEntry = None
 
 if not settings.COSINNUS_ROCKET_ENABLED and 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
@@ -828,7 +829,7 @@ if not settings.COSINNUS_ROCKET_ENABLED and 'cosinnus_message' not in settings.C
         # SEARCH_RESULT_DETAIL_TYPE_MAP.update({
         #    'messages': NYI,
         # })
-    except:
+    except Exception:
         Message = None
 
 try:
@@ -847,7 +848,7 @@ try:
     # SEARCH_RESULT_DETAIL_TYPE_MAP.update({
     #    'todos': NYI,
     # })
-except:
+except Exception:
     TodoEntry = None
 
 try:
@@ -866,7 +867,7 @@ try:
     # SEARCH_RESULT_DETAIL_TYPE_MAP.update({
     #    'polls': NYI,
     # })
-except:
+except Exception:
     Poll = None
 
 
@@ -886,7 +887,7 @@ try:
     # SEARCH_RESULT_DETAIL_TYPE_MAP.update({
     #    'notes': NYI,
     # })
-except:
+except Exception:
     Note = None
 
 
@@ -906,7 +907,7 @@ try:
     # SEARCH_RESULT_DETAIL_TYPE_MAP.update({
     #    'notes': NYI,
     # })
-except:
+except Exception:
     Offer = None
 
 

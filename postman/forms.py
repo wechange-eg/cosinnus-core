@@ -189,15 +189,15 @@ class BaseWriteForm(FormAttachableMixin, forms.ModelForm):
         # important to clear because forms are reused
         self.extra_instances = []
         for r in recipients:
-            # in a multiconversation reply, find the actual parent for this recipient's message object of the conversation
-            # (each recipient has their own thread, connected my a MultiConversation)
+            # in a multiconversation reply, find the actual parent for this recipient's message object of the
+            # conversation (each recipient has their own thread, connected my a MultiConversation)
             if multiconv and original_parent and not do_reply_single_copy:
                 # the parent is unambiguous, it is the message in the conversation's last level where either
                 # A) the recipient is the same (when this message goes to any participant but the last sender)
                 parent = get_object_or_None(Message, multi_conversation=multiconv, level=0, recipient=r)
                 if not parent:
-                    # B) or the message where the recipient was the current sender (when this message goes to the last sender)
-                    # we choose this one, because the last sender is sender of all messages on that level
+                    # B) or the message where the recipient was the current sender (when this message goes to the last
+                    # sender) we choose this one, because the last sender is sender of all messages on that level
                     parent = get_object_or_None(
                         Message, multi_conversation=multiconv, level=0, sender=r, recipient=sender
                     )
@@ -239,7 +239,8 @@ class BaseWriteForm(FormAttachableMixin, forms.ModelForm):
 
                 if self.instance.thread_id:
                     # in a multiconversation, for all messages but the first, the master_for_sender flag must be
-                    # on the message object that is being sent to the person that was sender of the first (thread) message object
+                    # on the message object that is being sent to the person that was sender of the first (thread)
+                    # message object
                     thread = Message.objects.get(
                         id=self.instance.thread_id
                     )  # need to refetch, since we only change the thread_id, the fk object is stale
@@ -249,9 +250,10 @@ class BaseWriteForm(FormAttachableMixin, forms.ModelForm):
                     self.instance.master_for_sender = is_master
                     is_master = False
 
-            m = super(BaseWriteForm, self).save()
+            m = super(BaseWriteForm, self).save()  # noqa
 
-            # save away a copied message to another recipient so we can access them all later (for adding attachable objects)
+            # save away a copied message to another recipient so we can access them all later (for adding attachable
+            # objects)
             self.extra_instances.append(copy(self.instance))
 
             if self.instance.is_rejected():

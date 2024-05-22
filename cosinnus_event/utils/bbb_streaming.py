@@ -33,7 +33,10 @@ def create_streamer_for_event(event):
         return
     if not event.enable_streaming or not event.stream_url or not event.stream_key:
         logger.error(
-            'BBB Streaming: Could not create a streamer for event because streaming was not enabled for it or stream url or key was missing!',
+            (
+                'BBB Streaming: Could not create a streamer for event because streaming was not enabled for it or '
+                'stream url or key was missing!'
+            ),
             extra={
                 'event_id': event.id,
             },
@@ -210,7 +213,7 @@ def trigger_streamer_status_changes(events=None):
             event.settings.get(SETTINGS_STREAMER_RUNNING, None)
             and event.settings.get(SETTINGS_STREAMER_ID, None)
             and (
-                event.enable_streaming == False
+                event.enable_streaming is False
                 or not event.streaming_allowed
                 or stop_delete_time <= now()
                 or now() <= start_time
@@ -227,7 +230,7 @@ def trigger_streamer_status_changes(events=None):
         # events which have streamer settings still will be stopped/deleted *even if* their `enable_streaming`
         # is set to false, so we can stop streams that have just had their streaming disabled but were still running
         if event.settings.get(SETTINGS_STREAMER_ID, None) and (
-            event.enable_streaming == False
+            event.enable_streaming is False
             or not event.streaming_allowed
             or stop_delete_time <= now()
             or now() <= create_time

@@ -30,8 +30,6 @@ from taggit.managers import TaggableManager
 from cosinnus import cosinnus_notifications
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry
-from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.utils.dates import timestamp_from_datetime
 from cosinnus.utils.functions import clean_single_line_text, unique_aware_slugify
@@ -100,7 +98,7 @@ class BaseTagObject(models.Model):
             VISIBILITY_ALL,
             (
                 _('Platform-wide (visible for all portal members)')
-                if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN == True
+                if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN is True
                 else _('Public (visible without login)')
             ),
         ),
@@ -469,7 +467,7 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         return '<tagged object {0} {1} (ID: {2})>'.format(self.__class__.__name__, self.title, self.pk)
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
         self.title = clean_single_line_text(self.title)
         if hasattr(self, '_media_tag_cache'):
@@ -701,7 +699,10 @@ class BaseTaggableObjectReflection(models.Model):
 
         if not check_group_create_objects_access(self.group, self.creator):
             logger.warn(
-                'Deleted a BaseTaggableObjectReflection after saving it for sanity - user did not have create objects permissions on the group!',
+                (
+                    'Deleted a BaseTaggableObjectReflection after saving it for sanity - user did not have create '
+                    'objects permissions on the group!'
+                ),
                 extra={'group': self.group, 'user': self.creator.id},
             )
             self.delete()

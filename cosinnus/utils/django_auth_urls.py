@@ -6,12 +6,10 @@
 from django.contrib.auth.views import (
     PasswordChangeDoneView,
     PasswordResetCompleteView,
-    PasswordResetConfirmView,
     PasswordResetDoneView,
 )
 from django.urls import include, path, re_path
 
-from cosinnus.forms.user import UserEmailLoginForm
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
 from cosinnus.views import common, integrated, sso, user
 from cosinnus.views.user import CosinnusPasswordResetConfirmView, SetInitialPasswordView

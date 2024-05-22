@@ -9,10 +9,7 @@ from uuid import uuid1, uuid4
 from annoying.functions import get_object_or_None
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login
-from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout as auth_logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.auth.views import PasswordChangeView, PasswordResetConfirmView, PasswordResetView
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
@@ -32,24 +29,17 @@ from django.shortcuts import redirect, render
 from django.template import loader
 from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
-from django.utils.timezone import now
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
-from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django_select2.views import NO_ERR_RESP, Select2View
 from honeypot.decorators import check_honeypot
-from two_factor.utils import default_device
-from two_factor.views.core import QRGeneratorView
-from two_factor.views.utils import class_view_decorator
 
 from cosinnus import cosinnus_notifications
 from cosinnus.conf import settings
@@ -59,10 +49,8 @@ from cosinnus.core.decorators.views import (
     redirect_to_error_page,
     redirect_to_not_logged_in,
     staff_required,
-    superuser_required,
 )
 from cosinnus.core.mail import (
-    MailThread,
     get_common_mail_context,
     send_html_mail_threaded,
     send_mail_or_fail,
@@ -102,7 +90,6 @@ from cosinnus.templatetags.cosinnus_tags import full_name, full_name_force, text
 from cosinnus.utils.functions import is_email_valid
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import (
     check_user_can_see_user,
     check_user_integrated_portal_member,
@@ -122,7 +109,6 @@ from cosinnus.utils.user import (
     get_user_query_filter_for_search_terms,
     get_user_select2_pills,
 )
-from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.views.mixins.group import EndlessPaginationMixin, RequireLoggedInMixin
 
 logger = logging.getLogger('cosinnus')
@@ -230,7 +216,8 @@ class SetInitialPasswordView(TemplateView):
             messages.warning(
                 request,
                 _(
-                    'You are already logged in. This function is only available to set up your account for the first time!'
+                    'You are already logged in. This function is only available to set up your account for the first '
+                    'time!'
                 ),
             )
             raise PermissionDenied()
@@ -248,7 +235,8 @@ class SetInitialPasswordView(TemplateView):
                 messages.success(
                     self.request,
                     _(
-                        'Your password was set successfully! You may now log in using your e-mail address and the password you just set.'
+                        'Your password was set successfully! You may now log in using your e-mail address and the '
+                        'password you just set.'
                     ),
                 )
 
@@ -261,11 +249,15 @@ class SetInitialPasswordView(TemplateView):
                     profile_needs_to_saved = True
                 except KeyError as e:
                     logger.error(
-                        'Error while deleting key %s from cosinnus_profile settings of user %s. This key is supposed to be present. Password was set anyway',
+                        (
+                            'Error while deleting key %s from cosinnus_profile settings of user %s. This key is '
+                            'supposed to be present. Password was set anyway'
+                        ),
                         extra={'exception': e, 'reason': str(e)},
                     )
 
-                # setting your password automatically validates your email, as you have received the mail to your address
+                # setting your password automatically validates your email, as you have received the mail to your
+                # address
                 if not profile.email_verified:
                     profile.email_verified = True
                     profile_needs_to_saved = True
@@ -302,10 +294,12 @@ class UserSignupTriggerEventsMixin(object):
 
     message_success = _('Your account "%(user)s" was registered successfully. Welcome to the community!')
     message_success_inactive = _(
-        'User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.'
+        'User "%(user)s" was registered successfully. The account will need to be approved before you can log in. '
+        'We will send an email to your address "%(email)s" when this happens.'
     )
     message_success_email_verification = _(
-        'Thank you for signing up and welcome to the platform! We sent an email to your address "%(email)s" - please click the link contained in it to verify your email address!'
+        'Thank you for signing up and welcome to the platform! We sent an email to your address "%(email)s" - please '
+        'click the link contained in it to verify your email address!'
     )
 
     def trigger_events_after_user_signup(self, user, request, skip_messages=False):
@@ -371,7 +365,9 @@ class UserSignupTriggerEventsMixin(object):
                         messages.warning(
                             request,
                             _(
-                                "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+                                'You need to verify your email before logging in. We have just sent you an email with '
+                                "a verifcation link. Please check your inbox, and if you haven't received an email, "
+                                'please check your spam folder.'
                             ),
                         )
                     do_login = False
@@ -412,7 +408,8 @@ class UserSignupTriggerEventsMixin(object):
                 messages.warning(
                     request,
                     _(
-                        'The invite token you have used does not exist. Please contact the responsible person to get a valid link!'
+                        'The invite token you have used does not exist. Please contact the responsible person to get '
+                        'a valid link!'
                     ),
                 )
             elif not invite.is_active:
@@ -429,7 +426,8 @@ class UserSignupTriggerEventsMixin(object):
                     messages.error(
                         request,
                         _(
-                            'There was an error while processing your invites. Some of your invites may not have been applied.'
+                            'There was an error while processing your invites. Some of your invites may not have been '
+                            'applied.'
                         ),
                     )
                 # also add a welcome-redirect to the first invite group for the user
@@ -636,7 +634,8 @@ class CosinnusGroupInviteTokenView(TemplateView):
             messages.error(
                 self.request,
                 _(
-                    'The invite token you have used does not exist. Please contact the responsible person to get a valid link!'
+                    'The invite token you have used does not exist. Please contact the responsible person to get a '
+                    'valid link!'
                 ),
             )
             return redirect('cosinnus:group-invite-token-enter')
@@ -654,7 +653,8 @@ class CosinnusGroupInviteTokenView(TemplateView):
                 messages.error(
                     request,
                     _(
-                        'There was an error while processing your invites. Some of your invites may not have been applied.'
+                        'There was an error while processing your invites. Some of your invites may not have been '
+                        'applied.'
                     ),
                 )
             return HttpResponseRedirect(redirect_url)
@@ -789,7 +789,8 @@ def approve_user(request, user_id):
     messages.success(
         request,
         _(
-            'Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site.'
+            'Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and '
+            'they can now log in to the site.'
         )
         % {'username': full_name_force(user), 'email': user.email},
     )
@@ -816,7 +817,8 @@ def deny_user(request, user_id):
         messages.warning(
             request,
             _(
-                'The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface.'
+                'The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! '
+                'If this is a problem, you may want to deactivate the user manually from the admin interface.'
             )
             % {'username': full_name_force(user), 'email': user.email},
         )
@@ -845,7 +847,10 @@ def deny_user(request, user_id):
 
 
 def verifiy_user_email(request, email_verification_param):
-    """Verify an email by comparing a token sent only to this email with the one saved in the user profile during registration (or email change)"""
+    """
+    Verify an email by comparing a token sent only to this email with the one saved in the user profile during
+    registration (or email change)
+    """
     redirect_url = reverse('cosinnus:profile-detail')
     user_id, token = email_verification_param.split('-', 1)
 
@@ -859,7 +864,8 @@ def verifiy_user_email(request, email_verification_param):
         messages.error(
             request,
             _(
-                'The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired.'
+                'The user account you were looking for does not exist! Your registration was probably already denied '
+                'or the email token has expired.'
             ),
         )
         return redirect(redirect_url)
@@ -873,7 +879,8 @@ def verifiy_user_email(request, email_verification_param):
         messages.error(
             request,
             _(
-                'The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!'
+                'The email you are trying to verify belongs to a different user account than the one you are logged in '
+                'with! Please log out before clicking the verification link again!'
             ),
         )
         if user_was_verified_before:
@@ -918,7 +925,8 @@ def verifiy_user_email(request, email_verification_param):
             # else, welcome the user
             _send_user_welcome_email_if_enabled(user)
         if not request.user.is_authenticated and settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
-            # if the v3 frontend is enabled, as a temporary solution do not log in the user directly, but redirect to the verified page instead
+            # if the v3 frontend is enabled, as a temporary solution do not log in the user directly, but redirect to
+            # the verified page instead
             if settings.COSINNUS_V3_FRONTEND_ENABLED:
                 return redirect(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE)
             # log the user in for portals that require a verification first
@@ -929,7 +937,9 @@ def verifiy_user_email(request, email_verification_param):
         messages.success(
             request,
             _(
-                'Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!'
+                'Your email address %(email)s was successfully confirmed! However, you account is not active yet and '
+                'will have to be approved by an administrator before you can log in. We will send you an email as soon '
+                'as that happens!'
             )
             % {'email': user.email},
         )
@@ -1148,7 +1158,8 @@ def send_user_email_to_verify(user, new_email, request=None, user_has_just_regis
         text += (
             str(
                 _(
-                    'Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):'
+                    'Please verify your email address by clicking on the following link (or copy and paste the link it '
+                    'in your browser):'
                 )
                 % data
             )
@@ -1161,7 +1172,8 @@ def send_user_email_to_verify(user, new_email, request=None, user_has_just_regis
         text += (
             str(
                 _(
-                    'If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!'
+                    'If you did not sign up for an account you may ignore this email. You can also click the '
+                    'unsubscrible link on the bottom of this email to never receive mails from us again!'
                 )
                 % data
             )
@@ -1268,7 +1280,8 @@ def add_email_to_blacklist(request, email, token):
     messages.success(
         request,
         _(
-            'We have unsubscribed your email "%(email)s" from our mailing list. You will not receive any more emails from us!'
+            'We have unsubscribed your email "%(email)s" from our mailing list. You will not receive any more emails '
+            'from us!'
         )
         % {'email': email},
     )
@@ -1387,10 +1400,15 @@ class UserSelect2View(Select2View):
         ]
 
         # these result sets are what select2 uses to build the choice list
-        # results = [("user:" + six.text_type(user.id), render_to_string('cosinnus/common/user_select_pill.html', {'type':'user','text':escape(user.first_name) + " " + escape(user.last_name), 'user': user}),)
-        #           for user in users]
-        # results.extend([("group:" + six.text_type(group.id), render_to_string('cosinnus/common/user_select_pill.html', {'type':'group','text':escape(group.name)}),)
-        #               for group in groups])
+        # results = [
+        #   ("user:" + six.text_type(user.id), render_to_string(
+        #       'cosinnus/common/user_select_pill.html',
+        #       {'type':'user','text':escape(user.first_name) + " " + escape(user.last_name), 'user': user}),)
+        #   for user in users]
+        # results.extend(
+        #   [("group:" + six.text_type(group.id),
+        #       render_to_string('cosinnus/common/user_select_pill.html', {'type':'group','text':escape(group.name)}),)
+        #   for group in groups])
 
         # sort results
         users = sorted(users, key=lambda useritem: full_name(useritem).lower())
@@ -1559,15 +1577,20 @@ def convert_email_group_invites(sender, profile, **kwargs):
                     other_invites.append(invite.group.id)
             # trigger translation indexing
             _(
-                'Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!'
+                'Welcome! You were invited to the following projects and groups. Please click the dropdown button to '
+                'accept or decline the invitation for each of them!'
             )
-            msg = 'Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!'
+            msg = (
+                'Welcome! You were invited to the following projects and groups. Please click the dropdown button to '
+                'accept or decline the invitation for each of them!'
+            )
             # create a user-settings-entry
             if other_invites:
                 profile.settings['group_recruits'] = other_invites
             profile.add_redirect_on_next_page(reverse('cosinnus:invitations'), msg)
-            # we actually do not delete the invites here yet, for many reasons such as re-registers when email verification didn't work
-            # the invites will be deleted upon first login using the `user_logged_in_first_time` signal
+            # we actually do not delete the invites here yet, for many reasons such as re-registers when email
+            # verification didn't work the invites will be deleted upon first login using the
+            # `user_logged_in_first_time` signal
 
 
 @receiver(userprofile_created)

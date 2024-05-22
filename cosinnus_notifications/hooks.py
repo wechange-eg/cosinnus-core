@@ -7,7 +7,7 @@ from django.dispatch.dispatcher import receiver
 from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus_notifications.models import UserNotificationPreference
-from cosinnus_notifications.notifications import ALL_NOTIFICATIONS_ID, NO_NOTIFICATIONS_ID
+from cosinnus_notifications.notifications import ALL_NOTIFICATIONS_ID
 
 
 @receiver(signals.user_joined_group)

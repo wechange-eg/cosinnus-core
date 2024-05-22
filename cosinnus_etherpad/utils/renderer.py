@@ -12,7 +12,6 @@ from django.shortcuts import render
 from cosinnus.utils.renderer import BaseRenderer
 from cosinnus.views.mixins.hierarchy import HierarchicalListCreateViewMixin
 from cosinnus_etherpad.models import Etherpad
-from cosinnus_etherpad.views import list_view
 
 
 class EtherpadRenderer(HierarchicalListCreateViewMixin, BaseRenderer):

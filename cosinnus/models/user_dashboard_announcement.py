@@ -12,7 +12,6 @@ from django.utils.translation import gettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.mixins.images import ThumbnailableImageMixin
-from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.files import get_user_dashboard_announcement_image_filename
 from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.urls import get_domain_for_portal
@@ -91,7 +90,8 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
     slug = models.SlugField(
         _('Slug'),
         help_text=_(
-            'Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'
+            'Be extremely careful when changing this slug manually! There can be many side-effects '
+            '(redirects breaking e.g.)!'
         ),
         max_length=50,
     )

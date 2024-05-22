@@ -18,8 +18,7 @@ from django.urls.base import reverse
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
-from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.functions import resolve_class
 
 logger = logging.getLogger('cosinnus')
@@ -28,7 +27,7 @@ logger = logging.getLogger('cosinnus')
 # this reads the environment and inits the right locale
 try:
     locale.setlocale(locale.LC_ALL, ('de_DE', 'utf8'))
-except:
+except Exception:
     locale.setlocale(locale.LC_ALL, '')
 
 
@@ -170,7 +169,8 @@ class CosinnusUserImport(models.Model):
         return cache.get(self.IMPORT_PROGRESS_CACHE_KEY % CosinnusPortal.get_current().id)
 
     def save(self, *args, **kwargs):
-        # sanity check: if the to-be-saved state isn't STATE_ARCHIVED, make sure no other import exists that isn't archived
+        # sanity check: if the to-be-saved state isn't STATE_ARCHIVED, make sure no other import exists that isn't
+        # archived
         if self.state != CosinnusUserImport.STATE_ARCHIVED:
             created = bool(self.pk is None)
             existing_imports = CosinnusUserImport.objects.exclude(state=CosinnusUserImport.STATE_ARCHIVED)
@@ -178,7 +178,8 @@ class CosinnusUserImport(models.Model):
                 existing_imports = existing_imports.exclude(id=self.id)
             if existing_imports.count() > 0:
                 raise Exception(
-                    'CosinnusUserImport: Could not save import object because state check failed: there is another import that is not archived.'
+                    'CosinnusUserImport: Could not save import object because state check failed: there is another '
+                    'import that is not archived.'
                 )
         super(CosinnusUserImport, self).save(*args, **kwargs)
 
@@ -305,7 +306,8 @@ class CosinnusUserImportProcessorBase(object):
                             user_import_item.import_report_html = (
                                 CosinnusUserImportReportItems(
                                     _(
-                                        'Import for a user item has failed, cancelling the import process! TODO: has data been written?'
+                                        'Import for a user item has failed, cancelling the import process! '
+                                        'TODO: has data been written?'
                                     ),
                                     'error',
                                 ).to_string()
@@ -343,7 +345,8 @@ class CosinnusUserImportProcessorBase(object):
                 # this means the dry-run finished properly and DB transactions have been rolled back
                 pass
             else:
-                # if this outside exception happens, the import will be declared as "no data has been imported" and the errors will be shown
+                # if this outside exception happens, the import will be declared as "no data has been imported" and the
+                # errors will be shown
                 logger.error(
                     f'User Import: Critical failure during import (dry-run: {dry_run})', extra={'exception': e}
                 )
@@ -355,7 +358,8 @@ class CosinnusUserImportProcessorBase(object):
                 user_import_item.import_report_html = (
                     CosinnusUserImportReportItems(
                         _(
-                            'An unexpected system error has occured while processing the data. This should not have happened. Please contact the support! Technical Details follow:'
+                            'An unexpected system error has occured while processing the data. This should not have '
+                            'happened. Please contact the support! Technical Details follow:'
                         ),
                         'error',
                     ).to_string()
@@ -385,7 +389,8 @@ class CosinnusUserImportProcessorBase(object):
     def _do_single_user_import(self, item_data, user_import_item, dry_run=True):
         """Main import function for a single user data object.
         During this, user_item_reports should be accrued for the item
-        @param item_data: A dict object containing keys corresponding to `KNOWN_CSV_IMPORT_COLUMNS_HEADERS` and the row data for one user
+        @param item_data: A dict object containing keys corresponding to `KNOWN_CSV_IMPORT_COLUMNS_HEADERS` and the row
+            data for one user
         @return: A django.auth.User object if successful, None if not"""
         check_valid = self._import_check_user_contraints_valid(item_data, user_import_item, dry_run=dry_run)
         if not check_valid:

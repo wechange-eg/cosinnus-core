@@ -8,7 +8,7 @@ from annoying.functions import get_object_or_None
 from bs4 import BeautifulSoup
 from django.apps import apps
 from django.contrib import messages
-from django.contrib.auth import get_user_model, logout
+from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
@@ -53,12 +53,12 @@ index = IndexView.as_view()
 """
 class PermissionDeniedView(TemplateView):
     template_name = '403.html'
-    
+
 view_403 = PermissionDeniedView.as_view()
 
 class NotFoundView(TemplateView):
     template_name = '404.html'
-    
+
 view_404 = NotFoundView.as_view()
 """
 
@@ -147,10 +147,12 @@ class LoginViewAdditionalLogicMixin(object):
             send_user_email_to_verify(user, user.email, self.request)
             msg = _('New verification email sent!')
             msg += '\n\n' + _(
-                "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+                'You need to verify your email before logging in. We have just sent you an email with a verifcation '
+                "link. Please check your inbox, and if you haven't received an email, please check your spam folder."
             )
             msg += '\n\n' + _(
-                'We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email.'
+                'We have just now sent another email with a new verification link to you. If the email still has not '
+                'arrived, you may log in again to receive yet another new email.'
             )
             return msg
         return None
@@ -239,7 +241,7 @@ def cosinnus_logout(request, **kwargs):
     context.update(
         {
             'user_was_guest': was_guest,
-            'run_logout_scripts': was_guest == False
+            'run_logout_scripts': was_guest is False
             and (settings.COSINNUS_V3_FRONTEND_ENABLED or settings.COSINNUS_CLOUD_ENABLED),
             'next_redirect_url': next_redirect_url,
         }
@@ -480,7 +482,7 @@ def get_metadata_from_url(request):
     error = None
     try:
         response = requests.get(url)
-    except:
+    except Exception:
         error = 'Error fetching URL'
 
     title = ''

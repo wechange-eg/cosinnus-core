@@ -11,28 +11,24 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DeleteView, DetailView, FormView, UpdateView
+from django.views.generic import DeleteView, DetailView, FormView
 from django_select2 import NO_ERR_RESP, Select2View
 
 from cosinnus.core import signals
 from cosinnus.forms.group import MultiGroupSelectForm
 from cosinnus.models import CosinnusPortal, force_str, group_aware_reverse
-from cosinnus.models.group_extra import ensure_group_type
 from cosinnus.models.membership import (
     MEMBER_STATUS,
-    MEMBERSHIP_ADMIN,
     MEMBERSHIP_INVITED_PENDING,
     MEMBERSHIP_MEMBER,
     MEMBERSHIP_PENDING,
 )
 from cosinnus.utils.group import get_cosinnus_group_model, get_group_query_filter_for_search_terms
-from cosinnus.utils.permissions import check_object_read_access, check_user_superuser
+from cosinnus.utils.permissions import check_object_read_access
 from cosinnus.utils.user import get_group_select2_pills
-from cosinnus.views.group import SamePortalGroupMixin
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 from cosinnus_organization.forms import CosinnusOrganizationGroupForm
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationGroup
-from cosinnus_organization.utils import get_organization_select2_pills
 
 logger = logging.getLogger('cosinnus')
 

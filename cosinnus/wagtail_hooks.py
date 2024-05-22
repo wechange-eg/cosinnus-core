@@ -45,8 +45,8 @@ def enable_source():
           registerHalloPlugin('hallojustify');
           registerHalloPlugin('hallohtml');
           // replaces non-existant HTML button icon
-          $('body').on('halloactivated', function(){{ 
-              $('.icon-list-alt').addClass('icon-code').removeClass('icon-list-alt'); 
+          $('body').on('halloactivated', function(){{
+              $('.icon-list-alt').addClass('icon-code').removeClass('icon-list-alt');
           }});
         </script>
         """
@@ -144,7 +144,8 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                     messages.error(
                         request,
                         dotrans_(
-                            'You uploaded a CSV file for both projects/groups AND users! Please only upload one file to import at a time!'
+                            'You uploaded a CSV file for both projects/groups AND users! Please only upload one file '
+                            'to import at a time!'
                         ),
                     )
                 elif not (csv_file_groups or csv_file_users):
@@ -160,7 +161,7 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                     delimiter = str(delimiter)[0]
 
                     try:
-                        debug = csv_import_projects(
+                        debug = csv_import_projects(  # noqa
                             csv_file, request=request, encoding=encoding, delimiter=delimiter, import_type=import_type
                         )
                         messages.success(
@@ -181,7 +182,10 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                         messages.error(
                             request,
                             dotrans_(
-                                'The CSV file you supplied was empty or not formatted in the proper encoding (%(encoding)s) or with a wrong delimiter (%(delimiter)s)!'
+                                (
+                                    'The CSV file you supplied was empty or not formatted in the proper encoding '
+                                    '(%(encoding)s) or with a wrong delimiter (%(delimiter)s)!'
+                                )
                                 % {'encoding': encoding, 'delimiter': delimiter}
                             ),
                         )
@@ -189,7 +193,11 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                         messages.error(
                             request,
                             dotrans_(
-                                'One or more rows in the CSV file you supplied contained less columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.'
+                                (
+                                    'One or more rows in the CSV file you supplied contained less columns than '
+                                    'expected (%s)! Either the file was read in a wrong encoding, or the file was '
+                                    'using a different format than the server expected.'
+                                )
                                 % str(e)
                             ),
                         )
@@ -208,7 +216,8 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                         messages.error(
                             request,
                             dotrans_(
-                                'There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!'
+                                'There was an unexpected error when reading the CSV file! Please make sure the file is '
+                                'properly formatted. If the problem persists, please contact an administrator!'
                             ),
                         )
                         logger.warn(

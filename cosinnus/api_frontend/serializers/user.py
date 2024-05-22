@@ -18,13 +18,12 @@ from cosinnus.api_frontend.handlers.error_codes import (
     ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN,
     ERROR_SIGNUP_EMAIL_IN_USE,
     ERROR_SIGNUP_NAME_NOT_ACCEPTABLE,
-    ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED,
 )
 from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusUserDynamicFieldsSerializerMixin
 from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, UserSignupFinalizeMixin
-from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.profile import PROFILE_DYNAMIC_FIELDS_CONTACTS, PROFILE_SETTINGS_AVATAR_COLOR
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.functions import is_number
@@ -44,7 +43,11 @@ class CosinnusUserLoginSerializer(serializers.Serializer):
     # but is actually used by the `LoginView` directly from request data
     next = serializers.CharField(
         required=False,
-        help_text='Next URL parameter, that should be passed through if the user has arrived on the login page with a next param. Depending on the state of the user account, the login endpoint may return this parameter value or a different redirect URL as `next` in its response.',
+        help_text=(
+            'Next URL parameter, that should be passed through if the user has arrived on the login page with a next '
+            'param. Depending on the state of the user account, the login endpoint may return this parameter value or '
+            'a different redirect URL as `next` in its response.'
+        ),
     )
 
     def validate(self, attrs):
@@ -114,7 +117,10 @@ class CosinnusUserSignupSerializer(
                     'details': captcha_response.json(),
                 }
                 logger.error(
-                    'User Signup could not be completed because hCaptcha could not be verified at the provider, response was not 200.',
+                    (
+                        'User Signup could not be completed because hCaptcha could not be verified at the provider, '
+                        'response was not 200.'
+                    ),
                     extra=extra,
                 )
                 raise ValidationError(ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN)
@@ -189,7 +195,8 @@ def validate_contact_info_pairs(pairs_array):
         for pair_dict in pairs_array:
             if 'type' not in pair_dict or 'value' not in pair_dict:
                 raise ValidationError(
-                    f'Could not parse malformed contact_info! A pair ({str(pair_dict)}) did not contain "type" or "value"!'
+                    f'Could not parse malformed contact_info! A pair ({str(pair_dict)}) did not contain "type" or '
+                    f'"value"!'
                 )
             if not pair_dict['type'] or pair_dict['type'].lower() not in ACCEPTABLE_TYPES:
                 raise ValidationError(
@@ -265,13 +272,19 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         source='cosinnus_profile.media_tag.location_lat',
         required=False,
         default=None,
-        help_text='If not supplied, but `location` is supplied, this will be determined automatically via nominatim from the string in `location`. If supplied, will only be saved if `location` is also supplied.',
+        help_text=(
+            'If not supplied, but `location` is supplied, this will be determined automatically via nominatim from the '
+            'string in `location`. If supplied, will only be saved if `location` is also supplied.'
+        ),
     )
     location_lon = serializers.FloatField(
         source='cosinnus_profile.media_tag.location_lon',
         required=False,
         default=None,
-        help_text='If not supplied, but `location` is supplied, this will be determined automatically via nominatim from the string in `location`. If supplied, will only be saved if `location` is also supplied.',
+        help_text=(
+            'If not supplied, but `location` is supplied, this will be determined automatically via nominatim from the '
+            'string in `location`. If supplied, will only be saved if `location` is also supplied.'
+        ),
     )
     # managed tag field (see `COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM` and `_ManagedTagFormMixin`)
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
@@ -298,7 +311,10 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         default=None,
         choices=get_tag_object_model()._VISIBILITY_CHOICES,
         source='cosinnus_profile.media_tag.visibility',
-        help_text=f'(optional) Int for corresponding visibility setting: {str(get_tag_object_model()._VISIBILITY_CHOICES)}. Default when omitted is different for each portal.',
+        help_text=(
+            f'(optional) Int for corresponding visibility setting: {str(get_tag_object_model()._VISIBILITY_CHOICES)}. '
+            f'Default when omitted is different for each portal.'
+        ),
     )
 
     # for `CosinnusUserDynamicFieldsSerializerMixin`

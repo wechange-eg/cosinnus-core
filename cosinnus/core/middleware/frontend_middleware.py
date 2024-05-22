@@ -119,7 +119,7 @@ class FrontendMiddleware(MiddlewareMixin):
                 if params.get(self.param_key) != self.param_value:
                     params[self.param_key] = self.param_value
                     request.META['QUERY_STRING'] = urlencode(params)
-                    cur_lang = translation.get_language()
+                    cur_lang = translation.get_language()  # noqa
                     redirect_to = request.get_full_path()
                     return redirect(redirect_to)
 

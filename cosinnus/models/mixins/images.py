@@ -22,7 +22,8 @@ class ThumbnailableImageMixin(object):
     def __init__(self, *args, **kwargs):
         if self.image_attr_name is None:
             raise ImproperlyConfigured(
-                'Must set a local attribute ``image_attr_name`` that points to your image field for ThumbnailableImageMixin'
+                'Must set a local attribute ``image_attr_name`` that points to your image field for '
+                'ThumbnailableImageMixin'
             )
         return super(ThumbnailableImageMixin, self).__init__(*args, **kwargs)
 

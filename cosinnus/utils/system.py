@@ -82,7 +82,8 @@ def cosinnus_manage(base_path):
             settings_module = env('WECHANGE_DJANGO_SETTINGS_MODULE')
         except environ.ImproperlyConfigured:
             print(
-                "Misconfigured: The entrypoint settings module 'WECHANGE_DJANGO_SETTINGS_MODULE' was not found in'.env'! Example: 'WECHANGE_DJANGO_SETTINGS_MODULE=config.settings.staging'."
+                "Misconfigured: The entrypoint settings module 'WECHANGE_DJANGO_SETTINGS_MODULE' was not found in "
+                "'.env'! Example: 'WECHANGE_DJANGO_SETTINGS_MODULE=config.settings.staging'."
             )
             raise
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)

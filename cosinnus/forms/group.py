@@ -13,7 +13,6 @@ from awesome_avatar import forms as avatar_forms
 from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ObjectDoesNotExist
 from django.forms.widgets import SelectMultiple
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -33,7 +32,6 @@ from cosinnus.forms.widgets import SplitHiddenDateWidget
 from cosinnus.models.group import (
     SDG_CHOICES,
     CosinnusBaseGroup,
-    CosinnusGroup,
     CosinnusGroupCallToActionButton,
     CosinnusGroupGalleryImage,
     CosinnusGroupMembership,
@@ -260,7 +258,8 @@ class CosinnusBaseGroupForm(
                 self.fields['video_conference_type'].initial = CosinnusBaseGroup.FAIRMEETING
             self.fields['video_conference_type'].choices = custom_choices
 
-        # disable the 'Create token' checkbox in case if the sought-after type of CosinnusBaseGroup has not been given in settings
+        # disable the 'Create token' checkbox in case if the sought-after type of CosinnusBaseGroup has not been given
+        # in settings
         if (
             CosinnusBaseGroup.TYPE_PROJECT not in settings.COSINNUS_ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE
             and self.instance.group_is_project

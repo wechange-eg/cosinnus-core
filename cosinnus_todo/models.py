@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from builtins import object
 from uuid import uuid1
 
+import django
 import six
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
@@ -114,7 +115,7 @@ class TodoEntry(LikeableObjectMixin, BaseTaggableObjectModel):
 
     def save(self, *args, **kwargs):
         self.is_completed = bool(self.completed_date)
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(TodoEntry, self).save(*args, **kwargs)
 
         if created:
@@ -250,7 +251,7 @@ class TodoList(models.Model):
         try:
             self.todos.all().delete()
             super(TodoList, self).delete(*args, **kwargs)
-        except:
+        except Exception:
             transaction.savepoint_rollback(sid)
         else:
             transaction.savepoint_commit(sid)
@@ -361,7 +362,7 @@ class Comment(models.Model):
         return self.todo.is_user_following(user)
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(Comment, self).save(*args, **kwargs)
         if created:
             session_id = uuid1().int
@@ -417,8 +418,6 @@ class Comment(models.Model):
         """Comments inherit their visibility from their commented on parent"""
         return check_object_read_access(self.todo, user)
 
-
-import django
 
 if django.VERSION[:2] < (1, 7):
     from cosinnus_todo import cosinnus_app

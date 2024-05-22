@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import two_factor.views as two_factor_views
 from django.urls import include, path, re_path, reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
 from drf_yasg import openapi
@@ -570,7 +569,10 @@ for url_key in group_model_registry:
         path(f'{url_key}/<str:group>/', group.group_startpage, name=prefix + 'group-dashboard'),
         path(f'{url_key}/<str:group>/microsite/', microsite.group_microsite_view, name=prefix + 'group-microsite'),
         # path(f'{url_key}/<str:group>/_microsite__old_/', 'cms.group_microsite', name=prefix+'group-microsite'),
-        # path(f'{url_key}/<str:group>/_microsite__old_/edit/', 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
+        # path(
+        #   f'{url_key}/<str:group>/_microsite__old_/edit/', 'cms.group_microsite_edit',
+        #   name=prefix+'group-microsite-edit'
+        # ),
         path(f'{url_key}/<str:group>/meeting/', group.group_meeting, name=prefix + 'group-meeting'),
         path(f'{url_key}/<str:group>/members/', group.group_detail, name=prefix + 'group-detail'),
         path(f'{url_key}/<str:group>/members/recruit/', group.group_user_recruit, name=prefix + 'group-user-recruit'),
@@ -674,14 +676,14 @@ try:
     from cosinnus_event.api.views import EventViewSet
 
     router.register(r'events', EventViewSet, basename='event')
-except:
+except Exception:
     pass
 # imports from external projects at this time may fail in certain test environments
 try:
     from cosinnus_note.api.views import NoteViewSet
 
     router.register(r'notes', NoteViewSet, basename='note')
-except:
+except Exception:
     pass
 
 if getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('user'):
@@ -695,7 +697,7 @@ if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
         urlpatterns += [
             path('api/v2/rocket-export/', MessageExportView.as_view()),
         ]
-    except:
+    except Exception:
         pass
 
 

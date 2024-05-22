@@ -91,7 +91,8 @@ cosinnus_group_patterns = [
         {'form_view': 'delete'},
         name='conference-event-delete',
     ),
-    # deprecated URL, see 'team-conference-event-entry' for the new URL. left as backwards compatibility for old ical imports.
+    # deprecated URL, see 'team-conference-event-entry' for the new URL. left as backwards compatibility for old ical
+    # imports.
     re_path(
         r'^conference/feed/(?P<slug>[^/]+)/$', views.conference_event_ical_feed_single, name='conference-event-entry'
     ),

@@ -5,7 +5,6 @@ from builtins import object
 
 from django.core.exceptions import FieldDoesNotExist
 from django.utils.translation import get_language
-from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 
@@ -42,7 +41,7 @@ class MultiLanguageFieldValidationFormMixin(object):
     def get_cleaned_name_from_other_languages(self):
         """Fills the name field with the content of other language fields if no name in default language was entered"""
         name = None
-        for lang, _ in settings.LANGUAGES:
+        for lang, __ in settings.LANGUAGES:
             other_name_field = 'name_%s' % lang
             if lang and self.cleaned_data.get(other_name_field, None):
                 name = self.cleaned_data.get(other_name_field)

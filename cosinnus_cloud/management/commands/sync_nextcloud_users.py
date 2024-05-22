@@ -2,11 +2,9 @@
 from __future__ import unicode_literals
 
 import logging
-import traceback
 
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
-from django.utils.encoding import force_str
 
 from cosinnus.conf import settings
 from cosinnus.core.middleware.cosinnus_middleware import (

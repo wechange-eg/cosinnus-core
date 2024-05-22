@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.http.response import HttpResponseNotFound
-from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 
 from cosinnus.conf import settings
 from cosinnus.core.decorators.views import get_group_for_request, redirect_to_403
-from cosinnus.core.registries import widget_registry
 from cosinnus.core.registries.attached_objects import attached_object_registry
-from cosinnus.models.cms import CosinnusMicropage
-from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.functions import get_cosinnus_app_from_class
 from cosinnus.utils.permissions import check_object_write_access

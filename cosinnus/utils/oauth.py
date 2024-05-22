@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import urllib.parse
-
-from requests_oauthlib import OAuth1, OAuth1Session
+from requests_oauthlib import OAuth1Session
 
 from cosinnus.conf import settings
 
@@ -11,7 +9,9 @@ from cosinnus.conf import settings
 
 
 def do_oauth1_request(request):
-    """Gets a initial OAuth temporary token and secret and saves them in the session and returns the redirect URL for the user.
+    """
+    Gets a initial OAuth temporary token and secret and saves them in the session and returns the redirect URL for the
+    user.
     @return: The authorization URL on the OAuth server app to send to user to for the authorization
     @raise TokenRequestDenied: can't access request URL or another error like mismatching signature
     @raise ConnectionError: wrong URL"""

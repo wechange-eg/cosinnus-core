@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import logging
+from threading import Thread
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
@@ -11,6 +12,7 @@ from django.db import transaction
 from django.db.models.signals import post_delete, post_save, pre_delete, pre_save
 from django.dispatch import receiver
 from django.utils import timezone
+from django.utils.encoding import force_str
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
@@ -18,8 +20,7 @@ from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.models.conference import CosinnusConferencePremiumBlock, CosinnusConferenceRoom
 from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, CosinnusPortalMembership
-from cosinnus.models.group_extra import ensure_group_type
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER, MEMBERSHIP_MEMBER
@@ -52,7 +53,7 @@ def ensure_user_in_group_portal(sender, created, **kwargs):
             CosinnusPortalMembership.objects.get_or_create(
                 user=membership.user, group=membership.group.portal, defaults={'status': MEMBERSHIP_MEMBER}
             )
-        except:
+        except Exception:
             # We fail silently, because we never want to 500 here unexpectedly
             logger.error('Error while trying to add User Portal Membership for user that has just joined a group.')
 
@@ -71,7 +72,7 @@ def ensure_user_in_logged_in_portal(sender, user, request, **kwargs):
         CosinnusPortalMembership.objects.get_or_create(
             user=user, group=CosinnusPortal.get_current(), defaults={'status': MEMBERSHIP_MEMBER}
         )
-    except:
+    except Exception:
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error('Error while trying to add User Portal Membership for user that has just logged in.')
 
@@ -87,7 +88,7 @@ def ensure_user_blacklist_converts_to_setting(sender, user, request, **kwargs):
                 settings_obj = GlobalUserNotificationSetting.objects.get_object_for_user(user)
                 settings_obj.setting = GlobalUserNotificationSetting.SETTING_NEVER
                 settings_obj.save()
-    except:
+    except Exception:
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error('Error while trying to add User Portal Membership for user that has just logged in.')
         if settings.DEBUG:
@@ -210,7 +211,10 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                     room = instance.group.media_tag.bbb_room
                 except Exception as e:
                     logger.debug(
-                        "Could not access a group's media_tag or the tag's BBBRoom in MembershipUpdateHookThread. Most likely a race condition.",
+                        (
+                            "Could not access a group's media_tag or the tag's BBBRoom in MembershipUpdateHookThread. "
+                            'Most likely a race condition.'
+                        ),
                         extra={'exception': e},
                     )
                     room = None
@@ -261,7 +265,10 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                                     room.sync_rocketchat_room()
                                     if not room.rocket_chat_room_id:
                                         logger.error(
-                                            'Wanted to sync a user membership to a conference room, but a rocketchat room for it could not be created!',
+                                            (
+                                                'Wanted to sync a user membership to a conference room, but a '
+                                                'rocketchat room for it could not be created!'
+                                            ),
                                             extra={'room': room.id},
                                         )
                                         continue

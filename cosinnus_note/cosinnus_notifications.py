@@ -5,7 +5,7 @@ import django.dispatch as dispatch
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext_lazy
 
-""" Cosinnus:Notifications configuration file. 
+""" Cosinnus:Notifications configuration file.
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
 """
 
@@ -20,9 +20,9 @@ following_note_comment_posted = dispatch.Signal()  # providing_args=["user", "ob
 
 
 """ Notification definitions.
-    These will be picked up by cosinnus_notfications automatically, as long as the 
+    These will be picked up by cosinnus_notfications automatically, as long as the
     variable 'notifications' is present in the module '<app_name>/cosinnus_notifications.py'.
-    
+
     Both the mail and subject template will be provided with the following context items:
         :receiver django.auth.User who receives the notification mail
         :sender django.auth.User whose action caused the notification to trigger
@@ -37,8 +37,8 @@ following_note_comment_posted = dispatch.Signal()  # providing_args=["user", "ob
         :notification_settings_url The URL to the cosinnus notification settings page.
         :site Current django site
         :protocol Current portocol, 'http' or 'https'
-        
-    
+
+
 """
 notifications = {
     'note_comment_posted_on_any': {
@@ -57,7 +57,8 @@ notifications = {
             'object_name': 'note.get_readable_title',
             'object_text': 'text',
             'object_url': 'get_absolute_url',
-            'image_url': 'note.creator.cosinnus_profile.get_avatar_thumbnail_url',  # note: receiver avatar, not creator's!
+            # note: receiver avatar, not creator's!
+            'image_url': 'note.creator.cosinnus_profile.get_avatar_thumbnail_url',
             'alert_image_url': 'get_icon',
             'sub_object_name': 'note.get_readable_title',
             'sub_object_text': 'note.text',
@@ -85,7 +86,8 @@ notifications = {
             'object_name': 'note.get_readable_title',
             'object_text': 'text',
             'object_url': 'get_absolute_url',
-            'image_url': 'note.creator.cosinnus_profile.get_avatar_thumbnail_url',  # note: receiver avatar, not creator's!
+            # note: receiver avatar, not creator's!
+            'image_url': 'note.creator.cosinnus_profile.get_avatar_thumbnail_url',
             'alert_image_url': 'get_icon',
             'sub_object_name': 'note.get_readable_title',
             'sub_object_text': 'note.text',
@@ -100,8 +102,10 @@ notifications = {
         'default': True,
         'alert_text': _('%(sender_name)s commented on the news post %(object_name)s you commented in'),
         'alert_text_multi': ngettext_lazy(
-            '%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in',
-            '%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in',
+            '%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you '
+            'commented in',
+            '%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you '
+            'commented in',
             'count_minus_one',
         ),
         'alert_multi_type': 1,
@@ -113,7 +117,8 @@ notifications = {
             'object_name': 'note.get_readable_title',
             'object_text': 'text',
             'object_url': 'get_absolute_url',
-            'image_url': 'note.creator.cosinnus_profile.get_avatar_thumbnail_url',  # note: receiver avatar, not creator's!
+            # note: receiver avatar, not creator's!
+            'image_url': 'note.creator.cosinnus_profile.get_avatar_thumbnail_url',
             'alert_image_url': 'get_icon',
             'sub_object_name': 'note.get_readable_title',
             'sub_object_text': 'note.text',
@@ -210,7 +215,8 @@ notifications = {
             'object_name': 'note.get_readable_title',
             'object_text': 'text',
             'object_url': 'get_absolute_url',
-            'image_url': 'note.creator.cosinnus_profile.get_avatar_thumbnail_url',  # note: receiver avatar, not creator's!
+            # note: receiver avatar, not creator's!
+            'image_url': 'note.creator.cosinnus_profile.get_avatar_thumbnail_url',
             'alert_image_url': 'get_icon',
             'sub_object_name': 'note.get_readable_title',
             'sub_object_text': 'note.text',

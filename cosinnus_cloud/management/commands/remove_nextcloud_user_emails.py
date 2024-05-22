@@ -2,18 +2,13 @@
 from __future__ import unicode_literals
 
 import logging
-import traceback
 
-from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
-from django.utils.encoding import force_str
 
 from cosinnus.conf import settings
 from cosinnus.core.middleware.cosinnus_middleware import (
     initialize_cosinnus_after_startup,
 )
-from cosinnus.utils.user import filter_active_users, filter_portal_users
-from cosinnus_cloud.hooks import create_user_from_obj, get_nc_user_id, update_user_from_obj
 from cosinnus_cloud.utils import nextcloud
 from cosinnus_cloud.utils.nextcloud import OCSException, list_all_users
 

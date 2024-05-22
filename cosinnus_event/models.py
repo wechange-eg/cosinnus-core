@@ -96,7 +96,10 @@ class Event(
     # the logic for this is in `cosinnus_event.hooks`
     is_hidden_group_proxy = models.BooleanField(
         _('Is hidden proxy'),
-        help_text='If set, this event is hidden in its own group, acting as a proxy for the group with from_date and to_date synced, to be able to be shown in other groups.',
+        help_text=(
+            'If set, this event is hidden in its own group, acting as a proxy for the group with from_date and to_date '
+            'synced, to be able to be shown in other groups.'
+        ),
         default=False,
     )
 
@@ -209,7 +212,7 @@ class Event(
             return 'fa-calendar'
 
     def save(self, created_from_doodle=False, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(Event, self).save(*args, **kwargs)
 
         if created and not self.is_hidden_group_proxy:
@@ -607,7 +610,7 @@ class Comment(models.Model):
         return self.event.is_user_following(user)
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(Comment, self).save(*args, **kwargs)
 
         already_messaged_user_pks = []
@@ -772,7 +775,10 @@ class ConferenceEvent(Event):
     # Checkbox for visible / hidden mode of the conference event's description on the conference microsite
     is_description_visible_on_microsite = models.BooleanField(
         _("Event's description is visible on the conference microsite"),
-        help_text="Provides an option to choose if the particular conference event's description should be shown on microsite or not",
+        help_text=(
+            "Provides an option to choose if the particular conference event's description should be shown on "
+            'microsite or not'
+        ),
         default=True,
     )
 
@@ -832,7 +838,7 @@ class ConferenceEvent(Event):
         return readable
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         if created:
             self.type = self.CONFERENCE_EVENT_TYPE_BY_ROOM_TYPE.get(self.room.type, None)
             if self.type is None:
@@ -960,7 +966,8 @@ class ConferenceEventAttendanceTracking(models.Model):
         verbose_name=_('Conference Event'),
     )
 
-    # start and end are initialized in save() with end=now and start=end-settings.COSINNUS_CONFERENCE_STATISTICS_TRACKING_INTERVAL
+    # start and end are initialized in save() with end=now and
+    # start=end-settings.COSINNUS_CONFERENCE_STATISTICS_TRACKING_INTERVAL
     start = models.DateTimeField(verbose_name=_('Start-Time'))
     end = models.DateTimeField(verbose_name=_('End-Time'))
 

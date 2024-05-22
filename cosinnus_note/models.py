@@ -6,6 +6,7 @@ import re
 from builtins import object
 from uuid import uuid1
 
+import django
 import six
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -59,7 +60,7 @@ class Note(LikeableObjectMixin, TranslateableFieldsModelMixin, RelayMessageMixin
         self._meta.get_field('creator').verbose_name = _('Author')
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
 
         # take the first youtube url from the textand save it as a video link
         self.video = None
@@ -109,7 +110,7 @@ class Note(LikeableObjectMixin, TranslateableFieldsModelMixin, RelayMessageMixin
         if self.facebook_post_id:
             try:
                 return FACEBOOK_POST_URL % tuple(self.facebook_post_id.split('_'))
-            except:
+            except Exception:
                 if settings.DEBUG:
                     raise
         return None
@@ -231,7 +232,7 @@ class Comment(models.Model):
         return self.note.is_user_following(user)
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(Comment, self).save(*args, **kwargs)
         if created:
             session_id = uuid1().int
@@ -241,7 +242,8 @@ class Comment(models.Model):
                     sender=self, user=self.creator, obj=self, audience=[self.note.creator], session_id=session_id
                 )
 
-            # comment was created, for other commenters posts (we skip the post creator because the previous notification precedes)
+            # comment was created, for other commenters posts (we skip the post creator because the previous
+            # notification precedes)
             try:
                 # message all followers of the note
                 followers_except_creator = [
@@ -268,7 +270,8 @@ class Comment(models.Model):
                     sender=self, user=self.creator, obj=self, audience=commenters, session_id=session_id
                 )
 
-                # notification for any members in this group, excepting thos who already commented on the note (because they already received a notification)
+                # notification for any members in this group, excepting thos who already commented on the note (because
+                # they already received a notification)
                 group_members_without_commenters_ids = [
                     member_id
                     for member_id in self.note.group.members
@@ -297,8 +300,6 @@ class Comment(models.Model):
         """Comments inherit their visibility from their commented on parent"""
         return check_object_read_access(self.note, user)
 
-
-import django
 
 if django.VERSION[:2] < (1, 7):
     from cosinnus_note import cosinnus_app

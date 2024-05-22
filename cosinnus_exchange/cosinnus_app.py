@@ -21,4 +21,4 @@ def register():
     url_registry.register_urlconf('cosinnus_exchange', 'cosinnus_exchange.urls')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'exchange')
+    name = pgettext_lazy('the_app', 'exchange')  # noqa

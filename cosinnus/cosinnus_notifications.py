@@ -7,13 +7,13 @@ from django.utils.translation import ngettext_lazy, pgettext_lazy
 
 from cosinnus.conf import settings
 
-""" Cosinnus:Notifications configuration file. 
+""" Cosinnus:Notifications configuration file.
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
 """
 
 """ Signal definitions """
 # also see cosinnus.core.signals
-from cosinnus.core.signals import (
+from cosinnus.core.signals import (  # noqa
     group_moved_to_portal,
     user_group_invitation_accepted,
     user_group_invitation_declined,
@@ -44,9 +44,9 @@ user_match_established = dispatch.Signal()  # providing_args=["from_user", "to_u
 
 
 """ Notification definitions.
-    These will be picked up by cosinnus_notfications automatically, as long as the 
+    These will be picked up by cosinnus_notfications automatically, as long as the
     variable 'notifications' is present in the module '<app_name>/cosinnus_notifications.py'.
-    
+
     Both the mail and subject template will be provided with the following context items:
         :receiver django.auth.User who receives the notification mail
         :sender django.auth.User whose action caused the notification to trigger
@@ -61,8 +61,8 @@ user_match_established = dispatch.Signal()  # providing_args=["from_user", "to_u
         :notification_settings_url The URL to the cosinnus notification settings page.
         :site Current django site
         :protocol Current portocol, 'http' or 'https'
-        
-    
+
+
 """
 notifications = {
     'user_group_join_requested': {
@@ -287,8 +287,10 @@ notifications = {
     },
     'user_tagged_in_object': {
         'label': _('You were tagged in a post, document or other item'),
-        'mail_template': 'cosinnus/mail/user_tagged_in_object.txt',  # this template will be overwritten by specific items in other cosinnus apps
-        'subject_template': 'cosinnus/mail/user_tagged_in_object_subj.txt',  # this template will be overwritten by specific items in other cosinnus apps
+        # this template will be overwritten by specific items in other cosinnus apps
+        'mail_template': 'cosinnus/mail/user_tagged_in_object.txt',
+        # this template will be overwritten by specific items in other cosinnus apps
+        'subject_template': 'cosinnus/mail/user_tagged_in_object_subj.txt',
         'signals': [user_tagged_in_object],
         'default': True,
         'alert_text': _('%(sender_name)s tagged you in %(object_name)s'),
@@ -315,7 +317,8 @@ notifications = {
         'event_text': _('%(sender_name)s invited you to join %(team_name)s'),
         'topic': _(
             '%(sender_name)s invited you to join "%(team_name)s" on %(portal_name)s! <br/><br/>'
-            ' To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation.'
+            ' To join, please click on the link below. You will be redirected to the portal, where you can view and '
+            'accept the invitation.'
         ),
         'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
@@ -370,14 +373,16 @@ notifications = {
         'event_text': _('New link to the moved project/group'),
         'topic': _(
             'One of your projects/groups were moved to the portal "%(portal_name)s"! <br/><br/> '
-            'Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>'
+            'Your user account for this portal is the same as for the old one - you do not need to register a new '
+            'account! <br/><br/>'
             'All of your old URLs will continue to work and redirect you to the correct page on the new portal.'
         ),
         'subject_text': _('"%(team_name)s" was moved to %(portal_name)s!'),
         'data_attributes': {
             'object_name': 'name',  # Main title and label of the notification object
             'object_text': 'description',
-            'image_url': 'portal.get_logo_image_url',  # image URL for the item. default if omitted is the event creator's user avatar
+            # image URL for the item. default if omitted is the event creator's user avatar
+            'image_url': 'portal.get_logo_image_url',
         },
         'notification_reason': 'none',
     },
@@ -562,8 +567,10 @@ if settings.COSINNUS_IDEAS_ENABLED:
                 #'snippet_template': 'cosinnus/html_mail/summary_group.html',
                 'event_text': _('%(sender_name)s just created the project "%(team_name)s" from an idea you follow!'),
                 'topic': _(
-                    '%(sender_name)s just created the project "%(team_name)s" on %(portal_name)s from an idea you follow! <br/><br/>'
-                    ' To check it out, please click on the link below. There you can see if you would like to join the project.'
+                    '%(sender_name)s just created the project "%(team_name)s" on %(portal_name)s from an idea you '
+                    'follow! <br/><br/>'
+                    ' To check it out, please click on the link below. There you can see if you would like to join the '
+                    'project.'
                 ),
                 'subject_text': _('%(sender_name)s just created the project "%(team_name)s" from an idea you follow!'),
                 'data_attributes': {

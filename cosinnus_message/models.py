@@ -3,12 +3,15 @@ from __future__ import unicode_literals
 
 from builtins import object
 
+import django
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_mailbox.models import Mailbox
 
 from cosinnus.models.group import CosinnusPortal
-from cosinnus_message.conf import settings  # we need this import here!
+
+# we need this import here!
+from cosinnus_message.conf import settings  # noqa
 
 
 class CosinnusMailbox(Mailbox):
@@ -28,8 +31,6 @@ class CosinnusMailbox(Mailbox):
         verbose_name = 'Cosinnus Mailbox'
         verbose_name_plural = 'Cosinnus Mailboxes'
 
-
-import django
 
 if django.VERSION[:2] < (1, 7):
     from cosinnus_message import cosinnus_app

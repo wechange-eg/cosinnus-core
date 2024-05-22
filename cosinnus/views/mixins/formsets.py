@@ -77,7 +77,7 @@ class JsonFieldFormsetMixin:
         The inline_form is added automatically to the context and is named "<json_field_name>_formset".
 
             {% include 'cosinnus/fields/inlineform_field.html' with inline_form=example_field_formset label=<label> content_template=<inline_form_template> unique_id='<id>' %}
-    """
+    """  # noqa
 
     json_field_formsets = None
     _json_field_formset_instances = None

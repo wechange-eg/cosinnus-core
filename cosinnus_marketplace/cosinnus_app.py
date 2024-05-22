@@ -28,4 +28,4 @@ def register():
     widget_registry.register('marketplace', 'cosinnus_marketplace.dashboard.CurrentOffers')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'marketplace')
+    name = pgettext_lazy('the_app', 'marketplace')  # noqa

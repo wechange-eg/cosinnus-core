@@ -1,6 +1,5 @@
 import functools
 
-from django.core.exceptions import ImproperlyConfigured
 from fabric import Connection, task
 
 # the env used for all cosinnus fabric connections
@@ -165,8 +164,10 @@ def setup_env(
         # env.frontend_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-node-frontend.service'
     else:
         env.reload_command = 'sudo systemctl restart unit-config.service'
-        env.stop_command = 'sudo systemctl stop unit-config.service'  # there is no stop for the unit-config, only for the config-service
-        env.start_command = 'sudo systemctl restart unit-config.service'  # this is why here we restart the unit config, so all gets restarted after stopping
+        # there is no stop for the unit-config, only for the config-service
+        env.stop_command = 'sudo systemctl stop unit-config.service'
+        # this is why here we restart the unit config, so all gets restarted after stopping
+        env.start_command = 'sudo systemctl restart unit-config.service'
 
     env.portal_additional_less_to_compile = []  # a list of django apps for which to compile extra less
     env.db_name = portal_name

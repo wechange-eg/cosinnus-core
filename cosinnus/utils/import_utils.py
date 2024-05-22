@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import division, unicode_literals
 
-import codecs
 import csv
 import io
 import logging
 import traceback
-from builtins import object, str
+from builtins import object
 from threading import Thread
 
 import six
 from django.conf import settings
 from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured
-from django.db import transaction
 from django.template.loader import render_to_string
 from django.utils.encoding import force_str
 
@@ -80,7 +78,8 @@ class UnicodeReader(object):
 
 class GroupCSVImporter(Thread):
     """Extend this class to implement the specific import function `_do_import``!
-    Assign your new class to the setting ``COSINNUS_CSV_IMPORT_TYPE_SETTINGS[import_type]['IMPORT_CLASS']`` to have it be used for the import.
+    Assign your new class to the setting ``COSINNUS_CSV_IMPORT_TYPE_SETTINGS[import_type]['IMPORT_CLASS']`` to have it
+    be used for the import.
     @param group_rows: The rows of CSV imported groups.
     @param request: Supply a request if a report summary of the import should be mailed to the user"""
 
@@ -96,7 +95,7 @@ class GroupCSVImporter(Thread):
         try:
             if rows[0][0][0] == '\ufeff':
                 rows[0][0] = rows[0][0][1:]
-        except:
+        except Exception:
             pass
 
         self.rows = rows
@@ -129,7 +128,10 @@ class GroupCSVImporter(Thread):
         missing_aliases = [alias for alias in list(self.ALIAS_MAP.values()) if alias not in list(column_map.keys())]
         if missing_aliases:
             raise ImproperlyConfigured(
-                'The GroupCSVImporter was configured to access CSV columns [%s], but they were not found in the CSV header row!'
+                (
+                    'The GroupCSVImporter was configured to access CSV columns [%s], but they were not found in the '
+                    'CSV header row!'
+                )
                 % ', '.join(missing_aliases)
             )
         return column_map

@@ -31,7 +31,8 @@ class CosinnusProjectTransBase(object):
     CREATE = _('Create Project')
     CREATE_NEW = _('Create new Project')
     CREATE_DESCRIPTION = _(
-        'Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more.'
+        'Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for '
+        'collaborating in one place: News, Pads, Events, Todos, and more.'
     )
     EDIT = _('Edit Project')
     ACTIVATE = _('Activate Project')
@@ -42,7 +43,10 @@ class CosinnusProjectTransBase(object):
         'You are about to re-activate this project. It and all of its content will be visible on the website again.'
     )
     DEACTIVATE_EXPLANATION = _(
-        'You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n\n Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator.'
+        'You are about to deactivate this project. When your project is deactivated, it is no longer accessible and '
+        'will be removed from the website. However, your data will still be retained.\n\n Please contact the '
+        'administrators of this portal if you would like to irrevocably delete all of the content. Until then the '
+        'project can be reactivated by your and any other project administrator.'
     )
     CONVERT_ITEMS_TO = _('Convert selected items to Projects')
     CONTACT_PERSON = _('Project administrator')
@@ -55,16 +59,19 @@ class CosinnusProjectTransBase(object):
     FORMFIELD_LOCATION_LABEL = _('Where is the project active?')
     FORMFIELD_VISIBILITY_LABEL = _('Project is publicly visible')
     FORMFIELD_VISIBILITY_LEGEND = _(
-        'Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search.'
+        'Should your project be visible for the anonymous users? The microsite may be found via the Internet and the '
+        'portal search.'
     )
     FORMFIELD_VISIBILITY_BOX_LABEL = _('Enable the public visibility of your project')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Project members only')
     FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND = _(
-        "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
+        "Users may join by submitting a membership request that can be accepted or declined by any of the project's "
+        'administrators.'
     )
     FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this project to attach...')
     FORMFIELD_PUBLIC_LEGEND = _(
-        'Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE.'
+        'Here you can control whether the publicly visible information about your project, such as name and address, '
+        'is transmitted to partner platforms by WECHANGE.'
     )
     FORMFIELD_PUBLIC_BOX_LABEL = _('This project shall be made publicly findable via other platforms.')
 
@@ -75,18 +82,24 @@ class CosinnusProjectTransBase(object):
     INFO_ONLY_VISIBLE_TO_ADMINS = _('This is only visible to admins of this project.')
 
     INFO_GUEST_USERS_ENABLED = _(
-        'Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project.'
+        'Guest user access has been enabled for this project. The project admins can share a special link which allows '
+        'unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this '
+        'when sharing sensitive information within this project.'
     )
     INFO_GUEST_USER_INVITE_LINK = _(
-        'You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project'
+        'You can invite an unregistered user to instantly join the platform by sharing the following link. They will '
+        'join as a guest and do not need to register an account. All they need to do is to enter their name and they '
+        'will gain read-only access to this project'
     )
     INFO_GUEST_USER_SIGNUP_INTRO = _('You are joining as a guest and will get read-only access to the project')
 
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _(
-        'Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators.'
+        'Sorry, only portal administrators can create Projects! You can write a message to one of the administrators '
+        'to create a Project for you. Below you can find a listing of all administrators.'
     )
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _(
-        'Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'
+        'Sorry, only portal administrators can deactivate Projects! You can write a message to one of the '
+        'administrators to deactivate it for you. Below you can find a listing of all administrators.'
     )
     MESSAGE_MEMBERS_ONLY = _('Only project members can see the content you requested. Apply to become a member now!')
 
@@ -119,7 +132,8 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     CREATE = _('Create Group')
     CREATE_NEW = _('Create new Group')
     CREATE_DESCRIPTION = _(
-        'Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups.'
+        'Groups help improve communication and collaboration in large networks or organizations. Within a Group you '
+        'can bring together several smaller projects or workgroups.'
     )
     EDIT = _('Edit Group')
     ACTIVATE = _('Activate Group')
@@ -130,7 +144,10 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
         'You are about to re-activate this group. It and all of its content will be visible on the website again.'
     )
     DEACTIVATE_EXPLANATION = _(
-        'You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n\n Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the group can be reactivated by your and any other group administrator.'
+        'You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will '
+        'be removed from the website. However, your data will still be retained.\n\n Please contact the administrators '
+        'of this portal if you would like to irrevocably delete all of the content. Until then the group can be '
+        'reactivated by your and any other group administrator.'
     )
     CONVERT_ITEMS_TO = _('Convert selected items to Groups')
     CONTACT_PERSON = _('Group administrator')
@@ -143,16 +160,19 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     FORMFIELD_LOCATION_LABEL = _('Where is the group active?')
     FORMFIELD_VISIBILITY_LABEL = _('Group is publicly visible')
     FORMFIELD_VISIBILITY_LEGEND = _(
-        'Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search.'
+        'Should your group be visible for the anonymous users? The microsite may be found via the Internet and the '
+        'portal search.'
     )
     FORMFIELD_VISIBILITY_BOX_LABEL = _('Enable the public visibility of your group')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Group members only')
     FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND = _(
-        "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
+        "Users may join by submitting a membership request that can be accepted or declined by any of the groups's "
+        'administrators.'
     )
     FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this group to attach...')
     FORMFIELD_PUBLIC_LEGEND = _(
-        'Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE.'
+        'Here you can control whether the publicly visible information about your group, such as name and address, is '
+        'transmitted to partner platforms by WECHANGE.'
     )
     FORMFIELD_PUBLIC_BOX_LABEL = _('This group shall be made publicly findable via other platforms.')
 
@@ -163,18 +183,24 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     INFO_ONLY_VISIBLE_TO_ADMINS = _('This is only visible to admins of this group.')
 
     INFO_GUEST_USERS_ENABLED = _(
-        'Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group.'
+        'Guest user access has been enabled for this group. The group admins can share a special link which allows '
+        'unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this '
+        'when sharing sensitive information within this group.'
     )
     INFO_GUEST_USER_INVITE_LINK = _(
-        'You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group'
+        'You can invite an unregistered user to instantly join the platform by sharing the following link. They will '
+        'join as a guest and do not need to register an account. All they need to do is to enter their name and they '
+        'will gain read-only access to this group'
     )
     INFO_GUEST_USER_SIGNUP_INTRO = _('You are joining as a guest and will get read-only access to the group')
 
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _(
-        'Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.'
+        'Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to '
+        'create a Group for you. Below you can find a listing of all administrators.'
     )
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _(
-        'Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'
+        'Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators '
+        'to deactivate it for you. Below you can find a listing of all administrators.'
     )
     MESSAGE_MEMBERS_ONLY = _('Only group members can see the content you requested. Apply to become a member now!')
 
@@ -206,7 +232,8 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     CREATE = _('Create Conference')
     CREATE_NEW = _('Create new Conference')
     CREATE_DESCRIPTION = _(
-        'Conferences let you set up and host workshops and events over multiple days, complete with video messaging, stage stream integration, breakout rooms and lobby chats.'
+        'Conferences let you set up and host workshops and events over multiple days, complete with video messaging, '
+        'stage stream integration, breakout rooms and lobby chats.'
     )
     EDIT = _('Edit Conference')
     ACTIVATE = _('Activate Conference')
@@ -217,7 +244,10 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
         'You are about to re-activate this conference. It and all of its content will be visible on the website again.'
     )
     DEACTIVATE_EXPLANATION = _(
-        'You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n\n Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the conference can be reactivated by your and any other conference organizer.'
+        'You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible '
+        'and will be removed from the website. However, your data will still be retained.\n\n Please contact the '
+        'administrators of this portal if you would like to irrevocably delete all of the content. Until then the '
+        'conference can be reactivated by your and any other conference organizer.'
     )
     CONVERT_ITEMS_TO = _('Convert selected items to Conferences')
     CONTACT_PERSON = _('Conference contact person')
@@ -230,16 +260,19 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     FORMFIELD_LOCATION_LABEL = _('Where is the conference active?')
     FORMFIELD_VISIBILITY_LABEL = _('Conference is publicly visible')
     FORMFIELD_VISIBILITY_LEGEND = _(
-        'Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search.'
+        'Should your conference be visible for the anonymous users? The microsite may be found via the Internet and '
+        'the portal search.'
     )
     FORMFIELD_VISIBILITY_BOX_LABEL = _('Enable the public visibility of your conference')
     FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY = _('Conference members only')
     FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND = _(
-        "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
+        "Users may join by submitting a membership request that can be accepted or declined by any of the conference's "
+        'organizers.'
     )
     FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this conference to attach...')
     FORMFIELD_PUBLIC_LEGEND = _(
-        'Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE.'
+        'Here you can control whether the publicly visible information about your conference, such as name and '
+        'address, is transmitted to partner platforms by WECHANGE.'
     )
     FORMFIELD_PUBLIC_BOX_LABEL = _('This conference shall be made publicly findable via other platforms.')
 
@@ -250,18 +283,24 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     INFO_ONLY_VISIBLE_TO_ADMINS = _('This is only visible to admins of this conference.')
 
     INFO_GUEST_USERS_ENABLED = _(
-        'Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference.'
+        'Guest user access has been enabled for this conference. The group admins can share a special link which '
+        'allows unregistered users to instantly join the platform and gain read-only access to this conference. '
+        'Be aware of this when sharing sensitive information within this conference.'
     )
     INFO_GUEST_USER_INVITE_LINK = _(
-        'You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference'
+        'You can invite an unregistered user to instantly join the platform by sharing the following link. They will '
+        'join as a guest and do not need to register an account. All they need to do is to enter their name and they '
+        'will gain read-only access to this conference'
     )
     INFO_GUEST_USER_SIGNUP_INTRO = _('You are joining as a guest and will get read-only access to the conference')
 
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _(
-        'Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators.'
+        'Sorry, only portal administrators can create Conferences! You can write a message to one of the '
+        'administrators to create a Conference for you. Below you can find a listing of all administrators.'
     )
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _(
-        'Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'
+        'Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the '
+        'administrators to deactivate it for you. Below you can find a listing of all administrators.'
     )
     MESSAGE_MEMBERS_ONLY = _('Only conference members can see the content you requested. Apply to become a member now!')
 

@@ -5,7 +5,7 @@ import django.dispatch as dispatch
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext_lazy
 
-""" Cosinnus:Notifications configuration etherpad. 
+""" Cosinnus:Notifications configuration etherpad.
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
 """
 
@@ -20,9 +20,9 @@ following_offer_changed = dispatch.Signal()  # providing_args=["user", "obj", "a
 following_offer_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
 """ Notification definitions.
-    These will be picked up by cosinnus_notfications automatically, as long as the 
+    These will be picked up by cosinnus_notfications automatically, as long as the
     variable 'notifications' is present in the module '<app_name>/cosinnus_notifications.py'.
-    
+
     Both the mail and subject template will be provided with the following context items:
         :receiver django.auth.User who receives the notification mail
         :sender django.auth.User whose action caused the notification to trigger
@@ -37,8 +37,8 @@ following_offer_comment_posted = dispatch.Signal()  # providing_args=["user", "o
         :notification_settings_url The URL to the cosinnus notification settings page.
         :site Current django site
         :protocol Current portocol, 'http' or 'https'
-        
-    
+
+
 """
 notifications = {
     'offer_created': {
@@ -102,7 +102,8 @@ notifications = {
             'object_name': 'offer.title',
             'object_text': 'text',
             'object_url': 'get_absolute_url',
-            'image_url': 'offer.creator.cosinnus_profile.get_avatar_thumbnail_url',  # note: receiver avatar, not creator's!
+            # note: receiver avatar, not creator's!
+            'image_url': 'offer.creator.cosinnus_profile.get_avatar_thumbnail_url',
             'alert_image_url': 'get_icon',
             'sub_object_name': 'offer.title',
             'sub_object_text': 'offer.note',
@@ -131,7 +132,8 @@ notifications = {
             'object_name': 'offer.title',
             'object_text': 'text',
             'object_url': 'get_absolute_url',
-            'image_url': 'offer.creator.cosinnus_profile.get_avatar_thumbnail_url',  # note: receiver avatar, not creator's!
+            # note: receiver avatar, not creator's!
+            'image_url': 'offer.creator.cosinnus_profile.get_avatar_thumbnail_url',
             'alert_image_url': 'get_icon',
             'sub_object_name': 'offer.title',
             'sub_object_text': 'offer.note',
@@ -199,7 +201,8 @@ notifications = {
             'object_name': 'offer.title',
             'object_text': 'text',
             'object_url': 'get_absolute_url',
-            'image_url': 'offer.creator.cosinnus_profile.get_avatar_thumbnail_url',  # note: receiver avatar, not creator's!
+            # note: receiver avatar, not creator's!
+            'image_url': 'offer.creator.cosinnus_profile.get_avatar_thumbnail_url',
             'alert_image_url': 'get_icon',
             'sub_object_name': 'offer.title',
             'sub_object_text': 'offer.note',

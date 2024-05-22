@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 import logging
 import time
-from builtins import object
 
 import requests
 from annoying.functions import get_object_or_None
@@ -21,10 +20,9 @@ from django.views.generic.base import RedirectView, TemplateView, View
 
 from cosinnus.conf import settings
 from cosinnus.core.decorators.views import redirect_to_403, redirect_to_error_page, redirect_to_not_logged_in
-from cosinnus.models.bbb_room import BBBRoom, BBBRoomVisitStatistics
+from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
-from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
@@ -84,7 +82,8 @@ class BBBRoomMeetingQueueView(RequireLoggedInMixin, RedirectView):
             return redirect(media_tag.bbb_room.get_absolute_url())
         else:
             return HttpResponse(
-                '<html><head><meta http-equiv="refresh" content="5" ></head><body>Connnecting you to your room...</body></html>'
+                '<html><head><meta http-equiv="refresh" content="5" ></head><body>Connnecting you to your room...'
+                '</body></html>'
             )
 
 
@@ -251,7 +250,10 @@ class BBBRoomGuestAccessView(TemplateView):
                     return _resolve_url(_room_url, retry=False)
             elif response.status_code == 200:
                 logger.error(
-                    'BBB guest URL resolver: resolving URL response unexpected, cannot rediredt the user to their room!',
+                    (
+                        'BBB guest URL resolver: resolving URL response unexpected, cannot rediredt the user to their '
+                        'room!'
+                    ),
                     extra={
                         'response': response,
                         'response_text': response.text,
@@ -270,7 +272,8 @@ class BBBRoomGuestAccessView(TemplateView):
 
         if not resolved_room_url:
             return HttpResponse(
-                '<html><head><meta http-equiv="refresh" content="5" ></head><body>Connnecting you to your room...</body></html>'
+                '<html><head><meta http-equiv="refresh" content="5" ></head><body>Connnecting you to your room...'
+                '</body></html>'
             )
         return HttpResponseRedirect(resolved_room_url)
 

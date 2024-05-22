@@ -1,10 +1,10 @@
 import json
 import random
 
-from django.contrib.auth import authenticate, get_user_model, login
+from django.contrib.auth import get_user_model
 from django.http import HttpResponse, HttpResponseForbidden
 from oauth2_provider.decorators import protected_resource
-from rest_framework import authentication, permissions, serializers, viewsets
+from rest_framework import permissions, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,7 +12,6 @@ from rest_framework.views import APIView
 from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin
 from cosinnus.conf import settings
 from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER
-from cosinnus.views.common import LoginViewAdditionalLogicMixin
 
 from ...models import MEMBERSHIP_MEMBER, CosinnusGroup, CosinnusGroupMembership, get_user_profile_model
 from ..serializers.user import UserCreateUpdateSerializer, UserSerializer
@@ -132,7 +131,8 @@ class OAuthUserView(APIView):
                 {
                     'success': True,
                     'id': user.username if user.username.isdigit() else str(user.id),
-                    'email': user.cosinnus_profile.rocket_user_email,  # use the rocket user email (may be a non-verified fake one)
+                    # use the rocket user email (may be a non-verified fake one)
+                    'email': user.cosinnus_profile.rocket_user_email,
                     'name': user.get_full_name(),
                     'avatar': avatar_url,
                     'group': group_dict,

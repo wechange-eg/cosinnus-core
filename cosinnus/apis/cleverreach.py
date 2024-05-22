@@ -28,7 +28,8 @@ def signup_user_to_cleverreach_group_receiver(sender, user, **kwargs):
 
 def signup_user_to_cleverreach_group(user):
     """Does a signup to a cleverreach newsletter group for a given user (unless they have already signed up before).
-    Settings `COSINNUS_CLEVERREACH_BASE_URL`, `COSINNUS_CLEVERREACH_GROUP_IDS`, `COSINNUS_CLEVERREACH_ACCESS_TOKEN` must be configured.
+    Settings `COSINNUS_CLEVERREACH_BASE_URL`, `COSINNUS_CLEVERREACH_GROUP_IDS`, `COSINNUS_CLEVERREACH_ACCESS_TOKEN`
+    must be configured.
     If setting `COSINNUS_CLEVERREACH_FORM_IDS` is also configured, the user will be signed up
         to the newsletter group, then deactivated, then sent an activation mail via the signup form.
         This acts as if he had just signed up via the form himself, and thus, the confirmation mail
@@ -46,7 +47,10 @@ def signup_user_to_cleverreach_group(user):
     )
     if not cleverreach_group_id:
         logger.error(
-            'Error when trying to signup a newly registered user to CleverReach (no group id found for language and no default set):',
+            (
+                'Error when trying to signup a newly registered user to CleverReach '
+                '(no group id found for language and no default set):'
+            ),
             extra={'language': language, 'user_email': user_email, 'base_url': cleverreach_base_url},
         )
         return
@@ -78,7 +82,10 @@ def signup_user_to_cleverreach_group(user):
     # if this returns a 200-code, the user has already signed up for the newsletter!
     if req.status_code == 200:
         logger.info(
-            'Aborted signing up a newly registered user to CleverReach (user was already signed up for this newsletter!):',
+            (
+                'Aborted signing up a newly registered user to CleverReach '
+                '(user was already signed up for this newsletter!):'
+            ),
             extra={
                 'status': req.status_code,
                 'language': language,
@@ -184,7 +191,8 @@ def signup_user_to_cleverreach_group(user):
                 'Error when trying to signup a newly registered user to CleverReach (Exception during set-inactive)',
                 extra=extra,
             )
-            # we do not return here, as cleverreach may change their set-deactive endpoint to throw an error on already inactive users
+            # we do not return here, as cleverreach may change their set-deactive endpoint to throw an error on already
+            # inactive users
         if not req.status_code == 200:
             extra = {
                 'status': req.status_code,
@@ -196,10 +204,14 @@ def signup_user_to_cleverreach_group(user):
                 'base_url': cleverreach_base_url,
             }
             logger.error(
-                'Error when trying to signup a newly registered user to CleverReach (non-200 response during set-inactive):',
+                (
+                    'Error when trying to signup a newly registered user to CleverReach '
+                    '(non-200 response during set-inactive):'
+                ),
                 extra=extra,
             )
-            # we do not return here, as cleverreach may change their set-deactive endpoint to throw an error on already inactive users
+            # we do not return here, as cleverreach may change their set-deactive endpoint to throw an error on already
+            # inactive users
 
         try:
             # register user as if he had filled out a form, for the group
@@ -245,7 +257,10 @@ def signup_user_to_cleverreach_group(user):
                 'base_url': cleverreach_base_url,
             }
             logger.error(
-                'Error when trying to signup a newly registered user to CleverReach (non-200 response during Form signup):',
+                (
+                    'Error when trying to signup a newly registered user to CleverReach '
+                    '(non-200 response during Form signup):'
+                ),
                 extra=extra,
             )
             return
@@ -274,7 +289,8 @@ if settings.COSINNUS_CLEVERREACH_AUTO_SIGNUP_ENABLED:
     ):
         logger.error(
             'The Cleverreach API integration was set to be enabled on this portal, some of the required '
-            'settings are not configured: `COSINNUS_CLEVERREACH_BASE_URL`, `COSINNUS_CLEVERREACH_GROUP_IDS`, `COSINNUS_CLEVERREACH_ACCESS_TOKEN`'
+            'settings are not configured: `COSINNUS_CLEVERREACH_BASE_URL`, `COSINNUS_CLEVERREACH_GROUP_IDS`, '
+            '`COSINNUS_CLEVERREACH_ACCESS_TOKEN`'
         )
     else:
         signals.user_registered.connect(signup_user_to_cleverreach_group_receiver)

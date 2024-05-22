@@ -106,7 +106,7 @@ def cosinnus(request):
     except Resolver404:
         pass
 
-    v3_api_content_active = bool(getattr(request, 'v3_api_content_active', None) == True)
+    v3_api_content_active = bool(getattr(request, 'v3_api_content_active', None) is True)
 
     # version history
     if v3_api_content_active:

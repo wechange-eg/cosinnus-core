@@ -14,7 +14,11 @@ logger = logging.getLogger('cosinnus')
 
 
 class Command(BaseCommand):
-    help = "Syncs the plattform's `groups.nextcloud_groupfolder_name` field entries with the actual current remote folder names in nextcloud. Helpful to repair broken folder associations after the cloud folder rename bugfix. Won't change anything in the nextcloud."
+    help = (
+        "Syncs the plattform's `groups.nextcloud_groupfolder_name` field entries with the actual current remote folder "
+        "names in nextcloud. Helpful to repair broken folder associations after the cloud folder rename bugfix. Won't "
+        'change anything in the nextcloud.'
+    )
 
     def handle(self, *args, **options):
         if not getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
@@ -53,7 +57,8 @@ class Command(BaseCommand):
                 if remote_name_differed and remote_groupfolder_name:
                     try:
                         self.stdout.write(
-                            f"\tSaving actual name '{remote_groupfolder_name}' instead of '{group.nextcloud_groupfolder_name}' for group {group.slug}."
+                            f"\tSaving actual name '{remote_groupfolder_name}' instead of "
+                            f"'{group.nextcloud_groupfolder_name}' for group {group.slug}."
                         )
                         type(group).objects.filter(pk=group.pk).update(
                             nextcloud_groupfolder_name=remote_groupfolder_name
@@ -71,5 +76,6 @@ class Command(BaseCommand):
                         errors += 1
 
             self.stdout.write(
-                f'{counter}/{total_groups} groups processed, {checked} cloud-enabled groups checked, {renamed} groupfolder names fixed ({errors} Errors)',
+                f'{counter}/{total_groups} groups processed, {checked} cloud-enabled groups checked, {renamed} '
+                f'groupfolder names fixed ({errors} Errors)',
             )

@@ -12,7 +12,6 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator, MinLengthValidator
-from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from osm_field.fields import LatitudeField, LongitudeField, OSMField
 
@@ -338,7 +337,8 @@ class UserChangeEmailForm(forms.Form):
         'email_already_taken': _('This email address already has a registered user!'),
         'email_same': _('This email is already currently associated with your account!'),
         'email_blacklisted': _(
-            'This email is blacklisted and cannot be used. You may have opted out of receiving any emails before. Please contact support to use this email address.'
+            'This email is blacklisted and cannot be used. You may have opted out of receiving any emails before. '
+            'Please contact support to use this email address.'
         ),
     }
     email = forms.EmailField(

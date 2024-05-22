@@ -123,5 +123,5 @@ class PrettyJSONWidget(widgets.Textarea):
             self.attrs['rows'] = min(max(len(row_lengths) + 4, 10), 30)
             self.attrs['cols'] = min(max(max(row_lengths) + 4, 40), 120)
             return value
-        except:
+        except Exception:
             return super(PrettyJSONWidget, self).format_value(value)

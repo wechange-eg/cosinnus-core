@@ -5,7 +5,6 @@ from builtins import object
 from datetime import datetime
 
 import pytz
-from django.db.models import Q
 from rest_framework import serializers
 
 from cosinnus.models import MEMBERSHIP_ADMIN, RelatedGroups, get_cosinnus_group_model

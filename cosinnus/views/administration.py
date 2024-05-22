@@ -17,7 +17,7 @@ from django.urls import reverse_lazy
 from django.urls.base import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, FormView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 
 from cosinnus.conf import settings
@@ -374,7 +374,8 @@ class UserListView(ListView):
                 UserLoginTokenThread().start()
 
                 msg = _(
-                    'Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations.'
+                    'Login tokens to all previously uninvited users are now being sent in the background. You can '
+                    'refresh this page to update the status display of invitations.'
                 )
                 messages.add_message(self.request, messages.SUCCESS, msg)
             else:

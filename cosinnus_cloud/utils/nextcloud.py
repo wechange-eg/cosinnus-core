@@ -12,7 +12,6 @@ from oauth2_provider.models import Application
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_cloud.models import CloudFile, SimpleCloudFile
 from cosinnus_cloud.utils.text import utf8_encode
 
@@ -82,7 +81,7 @@ def _response_or_raise(requests_response: requests.Response):
         requests_response.raise_for_status()
     try:
         response_json = requests_response.json()
-    except:
+    except Exception:
         raise OCSException(-1, requests_response.text)
     response = OCSResponse(response_json)
     if response.ok:
@@ -321,7 +320,7 @@ def rename_group_and_group_folder(folder_id: int, new_name: str):
             data={'mountpoint': new_name},
         )
     )
-    return response.data and response.data.get('success', False) == True
+    return response.data and response.data.get('success', False) is True
 
 
 def get_groupfolder_name(folder_id: int):
@@ -348,7 +347,7 @@ def add_group_access_for_folder(group_id: str, folder_id: int) -> bool:
             data={'group': group_id},
         )
     )
-    return response.data and response.data.get('success', False) == True
+    return response.data and response.data.get('success', False) is True
 
 
 def remove_group_access_for_folder(group_id: str, folder_id: int) -> bool:
@@ -362,7 +361,7 @@ def remove_group_access_for_folder(group_id: str, folder_id: int) -> bool:
             auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
         )
     )
-    return response.data and response.data.get('success', False) == True
+    return response.data and response.data.get('success', False) is True
 
 
 def delete_groupfolder(folder_id: int) -> bool:
@@ -375,7 +374,7 @@ def delete_groupfolder(folder_id: int) -> bool:
             auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
         )
     )
-    return response.data and response.data.get('success', False) == True
+    return response.data and response.data.get('success', False) is True
 
 
 def files_search(
@@ -531,7 +530,7 @@ def _get_requesttoken_for_session(session, get_url):
     soup = BeautifulSoup(get_response.text, 'xml')
     try:
         requesttoken = soup.find('head').attrs.get('data-requesttoken')
-    except:
+    except Exception:
         raise Exception("'data-requesttoken' was not found in <head> tag of Nextcloud admin page!")
     return requesttoken
 
@@ -630,7 +629,10 @@ def _make_ocs_call(relative_url, post_data={}, headers=HEADERS, session=None, pr
             print(response.status_code)
         return response.status_code == 200
     except OCSException as e:
-        message = f'Nextcloud OCS POST call to "{relative_url}" with data {post_data} was not successful. Status code: {e.statuscode}'
+        message = (
+            f'Nextcloud OCS POST call to "{relative_url}" with data {post_data} was not successful. '
+            f'Status code: {e.statuscode}'
+        )
         if print_to_console:
             print(message)
         else:
@@ -699,7 +701,7 @@ def apply_nextcloud_settings(print_to_console=False):
     documentserver: https://onlyoffice.<domain>/
     documentserverInternal: http://oo-ds/
     storageUrl: https://nextcloud.<domain>/
-    secret: 
+    secret:
     demo: false
     """
 
@@ -708,8 +710,8 @@ def perform_fulltext_search(userid: str, query: str, page=1, page_size=20, *, se
     """
     Perform a fulltext file search as the given user and return the result.
     Requires the fulltextsearch_admin-api addon to be installed on the Nextcloud server.
-    To make the search query behave like Haystack does ("foo bar" searches for "foo" AND "bar", instead of "foo" OR "bar"),
-    query words are prepended with a plus.
+    To make the search query behave like Haystack does ("foo bar" searches for "foo" AND "bar", instead of "foo"
+    OR "bar"), query words are prepended with a plus.
     """
 
     anded_query = ' '.join(f'+{word}' for word in query.split(' '))
@@ -754,7 +756,10 @@ def find_files(
     *,
     session=None,
 ):
-    """Finds files by name, unlike "perform_fulltext_search", by default, this function does only search in the filename, not the content"""
+    """
+    Finds files by name, unlike "perform_fulltext_search", by default, this function does only search in the filename,
+    not the content
+    """
 
     options = {
         'files_within_dir': folder,

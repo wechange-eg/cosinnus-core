@@ -6,7 +6,6 @@ import sys
 from threading import Thread
 
 import html2text
-from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage, get_connection
 from django.core.mail.message import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -24,10 +23,6 @@ from cosinnus.utils.user import get_list_unsubscribe_url
 logger = logging.getLogger('cosinnus')
 
 __all__ = ['send_mail']
-
-
-if settings.COSINNUS_USE_CELERY:
-    from celery.task import task
 
 
 def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
@@ -152,7 +147,7 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
         extra = {'to_user': to, 'subject': subject, 'exception': force_str(e), 'exc_reason': e}
         try:
             extra.update({'sys_except': sys.exc_info()[0]})
-        except:
+        except Exception:
             extra.update({'sys_except': 'could not print'})
         logger.warn('Cosinnus.core.mail: Failed to send mail!', extra=extra)
         if settings.DEBUG:

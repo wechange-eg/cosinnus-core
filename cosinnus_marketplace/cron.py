@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from datetime import timedelta
 
 from django.utils.timezone import now
-from django_cron import CronJobBase, Schedule
+from django_cron import Schedule
 
 from cosinnus.conf import settings
 from cosinnus.cron import CosinnusCronJobBase

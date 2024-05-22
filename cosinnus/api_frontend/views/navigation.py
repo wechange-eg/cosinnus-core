@@ -834,7 +834,7 @@ class LanguageMenuItemMixin:
         language_item = MenuItem(language_item_label, icon=language_item_icon, id='ChangeLanguage')
         if settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES:
             language_selection = filter(
-                lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES
+                lambda lang: lang[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES
             )
         else:
             language_selection = settings.LANGUAGES
@@ -1265,7 +1265,8 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                         MenuItem(_('Messages'), reverse('postman:inbox'), icon='messages', id='Messages')
                     )
 
-        # add "Discover" link to services for all logged in users and additionally for non-logged-in users on open portals
+        # add "Discover" link to services for all logged in users and additionally for non-logged-in users on open
+        # portals
         if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or (
             request.user.is_authenticated and not request.user.is_guest
         ):

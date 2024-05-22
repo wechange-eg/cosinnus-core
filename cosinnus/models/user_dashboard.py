@@ -10,7 +10,6 @@ from django.utils.html import escape
 from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal, get_domain_for_portal
 from cosinnus.models.cloud import NextcloudFileProxy
-from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.profile import BaseUserProfile
 from cosinnus.models.tagged import BaseTaggableObjectModel

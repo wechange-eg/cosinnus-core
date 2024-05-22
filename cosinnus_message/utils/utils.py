@@ -160,7 +160,10 @@ def process_direct_reply_messages(messages=None, no_delete=False):
             continue
         except MultipleObjectsReturned:
             logger.error(
-                'A directreply-received message was matched, but more than 1 postman message were be found with that hash.',
+                (
+                    'A directreply-received message was matched, but more than 1 postman message were be found with '
+                    'that hash.'
+                ),
                 extra={
                     'message-from': message.from_header,
                     'message-text': message.text,
@@ -180,13 +183,15 @@ def process_direct_reply_messages(messages=None, no_delete=False):
             sender_email_bad = True
 
         # make sure the sender of the reply is really the recipient of the replied-to message!
-        # if this doesn't match, likely a valid user just replied from the wrong email account, so we send them an error message back
+        # if this doesn't match, likely a valid user just replied from the wrong email account, so we send them an
+        # error message back
         if sender_email_bad or not user == postman_message.recipient:
             send_direct_reply_error_mail(
                 replier_email,
                 text,
                 _(
-                    'The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!'
+                    'The email adress you sent the reply from is not the one associated with your user account. Please '
+                    'send direct replies only from the email adress you are registered with on the site!'
                 ),
             )
             continue
@@ -364,8 +369,8 @@ def _test_direct_reply_mail(sender_email=None, body_text=None):
             body_text
             or """
             > --------------------------------------------------------------------
-            > DIRECT-REPLY CODE: 
-            > directreply+1+VYEVjxComiYWZ95a7Vj3FJ3VadWzQ58C+wachstumswende.de 
+            > DIRECT-REPLY CODE:
+            > directreply+1+VYEVjxComiYWZ95a7Vj3FJ3VadWzQ58C+wachstumswende.de
             -------------------------------------------------------------------------------
         """
         )

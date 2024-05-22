@@ -5,7 +5,7 @@ from builtins import object
 
 from django.core.management.base import BaseCommand
 
-from cosinnus_message.utils.utils import process_direct_reply_messages, update_mailboxes
+from cosinnus_message.utils.utils import process_direct_reply_messages
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)

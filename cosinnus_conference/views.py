@@ -3,37 +3,31 @@ from __future__ import unicode_literals
 
 import csv
 import logging
-from urllib.parse import quote
 
-import requests
-import six
 import xlsxwriter
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist
-from django.db import transaction
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect, JsonResponse
-from django.http.response import Http404, HttpResponseForbidden, HttpResponseNotFound
-from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http.response import HttpResponseForbidden, HttpResponseNotFound
+from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.dateparse import parse_datetime
 from django.utils.functional import cached_property
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-from django.utils.translation import ngettext, pgettext_lazy
-from django.views.generic import DetailView, ListView, TemplateView
+from django.utils.translation import ngettext
+from django.views.generic import ListView, TemplateView
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 
 from cosinnus import cosinnus_notifications
 from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 from cosinnus.core import signals
-from cosinnus.core.decorators.views import redirect_to_error_page
 from cosinnus.forms.conference import CosinnusConferenceRoomForm
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from cosinnus.models.conference import (
@@ -43,7 +37,7 @@ from cosinnus.models.conference import (
     CosinnusConferenceApplication,
     CosinnusConferenceRoom,
 )
-from cosinnus.models.group import MEMBERSHIP_ADMIN, CosinnusGroup, CosinnusGroupMembership
+from cosinnus.models.group import CosinnusGroupMembership
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS
 from cosinnus.models.membership import MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_MEMBER
 from cosinnus.models.profile import (
@@ -64,7 +58,6 @@ from cosinnus.views.mixins.group import (
     DipatchGroupURLMixin,
     FilterGroupMixin,
     GroupCanAccessRecordedMeetingsMixin,
-    GroupFormKwargsMixin,
     GroupIsConferenceMixin,
     RequireAdminMixin,
     RequireExtraDispatchCheckMixin,
@@ -72,7 +65,7 @@ from cosinnus.views.mixins.group import (
     RequireReadMixin,
     RequireWriteMixin,
 )
-from cosinnus.views.profile import deactivate_user_and_mark_for_deletion, delete_userprofile
+from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
 from cosinnus_conference.forms import (
     CHOICE_ALL_APPLICANTS,
     CHOICE_ALL_MEMBERS,

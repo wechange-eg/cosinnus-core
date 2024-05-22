@@ -7,7 +7,7 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import get_user_model, logout
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.http.response import Http404, HttpResponseRedirect
@@ -18,14 +18,14 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
-from django.views.generic.edit import DeleteView, FormView
+from django.views.generic.edit import DeleteView
 from oauth2_provider import models as oauth2_provider_models
 
 from cosinnus.core import signals
 from cosinnus.core.decorators.views import redirect_to_error_page, redirect_to_not_logged_in
 from cosinnus.core.mail import send_html_mail
 from cosinnus.forms.profile import UserProfileForm
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, CosinnusPortal
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
 from cosinnus.models.widget import WidgetConfig
@@ -37,8 +37,6 @@ from cosinnus.utils.permissions import (
 )
 from cosinnus.utils.user import filter_active_users
 from cosinnus.views.mixins.avatar import AvatarFormMixin
-from cosinnus.views.mixins.group import RequireLoggedInMixin
-from cosinnus.views.user import send_user_email_to_verify
 
 logger = logging.getLogger('cosinnus')
 
@@ -345,7 +343,8 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             messages.warning(
                 request,
                 _(
-                    "Your user account is associated with an integrated Portal. This account's email address is fixed and therefore was left unchanged."
+                    "Your user account is associated with an integrated Portal. This account's email address is fixed "
+                    'and therefore was left unchanged.'
                 ),
             )
             request.POST._mutable = True
@@ -452,7 +451,8 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
                 is_safe = False
         if non_safe_groups:
             msg = _(
-                'You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:'
+                'You are the only administrator left for these projects, groups or conferences. Please appoint a '
+                'different administrator or delete them first:'
             )
             group_string = ''.join([f'\n* {group.name}' for group in non_safe_groups])
             msg = f'{msg}\n{group_string}'
@@ -470,7 +470,12 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
 
         # send a notification email ignoring notification settings
         text = _(
-            'Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n\nIf this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile.'
+            'Your platform profile stored with us under this email has been deactivated by you and was approved for '
+            'deletion. The profile has been removed from the website and we will delete the account completely in 30 '
+            'days.\n\nIf this has happened without your knowledge or if you change your mind in the meantime, please '
+            'contact the portal administrators or the email address given in our imprint. Please note that the '
+            'response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would '
+            'like to keep your profile.'
         )
         body_text = textfield(text)
         send_html_mail(

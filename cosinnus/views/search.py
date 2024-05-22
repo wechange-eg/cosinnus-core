@@ -9,7 +9,7 @@ import operator
 
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models.query_utils import Q
-from django.http.response import HttpResponseBadRequest, HttpResponseForbidden, JsonResponse
+from django.http.response import HttpResponseBadRequest, JsonResponse
 from django.views.generic.base import View
 from haystack.views import SearchView, search_view_factory
 

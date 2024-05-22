@@ -112,7 +112,7 @@ def get_group_query_filter_for_search_terms(terms):
     @param terms: An array of string search terms.
     @return: A django Q object.
     """
-    first_term, other_terms = terms[0], terms[1:]
+    __, other_terms = terms[0], terms[1:]
 
     q = Q(name__icontains=terms[0])
     for other_term in other_terms:

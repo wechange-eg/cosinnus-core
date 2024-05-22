@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import random
 from builtins import object
 from datetime import timedelta
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import Max, Min
-from django.template.context import Context
 from django.template.defaultfilters import date as date_format
-from django.template.defaultfilters import linebreaksbr
 from django.template.loader import render_to_string
 from django.templatetags.static import static
-from django.urls import reverse
 from django.utils.timezone import now
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
@@ -21,7 +17,6 @@ from rest_framework import serializers
 
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.templatetags.cosinnus_tags import get_country_name, textfield
 
 __all__ = ('ConferenceSerializer',)
@@ -217,7 +212,8 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
                     notification_severity = 'success'
                 else:
                     notification_text = _(
-                        'Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times.'
+                        'Your conference is currently not using the high performance premium servers, but has been '
+                        'assigned premium slots at other times.'
                     )
                     notification_severity = 'info'
 
@@ -238,7 +234,9 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
                         )
             else:
                 notification_text = _(
-                    'Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:'
+                    'Your conference is still in trial mode. You have access to all features, but can only use them '
+                    'with a few people without restrictions. To ensure full performance for your conference with '
+                    'multiple users, book sufficient capacities here for free:'
                 )
                 notification_severity = 'warning'
             header_notification = {

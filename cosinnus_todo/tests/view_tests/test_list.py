@@ -1,16 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import range, str
-
-from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.encoding import force_str
-from django.utils.timezone import now
 
-from cosinnus.models import CosinnusGroupMembership
-from cosinnus.models.membership import MEMBERSHIP_MEMBER
-from cosinnus_todo.models import TodoEntry, TodoList
 from cosinnus_todo.tests.view_tests.base import ViewTestCase
 
 

@@ -1,28 +1,22 @@
-import re
 from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
-from django.db.models import Q
-from django.template import Context, Template
 from django.template.defaultfilters import date
 from django.template.loader import get_template
 from django.utils import timezone, translation
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-from uritemplate.api import variables
 
-from cosinnus.core.mail import get_common_mail_context
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.files import get_image_url_for_icon
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.utils.mail import send_notification_item_html, send_notification_item_html_threaded
+from cosinnus.utils.mail import send_notification_item_html
 from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.user import filter_active_users
 
 
 def get_initial_template(field_name):
@@ -53,7 +47,8 @@ def send_conference_reminder(group, recipients=None, field_name='week_before', u
         }
         return render_html_with_variables(user, template, variables)
 
-    # does not apply for `Send immediately`-`All applicants` case -> see the usage of `NoConferenceApplicantsFoundException` for further details
+    # does not apply for `Send immediately`-`All applicants` case -> see the usage of
+    # `NoConferenceApplicantsFoundException` for further details
     if not recipients:
         recipients = group.actual_members
 
@@ -82,7 +77,8 @@ def send_conference_reminder(group, recipients=None, field_name='week_before', u
             portal_url = group.portal.get_domain()
             group_icon_url = portal_url + (group.get_avatar_thumbnail_url() or get_image_url_for_icon(group.get_icon()))
             notification_reason = _(
-                'You are getting this notification because you are a member of this conference or have applied for membership.'
+                'You are getting this notification because you are a member of this conference or have applied for '
+                'membership.'
             )
             context = {
                 'action_user_url': group.get_absolute_url(),

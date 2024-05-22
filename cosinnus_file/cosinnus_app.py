@@ -21,4 +21,4 @@ def register():
     widget_registry.register('file', 'cosinnus_file.dashboard.Latest')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'file')
+    name = pgettext_lazy('the_app', 'file')  # noqa

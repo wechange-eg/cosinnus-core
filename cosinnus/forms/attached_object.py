@@ -8,7 +8,6 @@ from annoying.functions import get_object_or_None
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django_select2 import HeavyModelSelect2MultipleChoiceField
 from django_select2.util import JSFunction
@@ -48,9 +47,12 @@ class FormAttachableMixin(object):
                         attached.model_name + ':' + str(obj.id),
                         '%s' % (obj.title),
                     )
-                    # text_only = (attached.model_name+":"+str(obj.id), "&lt;i&gt;%s&lt;/i&gt; %s" % (attached.model_name, obj.title),)
+                    # text_only = (
+                    #   attached.model_name+":"+str(obj.id), "&lt;i&gt;%s&lt;/i&gt; %s"
+                    #   % (attached.model_name, obj.title),
+                    # )
                     # TODO: sascha: returning unescaped html here breaks the javascript of django-select2
-                    html = build_attachment_field_result(attached.model_name, obj)
+                    html = build_attachment_field_result(attached.model_name, obj)  # noqa
                     preresults.append(text_only)
 
         # add a field for each model type of attachable file provided by cosinnus apps
@@ -64,14 +66,18 @@ class FormAttachableMixin(object):
             target_group = target_group()
         if not target_group:
             # if this form's model has no group, it may be a global object that can still have attachments,
-            # so fall back to the forum group to add attached objects to. if this doesn't exist, attaching in not possible.
+            # so fall back to the forum group to add attached objects to. if this doesn't exist, attaching in not
+            # possible.
             forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
             if forum_slug:
                 target_group = get_object_or_None(
                     get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current()
                 )
 
-        """ Add attachable objects field if this model is configured in settings.py to have objects that can be attached to it """
+        """
+        Add attachable objects field if this model is configured in settings.py to have objects that can be attached
+        to it
+        """
         if target_group and attached_object_registry.get_attachable_to(source_model_id):
             self.fields['attached_objects'] = AttachableObjectSelect2MultipleChoiceField(
                 group=getattr(self, 'group', None),
@@ -124,11 +130,11 @@ class FormAttachableMixin(object):
             # safely invalidate the cached properties first
             try:
                 del instance.attached_image
-            except:
+            except Exception:
                 pass
             try:
                 del instance.attached_images
-            except:
+            except Exception:
                 pass
             # then update the instance's index after attaching objects
             if hasattr(instance, 'update_index'):
@@ -200,7 +206,10 @@ class AttachableWidgetSelect2Field(AttachableObjectSelect2MultipleChoiceField):
                         attached.model_name + ':' + str(obj.id),
                         '%s' % (obj.title),
                     )
-                    # text_only = (attached.model_name+":"+str(obj.id), "&lt;i&gt;%s&lt;/i&gt; %s" % (attached.model_name, obj.title),)
+                    # text_only = (
+                    #   attached.model_name+":"+str(obj.id), "&lt;i&gt;%s&lt;/i&gt; %s"
+                    #   % (attached.model_name, obj.title),
+                    # )
                     # TODO: sascha: returning unescaped html here breaks the javascript of django-select2
                     # html = build_attachment_field_result(attached.model_name, obj)
                     preresults.append(text_only)

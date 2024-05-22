@@ -7,12 +7,10 @@ from builtins import object, str
 from datetime import timedelta
 from uuid import uuid1
 
+import django
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
-from django.db.models.signals import post_delete, post_save, pre_save
-from django.dispatch import receiver
-from django.urls import reverse
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -79,7 +77,9 @@ class Etherpad(BaseHierarchicalTaggableObjectModel, LikeableObjectMixin):
 
     last_accessed = models.DateTimeField(
         verbose_name=_('Last accessed'),
-        help_text='This will be set to now() whenever someone with write permissions accesses the write-view for this pad.',
+        help_text=(
+            'This will be set to now() whenever someone with write permissions accesses the write-view for this pad.'
+        ),
         editable=False,
         auto_now_add=True,
     )
@@ -130,7 +130,7 @@ class Etherpad(BaseHierarchicalTaggableObjectModel, LikeableObjectMixin):
         return None
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) == False
+        created = bool(self.pk) is False
         super(Etherpad, self).save(*args, **kwargs)
         if created and not self.is_container:
             # pad was created
@@ -170,7 +170,9 @@ class Etherpad(BaseHierarchicalTaggableObjectModel, LikeableObjectMixin):
     @property
     def content(self):
         """Returns the content of the pad as HTML.
-        @raise Exception: Thrown when the content could not be retrieved. The type of exception depends on the client used."""
+        @raise Exception: Thrown when the content could not be retrieved. The type of exception depends on the client
+            used.
+        """
         return self.client.getHTML(padID=self.pad_id)['html']
 
     def get_content(self):
@@ -180,7 +182,7 @@ class Etherpad(BaseHierarchicalTaggableObjectModel, LikeableObjectMixin):
         """
         try:
             return self.content or ''
-        except:
+        except Exception:
             return None
 
     @classmethod
@@ -334,8 +336,6 @@ def _get_group_mapping(group):
 def _get_author_mapping(user):
     return 'p_%s_u_%s' % (CosinnusPortal.get_current().slug, user.username)
 
-
-import django
 
 if django.VERSION[:2] < (1, 7):
     from cosinnus_etherpad import cosinnus_app

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from collections import defaultdict
-
 from django import forms
 from django.core.exceptions import ImproperlyConfigured
 from django.template.loader import render_to_string

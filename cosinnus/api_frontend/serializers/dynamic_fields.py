@@ -37,7 +37,8 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                 field_options, self.filter_included_fields_by_option_name, False
             ):
                 continue
-            # dynamic fields are of type (drf serializer) CharField, BooleanField or IntergerField, validation will take place manually
+            # dynamic fields are of type (drf serializer) CharField, BooleanField or IntergerField, validation will take
+            # place manually
             if field_options.multiple:
                 # All lists are serialized as CharField lists.
                 field = serializers.ListField(
@@ -124,7 +125,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                 # skip non-required, empty fields
                 if (
                     not field_value
-                    and type(field_value) is not bool
+                    and not isinstance(field_value, bool)
                     and (
                         not field_options.required
                         or (self.all_fields_optional and field_name not in dynamic_field_attr_dict)

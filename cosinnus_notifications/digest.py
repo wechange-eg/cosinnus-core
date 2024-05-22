@@ -22,7 +22,6 @@ from cosinnus.conf import settings
 from cosinnus.core.mail import send_mail_or_fail
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.profile import GlobalUserNotificationSetting
-from cosinnus.templatetags.cosinnus_tags import cosinnus_setting, full_name
 from cosinnus.utils.files import get_image_url_for_icon
 from cosinnus.utils.functions import resolve_attributes
 from cosinnus.utils.permissions import check_object_read_access, check_user_can_receive_emails
@@ -125,7 +124,8 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                 and global_setting != GlobalUserNotificationSetting.SETTING_GROUP_INDIVIDUAL
             ):
                 if not multi_prefs:
-                    # users who don't have the global setting AND the multi pref setting set to this digest never get an email
+                    # users who don't have the global setting AND the multi pref setting set to this digest never get
+                    # an email
                     continue
                 else:
                     # user still has a multi pref setting for this digest_setting, so go on and check
@@ -167,7 +167,8 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
             else:
                 # these groups will never get digest notifications because they have a blanketing NONE setting or
                 # ALL setting (of anything but this ``digest_setting``)
-                # (they may still have individual preferences in the DB, which are ignored because of the blanket setting)
+                # (they may still have individual preferences in the DB, which are ignored because of the blanket
+                # setting)
                 unwanted_digest_settings = [
                     key
                     for key in list(dict(UserNotificationPreference.SETTING_CHOICES).keys())
@@ -182,7 +183,8 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                 )
                 exclude_digest_groups = exclude_digest_groups.values_list('group_id', flat=True)
 
-                # find out any notification preferences the user has for groups in this portal with the daily/weekly setting
+                # find out any notification preferences the user has for groups in this portal with the daily/weekly
+                # setting
                 # if he doesn't have any, we will not send a mail for them
                 prefs = UserNotificationPreference.objects.filter(
                     user=user, group_id__in=portal_group_ids, setting=digest_setting
@@ -247,7 +249,8 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                     group_events = events.filter(group=group).order_by('-id')  # id faster than ordering by created date
 
                     # filter only those events that the user actually has in his prefs, for this group and also
-                    # check for target object existing, being visible to user, and other sanity checks if the user should see this object
+                    # check for target object existing, being visible to user, and other sanity checks if the user
+                    # should see this object
                     wanted_group_events = []
                     for event in group_events:
                         # include the event only if it belongs to the right category,
@@ -297,10 +300,13 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
 
                     wanted_group_events = sorted(wanted_group_events, key=lambda e: e.date)
 
-                    # Throw out duplicate events (eg "X was updated" multiple times) for the same object and superceded events.
+                    # Throw out duplicate events (eg "X was updated" multiple times) for the same object and superceded
+                    # events.
                     # The most recent event is always kept.
-                    # - follow-events have a supercede list of events that are always less important than the follow-event
-                    # - this means that a "created" event would be thrown out by a later "an item you followed was updated" on the same object
+                    # - follow-events have a supercede list of events that are always less important than the
+                    #   follow-event
+                    # - this means that a "created" event would be thrown out by a later "an item you followed was
+                    #   updated" on the same object
                     for this_event in wanted_group_events[:]:
                         for other_event in wanted_group_events[:]:
                             if not other_event == this_event:
@@ -341,7 +347,8 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                 if category_html:
                     category_html = category_header_html + '\n' + category_html
                     body_html += category_html + '\n'
-                    # we currently don't have a proper category header, so add a larger space in-between categories, except for the last
+                    # we currently don't have a proper category header, so add a larger space in-between categories,
+                    # except for the last
                     if len(cat_notification_ids) > 0:
                         body_html += '<br/><br/>\n'
             # end for category

@@ -9,11 +9,9 @@ import urllib.request
 from builtins import str
 from tempfile import NamedTemporaryFile
 
-from annoying.functions import get_object_or_None
 from django.contrib import messages
 from django.contrib.auth import login as django_login
 from django.core.files import File
-from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import translation
@@ -50,7 +48,8 @@ def login(request):
             request,
             force_str(
                 _(
-                    'Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!'
+                    'Sorry, we could not connect your user account because of an internal error. Please contact a '
+                    'system administrator!'
                 )
             )
             + ' (sso:1)',
@@ -78,7 +77,8 @@ def callback(request):
             request,
             force_str(
                 _(
-                    'Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!'
+                    'Sorry, we could not connect your user account because of an internal error. Please contact a '
+                    'system administrator!'
                 )
             )
             + ' (sso:2)',
@@ -97,15 +97,18 @@ def callback(request):
             request,
             force_str(
                 _(
-                    'Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!'
+                    'Sorry, we could not connect your user account, because we could not retrieve important user '
+                    'account infos. Please contact a system administrator!'
                 )
             )
             + ' (sso:3)',
         )
         return redirect('sso-error')
 
-    # match user over ID, never email! this could be used to take over other user accounts if the SSO server does not enforce email validation
-    # because of this, we actually may end up with non-unique emails in cosinnus, but since regular authentication is disabled,  this should not cause problems
+    # match user over ID, never email! this could be used to take over other user accounts if the SSO server does not
+    # enforce email validation
+    # because of this, we actually may end up with non-unique emails in cosinnus, but since regular authentication is
+    # disabled,  this should not cause problems
     # Note: using a raw query here for actual safe JSON-matching
     try:
         # psql 9.3 does JSON right
@@ -122,7 +125,8 @@ def callback(request):
                 request,
                 force_str(
                     _(
-                        'Sorry, you cannot log in because your account is suspended. Please contact a system administrator!'
+                        'Sorry, you cannot log in because your account is suspended. Please contact a system '
+                        'administrator!'
                     )
                 )
                 + ' (sso:4)',
@@ -144,7 +148,8 @@ def callback(request):
                 request,
                 force_str(
                     _(
-                        'Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!'
+                        'Sorry, we could not connect your user account because of an internal error. Please contact a '
+                        'system administrator!'
                     )
                 )
                 + ' (sso:5)',

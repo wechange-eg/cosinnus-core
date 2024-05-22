@@ -3,10 +3,6 @@ from __future__ import unicode_literals
 
 from builtins import str
 
-"""
-Export views to be used by cosinnus apps
-"""
-
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -14,6 +10,10 @@ from django.views.generic import View
 
 from cosinnus.utils.http import CSVResponse, JSONResponse
 from cosinnus.views.mixins.group import RequireAdminMixin
+
+"""
+Export views to be used by cosinnus apps
+"""
 
 
 class ExportView(RequireAdminMixin, View):

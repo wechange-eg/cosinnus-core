@@ -9,7 +9,7 @@ import six
 from django.apps import apps
 from django.core.cache import cache
 from django.db.models import Count
-from django.template import Context, loader
+from django.template import loader
 from django.utils.dateparse import parse_datetime
 from haystack import indexes
 from haystack.exceptions import SearchFieldError
@@ -47,7 +47,7 @@ class TimezoneAwareHaystackDateTimeField(indexes.DateTimeField):
         if isinstance(value, six.string_types):
             try:
                 value = parse_datetime(value).astimezone(pytz.utc)
-            except:
+            except Exception:
                 raise SearchFieldError(
                     "Datetime provided to '%s' field doesn't appear to be a valid datetime string: '%s'"
                     % (self.instance_name, value)
@@ -361,7 +361,8 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
         return obj.group.slug
 
     def prepare_group_name(self, obj):
-        # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
+        # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't
+        # shown)
         if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) and obj.group.slug in get_default_user_group_slugs():
             return None
         return obj.group.name

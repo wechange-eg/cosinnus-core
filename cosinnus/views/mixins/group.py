@@ -22,7 +22,6 @@ from cosinnus.core.decorators.views import (
     require_write_access_groupless,
 )
 from cosinnus.core.registries.apps import app_registry
-from cosinnus.models.group import CosinnusBaseGroup
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 from cosinnus.utils.functions import resolve_class

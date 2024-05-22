@@ -185,7 +185,10 @@ group_model_registry = GroupModelRegistry()
 __all__ = ('group_model_registry',)
 
 # schema for registering a new group model and its URL paths:
-# group_model_registry.register(<group-url-fragment>, '<plural-url-fragment>', '<django url-name-prefix>', '<str group model name>', '<str group form>', <int group type>)
+# group_model_registry.register(
+#   <group-url-fragment>, '<plural-url-fragment>', '<django url-name-prefix>', '<str group model name>',
+#   '<str group form>', <int group type>
+# )
 group_model_registry.register(
     'project',
     'projects',

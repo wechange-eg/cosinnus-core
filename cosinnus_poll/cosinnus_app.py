@@ -21,4 +21,4 @@ def register():
     widget_registry.register('poll', 'cosinnus_poll.dashboard.CurrentPolls')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'poll')
+    name = pgettext_lazy('the_app', 'poll')  # noqa

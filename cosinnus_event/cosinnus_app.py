@@ -23,4 +23,4 @@ def register():
     widget_registry.register('event', 'cosinnus_event.dashboard.UpcomingEvents')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'event')
+    name = pgettext_lazy('the_app', 'event')  # noqa

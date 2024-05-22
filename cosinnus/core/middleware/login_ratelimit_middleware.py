@@ -45,11 +45,13 @@ default_settings = {
     'LOGIN_RATELIMIT_NUM_TRIES_CACHE_KEY': 'login_ratelimit/%s/num_tries/',
     'LOGIN_RATELIMIT_LIMIT_ACTIVE_UNTIL_CACHE_KEY': 'login_ratelimit/%s/limit_active/',
     'LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT': 5,  # after the n-th attempt, rate limiting begins
-    'LOGIN_RATELIMIT_LIMIT_DURATION_PER_ATTEMPT_SECONDS': 30,  # steps of rate limits, multiplied for each attempt after the LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT attempt
+    # steps of rate limits, multiplied for each attempt after the LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT attempt
+    'LOGIN_RATELIMIT_LIMIT_DURATION_PER_ATTEMPT_SECONDS': 30,
     'LOGIN_RATELIMIT_LIMIT_DURATION_MAX_SECONDS': 60 * 10,  # Maximum wait time incurred: 10 minutes
-    'LOGIN_RATELIMIT_ATTEMPT_RECORDS_RESET': 60
-    * 60,  # Maximum time to save the number of tries per username (timeout for LOGIN_RATELIMIT_NUM_TRIES_CACHE_KEY): 1 hour
-    'LOGIN_RATELIMIT_LOG_ON_LIMIT': True,  # should we log reaching the rate limit after `LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT` attempts for a username?
+    # Maximum time to save the number of tries per username (timeout for LOGIN_RATELIMIT_NUM_TRIES_CACHE_KEY): 1 hour
+    'LOGIN_RATELIMIT_ATTEMPT_RECORDS_RESET': 60 * 60,
+    # should we log reaching the rate limit after `LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT` attempts for a username?
+    'LOGIN_RATELIMIT_LOG_ON_LIMIT': True,
     'LOGIN_RATELIMIT_LOGGER_NAME': 'login_ratelimit_middleware',  # name of the logger used
 }
 
@@ -95,7 +97,10 @@ def register_and_limit_failed_login_attempt(sender, credentials, **kwargs):
             # We have reached the first rate limit attempt, send signal and maybe do logging
             if _get_setting('LOGIN_RATELIMIT_LOG_ON_LIMIT'):
                 logger.warning(
-                    'LoginRateLimitMiddleware: Failed Login Attempt Limit reached targetting an email. Details in extra.',
+                    (
+                        'LoginRateLimitMiddleware: Failed Login Attempt Limit reached targetting an email. Details in '
+                        'extra.'
+                    ),
                     extra={
                         'username': login_username,
                         'ip': None,
@@ -103,7 +108,8 @@ def register_and_limit_failed_login_attempt(sender, credentials, **kwargs):
                 )
             login_ratelimit_triggered.send(sender=None, username=login_username, ip=None)
 
-        # calculate the rate limit duration, increased per already failed attempt, but no larger than the maximum duration
+        # calculate the rate limit duration, increased per already failed attempt, but no larger than the maximum
+        # duration
         tries_threshold = _get_setting('LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT')
         ratelimit_per_try = _get_setting('LOGIN_RATELIMIT_LIMIT_DURATION_PER_ATTEMPT_SECONDS')
         increase_seconds = 0

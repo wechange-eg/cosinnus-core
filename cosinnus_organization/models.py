@@ -22,7 +22,6 @@ from cosinnus.models import (
     MEMBER_STATUS,
     MEMBERSHIP_ADMIN,
     MEMBERSHIP_INVITED_PENDING,
-    MEMBERSHIP_MEMBER,
     MEMBERSHIP_PENDING,
     MEMBERSHIP_STATUSES,
     BaseMembership,
@@ -43,7 +42,7 @@ from cosinnus.utils.urls import get_domain_for_portal
 # this reads the environment and inits the right locale
 try:
     locale.setlocale(locale.LC_ALL, ('de_DE', 'utf8'))
-except:
+except Exception:
     locale.setlocale(locale.LC_ALL, '')
 
 
@@ -297,7 +296,8 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     slug = models.SlugField(
         _('Slug'),
         help_text=_(
-            'Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'
+            'Be extremely careful when changing this slug manually! There can be many side-effects '
+            '(redirects breaking e.g.)!'
         ),
         max_length=50,
     )
@@ -328,7 +328,9 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     )
     is_active = models.BooleanField(
         _('Is active'),
-        help_text='If an organization is not active, it counts as non-existent for all purposes and views on the website.',
+        help_text=(
+            'If an organization is not active, it counts as non-existent for all purposes and views on the website.'
+        ),
         default=True,
     )
     is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), default=False)

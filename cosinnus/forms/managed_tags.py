@@ -38,8 +38,8 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
                     and not settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
                     and not user_admin_form_managed_tag_enabled
                 ):
-                    # if this form was not initialized for the user admin view and user assignable managed tags are disabled
-                    # we throw out the field as it should not be displayed in this view
+                    # if this form was not initialized for the user admin view and user assignable managed tags are
+                    # disabled we throw out the field as it should not be displayed in this view
                     del self.fields['managed_tag_field']
                 else:
                     all_managed_tags = list(CosinnusManagedTag.objects.all_in_portal_cached())
@@ -75,7 +75,7 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
         def save(self, commit=True):
             """Assign the selected managed tags to the assignment target object"""
             obj = super(_ManagedTagFormMixin, self).save(commit=commit)
-            if commit == True:
+            if commit is True:
                 self._save_assignment(obj)
             return obj
 

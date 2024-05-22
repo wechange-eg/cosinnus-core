@@ -4,9 +4,7 @@ from __future__ import unicode_literals
 from django import forms
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.translation import gettext_lazy as _
 from multiform.forms import InvalidArgument
-from openid.message import no_default
 
 from cosinnus.conf import settings
 from cosinnus.forms.group import GroupKwargModelFormMixin
@@ -78,7 +76,8 @@ class ConferenceSettingsFormMixin(object):
                 )
 
         # gather the inherited values for each field inherited from the parent/portal
-        # note: the values are retrieved for the *parent*-object, not the current object, so we get only the inherited values!
+        # note: the values are retrieved for the *parent*-object, not the current object, so we get only the inherited
+        # values!
         choice_dict = dict(CosinnusConferenceSettings.PRESET_FIELD_CHOICES)
         parent_object = self.get_bbb_settings_parent()
         inherited_conf = CosinnusConferenceSettings.get_for_object(parent_object)
@@ -115,7 +114,7 @@ class ConferenceSettingsFormMixin(object):
                 # Add presets for choice parameters.
                 try:
                     value = int(value)
-                except:
+                except Exception:
                     value = None
                 if (
                     value is not None
@@ -137,7 +136,8 @@ class ConferenceSettingsFormMixin(object):
         instance.set_bbb_preset_form_field_values(preset_choices)
 
         if commit:
-            # on first save, set the generic relation to the attached event/group for the CosinnusConferenceSettings instance
+            # on first save, set the generic relation to the attached event/group for the CosinnusConferenceSettings
+            # instance
             # this is a bit hacky, but for the MultiForm, we have no other way of getting the id of the freshly-saved
             # form object instance
             if not instance.pk and not instance.object_id:

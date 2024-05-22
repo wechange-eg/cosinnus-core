@@ -40,7 +40,9 @@ class InactiveLogoutMiddleware:
         if not last_activity:
             return True
         last_activity = (
-            datetime.strptime(last_activity, '%Y-%m-%d %H:%M:%S.%f') if type(last_activity) is str else last_activity
+            datetime.strptime(last_activity, '%Y-%m-%d %H:%M:%S.%f')
+            if isinstance(last_activity, str)
+            else last_activity
         )
         difference = datetime.utcnow() - last_activity
         seconds_difference = difference.total_seconds()

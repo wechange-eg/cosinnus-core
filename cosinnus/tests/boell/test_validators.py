@@ -1,10 +1,9 @@
 import json
 
-from django.conf import settings
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import get_default_password_validators
-from django.test import RequestFactory, TestCase, override_settings
+from django.test import TestCase, override_settings
 
 
 @override_settings(

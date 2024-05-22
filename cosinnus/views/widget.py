@@ -4,26 +4,19 @@ from __future__ import unicode_literals
 from builtins import object
 from uuid import uuid1
 
-import six
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
 from django.http.response import HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import RequestContext
-from django.urls import reverse, reverse_lazy
-from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 
-from cosinnus.conf import settings
 from cosinnus.core.decorators.views import redirect_to_not_logged_in, require_admin_access_decorator
 from cosinnus.core.registries import widget_registry
-from cosinnus.core.registries.apps import app_registry
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.http import JSONResponse, is_ajax
 from cosinnus.utils.permissions import (
     check_object_write_access,
@@ -32,7 +25,6 @@ from cosinnus.utils.permissions import (
     check_user_superuser,
 )
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.user import ensure_user_widget
 from cosinnus.views.mixins.group import GroupObjectCountMixin, RequireReadOrRedirectMixin
 
 
@@ -83,7 +75,9 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
                     continue
                 form_class = widget_class.get_setup_form_class()
                 if not getattr(form_class, 'template_name', None):
-                    # raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
+                    # raise ImproperlyConfigured(
+                    #   'Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name)
+                    # )
                     # print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
                     continue
                 context = {'form': form_class(group=group)}
@@ -195,7 +189,9 @@ def widget_edit(request, id, app_name=None, widget_name=None):
                     continue
                 form_class = widget_class.get_setup_form_class()
                 if not getattr(form_class, 'template_name', None):
-                    # raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
+                    # raise ImproperlyConfigured(
+                    #   'Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name)
+                    # )
                     # print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
                     continue
                 if app_name == widget.app_name and widget_name == widget.widget_name:

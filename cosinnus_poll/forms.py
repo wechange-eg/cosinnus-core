@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from builtins import object
 
 from django import forms
-from django.forms.widgets import HiddenInput, RadioSelect, SplitHiddenDateTimeWidget
+from django.forms.widgets import HiddenInput
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
@@ -12,7 +12,6 @@ from cosinnus.forms.attached_object import FormAttachableMixin
 from cosinnus.forms.group import GroupKwargModelFormMixin
 from cosinnus.forms.tagged import BaseTaggableObjectForm, get_form
 from cosinnus.forms.user import UserKwargModelFormMixin
-from cosinnus.forms.widgets import DateTimeL10nPicker
 from cosinnus_poll.models import Comment, Option, Poll, Vote
 
 

@@ -2,11 +2,8 @@
 from __future__ import unicode_literals
 
 import logging
-import traceback
 
-from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
-from django.utils.encoding import force_str
 
 from cosinnus.conf import settings
 from cosinnus.core.middleware.cosinnus_middleware import (
@@ -15,12 +12,7 @@ from cosinnus.core.middleware.cosinnus_middleware import (
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import is_user_active
-from cosinnus_cloud.hooks import (
-    create_user_from_obj,
-    generate_group_nextcloud_groupfolder_name,
-    generate_group_nextcloud_id,
-    get_nc_user_id,
-)
+from cosinnus_cloud.hooks import get_nc_user_id
 from cosinnus_cloud.utils import nextcloud
 from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group
 from cosinnus_cloud.utils.nextcloud import OCSException
@@ -81,7 +73,8 @@ class Command(BaseCommand):
                 )
 
             self.stdout.write(
-                f'Done! {counter}/{total_groups} groups processed, {users_added} groups members added ({errors} Errors).'
+                f'Done! {counter}/{total_groups} groups processed, {users_added} groups members added ({errors} '
+                f'Errors).'
             )
         except Exception:
             if settings.DEBUG:

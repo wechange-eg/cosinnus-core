@@ -59,7 +59,8 @@ class CosinnusConf(AppConf):
         '/group/forum/cloud/oauth2/',
         f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
         '/account/verify_email/',
-        # all bbb API endpoints and guest-access views are unlocked (sensitive endpoints have their own logged-in checks)
+        # all bbb API endpoints and guest-access views are unlocked (sensitive endpoints have their own logged-in
+        # checks)
         '/bbb/',
         # these deprecated URLs can be removed from the filter list once the URLs are removed
         # and their /account/ URL-path equivalents are the only remaining version of the view URL
@@ -984,8 +985,8 @@ class CosinnusConf(AppConf):
         '^/two_factor_auth/token_login/',
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
-    # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.
-    # if None or empty list, defaults to using the `LANGUAGES` dict keys
+    # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
+    # to these. If None or empty list, defaults to using the `LANGUAGES` dict keys
     V3_FRONTEND_SUPPORTED_LANGUAGES = []
 
     # Link of the brand / home button in the main navigation. If set to None personal-dashboard is used.
@@ -1001,7 +1002,8 @@ class CosinnusConf(AppConf):
     V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = False
 
     # Additional menu items for the community space in the v3 main navigation.
-    # Format: List of (<id-string>, <label>, <url>, <icon>), e.g.: [('ExternalLink', 'External Link', 'https://external-link.com', 'fa-group')]
+    # Format: List of (<id-string>, <label>, <url>, <icon>),
+    # e.g.: [('ExternalLink', 'External Link', 'https://external-link.com', 'fa-group')]
     V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS = []
 
     # List of help items to be included in the v3 main navigation.
@@ -1348,7 +1350,7 @@ class CosinnusConf(AppConf):
         0: (None, None),
     }
 
-    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: True
+    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: True  # noqa
 
     # whether to enable BBB conferences in legacy groups/projects and events itself,
     # independent of a conference
@@ -1369,7 +1371,8 @@ class CosinnusConf(AppConf):
 
     # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False
-    # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
+    # should the group dashboard widget grid calendar allow drag & drop of events
+    # (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
     CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
 
     # enables the translated fields on groups/events/conference rooms and more
@@ -1468,7 +1471,8 @@ class CosinnusConf(AppConf):
     # - voting in polls
     USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS = False
 
-    # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
+    # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal
+    # (microsite, groups/projects, events, etc.)?
     SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True
 
     # if True, the User Match feature will be enabled
@@ -1538,16 +1542,16 @@ class CosinnusDefaultSettings(AppConf):
     """
     The configuration of BBB join/create params
     for the field presets in `CosinnusConferenceSettings`.
-    - dict keys for the fields correspond to 
+    - dict keys for the fields correspond to
         0: `CosinnusConferenceSettings.SETTING_NO`
         1: `CosinnusConferenceSettings.SETTING_YES`
     - sub-dict keys for the dicts correspond to
         'create' the BBB API create call
         'join': the BBB join URL params
-    
+
     Full example for a single field (value keys and create/join keys
     may be empty or missing for non-options):
-    
+
         'auto_mic': {
             0: {
                 'create': {
@@ -1626,7 +1630,9 @@ class CosinnusDefaultSettings(AppConf):
             'userdata-bbb_mirror_own_webcam': 'true',  # mirror webcam makes seeing your picture less confusing
         },
         'create__coffee': {
-            'muteOnStart': 'false',  # coffee tables insta-join on microphone (overwritten by userdata-bbb_auto_join_audio 'true' anyways, so we show this to be clear)
+            # coffee tables insta-join on microphone (overwritten by userdata-bbb_auto_join_audio 'true' anyways,
+            # so we show this to be clear)
+            'muteOnStart': 'false',
         },
         'join__coffee': {
             'userdata-bbb_skip_check_audio': 'true',  # coffee table insta-join

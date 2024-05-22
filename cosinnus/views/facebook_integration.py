@@ -94,13 +94,17 @@ class FacebookIntegrationViewMixin(object):
         This method will never throw an exception.
         @param userprofile: a userprofile model instance that contains the user's fb info
         @param fb_post_text: Body text of the Facebook post
-        @param urls: Any URLs contained in the post that shall be attached to the post explicitly (for a preview box, etc)
-        @param fb_post_target_id: If None, post to the user's timeline. If given, post to this alternate id of the facebook graph API egdes:
-            /{user-id}/feed, /{page-id}/feed, /{event-id}/feed, or /{group-id}/feed (No need to specify which one; they are unique)
-        @param access_token: Give an alternate access_token. If None, the user's access token is used and the post will be made in the
-            user's voice. If you supply eg. an access_token to a Facebook fan-page and that page as a target, then the post will be made
-            to that page, in the voice *of that page*.
-        @return: a string if posted successfully (either the post's id or '' if unknown), None if the post failed for any reason
+        @param urls: Any URLs contained in the post that shall be attached to the post explicitly
+            (for a preview box, etc)
+        @param fb_post_target_id: If None, post to the user's timeline. If given, post to this alternate id of the
+            facebook graph API egdes:
+                /{user-id}/feed, /{page-id}/feed, /{event-id}/feed, or /{group-id}/feed
+                (No need to specify which one; they are unique)
+        @param access_token: Give an alternate access_token. If None, the user's access token is used and the post will
+            be made in the user's voice. If you supply eg. an access_token to a Facebook fan-page and that page as a
+            target, then the post will be made to that page, in the voice *of that page*.
+        @return: a string if posted successfully (either the post's id or '' if unknown), None if the post failed for
+            any reason
         """
         try:
             # get user id and check for valid token
@@ -114,7 +118,10 @@ class FacebookIntegrationViewMixin(object):
             access_token = access_token or userprofile.settings['fb_accessToken']
             if not access_token:
                 logger.warning(
-                    'Could not post to facebook timeline even though it was requested because of missing fb_accessToken!',
+                    (
+                        'Could not post to facebook timeline even though it was requested because of missing '
+                        'fb_accessToken!'
+                    ),
                     extra={
                         'user-email': userprofile.user.email,
                         'user_fbID': user_id,
@@ -183,7 +190,9 @@ class FacebookIntegrationViewMixin(object):
                 messages.warning(
                     self.request,
                     _(
-                        'We could not post this news post on your Facebook timeline. If this problem persists, please make sure you have granted us all required Facebook permissions, or try disconnecting and re-connecting your Facebook account!'
+                        'We could not post this news post on your Facebook timeline. If this problem persists, please '
+                        'make sure you have granted us all required Facebook permissions, or try disconnecting and '
+                        're-connecting your Facebook account!'
                     ),
                 )
 
@@ -230,7 +239,11 @@ class FacebookIntegrationViewMixin(object):
                 messages.warning(
                     self.request,
                     _(
-                        'We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least "Friends". If you are trying to post as a Fan-Page, make sure you accept the necessary permissions for us to post there, and make sure you are an Editor of the Fan-Page! If this doesn\'t work, contact this project/group\'s administrator!'
+                        'We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, '
+                        'please try disconnecting and re-connecting your Facebook account and make sure you allow us '
+                        'to post with a visibility of at least "Friends". If you are trying to post as a Fan-Page, '
+                        'make sure you accept the necessary permissions for us to post there, and make sure you are an '
+                        "Editor of the Fan-Page! If this doesn't work, contact this project/group's administrator!"
                     ),
                 )
 
@@ -274,7 +287,8 @@ class FacebookIntegrationGroupFormMixin(object):
         if facebook_id:
             if not getattr(self, 'request', None):
                 raise ImproperlyConfigured(
-                    'FacebookIntegrationGroupFormMixin needs a request to be set! Provide your form with one by overriding its __init__ function and passing a request as form kwarg!'
+                    'FacebookIntegrationGroupFormMixin needs a request to be set! Provide your form with one by '
+                    'overriding its __init__ function and passing a request as form kwarg!'
                 )
             # check if user has connected to facebook, we need the access token
             if not self.request.user.cosinnus_profile.get_facebook_user_id():
@@ -312,7 +326,8 @@ class FacebookIntegrationGroupFormMixin(object):
             if had_error:
                 raise forms.ValidationError(
                     _(
-                        'The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!'
+                        'The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have '
+                        'entered the correct ID for your Group/Fan-Page!'
                     )
                 )
 
@@ -325,7 +340,9 @@ class FacebookIntegrationGroupFormMixin(object):
                 if not obtain_token_result:
                     raise forms.ValidationError(
                         _(
-                            'We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!'
+                            'We could not obtain access to the Fan-Page for your connected Facebook Account. Please '
+                            'check that you entered the correct Fan-Page name, and that you are an Editor of that '
+                            'Fan-Page!'
                         )
                     )
 
@@ -347,7 +364,8 @@ def confirm_page_admin(request, group_id):
         messages.warning(
             request,
             _(
-                'We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!'
+                'We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you '
+                'entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!'
             ),
         )
 
@@ -358,7 +376,8 @@ def confirm_page_admin(request, group_id):
 
 def obtain_facebook_page_access_token_for_user(group, page_id, user):
     """Tries to obtain a Facebook-Page access token for a user and for a group, and its connected page-id.
-    Then saves this page-access token in the userprofile.settings as {'fb_page_%(group_id)d_%(page_id)s': <access-token>}
+    Then saves this page-access token in the userprofile.settings as
+    {'fb_page_%(group_id)d_%(page_id)s': <access-token>}
     Page tokens are retrieved via the /me/accounts node on the graph.
     See https://developers.facebook.com/docs/facebook-login/access-tokens/#pagetokens
     @return: True if the fan-page access token was obtained and saved in the user profile.
@@ -522,7 +541,10 @@ def remove_facebook_association(request):
         access_token = userprofile.settings['fb_accessToken']
         if not access_token:
             logger.error(
-                'Could not delete facebook associatione even though it was requested because of missing fb_accessToken!',
+                (
+                    'Could not delete facebook associatione even though it was requested because of missing '
+                    'fb_accessToken!'
+                ),
                 extra={'user-email': userprofile.user.email, 'user_fbID': fb_user_id},
             )
             messages.error(
@@ -540,17 +562,24 @@ def remove_facebook_association(request):
 
         req = requests.delete(post_url, data=data, verify=False)
         if not req.status_code == 200:
-            # logger.error('Facebook deleting association failed, request did not return status=200.', extra={'status':req.status_code, 'content': req._content})
-            # messages.error(request, _('An error occured when trying to disconnect your facebook account! Please contact an administrator!'))
+            # logger.error(
+            #   'Facebook deleting association failed, request did not return status=200.',
+            #   extra={'status':req.status_code, 'content': req._content}
+            # )
+            # messages.error(
+            #   request,
+            #   _('An error occured when trying to disconnect your facebook account! Please contact an administrator!')
+            # )
 
-            # if this fails, we probably don't have an access token to the app anymore anyways, so just delete the association on our end!
+            # if this fails, we probably don't have an access token to the app anymore anyways, so just delete the
+            # association on our end!
             userprofile.delete_facebook_association()
             messages.success(request, _('Your Facebook account was successfully disconnected from this account.'))
             return redirect(reverse('cosinnus:profile-edit'))
 
         response = req.json()
 
-        if response.get('success', False) == True:
+        if response.get('success', False) is True:
             userprofile.delete_facebook_association()
             messages.success(request, _('Your Facebook account was successfully disconnected from this account.'))
         else:
@@ -568,8 +597,8 @@ def remove_facebook_association(request):
 
 def get_user_group_fb_page_access_token(user, group):
     """
-    Check for a user and a group linked to a facebook page, if in that user's profile settings a Facebook page access token
-    for the linked page is saved.
+    Check for a user and a group linked to a facebook page, if in that user's profile settings a Facebook page access
+    token for the linked page is saved.
     """
     if not group.facebook_page_id:
         return None

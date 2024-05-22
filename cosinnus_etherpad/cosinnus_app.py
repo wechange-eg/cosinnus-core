@@ -26,4 +26,4 @@ def register():
     widget_registry.register('etherpad', 'cosinnus_etherpad.dashboard.Latest')
 
     # makemessages replacement protection
-    name = pgettext_lazy('the_app', 'etherpad')
+    name = pgettext_lazy('the_app', 'etherpad')  # noqa

@@ -142,7 +142,7 @@ def get_cosinnus_app_from_class(cls):
     """Tries to parse the cosinnus app name from any class in a cosinnus app"""
     try:
         return cls.__module__.split('.')[0].replace('cosinnus_', '')
-    except:
+    except Exception:
         return '<not-a-cosinnus-module>'
 
 

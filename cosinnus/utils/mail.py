@@ -22,7 +22,8 @@ def send_notification_item_html(
         data.update(
             {
                 'notification_reason': notification_reason,
-                'prefs_url': f"{CosinnusPortal.get_current().get_domain()}{reverse('cosinnus:notifications')}",  # workaround to get the template's `{{prefs_url}}` work properly
+                # workaround to get the template's `{{prefs_url}}` work properly
+                'prefs_url': f"{CosinnusPortal.get_current().get_domain()}{reverse('cosinnus:notifications')}",
             }
         )
     if extra_data:
@@ -43,7 +44,8 @@ def send_notification_item_html_threaded(
         data.update(
             {
                 'notification_reason': notification_reason,
-                'prefs_url': f"{CosinnusPortal.get_current().get_domain()}{reverse('cosinnus:notifications')}",  # workaround to get the template's `{{prefs_url}}` work properly
+                # workaround to get the template's `{{prefs_url}}` work properly
+                'prefs_url': f"{CosinnusPortal.get_current().get_domain()}{reverse('cosinnus:notifications')}",
             }
         )
     mail_template = '/cosinnus/html_mail/notification.html'

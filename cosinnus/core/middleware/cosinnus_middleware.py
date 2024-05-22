@@ -22,7 +22,6 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.encoding import force_str
 from django.utils.http import url_has_allowed_host_and_scheme
-from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from django_otp import user_has_device
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -311,7 +310,8 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                             messages.success(
                                 request,
                                 _(
-                                    'This team no longer resides under the URL you entered. You have been redirected automatically to the current location.'
+                                    'This team no longer resides under the URL you entered. You have been redirected '
+                                    'automatically to the current location.'
                                 ),
                             )
                         return HttpResponseRedirect(redirect_url)
@@ -363,7 +363,8 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                                 ):
                                     return HttpResponseRedirect(target_group.get_absolute_url())
                             elif check_ug_membership(request.user, target_group):
-                                # normal users only have access to the conference page of a conference group (and the management views)
+                                # normal users only have access to the conference page of a conference group (and the
+                                # management views)
                                 if len(request_tokens) <= 4 or (
                                     request_tokens[4] not in ['conference', 'members', 'leave'] and not is_admin
                                 ):
@@ -409,7 +410,9 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
                 messages.warning(
                     request,
                     _(
-                        "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+                        'You need to verify your email before logging in. We have just sent you an email with a '
+                        "verifcation link. Please check your inbox, and if you haven't received an email, please check "
+                        'your spam folder.'
                     ),
                 )
                 do_logout = True
@@ -441,7 +444,9 @@ class ExternalEmailLinkRedirectNoticeMiddleware(MiddlewareMixin):
             messages.warning(
                 request,
                 _(
-                    'You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it.'
+                    'You have been redirected here because you clicked a link in one of our mails. We do not link '
+                    'directly to external websites from our mails as a safety precaution. Please find the link below '
+                    'if you wish to visit it.'
                 ),
             )
 
@@ -464,7 +469,7 @@ class GroupResolvingMiddlewareMixin(object):
                 except Exception as e:
                     if settings.DEBUG:
                         raise e
-            except:
+            except Exception:
                 pass
             if not hasattr(request, '_middleware_resolved_group'):
                 setattr(request, '_middleware_resolved_group', None)
@@ -482,7 +487,7 @@ class GroupResolvingMiddlewareMixin(object):
                 # so we allow it for publicly_visible groups
                 if path_split[3] == 'note' and path_split[4] == 'embed':
                     return True
-            except:
+            except Exception:
                 pass
         return False
 
@@ -494,7 +499,7 @@ class GroupResolvingMiddlewareMixin(object):
                 path_split = request.path.split('/')
                 if path_split[3] == 'event' and path_split[4] == 'feed':
                     return True
-            except:
+            except Exception:
                 pass
         # additional check for additional feed urls (root patterns)
         for url_pattern in ICAL_FEED_URL_PATTERNS:
@@ -557,7 +562,7 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(GroupResolvingMiddleware
                     try:
                         if JWTAuthentication().authenticate(request):
                             return
-                    except:
+                    except Exception:
                         pass
                 return redirect_to_not_logged_in(request)
 
@@ -593,12 +598,14 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
             if request.path in ['/login/', '/signup/']:
                 # catch redirect loop for non-staff users trying to access the admin area
                 if request.GET.get('next', '').startswith('/admin/') and not user.is_staff:
-                    # additional explanation for superusers trying to access the admin area but someone forgot to make them staff as well
+                    # additional explanation for superusers trying to access the admin area but someone forgot to make
+                    # them staff as well
                     if user.is_superuser:
                         messages.warning(
                             request,
                             _(
-                                'You cannot access the admin area because you are missing the "Staff" permission even though you are a superuser. Please ask another admin to grant it to you.'
+                                'You cannot access the admin area because you are missing the "Staff" permission even '
+                                'though you are a superuser. Please ask another admin to grant it to you.'
                             ),
                         )
                     return redirect('cosinnus:profile-detail')
