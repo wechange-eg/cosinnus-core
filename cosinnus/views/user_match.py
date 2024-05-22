@@ -193,7 +193,7 @@ def check_for_user_match(from_user, to_user):
 
         # open rocketchat
         if settings.COSINNUS_ROCKET_ENABLED:
-            match_case_from.get_rocketchat_room_url()
+            match_case_from.get_rocketchat_room_url()  # sets rocketchat room ids and name in the match object
             if match_case_from.rocket_chat_room_id and match_case_from.rocket_chat_room_name:
                 match_case_to.rocket_chat_room_id = match_case_from.rocket_chat_room_id
                 match_case_to.rocket_chat_room_name = match_case_from.rocket_chat_room_name

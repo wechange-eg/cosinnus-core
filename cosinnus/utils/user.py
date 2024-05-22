@@ -504,6 +504,7 @@ def create_guest_user_and_login(guest_access, username, request=None):
     and if a request is given, logs the current session in as that guest user.
     If a request is given, the current user may not already be logged in or this method will fail!
 
+    @param guest_access: instance of `UserGroupGuestAccess`
     @return: True if successful, False if not
     """
     if request and request.user.is_authenticated:

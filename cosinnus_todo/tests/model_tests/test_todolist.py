@@ -16,19 +16,19 @@ class TodoListTest(TestCase):
 
     def test_delete_no_todos(self):
         initial_count = TodoList.objects.all().count()
-        list = TodoList.objects.create(title='List 1', group=self.group)
+        todolist = TodoList.objects.create(title='List 1', group=self.group)
         self.assertEqual(TodoList.objects.all().count(), initial_count + 1)
-        list.delete()
+        todolist.delete()
         self.assertEqual(TodoList.objects.all().count(), initial_count)
 
     def test_delete(self):
         initial_count = TodoList.objects.all().count()
         self.assertEqual(TodoEntry.objects.all().count(), 0)
-        list = TodoList.objects.create(title='List 2', group=self.group)
-        TodoEntry.objects.create(title='TD 1', group=self.group, creator=self.user, todolist=list)
-        TodoEntry.objects.create(title='TD 2', group=self.group, creator=self.user, todolist=list)
+        todolist = TodoList.objects.create(title='List 2', group=self.group)
+        TodoEntry.objects.create(title='TD 1', group=self.group, creator=self.user, todolist=todolist)
+        TodoEntry.objects.create(title='TD 2', group=self.group, creator=self.user, todolist=todolist)
         self.assertEqual(TodoList.objects.all().count(), initial_count + 1)
         self.assertEqual(TodoEntry.objects.all().count(), 2)
-        list.delete()
+        todolist.delete()
         self.assertEqual(TodoList.objects.all().count(), initial_count)
         self.assertEqual(TodoEntry.objects.all().count(), 0)

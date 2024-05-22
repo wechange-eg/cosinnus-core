@@ -18,7 +18,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import AttachedObject, get_tag_object_model
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.views.attached_object import AttachableObjectSelect2View, build_attachment_field_result
+from cosinnus.views.attached_object import AttachableObjectSelect2View
 
 logger = logging.getLogger('cosinnus')
 
@@ -52,7 +52,7 @@ class FormAttachableMixin(object):
                     #   % (attached.model_name, obj.title),
                     # )
                     # TODO: sascha: returning unescaped html here breaks the javascript of django-select2
-                    html = build_attachment_field_result(attached.model_name, obj)  # noqa
+                    # html = build_attachment_field_result(attached.model_name, obj)
                     preresults.append(text_only)
 
         # add a field for each model type of attachable file provided by cosinnus apps

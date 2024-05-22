@@ -62,7 +62,7 @@ from cosinnus.forms.group import (
     MultiUserSelectForm,
 )
 from cosinnus.forms.tagged import get_form
-from cosinnus.models import group as group_module  # noqa #circular import
+from cosinnus.models import group as group_module  # noqa # circular import prevention
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import (
     CosinnusGroup,

@@ -85,7 +85,7 @@ class ConferenceRemindersForm(forms.ModelForm):
                 required=False,
             )
             if kwargs.get('data', {}).get('send', None) == 'send_immediately':
-                self.fields['send_immediately_users'].required = True
+                self.fields['send_immediately_users'].required = True  # fix: had not been set correctly for a while
 
     def get_initial_for_field(self, field, field_name):
         dynamic_fields = self.instance.dynamic_fields
