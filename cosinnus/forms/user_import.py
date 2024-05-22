@@ -38,9 +38,10 @@ class CosinusUserImportCSVForm(forms.Form):
         if mismatched_rows:
             raise forms.ValidationError(
                 _(
-                    f'Rows on these line numbers did not have the same number of items ({len(processed_header)}) as '
-                    f'the header: {", ".join(mismatched_rows)}!'
+                    'Rows on these line numbers did not have the same number of items (%(header_length)s) as the '
+                    'header: %(mismatched_rows)s!'
                 )
+                % {'header_length': len(processed_header), 'mismatched_rows': ', '.join(mismatched_rows)}
             )
 
         # make a datadict, combining the headers with each row, ignoring any columns not found in
