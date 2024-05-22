@@ -342,7 +342,7 @@ def uniquify_list(arr):
     return [x for x in arr if not (x in seen or seen_add(x))]
 
 
-def chunked_set_many(data, timeout=300, chunk_size=2):
+def set_many_chunked(data, timeout=300, chunk_size=2):
     """Like django cache's `set_many`, but done in chunks. Useful for sets that get very
     large if the backend might be overburdened."""
     items = list(data.items())

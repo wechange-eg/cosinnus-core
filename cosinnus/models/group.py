@@ -74,8 +74,8 @@ from cosinnus.utils.files import (
     image_thumbnail_url,
 )
 from cosinnus.utils.functions import (
-    chunked_set_many,
     clean_single_line_text,
+    set_many_chunked,
     sort_key_strcoll_attr,
     unique_aware_slugify,
 )
@@ -315,7 +315,7 @@ class CosinnusGroupManager(models.Manager):
 
                     for group in query:
                         groups[self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug)] = group
-                    chunked_set_many(groups, timeout=settings.COSINNUS_GROUP_CACHE_TIMEOUT)
+                    set_many_chunked(groups, timeout=settings.COSINNUS_GROUP_CACHE_TIMEOUT)
 
                 # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
                 group_list = list(groups.values())
