@@ -167,8 +167,8 @@ setup(
         # requirements for documentation
         'sphinx==7.1.2',
         # dev requirements
-        'ruff=0.4.1',
-        'pre-commit=3.7.0',
+        'ruff==0.4.4',
+        'pre-commit==3.5.0',
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django-update-4-2#egg=django-awesome-avatar',
         'django-filer @ git+https://github.com/wechange-eg/django-filer.git@django-update-4-2#egg=django-filer',
