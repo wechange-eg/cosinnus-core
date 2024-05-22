@@ -73,7 +73,12 @@ from cosinnus.utils.files import (
     image_thumbnail,
     image_thumbnail_url,
 )
-from cosinnus.utils.functions import clean_single_line_text, sort_key_strcoll_attr, unique_aware_slugify
+from cosinnus.utils.functions import (
+    chunked_set_many,
+    clean_single_line_text,
+    sort_key_strcoll_attr,
+    unique_aware_slugify,
+)
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus.views.mixins.media import FlickrEmbedFieldMixin, VideoEmbedFieldMixin
@@ -310,7 +315,7 @@ class CosinnusGroupManager(models.Manager):
 
                     for group in query:
                         groups[self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug)] = group
-                    cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
+                    chunked_set_many(groups, timeout=settings.COSINNUS_GROUP_CACHE_TIMEOUT)
 
                 # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
                 group_list = list(groups.values())

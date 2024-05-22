@@ -11,6 +11,7 @@ from importlib import import_module
 from uuid import uuid1
 
 import six
+from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.core.validators import validate_email
 from django.utils.encoding import force_str
@@ -339,3 +340,12 @@ def uniquify_list(arr):
     seen = set()
     seen_add = seen.add
     return [x for x in arr if not (x in seen or seen_add(x))]
+
+
+def chunked_set_many(data, timeout=300, chunk_size=2):
+    """Like django cache's `set_many`, but done in chunks. Useful for sets that get very
+    large if the backend might be overburdened."""
+    items = list(data.items())
+    for i in range(0, len(items), chunk_size):
+        chunk = dict(items[i : i + chunk_size])
+        cache.set_many(chunk, timeout)

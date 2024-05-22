@@ -1353,7 +1353,6 @@ class UserSelect2View(Select2View):
     """
 
     HARD_USER_LIMIT = 50
-    HARD_GROUP_LIMIT = 20
 
     def check_all_permissions(self, request, *args, **kwargs):
         user = request.user
@@ -1378,19 +1377,11 @@ class UserSelect2View(Select2View):
         if direct_email_user and check_user_can_see_user(request.user, direct_email_user):
             users.append(direct_email_user)
 
-        # | Q(username__icontains=term))
-        # Filter all groups the user is a member of, and all public groups for
-        # the term.
-        # Use CosinnusGroup.objects.get_cached() to search in all groups
-        # instead
-        groups = list(
-            set(get_cosinnus_group_model().objects.get_for_user(request.user)).union(
-                get_cosinnus_group_model().objects.public()
-            )
-        )
-        # hard limit user count that we search for so we don't die on very short fuzzy searches
-        groups = groups[: self.HARD_GROUP_LIMIT]
-
+        # Filter all groups the user is a member of. No longer allows messaging public groups
+        #   that the user is not a member of.
+        # The Forum can never be messaged unless the user is an admin.
+        # Use CosinnusGroup.objects.get_cached() to search in all groups instead
+        groups = list(get_cosinnus_group_model().objects.get_for_user(request.user))
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         groups = [
             group
