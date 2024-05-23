@@ -1297,7 +1297,7 @@ class RocketChatConnection:
         either kick or invite and promote or demote a user depending on their status"""
         is_pending = membership.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
         if is_pending:
-            self.groups_kick(membership)
+            self.groups_kick(membership.user, membership.group)
         else:
             self.groups_invite(membership)
             if membership.status == MEMBERSHIP_ADMIN:
@@ -1326,22 +1326,18 @@ class RocketChatConnection:
                         extra={'response': response},
                     )
 
-    def groups_kick(self, membership):
-        """
-        Delete membership for default channels
-        :param group:
-        :return:
-        """
-        user_id = self.get_user_id(membership.user)
+    def groups_kick(self, user, group):
+        """Delete membership for default channels."""
+        user_id = self.get_user_id(user)
         if not user_id:
             return
 
         # Remove role in general and news group
         for room in settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS:
-            room_id = self.get_group_id(membership.group, room_key=room)
+            room_id = self.get_group_id(group, room_key=room)
             if room_id:
                 response = self.rocket.groups_kick(room_id=room_id, user_id=user_id).json()
-                if not response.get('success'):
+                if not response.get('success') and not response.get('errorType', '') == 'error-user-not-in-room':
                     logger.error(
                         'RocketChat: groups_kick ' + response.get('errorType', '<No Error Type>'),
                         extra={'response': response},
