@@ -9,13 +9,14 @@ import os
 import django
 
 import cosinnus
-from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'cosinnus.tests.settings.standalone_settings'
 os.environ['WECHANGE_SECRET_KEY'] = 'dummy-secret'
 os.environ['WECHANGE_DATABASE_URL'] = 'postgres://dummy:dummy@localhost/dummy'
 
 django.setup()
+
+from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup  # noqa
 
 initialize_cosinnus_after_startup()
 
