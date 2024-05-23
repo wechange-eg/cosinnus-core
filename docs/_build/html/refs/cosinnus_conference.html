@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_conference package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus_conference package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -155,7 +155,7 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_conference.bbb_streaming.create_streamer">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_conference.bbb_streaming.</span></span><span class="sig-name descname"><span class="pre">create_streamer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbb_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbb_secret</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream_url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_conference.bbb_streaming.create_streamer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a streamer on the streaming server. 
+<dd><p>Creates a streamer on the streaming server.
 &#64;return: The ID of the created streamer or raises an exception</p>
 </dd></dl>
 
@@ -165,7 +165,7 @@
 <dd><p>Deletes a streamer by id.
 On success, returns True, on error returns False, meaning the streamer is no
 longer active and can be deleted from our records.
-Raises an exception on other results. 
+Raises an exception on other results.
 &#64;return: True if the streamer was deleted, False if it already didn’t exist, otherwise raises an exception</p>
 </dd></dl>
 
@@ -1606,7 +1606,7 @@ Example for country and organization fields: [[(‘DE’, 50), (‘UA’, 25), (
 <dt class="sig sig-object py" id="cosinnus_conference.views.FilterConferenceRoomMixin">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_conference.views.</span></span><span class="sig-name descname"><span class="pre">FilterConferenceRoomMixin</span></span><a class="headerlink" href="#cosinnus_conference.views.FilterConferenceRoomMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Sets <cite>self.room</cite> as CosinnusConferenceRoom for the group already set during dispatch, 
+<p>Sets <cite>self.room</cite> as CosinnusConferenceRoom for the group already set during dispatch,
 pulled from the <cite>kwargs[‘room_slug’]</cite>, 404s if not found. Excepcts <cite>self.group</cite> to be set.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_conference.views.FilterConferenceRoomMixin.dispatch">
@@ -1794,6 +1794,7 @@ ConferenceAttendanceTrackingMixin and ConferenceUserDataStatisticsMixin as table
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

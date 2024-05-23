@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.utils.fabric package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.utils.fabric package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -56,7 +56,7 @@ pull_branch=’my_branch’,</p>
 <p>)</p>
 </div></blockquote>
 <p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
-<p>Then invoke any task defined in this file by calling <cite>fab</cite>. 
+<p>Then invoke any task defined in this file by calling <cite>fab</cite>.
 Usually you want to only call the high level tasks, (see “Deployment tasks” below),
 unless you want to chain individual small tasks to perform a custom execution.</p>
 <p>Examples:</p>
@@ -209,7 +209,7 @@ settings/behaviors; they are documented under
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.fabric.fabric_utils.setup_env">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.fabric.fabric_utils.</span></span><span class="sig-name descname"><span class="pre">setup_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">portal_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_branch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosinnus_pull_branch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confirm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_remote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'origin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosinnus_pull_remote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'origin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frontend_pull_branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frontend_pull_remote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'origin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legacy_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_requirements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'requirements-production.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_unit_commands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.fabric.fabric_utils.setup_env" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets up the env with all variables needed to run cosinnus 
+<dd><p>Sets up the env with all variables needed to run cosinnus
 fabric commands.
 &#64;param portal_name: the name for the user and portal instance
 &#64;param domain: the URL domain for the portal, for SSH connections and</p>
@@ -264,6 +264,7 @@ fabric commands.
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.apis package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.apis package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,12 +44,12 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This is a wrapper for django-bigbluebutton.bbb</p>
 <p>Some features are not present in bbb.py; for instance a meeting creation with a <cite>max_attendees</cite> value.
-Therefore we create a create_verbose_meeting function, to address these properties of a BBBRoom 
+Therefore we create a create_verbose_meeting function, to address these properties of a BBBRoom
 we need in the WeChange project.</p>
 <p>Functions that are not included in bbb.py are called <cite>manually</cite> via urllib.
 For a full documentation on BigBlueButton API parameters have a look at: <a class="reference external" href="https://docs.bigbluebutton.org/dev/api.html">https://docs.bigbluebutton.org/dev/api.html</a></p>
-<p>Checksum for API parameters is generated with SHA1 instead of SHA256 hash by default. Set the used hash algorithm in the 
-global settings in <cite>BBB_HASH_ALGORITHM</cite>.
+<p>Checksum for API parameters is generated with SHA1 instead of SHA256 hash by default. Set the used hash algorithm in
+the global settings in <cite>BBB_HASH_ALGORITHM</cite>.
 All wrapped functions from bbb.py are called with sha1, regardless of the <cite>BBB_HASH_ALGORITHM</cite> setting.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.RecordingAPIServerNotSetUp">
@@ -189,10 +189,8 @@ See <a class="reference external" href="https://docs.bigbluebutton.org/2.2/custo
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.apis.bigbluebutton.BigBlueButtonAPI.start">
 <span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meeting_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moderator_password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attendee_password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voice_bridge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_meeting_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presentation_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.bigbluebutton.BigBlueButtonAPI.start" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>This function calls the BigBlueButton API directly to create a meeting with all available parameters available</dt><dd><p>in the cosinnus-core.BBBRoom model.</p>
-</dd>
-</dl>
+<dd><p>This function calls the BigBlueButton API directly to create a meeting with all available parameters available
+in the cosinnus-core.BBBRoom model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -272,7 +270,8 @@ See <a class="reference external" href="https://docs.bigbluebutton.org/2.2/custo
 <dt class="sig sig-object py" id="cosinnus.apis.cleverreach.signup_user_to_cleverreach_group">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.apis.cleverreach.</span></span><span class="sig-name descname"><span class="pre">signup_user_to_cleverreach_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.apis.cleverreach.signup_user_to_cleverreach_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Does a signup to a cleverreach newsletter group for a given user (unless they have already signed up before).
-Settings <cite>COSINNUS_CLEVERREACH_BASE_URL</cite>, <cite>COSINNUS_CLEVERREACH_GROUP_IDS</cite>, <cite>COSINNUS_CLEVERREACH_ACCESS_TOKEN</cite> must be configured.
+Settings <cite>COSINNUS_CLEVERREACH_BASE_URL</cite>, <cite>COSINNUS_CLEVERREACH_GROUP_IDS</cite>, <cite>COSINNUS_CLEVERREACH_ACCESS_TOKEN</cite>
+must be configured.
 If setting <cite>COSINNUS_CLEVERREACH_FORM_IDS</cite> is also configured, the user will be signed up</p>
 <blockquote>
 <div><p>to the newsletter group, then deactivated, then sent an activation mail via the signup form.
@@ -314,6 +313,7 @@ and the subsequent welcome mails are triggered.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

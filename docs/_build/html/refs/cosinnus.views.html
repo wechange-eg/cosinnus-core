@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.views package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.views package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -401,7 +401,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.administration.AdminUserUpdateView.post">
 <span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.administration.AdminUserUpdateView.post" title="Permalink to this definition">¶</a></dt>
-<dd><p>if user changed his email, check if user is member of an integrated portal, 
+<dd><p>if user changed his email, check if user is member of an integrated portal,
 and if so ignore that change. Also, ignore the change if email verification is active, and instead
 set a new email-to-be-verified and send user a confirmation email.</p>
 </dd></dl>
@@ -821,11 +821,11 @@ Subclasses can override this to return any object.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.attached_object.</span></span><span class="sig-name descname"><span class="pre">AttachableObjectSelect2View</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.attached_object.AttachableObjectSelect2View" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Select2View</span></code></p>
 <p>This view is used as API backend to serve the suggestions for the message recipient field.</p>
-<p>For each model type use the search terms to both search in the attachable model types 
+<p>For each model type use the search terms to both search in the attachable model types
 (that is, their configured type aliases (see settings.COSINNUS_ATTACHABLE_OBJECTS_SUGGEST_ALIASES))
 and their title for good matches.</p>
 <dl class="simple">
-<dt>Examples (assumed that ‘event’ is configured as an alias for [cosinnus_event.Event]: </dt><dd><p>term: ‘even Heilig’ would return an [Event] with title ‘Heiligabendfeier’
+<dt>Examples (assumed that ‘event’ is configured as an alias for [cosinnus_event.Event]:</dt><dd><p>term: ‘even Heilig’ would return an [Event] with title ‘Heiligabendfeier’
 term: ‘even Heilig’ would not find a [File] with title ‘Einladung zum Heiligabend’
 term  ‘even Heilig’ would (!) return a [File] with title ‘Invitiation: Heiligabend-Event.pdf’</p>
 </dd>
@@ -928,11 +928,11 @@ attached to your object in `settings.COSINNUS_ATTACHABLE_OBJECTS</cite>.</p>
 <dt class="sig sig-object py" id="cosinnus.views.attached_object.attachable_object_select2_view">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.attached_object.</span></span><span class="sig-name descname"><span class="pre">attachable_object_select2_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.attached_object.attachable_object_select2_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>This view is used as API backend to serve the suggestions for the message recipient field.</p>
-<p>For each model type use the search terms to both search in the attachable model types 
+<p>For each model type use the search terms to both search in the attachable model types
 (that is, their configured type aliases (see settings.COSINNUS_ATTACHABLE_OBJECTS_SUGGEST_ALIASES))
 and their title for good matches.</p>
 <dl class="simple">
-<dt>Examples (assumed that ‘event’ is configured as an alias for [cosinnus_event.Event]: </dt><dd><p>term: ‘even Heilig’ would return an [Event] with title ‘Heiligabendfeier’
+<dt>Examples (assumed that ‘event’ is configured as an alias for [cosinnus_event.Event]:</dt><dd><p>term: ‘even Heilig’ would return an [Event] with title ‘Heiligabendfeier’
 term: ‘even Heilig’ would not find a [File] with title ‘Einladung zum Heiligabend’
 term  ‘even Heilig’ would (!) return a [File] with title ‘Invitiation: Heiligabend-Event.pdf’</p>
 </dd>
@@ -953,7 +953,7 @@ term  ‘even Heilig’ would (!) return a [File] with title ‘Invitiation: Hei
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.authentication.</span></span><span class="sig-name descname"><span class="pre">AdminOnlyOTPTokenValidationView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.authentication.AdminOnlyOTPTokenValidationView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginView</span></code></p>
 <p>Validation “login” view for 2-factor auth otp devices. Acts
-as an intercepting login page in the django-admin area for 
+as an intercepting login page in the django-admin area for
 logged-in users who aren’t yet 2fa validated.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.views.authentication.AdminOnlyOTPTokenValidationView.authentication_form">
@@ -988,7 +988,7 @@ logged-in users who aren’t yet 2fa validated.</p>
 <dt class="sig sig-object py" id="cosinnus.views.authentication.Cosinnus2FABackupTokensView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.authentication.</span></span><span class="sig-name descname"><span class="pre">Cosinnus2FABackupTokensView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.authentication.Cosinnus2FABackupTokensView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BackupTokensView</span></code></p>
-<p>The view generates a certain number of backup tokens that may be used as an alternative way of 
+<p>The view generates a certain number of backup tokens that may be used as an alternative way of
 authentication in case the main device with token generator app won’t be available.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.authentication.Cosinnus2FABackupTokensView.success_url">
@@ -1097,7 +1097,7 @@ Its main task is to help user activate the 2FA-feature in a step by step way.</p
 <dt class="sig sig-object py" id="cosinnus.views.authentication.UserOTPTokenValidationView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.authentication.</span></span><span class="sig-name descname"><span class="pre">UserOTPTokenValidationView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.authentication.UserOTPTokenValidationView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireLoggedInMixin" title="cosinnus.views.mixins.group.RequireLoggedInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireLoggedInMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginView</span></code></p>
-<p>Another validation “login” view for 2-factor auth otp devices. It is 
+<p>Another validation “login” view for 2-factor auth otp devices. It is
 responsible for checking if a common - not admin - user has a token that would
 provide him/her an access to the portal.</p>
 <dl class="py property">
@@ -1149,14 +1149,14 @@ provide him/her an access to the portal.</p>
 <dt class="sig sig-object py" id="cosinnus.views.authentication.admin_only_otp_token_validation">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.authentication.</span></span><span class="sig-name descname"><span class="pre">admin_only_otp_token_validation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.authentication.admin_only_otp_token_validation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validation “login” view for 2-factor auth otp devices. Acts
-as an intercepting login page in the django-admin area for 
+as an intercepting login page in the django-admin area for
 logged-in users who aren’t yet 2fa validated.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.authentication.two_factor_auth_back_tokens">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.authentication.</span></span><span class="sig-name descname"><span class="pre">two_factor_auth_back_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.authentication.two_factor_auth_back_tokens" title="Permalink to this definition">¶</a></dt>
-<dd><p>The view generates a certain number of backup tokens that may be used as an alternative way of 
+<dd><p>The view generates a certain number of backup tokens that may be used as an alternative way of
 authentication in case the main device with token generator app won’t be available.</p>
 </dd></dl>
 
@@ -1196,7 +1196,7 @@ Its main task is to help user activate the 2FA-feature in a step by step way.</p
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.authentication.user_otp_token_validation">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.authentication.</span></span><span class="sig-name descname"><span class="pre">user_otp_token_validation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.authentication.user_otp_token_validation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Another validation “login” view for 2-factor auth otp devices. It is 
+<dd><p>Another validation “login” view for 2-factor auth otp devices. It is
 responsible for checking if a common - not admin - user has a token that would
 provide him/her an access to the portal.</p>
 </dd></dl>
@@ -1289,7 +1289,7 @@ Returns None if none apply</p>
 <dt class="sig sig-object py" id="cosinnus.views.bbb_room.BBBRoomMeetingQueueAPIView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.bbb_room.</span></span><span class="sig-name descname"><span class="pre">BBBRoomMeetingQueueAPIView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.bbb_room.BBBRoomMeetingQueueAPIView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
-<p>An intermediate view that can be visited for a BBB-Room that 
+<p>An intermediate view that can be visited for a BBB-Room that
 is in the process of being created, without blocking the code.
 The target object is the media_tag id. As long as the media_tag
 has no BBBRoom, it will show a waiting page, and if the tag has a
@@ -1320,7 +1320,7 @@ GET params to be provided and valid:</p>
 <dt class="sig sig-object py" id="cosinnus.views.bbb_room.BBBRoomMeetingQueueView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.bbb_room.</span></span><span class="sig-name descname"><span class="pre">BBBRoomMeetingQueueView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.bbb_room.BBBRoomMeetingQueueView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireLoggedInMixin" title="cosinnus.views.mixins.group.RequireLoggedInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireLoggedInMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectView</span></code></p>
-<p>An intermediate view that can be visited for a BBB-Room that 
+<p>An intermediate view that can be visited for a BBB-Room that
 is in the process of being created, without blocking the code.
 The target object is the media_tag id. As long as the media_tag
 has no BBBRoom, it will show a waiting page, and if the tag has a
@@ -1336,7 +1336,7 @@ room, it will redirect to the room URL</p>
 <dt class="sig sig-object py" id="cosinnus.views.bbb_room.BBBRoomMeetingView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.bbb_room.</span></span><span class="sig-name descname"><span class="pre">BBBRoomMeetingView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.bbb_room.BBBRoomMeetingView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectView</span></code></p>
-<p>Generates a BBB-Room join URL for a logged in user depending on their permission level. 
+<p>Generates a BBB-Room join URL for a logged in user depending on their permission level.
 Also makes sure the room is created on the BBB server.</p>
 <p>if a user is a superuser,but neither attendee or moderator, they join as attendee!</p>
 <dl class="py method">
@@ -1366,7 +1366,7 @@ which redirects to this same view with filled GET params.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.bbb_room.bbb_room_meeting">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.bbb_room.</span></span><span class="sig-name descname"><span class="pre">bbb_room_meeting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.bbb_room.bbb_room_meeting" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a BBB-Room join URL for a logged in user depending on their permission level. 
+<dd><p>Generates a BBB-Room join URL for a logged in user depending on their permission level.
 Also makes sure the room is created on the BBB server.</p>
 <p>if a user is a superuser,but neither attendee or moderator, they join as attendee!</p>
 </dd></dl>
@@ -1374,7 +1374,7 @@ Also makes sure the room is created on the BBB server.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.bbb_room.bbb_room_meeting_queue">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.bbb_room.</span></span><span class="sig-name descname"><span class="pre">bbb_room_meeting_queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.bbb_room.bbb_room_meeting_queue" title="Permalink to this definition">¶</a></dt>
-<dd><p>An intermediate view that can be visited for a BBB-Room that 
+<dd><p>An intermediate view that can be visited for a BBB-Room that
 is in the process of being created, without blocking the code.
 The target object is the media_tag id. As long as the media_tag
 has no BBBRoom, it will show a waiting page, and if the tag has a
@@ -1384,7 +1384,7 @@ room, it will redirect to the room URL</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.bbb_room.bbb_room_meeting_queue_api">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.bbb_room.</span></span><span class="sig-name descname"><span class="pre">bbb_room_meeting_queue_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.bbb_room.bbb_room_meeting_queue_api" title="Permalink to this definition">¶</a></dt>
-<dd><p>An intermediate view that can be visited for a BBB-Room that 
+<dd><p>An intermediate view that can be visited for a BBB-Room that
 is in the process of being created, without blocking the code.
 The target object is the media_tag id. As long as the media_tag
 has no BBBRoom, it will show a waiting page, and if the tag has a
@@ -1586,7 +1586,7 @@ Excpects <cite>element_ids[]</cite> as POST arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.common.LoginViewAdditionalLogicMixin.set_response_cookies">
 <span class="sig-name descname"><span class="pre">set_response_cookies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.LoginViewAdditionalLogicMixin.set_response_cookies" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets cookies on the response of aa successfully validated login 
+<dd><p>Sets cookies on the response of aa successfully validated login
 &#64;return: The response itself</p>
 </dd></dl>
 
@@ -1654,8 +1654,20 @@ If a LikeObject existed, and either like is False, and the model has the <cite>N
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.common.</span></span><span class="sig-name descname"><span class="pre">cosinnus_logout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.cosinnus_logout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wraps the django logout view to delete the “wp_user_logged_in” cookie on logouts
 (this seems to only clear the value of the cookie and not completely delete it!).
-Will redirect to a “you have been logged out” page, that may perform additional 
+Will redirect to a “you have been logged out” page, that may perform additional
 JS queries or redirects to log out from other services.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.views.common.cosinnus_post_logout_actions">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.views.common.</span></span><span class="sig-name descname"><span class="pre">cosinnus_post_logout_actions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.cosinnus_post_logout_actions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs actions that should run just after the user is logged out</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.views.common.cosinnus_pre_logout_actions">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.views.common.</span></span><span class="sig-name descname"><span class="pre">cosinnus_pre_logout_actions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.cosinnus_pre_logout_actions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs actions that should run just before the user is logged out</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1864,12 +1876,12 @@ POST variables and then check if it’s valid.</p>
 <dt class="sig sig-object py" id="cosinnus.views.conference_administration.ConferenceOverviewView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.conference_administration.</span></span><span class="sig-name descname"><span class="pre">ConferenceOverviewView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.conference_administration.ConferenceOverviewView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequirePortalManagerMixin" title="cosinnus.views.mixins.group.RequirePortalManagerMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequirePortalManagerMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TemplateView</span></code></p>
-<p>A deep-down report list view of all conferences, their rooms, events, 
+<p>A deep-down report list view of all conferences, their rooms, events,
 and for all of those, their <cite>CosinnusConferenceSettings</cite> if they have one assigned.</p>
 <dl class="simple">
 <dt>Kwargs:</dt><dd><ul class="simple">
 <li><dl class="simple">
-<dt>only_nonstandard: if True, only objects with a set <cite>CosinnusConferenceSettings</cite> </dt><dd><p>will be listed</p>
+<dt>only_nonstandard: if True, only objects with a set <cite>CosinnusConferenceSettings</cite></dt><dd><p>will be listed</p>
 </dd>
 </dl>
 </li>
@@ -1937,12 +1949,12 @@ premium block.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.conference_administration.conference_overview">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.conference_administration.</span></span><span class="sig-name descname"><span class="pre">conference_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.conference_administration.conference_overview" title="Permalink to this definition">¶</a></dt>
-<dd><p>A deep-down report list view of all conferences, their rooms, events, 
+<dd><p>A deep-down report list view of all conferences, their rooms, events,
 and for all of those, their <cite>CosinnusConferenceSettings</cite> if they have one assigned.</p>
 <dl class="simple">
 <dt>Kwargs:</dt><dd><ul class="simple">
 <li><dl class="simple">
-<dt>only_nonstandard: if True, only objects with a set <cite>CosinnusConferenceSettings</cite> </dt><dd><p>will be listed</p>
+<dt>only_nonstandard: if True, only objects with a set <cite>CosinnusConferenceSettings</cite></dt><dd><p>will be listed</p>
 </dd>
 </dl>
 </li>
@@ -2156,17 +2168,23 @@ Is usually used by the subclass’ get_response method.</p>
 This method will never throw an exception.
 &#64;param userprofile: a userprofile model instance that contains the user’s fb info
 &#64;param fb_post_text: Body text of the Facebook post
-&#64;param urls: Any URLs contained in the post that shall be attached to the post explicitly (for a preview box, etc)
-&#64;param fb_post_target_id: If None, post to the user’s timeline. If given, post to this alternate id of the facebook graph API egdes:</p>
+&#64;param urls: Any URLs contained in the post that shall be attached to the post explicitly</p>
 <blockquote>
-<div><p>/{user-id}/feed, /{page-id}/feed, /{event-id}/feed, or /{group-id}/feed (No need to specify which one; they are unique)</p>
+<div><p>(for a preview box, etc)</p>
 </div></blockquote>
 <dl class="simple">
-<dt>&#64;param access_token: Give an alternate access_token. If None, the user’s access token is used and the post will be made in the</dt><dd><p>user’s voice. If you supply eg. an access_token to a Facebook fan-page and that page as a target, then the post will be made 
-to that page, in the voice <em>of that page</em>.</p>
+<dt>&#64;param fb_post_target_id: If None, post to the user’s timeline. If given, post to this alternate id of the</dt><dd><dl class="simple">
+<dt>facebook graph API egdes:</dt><dd><p>/{user-id}/feed, /{page-id}/feed, /{event-id}/feed, or /{group-id}/feed
+(No need to specify which one; they are unique)</p>
 </dd>
 </dl>
-<p>&#64;return: a string if posted successfully (either the post’s id or ‘’ if unknown), None if the post failed for any reason</p>
+</dd>
+<dt>&#64;param access_token: Give an alternate access_token. If None, the user’s access token is used and the post will</dt><dd><p>be made in the user’s voice. If you supply eg. an access_token to a Facebook fan-page and that page as a
+target, then the post will be made to that page, in the voice <em>of that page</em>.</p>
+</dd>
+<dt>&#64;return: a string if posted successfully (either the post’s id or ‘’ if unknown), None if the post failed for</dt><dd><p>any reason</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -2174,7 +2192,7 @@ to that page, in the voice <em>of that page</em>.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.facebook_integration.confirm_page_admin">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.facebook_integration.</span></span><span class="sig-name descname"><span class="pre">confirm_page_admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.facebook_integration.confirm_page_admin" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET to this view to try to obtain a user access token for a facebook fan-page 
+<dd><p>GET to this view to try to obtain a user access token for a facebook fan-page
 linked to the group_id supplied. Will always redirect to the group form’s facebook tab.</p>
 </dd></dl>
 
@@ -2187,15 +2205,16 @@ linked to the group_id supplied. Will always redirect to the group form’s face
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.facebook_integration.get_user_group_fb_page_access_token">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.facebook_integration.</span></span><span class="sig-name descname"><span class="pre">get_user_group_fb_page_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.facebook_integration.get_user_group_fb_page_access_token" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check for a user and a group linked to a facebook page, if in that user’s profile settings a Facebook page access token
-for the linked page is saved.</p>
+<dd><p>Check for a user and a group linked to a facebook page, if in that user’s profile settings a Facebook page access
+token for the linked page is saved.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.facebook_integration.obtain_facebook_page_access_token_for_user">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.facebook_integration.</span></span><span class="sig-name descname"><span class="pre">obtain_facebook_page_access_token_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.facebook_integration.obtain_facebook_page_access_token_for_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tries to obtain a Facebook-Page access token for a user and for a group, and its connected page-id.
-Then saves this page-access token in the userprofile.settings as {‘fb_page_%(group_id)d_%(page_id)s’: &lt;access-token&gt;} 
+Then saves this page-access token in the userprofile.settings as
+{‘fb_page_%(group_id)d_%(page_id)s’: &lt;access-token&gt;}
 Page tokens are retrieved via the /me/accounts node on the graph.
 See <a class="reference external" href="https://developers.facebook.com/docs/facebook-login/access-tokens/#pagetokens">https://developers.facebook.com/docs/facebook-login/access-tokens/#pagetokens</a>
 &#64;return: True if the fan-page access token was obtained and saved in the user profile.</p>
@@ -3139,7 +3158,7 @@ It decides whether the actual group dashboard or the group microsite should be s
 <dt class="sig sig-object py" id="cosinnus.views.group.GroupStartpage.check_redirect_to_microsite">
 <span class="sig-name descname"><span class="pre">check_redirect_to_microsite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.group.GroupStartpage.check_redirect_to_microsite" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether the user should be shown the Group Dashboard, the Group Micropage,
-or be redirected to a completely different page 
+or be redirected to a completely different page
 &#64;return: <code class="docutils literal notranslate"><span class="pre">True</span></code> if the group micropage should be shown
 &#64;return: <code class="docutils literal notranslate"><span class="pre">False</span></code> if the group dashboard should be shown
 &#64;return: <code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code> the URL that should be redirected to</p>
@@ -3928,8 +3947,9 @@ It decides whether the actual group dashboard or the group microsite should be s
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.group.group_user_recruit">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.group.</span></span><span class="sig-name descname"><span class="pre">group_user_recruit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">membership_class=&lt;class</span> <span class="pre">'cosinnus.models.group.CosinnusGroupMembership'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invite_class=&lt;class</span> <span class="pre">'cosinnus.models.group.CosinnusUnregisterdUserGroupInvite'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">membership_status=1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.group.group_user_recruit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Invites users to become group members by creating a CosinnusUnregisterdUserGroupInvite for each email to be recruited.
-Checks for recent invites and existing ones first. 
+<dd><p>Invites users to become group members by creating a CosinnusUnregisterdUserGroupInvite for each email to be
+recruited.
+Checks for recent invites and existing ones first.
 Sends out invitation mails to newly invited users.</p>
 </dd></dl>
 
@@ -4060,7 +4080,8 @@ Excpects <cite>element_ids[]</cite> and <cite>target_folder_id</cite> as POST ar
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.housekeeping.create_map_test_entities">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.housekeeping.</span></span><span class="sig-name descname"><span class="pre">create_map_test_entities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.housekeeping.create_map_test_entities" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates &lt;count&gt; CosinnusProjects, CosinnusSocieties, Users and Events (in the created group), all with random coordinates</p>
+<dd><p>Creates &lt;count&gt; CosinnusProjects, CosinnusSocieties, Users and Events (in the created group), all with random
+coordinates</p>
 </dd></dl>
 
 <dl class="py function">
@@ -4084,7 +4105,7 @@ THen deletes (!) any users who are both no member of any group AND no member of 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.housekeeping.ensure_group_widgets">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.housekeeping.</span></span><span class="sig-name descname"><span class="pre">ensure_group_widgets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.housekeeping.ensure_group_widgets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Do some integrity checks and corrections. 
+<dd><p>Do some integrity checks and corrections.
 Currently doing:</p>
 <blockquote>
 <div><ul class="simple">
@@ -4142,7 +4163,7 @@ who want to receive the newsletter</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.housekeeping.portal_switches_and_settings">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.housekeeping.</span></span><span class="sig-name descname"><span class="pre">portal_switches_and_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'portal-switches-and-settings'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.housekeeping.portal_switches_and_settings" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a downloadable excel spreadsheet of all the settings in conf.py, 
+<dd><p>Returns a downloadable excel spreadsheet of all the settings in conf.py,
 including their comments and default values.
 Will ignore any setting with the tag #internal in its comments.</p>
 </dd></dl>
@@ -4864,7 +4885,7 @@ or the userprofile for the username slug given</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.profile.UserProfileUpdateView.post">
 <span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.profile.UserProfileUpdateView.post" title="Permalink to this definition">¶</a></dt>
-<dd><p>if user changed his email, check if user is member of an integrated portal, 
+<dd><p>if user changed his email, check if user is member of an integrated portal,
 and if so ignore that change. Also, ignore the change if email verification is active, and instead
 set a new email-to-be-verified and send user a confirmation email.</p>
 </dd></dl>
@@ -4961,7 +4982,7 @@ Will not work on userprofiles whose user account is still active!</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.search.QuickSearchAPIView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.search.QuickSearchAPIView.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Accepted GET-params: 
+<dd><p>Accepted GET-params:
 <cite>q</cite> str: the query to search for
 <cite>page_size</cite> int (optional): Number of items to be returned. If a value larger than</p>
 <blockquote>
@@ -5015,7 +5036,7 @@ Default: `self.default_page_size</cite></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.search.QuickSearchAPIView.render_to_response">
 <span class="sig-name descname"><span class="pre">render_to_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.search.QuickSearchAPIView.render_to_response" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a list of items and returns a JsonResponse with the items 
+<dd><p>Renders a list of items and returns a JsonResponse with the items
 and additional meta info.
 Returned data:
 &#64;return:</p>
@@ -5480,7 +5501,7 @@ and the supplied value will be validated against the field in <cite>ALL_UI_PREFS
 <dl class="simple">
 <dt>Expected POST params: any number of ui_prefs and their values to be saved:</dt><dd><ul class="simple">
 <li><dl class="simple">
-<dt>&lt;ui_pref&gt;: &lt;value&gt;, </dt><dd><ul>
+<dt>&lt;ui_pref&gt;: &lt;value&gt;,</dt><dd><ul>
 <li><p>&lt;ui_pref&gt;: resolved name of the ui pref (e.g. ‘timeline_mine_only’)</p></li>
 <li><p>&lt;value&gt;: any value</p></li>
 </ul>
@@ -5492,7 +5513,7 @@ and the supplied value will be validated against the field in <cite>ALL_UI_PREFS
 <dt>Returns:</dt><dd><ul class="simple">
 <li><p>{‘status’: ‘ok’} if the UIPrefs were saved</p></li>
 <li><dl class="simple">
-<dt>a HttpResponseBadRequest if any ui_prefs could not be found or their </dt><dd><p>values were invalid. No saving happens in that case!</p>
+<dt>a HttpResponseBadRequest if any ui_prefs could not be found or their</dt><dd><p>values were invalid. No saving happens in that case!</p>
 </dd>
 </dl>
 </li>
@@ -5540,7 +5561,7 @@ and the supplied value will be validated against the field in <cite>ALL_UI_PREFS
 <dl class="simple">
 <dt>Expected POST params: any number of ui_prefs and their values to be saved:</dt><dd><ul class="simple">
 <li><dl class="simple">
-<dt>&lt;ui_pref&gt;: &lt;value&gt;, </dt><dd><ul>
+<dt>&lt;ui_pref&gt;: &lt;value&gt;,</dt><dd><ul>
 <li><p>&lt;ui_pref&gt;: resolved name of the ui pref (e.g. ‘timeline_mine_only’)</p></li>
 <li><p>&lt;value&gt;: any value</p></li>
 </ul>
@@ -5552,7 +5573,7 @@ and the supplied value will be validated against the field in <cite>ALL_UI_PREFS
 <dt>Returns:</dt><dd><ul class="simple">
 <li><p>{‘status’: ‘ok’} if the UIPrefs were saved</p></li>
 <li><dl class="simple">
-<dt>a HttpResponseBadRequest if any ui_prefs could not be found or their </dt><dd><p>values were invalid. No saving happens in that case!</p>
+<dt>a HttpResponseBadRequest if any ui_prefs could not be found or their</dt><dd><p>values were invalid. No saving happens in that case!</p>
 </dd>
 </dl>
 </li>
@@ -6044,6 +6065,11 @@ password to that view.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">UserSelect2View</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserSelect2View" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Select2View</span></code></p>
 <p>This view is used as API backend to serve the suggestions for the message recipient field.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.user.UserSelect2View.HARD_USER_LIMIT">
+<span class="sig-name descname"><span class="pre">HARD_USER_LIMIT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">50</span></em><a class="headerlink" href="#cosinnus.views.user.UserSelect2View.HARD_USER_LIMIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.user.UserSelect2View.check_all_permissions">
 <span class="sig-name descname"><span class="pre">check_all_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserSelect2View.check_all_permissions" title="Permalink to this definition">¶</a></dt>
@@ -6131,7 +6157,7 @@ used by <cite>UserCreateView</cite> and <cite>SignupView</cite></p>
 <dt class="sig sig-object py" id="cosinnus.views.user.UserSignupTriggerEventsMixin.trigger_events_after_user_signup">
 <span class="sig-name descname"><span class="pre">trigger_events_after_user_signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_messages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserSignupTriggerEventsMixin.trigger_events_after_user_signup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Triggers all kinds of events and signals after a user has signed up and their profile creation
-has been completed. Should be called after 
+has been completed. Should be called after
 <cite>UserSignupFinalizeMixin.finalize_user_object_after_signup</cite>
 &#64;param skip_messages: if True, will not trigger any user messages. used when this s</p>
 <blockquote>
@@ -6229,7 +6255,7 @@ the global notification setting and the userprofile visibility setting.</p>
 <dt class="sig sig-object py" id="cosinnus.views.user.accept_tos">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">accept_tos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.accept_tos" title="Permalink to this definition">¶</a></dt>
 <dd><p>A bare-bones ajax endpoint to save that a user has accepted the ToS settings.
-The frontend doesn’t care about a return values, so we don’t either 
+The frontend doesn’t care about a return values, so we don’t either
 (on fail, the user will just see another popup on next request).</p>
 </dd></dl>
 
@@ -6237,7 +6263,7 @@ The frontend doesn’t care about a return values, so we don’t either
 <dt class="sig sig-object py" id="cosinnus.views.user.accept_updated_tos">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">accept_updated_tos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.accept_updated_tos" title="Permalink to this definition">¶</a></dt>
 <dd><p>A bare-bones ajax endpoint to save a user’s accepted ToS settings and newsletter settings.
-The frontend doesn’t care about a return values, so we don’t either 
+The frontend doesn’t care about a return values, so we don’t either
 (on fail, the user will just see another popup on next request).</p>
 </dd></dl>
 
@@ -6251,8 +6277,8 @@ Use <cite>email_blacklist_token_generator.make_token(email)</cite> to generate a
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user.add_email_to_blacklist_result">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">add_email_to_blacklist_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.add_email_to_blacklist_result" title="Permalink to this definition">¶</a></dt>
-<dd><p>We redirect to a different URL because the original URL is valid forever, 
-and the browser tab may get reloaded and we don’t want to fire another 
+<dd><p>We redirect to a different URL because the original URL is valid forever,
+and the browser tab may get reloaded and we don’t want to fire another
 unsubscribe each time.
 It is expected that there is a messages.success or error message queued when arriving here</p>
 </dd></dl>
@@ -6261,7 +6287,7 @@ It is expected that there is a messages.success or error message queued when arr
 <dt class="sig sig-object py" id="cosinnus.views.user.apply_group_invite_token_for_user">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">apply_group_invite_token_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_invite_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.apply_group_invite_token_for_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies a <cite>CosinnusGroupInviteToken</cite> for a user, making them a member (if not already) of all groups
-determined by the invite token object. 
+determined by the invite token object.
 &#64;return: True if the user became member of all the groups, False if there was an error</p>
 </dd></dl>
 
@@ -6352,18 +6378,6 @@ the global notification setting and the userprofile visibility setting.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cosinnus.views.user.login_api">
-<span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">login_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authentication_form=&lt;class</span> <span class="pre">'django.contrib.auth.forms.AuthenticationForm'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.login_api" title="Permalink to this definition">¶</a></dt>
-<dd><p>Logs the user specified by the <cite>authentication_form</cite> in.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cosinnus.views.user.logout_api">
-<span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">logout_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.logout_api" title="Permalink to this definition">¶</a></dt>
-<dd><p>Logs the user out.</p>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user.password_change_proxy">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">password_change_proxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.password_change_proxy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Proxies the django.contrib.auth view. Only lets a user see the form or POST to it
@@ -6400,8 +6414,8 @@ if the email doesn’t belong to a user that is a member of an integrated portal
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user.send_user_email_to_verify">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">send_user_email_to_verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_has_just_registered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.send_user_email_to_verify" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the profile variables for a user to confirm a pending email, 
-and sends out an email with a verification URL to the user. 
+<dd><p>Sets the profile variables for a user to confirm a pending email,
+and sends out an email with a verification URL to the user.
 &#64;param user_has_just_registered: If this True, a welcome email will be sent.</p>
 <blockquote>
 <div><p>If False, an email change email will be sent.</p>
@@ -6443,7 +6457,8 @@ Returens {} if no user is logged in this session.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user.verifiy_user_email">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">verifiy_user_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email_verification_param</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.verifiy_user_email" title="Permalink to this definition">¶</a></dt>
-<dd><p>Verify an email by comparing a token sent only to this email with the one saved in the user profile during registration (or email change)</p>
+<dd><p>Verify an email by comparing a token sent only to this email with the one saved in the user profile during
+registration (or email change)</p>
 </dd></dl>
 
 <dl class="py function">
@@ -6599,7 +6614,7 @@ TODO: use clever caching</p>
 &#64;param only_mine: if True, will only show objects that belong to groups or projects</p>
 <blockquote>
 <div><p>the <cite>user</cite> is a member of, including the Forum, and including Ideas.
-If False, will include all visible items in this portal for the user. 
+If False, will include all visible items in this portal for the user.
 This is basically an “exclude unrelated public items” switch.</p>
 </div></blockquote>
 <dl class="simple">
@@ -6609,13 +6624,13 @@ This is basically a switch to only return items that are relevant to ME because
 they are from groups/projects I am a member of voluntarily.</p>
 </dd>
 <dt>&#64;param all_public: if True, includes ALL content that is specifically set to public</dt><dd><p>visibility. This will filter out any other content from groups, even if it would
-be visible for the current user normally. This clashes with <cite>only_mine==True</cite>, as it 
+be visible for the current user normally. This clashes with <cite>only_mine==True</cite>, as it
 does not filter further down for the user’s only items!</p>
 </dd>
-<dt>&#64;param only_forum: if True, includes only such items that are contained in groups</dt><dd><p>that any user joins automatically, i.e. the forum/events group as configured 
+<dt>&#64;param only_forum: if True, includes only such items that are contained in groups</dt><dd><p>that any user joins automatically, i.e. the forum/events group as configured
 per portal, and also Ideas as they are plattform wide.</p>
 </dd>
-<dt>&#64;param current_only: if True, will only retrieve current items (ie, upcoming events) </dt><dd><p>TODO: is this correct?</p>
+<dt>&#64;param current_only: if True, will only retrieve current items (ie, upcoming events)</dt><dd><p>TODO: is this correct?</p>
 </dd>
 </dl>
 </dd></dl>
@@ -6662,7 +6677,7 @@ per portal, and also Ideas as they are plattform wide.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">TimelineView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.TimelineView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cosinnus.views.user_dashboard.ModelRetrievalMixin" title="cosinnus.views.user_dashboard.ModelRetrievalMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelRetrievalMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
 <p>Timeline view for a user.
-Returns items as rendered HTML. 
+Returns items as rendered HTML.
 Accepts content type filters and pagination parameters.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard.TimelineView.content_types">
@@ -6687,18 +6702,18 @@ Accepts content type filters and pagination parameters.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard.TimelineView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.TimelineView.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Accepted GET-params: 
+<dd><p>Accepted GET-params:
 <cite>page_size</cite> int (optional): Number of items to be returned. If a value larger than</p>
 <blockquote>
 <div><p><cite>self.max_page_size</cite> is supplied, <cite>self.max_page_size`is used instead.
 Default: `self.default_page_size</cite></p>
 </div></blockquote>
 <dl class="simple">
-<dt><cite>offset_timestamp</cite> float (optional): If supplied, only items older than the given </dt><dd><p>timestamp are returned. Items with the exact timestamp are excluded.
-Use this parameter in conjunction with the return value <cite>last_timestamp</cite> for 
+<dt><cite>offset_timestamp</cite> float (optional): If supplied, only items older than the given</dt><dd><p>timestamp are returned. Items with the exact timestamp are excluded.
+Use this parameter in conjunction with the return value <cite>last_timestamp</cite> for
 pagination.</p>
 </dd>
-<dt><cite>only_mine</cite> bool (optional): if True, will include objects that belong to groups </dt><dd><p>or projects the <cite>user</cite> is a member of.</p>
+<dt><cite>only_mine</cite> bool (optional): if True, will include objects that belong to groups</dt><dd><p>or projects the <cite>user</cite> is a member of.</p>
 </dd>
 <dt><cite>only_forum</cite> bool (optional): if True, will include objects that belong to the</dt><dd><p>forum group.</p>
 </dd>
@@ -6777,7 +6792,7 @@ pagination.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard.TimelineView.render_to_response">
 <span class="sig-name descname"><span class="pre">render_to_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.TimelineView.render_to_response" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a list of items and returns a JsonResponse with the items 
+<dd><p>Renders a list of items and returns a JsonResponse with the items
 and additional meta info.
 Returned data:
 &#64;return:</p>
@@ -6870,7 +6885,7 @@ if 0 items were returned.</p>
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard.api_timeline">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">api_timeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.api_timeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Timeline view for a user.
-Returns items as rendered HTML. 
+Returns items as rendered HTML.
 Accepts content type filters and pagination parameters.</p>
 </dd></dl>
 
@@ -7413,8 +7428,8 @@ TODO: use clever caching</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user_match.match_create_view">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_match.</span></span><span class="sig-name descname"><span class="pre">match_create_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_match.match_create_view" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates an <cite>UserMatchObject</cite> where the <cite>from_user</cite> represents the current user, 
-<cite>to_user</cite> is certain user who got ‘liked’ or ‘disliked’, 
+<dd><p>Creates an <cite>UserMatchObject</cite> where the <cite>from_user</cite> represents the current user,
+<cite>to_user</cite> is certain user who got ‘liked’ or ‘disliked’,
 and <cite>action</cite> is certain type of reaction which <cite>to_user</cite> got from <cite>from_user</cite>.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>request</p>
@@ -7609,6 +7624,7 @@ template rendered with the given context.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.views.mixins package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.views.mixins package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -433,7 +433,7 @@ Used for initialization if no instance is available.</p>
 </div>
 <dl class="simple">
 <dt>Note: Accessing an object with a slug or pk that is not found will always result in two seperate DB hits,</dt><dd><p>because we first do a complete filter for the object, including permissions, pk, group memberships.
-Then, if the object wasn’t found, we re-do the filter without permissions to check if that was the 
+Then, if the object wasn’t found, we re-do the filter without permissions to check if that was the
 cause, then redirect to a login page or a permission denied page. If the second query also fails to
 match anything, we let the Http404 bubble up.</p>
 </dd>
@@ -546,7 +546,7 @@ If not, redirects to the group dashboard.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">GroupIsConferenceMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupIsConferenceMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>View mixin that makes it required for the view’s group to be a conference.
-If not, redirects to the group dashboard. 
+If not, redirects to the group dashboard.
 Needs to be in MRO <em>after</em> the group-applying <cite>RequireReadMixin</cite> (or similar).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupIsConferenceMixin.dispatch">
@@ -559,8 +559,8 @@ Needs to be in MRO <em>after</em> the group-applying <cite>RequireReadMixin</cit
 <dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupObjectCountMixin">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">GroupObjectCountMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.GroupObjectCountMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Adds an <code class="docutils literal notranslate"><span class="pre">object_counts</span></code> dict to the context containing the counts of all 
-BaseTaggableObjects in this view’s group. 
+<p>Adds an <code class="docutils literal notranslate"><span class="pre">object_counts</span></code> dict to the context containing the counts of all
+BaseTaggableObjects in this view’s group.
 Requires <code class="docutils literal notranslate"><span class="pre">self.group</span></code> to be set.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.mixins.group.GroupObjectCountMixin.app_object_count_mappings">
@@ -639,7 +639,7 @@ from the group they are in (need a <cite>group</cite> ForeignKey).</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireExtraDispatchCheckMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireExtraDispatchCheckMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>View mixin that makes it required for the view’s group to be a conference.
-If not, redirects to the group dashboard. 
+If not, redirects to the group dashboard.
 Needs to be in MRO <em>after</em> the group-applying <cite>RequireReadMixin</cite> (or similar).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.mixins.group.RequireExtraDispatchCheckMixin.dispatch">
@@ -698,7 +698,7 @@ the dispatch() function will return that value.</p>
 </div>
 <dl class="simple">
 <dt>Note: Accessing an object with a slug or pk that is not found will always result in two seperate DB hits,</dt><dd><p>because we first do a complete filter for the object, including permissions, pk, group memberships.
-Then, if the object wasn’t found, we re-do the filter without permissions to check if that was the 
+Then, if the object wasn’t found, we re-do the filter without permissions to check if that was the
 cause, then redirect to a login page or a permission denied page. If the second query also fails to
 match anything, we let the Http404 bubble up.</p>
 </dd>
@@ -772,7 +772,7 @@ or override <a class="reference internal" href="#cosinnus.views.mixins.group.Req
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.group.</span></span><span class="sig-name descname"><span class="pre">RequireReadWriteHybridMixin</span></span><a class="headerlink" href="#cosinnus.views.mixins.group.RequireReadWriteHybridMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a></p>
 <dl class="simple">
-<dt>Combines the functionality of </dt><dd><p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a> for GET requests and
+<dt>Combines the functionality of</dt><dd><p><a class="reference internal" href="#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a> for GET requests and
 <a class="reference internal" href="#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a> for POST requests</p>
 </dd>
 </dl>
@@ -901,7 +901,7 @@ else only allows creating them on the root level.</p>
 <dt class="sig sig-object py" id="cosinnus.views.mixins.media.FlickrEmbedFieldMixin.get_flickr_properties">
 <span class="sig-name descname"><span class="pre">get_flickr_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flickr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.media.FlickrEmbedFieldMixin.get_flickr_properties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dict specific for the <code class="docutils literal notranslate"><span class="pre">media.html</span></code> widget that contains the properties
-required for an embed code, parsed from the given URL 
+required for an embed code, parsed from the given URL
 &#64;param flickr: If supplied, will parse from this value instead of the flickr field of the class</p>
 </dd></dl>
 
@@ -921,7 +921,7 @@ required for an embed code, parsed from the given URL
 <dt class="sig sig-object py" id="cosinnus.views.mixins.media.VideoEmbedFieldMixin.get_video_properties">
 <span class="sig-name descname"><span class="pre">get_video_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">video</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.media.VideoEmbedFieldMixin.get_video_properties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dict specific for the <code class="docutils literal notranslate"><span class="pre">media.html</span></code> widget that contains the properties
-required for an embed code, parsed from the given URL 
+required for an embed code, parsed from the given URL
 &#64;param video: If supplied, will parse from this value instead of the video field of the class</p>
 </dd></dl>
 
@@ -1102,7 +1102,7 @@ and returns a single list of sorted items, with <code class="docutils literal no
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.mixins.tagged.</span></span><span class="sig-name descname"><span class="pre">EditViewWatchChangesMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A mixin for an EditView that handles watching the object and alerting
-any changes to watched attributed after a successful save. 
+any changes to watched attributed after a successful save.
 In your view, define <cite>changed_attr_watchlist</cite> and <cite>on_save_changed_attrs()</cite></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.changed_attr_watchlist">
@@ -1142,7 +1142,7 @@ In your view, define <cite>changed_attr_watchlist</cite> and <cite>on_save_chang
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.on_save_changed_attrs">
 <span class="sig-name descname"><span class="pre">on_save_changed_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changed_attr_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.mixins.tagged.EditViewWatchChangesMixin.on_save_changed_attrs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stub, implement this in your view 
+<dd><p>Stub, implement this in your view
 &#64;param obj: The newly saved object.
 &#64;param changed_attr_dict: k,v dict with k: changed attribue name, v: old value</p>
 </dd></dl>
@@ -1283,7 +1283,7 @@ the container itself!
 &#64;param recursive: Should folder levels below the given root path be included?</p>
 <blockquote>
 <div><dl class="simple">
-<dt>Note: Setting recursive=True and include_containers=False</dt><dd><p>really doesn’t make any sense, and will result in a 
+<dt>Note: Setting recursive=True and include_containers=False</dt><dd><p>really doesn’t make any sense, and will result in a
 garbled nonsensical tree structure!</p>
 </dd>
 </dl>
@@ -1373,6 +1373,7 @@ will cause a LastVisited record to be created for the</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_note package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus_note package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -165,7 +165,7 @@
 <dt class="sig sig-object py" id="cosinnus_note.cosinnus_notifications.following_note_comment_posted">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_note.cosinnus_notifications.</span></span><span class="sig-name descname"><span class="pre">following_note_comment_posted</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_note.cosinnus_notifications.following_note_comment_posted" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notification definitions.
-These will be picked up by cosinnus_notfications automatically, as long as the 
+These will be picked up by cosinnus_notfications automatically, as long as the
 variable ‘notifications’ is present in the module ‘&lt;app_name&gt;/cosinnus_notifications.py’.</p>
 <dl class="simple">
 <dt>Both the mail and subject template will be provided with the following context items:</dt><dd><p>:receiver django.auth.User who receives the notification mail
@@ -670,7 +670,7 @@ Needs to be set by a specific implementation of BaseTaggableObjectModel</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_note.models.Note.get_facebook_post_url">
 <span class="sig-name descname"><span class="pre">get_facebook_post_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.models.Note.get_facebook_post_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>If this post has been posted to facebook and its id is known, returns the URL to the facebook post. 
+<dd><p>If this post has been posted to facebook and its id is known, returns the URL to the facebook post.
 &#64;return: A string URL to a facebook post or None</p>
 </dd></dl>
 
@@ -1417,7 +1417,7 @@ visibility tags</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.on_save_changed_attrs">
 <span class="sig-name descname"><span class="pre">on_save_changed_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changed_attr_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.on_save_changed_attrs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stub, implement this in your view 
+<dd><p>Stub, implement this in your view
 &#64;param obj: The newly saved object.
 &#64;param changed_attr_dict: k,v dict with k: changed attribue name, v: old value</p>
 </dd></dl>
@@ -1536,6 +1536,7 @@ POST variables and then check if it’s valid.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
