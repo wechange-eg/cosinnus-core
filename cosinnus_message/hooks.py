@@ -12,6 +12,9 @@ from oauth2_provider.signals import app_authorized
 
 from cosinnus.core import signals
 from cosinnus.models import (
+    MEMBERSHIP_ADMIN,
+    MEMBERSHIP_INVITED_PENDING,
+    MEMBERSHIP_PENDING,
     CosinnusGroupMembership,
     UserProfile,
 )
@@ -19,7 +22,6 @@ from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus_event.models import Event
 from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException, delete_cached_rocket_connection
-from cosinnus_message.tasks import rocket_group_membership_update_task
 from cosinnus_note.models import Note
 
 logger = logging.getLogger(__name__)
@@ -301,29 +303,98 @@ if settings.COSINNUS_ROCKET_ENABLED:
         CosinnusRocketUserActivateThread().start()
 
     @receiver(pre_save, sender=CosinnusGroupMembership)
-    def handle_membership_changed(sender, instance, **kwargs):
-        """Updates an old RocketChat group membership when group or user are changed."""
-        if instance.id:
-            old_instance = CosinnusGroupMembership.objects.get(pk=instance.id)
-            user_changed = instance.user_id != old_instance.user_id
-            group_changed = instance.group_id != old_instance.group_id
-            # Invalidate old membership
-            if user_changed or group_changed:
-                rocket_group_membership_update_task.delay(old_instance.user.pk, old_instance.group.pk)
-
-    @receiver(post_save, sender=CosinnusGroupMembership)
-    def handle_membership_updated(sender, instance, created, **kwargs):
-        """Update RocketChat group membership."""
+    def handle_membership_updated(sender, instance, **kwargs):
         if instance.user.is_guest:
             return
-        rocket_group_membership_update_task.delay(instance.user.pk, instance.group.pk)
+        is_pending = instance.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
+        if instance.id:
+            old_instance = CosinnusGroupMembership.objects.get(pk=instance.id)
+            was_pending = old_instance.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
+            user_changed = instance.user_id != old_instance.user_id
+            group_changed = instance.group_id != old_instance.group_id
+            is_moderator_changed = instance.status != old_instance.status and (
+                instance.status == MEMBERSHIP_ADMIN or old_instance.status == MEMBERSHIP_ADMIN
+            )
+
+            # prefetch related objects and do a threaded call
+            prefetch_related_objects([instance], 'group')
+            prefetch_related_objects([instance], 'user__cosinnus_profile')
+
+            class CosinnusRocketMembershipUpdateThread(Thread):
+                def run(self):
+                    try:
+                        rocket = RocketChatConnection()
+                        # Check if a default channel exists for a conference. If not there is nothing to be done.
+                        if _group_is_conference_without_default_channel(rocket, instance.group):
+                            return
+
+                        # Invalidate old membership
+                        if (is_pending and not was_pending) or user_changed or group_changed:
+                            rocket.groups_kick(old_instance)
+
+                        # Create new membership
+                        if (was_pending and not is_pending) or user_changed or group_changed:
+                            rocket.groups_invite(instance)
+
+                        # Update membership
+                        if not is_pending and is_moderator_changed:
+                            # Upgrade
+                            if not old_instance.status == MEMBERSHIP_ADMIN and instance.status == MEMBERSHIP_ADMIN:
+                                rocket.groups_add_moderator(instance)
+                            # Downgrade
+                            elif old_instance.status == MEMBERSHIP_ADMIN and not instance.status == MEMBERSHIP_ADMIN:
+                                rocket.groups_remove_moderator(instance)
+                    except RocketChatDownException:
+                        logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                    except Exception as e:
+                        logger.exception(e)
+
+            CosinnusRocketMembershipUpdateThread().start()
+        elif not is_pending:
+            # prefetch related objects and do a threaded call
+            prefetch_related_objects([instance], 'group')
+            prefetch_related_objects([instance], 'user__cosinnus_profile')
+
+            class CosinnusRocketMembershipCreateThread(Thread):
+                def run(self):
+                    try:
+                        rocket = RocketChatConnection()
+                        # Check if a default channel exists for a conference. If not there is nothing to be done.
+                        if _group_is_conference_without_default_channel(rocket, instance.group):
+                            return
+                        # Create new membership
+                        rocket.groups_invite(instance)
+                        if instance.status == MEMBERSHIP_ADMIN:
+                            rocket.groups_add_moderator(instance)
+                    except RocketChatDownException:
+                        logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                    except Exception as e:
+                        logger.exception(e)
+
+            CosinnusRocketMembershipCreateThread().start()
 
     @receiver(post_delete, sender=CosinnusGroupMembership)
     def handle_membership_deleted(sender, instance, **kwargs):
-        """Delete RocketChat group membership."""
         if instance.user.is_guest:
             return
-        rocket_group_membership_update_task.delay(instance.user.pk, instance.group.pk)
+        try:
+            # prefetch related objects and do a threaded call
+            prefetch_related_objects([instance], 'group')
+            prefetch_related_objects([instance], 'user__cosinnus_profile')
+
+            class CosinnusRocketMembershipDeletedThread(Thread):
+                def run(self):
+                    rocket = RocketChatConnection()
+                    # Check if a default channel exists for a conference. If not there is nothing to be done.
+                    if _group_is_conference_without_default_channel(rocket, instance.group):
+                        return
+                    rocket.groups_kick(instance)
+
+            CosinnusRocketMembershipDeletedThread().start()
+        except RocketChatDownException:
+            logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+        except Exception as e:
+            logger.exception(e)
 
     @receiver(post_save, sender=Event)
     @receiver(post_save, sender=Note)

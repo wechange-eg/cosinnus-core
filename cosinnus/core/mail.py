@@ -61,9 +61,7 @@ def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=Fa
     }
 
     # if celery is active, delay the actual delivery
-    if False and settings.COSINNUS_USE_CELERY:
-        # We enabled Celery to RocketChat membership tasks. But we do not want to enable email tasks with it.
-        # TODO: Remove the "False" check to enable the email task.
+    if settings.COSINNUS_USE_CELERY:
         from cosinnus.tasks import deliver_mail_task
 
         deliver_mail_task.delay(to, subject, message, from_email, bcc, is_html=is_html, headers=headers)

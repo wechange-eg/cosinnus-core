@@ -6,7 +6,6 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 from rest_framework.test import APITestCase
 
-import cosinnus
 import cosinnus_event
 import cosinnus_message
 from cosinnus.conf import settings
@@ -29,21 +28,9 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
 
     cosinnus_message.hooks.Thread = TestableThreadPatch
     cosinnus_event.hooks.Thread = TestableThreadPatch
-    cosinnus.tasks.Thread = TestableThreadPatch
-
-    class CeleryTaskTestMixin:
-        """Mixin to run Celery Tasks in test cases."""
-
-        def runCeleryTasks(cls):
-            """
-            Our CeleryThreadTasks use on_commit callbacks that are not triggered in (non-transitional) test-cases.
-            For this case Django defines the captureOnCommitCallbacks contextmanagers. We just give it another name for
-            better test readability.
-            """
-            return cls.captureOnCommitCallbacks(execute=True)
 
     @override_settings(COSINNUS_ROCKET_ENABLED=True)
-    class RocketChatBaseTest(CeleryTaskTestMixin, TestCase):
+    class RocketChatBaseTest(TestCase):
         """Base setup for RocketChat test providing a rocket_connection and portal."""
 
         portal = None
@@ -195,7 +182,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             expected_unique_username = (
-                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}-{test_user2.id}'.lower()
+                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}1'.lower()
             )
             self.assertEqual(user_info['username'], expected_unique_username)
             self.rocket_connection.users_delete(test_user2)
@@ -284,46 +271,41 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
 
         def test_group_membership(self):
             # create pending membership
-            with self.runCeleryTasks():
-                group_membership = CosinnusGroupMembership.objects.create(
-                    user=self.test_user, group=self.test_group, status=MEMBERSHIP_PENDING
-                )
+            group_membership = CosinnusGroupMembership.objects.create(
+                user=self.test_user, group=self.test_group, status=MEMBERSHIP_PENDING
+            )
             is_member, is_moderator = self._get_test_user_group_membership()
             self.assertFalse(is_member)
             self.assertFalse(is_moderator)
 
             # make member
-            with self.runCeleryTasks():
-                group_membership.status = MEMBERSHIP_MEMBER
-                group_membership.save()
+            group_membership.status = MEMBERSHIP_MEMBER
+            group_membership.save()
             is_member, is_moderator = self._get_test_user_group_membership()
             self.assertTrue(is_member)
             self.assertFalse(is_moderator)
 
             # make moderator
-            with self.runCeleryTasks():
-                group_membership.status = MEMBERSHIP_ADMIN
-                group_membership.save()
+            group_membership.status = MEMBERSHIP_ADMIN
+            group_membership.save()
             is_member, is_moderator = self._get_test_user_group_membership()
             self.assertTrue(is_member)
             self.assertTrue(is_moderator)
 
             # make member again
-            with self.runCeleryTasks():
-                group_membership.status = MEMBERSHIP_MEMBER
-                group_membership.save()
+            group_membership.status = MEMBERSHIP_MEMBER
+            group_membership.save()
             is_member, is_moderator = self._get_test_user_group_membership()
             self.assertTrue(is_member)
             self.assertFalse(is_moderator)
 
             # remove membership
-            with self.runCeleryTasks():
-                group_membership.delete()
+            group_membership.delete()
             is_member, is_moderator = self._get_test_user_group_membership()
             self.assertFalse(is_member)
             self.assertFalse(is_moderator)
 
-    class RocketChatV3ApiIntegrationTest(CeleryTaskTestMixin, APITestCase):
+    class RocketChatAPITest(APITestCase):
         """Test RocketChat integration via the API."""
 
         signup_url = reverse('cosinnus:frontend-api:api-signup')
@@ -394,8 +376,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             ]
             group_members = self.rocket_connection.rocket.groups_members(room_id=room_id).json()
             group_members_count = len(group_members['members'])
-            with self.runCeleryTasks():
-                response = self.client.post(self.signup_url, self.test_user_signup_data, format='json')
+            response = self.client.post(self.signup_url, self.test_user_signup_data, format='json')
             self.assertEqual(response.status_code, 200)
             self.test_user = get_user_model().objects.last()
             expected_members_count = group_members_count + 1
