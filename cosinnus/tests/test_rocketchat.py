@@ -195,7 +195,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             expected_unique_username = (
-                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}1'.lower()
+                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}-{test_user2.id}'.lower()
             )
             self.assertEqual(user_info['username'], expected_unique_username)
             self.rocket_connection.users_delete(test_user2)
