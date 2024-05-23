@@ -6,8 +6,8 @@ import celery
 from django.db import transaction
 
 from cosinnus.celery import app as celery_app
-from cosinnus.core.mail import deliver_mail
 from cosinnus.conf import settings
+from cosinnus.core.mail import deliver_mail
 
 
 class CeleryThreadTask(celery.Task):
@@ -25,11 +25,14 @@ class CeleryThreadTask(celery.Task):
         else:
             # Runs task in a Thread after transaction is finished.
             task_run = super(CeleryThreadTask, self).__call__
+
             def run_task_threaded():
                 class TaskThread(Thread):
                     def run(self):
                         task_run(*args, **kwargs)
+
                 TaskThread().start()
+
             return transaction.on_commit(run_task_threaded)
 
 

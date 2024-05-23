@@ -6,6 +6,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 from rest_framework.test import APITestCase
 
+import cosinnus
 import cosinnus_event
 import cosinnus_message
 from cosinnus.conf import settings
@@ -30,9 +31,8 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
     cosinnus_event.hooks.Thread = TestableThreadPatch
     cosinnus.tasks.Thread = TestableThreadPatch
 
-
     class CeleryTaskTestMixin:
-        """ Mixin to run Celery Tasks in test cases. """
+        """Mixin to run Celery Tasks in test cases."""
 
         def runCeleryTasks(cls):
             """
@@ -41,7 +41,6 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             better test readability.
             """
             return cls.captureOnCommitCallbacks(execute=True)
-
 
     @override_settings(COSINNUS_ROCKET_ENABLED=True)
     class RocketChatBaseTest(CeleryTaskTestMixin, TestCase):
@@ -323,7 +322,6 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             is_member, is_moderator = self._get_test_user_group_membership()
             self.assertFalse(is_member)
             self.assertFalse(is_moderator)
-
 
     class RocketChatV3ApiIntegrationTest(CeleryTaskTestMixin, APITestCase):
         """Test RocketChat integration via the API."""

@@ -12,9 +12,6 @@ from oauth2_provider.signals import app_authorized
 
 from cosinnus.core import signals
 from cosinnus.models import (
-    MEMBERSHIP_ADMIN,
-    MEMBERSHIP_INVITED_PENDING,
-    MEMBERSHIP_PENDING,
     CosinnusGroupMembership,
     UserProfile,
 )
@@ -305,7 +302,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
 
     @receiver(pre_save, sender=CosinnusGroupMembership)
     def handle_membership_changed(sender, instance, **kwargs):
-        """ Updates an old RocketChat group membership when group or user are changed. """
+        """Updates an old RocketChat group membership when group or user are changed."""
         if instance.id:
             old_instance = CosinnusGroupMembership.objects.get(pk=instance.id)
             user_changed = instance.user_id != old_instance.user_id
@@ -316,14 +313,14 @@ if settings.COSINNUS_ROCKET_ENABLED:
 
     @receiver(post_save, sender=CosinnusGroupMembership)
     def handle_membership_updated(sender, instance, created, **kwargs):
-        """ Update RocketChat group membership. """
+        """Update RocketChat group membership."""
         if instance.user.is_guest:
             return
         rocket_group_membership_update_task.delay(instance.user.pk, instance.group.pk)
 
     @receiver(post_delete, sender=CosinnusGroupMembership)
     def handle_membership_deleted(sender, instance, **kwargs):
-        """ Delete RocketChat group membership. """
+        """Delete RocketChat group membership."""
         if instance.user.is_guest:
             return
         rocket_group_membership_update_task.delay(instance.user.pk, instance.group.pk)

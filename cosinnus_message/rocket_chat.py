@@ -1327,7 +1327,7 @@ class RocketChatConnection:
                     )
 
     def groups_kick(self, user, group):
-        """ Delete membership for default channels. """
+        """Delete membership for default channels."""
         user_id = self.get_user_id(user)
         if not user_id:
             return
@@ -1338,7 +1338,10 @@ class RocketChatConnection:
             if room_id:
                 response = self.rocket.groups_kick(room_id=room_id, user_id=user_id).json()
                 if not response.get('success') and not response.get('errorType', '') == 'error-user-not-in-room':
-                    logger.error('RocketChat: groups_kick ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+                    logger.error(
+                        'RocketChat: groups_kick ' + response.get('errorType', '<No Error Type>'),
+                        extra={'response': response},
+                    )
 
     def groups_add_moderator(self, membership):
         """
