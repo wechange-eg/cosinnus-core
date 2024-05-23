@@ -69,11 +69,6 @@ class CosinnusProjectTransBase(object):
         'administrators.'
     )
     FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this project to attach...')
-    FORMFIELD_PUBLIC_LEGEND = _(
-        'Here you can control whether the publicly visible information about your project, such as name and address, '
-        'is transmitted to partner platforms by WECHANGE.'
-    )
-    FORMFIELD_PUBLIC_BOX_LABEL = _('This project shall be made publicly findable via other platforms.')
 
     CALL_TO_JOIN = _('Collaborate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
@@ -170,11 +165,6 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
         'administrators.'
     )
     FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this group to attach...')
-    FORMFIELD_PUBLIC_LEGEND = _(
-        'Here you can control whether the publicly visible information about your group, such as name and address, is '
-        'transmitted to partner platforms by WECHANGE.'
-    )
-    FORMFIELD_PUBLIC_BOX_LABEL = _('This group shall be made publicly findable via other platforms.')
 
     CALL_TO_JOIN = _('Collaborate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
@@ -270,11 +260,6 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
         'organizers.'
     )
     FORMFIELD_ATTACH_OBJECTS_HINT = _('Type the names of files, events or pads from this conference to attach...')
-    FORMFIELD_PUBLIC_LEGEND = _(
-        'Here you can control whether the publicly visible information about your conference, such as name and '
-        'address, is transmitted to partner platforms by WECHANGE.'
-    )
-    FORMFIELD_PUBLIC_BOX_LABEL = _('This conference shall be made publicly findable via other platforms.')
 
     CALL_TO_JOIN = _('Participate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and participate!')

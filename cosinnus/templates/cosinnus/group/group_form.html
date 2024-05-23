@@ -531,12 +531,6 @@
 				                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
 				            {% endif %}
                         {% endblock visibility_field %}
-                        
-						{% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}
-							{# public Field #}
-							{% trans "Visibility on other platforms" as public_label %}
-							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=group_model_class.get_trans.FORMFIELD_PUBLIC_LEGEND checkbox_label=group_model_class.get_trans.FORMFIELD_PUBLIC_BOX_LABEL %}
-						{% endif %}
 
 						{% if SETTINGS.COSINNUS_MATCHING_ENABLED %}
 							{# is_open_for_cooperation Field #}
