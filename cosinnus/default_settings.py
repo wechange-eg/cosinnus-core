@@ -697,7 +697,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # (can be set for each portal individually in their settings.py)
     COSINNUS_MICROSITES_ENABLED = True
 
-    # NOTE: CELERY IS NOW DISABLED UNTIL THE SERVICE HAS BEEN UPDATED
     COSINNUS_USE_CELERY = False
     BROKER_URL = f'redis://localhost:6379/{SITE_ID}'
     CELERY_RESULT_BACKEND = 'redis://localhost:6379'
