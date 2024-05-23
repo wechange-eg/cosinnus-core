@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 13:45+0200\n"
+"POT-Creation-Date: 2024-05-23 11:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1000,6 +1000,7 @@ msgstr "Neue E-Mail Adresse"
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "Einige erforderliche Spalten sind in der CSV nicht vorhanden: {missing_headers}!"
 
+#, python-format
 msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
 msgstr "Zeilen auf diesen Zeilennummern hatten nicht die gleiche Anzahl von Elementen (%(header_length)s) wie die Kopfzeile: %(mismatched_rows)s!"
 
@@ -4651,9 +4652,6 @@ msgstr "Wenn du das nicht möchtest, kannst du oben die Sichtbarkeitseinstellung
 msgid "Platform-wide (visible for all members of the platform)"
 msgstr "Portalweit (sichtbar für alle Mitglieder des Portales)"
 
-msgid "Visibility on other platforms"
-msgstr "Sichtbarkeit auf anderen Plattformen"
-
 msgid "Is your project open to other partner organizations?"
 msgstr "Ist dein Projekt für die andere Partnerorganisationen offen?"
 
@@ -7893,12 +7891,6 @@ msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus diesem Projekt, um sie anzuhängen..."
 
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deinem Projekt, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr "Dieses Projekt soll über andere Plattformen öffentlich auffindbar gemacht werden."
-
 msgid "Collaborate!"
 msgstr "Mitmachen!"
 
@@ -8015,12 +8007,6 @@ msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Gruppe, um sie anzuhängen..."
-
-msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deiner Gruppe, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
-
-msgid "This group shall be made publicly findable via other platforms."
-msgstr "Diese Gruppe soll über andere Plattformen öffentlich auffindbar gemacht werden."
 
 msgid "You can access and browse the group that invited you"
 msgstr "Du kannst die Gruppe, zu der du eingeladen wurdest, aufrufen und deren Inhalte anschauen"
@@ -8139,12 +8125,6 @@ msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Tagung um sie anzuhängen..."
-
-msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deiner Tagung, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
-
-msgid "This conference shall be made publicly findable via other platforms."
-msgstr "Diese Tagung soll über andere Plattformen öffentlich auffindbar gemacht werden."
 
 msgid "Participate!"
 msgstr "Teilnehmen!"
@@ -12265,6 +12245,9 @@ msgstr "Telefon"
 msgid "Address(es) of your organization"
 msgstr "Addresse(n) der Organisation"
 
+msgid "Visibility on other platforms"
+msgstr "Sichtbarkeit auf anderen Plattformen"
+
 #, python-format
 msgid "Projects are always transferred to <a href=\"%(url)s\" target=\"_blank\">partner platforms</a> of WECHANGE. These are only organizational data and not personal data."
 msgstr "Projekte werden immer auch an <a href=\"%(url)s\" target=\"_blank\">Partner-Plattformen</a> von WECHANGE übertragen. Dabei handelt es sich nur um Organisations- und keine Personen bezogenen Daten."
@@ -13691,6 +13674,24 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
+#~ msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deinem Projekt, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
+
+#~ msgid "This project shall be made publicly findable via other platforms."
+#~ msgstr "Dieses Projekt soll über andere Plattformen öffentlich auffindbar gemacht werden."
+
+#~ msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deiner Gruppe, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
+
+#~ msgid "This group shall be made publicly findable via other platforms."
+#~ msgstr "Diese Gruppe soll über andere Plattformen öffentlich auffindbar gemacht werden."
+
+#~ msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deiner Tagung, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."
+
+#~ msgid "This conference shall be made publicly findable via other platforms."
+#~ msgstr "Diese Tagung soll über andere Plattformen öffentlich auffindbar gemacht werden."
 
 #~ msgid "Newsletter sent."
 #~ msgstr "Der Newsletter wurde abgeschickt."

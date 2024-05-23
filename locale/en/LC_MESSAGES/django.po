@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 13:45+0200\n"
+"POT-Creation-Date: 2024-05-23 11:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4842,9 +4842,6 @@ msgstr ""
 msgid "Platform-wide (visible for all members of the platform)"
 msgstr ""
 
-msgid "Visibility on other platforms"
-msgstr ""
-
 msgid "Is your project open to other partner organizations?"
 msgstr ""
 
@@ -8026,12 +8023,6 @@ msgstr ""
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr ""
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr ""
-
 msgid "Collaborate!"
 msgstr ""
 
@@ -8155,12 +8146,6 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr ""
 
 msgid "Type the names of files, events or pads from this group to attach..."
-msgstr ""
-
-msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr ""
-
-msgid "This group shall be made publicly findable via other platforms."
 msgstr ""
 
 msgid "You can access and browse the group that invited you"
@@ -8292,12 +8277,6 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr ""
 
 msgid "Type the names of files, events or pads from this conference to attach..."
-msgstr ""
-
-msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr ""
-
-msgid "This conference shall be made publicly findable via other platforms."
 msgstr ""
 
 msgid "Participate!"
@@ -12312,6 +12291,9 @@ msgstr ""
 #, fuzzy
 msgid "Address(es) of your organization"
 msgstr "Create Project"
+
+msgid "Visibility on other platforms"
+msgstr ""
 
 #, python-format
 msgid "Projects are always transferred to <a href=\"%(url)s\" target=\"_blank\">partner platforms</a> of WECHANGE. These are only organizational data and not personal data."
