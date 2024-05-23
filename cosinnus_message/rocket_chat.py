@@ -1,4 +1,3 @@
-import json
 import logging
 import mimetypes
 import os
@@ -466,7 +465,7 @@ class RocketChatConnection:
             return self.users_create(user, request)
 
     def has_username_changed(self, profile, rocket_user_name):
-        """ Check it username needs to be updated in RocketChat. """
+        """Check it username needs to be updated in RocketChat."""
         username = profile.get_new_rocket_username()
         username_match = re.match(rf'^{username}\d*$', rocket_user_name)
         return username_match is None
@@ -730,9 +729,9 @@ class RocketChatConnection:
         # Update name, email address, password, verified status if they have changed
         profile = user.cosinnus_profile
         rocket_email = user_data.get('emails', [{}])[0].get('address', None)
-        #rocket_mail_verified = user_data.get('emails', [{}])[0].get('verified', None)
+        # rocket_mail_verified = user_data.get('emails', [{}])[0].get('verified', None)
         rocket_username = user_data.get('username')
-        username_changed = rocket_username is None or self.has_username_changed(profile,  rocket_username)
+        username_changed = rocket_username is None or self.has_username_changed(profile, rocket_username)
         if username_changed:
             rocket_username = self._get_unique_username(profile)
             if not rocket_username:
@@ -749,14 +748,18 @@ class RocketChatConnection:
             }
             # Update email only if it has changed to avoid rate limiting by the RocketChat server.
             if email_changed:
-                data.update({
-                    "email": profile.rocket_user_email,
-                })
+                data.update(
+                    {
+                        'email': profile.rocket_user_email,
+                    }
+                )
             # Update active only if it has changed
             if active_changed:
-                data.update({
-                    "active": user.is_active,
-                })
+                data.update(
+                    {
+                        'active': user.is_active,
+                    }
+                )
             # updating the password invalidates existing user sessions, so use it only
             # when actually needed
             if update_password:
