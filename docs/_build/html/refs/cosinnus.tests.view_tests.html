@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.tests.view_tests package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.tests.view_tests package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -36,74 +36,11 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
-<section id="module-cosinnus.tests.view_tests.test_add">
-<span id="cosinnus-tests-view-tests-test-add-module"></span><h2>cosinnus.tests.view_tests.test_add module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_add" title="Permalink to this heading">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_add.</span></span><span class="sig-name descname"><span class="pre">AddGroupTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.setUp">
-<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.setUp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Hook method for setting up the test fixture before exercising it.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.test_get_logged_in">
-<span class="sig-name descname"><span class="pre">test_get_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.test_get_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should return 200 on GET when logged in</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.test_get_not_logged_in">
-<span class="sig-name descname"><span class="pre">test_get_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.test_get_not_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should return 403 on GET if not logged in</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.test_post_logged_in">
-<span class="sig-name descname"><span class="pre">test_post_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.test_post_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should return 302 to detail page on successful POST and have a todo
-with given title</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_add.AddGroupTest.test_post_not_logged_in">
-<span class="sig-name descname"><span class="pre">test_post_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_add.AddGroupTest.test_post_not_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should redirect to login on POST if not logged in</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="cosinnus-tests-view-tests-test-add-module">
+<h2>cosinnus.tests.view_tests.test_add module<a class="headerlink" href="#cosinnus-tests-view-tests-test-add-module" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-cosinnus.tests.view_tests.test_api">
 <span id="cosinnus-tests-view-tests-test-api-module"></span><h2>cosinnus.tests.view_tests.test_api module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_api" title="Permalink to this heading">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_api.</span></span><span class="sig-name descname"><span class="pre">AuthTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.view_tests.test_api.BaseApiTest" title="cosinnus.tests.view_tests.test_api.BaseApiTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseApiTest</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest.test_login_invalid_method">
-<span class="sig-name descname"><span class="pre">test_login_invalid_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest.test_login_invalid_method" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest.test_login_success">
-<span class="sig-name descname"><span class="pre">test_login_success</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest.test_login_success" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest.test_login_wrong_input">
-<span class="sig-name descname"><span class="pre">test_login_wrong_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest.test_login_wrong_input" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.AuthTest.test_logout">
-<span class="sig-name descname"><span class="pre">test_logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.AuthTest.test_logout" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_api.BaseApiTest">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_api.</span></span><span class="sig-name descname"><span class="pre">BaseApiTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_api.BaseApiTest" title="Permalink to this definition">¶</a></dt>
@@ -167,45 +104,8 @@ JSON POST data</p>
 </dd></dl>
 
 </section>
-<section id="module-cosinnus.tests.view_tests.test_edit">
-<span id="cosinnus-tests-view-tests-test-edit-module"></span><h2>cosinnus.tests.view_tests.test_edit module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_edit" title="Permalink to this heading">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.view_tests.test_edit.</span></span><span class="sig-name descname"><span class="pre">EditGroupTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.setUp">
-<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.setUp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Hook method for setting up the test fixture before exercising it.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.test_get_logged_in">
-<span class="sig-name descname"><span class="pre">test_get_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.test_get_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should return 200 on GET when logged in</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.test_get_not_logged_in">
-<span class="sig-name descname"><span class="pre">test_get_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.test_get_not_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should return redirect to login GET if not logged in</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.test_post_logged_in">
-<span class="sig-name descname"><span class="pre">test_post_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.test_post_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should return 302 to detail page on successful POST and have a todo
-with given title</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_edit.EditGroupTest.test_post_not_logged_in">
-<span class="sig-name descname"><span class="pre">test_post_not_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_edit.EditGroupTest.test_post_not_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should return redirect to group page on POST if not logged in</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="cosinnus-tests-view-tests-test-edit-module">
+<h2>cosinnus.tests.view_tests.test_edit module<a class="headerlink" href="#cosinnus-tests-view-tests-test-edit-module" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-cosinnus.tests.view_tests.test_export">
 <span id="cosinnus-tests-view-tests-test-export-module"></span><h2>cosinnus.tests.view_tests.test_export module<a class="headerlink" href="#module-cosinnus.tests.view_tests.test_export" title="Permalink to this heading">¶</a></h2>
@@ -879,6 +779,7 @@ seems not to work as expected there. Will need to look into it in more detail.</
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

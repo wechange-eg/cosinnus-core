@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.models package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.models package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -201,7 +201,7 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.bbb_room.BBBRoom.build_extra_create_parameters">
 <span class="sig-name descname"><span class="pre">build_extra_create_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.bbb_room.BBBRoom.build_extra_create_parameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Builds a parameter set for the create API call. Will use the inferred source 
+<dd><p>Builds a parameter set for the create API call. Will use the inferred source
 object that this BBBRoom belongs to to generate options.</p>
 </dd></dl>
 
@@ -243,7 +243,8 @@ given room type’s extra parameters</p>
 <li><p><strong>moderator_password</strong> – Password for joining the meeting with moderator rights</p></li>
 <li><p><strong>voice_bridge</strong> – Dial in PIN for joining the meeting via telephone call</p></li>
 <li><p><strong>presentation_url</strong> – Publicly available URL of presentation file to be pre-uploaded as slides to BBB room</p></li>
-<li><p><strong>source_object</strong> – The object the room is attached to. Check <cite>CosinnusConferenceSettings.get_for_object()</cite> for valid arguments.</p></li>
+<li><p><strong>source_object</strong> – The object the room is attached to. Check <cite>CosinnusConferenceSettings.get_for_object()</cite>
+for valid arguments.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Type<span class="colon">:</span></dt>
@@ -304,7 +305,7 @@ object the first time, the query is executed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.bbb_room.BBBRoom.get_direct_room_url_for_user">
 <span class="sig-name descname"><span class="pre">get_direct_room_url_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.bbb_room.BBBRoom.get_direct_room_url_for_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the direct BBB-server URL. This logic is also used by the 
+<dd><p>Returns the direct BBB-server URL. This logic is also used by the
 proxy-view used by <cite>get_absolute_url</cite>.
 This should be used as the boilerplate for the room-URL getter for a user,
 as it also handles creating statistics.
@@ -386,7 +387,7 @@ object the first time, the query is executed.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.bbb_room.BBBRoom.is_recorded_meeting">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_recorded_meeting</span></span><a class="headerlink" href="#cosinnus.models.bbb_room.BBBRoom.is_recorded_meeting" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns true if the options used for this meeting mean that the 
+<dd><p>Returns true if the options used for this meeting mean that the
 video conference will be recorded in BBB</p>
 </dd></dl>
 
@@ -1235,9 +1236,9 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dt class="sig sig-object py" id="cosinnus.models.conference.CosinnusConferencePremiumBlock">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.conference.</span></span><span class="sig-name descname"><span class="pre">CosinnusConferencePremiumBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.conference.CosinnusConferencePremiumBlock" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Signifies the time frames during which CosinnusConferences are set into premium mode by a 
+<p>Signifies the time frames during which CosinnusConferences are set into premium mode by a
 cronjob that switches their <cite>is_premium_currently</cite> flag. While this flag is True,
-the BBB URLs for all rooms/events within this conference will use the server config set 
+the BBB URLs for all rooms/events within this conference will use the server config set
 in the <cite>CosinnusConferenceSettings.bbb_server_choice_premium</cite> for each settings object
 inherited or set for each conference event.</p>
 <p>Note: There is a hook trigger for updating conferences when a CosinnusConferencePremiumBlock
@@ -1346,7 +1347,7 @@ object the first time, the query is executed.</p>
 <dt class="sig sig-object py" id="cosinnus.models.conference.CosinnusConferencePremiumCapacityInfo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.conference.</span></span><span class="sig-name descname"><span class="pre">CosinnusConferencePremiumCapacityInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.conference.CosinnusConferencePremiumCapacityInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>A guiding-only info for portal admins, during which times the premium BBB server can take 
+<p>A guiding-only info for portal admins, during which times the premium BBB server can take
 which capacity of users. Serves as a guideline for portal admins when they accept conferences
 as premium conference, to decide whether additional capacity on the BBB cluster should be booked.</p>
 <dl class="py exception">
@@ -1859,7 +1860,7 @@ customize the behavior of the Manager.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.conference.</span></span><span class="sig-name descname"><span class="pre">CosinnusConferenceSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.conference.CosinnusConferenceSettings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
 <p>A BBB settings container able to be attached to various objects to provide
-a granular hierarchy on settings. 
+a granular hierarchy on settings.
 Each level in the chain of the hierarchy for a BBBRoom object will be
 checked for this settings object, and if not found, the next higher level
 settings will be inherited.</p>
@@ -2059,9 +2060,9 @@ this returns an agglomeration of all the settings objects attached to <cite>sour
 and all inherited objects higher up in the object chain.</p>
 <p>If arrived at CosinnusPortal, and no setings object is found,
 None is returned.</p>
-<p>The currently supported source_object attachment points for CosinnusConferenceSettings are, 
+<p>The currently supported source_object attachment points for CosinnusConferenceSettings are,
 in order of the hierarchy chain: see <cite>get_parent_object_in_conference_setting_chain</cite>.</p>
-<p>Furthermore, this function will accept these models as source_object 
+<p>Furthermore, this function will accept these models as source_object
 and use the resolved cosinnus_event.ConferenceEvent as chain starting point, if there is one:</p>
 <blockquote>
 <div><ul class="simple">
@@ -2094,7 +2095,7 @@ as initial base params, unless <cite>no_defaults=True</cite> is supplied.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.conference.CosinnusConferenceSettings.get_readonly_copy">
 <span class="sig-name descname"><span class="pre">get_readonly_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.conference.CosinnusConferenceSettings.get_readonly_copy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a readonly copy of this instance, so that it can be passed around in the 
+<dd><p>Return a readonly copy of this instance, so that it can be passed around in the
 inheritance chain to collect unset values off of settings objects higher up in the chain.
 The save() and delete() functions are blocked to prevent accidental persisting of the fields.</p>
 </dd></dl>
@@ -2103,8 +2104,8 @@ The save() and delete() functions are blocked to prevent accidental persisting o
 <dt class="sig sig-object py" id="cosinnus.models.conference.CosinnusConferenceSettings.has_changed_inherited_fields">
 <span class="sig-name descname"><span class="pre">has_changed_inherited_fields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.conference.CosinnusConferenceSettings.has_changed_inherited_fields" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if any of the inheritable fields as a value other than the default inherit marker,
-or if the <cite>bbb_params</cite> field is set, False else. 
-If this returns False, it means that this settings instance carries no extra information and could be 
+or if the <cite>bbb_params</cite> field is set, False else.
+If this returns False, it means that this settings instance carries no extra information and could be
 deleted without losing anything.</p>
 </dd></dl>
 
@@ -2129,7 +2130,7 @@ object the first time, the query is executed.</p>
 <dt class="sig sig-object py" id="cosinnus.models.conference.CosinnusConferenceSettings.merge_in_inherited_settings_object">
 <span class="sig-name descname"><span class="pre">merge_in_inherited_settings_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inherit_target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.conference.CosinnusConferenceSettings.merge_in_inherited_settings_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merges this object “on top” of the <cite>inherit_target</cite> CosinnusConferenceSettings object
-to inherit all values from the target, that aren’t set in this object 
+to inherit all values from the target, that aren’t set in this object
 &#64;return: self, with missing values inherited from <cite>inherit_target</cite></p>
 </dd></dl>
 
@@ -2148,7 +2149,7 @@ object the first time, the query is executed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.conference.CosinnusConferenceSettings.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ignore_inherit_condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.conference.CosinnusConferenceSettings.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>If the instance has no actual overwritten settings (all are set to inherited), 
+<dd><p>If the instance has no actual overwritten settings (all are set to inherited),
 discard it if it hasn’t been created yet, and delete it if it already existed</p>
 </dd></dl>
 
@@ -2165,7 +2166,7 @@ user-chosen values and presets from presets from <cite>BBB_PRESET_FORM_FIELD_PAR
 <dt class="sig sig-object py" id="cosinnus.models.conference.ParticipationManagement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.conference.</span></span><span class="sig-name descname"><span class="pre">ParticipationManagement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.conference.ParticipationManagement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.models.mixins.html#cosinnus.models.mixins.translations.TranslatableFormsetJsonFieldMixin" title="cosinnus.models.mixins.translations.TranslatableFormsetJsonFieldMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">TranslatableFormsetJsonFieldMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>A settings object for a CosinnusConference that determines how and when 
+<p>A settings object for a CosinnusConference that determines how and when
 CosinnusConferenceApplications may be submitted, as well as other meta options
 for the application options for that conference.</p>
 <dl class="py exception">
@@ -2339,7 +2340,7 @@ and return that higher-level object.</p>
 - cosinnus.BBBRoom –&gt; (cosinnus_event.ConferenceEvent, cosinnus_event.Event, cosinnus.CosinnusGroup)
 - cosinnus_event.ConferenceEvent –&gt; cosinnus.CosinnusConferenceRoom
 - cosinnus.CosinnusConferenceRoom –&gt; cosinnus.CosinnusGroup
-- cosinnus.CosinnusGroup –&gt; cosinnus.CosinnusPortal 
+- cosinnus.CosinnusGroup –&gt; cosinnus.CosinnusPortal
 - cosinnus.CosinnusPortal –&gt; None (means the parameters configured in settings.py are used)</p>
 <p>&#64;param return: None if it arrived at CosinnusPortal or was given None. Else, the higher object in the chain.</p>
 </dd></dl>
@@ -2766,10 +2767,10 @@ Note: this replaces the old bool modelfield <cite>use_conference_applications</c
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.add_member_to_group">
 <span class="sig-name descname"><span class="pre">add_member_to_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">membership_status</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.add_member_to_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>“Makes the user a group member”. 
+<dd><p>“Makes the user a group member”.
 Safely adds a membership for the given user with the given status for this group.
 If the membership existed, does nothing. If it existed with a different status, will
-change the status (unless it would demote the user). If none existed, creates it. 
+change the status (unless it would demote the user). If none existed, creates it.
 This will also convert membership requests/invitations to actual memberships!</p>
 </dd></dl>
 
@@ -2847,7 +2848,8 @@ object the first time, the query is executed.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.conference_members">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">conference_members</span></span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.conference_members" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a User QS of <em>AUTO-INVITED</em> (!) conference member accounts of this group if it is a conference, an empty QS else</p>
+<dd><p>Returns a User QS of <em>AUTO-INVITED</em> (!) conference member accounts of this group if it is a conference,
+an empty QS else</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -3038,7 +3040,9 @@ members joining/leaving, etc.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.get_children">
 <span class="sig-name descname"><span class="pre">get_children</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">for_parent_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.get_children" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns all CosinnusGroups that have this group as parent.
+&#64;param for_parent_id: If supplied, will get the children for another CosinnusGroup id instead of for this group</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.get_content_type_for_last_visited">
@@ -3144,14 +3148,14 @@ If not set, used the default setting in COSINNUS_MICROSITE_DEFAULT_PUBLIC_APPS</
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.get_or_infer_from_date">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_or_infer_from_date</span></span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.get_or_infer_from_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the (conference) group’s <cite>from_date</cite> or if not set, 
+<dd><p>Gets the (conference) group’s <cite>from_date</cite> or if not set,
 infers it from the starting time of the earliest conference event</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.get_or_infer_to_date">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_or_infer_to_date</span></span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.get_or_infer_to_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the (conference) group’s <cite>to_date</cite> or if not set, 
+<dd><p>Gets the (conference) group’s <cite>to_date</cite> or if not set,
 infers it from the ending time of the earliest conference event</p>
 </dd></dl>
 
@@ -3175,7 +3179,7 @@ infers it from the ending time of the earliest conference event</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.get_readable_title">
 <span class="sig-name descname"><span class="pre">get_readable_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.get_readable_title" title="Permalink to this definition">¶</a></dt>
-<dd><p>The human-readable title. 
+<dd><p>The human-readable title.
 An overridable replacement for the title, to be used by extending models
 that may not have a well-readable title.</p>
 </dd></dl>
@@ -3190,7 +3194,7 @@ as a parent (excluding self)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.get_trans">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_trans</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.get_trans" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the typed group trans object containing translations for all 
+<dd><p>Returns the typed group trans object containing translations for all
 type-dependent strings for this group’s type.
 This method only works on classes.
 See <cite>CosinnusProjectTransBase</cite>.</p>
@@ -3282,9 +3286,9 @@ object the first time, the query is executed.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.is_autojoin_group">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_autojoin_group</span></span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.is_autojoin_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut to determine if a user joining this group will be instantly 
+<dd><p>Shortcut to determine if a user joining this group will be instantly
 accepted instead of creating a join request for the administrators.
-This checks the membership_mode of the group, as well as the 
+This checks the membership_mode of the group, as well as the
 settings.COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS setting for this portal.</p>
 </dd></dl>
 
@@ -3420,7 +3424,7 @@ by GenericRelation.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.membership_applications_possible">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">membership_applications_possible</span></span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.membership_applications_possible" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut to determine if users can currently apply to become a member, 
+<dd><p>Shortcut to determine if users can currently apply to become a member,
 depending on what type of membership requests are set, and if applicable,
 if conference applications are currently open.</p>
 </dd></dl>
@@ -3553,9 +3557,9 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.remove_member_from_group">
 <span class="sig-name descname"><span class="pre">remove_member_from_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.remove_member_from_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>“Kicks a user from the group.” 
+<dd><p>“Kicks a user from the group.”
 Safely removes a membership for the given user from the group.
-If the user wasn’t a member of the group,  does nothing. 
+If the user wasn’t a member of the group,  does nothing.
 This will also remove membership requests/invitations!</p>
 </dd></dl>
 
@@ -3634,7 +3638,7 @@ object the first time, the query is executed.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.trans">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">trans</span></span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.trans" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the typed group trans object containing translations for all 
+<dd><p>Returns the typed group trans object containing translations for all
 type-dependent strings for this group’s type.
 This property only works on instances.
 See <cite>CosinnusProjectTransBase</cite>.</p>
@@ -3677,8 +3681,8 @@ object the first time, the query is executed.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusBaseGroup.use_conference_applications">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_conference_applications</span></span><a class="headerlink" href="#cosinnus.models.group.CosinnusBaseGroup.use_conference_applications" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut to determine if the group uses CosinnusConferenceApplication as 
-membership request mode. 
+<dd><p>Shortcut to determine if the group uses CosinnusConferenceApplication as
+membership request mode.
 Replacement for the old bool modelfield that existed.</p>
 </dd></dl>
 
@@ -4987,11 +4991,11 @@ object the first time, the query is executed.</p>
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusGroupManager">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.group.</span></span><span class="sig-name descname"><span class="pre">CosinnusGroupManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group.CosinnusGroupManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Manager</span></code></p>
-<p>These caches are the directories of which groups are active and displayed in each portal. 
+<p>These caches are the directories of which groups are active and displayed in each portal.
 They are typed by the Groups’ Manager (!) so that one can be sure to always receive the correct Model instantiation.
 This also means that when called on the base CosinnusGroupManager, one will receive cached CosinnusGroups and not
-either CosinnusProject or CosinnusSociety. This works as intended, as often functions wish to explicitly get a set of
-both of these (membership queries, BaseTaggableObject displays in Stream, etc)</p>
+either CosinnusProject or CosinnusSociety. This works as intended, as often functions wish to explicitly get a set
+of both of these (membership queries, BaseTaggableObject displays in Stream, etc)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusGroupManager.all_in_portal">
 <span class="sig-name descname"><span class="pre">all_in_portal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group.CosinnusGroupManager.all_in_portal" title="Permalink to this definition">¶</a></dt>
@@ -5138,7 +5142,7 @@ groups</p>
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusGroupManager.to_be_reminded">
 <span class="sig-name descname"><span class="pre">to_be_reminded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'week_before'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group.CosinnusGroupManager.to_be_reminded" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns conferences with due reminders inside a short time-period that is
-1 week/day/hour before the start date of <em>the first ConferenceEvent in any ConferenceRoom</em>. 
+1 week/day/hour before the start date of <em>the first ConferenceEvent in any ConferenceRoom</em>.
 Currently:</p>
 <blockquote>
 <div><ul class="simple">
@@ -5409,7 +5413,7 @@ non-SQL backends), respectively. Normally, they should not be set.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
 <p>Sets up a redirect for all URLs that match the pattern of
 <a class="reference external" href="http:/">http:/</a>/&lt;from-portal-url&gt;/&lt;from-type&gt;/&lt;from-slug/ where &lt;from-type&gt; is one of
-cosinnus.core.registries.group_model_registry’s group slug fragments. 
+cosinnus.core.registries.group_model_registry’s group slug fragments.
 If a URL requested matches this, a Middleware will redirect to &lt;to_group&gt;</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusPermanentRedirect.CACHE_KEY">
@@ -5436,7 +5440,7 @@ If a URL requested matches this, a Middleware will redirect to &lt;to_group&gt;<
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group.CosinnusPermanentRedirect.check_integrity">
 <span class="sig-name descname"><span class="pre">check_integrity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group.CosinnusPermanentRedirect.check_integrity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if this redirect is valid (doesn’t point at itself for an infinite loop) 
+<dd><p>Checks if this redirect is valid (doesn’t point at itself for an infinite loop)
 &#64;return: True if the redirect looks stable, False if it would cause a loop</p>
 </dd></dl>
 
@@ -6600,7 +6604,7 @@ by GenericRelation.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group_extra.CosinnusConference.get_trans">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_trans</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group_extra.CosinnusConference.get_trans" title="Permalink to this definition">¶</a></dt>
-<dd><p>Added this for IDEs and parsers to not mark the unknown <cite>get_trans()</cite> property everywhere the subtypes are 
+<dd><p>Added this for IDEs and parsers to not mark the unknown <cite>get_trans()</cite> property everywhere the subtypes are
 called using this directly.</p>
 </dd></dl>
 
@@ -6706,7 +6710,7 @@ by GenericRelation.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group_extra.CosinnusProject.get_trans">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_trans</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group_extra.CosinnusProject.get_trans" title="Permalink to this definition">¶</a></dt>
-<dd><p>Added this for IDEs and parsers to not mark the unknown <cite>get_trans()</cite> property everywhere the subtypes are 
+<dd><p>Added this for IDEs and parsers to not mark the unknown <cite>get_trans()</cite> property everywhere the subtypes are
 called using this directly.</p>
 </dd></dl>
 
@@ -6813,7 +6817,7 @@ by GenericRelation.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.group_extra.CosinnusSociety.get_trans">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_trans</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.group_extra.CosinnusSociety.get_trans" title="Permalink to this definition">¶</a></dt>
-<dd><p>Added this for IDEs and parsers to not mark the unknown <cite>get_trans()</cite> property everywhere the subtypes are 
+<dd><p>Added this for IDEs and parsers to not mark the unknown <cite>get_trans()</cite> property everywhere the subtypes are
 called using this directly.</p>
 </dd></dl>
 
@@ -6972,14 +6976,14 @@ delete the user’s group membership in the paired group (unless the user is a g
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.models.hooks.reset_cookie_expiry_for_anonymous_user">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.models.hooks.</span></span><span class="sig-name descname"><span class="pre">reset_cookie_expiry_for_anonymous_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.hooks.reset_cookie_expiry_for_anonymous_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default for cookies for anonymous users is browser-session and as set in 
+<dd><p>Default for cookies for anonymous users is browser-session and as set in
 <cite>COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS</cite> logged in users</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.models.hooks.set_cookie_expiry_for_authenticated_user">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.models.hooks.</span></span><span class="sig-name descname"><span class="pre">set_cookie_expiry_for_authenticated_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.hooks.set_cookie_expiry_for_authenticated_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default for cookies for anonymous users is browser-session and as set in 
+<dd><p>Default for cookies for anonymous users is browser-session and as set in
 <cite>COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS</cite> logged in users</p>
 </dd></dl>
 
@@ -7374,7 +7378,7 @@ timely relevance to show the users in their timelines or similar.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.idea.IdeaManager.get_by_shortid">
 <span class="sig-name descname"><span class="pre">get_by_shortid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shortid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.idea.IdeaManager.get_by_shortid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets an idea from a string id in the form of <cite>“%(portal)d.%(type)s.%(slug)s”</cite>. 
+<dd><p>Gets an idea from a string id in the form of <cite>“%(portal)d.%(type)s.%(slug)s”</cite>.
 Returns None if not found.</p>
 </dd></dl>
 
@@ -7602,7 +7606,7 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.managed_tags.CosinnusManagedTag.create_managed_tag_and_paired_group">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_managed_tag_and_paired_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">managed_tag_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.managed_tags.CosinnusManagedTag.create_managed_tag_and_paired_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a managed tag if it doesn’t exist and a paired group 
+<dd><p>Creates a managed tag if it doesn’t exist and a paired group
 &#64;param name: The name for both the managed tag and the paired group
 &#64;param creator: user that is set as creator of the tag and group
 &#64;param managed_tag_type: optional, the CosinnusManagedTagType for the tag
@@ -7987,7 +7991,7 @@ ForwardManyToOneDescriptor) by adding itself as a model attribute.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.managed_tags.CosinnusManagedTagAssignment.update_assignments_for_object">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_assignments_for_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag_slugs_to_assign</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.managed_tags.CosinnusManagedTagAssignment.update_assignments_for_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Will assign all given CosinnusManagedTags to the given object and remove existing assignments 
+<dd><p>Will assign all given CosinnusManagedTags to the given object and remove existing assignments
 not contained in the given assignment list.
 &#64;param obj: Any object to assign the managed tags to
 &#64;param tag_slugs_to_assign: A list of slugs of CosinnusManagedTags. Only those slugs that actually</p>
@@ -8026,9 +8030,9 @@ customize the behavior of the Manager.</p>
 <dt class="sig sig-object py" id="cosinnus.models.managed_tags.CosinnusManagedTagAssignmentModelMixin">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.managed_tags.</span></span><span class="sig-name descname"><span class="pre">CosinnusManagedTagAssignmentModelMixin</span></span><a class="headerlink" href="#cosinnus.models.managed_tags.CosinnusManagedTagAssignmentModelMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Mixin for models that can have CosinnusManagedTagAssignments assigned. 
-You still need to add 
-<cite>managed_tag_assignments = GenericRelation(‘cosinnus.CosinnusManagedTagAssignment’)</cite> 
+<p>Mixin for models that can have CosinnusManagedTagAssignments assigned.
+You still need to add
+<cite>managed_tag_assignments = GenericRelation(‘cosinnus.CosinnusManagedTagAssignment’)</cite>
 to your model.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.managed_tags.CosinnusManagedTagAssignmentModelMixin.get_managed_tag_ids">
@@ -8553,7 +8557,7 @@ datetime range, either fully or in part.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.models.map.itemid_from_searchresult">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.models.map.</span></span><span class="sig-name descname"><span class="pre">itemid_from_searchresult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.map.itemid_from_searchresult" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a unique long id for a haystack result without revealing any DB ids. 
+<dd><p>Returns a unique long id for a haystack result without revealing any DB ids.
 itemid: &lt;portal_id&gt;.&lt;modeltype&gt;.&lt;slug&gt;
 Example:  <cite>1.people.saschanarr</cite></p>
 </dd></dl>
@@ -8793,7 +8797,8 @@ but less permissions than an admin</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.membership.MembersManagerMixin.actual_invited_pendings">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actual_invited_pendings</span></span><a class="headerlink" href="#cosinnus.models.membership.MembersManagerMixin.actual_invited_pendings" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a QS of users that have a pending invitation on this group and are actually active and visible on the site</p>
+<dd><p>Returns a QS of users that have a pending invitation on this group and are actually active and visible on the
+site</p>
 </dd></dl>
 
 <dl class="py property">
@@ -8805,7 +8810,8 @@ but less permissions than an admin</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="cosinnus.models.membership.MembersManagerMixin.actual_members">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actual_members</span></span><a class="headerlink" href="#cosinnus.models.membership.MembersManagerMixin.actual_members" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a QS of users that are members of this group (admins and members) and are actually active and visible on the site</p>
+<dd><p>Returns a QS of users that are members of this group (admins and members) and are actually active and visible
+on the site</p>
 </dd></dl>
 
 <dl class="py property">
@@ -9205,7 +9211,7 @@ on the manager:</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.models.profile.BaseUserProfile.SKIP_FIELDS">
-<span class="sig-name descname"><span class="pre">SKIP_FIELDS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'user',</span> <span class="pre">'user_id',</span> <span class="pre">'media_tag',</span> <span class="pre">'media_tag_id',</span> <span class="pre">'settings',</span> <span class="pre">'managed_tag_assignments',</span> <span class="pre">'likes',</span> <span class="pre">'deletion_triggered_by_self',</span> <span class="pre">'_is_guest',</span> <span class="pre">'guest_access_object']</span></em><a class="headerlink" href="#cosinnus.models.profile.BaseUserProfile.SKIP_FIELDS" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">SKIP_FIELDS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'user',</span> <span class="pre">'user_id',</span> <span class="pre">'media_tag',</span> <span class="pre">'media_tag_id',</span> <span class="pre">'settings',</span> <span class="pre">'managed_tag_assignments',</span> <span class="pre">'likes',</span> <span class="pre">'deletion_triggered_by_self',</span> <span class="pre">'_is_guest',</span> <span class="pre">'guest_access_object',</span> <span class="pre">'tos_accepted']</span></em><a class="headerlink" href="#cosinnus.models.profile.BaseUserProfile.SKIP_FIELDS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -9368,8 +9374,10 @@ nextcloud and rocketchat receive for this user</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.profile.BaseUserProfile.get_full_name">
-<span class="sig-name descname"><span class="pre">get_full_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.profile.BaseUserProfile.get_full_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">get_full_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.profile.BaseUserProfile.get_full_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the full user name, or an “inactive” placeholder for inactive users.
+&#64;param force: if True, will always print the user name, even if they are inactive.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.profile.BaseUserProfile.get_icon">
@@ -9423,7 +9431,7 @@ of dicts with the keys <code class="docutils literal notranslate"><span class="p
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.profile.BaseUserProfile.get_unique_identifier">
 <span class="sig-name descname"><span class="pre">get_unique_identifier</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.profile.BaseUserProfile.get_unique_identifier" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a string that can be used to uniquely differentiate a user from another, 
+<dd><p>Returns a string that can be used to uniquely differentiate a user from another,
 even if they have the same names and avatars.
 As a fast solution, will right now simply display the URL fragment to the user’s profile.</p>
 </dd></dl>
@@ -9618,6 +9626,13 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.models.profile.BaseUserProfile.tos_accepted">
+<span class="sig-name descname"><span class="pre">tos_accepted</span></span><a class="headerlink" href="#cosinnus.models.profile.BaseUserProfile.tos_accepted" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.models.profile.BaseUserProfile.translations">
 <span class="sig-name descname"><span class="pre">translations</span></span><a class="headerlink" href="#cosinnus.models.profile.BaseUserProfile.translations" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
@@ -9706,7 +9721,7 @@ Only exception are email-validation mails.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.profile.GlobalBlacklistedEmail.add_for_email">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_for_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.profile.GlobalBlacklistedEmail.add_for_email" title="Permalink to this definition">¶</a></dt>
-<dd><p>Will add an email to the blacklist if it doesn’t exist yet if no user is registered with that email 
+<dd><p>Will add an email to the blacklist if it doesn’t exist yet if no user is registered with that email
 or doesn’t have a portal membership in this current portal.
 Otherwise will simply set the global “no-email” setting for that user.</p>
 </dd></dl>
@@ -10304,6 +10319,13 @@ object the first time, the query is executed.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.models.profile.UserProfile.timezone">
 <span class="sig-name descname"><span class="pre">timezone</span></span><a class="headerlink" href="#cosinnus.models.profile.UserProfile.timezone" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.models.profile.UserProfile.tos_accepted">
+<span class="sig-name descname"><span class="pre">tos_accepted</span></span><a class="headerlink" href="#cosinnus.models.profile.UserProfile.tos_accepted" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -11351,7 +11373,7 @@ Needs to be set by a specific implementation of BaseTaggableObjectModel</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.tagged.BaseTaggableObjectModel.get_readable_title">
 <span class="sig-name descname"><span class="pre">get_readable_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.tagged.BaseTaggableObjectModel.get_readable_title" title="Permalink to this definition">¶</a></dt>
-<dd><p>The human-readable title. 
+<dd><p>The human-readable title.
 An overridable replacement for the title, to be used by extending models
 that may not have a well-readable title.</p>
 </dd></dl>
@@ -11455,7 +11477,7 @@ object the first time, the query is executed.</p>
 <dt class="sig sig-object py" id="cosinnus.models.tagged.BaseTaggableObjectModel.on_save_added_tagged_persons">
 <span class="sig-name descname"><span class="pre">on_save_added_tagged_persons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_users</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.tagged.BaseTaggableObjectModel.on_save_added_tagged_persons" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called by the taggable form whenever this object is saved and -new- persons
-have been added as tagged! 
+have been added as tagged!
 This can be overridden in specific TaggableObjects for a more specific notification email message.
 Just add extra={‘mail_template’:’&lt;your_template&gt;’, ‘subject_template’:’&lt;your_template&gt;’}</p>
 </dd></dl>
@@ -11585,7 +11607,7 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.tagged.BaseTaggableObjectReflection.get_groups_for_object">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_groups_for_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.tagged.BaseTaggableObjectReflection.get_groups_for_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Will return a queryset of all CosinnusBaseGroup (not projects or societies!) that the 
+<dd><p>Will return a queryset of all CosinnusBaseGroup (not projects or societies!) that the
 given object is being reflected into.</p>
 </dd></dl>
 
@@ -12098,7 +12120,7 @@ the automatic like modal popup <cite>confirm_likefollowstar_modal.html</cite></p
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.models.tagged.LikeableObjectMixin.get_content_type">
 <span class="sig-name descname"><span class="pre">get_content_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.tagged.LikeableObjectMixin.get_content_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the string concatenation of this object’s content type 
+<dd><p>Returns the string concatenation of this object’s content type
 (useful for identification and linking the likeable object to JS methods)</p>
 </dd></dl>
 
@@ -12687,7 +12709,7 @@ Used by DashboardWidgets and in the v3 navigation API.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.models.user_dashboard.MenuItem">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">MenuItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">badge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_external</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.user_dashboard.MenuItem" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.models.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">MenuItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">badge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_external</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.user_dashboard.MenuItem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
 <p>Dictionary used as a representation and API serializer of menu links. Used in the v3 navigation API.</p>
 </dd></dl>
@@ -12986,7 +13008,7 @@ object the first time, the query is executed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.models.user_dashboard_announcement.get_hidden_user_dashboard_announcements_for_user">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.models.user_dashboard_announcement.</span></span><span class="sig-name descname"><span class="pre">get_hidden_user_dashboard_announcements_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.user_dashboard_announcement.get_hidden_user_dashboard_announcements_for_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of ids of UserDashboardAnnouncement that the user has chosen to 
+<dd><p>Returns a list of ids of UserDashboardAnnouncement that the user has chosen to
 “not show this again”.</p>
 </dd></dl>
 
@@ -13406,7 +13428,7 @@ object the first time, the query is executed.</p>
 <span class="sig-name descname"><span class="pre">do_import</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_import_item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threaded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">import_creator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.models.user_import.CosinnusUserImportProcessorBase.do_import" title="Permalink to this definition">¶</a></dt>
 <dd><p>Does a threaded user import, either as a dry-run or real one.
 Will update the import object’s state when done or failed.
-&#64;property user_import_item: class <cite>CosinnusUserImport</cite> containing import_data 
+&#64;property user_import_item: class <cite>CosinnusUserImport</cite> containing import_data
 &#64;property import_creator: the user performing the import, or None.</p>
 <blockquote>
 <div><p>Needed for some import actions that require setting a creator
@@ -15794,6 +15816,7 @@ object the first time, the query is executed.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

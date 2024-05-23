@@ -14,6 +14,7 @@ network and organize effectively without relying on commercial software with que
    :caption: Contents:
 
    dev_setup
+   coding_style
    components
    services
    settings

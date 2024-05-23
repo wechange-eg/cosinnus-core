@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.utils package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.utils package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -109,7 +109,7 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.captcha.dissimilar_random_char_challenge">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.captcha.</span></span><span class="sig-name descname"><span class="pre">dissimilar_random_char_challenge</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.captcha.dissimilar_random_char_challenge" title="Permalink to this definition">¶</a></dt>
-<dd><p>A django-simple-captcha generator function that uses 
+<dd><p>A django-simple-captcha generator function that uses
 only chars that can not easily be confused in the captcha,
 like confusion between ‘O’ and ‘Q’.
 Removed: R, P, Q, O, K, X, I, J, V, Z, F, S, D</p>
@@ -790,7 +790,7 @@ if has_more == False, the receiving widget will assume no further data can be lo
 <dt class="sig sig-object py" id="cosinnus.utils.dashboard.create_initial_group_widgets">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.dashboard.</span></span><span class="sig-name descname"><span class="pre">create_initial_group_widgets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.dashboard.create_initial_group_widgets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function responsible for creating the initial widgets of CosinnusGroups
-(and subtypes) upon creation. Will create all group dashboard and microsite widgets 
+(and subtypes) upon creation. Will create all group dashboard and microsite widgets
 that are defined in:</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">settings.COSINNUS_INITIAL_GROUP_WIDGETS</span></code> and
@@ -827,7 +827,7 @@ upon user creation. Will create widgets that are defined in:</p>
 <dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.get_date_or_now_starting_time">
 <span class="sig-name descname"><span class="pre">get_date_or_now_starting_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.get_date_or_now_starting_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dict like {‘is_date’: True, ‘date’: &lt;date&gt;}
-with is_date=False date as string “Now” if the event is running, 
+with is_date=False date as string “Now” if the event is running,
 else is_date=True and date as the moment-usable datetime of the from_date.</p>
 </dd></dl>
 
@@ -938,7 +938,7 @@ eg. <code class="docutils literal notranslate"><span class="pre">&quot;%d&quot;<
 <dt class="sig sig-object py" id="cosinnus.utils.exceptions.CosinnusPermissionDeniedException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.exceptions.</span></span><span class="sig-name descname"><span class="pre">CosinnusPermissionDeniedException</span></span><a class="headerlink" href="#cosinnus.utils.exceptions.CosinnusPermissionDeniedException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Exception to be raised when somewhere deeper than dispatch() in a View it is found that 
+<p>Exception to be raised when somewhere deeper than dispatch() in a View it is found that
 the user needs to be logged in to access it.
 This should always be caught and a proper redirect to a login page should be issued.</p>
 </dd></dl>
@@ -965,7 +965,7 @@ This should always be caught and a proper redirect to a login page should be iss
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.files.create_zip_from_files">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.files.</span></span><span class="sig-name descname"><span class="pre">create_zip_from_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.files.create_zip_from_files" title="Permalink to this definition">¶</a></dt>
-<dd><p>Will create an in-memory (BytesIO) Zip-File from files on the disk. 
+<dd><p>Will create an in-memory (BytesIO) Zip-File from files on the disk.
 &#64;param file_list: A list of string tuples: [(local_file_path, relative_zip_path)]</p>
 <blockquote>
 <div><p>Example: [(‘/tmp/file1.txt’, ‘file1.txt’), (‘/tmp/sub/file2.txt’, ‘sub/file2.txt’)]</p>
@@ -991,7 +991,7 @@ This should always be caught and a proper redirect to a login page should be iss
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.files.get_cosinnus_media_file_folder">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.files.</span></span><span class="sig-name descname"><span class="pre">get_cosinnus_media_file_folder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.files.get_cosinnus_media_file_folder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the prefix-folder path for this portal, 
+<dd><p>Returns the prefix-folder path for this portal,
 under which all media and files should be saved.</p>
 </dd></dl>
 
@@ -1055,15 +1055,15 @@ under which all media and files should be saved.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.files.image_thumbnail">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.files.</span></span><span class="sig-name descname"><span class="pre">image_thumbnail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.files.image_thumbnail" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the thumbnail to a given image field in the required size, or None if no image is provided 
+<dd><p>Returns the thumbnail to a given image field in the required size, or None if no image is provided
 &#64;param size: Tuple of sizes, e.g. (80, 80)</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.files.image_thumbnail_url">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.files.</span></span><span class="sig-name descname"><span class="pre">image_thumbnail_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.files.image_thumbnail_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the static image URL for a thumbnail to a given image field in the required size, 
-or None if no image is provided 
+<dd><p>Returns the static image URL for a thumbnail to a given image field in the required size,
+or None if no image is provided
 &#64;param size: Tuple of sizes, e.g. (80, 80)</p>
 </dd></dl>
 
@@ -1159,7 +1159,7 @@ Members outside are min/maxed to 0/1.0 respective.
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">resolve_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_or_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.functions.resolve_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the given string attribute of an object, or its return value if it’s a function.
 If None given, or the object had no such attribute or function, try to find
-the given default attribute. If no default given, return None. 
+the given default attribute. If no default given, return None.
 Supplying a string argument ‘None’ to attr_or_function will override the default and return None.
 This function takes stacked attributes, much like a django template would.
 &#64;param func_args: If given, and the resolved attribute is a function, supply these args</p>
@@ -1179,6 +1179,13 @@ This function takes stacked attributes, much like a django template would.
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">select_related_chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.functions.select_related_chain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Monkey-patch for django &lt; 1.7  to be able to chain multiple calls
 to qs.select_related() without losing the args of the first calls.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.set_many_chunked">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">set_many_chunked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.functions.set_many_chunked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like django cache’s <cite>set_many</cite>, but done in chunks. Useful for sets that get very
+large if the backend might be overburdened.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1227,11 +1234,11 @@ existing slugs and can be used to filter them.</p>
 <li><p><strong>slug_field</strong> (<em>str</em>) – The name of the field to write the slug to</p></li>
 <li><p><strong>extra_conflict_check</strong> (<em>lambda/func</em>) – A function that takes
 a candidate slug as argument, and returns True if a clash exists
-for that slug. Used as an additional constraining check on whether a 
+for that slug. Used as an additional constraining check on whether a
 slug should not be used.
 Default: lambda slug: False</p></li>
 <li><p><strong>force_redo</strong> (<em>bool</em>) – If False, will do nothing if a slug is already set
-on the item. If True, will redo the slugification, but exclude the 
+on the item. If True, will redo the slugification, but exclude the
 currently set slug from the list, meaning that if all other constraints
 are clean, an item will keep its slug, but if the current slug clashes,
 it will be redone.</p></li>
@@ -1352,9 +1359,10 @@ with a replacement URL.</p>
 <dt class="sig sig-object py" id="cosinnus.utils.import_utils.GroupCSVImporter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.import_utils.</span></span><span class="sig-name descname"><span class="pre">GroupCSVImporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.import_utils.GroupCSVImporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
-<p>Extend this class to implement the specific import function <cite>_do_import`</cite>! 
-Assign your new class to the setting <code class="docutils literal notranslate"><span class="pre">COSINNUS_CSV_IMPORT_TYPE_SETTINGS[import_type]['IMPORT_CLASS']</span></code> to have it be used for the import. 
-&#64;param group_rows: The rows of CSV imported groups. 
+<p>Extend this class to implement the specific import function <cite>_do_import`</cite>!
+Assign your new class to the setting <code class="docutils literal notranslate"><span class="pre">COSINNUS_CSV_IMPORT_TYPE_SETTINGS[import_type]['IMPORT_CLASS']</span></code> to have it
+be used for the import.
+&#64;param group_rows: The rows of CSV imported groups.
 &#64;param request: Supply a request if a report summary of the import should be mailed to the user</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.utils.import_utils.GroupCSVImporter.ALIAS_MAP">
@@ -1423,7 +1431,7 @@ from the args and kwargs arguments, respectively.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.utils.import_utils.GroupCSVImporter.set_progress">
 <span class="sig-name descname"><span class="pre">set_progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.import_utils.GroupCSVImporter.set_progress" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the current progress of import in the cache as a float between 0.0 - 100.0. 
+<dd><p>Sets the current progress of import in the cache as a float between 0.0 - 100.0.
 This method will take care of rounding.
 Provide either the progress, or the current item and total items.
 &#64;param progress: (float) progress in percent between 0.0-100.0
@@ -1460,7 +1468,7 @@ which is encoded in the given encoding.</p>
 <dl class="simple">
 <dt>&#64;param expected_columns: if set to an integer, each row must have this number of columns,</dt><dd><p>or the import is rejected</p>
 </dd>
-<dt>&#64;return: (imported_groups, imported_projects, updated_groups, updated_projects): </dt><dd><p>a 4-tuple of groups and projects imported and groups and projects updated</p>
+<dt>&#64;return: (imported_groups, imported_projects, updated_groups, updated_projects):</dt><dd><p>a 4-tuple of groups and projects imported and groups and projects updated</p>
 </dd>
 </dl>
 <p>&#64;raise UnicodeDecodeError: if the supplied csv_file is not encoded in ‘utf-8’</p>
@@ -1474,6 +1482,41 @@ which is encoded in the given encoding.</p>
 </section>
 <section id="module-cosinnus.utils.jwt">
 <span id="cosinnus-utils-jwt-module"></span><h2>cosinnus.utils.jwt module<a class="headerlink" href="#module-cosinnus.utils.jwt" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.utils.jwt.TwoFactorTokenObtainPairSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.jwt.</span></span><span class="sig-name descname"><span class="pre">TwoFactorTokenObtainPairSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.jwt.TwoFactorTokenObtainPairSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.utils.jwt.TwoFactorTokenObtainSerializer" title="cosinnus.utils.jwt.TwoFactorTokenObtainSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TwoFactorTokenObtainSerializer</span></code></a></p>
+<p>Using our own copied class so we can inherit from a redefined <cite>TokenObtainSerializer</cite></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.utils.jwt.TwoFactorTokenObtainPairSerializer.token_class">
+<span class="sig-name descname"><span class="pre">token_class</span></span><a class="headerlink" href="#cosinnus.utils.jwt.TwoFactorTokenObtainPairSerializer.token_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">RefreshToken</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.jwt.TwoFactorTokenObtainPairSerializer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cosinnus.utils.jwt.TwoFactorTokenObtainPairSerializer.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.utils.jwt.TwoFactorTokenObtainSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.jwt.</span></span><span class="sig-name descname"><span class="pre">TwoFactorTokenObtainSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.jwt.TwoFactorTokenObtainSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TokenObtainSerializer</span></code></p>
+<p>Adding TwoFactor auth and rate limit capabilites and verification to <cite>TokenObtainSerializer</cite></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.utils.jwt.TwoFactorTokenObtainSerializer.otp_token_field">
+<span class="sig-name descname"><span class="pre">otp_token_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'otp_token'</span></em><a class="headerlink" href="#cosinnus.utils.jwt.TwoFactorTokenObtainSerializer.otp_token_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.jwt.TwoFactorTokenObtainSerializer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cosinnus.utils.jwt.TwoFactorTokenObtainSerializer.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.jwt.get_tokens_for_user">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.jwt.</span></span><span class="sig-name descname"><span class="pre">get_tokens_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.jwt.get_tokens_for_user" title="Permalink to this definition">¶</a></dt>
@@ -1559,7 +1602,7 @@ from cosinnus.utils.migrations import attach_swappable_dependencies</p>
 <dt class="sig sig-object py" id="cosinnus.utils.model_fields.UserNameModelMultipleChoiceField">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.model_fields.</span></span><span class="sig-name descname"><span class="pre">UserNameModelMultipleChoiceField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.model_fields.UserNameModelMultipleChoiceField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelMultipleChoiceField</span></code></p>
-<p>Provides an oppurtunity to workaround the <cite>ModelMultipleChoiceField</cite>’s limitation 
+<p>Provides an oppurtunity to workaround the <cite>ModelMultipleChoiceField</cite>’s limitation
 ragarding the usage of user names instead of user ids</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.utils.model_fields.UserNameModelMultipleChoiceField.label_from_instance">
@@ -1585,7 +1628,8 @@ Afterwards, it immediately uses the key to access the user account infos.
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.oauth.do_oauth1_request">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.oauth.</span></span><span class="sig-name descname"><span class="pre">do_oauth1_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.oauth.do_oauth1_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets a initial OAuth temporary token and secret and saves them in the session and returns the redirect URL for the user.
+<dd><p>Gets a initial OAuth temporary token and secret and saves them in the session and returns the redirect URL for the
+user.
 &#64;return: The authorization URL on the OAuth server app to send to user to for the authorization
 &#64;raise TokenRequestDenied: can’t access request URL or another error like mismatching signature
 &#64;raise ConnectionError: wrong URL</p>
@@ -1614,9 +1658,9 @@ Requires the attribute ‘per_page’ to be set in the mixing class!</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Iterator that lazyily combines items from multiple sorted querysets by picking
 the one highest sorted item from all of the querysets at each step.
-Will laziliy fetch only <cite>peek_amount</cite> items from each queryset until more are 
+Will laziliy fetch only <cite>peek_amount</cite> items from each queryset until more are
 needed.
-Note: It is required that all querysets are already <cite>.order_by()`ed by the 
+Note: It is required that all querysets are already <cite>.order_by()`ed by the
 given`order_key</cite>!</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.utils.pagination.QuerysetLazyCombiner.buffer_map">
@@ -1736,7 +1780,7 @@ For CosinnusGroups, check if the user can edit/update/delete the group iself:</p
 </div></blockquote>
 <dl class="simple">
 <dt>For BaseTaggableObjects, check if the user can edit/update/delete the item iself:</dt><dd><dl class="simple">
-<dt>returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the user is either admin, staff member, object owner or group admin </dt><dd><p>of the group the item belongs to</p>
+<dt>returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the user is either admin, staff member, object owner or group admin</dt><dd><p>of the group the item belongs to</p>
 </dd>
 </dl>
 </dd>
@@ -1852,9 +1896,9 @@ get ingnored somehow</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.permissions.check_user_can_see_user">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.permissions.</span></span><span class="sig-name descname"><span class="pre">check_user_can_see_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.permissions.check_user_can_see_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if <code class="docutils literal notranslate"><span class="pre">user</span></code> is in any relation with <code class="docutils literal notranslate"><span class="pre">target_user</span></code> so that he can see them and 
-their profile, and can send him messages, etc. 
-This depends on the privacy settings of <code class="docutils literal notranslate"><span class="pre">target_user</span></code> and on whether they are members 
+<dd><p>Checks if <code class="docutils literal notranslate"><span class="pre">user</span></code> is in any relation with <code class="docutils literal notranslate"><span class="pre">target_user</span></code> so that he can see them and
+their profile, and can send him messages, etc.
+This depends on the privacy settings of <code class="docutils literal notranslate"><span class="pre">target_user</span></code> and on whether they are members
 of a same group/project.</p>
 </dd></dl>
 
@@ -1940,7 +1984,7 @@ specific purpose each!</p>
 <span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.renderer.BaseRenderer.get_context_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>FIXME: This exists for compatibility with EtherpadRenderer and others,
 that need to use the HierarchicalListCreateViewMixin to display folder structures
-in their render_list_for_user() function. 
+in their render_list_for_user() function.
 This is horrible, and should be refactored anyways!</p>
 </dd></dl>
 
@@ -2035,7 +2079,7 @@ passed via the qs_filter dict.</p>
 <dt class="sig sig-object py" id="cosinnus.utils.search.BaseTaggableObjectIndex.boost_model">
 <span class="sig-name descname"><span class="pre">boost_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indexed_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.search.BaseTaggableObjectIndex.boost_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>We boost by number of members the tagged objects’s group has, normalized over
-the mean/stddev of the member count of all groups in this portal (excluded the Forum!), 
+the mean/stddev of the member count of all groups in this portal (excluded the Forum!),
 in a range of [0.0..1.0].
 Special case: Events in the Forum always return 0.5! (Because everyone is in the Forum
 so it should be average.</p>
@@ -2554,9 +2598,13 @@ data coercion.</p>
 Loads the variables in .env (.env.test when running tests) into the environment.
 Sets the settings module to the one set in WECHANGE_DJANGO_SETTINGS_MODULE during normal runs.
 During test runs custom settings are used from cosinnus.tests.settings depending on the test arguments.
+The .env.test file needed for testing can be created by copying the .env file used for local development, with
+WECHANGE_HAYSTACK_INDEX_NAME adjusted to a dedicated test index. The service settings such as
+WECHANGE_COSINNUS_CHAT_* settings should be set to a service that can be used for testing.
 Arguments:
 –test-rocketchat:  Run RocketChat service tests.
 –test-bbb:         Run BBB service tests.
+–test-etherpad:    Run Etherpad/Ethercalc service tests.
 –print-time:       Prints execution time for slow test (&gt;0.5s).</p>
 </dd></dl>
 
@@ -2583,8 +2631,8 @@ Arguments:
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.tokens.</span></span><span class="sig-name descname"><span class="pre">EmailBlacklistTokenGenerator</span></span><a class="headerlink" href="#cosinnus.utils.tokens.EmailBlacklistTokenGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Strategy object used to generate and check tokens for the list-unsubscribe email blacklist mechanism.</p>
-<p>Taken and modified from <cite>django.contrib.auth.tokens.PasswordResetTokenGenerator</cite>. 
-Note: This does not actually use any information that isn’t accessible to the user 
+<p>Taken and modified from <cite>django.contrib.auth.tokens.PasswordResetTokenGenerator</cite>.
+Note: This does not actually use any information that isn’t accessible to the user
 (only the timestamp and email are used for token generation), so this is <em>not</em> a secure token!</p>
 <p>However since we use it only as a permission to blacklist an email, <em>and</em> it needs to be available
 for non-registered users, and we do not want to persist tokens for this in the DB,
@@ -2636,10 +2684,17 @@ function to always return the active language-code as regex.</p>
 <section id="module-cosinnus.utils.urls">
 <span id="cosinnus-utils-urls-module"></span><h2>cosinnus.utils.urls module<a class="headerlink" href="#module-cosinnus.utils.urls" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.urls.check_url_v3_everywhere_exempt">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.urls.</span></span><span class="sig-name descname"><span class="pre">check_url_v3_everywhere_exempt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.urls.check_url_v3_everywhere_exempt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the given url_path matches an exempted URL from
+<cite>COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS</cite>, False if not.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.urls.get_domain_for_portal">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.urls.</span></span><span class="sig-name descname"><span class="pre">get_domain_for_portal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">portal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.urls.get_domain_for_portal" title="Permalink to this definition">¶</a></dt>
 <dd><p>We obtain the protocol from either the DB Portal entry, or, if not set there,
-from the setting <cite>COSINNUS_SITE_PROTOCOL</cite> or default to ‘http’ 
+from the setting <cite>COSINNUS_SITE_PROTOCOL</cite> or default to ‘http’
 The domain comes from the Portal’s Site.</p>
 </dd></dl>
 
@@ -2744,20 +2799,20 @@ Otherwise, returns <cite>url</cite>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.user.create_guest_user_and_login">
-<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.user.</span></span><span class="sig-name descname"><span class="pre">create_guest_user_and_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guest_access</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="cosinnus.models.html#cosinnus.models.group.UserGroupGuestAccess" title="cosinnus.models.group.UserGroupGuestAccess"><span class="pre">UserGroupGuestAccess</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cosinnus.utils.user.create_guest_user_and_login" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.user.</span></span><span class="sig-name descname"><span class="pre">create_guest_user_and_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guest_access</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.user.create_guest_user_and_login" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a guest-type user account based on a UserGroupGuestAccess token with the given username
 and if a request is given, logs the current session in as that guest user.
 If a request is given, the current user may not already be logged in or this method will fail!</p>
-<p>&#64;return: True if successful, False if not</p>
+<p>&#64;param guest_access: instance of <cite>UserGroupGuestAccess</cite>
+&#64;return: True if successful, False if not</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.user.create_user">
-<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.user.</span></span><span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tos_checked</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.user.create_user" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.user.</span></span><span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.user.create_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a user with a random password, and adds proper PortalMemberships for this portal.
 &#64;param email: Email is required because it’s basically our pk
 &#64;param username: Can be left blank and will then be set to the user’s id after creation.
-&#64;param tos_checked: Set to False if the user should have to check the Terms of Services upon first login.
 &#64;return: A &lt;USER_MODEL&gt; instance if creation successful, False if failed to create (was the username taken?)</p>
 </dd></dl>
 
@@ -2882,14 +2937,14 @@ additional fields defined in the user profile model (<code class="docutils liter
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.user.get_user_tos_accepted_date">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.user.</span></span><span class="sig-name descname"><span class="pre">get_user_tos_accepted_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.user.get_user_tos_accepted_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the datetime the user accepted this portals ToS, or None if they have not accepted it yet. 
+<dd><p>Gets the datetime the user accepted this portals ToS, or None if they have not accepted it yet.
 &#64;return: a Datetime object or None</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.utils.user.is_user_active">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.utils.user.</span></span><span class="sig-name descname"><span class="pre">is_user_active</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.user.is_user_active" title="Permalink to this definition">¶</a></dt>
-<dd><p>Similar to <cite>filter_active_users</cite>, returns True if 
+<dd><p>Similar to <cite>filter_active_users</cite>, returns True if
 the user account is considered active in the portal and not a guest.</p>
 </dd></dl>
 
@@ -3026,6 +3081,7 @@ of the date range</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

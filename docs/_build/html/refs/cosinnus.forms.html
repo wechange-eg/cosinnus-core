@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.forms package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.forms package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -349,7 +349,7 @@ Uses explicitly set bbb_settings_parent form attribute or falls back to portal i
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.forms.conference.ConferenceSettingsFormMixin.get_group_object">
 <span class="sig-name descname"><span class="pre">get_group_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.conference.ConferenceSettingsFormMixin.get_group_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stub, implement this to return the group of the object that this 
+<dd><p>Stub, implement this to return the group of the object that this
 conference settings object is be attached to</p>
 </dd></dl>
 
@@ -451,7 +451,7 @@ conference settings object is be attached to</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.forms.conference.CosinnusConferenceSettingsMultiForm.get_group_object">
 <span class="sig-name descname"><span class="pre">get_group_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.conference.CosinnusConferenceSettingsMultiForm.get_group_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stub, implement this to return the group of the object that this 
+<dd><p>Stub, implement this to return the group of the object that this
 conference settings object is be attached to</p>
 </dd></dl>
 
@@ -465,7 +465,7 @@ conference settings object is be attached to</p>
 <dt class="sig sig-object py" id="cosinnus.forms.conference.CosinnusConferenceSettingsMultiForm.post_init">
 <span class="sig-name descname"><span class="pre">post_init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.conference.CosinnusConferenceSettingsMultiForm.post_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect the inherited field labels of the parent objects for the preset fields.
-We’re using post_init for multiforms as we have no back reference to 
+We’re using post_init for multiforms as we have no back reference to
 the MultiForm in __init__</p>
 </dd></dl>
 
@@ -684,7 +684,7 @@ association with the field named ‘__all__’.</p>
 <dt class="sig sig-object py" id="cosinnus.forms.filters.AllObjectsFilter.field">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">field</span></span><a class="headerlink" href="#cosinnus.forms.filters.AllObjectsFilter.field" title="Permalink to this definition">¶</a></dt>
 <dd><p>Choices for this filter field are all related objects in this group that are actually
-assigned to any objects in this group. 
+assigned to any objects in this group.
 Example: All users that have created a TodoEntry in the displayed group.</p>
 </dd></dl>
 
@@ -1810,7 +1810,7 @@ subwidgets.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.forms.tagged.BaseTagObjectForm.Meta.exclude">
-<span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('group',</span> <span class="pre">'likes',</span> <span class="pre">'likers')</span></em><a class="headerlink" href="#cosinnus.forms.tagged.BaseTagObjectForm.Meta.exclude" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('group',</span> <span class="pre">'likes',</span> <span class="pre">'likers',</span> <span class="pre">'public')</span></em><a class="headerlink" href="#cosinnus.forms.tagged.BaseTagObjectForm.Meta.exclude" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1828,7 +1828,7 @@ subwidgets.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.forms.tagged.BaseTagObjectForm.base_fields">
-<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'approach':</span> <span class="pre">&lt;django_select2.fields.Select2ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'bbb_room':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'like':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'location':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'location_lat':</span> <span class="pre">&lt;django.forms.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'location_lon':</span> <span class="pre">&lt;django.forms.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'persons':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'place':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'public':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'tags':</span> <span class="pre">&lt;taggit.forms.TagField</span> <span class="pre">object&gt;,</span> <span class="pre">'text_topics':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'topics':</span> <span class="pre">&lt;cosinnus.forms.select2.CommaSeparatedSelect2MultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'valid_end':</span> <span class="pre">&lt;django.forms.fields.DateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'valid_start':</span> <span class="pre">&lt;django.forms.fields.DateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'visibility':</span> <span class="pre">&lt;django_select2.fields.Select2ChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus.forms.tagged.BaseTagObjectForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'approach':</span> <span class="pre">&lt;django_select2.fields.Select2ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'bbb_room':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'like':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'location':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'location_lat':</span> <span class="pre">&lt;django.forms.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'location_lon':</span> <span class="pre">&lt;django.forms.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'persons':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'place':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'tags':</span> <span class="pre">&lt;taggit.forms.TagField</span> <span class="pre">object&gt;,</span> <span class="pre">'text_topics':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'topics':</span> <span class="pre">&lt;cosinnus.forms.select2.CommaSeparatedSelect2MultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'valid_end':</span> <span class="pre">&lt;django.forms.fields.DateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'valid_start':</span> <span class="pre">&lt;django.forms.fields.DateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'visibility':</span> <span class="pre">&lt;django_select2.fields.Select2ChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus.forms.tagged.BaseTagObjectForm.base_fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1891,7 +1891,7 @@ is saved manually at a later time. Return the model instance.</p>
 <dd><p>Bases: <a class="reference internal" href="#cosinnus.forms.tagged.BaseTagObjectForm" title="cosinnus.forms.tagged.BaseTagObjectForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTagObjectForm</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.forms.tagged.TagObjectForm.base_fields">
-<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'approach':</span> <span class="pre">&lt;django_select2.fields.Select2ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'bbb_room':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'like':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'location':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'location_lat':</span> <span class="pre">&lt;django.forms.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'location_lon':</span> <span class="pre">&lt;django.forms.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'persons':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'place':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'public':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'tags':</span> <span class="pre">&lt;taggit.forms.TagField</span> <span class="pre">object&gt;,</span> <span class="pre">'text_topics':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'topics':</span> <span class="pre">&lt;cosinnus.forms.select2.CommaSeparatedSelect2MultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'valid_end':</span> <span class="pre">&lt;django.forms.fields.DateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'valid_start':</span> <span class="pre">&lt;django.forms.fields.DateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'visibility':</span> <span class="pre">&lt;django_select2.fields.Select2ChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus.forms.tagged.TagObjectForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'approach':</span> <span class="pre">&lt;django_select2.fields.Select2ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'bbb_room':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'like':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'location':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'location_lat':</span> <span class="pre">&lt;django.forms.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'location_lon':</span> <span class="pre">&lt;django.forms.fields.FloatField</span> <span class="pre">object&gt;,</span> <span class="pre">'persons':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'place':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'tags':</span> <span class="pre">&lt;taggit.forms.TagField</span> <span class="pre">object&gt;,</span> <span class="pre">'text_topics':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'topics':</span> <span class="pre">&lt;cosinnus.forms.select2.CommaSeparatedSelect2MultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'valid_end':</span> <span class="pre">&lt;django.forms.fields.DateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'valid_start':</span> <span class="pre">&lt;django.forms.fields.DateTimeField</span> <span class="pre">object&gt;,</span> <span class="pre">'visibility':</span> <span class="pre">&lt;django_select2.fields.Select2ChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus.forms.tagged.TagObjectForm.base_fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2189,7 +2189,7 @@ on fieldtype of model field, only Charfield and Textfield possible.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.forms.user.UserCreationForm.is_valid">
 <span class="sig-name descname"><span class="pre">is_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.user.UserCreationForm.is_valid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the email from the form and set it as username. 
+<dd><p>Get the email from the form and set it as username.
 If none was set, hide the username field and let validation take its course.</p>
 </dd></dl>
 
@@ -2231,7 +2231,7 @@ If none was set, hide the username field and let validation take its course.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.forms.user.UserCreationFormDynamicFieldsMixin.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.user.UserCreationFormDynamicFieldsMixin.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign the extra fields to the user’s cosinnus_profile’s <cite>dynamic_fields</cite> 
+<dd><p>Assign the extra fields to the user’s cosinnus_profile’s <cite>dynamic_fields</cite>
 JSON field instead of model fields, after user form save</p>
 </dd></dl>
 
@@ -2309,7 +2309,7 @@ used by <cite>UserCreationForm</cite> and <cite>CosinnusUserSignupSerializer</ci
 <span class="sig-name descname"><span class="pre">finalize_user_object_after_signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleaned_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.user.UserSignupFinalizeMixin.finalize_user_object_after_signup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs extra initialization logic after a user object has just been created
 after a fresh user signup.
-This should be called before 
+This should be called before
 <cite>UserSignupTriggerEventsMixin.trigger_events_after_user_signup</cite></p>
 </dd></dl>
 
@@ -2417,7 +2417,8 @@ Therefore this form includes the default password validators.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.forms.user_import.CosinusUserImportCSVForm.make_data_dict_list">
 <span class="sig-name descname"><span class="pre">make_data_dict_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.user_import.CosinusUserImportCSVForm.make_data_dict_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Makes a datadict, combining the headers with each row, ignoring any columns not found in KNOWN_CSV_IMPORT_COLUMNS_HEADERS</p>
+<dd><p>Makes a datadict, combining the headers with each row, ignoring any columns not found in
+KNOWN_CSV_IMPORT_COLUMNS_HEADERS</p>
 </dd></dl>
 
 <dl class="py property">
@@ -2538,7 +2539,7 @@ Examples:</p>
 <blockquote>
 <div><p>‘7’ –&gt; ‘7:00’
 ‘1730’ –&gt; ‘17:30’
-‘132’ –&gt; ‘1:32’ 
+‘132’ –&gt; ‘1:32’
 ‘22222222’ –&gt; ‘22222222’</p>
 </div></blockquote>
 <dl class="py property">
@@ -2635,6 +2636,7 @@ subwidgets.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

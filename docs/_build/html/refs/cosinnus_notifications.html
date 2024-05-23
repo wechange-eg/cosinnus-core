@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_notifications package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus_notifications package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -150,7 +150,7 @@
 <dt class="sig sig-object py" id="cosinnus_notifications.alerts.create_user_alert">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_notifications.alerts.</span></span><span class="sig-name descname"><span class="pre">create_user_alert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notification_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.alerts.create_user_alert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a NotificationAlert for a NotificationEvent to someone who wants it.
-&#64;param group: can be None (for non-group items or groups themselves) 
+&#64;param group: can be None (for non-group items or groups themselves)
 &#64;param reason_key: a key of <cite>ALERT_REASONS</cite> or None.</p>
 </dd></dl>
 
@@ -249,7 +249,7 @@ The existing alert may yet still be a single alert</p>
 <dt class="sig sig-object py" id="cosinnus_notifications.digest.cleanup_stale_notifications">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_notifications.digest.</span></span><span class="sig-name descname"><span class="pre">cleanup_stale_notifications</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.digest.cleanup_stale_notifications" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes all notification events that will never be used again to compose a digest.</p>
-<p>This deletes all notification events that have been created more than 3x the length 
+<p>This deletes all notification events that have been created more than 3x the length
 of the longest digest period ago. I.e. if our longest digest is 1 week, this will delete
 all items older than 21 days. This is a naive safety measure to prevent multiple digests
 running at the same time to delete each other’s notification events from under them.</p>
@@ -504,7 +504,7 @@ object the first time, the query is executed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_notifications.models.NotificationAlert.fill_notification_dependent_data">
 <span class="sig-name descname"><span class="pre">fill_notification_dependent_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.models.NotificationAlert.fill_notification_dependent_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fills data fields that depend on different model fields depending on different model 
+<dd><p>Fills data fields that depend on different model fields depending on different model
 types of the target_object.</p>
 </dd></dl>
 
@@ -1136,9 +1136,9 @@ re-creation during digest generation.
 There is some ‘magic’ here: After the thread has been initied normally, instead of
 running it immediately, it can be initiated an additional number of times by calling
 <cite>mythread.add_session_frame(*args)</cite> that takes the same arguments as the __init__ function.
-Then, when the thread is finally started, it will run using its normal set of args until it 
+Then, when the thread is finally started, it will run using its normal set of args until it
 finishes, but then replace the args with the next set of queued args and run again. This happens
-until no further queued arg sets exist. This is done so if we have a physical event with 
+until no further queued arg sets exist. This is done so if we have a physical event with
 n notifications spawned, we can run the n events off sequentially in just this one thread.
 Also this allows us to remember which users already received an email, to de-duplicate
 very similar event notifications and only send out 1 mail for each actual event.
@@ -1171,8 +1171,8 @@ basically so that this thread can be reused again after its first run finished</
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_notifications.notifications.NotificationsThread.check_user_wants_alert">
 <span class="sig-name descname"><span class="pre">check_user_wants_alert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notification_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.notifications.NotificationsThread.check_user_wants_alert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Do multiple pre-checks and a DB check to find out if the user would like to receive an alert for this 
-notification event. 
+<dd><p>Do multiple pre-checks and a DB check to find out if the user would like to receive an alert for this
+notification event.
 &#64;return: False if an alert should not be created for the user.</p>
 <blockquote>
 <div><p>&lt;reason&gt;::str if an alert should be created.
@@ -1183,8 +1183,8 @@ notification event.
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_notifications.notifications.NotificationsThread.check_user_wants_notification">
 <span class="sig-name descname"><span class="pre">check_user_wants_notification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notification_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notification_moderator_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.notifications.NotificationsThread.check_user_wants_notification" title="Permalink to this definition">¶</a></dt>
-<dd><p>Do multiple pre-checks and a DB check to find if the user wants to receive a mail for a 
-notification event. 
+<dd><p>Do multiple pre-checks and a DB check to find if the user wants to receive a mail for a
+notification event.
 &#64;param notification_moderator_check: Do a special check to see if a moderator should receive this</p>
 </dd></dl>
 
@@ -1264,18 +1264,18 @@ from the args and kwargs arguments, respectively.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_notifications.notifications.notification_receiver">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_notifications.notifications.</span></span><span class="sig-name descname"><span class="pre">notification_receiver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audience</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.notifications.notification_receiver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic receiver function for all notifications 
+<dd><p>Generic receiver function for all notifications
 sender: the main object that is being updated / created
 user: the user that modified the object and caused the event
 audience: a list of users that are potential targets for the event</p>
 <dl class="simple">
-<dt>Feature: Physical event de-duplication and queuing: To achieve that a single physical event, </dt><dd><p>which has multiple different notification types, doesn’t end up sending the 
+<dt>Feature: Physical event de-duplication and queuing: To achieve that a single physical event,</dt><dd><p>which has multiple different notification types, doesn’t end up sending the
 almost-same-but-slightly-similar mail multiple times to the same user:
 - add a unique <cite>session_id</cite> to each of the notification signals in the same event group,
 - and also add <cite>end_session=False</cite> to the last notification signal.</p>
 </dd>
 <dt>This will cause all of the notification signals with the same session_id to be processed sequentially</dt><dd><p>in a single thread, one after another in the order they got sent. During the entire session, each user
-from the audience will receive at most 1 email for the first notification event they qualify for, 
+from the audience will receive at most 1 email for the first notification event they qualify for,
 and none after that.</p>
 </dd>
 </dl>
@@ -1470,6 +1470,7 @@ POST variables and then checked for validity.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.core.middleware package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.core.middleware package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -63,7 +63,7 @@
 <dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.AdminOTPMiddleware">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.core.middleware.cosinnus_middleware.</span></span><span class="sig-name descname"><span class="pre">AdminOTPMiddleware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.AdminOTPMiddleware" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareMixin</span></code></p>
-<p>If setting <cite>COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED</cite> is True, this middleware 
+<p>If setting <cite>COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED</cite> is True, this middleware
 will restrict all access to the django admin area to accounts with a django-otp
 2-factor authentication device set up, by redirecting the otp validation view.
 Set up at least one device at &lt;host&gt;/admin/otp_totp/totpdevice/ before activating this!</p>
@@ -179,7 +179,7 @@ group slugs, effictively hiding the new groups under this redirect.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.GroupResolvingMiddlewareMixin.is_anonymous_block_exempted_group_url">
 <span class="sig-name descname"><span class="pre">is_anonymous_block_exempted_group_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.GroupResolvingMiddlewareMixin.is_anonymous_block_exempted_group_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>Is this a URL for a valid group, that can always be accessed by 
+<dd><p>Is this a URL for a valid group, that can always be accessed by
 anonymous users, even if the portal is blocked from anonymous access?</p>
 </dd></dl>
 
@@ -295,6 +295,16 @@ Set up at least one device at &lt;host&gt;/two_factor_auth/settings/setup/ befor
 </dd>
 </dl>
 <dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.core.middleware.frontend_middleware.FrontendMiddleware.FRONTEND_V3_POST_CONTENT_CACHE_KEY">
+<span class="sig-name descname"><span class="pre">FRONTEND_V3_POST_CONTENT_CACHE_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/core/v3/maincontent/cache_id/%s'</span></em><a class="headerlink" href="#cosinnus.core.middleware.frontend_middleware.FrontendMiddleware.FRONTEND_V3_POST_CONTENT_CACHE_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.core.middleware.frontend_middleware.FrontendMiddleware.cached_content_key">
+<span class="sig-name descname"><span class="pre">cached_content_key</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'usecached'</span></em><a class="headerlink" href="#cosinnus.core.middleware.frontend_middleware.FrontendMiddleware.cached_content_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.core.middleware.frontend_middleware.FrontendMiddleware.force_disable_key">
 <span class="sig-name descname"><span class="pre">force_disable_key</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'forcev2'</span></em><a class="headerlink" href="#cosinnus.core.middleware.frontend_middleware.FrontendMiddleware.force_disable_key" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -373,17 +383,17 @@ and incurs a rate-limit specifically for the used credential after n specified a
 <dt class="sig sig-object py" id="cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.core.middleware.login_ratelimit_middleware.</span></span><span class="sig-name descname"><span class="pre">LoginRateLimitMiddleware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareMixin</span></code></p>
-<p>A Middleware that detects failed login attempts per username 
+<p>A Middleware that detects failed login attempts per username
 and incurs a rate-limit specifically for the used credential after n specified attemps.</p>
-<p>During an active rate limit, this middleware prevents <em>any</em> authentication attempts 
-on the limited user credential. This means that the credentials are not checked at all, 
-so not even the correct credentials can be used to log in. Each successive failed login 
+<p>During an active rate limit, this middleware prevents <em>any</em> authentication attempts
+on the limited user credential. This means that the credentials are not checked at all,
+so not even the correct credentials can be used to log in. Each successive failed login
 attempt after a rate limit period incurs an even longer rate-limit.</p>
 <p>After a user logs in successfully, all recorded failed attempts are reset.</p>
 <p>By default, this middleware only catches login attempts on the django admin.
 To monitor your custom login URL, set LOGIN_RATELIMIT_LOGIN_URLS in your settings.py
 and add your URLs there.
-If your authentication does not use <cite>user.username</cite> as credential field, 
+If your authentication does not use <cite>user.username</cite> as credential field,
 set LOGIN_RATELIMIT_USERNAME_FIELD in your settings.py!</p>
 <p>Other settings can be found in <cite>login_ratelimit_middleware.default_settings</cite>.</p>
 <p>Note: unless you override ‘admin/login.html’ to include the django messages, the rate limit
@@ -392,12 +402,12 @@ warning message will <em>not</em> be displayed in the django admin login interfa
 <dt>Other details:</dt><dd><ul class="simple">
 <li><p>This middleware only uses the cache and doesn’t hit the database at all.</p></li>
 <li><dl class="simple">
-<dt>This middleware uses the <cite>user_login_failed</cite> and <cite>user_logged_in</cite> django signals to </dt><dd><p>monitor failed and successful login attempts.</p>
+<dt>This middleware uses the <cite>user_login_failed</cite> and <cite>user_logged_in</cite> django signals to</dt><dd><p>monitor failed and successful login attempts.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>The existence of accounts is not exposed because attempts for all user credentials are </dt><dd><p>being rate limited, not only existing ones.</p>
+<dt>The existence of accounts is not exposed because attempts for all user credentials are</dt><dd><p>being rate limited, not only existing ones.</p>
 </dd>
 </dl>
 </li>
@@ -414,7 +424,7 @@ originating URL and display a warning with the remaining rate limit duration.</p
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware.process_request">
 <span class="sig-name descname"><span class="pre">process_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware.process_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>If we see a POST on a defined login URL with user credentials filled, 
+<dd><p>If we see a POST on a defined login URL with user credentials filled,
 check if a rate limit is active and if so, intercept the request</p>
 </dd></dl>
 
@@ -443,7 +453,7 @@ check if a rate limit is active and if so, intercept the request</p>
 <dt class="sig sig-object py" id="cosinnus.core.middleware.login_ratelimit_middleware.register_and_limit_failed_login_attempt">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.middleware.login_ratelimit_middleware.</span></span><span class="sig-name descname"><span class="pre">register_and_limit_failed_login_attempt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">credentials</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.login_ratelimit_middleware.register_and_limit_failed_login_attempt" title="Permalink to this definition">¶</a></dt>
 <dd><p>On each failed login attempt, increase the atetmpt counter on the attempted user credential.
-If it is greater than LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT, set an expiry time, before which 
+If it is greater than LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT, set an expiry time, before which
 all further login attempts on that credential will be prevented entirely.</p>
 </dd></dl>
 
@@ -517,6 +527,7 @@ as default for the entire portal.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

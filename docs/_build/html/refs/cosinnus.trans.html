@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.trans package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.trans package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -173,8 +173,23 @@ to vary the names of i.e. “Conferences” to “Expos”.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusConferenceTransBase.FORMFIELD_VISIBILITY_BOX_LABEL">
+<span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_BOX_LABEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Enable</span> <span class="pre">the</span> <span class="pre">public</span> <span class="pre">visibility</span> <span class="pre">of</span> <span class="pre">your</span> <span class="pre">conference'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusConferenceTransBase.FORMFIELD_VISIBILITY_BOX_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusConferenceTransBase.FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY">
 <span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Conference</span> <span class="pre">members</span> <span class="pre">only'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusConferenceTransBase.FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusConferenceTransBase.FORMFIELD_VISIBILITY_LABEL">
+<span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_LABEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Conference</span> <span class="pre">is</span> <span class="pre">publicly</span> <span class="pre">visible'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusConferenceTransBase.FORMFIELD_VISIBILITY_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusConferenceTransBase.FORMFIELD_VISIBILITY_LEGEND">
+<span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_LEGEND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Should</span> <span class="pre">your</span> <span class="pre">conference</span> <span class="pre">be</span> <span class="pre">visible</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">anonymous</span> <span class="pre">users?</span> <span class="pre">The</span> <span class="pre">microsite</span> <span class="pre">may</span> <span class="pre">be</span> <span class="pre">found</span> <span class="pre">via</span> <span class="pre">the</span> <span class="pre">Internet</span> <span class="pre">and</span> <span class="pre">the</span> <span class="pre">portal</span> <span class="pre">search.'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusConferenceTransBase.FORMFIELD_VISIBILITY_LEGEND" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -288,7 +303,7 @@ to vary the names of i.e. “Conferences” to “Expos”.</p>
 CosinnusBaseGroup variations.
 Can be drop-in replaced per-portal with the setting <cite>COSINNUS_GROUP_TRANS_TYPED_CLASSES_DROPINS</cite>
 to vary the names of i.e. “Conferences” to “Expos”.
-Always inherit at least the base class <cite>CosinnusProjectTransBase</cite> to make sure no 
+Always inherit at least the base class <cite>CosinnusProjectTransBase</cite> to make sure no
 class members are missing!</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusProjectTransBase.ACTIVATE">
@@ -411,8 +426,23 @@ class members are missing!</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusProjectTransBase.FORMFIELD_VISIBILITY_BOX_LABEL">
+<span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_BOX_LABEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Enable</span> <span class="pre">the</span> <span class="pre">public</span> <span class="pre">visibility</span> <span class="pre">of</span> <span class="pre">your</span> <span class="pre">project'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusProjectTransBase.FORMFIELD_VISIBILITY_BOX_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusProjectTransBase.FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY">
 <span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Project</span> <span class="pre">members</span> <span class="pre">only'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusProjectTransBase.FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusProjectTransBase.FORMFIELD_VISIBILITY_LABEL">
+<span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_LABEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Project</span> <span class="pre">is</span> <span class="pre">publicly</span> <span class="pre">visible'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusProjectTransBase.FORMFIELD_VISIBILITY_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusProjectTransBase.FORMFIELD_VISIBILITY_LEGEND">
+<span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_LEGEND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Should</span> <span class="pre">your</span> <span class="pre">project</span> <span class="pre">be</span> <span class="pre">visible</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">anonymous</span> <span class="pre">users?</span> <span class="pre">The</span> <span class="pre">microsite</span> <span class="pre">may</span> <span class="pre">be</span> <span class="pre">found</span> <span class="pre">via</span> <span class="pre">the</span> <span class="pre">Internet</span> <span class="pre">and</span> <span class="pre">the</span> <span class="pre">portal</span> <span class="pre">search.'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusProjectTransBase.FORMFIELD_VISIBILITY_LEGEND" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -623,7 +653,7 @@ to vary the names of i.e. “Conferences” to “Expos”.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_DESCRIPTION_LEGEND">
-<span class="sig-name descname"><span class="pre">FORMFIELD_DESCRIPTION_LEGEND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Describe</span> <span class="pre">the</span> <span class="pre">project</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">few</span> <span class="pre">sentences.'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_DESCRIPTION_LEGEND" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">FORMFIELD_DESCRIPTION_LEGEND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Describe</span> <span class="pre">the</span> <span class="pre">group</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">few</span> <span class="pre">sentences.'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_DESCRIPTION_LEGEND" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -647,8 +677,23 @@ to vary the names of i.e. “Conferences” to “Expos”.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_VISIBILITY_BOX_LABEL">
+<span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_BOX_LABEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Enable</span> <span class="pre">the</span> <span class="pre">public</span> <span class="pre">visibility</span> <span class="pre">of</span> <span class="pre">your</span> <span class="pre">group'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_VISIBILITY_BOX_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY">
 <span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Group</span> <span class="pre">members</span> <span class="pre">only'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_VISIBILITY_LABEL">
+<span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_LABEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Group</span> <span class="pre">is</span> <span class="pre">publicly</span> <span class="pre">visible'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_VISIBILITY_LABEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_VISIBILITY_LEGEND">
+<span class="sig-name descname"><span class="pre">FORMFIELD_VISIBILITY_LEGEND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Should</span> <span class="pre">your</span> <span class="pre">group</span> <span class="pre">be</span> <span class="pre">visible</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">anonymous</span> <span class="pre">users?</span> <span class="pre">The</span> <span class="pre">microsite</span> <span class="pre">may</span> <span class="pre">be</span> <span class="pre">found</span> <span class="pre">via</span> <span class="pre">the</span> <span class="pre">Internet</span> <span class="pre">and</span> <span class="pre">the</span> <span class="pre">portal</span> <span class="pre">search.'</span></em><a class="headerlink" href="#cosinnus.trans.group.CosinnusSocietyTransBase.FORMFIELD_VISIBILITY_LEGEND" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -779,6 +824,7 @@ to vary the names of i.e. “Conferences” to “Expos”.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

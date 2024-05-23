@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.core.decorators package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus.core.decorators package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -61,7 +61,7 @@ the group from within an view instance (e.g. <cite>self.group</cite>). Defaults 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.core.decorators.views.get_group_for_request">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">get_group_for_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fail_silently</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.get_group_for_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve the proxy group object depending on the URL path regarding 
+<dd><p>Retrieve the proxy group object depending on the URL path regarding
 the registered group models.
 A CosinnusGroup will not be returned if it is requested by an URL
 path with a different group_model_key than the one it got registered with.</p>
@@ -76,7 +76,7 @@ path with a different group_model_key than the one it got registered with.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.core.decorators.views.redirect_to_403">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">redirect_to_403</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.redirect_to_403" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a redirect to a permission-denied page with the same URL and an and an error message 
+<dd><p>Returns a redirect to a permission-denied page with the same URL and an and an error message
 &#64;param group: If supplied, the user will in most cases be redirected to the group’s micropage instead</p>
 </dd></dl>
 
@@ -92,7 +92,7 @@ will be blank.
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.core.decorators.views.redirect_to_not_logged_in">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">redirect_to_not_logged_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.redirect_to_not_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a redirect to the login page with a next-URL parameter and an error message 
+<dd><p>Returns a redirect to the login page with a next-URL parameter and an error message
 &#64;param group: If supplied, the user will in most cases be redirected to the group’s micropage instead</p>
 </dd></dl>
 
@@ -194,7 +194,7 @@ the group from within an view instance (e.g. <cite>self.group</cite>). Defaults 
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.decorators.views.</span></span><span class="sig-name descname"><span class="pre">require_user_token_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_url_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'group'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_url_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.decorators.views.require_user_token_access" title="Permalink to this definition">¶</a></dt>
 <dd><p>A method decorator that allows access only if the URL params
 <cite>user=999&amp;token=1234567</cite> are supplied, and if the token supplied matches
-the specific token (determined by :param <code class="docutils literal notranslate"><span class="pre">token_name</span></code>) in the supplied 
+the specific token (determined by :param <code class="docutils literal notranslate"><span class="pre">token_name</span></code>) in the supplied
 user’s settings. Please only use different token_names for each specific purpose.</p>
 <p>Additionally this function populates the group instance to the view
 instance as attribute <cite>group_attr</cite> and the resolved token user as attribute <cite>user</cite></p>
@@ -287,6 +287,7 @@ perform write operations.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

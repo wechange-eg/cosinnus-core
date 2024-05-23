@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_cloud package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus_cloud package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -249,7 +249,7 @@ if has_more == False, the receiving widget will assume no further data can be lo
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.hooks.disable_group_folder_for_group">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">disable_group_folder_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.disable_group_folder_for_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>For lack of a better way through the API, this 
+<dd><p>For lack of a better way through the API, this
 ‘disables’ a group folder for a CosinnusGroup by removing the nextcloud group’s access
 to the group folder, when a CosinnusGroup is deactivated</p>
 </dd></dl>
@@ -257,7 +257,7 @@ to the group folder, when a CosinnusGroup is deactivated</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.hooks.enable_group_folder_for_group">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">enable_group_folder_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.enable_group_folder_for_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>For lack of a better way through the API, this 
+<dd><p>For lack of a better way through the API, this
 ‘enables’ a group folder for a CosinnusGroup by removing the nextcloud group’s access
 to the group folder, when a CosinnusGroup is deactivated</p>
 </dd></dl>
@@ -265,10 +265,10 @@ to the group folder, when a CosinnusGroup is deactivated</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.hooks.generate_group_nextcloud_field">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">generate_group_nextcloud_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_generate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.generate_group_nextcloud_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>If one doesn’t yet exist, generates, saves and returns 
-a unique file-system-valid id that is used for both the 
-nextcloud group and group folder for this group. 
-Remove leading and trailing spaces; leave other spaces intact and remove 
+<dd><p>If one doesn’t yet exist, generates, saves and returns
+a unique file-system-valid id that is used for both the
+nextcloud group and group folder for this group.
+Remove leading and trailing spaces; leave other spaces intact and remove
 anything that is not an alphanumeric.
 &#64;param field: The field for which a unique nextcloud name should be generated. Usually</p>
 <blockquote>
@@ -311,7 +311,7 @@ and this way it’s more secure.</p>
 <dt class="sig sig-object py" id="cosinnus_cloud.hooks.initialize_nextcloud_for_group">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.hooks.</span></span><span class="sig-name descname"><span class="pre">initialize_nextcloud_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.hooks.initialize_nextcloud_for_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes a nextcloud groupfolder for a group.
-Safe to call on already initialized folders. If called on a pre-existing folder that is 
+Safe to call on already initialized folders. If called on a pre-existing folder that is
 “disabled” (group has no more access to it), the group’s access will be re-enabled for the folder.</p>
 </dd></dl>
 
@@ -595,7 +595,7 @@ object the first time, the query is executed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.resolve_attachable_object_id">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resolve_attachable_object_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.resolve_attachable_object_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>For _unresolved_ IDs of an attachable object, get an attachable object 
+<dd><p>For _unresolved_ IDs of an attachable object, get an attachable object
 that belongs to that ID (usually an external object’s ID is given, and
 we return the local DB object that is attachable and is pointing to it)</p>
 </dd></dl>
@@ -627,7 +627,7 @@ object the first time, the query is executed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_cloud.models.LinkedCloudFile.sync_from_nextcloud_id_data_str">
 <span class="sig-name descname"><span class="pre">sync_from_nextcloud_id_data_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_data_str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.models.LinkedCloudFile.sync_from_nextcloud_id_data_str" title="Permalink to this definition">¶</a></dt>
-<dd><p>So we don’t have to run multiple nextcloud API queries for attached files, we encode the 
+<dd><p>So we don’t have to run multiple nextcloud API queries for attached files, we encode the
 data found on the autocomplete search query as <cite>id_data_str</cite> and pass it through the form on POST.</p>
 </dd></dl>
 
@@ -828,6 +828,7 @@ method.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_cloud.utils package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus_cloud.utils package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -42,7 +42,7 @@
 <dt class="sig sig-object py" id="cosinnus_cloud.utils.cosinnus.is_cloud_enabled_for_group">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.cosinnus.</span></span><span class="sig-name descname"><span class="pre">is_cloud_enabled_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.cosinnus.is_cloud_enabled_for_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if a CosinnusGroup should have a nextcloud folder.
-I.e., the group is of a type that should have cloud files and 
+I.e., the group is of a type that should have cloud files and
 the cloud app is active for it</p>
 </dd></dl>
 
@@ -178,7 +178,8 @@ the admin user, or from a specified folder.
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.find_files">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">find_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">also_search_content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.find_files" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds files by name, unlike “perform_fulltext_search”, by default, this function does only search in the filename, not the content</p>
+<dd><p>Finds files by name, unlike “perform_fulltext_search”, by default, this function does only search in the filename,
+not the content</p>
 </dd></dl>
 
 <dl class="py function">
@@ -232,8 +233,8 @@ the admin user, or from a specified folder.
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">perform_fulltext_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.perform_fulltext_search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a fulltext file search as the given user and return the result.
 Requires the fulltextsearch_admin-api addon to be installed on the Nextcloud server.
-To make the search query behave like Haystack does (“foo bar” searches for “foo” AND “bar”, instead of “foo” OR “bar”),
-query words are prepended with a plus.</p>
+To make the search query behave like Haystack does (“foo bar” searches for “foo” AND “bar”, instead of “foo”
+OR “bar”), query words are prepended with a plus.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -350,6 +351,7 @@ passed via the qs_filter dict.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>

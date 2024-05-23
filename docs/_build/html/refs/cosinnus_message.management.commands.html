@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_message.management.commands package &#8212; Cosinnus 1.20.0 documentation</title>
+    <title>cosinnus_message.management.commands package &#8212; Cosinnus 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -89,7 +89,7 @@ Will never create accounts for users with __unverified__ emails.</p>
 <p>&#64;param –skip-inactive: if given, will not create any accounts for inactive users
 &#64;param –force-group-membership-sync: if given, will also re-do and sync all group</p>
 <blockquote>
-<div><p>memberships, for all users. (default: only sync memberships for users created 
+<div><p>memberships, for all users. (default: only sync memberships for users created
 during this run)</p>
 </div></blockquote>
 <dl class="py method">
@@ -154,8 +154,8 @@ this method.</p>
 <dt class="sig sig-object py" id="cosinnus_message.management.commands.rocket_sync_default_notification_settings.Command">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.management.commands.rocket_sync_default_notification_settings.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.management.commands.rocket_sync_default_notification_settings.Command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseCommand</span></code></p>
-<p>For all users who have <em>not yet</em> set any rocketchat mail notification preference, 
-this will set the equivalent of their current portal-mail notification setting 
+<p>For all users who have <em>not yet</em> set any rocketchat mail notification preference,
+this will set the equivalent of their current portal-mail notification setting
 as their rocketchat-mail notification preference.
 Users who have saved their preference before are left untouched.</p>
 <p>This is not neccessary to run on new portals, as the setting is set on user creation already.</p>
@@ -297,6 +297,7 @@ this method.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_style.html">Coding Style</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
