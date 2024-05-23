@@ -44,6 +44,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin, forms
             'group',
             'likes',
             'likers',
+            'public',
         )
         widgets = {
             'location_lat': forms.HiddenInput(),

@@ -123,6 +123,7 @@ class BaseTagObject(models.Model):
         _('Permissions'), blank=True, default=VISIBILITY_GROUP, choices=VISIBILITY_CHOICES
     )
 
+    # DEPRECATED! Not used anymore and will be deleted in the future.
     public = models.BooleanField(_('Publicly available via other platforms'), default=False)
 
     #: Choices for :attr:`approach`: ``(str, str)``
