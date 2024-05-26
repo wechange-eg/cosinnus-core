@@ -18,6 +18,13 @@
 
 {% block container_classes %}conference{% endblock container_classes %}
 
+{% block cosinnus_report_modal %}
+    {# do not load in the report modal for the conference area when the v3 main content is being rendered out #}
+    {% if not COSINNUS_V3_API_CONTENT_ACTIVE %}
+        {{ block.super }}
+    {% endif %}
+{% endblock cosinnus_report_modal %}
+
 {% block main_page %}
     {% include 'cosinnus/extra_body_header.html' %}
     <div id="app">

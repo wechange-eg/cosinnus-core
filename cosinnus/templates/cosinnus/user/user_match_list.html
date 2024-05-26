@@ -41,12 +41,16 @@
                         <form action="{% url 'cosinnus:user-match-match' %}" method="POST" class="card-buttons">
                             {% csrf_token %}
                             <input type="hidden" name="user_id" value="{{ scored_user_profile.user.id }}">
-                            <button type="submit" class="rounded-button button-action button-action-like button-star button-like-dislike-liked regular-space" name="action" value="1">
-                                <i class="far fa-star"></i>
-                                {% trans 'Wonderful, we definitely have so much to discuss!' %}
+                            <button type="submit" class="rounded-button w100 button-action button-action-like button-star button-like-dislike-liked regular-space" name="action" value="1">
+                                <span class="rounded-button-inner">
+                                    <i class="far fa-star"></i>
+                                    {% trans 'Wonderful, we definitely have so much to discuss!' %}
+                                </span>
                             </button>
-                            <button type="submit" class="rounded-button button-action button-action-dislike button-star regular-space" name="action" value="0">
-                                {% trans 'Looks like we share no common interests' %}
+                            <button type="submit" class="rounded-button w100 button-action button-action-dislike button-star regular-space" name="action" value="0">
+                                <span class="rounded-button-inner">
+                                    {% trans 'Looks like we share no common interests' %}
+                                </span>
                             </button>
                             <div class="clearfix"></div>
                         </form>

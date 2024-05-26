@@ -232,7 +232,9 @@
                 </div><!-- row -->
             {% endblock main_page %}
 
-            {% include 'cosinnus/feedback/report_modal.html' %}
+            {% block cosinnus_report_modal %}
+                {% include 'cosinnus/feedback/report_modal.html' %}
+            {% endblock cosinnus_report_modal %}
         </div><!-- main container -->
 
         <div {% if COSINNUS_V3_API_CONTENT_ACTIVE %}class="x-v3-footer"{% endif %}>
