@@ -126,13 +126,17 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
 
 def is_user_active(user):
     """Similar to `filter_active_users`, returns True if
-    the user account is considered active in the portal and not a guest."""
+    the user account is considered active in the portal and not a guest.
+
+    Note: the `user.email.startswith('__unverified__')` check is a check for legacy
+    user accounts that are deactivated. we do NOT want to exclude unverified users from being considered active!
+    """
     return (
         user.is_active
         and user.last_login
         and user.cosinnus_profile.tos_accepted
         and user.email
-        and user.cosinnus_profile.email_verified
+        and not user.email.startswith('__unverified__')
         and not user.email.startswith('__deleted_user__')
         and not user.is_guest
     )
@@ -144,15 +148,20 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False, filte
         - have never logged in
         - have not accepted the ToS
         - are a guest account
+
+    Note: the `user.email.startswith('__unverified__')` check is a check for legacy
+    user accounts that are deactivated. we do NOT want to exclude unverified users from being considered active!
+
     @param filter_on_user_profile_model: Filter not on User, but on CosinnusUserProfile instead.
     @param filter_guests: switch to disable the standard mode of considering guest accounts inactive,
         which is done so that many permission checks do not apply to guests.
+
     """
     if filter_on_user_profile_model:
         filtered_qs = (
             user_model_qs.exclude(user__is_active=False)
             .exclude(user__last_login__exact=None)
-            .exclude(email_verified=False)
+            .exclude(user__email__icontains='__unverified__')
             .filter(tos_accepted=True)
         )
         if filter_guests:
@@ -162,7 +171,7 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False, filte
         filtered_qs = (
             user_model_qs.exclude(is_active=False)
             .exclude(last_login__exact=None)
-            .exclude(cosinnus_profile__email_verified=False)
+            .exclude(email__icontains='__unverified__')
             .filter(cosinnus_profile__tos_accepted=True)
         )
         if filter_guests:
