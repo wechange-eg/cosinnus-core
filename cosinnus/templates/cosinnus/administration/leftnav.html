@@ -11,7 +11,7 @@
                         <i class="fa fa-envelope"></i>
                     </span>
                     <span class="pull-right">
-                        {% if request.path == url_managed_tags_newsletter %}
+                        {% if request.path|startswith:url_managed_tags_newsletter %}
                           <i class="fa fa-caret-right"></i>
                         {% endif %}
                     </span>
@@ -35,7 +35,7 @@
                         <i class="fa fa-envelope"></i>
                     </span>
                     <span class="pull-right">
-                        {% if request.path == url_group_newsletter %}
+                        {% if request.path|startswith:url_group_newsletter %}
                           <i class="fa fa-caret-right"></i>
                         {% endif %}
                     </span>
@@ -59,7 +59,7 @@
                         <i class="fas fa-user"></i>
                     </span>
                     <span class="pull-right">
-                        {% if request.path == url_user_management %}
+                        {% if request.path|startswith:url_user_management %}
                           <i class="fa fa-caret-right"></i>
                         {% endif %}
                     </span>
@@ -80,7 +80,7 @@
                         <i class="fa fa-upload"></i>
                     </span>
                     <span class="pull-right">
-                        {% if request.path == url_user_import %}
+                        {% if request.path|startswith:url_user_import %}
                           <i class="fa fa-caret-right"></i>
                         {% endif %}
                     </span>
@@ -101,7 +101,7 @@
                         <i class="fa fa-download"></i>
                     </span>
                     <span class="pull-right">
-                        {% if request.path == url_user_export %}
+                        {% if request.path|startswith:url_user_export %}
                           <i class="fa fa-caret-right"></i>
                         {% endif %}
                     </span>
@@ -123,7 +123,7 @@
                         <i class="fas fa-list"></i>
                     </span>
                       <span class="pull-right">
-                          {% if request.path == url_dynamic_fields %}
+                          {% if request.path|startswith:url_dynamic_fields %}
                             <i class="fa fa-caret-right"></i>
                           {% endif %}
                       </span>
@@ -143,7 +143,7 @@
                     <i class="fa fa-comment"></i>
                 </span>
                 <span class="pull-right">
-                    {% if request.path == url_announcements %}
+                    {% if request.path|startswith:url_announcements %}
                       <i class="fa fa-caret-right"></i>
                     {% endif %}
                 </span>
@@ -162,7 +162,7 @@
                     <i class="fa fa-envelope"></i>
                 </span>
                 <span class="pull-right">
-                    {% if request.path == url_welcome_mail %}
+                    {% if request.path|startswith:url_welcome_mail %}
                       <i class="fa fa-caret-right"></i>
                     {% endif %}
                 </span>
@@ -185,7 +185,7 @@
                         <i class="fa fa-television"></i>
                     </span>
                     <span class="pull-right">
-                        {% if request.path == url_conference_overview %}
+                        {% if request.path|startswith:url_conference_overview %}
                           <i class="fa fa-caret-right"></i>
                         {% endif %}
                     </span>
@@ -204,7 +204,7 @@
                         <i class="fa fa-television"></i>
                     </span>
                     <span class="pull-right">
-                        {% if request.path == url_conference_overview_premium %}
+                        {% if request.path|startswith:url_conference_overview_premium %}
                           <i class="fa fa-caret-right"></i>
                         {% endif %}
                     </span>
@@ -223,7 +223,7 @@
                         <i class="fa fa-television"></i>
                     </span>
                     <span class="pull-right">
-                        {% if request.path == url_conference_overview_nonstandard %}
+                        {% if request.path|startswith:url_conference_overview_nonstandard %}
                           <i class="fa fa-caret-right"></i>
                         {% endif %}
                     </span>
@@ -243,7 +243,7 @@
                     <i class="fa fa-table"></i>
                 </span>
                 <span class="pull-right">
-                    {% if request.path == url_simple_statistics %}
+                    {% if request.path|startswith:url_simple_statistics %}
                       <i class="fa fa-caret-right"></i>
                     {% endif %}
                 </span>
