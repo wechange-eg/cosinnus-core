@@ -26,7 +26,7 @@ from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import FONT_AWESOME_CLASS_FILTER, MenuItem
 from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
-from cosinnus.utils.functions import uniquify_list
+from cosinnus.utils.functions import clean_single_line_text, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
 from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 
@@ -574,6 +574,7 @@ class MainContentView(APIView):
                         parsed_label = parsed_label.strip().replace('/n', '')
                 if parsed_label:
                     link_label = parsed_label
+            link_label = clean_single_line_text(link_label)
 
             # a button counts as selected item if there is an `<i class="fa fa-caret-right"></i>` in it
             selected = (

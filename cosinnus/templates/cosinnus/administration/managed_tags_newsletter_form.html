@@ -39,7 +39,7 @@
 
 {% block content %}
 
-<form method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
+<form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
 
     <div class="content-box">
         {{ form.non_field_errors }}

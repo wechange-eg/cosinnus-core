@@ -20,7 +20,7 @@
 {% block content %}
 <div class="content-box">
     
-    <form method="post">{% csrf_token %}
+    <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" >{% csrf_token %}
         {% if request.GET.search %}
             <input type="hidden" name="search" value="{{ request.GET.search }}">
         {% endif %}
@@ -52,7 +52,7 @@
     </form>
 
     <h2 class="white-text large-space">{% trans 'Users' %}</h2>
-    <form method="get">
+    <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="get">
         {% if request.GET.order_by %}
             <input type="hidden" name="order_by" value="{{ request.GET.order_by }}">
         {% endif %}
@@ -217,7 +217,7 @@
             <th>
                 <div data-target="ajax-form-delete-element" data-ajax-form-id="send-login-token-u-{{ user.id }}">
 	                {% if not user.last_login and not user.password %}
-		                <form method="post" id="send-login-token-u-{{ user.id }}" data-target="ajax-form">{% csrf_token %}
+		                <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" id="send-login-token-u-{{ user.id }}" data-target="ajax-form">{% csrf_token %}
 		                    {% if request.GET.search %}
 		                        <input type="hidden" name="search" value="{{ request.GET.search }}" />
 		                    {% endif %}
