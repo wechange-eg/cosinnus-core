@@ -507,6 +507,13 @@ class MainContentView(APIView):
             self.has_leftnav = False
         self.content_html = str(content or '').strip()
 
+        # if the report modal is not in the content (i.e. because we extracted only the x-v3-content or a part where
+        # the report modal isn't contained), add it from the main soup
+        if not content.find('div', class_='x-v3-report-modal'):
+            modal_content = soup.find('div', class_='x-v3-report-modal')
+            if modal_content:
+                self.content_html += '\n' + str(modal_content or '').strip()
+
         # add any modal boxes from the leftnav to the main content html
         if self.has_leftnav:
             leftnav = soup.find('div', class_='x-v3-leftnav')
