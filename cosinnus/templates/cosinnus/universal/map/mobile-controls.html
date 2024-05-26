@@ -8,7 +8,7 @@
 		    </span>
 		</a>
 	</div>
-	
+
 	<div class="map-mobile-controls map-pagination-controls full-width vertical-center-parent   mobile-only mobile-view mobile-view-idea-create-1-visible-block">
         <a class="trigger-mobile-idea-create-2-view rounded-button button-color-action pull-right inline-spacer vertical-center-child">
             <span class="rounded-button-inner">
@@ -21,17 +21,15 @@
             {% trans "Choose a location for your idea by dragging the marker!" %}
 	    </div>
     </div>
-	
+
 {% endif %}
 
 <div class="map-mobile-controls mobile-only">
-    {% if not fullscreen%}
     <div class="rounded-button rounded-button-circular button-action-faded shadowed-button trigger-mobile-search-view   mobile-view mobile-view-list-visible-inline-block  mobile-view-map-visible-inline-block mobile-view-detail-visible-inline-block">
         <span class="rounded-button-inner">
             <i class="fa fa-fw fa-search"></i>
         </span>
     </div>
-    {% endif %}
     {% if splitscreen %}
 	    <div class="rounded-button rounded-button-circular button-action-faded shadowed-button trigger-mobile-map-view   mobile-view mobile-view-search-visible-inline-block  mobile-view-list-visible-inline-block mobile-view-detail-visible-inline-block">
 	        <span class="rounded-button-inner">
