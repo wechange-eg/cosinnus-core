@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-07 17:45+0200\n"
+"POT-Creation-Date: 2024-05-27 16:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -324,6 +324,10 @@ msgstr ""
 msgid "Messages"
 msgstr "Хабарламалар"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Шолу жасау"
+
 msgid "Help"
 msgstr "Көмек"
 
@@ -342,6 +346,25 @@ msgstr "Тіркелу"
 
 msgid "Show all"
 msgstr "Барлығын көрсету"
+
+msgid "Last name"
+msgstr "Тегі"
+
+msgid "Display name"
+msgstr "Көрсетілетін Аты"
+
+msgid "Help other members find you and use your real name."
+msgstr "Басқа мүшелерге сені жылдам табу үшін және толық атыңды беру үшін атыңды көрсет."
+
+msgid "fields.managed_tags.label"
+msgstr ""
+
+msgid "fields.managed_tags.description"
+msgstr ""
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
+msgstr "Сіз жүйеге тым көп рет кіруге тырыстыңыз. %(duration)s кейін қайта тырысып көріңіз."
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -514,10 +537,6 @@ msgstr "Сіз сұраған бет бұл шара үшін қазір қол 
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
-
-#, python-format
-msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
-msgstr "Сіз жүйеге тым көп рет кіруге тырыстыңыз. %(duration)s кейін қайта тырысып көріңіз."
 
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Пайдаланушы осы топтың мүшесі болуды сұрады (тек әкімшілер)"
@@ -1061,7 +1080,8 @@ msgstr "Электрондық пошта"
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr ""
 
-msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+#, python-format
+msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
 msgstr ""
 
 msgid "Some CSV headers did not have a name!"
@@ -3599,6 +3619,11 @@ msgstr "Шақыруды қабылдау"
 msgid "Copy guest invitation"
 msgstr "Шақыруды қабылдау"
 
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There was an error."
+msgstr "Топтар жоқ."
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 
@@ -4977,9 +5002,6 @@ msgid "If you do not wish this, you can change the visibility setting above."
 msgstr "Егер сіз мұны қаламасаңыз, жоғарыда көріну параметрін өзгерте аласыз."
 
 msgid "Platform-wide (visible for all members of the platform)"
-msgstr ""
-
-msgid "Visibility on other platforms"
 msgstr ""
 
 msgid "Is your project open to other partner organizations?"
@@ -6409,9 +6431,6 @@ msgstr "Бұл есім сайттағы басқа пайдаланушылар
 msgid "First name"
 msgstr "Аты"
 
-msgid "Last name"
-msgstr "Тегі"
-
 msgid "You can supply your last name to be displayed as well"
 msgstr "Сіз өзіңіздің тегіңізді де көрсете аласыз"
 
@@ -7072,10 +7091,6 @@ msgstr "Мұнда сіз ұнаған идеялардың шолуын таб�
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
 msgstr "Жоғарыдағы ‘+’ батырмасы арқылы сіз идеялар жасай аласыз немесе осында бар идеяларға шолу жасай аласыз"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Шолу жасау"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Filter"
@@ -8315,13 +8330,6 @@ msgstr ""
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr ""
-
-#, fuzzy
-msgid "This project shall be made publicly findable via other platforms."
-msgstr "Бұл жоба көпшілік назарына ұсынылады!"
-
 msgid "Collaborate!"
 msgstr "Ынтымақтастық!"
 
@@ -8456,13 +8464,6 @@ msgstr ""
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
-
-msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr ""
-
-#, fuzzy
-msgid "This group shall be made publicly findable via other platforms."
-msgstr "Бұл жоба көпшілік назарына ұсынылады!"
 
 msgid "You can access and browse the group that invited you"
 msgstr ""
@@ -8602,13 +8603,6 @@ msgstr ""
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
-
-msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr ""
-
-#, fuzzy
-msgid "This conference shall be made publicly findable via other platforms."
-msgstr "Бұл жоба көпшілік назарына ұсынылады!"
 
 #, fuzzy
 msgid "Participate!"
@@ -12905,6 +12899,9 @@ msgstr ""
 msgid "Address(es) of your organization"
 msgstr "Пайдаланушыларды іздеу"
 
+msgid "Visibility on other platforms"
+msgstr ""
+
 #, python-format
 msgid "Projects are always transferred to <a href=\"%(url)s\" target=\"_blank\">partner platforms</a> of WECHANGE. These are only organizational data and not personal data."
 msgstr ""
@@ -14376,6 +14373,18 @@ msgstr "Sind Sie sicher, dass Sie diese Liste und alle Unteraufgaben löschen wo
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Бұл пәрменді шынымен жойғыңыз келе ме?"
+
+#, fuzzy
+#~ msgid "This project shall be made publicly findable via other platforms."
+#~ msgstr "Бұл жоба көпшілік назарына ұсынылады!"
+
+#, fuzzy
+#~ msgid "This group shall be made publicly findable via other platforms."
+#~ msgstr "Бұл жоба көпшілік назарына ұсынылады!"
+
+#, fuzzy
+#~ msgid "This conference shall be made publicly findable via other platforms."
+#~ msgstr "Бұл жоба көпшілік назарына ұсынылады!"
 
 #, fuzzy
 #~| msgid "Contact"

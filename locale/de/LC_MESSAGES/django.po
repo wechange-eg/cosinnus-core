@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 11:20+0200\n"
+"POT-Creation-Date: 2024-05-27 16:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -309,6 +309,25 @@ msgstr "Registrieren"
 msgid "Show all"
 msgstr "Alle anzeigen"
 
+msgid "Last name"
+msgstr "Nachname"
+
+msgid "Display name"
+msgstr "Anzeigename"
+
+msgid "Help other members find you and use your real name."
+msgstr "Hilf anderen Mitgliedern dich schneller zu finden und gebe deinen Klarnamen an."
+
+msgid "fields.managed_tags.label"
+msgstr ""
+
+msgid "fields.managed_tags.description"
+msgstr ""
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
+msgstr "Du hast zu oft versucht, dich einzuloggen. Du kannst es in einer Weile wieder versuchen: %(duration)s."
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr "Hallo %(user)s! Deine Registrierung war erfolgreich. Du wirst in den nächsten Tagen von unseren Administrator/innen freigeschaltet. Wenn dein Account freigeschaltet ist, erhältst du eine E-Mail auf %(email)s."
@@ -463,10 +482,6 @@ msgstr "Die Seite die du aufgerufen hast ist für Gastkonten nicht verfügbar."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Du wurdest automatisch abgemeldet, nachdem du für einige Zeit inaktiv warst."
-
-#, python-format
-msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
-msgstr "Du hast zu oft versucht, dich einzuloggen. Du kannst es in einer Weile wieder versuchen: %(duration)s."
 
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Jemand hat beantragt Mitglied in dieser Gruppe zu werden (betrifft nur Gruppenadministratoren)"
@@ -6070,9 +6085,6 @@ msgstr "Dieser Name wird anderen Benutzer/innen auf der Plattform angezeigt"
 
 msgid "First name"
 msgstr "Vorname"
-
-msgid "Last name"
-msgstr "Nachname"
 
 msgid "You can supply your last name to be displayed as well"
 msgstr "Wenn du möchtest, kannst du auch deinen Nachnamen anzeigen lassen"

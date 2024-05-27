@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-07 17:45+0200\n"
+"POT-Creation-Date: 2024-05-27 16:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -326,6 +326,10 @@ msgstr "Nour"
 msgid "Messages"
 msgstr "Mesaje"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Descoperi"
+
 msgid "Help"
 msgstr "Ajutor"
 
@@ -344,6 +348,25 @@ msgstr "Înregistrează-te"
 
 msgid "Show all"
 msgstr "Arată tot"
+
+msgid "Last name"
+msgstr "Numele de familie"
+
+msgid "Display name"
+msgstr "Nume Afișat"
+
+msgid "Help other members find you and use your real name."
+msgstr "Ajutați-i pe ceilalți membri să vă găsească mai repede și introduceți numele dvs. real."
+
+msgid "fields.managed_tags.label"
+msgstr ""
+
+msgid "fields.managed_tags.description"
+msgstr ""
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
+msgstr "Ai încercat să te autentifici de prea multe ori. Puteți încerca să vă autentificați din nou în: %(duration)s."
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -518,10 +541,6 @@ msgstr "Pagina solicitată nu este disponibilă pentru acest eveniment."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
-
-#, python-format
-msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
-msgstr "Ai încercat să te autentifici de prea multe ori. Puteți încerca să vă autentificați din nou în: %(duration)s."
 
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Un utilizator a solicitat să devină membru al acestei echipe (doar admin)"
@@ -1069,7 +1088,8 @@ msgstr "E-mail"
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr ""
 
-msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+#, python-format
+msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
 msgstr ""
 
 msgid "Some CSV headers did not have a name!"
@@ -3602,6 +3622,11 @@ msgstr "Invitația acceptată"
 msgid "Copy guest invitation"
 msgstr "Invitația acceptată"
 
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There was an error."
+msgstr "Nu există grupuri."
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 
@@ -4987,9 +5012,6 @@ msgstr "Dacă nu doriți acest lucru, puteți modifica setarea de vizibilitate d
 
 msgid "Platform-wide (visible for all members of the platform)"
 msgstr ""
-
-msgid "Visibility on other platforms"
-msgstr "Vizibilitate pe alte platforme"
 
 msgid "Is your project open to other partner organizations?"
 msgstr ""
@@ -6437,9 +6459,6 @@ msgstr "Acest nume va fi afișat altor utilizatori de pe site"
 msgid "First name"
 msgstr "Nume"
 
-msgid "Last name"
-msgstr "Numele de familie"
-
 msgid "You can supply your last name to be displayed as well"
 msgstr "Puteți furniza numele dvs. pentru a fi afișat, de asemenea"
 
@@ -7093,10 +7112,6 @@ msgstr "Aici puteți găsi o imagine o imagine de ansamblu a Ideilor care v-au p
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
 msgstr "Puteți să vă creați propriile Idei cu ajutorul butonului '+' din antet sau puteți descoperi Idei existente aici"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Descoperi"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Filter"
@@ -8339,14 +8354,6 @@ msgstr ""
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
-#, fuzzy
-#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr "Aici puteți controla dacă informațiile vizibile public despre proiectul dvs., cum ar fi numele și adresa, sunt transmise către <a href=\"#\" target=\"_blank\"> platforme partenere</a> de WECHANGE."
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr "Acest proiect va putea fi găsit public prin intermediul altor platforme."
-
 msgid "Collaborate!"
 msgstr "Colabora!"
 
@@ -8479,16 +8486,6 @@ msgstr ""
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
-
-#, fuzzy
-#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr "Aici puteți controla dacă informațiile vizibile public despre proiectul dvs., cum ar fi numele și adresa, sunt transmise către <a href=\"#\" target=\"_blank\"> platforme partenere</a> de WECHANGE."
-
-#, fuzzy
-#| msgid "This project shall be made publicly findable via other platforms."
-msgid "This group shall be made publicly findable via other platforms."
-msgstr "Acest proiect va putea fi găsit public prin intermediul altor platforme."
 
 msgid "You can access and browse the group that invited you"
 msgstr ""
@@ -8628,16 +8625,6 @@ msgstr ""
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
-
-#, fuzzy
-#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr "Aici puteți controla dacă informațiile vizibile public despre proiectul dvs., cum ar fi numele și adresa, sunt transmise către <a href=\"#\" target=\"_blank\"> platforme partenere</a> de WECHANGE."
-
-#, fuzzy
-#| msgid "This project shall be made publicly findable via other platforms."
-msgid "This conference shall be made publicly findable via other platforms."
-msgstr "Acest proiect va putea fi găsit public prin intermediul altor platforme."
 
 #, fuzzy
 msgid "Participate!"
@@ -12931,6 +12918,9 @@ msgstr ""
 msgid "Address(es) of your organization"
 msgstr "Căutați organizații"
 
+msgid "Visibility on other platforms"
+msgstr "Vizibilitate pe alte platforme"
+
 #, python-format
 msgid "Projects are always transferred to <a href=\"%(url)s\" target=\"_blank\">partner platforms</a> of WECHANGE. These are only organizational data and not personal data."
 msgstr ""
@@ -14388,6 +14378,34 @@ msgstr "Sunteți sigur că doriți să ștergeți această echipă?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Sunteți sigur că doriți să ștergeți această echipă?"
+
+#, fuzzy
+#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+#~ msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Aici puteți controla dacă informațiile vizibile public despre proiectul dvs., cum ar fi numele și adresa, sunt transmise către <a href=\"#\" target=\"_blank\"> platforme partenere</a> de WECHANGE."
+
+#~ msgid "This project shall be made publicly findable via other platforms."
+#~ msgstr "Acest proiect va putea fi găsit public prin intermediul altor platforme."
+
+#, fuzzy
+#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+#~ msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Aici puteți controla dacă informațiile vizibile public despre proiectul dvs., cum ar fi numele și adresa, sunt transmise către <a href=\"#\" target=\"_blank\"> platforme partenere</a> de WECHANGE."
+
+#, fuzzy
+#~| msgid "This project shall be made publicly findable via other platforms."
+#~ msgid "This group shall be made publicly findable via other platforms."
+#~ msgstr "Acest proiect va putea fi găsit public prin intermediul altor platforme."
+
+#, fuzzy
+#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+#~ msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Aici puteți controla dacă informațiile vizibile public despre proiectul dvs., cum ar fi numele și adresa, sunt transmise către <a href=\"#\" target=\"_blank\"> platforme partenere</a> de WECHANGE."
+
+#, fuzzy
+#~| msgid "This project shall be made publicly findable via other platforms."
+#~ msgid "This conference shall be made publicly findable via other platforms."
+#~ msgstr "Acest proiect va putea fi găsit public prin intermediul altor platforme."
 
 #, fuzzy
 #~| msgid "Contact"

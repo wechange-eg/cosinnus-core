@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 11:20+0200\n"
+"POT-Creation-Date: 2024-05-27 16:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -322,6 +322,25 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
+msgid "Last name"
+msgstr ""
+
+msgid "Display name"
+msgstr ""
+
+msgid "Help other members find you and use your real name."
+msgstr "Help other members find you and use your real name."
+
+msgid "fields.managed_tags.label"
+msgstr ""
+
+msgid "fields.managed_tags.description"
+msgstr ""
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
+msgstr ""
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -485,10 +504,6 @@ msgid "The page you tried to visit is not available for guest accounts."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
-msgstr ""
-
-#, python-format
-msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
 msgstr ""
 
 msgid "A user requested to become a member of this team (admins only)"
@@ -6127,9 +6142,6 @@ msgid "This name will be displayed to other users on the site"
 msgstr ""
 
 msgid "First name"
-msgstr ""
-
-msgid "Last name"
 msgstr ""
 
 msgid "You can supply your last name to be displayed as well"

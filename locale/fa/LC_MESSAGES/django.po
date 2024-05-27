@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-07 17:45+0200\n"
+"POT-Creation-Date: 2024-05-27 16:16+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -292,6 +292,10 @@ msgstr "اَبر"
 msgid "Messages"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr ""
+
 msgid "Help"
 msgstr "یاری"
 
@@ -309,6 +313,25 @@ msgstr ""
 
 msgid "Show all"
 msgstr ""
+
+msgid "Last name"
+msgstr ""
+
+msgid "Display name"
+msgstr "نام نمایشی"
+
+msgid "Help other members find you and use your real name."
+msgstr "به سایر اعضا کمک کنید شما را سریعتر پیدا کنند و نام واقعی خود را وارد کنید."
+
+msgid "fields.managed_tags.label"
+msgstr ""
+
+msgid "fields.managed_tags.description"
+msgstr ""
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
+msgstr "شما چندین بار کوشیده‌اید که به سامانه متصل شوید. پس از %(duration)s می‌توانید دوباره به سامانه متصل شوید."
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -474,10 +497,6 @@ msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "پس از گذر مدت زمانی غیرفعال بودن از سامانه بیرون فرستاده شده‌اید."
-
-#, python-format
-msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
-msgstr "شما چندین بار کوشیده‌اید که به سامانه متصل شوید. پس از %(duration)s می‌توانید دوباره به سامانه متصل شوید."
 
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "یک کاربر درخواست عضویت در این گروه داشته است (تنها مدیران)"
@@ -1021,7 +1040,9 @@ msgstr ""
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "برخی از ستون‌های لازم در CSV نمی‌باشند: {missing_headers}!"
 
-msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+#, fuzzy, python-format
+#| msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
 msgstr "ردیف‌ها در این سطور تعداد موارد مشابه با سرآیند ({len(processed_header)})  را در خود ندارند: {\", \".join(mismatched_rows)}!"
 
 msgid "Some CSV headers did not have a name!"
@@ -3426,6 +3447,9 @@ msgstr "پذیرفتن دعوت‌نامه"
 msgid "Copy guest invitation"
 msgstr "پذیرفتن دعوت‌نامه"
 
+msgid "There was an error."
+msgstr ""
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 
@@ -4716,9 +4740,6 @@ msgstr ""
 msgid "Platform-wide (visible for all members of the platform)"
 msgstr ""
 
-msgid "Visibility on other platforms"
-msgstr ""
-
 msgid "Is your project open to other partner organizations?"
 msgstr ""
 
@@ -5972,9 +5993,6 @@ msgstr ""
 msgid "First name"
 msgstr ""
 
-msgid "Last name"
-msgstr ""
-
 msgid "You can supply your last name to be displayed as well"
 msgstr ""
 
@@ -6609,10 +6627,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -7799,12 +7813,6 @@ msgstr ""
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr ""
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr ""
-
 msgid "Collaborate!"
 msgstr ""
 
@@ -7922,12 +7930,6 @@ msgstr ""
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
-msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr ""
-
-msgid "This group shall be made publicly findable via other platforms."
-msgstr ""
-
 msgid "You can access and browse the group that invited you"
 msgstr ""
 
@@ -8043,12 +8045,6 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr ""
 
 msgid "Type the names of files, events or pads from this conference to attach..."
-msgstr ""
-
-msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr ""
-
-msgid "This conference shall be made publicly findable via other platforms."
 msgstr ""
 
 msgid "Participate!"
@@ -12044,6 +12040,9 @@ msgid "Phone"
 msgstr ""
 
 msgid "Address(es) of your organization"
+msgstr ""
+
+msgid "Visibility on other platforms"
 msgstr ""
 
 #, python-format

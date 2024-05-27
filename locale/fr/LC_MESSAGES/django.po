@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-07 17:45+0200\n"
+"POT-Creation-Date: 2024-05-27 16:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -327,6 +327,10 @@ msgstr "Cloud"
 msgid "Messages"
 msgstr "Messages"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Découvrir"
+
 msgid "Help"
 msgstr "Aide"
 
@@ -345,6 +349,25 @@ msgstr "S'inscrire"
 
 msgid "Show all"
 msgstr "Afficher tout"
+
+msgid "Last name"
+msgstr "Nom de famille"
+
+msgid "Display name"
+msgstr "Nom d'affichage"
+
+msgid "Help other members find you and use your real name."
+msgstr "Aide les autres membres à te trouver plus rapidement en indiquant ton nom en clair."
+
+msgid "fields.managed_tags.label"
+msgstr ""
+
+msgid "fields.managed_tags.description"
+msgstr ""
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
+msgstr "Tu as essayé de te connecter trop de fois. Tu pourras essayer de te reconnecter dans : %(duration)s."
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -520,10 +543,6 @@ msgstr "La page que tu as demandé n'est pas disponible pour cet événement à 
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Tu as été automatiquement déconnecté après avoir été inactif pendant un certain temps."
-
-#, python-format
-msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
-msgstr "Tu as essayé de te connecter trop de fois. Tu pourras essayer de te reconnecter dans : %(duration)s."
 
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Un utilisateur a demandé à devenir membre de cette équipe (admins only)"
@@ -1070,7 +1089,9 @@ msgstr "Nouvel item"
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "Certaines colonnes requises ne sont pas présentes dans le CSV : {missing_headers} !"
 
-msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+#, fuzzy, python-format
+#| msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
+msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
 msgstr "Les lignes de ces numéros de ligne n’avaient pas le même nombre d’éléments ({len(processed_header)}) que l’en-tête : {\", \".join(mismatched_rows)}!"
 
 msgid "Some CSV headers did not have a name!"
@@ -3521,6 +3542,11 @@ msgstr "Accepter l'invitation"
 msgid "Copy guest invitation"
 msgstr "Accepter l'invitation"
 
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There was an error."
+msgstr "Il n'y a pas de groupes."
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 
@@ -4870,9 +4896,6 @@ msgstr "Si tu ne le souhaites pas, tu peux changer le paramètre de visibilité 
 
 msgid "Platform-wide (visible for all members of the platform)"
 msgstr ""
-
-msgid "Visibility on other platforms"
-msgstr "Visibilité sur d'autres plateformes"
 
 msgid "Is your project open to other partner organizations?"
 msgstr ""
@@ -6314,9 +6337,6 @@ msgstr "Ce nom sera affiché aux autres utilisateurs sur le site"
 msgid "First name"
 msgstr "Prénom"
 
-msgid "Last name"
-msgstr "Nom de famille"
-
 msgid "You can supply your last name to be displayed as well"
 msgstr "Tu peux donner ton nom de famille pour qu'il soit également affiché"
 
@@ -6959,10 +6979,6 @@ msgstr "Tu trouveras ici un aperçu des idées que tu as aimées."
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
 msgstr "Tu peux créer tes propres idées via le bouton \"+\" dans l'en-tête, ou découvrir ici des idées déjà existantes"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Découvrir"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Filter"
@@ -8202,14 +8218,6 @@ msgstr "Les utilisateurs peuvent se joindre en soumettant une demande d’adhés
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr ""
 
-#, fuzzy
-#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
-
-msgid "This project shall be made publicly findable via other platforms."
-msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
-
 msgid "Collaborate!"
 msgstr "Collabore !"
 
@@ -8334,16 +8342,6 @@ msgstr "Les utilisateurs peuvent se joindre en soumettant une demande d’adhés
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
-#, fuzzy
-#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
-
-#, fuzzy
-#| msgid "This project shall be made publicly findable via other platforms."
-msgid "This group shall be made publicly findable via other platforms."
-msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
-
 msgid "You can access and browse the group that invited you"
 msgstr ""
 
@@ -8466,16 +8464,6 @@ msgstr "Les utilisateurs peuvent se joindre en soumettant une demande d’adhés
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr ""
-
-#, fuzzy
-#| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
-msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
-
-#, fuzzy
-#| msgid "This project shall be made publicly findable via other platforms."
-msgid "This conference shall be made publicly findable via other platforms."
-msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
 
 msgid "Participate!"
 msgstr "Participe !"
@@ -12748,6 +12736,9 @@ msgstr ""
 msgid "Address(es) of your organization"
 msgstr "Révoquer la demande d’organisation"
 
+msgid "Visibility on other platforms"
+msgstr "Visibilité sur d'autres plateformes"
+
 #, python-format
 msgid "Projects are always transferred to <a href=\"%(url)s\" target=\"_blank\">partner platforms</a> of WECHANGE. These are only organizational data and not personal data."
 msgstr ""
@@ -14199,6 +14190,34 @@ msgstr "Veux-tu vraiment supprimer cette équipe ?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Veux-tu vraiment supprimer cette équipe ?"
+
+#, fuzzy
+#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+#~ msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
+
+#~ msgid "This project shall be made publicly findable via other platforms."
+#~ msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
+
+#, fuzzy
+#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+#~ msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
+
+#, fuzzy
+#~| msgid "This project shall be made publicly findable via other platforms."
+#~ msgid "This group shall be made publicly findable via other platforms."
+#~ msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
+
+#, fuzzy
+#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
+#~ msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Vous pouvez ici contrôler si les informations visibles au public concernant votre projet, telles que le nom et l'adresse, sont transmises à <a href=\"#\" target=\"_blank\">plateformes partenaires</a> par WECHANGE."
+
+#, fuzzy
+#~| msgid "This project shall be made publicly findable via other platforms."
+#~ msgid "This conference shall be made publicly findable via other platforms."
+#~ msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
 
 #~ msgid "Pre-filled content for the information field"
 #~ msgstr "Contenu pré-rempli pour le domaine de l’information"
