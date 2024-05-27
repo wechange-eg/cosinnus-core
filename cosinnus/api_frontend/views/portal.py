@@ -460,16 +460,6 @@ class PortalSettingsView(APIView):
             'portalDisplayName': settings.COSINNUS_BASE_PAGE_TITLE_TRANS,
             'hasNewsletter': settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN,
             'links': {
-                'images': {
-                    'navBarLogo': {'light': '/static/img/frontend/logo.svg', 'dark': '/static/img/frontend/logo.svg'},
-                    'welcome': {
-                        'light': '/static/img/frontend/signup/welcome/img.svg',
-                    },
-                    'login': {
-                        'light': '/static/img/frontend/login/light.svg',
-                        'dark': '/static/img/frontend/login/dark.svg',
-                    },
-                },
                 'privacyPolicy': privacy_policy_url,
                 'termsOfUse': terms_of_use_url,
                 'legalNotice': impressum_url,
