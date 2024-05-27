@@ -137,7 +137,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
             limit_expires = check_user_login_ratelimit(username)
             if limit_expires:
                 ratelimit_msg = (
-                    'You have tried to log in too many times. You may try to log in again in: %(duration)s.'
+                    _('You have tried to log in too many times. You may try to log in again in: %(duration)s.')
                 ) % {'duration': naturaltime(limit_expires)}
                 raise serializers.ValidationError({'non_field_errors': [ratelimit_msg]})
 
