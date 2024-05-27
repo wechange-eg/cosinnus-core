@@ -1,8 +1,10 @@
-from copy import copy
-
+from django.core.cache import cache
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
+from django.template.loader import render_to_string
 from django.utils.encoding import force_str
+from django.utils.translation import get_language
+from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import IsAuthenticated
@@ -19,7 +21,7 @@ from cosinnus.conf import settings
 from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
-from cosinnus.utils.functions import is_number
+from cosinnus.utils.functions import clean_single_line_text, is_number, update_dict_recursive
 
 
 class PortalTopicsView(APIView):
@@ -214,6 +216,73 @@ class PortalManagedTagsView(APIView):
         return Response(data)
 
 
+def generate_api_dict_for_dynamic_field(field_name, field_definition_dict, field_option_filter=None):
+    """Generates a list of API response dicts for a single dynamic field, given the field name
+    and field definitions dict for that field (the dict is usally a reference to the ones defined in
+    `COSINNUS_USERPROFILE_EXTRA_FIELDS`.
+    @return: an array of dynamic field definition dicts. there can be multiple, e.g. if translateable
+        fields are involved."""
+    field_data = []
+
+    field_options = field_definition_dict[field_name]
+    if field_option_filter and not getattr(field_options, field_option_filter, False):
+        return []
+    choices = field_options.choices
+    if not choices:
+        if False and field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES:
+            # TODO: for dynamic fields with dynamic choices, an extra select2-style
+            # autocomplete endpoint should be created, both in the v3 API and in the formfields!
+            # as this doesn't scale well for portals with large numbers of groups!
+            choices = '<dynamic-NYI>'
+        else:
+            formfield = EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS.get(field_options.type)().get_formfield(
+                field_name, field_options
+            )
+            choices = getattr(formfield, 'choices', None)
+    # remove the empty choice from choices for multiple fields, as our frontend doesn't need it
+    if choices and field_options.multiple is True:
+        choices = [(k, v) for (k, v) in choices if k]
+
+    # check if multilanguage is enabled
+    is_multi_language_field = (
+        settings.COSINNUS_TRANSLATED_FIELDS_ENABLED
+        and field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS
+    )
+
+    current_field_data = {
+        'name': field_name,
+        'is_multi_language': is_multi_language_field,
+        'is_multi_language_sub_field': False,
+        'in_signup': field_options.in_signup,
+        'required': field_options.required,
+        'multiple': field_options.multiple,
+        'type': field_options.type,
+        'label': field_options.label,
+        'legend': field_options.legend,
+        'header': field_options.header,
+        'placeholder': field_options.placeholder,
+        'is_group_header': field_options.is_group_header,
+        'parent_group_field_name': field_options.parent_group_field_name,
+        'display_required_field_names': field_options.display_required_field_names,
+        'choices': choices,
+    }
+    field_data.append(current_field_data)
+
+    # add multilanguage sub fields
+    if is_multi_language_field:
+        for language_code, language in settings.LANGUAGES:
+            multilanguage_field_data = current_field_data.copy()
+            multilanguage_field_data.update(
+                **{
+                    'name': f'{field_name}__{language_code}',
+                    'label': language,
+                    'is_multi_language_sub_field': True,
+                }
+            )
+            field_data.append(multilanguage_field_data)
+    return field_data
+
+
 class PortalUserprofileDynamicFieldsView(APIView):
     """An endpoint that returns the configured topic choices for this portal"""
 
@@ -304,62 +373,11 @@ class PortalUserprofileDynamicFieldsView(APIView):
     )
     def get(self, request):
         field_data = []
-        for field_name, field_options in self.DYNAMIC_FIELD_SETTINGS.items():
-            if self.field_option_filter and not getattr(field_options, self.field_option_filter, False):
-                continue
-            choices = field_options.choices
-            if not choices:
-                if False and field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES:
-                    # TODO: for dynamic fields with dynamic choices, an extra select2-style
-                    # autocomplete endpoint should be created, both in the v3 API and in the formfields!
-                    # as this doesn't scale well for portals with large numbers of groups!
-                    choices = '<dynamic-NYI>'
-                else:
-                    formfield = EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS.get(field_options.type)().get_formfield(
-                        field_name, field_options
-                    )
-                    choices = getattr(formfield, 'choices', None)
-            # remove the empty choice from choices for multiple fields, as our frontend doesn't need it
-            if choices and field_options.multiple is True:
-                choices = [(k, v) for (k, v) in choices if k]
-
-            # check if multilanguage is enabled
-            is_multi_language_field = (
-                settings.COSINNUS_TRANSLATED_FIELDS_ENABLED
-                and field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS
+        for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
+            items_for_field = generate_api_dict_for_dynamic_field(
+                field_name, self.DYNAMIC_FIELD_SETTINGS, field_option_filter=self.field_option_filter
             )
-
-            current_field_data = {
-                'name': field_name,
-                'is_multi_language': is_multi_language_field,
-                'is_multi_language_sub_field': False,
-                'in_signup': field_options.in_signup,
-                'required': field_options.required,
-                'multiple': field_options.multiple,
-                'type': field_options.type,
-                'label': field_options.label,
-                'legend': field_options.legend,
-                'header': field_options.header,
-                'placeholder': field_options.placeholder,
-                'is_group_header': field_options.is_group_header,
-                'parent_group_field_name': field_options.parent_group_field_name,
-                'display_required_field_names': field_options.display_required_field_names,
-                'choices': choices,
-            }
-            field_data.append(current_field_data)
-
-            # add multilanguage sub fields
-            if is_multi_language_field:
-                for language_code, language in settings.LANGUAGES:
-                    multilanguage_field_data = current_field_data.copy()
-                    multilanguage_field_data.update(
-                        **{
-                            'name': f'{field_name}__{language_code}',
-                            'label': language,
-                            'is_multi_language_sub_field': True,
-                        }
-                    )
-                    field_data.append(multilanguage_field_data)
+            field_data.extend(items_for_field)
 
         return Response(field_data)
 
@@ -378,14 +396,24 @@ class PortalUserprofileDynamicFieldsSignupView(PortalUserprofileDynamicFieldsVie
 
 
 class PortalSettingsView(APIView):
-    """An endpoint that returns configured settings for this portal.
-    Currently simply returns the contents of conf setting `COSINNUS_V3_PORTAL_SETTINGS`"""
+    """
+    An endpoint that returns configured settings for this portal.
+    Returns many settings from conf.py for this portal, as well as preformatted dynamic fields.
+    This endpoint is called on every page load and is i18n-session sensitive,
+    and thus uses language-dependent caching of the entire return value to reduce computational costs.
+
+    Any returned values will be overridden by anything defined in conf dict `COSINNUS_V3_PORTAL_SETTINGS` (uncached).
+    """
 
     renderer_classes = (
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
     authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY = 'cosinnus/core/portal/portalsettings/%s'  # key is language code
+    CACHE_TIMEOUT_DEV = 30  # 30 seconds for dev servers
+    CACHE_TIMEOUT = 30 * 60  # 30 minutes for production servers
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -409,11 +437,109 @@ class PortalSettingsView(APIView):
         }
     )
     def get(self, request):
-        settings_dict = copy(settings.COSINNUS_V3_PORTAL_SETTINGS)
-        settings_dict.update(
-            {
-                'COSINNUS_CLOUD_ENABLED': settings.COSINNUS_CLOUD_ENABLED,
-                'COSINNUS_CLOUD_NEXTCLOUD_URL': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
-            }
-        )
+        current_language = get_language()
+        settings_dict = cache.get(self.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % current_language)
+        if not settings_dict:
+            settings_dict = self.build_settings_dict(request)
+            timeout = self.CACHE_TIMEOUT_DEV if settings.COSINNUS_IS_TEST_SERVER else self.CACHE_TIMEOUT
+            cache.set(self.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % current_language, settings_dict, timeout)
+        # update any settings delivered from `COSINNUS_V3_PORTAL_SETTINGS` recursively, uncached
+        update_dict_recursive(settings_dict, settings.COSINNUS_V3_PORTAL_SETTINGS)
         return Response(settings_dict)
+
+    def build_settings_dict(self, request):
+        """Generates the complete settings dict afresh"""
+        privacy_policy_url = clean_single_line_text(
+            render_to_string('cosinnus/v2/urls/privacy_policy_url.html', request=request)
+        )
+        terms_of_use_url = clean_single_line_text(render_to_string('cosinnus/v2/urls/tos_url.html', request=request))
+        impressum_url = clean_single_line_text(render_to_string('cosinnus/v2/urls/impressum_url.html', request=request))
+
+        settings_dict = {
+            'portalName': settings.COSINNUS_PORTAL_NAME,
+            'portalDisplayName': settings.COSINNUS_BASE_PAGE_TITLE_TRANS,
+            'hasNewsletter': settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN,
+            'links': {
+                'images': {
+                    'navBarLogo': {'light': '/static/img/frontend/logo.svg', 'dark': '/static/img/frontend/logo.svg'},
+                    'welcome': {
+                        'light': '/static/img/frontend/signup/welcome/img.svg',
+                    },
+                    'login': {
+                        'light': '/static/img/frontend/login/light.svg',
+                        'dark': '/static/img/frontend/login/dark.svg',
+                    },
+                },
+                'privacyPolicy': privacy_policy_url,
+                'termsOfUse': terms_of_use_url,
+                'legalNotice': impressum_url,
+            },
+            'cosinnusIsPrivatePortal': settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN,
+            'cosinnusCloudEnabled': settings.COSINNUS_CLOUD_ENABLED,
+            'cosinnusCloudNextcloudUrl': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
+            # 'theme': {...},  # set manually
+            # 'setup': {'additionalSteps': ... }},  # set manually
+            # 'signupShowContributionMessage': False,  # set manually
+        }
+        field_overrides = self._build_field_overrides_dict()
+        if field_overrides:
+            settings_dict['fieldOverrides'] = field_overrides
+        return settings_dict
+
+    def _build_field_overrides_dict(self):
+        """Build the dict of overriden dynamic fields"""
+        field_overrides = {}
+        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
+            # for last-name required portals, we add a hardcoded last name field
+            field_overrides['signup'] = {
+                'profile': [
+                    {
+                        'name': 'last_name',
+                        'is_multi_language': False,
+                        'is_multi_language_sub_field': False,
+                        'in_signup': True,
+                        'required': True,
+                        'multiple': False,
+                        'type': 'text',
+                        'label': _('Last name'),
+                        'legend': None,
+                        'placeholder': {'en': ''},
+                        'is_group_header': False,
+                        'parent_group_field_name': None,
+                        'display_required_field_names': None,
+                        'choices': None,
+                    }
+                ]
+            }
+        else:
+            display_name_field = {
+                'name': 'first_name',
+                'is_multi_language': False,
+                'is_multi_language_sub_field': False,
+                'in_signup': True,
+                'required': True,
+                'multiple': False,
+                'type': 'text',
+                'label': _('Display name'),
+                'legend': _('Help other members find you and use your real name.'),
+                'placeholder': {'en': ''},
+                'is_group_header': False,
+                'parent_group_field_name': None,
+                'display_required_field_names': None,
+                'choices': None,
+            }
+            # for only-first-name required portals, we add a hardcoded display name field
+            field_overrides['signup'] = {'profile': [display_name_field]}
+            # and we also add that display name field in the first setup step again
+            # note difference of 'setup' vs 'signup' keys!
+            field_overrides['setup'] = {'profile': [display_name_field]}
+
+        # add a field override managed tags section if they should appear in signup
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
+            if 'signup' not in field_overrides:
+                field_overrides['signup'] = {}
+            field_overrides['signup']['managedTagsSection'] = {
+                'label': _('fields.managed_tags.label'),
+                'description': _('fields.managed_tags.description'),
+            }
+        return field_overrides

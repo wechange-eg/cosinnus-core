@@ -26,6 +26,10 @@ class CosinnusConf(AppConf):
     class Meta(object):
         prefix = 'COSINNUS'
 
+    # whether the running server config is for a dev server
+    # changes some test environment behaviours
+    IS_TEST_SERVER = False
+
     # a list of "startswith" URLs that will never be redirected by any middleware logic
     # these URLs are allowed to be accessed for anonymous accounts, even when everything else
     # is locked down. all integrated-API related URLs and all login/logout URLs should be in here!
