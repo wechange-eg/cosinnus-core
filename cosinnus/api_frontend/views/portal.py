@@ -467,9 +467,9 @@ class PortalSettingsView(APIView):
             'cosinnusIsPrivatePortal': settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN,
             'cosinnusCloudEnabled': settings.COSINNUS_CLOUD_ENABLED,
             'cosinnusCloudNextcloudUrl': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
+            'signupShowContributionMessage': False,
             # 'theme': {...},  # set manually
             # 'setup': {'additionalSteps': ... }},  # set manually
-            # 'signupShowContributionMessage': False,  # set manually
         }
         field_overrides = self._build_field_overrides_dict()
         if field_overrides:
@@ -493,7 +493,7 @@ class PortalSettingsView(APIView):
                         'type': 'text',
                         'label': _('Last name'),
                         'legend': None,
-                        'placeholder': {'en': ''},
+                        'placeholder': None,
                         'is_group_header': False,
                         'parent_group_field_name': None,
                         'display_required_field_names': None,
@@ -512,7 +512,7 @@ class PortalSettingsView(APIView):
                 'type': 'text',
                 'label': _('Display name'),
                 'legend': _('Help other members find you and use your real name.'),
-                'placeholder': {'en': ''},
+                'placeholder': None,
                 'is_group_header': False,
                 'parent_group_field_name': None,
                 'display_required_field_names': None,
