@@ -1,3 +1,12 @@
 .v2-dashboard {
     margin-top: 0;
 }
+
+/** Map container needs to be at 50px top, not 55px in v3 */
+.app-root, .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
+    top: 50px; /** Navbar compensation */
+}
+/** The full-50%-screen tile overlay */
+.app-fullscreen .tile-detail {
+    margin-top: 50px;
+}
