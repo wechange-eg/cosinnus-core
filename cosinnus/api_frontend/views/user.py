@@ -132,7 +132,11 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
     def post(self, request):
         # deny login if the attempted username for login has been rate limited after too many attempts
         # (the failed login registering itself is set up in `LoginRateLimitMiddleware.__init__()`
-        username = request.data.get('username', None)
+        username = request.data.get('username', '')
+        try:
+            username = username.lower().strip()
+        except Exception:
+            username = None
         if username:
             limit_expires = check_user_login_ratelimit(username)
             if limit_expires:
