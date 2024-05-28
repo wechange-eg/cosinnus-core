@@ -5,7 +5,6 @@
             
             <columns class="image image-column" large="1" small="1" valign="middle">
                 <a href="{{#rw this}}action_user_url{{/rw}}">
-                    <!-- always include the width="nn" attribute in <img> for Outlook! -->
                     <img class="regular-img" width="40" src="{{#rw this}}user_image_url{{/rw}}" alt="" />
                 </a>
             </columns>
@@ -46,7 +45,6 @@
                        {{#rwif origin_icon_url raw_if="origin_icon_url" }}
                        <th class="group-aside-icon">
                            <a href="{{#rw this}}origin_url{{/rw}}">
-	                           <!-- always include the width="nn" attribute in <img> for Outlook! -->
                                <img class="smallest-img inline-img padded-img-no-right" width="20" src="{{#rw this}}origin_icon_url{{/rw}}" />
                            </a>
                        </th>
@@ -71,7 +69,6 @@
                 
                 <columns class="image-column" large="1" small="1" valign="middle">
 	                    <a href="{{#rw this}}sub_object_url{{/rw}}">
-	                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
 	                        <img class="small-img padded-img" width="30" src="{{#rw this}}sub_object_icon_url{{/rw}}" alt="" />
 	                    </a>
                 </columns>
@@ -114,7 +111,6 @@
             
                 <columns class="image image-column" large="1" small="1" valign="top">
                     <a href="{{#rw this}}object_url{{/rw}}">
-                        <!-- always include the width="nn" attribute in <img> for Outlook! -->
                         <img class="small-img padded-img" width="30" src="{{#rw this}}object_icon_url{{/rw}}" alt="" />
                     </a>
                 </columns>
