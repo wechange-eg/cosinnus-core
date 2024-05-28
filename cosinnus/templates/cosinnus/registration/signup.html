@@ -143,7 +143,6 @@
             
             {% block topic_field %}
                 {% if SETTINGS.COSINNUS_USER_SIGNUP_INCLUDES_TOPIC_FIELD %}
-                    <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
                     <script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
                     {# Large Field #}
 					{% trans "Which topics are you interested in?" as topics_label %}
