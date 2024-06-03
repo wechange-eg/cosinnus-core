@@ -4,15 +4,54 @@ from datetime import datetime
 import pytz
 from django.utils.translation import gettext_lazy as _
 
+from cosinnus.conf import settings
+
 """
 UPDATES includes release notes for each version shown to the users with:
 - datetime: datetime-release-timestamp (the time of authoring this update object)
 - title: text for dropdown title (i18n)
 - short-text: markdown-text for dropdown label and the details page (i18n)
 - full-text: markdown-text for the details page (i18n)
+- display_conditional: (optional) bool, if this evaluates to False, the update will not be included in the updates list
 """
 
 UPDATES = {
+    'Redesign': {
+        'datetime': datetime(2024, 6, 5, tzinfo=pytz.utc),
+        'title': _('Redesign Update'),
+        'short_text': _('The Redesign has been launched on the entire platform!'),
+        'full_text': _(
+            'With the Redesign, the user interface has received a large update. This includes a new navigation bar, '
+            'a new menu structure in groups and projects, and many small improvements in user interaction.\n\n'
+            'This is the stepping stone update for many further exciting features and interface improvements to come '
+            'in the near future!'
+        ),
+        'display_conditional': (
+            settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
+        ),
+    },
+    '2.0.0': {
+        'datetime': datetime(2024, 6, 5, tzinfo=pytz.utc),
+        'title': _('Version 2.0.0 released'),
+        'short_text': _('This update includes several features and bugfixes:'),
+        'full_text': _(
+            '- User accounts with unverified email addresses are no longer shown as "inactive" in member lists '
+            'and their profiles are now always displayed properly.\n'
+            '- Images from external servers that are embedded in user-generated text content \n'
+            'will no longer be shown directly in-line, but will be displayed as a link that opens the '
+            'image on click. This is done for security reasons and to prevent unwanted trackable \n'
+            "connections from the user's browser.\n"
+            '- Streamlined some translations in the German user interface to be more gender-neutral.\n'
+            '- Fixed a bug where the title of an event was sometimes not readable onevent pages with a dark background image.\n'
+            '- Fixed a bug where copying an invitation link in the conference area did not work in some browsers.\n'
+            '- Fixed a bug where renaming a project or group was not possible and would fail with an error.\n'
+            '- Fixed a bug where the map page did not show a search bar on mobile devices.\n'
+            '- Fixed a bug where the map attribution labels were covered by other elements.\n'
+            '- Several technical changes have been made under-the-hood to prepare for the redesign.\n'
+            '- Some changes and additions have been made to the API for groups and projects.\n'
+            '- Further security updates and minor bugfixes have been made.\n'
+        ),
+    },
     '1.20.4': {
         'datetime': datetime(2024, 5, 6, tzinfo=pytz.utc),
         'title': _('Version 1.20.4 released'),

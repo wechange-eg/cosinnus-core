@@ -14,6 +14,9 @@ def _version_list(updates):
     version_list = []
     version_history_url = reverse('cosinnus:version-history')
     for version, update in updates.items():
+        # check if this update should be displayed
+        if 'display_conditional' in update and not update.get('display_conditional', True):
+            continue
         # copy and extend update info
         version_details = update.copy()
         anchor = slugify(version)

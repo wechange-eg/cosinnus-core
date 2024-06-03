@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-27 16:16+0200\n"
+"POT-Creation-Date: 2024-06-03 16:38+0200\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8776,6 +8776,42 @@ msgid "Please also provide an end date"
 msgstr ""
 
 msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
+msgid "Redesign Update"
+msgstr ""
+
+#, fuzzy
+#| msgid "This description will be publicly visible."
+msgid "The Redesign has been launched on the entire platform!"
+msgstr "سيكون هذا الوصف مرئيًا للعامة."
+
+msgid ""
+"With the Redesign, the user interface has received a large update. This includes a new navigation bar, a new menu structure in groups and projects, and many small improvements in user interaction.\n"
+"\n"
+"This is the stepping stone update for many further exciting features and interface improvements to come in the near future!"
+msgstr ""
+
+msgid "Version 2.0.0 released"
+msgstr ""
+
+msgid "This update includes several features and bugfixes:"
+msgstr ""
+
+msgid ""
+"- User accounts with unverified email addresses are no longer shown as \"inactive\" in member lists and their profiles are now always displayed properly.\n"
+"- Images from external servers that are embedded in user-generated text content \n"
+"will no longer be shown directly in-line, but will be displayed as a link that opens the image on click. This is done for security reasons and to prevent unwanted trackable \n"
+"connections from the user's browser.\n"
+"- Streamlined some translations in the German user interface to be more gender-neutral.\n"
+"- Fixed a bug where the title of an event was sometimes not readable onevent pages with a dark background image.\n"
+"- Fixed a bug where copying an invitation link in the conference area did not work in some browsers.\n"
+"- Fixed a bug where renaming a project or group was not possible and would fail with an error.\n"
+"- Fixed a bug where the map page did not show a search bar on mobile devices.\n"
+"- Fixed a bug where the map attribution labels were covered by other elements.\n"
+"- Several technical changes have been made under-the-hood to prepare for the redesign.\n"
+"- Some changes and additions have been made to the API for groups and projects.\n"
+"- Further security updates and minor bugfixes have been made.\n"
 msgstr ""
 
 msgid "Version 1.20.4 released"
