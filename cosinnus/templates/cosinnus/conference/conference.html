@@ -5,9 +5,12 @@
 {% block page_title %}{% if room and room.title %}{{ room.title }} - {% endif %}{{ group.name }}{% endblock page_title %}
 
 {% block csshead %}
-    {# do not load in any CSS stylesheets for the conference area when the v3 main content is being rendered out #}
+    {# do not load in any cosinnus CSS stylesheets for the conference area when the v3 main content is being rendered out #}
     {% if not COSINNUS_V3_API_CONTENT_ACTIVE %}
         {{ block.super }}
+    {% else %}
+	      <link href="{% static 'css/vendor/font-awesome-5/css/all.css' %}" rel="stylesheet"><!-- fa5 -->
+	      <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet"><!-- fa4 -->
     {% endif %}
 {% endblock csshead %}
 
