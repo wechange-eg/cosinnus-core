@@ -171,8 +171,8 @@ def fulldeploy(_ctx):
     collectstatic(_ctx)
     compileless(_ctx)
     maintenanceoff(_ctx)
-    print('Note: this may fail if no redesign frontend is present yet for this portal. In that case, this is fine!')
-    restartfrontend(_ctx)
+    # print('Note: this may fail if no redesign frontend is present yet for this portal. In that case, this is fine!')
+    # restartfrontend(_ctx)
 
 
 """ ----------- Single helper tasks. Used in deploy tasks, but can also be called solo ----------- """
