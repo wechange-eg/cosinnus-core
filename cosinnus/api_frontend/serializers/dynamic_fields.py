@@ -13,6 +13,16 @@ from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIEL
 logger = logging.getLogger('cosinnus')
 
 
+class OutputEmptyAsNoneCharField(serializers.CharField):
+    """A normal charfield, but it outputs `None` instead of an empty string.
+    Used for translatable fields so the frontend can distinguish which formfields to display and which to hide."""
+
+    def to_representation(self, value):
+        if not value:
+            return None
+        return str(value)
+
+
 class CosinnusUserDynamicFieldsSerializerMixin(object):
     """Dynamically adds serializer fields for the dynamic userprofile fields
     to any DRF serializer.
@@ -88,7 +98,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                     translated_field_name = f'{field_name}__{language_code}'
                     # Using a profile function added by the TranslateableFieldsModelMixin as source.
                     source = f'cosinnus_profile.get_{translated_field_name}'
-                    field = serializers.CharField(
+                    field = OutputEmptyAsNoneCharField(
                         required=False,
                         allow_null=True,
                         allow_blank=True,
