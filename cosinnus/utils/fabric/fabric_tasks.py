@@ -471,5 +471,5 @@ def _pull_and_update_frontend():
         c.run('git pull')
         c.run('pnpm install')
         c.run('pnpm run build')
-        # make newly built next dist files that will be served as static accessible by nginx
-        c.run(f'chown {env.username}:www-data -R .next/')
+        # not necessary any more: make newly built next dist files that will be served as static accessible by nginx
+        # c.run(f'chown {env.username}:www-data -R .next/')
