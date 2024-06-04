@@ -7,7 +7,6 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.cache import cache
 from django.http import QueryDict
-from django.template.response import TemplateResponse
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
@@ -269,10 +268,12 @@ class MainContentView(APIView):
         if cached_response:
             # use the response from the cache key
             response = cached_response
-            # pipe some response attributes of TemplateResponse so they can be accessed like a requests response
-            if type(response) is TemplateResponse:
+            # for some response types like TemplateResponse or HttpResponseForbidden that we receive during `usecached`
+            # mode, we patch on properties we expect later on so they can be accessed like a requests response
+            if getattr(response, 'url', None) is None:
                 setattr(response, 'url', self.url)
-                setattr(response, 'text', response.content)
+            if getattr(response, 'text', None) is None:
+                setattr(response, 'text', getattr(response, 'content', ''))
         else:
             # resolve the response by querying with a request, including redirects
             response = self._resolve_url_via_query(self.url, django_request, allow_redirects=False)
@@ -498,14 +499,20 @@ class MainContentView(APIView):
         # try to extract our page's inner container, below the breadcrumb
         content = soup.find('div', class_='x-v3-content')
         if not content:
-            # if that doesn't exist, try to extract the
+            # if that doesn't exist, try to extract the outer container
             content = soup.find('div', class_='x-v3-container')
-        if not content:
+
+        if content:
+            self.content_html = str(content or '').strip()
+        else:
             # if even that doesn't exist, return the content of the body tag, minus all <nav> tags
-            content = soup.find('body')
-            content = content.decode_contents()
             self.has_leftnav = False
-        self.content_html = str(content or '').strip()
+            content = soup.find('body')
+            if content:
+                self.content_html = str(content.decode_contents()).strip()
+            else:
+                content = soup
+                self.content_html = str(content or '').strip()
 
         # if the report modal is not in the content (i.e. because we extracted only the x-v3-content or a part where
         # the report modal isn't contained), add it from the main soup
