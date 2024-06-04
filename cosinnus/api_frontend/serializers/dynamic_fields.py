@@ -103,6 +103,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                         allow_null=True,
                         allow_blank=True,
                         source=source,
+                        default='',
                         help_text=f'This is a dynamic field translation for {field_name}.',
                     )
                     setattr(self, translated_field_name, field)
@@ -190,6 +191,10 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                     translated_field_name = f'get_{field_name}__{language_code}'
                     if translated_field_name in profile_attr_dict:
                         translated_field_value = profile_attr_dict.get(translated_field_name)
+                        # save translated field values as empty string instead of null, to be in line with the way the
+                        # old frontend saves the values
+                        if not translated_field_value:
+                            translated_field_value = ''
                         if language_code not in dynamic_field_translations:
                             dynamic_field_translations[language_code] = {}
                         dynamic_field_translations[language_code][field_name] = translated_field_value
