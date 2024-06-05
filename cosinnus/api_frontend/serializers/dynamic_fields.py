@@ -122,6 +122,10 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
 
             errors = {}
             dynamic_field_attr_dict = attrs.get('cosinnus_profile', {}).get('dynamic_fields', {})
+            # skip non required, non-existant fields
+            if not field_options.required and field_name not in dynamic_field_attr_dict:
+                continue
+
             field_value = dynamic_field_attr_dict.get(field_name, '')
             # create a formfield from the dynamic field definitions to validate, since all dynamic fields are CharField
             dynamic_field_generator = EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS[field_options.type]()
