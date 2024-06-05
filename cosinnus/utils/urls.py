@@ -158,9 +158,20 @@ def redirect_with_next(url, request_with_next, additional_param_str=None):
     return f'{url}?next={next_param}'
 
 
-def check_url_v3_everywhere_exempt(url_path):
+def check_url_v3_everywhere_exempt(url_path, request):
     """Returns True if the given url_path matches an exempted URL from
     `COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS`, False if not."""
+    request_uri = request.build_absolute_uri()
+    request_tokens = request_uri.split('/')
+    # do a special check for the login url if the '/o/authorize' request token is present
+    # currently do not affect login requests within the oauth flow
+    if (
+        '/o/authorize' in request_uri
+        or any(['/o/authorize' in urllib.parse.unquote(request_token) for request_token in request_tokens])
+    ) and not request_tokens[3] == 'signup':
+        return True
+
+    # check if url_path is in exemption patterns
     for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
         if re.match(url_pattern, url_path):
             return True

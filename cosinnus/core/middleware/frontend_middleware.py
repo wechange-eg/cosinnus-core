@@ -64,7 +64,7 @@ class FrontendMiddleware(MiddlewareMixin):
                     # `MainContentView._get_valid_cached_response`
 
                     # but do not change the POST v3 context if it was an ecempted frontend URL
-                    if not check_url_v3_everywhere_exempt(request.path):
+                    if not check_url_v3_everywhere_exempt(request.path, request):
                         setattr(request, REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE, True)
                 return
 
@@ -106,7 +106,7 @@ class FrontendMiddleware(MiddlewareMixin):
             matched = False
             if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
                 # in everywhere-enabled blacklist mode, we check if we *shouldn't* redirect to the v3 frontend
-                matched = not check_url_v3_everywhere_exempt(request.path)
+                matched = not check_url_v3_everywhere_exempt(request.path, request)
             else:
                 # in the whitelist mode, check only if the URL matches any of the v3 redirectable URLs
                 for url_pattern in settings.COSINNUS_V3_FRONTEND_URL_PATTERNS:
@@ -150,7 +150,7 @@ class FrontendMiddleware(MiddlewareMixin):
         if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
             if request.method == 'POST' and response.status_code != 302 and not is_ajax(request):
                 # do not redirect the POST if it was an ecempted frontend URL (API or necesseray direct calls)
-                if check_url_v3_everywhere_exempt(request.path):
+                if check_url_v3_everywhere_exempt(request.path, request):
                     return response
 
                 # save response to cache and redirect with the cache

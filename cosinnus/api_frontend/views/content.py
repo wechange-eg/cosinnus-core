@@ -260,7 +260,7 @@ class MainContentView(APIView):
         # append slash since with a missing resolver it wouldn't be auto appended and might miss matches
         if not target_url_path.endswith('/'):
             target_url_path += '/'
-        if check_url_v3_everywhere_exempt(target_url_path):
+        if check_url_v3_everywhere_exempt(target_url_path, request):
             return self.build_redirect_response(self.url)
 
         # check if we have a redirected request where `FrontendMiddleware` saved the response
