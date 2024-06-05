@@ -19,11 +19,11 @@ UPDATES = {
     'Redesign': {
         'datetime': datetime(2024, 6, 5, tzinfo=pytz.utc),
         'title': _('Redesign Update'),
-        'short_text': _('The Redesign has been launched on the entire platform!'),
+        'short_text': _('The redesign has been launched across the platform!'),
         'full_text': _(
-            'With the Redesign, the user interface has received a large update. This includes a new navigation bar, '
+            'With the redesign, the user interface has received a major update. This includes a new navigation bar, '
             'a new menu structure in groups and projects, and many small improvements in user interaction.\n\n'
-            'This is the stepping stone update for many further exciting features and interface improvements to come '
+            'This is a stepping stone update for many more exciting features and interface improvements to come '
             'in the near future!'
         ),
         'display_conditional': (
