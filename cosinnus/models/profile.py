@@ -22,6 +22,7 @@ from django.templatetags.static import static
 from django.urls import reverse
 from django.utils import translation
 from django.utils.crypto import get_random_string
+from django.utils.encoding import force_str
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
@@ -625,9 +626,15 @@ class BaseUserProfile(
         liked = LikeObject.objects.filter(user=self.user, starred=True).exclude(content_type_id__in=exclude_ids)
         objects = []
         for like in liked:
-            ct = ContentType.objects.get_for_id(like.content_type.id)
-            obj = ct.get_object_for_this_type(pk=like.object_id)
-
+            try:
+                ct = ContentType.objects.get_for_id(like.content_type.id)
+                obj = ct.get_object_for_this_type(pk=like.object_id)
+            except Exception as e:
+                logger.error(
+                    'Error when trying to access a like object!',
+                    extra={'exception': force_str(e), 'ct': like.content_type.id, 'obj.id': like.object_id},
+                )
+                continue
             # filter inactive groups
             if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
                 if not obj.is_active:
