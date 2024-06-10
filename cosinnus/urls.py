@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.templatetags.static import static
 from django.urls import include, path, re_path, reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
 from drf_yasg import openapi
@@ -58,6 +59,7 @@ app_name = 'cosinnus'
 
 urlpatterns = [
     # we do not define an index anymore and let CMS handle that.
+    path('favicon.ico', RedirectView.as_view(url=static('images/favicon.ico'), permanent=False)),
     path('users/', map.tile_view, name='user-list', kwargs={'types': ['people']}),
     path('portal/admins/', user.portal_admin_list, name='portal-admin-list'),
     path('user/<str:username>/', profile.detail_view, name='profile-detail'),
