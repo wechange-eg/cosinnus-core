@@ -1,7 +1,10 @@
+import logging
+
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.db.models import Case, Count, When
 from django.urls.base import reverse
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext
 from drf_yasg import openapi
@@ -30,6 +33,8 @@ from cosinnus.utils.user import get_unread_message_count_for_user
 from cosinnus.utils.version_history import get_version_history_for_user, mark_version_history_as_read
 from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
 from cosinnus_notifications.models import NotificationAlert, SerializedNotificationAlert
+
+logger = logging.getLogger('cosinnus')
 
 
 class SpacesView(MyGroupsClusteredMixin, APIView):
@@ -394,29 +399,35 @@ class BookmarksView(APIView):
         group_items = []
         content_items = []
         if request.user.is_authenticated:
-            liked_users = request.user.cosinnus_profile.get_user_starred_users()
-            user_items = [DashboardItem(user).as_menu_item() for user in liked_users]
-            liked_objects = request.user.cosinnus_profile.get_user_starred_objects()
-            for liked_object in liked_objects:
-                if isinstance(liked_object, get_cosinnus_group_model()):
-                    group_items.append(DashboardItem(liked_object).as_menu_item())
-                else:
-                    content_items.append(DashboardItem(liked_object).as_menu_item())
-            if group_items or user_items or content_items:
-                bookmarks = {
-                    'groups': {
-                        'header': _('Groups and Projects'),
-                        'items': group_items,
-                    },
-                    'users': {
-                        'header': _('Users'),
-                        'items': user_items,
-                    },
-                    'content': {
-                        'header': pgettext('navigation bookmarks header', 'Content'),
-                        'items': content_items,
-                    },
-                }
+            try:
+                liked_users = request.user.cosinnus_profile.get_user_starred_users()
+                user_items = [DashboardItem(user).as_menu_item() for user in liked_users]
+                liked_objects = request.user.cosinnus_profile.get_user_starred_objects()
+                for liked_object in liked_objects:
+                    if isinstance(liked_object, get_cosinnus_group_model()):
+                        group_items.append(DashboardItem(liked_object).as_menu_item())
+                    else:
+                        content_items.append(DashboardItem(liked_object).as_menu_item())
+                if group_items or user_items or content_items:
+                    bookmarks = {
+                        'groups': {
+                            'header': _('Groups and Projects'),
+                            'items': group_items,
+                        },
+                        'users': {
+                            'header': _('Users'),
+                            'items': user_items,
+                        },
+                        'content': {
+                            'header': pgettext('navigation bookmarks header', 'Content'),
+                            'items': content_items,
+                        },
+                    }
+            except Exception as e:
+                logger.error(
+                    'An error occurred in the navigation API!',
+                    extra={'exception': force_str(e), 'user': request.user},
+                )
         return Response(bookmarks)
 
 

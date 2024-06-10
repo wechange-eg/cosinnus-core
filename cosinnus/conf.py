@@ -983,6 +983,9 @@ class CosinnusConf(AppConf):
         '/.*/.*/attachmentselect/',
         '/.*/.*/users/member-invite-select2/',
         '/.*/.*/group-invite-select2/',
+        '^/.*/.*/file/.*/save',  # cosinnus file download
+        '^/.*/.*/file/.*/download',  # cosinnus file download
+        r'.*\.[\w\-_]+$',  # any direct access to files like "robots.txt"
         # extra exemptions for views that do not work well with v3
         '^/map/embed/',
         '^/.*/.*/note/embed/',
