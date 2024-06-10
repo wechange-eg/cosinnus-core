@@ -20,6 +20,7 @@ from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
 from cosinnus.utils.functions import clean_single_line_text, is_number, update_dict_recursive
 
@@ -449,12 +450,12 @@ class PortalSettingsView(APIView):
 
     def build_settings_dict(self, request):
         """Generates the complete settings dict afresh"""
+        portal = CosinnusPortal.get_current()
         privacy_policy_url = clean_single_line_text(
             render_to_string('cosinnus/v2/urls/privacy_policy_url.html', request=request)
         )
         terms_of_use_url = clean_single_line_text(render_to_string('cosinnus/v2/urls/tos_url.html', request=request))
         impressum_url = clean_single_line_text(render_to_string('cosinnus/v2/urls/impressum_url.html', request=request))
-
         settings_dict = {
             'portalName': settings.COSINNUS_PORTAL_NAME,
             'portalDisplayName': settings.COSINNUS_BASE_PAGE_TITLE_TRANS,
@@ -468,6 +469,7 @@ class PortalSettingsView(APIView):
             'cosinnusCloudEnabled': settings.COSINNUS_CLOUD_ENABLED,
             'cosinnusCloudNextcloudUrl': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
             'signupShowContributionMessage': False,
+            'usersNeedActivation': portal.users_need_activation,
             # 'theme': {...},  # set manually
             # 'setup': {'additionalSteps': ... }},  # set manually
         }
