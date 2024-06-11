@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "braces": "^2.3.1",
+    "braces": "^3.0.3",
     "exports-loader": "^0.6.3",
     "less": "^4.1.1",
     "less-plugin-clean-css": "^1.5.1",
