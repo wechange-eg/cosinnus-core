@@ -468,7 +468,7 @@ class PortalSettingsView(APIView):
             'cosinnusIsPrivatePortal': settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN,
             'cosinnusCloudEnabled': settings.COSINNUS_CLOUD_ENABLED,
             'cosinnusCloudNextcloudUrl': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
-            'signupShowContributionMessage': False,
+            'signupCredentialsScreenMessage': None,
             'usersNeedActivation': portal.users_need_activation,
             # 'theme': {...},  # set manually
             # 'setup': {'additionalSteps': ... }},  # set manually
