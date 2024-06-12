@@ -1,4 +1,5 @@
 from threading import Thread
+from unittest.mock import MagicMock
 
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
@@ -67,6 +68,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
 
         test_user_data = {
             'username': '1',
+            'password': 'pwd',
             'email': 'rockettest@example.com',
             'first_name': 'Rocket',
             'last_name': 'Test',
@@ -182,7 +184,10 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertEqual(user_info['emails'], [{'address': expected_email, 'verified': True}])
 
         def test_create_user_with_same_name(self):
-            """Test that if a new user is created with the same name as an existing user a new RC user is created."""
+            """
+            Test that if a new user is created with the same name as an existing user a new RC user is created.
+            Tests that a unique RC username is used by appending the user id.
+            """
             test_user2_data = self.test_user_data.copy()
             test_user2_data.update({'username': 2, 'email': 'rockettest2@example.com'})
             test_user2 = User.objects.create(**test_user2_data)
@@ -200,12 +205,36 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertEqual(user_info['username'], expected_unique_username)
             self.rocket_connection.users_delete(test_user2)
 
-        def test_user_update_with_same_name(self):
+        def test_create_user_with_existing_rocket_chat_username(self):
+            """Tests that creating a user with a used RC username a new user is created with a unique username."""
+            test_user2_data = self.test_user_data.copy()
+            test_user2_data.update({'username': 2, 'email': 'rockettest2@example.com'})
+            test_user2 = User.objects.create(**test_user2_data)
+            profile1 = self.test_user.cosinnus_profile
+            profile2 = test_user2.cosinnus_profile
+            mocked_rocket_username = profile1.rocket_username
+            profile2.get_new_rocket_username = MagicMock(return_value=mocked_rocket_username)
+            profile2.save()
+            rocket_connection_user = self.rocket_connection._get_user_connection(test_user2)
+            user_info = rocket_connection_user.me().json()
+            self.assertEqual(user_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
+            self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
+            expected_unique_username = f'{mocked_rocket_username}-1'.lower()
+            self.assertEqual(user_info['username'], expected_unique_username)
+            self.rocket_connection.users_delete(test_user2)
+
+        def test_user_update_with_existing_rocket_chat_username(self):
             """Test that updating a user does not change the RC username if a user with the same name also exists."""
             original_username = self.test_user.cosinnus_profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME]
             test_user2_data = self.test_user_data.copy()
             test_user2_data.update({'username': 2, 'email': 'rockettest2@example.com'})
             test_user2 = User.objects.create(**test_user2_data)
+            profile1 = self.test_user.cosinnus_profile
+            profile2 = test_user2.cosinnus_profile
+            profile2.get_new_rocket_username = MagicMock(return_value=profile1.rocket_username)
+            profile2.save()
             self.test_user.email = 'changed@exmaple.com'
             self.test_user.save()
             self.assertEqual(
