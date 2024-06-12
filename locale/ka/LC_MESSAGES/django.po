@@ -6555,7 +6555,7 @@ msgid "With the Cloud, we offer your team a new file repository with extensive o
 msgstr ""
 
 msgid "Learn more"
-msgstr ""
+msgstr "მეტის გაგრძელება"
 
 msgid "Recommended minimum dimensions: 200px x 200px (square)."
 msgstr ""
