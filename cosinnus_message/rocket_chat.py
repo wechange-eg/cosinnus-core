@@ -467,7 +467,7 @@ class RocketChatConnection:
     def has_username_changed(self, profile, rocket_user_name):
         """Check it username needs to be updated in RocketChat."""
         username = profile.get_new_rocket_username()
-        username_match = re.match(rf'^{username}\d*$', rocket_user_name)
+        username_match = re.match(rf'^{username}-?\d*$', rocket_user_name)
         return username_match is None
 
     def _get_unique_username(self, profile):
@@ -520,6 +520,7 @@ class RocketChatConnection:
         rocket_user_password = user.password or get_random_string(length=16)
         rocket_username = self._get_unique_username(profile)
         if not rocket_username:
+            # A RocketChat error occurred when fetching the user list for unique check. Return without creating user.
             return
 
         # make sure a rocketchat user with that username does not exist.
@@ -731,6 +732,7 @@ class RocketChatConnection:
         rocket_email = user_data.get('emails', [{}])[0].get('address', None)
         # rocket_mail_verified = user_data.get('emails', [{}])[0].get('verified', None)
         rocket_username = user_data.get('username')
+        # rocket_username show never be None, the check is just out of caution
         username_changed = rocket_username is None or self.has_username_changed(profile, rocket_username)
         if username_changed:
             rocket_username = self._get_unique_username(profile)
