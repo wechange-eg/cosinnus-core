@@ -56,6 +56,7 @@ class CosinnusConf(AppConf):
         '/api/v3/portal/managed_tags',
         '/api/v3/portal/userprofile_dynamicfields',
         '/api/v3/portal/settings',
+        '/api/v3/navigation',
         '/api/v3/user/profile',
         '/api/v3/signup',
         '/api/v3/content/main',
