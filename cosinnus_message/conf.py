@@ -96,7 +96,7 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Accounts_AllowUsernameChange': False,
         'Accounts_Default_User_Preferences_sidebarGroupByType': True,
         'Accounts_Default_User_Preferences_sidebarShowUnread': True,
-        'Accounts_ShowFormLogin': True,  # Required True to be able to login as bot on first deployment
+        'Accounts_ShowFormLogin': False,  # Should be set to True and single-synced for an admin to log in directly
         'Accounts_RegistrationForm': 'Disabled',
         'Accounts_RegistrationForm_LinkReplacementText': '',
         'Accounts_TwoFactorAuthentication_By_Email_Enabled': False,
@@ -154,6 +154,8 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Hide_System_Messages': ['uj', 'ul', 'ru', 'subscription-role-added', 'ut', 'subscription-role-removed', 'au'],
         # User Surveys
         'NPS_survey_enabled': False,
+        # Disable update check notifications
+        'Update_EnableChecker': False,
         # Custom login script copying the Rocketchat session cookies to the top level domain. This makes the cookies
         # available in the logout view and is used to log out the user from the Rocketchat session.
         'Custom_Script_Logged_In': """
