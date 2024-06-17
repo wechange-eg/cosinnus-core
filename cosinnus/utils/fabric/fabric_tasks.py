@@ -285,6 +285,16 @@ def collectstatic(_ctx):
 
 
 @task
+def rocketsyncupdatesetting(_ctx):
+    """A temporary task used to update a single rocketchat setting. Can be removed after it has run on all portals."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('./manage.py rocket_sync_settings --only-settings Update_EnableChecker')
+
+
+@task
 def staticown(_ctx):
     """Chowns all media files and collected-static files. Useful only after a portal transfer/copy"""
     env = get_env()

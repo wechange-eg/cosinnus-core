@@ -21,7 +21,8 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        if not settings.COSINNUS_CHAT_USER:
+        if not settings.COSINNUS_CHAT_USER or not settings.COSINNUS_CHAT_PASSWORD:
+            self.stdout.write('Not updating any Rocketchat settings as Rocketchat does not seem to be configured.')
             return
 
         only_settings = options['only_settings'].split(',') if options['only_settings'] else None
