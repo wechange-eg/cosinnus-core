@@ -325,11 +325,15 @@ def catch_all_and_log(func):
     return inner_function
 
 
-def update_dict_recursive(d, u):
-    """Recursively update a dict so that all nested dicts are also updated instead of replaced"""
+def update_dict_recursive(d, u, extend_lists=False):
+    """Recursively update a dict so that all nested dicts are also updated instead of replaced.
+    @param extend_lists: If True and both dicts have a list in the same spot, extend the list from d with
+        the items of the list from u, instead of overwriting the list from d with that from u."""
     for k, v in u.items():
         if isinstance(v, collections.abc.Mapping):
-            d[k] = update_dict_recursive(d.get(k, {}), v)
+            d[k] = update_dict_recursive(d.get(k, {}), v, extend_lists=extend_lists)
+        elif extend_lists and k in d and isinstance(d[k], list) and isinstance(v, list):
+            d[k].extend(v)
         else:
             d[k] = v
     return d

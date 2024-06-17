@@ -445,7 +445,7 @@ class PortalSettingsView(APIView):
             timeout = self.CACHE_TIMEOUT_DEV if settings.COSINNUS_IS_TEST_SERVER else self.CACHE_TIMEOUT
             cache.set(self.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % current_language, settings_dict, timeout)
         # update any settings delivered from `COSINNUS_V3_PORTAL_SETTINGS` recursively, uncached
-        update_dict_recursive(settings_dict, settings.COSINNUS_V3_PORTAL_SETTINGS)
+        update_dict_recursive(settings_dict, settings.COSINNUS_V3_PORTAL_SETTINGS, extend_lists=True)
         return Response(settings_dict)
 
     def build_settings_dict(self, request):
