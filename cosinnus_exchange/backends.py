@@ -6,6 +6,7 @@ from importlib import import_module
 
 import requests
 from django.apps import apps
+from haystack.query import SearchQuerySet
 
 from cosinnus.conf import settings
 
@@ -46,7 +47,9 @@ class ExchangeBackend:
         """
         results = self._get()
         self._delete()
+        indexed = self._get_indexed_ids()
         self._create(results)
+        self._delete_stale(indexed, results)
 
     def authenticate(self):
         """
@@ -138,3 +141,24 @@ class ExchangeBackend:
         :return:
         """
         pass
+
+    def _get_indexed_ids(self):
+        """
+        Returns the IDs of currently indexed results for the backends model and source.
+        Note: Using "pk" as it contains the url/slug of the instance, while "id" has the additional model-name prefix.
+        """
+        sqs = SearchQuerySet().models(self.model).filter(source=self.source).all()
+        ids = [result.pk for result in sqs]
+        return ids
+
+    def _delete_stale(self, indexed_ids, results):
+        """
+        Deletes stale results from the index by comparing the initially indexed ids with the results.
+        Note: The ID of a ExchangeObjectBaseModel instance is set to the result "url" so we use it here.
+        """
+        created_ids = [result.get('url') for result in results]
+        stale_ids = set(indexed_ids).difference(set(created_ids))
+        for stale_id in stale_ids:
+            self.model(url=stale_id).remove_index()
+            if settings.DEBUG:
+                print(f'>> deleted stale: {stale_id}')
