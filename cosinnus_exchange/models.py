@@ -121,11 +121,11 @@ class ExchangeObjectBaseModel(IndexingUtilsMixin, models.Model):
         self.description = kwargs.get('description')
         self.icon_image_url = kwargs.get('icon_image_url')
         self.contact_info = kwargs.get('contact_info')
-        self.mt_topics = ','.join(str(t) for t in kwargs.get('mt_topics'))
+        self.mt_topics = ','.join(str(t) for t in kwargs.get('mt_topics', []))
 
         # add unknown tags to taggit, save all ids
         all_tags = []
-        for str_tag in kwargs.get('mt_tags'):
+        for str_tag in kwargs.get('mt_tags', []):
             tag = Tag.objects.filter(name__iexact=str_tag).first()
             if not tag:
                 tag = Tag.objects.create(name=str_tag)
