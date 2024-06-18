@@ -46,7 +46,6 @@ class ExchangeBackend:
         :return:
         """
         results = self._get()
-        self._delete()
         indexed = self._get_indexed_ids()
         self._create(results)
         self._delete_stale(indexed, results)
@@ -133,14 +132,6 @@ class ExchangeBackend:
         for data in results:
             obj = self.model(**data)
             obj.save()
-
-    def _delete(self):
-        """
-        Delete existing data for model in ElasticSearch index
-        FIXME: Use _delete_by_query once we've upgraded to ES>=5
-        :return:
-        """
-        pass
 
     def _get_indexed_ids(self):
         """
