@@ -871,7 +871,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         OAUTH2_PROVIDER.update(
             {
                 'OIDC_ENABLED': True,
-                'OIDC_RSA_PRIVATE_KEY': env.str('WECHANGE_OAUTH_OIDC_PRIVATE_KEY', multiline=True),
+                'OIDC_RSA_PRIVATE_KEY': env.str('WECHANGE_OAUTH_OIDC_PRIVATE_KEY', multiline=True, default=''),
                 'SCOPES': {
                     # default scopes
                     'read': 'Read scope',
