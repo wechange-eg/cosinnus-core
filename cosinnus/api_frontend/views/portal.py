@@ -470,8 +470,10 @@ class PortalSettingsView(APIView):
             'cosinnusCloudNextcloudUrl': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
             'signupCredentialsScreenMessage': None,
             'usersNeedActivation': portal.users_need_activation,
-            # 'theme': {...},  # set manually
             # 'setup': {'additionalSteps': ... }},  # set manually
+            # 'theme': {...},  # set manually. example:
+            # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
+            #    ("loginImage" ist optional, values: "covering|contained", defaults zu covering)
         }
         field_overrides = self._build_field_overrides_dict()
         if field_overrides:
