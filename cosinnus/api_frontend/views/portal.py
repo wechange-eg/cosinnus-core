@@ -481,49 +481,52 @@ class PortalSettingsView(APIView):
         return settings_dict
 
     def _build_field_overrides_dict(self):
-        """Build the dict of overriden dynamic fields"""
+        """Build the dict of overriden dynamic fields
+        The full overridable field definition looks as follows, and each or any key can be overridden:
+        defined_name_field = {
+            'name': 'last_name',
+            'is_multi_language': False,
+            'is_multi_language_sub_field': False,
+            'in_signup': True,
+            'required': True,
+            'multiple': False,
+            'type': 'text',
+            'label': _('Last name'),
+            'legend': None,
+            'placeholder': None,
+            'is_group_header': False,
+            'parent_group_field_name': None,
+            'display_required_field_names': None,
+            'choices': None,
+        }
+        """
         field_overrides = {}
         if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
-            # for last-name required portals, we add a hardcoded last name field
-            defined_name_field = {
-                'name': 'last_name',
-                'is_multi_language': False,
-                'is_multi_language_sub_field': False,
-                'in_signup': True,
-                'required': True,
-                'multiple': False,
-                'type': 'text',
-                'label': _('Last name'),
-                'legend': None,
-                'placeholder': None,
-                'is_group_header': False,
-                'parent_group_field_name': None,
-                'display_required_field_names': None,
-                'choices': None,
+            # for last-name required portals, we make the last name field required and set its label
+            defined_name_fields = {
+                'last_name': {
+                    'name': 'last_name',
+                    'in_signup': True,
+                    'required': True,
+                    'label': _('Last name'),
+                }
             }
         else:
-            # for only-first-name required portals, we add a hardcoded display name field
-            defined_name_field = {
-                'name': 'first_name',
-                'is_multi_language': False,
-                'is_multi_language_sub_field': False,
-                'in_signup': True,
-                'required': True,
-                'multiple': False,
-                'type': 'text',
-                'label': _('Display name'),
-                'legend': _('Help other members find you and use your real name.'),
-                'placeholder': None,
-                'is_group_header': False,
-                'parent_group_field_name': None,
-                'display_required_field_names': None,
-                'choices': None,
+            # for only-first-name required portals, we change the label of the first name field to "Display name"
+            defined_name_fields = {
+                'first_name': {
+                    'name': 'first_name',
+                    'in_signup': True,
+                    'required': True,
+                    'label': _('Display name'),
+                    'legend': _('Help other members find you and use your real name.'),
+                }
             }
         # the field gets added to the signup
-        field_overrides['signup'] = {'profile': [defined_name_field]}
+        field_overrides['signup'] = {'profile': defined_name_fields}
         # and we also add that field in the first setup step again
         # note difference of 'setup' vs 'signup' keys!
-        field_overrides['setup'] = {'profile': [defined_name_field]}
+        field_overrides['setup'] = {'profile': defined_name_fields}
 
         # add a field override managed tags section if they should appear in signup
         if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
