@@ -350,7 +350,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     exclude = [
         'is_conference',
     ]
-    inlines = [CosinnusConferenceSettingsInline]
+    if settings.COSINNUS_CONFERENCES_ENABLED:
+        inlines = [CosinnusConferenceSettingsInline]
 
     ALL_TYPES_CLASSES = [CosinnusProject, CosinnusSociety, CosinnusConference]
 
@@ -685,7 +686,8 @@ class CosinnusPortalAdmin(admin.ModelAdmin):
         'top_color',
         'bottom_color',
     )
-    inlines = [CosinnusConferenceSettingsInline, CosinnusConferencePremiumCapacityInfoInline]
+    if settings.COSINNUS_CONFERENCES_ENABLED:
+        inlines = [CosinnusConferenceSettingsInline, CosinnusConferencePremiumCapacityInfoInline]
 
     def queryset(self, request):
         """Allow portals to be accessed only by superusers and Portal-Admins"""
