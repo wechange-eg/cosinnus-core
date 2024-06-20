@@ -6,6 +6,7 @@ import importlib
 import pycountry
 from django import forms
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 from django.forms.boundfield import BoundField
 from django.urls.base import reverse, reverse_lazy
@@ -218,6 +219,22 @@ class MultiAddressDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator)
         return {'form': self.form}
 
 
+class IgnoreEmptySelect2MultipleChoiceField(Select2MultipleChoiceField):
+    """Same as Select2MultipleChoiceField, will drop any passed Falsy or empty values. This is done because
+    select2's widgets sometimes send `''` empty strings along with actual choices,
+    which fails the validator."""
+
+    def to_python(self, value):
+        if not value:
+            return []
+        elif not isinstance(value, (list, tuple)):
+            raise ValidationError(self.error_messages['invalid_list'], code='invalid_list')
+        print(value)
+        ret = [str(val) for val in value if val]
+        print(ret)
+        return ret
+
+
 class _BaseSelect2DynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     """Base for the dynamic field that uses a select2 widget"""
 
@@ -225,7 +242,7 @@ class _BaseSelect2DynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator)
 
     def get_formfield_class(self):
         if self._dynamic_field_options.multiple:
-            return Select2MultipleChoiceField
+            return IgnoreEmptySelect2MultipleChoiceField
         else:
             return Select2ChoiceField
 
