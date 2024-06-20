@@ -89,6 +89,7 @@ def __deprecated__deploy(_ctx, do_maintenance=True):
     # restart_db()
     migrate(_ctx)
     start(_ctx)
+    clearportalcache(_ctx)
     compilewebpack(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
@@ -202,6 +203,7 @@ def restart(_ctx):
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
     c.run(env.reload_command)
+    clearportalcache(_ctx)
 
 
 @task
@@ -282,6 +284,16 @@ def collectstatic(_ctx):
     with c.cd(env.path):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('./manage.py collectstatic --noinput')
+
+
+@task
+def clearportalcache(_ctx):
+    """Run a django collectstatic"""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('./manage.py clear_portal_cache')
 
 
 @task
