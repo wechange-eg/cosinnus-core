@@ -534,3 +534,9 @@ class PortalSettingsView(APIView):
                 'description': _('fields.managed_tags.description'),
             }
         return field_overrides
+
+    @classmethod
+    def clear_cache(cls):
+        """Clears the portal setting dict cache entries for all languages"""
+        for language_code, __ in settings.LANGUAGES:
+            cache.delete(cls.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % language_code)

@@ -782,6 +782,10 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
     def clear_cache(self):
         cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
         cache.delete(self._ALL_PORTAL_CACHE_KEY)
+        # also clear the v3 portal settings api caches
+        from cosinnus.api_frontend.views.portal import PortalSettingsView
+
+        PortalSettingsView.clear_cache()
 
     def get_domain(self):
         """Gets the http/https protocol aware domain for this portal"""
