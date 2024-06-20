@@ -860,6 +860,28 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'PKCE_REQUIRED': False,
     }
 
+    # Enables OpenID Connect (OIDC) support of the django-oauth-toolkit.
+    # OIDC can be used with two different algorithms for signing JWT tokens "RS256" and "HS256".
+    # "HS256" has some limitation, e.g. can't be used for public clients.
+    # "RS256" requires a private ssl key to be configured via the WECHANGE_OAUTH_OIDC_PRIVATE_KEY .env variable. The
+    # public key does not need to be set but can be kept on the server for manual validation.
+    # See dokumentation at: https://django-oauth-toolkit.readthedocs.io/en/latest/oidc.html
+    _oidc_enabled = project_settings.get('OAUTH_OIDC_ENABLED', False)
+    if _oidc_enabled:
+        OAUTH2_PROVIDER.update(
+            {
+                'OIDC_ENABLED': True,
+                'OIDC_RSA_PRIVATE_KEY': env.str('WECHANGE_OAUTH_OIDC_PRIVATE_KEY', multiline=True, default=''),
+                'SCOPES': {
+                    # default scopes
+                    'read': 'Read scope',
+                    'write': 'Write scope',
+                    # add openid scope
+                    'openid': 'OpenID Connect scope',
+                },
+            }
+        )
+
     # Organizations
     COSINNUS_ORGANIZATIONS_ENABLED = False
     
