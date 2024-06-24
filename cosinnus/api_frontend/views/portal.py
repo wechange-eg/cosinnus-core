@@ -404,6 +404,91 @@ class PortalSettingsView(APIView):
     and thus uses language-dependent caching of the entire return value to reduce computational costs.
 
     Any returned values will be overridden by anything defined in conf dict `COSINNUS_V3_PORTAL_SETTINGS` (uncached).
+
+    A full example string for manually configuarable settings that aren't dynamically taken from the portal config:
+
+    {
+        "links": {
+            "privacyPolicy": "https://PORTAL/cms/datenschutzerklaerung/",
+            "termsOfUse": "https://PORTAL/cms/nutzungsbedingungen/",
+            "legalNotice": "https://PORTAL/cms/impressum/",
+            "images": {
+                "navBarLogo": {
+                    "light": "/static/img/frontend/logo.png",
+                    "dark": "/static/img/frontend/logo.png"
+                },
+                "welcome": {
+                    "light": "/static/img/frontend/signup/welcome/img.svg",
+                    "dark": "/static/img/frontend/signup/welcome/img.svg"
+                },
+               "verified": {
+                    "light": "PATH_TO_VERIFIED",
+                    "dark": "PATH_TO_VERIFIED"
+                },
+                "login": {
+                    "light": "/static/img/frontend/login/light.svg",
+                    "dark": "/static/img/frontend/login/dark.svg"
+                }
+            }
+        },
+        "theme": {
+            "loginImage": {
+                "variant": "covering|contained"  # default: covering
+            },
+           "color": "blue",  # exclusive with "brandColors"
+           "brandColors": {  # exclusive with "colors"
+               "50": "#ffffff",
+               "100": "#ffffff",
+               "200": "#ffffff",
+               "300": "#ffffff",
+               "400": "#ffffff",
+               "500": "#ffffff",
+               "600": "#ffffff",
+               "700": "#ffffff",
+               "800": "#ffffff",
+               "900": "#ffffff",
+           }
+        },
+        "setup": {  # settings for the each of the step pages of the onboarding wizards
+            "contact": {
+                "description": format_lazy("{} {}", _("Combined"), _("lazy example"))
+            },
+            "interests": {
+                "description": "..."
+            }
+        },
+        "fieldOverrides": {
+            "setup": {
+                "profile": {
+                    # this is an example full overridable field dict. single properties can be overriden as well
+                    "first_name" = {
+                        "name": "first_name",
+                        "is_multi_language": False,
+                        "is_multi_language_sub_field": False,
+                        "in_signup": True,
+                        "required": True,
+                        "multiple": False,
+                        "type": "text",
+                        "label": "...",
+                        "legend": "...",
+                        "placeholder": None,
+                        "is_group_header": False,
+                        "parent_group_field_name": None,
+                        "display_required_field_names": None,
+                        "choices": None,
+                    },
+                    ...  # more named field overrides
+                }
+            },
+            "signup": {
+                "credentials": {}  # see example above
+            },
+            "contact": {
+                "profile": {}  # see example above
+            }
+        },
+        "signupCredentialsScreenMessage": "..."  # paragraph text under the signup form
+    }
     """
 
     renderer_classes = (
