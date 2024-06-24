@@ -943,6 +943,11 @@ class CosinnusConf(AppConf):
     # paths are defined in V3_FRONTEND_URL_PATTERNS
     V3_FRONTEND_ENABLED = False
 
+    # whether the v3 frontend is its own, seperate frontend repo instead of the wechange-frontend
+    # white label solution. enables next-auth logouts.
+    # TODO: remove after all frontend instances have been updated to wechange-frontend
+    V3_FRONTEND_LEGACY = False
+
     # if this is enabled while V3_FRONTEND_ENABLED==True,
     # ALL page access are redirected to the v3 frontend
     # by appending a '?v=3' GET param,
