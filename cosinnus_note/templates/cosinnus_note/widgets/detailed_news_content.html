@@ -17,7 +17,7 @@
                             </a>
                          {% endif %}
                          
-                         {% if note.creator == user or user|is_superuser %}
+                         {% if note.creator == user or user|has_write_access:note %}
                             <a data-toggle="modal" data-target="#deleteNote_{{note.pk}}" href="#" title="{% trans "Delete note" %}"><i class="fa fa-times"></i></a>
                          {% endif %}
                          {% if note.creator == user %}
