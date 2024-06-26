@@ -1,4 +1,4 @@
-{% extends "cosinnus_event/base.html" %}
+{% extends "cosinnus/base.html" %}
 {% load i18n static cosinnus_tags widget_tweaks sekizai_tags %}
 
 {% block html_attributes %}class="mobile-noscroll"{% endblock html_attributes %}
@@ -7,29 +7,46 @@
 {% trans "Meeting" %} {{ meeting_name }}{{ block.super }}
 {% endblock page_title %}
 
-{% block breadcrumb %}
-    {% if group %}
-        <li><a href="{{ group.get_absolute_url }}">{{ group.name }}</a></li>
-        <li class="active">{% if has_bbb_video %}{% trans 'BBB-Meeting' %}{% else %}{% trans 'Fairmeeting' %}{% endif %}</li>
-    {% endif %}
-{% endblock %}
-
 {% block og_image %}{% if group and group.attached_images %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ group.attached_images.0.static_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock og_image %}
 {% block og_title %}{{ meeting_name }} - {{ block.super }}{% endblock og_title %}
 {% block og_description %}{% if group %}{{ group.description|truncatewords:30 }}{% else %}{{ block.super }}{% endif %}{% endblock og_description %}
 
-{% block content %}
-{% endblock content %}
+
+{% block main_page_header %}
+
+	{% if user.is_authenticated %}
+		{% comment %} Combobox dropdown and breadcrumb {% endcomment %}
+	    <div class="row">
+	        <!-- start with left navigation -->
+	        <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav {% endif %}col-lg-3 col-md-3"><!-- left column -->
+	            {% if group %}
+	                {% cosinnus_menu "cosinnus/appsmenu.html" %}
+	            {% endif %}
+	        </div><!-- left column -->
+	        <!-- now the content -->
+	        <div class="col-lg-9 col-md-9"><!-- right column -->
+	            <ol class="breadcrumb">
+	                {% include 'cosinnus/breadcrumb.html' %}
+	                {% if group %}
+                      <li class="active">{% if has_bbb_video %}{% trans 'BBB-Meeting' %}{% else %}{% trans 'Fairmeeting' %}{% endif %}</li>
+                  {% endif %}
+	            </ol>
+	        </div><!-- right column -->
+	    </div><!-- row -->
+    {% endif %}
+
+    {% include 'cosinnus/messages.html' %}
+{% endblock main_page_header %}
+
 
 {% block main_page %}
-	{{ block.super }}
-	
+
 	<div class="row">
-	    <div class="col-lg-12 col-md-12">    
+	    <div class="col-lg-12 col-md-12">
 	        <div class="content-box"> <!-- a box with semi transparent background -->
 	            {% include 'cosinnus/conference/conference_meeting_single.html' %}
 	        </div><!-- content-box -->
 	    </div>
 	</div> <!-- row -->
-    
+
 {% endblock main_page %}
