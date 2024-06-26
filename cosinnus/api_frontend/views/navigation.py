@@ -3,6 +3,7 @@ import logging
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.db.models import Case, Count, When
+from django.templatetags.static import static
 from django.urls.base import reverse
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
@@ -1217,7 +1218,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
 
         # home
         current_portal = CosinnusPortal.get_current()
-        home_image = current_portal.get_logo_image_url()
+        home_image = '%s%s' % (current_portal.get_domain(), static(settings.COSINNUS_PORTAL_LOGO_NAVBAR_IMAGE_URL))
         if settings.COSINNUS_V3_MENU_HOME_LINK:
             home_item = MenuItem(
                 _('Home'), settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-home', image=home_image, id='Home'

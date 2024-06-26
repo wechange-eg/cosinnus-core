@@ -800,7 +800,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
 
     def get_logo_image_url(self):
         """Returns the portal logo static image URL"""
-        return '%s%s' % (self.get_domain(), static('img/logo-icon.png'))
+        return '%s%s' % (self.get_domain(), static(settings.COSINNUS_PORTAL_LOGO_ICON_IMAGE_URL))
 
     def __str__(self):
         return self.name
