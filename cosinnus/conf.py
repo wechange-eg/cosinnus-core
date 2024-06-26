@@ -1030,6 +1030,14 @@ class CosinnusConf(AppConf):
     # (str classpath)
     V3_MENU_PORTAL_LINKS_DROPIN = None
 
+    # default CosinnusPortal logo image url, shown in the top left navigation bar
+    # (will be used with a `static()`) call
+    PORTAL_LOGO_NAVBAR_IMAGE_URL = 'img/v2_navbar_brand.png'
+
+    # default CosinnusPortal logo icon image url
+    # (will be used with a `static()`) call
+    PORTAL_LOGO_ICON_IMAGE_URL = 'img/logo-icon.png'
+
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
 
