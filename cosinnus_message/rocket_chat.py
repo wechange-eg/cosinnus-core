@@ -1,4 +1,3 @@
-import json
 import logging
 import mimetypes
 import os
@@ -287,20 +286,18 @@ class RocketChatConnection:
                 'User %i/%i. Success: %s \t %s' % (i, count, str(result), user.email),
             )
 
-    def _get_rocket_users_list(self, filter_query):
+    def _get_rocket_users_list(self):
         """
         Get complete Rocket.Chat user list.
-        @param filter_query: query passed to the users_list api call (See https://developer.rocket.chat/reference/api/rest-api#query-parameters)
         @return:
-            - A list of rocketchat user respones if users were found for the query.
-            - An empty list of no users were found for the query.
-            - `None` if an error retrieving the users occured.
+            - A list of all rocketchat users
+            - `None` if an error retrieving the users occurred.
         """
         rocket_users = []
         count = 100
         offset = 0
         while True:
-            response = self.rocket.users_list(count=count, offset=offset, query=filter_query).json()
+            response = self.rocket.users_list(count=count, offset=offset).json()
             if not response.get('success'):
                 self.stderr.write(':_get_rocket_users_list:' + str(response), response)
                 # setting the users list to None to avoid working with incomplete user lists
@@ -319,7 +316,7 @@ class RocketChatConnection:
         :return:
         """
         # Get existing rocket users
-        rocket_users_list = self._get_rocket_users_list(filter_query='')
+        rocket_users_list = self._get_rocket_users_list()
         if rocket_users_list is None:
             # An error occurred fetching the user list.
             return
@@ -467,13 +464,18 @@ class RocketChatConnection:
         else:
             return self.users_create(user, request)
 
+    def has_username_changed(self, profile, rocket_user_name):
+        """Check it username needs to be updated in RocketChat."""
+        username = profile.get_new_rocket_username()
+        username_match = re.match(rf'^{username}(-\d+)?$', rocket_user_name)
+        return username_match is None
+
     def _get_unique_username(self, profile):
         """Generates a unique username considering existing Rocket.Chat users."""
         username = profile.get_new_rocket_username()
 
         # get existing rocket users matching the username.
-        filter_query = json.dumps({'username': {'$regex': username}})
-        rocket_users = self._get_rocket_users_list(filter_query=filter_query)
+        rocket_users = self._get_rocket_users_list()
         if rocket_users is None:
             # An error occurred fetching the user list.
             return
@@ -518,6 +520,7 @@ class RocketChatConnection:
         rocket_user_password = user.password or get_random_string(length=16)
         rocket_username = self._get_unique_username(profile)
         if not rocket_username:
+            # A RocketChat error occurred when fetching the user list for unique check. Return without creating user.
             return
 
         # make sure a rocketchat user with that username does not exist.
@@ -728,23 +731,35 @@ class RocketChatConnection:
         profile = user.cosinnus_profile
         rocket_email = user_data.get('emails', [{}])[0].get('address', None)
         # rocket_mail_verified = user_data.get('emails', [{}])[0].get('verified', None)
-        rocket_username = self._get_unique_username(profile)
-        if not rocket_username:
-            return
-        if force_user_update or user_data.get('name') != rocket_username or rocket_email != profile.rocket_user_email:
+        rocket_username = user_data.get('username')
+        # rocket_username show never be None, the check is just out of caution
+        username_changed = rocket_username is None or self.has_username_changed(profile, rocket_username)
+        if username_changed:
+            rocket_username = self._get_unique_username(profile)
+            if not rocket_username:
+                return
+        email_changed = rocket_email != profile.rocket_user_email
+        active_changed = user_data.get('active') != user.is_active
+        if force_user_update or username_changed or email_changed or active_changed:
             data = {
                 'username': rocket_username,
                 'name': profile.get_external_full_name(),
                 'bio': profile.get_absolute_url(),
-                'active': user.is_active,
                 'verified': True,  # we keep verified at True always and provide a fake email for unverified accounts, since rocket is broken and still sends emails to unverified accounts # noqa
                 'requirePasswordChange': False,
             }
             # Update email only if it has changed to avoid rate limiting by the RocketChat server.
-            if rocket_email != profile.rocket_user_email:
+            if email_changed:
                 data.update(
                     {
                         'email': profile.rocket_user_email,
+                    }
+                )
+            # Update active only if it has changed
+            if active_changed:
+                data.update(
+                    {
+                        'active': user.is_active,
                     }
                 )
             # updating the password invalidates existing user sessions, so use it only
