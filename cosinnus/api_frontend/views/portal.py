@@ -557,6 +557,7 @@ class PortalSettingsView(APIView):
             'cosinnusCloudNextcloudUrl': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
             'signupCredentialsScreenMessage': None,
             'usersNeedActivation': portal.users_need_activation,
+            'currentLanguage': get_language(),
             # 'setup': {'additionalSteps': ... }},  # set manually
             # 'theme': {...},  # set manually. example:
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
@@ -629,7 +630,17 @@ class PortalSettingsView(APIView):
                 }
             }
         # the field gets added to the signup
-        field_overrides['signup'] = {'profile': copy(defined_name_fields)}
+        field_overrides['signup'] = {
+            'signup': {
+                'email': {
+                    'legend': _(
+                        'This will be used as your login. '
+                        + 'Notification emails will be sent to this address (if you want to receive them).'
+                    ),
+                },
+            },
+            'profile': copy(defined_name_fields),
+        }
         # and we also add that field in the first setup step again
         # note difference of 'setup' vs 'signup' keys!
         field_overrides['setup'] = {'profile': copy(defined_name_fields)}
