@@ -833,6 +833,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
 
     # django-oauth-toolkit settings
     OAUTH2_PROVIDER = {
+        'OAUTH2_VALIDATOR_CLASS': 'cosinnus.oauth_validators.CustomOAuth2Validator',
         'PKCE_REQUIRED': False,
     }
 
