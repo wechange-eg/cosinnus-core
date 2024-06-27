@@ -467,7 +467,7 @@ class RocketChatConnection:
     def has_username_changed(self, profile, rocket_user_name):
         """Check it username needs to be updated in RocketChat."""
         username = profile.get_new_rocket_username()
-        username_match = re.match(rf'^{username}-?\d*$', rocket_user_name)
+        username_match = re.match(rf'^{username}(-\d+)?$', rocket_user_name)
         return username_match is None
 
     def _get_unique_username(self, profile):
