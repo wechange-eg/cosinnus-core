@@ -217,6 +217,10 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         with open('.env', 'a') as envfile:
             envfile.write(f'WECHANGE_SECRET_KEY={SECRET_KEY}\n')
 
+    # Proxy settings
+    # Make build_absolute_uri use "https" behind the proxy. E.g. this is needed for the OpenID auto-discovery view.
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
     """ --------------- SESSION/COOKIES ---------------- """
 
     # use session storage for CSRF instead of cookie
