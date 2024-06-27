@@ -1077,14 +1077,6 @@ class RocketChatConnection:
 
         return room_id
 
-    def delete_private_room(self, room_id):
-        """Delete a private room by room_id.
-        @param room_id: rocket chat room id
-        """
-        response = self.rocket.groups_delete(room_id=room_id).json()
-        if not response.get('success'):
-            logger.error('RocketChat: Direct delete_private_group groups_delete', extra={'response': response})
-
     def groups_create(self, group):
         """
         Create default channels for group or project, if they doesn't exist yet:
@@ -1229,6 +1221,26 @@ class RocketChatConnection:
                     success = False
         return success
 
+    def groups_names_changed(self, group):
+        """Check if the default channels names changed for a group or project."""
+        changed = False
+        for room_key, room_name_code in settings.COSINNUS_ROCKET_GROUP_ROOM_NAMES_MAP.items():
+            room_id = self.get_group_id(group, room_key=room_key)
+            if room_id:
+                response = self.rocket.groups_info(room_id=room_id).json()
+                if not response.get('success'):
+                    logger.error(
+                        'RocketChat: groups_name_changed' + response.get('errorType', '<No Error Type>'),
+                        extra={'response': response},
+                    )
+                    continue
+                group_data = response.get('group')
+                room_name = room_name_code % group.slug
+                if room_name != group_data.get('name'):
+                    changed = True
+                    break
+        return changed
+
     def group_set_topic_to_url(self, group, specific_room_keys=None):
         """Sets the CosinnusGroup url as topic of the group's room
         @param specific_room_keysspecific_room_keys: if set to a list, the topic will only be
@@ -1305,6 +1317,18 @@ class RocketChatConnection:
                         extra={'response': response},
                     )
                     success = False
+        return success
+
+    def groups_room_delete(self, room_id=None):
+        """Deletes a group doom by its room_id."""
+        success = True
+        response = self.rocket.groups_delete(room_id=room_id).json()
+        if not response.get('success'):
+            logger.error(
+                'RocketChat: groups_room_delete ' + response.get('errorType', '<No Error Type>'),
+                extra={'response': response},
+            )
+            success = False
         return success
 
     def invite_or_kick_for_membership(self, membership):

@@ -253,7 +253,9 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
 
         def setUp(self):
             super().setUp()
-            self.test_group = CosinnusSociety.objects.create(name=self.test_group_name)
+            with self.runCeleryTasks():
+                self.test_group = CosinnusSociety.objects.create(name=self.test_group_name)
+            self.test_group.refresh_from_db()
             self.test_group_room_id = self.test_group.settings.get(
                 f'{PROFILE_SETTING_ROCKET_CHAT_ID}_{settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS[0]}', None
             )
@@ -289,11 +291,20 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertEqual(group_info['group']['name'], self.test_group_name.lower())
 
         def test_group_delete(self):
-            self.rocket_connection.groups_delete(self.test_group)
+            with self.runCeleryTasks():
+                self.test_group.delete()
             group_info = self.rocket_connection.rocket.groups_info(room_id=self.test_group_room_id).json()
             self.assertFalse(group_info['success'])
             self.assertEqual(group_info['errorType'], 'error-room-not-found')
             self.test_group = None
+
+        def test_group_rename(self):
+            with self.runCeleryTasks():
+                self.test_group.name = 'TestGroupRenamed'
+                self.test_group.save()
+            group_info = self.rocket_connection.rocket.groups_info(room_id=self.test_group_room_id).json()
+            self.assertTrue(group_info['success'])
+            self.assertEqual(group_info['group']['name'], 'testgrouprenamed')
 
         def test_group_deactivate_reactivate(self):
             # Note: Found no better way to find out if a group is not archived via API apart from archive call errors.
@@ -301,13 +312,15 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertTrue(group_archived['success'])
             group_archived = self.rocket_connection.rocket.groups_unarchive(room_id=self.test_group_room_id).json()
             self.assertTrue(group_archived['success'])
-            self.test_group.is_active = False
-            self.test_group.save()
+            with self.runCeleryTasks():
+                self.test_group.is_active = False
+                self.test_group.save()
             group_archived = self.rocket_connection.rocket.groups_archive(room_id=self.test_group_room_id).json()
             self.assertFalse(group_archived['success'])
             self.assertTrue(group_archived['errorType'], 'error-room-archived')
-            self.test_group.is_active = True
-            self.test_group.save()
+            with self.runCeleryTasks():
+                self.test_group.is_active = True
+                self.test_group.save()
             group_archived = self.rocket_connection.rocket.groups_archive(room_id=self.test_group_room_id).json()
             self.assertTrue(group_archived['success'])
 
@@ -417,7 +430,9 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
         @override_settings(NEWW_FORUM_GROUP_SLUG='test-forum')
         @override_settings(NEWW_DEFAULT_USER_GROUPS=['test-forum'])
         def test_forum_group_membership(self):
-            self.test_forum = CosinnusSociety.objects.create(slug='test-forum', name='test-forum')
+            with self.runCeleryTasks():
+                self.test_forum = CosinnusSociety.objects.create(slug='test-forum', name='test-forum')
+            self.test_forum.refresh_from_db()
             room_id = self.test_forum.settings[
                 f'{PROFILE_SETTING_ROCKET_CHAT_ID}_{settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS[0]}'
             ]
