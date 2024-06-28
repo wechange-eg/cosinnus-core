@@ -56,9 +56,12 @@ class CosinnusConf(AppConf):
         '/api/v3/portal/managed_tags',
         '/api/v3/portal/userprofile_dynamicfields',
         '/api/v3/portal/settings',
+        '/api/v3/navigation',
         '/api/v3/user/profile',
         '/api/v3/signup',
         '/api/v3/content/main',
+        '/favicon.ico',
+        '/robots.txt',
         '/o/',
         '/group/forum/cloud/oauth2/',
         f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
@@ -940,6 +943,11 @@ class CosinnusConf(AppConf):
     # paths are defined in V3_FRONTEND_URL_PATTERNS
     V3_FRONTEND_ENABLED = False
 
+    # whether the v3 frontend is its own, seperate frontend repo instead of the wechange-frontend
+    # white label solution. enables next-auth logouts.
+    # TODO: remove after all frontend instances have been updated to wechange-frontend
+    V3_FRONTEND_LEGACY = False
+
     # if this is enabled while V3_FRONTEND_ENABLED==True,
     # ALL page access are redirected to the v3 frontend
     # by appending a '?v=3' GET param,
@@ -1021,6 +1029,14 @@ class CosinnusConf(AppConf):
     # navbar links returned in various v3 navigation API endpoints
     # (str classpath)
     V3_MENU_PORTAL_LINKS_DROPIN = None
+
+    # default CosinnusPortal logo image url, shown in the top left navigation bar
+    # (will be used with a `static()`) call
+    PORTAL_LOGO_NAVBAR_IMAGE_URL = 'img/v2_navbar_brand.png'
+
+    # default CosinnusPortal logo icon image url
+    # (will be used with a `static()`) call
+    PORTAL_LOGO_ICON_IMAGE_URL = 'img/logo-icon.png'
 
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True

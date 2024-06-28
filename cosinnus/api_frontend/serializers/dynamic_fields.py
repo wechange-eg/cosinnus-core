@@ -60,7 +60,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                     ),
                     required=field_options.required if not self.all_fields_optional else False,
                     allow_empty=not field_options.required if self.all_fields_optional else True,
-                    default=list if field_options.required else field_options.default or list,
+                    default=drf_empty if field_options.required else field_options.default or list,
                     source=f'cosinnus_profile.dynamic_fields.{field_name}',
                     help_text=f'This is a dynamic field of data type: <List>({field_options.type})',
                 )
