@@ -4,7 +4,9 @@ from django.contrib.auth import get_user_model
 from cosinnus.celery import app as celery_app
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.tasks import CeleryThreadTask
+from cosinnus_event.models import Event
 from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
+from cosinnus_note.models import Note
 
 
 class RocketChatTask(CeleryThreadTask):
@@ -114,3 +116,41 @@ def rocket_group_membership_update_task(user_id, group_id):
                 return
 
             rocket.groups_kick(user, group)
+
+
+def _get_relay_message_instance(model_name, instance_id):
+    """Helper to get the instance for a relay message by model-name and id."""
+    model = None
+    if model_name == 'note':
+        model = Note
+    elif model_name == 'event':
+        model = Event
+    instance = model.objects.filter(pk=instance_id).first()
+    return instance
+
+
+@celery_app.task(base=RocketChatTask)
+def rocket_relay_message_create_task(model_name, instance_id):
+    """Create a relayed message."""
+    instance = _get_relay_message_instance(model_name, instance_id)
+    if instance:
+        rocket = RocketChatConnection()
+        rocket.relay_message_create(instance)
+
+
+@celery_app.task(base=RocketChatTask)
+def rocket_relay_message_update_task(model_name, instance_id):
+    """Update a relayed massage."""
+    instance = _get_relay_message_instance(model_name, instance_id)
+    if instance:
+        rocket = RocketChatConnection()
+        rocket.relay_message_update(instance)
+
+
+@celery_app.task(base=RocketChatTask)
+def rocket_relay_message_delete_task(group_id, room_key, msg_id):
+    """Delete a relayed message."""
+    rocket = RocketChatConnection()
+    group = CosinnusGroup.objects.filter(pk=group_id).first()
+    if group:
+        rocket.relay_message_delete_in_group(group, room_key, msg_id)

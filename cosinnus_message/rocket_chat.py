@@ -1600,21 +1600,25 @@ class RocketChatConnection:
         # Update note settings without triggering signals to prevent cycles
         # type(note).objects.filter(pk=note.pk).update(settings=note.settings)
 
+    def relay_message_delete_in_group(self, group, room_key, msg_id):
+        """Delete a message by id in a group."""
+        room_id = self.get_group_id(group, room_key=room_key, create_if_not_exists=False)
+        if room_id:
+            response = self.rocket.chat_delete(room_id=room_id, msg_id=msg_id).json()
+            if not response.get('success'):
+                if response.get('error', None) == 'The room id provided does not match where the message is from.':
+                    # if the room has moved, we cannot reach the note anymore, ignore this error
+                    return
+                logger.error('RocketChat: notes_delete did not return a success response', extra={'response': response})
+
     def relay_message_delete(self, instance):
         """Delete message for objects implementing the RelayMessageMixin in default channel of group/project"""
         room_key = settings.COSINNUS_ROCKET_NOTE_POST_RELAY_ROOM_KEY
         if not room_key:
             return
         msg_id = instance.settings.get(ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY)
-        room_id = self.get_group_id(instance.group, room_key=room_key)
-        if not msg_id or not room_id:
-            return
-        response = self.rocket.chat_delete(room_id=room_id, msg_id=msg_id).json()
-        if not response.get('success'):
-            if response.get('error', None) == 'The room id provided does not match where the message is from.':
-                # if the room has moved, we cannot reach the note anymore, ignore this error
-                return
-            logger.error('RocketChat: notes_delete did not return a success response', extra={'response': response})
+        if msg_id:
+            self.relay_message_delete_in_group(instance.group, room_key, msg_id)
 
     def unread_messages(self, user):
         """

@@ -19,7 +19,12 @@ from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, Cos
 from cosinnus.models.profile import PROFILE_SETTING_ROCKET_CHAT_ID
 from cosinnus_event.models import Event
 from cosinnus_message import tasks
-from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException, delete_cached_rocket_connection
+from cosinnus_message.rocket_chat import (
+    ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY,
+    RocketChatConnection,
+    RocketChatDownException,
+    delete_cached_rocket_connection,
+)
 from cosinnus_note.models import Note
 
 logger = logging.getLogger(__name__)
@@ -249,29 +254,11 @@ if settings.COSINNUS_ROCKET_ENABLED:
             # Don't relay conference proxy events.
             return
         if created:
-            # Not a threaded call as event and note settings are updated
-            try:
-                rocket = RocketChatConnection()
-                rocket.relay_message_create(instance)
-            except RocketChatDownException:
-                logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-            except Exception as e:
-                logger.exception(e)
+            # Not a threaded call as event and note settings are updated.
+            # TODO: moved to Celery task. Not sure why this was blocking.
+            tasks.rocket_relay_message_create_task.delay(instance._meta.model_name, instance.pk)
         else:
-            # prefetch related objects and do a threaded call
-            prefetch_related_objects([instance], 'group__portal')
-
-            class CosinnusRocketRelayMessageUpdateThread(Thread):
-                def run(self):
-                    try:
-                        rocket = RocketChatConnection()
-                        rocket.relay_message_update(instance)
-                    except RocketChatDownException:
-                        logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                    except Exception as e:
-                        logger.exception(e)
-
-            CosinnusRocketRelayMessageUpdateThread().start()
+            tasks.rocket_relay_message_update_task.delay(instance._meta.model_name, instance.pk)
 
     @receiver(post_delete, sender=Event)
     @receiver(post_delete, sender=Note)
@@ -279,19 +266,10 @@ if settings.COSINNUS_ROCKET_ENABLED:
         if hasattr(instance, 'is_hidden_group_proxy') and instance.is_hidden_group_proxy:
             # Conference proxy events are not relayed.
             return
-
-        # do a threaded call
-        class CosinnusRocketRelayMessageDeleteThread(Thread):
-            def run(self):
-                try:
-                    rocket = RocketChatConnection()
-                    rocket.relay_message_delete(instance)
-                except RocketChatDownException:
-                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                except Exception as e:
-                    logger.exception(e)
-
-        CosinnusRocketRelayMessageDeleteThread().start()
+        room_key = settings.COSINNUS_ROCKET_NOTE_POST_RELAY_ROOM_KEY
+        msg_id = instance.settings.get(ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY)
+        if room_key and msg_id:
+            tasks.rocket_relay_message_delete_task(instance.group.pk, room_key, msg_id)
 
     @receiver(signals.pre_userprofile_delete)
     def handle_user_deleted(sender, profile, **kwargs):
