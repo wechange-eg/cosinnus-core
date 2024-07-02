@@ -22,8 +22,44 @@ class RocketChatTask(CeleryThreadTask):
 
 
 @celery_app.task(base=RocketChatTask)
+def rocket_user_update_task(user_id, force_update, update_password):
+    """Update a user in RocketChat."""
+    rocket = RocketChatConnection()
+    user = get_user_model().objects.filter(pk=user_id).first()
+    if user:
+        rocket.users_update(user, force_user_update=force_update, update_password=update_password)
+
+
+@celery_app.task(base=RocketChatTask)
+def rocket_user_deactivate_task(user_id):
+    """Deactivate a user in RocketChat."""
+    rocket = RocketChatConnection()
+    user = get_user_model().objects.filter(pk=user_id).first()
+    if user:
+        rocket.users_disable(user)
+
+
+@celery_app.task(base=RocketChatTask)
+def rocket_user_reactivate_task(user_id):
+    """Reactivate a user in RocketChat."""
+    rocket = RocketChatConnection()
+    user = get_user_model().objects.filter(pk=user_id).first()
+    if user:
+        rocket.users_enable(user)
+
+
+@celery_app.task(base=RocketChatTask)
+def rocket_user_sanity_task(user_id):
+    """Ensure RocketChat user account sanity."""
+    rocket = RocketChatConnection()
+    user = get_user_model().objects.filter(pk=user_id).first()
+    if user:
+        rocket.ensure_user_account_sanity(user)
+
+
+@celery_app.task(base=RocketChatTask)
 def rocket_group_update_task(group_id):
-    """Creates or updates a RocketChat channels for a group."""
+    """Create or update a RocketChat channels for a group."""
     rocket = RocketChatConnection()
     group = CosinnusGroup.objects.filter(pk=group_id).first()
     if group:
@@ -41,7 +77,7 @@ def rocket_group_update_task(group_id):
 
 @celery_app.task(base=RocketChatTask)
 def rocket_group_archive_task(group_id):
-    """Archives a group."""
+    """Archive a group."""
     rocket = RocketChatConnection()
     group = CosinnusGroup.objects.filter(pk=group_id).first()
     if group:
@@ -58,7 +94,7 @@ def rocket_group_archive_task(group_id):
 
 @celery_app.task(base=RocketChatTask)
 def rocket_group_unarchive_task(group_id):
-    """Unarchives a group."""
+    """Unarchive a group."""
     rocket = RocketChatConnection()
     group = CosinnusGroup.objects.filter(pk=group_id).first()
     if group:
@@ -75,7 +111,7 @@ def rocket_group_unarchive_task(group_id):
 
 @celery_app.task(base=RocketChatTask)
 def rocket_group_room_delete_task(room_id):
-    """Deletes a group room."""
+    """Delete a group room."""
     rocket = RocketChatConnection()
     rocket.groups_room_delete(room_id)
 
@@ -94,7 +130,7 @@ def _group_is_conference_without_default_channel(rocket, group):
 
 @celery_app.task(base=RocketChatTask)
 def rocket_group_membership_update_task(user_id, group_id):
-    """Updates RocketChat default channel member status for a group membership."""
+    """Update the RocketChat default channel member status for a group membership."""
     rocket = RocketChatConnection()
     membership = CosinnusGroupMembership.objects.filter(user_id=user_id, group_id=group_id).first()
     if membership:

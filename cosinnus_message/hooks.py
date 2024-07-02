@@ -1,10 +1,8 @@
 import logging
-from threading import Thread
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.signals import user_logged_in
-from django.db.models import prefetch_related_objects
 from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
 from oauth2_provider.signals import app_authorized
@@ -23,7 +21,6 @@ from cosinnus_message.rocket_chat import (
     ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY,
     RocketChatConnection,
     RocketChatDownException,
-    delete_cached_rocket_connection,
 )
 from cosinnus_note.models import Note
 
@@ -55,58 +52,20 @@ if settings.COSINNUS_ROCKET_ENABLED:
                 ]
             )
             password_updated = bool(instance.password != old_instance.password)
-
-            # do a threaded call
-            class CosinnusRocketUpdateThread(Thread):
-                def run(self):
-                    try:
-                        rocket = RocketChatConnection()
-                        rocket.users_update(instance, force_user_update=force, update_password=password_updated)
-                    except RocketChatDownException:
-                        logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                    except Exception as e:
-                        logger.exception(e)
-
-            CosinnusRocketUpdateThread().start()
+            tasks.rocket_user_update_task.delay(instance.pk, force, password_updated)
 
     @receiver(user_logged_in)
     def handle_user_logged_in(sender, user, request, **kwargs):
         """Checks if the user exists in rocketchat, and if not, attempts to create them"""
-        # we're Threading this entire hook as it might take a while
         if user.is_guest:
             return
-
-        class UserSanityCheck(Thread):
-            def run(self):
-                try:
-                    rocket = RocketChatConnection()
-                    rocket.ensure_user_account_sanity(user)
-                except RocketChatDownException:
-                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                except Exception as e:
-                    logger.exception(e)
-
-        UserSanityCheck().start()
+        tasks.rocket_user_sanity_task.delay(user.pk)
 
     @receiver(signals.user_password_changed)
     def handle_user_password_updated(sender, user, **kwargs):
         if user.is_guest:
             return
-        # prefetch related objects and do a threaded call
-        prefetch_related_objects([user], 'cosinnus_profile')
-
-        class CosinnusRocketPasswordUpdateThread(Thread):
-            def run(self):
-                try:
-                    rocket = RocketChatConnection()
-                    rocket.users_update(user, force_user_update=True, update_password=True)
-                    delete_cached_rocket_connection(user.cosinnus_profile.rocket_username)
-                except RocketChatDownException:
-                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                except Exception as e:
-                    logger.exception(e)
-
-        CosinnusRocketPasswordUpdateThread().start()
+        tasks.rocket_user_update_task.delay(user.pk, force_update=True, update_password=True)
 
     @receiver(post_save, sender=UserProfile)
     def handle_profile_updated(sender, instance, created, **kwargs):
@@ -126,20 +85,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
             except Exception as e:
                 logger.exception(e)
         else:
-            # prefetch related objects and do a threaded call
-            prefetch_related_objects([instance.user], 'cosinnus_profile')
-
-            class CosinnusRocketProfileUpdateThread(Thread):
-                def run(self):
-                    try:
-                        rocket = RocketChatConnection()
-                        rocket.users_update(instance.user)
-                    except RocketChatDownException:
-                        logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                    except Exception as e:
-                        logger.exception(e)
-
-            CosinnusRocketProfileUpdateThread().start()
+            tasks.rocket_user_update_task.delay(instance.user.pk, force_update=True, update_password=True)
 
     @receiver(pre_save, sender=CosinnusSociety)
     @receiver(pre_save, sender=CosinnusProject)
@@ -187,40 +133,13 @@ if settings.COSINNUS_ROCKET_ENABLED:
         """Deactivate a rocketchat user account"""
         if user.is_guest:
             return
-        # prefetch related objects and do a threaded call
-        prefetch_related_objects([user], 'cosinnus_profile')
-
-        class CosinnusRocketUserDeactivateThread(Thread):
-            def run(self):
-                try:
-                    rocket = RocketChatConnection()
-                    rocket.users_disable(user)
-                except RocketChatDownException:
-                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                except Exception as e:
-                    logger.exception(e)
-
-        CosinnusRocketUserDeactivateThread().start()
+        tasks.rocket_user_deactivate_task.delay(user.pk)
 
     @receiver(signals.user_activated)
     def user_activated(sender, user, **kwargs):
         """Activate a rocketchat user account"""
         if user.is_guest:
             return
-        # prefetch related objects and do a threaded call
-        prefetch_related_objects([user], 'cosinnus_profile')
-
-        class CosinnusRocketUserActivateThread(Thread):
-            def run(self):
-                try:
-                    rocket = RocketChatConnection()
-                    rocket.users_enable(user)
-                except RocketChatDownException:
-                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                except Exception as e:
-                    logger.exception(e)
-
-        CosinnusRocketUserActivateThread().start()
 
     @receiver(pre_save, sender=CosinnusGroupMembership)
     def handle_membership_changed(sender, instance, **kwargs):
