@@ -23,7 +23,7 @@ class CustomOAuth2Validator(OAuth2Validator):
 
             avatar_url = user.cosinnus_profile.avatar.url if user.cosinnus_profile.avatar else ''
             if avatar_url:
-                avatar_url = request.build_absolute_uri(avatar_url)
+                avatar_url = portal.get_absolute_url() + avatar_url
 
             claims.update(
                 {
