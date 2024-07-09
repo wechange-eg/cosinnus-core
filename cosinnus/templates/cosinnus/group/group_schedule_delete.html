@@ -1,0 +1,66 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+	   {{ group.trans.DELETE }}: {{ group.name }}
+{% endblock %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">
+            {{ group.trans.DELETE }}: {{ group.name }}
+        </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/group/leftnav_group.html' with group=group current_page='groupdelete' %}
+{% endblock leftnav %}
+
+
+{% block content %}
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        
+	    {% if not activate %}
+	        <div class="alert alert-danger alert-dismissable">
+	            <i class="fa fa-exclamation-triangle fa-3x"></i>
+	            <p>{% trans 'Warning!' %}</p>
+	            <p>{{ group.trans.DELETE_WARNING }}</p>
+	        </div>
+	    {% endif %}
+    
+        <h2> 
+          {{ group.trans.DELETE }}: {{ group.name }}
+        </h2>
+
+        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
+        <div class="row">
+            <!-- explanation text -->
+            <div class="col-md-12">
+              <div class="textfield transparent">
+                  {{ group.trans.DELETE_EXPLANATION|textfield }}
+              </div>
+            </div>
+        </div><!-- row -->
+    </div>
+    
+    <form method="POST" action=".">{% csrf_token %}
+	    <button type="submit" class="btn btn-{% if activate %}emphasized{% else %}default{% endif %}">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-trash"></i>
+	                </span>
+	                <div class="media-body">
+                        {% trans "Delete" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    </form>
+
+{% endblock %}
+
+
+

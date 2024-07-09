@@ -523,6 +523,9 @@ class CosinnusConf(AppConf):
     # has been run, previous values of all existing groups will remain unchanged!
     GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
 
+    # the duration in days from which a user deletes a group until its actual deletion is triggererd
+    GROUP_DELETION_SCHEDULE_DAYS = 30
+
     # if True, enables an option to choose related groups/projects in the groups/projects
     # settings showing the chosen ones on microsite and dashboard
     RELATED_GROUPS_PROJECTS_ENABLED = True
