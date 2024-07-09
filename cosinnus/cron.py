@@ -21,6 +21,7 @@ from cosinnus.models.storage import TemporaryData
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.views.group import delete_group
 from cosinnus.views.profile import delete_userprofile
 from cosinnus_conference.utils import update_conference_premium_status
 from cosinnus_event.models import Event
@@ -234,3 +235,36 @@ class DeleteOldSentEmailLogs(CosinnusCronJobBase):
         count = queryset.count()
         queryset.delete()
         return f'Deleted {count} sent-email-logs older than {self.OLD_SENT_EMAIL_LOGS_THRESHOLD_DAYS} days.'
+
+
+class DeleteScheduledGroups(CosinnusCronJobBase):
+    """Triggers a group delete on all groups whose `scheduled_for_deletion_at` datetime is in the past."""
+
+    RUN_EVERY_MINS = 60  # every 1 hour
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.delete_scheduled_groups'
+
+    def do(self):
+        groups_to_delete = (
+            get_cosinnus_group_model()
+            .objects.exclude(scheduled_for_deletion_at__exact=None)
+            .filter(scheduled_for_deletion_at__lte=now())
+        )
+
+        for group in groups_to_delete:
+            try:
+                # sanity checks are done within this function, no need to do any here
+                delete_group(group)
+                logger.info(
+                    'delete_group() cronjob: group was deleted completely after 30 days',
+                    extra={'group_id': group.id},
+                )
+            except Exception as e:
+                logger.error(
+                    (
+                        'delete_group() cronjob: threw an exception during the DeleteScheduledGroups cronjob! '
+                        '(in extra)'
+                    ),
+                    extra={'exception': force_str(e)},
+                )
