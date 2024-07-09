@@ -16,7 +16,7 @@ from cosinnus.models import (
     UserProfile,
 )
 from cosinnus.models.conference import CosinnusConferenceRoom
-from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety, get_cosinnus_group_model
 from cosinnus_event.models import Event
 from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException, delete_cached_rocket_connection
 from cosinnus_message.tasks import rocket_group_membership_update_task
@@ -191,6 +191,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(post_delete, sender=CosinnusSociety)
     @receiver(post_delete, sender=CosinnusProject)
     @receiver(post_delete, sender=CosinnusConference)
+    @receiver(post_delete, sender=get_cosinnus_group_model())
     def handle_cosinnus_group_deleted(sender, instance, **kwargs):
         # do a threaded call
         class CosinnusRocketGroupDeleteThread(Thread):
