@@ -52,6 +52,7 @@ from cosinnus.core.decorators.views import (
 )
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.models.mail import QueuedMassMail
 from cosinnus.forms.conference import CosinnusConferenceSettingsMultiForm
 from cosinnus.forms.group import (
     CosinnusGroupCallToActionButtonForm,
@@ -129,6 +130,86 @@ from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizat
 from cosinnus_organization.utils import get_organization_select2_pills
 
 logger = logging.getLogger('cosinnus')
+
+
+def deactivate_group_and_mark_for_deletion(group, triggered_by_user):
+    """Deacitvate the group and mark it for deletion in 30 days"""
+    group.is_active = False
+    # we need to manually reindex or remove index to be sure the index gets removed
+    # need to get a typed group first and remove it from index, because after saving it deactived the manager
+    # won't find it
+    typed_group = ensure_group_type(group)
+    typed_group.remove_index()
+    typed_group.remove_index_for_all_group_objects()
+    deletion_schedule_time = now() + datetime.timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS)
+    group.scheduled_for_deletion_at = deletion_schedule_time
+    group.deletion_triggered_by = triggered_by_user
+    group.save()
+
+    portal = CosinnusPortal.get_current()
+    mail_subject = _(
+        '%(group_type)s %(group_name)s has just been deactivated.'
+    ) % {
+        'group_type': group.trans.VERBOSE_NAME,
+        'group_name': group.name,
+    }
+    mail_content = _(
+        'Dear user,\n\n'
+        'this is an automated email from the %(portal_name)s.\n'
+        '%(group_type)s %(group_name)s has just been deactivated. The deactivated project will be automatically '
+        'deleted after 30 days. Until then, reactivation is possible.\n'
+        'If an earlier deletion is desired or the deletion happened by mistake, please send an email to the portal '
+        'support.\n\n'
+        'With best regards your %(portal_name)s admins'
+    ) % {
+        'group_type': group.trans.VERBOSE_NAME,
+        'group_name': group.name,
+        'portal_name': portal.name,
+    }
+    queued_mail = QueuedMassMail.objects.create(
+        subject=mail_subject,
+        content=mail_content,
+        send_mail_kwargs={'topic_instead_of_subject': ' '},
+    )
+    queued_mail.recipients.set(group.actual_members.all())
+
+
+def delete_group(group):
+    """Delete group and related objects. Will not work if group is still active!"""
+    if group.is_active:
+        logger.warning(
+            'Aborting group deletion because the group was still active!', extra={'group_id': group.id}
+        )
+        return
+
+    group.delete()
+
+    portal = CosinnusPortal.get_current()
+    mail_subject = _(
+        '%(group_type)s %(group_name)s has just been deleted.'
+    ) % {
+        'group_type': group.trans.VERBOSE_NAME,
+        'group_name': group.name,
+    }
+    deleted_by = group.deletion_triggered_by.get_full_name() if group.deletion_triggered_by else _('Deleted User')
+    mail_content = _(
+        'Dear user,\n\n'
+        'this is an automated email from the %(portal_name)s.\n'
+        'A %(group_type)s of which you are a member has just been deleted from our platform. The %(group_type)s '
+        '%(group_name)s has been permanently deleted at the instigation of the project admin %(deleted_by)s.\n\n'
+        'With best regards your %(portal_name)s admins'
+    ) % {
+        'group_type': group.trans.VERBOSE_NAME,
+        'group_name': group.name,
+        'portal_name': portal.name,
+        'deleted_by': deleted_by,
+    }
+    queued_mail = QueuedMassMail.objects.create(
+        subject=mail_subject,
+        content=mail_content,
+        send_mail_kwargs={'topic_instead_of_subject': ' '},
+    )
+    queued_mail.recipients.set(group.actual_members.all())
 
 
 class SamePortalGroupMixin(object):
@@ -1700,6 +1781,26 @@ class ActivateOrDeactivateGroupView(TemplateView):
         return context
 
 
+class GroupScheduleDeleteView(RequireAdminMixin, TemplateView):
+    template_name = 'cosinnus/group/group_schedule_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupScheduleDeleteView, self).get_context_data(**kwargs)
+        context.update(
+            {
+                'object': self.group,  # used in leftnav_group.html
+            }
+        )
+        return context
+
+    def post(self, request, *args, **kwargs):
+        deactivate_group_and_mark_for_deletion(self.group, triggered_by_user=request.user)
+        success_message = _('%(team_name)s has been deactivated and will be deleted in 30 days!')
+        messages.success(request, success_message % {'team_name': self.group.name})
+        admin_log_action(request.user, self.group, _('Scheduled for deletion.'))
+        return redirect(reverse('cosinnus:user-dashboard'))
+
+
 class GroupStartpage(View):
     """This view is in place as first starting point for the initial group frontpage.
     It decides whether the actual group dashboard or the group microsite should be shown."""
@@ -2379,6 +2480,7 @@ group_user_delete = GroupUserDeleteView.as_view()
 group_user_delete_api = GroupUserDeleteView.as_view(is_ajax_request_url=True)
 group_export = GroupExportView.as_view()
 activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()
+group_schedule_delete = GroupScheduleDeleteView.as_view()
 group_startpage = GroupStartpage.as_view()
 user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()
 group_invite_select2 = GroupInviteSelect2View.as_view()
