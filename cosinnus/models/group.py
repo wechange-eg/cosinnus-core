@@ -1172,6 +1172,24 @@ class CosinnusBaseGroup(
         default=False,
         help_text='If enabled, allows the creation of invite tokens in non-admin area',
     )
+    scheduled_for_deletion_at = models.DateTimeField(
+        _('Scheduled for Deletion at'),
+        default=None,
+        blank=True,
+        null=True,
+        help_text=_(
+            'The date this group is scheduled for deletion. Will be deleted after this date (ONLY IF the group is set '
+            'to inactive!)'
+        ),
+    )
+    deletion_triggered_by = models.ForeignKey(
+        get_user_model(),
+        verbose_name=_('Scheduled for Deletion by'),
+        related_name='+',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
 
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
 
@@ -1983,7 +2001,6 @@ class CosinnusBaseGroup(
                         'token': self.settings.get('invite_token', None),
                     },
                 )
-
 
 class CosinnusGroup(CosinnusBaseGroup):
     """Swappable group model implementation."""
