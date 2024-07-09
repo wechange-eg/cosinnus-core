@@ -323,7 +323,9 @@
 		        {% endif %}
 	        </div> {% comment %} end dashboard-announcement-frame {% endcomment %}
         {% endif %}
-		
+
+    {% include 'cosinnus/messages.html' %}
+
 		<div class="dashboard-news-create-frame">
 		    {% block news_form_headline %}
 			    <h2 class="headline mobile-hidden">{% trans "News" %}</h2>
