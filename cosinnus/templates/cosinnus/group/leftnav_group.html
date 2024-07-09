@@ -12,6 +12,8 @@
     {% captureas is_organizations %}True{% endcaptureas %}
 {% elif current_page == "groupdeactivate" %}
     {% captureas is_deactivategroup %}True{% endcaptureas %}
+{% elif current_page == "groupdelete" %}
+  {% captureas is_deletegroup %}True{% endcaptureas %}
 {% elif current_page == "temporaryusers" %}
     {% captureas is_temporaryusers %}True{% endcaptureas %}
 {% elif current_page == "recordedmeetings" %}
@@ -104,6 +106,11 @@
 	{% captureas label %}{% if activate %}{{ group.trans.REACTIVATE }}{% else %}{{ group.trans.DEACTIVATE }}{% endif %}{% endcaptureas %}
 	{% captureas icon %}{% if activate %}fa-flash{% else %}fa-times{% endif %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_deactivategroup extra_classes="large-space" icon=icon label=label href=href  %}
+
+  {% captureas href %}{% group_url 'cosinnus:group-schedule-delete' group=group %}{% endcaptureas %}
+  {% captureas label %}{{ group.trans.DELETE }}{% endcaptureas %}
+  {% include "cosinnus/leftnav_button.html" with active=is_deletegroup extra_classes="large-space" icon="fa-trash" label=label href=href %}
+
 {% else %}
 	{% include 'cosinnus/feedback/report_button_leftnav_btn.html' with object=group %}
 {% endif %}
