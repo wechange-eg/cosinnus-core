@@ -345,6 +345,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'last_modified',
         'is_premium_currently',
         'attached_objects',
+        'last_activity',
+        'inactivity_notification_send_at',
     ]
     raw_id_fields = ('parent',)
     exclude = [

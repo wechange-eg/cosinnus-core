@@ -1172,6 +1172,18 @@ class CosinnusBaseGroup(
         default=False,
         help_text='If enabled, allows the creation of invite tokens in non-admin area',
     )
+    last_activity = models.DateTimeField(
+        _('Last activity'),
+        default=None,
+        blank=True,
+        null=True,
+    )
+    inactivity_notification_send_at = models.DateTimeField(
+        _('Inactivity notification send at'),
+        default=None,
+        blank=True,
+        null=True,
+    )
     scheduled_for_deletion_at = models.DateTimeField(
         _('Scheduled for Deletion at'),
         default=None,
