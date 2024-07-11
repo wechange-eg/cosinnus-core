@@ -3,6 +3,7 @@ import logging
 import secrets
 import string
 import urllib
+from datetime import datetime
 from typing import List, Mapping, Optional
 from urllib.parse import quote
 
@@ -464,6 +465,37 @@ def files_search(
             data=utf8_encode(body),
         )
     )
+
+def get_group_folder_last_modified(groupfolder_name, timeout=settings.COSINNUS_CLOUD_NEXTCLOUD_REQUEST_TIMEOUT):
+    """Returns the last-modified timestamp of a group folder."""
+    last_modified = None
+    url = f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/remote.php/dav/files/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/{quote(groupfolder_name)}/'  # noqa
+    body = """\
+<?xml version="1.0" encoding="UTF-8"?>
+<d:propfind xmlns:d="DAV:" xmlns:oc="http://owncloud.org/ns" xmlns:nc="http://nextcloud.org/ns">
+  <d:prop>
+    <d:getlastmodified/>
+  </d:prop>              
+</d:propfind>"""
+    # We need just the last modified of the group folder itself
+    headers = WEBDAV_HEADERS.copy()
+    headers['Depth'] = '0'
+    response_text = _webdav_response_or_raise(
+        requests.request(
+            method='PROPFIND',
+            url=url,
+            auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+            headers=headers,
+            timeout=timeout,
+            data=utf8_encode(body),
+        )
+    )
+    soup = BeautifulSoup(response_text, 'xml')
+    last_modified_xml = soup.find('d:getlastmodified')
+    if last_modified_xml:
+        last_modified_string = last_modified_xml.get_text()
+        last_modified = datetime.strptime(last_modified_string, '%a, %d %b %Y %H:%M:%S %Z')
+    return last_modified
 
 
 def list_group_folder_files(groupfolder_name, user=None):

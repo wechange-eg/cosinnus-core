@@ -19,6 +19,7 @@ from django.core.exceptions import ImproperlyConfigured, PermissionDenied, Valid
 from django.core.paginator import Paginator
 from django.core.validators import validate_email
 from django.db import transaction
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.http.response import Http404, HttpResponseBadRequest, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect
@@ -125,6 +126,9 @@ from cosinnus.views.mixins.group import (
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 from cosinnus.views.widget import GroupDashboard
+from cosinnus_cloud.utils.nextcloud import get_group_folder_last_modified
+from cosinnus_etherpad.models import Etherpad
+from cosinnus_message.rocket_chat import RocketChatConnection
 from cosinnus_organization.forms import MultiOrganizationSelectForm
 from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizationGroup
 from cosinnus_organization.utils import get_organization_select2_pills
@@ -210,6 +214,43 @@ def delete_group(group):
         send_mail_kwargs={'topic_instead_of_subject': ' '},
     )
     queued_mail.recipients.set(group.actual_members.all())
+
+
+def update_group_last_activity(group):
+    """Updates the group activity field."""
+
+    # Stating with group itself
+    last_activity = group.last_modified
+
+    # membership changes
+    if group.memberships.exists():
+        last_membership_activity = group.memberships.latest('date').date
+        last_activity = max(last_activity, last_membership_activity)
+
+    # taggable objects (notes, events, ...)
+    base_taggable_objects = group.get_all_objects_for_group()
+    last_taggable_object_activity = max(taggable_object.last_modified for taggable_object in base_taggable_objects)
+    last_activity = max(last_activity,  last_taggable_object_activity)
+
+    # Etherpad/Ethercalc
+    if Etherpad.objects.filter(group=group).exists():
+        last_etherpad_activity = Etherpad.objects.filter(group=group).latest('last_accessed').last_accessed
+        last_activity = max(last_activity, last_etherpad_activity)
+
+    # RocketChat
+    if settings.COSINNUS_ROCKET_ENABLED:
+        rocket_chat = RocketChatConnection()
+        last_rocket_chat_activity = rocket_chat.get_group_updated_at(group)
+        if last_rocket_chat_activity:
+            last_activity = max(last_activity, last_rocket_chat_activity)
+
+    # NextCloud
+    if settings.COSINNUS_CLOUD_ENABLED and group.nextcloud_groupfolder_name:
+        last_next_cloud_activity = get_group_folder_last_modified(group.nextcloud_groupfolder_name)
+        last_activity = max(last_activity, last_next_cloud_activity)
+
+    # update last_activity without updating last_modified
+    type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
 
 
 class SamePortalGroupMixin(object):
