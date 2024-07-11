@@ -20,7 +20,7 @@ from cosinnus.models.storage import TemporaryData
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.views.group import delete_group
+from cosinnus.views.group import delete_group, update_group_last_activity
 from cosinnus.views.profile import delete_userprofile
 from cosinnus_conference.utils import update_conference_premium_status
 from cosinnus_event.models import Event
@@ -246,6 +246,29 @@ class DeleteScheduledGroups(CosinnusCronJobBase):
                     (
                         'delete_group() cronjob: threw an exception during the DeleteScheduledGroups cronjob! '
                         '(in extra)'
+                    ),
+                    extra={'exception': force_str(e)},
+                )
+
+
+class UpdateGroupsLastActivity(CosinnusCronJobBase):
+    """Updates the last-activity of all active groups."""
+
+    RUN_EVERY_MINS = 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.update_groups_last_activity'
+
+    def do(self):
+        groups = get_cosinnus_group_model().objects.filter(is_active=True)
+        for group in groups:
+            try:
+                update_group_last_activity(group)
+            except Exception as e:
+                logger.error(
+                    (
+                        'update_group_last_activity() cronjob: threw an exception during the UpdateGroupsLastActivity '
+                        'cronjob! (in extra)'
                     ),
                     extra={'exception': force_str(e)},
                 )
