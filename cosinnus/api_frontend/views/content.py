@@ -351,8 +351,15 @@ class MainContentView(APIView):
         """Build a response from the given data package and set the cookies from the resolved target URL query."""
         rest_response = Response(data)
         if resolved_response is not None:
-            for k, v in resolved_response.cookies.items():
-                rest_response.set_cookie(k, v)
+            for cookie in resolved_response.cookies:
+                rest_response.set_cookie(
+                    cookie.name,
+                    value=cookie.value,
+                    expires=cookie.expires,
+                    path=cookie.path,
+                    domain=cookie.domain,
+                    secure=cookie.secure,
+                )
         return rest_response
 
     def build_redirect_response(self, target_url, resolved_response=None):
