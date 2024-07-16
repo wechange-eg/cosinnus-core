@@ -253,6 +253,96 @@ def update_group_last_activity(group):
     type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
 
 
+def send_group_inactivity_deactivation_notifications():
+    """Sends notifications before automatic group deactivation due inactivity."""
+    portal = CosinnusPortal.get_current()
+    groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(last_activity=None)
+    for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
+
+        # get groups that are notified according to the configured interval
+        days_after_last_activity = settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before_deactivation
+        group_last_activity_date = (now() - datetime.timedelta(days=days_after_last_activity)).date()
+        inactive_groups = groups.filter(last_activity__date=group_last_activity_date)
+        today = now().date()
+        notify_groups = inactive_groups.filter(
+            Q(inactivity_notification_send_at=None) | Q(inactivity_notification_send_at__date__lt=today)
+        )
+
+        for group in notify_groups:
+
+            # queue notitication email
+            mail_subject = _(
+                '%(group_type)s %(group_name)s will be deactivated due to inactivity.'
+            ) % {
+                'group_type': group.trans.VERBOSE_NAME,
+                'group_name': group.name,
+            }
+            mail_content = _(
+                'Dear user,\n\n'
+                'this is an automated email from the %(portal_name)s.\n'
+                '%(group_type)s %(group_name)s will be deactivated 10 years after the last activity and then '
+                'permanently deleted. This will happen in %(time)s. If an earlier deletion is desired, please send an '
+                'email to the portal support.\n\n'
+                'With best regards your %(portal_name)s admins'
+            ) % {
+                'group_type': group.trans.VERBOSE_NAME,
+                'group_name': group.name,
+                'portal_name': portal.name,
+                'time': time_message,
+            }
+            queued_mail = QueuedMassMail.objects.create(
+                subject=mail_subject,
+                content=mail_content,
+                send_mail_kwargs={'topic_instead_of_subject': ' '},
+            )
+            queued_mail.recipients.set(group.actual_members.all())
+
+            # update the notification send timestamp
+            group.inactivity_notification_send_at = now()
+            group.save()
+
+    """
+    TODO: discuss if the date based notificaiton is a good idea, otherwise we might still reuse this previous solution.
+    # compute notification times after last activity
+    notification_intervals = {}
+    last_notification = None
+    for days_before_deactivation in GROUP_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION:
+        notification_time = GROUP_INACTIVE_DEACTIVATION_SCHEDULE_DAYS - days_before_deactivation
+        notification_intervals[days_before_deactivation] = {
+            'days_after_inactive': notification_time,
+            'last_notification': last_notification,
+        }
+        last_notification = notification_time
+    print(notification_intervals)
+
+    groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(last_activity=None)
+    for days_before_deactivation, message in reversed(GROUP_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items()):
+        last_activity_threshold = notification_intervals[days_before_deactivation]['days_after_inactive']
+        group_last_activity = now() - datetime.timedelta(days=last_activity_threshold)
+        print(f'### group-last-activity-filter: {group_last_activity}')
+        inactive_groups = groups.filter(last_activity__lte=group_last_activity)
+        print(f'### {inactive_groups}')
+        # TODO: Do we need to filter by interval, i.e. do not send notificaitons if we missed an interval later.
+
+        last_notification_threshold = notification_intervals[days_before_deactivation]['last_notification']
+        if last_notification_threshold:
+            group_last_notification = now() - datetime.timedelta(days=last_notification_threshold)
+            notify_groups = inactive_groups.filter(
+                Q(inactivity_notification_send_at=None) | Q(inactivity_notification_send_at__lt=group_last_notification)
+            )
+        else:
+            notify_groups = inactive_groups.filter(inactivity_notification_send_at=None)
+        for group in notify_groups:
+            # TODO: send notificaiton
+            print(f'>>> {group} sending notification {days_before_deactivation} days before ....')
+            #group.inactivity_notification_send_at = now()
+            #group.save()
+
+        # remove already notified groups
+        groups = groups.exclude(pk__in=[group.pk for group in inactive_groups])
+    """
+
+
 class SamePortalGroupMixin(object):
     def get_queryset(self):
         """

@@ -508,7 +508,7 @@ class CosinnusConf(AppConf):
     # has been run, previous values of all existing groups will remain unchanged!
     GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
 
-    # the duration in days from which a user deletes a group until its actual deletion is triggererd
+    # the duration in days from which a user deletes a group until its actual deletion is triggered
     GROUP_DELETION_SCHEDULE_DAYS = 30
 
     # if True, enables an option to choose related groups/projects in the groups/projects
@@ -1520,6 +1520,19 @@ class CosinnusConf(AppConf):
     # via v3 API endpoint 'api/v3/portal/settings/'
     # and are used to configure the frontend server
     V3_PORTAL_SETTINGS = {}
+
+    # Number of days before inactive groups and users are automatically deactivated for deletion.
+    # Note: Ignoring leap years to avoid calendar arithmetics as the exact duration is not crucial for the deactivation.
+    INACTIVE_DEACTIVATION_SCHEDULE = 365 * 10  # 10 years
+
+    # Notification intervals in days before automatic deactivation of users and groups.
+    # Dictionary with day value and the corresponding user text.
+    INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION = {
+        365: _('1 year'),
+        182: _('6 months'),
+        14: _('2 weeks'),
+        2: _('2 days'),
+    }
 
 
 class CosinnusDefaultSettings(AppConf):
