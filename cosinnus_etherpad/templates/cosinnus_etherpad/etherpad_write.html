@@ -7,19 +7,6 @@
 {% trans "Pad" %} {{ object.title }}{{ block.super }}
 {% endblock page_title %}
 
-{% block breadcrumb %}
-        {{ block.super }}
-        {% if object.path != '/' %}
-            <li><a href="{% group_url 'cosinnus:etherpad:list' group=group slug=object.container.slug %}">{{ object.container.title }}</a></li>
-        {% endif %}
-        <li><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></li>
-        <li class="active">{% trans "Edit" %}</li>
-{% endblock %}
-
-{% block leftnav %}
-    {% include "cosinnus/leftnav_hierarchic_itemview.html" %}
-{% endblock leftnav %}
-
 {% block og_image %}{% if object.attached_images %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ object.attached_images.0.static_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock og_image %}
 {% block og_title %}{% if object.title %}{{ object.title }}{% else %}{{ object.description|truncatewords:8 }}{% endif %} - {{ group.name }} - {{ block.super }}{% endblock og_title %}
 {% block og_description %}{{ object.description|truncatewords:30 }}{% endblock og_description %}
@@ -32,14 +19,41 @@
 {% endblock extrahead %}
 
 
-{% block content %}
-{% endblock content %}
+{% block main_page_header %}
+
+	{% if user.is_authenticated %}
+		{% comment %} Combobox dropdown and breadcrumb {% endcomment %}
+	    <div class="row">
+	        <!-- start with left navigation -->
+	        <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav {% endif %}col-lg-3 col-md-3"><!-- left column -->
+	            {% if group %}
+	                {% cosinnus_menu "cosinnus/appsmenu.html" %}
+	            {% endif %}
+              <div {% if COSINNUS_V3_API_CONTENT_ACTIVE %}class="x-v3-leftnav-buttons"{% endif %}>
+                  {% include "cosinnus/leftnav_hierarchic_itemview.html" %}
+              </div>
+
+	        </div><!-- left column -->
+	        <!-- now the content -->
+	        <div class="col-lg-9 col-md-9"><!-- right column -->
+	            <ol class="breadcrumb">
+	                {% include 'cosinnus/breadcrumb.html' %}
+                  <li><a class="active" href="{% group_url 'cosinnus:etherpad:index' group=group %}">{% trans "Etherpads" %}</a></li>
+                  {% if object.path != '/' %}
+                      <li><a href="{% group_url 'cosinnus:etherpad:list' group=group slug=object.container.slug %}">{{ object.container.title }}</a></li>
+                  {% endif %}
+                  <li><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></li>
+                  <li class="active">{% trans "Edit" %}</li>
+	            </ol>
+
+              {% include 'cosinnus/messages.html' %}
+	        </div><!-- right column -->
+	    </div><!-- row -->
+    {% endif %}
+
+{% endblock main_page_header %}
 
 {% block main_page %}
-	{{ block.super }}
-	
-	
-	
 	<div class="row">
 	    <div class="col-lg-12 col-md-12">    
 	    
