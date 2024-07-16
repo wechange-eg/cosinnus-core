@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 09:51+0200\n"
+"POT-Creation-Date: 2024-07-16 09:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: gpt-po v1.0.6\n"
 "Language-Team: \n"
@@ -222,7 +222,7 @@ msgid "Personal"
 msgstr "Personal"
 
 msgid "Personal Dashboard"
-msgstr "Panel personal"
+msgstr "Dashboard personal"
 
 #| msgid "Contact info"
 msgid "My Personal Space"
@@ -279,7 +279,7 @@ msgid "Home"
 msgstr "Hogar"
 
 msgid "Dashboard"
-msgstr "Tablero"
+msgstr "Dashboard"
 
 msgid "Search"
 msgstr "Buscar"
@@ -376,7 +376,7 @@ msgid "Digitalisation"
 msgstr "Digitalización"
 
 msgid "Forum"
-msgstr "Foro"
+msgstr "Forum"
 
 msgid "Map"
 msgstr "Mapa"
@@ -985,7 +985,7 @@ msgid "Unsubscribe"
 msgstr "Anular"
 
 msgid "My Dashboard"
-msgstr "Mi panel"
+msgstr "Mi Dashboard"
 
 msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
 msgstr "Formato de archivo incorrecto. Intente usar .jpg, .jpeg, .png o .gif en su lugar."
@@ -1578,7 +1578,7 @@ msgid "Call to Action Box Description"
 msgstr "Descipción de caja de llamar a la acción"
 
 msgid "Embedded Dashboard HTML"
-msgstr "Panel de control incrustado HTML"
+msgstr "Dashboard incrustado HTML"
 
 msgid "Conference theme color"
 msgstr "Color del tema de la conferencia"
@@ -2157,7 +2157,7 @@ msgid "Footer"
 msgstr "Pié de página"
 
 msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-msgstr "Se mostrará como un pie de página en CADA página de esta página web (¡no solo en las páginas del tablero!)"
+msgstr "Se mostrará como un pie de página en CADA página de esta página web (¡no solo en las páginas del dashboard!)"
 
 msgid "Show Register Button"
 msgstr "Mostrar botón para registrar"
@@ -2184,10 +2184,10 @@ msgid "Right footer"
 msgstr "Pié de página derecha"
 
 msgid "1-Column Dashboard Page"
-msgstr "Página del panel de 1 columna"
+msgstr "Página del Dashboard de 1 columna"
 
 msgid "2-Column Dashboard Page"
-msgstr "Página del panel de 2 columnas"
+msgstr "Página del Dashboard de 2 columnas"
 
 msgid "Content (left column)"
 msgstr "Contenido (columna izquierda)"
@@ -2196,7 +2196,7 @@ msgid "Content (right column)"
 msgstr "Contenido (columna derecha)"
 
 msgid "3-Column Dashboard Page"
-msgstr "Página del panel de 3 columnas"
+msgstr "Página del Dashboard de 3 columnas"
 
 msgid "Content (center column)"
 msgstr "Contenido (columna central)"
@@ -2211,13 +2211,13 @@ msgid "Left Sidebar"
 msgstr "Barra lateral izquierda"
 
 msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "Página de tablero de 1 columna (Modular, NO LO USES MÀS!)"
+msgstr "Página de Dashboard de 1 columna (Modular, NO LO USES MÀS!)"
 
 msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "Página de tablero de 2 columnas (Modular, NO LO USES MÀS!)"
+msgstr "Página de Dashboard de 2 columnas (Modular, NO LO USES MÀS!)"
 
 msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "Página de tablero de 3 columnas (Modular, NO LO USES MÀS!)"
+msgstr "Página de Dashboard de 3 columnas (Modular, NO LO USES MÀS!)"
 
 msgid "Simple One-Column Page (Modular)"
 msgstr "Página de columna simple (Modular)"
@@ -2648,7 +2648,7 @@ msgid "User Profile Field Choices"
 msgstr "Opciones de campo de perfil de usario"
 
 msgid "User Dashboard Announcements"
-msgstr "Anuncios del panel del usario"
+msgstr "Anuncios del Dashboard del usario"
 
 msgid "User Welcome Email"
 msgstr "Correo de bienvenida del usario"
@@ -2966,7 +2966,7 @@ msgid "Check the projects/groups where you wish to show this item in. It will be
 msgstr "Comprueba estos proyectos/grupos donde quieras que se muestre este item. Será mostrado en todas las listas, pero permanecerá en este grupo."
 
 msgid "Items from the Forum can be shown in any of your projects/groups."
-msgstr "Items de este foro puedes ser mostrados en cualquier de tus proyectos/grupos."
+msgstr "Items de este Forum puedes ser mostrados en cualquier de tus proyectos/grupos."
 
 msgid "Items from this group can be shown in any of the group's subprojects."
 msgstr "Items de este grupo puedes ser mostrados en cualquier de los subproyectos del grupo."
@@ -3740,7 +3740,7 @@ msgid "Saving..."
 msgstr "Guardando..."
 
 msgid "You are now editing the dashboard's layout"
-msgstr "Estas editando el diseño del tablero"
+msgstr "Estas editando el diseño del dashboard"
 
 #, python-format
 msgid "The layout you choose will be the layout for all members of %(team_name)s! Click save to apply your changes."
@@ -4577,7 +4577,7 @@ msgid "Facebook integration is available after you created the project!"
 msgstr "Integración de Facebook es disponible después de que hayas creado el proyecto!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
-msgstr "El HTML introducido aquí se mostrará en el panel del grupo / proyecto (solo para miembros)"
+msgstr "El HTML introducido aquí se mostrará en el dashboard del grupo / proyecto (solo para miembros)"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
@@ -4596,7 +4596,7 @@ msgid "Overview"
 msgstr "Visión conjunta"
 
 msgid "To the Forum"
-msgstr "Al foro"
+msgstr "Al Forum"
 
 msgid "Invited to apply"
 msgstr "Invitado a aplicar"
@@ -6525,7 +6525,7 @@ msgstr "Filtros"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Content from the Forum"
-msgstr "Contenido del foro"
+msgstr "Contenido del Forum"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Content from my Groups and Projects"
@@ -7051,7 +7051,7 @@ msgid "The main text of the announcement."
 msgstr "El texto principal del anuncio."
 
 msgid "Use \"# Big Header\" as main title and \"## Small Header\" as in-between header. They will be styled appropriately on the dashboard!"
-msgstr "Usa \"# Big Header\" como título principal y \"## Small Header\" como título intermedio. ¡Se les dará estilo apropiadamente en el tablero!"
+msgstr "Usa \"# Big Header\" como título principal y \"## Small Header\" como título intermedio. ¡Se les dará estilo apropiadamente en el dashboard!"
 
 msgid "Raw HTML. Should contain a Dismiss-button"
 msgstr "HTML sin procesar. Debería contener un botón de descartar"
@@ -7063,7 +7063,7 @@ msgid "requires a Save before"
 msgstr "requiere un guardar antes"
 
 msgid "User Dashboard Announcements are sticky posts that appear on top of each user's personal Dashboard."
-msgstr "Anuncios del panel del usario son publicaciones fijadas que aparecen en la parte superior del panel personal de cada usario."
+msgstr "Anuncios del Dashboard del usario son publicaciones fijadas que aparecen en la parte superior del Dashboard personal de cada usario."
 
 msgid "An announcement will only appear during its valid-time frame."
 msgstr "Un anuncio solo aparecerá durante su marco de tiempo válido."
@@ -7072,10 +7072,10 @@ msgid "Only one announcement at a time will ever be shown to a user."
 msgstr "Solo un anuncio a la vez será mostrado a un usario."
 
 msgid "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements."
-msgstr "Si el usario todavía no ha ocultado su mensaje de introducción en el tablero, no verá ningún anuncio."
+msgstr "Si el usario todavía no ha ocultado su mensaje de introducción en el dashboard, no verá ningún anuncio."
 
 msgid "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown."
-msgstr "Un usario puede rechazar un anuncio, en cuyo caso desaparecerá y nunca se mostrará de nuevo. En la próxima visita a su tablero, se puede mostrar otro anuncio válido que no han ocultado todavía."
+msgstr "Un usario puede rechazar un anuncio, en cuyo caso desaparecerá y nunca se mostrará de nuevo. En la próxima visita a su Dashboard, se puede mostrar otro anuncio válido que no han ocultado todavía."
 
 msgid "There are no announcements yet."
 msgstr "No hay anuncios todavía."
@@ -7512,10 +7512,10 @@ msgid "Attach image/file"
 msgstr "Adjuntar imágen/archivo"
 
 msgid "You cannot put this widget on a team dashboard."
-msgstr "No puedes poner este Widget en el tablero de un equipo."
+msgstr "No puedes poner este Widget en el dashboard de un equipo."
 
 msgid "You cannot put this widget on a user dashboard."
-msgstr "No puedes poner este widget en el tablero de un usario."
+msgstr "No puedes poner este widget en el dashboard de un usario."
 
 msgid "Widget not found."
 msgstr "Widget no encontrado."
@@ -7574,7 +7574,7 @@ msgid "Project Dashboard"
 msgstr "Panel del proyecto"
 
 msgid "in the Project Dashboard"
-msgstr "en el panel del proyecto"
+msgstr "en el Dashboard del proyecto"
 
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Organiza tus proyectos o iniciativas de manera eficiente con tus compañeros de campaña. Todas las herramientas importantes para colaborar en un solo lugar: noticias, pads, eventos, tareas pendientes y más."
@@ -7680,10 +7680,10 @@ msgid "Group Menu"
 msgstr "Menú del grupo"
 
 msgid "Group Dashboard"
-msgstr "Panel de control del grupo"
+msgstr "Dashboard de control del grupo"
 
 msgid "in the Group Dashboard"
-msgstr "en el panel del grupo"
+msgstr "en el Dashboard del grupo"
 
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Los grupos ayudan a mejorar la comunicación y colaboración en redes u organizaciones grandes. Dentro de un grupo, puedes reunir varios proyectos o grupos de trabajo más pequeños."
@@ -7967,7 +7967,7 @@ msgid ""
 msgstr ""
 "- Se solucionó un problema en el que los usuarios invitados directamente no podían ingresar su contraseña inicial.\n"
 "- Se solucionó un problema en el que el enlace de restablecimiento de contraseña no funcionaba en algunos casos.\n"
-"- Se solucionó un problema con los usuarios que no eran redirigidos correctamente al panel de control de usuario después de registrarse.\n"
+"- Se solucionó un problema con los usuarios que no eran redirigidos correctamente al dashboard de usuario después de registrarse.\n"
 "- Se solucionó un problema en el que las fuentes iCal a veces no eran accesibles desde aplicaciones de calendario externas.\n"
 "- Se solucionó un problema en el que acceder directamente a las URL de pad compartidas mostraría un error.\n"
 "- Se solucionó un problema en el que las cuentas de invitado no podían acceder a videoconferencias (si estaban habilitadas).\n"
@@ -8041,7 +8041,7 @@ msgstr ""
 "- (OAuth) Se cambió el formulario de inicio de sesión durante los flujos de inicio de sesión de OAuth para diferenciarlo de los inicios de sesión regulares\n"
 "- (OAuth) Se solucionó un problema para los registros de cuenta de usuario cuando se iniciaron desde un flujo de OAuth\n"
 "- (OAuth) Se solucionó un problema con los inicios de sesión de OAuth cuando el avatar del usuario era demasiado grande\n"
-"- (Nextcloud) Se eliminó el contador del panel de grupo/proyecto para los archivos en la carpeta de Cloud de grupo/proyecto, ya que a menudo era incorrecto\n"
+"- (Nextcloud) Se eliminó el contador del dashboard de grupo/proyecto para los archivos en la carpeta de Cloud de grupo/proyecto, ya que a menudo era incorrecto\n"
 
 msgid "Version 1.19.0 released"
 msgstr "Versión 1.19.0 lanzada"
@@ -8062,7 +8062,7 @@ msgstr ""
 "La actualización incluye:\n"
 "- (BigBlueButton) Se ha añadido un ajuste para cambiar el mensaje de bienvenida de la sala de conferencias.\n"
 "- (BigBlueButton) Se ha corregido la configuración del archivo de presentación de las conferencias que no se heredaba por sus salas de conferencias.\n"
-"- (RocketChat) El elemento de chat en los paneles de grupo y proyecto ahora solo se carga después de hacer clic activamente en él. Esto optimiza los tiempos de carga de la página y ahorra recursos.\n"
+"- (RocketChat) El elemento de chat en los dashboards de grupo y proyecto ahora solo se carga después de hacer clic activamente en él. Esto optimiza los tiempos de carga de la página y ahorra recursos.\n"
 "- (RocketChat) Mejoras de seguridad e integración de plataforma.\n"
 "- Los eventos de las encuestas de eventos se crean con una duración predeterminada de una hora.\n"
 "- (Admin) Se ha corregido un error que podía ocurrir al convertir proyectos en grupos o viceversa.\n"
@@ -10737,7 +10737,7 @@ msgid "Contact request"
 msgstr "Solicitud de contacto"
 
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
-msgstr "Solo puedes adjuntar archivos e imágenes a mensajes si eres un miembro de este foro. Puedes participar en el aquí:"
+msgstr "Solo puedes adjuntar archivos e imágenes a mensajes si eres un miembro de este forum. Puedes participar en el aquí:"
 
 msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
 msgstr "La aplicación de mensajería heredada ya no está en uso. Puedes ver todos tus mensajes antiguos, pero no puedes escribir nuevos. ¡Usa la nueva aplicación de mensajería en la navegación a partir de ahora!"
