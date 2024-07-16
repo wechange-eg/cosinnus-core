@@ -22,9 +22,10 @@ from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.views.group import (
+    deactivate_group_and_mark_for_deletion,
     delete_group,
-    update_group_last_activity,
     send_group_inactivity_deactivation_notifications,
+    update_group_last_activity,
 )
 from cosinnus.views.profile import delete_userprofile
 from cosinnus_conference.utils import update_conference_premium_status
@@ -316,3 +317,29 @@ class SendGroupsInactivityNotifications(CosinnusCronJobBase):
                 ),
                 extra={'exception': force_str(e)},
             )
+
+
+class DeactivateInactiveGroups(CosinnusCronJobBase):
+    """Deactivates groups afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE days of inactivity."""
+
+    RUN_EVERY_MINS = 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.deactivate_inactive_groups'
+
+    def do(self):
+        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
+        inactive_groups = get_cosinnus_group_model().objects.filter(
+            is_active=True, last_activity__lt=inactivity_deactivation_threshold
+        )
+        for group in inactive_groups:
+            try:
+                deactivate_group_and_mark_for_deletion(group)
+            except Exception as e:
+                logger.error(
+                    (
+                        'deactivate_group_and_mark_for_deletion() cronjob: threw an exception during the '
+                        'DeactivateInactiveGroups cronjob! (in extra)'
+                    ),
+                    extra={'exception': force_str(e)},
+                )
