@@ -21,7 +21,11 @@ from cosinnus.models.storage import TemporaryData
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.views.group import delete_group, update_group_last_activity
+from cosinnus.views.group import (
+    delete_group,
+    update_group_last_activity,
+    send_group_inactivity_deactivation_notifications,
+)
 from cosinnus.views.profile import delete_userprofile
 from cosinnus_conference.utils import update_conference_premium_status
 from cosinnus_event.models import Event
@@ -291,3 +295,24 @@ class UpdateGroupsLastActivity(CosinnusCronJobBase):
                     ),
                     extra={'exception': force_str(e)},
                 )
+
+
+class SendGroupsInactivityNotifications(CosinnusCronJobBase):
+    """Queues deactivation notification for inactive groups."""
+
+    RUN_EVERY_MINS = 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.send_group_inactivity_notifications'
+
+    def do(self):
+        try:
+            send_group_inactivity_deactivation_notifications()
+        except Exception as e:
+            logger.error(
+                (
+                    'send_group_inactivity_deactivation_notifications() cronjob: threw an exception during the '
+                    'SendGroupsInactivityNotifications cronjob! (in extra)'
+                ),
+                extra={'exception': force_str(e)},
+            )
