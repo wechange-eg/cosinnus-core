@@ -351,8 +351,15 @@ class MainContentView(APIView):
         """Build a response from the given data package and set the cookies from the resolved target URL query."""
         rest_response = Response(data)
         if resolved_response is not None:
-            for k, v in resolved_response.cookies.items():
-                rest_response.set_cookie(k, v)
+            for cookie in resolved_response.cookies:
+                rest_response.set_cookie(
+                    cookie.name,
+                    value=cookie.value,
+                    expires=cookie.expires,
+                    path=cookie.path,
+                    domain=cookie.domain,
+                    secure=cookie.secure,
+                )
         return rest_response
 
     def build_redirect_response(self, target_url, resolved_response=None):
@@ -496,6 +503,13 @@ class MainContentView(APIView):
         for bad_tag_literal in ['nav', 'script', 'style']:
             for bad_tag in soup.find_all(bad_tag_literal):
                 bad_tag.decompose()
+
+        # parse footer and remove it
+        footer = soup.find('div', class_='x-v3-footer')
+        if footer:
+            self.footer_html = str(footer.decode_contents()).strip()
+            footer.decompose()
+
         # try to extract our page's inner container, below the breadcrumb
         content = soup.find('div', class_='x-v3-content')
         if not content:
@@ -530,11 +544,6 @@ class MainContentView(APIView):
                 ]
                 for popup_modal in popup_modals:
                     self.content_html += '\n' + str(popup_modal)
-
-        # parse footer
-        footer = soup.find('div', class_='x-v3-footer')
-        if footer:
-            self.footer_html = str(footer.decode_contents()).strip()
 
     def _extract_fa_icon(self, tag):
         """Extracts the actual font-awesome icon class name from the first i tag within the given tag tree"""
