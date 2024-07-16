@@ -496,6 +496,13 @@ class MainContentView(APIView):
         for bad_tag_literal in ['nav', 'script', 'style']:
             for bad_tag in soup.find_all(bad_tag_literal):
                 bad_tag.decompose()
+
+        # parse footer and remove it
+        footer = soup.find('div', class_='x-v3-footer')
+        if footer:
+            self.footer_html = str(footer.decode_contents()).strip()
+            footer.decompose()
+
         # try to extract our page's inner container, below the breadcrumb
         content = soup.find('div', class_='x-v3-content')
         if not content:
@@ -530,11 +537,6 @@ class MainContentView(APIView):
                 ]
                 for popup_modal in popup_modals:
                     self.content_html += '\n' + str(popup_modal)
-
-        # parse footer
-        footer = soup.find('div', class_='x-v3-footer')
-        if footer:
-            self.footer_html = str(footer.decode_contents()).strip()
 
     def _extract_fa_icon(self, tag):
         """Extracts the actual font-awesome icon class name from the first i tag within the given tag tree"""
