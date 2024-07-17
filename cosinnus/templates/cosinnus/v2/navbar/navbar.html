@@ -338,7 +338,7 @@
 			<ul class="item-list">
 				{% for code, language in SETTINGS.LANGUAGES %}
 					<li>
-						<a href="{% url 'cosinnus:switch-language' language=code %}?next={{ request.path }}"
+						<a href="{% url 'cosinnus:switch-language' language=code %}{% if not is_api_request %}?next={{ request.path }}{% endif %}"
 								class="list-item {% if request.LANGUAGE_CODE == code %}text-bold{% endif %}" role="button" titledby=".item-text">
 				    		<div class="item-text">
 				    			{{ language }}
