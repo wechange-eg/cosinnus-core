@@ -120,7 +120,7 @@ class HeaderView(APIView):
     """
 
     def get(self, request):
-        context = Context({'request': request})
+        context = Context({'request': request, 'is_api_request': True})
         return Response({
             'html': cosinnus_menu_v2(context, request=request),
             'css': [
