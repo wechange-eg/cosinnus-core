@@ -293,6 +293,7 @@ def send_group_inactivity_deactivation_notifications():
     """Sends notifications before automatic group deactivation due inactivity."""
     # TODO: make sure to send out the last notification event after the interval has passed to ensure at least one
     #       notification was send before deletion.
+    groups_notified_count = 0
     portal = CosinnusPortal.get_current()
     groups = get_cosinnus_group_model().objects.exclude(last_activity=None)
     for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
@@ -368,6 +369,9 @@ def send_group_inactivity_deactivation_notifications():
             # update the notification send timestamp
             group.inactivity_notification_send_at = now()
             group.save()
+            groups_notified_count += 1
+
+        return groups_notified_count
 
 
 class SamePortalGroupMixin(object):
