@@ -226,7 +226,6 @@ class DeleteOldGuestUsers(CosinnusCronJobBase):
 
 class DeleteScheduledGroups(CosinnusCronJobBase):
     """Triggers a group delete on all groups whose `scheduled_for_deletion_at` datetime is in the past."""
-    # TODO: add result strings to cron jobs
 
     RUN_EVERY_MINS = 60  # every 1 hour
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -240,22 +239,25 @@ class DeleteScheduledGroups(CosinnusCronJobBase):
             .filter(scheduled_for_deletion_at__lte=now())
         )
 
+        deleted_groups_count = 0
+        errors_occurred = False
         for group in groups_to_delete:
             try:
                 # sanity checks are done within this function, no need to do any here
                 delete_group(group)
+                deleted_groups_count += 1
                 logger.info(
                     'delete_group() cronjob: group was deleted completely after 30 days',
                     extra={'group_id': group.id},
                 )
             except Exception as e:
-                logger.error(
-                    (
-                        'delete_group() cronjob: threw an exception during the DeleteScheduledGroups cronjob! '
-                        '(in extra)'
-                    ),
-                    extra={'exception': force_str(e)},
-                )
+                logger.exception(e)
+                errors_occurred = True
+
+        message = f'{deleted_groups_count} groups deleted.' if deleted_groups_count > 0 else 'No groups deleted.'
+        if errors_occurred:
+            message += ' Errors occurred during cron job.'
+        return message
 
 
 class UpdateGroupsLastActivity(CosinnusCronJobBase):
@@ -267,19 +269,16 @@ class UpdateGroupsLastActivity(CosinnusCronJobBase):
     cosinnus_code = 'cosinnus.update_groups_last_activity'
 
     def do(self):
+        errors_occurred = False
+
         # update active groups
         groups = get_cosinnus_group_model().objects.filter(is_active=True)
         for group in groups:
             try:
                 update_group_last_activity(group)
             except Exception as e:
-                logger.error(
-                    (
-                        'update_group_last_activity() cronjob: threw an exception during the UpdateGroupsLastActivity '
-                        'cronjob! (in extra)'
-                    ),
-                    extra={'exception': force_str(e)},
-                )
+                logger.exception(e)
+                errors_occurred = True
 
         # compute the last activity for inactive groups
         groups = get_cosinnus_group_model().objects.filter(is_active=False, last_activity=None)
@@ -287,13 +286,13 @@ class UpdateGroupsLastActivity(CosinnusCronJobBase):
             try:
                 update_group_last_activity(group)
             except Exception as e:
-                logger.error(
-                    (
-                        'update_group_last_activity() cronjob: threw an exception during the UpdateGroupsLastActivity '
-                        'cronjob! (in extra)'
-                    ),
-                    extra={'exception': force_str(e)},
-                )
+                logger.exception(e)
+                errors_occurred = True
+
+        message = 'Last activity of groups updated.'
+        if errors_occurred:
+            message += ' Errors occurred during cron job.'
+        return message
 
 
 class SendGroupsInactivityNotifications(CosinnusCronJobBase):
@@ -305,16 +304,17 @@ class SendGroupsInactivityNotifications(CosinnusCronJobBase):
     cosinnus_code = 'cosinnus.send_group_inactivity_notifications'
 
     def do(self):
+        groups_notified = None
         try:
-            send_group_inactivity_deactivation_notifications()
+            groups_notified = send_group_inactivity_deactivation_notifications()
         except Exception as e:
-            logger.error(
-                (
-                    'send_group_inactivity_deactivation_notifications() cronjob: threw an exception during the '
-                    'SendGroupsInactivityNotifications cronjob! (in extra)'
-                ),
-                extra={'exception': force_str(e)},
-            )
+            logger.exception(e)
+
+        if groups_notified is not None:
+            message = f'{groups_notified} groups notified.'
+        else:
+            message = 'An error occurred during cron job execution'
+        return message
 
 
 class DeactivateInactiveGroups(CosinnusCronJobBase):
@@ -326,6 +326,8 @@ class DeactivateInactiveGroups(CosinnusCronJobBase):
     cosinnus_code = 'cosinnus.deactivate_inactive_groups'
 
     def do(self):
+        groups_scheduled = 0
+        errors_occurred = False
         inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
         inactive_groups = get_cosinnus_group_model().objects.filter(last_activity__lt=inactivity_deactivation_threshold)
         for group in inactive_groups:
@@ -334,11 +336,14 @@ class DeactivateInactiveGroups(CosinnusCronJobBase):
                     deactivate_group_and_mark_for_deletion(group)
                 else:
                     mark_group_for_deletion(group)
+                groups_scheduled += 1
             except Exception as e:
-                logger.error(
-                    (
-                        'deactivate_group_and_mark_for_deletion() cronjob: threw an exception during the '
-                        'DeactivateInactiveGroups cronjob! (in extra)'
-                    ),
-                    extra={'exception': force_str(e)},
-                )
+                logger.exception(e)
+                errors_occurred = True
+
+        if groups_scheduled > 0:
+            message = f'{groups_scheduled} groups scheduled for deletion'
+        else:
+            message = 'No groups scheduled for deletion'
+        if errors_occurred:
+            message += ' Errors occurred during cron job.'
