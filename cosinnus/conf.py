@@ -1524,6 +1524,7 @@ class CosinnusConf(AppConf):
     # Number of days before inactive groups and users are automatically deactivated for deletion.
     # Note: Ignoring leap years to avoid calendar arithmetics as the exact duration is not crucial for the deactivation.
     INACTIVE_DEACTIVATION_SCHEDULE = 365 * 10  # 10 years
+    INACTIVE_DEACTIVATION_SCHEDULE_TEXT = _('10 years')
 
     # Notification intervals in days before automatic deactivation of users and groups.
     # Dictionary with day value and the corresponding user text.

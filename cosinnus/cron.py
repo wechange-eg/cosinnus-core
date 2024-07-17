@@ -23,6 +23,7 @@ from cosinnus.utils.html import render_html_with_variables
 from cosinnus.views.group import (
     deactivate_group_and_mark_for_deletion,
     delete_group,
+    mark_group_for_deletion,
     send_group_inactivity_deactivation_notifications,
     update_group_last_activity,
 )
@@ -225,6 +226,7 @@ class DeleteOldGuestUsers(CosinnusCronJobBase):
 
 class DeleteScheduledGroups(CosinnusCronJobBase):
     """Triggers a group delete on all groups whose `scheduled_for_deletion_at` datetime is in the past."""
+    # TODO: add result strings to cron jobs
 
     RUN_EVERY_MINS = 60  # every 1 hour
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -265,7 +267,22 @@ class UpdateGroupsLastActivity(CosinnusCronJobBase):
     cosinnus_code = 'cosinnus.update_groups_last_activity'
 
     def do(self):
+        # update active groups
         groups = get_cosinnus_group_model().objects.filter(is_active=True)
+        for group in groups:
+            try:
+                update_group_last_activity(group)
+            except Exception as e:
+                logger.error(
+                    (
+                        'update_group_last_activity() cronjob: threw an exception during the UpdateGroupsLastActivity '
+                        'cronjob! (in extra)'
+                    ),
+                    extra={'exception': force_str(e)},
+                )
+
+        # compute the last activity for inactive groups
+        groups = get_cosinnus_group_model().objects.filter(is_active=False, last_activity=None)
         for group in groups:
             try:
                 update_group_last_activity(group)
@@ -310,12 +327,13 @@ class DeactivateInactiveGroups(CosinnusCronJobBase):
 
     def do(self):
         inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
-        inactive_groups = get_cosinnus_group_model().objects.filter(
-            is_active=True, last_activity__lt=inactivity_deactivation_threshold
-        )
+        inactive_groups = get_cosinnus_group_model().objects.filter(last_activity__lt=inactivity_deactivation_threshold)
         for group in inactive_groups:
             try:
-                deactivate_group_and_mark_for_deletion(group)
+                if group.is_active:
+                    deactivate_group_and_mark_for_deletion(group)
+                else:
+                    mark_group_for_deletion(group)
             except Exception as e:
                 logger.error(
                     (
