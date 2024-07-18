@@ -979,6 +979,8 @@ class CosinnusConf(AppConf):
         '^/account/',  # user account service functions
         '^/fb-integration/',
         '^/two_factor_auth/qrcode/',  # QR code image generator
+        # django password reset (note: only initial redirect portion, this works!)
+        '^/reset/MQ/(?!set-password)[\w\-_]+/',
         # API URLs that are not route-namespaced under "/api/":
         '^/select2/',
         '^/likefollowstar/',
