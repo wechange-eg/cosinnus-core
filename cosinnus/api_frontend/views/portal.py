@@ -566,6 +566,7 @@ class PortalSettingsView(APIView):
             'signupCredentialsScreenMessage': None,
             'usersNeedActivation': portal.users_need_activation,
             'currentLanguage': get_language(),
+            'userProfileVisibilityLocked': bool(settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None),
             # 'setup': {'additionalSteps': ... }},  # set manually
             # 'theme': {...},  # set manually. example:
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},

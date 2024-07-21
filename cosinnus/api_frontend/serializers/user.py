@@ -363,7 +363,9 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
             last_name_fallback = instance.last_name
         instance.last_name = user_data.get('last_name', last_name_fallback)
         profile.description = profile_data.get('description', profile.description)
-        media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
+        # only update the userprofile visibility field if it is not locked
+        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is None:
+            media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
         profile.avatar = profile_data.get('avatar', profile.avatar)
         avatar_color = profile_data.get('settings', {}).get(PROFILE_SETTINGS_AVATAR_COLOR, None)
         if avatar_color:
