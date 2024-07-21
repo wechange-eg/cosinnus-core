@@ -25,6 +25,7 @@ from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIEL
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
 from cosinnus.utils.functions import clean_single_line_text, is_number, update_dict_recursive
+from cosinnus.views.common import SwitchLanguageView
 
 
 class PortalTopicsView(APIView):
@@ -533,7 +534,14 @@ class PortalSettingsView(APIView):
             cache.set(self.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % current_language, settings_dict, timeout)
         # update any settings delivered from `COSINNUS_V3_PORTAL_SETTINGS` recursively, uncached
         update_dict_recursive(settings_dict, settings.COSINNUS_V3_PORTAL_SETTINGS, extend_lists=True)
-        return Response(settings_dict)
+        response = Response(settings_dict)
+        # set language cookie if not present
+        if settings.LANGUAGE_COOKIE_NAME not in request.COOKIES:
+            # if we ever wanted to ignore browser language preferences, and force the default portal language,
+            # we can replace `get_language()` with `settings.LANGUAGE_CODE` here:
+            switch_language_view = SwitchLanguageView()
+            switch_language_view.switch_language(get_language(), request, response)
+        return response
 
     def build_settings_dict(self, request):
         """Generates the complete settings dict afresh"""
@@ -558,6 +566,7 @@ class PortalSettingsView(APIView):
             'signupCredentialsScreenMessage': None,
             'usersNeedActivation': portal.users_need_activation,
             'currentLanguage': get_language(),
+            'userProfileVisibilityLocked': bool(settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None),
             # 'setup': {'additionalSteps': ... }},  # set manually
             # 'theme': {...},  # set manually. example:
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
@@ -631,7 +640,7 @@ class PortalSettingsView(APIView):
             }
         # the field gets added to the signup
         field_overrides['signup'] = {
-            'signup': {
+            'credentials': {
                 'email': {
                     'legend': _(
                         'This will be used as your login. '
