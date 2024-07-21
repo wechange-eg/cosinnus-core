@@ -639,7 +639,7 @@ class PortalSettingsView(APIView):
             }
         # the field gets added to the signup
         field_overrides['signup'] = {
-            'signup': {
+            'credentials': {
                 'email': {
                     'legend': _(
                         'This will be used as your login. '
