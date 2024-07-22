@@ -7,9 +7,10 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
+from django.db.models import Q
 from django.http.response import Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.utils.crypto import get_random_string
@@ -25,7 +26,7 @@ from cosinnus.core import signals
 from cosinnus.core.decorators.views import redirect_to_error_page, redirect_to_not_logged_in
 from cosinnus.core.mail import send_html_mail
 from cosinnus.forms.profile import UserProfileForm
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
 from cosinnus.models.widget import WidgetConfig
@@ -53,6 +54,7 @@ def deactivate_user(user):
 
 def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
     """Deacitvates a user account and marks them for deletion in 30 days"""
+    # TODO: send notification email
     if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         # add a marked-for-deletion flag and a cronjob, deleting the profile using this
         deletion_schedule_time = now() + timedelta(days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS)
@@ -168,6 +170,63 @@ def delete_userprofile(user):
 
     user.is_active = False
     user.save()
+
+
+def send_user_inactivity_deactivation_notifications():
+    """Sends notifications before automatic user deactivation due inactivity."""
+    # TODO: see if this can be refactored an common parts with the group functions moved to utils.
+    # TODO: discuss what to do with inactive users, e.g. automatically delete them without notifications?
+    #       same goes for users without a profile.
+    users_notified_count = 0
+    portal = CosinnusPortal.get_current()
+    users = get_user_model().objects.filter(is_active=True)
+    for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
+        # get users that are notified according to the configured interval
+        days_after_last_activity = settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before_deactivation
+        user_last_activity_date = (now() - timedelta(days=days_after_last_activity)).date()
+        inactive_users = users.filter(
+            Q(last_login__date=user_last_activity_date) | Q(last_login=None, date_joined__date=user_last_activity_date)
+        )
+        today = now().date()
+        notify_users = inactive_users.filter(
+            Q(cosinnus_profile__inactivity_notification_send_at=None) |
+            Q(cosinnus_profile__inactivity_notification_send_at__date__lt=today)
+        )
+
+        for user in notify_users:
+            # send notification email
+
+            mail_subject = _('Your account will be deleted due to inactivity.')
+            mail_content = _(
+                'This is an automated email from %(portal_name)s.\n'
+                'Your entire account, profile and personal information will be be deactivated and irrevocably deleted '
+                'in %(time)s.\n'
+                'Your pads, news, uploaded files and other content will remain on the website. However, your name will '
+                'no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your '
+                'profile direct messages will be deleted, but content within discussions and channels will remain. If '
+                'you still want to delete content from yourself, you can do this now by deleting the content on the '
+                'relevant pages.\n'
+                'Your profile will first be deactivated and completely removed from the platform. After deactivation, '
+                'it will be deleted from our database after %(deleted_after_days)s days and only then permanently. '
+                'The account may be stored in our backup systems for up to 6 months after deletion. If this is too '
+                'long for you, please contact the support team of this platform for immediate deletion.\n'
+                'During this %(deleted_after_days)s-day period after deletion, the e-mail address of your account is '
+                'reserved and cannot be used to register a new account.\n\n'
+                'With best regards your %(portal_name)s admins'
+            ) % {
+                'portal_name': portal.name,
+                'time': time_message,
+                'deleted_after_days': settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS,
+            }
+            body_text = textfield(mail_content)
+            send_html_mail(user, mail_subject, body_text, threaded=False, topic_instead_of_subject=' ')
+
+            # update the notification send timestamp
+            user.cosinnus_profile.inactivity_notification_send_at = now()
+            user.cosinnus_profile.save()
+            users_notified_count += 1
+
+    return users_notified_count
 
 
 class UserProfileObjectMixin(SingleObjectMixin):
