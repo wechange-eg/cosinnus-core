@@ -752,6 +752,7 @@ class UserProfileInline(admin.StackedInline):
         'deletion_triggered_by_self',
         '_is_guest',
         'guest_access_object',
+        'inactivity_notification_send_at',
     )
     show_change_link = True
     view_on_site = False
