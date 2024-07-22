@@ -6,6 +6,7 @@ from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
+from django.db.models import Q
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django_cron import CronJobBase, Schedule
@@ -28,7 +29,11 @@ from cosinnus.views.group import (
     send_group_inactivity_deactivation_notifications,
     update_group_last_activity,
 )
-from cosinnus.views.profile import delete_userprofile
+from cosinnus.views.profile import (
+    delete_userprofile,
+    deactivate_user_and_mark_for_deletion,
+    send_user_inactivity_deactivation_notifications
+)
 from cosinnus_conference.utils import update_conference_premium_status
 from cosinnus_event.models import Event
 
@@ -86,6 +91,63 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
                     ),
                     extra={'exception': force_str(e)},
                 )
+
+
+class SendUserInactivityNotifications(CosinnusCronJobBase):
+    """Queues deactivation notification for inactive users."""
+
+    RUN_EVERY_MINS = 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.send_user_inactivity_notifications'
+
+    def do(self):
+        users_notified = None
+        try:
+            users_notified = send_user_inactivity_deactivation_notifications()
+        except Exception as e:
+            logger.exception(e)
+
+        if users_notified is not None:
+            message = f'{users_notified} users notified.'
+        else:
+            message = 'An error occurred during cron job execution.'
+        return message
+
+
+class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
+    """Marks inactive users for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE day since last login."""
+
+    RUN_EVERY_MINS = 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.deactivate_inactive_users'
+
+    def do(self):
+        users_scheduled = 0
+        errors_occurred = False
+        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
+        inactive_users = get_user_model().objects.filter(
+            is_active=True, cosinnus_profile__scheduled_for_deletion_at=None
+        )
+        inactive_users = inactive_users.filter(
+            Q(last_login__lt=inactivity_deactivation_threshold) |
+            Q(last_login=None, date_joined__lt=inactivity_deactivation_threshold)
+        )
+        for user in inactive_users:
+            try:
+                deactivate_user_and_mark_for_deletion(user)
+                users_scheduled += 1
+            except Exception as e:
+                logger.exception(e)
+                errors_occurred = True
+
+        if users_scheduled > 0:
+            message = f'{users_scheduled} users scheduled for deletion'
+        else:
+            message = 'No users scheduled for deletion'
+        if errors_occurred:
+            message += ' Errors occurred during cron job.'
 
 
 class UpdateConferencePremiumStatus(CosinnusCronJobBase):
