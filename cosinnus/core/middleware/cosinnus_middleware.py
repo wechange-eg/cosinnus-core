@@ -86,6 +86,7 @@ EXEMPTED_URLS_FOR_2FA = [
     '/api/v3/logout',
     '/api/v3/authinfo',
     '/api/v3/portal/settings',
+    '/api/v3/navigation',
     '/api/v3/content/main',
 ]
 

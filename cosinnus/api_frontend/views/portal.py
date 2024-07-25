@@ -1,3 +1,5 @@
+from copy import copy
+
 from django.core.cache import cache
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
@@ -20,8 +22,10 @@ from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
 from cosinnus.utils.functions import clean_single_line_text, is_number, update_dict_recursive
+from cosinnus.views.common import SwitchLanguageView
 
 
 class PortalTopicsView(APIView):
@@ -403,6 +407,91 @@ class PortalSettingsView(APIView):
     and thus uses language-dependent caching of the entire return value to reduce computational costs.
 
     Any returned values will be overridden by anything defined in conf dict `COSINNUS_V3_PORTAL_SETTINGS` (uncached).
+
+    A full example string for manually configuarable settings that aren't dynamically taken from the portal config:
+
+    {
+        "links": {
+            "privacyPolicy": "https://PORTAL/cms/datenschutzerklaerung/",
+            "termsOfUse": "https://PORTAL/cms/nutzungsbedingungen/",
+            "legalNotice": "https://PORTAL/cms/impressum/",
+            "images": {
+                "navBarLogo": {
+                    "light": "/static/img/frontend/logo.png",
+                    "dark": "/static/img/frontend/logo.png"
+                },
+                "welcome": {
+                    "light": "/static/img/frontend/signup/welcome/img.svg",
+                    "dark": "/static/img/frontend/signup/welcome/img.svg"
+                },
+               "verified": {
+                    "light": "PATH_TO_VERIFIED",
+                    "dark": "PATH_TO_VERIFIED"
+                },
+                "login": {
+                    "light": "/static/img/frontend/login/light.svg",
+                    "dark": "/static/img/frontend/login/dark.svg"
+                }
+            }
+        },
+        "theme": {
+            "loginImage": {
+                "variant": "covering|contained"  # default: covering
+            },
+           "color": "blue",  # exclusive with "brandColors"
+           "brandColors": {  # exclusive with "colors"
+               "50": "#ffffff",
+               "100": "#ffffff",
+               "200": "#ffffff",
+               "300": "#ffffff",
+               "400": "#ffffff",
+               "500": "#ffffff",
+               "600": "#ffffff",
+               "700": "#ffffff",
+               "800": "#ffffff",
+               "900": "#ffffff",
+           }
+        },
+        "setup": {  # settings for the each of the step pages of the onboarding wizards
+            "contact": {
+                "description": format_lazy("{} {}", _("Combined"), _("lazy example"))
+            },
+            "interests": {
+                "description": "..."
+            }
+        },
+        "fieldOverrides": {
+            "setup": {
+                "profile": {
+                    # this is an example full overridable field dict. single properties can be overriden as well
+                    "first_name" = {
+                        "name": "first_name",
+                        "is_multi_language": False,
+                        "is_multi_language_sub_field": False,
+                        "in_signup": True,
+                        "required": True,
+                        "multiple": False,
+                        "type": "text",
+                        "label": "...",
+                        "legend": "...",
+                        "placeholder": None,
+                        "is_group_header": False,
+                        "parent_group_field_name": None,
+                        "display_required_field_names": None,
+                        "choices": None,
+                    },
+                    ...  # more named field overrides
+                }
+            },
+            "signup": {
+                "credentials": {}  # see example above
+            },
+            "contact": {
+                "profile": {}  # see example above
+            }
+        },
+        "signupCredentialsScreenMessage": "..."  # paragraph text under the signup form
+    }
     """
 
     renderer_classes = (
@@ -444,17 +533,24 @@ class PortalSettingsView(APIView):
             timeout = self.CACHE_TIMEOUT_DEV if settings.COSINNUS_IS_TEST_SERVER else self.CACHE_TIMEOUT
             cache.set(self.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % current_language, settings_dict, timeout)
         # update any settings delivered from `COSINNUS_V3_PORTAL_SETTINGS` recursively, uncached
-        update_dict_recursive(settings_dict, settings.COSINNUS_V3_PORTAL_SETTINGS)
-        return Response(settings_dict)
+        update_dict_recursive(settings_dict, settings.COSINNUS_V3_PORTAL_SETTINGS, extend_lists=True)
+        response = Response(settings_dict)
+        # set language cookie if not present
+        if settings.LANGUAGE_COOKIE_NAME not in request.COOKIES:
+            # if we ever wanted to ignore browser language preferences, and force the default portal language,
+            # we can replace `get_language()` with `settings.LANGUAGE_CODE` here:
+            switch_language_view = SwitchLanguageView()
+            switch_language_view.switch_language(get_language(), request, response)
+        return response
 
     def build_settings_dict(self, request):
         """Generates the complete settings dict afresh"""
+        portal = CosinnusPortal.get_current()
         privacy_policy_url = clean_single_line_text(
             render_to_string('cosinnus/v2/urls/privacy_policy_url.html', request=request)
         )
         terms_of_use_url = clean_single_line_text(render_to_string('cosinnus/v2/urls/tos_url.html', request=request))
         impressum_url = clean_single_line_text(render_to_string('cosinnus/v2/urls/impressum_url.html', request=request))
-
         settings_dict = {
             'portalName': settings.COSINNUS_PORTAL_NAME,
             'portalDisplayName': settings.COSINNUS_BASE_PAGE_TITLE_TRANS,
@@ -467,9 +563,14 @@ class PortalSettingsView(APIView):
             'cosinnusIsPrivatePortal': settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN,
             'cosinnusCloudEnabled': settings.COSINNUS_CLOUD_ENABLED,
             'cosinnusCloudNextcloudUrl': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
-            'signupShowContributionMessage': False,
-            # 'theme': {...},  # set manually
+            'signupCredentialsScreenMessage': None,
+            'usersNeedActivation': portal.users_need_activation,
+            'currentLanguage': get_language(),
+            'userProfileVisibilityLocked': bool(settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None),
             # 'setup': {'additionalSteps': ... }},  # set manually
+            # 'theme': {...},  # set manually. example:
+            # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
+            #    ("loginImage" ist optional, values: "covering|contained", defaults zu covering)
         }
         field_overrides = self._build_field_overrides_dict()
         if field_overrides:
@@ -477,49 +578,81 @@ class PortalSettingsView(APIView):
         return settings_dict
 
     def _build_field_overrides_dict(self):
-        """Build the dict of overriden dynamic fields"""
+        """Build the dict of overriden dynamic fields
+        The full overridable field definition looks as follows, and each or any key can be overridden:
+        defined_name_field = {
+            'name': 'last_name',
+            'is_multi_language': False,
+            'is_multi_language_sub_field': False,
+            'in_signup': True,
+            'required': True,
+            'multiple': False,
+            'type': 'text',
+            'label': _('Last name'),
+            'legend': None,
+            'placeholder': None,
+            'is_group_header': False,
+            'parent_group_field_name': None,
+            'display_required_field_names': None,
+            'choices': None,
+        }
+        """
         field_overrides = {}
         if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
-            # for last-name required portals, we add a hardcoded last name field
-            defined_name_field = {
-                'name': 'last_name',
-                'is_multi_language': False,
-                'is_multi_language_sub_field': False,
-                'in_signup': True,
-                'required': True,
-                'multiple': False,
-                'type': 'text',
-                'label': _('Last name'),
-                'legend': None,
-                'placeholder': None,
-                'is_group_header': False,
-                'parent_group_field_name': None,
-                'display_required_field_names': None,
-                'choices': None,
+            # for last-name required portals, we make the last name field required and set its label
+            defined_name_fields = {
+                'last_name': {
+                    'name': 'last_name',
+                    'is_multi_language': False,
+                    'is_multi_language_sub_field': False,
+                    'in_signup': True,
+                    'required': True,
+                    'multiple': False,
+                    'type': 'text',
+                    'label': _('Last name'),
+                    'legend': None,
+                    'placeholder': None,
+                    'is_group_header': False,
+                    'parent_group_field_name': None,
+                    'display_required_field_names': None,
+                    'choices': None,
+                }
             }
         else:
-            # for only-first-name required portals, we add a hardcoded display name field
-            defined_name_field = {
-                'name': 'first_name',
-                'is_multi_language': False,
-                'is_multi_language_sub_field': False,
-                'in_signup': True,
-                'required': True,
-                'multiple': False,
-                'type': 'text',
-                'label': _('Display name'),
-                'legend': _('Help other members find you and use your real name.'),
-                'placeholder': None,
-                'is_group_header': False,
-                'parent_group_field_name': None,
-                'display_required_field_names': None,
-                'choices': None,
+            # for only-first-name required portals, we change the label of the first name field to "Display name"
+            defined_name_fields = {
+                'first_name': {
+                    'name': 'first_name',
+                    'is_multi_language': False,
+                    'is_multi_language_sub_field': False,
+                    'in_signup': True,
+                    'required': True,
+                    'multiple': False,
+                    'type': 'text',
+                    'label': _('Display name'),
+                    'legend': _('Help other members find you and use your real name.'),
+                    'placeholder': None,
+                    'is_group_header': False,
+                    'parent_group_field_name': None,
+                    'display_required_field_names': None,
+                    'choices': None,
+                }
             }
         # the field gets added to the signup
-        field_overrides['signup'] = {'profile': [defined_name_field]}
+        field_overrides['signup'] = {
+            'credentials': {
+                'email': {
+                    'legend': _(
+                        'This will be used as your login. '
+                        + 'Notification emails will be sent to this address (if you want to receive them).'
+                    ),
+                },
+            },
+            'profile': copy(defined_name_fields),
+        }
         # and we also add that field in the first setup step again
         # note difference of 'setup' vs 'signup' keys!
-        field_overrides['setup'] = {'profile': [defined_name_field]}
+        field_overrides['setup'] = {'profile': copy(defined_name_fields)}
 
         # add a field override managed tags section if they should appear in signup
         if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
@@ -530,3 +663,9 @@ class PortalSettingsView(APIView):
                 'description': _('fields.managed_tags.description'),
             }
         return field_overrides
+
+    @classmethod
+    def clear_cache(cls):
+        """Clears the portal setting dict cache entries for all languages"""
+        for language_code, __ in settings.LANGUAGES:
+            cache.delete(cls.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % language_code)

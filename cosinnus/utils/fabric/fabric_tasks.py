@@ -62,8 +62,11 @@ def do_things(c):
 
 
 @task
-def deploy(_ctx, do_maintenance=True):
+def __deprecated__deploy(_ctx, do_maintenance=True):
     """
+    Note: not used anymore since we have been using poetry, as inplace `poetry update`s are a bad idea.
+          Use `hotdeploy` or `fulldeploy` instead!
+
     Main deploy command, full deploy with dependency update, raising a downtime banner
     on the entire site, blocking any user access.
 
@@ -86,18 +89,19 @@ def deploy(_ctx, do_maintenance=True):
     # restart_db()
     migrate(_ctx)
     start(_ctx)
+    clearportalcache(_ctx)
     compilewebpack(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
     if do_maintenance:
         maintenanceoff(_ctx)
+    print('\n\n>> Deploy has finished successfully.\n')
 
 
 @task
 def hotdeploy(_ctx):
     """Fast deploy with poetry update and soft server restarts. No downtime-banner raised.
-    Recommended only for hotfixes that do not require migrations,
-    else you run the risk that active users get server errors while the deploy is running."""
+    Recommended only for hotfixes that do not require dependency package updates."""
     check_confirmation()
     _pull_and_update()
     migrate(_ctx)
@@ -105,6 +109,7 @@ def hotdeploy(_ctx):
     compilewebpack(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
+    print('\n\n>> Hotdeploy has finished successfully.\n')
 
 
 @task
@@ -114,6 +119,7 @@ def fastdeploy(_ctx):
     restart(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
+    print('\n\n>> Fastdeploy has finished successfully.\n')
 
 
 @task
@@ -125,6 +131,7 @@ def fastpull(_ctx):
     with c.cd(env.path):
         c.run(f'git checkout {env.pull_branch}')
         c.run('git pull')
+    print('\n\n>> Fastpull has finished successfully.\n')
 
 
 @task
@@ -133,17 +140,16 @@ def deployfrontend(_ctx):
     check_confirmation()
     _pull_and_update_frontend()
     restartfrontend(_ctx)
+    print('\n\n>> Deployfrontend has finished successfully.\n')
 
 
 @task
 def fulldeploy(_ctx):
-    """Deploys and forces a complete recreation of the virtual env.
-    This will require a complete django unit stop and will pull up a maintenance banner on the server.
-    This will take longer and can be risky if the new build doesn't work.
+    """Deploys and does a complete rebuild of the virtual env.
+    This will take longer than `hotdeploy` pull up a maintenance banner on the server during the entire time.
+    The poetry `.venv` folder and lockfile are backuped and can be re-instated if the new poetry build fails.
 
-    This should only be done if some drastic architecture changes for poetry have happened or the
-    old environment is irrevocably broken (or also probably if poetry is again
-    just not updating its dependencies no matter what you try)."""
+    This should be done if dependency changes have been made in `setup.py`. If not, use `hotdeploy` instead."""
 
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
@@ -173,6 +179,7 @@ def fulldeploy(_ctx):
     maintenanceoff(_ctx)
     # print('Note: this may fail if no redesign frontend is present yet for this portal. In that case, this is fine!')
     # restartfrontend(_ctx)
+    print('\n\n>> Fulldeploy has finished successfully.\n')
 
 
 """ ----------- Single helper tasks. Used in deploy tasks, but can also be called solo ----------- """
@@ -196,6 +203,7 @@ def restart(_ctx):
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
     c.run(env.reload_command)
+    clearportalcache(_ctx)
 
 
 @task
@@ -276,6 +284,26 @@ def collectstatic(_ctx):
     with c.cd(env.path):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('./manage.py collectstatic --noinput')
+
+
+@task
+def clearportalcache(_ctx):
+    """Run a django collectstatic"""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('./manage.py clear_portal_cache')
+
+
+@task
+def rocketsyncupdatesetting(_ctx):
+    """A temporary task used to update a single rocketchat setting. Can be removed after it has run on all portals."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('./manage.py rocket_sync_settings --only-settings Update_EnableChecker')
 
 
 @task

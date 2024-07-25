@@ -3,6 +3,7 @@ import logging
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.db.models import Case, Count, When
+from django.templatetags.static import static
 from django.urls.base import reverse
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
@@ -29,6 +30,7 @@ from cosinnus.utils.permissions import (
     check_user_can_create_groups,
     check_user_portal_manager,
 )
+from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_unread_message_count_for_user
 from cosinnus.utils.version_history import get_version_history_for_user, mark_version_history_as_read
 from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
@@ -1216,7 +1218,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
 
         # home
         current_portal = CosinnusPortal.get_current()
-        home_image = current_portal.get_logo_image_url()
+        home_image = '%s%s' % (current_portal.get_domain(), static(settings.COSINNUS_PORTAL_LOGO_NAVBAR_IMAGE_URL))
         if settings.COSINNUS_V3_MENU_HOME_LINK:
             home_item = MenuItem(
                 _('Home'), settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-home', image=home_image, id='Home'
@@ -1275,7 +1277,15 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                     services_navigation_items.append(
                         MenuItem(_('Messages'), reverse('postman:inbox'), icon='messages', id='Messages')
                     )
-
+        # add "Calendar" link to services for all logged in users if the portal has a seperate Events forum group
+        if request.user.is_authenticated:
+            if settings.NEWW_EVENTS_GROUP_SLUG and settings.NEWW_EVENTS_GROUP_SLUG != settings.NEWW_FORUM_GROUP_SLUG:
+                events_url = group_aware_reverse(
+                    'cosinnus:event:list', kwargs={'group': settings.NEWW_EVENTS_GROUP_SLUG}
+                )
+                services_navigation_items.insert(
+                    0, MenuItem(_('Events'), events_url, icon='fa-calendar', is_external=False, id='Events')
+                )
         # add "Discover" link to services for all logged in users and additionally for non-logged-in users on open
         # portals
         if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or (

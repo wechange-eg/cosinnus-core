@@ -124,10 +124,13 @@
                     });
                 {% endif %}
 
-                {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
+                {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED and SETTINGS.COSINNUS_V3_FRONTEND_LEGACY %}
                     var url_csrf_v3_frontend = '/api/frontend/auth/csrf?v=3';
                     var url_logout_v3_frontend = '/api/frontend/auth/signout?v=3';
                     doFrontendLogout(url_csrf_v3_frontend, url_logout_v3_frontend);
+                {% elif not SETTINGS.COSINNUS_CLOUD_ENABLED %}
+                    {# if neither is enabled, show a success logout #}
+                    logoutSuccess(true);
                 {% endif %}
             </script>
 		{% endif %}
