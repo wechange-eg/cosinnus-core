@@ -128,7 +128,7 @@
                 var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
             </script>
             <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
-            {% if request.LANGUAGE_CODE in 'de,en,ru,uk' %}
+            {% if request.LANGUAGE_CODE in 'de,en,ru,uk,pl' %}
 	        <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
 	        {% else %}
 	        <script src="{% static 'js/locale/en/cosinnus_formats.js' %}?lang=en&v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
