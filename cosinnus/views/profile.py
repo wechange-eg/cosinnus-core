@@ -27,6 +27,7 @@ from cosinnus.core.decorators.views import redirect_to_error_page, redirect_to_n
 from cosinnus.core.mail import send_html_mail
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, CosinnusPortal
+from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_MANAGER
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
 from cosinnus.models.widget import WidgetConfig
@@ -37,6 +38,7 @@ from cosinnus.utils.permissions import (
     check_user_superuser,
 )
 from cosinnus.utils.user import filter_active_users
+from cosinnus.views.group import mark_group_for_deletion
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 
 logger = logging.getLogger('cosinnus')
@@ -52,9 +54,35 @@ def deactivate_user(user):
         user.cosinnus_profile.save()
 
 
-def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
+def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactivity_deletion=False):
     """Deacitvates a user account and marks them for deletion in 30 days"""
-    # TODO: send notification email
+    if triggered_by_self:
+        # send a notification email ignoring notification settings for a user triggered deletion
+        text = _(
+            'Your platform profile stored with us under this email has been deactivated by you and was approved for '
+            'deletion. The profile has been removed from the website and we will delete the account completely in 30 '
+            'days.\n\nIf this has happened without your knowledge or if you change your mind in the meantime, please '
+            'contact the portal administrators or the email address given in our imprint. Please note that the '
+            'response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would '
+            'like to keep your profile.'
+        )
+        body_text = textfield(text)
+        send_html_mail(
+            user, _('Information about the deletion of your user account'), body_text, threaded=False
+        )
+    elif inactivity_deletion:
+        # send notification for automatic deletion due to inactivity
+        subject = _('Attention: Your profile has been deactivated will be deleted due to inactivity')
+        text = _(
+            'Your platform profile stored under this email has been deactivated by us and released for deletion. We '
+            'will delete this account completely in 30 days.\n\nIf you change your mind  in the meantime, please '
+            'contact the portal administrators or the email address given in our imprint. Please note that the '
+            'response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would '
+            'like to keep your profile.'
+        )
+        body_text = textfield(text)
+        send_html_mail(user, subject, body_text, threaded=False)
+
     if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         # add a marked-for-deletion flag and a cronjob, deleting the profile using this
         deletion_schedule_time = now() + timedelta(days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS)
@@ -65,6 +93,25 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
 
     # send extended deactivation signal
     signals.user_deactivated_and_marked_for_deletion.send(sender=None, profile=user.cosinnus_profile)
+
+
+def reassign_admins_for_groups_of_deleted_user(user):
+    """Reassigned group members to admins if the only group admin is automatically deleted."""
+    for group in CosinnusGroup.objects.get_for_user(user):
+        admins = CosinnusGroupMembership.objects.get_admins(group=group)
+        members = CosinnusGroupMembership.objects.get_members(group=group)
+        if [user.pk] == admins:
+            # user is the only admin of the group
+            other_members = set(members).difference(admins)
+            if other_members:
+                # make other members admins
+                non_admin_status = [MEMBERSHIP_MANAGER, MEMBERSHIP_MEMBER]
+                for membership in CosinnusGroupMembership.objects.filter(group=group, status__in=non_admin_status):
+                    membership.status = MEMBERSHIP_ADMIN
+                    membership.save()
+            else:
+                # user is the only member of the group
+                mark_group_for_deletion(group, triggered_by_user=user)
 
 
 def delete_guest_user(user, deactivate_only=True):
@@ -174,11 +221,7 @@ def delete_userprofile(user):
 
 def send_user_inactivity_deactivation_notifications():
     """Sends notifications before automatic user deactivation due inactivity."""
-    # TODO: see if this can be refactored an common parts with the group functions moved to utils.
-    # TODO: discuss what to do with inactive users, e.g. automatically delete them without notifications?
-    #       same goes for users without a profile.
     users_notified_count = 0
-    portal = CosinnusPortal.get_current()
     users = get_user_model().objects.filter(is_active=True)
     for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
         # get users that are notified according to the configured interval
@@ -195,31 +238,27 @@ def send_user_inactivity_deactivation_notifications():
 
         for user in notify_users:
             # send notification email
-
-            mail_subject = _('Your account will be deleted due to inactivity.')
+            mail_subject = _('Your account will be deleted due to inactivity')
             mail_content = _(
-                'This is an automated email from %(portal_name)s.\n'
-                'Your entire account, profile and personal information will be be deactivated and irrevocably deleted '
-                'in %(time)s.\n'
+                'Your entire account, profile and personal information will be deactivated and irrevocably deleted in '
+                '%(deactivation_in)s.\n'
                 'Your pads, news, uploaded files and other content will remain on the website. However, your name will '
                 'no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your '
                 'profile direct messages will be deleted, but content within discussions and channels will remain. If '
                 'you still want to delete content from yourself, you can do this now by deleting the content on the '
                 'relevant pages.\n'
                 'Your profile will first be deactivated and completely removed from the platform. After deactivation, '
-                'it will be deleted from our database after %(deleted_after_days)s days and only then permanently. '
+                'it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n'
                 'The account may be stored in our backup systems for up to 6 months after deletion. If this is too '
                 'long for you, please contact the support team of this platform for immediate deletion.\n'
                 'During this %(deleted_after_days)s-day period after deletion, the e-mail address of your account is '
-                'reserved and cannot be used to register a new account.\n\n'
-                'With best regards your %(portal_name)s admins'
+                'reserved and cannot be used to register a new account.'
             ) % {
-                'portal_name': portal.name,
-                'time': time_message,
                 'deleted_after_days': settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS,
+                'deactivation_in': time_message,
             }
-            body_text = textfield(mail_content)
-            send_html_mail(user, mail_subject, body_text, threaded=False, topic_instead_of_subject=' ')
+            html_content = textfield(mail_content)
+            send_html_mail(user, mail_subject, html_content)
 
             # update the notification send timestamp
             user.cosinnus_profile.inactivity_notification_send_at = now()
@@ -526,20 +565,6 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         self.object = self.get_object()
         if not self._validate_user_delete_safe(request.user):
             return HttpResponseRedirect(reverse('cosinnus:profile-delete'))
-
-        # send a notification email ignoring notification settings
-        text = _(
-            'Your platform profile stored with us under this email has been deactivated by you and was approved for '
-            'deletion. The profile has been removed from the website and we will delete the account completely in 30 '
-            'days.\n\nIf this has happened without your knowledge or if you change your mind in the meantime, please '
-            'contact the portal administrators or the email address given in our imprint. Please note that the '
-            'response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would '
-            'like to keep your profile.'
-        )
-        body_text = textfield(text)
-        send_html_mail(
-            request.user, _('Information about the deletion of your user account'), body_text, threaded=False
-        )
 
         # this no longer immediately deletes the user profile, but instead deactivates it!
         # function after 30 days.

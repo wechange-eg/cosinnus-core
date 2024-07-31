@@ -51,6 +51,7 @@ from cosinnus.core.decorators.views import (
     membership_required,
     redirect_to_403,
 )
+from cosinnus.core.mail import send_html_mail
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.conference import CosinnusConferenceSettingsMultiForm
@@ -76,7 +77,6 @@ from cosinnus.models.group import (
     CosinnusUnregisterdUserGroupInvite,
 )
 from cosinnus.models.group_extra import CosinnusConference, CosinnusSociety, ensure_group_type
-from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.membership import (
     MEMBER_STATUS,
     MEMBERSHIP_ADMIN,
@@ -87,7 +87,7 @@ from cosinnus.models.membership import (
 )
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
-from cosinnus.templatetags.cosinnus_tags import full_name, is_superuser
+from cosinnus.templatetags.cosinnus_tags import full_name, is_superuser, textfield
 from cosinnus.utils.compat import atomic
 from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.group import (
@@ -101,10 +101,11 @@ from cosinnus.utils.permissions import (
     check_ug_admin,
     check_ug_membership,
     check_user_can_create_conferences,
+    check_user_can_receive_emails,
     check_user_can_see_user,
     check_user_superuser,
 )
-from cosinnus.utils.urls import group_aware_reverse, redirect_next_or
+from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse, redirect_next_or
 from cosinnus.utils.user import (
     filter_active_users,
     get_group_select2_pills,
@@ -137,61 +138,93 @@ logger = logging.getLogger('cosinnus')
 
 
 def mark_group_for_deletion(group, triggered_by_user=None):
-    """Mark group it for deletion in COSINNUS_GROUP_DELETION_SCHEDULE_DAYS days.
-    @param group: group to schedule deletion
-    @param triggered_by_user: User triggering the deletion, can be None for automatic deletion
+    """Schedule group deletion in COSINNUS_GROUP_DELETION_SCHEDULE_DAYS days.
+    Deactivates active groups and send notifications.
+
+    @param group: Group to deactivate for deletion
+    @param triggered_by_user: User triggering the deletion, can be None for automatic deactivation
     """
+    automatic_deletion = triggered_by_user is None
+
+    if automatic_deletion:
+        # ensure last activity threshold has passed
+        last_activity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
+        if group.last_activity > last_activity_threshold:
+            logger.warning(
+                'Automatic group deletion due to inactivity scheduled to early!', extra={'group_id': group.id}
+            )
+            return
+
+    # send notifications
+    portal = CosinnusPortal.get_current()
+    mail_subject = _('%(group_type)s %(group_name)s has been deactivated and will be deleted') % {
+        'group_type': group.trans.VERBOSE_NAME,
+        'group_name': group.name,
+    }
+    for user in group.actual_members.all():
+        if not check_ug_admin(user, group) and not check_user_can_receive_emails(user):
+            # consider notification settings for non admin users
+            continue
+        deactivated_groups_url = get_domain_for_portal(portal) + reverse('cosinnus:deactivated-groups')
+        mail_context = (
+            {
+                'group_type': group.trans.VERBOSE_NAME,
+                'group_name': group.name,
+                'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
+                'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
+                'deactivated_groups_url': deactivated_groups_url,
+            }
+        )
+        if automatic_deletion:
+            if group.is_active:
+                mail_content = _(
+                    '%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of '
+                    'inactivity.\n'
+                    'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
+                    'Until then, reactivation is possible by the %(group_type)s admins under '
+                    '%(deactivated_groups_url)s.\n'
+                    'If an earlier deletion is desired, please send an email to the portal support.'
+                ) % mail_context
+            else:
+                mail_content = _(
+                    '%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since '
+                    'deactivation.\n'
+                    'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
+                    'Until then, reactivation is possible by the %(group_type)s admins under '
+                    '%(deactivated_groups_url)s.\n'
+                    'If an earlier deletion is desired, please send an email to the portal support.'
+                ) % mail_context
+        else:
+            mail_context.update({
+                'deleted_by': triggered_by_user.get_full_name(),
+            })
+            mail_content = _(
+                '%(group_type)s %(group_name)s has just been deactivated at the instigation of the %(group_type)s '
+                'admin %(deleted_by)s.\n'
+                'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
+                'Until then, reactivation is possible by the %(group_type)s admins under '
+                '%(deactivated_groups_url)s.\n'
+                'If an earlier deletion is desired, please send an email to the portal support.'
+            ) % mail_context
+        html_content = textfield(mail_content)
+        send_html_mail(user, mail_subject, html_content)
+
+    if group.is_active:
+        # deactivate active groups
+        group.is_active = False
+        # we need to manually reindex or remove index to be sure the index gets removed
+        # need to get a typed group first and remove it from index, because after saving it deactived the manager
+        # won't find it
+        typed_group = ensure_group_type(group)
+        typed_group.remove_index()
+        typed_group.remove_index_for_all_group_objects()
+
+    # schedule deletion
     deletion_schedule_time = now() + datetime.timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS)
     group.scheduled_for_deletion_at = deletion_schedule_time
     if triggered_by_user:
         group.deletion_triggered_by = triggered_by_user
     group.save()
-
-
-def deactivate_group_and_mark_for_deletion(group, triggered_by_user=None, send_notification=False):
-    """Deactivate the group and mark it for deletion in COSINNUS_GROUP_DELETION_SCHEDULE_DAYS days
-    @param group: Group to deactivate for deletion
-    @param triggered_by_user: User triggering the deletion, can be None for automatic deactivation
-    @param send_notification: Send a notification email to all users
-    """
-    group.is_active = False
-    # we need to manually reindex or remove index to be sure the index gets removed
-    # need to get a typed group first and remove it from index, because after saving it deactived the manager
-    # won't find it
-    typed_group = ensure_group_type(group)
-    typed_group.remove_index()
-    typed_group.remove_index_for_all_group_objects()
-
-    # mark group for deletion
-    mark_group_for_deletion(group, triggered_by_user)
-
-    if send_notification:
-        # notifications are send only after a manual deletion, not after an automatic deactivation due to inactivity.
-        portal = CosinnusPortal.get_current()
-        mail_subject = _('%(group_type)s %(group_name)s has just been deactivated.') % {
-            'group_type': group.trans.VERBOSE_NAME,
-            'group_name': group.name,
-        }
-        mail_content = _(
-            'Dear user,\n\n'
-            'this is an automated email from the %(portal_name)s.\n'
-            '%(group_type)s %(group_name)s has just been deactivated. The deactivated project will be automatically '
-            'deleted after %(deleted_after_days)s days. Until then, reactivation is possible.\n'
-            'If an earlier deletion is desired or the deletion happened by mistake, please send an email to the portal '
-            'support.\n\n'
-            'With best regards your %(portal_name)s admins'
-        ) % {
-            'group_type': group.trans.VERBOSE_NAME,
-            'group_name': group.name,
-            'portal_name': portal.name,
-            'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
-        }
-        queued_mail = QueuedMassMail.objects.create(
-            subject=mail_subject,
-            content=mail_content,
-            send_mail_kwargs={'topic_instead_of_subject': ' '},
-        )
-        queued_mail.recipients.set(group.actual_members.all())
 
 
 def delete_group(group):
@@ -200,56 +233,8 @@ def delete_group(group):
         logger.warning('Aborting group deletion because the group was still active!', extra={'group_id': group.id})
         return
 
-    # TODO: check that deletion due to inactivity is done only if a notification was send
-    # TODO: here and everywhere else: consider first sending the emails then deactivating/deleting
-
-    # get the members for the notification email
-    group_members = list(group.actual_members.all())
-
     # delete group
     group.delete()
-
-    # queue notification email
-    portal = CosinnusPortal.get_current()
-    mail_subject = _('%(group_type)s %(group_name)s has just been deleted.') % {
-        'group_type': group.trans.VERBOSE_NAME,
-        'group_name': group.name,
-    }
-
-    if group.deletion_triggered_by:
-        # deletion triggered by an admin
-        deleted_by = group.deletion_triggered_by.get_full_name()
-        mail_content = _(
-            'Dear user,\n\n'
-            'this is an automated email from the %(portal_name)s.\n'
-            'A %(group_type)s of which you are a member has just been deleted from our platform. The %(group_type)s '
-            '%(group_name)s has been permanently deleted at the instigation of the project admin %(deleted_by)s.\n\n'
-            'With best regards your %(portal_name)s admins'
-        ) % {
-            'group_type': group.trans.VERBOSE_NAME,
-            'group_name': group.name,
-            'portal_name': portal.name,
-            'deleted_by': deleted_by,
-        }
-    else:
-        # automatic deletion due to inactivity.
-        mail_content = _(
-            'Dear user,\n\n'
-            'this is an automated email from the %(portal_name)s.\n'
-            'A %(group_type)s of which you are a member has just been deleted from our platform. The %(group_type)s '
-            '%(group_name)s has been permanently deleted due to a long period of inactivity.\n\n'
-            'With best regards your %(portal_name)s admins'
-        ) % {
-            'group_type': group.trans.VERBOSE_NAME,
-            'group_name': group.name,
-            'portal_name': portal.name,
-        }
-    queued_mail = QueuedMassMail.objects.create(
-        subject=mail_subject,
-        content=mail_content,
-        send_mail_kwargs={'topic_instead_of_subject': ' '},
-    )
-    queued_mail.recipients.set(group_members)
 
 
 def update_group_last_activity(group):
@@ -265,8 +250,9 @@ def update_group_last_activity(group):
 
     # taggable objects (notes, events, ...)
     base_taggable_objects = group.get_all_objects_for_group()
-    last_taggable_object_activity = max(taggable_object.last_modified for taggable_object in base_taggable_objects)
-    last_activity = max(last_activity, last_taggable_object_activity)
+    if base_taggable_objects:
+        last_taggable_object_activity = max(taggable_object.last_modified for taggable_object in base_taggable_objects)
+        last_activity = max(last_activity, last_taggable_object_activity)
 
     # Etherpad/Ethercalc
     if Etherpad.objects.filter(group=group).exists():
@@ -290,88 +276,50 @@ def update_group_last_activity(group):
 
 
 def send_group_inactivity_deactivation_notifications():
-    """Sends notifications before automatic group deactivation due inactivity."""
-    # TODO: make sure to send out the last notification event after the interval has passed to ensure at least one
-    #       notification was send before deletion.
+    """Sends notifications before automatic group deactivation due inactivity.
+    Notification are send at the exact interval. This means that if an interval is missed (e.g. due to cron jobs not
+    running for a day) the notification is not resend. This is considered non-critical as we make sure
+    to send a notification when actually scheduling the deletion.
+    """
     groups_notified_count = 0
-    portal = CosinnusPortal.get_current()
-    groups = get_cosinnus_group_model().objects.exclude(last_activity=None)
+    today = now().date()
+    groups = get_cosinnus_group_model().objects.exclude(is_active=True, last_activity=None)
     for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
         # get groups that are notified according to the configured interval
         days_after_last_activity = settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before_deactivation
         group_last_activity_date = (now() - datetime.timedelta(days=days_after_last_activity)).date()
         inactive_groups = groups.filter(last_activity__date=group_last_activity_date)
-        today = now().date()
         notify_groups = inactive_groups.filter(
             Q(inactivity_notification_send_at=None) | Q(inactivity_notification_send_at__date__lt=today)
         )
 
         for group in notify_groups:
-            # queue notification email
-
-            if group.is_active:
-                # Active groups are first deactivated and then deleted after COSINNUS_GROUP_DELETION_SCHEDULE_DAYS.
-
-                mail_subject = _('%(group_type)s %(group_name)s will be deactivated due to inactivity.') % {
+            for admin in group.actual_admins.all():
+                mail_subject = _('%(group_type)s %(group_name)s will be deleted due to inactivity') % {
                     'group_type': group.trans.VERBOSE_NAME,
                     'group_name': group.name,
                 }
+                delete_url = group_aware_reverse('cosinnus:group-schedule-delete', kwargs={'group': group})
                 mail_content = _(
-                    'Dear user,\n\n'
-                    'this is an automated email from the %(portal_name)s.\n'
                     '%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity '
-                    'and then permanently deleted. This will happen in %(time)s. If an earlier deletion is desired, '
-                    'please send an email to the portal support.\n\n'
-                    'With best regards your %(portal_name)s admins'
+                    'and then permanently deleted. This will happen in %(deactivation_in)s.\n'
+                    'If an earlier deletion is desired, you can delete the group under %(delete_group_url)s.'
                 ) % {
                     'group_type': group.trans.VERBOSE_NAME,
                     'group_name': group.name,
-                    'portal_name': portal.name,
                     'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
-                    'time': time_message,
+                    'deactivation_in': time_message,
+                    'delete_group_url':  delete_url,
                 }
-                queued_mail = QueuedMassMail.objects.create(
-                    subject=mail_subject,
-                    content=mail_content,
-                    send_mail_kwargs={'topic_instead_of_subject': ' '},
-                )
-                # All users get the notification for an active group.
-                queued_mail.recipients.set(group.actual_members.all())
-            else:
-                # for already inactive groups the notification is different, as we do not deactivate it before deletion.
-
-                mail_subject = _('%(group_type)s %(group_name)s will be deleted due to inactivity.') % {
-                    'group_type': group.trans.VERBOSE_NAME,
-                    'group_name': group.name,
-                }
-                mail_content = _(
-                    'Dear user,\n\n'
-                    'this is an automated email from the %(portal_name)s.\n'
-                    '%(group_type)s %(group_name)s will be deleted %(deactivation_after)s after the last activity. '
-                    'This will happen in %(time)s. If an earlier deletion is desired, please send an email to the '
-                    'portal support.\n\n'
-                    'With best regards your %(portal_name)s admins'
-                ) % {
-                    'group_type': group.trans.VERBOSE_NAME,
-                    'group_name': group.name,
-                    'portal_name': portal.name,
-                    'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
-                    'time': time_message,
-                }
-                queued_mail = QueuedMassMail.objects.create(
-                    subject=mail_subject,
-                    content=mail_content,
-                    send_mail_kwargs={'topic_instead_of_subject': ' '},
-                )
-                # Only admins get the notification for an inactive group.
-                queued_mail.recipients.set(group.actual_admins.all())
+                html_content = textfield(mail_content)
+                send_html_mail(admin, mail_subject, html_content)
 
             # update the notification send timestamp
             group.inactivity_notification_send_at = now()
             group.save()
             groups_notified_count += 1
 
-        return groups_notified_count
+    return groups_notified_count
 
 
 class SamePortalGroupMixin(object):
@@ -1936,7 +1884,7 @@ class GroupScheduleDeleteView(RequireAdminMixin, TemplateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        deactivate_group_and_mark_for_deletion(self.group, triggered_by_user=request.user, send_notification=True)
+        mark_group_for_deletion(self.group, triggered_by_user=request.user)
         success_message = _('%(team_name)s has been deactivated and will be deleted in 30 days!')
         messages.success(request, success_message % {'team_name': self.group.name})
         admin_log_action(request.user, self.group, _('Scheduled for deletion.'))

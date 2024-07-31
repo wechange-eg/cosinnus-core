@@ -22,7 +22,6 @@ from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.views.group import (
-    deactivate_group_and_mark_for_deletion,
     delete_group,
     mark_group_for_deletion,
     send_group_inactivity_deactivation_notifications,
@@ -31,6 +30,7 @@ from cosinnus.views.group import (
 from cosinnus.views.profile import (
     delete_userprofile,
     deactivate_user_and_mark_for_deletion,
+    reassign_admins_for_groups_of_deleted_user,
     send_user_inactivity_deactivation_notifications
 )
 from cosinnus_conference.utils import update_conference_premium_status
@@ -133,7 +133,8 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
         )
         for user in inactive_users:
             try:
-                deactivate_user_and_mark_for_deletion(user)
+                reassign_admins_for_groups_of_deleted_user(user)
+                deactivate_user_and_mark_for_deletion(user, inactivity_deletion=True)
                 users_scheduled += 1
             except Exception as e:
                 logger.exception(e)
@@ -323,8 +324,8 @@ class DeleteScheduledGroups(CosinnusCronJobBase):
 class UpdateGroupsLastActivity(CosinnusCronJobBase):
     """Updates the last-activity of all active groups."""
 
-    RUN_EVERY_MINS = 60 * 24  # every day
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    RUN_AT_TIMES = ['02:00']  # Run once a day during the night
+    schedule = Schedule(run_at_times=RUN_AT_TIMES)
 
     cosinnus_code = 'cosinnus.update_groups_last_activity'
 
@@ -340,7 +341,7 @@ class UpdateGroupsLastActivity(CosinnusCronJobBase):
                 logger.exception(e)
                 errors_occurred = True
 
-        # compute the last activity for inactive groups
+        # compute the last activity for inactive groups once
         groups = get_cosinnus_group_model().objects.filter(is_active=False, last_activity=None)
         for group in groups:
             try:
@@ -373,12 +374,12 @@ class SendGroupsInactivityNotifications(CosinnusCronJobBase):
         if groups_notified is not None:
             message = f'{groups_notified} groups notified.'
         else:
-            message = 'An error occurred during cron job execution'
+            message = 'An error occurred during cron job execution.'
         return message
 
 
-class DeactivateInactiveGroups(CosinnusCronJobBase):
-    """Deactivates groups afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE days of inactivity."""
+class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
+    """Marks inactive groups for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE days of inactivity."""
 
     RUN_EVERY_MINS = 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -389,11 +390,13 @@ class DeactivateInactiveGroups(CosinnusCronJobBase):
         groups_scheduled = 0
         errors_occurred = False
         inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
-        inactive_groups = get_cosinnus_group_model().objects.filter(last_activity__lt=inactivity_deactivation_threshold)
+        inactive_groups = get_cosinnus_group_model().objects.filter(
+            scheduled_for_deletion_at=None, last_activity__lt=inactivity_deactivation_threshold
+        )
         for group in inactive_groups:
             try:
                 if group.is_active:
-                    deactivate_group_and_mark_for_deletion(group)
+                    mark_group_for_deletion(group)
                 else:
                     mark_group_for_deletion(group)
                 groups_scheduled += 1
@@ -407,3 +410,4 @@ class DeactivateInactiveGroups(CosinnusCronJobBase):
             message = 'No groups scheduled for deletion'
         if errors_occurred:
             message += ' Errors occurred during cron job.'
+        return message
