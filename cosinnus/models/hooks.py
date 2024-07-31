@@ -392,5 +392,22 @@ def handle_user_group_guest_access_logged_out(sender, user, **kwargs):
         delete_guest_user(user, deactivate_only=True)
 
 
+@receiver(signals.user_activated)
+def abort_user_deletion(sender, user, **kwargs):
+    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile.scheduled_for_deletion_at:
+        profile = user.cosinnus_profile
+        type(profile).objects.filter(pk=profile.pk).update(
+            scheduled_for_deletion_at=None, deletion_triggered_by_self=False
+        )
+
+
+@receiver(signals.group_reactivated)
+def abort_group_deletion(sender, group, **kwargs):
+    type(group).objects.filter(pk=group.pk).update(
+        scheduled_for_deletion_at=None,
+        deletion_triggered_by=None,
+    )
+
+
 from cosinnus.apis.cleverreach import *  # noqa
 from cosinnus.models.wagtail_models import *  # noqa
