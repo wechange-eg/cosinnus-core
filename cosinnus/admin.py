@@ -315,6 +315,27 @@ class MembershipInline(admin.StackedInline):
     extra = 0
 
 
+class ProjectScheduledForDeletionAtFilter(admin.SimpleListFilter):
+    """Will show groups that are scheduled for deletedion (or not)"""
+
+    title = _('Scheduled for Deletion?')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'groupscheduledfordeletion'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(scheduled_for_deletion_at__exact=None)
+        if self.value() == 'no':
+            return queryset.filter(scheduled_for_deletion_at__exact=None)
+
+
 class CosinnusProjectAdmin(admin.ModelAdmin):
     actions = [
         'convert_to_society',
@@ -342,6 +363,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'portal',
         'public',
         'is_active',
+        ProjectScheduledForDeletionAtFilter,
     )
     search_fields = (
         'name',
