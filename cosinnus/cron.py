@@ -127,9 +127,7 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
         users_scheduled = 0
         errors_occurred = False
         inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
-        inactive_users = get_user_model().objects.filter(
-            is_active=True, cosinnus_profile__scheduled_for_deletion_at=None
-        )
+        inactive_users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
         inactive_users = inactive_users.filter(
             Q(last_login__lt=inactivity_deactivation_threshold) |
             Q(last_login=None, date_joined__lt=inactivity_deactivation_threshold)
