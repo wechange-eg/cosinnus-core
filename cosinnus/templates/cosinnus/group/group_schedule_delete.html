@@ -44,21 +44,23 @@
             </div>
         </div><!-- row -->
     </div>
-    
-    <form method="POST" action=".">{% csrf_token %}
-	    <button type="submit" class="btn btn-{% if activate %}emphasized{% else %}default{% endif %}">
-	        <ul class="media-list">
-	            <li class="media">
-	                <span class="pull-left">
-	                    <i class="fa fa-trash"></i>
-	                </span>
-	                <div class="media-body">
-                        {% trans "Delete" %}
-	                </div>
-	            </li>
-	        </ul>
-	    </button>
-    </form>
+
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#delete_confirm_modal">
+      <ul class="media-list">
+        <li class="media">
+                  <span class="pull-left">
+                      <i class="fa fa-trash"></i>
+                  </span>
+          <div class="media-body">
+            {% trans "Delete" %}
+          </div>
+        </li>
+      </ul>
+    </button>
+
+    {% captureas label %}{% blocktrans with title=group.name %}I wish to delete „{{ title }}“.{% endblocktrans %}{% endcaptureas %}
+    {% captureas title %}{{ group.trans.DELETE }}{% endcaptureas %}
+    {% include "cosinnus/modal_box.html" with id="delete_confirm_modal" label=label title=title form_action="." %}
 
 {% endblock %}
 
