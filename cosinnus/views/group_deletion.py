@@ -47,9 +47,13 @@ def mark_group_for_deletion(group, triggered_by_user=None):
         'group_name': group.name,
     }
     for user in group.actual_members.all():
+        # consider notification settings for non admin users
         if not check_ug_admin(user, group) and not check_user_can_receive_emails(user):
-            # consider notification settings for non admin users
             continue
+        # for deactivated groups only admins are notified
+        if not group.is_active and not check_ug_admin(user, group):
+            continue
+
         deactivated_groups_url = get_domain_for_portal(portal) + reverse('cosinnus:deactivated-groups')
         mail_context = (
             {
