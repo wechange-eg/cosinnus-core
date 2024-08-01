@@ -31,7 +31,7 @@ from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import ensure_group_widget
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import assign_user_to_default_auth_group, ensure_user_to_default_portal_groups
-from cosinnus.views.profile import delete_guest_user
+from cosinnus.views.profile_deletion import delete_guest_user
 from cosinnus_conference.utils import update_conference_premium_status
 
 logger = logging.getLogger('cosinnus')

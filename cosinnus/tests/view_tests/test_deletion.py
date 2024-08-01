@@ -23,7 +23,7 @@ from cosinnus.cron import (
 from cosinnus.models.group import CosinnusGroupMembership, MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.views.profile import delete_userprofile
+from cosinnus.views.profile_deletion import delete_userprofile
 from cosinnus_note.models import Note
 
 
@@ -97,7 +97,7 @@ class UserDeletionTest(TestUserMixin, TestCase):
 class UserManualDeletionTest(TestUserMixin, TestCase):
 
     @freeze_time('2024-01-01')
-    @patch('cosinnus.views.profile.send_html_mail')
+    @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_user_delete_view_schedules_deletion(self, send_mail_mock):
         self.client.force_login(self.test_user)
         self.assertTrue(self.test_user.is_active)
@@ -124,7 +124,7 @@ class UserManualDeletionTest(TestUserMixin, TestCase):
 
 class UserInactivityDeletionTest(TestUserMixin, TestCase):
 
-    @patch('cosinnus.views.profile.send_html_mail')
+    @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_inactivity_notifications(self, send_mail_mock):
         last_login = datetime(2014,1, 1)
         self.test_user.last_login = last_login
@@ -158,7 +158,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
                 SendUserInactivityNotifications().do()
                 self.assertFalse(send_mail_mock.called)
 
-    @patch('cosinnus.views.profile.send_html_mail')
+    @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
         last_login = datetime(2014,1, 1, tzinfo=timezone.utc)
         self.test_user.last_login = last_login
@@ -350,7 +350,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             self.test_group.refresh_from_db()
             self.assertEqual(self.test_group.last_activity, activity_time)
 
-    @patch('cosinnus.views.group.send_html_mail')
+    @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_inactivity_notifications(self, send_mail_mock):
         last_activity = datetime(2014,1, 1)
         with freeze_time(last_activity):
@@ -385,7 +385,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 SendGroupsInactivityNotifications().do()
                 self.assertFalse(send_mail_mock.called)
 
-    @patch('cosinnus.views.group.send_html_mail')
+    @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
         last_activity = datetime(2014,1, 1, tzinfo=timezone.utc)
         self.test_group.last_activity = last_activity
