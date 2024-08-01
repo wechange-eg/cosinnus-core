@@ -423,3 +423,23 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             MarkInactiveGroupsForDeletion().do()
             self.test_group.refresh_from_db()
             self.assertEqual(self.test_group.scheduled_for_deletion_at, expected_deletion)
+
+    @patch('cosinnus.views.group_deletion.send_html_mail')
+    def test_scheduled_deletion_of_inactive_groups(self, send_mail_mock):
+        last_activity = datetime(2014,1, 1, tzinfo=timezone.utc)
+        self.test_group.is_active = False
+        self.test_group.last_activity = last_activity
+        self.test_group.save()
+
+        deactivation_date = last_activity + timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE, seconds=1)
+
+        # deletion is scheduled after the schedule interval is passed
+        expected_deletion = deactivation_date + timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS)
+        with freeze_time(deactivation_date):
+            MarkInactiveGroupsForDeletion().do()
+            self.test_group.refresh_from_db()
+            self.assertEqual(self.test_group.scheduled_for_deletion_at, expected_deletion)
+            send_mail_mock.assert_called_with(
+                self.test_admin, f'Group {self.test_group.name} has been deactivated and will be deleted', ANY
+            )
+            send_mail_mock.reset_mock()
