@@ -20,7 +20,7 @@ from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.storage import TemporaryData
 from cosinnus.templatetags.cosinnus_tags import textfield
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.views.group_deletion import (
     delete_group,
@@ -142,9 +142,9 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
                 errors_occurred = True
 
         if users_scheduled > 0:
-            message = f'{users_scheduled} users scheduled for deletion'
+            message = f'{users_scheduled} users scheduled for deletion.'
         else:
-            message = 'No users scheduled for deletion'
+            message = 'No users scheduled for deletion.'
         if errors_occurred:
             message += ' Errors occurred during cron job.'
 
@@ -412,21 +412,20 @@ class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
         inactive_groups = get_cosinnus_group_model().objects.filter(
             scheduled_for_deletion_at=None, last_activity__lt=inactivity_deactivation_threshold
         )
+        # ignore forum and other default groups
+        inactive_groups = inactive_groups.exclude(pk__in=get_default_user_group_ids())
         for group in inactive_groups:
             try:
-                if group.is_active:
-                    mark_group_for_deletion(group)
-                else:
-                    mark_group_for_deletion(group)
+                mark_group_for_deletion(group)
                 groups_scheduled += 1
             except Exception as e:
                 logger.exception(e)
                 errors_occurred = True
 
         if groups_scheduled > 0:
-            message = f'{groups_scheduled} groups scheduled for deletion'
+            message = f'{groups_scheduled} groups scheduled for deletion.'
         else:
-            message = 'No groups scheduled for deletion'
+            message = 'No groups scheduled for deletion.'
         if errors_occurred:
             message += ' Errors occurred during cron job.'
         return message
