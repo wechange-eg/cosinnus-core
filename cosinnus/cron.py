@@ -21,15 +21,15 @@ from cosinnus.models.storage import TemporaryData
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.views.group import (
+from cosinnus.views.group_deletion import (
     delete_group,
     mark_group_for_deletion,
     send_group_inactivity_deactivation_notifications,
     update_group_last_activity,
 )
-from cosinnus.views.profile import (
-    delete_userprofile,
+from cosinnus.views.profile_deletion import (
     deactivate_user_and_mark_for_deletion,
+    delete_userprofile,
     reassign_admins_for_groups_of_deleted_user,
     send_user_inactivity_deactivation_notifications
 )
