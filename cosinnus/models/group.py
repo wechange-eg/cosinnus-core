@@ -2440,7 +2440,7 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
 
     class UserGroupGuestAccessDeleteThread(Thread):
         def run(self):
-            from cosinnus.views.profile import delete_guest_user
+            from cosinnus.views.profile_deletion import delete_guest_user
 
             for user in get_user_model().objects.filter(id__in=user_ids):
                 try:

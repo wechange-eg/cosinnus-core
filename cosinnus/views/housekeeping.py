@@ -55,7 +55,7 @@ from cosinnus.utils.user import (
     filter_active_users,
     is_user_active,
 )
-from cosinnus.views.profile import delete_userprofile
+from cosinnus.views.profile_deletion import delete_userprofile
 
 logger = logging.getLogger('cosinnus')
 
