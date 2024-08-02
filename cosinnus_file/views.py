@@ -96,7 +96,18 @@ class FileFormMixin(FilterGroupMixin, GroupFormKwargsMixin,
                                'slug': self.object.slug})
 
 
-class FileIndexView(RequireReadMixin, RedirectView):
+class RedirectIfSoftDisabledMixin(object):
+    """ Views with this mixin will redirect the user to their dashboard if `COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP`
+        is active. This is in lieu of completely disabling the app. """
+    
+    def dispatch(self, *args, **kwargs):
+        if settings.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP:
+            messages.warning(self.request, _('This action is not allowed right now'))
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
+        return super().dispatch(*args, **kwargs)
+
+
+class FileIndexView(RequireReadMixin, RedirectIfSoftDisabledMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, **kwargs):
@@ -106,7 +117,8 @@ class FileIndexView(RequireReadMixin, RedirectView):
 file_index_view = FileIndexView.as_view()
 
 class FileHybridListView(RequireReadWriteHybridMixin, HierarchyPathMixin, HierarchicalListCreateViewMixin, 
-                             CosinnusFilterMixin, FileFormMixin, AjaxFormsCreateViewMixin, CreateView):
+                             RedirectIfSoftDisabledMixin, CosinnusFilterMixin, FileFormMixin, AjaxFormsCreateViewMixin,
+                             CreateView):
     template_name = 'cosinnus_file/file_list.html'
     filterset_class = FileFilter
     
@@ -232,7 +244,7 @@ class FileListView(RequireReadMixin, FilterGroupMixin,
 file_list_view = FileListView.as_view()
 
 
-class FileUpdateView(RequireWriteMixin, FileFormMixin, UpdateView):
+class FileUpdateView(RequireWriteMixin, RedirectIfSoftDisabledMixin, FileFormMixin, UpdateView):
     form_view = 'edit'
     form_class = FileForm
     model = FileEntry
@@ -240,6 +252,9 @@ class FileUpdateView(RequireWriteMixin, FileFormMixin, UpdateView):
     
     message_success = _('File "%(title)s" was updated successfully.')
     message_error = _('File "%(title)s" could not be updated.')
+    
+    # allow updates for inline uploads during soft disable mode
+    ALLOW_VIEW_ACCESS_WHEN_GROUP_APP_DEACTIVATED = True# COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP
 
     def get_context_data(self, **kwargs):
         context = super(FileUpdateView, self).get_context_data(**kwargs)
@@ -374,7 +389,7 @@ class RocketFileDownloadView(RecordLastVisitedMixin, DetailView):
 rocket_file_download_view = RocketFileDownloadView.as_view()
 
 
-class FolderDownloadView(RequireReadMixin, FilterGroupMixin, DetailView):
+class FolderDownloadView(RequireReadMixin, RedirectIfSoftDisabledMixin, FilterGroupMixin, DetailView):
     '''
         Lets the user download a FileEntry file (file is determined by slug),
         while the user never gets to see the server file path.
@@ -472,13 +487,13 @@ class FolderDownloadView(RequireReadMixin, FilterGroupMixin, DetailView):
 folder_download_view = FolderDownloadView.as_view()
 
 
-class FileMoveElementView(MoveElementView):
+class FileMoveElementView(RedirectIfSoftDisabledMixin, MoveElementView):
     model = FileEntry
 
 move_element_view = FileMoveElementView.as_view()
 
 
-class FileDeleteElementView(DeleteElementView):
+class FileDeleteElementView(RedirectIfSoftDisabledMixin, DeleteElementView):
     model = FileEntry
 
 delete_element_view = FileDeleteElementView.as_view()

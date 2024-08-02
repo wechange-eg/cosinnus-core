@@ -195,7 +195,7 @@
 	            </div>
             {% endif %}
             
-            {% if not 'cosinnus_file' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+            {% if not 'cosinnus_file' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS and not SETTINGS.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP %}
                 <div class="app-files">
                   <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=file">
                     <ul class="media-list">
