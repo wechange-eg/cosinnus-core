@@ -1,46 +1,93 @@
-{% load i18n cosinnus_tags djajax_tags %}
+{% load i18n cosinnus_tags djajax_tags widget_tweaks %}
 
-<div class="fadedown">
-    <button type="button" class="btn w100 btn-{% if active %}extra-{% endif %}emphasized {{ extra_classes }}" {% if extra_atts %}{{ extra_atts }}{% endif %}>
-    {% comment %} <button type="button" class="btn w100 btn{% if active %}-extra{% endif %}-emphasized {{ extra_classes }}" href="{{ href }}"> {% endcomment %}
+{# ------- Edit Folder Modal ---------- #}
+{% captureas edit_modal_id %}editFolder_{{folder.pk}}{% endcaptureas %}
+{% captureas folder_button_id %}folderButton_{{folder.pk}}{% endcaptureas %}
+{% captureas edit_content %}
+    <script type="text/javascript">
+        function editFolderSuccess_{{folder.pk}}() {
+            {% comment %}
+                // update folder label and close modal, but this only works in the v2 frontend, not v3
+                $('#folder_label_{{ folder.group.pk }}_{{ folder.pk }}').text($('#folder_{{ folder.group.pk }}_{{ folder.pk }}').val());
+                $('#{{ edit_modal_id }}').modal('hide');
+            {% endcomment %}
+            location.reload();
+        }
+    </script>
+    {% captureas on_success %}editFolderSuccess_{{folder.pk}}{% endcaptureas %}
+    <input id="folder_{{ folder.group.pk }}_{{ folder.pk }}" class="form-control"
+        placeholder="{% trans "Folder name" %}" value="{{ label }}"
+        {% djajax_connect folder.title trigger_on="enter_key" empty="false" on_success=on_success %} />
+    <div class="clearfix large-space"></div>
+{% endcaptureas %}
+{% captureas edit_folder_custom_button_html %}
+    <button type="button" class="submit-btn-x btn btn-emphasized" onclick="$.cosinnus.pressEnterOn('#folder_{{ folder.group.pk }}_{{ folder.pk }}')">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left btn-extra-emphasized" href="{{ href }}" title="{{ label }}">
+                <span class="pull-left">
+                    <i class="fa fa-check"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "OK" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-times"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "Cancel" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+{% endcaptureas %}
+{% captureas title %}{% trans "Enter a new name for the folder" %}:{% endcaptureas %}
+{% include "cosinnus/modal_box.html" with id=edit_modal_id label=edit_content title=title custom_button_html=edit_folder_custom_button_html hide_submit_button=True hide_cancel_button=True title_icon="fa-folder" %}
+
+
+{# ------- Folder Leftnav button with fadedown actions menu ---------- #}
+<div class="fadedown">
+    <button type="button" class="btn w100 btn-{% if active %}extra-{% endif %}emphasized {{ extra_classes }}" {% if extra_atts %}{{ extra_atts }}{% endif %}>
+        <ul class="media-list">
+            <li class="media">
+                <a id="{{ folder_button_id }}" class="pull-left btn-extra-emphasized" href="{{ href }}" title="{{ label }}">
                     {% if icon_content %}
                         {{ icon_content }}
                     {% else %}
                         <i class="fa {{ icon }}"></i>
                     {% endif %}
                 </a>
-                <a id="folder_clickarea_{{ folder.group.pk }}_{{ folder.pk }}" class="pull-right fadedown-clickarea edit-this-clickarea" title="{% trans "Edit folder" %}" href="#">
+                <a id="folder_clickarea_{{ folder.group.pk }}_{{ folder.pk }}" class="pull-right fadedown-clickarea" title="{% trans "Edit folder" %}" href="#">
                     <i class="fa fa-ellipsis-h"></i>
                 </a>
-                <div class="media-body" href="{{ href }}" >
+                <div id="folder_label_{{ folder.group.pk }}_{{ folder.pk }}" class="media-body" href="{{ href }}">
                     <span>{{ label }}</span>
-                    {% captureas on_success %}$.cosinnus.restoreThisClickarea{% endcaptureas %}
-                    {% captureas on_success_args %}#folder_clickarea_{{ folder.group.pk }}_{{ folder.pk }}{% endcaptureas %}
-                    <input id="folder_{{ folder.group.pk }}_{{ folder.pk }}" class="form-control" style="display: none;" 
-                        placeholder="{% trans "Folder name" %}" value="{{ label }}" 
-                        {% djajax_connect folder.title trigger_on="enter_key" empty="false" on_success=on_success on_success_args=on_success_args %} />
                 </div>
             </li>
         </ul>
     </button>
-    
+
     <div>
-        <div type="button" class="btn btn-emphasized fine-space" onclick="$.cosinnus.pressEnterOn('#folder_{{ folder.group.pk }}_{{ folder.pk }}')">
+        <button type="button" class="btn btn-emphasized fine-space x-v3-leftnav-action-button x-v3-leftnav-action-target-active-subitem"
+                  data-toggle="modal" data-target="#{{ edit_modal_id }}" data-v3-parent="{{ folder_button_id }}">
             <ul class="media-list">
                 <li class="media">
                     <span class="pull-right btn-extra-emphasized" href="#">
-                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-pencil"></i>
                     </span>
                     <div class="media-body">
-                        {% trans "Save" %}
+                        {% trans "Edit folder" %}
                     </div>
                 </li>
             </ul>
-        </div>
-        <div type="button" class="btn btn-emphasized regular-space" title="{% trans "Delete folder" %}" data-toggle="modal" data-target="#deleteFolder_{{folder.pk}}">
+        </button>
+        <button type="button" class="btn btn-emphasized regular-space x-v3-leftnav-action-button x-v3-leftnav-action-target-active-subitem"
+                  title="{% trans "Delete folder" %}" data-toggle="modal" data-target="#deleteFolder_{{folder.pk}}" data-v3-parent="{{ folder_button_id }}">
             <ul class="media-list">
                 <li class="media">
                     <span class="pull-right btn-extra-emphasized" href="#">
@@ -51,9 +98,10 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </button>
         {% if downloadable %}
-	        <div type="button" class="btn btn-emphasized large-space" title="{% trans "Download" %}" href="{{ href }}download/">
+	        <button type="button" class="btn btn-emphasized large-space x-v3-leftnav-action-button x-v3-leftnav-action-target-active-subitem"
+                    title="{% trans "Download" %}" href="{{ href }}download/" data-v3-parent="{{ folder_button_id }}">
 	            <ul class="media-list">
 	                <li class="media">
 	                    <span class="pull-right btn-extra-emphasized">
@@ -64,7 +112,7 @@
 	                    </div>
 	                </li>
 	            </ul>
-	        </div>
+	        </button>
         {% endif %}
     </div>
 </div>
@@ -73,4 +121,3 @@
 {% captureas title %}{% trans "Delete folder" %}{% endcaptureas %}
 {% captureas label %}{% trans "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!" %}{% endcaptureas %}
 {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=folder.get_delete_url %}
-        

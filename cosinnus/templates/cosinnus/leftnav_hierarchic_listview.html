@@ -30,35 +30,18 @@
 {% endfor %}
 
 {% if user|can_create_objects_in:group %}
-	<form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" name="container_form" method="post"class="form-horizontal" autocomplete="off">{% csrf_token %}
-	    <div type="button" class="btn btn-default w100">
-	        <ul class="media-list">
-	            <li class="media">
-	                <span class="pull-left">
-	                    <i class="fa fa-plus"></i>
-	                </span>
-	                <div class="media-body media-body-form-control">
-	                    {{ container_form.title.errors }}
-	                    <!-- use spaces for centering. CSS padding does not work here. -->
-	                    {% captureas placeholder %}{% trans "New folder name" %}{% endcaptureas %}
-	                    {% render_field container_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder %}
-	                    <!-- next-button-is-for-sending -->
-	                </div>
-	            </li>
-	        </ul>
-	    </div>
-	    <button type="submit"  name="create_container" class="btn btn-emphasized large-space" style="display: none;">
-	        <ul class="media-list">
-	            <li class="media">
-	                <span class="pull-left">
-	                    <i class="fa fa-pencil"></i>
-	                </span>
-	                <div class="media-body">
-	                    {% trans "Create folder" %}
-	                </div>
-	            </li>
-	        </ul>
-	    </button>
-	</form>
+  <div class="clearfix v-spacer-m"></div>
+  {% captureas label %}{% trans "Create folder" %}{% endcaptureas %}
+  {% include "cosinnus/leftnav_button.html" with icon="fas fa-plus" label=label extra_atts='data-toggle="modal" data-target="#create_folder_modal"' extra_classes="x-v3-leftnav-action-button x-v3-leftnav-action-target-active-app" %}
+
+  {% captureas content %}
+      {{ container_form.title.errors }}
+      {% captureas placeholder %}{% trans "New folder name" %}{% endcaptureas %}
+      {% render_field container_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder %}
+      <div class="clearfix large-space"></div>
+  {% endcaptureas %}
+  {% captureas create_folder_action %}.{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}{% endcaptureas %}
+  {% captureas title %}{% trans "Enter a name for the new folder" %}:{% endcaptureas %}
+  {% include "cosinnus/modal_box.html" with id="create_folder_modal" label=content title=title form_action=create_folder_action form_attrs="name='container_form'" submit_name="create_container" title_icon="fa-folder" %}
+
 {% endif %}
-	

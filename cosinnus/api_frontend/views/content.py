@@ -624,6 +624,11 @@ class MainContentView(APIView):
                 selected=selected,
                 attributes=attributes if attributes else None,
             )
+            # attach the id, CSS classes, and data-target to the menu item for internal use
+            setattr(menu_item, '_original_id', leftnav_link.get('id', None))
+            setattr(menu_item, '_original_css_class', leftnav_link.get('class', []))
+            setattr(menu_item, '_original_data_target', leftnav_link.get('data-target', None))
+            setattr(menu_item, '_original_data_parent', leftnav_link.get('data-v3-parent', None))
             menu_items.append(menu_item)
         return menu_items
 
@@ -668,7 +673,7 @@ class MainContentView(APIView):
         label_href_hashes = []
 
         def _check_unique_and_remember(menu_item):
-            hash = menu_item['label'] + '|' + (menu_item.get('url') or '-')
+            hash = menu_item['label'] + '|' + (menu_item.get('url') or getattr(menu_item, '_original_data_target') or '-')
             if hash in label_href_hashes:
                 return False
             label_href_hashes.append(hash)
@@ -683,7 +688,22 @@ class MainContentView(APIView):
             for menu_item in menu_items:
                 target_subnav = default_target
                 # select the proper subnav for this menu to go to, by type of URL
-                if not menu_item['url']:
+                if 'x-v3-leftnav-action-button' in [subclass for subclass in getattr(menu_item, '_original_css_class', [])]:
+                    # action menu buttons are sorted into the actions sublist of a menu item depending on their target
+                    if 'x-v3-leftnav-action-target-active-app' in [subclass for subclass in getattr(menu_item, '_original_css_class', [])]:
+                        active_menu_item['actions'] = active_menu_item.get('actions', []) # make sure actions list exists
+                        target_subnav = active_menu_item['actions']
+                    elif 'x-v3-leftnav-action-target-active-subitem' in [subclass for subclass in getattr(menu_item, '_original_css_class', [])]:
+                        # find the MenuItem from the buttons_items menu that has the original html id of this action button target
+                        # (for example, the Etherpad folder button as parent for its "edit folder" action context button)
+                        action_target_parent_id = getattr(menu_item, '_original_data_parent', None)
+                        if action_target_parent_id:
+                            for find_target_button in buttons_items:
+                                if getattr(find_target_button, '_original_id', None) == action_target_parent_id:
+                                    find_target_button['actions'] = find_target_button.get('actions', [])  # make sure actions list exists
+                                    target_subnav = find_target_button['actions']
+                elif not menu_item['url']:
+                    # non url buttons like help popups go in the bottom list
                     target_subnav = bottom
                 elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS):
                     target_subnav = bottom
