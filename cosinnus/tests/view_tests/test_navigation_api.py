@@ -433,7 +433,6 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
                 MenuItem(
                     'Notification Preferences', '/profile/notifications/', 'fa-envelope', id='NotificationPreferences'
                 ),
-                self.expected_language_menu_item(),
                 MenuItem('Logout', '/logout/', 'fa-right-from-bracket', id='Logout'),
             ],
         )
@@ -444,7 +443,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(
-            response.data[3],
+            response.data[2],
             MenuItem('Administration', '/administration/', 'fa-screwdriver-wrench', id='Administration'),
         )
 
@@ -464,7 +463,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(
-            response.data[3],
+            response.data[2],
             MenuItem(
                 'Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €', id='Contribution'
             ),

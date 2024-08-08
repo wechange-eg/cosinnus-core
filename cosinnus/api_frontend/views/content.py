@@ -42,6 +42,7 @@ V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS = [
     '.*/edit/$',
     '.*/delete/$',
     '.*/password_change/$',
+    '^/setup/profile/',
     '^/account/deactivate/',
     '^/account/activate/',
     '^#$',
@@ -559,7 +560,22 @@ class MainContentView(APIView):
 
     def _create_menu_items_from_html(self, html_soup):
         """Extracts a menu_item from all proper links contained in the given HTML soup,
-        with a heuristic for icons/labels"""
+        with a heuristic for icons/labels.
+        Possible HTML properties on buttons that are v3-specific and change button behaviour:
+            - attribute "data-v3-id": if present the button needs to href to be included and its returned id property
+                is set to it
+            - attribute "data-toggle" in combination with "data-target": bootstrap modal buttons are included and these two
+                attributes are passed along in the "attributes" attribute
+            - CSS classes "x-v3-leftnav-action-button", "x-v3-leftnav-action-target-active-app",
+                and "x-v3-leftnav-action-target-active-subitem" signify that these leftnav items are action buttons
+                that appear as context menu buttons on another leftnav button.
+                - "x-v3-leftnav-action-target-active-app" directs that the action button should be rendered on the
+                    current active app's app button in the v3 frontend
+                - "x-v3-leftnav-action-target-active-subitem" directs the target button id on which the context menu
+                    should be rendered in the v3 frontend
+            - attribute "data-v3-parent": only in conjunction with CSS class "x-v3-leftnav-action-target-active-subitem"
+                (see above)
+        """
         if not html_soup:
             return []
         menu_items = []
@@ -570,9 +586,11 @@ class MainContentView(APIView):
                 attributes.update(
                     {'data-toggle': leftnav_link.get('data-toggle'), 'data-target': leftnav_link.get('data-target')}
                 )
+            # extract v3-specific id if present
+            v3_id = leftnav_link.get('data-v3-id', None)
             # skip link-less buttons (like the dropdown trigger), unless they have modal data attributes
             href = leftnav_link.get('href')
-            if not href and not attributes:
+            if not href and not attributes and not v3_id:
                 continue
             # ignore some links depending on their class
             if leftnav_link.get('class') and any(
@@ -613,13 +631,13 @@ class MainContentView(APIView):
                 and 'active' in leftnav_link.parent.get('class')
             ):
                 sub_items = []
-
+            
             # create menu item for the link
             menu_item = MenuItem(
                 link_label,
                 url=href if href else None,
                 icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
-                id='Sidebar-' + get_random_string(8),
+                id=v3_id or ('Sidebar-' + get_random_string(8)),
                 sub_items=sub_items,
                 selected=selected,
                 attributes=attributes if attributes else None,

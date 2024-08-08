@@ -913,37 +913,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                                 'selected': False,
                             },
                             {
-                                'id': 'ChangeLanguage',
-                                'icon': 'fa-language',
-                                'label': 'Change Language',
-                                'url': None,
-                                'image': None,
-                                'is_external': False,
-                                'badge': None,
-                                'sub_items': [
-                                    {
-                                        'id': 'ChangeLanguageItemDE',
-                                        'label': 'Deutsch',
-                                        'url': '/language/de/',
-                                        'is_external': False,
-                                        'icon': None,
-                                        'image': None,
-                                        'badge': None,
-                                        'selected': False,
-                                    },
-                                    {
-                                        'id': 'ChangeLanguageItemEN',
-                                        'label': 'English',
-                                        'url': '/language/en/',
-                                        'is_external': False,
-                                        'icon': None,
-                                        'image': None,
-                                        'badge': None,
-                                        'selected': True,
-                                    },
-                                ],
-                            },
-                            {
                                 'id': 'Contribution',
                                 'label': 'Your Contribution',
                                 'url': '/account/contribution/',
@@ -996,11 +965,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     ]
                 )
             profile_menu.extend(profile_menu_items)
-
-            # language
-            if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
-                language_item = self.get_language_menu_item(request)
-                profile_menu.append(language_item)
 
             # payments
             if (
