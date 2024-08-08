@@ -444,7 +444,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(
-            response.data[5],
+            response.data[3],
             MenuItem('Administration', '/administration/', 'fa-screwdriver-wrench', id='Administration'),
         )
 
@@ -464,7 +464,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(
-            response.data[5],
+            response.data[3],
             MenuItem(
                 'Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €', id='Contribution'
             ),
@@ -499,7 +499,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
             response.data,
             {
                 'left': [
-                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
+                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/v2_navbar_brand.png', id='Home'),
                     MenuItem('Spaces', id='Spaces'),
                 ],
                 'middle': [
@@ -528,7 +528,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
             response.data,
             {
                 'left': [
-                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
+                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/v2_navbar_brand.png', id='Home'),
                     MenuItem('Spaces', id='Spaces'),
                 ],
                 'middle': [],
