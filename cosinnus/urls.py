@@ -5,6 +5,7 @@ from django.templatetags.static import static
 from django.urls import include, path, re_path, reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
 from drf_yasg import openapi
+from drf_yasg.generators import OpenAPISchemaGenerator
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions, routers
 from rest_framework_simplejwt.views import (
@@ -743,6 +744,19 @@ api_v3_url_patterns = [
 schema_url_patterns = api_v2_url_patterns + api_v3_url_patterns
 urlpatterns += schema_url_patterns
 
+
+class StrictProductionHttpsSchemaGenerator(OpenAPISchemaGenerator):
+    """ Strictly sets "https" as schema in non-DEBUG environments """
+    
+    def get_schema(self, request=None, public=False):
+        schema = super().get_schema(request, public)
+        if settings.DEBUG:
+            schema.schemes = ['http', 'https']
+        else:
+            schema.schemes = ['https',]
+        return schema
+
+
 schema_view = get_schema_view(
     openapi.Info(
         title='WECHANGE API',
@@ -752,6 +766,7 @@ schema_view = get_schema_view(
         contact=openapi.Contact(email='support@wechange.de'),
         license=openapi.License(name='AGPL 3.0'),
     ),
+    generator_class=StrictProductionHttpsSchemaGenerator,
     public=True,
     permission_classes=(permissions.AllowAny,),
     patterns=schema_url_patterns,
