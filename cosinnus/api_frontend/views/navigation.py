@@ -913,16 +913,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                                 'selected': False,
                             },
                             {
-                                'id': 'EditProfile',
-                                'label': 'Edit my Profile',
-                                'url': '/profile/edit/',
-                                'is_external': False,
-                                'icon': 'fa-gear',
-                                'image': None,
-                                'badge': None,
-                                'selected': False,
-                            },
-                            {
                                 'id': 'NotificationPreferences',
                                 'label': 'Notification Preferences',
                                 'url': '/profile/notifications/',
@@ -1016,7 +1006,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     )
                 profile_menu_items.extend(
                     [
-                        MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
                         MenuItem(
                             _('Notification Preferences'),
                             reverse('cosinnus:notifications'),
