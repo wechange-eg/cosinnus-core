@@ -426,17 +426,11 @@ class CosinnusGroupManager(models.Manager):
         For superusers, returns *all* deactivated groups and projects!
         Note: uncached!
         """
-        from cosinnus.utils.permissions import check_user_superuser
-
         all_inactive_groups = self.get_queryset().filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
-
-        # admins can see *all* inactive groups. for the rest of the users, filter the list to groups they are admin of.
-        if check_user_superuser(user):
-            my_inactive_groups = all_inactive_groups
-        else:
-            my_inactive_groups = all_inactive_groups.filter(
-                id__in=self.get_for_user_group_admin_pks(user, includeInactive=True)
-            )
+        # filter the list to groups they are admin of.
+        my_inactive_groups = all_inactive_groups.filter(
+            id__in=self.get_for_user_group_admin_pks(user, includeInactive=True)
+        )
         return my_inactive_groups
 
     def with_deactivated_app(self, app_name):
