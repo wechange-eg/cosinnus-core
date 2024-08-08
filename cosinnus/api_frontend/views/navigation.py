@@ -903,16 +903,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                                 'selected': False,
                             },
                             {
-                                'id': 'SetupProfile',
-                                'label': 'Set up my Profile',
-                                'url': '/profile/edit/',
-                                'is_external': False,
-                                'icon': 'fa-pen',
-                                'image': None,
-                                'badge': None,
-                                'selected': False,
-                            },
-                            {
                                 'id': 'NotificationPreferences',
                                 'label': 'Notification Preferences',
                                 'url': '/profile/notifications/',
@@ -995,15 +985,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 MenuItem(profile_label, reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
             if not request.user.is_guest:
-                if settings.COSINNUS_V3_FRONTEND_ENABLED:
-                    profile_menu_items.append(
-                        MenuItem(
-                            _('Set up my Profile'),
-                            reverse('cosinnus:v3-frontend-setup-profile'),
-                            'fa-pen',
-                            id='SetupProfile',
-                        ),
-                    )
                 profile_menu_items.extend(
                     [
                         MenuItem(

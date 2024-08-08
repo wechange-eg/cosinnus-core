@@ -430,7 +430,6 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
             response.data,
             [
                 MenuItem('My Profile', '/profile/', 'fa-circle-user', id='Profile'),
-                MenuItem('Set up my Profile', '/setup/profile/', 'fa-pen', id='SetupProfile'),
                 MenuItem(
                     'Notification Preferences', '/profile/notifications/', 'fa-envelope', id='NotificationPreferences'
                 ),
