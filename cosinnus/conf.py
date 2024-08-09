@@ -1016,7 +1016,7 @@ class CosinnusConf(AppConf):
     V3_MENU_SPACES_MAP_LABEL = _('Discover')
 
     # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
-    V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = False
+    V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = True
 
     # Additional menu items for the community space in the v3 main navigation.
     # Format: List of (<id-string>, <label>, <url>, <icon>),
@@ -1029,6 +1029,7 @@ class CosinnusConf(AppConf):
 
     # a class dropin to replace CosinnusNavigationPortalLinksBase as class that modifies or provides additional
     # navbar links returned in various v3 navigation API endpoints
+    # used for example to modify navigation links, like adding "big" links in the main navbar
     # (str classpath)
     V3_MENU_PORTAL_LINKS_DROPIN = None
 
