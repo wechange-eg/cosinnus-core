@@ -48,6 +48,36 @@
 			        </li>
 			    </ul>
 			</button>
+
+      {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
+          <button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:v3-frontend-setup-profile' %}">
+              <ul class="media-list">
+                  <li class="media">
+                     <span class="pull-left">
+                          <i class="fa fa-cog"></i>
+                      </span>
+                      <div class="media-body">
+                          {% trans "Set up my Profile" %}
+                      </div>
+                  </li>
+              </ul>
+          </button>
+          {% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED and COSINNUS_V3_API_CONTENT_ACTIVE %}
+              <button type="button" class="btn w100 btn-emphasized regular-space" data-v3-id="ChangeLanguage">
+                  <ul class="media-list">
+                      <li class="media">
+                         <span class="pull-left">
+                              <i class="fa fa-language"></i>
+                          </span>
+                          <div class="media-body">
+                              {% trans "Change language" %}
+                          </div>
+                      </li>
+                  </ul>
+              </button>
+
+          {% endif %}
+      {% endif %}
 		{% endblock %}
 	{% endif %}
 {% endif %}

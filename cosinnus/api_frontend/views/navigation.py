@@ -234,6 +234,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         community_space = None
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        events_slug = getattr(settings, 'NEWW_EVENTS_GROUP_SLUG', None)
         if forum_slug:
             forum_group = get_object_or_None(
                 get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current()
@@ -256,6 +257,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                         id=f'Forum{tag.paired_group.id}',
                                     )
                                 )
+                # add Forum group to community space
                 if settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
                     community_space_items.append(
                         MenuItem(
@@ -265,9 +267,24 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                             id='Forum',
                         )
                     )
+                # add Events-Forum group to community space for portals that have a split Events Forum group
+                if events_slug != forum_slug:
+                    events_group = get_object_or_None(
+                        get_cosinnus_group_model(), slug=events_slug, portal=CosinnusPortal.get_current()
+                    )
+                    if events_group:
+                        community_space_items.append(
+                            MenuItem(
+                                events_group['name'],
+                                events_group.get_absolute_url(),
+                                'fa-calendar',
+                                id='Events',
+                            )
+                        )
+        # "Discover" link in community section of spaces menu
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
-                MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-group', id='Map')
+                MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-map', id='Map')
             )
         if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
             community_space_items.extend(
@@ -806,7 +823,7 @@ class HelpView(APIView):
                         'data': [
                             {
                                 'id': 'FAQ',
-                                'label': '<b>FAQ</b> (Frequently asked questions)',
+                                'label': '<b>FAQ</b>',
                                 'url': 'https://localhost/cms/faq/',
                                 'is_external': True,
                                 'icon': 'fa-question-circle',
@@ -903,26 +920,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                                 'selected': False,
                             },
                             {
-                                'id': 'SetupProfile',
-                                'label': 'Set up my Profile',
-                                'url': '/profile/edit/',
-                                'is_external': False,
-                                'icon': 'fa-pen',
-                                'image': None,
-                                'badge': None,
-                                'selected': False,
-                            },
-                            {
-                                'id': 'EditProfile',
-                                'label': 'Edit my Profile',
-                                'url': '/profile/edit/',
-                                'is_external': False,
-                                'icon': 'fa-gear',
-                                'image': None,
-                                'badge': None,
-                                'selected': False,
-                            },
-                            {
                                 'id': 'NotificationPreferences',
                                 'label': 'Notification Preferences',
                                 'url': '/profile/notifications/',
@@ -931,37 +928,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                                 'image': None,
                                 'badge': None,
                                 'selected': False,
-                            },
-                            {
-                                'id': 'ChangeLanguage',
-                                'icon': 'fa-language',
-                                'label': 'Change Language',
-                                'url': None,
-                                'image': None,
-                                'is_external': False,
-                                'badge': None,
-                                'sub_items': [
-                                    {
-                                        'id': 'ChangeLanguageItemDE',
-                                        'label': 'Deutsch',
-                                        'url': '/language/de/',
-                                        'is_external': False,
-                                        'icon': None,
-                                        'image': None,
-                                        'badge': None,
-                                        'selected': False,
-                                    },
-                                    {
-                                        'id': 'ChangeLanguageItemEN',
-                                        'label': 'English',
-                                        'url': '/language/en/',
-                                        'is_external': False,
-                                        'icon': None,
-                                        'image': None,
-                                        'badge': None,
-                                        'selected': True,
-                                    },
-                                ],
                             },
                             {
                                 'id': 'Contribution',
@@ -1005,18 +971,8 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 MenuItem(profile_label, reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
             if not request.user.is_guest:
-                if settings.COSINNUS_V3_FRONTEND_ENABLED:
-                    profile_menu_items.append(
-                        MenuItem(
-                            _('Set up my Profile'),
-                            reverse('cosinnus:v3-frontend-setup-profile'),
-                            'fa-pen',
-                            id='SetupProfile',
-                        ),
-                    )
                 profile_menu_items.extend(
                     [
-                        MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
                         MenuItem(
                             _('Notification Preferences'),
                             reverse('cosinnus:notifications'),
@@ -1026,11 +982,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     ]
                 )
             profile_menu.extend(profile_menu_items)
-
-            # language
-            if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
-                language_item = self.get_language_menu_item(request)
-                profile_menu.append(language_item)
 
             # payments
             if (
@@ -1286,13 +1237,11 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 services_navigation_items.insert(
                     0, MenuItem(_('Events'), events_url, icon='fa-calendar', is_external=False, id='Events')
                 )
-        # add "Discover" link to services for all logged in users and additionally for non-logged-in users on open
+        # add "Discover" link to services for non-logged-in users on open
         # portals
-        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or (
-            request.user.is_authenticated and not request.user.is_guest
-        ):
+        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN and not request.user.is_authenticated:
             services_navigation_items.insert(
-                0, MenuItem(_('Discover'), reverse('cosinnus:map'), icon=None, is_external=False, id='Map')
+                0, MenuItem(_('Discover'), reverse('cosinnus:map'), icon='fa-map', is_external=False, id='Map')
             )
 
         # right part
