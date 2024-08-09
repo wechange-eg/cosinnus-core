@@ -806,7 +806,7 @@ class HelpView(APIView):
                         'data': [
                             {
                                 'id': 'FAQ',
-                                'label': '<b>FAQ</b> (Frequently asked questions)',
+                                'label': '<b>FAQ</b>',
                                 'url': 'https://localhost/cms/faq/',
                                 'is_external': True,
                                 'icon': 'fa-question-circle',

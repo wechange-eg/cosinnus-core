@@ -35,10 +35,13 @@ logger = logging.getLogger('cosinnus')
 # url prefixes that make the requested url be considered to belong in the "community" space
 V3_CONTENT_COMMUNITY_URL_PREFIXES = ['/map/', '/user_match/']
 # url suffixes for links from the leftnav that should be sorted into the top sidebar list
-V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS = ['.*/microsite/$']
+V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS = [
+    '.*/?browse=true$', # group dashboard
+    '.*/microsite/$',
+    '.*/members/$',
+]
 # url suffixes for links from the leftnav that should be sorted into the bottom sidebar list
 V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS = [
-    '.*/members/$',
     '.*/edit/$',
     '.*/delete/$',
     '.*/password_change/$',
