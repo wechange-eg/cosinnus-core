@@ -234,6 +234,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         community_space = None
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        events_slug = getattr(settings, 'NEWW_EVENTS_GROUP_SLUG', None)
         if forum_slug:
             forum_group = get_object_or_None(
                 get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current()
@@ -256,6 +257,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                         id=f'Forum{tag.paired_group.id}',
                                     )
                                 )
+                # add Forum group to community space
                 if settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
                     community_space_items.append(
                         MenuItem(
@@ -265,6 +267,20 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                             id='Forum',
                         )
                     )
+                # add Events-Forum group to community space for portals that have a split Events Forum group
+                if events_slug != forum_slug:
+                    events_group = get_object_or_None(
+                        get_cosinnus_group_model(), slug=events_slug, portal=CosinnusPortal.get_current()
+                    )
+                    if events_group:
+                        community_space_items.append(
+                            MenuItem(
+                                events_group['name'],
+                                events_group.get_absolute_url(),
+                                'fa-calendar',
+                                id='Events',
+                            )
+                        )
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
                 MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-group', id='Map')
