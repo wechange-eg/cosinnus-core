@@ -281,9 +281,10 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 id='Events',
                             )
                         )
+        # "Discover" link in community section of spaces menu
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
-                MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-group', id='Map')
+                MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-map', id='Map')
             )
         if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
             community_space_items.extend(
@@ -1236,13 +1237,11 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 services_navigation_items.insert(
                     0, MenuItem(_('Events'), events_url, icon='fa-calendar', is_external=False, id='Events')
                 )
-        # add "Discover" link to services for all logged in users and additionally for non-logged-in users on open
+        # add "Discover" link to services for non-logged-in users on open
         # portals
-        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or (
-            request.user.is_authenticated and not request.user.is_guest
-        ):
+        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN and not request.user.is_authenticated:
             services_navigation_items.insert(
-                0, MenuItem(_('Discover'), reverse('cosinnus:map'), icon=None, is_external=False, id='Map')
+                0, MenuItem(_('Discover'), reverse('cosinnus:map'), icon='fa-map', is_external=False, id='Map')
             )
 
         # right part
