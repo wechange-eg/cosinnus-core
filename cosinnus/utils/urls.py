@@ -159,10 +159,20 @@ def redirect_with_next(url, request_with_next, additional_param_str=None):
 
 
 def check_url_v3_everywhere_exempt(url_path, request):
-    """Returns True if the given url_path matches an exempted URL from
-    `COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS`, False if not."""
+    """Checks if the given url_path is exempt from any redirection logic that adds the "v3" parameter. So returns True
+    for any URL paths that should *never* redirect the user to the react frontent. This is mainly the case for
+    programmatic requests such as API/AJAX calls, but also for views that should be displayed in the old frontend.
+    Returns True if:
+        - the given url_path matches an exempted URL from `COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS`
+        - the request is an AJAX request
+    Returns False if not."""
     request_uri = request.build_absolute_uri()
     request_tokens = request_uri.split('/')
+    
+    # always consider AJAX requests v3 exempt
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return True
+    
     # do a special check for the login url if the '/o/authorize' request token is present
     # currently do not affect login requests within the oauth flow
     if (

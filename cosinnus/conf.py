@@ -40,7 +40,7 @@ class CosinnusConf(AppConf):
         '/administration/login-2fa/',
         '/media/',
         '/static/',
-        '/language',
+        '/language/',
         '/api/v1/user/me/',
         '/api/v1/login/',
         '/api/v2/navbar/',
