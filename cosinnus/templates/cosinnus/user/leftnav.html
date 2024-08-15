@@ -62,7 +62,7 @@
                   </li>
               </ul>
           </button>
-          {% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED and COSINNUS_V3_API_CONTENT_ACTIVE %}
+          {% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED and COSINNUS_V3_API_CONTENT_ACTIVE and not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
               <button type="button" class="btn w100 btn-emphasized regular-space" data-v3-id="ChangeLanguage">
                   <ul class="media-list">
                       <li class="media">

@@ -248,7 +248,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                     managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
                     if managed_tags:
                         for tag in managed_tags:
-                            if tag.paired_group and tag.paired_group != forum_group:
+                            if tag and tag.paired_group and tag.paired_group != forum_group:
                                 community_space_items.append(
                                     MenuItem(
                                         tag.paired_group.name,
@@ -1237,11 +1237,16 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 services_navigation_items.insert(
                     0, MenuItem(_('Events'), events_url, icon='fa-calendar', is_external=False, id='Events')
                 )
-        # add "Discover" link to services for non-logged-in users on open
-        # portals
+        # add "Discover" link to services for non-logged-in users on open portals
         if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN and not request.user.is_authenticated:
             services_navigation_items.insert(
-                0, MenuItem(_('Discover'), reverse('cosinnus:map'), icon='fa-map', is_external=False, id='Map')
+                0, MenuItem(
+                    settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL,
+                    reverse('cosinnus:map'),
+                    icon='fa-map',
+                    is_external=False,
+                    id='Map'
+                )
             )
 
         # right part

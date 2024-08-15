@@ -99,7 +99,7 @@ class SpacesViewTest(APITestCase):
                     MenuItem(
                         settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-sitemap', id='Forum'
                     ),
-                    MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, '/map/', 'fa-group', id='Map'),
+                    MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, '/map/', 'fa-map', id='Map'),
                 ],
                 'actions': [
                     MenuItem(CosinnusSocietyTrans.BROWSE_ALL, reverse('cosinnus:group__group-list'), id='BrowseGroups'),
@@ -506,7 +506,6 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                     MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'),
                 ],
                 'services': [
-                    MenuItem('Discover', reverse('cosinnus:map'), icon=None, is_external=False, id='Map'),
                     MenuItem('Cloud', 'http://cloud.example.com', 'fa-cloud', is_external=True, id='Cloud'),
                     MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
                 ],
@@ -532,7 +531,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                 ],
                 'middle': [],
                 'services': [
-                    MenuItem('Discover', reverse('cosinnus:map'), icon=None, is_external=False, id='Map'),
+                    MenuItem('Discover', reverse('cosinnus:map'), icon='fa-map', is_external=False, id='Map'),
                 ],
                 'right': [
                     MenuItem('Help', icon='fa-question', id='Help'),
