@@ -465,7 +465,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
         self.assertEqual(
             response.data[2],
             MenuItem(
-                'Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €', id='Contribution'
+                'Your Contribution', '/account/contribution/', 'fa-hand-holding-heart', badge='100 €', id='Contribution'
             ),
         )
 
@@ -498,7 +498,9 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
             response.data,
             {
                 'left': [
-                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/v2_navbar_brand.png', id='Home'),
+                    MenuItem(
+                        'Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/v2_navbar_brand.png', id='Home'
+                    ),
                     MenuItem('Spaces', id='Spaces'),
                 ],
                 'middle': [
@@ -526,7 +528,9 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
             response.data,
             {
                 'left': [
-                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/v2_navbar_brand.png', id='Home'),
+                    MenuItem(
+                        'Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/v2_navbar_brand.png', id='Home'
+                    ),
                     MenuItem('Spaces', id='Spaces'),
                 ],
                 'middle': [],

@@ -20,6 +20,7 @@ from rest_framework.views import APIView
 from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
+from cosinnus.api_frontend.views.navigation import LanguageMenuItemMixin
 from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
@@ -36,7 +37,7 @@ logger = logging.getLogger('cosinnus')
 V3_CONTENT_COMMUNITY_URL_PREFIXES = ['/map/', '/user_match/']
 # url suffixes for links from the leftnav that should be sorted into the top sidebar list
 V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS = [
-    '.*/?browse=true$', # group dashboard
+    '.*/?browse=true$',  # group dashboard
     '.*/microsite/$',
     '.*/members/$',
 ]
@@ -52,7 +53,7 @@ V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS = [
 ]
 
 
-class MainContentView(APIView):
+class MainContentView(LanguageMenuItemMixin, APIView):
     """v3_content_main
 
     An endpoint that returns HTML content for any legacy view on the portal.
@@ -109,6 +110,7 @@ class MainContentView(APIView):
     url = None
 
     # set during processing
+    django_request = None
     group = None
     has_leftnav = True  # can be toggled during HTML parsing to determine that this page has no leftnav
 
@@ -249,7 +251,7 @@ class MainContentView(APIView):
     def get(self, request):
         self.url = request.query_params.get('url', '').strip()
         self.url = remove_url_param(self.url, 'v', '3')
-        django_request = copy(request._request)
+        self.django_request = copy(request._request)
         if not self.url:
             raise ValidationError('Missing required parameter: url')
         if not self.url.startswith('http'):
@@ -268,7 +270,7 @@ class MainContentView(APIView):
             return self.build_redirect_response(self.url)
 
         # check if we have a redirected request where `FrontendMiddleware` saved the response
-        cached_response = self._get_valid_cached_response(django_request, target_url_path, target_url_query)
+        cached_response = self._get_valid_cached_response(self.django_request, target_url_path, target_url_query)
         if cached_response:
             # use the response from the cache key
             response = cached_response
@@ -280,7 +282,7 @@ class MainContentView(APIView):
                 setattr(response, 'text', getattr(response, 'content', ''))
         else:
             # resolve the response by querying with a request, including redirects
-            response = self._resolve_url_via_query(self.url, django_request, allow_redirects=False)
+            response = self._resolve_url_via_query(self.url, self.django_request, allow_redirects=False)
 
         # if we have been redirected, return an empty data package with a redirect target url!
         if response.status_code in [301, 302]:
@@ -291,11 +293,11 @@ class MainContentView(APIView):
             return self.build_redirect_response(redirect_target_url, response)
 
         # fake our django request to act as if the resolved url was the original one
-        django_request = self._transform_request_to_resolved(django_request, response.url)
+        self.django_request = self._transform_request_to_resolved(self.django_request, response.url)
         # get the relative resolved url from the target url (following all redirects)
-        resolved_url = django_request.path
-        if django_request.GET:
-            resolved_url += '?' + django_request.GET.urlencode()
+        resolved_url = self.django_request.path
+        if self.django_request.GET:
+            resolved_url += '?' + self.django_request.GET.urlencode()
             # remove the v3-exempt parameter from the resolved URL again
             resolved_url = remove_url_param(
                 self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt
@@ -304,7 +306,7 @@ class MainContentView(APIView):
         resolved_url = '/' + '/'.join(resolved_url.split('/')[3:])
 
         # determine group for request
-        self._resolve_request_group(resolved_url, django_request)
+        self._resolve_request_group(resolved_url, self.django_request)
         # parse the response's html
         html = self._clean_response_html(force_str(response.text))
 
@@ -344,7 +346,7 @@ class MainContentView(APIView):
             'icon': self.main_menu_icon,  # exclusive with `main_menu_image`, only one can be non-None!
             'image': self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
         }
-        data['announcements'] = self._get_announcements(django_request)
+        data['announcements'] = self._get_announcements(self.django_request)
 
         # set cookies on rest response from the requests response
         # note: we seem to be losing all meta-infos like max-age here,
@@ -567,8 +569,8 @@ class MainContentView(APIView):
         Possible HTML properties on buttons that are v3-specific and change button behaviour:
             - attribute "data-v3-id": if present the button needs to href to be included and its returned id property
                 is set to it
-            - attribute "data-toggle" in combination with "data-target": bootstrap modal buttons are included and these two
-                attributes are passed along in the "attributes" attribute
+            - attribute "data-toggle" in combination with "data-target": bootstrap modal buttons are included and
+                these two attributes are passed along in the "attributes" attribute
             - CSS classes "x-v3-leftnav-action-button", "x-v3-leftnav-action-target-active-app",
                 and "x-v3-leftnav-action-target-active-subitem" signify that these leftnav items are action buttons
                 that appear as context menu buttons on another leftnav button.
@@ -634,17 +636,23 @@ class MainContentView(APIView):
                 and 'active' in leftnav_link.parent.get('class')
             ):
                 sub_items = []
-            
+
+            menu_item = None
+            # create a hardcoded menu item for specific `data-v3-id` values
+            if v3_id:
+                menu_item = self._generate_hardcoded_menu_item_by_id(v3_id)
             # create menu item for the link
-            menu_item = MenuItem(
-                link_label,
-                url=href if href else None,
-                icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
-                id=v3_id or ('Sidebar-' + get_random_string(8)),
-                sub_items=sub_items,
-                selected=selected,
-                attributes=attributes if attributes else None,
-            )
+            if not menu_item:
+                menu_item = MenuItem(
+                    link_label,
+                    url=href if href else None,
+                    icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
+                    id=v3_id or ('Sidebar-' + get_random_string(8)),
+                    is_external=bool(leftnav_link.get('target', None) == '_blank'),
+                    sub_items=sub_items,
+                    selected=selected,
+                    attributes=attributes if attributes else None,
+                )
             # attach the id, CSS classes, and data-target to the menu item for internal use
             setattr(menu_item, '_original_id', leftnav_link.get('id', None))
             setattr(menu_item, '_original_css_class', leftnav_link.get('class', []))
@@ -652,6 +660,17 @@ class MainContentView(APIView):
             setattr(menu_item, '_original_data_parent', leftnav_link.get('data-v3-parent', None))
             menu_items.append(menu_item)
         return menu_items
+
+    def _generate_hardcoded_menu_item_by_id(self, v3_id):
+        """For some leftnav menu items, we set a placeholder in the leftnav html with a specific
+        e.g. `data-v3-id="ChangeLanguage"` and instead of parsing them from the HTML, we generate them
+        pythonically in this method, depending on their v3-id.
+        @return a `MenuItem` if the supplied v3_id is known, None if not.
+        """
+        # generate "Change Language" Button with a submenu from mixin `LanguageMenuItemMixin`
+        if v3_id == 'ChangeLanguage':
+            return self.get_language_menu_item(self.django_request)
+        return None
 
     def _parse_leftnav_menu(self, html_soup):
         """Tries to parse from the leftnav all links to show in the left sub navigation.
@@ -694,7 +713,9 @@ class MainContentView(APIView):
         label_href_hashes = []
 
         def _check_unique_and_remember(menu_item):
-            hash = menu_item['label'] + '|' + (menu_item.get('url') or getattr(menu_item, '_original_data_target') or '-')
+            hash = (
+                menu_item['label'] + '|' + (menu_item.get('url') or getattr(menu_item, '_original_data_target') or '-')
+            )
             if hash in label_href_hashes:
                 return False
             label_href_hashes.append(hash)
@@ -709,19 +730,30 @@ class MainContentView(APIView):
             for menu_item in menu_items:
                 target_subnav = default_target
                 # select the proper subnav for this menu to go to, by type of URL
-                if 'x-v3-leftnav-action-button' in [subclass for subclass in getattr(menu_item, '_original_css_class', [])]:
+                if 'x-v3-leftnav-action-button' in [
+                    subclass for subclass in getattr(menu_item, '_original_css_class', [])
+                ]:
                     # action menu buttons are sorted into the actions sublist of a menu item depending on their target
-                    if 'x-v3-leftnav-action-target-active-app' in [subclass for subclass in getattr(menu_item, '_original_css_class', [])]:
-                        active_menu_item['actions'] = active_menu_item.get('actions', []) # make sure actions list exists
+                    if 'x-v3-leftnav-action-target-active-app' in [
+                        subclass for subclass in getattr(menu_item, '_original_css_class', [])
+                    ]:
+                        active_menu_item['actions'] = active_menu_item.get(
+                            'actions', []
+                        )  # make sure actions list exists
                         target_subnav = active_menu_item['actions']
-                    elif 'x-v3-leftnav-action-target-active-subitem' in [subclass for subclass in getattr(menu_item, '_original_css_class', [])]:
-                        # find the MenuItem from the buttons_items menu that has the original html id of this action button target
-                        # (for example, the Etherpad folder button as parent for its "edit folder" action context button)
+                    elif 'x-v3-leftnav-action-target-active-subitem' in [
+                        subclass for subclass in getattr(menu_item, '_original_css_class', [])
+                    ]:
+                        # find the MenuItem from the buttons_items menu that has the original html id of this
+                        # action button target (for example, the Etherpad folder button as parent for its "edit folder"
+                        # action context button)
                         action_target_parent_id = getattr(menu_item, '_original_data_parent', None)
                         if action_target_parent_id:
                             for find_target_button in buttons_items:
                                 if getattr(find_target_button, '_original_id', None) == action_target_parent_id:
-                                    find_target_button['actions'] = find_target_button.get('actions', [])  # make sure actions list exists
+                                    find_target_button['actions'] = find_target_button.get(
+                                        'actions', []
+                                    )  # make sure actions list exists
                                     target_subnav = find_target_button['actions']
                 elif not menu_item['url']:
                     # non url buttons like help popups go in the bottom list

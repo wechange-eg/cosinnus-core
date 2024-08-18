@@ -874,6 +874,7 @@ class LanguageMenuItemMixin:
             language_subitem = MenuItem(
                 language,
                 reverse('cosinnus:switch-language', kwargs={'language': code}),
+                icon=None if current_language_as_label else 'fa-language',
                 id=f'ChangeLanguageItem{code.upper()}',
                 selected=selected,
             )
@@ -934,7 +935,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                                 'label': 'Your Contribution',
                                 'url': '/account/contribution/',
                                 'is_external': False,
-                                'icon': 'fa-hand-holding-hart',
+                                'icon': 'fa-hand-holding-heart',
                                 'image': None,
                                 'badge': None,
                                 'selected': False,
@@ -998,7 +999,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 payments_item = MenuItem(
                     _('Your Contribution'),
                     reverse('wechange-payments:overview'),
-                    'fa-hand-holding-hart',
+                    'fa-hand-holding-heart',
                     badge=contribution_badge,
                     id='Contribution',
                 )
@@ -1240,13 +1241,14 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         # add "Discover" link to services for non-logged-in users on open portals
         if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN and not request.user.is_authenticated:
             services_navigation_items.insert(
-                0, MenuItem(
+                0,
+                MenuItem(
                     settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL,
                     reverse('cosinnus:map'),
                     icon='fa-map',
                     is_external=False,
-                    id='Map'
-                )
+                    id='Map',
+                ),
             )
 
         # right part
