@@ -648,6 +648,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                     url=href if href else None,
                     icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
                     id=v3_id or ('Sidebar-' + get_random_string(8)),
+                    is_external=bool(leftnav_link.get('target', None) == '_blank'),
                     sub_items=sub_items,
                     selected=selected,
                     attributes=attributes if attributes else None,
