@@ -874,6 +874,7 @@ class LanguageMenuItemMixin:
             language_subitem = MenuItem(
                 language,
                 reverse('cosinnus:switch-language', kwargs={'language': code}),
+                icon=None if current_language_as_label else 'fa-language',
                 id=f'ChangeLanguageItem{code.upper()}',
                 selected=selected,
             )
@@ -1240,13 +1241,14 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         # add "Discover" link to services for non-logged-in users on open portals
         if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN and not request.user.is_authenticated:
             services_navigation_items.insert(
-                0, MenuItem(
+                0,
+                MenuItem(
                     settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL,
                     reverse('cosinnus:map'),
                     icon='fa-map',
                     is_external=False,
-                    id='Map'
-                )
+                    id='Map',
+                ),
             )
 
         # right part
