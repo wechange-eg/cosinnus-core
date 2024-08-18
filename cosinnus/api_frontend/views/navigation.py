@@ -935,7 +935,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                                 'label': 'Your Contribution',
                                 'url': '/account/contribution/',
                                 'is_external': False,
-                                'icon': 'fa-hand-holding-hart',
+                                'icon': 'fa-hand-holding-heart',
                                 'image': None,
                                 'badge': None,
                                 'selected': False,
@@ -999,7 +999,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 payments_item = MenuItem(
                     _('Your Contribution'),
                     reverse('wechange-payments:overview'),
-                    'fa-hand-holding-hart',
+                    'fa-hand-holding-heart',
                     badge=contribution_badge,
                     id='Contribution',
                 )

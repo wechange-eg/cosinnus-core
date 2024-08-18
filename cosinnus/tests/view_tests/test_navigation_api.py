@@ -465,7 +465,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
         self.assertEqual(
             response.data[2],
             MenuItem(
-                'Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €', id='Contribution'
+                'Your Contribution', '/account/contribution/', 'fa-hand-holding-heart', badge='100 €', id='Contribution'
             ),
         )
 
