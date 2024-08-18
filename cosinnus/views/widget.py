@@ -273,6 +273,8 @@ class DashboardWidgetMixin(object):
             # check deactivated apps to see if widget can't be shown:
             if 'cosinnus_%s' % wc.app_name in deactivated_apps:
                 continue
+            if wc.app_name == 'file' and settings.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP:
+                continue
             # check block list for disallowed widgets (from overriding views)
             if "%s.%s" % (wc.app_name, wc.widget_name.replace(" ", "_")) in self.disallowed_widgets:
                 continue

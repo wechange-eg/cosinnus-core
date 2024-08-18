@@ -27,7 +27,6 @@ logger = logging.getLogger('cosinnus')
 # FIXME: This can probably be replaced with SEARCH_MODEL_NAMES_REVERSE
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
-    'file': 'cosinnus_file.fileentry',
     'etherpad': 'cosinnus_etherpad.etherpad',
     'ethercalc': 'cosinnus_etherpad.ethercalc',
     'note': 'cosinnus_note.note',
@@ -39,6 +38,11 @@ MODEL_ALIASES = {
     'group': 'cosinnus.CosinnusSociety',
     'organization': 'cosinnus_organization.CosinnusOrganization',
 }
+# do not allow search for files if it is soft disabled
+if not settings.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP:
+    MODEL_ALIASES.update({
+        'file': 'cosinnus_file.fileentry',
+    })
 
 VISIBLE_PORTAL_IDS = None  # global
 
