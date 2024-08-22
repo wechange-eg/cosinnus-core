@@ -165,12 +165,17 @@ def check_url_v3_everywhere_exempt(url_path, request):
     Returns True if:
         - the given url_path matches an exempted URL from `COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS`
         - the request is an AJAX request
+        - the request contains the `EL_PAGINATION_PAGE_LABEL` GET param
     Returns False if not."""
     request_uri = request.build_absolute_uri()
     request_tokens = request_uri.split('/')
     
     # always consider AJAX requests v3 exempt
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return True
+    
+    # always exempt endless-pagination reloads (these are hard to filter for if not through their GET param)
+    if request.GET.get(settings.EL_PAGINATION_PAGE_LABEL, None):
         return True
     
     # do a special check for the login url if the '/o/authorize' request token is present
