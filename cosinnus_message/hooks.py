@@ -85,7 +85,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
             except Exception as e:
                 logger.exception(e)
         else:
-            tasks.rocket_user_update_task.delay(instance.user.pk, force_update=True, update_password=True)
+            tasks.rocket_user_update_task.delay(instance.user.pk, force_update=False, update_password=False)
 
     @receiver(pre_save, sender=CosinnusSociety)
     @receiver(pre_save, sender=CosinnusProject)
