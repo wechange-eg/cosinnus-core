@@ -155,12 +155,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
         if hasattr(instance, 'is_hidden_group_proxy') and instance.is_hidden_group_proxy:
             # Don't relay conference proxy events.
             return
-        if created:
-            # Not a threaded call as event and note settings are updated.
-            # TODO: moved to Celery task. Not sure why this was blocking.
-            tasks.rocket_relay_message_create_task.delay(instance._meta.model_name, instance.pk)
-        else:
-            tasks.rocket_relay_message_update_task.delay(instance._meta.model_name, instance.pk)
+        tasks.rocket_relay_message_create_task.delay(instance._meta.model_name, instance.pk)
 
     @receiver(post_delete, sender=Event)
     @receiver(post_delete, sender=Note)
