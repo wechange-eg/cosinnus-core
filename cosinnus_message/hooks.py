@@ -86,20 +86,6 @@ if settings.COSINNUS_ROCKET_ENABLED:
         else:
             tasks.rocket_user_update_task.delay(instance.user.pk, force_update=False, update_password=False)
 
-    @receiver(pre_save, sender=CosinnusSociety)
-    @receiver(pre_save, sender=CosinnusProject)
-    def handle_cosinnus_group_create_missing(sender, instance, **kwargs):
-        """Create missing group. TODO: discuss if needed and why."""
-        rocket = RocketChatConnection()
-        if instance.pk is not None and not rocket.get_group_id(instance, create_if_not_exists=False):
-            # Not a threaded call / task as group settings are updated.
-            try:
-                rocket.groups_create(instance)
-            except RocketChatDownException:
-                logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-            except Exception as e:
-                logger.exception(e)
-
     @receiver(post_save, sender=CosinnusSociety)
     @receiver(post_save, sender=CosinnusProject)
     def handle_cosinnus_group_updated(sender, instance, created, **kwargs):
