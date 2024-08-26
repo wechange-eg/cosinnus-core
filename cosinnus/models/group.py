@@ -1531,6 +1531,18 @@ class CosinnusBaseGroup(
             return get_cosinnus_group_model().objects.none()
         return get_cosinnus_group_model().objects.filter(is_active=True, conference_room__group=self)
 
+    def get_rocketchat_room_ids(self):
+        """Helper to get the RocketChat room IDs for a group."""
+        from cosinnus.models.profile import PROFILE_SETTING_ROCKET_CHAT_ID
+
+        room_ids = []
+        for room_key in settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS:
+            key = f'{PROFILE_SETTING_ROCKET_CHAT_ID}_{room_key}'
+            room_id = self.settings.get(key)
+            if room_id:
+                room_ids.append(room_id)
+        return room_ids
+
     def get_additional_rocketchat_room_ids(self):
         """A group may have additional rocketchat room IDs that it corresponds to.
         All room ids returned here will also be managed by the rocketchat hooks for

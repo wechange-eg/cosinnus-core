@@ -14,7 +14,6 @@ from cosinnus.models import (
 )
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
-from cosinnus.models.profile import PROFILE_SETTING_ROCKET_CHAT_ID
 from cosinnus_event.models import Event
 from cosinnus_message import tasks
 from cosinnus_message.rocket_chat import (
@@ -112,11 +111,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(post_delete, sender=CosinnusConference)
     def handle_cosinnus_group_deleted(sender, instance, **kwargs):
         """Delete group channels."""
-        for room_key in settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS:
-            key = f'{PROFILE_SETTING_ROCKET_CHAT_ID}_{room_key}'
-            room_id = instance.settings.get(key)
-            if room_id:
-                tasks.rocket_group_room_delete_task.delay(room_id)
+        group_room_ids = instance.get_rocketchat_room_ids()
+        for room_id in group_room_ids:
+            tasks.rocket_group_room_delete_task.delay(room_id)
 
     @receiver(signals.group_deactivated)
     def handle_cosinnus_group_deactivated(sender, group, **kwargs):
