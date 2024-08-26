@@ -123,6 +123,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
         """Activate a rocketchat user account"""
         if user.is_guest:
             return
+        tasks.rocket_user_reactivate_task.delay(user.pk)
 
     @receiver(pre_save, sender=CosinnusGroupMembership)
     def handle_membership_changed(sender, instance, **kwargs):
