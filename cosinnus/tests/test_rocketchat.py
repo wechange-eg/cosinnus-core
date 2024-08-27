@@ -212,6 +212,31 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertEqual(user_info['username'], expected_unique_username)
             self.rocket_connection.users_delete(test_user2)
 
+        def test_update_user_with_same_name(self):
+            """
+            Test that if a user is renamed with the same name as an existing user the RC users are different.
+            Tests that a unique RC username is used by appending the user id.
+            """
+            test_user2_data = self.test_user_data.copy()
+            test_user2_data.update({'username': 2, 'last_name': 'Test2', 'email': 'rockettest2@example.com'})
+            with self.runCeleryTasks():
+                test_user2 = User.objects.create(**test_user2_data)
+                test_user2.last_name = self.test_user_data['last_name']
+                test_user2.save()
+            profile1 = self.test_user.cosinnus_profile
+            profile2 = test_user2.cosinnus_profile
+            rocket_connection_user = self.rocket_connection._get_user_connection(test_user2)
+            user_info = rocket_connection_user.me().json()
+            self.assertEqual(user_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
+            self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            expected_unique_username = (
+                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}-{test_user2.id}'.lower()
+            )
+            self.assertEqual(user_info['username'], expected_unique_username)
+            self.rocket_connection.users_delete(test_user2)
+
         def test_create_user_with_existing_rocket_chat_username(self):
             """Tests that creating a user with a used RC username a new user is created with a unique username."""
             # create colliding RC user
