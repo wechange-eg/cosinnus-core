@@ -64,9 +64,7 @@ if not getattr(settings, 'COSINNUS_ETHERPAD_DISABLE_HOOKS', False):
             # we trust uuid4 to create a new pad
             instance.pad_id = groupMapper + ('-%s' % str(uuid4()).replace('-', ''))
 
-    """@receiver(post_delete, sender=Etherpad)"""
-    """ Disabled the etherpad delete hook, as we now always retain pads on the server for retrieval purposes. """
-
+    @receiver(post_delete, sender=Etherpad)
     @catch_all_and_log
     def delete_etherpad(sender, instance, **kwargs):
         """
