@@ -148,6 +148,13 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
     class RocketChatUserTest(RocketChatTestUserMixin, RocketChatBaseTest):
         """Test existing user integration."""
 
+        def tearDown(self):
+            super().tearDown()
+            if hasattr(self, 'test_user2') and self.test_user2:
+                self.rocket_connection.users_delete(self.test_user2)
+            if hasattr(self, 'colliding_rocket_chat_user_id') and self.colliding_rocket_chat_user_id:
+                self.rocket_connection.rocket.users_delete(self.colliding_rocket_chat_user_id)
+
         def test_user_deactivate_reactivate(self):
             user_info = self._get_test_user_info()
             self.assertTrue(user_info['active'])
@@ -197,20 +204,19 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             test_user2_data = self.test_user_data.copy()
             test_user2_data.update({'username': 2, 'email': 'rockettest2@example.com'})
             with self.runCeleryTasks():
-                test_user2 = User.objects.create(**test_user2_data)
+                self.test_user2 = User.objects.create(**test_user2_data)
             profile1 = self.test_user.cosinnus_profile
-            profile2 = test_user2.cosinnus_profile
-            rocket_connection_user = self.rocket_connection._get_user_connection(test_user2)
+            profile2 = self.test_user2.cosinnus_profile
+            rocket_connection_user = self.rocket_connection._get_user_connection(self.test_user2)
             user_info = rocket_connection_user.me().json()
             self.assertEqual(user_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
             self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             expected_unique_username = (
-                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}-{test_user2.id}'.lower()
+                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}-{self.test_user2.id}'.lower()
             )
             self.assertEqual(user_info['username'], expected_unique_username)
-            self.rocket_connection.users_delete(test_user2)
 
         def test_update_user_with_same_name(self):
             """
@@ -220,22 +226,21 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             test_user2_data = self.test_user_data.copy()
             test_user2_data.update({'username': 2, 'last_name': 'Test2', 'email': 'rockettest2@example.com'})
             with self.runCeleryTasks():
-                test_user2 = User.objects.create(**test_user2_data)
-                test_user2.last_name = self.test_user_data['last_name']
-                test_user2.save()
+                self.test_user2 = User.objects.create(**test_user2_data)
+                self.test_user2.last_name = self.test_user_data['last_name']
+                self.test_user2.save()
             profile1 = self.test_user.cosinnus_profile
-            profile2 = test_user2.cosinnus_profile
-            rocket_connection_user = self.rocket_connection._get_user_connection(test_user2)
+            profile2 = self.test_user2.cosinnus_profile
+            rocket_connection_user = self.rocket_connection._get_user_connection(self.test_user2)
             user_info = rocket_connection_user.me().json()
             self.assertEqual(user_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
             self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             expected_unique_username = (
-                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}-{test_user2.id}'.lower()
+                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}-{self.test_user2.id}'.lower()
             )
             self.assertEqual(user_info['username'], expected_unique_username)
-            self.rocket_connection.users_delete(test_user2)
 
         def test_create_user_with_existing_rocket_chat_username(self):
             """Tests that creating a user with a used RC username a new user is created with a unique username."""
@@ -249,24 +254,21 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             }
             response = self.rocket_connection.rocket.users_create(**colliding_user_data).json()
             self.assertTrue(response.get('success'))
-            colliding_user_id = response['user']['_id']
+            self.colliding_rocket_chat_user_id = response['user']['_id']
 
             # create user with same username
             test_user2_data = self.test_user_data.copy()
             test_user2_data.update({'pk': 100, 'username': 2, 'email': 'rockettest2@example.com'})
             with self.runCeleryTasks():
-                test_user2 = User.objects.create(**test_user2_data)
+                self.test_user2 = User.objects.create(**test_user2_data)
 
-            profile2 = test_user2.cosinnus_profile
-            rocket_connection_user = self.rocket_connection._get_user_connection(test_user2)
+            profile2 = self.test_user2.cosinnus_profile
+            rocket_connection_user = self.rocket_connection._get_user_connection(self.test_user2)
             user_info = rocket_connection_user.me().json()
             self.assertEqual(user_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
             expected_unique_username = f'{colliding_username}-1'
             self.assertEqual(user_info['username'], expected_unique_username)
-
-            self.rocket_connection.users_delete(test_user2)
-            self.rocket_connection.rocket.users_delete(colliding_user_id)
 
         def test_user_update_with_existing_rocket_chat_username(self):
             """Test that updating a user does not change the RC username if a user with the same name also exists."""
@@ -274,9 +276,9 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             test_user2_data = self.test_user_data.copy()
             test_user2_data.update({'username': 2, 'email': 'rockettest2@example.com'})
             with self.runCeleryTasks():
-                test_user2 = User.objects.create(**test_user2_data)
+                self.test_user2 = User.objects.create(**test_user2_data)
             profile1 = self.test_user.cosinnus_profile
-            profile2 = test_user2.cosinnus_profile
+            profile2 = self.test_user2.cosinnus_profile
             profile2.get_new_rocket_username = MagicMock(return_value=profile1.rocket_username)
             with self.runCeleryTasks():
                 profile2.save()
@@ -285,12 +287,11 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertEqual(
                 self.test_user.cosinnus_profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME], original_username
             )
-            self.rocket_connection.users_delete(test_user2)
 
     class RocketChatGroupTest(RocketChatTestUserMixin, RocketChatBaseTest):
         """Test group integration."""
 
-        test_group_name = 'TestGroup'
+        test_group_name = 'RocketChatTestGroup'
 
         # Test data created in setUp
         test_group = None
