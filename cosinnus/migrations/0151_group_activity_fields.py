@@ -18,8 +18,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='cosinnusgroup',
-            name='inactivity_notification_send_at',
-            field=models.DateTimeField(blank=True, default=None, null=True, verbose_name='Inactivity notification send at'),
+            name='inactivity_notification_sent_at',
+            field=models.DateTimeField(blank=True, default=None, null=True, verbose_name='Inactivity notification sent at'),
         ),
         migrations.AddField(
             model_name='cosinnusgroup',

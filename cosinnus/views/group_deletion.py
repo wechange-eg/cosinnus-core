@@ -2,16 +2,18 @@ from __future__ import unicode_literals
 
 import datetime
 import logging
+
 from django.conf import settings
 from django.db.models import Q
 from django.urls import reverse
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+
 from cosinnus.core.mail import send_html_mail
 from cosinnus.models import group as group_module  # noqa # circular import prevention
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import ensure_group_type
-from cosinnus.templatetags.cosinnus_tags import full_name, is_superuser, textfield
+from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_ug_admin, check_user_can_receive_emails
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
@@ -55,46 +57,55 @@ def mark_group_for_deletion(group, triggered_by_user=None):
             continue
 
         deactivated_groups_url = get_domain_for_portal(portal) + reverse('cosinnus:deactivated-groups')
-        mail_context = (
-            {
-                'group_type': group.trans.VERBOSE_NAME,
-                'group_name': group.name,
-                'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
-                'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
-                'deactivated_groups_url': deactivated_groups_url,
-            }
-        )
+        mail_context = {
+            'group_type': group.trans.VERBOSE_NAME,
+            'group_name': group.name,
+            'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
+            'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
+            'deactivated_groups_url': deactivated_groups_url,
+        }
         if automatic_deletion:
             if group.is_active:
-                mail_content = _(
-                    '%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of '
-                    'inactivity.\n'
-                    'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
-                    'Until then, reactivation is possible by the %(group_type)s admins under '
-                    '%(deactivated_groups_url)s.\n'
-                    'If an earlier deletion is desired, please send an email to the portal support.'
-                ) % mail_context
+                mail_content = (
+                    _(
+                        '%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of '
+                        'inactivity.\n'
+                        'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
+                        'Until then, reactivation is possible by the %(group_type)s admins under '
+                        '%(deactivated_groups_url)s.\n'
+                        'If an earlier deletion is desired, please send an email to the portal support.'
+                    )
+                    % mail_context
+                )
             else:
-                mail_content = _(
-                    '%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since '
-                    'deactivation.\n'
+                mail_content = (
+                    _(
+                        '%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since '
+                        'deactivation.\n'
+                        'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
+                        'Until then, reactivation is possible by the %(group_type)s admins under '
+                        '%(deactivated_groups_url)s.\n'
+                        'If an earlier deletion is desired, please send an email to the portal support.'
+                    )
+                    % mail_context
+                )
+        else:
+            mail_context.update(
+                {
+                    'deleted_by': triggered_by_user.get_full_name(),
+                }
+            )
+            mail_content = (
+                _(
+                    '%(group_type)s %(group_name)s has just been deactivated at the instigation of the %(group_type)s '
+                    'admin %(deleted_by)s.\n'
                     'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                     'Until then, reactivation is possible by the %(group_type)s admins under '
                     '%(deactivated_groups_url)s.\n'
                     'If an earlier deletion is desired, please send an email to the portal support.'
-                ) % mail_context
-        else:
-            mail_context.update({
-                'deleted_by': triggered_by_user.get_full_name(),
-            })
-            mail_content = _(
-                '%(group_type)s %(group_name)s has just been deactivated at the instigation of the %(group_type)s '
-                'admin %(deleted_by)s.\n'
-                'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
-                'Until then, reactivation is possible by the %(group_type)s admins under '
-                '%(deactivated_groups_url)s.\n'
-                'If an earlier deletion is desired, please send an email to the portal support.'
-            ) % mail_context
+                )
+                % mail_context
+            )
         html_content = textfield(mail_content)
         send_html_mail(user, mail_subject, html_content)
 
@@ -179,7 +190,7 @@ def send_group_inactivity_deactivation_notifications():
         group_last_activity_date = (now() - datetime.timedelta(days=days_after_last_activity)).date()
         inactive_groups = groups.filter(last_activity__date=group_last_activity_date)
         notify_groups = inactive_groups.filter(
-            Q(inactivity_notification_send_at=None) | Q(inactivity_notification_send_at__date__lt=today)
+            Q(inactivity_notification_sent_at=None) | Q(inactivity_notification_sent_at__date__lt=today)
         )
 
         for group in notify_groups:
@@ -198,13 +209,13 @@ def send_group_inactivity_deactivation_notifications():
                     'group_name': group.name,
                     'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
                     'deactivation_in': time_message,
-                    'delete_group_url':  delete_url,
+                    'delete_group_url': delete_url,
                 }
                 html_content = textfield(mail_content)
                 send_html_mail(admin, mail_subject, html_content)
 
             # update the notification send timestamp
-            group.inactivity_notification_send_at = now()
+            group.inactivity_notification_sent_at = now()
             group.save()
             groups_notified_count += 1
 

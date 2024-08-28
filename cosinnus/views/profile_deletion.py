@@ -2,7 +2,7 @@ import logging
 from datetime import timedelta
 
 from django.conf import settings
-from django.contrib.auth import logout, get_user_model
+from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.utils.crypto import get_random_string
 from django.utils.timezone import now
@@ -12,7 +12,7 @@ from oauth2_provider import models as oauth2_provider_models
 from cosinnus.core import signals
 from cosinnus.core.mail import send_html_mail
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
-from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_MANAGER
+from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER, MEMBERSHIP_MEMBER
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.models.widget import WidgetConfig
@@ -45,9 +45,7 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
             'like to keep your profile.'
         )
         body_text = textfield(text)
-        send_html_mail(
-            user, _('Information about the deletion of your user account'), body_text, threaded=False
-        )
+        send_html_mail(user, _('Information about the deletion of your user account'), body_text, threaded=False)
     elif inactivity_deletion:
         # send notification for automatic deletion due to inactivity
         subject = _('Attention: Your profile has been deactivated will be deleted due to inactivity')
@@ -210,8 +208,8 @@ def send_user_inactivity_deactivation_notifications():
         )
         today = now().date()
         notify_users = inactive_users.filter(
-            Q(cosinnus_profile__inactivity_notification_send_at=None) |
-            Q(cosinnus_profile__inactivity_notification_send_at__date__lt=today)
+            Q(cosinnus_profile__inactivity_notification_sent_at=None)
+            | Q(cosinnus_profile__inactivity_notification_sent_at__date__lt=today)
         )
 
         for user in notify_users:
@@ -239,7 +237,7 @@ def send_user_inactivity_deactivation_notifications():
             send_html_mail(user, mail_subject, html_content)
 
             # update the notification send timestamp
-            user.cosinnus_profile.inactivity_notification_send_at = now()
+            user.cosinnus_profile.inactivity_notification_sent_at = now()
             user.cosinnus_profile.save()
             users_notified_count += 1
 
