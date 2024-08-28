@@ -149,10 +149,13 @@ def update_group_last_activity(group):
         last_activity = max(last_activity, last_membership_activity)
 
     # taggable objects (notes, events, ...)
-    base_taggable_objects = group.get_all_objects_for_group()
-    if base_taggable_objects:
-        last_taggable_object_activity = max(taggable_object.last_modified for taggable_object in base_taggable_objects)
-        last_activity = max(last_activity, last_taggable_object_activity)
+    base_taggable_models = group.get_registered_base_taggable_models()
+    for base_taggable_model in base_taggable_models:
+        if base_taggable_model.objects.filter(group=group).exists():
+            last_taggable_object_activity = (
+                base_taggable_model.objects.filter(group=group).latest('last_modified').last_modified
+            )
+            last_activity = max(last_activity, last_taggable_object_activity)
 
     # Etherpad/Ethercalc
     if Etherpad.objects.filter(group=group).exists():

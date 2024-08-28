@@ -1668,17 +1668,24 @@ class CosinnusBaseGroup(
     def clear_cache(self):
         self._clear_cache(group=self)
 
-    def get_all_objects_for_group(self):
-        """Returns in a list all the BaseTaggableObjects for this group"""
+    def get_registered_base_taggable_models(self):
+        """Returns a list of all registered models that inherit from BaseTaggableObjects."""
         from cosinnus.models.tagged import BaseTaggableObjectModel
 
-        base_taggable_objects = []
+        base_taggable_object_models = []
         for full_model_name in attached_object_registry:
             app_label, model_name = full_model_name.split('.')
             model = apps.get_model(app_label, model_name)
             if issubclass(model, BaseTaggableObjectModel):
-                instances = model.objects.filter(group=self)
-                base_taggable_objects.extend(list(instances))
+                base_taggable_object_models.append(model)
+        return base_taggable_object_models
+
+    def get_all_objects_for_group(self):
+        """Returns in a list all the BaseTaggableObjects for this group"""
+        base_taggable_objects = []
+        for base_taggable_model in self.get_registered_base_taggable_models():
+            instances = base_taggable_model.objects.filter(group=self)
+            base_taggable_objects.extend(list(instances))
         return base_taggable_objects
 
     def remove_index_for_all_group_objects(self):
