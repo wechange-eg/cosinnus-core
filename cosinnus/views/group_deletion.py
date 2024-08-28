@@ -206,6 +206,7 @@ def send_group_inactivity_deactivation_notifications():
                 mail_content = _(
                     '%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity '
                     'and then permanently deleted. This will happen in %(deactivation_in)s.\n'
+                    'If you do not wish for the %(group_type)s to be deactivated, just create some content there.\n'
                     'If an earlier deletion is desired, you can delete the group under %(delete_group_url)s.'
                 ) % {
                     'group_type': group.trans.VERBOSE_NAME,
