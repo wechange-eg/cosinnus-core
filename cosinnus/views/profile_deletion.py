@@ -228,17 +228,17 @@ def send_user_inactivity_deactivation_notifications():
             mail_subject = _('Your account will be deleted due to inactivity')
             mail_content = _(
                 'Your entire account, profile and personal information will be deactivated and irrevocably deleted in '
-                '%(deactivation_in)s.\n'
-                'If you do not wish for you account to be deactivated, just log in once.\n'
+                '%(deactivation_in)s.\n\n'
+                'If you do not wish for you account to be deactivated, just log in once.\n\n'
                 'Your pads, news, uploaded files and other content will remain on the website. However, your name will '
                 'no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your '
                 'profile direct messages will be deleted, but content within discussions and channels will remain. If '
                 'you still want to delete content from yourself, you can do this now by deleting the content on the '
-                'relevant pages.\n'
+                'relevant pages.\n\n'
                 'Your profile will first be deactivated and completely removed from the platform. After deactivation, '
-                'it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n'
+                'it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n\n'
                 'The account may be stored in our backup systems for up to 6 months after deletion. If this is too '
-                'long for you, please contact the support team of this platform for immediate deletion.\n'
+                'long for you, please contact the support team of this platform for immediate deletion.\n\n'
                 'During this %(deleted_after_days)s-day period after deletion, the e-mail address of your account is '
                 'reserved and cannot be used to register a new account.'
             ) % {

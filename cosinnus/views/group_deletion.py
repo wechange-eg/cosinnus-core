@@ -69,10 +69,10 @@ def mark_group_for_deletion(group, triggered_by_user=None):
                 mail_content = (
                     _(
                         '%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of '
-                        'inactivity.\n'
+                        'inactivity.\n\n'
                         'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                         'Until then, reactivation is possible by the %(group_type)s admins under '
-                        '%(deactivated_groups_url)s.\n'
+                        '%(deactivated_groups_url)s.\n\n'
                         'If an earlier deletion is desired, please send an email to the portal support.'
                     )
                     % mail_context
@@ -81,10 +81,10 @@ def mark_group_for_deletion(group, triggered_by_user=None):
                 mail_content = (
                     _(
                         '%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since '
-                        'deactivation.\n'
+                        'deactivation.\n\n'
                         'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                         'Until then, reactivation is possible by the %(group_type)s admins under '
-                        '%(deactivated_groups_url)s.\n'
+                        '%(deactivated_groups_url)s.\n\n'
                         'If an earlier deletion is desired, please send an email to the portal support.'
                     )
                     % mail_context
@@ -98,10 +98,10 @@ def mark_group_for_deletion(group, triggered_by_user=None):
             mail_content = (
                 _(
                     '%(group_type)s %(group_name)s has just been deactivated at the instigation of the %(group_type)s '
-                    'admin %(deleted_by)s.\n'
+                    'admin %(deleted_by)s.\n\n'
                     'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                     'Until then, reactivation is possible by the %(group_type)s admins under '
-                    '%(deactivated_groups_url)s.\n'
+                    '%(deactivated_groups_url)s.\n\n'
                     'If an earlier deletion is desired, please send an email to the portal support.'
                 )
                 % mail_context
@@ -205,8 +205,8 @@ def send_group_inactivity_deactivation_notifications():
                 delete_url = group_aware_reverse('cosinnus:group-schedule-delete', kwargs={'group': group})
                 mail_content = _(
                     '%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity '
-                    'and then permanently deleted. This will happen in %(deactivation_in)s.\n'
-                    'If you do not wish for the %(group_type)s to be deactivated, just create some content there.\n'
+                    'and then permanently deleted. This will happen in %(deactivation_in)s.\n\n'
+                    'If you do not wish for the %(group_type)s to be deactivated, just create some content there.\n\n'
                     'If an earlier deletion is desired, you can delete the group under %(delete_group_url)s.'
                 ) % {
                     'group_type': group.trans.VERBOSE_NAME,
