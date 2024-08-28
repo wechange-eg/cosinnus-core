@@ -22,6 +22,7 @@ from cosinnus.cron import (
 from cosinnus.models.group import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.views.group_deletion import mark_group_for_deletion
 from cosinnus.views.profile_deletion import delete_userprofile
 from cosinnus_note.models import Note
 
@@ -311,6 +312,21 @@ class GroupDeletionTest(TestGroupMixin, TestCase):
         self.test_group.refresh_from_db()
         self.assertIsNone(self.test_group.scheduled_for_deletion_at)
 
+    def test_forum_cannot_be_marked_for_deletion(self):
+        self.test_group.name = settings.NEWW_FORUM_GROUP_SLUG
+        self.test_group.slug = settings.NEWW_FORUM_GROUP_SLUG
+        self.test_group.save()
+
+        self.assertTrue(self.test_group.is_active)
+        self.assertIsNone(self.test_group.scheduled_for_deletion_at)
+
+        # try to delete group
+        mark_group_for_deletion(self.test_group)
+
+        # check that the group is still active and not scheduled for deletion
+        self.assertTrue(self.test_group.is_active)
+        self.assertIsNone(self.test_group.scheduled_for_deletion_at)
+
 
 class GroupManualDeletionTest(TestGroupMixin, TestCase):
     @freeze_time('2024-01-01')
@@ -326,7 +342,7 @@ class GroupManualDeletionTest(TestGroupMixin, TestCase):
         self.assertEqual(reverse('cosinnus:user-dashboard'), response.get('location'))
         self.test_group.refresh_from_db()
 
-        # check the user is deactivated and scheduled for deletion
+        # check that the group is deactivated and scheduled for deletion
         self.assertFalse(self.test_group.is_active)
         expected_deletion_at = now() + timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS)
         self.assertEqual(self.test_group.scheduled_for_deletion_at, expected_deletion_at)
@@ -359,6 +375,17 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
             self.assertEqual(self.test_group.last_activity, activity_time)
+
+    @patch('cosinnus.views.group_deletion.update_group_last_activity')
+    def test_group_last_activity_update_skips_forum(self, update_group_activity_mock):
+        self.test_group.name = settings.NEWW_FORUM_GROUP_SLUG
+        self.test_group.slug = settings.NEWW_FORUM_GROUP_SLUG
+        self.test_group.save()
+        self.assertIsNone(self.test_group.last_activity)
+        UpdateGroupsLastActivity().do()
+        self.assertFalse(update_group_activity_mock.called)
+        self.test_group.refresh_from_db()
+        self.assertIsNone(self.test_group.last_activity)
 
     @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_inactivity_notifications(self, send_mail_mock):

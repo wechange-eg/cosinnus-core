@@ -14,7 +14,7 @@ from cosinnus.models import group as group_module  # noqa # circular import prev
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import ensure_group_type
 from cosinnus.templatetags.cosinnus_tags import textfield
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_portal_group_slugs
 from cosinnus.utils.permissions import check_ug_admin, check_user_can_receive_emails
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus_cloud.utils.nextcloud import get_group_folder_last_modified
@@ -32,6 +32,11 @@ def mark_group_for_deletion(group, triggered_by_user=None):
     @param triggered_by_user: User triggering the deletion, can be None for automatic deactivation
     """
     automatic_deletion = triggered_by_user is None
+
+    # safety guard to avoid deletion of forum, events and default user groups
+    if group.slug in get_default_portal_group_slugs():
+        logger.warn('Attempted to deactivate default user group!', extra={'group_slug': group.slug})
+        return
 
     if automatic_deletion:
         # ensure last activity threshold has passed
@@ -133,12 +138,21 @@ def delete_group(group):
         logger.warning('Aborting group deletion because the group was still active!', extra={'group_id': group.id})
         return
 
+    # safety guard to avoid deletion of forum, events and default user groups
+    if group.slug in get_default_portal_group_slugs():
+        logger.warn('Attempted to delete default user group!', extra={'group_slug': group.slug})
+        return
+
     # delete group
     group.delete()
 
 
 def update_group_last_activity(group):
     """Updates the group activity field."""
+
+    # Ignore forum, events and default user groups
+    if group.slug in get_default_portal_group_slugs():
+        return
 
     # Stating with group itself
     last_activity = group.last_modified
@@ -186,7 +200,8 @@ def send_group_inactivity_deactivation_notifications():
     """
     groups_notified_count = 0
     today = now().date()
-    groups = get_cosinnus_group_model().objects.exclude(is_active=True, last_activity=None)
+    groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(last_activity=None)
+    groups = groups.exclude(slug__in=get_default_portal_group_slugs())
     for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
         # get groups that are notified according to the configured interval
         days_after_last_activity = settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before_deactivation
