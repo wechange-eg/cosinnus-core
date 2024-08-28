@@ -1112,7 +1112,7 @@ class UserAdmin(DjangoUserAdmin):
         return False
 
     def deactivate_users(self, request, queryset):
-        from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
+        from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion
 
         count = 0
         for user in queryset:
@@ -1129,7 +1129,7 @@ class UserAdmin(DjangoUserAdmin):
     deactivate_users.short_description = _('DEACTIVATE user accounts and DELETE them after 30 days')
 
     def reactivate_users(self, request, queryset):
-        from cosinnus.views.profile import reactivate_user
+        from cosinnus.views.profile_deletion import reactivate_user
 
         count = 0
         for user in queryset:
