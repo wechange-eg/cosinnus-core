@@ -368,7 +368,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'is_premium_currently',
         'attached_objects',
         'last_activity',
-        'inactivity_notification_send_at',
+        'inactivity_notification_sent_at',
     ]
     raw_id_fields = ('parent',)
     exclude = [
@@ -774,7 +774,7 @@ class UserProfileInline(admin.StackedInline):
         'deletion_triggered_by_self',
         '_is_guest',
         'guest_access_object',
-        'inactivity_notification_send_at',
+        'inactivity_notification_sent_at',
     )
     show_change_link = True
     view_on_site = False
