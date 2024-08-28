@@ -28,7 +28,7 @@ def deactivate_user(user):
     user.save()
     # save the user's profile as well,
     # as numerous triggers occur on the profile instead of the user object
-    if user.cosinnus_profile:
+    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         user.cosinnus_profile.save()
 
 
@@ -76,7 +76,8 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
     deactivate_user(user)
 
     # send extended deactivation signal
-    signals.user_deactivated_and_marked_for_deletion.send(sender=None, profile=user.cosinnus_profile)
+    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
+        signals.user_deactivated_and_marked_for_deletion.send(sender=None, profile=user.cosinnus_profile)
 
 
 def reassign_admins_for_groups_of_deleted_user(user):
@@ -119,7 +120,7 @@ def reactivate_user(user):
     user.save()
     # save the user's profile as well,
     # as numerous triggers occur on the profile instead of the user object
-    if user.cosinnus_profile:
+    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         # delete the marked-for-deletion flag
         user.cosinnus_profile.scheduled_for_deletion_at = None
         user.cosinnus_profile.deletion_triggered_by_self = False
@@ -143,10 +144,11 @@ def delete_userprofile(user):
         )
         return
 
-    profile = user.cosinnus_profile
+    profile = user.cosinnus_profile if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile else None
 
     # send deletion signal
-    signals.pre_userprofile_delete.send(sender=None, profile=profile)
+    if profile:
+        signals.pre_userprofile_delete.send(sender=None, profile=profile)
 
     # delete user widgets
     widgets = WidgetConfig.objects.filter(user_id__exact=user.pk)
@@ -159,7 +161,7 @@ def delete_userprofile(user):
 
     # delete user media_tag
     try:
-        if profile.media_tag:
+        if profile and profile.media_tag:
             profile.media_tag.delete()
     except get_tag_object_model().DoesNotExist:
         pass
@@ -184,9 +186,10 @@ def delete_userprofile(user):
         )
 
     # delete user profile
-    if profile.avatar:
-        profile.avatar.delete(False)
-    profile.delete()
+    if profile:
+        if profile.avatar:
+            profile.avatar.delete(False)
+        profile.delete()
 
     # set user to inactive and anonymize all data.
     user.first_name = 'deleted'
@@ -245,8 +248,9 @@ def send_user_inactivity_deactivation_notifications():
             send_html_mail(user, mail_subject, html_content)
 
             # update the notification send timestamp
-            user.cosinnus_profile.inactivity_notification_sent_at = now()
-            user.cosinnus_profile.save()
+            if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
+                user.cosinnus_profile.inactivity_notification_sent_at = now()
+                user.cosinnus_profile.save()
             users_notified_count += 1
 
     return users_notified_count
