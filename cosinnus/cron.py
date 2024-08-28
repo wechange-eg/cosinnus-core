@@ -19,7 +19,7 @@ from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.storage import TemporaryData
 from cosinnus.templatetags.cosinnus_tags import textfield
-from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_portal_group_slugs
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.views.group_deletion import (
     delete_group,
@@ -31,7 +31,7 @@ from cosinnus.views.profile_deletion import (
     deactivate_user_and_mark_for_deletion,
     delete_userprofile,
     reassign_admins_for_groups_of_deleted_user,
-    send_user_inactivity_deactivation_notifications
+    send_user_inactivity_deactivation_notifications,
 )
 from cosinnus_conference.utils import update_conference_premium_status
 from cosinnus_event.models import Event
@@ -128,8 +128,8 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
         inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
         inactive_users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
         inactive_users = inactive_users.filter(
-            Q(last_login__lt=inactivity_deactivation_threshold) |
-            Q(last_login=None, date_joined__lt=inactivity_deactivation_threshold)
+            Q(last_login__lt=inactivity_deactivation_threshold)
+            | Q(last_login=None, date_joined__lt=inactivity_deactivation_threshold)
         )
         for user in inactive_users:
             try:
@@ -334,6 +334,7 @@ class UpdateGroupsLastActivity(CosinnusCronJobBase):
 
         # update active groups
         groups = get_cosinnus_group_model().objects.filter(is_active=True)
+        groups = groups.exclude(slug__in=get_default_portal_group_slugs())
         for group in groups:
             try:
                 update_group_last_activity(group)
@@ -394,7 +395,7 @@ class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
             scheduled_for_deletion_at=None, last_activity__lt=inactivity_deactivation_threshold
         )
         # ignore forum and other default groups
-        inactive_groups = inactive_groups.exclude(pk__in=get_default_user_group_ids())
+        inactive_groups = inactive_groups.exclude(slug__in=get_default_portal_group_slugs())
         for group in inactive_groups:
             try:
                 mark_group_for_deletion(group)
