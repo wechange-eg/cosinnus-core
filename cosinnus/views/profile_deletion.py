@@ -229,6 +229,7 @@ def send_user_inactivity_deactivation_notifications():
             mail_content = _(
                 'Your entire account, profile and personal information will be deactivated and irrevocably deleted in '
                 '%(deactivation_in)s.\n'
+                'If you do not wish for you account to be deactivated, just log in once.\n'
                 'Your pads, news, uploaded files and other content will remain on the website. However, your name will '
                 'no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your '
                 'profile direct messages will be deleted, but content within discussions and channels will remain. If '
