@@ -1179,8 +1179,8 @@ class CosinnusBaseGroup(
         blank=True,
         null=True,
     )
-    inactivity_notification_send_at = models.DateTimeField(
-        _('Inactivity notification send at'),
+    inactivity_notification_sent_at = models.DateTimeField(
+        _('Inactivity notification sent at'),
         default=None,
         blank=True,
         null=True,
@@ -2040,6 +2040,7 @@ class CosinnusBaseGroup(
                         'token': self.settings.get('invite_token', None),
                     },
                 )
+
 
 class CosinnusGroup(CosinnusBaseGroup):
     """Swappable group model implementation."""
