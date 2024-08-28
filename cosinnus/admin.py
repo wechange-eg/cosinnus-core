@@ -316,7 +316,7 @@ class MembershipInline(admin.StackedInline):
 
 
 class ProjectScheduledForDeletionAtFilter(admin.SimpleListFilter):
-    """Will show groups that are scheduled for deletedion (or not)"""
+    """Will show groups that are scheduled for deletion (or not)"""
 
     title = _('Scheduled for Deletion?')
 
@@ -334,6 +334,27 @@ class ProjectScheduledForDeletionAtFilter(admin.SimpleListFilter):
             return queryset.exclude(scheduled_for_deletion_at__exact=None)
         if self.value() == 'no':
             return queryset.filter(scheduled_for_deletion_at__exact=None)
+
+
+class ProjectInactivityNotificationSentFilter(admin.SimpleListFilter):
+    """Will show projects where notification were sent about the pending deletion due to inactivity."""
+
+    title = _('Inactivity Notification Sent?')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'groupinactivitynotificationsent'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(inactivity_notification_sent_at__exact=None)
+        if self.value() == 'no':
+            return queryset.filter(inactivity_notification_sent_at__exact=None)
 
 
 class CosinnusProjectAdmin(admin.ModelAdmin):
@@ -364,6 +385,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'public',
         'is_active',
         ProjectScheduledForDeletionAtFilter,
+        ProjectInactivityNotificationSentFilter,
     )
     search_fields = (
         'name',
@@ -945,6 +967,27 @@ class UserScheduledForDeletionAtFilter(admin.SimpleListFilter):
 _useradmin_excluded_list_filter = ['groups', 'is_staff']
 
 
+class UserInactivityNotificationSentFilter(admin.SimpleListFilter):
+    """Will show users that were notified on about the pending deletion due to inactivity."""
+
+    title = _('Inactivity Notification Sent?')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'usersinactivitynotificationsent'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(cosinnus_profile__inactivity_notification_sent_at__exact=None)
+        if self.value() == 'no':
+            return queryset.filter(cosinnus_profile__inactivity_notification_sent_at__exact=None)
+
+
 class UserAdmin(DjangoUserAdmin):
     PERMISSION_FIELDS = ('is_active', 'is_superuser', 'is_staff')
 
@@ -1019,8 +1062,9 @@ class UserAdmin(DjangoUserAdmin):
         'date_joined',
         UserHasLoggedInFilter,
         UserToSAcceptedFilter,
-        UserScheduledForDeletionAtFilter,
         EmailVerifiedFilter,
+        UserScheduledForDeletionAtFilter,
+        UserInactivityNotificationSentFilter,
         IsGuestFilter,
     ]
 
