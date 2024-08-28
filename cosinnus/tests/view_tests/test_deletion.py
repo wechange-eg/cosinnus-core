@@ -1,5 +1,3 @@
-import cosinnus_notifications
-
 from datetime import datetime, timedelta, timezone
 from unittest.mock import ANY, patch
 
@@ -10,6 +8,7 @@ from django.urls import reverse
 from django.utils.timezone import now
 from freezegun import freeze_time
 
+import cosinnus_notifications
 from cosinnus.conf import settings
 from cosinnus.cron import (
     DeleteScheduledGroups,
@@ -20,12 +19,11 @@ from cosinnus.cron import (
     SendUserInactivityNotifications,
     UpdateGroupsLastActivity,
 )
-from cosinnus.models.group import CosinnusGroupMembership, MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER
+from cosinnus.models.group import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.profile_deletion import delete_userprofile
 from cosinnus_note.models import Note
-
 
 # Patch threads as threads do not work with Django tests as they don't get the correct test database connection.
 cosinnus_notifications.notifications.NotificationsThread.start = lambda self: self.run()
@@ -42,13 +40,11 @@ def create_active_test_user(username='user'):
 
 
 class TestUserMixin:
-
     def setUp(self):
         self.test_user = create_active_test_user()
 
 
 class UserDeletionTest(TestUserMixin, TestCase):
-
     def test_user_fields(self):
         self.test_user.is_active = False
         self.test_user.save()
@@ -95,7 +91,6 @@ class UserDeletionTest(TestUserMixin, TestCase):
 
 
 class UserManualDeletionTest(TestUserMixin, TestCase):
-
     @freeze_time('2024-01-01')
     @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_user_delete_view_schedules_deletion(self, send_mail_mock):
@@ -123,10 +118,9 @@ class UserManualDeletionTest(TestUserMixin, TestCase):
 
 
 class UserInactivityDeletionTest(TestUserMixin, TestCase):
-
     @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_inactivity_notifications(self, send_mail_mock):
-        last_login = datetime(2014,1, 1)
+        last_login = datetime(2014, 1, 1)
         self.test_user.last_login = last_login
         self.test_user.save()
 
@@ -143,9 +137,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             # notification is sent at the scheduled date
             with freeze_time(notification_date):
                 SendUserInactivityNotifications().do()
-                send_mail_mock.assert_called_with(
-                    self.test_user, 'Your account will be deleted due to inactivity', ANY
-                )
+                send_mail_mock.assert_called_with(self.test_user, 'Your account will be deleted due to inactivity', ANY)
                 send_mail_mock.reset_mock()
 
                 # notification is not send again
@@ -160,7 +152,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
 
     @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
-        last_login = datetime(2014,1, 1, tzinfo=timezone.utc)
+        last_login = datetime(2014, 1, 1, tzinfo=timezone.utc)
         self.test_user.last_login = last_login
         self.test_user.save()
 
@@ -181,8 +173,11 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             self.test_user.cosinnus_profile.refresh_from_db()
             self.assertEqual(self.test_user.cosinnus_profile.scheduled_for_deletion_at, expected_deletion)
             send_mail_mock.assert_called_with(
-                self.test_user, 'Attention: Your profile has been deactivated will be deleted due to inactivity',
-                ANY, threaded=False
+                self.test_user,
+                'Attention: Your profile has been deactivated will be deleted due to inactivity',
+                ANY,
+                threaded=False,
+                raise_on_error=True,
             )
             send_mail_mock.reset_mock()
 
@@ -194,6 +189,26 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             self.test_user.cosinnus_profile.refresh_from_db()
             self.assertEqual(self.test_user.cosinnus_profile.scheduled_for_deletion_at, expected_deletion)
 
+    @patch('cosinnus.views.profile_deletion.send_html_mail', side_effect=Exception)
+    def test_scheduled_deletion_email_exception(self, send_mail_mock):
+        last_login = datetime(2014, 1, 1, tzinfo=timezone.utc)
+        self.test_user.last_login = last_login
+        self.test_user.save()
+
+        deactivation_date = last_login + timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE, seconds=1)
+        with freeze_time(deactivation_date):
+            MarkInactiveUsersForDeletion().do()
+            self.test_user.cosinnus_profile.refresh_from_db()
+            self.assertIsNone(self.test_user.cosinnus_profile.scheduled_for_deletion_at)
+            send_mail_mock.assert_called_with(
+                self.test_user,
+                'Attention: Your profile has been deactivated will be deleted due to inactivity',
+                ANY,
+                threaded=False,
+                raise_on_error=True,
+            )
+            send_mail_mock.reset_mock()
+
     def test_admin_reassignment_other_user(self):
         cache.clear()  # clear membership cache
         second_user = create_active_test_user('user2')
@@ -201,7 +216,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         CosinnusGroupMembership.objects.create(group=test_group, user=self.test_user, status=MEMBERSHIP_ADMIN)
         CosinnusGroupMembership.objects.create(group=test_group, user=second_user, status=MEMBERSHIP_MEMBER)
 
-        last_login = datetime(2014,1, 1, tzinfo=timezone.utc)
+        last_login = datetime(2014, 1, 1, tzinfo=timezone.utc)
         self.test_user.last_login = last_login
         self.test_user.save()
 
@@ -217,7 +232,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         test_group = CosinnusSociety.objects.create(name='Test Group')
         CosinnusGroupMembership.objects.create(group=test_group, user=self.test_user, status=MEMBERSHIP_ADMIN)
 
-        last_login = datetime(2014,1, 1, tzinfo=timezone.utc)
+        last_login = datetime(2014, 1, 1, tzinfo=timezone.utc)
         self.test_user.last_login = last_login
         self.test_user.save()
 
@@ -237,7 +252,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         CosinnusGroupMembership.objects.create(group=test_group, user=self.test_user, status=MEMBERSHIP_ADMIN)
         CosinnusGroupMembership.objects.create(group=test_group, user=second_admin, status=MEMBERSHIP_ADMIN)
 
-        last_login = datetime(2014,1, 1, tzinfo=timezone.utc)
+        last_login = datetime(2014, 1, 1, tzinfo=timezone.utc)
         self.test_user.last_login = last_login
         self.test_user.save()
 
@@ -252,7 +267,6 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
 
 
 class TestGroupMixin:
-
     def setUp(self):
         with freeze_time('2024-01-01'):
             self.test_admin = create_active_test_user('admin')
@@ -267,7 +281,6 @@ class TestGroupMixin:
 
 
 class GroupDeletionTest(TestGroupMixin, TestCase):
-
     def test_group_delete_cron_job(self):
         self.test_group.scheduled_for_deletion_at = datetime(2024, 2, 1)
         self.test_group.save()
@@ -300,7 +313,6 @@ class GroupDeletionTest(TestGroupMixin, TestCase):
 
 
 class GroupManualDeletionTest(TestGroupMixin, TestCase):
-
     @freeze_time('2024-01-01')
     def test_group_delete_view_schedules_deletion(self):
         self.client.force_login(self.test_admin)
@@ -321,9 +333,7 @@ class GroupManualDeletionTest(TestGroupMixin, TestCase):
 
 
 class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
-
     def test_group_last_activity_update(self):
-
         # test last modified
         activity_time = datetime(2024, 1, 1, tzinfo=timezone.utc)
         with freeze_time(activity_time):
@@ -352,7 +362,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
 
     @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_inactivity_notifications(self, send_mail_mock):
-        last_activity = datetime(2014,1, 1)
+        last_activity = datetime(2014, 1, 1)
         with freeze_time(last_activity):
             self.test_group.last_activity = last_activity
             self.test_group.save()
@@ -387,7 +397,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
 
     @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
-        last_activity = datetime(2014,1, 1, tzinfo=timezone.utc)
+        last_activity = datetime(2014, 1, 1, tzinfo=timezone.utc)
         self.test_group.last_activity = last_activity
         self.test_group.save()
 
@@ -426,7 +436,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
 
     @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_scheduled_deletion_of_inactive_groups(self, send_mail_mock):
-        last_activity = datetime(2014,1, 1, tzinfo=timezone.utc)
+        last_activity = datetime(2014, 1, 1, tzinfo=timezone.utc)
         self.test_group.is_active = False
         self.test_group.last_activity = last_activity
         self.test_group.save()

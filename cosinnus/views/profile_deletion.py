@@ -57,7 +57,15 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
             'like to keep your profile.'
         )
         body_text = textfield(text)
-        send_html_mail(user, subject, body_text, threaded=False)
+        # When errors occur when sending the notification for inactivity deletions do not deactivate the user.
+        try:
+            send_html_mail(user, subject, body_text, threaded=False, raise_on_error=True)
+        except Exception as e:
+            logger.warn(
+                'Could not deactivate inactive user because of an exception while sending the notification email.',
+                extra={'exception': e},
+            )
+            return
 
     if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         # add a marked-for-deletion flag and a cronjob, deleting the profile using this
