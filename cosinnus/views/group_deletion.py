@@ -77,8 +77,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
                         'inactivity.\n\n'
                         'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                         'Until then, reactivation is possible by the %(group_type)s admins under '
-                        '%(deactivated_groups_url)s.\n\n'
-                        'If an earlier deletion is desired, please send an email to the portal support.'
+                        '%(deactivated_groups_url)s.'
                     )
                     % mail_context
                 )
@@ -89,8 +88,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
                         'deactivation.\n\n'
                         'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                         'Until then, reactivation is possible by the %(group_type)s admins under '
-                        '%(deactivated_groups_url)s.\n\n'
-                        'If an earlier deletion is desired, please send an email to the portal support.'
+                        '%(deactivated_groups_url)s.'
                     )
                     % mail_context
                 )
@@ -106,8 +104,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
                     'admin %(deleted_by)s.\n\n'
                     'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                     'Until then, reactivation is possible by the %(group_type)s admins under '
-                    '%(deactivated_groups_url)s.\n\n'
-                    'If an earlier deletion is desired, please send an email to the portal support.'
+                    '%(deactivated_groups_url)s.'
                 )
                 % mail_context
             )
