@@ -65,7 +65,7 @@ from cosinnus.views.mixins.group import (
     RequireReadMixin,
     RequireWriteMixin,
 )
-from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
+from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion
 from cosinnus_conference.forms import (
     CHOICE_ALL_APPLICANTS,
     CHOICE_ALL_MEMBERS,
