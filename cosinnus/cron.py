@@ -61,7 +61,7 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
     """Triggers a profile delete on all user profiles whose `scheduled_for_deletion_at`
     datetime is in the past."""
 
-    RUN_EVERY_MINS = 60  # every 1 hour
+    RUN_EVERY_MINS = 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus.delete_scheduled_user_profiles'
@@ -289,7 +289,7 @@ class DeleteOldGuestUsers(CosinnusCronJobBase):
 class DeleteScheduledGroups(CosinnusCronJobBase):
     """Triggers a group delete on all groups whose `scheduled_for_deletion_at` datetime is in the past."""
 
-    RUN_EVERY_MINS = 60  # every 1 hour
+    RUN_EVERY_MINS = 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus.delete_scheduled_groups'
