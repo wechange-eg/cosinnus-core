@@ -112,7 +112,7 @@ class UserManualDeletionTest(TestUserMixin, TestCase):
         self.assertEqual(self.test_user.cosinnus_profile.scheduled_for_deletion_at, expected_deletion_at)
 
         # check that a notification email was send
-        send_mail_mock.assert_called_with(
+        send_mail_mock.assert_called_once_with(
             self.test_user, 'Information about the deletion of your user account', ANY, threaded=False
         )
         send_mail_mock.reset_mock()
@@ -138,7 +138,9 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             # notification is sent at the scheduled date
             with freeze_time(notification_date):
                 SendUserInactivityNotifications().do()
-                send_mail_mock.assert_called_with(self.test_user, 'Your account will be deleted due to inactivity', ANY)
+                send_mail_mock.assert_called_once_with(
+                    self.test_user, 'Your account will be deleted due to inactivity', ANY
+                )
                 send_mail_mock.reset_mock()
 
                 # notification is not send again
@@ -173,7 +175,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             MarkInactiveUsersForDeletion().do()
             self.test_user.cosinnus_profile.refresh_from_db()
             self.assertEqual(self.test_user.cosinnus_profile.scheduled_for_deletion_at, expected_deletion)
-            send_mail_mock.assert_called_with(
+            send_mail_mock.assert_called_once_with(
                 self.test_user,
                 'Attention: Your profile has been deactivated will be deleted due to inactivity',
                 ANY,
@@ -201,7 +203,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             MarkInactiveUsersForDeletion().do()
             self.test_user.cosinnus_profile.refresh_from_db()
             self.assertIsNone(self.test_user.cosinnus_profile.scheduled_for_deletion_at)
-            send_mail_mock.assert_called_with(
+            send_mail_mock.assert_called_once_with(
                 self.test_user,
                 'Attention: Your profile has been deactivated will be deleted due to inactivity',
                 ANY,
@@ -407,7 +409,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             # admin notification is sent at the scheduled date
             with freeze_time(notification_date):
                 SendGroupsInactivityNotifications().do()
-                send_mail_mock.assert_called_with(
+                send_mail_mock.assert_called_once_with(
                     self.test_admin, f'Group {self.test_group.name} will be deleted due to inactivity', ANY
                 )
                 send_mail_mock.reset_mock()
@@ -476,7 +478,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             MarkInactiveGroupsForDeletion().do()
             self.test_group.refresh_from_db()
             self.assertEqual(self.test_group.scheduled_for_deletion_at, expected_deletion)
-            send_mail_mock.assert_called_with(
+            send_mail_mock.assert_called_once_with(
                 self.test_admin, f'Group {self.test_group.name} has been deactivated and will be deleted', ANY
             )
             send_mail_mock.reset_mock()
