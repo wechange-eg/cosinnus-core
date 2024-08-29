@@ -146,6 +146,7 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
             message = 'No users scheduled for deletion.'
         if errors_occurred:
             message += ' Errors occurred during cron job.'
+        return message
 
 
 class UpdateConferencePremiumStatus(CosinnusCronJobBase):
