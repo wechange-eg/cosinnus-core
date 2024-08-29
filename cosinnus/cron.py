@@ -333,18 +333,9 @@ class UpdateGroupsLastActivity(CosinnusCronJobBase):
     def do(self):
         errors_occurred = False
 
-        # update active groups
-        groups = get_cosinnus_group_model().objects.filter(is_active=True)
+        # update active groups periodically and inactive groups once.
+        groups = get_cosinnus_group_model().objects.filter(Q(is_active=True) | Q(is_active=False, last_activity=None))
         groups = groups.exclude(slug__in=get_default_portal_group_slugs())
-        for group in groups:
-            try:
-                update_group_last_activity(group)
-            except Exception as e:
-                logger.exception(e)
-                errors_occurred = True
-
-        # compute the last activity for inactive groups once
-        groups = get_cosinnus_group_model().objects.filter(is_active=False, last_activity=None)
         for group in groups:
             try:
                 update_group_last_activity(group)
