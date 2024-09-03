@@ -62,7 +62,7 @@ def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=Fa
 
     # if celery is active, delay the actual delivery
     if False and settings.COSINNUS_USE_CELERY:
-        # We enabled Celery to RocketChat membership tasks. But we do not want to enable email tasks with it.
+        # We enabled Celery to RocketChat tasks. But we do not want to enable email tasks with it.
         # TODO: Remove the "False" check to enable the email task.
         from cosinnus.tasks import deliver_mail_task
 
@@ -76,7 +76,9 @@ def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=Fa
             from cosinnus.models.feedback import CosinnusSentEmailLog
             from cosinnus.models.group import CosinnusPortal
 
-            if settings.COSINNUS_USE_CELERY:
+            if False and settings.COSINNUS_USE_CELERY:
+                # We enabled Celery to RocketChat tasks. But we do not want to enable email tasks with it.
+                # TODO: Remove the "False" check to enable the email task.
                 subject = '[CELERY-DELEGATED] %s' % subject
             CosinnusSentEmailLog.objects.create(email=to, title=subject, portal=CosinnusPortal.get_current())
         except Exception as e:
@@ -159,7 +161,9 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
 
 
 def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc=None, is_html=False):
-    if settings.COSINNUS_USE_CELERY:
+    if False and settings.COSINNUS_USE_CELERY:
+        # We enabled Celery to RocketChat tasks. But we do not want to enable email tasks with it.
+        # TODO: Remove the "False" check to enable the email task.
         # if this is meant to be threaded, but we have celery, just pass it on
         send_mail_or_fail(to, subject, template, data, from_email=from_email, bcc=bcc, is_html=is_html)
     else:
