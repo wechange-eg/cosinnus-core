@@ -137,18 +137,22 @@ if settings.COSINNUS_ROCKET_ENABLED:
                 tasks.rocket_group_membership_update_task.delay(old_instance.user.pk, old_instance.group.pk)
 
     @receiver(post_save, sender=CosinnusGroupMembership)
-    def handle_membership_updated(sender, instance, created, **kwargs):
+    @receiver(post_delete, sender=CosinnusGroupMembership)
+    def handle_membership_updated(sender, instance, **kwargs):
         """Update RocketChat group membership."""
         if instance.user.is_guest:
             return
-        tasks.rocket_group_membership_update_task.delay(instance.user.pk, instance.group.pk)
 
-    @receiver(post_delete, sender=CosinnusGroupMembership)
-    def handle_membership_deleted(sender, instance, **kwargs):
-        """Delete RocketChat group membership."""
-        if instance.user.is_guest:
-            return
-        tasks.rocket_group_membership_update_task.delay(instance.user.pk, instance.group.pk)
+        group = instance.group
+        tasks.rocket_group_membership_update_task.delay(instance.user.pk, group.pk)
+
+        if group.group_is_conference:
+            rocket_rooms = CosinnusConferenceRoom.objects.filter(
+                group=group, type__in=CosinnusConferenceRoom.ROCKETCHAT_ROOM_TYPES
+            )
+            # add/remove member from each rocketchat room for each conference room
+            for room in rocket_rooms:
+                tasks.rocket_conference_room_membership_update_task.delay(room.pk, instance.user.pk, group.pk)
 
     @receiver(post_save, sender=Event)
     @receiver(post_save, sender=Note)

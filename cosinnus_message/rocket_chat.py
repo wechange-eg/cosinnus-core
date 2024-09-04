@@ -1424,6 +1424,24 @@ class RocketChatConnection:
                         extra={'response': response},
                     )
 
+    def invite_or_kick_for_room_membership(self, membership, room_id):
+        """
+        For a CosinnusGroupMembership and a specific rocket chat room either kick or invite and promote or demote a user
+        depending on their status. E.g. used for membership updates for conference rooms.
+        """
+        is_pending = membership.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
+        if is_pending:
+            self.remove_member_from_room(membership.user, room_id)
+        else:
+            self.add_member_to_room(membership.user, room_id)
+            # Update membership
+            if membership.status == MEMBERSHIP_ADMIN:
+                # Upgrade
+                self.add_moderator_to_room(membership.user, room_id)
+            else:
+                # Downgrade
+                self.remove_moderator_from_room(membership.user, room_id)
+
     def add_member_to_room(self, user, room_id):
         """Add a member to a given room"""
         user_id = self.get_user_id(user)

@@ -2,6 +2,7 @@
 from django.contrib.auth import get_user_model
 
 from cosinnus.celery import app as celery_app
+from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.tasks import CeleryThreadTask
 from cosinnus_event.models import Event
@@ -141,6 +142,7 @@ def rocket_group_membership_update_task(user_id, group_id):
             return
 
         rocket.invite_or_kick_for_membership(membership)
+
     else:
         # membership deleted
         user = get_user_model().objects.filter(pk=user_id).first()
@@ -152,6 +154,32 @@ def rocket_group_membership_update_task(user_id, group_id):
                 return
 
             rocket.groups_kick(user, group)
+
+
+@celery_app.task(base=RocketChatTask)
+def rocket_conference_room_membership_update_task(room_id, user_id, group_id):
+    """Update the user membership for a conference room."""
+    rocket = RocketChatConnection()
+    room = CosinnusConferenceRoom.objects.get(pk=room_id)
+    user = get_user_model().objects.filter(pk=user_id).first()
+    if room and user:
+        # In case the room channel was not created because of an error, recreate it.
+        room.sync_rocketchat_room()
+        if room.rocket_chat_room_id:
+            membership = CosinnusGroupMembership.objects.filter(user_id=user_id, group_id=group_id).first()
+            if membership:
+                # membership created or updated
+                rocket.invite_or_kick_for_room_membership(membership, room.rocket_chat_room_id)
+            else:
+                # membership deleted
+                rocket.remove_member_from_room(user, room.rocket_chat_room_id)
+
+
+@celery_app.task(base=RocketChatTask)
+def rocket_group_room_membershio_update_task(room_id):
+    """Delete a group room."""
+    rocket = RocketChatConnection()
+    rocket.groups_room_delete(room_id)
 
 
 def _get_relay_message_instance(model_name, instance_id):
