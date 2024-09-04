@@ -18,7 +18,7 @@ from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
 from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.models.conference import CosinnusConferencePremiumBlock, CosinnusConferenceRoom
+from cosinnus.models.conference import CosinnusConferencePremiumBlock
 from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.mail import QueuedMassMail
@@ -247,45 +247,6 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                             CosinnusGroupMembership.objects.create(
                                 group=result_group, user=user, status=instance.status
                             )
-
-                    # if there are any rocketchat rooms, update the rocketchat group membership for those rooms
-                    if settings.COSINNUS_ROCKET_ENABLED:
-                        rocket_rooms = list(
-                            CosinnusConferenceRoom.objects.filter(
-                                group=group, type__in=CosinnusConferenceRoom.ROCKETCHAT_ROOM_TYPES
-                            )
-                        )
-                        if len(rocket_rooms) > 0:
-                            from cosinnus_message.rocket_chat import RocketChatConnection
-
-                            try:
-                                rocket = RocketChatConnection()
-                                # add/remove member from each rocketchat room for each conference room
-                                for room in rocket_rooms:
-                                    room.sync_rocketchat_room()
-                                    if not room.rocket_chat_room_id:
-                                        logger.error(
-                                            (
-                                                'Wanted to sync a user membership to a conference room, but a '
-                                                'rocketchat room for it could not be created!'
-                                            ),
-                                            extra={'room': room.id},
-                                        )
-                                        continue
-                                    if deleted:
-                                        # kicked member
-                                        rocket.remove_member_from_room(user, room.rocket_chat_room_id)
-                                    else:
-                                        rocket.add_member_to_room(user, room.rocket_chat_room_id)
-                                        # Update membership
-                                        if instance.status == MEMBERSHIP_ADMIN:
-                                            # Upgrade
-                                            rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
-                                        else:
-                                            # Downgrade
-                                            rocket.remove_moderator_from_room(user, room.rocket_chat_room_id)
-                            except Exception as e:
-                                logger.exception(e)
 
     MembershipUpdateHookThread().start()
 

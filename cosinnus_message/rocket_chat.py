@@ -1077,14 +1077,6 @@ class RocketChatConnection:
 
         return room_id
 
-    def delete_private_room(self, room_id):
-        """Delete a private room by room_id.
-        @param room_id: rocket chat room id
-        """
-        response = self.rocket.groups_delete(room_id=room_id).json()
-        if not response.get('success'):
-            logger.error('RocketChat: Direct delete_private_group groups_delete', extra={'response': response})
-
     def groups_create(self, group):
         """
         Create default channels for group or project, if they doesn't exist yet:
@@ -1229,6 +1221,26 @@ class RocketChatConnection:
                     success = False
         return success
 
+    def groups_names_changed(self, group):
+        """Check if the default channels names changed for a group or project."""
+        changed = False
+        for room_key, room_name_code in settings.COSINNUS_ROCKET_GROUP_ROOM_NAMES_MAP.items():
+            room_id = self.get_group_id(group, room_key=room_key)
+            if room_id:
+                response = self.rocket.groups_info(room_id=room_id).json()
+                if not response.get('success'):
+                    logger.error(
+                        'RocketChat: groups_name_changed' + response.get('errorType', '<No Error Type>'),
+                        extra={'response': response},
+                    )
+                    continue
+                group_data = response.get('group')
+                room_name = room_name_code % group.slug
+                if room_name != group_data.get('name'):
+                    changed = True
+                    break
+        return changed
+
     def group_set_topic_to_url(self, group, specific_room_keys=None):
         """Sets the CosinnusGroup url as topic of the group's room
         @param specific_room_keysspecific_room_keys: if set to a list, the topic will only be
@@ -1305,6 +1317,18 @@ class RocketChatConnection:
                         extra={'response': response},
                     )
                     success = False
+        return success
+
+    def groups_room_delete(self, room_id=None):
+        """Deletes a group doom by its room_id."""
+        success = True
+        response = self.rocket.groups_delete(room_id=room_id).json()
+        if not response.get('success'):
+            logger.error(
+                'RocketChat: groups_room_delete ' + response.get('errorType', '<No Error Type>'),
+                extra={'response': response},
+            )
+            success = False
         return success
 
     def invite_or_kick_for_membership(self, membership):
@@ -1399,6 +1423,24 @@ class RocketChatConnection:
                         'RocketChat: groups_remove_moderator ' + response.get('errorType', '<No Error Type>'),
                         extra={'response': response},
                     )
+
+    def invite_or_kick_for_room_membership(self, membership, room_id):
+        """
+        For a CosinnusGroupMembership and a specific rocket chat room either kick or invite and promote or demote a user
+        depending on their status. E.g. used for membership updates for conference rooms.
+        """
+        is_pending = membership.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
+        if is_pending:
+            self.remove_member_from_room(membership.user, room_id)
+        else:
+            self.add_member_to_room(membership.user, room_id)
+            # Update membership
+            if membership.status == MEMBERSHIP_ADMIN:
+                # Upgrade
+                self.add_moderator_to_room(membership.user, room_id)
+            else:
+                # Downgrade
+                self.remove_moderator_from_room(membership.user, room_id)
 
     def add_member_to_room(self, user, room_id):
         """Add a member to a given room"""
@@ -1576,21 +1618,25 @@ class RocketChatConnection:
         # Update note settings without triggering signals to prevent cycles
         # type(note).objects.filter(pk=note.pk).update(settings=note.settings)
 
+    def relay_message_delete_in_group(self, group, room_key, msg_id):
+        """Delete a message by id in a group."""
+        room_id = self.get_group_id(group, room_key=room_key, create_if_not_exists=False)
+        if room_id:
+            response = self.rocket.chat_delete(room_id=room_id, msg_id=msg_id).json()
+            if not response.get('success'):
+                if response.get('error', None) == 'The room id provided does not match where the message is from.':
+                    # if the room has moved, we cannot reach the note anymore, ignore this error
+                    return
+                logger.error('RocketChat: notes_delete did not return a success response', extra={'response': response})
+
     def relay_message_delete(self, instance):
         """Delete message for objects implementing the RelayMessageMixin in default channel of group/project"""
         room_key = settings.COSINNUS_ROCKET_NOTE_POST_RELAY_ROOM_KEY
         if not room_key:
             return
         msg_id = instance.settings.get(ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY)
-        room_id = self.get_group_id(instance.group, room_key=room_key)
-        if not msg_id or not room_id:
-            return
-        response = self.rocket.chat_delete(room_id=room_id, msg_id=msg_id).json()
-        if not response.get('success'):
-            if response.get('error', None) == 'The room id provided does not match where the message is from.':
-                # if the room has moved, we cannot reach the note anymore, ignore this error
-                return
-            logger.error('RocketChat: notes_delete did not return a success response', extra={'response': response})
+        if msg_id:
+            self.relay_message_delete_in_group(instance.group, room_key, msg_id)
 
     def unread_messages(self, user):
         """
