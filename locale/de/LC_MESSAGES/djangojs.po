@@ -394,3 +394,6 @@ msgstr "Gäste-Einladung kopieren"
 
 msgid "There was an error."
 msgstr "Ein Fehler ist aufgetreten."
+
+msgid "Open Result Project"
+msgstr "Ergebnisprojekt öffnen"
