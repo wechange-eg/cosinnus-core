@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:30+0200\n"
+"POT-Creation-Date: 2024-09-10 16:00+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -201,6 +201,13 @@ msgid "Rocket: Repair/create missing users' rocketchat accounts"
 msgstr ""
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
+msgstr ""
+
+#, python-format
+msgid "%d Users were made Nextcloud admins."
+msgstr ""
+
+msgid "Nextcloud: Make user Nextcloud admin"
 msgstr ""
 
 msgid "Recipients Count"
