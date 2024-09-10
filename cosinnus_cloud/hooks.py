@@ -389,6 +389,18 @@ if settings.COSINNUS_CLOUD_ENABLED:
             return
         submit_with_retry(nextcloud.enable_user, get_nc_user_id(user))
 
+    @receiver(signals.user_promoted_to_superuser)
+    def user_promoted_to_superuser(sender, user, **kwargs):
+        if user.is_guest:
+            return
+        submit_with_retry(nextcloud.add_user_to_admin_group, get_nc_user_id(user))
+
+    @receiver(signals.user_demoted_from_superuser)
+    def user_demoted_from_superuser(sender, user, **kwargs):
+        if user.is_guest:
+            return
+        submit_with_retry(nextcloud.remove_user_from_admin_group, get_nc_user_id(user))
+
     @receiver(signals.pre_userprofile_delete)
     def user_deleted(sender, profile, **kwargs):
         """Called when a user deletes their account. Completely deletes the user's nextcloud account"""
