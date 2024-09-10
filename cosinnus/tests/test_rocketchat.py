@@ -174,6 +174,18 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertIsNone(user_info)
             self.test_user = None
 
+        def test_user_change_superuser(self):
+            user_info = self._get_test_user_info()
+            self.assertEqual(user_info['roles'], ['user'])
+            self.test_user.is_superuser = True
+            self.test_user.save()
+            user_info = self._get_test_user_info()
+            self.assertEqual(user_info['roles'], ['user', 'admin'])
+            self.test_user.is_superuser = False
+            self.test_user.save()
+            user_info = self._get_test_user_info()
+            self.assertEqual(user_info['roles'], ['user'])
+
         def test_user_update(self):
             updated_email = 'rockettest_updated@example.com'
             self.test_user.email = updated_email
