@@ -21,7 +21,7 @@ logger = logging.getLogger('cosinnus')
 
 # a list of font-awesome class names that are not actual icons,
 # useful for filtering them out of a class string
-FONT_AWESOME_CLASS_FILTER = ['fa', 'fas', 'fa-fw', 'fa-2x', 'fa-3x', 'fa--spin', 'fa-cog']
+FONT_AWESOME_CLASS_FILTER = ['fa', 'fas', 'fa-fw', 'fa-2x', 'fa-3x', 'fa--spin']
 
 
 class DashboardItem(dict):
@@ -158,4 +158,3 @@ class MenuItem(dict):
         # only add actions as a key if it is actually given
         if actions is not None:
             self['actions'] = actions
-
