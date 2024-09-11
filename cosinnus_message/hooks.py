@@ -195,3 +195,33 @@ if settings.COSINNUS_ROCKET_ENABLED:
         """Called when a conference room is deleted. Delete the corresponding group."""
         if instance.rocket_chat_room_id:
             tasks.rocket_group_room_delete_task.delay(room_id=instance.rocket_chat_room_id)
+
+    @receiver(signals.user_promoted_to_superuser)
+    def handle_user_promoted_to_superuser(sender, user, **kwargs):
+        """Called when a user is promoted to superuser. Not a task as done in the admin."""
+        if user.is_guest:
+            return
+        try:
+            rocket = RocketChatConnection()
+            rocket_user_id = rocket.get_user_id(user)
+            if rocket_user_id:
+                rocket.rocket.users_update(user_id=rocket_user_id, roles=['user', 'admin'])
+        except RocketChatDownException:
+            logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+        except Exception as e:
+            logger.exception(e)
+
+    @receiver(signals.user_demoted_from_superuser)
+    def handle_user_demoted_from_superuser(sender, user, **kwargs):
+        """Called when a user is demoted from superuser. Not a task as done in the admin."""
+        if user.is_guest:
+            return
+        try:
+            rocket = RocketChatConnection()
+            rocket_user_id = rocket.get_user_id(user)
+            if rocket_user_id:
+                rocket.rocket.users_update(user_id=rocket_user_id, roles=['user'])
+        except RocketChatDownException:
+            logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+        except Exception as e:
+            logger.exception(e)

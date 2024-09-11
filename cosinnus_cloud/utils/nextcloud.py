@@ -203,6 +203,14 @@ def remove_user_from_group(userid: str, groupid: str) -> OCSResponse:
     )
 
 
+def add_user_to_admin_group(userid: str) -> OCSResponse:
+    return add_user_to_group(userid, 'admin')
+
+
+def remove_user_from_admin_group(userid: str) -> OCSResponse:
+    return remove_user_from_group(userid, 'admin')
+
+
 def create_group(groupid: str) -> Optional[OCSResponse]:
     try:
         return _response_or_raise(

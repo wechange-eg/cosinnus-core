@@ -159,20 +159,23 @@ if getattr(settings, 'COSINNUS_USER_FOLLOWS_GROUP_WHEN_JOINING', True):
             group.clear_likes_cache()
 
 
-""" User account activation/deactivation logic """
+""" User value change signal trigger """
 
 
 def user_pre_save(sender, **kwargs):
-    """Saves a user's is_active value as it was before saving"""
+    """Saves a user's is_active and is_superuser value as it was before saving"""
     user = kwargs['instance']
-    actual_value = user.is_active
+    is_active_value = user.is_active
+    is_superuser_value = user.is_superuser
     try:
-        user.refresh_from_db(fields=['is_active'])
+        user.refresh_from_db(fields=['is_active', 'is_superuser'])
     except get_user_model().DoesNotExist:
         # happens on user create
         pass
     user._is_active = user.is_active
-    user.is_active = actual_value
+    user.is_active = is_active_value
+    user._is_superuser = user.is_superuser
+    user.is_superuser = is_superuser_value
 
 
 def user_post_save(sender, **kwargs):
@@ -184,6 +187,12 @@ def user_post_save(sender, **kwargs):
                 signals.user_activated.send(sender=sender, user=user)
             else:
                 signals.user_deactivated.send(sender=sender, user=user)
+    if hasattr(user, '_is_superuser'):
+        if user.is_superuser != user._is_superuser:
+            if user.is_superuser:
+                signals.user_promoted_to_superuser.send(sender=sender, user=user)
+            else:
+                signals.user_demoted_from_superuser.send(sender=sender, user=user)
 
 
 pre_save.connect(user_pre_save, sender=get_user_model())

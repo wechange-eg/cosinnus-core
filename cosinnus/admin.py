@@ -926,6 +926,7 @@ class UserAdmin(DjangoUserAdmin):
     if settings.COSINNUS_CLOUD_ENABLED:
         actions += [
             'force_redo_cloud_user_room_memberships',
+            'make_user_cloud_admin',
         ]
     list_display = (
         'email',
@@ -1117,6 +1118,18 @@ class UserAdmin(DjangoUserAdmin):
         force_redo_cloud_user_room_memberships.short_description = _(
             'Nextcloud: Fix missing Nextcloud folder membership for users'
         )
+
+        def make_user_cloud_admin(self, request, queryset):
+            from cosinnus_cloud.hooks import user_promoted_to_superuser
+
+            count = 0
+            for user in queryset:
+                user_promoted_to_superuser(None, user)
+                count += 1
+            message = _('%d Users were made Nextcloud admins.') % count
+            self.message_user(request, message)
+
+        make_user_cloud_admin.short_description = _('Nextcloud: Make user Nextcloud admin')
 
 
 admin.site.unregister(USER_MODEL)
