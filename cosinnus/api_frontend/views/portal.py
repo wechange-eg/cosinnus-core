@@ -439,7 +439,8 @@ class PortalSettingsView(APIView):
                 "variant": "covering|contained"  # default: covering
             },
            "color": "blue",  # exclusive with "brandColors"
-           "brandColors": {  # exclusive with "colors"
+           # palette color. can be generated with https://palette.saas-ui.dev/
+           "brandColors": {  # exclusive with "color"
                "50": "#ffffff",
                "100": "#ffffff",
                "200": "#ffffff",
