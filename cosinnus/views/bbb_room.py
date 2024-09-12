@@ -144,6 +144,7 @@ class BBBRoomMeetingQueueAPIView(View):
                 user not in bbb_room.attendees.all()
                 and user not in bbb_room.moderators.all()
                 and not check_user_superuser(user)
+                and not bbb_room.is_publicly_visible
             ):
                 # deny logged in users without a guest token if they have no permission to enter the room
                 return HttpResponseBadRequest('User is not allowed to enter this room.')

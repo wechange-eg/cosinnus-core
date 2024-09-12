@@ -219,6 +219,23 @@ class BBBRoom(models.Model):
             )
         return count
 
+    @property
+    def is_publicly_visible(self):
+        """
+        Checks if the BBB room can be accessed by authenticated users without group membership.
+        BBB rooms are public when the tagged object visibility is VISIBILITY_ALL or if the BBB room belongs to a group
+        that is public.
+        """
+        if self.tagged_objects.count() != 1:
+            # Safety check to ensure that the bbb room does not belong to multiple or none parent objects.
+            return False
+        tagged_object = self.tagged_objects.first()
+        if tagged_object.visibility == tagged_object.VISIBILITY_ALL:
+            return True
+        if hasattr(tagged_object, 'cosinnusgroup') and tagged_object.cosinnusgroup.public:
+            return True
+        return False
+
     def get_password_for_user(self, user):
         """returns the room password according to the permission of a given user.
             If the user object has a temporary bbb guest token attached that matches this room,
@@ -231,7 +248,11 @@ class BBBRoom(models.Model):
         user_bbb_guest_token = getattr(user, self.BBB_USER_GUEST_TOKEN_ATTR, None)
         if check_user_superuser(user) or user in self.moderators.all():
             return self.moderator_password
-        elif (user_bbb_guest_token and user_bbb_guest_token == self.guest_token) or user in self.attendees.all():
+        elif (
+            (user_bbb_guest_token and user_bbb_guest_token == self.guest_token)
+            or user in self.attendees.all()
+            or self.is_publicly_visible
+        ):
             return self.attendee_password
         else:
             return ''
