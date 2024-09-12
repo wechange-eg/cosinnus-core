@@ -58,6 +58,16 @@
         </div>
     {% endif %}
     <div class="clearfix"></div>
+
+    {# An extra breadcrumb in the v3 main content view only, because otherwise the current folder's name wouldn't be shown #}
+    {% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED and COSINNUS_V3_API_CONTENT_ACTIVE %}
+        {% if current_folder and current_folder.path != '/' %}
+            <ol class="breadcrumb">
+                <li><a class="active" href="{% group_url 'cosinnus:file:index' group=group %}">{% trans "Files" %}</a></li>
+                <li class="active">{{ current_folder.title }}</li>
+            </ol>
+        {% endif %}
+    {% endif %}
     
 	{% trans "Delete" as btn_label %}
     {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_delete_element($.cosinnus.getListOfCheckedItems());{% endcaptureas %}
