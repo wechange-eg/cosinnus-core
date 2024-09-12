@@ -816,11 +816,12 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     CAPTCHA_TIMEOUT = 30
 
     # django-rest-framework-simplejwt, see https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
+    # Rest-framework access token expiry time, generated under /api/v2/token/
     from datetime import timedelta
 
     SIMPLE_JWT = {
-        'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-        'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+        'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+        'REFRESH_TOKEN_LIFETIME': timedelta(days=90),
         'TOKEN_OBTAIN_SERIALIZER': 'cosinnus.utils.jwt.TwoFactorTokenObtainPairSerializer',
     }
 
@@ -916,7 +917,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     COSINNUS_EXCHANGE_BACKENDS = []
 
     LOGIN_REDIRECT_URL = '/dashboard/'
-    
+
     # reconfigure the el_pagination label so we can identify it better
     EL_PAGINATION_PAGE_LABEL = 'endless_page'
 
