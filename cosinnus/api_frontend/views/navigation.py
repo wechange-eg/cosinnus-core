@@ -130,7 +130,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                         'label': 'Forum',
                                         'url': '/group/forum/',
                                         'is_external': False,
-                                        'icon': 'fa-sitemap',
+                                        'icon': 'fa-globe',
                                         'image': None,
                                         'badge': None,
                                         'selected': False,
@@ -263,7 +263,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                         MenuItem(
                             settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL,
                             forum_group.get_absolute_url(),
-                            'fa-sitemap',
+                            'fa-globe',
                             id='Forum',
                         )
                     )

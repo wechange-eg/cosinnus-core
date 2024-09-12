@@ -1660,6 +1660,11 @@ class CosinnusBaseGroup(
 
     def get_icon(self):
         """Returns the font-awesome icon specific to the group type"""
+        # the special forum and events groups have different, hardcoded items:
+        if settings.NEWW_FORUM_GROUP_SLUG and self.slug == settings.NEWW_FORUM_GROUP_SLUG:
+            return 'fa-globe'
+        if settings.NEWW_EVENTS_GROUP_SLUG and self.slug == settings.NEWW_EVENTS_GROUP_SLUG:
+            return 'fa-calendar'
         return self.trans.ICON
 
     def get_group_label(self):

@@ -97,7 +97,7 @@ class SpacesViewTest(APITestCase):
                 'header': settings.COSINNUS_PORTAL_NAME.upper() + ' Community',
                 'items': [
                     MenuItem(
-                        settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-sitemap', id='Forum'
+                        settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-globe', id='Forum'
                     ),
                     MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, '/map/', 'fa-map', id='Map'),
                 ],
