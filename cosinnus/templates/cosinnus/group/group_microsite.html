@@ -511,14 +511,14 @@
 					{% for app, app_name, public_object_list in public_objects %}
 					    {% if not app_name == 'note' %} {% comment %} Fix "MICROSITE_DOUBLE_NEWSBOX": hide note box {% endcomment %}
     					    {% captureas app_css_class %}{% if app == 'cosinnus_todo' %}app-todos{% elif app == 'cosinnus_note' %}app-main{% elif app == 'cosinnus_poll' %}app-poll{% elif app == 'cosinnus_cloud' %}app-cloud{% elif app == 'cosinnus_marketplace' %}app-marketplace{% elif app == 'cosinnus_file' %}app-files{% elif app == 'cosinnus_etherpad' %}app-etherpad{% elif app == 'cosinnus_event' %}app-calendar{% elif app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
-                            {% captureas app_icon %}{% if app == 'cosinnus_todo' %}fa-tasks{% elif app == 'cosinnus_note' %}fa-book{% elif app == 'cosinnus_poll' %}fa-bar-chart{% elif app == 'cosinnus_cloud' %}fa-cloud{% elif app == 'cosinnus_marketplace' %}fa-exchange{% elif app == 'cosinnus_file' %}fa-file{% elif app == 'cosinnus_etherpad' %}fa-file-text{% elif app == 'cosinnus_event' %}fa-calendar{% elif app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
+                            {% captureas app_icon %}{% if app == 'cosinnus_todo' %}fa-tasks{% elif app == 'cosinnus_note' %}fa-broadcast-tower{% elif app == 'cosinnus_poll' %}fa-bar-chart{% elif app == 'cosinnus_cloud' %}fa-cloud{% elif app == 'cosinnus_marketplace' %}fa-exchange-alt{% elif app == 'cosinnus_file' %}fa-file{% elif app == 'cosinnus_etherpad' %}fa-edit{% elif app == 'cosinnus_event' %}fa-calendar{% elif app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
                             <div class="app {{ app_css_class }}">
 						        <div type="button" class="{{ app_css_class }} btn btn-emphasized btn-headline fine-space v-offset-l">
 						            <ul class="media-list">
 						                <li class="media">
 						                    <span class="pull-left btn-extra-emphasized"></span>
 						                    <div class="media-body">
-						                        <i class="fa {{ app_icon }}"></i>
+						                        <i class="fas {{ app_icon }}"></i>
 						                        {% trans app_name context "the_app" %}
 						                    </div>
 						                </li>
