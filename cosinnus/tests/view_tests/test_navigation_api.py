@@ -3,6 +3,7 @@ from unittest.mock import patch
 
 import pytz
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.template.defaultfilters import date
 from django.urls import reverse
 from rest_framework.test import APITestCase, override_settings
@@ -13,7 +14,12 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
-from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.models.membership import (
+    MEMBERSHIP_ADMIN,
+    MEMBERSHIP_INVITED_PENDING,
+    MEMBERSHIP_MEMBER,
+    MEMBERSHIP_PENDING,
+)
 from cosinnus.models.tagged import LikeObject
 from cosinnus.models.user_dashboard import MenuItem
 from cosinnus.tests.utils import reload_urlconf
@@ -159,8 +165,9 @@ class BookmarksViewTest(APITestCase):
         )
 
     def test_user_bookmarks(self):
-        TEST_USER_DATA.update({'username': '2', 'email': 'testuser2@example.com', 'last_name': 'User2'})
-        user2 = User.objects.create(**TEST_USER_DATA)
+        test_user2_data = TEST_USER_DATA.copy()
+        test_user2_data.update({'username': '2', 'email': 'testuser2@example.com', 'last_name': 'User2'})
+        user2 = User.objects.create(**test_user2_data)
         LikeObject.objects.create(target_object=user2.cosinnus_profile, user=self.test_user, starred=True)
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
@@ -218,7 +225,8 @@ class UnreadMessagesViewTest(APITestCase):
 class TestAlertsMixin:
     def setUp(self):
         super().setUp()
-        self.group = CosinnusSociety.objects.create(name='Test Group')
+        if not hasattr(self, 'group'):
+            self.group = CosinnusSociety.objects.create(name='Test Group')
 
     def create_test_alert(self, seen=False):
         alert = NotificationAlert.objects.create(
@@ -232,7 +240,26 @@ class TestAlertsMixin:
         return alert
 
 
-class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
+class TestMembershipAlertsMixin:
+    def setUp(self):
+        cache.clear()
+        super().setUp()
+        if not hasattr(self, 'group'):
+            self.group = CosinnusSociety.objects.create(name='Test Group')
+        self.group2 = CosinnusSociety.objects.create(name='Test Group 2')
+
+    def create_membership_request(self):
+        test_user2_data = TEST_USER_DATA.copy()
+        test_user2_data.update({'username': '2', 'email': 'testuser2@example.com', 'last_name': 'User2'})
+        test_user2 = User.objects.create(**test_user2_data)
+        self.group.memberships.create(user=self.test_user, status=MEMBERSHIP_ADMIN)
+        self.group.memberships.create(user=test_user2, status=MEMBERSHIP_PENDING)
+
+    def create_invitation(self):
+        self.group2.memberships.create(user=self.test_user, status=MEMBERSHIP_INVITED_PENDING)
+
+
+class UnreadAlertsViewTest(TestAlertsMixin, TestMembershipAlertsMixin, APITestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -266,6 +293,26 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 0})
+
+    def test_membership_alert_count_counts_membership_requests(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 0})
+        self.create_membership_request()
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 1})
+
+    def test_membership_alert_count_counts_invitations(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 0})
+        self.create_invitation()
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 1})
 
 
 class AlertsViewTest(TestAlertsMixin, APITestCase):
@@ -373,6 +420,58 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
                 'has_more': False,
                 'offset_timestamp': None,
                 'newest_timestamp': None,
+            },
+        )
+
+
+class MembershipAlertsViewTest(TestMembershipAlertsMixin, APITestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.api_url = reverse('cosinnus:frontend-api:api-navigation-membership-alerts')
+        cls.test_user = User.objects.create(**TEST_USER_DATA)
+
+    def test_membership_alerts(self):
+        self.client.force_login(self.test_user)
+        self.create_membership_request()
+        self.create_invitation()
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.data,
+            {
+                'invitations': {
+                    'header': 'Invitations',
+                    'items': [
+                        {
+                            'attributes': None,
+                            'badge': None,
+                            'icon': 'fa-sitemap',
+                            'id': f'CosinnusSociety{self.group2.pk}',
+                            'image': None,
+                            'is_external': False,
+                            'label': 'Test Group 2',
+                            'selected': False,
+                            'url': '/group/test-group-2/',
+                        }
+                    ],
+                },
+                'membership_requests': {
+                    'header': 'Membership Requests',
+                    'items': [
+                        {
+                            'attributes': None,
+                            'badge': None,
+                            'icon': 'fa-sitemap',
+                            'id': f'MembershipRequests{self.group.pk}',
+                            'image': None,
+                            'is_external': False,
+                            'label': 'Test Group (1)',
+                            'selected': False,
+                            'url': '/group/test-group/members/?requests=1#requests',
+                        }
+                    ],
+                },
             },
         )
 
