@@ -1222,6 +1222,14 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 )
                 profile_menu.append(administration_item)
 
+            # about
+            if settings.COSINNUS_V3_MENU_HOME_LINK:
+                about_label = _('About %(portal_name)s') % {'portal_name': settings.COSINNUS_PORTAL_NAME.upper()}
+                about_item = MenuItem(
+                    about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About'
+                )
+                profile_menu.append(about_item)
+
             # logout
             logout_label = _('Logout')
             if request.user.is_guest:
