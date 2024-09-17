@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-10 16:00+0200\n"
+"POT-Creation-Date: 2024-09-17 14:22+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -255,6 +255,18 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "All Projects"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Conference Applications"
+msgstr ""
+
 msgid "Change Language"
 msgstr ""
 
@@ -263,14 +275,6 @@ msgstr ""
 
 msgid "My Guest Account"
 msgstr ""
-
-#, fuzzy
-msgid "Set up my Profile"
-msgstr "Edit Project"
-
-#, fuzzy
-msgid "Edit my Profile"
-msgstr "Edit Project"
 
 msgid "Notification Preferences"
 msgstr ""
@@ -281,6 +285,10 @@ msgstr ""
 #, fuzzy
 msgid "Administration"
 msgstr "There are no groups."
+
+#, python-format
+msgid "About %(portal_name)s"
+msgstr ""
 
 msgid "Logout"
 msgstr ""
@@ -307,7 +315,7 @@ msgid "Messages"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
+msgid "Events"
 msgstr ""
 
 msgid "Help"
@@ -337,6 +345,9 @@ msgstr ""
 
 msgid "Help other members find you and use your real name."
 msgstr "Help other members find you and use your real name."
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr ""
 
 msgid "fields.managed_tags.label"
 msgstr ""
@@ -420,7 +431,8 @@ msgstr ""
 msgid "Forum"
 msgstr ""
 
-msgid "Map"
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
 msgstr ""
 
 msgid "Overnight stay required"
@@ -2303,10 +2315,6 @@ msgid "Create-Project or Group Button"
 msgstr "Convert selected Projects to Groups"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr ""
 
@@ -3412,10 +3420,6 @@ msgid "Apply for conference participation"
 msgstr ""
 
 msgid "Withdraw"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Conference Applications"
 msgstr ""
 
 msgid "Manage participation applications"
@@ -4978,10 +4982,6 @@ msgstr ""
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr ""
-
 msgid "About me"
 msgstr ""
 
@@ -5033,6 +5033,9 @@ msgstr ""
 #, fuzzy
 msgid "There are no invitations."
 msgstr "There are no groups."
+
+msgid "Map"
+msgstr ""
 
 msgid "Meeting"
 msgstr ""
@@ -5392,10 +5395,16 @@ msgstr ""
 msgid "Registered users only"
 msgstr ""
 
-msgid "Edit folder"
+msgid "Folder name"
 msgstr ""
 
-msgid "Folder name"
+msgid "OK"
+msgstr ""
+
+msgid "Enter a new name for the folder"
+msgstr ""
+
+msgid "Edit folder"
 msgstr ""
 
 msgid "Delete folder"
@@ -5422,10 +5431,13 @@ msgstr ""
 msgid "Back to"
 msgstr ""
 
+msgid "Create folder"
+msgstr ""
+
 msgid "New folder name"
 msgstr ""
 
-msgid "Create folder"
+msgid "Enter a name for the new folder"
 msgstr ""
 
 msgid ""
@@ -5861,9 +5873,6 @@ msgstr ""
 msgid "Everybody"
 msgstr ""
 
-msgid "OK"
-msgstr ""
-
 msgid "Toggle navigation"
 msgstr ""
 
@@ -6137,9 +6146,6 @@ msgid "After signup, you will automatically become a member of the associated pr
 msgstr ""
 
 msgid "Email address"
-msgstr ""
-
-msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
 msgstr ""
 
 msgid "Repeat Password"
@@ -6450,10 +6456,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Find partners"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership Requests"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -6919,6 +6921,9 @@ msgid "Join as a Guest"
 msgstr ""
 
 msgid "Edit Profile"
+msgstr ""
+
+msgid "Set up my Profile"
 msgstr ""
 
 msgid "Legacy Messages Archive"
@@ -7812,13 +7817,6 @@ msgstr ""
 #, fuzzy
 msgid "Post new Offer in "
 msgstr "Project"
-
-msgid "New!"
-msgstr ""
-
-#, fuzzy
-msgid "Set up your Profile"
-msgstr "Edit Project"
 
 #, fuzzy
 msgid "Edit My Profile"
@@ -13627,6 +13625,14 @@ msgstr "Are you sure you want to delete this prject?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Are you sure you want to delete this prject?"
+
+#, fuzzy
+#~ msgid "Edit my Profile"
+#~ msgstr "Edit Project"
+
+#, fuzzy
+#~ msgid "Set up your Profile"
+#~ msgstr "Edit Project"
 
 #, fuzzy
 #~ msgid "Direct Contact"

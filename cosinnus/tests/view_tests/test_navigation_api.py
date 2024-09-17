@@ -433,6 +433,12 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
                 MenuItem(
                     'Notification Preferences', '/profile/notifications/', 'fa-envelope', id='NotificationPreferences'
                 ),
+                MenuItem(
+                    f'About {settings.COSINNUS_PORTAL_NAME.upper()}',
+                    settings.COSINNUS_V3_MENU_HOME_LINK,
+                    'fa-info-circle',
+                    id='About',
+                ),
                 MenuItem('Logout', '/logout/', 'fa-right-from-bracket', id='Logout'),
             ],
         )
