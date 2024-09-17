@@ -6,6 +6,7 @@ from django.db.models import Case, Count, When
 from django.templatetags.static import static
 from django.urls.base import reverse
 from django.utils.encoding import force_str
+from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext
 from drf_yasg import openapi
@@ -19,8 +20,14 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal, get_cosinnus_group_model, get_domain_for_portal
-from cosinnus.models.group_extra import CosinnusConference
+from cosinnus.models.conference import CosinnusConferenceApplication
+from cosinnus.models.group import (
+    CosinnusGroupMembership,
+    CosinnusPortal,
+    get_cosinnus_group_model,
+    get_domain_for_portal,
+)
+from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.user_dashboard import DashboardItem, MenuItem
 from cosinnus.trans.group import CosinnusConferenceTrans, CosinnusProjectTrans, CosinnusSocietyTrans
 from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetime
@@ -489,7 +496,9 @@ class UnreadMessagesView(APIView):
 
 
 class UnreadAlertsView(APIView):
-    """An endpoint that returns the user unseen alerts count for the main navigation."""
+    """
+    An endpoint that returns the user unseen alerts count and the membership alert count for the main navigation.
+    """
 
     renderer_classes = (
         CosinnusAPIFrontendJSONResponseRenderer,
@@ -508,7 +517,10 @@ class UnreadAlertsView(APIView):
                 description='WIP: Response info missing. Short example included',
                 examples={
                     'application/json': {
-                        'data': {'count': 10},
+                        'data': {
+                            'count': 10,
+                            'membership_alert_count': 2,
+                        },
                         'version': COSINNUS_VERSION,
                         'timestamp': 1658414865.057476,
                     }
@@ -518,12 +530,41 @@ class UnreadAlertsView(APIView):
     )
     def get(self, request):
         alerts_count = 0
+        membership_alert_count = 0
         if request.user.is_authenticated:
-            alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
-            unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
-            alerts_count = unseen_aggr.get('seen_count', 0)
-        unread_alerts = {'count': alerts_count}
+            alerts_count = self._get_unread_notification_count(request.user)
+            membership_alert_count = self._get_membership_alert_count(request.user)
+        unread_alerts = {'count': alerts_count, 'membership_alert_count': membership_alert_count}
         return Response(unread_alerts)
+
+    def _get_unread_notification_count(self, user):
+        """Get the unread notification count"""
+        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=user)
+        unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
+        alerts_count = unseen_aggr.get('seen_count', 0)
+        return alerts_count
+
+    def _get_membership_alert_count(self, user):
+        """Get the count of pending invitations, membership requests and conference applications."""
+        membership_alert_count = 0
+
+        # count invitations
+        membership_alert_count += len(CosinnusSociety.objects.get_for_user_invited(user))
+        membership_alert_count += len(CosinnusProject.objects.get_for_user_invited(user))
+        membership_alert_count += len(CosinnusConference.objects.get_for_user_invited(user))
+
+        # count membership requests and conference applications
+        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(user)
+        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
+        for admined_group in admined_groups:
+            pending_membership_request_count = len(CosinnusGroupMembership.objects.get_pendings(group=admined_group))
+            membership_alert_count += pending_membership_request_count
+            pending_conference_application_count = len(
+                CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
+            )
+            membership_alert_count += pending_conference_application_count
+
+        return membership_alert_count
 
 
 class AlertsView(APIView):
@@ -794,6 +835,172 @@ class AlertsView(APIView):
                 icon_or_image_url = domain + icon_or_image_url
             serialized_alert[key_prefix + 'image'] = icon_or_image_url
             serialized_alert[key_prefix + 'icon'] = None
+
+
+class MembershipAlertsView(APIView):
+    """
+    An endpoint that returns pending membership related notifications.
+    This includes invitations, membership requests and conference applications.
+    """
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    @swagger_auto_schema(
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'invitations': {
+                                'header': 'Invitations',
+                                'items': [
+                                    {
+                                        'id': 'CosinnusProject42',
+                                        'label': 'AnotherProject',
+                                        'url': '/project/anotherproject/',
+                                        'is_external': False,
+                                        'icon': 'fa-group',
+                                        'image': None,
+                                        'badge': None,
+                                        'attributes': None,
+                                        'selected': False,
+                                    }
+                                ],
+                            },
+                            'membership_requests': {
+                                'header': 'Membership Requests',
+                                'items': [
+                                    {
+                                        'id': 'MembershipRequests24',
+                                        'label': 'TestGroup (2)',
+                                        'url': '/group/testgroup/members/?requests=1#requests',
+                                        'is_external': False,
+                                        'icon': 'fa-sitemap',
+                                        'image': None,
+                                        'badge': None,
+                                        'attributes': None,
+                                        'selected': False,
+                                    }
+                                ],
+                            },
+                            'conference_applications': {
+                                'header': 'Conference Applications',
+                                'items': [
+                                    {
+                                        'id': 'ConferenceApplications9',
+                                        'label': 'Conference (1)',
+                                        'url': '/conference/conference/conference/participation-management/applications/',  # noqa
+                                        'is_external': False,
+                                        'icon': 'fa-sitemap',
+                                        'image': None,
+                                        'badge': None,
+                                        'attributes': None,
+                                        'selected': False,
+                                    }
+                                ],
+                            },
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
+    )
+    def get(self, request):
+        membership_alerts = {}
+        if request.user.is_authenticated:
+            # invitations
+            group_invitations = self._get_group_invitations(request.user)
+            if group_invitations:
+                membership_alerts['invitations'] = {
+                    'header': _('Invitations'),
+                    'items': group_invitations,
+                }
+
+            # membership requests
+            membership_requests = self._get_membership_requests(request.user)
+            if membership_requests:
+                membership_alerts['membership_requests'] = {
+                    'header': _('Membership Requests'),
+                    'items': membership_requests,
+                }
+
+            # conference applications
+            if settings.COSINNUS_CONFERENCES_ENABLED:
+                conference_applications = self._get_conference_applications(request.user)
+                if conference_applications:
+                    membership_alerts['conference_applications'] = {
+                        'header': _('Conference Applications'),
+                        'items': conference_applications,
+                    }
+
+        return Response(membership_alerts)
+
+    def _get_group_invitations(self, user):
+        societies_invited = CosinnusSociety.objects.get_for_user_invited(user)
+        projects_invited = CosinnusProject.objects.get_for_user_invited(user)
+        conferences_invited = CosinnusConference.objects.get_for_user_invited(user)
+
+        groups_invited = [DashboardItem(group).as_menu_item() for group in societies_invited]
+        groups_invited += [DashboardItem(group).as_menu_item() for group in projects_invited]
+        # for conferences, only show invites if becoming a member is currently possible
+        groups_invited += [
+            DashboardItem(conference).as_menu_item()
+            for conference in conferences_invited
+            if conference.membership_applications_possible
+        ]
+        return groups_invited
+
+    def _get_membership_requests(self, user):
+        membership_requests = []
+        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(user)
+        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
+        for admined_group in admined_groups:
+            pending_ids = CosinnusGroupMembership.objects.get_pendings(group=admined_group)
+            if len(pending_ids) > 0:
+                membership_request_url = (
+                    group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group})
+                    + '?requests=1#requests'
+                )
+                membership_request_icon = (
+                    'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_SOCIETY else 'fa-group'
+                )
+                membership_request_item = MenuItem(
+                    escape('%s (%d)' % (admined_group.name, len(pending_ids))),
+                    id=f'MembershipRequests{admined_group.pk}',
+                    url=membership_request_url,
+                    icon=membership_request_icon,
+                )
+                membership_requests.append(membership_request_item)
+        return membership_requests
+
+    def _get_conference_applications(self, user):
+        conference_application_requests = []
+        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(user)
+        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
+        for admined_group in admined_groups:
+            pending_ids = CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
+            if len(pending_ids) > 0:
+                conference_application_icon = (
+                    'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_CONFERENCE else 'fa-group'
+                )
+                conference_application_url = group_aware_reverse(
+                    'cosinnus:conference:participation-management-applications', kwargs={'group': admined_group}
+                )
+                conference_application_request_item = MenuItem(
+                    escape('%s (%d)' % (admined_group.name, len(pending_ids))),
+                    id=f'ConferenceApplications{admined_group.pk}',
+                    url=conference_application_url,
+                    icon=conference_application_icon,
+                )
+                conference_application_requests.append(conference_application_request_item)
+        return conference_application_requests
 
 
 class HelpView(APIView):

@@ -246,26 +246,26 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertDictEqual(response.data, {'count': 1})
+        self.assertDictEqual(response.data, {'count': 1, 'membership_alert_count': 0})
 
     def test_unread_alerts_count_anonymous(self):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertDictEqual(response.data, {'count': 0})
+        self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 0})
 
     def test_mark_as_read(self):
         self.create_test_alert(seen=False)
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertDictEqual(response.data, {'count': 1})
+        self.assertDictEqual(response.data, {'count': 1, 'membership_alert_count': 0})
 
         mark_as_read_url = reverse('cosinnus:frontend-api:api-navigation-alerts') + '?mark_as_read=true'
         response = self.client.get(mark_as_read_url)
         self.assertEqual(response.status_code, 200)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertDictEqual(response.data, {'count': 0})
+        self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 0})
 
 
 class AlertsViewTest(TestAlertsMixin, APITestCase):
