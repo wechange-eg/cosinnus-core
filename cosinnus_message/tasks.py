@@ -41,6 +41,15 @@ def rocket_user_deactivate_task(user_id):
 
 
 @celery_app.task(base=RocketChatTask)
+def rocket_user_logout_task(user_id):
+    """Logout user from RocketChat."""
+    rocket = RocketChatConnection()
+    user = get_user_model().objects.filter(pk=user_id).first()
+    if user:
+        rocket.users_logout(user)
+
+
+@celery_app.task(base=RocketChatTask)
 def rocket_user_reactivate_task(user_id):
     """Reactivate a user in RocketChat."""
     rocket = RocketChatConnection()

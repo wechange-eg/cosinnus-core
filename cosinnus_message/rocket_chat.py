@@ -806,6 +806,21 @@ class RocketChatConnection:
                     extra={'response': response},
                 )
 
+    def users_logout(self, user):
+        """Logs out a user from RocketChat by resubmitting the password."""
+        user_id = self.get_user_id(user)
+        if not user_id:
+            return
+        if not hasattr(user, 'cosinnus_profile'):
+            return
+        data = {'password': user.password}
+        response = self.rocket.users_update(user_id=user_id, **data).json()
+        if not response.get('success'):
+            logger.error(
+                'RocketChat: users_logout response: ' + response.get('errorType', '<No Error Type>'),
+                extra={'user_id': user.pk, 'response': response},
+            )
+
     def users_disable(self, user):
         """
         Set user to inactive

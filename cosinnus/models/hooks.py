@@ -16,6 +16,7 @@ from django.utils.encoding import force_str
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
+from cosinnus.core.middleware.cosinnus_middleware import LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME
 from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.models.conference import CosinnusConferencePremiumBlock
@@ -75,6 +76,13 @@ def ensure_user_in_logged_in_portal(sender, user, request, **kwargs):
     except Exception:
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error('Error while trying to add User Portal Membership for user that has just logged in.')
+
+
+@receiver(user_logged_in)
+def update_session_last_login(sender, user, request, **kwargs):
+    """Store the last login timestamp in the session."""
+    if request:
+        request.session[LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME] = timezone.now().timestamp()
 
 
 @receiver(user_logged_in)
