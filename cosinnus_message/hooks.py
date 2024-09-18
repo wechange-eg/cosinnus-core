@@ -64,7 +64,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
     def handle_user_password_updated(sender, user, **kwargs):
         if user.is_guest:
             return
-        tasks.rocket_user_update_task.delay(user.pk, force_update=True, update_password=True)
+        tasks.rocket_user_logout_task.delay(user.pk)
 
     @receiver(post_save, sender=UserProfile)
     def handle_profile_updated(sender, instance, created, **kwargs):
