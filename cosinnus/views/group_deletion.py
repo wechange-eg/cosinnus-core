@@ -18,7 +18,7 @@ from cosinnus.utils.group import get_cosinnus_group_model, get_default_portal_gr
 from cosinnus.utils.permissions import check_ug_admin, check_user_can_receive_emails
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus_cloud.utils.nextcloud import get_group_folder_last_modified
-from cosinnus_etherpad.models import Etherpad
+from cosinnus_etherpad.models import Etherpad, EtherpadException
 from cosinnus_message.rocket_chat import RocketChatConnection
 
 logger = logging.getLogger('cosinnus')
@@ -139,6 +139,22 @@ def delete_group(group):
     if group.slug in get_default_portal_group_slugs():
         logger.warn('Attempted to delete default user group!', extra={'group_slug': group.slug})
         return
+
+    # Delete Etherpads/Ethercalcs
+    # Note: The automatic deletion of Etherpad instances is normally disabled by the setting
+    # COSINNUS_DELETE_ETHERPADS_ON_SERVER_ON_DELETE. However, during group deletion the setting is ignored and the
+    # pads are deleted.
+    if not getattr(settings, 'COSINNUS_ETHERPAD_DISABLE_HOOKS', False):
+        for pad in Etherpad.objects.filter(group=group):
+            try:
+                pad.client.deletePad(padID=pad.pad_id)
+            except EtherpadException as exc:
+                # failed deletion of missing padIDs is ok
+                if 'padID does not exist' not in str(exc):
+                    logger.error(
+                        'Could not delete etherpad during group deletion.',
+                        extra={'group_slug': group.slug, 'exception': exc},
+                    )
 
     # delete group
     group.delete()
