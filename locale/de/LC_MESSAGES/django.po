@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-17 14:22+0200\n"
+"POT-Creation-Date: 2024-09-18 15:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -167,6 +167,13 @@ msgstr "%(count)d Benutzerkonten wurden erfolgreich reaktiviert."
 #
 msgid "Reactivate user accounts"
 msgstr "Reaktiviere Benutzerkontos"
+
+#, python-format
+msgid "%(count)d Users were logged out."
+msgstr "%d Benutzer/innen wurden erfolgreich ausgeloggt"
+
+msgid "Logout users"
+msgstr "Benutzer/innen ausloggen"
 
 #, python-format
 msgid "%(count)d Users' group memberships were refreshed."
