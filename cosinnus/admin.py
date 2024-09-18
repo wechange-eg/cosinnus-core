@@ -912,6 +912,7 @@ class UserAdmin(DjangoUserAdmin):
     actions = [
         'deactivate_users',
         'reactivate_users',
+        'logout_users',
         'export_as_csv',
         'log_in_as_user',
         'refresh_group_memberships',
@@ -1018,6 +1019,17 @@ class UserAdmin(DjangoUserAdmin):
         self.message_user(request, message)
 
     reactivate_users.short_description = _('Reactivate user accounts')
+
+    def logout_users(self, request, queryset):
+        count = 0
+        for user in queryset:
+            if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
+                user.cosinnus_profile.force_logout_user()
+                count += 1
+        message = _('%(count)d Users were logged out.') % {'count': count}
+        self.message_user(request, message)
+
+    logout_users.short_description = _('Logout users')
 
     def log_in_as_user(self, request, queryset):
         user = queryset[0]
