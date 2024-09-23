@@ -512,7 +512,7 @@ class MapDetailView(SearchQuerySetMixin, APIView):
             else:
                 obj = get_object_or_None(model, portal__id=portal, slug=slug)
             if obj is None:
-                return HttpResponseNotFound('No item found that matches the requested type and slug (obj: %s, %s, %s).' % (escape(force_str(model)), portal, slug))
+                return HttpResponseNotFound('No item found that matches the requested type and slug (obj).')
 
             # check read permission
             if not model_type in SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS and not check_object_read_access(obj, request.user):
@@ -520,7 +520,7 @@ class MapDetailView(SearchQuerySetMixin, APIView):
             # get the basic result data from the search index (as it is already prepared and faster to access there)
             haystack_result = get_searchresult_by_args(portal, model_type, slug)
             if not haystack_result:
-                return HttpResponseNotFound('No item found that matches the requested type and slug (index: %s, %s, %s).' % (portal, model_type, slug))
+                return HttpResponseNotFound('No item found that matches the requested type and slug (index).')
             # format data
             result_model = SEARCH_RESULT_DETAIL_TYPE_MAP[model_type]
             result = result_model(haystack_result, obj, request.user, request=request)
@@ -528,7 +528,7 @@ class MapDetailView(SearchQuerySetMixin, APIView):
             # for external, api based objects:
             haystack_result = get_searchresult_by_args(portal, model_type, slug)
             if not haystack_result:
-                return HttpResponseNotFound('No item found that matches the requested type and slug (external: %s, %s, %s).' % (portal, model_type, slug))
+                return HttpResponseNotFound('No item found that matches the requested type and slug (external).')
             result = HaystackMapResult(haystack_result, request.user, request=request)
 
         data = {
