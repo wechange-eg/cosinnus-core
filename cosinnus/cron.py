@@ -226,7 +226,7 @@ class DeleteOldSentEmailLogs(CosinnusCronJobBase):
 
     cosinnus_code = 'cosinnus.delete_old_sent_email_logs'
 
-    OLD_SENT_EMAIL_LOGS_THRESHOLD_DAYS = 30
+    OLD_SENT_EMAIL_LOGS_THRESHOLD_DAYS = 180
 
     def do(self):
         threshold = now() - timedelta(days=self.OLD_SENT_EMAIL_LOGS_THRESHOLD_DAYS)
