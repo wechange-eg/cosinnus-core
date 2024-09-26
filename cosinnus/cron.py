@@ -13,6 +13,7 @@ from django_cron import CronJobBase, Schedule
 from cosinnus.conf import settings
 from cosinnus.core.mail import send_html_mail
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
+from cosinnus.models.feedback import CosinnusSentEmailLog
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.profile import get_user_profile_model
@@ -215,3 +216,21 @@ class DeleteOldGuestUsers(CosinnusCronJobBase):
             guest_users_to_delete.delete()
             return f'Deleted {count} guest users.'
         return 'No guest users to delete.'
+
+
+class DeleteOldSentEmailLogs(CosinnusCronJobBase):
+    """Delete all CosinnusSentEmailLog older than a set date (defined by `OLD_SENT_EMAIL_LOGS_THRESHOLD_DAYS`)."""
+
+    RUN_EVERY_MINS = 60 * 24 * 7  # every 7 days
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.delete_old_sent_email_logs'
+
+    OLD_SENT_EMAIL_LOGS_THRESHOLD_DAYS = 180
+
+    def do(self):
+        threshold = now() - timedelta(days=self.OLD_SENT_EMAIL_LOGS_THRESHOLD_DAYS)
+        queryset = CosinnusSentEmailLog.objects.filter(date__lte=threshold)
+        count = queryset.count()
+        queryset.delete()
+        return f'Deleted {count} sent-email-logs older than {self.OLD_SENT_EMAIL_LOGS_THRESHOLD_DAYS} days.'

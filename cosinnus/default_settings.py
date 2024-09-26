@@ -657,10 +657,11 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.cron.DeleteOldGuestUsers',
         'cosinnus_conference.cron.SendConferenceReminders',
         'cosinnus_event.cron.TriggerBBBStreamers',
-        'cosinnus_exchange.cron.PullData',
         'cosinnus_marketplace.cron.DeactivateExpiredOffers',
         'cosinnus_message.cron.ProcessDirectReplyMails',
         'cosinnus_notifications.cron.DeleteOldNotificationAlerts',
+        'cosinnus.cron.DeleteOldSentEmailLogs',
+        'cosinnus_exchange.cron.PullData',
     ]
     # delete cronjob logs older than 30 days
     DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
