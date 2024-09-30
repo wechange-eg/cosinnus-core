@@ -32,124 +32,125 @@
     </div>
     
 {% else %}
-    <div class="regular-space">
-        <div class="btn btn-extra-emphasized w100">
+    {% block video_conference_frame %}
+        <div class="regular-space">
+            <div class="btn btn-extra-emphasized w100">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-fw fa-eye"></i>
+                        </span>
+
+                        <div class="media-body">
+                                <span class="annotation">
+                                    <a class="fullscreen-button fullscreen-popout" title="{% trans "Popout" %}" target="_blank" href="{% comment %} Will be set in JS {% endcomment %}" >
+                                        <span>{% trans "Popout" %}</span>
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a class="fullscreen-button fullscreen-toggle" title="{% trans "Fullscreen" %}">
+                                        <span>{% trans "Fullscreen" %}</span>
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                </span>
+                            <span>{{ meeting_name }}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="video-conference-iframe">
+            <div class="loading-frame">
+                <span class="fa fa-fw fa-spin fa-cog fa-3x"></span>
+            </div>
+            <div style="display: none;" class="error-frame">
+                {% trans "Sorry! Something went wrong..." %}
+            </div>
+            <iframe style="display: none;" src="" allow="{% comment %} Src and allow will be set in JS! {% endcomment %}" width="100%" height="100%"></iframe>
+
+            {% if has_bbb_video %}
+                {% include "cosinnus/conference/conference_invitation_text_buttons.html" with object_type="group" %}
+            {% endif %}
+        </div>
+
+
+        <button type="button" class="btn btn-small w100 btn-emphasized btn-autosize fullscreen-leave-button fullscreen-toggle mobile-hidden">
             <ul class="media-list">
                 <li class="media">
                     <span class="pull-left">
-                        <i class="fa fa-fw fa-eye"></i>
+                        <i class="fa fa-compress"></i>
                     </span>
-
                     <div class="media-body">
-                            <span class="annotation">
-                                <a class="fullscreen-button fullscreen-popout" title="{% trans "Popout" %}" target="_blank" href="{% comment %} Will be set in JS {% endcomment %}" >
-                                    <span>{% trans "Popout" %}</span>
-                                    <i class="fa fa-external-link"></i>
-                                </a>
-                                <a class="fullscreen-button fullscreen-toggle" title="{% trans "Fullscreen" %}">
-                                    <span>{% trans "Fullscreen" %}</span>
-                                    <i class="fa fa-expand"></i>
-                                </a>
-                            </span>
-                        <span>{{ meeting_name }}</span>
+                        {% trans "Leave Fullscreen" %}
                     </div>
                 </li>
             </ul>
-        </div>
-    </div> 
-    
-   
-    <div class="video-conference-iframe">
-        <div class="loading-frame">
-            <span class="fa fa-fw fa-spin fa-cog fa-3x"></span>
-        </div>
-        <div style="display: none;" class="error-frame">
-            {% trans "Sorry! Something went wrong..." %}
-        </div>
-        <iframe style="display: none;" src="" allow="{% comment %} Src and allow will be set in JS! {% endcomment %}" width="100%" height="100%"></iframe>
+        </button>
 
-        {% if has_bbb_video %}
-            {% include "cosinnus/conference/conference_invitation_text_buttons.html" with object_type="group" %}
-        {% endif %}
-    </div>
-    
-
-    <button type="button" class="btn btn-small w100 btn-emphasized btn-autosize fullscreen-leave-button fullscreen-toggle mobile-hidden">
-        <ul class="media-list">
-            <li class="media">
-                <span class="pull-left">
-                    <i class="fa fa-compress"></i>
-                </span>
-                <div class="media-body">
-                    {% trans "Leave Fullscreen" %}
-                </div>
-            </li>
-        </ul>
-    </button>
-    
-    <!-- Safari can only scroll with the extra CSS, but non-safari browser can't scroll with it, so add it dynamically. -->
-    <script type="text/javascript">
-        var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
-        var is_safari = navigator.userAgent.indexOf("Safari") > -1;
-        function isSafariBrowser(){
-            if (is_safari){
-                if (is_chrome)  // Chrome seems to have both Chrome and Safari userAgents
-                    return false;
-                else
-                    return true;
-            }
-            return false;
-        }
-        if (isSafariBrowser()){
-            $('.video-conference-iframe').css('overflow-y', 'scroll').css('-webkit-overflow-scrolling', 'touch');
-        }
-        
-        $(function() {
-            /** Video chat fullscreen toggle: left as 'video-conference-iframe' due to constant bugs with fullscreen-mode */
-            $('.fullscreen-popout').click(function() {
-                $('.video-conference-iframe').html('<p class="textfield">{% trans "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page." %}</p>');
-            });
-            $('.fullscreen-toggle').click(function() {
-                $('.video-conference-iframe').toggleClass('fullscreen');
-            });
-            $('.stop-etherpad').click(function(){
-                $('.video-conference-iframe').html('');
-            });
-            
-            function startVideoConference(src_url) {
-                var src_domain = 'https://' + src_url.split('/')[2];
-                var allowAttribute = '{% include "cosinnus/common/iframe_allow_attribute.html" with url="{0}" %}';
-                allowAttribute = allowAttribute.format(src_domain);
-                $('.loading-frame').hide();
-                $('.fullscreen-popout').attr('href', src_url);
-                $('.video-conference-iframe iframe').show().attr('allow', allowAttribute).attr('src', src_url);
-            }
-            function showError() {
-                $('.loading-frame').hide();
-                $('.error-frame').show();
-            }
-            {% if has_bbb_video %}
-                var bbb_queue_url = '{{ meeting_url|safe }}';
-                function loadBBBUrl() {
-                    $.ajax(bbb_queue_url, {
-                        type: 'GET',
-                        success: function (response, textStatus, xhr) {
-                            if (response && response.url) {
-                                startVideoConference(response.url);
-                            } else if (response && response.status && response.status == 'WAITING') {
-                                setTimeout(loadBBBUrl, 2000);
-                            } else {
-                                showError();
-                            }
-                        },
-                        error: showError
-                    });
+        <!-- Safari can only scroll with the extra CSS, but non-safari browser can't scroll with it, so add it dynamically. -->
+        <script type="text/javascript">
+            var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+            var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+            function isSafariBrowser(){
+                if (is_safari){
+                    if (is_chrome)  // Chrome seems to have both Chrome and Safari userAgents
+                        return false;
+                    else
+                        return true;
                 }
-                loadBBBUrl();
-            {% elif has_fairmeeting_video %}
-                startVideoConference("{{ meeting_url|safe }}");
-            {% endif %}
-        });
-    </script>
-    
+                return false;
+            }
+            if (isSafariBrowser()){
+                $('.video-conference-iframe').css('overflow-y', 'scroll').css('-webkit-overflow-scrolling', 'touch');
+            }
+
+            $(function() {
+                /** Video chat fullscreen toggle: left as 'video-conference-iframe' due to constant bugs with fullscreen-mode */
+                $('.fullscreen-popout').click(function() {
+                    $('.video-conference-iframe').html('<p class="textfield">{% trans "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page." %}</p>');
+                });
+                $('.fullscreen-toggle').click(function() {
+                    $('.video-conference-iframe').toggleClass('fullscreen');
+                });
+                $('.stop-etherpad').click(function(){
+                    $('.video-conference-iframe').html('');
+                });
+
+                function startVideoConference(src_url) {
+                    var src_domain = 'https://' + src_url.split('/')[2];
+                    var allowAttribute = '{% include "cosinnus/common/iframe_allow_attribute.html" with url="{0}" %}';
+                    allowAttribute = allowAttribute.format(src_domain);
+                    $('.loading-frame').hide();
+                    $('.fullscreen-popout').attr('href', src_url);
+                    $('.video-conference-iframe iframe').show().attr('allow', allowAttribute).attr('src', src_url);
+                }
+                function showError() {
+                    $('.loading-frame').hide();
+                    $('.error-frame').show();
+                }
+                {% if has_bbb_video %}
+                    var bbb_queue_url = '{{ meeting_url|safe }}';
+                    function loadBBBUrl() {
+                        $.ajax(bbb_queue_url, {
+                            type: 'GET',
+                            success: function (response, textStatus, xhr) {
+                                if (response && response.url) {
+                                    startVideoConference(response.url);
+                                } else if (response && response.status && response.status == 'WAITING') {
+                                    setTimeout(loadBBBUrl, 2000);
+                                } else {
+                                    showError();
+                                }
+                            },
+                            error: showError
+                        });
+                    }
+                    loadBBBUrl();
+                {% elif has_fairmeeting_video %}
+                    startVideoConference("{{ meeting_url|safe }}");
+                {% endif %}
+            });
+        </script>
+    {% endblock video_conference_frame %}
 {% endif %}
