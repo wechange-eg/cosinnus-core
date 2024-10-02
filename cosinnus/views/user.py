@@ -914,12 +914,11 @@ def verifiy_user_email(request, email_verification_param):
         del profile.settings[PROFILE_SETTING_EMAIL_TO_VERIFY]
         del profile.settings[PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN]
         profile.email_verified = True
+        if user_was_verified_before:
+            # logout user sessions after email change
+            keep_session = request.session if user.is_authenticated else None
+            profile.force_logout_user(keep_session=keep_session, save=False)
         profile.save()
-
-    # logout user sessions after email change
-    if user_was_verified_before:
-        keep_session = request.session if user.is_authenticated else None
-        profile.force_logout_user(keep_session=keep_session)
 
     if user.is_active:
         messages.success(request, _('Your email address %(email)s was successfully confirmed!') % {'email': user.email})
