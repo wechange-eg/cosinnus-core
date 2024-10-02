@@ -269,6 +269,7 @@ def generate_api_dict_for_dynamic_field(field_name, field_definition_dict, field
         'parent_group_field_name': field_options.parent_group_field_name,
         'display_required_field_names': field_options.display_required_field_names,
         'choices': choices,
+        'max_length': field_options.max_length,
     }
     field_data.append(current_field_data)
 
@@ -492,6 +493,7 @@ class PortalSettingsView(APIView):
                         "parent_group_field_name": None,
                         "display_required_field_names": None,
                         "choices": None,
+                        "max_length": None,
                     },
                     ...  # more named field overrides
                 }

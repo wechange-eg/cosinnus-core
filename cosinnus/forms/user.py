@@ -154,7 +154,7 @@ class UserSignupFinalizeMixin(object):
 
         # set the newsletter opt-in
         if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
-            user.cosinnus_profile.settings['newsletter_opt_in'] = cleaned_data.get('newsletter_opt_in')
+            user.cosinnus_profile.settings['newsletter_opt_in'] = cleaned_data.get('newsletter_opt_in', False)
 
         user.cosinnus_profile.save()
 
