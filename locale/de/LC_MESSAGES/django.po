@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-18 15:04+0200\n"
+"POT-Creation-Date: 2024-10-02 10:53+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -492,6 +492,9 @@ msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Dein Gastzugang ist abgelaufen. Du wurdest ausgeloggt."
+
+msgid "You have been logged out for security reasons, please log in again."
+msgstr "Du wurdest aus sicherheitstechnischen Gründen ausgeloggt, bitte logge dich erneut ein."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E-Mails geklickt hast. Als Vorsichtsmaßnahme verlinken wir nicht direkt auf externe Webseiten aus unseren E-Mails. Bitte klicke den Link unten erneut wenn du die Seite besuchen möchtest."

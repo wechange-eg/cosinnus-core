@@ -441,7 +441,8 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
                     )
                 )
             ):
-                # if the user has a force_logout_timestamp sessions with a previous login date are logged out.
+                # if the user has a force_logout_timestamp, sessions with a previous login date are logged out.
+                messages.warning(request, _('You have been logged out for security reasons, please log in again.'))
                 do_logout = True
 
             if do_logout:
