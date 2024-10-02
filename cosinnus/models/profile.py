@@ -601,13 +601,15 @@ class BaseUserProfile(
     def force_logout_timestamp(self):
         return self.settings.get(PROFILE_SETTING_FORCE_LOGOUT_TIMESTAMP, None)
 
-    def force_logout_user(self, keep_session=None):
+    def force_logout_user(self, keep_session=None, save=True):
         """Log out all user sessions from the portal and RocketChat.
         :param keep_session:  If a session is passed it remains logged in.
+        :param save: If true the profile is saved
         """
         logout_timestamp = timezone.now().timestamp()
         self.settings[PROFILE_SETTING_FORCE_LOGOUT_TIMESTAMP] = logout_timestamp
-        self.save()
+        if save:
+            self.save()
         if settings.COSINNUS_ROCKET_ENABLED:
             from cosinnus_message.tasks import rocket_user_logout_task
 
