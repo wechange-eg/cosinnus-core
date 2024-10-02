@@ -1392,7 +1392,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             )
         else:
             home_item = MenuItem(
-                _('Dashboard'), reverse('cosinnus:user-dashboard'), icon='fa-home', image=home_image, id='HomeDashboard'
+                _('Dashboard'), reverse('cosinnus:user-dashboard'), icon='fa-home', image=home_image, id='Home'
             )
         left_navigation_items.append(home_item)
 

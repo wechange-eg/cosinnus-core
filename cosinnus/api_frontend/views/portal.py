@@ -451,7 +451,19 @@ class PortalSettingsView(APIView):
                "700": "#ffffff",
                "800": "#ffffff",
                "900": "#ffffff",
-           }
+           },
+           "signalColors": {  # signal highlight colors like unread badges (only to override the frontend defaults)
+               "50": "#f50a41",
+               "100": "#f50a41",
+               "200": "#f50a41",
+               "300": "#f50a41",
+               "400": "#f50a41",
+               "500": "#f50a41",
+               "600": "#f50a41",
+               "700": "#f50a41",
+               "800": "#f50a41",
+               "900": "#f50a41",
+           },
         },
         "setup": {  # settings for the each of the step pages of the onboarding wizards
             "contact": {
@@ -465,7 +477,7 @@ class PortalSettingsView(APIView):
             "setup": {
                 "profile": {
                     # this is an example full overridable field dict. single properties can be overriden as well
-                    "first_name" = {
+                    "first_name": {
                         "name": "first_name",
                         "is_multi_language": False,
                         "is_multi_language_sub_field": False,
