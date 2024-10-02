@@ -916,6 +916,11 @@ def verifiy_user_email(request, email_verification_param):
         profile.email_verified = True
         profile.save()
 
+    # logout user sessions after email change
+    if user_was_verified_before:
+        keep_session = request.session if user.is_authenticated else None
+        profile.force_logout_user(keep_session=keep_session)
+
     if user.is_active:
         messages.success(request, _('Your email address %(email)s was successfully confirmed!') % {'email': user.email})
         if user_was_verified_before:
@@ -1426,9 +1431,6 @@ class UserChangeEmailView(RequireLoggedInMixin, FormView):
         new_email = form.cleaned_data.get('email')
         # send out email-change-verification mail
         send_user_email_to_verify(self.request.user, new_email, self.request, user_has_just_registered=False)
-
-        # logout other user sessions
-        self.request.user.cosinnus_profile.force_logout_user(keep_session=self.request.session)
 
         return ret
 
