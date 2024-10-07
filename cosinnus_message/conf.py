@@ -141,7 +141,10 @@ class CosinnusMessageDefaultSettings(AppConf):
             }
 
             /* Hide "Welcome to XYZ workspace" and "By proceeding you are agreeing to our Terms of Service, Privacy Policy and Legal Notice. - Switch to en" on login page */
-            #react-root > div > div > div > h1, #react-root > div > div > div > form + div {
+            div:has(> h1 > span#welcomeTitle) {
+                display: none !important;
+            }
+            [aria-describedby="welcomeTitle"] + div {
                 display: none !important;
             }
         """,
