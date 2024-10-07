@@ -2,6 +2,7 @@ import logging
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.db.models import Case, Count, When
 from django.templatetags.static import static
 from django.urls.base import reverse
@@ -44,6 +45,10 @@ from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
 from cosinnus_notifications.models import NotificationAlert, SerializedNotificationAlert
 
 logger = logging.getLogger('cosinnus')
+
+
+UNREAD_ALERTS_USER_CACHE_KEY = 'cosinnus/core/portal/%d/user_unread_alerts/%s/'
+UNREAD_ALERTS_USER_CACHE_TIMEOUT = 55
 
 
 class SpacesView(MyGroupsClusteredMixin, APIView):
@@ -529,12 +534,19 @@ class UnreadAlertsView(APIView):
         }
     )
     def get(self, request):
-        alerts_count = 0
-        membership_alert_count = 0
+        unread_alerts = None
         if request.user.is_authenticated:
-            alerts_count = self._get_unread_notification_count(request.user)
-            membership_alert_count = self._get_membership_alert_count(request.user)
-        unread_alerts = {'count': alerts_count, 'membership_alert_count': membership_alert_count}
+            unread_alerts_cache_key = UNREAD_ALERTS_USER_CACHE_KEY % (CosinnusPortal.get_current().id, request.user.pk)
+            unread_alerts_cache = cache.get(unread_alerts_cache_key)
+            if unread_alerts_cache:
+                unread_alerts = unread_alerts_cache
+            else:
+                alerts_count = self._get_unread_notification_count(request.user)
+                membership_alert_count = self._get_membership_alert_count(request.user)
+                unread_alerts = {'count': alerts_count, 'membership_alert_count': membership_alert_count}
+                cache.set(unread_alerts_cache_key, unread_alerts, UNREAD_ALERTS_USER_CACHE_TIMEOUT)
+        else:
+            unread_alerts = {'count': 0, 'membership_alert_count': 0}
         return Response(unread_alerts)
 
     def _get_unread_notification_count(self, user):
@@ -745,6 +757,12 @@ class AlertsView(APIView):
                 for alert in alerts:
                     alert.seen = True
                 NotificationAlert.objects.bulk_update(alerts, ['seen'])
+
+                unread_alerts_cache_key = UNREAD_ALERTS_USER_CACHE_KEY % (
+                    CosinnusPortal.get_current().id,
+                    request.user.pk,
+                )
+                cache.delete(unread_alerts_cache_key)
 
             # alert items
             user_cache = self.get_user_cache(alerts)

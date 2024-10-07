@@ -267,6 +267,10 @@ class UnreadAlertsViewTest(TestAlertsMixin, TestMembershipAlertsMixin, APITestCa
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
+    def setUp(self):
+        super().setUp()
+        cache.clear()
+
     def test_unread_alerts_count(self):
         self.create_test_alert(seen=True)
         self.create_test_alert(seen=False)
@@ -300,6 +304,7 @@ class UnreadAlertsViewTest(TestAlertsMixin, TestMembershipAlertsMixin, APITestCa
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 0})
         self.create_membership_request()
+        cache.clear()
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 1})
@@ -310,6 +315,7 @@ class UnreadAlertsViewTest(TestAlertsMixin, TestMembershipAlertsMixin, APITestCa
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 0})
         self.create_invitation()
+        cache.clear()
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 0, 'membership_alert_count': 1})
