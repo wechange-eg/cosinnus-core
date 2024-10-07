@@ -521,6 +521,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
+    @override_settings(COSINNUS_V3_MENU_HOME_LINK='/cms/')
     def test_profile(self):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
@@ -595,6 +596,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
 
     @override_settings(COSINNUS_CLOUD_ENABLED=True)
     @override_settings(COSINNUS_CLOUD_NEXTCLOUD_URL='http://cloud.example.com')
+    @override_settings(COSINNUS_V3_MENU_HOME_LINK='/cms/')
     def test_main_navigation_authenticated(self):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
@@ -626,6 +628,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
 
     @override_settings(COSINNUS_CLOUD_ENABLED=True)
     @override_settings(COSINNUS_CLOUD_NEXTCLOUD_URL='http://cloud.example.com')
+    @override_settings(COSINNUS_V3_MENU_HOME_LINK='/cms/')
     def test_main_navigation_anonymous(self):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
