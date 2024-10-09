@@ -21,6 +21,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_reverse_admin import ReverseModelAdmin
 
+from cosinnus.backends import elastic_threading_disabled
 from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.core.registries import attached_object_registry
@@ -1087,12 +1088,11 @@ class UserAdmin(DjangoUserAdmin):
         hidden_content_count = 0
         for user in queryset:
             _group_count, _hidden_count = _deactivate_or_hide_all_user_content(user)
-            deactivate_user_and_mark_for_deletion(user)
-            user.refresh_from_db()
-            if hasattr(user, 'cosinnus_profile') and getattr(user, 'cosinnus_profile', None):
-                profile = user.cosinnus_profile
-                profile.refresh_from_db()
-                profile.remove_index()
+            with elastic_threading_disabled():
+                deactivate_user_and_mark_for_deletion(user)
+                if hasattr(user, 'cosinnus_profile') and getattr(user, 'cosinnus_profile', None):
+                    profile = user.cosinnus_profile
+                    profile.remove_index()
             deactivated_groups_count += _group_count
             hidden_content_count += _hidden_count
             user_count += 1
