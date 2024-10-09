@@ -311,7 +311,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 MenuItem(CosinnusProjectTrans.BROWSE_ALL, reverse('cosinnus:group-list'), id='BrowseProjects'),
             ]
             community_space = {
-                'header': f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
+                'header': settings.COSINNUS_V3_COMMUNITY_HEADER_CUSTOM_LABEL
+                or f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
                 'items': community_space_items,
                 'actions': community_space_actions,
             }
@@ -552,9 +553,7 @@ class UnreadAlertsView(APIView):
     def _get_unread_notification_count(self, user):
         """Get the unread notification count"""
         alerts_qs = NotificationAlert.objects.filter(
-            portal=CosinnusPortal.get_current(),
-            user=user,
-            action_user__is_active=True
+            portal=CosinnusPortal.get_current(), user=user, action_user__is_active=True
         )
         unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
         alerts_count = unseen_aggr.get('seen_count', 0)
@@ -820,9 +819,7 @@ class AlertsView(APIView):
 
     def get_queryset(self):
         alerts_qs = NotificationAlert.objects.filter(
-            portal=CosinnusPortal.get_current(),
-            user=self.request.user,
-            action_user__is_active=True
+            portal=CosinnusPortal.get_current(), user=self.request.user, action_user__is_active=True
         )
         if self.newer_than_timestamp:
             after_dt = datetime_from_timestamp(self.newer_than_timestamp)

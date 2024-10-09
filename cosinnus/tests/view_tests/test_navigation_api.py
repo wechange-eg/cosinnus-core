@@ -93,6 +93,7 @@ class SpacesViewTest(APITestCase):
             },
         )
 
+    @override_settings(COSINNUS_V3_COMMUNITY_HEADER_CUSTOM_LABEL=None)
     def test_community_space(self):
         forum = CosinnusSociety.objects.create(slug=settings.NEWW_FORUM_GROUP_SLUG, name=settings.NEWW_FORUM_GROUP_SLUG)
         response = self.client.get(self.api_url)
