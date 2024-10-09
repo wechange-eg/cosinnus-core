@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:30+0200\n"
+"POT-Creation-Date: 2024-10-09 16:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -180,6 +180,26 @@ msgid "Reactivate user accounts"
 msgstr "Пайдаланушы тіркелгісін жою"
 
 #, python-format
+msgid ""
+"%(user_count)d User account(s) were deactivated successfully. \n"
+"%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+"%(hidden_content_count)d contents have been set invisible. \n"
+"The user(s) will be deleted after 30 days."
+msgstr ""
+
+msgid "(SPAM) DEACTIVATE user and their contents (user deletion in 30d)"
+msgstr ""
+
+#, python-format
+msgid "%(count)d Users were logged out."
+msgstr ""
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logout users"
+msgstr "Шығу"
+
+#, python-format
 msgid "%(count)d Users' group memberships were refreshed."
 msgstr ""
 
@@ -210,6 +230,14 @@ msgstr ""
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%d Users were made Nextcloud admins."
+msgstr "%d пайдаланушылар сәтті ажыратылды."
+
+#, fuzzy
+msgid "Nextcloud: Make user Nextcloud admin"
+msgstr "Сізді әкімші қылды"
 
 #, fuzzy
 #| msgid "Recipients"
@@ -266,6 +294,19 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Мазмұны"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Шақырулар"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "Мүшелікке Сұраныстар"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Conference Applications"
+msgstr "Бейне конференциялар сервері"
+
 #, fuzzy
 #| msgid "Change language"
 msgid "Change Language"
@@ -279,16 +320,6 @@ msgstr "Менің профилім"
 msgid "My Guest Account"
 msgstr "Аккаунтты Жою"
 
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up my Profile"
-msgstr "Профильді редакциялаңыз"
-
-#, fuzzy
-#| msgid "Edit My Profile"
-msgid "Edit my Profile"
-msgstr "Профилімді редакциялау"
-
 msgid "Notification Preferences"
 msgstr "Хабарландыру теңшелімдері"
 
@@ -297,6 +328,12 @@ msgstr "Сіздің үлесіңіз"
 
 msgid "Administration"
 msgstr "Әкімшілік"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "About %(portal_name)s"
+msgstr "to %(portal_name)s"
 
 msgid "Logout"
 msgstr "Шығу"
@@ -325,8 +362,8 @@ msgid "Messages"
 msgstr "Хабарламалар"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Шолу жасау"
+msgid "Events"
+msgstr "Оқиғалар"
 
 msgid "Help"
 msgstr "Көмек"
@@ -355,6 +392,9 @@ msgstr "Көрсетілетін Аты"
 
 msgid "Help other members find you and use your real name."
 msgstr "Басқа мүшелерге сені жылдам табу үшін және толық атыңды беру үшін атыңды көрсет."
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr "Бұл сіздің логиніңіз ретінде пайдаланылады. Хабарламалар осы мекен-жайға жіберіледі (егер сіз алғыңыз келсе)."
 
 msgid "fields.managed_tags.label"
 msgstr ""
@@ -439,8 +479,9 @@ msgstr "Шақырулар"
 msgid "Forum"
 msgstr "Форум"
 
-msgid "Map"
-msgstr "Карта"
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Шолу жасау"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -517,6 +558,9 @@ msgstr "Бұл есептік жазба енді белсенді емес. С�
 #| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Бұл есептік жазба енді белсенді емес. Сіз жүйеден шықтыңыз."
+
+msgid "You have been logged out for security reasons, please log in again."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -2343,10 +2387,6 @@ msgid "Create-Project or Group Button"
 msgstr "Жоба-жасау немесе Топ батырмасы"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Оқиғалар"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Жобалар"
 
@@ -3468,11 +3508,6 @@ msgstr ""
 
 msgid "Withdraw"
 msgstr "Қаражатты шығару"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "Conference Applications"
-msgstr "Бейне конференциялар сервері"
 
 msgid "Manage participation applications"
 msgstr ""
@@ -5123,10 +5158,6 @@ msgstr "Facebook интеграциясы жоба жасалғаннан кей
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Шақырулар"
-
 msgid "About me"
 msgstr "Мен туралы"
 
@@ -5178,6 +5209,9 @@ msgstr "Жобалар жоқ."
 
 msgid "There are no invitations."
 msgstr "Шақырулар жоқ."
+
+msgid "Map"
+msgstr "Карта"
 
 #, fuzzy
 msgid "Meeting"
@@ -5545,11 +5579,19 @@ msgstr "Жалпыға қол жетімді мазмұнды Интернетт
 msgid "Registered users only"
 msgstr "Тек тіркелген пайдаланушылар"
 
-msgid "Edit folder"
-msgstr "Қалтаны өңдеу"
-
 msgid "Folder name"
 msgstr "Қалта атауы"
+
+msgid "OK"
+msgstr "ОК"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a new name for the folder"
+msgstr "Жобаның атын енгізіңіз."
+
+msgid "Edit folder"
+msgstr "Қалтаны өңдеу"
 
 msgid "Delete folder"
 msgstr "Қалтаны жою"
@@ -5575,11 +5617,15 @@ msgstr "Артқа"
 msgid "Back to"
 msgstr "Оралу"
 
+msgid "Create folder"
+msgstr "Қалтаны жасау"
+
 msgid "New folder name"
 msgstr "Жаңа қалта атауы"
 
-msgid "Create folder"
-msgstr "Қалтаны жасау"
+#, fuzzy
+msgid "Enter a name for the new folder"
+msgstr "Жобаның атын енгізіңіз."
 
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
@@ -6132,9 +6178,6 @@ msgstr "Тек пайдаланушылар үшін"
 msgid "Everybody"
 msgstr "Барлығы"
 
-msgid "OK"
-msgstr "ОК"
-
 msgid "Toggle navigation"
 msgstr "Жылжуды қосу"
 
@@ -6418,9 +6461,6 @@ msgstr "Тіркелгеннен кейін сіз автоматты түрде
 
 msgid "Email address"
 msgstr "Электрондық пошта"
-
-msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Бұл сіздің логиніңіз ретінде пайдаланылады. Хабарламалар осы мекен-жайға жіберіледі (егер сіз алғыңыз келсе)."
 
 msgid "Repeat Password"
 msgstr "Парольді қайталаңыз"
@@ -6729,10 +6769,6 @@ msgstr "Осы аймақты іздеңіз"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Find partners"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership Requests"
-msgstr "Мүшелікке Сұраныстар"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -7190,6 +7226,11 @@ msgstr ""
 msgid "Edit Profile"
 msgstr "Профильді редакциялаңыз"
 
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Профильді редакциялаңыз"
+
 msgid "Legacy Messages Archive"
 msgstr ""
 
@@ -7343,6 +7384,9 @@ msgstr "Пайдаланушы тіркелгісін жою"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Қолданушы профилі: %(username)s"
+
+msgid "(ADMIN) View in Admin"
+msgstr ""
 
 msgid "Cooperation requests"
 msgstr "Ынтымақтастық туралы өтініштер"
@@ -8103,14 +8147,6 @@ msgstr "Ұсыныс"
 #| msgid "Post new Offer"
 msgid "Post new Offer in "
 msgstr "Жаңа ұсыныс жариялау"
-
-msgid "New!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up your Profile"
-msgstr "Профильді редакциялаңыз"
 
 msgid "Edit My Profile"
 msgstr "Профилімді редакциялау"
@@ -11679,6 +11715,10 @@ msgstr ""
 msgid "Contact request"
 msgstr "Мүшені қабылдау"
 
+#, fuzzy
+msgid "This content has been hidden or removed."
+msgstr "Сіздің өзгертулеріңіз сақталды."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Сіз форумға қатысқан жағдайда ғана хабарламалар мен файлдарды қоса аласыз. Оған мына жерде қосыла аласыз:"
 
@@ -14409,6 +14449,16 @@ msgstr "Sind Sie sicher, dass Sie diese Liste und alle Unteraufgaben löschen wo
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Бұл пәрменді шынымен жойғыңыз келе ме?"
+
+#, fuzzy
+#~| msgid "Edit My Profile"
+#~ msgid "Edit my Profile"
+#~ msgstr "Профилімді редакциялау"
+
+#, fuzzy
+#~| msgid "Edit Your Profile"
+#~ msgid "Set up your Profile"
+#~ msgstr "Профильді редакциялаңыз"
 
 #, fuzzy
 #~ msgid "This project shall be made publicly findable via other platforms."

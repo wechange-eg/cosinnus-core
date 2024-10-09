@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:30+0200\n"
+"POT-Creation-Date: 2024-10-09 16:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -180,6 +180,26 @@ msgstr "%d utilisateurs ont été désactivés."
 msgid "Reactivate user accounts"
 msgstr "Compte utilisateur activé avec succès"
 
+#, python-format
+msgid ""
+"%(user_count)d User account(s) were deactivated successfully. \n"
+"%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+"%(hidden_content_count)d contents have been set invisible. \n"
+"The user(s) will be deleted after 30 days."
+msgstr ""
+
+msgid "(SPAM) DEACTIVATE user and their contents (user deletion in 30d)"
+msgstr ""
+
+#, python-format
+msgid "%(count)d Users were logged out."
+msgstr ""
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logout users"
+msgstr "Déconnexion"
+
 #, fuzzy, python-format
 #| msgid "%d Users' rocketchat room memberships were re-done."
 msgid "%(count)d Users' group memberships were refreshed."
@@ -211,6 +231,16 @@ msgstr "Rocket : réparer/créer les comptes rocketchat des utilisateurs manquan
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket : correction de l'absence d'adhésion à la salle RocketChat pour les utilisateurs"
+
+#, fuzzy, python-format
+#| msgid "%d Users were made RocketChat admins."
+msgid "%d Users were made Nextcloud admins."
+msgstr "%d utilisateurs ont été rendus administrateurs RocketChat."
+
+#, fuzzy
+#| msgid "Rocket: Make user RocketChat admin"
+msgid "Nextcloud: Make user Nextcloud admin"
+msgstr "Rocket : rendre l’utilisateur RocketChat admin"
 
 #, fuzzy
 #| msgid "Recipients"
@@ -267,6 +297,18 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Contenu"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Invitations"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "Demandes d'adhésion"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Conference Applications"
+msgstr "Demandes de conférence"
+
 #, fuzzy
 #| msgid "Change language"
 msgid "Change Language"
@@ -280,16 +322,6 @@ msgstr "Mon profil"
 msgid "My Guest Account"
 msgstr "Supprimer compte"
 
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up my Profile"
-msgstr "Modifier ton profil"
-
-#, fuzzy
-#| msgid "Edit My Profile"
-msgid "Edit my Profile"
-msgstr "Modifier mon profil"
-
 msgid "Notification Preferences"
 msgstr "Préférences de notification"
 
@@ -298,6 +330,12 @@ msgstr "Ta contribution"
 
 msgid "Administration"
 msgstr "Administration"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "About %(portal_name)s"
+msgstr "à %(portal_name)s"
 
 msgid "Logout"
 msgstr "Déconnexion"
@@ -328,8 +366,8 @@ msgid "Messages"
 msgstr "Messages"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Découvrir"
+msgid "Events"
+msgstr "Evénements"
 
 msgid "Help"
 msgstr "Aide"
@@ -358,6 +396,9 @@ msgstr "Nom d'affichage"
 
 msgid "Help other members find you and use your real name."
 msgstr "Aide les autres membres à te trouver plus rapidement en indiquant ton nom en clair."
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr "Elle sera utilisée comme identifiant. Les e-mails de notification seront envoyés à cette adresse (si tu souhaites les recevoir)."
 
 msgid "fields.managed_tags.label"
 msgstr ""
@@ -445,8 +486,9 @@ msgstr "Organisation"
 msgid "Forum"
 msgstr "Forum"
 
-msgid "Map"
-msgstr "Plan"
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Découvrir"
 
 msgid "Overnight stay required"
 msgstr "Nuitée requise"
@@ -523,6 +565,9 @@ msgstr "Ce compte n'est plus actif. Tu as été déconnecté."
 #| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Ce compte n'est plus actif. Tu as été déconnecté."
+
+msgid "You have been logged out for security reasons, please log in again."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -2304,10 +2349,6 @@ msgid "Create-Project or Group Button"
 msgstr "Bouton créer un projet ou groupe"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Evénements"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Projets"
 
@@ -3397,10 +3438,6 @@ msgstr "Postuler à la participation à la conférence"
 
 msgid "Withdraw"
 msgstr "Retirer"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Conference Applications"
-msgstr "Demandes de conférence"
 
 msgid "Manage participation applications"
 msgstr "Gérer les demandes de participation"
@@ -5014,10 +5051,6 @@ msgstr "L'intégration Facebook est disponible après la création du projet !"
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Le HTML saisi ici sera affiché sur le tableau de bord du groupe/projet (uniquement pour les membres)"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Invitations"
-
 msgid "About me"
 msgstr "A propos de moi"
 
@@ -5067,6 +5100,9 @@ msgstr "Il n'y a pas de projets."
 
 msgid "There are no invitations."
 msgstr "Il n'y a pas d'invitations."
+
+msgid "Map"
+msgstr "Plan"
 
 #, fuzzy
 msgid "Meeting"
@@ -5408,11 +5444,19 @@ msgstr "Cela signifie que n'importe qui sur Internet peut voir ton nom, avatar e
 msgid "Registered users only"
 msgstr "Utilisateurs inscrits uniquement"
 
-msgid "Edit folder"
-msgstr "Editer le dossier"
-
 msgid "Folder name"
 msgstr "Nom du dossier"
+
+msgid "OK"
+msgstr "D'accord"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a new name for the folder"
+msgstr "Entre un nom pour le projet."
+
+msgid "Edit folder"
+msgstr "Editer le dossier"
 
 msgid "Delete folder"
 msgstr "Supprimer dossier"
@@ -5438,11 +5482,16 @@ msgstr "Retour"
 msgid "Back to"
 msgstr "Retour à"
 
+msgid "Create folder"
+msgstr "Créer dossier"
+
 msgid "New folder name"
 msgstr "Nouveau nom de dossier"
 
-msgid "Create folder"
-msgstr "Créer dossier"
+#, fuzzy
+#| msgid "Enter a name for the conference."
+msgid "Enter a name for the new folder"
+msgstr "Entre un nom pour la conférence."
 
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
@@ -6047,9 +6096,6 @@ msgstr "Membres connectés seulement"
 msgid "Everybody"
 msgstr "Tout le monde"
 
-msgid "OK"
-msgstr "D'accord"
-
 msgid "Toggle navigation"
 msgstr "Faire basculer la navigation"
 
@@ -6324,9 +6370,6 @@ msgstr "Après votre inscription, vous deviendrez automatiquement participant de
 
 msgid "Email address"
 msgstr "Adresse e-mail"
-
-msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Elle sera utilisée comme identifiant. Les e-mails de notification seront envoyés à cette adresse (si tu souhaites les recevoir)."
 
 msgid "Repeat Password"
 msgstr "Répéter mot de passe"
@@ -6631,10 +6674,6 @@ msgstr "Rechercher dans cette zone"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Find partners"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership Requests"
-msgstr "Demandes d'adhésion"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -7082,6 +7121,11 @@ msgstr ""
 msgid "Edit Profile"
 msgstr "Modifier mon profil"
 
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Modifier ton profil"
+
 msgid "Legacy Messages Archive"
 msgstr "Archive des messages de l'héritage"
 
@@ -7237,6 +7281,9 @@ msgstr "Supprimer compte utilisateur"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Profil de l'utilisateur : %(username)s"
+
+msgid "(ADMIN) View in Admin"
+msgstr ""
 
 msgid "Cooperation requests"
 msgstr "Demandes de coopération"
@@ -7997,14 +8044,6 @@ msgstr "Offre"
 #| msgid "Post new Offer"
 msgid "Post new Offer in "
 msgstr "Publier une nouvelle offre"
-
-msgid "New!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up your Profile"
-msgstr "Modifier ton profil"
 
 msgid "Edit My Profile"
 msgstr "Modifier mon profil"
@@ -11486,6 +11525,11 @@ msgstr ""
 msgid "Contact request"
 msgstr "Accepter la demande"
 
+#, fuzzy
+#| msgid "Your application has been accepted!"
+msgid "This content has been hidden or removed."
+msgstr "Ta demande a été acceptée !"
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Tu peux joindre des fichiers et des images aux messages uniquement si tu es membre du forum. Tu peux le rejoindre ici :"
 
@@ -14226,6 +14270,16 @@ msgstr "Veux-tu vraiment supprimer cette équipe ?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Veux-tu vraiment supprimer cette équipe ?"
+
+#, fuzzy
+#~| msgid "Edit My Profile"
+#~ msgid "Edit my Profile"
+#~ msgstr "Modifier mon profil"
+
+#, fuzzy
+#~| msgid "Edit Your Profile"
+#~ msgid "Set up your Profile"
+#~ msgstr "Modifier ton profil"
 
 #, fuzzy
 #~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."

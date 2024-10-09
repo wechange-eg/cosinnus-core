@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-02 10:53+0200\n"
+"POT-Creation-Date: 2024-10-09 16:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -169,8 +169,19 @@ msgid "Reactivate user accounts"
 msgstr "Reaktiviere Benutzerkontos"
 
 #, python-format
+msgid ""
+"%(user_count)d User account(s) were deactivated successfully. \n"
+"%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+"%(hidden_content_count)d contents have been set invisible. \n"
+"The user(s) will be deleted after 30 days."
+msgstr ""
+
+msgid "(SPAM) DEACTIVATE user and their contents (user deletion in 30d)"
+msgstr ""
+
+#, python-format
 msgid "%(count)d Users were logged out."
-msgstr "%d Benutzer/innen wurden erfolgreich ausgeloggt"
+msgstr "%(count)d Benutzer/innen wurden erfolgreich ausgeloggt"
 
 msgid "Logout users"
 msgstr "Benutzer/innen ausloggen"
@@ -6990,6 +7001,9 @@ msgstr "Benutzer/innen-Konto löschen"
 msgid "User profile: %(username)s"
 msgstr "Benutzer/innen-Profil: %(username)s"
 
+msgid "(ADMIN) View in Admin"
+msgstr ""
+
 msgid "Cooperation requests"
 msgstr "Kooperationsanfragen"
 
@@ -11176,6 +11190,9 @@ msgstr "Es ist ein technischer Fehler beim RocketChat Dienst aufgetreten. Einige
 
 msgid "Contact request"
 msgstr "Kontaktanfrage"
+
+msgid "This content has been hidden or removed."
+msgstr "Dieser Inhalt wurde versteckt oder entfernt."
 
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Du kannst Dateien und Bilder nur anhängen, wenn du Mitglied im Forum bist. Du kannst hier beitreten:"

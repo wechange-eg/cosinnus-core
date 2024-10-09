@@ -21,8 +21,10 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_reverse_admin import ReverseModelAdmin
 
+from cosinnus.backends import elastic_threading_disabled
 from cosinnus.conf import settings
 from cosinnus.core import signals
+from cosinnus.core.registries import attached_object_registry
 from cosinnus.forms.widgets import PrettyJSONWidget
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.conference import CosinnusConferencePremiumCapacityInfo, CosinnusConferenceSettings
@@ -882,6 +884,9 @@ class UserScheduledForDeletionAtFilter(admin.SimpleListFilter):
             return queryset.filter(cosinnus_profile__scheduled_for_deletion_at__exact=None)
 
 
+_useradmin_excluded_list_filter = ['groups', 'is_staff']
+
+
 class UserAdmin(DjangoUserAdmin):
     fieldsets = (
         (
@@ -912,6 +917,7 @@ class UserAdmin(DjangoUserAdmin):
     actions = [
         'deactivate_users',
         'reactivate_users',
+        'deactivate_spam_users',
         'logout_users',
         'export_as_csv',
         'log_in_as_user',
@@ -943,7 +949,10 @@ class UserAdmin(DjangoUserAdmin):
         'is_staff',
         'scheduled_for_deletion_at',
     )
-    list_filter = list(DjangoUserAdmin.list_filter) + [
+    list_filter = [
+        field for field in list(DjangoUserAdmin.list_filter) if field not in _useradmin_excluded_list_filter
+    ] + [
+        'date_joined',
         UserHasLoggedInFilter,
         UserToSAcceptedFilter,
         UserScheduledForDeletionAtFilter,
@@ -1019,6 +1028,87 @@ class UserAdmin(DjangoUserAdmin):
         self.message_user(request, message)
 
     reactivate_users.short_description = _('Reactivate user accounts')
+
+    def deactivate_spam_users(self, request, queryset):
+        """For use on spam users that admins want to completely boot off the platform.
+        Will deactivate and mark for deletion the user, deactivate all groups they are the only admin of,
+        and hide all content from other groups and non-group-content ('visibility: only me')."""
+        # TODO: delete this function and replace it with the `get_registered_base_taggable_models`
+        #  once the changes from 'dsgvo-deletion' PR are in!
+        from django.apps import apps
+
+        from cosinnus.models.tagged import BaseTaggableObjectModel
+        from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
+
+        def _get_registered_base_taggable_models():
+            base_taggable_object_models = []
+            for full_model_name in attached_object_registry:
+                app_label, model_name = full_model_name.split('.')
+                model = apps.get_model(app_label, model_name)
+                if issubclass(model, BaseTaggableObjectModel):
+                    base_taggable_object_models.append(model)
+            return base_taggable_object_models
+
+        models_to_hide_content = _get_registered_base_taggable_models() + [CosinnusIdea]
+
+        # TODO: move this function to views/profile_deletion.py once the changes from 'dsgvo-deletion' PR are in!
+        from cosinnus.models.tagged import BaseTagObject
+
+        def _deactivate_or_hide_all_user_content(user):
+            """Deactivate all groups a user is the only admin of,
+            and hide all content from other groups and non-group-content ('visibility: only me').
+            @return: returns a tuple of ints (num_deactivated_groups, hidden_content)"""
+            deactivated_groups = 0
+            hidden_content = 0
+            for group in CosinnusGroup.objects.get_for_user(user):
+                admins = CosinnusGroupMembership.objects.get_admins(group=group)
+                if [user.pk] == admins:
+                    # user is the only admin of the group, deactivate it
+                    group.is_active = False
+                    group.save()
+                    # remove group from search index
+                    group.remove_index()
+                    deactivated_groups += 1
+            # taggable objects (notes, events, ...) and ideas
+            for model_to_hide in models_to_hide_content:
+                for object_to_hide in model_to_hide.objects.filter(creator=user):
+                    # set visibility to user-only
+                    if hasattr(object_to_hide, 'media_tag') and getattr(object_to_hide, 'media_tag', None):
+                        media_tag = object_to_hide.media_tag
+                        if not media_tag.visibility == BaseTagObject.VISIBILITY_USER:
+                            media_tag.visibility = BaseTagObject.VISIBILITY_USER
+                            media_tag.save()
+                            hidden_content += 1
+                        # remove object from search index (always, just to be sure)
+                        object_to_hide.remove_index()
+            return deactivated_groups, hidden_content
+
+        user_count = 0
+        deactivated_groups_count = 0
+        hidden_content_count = 0
+        for user in queryset:
+            _group_count, _hidden_count = _deactivate_or_hide_all_user_content(user)
+            with elastic_threading_disabled():
+                deactivate_user_and_mark_for_deletion(user)
+                if hasattr(user, 'cosinnus_profile') and getattr(user, 'cosinnus_profile', None):
+                    profile = user.cosinnus_profile
+                    profile.remove_index()
+            deactivated_groups_count += _group_count
+            hidden_content_count += _hidden_count
+            user_count += 1
+        message = _(
+            '%(user_count)d User account(s) were deactivated successfully. \n'
+            '%(deactivated_groups_count)d groups and projects have been deactivated. \n'
+            '%(hidden_content_count)d contents have been set invisible. \n'
+            'The user(s) will be deleted after 30 days.'
+        ) % {
+            'user_count': user_count,
+            'deactivated_groups_count': deactivated_groups_count,
+            'hidden_content_count': hidden_content_count,
+        }
+        self.message_user(request, message)
+
+    deactivate_spam_users.short_description = _('(SPAM) DEACTIVATE user and their contents (user deletion in 30d)')
 
     def logout_users(self, request, queryset):
         count = 0

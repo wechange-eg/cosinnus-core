@@ -109,6 +109,31 @@ class DKIMEmailBackend(EmailBackend):
         return True
 
 
+class ElasticSearchThreadingState:
+    """Holds the current context's state of whether elasticsearch index functions should run threaded or not"""
+
+    local_threading_disabled = False
+
+    def is_elastic_threaded(self):
+        """Determines if in the current context, elasticsearch index functions should run threaded or not"""
+        return (
+            bool(getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True)) and not self.local_threading_disabled
+        )
+
+
+_threading_state = ElasticSearchThreadingState()
+
+
+class elastic_threading_disabled:
+    """Context manager that disables threaded elasticsearch indexing calls within its context"""
+
+    def __enter__(self):
+        _threading_state.local_threading_disabled = True
+
+    def __exit__(self, type, value, tb):
+        _threading_state.local_threading_disabled = False
+
+
 def threaded_execution_and_catch_error(f):
     """Will run in a thread and catch all errors"""
 
@@ -134,7 +159,7 @@ def threaded_execution_and_catch_error(f):
                 if settings.DEBUG:
                     raise
 
-        if getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True):
+        if _threading_state.is_elastic_threaded():
 
             class CosinnusElasticsearchExecutionThread(Thread):
                 def run(self):
