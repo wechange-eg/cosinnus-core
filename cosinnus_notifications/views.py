@@ -372,7 +372,11 @@ class AlertsRetrievalView(BasePagedOffsetWidgetView):
             self.page_size = 999
 
     def get_queryset(self):
-        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
+        alerts_qs = NotificationAlert.objects.filter(
+            portal=CosinnusPortal.get_current(),
+            user=self.request.user,
+            action_user__is_active=True
+        )
         # retrieve number of unseen alerts from ALL alerts (before pagination) unless we're loading "more..." paged
         # items
         self.unseen_count = -1

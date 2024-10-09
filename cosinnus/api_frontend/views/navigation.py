@@ -551,7 +551,11 @@ class UnreadAlertsView(APIView):
 
     def _get_unread_notification_count(self, user):
         """Get the unread notification count"""
-        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=user)
+        alerts_qs = NotificationAlert.objects.filter(
+            portal=CosinnusPortal.get_current(),
+            user=user,
+            action_user__is_active=True
+        )
         unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
         alerts_count = unseen_aggr.get('seen_count', 0)
         return alerts_count
@@ -815,7 +819,11 @@ class AlertsView(APIView):
         self.mark_as_read = request.query_params.get('mark_as_read') == 'true'
 
     def get_queryset(self):
-        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
+        alerts_qs = NotificationAlert.objects.filter(
+            portal=CosinnusPortal.get_current(),
+            user=self.request.user,
+            action_user__is_active=True
+        )
         if self.newer_than_timestamp:
             after_dt = datetime_from_timestamp(self.newer_than_timestamp)
             alerts_qs = alerts_qs.filter(last_event_at__gt=after_dt)
