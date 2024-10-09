@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:30+0200\n"
+"POT-Creation-Date: 2024-10-09 16:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -180,6 +180,26 @@ msgid "Reactivate user accounts"
 msgstr "Cont de utilizator activat cu succes"
 
 #, python-format
+msgid ""
+"%(user_count)d User account(s) were deactivated successfully. \n"
+"%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+"%(hidden_content_count)d contents have been set invisible. \n"
+"The user(s) will be deleted after 30 days."
+msgstr ""
+
+msgid "(SPAM) DEACTIVATE user and their contents (user deletion in 30d)"
+msgstr ""
+
+#, python-format
+msgid "%(count)d Users were logged out."
+msgstr ""
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logout users"
+msgstr "Deconectare"
+
+#, python-format
 msgid "%(count)d Users' group memberships were refreshed."
 msgstr ""
 
@@ -211,6 +231,15 @@ msgstr ""
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%d Users were made RocketChat admins."
+msgid "%d Users were made Nextcloud admins."
+msgstr "%d Utilizatorii au fost numiți administratorii RocketChat."
+
+#, fuzzy
+msgid "Nextcloud: Make user Nextcloud admin"
+msgstr "Faceți utilizator RocketChat administrator"
 
 #, fuzzy
 #| msgid "Recipients"
@@ -268,6 +297,19 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Conținut"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Invitații"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "Cereri de Membru"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Conference Applications"
+msgstr "Setările Conferinței"
+
 #, fuzzy
 #| msgid "Change language"
 msgid "Change Language"
@@ -281,16 +323,6 @@ msgstr "Profilul Meu"
 msgid "My Guest Account"
 msgstr "Șterge Contul"
 
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up my Profile"
-msgstr "Editează-ți Profilul"
-
-#, fuzzy
-#| msgid "Edit My Profile"
-msgid "Edit my Profile"
-msgstr "Editează Profilul Meu"
-
 msgid "Notification Preferences"
 msgstr "Preferințe de notificare"
 
@@ -299,6 +331,12 @@ msgstr "Contribuția Ta"
 
 msgid "Administration"
 msgstr "Administrare"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "About %(portal_name)s"
+msgstr "la %(portal_name)s"
 
 msgid "Logout"
 msgstr "Deconectare"
@@ -327,8 +365,8 @@ msgid "Messages"
 msgstr "Mesaje"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Descoperi"
+msgid "Events"
+msgstr "Evenimente"
 
 msgid "Help"
 msgstr "Ajutor"
@@ -357,6 +395,9 @@ msgstr "Nume Afișat"
 
 msgid "Help other members find you and use your real name."
 msgstr "Ajutați-i pe ceilalți membri să vă găsească mai repede și introduceți numele dvs. real."
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr "Aceasta va fi folosită ca autentificare. E-mailurile de notificare vor fi trimise la această adresă (dacă doriți să le primiți)."
 
 msgid "fields.managed_tags.label"
 msgstr ""
@@ -443,8 +484,9 @@ msgstr "Organizare"
 msgid "Forum"
 msgstr "Forum"
 
-msgid "Map"
-msgstr "Hartă"
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Descoperi"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -521,6 +563,9 @@ msgstr "Acest cont nu mai este activ. Ai fost deconectat."
 #| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Acest cont nu mai este activ. Ai fost deconectat."
+
+msgid "You have been logged out for security reasons, please log in again."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -2338,10 +2383,6 @@ msgid "Create-Project or Group Button"
 msgstr "Create-Proiect sau Grup de Buton"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Evenimente"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Proiecte"
 
@@ -3467,11 +3508,6 @@ msgstr ""
 
 msgid "Withdraw"
 msgstr "Retrage"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "Conference Applications"
-msgstr "Setările Conferinței"
 
 msgid "Manage participation applications"
 msgstr ""
@@ -5132,10 +5168,6 @@ msgstr "Integrarea Facebook este disponibilă după ce ați creat proiectul!"
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Codul HTML introdus aici va fi afișat pe tabloul de board al grupului/proiectului (numai pentru membri)"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Invitații"
-
 msgid "About me"
 msgstr "Despre mine"
 
@@ -5187,6 +5219,9 @@ msgstr "Nu există proiecte."
 
 msgid "There are no invitations."
 msgstr "Nu există invitații."
+
+msgid "Map"
+msgstr "Hartă"
 
 #, fuzzy
 msgid "Meeting"
@@ -5552,11 +5587,19 @@ msgstr "Conținutul vizibil public poate fi văzut de ORICINE pe internet și po
 msgid "Registered users only"
 msgstr "Doar utilizatorii înregistrați"
 
-msgid "Edit folder"
-msgstr "Editarea dosarului"
-
 msgid "Folder name"
 msgstr "Numele dosarului"
+
+msgid "OK"
+msgstr "OK"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a new name for the folder"
+msgstr "Introduceți un nume pentru proiect."
+
+msgid "Edit folder"
+msgstr "Editarea dosarului"
 
 msgid "Delete folder"
 msgstr "Ștergeți dosarul"
@@ -5582,11 +5625,15 @@ msgstr "Înapoi"
 msgid "Back to"
 msgstr "Înapoi la"
 
+msgid "Create folder"
+msgstr "Creează dosar"
+
 msgid "New folder name"
 msgstr "Nume nou de dosar"
 
-msgid "Create folder"
-msgstr "Creează dosar"
+#, fuzzy
+msgid "Enter a name for the new folder"
+msgstr "Introduceți un nume pentru proiect."
 
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
@@ -6160,9 +6207,6 @@ msgstr "Autentificat numai Membrii"
 msgid "Everybody"
 msgstr "Toată lumea"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
@@ -6446,9 +6490,6 @@ msgstr "După înregistrare, veți deveni un membru automat al proiectelor și g
 
 msgid "Email address"
 msgstr "Adresa de e-mail"
-
-msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Aceasta va fi folosită ca autentificare. E-mailurile de notificare vor fi trimise la această adresă (dacă doriți să le primiți)."
 
 msgid "Repeat Password"
 msgstr "Repetă Parola"
@@ -6755,10 +6796,6 @@ msgstr "Căutați în această zonă"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Find partners"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership Requests"
-msgstr "Cereri de Membru"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -7214,6 +7251,11 @@ msgstr ""
 msgid "Edit Profile"
 msgstr "Editează Profilul"
 
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Editează-ți Profilul"
+
 msgid "Legacy Messages Archive"
 msgstr "Arhivă de Mesaje Vechi"
 
@@ -7367,6 +7409,9 @@ msgstr "Ștergeți contul de utilizator"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Profil de utilizator: %(username)s"
+
+msgid "(ADMIN) View in Admin"
+msgstr ""
 
 msgid "Cooperation requests"
 msgstr "Cerere de cooperare"
@@ -8129,14 +8174,6 @@ msgstr "Oferi"
 #| msgid "Post new Offer"
 msgid "Post new Offer in "
 msgstr "Publicați o nouă Ofertă"
-
-msgid "New!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up your Profile"
-msgstr "Editează-ți Profilul"
 
 msgid "Edit My Profile"
 msgstr "Editează Profilul Meu"
@@ -11688,6 +11725,10 @@ msgstr ""
 msgid "Contact request"
 msgstr "Accept membru"
 
+#, fuzzy
+msgid "This content has been hidden or removed."
+msgstr "Schimbările tale au fost salvate."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Puteți atașa fișiere și imagini la mesaj doar dacă sunteți membru forumului. Vă puteți alătura aici:"
 
@@ -14414,6 +14455,16 @@ msgstr "Sunteți sigur că doriți să ștergeți această echipă?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Sunteți sigur că doriți să ștergeți această echipă?"
+
+#, fuzzy
+#~| msgid "Edit My Profile"
+#~ msgid "Edit my Profile"
+#~ msgstr "Editează Profilul Meu"
+
+#, fuzzy
+#~| msgid "Edit Your Profile"
+#~ msgid "Set up your Profile"
+#~ msgstr "Editează-ți Profilul"
 
 #, fuzzy
 #~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."

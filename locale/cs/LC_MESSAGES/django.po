@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:30+0200\n"
+"POT-Creation-Date: 2024-10-09 16:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -183,6 +183,26 @@ msgstr "%d uživatelů bylo úspěšně deaktivováno."
 msgid "Reactivate user accounts"
 msgstr "Uživatelský účet byl úspěšně aktivován"
 
+#, python-format
+msgid ""
+"%(user_count)d User account(s) were deactivated successfully. \n"
+"%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+"%(hidden_content_count)d contents have been set invisible. \n"
+"The user(s) will be deleted after 30 days."
+msgstr ""
+
+msgid "(SPAM) DEACTIVATE user and their contents (user deletion in 30d)"
+msgstr ""
+
+#, python-format
+msgid "%(count)d Users were logged out."
+msgstr ""
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logout users"
+msgstr "Odhlásit se"
+
 #, fuzzy, python-format
 #| msgid "%d Users' rocketchat room memberships were re-done."
 msgid "%(count)d Users' group memberships were refreshed."
@@ -214,6 +234,16 @@ msgstr "Rocket: Opravte/vytvořte chybějící RocketChat účty"
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Zařiďte chybějící členství v RocketChat místnosti pro uživatele"
+
+#, fuzzy, python-format
+#| msgid "%d Users were made RocketChat admins."
+msgid "%d Users were made Nextcloud admins."
+msgstr "%d uživatelů bylo učiněno RocketChat administrátory."
+
+#, fuzzy
+#| msgid "Rocket: Make user RocketChat admin"
+msgid "Nextcloud: Make user Nextcloud admin"
+msgstr "Rocket: Učiňte z uživatele RocketChat administrátora"
 
 #, fuzzy
 #| msgid "Recipients"
@@ -270,6 +300,18 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Obsah"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Pozvánky"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "Žádosti o členství"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Conference Applications"
+msgstr "Žádost o účast v konferenci"
+
 #, fuzzy
 #| msgid "Change language"
 msgid "Change Language"
@@ -283,16 +325,6 @@ msgstr "Můj profil"
 msgid "My Guest Account"
 msgstr "Smazat účet"
 
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up my Profile"
-msgstr "Upravit váš profil"
-
-#, fuzzy
-#| msgid "Edit My Profile"
-msgid "Edit my Profile"
-msgstr "Upravit můj profil"
-
 msgid "Notification Preferences"
 msgstr "Předvolby oznámení"
 
@@ -301,6 +333,12 @@ msgstr "Váš příspěvek"
 
 msgid "Administration"
 msgstr "Správa"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "About %(portal_name)s"
+msgstr "na %(portal_name)s"
 
 msgid "Logout"
 msgstr "Odhlásit se"
@@ -331,8 +369,8 @@ msgid "Messages"
 msgstr "Zprávy"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Objevovat"
+msgid "Events"
+msgstr "Události"
 
 msgid "Help"
 msgstr "Nápověda"
@@ -361,6 +399,9 @@ msgstr "Zobrazené Jméno"
 
 msgid "Help other members find you and use your real name."
 msgstr "Pomozte ostatním členům rychleji vás najít a zadejte své skutečné jméno."
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr "Bude používána jako vaše přihlašovací jméno. Na tuto adresu budou zasílány e-maily s oznámeními (pokud je chcete dostávat)."
 
 msgid "fields.managed_tags.label"
 msgstr ""
@@ -448,8 +489,9 @@ msgstr "Organizace"
 msgid "Forum"
 msgstr "Fórum"
 
-msgid "Map"
-msgstr "Mapa"
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Objevovat"
 
 msgid "Overnight stay required"
 msgstr "Vyžadován nocleh"
@@ -526,6 +568,9 @@ msgstr "Tento účet již není aktivní. Byli jste odhlášeni."
 #| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Tento účet již není aktivní. Byli jste odhlášeni."
+
+msgid "You have been logged out for security reasons, please log in again."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -2317,10 +2362,6 @@ msgid "Create-Project or Group Button"
 msgstr "Tlačítko Vytvořit projekt nebo skupinu"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Události"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Projekty"
 
@@ -3444,10 +3485,6 @@ msgstr "Přihlaste se k účasti na konferenci"
 
 msgid "Withdraw"
 msgstr "Stáhnout"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Conference Applications"
-msgstr "Žádost o účast v konferenci"
 
 msgid "Manage participation applications"
 msgstr "Řiďte žádosti o účast"
@@ -5077,10 +5114,6 @@ msgstr "Integrace s Facebookem je k dispozici po vytvoření projektu!"
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Zde zadaný kód HTML se zobrazí na panelu skupiny/projektu (pouze pro členy)"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Pozvánky"
-
 msgid "About me"
 msgstr "O mně"
 
@@ -5130,6 +5163,9 @@ msgstr "Nejsou žádné projekty."
 
 msgid "There are no invitations."
 msgstr "Nejsou žádné pozvánky."
+
+msgid "Map"
+msgstr "Mapa"
 
 #, fuzzy
 msgid "Meeting"
@@ -5474,11 +5510,19 @@ msgstr "Veřejně viditelný obsah může KDOKOLI vidět na internetu a může b
 msgid "Registered users only"
 msgstr "Pouze registrovaní uživatelé"
 
-msgid "Edit folder"
-msgstr "Upravit složku"
-
 msgid "Folder name"
 msgstr "Název složky"
+
+msgid "OK"
+msgstr "OK"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a new name for the folder"
+msgstr "Zadejte název projektu."
+
+msgid "Edit folder"
+msgstr "Upravit složku"
 
 msgid "Delete folder"
 msgstr "Smazat složku"
@@ -5504,11 +5548,16 @@ msgstr "Zpět"
 msgid "Back to"
 msgstr "Zpět k"
 
+msgid "Create folder"
+msgstr "Vytvořit složku"
+
 msgid "New folder name"
 msgstr "Název nové složky"
 
-msgid "Create folder"
-msgstr "Vytvořit složku"
+#, fuzzy
+#| msgid "Enter a name for the conference."
+msgid "Enter a name for the new folder"
+msgstr "Zadejte název konference."
 
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
@@ -6103,9 +6152,6 @@ msgstr "Pouze přihlášení členové"
 msgid "Everybody"
 msgstr "Všichni"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Toggle navigation"
 msgstr "Přepnout navigaci"
 
@@ -6380,9 +6426,6 @@ msgstr "Po registraci se automaticky stanete členem přidružených projektů a
 
 msgid "Email address"
 msgstr "E-mailová adresa"
-
-msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Bude používána jako vaše přihlašovací jméno. Na tuto adresu budou zasílány e-maily s oznámeními (pokud je chcete dostávat)."
 
 msgid "Repeat Password"
 msgstr "Zopakovat heslo"
@@ -6687,10 +6730,6 @@ msgstr "Prohledat tuto oblast"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Find partners"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership Requests"
-msgstr "Žádosti o členství"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -7138,6 +7177,11 @@ msgstr ""
 msgid "Edit Profile"
 msgstr "Upravit profil"
 
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Upravit váš profil"
+
 msgid "Legacy Messages Archive"
 msgstr "Archiv starších zpráv"
 
@@ -7291,6 +7335,9 @@ msgstr "Smazat uživatelský účet"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Uživatelský profil: %(username)s"
+
+msgid "(ADMIN) View in Admin"
+msgstr ""
 
 msgid "Cooperation requests"
 msgstr "Žádosti o spolupráci"
@@ -8055,14 +8102,6 @@ msgstr "Nabídka"
 #| msgid "Post new Offer"
 msgid "Post new Offer in "
 msgstr "Zveřejnit novou nabídku"
-
-msgid "New!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up your Profile"
-msgstr "Upravit váš profil"
 
 msgid "Edit My Profile"
 msgstr "Upravit můj profil"
@@ -11551,6 +11590,11 @@ msgstr ""
 msgid "Contact request"
 msgstr "Přijměte žádost"
 
+#, fuzzy
+#| msgid "Your application has been accepted!"
+msgid "This content has been hidden or removed."
+msgstr "Vaše žádost byla přijata!"
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Ke zprávám můžete připojit soubory a obrázky, pouze pokud jste členem fóra. Můžete se k němu připojit zde:"
 
@@ -14309,6 +14353,16 @@ msgstr "Opravdu chcete tento tým smazat?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Opravdu chcete tento tým smazat?"
+
+#, fuzzy
+#~| msgid "Edit My Profile"
+#~ msgid "Edit my Profile"
+#~ msgstr "Upravit můj profil"
+
+#, fuzzy
+#~| msgid "Edit Your Profile"
+#~ msgid "Set up your Profile"
+#~ msgstr "Upravit váš profil"
 
 #, fuzzy
 #~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."

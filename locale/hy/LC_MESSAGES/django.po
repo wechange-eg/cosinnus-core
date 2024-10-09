@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:30+0200\n"
+"POT-Creation-Date: 2024-10-09 16:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -180,6 +180,26 @@ msgid "Reactivate user accounts"
 msgstr "Ջնջել օգտատիրոջ անձնական էջը"
 
 #, python-format
+msgid ""
+"%(user_count)d User account(s) were deactivated successfully. \n"
+"%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+"%(hidden_content_count)d contents have been set invisible. \n"
+"The user(s) will be deleted after 30 days."
+msgstr ""
+
+msgid "(SPAM) DEACTIVATE user and their contents (user deletion in 30d)"
+msgstr ""
+
+#, python-format
+msgid "%(count)d Users were logged out."
+msgstr ""
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logout users"
+msgstr "Ելք"
+
+#, python-format
 msgid "%(count)d Users' group memberships were refreshed."
 msgstr ""
 
@@ -210,6 +230,14 @@ msgstr ""
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%d Users were made Nextcloud admins."
+msgstr "%d Օգտատերերը հաջողությամբ ապաակտիվացվել են."
+
+#, fuzzy
+msgid "Nextcloud: Make user Nextcloud admin"
+msgstr "Ձեզ նշանակել են ադմինիստրատոր"
 
 #, fuzzy
 #| msgid "Recipients"
@@ -266,6 +294,19 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Բովանդակություն"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Հրավերներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "Անդամակցության Հայտեր"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Conference Applications"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
 #, fuzzy
 #| msgid "Change language"
 msgid "Change Language"
@@ -279,16 +320,6 @@ msgstr "Իմ էջը"
 msgid "My Guest Account"
 msgstr "Ջնջել Անձնական Էջը"
 
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up my Profile"
-msgstr "Խմբագրել ձեր էջը"
-
-#, fuzzy
-#| msgid "Edit My Profile"
-msgid "Edit my Profile"
-msgstr "Խմբագրել Իմ Անձնական Էջը"
-
 msgid "Notification Preferences"
 msgstr "Ծանուցման նախապատվություններ"
 
@@ -297,6 +328,12 @@ msgstr "Ձեր ներդրումը"
 
 msgid "Administration"
 msgstr "Ադմինիստրացիա"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "About %(portal_name)s"
+msgstr "%(portal_name)s կայք"
 
 msgid "Logout"
 msgstr "Ելք"
@@ -325,8 +362,8 @@ msgid "Messages"
 msgstr "Նամակներ"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Բացահայտել"
+msgid "Events"
+msgstr "Իրադարձություններ"
 
 msgid "Help"
 msgstr "Օգնություն"
@@ -355,6 +392,9 @@ msgstr "Ցուցադրվող Անուն"
 
 msgid "Help other members find you and use your real name."
 msgstr "Օգտագործողներին արագությամբ գտնելու համար տրամադրեք ձեր իրական անունը:"
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr "Սա կօգտագործվի որպես ձեր լոգին: Ծանուցման էլ․նամակները կուղարկվեն այս էլ․հասցեին (եթե ուզում եք ստանալ դրանք)."
 
 msgid "fields.managed_tags.label"
 msgstr ""
@@ -439,8 +479,9 @@ msgstr "Հրավերներ"
 msgid "Forum"
 msgstr "Ֆորում"
 
-msgid "Map"
-msgstr "Քարտեզ"
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Բացահայտել"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -517,6 +558,9 @@ msgstr "Այս անձնական էջյ այլևս ակտիվ չէ: Դուք դո
 #| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Այս անձնական էջյ այլևս ակտիվ չէ: Դուք դուրս եք եկել համակարգից."
+
+msgid "You have been logged out for security reasons, please log in again."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -2343,10 +2387,6 @@ msgid "Create-Project or Group Button"
 msgstr "Ստեղծել Նախագիծ կամ Խումբ կոճակ"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Իրադարձություններ"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Նախագծեր"
 
@@ -3468,11 +3508,6 @@ msgstr ""
 
 msgid "Withdraw"
 msgstr "Հեռացնել"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "Conference Applications"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Manage participation applications"
 msgstr ""
@@ -5123,10 +5158,6 @@ msgstr "Facebook- ի ինտեգրումն հնարավոր է միայն նախ�
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Հրավերներ"
-
 msgid "About me"
 msgstr "Իմ մասին"
 
@@ -5178,6 +5209,9 @@ msgstr "Նախագծեր չկան."
 
 msgid "There are no invitations."
 msgstr "Հրավերներ չկան."
+
+msgid "Map"
+msgstr "Քարտեզ"
 
 #, fuzzy
 msgid "Meeting"
@@ -5545,11 +5579,19 @@ msgstr "Հանրային տեսանելի բովանդակությունը ցա�
 msgid "Registered users only"
 msgstr "Միայն գրանցված օգտատերերը"
 
-msgid "Edit folder"
-msgstr "Խմբագրել թղթապանակը"
-
 msgid "Folder name"
 msgstr "Թղթապանակի անունը"
+
+msgid "OK"
+msgstr "OK"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a new name for the folder"
+msgstr "Մուտքագրեք անուն նախագծի համար."
+
+msgid "Edit folder"
+msgstr "Խմբագրել թղթապանակը"
 
 msgid "Delete folder"
 msgstr "Ջնջել թղթապանակը"
@@ -5575,11 +5617,15 @@ msgstr "Հետ"
 msgid "Back to"
 msgstr "Հետ դեպի"
 
+msgid "Create folder"
+msgstr "Ստեղծել թղթապանակ"
+
 msgid "New folder name"
 msgstr "Թղթապանակի նոր անունը"
 
-msgid "Create folder"
-msgstr "Ստեղծել թղթապանակ"
+#, fuzzy
+msgid "Enter a name for the new folder"
+msgstr "Մուտքագրեք անուն նախագծի համար."
 
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
@@ -6132,9 +6178,6 @@ msgstr "Միայն Մուտք գործած Անդամներ"
 msgid "Everybody"
 msgstr "Բոլորը"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Toggle navigation"
 msgstr "Նավիգացիայի փոփոխում"
 
@@ -6418,9 +6461,6 @@ msgstr "Գրանցվելուց հետո դուք ավտոմատ կերպով կ�
 
 msgid "Email address"
 msgstr "Էլեկտրոնային հասցե"
-
-msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Սա կօգտագործվի որպես ձեր լոգին: Ծանուցման էլ․նամակները կուղարկվեն այս էլ․հասցեին (եթե ուզում եք ստանալ դրանք)."
 
 msgid "Repeat Password"
 msgstr "Կրկնեք գաղտնաբառը"
@@ -6729,10 +6769,6 @@ msgstr "Որոնել այս տարածքում"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Find partners"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership Requests"
-msgstr "Անդամակցության Հայտեր"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -7190,6 +7226,11 @@ msgstr ""
 msgid "Edit Profile"
 msgstr "Խմբագրել Պրոֆիլը"
 
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Խմբագրել ձեր էջը"
+
 msgid "Legacy Messages Archive"
 msgstr ""
 
@@ -7343,6 +7384,9 @@ msgstr "Ջնջել օգտատիրոջ անձնական էջը"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Օգտատիրոջ անձնական էջ։ %(username)s"
+
+msgid "(ADMIN) View in Admin"
+msgstr ""
 
 msgid "Cooperation requests"
 msgstr "Համագործակցության հայցեր"
@@ -8103,14 +8147,6 @@ msgstr "Առաջարկ"
 #| msgid "Post new Offer"
 msgid "Post new Offer in "
 msgstr "Հրապարակել նոր Առաջարկ"
-
-msgid "New!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up your Profile"
-msgstr "Խմբագրել ձեր էջը"
 
 msgid "Edit My Profile"
 msgstr "Խմբագրել Իմ Անձնական Էջը"
@@ -11658,6 +11694,10 @@ msgstr ""
 msgid "Contact request"
 msgstr "Ընդունել Անդամ"
 
+#, fuzzy
+msgid "This content has been hidden or removed."
+msgstr "Ձեր փոփոխությունները պահպանվել են."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Կարող եք ֆայլեր և նկարներ կցել հաղորդագրություններին, եթե ֆորումի անդամ եք: Ֆորումին կարող եք միանալ այստեղ ՝:"
 
@@ -14352,6 +14392,16 @@ msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս 
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս թիմը?"
+
+#, fuzzy
+#~| msgid "Edit My Profile"
+#~ msgid "Edit my Profile"
+#~ msgstr "Խմբագրել Իմ Անձնական Էջը"
+
+#, fuzzy
+#~| msgid "Edit Your Profile"
+#~ msgid "Set up your Profile"
+#~ msgstr "Խմբագրել ձեր էջը"
 
 #, fuzzy
 #~ msgid "This project shall be made publicly findable via other platforms."

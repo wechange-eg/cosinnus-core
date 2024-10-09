@@ -18,7 +18,7 @@ from rocketchat_API.APIExceptions.RocketExceptions import RocketAuthenticationEx
 from rocketchat_API.rocketchat import RocketChat as RocketChatAPI
 
 from cosinnus.conf import settings
-from cosinnus.models import MEMBERSHIP_ADMIN
+from cosinnus.models import MEMBERSHIP_ADMIN, BaseTagObject
 from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_PENDING
@@ -1541,6 +1541,10 @@ class RocketChatConnection:
 
     def _format_relay_message(self, instance):
         """Creates a readable chat message for an instance implementing the RelayMessageMixin"""
+        # do not relay private messages, but instead show a placeholder text, for when they are shown again
+        if hasattr(instance, 'media_tag') and getattr(instance, 'media_tag', None):
+            if instance.media_tag.visibility == BaseTagObject.VISIBILITY_USER:
+                return '_(%s)_' % _('This content has been hidden or removed.')
         url = instance.get_absolute_url()
         message_text = instance.get_message_text()
         text = self.format_message(message_text)
