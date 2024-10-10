@@ -10,7 +10,7 @@ from cosinnus.utils.search import (
     TemplateResolveNgramField,
     TimezoneAwareHaystackDateTimeField,
 )
-from cosinnus_exchange.models import ExchangeConference
+from cosinnus_exchange.models import ExchangeConference, ExchangeExternalResource
 
 from .models import ExchangeEvent, ExchangeOrganization, ExchangeProject, ExchangeSociety
 
@@ -101,3 +101,12 @@ class ExchangeEventIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexa
 
     def get_model(self):
         return ExchangeEvent
+
+
+class ExchangeExternalResourceIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexable):
+    description_detail = indexes.CharField(stored=True, indexed=False, null=True, model_attr='description_detail')
+    contact = indexes.CharField(stored=True, indexed=False, null=True, model_attr='contact_info')
+    website_url = indexes.CharField(stored=True, indexed=False, null=True, model_attr='website_url')
+
+    def get_model(self):
+        return ExchangeExternalResource
