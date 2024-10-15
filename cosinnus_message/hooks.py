@@ -97,8 +97,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(post_delete, sender=CosinnusConference)
     def handle_cosinnus_group_deleted(sender, instance, **kwargs):
         """Delete group channels."""
-        group_room_ids = instance.get_rocketchat_room_ids()
-        for room_id in group_room_ids:
+        for room_id in instance.get_rocketchat_room_ids():
             tasks.rocket_group_room_delete_task.delay(room_id)
 
     @receiver(signals.group_deactivated)
