@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 16:28+0200\n"
+"POT-Creation-Date: 2024-10-15 16:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: gpt-po v1.0.6\n"
 "Language-Team: \n"
@@ -8286,13 +8286,27 @@ msgstr ""
 
 #, fuzzy
 #| msgid "Version 1.20.0 released"
-msgid "Version 2.0.0 released"
+msgid "Version 2.1.0 released"
 msgstr "Versión 1.20.0 lanzada"
 
 #, fuzzy
 #| msgid "This update includes several bugfixes:"
 msgid "This update includes several features and bugfixes:"
 msgstr "Esta actualización incluye varias correcciones de errores:"
+
+msgid ""
+"- Fixed a bug where registered users could not enter BBB Meetings in public events, projects and groups that they were not a member of.\n"
+"- Fixed a bug where users who wanted to deleted their accounts would incorrectly see an error message saying they were the only admin in a project or group.\n"
+"- Fixed a bug where long text in poll options was sometimes not shown properly.\n"
+"- As an additional account security measure, all user sessions except the current one are now logged out after changing your account password or email.\n"
+"- (RocketChat) improved the stability and performance of the integration with RocketChat (if enabled).\n"
+"- The latest security updates have been applied and further minor bugfixes have been made.\n"
+msgstr ""
+
+#, fuzzy
+#| msgid "Version 1.20.0 released"
+msgid "Version 2.0.0 released"
+msgstr "Versión 1.20.0 lanzada"
 
 msgid ""
 "- User accounts with unverified email addresses are no longer shown as \"inactive\" in member lists and their profiles are now always displayed properly.\n"

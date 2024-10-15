@@ -30,6 +30,19 @@ UPDATES = {
             settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
         ),
     },
+    '2.1.0': {
+        'datetime': datetime(2024, 10, 15, tzinfo=pytz.utc),
+        'title': _('Version 2.1.0 released'),
+        'short_text': _('This update includes several features and bugfixes:'),
+        'full_text': _(
+            '- Fixed a bug where registered users could not enter BBB Meetings in public events, projects and groups that they were not a member of.\n'
+            '- Fixed a bug where users who wanted to deleted their accounts would incorrectly see an error message saying they were the only admin in a project or group.\n'
+            '- Fixed a bug where long text in poll options was sometimes not shown properly.\n'
+            '- As an additional account security measure, all user sessions except the current one are now logged out after changing your account password or email.\n'
+            '- (RocketChat) improved the stability and performance of the integration with RocketChat (if enabled).\n'
+            '- The latest security updates have been applied and further minor bugfixes have been made.\n'
+        ),
+    },
     '2.0.0': {
         'datetime': datetime(2024, 6, 5, tzinfo=pytz.utc),
         'title': _('Version 2.0.0 released'),
