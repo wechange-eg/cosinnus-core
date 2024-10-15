@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from haystack import indexes
 
 from cosinnus.conf import settings
+from cosinnus.trans.exchange import CosinnusExternalResourceTrans
 from cosinnus.utils.search import (
     CommaSeperatedIntegerMultiValueField,
     TemplateResolveCharField,
@@ -104,6 +105,9 @@ class ExchangeEventIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexa
 
 
 class ExchangeExternalResourceIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexable):
+    rendered = TemplateResolveCharField(
+        use_template=True, indexed=False, additional_context={'LARGE_ICON': CosinnusExternalResourceTrans.LARGE_ICON}
+    )
     description_detail = indexes.CharField(stored=True, indexed=False, null=True, model_attr='description_detail')
     contact = indexes.CharField(stored=True, indexed=False, null=True, model_attr='contact_info')
     website_url = indexes.CharField(stored=True, indexed=False, null=True, model_attr='website_url')

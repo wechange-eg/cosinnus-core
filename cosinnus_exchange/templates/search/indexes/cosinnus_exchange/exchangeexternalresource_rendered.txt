@@ -6,9 +6,7 @@
 	        <ul class="media-list large-space">
 	            <li class="media">
                     <span class="pull-left">
-                        {% if external_resource.icon_image_url %}
-                            <img src="{{ external_resource.icon_image_url }}" title="{{ external_resource.title }}" />
-                        {% endif %}
+						<img src="{% if external_resource.icon_image_url %}{{ external_resource.icon_image_url }}{% else %}{% static LARGE_ICON %}{% endif %}" title="{{ external_resource.title }}" />
                     </span>
 	                <div class="media-body">
 						<span class="annotation">
