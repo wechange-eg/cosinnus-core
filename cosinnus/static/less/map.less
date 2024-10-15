@@ -132,6 +132,12 @@
     .apply-bg-color-liked {
         background-color: @map-liked-color;
     }
+    .apply-color-externalresources {
+        color: @map-externalresources-color;
+    }
+    .apply-bg-color-externalresources {
+        background-color: @map-externalresources-color;
+    }
 
     .inline-spacer {
         display: inline-block;
@@ -224,7 +230,8 @@
     .placemark(organizations, organization);
     .placemark(people, person);
     .placemark(projects, project);
-    
+    .placemark(externalresources, externalresource);
+
 }
 .app-root.no-navbar, .app-root.no-navbar .map-fullscreen, .app-root.no-navbar .tile-list-fullscreen {
     top: 0;
@@ -477,6 +484,13 @@
         background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-organizations-color', GradientType=0); /* IE6-9 */
     }
+    .image-placeholder-background-externalresources {
+        background: @map-ideas-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-organizations-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-organizations-color', GradientType=0); /* IE6-9 */
+    }
 
     .one-line {
         white-space: nowrap;
@@ -500,6 +514,7 @@
     .dual-tile-image {
         position: relative;
         padding-top: 55%;
+        overflow: hidden;
                 
         .tile-image-background {
             position: absolute;
@@ -712,6 +727,7 @@
     /** The image is smaller in height (and gets delivered that way) */
     .dual-tile-image {
         padding-top: 35%;
+        overflow: hidden;
         .floating-tile-image {
             position: absolute;
             width: 15%;

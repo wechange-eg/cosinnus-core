@@ -1,0 +1,64 @@
+{% extends 'tiles/tile-detail-base' %}
+{% import "include/macros.html" as macros %}
+
+{% block action_buttons %}
+  <a class="rounded-button button-action" href="{{ url }}" target="_blank">
+          <span class="rounded-button-inner">
+            Beteiligunsprojekt ansehen
+          </span>
+  </a>
+{% endblock action_buttons %}
+
+{% block description %}
+  <div class="tile-section description extra-space-top">
+    {% if description_detail %}
+      {{ description_detail|safe }}
+    {% else %}
+      <p class="pale-color">
+        <i>
+          {# Translators: __INCLUDE_JS_PO__ #}
+          {% trans "No description yet." %}
+        </i>
+      </p>
+    {% endif %}
+  </div>
+{% endblock description %}
+
+{% block contact %}
+  <div class="tile-section tile-section-divided">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="subheading">
+          {# Translators: __INCLUDE_JS_PO__ #}
+          {% trans "Contact" %}
+        </div>
+          {% if not website_url and not contact %}
+            <p class="pale-color">
+              <i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "No info." %}
+              </i>
+            </p>
+          {% else %}
+          {% if contact %}
+            <div class="tile-section">
+              {{ contact|safe }}
+            </div>
+          {% endif %}
+          {% if website_url %}
+            <div class="tile-section tile-section-compact">
+              <a href="{{ website_url }}" target="_blank" class="compact-link">
+                <i class="fa fa-globe"></i>{{ website_url }}
+              </a>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock contact %}
+
+{% block report_object %}{% endblock report_object %}
+
+{% block create_modified_timestamps %}{% endblock create_modified_timestamps %}
+

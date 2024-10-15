@@ -19,6 +19,7 @@ from cosinnus.forms.user import TermsOfServiceFormFields
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import CosinnusManagedTag
 from cosinnus.models.profile import GlobalBlacklistedEmail
+from cosinnus.trans.exchange import CosinnusExternalResourceTrans
 from cosinnus.trans.group import get_group_trans_by_type
 from cosinnus.utils.permissions import check_user_verified
 from cosinnus.utils.user import check_user_has_accepted_portal_tos, get_user_tos_accepted_date
@@ -114,7 +115,7 @@ def cosinnus(request):
     else:
         version_history, version_history_unread_count = get_version_history_for_user(request.user)
 
-    return {
+    context = {
         'COSINNUS_BASE_URL': base_url,
         'COSINNUS_CURRENT_APP': current_app_name,
         'COSINNUS_DATE_FORMAT': get_format('COSINNUS_DATETIMEPICKER_DATE_FORMAT'),
@@ -139,6 +140,13 @@ def cosinnus(request):
         'COSINNUS_VERSION_HISTORY_UNREAD_COUNT': version_history_unread_count,
         'COSINNUS_V3_API_CONTENT_ACTIVE': v3_api_content_active,
     }
+    if getattr(SETTINGS, 'COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED', False):
+        context.update(
+            {
+                'COSINNUS_EXTERNAL_RESOURCE_TRANS': CosinnusExternalResourceTrans,
+            }
+        )
+    return context
 
 
 def tos_check(request):
