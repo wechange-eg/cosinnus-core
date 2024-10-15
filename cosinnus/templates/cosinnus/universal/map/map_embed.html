@@ -50,6 +50,12 @@
 		{% include 'cosinnus/map/extra_head_map.html' %}
         
         <script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
+        {# Patch-fix to prevent https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/ until we update jQuery to >=3.5 #}
+        <script type="text/javascript">
+            $.htmlPrefilter = function(html) {
+                return html;
+            }
+        </script>
         <script src="{% static 'js/vendor/underscore-1.12.1.js' %}"></script>
         <script src="{% static 'js/vendor/backbone-1.3.3.js' %}"></script>
         <script src="{% static 'js/vendor/leaflet.js' %}"></script>
@@ -61,7 +67,7 @@
 	    <script src="{% static 'js/vendor/moment-timezone-with-data-0.5.43.min.js' %}"></script>
         <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
-        {% if request.LANGUAGE_CODE in 'de,en,ru,uk' %}
+        {% if request.LANGUAGE_CODE in 'de,en,ru,uk,pl' %}
         <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
         {% else %}
         <script src="{% static 'js/locale/en/cosinnus_formats.js' %}?lang=en&v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>

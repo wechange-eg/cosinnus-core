@@ -217,6 +217,10 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         with open('.env', 'a') as envfile:
             envfile.write(f'WECHANGE_SECRET_KEY={SECRET_KEY}\n')
 
+    # Proxy settings
+    # Make build_absolute_uri use "https" behind the proxy. E.g. this is needed for the OpenID auto-discovery view.
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
     """ --------------- SESSION/COOKIES ---------------- """
 
     # use session storage for CSRF instead of cookie
@@ -653,10 +657,11 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.cron.DeleteOldGuestUsers',
         'cosinnus_conference.cron.SendConferenceReminders',
         'cosinnus_event.cron.TriggerBBBStreamers',
-        'cosinnus_exchange.cron.PullData',
         'cosinnus_marketplace.cron.DeactivateExpiredOffers',
         'cosinnus_message.cron.ProcessDirectReplyMails',
         'cosinnus_notifications.cron.DeleteOldNotificationAlerts',
+        'cosinnus.cron.DeleteOldSentEmailLogs',
+        'cosinnus_exchange.cron.PullData',
     ]
     # delete cronjob logs older than 30 days
     DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
@@ -697,7 +702,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # (can be set for each portal individually in their settings.py)
     COSINNUS_MICROSITES_ENABLED = True
 
-    # NOTE: CELERY IS NOW DISABLED UNTIL THE SERVICE HAS BEEN UPDATED
     COSINNUS_USE_CELERY = False
     BROKER_URL = f'redis://localhost:6379/{SITE_ID}'
     CELERY_RESULT_BACKEND = 'redis://localhost:6379'
@@ -834,8 +838,31 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
 
     # django-oauth-toolkit settings
     OAUTH2_PROVIDER = {
+        'OAUTH2_VALIDATOR_CLASS': 'cosinnus.oauth_validators.CustomOAuth2Validator',
         'PKCE_REQUIRED': False,
     }
+
+    # Enables OpenID Connect (OIDC) support of the django-oauth-toolkit.
+    # OIDC can be used with two different algorithms for signing JWT tokens "RS256" and "HS256".
+    # "HS256" has some limitation, e.g. can't be used for public clients.
+    # "RS256" requires a private ssl key to be configured via the WECHANGE_OAUTH_OIDC_PRIVATE_KEY .env variable. The
+    # public key does not need to be set but can be kept on the server for manual validation.
+    # See dokumentation at: https://django-oauth-toolkit.readthedocs.io/en/latest/oidc.html
+    _oidc_enabled = project_settings.get('OAUTH_OIDC_ENABLED', False)
+    if _oidc_enabled:
+        OAUTH2_PROVIDER.update(
+            {
+                'OIDC_ENABLED': True,
+                'OIDC_RSA_PRIVATE_KEY': env.str('WECHANGE_OAUTH_OIDC_PRIVATE_KEY', multiline=True, default=''),
+                'SCOPES': {
+                    # default scopes
+                    'read': 'Read scope',
+                    'write': 'Write scope',
+                    # add openid scope
+                    'openid': 'OpenID Connect scope',
+                },
+            }
+        )
 
     # Organizations
     COSINNUS_ORGANIZATIONS_ENABLED = False
@@ -890,7 +917,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     COSINNUS_EXCHANGE_BACKENDS = []
 
     LOGIN_REDIRECT_URL = '/dashboard/'
-    
+
     # reconfigure the el_pagination label so we can identify it better
     EL_PAGINATION_PAGE_LABEL = 'endless_page'
 

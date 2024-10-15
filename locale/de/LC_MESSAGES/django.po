@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:30+0200\n"
+"POT-Creation-Date: 2024-10-15 16:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -169,6 +169,28 @@ msgid "Reactivate user accounts"
 msgstr "Reaktiviere Benutzerkontos"
 
 #, python-format
+msgid ""
+"%(user_count)d User account(s) were deactivated successfully. \n"
+"%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+"%(hidden_content_count)d contents have been set invisible. \n"
+"The user(s) will be deleted after 30 days."
+msgstr ""
+"%(user_count)d Benutzerkonten wurden erfolgreich deaktiviert. \n"
+"%(deactivated_groups_count)d Gruppen und Projekte wurden erfolgreich deaktivier. \n"
+"%(hidden_content_count)d Inhalte wurden unsichtbar gemacht. \n"
+"Die Benutzerkonten werden nach 30 Tagen gelöscht."
+
+msgid "(SPAM) DEACTIVATE user and their contents (user deletion in 30d)"
+msgstr "(SPAM) DEAKTIVIERE diese Benutzerkonten und ihre Inhalte (Kontenlöschung nach 30 Tagen)"
+
+#, python-format
+msgid "%(count)d Users were logged out."
+msgstr "%(count)d Benutzer/innen wurden erfolgreich ausgeloggt"
+
+msgid "Logout users"
+msgstr "Benutzer/innen ausloggen"
+
+#, python-format
 msgid "%(count)d Users' group memberships were refreshed."
 msgstr "%(count)d Gruppenmitgliedschaften der Benutzer/innen wurden aktualisiert."
 
@@ -198,6 +220,13 @@ msgstr "Rocket: Reparieren/Erstellen von fehlenden Rocketchat-Konten von Benutze
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaften für Benutzer/innen beheben"
+
+#, python-format
+msgid "%d Users were made Nextcloud admins."
+msgstr "%d Benutzer/innen wurden zu Nextcloud-Admins gemacht."
+
+msgid "Nextcloud: Make user Nextcloud admin"
+msgstr "Rocket: Benutzer/in zum Nextcloud-Admin machen"
 
 msgid "Recipients Count"
 msgstr "Anzahl der Empfänger"
@@ -238,6 +267,18 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Inhalte"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Einladungen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "Mitgliedschaftsanträge"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Conference Applications"
+msgstr "Tagungs-Teilnahmeanträge"
+
 msgid "Change Language"
 msgstr "Sprache ändern"
 
@@ -248,12 +289,6 @@ msgstr "Mein Profil"
 msgid "My Guest Account"
 msgstr "Mein Gastkonto"
 
-msgid "Set up my Profile"
-msgstr "Richte dein Profil ein"
-
-msgid "Edit my Profile"
-msgstr "Profil-Einstellungen"
-
 msgid "Notification Preferences"
 msgstr "Benachrichtigungseinstellungen"
 
@@ -262,6 +297,10 @@ msgstr "Dein Beitrag"
 
 msgid "Administration"
 msgstr "Administration"
+
+#, python-format
+msgid "About %(portal_name)s"
+msgstr "Über %(portal_name)s"
 
 msgid "Logout"
 msgstr "Abmelden"
@@ -288,8 +327,8 @@ msgid "Messages"
 msgstr "Nachrichten"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Entdecken"
+msgid "Events"
+msgstr "Veranstaltungen"
 
 msgid "Help"
 msgstr "Hilfe"
@@ -317,6 +356,9 @@ msgstr "Anzeigename"
 
 msgid "Help other members find you and use your real name."
 msgstr "Hilf anderen Mitgliedern dich schneller zu finden und gebe deinen Klarnamen an."
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-E-Mails geschickt (wenn du das möchtest)"
 
 msgid "fields.managed_tags.label"
 msgstr ""
@@ -392,8 +434,9 @@ msgstr "Digitalisierung"
 msgid "Forum"
 msgstr "Forum"
 
-msgid "Map"
-msgstr "Karte"
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Entdecken"
 
 msgid "Overnight stay required"
 msgstr "Übernachtung benötigt"
@@ -464,6 +507,9 @@ msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Dein Gastzugang ist abgelaufen. Du wurdest ausgeloggt."
+
+msgid "You have been logged out for security reasons, please log in again."
+msgstr "Du wurdest aus sicherheitstechnischen Gründen ausgeloggt, bitte logge dich erneut ein."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E-Mails geklickt hast. Als Vorsichtsmaßnahme verlinken wir nicht direkt auf externe Webseiten aus unseren E-Mails. Bitte klicke den Link unten erneut wenn du die Seite besuchen möchtest."
@@ -2194,10 +2240,6 @@ msgid "Create-Project or Group Button"
 msgstr "Projekt oder Gruppe-erstellen Button"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Veranstaltungen"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Projekte"
 
@@ -3273,10 +3315,6 @@ msgstr "Anmeldung zur Tagungsteilnahme"
 
 msgid "Withdraw"
 msgstr "Zurückziehen"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Conference Applications"
-msgstr "Tagungs-Teilnahmeanträge"
 
 msgid "Manage participation applications"
 msgstr "Teilnahmeanträge bearbeiten"
@@ -4781,10 +4819,6 @@ msgstr "Die Facebook-Integration wird verfügbar sobald du das Projekt erstellt 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Das hier eingegebene HTML wird auf dem Gruppen/Projektdashboard dargestellt (nur für Mitglieder)"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Einladungen"
-
 msgid "About me"
 msgstr "Über mich"
 
@@ -4835,6 +4869,9 @@ msgstr "Es gibt keine sichtbaren Projekte."
 
 msgid "There are no invitations."
 msgstr "Es gibt aktuell keine Einladungen."
+
+msgid "Map"
+msgstr "Karte"
 
 msgid "Meeting"
 msgstr "Meeting"
@@ -5166,11 +5203,17 @@ msgstr "Das bedeutet, dass jeder im Internet darauf Zugriff hat und es lesen kan
 msgid "Registered users only"
 msgstr "Nur registrierte Benutzer/innen"
 
-msgid "Edit folder"
-msgstr "Ordner bearbeiten"
-
 msgid "Folder name"
 msgstr "Ordnername"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Enter a new name for the folder"
+msgstr "Gib einen neuen Namen für den Ordner ein."
+
+msgid "Edit folder"
+msgstr "Ordner bearbeiten"
 
 msgid "Delete folder"
 msgstr "Ordner löschen"
@@ -5196,11 +5239,14 @@ msgstr "Zurück"
 msgid "Back to"
 msgstr "Zurück zu"
 
+msgid "Create folder"
+msgstr "Ordner erstellen"
+
 msgid "New folder name"
 msgstr "Neuer Ordnername"
 
-msgid "Create folder"
-msgstr "Ordner erstellen"
+msgid "Enter a name for the new folder"
+msgstr "Gib einen Namen für den neuen Ordner ein."
 
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
@@ -5797,9 +5843,6 @@ msgstr "Nur eingeloggte Mitglieder"
 msgid "Everybody"
 msgstr "Jeder"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
 
@@ -6073,9 +6116,6 @@ msgstr "Nach dem Registrieren wirst du automatisch Mitglied in den dazugehörige
 
 msgid "Email address"
 msgstr "E-Mail Adresse"
-
-msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-E-Mails geschickt (wenn du das möchtest)"
 
 msgid "Repeat Password"
 msgstr "Passwort wiederholen"
@@ -6374,10 +6414,6 @@ msgstr "In diesem Ausschnitt suchen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Find partners"
 msgstr "Partner finden"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership Requests"
-msgstr "Mitgliedschaftsanträge"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -6817,6 +6853,9 @@ msgstr "Als Gast beitreten"
 msgid "Edit Profile"
 msgstr "Profil bearbeiten"
 
+msgid "Set up my Profile"
+msgstr "Richte dein Profil ein"
+
 msgid "Legacy Messages Archive"
 msgstr "Archiv für ältere Nachrichten"
 
@@ -6965,6 +7004,9 @@ msgstr "Benutzer/innen-Konto löschen"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Benutzer/innen-Profil: %(username)s"
+
+msgid "(ADMIN) View in Admin"
+msgstr ""
 
 msgid "Cooperation requests"
 msgstr "Kooperationsanfragen"
@@ -7689,12 +7731,6 @@ msgstr "Inserat"
 msgid "Post new Offer in "
 msgstr "Neues Inserat eintragen in "
 
-msgid "New!"
-msgstr "Neu!"
-
-msgid "Set up your Profile"
-msgstr "Richte dein Profil ein"
-
 msgid "Edit My Profile"
 msgstr "Profil-Einstellungen"
 
@@ -8249,11 +8285,29 @@ msgstr ""
 "\n"
 "Dies ist das Auftakt-Update für viele weitere spannende Funktionen und Verbesserungen der Benutzeroberfläche, die in naher Zukunft kommen werden!"
 
-msgid "Version 2.0.0 released"
-msgstr "Version 2.0.0 veröffentlicht"
+msgid "Version 2.1.0 released"
+msgstr "Version 2.1.0 veröffentlicht"
 
 msgid "This update includes several features and bugfixes:"
 msgstr "Das Update enthält mehrere Features und Bugfixes:"
+
+msgid ""
+"- Fixed a bug where registered users could not enter BBB Meetings in public events, projects and groups that they were not a member of.\n"
+"- Fixed a bug where users who wanted to deleted their accounts would incorrectly see an error message saying they were the only admin in a project or group.\n"
+"- Fixed a bug where long text in poll options was sometimes not shown properly.\n"
+"- As an additional account security measure, all user sessions except the current one are now logged out after changing your account password or email.\n"
+"- (RocketChat) improved the stability and performance of the integration with RocketChat (if enabled).\n"
+"- The latest security updates have been applied and further minor bugfixes have been made.\n"
+msgstr ""
+"- Es wurde ein Fehler behoben, durch den registrierte Benutzer/inen keine BBB-Meetings in öffentlichen Veranstaltungen, Projekten und Gruppen besuchen konnten, in denen sie nicht Mitglied waren.\n"
+"- Es wurde ein Fehler behoben, bei dem Benutzer/innen, die ihre Konten löschen wollten, fälschlicherweise eine Fehlermeldung erhielten, dass sie der/die letzte Administrator/in in einem Projekt oder einer Gruppe seien.\n"
+"- Es wurde ein Fehler behoben, bei dem längere Texte in Umfrageoptionen manchmal nicht richtig angezeigt wurde.\n"
+"- Als zusätzliche Kontosicherheitsmaßnahme werden nun alle Sitzungen außer der aktuellen ausgeloggt, wenn man das Kontopasswort oder die E-Mail ändert.\n"
+"- (RocketChat) Es wurden Verbesserrungen für mehr Stabilität und Geschwindigkeit der Integration mit RocketChat vorgenommen (falls aktiviert).\n"
+"- Die neuesten Sicherheitsupdates wurden eingespielt und weitere kleinere Fehlerbehebungen vorgenommen.\n"
+
+msgid "Version 2.0.0 released"
+msgstr "Version 2.0.0 veröffentlicht"
 
 msgid ""
 "- User accounts with unverified email addresses are no longer shown as \"inactive\" in member lists and their profiles are now always displayed properly.\n"
@@ -11159,6 +11213,9 @@ msgstr "Es ist ein technischer Fehler beim RocketChat Dienst aufgetreten. Einige
 msgid "Contact request"
 msgstr "Kontaktanfrage"
 
+msgid "This content has been hidden or removed."
+msgstr "Dieser Inhalt wurde versteckt oder entfernt."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Du kannst Dateien und Bilder nur anhängen, wenn du Mitglied im Forum bist. Du kannst hier beitreten:"
 
@@ -13734,6 +13791,15 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
+#~ msgid "Edit my Profile"
+#~ msgstr "Profil-Einstellungen"
+
+#~ msgid "New!"
+#~ msgstr "Neu!"
+
+#~ msgid "Set up your Profile"
+#~ msgstr "Richte dein Profil ein"
 
 #~ msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
 #~ msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu deinem Projekt, wie Name und Adresse, an <a href=\"#\" target=\"_blank\">Partnerplattformen</a> von WECHANGE übermittelt werden sollen."

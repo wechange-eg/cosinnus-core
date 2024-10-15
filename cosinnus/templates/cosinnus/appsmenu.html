@@ -46,7 +46,7 @@
             {% if not group.group_is_conference or not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
 		        <li class="app-main appnavi-listelement fine-space">
 		            <a href="{{ group_microsite_page }}">
-		                <i class="fa fa-fw fa-lightbulb-o"></i>
+		                <i class="fa fa-fw fa-info-circle"></i>
 		                {% trans "Microsite" %}
 		            </a>
 		        </li>
@@ -56,7 +56,7 @@
         {% if not group.group_is_conference and group.video_conference_type %}
             <li class="app-main appnavi-listelement fine-space">
                 <a href="{{ group_video_meeting }}">
-                    <i class="fa fa-fw fa-eye"></i>
+                    <i class="fa fa-fw fa-video"></i>
                     {% trans "Video conference" %}
                 </a>
             </li>
@@ -75,11 +75,11 @@
 	        {% for app in apps %}
 		        {% if not group.group_is_conference or app.app == 'cosinnus_event' %}
 		            {% captureas app_css_class %}{% if group.group_is_conference %}app-main{% elif app.app == 'cosinnus_todo' %}app-todos{% elif app.app == 'cosinnus_note' %}app-main{% elif app.app == 'cosinnus_poll' %}app-poll{% elif app.app == 'cosinnus_cloud' %}app-cloud{% elif app.app == 'cosinnus_marketplace' %}app-marketplace{% elif app.app == 'cosinnus_file' %}app-files{% elif app.app == 'cosinnus_etherpad' %}app-etherpad{% elif app.app == 'cosinnus_event' %}app-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
-		            {% captureas app_icon %}{% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_cloud' %}fa-cloud{% elif app.app == 'cosinnus_marketplace' %}fa-exchange{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
+		            {% captureas app_icon %}{% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-broadcast-tower{% elif app.app == 'cosinnus_poll' %}fa-bar-chart{% elif app.app == 'cosinnus_cloud' %}fa-cloud{% elif app.app == 'cosinnus_marketplace' %}fa-exchange-alt{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-edit{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
 		
 			        <li class="{{app_css_class}} appnavi-listelement {% if app.active %}active{% endif %} fine-space">
 			            <a href="{{ app.url }}" {% if app.app == 'cosinnus_cloud' and SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
-			                <i class="fa fa-fw {{ app_icon }}"></i> {{ app.label }}
+			                <i class="fas fa-fw {{ app_icon }}"></i> {{ app.label }}
 			            </a>
 			        </li>
 	            {% endif %}
@@ -140,7 +140,7 @@
 				
 				<li class="app-main appnavi-listelement fine-space">
                     <a href="{{ conference_recorded_meetings_page }}">
-                        <i class="fas fa-video"></i>
+                        <i class="fa fa-play"></i>
                         {% trans "Recorded Meetings" %}
                     </a>
                 </li>

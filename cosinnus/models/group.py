@@ -426,17 +426,11 @@ class CosinnusGroupManager(models.Manager):
         For superusers, returns *all* deactivated groups and projects!
         Note: uncached!
         """
-        from cosinnus.utils.permissions import check_user_superuser
-
         all_inactive_groups = self.get_queryset().filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
-
-        # admins can see *all* inactive groups. for the rest of the users, filter the list to groups they are admin of.
-        if check_user_superuser(user):
-            my_inactive_groups = all_inactive_groups
-        else:
-            my_inactive_groups = all_inactive_groups.filter(
-                id__in=self.get_for_user_group_admin_pks(user, includeInactive=True)
-            )
+        # filter the list to groups they are admin of.
+        my_inactive_groups = all_inactive_groups.filter(
+            id__in=self.get_for_user_group_admin_pks(user, includeInactive=True)
+        )
         return my_inactive_groups
 
     def with_deactivated_app(self, app_name):
@@ -1537,6 +1531,18 @@ class CosinnusBaseGroup(
             return get_cosinnus_group_model().objects.none()
         return get_cosinnus_group_model().objects.filter(is_active=True, conference_room__group=self)
 
+    def get_rocketchat_room_ids(self):
+        """Helper to get the RocketChat room IDs for a group."""
+        from cosinnus.models.profile import PROFILE_SETTING_ROCKET_CHAT_ID
+
+        room_ids = []
+        for room_key in settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS:
+            key = f'{PROFILE_SETTING_ROCKET_CHAT_ID}_{room_key}'
+            room_id = self.settings.get(key)
+            if room_id:
+                room_ids.append(room_id)
+        return room_ids
+
     def get_additional_rocketchat_room_ids(self):
         """A group may have additional rocketchat room IDs that it corresponds to.
         All room ids returned here will also be managed by the rocketchat hooks for
@@ -1654,6 +1660,11 @@ class CosinnusBaseGroup(
 
     def get_icon(self):
         """Returns the font-awesome icon specific to the group type"""
+        # the special forum and events groups have different, hardcoded items:
+        if settings.NEWW_FORUM_GROUP_SLUG and self.slug == settings.NEWW_FORUM_GROUP_SLUG:
+            return 'fa-globe'
+        if settings.NEWW_EVENTS_GROUP_SLUG and self.slug == settings.NEWW_EVENTS_GROUP_SLUG:
+            return 'fa-calendar'
         return self.trans.ICON
 
     def get_group_label(self):
@@ -1807,6 +1818,7 @@ class CosinnusBaseGroup(
 
     def is_app_deactivated(self, app_name):
         """Returns True if the cosinnus app with the given app_name has been deactivated for this group"""
+        # we specifically allow 'cosinnus_file' if it is soft deactivated, to allow attachment uploads
         if self.deactivated_apps:
             return app_name in self.deactivated_apps.split(',')
         return False

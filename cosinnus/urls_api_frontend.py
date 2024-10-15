@@ -9,6 +9,7 @@ from cosinnus.api_frontend.views.navigation import (
     BookmarksView,
     HelpView,
     MainNavigationView,
+    MembershipAlertsView,
     ProfileView,
     SpacesView,
     UnreadAlertsView,
@@ -63,6 +64,9 @@ urlpatterns += [
     path('api/v3/navigation/unread_messages/', UnreadMessagesView.as_view(), name='api-navigation-unread-messages'),
     path('api/v3/navigation/unread_alerts/', UnreadAlertsView.as_view(), name='api-navigation-unread-alerts'),
     path('api/v3/navigation/alerts/', AlertsView.as_view(), name='api-navigation-alerts'),
+    path(
+        'api/v3/navigation/membership_alerts/', MembershipAlertsView.as_view(), name='api-navigation-membership-alerts'
+    ),
     path('api/v3/navigation/help/', HelpView.as_view(), name='api-navigation-help'),
     path('api/v3/navigation/profile/', ProfileView.as_view(), name='api-navigation-profile'),
     path('api/v3/navigation/version_history/', VersionHistoryView.as_view(), name='api-navigation-version-history'),

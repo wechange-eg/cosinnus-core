@@ -12,7 +12,7 @@ from os.path import basename
 from django.contrib import messages
 from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect, StreamingHttpResponse
 from django.http.response import HttpResponseNotAllowed
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.utils.crypto import get_random_string
 from django.utils.datastructures import MultiValueDict
@@ -91,7 +91,18 @@ class FileFormMixin(FilterGroupMixin, GroupFormKwargsMixin, UserFormKwargsMixin)
         return group_aware_reverse('cosinnus:file:list', kwargs={'group': self.group, 'slug': self.object.slug})
 
 
-class FileIndexView(RequireReadMixin, RedirectView):
+class RedirectIfSoftDisabledMixin(object):
+    """Views with this mixin will redirect the user to their dashboard if `COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP`
+    is active. This is in lieu of completely disabling the app."""
+
+    def dispatch(self, *args, **kwargs):
+        if settings.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP:
+            messages.warning(self.request, _('This action is not allowed right now'))
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
+        return super().dispatch(*args, **kwargs)
+
+
+class FileIndexView(RequireReadMixin, RedirectIfSoftDisabledMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, **kwargs):
@@ -105,6 +116,7 @@ class FileHybridListView(
     RequireReadWriteHybridMixin,
     HierarchyPathMixin,
     HierarchicalListCreateViewMixin,
+    RedirectIfSoftDisabledMixin,
     CosinnusFilterMixin,
     FileFormMixin,
     AjaxFormsCreateViewMixin,
@@ -234,7 +246,7 @@ class FileListView(RequireReadMixin, FilterGroupMixin, FormMixin, HierarchyTreeM
 file_list_view = FileListView.as_view()
 
 
-class FileUpdateView(RequireWriteMixin, FileFormMixin, UpdateView):
+class FileUpdateView(RequireWriteMixin, RedirectIfSoftDisabledMixin, FileFormMixin, UpdateView):
     form_view = 'edit'
     form_class = FileForm
     model = FileEntry
@@ -242,6 +254,9 @@ class FileUpdateView(RequireWriteMixin, FileFormMixin, UpdateView):
 
     message_success = _('File "%(title)s" was updated successfully.')
     message_error = _('File "%(title)s" could not be updated.')
+
+    # allow updates for inline uploads during soft disable mode
+    ALLOW_VIEW_ACCESS_WHEN_GROUP_APP_DEACTIVATED = True  # COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP
 
     def get_context_data(self, **kwargs):
         context = super(FileUpdateView, self).get_context_data(**kwargs)
@@ -373,7 +388,7 @@ class RocketFileDownloadView(RecordLastVisitedMixin, DetailView):
 rocket_file_download_view = RocketFileDownloadView.as_view()
 
 
-class FolderDownloadView(RequireReadMixin, FilterGroupMixin, DetailView):
+class FolderDownloadView(RequireReadMixin, RedirectIfSoftDisabledMixin, FilterGroupMixin, DetailView):
     """
     Lets the user download a FileEntry file (file is determined by slug),
     while the user never gets to see the server file path.
@@ -475,14 +490,14 @@ class FolderDownloadView(RequireReadMixin, FilterGroupMixin, DetailView):
 folder_download_view = FolderDownloadView.as_view()
 
 
-class FileMoveElementView(MoveElementView):
+class FileMoveElementView(RedirectIfSoftDisabledMixin, MoveElementView):
     model = FileEntry
 
 
 move_element_view = FileMoveElementView.as_view()
 
 
-class FileDeleteElementView(DeleteElementView):
+class FileDeleteElementView(RedirectIfSoftDisabledMixin, DeleteElementView):
     model = FileEntry
 
 

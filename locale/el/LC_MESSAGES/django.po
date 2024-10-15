@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:30+0200\n"
+"POT-Creation-Date: 2024-10-15 16:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -180,6 +180,26 @@ msgstr "%d Χρήστες απενεργοποιήθηκαν με επιτυχί
 msgid "Reactivate user accounts"
 msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
 
+#, python-format
+msgid ""
+"%(user_count)d User account(s) were deactivated successfully. \n"
+"%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+"%(hidden_content_count)d contents have been set invisible. \n"
+"The user(s) will be deleted after 30 days."
+msgstr ""
+
+msgid "(SPAM) DEACTIVATE user and their contents (user deletion in 30d)"
+msgstr ""
+
+#, python-format
+msgid "%(count)d Users were logged out."
+msgstr ""
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logout users"
+msgstr "Αποσύνδεση"
+
 #, fuzzy, python-format
 #| msgid "%d Users' rocketchat room memberships were re-done."
 msgid "%(count)d Users' group memberships were refreshed."
@@ -211,6 +231,16 @@ msgstr "Rocket: Επιδιορθώστε/δημιουργήστε λογαρια
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Επιδιορθώστε τις συνδρομές χρηστών για δωμάτιο RocketChat"
+
+#, fuzzy, python-format
+#| msgid "%d Users were made RocketChat admins."
+msgid "%d Users were made Nextcloud admins."
+msgstr "%d Χρήστες έγιναν διαχειριστές RocketChat."
+
+#, fuzzy
+#| msgid "Rocket: Make user RocketChat admin"
+msgid "Nextcloud: Make user Nextcloud admin"
+msgstr "Rocket: Ορίστε τον χρήστη ως διαχειριστή RocketChat"
 
 #, fuzzy
 #| msgid "Recipients"
@@ -267,6 +297,18 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Περιεχόμενο"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Προσκλήσεις"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "Αιτήματα συνδρομής"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Conference Applications"
+msgstr "Εφαρμογές Σύσκεψης"
+
 #, fuzzy
 #| msgid "Change language"
 msgid "Change Language"
@@ -280,16 +322,6 @@ msgstr "Το Προφίλ Μου"
 msgid "My Guest Account"
 msgstr "Διαγραφή Λογαριασμού"
 
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up my Profile"
-msgstr "Επεξεργασία του Προφίλ Σας"
-
-#, fuzzy
-#| msgid "Edit My Profile"
-msgid "Edit my Profile"
-msgstr "Επεξεργασία του Προφίλ Μου"
-
 msgid "Notification Preferences"
 msgstr "Προτιμήσεις Ειδοποίησης"
 
@@ -298,6 +330,12 @@ msgstr "Η Συμβολή σας"
 
 msgid "Administration"
 msgstr "Διαχείριση"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "About %(portal_name)s"
+msgstr "σε %(portal_name)s"
 
 msgid "Logout"
 msgstr "Αποσύνδεση"
@@ -328,8 +366,8 @@ msgid "Messages"
 msgstr "Μηνύματα"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Ανακαλύψτε"
+msgid "Events"
+msgstr "Εκδηλώσεις"
 
 msgid "Help"
 msgstr "Βοήθεια"
@@ -358,6 +396,9 @@ msgstr "Εμφανιζόμενο Όνομα"
 
 msgid "Help other members find you and use your real name."
 msgstr "Βοηθήστε τα άλλα μέλη να σας βρουν πιο γρήγορα και εισάγετε το πραγματικό σας όνομα."
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr "Αυτή θα χρησιμοποιηθεί για τη σύνδεσή σας. Email ειδοποίησης θα σταλούν σε αυτή τη διεύθυνση (εάν θέλετε να τα λαμβάνετε)."
 
 msgid "fields.managed_tags.label"
 msgstr ""
@@ -441,8 +482,9 @@ msgstr "Οργανισμός"
 msgid "Forum"
 msgstr "Φόρουμ"
 
-msgid "Map"
-msgstr "Χάρτης"
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Ανακαλύψτε"
 
 msgid "Overnight stay required"
 msgstr "Απαιτείται διανυκτέρευση"
@@ -519,6 +561,9 @@ msgstr "Αυτός ο λογαριασμός δεν είναι πλέον ενε
 #| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Αυτός ο λογαριασμός δεν είναι πλέον ενεργός. Έχετε αποσυνδεθεί."
+
+msgid "You have been logged out for security reasons, please log in again."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -2301,10 +2346,6 @@ msgid "Create-Project or Group Button"
 msgstr "Πλήκτρο Δημιουργίας Έργου ή Ομάδας"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Εκδηλώσεις"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Έργα"
 
@@ -3394,10 +3435,6 @@ msgstr "Αίτηση για συμμετοχή στη σύσκεψη"
 
 msgid "Withdraw"
 msgstr "Αποχώρηση"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Conference Applications"
-msgstr "Εφαρμογές Σύσκεψης"
 
 msgid "Manage participation applications"
 msgstr "Διαχείριση αιτήσεων συμμετοχής"
@@ -5012,10 +5049,6 @@ msgstr "Η ενσωμάτωση του Facebook είναι διαθέσιμη μ
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Το HTML που εισήχθη εδώ θα εμφανιστεί στον πίνακα της ομάδας/έργου (μόνο για μέλη)"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Προσκλήσεις"
-
 msgid "About me"
 msgstr "Σχετικά με εμένα"
 
@@ -5065,6 +5098,9 @@ msgstr "Δεν υπάρχουν έργα."
 
 msgid "There are no invitations."
 msgstr "Δεν υπάρχουν προσκλήσεις."
+
+msgid "Map"
+msgstr "Χάρτης"
 
 #, fuzzy
 msgid "Meeting"
@@ -5409,11 +5445,19 @@ msgstr "Το δημόσια ορατό περιεχόμενο μπορεί να 
 msgid "Registered users only"
 msgstr "Μόνο εγγεγραμμένοι χρήστες"
 
-msgid "Edit folder"
-msgstr "Επεξεργασία φακέλου"
-
 msgid "Folder name"
 msgstr "Όνομα φακέλου"
+
+msgid "OK"
+msgstr "Εντάξει"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a new name for the folder"
+msgstr "Εισάγετε όνομα για το έργο."
+
+msgid "Edit folder"
+msgstr "Επεξεργασία φακέλου"
 
 msgid "Delete folder"
 msgstr "Διαγραφή φακέλου"
@@ -5439,11 +5483,16 @@ msgstr "Πίσω"
 msgid "Back to"
 msgstr "Πίσω σε"
 
+msgid "Create folder"
+msgstr "Δημιουργία φακέλου"
+
 msgid "New folder name"
 msgstr "Νέο όνομα φακέλου"
 
-msgid "Create folder"
-msgstr "Δημιουργία φακέλου"
+#, fuzzy
+#| msgid "Enter a name for the conference."
+msgid "Enter a name for the new folder"
+msgstr "Εισάγετε όνομα για τη σύσκεψη."
 
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
@@ -6037,9 +6086,6 @@ msgstr "Μόνο Συνδεδεμένα Μέλη"
 msgid "Everybody"
 msgstr "Όλοι"
 
-msgid "OK"
-msgstr "Εντάξει"
-
 msgid "Toggle navigation"
 msgstr "Μετακίνηση πλοήγησης"
 
@@ -6314,9 +6360,6 @@ msgstr "Μετά την εγγραφή σας, θα γίνετε αυτόματ�
 
 msgid "Email address"
 msgstr "Διεύθυνση email"
-
-msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Αυτή θα χρησιμοποιηθεί για τη σύνδεσή σας. Email ειδοποίησης θα σταλούν σε αυτή τη διεύθυνση (εάν θέλετε να τα λαμβάνετε)."
 
 msgid "Repeat Password"
 msgstr "Επανάληψη Κωδικού Πρόσβασης"
@@ -6621,10 +6664,6 @@ msgstr "Αναζήτηση αυτής της περιοχής"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Find partners"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership Requests"
-msgstr "Αιτήματα συνδρομής"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -7072,6 +7111,11 @@ msgstr ""
 msgid "Edit Profile"
 msgstr "Επεξεργασία Προφίλ"
 
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Επεξεργασία του Προφίλ Σας"
+
 msgid "Legacy Messages Archive"
 msgstr "Αρχείο Μηνυμάτων Κληροδοτημένου Συστήματος"
 
@@ -7225,6 +7269,9 @@ msgstr "Διαγραφή λογαριασμού χρήστη"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Προφίλ χρήστη: %(username)s"
+
+msgid "(ADMIN) View in Admin"
+msgstr ""
 
 msgid "Cooperation requests"
 msgstr "Αιτήματα συνεργασίας"
@@ -7985,14 +8032,6 @@ msgstr "Προσφορά"
 msgid "Post new Offer in "
 msgstr "Ανάρτηση νέας Προσφοράς"
 
-msgid "New!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up your Profile"
-msgstr "Επεξεργασία του Προφίλ Σας"
-
 msgid "Edit My Profile"
 msgstr "Επεξεργασία του Προφίλ Μου"
 
@@ -8554,10 +8593,22 @@ msgid ""
 "This is a stepping stone update for many more exciting features and interface improvements to come in the near future!"
 msgstr ""
 
-msgid "Version 2.0.0 released"
+msgid "Version 2.1.0 released"
 msgstr ""
 
 msgid "This update includes several features and bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed a bug where registered users could not enter BBB Meetings in public events, projects and groups that they were not a member of.\n"
+"- Fixed a bug where users who wanted to deleted their accounts would incorrectly see an error message saying they were the only admin in a project or group.\n"
+"- Fixed a bug where long text in poll options was sometimes not shown properly.\n"
+"- As an additional account security measure, all user sessions except the current one are now logged out after changing your account password or email.\n"
+"- (RocketChat) improved the stability and performance of the integration with RocketChat (if enabled).\n"
+"- The latest security updates have been applied and further minor bugfixes have been made.\n"
+msgstr ""
+
+msgid "Version 2.0.0 released"
 msgstr ""
 
 msgid ""
@@ -11461,6 +11512,11 @@ msgstr ""
 msgid "Contact request"
 msgstr "Αποδοχή αιτήματος"
 
+#, fuzzy
+#| msgid "Your application has been accepted!"
+msgid "This content has been hidden or removed."
+msgstr "Η αίτησή σας έχει γίνει δεκτή!"
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Μπορείτε να επισυνάψετε αρχεία και εικόνες σε μηνύματα μόνο εάν είστε μέλος του φόρουμ. Μπορείτε να εγγραφείτε εδώ:"
 
@@ -14202,6 +14258,16 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την ομάδα;"
+
+#, fuzzy
+#~| msgid "Edit My Profile"
+#~ msgid "Edit my Profile"
+#~ msgstr "Επεξεργασία του Προφίλ Μου"
+
+#, fuzzy
+#~| msgid "Edit Your Profile"
+#~ msgid "Set up your Profile"
+#~ msgstr "Επεξεργασία του Προφίλ Σας"
 
 #, fuzzy
 #~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."

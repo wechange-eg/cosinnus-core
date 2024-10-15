@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n thumbnail cosinnus_tags cosinnus_map_tags static %}
 
-{% block page_title %}{% if group_type == 1 %}{% trans "Groups" %}{% elif group_type == 0 %}{% trans "Projects" %}{% else %}{% trans "Invitations" %}{% endif %}{% endblock %}
+{% block page_title %}{% trans "Your Deactivated Content" %}{% endblock %}
 
 {% block leftnav %}
     {% if group_type == 1 %}

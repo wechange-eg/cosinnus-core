@@ -202,14 +202,16 @@
                                 {% endif %}
                             {% endblock cloud_app %}
                             {% block file_app %}
-                                {% if "file" in object_counts %}
-                                    <div class="dashboard-header-link app-files mobile-hidden">
-                                        <a href="{% group_url 'cosinnus:file:list' group=group %}">
-                                            <i class="fa fa-file"></i>
-                                            <span>{{ object_counts.file }}</span>
-                                            {% if object_counts.file == 1 %}{% trans "File" %}{% else %}{% trans "Files" %}{% endif %}
-                                        </a>
-                                    </div>
+                                {% if not SETTINGS.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP %}
+                                    {% if "file" in object_counts %}
+                                        <div class="dashboard-header-link app-files mobile-hidden">
+                                            <a href="{% group_url 'cosinnus:file:list' group=group %}">
+                                                <i class="fa fa-file"></i>
+                                                <span>{{ object_counts.file }}</span>
+                                                {% if object_counts.file == 1 %}{% trans "File" %}{% else %}{% trans "Files" %}{% endif %}
+                                            </a>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
                             {% endblock file_app %}
                             {% block etherpad_app %}
@@ -271,7 +273,7 @@
                                 {% if "note" in object_counts %}
                                     <div class="dashboard-header-link app-main mobile-hidden">
                                         <a href="{% group_url 'cosinnus:note:list' group=group %}">
-                                            <i class="fa fa-book"></i>
+                                            <i class="fas fa-broadcast-tower"></i>
                                             <span>{{ object_counts.note }}</span>
                                             {% if object_counts.todo == 1 %}{% trans "News" %}{% else %}{% trans "News" %}{% endif %}
                                         </a>
@@ -294,6 +296,7 @@
                                         <div class="dashboard-header-link app-main mobile-hidden">
                                             <a href="{{ third_party_tool.url }}" target="_blank">
                                                 <i class="fa fa-external-link"></i>
+                                                <span>&nbsp;</span>
                                                 {{ third_party_tool.label|linebreaksbr }}
                                             </a>
                                         </div>

@@ -446,7 +446,7 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         non_safe_groups = []
         for group in CosinnusGroup.objects.get_for_user(user):
             admins = CosinnusGroupMembership.objects.get_admins(group=group)
-            if user.pk in admins:
+            if [user.pk] == admins:
                 non_safe_groups.append(group)
                 is_safe = False
         if non_safe_groups:

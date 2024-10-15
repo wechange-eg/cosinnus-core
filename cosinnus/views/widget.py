@@ -14,6 +14,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 
+from cosinnus.conf import settings
 from cosinnus.core.decorators.views import redirect_to_not_logged_in, require_admin_access_decorator
 from cosinnus.core.registries import widget_registry
 from cosinnus.models.widget import WidgetConfig
@@ -286,6 +287,8 @@ class DashboardWidgetMixin(object):
         for wc in widgets_configs:
             # check deactivated apps to see if widget can't be shown:
             if 'cosinnus_%s' % wc.app_name in deactivated_apps:
+                continue
+            if wc.app_name == 'file' and settings.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP:
                 continue
             # check block list for disallowed widgets (from overriding views)
             if '%s.%s' % (wc.app_name, wc.widget_name.replace(' ', '_')) in self.disallowed_widgets:

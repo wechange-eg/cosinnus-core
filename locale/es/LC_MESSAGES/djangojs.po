@@ -1,0 +1,393 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2020-10-06T13:53:05.285Z\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 2.0.6\n"
+"Project-Id-Version: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: gpt-po v1.0.6\n"
+"Language-Team: \n"
+"Language: es\n"
+
+#: locale/src/views/Discussions/list.json locale/src/views/Lobby/index.json
+#: locale/src/views/Stage/list.json locale/src/views/Workshops/list.json
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+#. [Agenda]
+#. defaultMessage is:
+#. undefined
+msgid "Agenda"
+msgstr "Agenda"
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+#. [Are you sure you want to delete this event?]
+#. defaultMessage is:
+#. undefined
+#. [Are you sure you want to delete this event?]
+#. defaultMessage is:
+#. undefined
+msgid "Are you sure you want to delete this event?"
+msgstr "Estas seguro de que quieres eliminar este evento?"
+
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Are you sure you want to delete this room?]
+#. defaultMessage is:
+#. undefined
+msgid "Are you sure you want to delete this room?"
+msgstr "Estas seguro de que quieres eliminar esta habitación?"
+
+#: locale/src/views/components/Sidebar/index.json
+#. [Chats]
+#. defaultMessage is:
+#. undefined
+msgid "Chats"
+msgstr "Chats"
+
+#: locale/src/views/App.json
+#. [Conference is being prepared]
+#. defaultMessage is:
+#. undefined
+msgid "Conference is being prepared"
+msgstr "Se está preparando la conferencia"
+
+#: locale/src/views/Channels/list.json
+#. [Connect with someone via videochat for 5 minutes]
+#. defaultMessage is:
+#. undefined
+msgid "Connect with someone via videochat for 5 minutes"
+msgstr "Conectar con alguien a través de videochat durante 5 minutos"
+
+#: locale/src/views/Participants/list.json
+#. [Contact]
+#. defaultMessage is:
+#. undefined
+msgid "Contact"
+msgstr "Contacto"
+
+#: locale/src/views/Participants/list.json
+#. [Country]
+#. defaultMessage is:
+#. undefined
+msgid "Country"
+msgstr "País"
+
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Create event]
+#. defaultMessage is:
+#. undefined
+msgid "Create event"
+msgstr "Crear evento"
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+#. [Delete event]
+#. defaultMessage is:
+#. undefined
+#. [Delete event]
+#. defaultMessage is:
+#. undefined
+msgid "Delete event"
+msgstr "Eliminar evento"
+
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Delete room]
+#. defaultMessage is:
+#. undefined
+msgid "Delete room"
+msgstr "Eliminar habitación"
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#. [Edit event]
+#. defaultMessage is:
+#. undefined
+msgid "Edit event"
+msgstr "Editar evento"
+
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Edit room]
+#. defaultMessage is:
+#. undefined
+msgid "Edit room"
+msgstr "Editar habitación"
+
+#: locale/src/views/Participants/list.json
+#. [Filter by country]
+#. defaultMessage is:
+#. undefined
+msgid "Filter by country"
+msgstr "Filtrar por país"
+
+#: locale/src/views/CoffeeTables/list.json
+#: locale/src/views/components/EventGrid/index.json
+#: locale/src/views/components/EventList/index.json
+#. [Happening now]
+#. defaultMessage is:
+#. undefined
+#. [Happening now]
+#. defaultMessage is:
+#. undefined
+#. [Happening now]
+#. defaultMessage is:
+#. undefined
+msgid "Happening now"
+msgstr "Sucediendo ahora"
+
+#: locale/src/views/components/Nav/index.json
+#. [Manage conference]
+#. defaultMessage is:
+#. undefined
+msgid "Manage conference"
+msgstr "Gestionar conferencia"
+
+#: locale/src/views/components/Nav/index.json
+#. [Manage events]
+#. defaultMessage is:
+#. undefined
+msgid "Manage events"
+msgstr "Gestionar eventos"
+
+#: locale/src/views/components/Nav/index.json
+#. [Manage rooms]
+#. defaultMessage is:
+#. undefined
+msgid "Manage rooms"
+msgstr "Gestionar habitaciones"
+
+#: locale/src/views/components/Nav/index.json
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+msgid "Membership"
+msgstr "Pertenencia"
+
+#: locale/src/views/Participants/list.json
+#. [Name]
+#. defaultMessage is:
+#. undefined
+msgid "Name"
+msgstr "Nombre"
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [No]
+#. defaultMessage is:
+#. undefined
+#. [No]
+#. defaultMessage is:
+#. undefined
+#. [No]
+#. defaultMessage is:
+#. undefined
+msgid "No"
+msgstr "No"
+
+#: locale/src/views/CoffeeTables/list.json
+#. [No coffee tables.]
+#. defaultMessage is:
+#. undefined
+msgid "No coffee tables."
+msgstr "Sin mesas de café."
+
+#: locale/src/views/Discussions/list.json
+#. [No discussions.]
+#. defaultMessage is:
+#. undefined
+msgid "No discussions."
+msgstr "No hay discusiones."
+
+#: locale/src/views/Lobby/index.json
+#. [No events.]
+#. defaultMessage is:
+#. undefined
+msgid "No events."
+msgstr "No hay eventos."
+
+#: locale/src/views/Channels/list.json
+#. [No networking channels.]
+#. defaultMessage is:
+#. undefined
+msgid "No networking channels."
+msgstr "No hay canales de redes."
+
+#: locale/src/views/Participants/list.json
+#. [No participants.]
+#. defaultMessage is:
+#. undefined
+msgid "No participants."
+msgstr "Ningún participante."
+
+#: locale/src/views/Organisations/index.json
+#. [No represented organizations.]
+#. defaultMessage is:
+#. undefined
+msgid "No represented organizations."
+msgstr "No hay organizaciones representadas."
+
+#: locale/src/views/Stage/list.json
+#. [No stage events.]
+#. defaultMessage is:
+#. undefined
+msgid "No stage events."
+msgstr "No hay eventos en el escenario."
+
+#: locale/src/views/Workshops/list.json
+#. [No workshops.]
+#. defaultMessage is:
+#. undefined
+msgid "No workshops."
+msgstr "No hay talleres."
+
+#: locale/src/views/components/EventGrid/index.json
+#. [Now]
+#. defaultMessage is:
+#. undefined
+msgid "Now"
+msgstr "Ahora"
+
+#: locale/src/views/Participants/list.json
+#. [Organisation]
+#. defaultMessage is:
+#. undefined
+msgid "Organization"
+msgstr "Organización"
+
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
+msgstr "Ciudad"
+
+#: locale/src/views/Organisations/index.json
+#. [Represented organizations]
+#. defaultMessage is:
+#. undefined
+msgid "Represented organizations"
+msgstr "Organizaciones representadas"
+
+#: locale/src/views/App.json
+#. [The conference is being prepared, please try again at a later date.]
+#. defaultMessage is:
+#. undefined
+msgid "The conference is being prepared, please try again at a later date."
+msgstr "La conferencia se está preparando, por favor inténtalo de nuevo en otra fecha."
+
+#: locale/src/views/components/EventGrid/index.json
+#: locale/src/views/components/EventList/index.json
+#. [Today]
+#. defaultMessage is:
+#. undefined
+#. [Today]
+#. defaultMessage is:
+#. undefined
+msgid "Today"
+msgstr "Hoy"
+
+#: locale/src/views/components/EventGrid/index.json
+#: locale/src/views/components/EventList/index.json
+#. [Tomorrow]
+#. defaultMessage is:
+#. undefined
+#. [Tomorrow]
+#. defaultMessage is:
+#. undefined
+msgid "Tomorrow"
+msgstr "Mañana"
+
+#: locale/src/views/components/EventGrid/index.json
+#. [Upcoming]
+#. defaultMessage is:
+#. undefined
+msgid "Upcoming"
+msgstr "Próximo"
+
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+#: locale/src/views/components/ManageRoomButtons/index.json
+#. [Yes]
+#. defaultMessage is:
+#. undefined
+#. [Yes]
+#. defaultMessage is:
+#. undefined
+#. [Yes]
+#. defaultMessage is:
+#. undefined
+msgid "Yes"
+msgstr "Sí"
+
+#: locale/src/views/components/Nav/index.json
+#. [hidden]
+#. defaultMessage is:
+#. undefined
+msgid "hidden"
+msgstr "oculto"
+
+#: locale/src/views/components/EventGrid/index.json
+#. [minutes left]
+#. defaultMessage is:
+#. undefined
+msgid "minutes left"
+msgstr "minutos restantes"
+
+#: locale/src/views/components/EventList/index.json
+#. [parallel events]
+#. defaultMessage is:
+#. undefined
+msgid "parallel events"
+msgstr "eventos paralelos"
+
+#: locale/src/views/components/CoffeeTable/index.json
+#: locale/src/views/components/EventGrid/index.json
+#. [participants]
+#. defaultMessage is:
+#. undefined
+#. [participants]
+#. defaultMessage is:
+#. undefined
+msgid "participants"
+msgstr "participantes"
+
+#: locale/src/views/components/CoffeeTable/index.json
+#. [places left]
+#. defaultMessage is:
+#. undefined
+msgid "places left"
+msgstr "lugares restantes"
+
+msgid "Are you sure you want to leave this video conference?"
+msgstr "Estas seguro de que quieres dejar esta videoconferencia?"
+
+msgid "If you click, you will leave the video conference. Are you sure you want to leave? Tip: Alternatively, you can open the link in a new tab or window and stay in the event."
+msgstr "Si haces clic, abandonarás la videoconferencia. ¿Estás seguro de que quieres irte? Consejo: Alternativamente, puedes abrir el enlace en una nueva pestaña o ventana y permanecer en el evento."
+
+msgid "Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants."
+msgstr "Tu perfil no es mostrado aquí o no es exhibido correctamente? Añade a tu perfil o hazte visible a otros participantes de la conferencia."
+
+msgid "Edit Profile"
+msgstr "Editar perfil"
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr "Solo puedes participar en esta reunión si aceptas ser grabado. Para participar en esta reunión, vuelve a cargar esta página para intentarlo de nuevo."
+
+msgid "Do you consent to be recorded?"
+msgstr "Estas de acuerdo en ser grabado?"
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr "Esta sesión puede ser grabada por los organizadores. Al continuar, das tu consentimiento para ser grabado. Esto incluye audio, video, chat, notas compartidas y actividades de pizarra. La grabación puede ser compartida de acuerdo con los organizadores."
+
+msgid "Copy invitation"
+msgstr "Copiar invitación"
+
+msgid "Copy guest invitation"
+msgstr "Copiar invitación para invitado"

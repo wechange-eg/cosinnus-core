@@ -16,9 +16,10 @@ from django.utils.encoding import force_str
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
+from cosinnus.core.middleware.cosinnus_middleware import LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME
 from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
 from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.models.conference import CosinnusConferencePremiumBlock, CosinnusConferenceRoom
+from cosinnus.models.conference import CosinnusConferencePremiumBlock
 from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.mail import QueuedMassMail
@@ -75,6 +76,13 @@ def ensure_user_in_logged_in_portal(sender, user, request, **kwargs):
     except Exception:
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error('Error while trying to add User Portal Membership for user that has just logged in.')
+
+
+@receiver(user_logged_in)
+def update_session_last_login(sender, user, request, **kwargs):
+    """Store the last login timestamp in the session."""
+    if request:
+        request.session[LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME] = timezone.now().timestamp()
 
 
 @receiver(user_logged_in)
@@ -159,20 +167,23 @@ if getattr(settings, 'COSINNUS_USER_FOLLOWS_GROUP_WHEN_JOINING', True):
             group.clear_likes_cache()
 
 
-""" User account activation/deactivation logic """
+""" User value change signal trigger """
 
 
 def user_pre_save(sender, **kwargs):
-    """Saves a user's is_active value as it was before saving"""
+    """Saves a user's is_active and is_superuser value as it was before saving"""
     user = kwargs['instance']
-    actual_value = user.is_active
+    is_active_value = user.is_active
+    is_superuser_value = user.is_superuser
     try:
-        user.refresh_from_db(fields=['is_active'])
+        user.refresh_from_db(fields=['is_active', 'is_superuser'])
     except get_user_model().DoesNotExist:
         # happens on user create
         pass
     user._is_active = user.is_active
-    user.is_active = actual_value
+    user.is_active = is_active_value
+    user._is_superuser = user.is_superuser
+    user.is_superuser = is_superuser_value
 
 
 def user_post_save(sender, **kwargs):
@@ -184,6 +195,12 @@ def user_post_save(sender, **kwargs):
                 signals.user_activated.send(sender=sender, user=user)
             else:
                 signals.user_deactivated.send(sender=sender, user=user)
+    if hasattr(user, '_is_superuser'):
+        if user.is_superuser != user._is_superuser:
+            if user.is_superuser:
+                signals.user_promoted_to_superuser.send(sender=sender, user=user)
+            else:
+                signals.user_demoted_from_superuser.send(sender=sender, user=user)
 
 
 pre_save.connect(user_pre_save, sender=get_user_model())
@@ -247,45 +264,6 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                             CosinnusGroupMembership.objects.create(
                                 group=result_group, user=user, status=instance.status
                             )
-
-                    # if there are any rocketchat rooms, update the rocketchat group membership for those rooms
-                    if settings.COSINNUS_ROCKET_ENABLED:
-                        rocket_rooms = list(
-                            CosinnusConferenceRoom.objects.filter(
-                                group=group, type__in=CosinnusConferenceRoom.ROCKETCHAT_ROOM_TYPES
-                            )
-                        )
-                        if len(rocket_rooms) > 0:
-                            from cosinnus_message.rocket_chat import RocketChatConnection
-
-                            try:
-                                rocket = RocketChatConnection()
-                                # add/remove member from each rocketchat room for each conference room
-                                for room in rocket_rooms:
-                                    room.sync_rocketchat_room()
-                                    if not room.rocket_chat_room_id:
-                                        logger.error(
-                                            (
-                                                'Wanted to sync a user membership to a conference room, but a '
-                                                'rocketchat room for it could not be created!'
-                                            ),
-                                            extra={'room': room.id},
-                                        )
-                                        continue
-                                    if deleted:
-                                        # kicked member
-                                        rocket.remove_member_from_room(user, room.rocket_chat_room_id)
-                                    else:
-                                        rocket.add_member_to_room(user, room.rocket_chat_room_id)
-                                        # Update membership
-                                        if instance.status == MEMBERSHIP_ADMIN:
-                                            # Upgrade
-                                            rocket.add_moderator_to_room(user, room.rocket_chat_room_id)
-                                        else:
-                                            # Downgrade
-                                            rocket.remove_moderator_from_room(user, room.rocket_chat_room_id)
-                            except Exception as e:
-                                logger.exception(e)
 
     MembershipUpdateHookThread().start()
 

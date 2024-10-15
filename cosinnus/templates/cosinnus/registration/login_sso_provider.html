@@ -63,6 +63,12 @@
                                 {% blocktrans with portal_name=SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}You don't have a {{ portal_name }} account yet?{% endblocktrans %}
                             </span>
                         </a>
+                        <div class="clearfix v-spacer-s"></div>
+                        <a href="{% url "password_reset" %}" target="_blank">
+                            <span class="rounded-button-inner">
+                                {% trans "Forgot password?" %}
+                            </span>
+                        </a>
                     </div>
 			        
 	            </div>		

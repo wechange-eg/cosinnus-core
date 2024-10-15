@@ -914,6 +914,10 @@ def verifiy_user_email(request, email_verification_param):
         del profile.settings[PROFILE_SETTING_EMAIL_TO_VERIFY]
         del profile.settings[PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN]
         profile.email_verified = True
+        if user_was_verified_before:
+            # logout user sessions after email change
+            keep_session = request.session if user.is_authenticated else None
+            profile.force_logout_user(keep_session=keep_session, save=False)
         profile.save()
 
     if user.is_active:
@@ -1426,6 +1430,7 @@ class UserChangeEmailView(RequireLoggedInMixin, FormView):
         new_email = form.cleaned_data.get('email')
         # send out email-change-verification mail
         send_user_email_to_verify(self.request.user, new_email, self.request, user_has_just_registered=False)
+
         return ret
 
     def get_form_kwargs(self):

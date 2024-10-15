@@ -338,7 +338,7 @@
 			<ul class="item-list">
 				{% for code, language in SETTINGS.LANGUAGES %}
 					<li>
-						<a href="{% url 'cosinnus:switch-language' language=code %}?next={{ request.path }}"
+						<a href="{% url 'cosinnus:switch-language' language=code %}{% if not is_api_request %}?next={{ request.path }}{% endif %}"
 								class="list-item {% if request.LANGUAGE_CODE == code %}text-bold{% endif %}" role="button" titledby=".item-text">
 				    		<div class="item-text">
 				    			{{ language }}
@@ -377,22 +377,15 @@
 						</a>
 					</li>
                     {% if not request.user.is_guest %}
-                        {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
+                        {% if not SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
                            <li>
-                                <a href="{% url 'cosinnus:v3-frontend-setup-profile' %}" class="list-item" role="button" titledby=".item-text">
-                                    <div class="item-text">
-                                        <b>({% trans "New!" %})</b> {% trans "Set up your Profile" %}
-                                    </div>
-                                </a>
-                            </li>
-                        {% endif %}
-                        <li>
                             <a href="{% url 'cosinnus:profile-edit' %}" class="list-item" role="button" titledby=".item-text">
                                 <div class="item-text">
                                     {% trans "Edit My Profile" %}
                                 </div>
                             </a>
                         </li>
+                        {% endif %}
                         <li>
                             <a href="{% url 'cosinnus:notifications' %}" class="list-item" role="button" titledby=".item-text">
                                 <div class="item-text">

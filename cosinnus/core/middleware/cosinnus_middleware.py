@@ -383,6 +383,10 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
             )
 
 
+# session property to store the last logout timestamp used to log out user sessions.
+LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME = 'LOGIN_TIMESTAMP'
+
+
 class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
     """This middleware will force-logout a user if his account has been disabled, or a force-logout flag is set."""
 
@@ -426,6 +430,20 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
                 request.user.cosinnus_profile.save()
                 if request.path not in LOGIN_URLS:
                     do_logout = True
+            elif (
+                hasattr(request.user, 'cosinnus_profile')
+                and request.user.cosinnus_profile.force_logout_timestamp
+                and (
+                    LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME not in request.session
+                    or (
+                        request.session[LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME]
+                        < request.user.cosinnus_profile.force_logout_timestamp
+                    )
+                )
+            ):
+                # if the user has a force_logout_timestamp, sessions with a previous login date are logged out.
+                messages.warning(request, _('You have been logged out for security reasons, please log in again.'))
+                do_logout = True
 
             if do_logout:
                 try:

@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n static cosinnus_tags djajax_tags %}
+{% load admin_urls i18n static cosinnus_tags djajax_tags %}
 
 {% block page_title %}
   {% blocktrans with username=this_user|full_name %}User profile: {{ username }}{% endblocktrans %}{{ block.super }}
@@ -46,7 +46,15 @@
 	        {% include "cosinnus/user/user_avatar_image.html" with user=this_user extra_classes="w100" image_size="large" %}
 	    </div>
 	    <div class="col-sm-9 bottom-align large-space">
-			<legend class="large-space userprofile-title ">{{ this_user.cosinnus_profile.get_extended_full_name }}</legend>
+			<legend class="large-space userprofile-title ">
+          {{ this_user.cosinnus_profile.get_extended_full_name }}
+          {% if request.user.is_superuser %}
+              <a href="{% url "admin:auth_user_changelist" %}?q={{ user.email }}" target="_blank"
+                  title="{% trans "(ADMIN) View in Admin" %}">
+                  <i class="fa fa-cog"></i>
+              </a>
+          {% endif %}
+      </legend>
             
 			{% block buttons %}
 				{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
@@ -116,7 +124,7 @@
 		            {% if request.user.is_authenticated %}
 		                {% include 'cosinnus/feedback/report_button_btn.html' with object=this_user extra_classes="v-offset-s" %}
 		            {% endif %}
-		            
+
 				{% endif %}
 			{% endblock buttons %}
 	    </div>

@@ -5,6 +5,7 @@ from django.templatetags.static import static
 from django.urls import include, path, re_path, reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
 from drf_yasg import openapi
+from drf_yasg.generators import OpenAPISchemaGenerator
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions, routers
 from rest_framework_simplejwt.views import (
@@ -96,6 +97,9 @@ urlpatterns = [
     path('guest/restricted/', user.guest_user_not_allowed_view, name='guest-user-not-allowed'),
     path('guest/<str:guest_token>/', user.guest_user_signup_view, name='guest-user-signup'),
     path('whats_new/', version_history.version_history, name='version-history'),
+    path('list-unsubscribe-result/', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
+    # /account/ URLs: Note that no views should be placed under the /account/ path that show user UI pages or
+    # that require input! Only service-endpoints that redirect elsewhere or are used as AJAX should be here.
     path('account/report/', feedback.report_object, name='report-object'),
     path('account/accept_tos/', user.accept_tos, name='accept-tos'),
     path('account/resend_email_validation/', user.resend_email_validation, name='resend-email-validation'),
@@ -104,22 +108,6 @@ urlpatterns = [
         'account/list-unsubscribe/<str:email>/<str:token>/',
         user.add_email_to_blacklist,
         name='user-add-email-blacklist',
-    ),
-    path(
-        'account/list-unsubscribe-result/', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'
-    ),
-    path('account/deactivated/', group.group_list_mine_deactivated, name='deactivated-groups'),
-    path(
-        'account/activate/<int:group_id>/',
-        group.activate_or_deactivate,
-        name='group-activate',
-        kwargs={'activate': True},
-    ),
-    path(
-        'account/deactivate/<int:group_id>/',
-        group.activate_or_deactivate,
-        name='group-deactivate',
-        kwargs={'activate': False},
     ),
     path('account/verify_email/<str:email_verification_param>/', user.verifiy_user_email, name='user-verifiy-email'),
     # --- DEPERECATED -----
@@ -516,6 +504,22 @@ if not is_integrated_portal():
         path('profile/delete/', profile.delete_view, name='profile-delete'),
     ]
 
+urlpatterns += [
+    path('profile/deactivated/', group.group_list_mine_deactivated, name='deactivated-groups'),
+    path(
+        'profile/activate/<int:group_id>/',
+        group.activate_or_deactivate,
+        name='group-activate',
+        kwargs={'activate': True},
+    ),
+    path(
+        'profile/deactivate/<int:group_id>/',
+        group.activate_or_deactivate,
+        name='group-deactivate',
+        kwargs={'activate': False},
+    ),
+]
+
 # in SSO-portals we redirect the signup page to the login page
 if is_sso_portal():
     urlpatterns += [
@@ -743,6 +747,21 @@ api_v3_url_patterns = [
 schema_url_patterns = api_v2_url_patterns + api_v3_url_patterns
 urlpatterns += schema_url_patterns
 
+
+class StrictProductionHttpsSchemaGenerator(OpenAPISchemaGenerator):
+    """Strictly sets "https" as schema in non-DEBUG environments"""
+
+    def get_schema(self, request=None, public=False):
+        schema = super().get_schema(request, public)
+        if settings.DEBUG:
+            schema.schemes = ['http', 'https']
+        else:
+            schema.schemes = [
+                'https',
+            ]
+        return schema
+
+
 schema_view = get_schema_view(
     openapi.Info(
         title='WECHANGE API',
@@ -752,6 +771,7 @@ schema_view = get_schema_view(
         contact=openapi.Contact(email='support@wechange.de'),
         license=openapi.License(name='AGPL 3.0'),
     ),
+    generator_class=StrictProductionHttpsSchemaGenerator,
     public=True,
     permission_classes=(permissions.AllowAny,),
     patterns=schema_url_patterns,

@@ -68,6 +68,7 @@ export function IframeContent(props: IframeProps) {
       [classes.iframe]: true,
       [classes.fullscreen]: fullscreen,
       "iframe": true,
+      "fullscreen": fullscreen,
     })}>
       <div className={classes.buttons}>
         <Link

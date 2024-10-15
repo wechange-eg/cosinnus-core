@@ -26,7 +26,7 @@
             </div>
             
             {% if form_action and not action_as_href %}
-            <form action="{{ form_action }}" method="post" class="form-horizontal">{% csrf_token %}
+            <form action="{{ form_action }}" method="post" class="form-horizontal" {% if form_attrs %}{{ form_attrs }}{% endif %}>{% csrf_token %}
             {% endif %}
             
             <div class="modal-body">

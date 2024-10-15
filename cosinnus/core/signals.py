@@ -45,6 +45,12 @@ user_password_changed = dispatch.Signal()  # providing_args=["user"]
 """ Called when the user logs in for the first time ever """
 user_logged_in_first_time = dispatch.Signal()  # providing_args=['request', 'user']
 
+""" Called after a user made is superuser """
+user_promoted_to_superuser = dispatch.Signal()  # providing_args=["user"]
+
+""" Called after a user is demoted from superuser """
+user_demoted_from_superuser = dispatch.Signal()  # providing_args=["user"]
+
 """ Called after a new user properly joined a group as member (invites or join-requests do not trigger this!) """
 user_joined_group = dispatch.Signal()  # providing_args=["user", "group"]
 

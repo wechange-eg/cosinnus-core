@@ -269,6 +269,7 @@ def generate_api_dict_for_dynamic_field(field_name, field_definition_dict, field
         'parent_group_field_name': field_options.parent_group_field_name,
         'display_required_field_names': field_options.display_required_field_names,
         'choices': choices,
+        'max_length': field_options.max_length,
     }
     field_data.append(current_field_data)
 
@@ -439,7 +440,8 @@ class PortalSettingsView(APIView):
                 "variant": "covering|contained"  # default: covering
             },
            "color": "blue",  # exclusive with "brandColors"
-           "brandColors": {  # exclusive with "colors"
+           # palette color. can be generated with https://palette.saas-ui.dev/
+           "brandColors": {  # exclusive with "color"
                "50": "#ffffff",
                "100": "#ffffff",
                "200": "#ffffff",
@@ -450,7 +452,19 @@ class PortalSettingsView(APIView):
                "700": "#ffffff",
                "800": "#ffffff",
                "900": "#ffffff",
-           }
+           },
+           "signalColors": {  # signal highlight colors like unread badges (only to override the frontend defaults)
+               "50": "#f50a41",
+               "100": "#f50a41",
+               "200": "#f50a41",
+               "300": "#f50a41",
+               "400": "#f50a41",
+               "500": "#f50a41",
+               "600": "#f50a41",
+               "700": "#f50a41",
+               "800": "#f50a41",
+               "900": "#f50a41",
+           },
         },
         "setup": {  # settings for the each of the step pages of the onboarding wizards
             "contact": {
@@ -464,7 +478,7 @@ class PortalSettingsView(APIView):
             "setup": {
                 "profile": {
                     # this is an example full overridable field dict. single properties can be overriden as well
-                    "first_name" = {
+                    "first_name": {
                         "name": "first_name",
                         "is_multi_language": False,
                         "is_multi_language_sub_field": False,
@@ -479,6 +493,7 @@ class PortalSettingsView(APIView):
                         "parent_group_field_name": None,
                         "display_required_field_names": None,
                         "choices": None,
+                        "max_length": None,
                     },
                     ...  # more named field overrides
                 }

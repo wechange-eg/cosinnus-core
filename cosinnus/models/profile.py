@@ -20,7 +20,7 @@ from django.db.models.signals import class_prepared, post_save
 from django.template.loader import render_to_string
 from django.templatetags.static import static
 from django.urls import reverse
-from django.utils import translation
+from django.utils import timezone, translation
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
 from django.utils.html import strip_tags
@@ -69,6 +69,8 @@ PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME = 'workshop_participant_name'
 PROFILE_SETTING_COSINUS_OAUTH_LOGIN = 'has_logged_in_with_cosinnus_oauth'
 # hex color code for user's chosen avatar background color
 PROFILE_SETTINGS_AVATAR_COLOR = 'avatar_color'
+# a timestamp used to force the logout all older user sessions
+PROFILE_SETTING_FORCE_LOGOUT_TIMESTAMP = 'force_logout_timestamp'
 # contact info JSON pairs for the frontend API
 # example: [{type: "email|phone_number|url", value: "mail@mail.com"}, ...]
 PROFILE_DYNAMIC_FIELDS_CONTACTS = 'contact_infos'
@@ -594,6 +596,28 @@ class BaseUserProfile(
     @property
     def get_last_login_token_sent(self):
         return self.settings.get(PROFILE_SETTING_LOGIN_TOKEN_SENT, None)
+
+    @property
+    def force_logout_timestamp(self):
+        return self.settings.get(PROFILE_SETTING_FORCE_LOGOUT_TIMESTAMP, None)
+
+    def force_logout_user(self, keep_session=None, save=True):
+        """Log out all user sessions from the portal and RocketChat.
+        :param keep_session:  If a session is passed it remains logged in.
+        :param save: If true the profile is saved
+        """
+        logout_timestamp = timezone.now().timestamp()
+        self.settings[PROFILE_SETTING_FORCE_LOGOUT_TIMESTAMP] = logout_timestamp
+        if save:
+            self.save()
+        if settings.COSINNUS_ROCKET_ENABLED:
+            from cosinnus_message.tasks import rocket_user_logout_task
+
+            rocket_user_logout_task.delay(self.user.pk)
+        if keep_session:
+            from cosinnus.core.middleware.cosinnus_middleware import LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME
+
+            keep_session[LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME] = logout_timestamp
 
     @property
     def map_embed_url(self):

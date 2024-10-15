@@ -2,10 +2,12 @@ import logging
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.db.models import Case, Count, When
 from django.templatetags.static import static
 from django.urls.base import reverse
 from django.utils.encoding import force_str
+from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext
 from drf_yasg import openapi
@@ -19,8 +21,14 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal, get_cosinnus_group_model, get_domain_for_portal
-from cosinnus.models.group_extra import CosinnusConference
+from cosinnus.models.conference import CosinnusConferenceApplication
+from cosinnus.models.group import (
+    CosinnusGroupMembership,
+    CosinnusPortal,
+    get_cosinnus_group_model,
+    get_domain_for_portal,
+)
+from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.user_dashboard import DashboardItem, MenuItem
 from cosinnus.trans.group import CosinnusConferenceTrans, CosinnusProjectTrans, CosinnusSocietyTrans
 from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetime
@@ -37,6 +45,10 @@ from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
 from cosinnus_notifications.models import NotificationAlert, SerializedNotificationAlert
 
 logger = logging.getLogger('cosinnus')
+
+
+UNREAD_ALERTS_USER_CACHE_KEY = 'cosinnus/core/portal/%d/user_unread_alerts/%s/'
+UNREAD_ALERTS_USER_CACHE_TIMEOUT = 55
 
 
 class SpacesView(MyGroupsClusteredMixin, APIView):
@@ -130,7 +142,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                         'label': 'Forum',
                                         'url': '/group/forum/',
                                         'is_external': False,
-                                        'icon': 'fa-sitemap',
+                                        'icon': 'fa-globe',
                                         'image': None,
                                         'badge': None,
                                         'selected': False,
@@ -234,6 +246,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         community_space = None
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        events_slug = getattr(settings, 'NEWW_EVENTS_GROUP_SLUG', None)
         if forum_slug:
             forum_group = get_object_or_None(
                 get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current()
@@ -247,7 +260,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                     managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
                     if managed_tags:
                         for tag in managed_tags:
-                            if tag.paired_group and tag.paired_group != forum_group:
+                            if tag and tag.paired_group and tag.paired_group != forum_group:
                                 community_space_items.append(
                                     MenuItem(
                                         tag.paired_group.name,
@@ -256,18 +269,34 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                         id=f'Forum{tag.paired_group.id}',
                                     )
                                 )
+                # add Forum group to community space
                 if settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
                     community_space_items.append(
                         MenuItem(
                             settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL,
                             forum_group.get_absolute_url(),
-                            'fa-sitemap',
+                            'fa-globe',
                             id='Forum',
                         )
                     )
+                # add Events-Forum group to community space for portals that have a split Events Forum group
+                if events_slug != forum_slug:
+                    events_group = get_object_or_None(
+                        get_cosinnus_group_model(), slug=events_slug, portal=CosinnusPortal.get_current()
+                    )
+                    if events_group:
+                        community_space_items.append(
+                            MenuItem(
+                                events_group['name'],
+                                events_group.get_absolute_url(),
+                                'fa-calendar',
+                                id='Events',
+                            )
+                        )
+        # "Discover" link in community section of spaces menu
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
-                MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-group', id='Map')
+                MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-map', id='Map')
             )
         if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
             community_space_items.extend(
@@ -282,7 +311,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 MenuItem(CosinnusProjectTrans.BROWSE_ALL, reverse('cosinnus:group-list'), id='BrowseProjects'),
             ]
             community_space = {
-                'header': f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
+                'header': settings.COSINNUS_V3_COMMUNITY_HEADER_CUSTOM_LABEL
+                or f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
                 'items': community_space_items,
                 'actions': community_space_actions,
             }
@@ -472,7 +502,9 @@ class UnreadMessagesView(APIView):
 
 
 class UnreadAlertsView(APIView):
-    """An endpoint that returns the user unseen alerts count for the main navigation."""
+    """
+    An endpoint that returns the user unseen alerts count and the membership alert count for the main navigation.
+    """
 
     renderer_classes = (
         CosinnusAPIFrontendJSONResponseRenderer,
@@ -491,7 +523,10 @@ class UnreadAlertsView(APIView):
                 description='WIP: Response info missing. Short example included',
                 examples={
                     'application/json': {
-                        'data': {'count': 10},
+                        'data': {
+                            'count': 10,
+                            'membership_alert_count': 2,
+                        },
                         'version': COSINNUS_VERSION,
                         'timestamp': 1658414865.057476,
                     }
@@ -500,13 +535,51 @@ class UnreadAlertsView(APIView):
         }
     )
     def get(self, request):
-        alerts_count = 0
+        unread_alerts = None
         if request.user.is_authenticated:
-            alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
-            unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
-            alerts_count = unseen_aggr.get('seen_count', 0)
-        unread_alerts = {'count': alerts_count}
+            unread_alerts_cache_key = UNREAD_ALERTS_USER_CACHE_KEY % (CosinnusPortal.get_current().id, request.user.pk)
+            unread_alerts_cache = cache.get(unread_alerts_cache_key)
+            if unread_alerts_cache:
+                unread_alerts = unread_alerts_cache
+            else:
+                alerts_count = self._get_unread_notification_count(request.user)
+                membership_alert_count = self._get_membership_alert_count(request.user)
+                unread_alerts = {'count': alerts_count, 'membership_alert_count': membership_alert_count}
+                cache.set(unread_alerts_cache_key, unread_alerts, UNREAD_ALERTS_USER_CACHE_TIMEOUT)
+        else:
+            unread_alerts = {'count': 0, 'membership_alert_count': 0}
         return Response(unread_alerts)
+
+    def _get_unread_notification_count(self, user):
+        """Get the unread notification count"""
+        alerts_qs = NotificationAlert.objects.filter(
+            portal=CosinnusPortal.get_current(), user=user, action_user__is_active=True
+        )
+        unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
+        alerts_count = unseen_aggr.get('seen_count', 0)
+        return alerts_count
+
+    def _get_membership_alert_count(self, user):
+        """Get the count of pending invitations, membership requests and conference applications."""
+        membership_alert_count = 0
+
+        # count invitations
+        membership_alert_count += len(CosinnusSociety.objects.get_for_user_invited(user))
+        membership_alert_count += len(CosinnusProject.objects.get_for_user_invited(user))
+        membership_alert_count += len(CosinnusConference.objects.get_for_user_invited(user))
+
+        # count membership requests and conference applications
+        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(user)
+        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
+        for admined_group in admined_groups:
+            pending_membership_request_count = len(CosinnusGroupMembership.objects.get_pendings(group=admined_group))
+            membership_alert_count += pending_membership_request_count
+            pending_conference_application_count = len(
+                CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
+            )
+            membership_alert_count += pending_conference_application_count
+
+        return membership_alert_count
 
 
 class AlertsView(APIView):
@@ -688,6 +761,12 @@ class AlertsView(APIView):
                     alert.seen = True
                 NotificationAlert.objects.bulk_update(alerts, ['seen'])
 
+                unread_alerts_cache_key = UNREAD_ALERTS_USER_CACHE_KEY % (
+                    CosinnusPortal.get_current().id,
+                    request.user.pk,
+                )
+                cache.delete(unread_alerts_cache_key)
+
             # alert items
             user_cache = self.get_user_cache(alerts)
             items = []
@@ -739,7 +818,9 @@ class AlertsView(APIView):
         self.mark_as_read = request.query_params.get('mark_as_read') == 'true'
 
     def get_queryset(self):
-        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
+        alerts_qs = NotificationAlert.objects.filter(
+            portal=CosinnusPortal.get_current(), user=self.request.user, action_user__is_active=True
+        )
         if self.newer_than_timestamp:
             after_dt = datetime_from_timestamp(self.newer_than_timestamp)
             alerts_qs = alerts_qs.filter(last_event_at__gt=after_dt)
@@ -779,6 +860,172 @@ class AlertsView(APIView):
             serialized_alert[key_prefix + 'icon'] = None
 
 
+class MembershipAlertsView(APIView):
+    """
+    An endpoint that returns pending membership related notifications.
+    This includes invitations, membership requests and conference applications.
+    """
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    @swagger_auto_schema(
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'invitations': {
+                                'header': 'Invitations',
+                                'items': [
+                                    {
+                                        'id': 'CosinnusProject42',
+                                        'label': 'AnotherProject',
+                                        'url': '/project/anotherproject/',
+                                        'is_external': False,
+                                        'icon': 'fa-group',
+                                        'image': None,
+                                        'badge': None,
+                                        'attributes': None,
+                                        'selected': False,
+                                    }
+                                ],
+                            },
+                            'membership_requests': {
+                                'header': 'Membership Requests',
+                                'items': [
+                                    {
+                                        'id': 'MembershipRequests24',
+                                        'label': 'TestGroup (2)',
+                                        'url': '/group/testgroup/members/?requests=1#requests',
+                                        'is_external': False,
+                                        'icon': 'fa-sitemap',
+                                        'image': None,
+                                        'badge': None,
+                                        'attributes': None,
+                                        'selected': False,
+                                    }
+                                ],
+                            },
+                            'conference_applications': {
+                                'header': 'Conference Applications',
+                                'items': [
+                                    {
+                                        'id': 'ConferenceApplications9',
+                                        'label': 'Conference (1)',
+                                        'url': '/conference/conference/conference/participation-management/applications/',  # noqa
+                                        'is_external': False,
+                                        'icon': 'fa-sitemap',
+                                        'image': None,
+                                        'badge': None,
+                                        'attributes': None,
+                                        'selected': False,
+                                    }
+                                ],
+                            },
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        }
+    )
+    def get(self, request):
+        membership_alerts = {}
+        if request.user.is_authenticated:
+            # invitations
+            group_invitations = self._get_group_invitations(request.user)
+            if group_invitations:
+                membership_alerts['invitations'] = {
+                    'header': _('Invitations'),
+                    'items': group_invitations,
+                }
+
+            # membership requests
+            membership_requests = self._get_membership_requests(request.user)
+            if membership_requests:
+                membership_alerts['membership_requests'] = {
+                    'header': _('Membership Requests'),
+                    'items': membership_requests,
+                }
+
+            # conference applications
+            if settings.COSINNUS_CONFERENCES_ENABLED:
+                conference_applications = self._get_conference_applications(request.user)
+                if conference_applications:
+                    membership_alerts['conference_applications'] = {
+                        'header': _('Conference Applications'),
+                        'items': conference_applications,
+                    }
+
+        return Response(membership_alerts)
+
+    def _get_group_invitations(self, user):
+        societies_invited = CosinnusSociety.objects.get_for_user_invited(user)
+        projects_invited = CosinnusProject.objects.get_for_user_invited(user)
+        conferences_invited = CosinnusConference.objects.get_for_user_invited(user)
+
+        groups_invited = [DashboardItem(group).as_menu_item() for group in societies_invited]
+        groups_invited += [DashboardItem(group).as_menu_item() for group in projects_invited]
+        # for conferences, only show invites if becoming a member is currently possible
+        groups_invited += [
+            DashboardItem(conference).as_menu_item()
+            for conference in conferences_invited
+            if conference.membership_applications_possible
+        ]
+        return groups_invited
+
+    def _get_membership_requests(self, user):
+        membership_requests = []
+        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(user)
+        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
+        for admined_group in admined_groups:
+            pending_ids = CosinnusGroupMembership.objects.get_pendings(group=admined_group)
+            if len(pending_ids) > 0:
+                membership_request_url = (
+                    group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group})
+                    + '?requests=1#requests'
+                )
+                membership_request_icon = (
+                    'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_SOCIETY else 'fa-group'
+                )
+                membership_request_item = MenuItem(
+                    escape('%s (%d)' % (admined_group.name, len(pending_ids))),
+                    id=f'MembershipRequests{admined_group.pk}',
+                    url=membership_request_url,
+                    icon=membership_request_icon,
+                )
+                membership_requests.append(membership_request_item)
+        return membership_requests
+
+    def _get_conference_applications(self, user):
+        conference_application_requests = []
+        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(user)
+        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
+        for admined_group in admined_groups:
+            pending_ids = CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
+            if len(pending_ids) > 0:
+                conference_application_icon = (
+                    'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_CONFERENCE else 'fa-group'
+                )
+                conference_application_url = group_aware_reverse(
+                    'cosinnus:conference:participation-management-applications', kwargs={'group': admined_group}
+                )
+                conference_application_request_item = MenuItem(
+                    escape('%s (%d)' % (admined_group.name, len(pending_ids))),
+                    id=f'ConferenceApplications{admined_group.pk}',
+                    url=conference_application_url,
+                    icon=conference_application_icon,
+                )
+                conference_application_requests.append(conference_application_request_item)
+        return conference_application_requests
+
+
 class HelpView(APIView):
     """
     An endpoint that returns a list of help menu items for the main navigation.
@@ -806,7 +1053,7 @@ class HelpView(APIView):
                         'data': [
                             {
                                 'id': 'FAQ',
-                                'label': '<b>FAQ</b> (Frequently asked questions)',
+                                'label': '<b>FAQ</b>',
                                 'url': 'https://localhost/cms/faq/',
                                 'is_external': True,
                                 'icon': 'fa-question-circle',
@@ -857,6 +1104,7 @@ class LanguageMenuItemMixin:
             language_subitem = MenuItem(
                 language,
                 reverse('cosinnus:switch-language', kwargs={'language': code}),
+                icon=None if current_language_as_label else 'fa-language',
                 id=f'ChangeLanguageItem{code.upper()}',
                 selected=selected,
             )
@@ -903,26 +1151,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                                 'selected': False,
                             },
                             {
-                                'id': 'SetupProfile',
-                                'label': 'Set up my Profile',
-                                'url': '/profile/edit/',
-                                'is_external': False,
-                                'icon': 'fa-pen',
-                                'image': None,
-                                'badge': None,
-                                'selected': False,
-                            },
-                            {
-                                'id': 'EditProfile',
-                                'label': 'Edit my Profile',
-                                'url': '/profile/edit/',
-                                'is_external': False,
-                                'icon': 'fa-gear',
-                                'image': None,
-                                'badge': None,
-                                'selected': False,
-                            },
-                            {
                                 'id': 'NotificationPreferences',
                                 'label': 'Notification Preferences',
                                 'url': '/profile/notifications/',
@@ -933,42 +1161,11 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                                 'selected': False,
                             },
                             {
-                                'id': 'ChangeLanguage',
-                                'icon': 'fa-language',
-                                'label': 'Change Language',
-                                'url': None,
-                                'image': None,
-                                'is_external': False,
-                                'badge': None,
-                                'sub_items': [
-                                    {
-                                        'id': 'ChangeLanguageItemDE',
-                                        'label': 'Deutsch',
-                                        'url': '/language/de/',
-                                        'is_external': False,
-                                        'icon': None,
-                                        'image': None,
-                                        'badge': None,
-                                        'selected': False,
-                                    },
-                                    {
-                                        'id': 'ChangeLanguageItemEN',
-                                        'label': 'English',
-                                        'url': '/language/en/',
-                                        'is_external': False,
-                                        'icon': None,
-                                        'image': None,
-                                        'badge': None,
-                                        'selected': True,
-                                    },
-                                ],
-                            },
-                            {
                                 'id': 'Contribution',
                                 'label': 'Your Contribution',
                                 'url': '/account/contribution/',
                                 'is_external': False,
-                                'icon': 'fa-hand-holding-hart',
+                                'icon': 'fa-hand-holding-heart',
                                 'image': None,
                                 'badge': None,
                                 'selected': False,
@@ -1005,18 +1202,8 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 MenuItem(profile_label, reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
             if not request.user.is_guest:
-                if settings.COSINNUS_V3_FRONTEND_ENABLED:
-                    profile_menu_items.append(
-                        MenuItem(
-                            _('Set up my Profile'),
-                            reverse('cosinnus:v3-frontend-setup-profile'),
-                            'fa-pen',
-                            id='SetupProfile',
-                        ),
-                    )
                 profile_menu_items.extend(
                     [
-                        MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
                         MenuItem(
                             _('Notification Preferences'),
                             reverse('cosinnus:notifications'),
@@ -1026,11 +1213,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     ]
                 )
             profile_menu.extend(profile_menu_items)
-
-            # language
-            if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
-                language_item = self.get_language_menu_item(request)
-                profile_menu.append(language_item)
 
             # payments
             if (
@@ -1047,7 +1229,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 payments_item = MenuItem(
                     _('Your Contribution'),
                     reverse('wechange-payments:overview'),
-                    'fa-hand-holding-hart',
+                    'fa-hand-holding-heart',
                     badge=contribution_badge,
                     id='Contribution',
                 )
@@ -1062,6 +1244,14 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     id='Administration',
                 )
                 profile_menu.append(administration_item)
+
+            # about
+            if settings.COSINNUS_V3_MENU_HOME_LINK:
+                about_label = _('About %(portal_name)s') % {'portal_name': settings.COSINNUS_PORTAL_NAME.upper()}
+                about_item = MenuItem(
+                    about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About'
+                )
+                profile_menu.append(about_item)
 
             # logout
             logout_label = _('Logout')
@@ -1225,7 +1415,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             )
         else:
             home_item = MenuItem(
-                _('Dashboard'), reverse('cosinnus:user-dashboard'), icon='fa-home', image=home_image, id='HomeDashboard'
+                _('Dashboard'), reverse('cosinnus:user-dashboard'), icon='fa-home', image=home_image, id='Home'
             )
         left_navigation_items.append(home_item)
 
@@ -1286,13 +1476,17 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 services_navigation_items.insert(
                     0, MenuItem(_('Events'), events_url, icon='fa-calendar', is_external=False, id='Events')
                 )
-        # add "Discover" link to services for all logged in users and additionally for non-logged-in users on open
-        # portals
-        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or (
-            request.user.is_authenticated and not request.user.is_guest
-        ):
+        # add "Discover" link to services for non-logged-in users on open portals
+        if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN and not request.user.is_authenticated:
             services_navigation_items.insert(
-                0, MenuItem(_('Discover'), reverse('cosinnus:map'), icon=None, is_external=False, id='Map')
+                0,
+                MenuItem(
+                    settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL,
+                    reverse('cosinnus:map'),
+                    icon='fa-map',
+                    is_external=False,
+                    id='Map',
+                ),
             )
 
         # right part

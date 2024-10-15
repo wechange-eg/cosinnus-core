@@ -310,6 +310,12 @@ class CosinnusConf(AppConf):
     # (they are still admin accessible)
     DISABLED_COSINNUS_APPS = []
 
+    # alternative to putting 'cosinnus_file' in COSINNUS_DISABLED_COSINNUS_APPS,
+    # thereby completely disabling attached files and images, this can be set to True
+    # to hide the file app for users and bounce them from all view-urls,
+    # but still retain the ability to upload/attach/download files in groups
+    SOFT_DISABLE_COSINNUS_FILE_APP = False
+
     # a list of which app checkboxes should be default-active on the create group form
     # Deactivating several group apps by default
     DEFAULT_ACTIVE_GROUP_APPS = [
@@ -1009,14 +1015,18 @@ class CosinnusConf(AppConf):
     # Link of the brand / home button in the main navigation. If set to None personal-dashboard is used.
     V3_MENU_HOME_LINK = '/cms/?noredir=1'
 
+    # Header label of the top left menu für the community space
+    # default if None: "PORTALNAME Community"
+    V3_COMMUNITY_HEADER_CUSTOM_LABEL = None
+
     # Forum space label in the v3 main navigation. Set to None to exclude forum from the community space.
     V3_MENU_SPACES_FORUM_LABEL = _('Forum')
 
     # Map space label in the v3 main navigation. Set to None to exclude the map from the community space.
-    V3_MENU_SPACES_MAP_LABEL = _('Map')
+    V3_MENU_SPACES_MAP_LABEL = _('Discover')
 
     # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
-    V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = False
+    V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = True
 
     # Additional menu items for the community space in the v3 main navigation.
     # Format: List of (<id-string>, <label>, <url>, <icon>),
@@ -1029,6 +1039,7 @@ class CosinnusConf(AppConf):
 
     # a class dropin to replace CosinnusNavigationPortalLinksBase as class that modifies or provides additional
     # navbar links returned in various v3 navigation API endpoints
+    # used for example to modify navigation links, like adding "big" links in the main navbar
     # (str classpath)
     V3_MENU_PORTAL_LINKS_DROPIN = None
 

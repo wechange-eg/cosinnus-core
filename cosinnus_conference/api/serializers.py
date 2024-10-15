@@ -129,8 +129,8 @@ class ConferenceRoomSerializer(TranslateableModelSerializer):
                 'update_room': obj.get_edit_url(),
                 'delete_room': obj.get_delete_url(),
             }
-            # Lobby room types do not have a "Create Event" button
-            if obj.type != CosinnusConferenceRoom.TYPE_LOBBY:
+            # Lobby and Result room types do not have a "Create Event" button
+            if obj.type not in [CosinnusConferenceRoom.TYPE_LOBBY, CosinnusConferenceRoom.TYPE_RESULTS]:
                 management_urls.update(
                     {
                         'create_event': obj.get_room_create_url(),

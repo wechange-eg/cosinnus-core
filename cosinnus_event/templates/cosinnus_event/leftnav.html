@@ -89,9 +89,9 @@
                 <span class="pull-left">
                     {% if future_events_count %}
                         {{ future_events_count }}
-                        <i class="fa fa-calendar" style="display:none;"></i>
+                        <i class="fa fa-list-ul" style="display:none;"></i>
                     {% else %}
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa fa-list-ul"></i>
                     {% endif %}
                 </span>
                 <span class="pull-right">
@@ -115,9 +115,9 @@
 	                <span class="pull-left">
 	                    {% if proxy_event_count %}
 	                        {{ proxy_event_count }}
-                            <i class="fa fa-calendar" style="display:none;"></i>
+                            <i class="fa fa-list-ul" style="display:none;"></i>
 	                    {% else %}
-	                        <i class="fa fa-calendar"></i>
+	                        <i class="fa fa-list-ul"></i>
 	                    {% endif %}
 	                </span>
 	                <span class="pull-right">
@@ -138,7 +138,7 @@
 		        <ul class="media-list">
 		            <li class="media">
 		                <span class="pull-left">
-		                    <i class="fa fa-calendar"></i>
+		                    <i class="fa fa-list-ul"></i>
 		                </span>
 		                <span class="pull-right">
 		                    {% if request.path == event_list_past_page %}
@@ -160,9 +160,9 @@
 		            <span class="pull-left">
 		                {% if doodle_count %}
 	                        {{ doodle_count }}
-                            <i class="fa fa-calendar" style="display:none;"></i>
+                            <i class="fa fa-calendar-check-o" style="display:none;"></i>
 	                    {% else %}
-	                        <i class="fa fa-calendar"></i>
+	                        <i class="fa fa-calendar-check-o"></i>
 	                    {% endif %}
 		            </span>
 		            <span class="pull-right">

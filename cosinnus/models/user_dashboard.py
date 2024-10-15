@@ -21,7 +21,7 @@ logger = logging.getLogger('cosinnus')
 
 # a list of font-awesome class names that are not actual icons,
 # useful for filtering them out of a class string
-FONT_AWESOME_CLASS_FILTER = ['fa', 'fas', 'fa-fw', 'fa-2x', 'fa-3x', 'fa--spin', 'fa-cog']
+FONT_AWESOME_CLASS_FILTER = ['fa', 'fas', 'fa-fw', 'fa-2x', 'fa-3x', 'fa--spin']
 
 
 class DashboardItem(dict):
@@ -134,6 +134,7 @@ class MenuItem(dict):
         selected=False,
         attributes=None,
         sub_items=None,
+        actions=None,
     ):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
         if not is_external and url and url.startswith(domain):
@@ -154,3 +155,6 @@ class MenuItem(dict):
         # only add sub_items as a key if it is actually given
         if sub_items is not None:
             self['sub_items'] = sub_items
+        # only add actions as a key if it is actually given
+        if actions is not None:
+            self['actions'] = actions

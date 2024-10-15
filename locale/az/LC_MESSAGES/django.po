@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:30+0200\n"
+"POT-Creation-Date: 2024-10-15 16:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -180,6 +180,26 @@ msgid "Reactivate user accounts"
 msgstr "İstifadəçi hesabını silin"
 
 #, python-format
+msgid ""
+"%(user_count)d User account(s) were deactivated successfully. \n"
+"%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+"%(hidden_content_count)d contents have been set invisible. \n"
+"The user(s) will be deleted after 30 days."
+msgstr ""
+
+msgid "(SPAM) DEACTIVATE user and their contents (user deletion in 30d)"
+msgstr ""
+
+#, python-format
+msgid "%(count)d Users were logged out."
+msgstr ""
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logout users"
+msgstr "Çıxış"
+
+#, python-format
 msgid "%(count)d Users' group memberships were refreshed."
 msgstr ""
 
@@ -210,6 +230,14 @@ msgstr ""
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%d Users were made Nextcloud admins."
+msgstr "%d İstifadəçilər uğurla de aktivasiya edildi."
+
+#, fuzzy
+msgid "Nextcloud: Make user Nextcloud admin"
+msgstr "Sizi admin etdi"
 
 #, fuzzy
 #| msgid "Recipients"
@@ -266,6 +294,19 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Məzmun"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Dəvətlər"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership Requests"
+msgstr "Üzvlük İstəkləri"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Conference Applications"
+msgstr "Video konfrans Serveri"
+
 #, fuzzy
 #| msgid "Change language"
 msgid "Change Language"
@@ -279,16 +320,6 @@ msgstr "Mənim Hesabım"
 msgid "My Guest Account"
 msgstr "Hesabı silin"
 
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up my Profile"
-msgstr "Profilinizi redaktə edin"
-
-#, fuzzy
-#| msgid "Edit My Profile"
-msgid "Edit my Profile"
-msgstr "Profilimi Redaktə edin"
-
 msgid "Notification Preferences"
 msgstr "Bildiriş Seçimləri"
 
@@ -297,6 +328,12 @@ msgstr "Sizin töhfəniz"
 
 msgid "Administration"
 msgstr "İdarəetmə"
+
+#, fuzzy, python-format
+#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+#| msgid "to %(portal_name)s"
+msgid "About %(portal_name)s"
+msgstr "%(portal_name)s -a"
 
 msgid "Logout"
 msgstr "Çıxış"
@@ -325,8 +362,8 @@ msgid "Messages"
 msgstr "Mesajlar"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Discover"
-msgstr "Aşkar etmək"
+msgid "Events"
+msgstr "Tədbirlər"
 
 msgid "Help"
 msgstr "Dəstək"
@@ -355,6 +392,9 @@ msgstr "Göstərilən ad"
 
 msgid "Help other members find you and use your real name."
 msgstr "Digər üzvlərin səni daha sürətli tapmaq üçün özünü təqdim et və adını açıq şəkildə göstər."
+
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr "Bu giriş kimliyiniz kimi istifadə olunacaq. Bildiriş e-poçtları bu ünvana göndəriləcək (onları almaq istəyirsinizsə)."
 
 msgid "fields.managed_tags.label"
 msgstr ""
@@ -439,8 +479,9 @@ msgstr "Dəvətlər"
 msgid "Forum"
 msgstr "Forum"
 
-msgid "Map"
-msgstr "Xəritə"
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Aşkar etmək"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -517,6 +558,9 @@ msgstr "Bu hesab artıq aktiv deyil. Siz sistemdən çıxmısınız."
 #| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Bu hesab artıq aktiv deyil. Siz sistemdən çıxmısınız."
+
+msgid "You have been logged out for security reasons, please log in again."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -2343,10 +2387,6 @@ msgid "Create-Project or Group Button"
 msgstr "Yarat-Layihə və ya Qrup Düyməsi"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Tədbirlər"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Layihələr"
 
@@ -3468,11 +3508,6 @@ msgstr ""
 
 msgid "Withdraw"
 msgstr "Geri çəkin"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "Conference Applications"
-msgstr "Video konfrans Serveri"
 
 msgid "Manage participation applications"
 msgstr ""
@@ -5123,10 +5158,6 @@ msgstr "Layihəni yaratdıqdan sonra Facebook inteqrasiyası mümkündür!"
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Dəvətlər"
-
 msgid "About me"
 msgstr "Haqqımda"
 
@@ -5178,6 +5209,9 @@ msgstr "Heç bir layihə yoxdur."
 
 msgid "There are no invitations."
 msgstr "Heç bir dəvət yoxdur."
+
+msgid "Map"
+msgstr "Xəritə"
 
 #, fuzzy
 msgid "Meeting"
@@ -5545,11 +5579,19 @@ msgstr "İctimaiyyətə görünən məzmunu hər kəs internetdə görə bilər 
 msgid "Registered users only"
 msgstr "Yalnız qeydiyyatdan keçmiş istifadəçilər üçün"
 
-msgid "Edit folder"
-msgstr "Qovluğu redaktə edin"
-
 msgid "Folder name"
 msgstr "Qovluğun adı"
+
+msgid "OK"
+msgstr "Tamam"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a new name for the folder"
+msgstr "Layihə üçün bir ad daxil edin."
+
+msgid "Edit folder"
+msgstr "Qovluğu redaktə edin"
 
 msgid "Delete folder"
 msgstr "Qovluğu silin"
@@ -5575,11 +5617,15 @@ msgstr "Geri"
 msgid "Back to"
 msgstr "Geriyə"
 
+msgid "Create folder"
+msgstr "Qovluq yarat"
+
 msgid "New folder name"
 msgstr "Yeni qovluğun adı"
 
-msgid "Create folder"
-msgstr "Qovluq yarat"
+#, fuzzy
+msgid "Enter a name for the new folder"
+msgstr "Layihə üçün bir ad daxil edin."
 
 msgid ""
 "The conference [[name]] starts tomorrow.\n"
@@ -6134,9 +6180,6 @@ msgstr "Yalnız daxil olan Üzvlər"
 msgid "Everybody"
 msgstr "Hər kəs"
 
-msgid "OK"
-msgstr "Tamam"
-
 msgid "Toggle navigation"
 msgstr "Naviqasiyanı keçirin"
 
@@ -6420,9 +6463,6 @@ msgstr "Qeydiyyatdan sonra avtomatik olaraq əlaqəli layihələr və qrupların
 
 msgid "Email address"
 msgstr "E-poçt ünvanı"
-
-msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Bu giriş kimliyiniz kimi istifadə olunacaq. Bildiriş e-poçtları bu ünvana göndəriləcək (onları almaq istəyirsinizsə)."
 
 msgid "Repeat Password"
 msgstr "Şifrəni təkrarlayın"
@@ -6731,10 +6771,6 @@ msgstr "Bu ərazini araşdırın"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Find partners"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Membership Requests"
-msgstr "Üzvlük İstəkləri"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -7192,6 +7228,11 @@ msgstr ""
 msgid "Edit Profile"
 msgstr "Profilə düzəliş et"
 
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Profilinizi redaktə edin"
+
 msgid "Legacy Messages Archive"
 msgstr ""
 
@@ -7345,6 +7386,9 @@ msgstr "İstifadəçi hesabını silin"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "İstifadəçi profili: %(username)s"
+
+msgid "(ADMIN) View in Admin"
+msgstr ""
 
 msgid "Cooperation requests"
 msgstr "Əməkdaşlıq istəkləri"
@@ -8105,14 +8149,6 @@ msgstr "Təklif"
 msgid "Post new Offer in "
 msgstr "Yeni Təklif göndərin"
 
-msgid "New!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Edit Your Profile"
-msgid "Set up your Profile"
-msgstr "Profilinizi redaktə edin"
-
 msgid "Edit My Profile"
 msgstr "Profilimi Redaktə edin"
 
@@ -8726,10 +8762,22 @@ msgid ""
 "This is a stepping stone update for many more exciting features and interface improvements to come in the near future!"
 msgstr ""
 
-msgid "Version 2.0.0 released"
+msgid "Version 2.1.0 released"
 msgstr ""
 
 msgid "This update includes several features and bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed a bug where registered users could not enter BBB Meetings in public events, projects and groups that they were not a member of.\n"
+"- Fixed a bug where users who wanted to deleted their accounts would incorrectly see an error message saying they were the only admin in a project or group.\n"
+"- Fixed a bug where long text in poll options was sometimes not shown properly.\n"
+"- As an additional account security measure, all user sessions except the current one are now logged out after changing your account password or email.\n"
+"- (RocketChat) improved the stability and performance of the integration with RocketChat (if enabled).\n"
+"- The latest security updates have been applied and further minor bugfixes have been made.\n"
+msgstr ""
+
+msgid "Version 2.0.0 released"
 msgstr ""
 
 msgid ""
@@ -11659,6 +11707,10 @@ msgstr ""
 msgid "Contact request"
 msgstr "İstifadəçini qəbul edin"
 
+#, fuzzy
+msgid "This content has been hidden or removed."
+msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Əgər Siz forumun üzvüsünüzə, yalnız siz mesajlara fayl və şəkillər əlavə edə bilərsiniz. Siz buradan qoşula bilərsiniz:"
 
@@ -14360,6 +14412,16 @@ msgstr "Bu komandanı silmək istədiyinizə əminsiniz?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Bu komandanı silmək istədiyinizə əminsiniz?"
+
+#, fuzzy
+#~| msgid "Edit My Profile"
+#~ msgid "Edit my Profile"
+#~ msgstr "Profilimi Redaktə edin"
+
+#, fuzzy
+#~| msgid "Edit Your Profile"
+#~ msgid "Set up your Profile"
+#~ msgstr "Profilinizi redaktə edin"
 
 #, fuzzy
 #~ msgid "This project shall be made publicly findable via other platforms."

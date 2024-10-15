@@ -4,61 +4,44 @@
 
 {% if current_folder and current_folder.path != '/' %}
     {% if current_folder.container and current_folder.container.path != '/' %}
-        {% captureas href %}{% group_url cosinnus_app_list_url group=group slug=current_folder.container.slug %}{% add_current_params %}{% endcaptureas %}
-        {% captureas label %}{% trans "Back to" %} {{ current_folder.container.title }}{% endcaptureas %}
-        {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=href  %}
+        {% captureas back_href %}{% group_url cosinnus_app_list_url group=group slug=current_folder.container.slug %}{% add_current_params %}{% endcaptureas %}
+        {% captureas back_label %}{% trans "Back to" %} {{ current_folder.container.title }}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=back_label href=back_href  %}
     {% else %}
-	    {% captureas href %}{% group_url cosinnus_app_list_url group=group %}{% add_current_params %}{% endcaptureas %}
-	    {% captureas label %}{% trans "Back to" %} {% trans COSINNUS_CURRENT_APP context "the_app" %}{% endcaptureas %}
-	    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=href  %}
+	    {% captureas back_href %}{% group_url cosinnus_app_list_url group=group %}{% add_current_params %}{% endcaptureas %}
+	    {% captureas back_label %}{% trans "Back to" %} {% trans COSINNUS_CURRENT_APP context "the_app" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=back_label href=back_href  %}
     {% endif %}
 {% endif %}
 
 {% for folder in folders %}
     {% if not group.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG or not folder.container_object.special_type %}
-	    {% captureas href %}{% group_url cosinnus_app_list_url group=group slug=folder.container_object.slug %}{% add_current_params %}{% endcaptureas %}
-	    {% captureas label %}{% if folder.container_object.special_type %}{% trans folder.container_object.title context "special_folder_type" %}{% else %}{{ folder.container_object.title }}{% endif %}{% endcaptureas %}
-	    {% captureas button_class %}{% if forloop.last or folder.container_object.special_type %}regular-space{% else %}fine-space{% endif %}{% endcaptureas %}
+	    {% captureas folder_href %}{% group_url cosinnus_app_list_url group=group slug=folder.container_object.slug %}{% add_current_params %}{% endcaptureas %}
+	    {% captureas folder_label %}{% if folder.container_object.special_type %}{% trans folder.container_object.title context "special_folder_type" %}{% else %}{{ folder.container_object.title }}{% endif %}{% endcaptureas %}
+	    {% captureas folder_button_class %}{% if forloop.last or folder.container_object.special_type %}regular-space{% else %}fine-space{% endif %}{% endcaptureas %}
 	    {% if not is_deep_hierarchy or is_deep_hierarchy == False %}
 	        {% captureas folder_size %}{{ folder.objects|length }}{% endcaptureas %}
 	    {% endif %}
-	    {% captureas active %}{% if current_folder and folder.name == current_folder.slug %}True{% endif %}{% endcaptureas %}
+	    {% captureas folder_active %}{% if current_folder and folder.name == current_folder.slug %}True{% endif %}{% endcaptureas %}
 	    {% captureas button_template %}{% if user|can_create_objects_in:folder.container_object.group and not folder.container_object.special_type %}cosinnus/leftnav_button_editable_folder.html{% else %}cosinnus/leftnav_button.html{% endif %}{% endcaptureas %}
     
-        {% include button_template with active=active extra_classes=button_class icon="fa-folder" icon_content=folder_size label=label href=href folder=folder.container_object downloadable=downloadable %}
+        {% include button_template with active=folder_active extra_classes=folder_button_class icon="fa-folder" icon_content=folder_size label=folder_label href=folder_href folder=folder.container_object downloadable=downloadable %}
     {% endif %}
 {% endfor %}
 
 {% if user|can_create_objects_in:group %}
-	<form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" name="container_form" method="post"class="form-horizontal" autocomplete="off">{% csrf_token %}
-	    <div type="button" class="btn btn-default w100">
-	        <ul class="media-list">
-	            <li class="media">
-	                <span class="pull-left">
-	                    <i class="fa fa-plus"></i>
-	                </span>
-	                <div class="media-body media-body-form-control">
-	                    {{ container_form.title.errors }}
-	                    <!-- use spaces for centering. CSS padding does not work here. -->
-	                    {% captureas placeholder %}{% trans "New folder name" %}{% endcaptureas %}
-	                    {% render_field container_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder %}
-	                    <!-- next-button-is-for-sending -->
-	                </div>
-	            </li>
-	        </ul>
-	    </div>
-	    <button type="submit"  name="create_container" class="btn btn-emphasized large-space" style="display: none;">
-	        <ul class="media-list">
-	            <li class="media">
-	                <span class="pull-left">
-	                    <i class="fa fa-pencil"></i>
-	                </span>
-	                <div class="media-body">
-	                    {% trans "Create folder" %}
-	                </div>
-	            </li>
-	        </ul>
-	    </button>
-	</form>
+  <div class="clearfix v-spacer-m"></div>
+  {% captureas create_label %}{% trans "Create folder" %}{% endcaptureas %}
+  {% include "cosinnus/leftnav_button.html" with icon="fas fa-plus" label=create_label extra_atts='data-toggle="modal" data-target="#create_folder_modal"' extra_classes="x-v3-leftnav-action-button x-v3-leftnav-action-target-active-app" %}
+
+  {% captureas content %}
+      {{ container_form.title.errors }}
+      {% captureas placeholder %}{% trans "New folder name" %}{% endcaptureas %}
+      {% render_field container_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder %}
+      <div class="clearfix large-space"></div>
+  {% endcaptureas %}
+  {% captureas create_folder_action %}.{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}{% endcaptureas %}
+  {% captureas title %}{% trans "Enter a name for the new folder" %}:{% endcaptureas %}
+  {% include "cosinnus/modal_box.html" with id="create_folder_modal" label=content title=title form_action=create_folder_action form_attrs="name='container_form'" submit_name="create_container" title_icon="fa-folder" %}
+
 {% endif %}
-	
