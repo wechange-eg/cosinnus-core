@@ -36,7 +36,7 @@ UPDATES = {
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': _(
             '- Fixed a bug where registered users could not enter BBB Meetings in public events, projects and groups that they were not a member of.\n'
-            '- Fixed a bug where users who wanted to deleted their accounts would incorrectly see an error message saying they were the only admin in a project or group.\n'
+            '- Fixed a bug where users who wanted to delete their account would incorrectly see an error message saying they were the only admin in a project or group.\n'
             '- Fixed a bug where long text in poll options was sometimes not shown properly.\n'
             '- As an additional account security measure, all user sessions except the current one are now logged out after changing your account password or email.\n'
             '- (RocketChat) improved the stability and performance of the integration with RocketChat (if enabled).\n'
