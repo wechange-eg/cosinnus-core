@@ -184,13 +184,6 @@ def rocket_conference_room_membership_update_task(room_id, user_id, group_id):
                 rocket.remove_member_from_room(user, room.rocket_chat_room_id)
 
 
-@celery_app.task(base=RocketChatTask)
-def rocket_group_room_membershio_update_task(room_id):
-    """Delete a group room."""
-    rocket = RocketChatConnection()
-    rocket.groups_room_delete(room_id)
-
-
 def _get_relay_message_instance(model_name, instance_id):
     """Helper to get the instance for a relay message by model-name and id."""
     model = None
