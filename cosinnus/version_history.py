@@ -17,7 +17,7 @@ UPDATES includes release notes for each version shown to the users with:
 
 UPDATES = {
     'Redesign': {
-        'datetime': datetime(2024, 6, 5, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 10, 15, tzinfo=pytz.utc),
         'title': _('Redesign Update'),
         'short_text': _('The redesign has been launched across the platform!'),
         'full_text': _(
@@ -31,7 +31,7 @@ UPDATES = {
         ),
     },
     '2.1.0': {
-        'datetime': datetime(2024, 10, 15, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 10, 14, tzinfo=pytz.utc),
         'title': _('Version 2.1.0 released'),
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': _(
