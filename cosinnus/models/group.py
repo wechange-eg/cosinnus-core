@@ -1818,6 +1818,7 @@ class CosinnusBaseGroup(
 
     def is_app_deactivated(self, app_name):
         """Returns True if the cosinnus app with the given app_name has been deactivated for this group"""
+        # we specifically allow 'cosinnus_file' if it is soft deactivated, to allow attachment uploads
         if self.deactivated_apps:
             return app_name in self.deactivated_apps.split(',')
         return False

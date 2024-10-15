@@ -202,14 +202,16 @@
                                 {% endif %}
                             {% endblock cloud_app %}
                             {% block file_app %}
-                                {% if "file" in object_counts %}
-                                    <div class="dashboard-header-link app-files mobile-hidden">
-                                        <a href="{% group_url 'cosinnus:file:list' group=group %}">
-                                            <i class="fa fa-file"></i>
-                                            <span>{{ object_counts.file }}</span>
-                                            {% if object_counts.file == 1 %}{% trans "File" %}{% else %}{% trans "Files" %}{% endif %}
-                                        </a>
-                                    </div>
+                                {% if not SETTINGS.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP %}
+                                    {% if "file" in object_counts %}
+                                        <div class="dashboard-header-link app-files mobile-hidden">
+                                            <a href="{% group_url 'cosinnus:file:list' group=group %}">
+                                                <i class="fa fa-file"></i>
+                                                <span>{{ object_counts.file }}</span>
+                                                {% if object_counts.file == 1 %}{% trans "File" %}{% else %}{% trans "Files" %}{% endif %}
+                                            </a>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
                             {% endblock file_app %}
                             {% block etherpad_app %}

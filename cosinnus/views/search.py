@@ -138,6 +138,8 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
         """Returns a paginated list of items as mixture of different models, in sorted order"""
         single_querysets = []
         for content_type in self.content_types:
+            if content_type == 'files' and settings.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP:
+                continue
             if content_type == 'cloudfiles':
                 from cosinnus_cloud.hooks import get_nc_user_id
 

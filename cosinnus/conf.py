@@ -310,6 +310,12 @@ class CosinnusConf(AppConf):
     # (they are still admin accessible)
     DISABLED_COSINNUS_APPS = []
 
+    # alternative to putting 'cosinnus_file' in COSINNUS_DISABLED_COSINNUS_APPS,
+    # thereby completely disabling attached files and images, this can be set to True
+    # to hide the file app for users and bounce them from all view-urls,
+    # but still retain the ability to upload/attach/download files in groups
+    SOFT_DISABLE_COSINNUS_FILE_APP = False
+
     # a list of which app checkboxes should be default-active on the create group form
     # Deactivating several group apps by default
     DEFAULT_ACTIVE_GROUP_APPS = [

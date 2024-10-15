@@ -133,6 +133,7 @@ setup(
         'elasticsearch==7.17.9',
         'ecdsa==0.18.0',
         'geopy==1.11.0',
+        'icalendar==5.0.12',
         'jsonfield==3.1.0',
         'l18n==2021.3',
         'lxml==4.9.1',

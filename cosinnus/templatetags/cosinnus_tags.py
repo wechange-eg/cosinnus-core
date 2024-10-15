@@ -376,6 +376,8 @@ def cosinnus_menu(context, template='cosinnus/navbar.html'):
                 continue
             if group.is_app_deactivated(app):
                 continue
+            if app == 'cosinnus_file' and settings.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP:
+                continue
 
             url = group_aware_reverse('cosinnus:%s:index' % name, kwargs={'group': group})
             if app == current_app:

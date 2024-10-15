@@ -15,7 +15,13 @@ def register():
     from cosinnus.core.registries import app_registry, attached_object_registry, url_registry, widget_registry
 
     active_by_default = 'cosinnus_file' in settings.COSINNUS_DEFAULT_ACTIVE_GROUP_APPS
-    app_registry.register('cosinnus_file', 'file', _('Files'), deactivatable=True, active_by_default=active_by_default)
+    app_registry.register(
+        'cosinnus_file',
+        'file',
+        _('Files'),
+        deactivatable=bool(not settings.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP),
+        active_by_default=active_by_default,
+    )
     attached_object_registry.register('cosinnus_file.FileEntry', 'cosinnus_file.utils.renderer.FileEntryRenderer')
     url_registry.register_urlconf('cosinnus_file', 'cosinnus_file.urls')
     widget_registry.register('file', 'cosinnus_file.dashboard.Latest')
