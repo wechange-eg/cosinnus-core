@@ -22,6 +22,7 @@ class ExchangeBackend:
     token_url = None
     username = None
     password = None
+    accept_language = None
     model = None
     serializer = None
     source = None
@@ -29,16 +30,31 @@ class ExchangeBackend:
     token = None
     expires_in = None
 
-    def __init__(self, url, model, serializer, source=None, token_url=None, username=None, password=None):
+    def __init__(
+        self,
+        url,
+        model,
+        serializer,
+        serializer_kwargs=None,
+        source=None,
+        token_url=None,
+        username=None,
+        password=None,
+        accept_language=None,
+    ):
         self.url = url
         self.token_url = token_url or f"{'/'.join(url.split('/')[:-2])}/token/"
         self.username = username
         self.password = password
+        self.accept_language = accept_language
         self.source = source or urllib.parse.urlparse(url).netloc
         self.model = apps.get_model(*model.rsplit('.'))
         serializer_module_name, serializer_name = serializer.rsplit('.', 1)
         serializer_module = import_module(serializer_module_name)
-        self.serializer = getattr(serializer_module, serializer_name)(source=self.source)
+        if not serializer_kwargs:
+            serializer_kwargs = {}
+        serializer_kwargs['source'] = self.source
+        self.serializer = getattr(serializer_module, serializer_name)(**serializer_kwargs)
 
     def pull(self):
         """
@@ -64,7 +80,7 @@ class ExchangeBackend:
         Authenticate with backend if user/password given
         :return:
         """
-        if not self.username and not self.password:
+        if not self.username or not self.password:
             return
         params = {
             'username': self.username,
@@ -84,8 +100,26 @@ class ExchangeBackend:
             raise ExchangeError(response.status_code, response.content)
         if 'errors' in data:
             raise ExchangeError(response.status_code, response.content)
-        self.token = data['token']
+        self.token = data['access']
         self.expires_in = None  # datetime.now() + timedelta(seconds=data['expiresIn'])
+
+    def _serialize_results(self, results):
+        serialized_results = []
+        for result in results:
+            try:
+                serialized_result = self.serializer.to_representation(instance=result)
+                serialized_results.append(serialized_result)
+                if settings.DEBUG:
+                    print(f'>> pulled: {serialized_result.get("url")}')
+            except Exception as e:
+                logger.warn(
+                    'An external data object could not be pulled in for cosinnus exchange!',
+                    extra={'page_result': result, 'exception': str(e)},
+                )
+                if settings.DEBUG:
+                    print(f'>> Error: {result.get("url", result.get("slug"))}')
+                    raise
+        return serialized_results
 
     def _get(self):
         """
@@ -98,6 +132,8 @@ class ExchangeBackend:
         headers = {'Accept': 'application/json'}
         if self.token:
             headers['Authorization'] = f'Bearer {self.token}'
+        if self.accept_language:
+            headers['Accept-Language'] = self.accept_language
         next_url = self.url
         while next_url:
             response = requests.get(next_url, headers=headers)
@@ -107,22 +143,15 @@ class ExchangeBackend:
                 raise ExchangeError(response.status_code, next_url, response.content)
 
             data = json.loads(response.content)
-            page_results = []
-            for page_result in data['results']:
-                try:
-                    page_results.append(self.serializer.to_representation(instance=page_result))
-                    if settings.DEBUG:
-                        print(f'>> pulled: {page_result.get("url")}')
-                except Exception as e:
-                    logger.warn(
-                        'An external data object could not be pulled in for cosinnus exchange!',
-                        extra={'page_result': page_result, 'exception': str(e)},
-                    )
-                    if settings.DEBUG:
-                        print(f'>> Error: {page_result.get("url")}')
-                        raise
-            results += page_results
-            next_url = data['next']
+            if 'next' in data:
+                # paginated results
+                page_results = self._serialize_results(data['results'])
+                results += page_results
+                next_url = data['next']
+            else:
+                # non-paginated results
+                results = self._serialize_results(data)
+                next_url = None
         return results
 
     def _create(self, results):
