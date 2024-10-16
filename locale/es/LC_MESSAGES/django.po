@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-15 17:05+0200\n"
+"POT-Creation-Date: 2024-10-16 09:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: gpt-po v1.0.6\n"
 "Language-Team: \n"
@@ -9113,8 +9113,10 @@ msgstr "Archivos de Cloud vinculados"
 msgid "Cloud Stub"
 msgstr "Cloud falso"
 
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr "No hemos podido recuperar información del archivo de Nextcloud en este momento. Haz clic aquí para ver los archivos directamente en la Cloud."
+#, fuzzy
+#| msgid "Click here to send the validation link again."
+msgid "Click here to view the files directly in the cloud."
+msgstr "Haz clic aquí para enviar de nuevo el enlace de validación."
 
 msgid "There are no cloud files yet"
 msgstr "No hay archivos en la Cloud todavía"
@@ -13758,6 +13760,9 @@ msgstr "Estas seguro de que quieres eliminar este contenedor y todos los objetos
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Estas seguro de que quieres eliminar este objeto?"
+
+#~ msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+#~ msgstr "No hemos podido recuperar información del archivo de Nextcloud en este momento. Haz clic aquí para ver los archivos directamente en la Cloud."
 
 #~ msgid "Edit my Profile"
 #~ msgstr "Editar mi perfil"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-15 17:05+0200\n"
+"POT-Creation-Date: 2024-10-16 09:17+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9281,8 +9281,10 @@ msgstr "Связанные облачные файлы"
 msgid "Cloud Stub"
 msgstr "Облачная заглушка"
 
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr "Запросить информацию напрямую от Nextcloud сейчас невозможно. Нажми здесь, чтобы перейти к файлам напрямую в облаке."
+#, fuzzy
+#| msgid "Click here to send the validation link again."
+msgid "Click here to view the files directly in the cloud."
+msgstr "Нажмите сюда, чтобы повторить отправку ссылки на валидацию."
 
 msgid "There are no cloud files yet"
 msgstr "Облачных файлов пока нет"
@@ -13979,6 +13981,9 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Вы уверены, что хотите удалить этот проект?"
+
+#~ msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+#~ msgstr "Запросить информацию напрямую от Nextcloud сейчас невозможно. Нажми здесь, чтобы перейти к файлам напрямую в облаке."
 
 #~ msgid "Edit my Profile"
 #~ msgstr "Редактировать мой профиль"
