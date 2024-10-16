@@ -66,9 +66,11 @@ class CosinnusConf(AppConf):
         '/group/forum/cloud/oauth2/',
         f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
         '/account/verify_email/',
-        # all bbb API endpoints and guest-access views are unlocked (sensitive endpoints have their own logged-in
+        # all bbb API endpoints except guest-access views are unlocked (sensitive endpoints have their own logged-in
         # checks)
-        '/bbb/',
+        '/bbb/room/',
+        '/bbb/queue/',
+        '/bbb/queue-api/',
         # these deprecated URLs can be removed from the filter list once the URLs are removed
         # and their /account/ URL-path equivalents are the only remaining version of the view URL
         '/administration/list-unsubscribe/',
