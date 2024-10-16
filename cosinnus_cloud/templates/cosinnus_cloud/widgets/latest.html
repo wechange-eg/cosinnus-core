@@ -1,8 +1,9 @@
 {% load i18n cosinnus_tags %}
 
-{% if rows %}
+{# Temporarily ALWAYS show the cloud error message in the widget! #}
+{% if False and rows %}
     {% include 'cosinnus_cloud/attached_cloud_files.html' with objects=rows no_indent=1 %}
-{% elif had_error %}
+{% elif True or had_error %}
     <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space" href="{% group_url 'cosinnus:cloud:index' group=group %}">
         <ul class="media-list">
             <li class="media">
@@ -10,7 +11,7 @@
                     <i class="fa fa-cloud"></i>
                 </a>
                 <div class="media-body">
-                    <a>{% trans "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud." %}</a>
+                    <a>{% trans "Click here to view the files directly in the cloud." %}</a>
                 </div>
             </li>
         </ul>
