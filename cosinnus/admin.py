@@ -58,6 +58,7 @@ from cosinnus.models.user_import import CosinnusUserImport
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
 
 
@@ -1008,6 +1009,9 @@ class UserAdmin(DjangoUserAdmin):
 
         count = 0
         for user in queryset:
+            if check_user_superuser(user):
+                self.message_user(request, 'Skipping deactivating a user that is an admin! Careful who you select!')
+                continue
             deactivate_user_and_mark_for_deletion(user)
             count += 1
         message = _(
@@ -1087,6 +1091,9 @@ class UserAdmin(DjangoUserAdmin):
         deactivated_groups_count = 0
         hidden_content_count = 0
         for user in queryset:
+            if check_user_superuser(user):
+                self.message_user(request, 'Skipping banning a user that is an admin! Careful who you select!')
+                continue
             _group_count, _hidden_count = _deactivate_or_hide_all_user_content(user)
             with elastic_threading_disabled():
                 deactivate_user_and_mark_for_deletion(user)
