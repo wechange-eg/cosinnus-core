@@ -1,3 +1,5 @@
+import json
+import logging
 from urllib.parse import unquote
 
 from django.contrib.auth import login, logout
@@ -41,6 +43,8 @@ from cosinnus.views.common import (
     cosinnus_pre_logout_actions,
 )
 from cosinnus.views.user import UserSignupTriggerEventsMixin
+
+logger = logging.getLogger('cosinnus')
 
 
 class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
@@ -520,3 +524,61 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
         # return data from a freshly serialized user object so all fields show up
         data = self.get_data(CosinnusHybridUserSerializer(user, context={'request': request}))
         return Response(data)
+
+
+class UserUIFlagsView(APIView):
+    """
+    Read and set the UI-Flags JSON in user profile. Accepts arbitrary JSON content.
+    The UI-Flags are also included in the "/v3/user/profile" response.
+    """
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    MAX_UI_FLAGS_LENGTH = 10000
+
+    @swagger_auto_schema(
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'ui_flag1': ['value1', 'value2'],
+                            'ui_flag2': 'value3',
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
+    )
+    def get(self, request):
+        ui_flags = request.user.cosinnus_profile.settings.get('ui_flags', {})
+        return Response(data=ui_flags)
+
+    def post(self, request):
+        ui_flag = request.data
+        if not isinstance(ui_flag, dict) or not ui_flag:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'error': 'Non-empty dictionary expected.'})
+
+        # update ui_flags
+        profile_settings = request.user.cosinnus_profile.settings
+        if 'ui_flags' not in profile_settings:
+            profile_settings['ui_flags'] = {}
+        profile_settings['ui_flags'].update(**ui_flag)
+
+        # Limit the maximum allowed length of ui_flags.
+        if len(json.dumps(profile_settings['ui_flags'])) > self.MAX_UI_FLAGS_LENGTH:
+            logger.error('User UI-Flags API: ui_flags not saved, as the maximum allowed size is exceeded!')
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'error': 'Stored ui_flags size exceeded.'})
+
+        # save profile
+        request.user.cosinnus_profile.save()
+
+        return Response(data=profile_settings['ui_flags'])
