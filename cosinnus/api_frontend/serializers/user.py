@@ -316,6 +316,12 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
             f'Default when omitted is different for each portal.'
         ),
     )
+    ui_flags = serializers.JSONField(
+        source='cosinnus_profile.settings.ui_flags',
+        required=False,
+        default=dict,
+        help_text='JSON dictionary with ui_flags.',
+    )
 
     # for `CosinnusUserDynamicFieldsSerializerMixin`
     all_fields_optional = True
