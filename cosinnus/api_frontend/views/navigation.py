@@ -1247,7 +1247,9 @@ class ProfileView(LanguageMenuItemMixin, APIView):
 
             # about
             if settings.COSINNUS_V3_MENU_HOME_LINK:
-                about_label = _('About %(portal_name)s') % {'portal_name': settings.COSINNUS_PORTAL_NAME.upper()}
+                about_label = settings.COSINNUS_V3_MENU_HOME_LINK_LABEL or _('About %(portal_name)s') % {
+                    'portal_name': settings.COSINNUS_PORTAL_NAME.upper()
+                }
                 about_item = MenuItem(
                     about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About'
                 )

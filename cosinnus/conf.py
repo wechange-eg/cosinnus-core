@@ -1017,6 +1017,9 @@ class CosinnusConf(AppConf):
     # Link of the brand / home button in the main navigation. If set to None personal-dashboard is used.
     V3_MENU_HOME_LINK = '/cms/?noredir=1'
 
+    # Label for the link of the brand / home button in the main navigation. If set to None "About PORTALNAME" is used.
+    V3_MENU_HOME_LINK_LABEL = None
+
     # Header label of the top left menu für the community space
     # default if None: "PORTALNAME Community"
     V3_COMMUNITY_HEADER_CUSTOM_LABEL = None

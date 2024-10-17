@@ -541,7 +541,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
                     'Notification Preferences', '/profile/notifications/', 'fa-envelope', id='NotificationPreferences'
                 ),
                 MenuItem(
-                    f'About {settings.COSINNUS_PORTAL_NAME.upper()}',
+                    settings.COSINNUS_V3_MENU_HOME_LINK_LABEL or f'About {settings.COSINNUS_PORTAL_NAME.upper()}',
                     settings.COSINNUS_V3_MENU_HOME_LINK,
                     'fa-info-circle',
                     id='About',
