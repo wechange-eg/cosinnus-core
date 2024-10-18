@@ -439,6 +439,20 @@
                     </li>
                   </ul>
                 </button>
+                {% if SETTINGS.COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED %}
+                  <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=externalresource">
+                    <ul class="media-list">
+                      <li class="media">
+                      <span class="pull-left" href="#">
+                        <i class="fa {{ TRANS_EXTERNAL_RESOURCE_ICON }}"></i>
+                      </span>
+                        <div class="media-body">
+                          {{ TRANS_EXTERNAL_RESOURCES }}
+                        </div>
+                      </li>
+                    </ul>
+                  </button>
+              {% endif %}
             {% endif %}
 
             {% comment %}

@@ -65,6 +65,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Cloud Files" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "externalresources" %}
+                {% if showIcon == 1 %}<i class="fa {{ COSINNUS_TRANS.COSINNUS_TRANS_EXTERNAL_RESOURCE_ICON }}"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_EXTERNAL_RESOURCES }}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif singular %}
             {% if type == "people" %}
@@ -98,6 +101,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Cloud File" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "externalresources" %}
+                {% if showIcon == 1 %}<i class="fa {{ COSINNUS_TRANS.COSINNUS_TRANS_EXTERNAL_RESOURCE_ICON }}"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_EXTERNAL_RESOURCE }}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% elif create %}
             {% if type == "people" %}
@@ -160,6 +166,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-cloud"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Cloud Files" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "externalresources" %}
+                {% if showIcon == 1 %}<i class="fa {{ COSINNUS_TRANS.COSINNUS_TRANS_EXTERNAL_RESOURCE_ICON }}"></i>{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_EXTERNAL_RESOURCES }}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% endif %}
     </span>

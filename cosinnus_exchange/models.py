@@ -120,6 +120,8 @@ class ExchangeObjectBaseModel(IndexingUtilsMixin, models.Model):
         self.mt_location_lon = kwargs.get('mt_location_lon')
         self.description = kwargs.get('description')
         self.icon_image_url = kwargs.get('icon_image_url')
+        self.background_image_small_url = kwargs.get('background_image_small_url')
+        self.background_image_large_url = kwargs.get('background_image_large_url')
         self.contact_info = kwargs.get('contact_info')
         self.mt_topics = ','.join(str(t) for t in kwargs.get('mt_topics', []))
 
@@ -133,8 +135,6 @@ class ExchangeObjectBaseModel(IndexingUtilsMixin, models.Model):
         self.mt_tags = ','.join(all_tags)
 
         # fill all other fields' default values, or None (haystack needs this)
-        self.background_image_small_url = None
-        self.background_image_large_url = None
         self.group_slug = None
         self.group_name = None
         self.participant_count = 0
@@ -195,3 +195,16 @@ class ExchangeEvent(ExchangeObjectBaseModel):
         self.from_date = kwargs.pop('from_date', None)
         self.to_date = kwargs.pop('to_date', None)
         super().__init__(**kwargs)
+
+
+class ExchangeExternalResource(ExchangeObjectBaseModel):
+    description_detail = models.TextField(blank=True, null=True)
+    website_url = models.URLField(blank=True, null=True)
+
+    class Meta(object):
+        managed = False
+
+    def __init__(self, **kwargs):
+        super(ExchangeExternalResource, self).__init__(**kwargs)
+        self.description_detail = kwargs.get('description_detail')
+        self.website_url = kwargs.get('website_url')

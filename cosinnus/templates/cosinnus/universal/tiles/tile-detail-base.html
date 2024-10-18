@@ -31,7 +31,9 @@
                     {% if backgroundImageLargeUrl %}
                         <img class="tile-image tile-image-background" src="{{ backgroundImageLargeUrl }}" /> 
                     {% endif %}
-                    <img class="floating-tile-image" src="{{ iconImageUrl }}" />
+                    {% if iconImageUrl %}
+                      <img class="floating-tile-image" src="{{ iconImageUrl }}" />
+                    {% endif %}
                 </div>
             </div>
         {% endblock header_image %}
