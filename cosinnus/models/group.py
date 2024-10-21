@@ -511,6 +511,7 @@ class CosinnusGroupMembership(BaseMembership):
         settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='memberships', on_delete=models.CASCADE
     )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cosinnus_memberships', on_delete=models.CASCADE)
+    is_late_invitation = models.BooleanField(_('Is Late Invitation'), default=False)
 
     CACHE_KEY_MODEL = 'CosinnusGroup'
 
