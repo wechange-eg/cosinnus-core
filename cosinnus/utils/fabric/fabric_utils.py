@@ -169,6 +169,7 @@ def setup_env(
         # this is why here we restart the unit config, so all gets restarted after stopping
         env.start_command = 'sudo systemctl restart unit-config.service'
 
+    env.celery_restart_command = f'sc restart portal-{portal_name}-celery.service'
     env.portal_additional_less_to_compile = []  # a list of django apps for which to compile extra less
     env.db_name = portal_name
     env.db_username = portal_name
