@@ -10,6 +10,7 @@ from django_otp.forms import OTPTokenForm
 from two_factor.views import BackupTokensView, DisableView, ProfileView, QRGeneratorView, SetupCompleteView, SetupView
 
 from cosinnus.forms.authentication import DisableFormWithPasswordValidation
+from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.urls import get_non_cms_root_url, safe_redirect
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 
@@ -26,8 +27,12 @@ class AdminOnlyOTPTokenValidationView(auth_views.LoginView):
 
     def dispatch(self, request, *args, **kwargs):
         user = self.request.user
-        if not user.is_authenticated or user.is_verified() or not (user.is_staff or user.is_superuser):
-            return redirect('/admin/')
+        if not user.is_authenticated:
+            return redirect('login')
+        elif user.is_verified():
+            return redirect(self.get_success_url())
+        elif not (user.is_staff or check_user_superuser(user)):
+            return redirect('cosinnus:user-dashboard')
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         return super(AdminOnlyOTPTokenValidationView, self).dispatch(request, *args, **kwargs)
 
@@ -37,7 +42,9 @@ class AdminOnlyOTPTokenValidationView(auth_views.LoginView):
 
     def get_success_url(self):
         url = self.get_redirect_url()
-        return url or '/admin/'
+        if not url:
+            url = '/admin/' if self.request.user.is_staff else '/administration/'
+        return url
 
 
 admin_only_otp_token_validation = AdminOnlyOTPTokenValidationView.as_view()
