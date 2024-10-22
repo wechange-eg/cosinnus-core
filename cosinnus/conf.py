@@ -1528,6 +1528,9 @@ class CosinnusConf(AppConf):
     # and are used to configure the frontend server
     V3_PORTAL_SETTINGS = {}
 
+    # enable group permissions in the django admin, including the group admin and the group field in the user admin.
+    DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
+
 
 class CosinnusDefaultSettings(AppConf):
     """Settings without a prefix namespace to provide default setting values for other apps.
