@@ -215,6 +215,14 @@ def restartfrontend(_ctx):
 
 
 @task
+def restartcelery(_ctx):
+    """Restart the celery service"""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run(env.celery_restart_command)
+
+
+@task
 def stop(_ctx):
     """Stop the django service"""
     env = get_env()
