@@ -176,7 +176,7 @@ class AdminOTPMiddleware(MiddlewareMixin):
         # check if the user is a superuser and they attempted to access a covered url
         if (
             user
-            and check_user_superuser(user)
+            and (check_user_superuser(user) or user.is_staff)
             and request.path.startswith(filter_path)
             and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA])
         ):
@@ -195,6 +195,7 @@ class AdminOTPMiddleware(MiddlewareMixin):
             user
             and user.is_authenticated
             and not check_user_superuser(user)
+            and not user.is_staff
             and request.path.startswith('/admin/')
             and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA])
         ):
