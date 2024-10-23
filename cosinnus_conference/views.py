@@ -933,7 +933,8 @@ class ConferenceApplicationView(SamePortalGroupMixin,
     def _applications_are_active(self):
         pm = self.participation_management
         if pm:
-            return pm.applications_are_active
+            user = self.request.user
+            return pm.applications_are_active or pm.is_late_application_allowed(user)
         return True
 
     def _user_can_edit_application(self):
