@@ -1429,6 +1429,13 @@ class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormV
 
     # TODONEXT: error handling!
 
+    def _is_group_invitation_late(self):
+        """Checks if a conference invitation is issued after the application end date has passed."""
+        if self.group.group_is_conference and self.group.participation_management.count() == 1:
+            participation_management = self.group.participation_management.first()
+            return participation_management.applications_have_ended
+        return False
+
     def do_invite_valid_user(self, user, form):
         try:
             m = self.membership_class.objects.get(user=user, group=self.group)
@@ -1447,7 +1454,12 @@ class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormV
                 # trigger signal for accepting that user's join request
             return HttpResponseRedirect(self.get_success_url())
         except self.membership_class.DoesNotExist:
-            self.membership_class.objects.create(user=user, group=self.group, status=MEMBERSHIP_INVITED_PENDING)
+            self.membership_class.objects.create(
+                user=user,
+                group=self.group,
+                status=MEMBERSHIP_INVITED_PENDING,
+                is_late_invitation=self._is_group_invitation_late(),
+            )
             signals.user_group_invited.send(sender=self, obj=self.group, user=self.request.user, audience=[user])
 
             # sends a direct message about the invitation to the user (non-rocketchat only)
