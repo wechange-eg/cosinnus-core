@@ -12,6 +12,7 @@ var templates = {
     'events': require('tiles/tile-detail-events'),
     'ideas': require('tiles/tile-detail-ideas'),
     'organizations': require('tiles/tile-detail-organizations'),
+    'externalresources': require('tiles/tile-detail-externalresources'),
     'error-403': require('tiles/tile-detail-error-403'),
     'error': require('tiles/tile-detail-error'),
 };

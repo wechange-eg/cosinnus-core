@@ -397,6 +397,9 @@ class CosinnusConf(AppConf):
     # default cron run frequency for exchange data pulls
     EXCHANGE_RUN_EVERY_MINS = 60 * 24  # once a day
 
+    # Are external resources included in the search
+    EXCHANGE_EXTERNAL_RESOURCES_ENABLED = False
+
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
 

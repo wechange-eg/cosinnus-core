@@ -137,6 +137,10 @@ module.exports = ContentControlView.extend({
             self.defaults.availableFilterList['cloudfiles'] = true;
             self.defaults.activeFilters['cloudfiles'] = false;
         }
+        if (COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED) {
+            self.defaults.availableFilters['externalresources'] = true;
+            self.defaults.activeFilters['externalresources'] = true;
+        }
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
         _.each(this.options.availableFilters, function(active, type){
@@ -1590,6 +1594,9 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_CLOUD_ENABLED) {
             this.state.activeFilters['cloudfiles'] = this.options.availableFilterList.cloudfiles ? util.ifundef(urlParams.cloudfiles, this.options.activeFilters.cloudfiles) : false;
         }
+        if (COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED) {
+            this.state.activeFilters['externalresources'] = this.options.availableFilterList.externalresources ? util.ifundef(urlParams.externalresources, this.options.activeFilters.externalresources) : true;
+        }
 
         if (cosinnus_active_user) {
         	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
@@ -1691,6 +1698,11 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_CLOUD_ENABLED) {
             _.extend(searchParams, {
                 cloudfiles: this.state.activeFilters.cloudfiles
+            });
+        }
+        if (COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED) {
+            _.extend(searchParams, {
+                externalresources: this.state.activeFilters.externalresources
             });
         }
         if (this.state.activeTopicIds.length > 0) {

@@ -165,6 +165,8 @@ class TaggableModelSearchForm(SearchForm):
         self.request = kwargs.pop('request')
         super(TaggableModelSearchForm, self).__init__(*args, **kwargs)
         self.fields['models'].choices = list(MODEL_ALIASES.items())
+        if settings.COSINNUS_EXCHANGE_ENABLED and settings.COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED:
+            self.fields['models'].choices.append(('externalresource', '<external>'))
 
     def get_models(self):
         """Return the models of types user has selected to filter search on"""
@@ -180,6 +182,8 @@ class TaggableModelSearchForm(SearchForm):
 
             if not model_aliases_query:
                 model_aliases_query = list(MODEL_ALIASES.keys())
+                if settings.COSINNUS_EXCHANGE_ENABLED and settings.COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED:
+                    model_aliases_query.append('externalresource')
             for model_alias in model_aliases_query:
                 if model_alias in list(MODEL_ALIASES.keys()):
                     model_string = MODEL_ALIASES[model_alias]
