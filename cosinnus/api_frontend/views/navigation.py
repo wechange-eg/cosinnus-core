@@ -1469,15 +1469,6 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                     services_navigation_items.append(
                         MenuItem(_('Messages'), reverse('postman:inbox'), icon='messages', id='Messages')
                     )
-        # add "Calendar" link to services for all logged in users if the portal has a seperate Events forum group
-        if request.user.is_authenticated:
-            if settings.NEWW_EVENTS_GROUP_SLUG and settings.NEWW_EVENTS_GROUP_SLUG != settings.NEWW_FORUM_GROUP_SLUG:
-                events_url = group_aware_reverse(
-                    'cosinnus:event:list', kwargs={'group': settings.NEWW_EVENTS_GROUP_SLUG}
-                )
-                services_navigation_items.insert(
-                    0, MenuItem(_('Events'), events_url, icon='fa-calendar', is_external=False, id='Events')
-                )
         # add "Discover" link to services for non-logged-in users on open portals
         if not settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN and not request.user.is_authenticated:
             services_navigation_items.insert(
