@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 09:17+0200\n"
+"POT-Creation-Date: 2024-10-21 14:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1495,6 +1495,9 @@ msgstr "Partnerschaft zur Erreichung der Ziele"
 
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
+
+msgid "Is Late Invitation"
+msgstr "Ist verspätete Einladung"
 
 msgid "Team membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
@@ -4319,6 +4322,9 @@ msgstr "Registrierte Benutzer/innen einladen..."
 msgid "Invite a member"
 msgstr "Mitglied einladen"
 
+msgid "Participation application has ended. If you invite members now, they can register despite the deadline having expired."
+msgstr "Die Anmeldefrist ist beendet. Wenn du jetzt mitglieder einlädst, dürfen sich diese trotz abgelaufener Frist nachträglich anmelden."
+
 msgid "Enter a user name or email to find users to invite..."
 msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
 
@@ -4339,6 +4345,9 @@ msgstr "Einladung annehmen"
 
 msgid "Invited to be a member"
 msgstr "Als Mitglied eingeladen"
+
+msgid "late invitation"
+msgstr "verspätete Einladung"
 
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
@@ -5017,6 +5026,9 @@ msgstr "Ansehen"
 
 msgid "Register and apply!"
 msgstr "Registrieren und Teilnahme beantragen!"
+
+msgid "Late registration possible"
+msgstr "Spätanmeldung ermöglicht"
 
 msgid "You have been invited to apply!"
 msgstr "Du wurdest eingeladen, die Teilnahme zu beantragen!"

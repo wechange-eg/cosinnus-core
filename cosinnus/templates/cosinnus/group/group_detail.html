@@ -224,7 +224,13 @@
                                 
                                 {% if user|has_write_access:object %}
                                     <legend>{% trans "Invite a member" %}</legend>
-                                    
+
+                                    {% if group.group_is_conference and group.use_conference_applications and group.participation_management.first.applications_have_ended  %}
+                                      <p class="transparent">
+                                        {% trans "Participation application has ended. If you invite members now, they can register despite the deadline having expired." %}
+                                      </p>
+                                    {% endif %}
+
                                     <form action="{% group_url 'cosinnus:group-user-add-multiple' group=object %}" method="post" class="cosinnus-form">
                                         {% csrf_token %}
                                         {{ member_invite_form.non_field_errors }}
@@ -317,6 +323,9 @@
                                                                     {% trans "Invited to be a member" %}
                                                                     &nbsp;
                                                                     <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
+                                                                    {% if group.group_is_conference and group.use_conference_applications and group.participation_management.all.first and group.participation_management.first.applications_have_ended and  group.participation_management.first|is_late_application_allowed:member %}
+                                                                      ({% trans "late invitation" %})
+                                                                    {% endif %}
                                                                 </span>
                                                                 <a class="username-name" href="{% url 'cosinnus:profile-detail' username=member.username %}">
                                                                     {{ member|full_name }}

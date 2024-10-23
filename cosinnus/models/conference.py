@@ -25,6 +25,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
+from cosinnus.models.membership import MEMBERSHIP_INVITED_PENDING
 from cosinnus.models.mixins.translations import TranslatableFormsetJsonFieldMixin, TranslateableFieldsModelMixin
 from cosinnus.utils.files import get_conference_conditions_filename, get_presentation_filename
 from cosinnus.utils.functions import clean_single_line_text, unique_aware_slugify, update_dict_recursive
@@ -898,6 +899,21 @@ class ParticipationManagement(TranslatableFormsetJsonFieldMixin, models.Model):
             now = timezone.now()
             return now >= self.application_start and now <= self.application_end
         return True
+
+    @property
+    def applications_have_ended(self):
+        if self.application_end:
+            now = timezone.now()
+            return now > self.application_end
+        return False
+
+    def is_late_application_allowed(self, user):
+        membership = CosinnusGroupMembership.objects.filter(
+            group=self.conference, user=user, status=MEMBERSHIP_INVITED_PENDING
+        ).first()
+        if membership and membership.is_late_invitation:
+            return True
+        return False
 
     @property
     def application_time_string(self):
