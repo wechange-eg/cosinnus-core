@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 09:17+0200\n"
+"POT-Creation-Date: 2024-10-16 12:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7857,6 +7857,12 @@ msgstr "Klicke hier, um das externe Bild \"%(image_name)s\" zu öffnen"
 
 msgid "Click here to view external image"
 msgstr "Klicke hier, um das externe Bild zu öffnen"
+
+msgid "External Resource"
+msgstr "Externe Ressource"
+
+msgid "External Resources"
+msgstr "Externe Ressourcen"
 
 msgid "You are not currently in any Projects"
 msgstr "Du bist noch in keinen Projekten Mitglied"

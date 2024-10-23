@@ -18,6 +18,7 @@ from cosinnus.forms.search import TaggableModelSearchForm
 from cosinnus.models.cloud import NextcloudFulltextSearchQuerySet
 from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
 from cosinnus.models.user_dashboard import DashboardItem
+from cosinnus.trans.exchange import CosinnusExternalResourceTrans
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.pagination import QuerysetLazyCombiner
 from cosinnus.views.user_dashboard import ModelRetrievalMixin
@@ -37,6 +38,17 @@ class TaggableSearchView(SearchView):
 
     def get_form_kwargs(self):
         return {'request': self.request}
+
+    def get_context(self):
+        context = super(TaggableSearchView, self).get_context()
+        if settings.COSINNUS_EXCHANGE_ENABLED and settings.COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED:
+            context.update(
+                {
+                    'TRANS_EXTERNAL_RESOURCES': CosinnusExternalResourceTrans.VERBOSE_NAME_PLURAL,
+                    'TRANS_EXTERNAL_RESOURCE_ICON': CosinnusExternalResourceTrans.ICON,
+                }
+            )
+        return context
 
 
 search = search_view_factory(
