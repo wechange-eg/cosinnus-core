@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-21 14:28+0200\n"
+"POT-Creation-Date: 2024-10-24 15:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -783,6 +783,10 @@ msgstr "%(sender_name)s hat gerade aus einer Idee, der du folgst, das Projekt \"
 #, python-format
 msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
 msgstr "Du hast ein erfolgreiches Match mit %(sender_name)s. Lerne jetzt dein Match über Rocket.Chat kennen"
+
+#, python-format
+msgid "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
+msgstr "%(sender_name)s findet dich und deine Aktivitäten interessant. Schaue dir das Nutzer/innen-Profil an"
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Deutsch"
@@ -6957,8 +6961,9 @@ msgstr "Falls die Bestätigungsmail nicht ankommt, überprüfe bitte deinen Spam
 msgid "Find a Match"
 msgstr "Finde einen Match"
 
-msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
-msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer/innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner/innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer/innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
+#| msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange. If you express interest in another user, this user is notified and gets the ability to do the same with you."
+msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer/innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner/innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer/innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt. Wenn du Interesse an einem/r Nutzer/in bekundest, wird diese/r benachrichtigt und erhält die Möglichkeit, dasselbe mit dir zu tun."
 
 msgid "Wonderful, we definitely have so much to discuss!"
 msgstr "Wunderbar, wir haben so viel zu besprechen!"

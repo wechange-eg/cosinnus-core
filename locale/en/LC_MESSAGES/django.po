@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-21 14:28+0200\n"
+"POT-Creation-Date: 2024-10-24 15:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -836,6 +836,10 @@ msgstr ""
 
 #, python-format
 msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
 msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -7053,7 +7057,7 @@ msgstr ""
 msgid "Find a Match"
 msgstr ""
 
-msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange. If you express interest in another user, this user is notified and gets the ability to do the same with you."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
