@@ -179,7 +179,7 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
         selected_user_id = self.request.GET.get('user')
         if selected_user_id:
             # show user specified by request parameter
-            selected_user = self.model.objects.filter(pk=selected_user_id).first()
+            selected_user = self.model.objects.filter(user__pk=selected_user_id).first()
             scored_user_profiles = [selected_user] if selected_user else []
         else:
             # show scored user profiles
