@@ -1,0 +1,24 @@
+{% load i18n cosinnus_tags static %}
+
+{% with external_resource=object %}
+	<div class="app-main">
+	    <a class="btn btn-emphasized w100" href="{{ external_resource.url }}" target="_blank">
+	        <ul class="media-list large-space">
+	            <li class="media">
+                    <span class="pull-left">
+						<img src="{% if external_resource.icon_image_url %}{{ external_resource.icon_image_url }}{% else %}{% static LARGE_ICON %}{% endif %}" title="{{ external_resource.title }}" />
+                    </span>
+	                <div class="media-body">
+						<span class="annotation">
+							{% trans "from" %}: {{ external_resource.source }}
+                        </span>
+						<span>
+							{{ external_resource.title }}
+							<i class="fa fa-external-link"></i>
+						</span>
+	                </div>
+	            </li>
+	        </ul>
+	    </a>
+	</div>
+{% endwith %}

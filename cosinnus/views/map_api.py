@@ -13,6 +13,7 @@ from django.contrib.gis.geos import Point
 from django.db.models import Q
 from django.http.response import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound
 from django.utils.encoding import force_str
+from django.utils.html import unquote
 from haystack.backends import SQ
 from haystack.inputs import AutoQuery
 from haystack.query import SearchQuerySet
@@ -128,6 +129,12 @@ if settings.COSINNUS_CLOUD_ENABLED:
     MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update(
         {
             'cloudfiles': True,
+        }
+    )
+if settings.COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED:
+    MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update(
+        {
+            'externalresources': True,
         }
     )
 
@@ -530,13 +537,13 @@ class MapDetailView(SearchQuerySetMixin, APIView):
         if portal == 0:
             portal = CosinnusPortal.get_current().id
 
-        # try to retrieve the requested object
-        model = SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
-        if model is None:
-            return HttpResponseBadRequest('``type`` param indicated an invalid data model type!')
-
         # for internal DB based objects:
         if portal != settings.COSINNUS_EXCHANGE_PORTAL_ID:
+            # try to retrieve the requested object
+            model = SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
+            if model is None:
+                return HttpResponseBadRequest('``type`` param indicated an invalid data model type!')
+
             # TODO: for groups/projects we should really use the cache here.
             if model_type == 'people':
                 # UserProfiles are retrieved independent of the portal
@@ -582,6 +589,13 @@ def get_searchresult_by_itemid(itemid, user=None):
 def get_searchresult_by_args(portal, model_type, slug, user=None):
     """Retrieves a HaystackMapResult just as the API would, for a given shortid
     in the form of `<classid>.<instanceid>` (see `itemid_from_searchresult()`)."""
+
+    # convert url parameters to indexed values
+    try:
+        portal = int(portal)
+    except Exception:
+        pass
+    slug = unquote(slug)
 
     # if the portal id is COSINNUS_EXCHANGE_PORTAL_ID, we have an external item, so look up the external models
     if settings.COSINNUS_EXCHANGE_ENABLED and portal == settings.COSINNUS_EXCHANGE_PORTAL_ID:

@@ -68,10 +68,6 @@
                 {% trans "Sorry! Something went wrong..." %}
             </div>
             <iframe style="display: none;" src="" allow="{% comment %} Src and allow will be set in JS! {% endcomment %}" width="100%" height="100%"></iframe>
-
-            {% if has_bbb_video %}
-                {% include "cosinnus/conference/conference_invitation_text_buttons.html" with object_type="group" %}
-            {% endif %}
         </div>
 
 
@@ -86,47 +82,24 @@
                     </div>
                 </li>
             </ul>
-        </div>
-    </div> 
-    
-   
-    <div class="video-conference-iframe">
-        <div class="loading-frame">
-            <span class="fa fa-fw fa-spin fa-cog fa-3x"></span>
-        </div>
-        <div style="display: none;" class="error-frame">
-            {% trans "Sorry! Something went wrong..." %}
-        </div>
-        <iframe style="display: none;" src="" allow="{% comment %} Src and allow will be set in JS! {% endcomment %}" width="100%" height="100%"></iframe>
-    </div>
+        </button>
 
-    <button type="button" class="btn btn-small w100 btn-emphasized btn-autosize fullscreen-leave-button fullscreen-toggle mobile-hidden">
-        <ul class="media-list">
-            <li class="media">
-                <span class="pull-left">
-                    <i class="fa fa-compress"></i>
-                </span>
-                <div class="media-body">
-                    {% trans "Leave Fullscreen" %}
-                </div>
-            </li>
-        </ul>
-    </button>
+        {% if has_bbb_video %}
+            {% include "cosinnus/conference/conference_invitation_text_buttons.html" with object_type="group" %}
+        {% endif %}
 
-    {% if has_bbb_video %}
-        {% include "cosinnus/conference/conference_invitation_text_buttons.html" with object_type="group" %}
-    {% endif %}
-
-    <!-- Safari can only scroll with the extra CSS, but non-safari browser can't scroll with it, so add it dynamically. -->
-    <script type="text/javascript">
-        var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
-        var is_safari = navigator.userAgent.indexOf("Safari") > -1;
-        function isSafariBrowser(){
-            if (is_safari){
-                if (is_chrome)  // Chrome seems to have both Chrome and Safari userAgents
-                    return false;
-                else
-                    return true;
+        <!-- Safari can only scroll with the extra CSS, but non-safari browser can't scroll with it, so add it dynamically. -->
+        <script type="text/javascript">
+            var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+            var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+            function isSafariBrowser(){
+                if (is_safari){
+                    if (is_chrome)  // Chrome seems to have both Chrome and Safari userAgents
+                        return false;
+                    else
+                        return true;
+                }
+                return false;
             }
             if (isSafariBrowser()){
                 $('.video-conference-iframe').css('overflow-y', 'scroll').css('-webkit-overflow-scrolling', 'touch');

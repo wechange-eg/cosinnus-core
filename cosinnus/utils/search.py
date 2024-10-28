@@ -134,11 +134,23 @@ class TemplateResolveMixin(object):
         }
         resolved_template_names = [tn.format(**resolve_data) for tn in template_names]
         t = loader.select_template(resolved_template_names)
-        return t.render({'object': obj})
+        context = {'object': obj}
+        context.update(**self.get_additional_context())
+        return t.render(context)
+
+    def get_additional_context(self):
+        return {}
 
 
 class TemplateResolveCharField(TemplateResolveMixin, indexes.CharField):
-    pass
+    additional_context = None
+
+    def __init__(self, **kwargs):
+        self.additional_context = kwargs.pop('additional_context', None)
+        super(TemplateResolveCharField, self).__init__(**kwargs)
+
+    def get_additional_context(self):
+        return self.additional_context if self.additional_context else {}
 
 
 class TemplateResolveNgramField(TemplateResolveMixin, indexes.NgramField):

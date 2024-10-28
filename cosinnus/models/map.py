@@ -34,6 +34,7 @@ from cosinnus_event.models import Event
 from cosinnus_exchange.models import (
     ExchangeConference,
     ExchangeEvent,
+    ExchangeExternalResource,
     ExchangeOrganization,
     ExchangeProject,
     ExchangeSociety,
@@ -302,6 +303,18 @@ class HaystackMapResult(BaseMapResult):
                     'managed_tags': result.managed_tags,
                 }
             )
+        if (
+            result.portal == settings.COSINNUS_EXCHANGE_PORTAL_ID
+            and settings.COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED
+        ):
+            fields.update(
+                {
+                    'description_detail': getattr(result, 'description_detail', None),
+                    'contact': getattr(result, 'contact', None),
+                    'website_url': getattr(result, 'website_url', None),
+                }
+            )
+
         if 'request' in kwargs:
             kwargs.pop('request')
         fields.update(**kwargs)
@@ -962,6 +975,12 @@ EXCHANGE_SEARCH_MODEL_NAMES = {
     ExchangeOrganization: 'organizations',
     ExchangeEvent: 'events',
 }
+if settings.COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED:
+    EXCHANGE_SEARCH_MODEL_NAMES.update(
+        {
+            ExchangeExternalResource: 'externalresources',
+        }
+    )
 
 SHORTENED_ID_MAP_REVERSE = dict([(val, key) for key, val in list(SHORTENED_ID_MAP.items())])
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])

@@ -66,9 +66,11 @@ class CosinnusConf(AppConf):
         '/group/forum/cloud/oauth2/',
         f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
         '/account/verify_email/',
-        # all bbb API endpoints and guest-access views are unlocked (sensitive endpoints have their own logged-in
+        # all bbb API endpoints except guest-access views are unlocked (sensitive endpoints have their own logged-in
         # checks)
-        '/bbb/',
+        '/bbb/room/',
+        '/bbb/queue/',
+        '/bbb/queue-api/',
         # these deprecated URLs can be removed from the filter list once the URLs are removed
         # and their /account/ URL-path equivalents are the only remaining version of the view URL
         '/administration/list-unsubscribe/',
@@ -394,6 +396,9 @@ class CosinnusConf(AppConf):
 
     # default cron run frequency for exchange data pulls
     EXCHANGE_RUN_EVERY_MINS = 60 * 24  # once a day
+
+    # Are external resources included in the search
+    EXCHANGE_EXTERNAL_RESOURCES_ENABLED = False
 
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
@@ -1014,6 +1019,9 @@ class CosinnusConf(AppConf):
 
     # Link of the brand / home button in the main navigation. If set to None personal-dashboard is used.
     V3_MENU_HOME_LINK = '/cms/?noredir=1'
+
+    # Label for the link of the brand / home button in the main navigation. If set to None "About PORTALNAME" is used.
+    V3_MENU_HOME_LINK_LABEL = None
 
     # Header label of the top left menu für the community space
     # default if None: "PORTALNAME Community"
