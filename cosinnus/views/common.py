@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.http.response import (
     HttpResponse,
@@ -522,3 +523,19 @@ def empty_file_download(request, **kwargs):
     response = HttpResponse('', content_type='application/text')
     response['Content-Disposition'] = 'attachment; filename="%s"' % settings.COSINNUS_EMPTY_FILE_DOWNLOAD_NAME
     return response
+
+
+class RobotsTextView(View):
+    def get(self, request, *args, **kwargs):
+        if settings.COSINNUS_DENY_ALL_ROBOTS:
+            # serve disallow all content
+            robots_text_content = 'User-agent: *\n' 'Disallow: /\n'
+        else:
+            # read robots.txt from static directory. (Note: depends on collectstatic)
+            robots_file = staticfiles_storage.path('robots.txt')
+            robots_text_content = open(robots_file).read()
+        response = HttpResponse(robots_text_content, content_type='text/plain')
+        return response
+
+
+robots_text = RobotsTextView.as_view()

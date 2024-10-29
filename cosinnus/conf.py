@@ -1528,6 +1528,9 @@ class CosinnusConf(AppConf):
     # and are used to configure the frontend server
     V3_PORTAL_SETTINGS = {}
 
+    # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
+    DENY_ALL_ROBOTS = False
+
 
 class CosinnusDefaultSettings(AppConf):
     """Settings without a prefix namespace to provide default setting values for other apps.
