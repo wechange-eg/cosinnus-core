@@ -330,6 +330,7 @@ urlpatterns = [
     ),
     path('error/', common.generic_error_page_view, name='generic-error-page'),
     path('select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
+    path('robots.txt', common.robots_text, name='robots-text'),
 ]
 
 if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False):
