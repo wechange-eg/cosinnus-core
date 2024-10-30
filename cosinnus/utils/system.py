@@ -112,14 +112,12 @@ def cosinnus_manage(base_path):
         elif TEST_BBB_ARG in args:
             _check_test_env_settings(env, 'BBB')
             settings_module = 'cosinnus.tests.settings.test_bbb'
-            custom_test = any('.tests.' in arg for arg in args)
             if not custom_test:
                 args.extend(TEST_APPS_BBB)
             args.remove(TEST_BBB_ARG)
         elif TEST_ETHERPAD_ARG in args:
             _check_test_env_settings(env, 'Etherpad')
             settings_module = 'cosinnus.tests.settings.test_etherpad'
-            custom_test = any('.tests.' in arg for arg in args)
             if not custom_test:
                 args.extend(TEST_APPS_ETHERPAD)
             args.remove(TEST_ETHERPAD_ARG)
