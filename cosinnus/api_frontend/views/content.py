@@ -7,6 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.cache import cache
 from django.http import QueryDict
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
@@ -21,6 +22,7 @@ from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.navigation import LanguageMenuItemMixin
+from cosinnus.conf import settings
 from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
@@ -33,8 +35,6 @@ from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 logger = logging.getLogger('cosinnus')
 
 
-# url prefixes that make the requested url be considered to belong in the "community" space
-V3_CONTENT_COMMUNITY_URL_PREFIXES = ['/map/', '/user_match/']
 # url suffixes for links from the leftnav that should be sorted into the top sidebar list
 V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS = [
     '.*/?browse=true$',  # group dashboard
@@ -452,22 +452,35 @@ class MainContentView(LanguageMenuItemMixin, APIView):
 
         # determine menu labels/image
         if self.group:
-            if self.group.is_forum_group or self.group.is_events_group:
-                self.main_menu_label = _('Community')
-            else:
-                self.main_menu_label = self.group['name']
+            self.main_menu_label = self.group['name']
             if self.group.avatar_url:
                 self.main_menu_image = self.group.get_avatar_thumbnail_url()
             else:
                 self.main_menu_icon = self.group.trans.ICON
-        elif any(
-            url.startswith(prefix) for prefix in V3_CONTENT_COMMUNITY_URL_PREFIXES
-        ):  # TODO: other places that belong to Community?
-            self.main_menu_label = _('Community')
-            self.main_menu_icon = 'fa-sitemap'  # TODO: icon for Community space?
-        else:
-            self.main_menu_label = _('Personal')
-            self.main_menu_icon = 'fa-user'  # TODO: icon for Personal space? use user avatar if they have one instead?
+
+        # match personal dashboard
+        if not self.main_menu_label and url.startswith(reverse('cosinnus:user-dashboard')):
+            self.main_menu_label = _('Personal Dashboard')
+            if self.request.user.cosinnus_profile.avatar_url:
+                self.main_menu_image = self.request.user.cosinnus_profile.get_avatar_thumbnail_url()
+            else:
+                self.main_menu_icon = 'fa-user'
+
+        # match map
+        if not self.main_menu_label and url.startswith(reverse('cosinnus:map')):
+            self.main_menu_label = settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL
+            self.main_menu_icon = 'fa-map'
+
+        # match additional community space links
+        if not self.main_menu_label and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
+            for __, link_label, link_url, link_icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
+                if url.startswith(str(link_url)):
+                    self.main_menu_label = link_label
+                    self.main_menu_icon = link_icon
+
+        # unmatched urls get the "Go to" label
+        if not self.main_menu_label:
+            self.main_menu_label = _('Go To...')
 
     def _filter_html_view_specific(self, html_soup, resolved_url):
         """Will alter the given html soup by specific, hardcoded view/url/page rules,
