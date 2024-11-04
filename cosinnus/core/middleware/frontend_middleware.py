@@ -148,11 +148,11 @@ class FrontendMiddleware(MiddlewareMixin):
         #      then uses the cached response's HTML for itself instead of performing a request to that URL by itself
         #   - we never filter out AJAX requests and those to exempted views with this method.
         if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
-            if request.method == 'POST' and response.status_code != 302 and not is_ajax(request):
+            if request.method == 'POST' and response.status_code == 200 and not is_ajax(request):
                 # do not redirect the POST if it was an ecempted frontend URL (API or necesseray direct calls)
                 if check_url_v3_everywhere_exempt(request.path, request):
                     return response
-
+                
                 # save response to cache and redirect with the cache
                 if hasattr(response, '_is_rendered') and not response._is_rendered:
                     response.render()
