@@ -481,6 +481,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         # unmatched urls get the "Go to" label
         if not self.main_menu_label:
             self.main_menu_label = _('Go To...')
+            self.main_menu_icon = 'fa-arrow-right'
 
     def _filter_html_view_specific(self, html_soup, resolved_url):
         """Will alter the given html soup by specific, hardcoded view/url/page rules,
