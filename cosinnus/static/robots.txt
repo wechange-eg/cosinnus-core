@@ -55,7 +55,7 @@ Disallow: /bbb/
 Disallow: /swagger/
 Disallow: /redoc/
 Disallow: /housekeeping/
-Disallow: /account/'
+Disallow: /account/
 Disallow: /fb-integration/
 Disallow: /two_factor_auth/
 Disallow: /*/*select2/
