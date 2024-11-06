@@ -689,7 +689,7 @@ class CosinnusPortalAdmin(admin.ModelAdmin):
         'top_color',
         'bottom_color',
     )
-    if settings.COSINNUS_CONFERENCES_ENABLED:
+    if settings.COSINNUS_CONFERENCES_ENABLED or settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
         inlines = [CosinnusConferenceSettingsInline, CosinnusConferencePremiumCapacityInfoInline]
 
     def queryset(self, request):
