@@ -8,6 +8,7 @@ from django.core.management import execute_from_command_line
 TEST_ROCKET_CHAT_ARG = '--test-rocketchat'
 TEST_BBB_ARG = '--test-bbb'
 TEST_ETHERPAD_ARG = '--test-etherpad'
+TEST_PAYMENTS_ARG = '--test-payments'
 TEST_PRINT_TIME_ARG = '--print-time'
 
 # test apps
@@ -15,6 +16,7 @@ TEST_APPS_BASE = ['cosinnus', 'cosinnus_event', 'cosinnus_todo']
 TEST_APPS_ROCKET_CHAT = ['cosinnus.tests.test_rocketchat']
 TEST_APPS_BBB = ['cosinnus.tests.test_bbbroom']
 TEST_APPS_ETHERPAD = ['cosinnus_etherpad']
+TEST_APPS_PAYMENTS = ['wechange_payments']
 
 TEST_REQUIRED_ENV_SETTINGS = {
     'RocketChat': [
@@ -30,6 +32,12 @@ TEST_REQUIRED_ENV_SETTINGS = {
         'WECHANGE_COSINNUS_ETHERPAD_BASE_URL',
         'WECHANGE_COSINNUS_ETHERPAD_ETHERCALC_BASE_URL',
         'WECHANGE_COSINNUS_ETHERPAD_API_KEY',
+    ],
+    'Payments': [
+        'WECHANGE_PAYMENTS_BETTERPAYMENT_API_KEY',
+        'WECHANGE_PAYMENTS_BETTERPAYMENT_INCOMING_KEY',
+        'WECHANGE_PAYMENTS_BETTERPAYMENT_OUTGOING_KEY',
+        'WECHANGE_PAYMENTS_INVOICE_BACKEND_AUTH_DATA',
     ],
 }
 
@@ -60,6 +68,7 @@ def cosinnus_manage(base_path):
     --test-rocketchat:  Run RocketChat service tests.
     --test-bbb:         Run BBB service tests.
     --test-etherpad:    Run Etherpad/Ethercalc service tests.
+    --test-payments:    Run wechange-payments tests.
     --print-time:       Prints execution time for slow test (>0.5s).
     """
 
@@ -114,6 +123,12 @@ def cosinnus_manage(base_path):
             if not custom_test:
                 args.extend(TEST_APPS_ETHERPAD)
             args.remove(TEST_ETHERPAD_ARG)
+        elif TEST_PAYMENTS_ARG in args:
+            _check_test_env_settings(env, 'Payments')
+            settings_module = 'cosinnus.tests.settings.test_payments'
+            if not custom_test:
+                args.extend(TEST_APPS_PAYMENTS)
+            args.remove(TEST_PAYMENTS_ARG)
         elif not custom_test:
             args.extend(TEST_APPS_BASE)
         os.environ['DJANGO_SETTINGS_MODULE'] = settings_module
