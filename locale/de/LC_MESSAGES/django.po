@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 13:22+0100\n"
+"POT-Creation-Date: 2024-11-07 12:38+0100\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -771,9 +771,8 @@ msgstr "%(sender_name)s hat gerade aus einer Idee, der du folgst, das Projekt \"
 msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
 msgstr "Du hast ein erfolgreiches Match mit %(sender_name)s. Lerne jetzt dein Match über Rocket.Chat kennen"
 
-#, python-format
-msgid "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
-msgstr "%(sender_name)s findet dich und deine Aktivitäten interessant. Schaue dir das Nutzer/innen-Profil an"
+msgid "%(sender_name)s is interested in networking with you. Check out the user's profile"
+msgstr "%(sender_name)s möchte sich mit dir vernetzen. Schaue dir das Nutzer/innen-Profil an"
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Deutsch"
