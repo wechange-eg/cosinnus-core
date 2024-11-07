@@ -448,7 +448,7 @@ class NotificationsThread(Thread):
             scope.set_extra('object', self.obj)
             scope.set_extra('notification_id', self.notification_id)
             scope.set_extra('audience_len', len(self.audience))
-            logger.error(f'NotificationThread {state}')
+            logger.info(f'NotificationThread {state}')
 
     def __init__(self, sender, user, obj, audience, notification_id, options, first_init=True):
         if first_init:

@@ -716,13 +716,13 @@ class RocketChatConnection:
         # Get user information and ID
         response = self.rocket.users_info(user_id=user_id)
         if not response.status_code == 200:
-            logger.error('RocketChat: users_info status code: ' + str(response.text), extra={'response': response})
+            logger.info('RocketChat: users_info status code: ' + str(response.text), extra={'response': response})
             return
         response = response.json()
         if not response.get('success'):
-            logger.error(
+            logger.warning(
                 'RocketChat: users_info response: ' + response.get('errorType', '<No Error Type>'),
-                extra={'response': response},
+                extra={'response': response, 'user_id': user.id},
             )
             return
         user_data = response.get('user')
@@ -777,10 +777,10 @@ class RocketChatConnection:
                     profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = rocket_username
                     type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
             else:
-                logger.error(
-                    f'users_update (force={force_user_update}) base user: '
+                logger.warning(
+                    f'Rocketchat: users_update (force={force_user_update}) base user: '
                     + response.get('errorType', '<No Error Type>'),
-                    extra={'response': response},
+                    extra={'response': response, 'user_id': user.id},
                 )
 
         # Update Avatar URL
@@ -793,17 +793,17 @@ class RocketChatConnection:
                 avatar_url = f'{portal_domain}{avatar_url}'
             response = self.rocket.users_set_avatar(avatar_url, userId=user_id).json()
             if not response.get('success'):
-                logger.error(
-                    f'users_update (force={force_user_update}) avatar: ' + response.get('errorType', '<No Error Type>'),
-                    extra={'response': response},
+                logger.warning(
+                    f'Rocketchat: users_update (force={force_user_update}) avatar: ' + response.get('errorType', '<No Error Type>'),
+                    extra={'response': response, 'user_id': user.id},
                 )
         else:
             response = self.rocket.users_reset_avatar(user_id=user_id).json()
             if not response.get('success'):
-                logger.error(
-                    f'users_update (force={force_user_update}) reset_avatar: '
+                logger.warning(
+                    f'Rocketchat: users_update (force={force_user_update}) reset_avatar: '
                     + response.get('errorType', '<No Error Type>'),
-                    extra={'response': response},
+                    extra={'response': response, 'user_id': user.id},
                 )
 
     def users_logout(self, user):
@@ -1392,7 +1392,7 @@ class RocketChatConnection:
             if room_id:
                 response = self.rocket.groups_kick(room_id=room_id, user_id=user_id).json()
                 if not response.get('success') and not response.get('errorType', '') == 'error-user-not-in-room':
-                    logger.error(
+                    logger.warning(
                         'RocketChat: groups_kick ' + response.get('errorType', '<No Error Type>'),
                         extra={'response': response},
                     )
@@ -1413,7 +1413,7 @@ class RocketChatConnection:
             if room_id:
                 response = self.rocket.groups_add_moderator(room_id=room_id, user_id=user_id).json()
                 if not response.get('success') and not response.get('errorType', '') == 'error-user-already-moderator':
-                    logger.error(
+                    logger.warning(
                         'RocketChat: groups_add_moderator ' + response.get('errorType', '<No Error Type>'),
                         extra={'response': response},
                     )
@@ -1434,7 +1434,7 @@ class RocketChatConnection:
             if room_id:
                 response = self.rocket.groups_remove_moderator(room_id=room_id, user_id=user_id).json()
                 if not response.get('success') and not response.get('errorType', '') == 'error-user-not-moderator':
-                    logger.error(
+                    logger.warning(
                         'RocketChat: groups_remove_moderator ' + response.get('errorType', '<No Error Type>'),
                         extra={'response': response},
                     )
@@ -1489,7 +1489,7 @@ class RocketChatConnection:
         response = self.rocket.groups_add_moderator(room_id=room_id, user_id=user_id).json()
         if not response.get('success'):
             if not response.get('errorType', None) == 'error-user-already-moderator':
-                logger.error(
+                logger.warning(
                     'RocketChat: Direct room_add_moderator: ' + response.get('errorType', '<No Error Type>'),
                     extra={'user_email': user.email, 'response': response},
                 )
