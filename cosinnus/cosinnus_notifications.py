@@ -610,9 +610,7 @@ if settings.COSINNUS_ENABLE_USER_MATCH:
                 'signals': [user_match_liked],
                 'default': False,
                 'hidden': True,
-                'alert_text': _(
-                    "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
-                ),
+                'alert_text': _("%(sender_name)s is interested in networking with you. Check out the user's profile"),
                 'alert_reason': '',
                 'can_be_email': False,
                 'data_attributes': {
