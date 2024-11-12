@@ -52,7 +52,7 @@ def create_user_alert(obj, group, receiver, action_user, notification_id, reason
         )
         multi_user_qs = list(multi_user_qs)
         if len(multi_user_qs) > 1:
-            logger.warning(
+            logger.info(
                 'Inconsistency: Trying to match a multi user alert, but had a QS with more than 1 items!',
                 extra={'alert': str(alert)},
             )
@@ -78,8 +78,8 @@ def create_user_alert(obj, group, receiver, action_user, notification_id, reason
         )
         bundle_qs = list(bundle_qs)
         if len(bundle_qs) > 1:
-            logger.warning(
-                'Inconsistency: Trying to match a multi user alert, but had a QS with more than 1 items!',
+            logger.info(
+                'Inconsistency: Trying to match a bundle alert, but had a QS with more than 1 items!',
                 extra={'alert': str(alert)},
             )
             if settings.DEBUG:
@@ -102,7 +102,7 @@ def merge_new_alert_into_multi_alert(new_alert, multi_alert):
     The existing alert may yet still be a single alert"""
     # sanity check, cannot convert bundle alerts
     if multi_alert.type not in (NotificationAlert.TYPE_SINGLE_ALERT, NotificationAlert.TYPE_MULTI_USER_ALERT):
-        logger.warning(
+        logger.info(
             'Inconsistency: Trying to create a multi user alert, but matched existing alert was a bundle alert!',
             extra={'alert': str(multi_alert)},
         )
@@ -146,7 +146,7 @@ def merge_new_alert_into_bundle_alert(new_alert, bundle_alert):
     The existing alert may yet still be a single alert"""
     # sanity check, cannot convert multi alerts
     if bundle_alert.type not in (NotificationAlert.TYPE_SINGLE_ALERT, NotificationAlert.TYPE_BUNDLE_ALERT):
-        logger.warning(
+        logger.info(
             'Inconsistency: Trying to create a bundle alert, but matched existing alert was a multi user alert!',
             extra={'alert': str(bundle_alert)},
         )
