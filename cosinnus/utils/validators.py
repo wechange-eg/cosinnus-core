@@ -93,7 +93,7 @@ class CleanFromToDateFieldsMixin(object):
         from_date = cleaned_data.get(self.from_date_field_name)
         to_date = cleaned_data.get(self.to_date_field_name)
 
-        if to_date and to_date:
+        if to_date and from_date:
             if to_date <= from_date:
                 msg = _('The start date must be before the end date')
                 self.add_error(self.to_date_field_name, msg)
