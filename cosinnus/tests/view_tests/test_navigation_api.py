@@ -101,7 +101,7 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['community'],
             {
-                'header': settings.COSINNUS_PORTAL_NAME.upper() + ' Community',
+                'header': settings.COSINNUS_BASE_PAGE_TITLE_TRANS + ' Community',
                 'items': [
                     MenuItem(
                         settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-globe', id='Forum'
@@ -541,7 +541,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
                     'Notification Preferences', '/profile/notifications/', 'fa-envelope', id='NotificationPreferences'
                 ),
                 MenuItem(
-                    settings.COSINNUS_V3_MENU_HOME_LINK_LABEL or f'About {settings.COSINNUS_PORTAL_NAME.upper()}',
+                    settings.COSINNUS_V3_MENU_HOME_LINK_LABEL or f'About {settings.COSINNUS_BASE_PAGE_TITLE_TRANS}',
                     settings.COSINNUS_V3_MENU_HOME_LINK,
                     'fa-info-circle',
                     id='About',

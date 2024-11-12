@@ -205,8 +205,9 @@ class CosinnusConf(AppConf):
         'cosinnus_note.note',
         'cosinnus_event.event',
     ]
-
-    # The default title for all pages unless the title block is overwritten.
+    
+    # The portal display name, as it is diplayed to the user when referred to the portal.
+    # The default html-title for all pages unless the title block is overwritten.
     # This is translated through a {% trans %} tag.
     BASE_PAGE_TITLE_TRANS = 'Cosinnus'
 
