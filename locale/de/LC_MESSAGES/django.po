@@ -14889,3 +14889,13 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "status: "
 #~ msgstr "Status: "
+
+msgid "Version 2.2.0 released"
+msgstr "Version 2.2.0 veröffentlicht"
+
+msgid ""
+"- Several improvements have been made to the redesign user interface, and an introductory tooltip tour has been added.\n"
+"- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+"- Mehrere Verbesserungen wurden an der Benutzeroberfläche des Redesigns vorgenommen und es wurde eine Tooltip-Tour zur Einführung hinzugefügt.\n"
+"- Weitere kleinere Fehlerbehebungen und Stabilitätsverbesserungen wurden vorgenommen."

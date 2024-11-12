@@ -17,7 +17,7 @@ UPDATES includes release notes for each version shown to the users with:
 
 UPDATES = {
     'Redesign': {
-        'datetime': datetime(2024, 10, 15, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 11, 14, tzinfo=pytz.utc),
         'title': _('Redesign Update'),
         'short_text': _('The redesign has been launched across the platform!'),
         'full_text': _(
@@ -25,6 +25,19 @@ UPDATES = {
             'a new menu structure in groups and projects, and many small improvements in user interaction.\n\n'
             'This is a stepping stone update for many more exciting features and interface improvements to come '
             'in the near future!'
+        ),
+        'display_conditional': (
+            settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
+        ),
+    },
+    '2.2.0': {
+        'datetime': datetime(2024, 11, 13, tzinfo=pytz.utc),
+        'title': _('Version 2.2.0 released'),
+        'short_text': _('This update includes several features and bugfixes:'),
+        'full_text': _(
+            '- Several improvements have been made to the redesign user interface, and an introductory tooltip tour '
+            'has been added.\n'
+            '- Further minor bugfixes and stability improvements have been made.'
         ),
         'display_conditional': (
             settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
