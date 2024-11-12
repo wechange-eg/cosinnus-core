@@ -123,8 +123,8 @@ class CloudFilesContentWidgetView(BasePagedOffsetWidgetView):
                 userid=get_nc_user_id(self.request.user), page=page, page_size=self.page_size
             )
         except Exception as e:
-            logger.error(
-                'An error occured during Nextcloud widget data retrieval! Exception in extra.',
+            logger.info(
+                'An error occured during Nextcloud widget data retrieval (views.py)! Exception in extra.',
                 extra={'exc_str': force_str(e), 'exception': e},
             )
             had_error = True

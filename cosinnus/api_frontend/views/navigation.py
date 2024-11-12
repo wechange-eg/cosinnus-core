@@ -312,7 +312,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             ]
             community_space = {
                 'header': settings.COSINNUS_V3_COMMUNITY_HEADER_CUSTOM_LABEL
-                or f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
+                or f'{settings.COSINNUS_BASE_PAGE_TITLE_TRANS} {_("Community")}',
                 'items': community_space_items,
                 'actions': community_space_actions,
             }
@@ -1248,7 +1248,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
             # about
             if settings.COSINNUS_V3_MENU_HOME_LINK:
                 about_label = settings.COSINNUS_V3_MENU_HOME_LINK_LABEL or _('About %(portal_name)s') % {
-                    'portal_name': settings.COSINNUS_PORTAL_NAME.upper()
+                    'portal_name': settings.COSINNUS_BASE_PAGE_TITLE_TRANS
                 }
                 about_item = MenuItem(
                     about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About'
