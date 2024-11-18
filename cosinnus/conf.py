@@ -1012,6 +1012,15 @@ class CosinnusConf(AppConf):
         '^/map/embed/',
         '^/.*/.*/note/embed/',
         '^/two_factor_auth/token_login/',
+        # iCal feeds
+        '^/events/team/.*/feed/',
+        '^/events/team/.*/conference/feed/',
+        '^/events/feed/all/',
+        '^/events/.*/update/',
+        '^/.*/.*/event/feed/',
+        '^/.*/.*/event/feed/.*/',
+        '^/.*/.*/conference/feed/.*/',
+        
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
