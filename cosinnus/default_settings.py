@@ -253,7 +253,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     TIME_ZONE = 'Europe/Berlin'
     # Language code for this installation. All choices can be found here:
     # http://www.i18nguy.com/unicode/language-identifiers.html
-    LANGUAGE_CODE = 'en'
+    LANGUAGE_CODE = 'de'
     # If you set this to False, Django will make some optimizations so as not
     # to load the internationalization machinery.
     USE_I18N = True
