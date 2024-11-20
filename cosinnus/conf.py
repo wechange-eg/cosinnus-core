@@ -205,7 +205,7 @@ class CosinnusConf(AppConf):
         'cosinnus_note.note',
         'cosinnus_event.event',
     ]
-    
+
     # The portal display name, as it is diplayed to the user when referred to the portal.
     # The default html-title for all pages unless the title block is overwritten.
     # This is translated through a {% trans %} tag.
@@ -1020,7 +1020,8 @@ class CosinnusConf(AppConf):
         '^/.*/.*/event/feed/',
         '^/.*/.*/event/feed/.*/',
         '^/.*/.*/conference/feed/.*/',
-        
+        # old captcha
+        '^/captcha/',
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
