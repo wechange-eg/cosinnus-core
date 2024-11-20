@@ -331,7 +331,14 @@ def check_user_can_receive_emails(user, ignore_user_notification_settings=False)
 
 def check_user_verified(user):
     """Checks if the user is logged in and has a verified email address"""
-    return user.is_authenticated and user.is_active and getattr(user, 'cosinnus_profile', None) and user.cosinnus_profile.email_verified and not user.is_guest
+    return (
+        user
+        and user.is_authenticated
+        and user.is_active
+        and getattr(user, 'cosinnus_profile', None)
+        and user.cosinnus_profile.email_verified
+        and not user.is_guest
+    )
 
 
 def filter_tagged_object_queryset_for_user(qs, user):
