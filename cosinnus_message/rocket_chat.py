@@ -412,7 +412,7 @@ class RocketChatConnection:
         if not profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID):
             username = profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME)
             if not username:
-                logger.error('RocketChat: get_user_id: no username given')
+                logger.warning('RocketChat: get_user_id: no username given')
                 return
             response = self.rocket.users_info(username=username).json()
             if not response.get('success'):
@@ -471,38 +471,56 @@ class RocketChatConnection:
         return username_match is None
 
     def _get_unique_username(self, profile):
-        """Generates a unique username considering existing Rocket.Chat users."""
+        """Generates a unique username by checking for an existing Rocket.Chat user with that username."""
         username = profile.get_new_rocket_username()
 
-        # get existing rocket users matching the username.
-        rocket_users = self._get_rocket_users_list()
-        if rocket_users is None:
-            # An error occurred fetching the user list.
-            return
-
-        # ignoring users own username if already set.
+        # fetch current user from rocketchat by ID (if it exists)
+        own_user_info = None
         if profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID):
-            users_rocket_chat_id = profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID)
-            rocket_users = filter(lambda user: user['_id'] != users_rocket_chat_id, rocket_users)
+            response = self.rocket.users_info(user_id=profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID)).json()
+            if response.get('success'):
+                own_user_info = response.get('user')
 
-        rocket_usernames = [user.get('username') for user in rocket_users if 'username' in user]
+        def _is_username_free_rocketchat(username):
+            # make sure a rocketchat user in Rocketchat (by username) does not exist.
+            response = self.rocket.users_info(username=username).json()
+            if response.get('success'):
+                response_user_info = response.get('user')
+                # user with such a username exists. Ignore it if it is the same user we're requesting for
+                if own_user_info and own_user_info.get('_id', None) == response_user_info.get('_id', None):
+                    return True
+                # user is appearently really taken
+                return False
+            # a non-exception response means the user doesn't exist
+            return True
 
-        def _is_username_free(username, profile):
+        def _is_username_free_portal(username):
             # checks if no user in the DB already has the given rocket_chat_username set (except self)
             filter_query = {f'settings__{PROFILE_SETTING_ROCKET_CHAT_USERNAME}': username}
             queryset = get_user_profile_model().objects.filter(**filter_query).exclude(pk=profile.pk)
             return queryset.count() == 0
 
-        # generate unique username
+        # deduplicate unique username, which shouldn't be neccessary
         unique_username = username
         i = 1
         while True:
-            if unique_username not in rocket_usernames and _is_username_free(unique_username, profile):
+            if (
+                unique_username
+                and _is_username_free_rocketchat(unique_username)
+                and _is_username_free_portal(unique_username)
+            ):
+                if i > 1:
+                    logger.warning(
+                        'RocketChat: _get_unique_username actually had to deduplicate a username! '
+                        'This means that the user was either manually created on the RC server before, '
+                        'or we have to investigate this!',
+                        extra={'unique_username': unique_username, 'django-user-id': getattr(profile.user, 'id')},
+                    )
                 break
-            unique_username = f'{username}-{i}'
+            unique_username = f'{username}_{i}'
             i += 1
-            if i > 10000:
-                raise Exception('Name is very popular')
+            if i > 100:
+                raise Exception('Rocketchat: _get_unique_username() did not resolve after looping!')
 
         return unique_username
 
@@ -521,6 +539,10 @@ class RocketChatConnection:
         rocket_username = self._get_unique_username(profile)
         if not rocket_username:
             # A RocketChat error occurred when fetching the user list for unique check. Return without creating user.
+            logger.error(
+                'RocketChat: users_create: user could not be created because a name could not be found.',
+                extra={'user_id': getattr(user, 'id', None)},
+            )
             return
 
         # make sure a rocketchat user with that username does not exist.
@@ -794,7 +816,8 @@ class RocketChatConnection:
             response = self.rocket.users_set_avatar(avatar_url, userId=user_id).json()
             if not response.get('success'):
                 logger.warning(
-                    f'Rocketchat: users_update (force={force_user_update}) avatar: ' + response.get('errorType', '<No Error Type>'),
+                    f'Rocketchat: users_update (force={force_user_update}) avatar: '
+                    + response.get('errorType', '<No Error Type>'),
                     extra={'response': response, 'user_id': user.id},
                 )
         else:
