@@ -995,7 +995,12 @@ class CosinnusConf(AppConf):
         '^/account/accept_updated_tos/',
         '^/account/list-unsubscribe/',
         '^/account/verify_email/',
-        '^/payments/',  # PAYL API
+        # PAYL API and downloads
+        '^/payments/',
+        '^/account/invoices/.*/',  # note: only subpaths of /invoices/!
+        '^/account/additional_invoices/.*/',
+        '^/account/payl_stats/',
+        # integrations
         '^/fb-integration/',
         '^/two_factor_auth/qrcode/',  # QR code image generator
         # django password reset (note: only initial redirect portion, this works!)
