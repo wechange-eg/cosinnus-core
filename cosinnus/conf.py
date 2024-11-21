@@ -988,7 +988,14 @@ class CosinnusConf(AppConf):
         '.*/api/.*',  # any paths with api calls
         '^/o/',  # any oauth paths
         '^/housekeeping/',
-        '^/account/',  # user account service functions
+        # user account service functions (can't blanket /account/ beacause PAYL uses them too)
+        '^/account/report/',
+        '^/account/accept_tos/',
+        '^/account/resend_email_validation/',
+        '^/account/accept_updated_tos/',
+        '^/account/list-unsubscribe/',
+        '^/account/verify_email/',
+        '^/payments/',  # PAYL API
         '^/fb-integration/',
         '^/two_factor_auth/qrcode/',  # QR code image generator
         # django password reset (note: only initial redirect portion, this works!)
