@@ -255,7 +255,8 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.assertEqual(user_info['username'], expected_unique_username)
 
         def test_create_user_with_existing_rocket_chat_username(self):
-            """Tests that creating a user with a used RC username a new user is created with a unique username."""
+            """Tests that creating a user with a used RC username a new user is created with a unique,
+            deduplicated username because of a collision on the RC server."""
             # create colliding RC user
             colliding_username = 'rocket.test-100'
             colliding_user_data = {
@@ -279,7 +280,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             user_info = rocket_connection_user.me().json()
             self.assertEqual(user_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
-            expected_unique_username = f'{colliding_username}-1'
+            expected_unique_username = f'{colliding_username}_1'
             self.assertEqual(user_info['username'], expected_unique_username)
 
         def test_user_update_with_existing_rocket_chat_username(self):

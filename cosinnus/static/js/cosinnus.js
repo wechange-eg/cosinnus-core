@@ -1779,6 +1779,17 @@
                 }, 10);
             });
         },
+        
+        /* Refreshes any CodeMirror editors inside a bootstrap tab when that tab is clicked.
+        *  Fixes the initial text being hidden on editors within tabs. */
+        refreshAllCodeMirrors: function(event) {
+            $(window.simplemdes).each(function(index){window.simplemdes[index].codemirror.refresh();})
+        },
+        
+        connectRefreshAllCodeMirrors: function() {
+            $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', $.cosinnus.refreshAllCodeMirrors);
+        },
+        
     };
 })( jQuery );
 
@@ -1850,5 +1861,6 @@ $(function() {
     $.cosinnus.fixBootstrapMobileNavbar();
     $.cosinnus.truncatedTextfield();
     $.cosinnus.conditionalSelectField();
+    $.cosinnus.connectRefreshAllCodeMirrors();
 });
 

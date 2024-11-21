@@ -1083,7 +1083,7 @@ def password_reset_proxy(request, *args, **kwargs):
         user = None
         if email:
             try:
-                user = USER_MODEL.objects.get(email=email, is_active=True)
+                user = USER_MODEL.objects.get(email__iexact=email, is_active=True)
             except USER_MODEL.DoesNotExist:
                 pass
         if user and not check_user_verified(user) and GlobalBlacklistedEmail.is_email_blacklisted(email):
