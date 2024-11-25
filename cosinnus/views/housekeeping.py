@@ -399,17 +399,6 @@ def create_map_test_entities(request=None, count=1):
     return HttpResponse('Done. Created %d Projects, Groups, Events and Users' % count)
 
 
-def delete_portal(portal_slug):
-    """Completely deletes a portal object and all of its groups and all objects assigned to the groups.
-    THen deletes (!) any users who are both no member of any group AND no member of any portal."""
-    # do NOT delete etherpads on the server!
-    settings.COSINNUS_DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
-    CosinnusPortal.objects.get(slug=portal_slug).delete()
-    get_user_model().objects.filter(cosinnus_memberships__isnull=True).filter(
-        cosinnus_portal_memberships__isnull=True
-    ).delete()
-
-
 def reset_user_tos_flags(request=None):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')

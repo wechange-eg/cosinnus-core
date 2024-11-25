@@ -28,7 +28,7 @@ from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import FONT_AWESOME_CLASS_FILTER, MenuItem
 from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
-from cosinnus.utils.functions import clean_single_line_text, uniquify_list
+from cosinnus.utils.functions import clean_single_line_text, is_number, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
 from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 
@@ -312,7 +312,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
 
         # TODO compress html? or do server-side request compression?
 
-        html_soup = BeautifulSoup(html, 'html.parser')  # might try out 'html5lib' as alternate parser but it is slower
+        html_soup = BeautifulSoup(html, 'lxml')  # might try out 'html5lib' as alternate parser but it is slower
         parsed_js_urls = self._parse_js_urls(html_soup)
         js_vendor_urls = [js_url for js_url in parsed_js_urls if '/vendor/' in js_url]
         js_urls = [js_url for js_url in parsed_js_urls if '/vendor/' not in js_url]
@@ -618,16 +618,27 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                 continue
             link_label = '(Link)'
             text_source = leftnav_link.find('div', class_='media-body') or leftnav_link
+            badge_label = None
             if text_source:
-                parsed_label = text_source.text.strip().replace('/n', '')
-                if not parsed_label:
+                parsed_label = text_source.text.replace('/n', '').strip()
+                if parsed_label and is_number(parsed_label):
+                    badge_label = parsed_label
+                if not parsed_label or badge_label:
                     # check for an additional span within the media-body
                     parsed_label = text_source.get('title')
                     if parsed_label:
-                        parsed_label = parsed_label.strip().replace('/n', '')
+                        parsed_label = parsed_label.replace('/n', '').strip()
                 if parsed_label:
                     link_label = parsed_label
             link_label = clean_single_line_text(link_label)
+
+            # find other types of leftnav badge numbers
+            if not badge_label:
+                badge_source = leftnav_link.find('span', class_='pull-left')
+                if badge_source:
+                    parsed_badge = badge_source.text.strip().replace('/n', '').strip()
+                    if is_number(parsed_badge):
+                        badge_label = parsed_badge
 
             # a button counts as selected item if there is an `<i class="fa fa-caret-right"></i>` in it
             selected = (
@@ -661,6 +672,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                     link_label,
                     url=href if href else None,
                     icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
+                    badge=badge_label if badge_label and badge_label != link_label else None,
                     id=v3_id or ('Sidebar-' + get_random_string(8)),
                     is_external=bool(leftnav_link.get('target', None) == '_blank'),
                     sub_items=sub_items,

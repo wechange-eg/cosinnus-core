@@ -303,7 +303,7 @@ class CosinnusConf(AppConf):
     DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2  # SETTING_DAILY = 2
 
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
-    DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
+    DELETE_ETHERPADS_ON_SERVER_ON_DELETE = True
 
     # if True, will forbid anyone to edit an etherpad created by a user
     # whose account is inactive or deleted. view-only is still possible.
@@ -988,7 +988,19 @@ class CosinnusConf(AppConf):
         '.*/api/.*',  # any paths with api calls
         '^/o/',  # any oauth paths
         '^/housekeeping/',
-        '^/account/',  # user account service functions
+        # user account service functions (can't blanket /account/ beacause PAYL uses them too)
+        '^/account/report/',
+        '^/account/accept_tos/',
+        '^/account/resend_email_validation/',
+        '^/account/accept_updated_tos/',
+        '^/account/list-unsubscribe/',
+        '^/account/verify_email/',
+        # PAYL API and downloads
+        '^/payments/',
+        '^/account/invoices/.*/',  # note: only subpaths of /invoices/!
+        '^/account/additional_invoices/.*/',
+        '^/account/payl_stats/',
+        # integrations
         '^/fb-integration/',
         '^/two_factor_auth/qrcode/',  # QR code image generator
         # django password reset (note: only initial redirect portion, this works!)
@@ -1012,6 +1024,9 @@ class CosinnusConf(AppConf):
         '^/map/embed/',
         '^/.*/.*/note/embed/',
         '^/two_factor_auth/token_login/',
+        # ethercalc download views
+        '^/.*/.*/document/.*/csv/',
+        '^/.*/.*/document/.*/xlsx/',
         # iCal feeds
         '^/events/team/.*/feed/',
         '^/events/team/.*/conference/feed/',

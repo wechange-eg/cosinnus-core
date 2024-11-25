@@ -1,5 +1,5 @@
 {% extends "cosinnus_todo/base.html" %}
-{% load i18n humanize todo_tags cosinnus_tags djajax_tags thumbnail %}
+{% load i18n humanize todo_tags cosinnus_tags djajax_tags thumbnail widget_tweaks %}
 {% load static %}
 
 {% block extrahead %}
@@ -38,39 +38,23 @@
        <!-- {% trans "There are no todolists yet." %} -->
        {% include 'cosinnus/common/empty_button.html' with message="There are no todolists yet." %}
     {% endfor %}
-    
+
     {% if user|can_create_objects_in:group %}
-        <form action="{% group_url 'cosinnus:todo:todolist-add' group=group %}" method="POST" class="form-horizontal">
-            {% csrf_token %}
-            <div type="button" class="btn btn-default w100">
-                <ul class="media-list">
-                    <li class="media">
-                        <span class="pull-left">
-                            <i class="fa fa-plus"></i>
-                        </span>
-                        <div class="media-body media-body-form-control">
-                            <input name="title" class="form-control next-button-is-for-sending"
+        <div class="clearfix v-spacer-m"></div>
+        {% captureas create_label %}{% trans "Create" %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with icon="fas fa-plus" label=create_label extra_atts='data-toggle="modal" data-target="#create_folder_modal"' extra_classes="x-v3-leftnav-action-button x-v3-leftnav-action-target-active-app" %}
+
+        {% captureas content %}
+            <input name="title" class="form-control next-button-is-for-sending"
                             autocomplete="off" placeholder="{% trans 'New List Name' %}" value="" />
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        
-            <button type="submit" name="create_todolist" class="btn btn-emphasized large-space" style="display: none;">
-                <ul class="media-list">
-                    <li class="media">
-                        <span class="pull-left">
-                            <i class="fa fa-pencil"></i>
-                        </span>
-                        <div class="media-body">
-                            {% trans "Create" %}
-                        </div>
-                    </li>
-                </ul>
-            </button>
-        </form>
+            <div class="clearfix large-space"></div>
+        {% endcaptureas %}
+        {% captureas create_folder_action %}{% group_url 'cosinnus:todo:todolist-add' group=group %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}{% endcaptureas %}
+        {% captureas title %}{% trans 'New List Name' %}:{% endcaptureas %}
+        {% include "cosinnus/modal_box.html" with id="create_folder_modal" label=content title=title form_action=create_folder_action form_attrs="name='container_form'" submit_name="create_container" title_icon="fa-document-list" %}
+
     {% endif %}
-    
+
 {% endblock leftnav %}
 
 {% block content %}
