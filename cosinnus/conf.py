@@ -303,7 +303,7 @@ class CosinnusConf(AppConf):
     DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2  # SETTING_DAILY = 2
 
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
-    DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
+    DELETE_ETHERPADS_ON_SERVER_ON_DELETE = True
 
     # if True, will forbid anyone to edit an etherpad created by a user
     # whose account is inactive or deleted. view-only is still possible.
