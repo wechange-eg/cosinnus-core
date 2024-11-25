@@ -312,7 +312,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
 
         # TODO compress html? or do server-side request compression?
 
-        html_soup = BeautifulSoup(html, 'html.parser')  # might try out 'html5lib' as alternate parser but it is slower
+        html_soup = BeautifulSoup(html, 'lxml')  # might try out 'html5lib' as alternate parser but it is slower
         parsed_js_urls = self._parse_js_urls(html_soup)
         js_vendor_urls = [js_url for js_url in parsed_js_urls if '/vendor/' in js_url]
         js_urls = [js_url for js_url in parsed_js_urls if '/vendor/' not in js_url]
