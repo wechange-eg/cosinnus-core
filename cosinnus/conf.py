@@ -1024,6 +1024,9 @@ class CosinnusConf(AppConf):
         '^/map/embed/',
         '^/.*/.*/note/embed/',
         '^/two_factor_auth/token_login/',
+        # ethercalc download views
+        '^/.*/.*/document/.*/csv/',
+        '^/.*/.*/document/.*/xlsx/',
         # iCal feeds
         '^/events/team/.*/feed/',
         '^/events/team/.*/conference/feed/',
