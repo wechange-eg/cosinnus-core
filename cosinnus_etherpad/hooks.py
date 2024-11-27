@@ -4,7 +4,7 @@ from __future__ import print_function, unicode_literals
 from builtins import str
 from uuid import uuid4
 
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
 
 from cosinnus.conf import settings
@@ -25,9 +25,7 @@ if not getattr(settings, 'COSINNUS_ETHERPAD_DISABLE_HOOKS', False):
             client = _init_etherpad_client()
             client.createGroupIfNotExistsFor(groupMapper=_get_group_mapping(instance))
 
-    """ @receiver(post_delete, sender=CosinnusGroup) """
-    """ Disabled the etherpad delete hook, as we now always retain pads on the server for retrieval purposes. """
-
+    @receiver(post_delete, sender=CosinnusGroup)
     @catch_all_and_log
     def delete_etherpad_group(sender, instance, **kwargs):
         """
@@ -66,9 +64,7 @@ if not getattr(settings, 'COSINNUS_ETHERPAD_DISABLE_HOOKS', False):
             # we trust uuid4 to create a new pad
             instance.pad_id = groupMapper + ('-%s' % str(uuid4()).replace('-', ''))
 
-    """@receiver(post_delete, sender=Etherpad)"""
-    """ Disabled the etherpad delete hook, as we now always retain pads on the server for retrieval purposes. """
-
+    @receiver(post_delete, sender=Etherpad)
     @catch_all_and_log
     def delete_etherpad(sender, instance, **kwargs):
         """

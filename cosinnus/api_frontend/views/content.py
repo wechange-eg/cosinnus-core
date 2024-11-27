@@ -566,12 +566,15 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                     self.content_html += '\n' + str(popup_modal)
 
     def _extract_fa_icon(self, tag):
-        """Extracts the actual font-awesome icon class name from the first i tag within the given tag tree"""
+        """Extracts the actual font-awesome icon class name from the first i tag within the given
+        tag tree of a pull-left. Will prefer the value of the attribute `data-v3-icon` if present."""
         fa_class = 'fa-group'  # fallback for icons that do not have one
-        # TODO: add a better fallback! for example http://localhost:8000/api/v3/content/main/?url=http://localhost:8000/group/forum/event/list/
         # on the leftnav is missing icons for links with numbers in them!
+        data_v3_value = tag.get('data-v3-icon', None)
         fa_i = tag.find('i')
-        if fa_i:
+        if data_v3_value:
+            return data_v3_value
+        elif fa_i:
             fa_class = ' '.join(
                 [subclass for subclass in fa_i.get('class') if subclass.lower() not in FONT_AWESOME_CLASS_FILTER]
             )
