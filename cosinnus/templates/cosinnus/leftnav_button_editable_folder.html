@@ -55,7 +55,7 @@
     <button type="button" class="btn w100 btn-{% if active %}extra-{% endif %}emphasized {{ extra_classes }}" {% if extra_atts %}{{ extra_atts }}{% endif %}>
         <ul class="media-list">
             <li class="media">
-                <a id="{{ folder_button_id }}" class="pull-left btn-extra-emphasized" href="{{ href }}" title="{{ label }}">
+                <a id="{{ folder_button_id }}" class="pull-left btn-extra-emphasized" href="{{ href }}" title="{{ label }}" data-v3-icon="{{ icon }}">
                     {% if icon_content %}
                         {{ icon_content }}
                     {% else %}

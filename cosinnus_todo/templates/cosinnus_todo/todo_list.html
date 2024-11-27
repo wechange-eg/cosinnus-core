@@ -33,7 +33,7 @@
 	    {% captureas active %}{% if todolist == active_todolist %}True{% endif %}{% endcaptureas %}
 	    {% captureas button_template %}{% if user|can_create_objects_in:todolist.group %}cosinnus/leftnav_button_editable_folder.html{% else %}cosinnus/leftnav_button.html{% endif %}{% endcaptureas %}
 	    
-	    {% include button_template with active=active extra_classes=button_class icon_content=folder_size label=label href=href folder=todolist %}
+	    {% include button_template with active=active extra_classes=button_class icon="fa-list-ul" icon_content=folder_size label=label href=href folder=todolist %}
     {% empty %}
        <!-- {% trans "There are no todolists yet." %} -->
        {% include 'cosinnus/common/empty_button.html' with message="There are no todolists yet." %}
