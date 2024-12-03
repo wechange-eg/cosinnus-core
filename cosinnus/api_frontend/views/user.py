@@ -375,7 +375,9 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
             UserSignupThrottleBurst().throttle_success(really_throttle=True, request=request, view=self)
 
         user = serializer.create(serializer.validated_data)
-        redirect_url = self.trigger_events_after_user_signup(user, self.request, skip_messages=True)
+        redirect_url = self.trigger_events_after_user_signup(
+            user, self.request, request_data=request.data, skip_messages=True
+        )
 
         # if the user has been logged in immediately, return the auth tokens
         data = {

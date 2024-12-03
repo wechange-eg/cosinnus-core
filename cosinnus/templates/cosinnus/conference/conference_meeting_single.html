@@ -84,7 +84,7 @@
             </ul>
         </button>
 
-        {% if has_bbb_video %}
+        {% if has_bbb_video and not request.user.is_guest and not request.user.is_anonymous %}
             {% include "cosinnus/conference/conference_invitation_text_buttons.html" with object_type="group" %}
         {% endif %}
 

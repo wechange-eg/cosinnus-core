@@ -1822,9 +1822,18 @@ def group_user_recruit(
     success = []
     prev_invites_to_refresh = []
 
-    # format and validate emails
+    def _strip_non_ascii_from_end(mail):
+        """Strips any non-ascii characters from the end of a string"""
+        last_ord = 0
+        for i in reversed(range(len(mail))):
+            if ord(mail[i]) < 128:
+                last_ord = i
+                break
+        return mail[: last_ord + 1]
+
+    # format and validate emails. perform some removal of "invisible" characters at the end which might be pasted in
     emails = emails.lower().replace(';', ',').replace('\n', ',').replace('\r', ',').split(',')
-    emails = list(set([email.strip(' \t\n\r') for email in emails]))
+    emails = list(set([_strip_non_ascii_from_end(email.strip(' \t\n\r')).strip(' \t\n\r') for email in emails]))
 
     for email in emails:
         # stop after 20 fragments to prevent malicious overloading

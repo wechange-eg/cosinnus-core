@@ -19,18 +19,20 @@
 
 {% with groups=profile.cosinnus_societies %}
     {% for group in groups %}
-        <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
-            <ul class="media-list">
-                <li class="media">
-                    <span class="pull-left">
-                        {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-                    </span>
-                    <div class="media-body">
-                        {{ group.name }}
-                    </div>
-                </li>
-            </ul>
-        </button>
+        {% if group.publicly_visible or request.user.is_authenticated %}
+            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+                        </span>
+                        <div class="media-body">
+                            {{ group.name }}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        {% endif %}
     {% endfor %}
 {% endwith %}
 
