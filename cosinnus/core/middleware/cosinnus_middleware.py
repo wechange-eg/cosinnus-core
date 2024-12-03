@@ -529,6 +529,11 @@ class GroupResolvingMiddlewareMixin(object):
     def is_anonymous_block_exempted_group_url(self, request):
         """Is this a URL for a valid group, that can always be accessed by
         anonymous users, even if the portal is blocked from anonymous access?"""
+        path_split = request.path.split('/')
+        # BBB direct guest access login page can always be accessed, even on private portals
+        if len(path_split) > 2 and path_split[1] == 'bbb' and path_split[2].count('-') >= 2:
+            return True
+        # check other exempted URLs
         return self.is_url_for_publicly_visible_group_microsite(request) or self.is_url_for_group_ical_token_feed(
             request
         )
