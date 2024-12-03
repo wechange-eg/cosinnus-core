@@ -302,10 +302,11 @@ class UserSignupTriggerEventsMixin(object):
         'click the link contained in it to verify your email address!'
     )
 
-    def trigger_events_after_user_signup(self, user, request, skip_messages=False):
+    def trigger_events_after_user_signup(self, user, request, request_data=None, skip_messages=False):
         """Triggers all kinds of events and signals after a user has signed up and their profile creation
         has been completed. Should be called after
         `UserSignupFinalizeMixin.finalize_user_object_after_signup`
+        @param request_data: if the POST data is not contained in `request.POST`, supply it via this arg
         @param skip_messages: if True, will not trigger any user messages. used when this s
             called via API.
         @return: None or an alternate return redirect URL"""
@@ -319,6 +320,54 @@ class UserSignupTriggerEventsMixin(object):
         if not user.cosinnus_profile.language == lang:
             user.cosinnus_profile.language = lang
             user.cosinnus_profile.save(update_fields=['language'])
+
+        # check if there was a token group invite associated with the signup
+        request_data = request_data or request.POST
+        invite_token = request_data.get('invite_token', None)
+        if invite_token:
+            invite = get_object_or_None(
+                CosinnusGroupInviteToken, token__iexact=invite_token, portal=CosinnusPortal.get_current()
+            )
+            if not invite:
+                messages.warning(
+                    request,
+                    _(
+                        'The invite token you have used does not exist. Please contact the responsible person to get '
+                        'a valid link!'
+                    ),
+                )
+            elif not invite.is_active:
+                messages.warning(
+                    request, _('Sorry, but the invite token you have used is not active yet or not active anymore!')
+                )
+            else:
+                success = apply_group_invite_token_for_user(invite, user)
+                if success:
+                    messages.success(
+                        request, _('Token invitations applied. You are now a member of the associated projects/groups!')
+                    )
+                else:
+                    messages.error(
+                        request,
+                        _(
+                            'There was an error while processing your invites. Some of your invites may not have been '
+                            'applied.'
+                        ),
+                    )
+                # also add a welcome-redirect to the first invite group for the user
+                # (non-prio so the welcome page shows first!)
+                try:
+                    first_invite_group = invite.invite_groups.first()
+                    user.cosinnus_profile.add_redirect_on_next_page(
+                        group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': first_invite_group}),
+                        message=None,
+                        priority=False,
+                    )
+                except Exception as e:
+                    logger.error(
+                        'Error while applying a welcome-redirect from invite token to a freshly signed up user profile',
+                        extra={'exception': e, 'reason': str(e)},
+                    )
 
         # set user inactive if this portal needs user approval and send an email to portal admins
         if CosinnusPortal.get_current().users_need_activation:
@@ -396,54 +445,6 @@ class UserSignupTriggerEventsMixin(object):
 
         # send user registration signal
         signals.user_registered.send(sender=self, user=user)
-
-        # FIXME: this may be broken with the API v3 signup
-        # check if there was a token group invite associated with the signup
-        invite_token = request.POST.get('invite_token', None)
-        if invite_token:
-            invite = get_object_or_None(
-                CosinnusGroupInviteToken, token__iexact=invite_token, portal=CosinnusPortal.get_current()
-            )
-            if not invite:
-                messages.warning(
-                    request,
-                    _(
-                        'The invite token you have used does not exist. Please contact the responsible person to get '
-                        'a valid link!'
-                    ),
-                )
-            elif not invite.is_active:
-                messages.warning(
-                    request, _('Sorry, but the invite token you have used is not active yet or not active anymore!')
-                )
-            else:
-                success = apply_group_invite_token_for_user(invite, user)
-                if success:
-                    messages.success(
-                        request, _('Token invitations applied. You are now a member of the associated projects/groups!')
-                    )
-                else:
-                    messages.error(
-                        request,
-                        _(
-                            'There was an error while processing your invites. Some of your invites may not have been '
-                            'applied.'
-                        ),
-                    )
-                # also add a welcome-redirect to the first invite group for the user
-                # (non-prio so the welcome page shows first!)
-                try:
-                    first_invite_group = invite.invite_groups.first()
-                    user.cosinnus_profile.add_redirect_on_next_page(
-                        group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': first_invite_group}),
-                        message=None,
-                        priority=False,
-                    )
-                except Exception as e:
-                    logger.error(
-                        'Error while applying a welcome-redirect from invite token to a freshly signed up user profile',
-                        extra={'exception': e, 'reason': str(e)},
-                    )
 
         if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
             # add redirect to the welcome-settings page, with priority so that it is shown as first one
