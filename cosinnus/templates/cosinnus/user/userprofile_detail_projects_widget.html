@@ -19,19 +19,21 @@
 
 {% with projects=profile.cosinnus_projects %}
     {% for group in projects %}
-        {% if not SETTINGS.COSINNUS_USE_V2_DASHBOARD or not group.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
-            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
-                <ul class="media-list">
-                    <li class="media">
-                        <span class="pull-left">
-                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-                        </span>
-                        <div class="media-body">
-                            {{ group.name }}
-                        </div>
-                    </li>
-                </ul>
-            </button>
-        {% endif %}
+        {% if group.publicly_visible or request.user.is_authenticated %}
+            {% if not SETTINGS.COSINNUS_USE_V2_DASHBOARD or not group.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
+                <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+                            </span>
+                            <div class="media-body">
+                                {{ group.name }}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            {% endif %}
+         {% endif %}
     {% endfor %}
 {% endwith %}
