@@ -12,7 +12,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.storage import staticfiles_storage
-from django.core.exceptions import ImproperlyConfigured, PermissionDenied
+from django.core.exceptions import ImproperlyConfigured
 from django.http.response import (
     HttpResponse,
     HttpResponseBadRequest,
@@ -22,7 +22,7 @@ from django.http.response import (
     HttpResponseServerError,
     JsonResponse,
 )
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -227,32 +227,47 @@ def cosinnus_post_logout_actions(request, response):
         response.delete_cookie('wp_user_logged_in')
 
 
-def cosinnus_logout(request, **kwargs):
-    """Wraps the django logout view to delete the "wp_user_logged_in" cookie on logouts
+class CosinnusLogoutView(LogoutView):
+    """Extends the django logout view to delete the "wp_user_logged_in" cookie on logouts
     (this seems to only clear the value of the cookie and not completely delete it!).
     Will redirect to a "you have been logged out" page, that may perform additional
     JS queries or redirects to log out from other services."""
 
-    if not request.user.is_authenticated:
-        raise PermissionDenied()
+    template_name = 'cosinnus/registration/logged_out.html'
+    saved_context = None
 
-    context = {}
-    next_redirect_url = safe_redirect(request.GET.get('next'), request, return_none_if_unsafe=True)
-    was_guest = request.user.is_authenticated and request.user.is_guest
-    context.update(
-        {
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context.update(self.saved_context)
+        return context
+
+    def save_context(self):
+        next_redirect_url = safe_redirect(self.request.GET.get('next'), self.request, return_none_if_unsafe=True)
+        was_guest = self.request.user.is_authenticated and self.request.user.is_guest
+        self.saved_context = {
             'user_was_guest': was_guest,
             'run_logout_scripts': was_guest is False
             and (settings.COSINNUS_V3_FRONTEND_ENABLED or settings.COSINNUS_CLOUD_ENABLED),
             'next_redirect_url': next_redirect_url,
         }
-    )
 
-    cosinnus_pre_logout_actions(request)
-    response = LogoutView.as_view(**kwargs)(request)  # logout(request, **kwargs)
-    cosinnus_post_logout_actions(request, response)
+    def post(self, *args, **kwargs):
+        """Note: the methods are set equal: get = post in `LogoutView`."""
+        self.save_context()
+        cosinnus_pre_logout_actions(self.request)
+        response = super().post(*args, **kwargs)
+        cosinnus_post_logout_actions(self.request, response)
+        return response
 
-    return render(request, 'cosinnus/registration/logged_out.html', context)
+    get = post
+
+
+cosinnus_logout = CosinnusLogoutView.as_view()
 
 
 UNSPECIFIED = object()
