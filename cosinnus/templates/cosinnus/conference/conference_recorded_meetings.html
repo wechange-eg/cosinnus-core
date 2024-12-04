@@ -3,10 +3,6 @@
 
 {% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
 
-{% block leftnav %}
-    {% include "cosinnus/group/leftnav_group.html"  with current_page="recordedmeetings" %}
-{% endblock leftnav %}
-
 {% block breadcrumb %}
     {{ block.super }}
     <li class="active">{% trans "Recorded Meetings" %}</li>
