@@ -227,13 +227,17 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 for cluster in self.get_group_clusters(request.user)
                 for dashboard_item in cluster
             ]
-        if not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED or check_user_can_create_groups(
-            request.user
-        ):
+        if not settings.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or request.user.is_superuser:
             group_space_actions = [
-                MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add'), id='CreateGroup'),
                 MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add'), id='CreateProject'),
             ]
+            if (
+                not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED
+                or check_user_can_create_groups(request.user)
+            ):
+                group_space_actions.append(
+                    MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add'), id='CreateGroup'),
+                )
         if group_space_items or group_space_actions:
             group_space = {
                 'header': _('My Groups and Projects'),
