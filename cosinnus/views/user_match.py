@@ -180,16 +180,33 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
         if selected_user_id:
             # show user specified by request parameter
             selected_user = self.model.objects.filter(user__pk=selected_user_id).first()
-            scored_user_profiles = [selected_user] if selected_user else []
+            context.update(
+                {
+                    'selected_user_profile': selected_user,
+                    'selected_user_liked': False,
+                    'selected_user_disliked': False,
+                    'selected_user_matched': False,
+                }
+            )
+            if selected_user:
+                selected_user_like = UserMatchObject.objects.filter(
+                    from_user=self.request.user, to_user__pk=selected_user_id
+                ).first()
+                if selected_user_like:
+                    if selected_user_like.type == UserMatchObject.LIKE:
+                        selected_user_matched = UserMatchObject.objects.filter(
+                            from_user__pk=selected_user_id, to_user=self.request.user, type=UserMatchObject.LIKE
+                        ).exists()
+                        if selected_user_matched:
+                            context['selected_user_matched'] = True
+                        else:
+                            context['selected_user_liked'] = True
+                    elif selected_user_like.type == UserMatchObject.DISLIKE:
+                        context['selected_user_disliked'] = True
         else:
             # show scored user profiles
             scored_user_profiles = self.get_scored_user_profiles()
-
-        context.update(
-            {
-                'scored_user_profiles': scored_user_profiles,
-            }
-        )
+            context['scored_user_profiles'] = scored_user_profiles
 
         return context
 
