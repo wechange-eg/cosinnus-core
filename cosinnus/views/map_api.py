@@ -483,9 +483,6 @@ class MapCloudfilesView(SearchQuerySetMixin, APIView):
         limit = self.params['limit']
         page = self.params['page']
 
-        if self.params.get('cloudfiles', False):
-            return MapCloudfilesView.as_view()(request)
-
         result = perform_fulltext_search(get_nc_user_id(request.user), query, page=page + 1, page_size=limit)
 
         if result['documents']:
