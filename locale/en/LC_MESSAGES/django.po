@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-07 12:38+0100\n"
+"POT-Creation-Date: 2024-12-05 12:07+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6081,9 +6081,6 @@ msgstr ""
 msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
 msgstr ""
 
-msgid "Password reset successful"
-msgstr ""
-
 msgid "Password reset request received."
 msgstr ""
 
@@ -7037,16 +7034,25 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-msgid "Find a Match"
+msgid "You already showed have a match with this person."
 msgstr ""
 
-msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange. If you express interest in another user, this user is notified and gets the ability to do the same with you."
+msgid "You already showed your interest in this person."
+msgstr ""
+
+msgid "You already showed no interest in this person."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
 msgstr ""
 
 msgid "Looks like we share no common interests"
+msgstr ""
+
+msgid "Find a Match"
+msgstr ""
+
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange. If you express interest in another user, this user is notified and gets the ability to do the same with you."
 msgstr ""
 
 msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
