@@ -70,7 +70,7 @@ def filter_searchqueryset_for_read_access(sqs, user):
             # of an items group. New members of a group won't be able to find old indexed items if the index
             # is not refreshed regularly
             group_visible_and_in_my_group = SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) & SQ(
-                group_members__contains=user.id
+                group_members__in=[user.id]
             )
 
             ored_query = (
@@ -243,9 +243,9 @@ class TaggableModelSearchForm(SearchForm):
         if user.is_authenticated:
             term = self.cleaned_data.get('groups', 'all').lower()
             if term == 'mine':
-                sqs = sqs.filter_and(group_members__contains=user.id)
+                sqs = sqs.filter_and(group_members__in=[user.id])
             elif term == 'others':
-                sqs = sqs.exclude(group_members__contains=user.id)
+                sqs = sqs.exclude(group_members__in=[user.id])
             else:
                 pass
         # we don't need to limit the result set on anonymous user. They are not
