@@ -1,7 +1,7 @@
 {% load trans from i18n %}
 {% if widget.has_previous or widget.has_next %}
 	{% with num_pages=widget.num_pages current_page_number=widget.number %}
-		<nav class="widget-pagination v-offset-l v-spacer-s">
+		<div class="widget-pagination v-offset-l v-spacer-s">
 			<ul class="pagination center-block text-center">
 			{% if widget.has_previous %}
 				<li><a href="?{% if widget.query %}{{ widget.query }}&amp;{% endif %}page={{ widget.previous_page_number }}"><span aria-hidden="true">&laquo;</span><span class="sr-only">{% trans "Back" %}</span></a></li>
@@ -28,6 +28,6 @@
 				<li><a href="?{% if widget.query %}{{ widget.query }}&amp;{% endif %}page={{ widget.next_page_number }}"><span aria-hidden="true">&raquo;</span><span class="sr-only">{% trans "Next" %}</span></a></li>
 			{% endif %}
 			</ul>
-		</nav>
+		</div>
 	{% endwith %}
 {% endif %}
