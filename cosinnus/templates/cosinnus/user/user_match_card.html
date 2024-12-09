@@ -41,11 +41,11 @@
     <hr class="invisible"/>
 
     {% if user_already_matched %}
-        <i>{% trans 'You already showed have a match with this person.' %}</i>
+        <i>{% trans 'You already have a match with this person.' %}</i>
     {% elif user_already_liked %}
-        <i>{% trans 'You already showed your interest in this person.' %}</i>
+        <i>{% trans 'You have already specified that you have common interests with this person.' %}</i>
     {% elif user_already_disliked %}
-        <i>{% trans 'You already showed no interest in this person.' %}</i>
+        <i>{% trans 'You have already specified that you have no common interests with this person.' %}</i>
     {% else %}
         <form action="{% url 'cosinnus:user-match-match' %}" method="POST" class="card-buttons">
             {% csrf_token %}
