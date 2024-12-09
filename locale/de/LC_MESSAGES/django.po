@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 12:07+0100\n"
+"POT-Creation-Date: 2024-12-09 14:12+0100\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6946,14 +6946,14 @@ msgstr "Falls du einen Fehler gemacht hast und die E-Mail Adresse erneut ändern
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr "Falls die Bestätigungsmail nicht ankommt, überprüfe bitte deinen Spamordner und überprüfe die korrekte Schreibweise deiner E-Mail Adresse erneut. Wenn alles ok zu sein scheint, aber die E-Mail immer noch nicht angekommen ist, wiederhole bitte die E-Mail Adressenänderung um eine neue Bestätigungsmail zu erhalten."
 
-msgid "You already showed have a match with this person."
+msgid "You already have a match with this person."
 msgstr "Du hast bereits ein Match mit dieser Person."
 
-msgid "You already showed your interest in this person."
-msgstr "Du hast bereits dein Interesse an dieser Person gezeigt."
+msgid "You have already specified that you have common interests with this person."
+msgstr "Du hast bereits angegeben, dass du gemeinsame Interessen mit dieser Person hast."
 
-msgid "You already showed no interest in this person."
-msgstr "Du hast bereits kein Interesse an dieser Person gezeigt."
+msgid "You have already specified that you have no common interests with this person."
+msgstr "Du hast bereits angegeben, dass du keine gemeinsame Interessen mit dieser Person hast."
 
 msgid "Wonderful, we definitely have so much to discuss!"
 msgstr "Wunderbar, wir haben so viel zu besprechen!"

@@ -34,6 +34,20 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
     template_name = 'cosinnus/user/user_match_list.html'
     login_url = LOGIN_URL
 
+    def get(self, request, *args, **kwargs):
+        selected_user_id = request.GET.get('user')
+        if selected_user_id:
+            like_from = UserMatchObject.objects.filter(
+                from_user=request.user, to_user__pk=selected_user_id, type=UserMatchObject.LIKE
+            ).first()
+            like_to = UserMatchObject.objects.filter(
+                from_user__pk=selected_user_id, to_user=request.user, type=UserMatchObject.LIKE
+            ).first()
+            if like_from and like_to:
+                # If a match already exists for the selected user, redirect to the match RC channel.
+                return redirect(like_from.get_absolute_url())
+        return super().get(request, *args, **kwargs)
+
     def get_hashed_likes(self):
         """Returns a dict with all likes by all users. The likes are stored in a hashed string format."""
         cache_key = USER_MATCH_LIKES_CACHE_KEY % (CosinnusPortal.get_current().id)
