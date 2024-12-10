@@ -754,11 +754,11 @@ def approve_user(request, user_id):
             request,
             _('The user account you were looking for does not exist! Their registration was probably already denied.'),
         )
-        return redirect(reverse('cosinnus:user-list'))
+        return redirect(reverse('cosinnus:profile-detail'))
 
     if user.is_active:
         messages.success(request, _('The user account was already approved, but thank you anyway!'))
-        return redirect(reverse('cosinnus:user-list'))
+        return redirect(reverse('cosinnus:profile-detail', kwargs={'username': user.username}) + '?force_show=1')
 
     user.is_active = True
     user.save()
@@ -812,7 +812,7 @@ def deny_user(request, user_id):
             request,
             _('The user account you were looking for does not exist! Their registration was probably already denied.'),
         )
-        return redirect(reverse('cosinnus:user-list'))
+        return redirect(reverse('cosinnus:profile-detail'))
 
     if user.is_active:
         messages.warning(
@@ -823,7 +823,7 @@ def deny_user(request, user_id):
             )
             % {'username': full_name_force(user), 'email': user.email},
         )
-        return redirect(reverse('cosinnus:user-list'))
+        return redirect(reverse('cosinnus:profile-detail', kwargs={'username': user.username}) + '?force_show=1')
 
     # message user for denied request
     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
@@ -844,7 +844,7 @@ def deny_user(request, user_id):
         % {'username': full_name_force(user), 'email': user.email},
     )
     user.delete()
-    return redirect(reverse('cosinnus:user-list'))
+    return redirect(reverse('cosinnus:profile-detail'))
 
 
 def verifiy_user_email(request, email_verification_param):

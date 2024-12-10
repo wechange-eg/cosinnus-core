@@ -120,7 +120,7 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
                         self.group, request, term, page
                     )
                 except Exception as e:
-                    logger.error(
+                    logger.warning(
                         'AttachableObjectSelect2View: Caught an exception while collecting attachable object results !',
                         extra={'exception': e},
                     )
