@@ -1335,6 +1335,13 @@ class GroupInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormView)
         kwargs['group'] = self.group
         return kwargs
 
+    def _is_group_invitation_late(self):
+        """Checks if a conference invitation is issued after the application end date has passed."""
+        if self.group.group_is_conference and self.group.participation_management.count() == 1:
+            participation_management = self.group.participation_management.first()
+            return participation_management.applications_have_ended
+        return False
+
     def form_valid(self, form):
         groups = form.cleaned_data.get('groups')
         invited_users = []
@@ -1363,6 +1370,7 @@ class GroupInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormView)
             set(self.group.members + self.group.invited_pendings + already_applied_id_list)
         )
 
+        is_late_invitation = self._is_group_invitation_late()
         member_list = filter_active_users(
             get_user_model().objects.filter(id__in=member_id_list).exclude(id__in=currently_notified_id_list)
         )
@@ -1370,7 +1378,7 @@ class GroupInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormView)
         for user in member_list:
             if user.id not in invited_users and not user.id == self.request.user.id:
                 # send conference invitations to all users who haven't been invited, and never to self
-                self.group.add_member_to_group(user, MEMBERSHIP_INVITED_PENDING)
+                self.group.add_member_to_group(user, MEMBERSHIP_INVITED_PENDING, is_late_invitation=is_late_invitation)
                 cosinnus_notifications.user_conference_invited_to_apply.send(
                     sender=self, obj=self.group, user=self.request.user, audience=[user]
                 )
