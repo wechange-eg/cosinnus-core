@@ -1159,7 +1159,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     def has_premium_rights(self):
         return self.has_premium_blocks or self.is_premium_permanently
 
-    def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER):
+    def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER, is_late_invitation=False):
         """ "Makes the user a group member".
             Safely adds a membership for the given user with the given status for this group.
             If the membership existed, does nothing. If it existed with a different status, will
@@ -1178,7 +1178,8 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
             CosinnusGroupMembership.objects.create(
                 group=self,
                 user=user,
-                status=membership_status
+                status=membership_status,
+                is_late_invitation=is_late_invitation
             )
 
     def remove_member_from_group(self, user):
