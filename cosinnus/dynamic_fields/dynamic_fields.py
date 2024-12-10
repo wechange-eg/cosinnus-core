@@ -7,6 +7,8 @@ from django.core.exceptions import ImproperlyConfigured
 DYNAMIC_FIELD_TYPE_TEXT = 'text'
 # freeform text area field
 DYNAMIC_FIELD_TYPE_TEXT_AREA = 'textarea'
+# freeform regular slugified text field
+DYNAMIC_FIELD_TYPE_TEXT_SLUG = 'text_id'
 # number field
 DYNAMIC_FIELD_TYPE_INT = 'int'
 # bool checkbox field
@@ -45,6 +47,7 @@ DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES = 'dynamic_choices'
 DYNAMIC_FIELD_TYPES = [
     DYNAMIC_FIELD_TYPE_TEXT,
     DYNAMIC_FIELD_TYPE_TEXT_AREA,
+    DYNAMIC_FIELD_TYPE_TEXT_SLUG,
     DYNAMIC_FIELD_TYPE_INT,
     DYNAMIC_FIELD_TYPE_BOOLEAN,
     DYNAMIC_FIELD_TYPE_DATE,
@@ -99,6 +102,8 @@ class CosinnusDynamicField(object):
     required = False
     # for choice fields, if multiple choices are allowed. ignored for other types
     multiple = False
+    # unique dynamic fields can only be saved if their value is not already set by another of the same model
+    unique = False
     # bool, whether to show up in the signup form
     in_signup = False
     # bool, special flag to hide field in user forms, but shown for admins

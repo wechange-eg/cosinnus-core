@@ -21,7 +21,7 @@ from cosinnus.forms.select2 import HeavySelect2MultipleFreeTextChoiceWidget, \
     HeavySelect2FreeTextChoiceWidget
 from cosinnus.utils.user import get_user_select2_pills
 from cosinnus.utils.functions import is_number
-from django.core.validators import MaxLengthValidator
+from django.core.validators import MaxLengthValidator, validate_slug
 
 
 class DynamicFieldFormFieldGenerator(object):
@@ -93,6 +93,15 @@ class TextDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
 
 class TextAreaDynamicFieldFormFieldGenerator(TextDynamicFieldFormFieldGenerator):
     widget_class = forms.Textarea
+
+class TextSlugDynamicFieldFormFieldGenerator(TextDynamicFieldFormFieldGenerator):
+    
+    def get_formfield_kwargs(self):
+        kwargs = super().get_formfield_kwargs()
+        validators = kwargs.get('validators', [])
+        validators.append(validate_slug)
+        kwargs['validators'] = validators
+        return kwargs
 
 class IntDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = forms.IntegerField
@@ -330,6 +339,7 @@ class FreeChoicesTextDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFieldForm
 EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS = {
     dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT: TextDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_AREA: TextAreaDynamicFieldFormFieldGenerator,
+    dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_SLUG: TextSlugDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_INT: IntDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: BooleanDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: DateDynamicFieldFormFieldGenerator,
