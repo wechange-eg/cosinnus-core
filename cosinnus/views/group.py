@@ -1893,9 +1893,15 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
 
     def get_user_queryset(self, terms):
         # filter for active portal members that are not group members
-        users = filter_active_users(get_user_model().objects.all())\
-                .exclude(id__in=self.group.members)\
-                .exclude(id__in=self.group.invited_pendings)
+        users = (
+            filter_active_users(get_user_model().objects.all())
+            .exclude(id__in=self.group.members)
+            .exclude(id__in=self.group.invited_pendings)
+        )
+        if self.group.use_conference_applications and hasattr(self.group, 'conference_applications'):
+            # exclude conference users with applications
+            applications = list(self.group.conference_applications.values_list('user', flat=True))
+            users = users.exclude(id__in=applications)
         # filter for query terms
         q = get_user_query_filter_for_search_terms(terms)
         users = users.filter(q)
