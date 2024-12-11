@@ -162,10 +162,12 @@ class CosinnusMessageDefaultSettings(AppConf):
         # Custom login script copying the Rocketchat session cookies to the top level domain. This makes the cookies
         # available in the logout view and is used to log out the user from the Rocketchat session.
         'Custom_Script_Logged_In': '''
-            const rcUid = document.cookie.split("; ").find((row) => row.startsWith("rc_uid="))?.split("=")[1];
-            const rcToken = document.cookie.split("; ").find((row) => row.startsWith("rc_token="))?.split("=")[1];
-            document.cookie = 'rc_session_uid=' + rcUid + ';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/';
-            document.cookie = 'rc_session_token=' + rcToken + ';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/';
+            setTimeout(function() {
+                const rcUid = document.cookie.split("; ").find((row) => row.startsWith("rc_uid="))?.split("=")[1];
+                const rcToken = document.cookie.split("; ").find((row) => row.startsWith("rc_token="))?.split("=")[1];
+                document.cookie = 'rc_session_uid=' + rcUid + ';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/';
+                document.cookie = 'rc_session_token=' + rcToken + ';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/';
+            }, 1000);
         ''',
 
         # TODO: this setting needs to be added, but under API url:
