@@ -167,7 +167,7 @@ class CosinnusMessageDefaultSettings(AppConf):
                 const rcToken = document.cookie.split("; ").find((row) => row.startsWith("rc_token="))?.split("=")[1];
                 document.cookie = 'rc_session_uid=' + rcUid + ';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/';
                 document.cookie = 'rc_session_token=' + rcToken + ';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/';
-            }, 100);
+            }, 1000);
         ''',
 
         # TODO: this setting needs to be added, but under API url:
