@@ -1610,6 +1610,11 @@ def conference_application(context, conference):
 
 
 @register.filter
+def is_late_application_allowed(participation_management, user):
+    return participation_management.is_late_application_allowed(user)
+
+
+@register.filter
 def is_user_active(user):
     """Returns for a user the value of the given ui pref"""
     return utils_is_user_active(user)

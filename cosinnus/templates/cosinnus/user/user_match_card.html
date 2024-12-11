@@ -1,27 +1,67 @@
 {% load i18n cosinnus_tags widget_tweaks static thumbnail %}
 
-<div class="card-body textfield">
-    <h3 class="card-title">
-        <a href="{{ scored_user_profile.get_absolute_url }}" target="_blank">
-            {{ scored_user_profile.get_full_name }}
-        </a>
-    </h3>
-    
-    <div class="truncated-textfield">
-        {% block card_content %}
-	        {% if scored_user_profile.description %}
-	            <div class="card-text textfield no-padding">
-	                {{ scored_user_profile.description|textfield }}
-                </div>
-	        {% endif %}
-        {% endblock %}
+<div class="card h-100 white-content">
+    <div class="card-img-top">
+        {% with avatar=user_profile.avatar %}
+            {% if avatar %}
+                {% include 'cosinnus/user/user_avatar_image.html' with user=user_profile.user image_size="large" %}
+            {% else %}
+                <img src="{{ COSINNUS_CURRENT_PORTAL.get_domain }}{% static 'images/jane-doe.png' %}" title="{{ user_profile.user|full_name }}{% if extra_title %} - {{ extra_title }}{% endif %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %} width="264" height="264"></img>
+            {% endif %}
+        {% endwith %}
     </div>
-    <script type="text/javascript">
-        $.cosinnus.truncatedTextfield();
-    </script>
-</div>
-<div class="card-footer">   
-    {% comment %}
-        Some additional information if needed
-    {% endcomment %}
+
+    <div class="card-body textfield">
+        <h3 class="card-title">
+            <a href="{{ user_profile.get_absolute_url }}" target="_blank">
+                {{ user_profile.get_full_name }}
+            </a>
+        </h3>
+
+        <div class="truncated-textfield">
+            {% block card_content %}
+              {% if user_profile.description %}
+                  <div class="card-text textfield no-padding">
+                      {{ user_profile.description|textfield }}
+                    </div>
+              {% endif %}
+            {% endblock %}
+        </div>
+        <script type="text/javascript">
+            $.cosinnus.truncatedTextfield();
+        </script>
+    </div>
+    <div class="card-footer">
+        {% comment %}
+            Some additional information if needed
+        {% endcomment %}
+    </div>
+
+    <div class="clearfix"></div>
+    <hr class="invisible"/>
+
+    {% if user_already_matched %}
+        <i>{% trans 'You already have a match with this person.' %}</i>
+    {% elif user_already_liked %}
+        <i>{% trans 'You have already specified that you have common interests with this person.' %}</i>
+    {% elif user_already_disliked %}
+        <i>{% trans 'You have already specified that you have no common interests with this person.' %}</i>
+    {% else %}
+        <form action="{% url 'cosinnus:user-match-match' %}" method="POST" class="card-buttons">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ user_profile.user.id }}">
+            <button type="submit" class="rounded-button w100 button-action button-action-like button-star button-like-dislike-liked regular-space" name="action" value="1">
+                <span class="rounded-button-inner">
+                    <i class="far fa-star"></i>
+                    {% trans 'Wonderful, we definitely have so much to discuss!' %}
+                </span>
+            </button>
+            <button type="submit" class="rounded-button w100 button-action button-action-dislike button-star regular-space" name="action" value="0">
+                <span class="rounded-button-inner">
+                    {% trans 'Looks like we share no common interests' %}
+                </span>
+            </button>
+            <div class="clearfix"></div>
+        </form>
+    {% endif %}
 </div>

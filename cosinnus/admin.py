@@ -85,9 +85,11 @@ def admin_log_action(user, instance, message):
 
 class SingleDeleteActionMixin(object):
     def get_actions(self, request):
-        self.actions.append('really_delete_selected')
+        # replace the django delete-selected action with ours
+        self.actions = list(set(list(self.actions) + ['really_delete_selected']))
         actions = super(SingleDeleteActionMixin, self).get_actions(request)
-        del actions['delete_selected']
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
         return actions
 
     def really_delete_selected(self, request, queryset):

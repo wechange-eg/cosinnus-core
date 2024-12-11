@@ -1089,3 +1089,7 @@ class UserMatchObject(models.Model):
                         'Could not create a match chat rocketchat room!',
                         extra={'match-id': self.id, 'from_user_id': self.from_user_id, 'to_user_id': self.to_user_id},
                     )
+
+    def get_match_user_url(self):
+        url = reverse('cosinnus:user-match') + f'?user={self.from_user.pk}'
+        return url

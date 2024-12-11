@@ -12,52 +12,28 @@
                 <div class="textfield transparent">
                     <p>
                         {% comment %} Sending this through |textfield allows markdown formatting {% endcomment %}
-                        {% trans "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange." as trans_header %}
+                        {% trans "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange. If you express interest in another user, this user is notified and gets the ability to do the same with you." as trans_header %}
                         {{ trans_header|textfield }}
                     </p>
                 </div>
             </div>
             <div class="clearfix"></div>
 
-            {% for scored_user_profile in scored_user_profiles %}
-                <!-- card -->
+            {% if selected_user_profile %}
                 <div class="col-sm-4 large-space">
-                    <div class="card h-100 white-content">
-                        <div class="card-img-top">
-                            {% with avatar=scored_user_profile.avatar %}
-                                {% if avatar %}
-                                    {% include 'cosinnus/user/user_avatar_image.html' with user=scored_user_profile.user image_size="large" %}
-                                {% else %}
-                                    <img src="{{ COSINNUS_CURRENT_PORTAL.get_domain }}{% static 'images/jane-doe.png' %}" title="{{ scored_user_profile.user|full_name }}{% if extra_title %} - {{ extra_title }}{% endif %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %} width="264" height="264"></img>
-                                {% endif %}
-                            {% endwith %}
-                        </div>
-                        
-                        {% include "cosinnus/user/user_match_card.html" with scored_user_profile=scored_user_profile %}
-
-                        <div class="clearfix"></div>
-                        <hr class="invisible"/>
-
-                        <form action="{% url 'cosinnus:user-match-match' %}" method="POST" class="card-buttons">
-                            {% csrf_token %}
-                            <input type="hidden" name="user_id" value="{{ scored_user_profile.user.id }}">
-                            <button type="submit" class="rounded-button w100 button-action button-action-like button-star button-like-dislike-liked regular-space" name="action" value="1">
-                                <span class="rounded-button-inner">
-                                    <i class="far fa-star"></i>
-                                    {% trans 'Wonderful, we definitely have so much to discuss!' %}
-                                </span>
-                            </button>
-                            <button type="submit" class="rounded-button w100 button-action button-action-dislike button-star regular-space" name="action" value="0">
-                                <span class="rounded-button-inner">
-                                    {% trans 'Looks like we share no common interests' %}
-                                </span>
-                            </button>
-                            <div class="clearfix"></div>
-                        </form>
-                    </div>        
+                    {% include "cosinnus/user/user_match_card.html" with user_profile=selected_user_profile user_already_liked=selected_user_liked user_already_disliked=selected_user_disliked user_already_matched=selected_user_matched %}
                 </div>
-                <!-- card -->
-            {% empty %}
+
+            {% elif scored_user_profiles %}
+
+                {% for scored_user_profile in scored_user_profiles %}
+                    <div class="col-sm-4 large-space">
+                        {% include "cosinnus/user/user_match_card.html" with user_profile=scored_user_profile %}
+                    </div>
+                {% endfor %}
+
+            {% else %} {# no selected user and no selected user profiles #}
+
                 <div class="col-xs-12">
                     <hr class="invisible"/>
                     <div class="textfield transparent">
@@ -68,7 +44,9 @@
                         </p>
                     </div>
                 </div>
-            {% endfor %}
+
+            {% endif %}
+
         </div>
     </div>
 {% endblock main_page %}

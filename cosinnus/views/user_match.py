@@ -34,6 +34,20 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
     template_name = 'cosinnus/user/user_match_list.html'
     login_url = LOGIN_URL
 
+    def get(self, request, *args, **kwargs):
+        selected_user_id = request.GET.get('user')
+        if selected_user_id:
+            like_from = UserMatchObject.objects.filter(
+                from_user=request.user, to_user__pk=selected_user_id, type=UserMatchObject.LIKE
+            ).first()
+            like_to = UserMatchObject.objects.filter(
+                from_user__pk=selected_user_id, to_user=request.user, type=UserMatchObject.LIKE
+            ).first()
+            if like_from and like_to:
+                # If a match already exists for the selected user, redirect to the match RC channel.
+                return redirect(like_from.get_absolute_url())
+        return super().get(request, *args, **kwargs)
+
     def get_hashed_likes(self):
         """Returns a dict with all likes by all users. The likes are stored in a hashed string format."""
         cache_key = USER_MATCH_LIKES_CACHE_KEY % (CosinnusPortal.get_current().id)
@@ -49,9 +63,7 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
         return likes_by_user
 
     # TODO: cache after!
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
+    def get_scored_user_profiles(self):
         # exclude self
         user_profiles = self.model.objects.exclude(user=self.request.user)
 
@@ -150,9 +162,8 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
         score_dict = sorted(score_dict.items(), key=lambda score: score[1], reverse=True)
         result_score = {k: v for k, v in score_dict}
 
-        selected_user_profiles = list(result_score.keys())[
-            :3
-        ]  # get first 3 user profiles with the highest counted score
+        # get first 3 user profiles with the highest counted score
+        selected_user_profiles = list(result_score.keys())[:3]
 
         # all active users related to the selected user profiles
         scored_user_profiles = list(self.model.objects.select_related('user').filter(id__in=selected_user_profiles))
@@ -174,12 +185,42 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
                 random.seed()
                 random_pos = random.randrange(3)
                 scored_user_profiles.insert(random_pos, liked_by_user_profile)
+        return scored_user_profiles
 
-        context.update(
-            {
-                'scored_user_profiles': scored_user_profiles,
-            }
-        )
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        selected_user_id = self.request.GET.get('user')
+        if selected_user_id:
+            # show user specified by request parameter
+            selected_user = self.model.objects.filter(user__pk=selected_user_id).first()
+            context.update(
+                {
+                    'selected_user_profile': selected_user,
+                    'selected_user_liked': False,
+                    'selected_user_disliked': False,
+                    'selected_user_matched': False,
+                }
+            )
+            if selected_user:
+                selected_user_like = UserMatchObject.objects.filter(
+                    from_user=self.request.user, to_user__pk=selected_user_id
+                ).first()
+                if selected_user_like:
+                    if selected_user_like.type == UserMatchObject.LIKE:
+                        selected_user_matched = UserMatchObject.objects.filter(
+                            from_user__pk=selected_user_id, to_user=self.request.user, type=UserMatchObject.LIKE
+                        ).exists()
+                        if selected_user_matched:
+                            context['selected_user_matched'] = True
+                        else:
+                            context['selected_user_liked'] = True
+                    elif selected_user_like.type == UserMatchObject.DISLIKE:
+                        context['selected_user_disliked'] = True
+        else:
+            # show scored user profiles
+            scored_user_profiles = self.get_scored_user_profiles()
+            context['scored_user_profiles'] = scored_user_profiles
 
         return context
 
@@ -187,10 +228,15 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
 def check_for_user_match(from_user, to_user):
     """Checks if between two users, a MatchObject exists, in a way that both users
     "like" each other, and if so, triggers different effects."""
-    try:
-        match_case_from = UserMatchObject.objects.get(from_user=from_user, to_user=to_user, type=UserMatchObject.LIKE)
-        match_case_to = UserMatchObject.objects.get(from_user=to_user, to_user=from_user, type=UserMatchObject.LIKE)
 
+    match_case_from = UserMatchObject.objects.filter(
+        from_user=from_user, to_user=to_user, type=UserMatchObject.LIKE
+    ).first()
+    match_case_to = UserMatchObject.objects.filter(
+        from_user=to_user, to_user=from_user, type=UserMatchObject.LIKE
+    ).first()
+
+    if match_case_from and match_case_to:
         # open rocketchat
         if settings.COSINNUS_ROCKET_ENABLED:
             match_case_from.get_rocketchat_room_url()  # sets rocketchat room ids and name in the match object
@@ -217,11 +263,18 @@ def check_for_user_match(from_user, to_user):
                         from_user,
                     ],
                 )
-
-        else:
-            logger.info('RocketChat is not enabled on this portal!')
-    except UserMatchObject.DoesNotExist:
-        pass
+            else:
+                logger.info('RocketChat is not enabled on this portal!')
+    elif match_case_from:
+        # send like notification
+        cosinnus_notifications.user_match_liked.send(
+            sender=from_user,
+            obj=match_case_from,
+            user=from_user,
+            audience=[
+                to_user,
+            ],
+        )
 
 
 def match_create_view(request):
