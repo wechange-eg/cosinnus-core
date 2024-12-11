@@ -511,6 +511,7 @@ class CosinnusGroupMembership(BaseMembership):
         settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='memberships', on_delete=models.CASCADE
     )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cosinnus_memberships', on_delete=models.CASCADE)
+    is_late_invitation = models.BooleanField(_('Is Late Invitation'), default=False)
 
     CACHE_KEY_MODEL = 'CosinnusGroup'
 
@@ -1415,7 +1416,7 @@ class CosinnusBaseGroup(
     def has_premium_rights(self):
         return self.has_premium_blocks or self.is_premium_permanently
 
-    def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER):
+    def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER, is_late_invitation=False):
         """ "Makes the user a group member".
         Safely adds a membership for the given user with the given status for this group.
         If the membership existed, does nothing. If it existed with a different status, will
@@ -1438,7 +1439,9 @@ class CosinnusBaseGroup(
                 membership.status = membership_status
                 membership.save()
         elif not membership:
-            CosinnusGroupMembership.objects.create(group=self, user=user, status=membership_status)
+            CosinnusGroupMembership.objects.create(
+                group=self, user=user, status=membership_status, is_late_invitation=is_late_invitation
+            )
 
     def remove_member_from_group(self, user):
         """ "Kicks a user from the group."

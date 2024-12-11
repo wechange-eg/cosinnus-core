@@ -41,6 +41,7 @@ attending_conference_changed = dispatch.Signal()  # providing_args=["user", "obj
 attending_conference_time_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 user_conference_invited_to_apply = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 user_match_established = dispatch.Signal()  # providing_args=["from_user", "to_user", "audience"]
+user_match_liked = dispatch.Signal()  # providing_args=["from_user", "to_user", "audience"]
 
 
 """ Notification definitions.
@@ -600,6 +601,21 @@ if settings.COSINNUS_ENABLE_USER_MATCH:
                 'data_attributes': {
                     'object_name': 'name',
                     'object_url': 'get_rocketchat_room_url',
+                    'object_icon': '_sender.cosinnus_profile.get_icon',
+                },
+                'notification_reason': 'none',
+            },
+            'user_match_liked': {
+                'label': '<hidden-user_match_liked>',
+                'signals': [user_match_liked],
+                'default': False,
+                'hidden': True,
+                'alert_text': _("%(sender_name)s is interested in networking with you. Check out the user's profile"),
+                'alert_reason': '',
+                'can_be_email': False,
+                'data_attributes': {
+                    'object_name': 'name',
+                    'object_url': 'get_match_user_url',
                     'object_icon': '_sender.cosinnus_profile.get_icon',
                 },
                 'notification_reason': 'none',
