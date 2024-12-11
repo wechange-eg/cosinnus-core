@@ -312,6 +312,7 @@ def rocketsyncupdatesetting(_ctx):
     with c.cd(env.path):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('./manage.py rocket_sync_settings --only-settings Update_EnableChecker')
+            c.run('./manage.py rocket_sync_settings --only-settings Custom_Script_Logged_In')
 
 
 @task
