@@ -322,6 +322,12 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         default=dict,
         help_text='JSON dictionary with ui_flags.',
     )
+    is_guest = serializers.BooleanField(
+        required=False,
+        read_only=True,
+        default=False,
+        help_text='Bool flag indicating that the user is a guest user.',
+    )
 
     # for `CosinnusUserDynamicFieldsSerializerMixin`
     all_fields_optional = True
