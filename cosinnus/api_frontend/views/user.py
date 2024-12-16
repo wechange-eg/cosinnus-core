@@ -271,6 +271,7 @@ class UserAuthInfoView(LoginViewAdditionalLogicMixin, APIView):
                                 'username': '77',
                                 'first_name': 'NewUser',
                                 'last_name': '',
+                                'is_guest': False,
                                 'profile': {
                                     'id': 82,
                                     'avatar': None,
@@ -507,6 +508,8 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
                                 'tags': ['testtag', 'anothertag'],
                                 'topics': [2, 5, 6],
                                 'visibility': 2,
+                                'ui_flags': {},
+                                'is_guest': False,
                             }
                         },
                         'version': COSINNUS_VERSION,
