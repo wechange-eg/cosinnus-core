@@ -1107,7 +1107,7 @@ class CosinnusConf(AppConf):
     # #internal 
     USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS = []
     
-    # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 
+    # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms
     # for the current portal. can be dynamic and regular fields
     # multiforms choosable are 'obj' (CosinnusProfile), 'user', 'media_tag'
     # #internal 
@@ -1377,6 +1377,13 @@ class CosinnusConf(AppConf):
     
     # should the editable user-list be shown in the administration area?
     PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+    
+    # a list of field query names from fields in the user profile that
+    # should be searched in the search in the administration user list.
+    # can also specify dynamic fields by e.g. `dynamic_fields__institution`.
+    # Don't go overboard here, this is an expensive search!
+    # only applies when `PLATFORM_ADMIN_CAN_EDIT_PROFILES=True`
+    USERPROFILE_FIELDS_SEARCHABLE_IN_ADMINISTRATION = []
     
     # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False

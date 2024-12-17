@@ -298,9 +298,13 @@ class UserListView(ListView):
         qs = super().get_queryset()
         if self.request.GET.get('search'):
             search_string = self.request.GET.get('search')
-            qs = qs.filter(Q(email__icontains=search_string) |
-                           Q(first_name__icontains=search_string) |
-                           Q(last_name__icontains=search_string) )
+            q_term = Q(email__icontains=search_string) |\
+                Q(first_name__icontains=search_string) |\
+                Q(last_name__icontains=search_string)
+            # include userprofile dynamic fields
+            for search_field_name in settings.COSINNUS_USERPROFILE_FIELDS_SEARCHABLE_IN_ADMINISTRATION:
+                q_term = q_term | Q(**{f'cosinnus_profile__{search_field_name}__icontains': search_string})
+            qs = qs.filter(q_term)
         if self.request.GET.get('order_by'):
             order = self.request.GET.get('order_by')
             if order:

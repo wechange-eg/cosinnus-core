@@ -33,6 +33,7 @@ from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
 from cosinnus.core.mail import send_mail_or_fail_threaded,\
     convert_html_to_plaintext
+from cosinnus.dynamic_fields.dynamic_fields import CosinnusDynamicFieldsModelMixin
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin,\
     CosinnusManagedTag
@@ -103,7 +104,7 @@ class BaseUserProfileManager(models.Manager):
 
 
 @six.python_2_unicode_compatible
-class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
+class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, CosinnusDynamicFieldsModelMixin,
                       TranslateableFieldsModelMixin, LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
                       models.Model):
     """
@@ -266,6 +267,11 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             self.id = existing.id  # force update instead of insert
         except ObjectDoesNotExist:
             pass
+        
+        # we add a validate_unique here to double-check unique constraints for direct edits on the
+        # JSON field values in `dynamic_fields` via CosinnusDynamicFieldsModelMixin
+        self.validate_unique()
+        
         super(BaseUserProfile, self).save(*args, **kwargs)
         
         if created:
