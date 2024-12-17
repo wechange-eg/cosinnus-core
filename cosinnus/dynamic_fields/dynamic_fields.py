@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured, ValidationError, NON_FIELD_ERRORS
+from django.template.defaultfilters import capfirst
+from django.utils.translation import gettext_lazy as _
 
 # freeform regular text field
 DYNAMIC_FIELD_TYPE_TEXT = 'text'
@@ -140,3 +142,64 @@ class CosinnusDynamicField(object):
             raise ImproperlyConfigured(f'`CosinnusDynamicField` was initialized with no or unknown type "{self.type}" {self.__dict__} ++ {str(kwargs.items())})')
         if self.placeholder is None:
             self.placeholder = self.label
+
+
+class CosinnusDynamicFieldsModelMixin(object):
+    """Adds model field checks to sub-fields within dynamic fields for a model."""
+    
+    # the name of the dynamic fields in the inheriting model
+    dynamic_field_attr = 'dynamic_fields'
+    dynamic_field_conf_setting = 'COSINNUS_USERPROFILE_EXTRA_FIELDS'
+    
+    def _get_unique_dynamic_field_names(self):
+        """Returns all dynamic field names with option `unique=True`"""
+        from cosinnus.conf import settings
+        unique_dynamic_fields = []
+        for field_name, field_options in getattr(settings, self.dynamic_field_conf_setting).items():
+            if field_options.unique:
+                unique_dynamic_fields.append(field_name)
+        return unique_dynamic_fields
+    
+    def _perform_dynamic_field_unique_check(self, dynamic_field_name):
+        """Performs a single unique check on this model instance for the given dynamic field.
+        @return None if no unique value was found, else return a ValidationError.
+        """
+        model_class = type(self)
+        dynamic_field_value = getattr(self, self.dynamic_field_attr).get(dynamic_field_name, None)
+        # ignore empty values
+        if dynamic_field_value is None or dynamic_field_value == '':
+            return None
+        
+        # build lookup QS for the dynamic field
+        lookup_kwargs = {f'{self.dynamic_field_attr}__{dynamic_field_name}': dynamic_field_value}
+        qs = model_class._default_manager.filter(**lookup_kwargs)
+        
+        # exclude own pk from lookup, unless we are creating this instance right now
+        model_class_pk = self._get_pk_val(model_class._meta)
+        if not self._state.adding and model_class_pk is not None:
+            qs = qs.exclude(pk=model_class_pk)
+        # another instance with the same dynamic field value exists, return a validation error
+        if qs.exists():
+            check = bool(getattr(qs.first(), self.dynamic_field_attr).get(dynamic_field_name) == dynamic_field_value)
+            return ValidationError(
+                message=_('%(model_name)s with this %(field_name)s already exists.') % {
+                    'model_name': capfirst(model_class._meta.verbose_name),
+                    'field_name': dynamic_field_name
+                },
+                code="unique"
+            )
+        return None
+        
+    def validate_unique(self, *args, **kwargs):
+        """Performs unique checks on fields with option `unique=True` within the `dynamic_fields` JSON field"""
+        super().validate_unique(*args, **kwargs)
+        errors = {}
+        for dynamic_field_name in self._get_unique_dynamic_field_names():
+            error = self._perform_dynamic_field_unique_check(dynamic_field_name)
+            if error:
+                # we set the error message as non-field-error instead of on the field_name key,
+                # because while the dynamic field exists in the user profile form (it is added dynamically),
+                # it doesn't exist in the django admin profile form, where a FieldNotFoundError would be raised
+                errors.setdefault(NON_FIELD_ERRORS, []).append(error)
+        if errors:
+            raise ValidationError(errors)
