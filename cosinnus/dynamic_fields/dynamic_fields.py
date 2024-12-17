@@ -180,7 +180,6 @@ class CosinnusDynamicFieldsModelMixin(object):
             qs = qs.exclude(pk=model_class_pk)
         # another instance with the same dynamic field value exists, return a validation error
         if qs.exists():
-            check = bool(getattr(qs.first(), self.dynamic_field_attr).get(dynamic_field_name) == dynamic_field_value)
             return ValidationError(
                 message=_('%(model_name)s with this %(field_name)s already exists.') % {
                     'model_name': capfirst(model_class._meta.verbose_name),
