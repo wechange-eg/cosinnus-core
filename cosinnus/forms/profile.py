@@ -26,10 +26,10 @@ class UserProfileFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
         
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
     
-    def full_clean(self):
+    def clean(self):
         """ Assign the extra fields to the `dynamic_fields` the userprofile JSON field
             instead of model fields, during regular form saving """
-        super().full_clean()
+        super().clean()
         if hasattr(self, 'cleaned_data'):
             for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
                 # skip saving fields that weren't included in the POST
