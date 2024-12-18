@@ -429,3 +429,14 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
                 managed_tag_ids = profile_data.get('get_managed_tag_slugs', [])
                 CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, managed_tag_ids)
         return instance
+
+
+class CosinnusGuestLoginSerializer(serializers.Serializer):
+    """Serializer for the guest Login API endpoint"""
+
+    username = serializers.CharField(
+        required=True,
+        max_length=50,
+        validators=[MinLengthValidator(2), MaxLengthValidator(50)],
+        help_text='Username for the guest user.',
+    )
