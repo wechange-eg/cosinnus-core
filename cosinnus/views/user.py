@@ -774,7 +774,6 @@ def approve_user(request, user_id):
     text = textfield(render_to_string('cosinnus/mail/user_registration_approved.html', data))
     send_html_mail_threaded(user, subj_user, text)
 
-    _send_user_welcome_email_if_enabled(user)
     # send user account creation signal, the audience is empty because this is a moderator-only notification
     user_profile = user.cosinnus_profile
     # need to attach a group to notification objects
@@ -786,6 +785,10 @@ def approve_user(request, user_id):
     # also send out a verification email if portals have email verification turned on
     if CosinnusPortal.get_current().email_needs_verification:
         send_user_email_to_verify(user, user.email, request)
+    else:
+        # send the welcome email if no email verification is needed, otherwise the welcome email is sent after the
+        # email is verified.
+        _send_user_welcome_email_if_enabled(user)
 
     messages.success(
         request,
