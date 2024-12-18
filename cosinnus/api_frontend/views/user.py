@@ -2,8 +2,10 @@ import json
 import logging
 from urllib.parse import unquote
 
+from annoying.functions import get_object_or_None
 from django.contrib.auth import login, logout
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.http import Http404
 from django.shortcuts import redirect
 from django.urls.base import reverse
 from django.utils.encoding import force_str
@@ -27,6 +29,7 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.user import (
+    CosinnusGuestLoginSerializer,
     CosinnusHybridUserSerializer,
     CosinnusUserLoginSerializer,
     CosinnusUserSignupSerializer,
@@ -34,10 +37,12 @@ from cosinnus.api_frontend.serializers.user import (
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
 from cosinnus.models import CosinnusPortal
+from cosinnus.models.group import UserGroupGuestAccess
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import AllowNone, IsNotAuthenticated
 from cosinnus.utils.urls import redirect_with_next
+from cosinnus.utils.user import create_guest_user_and_login
 from cosinnus.views.common import (
     LoginViewAdditionalLogicMixin,
     cosinnus_post_logout_actions,
@@ -591,3 +596,97 @@ class UserUIFlagsView(APIView):
         request.user.cosinnus_profile.save()
 
         return Response(data=profile_settings['ui_flags'])
+
+
+class GuestLoginView(LoginViewAdditionalLogicMixin, APIView):
+    """A Guest user login API endpoint"""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    msg_invalid_token = _('Invalid guest token.')
+    msg_already_logged_in = _(
+        'You are currently logged in. The guest access can only be used if you are not logged in.'
+    )
+    msg_signup_not_possible = _('We could not sign you in as a guest at this time. Please try again later!')
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        request_body=CosinnusGuestLoginSerializer,
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        # TODO
+                        'data': {
+                            'refresh': 'eyJ...',
+                            'access': 'eyJ...',
+                            'user': {
+                                'id': 77,
+                                'username': '77',
+                                'first_name': 'New Guest User',
+                                'last_name': '',
+                                'profile': {
+                                    'id': 82,
+                                    'avatar': None,
+                                    'avatar_80x80': None,
+                                    'avatar_50x50': None,
+                                    'avatar_40x40': None,
+                                },
+                            },
+                            'next': '/dashboard/',
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
+    )
+    def post(self, request, guest_token):
+        if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
+            raise Http404
+
+        if request.user.is_authenticated:
+            raise serializers.ValidationError({'non_field_errors': [self.msg_already_logged_in]})
+
+        # check if guest token and its access object and group exists
+        guest_token_str = guest_token.strip().lower()
+        guest_access = None
+        group = None
+        if guest_token_str:
+            guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token_str)
+        if guest_access:
+            group = guest_access.group
+        if not group or not group.is_active:
+            # do not allow to tokens without a group or an inactive group
+            raise serializers.ValidationError({'non_field_errors': [self.msg_invalid_token]})
+        # check if feature is disabled on this portal for this group type
+        if group.type not in settings.COSINNUS_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
+            raise Http404
+
+        serializer = CosinnusGuestLoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        username = serializer.validated_data['username']
+        success = create_guest_user_and_login(guest_access, username, self.request)
+        if not success:
+            raise serializers.ValidationError({'non_field_errors': [self.msg_signup_not_possible]})
+
+        user_tokens = get_tokens_for_user(self.request.user)
+        data = {
+            'refresh': user_tokens['refresh'],
+            'access': user_tokens['access'],
+            'user': UserSerializer(self.request.user, context={'request': request}).data,
+            'next': reverse('cosinnus:user-dashboard'),
+        }
+        response = Response(data)
+        response = self.set_response_cookies(response)
+        return response
