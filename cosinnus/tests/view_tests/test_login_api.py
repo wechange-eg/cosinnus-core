@@ -2,7 +2,10 @@ import json
 
 from django.contrib.auth.models import User
 from django.urls import reverse
-from rest_framework.test import APIClient, APITestCase
+from rest_framework.test import APIClient, APITestCase, override_settings
+
+from cosinnus.models.group import UserGroupGuestAccess
+from cosinnus.models.group_extra import CosinnusSociety
 
 
 class LoginViewTest(APITestCase):
@@ -120,3 +123,46 @@ class LoginViewTest(APITestCase):
         s = self.client.session.get('_auth_user_id')
         self.assertEqual(int(s), self.user.pk, 'this user should be logged in')
         self.assertNotEqual(int(s), self.another_user.pk, 'this user should not be logged in')
+
+
+@override_settings(COSINNUS_USER_GUEST_ACCOUNTS_ENABLED=True)
+class GuestLoginViewTest(APITestCase):
+    TEST_USER_DATA = {
+        'username': '1',
+        'email': 'testuser@example.com',
+        'first_name': 'Test',
+        'last_name': 'User',
+    }
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user = User.objects.create(**cls.TEST_USER_DATA)
+        cls.test_group = CosinnusSociety.objects.create(name='Test Group')
+        cls.guest_token = UserGroupGuestAccess.objects.create(group=cls.test_group, creator=cls.user, token='testTOKEN')
+        cls.api_url = reverse('cosinnus:frontend-api:api-guest-login', kwargs={'guest_token': cls.guest_token.token})
+
+    @override_settings(COSINNUS_USER_GUEST_ACCOUNTS_ENABLED=False)
+    def test_disabled(self):
+        response = self.client.post(self.api_url, {}, format='json')
+        self.assertEqual(response.status_code, 404)
+
+    def test_invalid_token(self):
+        api_url = reverse('cosinnus:frontend-api:api-guest-login', kwargs={'guest_token': 'invalid'})
+        response = self.client.post(api_url, {'username': 'Guest'}, format='json')
+        self.assertEqual(response.status_code, 400)
+
+    def test_invalid_data(self):
+        response = self.client.post(self.api_url, {}, format='json')
+        self.assertEqual(response.status_code, 400)
+        response = self.client.post(self.api_url, {'username': 'x'}, format='json')
+        self.assertEqual(response.status_code, 400)
+
+    def test_guest_login(self):
+        response = self.client.post(self.api_url, {'username': 'Guest'}, format='json')
+        self.assertEqual(response.status_code, 200)
+        signed_in_guest_user = User.objects.get(
+            id=self.client.session.get('_auth_user_id')
+        )  # get the user via their auth id
+        self.assertTrue(signed_in_guest_user.is_guest, 'guest user is a guest')
+        self.assertTrue(signed_in_guest_user.is_authenticated, 'guest user is logged in')
