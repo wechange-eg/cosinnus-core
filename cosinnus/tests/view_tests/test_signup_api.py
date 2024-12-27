@@ -8,6 +8,8 @@ from rest_framework.test import APIClient, APITestCase
 
 from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal
+from cosinnus.models.profile import PROFILE_SETTING_PASSWORD_NOT_SET
+from cosinnus.views.user import email_first_login_token_to_user
 
 
 class SignupTestView(APITestCase):
@@ -270,4 +272,71 @@ class SignupTestView(APITestCase):
         Ensure user cannot signup if `COSINNUS_USER_SIGNUP_ENABLED` setting is turned off
         """
         response = self.client.post(self.signup_url, self.user_data, format='json')
+        self.assertEqual(response.status_code, 403)
+
+
+class SetInitialPasswordViewTest(APITestCase):
+    TEST_USER_DATA = {
+        'username': '1',
+        'email': 'testuser@example.com',
+        'first_name': 'Test',
+        'last_name': 'User',
+        'is_active': True,
+    }
+    TEST_USER_PWD = '12345'
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.test_user = get_user_model().objects.create(**cls.TEST_USER_DATA)
+        email_first_login_token_to_user(cls.test_user, threaded=False)
+        cls.token = cls.test_user.cosinnus_profile.settings[PROFILE_SETTING_PASSWORD_NOT_SET]
+        cls.api_url = reverse('cosinnus:frontend-api:api-set-initial-password', kwargs={'token': cls.token})
+        cls.login_api_url = reverse('cosinnus:frontend-api:api-login')
+        cls.login_data = {'username': cls.TEST_USER_DATA['email'], 'password': cls.TEST_USER_PWD}
+
+    def test_invalid_token(self):
+        api_url = reverse('cosinnus:frontend-api:api-set-initial-password', kwargs={'token': 'invalid'})
+        response = self.client.post(api_url, {'password': 'password'}, format='json')
+        self.assertEqual(response.status_code, 404)
+
+    def test_invalid_data(self):
+        response = self.client.post(self.api_url, {}, format='json')
+        self.assertEqual(response.status_code, 400)
+        response = self.client.post(self.api_url, {'password': ''}, format='json')
+        self.assertEqual(response.status_code, 400)
+
+    def test_set_initial_password(self):
+        # no password is set
+        self.assertEqual(self.test_user.password, '')
+        self.assertIn(PROFILE_SETTING_PASSWORD_NOT_SET, self.test_user.cosinnus_profile.settings)
+        self.assertFalse(self.test_user.check_password(self.TEST_USER_PWD))
+
+        # login is not possible
+        login_response = self.client.post(self.login_api_url, self.login_data, format='json')
+        self.assertEqual(login_response.status_code, 400)
+
+        # set initial password
+        response = self.client.post(self.api_url, {'password': self.TEST_USER_PWD}, format='json')
+        self.assertEqual(response.status_code, 200)
+
+        # password is set
+        self.test_user.refresh_from_db()
+        self.assertNotEqual(self.test_user.password, '')
+        self.assertNotIn(PROFILE_SETTING_PASSWORD_NOT_SET, self.test_user.cosinnus_profile.settings)
+        self.assertTrue(self.test_user.check_password(self.TEST_USER_PWD))
+
+        # user is logged in
+        signed_in_guest_user = get_user_model().objects.get(
+            id=self.client.session.get('_auth_user_id')
+        )  # get the user via their auth id
+        self.assertTrue(signed_in_guest_user.is_authenticated, 'guest user is logged in')
+
+        # login is possible
+        self.client.logout()
+        login_response = self.client.post(self.login_api_url, self.login_data, format='json')
+        self.assertEqual(login_response.status_code, 200)
+
+        # reusing token is not possible
+        response = self.client.post(self.api_url, {'password': self.TEST_USER_PWD}, format='json')
         self.assertEqual(response.status_code, 403)
