@@ -2,7 +2,7 @@ import logging
 import random
 
 import requests
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import authenticate, get_user_model, password_validation
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator, MinLengthValidator, URLValidator
 from drf_extra_fields.fields import Base64ImageField
@@ -440,3 +440,13 @@ class CosinnusGuestLoginSerializer(serializers.Serializer):
         validators=[MinLengthValidator(2), MaxLengthValidator(50)],
         help_text='Username for the guest user.',
     )
+
+
+class CosinnusSetInitialPasswordSerializer(serializers.Serializer):
+    """Serializer for the set initial API endpoint"""
+
+    password = serializers.CharField(required=True, help_text='Initial user password.')
+
+    def validate_password(self, value):
+        password_validation.validate_password(value)
+        return value

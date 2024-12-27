@@ -31,6 +31,7 @@ from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResp
 from cosinnus.api_frontend.serializers.user import (
     CosinnusGuestLoginSerializer,
     CosinnusHybridUserSerializer,
+    CosinnusSetInitialPasswordSerializer,
     CosinnusUserLoginSerializer,
     CosinnusUserSignupSerializer,
 )
@@ -38,17 +39,18 @@ from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.group import UserGroupGuestAccess
+from cosinnus.models.profile import PROFILE_SETTING_PASSWORD_NOT_SET
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import AllowNone, IsNotAuthenticated
 from cosinnus.utils.urls import redirect_with_next
-from cosinnus.utils.user import create_guest_user_and_login
+from cosinnus.utils.user import create_guest_user_and_login, get_user_from_set_password_token
 from cosinnus.views.common import (
     LoginViewAdditionalLogicMixin,
     cosinnus_post_logout_actions,
     cosinnus_pre_logout_actions,
 )
-from cosinnus.views.user import UserSignupTriggerEventsMixin
+from cosinnus.views.user import UserSignupTriggerEventsMixin, _send_user_welcome_email_if_enabled
 
 logger = logging.getLogger('cosinnus')
 
@@ -690,3 +692,86 @@ class GuestLoginView(LoginViewAdditionalLogicMixin, APIView):
         response = Response(data)
         response = self.set_response_cookies(response)
         return response
+
+
+class SetInitialPasswordView(APIView):
+    """API used to set an initial password for a user, who was created without a initial password."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsNotAuthenticated,)
+
+    @swagger_auto_schema(
+        request_body=CosinnusSetInitialPasswordSerializer,
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+            )
+        },
+    )
+    def post(self, request, token):
+        user = get_user_from_set_password_token(token)
+        if not user:
+            # return 404 if the token is invalid
+            raise Http404
+
+        # validate password
+        serializer = CosinnusSetInitialPasswordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # set password
+        password = serializer.validated_data['password']
+        user.set_password(password)
+        user.save()
+
+        # update profile
+        profile = user.cosinnus_profile
+        profile_needs_to_saved = False
+
+        try:
+            # removing the key from the cosinnus_profile settings to prevent double usage
+            profile.settings.pop(PROFILE_SETTING_PASSWORD_NOT_SET)
+            profile_needs_to_saved = True
+        except KeyError as e:
+            logger.error(
+                (
+                    'Error while deleting key %s from cosinnus_profile settings of user %s. This key is '
+                    'supposed to be present. Password was set anyway'
+                ),
+                extra={'exception': e, 'reason': str(e)},
+            )
+
+        # setting your password automatically validates your email, as you have received the mail to your address
+        if not profile.email_verified:
+            profile.email_verified = True
+            profile_needs_to_saved = True
+
+        # add redirect to the welcome-settings page, with priority so that it is shown as first one
+        if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
+            profile.add_redirect_on_next_page(
+                redirect_with_next(reverse('cosinnus:welcome-settings'), self.request),
+                message=None,
+                priority=True,
+            )
+        elif profile_needs_to_saved:
+            # if a redirect has been added, the profile has been saved already. otherwise, save it here
+            profile.save()
+
+        # send welcome email if enabled
+        _send_user_welcome_email_if_enabled(user)
+
+        # log the user in
+        user.backend = 'cosinnus.backends.EmailAuthBackend'
+        login(self.request, user)
+
+        data = {
+            'message': _(
+                'Your password was set successfully! You may now log in using your e-mail address and the password you '
+                'just set.'
+            ),
+            'next': reverse('login'),
+        }
+        return Response(data)
