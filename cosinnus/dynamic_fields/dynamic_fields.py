@@ -117,6 +117,8 @@ class CosinnusDynamicField(object):
     # if this field should only be shown if either one of a list of checkbox fields is checked,
     # this is the list field names of checkbox fields of which one is required to be checked
     display_required_field_names = None
+    # if this field should only be shown if the managed tag is assigned to the user
+    display_required_managed_tags_slug = None
     # settings for how this field behaves for the search
     # see <str type of `DYNAMIC_FIELD_SEARCH_FIELD_TYPES`>
     search_field_type = DYNAMIC_FIELD_SEARCH_FIELD_TYPE_NONE

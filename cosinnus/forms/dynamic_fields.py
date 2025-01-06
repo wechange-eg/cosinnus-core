@@ -177,6 +177,12 @@ class _DynamicFieldsBaseFormMixin(object):
             setattr(self.fields[field_name], 'placeholder', field_options.placeholder)
             setattr(self.fields[field_name], 'large_field', dynamic_field_generator.get_is_large_field())
             setattr(self.fields[field_name], 'dynamic_field_type', field_options.type)
+            if hasattr(field_options, 'display_required_managed_tags_slug'):
+                setattr(
+                    self.fields[field_name],
+                    'dynamic_field_display_required_managed_tags_slug',
+                    field_options.display_required_managed_tags_slug,
+                )
 
             # some formfields may need to change the initial data in the form itself
             if dynamic_field_generator.get_new_initial_after_formfield_creation():
