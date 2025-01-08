@@ -80,11 +80,11 @@
         {% if not visibility_label %}{% trans "Visibility" as visibility_label %}{% endif %}
         {% trans "Visibility" as visibility_placeholder %}
         {% captureas visibility_legend %}{% if show_partner_portal_content_type %}{% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type=show_partner_portal_content_type %}{% endif %}{% endcaptureas %}
-        {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.visibility label=visibility_label legend=visibility_legend icon="fa-globe" placeholder=visibility_placeholder help_popup="helptext_51_objectprivacy" %}
+        {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.visibility label=visibility_label legend=visibility_legend icon="fa-eye" placeholder=visibility_placeholder help_popup="helptext_51_objectprivacy" %}
     </div>
 	<ol class="group-public-warning-area" {% if form.forms.media_tag.initial.visibility != 2 %}style="display: none;"{% endif %} id="visibility-warning">
 	    <li class="w100">
-	        <i class="fa fa-fw fa-globe"></i>
+	        <i class="fa fa-fw fa-eye"></i>
             {% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
                 {% trans "This item will be visible on the entire portal. This means that any portal member will be able to see it." %}
             {% else %}
