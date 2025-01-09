@@ -96,6 +96,7 @@ class CosinnusUserSignupSerializer(
     # for `CosinnusUserDynamicFieldsSerializerMixin`
     filter_included_fields_by_option_name = 'in_signup'
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+    used_only_for_signup = True
 
     # missing/not-yet-supported fields for the signup endpoint:
 
