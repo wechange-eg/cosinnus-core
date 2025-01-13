@@ -985,6 +985,11 @@ class CosinnusConf(AppConf):
     # URL paths that get are exempted from being redirected to the new frontend
     # if V3_FRONTEND_EVERYWHERE_ENABLED==True and V3_FRONTEND_ENABLED==True
     V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS = [
+        # any direct access to files and resources like "robots.txt"
+        r'.*\.[\w\-_]+$',
+        # blanket exempts, to reduce server-load for targets we know we never want to show in v3
+        '^/.well-known/',
+        '^/wp-',  # any wordpress prefixes
         '^/language/',
         '.*/api/.*',  # any paths with api calls
         '^/o/',  # any oauth paths
@@ -1020,7 +1025,6 @@ class CosinnusConf(AppConf):
         '/.*/.*/group-invite-select2/',
         '^/.*/.*/file/.*/save',  # cosinnus file download
         '^/.*/.*/file/.*/download',  # cosinnus file download
-        r'.*\.[\w\-_]+$',  # any direct access to files like "robots.txt"
         # extra exemptions for views that do not work well with v3
         '^/map/embed/',
         '^/.*/.*/note/embed/',
