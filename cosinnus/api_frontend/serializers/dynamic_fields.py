@@ -47,6 +47,17 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                 field_options, self.filter_included_fields_by_option_name, False
             ):
                 continue
+
+            # Handle required option for fields that depend on a managed tag.
+            if (
+                field_options.required
+                and field_options.display_required_managed_tags_slug
+                and 'data' in kwargs
+                and 'managed_tags' in kwargs['data']
+                and field_options.display_required_managed_tags_slug not in kwargs['data']['managed_tags']
+            ):
+                field_options.required = False
+
             # dynamic fields are of type (drf serializer) CharField, BooleanField or IntergerField, validation will take
             # place manually
             if field_options.multiple:
