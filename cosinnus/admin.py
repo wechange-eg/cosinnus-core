@@ -54,7 +54,6 @@ from cosinnus.models.profile import (
 )
 from cosinnus.models.storage import TemporaryData
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory, TagObject
-from cosinnus.models.user_import import CosinnusUserImport
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -1412,14 +1411,6 @@ class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
 
 admin.site.register(CosinnusManagedTagAssignment, CosinnusManagedTagAssignmentAdmin)
 """
-
-
-class CosinnusUserImportAdmin(admin.ModelAdmin):
-    list_display = ('state', 'creator', 'last_modified')
-    readonly_fields = ('import_data', 'import_report_html')
-
-
-admin.site.register(CosinnusUserImport, CosinnusUserImportAdmin)
 
 
 ## TODO: FIXME: re-enable after 1.8 migration
