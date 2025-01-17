@@ -1499,7 +1499,12 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
 
             # profile
             right_navigation_items.append(
-                MenuItem(_('Profile'), icon='fa-user', image=request.user.cosinnus_profile.avatar_url, id='Profile')
+                MenuItem(
+                    _('Profile'),
+                    icon='fa-user',
+                    image=request.user.cosinnus_profile.get_avatar_thumbnail_url(),
+                    id='Profile',
+                )
             )
         else:
             # language
