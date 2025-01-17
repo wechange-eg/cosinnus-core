@@ -38,7 +38,7 @@ from cosinnus.api_frontend.serializers.user import (
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
 from cosinnus.models import CosinnusPortal
-from cosinnus.models.group import UserGroupGuestAccess
+from cosinnus.models.group import CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.models.profile import PROFILE_SETTING_PASSWORD_NOT_SET
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
@@ -775,3 +775,60 @@ class SetInitialPasswordView(APIView):
             'next': reverse('login'),
         }
         return Response(data)
+
+
+class GroupInviteTokenView(APIView):
+    """API endpoint for group invite token information."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+
+    @swagger_auto_schema(
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'title': 'Invite Title',
+                            'description': 'Invite Description',
+                            'groups': [
+                                {
+                                    'name': 'Invite Group',
+                                    'url': 'https//portal.url/groups/group/',
+                                    'avatar': None,
+                                    'icon': 'fa-sitemap',
+                                    'members': 10,
+                                }
+                            ],
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
+    )
+    def get(self, request, token):
+        data = {'title': None, 'description': None, 'groups': []}
+        invite = get_object_or_None(CosinnusGroupInviteToken, token__iexact=token)
+        if not invite:
+            raise Http404
+
+        # set title and description
+        data['title'] = invite.title
+        data['description'] = invite.description
+
+        # add group infos
+        for group in invite.invite_groups.all():
+            group_data = {
+                'name': group.name,
+                'url': group.get_absolute_url(),
+                'icon': group.get_icon(),
+                'avatar': group.avatar_url,
+                'members': len(group.members),
+            }
+            data['groups'].append(group_data)
+        return Response(data=data)

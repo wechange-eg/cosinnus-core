@@ -8,6 +8,9 @@ from rest_framework.test import APIClient, APITestCase
 
 from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal
+from cosinnus.models.group import CosinnusGroupInviteToken
+from cosinnus.models.group_extra import CosinnusSociety
+from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models.profile import PROFILE_SETTING_PASSWORD_NOT_SET
 from cosinnus.views.user import email_first_login_token_to_user
 
@@ -340,3 +343,44 @@ class SetInitialPasswordViewTest(APITestCase):
         # reusing token is not possible
         response = self.client.post(self.api_url, {'password': self.TEST_USER_PWD}, format='json')
         self.assertEqual(response.status_code, 403)
+
+
+class GroupInviteTokenViewTest(APITestCase):
+    TEST_USER_DATA = {'username': '1', 'email': 'testuser@example.com', 'first_name': 'Test', 'last_name': 'User'}
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.test_user = get_user_model().objects.create(**cls.TEST_USER_DATA)
+        cls.test_group = CosinnusSociety.objects.create(name='Test Group')
+        cls.test_group.memberships.create(user=cls.test_user, status=MEMBERSHIP_MEMBER)
+        cls.group_invite = CosinnusGroupInviteToken.objects.create(
+            title='Test Title', description='Test Description', token='test-token'
+        )
+        cls.group_invite.invite_groups.add(cls.test_group)
+
+    def test_valid_token(self):
+        api_url = reverse('cosinnus:frontend-api:api-group-invite-token', kwargs={'token': self.group_invite.token})
+        response = self.client.get(api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.data,
+            {
+                'title': 'Test Title',
+                'description': 'Test Description',
+                'groups': [
+                    {
+                        'name': self.test_group.name,
+                        'url': self.test_group.get_absolute_url(),
+                        'avatar': None,
+                        'icon': 'fa-sitemap',
+                        'members': 1,
+                    }
+                ],
+            },
+        )
+
+    def test_invalid_token(self):
+        api_url = reverse('cosinnus:frontend-api:api-group-invite-token', kwargs={'token': 'invalid'})
+        response = self.client.get(api_url)
+        self.assertEqual(response.status_code, 404)
