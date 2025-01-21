@@ -611,6 +611,9 @@ class CosinnusGroupInviteTokenEnterView(TemplateView):
         if not token:
             messages.error(request, _('Please enter a token!'))
             redirect_url = '.'
+        elif settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # in v3 the signup page handles the invite token
+            return redirect(reverse('cosinnus:user-add') + f'?invite_token={token}')
         else:
             redirect_url = reverse('cosinnus:group-invite-token', kwargs={'token': token})
         return HttpResponseRedirect(redirect_url)
