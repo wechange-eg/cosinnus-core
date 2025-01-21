@@ -154,7 +154,7 @@ def remove_url_param(url, param_key=None, param_value=None):
     query = parsed.query
     dic = QueryDict(query)
     dic._mutable = True
-    if dic.get(param_key, None) and (param_value is None or dic.get(param_key, None) == param_value):
+    if dic.getlist(param_key, None) and (param_value is None or param_value in dic.getlist(param_key, None)):
         del dic[param_key]
         query = dic.urlencode()
     url = urlunparse(
