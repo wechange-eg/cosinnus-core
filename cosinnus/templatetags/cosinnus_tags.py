@@ -1538,10 +1538,22 @@ def get_language_name(language_code):
 
 @register.filter
 def get_dynamic_field_value(dynamic_field_key, dynamic_field_name):
+    dynamic_field_value = ''
     choices = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.get(dynamic_field_name).choices
-    for choice in choices:
-        if choice[0] == dynamic_field_key:
-            return choice[1]
+    if isinstance(dynamic_field_key, str):
+        for choice in choices:
+            if choice[0] == dynamic_field_key:
+                dynamic_field_value = choice[1]
+                break
+    elif isinstance(dynamic_field_key, list):
+        dynamic_key_values = []
+        for key in dynamic_field_key:
+            for choice in choices:
+                if choice[0] == key:
+                    dynamic_key_values.append(str(choice[1]))
+                    break
+        dynamic_field_value = ', '.join(dynamic_key_values)
+    return dynamic_field_value
 
 
 @register.simple_tag

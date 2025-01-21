@@ -738,6 +738,7 @@ class CosinnusManagedTagAssignmentInline(GenericStackedInline):
 class CosinnusUserProfileAdmin(admin.ModelAdmin):
     list_display = ('user',)
     inlines = (CosinnusManagedTagAssignmentInline,)
+    readonly_fields = ('guest_access_object',)
 
     def get_model_perms(self, request):
         """Return empty perms dict thus hiding the model from admin index."""
