@@ -250,7 +250,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
     )
     def get(self, request):
         self.url = request.query_params.get('url', '').strip()
-        self.url = remove_url_param(self.url, FrontendMiddleware.param_key, FrontendMiddleware.param_value)
+        self.url = remove_url_param(self.url, FrontendMiddleware.param_key, None)
         self.django_request = copy(request._request)
         if not self.url:
             raise ValidationError('Missing required parameter: url')
