@@ -611,6 +611,9 @@ class CosinnusGroupInviteTokenEnterView(TemplateView):
         if not token:
             messages.error(request, _('Please enter a token!'))
             redirect_url = '.'
+        elif settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # in v3 the signup page handles the invite token
+            return redirect(reverse('cosinnus:user-add') + f'?invite_token={token}')
         else:
             redirect_url = reverse('cosinnus:group-invite-token', kwargs={'token': token})
         return HttpResponseRedirect(redirect_url)
@@ -628,6 +631,9 @@ class CosinnusGroupInviteTokenView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         self.token = kwargs.get('token', None)
+        if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # in v3 the signup page handles the invite token
+            return redirect(reverse('cosinnus:user-add') + f'?invite_token={self.token}')
         self.invite = get_object_or_None(
             CosinnusGroupInviteToken, token__iexact=self.token, portal=CosinnusPortal.get_current()
         )
