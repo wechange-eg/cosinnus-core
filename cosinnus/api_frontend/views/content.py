@@ -250,7 +250,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
     )
     def get(self, request):
         self.url = request.query_params.get('url', '').strip()
-        self.url = remove_url_param(self.url, 'v', '3')
+        self.url = remove_url_param(self.url, FrontendMiddleware.param_key, FrontendMiddleware.param_value)
         self.django_request = copy(request._request)
         if not self.url:
             raise ValidationError('Missing required parameter: url')
@@ -285,7 +285,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             response = self._resolve_url_via_query(self.url, self.django_request, allow_redirects=False)
 
         # if we have been redirected, return an empty data package with a redirect target url!
-        if response.status_code in [301, 302]:
+        if response.status_code in [301, 302, 307, 308]:
             # remove the v3-exempt parameter from the resolved URL again
             redirect_target_url = remove_url_param(
                 response.headers['Location'], FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt
@@ -326,6 +326,9 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         html_soup = self._filter_html_view_specific(html_soup, resolved_url)
         # this sets self.content_html and self.footer_html
         self._parse_html_content(html_soup)  # this will destroy the soup, so use it last or on a new soup!
+
+        # always strip v=3 params from resolved urls
+        resolved_url = remove_url_param(resolved_url, FrontendMiddleware.param_key, None)
 
         data = copy(self._data_proto)
         data['resolved_url'] = resolved_url
@@ -372,6 +375,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         """Builds an empty data package with the `redirect` flag set to True and
         `resolved_url` set to the target redirect URL."""
         data = copy(self._data_proto)
+        # always strip v=3 params from resolved urls
+        target_url = remove_url_param(target_url, FrontendMiddleware.param_key, None)
         data['resolved_url'] = target_url
         data['redirect'] = True
         data['status_code'] = resolved_response.status_code if resolved_response else 302
