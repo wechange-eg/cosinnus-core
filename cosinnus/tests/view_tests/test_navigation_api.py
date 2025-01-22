@@ -628,7 +628,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                 'right': [
                     MenuItem('Help', icon='fa-question', id='Help'),
                     MenuItem('Alerts', icon='fa-bell', id='Alerts'),
-                    MenuItem('Profile', icon='fa-user', id='Profile'),
+                    MenuItem('Profile', image=self.test_user.cosinnus_profile.get_avatar_thumbnail_url(), id='Profile'),
                 ],
             },
         )

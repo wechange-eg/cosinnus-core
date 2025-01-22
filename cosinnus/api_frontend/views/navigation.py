@@ -251,28 +251,27 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         events_slug = getattr(settings, 'NEWW_EVENTS_GROUP_SLUG', None)
+
+        if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS and request.user.is_authenticated:
+            # Add paired_groups of managed tags to community space.
+            managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
+            if managed_tags:
+                for tag in managed_tags:
+                    if tag and tag.paired_group and (not forum_slug or tag.paired_group.slug != forum_slug):
+                        community_space_items.append(
+                            MenuItem(
+                                tag.paired_group.name,
+                                tag.paired_group.get_absolute_url(),
+                                'fa-group',
+                                id=f'Forum{tag.paired_group.id}',
+                            )
+                        )
+
         if forum_slug:
             forum_group = get_object_or_None(
                 get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current()
             )
             if forum_group:
-                if (
-                    settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
-                    and request.user.is_authenticated
-                ):
-                    # Add paired_groups of managed tags to community space.
-                    managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
-                    if managed_tags:
-                        for tag in managed_tags:
-                            if tag and tag.paired_group and tag.paired_group != forum_group:
-                                community_space_items.append(
-                                    MenuItem(
-                                        tag.paired_group.name,
-                                        tag.paired_group.get_absolute_url(),
-                                        'fa-group',
-                                        id=f'Forum{tag.paired_group.id}',
-                                    )
-                                )
                 # add Forum group to community space
                 if settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
                     community_space_items.append(
@@ -297,6 +296,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 id='Events',
                             )
                         )
+
         # "Discover" link in community section of spaces menu
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
