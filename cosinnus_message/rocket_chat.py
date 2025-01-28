@@ -99,7 +99,8 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
         try:
             alive = rocket_connection.me().status_code == 200
         except Exception:
-            pass
+            # close the session, a new connection is retried below
+            close_rocket_chat_session()
         if not alive:
             cache.delete(cache_key)
             rocket_connection = None
@@ -111,6 +112,8 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
             rocket_connection = RocketChat(
                 user=rocket_username, password=password, server_url=server_url, timeout=timeout, session=session
             )
+            # As connection errors are not always raised upon creation ensure connectivity
+            rocket_connection.me()
             cache.set(cache_key, rocket_connection, settings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT)
         except (ConnectionError, Timeout) as e:
             # When a timeout error occurred disable rocketchat connections for 5 minutes to avoid overloading our
