@@ -770,6 +770,7 @@ class BaseEventFeed(ICalFeed):
     title = None  # set to base_title on init
     base_description = _('Upcoming events')
     description = None  # set to base_description on init
+    location = None
     categories = None
     localtime = True  # if given (?localtime=1), times will be converted to local server timezone time
     utc_offset = None  # in hours, taken from ?utc_offset=<number> optional param
@@ -813,7 +814,9 @@ class BaseEventFeed(ICalFeed):
         return item.title
 
     def item_description(self, item):
-        description = item.note
+        description = item.get_absolute_url()
+        if item.note and item.note.strip():
+            description += '\n\n' + item.note
         # add website URL to description if set on event
         if item.url:
             description = description + '\n\n' + item.url if description else item.url
