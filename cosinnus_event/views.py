@@ -803,7 +803,12 @@ class BaseEventFeed(ICalFeed):
     def items(self, request):
         # check if we should expand the group to sub
         include_sub_projects = self.request.GET.get('include_sub_projects', None) == '1'
-        qs = Event.get_current(self.group, self.user, include_sub_projects=include_sub_projects)
+        qs = Event.get_current(
+            self.group,
+            self.user,
+            include_sub_projects=include_sub_projects,
+            include_days_past=settings.COSINNUS_EVENT_ICAL_FEED_SHOW_PAST_DAYS,
+        )
         qs = qs.filter(state=Event.STATE_SCHEDULED, from_date__isnull=False, to_date__isnull=False).order_by(
             '-from_date'
         )
