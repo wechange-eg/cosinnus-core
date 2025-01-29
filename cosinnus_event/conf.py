@@ -9,6 +9,9 @@ class CosinnusEventConf(AppConf):
     # identifier for token label used for the event-feed token in cosinnus_profile.settings 
     TOKEN_EVENT_FEED = 'event_feed'
     
+    # the number of days in the past that past events in iCal feeds are included
+    ICAL_FEED_SHOW_PAST_DAYS = 90
+    
     # should the calendar view load *all* events, even past ones? 
     # can be very DB intensive for groups with many events
     CALENDAR_ALSO_SHOWS_PAST_EVENTS = True

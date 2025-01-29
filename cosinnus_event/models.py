@@ -297,7 +297,7 @@ class Event(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LikeableObje
         self.save(update_fields=update_fields)
 
     @classmethod
-    def get_current(self, group, user, include_sub_projects=False):
+    def get_current(self, group, user, include_sub_projects=False, include_days_past=0):
         """ Returns a queryset of the current upcoming events """
         groups = [group]
         if include_sub_projects:
@@ -316,7 +316,7 @@ class Event(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LikeableObje
                     qs = mixin.mix_queryset(qs, self._meta.model, onegroup)
         if user:
             qs = filter_tagged_object_queryset_for_user(qs, user)
-        return upcoming_event_filter(qs).distinct()
+        return upcoming_event_filter(qs, include_days_past=include_days_past).distinct()
     
     @classmethod
     def get_current_for_portal(self):
@@ -938,16 +938,18 @@ def post_vote_save(sender, **kwargs):
     kwargs['instance'].suggestion.update_vote_count()
 
 
-def get_past_event_filter_expression():
+def get_past_event_filter_expression(include_days_past=0):
     """ Returns the filter expression that defines all events that were finished before <now>. """
     _now = now()
+    if include_days_past > 0:
+        _now = _now - datetime.timedelta(days=include_days_past)
     event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
     return Q(to_date__lt=event_horizon) | (Q(to_date__isnull=True) & Q(from_date__lt=event_horizon))
    
-def upcoming_event_filter(queryset):
+def upcoming_event_filter(queryset, include_days_past=0):
     """ Filters a queryset of events for events that begin in the future, 
     or have an end date in the future. Will always show all events that ended today as well. """
-    return queryset.exclude(get_past_event_filter_expression())
+    return queryset.exclude(get_past_event_filter_expression(include_days_past=include_days_past))
 
 def past_event_filter(queryset):
     """ Filters a queryset of events for events that began before today, 
