@@ -175,7 +175,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
             try:
                 field_value = formfield.to_python(field_value)
                 # skip non-required, empty fields
-                emtpy_field_values = [None, '', False]
+                emtpy_field_values = [None, '', False, []]
                 if field_value in emtpy_field_values and (
                     not field_options.required
                     or (self.all_fields_optional and field_name not in dynamic_field_attr_dict)
