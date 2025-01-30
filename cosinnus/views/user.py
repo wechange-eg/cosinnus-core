@@ -209,7 +209,7 @@ class SetInitialPasswordView(TemplateView):
 
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
             # in v3 the /set-password/ page handles setting the initial password
-            return redirect(f'/set-password/{self.token}/')
+            return redirect(f'/set-password/{token}/')
 
         user = get_user_from_set_password_token(token)
 
