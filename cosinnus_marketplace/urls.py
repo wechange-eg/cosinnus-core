@@ -8,7 +8,8 @@ from cosinnus_marketplace import views
 app_name = 'marketplace'
 
 cosinnus_group_patterns = [
-    re_path(r'^$', views.index_view, name='index'),
+    re_path(r'^$', views.index_view, name='index-redirect'),
+    re_path(r'^list/$', views.offer_list_view, name='index', kwargs={'offer_view': 'all'}),
     re_path(r'^list/$', views.offer_list_view, name='list', kwargs={'offer_view': 'all'}),
     re_path(r'^list/mine/$', views.offer_list_view, name='list_mine', kwargs={'offer_view': 'mine'}),
     re_path(r'^list/delete_element/$', views.delete_element_view, name='delete-element'),

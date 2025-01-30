@@ -8,7 +8,8 @@ from cosinnus_etherpad import views
 app_name = 'etherpad'
 
 cosinnus_group_patterns = [
-    re_path(r'^$', views.index_view, name='index'),
+    re_path(r'^$', views.index_view, name='index-redirect'),
+    re_path(r'^list/$', views.pad_hybrid_list_view, name='index'),
     re_path(r'^list/$', views.pad_hybrid_list_view, name='list'),
     re_path(r'^list/move_element/$', views.move_element_view, name='move-element'),
     re_path(r'^list/delete_element/$', views.delete_element_view, name='delete-element'),
