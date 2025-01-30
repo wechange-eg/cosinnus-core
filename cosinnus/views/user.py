@@ -207,6 +207,10 @@ class SetInitialPasswordView(TemplateView):
     def get(self, request, *args, **kwargs):
         token = kwargs['token'] if kwargs.get('token', '') else request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET)
 
+        if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # in v3 the /set-password/ page handles setting the initial password
+            return redirect(f'/set-password/{self.token}/')
+
         user = get_user_from_set_password_token(token)
 
         if user and not request.user.is_authenticated and not user.password:
