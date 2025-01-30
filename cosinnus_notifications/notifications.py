@@ -731,7 +731,7 @@ class NotificationsThread(Thread):
                     topic = mark_safe(self.options.get('topic') % data.get('string_variables'))
                 context = {
                     'site': site,
-                    'site_name': site.name,
+                    'site_name': force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)),
                     'domain_url': domain,
                     'portal_url': domain,
                     'portal_image_url': portal_image_url,
@@ -1048,7 +1048,7 @@ def render_digest_item_for_notification_event(
             if notification_event.group.slug in get_default_user_group_slugs():
                 data.update(
                     {
-                        'origin_name': CosinnusPortal.get_current().name,
+                        'origin_name': force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)),
                     }
                 )
             else:
@@ -1135,7 +1135,7 @@ def render_digest_item_for_notification_event(
                 {
                     'show_action_buttons': True,
                     'action_button_2_text': _('View on %(portal_name)s')
-                    % {'portal_name': CosinnusPortal.get_current().name},
+                    % {'portal_name': force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))},
                     'action_button_2_url': data.get('object_url'),
                 }
             )
