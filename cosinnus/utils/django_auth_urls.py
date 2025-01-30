@@ -91,7 +91,7 @@ if not is_integrated_portal():
                             name='password_set_initial',
                         ),
                         re_path(
-                            '(?P<token>[0-9A-Za-z_\-]+)$',
+                            '(?P<token>[0-9A-Za-z_\-]+)/?$',
                             SetInitialPasswordView.as_view(
                                 template_name='cosinnus/registration/password_set_initial_form.html'
                             ),
