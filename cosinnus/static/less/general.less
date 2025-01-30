@@ -186,9 +186,13 @@ body, .x-v3-container, .x-v3-content {
 }
 
 
-// .fadedown
+/** .fadedown */
 .fadedown {
 	.clearfix();
+}
+/** Any element in a .fadedown container is hidden, except its first child element */
+.fadedown:not(.open) > :not(:first-child) {
+    display: none;
 }
 
 p.navi-explanation {
