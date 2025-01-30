@@ -2100,11 +2100,7 @@ class CosinnusGroupInviteToken(models.Model):
         self._token = self.token
 
     def get_absolute_url(self):
-        portal_domain = get_domain_for_portal(self.portal)
-        if settings.COSINNUS_V3_FRONTEND_ENABLED:
-            # in v3 the signup page handles the invite token
-            return portal_domain + reverse('cosinnus:user-add') + f'?invite_token={self.token}'
-        return portal_domain + reverse('cosinnus:group-invite-token', kwargs={'token': self.token})
+        return get_domain_for_portal(self.portal) + reverse('cosinnus:group-invite-token', kwargs={'token': self.token})
 
 
 class CosinnusPermanentRedirect(models.Model):
