@@ -156,6 +156,10 @@ class CosinnusUserSignupSerializer(
         attrs = super().validate(attrs)
         return attrs
 
+    def validate_password(self, value):
+        password_validation.validate_password(value)
+        return value
+
     def create(self, validated_data):
         """Create a new user as a signup via the API.
         TODO: should this all run in an atomic block?"""

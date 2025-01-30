@@ -627,6 +627,20 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'allauth.account.auth_backends.AuthenticationBackend',
     ]
 
+    # basic password validators
+    if not DEBUG:
+        AUTH_PASSWORD_VALIDATORS = [
+            {
+                'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+                'OPTIONS': {
+                    'min_length': 8,
+                },
+            },
+            {
+                'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+            },
+        ]
+
     # select2 render static files
     AUTO_RENDER_SELECT2_STATICS = False
 
