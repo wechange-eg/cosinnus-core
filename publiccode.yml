@@ -1,0 +1,39 @@
+publiccodeYmlVersion: "0.4"
+name: "Cosinnus"
+url: "https://github.com/wechange-eg/cosinnus-core.git"
+platforms:
+  - web
+categories:
+  - collaboration
+  - event-management
+  - productivity-suite
+  - project-collaboration
+  - web-collaboration
+usedBy:
+  - "Bürgerwerke eG"
+  - "freier zusammenschluss von student*innenschaften (fzs) e.V."
+  - "Heinrich-Böll-Stiftung e.V."
+  - "IT-Verbund Schleswig-Holstein (ITVSH)"
+  - "Landkreis Hameln-Pyrmont"
+  - "Landesverband der Musikschulen in Schleswig-Holstein e.V"
+  - "Scientists for Future"
+  - "Verein für Computergenealogie (CompGen) e. V."
+developmentStatus: stable
+softwareType: "standalone/backend"
+description:
+  en:
+    longDescription: "Main codebase for the WECHANGE suite. Contains the core functionality and models: user account management, groups/projects, ideas, user-dashboard, map, search, and all base templates, forms, and stylesheets.
+legal:
+  license: "AGPL-3.0-or-later"
+maintenance:
+  type: "contract"
+  contractors:
+    - name: "wechange eG"
+      until: "2027-02-03"
+      website: "https://wechange.coop"
+localisation:
+  localisationReady: true
+  availableLanguages:
+    - "de"
+    - "en"
+ 
