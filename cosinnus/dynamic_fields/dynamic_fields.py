@@ -109,6 +109,8 @@ class CosinnusDynamicField(object):
     unique = False
     # bool, whether to show up in the signup form
     in_signup = False
+    # bool, whether to show up on the v3 setup page
+    hide_in_setup = False
     # bool, special flag to hide field in user forms, but shown for admins
     hidden = False
     # bool, special flag to lock field in user forms, but enabled for admins

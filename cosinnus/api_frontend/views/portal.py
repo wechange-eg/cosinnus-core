@@ -258,6 +258,7 @@ def generate_api_dict_for_dynamic_field(field_name, field_definition_dict, field
         'is_multi_language': is_multi_language_field,
         'is_multi_language_sub_field': False,
         'in_signup': field_options.in_signup,
+        'hide_in_setup': field_options.hide_in_setup,
         'required': field_options.required,
         'multiple': field_options.multiple,
         'type': field_options.type,
