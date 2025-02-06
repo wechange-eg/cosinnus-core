@@ -210,6 +210,7 @@ class PortalManagedTagsView(APIView):
         data = {
             'enabled': settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF,
             'in_signup': settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM,
+            'readonly_in_setup': settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM,
             'required': settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED,
             'multiple': settings.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED,
             'title': MANAGED_TAG_LABELS.MANAGED_TAG_NAME,

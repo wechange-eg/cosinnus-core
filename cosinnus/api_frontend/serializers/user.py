@@ -298,6 +298,7 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
             child=serializers.SlugField(allow_blank=False),
             allow_empty=not bool(settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED),
             source='cosinnus_profile.get_managed_tag_slugs',
+            read_only=settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM,
         )
     tags = TagListSerializerField(
         required=False, default=list, source='cosinnus_profile.media_tag.tags', help_text='An array of string tags'
@@ -349,7 +350,11 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
 
     def validate(self, attrs):
         # validate managed tags
-        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        if (
+            settings.COSINNUS_MANAGED_TAGS_ENABLED
+            and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
+            and settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM
+        ):
             profile_data = attrs.get('cosinnus_profile', {})
             if 'get_managed_tag_slugs' in profile_data:
                 managed_tag_slugs = profile_data.get('get_managed_tag_slugs', [])
@@ -429,7 +434,11 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         media_tag.save()
         profile.save()
         instance.save()
-        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        if (
+            settings.COSINNUS_MANAGED_TAGS_ENABLED
+            and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
+            and settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM
+        ):
             if 'get_managed_tag_slugs' in profile_data:
                 managed_tag_ids = profile_data.get('get_managed_tag_slugs', [])
                 CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, managed_tag_ids)
