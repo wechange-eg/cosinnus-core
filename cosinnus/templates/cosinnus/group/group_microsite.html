@@ -399,55 +399,53 @@
 						{% endblock microsite_group_contact %}
 		        	</p>
 				</div>
-				{% with group_admins=group.actual_admins %}
-				    {% if group_admins %}
-						<div class="white-content">
-						    <p>
-						        <b>{{ group.trans.CONTACT_PERSON }}:</b>&nbsp;
-						        {% for admin in group_admins %}
-						            <a href="{{ admin|profile_url }}" >{{ admin|full_name }}</a>
-						            {% if not forloop.last %}, {% endif %}
-						        {% endfor %}
-						    </p>
-						</div>
-					    {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-						    {% with contact_url=group.get_admin_contact_url %}
-				                <div>
-									<p>
-										{% trans "Here you can send a message to the admins." %}<br>
-										{% if group.type == 0 %}
-											{% trans "If you want to send your message to the project chat, you have to turn directly to the project." %}
-										{% elif group.type == 1 %}
-											{% trans "If you want to send your message to the group chat, you have to turn directly to the group." %}
-										{% else %}
-											{% trans "If you want to send your message to the conference chat, you have to turn directly to the conference." %}
-										{% endif %}
-									</p>
-        						</div>
-							    <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized btn-autosize" style="float: none; margin-left: 0px;" target="_blank">
-			                        <ul class="media-list">
-			                            <li class="media">
-			                                <span class="pull-left">
-			                                    <i class="fa fa-envelope"></i>
-			                                </span>
-			                                <div class="media-body">
-												{% if group.type == 0 %}
-													{% trans "Contact Project Admins" %}
-												{% elif group.type == 1 %}
-													{% trans "Contact Group Admins" %}
-												{% else %}
-													{% trans "Contact Conference Admins" %}
+        <div class="white-content">
+            <p>
+                <b>{{ group.trans.CONTACT_PERSON }}:</b>&nbsp;
+                {% for admin in group_admins %}
+                    <a href="{{ admin|profile_url }}" >{{ admin|full_name }}</a>
+                    {% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    <i>{% trans "The administrators' profiles are not visible due to their privacy settings." %}</i>
+                {% endfor %}
+            </p>
+        </div>
 
-												{% endif %}
-			                                </div>
-			                            </li>
-			                        </ul>
-			                    </button>
-		                    {% endwith %}
-	                    {% endif %}
-				    {% endif %}
-				{% endwith %}
-				
+        {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+            {% with contact_url=group.get_admin_contact_url %}
+                <div>
+                    <p>
+                        {% trans "Here you can send a message to the admins." %}<br>
+                        {% if group.type == 0 %}
+                            {% trans "If you want to send your message to the project chat, you have to turn directly to the project." %}
+                        {% elif group.type == 1 %}
+                            {% trans "If you want to send your message to the group chat, you have to turn directly to the group." %}
+                        {% else %}
+                            {% trans "If you want to send your message to the conference chat, you have to turn directly to the conference." %}
+                        {% endif %}
+                    </p>
+                </div>
+                <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized btn-autosize" style="float: none; margin-left: 0px;" target="_blank">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <div class="media-body">
+                                {% if group.type == 0 %}
+                                    {% trans "Contact Project Admins" %}
+                                {% elif group.type == 1 %}
+                                    {% trans "Contact Group Admins" %}
+                                {% else %}
+                                    {% trans "Contact Conference Admins" %}
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            {% endwith %}
+        {% endif %}
+
 
 				{% if contact_form %}
 				<div type="button" class="btn btn-emphasized btn-headline v-offset-l">

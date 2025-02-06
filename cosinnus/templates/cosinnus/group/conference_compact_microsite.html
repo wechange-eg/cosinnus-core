@@ -135,7 +135,7 @@
                 <hr class="invisible" />
 
 
-                <p class="conference-microsite-created-updated-timestamp">
+                <p class="conference-microsite-created-updated-timestamp small">
                     <i>{% trans "Created on: " %}</i>{{ group.created|date:"SHORT_DATE_FORMAT" }}
                     <br>
                     <i>{% trans "Last updated on: " %}</i>{{ group.last_modified|date:"SHORT_DATE_FORMAT" }}
@@ -201,39 +201,37 @@
                     {% endwith %}
                 </p>
             </div>
-            {% with group_admins=group.actual_admins %}
-                {% if group_admins %}
-                    <div class="white-content">
+            <div class="white-content">
+                <p>
+                    <b>{{ group.trans.CONTACT_PERSON }}:</b>&nbsp;
+                    {% for admin in group_admins %}
+                        <a href="{{ admin|profile_url }}" >{{ admin|full_name }}</a>
+                        {% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        <i>{% trans "The administrators' profiles are not visible due to their privacy settings." %}</i>
+                    {% endfor %}
+                </p>
+                {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+                    {% with contact_url=group.get_admin_contact_url %}
+                        <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized btn-autosize" style="float: none; margin-left: 0px;">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <span class="pull-left">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        {% trans "Contact organizers" %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
                         <p>
-                            <b>{{ group.trans.CONTACT_PERSON }}:</b>&nbsp;
-                            {% for admin in group_admins %}
-                                <a href="{{ admin|profile_url }}" >{{ admin|full_name }}</a>
-                                {% if not forloop.last %}, {% endif %}
-                            {% endfor %}
+                            {% trans "Here you can send a message to the admins." %}
                         </p>
-                        {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-                            {% with contact_url=group.get_admin_contact_url %}
-                                <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized btn-autosize" style="float: none; margin-left: 0px;">
-                                    <ul class="media-list">
-                                        <li class="media">
-                                            <span class="pull-left">
-                                                <i class="fa fa-envelope"></i>
-                                            </span>
-                                            <div class="media-body">
-                                                {% trans "Contact organizers" %}
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </button>
-                                <p>
-                                    {% trans "Here you can send a message to the admins." %}
-                                </p>
-                            {% endwith %}
-                        {% endif %}
-                    </div>
+                    {% endwith %}
                 {% endif %}
-			{% endwith %}
-			
+            </div>
+
             <hr class="invisible"/>
             
             <div class="no-indent">
