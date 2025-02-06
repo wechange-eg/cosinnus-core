@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 09:17+0200\n"
+"POT-Creation-Date: 2025-02-06 13:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -261,19 +261,12 @@ msgid "Guest access URL"
 msgstr "Naposledy navštívené"
 
 #, fuzzy
-#| msgid "Comment"
-msgid "Community"
-msgstr "Komentář"
-
-#, fuzzy
-#| msgid "Persons"
-msgid "Personal"
-msgstr "Osoby"
-
-#, fuzzy
 #| msgid "Project Dashboard"
 msgid "Personal Dashboard"
 msgstr "Panel projektu"
+
+msgid "Go To..."
+msgstr ""
 
 #, fuzzy
 #| msgid "Contact info"
@@ -367,10 +360,6 @@ msgstr "Cloud"
 
 msgid "Messages"
 msgstr "Zprávy"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Události"
 
 msgid "Help"
 msgstr "Nápověda"
@@ -859,6 +848,10 @@ msgstr "%(sender_name)s právě vytvořil/a projekt \"%(team_name)s\" na %(porta
 
 #, python-format
 msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s is interested in networking with you. Check out the user's profile"
 msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -1590,6 +1583,11 @@ msgstr "Partnerství pro dosažení cílů"
 
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Zadejte platné jméno. Lomítko není povoleno."
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Is Late Invitation"
+msgstr "Pozvánky"
 
 msgid "Team membership"
 msgstr "Členství v týmu"
@@ -2360,6 +2358,10 @@ msgstr "Nový uživatelský účet:"
 
 msgid "Create-Project or Group Button"
 msgstr "Tlačítko Vytvořit projekt nebo skupinu"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Events"
+msgstr "Události"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
@@ -4520,6 +4522,10 @@ msgstr "Kontakt"
 msgid "No contact data has been added yet."
 msgstr "Zatím nebyly přidány žádné kontaktní údaje."
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "The administrators' profiles are not visible due to their privacy settings."
+msgstr ""
+
 msgid "Contact organizers"
 msgstr "Kontaktujte organizátory"
 
@@ -4567,6 +4573,9 @@ msgstr "Řiďte žádosti o účast"
 msgid "Invite members of groups/projects to apply..."
 msgstr "Vyzvěte členy skupin/projektů, aby podali žádost..."
 
+msgid "Participation application has ended. If you invite members now, they can register despite the deadline having expired."
+msgstr ""
+
 msgid "Select one or more groups/projects..."
 msgstr "Vyberte jednu nebo více skupin/projektů..."
 
@@ -4605,6 +4614,11 @@ msgstr "Přijmout pozvánku"
 
 msgid "Invited to be a member"
 msgstr "Pozván/a být členem"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "late invitation"
+msgstr "Smazat pozvánku"
 
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
@@ -5319,6 +5333,11 @@ msgstr "Procházet"
 
 msgid "Register and apply!"
 msgstr "Zaregistrujte se a požádejte o účast!"
+
+#, fuzzy
+#| msgid "Presentation file"
+msgid "Late registration possible"
+msgstr "Prezentační soubor"
 
 msgid "You have been invited to apply!"
 msgstr "Byli jste pozváni k podání žádosti!"
@@ -6339,9 +6358,6 @@ msgstr "Obnovení hesla bylo neúspěšné"
 msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
 msgstr "Odkaz na obnovení hesla byl neplatný, pravděpodobně proto, že již byl použit. Požádejte o nové obnovení hesla."
 
-msgid "Password reset successful"
-msgstr "Obnovení hesla bylo úspěšné"
-
 msgid "Password reset request received."
 msgstr "Obdržena žádost o reset hesla."
 
@@ -6872,10 +6888,6 @@ msgid "Administrators"
 msgstr "Správci"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Administrators unknown"
-msgstr "Správci nejsou známí"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "No description yet."
 msgstr "Zatím žádný popis."
 
@@ -7275,16 +7287,25 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-msgid "Find a Match"
+msgid "You already have a match with this person."
 msgstr ""
 
-msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
+msgid "You have already specified that you have common interests with this person."
+msgstr ""
+
+msgid "You have already specified that you have no common interests with this person."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
 msgstr ""
 
 msgid "Looks like we share no common interests"
+msgstr ""
+
+msgid "Find a Match"
+msgstr ""
+
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange. If you express interest in another user, this user is notified and gets the ability to do the same with you."
 msgstr ""
 
 msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
@@ -8230,6 +8251,14 @@ msgstr ""
 msgid "Click here to view external image"
 msgstr ""
 
+#, fuzzy
+msgid "External Resource"
+msgstr "Vytvořit obsah"
+
+#, fuzzy
+msgid "External Resources"
+msgstr "Vytvořit obsah"
+
 msgid "You are not currently in any Projects"
 msgstr "Zatím nejste v žádném projektu"
 
@@ -8663,10 +8692,33 @@ msgid ""
 "This is a stepping stone update for many more exciting features and interface improvements to come in the near future!"
 msgstr ""
 
-msgid "Version 2.1.0 released"
+msgid "Version 2.2.5 released"
+msgstr ""
+
+msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed a bug where guest access to BBB meetings was sometimes not possible.\n"
+"- Fixed a bug where users could sometimes not be invited to groups or projects by e-mail.\n"
+"- Fixed a bug where some users could not reset or change their passwords.\n"
+"- Fixed a bug where the text content of markdown editor text boxes was not displayed until the text box was focused.\n"
+"- Fixed a bug where iCal calendar feeds would sometimes not be accessible.\n"
+"- Further minor bugfixes have been made."
+msgstr ""
+
+msgid "Version 2.2.0 released"
 msgstr ""
 
 msgid "This update includes several features and bugfixes:"
+msgstr ""
+
+msgid ""
+"- Several improvements have been made to the redesign user interface, and an introductory tooltip tour has been added.\n"
+"- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+
+msgid "Version 2.1.0 released"
 msgstr ""
 
 msgid ""
@@ -8698,9 +8750,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 1.20.4 released"
-msgstr ""
-
-msgid "This update includes several bugfixes:"
 msgstr ""
 
 msgid ""
@@ -9210,6 +9259,11 @@ msgstr "%(numobjects)d dalších objektů bylo úspěšně smazáno."
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Nebyly nalezeny žádné %(verbose_name)s odpovídající dotazu"
+
+#, fuzzy
+#| msgid "There is no description for this project yet."
+msgid "This profile is not visible to you due to its privacy settings."
+msgstr "Tento projekt zatím nemá žádný popis."
 
 #, python-format
 msgid "User \"%s\" is a guest user and has no profile."
@@ -14365,6 +14419,22 @@ msgstr "Opravdu chcete tento tým smazat?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Opravdu chcete tento tým smazat?"
+
+#, fuzzy
+#~| msgid "Comment"
+#~ msgid "Community"
+#~ msgstr "Komentář"
+
+#, fuzzy
+#~| msgid "Persons"
+#~ msgid "Personal"
+#~ msgstr "Osoby"
+
+#~ msgid "Password reset successful"
+#~ msgstr "Obnovení hesla bylo úspěšné"
+
+#~ msgid "Administrators unknown"
+#~ msgstr "Správci nejsou známí"
 
 #, fuzzy
 #~| msgid "Edit My Profile"

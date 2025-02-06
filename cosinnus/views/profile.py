@@ -244,6 +244,7 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request)
             if not check_user_can_see_user(user, target_user_profile.user) and not target_user_is_guest:
+                messages.warning(request, _('This profile is not visible to you due to its privacy settings.'))
                 raise PermissionDenied
 
         if target_user_is_guest:

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 09:17+0200\n"
+"POT-Creation-Date: 2025-02-06 13:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -257,19 +257,12 @@ msgid "Guest access URL"
 msgstr "Laatst bekeken"
 
 #, fuzzy
-#| msgid "Comment"
-msgid "Community"
-msgstr "Opmerking"
-
-#, fuzzy
-#| msgid "Persons"
-msgid "Personal"
-msgstr "Personen"
-
-#, fuzzy
 #| msgid "Project Dashboard"
 msgid "Personal Dashboard"
 msgstr "Project dashboard"
+
+msgid "Go To..."
+msgstr ""
 
 #, fuzzy
 #| msgid "Contact info"
@@ -363,10 +356,6 @@ msgstr "Cloud"
 
 msgid "Messages"
 msgstr "Berichten"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Events"
-msgstr "Evenementen"
 
 msgid "Help"
 msgstr "Hulp"
@@ -844,6 +833,10 @@ msgstr "%(sender_name)s heeft zojuist het project “%(team_name)s” op %(porta
 
 #, python-format
 msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s is interested in networking with you. Check out the user's profile"
 msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -1591,6 +1584,11 @@ msgstr "Partnerschappen voor het bereiken van doelen"
 
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Voer een geldige naam in. Slash is niet toegestaan."
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Is Late Invitation"
+msgstr "Uitnodigingen"
 
 msgid "Team membership"
 msgstr "Team lidmaatschap"
@@ -2377,6 +2375,10 @@ msgstr "Gebruikersaccount verwijderen"
 
 msgid "Create-Project or Group Button"
 msgstr "Maak-project of groep button"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Events"
+msgstr "Evenementen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
@@ -4548,6 +4550,10 @@ msgstr "Contact"
 msgid "No contact data has been added yet."
 msgstr "Er zijn nog geen contactgegevens toegevoegd."
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "The administrators' profiles are not visible due to their privacy settings."
+msgstr ""
+
 #, fuzzy
 msgid "Contact organizers"
 msgstr "Contactgegevens"
@@ -4598,6 +4604,9 @@ msgstr "Mijn locatie"
 msgid "Invite members of groups/projects to apply..."
 msgstr ""
 
+msgid "Participation application has ended. If you invite members now, they can register despite the deadline having expired."
+msgstr ""
+
 #, fuzzy
 msgid "Select one or more groups/projects..."
 msgstr "Getoond in mijn projecten…"
@@ -4640,6 +4649,11 @@ msgstr "Uitnodiging accepteren"
 
 msgid "Invited to be a member"
 msgstr "Uitgenodigd om lid te worden"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "late invitation"
+msgstr "Uitnodiging verwijderen"
 
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
@@ -5362,6 +5376,9 @@ msgstr "Bladeren"
 #, fuzzy
 msgid "Register and apply!"
 msgstr "Registreer en doe mee!"
+
+msgid "Late registration possible"
+msgstr ""
 
 #, fuzzy
 msgid "You have been invited to apply!"
@@ -6383,9 +6400,6 @@ msgstr "Wachtwoord succesvol gereset"
 msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
 msgstr "De link voor het opnieuw instellen van het wachtwoord was ongeldig, mogelijk omdat deze al is gebruikt. Vraag een nieuwe wachtwoord reset aan."
 
-msgid "Password reset successful"
-msgstr "Wachtwoord reset succesvol"
-
 #, fuzzy
 msgid "Password reset request received."
 msgstr "Wachtwoord reset afsluiten"
@@ -6928,10 +6942,6 @@ msgid "Administrators"
 msgstr "Beheerders"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Administrators unknown"
-msgstr "Beheerders onbekend"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "No description yet."
 msgstr "Nog geen beschrijving."
 
@@ -7338,16 +7348,25 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-msgid "Find a Match"
+msgid "You already have a match with this person."
 msgstr ""
 
-msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
+msgid "You have already specified that you have common interests with this person."
+msgstr ""
+
+msgid "You have already specified that you have no common interests with this person."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
 msgstr ""
 
 msgid "Looks like we share no common interests"
+msgstr ""
+
+msgid "Find a Match"
+msgstr ""
+
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange. If you express interest in another user, this user is notified and gets the ability to do the same with you."
 msgstr ""
 
 msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
@@ -8289,6 +8308,14 @@ msgid "Click here to view external image"
 msgstr ""
 
 #, fuzzy
+msgid "External Resource"
+msgstr "Inhoud aanmaken"
+
+#, fuzzy
+msgid "External Resources"
+msgstr "Inhoud aanmaken"
+
+#, fuzzy
 msgid "You are not currently in any Projects"
 msgstr "Je zit nog niet in groepen of projecten"
 
@@ -8770,10 +8797,33 @@ msgid ""
 "This is a stepping stone update for many more exciting features and interface improvements to come in the near future!"
 msgstr ""
 
-msgid "Version 2.1.0 released"
+msgid "Version 2.2.5 released"
+msgstr ""
+
+msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed a bug where guest access to BBB meetings was sometimes not possible.\n"
+"- Fixed a bug where users could sometimes not be invited to groups or projects by e-mail.\n"
+"- Fixed a bug where some users could not reset or change their passwords.\n"
+"- Fixed a bug where the text content of markdown editor text boxes was not displayed until the text box was focused.\n"
+"- Fixed a bug where iCal calendar feeds would sometimes not be accessible.\n"
+"- Further minor bugfixes have been made."
+msgstr ""
+
+msgid "Version 2.2.0 released"
 msgstr ""
 
 msgid "This update includes several features and bugfixes:"
+msgstr ""
+
+msgid ""
+"- Several improvements have been made to the redesign user interface, and an introductory tooltip tour has been added.\n"
+"- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+
+msgid "Version 2.1.0 released"
 msgstr ""
 
 msgid ""
@@ -8805,9 +8855,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 1.20.4 released"
-msgstr ""
-
-msgid "This update includes several bugfixes:"
 msgstr ""
 
 msgid ""
@@ -9321,6 +9368,11 @@ msgstr "%(numobjects)d andere objecten zijn verwijderd."
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Geen %(verbose_name)s gevonden die past bij deze vraag"
+
+#, fuzzy
+#| msgid "There is no description for this project yet."
+msgid "This profile is not visible to you due to its privacy settings."
+msgstr "Er is nog geen beschrijving voor dit project."
 
 #, python-format
 msgid "User \"%s\" is a guest user and has no profile."
@@ -14440,6 +14492,22 @@ msgstr "Weet je zeker dat je dit team wilt verwijderen?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Weet je zeker dat je dit team wilt verwijderen?"
+
+#, fuzzy
+#~| msgid "Comment"
+#~ msgid "Community"
+#~ msgstr "Opmerking"
+
+#, fuzzy
+#~| msgid "Persons"
+#~ msgid "Personal"
+#~ msgstr "Personen"
+
+#~ msgid "Password reset successful"
+#~ msgstr "Wachtwoord reset succesvol"
+
+#~ msgid "Administrators unknown"
+#~ msgstr "Beheerders onbekend"
 
 #, fuzzy
 #~| msgid "Edit My Profile"
