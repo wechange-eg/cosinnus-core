@@ -313,6 +313,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
         Field attributes:
         - "name": str, field name
         - "in_signup": bool, whether to show up in the signup form
+        - "hide_in_setup": bool, whether to show up in the setup form
         - "required": bool, whether to be required in forms
         - "multiple": bool, for choice fields, if multiple choices are allowed. ignored for other types
         - "type": type of the dynamic field (affects both model and form), see <str type of `DYNAMIC_FIELD_TYPES`>,
@@ -350,6 +351,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
                                 'is_multi_language': False,
                                 'is_multi_language_sub_field': False,
                                 'in_signup': 'true',
+                                'hide_in_signup': 'false',
                                 'required': 'true',
                                 'multiple': 'false',
                                 'type': 'text',
@@ -362,6 +364,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
                                 'is_multi_language': False,
                                 'is_multi_language_sub_field': False,
                                 'in_signup': 'false',
+                                'hide_in_signup': 'false',
                                 'required': 'false',
                                 'multiple': 'true',
                                 'type': 'languages',
