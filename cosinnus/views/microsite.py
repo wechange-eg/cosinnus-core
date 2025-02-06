@@ -15,6 +15,7 @@ from cosinnus.core.decorators.views import redirect_to_not_logged_in
 from cosinnus.core.mail import send_html_mail_threaded
 from cosinnus.forms.group import GroupContactForm
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.permissions import check_user_can_see_user
 from cosinnus.views.mixins.group import DipatchGroupURLMixin, GroupObjectCountMixin
 from cosinnus.views.mixins.tagged import DisplayTaggedObjectsMixin
 
@@ -90,10 +91,18 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
 
     def get_context_data(self, **kwargs):
         context = super(GroupMicrositeView, self).get_context_data(**kwargs)
+        # private users are not visible to anonymous users, BUT they are visible to logged in users!
+        # because if a user chose to make his group visible, he has to take authorship responsibilities
+        visible_group_admins = self.group.actual_admins
+        if not self.request.user.is_authenticated:
+            visible_group_admins = [
+                admin for admin in visible_group_admins if check_user_can_see_user(self.request.user, admin)
+            ]
         context.update(
             {
                 'public_objects': self.get_public_objects(),
                 'anonymous_user': AnonymousUser(),
+                'group_admins': visible_group_admins,
             }
         )
         if (

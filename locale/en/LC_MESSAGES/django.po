@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-09 14:12+0100\n"
+"POT-Creation-Date: 2025-02-06 13:42+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4411,6 +4411,10 @@ msgstr ""
 msgid "No contact data has been added yet."
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "The administrators' profiles are not visible due to their privacy settings."
+msgstr ""
+
 msgid "Contact organizers"
 msgstr ""
 
@@ -6630,10 +6634,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Administrators"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Administrators unknown"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -8988,6 +8988,9 @@ msgstr ""
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+msgid "This profile is not visible to you due to its privacy settings."
 msgstr ""
 
 #, python-format
