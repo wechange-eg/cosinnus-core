@@ -140,7 +140,7 @@ class SpacesViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.data['community']['items'][0],
-            MenuItem(tag_group.name, tag_group.get_absolute_url(), 'fa-group', id=f'Forum{tag_group.pk}'),
+            MenuItem(tag_group.name, tag_group.get_absolute_url(), 'fa-sitemap', id=f'Forum{tag_group.pk}'),
         )
 
 

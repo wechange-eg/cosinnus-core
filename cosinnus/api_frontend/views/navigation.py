@@ -262,7 +262,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                             MenuItem(
                                 tag.paired_group.name,
                                 tag.paired_group.get_absolute_url(),
-                                'fa-group',
+                                'fa-sitemap',
                                 id=f'Forum{tag.paired_group.id}',
                             )
                         )
