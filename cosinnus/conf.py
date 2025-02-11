@@ -1580,6 +1580,9 @@ class CosinnusConf(AppConf):
 
     # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
     DENY_ALL_ROBOTS = False
+    
+    # enable group permissions in the django admin, including the group admin and the group field in the user admin.
+    DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
 
 
 class CosinnusDefaultSettings(AppConf):

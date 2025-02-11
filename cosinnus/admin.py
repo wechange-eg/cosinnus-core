@@ -11,6 +11,7 @@ from django.contrib.admin.options import get_content_type_for_model
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as django_login
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.contrib.auth.models import Group
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.exceptions import ValidationError
 from django.db.models import JSONField, Q
@@ -891,6 +892,16 @@ _useradmin_excluded_list_filter = ['groups', 'is_staff']
 
 
 class UserAdmin(DjangoUserAdmin):
+    PERMISSION_FIELDS = ('is_active', 'is_superuser')
+
+    if settings.COSINNUS_DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED:
+        PERMISSION_FIELDS = (
+            'is_active',
+            'is_superuser',
+            'is_staff',
+            'groups',
+        )
+
     fieldsets = (
         (
             _('Personal info'),
@@ -899,11 +910,7 @@ class UserAdmin(DjangoUserAdmin):
         (
             _('Permissions'),
             {
-                'fields': (
-                    'is_active',
-                    'is_staff',
-                    'is_superuser',
-                ),
+                'fields': PERMISSION_FIELDS,
             },
         ),
     )
@@ -1245,6 +1252,11 @@ class UserAdmin(DjangoUserAdmin):
 
 admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)
+
+
+# disable group admin if django permissions are not used.
+if not settings.COSINNUS_DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED:
+    admin.site.unregister(Group)
 
 
 class CosinnusTopicCategoryAdmin(admin.ModelAdmin):
