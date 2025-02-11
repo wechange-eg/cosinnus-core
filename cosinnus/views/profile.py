@@ -414,6 +414,16 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
 
         return form
 
+    def get_form_kwargs(self, *args, **kwargs):
+        form_kwargs = super(UserProfileUpdateView, self).get_form_kwargs(*args, **kwargs)
+        if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
+            form_kwargs.update(
+                {
+                    'obj__is_profile_update': True,
+                }
+            )
+        return form_kwargs
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context.update(
