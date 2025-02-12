@@ -42,7 +42,8 @@ class EventExchangeViewSet(EventViewSet):
     """Adds an additional filter that excludes groups/projects with only one member,
     for use with `CosinnusFilterQuerySetMixin`."""
 
-    def exclude_single_member_groups(self, qs):
+    def _expensive_exclude_single_member_groups(self, qs):
+        """This will also ignore any inactive users as group members, but is very DB-heavy."""
         qs = qs.annotate(
             count_group_members=Count(
                 'group__memberships',
@@ -57,6 +58,12 @@ class EventExchangeViewSet(EventViewSet):
                     group__memberships__user__cosinnus_profile___is_guest=True,
                 ),
             )
+        ).filter(count_group_members__gt=1)
+        return qs
+
+    def exclude_single_member_groups(self, qs):
+        qs = qs.annotate(
+            count_group_members=Count('group__memberships', filter=Q(group__memberships__status__in=MEMBER_STATUS))
         ).filter(count_group_members__gt=1)
         return qs
 

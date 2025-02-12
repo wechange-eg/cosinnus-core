@@ -20,7 +20,8 @@ class ExcludeSingleMemberGroupsMixin(object):
     """Adds an additional filter that excludes groups/projects with only one member,
     for use with `CosinnusFilterQuerySetMixin`."""
 
-    def exclude_single_member_groups(self, qs):
+    def _expensive_exclude_single_member_groups(self, qs):
+        """This will also ignore any inactive users as group members, but is very DB-heavy."""
         qs = qs.annotate(
             count_members=Count(
                 'memberships',
@@ -36,6 +37,12 @@ class ExcludeSingleMemberGroupsMixin(object):
                 ),
             )
         ).filter(count_members__gt=1)
+        return qs
+
+    def exclude_single_member_groups(self, qs):
+        qs = qs.annotate(count_members=Count('memberships', filter=Q(memberships__status__in=MEMBER_STATUS))).filter(
+            count_members__gt=1
+        )
         return qs
 
     additional_qs_filter_func = exclude_single_member_groups
