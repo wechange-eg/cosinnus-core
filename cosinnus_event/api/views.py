@@ -1,8 +1,9 @@
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.utils.timezone import now
 from rest_framework import viewsets
 
 from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin, PublicTaggableObjectFilterMixin
+from cosinnus.models import MEMBER_STATUS
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_event.api.serializers import EventListSerializer, EventRetrieveSerializer
 from cosinnus_event.models import Event
@@ -35,3 +36,28 @@ class EventViewSet(
         if self.action == 'retrieve':
             return EventRetrieveSerializer
         return EventRetrieveSerializer
+
+
+class EventExchangeViewSet(EventViewSet):
+    """Adds an additional filter that excludes groups/projects with only one member,
+    for use with `CosinnusFilterQuerySetMixin`."""
+
+    def exclude_single_member_groups(self, qs):
+        qs = qs.annotate(
+            count_group_members=Count(
+                'group__memberships',
+                filter=Q(
+                    group__memberships__status__in=MEMBER_STATUS,
+                    group__memberships__user__is_active=True,
+                    group__memberships__user__cosinnus_profile__tos_accepted=True,
+                )
+                & ~Q(
+                    group__memberships__user__last_login__exact=None,
+                    group__memberships__user__email__icontains='__unverified__',
+                    group__memberships__user__cosinnus_profile___is_guest=True,
+                ),
+            )
+        ).filter(count_group_members__gt=1)
+        return qs
+
+    additional_qs_filter_func = exclude_single_member_groups

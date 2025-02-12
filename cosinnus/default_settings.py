@@ -893,21 +893,21 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     COSINNUS_EXCHANGE_BACKENDS = [
         {
             'backend': 'cosinnus_exchange.backends.ExchangeBackend',
-            'url': 'http://staging.wechange.de/api/v2/events/',
+            'url': 'http://staging.wechange.de/api/v2/exchange/events/',
             'source': 'WECHANGE Staging',
             'model': 'cosinnus_exchange.ExchangeEvent',
             'serializer': 'cosinnus_exchange.serializers.ExchangeEventSerializer',
         },
         {
             'backend': 'cosinnus_exchange.backends.ExchangeBackend',
-            'url': 'http://staging.wechange.de/api/v2/organizations/',
+            'url': 'http://staging.wechange.de/api/v2/exchange/organizations/',
             'source': 'WECHANGE Staging',
             'model': 'cosinnus_exchange.ExchangeOrganization',
             'serializer': 'cosinnus_exchange.serializers.ExchangeOrganizationSerializer',
         },
         {
             'backend': 'cosinnus_exchange.backends.ExchangeBackend',
-            'url': 'https://community.civilsocietycooperation.net/api/v2/events/',
+            'url': 'https://community.civilsocietycooperation.net/api/v2/exchange/events/',
             'source': 'Civilsocietycooperation.net',
             'model': 'cosinnus_exchange.ExchangeEvent',
             'serializer': 'cosinnus_exchange.serializers.ExchangeEventSerializer',

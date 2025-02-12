@@ -13,7 +13,12 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from cosinnus.api.views.group import CosinnusProjectViewSet, CosinnusSocietyViewSet
+from cosinnus.api.views.group import (
+    CosinnusProjectExchangeViewSet,
+    CosinnusProjectViewSet,
+    CosinnusSocietyExchangeViewSet,
+    CosinnusSocietyViewSet,
+)
 from cosinnus.api.views.i18n import translations
 from cosinnus.api.views.portal import config as api_config
 from cosinnus.api.views.portal import footer, header
@@ -675,14 +680,17 @@ router = routers.SimpleRouter()
 router.register(r'public_conferences', PublicConferenceViewSet, basename='public_conference')
 router.register(r'conferences', ConferenceViewSet, basename='conference')
 router.register(r'groups', CosinnusSocietyViewSet, basename='group')
+router.register(r'exchange/groups', CosinnusSocietyExchangeViewSet, basename='group_exchange')
 router.register(r'projects', CosinnusProjectViewSet, basename='project')
+router.register(r'exchange/projects', CosinnusProjectExchangeViewSet, basename='project_exchange')
 router.register(r'organizations', OrganizationViewSet, basename='organization')
 
 # imports from external projects at this time may fail in certain test environments
 try:
-    from cosinnus_event.api.views import EventViewSet
+    from cosinnus_event.api.views import EventExchangeViewSet, EventViewSet
 
     router.register(r'events', EventViewSet, basename='event')
+    router.register(r'exchange/events', EventExchangeViewSet, basename='event_exchange')
 except Exception:
     pass
 # imports from external projects at this time may fail in certain test environments
