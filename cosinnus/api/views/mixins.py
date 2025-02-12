@@ -51,6 +51,9 @@ class CosinnusFilterQuerySetMixin(object):
     # if true, filter managed tags on the group of the object, not on the object itself
     MANAGED_TAGS_FILTER_ON_GROUP = False
 
+    # can be defined in implementing views, to additionally filter the queryset
+    additional_qs_filter_func = None
+
     def get_queryset(self):
         """
         Optionally filter by group
@@ -88,6 +91,10 @@ class CosinnusFilterQuerySetMixin(object):
                     queryset = queryset.exclude(**{key[8:]: value})
                 else:
                     queryset = queryset.filter(**{key: value})
+
+        # run additional filters for extending ViewSets, for example for exchange views
+        if self.additional_qs_filter_func:
+            queryset = self.additional_qs_filter_func(queryset)
         return queryset
 
 
