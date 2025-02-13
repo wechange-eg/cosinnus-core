@@ -116,12 +116,20 @@ logger = logging.getLogger('cosinnus')
 USER_MODEL = get_user_model()
 
 
-def email_portal_admins(subject, template, data):
+def email_portal_admins(subject, template, data, user=None):
     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
-    text = textfield(render_to_string('cosinnus/mail/user_register_notification.html', data))
+    text = textfield(render_to_string(template, data))
 
-    for user in admins:
-        send_html_mail_threaded(user, subject, text)
+    for admin in admins:
+        # If managed tags are enabled consider only admins that have a common managed tag with the user
+        if user and settings.COSINNUS_MANAGED_TAGS_ENABLED:
+            user_managed_tags = set(user.cosinnus_profile.get_managed_tags())
+            admin_managed_tags = set(admin.cosinnus_profile.get_managed_tags())
+            common_managed_tags = user_managed_tags.intersection(admin_managed_tags)
+            if not common_managed_tags:
+                continue
+
+        send_html_mail_threaded(admin, subject, text)
 
     return
 
@@ -394,7 +402,7 @@ class UserSignupTriggerEventsMixin(object):
             )
             # message portal admins of request
             subject = render_to_string('cosinnus/mail/user_register_notification_subj.txt', data)
-            email_portal_admins(subject, 'cosinnus/mail/user_register_notification.html', data)
+            email_portal_admins(subject, 'cosinnus/mail/user_register_notification.html', data, user)
             # message user for pending request
             subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
             text = textfield(render_to_string('cosinnus/mail/user_registration_pending.html', data))
