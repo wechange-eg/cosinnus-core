@@ -38,7 +38,7 @@ from cosinnus.api_frontend.serializers.user import (
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
 from cosinnus.models import CosinnusPortal
-from cosinnus.models.group import CosinnusGroupInviteToken, UserGroupGuestAccess
+from cosinnus.models.group import CosinnusGroupInviteToken
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import AllowNone, IsNotAuthenticated
@@ -50,6 +50,7 @@ from cosinnus.views.common import (
     cosinnus_pre_logout_actions,
 )
 from cosinnus.views.user import (
+    GuestAccessMixin,
     SetInitialPasswordMixin,
     UserSignupTriggerEventsMixin,
 )
@@ -602,7 +603,7 @@ class UserUIFlagsView(APIView):
         return Response(data=profile_settings['ui_flags'])
 
 
-class GuestLoginView(LoginViewAdditionalLogicMixin, APIView):
+class GuestLoginView(LoginViewAdditionalLogicMixin, GuestAccessMixin, APIView):
     """A Guest user login API endpoint"""
 
     renderer_classes = (
@@ -662,20 +663,11 @@ class GuestLoginView(LoginViewAdditionalLogicMixin, APIView):
         if request.user.is_authenticated:
             raise serializers.ValidationError({'non_field_errors': [self.msg_already_logged_in]})
 
-        # check if guest token and its access object and group exists
-        guest_token_str = guest_token.strip().lower()
-        guest_access = None
-        group = None
-        if guest_token_str:
-            guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token_str)
-        if guest_access:
-            group = guest_access.group
-        if not group or not group.is_active:
-            # do not allow to tokens without a group or an inactive group
+        # get guest access for token
+        guest_access = self.get_guest_access(guest_token)
+        if not guest_access:
+            # invalid token
             raise serializers.ValidationError({'non_field_errors': [self.msg_invalid_token]})
-        # check if feature is disabled on this portal for this group type
-        if group.type not in settings.COSINNUS_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
-            raise Http404
 
         serializer = CosinnusGuestLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

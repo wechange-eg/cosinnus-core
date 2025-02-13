@@ -1483,7 +1483,27 @@ class UserChangeEmailPendingView(RequireLoggedInMixin, TemplateView):
 change_email_pending_view = UserChangeEmailPendingView.as_view()
 
 
-class GuestUserSignupView(FormView):
+class GuestAccessMixin:
+    """Mixin for guest access processing."""
+
+    def get_guest_access(self, guest_token):
+        """Get and check the guest access and group for a guest token."""
+        guest_access = None
+        guest_token_str = guest_token.strip().lower()
+        if guest_token_str:
+            guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token_str)
+        if guest_access:
+            # check group
+            if not guest_access.group or not guest_access.group.is_active:
+                # do not allow to tokens without a group or an inactive group
+                guest_access = None
+            elif guest_access.group.type not in settings.COSINNUS_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
+                # check if feature is disabled on this portal for this group type
+                raise Http404
+        return guest_access
+
+
+class GuestUserSignupView(GuestAccessMixin, FormView):
     """Guest access for a given `UserGroupGuestAccess` token."""
 
     form_class = UserGroupGuestAccessForm
@@ -1501,19 +1521,15 @@ class GuestUserSignupView(FormView):
         # check if feature is disabled on this portal
         if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
             raise Http404
-        # check if guest token and its access object and group exists
-        guest_token_str = kwargs.pop('guest_token', '').strip().lower()
-        if guest_token_str:
-            self.guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token_str)
-        if self.guest_access:
-            self.group = self.guest_access.group
-        if not self.group or not self.group.is_active:
-            # do not allow to tokens without a group or an inactive group
+
+        # get guest access object and group
+        guest_token = kwargs.pop('guest_token', '')
+        self.guest_access = self.get_guest_access(guest_token)
+        if not self.guest_access:
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
-        # check if feature is disabled on this portal for this group type
-        if self.group.type not in settings.COSINNUS_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
-            raise Http404
+        self.group = self.guest_access.group
+
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
