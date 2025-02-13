@@ -60,7 +60,8 @@ class CosinnusConf(AppConf):
         '/api/v3/user/profile',
         '/api/v3/signup',
         '/api/v3/set_initial_password',
-        '/api/v3/guest_login' '/api/v3/content/main',
+        '/api/v3/guest_login',
+        '/api/v3/content/main',
         '/favicon.ico',
         '/robots.txt',
         '/o/',
@@ -1580,7 +1581,7 @@ class CosinnusConf(AppConf):
 
     # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
     DENY_ALL_ROBOTS = False
-    
+
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
 
