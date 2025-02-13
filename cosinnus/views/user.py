@@ -193,7 +193,49 @@ class PortalAdminListView(UserListView):
 portal_admin_list = PortalAdminListView.as_view()
 
 
-class SetInitialPasswordView(TemplateView):
+class SetInitialPasswordMixin:
+    """Mixin for set initial password processing."""
+
+    def prepare_initial_profile(self, user):
+        """Should be called after the initial password is set."""
+        profile = user.cosinnus_profile
+        profile_needs_to_saved = False
+
+        try:
+            # removing the key from the cosinnus_profile settings to prevent double usage
+            profile.settings.pop(PROFILE_SETTING_PASSWORD_NOT_SET)
+            profile_needs_to_saved = True
+        except KeyError as e:
+            logger.error(
+                (
+                    'Error while deleting key %s from cosinnus_profile settings of user %s. This key is '
+                    'supposed to be present. Password was set anyway'
+                ),
+                extra={'exception': e, 'reason': str(e)},
+            )
+
+        # setting your password automatically validates your email, as you have received the mail to your
+        # address
+        if not profile.email_verified:
+            profile.email_verified = True
+            profile_needs_to_saved = True
+
+        # add redirect to the welcome-settings page, with priority so that it is shown as first one
+        if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
+            profile.add_redirect_on_next_page(
+                redirect_with_next(reverse('cosinnus:welcome-settings'), self.request),
+                message=None,
+                priority=True,
+            )
+        elif profile_needs_to_saved:
+            # if a redirect has been added, the profile has been saved already. otherwise, save it here
+            profile.save()
+
+        # send welcome email if enabled
+        _send_user_welcome_email_if_enabled(user)
+
+
+class SetInitialPasswordView(SetInitialPasswordMixin, TemplateView):
     """View that is used to set an initial password for a user, who was created without a initial password.
     Cosinnus.middleware.set_password.SetPasswordMiddleware will redirect every request for a user without an initial
     password to that view.
@@ -244,41 +286,8 @@ class SetInitialPasswordView(TemplateView):
                     ),
                 )
 
-                profile = user.cosinnus_profile
-                profile_needs_to_saved = False
-
-                try:
-                    # removing the key from the cosinnus_profile settings to prevent double usage
-                    profile.settings.pop(PROFILE_SETTING_PASSWORD_NOT_SET)
-                    profile_needs_to_saved = True
-                except KeyError as e:
-                    logger.error(
-                        (
-                            'Error while deleting key %s from cosinnus_profile settings of user %s. This key is '
-                            'supposed to be present. Password was set anyway'
-                        ),
-                        extra={'exception': e, 'reason': str(e)},
-                    )
-
-                # setting your password automatically validates your email, as you have received the mail to your
-                # address
-                if not profile.email_verified:
-                    profile.email_verified = True
-                    profile_needs_to_saved = True
-
-                # add redirect to the welcome-settings page, with priority so that it is shown as first one
-                if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
-                    profile.add_redirect_on_next_page(
-                        redirect_with_next(reverse('cosinnus:welcome-settings'), self.request),
-                        message=None,
-                        priority=True,
-                    )
-                elif profile_needs_to_saved:
-                    # if a redirect has been added, the profile has been saved already. otherwise, save it here
-                    profile.save()
-
-                # send welcome email if enabled
-                _send_user_welcome_email_if_enabled(user)
+                # prepare profile
+                self.prepare_initial_profile(user)
 
                 # log the user in
                 user.backend = 'cosinnus.backends.EmailAuthBackend'
