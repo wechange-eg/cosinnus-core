@@ -29,6 +29,7 @@ logger = logging.getLogger(__name__)
 if settings.COSINNUS_ROCKET_ENABLED:
 
     def handle_app_authorized(sender, request, token, **kwargs):
+        """OAuth post-login hook. Makes sure that the RC user account is created and up to date."""
         if token.user.is_guest:
             return
         rocket = RocketChatConnection()
