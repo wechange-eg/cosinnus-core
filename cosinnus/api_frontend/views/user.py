@@ -317,8 +317,83 @@ class UserAuthInfoView(LoginViewAdditionalLogicMixin, APIView):
         return response
 
 
+class SignupApiMixin:
+    """Mixin for common signup api functionality."""
+
+    def get_signup_response(
+        self, request, user, user_need_activation=False, verify_email_before_login=False, redirect_url=None
+    ):
+        """Prepare an API response for a signed up user."""
+        data = {
+            'user': UserSerializer(user, context={'request': request}).data,
+        }
+        next_url = None
+        refresh = None
+        access = None
+        message = None
+        do_login = True
+        if user.is_authenticated:
+            # if the user has been logged in immediately, return the auth tokens
+            user_tokens = get_tokens_for_user(user)
+            refresh = user_tokens['refresh']
+            access = user_tokens['access']
+        if user_need_activation:
+            str_dict = {
+                'user': full_name_force(user),
+                'email': user.email,
+            }
+            message = (
+                force_str(
+                    _(
+                        'Hello "%(user)s"! Your registration was successful. Within the next few days you will be '
+                        'activated by our administrators. When your account is activated, you will receive an e-mail '
+                        'at "%(email)s".'
+                    )
+                )
+                % str_dict
+            )
+            message += ' '
+            do_login = False
+        if verify_email_before_login:
+            message = (message or '') + force_str(
+                _(
+                    'You need to verify your email before logging in. We have just sent you an email with a '
+                    "verifcation link. Please check your inbox, and if you haven't received an email, please check "
+                    'your spam folder.'
+                )
+            )
+            do_login = False
+
+        if do_login:
+            next_url = redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
+        elif settings.COSINNUS_V3_FRONTEND_ENABLED:
+            if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+                # temporary solution: since user isn't logged in after verification, redirect directly to onboarding!
+                user.cosinnus_profile.add_redirect_on_next_page(
+                    redirect_with_next('/setup/profile', self.request), message=None, priority=True
+                )
+            else:
+                user.cosinnus_profile.add_redirect_on_next_page(
+                    redirect_with_next(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE, self.request),
+                    message=None,
+                    priority=True,
+                )
+
+        data.update(
+            {
+                'refresh': refresh,
+                'access': access,
+                'next': next_url,
+                'do_login': do_login,
+                'message': message,
+            }
+        )
+
+        return data
+
+
 @swagger_auto_schema(request_body=CosinnusUserSignupSerializer)
-class SignupView(UserSignupTriggerEventsMixin, APIView):
+class SignupView(UserSignupTriggerEventsMixin, SignupApiMixin, APIView):
     """A proper User Registration API endpoint"""
 
     if not settings.COSINNUS_USER_SIGNUP_ENABLED:
@@ -389,70 +464,12 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
         redirect_url = self.trigger_events_after_user_signup(
             user, self.request, request_data=request.data, skip_messages=True
         )
-
-        # if the user has been logged in immediately, return the auth tokens
-        data = {
-            'user': UserSerializer(user, context={'request': request}).data,
-        }
-        next_url = None
-        refresh = None
-        access = None
-        message = None
-        do_login = True
-        if user.is_authenticated:
-            user_tokens = get_tokens_for_user(user)
-            refresh = user_tokens['refresh']
-            access = user_tokens['access']
-        if CosinnusPortal.get_current().users_need_activation:
-            str_dict = {
-                'user': full_name_force(user),
-                'email': user.email,
-            }
-            message = (
-                force_str(
-                    _(
-                        'Hello "%(user)s"! Your registration was successful. Within the next few days you will be '
-                        'activated by our administrators. When your account is activated, you will receive an e-mail '
-                        'at "%(email)s".'
-                    )
-                )
-                % str_dict
-            )
-            message += ' '
-            do_login = False
-        if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
-            message = (message or '') + force_str(
-                _(
-                    'You need to verify your email before logging in. We have just sent you an email with a '
-                    "verifcation link. Please check your inbox, and if you haven't received an email, please check "
-                    'your spam folder.'
-                )
-            )
-            do_login = False
-
-        if do_login:
-            next_url = redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
-        elif settings.COSINNUS_V3_FRONTEND_ENABLED:
-            if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
-                # temporary solution: since user isn't logged in after verification, redirect directly to onboarding!
-                user.cosinnus_profile.add_redirect_on_next_page(
-                    redirect_with_next('/setup/profile', self.request), message=None, priority=True
-                )
-            else:
-                user.cosinnus_profile.add_redirect_on_next_page(
-                    redirect_with_next(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE, self.request),
-                    message=None,
-                    priority=True,
-                )
-
-        data.update(
-            {
-                'refresh': refresh,
-                'access': access,
-                'next': next_url,
-                'do_login': do_login,
-                'message': message,
-            }
+        data = self.get_signup_response(
+            request,
+            user,
+            user_need_activation=CosinnusPortal.get_current().users_need_activation,
+            verify_email_before_login=settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN,
+            redirect_url=redirect_url,
         )
         return Response(data)
 
@@ -684,7 +701,7 @@ class GuestLoginView(LoginViewAdditionalLogicMixin, GuestAccessMixin, APIView):
         return response
 
 
-class SetInitialPasswordView(SetInitialPasswordMixin, APIView):
+class SetInitialPasswordView(SetInitialPasswordMixin, SignupApiMixin, APIView):
     """API used to set an initial password for a user, who was created without a initial password."""
 
     renderer_classes = (
@@ -724,13 +741,7 @@ class SetInitialPasswordView(SetInitialPasswordMixin, APIView):
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         login(self.request, user)
 
-        data = {
-            'message': _(
-                'Your password was set successfully! You may now log in using your e-mail address and the password you '
-                'just set.'
-            ),
-            'next': reverse('login'),
-        }
+        data = self.get_signup_response(request, user, user_need_activation=False, verify_email_before_login=False)
         return Response(data)
 
 
