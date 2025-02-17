@@ -6,7 +6,6 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth import login, logout
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.http import Http404
-from django.shortcuts import redirect
 from django.urls.base import reverse
 from django.utils.encoding import force_str
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -532,9 +531,6 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     )
     def post(self, request):
         user = request.user
-        if user.is_guest:
-            # do not allow guest user posts
-            return redirect('cosinnus:guest-user-not-allowed')
         user_serializer = CosinnusHybridUserSerializer(user, data=request.data, partial=True)
         user_serializer.is_valid(raise_exception=True)
         # this save() will update the existing user, user.cosinnus_profile,
