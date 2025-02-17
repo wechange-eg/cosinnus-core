@@ -123,8 +123,8 @@ def email_portal_admins(subject, template, data, user=None):
     for admin in admins:
         # If managed tags are enabled consider only admins that have a common managed tag with the user
         if user and settings.COSINNUS_MANAGED_TAGS_ENABLED:
-            user_managed_tags = set(user.cosinnus_profile.get_managed_tags())
-            admin_managed_tags = set(admin.cosinnus_profile.get_managed_tags())
+            user_managed_tags = set(user.cosinnus_profile.get_managed_tag_ids())
+            admin_managed_tags = set(admin.cosinnus_profile.get_managed_tag_ids())
             common_managed_tags = user_managed_tags.intersection(admin_managed_tags)
             if not common_managed_tags:
                 continue
