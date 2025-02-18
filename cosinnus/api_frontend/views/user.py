@@ -735,7 +735,7 @@ class SetInitialPasswordView(SetInitialPasswordMixin, SignupApiMixin, APIView):
         user.save()
 
         # prepare profile
-        self.prepare_initial_profile(user)
+        self.prepare_initial_profile(user, tos_accepted=True)
 
         # log the user in
         user.backend = 'cosinnus.backends.EmailAuthBackend'

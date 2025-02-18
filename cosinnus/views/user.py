@@ -204,7 +204,7 @@ portal_admin_list = PortalAdminListView.as_view()
 class SetInitialPasswordMixin:
     """Mixin for set initial password processing."""
 
-    def prepare_initial_profile(self, user):
+    def prepare_initial_profile(self, user, tos_accepted=False):
         """Should be called after the initial password is set."""
         profile = user.cosinnus_profile
         profile_needs_to_saved = False
@@ -222,10 +222,14 @@ class SetInitialPasswordMixin:
                 extra={'exception': e, 'reason': str(e)},
             )
 
-        # setting your password automatically validates your email, as you have received the mail to your
-        # address
+        # setting your password automatically validates your email, as you have received the mail to your address
         if not profile.email_verified:
             profile.email_verified = True
+            profile_needs_to_saved = True
+
+        if tos_accepted:
+            # set the user's tos_accepted flag to true and date to now
+            accept_user_tos_for_portal(user, profile=profile, save=False)
             profile_needs_to_saved = True
 
         # add redirect to the welcome-settings page, with priority so that it is shown as first one
