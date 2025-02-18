@@ -166,3 +166,31 @@ class GuestLoginViewTest(APITestCase):
         )  # get the user via their auth id
         self.assertTrue(signed_in_guest_user.is_guest, 'guest user is a guest')
         self.assertTrue(signed_in_guest_user.is_authenticated, 'guest user is logged in')
+
+
+@override_settings(COSINNUS_USER_GUEST_ACCOUNTS_ENABLED=True)
+class GuestAccessViewTest(APITestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.test_group = CosinnusSociety.objects.create(name='Test Group')
+        cls.guest_token = UserGroupGuestAccess.objects.create(group=cls.test_group, token='testTOKEN')
+        cls.api_url = reverse(
+            'cosinnus:frontend-api:api-guest-access-token', kwargs={'guest_token': cls.guest_token.token}
+        )
+
+    def test_group_info(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.data,
+            {
+                'group': {
+                    'name': self.test_group.name,
+                    'url': self.test_group.get_absolute_url(),
+                    'avatar': None,
+                    'icon': 'fa-sitemap',
+                    'members': 0,
+                }
+            },
+        )

@@ -37,7 +37,7 @@ from cosinnus.api_frontend.serializers.user import (
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
 from cosinnus.models import CosinnusPortal
-from cosinnus.models.group import CosinnusGroupInviteToken
+from cosinnus.models.group import CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import AllowNone, IsNotAuthenticated
@@ -799,4 +799,52 @@ class GroupInviteTokenView(APIView):
                 'members': len(group.members),
             }
             data['groups'].append(group_data)
+        return Response(data=data)
+
+
+class GuestAccessTokenView(APIView):
+    """API endpoint for guest access token information."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+
+    @swagger_auto_schema(
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'group': {
+                                'name': 'Invite Group',
+                                'url': 'https//portal.url/groups/group/',
+                                'avatar': None,
+                                'icon': 'fa-sitemap',
+                                'members': 10,
+                            }
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
+    )
+    def get(self, request, guest_token):
+        data = {}
+        guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token)
+        if not guest_access:
+            raise Http404
+
+        # add group infos
+        group = guest_access.group
+        data['group'] = {
+            'name': group.name,
+            'url': group.get_absolute_url(),
+            'icon': group.get_icon(),
+            'avatar': group.avatar_url,
+            'members': len(group.members),
+        }
         return Response(data=data)
