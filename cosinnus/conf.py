@@ -1056,6 +1056,10 @@ class CosinnusConf(AppConf):
     # Forum space label in the v3 main navigation. Set to None to exclude forum from the community space.
     V3_MENU_SPACES_FORUM_LABEL = _('Forum')
 
+    # if set to a String, creates an Events link in the community space that
+    # links to the Forum group's calendar, with the given Label
+    V3_MENU_SPACES_ADD_FORUM_EVENTS_LINK_LABEL = None
+
     # Map space label in the v3 main navigation. Set to None to exclude the map from the community space.
     V3_MENU_SPACES_MAP_LABEL = _('Discover')
 
