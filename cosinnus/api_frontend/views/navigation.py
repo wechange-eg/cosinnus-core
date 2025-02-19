@@ -296,7 +296,16 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 id='Events',
                             )
                         )
-
+                # adds an Events link to the forum calendar if set
+                if settings.COSINNUS_V3_MENU_SPACES_ADD_FORUM_EVENTS_LINK_LABEL:
+                    community_space_items.append(
+                        MenuItem(
+                            settings.COSINNUS_V3_MENU_SPACES_ADD_FORUM_EVENTS_LINK_LABEL,
+                            group_aware_reverse('cosinnus:event:list', kwargs={'group': forum_group}),
+                            'fa-calendar',
+                            id='EventsForum',
+                        )
+                    )
         # "Discover" link in community section of spaces menu
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
