@@ -892,7 +892,7 @@ _useradmin_excluded_list_filter = ['groups', 'is_staff']
 
 
 class UserAdmin(DjangoUserAdmin):
-    PERMISSION_FIELDS = ('is_active', 'is_superuser')
+    PERMISSION_FIELDS = ('is_active', 'is_superuser', 'is_staff')
 
     if settings.COSINNUS_DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED:
         PERMISSION_FIELDS = (
