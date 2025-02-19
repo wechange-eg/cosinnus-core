@@ -792,7 +792,7 @@ class GroupInviteTokenView(APIView):
         # add group infos
         for group in invite.invite_groups.all():
             group_data = {
-                'name': group.name,
+                'name': group.get_name(),
                 'url': group.get_absolute_url(),
                 'icon': group.get_icon(),
                 'avatar': group.get_avatar_thumbnail_url() if group.avatar_url else None,
@@ -841,7 +841,7 @@ class GuestAccessTokenView(APIView):
         # add group infos
         group = guest_access.group
         data['group'] = {
-            'name': group.name,
+            'name': group.get_name(),
             'url': group.get_absolute_url(),
             'icon': group.get_icon(),
             'avatar': group.get_avatar_thumbnail_url() if group.avatar_url else None,

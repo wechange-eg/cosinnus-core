@@ -457,7 +457,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
 
         # determine menu labels/image
         if self.group:
-            self.main_menu_label = self.group['name']
+            self.main_menu_label = self.group.get_name()
             if self.group.avatar_url:
                 self.main_menu_image = self.group.get_avatar_thumbnail_url()
             else:

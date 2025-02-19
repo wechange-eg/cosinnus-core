@@ -775,7 +775,7 @@ class NotificationsThread(Thread):
                 )
 
                 # additional context for BaseTaggableObjectModels
-                context.update({'team_name': self.group['name']})
+                context.update({'team_name': self.group.get_name()})
                 if issubclass(self.obj.__class__, BaseTaggableObjectModel):
                     context.update({'object_name': self.obj.title})
                 try:
@@ -958,10 +958,10 @@ def render_digest_item_for_notification_event(
             'sender_name': escape(sender_name) if sender_name else '',
             'object_name': escape(object_name) if object_name else '',
             'portal_name': escape(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)),
-            'team_name': escape(notification_event.group['name'])
+            'team_name': escape(notification_event.group.get_name())
             if getattr(notification_event, 'group', None) is not None
             else '(unknowngroup)',
-            'team_name_short': escape(notification_event.group['name'][:11])
+            'team_name_short': escape(notification_event.group.get_name()[:11])
             if getattr(notification_event, 'group', None) is not None
             else '(unknowngroup)',  # first 10 characters given
         }
@@ -1054,7 +1054,7 @@ def render_digest_item_for_notification_event(
             else:
                 data.update(
                     {
-                        'origin_name': notification_event.group['name'],
+                        'origin_name': notification_event.group.get_name(),
                         'origin_icon_url': get_image_url_for_icon(notification_event.group.get_icon()),
                         'origin_image_url': portal_url
                         + (

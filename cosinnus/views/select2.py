@@ -196,8 +196,8 @@ class GroupsView(Select2View):
             # do/do not return the forum group
             # if group.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None):
             #    continue
-            # access group.name by its dict lookup to support translation magic
-            groups.append((group.id, group['name']))
+            # access group.name with the helper to support translation magic
+            groups.append((group.id, group.get_name()))
 
         return (NO_ERR_RESP, has_more, groups)
 

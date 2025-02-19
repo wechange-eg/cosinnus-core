@@ -260,7 +260,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                     if tag and tag.paired_group and (not forum_slug or tag.paired_group.slug != forum_slug):
                         community_space_items.append(
                             MenuItem(
-                                tag.paired_group.name,
+                                tag.paired_group.get_name(),
                                 tag.paired_group.get_absolute_url(),
                                 'fa-sitemap',
                                 id=f'Forum{tag.paired_group.id}',
@@ -290,7 +290,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                     if events_group:
                         community_space_items.append(
                             MenuItem(
-                                events_group['name'],
+                                events_group.get_name(),
                                 events_group.get_absolute_url(),
                                 'fa-calendar',
                                 id='Events',
@@ -1008,7 +1008,7 @@ class MembershipAlertsView(APIView):
                     'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_SOCIETY else 'fa-group'
                 )
                 membership_request_item = MenuItem(
-                    escape('%s (%d)' % (admined_group.name, len(pending_ids))),
+                    escape('%s (%d)' % (admined_group.get_name(), len(pending_ids))),
                     id=f'MembershipRequests{admined_group.pk}',
                     url=membership_request_url,
                     icon=membership_request_icon,
@@ -1030,7 +1030,7 @@ class MembershipAlertsView(APIView):
                     'cosinnus:conference:participation-management-applications', kwargs={'group': admined_group}
                 )
                 conference_application_request_item = MenuItem(
-                    escape('%s (%d)' % (admined_group.name, len(pending_ids))),
+                    escape('%s (%d)' % (admined_group.get_name(), len(pending_ids))),
                     id=f'ConferenceApplications{admined_group.pk}',
                     url=conference_application_url,
                     icon=conference_application_icon,
