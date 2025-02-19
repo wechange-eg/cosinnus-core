@@ -795,7 +795,7 @@ class GroupInviteTokenView(APIView):
                 'name': group.name,
                 'url': group.get_absolute_url(),
                 'icon': group.get_icon(),
-                'avatar': group.avatar_url,
+                'avatar': group.get_avatar_thumbnail_url() if group.avatar_url else None,
                 'members': len(group.members),
             }
             data['groups'].append(group_data)
@@ -844,7 +844,7 @@ class GuestAccessTokenView(APIView):
             'name': group.name,
             'url': group.get_absolute_url(),
             'icon': group.get_icon(),
-            'avatar': group.avatar_url,
+            'avatar': group.get_avatar_thumbnail_url() if group.avatar_url else None,
             'members': len(group.members),
         }
         return Response(data=data)
