@@ -104,6 +104,7 @@ GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
 ]
 GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS = [
     r'^/dashboard/api/save_ui_prefs/',  # save ui prefs
+    r'^/api/v3/logout/',  # logout via api
 ]
 GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS = [
     r'^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/doodle/(?P<doodle_slug>[^/]+)/',  # event poll votes
