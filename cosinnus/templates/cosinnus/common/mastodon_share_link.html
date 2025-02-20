@@ -9,9 +9,7 @@
     data-editlabel="{% trans "Edit your Mastodon instance" %}"
     class="mastodon-share"
 >
-    <i class="fa fa-external-link"></i>
-    {% trans "Share on Mastodon" %}
+    <img class="share-icon-img" src="{% static 'images/mastodon-icon.svg' %}" />
 </a>
-<div class="clearfix"></div>
 {# This script runs directly after the button to convert it so can't be loaded in head #}
 <script src="{% static 'js/vendor/mastodon-share.js' %}"></script>
