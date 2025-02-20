@@ -86,6 +86,9 @@ def get_env():
     return _env
 
 
+DEPRECATED = object()
+
+
 def setup_env(
     portal_name,
     domain,
@@ -97,9 +100,8 @@ def setup_env(
     cosinnus_pull_remote='origin',
     frontend_pull_branch='main',
     frontend_pull_remote='origin',
-    legacy_mode=False,
-    special_requirements='requirements-production.txt',
-    new_unit_commands=False,
+    new_unit_commands=DEPRECATED,
+    command_unit_directly=True,
 ):
     """
     Sets up the env with all variables needed to run cosinnus
@@ -114,11 +116,11 @@ def setup_env(
         is non-default, use this argument to override it
     @param pull_remote: used to override non-origin git pulls
     @param cosinnus_pull_remote: used to override non-origin git pulls for the cosinnus-core repo
-    @param legacy_mode: set this to True for deploys on portals that
-        do not have the v3 redesign devops architecture yet (pip instead of poetry, etc)
-    @param special_requirements: if run in `legacy_mode == True`, this can be used to change
-        the requirements file
-    @param new_unit_commands: set to True to use the newer, unified configuration for unit commands.
+    @param new_unit_commands: DEPRECATED and ignored, the former True value is now default.
+    @param command_unit_directly: default True (new method) of restarting the django backend by restarting
+        the entire unit service instead of just the django backend (old method).
+        set to False to use the old method
+
     """
     if not base_path and domain:
         base_path = f'/srv/http/{domain}'
@@ -132,9 +134,7 @@ def setup_env(
     env.path = f'{base_path}/htdocs'
     env.frontend_path = f'{base_path}/frontend'
     env.virtualenv_path = f'{env.path}/.venv'
-    env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus'
-    if not legacy_mode:
-        env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus-core'
+    env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus-core'
     env.backup_path = f'{base_path}/backups'
     env.maintenance_mode_path = base_path
     env.pull_branch = pull_branch
@@ -144,31 +144,21 @@ def setup_env(
     env.frontend_pull_branch = frontend_pull_branch
     env.frontend_pull_remote = frontend_pull_remote
     env.lessc_binary = '~/node_modules/.bin/lessc'
-    env.skip_compile_webpack = bool(not legacy_mode)
+    env.skip_compile_webpack = True
 
-    env.memcached_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-memcached.service'
-    env.frontend_restart_command = f'sudo systemctl restart django-{portal_name}-node-frontend.service'
-    if not legacy_mode:
-        env.lessc_binary = f'{env.cosinnus_src_path}/node_modules/.bin/lessc'
-    if legacy_mode:
-        env.reload_command = f'sudo /bin/systemctl restart django-{portal_name}.service'
-        env.stop_command = f'sudo /bin/systemctl stop django-{portal_name}.service'
-        env.start_command = f'sudo /bin/systemctl start django-{portal_name}.service'
-    elif new_unit_commands:
+    env.lessc_binary = f'{env.cosinnus_src_path}/node_modules/.bin/lessc'
+    if command_unit_directly:
+        env.reload_command = 'sc stop unit.service && sc start unit.service'
+        env.stop_command = 'sc stop unit.service'
+        env.start_command = 'sc start unit.service'
+    else:
         env.reload_command = f'sudo /bin/systemctl restart portal-{portal_name}-django.service'
         env.stop_command = f'sudo /bin/systemctl stop portal-{portal_name}-django.service'
         env.start_command = f'sudo /bin/systemctl start portal-{portal_name}-django.service'
-        env.memcached_restart_command = f'sudo /bin/systemctl restart portal-{portal_name}-memcached.service'
-        env.frontend_restart_command = f'sudo /bin/systemctl restart portal-{portal_name}-frontend.service'
-        # or maybe this, even newer?
-        # env.frontend_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-node-frontend.service'
-    else:
-        env.reload_command = 'sudo systemctl restart unit-config.service'
-        # there is no stop for the unit-config, only for the config-service
-        env.stop_command = 'sudo systemctl stop unit-config.service'
-        # this is why here we restart the unit config, so all gets restarted after stopping
-        env.start_command = 'sudo systemctl restart unit-config.service'
 
+    env.frontend_restart_command = f'sudo /bin/systemctl restart portal-{portal_name}-frontend.service'
+    env.status_command = 'sc status unit.service'
+    env.memcached_restart_command = f'sudo /bin/systemctl restart portal-{portal_name}-memcached.service'
     env.celery_restart_command = f'sc restart portal-{portal_name}-celery.service'
     env.portal_additional_less_to_compile = []  # a list of django apps for which to compile extra less
     env.db_name = portal_name
@@ -176,8 +166,4 @@ def setup_env(
     env.confirm = confirm
     env.legacy_mode = False
 
-    if legacy_mode:
-        env.legacy_mode = True
-        env.virtualenv_path = f'{base_path}/venv'
-        env.special_requirements = special_requirements
     return env

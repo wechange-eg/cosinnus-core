@@ -1,14 +1,11 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-06 13:42+0100\n"
+"POT-Creation-Date: 2025-02-20 12:37+0100\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-
-msgid "Debug"
-msgstr ""
 
 msgid "Info"
 msgstr ""
@@ -256,6 +253,10 @@ msgstr "المستلمون"
 msgid "Guest access URL"
 msgstr "اخر دخول/وصول"
 
+#, python-format
+msgid "%(model_name)s with this %(field_name)s already exists."
+msgstr ""
+
 #, fuzzy
 #| msgid "Project Dashboard"
 msgid "Personal Dashboard"
@@ -404,6 +405,17 @@ msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few
 msgstr ""
 
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invalid request."
+msgid "Invalid guest token."
+msgstr "طلب غير صالح."
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr ""
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
@@ -564,9 +576,6 @@ msgstr ""
 msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
-msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
-msgstr ""
-
 msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr ""
 
@@ -574,6 +583,9 @@ msgstr ""
 #| msgid "The page you requested is not available for this event at this time."
 msgid "The page you tried to visit is not available for guest accounts."
 msgstr "الصفحة التي طلبتها غير متاحة لهذه الماسبة في الوقت الحالي."
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "لقد تم تسجيل خروجك تلقائيًا بعد أن بقيت غير نشط لبعض الوقت."
@@ -2742,6 +2754,11 @@ msgstr "حذف العنصر المبلغ عنه..."
 msgid "(The reported item has been deleted.)"
 msgstr "(تم حذف العنصر المبلغ عنه.)"
 
+#, fuzzy
+#| msgid "User Administration"
+msgid "Edit in User Administration"
+msgstr "إدارة المستخدم"
+
 msgid "This user profile is scheduled for deletion at: "
 msgstr ""
 
@@ -3375,6 +3392,17 @@ msgstr "توسيع"
 
 msgid "Shrink"
 msgstr "تقليص"
+
+#, fuzzy
+#| msgid "Share on Facebook"
+msgid "Share on Mastodon"
+msgstr "شارك على فيسبوك"
+
+msgid "Enter your Mastodon instance you'd like to share to"
+msgstr ""
+
+msgid "Edit your Mastodon instance"
+msgstr ""
 
 msgid "Check the projects/groups where you wish to show this item in. It will be shown in all lists, but will still remain in this group."
 msgstr "تحقق من المشاريع/المجموعات التي ترغب في إظهار هذا العنصر فيها. سيظهر في جميع القوائم، لكنه سيظل في هذه المجموعة."
@@ -8845,6 +8873,15 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 2.3.0 released"
+msgstr ""
+
+msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
+msgstr ""
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr ""
+
 msgid "Redesign Update"
 msgstr ""
 
@@ -9061,11 +9098,6 @@ msgstr ""
 #, fuzzy
 msgid "You have successfully disabled two-factor authentication for your account."
 msgstr "تم حذف الدعوة بنجاح."
-
-#, fuzzy
-#| msgid "Invalid request."
-msgid "Invalid guest token."
-msgstr "طلب غير صالح."
 
 #, fuzzy
 #| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
@@ -9601,12 +9633,6 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr "لقد ألغينا اشتراكك في بريدك الإلكتروني \"%(email)s\" من قائمتنا البريدية. لن تتلقى المزيد من رسائل البريد الإلكتروني منا!"
 
 msgid "A new verification email has been sent."
-msgstr ""
-
-msgid "You are currently logged in. The guest access can only be used if you are not logged in."
-msgstr ""
-
-msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"

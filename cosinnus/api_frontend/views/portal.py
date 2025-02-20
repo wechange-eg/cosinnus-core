@@ -210,6 +210,7 @@ class PortalManagedTagsView(APIView):
         data = {
             'enabled': settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF,
             'in_signup': settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM,
+            'readonly_in_setup': settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM,
             'required': settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED,
             'multiple': settings.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED,
             'title': MANAGED_TAG_LABELS.MANAGED_TAG_NAME,
@@ -258,6 +259,7 @@ def generate_api_dict_for_dynamic_field(field_name, field_definition_dict, field
         'is_multi_language': is_multi_language_field,
         'is_multi_language_sub_field': False,
         'in_signup': field_options.in_signup,
+        'hide_in_setup': field_options.hide_in_setup,
         'required': field_options.required,
         'multiple': field_options.multiple,
         'type': field_options.type,
@@ -268,6 +270,7 @@ def generate_api_dict_for_dynamic_field(field_name, field_definition_dict, field
         'is_group_header': field_options.is_group_header,
         'parent_group_field_name': field_options.parent_group_field_name,
         'display_required_field_names': field_options.display_required_field_names,
+        'display_required_managed_tags_slug': field_options.display_required_managed_tags_slug,
         'choices': choices,
         'max_length': field_options.max_length,
     }
@@ -310,6 +313,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
         Field attributes:
         - "name": str, field name
         - "in_signup": bool, whether to show up in the signup form
+        - "hide_in_setup": bool, whether to show up in the setup form
         - "required": bool, whether to be required in forms
         - "multiple": bool, for choice fields, if multiple choices are allowed. ignored for other types
         - "type": type of the dynamic field (affects both model and form), see <str type of `DYNAMIC_FIELD_TYPES`>,
@@ -324,6 +328,8 @@ class PortalUserprofileDynamicFieldsView(APIView):
         - "display_required_field_names": if this field should only be shown if either one of a list of checkbox \
                 fields is checked, this is the list field names of checkbox fields of which one is required to be \
                 checked
+        - "display_required_managed_tags_slug": if this field should only be shown if the user has the managed tag \
+                assigned
         - "choices": list or null, the choice tuples of (value, label) for choice fields
     """
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
@@ -345,6 +351,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
                                 'is_multi_language': False,
                                 'is_multi_language_sub_field': False,
                                 'in_signup': 'true',
+                                'hide_in_signup': 'false',
                                 'required': 'true',
                                 'multiple': 'false',
                                 'type': 'text',
@@ -357,6 +364,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
                                 'is_multi_language': False,
                                 'is_multi_language_sub_field': False,
                                 'in_signup': 'false',
+                                'hide_in_signup': 'false',
                                 'required': 'false',
                                 'multiple': 'true',
                                 'type': 'languages',
@@ -492,6 +500,7 @@ class PortalSettingsView(APIView):
                         "is_group_header": False,
                         "parent_group_field_name": None,
                         "display_required_field_names": None,
+                        "display_required_managed_tags_slug": None,
                         "choices": None,
                         "max_length": None,
                     },
@@ -609,6 +618,7 @@ class PortalSettingsView(APIView):
             'is_group_header': False,
             'parent_group_field_name': None,
             'display_required_field_names': None,
+            'display_required_managed_tags_slug': None,
             'choices': None,
         }
         """
@@ -630,6 +640,7 @@ class PortalSettingsView(APIView):
                     'is_group_header': False,
                     'parent_group_field_name': None,
                     'display_required_field_names': None,
+                    'display_required_managed_tags_slug': None,
                     'choices': None,
                 }
             }
@@ -650,6 +661,7 @@ class PortalSettingsView(APIView):
                     'is_group_header': False,
                     'parent_group_field_name': None,
                     'display_required_field_names': None,
+                    'display_required_managed_tags_slug': None,
                     'choices': None,
                 }
             }

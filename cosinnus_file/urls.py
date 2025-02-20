@@ -12,6 +12,8 @@ cosinnus_root_patterns = []
 
 
 cosinnus_group_patterns = [
+    re_path(r'^$', views.file_index_view, name='index-redirect'),
+    re_path(r'^list/$', views.file_hybrid_list_view, name='index'),
     re_path(r'^list/$', views.file_hybrid_list_view, name='list'),
     re_path(r'^list/download/$', views.folder_download_view, name='download-folder'),
     re_path(r'^list/move_element/$', views.move_element_view, name='move-element'),
@@ -26,7 +28,6 @@ cosinnus_group_patterns = [
     re_path(r'^(?P<slug>[^/]+)/download/(?P<pretty_filename>[^/]+)$', views.file_download_view, name='pretty-download'),
     re_path(r'^(?P<slug>[^/]+)/save', views.file_download_view, {'force_download': True}, name='save'),
     re_path(r'^(?P<slug>[^/]+)/delete/$', views.file_delete_view, {'form_view': 'delete'}, name='delete'),
-    re_path(r'^$', views.file_index_view, name='index'),
 ]
 
 if settings.COSINNUS_ROCKET_EXPORT_ENABLED:

@@ -336,7 +336,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                                 'group_image_url': CosinnusPortal.get_current().get_domain()
                                 + group.get_avatar_thumbnail_url(),
                                 'group_url': group.get_absolute_url(),
-                                'group_name': group['name'],
+                                'group_name': group.get_name(),
                             }
                             group_html = render_to_string(
                                 'cosinnus/html_mail/summary_group.html', context=group_template_context

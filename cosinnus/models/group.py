@@ -1661,6 +1661,12 @@ class CosinnusBaseGroup(
         for instance in self.get_all_objects_for_group():
             instance.update_index()
 
+    def get_name(self):
+        """Returns the group name considering translations. Should be used instead of group.name.
+        See TranslateableFieldsModelMixin.__getitem__ for details.
+        """
+        return self['name']
+
     def get_icon(self):
         """Returns the font-awesome icon specific to the group type"""
         # the special forum and events groups have different, hardcoded items:

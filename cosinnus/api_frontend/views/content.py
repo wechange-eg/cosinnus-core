@@ -457,7 +457,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
 
         # determine menu labels/image
         if self.group:
-            self.main_menu_label = self.group['name']
+            self.main_menu_label = self.group.get_name()
             if self.group.avatar_url:
                 self.main_menu_image = self.group.get_avatar_thumbnail_url()
             else:
@@ -580,9 +580,15 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         if data_v3_value:
             return data_v3_value
         elif fa_i:
-            fa_class = ' '.join(
-                [subclass for subclass in fa_i.get('class') if subclass.lower() not in FONT_AWESOME_CLASS_FILTER]
-            )
+            fa_i_class = fa_i.get('class')
+            if fa_i_class:
+                fa_class = ' '.join(
+                    [
+                        subclass
+                        for subclass in fa_i_class
+                        if subclass and subclass.lower() not in FONT_AWESOME_CLASS_FILTER
+                    ]
+                )
         return fa_class
 
     def _create_menu_items_from_html(self, html_soup):

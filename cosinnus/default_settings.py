@@ -168,10 +168,10 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
-        'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
         'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
         'cosinnus.core.middleware.time_zone_middleware.TimezoneMiddleware',
         'cosinnus.core.middleware.frontend_middleware.FrontendMiddleware',
+        'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
     ]
 
     TEMPLATES = [
@@ -626,6 +626,20 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.backends.EmailAuthBackend',
         'allauth.account.auth_backends.AuthenticationBackend',
     ]
+
+    # basic password validators
+    if not DEBUG:
+        AUTH_PASSWORD_VALIDATORS = [
+            {
+                'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+                'OPTIONS': {
+                    'min_length': 8,
+                },
+            },
+            {
+                'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+            },
+        ]
 
     # select2 render static files
     AUTO_RENDER_SELECT2_STATICS = False

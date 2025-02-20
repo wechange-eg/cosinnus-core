@@ -41,7 +41,7 @@ def send_conference_reminder(group, recipients=None, field_name='week_before', u
         template = dynamic_fields.get(f'reminder_{field_name}_{field_type}')
         template = template or (initial_template_subject if field_type == 'subject' else initial_template_content)
         variables = {
-            'name': group['name'],
+            'name': group.get_name(),
             'from_date': date(timezone.localtime(group.from_date), 'SHORT_DATETIME_FORMAT'),
             'to_date': date(timezone.localtime(group.to_date), 'SHORT_DATETIME_FORMAT'),
         }

@@ -9,7 +9,8 @@ from cosinnus_todo import views
 app_name = 'todo'
 
 cosinnus_group_patterns = [
-    re_path(r'^$', views.index_view, name='index'),
+    re_path(r'^$', views.index_view, name='index-redirect'),
+    re_path(r'^list/$', views.todo_list_create_view, name='index'),
     re_path(r'^list/$', views.todo_list_create_view, name='list'),
     re_path(r'^list/move_element/$', views.move_element_view, name='move-element'),
     re_path(r'^list/(?P<listslug>[^/]+)/$', views.todo_list_create_view, name='list-list'),

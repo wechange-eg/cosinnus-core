@@ -10,12 +10,14 @@
 {% block breadcrumb %}
 <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
 <li><a href="{% url 'cosinnus:administration-users' %}">{% trans "User Management" %}</a></li>
-<li class="active">{% trans "User" %}</li>
+<li class="active">{% trans "Create new User" %}</li>
 {% endblock %}
 
 {% block content %}
 <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
     <div class="content-box">
+        <h2 class="white-text large-space">{% trans "Create new User" %}</h2>
+
         {% trans "Email" as email_label %}
         {% trans "Email" as email_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.email label=email_label placeholder=email_placeholder large_field=True %}

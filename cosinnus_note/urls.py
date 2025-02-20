@@ -13,7 +13,8 @@ cosinnus_root_patterns = [
 ]
 
 cosinnus_group_patterns = [
-    re_path(r'^$', views.note_index, name='index'),
+    re_path(r'^$', views.note_index, name='index-redirect'),
+    re_path(r'^list/$', views.note_list, name='index'),
     re_path(r'^list/$', views.note_list, name='list'),
     re_path(r'^embed/$', views.note_embed, name='embed'),
     re_path(r'^add/$', views.note_create, name='add'),

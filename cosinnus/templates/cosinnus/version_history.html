@@ -21,7 +21,7 @@
                 <span class="pull-right"><i>Version: {{ version.version }}</i></span>
                 <h3>{{ version.title }}</h3>
                 {{ version.short_text|textfield }}
-                {{ version.full_text|textfield }}
+                {% if version.full_text %}{{ version.full_text|textfield }}{% endif %}
             </div>
         {% endfor %}
     </div>

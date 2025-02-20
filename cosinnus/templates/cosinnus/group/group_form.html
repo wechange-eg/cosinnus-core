@@ -489,7 +489,7 @@
 				                {% trans "This will be the default setting for all content created by members." as visibility_legend %}
 				                {% captureas visibility_warning_html %}
 				                    <div class="group-public-warning-area" {% if not object or not object.public %}style="display: none;"{% endif %} id="group-visibility-warning">
-		                                <i class="fa fa-fw fa-globe"></i>
+		                                <i class="fa fa-fw fa-eye"></i>
 		                                {% if group_model == "CosinnusSociety" %}
 		                                    {% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}{% trans "This group will be set to be visible on the entire portal!" %}{% else %}{% trans "This group will be set to be publicly visible!" %}{% endif %}
 		                                {% else %}

@@ -1,0 +1,15 @@
+{% load i18n static %}
+
+<a type="button" href="#"
+    title="{% trans "Share on Mastodon" %}"
+    rel="noreferrer noopener"
+    target="_blank"
+    data-prompt="{% trans "Enter your Mastodon instance you'd like to share to" %}"
+    data-edittext="{% trans "Edit your Mastodon instance" %}"
+    data-editlabel="{% trans "Edit your Mastodon instance" %}"
+    class="mastodon-share"
+>
+    <img class="share-icon-img" src="{% static 'images/mastodon-icon.svg' %}" />
+</a>
+{# This script runs directly after the button to convert it so can't be loaded in head #}
+<script src="{% static 'js/vendor/mastodon-share.js' %}"></script>

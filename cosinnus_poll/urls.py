@@ -8,7 +8,8 @@ from cosinnus_poll import views
 app_name = 'poll'
 
 cosinnus_group_patterns = [
-    re_path(r'^$', views.index_view, name='index'),
+    re_path(r'^$', views.index_view, name='index-redirect'),
+    re_path(r'^list/$', views.poll_list_view, name='index', kwargs={'poll_view': 'current'}),
     re_path(r'^list/$', views.poll_list_view, name='list', kwargs={'poll_view': 'current'}),
     re_path(r'^list/past/$', views.poll_list_view, name='list_past', kwargs={'poll_view': 'past'}),
     re_path(r'^list/delete_element/$', views.delete_element_view, name='delete-element'),

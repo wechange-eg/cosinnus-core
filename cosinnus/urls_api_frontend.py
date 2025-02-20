@@ -26,8 +26,12 @@ from cosinnus.api_frontend.views.portal import (
     PortalUserprofileDynamicFieldsView,
 )
 from cosinnus.api_frontend.views.user import (
+    GroupInviteTokenView,
+    GuestAccessTokenView,
+    GuestLoginView,
     LoginView,
     LogoutView,
+    SetInitialPasswordView,
     SignupView,
     UserAuthInfoView,
     UserProfileView,
@@ -49,6 +53,10 @@ urlpatterns += [
     path('api/v3/logout/', LogoutView.as_view(), name='api-logout'),
     path('api/v3/authinfo/', UserAuthInfoView.as_view(), name='api-authinfo'),
     path('api/v3/signup/', SignupView.as_view(), name='api-signup'),
+    path('api/v3/guest_login/<str:guest_token>/', GuestLoginView.as_view(), name='api-guest-login'),
+    path('api/v3/guest_access/<str:guest_token>/', GuestAccessTokenView.as_view(), name='api-guest-access-token'),
+    path('api/v3/set_initial_password/<str:token>/', SetInitialPasswordView.as_view(), name='api-set-initial-password'),
+    path('api/v3/group_invite/<str:token>/', GroupInviteTokenView.as_view(), name='api-group-invite-token'),
     path('api/v3/user/profile/', UserProfileView.as_view(), name='api-user-profile'),
     path('api/v3/user/ui_flags/', UserUIFlagsView.as_view(), name='api-user-ui-flags'),
     path('api/v3/portal/topics/', PortalTopicsView.as_view(), name='api-portal-topics'),

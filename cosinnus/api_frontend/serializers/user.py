@@ -2,7 +2,7 @@ import logging
 import random
 
 import requests
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import authenticate, get_user_model, password_validation
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator, MinLengthValidator, URLValidator
 from drf_extra_fields.fields import Base64ImageField
@@ -96,6 +96,7 @@ class CosinnusUserSignupSerializer(
     # for `CosinnusUserDynamicFieldsSerializerMixin`
     filter_included_fields_by_option_name = 'in_signup'
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+    used_only_for_signup = True
 
     # missing/not-yet-supported fields for the signup endpoint:
 
@@ -154,6 +155,10 @@ class CosinnusUserSignupSerializer(
 
         attrs = super().validate(attrs)
         return attrs
+
+    def validate_password(self, value):
+        password_validation.validate_password(value)
+        return value
 
     def create(self, validated_data):
         """Create a new user as a signup via the API.
@@ -293,6 +298,7 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
             child=serializers.SlugField(allow_blank=False),
             allow_empty=not bool(settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED),
             source='cosinnus_profile.get_managed_tag_slugs',
+            read_only=settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM,
         )
     tags = TagListSerializerField(
         required=False, default=list, source='cosinnus_profile.media_tag.tags', help_text='An array of string tags'
@@ -322,6 +328,12 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         default=dict,
         help_text='JSON dictionary with ui_flags.',
     )
+    is_guest = serializers.BooleanField(
+        required=False,
+        read_only=True,
+        default=False,
+        help_text='Bool flag indicating that the user is a guest user.',
+    )
 
     # for `CosinnusUserDynamicFieldsSerializerMixin`
     all_fields_optional = True
@@ -338,7 +350,11 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
 
     def validate(self, attrs):
         # validate managed tags
-        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        if (
+            settings.COSINNUS_MANAGED_TAGS_ENABLED
+            and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
+            and settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM
+        ):
             profile_data = attrs.get('cosinnus_profile', {})
             if 'get_managed_tag_slugs' in profile_data:
                 managed_tag_slugs = profile_data.get('get_managed_tag_slugs', [])
@@ -418,8 +434,33 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         media_tag.save()
         profile.save()
         instance.save()
-        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        if (
+            settings.COSINNUS_MANAGED_TAGS_ENABLED
+            and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
+            and settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM
+        ):
             if 'get_managed_tag_slugs' in profile_data:
                 managed_tag_ids = profile_data.get('get_managed_tag_slugs', [])
                 CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, managed_tag_ids)
         return instance
+
+
+class CosinnusGuestLoginSerializer(serializers.Serializer):
+    """Serializer for the guest Login API endpoint"""
+
+    username = serializers.CharField(
+        required=True,
+        max_length=50,
+        validators=[MinLengthValidator(2), MaxLengthValidator(50)],
+        help_text='Username for the guest user.',
+    )
+
+
+class CosinnusSetInitialPasswordSerializer(serializers.Serializer):
+    """Serializer for the set initial API endpoint"""
+
+    password = serializers.CharField(required=True, help_text='Initial user password.')
+
+    def validate_password(self, value):
+        password_validation.validate_password(value)
+        return value
