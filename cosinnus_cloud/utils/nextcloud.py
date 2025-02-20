@@ -577,7 +577,7 @@ def create_social_login_apps():
                     provider_arg % 'authorizeUrl': f'{portal_domain}/o/authorize/',
                     provider_arg % 'tokenUrl': f'{portal_domain}/o/token/',
                     provider_arg % 'profileUrl': f'{portal_domain}/group/forum/cloud/oauth2/',
-                    provider_arg % 'logoutUrl': '',
+                    provider_arg % 'logoutUrl': f'{portal_domain}/logout/',
                     provider_arg % 'clientId': client_id,
                     provider_arg % 'clientSecret': client_secret,
                     provider_arg % 'scope': 'read',
