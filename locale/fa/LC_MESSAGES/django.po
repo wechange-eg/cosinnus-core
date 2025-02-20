@@ -1,14 +1,11 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-06 13:42+0100\n"
+"POT-Creation-Date: 2025-02-20 12:37+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-msgid "Debug"
-msgstr ""
 
 msgid "Info"
 msgstr ""
@@ -233,6 +230,10 @@ msgstr ""
 msgid "Guest access URL"
 msgstr "آخرین بار دست‌یافته شده"
 
+#, python-format
+msgid "%(model_name)s with this %(field_name)s already exists."
+msgstr ""
+
 #, fuzzy
 #| msgid "My Dashboard"
 msgid "Personal Dashboard"
@@ -368,6 +369,15 @@ msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few
 msgstr ""
 
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
+
+msgid "Invalid guest token."
+msgstr ""
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr ""
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
@@ -520,13 +530,13 @@ msgstr "از آن‌جا که روی لینکی که در یکی از ایمیل
 msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
-msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
-msgstr ""
-
 msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr ""
 
 msgid "The page you tried to visit is not available for guest accounts."
+msgstr ""
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -2574,6 +2584,9 @@ msgstr "مورد گزارش‌شده را پاک کن..."
 msgid "(The reported item has been deleted.)"
 msgstr ""
 
+msgid "Edit in User Administration"
+msgstr ""
+
 msgid "This user profile is scheduled for deletion at: "
 msgstr ""
 
@@ -3152,6 +3165,15 @@ msgid "Expand"
 msgstr ""
 
 msgid "Shrink"
+msgstr ""
+
+msgid "Share on Mastodon"
+msgstr ""
+
+msgid "Enter your Mastodon instance you'd like to share to"
+msgstr ""
+
+msgid "Edit your Mastodon instance"
 msgstr ""
 
 msgid "Check the projects/groups where you wish to show this item in. It will be shown in all lists, but will still remain in this group."
@@ -8212,6 +8234,15 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 2.3.0 released"
+msgstr ""
+
+msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
+msgstr ""
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr ""
+
 msgid "Redesign Update"
 msgstr ""
 
@@ -8424,9 +8455,6 @@ msgid "You do not have any backup tokens set up. Please log in using your OTP to
 msgstr ""
 
 msgid "You have successfully disabled two-factor authentication for your account."
-msgstr ""
-
-msgid "Invalid guest token."
 msgstr ""
 
 #, fuzzy
@@ -8942,12 +8970,6 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr ""
 
 msgid "A new verification email has been sent."
-msgstr ""
-
-msgid "You are currently logged in. The guest access can only be used if you are not logged in."
-msgstr ""
-
-msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"

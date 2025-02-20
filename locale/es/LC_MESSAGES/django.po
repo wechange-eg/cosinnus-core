@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-06 13:42+0100\n"
+"POT-Creation-Date: 2025-02-20 12:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: gpt-po v1.0.6\n"
 "Language-Team: \n"
@@ -12,9 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
-
-msgid "Debug"
-msgstr "Depurar"
 
 msgid "Info"
 msgstr "Información"
@@ -238,6 +235,10 @@ msgstr "Recipients Enviar Contar"
 msgid "Guest access URL"
 msgstr "URL de acceso de invitado"
 
+#, python-format
+msgid "%(model_name)s with this %(field_name)s already exists."
+msgstr ""
+
 msgid "Personal Dashboard"
 msgstr "Dashboard personal"
 
@@ -373,6 +374,15 @@ msgstr "Hola \"%(user)s\"! Tu registro fue exitoso. Dentro de los próximos día
 
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
 msgstr "Necesitas verificar tu correo electrónico antes de iniciar sesión. Acabamos de enviarte un correo electrónico con un enlace de verificación. Por favor, revisa tu bandeja de entrada y, si no has recibido un correo electrónico, revisa tu carpeta de spam."
+
+msgid "Invalid guest token."
+msgstr "Token de invitado no válido."
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr "En este momento has iniciado sesión."
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
+msgstr "No pudimos iniciar sesión como invitado en este momento. ¡Por favor, inténtalo de nuevo más tarde!"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "La dirección de correo electrónico para la cuenta que estás intentando usar necesita ser activada antes de que puedas iniciar sesión."
@@ -516,14 +526,14 @@ msgstr "Se le ha redirigido aquí porque ha hecho clic en un enlace en uno de nu
 msgid "Sorry, only admin accounts may log in at this time."
 msgstr "Lo sentimos, sólo las cuentas de administrador pueden iniciar sesión en este momento."
 
-msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
-msgstr "No puedes acceder al área de administración porque te falta el permiso de \"Personal\" a pesar de que eres un superusuario. Pídele a otro administrador que te lo conceda."
-
 msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr "La acción que intentaste realizar no está permitida para cuentas de invitado."
 
 msgid "The page you tried to visit is not available for guest accounts."
 msgstr "La página que intentaste visitar no está disponible para cuentas de invitado."
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
+msgstr "No puedes acceder al área de administración porque te falta el permiso de \"Personal\" a pesar de que eres un superusuario. Pídele a otro administrador que te lo conceda."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Se te ha desconectado automáticamente después de estar inactivo durante un tiempo."
@@ -2543,6 +2553,11 @@ msgstr "Eliminar el item reportado..."
 msgid "(The reported item has been deleted.)"
 msgstr "(el item reportado ha sido eliminado)"
 
+#, fuzzy
+#| msgid "User Administration"
+msgid "Edit in User Administration"
+msgstr "Administración de usario"
+
 msgid "This user profile is scheduled for deletion at: "
 msgstr "Este perfil de usario está programado para ser eliminado en:"
 
@@ -3115,6 +3130,17 @@ msgstr "Expander"
 
 msgid "Shrink"
 msgstr "Reducir"
+
+#, fuzzy
+#| msgid "Share on Facebook"
+msgid "Share on Mastodon"
+msgstr "Comparte en Facebook"
+
+msgid "Enter your Mastodon instance you'd like to share to"
+msgstr ""
+
+msgid "Edit your Mastodon instance"
+msgstr ""
 
 msgid "Check the projects/groups where you wish to show this item in. It will be shown in all lists, but will still remain in this group."
 msgstr "Comprueba estos proyectos/grupos donde quieras que se muestre este item. Será mostrado en todas las listas, pero permanecerá en este grupo."
@@ -8309,6 +8335,19 @@ msgstr "Por favor, proporciona también una fecha de finalización"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Asegúrate de que tu nombre no contenga ningún carácter no válido."
 
+#, fuzzy
+#| msgid "Version 1.20.0 released"
+msgid "Version 2.3.0 released"
+msgstr "Versión 1.20.0 lanzada"
+
+msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
+msgstr ""
+
+#, fuzzy
+#| msgid "This update includes several bugfixes:"
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr "Esta actualización incluye varias correcciones de errores:"
+
 msgid "Redesign Update"
 msgstr ""
 
@@ -8584,9 +8623,6 @@ msgstr "No tienes ninguna configuración de tokens de respaldo. Inicia sesión u
 
 msgid "You have successfully disabled two-factor authentication for your account."
 msgstr "Has desactivado con éxito la autenticación de dos factores para tu cuenta."
-
-msgid "Invalid guest token."
-msgstr "Token de invitado no válido."
 
 msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
 msgstr "Hubo un error al intentar redirigirte a la sala de BBB. ¡Por favor contacta a un administrador!"
@@ -9101,12 +9137,6 @@ msgstr "Hemos cancelado tu suscripción a tu correo electrónico \"%(email)s\" d
 
 msgid "A new verification email has been sent."
 msgstr "Un nuevo correo electrónico de verificación ha sido enviado."
-
-msgid "You are currently logged in. The guest access can only be used if you are not logged in."
-msgstr "En este momento has iniciado sesión."
-
-msgid "We could not sign you in as a guest at this time. Please try again later!"
-msgstr "No pudimos iniciar sesión como invitado en este momento. ¡Por favor, inténtalo de nuevo más tarde!"
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "¡Bienvenido! Fuiste invitado a los siguientes proyectos y grupos. Por favor, haz clic en el botón desplegable para aceptar o rechazar la invitación para cada uno de ellos!"
@@ -13826,6 +13856,9 @@ msgstr "Estas seguro de que quieres eliminar este contenedor y todos los objetos
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Estas seguro de que quieres eliminar este objeto?"
+
+#~ msgid "Debug"
+#~ msgstr "Depurar"
 
 #~ msgid "Community"
 #~ msgstr "Comunidad"
