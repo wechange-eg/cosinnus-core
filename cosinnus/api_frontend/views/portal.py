@@ -585,6 +585,7 @@ class PortalSettingsView(APIView):
                 'legalNotice': impressum_url,
             },
             'cosinnusIsPrivatePortal': settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN,
+            'cosinnusIsSignupDisabled': not settings.COSINNUS_USER_SIGNUP_ENABLED,
             'cosinnusCloudEnabled': settings.COSINNUS_CLOUD_ENABLED,
             'cosinnusCloudNextcloudUrl': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
             'signupCredentialsScreenMessage': None,
