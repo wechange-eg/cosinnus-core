@@ -6,11 +6,11 @@
             <li class="media">
                 <a class="pull-left square-date-icon" href="{{ object.get_edit_url }}">
                     <div>{{ object.valid_from|date:"d" }}</div>
-                    <div>{{ object.valid_from|date:"M" }}</div>
+                    <div>{{ object.valid_from|date:"M 'y" }}</div>
                 </a>
                 <a class="pull-left square-date-icon" href="{{ object.get_edit_url }}">
                     <div>{{ object.valid_till|date:"d" }}</div>
-                    <div>{{ object.valid_till|date:"M" }}</div>
+                    <div>{{ object.valid_till|date:"M 'y" }}</div>
                 </a>
                 <a class="pull-right fadedown-clickarea">
                     <i class="fa fa-chevron-down"></i>
