@@ -23,6 +23,7 @@ developmentStatus: stable
 softwareType: "standalone/backend"
 description:
   en:
+    shortDescription: "Main codebase for the WECHANGE suite.  Contains the core functionality and models: user account management, groups/projects, map, search etc."
     longDescription: "Main codebase for the WECHANGE suite. Contains the core functionality and models: user account management, groups/projects, ideas, user-dashboard, map, search, and all base templates, forms, and stylesheets."
 legal:
   license: "AGPL-3.0-or-later"
