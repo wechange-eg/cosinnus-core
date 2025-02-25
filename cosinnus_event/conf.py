@@ -19,3 +19,6 @@ class CosinnusEventConf(AppConf):
     # if True, and a group slug is set for NEWW_EVENTS_GROUP_SLUG,
     # that group will also show all other group/project's public events in its calendar
     EVENTS_GROUP_SHOWS_ALL_PUBLIC_EVENTS = False
+
+    # Hide event list filters (e.g. 'o', 'creator', see EventFilter class).
+    EVENT_LIST_HIDDEN_FILTERS = []

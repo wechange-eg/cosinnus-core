@@ -8,6 +8,7 @@ from builtins import object
 
 from django.utils.translation import gettext_lazy as _
 
+from cosinnus.conf import settings
 from cosinnus.forms.filters import AllObjectsFilter, DropdownChoiceWidget, SelectCreatorWidget
 from cosinnus.views.mixins.filters import CosinnusFilterSet, CosinnusOrderingFilter
 from cosinnus_event.models import Event
@@ -30,6 +31,8 @@ class EventFilter(CosinnusFilterSet):
         default='-from_date',
         widget=DropdownChoiceWidget,
     )
+
+    hidden_filters = settings.COSINNUS_EVENT_EVENT_LIST_HIDDEN_FILTERS
 
     class Meta(object):
         model = Event

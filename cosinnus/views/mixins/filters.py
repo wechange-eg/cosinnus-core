@@ -6,6 +6,7 @@ Created on 30.07.2014
 
 from builtins import str
 
+from django import forms
 from django.http.request import QueryDict
 from django_filters.filters import OrderingFilter
 from django_filters.filterset import FilterSet
@@ -70,6 +71,8 @@ class CosinnusFilterMixin(FilterMixin):
 
 
 class CosinnusFilterSet(FilterSet):
+    hidden_filters = []
+
     def __init__(self, data=None, queryset=None, prefix=None, group=None):
         """Add a reference to the form to the form's widgets"""
         self.group = group
@@ -82,6 +85,10 @@ class CosinnusFilterSet(FilterSet):
             filter_obj.group = group
         for field in list(self.form.fields.values()):
             field.widget.form_instance = self.form
+        # hide selected filters
+        if self.hidden_filters:
+            for filter_name in self.hidden_filters:
+                self.form.fields[filter_name].widget = forms.HiddenInput()
 
 
 class CosinnusOrderingFilter(OrderingFilter):
