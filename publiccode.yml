@@ -1,6 +1,7 @@
 publiccodeYmlVersion: "0.4"
 name: "Cosinnus"
 url: "https://github.com/wechange-eg/cosinnus-core.git"
+releaseDate: "2024-05-12"
 platforms:
   - web
 categories:
@@ -23,6 +24,7 @@ developmentStatus: stable
 softwareType: "standalone/backend"
 description:
   en:
+    genericName: "Cosinnus"
     shortDescription: "Main codebase for the WECHANGE suite.  Contains the core functionality and models: user account management, groups/projects, map, search etc."
     longDescription: "Main codebase for the WECHANGE suite. Contains the core functionality and models: user account management, groups/projects, ideas, user-dashboard, map, search, and all base templates, forms, and stylesheets."
 legal:
