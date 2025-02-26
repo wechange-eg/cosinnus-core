@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 12:37+0100\n"
+"POT-Creation-Date: 2025-02-26 15:17+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4417,6 +4417,12 @@ msgstr ""
 msgid "About the conference"
 msgstr "About the project"
 
+msgid "On-site event"
+msgstr ""
+
+msgid "Online event"
+msgstr ""
+
 #, fuzzy
 msgid "More infos..."
 msgstr "Other Projects"
@@ -4836,6 +4842,9 @@ msgid "Remove location"
 msgstr ""
 
 msgid "Add location"
+msgstr ""
+
+msgid "If no location is specified, the event is interpreted as an online event."
 msgstr ""
 
 msgid "Which Group does the group belong to?"
@@ -9842,6 +9851,15 @@ msgid "Soonest Upcoming"
 msgstr ""
 
 msgid "Newest Created"
+msgstr ""
+
+msgid "Online/On-Site"
+msgstr ""
+
+msgid "Online (has no location)"
+msgstr ""
+
+msgid "On-Site (has location)"
 msgstr ""
 
 msgid "Presenters"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 12:42+0100\n"
+"POT-Creation-Date: 2025-02-26 15:17+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,9 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
-
-msgid "Debug"
-msgstr "Fehlersuche"
 
 msgid "Info"
 msgstr "Information"
@@ -523,14 +520,14 @@ msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E
 msgid "Sorry, only admin accounts may log in at this time."
 msgstr "Zurzeit können sich nur die Portal-Administrator/innen einloggen."
 
-msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
-msgstr "Du kannst nicht auf den Admin-Bereich zugreifen, weil dir die Berechtigung “Mitarbeiter” fehlt, obwohl du ein Superuser bist. Bitte eine/n andere/n Administrator/in, dir dieses Recht zu erteilen."
-
 msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr "Die Aktion, die du versucht hast auszuführen, ist für Gastkonten nicht gestattet."
 
 msgid "The page you tried to visit is not available for guest accounts."
 msgstr "Die Seite die du aufgerufen hast ist für Gastkonten nicht verfügbar."
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
+msgstr "Du kannst nicht auf den Admin-Bereich zugreifen, weil dir die Berechtigung “Mitarbeiter” fehlt, obwohl du ein Superuser bist. Bitte eine/n andere/n Administrator/in, dir dieses Recht zu erteilen."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Du wurdest automatisch abgemeldet, nachdem du für einige Zeit inaktiv warst."
@@ -4267,6 +4264,12 @@ msgstr "Maximale Anzahl von Teilnehmenden"
 msgid "About the conference"
 msgstr "Über die Tagung"
 
+msgid "On-site event"
+msgstr "Präsenz-Veranstaltung"
+
+msgid "Online event"
+msgstr "Online-Veranstaltung"
+
 msgid "More infos..."
 msgstr "Mehr Informationen..."
 
@@ -4334,6 +4337,9 @@ msgstr "Teilnahmeanträge bearbeiten"
 msgid "Invite members of groups/projects to apply..."
 msgstr "Mitglieder/innen von Gruppen/Projekten zur Antragsstellung einladen..."
 
+msgid "Participation application has ended. If you invite members now, they can register despite the deadline having expired."
+msgstr "Die Anmeldefrist ist beendet. Wenn du jetzt mitglieder einlädst, dürfen sich diese trotz abgelaufener Frist nachträglich anmelden."
+
 msgid "Select one or more groups/projects..."
 msgstr "Wähle eine oder mehrere Gruppe/Projekte..."
 
@@ -4351,9 +4357,6 @@ msgstr "Registrierte Benutzer/innen einladen..."
 
 msgid "Invite a member"
 msgstr "Mitglied einladen"
-
-msgid "Participation application has ended. If you invite members now, they can register despite the deadline having expired."
-msgstr "Die Anmeldefrist ist beendet. Wenn du jetzt mitglieder einlädst, dürfen sich diese trotz abgelaufener Frist nachträglich anmelden."
 
 msgid "Enter a user name or email to find users to invite..."
 msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
@@ -4670,6 +4673,9 @@ msgstr "Ort entfernen"
 
 msgid "Add location"
 msgstr "Ort hinzufügen"
+
+msgid "If no location is specified, the event is interpreted as an online event."
+msgstr "Wenn kein Standort angegeben ist, wird die Veranstaltung als Online-Veranstaltung interpretiert."
 
 msgid "Which Group does the group belong to?"
 msgstr "Welcher Gruppe gehört das Projekt an?"
@@ -9790,6 +9796,15 @@ msgstr "Bald stattfindend"
 msgid "Newest Created"
 msgstr "Zuletzt erstellt"
 
+msgid "Online/On-Site"
+msgstr "Online/Präsenz"
+
+msgid "Online (has no location)"
+msgstr "Online (kein Standort)"
+
+msgid "On-Site (has location)"
+msgstr "Präsenz (Standort angegeben)"
+
 msgid "Presenters"
 msgstr "Präsentierende"
 
@@ -13872,6 +13887,9 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
+#~ msgid "Debug"
+#~ msgstr "Fehlersuche"
 
 #~ msgid "Administrators unknown"
 #~ msgstr "Administrator/innen unbekannt"
