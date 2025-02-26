@@ -94,8 +94,11 @@
                       
 	    {% trans "The first uploaded image will be displayed as a wallpaper." as files_legend %}
         {% trans "If you set this, your event will be shown on the map! (if permitted by its visibility settings)" as loc_legend %}
+        {% if SETTINGS.COSINNUS_EVENT_DIFFERENTIATE_ONLINE_AND_ONSITE_EVENTS %}
+            {% captureas loc_legend %}{{ loc_legend }}<br/>{% trans "If no location is specified, the event is interpreted as an online event." %}{% endcaptureas %}
+        {% endif %}
         {% include 'cosinnus/media_tags.html' with show_files=True show_location=True show_topics=True files_label=files_label loc_label=loc_label files_legend=files_legend loc_legend=loc_legend show_visibility=True show_partner_portal_content_type="event" %}
-                        
+
 	</div><!-- content-box -->
 	
 	       
