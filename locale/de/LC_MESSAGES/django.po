@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-26 15:17+0100\n"
+"POT-Creation-Date: 2025-02-27 15:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3297,8 +3297,8 @@ msgstr "Dein Profil"
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
 msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn deine Anmeldung bearbeitet wurde. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-E-Mails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten!"
 
-msgid "Please provide your motivation for applying"
-msgstr "Bitte gib deine Motivation für die Teilnahme an"
+msgid "Please answer the following questions"
+msgstr "Bitte beantworte die folgenden Fragen"
 
 msgid "Optional contact information"
 msgstr "Optionale Kontaktinformationen"
@@ -3536,8 +3536,8 @@ msgstr "Dies ist kein forciertes Limit, sondern dient nur zur Orientierung für 
 msgid "(no limit selected)"
 msgstr "(keine Begrenzung ausgewählt)"
 
-msgid "Require applicants to answer questions about their motivation for applying"
-msgstr "Antragsstellende müssen Fragen über ihre Motiviation für die Teilnahme beantworten"
+msgid "Applicants must answer questions about participation"
+msgstr "Antragsstellende müssen Fragen zur Teilnahme beantworten"
 
 msgid "Provide a list of questions that the applicants should answer."
 msgstr "Gib Fragen an, die Antragsstellende beantworten müssen."
@@ -13887,6 +13887,9 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
+#~ msgid "Please provide your motivation for applying"
+#~ msgstr "Bitte gib deine Motivation für die Teilnahme an"
 
 #~ msgid "Debug"
 #~ msgstr "Fehlersuche"
