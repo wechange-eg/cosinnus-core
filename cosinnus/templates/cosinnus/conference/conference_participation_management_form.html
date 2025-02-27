@@ -47,16 +47,28 @@
             {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label legend=limits_legend placeholder=limits_placeholder large_field=True %}
             
             <div class="regular-space"></div>
-            {% trans "Require applicants to answer questions about their motivation for applying" as information_checkbox_label %}
+            {% trans "Applicants must answer questions about participation" as information_checkbox_label %}
             {% include 'cosinnus/fields/checkbox_field.html' with field=form.information_field_enabled label=information_checkbox_label checkbox_label=information_checkbox_label %}
 
-            {% captureas motivation_questions_legend %}
-                {% trans "Provide a list of questions that the applicants should answer." %}
-                {% blocktrans with other_option=information_checkbox_label %}Only applicable if "{{ other_option }}" is enabled.{% endblocktrans %}
-            {% endcaptureas %}
-            {% trans "Remove question" as  question_rm_label %}
-            {% trans "Add question" as question_add_label %}
-            {% include 'cosinnus/fields/inlineform_field.html' with inline_form=motivation_questions_formset legend=motivation_questions_legend content_template='cosinnus/conference/motivation_question_inline.html' unique_id='motivation-questions' add_button_label=question_add_label remove_button_label=question_rm_label %}
+            <div id="motivation_questions" {% if not form.information_field_enabled.value %}style="display: none"{% endif %}>
+                {% captureas motivation_questions_legend %}
+                    {% trans "Provide a list of questions that the applicants should answer." %}
+                    {% blocktrans with other_option=information_checkbox_label %}Only applicable if "{{ other_option }}" is enabled.{% endblocktrans %}
+                {% endcaptureas %}
+                {% trans "Remove question" as  question_rm_label %}
+                {% trans "Add question" as question_add_label %}
+                {% include 'cosinnus/fields/inlineform_field.html' with inline_form=motivation_questions_formset legend=motivation_questions_legend content_template='cosinnus/conference/motivation_question_inline.html' unique_id='motivation-questions' add_button_label=question_add_label remove_button_label=question_rm_label %}
+            </div>
+
+            <script type="text/javascript">
+                {# hide and show motivation questions depending on the information_field_enabled setting #}
+                $("#id_information_field_enabled").on("click", function(){
+                    if($("#id_information_field_enabled").is(':checked'))
+                        $("#motivation_questions").show('slow');
+                    else
+                        $("#motivation_questions").hide('slow');
+                });
+            </script>
 
             {% if form.application_options %}
                 {% trans "Options for participation" as options_label %}

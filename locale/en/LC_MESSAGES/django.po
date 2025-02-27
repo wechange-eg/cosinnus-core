@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-26 15:17+0100\n"
+"POT-Creation-Date: 2025-02-27 15:15+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3411,7 +3411,7 @@ msgstr ""
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
 msgstr ""
 
-msgid "Please provide your motivation for applying"
+msgid "Please answer the following questions"
 msgstr ""
 
 msgid "Optional contact information"
@@ -3646,7 +3646,7 @@ msgstr ""
 msgid "(no limit selected)"
 msgstr ""
 
-msgid "Require applicants to answer questions about their motivation for applying"
+msgid "Applicants must answer questions about participation"
 msgstr ""
 
 msgid "Provide a list of questions that the applicants should answer."
