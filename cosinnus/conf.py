@@ -1276,6 +1276,10 @@ class CosinnusConf(AppConf):
 
     GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED = False
 
+    # If enabled the full dashboard header text is shown, otherwise the height is limited and can be expaneded with
+    # the "more" link.
+    GROUP_DASHBOARD_HEADER_TEXT_EXPANDED = False
+
     # enable e-mail downloads of newsletter-enabled users in the administration area
     # if enabled, this allows all portal-admins to download user emails, this might be
     # *VERY* risky, so use cautiously
