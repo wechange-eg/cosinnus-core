@@ -855,6 +855,7 @@ class ParticipationManagement(TranslatableFormsetJsonFieldMixin, models.Model):
     for the application options for that conference."""
 
     participants_limit = models.IntegerField(blank=True, null=True)
+    application_enabled = models.BooleanField(default=True)
     application_start = models.DateTimeField(blank=True, null=True)
     application_end = models.DateTimeField(blank=True, null=True)
     application_conditions = models.TextField(blank=True)
@@ -895,9 +896,13 @@ class ParticipationManagement(TranslatableFormsetJsonFieldMixin, models.Model):
 
     @property
     def applications_are_active(self):
-        if self.application_start and self.application_end:
-            now = timezone.now()
-            return now >= self.application_start and now <= self.application_end
+        if not self.application_enabled:
+            return False
+        now = timezone.now()
+        application_end = self.application_end if self.application_end else self.conference.to_date
+        application_start = self.application_start if self.application_start else now
+        if application_start and application_end:
+            return now >= application_start and now <= application_end
         return True
 
     @property
@@ -921,10 +926,12 @@ class ParticipationManagement(TranslatableFormsetJsonFieldMixin, models.Model):
             return _('Participation applications are open.')
         else:
             now = timezone.now()
-            if now < self.application_start:
+            if self.application_start and now < self.application_start:
                 return _('Participation application has not started yet.')
-            elif now > self.application_end:
+            elif self.application_end and now > self.application_end:
                 return _('Participation application is over.')
+            elif self.conference.to_date and now > self.conference.to_date:
+                return _('The conference has ended.')
 
     @property
     def has_conditions(self):
