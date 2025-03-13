@@ -649,7 +649,10 @@ def _make_ocs_call(relative_url, post_data={}, headers=HEADERS, session=None, pr
 
 
 def apply_nextcloud_settings(print_to_console=False):
-    """Applies configured settings from conf `COSINNUS_CLOUD_NEXTCLOUD_SETTINGS` via OCS"""
+    """
+    Applies configured settings from conf `COSINNUS_CLOUD_NEXTCLOUD_SETTINGS` via OCS
+    DEPRECATED: now handled by Ansible.
+    """
 
     # default user quota
     _make_ocs_call(

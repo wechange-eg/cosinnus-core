@@ -1238,6 +1238,7 @@ class CosinnusConf(AppConf):
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
 
     # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
+    # DEPRECATED: now handled by Ansible.
     CLOUD_NEXTCLOUD_SETTINGS = {
         'DEFAULT_USER_QUOTA': '100 MB',  # in human readable nextcloud format
         'ALLOW_PUBLIC_UPLOADS': 'no',  # "yes" or "no"
