@@ -282,11 +282,14 @@ class ExchangeDipasSerializer(ExchangeSerializerMixin, serializers.Serializer):
                 self.location_api_data = json.loads(response.content)
             except Exception as e:
                 logger.warning('ExchangeDipasSerializer: Could not get location data.', extra={'exception': e})
-        for project_location_data in self.location_api_data.get('features', []):
-            if project_location_data.get('properties', {}).get('id') == project_id:
-                self.location_api_data = project_location_data
-                break
-        return self.location_api_data
+
+        project_location_data = None
+        if self.location_api_data:
+            for location_data in self.location_api_data.get('features', []):
+                if location_data.get('properties', {}).get('id') == project_id:
+                    project_location_data = location_data
+                    break
+        return project_location_data
 
     def _get_location_coordinates(self, obj):
         """Get the location coordinates from the location API data."""
