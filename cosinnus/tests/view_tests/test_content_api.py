@@ -1,4 +1,5 @@
 import re
+from urllib.parse import urlencode
 
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
@@ -7,9 +8,11 @@ from django.urls import reverse
 from rest_framework.test import APILiveServerTestCase
 
 from cosinnus.conf import settings
+from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.tests.view_tests.views import MainContentFormTestView
 from cosinnus.utils.urls import group_aware_reverse
 
 User = get_user_model()
@@ -172,3 +175,33 @@ class MainContentViewTest(APILiveServerTestCase):
 
         # check main_menu
         self.assertEqual(response.data['main_menu'], {'label': 'Go To...', 'icon': 'fa-arrow-right', 'image': None})
+
+    def test_form_processing(self):
+        """Basic tests for main content form processing using a dedicated test form view with a required field."""
+        form_url = reverse('cosinnus:main-content-form-test')
+        response = self.client.get(self.api_url + f'?url={form_url}')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            '<input id="id_test_field" name="test_field" required="" type="text"/>', response.data['content_html']
+        )
+
+        # post invalid data redirects to cached form response with the form errors
+        data = urlencode({'test_field': ''})
+        response = self.client.post(form_url, data, content_type='application/x-www-form-urlencoded')
+        self.assertEqual(response.status_code, 302)
+        redirect_url = response.url
+        self.assertIn(form_url, redirect_url)
+        self.assertIn(FrontendMiddleware.cached_content_key, redirect_url)
+        encoded_url_param = urlencode({'url': redirect_url})
+        response = self.client.get(self.api_url + f'?{encoded_url_param}')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            '<ul class="errorlist"><li>test_field<ul class="errorlist"><li>This field is required.</li></ul></li></ul>',
+            response.data['content_html'],
+        )
+
+        # post valid data redirects to the success url of the form test view
+        data = urlencode({'test_field': 'test'})
+        response = self.client.post(form_url, data, content_type='application/x-www-form-urlencoded')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, MainContentFormTestView.success_url)

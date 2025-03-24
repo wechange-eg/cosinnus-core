@@ -797,8 +797,9 @@ urlpatterns += [
 
 
 if getattr(settings, 'TESTING', False):
-    from cosinnus.tests.view_tests.views import main_content_test_view
+    from cosinnus.tests.view_tests.views import main_content_form_test_view, main_content_test_view
 
     urlpatterns += [
-        path('main-content-test-view/', main_content_test_view, name='main-content-test'),
+        path('test/main-content-test-view/', main_content_test_view, name='main-content-test'),
+        path('test/main-content-form-test-view/', main_content_form_test_view, name='main-content-form-test'),
     ]
