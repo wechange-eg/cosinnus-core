@@ -1555,39 +1555,38 @@ def convert_email_group_invites(sender, profile, **kwargs):
     user = profile.user
     invites = CosinnusUnregisterdUserGroupInvite.objects.filter(email__iexact=get_newly_registered_user_email(user))
     if invites:
-        with transaction.atomic():
-            other_invites = []
-            for invite in invites:
-                # skip inviting to auto-invite groups, users are in them automatically
-                if invite.group.slug in get_default_user_group_slugs():
-                    continue
-                # check if the inviting user may invite directly
-                if invite.invited_by_id in invite.group.admins:
-                    CosinnusGroupMembership.objects.get_or_create(
-                        group=invite.group,
-                        user=user,
-                        defaults={
-                            'status': MEMBERSHIP_INVITED_PENDING,
-                        },
-                    )
-                else:
-                    other_invites.append(invite.group.id)
-            # trigger translation indexing
-            _(
-                'Welcome! You were invited to the following projects and groups. Please click the dropdown button to '
-                'accept or decline the invitation for each of them!'
-            )
-            msg = (
-                'Welcome! You were invited to the following projects and groups. Please click the dropdown button to '
-                'accept or decline the invitation for each of them!'
-            )
-            # create a user-settings-entry
-            if other_invites:
-                profile.settings['group_recruits'] = other_invites
-            profile.add_redirect_on_next_page(reverse('cosinnus:invitations'), msg)
-            # we actually do not delete the invites here yet, for many reasons such as re-registers when email
-            # verification didn't work the invites will be deleted upon first login using the
-            # `user_logged_in_first_time` signal
+        other_invites = []
+        for invite in invites:
+            # skip inviting to auto-invite groups, users are in them automatically
+            if invite.group.slug in get_default_user_group_slugs():
+                continue
+            # check if the inviting user may invite directly
+            if invite.invited_by_id in invite.group.admins:
+                CosinnusGroupMembership.objects.get_or_create(
+                    group=invite.group,
+                    user=user,
+                    defaults={
+                        'status': MEMBERSHIP_INVITED_PENDING,
+                    },
+                )
+            else:
+                other_invites.append(invite.group.id)
+        # trigger translation indexing
+        _(
+            'Welcome! You were invited to the following projects and groups. Please click the dropdown button to '
+            'accept or decline the invitation for each of them!'
+        )
+        msg = (
+            'Welcome! You were invited to the following projects and groups. Please click the dropdown button to '
+            'accept or decline the invitation for each of them!'
+        )
+        # create a user-settings-entry
+        if other_invites:
+            profile.settings['group_recruits'] = other_invites
+        profile.add_redirect_on_next_page(reverse('cosinnus:invitations'), msg)
+        # we actually do not delete the invites here yet, for many reasons such as re-registers when email
+        # verification didn't work the invites will be deleted upon first login using the
+        # `user_logged_in_first_time` signal
 
 
 @receiver(userprofile_created)
