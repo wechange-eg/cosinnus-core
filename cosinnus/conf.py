@@ -65,6 +65,7 @@ class CosinnusConf(AppConf):
         '/favicon.ico',
         '/robots.txt',
         '/o/',
+        '/cloud/oauth2/profile/',
         '/group/forum/cloud/oauth2/',
         f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
         '/account/verify_email/',

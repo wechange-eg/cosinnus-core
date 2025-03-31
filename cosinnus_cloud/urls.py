@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import re_path
+from django.urls import path, re_path
 
 from cosinnus_cloud import views
 
 app_name = 'cloud'
 
-cosinnus_root_patterns = []
+cosinnus_root_patterns = [
+    path('cloud/oauth2/profile/', views.oauth_view, name='cloud-oath2-profile'),
+]
 
 cosinnus_group_patterns = [
     re_path(r'^stub/$', views.cloud_stub_view, name='stub'),
