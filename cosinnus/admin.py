@@ -15,7 +15,7 @@ from django.contrib.auth.models import Group
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.exceptions import ValidationError
 from django.db.models import JSONField, Q
-from django.db.models.signals import post_save
+from django.db.models.signals import post_delete, post_save
 from django.utils import translation
 from django.utils.crypto import get_random_string
 from django.utils.safestring import mark_safe
@@ -1092,6 +1092,8 @@ class UserAdmin(DjangoUserAdmin):
                             media_tag.visibility = BaseTagObject.VISIBILITY_USER
                             media_tag.save()
                             hidden_content += 1
+                        # trigger the post_delete signal on the object, so external service relays will be removed
+                        post_delete.send(sender=model_to_hide, instance=object_to_hide, origin=object_to_hide)
                         # remove object from search index (always, just to be sure)
                         object_to_hide.remove_index()
             return deactivated_groups, hidden_content
