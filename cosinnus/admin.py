@@ -1085,8 +1085,12 @@ class UserAdmin(DjangoUserAdmin):
             # taggable objects (notes, events, ...) and ideas
             for model_to_hide in models_to_hide_content:
                 for object_to_hide in model_to_hide.objects.filter(creator=user):
-                    # set visibility to user-only
-                    if hasattr(object_to_hide, 'media_tag') and getattr(object_to_hide, 'media_tag', None):
+                    if model_to_hide == CosinnusIdea:
+                        # delete ideas directly (because they cannot be hidden as "only me")
+                        object_to_hide.delete()
+                    elif hasattr(object_to_hide, 'media_tag') and getattr(object_to_hide, 'media_tag', None):
+                        # set visibility to user-only for basetaggablemodels, let deletion be handled by the
+                        # 30-day later user cleanup. this way admin errors aren't immediately fatal.
                         media_tag = object_to_hide.media_tag
                         if not media_tag.visibility == BaseTagObject.VISIBILITY_USER:
                             media_tag.visibility = BaseTagObject.VISIBILITY_USER
@@ -1094,8 +1098,8 @@ class UserAdmin(DjangoUserAdmin):
                             hidden_content += 1
                         # trigger the post_delete signal on the object, so external service relays will be removed
                         post_delete.send(sender=model_to_hide, instance=object_to_hide, origin=object_to_hide)
-                        # remove object from search index (always, just to be sure)
-                        object_to_hide.remove_index()
+                    # remove object from search index (always, just to be sure)
+                    object_to_hide.remove_index()
             return deactivated_groups, hidden_content
 
         user_count = 0
