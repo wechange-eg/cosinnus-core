@@ -5412,7 +5412,7 @@ msgstr ""
 
 #, python-format
 msgid "Edit “%(team_name)s”"
-msgstr "Edit project “%(team_name)s”"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
