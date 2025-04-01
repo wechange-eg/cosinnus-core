@@ -9,7 +9,10 @@ const button = document.querySelector('.mastodon-share');
 
 // refresh the link with the instance name
 const refreshlink = (instance) => {
-    button.href = `https://${instance}/share?text=${encodeURIComponent(document.title)}%20${encodeURIComponent(location.href)}`;
+    if (!instance.startsWith('https://')) {
+        instance = 'https://' + instance;
+    }
+    button.href = `${instance}/share?text=${encodeURIComponent(document.title)}%20${encodeURIComponent(location.href)}`;
 }
 
 // got it? Let's go! 

@@ -223,7 +223,7 @@ msgid "%d Users were made Nextcloud admins."
 msgstr "%d Benutzer/innen wurden zu Nextcloud-Admins gemacht."
 
 msgid "Nextcloud: Make user Nextcloud admin"
-msgstr "Rocket: Benutzer/in zum Nextcloud-Admin machen"
+msgstr "Nextcloud: Benutzer/in zum Nextcloud-Admin machen"
 
 msgid "Recipients Count"
 msgstr "Anzahl der Empfänger"
