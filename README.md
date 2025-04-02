@@ -7,7 +7,7 @@ This is the main codebase of the backend (django) and legacy frontend code of we
 
 You'd like to contribute a bug fix or feature for wechange? Great! These are the basic steps on how to do so:
 
-1. Install a basic wechange portal for local development using the guide here: https://git.wechange.de/gl/code/portals/template-portal
+1. Install a basic wechange portal for local development using the guide here: https://git.wechange.de/gl/code/template-portal
 2. Make changes in the `cosinnus-core` (https://git.wechange.de/gl/code/cosinnus) repository on your local machine that you set up in Step 1.
 3. Make sure you have thoroughly tested your changes and that your code quality is sufficient. (contribution guidelines will follow soon)
 4. Push your changes to a feature branch in the `cosinnus-core` repository. This branch should ideally be up-to-date with the **Bleeding-edge development branch**.
