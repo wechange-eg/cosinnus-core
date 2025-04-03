@@ -1,5 +1,8 @@
+import hashlib
 import json
 import logging
+import os
+from tempfile import TemporaryFile
 
 import requests
 from dateutil import parser
@@ -9,10 +12,20 @@ from django.utils.html import escape, strip_tags
 from rest_framework import serializers
 
 from cosinnus.conf import settings
+from cosinnus.utils.files import get_cosinnus_media_file_folder, image_thumbnail
 
 logger = logging.getLogger(__name__)
 
 TOPIC_CHOICES_MAP = {v: k for k, v in settings.COSINNUS_TOPIC_CHOICES}
+
+# Path under cosinnus media for thumbnails created form external images
+EXTERNAL_IMAGE_THUMBNAIL_PATH = 'exchange_external_thumbnails/'
+
+# Thumbnail size as used by the map tiles
+THUMBNAIL_SIZE = {
+    'small': (500, 275),
+    'large': (1000, 350),
+}
 
 
 class ExchangeSerializerMixin(serializers.Serializer):
@@ -247,14 +260,17 @@ class ExchangeDipasSerializer(ExchangeSerializerMixin, serializers.Serializer):
 
     # Storage for additional API data
     location_api_data = None
-    images = None
+    detail_data = None
     descriptions = None
+    image_thumbnails = None
 
     def __init__(self, *args, **kwargs):
         self.location_api_url = kwargs.pop('location_api_url')
         super().__init__(*args, **kwargs)
+        self.location_api_data = None
         self.detail_data = {}
         self.descriptions = {}
+        self.image_thumbnails = {}
 
     def _get_project_base_url(self, obj):
         """Returns the base project URL for the additional APIs."""
@@ -351,11 +367,56 @@ class ExchangeDipasSerializer(ExchangeSerializerMixin, serializers.Serializer):
                 image_url = 'https:' + image_url
         return image_url
 
+    def _get_remote_image_thumbnails(self, image_url):
+        """Create thumbnails for a remote image."""
+        if image_url not in self.image_thumbnails:
+            thumbnails = {}
+            media_path = get_cosinnus_media_file_folder()
+            image_filename = image_url.split('/')[-1]
+            base_name, ext = os.path.splitext(image_filename)
+            for size in THUMBNAIL_SIZE:
+                # compute thumbnail file properties based on the image url and size hash
+                image_url_hash = hashlib.md5(f'{image_url}-{size}'.encode()).hexdigest()
+                file_name = image_url_hash + ext.lower()
+                relative_path = os.path.join(media_path, EXTERNAL_IMAGE_THUMBNAIL_PATH, file_name)
+                thumbnails[size] = {
+                    'path': relative_path,
+                    'file': os.path.join(settings.MEDIA_ROOT, relative_path),
+                    'url': os.path.join(settings.MEDIA_URL, relative_path),
+                }
+
+            if not all(os.path.exists(thumbnails[size]['file']) for size in THUMBNAIL_SIZE):
+                # thumbnails for the image do not exist
+                try:
+                    # download image and use a temporary file to generate thumbnails
+                    image_data = requests.get(image_url)
+                    with TemporaryFile() as tmp_file:
+                        tmp_file.write(image_data.content)
+                        tmp_file.flush()
+                        for size in THUMBNAIL_SIZE:
+                            thumbnail = image_thumbnail(tmp_file, THUMBNAIL_SIZE[size], thumbnails[size]['path'])
+                            os.rename(thumbnail.path, thumbnails[size]['file'])
+                except Exception as e:
+                    logger.warning(
+                        'ExchangeDipasSerializer: Could not create image thumbnails.', extra={'exception': e}
+                    )
+            self.image_thumbnails[image_url] = {size: thumbnails[size]['url'] for size in THUMBNAIL_SIZE}
+        return self.image_thumbnails.get(image_url, {})
+
+    def _get_image_thumbnail_url(self, obj, size):
+        thumbnail_url = ''
+        image_url = self._get_image_url(obj)
+        if image_url:
+            image_thumbnails = self._get_remote_image_thumbnails(image_url)
+            if image_thumbnails:
+                thumbnail_url = image_thumbnails.get(size, '')
+        return thumbnail_url
+
     def get_background_image_small_url(self, obj):
-        return self._get_image_url(obj)
+        return self._get_image_thumbnail_url(obj, 'small')
 
     def get_background_image_large_url(self, obj):
-        return self._get_image_url(obj)
+        return self._get_image_thumbnail_url(obj, 'large')
 
     def get_description(self, obj):
         """Get description as text"""
