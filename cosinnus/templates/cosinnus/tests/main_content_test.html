@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Test-Title</title>
+        {# test meta tags #}
+        <meta charset="utf-8"/>
+        {#  test vendor scripts #}
+        <script src="{% static "js/vendor/test.js" %}"></script>
+        {# test non-vendedor script #}
+        <script src="{% static 'js/cosinnus.js' %}"></script>
+        {# test script constants #}
+        <script type="text/javascript" class="v3-constants">
+            var constant;
+        </script>
+        {# test head inline script #}
+        <script type="text/javascript">
+            var head_script;
+        </script>
+        {# test css #}
+        <link href="{% static 'css/test.css' %}" rel="stylesheet">
+        {# test style #}
+        <style>
+            .test_style {}
+        </style>
+    </head>
+    <body>
+        <div class="x-v3-container">
+            {# test leftnav #}
+            {# FIME test active #}
+            <div class="x-v3-leftnav">
+                <div class="x-v3-leftnav-appsmenu">
+                    <ul>
+                        <li>
+                            <a href="/appsmenu-link/">
+                                <i class="icon1"></i>
+                                Appsmenu Link
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="x-v3-leftnav-buttons">
+                    <button type="button" href="/leftnav-button-link/">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="icon2"></i>
+                                </span>
+                                <span class="pull-right">
+                                    <i class="fa fa-caret-right"></i>
+                                </span>
+                                <div class="media-body">
+                                    Leftnav Button
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </div>
+            </div>
+            {# test content #}
+            <div class="x-v3-content">
+                Test-Content
+                {# test inline script #}
+                <script type="text/javascript">
+                    var body_script;
+                </script>
+            </div>
+        </div>
+    </body>
+    <div class="x-v3-footer">
+        Test-Footer
+    </div>
+</html>
