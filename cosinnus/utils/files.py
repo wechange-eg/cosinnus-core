@@ -148,14 +148,15 @@ def append_string_to_filename(file_path, string_to_append):
     return os.path.join(dir_name, '%s_%s%s' % (file_root, string_to_append, file_ext))
 
 
-def image_thumbnail(image, size):
+def image_thumbnail(image, size, relative_name=None):
     """Returns the thumbnail to a given image field in the required size, or None if no image is provided
     @param size: Tuple of sizes, e.g. (80, 80)
+    @param relative_name: Required for thumbnails of file-like objects, e.g. image in a TemporaryFile
     """
     if not image:
         return None
 
-    thumbnailer = get_thumbnailer(image)
+    thumbnailer = get_thumbnailer(image, relative_name=relative_name)
     try:
         thumbnail = thumbnailer.get_thumbnail(
             {
@@ -170,11 +171,13 @@ def image_thumbnail(image, size):
     return None
 
 
-def image_thumbnail_url(image, size):
+def image_thumbnail_url(image, size, relative_name=None):
     """Returns the static image URL for a thumbnail to a given image field in the required size,
     or None if no image is provided
-    @param size: Tuple of sizes, e.g. (80, 80)"""
-    thumbnail = image_thumbnail(image, size)
+    @param size: Tuple of sizes, e.g. (80, 80)
+    @param relative_name: Required for thumbnails of file-like objects, e.g. image in a TemporaryFile
+    """
+    thumbnail = image_thumbnail(image, size, relative_name=relative_name)
     return thumbnail.url if thumbnail else None
 
 
