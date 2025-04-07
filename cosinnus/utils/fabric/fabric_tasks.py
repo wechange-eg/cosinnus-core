@@ -239,6 +239,14 @@ def start(_ctx):
 
 
 @task
+def status(_ctx):
+    """Start the django service"""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run(env.status_command)
+
+
+@task
 def restartmemcached(_ctx):
     """Restart the django service"""
     env = get_env()

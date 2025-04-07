@@ -1,6 +1,8 @@
 import logging
 
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.template.defaultfilters import capfirst
+from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import empty as drf_empty
@@ -40,6 +42,9 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
     # will instead become serializer fields that are required=False but may not be empty
     all_fields_optional = False
 
+    # set to true if this is used only for signup and should run unique checks on profile, ignoring own instance pk's
+    used_only_for_signup = False
+
     def __init__(self, *args, **kwargs):
         """Add serializer field for each dynamic field"""
         for field_name, field_options in self.DYNAMIC_FIELD_SETTINGS.items():
@@ -47,6 +52,17 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                 field_options, self.filter_included_fields_by_option_name, False
             ):
                 continue
+
+            # Handle required option for fields that depend on a managed tag.
+            if (
+                field_options.required
+                and field_options.display_required_managed_tags_slug
+                and 'data' in kwargs
+                and 'managed_tags' in kwargs['data']
+                and field_options.display_required_managed_tags_slug not in kwargs['data']['managed_tags']
+            ):
+                field_options.required = False
+
             # dynamic fields are of type (drf serializer) CharField, BooleanField or IntergerField, validation will take
             # place manually
             if field_options.multiple:
@@ -111,6 +127,27 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
 
         super().__init__(*args, **kwargs)
 
+    def _validate_unique_dynamic_field(self, dynamic_field_name, dynamic_field_value):
+        """Perform unique validation for a given field and field value of the dynamic userprofile fields.
+        This does NOT take into account the own userprofile!
+        @return an Error message if there was a unique error, None otherwise"""
+        from cosinnus.models.profile import get_user_profile_model
+
+        model_class = get_user_profile_model()
+        # ignore empty values
+        if dynamic_field_value is None or dynamic_field_value == '':
+            return None
+        # build lookup QS for the dynamic field
+        lookup_kwargs = {f'dynamic_fields__{dynamic_field_name}': dynamic_field_value}
+        qs = model_class._default_manager.filter(**lookup_kwargs)
+        # another instance with the same dynamic field value exists, return a validation error
+        if qs.exists():
+            return _('%(model_name)s with this %(field_name)s already exists.') % {
+                'model_name': capfirst(model_class._meta.verbose_name),
+                'field_name': dynamic_field_name,
+            }
+        return None
+
     def validate(self, attrs):
         """Validate dynamic fields: we build a temporary formfield and use it to
         run validation with the given data"""
@@ -138,17 +175,19 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
             try:
                 field_value = formfield.to_python(field_value)
                 # skip non-required, empty fields
-                if (
-                    not field_value
-                    and not isinstance(field_value, bool)
-                    and (
-                        not field_options.required
-                        or (self.all_fields_optional and field_name not in dynamic_field_attr_dict)
-                    )
+                emtpy_field_values = [None, '', False, []]
+                if field_value in emtpy_field_values and (
+                    not field_options.required
+                    or (self.all_fields_optional and field_name not in dynamic_field_attr_dict)
                 ):
                     continue
                 formfield.validate(field_value)
                 formfield.run_validators(field_value)
+                # run unique validation (custom, to catch errors before a profile save - important for user creation)
+                if field_options.unique and self.used_only_for_signup:
+                    unique_error = self._validate_unique_dynamic_field(field_name, field_value)
+                    if unique_error:
+                        errors[field_name] = unique_error
             except ValidationError as exc:
                 errors[field_name] = exc.detail
             except DjangoValidationError as exc:
@@ -207,5 +246,13 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                 profile_changed = True
                 userprofile.translations['dynamic_fields'] = dynamic_field_translations
 
-        if profile_changed and save:
-            userprofile.save()
+        if profile_changed:
+            try:
+                if save:
+                    userprofile.save()
+                else:
+                    # if we aren't saving yet, still run unique validation
+                    userprofile.validate_unique()
+            except DjangoValidationError as exc:
+                errors = {'field_name': get_error_detail(exc)}
+                raise ValidationError(errors)

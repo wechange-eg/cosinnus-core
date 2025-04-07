@@ -1,5 +1,4 @@
-<button type="button" class="btn w100 btn-{% if active %}extra-{% endif %}emphasized {{ extra_classes }}" {% if href %}href="{{ href }}"{% endif %} {% if extra_atts %}{{ extra_atts }}{% endif %}>
-{% comment %} <button type="button" class="btn w100 btn{% if active %}-extra{% endif %}-emphasized {{ extra_classes }}" href="{{ href }}"> {% endcomment %}
+<button type="button" class="btn w100 btn-{% if active %}extra-{% endif %}emphasized {{ extra_classes }}" {% if href %}href="{{ href }}"{% endif %} {% if icon %}data-v3-icon="{{ icon }}"{% endif %} {% if extra_atts %}{{ extra_atts }}{% endif %}>
     <ul class="media-list">
         <li class="media">
             <span class="pull-left">

@@ -172,7 +172,7 @@
         		{% trans "Generate a new captcha" %}
         	</a>
     	{% endcaptureas %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.captcha legend=captcha_legend label=captcha_label large_field=True field_classes="captcha-field" %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.captcha legend=captcha_legend placeholder=captcha_label label=captcha_label large_field=True  field_classes="captcha-field" %}
         
         <script>
         	$('.refresh-captcha').click(function () {

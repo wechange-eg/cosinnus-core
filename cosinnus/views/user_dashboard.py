@@ -200,6 +200,16 @@ class MyGroupsClusteredMixin(object):
             if society.slug in get_default_user_group_slugs():
                 continue
 
+            # if enabled in v3 the managed tags groups are part of community spaces and can be skipped
+            if (
+                settings.COSINNUS_V3_FRONTEND_ENABLED
+                and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
+            ):
+                managed_tags = user.cosinnus_profile.get_managed_tags()
+                paired_groups = [tag.paired_group for tag in managed_tags if tag.paired_group]
+                if society in paired_groups:
+                    continue
+
             # the most recent visit time to any project or society in the cluster
             most_recent_dt = group_last_visited.get(society.id, default_date)
             items_projects = []

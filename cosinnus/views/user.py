@@ -116,12 +116,20 @@ logger = logging.getLogger('cosinnus')
 USER_MODEL = get_user_model()
 
 
-def email_portal_admins(subject, template, data):
+def email_portal_admins(subject, template, data, user=None):
     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
-    text = textfield(render_to_string('cosinnus/mail/user_register_notification.html', data))
+    text = textfield(render_to_string(template, data))
 
-    for user in admins:
-        send_html_mail_threaded(user, subject, text)
+    for admin in admins:
+        # If managed tags are enabled consider only admins that have a common managed tag with the user
+        if user and settings.COSINNUS_MANAGED_TAGS_ENABLED:
+            user_managed_tags = set(user.cosinnus_profile.get_managed_tag_ids())
+            admin_managed_tags = set(admin.cosinnus_profile.get_managed_tag_ids())
+            common_managed_tags = user_managed_tags.intersection(admin_managed_tags)
+            if not common_managed_tags:
+                continue
+
+        send_html_mail_threaded(admin, subject, text)
 
     return
 
@@ -193,7 +201,53 @@ class PortalAdminListView(UserListView):
 portal_admin_list = PortalAdminListView.as_view()
 
 
-class SetInitialPasswordView(TemplateView):
+class SetInitialPasswordMixin:
+    """Mixin for set initial password processing."""
+
+    def prepare_initial_profile(self, user, tos_accepted=False):
+        """Should be called after the initial password is set."""
+        profile = user.cosinnus_profile
+        profile_needs_to_saved = False
+
+        try:
+            # removing the key from the cosinnus_profile settings to prevent double usage
+            profile.settings.pop(PROFILE_SETTING_PASSWORD_NOT_SET)
+            profile_needs_to_saved = True
+        except KeyError as e:
+            logger.error(
+                (
+                    'Error while deleting key %s from cosinnus_profile settings of user %s. This key is '
+                    'supposed to be present. Password was set anyway'
+                ),
+                extra={'exception': e, 'reason': str(e)},
+            )
+
+        # setting your password automatically validates your email, as you have received the mail to your address
+        if not profile.email_verified:
+            profile.email_verified = True
+            profile_needs_to_saved = True
+
+        if tos_accepted:
+            # set the user's tos_accepted flag to true and date to now
+            accept_user_tos_for_portal(user, profile=profile, save=False)
+            profile_needs_to_saved = True
+
+        # add redirect to the welcome-settings page, with priority so that it is shown as first one
+        if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
+            profile.add_redirect_on_next_page(
+                redirect_with_next(reverse('cosinnus:welcome-settings'), self.request),
+                message=None,
+                priority=True,
+            )
+        elif profile_needs_to_saved:
+            # if a redirect has been added, the profile has been saved already. otherwise, save it here
+            profile.save()
+
+        # send welcome email if enabled
+        _send_user_welcome_email_if_enabled(user)
+
+
+class SetInitialPasswordView(SetInitialPasswordMixin, TemplateView):
     """View that is used to set an initial password for a user, who was created without a initial password.
     Cosinnus.middleware.set_password.SetPasswordMiddleware will redirect every request for a user without an initial
     password to that view.
@@ -206,6 +260,10 @@ class SetInitialPasswordView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         token = kwargs['token'] if kwargs.get('token', '') else request.COOKIES.get(PROFILE_SETTING_PASSWORD_NOT_SET)
+
+        if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # in v3 the /set-password/ page handles setting the initial password
+            return redirect(f'/set-password/{token}/')
 
         user = get_user_from_set_password_token(token)
 
@@ -240,41 +298,8 @@ class SetInitialPasswordView(TemplateView):
                     ),
                 )
 
-                profile = user.cosinnus_profile
-                profile_needs_to_saved = False
-
-                try:
-                    # removing the key from the cosinnus_profile settings to prevent double usage
-                    profile.settings.pop(PROFILE_SETTING_PASSWORD_NOT_SET)
-                    profile_needs_to_saved = True
-                except KeyError as e:
-                    logger.error(
-                        (
-                            'Error while deleting key %s from cosinnus_profile settings of user %s. This key is '
-                            'supposed to be present. Password was set anyway'
-                        ),
-                        extra={'exception': e, 'reason': str(e)},
-                    )
-
-                # setting your password automatically validates your email, as you have received the mail to your
-                # address
-                if not profile.email_verified:
-                    profile.email_verified = True
-                    profile_needs_to_saved = True
-
-                # add redirect to the welcome-settings page, with priority so that it is shown as first one
-                if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
-                    profile.add_redirect_on_next_page(
-                        redirect_with_next(reverse('cosinnus:welcome-settings'), self.request),
-                        message=None,
-                        priority=True,
-                    )
-                elif profile_needs_to_saved:
-                    # if a redirect has been added, the profile has been saved already. otherwise, save it here
-                    profile.save()
-
-                # send welcome email if enabled
-                _send_user_welcome_email_if_enabled(user)
+                # prepare profile
+                self.prepare_initial_profile(user)
 
                 # log the user in
                 user.backend = 'cosinnus.backends.EmailAuthBackend'
@@ -381,7 +406,7 @@ class UserSignupTriggerEventsMixin(object):
             )
             # message portal admins of request
             subject = render_to_string('cosinnus/mail/user_register_notification_subj.txt', data)
-            email_portal_admins(subject, 'cosinnus/mail/user_register_notification.html', data)
+            email_portal_admins(subject, 'cosinnus/mail/user_register_notification.html', data, user)
             # message user for pending request
             subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
             text = textfield(render_to_string('cosinnus/mail/user_registration_pending.html', data))
@@ -628,6 +653,9 @@ class CosinnusGroupInviteTokenView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         self.token = kwargs.get('token', None)
+        if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # in v3 the /signup/ page handles the invite token
+            return redirect(f'/signup/?invite_token={self.token}')
         self.invite = get_object_or_None(
             CosinnusGroupInviteToken, token__iexact=self.token, portal=CosinnusPortal.get_current()
         )
@@ -774,7 +802,6 @@ def approve_user(request, user_id):
     text = textfield(render_to_string('cosinnus/mail/user_registration_approved.html', data))
     send_html_mail_threaded(user, subj_user, text)
 
-    _send_user_welcome_email_if_enabled(user)
     # send user account creation signal, the audience is empty because this is a moderator-only notification
     user_profile = user.cosinnus_profile
     # need to attach a group to notification objects
@@ -786,6 +813,10 @@ def approve_user(request, user_id):
     # also send out a verification email if portals have email verification turned on
     if CosinnusPortal.get_current().email_needs_verification:
         send_user_email_to_verify(user, user.email, request)
+    else:
+        # send the welcome email if no email verification is needed, otherwise the welcome email is sent after the
+        # email is verified.
+        _send_user_welcome_email_if_enabled(user)
 
     messages.success(
         request,
@@ -1464,7 +1495,27 @@ class UserChangeEmailPendingView(RequireLoggedInMixin, TemplateView):
 change_email_pending_view = UserChangeEmailPendingView.as_view()
 
 
-class GuestUserSignupView(FormView):
+class GuestAccessMixin:
+    """Mixin for guest access processing."""
+
+    def get_guest_access(self, guest_token):
+        """Get and check the guest access and group for a guest token."""
+        guest_access = None
+        guest_token_str = guest_token.strip().lower()
+        if guest_token_str:
+            guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token_str)
+        if guest_access:
+            # check group
+            if not guest_access.group or not guest_access.group.is_active:
+                # do not allow to tokens without a group or an inactive group
+                guest_access = None
+            elif guest_access.group.type not in settings.COSINNUS_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
+                # check if feature is disabled on this portal for this group type
+                raise Http404
+        return guest_access
+
+
+class GuestUserSignupView(GuestAccessMixin, FormView):
     """Guest access for a given `UserGroupGuestAccess` token."""
 
     form_class = UserGroupGuestAccessForm
@@ -1482,19 +1533,15 @@ class GuestUserSignupView(FormView):
         # check if feature is disabled on this portal
         if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
             raise Http404
-        # check if guest token and its access object and group exists
-        guest_token_str = kwargs.pop('guest_token', '').strip().lower()
-        if guest_token_str:
-            self.guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token_str)
-        if self.guest_access:
-            self.group = self.guest_access.group
-        if not self.group or not self.group.is_active:
-            # do not allow to tokens without a group or an inactive group
+
+        # get guest access object and group
+        guest_token = kwargs.pop('guest_token', '')
+        self.guest_access = self.get_guest_access(guest_token)
+        if not self.guest_access:
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
-        # check if feature is disabled on this portal for this group type
-        if self.group.type not in settings.COSINNUS_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
-            raise Http404
+        self.group = self.guest_access.group
+
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):

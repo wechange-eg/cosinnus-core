@@ -104,6 +104,7 @@ GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
 ]
 GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS = [
     r'^/dashboard/api/save_ui_prefs/',  # save ui prefs
+    r'^/api/v3/logout/',  # logout via api
 ]
 GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS = [
     r'^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/doodle/(?P<doodle_slug>[^/]+)/',  # event poll votes
@@ -176,7 +177,7 @@ class AdminOTPMiddleware(MiddlewareMixin):
         # check if the user is a superuser and they attempted to access a covered url
         if (
             user
-            and check_user_superuser(user)
+            and (check_user_superuser(user) or user.is_staff)
             and request.path.startswith(filter_path)
             and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA])
         ):
@@ -195,6 +196,7 @@ class AdminOTPMiddleware(MiddlewareMixin):
             user
             and user.is_authenticated
             and not check_user_superuser(user)
+            and not user.is_staff
             and request.path.startswith('/admin/')
             and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA])
         ):
@@ -579,7 +581,7 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(GroupResolvingMiddleware
             if path and not path.endswith('/'):
                 path += '/'
             if not any(
-                [path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]
+                [path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/', '/api/v3/content/main/']]
             ) and not self.is_anonymous_block_exempted_group_url(request):
                 if path.startswith('/api/') and 'Authorization' in request.headers:
                     # attempt to login with header token to accept token-authenticated API requests
@@ -607,6 +609,41 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
     usually to force some routing behaviour, like logged-in users being redirected off /login"""
 
     def process_request(self, request):
+        user = request.user
+
+        # guest account site-lockoff logic
+        if user.is_authenticated and user.is_guest:
+            # check if the URL matches any of the guest-account-locked URLs
+            locked = False
+            # sanity check: if this guest user still has a session, but guest access was disabled, lock everything
+            if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
+                if request.path != reverse('cosinnus:guest-user-not-allowed') and request.path not in LOGIN_URLS:
+                    locked = True
+            # disable any POST requests, except whitelested and "soft edits" if enabled
+            if request.method == 'POST':
+                locked = True
+                for whitelist_pattern in GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS:
+                    if re.match(whitelist_pattern, request.path):
+                        locked = False
+                        break
+                if locked and settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
+                    for whitelist_pattern in GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS:
+                        if re.match(whitelist_pattern, request.path):
+                            locked = False
+                            break
+            if not locked:
+                for url_pattern in GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS:
+                    if re.match(url_pattern, request.path):
+                        locked = True
+                        break
+            if locked:
+                if request.method == 'POST':
+                    messages.warning(request, _('The action you tried to perform is not allowed for guest accounts.'))
+                else:
+                    messages.warning(request, _('The page you tried to visit is not available for guest accounts.'))
+                return redirect('cosinnus:guest-user-not-allowed')
+
+        #  ignore urls that should not be redirected
         if any([request.path.startswith(never_path) for never_path in settings.COSINNUS_NEVER_REDIRECT_URLS]):
             return
 
@@ -616,7 +653,6 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         if request.path.startswith('/api-auth/logout'):
             return redirect('logout')
 
-        user = request.user
         if user.is_authenticated:
             # hiding login and signup pages for logged in users
             if request.path in ['/login/', '/signup/']:
@@ -651,40 +687,6 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                         if settings_redirect[1]:
                             messages.success(request, _(settings_redirect[1]))
                         return HttpResponseRedirect(settings_redirect[0])
-
-            # guest account site-lockoff logic
-            if user.is_guest:
-                # check if the URL matches any of the guest-account-locked URLs
-                locked = False
-                # sanity check: if this guest user still has a session, but guest access was disabled, lock everything
-                if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
-                    if request.path != reverse('cosinnus:guest-user-not-allowed') and request.path not in LOGIN_URLS:
-                        locked = True
-                # disable any POST requests, except whitelested and "soft edits" if enabled
-                if request.method == 'POST':
-                    locked = True
-                    for whitelist_pattern in GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS:
-                        if re.match(whitelist_pattern, request.path):
-                            locked = False
-                            break
-                    if locked and settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
-                        for whitelist_pattern in GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS:
-                            if re.match(whitelist_pattern, request.path):
-                                locked = False
-                                break
-                if not locked:
-                    for url_pattern in GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS:
-                        if re.match(url_pattern, request.path):
-                            locked = True
-                            break
-                if locked:
-                    if request.method == 'POST':
-                        messages.warning(
-                            request, _('The action you tried to perform is not allowed for guest accounts.')
-                        )
-                    else:
-                        messages.warning(request, _('The page you tried to visit is not available for guest accounts.'))
-                    return redirect('cosinnus:guest-user-not-allowed')
 
 
 class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):

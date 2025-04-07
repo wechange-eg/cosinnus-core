@@ -30,16 +30,21 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
 
         def __init__(self, *args, **kwargs):
             user_admin_form_managed_tag_enabled = kwargs.pop('user_admin_form_managed_tag_enabled', False)
+            is_profile_update = kwargs.pop('is_profile_update', False)
             super(_ManagedTagFormMixin, self).__init__(*args, **kwargs)
             if 'managed_tag_field' in self.fields:
                 if (
                     settings.COSINNUS_MANAGED_TAGS_ENABLED
                     and settings.COSINNUS_MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM
-                    and not settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
                     and not user_admin_form_managed_tag_enabled
+                    and (
+                        not settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
+                        or (not settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM and is_profile_update)
+                    )
                 ):
                     # if this form was not initialized for the user admin view and user assignable managed tags are
-                    # disabled we throw out the field as it should not be displayed in this view
+                    # disabled or the managed tags are disabled in the user update form we throw out the field as it
+                    # should not be displayed in this view
                     del self.fields['managed_tag_field']
                 else:
                     all_managed_tags = list(CosinnusManagedTag.objects.all_in_portal_cached())

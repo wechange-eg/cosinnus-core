@@ -3,6 +3,14 @@
 
 {% block object-tools-items %}
     {% with profile=original.cosinnus_profile %}
+        {% if profile and SETTINGS.COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES %}
+            <li>
+                <a href="{% url 'cosinnus:administration-user-update' pk=profile.user.pk %}">
+                    <i class="icon-pencil icon-alpha75"></i>
+                    {% trans "Edit in User Administration" %}
+                </a>
+            </li>
+        {% endif %}
 	    {% if profile and profile.scheduled_for_deletion_at and not original.is_active %}
             <li>
                 <a href="#" style="color:green">

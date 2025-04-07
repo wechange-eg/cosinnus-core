@@ -2,8 +2,10 @@ import json
 import logging
 from urllib.parse import unquote
 
+from annoying.functions import get_object_or_None
 from django.contrib.auth import login, logout
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.http import Http404
 from django.urls.base import reverse
 from django.utils.encoding import force_str
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -26,23 +28,31 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.user import (
+    CosinnusGuestLoginSerializer,
     CosinnusHybridUserSerializer,
+    CosinnusSetInitialPasswordSerializer,
     CosinnusUserLoginSerializer,
     CosinnusUserSignupSerializer,
 )
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
 from cosinnus.models import CosinnusPortal
+from cosinnus.models.group import CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import AllowNone, IsNotAuthenticated
 from cosinnus.utils.urls import redirect_with_next
+from cosinnus.utils.user import create_guest_user_and_login, get_user_from_set_password_token
 from cosinnus.views.common import (
     LoginViewAdditionalLogicMixin,
     cosinnus_post_logout_actions,
     cosinnus_pre_logout_actions,
 )
-from cosinnus.views.user import UserSignupTriggerEventsMixin
+from cosinnus.views.user import (
+    GuestAccessMixin,
+    SetInitialPasswordMixin,
+    UserSignupTriggerEventsMixin,
+)
 
 logger = logging.getLogger('cosinnus')
 
@@ -271,6 +281,7 @@ class UserAuthInfoView(LoginViewAdditionalLogicMixin, APIView):
                                 'username': '77',
                                 'first_name': 'NewUser',
                                 'last_name': '',
+                                'is_guest': False,
                                 'profile': {
                                     'id': 82,
                                     'avatar': None,
@@ -306,8 +317,83 @@ class UserAuthInfoView(LoginViewAdditionalLogicMixin, APIView):
         return response
 
 
+class SignupApiMixin:
+    """Mixin for common signup api functionality."""
+
+    def get_signup_response(
+        self, request, user, user_need_activation=False, verify_email_before_login=False, redirect_url=None
+    ):
+        """Prepare an API response for a signed up user."""
+        data = {
+            'user': UserSerializer(user, context={'request': request}).data,
+        }
+        next_url = None
+        refresh = None
+        access = None
+        message = None
+        do_login = True
+        if user.is_authenticated:
+            # if the user has been logged in immediately, return the auth tokens
+            user_tokens = get_tokens_for_user(user)
+            refresh = user_tokens['refresh']
+            access = user_tokens['access']
+        if user_need_activation:
+            str_dict = {
+                'user': full_name_force(user),
+                'email': user.email,
+            }
+            message = (
+                force_str(
+                    _(
+                        'Hello "%(user)s"! Your registration was successful. Within the next few days you will be '
+                        'activated by our administrators. When your account is activated, you will receive an e-mail '
+                        'at "%(email)s".'
+                    )
+                )
+                % str_dict
+            )
+            message += ' '
+            do_login = False
+        if verify_email_before_login:
+            message = (message or '') + force_str(
+                _(
+                    'You need to verify your email before logging in. We have just sent you an email with a '
+                    "verifcation link. Please check your inbox, and if you haven't received an email, please check "
+                    'your spam folder.'
+                )
+            )
+            do_login = False
+
+        if do_login:
+            next_url = redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
+        elif settings.COSINNUS_V3_FRONTEND_ENABLED:
+            if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+                # temporary solution: since user isn't logged in after verification, redirect directly to onboarding!
+                user.cosinnus_profile.add_redirect_on_next_page(
+                    redirect_with_next('/setup/profile', self.request), message=None, priority=True
+                )
+            else:
+                user.cosinnus_profile.add_redirect_on_next_page(
+                    redirect_with_next(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE, self.request),
+                    message=None,
+                    priority=True,
+                )
+
+        data.update(
+            {
+                'refresh': refresh,
+                'access': access,
+                'next': next_url,
+                'do_login': do_login,
+                'message': message,
+            }
+        )
+
+        return data
+
+
 @swagger_auto_schema(request_body=CosinnusUserSignupSerializer)
-class SignupView(UserSignupTriggerEventsMixin, APIView):
+class SignupView(UserSignupTriggerEventsMixin, SignupApiMixin, APIView):
     """A proper User Registration API endpoint"""
 
     if not settings.COSINNUS_USER_SIGNUP_ENABLED:
@@ -378,70 +464,12 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
         redirect_url = self.trigger_events_after_user_signup(
             user, self.request, request_data=request.data, skip_messages=True
         )
-
-        # if the user has been logged in immediately, return the auth tokens
-        data = {
-            'user': UserSerializer(user, context={'request': request}).data,
-        }
-        next_url = None
-        refresh = None
-        access = None
-        message = None
-        do_login = True
-        if user.is_authenticated:
-            user_tokens = get_tokens_for_user(user)
-            refresh = user_tokens['refresh']
-            access = user_tokens['access']
-        if CosinnusPortal.get_current().users_need_activation:
-            str_dict = {
-                'user': full_name_force(user),
-                'email': user.email,
-            }
-            message = (
-                force_str(
-                    _(
-                        'Hello "%(user)s"! Your registration was successful. Within the next few days you will be '
-                        'activated by our administrators. When your account is activated, you will receive an e-mail '
-                        'at "%(email)s".'
-                    )
-                )
-                % str_dict
-            )
-            message += ' '
-            do_login = False
-        if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
-            message = (message or '') + force_str(
-                _(
-                    'You need to verify your email before logging in. We have just sent you an email with a '
-                    "verifcation link. Please check your inbox, and if you haven't received an email, please check "
-                    'your spam folder.'
-                )
-            )
-            do_login = False
-
-        if do_login:
-            next_url = redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
-        elif settings.COSINNUS_V3_FRONTEND_ENABLED:
-            if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
-                # temporary solution: since user isn't logged in after verification, redirect directly to onboarding!
-                user.cosinnus_profile.add_redirect_on_next_page(
-                    redirect_with_next('/setup/profile', self.request), message=None, priority=True
-                )
-            else:
-                user.cosinnus_profile.add_redirect_on_next_page(
-                    redirect_with_next(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE, self.request),
-                    message=None,
-                    priority=True,
-                )
-
-        data.update(
-            {
-                'refresh': refresh,
-                'access': access,
-                'next': next_url,
-                'do_login': do_login,
-                'message': message,
-            }
+        data = self.get_signup_response(
+            request,
+            user,
+            user_need_activation=CosinnusPortal.get_current().users_need_activation,
+            verify_email_before_login=settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN,
+            redirect_url=redirect_url,
         )
         return Response(data)
 
@@ -507,6 +535,8 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
                                 'tags': ['testtag', 'anothertag'],
                                 'topics': [2, 5, 6],
                                 'visibility': 2,
+                                'ui_flags': {},
+                                'is_guest': False,
                             }
                         },
                         'version': COSINNUS_VERSION,
@@ -584,3 +614,237 @@ class UserUIFlagsView(APIView):
         request.user.cosinnus_profile.save()
 
         return Response(data=profile_settings['ui_flags'])
+
+
+class GuestLoginView(LoginViewAdditionalLogicMixin, GuestAccessMixin, APIView):
+    """A Guest user login API endpoint"""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    msg_invalid_token = _('Invalid guest token.')
+    msg_already_logged_in = _(
+        'You are currently logged in. The guest access can only be used if you are not logged in.'
+    )
+    msg_signup_not_possible = _('We could not sign you in as a guest at this time. Please try again later!')
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        request_body=CosinnusGuestLoginSerializer,
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        # TODO
+                        'data': {
+                            'refresh': 'eyJ...',
+                            'access': 'eyJ...',
+                            'user': {
+                                'id': 77,
+                                'username': '77',
+                                'first_name': 'New Guest User',
+                                'last_name': '',
+                                'profile': {
+                                    'id': 82,
+                                    'avatar': None,
+                                    'avatar_80x80': None,
+                                    'avatar_50x50': None,
+                                    'avatar_40x40': None,
+                                },
+                            },
+                            'next': '/dashboard/',
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
+    )
+    def post(self, request, guest_token):
+        if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
+            raise Http404
+
+        if request.user.is_authenticated:
+            raise serializers.ValidationError({'non_field_errors': [self.msg_already_logged_in]})
+
+        # get guest access for token
+        guest_access = self.get_guest_access(guest_token)
+        if not guest_access:
+            # invalid token
+            raise serializers.ValidationError({'non_field_errors': [self.msg_invalid_token]})
+
+        serializer = CosinnusGuestLoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        username = serializer.validated_data['username']
+        success = create_guest_user_and_login(guest_access, username, self.request)
+        if not success:
+            raise serializers.ValidationError({'non_field_errors': [self.msg_signup_not_possible]})
+
+        user_tokens = get_tokens_for_user(self.request.user)
+        data = {
+            'refresh': user_tokens['refresh'],
+            'access': user_tokens['access'],
+            'user': UserSerializer(self.request.user, context={'request': request}).data,
+            'next': reverse('cosinnus:user-dashboard'),
+        }
+        response = Response(data)
+        response = self.set_response_cookies(response)
+        return response
+
+
+class SetInitialPasswordView(SetInitialPasswordMixin, SignupApiMixin, APIView):
+    """API used to set an initial password for a user, who was created without a initial password."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsNotAuthenticated,)
+
+    @swagger_auto_schema(
+        request_body=CosinnusSetInitialPasswordSerializer,
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+            )
+        },
+    )
+    def post(self, request, token):
+        user = get_user_from_set_password_token(token)
+        if not user:
+            # return 404 if the token is invalid
+            raise Http404
+
+        # validate password
+        serializer = CosinnusSetInitialPasswordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # set password
+        password = serializer.validated_data['password']
+        user.set_password(password)
+        user.save()
+
+        # prepare profile
+        self.prepare_initial_profile(user, tos_accepted=True)
+
+        # log the user in
+        user.backend = 'cosinnus.backends.EmailAuthBackend'
+        login(self.request, user)
+
+        data = self.get_signup_response(request, user, user_need_activation=False, verify_email_before_login=False)
+        return Response(data)
+
+
+class GroupInviteTokenView(APIView):
+    """API endpoint for group invite token information."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+
+    @swagger_auto_schema(
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'title': 'Invite Title',
+                            'description': 'Invite Description',
+                            'groups': [
+                                {
+                                    'name': 'Invite Group',
+                                    'url': 'https//portal.url/groups/group/',
+                                    'avatar': None,
+                                    'icon': 'fa-sitemap',
+                                    'members': 10,
+                                }
+                            ],
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
+    )
+    def get(self, request, token):
+        data = {'title': None, 'description': None, 'groups': []}
+        invite = get_object_or_None(CosinnusGroupInviteToken, token__iexact=token)
+        if not invite:
+            raise Http404
+
+        # set title and description
+        data['title'] = invite.title
+        data['description'] = invite.description
+
+        # add group infos
+        for group in invite.invite_groups.all():
+            group_data = {
+                'name': group.get_name(),
+                'url': group.get_absolute_url(),
+                'icon': group.get_icon(),
+                'avatar': group.get_avatar_thumbnail_url() if group.avatar_url else None,
+                'members': len(group.members),
+            }
+            data['groups'].append(group_data)
+        return Response(data=data)
+
+
+class GuestAccessTokenView(APIView):
+    """API endpoint for guest access token information."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+
+    @swagger_auto_schema(
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'group': {
+                                'name': 'Invite Group',
+                                'url': 'https//portal.url/groups/group/',
+                                'avatar': None,
+                                'icon': 'fa-sitemap',
+                                'members': 10,
+                            }
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
+    )
+    def get(self, request, guest_token):
+        data = {}
+        guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token)
+        if not guest_access:
+            raise Http404
+
+        # add group infos
+        group = guest_access.group
+        data['group'] = {
+            'name': group.get_name(),
+            'url': group.get_absolute_url(),
+            'icon': group.get_icon(),
+            'avatar': group.get_avatar_thumbnail_url() if group.avatar_url else None,
+            'members': len(group.members),
+        }
+        return Response(data=data)

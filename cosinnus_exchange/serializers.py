@@ -1,15 +1,31 @@
+import hashlib
 import json
 import logging
+import os
+from tempfile import TemporaryFile
 
+import requests
+from dateutil import parser
 from django.template.defaultfilters import linebreaksbr
-from django.utils.html import escape
+from django.templatetags.static import static
+from django.utils.html import escape, strip_tags
 from rest_framework import serializers
 
 from cosinnus.conf import settings
+from cosinnus.utils.files import get_cosinnus_media_file_folder, image_thumbnail
 
 logger = logging.getLogger(__name__)
 
 TOPIC_CHOICES_MAP = {v: k for k, v in settings.COSINNUS_TOPIC_CHOICES}
+
+# Path under cosinnus media for thumbnails created form external images
+EXTERNAL_IMAGE_THUMBNAIL_PATH = 'exchange_external_thumbnails/'
+
+# Thumbnail size as used by the map tiles
+THUMBNAIL_SIZE = {
+    'small': (500, 275),
+    'large': (1000, 350),
+}
 
 
 class ExchangeSerializerMixin(serializers.Serializer):
@@ -169,9 +185,12 @@ class ExchangeAdhocracySerializer(ExchangeSerializerMixin, serializers.Serialize
         organisation = obj.get('organisation')
         if organisation:
             description_detail += f'<p><strong>Organisation:</strong> {organisation}</p>'
-        participation_time_display = obj.get('participation_time_display')
-        if participation_time_display:
-            description_detail += f'<p><strong>Beteiligungsphase:</strong> {participation_time_display}</p>'
+        participation_time_start = obj.get('dateStart')
+        participation_time_end = obj.get('dateEnd')
+        if participation_time_start and participation_time_end:
+            description_detail += (
+                f'<p><strong>Beteiligungsphase:</strong> {participation_time_start} - {participation_time_end}</p>'
+            )
         description = obj.get('description')
         if description:
             description_detail += f'<p>{description}</p>'
@@ -192,3 +211,279 @@ class ExchangeAdhocracySerializer(ExchangeSerializerMixin, serializers.Serialize
                         contact += '<br>'
                     contact += linebreaksbr(escape(contact_field_value))
         return contact
+
+
+class ExchangeDipasSerializer(ExchangeSerializerMixin, serializers.Serializer):
+    """
+    Serialize DIPAS projects into ExternalResource data.
+    Multiple APIs are used for the data:
+    - Project list with most data: https://dialog-kiel.de/drupal/dipas-pds/projects
+    - Project list with location points: https://dialog-kiel.de/drupal/dipas/navigator/cockpitdatamap
+    - Project detail with image url and contact: https://<project-url>/drupal/dipas/init
+    - Project detail with html description: https://<project-url>/drupal/dipas/projectinfo
+
+    Example COSINNUS_EXCHANGE_BACKENDS settings:
+     {
+        'backend': 'cosinnus_exchange.backends.ExchangeBackend',
+        'url': 'https://dialog-kiel.de/drupal/dipas-pds/projects',
+        'result_key': 'features',
+        'source': 'DIPAS',
+        'model': 'cosinnus_exchange.ExchangeExternalResource',
+        'serializer': 'cosinnus_exchange.serializers.ExchangeDipasSerializer',
+        'serializer_kwargs': {
+             'location_api_url': 'https://dialog-kiel.de/drupal/dipas/navigator/cockpitdatamap',
+        },
+    }
+    """
+
+    title = serializers.SerializerMethodField()
+    mt_location = serializers.SerializerMethodField()
+    mt_location_lat = serializers.SerializerMethodField()
+    mt_location_lon = serializers.SerializerMethodField()
+    mt_tags = serializers.SerializerMethodField()
+    icon_image_url = serializers.SerializerMethodField()
+    background_image_small_url = serializers.SerializerMethodField()
+    background_image_large_url = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+    description_detail = serializers.SerializerMethodField()
+    contact_info = serializers.SerializerMethodField()
+    website_url = serializers.SerializerMethodField()
+
+    # API url with location data
+    location_api_url = None
+    # API path for project details containing location and organization info
+    DETAIL_API_PATH = '/drupal/dipas/init'
+    # API path for project details containing the formatted HTML description
+    DESCRIPTION_API_PATH = '/drupal/dipas/projectinfo'
+
+    # Storage for additional API data
+    location_api_data = None
+    detail_data = None
+    descriptions = None
+    image_thumbnails = None
+
+    def __init__(self, *args, **kwargs):
+        self.location_api_url = kwargs.pop('location_api_url')
+        super().__init__(*args, **kwargs)
+        self.location_api_data = None
+        self.detail_data = {}
+        self.descriptions = {}
+        self.image_thumbnails = {}
+
+    def _get_project_base_url(self, obj):
+        """Returns the base project URL for the additional APIs."""
+        project_url = self.get_url(obj)
+        if project_url.endswith('/#'):
+            project_url = project_url[:-2]
+        return project_url
+
+    def get_external_id(self, obj):
+        return self.get_url(obj)
+
+    def get_url(self, obj):
+        return obj.get('properties', {}).get('website')
+
+    def get_title(self, obj):
+        return obj.get('properties', {}).get('nameFull')
+
+    def get_mt_location(self, obj):
+        return None
+
+    def _get_location_data(self, project_id):
+        """Get the location data for the project from the additional location API."""
+        if not self.location_api_data:
+            try:
+                response = requests.get(self.location_api_url)
+                response.raise_for_status()
+                self.location_api_data = json.loads(response.content)
+            except Exception as e:
+                logger.warning('ExchangeDipasSerializer: Could not get location data.', extra={'exception': e})
+
+        project_location_data = None
+        if self.location_api_data:
+            for location_data in self.location_api_data.get('features', []):
+                if location_data.get('properties', {}).get('id') == project_id:
+                    project_location_data = location_data
+                    break
+        return project_location_data
+
+    def _get_location_coordinates(self, obj):
+        """Get the location coordinates from the location API data."""
+        coordinates = None
+        project_id = obj.get('properties', {}).get('id')
+        if project_id:
+            location_data = self._get_location_data(project_id)
+            if location_data:
+                coordinates = location_data.get('geometry', {}).get('coordinates')
+        return coordinates
+
+    def get_mt_location_lat(self, obj):
+        lat = None
+        coordinates = self._get_location_coordinates(obj)
+        if coordinates and len(coordinates) == 2:
+            lat = coordinates[1]
+        return lat
+
+    def get_mt_location_lon(self, obj):
+        lon = None
+        coordinates = self._get_location_coordinates(obj)
+        if coordinates and len(coordinates) == 2:
+            lon = coordinates[0]
+        return lon
+
+    def get_mt_tags(self, obj):
+        return []
+
+    def get_mt_topics(self, obj):
+        return []
+
+    def get_icon_image_url(self, obj):
+        """Use static DIPAS logo, as the APIs do not provide a square logo."""
+        return static('images/dipas-logo.png')
+
+    def _get_project_detail_data(self, obj):
+        """Get the project detail data from the additional detail API."""
+        project_url = self._get_project_base_url(obj)
+        if project_url not in self.detail_data:
+            detail_api_url = project_url + self.DETAIL_API_PATH
+            try:
+                response = requests.get(detail_api_url)
+                response.raise_for_status()
+                detail_data = json.loads(response.content)
+                self.detail_data[project_url] = detail_data
+            except Exception as e:
+                logger.warning('ExchangeDipasSerializer: Could not get project details.', extra={'exception': e})
+        return self.detail_data.get(project_url, {})
+
+    def _get_image_url(self, obj):
+        """Get the image from the project detail data."""
+        image_url = ''
+        project_details = self._get_project_detail_data(obj)
+        if project_details:
+            image_url = project_details.get('landingpage', {}).get('image', {}).get('path', '')
+            if image_url and image_url.startswith('//'):
+                image_url = 'https:' + image_url
+        return image_url
+
+    def _get_remote_image_thumbnails(self, image_url):
+        """Create thumbnails for a remote image."""
+        if image_url not in self.image_thumbnails:
+            thumbnails = {}
+            media_path = get_cosinnus_media_file_folder()
+            image_filename = image_url.split('/')[-1]
+            base_name, ext = os.path.splitext(image_filename)
+            for size in THUMBNAIL_SIZE:
+                # compute thumbnail file properties based on the image url and size hash
+                image_url_hash = hashlib.md5(f'{image_url}-{size}'.encode()).hexdigest()
+                file_name = image_url_hash + ext.lower()
+                relative_path = os.path.join(media_path, EXTERNAL_IMAGE_THUMBNAIL_PATH, file_name)
+                thumbnails[size] = {
+                    'path': relative_path,
+                    'file': os.path.join(settings.MEDIA_ROOT, relative_path),
+                    'url': os.path.join(settings.MEDIA_URL, relative_path),
+                }
+
+            if not all(os.path.exists(thumbnails[size]['file']) for size in THUMBNAIL_SIZE):
+                # thumbnails for the image do not exist
+                try:
+                    # download image and use a temporary file to generate thumbnails
+                    image_data = requests.get(image_url)
+                    with TemporaryFile() as tmp_file:
+                        tmp_file.write(image_data.content)
+                        tmp_file.flush()
+                        for size in THUMBNAIL_SIZE:
+                            thumbnail = image_thumbnail(tmp_file, THUMBNAIL_SIZE[size], thumbnails[size]['path'])
+                            os.rename(thumbnail.path, thumbnails[size]['file'])
+                except Exception as e:
+                    logger.warning(
+                        'ExchangeDipasSerializer: Could not create image thumbnails.', extra={'exception': e}
+                    )
+            self.image_thumbnails[image_url] = {size: thumbnails[size]['url'] for size in THUMBNAIL_SIZE}
+        return self.image_thumbnails.get(image_url, {})
+
+    def _get_image_thumbnail_url(self, obj, size):
+        thumbnail_url = ''
+        image_url = self._get_image_url(obj)
+        if image_url:
+            image_thumbnails = self._get_remote_image_thumbnails(image_url)
+            if image_thumbnails:
+                thumbnail_url = image_thumbnails.get(size, '')
+        return thumbnail_url
+
+    def get_background_image_small_url(self, obj):
+        return self._get_image_thumbnail_url(obj, 'small')
+
+    def get_background_image_large_url(self, obj):
+        return self._get_image_thumbnail_url(obj, 'large')
+
+    def get_description(self, obj):
+        """Get description as text"""
+        return strip_tags(obj.get('properties', {}).get('description')).replace('&nbsp;', ' ')
+
+    def _get_description_html(self, obj):
+        """Get the html description from the additional description API."""
+        project_url = self._get_project_base_url(obj)
+        if project_url not in self.descriptions:
+            description_api_url = project_url + self.DESCRIPTION_API_PATH
+            description_data = None
+            try:
+                response = requests.get(description_api_url)
+                response.raise_for_status()
+                description_data = json.loads(response.content)
+            except Exception as e:
+                logger.warning('ExchangeDipasSerializer: Could not get project description.', extra={'exception': e})
+            if description_data:
+                for paragraph_data in description_data.get('content', []):
+                    if (
+                        paragraph_data.get('type') == 'paragraph'
+                        and paragraph_data.get('bundle') == 'text'
+                        and paragraph_data.get('field_text')
+                    ):
+                        description = paragraph_data.get('field_text')
+                        self.descriptions[project_url] = description
+                        break
+            else:
+                # Fallback to the unformatted description in the main API.
+                description = obj.get('properties', {}).get('description', '').replace('&nbsp;', ' ')
+                self.descriptions[project_url] = description
+        return self.descriptions.get(project_url, '')
+
+    def get_description_detail(self, obj):
+        description_detail = ''
+        organisation = obj.get('properties', {}).get('owner')
+        if organisation:
+            description_detail += f'<p><strong>Organisation:</strong> {organisation}</p>'
+        participation_start = obj.get('properties', {}).get('dateStart')
+        participation_end = obj.get('properties', {}).get('dateEnd')
+        if participation_start and participation_end:
+            start_date = parser.parse(participation_start).strftime('%d.%m.%y')
+            end_date = parser.parse(participation_end).strftime('%d.%m.%y')
+            description_detail += f'<p><strong>Beteiligungsphase:</strong> vom {start_date} bis {end_date}</p>'
+        description = self._get_description_html(obj)
+        if description:
+            description_detail += f'<p>{description}</p>'
+        url = self.get_url(obj)
+        if url:
+            description_detail += f'<p><a href="{url}" target="_blank">Mehr erfahren und beteiligen</a></p>'
+        return description_detail
+
+    def get_contact_info(self, obj):
+        """Get the contact info from the project detail data."""
+        contact = ''
+        project_details = self._get_project_detail_data(obj)
+        if project_details and project_details.get('projectowner'):
+            fields = ['name', 'street1', 'street2', 'zip', 'city', 'telephone', 'email']
+            no_linebreak_after_fields = ['zip']
+            for field in fields:
+                field_value = project_details.get('projectowner').get(field)
+                if field_value:
+                    contact += field_value
+                    contact += '<br/>' if field not in no_linebreak_after_fields else ' '
+        return contact
+
+    def get_website_url(self, obj):
+        website_url = ''
+        project_details = self._get_project_detail_data(obj)
+        if project_details and project_details.get('projectowner'):
+            website_url = project_details.get('projectowner').get('website')
+        return website_url

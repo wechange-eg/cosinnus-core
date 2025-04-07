@@ -186,9 +186,13 @@ body, .x-v3-container, .x-v3-content {
 }
 
 
-// .fadedown
+/** .fadedown */
 .fadedown {
 	.clearfix();
+}
+/** Any element in a .fadedown container is hidden, except its first child element */
+.fadedown:not(.open) > :not(:first-child) {
+    display: none;
 }
 
 p.navi-explanation {
@@ -625,6 +629,18 @@ a.portal-inlink:hover img {
 .group-microsite-share-buttons {
 	float: left;
 	display:block;
+    margin-left: 6px;
+
+    .mastodon-edit {
+        margin-left: 4px;
+        cursor: pointer;
+    }
+    .share-icon-img {
+        display: inline-block;
+        text-rendering: auto;
+        vertical-align: text-bottom;
+        height: 28px;
+    }
 }
 
 .group-microsite-created-updated-timestamp {

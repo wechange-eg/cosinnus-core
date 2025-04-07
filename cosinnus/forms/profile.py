@@ -25,10 +25,10 @@ class UserProfileFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
 
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
 
-    def full_clean(self):
+    def clean(self):
         """Assign the extra fields to the `dynamic_fields` the userprofile JSON field
         instead of model fields, during regular form saving"""
-        super().full_clean()
+        super().clean()
         if hasattr(self, 'cleaned_data'):
             for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
                 # skip saving fields that weren't included in the POST
@@ -58,7 +58,7 @@ class _UserProfileForm(
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and (
-        settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
+        (settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM)
         or settings.COSINNUS_MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM
     ):
         managed_tag_field = forms.CharField(required=settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED)

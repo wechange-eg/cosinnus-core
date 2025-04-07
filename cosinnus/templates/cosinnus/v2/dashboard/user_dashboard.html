@@ -329,7 +329,7 @@
 			    <h2 class="headline mobile-hidden">{% trans "News" %}</h2>
 			{% endblock %}
 			
-			{% if not SETTINGS.COSINNUS_FORUM_DISABLED and not SETTINGS.COSINNUS_POST_TO_FORUM_FROM_DASHBOARD_DISABLED %}
+			{% if not SETTINGS.COSINNUS_FORUM_DISABLED and not SETTINGS.COSINNUS_POST_TO_FORUM_FROM_DASHBOARD_DISABLED and not 'cosinnus_note' in forum_group.get_deactivated_apps %}
 				<div class="news-textbox-frame">
 					{% trans "What's the latest news that you would like to share with all users of the platform?" as textbox_label %}
 					<div class="news-textbox" data-toggle="modal" data-target="#write-news-modal" title="{{ textbox_label }}">

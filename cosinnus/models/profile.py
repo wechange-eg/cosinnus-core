@@ -35,6 +35,7 @@ from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
 from cosinnus.core.mail import convert_html_to_plaintext, send_mail_or_fail_threaded
+from cosinnus.dynamic_fields.dynamic_fields import CosinnusDynamicFieldsModelMixin
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignmentModelMixin
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
@@ -104,6 +105,7 @@ class BaseUserProfileManager(models.Manager):
 class BaseUserProfile(
     IndexingUtilsMixin,
     FacebookIntegrationUserProfileMixin,
+    CosinnusDynamicFieldsModelMixin,
     TranslateableFieldsModelMixin,
     LikeableObjectMixin,
     CosinnusManagedTagAssignmentModelMixin,
@@ -296,6 +298,11 @@ class BaseUserProfile(
             self.id = existing.id  # force update instead of insert
         except ObjectDoesNotExist:
             pass
+
+        # we add a validate_unique here to double-check unique constraints for direct edits on the
+        # JSON field values in `dynamic_fields` via CosinnusDynamicFieldsModelMixin
+        self.validate_unique()
+
         super(BaseUserProfile, self).save(*args, **kwargs)
 
         if created:

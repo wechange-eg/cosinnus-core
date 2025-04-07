@@ -8,7 +8,8 @@ from cosinnus_event import views
 app_name = 'event'
 
 cosinnus_group_patterns = [
-    re_path(r'^$', views.index_view, name='index'),
+    re_path(r'^$', views.index_view, name='index-redirect'),
+    re_path(r'^calendar/$', views.list_view, name='index'),
     re_path(r'^calendar/$', views.list_view, name='list'),
     re_path(r'^calendar/(?P<tag>[^/]+)/$', views.list_view, name='list-filtered'),
     # deprecated URL, see 'team-feed' for the new URL. left as backwards compatibility for old ical imports.

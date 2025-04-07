@@ -15,7 +15,21 @@ UPDATES includes release notes for each version shown to the users with:
 - display_conditional: (optional) bool, if this evaluates to False, the update will not be included in the updates list
 """
 
+_REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
+
 UPDATES = {
+    '2.3.0': {
+        'datetime': datetime(2025, 4, 1, tzinfo=pytz.utc),
+        'title': _('Version 2.3.0 released'),
+        'short_text': (
+            _(
+                'This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements.'
+            )
+            if _REDESIGN_FULL_IS_ENABLED
+            else _('This update provides several small bugfixes and stability improvements.')
+        ),
+        'full_text': None,
+    },
     'Redesign': {
         'datetime': datetime(2024, 12, 2, tzinfo=pytz.utc),
         'title': _('Redesign Update'),
@@ -26,9 +40,7 @@ UPDATES = {
             'This is a stepping stone update for many more exciting features and interface improvements to come '
             'in the near future!'
         ),
-        'display_conditional': (
-            settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
-        ),
+        'display_conditional': _REDESIGN_FULL_IS_ENABLED,
     },
     '2.2.5': {
         'datetime': datetime(2024, 12, 1, tzinfo=pytz.utc),
@@ -42,9 +54,7 @@ UPDATES = {
             '- Fixed a bug where iCal calendar feeds would sometimes not be accessible.\n'
             '- Further minor bugfixes have been made.'
         ),
-        'display_conditional': (
-            settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
-        ),
+        'display_conditional': _REDESIGN_FULL_IS_ENABLED,
     },
     '2.2.0': {
         'datetime': datetime(2024, 11, 13, tzinfo=pytz.utc),
@@ -55,9 +65,7 @@ UPDATES = {
             'has been added.\n'
             '- Further minor bugfixes and stability improvements have been made.'
         ),
-        'display_conditional': (
-            settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
-        ),
+        'display_conditional': _REDESIGN_FULL_IS_ENABLED,
     },
     '2.1.0': {
         'datetime': datetime(2024, 10, 14, tzinfo=pytz.utc),

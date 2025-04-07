@@ -59,6 +59,8 @@ class CosinnusConf(AppConf):
         '/api/v3/navigation',
         '/api/v3/user/profile',
         '/api/v3/signup',
+        '/api/v3/set_initial_password',
+        '/api/v3/guest_login',
         '/api/v3/content/main',
         '/favicon.ico',
         '/robots.txt',
@@ -984,6 +986,11 @@ class CosinnusConf(AppConf):
     # URL paths that get are exempted from being redirected to the new frontend
     # if V3_FRONTEND_EVERYWHERE_ENABLED==True and V3_FRONTEND_ENABLED==True
     V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS = [
+        # any direct access to files and resources like "robots.txt"
+        r'.*\.[\w\-_]+$',
+        # blanket exempts, to reduce server-load for targets we know we never want to show in v3
+        '^/.well-known/',
+        '^/wp-',  # any wordpress prefixes
         '^/language/',
         '.*/api/.*',  # any paths with api calls
         '^/o/',  # any oauth paths
@@ -1019,7 +1026,6 @@ class CosinnusConf(AppConf):
         '/.*/.*/group-invite-select2/',
         '^/.*/.*/file/.*/save',  # cosinnus file download
         '^/.*/.*/file/.*/download',  # cosinnus file download
-        r'.*\.[\w\-_]+$',  # any direct access to files like "robots.txt"
         # extra exemptions for views that do not work well with v3
         '^/map/embed/',
         '^/.*/.*/note/embed/',
@@ -1037,7 +1043,6 @@ class CosinnusConf(AppConf):
         '^/.*/.*/conference/feed/.*/',
         # old captcha
         '^/captcha/',
-        '^/password_set_initial/',  # TEMPORARY on < v2.3 only!
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
@@ -1361,7 +1366,11 @@ class CosinnusConf(AppConf):
     # will the managed tag show up in the group form for the users to assign their groups?
     MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS = False
 
+    # will allow managed tags to be edited in the signup for and via the v3 signup api
     MANAGED_TAGS_IN_SIGNUP_FORM = True
+    # will allow managed tags to be edited in the profile edit forms
+    # also determines if the managed tags are readonly in the v3 profile api
+    MANAGED_TAGS_IN_UPDATE_FORM = True
     # if set to True, managed tag descriptions will only be shown in form fields
     MANAGED_TAGS_SHOW_DESCRIPTION_IN_FORMS_ONLY = False
     # is approval by an admin needed on user created tags?
@@ -1443,6 +1452,13 @@ class CosinnusConf(AppConf):
 
     # should the editable user-list be shown in the administration area?
     PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+
+    # a list of field query names from fields in the user profile that
+    # should be searched in the search in the administration user list.
+    # can also specify dynamic fields by e.g. `dynamic_fields__institution`.
+    # Don't go overboard here, this is an expensive search!
+    # only applies when `PLATFORM_ADMIN_CAN_EDIT_PROFILES=True`
+    USERPROFILE_FIELDS_SEARCHABLE_IN_ADMINISTRATION = []
 
     # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False
@@ -1569,6 +1585,9 @@ class CosinnusConf(AppConf):
 
     # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
     DENY_ALL_ROBOTS = False
+
+    # enable group permissions in the django admin, including the group admin and the group field in the user admin.
+    DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
 
 
 class CosinnusDefaultSettings(AppConf):

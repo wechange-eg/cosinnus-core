@@ -32,7 +32,7 @@
 {% if user|can_create_objects_in:group %}
   <div class="clearfix v-spacer-m"></div>
   {% captureas create_label %}{% trans "Create folder" %}{% endcaptureas %}
-  {% include "cosinnus/leftnav_button.html" with icon="fas fa-plus" label=create_label extra_atts='data-toggle="modal" data-target="#create_folder_modal"' extra_classes="x-v3-leftnav-action-button x-v3-leftnav-action-target-active-app" %}
+  {% include "cosinnus/leftnav_button.html" with icon="fa-plus" label=create_label extra_atts='data-toggle="modal" data-target="#create_folder_modal"' extra_classes="x-v3-leftnav-action-button x-v3-leftnav-action-target-active-app" %}
 
   {% captureas content %}
       {{ container_form.title.errors }}

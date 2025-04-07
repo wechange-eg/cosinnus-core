@@ -74,8 +74,9 @@ def is_rocket_down():
     return cache.get(cache_key)
 
 
-def set_rocket_down():
+def set_rocket_down(exception):
     """Store in cache that rocketchat is considered down."""
+    logger.warning('RocketChat is considered down.', extra={'exception': exception})
     cache_key = ROCKETCHAT_DOWN_CACHE_KEY % (CosinnusPortal.get_current().id)
     cache.set(cache_key, True, settings.COSINNUS_CHAT_CONSIDER_DOWN_TIMEOUT)
 
@@ -98,15 +99,9 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
         alive = False
         try:
             alive = rocket_connection.me().status_code == 200
-        except Timeout as e:
-            # When a timeout error occurred disable rocketchat connections for 5 minutes to avoid overloading our
-            # webserver with pending requests.
-            set_rocket_down()
-            close_rocket_chat_session()
-            logger.exception(e)
-            raise RocketChatDownException()
         except Exception:
-            pass
+            # close the session, a new connection is retried below
+            close_rocket_chat_session()
         if not alive:
             cache.delete(cache_key)
             rocket_connection = None
@@ -118,16 +113,13 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
             rocket_connection = RocketChat(
                 user=rocket_username, password=password, server_url=server_url, timeout=timeout, session=session
             )
+            # As connection errors are not always raised upon creation ensure connectivity
+            rocket_connection.me()
             cache.set(cache_key, rocket_connection, settings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT)
-        except Timeout as e:
+        except (ConnectionError, Timeout) as e:
             # When a timeout error occurred disable rocketchat connections for 5 minutes to avoid overloading our
             # webserver with pending requests.
-            set_rocket_down()
-            close_rocket_chat_session()
-            logger.exception(e)
-            raise RocketChatDownException()
-        except ConnectionError as e:
-            # When a connection error occurred raise RocketChatDownException.
+            set_rocket_down(e)
             close_rocket_chat_session()
             logger.exception(e)
             raise RocketChatDownException()
@@ -467,7 +459,7 @@ class RocketChatConnection:
     def has_username_changed(self, profile, rocket_user_name):
         """Check it username needs to be updated in RocketChat."""
         username = profile.get_new_rocket_username()
-        username_match = re.match(rf'^{username}(-\d+)?$', rocket_user_name)
+        username_match = re.match(rf'^{username}(_\d+)?$', rocket_user_name)
         return username_match is None
 
     def _get_unique_username(self, profile):

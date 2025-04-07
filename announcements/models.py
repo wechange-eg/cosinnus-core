@@ -13,7 +13,6 @@ class Announcement(models.Model):
     LEVEL_WARNING = 'warning'
     LEVEL_ERROR = 'error'
     LEVEL_CHOICES = (
-        (LEVEL_DEBUG, _('Debug')),
         (LEVEL_INFO, _('Info')),
         (LEVEL_SUCCESS, _('Success')),
         (LEVEL_WARNING, _('Warning')),

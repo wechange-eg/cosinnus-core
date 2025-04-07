@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
+from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.urls import BETTER_URL_RE
 
@@ -17,10 +19,17 @@ def replace_non_portal_urls(html_text, replacement_url=None, portal_url=None):
         # do no replacements unless we have a proper target to point to
         # this will only affect admin-user-generated content
         return html_text
-    whitelisted_urls = [
-        'https://openstreetmap.org',  # we whitelist OSm as it is used in location links in emails
-        portal_url,
-    ]
+    # hack: we add all word tokens from the portal name as whitelist URLs, so portal names
+    # containing strings like "wechange.de Portal" won't get replaced with a full URL
+    whitelisted_urls = (
+        [
+            'https://openstreetmap.org',  # we whitelist OSm as it is used in location links in emails
+            portal_url,
+        ]
+        + CosinnusPortal.get_current().name.split(' ')
+        + str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)).split(' ')
+    )
+    whitelisted_urls = list(set(whitelisted_urls))
     # add a GET param to show a redirect warning to the user
     # (handled by `ExternalEmailLinkRedirectNoticeMiddleware`)
     append_param_arg = '?' if '?' not in replacement_url else '&'

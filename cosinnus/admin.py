@@ -11,10 +11,11 @@ from django.contrib.admin.options import get_content_type_for_model
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as django_login
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.contrib.auth.models import Group
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.exceptions import ValidationError
 from django.db.models import JSONField, Q
-from django.db.models.signals import post_save
+from django.db.models.signals import post_delete, post_save
 from django.utils import translation
 from django.utils.crypto import get_random_string
 from django.utils.safestring import mark_safe
@@ -54,7 +55,6 @@ from cosinnus.models.profile import (
 )
 from cosinnus.models.storage import TemporaryData
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory, TagObject
-from cosinnus.models.user_import import CosinnusUserImport
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -739,6 +739,7 @@ class CosinnusManagedTagAssignmentInline(GenericStackedInline):
 class CosinnusUserProfileAdmin(admin.ModelAdmin):
     list_display = ('user',)
     inlines = (CosinnusManagedTagAssignmentInline,)
+    readonly_fields = ('guest_access_object',)
 
     def get_model_perms(self, request):
         """Return empty perms dict thus hiding the model from admin index."""
@@ -891,6 +892,16 @@ _useradmin_excluded_list_filter = ['groups', 'is_staff']
 
 
 class UserAdmin(DjangoUserAdmin):
+    PERMISSION_FIELDS = ('is_active', 'is_superuser', 'is_staff')
+
+    if settings.COSINNUS_DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED:
+        PERMISSION_FIELDS = (
+            'is_active',
+            'is_superuser',
+            'is_staff',
+            'groups',
+        )
+
     fieldsets = (
         (
             _('Personal info'),
@@ -899,11 +910,7 @@ class UserAdmin(DjangoUserAdmin):
         (
             _('Permissions'),
             {
-                'fields': (
-                    'is_active',
-                    'is_staff',
-                    'is_superuser',
-                ),
+                'fields': PERMISSION_FIELDS,
             },
         ),
     )
@@ -1078,15 +1085,21 @@ class UserAdmin(DjangoUserAdmin):
             # taggable objects (notes, events, ...) and ideas
             for model_to_hide in models_to_hide_content:
                 for object_to_hide in model_to_hide.objects.filter(creator=user):
-                    # set visibility to user-only
-                    if hasattr(object_to_hide, 'media_tag') and getattr(object_to_hide, 'media_tag', None):
+                    if model_to_hide == CosinnusIdea:
+                        # delete ideas directly (because they cannot be hidden as "only me")
+                        object_to_hide.delete()
+                    elif hasattr(object_to_hide, 'media_tag') and getattr(object_to_hide, 'media_tag', None):
+                        # set visibility to user-only for basetaggablemodels, let deletion be handled by the
+                        # 30-day later user cleanup. this way admin errors aren't immediately fatal.
                         media_tag = object_to_hide.media_tag
                         if not media_tag.visibility == BaseTagObject.VISIBILITY_USER:
                             media_tag.visibility = BaseTagObject.VISIBILITY_USER
                             media_tag.save()
                             hidden_content += 1
-                        # remove object from search index (always, just to be sure)
-                        object_to_hide.remove_index()
+                        # trigger the post_delete signal on the object, so external service relays will be removed
+                        post_delete.send(sender=model_to_hide, instance=object_to_hide, origin=object_to_hide)
+                    # remove object from search index (always, just to be sure)
+                    object_to_hide.remove_index()
             return deactivated_groups, hidden_content
 
         user_count = 0
@@ -1245,6 +1258,11 @@ class UserAdmin(DjangoUserAdmin):
 
 admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)
+
+
+# disable group admin if django permissions are not used.
+if not settings.COSINNUS_DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED:
+    admin.site.unregister(Group)
 
 
 class CosinnusTopicCategoryAdmin(admin.ModelAdmin):
@@ -1412,14 +1430,6 @@ class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
 
 admin.site.register(CosinnusManagedTagAssignment, CosinnusManagedTagAssignmentAdmin)
 """
-
-
-class CosinnusUserImportAdmin(admin.ModelAdmin):
-    list_display = ('state', 'creator', 'last_modified')
-    readonly_fields = ('import_data', 'import_report_html')
-
-
-admin.site.register(CosinnusUserImport, CosinnusUserImportAdmin)
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

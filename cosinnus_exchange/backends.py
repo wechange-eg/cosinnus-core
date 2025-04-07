@@ -26,6 +26,9 @@ class ExchangeBackend:
     model = None
     serializer = None
     source = None
+    result_key = None
+    has_pagination = True
+    next_key = None
 
     token = None
     expires_in = None
@@ -41,12 +44,18 @@ class ExchangeBackend:
         username=None,
         password=None,
         accept_language=None,
+        result_key='results',
+        has_pagination=True,
+        next_key='next',
     ):
         self.url = url
         self.token_url = token_url or f"{'/'.join(url.split('/')[:-2])}/token/"
         self.username = username
         self.password = password
         self.accept_language = accept_language
+        self.result_key = result_key
+        self.has_pagination = has_pagination
+        self.next_key = next_key
         self.source = source or urllib.parse.urlparse(url).netloc
         self.model = apps.get_model(*model.rsplit('.'))
         serializer_module_name, serializer_name = serializer.rsplit('.', 1)
@@ -105,7 +114,7 @@ class ExchangeBackend:
 
     def _serialize_results(self, results):
         serialized_results = []
-        for result in results:
+        for i, result in enumerate(results):
             try:
                 serialized_result = self.serializer.to_representation(instance=result)
                 serialized_results.append(serialized_result)
@@ -117,7 +126,10 @@ class ExchangeBackend:
                     extra={'page_result': result, 'exception': str(e)},
                 )
                 if settings.DEBUG:
-                    print(f'>> Error: {result.get("url", result.get("slug"))}')
+                    result_id = result.get('url', result.get('slug', result.get('id')))
+                    if not result_id:
+                        result_id = f'#{i}'
+                    print(f'>> Error: {result_id}')
                     raise
         return serialized_results
 
@@ -143,14 +155,15 @@ class ExchangeBackend:
                 raise ExchangeError(response.status_code, next_url, response.content)
 
             data = json.loads(response.content)
-            if 'next' in data:
+            if self.has_pagination:
                 # paginated results
-                page_results = self._serialize_results(data['results'])
+                page_results = self._serialize_results(data[self.result_key])
                 results += page_results
-                next_url = data['next']
+                next_url = data[self.next_key]
             else:
                 # non-paginated results
-                results = self._serialize_results(data)
+                result_data = data[self.result_key] if self.result_key else data
+                results = self._serialize_results(result_data)
                 next_url = None
         return results
 

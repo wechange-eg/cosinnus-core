@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-06 13:42+0100\n"
-"Language: de\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-20 12:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
 msgid "Debug"
@@ -226,7 +226,7 @@ msgid "%d Users were made Nextcloud admins."
 msgstr "%d Benutzer/innen wurden zu Nextcloud-Admins gemacht."
 
 msgid "Nextcloud: Make user Nextcloud admin"
-msgstr "Rocket: Benutzer/in zum Nextcloud-Admin machen"
+msgstr "Nextcloud: Benutzer/in zum Nextcloud-Admin machen"
 
 msgid "Recipients Count"
 msgstr "Anzahl der Empfänger"
@@ -236,6 +236,10 @@ msgstr "Anzahl versandter Mails an Empfänger"
 
 msgid "Guest access URL"
 msgstr "Gastzugangs-URL"
+
+#, python-format
+msgid "%(model_name)s with this %(field_name)s already exists."
+msgstr "%(model_name)s mit diesem Feld %(field_name)s existiert bereits."
 
 msgid "Personal Dashboard"
 msgstr "Persönliches Dashboard"
@@ -369,6 +373,15 @@ msgstr "Hallo %(user)s! Deine Registrierung war erfolgreich. Du wirst in den nä
 
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
 msgstr "Du musst deine Email-Adresse verifizieren bevor du dich einloggen kannst. Eine Email mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang: wenn du keine Email von uns erhalten hast, überprüfe bitte deinen Spamordner."
+
+msgid "Invalid guest token."
+msgstr "Ungültiges Gast-Token."
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr "Du bist derzeit eingeloggt. Der Gastzugang kann nur genutzt werden, wenn du nicht eingeloggt bist."
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
+msgstr "Wir konnten dich zu diesem Zeitpunkt nicht als Gast anmelden. Bitte versuche es später noch einmal!"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Die E-Mail-Adresse des Accounts, mit dem du versuchst einzuloggen, muss erst bestätigt werden."
@@ -2533,6 +2546,9 @@ msgstr "Gemeldetes Objekt löschen..."
 msgid "(The reported item has been deleted.)"
 msgstr "(Der gemeldete Inhalt wurde gelöscht.)"
 
+msgid "Edit in User Administration"
+msgstr "In der Benutzerverwaltung bearbeiten"
+
 msgid "This user profile is scheduled for deletion at: "
 msgstr "Dieses Nutzerprofil ist zur Löschung geplant am: "
 
@@ -3107,6 +3123,15 @@ msgstr "Erweitern"
 
 msgid "Shrink"
 msgstr "Verkleinern"
+
+msgid "Share on Mastodon"
+msgstr "Auf Mastodon teilen"
+
+msgid "Enter your Mastodon instance you'd like to share to"
+msgstr "Gib die Mastodon-Instanz ein, auf der du Teilen möchtest"
+
+msgid "Edit your Mastodon instance"
+msgstr "Mastodon-Instanz bearbeiten"
 
 msgid "Check the projects/groups where you wish to show this item in. It will be shown in all lists, but will still remain in this group."
 msgstr "Wähle die Projekte/Gruppen, in denen dieser Inhalt angezeigt werden soll. Er wird dann dort in allen Listen angezeigt, bleibt aber weiterhin in dieser Gruppe."
@@ -7025,7 +7050,7 @@ msgid "User profile: %(username)s"
 msgstr "Benutzer/innen-Profil: %(username)s"
 
 msgid "(ADMIN) View in Admin"
-msgstr ""
+msgstr "(ADMIN) Im Admin-Interface ansehen"
 
 msgid "Cooperation requests"
 msgstr "Kooperationsanfragen"
@@ -8295,6 +8320,15 @@ msgstr "Bitte gib auch ein Enddatum an"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 
+msgid "Version 2.3.0 released"
+msgstr "Version 2.3.0 veröffentlicht"
+
+msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
+msgstr "Dieses Update enthält viele visuelle Verbesserungen für das neue Redesign und mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr "Dieses Update enthält mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
+
 msgid "Redesign Update"
 msgstr "Redesign-Update"
 
@@ -8588,9 +8622,6 @@ msgstr "Du hast noch keine Sicherungstoken erstellt. Logge die bitte anhand von 
 
 msgid "You have successfully disabled two-factor authentication for your account."
 msgstr "Du hast die Zwei-Faktor-Authentifizierung für dein Benutzerkonto deaktiviert."
-
-msgid "Invalid guest token."
-msgstr "Ungültiges Gast-Token."
 
 msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
 msgstr "Beim Versuch, dich zum BBB-Raum weiterzuleiten, ist ein Fehler aufgetreten. Bitte kontaktiere eine/n Administrator/in!"
@@ -9105,12 +9136,6 @@ msgstr "Wir haben deine E-Mail-Adresse \"%(email)s\" von unserer Mailingliste en
 
 msgid "A new verification email has been sent."
 msgstr "Eine neue Verifizierungsmail wurde versandt."
-
-msgid "You are currently logged in. The guest access can only be used if you are not logged in."
-msgstr "Du bist derzeit eingeloggt. Der Gastzugang kann nur genutzt werden, wenn du nicht eingeloggt bist."
-
-msgid "We could not sign you in as a guest at this time. Please try again later!"
-msgstr "Wir konnten dich zu diesem Zeitpunkt nicht als Gast anmelden. Bitte versuche es später noch einmal!"
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Willkommen! Du wurdest bereits in folgende Projekte und Gruppen eingeladen. Bitte klicke den Ausklappen-Button der Einladungen, die du annehmen oder ablehnen möchtest!"

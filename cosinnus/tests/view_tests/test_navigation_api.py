@@ -70,8 +70,8 @@ class SpacesViewTest(APITestCase):
                 'header': 'My Groups and Projects',
                 'items': [MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusSociety{group.pk}')],
                 'actions': [
-                    MenuItem('Create new Group', '/groups/add/', id='CreateGroup'),
                     MenuItem('Create new Project', '/projects/add/', id='CreateProject'),
+                    MenuItem('Create new Group', '/groups/add/', id='CreateGroup'),
                 ],
             },
         )
@@ -87,8 +87,8 @@ class SpacesViewTest(APITestCase):
                 'header': 'My Groups and Projects',
                 'items': [],
                 'actions': [
-                    MenuItem('Create new Group', '/groups/add/', id='CreateGroup'),
                     MenuItem('Create new Project', '/projects/add/', id='CreateProject'),
+                    MenuItem('Create new Group', '/groups/add/', id='CreateGroup'),
                 ],
             },
         )
@@ -140,7 +140,7 @@ class SpacesViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.data['community']['items'][0],
-            MenuItem(tag_group.name, tag_group.get_absolute_url(), 'fa-group', id=f'Forum{tag_group.pk}'),
+            MenuItem(tag_group.name, tag_group.get_absolute_url(), 'fa-sitemap', id=f'Forum{tag_group.pk}'),
         )
 
 
@@ -628,7 +628,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                 'right': [
                     MenuItem('Help', icon='fa-question', id='Help'),
                     MenuItem('Alerts', icon='fa-bell', id='Alerts'),
-                    MenuItem('Profile', icon='fa-user', id='Profile'),
+                    MenuItem('Profile', image=self.test_user.cosinnus_profile.get_avatar_thumbnail_url(), id='Profile'),
                 ],
             },
         )

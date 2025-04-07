@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-06 13:42+0100\n"
+"POT-Creation-Date: 2025-02-20 12:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,9 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.6\n"
-
-msgid "Debug"
-msgstr ""
 
 msgid "Info"
 msgstr ""
@@ -257,6 +254,10 @@ msgstr "Destinataires"
 msgid "Guest access URL"
 msgstr "Accédés récemment"
 
+#, python-format
+msgid "%(model_name)s with this %(field_name)s already exists."
+msgstr ""
+
 #, fuzzy
 #| msgid "Project Dashboard"
 msgid "Personal Dashboard"
@@ -404,6 +405,17 @@ msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few
 msgstr ""
 
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invalid request."
+msgid "Invalid guest token."
+msgstr "Demande invalide."
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr ""
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
@@ -564,9 +576,6 @@ msgstr ""
 msgid "Sorry, only admin accounts may log in at this time."
 msgstr "Désolé, seuls les comptes d’administration peuvent se connecter à ce moment."
 
-msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
-msgstr ""
-
 msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr ""
 
@@ -574,6 +583,9 @@ msgstr ""
 #| msgid "The page you requested is not available for this event at this time."
 msgid "The page you tried to visit is not available for guest accounts."
 msgstr "La page que tu as demandé n'est pas disponible pour cet événement à cet horaire."
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Tu as été automatiquement déconnecté après avoir été inactif pendant un certain temps."
@@ -2643,6 +2655,11 @@ msgstr "Supprimer l'item rapporté..."
 msgid "(The reported item has been deleted.)"
 msgstr "(L'item rapporté a été supprimé)"
 
+#, fuzzy
+#| msgid "User Administration"
+msgid "Edit in User Administration"
+msgstr "Gestion des utilisateurs"
+
 msgid "This user profile is scheduled for deletion at: "
 msgstr ""
 
@@ -3241,6 +3258,17 @@ msgstr "Agrandir"
 
 msgid "Shrink"
 msgstr "Réduire"
+
+#, fuzzy
+#| msgid "Share on Facebook"
+msgid "Share on Mastodon"
+msgstr "Partager sur Facebook"
+
+msgid "Enter your Mastodon instance you'd like to share to"
+msgstr ""
+
+msgid "Edit your Mastodon instance"
+msgstr ""
 
 msgid "Check the projects/groups where you wish to show this item in. It will be shown in all lists, but will still remain in this group."
 msgstr "Regarde les projets / groupes dans lesquels tu souhaites montrer cet item. Il sera affiché sur les listes, mais restera dans ce groupe."
@@ -8635,6 +8663,15 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 2.3.0 released"
+msgstr ""
+
+msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
+msgstr ""
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr ""
+
 msgid "Redesign Update"
 msgstr ""
 
@@ -8851,11 +8888,6 @@ msgstr ""
 #, fuzzy
 msgid "You have successfully disabled two-factor authentication for your account."
 msgstr "L’invitation a été supprimée avec succès."
-
-#, fuzzy
-#| msgid "Invalid request."
-msgid "Invalid guest token."
-msgstr "Demande invalide."
 
 #, fuzzy
 #| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
@@ -9386,12 +9418,6 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr "Nous avons supprimé ton adresse \"%(email)s\" de notre liste d'envoi. Tu ne recevras plus d'e-mails de nous !"
 
 msgid "A new verification email has been sent."
-msgstr ""
-
-msgid "You are currently logged in. The guest access can only be used if you are not logged in."
-msgstr ""
-
-msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
