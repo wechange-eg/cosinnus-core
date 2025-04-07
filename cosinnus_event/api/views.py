@@ -1,5 +1,7 @@
 from django.db.models import Count, Q
 from django.utils.timezone import now
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 
 from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin, PublicTaggableObjectFilterMixin
@@ -23,12 +25,30 @@ class ScheduledFilterMixin(object):
 class EventViewSet(
     ScheduledFilterMixin, CosinnusFilterQuerySetMixin, PublicTaggableObjectFilterMixin, viewsets.ReadOnlyModelViewSet
 ):
+    """
+    An endpoint that returns publicly visible events.
+    """
+
     queryset = Event.objects.all()
     FILTER_CONDITION_MAP = {'upcoming': {'true': [Q(to_date__gte=now())]}}
     FILTER_DEFAULT_ORDER = [
         'from_date',
     ]
     MANAGED_TAGS_FILTER_ON_GROUP = True
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'group_id',
+                openapi.IN_QUERY,
+                description='If provided, will only return items belonging to the group/project with the given '
+                'group id. Group ids are displayed in the `/groups/` and `/projects/` endpoints.',
+                type=openapi.TYPE_INTEGER,
+            ),
+        ],
+    )
+    def list(self, request, **kwargs):
+        return super().list(request, **kwargs)
 
     def get_serializer_class(self):
         if self.action == 'list':

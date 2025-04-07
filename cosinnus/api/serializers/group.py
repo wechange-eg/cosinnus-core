@@ -93,6 +93,7 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
             'url',
             'name',
             'slug',
+            'id',
             'description',
             'description_long',
             'contact_info',

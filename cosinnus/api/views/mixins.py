@@ -40,8 +40,11 @@ class CosinnusFilterQuerySetMixin(object):
             'false': [Q(avatar='')],
         }
     }
+    # a list of additionally allowed GET params as filters, and their QS filter key mapping
+    # apart from these, only filter params are allowed that are fields returned by the view's serializer class
     FILTER_KEY_MAP = {
         'tags': 'media_tag__tags__name',
+        'group_id': 'group_id',
     }
     FILTER_VALUE_MAP = {'false': False, 'true': True}
     FILTER_DEFAULT_ORDER = [
@@ -83,12 +86,19 @@ class CosinnusFilterQuerySetMixin(object):
                 if value in VALUE_MAP:
                     queryset = queryset.filter(*VALUE_MAP.get(value))
             else:
-                key = self.FILTER_KEY_MAP.get(key, key)
+                exclude = False
+                if key.startswith('exclude_'):
+                    exclude = True
+                    key = key[8:]
                 value = self.FILTER_VALUE_MAP.get(value, value)
                 if value is None:
                     continue
-                if key.startswith('exclude_'):
-                    queryset = queryset.exclude(**{key[8:]: value})
+                # only allow filtering on whitelisted filter params and the serializer's output fields
+                if key not in self.FILTER_KEY_MAP and key not in self.get_serializer_class().Meta.fields:
+                    continue
+                key = self.FILTER_KEY_MAP.get(key, key)
+                if exclude:
+                    queryset = queryset.exclude(**{key: value})
                 else:
                     queryset = queryset.filter(**{key: value})
 
@@ -113,6 +123,7 @@ class ReadOnlyOrIsAdminUser(permissions.IsAdminUser):
 class GetForUserViewSetMixin(object):
     @action(detail=False, methods=['get'])
     def mine(self, request):
+        """Displays groups/projects that the currently logged in user is a member of."""
         queryset = self.queryset.model
         queryset = queryset.objects.get_for_user(self.request.user)
         page = self.paginate_queryset(queryset)

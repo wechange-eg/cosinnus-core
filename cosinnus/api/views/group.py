@@ -1,4 +1,6 @@
 from django.db.models import Count, Q
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 
 from cosinnus.api.serializers.group import CosinnusProjectSerializer, CosinnusSocietySerializer
@@ -51,6 +53,10 @@ class ExcludeSingleMemberGroupsMixin(object):
 class CosinnusSocietyViewSet(
     CosinnusFilterQuerySetMixin, PublicCosinnusGroupFilterMixin, GetForUserViewSetMixin, viewsets.ModelViewSet
 ):
+    """
+    An endpoint that returns publicly visible groups.
+    """
+
     http_method_names = getattr(settings, 'COSINNUS_API_SETTINGS', {}).get(
         'society',
         [
@@ -61,6 +67,20 @@ class CosinnusSocietyViewSet(
     queryset = CosinnusSociety.objects.all()
     serializer_class = CosinnusSocietySerializer
     lookup_field = 'slug'
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'slug',
+                openapi.IN_PATH,
+                description="The slug of the group (as seen in the group's URL path).",
+                type=openapi.TYPE_INTEGER,
+            ),
+        ],
+    )
+    def retrieve(self, request, **kwargs):
+        """Returns a single group, if it is publicly visible."""
+        return super().retrieve(request, **kwargs)
 
     def perform_create(self, serializer):
         super().perform_create(serializer)
@@ -80,6 +100,10 @@ class CosinnusSocietyExchangeViewSet(ExcludeSingleMemberGroupsMixin, CosinnusSoc
 
 
 class CosinnusProjectViewSet(CosinnusSocietyViewSet):
+    """
+    An endpoint that returns publicly visible projects.
+    """
+
     http_method_names = getattr(settings, 'COSINNUS_API_SETTINGS', {}).get(
         'project',
         [
@@ -89,6 +113,20 @@ class CosinnusProjectViewSet(CosinnusSocietyViewSet):
     permission_classes = (ReadOnlyOrIsAdminUser,)
     queryset = CosinnusProject.objects.all()
     serializer_class = CosinnusProjectSerializer
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'slug',
+                openapi.IN_PATH,
+                description="The slug of the project (as seen in the group's URL path).",
+                type=openapi.TYPE_INTEGER,
+            ),
+        ],
+    )
+    def retrieve(self, request, **kwargs):
+        """Returns a single project, if it is publicly visible."""
+        return super().retrieve(request, **kwargs)
 
 
 class CosinnusProjectExchangeViewSet(ExcludeSingleMemberGroupsMixin, CosinnusProjectViewSet):

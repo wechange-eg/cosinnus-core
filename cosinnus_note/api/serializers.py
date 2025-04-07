@@ -37,10 +37,17 @@ class NoteListSerializer(serializers.HyperlinkedModelSerializer):
     timestamp = serializers.DateTimeField(source='last_modified')
     creator = NoteCreatorSerializer()
     group = NoteGroupSerializer()
+    tags = serializers.SerializerMethodField()
 
     class Meta(object):
         model = Note
-        fields = ('id', 'title', 'text', 'video', 'timestamp', 'creator', 'group')
+        fields = ('id', 'title', 'text', 'video', 'timestamp', 'creator', 'group', 'tags')
+
+    def get_tags(self, obj):
+        tags = []
+        if hasattr(obj, 'media_tag') and obj.media_tag and obj.media_tag.tags:
+            tags = obj.media_tag.tags.values_list('name', flat=True)
+        return tags
 
 
 class NoteRetrieveSerializer(NoteListSerializer):

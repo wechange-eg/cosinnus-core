@@ -660,13 +660,15 @@ class SimpleStatisticsBBBRoomVisitsView(APIView):
 
 
 class ConfigurationView(APIView):
-    """An endpoint that returns all portal configuration settings. Sensitive data is obfuscated."""
+    """An endpoint that returns all COSINNUS portal configuration settings. Sensitive data is obfuscated."""
 
     permission_classes = (IsAdminUser,)
 
     def get(self, request, *args, **kwargs):
         setting = request.query_params.get('setting')
         obfuscated_settings = get_obfuscated_settings_strings()
+        # only include COSINNUS settings
+        obfuscated_settings = {k: v for k, v in obfuscated_settings.items() if k.startswith('COSINNUS_')}
         if setting:
             if setting in obfuscated_settings:
                 obfuscated_settings = {setting: obfuscated_settings.get(setting)}
