@@ -80,7 +80,7 @@ setup(
     name='cosinnus',
     version=COSINNUS_VERSION,
     description='cosinnus core application',
-    long_description=read('README'),
+    long_description=read('README.md'),
     author='wechange eG',
     author_email='support@wechange.de',
     packages=find_packages(exclude=['tests']),
