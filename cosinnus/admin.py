@@ -326,6 +326,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     if settings.COSINNUS_CLOUD_ENABLED:
         actions += [
             'force_redo_cloud_user_room_memberships',
+            'force_update_group_names',
         ]
     list_display = (
         'name',
