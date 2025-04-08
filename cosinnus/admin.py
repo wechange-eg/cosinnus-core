@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
 from builtins import object
 
 from annoying.functions import get_object_or_None
@@ -60,6 +61,8 @@ from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
+
+logger = logging.getLogger('cosinnus')
 
 
 def admin_log_action(user, instance, message):
@@ -326,6 +329,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     if settings.COSINNUS_CLOUD_ENABLED:
         actions += [
             'force_redo_cloud_user_room_memberships',
+            'force_update_group_names',
         ]
     list_display = (
         'name',
@@ -614,6 +618,31 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         force_redo_cloud_user_room_memberships.short_description = _(
             'Nextcloud: Fix missing Nextcloud folder membership for users'
         )
+
+        def force_update_group_names(self, request, queryset):
+            count = 0
+            from cosinnus_cloud.utils.nextcloud import set_group_display_name
+
+            for group in queryset:
+                if not group.nextcloud_group_id:
+                    message = _('Group "%(group)s" does not have a Nextcloud group id set.') % {'group': group.name}
+                    self.message_user(request, message, level=messages.WARNING)
+                    continue
+                if not group.nextcloud_groupfolder_name:
+                    message = _('Group "%(group)s" does not have a Nextcloud folder name set.') % {'group': group.name}
+                    self.message_user(request, message, level=messages.WARNING)
+                    continue
+                try:
+                    set_group_display_name(group.nextcloud_group_id, group.nextcloud_groupfolder_name)
+                    count += 1
+                except Exception as e:
+                    logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
+                    message = _('Could not change Nextcloud group name for group "%(group)s".') % {'group': group.name}
+                    self.message_user(request, message, level=messages.WARNING)
+            message = _("%(count)d Groups' Nextcloud group names were updated.") % {'count': count}
+            self.message_user(request, message)
+
+        force_update_group_names.short_description = _('Nextcloud: Update group names')
 
 
 admin.site.register(CosinnusProject, CosinnusProjectAdmin)
