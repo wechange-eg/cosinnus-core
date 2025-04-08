@@ -333,7 +333,7 @@ def rename_group_folder(folder_id: int, new_name: str):
 
 def set_group_display_name(group_id: str, new_name: str):
     """Set the display name for a group."""
-    response = _response_or_raise(
+    return _response_or_raise(
         requests.put(
             f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/ocs/v2.php/cloud/groups/{group_id}',
             headers=HEADERS,
@@ -341,7 +341,6 @@ def set_group_display_name(group_id: str, new_name: str):
             data={'key': 'displayname', 'value': new_name},
         )
     )
-    return response.data and response.data.get('success', False) is True
 
 
 def get_groupfolder_name(folder_id: int):
