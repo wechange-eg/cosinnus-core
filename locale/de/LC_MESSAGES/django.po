@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 15:00+0100\n"
+"POT-Creation-Date: 2025-04-08 13:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -95,6 +95,25 @@ msgstr "Zusätzlich wurden die Mitglieder aus allen anderen Portalen entfernt."
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Alle enthaltenen Mitglieder ins aktuelle Portal verschieben (entfernt sie aus allen anderen Portalen!)"
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud group id set."
+msgstr "Gruppe \"%(group)s\" hat keine Nextcloud Gruppen-ID gesetzt."
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
+msgstr "Gruppe \"%(group)s\" hat keinen Nextcloud Gruppenordner-Namen gesetzt."
+
+#, python-format
+msgid "Could not change Nextcloud group name for group \"%(group)s\"."
+msgstr "Nextcloud Gruppen-Namen von Gruppe  \"%(group)s\" konnte nicht geändert werden."
+
+#, python-format
+msgid "%(count)d Groups' Nextcloud group names were updated."
+msgstr "Nextcloud Gruppen-Namen von %(count)d Gruppen wurden aktualisiert."
+
+msgid "Nextcloud: Update group names"
+msgstr "Nextcloud: Gruppen-Namen aktualisieren"
 
 msgid "Move selected groups and their subprojects to current portal"
 msgstr "Ausgewählte Gruppen und ihre Unterprojekte ins aktuelle Portal verschieben"
