@@ -318,7 +318,7 @@ def create_group_folder(name: str, group_id: str, group, raise_on_existing_name=
     return latest_response
 
 
-def rename_group_and_group_folder(folder_id: int, new_name: str):
+def rename_group_folder(folder_id: int, new_name: str):
     """Renames a group folder for a given id (int)"""
     response = _response_or_raise(
         requests.post(
@@ -326,6 +326,19 @@ def rename_group_and_group_folder(folder_id: int, new_name: str):
             headers=HEADERS,
             auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
             data={'mountpoint': new_name},
+        )
+    )
+    return response.data and response.data.get('success', False) is True
+
+
+def set_group_display_name(group_id: str, new_name: str):
+    """Set the display name for a group."""
+    response = _response_or_raise(
+        requests.put(
+            f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/ocs/v2.php/cloud/groups/{group_id}',
+            headers=HEADERS,
+            auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+            data={'key': 'displayname', 'value': new_name},
         )
     )
     return response.data and response.data.get('success', False) is True
