@@ -9,9 +9,16 @@ You'd like to contribute a bug fix or feature for wechange? Great! These are the
 
 1. Install a basic wechange portal for local development using the guide here: https://git.wechange.de/gl/code/template-portal
 2. Make changes in the `cosinnus-core` (https://git.wechange.de/gl/code/cosinnus) repository on your local machine that you set up in Step 1.
-3. Make sure you have thoroughly tested your changes and that your code quality is sufficient. (contribution guidelines will follow soon)
+3. Make sure you have thoroughly tested your changes and that your code quality is sufficient. Please adhere to the code styles as outlined in https://wechange.de/docs/coding_style.html and make sure to install the code-format pre-commit hooks.
 4. Push your changes to a feature branch in the `cosinnus-core` repository. This branch should ideally be up-to-date with the **Bleeding-edge development branch**.
 5. Submit a merge request to the cosinnus-core repository here: https://git.wechange.de/gl/code/cosinnus/-/merge_requests
+
+
+### Documentation
+
+* A written overview of the cosinnus framework architecture can be found here: https://wechange.de/docs/components.html
+* An autodoc code documentation can be found here: https://wechange.de/docs/refs/modules.html
+
 
 ### Overview of the branches for cosinnus-core
 
