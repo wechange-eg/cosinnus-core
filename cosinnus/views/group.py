@@ -86,6 +86,7 @@ from cosinnus.models.membership import (
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from cosinnus.templatetags.cosinnus_tags import full_name, is_superuser
+from cosinnus.views.group_deletion import mark_group_for_deletion
 from cosinnus.utils.compat import atomic
 from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.group import (
@@ -1700,6 +1701,26 @@ class ActivateOrDeactivateGroupView(TemplateView):
         return context
 
 
+class GroupScheduleDeleteView(RequireAdminMixin, TemplateView):
+    template_name = 'cosinnus/group/group_schedule_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupScheduleDeleteView, self).get_context_data(**kwargs)
+        context.update(
+            {
+                'object': self.group,  # used in leftnav_group.html
+            }
+        )
+        return context
+
+    def post(self, request, *args, **kwargs):
+        mark_group_for_deletion(self.group, triggered_by_user=request.user)
+        success_message = _('%(team_name)s has been deactivated and will be deleted in 30 days!')
+        messages.success(request, success_message % {'team_name': self.group.name})
+        admin_log_action(request.user, self.group, _('Scheduled for deletion.'))
+        return redirect(reverse('cosinnus:user-dashboard'))
+
+
 class GroupStartpage(View):
     """This view is in place as first starting point for the initial group frontpage.
     It decides whether the actual group dashboard or the group microsite should be shown."""
@@ -2379,6 +2400,7 @@ group_user_delete = GroupUserDeleteView.as_view()
 group_user_delete_api = GroupUserDeleteView.as_view(is_ajax_request_url=True)
 group_export = GroupExportView.as_view()
 activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()
+group_schedule_delete = GroupScheduleDeleteView.as_view()
 group_startpage = GroupStartpage.as_view()
 user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()
 group_invite_select2 = GroupInviteSelect2View.as_view()
