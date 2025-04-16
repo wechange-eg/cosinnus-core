@@ -618,9 +618,9 @@ class BaseUserProfile(
         if save:
             self.save()
         if settings.COSINNUS_ROCKET_ENABLED:
-            from cosinnus_message.tasks import rocket_user_logout_task
+            from cosinnus_message.integration import RocketChatIntegrationHandler
 
-            rocket_user_logout_task.delay(self.user.pk)
+            RocketChatIntegrationHandler._do_user_logout.delay(self.user.pk)
         if keep_session:
             from cosinnus.core.middleware.cosinnus_middleware import LOGIN_TIMESTAMP_SESSION_PROPERTY_NAME
 
