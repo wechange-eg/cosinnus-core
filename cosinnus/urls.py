@@ -406,8 +406,12 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
                 name='user-dashboard-api-typed-content-cloud',
                 kwargs={'show_recent': True},
             ),
+        ]
+    if getattr(settings, 'COSINNUS_CLOUD_SEARCH_ENABLED', False):
+        urlpatterns += [
             path('search/cloudfiles/', map.tile_view, name='cloudfiles-search', kwargs={'types': ['cloudfiles']}),
         ]
+
     urlpatterns += [
         path(f'{dashboard_url}/', user_dashboard.user_dashboard_view, name='user-dashboard'),
         path('dashboard/api/user_groups/', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
