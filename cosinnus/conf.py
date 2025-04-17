@@ -1211,8 +1211,6 @@ class CosinnusConf(AppConf):
 
     # whether to enable the cosinnus cloud app
     CLOUD_ENABLED = False
-    # whether to show the cosinnus cloud dashboard widget
-    CLOUD_DASHBOARD_WIDGET_ENABLED = True
     # Whether to enable cloud search in the map.
     # Currently not available, as the respective NextCloud search API is not available.
     CLOUD_SEARCH_ENABLED = False

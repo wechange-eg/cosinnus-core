@@ -391,22 +391,6 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
     settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False
 ):
     dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
-    if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
-        import cosinnus_cloud.views as cosinnus_cloud_views  # noqa
-
-        urlpatterns += [
-            path(
-                'dashboard/api/user_typed_content/cloud_files/',
-                cosinnus_cloud_views.api_user_cloud_files_content,
-                name='user-dashboard-api-typed-content-cloud',
-            ),
-            path(
-                'dashboard/api/user_typed_content/recent/cloud_files/',
-                cosinnus_cloud_views.api_user_cloud_files_content,
-                name='user-dashboard-api-typed-content-cloud',
-                kwargs={'show_recent': True},
-            ),
-        ]
     if getattr(settings, 'COSINNUS_CLOUD_SEARCH_ENABLED', False):
         urlpatterns += [
             path('search/cloudfiles/', map.tile_view, name='cloudfiles-search', kwargs={'types': ['cloudfiles']}),
