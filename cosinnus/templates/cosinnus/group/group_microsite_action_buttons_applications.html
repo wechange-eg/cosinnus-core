@@ -39,9 +39,7 @@
                 {{ application.application_status_string }}
             {% elif group.participation_management.count > 0 %}
                 {% with participation_management=group.participation_management.first %}
-                    {% if not participation_management.application_enabled %}
-                        {% trans "Participation applications are disabled." %}
-                    {% elif participation_management|is_late_application_allowed:user %}
+                    {% if participation_management|is_late_application_allowed:user %}
                         {% trans "Late registration possible" %}
                     {% else %}
                         {{ participation_management.application_time_string }}

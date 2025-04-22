@@ -924,6 +924,8 @@ class ParticipationManagement(TranslatableFormsetJsonFieldMixin, models.Model):
     def application_time_string(self):
         if self.applications_are_active:
             return _('Participation applications are open.')
+        elif not self.application_enabled:
+            return _('Participation applications are disabled.')
         else:
             now = timezone.now()
             if self.application_start and now < self.application_start:
