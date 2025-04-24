@@ -376,7 +376,7 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
 
     """
     Custom Conference Hooks
-    Note: the channel creation is done directly in 
+    Note: The channel creation is done directly in cosinnus_conference.api.serializers.py via get_rocketchat_room_url.
     """
 
     def do_conference_room_delete(self, sender, instance, **kwargs):
