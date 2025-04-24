@@ -29,7 +29,7 @@ class CosinnusBaseIntegrationHandler:
     integrated_group_models = [CosinnusProject, CosinnusSociety]
 
     # Group types for integrated_group_models populated in init.
-    integrated_group_types = None
+    _integrated_group_types = None
 
     # Changes to these fields of integrated models trigger an update handler.
     integrated_instance_fields = {
@@ -48,7 +48,7 @@ class CosinnusBaseIntegrationHandler:
 
     def __init__(self):
         # init group types
-        self.integrated_group_types = [self.GROUP_TYPES_BY_MODEL[model] for model in self.integrated_group_models]
+        self._integrated_group_types = [self.GROUP_TYPES_BY_MODEL[model] for model in self.integrated_group_models]
 
         # user hooks
         # Note: using weak=False as otherwise the function is removed by garbage collection and is not called.
@@ -237,7 +237,7 @@ class CosinnusBaseIntegrationHandler:
         """Checks if a group membership is relevant for integration."""
         return (
             self._is_integrated_user(membership.user)
-            and membership.group.type in self.integrated_group_types
+            and membership.group.type in self._integrated_group_types
             and membership.status not in PENDING_STATUS
         )
 
@@ -271,7 +271,7 @@ class CosinnusBaseIntegrationHandler:
         """Membership delete hook."""
         if (
             self._is_integrated_user(instance.user)
-            and instance.group.type in self.integrated_group_types
+            and instance.group.type in self._integrated_group_types
             and instance.status not in PENDING_STATUS
         ):
             self.do_membership_delete(instance)
