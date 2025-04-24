@@ -284,13 +284,13 @@ class CosinnusBaseIntegrationHandler:
     OAuth integration
     """
 
-    def get_oauth_application_name(self):
-        """Returns the oauth application name."""
+    def check_oauth_application_matches(self, application_name):
+        """Returns True if the application name matches the integrated service."""
         raise NotImplementedError
 
     def _handle_oauth_app_authorized(self, sender, request, token, **kwargs):
         """OAuth authorization hook."""
-        if self._is_integrated_user(token.user) and token.application.name == self.get_oauth_application_name():
+        if self._is_integrated_user(token.user) and self.check_oauth_application_matches(token.application.name):
             self.do_oauth_app_authorize(token)
 
     def do_oauth_app_authorize(self, token):

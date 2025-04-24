@@ -8,7 +8,7 @@ from cosinnus.conf import settings
 from cosinnus.integration import CosinnusBaseIntegrationHandler
 from cosinnus.models import UserProfile
 from cosinnus.models.conference import CosinnusConferenceRoom
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, CosinnusPortal
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.tasks import CeleryThreadTask
 from cosinnus_event.models import Event
@@ -365,10 +365,9 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
     OAuth hook
     """
 
-    def get_oauth_application_name(self):
-        """Get the RocketChat oauth application name."""
-        portal_id = CosinnusPortal.get_current().id
-        return f'rocketchat_{portal_id}'
+    def check_oauth_application_matches(self, application_name):
+        """Returns True if the application name matches the integrated service."""
+        return application_name.startswith('rocketchat')
 
     def do_oauth_app_authorize(self, token):
         """OAuth authorization handler. Makes sure that the RC user account is created and up to date."""
