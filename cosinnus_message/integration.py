@@ -22,6 +22,11 @@ from cosinnus_note.models import Note
 logger = logging.getLogger(__name__)
 
 
+# Singleton RocketChatIntegrationHandler instance ensuring that the hooks are initialized only once and allowing to
+# call the handler functions directly.
+ROCKET_SINGLETON = None
+
+
 class RocketChatTask(CeleryThreadTask):
     """
     RocketChat synchronization task definition.
@@ -56,6 +61,11 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
     }
 
     def __init__(self):
+        global ROCKET_SINGLETON
+        if ROCKET_SINGLETON:
+            # do not initialize hooks, if already initialized.
+            return
+
         super().__init__()
 
         # message relay hooks
@@ -66,6 +76,9 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
 
         # conference room hooks
         post_delete.connect(self.do_conference_room_delete, sender=CosinnusConferenceRoom, weak=False)
+
+        # set singleton instance
+        ROCKET_SINGLETON = self
 
     """
     User integration
