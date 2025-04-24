@@ -154,24 +154,91 @@ class MainContentViewTest(APILiveServerTestCase):
 
         # check subnavigation
         self.assertEqual(response.data['sub_navigation']['top'], [])
-        self.assertEqual(response.data['sub_navigation']['bottom'], [])
         self.assertEqual(len(response.data['sub_navigation']['middle']), 2)
+        self.assertEqual(len(response.data['sub_navigation']['bottom']), 2)
 
         # check leftnav appsmenu link
-        sub_navigation1 = response.data['sub_navigation']['middle'][0]
-        self.assertIn('Sidebar-', sub_navigation1['id'])
-        self.assertEqual(sub_navigation1['label'], 'Appsmenu Link')
-        self.assertEqual(sub_navigation1['url'], '/appsmenu-link/')
-        self.assertEqual(sub_navigation1['icon'], 'icon1')
-        self.assertFalse(sub_navigation1['selected'])
+        sub_navigation_apps = response.data['sub_navigation']['middle'][0]
+        self.assertIn('Sidebar-', sub_navigation_apps['id'])
+        self.assertEqual(sub_navigation_apps['label'], 'Appsmenu Link 1')
+        self.assertEqual(sub_navigation_apps['url'], '/appsmenu-link-1/')
+        self.assertEqual(sub_navigation_apps['icon'], 'icon_apps_1')
+        self.assertFalse(sub_navigation_apps['selected'])
 
-        # check leftnav button
-        sub_navigation2 = response.data['sub_navigation']['middle'][1]
+        # check active leftnav appsmenu link
+        sub_navigation_apps = response.data['sub_navigation']['middle'][1]
+        self.assertIn('Sidebar-', sub_navigation_apps['id'])
+        self.assertEqual(sub_navigation_apps['label'], 'Appsmenu Link 2 Active')
+        self.assertEqual(sub_navigation_apps['url'], '/appsmenu-link-2/')
+        self.assertEqual(sub_navigation_apps['icon'], 'icon_apps_2')
+        # note: "active" means it is the active app's item, not selected with a caret!
+        self.assertFalse(sub_navigation_apps['selected'])
+        self.assertEqual(len(sub_navigation_apps['sub_items']), 4)
+        # check Action button that will be added to the active app button as context action
+        self.assertEqual(len(sub_navigation_apps['actions']), 1)
+        sub_navigation1_action = sub_navigation_apps['actions'][0]
+        self.assertEqual(sub_navigation1_action['label'], 'Create Action')
+        self.assertEqual(len(sub_navigation1_action['attributes']), 2)
+        self.assertEqual(sub_navigation1_action['attributes'].get('data-toggle'), 'modal')
+        self.assertEqual(sub_navigation1_action['attributes'].get('data-target'), '#create_folder_modal')
+
+        # all further buttons will be sub_items of the active appsmenu leftnav button!
+        sub_items = sub_navigation_apps['sub_items']
+
+        # check "selected" (current) leftnav button
+        sub_navigation1 = sub_items[0]
+        self.assertIn('Sidebar-', sub_navigation1['id'])
+        self.assertEqual(sub_navigation1['label'], 'Leftnav Button 1')
+        self.assertEqual(sub_navigation1['url'], '/leftnav-button-link/')
+        self.assertEqual(sub_navigation1['icon'], 'icon1')
+        self.assertTrue(sub_navigation1['selected'])
+
+        # check other, regular leftnav button, with overridden icon
+        sub_navigation2 = sub_items[1]
         self.assertIn('Sidebar-', sub_navigation2['id'])
-        self.assertEqual(sub_navigation2['label'], 'Leftnav Button')
-        self.assertEqual(sub_navigation2['url'], '/leftnav-button-link/')
-        self.assertEqual(sub_navigation2['icon'], 'icon2')
-        self.assertTrue(sub_navigation2['selected'])
+        self.assertEqual(sub_navigation2['label'], 'Leftnav Button 2')
+        self.assertEqual(sub_navigation2['url'], '/leftnav-button-link-2/')
+        self.assertEqual(sub_navigation2['icon'], 'chosen-icon')
+        self.assertFalse(sub_navigation2['selected'])
+
+        # check leftnav button with number badge
+        sub_navigation3 = sub_items[2]
+        self.assertIn('Sidebar-', sub_navigation3['id'])
+        self.assertEqual(sub_navigation3['label'], 'Leftnav Button 3')
+        self.assertEqual(sub_navigation3['url'], '/leftnav-button-link-3/')
+        self.assertEqual(sub_navigation3['icon'], 'icon3')
+        self.assertEqual(sub_navigation3['badge'], '12345')
+        self.assertFalse(sub_navigation3['selected'])
+
+        # check leftnav button which will have an acction attached because of the 2nd button below it
+        sub_navigation4 = sub_items[3]
+        self.assertIn('Sidebar-', sub_navigation4['id'])
+        self.assertEqual(sub_navigation4['label'], 'Leftnav Button 4')
+        self.assertEqual(sub_navigation4['url'], '/leftnav-button-link-4/')
+        self.assertEqual(sub_navigation4['icon'], 'icon4')
+        self.assertFalse(sub_navigation4['selected'])
+        # check Action button will not be in the leftnav buttons list but instead attach itself as element
+        #   in the button's actions that has the data-v3-parent id
+        self.assertEqual(len(sub_navigation4['actions']), 1)
+        sub_navigation4_action = sub_navigation4['actions'][0]
+        self.assertIn('Sidebar-', sub_navigation4_action['id'])
+        self.assertNotEqual(sub_navigation4_action['id'], 'parent_button_id')  # html attr id does not carry over here!
+        self.assertEqual(sub_navigation4_action['label'], 'Edit Action')
+        self.assertEqual(len(sub_navigation4_action['attributes']), 2)
+        self.assertEqual(sub_navigation4_action['attributes'].get('data-toggle'), 'modal')
+        self.assertEqual(sub_navigation4_action['attributes'].get('data-target'), '#edit_popup_target')
+
+        # check leftnav language selector pythonically generated item
+        sub_navigation_bottom1 = response.data['sub_navigation']['bottom'][0]
+        self.assertEqual(sub_navigation_bottom1['id'], 'ChangeLanguage')
+        self.assertEqual(len(sub_navigation_bottom1['sub_items']), len(settings.LANGUAGES))
+
+        # check Modal popup button with extra attributes that get transfered in the main content data
+        sub_navigation_bottom2 = response.data['sub_navigation']['bottom'][1]
+        self.assertEqual(sub_navigation_bottom2['label'], 'Help')
+        self.assertEqual(len(sub_navigation_bottom2['attributes']), 2)
+        self.assertEqual(sub_navigation_bottom2['attributes'].get('data-toggle'), 'modal')
+        self.assertEqual(sub_navigation_bottom2['attributes'].get('data-target'), '#help_popup')
 
         # check main_menu
         self.assertEqual(response.data['main_menu'], {'label': 'Go To...', 'icon': 'fa-arrow-right', 'image': None})
