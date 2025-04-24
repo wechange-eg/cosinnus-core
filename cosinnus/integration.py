@@ -5,8 +5,8 @@ from oauth2_provider.signals import app_authorized
 
 from cosinnus.core import signals
 from cosinnus.models import PENDING_STATUS, CosinnusGroupMembership, UserProfile
-from cosinnus.models.group import CosinnusBaseGroup
-from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
+from cosinnus.models.group import CosinnusBaseGroup, CosinnusGroup
+from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety, ensure_group_type
 
 
 class CosinnusBaseIntegrationHandler:
@@ -67,7 +67,9 @@ class CosinnusBaseIntegrationHandler:
 
         # group hooks
         if self.integrate_groups:
-            for group_model in self.integrated_group_models:
+            # Handle signals send by the CosinnusGroup instance in addition to the explicit group models.
+            group_sender = [CosinnusGroup] + self.integrated_group_models
+            for group_model in group_sender:
                 post_save.connect(self._handle_group_created, sender=group_model, weak=False)
                 pre_save.connect(self._handle_group_updated, sender=group_model, weak=False)
                 post_delete.connect(self._handle_group_deleted, sender=group_model, weak=False)
@@ -191,9 +193,13 @@ class CosinnusBaseIntegrationHandler:
     Groups integration
     """
 
+    def _is_integrated_group(self, group):
+        """Check the group type for CosinnusGroup signals."""
+        return group.type in self._integrated_group_types
+
     def _handle_group_created(self, sender, instance, created, **kwargs):
         """Group create hook."""
-        if created:
+        if created and self._is_integrated_group(instance):
             self.do_group_create(instance)
 
     def do_group_create(self, group):
@@ -202,8 +208,10 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_group_updated(self, sender, instance, **kwargs):
         """Group update hook."""
-        if instance.pk is not None and self._has_instance_changed(instance):
-            self.do_group_update(instance)
+        if instance.pk is not None:
+            instance = ensure_group_type(instance)
+            if self._is_integrated_group(instance) and self._has_instance_changed(instance):
+                self.do_group_update(instance)
 
     def do_group_update(self, group):
         """Group update handler."""
@@ -211,7 +219,8 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_group_deleted(self, sender, instance, **kwargs):
         """Group delete hook."""
-        self.do_group_delete(instance)
+        if self._is_integrated_group(instance):
+            self.do_group_delete(instance)
 
     def do_group_delete(self, group):
         """Group delete handler."""
@@ -219,7 +228,8 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_group_activated(self, sender, group, **kwargs):
         """Group (re-)activation hook."""
-        self.do_group_activate(group)
+        if self._is_integrated_group(group):
+            self.do_group_activate(group)
 
     def do_group_activate(self, group):
         """Group (re-)activation handler."""
@@ -227,7 +237,8 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_group_deactivated(self, sender, group, **kwargs):
         """Group deactivation hook."""
-        self.do_group_deactivate(group)
+        if self._is_integrated_group(group):
+            self.do_group_deactivate(group)
 
     def do_group_deactivate(self, group):
         """Group deactivation handler."""
