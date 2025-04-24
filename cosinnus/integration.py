@@ -54,16 +54,16 @@ class CosinnusBaseIntegrationHandler:
         # Note: using weak=False as otherwise the function is removed by garbage collection and is not called.
         if self.integrate_users:
             User = get_user_model()
-            post_save.connect(self._handle_profile_created, sender=UserProfile, weak=True)
-            pre_save.connect(self._handle_user_updated, sender=User, weak=True)
-            pre_save.connect(self._handle_profile_updated, sender=UserProfile, weak=True)
-            user_logged_in.connect(self._handle_user_logged_in, weak=True)
-            signals.user_password_changed.connect(self._handle_user_password_changed, weak=True)
-            signals.user_activated.connect(self._handle_user_activated, weak=True)
-            signals.user_deactivated.connect(self._handle_user_deactivated, weak=True)
-            signals.pre_userprofile_delete.connect(self._handle_profile_deleted, weak=True)
-            signals.user_promoted_to_superuser.connect(self._handle_user_promoted_to_superuser, weak=True)
-            signals.user_demoted_from_superuser.connect(self._handle_user_demoted_from_superuser, weak=True)
+            post_save.connect(self._handle_profile_created, sender=UserProfile, weak=False)
+            pre_save.connect(self._handle_user_updated, sender=User, weak=False)
+            pre_save.connect(self._handle_profile_updated, sender=UserProfile, weak=False)
+            user_logged_in.connect(self._handle_user_logged_in, weak=False)
+            signals.user_password_changed.connect(self._handle_user_password_changed, weak=False)
+            signals.user_activated.connect(self._handle_user_activated, weak=False)
+            signals.user_deactivated.connect(self._handle_user_deactivated, weak=False)
+            signals.pre_userprofile_delete.connect(self._handle_profile_deleted, weak=False)
+            signals.user_promoted_to_superuser.connect(self._handle_user_promoted_to_superuser, weak=False)
+            signals.user_demoted_from_superuser.connect(self._handle_user_demoted_from_superuser, weak=False)
 
         # group hooks
         if self.integrate_groups:
