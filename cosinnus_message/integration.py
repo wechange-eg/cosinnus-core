@@ -267,22 +267,26 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
         rocket.groups_room_delete(room_id)
 
     @staticmethod
+    def _get_group_specific_room_ids(rocket, group):
+        """Return the room IDs for conference groups."""
+        room_ids = None
+        if group.group_is_conference:
+            # Deactivate workshop rooms for conference groups.
+            room_ids = [room.rocket_chat_room_id for room in group.rooms.all() if room.rocket_chat_room_name]
+            # Deactivate default room, if exists.
+            default_room_id = rocket.get_group_id(group, create_if_not_exists=False)
+            if default_room_id:
+                room_ids.append(default_room_id)
+        return room_ids
+
+    @staticmethod
     @celery_app.task(base=RocketChatTask)
     def _do_group_deactivate(group_id):
         """Archive group rooms in RocketChat."""
         rocket = RocketChatConnection()
         group = CosinnusGroup.objects.filter(pk=group_id).first()
         if group:
-            specific_room_ids = None
-            if group.group_is_conference:
-                # Deactivate workshop rooms for conference groups.
-                specific_room_ids = [
-                    room.rocket_chat_room_id for room in group.rooms.all() if room.rocket_chat_room_name
-                ]
-                # Deactivate default room, if exists.
-                default_room_id = rocket.get_group_id(group, create_if_not_exists=False)
-                if default_room_id:
-                    specific_room_ids.append(default_room_id)
+            specific_room_ids = RocketChatIntegrationHandler._get_group_specific_room_ids(rocket, group)
             rocket.groups_archive(group, specific_room_ids=specific_room_ids)
 
     @staticmethod
@@ -292,16 +296,7 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
         rocket = RocketChatConnection()
         group = CosinnusGroup.objects.filter(pk=group_id).first()
         if group:
-            specific_room_ids = None
-            if group.group_is_conference:
-                # Reactivate workshop rooms for conferences.
-                specific_room_ids = [
-                    room.rocket_chat_room_id for room in group.rooms.all() if room.rocket_chat_room_name
-                ]
-                # Deactivate default room, if exists.
-                default_room_id = rocket.get_group_id(group, create_if_not_exists=False)
-                if default_room_id:
-                    specific_room_ids.append(default_room_id)
+            specific_room_ids = RocketChatIntegrationHandler._get_group_specific_room_ids(rocket, group)
             rocket.groups_unarchive(group, specific_room_ids=specific_room_ids)
 
     @staticmethod
