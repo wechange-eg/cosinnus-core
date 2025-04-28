@@ -598,6 +598,11 @@ for url_key in group_model_registry:
         path(f'{url_key}/<str:group>/delete/', group.group_delete, name=prefix + 'group-delete'),
         path(f'{url_key}/<str:group>/join/', group.group_user_join, name=prefix + 'group-user-join'),
         path(
+            f'{url_key}/<str:group>/schedule-delete/',
+            group.group_schedule_delete,
+            name=prefix + 'group-schedule-delete',
+        ),
+        path(
             f'{url_key}/<str:group>/auto-join/',
             group.group_user_join_csrf_exempt,
             name=prefix + 'group-user-join-nocsrf',

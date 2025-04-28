@@ -15,7 +15,7 @@ from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
 from cosinnus.models.profile import PROFILE_SETTING_ROCKET_CHAT_ID, PROFILE_SETTING_ROCKET_CHAT_USERNAME
-from cosinnus.views.profile import deactivate_user_and_mark_for_deletion, delete_userprofile, reactivate_user
+from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion, delete_userprofile, reactivate_user
 from cosinnus_message.rocket_chat import RocketChatConnection
 
 if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
