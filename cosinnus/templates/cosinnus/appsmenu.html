@@ -132,20 +132,22 @@
 	            {% endif %}
 	            
 				{% if group.has_premium_rights and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
-				<li class="app-main appnavi-listelement fine-space {% if request.path == group_temporary_users %}active{% endif %}">
-					<a href="{{ group_temporary_users }}">
-						<i class="fas fa-user-clock"></i>
-						{% trans "Manage Temporary User Accounts" %}
-					</a>
-				</li>
+                    <li class="app-main appnavi-listelement fine-space {% if request.path == group_temporary_users %}active{% endif %}">
+                        <a href="{{ group_temporary_users }}">
+                            <i class="fas fa-user-clock"></i>
+                            {% trans "Manage Temporary User Accounts" %}
+                        </a>
+                    </li>
 				{% endif%}
-				
-				<li class="app-main appnavi-listelement fine-space {% if request.path == conference_recorded_meetings_page %}active{% endif %}">
-                    <a href="{{ conference_recorded_meetings_page }}">
-                        <i class="fa fa-play"></i>
-                        {% trans "Recorded Meetings" %}
-                    </a>
-                </li>
+
+	            {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+                    <li class="app-main appnavi-listelement fine-space {% if request.path == conference_recorded_meetings_page %}active{% endif %}">
+                        <a href="{{ conference_recorded_meetings_page }}">
+                            <i class="fa fa-play"></i>
+                            {% trans "Recorded Meetings" %}
+                        </a>
+                    </li>
+                {% endif %}
 	        {% endif%}
 	        
 	        {% if request.user.pk in group.members or request.user.pk in group.admins or request.user|is_superuser or group.public and not group.group_is_conference %}
