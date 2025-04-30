@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 12:37+0100\n"
+"POT-Creation-Date: 2025-04-30 12:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -103,6 +103,26 @@ msgstr "Сонымен қатар, мүшелер барлық басқа Пор
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Барлық мүшелерді ағымдағы порталға жылжытыңыз (барлық басқа мүшелерді жойыңыз!)"
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud group id set."
+msgstr ""
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
+msgstr ""
+
+#, python-format
+msgid "Could not change Nextcloud group name for group \"%(group)s\"."
+msgstr ""
+
+#, python-format
+msgid "%(count)d Groups' Nextcloud group names were updated."
+msgstr ""
+
+#, fuzzy
+msgid "Nextcloud: Update group names"
+msgstr "Nextcloud тобының идентификаторы"
 
 msgid "Move selected groups and their subprojects to current portal"
 msgstr "Таңдалған топтар мен олардың ішкі жобаларын ағымдағы порталға жылжытыңыз"
@@ -1395,11 +1415,19 @@ msgstr ""
 msgid "Participation applications are open."
 msgstr ""
 
+#, fuzzy
+msgid "Participation applications are disabled."
+msgstr "Шақырулар жоқ."
+
 msgid "Participation application has not started yet."
 msgstr ""
 
 msgid "Participation application is over."
 msgstr ""
+
+#, fuzzy
+msgid "The conference has ended."
+msgstr "Сіз „%(object_name)s“ %(team_name)s ішінде белгіленгенсіз."
 
 msgctxt "a conference application status"
 msgid "Invalid"
@@ -3489,8 +3517,10 @@ msgstr "Сіздің профиліңіз"
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
 msgstr ""
 
-msgid "Please provide your motivation for applying"
-msgstr ""
+#, fuzzy
+#| msgid ", for the following reason:"
+msgid "Please answer the following questions"
+msgstr "келесі себеп бойынша:"
 
 #, fuzzy
 msgid "Optional contact information"
@@ -3726,6 +3756,10 @@ msgid " If you would prefer to use simple membership requests as they are used i
 msgstr ""
 
 #, fuzzy
+msgid "Participation applications are enabled"
+msgstr "Сіздің %(team_name)s мүшелік сұранысыңыз қабылданбады."
+
+#, fuzzy
 msgid "Application period"
 msgstr "Өтінімнің атауы"
 
@@ -3741,7 +3775,7 @@ msgstr ""
 msgid "(no limit selected)"
 msgstr ""
 
-msgid "Require applicants to answer questions about their motivation for applying"
+msgid "Applicants must answer questions about participation"
 msgstr ""
 
 msgid "Provide a list of questions that the applicants should answer."
@@ -4565,6 +4599,16 @@ msgid "About the conference"
 msgstr "Жоба жайлы"
 
 #, fuzzy
+#| msgid "Delete event"
+msgid "On-site event"
+msgstr "Шараны жою"
+
+#, fuzzy
+#| msgid "Delete event"
+msgid "Online event"
+msgstr "Шараны жою"
+
+#, fuzzy
 msgid "More infos..."
 msgstr "Ақпарат жоқ."
 
@@ -4994,6 +5038,9 @@ msgstr "Орынды жою"
 
 msgid "Add location"
 msgstr "Орынды қосыңыз"
+
+msgid "If no location is specified, the event is interpreted as an online event."
+msgstr ""
 
 msgid "Which Group does the group belong to?"
 msgstr "Бұл топ қай топқа жатады?"
@@ -7150,7 +7197,9 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr "Мұнда сіз бір немесе бірнеше топқа енгеннен кейін топтарыңыз бен жобаларыңызға шолу таба аласыз."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
+#, fuzzy
+#| msgid "You can create Groups or Projects via the '+' button in the header."
+msgid "You can create Groups or Projects via the main menu in the header."
 msgstr "Жоғарыдағы ‘+’ батырмасы арқылы сіз топтар немесе жобалар жасай аласыз."
 
 #. Translators: __INCLUDE_JS_PO__
@@ -7162,7 +7211,9 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr "Мұнда сіз ұнаған идеялардың шолуын таба аласыз."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#, fuzzy
+#| msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr "Жоғарыдағы ‘+’ батырмасы арқылы сіз идеялар жасай аласыз немесе осында бар идеяларға шолу жасай аласыз"
 
 #. Translators: __INCLUDE_JS_PO__
@@ -10266,6 +10317,15 @@ msgstr "Жақында болатын"
 
 msgid "Newest Created"
 msgstr "Ең жаңа жасалғандар"
+
+msgid "Online/On-Site"
+msgstr ""
+
+msgid "Online (has no location)"
+msgstr ""
+
+msgid "On-Site (has location)"
+msgstr ""
 
 msgid "Presenters"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 13:45+0200\n"
+"POT-Creation-Date: 2025-04-30 12:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1395,6 +1395,10 @@ msgstr ""
 
 msgid "Participation applications are open."
 msgstr ""
+
+#, fuzzy
+msgid "Participation applications are disabled."
+msgstr "There are no groups."
 
 msgid "Participation application has not started yet."
 msgstr ""
@@ -5283,10 +5287,6 @@ msgstr ""
 msgid "Register and apply!"
 msgstr ""
 
-#, fuzzy
-msgid "Participation applications are disabled."
-msgstr "There are no groups."
-
 msgid "Late registration possible"
 msgstr ""
 
@@ -6900,7 +6900,7 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
+msgid "You can create Groups or Projects via the main menu in the header."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -6912,7 +6912,7 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__

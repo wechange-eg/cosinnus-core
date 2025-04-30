@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 13:45+0200\n"
+"POT-Creation-Date: 2025-04-30 12:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1339,6 +1339,9 @@ msgstr "Prioritätswahl aktiviert"
 
 msgid "Participation applications are open."
 msgstr "Anmeldung geöffnet."
+
+msgid "Participation applications are disabled."
+msgstr "Anmeldung ist deaktiviert."
 
 msgid "Participation application has not started yet."
 msgstr "Die Anmeldefrist hat noch nicht begonnen."
@@ -5088,9 +5091,6 @@ msgstr "Ansehen"
 msgid "Register and apply!"
 msgstr "Registrieren und Teilnahme beantragen!"
 
-msgid "Participation applications are disabled."
-msgstr "Anmeldung ist deaktiviert."
-
 msgid "Late registration possible"
 msgstr "Spätanmeldung ermöglicht"
 
@@ -6815,8 +6815,8 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr "Hier findest du in Zukunft eine Übersicht über deine Gruppen und Projekte. Noch bist du in keiner Gruppe oder einem Projekt aktiv."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
-msgstr "Du kannst eigene Gruppen oder Projekte über den '+'-Button im Header anlegen."
+msgid "You can create Groups or Projects via the main menu in the header."
+msgstr "Du kannst eigene Gruppen oder Projekte über das Hauptmenü im Header anlegen."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I like"
@@ -6827,8 +6827,8 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr "Hier findest du in Zukunft eine Übersicht über Ideen, die dir gefallen."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
-msgstr "Du kannst eigene Ideen über den '+'-Button im Header anlegen oder bestehende Ideen hier entdecken"
+msgid "You can create your own Ideas and discover existing Ideas here"
+msgstr "Du kannst eigene Ideen anlegen oder bestehende Ideen hier entdecken"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Filter"

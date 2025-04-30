@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 12:37+0100\n"
+"POT-Creation-Date: 2025-04-30 12:24+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,6 +89,28 @@ msgstr "بعلاوه، اعضا از تمام درگاه‌ها پاک شدند.
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "تمام کاربران را به درگاه فعلی جابجا کن (تمام عضویت‌های دیگر را پاک کن!)"
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud group id set."
+msgstr ""
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
+msgstr ""
+
+#, python-format
+msgid "Could not change Nextcloud group name for group \"%(group)s\"."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Groups' Nextcloud group names were updated."
+msgstr "%d عضویت اتاق راکت‌چت کاربران از نو انجام شدند."
+
+#, fuzzy
+#| msgid "Rocket: Make user RocketChat admin"
+msgid "Nextcloud: Update group names"
+msgstr "Rocket: کاربر راکت‌چت را مدیر کن"
 
 msgid "Move selected groups and their subprojects to current portal"
 msgstr "گروه‌های گزیده‌شده و زیرپروژه‌هایشان را به درگاه فعلی جابجا کن"
@@ -1344,11 +1366,21 @@ msgstr ""
 msgid "Participation applications are open."
 msgstr ""
 
+#, fuzzy
+#| msgid "Your participation application was declined"
+msgid "Participation applications are disabled."
+msgstr "درخواست مشارکت شما پذیرفته شده است"
+
 msgid "Participation application has not started yet."
 msgstr ""
 
 msgid "Participation application is over."
 msgstr ""
+
+#, fuzzy
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference has ended."
+msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
 
 msgctxt "a conference application status"
 msgid "Invalid"
@@ -3325,7 +3357,7 @@ msgstr ""
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
 msgstr ""
 
-msgid "Please provide your motivation for applying"
+msgid "Please answer the following questions"
 msgstr ""
 
 msgid "Optional contact information"
@@ -3546,6 +3578,11 @@ msgstr ""
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr ""
 
+#, fuzzy
+#| msgid "Your participation application was declined"
+msgid "Participation applications are enabled"
+msgstr "درخواست مشارکت شما پذیرفته شده است"
+
 msgid "Application period"
 msgstr ""
 
@@ -3561,7 +3598,7 @@ msgstr ""
 msgid "(no limit selected)"
 msgstr ""
 
-msgid "Require applicants to answer questions about their motivation for applying"
+msgid "Applicants must answer questions about participation"
 msgstr ""
 
 msgid "Provide a list of questions that the applicants should answer."
@@ -4327,6 +4364,12 @@ msgstr ""
 msgid "About the conference"
 msgstr ""
 
+msgid "On-site event"
+msgstr ""
+
+msgid "Online event"
+msgstr ""
+
 msgid "More infos..."
 msgstr ""
 
@@ -4735,6 +4778,9 @@ msgid "Remove location"
 msgstr ""
 
 msgid "Add location"
+msgstr ""
+
+msgid "If no location is specified, the event is interpreted as an online event."
 msgstr ""
 
 msgid "Which Group does the group belong to?"
@@ -6685,7 +6731,7 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
+msgid "You can create Groups or Projects via the main menu in the header."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -6697,7 +6743,7 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -9638,6 +9684,15 @@ msgstr ""
 
 msgid "Newest Created"
 msgstr "تازه‌ترین ساخته شده"
+
+msgid "Online/On-Site"
+msgstr ""
+
+msgid "Online (has no location)"
+msgstr ""
+
+msgid "On-Site (has location)"
+msgstr ""
 
 msgid "Presenters"
 msgstr ""

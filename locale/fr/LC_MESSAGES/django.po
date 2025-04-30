@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 12:37+0100\n"
+"POT-Creation-Date: 2025-04-30 12:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,6 +104,28 @@ msgstr "De plus, les membres ont été supprimés du groupe."
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Déplacer tous les membres vers le portail actuel (supprime toutes les autres appartenances !)"
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud group id set."
+msgstr ""
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
+msgstr ""
+
+#, python-format
+msgid "Could not change Nextcloud group name for group \"%(group)s\"."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Groups' Nextcloud group names were updated."
+msgstr "%d Les adhésions des utilisateurs à la salle Rocketchat ont été refaites."
+
+#, fuzzy
+#| msgid "Nextcloud Groupfolder Name"
+msgid "Nextcloud: Update group names"
+msgstr "Nom du dossier du groupe Nextcloud"
 
 msgid "Move selected groups and their subprojects to current portal"
 msgstr "Déplacer les groupes sélectionnés et leurs sous-projets au portail actuel"
@@ -1396,11 +1418,21 @@ msgstr "Choix prioritaire activé"
 msgid "Participation applications are open."
 msgstr "Les demandes de participation sont ouvertes."
 
+#, fuzzy
+#| msgid "Participation applications are open."
+msgid "Participation applications are disabled."
+msgstr "Les demandes de participation sont ouvertes."
+
 msgid "Participation application has not started yet."
 msgstr "La demande de participation n’a pas encore commencé."
 
 msgid "Participation application is over."
 msgstr "La demande de participation est terminée."
+
+#, fuzzy
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference has ended."
+msgstr "Une nouvelle conférence: \"%(object_name)s\" a été annoncée dans %(team_name)s."
 
 msgctxt "a conference application status"
 msgid "Invalid"
@@ -3423,8 +3455,10 @@ msgstr "Ton Profil"
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
 msgstr "Tu recevras un e-mail de notification et une notification sur place lorsque les organisateurs auront traité ta demande. Assure-toi que tes paramètres de notification sont correctement configurés pour recevoir des e-mails de notre part !"
 
-msgid "Please provide your motivation for applying"
-msgstr "Indique ta motivation pour postuler"
+#, fuzzy
+#| msgid ", for the following reason:"
+msgid "Please answer the following questions"
+msgstr ", pour la raison suivante :"
 
 msgid "Optional contact information"
 msgstr "Coordonnées facultatives"
@@ -3651,6 +3685,11 @@ msgstr "Tous les autres organisateurs et toi pouvez traiter les candidatures dan
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr "Si tu préfères utiliser les demandes d'adhésion simples telles qu'elles sont utilisées dans les projets/groupes, tu peux désactiver le paramètre \"%(application_setting_label)s\" dans les paramètres de la conférence."
 
+#, fuzzy
+#| msgid "Participation applications are open."
+msgid "Participation applications are enabled"
+msgstr "Les demandes de participation sont ouvertes."
+
 msgid "Application period"
 msgstr "Période de demande"
 
@@ -3668,7 +3707,7 @@ msgstr "(aucune limite sélectionnée)"
 
 #, fuzzy
 #| msgid "Require applicants to submit a text about their motivation for applying"
-msgid "Require applicants to answer questions about their motivation for applying"
+msgid "Applicants must answer questions about participation"
 msgstr "Exiger des candidats qu’ils soumettent un texte sur leur motivation à postuler"
 
 msgid "Provide a list of questions that the applicants should answer."
@@ -4473,6 +4512,16 @@ msgstr "Nombre maximal de participants"
 msgid "About the conference"
 msgstr "À propos de la conférence"
 
+#, fuzzy
+#| msgid "Delete event"
+msgid "On-site event"
+msgstr "Supprimer l'événement"
+
+#, fuzzy
+#| msgid "Delete event"
+msgid "Online event"
+msgstr "Supprimer l'événement"
+
 msgid "More infos..."
 msgstr "Plus d’infos..."
 
@@ -4890,6 +4939,9 @@ msgstr "Enlever le lieu"
 
 msgid "Add location"
 msgstr "Ajouter un lieu"
+
+msgid "If no location is specified, the event is interpreted as an online event."
+msgstr ""
 
 msgid "Which Group does the group belong to?"
 msgstr "A quel groupe appartient ce groupe ?"
@@ -7044,7 +7096,9 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr "Tu trouveras ici un aperçu de tes groupes et projets une fois que tu seras actif(active) dans un ou plusieurs d'entre eux."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
+#, fuzzy
+#| msgid "You can create Groups or Projects via the '+' button in the header."
+msgid "You can create Groups or Projects via the main menu in the header."
 msgstr "Tu peux créer des groupes ou des projets en cliquant sur le bouton \"+\" dans l'en-tête."
 
 #. Translators: __INCLUDE_JS_PO__
@@ -7056,7 +7110,9 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr "Tu trouveras ici un aperçu des idées que tu as aimées."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#, fuzzy
+#| msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr "Tu peux créer tes propres idées via le bouton \"+\" dans l'en-tête, ou découvrir ici des idées déjà existantes"
 
 #. Translators: __INCLUDE_JS_PO__
@@ -10100,6 +10156,15 @@ msgstr "Prochain événement"
 
 msgid "Newest Created"
 msgstr "Créé le plus récemment"
+
+msgid "Online/On-Site"
+msgstr ""
+
+msgid "Online (has no location)"
+msgstr ""
+
+msgid "On-Site (has location)"
+msgstr ""
 
 msgid "Presenters"
 msgstr "Présentateurs"
@@ -14362,6 +14427,9 @@ msgstr "Veux-tu vraiment supprimer cette équipe ?"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Veux-tu vraiment supprimer cette équipe ?"
+
+#~ msgid "Please provide your motivation for applying"
+#~ msgstr "Indique ta motivation pour postuler"
 
 #, fuzzy
 #~| msgid "Comment"
