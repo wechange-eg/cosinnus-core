@@ -85,7 +85,41 @@
                     });
                 }
 
-                doFrontendLogout();
+                {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
+                    let nc_url = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}'
+                    async function logout() {
+                        try {
+                            let token = await fetch(`${nc_url}/csrftoken`, {credentials: "include"}).then(r => r.json()).then(r => r.token);
+                            let res = await fetch(`${nc_url}/logout?requesttoken=${encodeURIComponent(token)}`, {
+                                credentials: "include",
+                                redirect: "manual"
+                            })
+                            if (res.type === "opaqueredirect") {
+                                // logout success
+                                logoutSuccess(global_logout_success)
+                            } else {
+                                // logout failed
+                                throw new Error('NC logout failed!')
+                            }
+                        } catch (error) {
+                            // logout error
+                            console.error(error.message)
+                            global_logout_success = false
+                            global_logout_errors_reasons.push('Nextcloud')
+                            logoutSuccess(global_logout_success)
+                        }
+                    }
+                    logout();
+                {% endif %}
+
+                {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED and SETTINGS.COSINNUS_V3_FRONTEND_LEGACY %}
+                    var url_csrf_v3_frontend = '/api/frontend/auth/csrf?v=3';
+                    var url_logout_v3_frontend = '/api/frontend/auth/signout?v=3';
+                    doFrontendLogout(url_csrf_v3_frontend, url_logout_v3_frontend);
+                {% elif not SETTINGS.COSINNUS_CLOUD_ENABLED %}
+                    {# if neither is enabled, show a success logout #}
+                    logoutSuccess(true);
+                {% endif %}
             </script>
 		{% endif %}
         
