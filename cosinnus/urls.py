@@ -266,6 +266,7 @@ urlpatterns = [
     path('housekeeping/fillcache/<str:number>/', housekeeping.fillcache, name='housekeeping-fillcache'),
     path('housekeeping/getcache', housekeeping.getcache, name='housekeeping-getcache'),
     path('housekeeping/deletecache', housekeeping.deletecache, name='housekeeping-deletecache'),
+    path('housekeeping/users_online_today/', housekeeping.users_online_today, name='housekeeping-users_online_today'),
     path('housekeeping/test_logging/', housekeeping.test_logging, name='housekeeping-test-logging'),
     path(
         'housekeeping/test_logging/info/',
