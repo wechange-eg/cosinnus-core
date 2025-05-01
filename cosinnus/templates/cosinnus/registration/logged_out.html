@@ -104,24 +104,30 @@
                 }
 
                 {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
-                    var url_direct_logout = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/apps/cspworkaround/user-session';
-                    $.ajax(url_direct_logout, {
-                        type: 'DELETE',
-                        xhrFields: {
-                            withCredentials: true
-                        },
-                        success: function (response, textStatus, xhr) {
-                            logoutSuccess(global_logout_success);
-                        },
-                        error: function (xhr, textStatus) {
-                            console.log('# # Error while logging out of nextcloud');
-                            console.log(xhr);
-                            console.log(textStatus);
-                            global_logout_success = false;
-                            global_logout_errors_reasons.push('Nextcloud');
-                            logoutSuccess(global_logout_success);
+                    let nc_url = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}'
+                    async function logout() {
+                        try {
+                            let token = await fetch(`${nc_url}/csrftoken`, {credentials: "include"}).then(r => r.json()).then(r => r.token);
+                            let res = await fetch(`${nc_url}/logout?requesttoken=${encodeURIComponent(token)}`, {
+                                credentials: "include",
+                                redirect: "manual"
+                            })
+                            if (res.type === "opaqueredirect") {
+                                // logout success
+                                logoutSuccess(global_logout_success)
+                            } else {
+                                // logout failed
+                                throw new Error('NC logout failed!')
+                            }
+                        } catch (error) {
+                            // logout error
+                            console.error(error.message)
+                            global_logout_success = false
+                            global_logout_errors_reasons.push('Nextcloud')
+                            logoutSuccess(global_logout_success)
                         }
-                    });
+                    }
+                    logout();
                 {% endif %}
 
                 {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED and SETTINGS.COSINNUS_V3_FRONTEND_LEGACY %}

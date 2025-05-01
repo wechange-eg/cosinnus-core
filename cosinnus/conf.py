@@ -1211,11 +1211,9 @@ class CosinnusConf(AppConf):
 
     # whether to enable the cosinnus cloud app
     CLOUD_ENABLED = False
-    # whether to show the cosinnus cloud dashboard widget
-    CLOUD_DASHBOARD_WIDGET_ENABLED = True
-    # whether the quicksearch includes cloud results.
-    # comes with a large reduction in search speed as nextcloud is slow
-    CLOUD_QUICKSEARCH_ENABLED = False
+    # Whether to enable cloud search in the map.
+    # Currently not available, as the respective NextCloud search API is not available.
+    CLOUD_SEARCH_ENABLED = False
 
     # base url of the nextcloud service, without trailing slash
     CLOUD_NEXTCLOUD_URL = None

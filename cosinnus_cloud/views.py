@@ -5,19 +5,13 @@ import logging
 import urllib.parse
 
 from django.http.response import JsonResponse
-from django.utils.encoding import force_str
-from django.utils.html import escape
-from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import RedirectView, TemplateView
 from rest_framework.views import APIView
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.models.user_dashboard import DashboardItem
 from cosinnus.views.mixins.group import RequireReadMixin
-from cosinnus.views.user_dashboard import BasePagedOffsetWidgetView
-from cosinnus_cloud.hooks import get_email_for_user, get_nc_user_id
-from cosinnus_cloud.utils import nextcloud
+from cosinnus_cloud.hooks import get_email_for_user
 
 logger = logging.getLogger('cosinnus')
 
@@ -91,72 +85,3 @@ class OAuthView(APIView):
 
 
 oauth_view = OAuthView.as_view()
-
-
-class CloudFilesContentWidgetView(BasePagedOffsetWidgetView):
-    """Shows Nextcloud files retrieved via Webdav for the user"""
-
-    model = None
-    # if True: will show only content that the user has recently visited
-    # if False: will show all of the users content, sorted by creation date
-    show_recent = False
-
-    def get(self, request, *args, **kwargs):
-        self.show_recent = kwargs.pop('show_recent', False)
-        if self.show_recent:
-            self.offset_model_field = 'visited'
-        else:
-            self.offset_model_field = 'created'
-        return super(CloudFilesContentWidgetView, self).get(request, *args, **kwargs)
-
-    def get_data(self, **kwargs):
-        # we do not use timestamps, but instead just simple paging offsets
-        # because Elasticsearch gives that to us for free
-        page = 1
-        if self.offset_timestamp:
-            page = int(self.offset_timestamp)
-
-        has_more = False
-        had_error = False
-        try:
-            dataset = nextcloud.find_newest_files(
-                userid=get_nc_user_id(self.request.user), page=page, page_size=self.page_size
-            )
-        except Exception as e:
-            logger.info(
-                'An error occured during Nextcloud widget data retrieval (views.py)! Exception in extra.',
-                extra={'exc_str': force_str(e), 'exception': e},
-            )
-            had_error = True
-
-        if had_error:
-            items = []
-        else:
-            items = self.get_items_from_dataset(dataset)
-            has_more = page * self.page_size < dataset['meta']['total']
-
-        return {
-            'items': items,
-            'widget_title': _('Cloud Files'),
-            'has_more': has_more,
-            'offset_timestamp': page + 1,
-        }
-
-    def get_items_from_dataset(self, dataset):
-        """Returns a list of converted item data from the ES result"""
-        items = []
-        for doc in dataset['documents']:
-            item = DashboardItem()
-            item['icon'] = 'fa-cloud'
-            try:
-                item['text'] = escape(doc['info']['file'])
-                item['subtext'] = escape(doc['info']['dir'])
-            except KeyError:
-                continue
-            # cloud_file.download_url for a direct download or cloud_file.url for a link into Nextcloud
-            item['url'] = f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{doc['link']}"
-            items.append(item)
-        return items
-
-
-api_user_cloud_files_content = CloudFilesContentWidgetView.as_view()

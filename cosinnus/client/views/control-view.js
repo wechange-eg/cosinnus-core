@@ -133,7 +133,7 @@ module.exports = ContentControlView.extend({
             self.defaults.availableFilters['organizations'] = true;
             self.defaults.activeFilters['organizations'] = true;
         }
-        if (COSINNUS_CLOUD_ENABLED) {
+        if (COSINNUS_CLOUD_SEARCH_ENABLED) {
             self.defaults.availableFilterList['cloudfiles'] = true;
             self.defaults.activeFilters['cloudfiles'] = false;
         }
@@ -1591,7 +1591,7 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_CONFERENCES_ENABLED) {
             this.state.activeFilters['conferences'] = this.options.availableFilters.conferences ? util.ifundef(urlParams.conferences, this.options.activeFilters.conferences) : false;
         }
-        if (COSINNUS_CLOUD_ENABLED) {
+        if (COSINNUS_CLOUD_SEARCH_ENABLED) {
             this.state.activeFilters['cloudfiles'] = this.options.availableFilterList.cloudfiles ? util.ifundef(urlParams.cloudfiles, this.options.activeFilters.cloudfiles) : false;
         }
         if (COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED) {
@@ -1695,7 +1695,7 @@ module.exports = ContentControlView.extend({
                 conferences: this.state.activeFilters.conferences
             });
         }
-        if (COSINNUS_CLOUD_ENABLED) {
+        if (COSINNUS_CLOUD_SEARCH_ENABLED) {
             _.extend(searchParams, {
                 cloudfiles: this.state.activeFilters.cloudfiles
             });

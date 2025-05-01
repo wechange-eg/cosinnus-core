@@ -37,7 +37,6 @@ module.exports = BaseView.extend({
     
     typedContentWidgetTypes: ['pads', 'files']
 		.concat((COSINNUS_ROCKET_ENABLED || !COSINNUS_MESSAGES_ENABLED) ? [] : ['messages'])
-        .concat(COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED ? ['cloud_files'] : [])
 	    .concat(['events', 'todos', 'polls'])
 		.concat(COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE ? ['offers'] : []),
     typedContentWidgets: {},

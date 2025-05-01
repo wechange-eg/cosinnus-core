@@ -9,7 +9,6 @@ from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.tagged import BaseTaggableObjectModel
-from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group
 
 
 class CloudFile(object):
@@ -160,32 +159,10 @@ class LinkedCloudFile(BaseTaggableObjectModel):
     @classmethod
     def get_attachable_objects_query_results(cls, group, request, term, page=1):
         """A droping for `cosinnus.view.attached_object.AttachableObjectSelect2View` to get attachable
-        objects in a non-DB-based query."""
-        # Check if cloud is enabled for group
-        if (
-            not is_cloud_enabled_for_group(group)
-            or not group.nextcloud_group_id
-            or not group.nextcloud_groupfolder_name
-        ):
-            return []
-        from cosinnus_cloud.hooks import get_nc_user_id
-        from cosinnus_cloud.utils import nextcloud
-
-        simple_cloud_files = nextcloud.get_groupfiles_match_list(
-            userid=get_nc_user_id(request.user),
-            folder=group.nextcloud_groupfolder_name,
-            name_query=term,
-            page=page,
-            page_size=10,
-        )
-        # add a prefix to the ID to signify that the ID doesn't belong to the actual model,
-        # but needs to be resolved
-        for simple_cloud_file in simple_cloud_files:
-            id_data_str = _encode_id_data_str(
-                simple_cloud_file.id, simple_cloud_file.filename, simple_cloud_file.dirname
-            )
-            simple_cloud_file.id = f'_unresolved_{id_data_str}'
-        return simple_cloud_files
+        objects in a non-DB-based query.
+        Disabled (stubbed) as our custom NextCloud plugin providing the API has been removed.
+        """
+        return []
 
     @classmethod
     def resolve_attachable_object_id(cls, object_id, group):
