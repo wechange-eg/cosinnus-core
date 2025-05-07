@@ -29,7 +29,7 @@ from cosinnus.core.mail import (
     send_mail,
     send_mail_or_fail_threaded,
 )
-from cosinnus.models import MEMBERSHIP_ADMIN, MEMBERSHIP_PENDING
+from cosinnus.models import MEMBERSHIP_ADMIN, MEMBERSHIP_PENDING, UserOnlineOnDay
 from cosinnus.models.group import (
     CosinnusGroup,
     CosinnusGroupMembership,
@@ -739,3 +739,19 @@ def portal_switches_and_settings(request, file_name='portal-switches-and-setting
     ]
 
     return make_xlsx_response(rows=rows, row_names=headers, file_name=file_name)
+
+
+def users_online_today(request):
+    """For checking up on `UserOnlineOnDay` stat generation."""
+    if request and not check_user_superuser(request.user):
+        return HttpResponseForbidden('Not authenticated')
+
+    prints = '<h3>All user IDs that have an online today stat point created:</h3><br/>'
+    for stat in UserOnlineOnDay.objects.filter(date=now().date()):
+        prints += f'{stat.user_id},<br/>\n'
+
+    prints += '<br/>\n<br/>\n<h3>All user IDs that have an online today stat point created yesterday:</h3><br/>'
+    for stat in UserOnlineOnDay.objects.filter(date=now().date() - datetime.timedelta(days=1)):
+        prints += f'{stat.user_id},<br/>\n'
+
+    return HttpResponse(prints)

@@ -15,7 +15,6 @@ from haystack.views import SearchView, search_view_factory
 
 from cosinnus.conf import settings
 from cosinnus.forms.search import TaggableModelSearchForm
-from cosinnus.models.cloud import NextcloudFulltextSearchQuerySet
 from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
 from cosinnus.models.user_dashboard import DashboardItem
 from cosinnus.trans.exchange import CosinnusExternalResourceTrans
@@ -69,10 +68,6 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
 
     if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
         content_types.append('offers')
-
-    if settings.COSINNUS_CLOUD_ENABLED and settings.COSINNUS_CLOUD_QUICKSEARCH_ENABLED:
-        # cloudfiles are a special case in QuicksearchAPIView.get_items
-        content_types.append('cloudfiles')
 
     # which fields should be filtered for the query for each model
     content_type_filter_fields = {
@@ -151,15 +146,6 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
         single_querysets = []
         for content_type in self.content_types:
             if content_type == 'files' and settings.COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP:
-                continue
-            if content_type == 'cloudfiles':
-                from cosinnus_cloud.hooks import get_nc_user_id
-
-                single_querysets.append(
-                    NextcloudFulltextSearchQuerySet(
-                        get_nc_user_id(self.request.user), self.query, page_size=self.page_size
-                    )
-                )
                 continue
 
             content_model = SEARCH_MODEL_NAMES_REVERSE.get(content_type, None)

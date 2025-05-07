@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
 import logging
 import re
 from builtins import object
@@ -12,6 +13,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.redirects.middleware import RedirectFallbackMiddleware
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.core.cache import cache
 from django.core.exceptions import MiddlewareNotUsed
 from django.db.models import signals
 from django.http.response import HttpResponseRedirect
@@ -29,6 +31,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
 from cosinnus.core.decorators.views import get_group_for_request, redirect_to_not_logged_in
+from cosinnus.models import UserOnlineOnDay
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse, redirect_next_or
 from cosinnus.views.user import send_user_email_to_verify
@@ -711,4 +714,34 @@ class PreventAnonymousUserCookieSessionMiddleware(SessionMiddleware):
         ):
             if not request.user.is_authenticated and settings.SESSION_COOKIE_NAME in response.cookies:
                 del response.cookies[settings.SESSION_COOKIE_NAME]
+        return response
+
+
+class UserOnlineStatisticsMiddleware(MiddlewareMixin):
+    """On a successful request for a logged-in user, create a daily statistics entry for a user.
+    Do the check for that only if there is no cache entry created"""
+
+    CACHE_KEY = 'cosinnus/core/statistics/useronline/createdtoday/%d'  # arg: user-id
+
+    def process_response(self, request, response):
+        user = request.user
+        if response.status_code == 200:
+            if user.is_authenticated and not user.is_guest:
+                # check a mini cache entry so we do not hit the DB on every request
+                created_today = cache.get(self.CACHE_KEY % user.id, None)
+                if created_today is None:
+                    # filter "inactive" URLs, ones that we do not count as a real online user action
+                    is_inactive_url = False
+                    for prefix in LOGIN_URLS + ['/signup/', '/captcha/', '/api/', '/profile/api/', '/map/embed/']:
+                        if request.path.startswith(prefix):
+                            is_inactive_url = True
+                            break
+                    if not is_inactive_url:
+                        # create user online statistics for today
+                        UserOnlineOnDay.objects.get_or_create(user=user, date=datetime.date.today())
+                        # set a mini cache entry
+                        now = datetime.datetime.now()
+                        _tomorrow = now + datetime.timedelta(days=1)
+                        seconds_until_tomorrow = (datetime.datetime.combine(_tomorrow, datetime.time.min) - now).seconds
+                        cache.set(self.CACHE_KEY % user.id, True, seconds_until_tomorrow)
         return response

@@ -23,11 +23,11 @@
             var COSINNUS_ROCKET_ENABLED = {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_MESSAGES_ENABLED = {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}true{% else %}false {% endif %};
             var COSINNUS_CLOUD_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}true{% else %}false{% endif %};
+            var COSINNUS_CLOUD_SEARCH_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_SEARCH_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_EXCHANGE_ENABLED = {% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED = {% if SETTINGS.COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_EXCHANGE_PORTAL_ID = {{ SETTINGS.COSINNUS_EXCHANGE_PORTAL_ID }};
             var COSINNUS_MATCHING_ENABLED = {% if SETTINGS.COSINNUS_MATCHING_ENABLED %}true{% else %}false{% endif %};
-            var COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED and SETTINGS.COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and user.is_authenticated and not user.is_guest %}true{% else %}false{% endif %};
             var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
             var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};

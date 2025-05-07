@@ -181,7 +181,7 @@
                 {% include "cosinnus/group/group_avatar_image.html" with group=group %}
             </a>            
         </div>
-        <div class="dashboard-header-text">
+        <div class="dashboard-header-text {% if SETTINGS.COSINNUS_GROUP_DASHBOARD_HEADER_TEXT_EXPANDED %} dashboard-header-text-expanded {% endif %}">
             <div class="multiline-ellipsis">
                 <div class="multiline-ellipsis-prop"></div>
                 <div class="multiline-ellipsis-main">

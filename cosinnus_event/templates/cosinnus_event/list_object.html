@@ -14,7 +14,7 @@
                     <i class="fa fa-calendar-check-o"></i>
                   {% else %}
                     <div>{{ event.from_date|date:"d" }}</div>
-                    <div>{{ event.from_date|date:"M" }}</div>
+                    <div>{{ event.from_date|date:"M 'y" }}</div>
                   {% endif %}
                 </a>
                 <a class="pull-right fadedown-clickarea">

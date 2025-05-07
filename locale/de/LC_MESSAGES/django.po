@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 12:42+0100\n"
+"POT-Creation-Date: 2025-05-07 10:52+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,9 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
-
-msgid "Debug"
-msgstr "Fehlersuche"
 
 msgid "Info"
 msgstr "Information"
@@ -98,6 +95,25 @@ msgstr "Zusätzlich wurden die Mitglieder aus allen anderen Portalen entfernt."
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Alle enthaltenen Mitglieder ins aktuelle Portal verschieben (entfernt sie aus allen anderen Portalen!)"
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud group id set."
+msgstr "Gruppe \"%(group)s\" hat keine Nextcloud Gruppen-ID gesetzt."
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
+msgstr "Gruppe \"%(group)s\" hat keinen Nextcloud Gruppenordner-Namen gesetzt."
+
+#, python-format
+msgid "Could not change Nextcloud group name for group \"%(group)s\"."
+msgstr "Nextcloud Gruppen-Namen von Gruppe  \"%(group)s\" konnte nicht geändert werden."
+
+#, python-format
+msgid "%(count)d Groups' Nextcloud group names were updated."
+msgstr "Nextcloud Gruppen-Namen von %(count)d Gruppen wurden aktualisiert."
+
+msgid "Nextcloud: Update group names"
+msgstr "Nextcloud: Gruppen-Namen aktualisieren"
 
 msgid "Move selected groups and their subprojects to current portal"
 msgstr "Ausgewählte Gruppen und ihre Unterprojekte ins aktuelle Portal verschieben"
@@ -523,14 +539,14 @@ msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E
 msgid "Sorry, only admin accounts may log in at this time."
 msgstr "Zurzeit können sich nur die Portal-Administrator/innen einloggen."
 
-msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
-msgstr "Du kannst nicht auf den Admin-Bereich zugreifen, weil dir die Berechtigung “Mitarbeiter” fehlt, obwohl du ein Superuser bist. Bitte eine/n andere/n Administrator/in, dir dieses Recht zu erteilen."
-
 msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr "Die Aktion, die du versucht hast auszuführen, ist für Gastkonten nicht gestattet."
 
 msgid "The page you tried to visit is not available for guest accounts."
 msgstr "Die Seite die du aufgerufen hast ist für Gastkonten nicht verfügbar."
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
+msgstr "Du kannst nicht auf den Admin-Bereich zugreifen, weil dir die Berechtigung “Mitarbeiter” fehlt, obwohl du ein Superuser bist. Bitte eine/n andere/n Administrator/in, dir dieses Recht zu erteilen."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Du wurdest automatisch abgemeldet, nachdem du für einige Zeit inaktiv warst."
@@ -1324,11 +1340,17 @@ msgstr "Prioritätswahl aktiviert"
 msgid "Participation applications are open."
 msgstr "Anmeldung geöffnet."
 
+msgid "Participation applications are disabled."
+msgstr "Anmeldung ist deaktiviert."
+
 msgid "Participation application has not started yet."
 msgstr "Die Anmeldefrist hat noch nicht begonnen."
 
 msgid "Participation application is over."
 msgstr "Die Teilnahmeantragsstellung ist vorbei."
+
+msgid "The conference has ended."
+msgstr "Die Tagung ist vorbei."
 
 msgctxt "a conference application status"
 msgid "Invalid"
@@ -2047,6 +2069,12 @@ msgstr "Ihr wurdet gematcht!"
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr "Ihr beide habt ähnliche Interessen und wurdet gematcht, sehr schön! Was hat dich an dem Profil der anderen Person angesprochen? Woran arbeitet ihr gerade? Welche Themen beschäftigen euch aktuell?"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "User Online on Day"
+msgstr "User Online an Tag"
 
 msgid "Deletion after"
 msgstr "Wird gelöscht nach"
@@ -3300,8 +3328,8 @@ msgstr "Dein Profil"
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
 msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn deine Anmeldung bearbeitet wurde. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-E-Mails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten!"
 
-msgid "Please provide your motivation for applying"
-msgstr "Bitte gib deine Motivation für die Teilnahme an"
+msgid "Please answer the following questions"
+msgstr "Bitte beantworte die folgenden Fragen"
 
 msgid "Optional contact information"
 msgstr "Optionale Kontaktinformationen"
@@ -3524,6 +3552,9 @@ msgstr "Du und alle anderen Organisator/innen können die Bewerbungen im Bereich
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr " Wenn du lieber einfache Mitgliedschaftsanfragen verwenden möchtest, wie sie in Projekten/Gruppen verwendet werden, kannst du die Einstellung \"%(application_setting_label)s\" in den Tagungseinstellungen deaktivieren."
 
+msgid "Participation applications are enabled"
+msgstr "Anmeldung ermöglichen"
+
 msgid "Application period"
 msgstr "Anmeldefrist"
 
@@ -3539,8 +3570,8 @@ msgstr "Dies ist kein forciertes Limit, sondern dient nur zur Orientierung für 
 msgid "(no limit selected)"
 msgstr "(keine Begrenzung ausgewählt)"
 
-msgid "Require applicants to answer questions about their motivation for applying"
-msgstr "Antragsstellende müssen Fragen über ihre Motiviation für die Teilnahme beantworten"
+msgid "Applicants must answer questions about participation"
+msgstr "Antragsstellende müssen Fragen zur Teilnahme beantworten"
 
 msgid "Provide a list of questions that the applicants should answer."
 msgstr "Gib Fragen an, die Antragsstellende beantworten müssen."
@@ -4188,9 +4219,6 @@ msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
 msgid "Change email address"
 msgstr "E-Mail Adresse ändern"
 
-msgid "Date"
-msgstr "Datum"
-
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
 msgstr "Zeitzone: %(TIME_ZONE)s"
@@ -4267,6 +4295,12 @@ msgstr "Maximale Anzahl von Teilnehmenden"
 msgid "About the conference"
 msgstr "Über die Tagung"
 
+msgid "On-site event"
+msgstr "Präsenz-Veranstaltung"
+
+msgid "Online event"
+msgstr "Online-Veranstaltung"
+
 msgid "More infos..."
 msgstr "Mehr Informationen..."
 
@@ -4334,6 +4368,9 @@ msgstr "Teilnahmeanträge bearbeiten"
 msgid "Invite members of groups/projects to apply..."
 msgstr "Mitglieder/innen von Gruppen/Projekten zur Antragsstellung einladen..."
 
+msgid "Participation application has ended. If you invite members now, they can register despite the deadline having expired."
+msgstr "Die Anmeldefrist ist beendet. Wenn du jetzt mitglieder einlädst, dürfen sich diese trotz abgelaufener Frist nachträglich anmelden."
+
 msgid "Select one or more groups/projects..."
 msgstr "Wähle eine oder mehrere Gruppe/Projekte..."
 
@@ -4351,9 +4388,6 @@ msgstr "Registrierte Benutzer/innen einladen..."
 
 msgid "Invite a member"
 msgstr "Mitglied einladen"
-
-msgid "Participation application has ended. If you invite members now, they can register despite the deadline having expired."
-msgstr "Die Anmeldefrist ist beendet. Wenn du jetzt mitglieder einlädst, dürfen sich diese trotz abgelaufener Frist nachträglich anmelden."
 
 msgid "Enter a user name or email to find users to invite..."
 msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
@@ -4670,6 +4704,9 @@ msgstr "Ort entfernen"
 
 msgid "Add location"
 msgstr "Ort hinzufügen"
+
+msgid "If no location is specified, the event is interpreted as an online event."
+msgstr "Wenn kein Standort angegeben ist, wird die Veranstaltung als Online-Veranstaltung interpretiert."
 
 msgid "Which Group does the group belong to?"
 msgstr "Welcher Gruppe gehört das Projekt an?"
@@ -6263,6 +6300,9 @@ msgstr "Speicherbedarf Gruppen"
 msgid "HD space used by projects"
 msgstr "Speicherbedarf Projekte"
 
+msgid "User Activity Timeline"
+msgstr "Benutzeraktivitäts-Timeline"
+
 msgid "User statistics (min 1x logged in)"
 msgstr "Benutzerstatistiken (mind. 1x eingeloggt)"
 
@@ -6561,10 +6601,6 @@ msgid "In my Groups and Projects"
 msgstr "In meinen Gruppen und Projekten"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "In my Cloud Files"
-msgstr "In meinen Cloud-Dateien"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
 msgstr "Thema"
 
@@ -6781,8 +6817,8 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr "Hier findest du in Zukunft eine Übersicht über deine Gruppen und Projekte. Noch bist du in keiner Gruppe oder einem Projekt aktiv."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
-msgstr "Du kannst eigene Gruppen oder Projekte über den '+'-Button im Header anlegen."
+msgid "You can create Groups or Projects via the main menu in the header."
+msgstr "Du kannst eigene Gruppen oder Projekte über das Hauptmenü im Header anlegen."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I like"
@@ -6793,8 +6829,8 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr "Hier findest du in Zukunft eine Übersicht über Ideen, die dir gefallen."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
-msgstr "Du kannst eigene Ideen über den '+'-Button im Header anlegen oder bestehende Ideen hier entdecken"
+msgid "You can create your own Ideas and discover existing Ideas here"
+msgstr "Du kannst eigene Ideen anlegen oder bestehende Ideen hier entdecken"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Filter"
@@ -8320,14 +8356,17 @@ msgstr "Bitte gib auch ein Enddatum an"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 
+msgid "Version 2.4.0 released"
+msgstr "Version 2.4.0 veröffentlicht"
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr "Dieses Update enthält mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
+
 msgid "Version 2.3.0 released"
 msgstr "Version 2.3.0 veröffentlicht"
 
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
 msgstr "Dieses Update enthält viele visuelle Verbesserungen für das neue Redesign und mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
-
-msgid "This update provides several small bugfixes and stability improvements."
-msgstr "Dieses Update enthält mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
 
 msgid "Redesign Update"
 msgstr "Redesign-Update"
@@ -9211,9 +9250,6 @@ msgstr "Cloud Stub"
 msgid "Click here to view the files directly in the cloud."
 msgstr "Klicke hier, um die Dateien direkt in der Cloud anzusehen."
 
-msgid "There are no cloud files yet"
-msgstr "Es gibt noch keine Cloud-Dateien"
-
 msgid "Restart"
 msgstr "Neustart"
 
@@ -9789,6 +9825,15 @@ msgstr "Bald stattfindend"
 
 msgid "Newest Created"
 msgstr "Zuletzt erstellt"
+
+msgid "Online/On-Site"
+msgstr "Online/Präsenz"
+
+msgid "Online (has no location)"
+msgstr "Online (kein Standort)"
+
+msgid "On-Site (has location)"
+msgstr "Präsenz (Standort angegeben)"
 
 msgid "Presenters"
 msgstr "Präsentierende"
@@ -13873,23 +13918,26 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
-#~ msgid "Administrators unknown"
-#~ msgstr "Administrator/innen unbekannt"
+#~ msgid "Debug"
+#~ msgstr "Fehlersuche"
 
-#~ msgid "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
-#~ msgstr "%(sender_name)s findet dich und deine Aktivitäten interessant. Schaue dir das Nutzer/innen-Profil an"
+#~ msgid "In my Cloud Files"
+#~ msgstr "In meinen Cloud-Dateien"
 
-#~ msgid "Community"
-#~ msgstr "Community"
+#~ msgid "Please provide your motivation for applying"
+#~ msgstr "Bitte gib deine Motivation für die Teilnahme an"
 
-#~ msgid "Password reset successful"
-#~ msgstr "Passwort erfolgreich geändert"
+#~ msgid "Require applicants to answer questions about their motivation for applying"
+#~ msgstr "Antragsstellende müssen Fragen über ihre Motiviation für die Teilnahme beantworten"
 
-#~ msgid "Personal"
-#~ msgstr "Persönlich"
+#~ msgid "There are no cloud files yet"
+#~ msgstr "Es gibt noch keine Cloud-Dateien"
 
-#~ msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
-#~ msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer/innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner/innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer/innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
+#~ msgid "You can create Groups or Projects via the '+' button in the header."
+#~ msgstr "Du kannst eigene Gruppen oder Projekte über den '+'-Button im Header anlegen."
+
+#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#~ msgstr "Du kannst eigene Ideen über den '+'-Button im Header anlegen oder bestehende Ideen hier entdecken"
 
 #~ msgid "%(numfiles)d files were deleted successfully."
 #~ msgstr "%(numfiles)d Dateien wurden erfolgreich gelöscht."
@@ -13908,6 +13956,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "%(sender_name)s completed a poll you are following"
 #~ msgstr "%(sender_name)s hat eine Umfrage (dem du folgst) beendet"
+
+#~ msgid "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
+#~ msgstr "%(sender_name)s findet dich und deine Aktivitäten interessant. Schaue dir das Nutzer/innen-Profil an"
 
 #~ msgid "%(sender_name)s invited you to apply for %(team_name)s"
 #~ msgstr "%(sender_name)s hat dich eingeladen, bei %(team_name)s Teilnahme zu beantragen"
@@ -13950,6 +14001,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Add workshop"
 #~ msgstr "Workshop hinzufügen"
+
+#~ msgid "Administrators unknown"
+#~ msgstr "Administrator/innen unbekannt"
 
 #~ msgid "All groups"
 #~ msgstr "Alle Gruppen"
@@ -14073,6 +14127,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Clear results and start a new import!"
 #~ msgstr "Ergebnisse löschen und den Import neu starten!"
+
+#~ msgid "Community"
+#~ msgstr "Community"
 
 #~ msgid "Conference Dashboard"
 #~ msgstr "Tagung Dashboard"
@@ -14553,8 +14610,14 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 #~ msgid "PIWIK configuration incomplete for tracking."
 #~ msgstr "PIWIK Konfiguration ist unvollständig zum Tracking."
 
+#~ msgid "Password reset successful"
+#~ msgstr "Passwort erfolgreich geändert"
+
 #~ msgid "Password set"
 #~ msgstr "Passwort gesetzt"
+
+#~ msgid "Personal"
+#~ msgstr "Persönlich"
 
 #~ msgid "Phone number (optional)"
 #~ msgstr "Mobilnumer (optional)"
@@ -14704,6 +14767,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Temporary restrictions"
 #~ msgstr "Temporäre Einschränkungen"
+
+#~ msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
+#~ msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer/innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner/innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer/innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
 
 #~ msgid "The CSV file was read successfully and the import is currently running on the server!"
 #~ msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"

@@ -8,6 +8,7 @@ import pytz
 from rest_framework import serializers
 
 from cosinnus.models import MEMBERSHIP_ADMIN, RelatedGroups, get_cosinnus_group_model
+from cosinnus.utils.files import image_thumbnail_url
 
 __all__ = ('GroupSimpleSerializer', 'CosinnusSocietySerializer', 'CosinnusProjectSerializer')
 
@@ -30,6 +31,8 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
     related = serializers.SerializerMethodField()
     child_projects = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
+    background_image_small = serializers.SerializerMethodField()
+    background_image_large = serializers.SerializerMethodField()
 
     def get_description(self, obj):
         return obj.description_long or obj.description
@@ -68,6 +71,22 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
     def get_child_projects(self, obj):
         return [project.slug for project in obj.get_children()]
 
+    def _get_wallpaper_url(self, obj, size):
+        image_url = None
+        if obj.wallpaper:
+            image_url = image_thumbnail_url(obj.wallpaper, size)
+            if image_url:
+                image_url = self.context['request'].build_absolute_uri(image_url)
+        return image_url
+
+    def get_background_image_small(self, obj):
+        """Get the small wallpaper thumbnail url the same size as used by the map tiles."""
+        return self._get_wallpaper_url(obj, (500, 275))
+
+    def get_background_image_large(self, obj):
+        """Get the large wallpaper thumbnail url the same size as used by the map tiles."""
+        return self._get_wallpaper_url(obj, (1000, 350))
+
     class Meta(object):
         model = CosinnusSociety
         fields = (
@@ -88,6 +107,8 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
             'created',
             'last_modified',
             'is_open_for_cooperation',
+            'background_image_small',
+            'background_image_large',
         )
 
 

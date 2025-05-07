@@ -65,6 +65,8 @@ class ExchangeGroupSerializer(ExchangeSerializerMixin, serializers.Serializer):
     mt_location_lat = serializers.SerializerMethodField()
     mt_location_lon = serializers.SerializerMethodField()
     icon_image_url = serializers.URLField(source='avatar')
+    background_image_small_url = serializers.URLField(source='background_image_small')
+    background_image_large_url = serializers.URLField(source='background_image_large')
 
     def get_mt_location(self, obj):
         if len(obj.get('locations', [])) > 0:

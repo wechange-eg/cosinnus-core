@@ -65,6 +65,7 @@ class CosinnusConf(AppConf):
         '/favicon.ico',
         '/robots.txt',
         '/o/',
+        '/cloud/oauth2/profile/',
         '/group/forum/cloud/oauth2/',
         f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
         '/account/verify_email/',
@@ -1210,11 +1211,9 @@ class CosinnusConf(AppConf):
 
     # whether to enable the cosinnus cloud app
     CLOUD_ENABLED = False
-    # whether to show the cosinnus cloud dashboard widget
-    CLOUD_DASHBOARD_WIDGET_ENABLED = True
-    # whether the quicksearch includes cloud results.
-    # comes with a large reduction in search speed as nextcloud is slow
-    CLOUD_QUICKSEARCH_ENABLED = False
+    # Whether to enable cloud search in the map.
+    # Currently not available, as the respective NextCloud search API is not available.
+    CLOUD_SEARCH_ENABLED = False
 
     # base url of the nextcloud service, without trailing slash
     CLOUD_NEXTCLOUD_URL = None
@@ -1238,6 +1237,7 @@ class CosinnusConf(AppConf):
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
 
     # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
+    # DEPRECATED: now handled by Ansible.
     CLOUD_NEXTCLOUD_SETTINGS = {
         'DEFAULT_USER_QUOTA': '100 MB',  # in human readable nextcloud format
         'ALLOW_PUBLIC_UPLOADS': 'no',  # "yes" or "no"
@@ -1275,6 +1275,10 @@ class CosinnusConf(AppConf):
     USERDASHBOARD_FORCE_ONLY_MINE = False
 
     GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED = False
+
+    # If enabled the full dashboard header text is shown, otherwise the height is limited and can be expaneded with
+    # the "more" link.
+    GROUP_DASHBOARD_HEADER_TEXT_EXPANDED = False
 
     # enable e-mail downloads of newsletter-enabled users in the administration area
     # if enabled, this allows all portal-admins to download user emails, this might be

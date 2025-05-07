@@ -6,6 +6,14 @@
     {% render_field field %}
     <label for="{{ field.auto_id }}" {% if label_class %}class="{{ label_class }}"{% endif %}>
         {{ checkbox_label }}
+        {% if  label == checkbox_label %}
+            {# If the checkbox field has no extra label, add the optional / required info to the checkbox_label. #}
+            {% if field and not field.field.required and not required and not hide_optional and not SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL %}
+                ({% trans "optional" context "written next to optional form fields" %})
+            {% elif show_required or field.field.required and SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL %}
+                <span class="required-label">{{ SETTINGS.COSINNUS_FIELDS_REQUIRED_LABEL }}</span>
+            {% endif %}
+        {% endif %}
     </label>
 {% endcaptureas %}
 {% captureas this_label %}{% if label != checkbox_label %}{{ label }}{% endif %}{% endcaptureas %}

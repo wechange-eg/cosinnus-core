@@ -7,7 +7,7 @@
                 <li class="media">
                     <span class="pull-left square-date-icon">
                         <div>{{ event.from_date|parse_datetime|date:"d" }}</div>
-                        <div>{{ event.from_date|parse_datetime|date:"M" }}</div>
+                        <div>{{ event.from_date|parse_datetime|date:"M 'y" }}</div>
                     </span>
                     <div class="media-body">
                         <span class="annotation">

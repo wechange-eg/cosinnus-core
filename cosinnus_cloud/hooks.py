@@ -20,7 +20,7 @@ from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import is_user_active
 from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group
-from cosinnus_cloud.utils.nextcloud import rename_group_and_group_folder
+from cosinnus_cloud.utils.nextcloud import rename_group_folder, set_group_display_name
 
 from .utils import nextcloud
 
@@ -335,8 +335,10 @@ if settings.COSINNUS_CLOUD_ENABLED:
         if 'cosinnus_cloud' in apps and settings.COSINNUS_CLOUD_ENABLED:
             disable_group_folder_for_group(group)
 
-    def rename_nextcloud_groupfolder_on_group_rename(sender, created, **kwargs):
-        """Tries to rename the nextcloud group folder to reflect a Group's naming change"""
+    def rename_nextcloud_group_and_groupfolder_on_group_rename(sender, created, **kwargs):
+        """
+        Tries to rename the nextcloud group folder and change the group display name to reflect a Group's naming change.
+        """
         if not created:
             group = kwargs.get('instance')
             if (
@@ -354,9 +356,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
                 if new_nextcloud_groupfolder_name != old_nextcloud_groupfolder_name:
                     result = False
                     try:
-                        result = rename_group_and_group_folder(
-                            group.nextcloud_groupfolder_id, new_nextcloud_groupfolder_name
-                        )
+                        result = rename_group_folder(group.nextcloud_groupfolder_id, new_nextcloud_groupfolder_name)
                     except Exception as e:
                         logger.warning('Could not rename Nextcloud group folder.', extra={'exc': e})
                     # if the rename was successful, save the new group folder name.
@@ -367,12 +367,19 @@ if settings.COSINNUS_CLOUD_ENABLED:
                         get_cosinnus_group_model().objects.filter(pk=group.pk).update(
                             nextcloud_groupfolder_name=new_nextcloud_groupfolder_name
                         )
+
+                        # change the group display name
+                        try:
+                            set_group_display_name(group.nextcloud_group_id, new_nextcloud_groupfolder_name)
+                        except Exception as e:
+                            logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
+
                         return
                 group.refresh_from_db()
 
-    post_save.connect(rename_nextcloud_groupfolder_on_group_rename, sender=get_cosinnus_group_model())
-    post_save.connect(rename_nextcloud_groupfolder_on_group_rename, sender=CosinnusProject)
-    post_save.connect(rename_nextcloud_groupfolder_on_group_rename, sender=CosinnusSociety)
+    post_save.connect(rename_nextcloud_group_and_groupfolder_on_group_rename, sender=get_cosinnus_group_model())
+    post_save.connect(rename_nextcloud_group_and_groupfolder_on_group_rename, sender=CosinnusProject)
+    post_save.connect(rename_nextcloud_group_and_groupfolder_on_group_rename, sender=CosinnusSociety)
 
     # maybe listen to user_logged_in and user_logged_out too?
     # https://docs.djangoproject.com/en/3.0/ref/contrib/auth/#django.contrib.auth.signals.user_logged_in

@@ -11,7 +11,7 @@ logger = logging.getLogger('cosinnus')
 
 
 class Command(BaseCommand):
-    help = 'Applies configured settings from conf `COSINNUS_CLOUD_NEXTCLOUD_SETTINGS` via OCS '
+    help = '(DEPRECATED) Applies configured settings from conf `COSINNUS_CLOUD_NEXTCLOUD_SETTINGS` via OCS '
 
     def handle(self, *args, **options):
         apply_nextcloud_settings(print_to_console=True)

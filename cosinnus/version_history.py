@@ -18,6 +18,12 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.4.0': {
+        'datetime': datetime(2025, 5, 7, tzinfo=pytz.utc),
+        'title': _('Version 2.4.0 released'),
+        'short_text': _('This update provides several small bugfixes and stability improvements.'),
+        'full_text': None,
+    },
     '2.3.0': {
         'datetime': datetime(2025, 4, 1, tzinfo=pytz.utc),
         'title': _('Version 2.3.0 released'),
