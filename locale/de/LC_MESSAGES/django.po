@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-30 12:24+0200\n"
+"POT-Creation-Date: 2025-05-07 10:52+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2069,6 +2069,12 @@ msgstr "Ihr wurdet gematcht!"
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr "Ihr beide habt ähnliche Interessen und wurdet gematcht, sehr schön! Was hat dich an dem Profil der anderen Person angesprochen? Woran arbeitet ihr gerade? Welche Themen beschäftigen euch aktuell?"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "User Online on Day"
+msgstr "User Online an Tag"
 
 msgid "Deletion after"
 msgstr "Wird gelöscht nach"
@@ -4213,9 +4219,6 @@ msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
 msgid "Change email address"
 msgstr "E-Mail Adresse ändern"
 
-msgid "Date"
-msgstr "Datum"
-
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
 msgstr "Zeitzone: %(TIME_ZONE)s"
@@ -6297,6 +6300,9 @@ msgstr "Speicherbedarf Gruppen"
 msgid "HD space used by projects"
 msgstr "Speicherbedarf Projekte"
 
+msgid "User Activity Timeline"
+msgstr "Benutzeraktivitäts-Timeline"
+
 msgid "User statistics (min 1x logged in)"
 msgstr "Benutzerstatistiken (mind. 1x eingeloggt)"
 
@@ -6593,10 +6599,6 @@ msgstr "Auf der Karte"
 #. Translators: __INCLUDE_JS_PO__
 msgid "In my Groups and Projects"
 msgstr "In meinen Gruppen und Projekten"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "In my Cloud Files"
-msgstr "In meinen Cloud-Dateien"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
@@ -8354,14 +8356,17 @@ msgstr "Bitte gib auch ein Enddatum an"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 
+msgid "Version 2.4.0 released"
+msgstr "Version 2.4.0 veröffentlicht"
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr "Dieses Update enthält mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
+
 msgid "Version 2.3.0 released"
 msgstr "Version 2.3.0 veröffentlicht"
 
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
 msgstr "Dieses Update enthält viele visuelle Verbesserungen für das neue Redesign und mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
-
-msgid "This update provides several small bugfixes and stability improvements."
-msgstr "Dieses Update enthält mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
 
 msgid "Redesign Update"
 msgstr "Redesign-Update"
@@ -9244,9 +9249,6 @@ msgstr "Cloud Stub"
 
 msgid "Click here to view the files directly in the cloud."
 msgstr "Klicke hier, um die Dateien direkt in der Cloud anzusehen."
-
-msgid "There are no cloud files yet"
-msgstr "Es gibt noch keine Cloud-Dateien"
 
 msgid "Restart"
 msgstr "Neustart"
@@ -13916,29 +13918,26 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
-#~ msgid "Please provide your motivation for applying"
-#~ msgstr "Bitte gib deine Motivation für die Teilnahme an"
-
 #~ msgid "Debug"
 #~ msgstr "Fehlersuche"
 
-#~ msgid "Administrators unknown"
-#~ msgstr "Administrator/innen unbekannt"
+#~ msgid "In my Cloud Files"
+#~ msgstr "In meinen Cloud-Dateien"
 
-#~ msgid "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
-#~ msgstr "%(sender_name)s findet dich und deine Aktivitäten interessant. Schaue dir das Nutzer/innen-Profil an"
+#~ msgid "Please provide your motivation for applying"
+#~ msgstr "Bitte gib deine Motivation für die Teilnahme an"
 
-#~ msgid "Community"
-#~ msgstr "Community"
+#~ msgid "Require applicants to answer questions about their motivation for applying"
+#~ msgstr "Antragsstellende müssen Fragen über ihre Motiviation für die Teilnahme beantworten"
 
-#~ msgid "Password reset successful"
-#~ msgstr "Passwort erfolgreich geändert"
+#~ msgid "There are no cloud files yet"
+#~ msgstr "Es gibt noch keine Cloud-Dateien"
 
-#~ msgid "Personal"
-#~ msgstr "Persönlich"
+#~ msgid "You can create Groups or Projects via the '+' button in the header."
+#~ msgstr "Du kannst eigene Gruppen oder Projekte über den '+'-Button im Header anlegen."
 
-#~ msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
-#~ msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer/innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner/innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer/innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
+#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#~ msgstr "Du kannst eigene Ideen über den '+'-Button im Header anlegen oder bestehende Ideen hier entdecken"
 
 #~ msgid "%(numfiles)d files were deleted successfully."
 #~ msgstr "%(numfiles)d Dateien wurden erfolgreich gelöscht."
@@ -13957,6 +13956,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "%(sender_name)s completed a poll you are following"
 #~ msgstr "%(sender_name)s hat eine Umfrage (dem du folgst) beendet"
+
+#~ msgid "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
+#~ msgstr "%(sender_name)s findet dich und deine Aktivitäten interessant. Schaue dir das Nutzer/innen-Profil an"
 
 #~ msgid "%(sender_name)s invited you to apply for %(team_name)s"
 #~ msgstr "%(sender_name)s hat dich eingeladen, bei %(team_name)s Teilnahme zu beantragen"
@@ -13999,6 +14001,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Add workshop"
 #~ msgstr "Workshop hinzufügen"
+
+#~ msgid "Administrators unknown"
+#~ msgstr "Administrator/innen unbekannt"
 
 #~ msgid "All groups"
 #~ msgstr "Alle Gruppen"
@@ -14122,6 +14127,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Clear results and start a new import!"
 #~ msgstr "Ergebnisse löschen und den Import neu starten!"
+
+#~ msgid "Community"
+#~ msgstr "Community"
 
 #~ msgid "Conference Dashboard"
 #~ msgstr "Tagung Dashboard"
@@ -14602,8 +14610,14 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 #~ msgid "PIWIK configuration incomplete for tracking."
 #~ msgstr "PIWIK Konfiguration ist unvollständig zum Tracking."
 
+#~ msgid "Password reset successful"
+#~ msgstr "Passwort erfolgreich geändert"
+
 #~ msgid "Password set"
 #~ msgstr "Passwort gesetzt"
+
+#~ msgid "Personal"
+#~ msgstr "Persönlich"
 
 #~ msgid "Phone number (optional)"
 #~ msgstr "Mobilnumer (optional)"
@@ -14753,6 +14767,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Temporary restrictions"
 #~ msgstr "Temporäre Einschränkungen"
+
+#~ msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
+#~ msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer/innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner/innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer/innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
 
 #~ msgid "The CSV file was read successfully and the import is currently running on the server!"
 #~ msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"

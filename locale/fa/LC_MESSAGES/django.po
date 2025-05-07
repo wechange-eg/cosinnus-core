@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-30 12:24+0200\n"
+"POT-Creation-Date: 2025-05-07 10:52+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,7 +155,6 @@ msgid "No"
 msgstr "نه"
 
 #, fuzzy
-#| msgid "Persons"
 msgid "Personal info"
 msgstr "افراد"
 
@@ -201,7 +200,6 @@ msgid "Logout users"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%d Users' rocketchat room memberships were re-done."
 msgid "%(count)d Users' group memberships were refreshed."
 msgstr "%d عضویت اتاق راکت‌چت کاربران از نو انجام شدند."
 
@@ -233,12 +231,10 @@ msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: مشکل عضویت اتاق ناپیدای کاربران را حل کن"
 
 #, fuzzy, python-format
-#| msgid "%d Users were made RocketChat admins."
 msgid "%d Users were made Nextcloud admins."
 msgstr "%d کاربر مدیر راکت‌چت شدند."
 
 #, fuzzy
-#| msgid "Rocket: Make user RocketChat admin"
 msgid "Nextcloud: Make user Nextcloud admin"
 msgstr "Rocket: کاربر راکت‌چت را مدیر کن"
 
@@ -257,7 +253,6 @@ msgid "%(model_name)s with this %(field_name)s already exists."
 msgstr ""
 
 #, fuzzy
-#| msgid "My Dashboard"
 msgid "Personal Dashboard"
 msgstr "داشبورد من"
 
@@ -265,7 +260,6 @@ msgid "Go To..."
 msgstr ""
 
 #, fuzzy
-#| msgid "Persons"
 msgid "My Personal Space"
 msgstr "افراد"
 
@@ -418,12 +412,10 @@ msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\"
 msgstr "%(sender_name)s از شما می‌خواهد که به پروژه‌ی \"%(team_name)s\" که روی %(portal_name)s قراردارد بپیوندید! روی نام پروژه که در زیر آمده کلیک کنید تا ببینید چه خبر است و همکاری کنید!"
 
 #, fuzzy
-#| msgid "Mobilität"
 msgid "Mobility"
 msgstr "ترابری"
 
 #, fuzzy
-#| msgid "Energie"
 msgid "Energy"
 msgstr "نیرو"
 
@@ -443,7 +435,6 @@ msgid "Art, Culture und Leisure Activities"
 msgstr ""
 
 #, fuzzy
-#| msgid "Geld und Finanzen"
 msgid "Money and Finance"
 msgstr "پول و امور مالی"
 
@@ -506,7 +497,6 @@ msgid "Conferences"
 msgstr "کنفرانس‌ها"
 
 #, fuzzy
-#| msgid "Notification Preferences"
 msgid "Invitations to Conferences"
 msgstr "ترجیحات آگاه‌سازی"
 
@@ -782,17 +772,14 @@ msgid "A conference you are attending has been updated"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgid "The conference %(object_name)s has been updated"
 msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
 
 #, fuzzy
-#| msgid "You are an admin of this team"
 msgid "You are attending this conference"
 msgstr "شما یک مدیر این گروه هستید"
 
 #, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgid "The conference \"%(object_name)s\" was updated."
 msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
 
@@ -800,7 +787,6 @@ msgid "The time of a conference you are attending has been updated"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgid "The time of conference %(object_name)s has been updated"
 msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
 
@@ -1075,7 +1061,6 @@ msgid "Persons"
 msgstr "افراد"
 
 #, fuzzy
-#| msgid "first name"
 msgid "last name"
 msgstr "نام"
 
@@ -1111,7 +1096,6 @@ msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "برخی از ستون‌های لازم در CSV نمی‌باشند: {missing_headers}!"
 
 #, fuzzy, python-format
-#| msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
 msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
 msgstr "ردیف‌ها در این سطور تعداد موارد مشابه با سرآیند ({len(processed_header)})  را در خود ندارند: {\", \".join(mismatched_rows)}!"
 
@@ -1356,7 +1340,6 @@ msgid "User motivation questions"
 msgstr ""
 
 #, fuzzy
-#| msgid "request to join"
 msgid "Request contact option"
 msgstr "درخواست عضویت بدهید"
 
@@ -1563,7 +1546,6 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
 #, fuzzy
-#| msgid "Revoke Invitation"
 msgid "Is Late Invitation"
 msgstr "دعوت را باطل کن"
 
@@ -1694,7 +1676,6 @@ msgid "Project Type"
 msgstr ""
 
 #, fuzzy
-#| msgid "Title"
 msgid "Subtitle"
 msgstr "عنوان"
 
@@ -1827,7 +1808,6 @@ msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr ""
 
 #, fuzzy
-#| msgid "View invitation"
 msgid "Use invite token"
 msgstr "دیدن دعوت‌نامه"
 
@@ -2014,7 +1994,6 @@ msgid "Is Moderator"
 msgstr ""
 
 #, fuzzy
-#| msgid "ToS accepted?"
 msgid "ToS accepted"
 msgstr "ToS پذیرفته شد؟"
 
@@ -2114,8 +2093,13 @@ msgstr ""
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
 
+msgid "Date"
+msgstr ""
+
+msgid "User Online on Day"
+msgstr ""
+
 #, fuzzy
-#| msgid "Delete note"
 msgid "Deletion after"
 msgstr "نوشته را پاک کن"
 
@@ -2632,7 +2616,6 @@ msgid "To delete this user account, please go back to the user account list, fin
 msgstr ""
 
 #, fuzzy
-#| msgid "View on page"
 msgid "View on site"
 msgstr "روی برگه نشان بده"
 
@@ -3460,7 +3443,6 @@ msgid "Motivation for applying"
 msgstr "انگیزه‌ی ارایه‌ی درخواست"
 
 #, fuzzy
-#| msgid "Option"
 msgid "Options"
 msgstr "گزینه"
 
@@ -3483,7 +3465,6 @@ msgid "Your name"
 msgstr ""
 
 #, fuzzy
-#| msgid "Please enter a message..."
 msgid "Please enter your name"
 msgstr "لطفن یک پیام وارد کنید..."
 
@@ -3531,12 +3512,10 @@ msgid "No, do not send"
 msgstr ""
 
 #, fuzzy
-#| msgid "Accept invitation"
 msgid "Copy invitation"
 msgstr "پذیرفتن دعوت‌نامه"
 
 #, fuzzy
-#| msgid "Accept invitation"
 msgid "Copy guest invitation"
 msgstr "پذیرفتن دعوت‌نامه"
 
@@ -3624,12 +3603,10 @@ msgid "Define additional custom options."
 msgstr ""
 
 #, fuzzy
-#| msgid "New link to the moved project/group"
 msgid "Remove option"
 msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
 
 #, fuzzy
-#| msgid "Add Todo"
 msgid "Add option"
 msgstr "افزودن کارِبرای‌انجام"
 
@@ -3846,12 +3823,10 @@ msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
-#| msgid "the rooms welcome message"
 msgid "Welcome Message"
 msgstr "پیام خوش‌آمدگویی در اتاق‌ها"
 
 #, fuzzy
-#| msgid "the rooms welcome message"
 msgid "Define a custom welcome message."
 msgstr "پیام خوش‌آمدگویی در اتاق‌ها"
 
@@ -3860,12 +3835,10 @@ msgid "Conference Statistics"
 msgstr "گذرواژه برای شرکت‌کننده‌هایی که با تلفن وارد می‌شوند"
 
 #, fuzzy
-#| msgid "Conference Room"
 msgid "Conference Name"
 msgstr "اتاق کنفرانس"
 
 #, fuzzy
-#| msgid "Revoke Invitation"
 msgid "Num. Invitations"
 msgstr "دعوت را باطل کن"
 
@@ -3893,7 +3866,6 @@ msgid "Room Type"
 msgstr "نوع اتاق"
 
 #, fuzzy
-#| msgid "Description"
 msgid "Duration"
 msgstr "تعریف"
 
@@ -4042,7 +4014,6 @@ msgid "Answer"
 msgstr ""
 
 #, fuzzy
-#| msgid "Description"
 msgid "Question"
 msgstr "تعریف"
 
@@ -4065,12 +4036,10 @@ msgid "minutes"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete reported item..."
 msgid "Delete Recording"
 msgstr "مورد گزارش‌شده را پاک کن..."
 
 #, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
 msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
@@ -4191,13 +4160,11 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Created"
 msgid "Created on: "
 msgstr "ساخته‌شده"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Last edited by"
 msgid "Last updated on: "
 msgstr "آخرین بار ویرایش شده توسط"
 
@@ -4280,12 +4247,8 @@ msgid "If you would like to change your email address, you can do it here:"
 msgstr ""
 
 #, fuzzy
-#| msgid "email address"
 msgid "Change email address"
 msgstr "نشانی ایمیل"
-
-msgid "Date"
-msgstr ""
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -4480,7 +4443,6 @@ msgid "Invited to be a member"
 msgstr "به عضویت دعوت کن"
 
 #, fuzzy
-#| msgid "View invitation"
 msgid "late invitation"
 msgstr "دیدن دعوت‌نامه"
 
@@ -4687,7 +4649,6 @@ msgid "Select Projects/Groups"
 msgstr ""
 
 #, fuzzy
-#| msgid "Conferences"
 msgid "Conference subtitle"
 msgstr "کنفرانس‌ها"
 
@@ -4695,7 +4656,6 @@ msgid "The subtitle is shown in the conference and on the conference micro site.
 msgstr ""
 
 #, fuzzy
-#| msgid "This function is not enabled for this conference."
 msgid "Add a subtitle for the conference."
 msgstr "این کارایی برای کنفرانس فعال نشده است."
 
@@ -4802,7 +4762,6 @@ msgid "You may still override these options in each conference room and in indiv
 msgstr ""
 
 #, fuzzy
-#| msgid "Accept invitation"
 msgid "Create invite token"
 msgstr "پذیرفتن دعوت‌نامه"
 
@@ -4819,7 +4778,6 @@ msgid "The current token is: "
 msgstr ""
 
 #, fuzzy
-#| msgid "Created"
 msgid "Create token"
 msgstr "ساخته‌شده"
 
@@ -5209,7 +5167,6 @@ msgid "All Projects"
 msgstr ""
 
 #, fuzzy
-#| msgid "Status"
 msgid "Statistics"
 msgstr "وضعیت"
 
@@ -5369,7 +5326,6 @@ msgid "OK"
 msgstr "باشه"
 
 #, fuzzy
-#| msgid "Enter a number for sort order"
 msgid "Enter a new name for the folder"
 msgstr "یک شماره برای دسته‌بندی وارد کنید"
 
@@ -5407,7 +5363,6 @@ msgid "New folder name"
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter a number for sort order"
 msgid "Enter a name for the new folder"
 msgstr "یک شماره برای دسته‌بندی وارد کنید"
 
@@ -6217,6 +6172,9 @@ msgstr ""
 msgid "HD space used by projects"
 msgstr ""
 
+msgid "User Activity Timeline"
+msgstr ""
+
 msgid "User statistics (min 1x logged in)"
 msgstr ""
 
@@ -6512,10 +6470,6 @@ msgid "In my Groups and Projects"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "In my Cloud Files"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
 msgstr ""
 
@@ -6799,12 +6753,10 @@ msgid "For example"
 msgstr ""
 
 #, fuzzy
-#| msgid "Restricted"
 msgid "Restricted Guest Access"
 msgstr "محدودشده"
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "Access restricted for guest accounts"
 msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
@@ -6886,7 +6838,6 @@ msgid "Enter new email address"
 msgstr "نشانی ایمیل"
 
 #, fuzzy
-#| msgid "email address"
 msgid "New email address"
 msgstr "نشانی ایمیل"
 
@@ -6903,7 +6854,6 @@ msgid "Success!"
 msgstr ""
 
 #, fuzzy
-#| msgid "Your stream was added successfully."
 msgid "Your email address was successfully changed to:"
 msgstr "جویبار داده‌ی شما با موفقیت افزوده شد."
 
@@ -7344,7 +7294,6 @@ msgid "A user export is in progress. As soon as the export is finished it will b
 msgstr ""
 
 #, fuzzy
-#| msgid "Mark as finished"
 msgid "User export finished"
 msgstr "نشانه‌ی پایان‌یافته بگذارید"
 
@@ -7373,7 +7322,6 @@ msgid "Retry user export"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete reported item..."
 msgid "Delete exported data"
 msgstr "مورد گزارش‌شده را پاک کن..."
 
@@ -8049,7 +7997,6 @@ msgid "Should your group be visible for the anonymous users? The microsite may b
 msgstr ""
 
 #, fuzzy
-#| msgid "Hide public items outside of your groups"
 msgid "Enable the public visibility of your group"
 msgstr "موردهای همگانی خارج از گروه‌تان را مخفی کنید"
 
@@ -8160,7 +8107,6 @@ msgid "Where is the conference active?"
 msgstr ""
 
 #, fuzzy
-#| msgid "Conferences"
 msgid "Conference is publicly visible"
 msgstr "کنفرانس‌ها"
 
@@ -8192,7 +8138,6 @@ msgid "You can access and participate in the conference that invited you"
 msgstr ""
 
 #, fuzzy
-#| msgid "This function is not enabled for this conference."
 msgid "This is only visible to admins of this conference."
 msgstr "این کارایی برای کنفرانس فعال نشده است."
 
@@ -8245,7 +8190,6 @@ msgid "Question about"
 msgstr ""
 
 #, fuzzy
-#| msgid "Please enter a message..."
 msgid "Please enter your OTP token."
 msgstr "لطفن یک پیام وارد کنید..."
 
@@ -8280,13 +8224,16 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 2.4.0 released"
+msgstr ""
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr ""
+
 msgid "Version 2.3.0 released"
 msgstr ""
 
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
-msgstr ""
-
-msgid "This update provides several small bugfixes and stability improvements."
 msgstr ""
 
 msgid "Redesign Update"
@@ -8504,7 +8451,6 @@ msgid "You have successfully disabled two-factor authentication for your account
 msgstr ""
 
 #, fuzzy
-#| msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
 msgstr "یک خطا در یکی از زمینه‌هایی که وارد کرده‌اید هست. لطفن پیش از ذخیره کردن آن را برطرف کنید!"
 
@@ -8608,7 +8554,6 @@ msgid "The %(team_type)s was changed successfully."
 msgstr ""
 
 #, fuzzy
-#| msgid "Edit"
 msgid "Edited."
 msgstr "ویرایش کن"
 
@@ -8663,7 +8608,6 @@ msgid "All members of groups/projects you selected had already been invited or h
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Invite users"
 msgid "Invited user \"%(user)s\"."
 msgstr "کاربران را دعوت کن"
 
@@ -8770,7 +8714,6 @@ msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Invited Members"
 msgid "Invited \"%(emails)s\"."
 msgstr "کاربران دعوت‌نامه"
 
@@ -9092,9 +9035,6 @@ msgstr ""
 msgid "Click here to view the files directly in the cloud."
 msgstr ""
 
-msgid "There are no cloud files yet"
-msgstr "هنوز پوشه‌ای توی اَبر نیست"
-
 msgid "Restart"
 msgstr "بازراه‌اندازی"
 
@@ -9115,7 +9055,6 @@ msgid "Applicants and members"
 msgstr ""
 
 #, fuzzy
-#| msgid "List of Applicants"
 msgid "All applicants"
 msgstr "فهرست درخواست‌دهنده‌ها"
 
@@ -9138,12 +9077,10 @@ msgid "This function is not enabled for this conference."
 msgstr "این کارایی برای کنفرانس فعال نشده است."
 
 #, fuzzy
-#| msgid "Successfully activated user account"
 msgid "successfully activated all user accounts."
 msgstr "حساب‌های کاربران با موفقیت فعال شدند"
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "successfully deactivated all user accounts."
 msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
@@ -9157,7 +9094,6 @@ msgid "Successfully removed user"
 msgstr "کاربر با موفقیت حذف شد"
 
 #, fuzzy
-#| msgid "Successfully removed user"
 msgid "Successfully removed all user"
 msgstr "کاربر با موفقیت حذف شد"
 
@@ -9171,14 +9107,12 @@ msgid "Last Name"
 msgstr "نام خانوادگی"
 
 #, fuzzy, python-format
-#| msgid "Successfully deactivated user account"
 msgid "Successfully created %(created_count)d account. "
 msgid_plural "Successfully created  %(created_count)d accounts. "
 msgstr[0] "حساب‌های کاربران با موفقیت غیرفعال شدند"
 msgstr[1] "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "Successfully updated accounts."
 msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
@@ -9208,7 +9142,6 @@ msgid "Recording %s was not found, has already been deleted, or you do not have 
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "The import was successfully archived."
 msgid "Recording %s was successfully deleted."
 msgstr "آن‌چه وارد شده با موفقیت بایگانی شد."
 
@@ -9260,7 +9193,6 @@ msgid "Status"
 msgstr "وضعیت"
 
 #, fuzzy
-#| msgid "This function is not enabled for this conference."
 msgid "Attendance data is not available for this conference."
 msgstr "این کارایی برای کنفرانس فعال نشده است."
 
@@ -10473,12 +10405,10 @@ msgid "Your comment was deleted successfully."
 msgstr "نظر شما با موفقیت پاک شد."
 
 #, fuzzy
-#| msgid "Save changes"
 msgid "Exchange"
 msgstr "تغییرات را ذخیره کن"
 
 #, fuzzy
-#| msgid "Save changes"
 msgctxt "the_app"
 msgid "exchange"
 msgstr "تغییرات را ذخیره کن"
@@ -11074,7 +11004,6 @@ msgid "A technical error occurred in the RocketChat service. Some of your action
 msgstr ""
 
 #, fuzzy
-#| msgid "Contact Phone Number"
 msgid "Contact request"
 msgstr "شماره‌ی تلفن تماس"
 
@@ -11125,7 +11054,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Show chat"
 msgid "Reload chat"
 msgstr "گفتگو را نشان دهید"
 
@@ -11805,17 +11733,14 @@ msgid "An account already exists with this e-mail address. To make sure that you
 msgstr ""
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "Successfully signed in as {}."
 msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "Successfully connected account."
 msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
 #, fuzzy
-#| msgid "Successfully removed user"
 msgid "Successfully removed connection."
 msgstr "کاربر با موفقیت حذف شد"
 
@@ -11845,7 +11770,6 @@ msgid "Disconnect Accounts"
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to disconnect your account account ?"
 msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
 
@@ -11872,7 +11796,6 @@ msgid "Connect Account with %(provider)s"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid " Do you really want to connect your account with the one on %(provider)s ? "
 msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
@@ -11933,7 +11856,6 @@ msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
 
 #, fuzzy
-#| msgid "You cannot change your application anymore."
 msgid "You can change your this data any time in you profile settings."
 msgstr "شما دیگر نمی‌توانید درخواست‌تان را تغییر دهید."
 
@@ -11984,7 +11906,6 @@ msgid " %(portal_name)s wants access to the following information of your %(prov
 msgstr ""
 
 #, fuzzy
-#| msgid "first name"
 msgid "last name (if set)"
 msgstr "نام"
 
@@ -12039,22 +11960,18 @@ msgid "organization"
 msgstr ""
 
 #, fuzzy
-#| msgid "Portal membership"
 msgid "Organization membership"
 msgstr "عضویت در درگاه"
 
 #, fuzzy
-#| msgid "Portal memberships"
 msgid "Organization memberships"
 msgstr "عضویت‌ها در درگاه"
 
 #, fuzzy
-#| msgid "Team Invite for Unregistered User"
 msgid "Organization Invite for Unregistered User"
 msgstr "دعوت‌های گروه برای کاربر ثبت‌نشده"
 
 #, fuzzy
-#| msgid "Team Invites for Unregistered Users"
 msgid "Organization Invites for Unregistered Users"
 msgstr "دعوت‌های گروه برای کاربران ثبت‌نشده"
 
@@ -12065,12 +11982,10 @@ msgid "Company (commercial)"
 msgstr ""
 
 #, fuzzy
-#| msgid "View invitation"
 msgid "Public institution"
 msgstr "دیدن دعوت‌نامه"
 
 #, fuzzy
-#| msgid "Other teams"
 msgid "Other"
 msgstr "گروه‌های دیگر"
 
@@ -12084,7 +11999,6 @@ msgid "Logo"
 msgstr ""
 
 #, fuzzy
-#| msgid "email address"
 msgid "Email Address"
 msgstr "نشانی ایمیل"
 
@@ -12092,7 +12006,6 @@ msgid "Cosinnus Organization"
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus Conference Settings"
 msgid "Cosinnus Organizations"
 msgstr "تنظیمات کنفرانس Cosinnus"
 
@@ -12116,7 +12029,6 @@ msgid "%(team_name)s - Assigned projects/groups"
 msgstr ""
 
 #, fuzzy
-#| msgid "Assigned to"
 msgid "Assigned projects/groups"
 msgstr "واگذار شده به"
 
@@ -12124,12 +12036,10 @@ msgid "Invite groups/projects..."
 msgstr ""
 
 #, fuzzy
-#| msgid "New link to the moved project/group"
 msgid "Invite project/group"
 msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
 
 #, fuzzy
-#| msgid "Enter a user name or email to find users to invite..."
 msgid "Enter a name to find project/groups to invite..."
 msgstr "یک نام کاریری یا ایمیل وارد کنید تا کاربران را دعوت کنید..."
 
@@ -12137,17 +12047,14 @@ msgid "Invite projects/groups"
 msgstr ""
 
 #, fuzzy
-#| msgid "Invite users"
 msgid "Invited groups/projects"
 msgstr "کاربران را دعوت کن"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid "Do you really want to revoke the invitation for „%(name)s“?"
 msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
 #, fuzzy
-#| msgid "Revoke Invitation for Member"
 msgid "Revoke invitation for project/group"
 msgstr "دعوت‌نامه را یرای کاربر باطل کن"
 
@@ -12155,12 +12062,10 @@ msgid "Project/group requests"
 msgstr ""
 
 #, fuzzy
-#| msgid "Decline Invitation"
 msgid "Decline Admin"
 msgstr "دعوت را رد کن"
 
 #, fuzzy
-#| msgid "New link to the moved project/group"
 msgid "Remove project/group"
 msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
 
@@ -12184,12 +12089,10 @@ msgid "%(team_name)s - Admins"
 msgstr ""
 
 #, fuzzy
-#| msgid "Invited Members"
 msgid "Invited Admins"
 msgstr "کاربران دعوت‌نامه"
 
 #, fuzzy
-#| msgid "Revoke Invitation for Member"
 msgid "Revoke Invitation for Admin"
 msgstr "دعوت‌نامه را یرای کاربر باطل کن"
 
@@ -12200,7 +12103,6 @@ msgid "Admin requested"
 msgstr ""
 
 #, fuzzy
-#| msgid "Current File"
 msgid "Current Admins"
 msgstr "پوشه‌ی فعلی"
 
@@ -12208,22 +12110,18 @@ msgid "Remove Admin"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Edit stream \"%(stream_name)s\""
 msgid "Edit \"%(organization_name)s\""
 msgstr "این جویبار داده‌ی \"%(stream_name)s\" را ویرایش کن"
 
 #, fuzzy
-#| msgid "Delete this Stream"
 msgid "Delete this Organization"
 msgstr "این جویبار داده را پاک کن"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to delete etherpad „%(pad)s“?"
 msgid "Do you really want to delete organization „%(name)s“?"
 msgstr "آیا واقعن می‌خواهید یادداشت „%(pad)s“ را پاک کنید؟"
 
 #, fuzzy
-#| msgid "Decline Invitation"
 msgid "Delete Organization"
 msgstr "دعوت را رد کن"
 
@@ -12280,7 +12178,6 @@ msgid "Project/group %(name)s had already requested and has now been accepted."
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "The import was successfully archived."
 msgid "Project/group %(name)s was successfully invited."
 msgstr "آن‌چه وارد شده با موفقیت بایگانی شد."
 
@@ -12289,7 +12186,6 @@ msgid "Your join request was withdrawn from organization “%(name)s” successf
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgid "You have declined the invitation to organization “%(name)s”."
 msgstr "%(sender_name)s دعوت به %(team_name)s را رد کرده است."
 
@@ -12306,7 +12202,6 @@ msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully.
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Todo \"%(title)s\" could not be assigned."
 msgid "Project/group \"%(name)s\" is no longer assigned."
 msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت واگذار نشد."
 
@@ -12314,12 +12209,10 @@ msgid "Sorry, only portal administrators can create Organizations! You can eithe
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Folder \"%(title)s\" was created successfully."
 msgid "Organization \"%(name)s\" was created successfully."
 msgstr "پوشه‌ی \"%(title)s\" با موفقیت ساخته شد."
 
 #, fuzzy
-#| msgid "Your comment was deleted successfully."
 msgid "Your organization was deleted successfully."
 msgstr "نظر شما با موفقیت پاک شد."
 
@@ -13591,12 +13484,10 @@ msgid "You cannot delete this folder because you do not have permission to delet
 msgstr "شما نمی‌توانید این پوشه را پاک کنید چراکه شما مجوز پاک کردن یک یا چند مورد در آن را ندارید!"
 
 #, fuzzy
-#| msgid "Add Todo"
 msgid "Add object"
 msgstr "افزودن کارِبرای‌انجام"
 
 #, fuzzy
-#| msgid "Create Etherpad"
 msgid "Create container"
 msgstr "یک Etherpad بساز"
 
@@ -13604,63 +13495,22 @@ msgid "ROOT"
 msgstr ""
 
 #, fuzzy
-#| msgid "Show chat"
 msgid "Show"
 msgstr "گفتگو را نشان دهید"
 
 #, fuzzy
-#| msgid "Do you really want to delete this note?"
 msgid "Are you sure you want to delete this container and all objects in it?"
 msgstr "آیا واقعن می‌خواهید این نوشته را پاک کنید؟"
 
 #, fuzzy
-#| msgid "Do you really want to delete this note?"
 msgid "Are you sure you want to delete this object?"
 msgstr "آیا واقعن می‌خواهید این نوشته را پاک کنید؟"
 
-#, fuzzy
-#~| msgid "Comment"
-#~ msgid "Community"
-#~ msgstr "نظر"
+#~ msgid "There are no cloud files yet"
+#~ msgstr "هنوز پوشه‌ای توی اَبر نیست"
 
-#, fuzzy
-#~| msgid "Persons"
-#~ msgid "Personal"
-#~ msgstr "افراد"
-
-#, fuzzy
-#~ msgid "Premium Bookings"
-#~ msgstr "اعلاء"
-
-#, fuzzy
-#~| msgid "Description"
-#~ msgid "Position"
-#~ msgstr "تعریف"
-
-#, fuzzy
-#~| msgid "Important"
-#~ msgid "Important messages:"
-#~ msgstr "ویژه"
-
-#, fuzzy
-#~ msgid "Disable 2FA"
-#~ msgstr "ویرایش‌گر را غیرفعال کن"
-
-#, fuzzy
-#~ msgid "Umwelt"
-#~ msgstr "محیط‌زیست"
-
-#~ msgid "Bildung"
-#~ msgstr "آموزش"
-
-#~ msgid "Gesundheit"
-#~ msgstr "سلامت"
-
-#~ msgid "Ernährung und Konsum"
-#~ msgstr "تغذیه و مصرف"
-
-#~ msgid "Kunst und Kultur"
-#~ msgstr "هنر و فرهنگ"
+#~ msgid "Active"
+#~ msgstr "فعال"
 
 #~ msgid "Arbeit und Recht"
 #~ msgstr "کار و حقوق"
@@ -13669,22 +13519,24 @@ msgstr "آیا واقعن می‌خواهید این نوشته را پاک کن
 #~ msgid "Bauen und Wohnen"
 #~ msgstr "ساختمان و زندگی"
 
-#~ msgid "Klimaschutz"
-#~ msgstr "محافظت از محیط‌زیست"
-
-#~ msgid "Active"
-#~ msgstr "فعال"
-
-#, fuzzy
-#~| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
-#~ msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
-
-#~ msgid "Premium"
-#~ msgstr "اعلاء"
+#~ msgid "Bildung"
+#~ msgstr "آموزش"
 
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "کارگروهی با آدرس کاربرپسند '{}' یافت نمی‌شود"
+
+#, fuzzy
+#~ msgid "Community"
+#~ msgstr "نظر"
+
+#~ msgid "Conference Management"
+#~ msgstr "مدیریت کنفرانس"
+
+#~ msgid "Conference successfully finished and user accounts deactivated"
+#~ msgstr "کنفرانس با موفقیت پایان یافت و حساب‌های کاربران غیرفعال شدند"
+
+#~ msgid "Conference successfully started and user accounts activated"
+#~ msgstr "کنفرانس با موفقیت آغاز شد و حساب‌های کاربران فعال شدند"
 
 #, fuzzy
 #~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
@@ -13695,29 +13547,63 @@ msgstr "آیا واقعن می‌خواهید این نوشته را پاک کن
 #~ msgstr "پیام خوش‌آمدگویی که به شرکت‌کننده‌ها نشان‌داده‌می‌شود"
 
 #, fuzzy
-#~ msgid "participants"
-#~ msgstr "شرکت‌کنندگان"
+#~ msgid "Disable 2FA"
+#~ msgstr "ویرایش‌گر را غیرفعال کن"
 
-#~ msgid "Conference Management"
-#~ msgstr "مدیریت کنفرانس"
+#, fuzzy
+#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+#~ msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
-#~ msgid "Workshop Participant File Upload"
-#~ msgstr "آپلود پوشه‌‌ی شرکت‌کنندگان کارگاه"
+#~ msgid "Ernährung und Konsum"
+#~ msgstr "تغذیه و مصرف"
+
+#~ msgid "Gesundheit"
+#~ msgstr "سلامت"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "ویژه"
+
+#~ msgid "Klimaschutz"
+#~ msgstr "محافظت از محیط‌زیست"
+
+#~ msgid "Kunst und Kultur"
+#~ msgstr "هنر و فرهنگ"
+
+#, fuzzy
+#~ msgid "Personal"
+#~ msgstr "افراد"
 
 #~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 #~ msgstr "لطفن یک CSV با ستون‌های روبرو آپلود کنید: شناسه‌ی کاربری بی‌مانند، نام، نام خانوادگی و یک ستون برای هر کارگاه که با نشانه‌ی کاربرپسند مشخص کنید. اگر به کمک نیاز دارید می‌توانید یک قالب از <a href=\"%(workshop_participants_upload_skeleton)s\">این</a> نشانی دانلود کنید"
 
-#~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-#~ msgstr "سپس یک ردیف برای هر حساب کاربری که می‌خواهید داشته باشید بیافزایید. شما باید یک شناسه‌ی کاربری بی‌مانند بیافزایید ولی می‌توانید نام و نام خانوادگی را خالی بگذارید. سپس یک «۱» به همه‌ی ستون‌های کارگاه‌ها، آن‌جایی که کابران قرار است کاربر معمولی باشند و یا «۲» برای کاربرانی که قرار است مدیر باشند وارد کنید."
+#, fuzzy
+#~ msgid "Position"
+#~ msgstr "تعریف"
+
+#~ msgid "Premium"
+#~ msgstr "اعلاء"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "اعلاء"
 
 #~ msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
 #~ msgstr "آپلود کردن CSV باعث ایجاد حساب‌های کاربری،عضویت حساب‌ها در کارگاه‌ها و دانلود مستقیم یک CSV جدید و دربرگیرنده‌ی حساب‌ها و گذرواژه‌های تازه‌ایجاد‌شده خواهد شد. گذرواژه‌ها تنها زمانی گنجانیده خواهند شد که حساب‌ها ساخته‌شوند. لطفن برگه را پس از دانلود دوباره بارگیری کنید."
 
-#~ msgid "Conference successfully started and user accounts activated"
-#~ msgstr "کنفرانس با موفقیت آغاز شد و حساب‌های کاربران فعال شدند"
+#~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+#~ msgstr "سپس یک ردیف برای هر حساب کاربری که می‌خواهید داشته باشید بیافزایید. شما باید یک شناسه‌ی کاربری بی‌مانند بیافزایید ولی می‌توانید نام و نام خانوادگی را خالی بگذارید. سپس یک «۱» به همه‌ی ستون‌های کارگاه‌ها، آن‌جایی که کابران قرار است کاربر معمولی باشند و یا «۲» برای کاربرانی که قرار است مدیر باشند وارد کنید."
 
-#~ msgid "Conference successfully finished and user accounts deactivated"
-#~ msgstr "کنفرانس با موفقیت پایان یافت و حساب‌های کاربران غیرفعال شدند"
+#, fuzzy
+#~ msgid "Umwelt"
+#~ msgstr "محیط‌زیست"
+
+#~ msgid "Workshop Participant File Upload"
+#~ msgstr "آپلود پوشه‌‌ی شرکت‌کنندگان کارگاه"
 
 #~ msgid "Workshop username"
 #~ msgstr "نام کاربری کارگاه"
+
+#, fuzzy
+#~ msgid "participants"
+#~ msgstr "شرکت‌کنندگان"

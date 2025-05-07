@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-30 12:24+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2025-05-07 10:52+0200\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
 
 msgid "Info"
 msgstr ""
@@ -20,12 +14,10 @@ msgid "Success"
 msgstr ""
 
 #, fuzzy
-#| msgid "Warning!"
 msgid "Warning"
 msgstr "Увага!"
 
 #, fuzzy
-#| msgid "Error!"
 msgid "Error"
 msgstr "Памылка!"
 
@@ -167,7 +159,6 @@ msgid "No"
 msgstr "Не"
 
 #, fuzzy
-#| msgid "Contact info"
 msgid "Personal info"
 msgstr "Кантактныя даныя"
 
@@ -211,7 +202,6 @@ msgid "%(count)d Users were logged out."
 msgstr ""
 
 #, fuzzy
-#| msgid "Logout"
 msgid "Logout users"
 msgstr "Выйсці"
 
@@ -256,17 +246,14 @@ msgid "Nextcloud: Make user Nextcloud admin"
 msgstr "Зрабіў(-ла) Вас адміністратарам"
 
 #, fuzzy
-#| msgid "Recipients"
 msgid "Recipients Count"
 msgstr "Атрымальнікі(-цы)"
 
 #, fuzzy
-#| msgid "Recipients"
 msgid "Recipients Send Count"
 msgstr "Атрымальнікі(-цы)"
 
 #, fuzzy
-#| msgid "Last accessed"
 msgid "Guest access URL"
 msgstr "Нядаўна адкрываныя"
 
@@ -282,7 +269,6 @@ msgid "Go To..."
 msgstr ""
 
 #, fuzzy
-#| msgid "Contact info"
 msgid "My Personal Space"
 msgstr "Кантактныя даныя"
 
@@ -303,7 +289,6 @@ msgid "Users"
 msgstr "Карыстальнікі(-цы)"
 
 #, fuzzy
-#| msgid "Content"
 msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Змесціва"
@@ -329,7 +314,6 @@ msgid "My Profile"
 msgstr "Мой профіль"
 
 #, fuzzy
-#| msgid "Delete Account"
 msgid "My Guest Account"
 msgstr "Выдаліць акаўнт"
 
@@ -351,7 +335,6 @@ msgid "Logout"
 msgstr "Выйсці"
 
 #, fuzzy
-#| msgid "Last accessed"
 msgid "Leave guest access"
 msgstr "Нядаўна адкрываныя"
 
@@ -422,7 +405,6 @@ msgid "You need to verify your email before logging in. We have just sent you an
 msgstr ""
 
 #, fuzzy
-#| msgid "Invalid request."
 msgid "Invalid guest token."
 msgstr "Недапушчальны запыт."
 
@@ -448,12 +430,10 @@ msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\"
 msgstr "%(sender_name)s жадае, каб Вы далучыліся да праекта \"%(team_name)s\" на %(portal_name)s! Націсніце на імя праекта ніжэй, каб паглядзець запрашэнне і пачаць супрацоўніцтва!"
 
 #, fuzzy
-#| msgid "Mobilität"
 msgid "Mobility"
 msgstr "Мабільнасць"
 
 #, fuzzy
-#| msgid "Energie"
 msgid "Energy"
 msgstr "Энергія"
 
@@ -473,7 +453,6 @@ msgid "Art, Culture und Leisure Activities"
 msgstr ""
 
 #, fuzzy
-#| msgid "Geld und Finanzen"
 msgid "Money and Finance"
 msgstr "Грошы і фінансы"
 
@@ -573,7 +552,6 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Гэта акаўнт ужо не актыўны. Вы выйшлі з акаўнту."
 
 #, fuzzy
-#| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Гэта акаўнт ужо не актыўны. Вы выйшлі з акаўнту."
 
@@ -590,7 +568,6 @@ msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr ""
 
 #, fuzzy
-#| msgid "The page you requested is not available for this event at this time."
 msgid "The page you tried to visit is not available for guest accounts."
 msgstr "Запытаная Вамі старонка на дадзены момант недасяжная для гэтай падзеі."
 
@@ -1115,7 +1092,6 @@ msgid "Persons"
 msgstr "Асобы"
 
 #, fuzzy
-#| msgid "Last name"
 msgid "last name"
 msgstr "Прозвішча"
 
@@ -1624,7 +1600,6 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Увядзіце сапраўднае імя. Касыя рыскі забаронены."
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Is Late Invitation"
 msgstr "Запрашэнні"
 
@@ -1758,7 +1733,6 @@ msgid "Project Type"
 msgstr "Тып праекта"
 
 #, fuzzy
-#| msgid "Untitled"
 msgid "Subtitle"
 msgstr "Без назвы"
 
@@ -2011,7 +1985,6 @@ msgid "Recipients"
 msgstr "Атрымальнікі(-цы)"
 
 #, fuzzy
-#| msgid "Additional Recipients"
 msgid "Mails sent to Recipients"
 msgstr "Дадатковыя атрымальнікі(-цы)"
 
@@ -2098,7 +2071,6 @@ msgid "Is Moderator"
 msgstr "З'яўляецца мадэратарам"
 
 #, fuzzy
-#| msgid "ToS accepted?"
 msgid "ToS accepted"
 msgstr "Умовы карыстання прынятыя?"
 
@@ -2175,7 +2147,6 @@ msgid "Match subject"
 msgstr "Запрашэнні"
 
 #, fuzzy
-#| msgid "Attached object"
 msgid "Match object"
 msgstr "Далучаны аб'ект"
 
@@ -2186,7 +2157,6 @@ msgid "User-Match"
 msgstr ""
 
 #, fuzzy
-#| msgid "User"
 msgid "User-Matches"
 msgstr "Карыстальнік(-ца)"
 
@@ -2203,8 +2173,13 @@ msgstr ""
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
 
+msgid "Date"
+msgstr "Дата"
+
+msgid "User Online on Day"
+msgstr ""
+
 #, fuzzy
-#| msgid "Delete offer"
 msgid "Deletion after"
 msgstr "Выдаліць прапанову"
 
@@ -2735,7 +2710,6 @@ msgid "To delete this user account, please go back to the user account list, fin
 msgstr ""
 
 #, fuzzy
-#| msgid "View on page"
 msgid "View on site"
 msgstr "Прагледзець на старонцы"
 
@@ -2997,8 +2971,6 @@ msgid "User Import"
 msgstr ""
 
 #, fuzzy
-#| msgctxt "the verb"
-#| msgid "Export"
 msgid "User Export"
 msgstr "Экспартаваць"
 
@@ -3352,7 +3324,6 @@ msgid "Shrink"
 msgstr "Згарнуць"
 
 #, fuzzy
-#| msgid "Share on Facebook"
 msgid "Share on Mastodon"
 msgstr "Падзяліцца на Facebook"
 
@@ -3444,8 +3415,6 @@ msgid "helptext_50_profileprivacy"
 msgstr "helptext_1_прыватнасць_профіля"
 
 #, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_50_profileprivacy"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy_external_users_forbidden"
 msgstr "helptext_1_прыватнасць_профіля"
@@ -3659,7 +3628,6 @@ msgid "Your name"
 msgstr "Ваша імя"
 
 #, fuzzy
-#| msgid "Please enter a token!"
 msgid "Please enter your name"
 msgstr "Калі ласка, увядзіце маркер!"
 
@@ -3711,17 +3679,14 @@ msgid "No, do not send"
 msgstr ""
 
 #, fuzzy
-#| msgid "Accept invitation"
 msgid "Copy invitation"
 msgstr "Прынять запрашэнне"
 
 #, fuzzy
-#| msgid "Accept invitation"
 msgid "Copy guest invitation"
 msgstr "Прынять запрашэнне"
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There was an error."
 msgstr "Груп няма."
 
@@ -3732,7 +3697,6 @@ msgid "This session is being recorded"
 msgstr ""
 
 #, fuzzy
-#| msgid "Content"
 msgid "Continue"
 msgstr "Змесціва"
 
@@ -3793,12 +3757,10 @@ msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr ""
 
 #, fuzzy
-#| msgid "Remove button"
 msgid "Remove question"
 msgstr "Выдаліць кнопку"
 
 #, fuzzy
-#| msgid "Add button"
 msgid "Add question"
 msgstr "Дадаць кнопку"
 
@@ -3809,17 +3771,14 @@ msgid "Choose one or more options that will be displayed on the application form
 msgstr ""
 
 #, fuzzy
-#| msgid "Additional options"
 msgid "Define additional custom options."
 msgstr "Дадатковыя параметры"
 
 #, fuzzy
-#| msgid "Remove location"
 msgid "Remove option"
 msgstr "Выдаліць месцазнаходжанне"
 
 #, fuzzy
-#| msgid "Add location"
 msgid "Add option"
 msgstr "Дадаць месцазнаходжанне"
 
@@ -4049,7 +4008,6 @@ msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
-#| msgid "Send Message"
 msgid "Welcome Message"
 msgstr "Даслаць паведамленне"
 
@@ -4065,7 +4023,6 @@ msgid "Conference Name"
 msgstr "Стварыць падзею"
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Num. Invitations"
 msgstr "Запрашэнні"
 
@@ -4087,7 +4044,6 @@ msgid "Conference Event Statistics"
 msgstr "Стварыць падзею"
 
 #, fuzzy
-#| msgid "Event date"
 msgid "Event Name"
 msgstr "Дата падзеі"
 
@@ -4096,7 +4052,6 @@ msgid "Room Type"
 msgstr "З тыпу каманды"
 
 #, fuzzy
-#| msgid "Description"
 msgid "Duration"
 msgstr "Апісанне"
 
@@ -4267,7 +4222,6 @@ msgid "Answer"
 msgstr "Адказ"
 
 #, fuzzy
-#| msgid "Suggestion"
 msgid "Question"
 msgstr "Прапанова"
 
@@ -4293,7 +4247,6 @@ msgid "minutes"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete Account"
 msgid "Delete Recording"
 msgstr "Выдаліць акаўнт"
 
@@ -4341,7 +4294,6 @@ msgid "Activate Cloud"
 msgstr "Узнавіць"
 
 #, fuzzy
-#| msgid "Members"
 msgid "Members-Map"
 msgstr "Чальцы"
 
@@ -4426,7 +4378,6 @@ msgstr "Стварыць"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Last edited by"
 msgid "Last updated on: "
 msgstr "Апошні раз адрэдагавана карыстальнікам(-цай)"
 
@@ -4467,7 +4418,6 @@ msgid "Report offensive content"
 msgstr "Паскардзіцца на абразлівае змесціва"
 
 #, fuzzy
-#| msgid "Your phone number is only visible for registered users"
 msgid "Sorry, this feature is only available for registered members."
 msgstr "Ваш нумар тэлефона бачны толькі зарэгістраваным карыстальнікам(-цам)"
 
@@ -4514,12 +4464,8 @@ msgid "If you would like to change your email address, you can do it here:"
 msgstr "Калі ласка, пацвердзіце свой адрас электроннай пошты для %(site_name)s!"
 
 #, fuzzy
-#| msgid "email address"
 msgid "Change email address"
 msgstr "адрас электроннай пошты"
-
-msgid "Date"
-msgstr "Дата"
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -4735,7 +4681,6 @@ msgid "Invited to be a member"
 msgstr "Запрошаны стаць чальцом"
 
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "late invitation"
 msgstr "Выдаліць запрашэнне"
 
@@ -4817,7 +4762,6 @@ msgid "There are no new membership requests."
 msgstr "Больш няма запытаў на членства."
 
 #, fuzzy
-#| msgid "Delete user account"
 msgid "Guest user access"
 msgstr "Выдаліць уліковы запіс карыстальніка(-цы)"
 
@@ -4954,7 +4898,6 @@ msgid "Conference subtitle"
 msgstr "Сканфігураваць"
 
 #, fuzzy
-#| msgid "Enter a title for the new event."
 msgid "The subtitle is shown in the conference and on the conference micro site."
 msgstr "Увядзіце назву новай падзеі."
 
@@ -4966,7 +4909,6 @@ msgid "Description and Infos"
 msgstr "Апісанне і інфармацыя"
 
 #, fuzzy
-#| msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
 msgstr "Гэта публічнае апісанне, якое можа бачыць кожны і якое будзе адлюстроўвацца на мікрасайце."
 
@@ -4989,7 +4931,6 @@ msgid "Describe the project in a few sentences."
 msgstr "Апішыце праект у некалькіх сказах."
 
 #, fuzzy
-#| msgid "This description will be publicly visible."
 msgid "This description will be visible on the entire portal."
 msgstr "Гэта апісанне будзе бачна ўсім."
 
@@ -5072,7 +5013,6 @@ msgid "You may still override these options in each conference room and in indiv
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "Create invite token"
 msgstr "Выдаліць запрашэнне"
 
@@ -5099,7 +5039,6 @@ msgid "This will be the default setting for all content created by members."
 msgstr "Гэта будуць стандартныя налады для ўсяго змесціва, створанага чальцамі."
 
 #, fuzzy
-#| msgid "This group will be set to be publicly visible!"
 msgid "This group will be set to be visible on the entire portal!"
 msgstr "Гэта група будзе пазначаная як бачная ўсім!"
 
@@ -5107,7 +5046,6 @@ msgid "This group will be set to be publicly visible!"
 msgstr "Гэта група будзе пазначаная як бачная ўсім!"
 
 #, fuzzy
-#| msgid "This project will be set to be publicly visible!"
 msgid "This project will be set to be visible on the entire portal!"
 msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
 
@@ -5115,12 +5053,10 @@ msgid "This project will be set to be publicly visible!"
 msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
 
 #, fuzzy
-#| msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)."
 msgstr "Гэта значыць, што кожны(-ая) зарэгістраваны(-ая) карыстальнік(-ца) зможа атрымаць доступ і бачыць яе, пры гэтым толькі чальцы змогуць ствараць змесціва. Акрамя таго, усё змесціва будзе па змаўчанні публічна бачнае (гэта можна змяніць для кожнага элемента падчас стварэння). Публічна даступнае змесціва можа праглядацца КОЖНЫМ(-АЙ) карыстальнікам(-цай) Інтэрнэту і патэнцыйна адлюстроўвацца ў выніках пошукавых сістэм!"
 
 #, fuzzy
-#| msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!"
 msgstr "Ваш абавязак як адміністратара групы або праекта - сачыць, каб змесціва, якое публікуецца чальцамі, не парушала ніякіх законаў аб аўтарскіх правах ці іншых законаў. Калі ласка, майце гэта на ўвазе, асабліва калі ўключаеце наладу бачнасці!"
 
@@ -5170,7 +5106,6 @@ msgid "Contact Form"
 msgstr "Кантактныя даныя"
 
 #, fuzzy
-#| msgid "From which apps should public items be shown on the microsite?"
 msgid "From which apps should platform-wide items be shown on the microsite?"
 msgstr "Публічныя элементы з якіх прыкладанняў павінны адлюстроўвацца на мікрасайце?"
 
@@ -5373,13 +5308,11 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Created Projects"
 msgid "Contact Project Admins"
 msgstr "Створаныя праекты"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Contact info"
 msgid "Contact Group Admins"
 msgstr "Кантактныя даныя"
 
@@ -5507,7 +5440,6 @@ msgid "All Projects"
 msgstr "Усе праекты"
 
 #, fuzzy
-#| msgid "Simple Statistics"
 msgid "Statistics"
 msgstr "Простая статыстыка"
 
@@ -5687,7 +5619,6 @@ msgid "OK"
 msgstr "ОК"
 
 #, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Enter a new name for the folder"
 msgstr "Увядзіце назву праекта."
 
@@ -6274,7 +6205,6 @@ msgid "What I wish to learn"
 msgstr "Чаму я хачу навучыцца"
 
 #, fuzzy
-#| msgid "Contact info"
 msgid "Contact Infos"
 msgstr "Кантактныя даныя"
 
@@ -6366,7 +6296,6 @@ msgid "You have been logged out. See you again soon!"
 msgstr ""
 
 #, fuzzy
-#| msgid "Redirect Logged in Users"
 msgid "Redirecting you in 3 seconds..."
 msgstr "Перанакіроўваць увайшоўшых карыстальнікаў(-ц)"
 
@@ -6676,6 +6605,11 @@ msgstr ""
 
 msgid "HD space used by projects"
 msgstr ""
+
+#, fuzzy
+#| msgid "Users Need Activation"
+msgid "User Activity Timeline"
+msgstr "Карыстальнікі(-цы) патрабуюць актывацыі"
 
 msgid "User statistics (min 1x logged in)"
 msgstr ""
@@ -6994,11 +6928,6 @@ msgstr ""
 #, fuzzy
 msgid "In my Groups and Projects"
 msgstr "Ператварыць выбраныя групы ў праекты"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "In my Cloud Files"
-msgstr "Шукаць ў камандах"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -7345,7 +7274,6 @@ msgid "Edit Profile"
 msgstr "Рэдагаваць профіль"
 
 #, fuzzy
-#| msgid "Edit Your Profile"
 msgid "Set up my Profile"
 msgstr "Рэдагаваць Ваш профіль"
 
@@ -7390,7 +7318,6 @@ msgid "Enter new email address"
 msgstr "адрас электроннай пошты"
 
 #, fuzzy
-#| msgid "email address"
 msgid "New email address"
 msgstr "адрас электроннай пошты"
 
@@ -7398,7 +7325,6 @@ msgid "This email address serves as login for your user account and notification
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter old password"
 msgid "Enter your password"
 msgstr "Увядзіце стары пароль"
 
@@ -7734,7 +7660,6 @@ msgid "Two-Factor Authentication Setup"
 msgstr ""
 
 #, fuzzy
-#| msgid "You are about to delete your user account from the site!"
 msgid "You are about to take your account security to the next level."
 msgstr "Вы збіраецеся выдаліць свой профіль карыстальніка(-цы) з сайта!"
 
@@ -7891,12 +7816,10 @@ msgid "Please note that for security reasons the export data will be only availa
 msgstr ""
 
 #, fuzzy
-#| msgid "An internal error occured."
 msgid "An error has occurred"
 msgstr "Здарылася ўнутраная памылка."
 
 #, fuzzy
-#| msgid "There was an error while trying to submit your report. Please try again in a moment."
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr "Падчас спробы адправіць Вашу справаздачу здарылася памылка. Калі ласка, паспрабуйце зноў праз хвіліну."
 
@@ -7907,7 +7830,6 @@ msgid "Retry user export"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete reported item..."
 msgid "Delete exported data"
 msgstr "Выдаліць элемент, на які паскардзіліся..."
 
@@ -8535,7 +8457,6 @@ msgid "You can access and browse the project that invited you"
 msgstr ""
 
 #, fuzzy
-#| msgid "There is no description for this project yet."
 msgid "This is only visible to admins of this project."
 msgstr "У гэтага праекта яшчэ няма апісання."
 
@@ -8642,7 +8563,6 @@ msgid "Should your group be visible for the anonymous users? The microsite may b
 msgstr ""
 
 #, fuzzy
-#| msgid "Hide public items outside of your groups"
 msgid "Enable the public visibility of your group"
 msgstr "Схаваць публічныя запісы за межамі Вашых груп"
 
@@ -8660,7 +8580,6 @@ msgid "You can access and browse the group that invited you"
 msgstr ""
 
 #, fuzzy
-#| msgid "There is no description for this group yet."
 msgid "This is only visible to admins of this group."
 msgstr "У гэтай групы яшчэ няма апісання."
 
@@ -8866,7 +8785,6 @@ msgid "Question about"
 msgstr "Пытанне пра"
 
 #, fuzzy
-#| msgid "Please enter a token!"
 msgid "Please enter your OTP token."
 msgstr "Калі ласка, увядзіце маркер!"
 
@@ -8901,20 +8819,22 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 2.4.0 released"
+msgstr ""
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr ""
+
 msgid "Version 2.3.0 released"
 msgstr ""
 
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
 msgstr ""
 
-msgid "This update provides several small bugfixes and stability improvements."
-msgstr ""
-
 msgid "Redesign Update"
 msgstr ""
 
 #, fuzzy
-#| msgid "This description will be publicly visible."
 msgid "The redesign has been launched across the platform!"
 msgstr "Гэта апісанне будзе бачна ўсім."
 
@@ -9130,7 +9050,6 @@ msgid "You have successfully disabled two-factor authentication for your account
 msgstr "Запрашэнне паспяхова выдаленае."
 
 #, fuzzy
-#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
 msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
 msgstr "Падчас спробы адлучыць Ваш Facebook-акаўнт здарылася памылка! Калі ласка, звяжыцеся з адміністратарам!"
 
@@ -9239,7 +9158,6 @@ msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s паспяхова змененая."
 
 #, fuzzy
-#| msgid "Edit"
 msgid "Edited."
 msgstr "Рэдагаваць"
 
@@ -9305,7 +9223,6 @@ msgid "You cannot remove “%(username)s” form this team. Only one admin left.
 msgstr "Вы не можаце выдаліць \"%(username)s\" з гэтай каманды. Застаўся толькі адзін адміністратар."
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "Accepted user \"%(user)s\" as  member."
 msgstr "Карыстальнік(-ца) \"%(username)s\" больш не з'яўляецца чальцом."
 
@@ -9314,7 +9231,6 @@ msgid "Made user \"%(user)s\" admin."
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "Made user \"%(user)s\" member."
 msgstr "Карыстальнік(-ца) \"%(username)s\" больш не з'яўляецца чальцом."
 
@@ -9360,12 +9276,10 @@ msgid "This project/group is already inactive!"
 msgstr "Гэты праект/група ўжо неактыўны!"
 
 #, fuzzy
-#| msgid "Activate"
 msgid "Activated."
 msgstr "Актываваць"
 
 #, fuzzy
-#| msgid "Deactivate"
 msgid "Deactivated."
 msgstr "Пазначыць як неактыўны"
 
@@ -9404,7 +9318,6 @@ msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Поспех! Мы зараз дашлем запрашэнні на гэтыя адрасы электроннай пошты: %s"
 
 #, fuzzy, python-format
-#| msgid "Invited Members"
 msgid "Invited \"%(emails)s\"."
 msgstr "Запрошаныя чальцы"
 
@@ -9488,7 +9401,6 @@ msgid "No %(verbose_name)s found matching the query"
 msgstr "%(verbose_name)s, адпавядаючых гэтаму запыту, не знойдзена"
 
 #, fuzzy
-#| msgid "There is no description for this project yet."
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "У гэтага праекта яшчэ няма апісання."
 
@@ -9554,7 +9466,6 @@ msgid "Thank you for signing up and welcome to the platform! We sent an email to
 msgstr ""
 
 #, fuzzy
-#| msgid "Sorry, but the invite token you have used does not seem to be valid!"
 msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
 msgstr "На жаль, маркер запрашэння, які Вы выкарысталі, выглядае несапраўдным!"
 
@@ -9742,11 +9653,7 @@ msgstr ""
 msgid "Click here to view the files directly in the cloud."
 msgstr ""
 
-msgid "There are no cloud files yet"
-msgstr ""
-
 #, fuzzy
-#| msgid "Start"
 msgid "Restart"
 msgstr "Пачатак"
 
@@ -9765,7 +9672,6 @@ msgid "conference"
 msgstr "Сканфігураваць"
 
 #, fuzzy
-#| msgid "Application name"
 msgid "Applicants and members"
 msgstr "Імя прыкладання"
 
@@ -9774,7 +9680,6 @@ msgid "All applicants"
 msgstr "Імя прыкладання"
 
 #, fuzzy
-#| msgid "Add choice"
 msgid "Individual choice"
 msgstr "Дадаць альтэрнатыву"
 
@@ -9786,7 +9691,6 @@ msgid "No error message supplied."
 msgstr ""
 
 #, fuzzy
-#| msgid "You are getting this notification because you are an administrator of this project or group."
 msgid "You are getting this notification because you are a member of this conference or have applied for membership."
 msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага праекта ці групы."
 
@@ -9823,7 +9727,6 @@ msgid "Successfully removed all user"
 msgstr "Выдаліць уліковы запіс карыстальніка(-цы)"
 
 #, fuzzy
-#| msgid "User"
 msgid "Username"
 msgstr "Карыстальнік(-ца)"
 
@@ -9851,17 +9754,14 @@ msgid "User was not created"
 msgstr "Стварыў(-ла)"
 
 #, fuzzy
-#| msgid "The offer was reactivated successfully."
 msgid "The room was created successfully."
 msgstr "Прапанова паспяхова ўзноўленая."
 
 #, fuzzy
-#| msgid "The poll was archived successfully."
 msgid "The room was saved successfully."
 msgstr "Апытанне паспяхова адпраўленае ў архіў."
 
 #, fuzzy
-#| msgid "Your stream was deleted successfully."
 msgid "The room was deleted successfully."
 msgstr "Ваша стужка паспяхова выдаленая."
 
@@ -9880,12 +9780,10 @@ msgid "Recording %s was not found, has already been deleted, or you do not have 
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "The invitation was successfully deleted."
 msgid "Recording %s was successfully deleted."
 msgstr "Запрашэнне паспяхова выдаленае."
 
 #, fuzzy, python-format
-#| msgid "Could not save your like setting because of an error."
 msgid "Recording %s could not be deleted because of a server error."
 msgstr "Не атрымалася захаваць Вашу наладу падабання з-за памылкі."
 
@@ -9897,7 +9795,6 @@ msgid "No conference applicants found at the moment."
 msgstr "CosinnusМесцазнаходжанне"
 
 #, fuzzy
-#| msgid "This message was sent in a conversation with: "
 msgid "The message was sent to the chosen participants."
 msgstr "Гэта паведамленне адпраўлена ў размове з: "
 
@@ -9913,7 +9810,6 @@ msgid "Your application has been updated."
 msgstr "Вашы змены захаваныя."
 
 #, fuzzy
-#| msgid "You cannot change your own admin status."
 msgid "You cannot change your application anymore."
 msgstr "Вы не можаце змяніць свой статус адміністратара."
 
@@ -9934,7 +9830,6 @@ msgid "The following users were declined: %s"
 msgstr "Наступныя карыстальнікі(-цы) былі дададзены да гэтага партала:"
 
 #, fuzzy
-#| msgid "Your changes have been saved."
 msgid "Your changes were saved."
 msgstr "Вашы змены захаваныя."
 
@@ -9959,12 +9854,10 @@ msgid "A user created a new etherpad"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новы нататнік Etherpad"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new etherpad"
 msgid "%(sender_name)s created the pad %(object_name)s"
 msgstr "%(sender_name)s стварыў(-ла) новы нататнік Etherpad"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new etherpad"
 msgid "%(sender_name)s created %(count)d pads"
 msgstr "%(sender_name)s стварыў(-ла) новы нататнік Etherpad"
 
@@ -10012,7 +9905,6 @@ msgid "Pad Type"
 msgstr "Тып нататніка"
 
 #, fuzzy
-#| msgid "Pads"
 msgid "Pad"
 msgstr "Нататнікі"
 
@@ -10061,7 +9953,6 @@ msgid "Download CSV"
 msgstr "Сцягнуць CSV"
 
 #, fuzzy
-#| msgid "Download CSV"
 msgid "Download Excel"
 msgstr "Сцягнуць CSV"
 
@@ -10092,12 +9983,10 @@ msgstr ""
 "Ваша каманда %(site_name)s."
 
 #, fuzzy
-#| msgid "A user created a new etherpad"
 msgid "You created a pad"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новы нататнік Etherpad"
 
 #, fuzzy
-#| msgid "Created By"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created a Pad"
 msgstr "Створаны карыстальнікам(-цай)"
@@ -10106,7 +9995,6 @@ msgid "There are no etherpads yet"
 msgstr "Нататнікаў Etherpad пакуль няма"
 
 #, fuzzy
-#| msgid "This action is not permitted for this poll at this stage!"
 msgid "Editing is not permitted for guest accounts."
 msgstr "Гэтае дзеянне не дазволена ў гэтым апытанні на дадзеным этапе!"
 
@@ -10519,7 +10407,6 @@ msgid "Is a Break"
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter a title for the new event."
 msgid "Event is visible on the conference microsite"
 msgstr "Увядзіце назву новай падзеі."
 
@@ -10565,7 +10452,6 @@ msgid "Start-Time"
 msgstr "Дата пачатку."
 
 #, fuzzy
-#| msgid "Time"
 msgid "End-Time"
 msgstr "Час"
 
@@ -11309,12 +11195,10 @@ msgid "Your comment was deleted successfully."
 msgstr "Ваш каментар паспяхова выдалены."
 
 #, fuzzy
-#| msgid "Save changes"
 msgid "Exchange"
 msgstr "Захаваць змены"
 
 #, fuzzy
-#| msgid "Save changes"
 msgctxt "the_app"
 msgid "exchange"
 msgstr "Захаваць змены"
@@ -11327,12 +11211,10 @@ msgid "A user uploaded a new file"
 msgstr "Карыстальнік(-ца) зацягнуў(-ла) новы файл"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new file"
 msgid "%(sender_name)s uploaded the file %(object_name)s"
 msgstr "%(sender_name)s стварыў(-ла) новы файл"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new file"
 msgid "%(sender_name)s uploaded %(count)d files"
 msgstr "%(sender_name)s стварыў(-ла) новы файл"
 
@@ -11484,7 +11366,6 @@ msgid "Navigate to the folder you wish to move to the Cloud, or to the root fold
 msgstr ""
 
 #, fuzzy
-#| msgid "Download this folder"
 msgid "Root folder"
 msgstr "Сцягнуць гэту папку"
 
@@ -11513,12 +11394,10 @@ msgid "If you wish to access your files from multiple devices, you may want to c
 msgstr ""
 
 #, fuzzy
-#| msgid "A user uploaded a new file"
 msgid "You uploaded a file"
 msgstr "Карыстальнік(-ца) зацягнуў(-ла) новы файл"
 
 #, fuzzy
-#| msgid "A user uploaded a new file"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "uploaded a file"
 msgstr "Карыстальнік(-ца) зацягнуў(-ла) новы файл"
@@ -11585,12 +11464,10 @@ msgid "A user created a new offer"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новую прапанову"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new offer"
 msgid "%(sender_name)s created the offer %(object_name)s"
 msgstr "%(sender_name)s стварыў(-ла) новую прапанову"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new offer"
 msgid "%(sender_name)s created %(count)d offers"
 msgstr "%(sender_name)s стварыў(-ла) новую прапанову"
 
@@ -11606,12 +11483,10 @@ msgid "One of your offers expired"
 msgstr "Адна з Вашых прапаноў скончылася"
 
 #, fuzzy, python-format
-#| msgid "Offer \"%(object_name)s\" has expired."
 msgid "Your offer %(object_name)s expired"
 msgstr "Прапанова \"%(object_name)s\" скончылася."
 
 #, fuzzy, python-format
-#| msgid "One of your offers expired"
 msgid "%(count)d of your offers expired"
 msgstr "Адна з Вашых прапаноў скончылася"
 
@@ -11626,12 +11501,10 @@ msgid "A user commented on one of your offers"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) адну з Вашых прапаноў"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on your offer"
 msgid "%(sender_name)s commented on your offer %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) Вашу прапанову"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on your offer"
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) Вашу прапанову"
@@ -11651,12 +11524,10 @@ msgid "A user commented on an offer you were tagged in"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) прапанову, у якой Вы былі пазначаны"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on your offer"
 msgid "%(sender_name)s commented on the offer %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) Вашу прапанову"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on your offer"
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) Вашу прапанову"
@@ -11665,7 +11536,6 @@ msgstr[2] "%(sender_name)s пракаментаваў(-ла) Вашу прапа
 msgstr[3] "%(sender_name)s пракаментаваў(-ла) Вашу прапанову"
 
 #, fuzzy
-#| msgid "A user created a new offer"
 msgid "You were tagged in this offer"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новую прапанову"
 
@@ -11692,7 +11562,6 @@ msgid "A user updated an offer you are following"
 msgstr "Карыстальнік(-ца) абнавіў(-ла) прапанову, за якой Вы сочыце"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s updated an offer you are following"
 msgid "%(sender_name)s updated the offer %(object_name)s"
 msgstr "%(sender_name)s абнавіў(-ла) прапанову, за якой Вы сочыце"
 
@@ -11860,12 +11729,10 @@ msgid "expired on"
 msgstr "скончылася"
 
 #, fuzzy
-#| msgid "A user created a new offer"
 msgid "You created an offer"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новую прапанову"
 
 #, fuzzy
-#| msgid "A user created a new offer"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an offer"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новую прапанову"
@@ -11976,7 +11843,6 @@ msgid "What is your message?"
 msgstr "Паведамленні"
 
 #, fuzzy
-#| msgid "Change it here..."
 msgid "Write it here"
 msgstr "Змяніце яго тут..."
 
@@ -12206,12 +12072,10 @@ msgid "A user commented on one of your news posts"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) адзін з Вашых допісаў"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
 msgid "%(sender_name)s commented on your news post %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) адзін з Вашых допісаў у %(team_name)s."
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) адзін з Вашых допісаў у %(team_name)s."
@@ -12232,12 +12096,10 @@ msgid "A user commented on a news posts you commented in"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) допіс, які Вы таксама каментавалі"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a news post you commented in"
 msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
 msgstr "%(sender_name)s пракаментаваў(-ла) допіс, які Вы таксама каментавалі"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a news post you commented in"
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) допіс, які Вы таксама каментавалі"
@@ -12253,12 +12115,10 @@ msgid "A user created a news post"
 msgstr "Карыстальнік(-ца) стварыў(-ла) допіс"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new news post"
 msgid "%(sender_name)s created the news post %(object_name)s"
 msgstr "%(sender_name)s стварыў(-ла) новы допіс"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new news post"
 msgid "%(sender_name)s created %(count)d news posts"
 msgstr "%(sender_name)s стварыў(-ла) новы допіс"
 
@@ -12285,7 +12145,6 @@ msgid "A user updated a news post"
 msgstr "Карыстальнік(-ца) абнавіў(-ла) допіс"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s updated a news post you are following"
 msgid "%(sender_name)s updated the news post %(object_name)s"
 msgstr "%(sender_name)s абнавіў(-ла) допіс, за якім Вы сочыце"
 
@@ -12301,17 +12160,14 @@ msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
 msgstr "Допіс ад %(sender_name)s, за якім вы сочыце, абноўлены ў %(team_name)s:"
 
 #, fuzzy
-#| msgid "A user commented on a news posts you are following"
 msgid "A user commented on a news post you are following"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) допіс, за якім Вы сочыце"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
 msgid "%(sender_name)s commented on the news post %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) адзін з Вашых допісаў у %(team_name)s."
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) адзін з Вашых допісаў у %(team_name)s."
@@ -12529,17 +12385,14 @@ msgid "Your news post was edited successfully."
 msgstr "Ваш допіс паспяхова адрэдагаваны."
 
 #, fuzzy
-#| msgid "You are getting this notification because you are an administrator of this portal."
 msgid "You are seeing this alert because you created this content."
 msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага партала."
 
 #, fuzzy
-#| msgid "You are getting this notification because you are an administrator of this project or group."
 msgid "You are seeing this alert because you are following the item's project or group."
 msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага праекта ці групы."
 
 #, fuzzy
-#| msgid "You are getting this notification because you are an administrator of this portal."
 msgid "You are seeing this alert because you are following this item."
 msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага партала."
 
@@ -12605,7 +12458,6 @@ msgid "Alert Reason key"
 msgstr ""
 
 #, fuzzy
-#| msgid "User who caused this notification event"
 msgid "Last user who caused this notification event"
 msgstr "Карыстальнік, які спрычыніўся да гэтага апавяшчэння"
 
@@ -12643,7 +12495,6 @@ msgid "New item"
 msgstr "Новы элемент"
 
 #, fuzzy, python-format
-#| msgid "Your daily digest for %(portal_name)s"
 msgid "View on %(portal_name)s"
 msgstr "Ваша штодзённая зводка навін для %(portal_name)s"
 
@@ -12751,7 +12602,6 @@ msgid "Go to %(provider)s account settings"
 msgstr ""
 
 #, fuzzy
-#| msgid "Remove location"
 msgid "Remove Connection"
 msgstr "Выдаліць месцазнаходжанне"
 
@@ -12760,7 +12610,6 @@ msgid "When you remove the connection you cannot login to this website via %(pro
 msgstr ""
 
 #, fuzzy
-#| msgid "Disconnect Facebook Account"
 msgid "Disconnect Accounts"
 msgstr "Адлучыць Facebook-акаўнт"
 
@@ -12785,7 +12634,6 @@ msgid " If you already have an account on %(provider)s you can connect both acco
 msgstr ""
 
 #, fuzzy
-#| msgid "Connect Facebook Account"
 msgid "Connect Accounts"
 msgstr "Падлучыць Facebook-акаўнт"
 
@@ -12794,7 +12642,6 @@ msgid "Connect Account with %(provider)s"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgid " Do you really want to connect your account with the one on %(provider)s ? "
 msgstr "Вы сапраўды хочаце выдаліць запрашэнне для \"%(title)s\"?"
 
@@ -12858,7 +12705,6 @@ msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
 
 #, fuzzy
-#| msgid "You can change this setting later in your profile settings"
 msgid "You can change your this data any time in you profile settings."
 msgstr "Вы можаце змяніць гэтую наладу пазней у Вашых наладах профіля"
 
@@ -12884,7 +12730,6 @@ msgid "Remove"
 msgstr "Выдаліць чальца"
 
 #, fuzzy
-#| msgid "Your Facebook account was successfully disconnected from this account."
 msgid "You currently have no social network accounts connected to this account."
 msgstr "Ваш Facebook-акаўнт паспяхова адлучаны ад гэтага акаўнта."
 
@@ -12892,7 +12737,6 @@ msgid "Add a 3rd Party Account"
 msgstr ""
 
 #, fuzzy
-#| msgid "Canceled"
 msgid "Login Cancelled"
 msgstr "Адмененая"
 
@@ -12901,7 +12745,6 @@ msgid "You decided to cancel logging in to our site using one of your existing a
 msgstr ""
 
 #, fuzzy
-#| msgid "Sign up"
 msgid "Signup"
 msgstr "Зарэгістравацца"
 
@@ -12917,7 +12760,6 @@ msgid " %(portal_name)s wants access to the following information of your %(prov
 msgstr ""
 
 #, fuzzy
-#| msgid "Last name"
 msgid "last name (if set)"
 msgstr "Прозвішча"
 
@@ -12929,12 +12771,10 @@ msgid "Yes, allow access to my profile data: (e.g Avatar, Location, Topics, Lang
 msgstr ""
 
 #, fuzzy
-#| msgid ", for the following reason:"
 msgid "Please also fill in the following information:"
 msgstr "па наступнай прычыне:"
 
 #, fuzzy
-#| msgid "Sign up"
 msgid "Sign up with"
 msgstr "Зарэгістравацца"
 
@@ -12943,7 +12783,6 @@ msgid "Sign up with %(provider)s Account"
 msgstr ""
 
 #, fuzzy
-#| msgid "Log in here"
 msgid "Log in with"
 msgstr "Увайдзіце тут"
 
@@ -12956,7 +12795,6 @@ msgid "Register with Social Account"
 msgstr "Зарэгіструйцеся і далучыцеся!"
 
 #, fuzzy
-#| msgid "Log in with Facebook"
 msgid "Login with Social Account"
 msgstr "Увайсці праз Facebook"
 
@@ -12990,12 +12828,10 @@ msgid "Organization memberships"
 msgstr "Запрашэнні"
 
 #, fuzzy
-#| msgid "Team Invite for Unregistered User"
 msgid "Organization Invite for Unregistered User"
 msgstr "Запрашэнне ў каманду для незарэгістраванага(-ай) карыстальніка(-цы)"
 
 #, fuzzy
-#| msgid "Team Invites for Unregistered Users"
 msgid "Organization Invites for Unregistered Users"
 msgstr "Запрашэнні ў каманду для незарэгістраваных карыстальнікаў(-ц)"
 
@@ -13007,12 +12843,10 @@ msgid "Company (commercial)"
 msgstr ""
 
 #, fuzzy
-#| msgid "Public voting"
 msgid "Public institution"
 msgstr "Публічнае галасаванне"
 
 #, fuzzy
-#| msgid "Other teams"
 msgid "Other"
 msgstr "Іншыя каманды"
 
@@ -13025,12 +12859,10 @@ msgid "Organization type"
 msgstr "Запрашэнні"
 
 #, fuzzy
-#| msgid "Logout"
 msgid "Logo"
 msgstr "Выйсці"
 
 #, fuzzy
-#| msgid "Email address"
 msgid "Email Address"
 msgstr "Адрас электроннай пошты"
 
@@ -13046,12 +12878,10 @@ msgid "CosinnusOrganizationSocialMedia"
 msgstr ""
 
 #, fuzzy
-#| msgid "CosinnusLocation"
 msgid "CosinnusOrganizationLocation"
 msgstr "CosinnusМесцазнаходжанне"
 
 #, fuzzy
-#| msgid "CosinnusLocations"
 msgid "CosinnusOrganizationLocations"
 msgstr "CosinnusМесцазнаходжанні"
 
@@ -13068,7 +12898,6 @@ msgid "%(team_name)s - Assigned projects/groups"
 msgstr "%(team_name)s - чальцы"
 
 #, fuzzy
-#| msgid "No related projects/groups"
 msgid "Assigned projects/groups"
 msgstr "Няма звязаных праектаў/груп"
 
@@ -13081,12 +12910,10 @@ msgid "Invite project/group"
 msgstr "Праекты/групы"
 
 #, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Enter a name to find project/groups to invite..."
 msgstr "Увядзіце назву праекта."
 
 #, fuzzy
-#| msgid "No related projects/groups"
 msgid "Invite projects/groups"
 msgstr "Няма звязаных праектаў/груп"
 
@@ -13095,12 +12922,10 @@ msgid "Invited groups/projects"
 msgstr "Запрошаны стаць чальцом"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid "Do you really want to revoke the invitation for „%(name)s“?"
 msgstr "Вы сапраўды хочаце адклікаць запрашэнне чальца „%(name)s“?"
 
 #, fuzzy
-#| msgid "Revoke Invitation for Member"
 msgid "Revoke invitation for project/group"
 msgstr "Адклікаць запрашэнне чальца"
 
@@ -13125,12 +12950,10 @@ msgid "Edit Organization"
 msgstr "Запрашэнні"
 
 #, fuzzy
-#| msgid "Admin"
 msgid "Admins"
 msgstr "Адміністратар"
 
 #, fuzzy
-#| msgid "Join"
 msgid "Joins"
 msgstr "Далучыцца"
 
@@ -13139,17 +12962,14 @@ msgid "Help about organizations"
 msgstr "Запрашэнні"
 
 #, fuzzy, python-format
-#| msgid "%(team_name)s - Members"
 msgid "%(team_name)s - Admins"
 msgstr "%(team_name)s - чальцы"
 
 #, fuzzy
-#| msgid "Invited Members"
 msgid "Invited Admins"
 msgstr "Запрошаныя чальцы"
 
 #, fuzzy
-#| msgid "Revoke Invitation for Member"
 msgid "Revoke Invitation for Admin"
 msgstr "Адклікаць запрашэнне чальца"
 
@@ -13158,7 +12978,6 @@ msgid "Admin requests"
 msgstr "Адмовіць кандыдату(-цы)"
 
 #, fuzzy
-#| msgid "Membership requested"
 msgid "Admin requested"
 msgstr "Адпраўлены запыт на членства"
 
@@ -13167,12 +12986,10 @@ msgid "Current Admins"
 msgstr "Запрошаныя чальцы"
 
 #, fuzzy
-#| msgid "Demote Admin"
 msgid "Remove Admin"
 msgstr "Разжалаваць адміністратара"
 
 #, fuzzy, python-format
-#| msgid "Edit stream \"%(stream_name)s\""
 msgid "Edit \"%(organization_name)s\""
 msgstr "Рэдагаваць стужку \"%(stream_name)s\""
 
@@ -13181,7 +12998,6 @@ msgid "Delete this Organization"
 msgstr "Выдаліць запрашэнне"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to delete idea „%(title)s“?"
 msgid "Do you really want to delete organization „%(name)s“?"
 msgstr "Вы сапраўды хочаце выдаліць ідэю \"%(title)s\"?"
 
@@ -13201,7 +13017,6 @@ msgid "If none of the options apply, specify the type of your organization here"
 msgstr ""
 
 #, fuzzy
-#| msgid "This description will be publicly visible."
 msgid "  Describe the project in a few sentences. This description will be publicly visible."
 msgstr "Гэта апісанне будзе бачна ўсім."
 
@@ -13210,7 +13025,6 @@ msgid "Social Media Accounts"
 msgstr "Выдаліць уліковы запіс карыстальніка(-цы)"
 
 #, fuzzy
-#| msgid "Remove location"
 msgid "Remove Social Media Account"
 msgstr "Выдаліць месцазнаходжанне"
 
@@ -13239,12 +13053,10 @@ msgid "Is your organization open for cooperation in the funding program?"
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Organization is open for future projects."
 msgstr "Увядзіце назву праекта."
 
 #, fuzzy, python-format
-#| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "Карыстальнікі(-цы) ў камандзе %(group)s"
 
@@ -13253,12 +13065,10 @@ msgid "Project/group %(name)s had already requested and has now been accepted."
 msgstr "Вы ўжо былі запрошаны ў \"%(team_name)s\", і цяпер адразу сталі чальцом!"
 
 #, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
 msgid "Project/group %(name)s was successfully invited."
 msgstr "Карыстальнік(-ца) %(username)s паспяхова запрошаны(-ая)!"
 
 #, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
 msgid "Your join request was withdrawn from organization “%(name)s” successfully."
 msgstr "Ваш запыт на далучэнне да %(team_type)s “%(team_name)s” паспяхова адкліканы."
 
@@ -13267,37 +13077,30 @@ msgid "You have declined the invitation to organization “%(name)s”."
 msgstr "Вы больш не з'яўляецеся чальцом %(team_type)s “%(team_name)s”."
 
 #, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
 msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
 msgstr "Цяпер Вы чалец %(team_type)s “%(team_name)s”. Сардэчна вітаем!"
 
 #, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
 msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
 msgstr "Ваш запыт на далучэнне да %(team_type)s “%(team_name)s” паспяхова адкліканы."
 
 #, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
 msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
 msgstr "Ваша запрашэнне карыстальніка(-цы) \"%(username)s\" паспяхова адклікана."
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "Project/group \"%(name)s\" is no longer assigned."
 msgstr "Карыстальнік(-ца) \"%(username)s\" больш не з'яўляецца чальцом."
 
 #, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
 msgstr "На жаль, толькі адміністратар партала можа ствараць групы! Вы можаце стварыць праект або напісаць паведамленне аднаму з адміністратараў, каб той стварыў для Вас групу. Ніжэй Вы знойдзеце спіс адміністратараў."
 
 #, fuzzy, python-format
-#| msgid "Folder \"%(title)s\" was created successfully."
 msgid "Organization \"%(name)s\" was created successfully."
 msgstr "Папка \"%(title)s\" паспяхова створаная."
 
 #, fuzzy
-#| msgid "Your idea was deleted successfully."
 msgid "Your organization was deleted successfully."
 msgstr "Ваша ідэя паспяхова выдаленая."
 
@@ -13309,12 +13112,10 @@ msgid "A user created a new poll"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new poll"
 msgid "%(sender_name)s created the poll %(object_name)s"
 msgstr "%(sender_name)s стварыў(-ла) новае апытанне"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new poll"
 msgid "%(sender_name)s created %(count)d polls"
 msgstr "%(sender_name)s стварыў(-ла) новае апытанне"
 
@@ -13330,12 +13131,10 @@ msgid "A poll you voted on was completed"
 msgstr "Апытанне, у якім Вы ўдзельнічалі, завяршылася"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s completed the poll you are following"
 msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
 msgstr "%(sender_name)s завяршыў(-ла) апытанне, за якім Вы сочыце"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a poll you voted in"
 msgid "%(sender_name)s completed %(count)d polls you voted on"
 msgstr "%(sender_name)s пракаментаваў(-ла) апытанне, у якім Вы ўдзельнічалі"
 
@@ -13351,12 +13150,10 @@ msgid "A user commented on one of your polls"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) адно з Вашых апытанняў"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
 msgid "%(sender_name)s commented on your poll %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
@@ -13376,12 +13173,10 @@ msgid "A user commented on a poll you were tagged in"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) апытанне, у якім Вы былі пазначаны"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
 msgid "%(sender_name)s commented on the poll %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
@@ -13390,7 +13185,6 @@ msgstr[2] "%(sender_name)s пракаментаваў(-ла) адно з Ваш�
 msgstr[3] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
 
 #, fuzzy
-#| msgid "A user created a new poll"
 msgid "You were tagged in this poll"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
 
@@ -13406,7 +13200,6 @@ msgid "A user commented on an poll you voted in"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) апытанне, у якім Вы ўдзельнічалі"
 
 #, fuzzy
-#| msgid "A user created a new poll"
 msgid "You voted on this poll"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
 
@@ -13433,12 +13226,10 @@ msgid "A user updated a poll you are following"
 msgstr "Карыстальнік(-ца) абнавіў(-ла) апытанне, за якім Вы сочыце"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s completed the poll"
 msgid "%(sender_name)s updated the poll %(object_name)s"
 msgstr "%(sender_name)s завяршыў(-ла) гэта апытанне"
 
 #, fuzzy
-#| msgid "A poll you are following was completed"
 msgid "You are following this poll"
 msgstr "Апытанне, за якім Вы сочыце, завяршылася"
 
@@ -13454,12 +13245,10 @@ msgid "A poll you are following was completed"
 msgstr "Апытанне, за якім Вы сочыце, завяршылася"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s completed the poll"
 msgid "%(sender_name)s completed the poll %(object_name)s"
 msgstr "%(sender_name)s завяршыў(-ла) гэта апытанне"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s completed the poll"
 msgid "%(sender_name)s completed %(count)d polls"
 msgstr "%(sender_name)s завяршыў(-ла) гэта апытанне"
 
@@ -13867,12 +13656,10 @@ msgid "Complete poll"
 msgstr "Завяршыць апытанне"
 
 #, fuzzy
-#| msgid "A user created a new poll"
 msgid "You created a poll"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
 
 #, fuzzy
-#| msgid "A user created a new poll"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created a poll"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
@@ -14037,12 +13824,10 @@ msgid "A user created a new todo"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новую задачу"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new todo"
 msgid "%(sender_name)s created the todo %(object_name)s"
 msgstr "%(sender_name)s стварыў(-ла) новую задачу"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s created a new todo"
 msgid "%(sender_name)s created %(count)d todos"
 msgstr "%(sender_name)s стварыў(-ла) новую задачу"
 
@@ -14058,12 +13843,10 @@ msgid "A todo was assigned to me"
 msgstr "Мне была прызначана задача"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
 msgid "%(sender_name)s assigned the todo %(object_name)s to you"
 msgstr "%(sender_name)s прызначыў(-ла) Вам задачу"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
 msgid "%(sender_name)s assigned %(count)d todos to you"
 msgstr "%(sender_name)s прызначыў(-ла) Вам задачу"
 
@@ -14075,17 +13858,14 @@ msgid "A todo I created was completed"
 msgstr "Створаная мной задача выкананая"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s completed your todo"
 msgid "%(sender_name)s completed the todo %(object_name)s"
 msgstr "%(sender_name)s выканаў(-ла) Вашу задачу"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s completed your todo"
 msgid "%(sender_name)s completed %(count)d todos"
 msgstr "%(sender_name)s выканаў(-ла) Вашу задачу"
 
 #, fuzzy
-#| msgid "A user created a new todo"
 msgid "You created this todo"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новую задачу"
 
@@ -14101,12 +13881,10 @@ msgid "A user commented on one of your todos"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) адну з Вашых задач"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s commented on your todo %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) адну з Вашых задач у %(team_name)s."
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) адну з Вашых задач у %(team_name)s."
@@ -14126,12 +13904,10 @@ msgid "A user commented on a todo you were tagged in"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s commented on the todo %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) адну з Вашых задач у %(team_name)s."
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) адну з Вашых задач у %(team_name)s."
@@ -14140,7 +13916,6 @@ msgstr[2] "%(sender_name)s пракаментаваў(-ла) адну з Ваш�
 msgstr[3] "%(sender_name)s пракаментаваў(-ла) адну з Вашых задач у %(team_name)s."
 
 #, fuzzy
-#| msgid "A user created a new todo"
 msgid "You were tagged in this todo"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новую задачу"
 
@@ -14156,12 +13931,10 @@ msgid "A user commented on a todo you were assigned to"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) прызначаную Вам задачу"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
 msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) адну з прызначаных Вам задач у %(team_name)s"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) адну з прызначаных Вам задач у %(team_name)s"
@@ -14178,17 +13951,14 @@ msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) адну з прызначаных Вам задач у %(team_name)s"
 
 #, fuzzy
-#| msgid "A user commented on a todo you were tagged in"
 msgid "A user updated a todo you are following"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a todo you were tagged in"
 msgid "%(sender_name)s updated the todo %(object_name)s"
 msgstr "%(sender_name)s пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a todo you were tagged in"
 msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
 msgstr[0] "%(sender_name)s пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
@@ -14197,67 +13967,54 @@ msgstr[2] "%(sender_name)s пракаментаваў(-ла) задачу, у я
 msgstr[3] "%(sender_name)s пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
 
 #, fuzzy
-#| msgid "You are not allowed to assign this Todo entry."
 msgid "You are following this todo"
 msgstr "Вам не дазволена прызначаць гэту задачу."
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a todo you were tagged in"
 msgid "%(sender_name)s updated a todo you are following"
 msgstr "%(sender_name)s пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
 
 #, fuzzy, python-format
-#| msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
 msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
 msgstr "Новая задача: \"%(object_name)s\" створана ў %(team_name)s."
 
 #, fuzzy
-#| msgid "A user commented on a todo you were tagged in"
 msgid "A user reassigned a todo you are following"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
 msgid "%(sender_name)s reassigned the todo %(object_name)s"
 msgstr "%(sender_name)s прызначыў(-ла) Вам задачу"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
 msgid "%(sender_name)s reassigned %(count)d todos"
 msgstr "%(sender_name)s прызначыў(-ла) Вам задачу"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
 msgid "%(sender_name)s reassigned a todo you are following"
 msgstr "%(sender_name)s прызначыў(-ла) Вам задачу"
 
 #, fuzzy, python-format
-#| msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
 msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
 msgstr "Новая задача: \"%(object_name)s\" створана ў %(team_name)s."
 
 #, fuzzy
-#| msgid "A user commented on a todo you were tagged in"
 msgid "A user completed a todo you are following"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s completed your todo"
 msgid "%(sender_name)s completed a todo you are following"
 msgstr "%(sender_name)s выканаў(-ла) Вашу задачу"
 
 #, fuzzy, python-format
-#| msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
 msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
 msgstr "Новая задача: \"%(object_name)s\" створана ў %(team_name)s."
 
 #, fuzzy
-#| msgid "A user commented on a todo you were tagged in"
 msgid "A user commented on a todo you are following"
 msgstr "Карыстальнік(-ца) пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a todo you were tagged in"
 msgid "%(sender_name)s commented on on a todo you are following"
 msgstr "%(sender_name)s пракаментаваў(-ла) задачу, у якой Вы былі пазначаны"
 
@@ -14605,12 +14362,10 @@ msgid "Todo lists"
 msgstr "Спісы задач"
 
 #, fuzzy
-#| msgid "A user created a new todo"
 msgid "You created a todo"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новую задачу"
 
 #, fuzzy
-#| msgid "A user created a new todo"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created a todo"
 msgstr "Карыстальнік(-ца) стварыў(-ла) новую задачу"
@@ -14722,7 +14477,6 @@ msgid "You cannot delete this folder because you do not have permission to delet
 msgstr "Вы не можаце выдаліць гэтую папку, таму что ў Вас няма дазволу выдаляць адзін або некалькі матэрыялаў, якія ў ёй змяшчаюцца!"
 
 #, fuzzy
-#| msgid "Add project"
 msgid "Add object"
 msgstr "Дадаць праект"
 
@@ -14734,224 +14488,49 @@ msgid "ROOT"
 msgstr ""
 
 #, fuzzy
-#| msgid "Show all"
 msgid "Show"
 msgstr "Паказаць усе"
 
 #, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this container and all objects in it?"
 msgstr "Вы сапраўды хочаце выдаліць гэту каманду?"
 
 #, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Вы сапраўды хочаце выдаліць гэту каманду?"
 
 #, fuzzy
-#~| msgid "Comment"
-#~ msgid "Community"
-#~ msgstr "Каментар"
+#~ msgid "In my Cloud Files"
+#~ msgstr "Шукаць ў камандах"
 
-#, fuzzy
-#~| msgid "Persons"
-#~ msgid "Personal"
-#~ msgstr "Асобы"
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
 
-#~ msgid "Password reset successful"
-#~ msgstr "Скіданне пароля прайшло паспяхова"
+#~ msgid "%(sender_name)s completed a poll"
+#~ msgstr "%(sender_name)s завяршыў(-ла) апытанне"
 
-#~ msgid "Administrators unknown"
-#~ msgstr "Адміністратары невядомыя"
+#~ msgid "%(sender_name)s completed a poll you are following"
+#~ msgstr "%(sender_name)s завяршыў(-ла) апытанне, за якім Вы сочыце"
 
-#, fuzzy
-#~ msgid "Edit my Profile"
-#~ msgstr "Рэдагаваць профіль"
+#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s толькі што стварыў праект/групу \"%(team_name)s\" на %(portal_name)s!"
 
-#, fuzzy
-#~| msgid "Edit Your Profile"
-#~ msgid "Set up your Profile"
-#~ msgstr "Рэдагаваць Ваш профіль"
+#~ msgid "%(sender_name)s voted in"
+#~ msgstr "%(sender_name)s прагаласаваў у"
 
-#, fuzzy
-#~ msgid "This project shall be made publicly findable via other platforms."
-#~ msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
-
-#, fuzzy
-#~ msgid "This group shall be made publicly findable via other platforms."
-#~ msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
-
-#, fuzzy
-#~ msgid "This conference shall be made publicly findable via other platforms."
-#~ msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
-
-#, fuzzy
-#~| msgid "Contact"
-#~ msgid "Direct Contact"
-#~ msgstr "Звязацца"
-
-#, fuzzy
-#~ msgid "Premium Bookings"
-#~ msgstr "Стварыць падзею"
-
-# EN > Our
-#, fuzzy
-#~ msgid ""
-#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
-#~ "\n"
-#~ "Our administrators will review your request and approve your user account soon!\n"
-#~ "\n"
-#~ "Until then, with warm greetings, \n"
-#~ "your %(site_name)s Team"
-#~ msgstr ""
-#~ "Вітаем! Мы рады даведацца, што Вы жадаеце стаць чальцом %(site_name)s.\n"
-#~ "\n"
-#~ "Нашы адміністратары прагледзяць Ваш запыт і ў хуткім часе ўхваляць Ваш уліковы запіс!\n"
-#~ "\n"
-#~ "А пакуль што дасылаем цёплыя прывітанні,\n"
-#~ "Ваша каманда %(site_name)s"
-
-#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-#~ msgstr "Вы змянілі свой адрас электроннай пошты. У бліжэйшы час мы адправім Вам ліст на гэты адрас са спасылкай для пацверджання. Пакуль Вы не націснеце на гэтую спасылку, у Вашым профілі захаваецца стары адрас электроннай пошты!"
-
-#, fuzzy
-#~ msgid "Type of educational institution"
-#~ msgstr "Шукаць карыстальнікаў(-ц)"
-
-#, fuzzy
-#~| msgid "Location"
-#~ msgid "Function"
-#~ msgstr "Месцазнаходжанне"
-
-#, fuzzy
-#~| msgid "Description"
-#~ msgid "Position"
-#~ msgstr "Апісанне"
-
-#, fuzzy
-#~ msgid "Name of educational institution"
-#~ msgstr "Выдаліць месцазнаходжанне"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Мае праекты і групы"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Поле сартавання"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Праекты/групы"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Праекты/групы"
-
-#, fuzzy
-#~| msgid "Delete file"
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Выдаліць файл"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Зацягніце выяву."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Мае праекты і групы"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Скіданне пароля прайшло паспяхова"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Памылка!"
-
-#, fuzzy
-#~| msgid "New item"
-#~ msgid "Saved items:"
-#~ msgstr "Новы элемент"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Паведамленні"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Памылка!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Паведамленні"
+#~ msgid "%(team_name)s was deactivated successfully!"
+#~ msgstr "%(team_name)s паспяхова дэактываваная!"
 
 #, fuzzy
 #~ msgid "2FA Settings"
 #~ msgstr "Налады"
 
 #, fuzzy
-#~ msgid "Disable 2FA"
-#~ msgstr "Aдключыць рэдактар"
-
-#~ msgid "Umwelt"
-#~ msgstr "Навакольнае асяроддзе"
-
-#~ msgid "Bildung"
-#~ msgstr "Адукацыя"
-
-#~ msgid "Gesundheit"
-#~ msgstr "Здароўе"
-
-#~ msgid "Ernährung und Konsum"
-#~ msgstr "Харчаванне і спажыванне"
-
-#~ msgid "Kunst und Kultur"
-#~ msgstr "Мастацтва і культура"
-
-#~ msgid "Arbeit und Recht"
-#~ msgstr "Праца і права"
-
-#~ msgid "Bauen und Wohnen"
-#~ msgstr "Будаўніцтва і жыллё"
-
-#~ msgid "Klimaschutz"
-#~ msgstr "Абарона клімату"
-
-#, fuzzy
-#~ msgid "Back to your profile"
-#~ msgstr "Ваш профіль"
-
-#~ msgid "Message Group"
-#~ msgstr "Адправіць групе паведамленне"
-
-#~ msgid "Message Project"
-#~ msgstr "Даслаць паведамленне праекту"
-
-#~ msgid "The invite token you have used does not exist!"
-#~ msgstr "Маркер запрашэння, які Вы выкарысталі, не існуе!"
-
-#~ msgid "Ok"
-#~ msgstr "OK"
-
-#, fuzzy
 #~ msgid "Active"
 #~ msgstr "Узнавіць"
 
-#, fuzzy
-#~| msgid "Delete elements"
-#~ msgid "Delete (not yet implemented)"
-#~ msgstr "Выдаліць элементы"
-
-#, fuzzy
-#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
-#~ msgstr "Вы сапраўды хочаце выдаліць запрашэнне для \"%(title)s\"?"
-
-#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-#~ msgstr "%(sender_name)s толькі што стварыў праект/групу \"%(team_name)s\" на %(portal_name)s!"
-
-#~ msgid "%(team_name)s was deactivated successfully!"
-#~ msgstr "%(team_name)s паспяхова дэактываваная!"
+#~ msgid "Administrators unknown"
+#~ msgstr "Адміністратары невядомыя"
 
 #~ msgid "All groups"
 #~ msgstr "Усе групы"
@@ -14965,6 +14544,9 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ msgid "Arabic--NATIVE-LANGUAGE"
 #~ msgstr "العربية"
 
+#~ msgid "Arbeit und Recht"
+#~ msgstr "Праца і права"
+
 #~ msgid "Armenian--NATIVE-LANGUAGE"
 #~ msgstr "Հայոց լեզու"
 
@@ -14975,11 +14557,29 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ msgstr "Azerbaycan dili"
 
 #, fuzzy
+#~ msgid "Back to your profile"
+#~ msgstr "Ваш профіль"
+
+#, fuzzy
 #~ msgid "Banner Image"
 #~ msgstr "Выява шапкі"
 
+#~ msgid "Bauen und Wohnen"
+#~ msgstr "Будаўніцтва і жыллё"
+
 #~ msgid "Belarussian--NATIVE-LANGUAGE"
 #~ msgstr "Беларуская"
+
+#~ msgid "Bildung"
+#~ msgstr "Адукацыя"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "Скіданне пароля прайшло паспяхова"
+
+#, fuzzy
+#~ msgid "Community"
+#~ msgstr "Каментар"
 
 #, fuzzy
 #~ msgid "Conference Dashboard"
@@ -15005,11 +14605,35 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Дэактываваныя праекты і групы"
 
+#, fuzzy
+#~ msgid "Delete (not yet implemented)"
+#~ msgstr "Выдаліць элементы"
+
+#, fuzzy
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "Выдаліць файл"
+
 #~ msgid "Deutsch--NATIVE-LANGUAGE"
 #~ msgstr "Deutsch"
 
+#, fuzzy
+#~ msgid "Direct Contact"
+#~ msgstr "Звязацца"
+
+#, fuzzy
+#~ msgid "Disable 2FA"
+#~ msgstr "Aдключыць рэдактар"
+
+#, fuzzy
+#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+#~ msgstr "Вы сапраўды хочаце выдаліць запрашэнне для \"%(title)s\"?"
+
 #~ msgid "Dutch--NATIVE-LANGUAGE"
 #~ msgstr "Nederlands"
+
+#, fuzzy
+#~ msgid "Edit my Profile"
+#~ msgstr "Рэдагаваць профіль"
 
 #, fuzzy
 #~ msgid "Email to group administrator"
@@ -15018,6 +14642,35 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ msgid "English--NATIVE-LANGUAGE"
 #~ msgstr "English"
 
+#~ msgid "Ernährung und Konsum"
+#~ msgstr "Харчаванне і спажыванне"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "Памылка!"
+
+#~ msgid "Event poll updated by %(sender_name)s"
+#~ msgstr "Апытанне да падзеі абноўлена карыстальнікам(-цай) %(sender_name)s"
+
+#, fuzzy
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "Прыклад: http://mywebsite.com"
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "Файл \"%(title)s\" не атрымалася дадаць."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "Файл \"%(title)s\" не атрымалася зацягнуць."
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "Файл \"%(title)s\" паспяхова зацягнуты."
+
+#~ msgid "File description"
+#~ msgstr "Апісанне файла"
+
+#~ msgid "File title"
+#~ msgstr "Назва файла"
+
 #, fuzzy
 #~ msgid "Finish conference and deactivate user accounts"
 #~ msgstr "Выдаліць уліковы запіс карыстальніка(-цы)"
@@ -15025,8 +14678,15 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ msgid "French--NATIVE-LANGUAGE"
 #~ msgstr "Français"
 
+#, fuzzy
+#~ msgid "Function"
+#~ msgstr "Месцазнаходжанне"
+
 #~ msgid "Georgian--NATIVE-LANGUAGE"
 #~ msgstr "ქართული ენა"
+
+#~ msgid "Gesundheit"
+#~ msgstr "Здароўе"
 
 #~ msgid "Group:"
 #~ msgstr "Група:"
@@ -15134,25 +14794,140 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ "\n"
 #~ "Ваша каманда %(site_name)s"
 
+# EN > Our
+#, fuzzy
+#~ msgid ""
+#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#~ "\n"
+#~ "Our administrators will review your request and approve your user account soon!\n"
+#~ "\n"
+#~ "Until then, with warm greetings, \n"
+#~ "your %(site_name)s Team"
+#~ msgstr ""
+#~ "Вітаем! Мы рады даведацца, што Вы жадаеце стаць чальцом %(site_name)s.\n"
+#~ "\n"
+#~ "Нашы адміністратары прагледзяць Ваш запыт і ў хуткім часе ўхваляць Ваш уліковы запіс!\n"
+#~ "\n"
+#~ "А пакуль што дасылаем цёплыя прывітанні,\n"
+#~ "Ваша каманда %(site_name)s"
+
 #~ msgid "Hi,"
 #~ msgstr "Вітаем,"
+
+#, fuzzy
+#~ msgid "I wish to receive RocketChat notification emails"
+#~ msgstr "Я жадаю атрымліваць электронныя лісты с апавяшчэннямі"
 
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Калі Вы жадаеце выдаліць штосьці з Вашага змесціва, калі ласка, вярніцеся і зрабіце гэта зараз. Як толькі вы выдаліце свой профіль, Вы згубіце доступ да любога змесціва, якое Вы стварылі пад гэтым акаўнтам."
 
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Мае праекты і групы"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Мае праекты і групы"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "Поле сартавання"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "Паведамленні"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Паведамленні"
+
 #~ msgid "Invited you"
 #~ msgstr "Запрасіў(-ла) Вас"
 
+#~ msgid "Kalender"
+#~ msgstr "Каляндар"
+
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Қазақ тілі"
+
+#~ msgid "Klimaschutz"
+#~ msgstr "Абарона клімату"
+
+#~ msgid "Kunst und Kultur"
+#~ msgstr "Мастацтва і культура"
+
+#~ msgid "Message Group"
+#~ msgstr "Адправіць групе паведамленне"
+
+#~ msgid "Message Project"
+#~ msgstr "Даслаць паведамленне праекту"
+
+#, fuzzy
+#~ msgid "Name of educational institution"
+#~ msgstr "Выдаліць месцазнаходжанне"
+
+#~ msgid "New etherpad by %(sender_name)s"
+#~ msgstr "Новы нататнік Etherpad ад %(sender_name)s"
+
+#~ msgid "New etherpad by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новы нататнік Etherpad ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
+
+#~ msgid "New event by %(sender_name)s"
+#~ msgstr "Новая падзея ад %(sender_name)s"
+
+#~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новая падзея ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
+
+#~ msgid "New event poll by %(sender_name)s"
+#~ msgstr "Новае апытанне да падзеі ад %(sender_name)s"
+
+#~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новае апытанне да падзеі ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
+
+#~ msgid "New file by %(sender_name)s"
+#~ msgstr "Новы файл ад %(sender_name)s"
+
+#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новы файл ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
+
+#~ msgid "New news post by %(sender_name)s"
+#~ msgstr "Новы допіс ад %(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новы допіс ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
+
+#~ msgid "New offer by %(sender_name)s"
+#~ msgstr "Новая прапанова ад %(sender_name)s"
+
+#~ msgid "New offer by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новая прапанова ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
+
+#~ msgid "New poll by %(sender_name)s"
+#~ msgstr "Новае апытанне ад %(sender_name)s"
+
+#~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новае апытанне ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
+
+#~ msgid "New todo by %(sender_name)s"
+#~ msgstr "Новая задача ад %(sender_name)s"
+
+#~ msgid "Ok"
+#~ msgstr "OK"
 
 #, fuzzy
 #~ msgid "Only conference members can see the event\\'s description."
 #~ msgstr "Толькі чальцы каманды могуць бачыць матэрыялы, якія Вы запыталі. Падайце запыт на членства!"
 
+#~ msgid "Password reset successful"
+#~ msgstr "Скіданне пароля прайшло паспяхова"
+
 #, fuzzy
 #~ msgid "Password set"
 #~ msgstr "Скіданне пароля"
+
+#, fuzzy
+#~ msgid "Personal"
+#~ msgstr "Асобы"
 
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
@@ -15161,11 +14936,30 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ msgid "Portal administrators"
 #~ msgstr "Адміністратары партала"
 
+#, fuzzy
+#~ msgid "Position"
+#~ msgstr "Апісанне"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Стварыць падзею"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "Праекты/групы"
+
 #~ msgid "Public Group"
 #~ msgstr "Публічная група"
 
 #~ msgid "Re-Activate Project/Group"
 #~ msgstr "Узнавіць праект/групу"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "Памылка!"
+
+#~ msgid "Read more..."
+#~ msgstr "Чытаць далей..."
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "Адклікаў(-ла) Ваш статус адміністратара"
@@ -15177,8 +14971,19 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ msgstr "Русский"
 
 #, fuzzy
+#~ msgid "Saved items:"
+#~ msgstr "Новы элемент"
+
+#~ msgid "Schedule an event"
+#~ msgstr "Вызначыць дату падзеі"
+
+#, fuzzy
 #~ msgid "Search for email"
 #~ msgstr "Шукаць карыстальнікаў(-ц)"
+
+#, fuzzy
+#~ msgid "Set up your Profile"
+#~ msgstr "Рэдагаваць Ваш профіль"
 
 #~ msgid "Spanish--NATIVE-LANGUAGE"
 #~ msgstr "Español"
@@ -15188,11 +14993,30 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ msgstr "Выдаліць уліковы запіс карыстальніка(-цы)"
 
 #, fuzzy
+#~ msgid "Start/join BBB video conference for this event"
+#~ msgstr "Карыстальнік(-ца) стварыў(-ла) новую падзею"
+
+#, fuzzy
+#~ msgid "Start/join video chat for this event"
+#~ msgstr "Карыстальнік(-ца) стварыў(-ла) новую падзею"
+
+#, fuzzy
 #~ msgid "Temporary restrictions"
 #~ msgstr "Апісанне каманды"
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Наступныя групы былі ператвораныя ў праекты:"
+
+#~ msgid "The invite token you have used does not exist!"
+#~ msgstr "Маркер запрашэння, які Вы выкарысталі, не існуе!"
+
+#, fuzzy
+#~ msgid "This conference shall be made publicly findable via other platforms."
+#~ msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
+
+#, fuzzy
+#~ msgid "This group shall be made publicly findable via other platforms."
+#~ msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
 
 #, fuzzy
 #~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
@@ -15206,17 +15030,36 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
 #~ msgstr "Гэты працэс абарачальны. Вы можаце ўзнавіць праект/групу на старонцы спісу праектаў/груп у любы момант."
 
+#, fuzzy
+#~ msgid "This project shall be made publicly findable via other platforms."
+#~ msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
+
+#, fuzzy
+#~ msgid "Type of educational institution"
+#~ msgstr "Шукаць карыстальнікаў(-ц)"
+
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Українська"
+
+#~ msgid "Umwelt"
+#~ msgstr "Навакольнае асяроддзе"
 
 #, fuzzy
 #~ msgid "Upload Participants"
 #~ msgstr "Удзельнікі(-цы)"
 
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "Зацягніце выяву."
+
 # EN > missed " in address
 #, fuzzy
 #~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 #~ msgstr "Карыстальнік(-ца) \"%(user)s\" паспяхова зарэгістраваны. У бліжэйшы час мы дашлем ліст на Ваш адрас \"%(email)s\". Вы павінны пацвердзіць адрас электроннай пошты, перш чым увайсці."
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Праекты/групы"
 
 #~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
 #~ msgstr "Мы даслалі Вам інструкцыі па заданні пароля электронным лістом. Вы хутка іх атрымаеце."
@@ -15232,6 +15075,9 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #, fuzzy
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Вы збіраецеся пазначыць гэты праект/групу як неактыўны. Ён/яна і ўсё яго/яе змесціва будзе схаванае на вэбсайце і нябачнае для ўсіх, у тым ліку для Вас."
+
+#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
+#~ msgstr "Вы змянілі свой адрас электроннай пошты. У бліжэйшы час мы адправім Вам ліст на гэты адрас са спасылкай для пацверджання. Пакуль Вы не націснеце на гэтую спасылку, у Вашым профілі захаваецца стары адрас электроннай пошты!"
 
 #~ msgid "You were tagged by %(sender_name)s"
 #~ msgstr "Вас пазначыў(-ла) %(sender_name)s"
@@ -15271,104 +15117,3 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #, fuzzy
 #~ msgid "participants"
 #~ msgstr "Удзельнікі(-цы)"
-
-#~ msgid "New etherpad by %(sender_name)s"
-#~ msgstr "Новы нататнік Etherpad ад %(sender_name)s"
-
-#~ msgid "New etherpad by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Новы нататнік Etherpad ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
-
-#~ msgid "%(sender_name)s"
-#~ msgstr "%(sender_name)s"
-
-#~ msgid "%(sender_name)s voted in"
-#~ msgstr "%(sender_name)s прагаласаваў у"
-
-#~ msgid "Event poll updated by %(sender_name)s"
-#~ msgstr "Апытанне да падзеі абноўлена карыстальнікам(-цай) %(sender_name)s"
-
-#, fuzzy
-#~ msgid "Example: https://www.youtube.com/watch?v=12345"
-#~ msgstr "Прыклад: http://mywebsite.com"
-
-#~ msgid "Kalender"
-#~ msgstr "Каляндар"
-
-#~ msgid "New event by %(sender_name)s"
-#~ msgstr "Новая падзея ад %(sender_name)s"
-
-#~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Новая падзея ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
-
-#~ msgid "New event poll by %(sender_name)s"
-#~ msgstr "Новае апытанне да падзеі ад %(sender_name)s"
-
-#~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Новае апытанне да падзеі ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
-
-#~ msgid "Schedule an event"
-#~ msgstr "Вызначыць дату падзеі"
-
-#, fuzzy
-#~ msgid "Start/join BBB video conference for this event"
-#~ msgstr "Карыстальнік(-ца) стварыў(-ла) новую падзею"
-
-#, fuzzy
-#~ msgid "Start/join video chat for this event"
-#~ msgstr "Карыстальнік(-ца) стварыў(-ла) новую падзею"
-
-#~ msgid "New file by %(sender_name)s"
-#~ msgstr "Новы файл ад %(sender_name)s"
-
-#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Новы файл ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
-
-#~ msgid "File title"
-#~ msgstr "Назва файла"
-
-#~ msgid "File description"
-#~ msgstr "Апісанне файла"
-
-#~ msgid "File \"%(title)s\" was uploaded successfully."
-#~ msgstr "Файл \"%(title)s\" паспяхова зацягнуты."
-
-#~ msgid "File \"%(title)s\" could not be uploaded."
-#~ msgstr "Файл \"%(title)s\" не атрымалася зацягнуць."
-
-#~ msgid "File \"%(title)s\" could not be added."
-#~ msgstr "Файл \"%(title)s\" не атрымалася дадаць."
-
-#~ msgid "New offer by %(sender_name)s"
-#~ msgstr "Новая прапанова ад %(sender_name)s"
-
-#~ msgid "New offer by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Новая прапанова ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
-
-#~ msgid "New news post by %(sender_name)s"
-#~ msgstr "Новы допіс ад %(sender_name)s"
-
-#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Новы допіс ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
-
-#~ msgid "Read more..."
-#~ msgstr "Чытаць далей..."
-
-#, fuzzy
-#~| msgid "I wish to receive notification emails"
-#~ msgid "I wish to receive RocketChat notification emails"
-#~ msgstr "Я жадаю атрымліваць электронныя лісты с апавяшчэннямі"
-
-#~ msgid "New poll by %(sender_name)s"
-#~ msgstr "Новае апытанне ад %(sender_name)s"
-
-#~ msgid "%(sender_name)s completed a poll"
-#~ msgstr "%(sender_name)s завяршыў(-ла) апытанне"
-
-#~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Новае апытанне ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
-
-#~ msgid "%(sender_name)s completed a poll you are following"
-#~ msgstr "%(sender_name)s завяршыў(-ла) апытанне, за якім Вы сочыце"
-
-#~ msgid "New todo by %(sender_name)s"
-#~ msgstr "Новая задача ад %(sender_name)s"

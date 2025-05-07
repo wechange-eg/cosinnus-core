@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-30 12:24+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2025-05-07 10:52+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
 
 msgid "Info"
 msgstr ""
@@ -2157,6 +2151,12 @@ msgid "You've matched!"
 msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "User Online on Day"
 msgstr ""
 
 #, fuzzy
@@ -4374,9 +4374,6 @@ msgstr ""
 msgid "Change email address"
 msgstr "Create Project"
 
-msgid "Date"
-msgstr ""
-
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
 msgstr ""
@@ -6354,6 +6351,9 @@ msgstr ""
 msgid "HD space used by projects"
 msgstr ""
 
+msgid "User Activity Timeline"
+msgstr ""
+
 msgid "User statistics (min 1x logged in)"
 msgstr ""
 
@@ -6670,10 +6670,6 @@ msgstr ""
 #, fuzzy
 msgid "In my Groups and Projects"
 msgstr "My Projects"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "In my Cloud Files"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
@@ -8499,13 +8495,16 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 2.4.0 released"
+msgstr ""
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr ""
+
 msgid "Version 2.3.0 released"
 msgstr ""
 
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
-msgstr ""
-
-msgid "This update provides several small bugfixes and stability improvements."
 msgstr ""
 
 msgid "Redesign Update"
@@ -9306,9 +9305,6 @@ msgid "Cloud Stub"
 msgstr ""
 
 msgid "Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
 msgstr ""
 
 msgid "Restart"
