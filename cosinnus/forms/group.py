@@ -5,6 +5,7 @@ import csv
 import io
 import re
 from builtins import object, str
+from copy import copy
 from uuid import uuid1
 
 import chardet
@@ -369,21 +370,29 @@ class CosinnusBaseGroupForm(
             conference_notification_alert_pairs = []
 
             for related_group in self.cleaned_data['related_groups']:
+                # in the context of notifications for each target related group (the groups getting notified),
+                # we attach that group as `notification_target_group` property to our origin group that
+                # was created (this) to hand over to the notifications receiver. we use a copied instance so we can
+                # attach different origin groups, becase the notifications will be evaluated *after* this loop
+                context_origin_group = copy(self.instance)
+
                 # non-superuser users can only tag groups they are in
                 if not user_superuser and related_group.id not in user_group_ids:
                     continue
                 # only create group rel if it didn't exist
-                existing_group_rel = get_object_or_None(RelatedGroups, to_group=self.instance, from_group=related_group)
+                existing_group_rel = get_object_or_None(
+                    RelatedGroups, to_group=context_origin_group, from_group=related_group
+                )
                 if not existing_group_rel:
                     # create a new related group link
-                    RelatedGroups.objects.create(to_group=self.instance, from_group=related_group)
+                    RelatedGroups.objects.create(to_group=context_origin_group, from_group=related_group)
                     # if the current group is a conference, and the related group is a society or project,
                     # the conference will be reflected into the group, so we send a notification
                     non_conference_group_types = [
                         get_cosinnus_group_model().TYPE_PROJECT,
                         get_cosinnus_group_model().TYPE_SOCIETY,
                     ]
-                    if self.instance.group_is_conference and related_group.type in non_conference_group_types:
+                    if context_origin_group.group_is_conference and related_group.type in non_conference_group_types:
                         audience_group_members_except_creator = [
                             member for member in related_group.actual_members if member.id != self.request.user.id
                         ]
@@ -396,34 +405,36 @@ class CosinnusBaseGroupForm(
                         # HERE: we should send alerts only for followers of the target group,
                         #    but send the email notification for members, independent of following
                         # set the target group for the notification onto the group instance
-                        setattr(self.instance, 'notification_target_group', related_group)
+                        setattr(context_origin_group, 'notification_target_group', related_group)
                         conference_notification_email_pairs.append(
-                            (self.instance, audience_group_members_except_creator)
+                            (context_origin_group, audience_group_members_except_creator)
                         )
                         conference_notification_alert_pairs.append(
-                            (self.instance, audience_group_followers_except_creator)
+                            (context_origin_group, audience_group_followers_except_creator)
                         )
 
             # send notifications in a session to avoid duplicate messages to any user
-            session_id = uuid1().int
+            session_notification_id = uuid1().int
+            # send email/alert in a different session each
+            session_alert_id = uuid1().int
+            # send notifications in a session to avoid duplicate messages to any user
             for i, pair in enumerate(conference_notification_email_pairs):
                 cosinnus_notifications.conference_created_in_group.send(
                     sender=self,
                     user=self.request.user,
                     obj=pair[0],
                     audience=pair[1],
-                    session_id=session_id,
+                    session_id=session_notification_id,
                     end_session=bool(i == len(conference_notification_email_pairs) - 1),
                 )
             # send email/alert in a different session each
-            session_id = uuid1().int
             for i, pair in enumerate(conference_notification_alert_pairs):
                 cosinnus_notifications.conference_created_in_group_alert.send(
                     sender=self,
                     user=self.request.user,
                     obj=pair[0],
                     audience=pair[1],
-                    session_id=session_id,
+                    session_id=session_alert_id,
                     end_session=bool(i == len(conference_notification_alert_pairs) - 1),
                 )
 
