@@ -685,7 +685,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                 menu_item = MenuItem(
                     link_label,
                     url=href if href else None,
-                    icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
+                    icon=self._extract_fa_icon(leftnav_link),
                     badge=badge_label if badge_label and badge_label != link_label else None,
                     id=v3_id or ('Sidebar-' + get_random_string(8)),
                     is_external=bool(leftnav_link.get('target', None) == '_blank'),
@@ -777,10 +777,18 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                     if 'x-v3-leftnav-action-target-active-app' in [
                         subclass for subclass in getattr(menu_item, '_original_css_class', [])
                     ]:
-                        active_menu_item['actions'] = active_menu_item.get(
-                            'actions', []
-                        )  # make sure actions list exists
-                        target_subnav = active_menu_item['actions']
+                        if active_menu_item:
+                            active_menu_item['actions'] = active_menu_item.get(
+                                'actions', []
+                            )  # make sure actions list exists
+                            target_subnav = active_menu_item['actions']
+                        else:
+                            target_subnav = None
+                            logger.warning(
+                                'Main content: A v3 leftnav button with "x-v3-leftnav-action-target-active-app" could '
+                                'not be sorted as no active app button was found! This action will not be displayed in '
+                                'the UI now!'
+                            )
                     elif 'x-v3-leftnav-action-target-active-subitem' in [
                         subclass for subclass in getattr(menu_item, '_original_css_class', [])
                     ]:
@@ -802,7 +810,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                     target_subnav = bottom
                 elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS):
                     target_subnav = top
-                target_subnav.append(menu_item)
+                if target_subnav is not None:
+                    target_subnav.append(menu_item)
 
         _sort_menu_items(appsmenu_items, middle)
         _sort_menu_items(buttons_items, middle_from_buttons_area)

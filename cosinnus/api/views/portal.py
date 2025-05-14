@@ -13,11 +13,12 @@ from rest_framework_csv.renderers import CSVRenderer
 
 from cosinnus.api.serializers.portal import PortalSettingsSerializer
 from cosinnus.conf import settings as cosinnus_settings
-from cosinnus.models import MEMBERSHIP_ADMIN, CosinnusPortal
+from cosinnus.models import MEMBERSHIP_ADMIN, CosinnusPortal, UserOnlineOnDay
 from cosinnus.models.bbb_room import BBBRoomVisitStatistics
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.templatetags.cosinnus_tags import cosinnus_footer_v2, cosinnus_menu_v2
+from cosinnus.utils.dates import daterange
 from cosinnus.utils.permissions import IsAdminUser, IsCosinnusAdminUser
 from cosinnus.utils.settings import get_obfuscated_settings_strings
 from cosinnus.utils.user import filter_active_users, get_user_id_hash, get_user_tos_accepted_date
@@ -459,6 +460,54 @@ class SimpleStatisticsUserActivityInfoView(APIView):
         return super().finalize_response(request, response, *args, **kwargs)
 
 
+class SimpleStatisticsUserActivityTimelineRenderer(CSVRenderer):
+    """
+    Renders the csv output with custom headers for user activity information API endpoint
+    """
+
+    header = [
+        'date',
+        'users-active-online',
+        'users-accounts-created',
+    ]
+
+
+class SimpleStatisticsUserActivityTimelineView(APIView):
+    """
+    API endpoint for user activity timeline, returning as a CSV all datapoints for known user
+    online activity days.
+    """
+
+    renderer_classes = (SimpleStatisticsUserActivityTimelineRenderer,) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
+    permission_classes = (IsCosinnusAdminUser,)
+
+    def get_user_timeline_stats(self):
+        rows = []
+        all_days = UserOnlineOnDay.objects.all().order_by('date')
+        for single_date in daterange(all_days.first().date, all_days.last().date, include_end_date=True):
+            # row: 'date', 'users-active-online', 'users-accounts-created',
+            row = [
+                single_date.strftime('%Y-%m-%d'),
+                UserOnlineOnDay.objects.filter(date=single_date).count(),
+                get_user_model().objects.filter(date_joined__date=single_date).count(),
+            ]
+            rows.append(row)
+        return rows
+
+    def get(self, request, *args, **kwargs):
+        user_timeline_stats = self.get_user_timeline_stats()
+        data = [dict(zip(SimpleStatisticsUserActivityTimelineRenderer.header, row)) for row in user_timeline_stats]
+        return Response(data)
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        """
+        Renders the csv output with custom headers for project storage report API endpoint
+        """
+        if request.GET.get('format') == 'csv':
+            response['Content-Disposition'] = 'attachment; filename=user_activity_timeline.csv'
+        return super().finalize_response(request, response, *args, **kwargs)
+
+
 if cosinnus_settings.COSINNUS_ENABLE_ADMIN_USER_DOMAIN_INFO_CSV_DOWNLOADS:
 
     class SimpleStatisticsUserDomainInfoRenderer(CSVRenderer):
@@ -682,6 +731,7 @@ statistics_group_storage_info = SimpleStatisticsGroupStorageReportView.as_view()
 statistics_conference_storage_info = SimpleStatisticsConferenceStorageReportView.as_view()
 statistics_project_storage_info = SimpleStatisticsProjectStorageReportView.as_view()
 statistics_user_activity_info = SimpleStatisticsUserActivityInfoView.as_view()
+statistics_user_activity_timeline = SimpleStatisticsUserActivityTimelineView.as_view()
 statictics_bbb_room_visits = SimpleStatisticsBBBRoomVisitsView.as_view()
 header = HeaderView.as_view()
 footer = FooterView.as_view()

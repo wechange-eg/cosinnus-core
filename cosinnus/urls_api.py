@@ -10,6 +10,7 @@ from cosinnus.api.views.portal import (
     SimpleStatisticsGroupStorageReportView,
     SimpleStatisticsProjectStorageReportView,
     SimpleStatisticsUserActivityInfoView,
+    SimpleStatisticsUserActivityTimelineView,
     StatisticsManagedTagFilteredView,
     StatisticsView,
 )
@@ -42,6 +43,11 @@ urlpatterns = api_patterns(
         r'^statistics/general/user_activity_info/',
         SimpleStatisticsUserActivityInfoView.as_view(),
         name='user-activity-info',
+    ),
+    re_path(
+        r'^statistics/general/user_activity_timeline/',
+        SimpleStatisticsUserActivityTimelineView.as_view(),
+        name='user-activity-timeline',
     ),
     re_path(
         r'^statistics/general/bbb_room_visits/', SimpleStatisticsBBBRoomVisitsView.as_view(), name='bbb-room-visits'

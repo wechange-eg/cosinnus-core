@@ -61,7 +61,19 @@
                             </b>
 	                    </div>
 	                {% endif %}
-                    
+
+                    {% if SETTINGS.COSINNUS_EVENT_DIFFERENTIATE_ONLINE_AND_ONSITE_EVENTS %}
+                        <div class="textfield transparent">
+                            <i>
+                                {% if group.locations.exists %}
+                                    {% trans "On-site event" %}
+                                {% else %}
+                                    {% trans "Online event" %}
+                                {% endif %}
+                            </i>
+                        </div>
+                    {% endif %}
+
                     {% if group.description_long or group.description %}
                         <div class="textfield transparent large-space">
                             {% if group.description_long %}

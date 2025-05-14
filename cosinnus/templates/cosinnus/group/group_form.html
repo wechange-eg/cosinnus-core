@@ -405,7 +405,10 @@
                         {# Locations Inlineform #}
                         {% trans "Remove location" as loc_rm_label %}
                         {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
-                        {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=group_model_class.get_trans.FORMFIELD_LOCATION_LABEL   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
+                        {% if SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE and SETTINGS.COSINNUS_EVENT_DIFFERENTIATE_ONLINE_AND_ONSITE_EVENTS %}
+                            {% captureas loc_legend %}{% trans "If no location is specified, the event is interpreted as an online event." %}{% endcaptureas %}
+                        {% endif %}
+                        {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=group_model_class.get_trans.FORMFIELD_LOCATION_LABEL legend=loc_legend content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
 
                         {% if form.forms.obj.parent %}
 	                        {# Parent Field #}

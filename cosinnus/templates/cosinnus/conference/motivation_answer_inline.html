@@ -1,7 +1,12 @@
 {% load i18n widget_tweaks %}
 
 <div class="small-padding background-light-fadeout transparent-p">
-    <em>{{ inlineform.question.value|linebreaks }}</em>
+    <p>
+        <em>{{ inlineform.question.value|linebreaksbr }}</em>
+        {% if SETTINGS.COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL %}
+            <span class="required-label">{{ SETTINGS.COSINNUS_FIELDS_REQUIRED_LABEL }}</span>
+        {% endif %}
+    </p>
 </div>
 {% trans "Answer" as answer_placeholder %}
 {% include 'cosinnus/fields/default_field.html' with field=inlineform.answer label=None large_field=True placeholder=answer_placeholder %}

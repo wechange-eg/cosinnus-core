@@ -86,6 +86,19 @@
 	        </li>
 	    </ul>
 	</button>
+
+    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus-api:user-activity-timeline' %}?format=csv">
+        <ul class="media-list">
+            <li class="media">
+               <span class="pull-left">
+                    <i class="fa fa-download"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "User Activity Timeline" %}
+                </div>
+            </li>
+        </ul>
+    </button>
 	
 	<button type="button" class="btn w100 btn-emphasized {% if SETTINGS.COSINNUS_ENABLE_ADMIN_USER_DOMAIN_INFO_CSV_DOWNLOADS %}fine-space{% else %}large-space{% endif %}" href="{% url 'cosinnus-api:user-activity-info' %}?format=csv">
         <ul class="media-list">

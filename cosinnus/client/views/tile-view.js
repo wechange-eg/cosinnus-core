@@ -7,7 +7,7 @@ var util = require('lib/util');
 var tileTemplateDefault = require('tiles/grid-tile-default');
 var tileTemplateGroups = require('tiles/grid-tile-groups');
 var tileTemplateProjects = require('tiles/grid-tile-projects');
-if (COSINNUS_CLOUD_ENABLED) {
+if (COSINNUS_CLOUD_SEARCH_ENABLED) {
     var tileTemplateCloudfile = require('tiles/grid-tile-cloudfile');
 }
 if (COSINNUS_ORGANIZATIONS_ENABLED) {

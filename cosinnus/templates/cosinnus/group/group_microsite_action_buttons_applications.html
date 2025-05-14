@@ -38,11 +38,13 @@
             {% if application and application.application_status_string %}
                 {{ application.application_status_string }}
             {% elif group.participation_management.count > 0 %}
-                {% if group.participation_management.first|is_late_application_allowed:user %}
-                    {% trans "Late registration possible" %}
-                {% else %}
-                    {{ group.participation_management.first.application_time_string }}
-                {% endif %}
+                {% with participation_management=group.participation_management.first %}
+                    {% if participation_management|is_late_application_allowed:user %}
+                        {% trans "Late registration possible" %}
+                    {% else %}
+                        {{ participation_management.application_time_string }}
+                    {% endif %}
+                {% endwith %}
             {% else %}
                 {% trans "Participation applications are open." %}
             {% endif %}
@@ -55,7 +57,7 @@
                 </div>
             {% endif %}
         {% endif %}
-        {% if group.participation_management.all.count == 1 and group.participation_management.first.from_date %}
+        {% if group.participation_management.all.count == 1 and group.participation_management.first.from_date and group.participation_management.first.application_enabled %}
             <div class="textfield transparent">
                 <p>
                     <b>{% trans "Application period" %}:</b>

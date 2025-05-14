@@ -62,19 +62,11 @@
 			{# Translators: __INCLUDE_JS_PO__ #}
 			{% trans "In my Groups and Projects" %}
 		{% endset %}
-		{% set cloudfiles_annotation %}
-			{# Translators: __INCLUDE_JS_PO__ #}
-			{% trans "In my Cloud Files" %}
-		{% endset %}
-		
+
 		{{ macros.listItem(query, searchMethods['default'], 'fa-search', annotation=default_annotation, includeUnderdrop=true) }}
 		{{ macros.listItem(query, searchMethods['map'], 'fa-search', annotation=map_annotation, includeUnderdrop=true) }}
 		{{ macros.listItem(query, searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
 
-		{% if cloudEnabled %}
-			{{ macros.listItem(query, searchMethods['cloudfiles'], 'fa-search', annotation=cloudfiles_annotation, includeUnderdrop=true) }}
-		{% endif %}
-		
 		{% for topic_title, topic_url in topicsSearchMethods %}
 			{% set topic_label %}
 				{# Translators: __INCLUDE_JS_PO__ #}
@@ -93,12 +85,7 @@
 		
 		{# We use makeSafe here because we escape results' text in handleDate() #}
 		{% for item in quicksearchResults %}
-			{# cloudfiles should show the subtext, others should not #}
-			{% if item.icon == "fa-cloud" %}
-				{{ macros.listItem(item.text, item.url, item.icon, subtext=item.subtext, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true) }}
-			{% else %}
-				{{ macros.listItem(item.text, item.url, item.icon, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true) }}
-			{% endif %}
+            {{ macros.listItem(item.text, item.url, item.icon, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true) }}
 		{% endfor %}
 	{% endif %}
 </ul>

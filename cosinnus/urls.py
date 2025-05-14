@@ -266,6 +266,7 @@ urlpatterns = [
     path('housekeeping/fillcache/<str:number>/', housekeeping.fillcache, name='housekeeping-fillcache'),
     path('housekeeping/getcache', housekeeping.getcache, name='housekeeping-getcache'),
     path('housekeeping/deletecache', housekeeping.deletecache, name='housekeeping-deletecache'),
+    path('housekeeping/users_online_today/', housekeeping.users_online_today, name='housekeeping-users_online_today'),
     path('housekeeping/test_logging/', housekeeping.test_logging, name='housekeeping-test-logging'),
     path(
         'housekeeping/test_logging/info/',
@@ -391,23 +392,11 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
     settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False
 ):
     dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
-    if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
-        import cosinnus_cloud.views as cosinnus_cloud_views  # noqa
-
+    if getattr(settings, 'COSINNUS_CLOUD_SEARCH_ENABLED', False):
         urlpatterns += [
-            path(
-                'dashboard/api/user_typed_content/cloud_files/',
-                cosinnus_cloud_views.api_user_cloud_files_content,
-                name='user-dashboard-api-typed-content-cloud',
-            ),
-            path(
-                'dashboard/api/user_typed_content/recent/cloud_files/',
-                cosinnus_cloud_views.api_user_cloud_files_content,
-                name='user-dashboard-api-typed-content-cloud',
-                kwargs={'show_recent': True},
-            ),
             path('search/cloudfiles/', map.tile_view, name='cloudfiles-search', kwargs={'types': ['cloudfiles']}),
         ]
+
     urlpatterns += [
         path(f'{dashboard_url}/', user_dashboard.user_dashboard_view, name='user-dashboard'),
         path('dashboard/api/user_groups/', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
@@ -794,3 +783,12 @@ urlpatterns += [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api/v2/docs/', RedirectView.as_view(url='/swagger/', permanent=False)),
 ]
+
+
+if getattr(settings, 'TESTING', False):
+    from cosinnus.tests.view_tests.views import main_content_form_test_view, main_content_test_view
+
+    urlpatterns += [
+        path('test/main-content-test-view/', main_content_test_view, name='main-content-test'),
+        path('test/main-content-form-test-view/', main_content_form_test_view, name='main-content-form-test'),
+    ]

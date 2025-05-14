@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 12:37+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2025-05-07 10:52+0200\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
 
 msgid "Info"
 msgstr ""
@@ -20,12 +14,10 @@ msgid "Success"
 msgstr ""
 
 #, fuzzy
-#| msgid "Warning!"
 msgid "Warning"
 msgstr "Uwaga!"
 
 #, fuzzy
-#| msgid "Error!"
 msgid "Error"
 msgstr "Błąd!"
 
@@ -36,7 +28,6 @@ msgid "Announcement"
 msgstr "Ogłoszenie"
 
 #, fuzzy
-#| msgid "Announcement"
 msgid "Announcements"
 msgstr "Ogłoszenie"
 
@@ -105,6 +96,28 @@ msgstr "Członkowie zostali dodatkowo usunięci ze wszystkich innych Portali."
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Przenieś wszystkich członków do obecnego Portalu (usuwa wszystkie inne członkostwa!)"
 
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud group id set."
+msgstr ""
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
+msgstr ""
+
+#, python-format
+msgid "Could not change Nextcloud group name for group \"%(group)s\"."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Groups' Nextcloud group names were updated."
+msgstr "%d Członkostwa użytkowników w pokoju rocketchat zostały przerobione."
+
+#, fuzzy
+#| msgid "Nextcloud Groupfolder Name"
+msgid "Nextcloud: Update group names"
+msgstr "ID folderu nazwy Grupy Nextcloud"
+
 msgid "Move selected groups and their subprojects to current portal"
 msgstr "Przenieś wybrane grupy i ich sub-projekty do obecnego portalu"
 
@@ -149,7 +162,6 @@ msgid "No"
 msgstr "Nie"
 
 #, fuzzy
-#| msgid "Contact info"
 msgid "Personal info"
 msgstr "Inform. kontaktowe"
 
@@ -193,12 +205,10 @@ msgid "%(count)d Users were logged out."
 msgstr ""
 
 #, fuzzy
-#| msgid "Logout"
 msgid "Logout users"
 msgstr "Wyloguj"
 
 #, fuzzy, python-format
-#| msgid "%d Users' rocketchat room memberships were re-done."
 msgid "%(count)d Users' group memberships were refreshed."
 msgstr "%d Członkostwa użytkowników w pokoju rocketchat zostały przerobione."
 
@@ -230,27 +240,22 @@ msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Obsadź brakujące członkostwa w pokoju RocketChat dla użytkowników"
 
 #, fuzzy, python-format
-#| msgid "%d Users were made RocketChat admins."
 msgid "%d Users were made Nextcloud admins."
 msgstr "%d Użytkowników stało się adminami RocketChat."
 
 #, fuzzy
-#| msgid "Rocket: Make user RocketChat admin"
 msgid "Nextcloud: Make user Nextcloud admin"
 msgstr "Rocket: Uczyń użytkownika RocketChat administratorem"
 
 #, fuzzy
-#| msgid "Recipients"
 msgid "Recipients Count"
 msgstr "Odbiorcy"
 
 #, fuzzy
-#| msgid "Recipients"
 msgid "Recipients Send Count"
 msgstr "Odbiorcy"
 
 #, fuzzy
-#| msgid "Last accessed"
 msgid "Guest access URL"
 msgstr "Ostatni dostęp"
 
@@ -259,7 +264,6 @@ msgid "%(model_name)s with this %(field_name)s already exists."
 msgstr ""
 
 #, fuzzy
-#| msgid "Project Dashboard"
 msgid "Personal Dashboard"
 msgstr "Strona główna projektu"
 
@@ -267,7 +271,6 @@ msgid "Go To..."
 msgstr ""
 
 #, fuzzy
-#| msgid "Contact info"
 msgid "My Personal Space"
 msgstr "Inform. kontaktowe"
 
@@ -286,7 +289,6 @@ msgid "Users"
 msgstr "Użytkownicy"
 
 #, fuzzy
-#| msgid "Content"
 msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Treść"
@@ -304,7 +306,6 @@ msgid "Conference Applications"
 msgstr "Aplikacje do udziału w konferencji"
 
 #, fuzzy
-#| msgid "Change language"
 msgid "Change Language"
 msgstr "Zmień język"
 
@@ -312,7 +313,6 @@ msgid "My Profile"
 msgstr "Mój Profil"
 
 #, fuzzy
-#| msgid "Delete Account"
 msgid "My Guest Account"
 msgstr "Usuń Konto"
 
@@ -326,8 +326,6 @@ msgid "Administration"
 msgstr "Administracja"
 
 #, fuzzy, python-format
-#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-#| msgid "to %(portal_name)s"
 msgid "About %(portal_name)s"
 msgstr "do %(portal_name)s"
 
@@ -335,7 +333,6 @@ msgid "Logout"
 msgstr "Wyloguj"
 
 #, fuzzy
-#| msgid "Last accessed"
 msgid "Leave guest access"
 msgstr "Ostatni dostęp"
 
@@ -349,7 +346,6 @@ msgid "Search"
 msgstr "Szukaj"
 
 #, fuzzy
-#| msgid "Bookmark"
 msgid "Bookmarks"
 msgstr "Zakładka"
 
@@ -408,7 +404,6 @@ msgid "You need to verify your email before logging in. We have just sent you an
 msgstr ""
 
 #, fuzzy
-#| msgid "Invalid request."
 msgid "Invalid guest token."
 msgstr "Nieprawidłowe żądanie."
 
@@ -434,12 +429,10 @@ msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\"
 msgstr "%(sender_name)s zaprasza Cię do projektu \"%(team_name)s\" na %(portal_name)s! Kliknij nazwę projektu poniżej, aby się z nim zapoznać i do niego dołączyć!"
 
 #, fuzzy
-#| msgid "Mobilität"
 msgid "Mobility"
 msgstr "Mobilność"
 
 #, fuzzy
-#| msgid "Energie"
 msgid "Energy"
 msgstr "Energia"
 
@@ -459,7 +452,6 @@ msgid "Art, Culture und Leisure Activities"
 msgstr ""
 
 #, fuzzy
-#| msgid "Geld und Finanzen"
 msgid "Money and Finance"
 msgstr "Pieniądze i finanse"
 
@@ -470,17 +462,14 @@ msgid "Construction and Living"
 msgstr ""
 
 #, fuzzy
-#| msgid "Climate Action"
 msgid "Climate Protection"
 msgstr "Akcja klimatyczna"
 
 #, fuzzy
-#| msgid "Apply for Participation"
 msgid "Democracy and Participation"
 msgstr "Złóż aplikację o uczestnictwo"
 
 #, fuzzy
-#| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Organizacja"
 
@@ -528,12 +517,10 @@ msgid "Conferences"
 msgstr "Konferencje"
 
 #, fuzzy
-#| msgid "Convert selected items to Conferences"
 msgid "Invitations to Conferences"
 msgstr "Konwertuj zaznaczone pozycje na konferencje"
 
 #, fuzzy
-#| msgid "In my Groups and Projects"
 msgid "Invitations to Groups and Projects"
 msgstr "W moich Grupach i Projektach"
 
@@ -563,7 +550,6 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "To konto nie jest już aktywne. Zostałeś/-aś wylogowany/-a."
 
 #, fuzzy
-#| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "To konto nie jest już aktywne. Zostałeś/-aś wylogowany/-a."
 
@@ -580,7 +566,6 @@ msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr ""
 
 #, fuzzy
-#| msgid "The page you requested is not available for this event at this time."
 msgid "The page you tried to visit is not available for guest accounts."
 msgstr "Strona, którą chcesz otworzyć, jest aktualnie niedostępna."
 
@@ -811,17 +796,14 @@ msgid "A conference you are attending has been updated"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgid "The conference %(object_name)s has been updated"
 msgstr "Nowa konferencja: \"%(object_name)s\" został zgłoszony w %(team_name)s."
 
 #, fuzzy
-#| msgid "You are about to deactivate this conference!"
 msgid "You are attending this conference"
 msgstr "Właśnie dezaktywujesz tę konferencję!"
 
 #, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgid "The conference \"%(object_name)s\" was updated."
 msgstr "Nowa konferencja: \"%(object_name)s\" został zgłoszony w %(team_name)s."
 
@@ -829,7 +811,6 @@ msgid "The time of a conference you are attending has been updated"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgid "The time of conference %(object_name)s has been updated"
 msgstr "Nowa konferencja: \"%(object_name)s\" został zgłoszony w %(team_name)s."
 
@@ -1082,7 +1063,6 @@ msgid "The selected choice was not found or invalid! Please choose a different v
 msgstr "Wytypowany wybór nie został znaleziony lub jest nieprawidłowy! Proszę wybrać inną wartość!"
 
 #, fuzzy
-#| msgid "Set your password"
 msgid "Your password"
 msgstr "Ustaw swoje hasło"
 
@@ -1106,7 +1086,6 @@ msgid "Persons"
 msgstr "Osoby"
 
 #, fuzzy
-#| msgid "Last name"
 msgid "last name"
 msgstr "Nazwisko"
 
@@ -1143,7 +1122,6 @@ msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "Niektóre wymagane kolumny nie są obecne w CSV: {missing_headers}!"
 
 #, fuzzy, python-format
-#| msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
 msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
 msgstr "Wiersze w tych numerach linii nie miały takiej samej liczby elementów ({len(processed_header)}) jak nagłówek: {\",\".join(mismatched_rows)}!"
 
@@ -1384,12 +1362,10 @@ msgid "Request user information"
 msgstr "Żądanie informacji o użytkowniku"
 
 #, fuzzy
-#| msgid "Cooperation requests"
 msgid "User motivation questions"
 msgstr "Współpraca"
 
 #, fuzzy
-#| msgid "Request organization"
 msgid "Request contact option"
 msgstr "Żądaj organizacji"
 
@@ -1399,11 +1375,21 @@ msgstr "Włączony wybór priorytetowy"
 msgid "Participation applications are open."
 msgstr "Aplikacje o uczestnictwo są otwarte."
 
+#, fuzzy
+#| msgid "Participation applications are open."
+msgid "Participation applications are disabled."
+msgstr "Aplikacje o uczestnictwo są otwarte."
+
 msgid "Participation application has not started yet."
 msgstr "Jeszcze nie rozpoczęto składania aplikacji o uczestnictwo."
 
 msgid "Participation application is over."
 msgstr "Zakończono składanie aplikacji o uczestnictwo."
+
+#, fuzzy
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference has ended."
+msgstr "Nowa konferencja: \"%(object_name)s\" został zgłoszony w %(team_name)s."
 
 msgctxt "a conference application status"
 msgid "Invalid"
@@ -1462,7 +1448,6 @@ msgid "Contact E-Mail Address"
 msgstr "Kontaktowy adres e-mail"
 
 #, fuzzy
-#| msgid "May be contacted"
 msgid "Applicant may be contacted"
 msgstr "Możliwość kontaktu"
 
@@ -1588,7 +1573,6 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Wpisz prawidłową nazwę. Nie można używać znaku \"/\"."
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Is Late Invitation"
 msgstr "Zaproszenia"
 
@@ -1718,7 +1702,6 @@ msgid "Project Type"
 msgstr "Typ Projektu"
 
 #, fuzzy
-#| msgid "Untitled"
 msgid "Subtitle"
 msgstr "Bez tytułu"
 
@@ -1842,7 +1825,6 @@ msgid "Related Teams"
 msgstr "Powiązane Zespoły"
 
 #, fuzzy
-#| msgid "I am open for cooperation requests"
 msgid "Open for cooperation"
 msgstr "Jestem otwarty/a na zapytania dotyczące współpracy"
 
@@ -1854,7 +1836,6 @@ msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "To ustawienie wyświetla pole Wezwania do Akcji na Mikrostronie."
 
 #, fuzzy
-#| msgid "User token"
 msgid "Use invite token"
 msgstr "Token użytkownika"
 
@@ -1957,8 +1938,6 @@ msgid "Cosinnus Ideas"
 msgstr "Idee Projektu Cosinnus"
 
 #, fuzzy
-#| msgctxt "subject of an E-Mail"
-#| msgid "Subject"
 msgid "Subject"
 msgstr "Temat"
 
@@ -1969,7 +1948,6 @@ msgid "Recipients"
 msgstr "Odbiorcy"
 
 #, fuzzy
-#| msgid "Additional Recipients"
 msgid "Mails sent to Recipients"
 msgstr "Dodatkowi Odbiorcy"
 
@@ -1977,7 +1955,6 @@ msgid "Mail function kwargs"
 msgstr ""
 
 #, fuzzy
-#| msgid "Dry run in progress"
 msgid "Sending in Progress"
 msgstr "Przebieg próbny w trakcie"
 
@@ -2049,7 +2026,6 @@ msgid "Is Moderator"
 msgstr "Jest moderator"
 
 #, fuzzy
-#| msgid "ToS accepted?"
 msgid "ToS accepted"
 msgstr "ToS Zaakceptowane?"
 
@@ -2109,7 +2085,6 @@ msgid "--- No country selected ---"
 msgstr "--- Nie wybrano żadnego kraju ---"
 
 #, fuzzy
-#| msgid "Ideas I like"
 msgid "dislike"
 msgstr "Pomysły, które mi się podobają"
 
@@ -2128,7 +2103,6 @@ msgid "Match subject"
 msgstr "Temat"
 
 #, fuzzy
-#| msgid "Attached object"
 msgid "Match object"
 msgstr "Załączony obiekt"
 
@@ -2154,8 +2128,13 @@ msgstr ""
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
 
+msgid "Date"
+msgstr "Data"
+
+msgid "User Online on Day"
+msgstr ""
+
 #, fuzzy
-#| msgid "Delete offer"
 msgid "Deletion after"
 msgstr "Usuń ofertę"
 
@@ -2163,7 +2142,6 @@ msgid "Data"
 msgstr ""
 
 #, fuzzy
-#| msgid "Import Data"
 msgid "Temporary Data"
 msgstr "Dane importu"
 
@@ -2659,7 +2637,6 @@ msgid "(The reported item has been deleted.)"
 msgstr "(Zgłoszony element został usunięty.)"
 
 #, fuzzy
-#| msgid "User Administration"
 msgid "Edit in User Administration"
 msgstr "Administracja Użytkownika"
 
@@ -2676,7 +2653,6 @@ msgid "To delete this user account, please go back to the user account list, fin
 msgstr ""
 
 #, fuzzy
-#| msgid "View on page"
 msgid "View on site"
 msgstr "Wyświetl na stronie"
 
@@ -2925,7 +2901,6 @@ msgid "User Import"
 msgstr "Import użytkownika"
 
 #, fuzzy
-#| msgid "User Import"
 msgid "User Export"
 msgstr "Import użytkownika"
 
@@ -2994,7 +2969,6 @@ msgid "Sent at:"
 msgstr "Wysłane do:"
 
 #, fuzzy
-#| msgid "Newsletter has been copied."
 msgid "Newsletter is being sent in the background."
 msgstr "Newsletter został skopiowany."
 
@@ -3266,7 +3240,6 @@ msgid "Shrink"
 msgstr "Zwiń"
 
 #, fuzzy
-#| msgid "Share on Facebook"
 msgid "Share on Mastodon"
 msgstr "Udostępnij na Facebooku"
 
@@ -3357,8 +3330,6 @@ msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_profileprivacy"
 
 #, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_50_profileprivacy"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy_external_users_forbidden"
 msgstr "helptext_50_profileprivacy"
@@ -3429,8 +3400,10 @@ msgstr "Twój profil"
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
 msgstr "Otrzymasz e-mail z powiadomieniem oraz powiadomienie na miejscu, gdy organizatorzy rozpatrzą Twoją aplikację. Upewnij się, że Twoje ustawienia powiadomień są poprawnie skonfigurowane, aby otrzymywać od nas e-maile!"
 
-msgid "Please provide your motivation for applying"
-msgstr "Proszę podać swoją motywację do złożenia aplikacji"
+#, fuzzy
+#| msgid ", for the following reason:"
+msgid "Please answer the following questions"
+msgstr "z następującego powodu:"
 
 msgid "Optional contact information"
 msgstr "Opcjonalne informacje kontaktowe"
@@ -3556,7 +3529,6 @@ msgid "Your name"
 msgstr "Twoje imię"
 
 #, fuzzy
-#| msgid "Please enter a token!"
 msgid "Please enter your name"
 msgstr "Proszę wpisać token!"
 
@@ -3609,17 +3581,14 @@ msgid "No, do not send"
 msgstr ""
 
 #, fuzzy
-#| msgid "Accept invitation"
 msgid "Copy invitation"
 msgstr "Przyjmij zaproszenie"
 
 #, fuzzy
-#| msgid "Accept invitation"
 msgid "Copy guest invitation"
 msgstr "Przyjmij zaproszenie"
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There was an error."
 msgstr "Brak grup."
 
@@ -3630,7 +3599,6 @@ msgid "This session is being recorded"
 msgstr ""
 
 #, fuzzy
-#| msgid "Continue reading"
 msgid "Continue"
 msgstr "Kontynuuj czytanie"
 
@@ -3660,6 +3628,11 @@ msgstr "Ty i wszyscy inni organizatorzy możecie przetwarzać aplikacje w sekcji
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr " Jeśli wolisz korzystać z prostych wniosków o członkostwo, tak jak jest to używane w projektach/grupach, wtedy możesz wyłączyć ustawienie \"%(application_setting_label)s\" w ustawieniach konferencji."
 
+#, fuzzy
+#| msgid "Participation applications are open."
+msgid "Participation applications are enabled"
+msgstr "Aplikacje o uczestnictwo są otwarte."
+
 msgid "Application period"
 msgstr "Okres składania aplikacji"
 
@@ -3677,7 +3650,7 @@ msgstr "(nie wybrano limitu)"
 
 #, fuzzy
 #| msgid "Require applicants to submit a text about their motivation for applying"
-msgid "Require applicants to answer questions about their motivation for applying"
+msgid "Applicants must answer questions about participation"
 msgstr "Wymagaj od osób składających aplikacje podania tekstu o motywacji do składania tego wniosku"
 
 msgid "Provide a list of questions that the applicants should answer."
@@ -3688,12 +3661,10 @@ msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr "Ma zastosowanie tylko wtedy, gdy włączona jest opcja \"%(other_option)s\"."
 
 #, fuzzy
-#| msgid "Remove button"
 msgid "Remove question"
 msgstr "Usuń przycisk"
 
 #, fuzzy
-#| msgid "Add button"
 msgid "Add question"
 msgstr "Dodaj przycisk"
 
@@ -3704,17 +3675,14 @@ msgid "Choose one or more options that will be displayed on the application form
 msgstr "Wybierz jedną lub więcej opcji, które będą wyświetlane w formularzu aplikacji. Osoby składające aplikację mogą wybrać dowolną z tych opcji wraz ze swoją aplikacją."
 
 #, fuzzy
-#| msgid "Additional options"
 msgid "Define additional custom options."
 msgstr "Opcje dodatkowe"
 
 #, fuzzy
-#| msgid "Remove location"
 msgid "Remove option"
 msgstr "Usuń lokalizację"
 
 #, fuzzy
-#| msgid "Add location"
 msgid "Add option"
 msgstr "Dodaj lokalizację"
 
@@ -3824,7 +3792,6 @@ msgid "The Lobby is the main entrance point for participants. You will find the 
 msgstr "Lobby jest głównym punktem startowym dla uczestników. Tutaj znajduje się agenda konferencji."
 
 #, fuzzy
-#| msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "Scena służy do wyświetlania streamu, np. z YouTube lub Vimeo. Obok niego wyświetlany jest czat."
 
@@ -3935,32 +3902,26 @@ msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
-#| msgid "Send Message"
 msgid "Welcome Message"
 msgstr "Wyślij Wiadomość"
 
 #, fuzzy
-#| msgid "the rooms welcome message"
 msgid "Define a custom welcome message."
 msgstr "wiadomość powitalna dla pokojów"
 
 #, fuzzy
-#| msgid "Conference Settings"
 msgid "Conference Statistics"
 msgstr "Ustawienia Konferencji"
 
 #, fuzzy
-#| msgid "Conference name"
 msgid "Conference Name"
 msgstr "Nazwa konferencji"
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Num. Invitations"
 msgstr "Zaproszenia"
 
 #, fuzzy
-#| msgid "Administration"
 msgid "Num. Registrations"
 msgstr "Administracja"
 
@@ -3974,12 +3935,10 @@ msgid "Download"
 msgstr "Pobierz"
 
 #, fuzzy
-#| msgid "Conference Events"
 msgid "Conference Event Statistics"
 msgstr "Wydarzenia/konferencje"
 
 #, fuzzy
-#| msgid "Event date"
 msgid "Event Name"
 msgstr "Data wydarzenia"
 
@@ -3987,7 +3946,6 @@ msgid "Room Type"
 msgstr "Typ pokoju"
 
 #, fuzzy
-#| msgid "Description"
 msgid "Duration"
 msgstr "Opis"
 
@@ -3998,7 +3956,6 @@ msgid "Attendance Percentage"
 msgstr ""
 
 #, fuzzy
-#| msgid "Download Statistics"
 msgid "Attendee Data Statistics"
 msgstr "Pobierz statystyki"
 
@@ -4150,7 +4107,6 @@ msgid "Answer"
 msgstr "Odpowiedź"
 
 #, fuzzy
-#| msgid "Suggestion"
 msgid "Question"
 msgstr "Propozycja terminu"
 
@@ -4174,12 +4130,10 @@ msgid "minutes"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete Account"
 msgid "Delete Recording"
 msgstr "Usuń Konto"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to delete room \"%(title)s\"?"
 msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
 msgstr "Czy na pewno chcesz usunąć pokój \"%(title)s\"?"
 
@@ -4222,7 +4176,6 @@ msgid "Activate Cloud"
 msgstr "Aktywuj Chmurę"
 
 #, fuzzy
-#| msgid "Members"
 msgid "Members-Map"
 msgstr "Członkowie"
 
@@ -4302,13 +4255,11 @@ msgstr "Brak opisu"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Created"
 msgid "Created on: "
 msgstr "Utworzył/-a"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Last sent on: "
 msgid "Last updated on: "
 msgstr "Ostatnio wysłano w dniu:"
 
@@ -4349,7 +4300,6 @@ msgid "Report offensive content"
 msgstr "Zgłoś niedozwoloną treść"
 
 #, fuzzy
-#| msgid "Your phone number is only visible for registered users"
 msgid "Sorry, this feature is only available for registered members."
 msgstr "Twój numer telefonu jest widoczny tylko dla zarejestrowanych użytkowników"
 
@@ -4396,12 +4346,8 @@ msgid "If you would like to change your email address, you can do it here:"
 msgstr "Zweryfikuj swój adres e-mail dla %(site_name)s!"
 
 #, fuzzy
-#| msgid "email address"
 msgid "Change email address"
 msgstr "adres e-mail"
-
-msgid "Date"
-msgstr "Data"
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -4472,7 +4418,6 @@ msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-#| msgid "Activate Conference"
 msgid "Activation required"
 msgstr "Aktywuj Konferencję"
 
@@ -4481,6 +4426,16 @@ msgstr "Maksymalna ilość uczestników"
 
 msgid "About the conference"
 msgstr "O tej konferencji"
+
+#, fuzzy
+#| msgid "Delete event"
+msgid "On-site event"
+msgstr "Usuń wydarzenie"
+
+#, fuzzy
+#| msgid "Delete event"
+msgid "Online event"
+msgstr "Usuń wydarzenie"
 
 msgid "More infos..."
 msgstr "Więcej informacji..."
@@ -4594,7 +4549,6 @@ msgid "Invited to be a member"
 msgstr "Zaproszeni do zostania członkami"
 
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "late invitation"
 msgstr "Usuń zaproszenie"
 
@@ -4673,7 +4627,6 @@ msgid "There are no new membership requests."
 msgstr "Nie ma nowych próśb o członkostwo."
 
 #, fuzzy
-#| msgid "Delete user account"
 msgid "Guest user access"
 msgstr "Usuń konto użytkownika"
 
@@ -4802,17 +4755,14 @@ msgid "Select Projects/Groups"
 msgstr "Wybierz Projekty/Grupy"
 
 #, fuzzy
-#| msgid "Conferences"
 msgid "Conference subtitle"
 msgstr "Konferencje"
 
 #, fuzzy
-#| msgid "Will be shown as a header in the conference lobby and on the conference microsite."
 msgid "The subtitle is shown in the conference and on the conference micro site."
 msgstr "Zostanie wyświetlony jako nagłówek w lobby konferencyjnym oraz na mikrostronie konferencji."
 
 #, fuzzy
-#| msgid "Enter a title for the conference event."
 msgid "Add a subtitle for the conference."
 msgstr "Podaj tytuł (nazwę) wydarzenia/konferencji."
 
@@ -4820,7 +4770,6 @@ msgid "Description and Infos"
 msgstr "Opis i informacje"
 
 #, fuzzy
-#| msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
 msgstr "Jest to publiczny opis i może być widoczny dla każdego na mikrostronie."
 
@@ -4843,7 +4792,6 @@ msgid "Describe the project in a few sentences."
 msgstr "Opisz projekt w kilku zdaniach."
 
 #, fuzzy
-#| msgid "This description will be publicly visible."
 msgid "This description will be visible on the entire portal."
 msgstr "Opis będzie widoczny publicznie."
 
@@ -4902,6 +4850,9 @@ msgstr "Usuń lokalizację"
 msgid "Add location"
 msgstr "Dodaj lokalizację"
 
+msgid "If no location is specified, the event is interpreted as an online event."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "Do jakiej grupy należy projekt?"
 
@@ -4922,7 +4873,6 @@ msgid "You may still override these options in each conference room and in indiv
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "Create invite token"
 msgstr "Usuń zaproszenie"
 
@@ -4939,7 +4889,6 @@ msgid "The current token is: "
 msgstr ""
 
 #, fuzzy
-#| msgid "Create content"
 msgid "Create token"
 msgstr "Stwórz treść"
 
@@ -4950,7 +4899,6 @@ msgid "This will be the default setting for all content created by members."
 msgstr "Będzie to domyślne ustawienie dla wszystkich treści utworzonych przez użytkowników."
 
 #, fuzzy
-#| msgid "This group will be set to be publicly visible!"
 msgid "This group will be set to be visible on the entire portal!"
 msgstr "Ta grupa będzie widoczna publicznie!"
 
@@ -4958,7 +4906,6 @@ msgid "This group will be set to be publicly visible!"
 msgstr "Ta grupa będzie widoczna publicznie!"
 
 #, fuzzy
-#| msgid "This project will be set to be publicly visible!"
 msgid "This project will be set to be visible on the entire portal!"
 msgstr "Ten projekt będzie widoczny publicznie!"
 
@@ -4966,12 +4913,10 @@ msgid "This project will be set to be publicly visible!"
 msgstr "Ten projekt będzie widoczny publicznie!"
 
 #, fuzzy
-#| msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)."
 msgstr "Oznacza to, że każdy zarejestrowany użytkownik może mieć dostęp do tego projektu/grupy, ale tylko członkowie mogą tworzyć treści. Dodatkowo, wszystkie treści będą domyślnie widoczne publicznie (można to zmienić dla każdego stworzonego elementu). Treści widoczne publicznie są widoczne dla KAŻDEGO w Internecie i mogą być zawarte w wynikach wyszukiwania!"
 
 #, fuzzy
-#| msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!"
 msgstr "Twoją odpowiedzialnością jako administratora grupy lub projektu jest zapewnienie, że treści umieszczone przez członków nie naruszają praw autorskich lub innych praw. Prosimy o uważną kontrolę, w szczególności ustawiając widoczność publiczną!"
 
@@ -5019,7 +4964,6 @@ msgid "Contact Form"
 msgstr "Inform. kontaktowe"
 
 #, fuzzy
-#| msgid "From which apps should public items be shown on the microsite?"
 msgid "From which apps should platform-wide items be shown on the microsite?"
 msgstr "Z jakich aplikacji mogą być widoczne elementy na mikrostronie?"
 
@@ -5219,13 +5163,11 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Created Projects"
 msgid "Contact Project Admins"
 msgstr "Utworzone Projekty"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Contact info"
 msgid "Contact Group Admins"
 msgstr "Inform. kontaktowe"
 
@@ -5310,7 +5252,6 @@ msgid "Register and apply!"
 msgstr "Zarejestruj się i przedłóż aplikcję!"
 
 #, fuzzy
-#| msgid "Presentation file"
 msgid "Late registration possible"
 msgstr "Prezentacja"
 
@@ -5348,7 +5289,6 @@ msgid "All Projects"
 msgstr "Wszystkie Projekty"
 
 #, fuzzy
-#| msgid "Simple Statistics"
 msgid "Statistics"
 msgstr "Proste Statystyki"
 
@@ -5511,7 +5451,6 @@ msgid "OK"
 msgstr "OK"
 
 #, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Enter a new name for the folder"
 msgstr "Wpisz nazwę projektu."
 
@@ -5549,7 +5488,6 @@ msgid "New folder name"
 msgstr "Nazwa nowego folderu"
 
 #, fuzzy
-#| msgid "Enter a name for the conference."
 msgid "Enter a name for the new folder"
 msgstr "Wpisz nazwę dla konferencji."
 
@@ -5922,17 +5860,6 @@ msgid "New user request: %(user_name)s wants to join %(site_name)s!"
 msgstr "Nowa prośba o dołączenie: %(user_name)s chce dołączyć do %(site_name)s!"
 
 #, fuzzy, python-format
-#| msgid ""
-#| "Hello, %(user_name)s! \n"
-#| "\n"
-#| "Welcome to %(site_name)s! Your user account was approved.\n"
-#| "\n"
-#| "You can now log in at %(domain_url)s.\n"
-#| "\n"
-#| "\n"
-#| "Best regards,\n"
-#| "\n"
-#| "the %(site_name)s Team"
 msgid ""
 "Hello, %(user_name)s! \n"
 "\n"
@@ -6148,7 +6075,6 @@ msgid "What I wish to learn"
 msgstr "Czego chciałbym/chciałabym się nauczyć"
 
 #, fuzzy
-#| msgid "Contact info"
 msgid "Contact Infos"
 msgstr "Inform. kontaktowe"
 
@@ -6241,7 +6167,6 @@ msgid "You have been logged out. See you again soon!"
 msgstr ""
 
 #, fuzzy
-#| msgid "Redirect Logged in Users"
 msgid "Redirecting you in 3 seconds..."
 msgstr "Przekieruj Zalogowanych Użytkowników"
 
@@ -6529,7 +6454,6 @@ msgid "CSV Downloads"
 msgstr "Pobrane CSV"
 
 #, fuzzy
-#| msgid "Portal Setting"
 msgid "Portal switches and settings"
 msgstr "Ustawienia portalu"
 
@@ -6543,11 +6467,15 @@ msgstr "Miejsce na dysku twardym użyte przez grupy"
 msgid "HD space used by projects"
 msgstr "Miejsce na dysku twardym użyte przez projekty"
 
+#, fuzzy
+#| msgid "Users Need Activation"
+msgid "User Activity Timeline"
+msgstr "Wymagana Aktywacja Użytkownika"
+
 msgid "User statistics (min 1x logged in)"
 msgstr "Statystyka użytkownika (minimum 1x zalogowanego)"
 
 #, fuzzy
-#| msgid "User statistics (min 1x logged in)"
 msgid "User domains (min 1x logged in)"
 msgstr "Statystyka użytkownika (minimum 1x zalogowanego)"
 
@@ -6840,10 +6768,6 @@ msgid "In my Groups and Projects"
 msgstr "W moich Grupach i Projektach"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "In my Cloud Files"
-msgstr "W moich Plikach w Chmurze"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
 msgstr "Temat"
 
@@ -7064,7 +6988,9 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr "Tu możesz znaleźć ogólny zarys twoich Grup i Projektów gdy będziesz raz aktywny w jednym lub więcej."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
+#, fuzzy
+#| msgid "You can create Groups or Projects via the '+' button in the header."
+msgid "You can create Groups or Projects via the main menu in the header."
 msgstr "Możesz założyć własne grupy i projekty za pomocą przycisku \"+\" w nagłówku."
 
 #. Translators: __INCLUDE_JS_PO__
@@ -7076,7 +7002,9 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr "Tu w przyszłości znajdziesz podgląd pomysłów, które ci się podobają."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#, fuzzy
+#| msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr "Możesz dodać własne pomysły za pomocą przycisku ‘+’ w nagłówku lub przejrzeć pomysły innych"
 
 #. Translators: __INCLUDE_JS_PO__
@@ -7136,12 +7064,10 @@ msgid "For example"
 msgstr "Na przykład"
 
 #, fuzzy
-#| msgid "Restricted"
 msgid "Restricted Guest Access"
 msgstr "Ograniczony"
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "Access restricted for guest accounts"
 msgstr "Pomyślnie dezaktywowano konto użytkownika"
 
@@ -7152,7 +7078,6 @@ msgid "As a guest, many features on this site are not available to you, such as 
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to perform the import of the shown data?"
 msgid "You cannot customize your user profile either."
 msgstr "Czy na pewno chcesz wykonać import przedstawionych danych?"
 
@@ -7182,7 +7107,6 @@ msgid "Edit Profile"
 msgstr "Edytuj Profil"
 
 #, fuzzy
-#| msgid "Edit Your Profile"
 msgid "Set up my Profile"
 msgstr "Edytuj Swój Profil"
 
@@ -7213,7 +7137,6 @@ msgid "User overview"
 msgstr "Przegląd profilu użytkownika"
 
 #, fuzzy
-#| msgid "Your email address"
 msgid "Change your email address"
 msgstr "Twój adres email"
 
@@ -7224,12 +7147,10 @@ msgid "Changes to your email address need to be verified by clicking a link in a
 msgstr ""
 
 #, fuzzy
-#| msgid "Your email address"
 msgid "Enter new email address"
 msgstr "Twój adres email"
 
 #, fuzzy
-#| msgid "email address"
 msgid "New email address"
 msgstr "adres e-mail"
 
@@ -7237,7 +7158,6 @@ msgid "This email address serves as login for your user account and notification
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter old password"
 msgid "Enter your password"
 msgstr "Wpisz stare hasło"
 
@@ -7395,7 +7315,6 @@ msgid "Tell others something about you!"
 msgstr "Powiedz innym coś o sobie!"
 
 #, fuzzy
-#| msgid "Timeline"
 msgid "Time zone"
 msgstr "Oś czasu"
 
@@ -7412,7 +7331,6 @@ msgid "I am open for cooperation requests"
 msgstr "Jestem otwarty/a na zapytania dotyczące współpracy"
 
 #, fuzzy
-#| msgid "Create Newsletter"
 msgid "News via the newsletter"
 msgstr "Utwórz Newsletter"
 
@@ -7468,7 +7386,6 @@ msgid "You are logged in as"
 msgstr "Jesteś już zalogowany/a jako"
 
 #, fuzzy
-#| msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
 msgid "It appears that no authentication device is attached to your account, but 2-factor-authentication is required to access the admin area on this portal."
 msgstr "Wygląda na to, że twoje konto nie ma podłączonego urządzenia potwierdzającego autentyczność. Poproś proszę innego administratora o podłączenie jednego i wysłanie kodu QR!"
 
@@ -7572,7 +7489,6 @@ msgid "Two-Factor Authentication Setup"
 msgstr ""
 
 #, fuzzy
-#| msgid "You are about to delete your user account from the site!"
 msgid "You are about to take your account security to the next level."
 msgstr "Za chwilę usuniesz swoje konto użytkownika ze strony!"
 
@@ -7694,7 +7610,6 @@ msgid "There are no announcements yet."
 msgstr "Nie ma żadnych ogłoszeń."
 
 #, fuzzy
-#| msgid "Start the Import?"
 msgid "Start user export"
 msgstr "Rozpocząć import?"
 
@@ -7702,7 +7617,6 @@ msgid "You can start a user export. As soon as the export is finished it will be
 msgstr ""
 
 #, fuzzy
-#| msgid "The import is currently running..."
 msgid "The export is currently running..."
 msgstr "Import jest w toku..."
 
@@ -7710,7 +7624,6 @@ msgid "A user export is in progress. As soon as the export is finished it will b
 msgstr ""
 
 #, fuzzy
-#| msgid "Import finished"
 msgid "User export finished"
 msgstr "Import zakończony"
 
@@ -7729,17 +7642,14 @@ msgid "Please note that for security reasons the export data will be only availa
 msgstr ""
 
 #, fuzzy
-#| msgid "An internal error occured."
 msgid "An error has occurred"
 msgstr "Wystąpił błąd wewnętrzny."
 
 #, fuzzy
-#| msgid "There was an error while trying to submit your report. Please try again in a moment."
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr "Wystąpił błąd podczas próby wysłania Twojego zgłoszenia. Spróbuj ponownie za chwilę."
 
 #, fuzzy
-#| msgid "Delete uploaded data and upload a new CSV file"
 msgid "Delete export data and start new user export"
 msgstr "Usuń przesłane dane i prześlij nowy plik CSV"
 
@@ -7747,7 +7657,6 @@ msgid "Retry user export"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete reported item..."
 msgid "Delete exported data"
 msgstr "Usuń zgłoszony element..."
 
@@ -8104,7 +8013,6 @@ msgid "Register a new account"
 msgstr "Zarejestruj nowe konto"
 
 #, fuzzy
-#| msgid "Add Event"
 msgid "Add Event to "
 msgstr "Dodaj Wydarzenie"
 
@@ -8112,7 +8020,6 @@ msgid "Offer"
 msgstr "Oferta"
 
 #, fuzzy
-#| msgid "Post new Offer"
 msgid "Post new Offer in "
 msgstr "Opublikuj nową ofertę"
 
@@ -8313,17 +8220,14 @@ msgid "Where is the project active?"
 msgstr "Miejsce aktywności projektu?"
 
 #, fuzzy
-#| msgid "Group/Project is publicly visible"
 msgid "Project is publicly visible"
 msgstr "Grupa/projekt jest widoczny publicznie"
 
 #, fuzzy
-#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgid "Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgstr "Czy Twoja grupa/projekt powinien być widoczny dla anonimowych użytkowników? Mikrostronę można znaleźć za pośrednictwem Internetu i wyszukiwarki portalowej."
 
 #, fuzzy
-#| msgid "Enable the public visibility of your group/project"
 msgid "Enable the public visibility of your project"
 msgstr "Włącz publiczną widoczność grupy/projektu"
 
@@ -8349,7 +8253,6 @@ msgid "You can access and browse the project that invited you"
 msgstr ""
 
 #, fuzzy
-#| msgid "There is no description for this project yet."
 msgid "This is only visible to admins of this project."
 msgstr "Nie ma jeszcze opisu dla tego projektu."
 
@@ -8437,17 +8340,14 @@ msgid "Where is the group active?"
 msgstr "Miejsce aktywności grupy?"
 
 #, fuzzy
-#| msgid "Group/Project is publicly visible"
 msgid "Group is publicly visible"
 msgstr "Grupa/projekt jest widoczny publicznie"
 
 #, fuzzy
-#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgid "Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgstr "Czy Twoja grupa/projekt powinien być widoczny dla anonimowych użytkowników? Mikrostronę można znaleźć za pośrednictwem Internetu i wyszukiwarki portalowej."
 
 #, fuzzy
-#| msgid "Enable the public visibility of your group/project"
 msgid "Enable the public visibility of your group"
 msgstr "Włącz publiczną widoczność grupy/projektu"
 
@@ -8464,7 +8364,6 @@ msgid "You can access and browse the group that invited you"
 msgstr ""
 
 #, fuzzy
-#| msgid "There is no description for this group yet."
 msgid "This is only visible to admins of this group."
 msgstr "Nie ma jeszcze opisu dla tej grupy."
 
@@ -8560,17 +8459,14 @@ msgid "Where is the conference active?"
 msgstr "Miejsce aktywności konferencji?"
 
 #, fuzzy
-#| msgid "Group/Project is publicly visible"
 msgid "Conference is publicly visible"
 msgstr "Grupa/projekt jest widoczny publicznie"
 
 #, fuzzy
-#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgid "Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgstr "Czy Twoja grupa/projekt powinien być widoczny dla anonimowych użytkowników? Mikrostronę można znaleźć za pośrednictwem Internetu i wyszukiwarki portalowej."
 
 #, fuzzy
-#| msgid "Enable the public visibility of your group/project"
 msgid "Enable the public visibility of your conference"
 msgstr "Włącz publiczną widoczność grupy/projektu"
 
@@ -8596,7 +8492,6 @@ msgid "You can access and participate in the conference that invited you"
 msgstr ""
 
 #, fuzzy
-#| msgid "This function is not enabled for this conference."
 msgid "This is only visible to admins of this conference."
 msgstr "Ta funkcja nie jest dostępna dla tej konferencji."
 
@@ -8650,7 +8545,6 @@ msgid "Question about"
 msgstr "Pytania"
 
 #, fuzzy
-#| msgid "Please enter a token!"
 msgid "Please enter your OTP token."
 msgstr "Proszę wpisać token!"
 
@@ -8685,20 +8579,22 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 2.4.0 released"
+msgstr ""
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr ""
+
 msgid "Version 2.3.0 released"
 msgstr ""
 
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
 msgstr ""
 
-msgid "This update provides several small bugfixes and stability improvements."
-msgstr ""
-
 msgid "Redesign Update"
 msgstr ""
 
 #, fuzzy
-#| msgid "This description will be publicly visible."
 msgid "The redesign has been launched across the platform!"
 msgstr "Opis będzie widoczny publicznie."
 
@@ -8912,7 +8808,6 @@ msgid "You have successfully disabled two-factor authentication for your account
 msgstr "Zaproszenie usunięte pomyślnie."
 
 #, fuzzy
-#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
 msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
 msgstr "Wystąpił błąd podczas próby połączenia Twojego konta na Facebooku. Skontaktuj się z administratorem!"
 
@@ -8921,7 +8816,6 @@ msgid "The language \"%s\" is not supported"
 msgstr "Język \"%s\" nie jest obsługiwany"
 
 #, fuzzy
-#| msgid "Test email sent!"
 msgid "New verification email sent!"
 msgstr "Wiadomość testowa wysłana!"
 
@@ -9022,7 +8916,6 @@ msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s został zmieniony pomyślnie."
 
 #, fuzzy
-#| msgid "Edit"
 msgid "Edited."
 msgstr "Edytuj"
 
@@ -9077,7 +8970,6 @@ msgid "All members of groups/projects you selected had already been invited or h
 msgstr "Wszyscy członkowie wybranych przez Ciebie grup/projektów zostali już zaproszeni lub złożyli już aplikacje. Żadne nowe zaproszenia nie zostały wysłane."
 
 #, fuzzy, python-format
-#| msgid "Invite unregistered users..."
 msgid "Invited user \"%(user)s\"."
 msgstr "Zaproś niezarejestrowanych użytkowników..."
 
@@ -9089,7 +8981,6 @@ msgid "You cannot remove “%(username)s” form this team. Only one admin left.
 msgstr "Nie możesz usunąć “%(username)s” z tego zespołu. Został tylko jeden administrator."
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "Accepted user \"%(user)s\" as  member."
 msgstr "Użytkownik \"%(username)s\" nie jest już członkiem."
 
@@ -9098,7 +8989,6 @@ msgid "Made user \"%(user)s\" admin."
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "Made user \"%(user)s\" member."
 msgstr "Użytkownik \"%(username)s\" nie jest już członkiem."
 
@@ -9144,12 +9034,10 @@ msgid "This project/group is already inactive!"
 msgstr "Ten projekt/grupa jest już nieaktywny/a!"
 
 #, fuzzy
-#| msgid "Activate"
 msgid "Activated."
 msgstr "Aktywuj"
 
 #, fuzzy
-#| msgid "Deactivate"
 msgid "Deactivated."
 msgstr "Dezaktywuj"
 
@@ -9188,7 +9076,6 @@ msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Sukces! Wysyłamy zaproszenia na te adresy e-mail: %s"
 
 #, fuzzy, python-format
-#| msgid "Invited Members"
 msgid "Invited \"%(emails)s\"."
 msgstr "Zaproszeni członkowie"
 
@@ -9272,7 +9159,6 @@ msgid "No %(verbose_name)s found matching the query"
 msgstr "Nie znaleziono %(verbose_name)s pasującego do zapytania"
 
 #, fuzzy
-#| msgid "There is no description for this project yet."
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "Nie ma jeszcze opisu dla tego projektu."
 
@@ -9339,7 +9225,6 @@ msgid "Thank you for signing up and welcome to the platform! We sent an email to
 msgstr ""
 
 #, fuzzy
-#| msgid "Sorry, but the invite token you have used does not seem to be valid!"
 msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
 msgstr "Przepraszamy, ale token z zaproszeniem, którego użyłeś/-aś nie jest ważny!"
 
@@ -9463,7 +9348,6 @@ msgid "Your Announcement was deactivated successfully."
 msgstr "Twoje ogłoszenie zostało pomyślnie dezaktywowane."
 
 #, fuzzy
-#| msgid "Another import is currently running!"
 msgid "Another export is currently running!"
 msgstr "Trwa inny import!"
 
@@ -9520,9 +9404,6 @@ msgstr "Stub chmury"
 msgid "Click here to view the files directly in the cloud."
 msgstr ""
 
-msgid "There are no cloud files yet"
-msgstr "Nie masz jeszcze żadnych plików w chmurze."
-
 msgid "Restart"
 msgstr "Restart"
 
@@ -9540,17 +9421,14 @@ msgid "conference"
 msgstr "konferencja"
 
 #, fuzzy
-#| msgid "Application name"
 msgid "Applicants and members"
 msgstr "Nazwa aplikacji"
 
 #, fuzzy
-#| msgid "Application"
 msgid "All applicants"
 msgstr "Aplikacja"
 
 #, fuzzy
-#| msgid "Add choice"
 msgid "Individual choice"
 msgstr "Dodaj odpowiedź"
 
@@ -9561,7 +9439,6 @@ msgid "No error message supplied."
 msgstr ""
 
 #, fuzzy
-#| msgid "You are getting this notification because you are an administrator of this project or group."
 msgid "You are getting this notification because you are a member of this conference or have applied for membership."
 msgstr "Otrzymujesz to powiadomienie, ponieważ jesteś administratorem tego projektu lub grupy."
 
@@ -9572,12 +9449,10 @@ msgid "This function is not enabled for this conference."
 msgstr "Ta funkcja nie jest dostępna dla tej konferencji."
 
 #, fuzzy
-#| msgid "Successfully activated user account"
 msgid "successfully activated all user accounts."
 msgstr "Konto użytkownika zostało pomyślnie zaktywowane"
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "successfully deactivated all user accounts."
 msgstr "Pomyślnie dezaktywowano konto użytkownika"
 
@@ -9591,7 +9466,6 @@ msgid "Successfully removed user"
 msgstr "Pomyślnie usunięto użytkownika"
 
 #, fuzzy
-#| msgid "Successfully removed user"
 msgid "Successfully removed all user"
 msgstr "Pomyślnie usunięto użytkownika"
 
@@ -9605,7 +9479,6 @@ msgid "Last Name"
 msgstr "Nazwisko"
 
 #, fuzzy, python-format
-#| msgid "Successfully deactivated user account"
 msgid "Successfully created %(created_count)d account. "
 msgid_plural "Successfully created  %(created_count)d accounts. "
 msgstr[0] "Pomyślnie dezaktywowano konto użytkownika"
@@ -9613,7 +9486,6 @@ msgstr[1] "Pomyślnie dezaktywowano konto użytkownika"
 msgstr[2] "Pomyślnie dezaktywowano konto użytkownika"
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "Successfully updated accounts."
 msgstr "Pomyślnie dezaktywowano konto użytkownika"
 
@@ -9654,7 +9526,6 @@ msgid "Please supply one ore more recipients."
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus conference application"
 msgid "No conference applicants found at the moment."
 msgstr "Aplikacja o konferencję Cosinnus"
 
@@ -9696,7 +9567,6 @@ msgid "Status"
 msgstr "Status"
 
 #, fuzzy
-#| msgid "This function is not enabled for this conference."
 msgid "Attendance data is not available for this conference."
 msgstr "Ta funkcja nie jest dostępna dla tej konferencji."
 
@@ -9851,7 +9721,6 @@ msgid "There are no etherpads yet"
 msgstr "Nie utworzono jeszcze żadnych padów."
 
 #, fuzzy
-#| msgid "This action is not permitted for this poll at this stage!"
 msgid "Editing is not permitted for guest accounts."
 msgstr "To działanie na tym etapie jest zabronione dla tej ankiety!"
 
@@ -10123,6 +9992,15 @@ msgstr "Rozpoczyna się wkrótce"
 msgid "Newest Created"
 msgstr "Ostatnio otworzone"
 
+msgid "Online/On-Site"
+msgstr ""
+
+msgid "Online (has no location)"
+msgstr ""
+
+msgid "On-Site (has location)"
+msgstr ""
+
 msgid "Presenters"
 msgstr "Osoba prezentująca"
 
@@ -10244,7 +10122,6 @@ msgid "Is a Break"
 msgstr "Jest przerwą"
 
 #, fuzzy
-#| msgid "Enter a title for the conference event."
 msgid "Event is visible on the conference microsite"
 msgstr "Podaj tytuł (nazwę) wydarzenia/konferencji."
 
@@ -10289,17 +10166,14 @@ msgid "Start-Time"
 msgstr "Gwiaździste"
 
 #, fuzzy
-#| msgid "Time"
 msgid "End-Time"
 msgstr "Czas"
 
 #, fuzzy
-#| msgid "Conference Event Management"
 msgid "Conference Event Attendance Tracking"
 msgstr "Zarządzanie wydarzeniem konferencji"
 
 #, fuzzy
-#| msgid "Conference Event Management"
 msgid "Conference Event Attendance Trackings"
 msgstr "Zarządzanie wydarzeniem konferencji"
 
@@ -11026,12 +10900,10 @@ msgid "Your comment was deleted successfully."
 msgstr "Twój komentarz został pomyślnie usunięty."
 
 #, fuzzy
-#| msgid "Save changes"
 msgid "Exchange"
 msgstr "Zapisz zmiany"
 
 #, fuzzy
-#| msgid "Save changes"
 msgctxt "the_app"
 msgid "exchange"
 msgstr "Zapisz zmiany"
@@ -11642,12 +11514,10 @@ msgid "A technical error occurred in the RocketChat service. Some of your action
 msgstr ""
 
 #, fuzzy
-#| msgid "Accept request"
 msgid "Contact request"
 msgstr "Zaakceptuj żądanie"
 
 #, fuzzy
-#| msgid "Your application has been accepted!"
 msgid "This content has been hidden or removed."
 msgstr "Twoja aplikacja została przyjęta!"
 
@@ -11664,12 +11534,10 @@ msgid "You can contact the project administration via this form. Write your mess
 msgstr ""
 
 #, fuzzy
-#| msgid "Your message"
 msgid "What is your message?"
 msgstr "Twoja wiadomość"
 
 #, fuzzy
-#| msgid "Change it here..."
 msgid "Write it here"
 msgstr "Zmień ją tutaj..."
 
@@ -11713,7 +11581,6 @@ msgstr ""
 "Nie wysyłaj odpowiedzi, nie zostanie ona odczytana."
 
 #, fuzzy
-#| msgid "Show chat"
 msgid "Reload chat"
 msgstr "Pokaż czat"
 
@@ -12393,17 +12260,14 @@ msgid "An account already exists with this e-mail address. To make sure that you
 msgstr ""
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "Successfully signed in as {}."
 msgstr "Pomyślnie dezaktywowano konto użytkownika"
 
 #, fuzzy
-#| msgid "Successfully deactivated user account"
 msgid "Successfully connected account."
 msgstr "Pomyślnie dezaktywowano konto użytkownika"
 
 #, fuzzy
-#| msgid "Successfully removed user"
 msgid "Successfully removed connection."
 msgstr "Pomyślnie usunięto użytkownika"
 
@@ -12412,7 +12276,6 @@ msgid "Set password"
 msgstr "Ustaw moje hasło"
 
 #, fuzzy, python-format
-#| msgid "%(provider)s-Account"
 msgid "Edit %(provider)s account "
 msgstr "Konto %(provider)s"
 
@@ -12421,12 +12284,10 @@ msgid " You connected your account with your account on %(provider)s. To change 
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%(provider)s-Account"
 msgid "Go to %(provider)s account settings"
 msgstr "Konto %(provider)s"
 
 #, fuzzy
-#| msgid "Remove location"
 msgid "Remove Connection"
 msgstr "Usuń lokalizację"
 
@@ -12435,12 +12296,10 @@ msgid "When you remove the connection you cannot login to this website via %(pro
 msgstr ""
 
 #, fuzzy
-#| msgid "Disconnect Facebook Account"
 msgid "Disconnect Accounts"
 msgstr "Odłącz konto na Facebooku"
 
 #, fuzzy
-#| msgid "Do you really want to deactivate the member's user account ?"
 msgid "Do you really want to disconnect your account account ?"
 msgstr "Czy naprawdę chcesz dezaktywować konto użytkownika członka?"
 
@@ -12461,7 +12320,6 @@ msgid " If you already have an account on %(provider)s you can connect both acco
 msgstr ""
 
 #, fuzzy
-#| msgid "Connect Facebook Account"
 msgid "Connect Accounts"
 msgstr "Połącz z kontem na Facebooku"
 
@@ -12470,7 +12328,6 @@ msgid "Connect Account with %(provider)s"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgid " Do you really want to connect your account with the one on %(provider)s ? "
 msgstr "Czy na pewno chcesz usunąć zaproszenie dla \"%(title)s”?"
 
@@ -12487,7 +12344,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Account deactivated"
 msgid "Account connected"
 msgstr "Konto nieaktywne"
 
@@ -12502,7 +12358,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Your application has been accepted!"
 msgid "Account connection has been removed"
 msgstr "Twoja aplikacja została przyjęta!"
 
@@ -12523,8 +12378,6 @@ msgid "Someone registered on %(site_name)s with your %(provider)s account "
 msgstr ""
 
 #, fuzzy
-#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-#| msgid "Welcome"
 msgid "Welcome"
 msgstr "Witaj"
 
@@ -12538,7 +12391,6 @@ msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
 
 #, fuzzy
-#| msgid "You can change this setting later in your profile settings"
 msgid "You can change your this data any time in you profile settings."
 msgstr "Możesz zmienić to ustawienie później w ustawieniach profilu"
 
@@ -12549,12 +12401,10 @@ msgid "An error occurred while attempting to login via your social network accou
 msgstr ""
 
 #, fuzzy
-#| msgid "Account deactivated"
 msgid "Account Connections"
 msgstr "Konto nieaktywne"
 
 #, fuzzy, python-format
-#| msgid "%(provider)s-Account"
 msgid " %(provider)s Account "
 msgstr "Konto %(provider)s"
 
@@ -12562,12 +12412,10 @@ msgid "You can sign in to your account using any of the following third party ac
 msgstr ""
 
 #, fuzzy
-#| msgid "Remove User"
 msgid "Remove"
 msgstr "Usuń Użytkownika"
 
 #, fuzzy
-#| msgid "Your Facebook account was successfully disconnected from this account."
 msgid "You currently have no social network accounts connected to this account."
 msgstr "Twoje konto na Facebooku zostało pomyślnie odłączone od tego konta."
 
@@ -12575,7 +12423,6 @@ msgid "Add a 3rd Party Account"
 msgstr ""
 
 #, fuzzy
-#| msgid "Canceled"
 msgid "Login Cancelled"
 msgstr "Odwołano"
 
@@ -12584,12 +12431,10 @@ msgid "You decided to cancel logging in to our site using one of your existing a
 msgstr ""
 
 #, fuzzy
-#| msgid "Sign up"
 msgid "Signup"
 msgstr "Zarejestruj się"
 
 #, fuzzy, python-format
-#| msgid "Log in with %(portal_name)s"
 msgid "Login with %(provider)s"
 msgstr "Zaloguj się z %(portal_name)s"
 
@@ -12601,12 +12446,10 @@ msgid " %(portal_name)s wants access to the following information of your %(prov
 msgstr ""
 
 #, fuzzy
-#| msgid "Last name"
 msgid "last name (if set)"
 msgstr "Nazwisko"
 
 #, fuzzy
-#| msgid "Do you really want to perform the import of the shown data?"
 msgid "Do you also want to copy your profile data?"
 msgstr "Czy na pewno chcesz wykonać import przedstawionych danych?"
 
@@ -12614,37 +12457,30 @@ msgid "Yes, allow access to my profile data: (e.g Avatar, Location, Topics, Lang
 msgstr ""
 
 #, fuzzy
-#| msgid ", for the following reason:"
 msgid "Please also fill in the following information:"
 msgstr "z następującego powodu:"
 
 #, fuzzy
-#| msgid "Sign up"
 msgid "Sign up with"
 msgstr "Zarejestruj się"
 
 #, fuzzy, python-format
-#| msgid "%(provider)s-Account"
 msgid "Sign up with %(provider)s Account"
 msgstr "Konto %(provider)s"
 
 #, fuzzy
-#| msgid "Log in here"
 msgid "Log in with"
 msgstr "Zaloguj się tutaj"
 
 #, fuzzy, python-format
-#| msgid "%(provider)s-Account"
 msgid "Log in with %(provider)s Account"
 msgstr "Konto %(provider)s"
 
 #, fuzzy
-#| msgid "Register a new account"
 msgid "Register with Social Account"
 msgstr "Zarejestruj nowe konto"
 
 #, fuzzy
-#| msgid "Log in with Facebook"
 msgid "Login with Social Account"
 msgstr "Zaloguj się przez Facebooka"
 
@@ -12661,38 +12497,31 @@ msgid "Sign up with %(provider_id)s"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Log in with %(portal_name)s"
 msgid "Login with %(provider_id)s"
 msgstr "Zaloguj się z %(portal_name)s"
 
 #, fuzzy
-#| msgid "Organization"
 msgctxt "the_app"
 msgid "organization"
 msgstr "Organizacja"
 
 #, fuzzy
-#| msgid "Organizations"
 msgid "Organization membership"
 msgstr "Organizacje"
 
 #, fuzzy
-#| msgid "Organizations"
 msgid "Organization memberships"
 msgstr "Organizacje"
 
 #, fuzzy
-#| msgid "Team Invite for Unregistered User"
 msgid "Organization Invite for Unregistered User"
 msgstr "Zaproszenie do Grupy dla Niezarejestrowanego Użytkownika"
 
 #, fuzzy
-#| msgid "Team Invites for Unregistered Users"
 msgid "Organization Invites for Unregistered Users"
 msgstr "Zaproszenia do Grupy dla Niezarejestrowanych Użytkowników"
 
 #, fuzzy
-#| msgid "Assigned organizations"
 msgid "Civil society organization"
 msgstr "Przypisane organizacje"
 
@@ -12700,42 +12529,34 @@ msgid "Company (commercial)"
 msgstr ""
 
 #, fuzzy
-#| msgid "Public voting"
 msgid "Public institution"
 msgstr "Głosowanie publiczne"
 
 #, fuzzy
-#| msgid "Other teams"
 msgid "Other"
 msgstr "Inne zespoły"
 
 #, fuzzy
-#| msgid "Remove organization"
 msgid "Name of the organization"
 msgstr "Usuń organizację"
 
 #, fuzzy
-#| msgid "Organization"
 msgid "Organization type"
 msgstr "Organizacja"
 
 #, fuzzy
-#| msgid "Logout"
 msgid "Logo"
 msgstr "Wyloguj"
 
 #, fuzzy
-#| msgid "Email address"
 msgid "Email Address"
 msgstr "Adres e-mail"
 
 #, fuzzy
-#| msgid "Organization"
 msgid "Cosinnus Organization"
 msgstr "Organizacja"
 
 #, fuzzy
-#| msgid "Organizations"
 msgid "Cosinnus Organizations"
 msgstr "Organizacje"
 
@@ -12743,172 +12564,138 @@ msgid "CosinnusOrganizationSocialMedia"
 msgstr ""
 
 #, fuzzy
-#| msgid "CosinnusLocation"
 msgid "CosinnusOrganizationLocation"
 msgstr "Lokalizacja Cosinnus"
 
 #, fuzzy
-#| msgid "CosinnusLocations"
 msgid "CosinnusOrganizationLocations"
 msgstr "Lokalizacje Cosinnus"
 
 #, fuzzy
-#| msgid "Organization"
 msgid "Organization group"
 msgstr "Organizacja"
 
 #, fuzzy
-#| msgid "Organizations"
 msgid "Organization groups"
 msgstr "Organizacje"
 
 #, fuzzy, python-format
-#| msgid "%(team_name)s - Assigned organizations"
 msgid "%(team_name)s - Assigned projects/groups"
 msgstr "%(team_name)s - Przypisane organizacje"
 
 #, fuzzy
-#| msgid "No related projects/groups"
 msgid "Assigned projects/groups"
 msgstr "Nie ma powiązanych projektów/grup"
 
 #, fuzzy
-#| msgid "Invited group/project members"
 msgid "Invite groups/projects..."
 msgstr "Zaproszeni członkowie grupy/projektu"
 
 #, fuzzy
-#| msgid "Project/group"
 msgid "Invite project/group"
 msgstr "Projekt/grupa"
 
 #, fuzzy
-#| msgid "Enter a user name or email to find users to invite..."
 msgid "Enter a name to find project/groups to invite..."
 msgstr "Wprowadź nazwę użytkownika lub jego e-mail, aby go zaprosić..."
 
 #, fuzzy
-#| msgid "No related projects/groups"
 msgid "Invite projects/groups"
 msgstr "Nie ma powiązanych projektów/grup"
 
 #, fuzzy
-#| msgid "Invited group/project members"
 msgid "Invited groups/projects"
 msgstr "Zaproszeni członkowie grupy/projektu"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid "Do you really want to revoke the invitation for „%(name)s“?"
 msgstr "Czy na pewno chcesz wycofać zaproszenie dla użytkownika „%(name)s“?"
 
 #, fuzzy
-#| msgid "Revoke Invitation for Member"
 msgid "Revoke invitation for project/group"
 msgstr "Wycofaj Zaproszenie dla Członka"
 
 #, fuzzy
-#| msgid "Project/group"
 msgid "Project/group requests"
 msgstr "Projekt/grupa"
 
 #, fuzzy
-#| msgid "Declined"
 msgid "Decline Admin"
 msgstr "Odrzucono"
 
 #, fuzzy
-#| msgid "Project/group"
 msgid "Remove project/group"
 msgstr "Projekt/grupa"
 
 #, fuzzy
-#| msgid "Organization"
 msgid "Add Organization"
 msgstr "Organizacja"
 
 #, fuzzy
-#| msgid "Organization"
 msgid "Edit Organization"
 msgstr "Organizacja"
 
 #, fuzzy
-#| msgid "Admin"
 msgid "Admins"
 msgstr "Administrator"
 
 #, fuzzy
-#| msgid "Join"
 msgid "Joins"
 msgstr "Dołącz"
 
 #, fuzzy
-#| msgid "Request organizations"
 msgid "Help about organizations"
 msgstr "Żądaj organizacji"
 
 #, fuzzy, python-format
-#| msgid "%(team_name)s - Members"
 msgid "%(team_name)s - Admins"
 msgstr "%(team_name)s - Członkowie"
 
 #, fuzzy
-#| msgid "Invited Members"
 msgid "Invited Admins"
 msgstr "Zaproszeni członkowie"
 
 #, fuzzy
-#| msgid "Revoke Invitation for Member"
 msgid "Revoke Invitation for Admin"
 msgstr "Wycofaj Zaproszenie dla Członka"
 
 #, fuzzy
-#| msgid "Decline request"
 msgid "Admin requests"
 msgstr "Odrzuć żądanie"
 
 #, fuzzy
-#| msgid "Membership requested"
 msgid "Admin requested"
 msgstr "Prośba o zostanie członkiem"
 
 #, fuzzy
-#| msgid "Current File"
 msgid "Current Admins"
 msgstr "Bieżący Plik"
 
 #, fuzzy
-#| msgid "Demote Admin"
 msgid "Remove Admin"
 msgstr "Zdegraduj Administratora"
 
 #, fuzzy, python-format
-#| msgid "Edit stream \"%(stream_name)s\""
 msgid "Edit \"%(organization_name)s\""
 msgstr "Edytuj stream \"%(stream_name)s\""
 
 #, fuzzy
-#| msgid "Create Organization"
 msgid "Delete this Organization"
 msgstr "Stwórz Organizację"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to delete idea „%(title)s“?"
 msgid "Do you really want to delete organization „%(name)s“?"
 msgstr "Czy na pewno usunąć ideę „%(title)s“?"
 
 #, fuzzy
-#| msgid "Create Organization"
 msgid "Delete Organization"
 msgstr "Stwórz Organizację"
 
 #, fuzzy
-#| msgid "Enter a name to find organizations to request..."
 msgid "Enter the name of your organization"
 msgstr "Wprowadź nazwę w celu znalezienia organizacji, aby ją zaprosić..."
 
 #, fuzzy
-#| msgid "Search for Organizations"
 msgid "Type of your organization"
 msgstr "Wyszukiwanie organizacji"
 
@@ -12916,7 +12703,6 @@ msgid "If none of the options apply, specify the type of your organization here"
 msgstr ""
 
 #, fuzzy
-#| msgid "This description will be publicly visible."
 msgid "  Describe the project in a few sentences. This description will be publicly visible."
 msgstr "Opis będzie widoczny publicznie."
 
@@ -12925,7 +12711,6 @@ msgid "Social Media Accounts"
 msgstr "Konto użytkownika zostało pomyślnie zaktywowane"
 
 #, fuzzy
-#| msgid "Remove location"
 msgid "Remove Social Media Account"
 msgstr "Usuń lokalizację"
 
@@ -12936,7 +12721,6 @@ msgid "Phone"
 msgstr ""
 
 #, fuzzy
-#| msgid "Revoke request for organization"
 msgid "Address(es) of your organization"
 msgstr "Unieważnij żądanie dla organizacji"
 
@@ -12948,7 +12732,6 @@ msgid "Projects are always transferred to <a href=\"%(url)s\" target=\"_blank\">
 msgstr ""
 
 #, fuzzy
-#| msgid "This project shall be made publicly findable via other platforms."
 msgid "This organization should be made publicly findable via other platforms."
 msgstr "Ten projekt zostanie publicznie możliwy do odnalezienia poprzez inne platformy."
 
@@ -12956,67 +12739,54 @@ msgid "Is your organization open for cooperation in the funding program?"
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Organization is open for future projects."
 msgstr "Wpisz nazwę projektu."
 
 #, fuzzy, python-format
-#| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "Użytkownicy w zespole %(group)s"
 
 #, fuzzy, python-format
-#| msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
 msgid "Project/group %(name)s had already requested and has now been accepted."
 msgstr "Projekt/grupa %(group)s została już zaproszona i została natychmiast przypisana!"
 
 #, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
 msgid "Project/group %(name)s was successfully invited."
 msgstr "Użytkownik %(username)s został pomyślnie zaproszony!"
 
 #, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
 msgid "Your join request was withdrawn from organization “%(name)s” successfully."
 msgstr "Twoja prośba o dołączenie do %(team_type)s “%(team_name)s” została pomyślnie cofnięta."
 
 #, fuzzy, python-format
-#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
 msgid "You have declined the invitation to organization “%(name)s”."
 msgstr "Odrzuciłeś(-aś) zaproszenie do %(team_type)s “%(team_name)s”."
 
 #, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
 msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
 msgstr "Jesteś członkiem %(team_type)s “%(team_name)s”. Witamy!"
 
 #, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
 msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
 msgstr "Twoja prośba o dołączenie do %(team_type)s \"%(team_name)s\" została pomyślnie cofnięta."
 
 #, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
 msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
 msgstr "Twoje zaproszenie dla użytkownika \"%(username)s” zostało pomyślnie cofnięte."
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "Project/group \"%(name)s\" is no longer assigned."
 msgstr "Użytkownik \"%(username)s\" nie jest już członkiem."
 
 #, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
 msgstr "Przepraszamy, tylko administratorzy portalu mogą tworzyć Grupy! Możesz stworzyć Projekt lub napisać wiadomość do administratora w celu stworzenia dla Ciebie Grupy. Poniżej znajduje się lista wszystkich administratorów."
 
 #, fuzzy, python-format
-#| msgid "Folder \"%(title)s\" was created successfully."
 msgid "Organization \"%(name)s\" was created successfully."
 msgstr "Folder „%(title)s“ został pomyślnie utworzony."
 
 #, fuzzy
-#| msgid "Your idea was deleted successfully."
 msgid "Your organization was deleted successfully."
 msgstr "Twój profil został pomyślnie usunięty."
 
@@ -14373,12 +14143,10 @@ msgid "You cannot delete this folder because you do not have permission to delet
 msgstr "Nie możesz usunąć tego folderu, ponieważ nie posiadasz uprawnień do usunięcia jednego lub więcej elementów zawartych w tym folderze!"
 
 #, fuzzy
-#| msgid "Add project"
 msgid "Add object"
 msgstr "Dodaj projekt"
 
 #, fuzzy
-#| msgid "Create content"
 msgid "Create container"
 msgstr "Stwórz treść"
 
@@ -14386,266 +14154,69 @@ msgid "ROOT"
 msgstr ""
 
 #, fuzzy
-#| msgid "Show all"
 msgid "Show"
 msgstr "Pokaż wszystkie"
 
 #, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this container and all objects in it?"
 msgstr "Czy na pewno chcesz usunąć ten zespół?"
 
 #, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Czy na pewno chcesz usunąć ten zespół?"
 
-#, fuzzy
-#~| msgid "Comment"
-#~ msgid "Community"
-#~ msgstr "Komentarz"
+#~ msgid "In my Cloud Files"
+#~ msgstr "W moich Plikach w Chmurze"
+
+#~ msgid "Please provide your motivation for applying"
+#~ msgstr "Proszę podać swoją motywację do złożenia aplikacji"
 
 #, fuzzy
-#~| msgid "Persons"
-#~ msgid "Personal"
-#~ msgstr "Osoby"
+#~ msgid "Require applicants to answer questions about their motivation for applying"
+#~ msgstr "Wymagaj od osób składających aplikacje podania tekstu o motywacji do składania tego wniosku"
 
-#~ msgid "Password reset successful"
-#~ msgstr "Reset hasła zakończony powodzeniem"
+#~ msgid "There are no cloud files yet"
+#~ msgstr "Nie masz jeszcze żadnych plików w chmurze."
 
-#~ msgid "Administrators unknown"
-#~ msgstr "Administratorzy nieznani"
+#~ msgid "You can create Groups or Projects via the '+' button in the header."
+#~ msgstr "Możesz założyć własne grupy i projekty za pomocą przycisku \"+\" w nagłówku."
 
-#, fuzzy
-#~| msgid "Edit My Profile"
-#~ msgid "Edit my Profile"
-#~ msgstr "Edytuj mój Profil"
+#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#~ msgstr "Możesz dodać własne pomysły za pomocą przycisku ‘+’ w nagłówku lub przejrzeć pomysły innych"
 
-#, fuzzy
-#~| msgid "Edit Your Profile"
-#~ msgid "Set up your Profile"
-#~ msgstr "Edytuj Swój Profil"
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
 
-#, fuzzy
-#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-#~ msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
-#~ msgstr "Tu możesz sprawdzić czy oficjalnie widoczna informacja na temat twojego projektu, taka jak nazwa, adres, jest przekazywana do <a href=\"#\" target=\"_blank\"> platform partnerskich </a> przez WECHANGE."
+#~ msgid "%(sender_name)s completed a poll"
+#~ msgstr "%(sender_name)s ukończył/a ankietę"
 
-#~ msgid "This project shall be made publicly findable via other platforms."
-#~ msgstr "Ten projekt zostanie publicznie możliwy do odnalezienia poprzez inne platformy."
+#~ msgid "%(sender_name)s completed a poll you are following"
+#~ msgstr "%(sender_name)s ukończył/a ankietę, którą śledzisz"
 
-#, fuzzy
-#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-#~ msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
-#~ msgstr "Tu możesz sprawdzić czy oficjalnie widoczna informacja na temat twojego projektu, taka jak nazwa, adres, jest przekazywana do <a href=\"#\" target=\"_blank\"> platform partnerskich </a> przez WECHANGE."
+#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s właśnie utworzył/a projekt/grupę ’’%(team_name)s\" na %(portal_name)s!"
 
-#, fuzzy
-#~| msgid "This project shall be made publicly findable via other platforms."
-#~ msgid "This group shall be made publicly findable via other platforms."
-#~ msgstr "Ten projekt zostanie publicznie możliwy do odnalezienia poprzez inne platformy."
+#~ msgid "%(sender_name)s voted in"
+#~ msgstr "%(sender_name)s zagłosował/a w"
 
-#, fuzzy
-#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-#~ msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
-#~ msgstr "Tu możesz sprawdzić czy oficjalnie widoczna informacja na temat twojego projektu, taka jak nazwa, adres, jest przekazywana do <a href=\"#\" target=\"_blank\"> platform partnerskich </a> przez WECHANGE."
-
-#, fuzzy
-#~| msgid "This project shall be made publicly findable via other platforms."
-#~ msgid "This conference shall be made publicly findable via other platforms."
-#~ msgstr "Ten projekt zostanie publicznie możliwy do odnalezienia poprzez inne platformy."
-
-#~ msgid "Pre-filled content for the information field"
-#~ msgstr "Wstępnie wypełnione treścią pola informacji"
-
-#~ msgid "Describe why you wish to participate"
-#~ msgstr "Opisz, dlaczego chcesz wziąć udział"
-
-#~ msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
-#~ msgstr "Pole tekstowe motywacji zostanie wstępnie wypełnione dowolnym tekstem, który tu wpiszesz. Możesz użyć tego pola, aby podać wytyczne lub listę pytań, na które osoby składające aplikacje powinni odpowiedzieć."
-
-#~ msgid "Enter text to pre-fill or leave empty"
-#~ msgstr "Wpisz tekst do wstępnego wypełnienia lub pozostaw pusty"
-
-#, fuzzy
-#~| msgid "Contact"
-#~ msgid "Direct Contact"
-#~ msgstr "Kontakt"
-
-#~ msgid "Newsletter sent."
-#~ msgstr "Newsletter wysłany."
-
-#, fuzzy
-#~ msgid "Premium Bookings"
-#~ msgstr "Premium"
-
-#, fuzzy
-#~ msgid ""
-#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
-#~ "\n"
-#~ "Our administrators will review your request and approve your user account soon!\n"
-#~ "\n"
-#~ "Until then, with warm greetings, \n"
-#~ "your %(site_name)s Team"
-#~ msgstr ""
-#~ "Cześć! Cieszymy się, że chcesz zostać członkiem %(site_name)s.\n"
-#~ "\n"
-#~ "Nasi administratorzy wkrótce zweryfikują Twoją prośbę i zatwierdzą Twoje konto!\n"
-#~ "\n"
-#~ "Pozdrawiamy,\n"
-#~ "Twój Zespół %(site_name)s"
-
-#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-#~ msgstr "Zmieniłeś/-aś swój adres e-mail. Wkrótce wyślemy Ci e-mail na podany adres z linkiem aktywacyjnym. Do momentu zatwierdzenia tego adresu, aktywny będzie Twój stary adres e-mail!"
-
-#, fuzzy
-#~| msgid "Search for Organizations"
-#~ msgid "Type of educational institution"
-#~ msgstr "Wyszukiwanie organizacji"
-
-#, fuzzy
-#~| msgid "Location"
-#~ msgid "Function"
-#~ msgstr "Lokalizacja"
-
-#, fuzzy
-#~| msgid "Description"
-#~ msgid "Position"
-#~ msgstr "Opis"
-
-#, fuzzy
-#~| msgid "Remove organization"
-#~ msgid "Name of educational institution"
-#~ msgstr "Usuń organizację"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Moje Projekty i Grupy"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Import nie powiódł się"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekty/Grupy"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Prześlij plik CSV"
-
-#, fuzzy
-#~| msgid "Delete file"
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Usuń plik"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Prześlij obraz."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Moje Projekty i Grupy"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Import zakończony powodzeniem!"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Błąd!"
-
-#, fuzzy
-#~| msgid "New item"
-#~ msgid "Saved items:"
-#~ msgstr "Nowy element"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Wiadomości"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Błąd!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Wiadomości"
+#~ msgid "%(team_name)s was deactivated successfully!"
+#~ msgstr "%(team_name)s zdezaktywowany pomyślnie!"
 
 #, fuzzy
 #~ msgid "2FA Settings"
 #~ msgstr "Ustawienia"
 
-#, fuzzy
-#~ msgid "Disable 2FA"
-#~ msgstr "Wyłączać edytor"
-
-#~ msgid "Umwelt"
-#~ msgstr "Środowisko"
-
-#~ msgid "Bildung"
-#~ msgstr "Edukacja"
-
-#~ msgid "Gesundheit"
-#~ msgstr "Zdrowie"
-
-#~ msgid "Ernährung und Konsum"
-#~ msgstr "Odżywianie i konsumpcja"
-
-#~ msgid "Kunst und Kultur"
-#~ msgstr "Sztuka i kultura"
-
-#~ msgid "Arbeit und Recht"
-#~ msgstr "Praca i prawo"
-
-#~ msgid "Bauen und Wohnen"
-#~ msgstr "Budownictwo i mieszkanie"
-
-#~ msgid "Klimaschutz"
-#~ msgstr "Ochrona klimatu"
-
-#, fuzzy
-#~ msgid "Back to your profile"
-#~ msgstr "Twój profil"
-
-#~ msgid "Message Group"
-#~ msgstr "Wyślij Wiadomość do Grupy"
-
-#~ msgid "Message Project"
-#~ msgstr "Wyślij wiadomość do Projektu"
-
-#~ msgid "The invite token you have used does not exist!"
-#~ msgstr "Użyty przez ciebie token z zaproszeniem jest nieprawidłowy!"
-
-#~ msgid "Ok"
-#~ msgstr "Ok"
+#~ msgid "Accounts from CSV Upload"
+#~ msgstr "Konta z przesłanego pliku CSV"
 
 #~ msgid "Active"
 #~ msgstr "Aktywny/-a"
 
-#, fuzzy
-#~| msgid "Delete elements"
-#~ msgid "Delete (not yet implemented)"
-#~ msgstr "Usuń elementy"
-
-#, fuzzy
-#~| msgid "Do you really want to delete room \"%(title)s\"?"
-#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
-#~ msgstr "Czy na pewno chcesz usunąć pokój \"%(title)s\"?"
-
-#~ msgid "Premium"
-#~ msgstr "Premium"
-
-#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-#~ msgstr "%(sender_name)s właśnie utworzył/a projekt/grupę ’’%(team_name)s\" na %(portal_name)s!"
-
-#~ msgid "%(team_name)s was deactivated successfully!"
-#~ msgstr "%(team_name)s zdezaktywowany pomyślnie!"
-
-#~ msgid "Accounts from CSV Upload"
-#~ msgstr "Konta z przesłanego pliku CSV"
-
 #~ msgid "Add workshop"
 #~ msgstr "Přidat workshop"
+
+#~ msgid "Administrators unknown"
+#~ msgstr "Administratorzy nieznani"
 
 #~ msgid "All groups"
 #~ msgstr "Wszystkie grupy"
@@ -14662,6 +14233,9 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "Arabic--NATIVE-LANGUAGE"
 #~ msgstr "العربية"
 
+#~ msgid "Arbeit und Recht"
+#~ msgstr "Praca i prawo"
+
 #~ msgid "Armenian--NATIVE-LANGUAGE"
 #~ msgstr "Հայոց լեզու"
 
@@ -14671,14 +14245,32 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "Azerbaijani--NATIVE-LANGUAGE"
 #~ msgstr "Azerbaycan dili"
 
+#, fuzzy
+#~ msgid "Back to your profile"
+#~ msgstr "Twój profil"
+
 #~ msgid "Banner Image"
 #~ msgstr "Obraz baneru"
+
+#~ msgid "Bauen und Wohnen"
+#~ msgstr "Budownictwo i mieszkanie"
 
 #~ msgid "Belarussian--NATIVE-LANGUAGE"
 #~ msgstr "Беларуская"
 
+#~ msgid "Bildung"
+#~ msgstr "Edukacja"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "Import zakończony powodzeniem!"
+
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "Nie da się znaleźć warsztatów ze slugiem '{}'"
+
+#, fuzzy
+#~ msgid "Community"
+#~ msgstr "Komentarz"
 
 #, fuzzy
 #~ msgid "Conference Dashboard"
@@ -14729,6 +14321,17 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Dezaktywuj Projekty/Grupy"
 
+#, fuzzy
+#~ msgid "Delete (not yet implemented)"
+#~ msgstr "Usuń elementy"
+
+#, fuzzy
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "Usuń plik"
+
+#~ msgid "Describe why you wish to participate"
+#~ msgstr "Opisz, dlaczego chcesz wziąć udział"
+
 #~ msgid "Determins if application management is visible in conference administration."
 #~ msgstr "Określa, czy zarządzanie aplikacjami jest widoczne w zarządzaniu konferencją."
 
@@ -14738,8 +14341,24 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "Deutsch--NATIVE-LANGUAGE"
 #~ msgstr "Deutsch"
 
+#, fuzzy
+#~ msgid "Direct Contact"
+#~ msgstr "Kontakt"
+
+#, fuzzy
+#~ msgid "Disable 2FA"
+#~ msgstr "Wyłączać edytor"
+
+#, fuzzy
+#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+#~ msgstr "Czy na pewno chcesz usunąć pokój \"%(title)s\"?"
+
 #~ msgid "Dutch--NATIVE-LANGUAGE"
 #~ msgstr "Nederlands"
+
+#, fuzzy
+#~ msgid "Edit my Profile"
+#~ msgstr "Edytuj mój Profil"
 
 #, fuzzy
 #~ msgid "Email to group administrator"
@@ -14748,8 +14367,42 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "English--NATIVE-LANGUAGE"
 #~ msgstr "English"
 
+#~ msgid "Enter text to pre-fill or leave empty"
+#~ msgstr "Wpisz tekst do wstępnego wypełnienia lub pozostaw pusty"
+
+#~ msgid "Ernährung und Konsum"
+#~ msgstr "Odżywianie i konsumpcja"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "Błąd!"
+
+#~ msgid "Event poll updated by %(sender_name)s"
+#~ msgstr "Ankieta wydarzenia uaktualniona przez %(sender_name)s"
+
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "Przykład: https://www.youtube.com/watch?v=12345"
+
+#~ msgid "Export (PDF)"
+#~ msgstr "Eksport (PDF)"
+
 #~ msgid "External"
 #~ msgstr "Zewnętrzny"
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "Plik \"%(title)s\" nie mógł zostać dodany."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "Plik \"%(title)s\" nie mógł zostać wysłany."
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "Plik \"%(title)s\" wysłano pomyślnie."
+
+#~ msgid "File description"
+#~ msgstr "Opis pliku"
+
+#~ msgid "File title"
+#~ msgstr "Tytuł pliku"
 
 #~ msgid "Finish conference and deactivate user accounts"
 #~ msgstr "Zakończ konferencję i dezaktywuj konta użytkowników"
@@ -14757,8 +14410,15 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "French--NATIVE-LANGUAGE"
 #~ msgstr "Français"
 
+#, fuzzy
+#~ msgid "Function"
+#~ msgstr "Lokalizacja"
+
 #~ msgid "Georgian--NATIVE-LANGUAGE"
 #~ msgstr "ქართული ენა"
+
+#~ msgid "Gesundheit"
+#~ msgstr "Zdrowie"
 
 #~ msgid "Group:"
 #~ msgstr "Grupa:"
@@ -14800,6 +14460,18 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 
 #~ msgid "Hebrew--NATIVE-LANGUAGE"
 #~ msgstr "עברית"
+
+#, fuzzy
+#~ msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Tu możesz sprawdzić czy oficjalnie widoczna informacja na temat twojego projektu, taka jak nazwa, adres, jest przekazywana do <a href=\"#\" target=\"_blank\"> platform partnerskich </a> przez WECHANGE."
+
+#, fuzzy
+#~ msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Tu możesz sprawdzić czy oficjalnie widoczna informacja na temat twojego projektu, taka jak nazwa, adres, jest przekazywana do <a href=\"#\" target=\"_blank\"> platform partnerskich </a> przez WECHANGE."
+
+#, fuzzy
+#~ msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Tu możesz sprawdzić czy oficjalnie widoczna informacja na temat twojego projektu, taka jak nazwa, adres, jest przekazywana do <a href=\"#\" target=\"_blank\"> platform partnerskich </a> przez WECHANGE."
 
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
@@ -14863,8 +14535,28 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ "\n"
 #~ "Twój Zespół %(site_name)s"
 
+#, fuzzy
+#~ msgid ""
+#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#~ "\n"
+#~ "Our administrators will review your request and approve your user account soon!\n"
+#~ "\n"
+#~ "Until then, with warm greetings, \n"
+#~ "your %(site_name)s Team"
+#~ msgstr ""
+#~ "Cześć! Cieszymy się, że chcesz zostać członkiem %(site_name)s.\n"
+#~ "\n"
+#~ "Nasi administratorzy wkrótce zweryfikują Twoją prośbę i zatwierdzą Twoje konto!\n"
+#~ "\n"
+#~ "Pozdrawiamy,\n"
+#~ "Twój Zespół %(site_name)s"
+
 #~ msgid "Hi,"
 #~ msgstr "Cześć,"
+
+#, fuzzy
+#~ msgid "I wish to receive RocketChat notification emails"
+#~ msgstr "Chcę otrzymywać powiadomienia e-mail"
 
 #~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
 #~ msgstr "Jeśli grupa jest oznaczona jako konferencja, to jest możliwa automatyczna generacja kont dla uczestników warsztatów"
@@ -14878,22 +14570,122 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Jeśli chcesz usunąć jakiekolwiek Twoje treści, wróć i zrób to teraz. Po usunięciu profilu nie będziesz miał/a dostępu do tego, co stworzyłeś/-aś na tym koncie."
 
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Moje Projekty i Grupy"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Moje Projekty i Grupy"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "Import nie powiódł się"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "Wiadomości"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Wiadomości"
+
 #~ msgid "Invited you"
 #~ msgstr "Zaprosił/a Cię"
 
 #~ msgid "Is premium"
 #~ msgstr "Jest premium"
 
+#~ msgid "Kalender"
+#~ msgstr "Kalendarz"
+
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Қазақ тілі"
+
+#~ msgid "Klimaschutz"
+#~ msgstr "Ochrona klimatu"
+
+#~ msgid "Kunst und Kultur"
+#~ msgstr "Sztuka i kultura"
+
+#~ msgid "Message Group"
+#~ msgstr "Wyślij Wiadomość do Grupy"
+
+#~ msgid "Message Project"
+#~ msgstr "Wyślij wiadomość do Projektu"
+
+#, fuzzy
+#~ msgid "Name of educational institution"
+#~ msgstr "Usuń organizację"
+
+#~ msgid "New etherpad by %(sender_name)s"
+#~ msgstr "Nowy etherpad został utworzony przez %(sender_name)s"
+
+#~ msgid "New etherpad by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nowy etherpad został utworzony przez %(sender_name)s w %(team_name)s (który śledzisz)"
+
+#~ msgid "New event by %(sender_name)s"
+#~ msgstr "Nowe wydarzenie utworzone przez %(sender_name)s"
+
+#~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nowe wydarzenie utworzone przez %(sender_name)s w zespole %(team_name)s (który śledzisz)"
+
+#~ msgid "New event poll by %(sender_name)s"
+#~ msgstr "Nowa ankieta wydarzenia utworzona przez %(sender_name)s"
+
+#~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nowa ankieta wydarzenia utworzona przez %(sender_name)s w zespole %(team_name)s (który śledzisz)"
+
+#~ msgid "New file by %(sender_name)s"
+#~ msgstr "Nowy plik wysłany przez %(sender_name)s"
+
+#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nowy plik przez %(sender_name)s w %(team_name)s (który śledzisz)"
+
+#~ msgid "New news post by %(sender_name)s"
+#~ msgstr "Post utworzony przez %(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Post utworzony przez %(sender_name)s w %(team_name)s (który śledzisz)"
+
+#~ msgid "New offer by %(sender_name)s"
+#~ msgstr "Nowa oferta utworzona przez %(sender_name)s"
+
+#~ msgid "New offer by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nowa oferta utworzona przez %(sender_name)s w %(team_name)s (którą śledzisz)"
+
+#~ msgid "New poll by %(sender_name)s"
+#~ msgstr "Nowa ankieta utworzona przez %(sender_name)s"
+
+#~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nowa ankieta utworzona przez %(sender_name)s w %(team_name)s (który śledzisz)"
+
+#~ msgid "New todo by %(sender_name)s"
+#~ msgstr "Nowe zadanie do wykonania utworzone przez %(sender_name)s"
+
+#~ msgid "Newsletter sent."
+#~ msgstr "Newsletter wysłany."
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
 
 #, fuzzy
 #~ msgid "Only conference members can see the event\\'s description."
 #~ msgstr "Tylko członkowie konferencji mają dostęp do tej treści. Aplikuj, aby zostać członkiem!"
 
+#~ msgid "Password reset successful"
+#~ msgstr "Reset hasła zakończony powodzeniem"
+
 #, fuzzy
 #~ msgid "Password set"
 #~ msgstr "Reset hasła"
+
+#, fuzzy
+#~ msgid "Personal"
+#~ msgstr "Osoby"
+
+#~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
+#~ msgstr "Zaimportuj proszę plik CSV z następującymi kolumnami: niepowtarzalny kod użytkowniczki/ka, imię, nazwisko i po jednej kolumnie na dany warsztat oznaczny przez slub warsztatu. Dla ułatwienia możesz skorzystać ze wzoru <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
 
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
@@ -14902,11 +14694,36 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "Portal administrators"
 #~ msgstr "Administratorzy Portalu"
 
+#, fuzzy
+#~ msgid "Position"
+#~ msgstr "Opis"
+
+#~ msgid "Pre-filled content for the information field"
+#~ msgstr "Wstępnie wypełnione treścią pola informacji"
+
+#~ msgid "Premium"
+#~ msgstr "Premium"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "Projekty/Grupy"
+
 #~ msgid "Public Group"
 #~ msgstr "Grupa Publiczna"
 
 #~ msgid "Re-Activate Project/Group"
 #~ msgstr "Reaktywuj Projekt/Grupę"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "Błąd!"
+
+#~ msgid "Read more..."
+#~ msgstr "Czytaj więcej..."
 
 #~ msgid "Reminder emails"
 #~ msgstr "E-maile przypominające"
@@ -14921,14 +14738,35 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgstr "Русский"
 
 #, fuzzy
+#~ msgid "Saved items:"
+#~ msgstr "Nowy element"
+
+#~ msgid "Schedule an event"
+#~ msgstr "Zaplanuj wydarzenie"
+
+#, fuzzy
 #~ msgid "Search for email"
 #~ msgstr "Szukaj pomysłów"
+
+#, fuzzy
+#~ msgid "Set up your Profile"
+#~ msgstr "Edytuj Swój Profil"
 
 #~ msgid "Spanish--NATIVE-LANGUAGE"
 #~ msgstr "Español"
 
 #~ msgid "Start conference and activate user accounts"
 #~ msgstr "Rozpocznij konferencję i aktywuj konta użytkowników"
+
+#, fuzzy
+#~ msgid "Start/join BBB video conference for this event"
+#~ msgstr "Zacznij/dołącz do video czata tego wydarzenia"
+
+#~ msgid "Start/join video chat for this event"
+#~ msgstr "Rozpocznij/dołącz do wideo czatu"
+
+#~ msgid "Stop Video Chat"
+#~ msgstr "Zakończ wideo czat"
 
 #, fuzzy
 #~ msgid "Temporary restrictions"
@@ -14940,6 +14778,23 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Następujące Grupy zostały przekonwertowane na Projekty:"
 
+#~ msgid "The invite token you have used does not exist!"
+#~ msgstr "Użyty przez ciebie token z zaproszeniem jest nieprawidłowy!"
+
+#~ msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+#~ msgstr "Pole tekstowe motywacji zostanie wstępnie wypełnione dowolnym tekstem, który tu wpiszesz. Możesz użyć tego pola, aby podać wytyczne lub listę pytań, na które osoby składające aplikacje powinni odpowiedzieć."
+
+#~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+#~ msgstr "Dodaj potem po jednym wierszu dla każdego konta, które chcesz dodać. Musisz dodać niepowtarzalny kod użytkowniczki/ka, ale pole dla imienia i nazwiska może pozostać puste. Dodaj potem proszę „1” do wszystkich kolumn warsztatów, jeśli użytkowni(cz)k(a) jest zwykłą/ym członkinią/em lub „2”, jeśli użytkowni(cz)k(a) ma być administratorką/em."
+
+#, fuzzy
+#~ msgid "This conference shall be made publicly findable via other platforms."
+#~ msgstr "Ten projekt zostanie publicznie możliwy do odnalezienia poprzez inne platformy."
+
+#, fuzzy
+#~ msgid "This group shall be made publicly findable via other platforms."
+#~ msgstr "Ten projekt zostanie publicznie możliwy do odnalezienia poprzez inne platformy."
+
 #~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
 #~ msgstr "Ten proces jest odwracalny. W każdej chwili możesz reaktywować konferencję ze swojej strony profilu użytkownika."
 
@@ -14949,17 +14804,41 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
 #~ msgstr "Ten proces jest odwracalny. W każdej chwili możesz reaktywować projekt ze swojej strony profilu użytkownika."
 
+#~ msgid "This project shall be made publicly findable via other platforms."
+#~ msgstr "Ten projekt zostanie publicznie możliwy do odnalezienia poprzez inne platformy."
+
+#, fuzzy
+#~ msgid "Type of educational institution"
+#~ msgstr "Wyszukiwanie organizacji"
+
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Українська"
+
+#~ msgid "Umwelt"
+#~ msgstr "Środowisko"
+
+#~ msgid "Upcoming events in"
+#~ msgstr "Nadchodzące wydarzenia"
 
 #~ msgid "Upload Participants"
 #~ msgstr "Prześlij dane Uczestników"
 
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "Prześlij obraz."
+
 #~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 #~ msgstr "Użytkownik \"%(email)s\" zarejestrowany pomyślnie. Wkrótce wyślemy Ci wiadomość. Zanim się zalogujesz, musisz zatwierdzić Twój adres e-mail."
 
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Prześlij plik CSV"
+
 #~ msgid "User participates in the following workshops:"
 #~ msgstr "Użytkownik uczestniczy w następujących warsztatach:"
+
+#~ msgid "Video Chat"
+#~ msgstr "Wideo czat"
 
 #~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
 #~ msgstr "Wysłaliśmy na Twój adres e-mail instrukcje ustawiania hasła. Otrzymasz je niebawem."
@@ -14969,6 +14848,9 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 
 #~ msgid "Workshop Participant File Upload"
 #~ msgstr "Prześlij plik uczestnika warsztatów"
+
+#~ msgid "Workshop username"
+#~ msgstr "Nazwa użytkowniczki/ka warsztatu"
 
 #~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Właśnie dezaktywujesz tę konferencję. Ona i jej treści będą znów ukryte na stronie internetowej i niewidoczne dla każdego, łącznie z Tobą."
@@ -14981,6 +14863,9 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 
 #~ msgid "You cannot change your own admin status."
 #~ msgstr "Nie możesz zmienić swojego statusu administratora."
+
+#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
+#~ msgstr "Zmieniłeś/-aś swój adres e-mail. Wkrótce wyślemy Ci e-mail na podany adres z linkiem aktywacyjnym. Do momentu zatwierdzenia tego adresu, aktywny będzie Twój stary adres e-mail!"
 
 #~ msgid "You were tagged by %(sender_name)s"
 #~ msgstr "Zostałeś/aś oznaczony/a przez %(sender_name)s"
@@ -15025,123 +14910,3 @@ msgstr "Czy na pewno chcesz usunąć ten zespół?"
 #, fuzzy
 #~ msgid "participants"
 #~ msgstr "Uczestnicy"
-
-#~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-#~ msgstr "Zaimportuj proszę plik CSV z następującymi kolumnami: niepowtarzalny kod użytkowniczki/ka, imię, nazwisko i po jednej kolumnie na dany warsztat oznaczny przez slub warsztatu. Dla ułatwienia możesz skorzystać ze wzoru <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
-
-#~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-#~ msgstr "Dodaj potem po jednym wierszu dla każdego konta, które chcesz dodać. Musisz dodać niepowtarzalny kod użytkowniczki/ka, ale pole dla imienia i nazwiska może pozostać puste. Dodaj potem proszę „1” do wszystkich kolumn warsztatów, jeśli użytkowni(cz)k(a) jest zwykłą/ym członkinią/em lub „2”, jeśli użytkowni(cz)k(a) ma być administratorką/em."
-
-#~ msgid "Workshop username"
-#~ msgstr "Nazwa użytkowniczki/ka warsztatu"
-
-#~ msgid "New etherpad by %(sender_name)s"
-#~ msgstr "Nowy etherpad został utworzony przez %(sender_name)s"
-
-#~ msgid "New etherpad by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Nowy etherpad został utworzony przez %(sender_name)s w %(team_name)s (który śledzisz)"
-
-#~ msgid "Export (PDF)"
-#~ msgstr "Eksport (PDF)"
-
-#~ msgid "%(sender_name)s"
-#~ msgstr "%(sender_name)s"
-
-#~ msgid "%(sender_name)s voted in"
-#~ msgstr "%(sender_name)s zagłosował/a w"
-
-#~ msgid "Event poll updated by %(sender_name)s"
-#~ msgstr "Ankieta wydarzenia uaktualniona przez %(sender_name)s"
-
-#~ msgid "Example: https://www.youtube.com/watch?v=12345"
-#~ msgstr "Przykład: https://www.youtube.com/watch?v=12345"
-
-#~ msgid "Kalender"
-#~ msgstr "Kalendarz"
-
-#~ msgid "New event by %(sender_name)s"
-#~ msgstr "Nowe wydarzenie utworzone przez %(sender_name)s"
-
-#~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Nowe wydarzenie utworzone przez %(sender_name)s w zespole %(team_name)s (który śledzisz)"
-
-#~ msgid "New event poll by %(sender_name)s"
-#~ msgstr "Nowa ankieta wydarzenia utworzona przez %(sender_name)s"
-
-#~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Nowa ankieta wydarzenia utworzona przez %(sender_name)s w zespole %(team_name)s (który śledzisz)"
-
-#~ msgid "Schedule an event"
-#~ msgstr "Zaplanuj wydarzenie"
-
-#, fuzzy
-#~ msgid "Start/join BBB video conference for this event"
-#~ msgstr "Zacznij/dołącz do video czata tego wydarzenia"
-
-#~ msgid "Start/join video chat for this event"
-#~ msgstr "Rozpocznij/dołącz do wideo czatu"
-
-#~ msgid "Stop Video Chat"
-#~ msgstr "Zakończ wideo czat"
-
-#~ msgid "Upcoming events in"
-#~ msgstr "Nadchodzące wydarzenia"
-
-#~ msgid "Video Chat"
-#~ msgstr "Wideo czat"
-
-#~ msgid "New file by %(sender_name)s"
-#~ msgstr "Nowy plik wysłany przez %(sender_name)s"
-
-#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Nowy plik przez %(sender_name)s w %(team_name)s (który śledzisz)"
-
-#~ msgid "File title"
-#~ msgstr "Tytuł pliku"
-
-#~ msgid "File description"
-#~ msgstr "Opis pliku"
-
-#~ msgid "File \"%(title)s\" was uploaded successfully."
-#~ msgstr "Plik \"%(title)s\" wysłano pomyślnie."
-
-#~ msgid "File \"%(title)s\" could not be uploaded."
-#~ msgstr "Plik \"%(title)s\" nie mógł zostać wysłany."
-
-#~ msgid "File \"%(title)s\" could not be added."
-#~ msgstr "Plik \"%(title)s\" nie mógł zostać dodany."
-
-#~ msgid "New offer by %(sender_name)s"
-#~ msgstr "Nowa oferta utworzona przez %(sender_name)s"
-
-#~ msgid "New offer by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Nowa oferta utworzona przez %(sender_name)s w %(team_name)s (którą śledzisz)"
-
-#~ msgid "New news post by %(sender_name)s"
-#~ msgstr "Post utworzony przez %(sender_name)s"
-
-#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Post utworzony przez %(sender_name)s w %(team_name)s (który śledzisz)"
-
-#~ msgid "Read more..."
-#~ msgstr "Czytaj więcej..."
-
-#, fuzzy
-#~| msgid "I wish to receive notification emails"
-#~ msgid "I wish to receive RocketChat notification emails"
-#~ msgstr "Chcę otrzymywać powiadomienia e-mail"
-
-#~ msgid "New poll by %(sender_name)s"
-#~ msgstr "Nowa ankieta utworzona przez %(sender_name)s"
-
-#~ msgid "%(sender_name)s completed a poll"
-#~ msgstr "%(sender_name)s ukończył/a ankietę"
-
-#~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Nowa ankieta utworzona przez %(sender_name)s w %(team_name)s (który śledzisz)"
-
-#~ msgid "%(sender_name)s completed a poll you are following"
-#~ msgstr "%(sender_name)s ukończył/a ankietę, którą śledzisz"
-
-#~ msgid "New todo by %(sender_name)s"
-#~ msgstr "Nowe zadanie do wykonania utworzone przez %(sender_name)s"

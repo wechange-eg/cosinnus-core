@@ -164,8 +164,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'wagtail.contrib.redirects.middleware.RedirectMiddleware',
         'allauth.account.middleware.AccountMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
-        'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
+        'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
+        'cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
         'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
@@ -806,7 +807,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     }
 
     COSINNUS_API_SETTINGS = {
-        'user': ['head', 'post'],
+        # 'user': ['head', 'post'],
         # 'users': [ 'head', 'get', 'post', 'put', 'patch', 'delete']
         # 'hooks': {
         #     'user.activated': ['https://webhook.site/test'],
