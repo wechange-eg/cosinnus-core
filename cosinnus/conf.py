@@ -224,6 +224,7 @@ class CosinnusConf(AppConf):
         'cosinnus_etherpad',
         'cosinnus_file',
         'cosinnus_cloud',
+        'cosinnus_deck',
     ]
 
     # a list of groups slugs for a portal, that do not require the group

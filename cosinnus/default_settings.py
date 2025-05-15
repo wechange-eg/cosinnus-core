@@ -291,6 +291,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus_organization',
         'cosinnus_oauth_client',
         'cosinnus_cloud',
+        'cosinnus_deck',
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
