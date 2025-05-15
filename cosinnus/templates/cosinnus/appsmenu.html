@@ -9,6 +9,7 @@
 {% group_url 'cosinnus:conference:recorded-meetings' group=group as conference_recorded_meetings_page %}
 {% group_url 'cosinnus:group-meeting' group=group as group_video_meeting %}
 {% group_url 'cosinnus:group-edit' group=group as group_edit_page %}
+{% group_url 'cosinnus:mitwirkomat-settings' group=group as group_mitwirkomat_settings_page %}
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
 {% group_url 'cosinnus:conference:temporary-users' group=group as group_temporary_users %}
@@ -160,12 +161,22 @@
 	        {% endif %}
 	
 	        {% if user|has_write_access:group %}
-	        <li class="app-main appnavi-listelement {% if request.path == group_edit_page %}active{% endif %}">
-	            <a href="{{ group_edit_page }}">
-	                <i class="fa fa-fw fa-cogs"></i>
-	                {% trans "Settings" %}
-	            </a>
-	        </li>
+                {# mitwirkomat settings are probably not important enough to be shown directly in apps menu #}
+                {% if False and group.show_mitwirkomat_settings %}
+                    <li class="app-main appnavi-listelement {% if request.path == group_mitwirkomat_settings_page %}active{% endif %}">
+                        <a href="{{ group_mitwirkomat_settings_page }}">
+                            <i class="fa fa-fw fa-comment-alt"></i>
+                            {% trans "Mitwirk-O-Mat Settings" %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="app-main appnavi-listelement {% if request.path == group_edit_page %}active{% endif %}">
+                    <a href="{{ group_edit_page }}">
+                        <i class="fa fa-fw fa-cogs"></i>
+                        {% trans "Settings" %}
+                    </a>
+                </li>
 	        {% endif %}
 	    </ul>
     {% endif %} 

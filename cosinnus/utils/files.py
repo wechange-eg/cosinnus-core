@@ -51,6 +51,10 @@ def get_group_avatar_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'group')
 
 
+def get_mitwirkomat_avatar_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'group_mitwirkomat')
+
+
 def get_group_gallery_image_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'gallery_images', base_folder='group_images')
 

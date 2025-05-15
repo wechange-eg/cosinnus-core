@@ -5,6 +5,7 @@
 
 {% block breadcrumb %}
         {{ block.super }}
+        <li><a href="{{ group.get_edit_url }}">{{ group.trans.EDIT }}</a></li>
         <li class="active">{% trans "Edit Conditions of Participation" %}</li>
 {% endblock %}
 

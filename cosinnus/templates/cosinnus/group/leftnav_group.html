@@ -26,12 +26,20 @@
     {% captureas is_conferenceeventmanagement %}True{% endcaptureas %}
 {% elif current_page == "conferencestatistics" %}
     {% captureas is_conferencestatistics %}True{% endcaptureas %}
+{% elif current_page == "mitwirkomat_settings" %}
+    {% captureas is_mitwirkomat_settings %}True{% endcaptureas %}
 {% endif %}
 
 {% if user|has_write_access:object %}
 	{% captureas href %}{% group_url 'cosinnus:group-edit' group=group %}{% endcaptureas %}
 	{% trans "Settings" as edit_label %}
 	{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-cogs" label=edit_label href=href  %}
+
+    {% if group.show_mitwirkomat_settings %}
+	    {% captureas href %}{% group_url 'cosinnus:mitwirkomat-settings' group=group %}{% endcaptureas %}
+        {% captureas label %}{% trans "Mitwirk-O-Mat Settings" %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_mitwirkomat_settings extra_classes="fine-space" icon_full_class="fas fa-comment-alt" label=label href=href  %}
+    {% endif %}
 {% endif %}
 
 {% if group.group_is_conference and user|has_write_access:object %}

@@ -10,6 +10,11 @@
                     <i class="fa {{ icon }}"></i>
                 {% endif %}
             </span>
+            {% if active %}
+                <a class="pull-right" href="#">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+            {% endif %}
             <div class="media-body">
                 {{ label }}
             </div>

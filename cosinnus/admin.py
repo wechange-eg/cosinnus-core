@@ -47,6 +47,7 @@ from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment, CosinnusManagedTagType
 from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
+from cosinnus.models.mitwirkomat import MitwirkomatSettings
 from cosinnus.models.newsletter import GroupsNewsletter, Newsletter
 from cosinnus.models.profile import (
     GlobalBlacklistedEmail,
@@ -1578,3 +1579,19 @@ if settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
             return form
 
     admin.site.register(UserGroupGuestAccess, UserGroupGuestAccessAdmin)
+
+
+if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
+
+    class MitwirkomatSettingsAdmin(admin.ModelAdmin):
+        list_display = (
+            'group',
+            'is_active',
+            'creator',
+            'last_modified',
+        )
+        search_fields = ('creator__first_name', 'creator__last_name', 'creator__email', 'group__name')
+        raw_id_fields = ('creator',)
+        list_filter = ('is_active',)
+
+    admin.site.register(MitwirkomatSettings, MitwirkomatSettingsAdmin)
