@@ -67,6 +67,7 @@ class CosinnusBaseIntegrationHandler:
 
         # group hooks
         if self.integrate_groups:
+            # TODO: consider app activated/deactivated
             # Handle signals send by the CosinnusGroup instance in addition to the explicit group models.
             group_sender = [CosinnusGroup] + self.integrated_group_models
             for group_model in group_sender:
