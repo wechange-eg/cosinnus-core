@@ -427,7 +427,7 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(GroupResolvingMiddleware
             path = request.path
             if path and not path.endswith('/'):
                 path += '/'
-            if not any([path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]) \
+            if not any([path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/', '/guest/']]) \
                     and not self.is_anonymous_block_exempted_group_url(request):
                 if path.startswith('/api/') and 'Authorization' in request.headers:
                     # attempt to login with header token to accept token-authenticated API requests
