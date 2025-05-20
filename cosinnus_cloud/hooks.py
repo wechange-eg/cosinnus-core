@@ -217,6 +217,10 @@ def initialize_nextcloud_for_group(group):
 
     # create nextcloud group
     nextcloud.create_group(group.nextcloud_group_id)
+
+    # send signal
+    signals.group_nextcloud_group_initialized.send(sender=group.__class__, group=group)
+
     # create nextcloud group folder
     nextcloud.create_group_folder(
         group.nextcloud_groupfolder_name,
