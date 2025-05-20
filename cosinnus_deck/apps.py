@@ -8,5 +8,10 @@ class CosinnusDeckAppConfig(AppConfig):
 
     def ready(self):
         from cosinnus_deck import cosinnus_app
+        from cosinnus_deck.integration import DeckIntegrationHandler
 
+        # register app
         cosinnus_app.register()
+
+        # initialize integration handler
+        DeckIntegrationHandler(app_name=self.name)
