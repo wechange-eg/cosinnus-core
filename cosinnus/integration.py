@@ -81,6 +81,8 @@ class CosinnusBaseIntegrationHandler:
                 post_delete.connect(self._handle_group_deleted, sender=group_model, weak=False)
                 signals.group_reactivated.connect(self._handle_group_activated, sender=group_model, weak=False)
                 signals.group_deactivated.connect(self._handle_group_deactivated, sender=group_model, weak=False)
+            signals.group_apps_activated.connect(self._handle_group_apps_activated, weak=False)
+            signals.group_apps_deactivated.connect(self._handle_group_apps_deactivated, weak=False)
 
             # membership hooks
             post_save.connect(self._handle_membership_created, sender=CosinnusGroupMembership, weak=False)
@@ -252,6 +254,24 @@ class CosinnusBaseIntegrationHandler:
 
     def do_group_deactivate(self, group):
         """Group deactivation handler."""
+        pass  # Implement me
+
+    def _handle_group_apps_activated(self, sender, group, apps, **kwargs):
+        """Group apps activation hook."""
+        if self._is_integrated_group(group) and self._app_name in apps:
+            self.do_group_app_activate(group)
+
+    def do_group_app_activate(self, group):
+        """Group app activation handler."""
+        pass  # Implement me
+
+    def _handle_group_apps_deactivated(self, sender, group, apps, **kwargs):
+        """Group apps deactivation hook."""
+        if self._is_integrated_group(group) and self._app_name in apps:
+            self.do_group_app_deactivate(group)
+
+    def do_group_app_deactivate(self, group):
+        """Group app deactivation handler."""
         pass  # Implement me
 
     def _is_integrated_membership(self, membership):
