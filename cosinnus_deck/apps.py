@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.apps import AppConfig
+from django.conf import settings
 
 
 class CosinnusDeckAppConfig(AppConfig):
@@ -13,5 +14,6 @@ class CosinnusDeckAppConfig(AppConfig):
         # register app
         cosinnus_app.register()
 
-        # initialize integration handler
-        DeckIntegrationHandler(app_name=self.name)
+        if settings.COSINNUS_DECK_ENABLED:
+            # initialize integration handler
+            DeckIntegrationHandler(app_name=self.name)
