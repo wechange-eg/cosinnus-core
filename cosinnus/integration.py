@@ -31,6 +31,9 @@ class CosinnusBaseIntegrationHandler:
     # Group types for integrated_group_models populated in init.
     _integrated_group_types = None
 
+    # app name
+    _app_name = None
+
     # Changes to these fields of integrated models trigger an update handler.
     integrated_instance_fields = {
         CosinnusProject: ['name'],
@@ -46,7 +49,10 @@ class CosinnusBaseIntegrationHandler:
         CosinnusConference: CosinnusBaseGroup.TYPE_CONFERENCE,
     }
 
-    def __init__(self):
+    def __init__(self, app_name):
+        # set app name
+        self._app_name = app_name
+
         # init group types
         self._integrated_group_types = [self.GROUP_TYPES_BY_MODEL[model] for model in self.integrated_group_models]
 
@@ -196,6 +202,10 @@ class CosinnusBaseIntegrationHandler:
     def _is_integrated_group(self, group):
         """Check the group type for CosinnusGroup signals."""
         return group.type in self._integrated_group_types
+
+    def _is_app_enabled_for_group(self, group):
+        """Check if the integrated app is enabled in the group."""
+        return self._app_name not in group.get_deactivated_apps()
 
     def _handle_group_created(self, sender, instance, created, **kwargs):
         """Group create hook."""
