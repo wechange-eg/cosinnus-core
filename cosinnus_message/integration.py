@@ -60,13 +60,13 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
         UserProfile: ['email_verified', 'avatar'],
     }
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         global ROCKET_SINGLETON
         if ROCKET_SINGLETON:
             # do not initialize hooks, if already initialized.
             return
 
-        super().__init__()
+        super().__init__(*args, **kwargs)
 
         # message relay hooks
         post_save.connect(self.do_relay_message_create_or_update, sender=Event, weak=False)

@@ -15,4 +15,4 @@ class CosinnusMessageAppConfig(AppConfig):
             from cosinnus_message.integration import RocketChatIntegrationHandler  # noqa
 
             # initialize integration handler
-            RocketChatIntegrationHandler()
+            RocketChatIntegrationHandler(app_name=self.name)
