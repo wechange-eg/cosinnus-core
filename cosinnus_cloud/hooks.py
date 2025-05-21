@@ -148,7 +148,7 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
     anything that is not an alphanumeric.
     @param field: The field for which a unique nextcloud name should be generated. Usually
         either `nextcloud_group_id` or `nextcloud_groupfolder_name`
-    @param save: If True, the group will be saved to DB after generation
+    @param save: If True, the group field will be saved to DB after generation
     @param force_generate: Generates a new id, even if one already exists
     """
     if hasattr(group, field) and getattr(group, field) and not force_generate:
@@ -187,7 +187,7 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
 
     setattr(group, field, unique_name)
     if save is True:
-        group.save()
+        group.save(update_fields=[field])
     return unique_name
 
 
