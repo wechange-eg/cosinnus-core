@@ -1254,6 +1254,9 @@ class CosinnusConf(AppConf):
         'DISABLE_APP_IDS': ['photos', 'activity', 'systemtags', 'dashboard'],  # list of string app ids
     }
 
+    # whether to enable the cosinnus deck app
+    DECK_ENABLED = False
+
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
     FORUM_GROUP_CUSTOM_BACKGROUND = None

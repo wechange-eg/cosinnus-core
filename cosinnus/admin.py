@@ -366,7 +366,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             'nextcloud_groupfolder_name',
             'nextcloud_groupfolder_id',
         ]
-    if 'cosinnus_deck' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+    if not settings.COSINNUS_DECK_ENABLED:
         exclude += [
             'nextcloud_deck_board_id',
         ]
