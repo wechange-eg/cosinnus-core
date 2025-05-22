@@ -14,7 +14,7 @@
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
 {% group_url 'cosinnus:conference:temporary-users' group=group as group_temporary_users %}
 
-{% captureas show_report_modal %}{% if request.user.is_authenticated and not request.user.pk in group.members and not request.user.pk in group.admins %}true{% endif %}{% endcaptureas %}
+{% captureas show_report_modal %}{% if request.user.is_authenticated and not request.user.pk in group.members and not request.user.pk in group.admins and not request.user|is_superuser %}true{% endif %}{% endcaptureas %}
 
 <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav-appsmenu {% endif %}apps-menu btn-group w100 large-space">
     <button type="button" class="btn btn-appnavi w100 dropdown-toggle" data-toggle="dropdown">
@@ -38,7 +38,7 @@
     <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
         {% if user|has_read_access:group %}
 	        <li class="app-main appnavi-listelement fine-space {% if request.path == group_dashboard_page %}active{% endif %}">
-	            <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or user.is_superuser %}?browse=true{% endif %}{% endif %}">
+	            <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or request.user|is_superuser %}?browse=true{% endif %}{% endif %}">
 	                <i class="fa fa-fw fa-th-large"></i>
 	                {{ group.get_group_dashboard_label }}
 	            </a>
@@ -165,13 +165,13 @@
                 {% if False and group.show_mitwirkomat_settings %}
                     <li class="app-main appnavi-listelement {% if request.path == group_mitwirkomat_settings_page %}active{% endif %}">
                         <a href="{{ group_mitwirkomat_settings_page }}">
-                            <i class="fa fa-fw fa-comment-alt"></i>
+                            <i class="fas fa-comment-alt"></i>
                             {% trans "Mitwirk-O-Mat Settings" %}
                         </a>
                     </li>
                 {% endif %}
 
-                <li class="app-main appnavi-listelement {% if request.path == group_edit_page %}active{% endif %}">
+                <li class="app-main appnavi-listelement {% if request.path == group_edit_page or request.path == group_mitwirkomat_settings_page %}active{% endif %}">
                     <a href="{{ group_edit_page }}">
                         <i class="fa fa-fw fa-cogs"></i>
                         {% trans "Settings" %}
