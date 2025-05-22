@@ -209,6 +209,10 @@ class CosinnusBaseIntegrationHandler:
         """Check if the integrated app is enabled in the group."""
         return self._app_name not in group.get_deactivated_apps()
 
+    def is_app_enabled_for_group(self, group):
+        """Check if the group type is integrated and the app enabled."""
+        return self._is_integrated_group(group) and self._is_app_enabled_for_group(group)
+
     def _handle_group_created(self, sender, instance, created, **kwargs):
         """Group create hook."""
         if created and self._is_integrated_group(instance):
