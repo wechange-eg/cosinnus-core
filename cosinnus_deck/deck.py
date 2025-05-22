@@ -64,7 +64,7 @@ class DeckConnection:
             'type': 1,
             'participant': group.nextcloud_group_id,
             'permissionEdit': True,
-            'permissionShare': True,
+            'permissionShare': False,
             'permissionManage': False,
         }
         response = self._api_post(f'/boards/{board_id}/acl', data=data)
