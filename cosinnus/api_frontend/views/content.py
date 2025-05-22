@@ -627,7 +627,10 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                 continue
             # ignore some links depending on their class
             if leftnav_link.get('class') and any(
-                [blacklisted_class in leftnav_link.get('class') for blacklisted_class in ['fadedown-clickarea']]
+                [
+                    blacklisted_class in leftnav_link.get('class')
+                    for blacklisted_class in ['x-v3-leftnav-hidden', 'fadedown-clickarea']
+                ]
             ):
                 continue
             link_label = '(Link)'

@@ -48,9 +48,9 @@
         {% captureas label %}{% trans "Edit Conditions of Participation" %}{% endcaptureas %}
         {% include "cosinnus/leftnav_button.html" with active=is_conference_participation_manangement extra_classes="fine-space" icon_full_class="fas fa-user-cog" label=label href=href  %}
     {% endif %}
-    
+
     <div class="small-space">&nbsp;</div>
-    
+
     {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
 		{% captureas href %}{% group_url 'cosinnus:conference:room-management' group=group %}{% endcaptureas %}
 	    {% captureas label %}{% trans "Conference Room Management" %}{% endcaptureas %}
@@ -74,13 +74,13 @@
     {% endif %}
 
     <div class="small-space">&nbsp;</div>
-    
+
     {% if group.use_conference_applications %}
         {% captureas href %}{% group_url 'cosinnus:conference:participation-management-applications' group=group %}{% endcaptureas %}
         {% captureas label %}{% trans "Manage Participation Applications" %}{% endcaptureas %}
         {% include "cosinnus/leftnav_button.html" with active=is_conference_applications extra_classes="fine-space" icon_full_class="fas fa-user-plus" label=label href=href  %}
     {% endif %}
-    
+
     {% if group.has_premium_rights and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
         {% captureas href %}{% group_url 'cosinnus:conference:temporary-users' group=group %}{% endcaptureas %}
         {% captureas label %}{% trans "Temporary User Accounts" %}{% endcaptureas %}
@@ -91,7 +91,7 @@
 
 {% captureas href %}{% group_url 'cosinnus:group-detail' group=group %}{% endcaptureas %}
 {% captureas label %}{% trans "Members" %}{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_groupdetails extra_classes="fine-space" icon="fa-users" label=label href=href  %}
+{% include "cosinnus/leftnav_button.html" with active=is_groupdetails extra_classes="fine-space x-v3-leftnav-hidden" icon="fa-users" label=label href=href  %}
 
 <div class="small-space">&nbsp;</div>
 
