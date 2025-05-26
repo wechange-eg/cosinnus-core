@@ -30,6 +30,7 @@ from cosinnus.models.user_dashboard import FONT_AWESOME_CLASS_FILTER, MenuItem
 from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 from cosinnus.utils.functions import clean_single_line_text, is_number, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
+from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 
 logger = logging.getLogger('cosinnus')
@@ -141,6 +142,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'image': None,  # exclusive with `main_menu_icon`, only one can be non-None!
         },
         'announcements': [],
+        'space': None,
     }
 
     # todo: generate proper response, by either putting the entire response into a
@@ -350,6 +352,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'image': self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
         }
         data['announcements'] = self._get_announcements(self.django_request)
+        if self.group:
+            data['space'] = self._get_space_context(request.user)
 
         # set cookies on rest response from the requests response
         # note: we seem to be losing all meta-infos like max-age here,
@@ -909,3 +913,22 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         if 'user_guest_announcement' in context:
             announcements.append(context['user_guest_announcement'])
         return announcements
+
+    def _get_space_context(self, user):
+        if not self.group:
+            return None
+
+        # add the group permissions.
+        permissions = {
+            'read': False,
+            'write': False,
+        }
+        if user.is_authenticated:
+            if user.is_superuser or check_ug_admin(user, self.group):
+                permissions['read'] = True
+                permissions['write'] = True
+            elif check_ug_membership(user, self.group):
+                permissions['read'] = True
+
+        data = {'permissions': permissions}
+        return data

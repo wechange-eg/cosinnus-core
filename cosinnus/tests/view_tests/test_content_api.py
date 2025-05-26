@@ -89,6 +89,11 @@ class MainContentViewTest(APILiveServerTestCase):
             self.test_group.trans.ICON,
             'main menu button is present and has the default group icon',
         )
+        self.assertEqual(
+            response.data['space'],
+            {'permissions': {'read': True, 'write': False}},
+            'group permissions are reflected in space element.',
+        )
 
     def test_personal_dashboard(self):
         """Basic test for accessing the personal dashboard."""
@@ -116,6 +121,7 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertEqual(
             response.data['main_menu']['icon'], 'fa-user', 'main menu button is present and has the user ico'
         )
+        self.assertIsNone(response.data['space'], 'no space element without group.')
 
     def test_template_processing(self):
         """
