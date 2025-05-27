@@ -31,6 +31,9 @@ class CosinnusBaseIntegrationHandler:
     # Group types for integrated_group_models populated in init.
     _integrated_group_types = None
 
+    # app name
+    _app_name = None
+
     # Changes to these fields of integrated models trigger an update handler.
     integrated_instance_fields = {
         CosinnusProject: ['name'],
@@ -46,7 +49,10 @@ class CosinnusBaseIntegrationHandler:
         CosinnusConference: CosinnusBaseGroup.TYPE_CONFERENCE,
     }
 
-    def __init__(self):
+    def __init__(self, app_name):
+        # set app name
+        self._app_name = app_name
+
         # init group types
         self._integrated_group_types = [self.GROUP_TYPES_BY_MODEL[model] for model in self.integrated_group_models]
 
@@ -75,6 +81,8 @@ class CosinnusBaseIntegrationHandler:
                 post_delete.connect(self._handle_group_deleted, sender=group_model, weak=False)
                 signals.group_reactivated.connect(self._handle_group_activated, sender=group_model, weak=False)
                 signals.group_deactivated.connect(self._handle_group_deactivated, sender=group_model, weak=False)
+            signals.group_apps_activated.connect(self._handle_group_apps_activated, weak=False)
+            signals.group_apps_deactivated.connect(self._handle_group_apps_deactivated, weak=False)
 
             # membership hooks
             post_save.connect(self._handle_membership_created, sender=CosinnusGroupMembership, weak=False)
@@ -197,6 +205,14 @@ class CosinnusBaseIntegrationHandler:
         """Check the group type for CosinnusGroup signals."""
         return group.type in self._integrated_group_types
 
+    def _is_app_enabled_for_group(self, group):
+        """Check if the integrated app is enabled in the group."""
+        return self._app_name not in group.get_deactivated_apps()
+
+    def is_app_enabled_for_group(self, group):
+        """Check if the group type is integrated and the app enabled."""
+        return self._is_integrated_group(group) and self._is_app_enabled_for_group(group)
+
     def _handle_group_created(self, sender, instance, created, **kwargs):
         """Group create hook."""
         if created and self._is_integrated_group(instance):
@@ -242,6 +258,24 @@ class CosinnusBaseIntegrationHandler:
 
     def do_group_deactivate(self, group):
         """Group deactivation handler."""
+        pass  # Implement me
+
+    def _handle_group_apps_activated(self, sender, group, apps, **kwargs):
+        """Group apps activation hook."""
+        if self._is_integrated_group(group) and self._app_name in apps:
+            self.do_group_app_activate(group)
+
+    def do_group_app_activate(self, group):
+        """Group app activation handler."""
+        pass  # Implement me
+
+    def _handle_group_apps_deactivated(self, sender, group, apps, **kwargs):
+        """Group apps deactivation hook."""
+        if self._is_integrated_group(group) and self._app_name in apps:
+            self.do_group_app_deactivate(group)
+
+    def do_group_app_deactivate(self, group):
+        """Group app deactivation handler."""
         pass  # Implement me
 
     def _is_integrated_membership(self, membership):

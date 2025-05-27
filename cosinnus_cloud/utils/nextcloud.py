@@ -262,7 +262,7 @@ def create_group_folder(name: str, group_id: str, group, raise_on_existing_name=
         if not group.nextcloud_groupfolder_id:
             logger.info('Group had its nextcloud groupfolder id missing - corrected it with matched folder!')
             group.nextcloud_groupfolder_id = int(same_name_entries[0].get('id'))
-            group.save()
+            group.save(update_fields=['nextcloud_groupfolder_id'])
 
         if raise_on_existing_name:
             raise ValueError('A groupfolder with that name already exists')
@@ -287,7 +287,7 @@ def create_group_folder(name: str, group_id: str, group, raise_on_existing_name=
     folder_id = response.data['id']
     if folder_id:
         group.nextcloud_groupfolder_id = int(folder_id)
-        group.save()
+        group.save(update_fields=['nextcloud_groupfolder_id'])
     else:
         logger.error(
             'Nextcloud folder creation did not return a folder id!',

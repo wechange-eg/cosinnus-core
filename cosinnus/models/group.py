@@ -1082,6 +1082,13 @@ class CosinnusBaseGroup(
         null=True,
         help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.',
     )
+    nextcloud_deck_board_id = models.PositiveIntegerField(
+        _('Nextcloud Deck Board ID'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='Internal ID of the nextcloud deck board for the group. Set after the deck is created.',
+    )
 
     # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(

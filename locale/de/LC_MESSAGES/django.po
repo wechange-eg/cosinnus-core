@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-07 10:52+0200\n"
+"POT-Creation-Date: 2025-05-26 14:56+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1760,6 +1760,9 @@ msgstr "Nextcloud Gruppenordner-Name"
 
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Gruppenordner-ID"
+
+msgid "Nextcloud Deck Board ID"
+msgstr "Nextcloud Deck Board-ID"
 
 msgid "Is conference"
 msgstr "Ist Tagung"
@@ -9405,6 +9408,16 @@ msgstr "Status"
 
 msgid "Attendance data is not available for this conference."
 msgstr "Es stehen keine Teilnahme-Daten für diese Konferenz zur verfügung."
+
+msgid "Task-Board"
+msgstr "Aufgaben-Board"
+
+msgctxt "the_app"
+msgid "deck"
+msgstr "Aufgaben-Board"
+
+msgid "We are currently experiencing some technical difficulties with the Deck service. Please try again later. We apologize for the inconveniences!"
+msgstr "Momentan gibt es technische Probleme mit dem Deck Dienst. Bitte versuche es später noch einmal. Wir entschuldigen uns für die Unannehmlichkeiten!"
 
 msgid "The following Pads were re-initialized:"
 msgstr "The following Pads were re-initialized:"

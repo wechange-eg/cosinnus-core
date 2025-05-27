@@ -19,7 +19,7 @@ from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, Cos
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import is_user_active
-from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group
+from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group, is_cloud_group_required_for_group
 from cosinnus_cloud.utils.nextcloud import rename_group_folder, set_group_display_name
 
 from .utils import nextcloud
@@ -148,7 +148,7 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
     anything that is not an alphanumeric.
     @param field: The field for which a unique nextcloud name should be generated. Usually
         either `nextcloud_group_id` or `nextcloud_groupfolder_name`
-    @param save: If True, the group will be saved to DB after generation
+    @param save: If True, the group field will be saved to DB after generation
     @param force_generate: Generates a new id, even if one already exists
     """
     if hasattr(group, field) and getattr(group, field) and not force_generate:
@@ -187,7 +187,7 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
 
     setattr(group, field, unique_name)
     if save is True:
-        group.save()
+        group.save(update_fields=[field])
     return unique_name
 
 
@@ -195,37 +195,59 @@ def initialize_nextcloud_for_group(group):
     """Initializes a nextcloud groupfolder for a group.
     Safe to call on already initialized folders. If called on a pre-existing folder that is
     "disabled" (group has no more access to it), the group's access will be re-enabled for the folder."""
-    if not is_cloud_enabled_for_group(group):
+    if not is_cloud_group_required_for_group(group):
+        # No app requires the nextcloud integration
         return
-    # generate group and groupfolder name if the group doesn't have one yet, or use the existing one
+
+    # generate group if the group doesn't have one yet, or use the existing one
     generate_group_nextcloud_id(group, save=False)
-    generate_group_nextcloud_groupfolder_name(group, save=False)
     try:
         # we need to only update these fields, as otherwise we could get save conflicts
         # if this method is called during group creation (m2m race conditions)
-        group.save(update_fields=['nextcloud_group_id', 'nextcloud_groupfolder_name'])
+        group.save(update_fields=['nextcloud_group_id'])
     except DatabaseError as e:
         # we ignore save errors if the field values were unchanged
         if 'did not affect any rows' not in str(e):
             raise
 
+    logger.debug('Creating new group [%s] in Nextcloud.', group.nextcloud_group_id)
+
+    # create nextcloud group
+    nextcloud.create_group(group.nextcloud_group_id)
+
+    # add admin user to group
+    nextcloud.add_user_to_group(settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, group.nextcloud_group_id)
+
+    # send signal
+    signals.group_nextcloud_group_initialized.send(sender=group.__class__, group=group)
+
     logger.debug(
-        'Creating new group [%s] in Nextcloud (wechange group name [%s])',
+        'Creating new group folder [%s] in Nextcloud (wechange group name [%s])',
         group.nextcloud_groupfolder_name,
         group.nextcloud_group_id,
     )
 
-    # create nextcloud group
-    nextcloud.create_group(group.nextcloud_group_id)
-    # create nextcloud group folder
-    nextcloud.create_group_folder(
-        group.nextcloud_groupfolder_name,
-        group.nextcloud_group_id,
-        group,
-        raise_on_existing_name=False,
-    )
-    # add admin user to group
-    nextcloud.add_user_to_group(settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, group.nextcloud_group_id)
+    if is_cloud_enabled_for_group(group):
+        # The cloud app is enabled for the group, create the group folder.
+
+        # generate groupfolder name if the group doesn't have one yet, or use the existing one
+        generate_group_nextcloud_groupfolder_name(group, save=False)
+        try:
+            # we need to only update these field, as otherwise we could get save conflicts
+            # if this method is called during group creation (m2m race conditions)
+            group.save(update_fields=['nextcloud_groupfolder_name'])
+        except DatabaseError as e:
+            # we ignore save errors if the field values were unchanged
+            if 'did not affect any rows' not in str(e):
+                raise
+
+        # create nextcloud group folder
+        nextcloud.create_group_folder(
+            group.nextcloud_groupfolder_name,
+            group.nextcloud_group_id,
+            group,
+            raise_on_existing_name=False,
+        )
 
 
 # only activate these hooks when the cloud is enabled
@@ -237,7 +259,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
         # only initialize if the cosinnus-app is actually activated
         if user.is_guest:
             return
-        if is_cloud_enabled_for_group(group):
+        if is_cloud_group_required_for_group(group):
             if group.nextcloud_group_id is not None:
                 logger.debug(
                     'User [%s] joined group [%s], adding him/her to Nextcloud',
@@ -311,13 +333,13 @@ if settings.COSINNUS_CLOUD_ENABLED:
     @receiver(signals.group_object_created)
     def group_created_sub(sender, group, **kwargs):
         # only initialize if the cosinnus-app is actually activated
-        if is_cloud_enabled_for_group(group):
+        if is_cloud_group_required_for_group(group):
             submit_with_retry(initialize_nextcloud_for_group, group)
 
     @receiver(signals.group_apps_activated)
     def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
         """Listen for the cloud app being activated"""
-        if 'cosinnus_cloud' in apps and is_cloud_enabled_for_group(group):
+        if 'cosinnus_cloud' in apps and is_cloud_group_required_for_group(group):
 
             def _conurrent_wrap():
                 initialize_nextcloud_for_group(group)
@@ -376,6 +398,24 @@ if settings.COSINNUS_CLOUD_ENABLED:
 
                         return
                 group.refresh_from_db()
+
+            elif is_cloud_group_required_for_group(group) and group.nextcloud_group_id:
+                # Cloud is required but cloud app is not enabled, update the group display name.
+
+                # Temporary generate a groupfolder name to use as display name
+                generate_group_nextcloud_groupfolder_name(group, save=False, force_generate=True)
+                new_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
+
+                # set the group display name
+                try:
+                    set_group_display_name(group.nextcloud_group_id, new_nextcloud_groupfolder_name)
+                except Exception as e:
+                    logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
+
+                # the folder name was used just to get the new display name, reset the group instance.
+                group.refresh_from_db()
+
+        return
 
     post_save.connect(rename_nextcloud_group_and_groupfolder_on_group_rename, sender=get_cosinnus_group_model())
     post_save.connect(rename_nextcloud_group_and_groupfolder_on_group_rename, sender=CosinnusProject)

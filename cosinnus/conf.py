@@ -224,6 +224,7 @@ class CosinnusConf(AppConf):
         'cosinnus_etherpad',
         'cosinnus_file',
         'cosinnus_cloud',
+        'cosinnus_deck',
     ]
 
     # a list of groups slugs for a portal, that do not require the group
@@ -1252,6 +1253,9 @@ class CosinnusConf(AppConf):
         ],  # list of string app ids
         'DISABLE_APP_IDS': ['photos', 'activity', 'systemtags', 'dashboard'],  # list of string app ids
     }
+
+    # whether to enable the cosinnus deck app
+    DECK_ENABLED = False
 
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
