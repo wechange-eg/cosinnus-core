@@ -9,9 +9,12 @@
 {% group_url 'cosinnus:conference:recorded-meetings' group=group as conference_recorded_meetings_page %}
 {% group_url 'cosinnus:group-meeting' group=group as group_video_meeting %}
 {% group_url 'cosinnus:group-edit' group=group as group_edit_page %}
+{% group_url 'cosinnus:mitwirkomat-settings' group=group as group_mitwirkomat_settings_page %}
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
 {% group_url 'cosinnus:conference:temporary-users' group=group as group_temporary_users %}
+
+{% captureas show_report_modal %}{% if request.user.is_authenticated and not request.user.pk in group.members and not request.user.pk in group.admins and not request.user|is_superuser %}true{% endif %}{% endcaptureas %}
 
 <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav-appsmenu {% endif %}apps-menu btn-group w100 large-space">
     <button type="button" class="btn btn-appnavi w100 dropdown-toggle" data-toggle="dropdown">
@@ -35,7 +38,7 @@
     <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
         {% if user|has_read_access:group %}
 	        <li class="app-main appnavi-listelement fine-space {% if request.path == group_dashboard_page %}active{% endif %}">
-	            <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or user.is_superuser %}?browse=true{% endif %}{% endif %}">
+	            <a href="{% group_url 'cosinnus:group-dashboard' group=group %}{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}{% if group.public or request.user|is_superuser %}?browse=true{% endif %}{% endif %}">
 	                <i class="fa fa-fw fa-th-large"></i>
 	                {{ group.get_group_dashboard_label }}
 	            </a>
@@ -71,9 +74,7 @@
                     </a>
                 </li>
             {% endif %}
-        {% endif %}
 
-	    {% if user|has_read_access:group %}
 	        {% for app in apps %}
 		        {% if not group.group_is_conference or app.app == 'cosinnus_event' %}
 		            {% captureas app_css_class %}{% if group.group_is_conference %}app-main{% elif app.app == 'cosinnus_todo' %}app-todos{% elif app.app == 'cosinnus_note' %}app-main{% elif app.app == 'cosinnus_poll' %}app-poll{% elif app.app == 'cosinnus_cloud' %}app-cloud{% elif app.app == 'cosinnus_marketplace' %}app-marketplace{% elif app.app == 'cosinnus_file' %}app-files{% elif app.app == 'cosinnus_etherpad' %}app-etherpad{% elif app.app == 'cosinnus_event' %}app-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
@@ -151,7 +152,7 @@
 	        {% endif%}
 	        
 	        {% if request.user.pk in group.members or request.user.pk in group.admins or request.user|is_superuser or group.public and not group.group_is_conference %}
-		        <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %} {% if request.path == group_detail_page %}active{% endif %}">
+		        <li class="app-main appnavi-listelement {% if user|has_write_access:group or show_report_modal %}fine-space{% endif %} {% if request.path == group_detail_page %}active{% endif %}">
 		            <a href="{{ group_detail_page }}">
 		                <i class="fa fa-fw fa-group"></i>
 		                {% trans "Members" %}
@@ -160,13 +161,32 @@
 	        {% endif %}
 	
 	        {% if user|has_write_access:group %}
-	        <li class="app-main appnavi-listelement {% if request.path == group_edit_page %}active{% endif %}">
-	            <a href="{{ group_edit_page }}">
-	                <i class="fa fa-fw fa-cogs"></i>
-	                {% trans "Settings" %}
-	            </a>
-	        </li>
+                {# mitwirkomat settings are probably not important enough to be shown directly in apps menu #}
+                {% if False and group.show_mitwirkomat_settings %}
+                    <li class="app-main appnavi-listelement {% if request.path == group_mitwirkomat_settings_page %}active{% endif %}">
+                        <a href="{{ group_mitwirkomat_settings_page }}">
+                            <i class="fas fa-comment-alt"></i>
+                            {% trans "Mitwirk-O-Mat Settings" %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="app-main appnavi-listelement {% if request.path == group_edit_page or request.path == group_mitwirkomat_settings_page %}active{% endif %}">
+                    <a href="{{ group_edit_page }}">
+                        <i class="fa fa-fw fa-cogs"></i>
+                        {% trans "Settings" %}
+                    </a>
+                </li>
 	        {% endif %}
-	    </ul>
-    {% endif %} 
+
+        {% endif %}
+
+        {# all authenticated non-group members see a report button #}
+        {% if show_report_modal %}
+            <li class="app-main appnavi-listelement {% if request.path == group_edit_page %}active{% endif %}">
+                {% trans "Report offensive content" as report_label %}
+                {% include 'cosinnus/feedback/report_button_a.html' with object=group extra_title=report_label %}
+            </li>
+        {% endif %}
+    </ul>
 </div><!-- btn-group -->

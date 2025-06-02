@@ -1,0 +1,11 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% captureas answer_label %}{{ SETTINGS.COSINNUS_MITWIRKOMAT_QUESTION_LABELS|dict_lookup:inlineform.question.value }}{% endcaptureas %}
+
+{# Hide answers with a label, as those have been removed from COSINNUS_MITWIRKOMAT_QUESTION_LABELS but should still be carried over on save #}
+<div {% if not answer_label %} style="display: none;"{% endif %}>
+    {% include 'cosinnus/fields/condensed_radio_field.html' with field=inlineform.answer label=answer_label %}
+
+    {# hidden input, required to save the value of the question #}
+    {{ inlineform.question }}
+</div>

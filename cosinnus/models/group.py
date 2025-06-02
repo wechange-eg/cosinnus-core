@@ -1416,6 +1416,15 @@ class CosinnusBaseGroup(
     def has_premium_rights(self):
         return self.has_premium_blocks or self.is_premium_permanently
 
+    @property
+    def show_mitwirkomat_settings(self):
+        """Returns true if Mitwirk-O-Mat the settings view and links are shown for this group,
+        depending on conf settings and the group type"""
+        return (
+            settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED
+            and self.type in settings.COSINNUS_MITWIRKOMAT_ENABLED_FOR_GROUP_TYPES
+        )
+
     def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER, is_late_invitation=False):
         """ "Makes the user a group member".
         Safely adds a membership for the given user with the given status for this group.

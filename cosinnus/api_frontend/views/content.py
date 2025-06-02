@@ -619,6 +619,10 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                 attributes.update(
                     {'data-toggle': leftnav_link.get('data-toggle'), 'data-target': leftnav_link.get('data-target')}
                 )
+            # detect onclick attribute buttons like the report content modal link
+            if leftnav_link.get('onclick'):
+                attributes.update({'onclick': leftnav_link.get('onclick')})
+
             # extract v3-specific id if present
             v3_id = leftnav_link.get('data-v3-id', None)
             # skip link-less buttons (like the dropdown trigger), unless they have modal data attributes
@@ -627,7 +631,10 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                 continue
             # ignore some links depending on their class
             if leftnav_link.get('class') and any(
-                [blacklisted_class in leftnav_link.get('class') for blacklisted_class in ['fadedown-clickarea']]
+                [
+                    blacklisted_class in leftnav_link.get('class')
+                    for blacklisted_class in ['x-v3-leftnav-hidden', 'fadedown-clickarea']
+                ]
             ):
                 continue
             link_label = '(Link)'
@@ -804,7 +811,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                                     )  # make sure actions list exists
                                     target_subnav = find_target_button['actions']
                 elif not menu_item['url']:
-                    # non url buttons like help popups go in the bottom list
+                    # non url buttons like help popups and modal boxes go in the bottom list
                     target_subnav = bottom
                 elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS):
                     target_subnav = bottom

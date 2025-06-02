@@ -1593,6 +1593,46 @@ class CosinnusConf(AppConf):
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
 
+    # enable the Mitwirk-O-Mat integration groups settings view and API endpoints
+    MITWIRKOMAT_INTEGRATION_ENABLED = False
+
+    # if `MITWIRKOMAT_INTEGRATION_ENABLED=True`, this determines the group types
+    # the Mitwirk-O-Mat views are enabled for
+    MITWIRKOMAT_ENABLED_FOR_GROUP_TYPES = [
+        0,  # CosinnusBaseGroup.TYPE_PROJECT,
+        1,  # CosinnusBaseGroup.TYPE_SOCIETY,
+    ]
+
+    # the label dict for the Mitwirk-O-Mat integration when `MITWIRKOMAT_INTEGRATION_ENABLED=True`
+    # note: since this is a dict, the order is given by the numeric key sort order,
+    # not by how these are listed! reordering these will not change anything, neither in form nor in the export.
+    # note: do not swap the keys for questions, because answers are saved by-key!
+    MITWIRKOMAT_QUESTION_LABELS = {
+        '0': 'Placeholder question 1',
+        '1': 'Placeholder question 2',
+        '2': 'Placeholder question 3',
+        '3': 'Placeholder question 4',
+        '4': 'Placeholder question 5',
+        '5': 'Placeholder question 6',
+        '6': 'Placeholder question 7',
+        '7': 'Placeholder question 8',
+        '8': 'Placeholder question 9',
+        '9': 'Placeholder question 10',
+        '10': 'Placeholder question 11',
+        '11': 'Placeholder question 12',
+        '12': 'Placeholder question 13',
+        '13': 'Placeholder question 14',
+        '14': 'Placeholder question 15',
+        '15': 'Placeholder question 16',
+        '16': 'Placeholder question 17',
+        '17': 'Placeholder question 18',
+        '18': 'Placeholder question 19',
+        '19': 'Placeholder question 20',
+    }
+
+    # default value for the answers for an unfilled form, see `MitwirkomatSettings.QUESTION_CHOICES`
+    MITWIRKOMAT_QUESTION_DEFAULT_VALUE = '0'
+
 
 class CosinnusDefaultSettings(AppConf):
     """Settings without a prefix namespace to provide default setting values for other apps.

@@ -44,6 +44,8 @@ MEMBER_STATUS = (
 )
 # A user is a manager of a group if they are a manager or an admin
 MANAGER_STATUS = (MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER)
+# A user is pending if the status is pending or pending-invited
+PENDING_STATUS = (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
 
 _MEMBERSHIP_ADMINS_KEY = 'cosinnus/core/membership/%s/admins/%d'
 _MEMBERSHIP_MEMBERS_KEY = 'cosinnus/core/membership/%s/members/%d'
