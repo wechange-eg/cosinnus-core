@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-26 14:56+0200\n"
+"POT-Creation-Date: 2025-06-02 15:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9416,8 +9416,11 @@ msgctxt "the_app"
 msgid "deck"
 msgstr "Aufgaben-Board"
 
-msgid "We are currently experiencing some technical difficulties with the Deck service. Please try again later. We apologize for the inconveniences!"
-msgstr "Momentan gibt es technische Probleme mit dem Deck Dienst. Bitte versuche es später noch einmal. Wir entschuldigen uns für die Unannehmlichkeiten!"
+msgid "The task-board creation is in progress..."
+msgstr "Das Aufgaben-Board wird erstellt..."
+
+msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
+msgstr "Wenn das Aufgaben-Board nicht innerhalb einiger Minuten verfügbar wird, gibt es technische Probleme mit dem Board-Service. Versuche die Aufgaben-Board App in den Einstellungen zu deaktivieren und zu reaktivieren. Falls das Problem bleibt, melde dich beim Support. Wir entschuldigen uns für die Unannehmlichkeiten!"
 
 msgid "The following Pads were re-initialized:"
 msgstr "The following Pads were re-initialized:"
@@ -13930,6 +13933,9 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
+#~ msgid "We are currently experiencing some technical difficulties with the Deck service. Please try again later. We apologize for the inconveniences!"
+#~ msgstr "Momentan gibt es technische Probleme mit dem Deck Dienst. Bitte versuche es später noch einmal. Wir entschuldigen uns für die Unannehmlichkeiten!"
 
 #~ msgid "Debug"
 #~ msgstr "Fehlersuche"
