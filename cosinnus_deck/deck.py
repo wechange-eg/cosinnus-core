@@ -46,6 +46,8 @@ class DeckConnection:
         if group.nextcloud_deck_board_id:
             # Group already has a deck board created.
             return
+
+        # create the board
         data = {'title': group.name, 'color': 'ffffff'}
         response = self._api_post('/boards', data=data)
         if response.status_code != 200:
@@ -60,6 +62,8 @@ class DeckConnection:
         if not board_id:
             logger.warning('Deck: No board id returned!', extra={'response': response})
             raise DeckConnectionException()
+
+        # give group permissions to the new board
         data = {
             'type': 1,
             'participant': group.nextcloud_group_id,
@@ -73,8 +77,14 @@ class DeckConnection:
                 'Deck: Adding group permissions to board failed!', extra={'response': response, 'board_id': board_id}
             )
             raise DeckConnectionException()
-        group.nextcloud_deck_board_id = board_id
-        type(group).objects.filter(pk=group.pk).update(nextcloud_deck_board_id=group.nextcloud_deck_board_id)
+
+        # save board id for the group
+        group.refresh_from_db()
+        if not group.nextcloud_deck_board_id:
+            # no board was created in parallel.
+            group.nextcloud_deck_board_id = board_id
+            type(group).objects.filter(pk=group.pk).update(nextcloud_deck_board_id=group.nextcloud_deck_board_id)
+            group.clear_cache()
 
     def group_board_update(self, group):
         """Updates the group board name and archived status."""
