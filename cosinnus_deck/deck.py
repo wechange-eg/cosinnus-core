@@ -14,7 +14,7 @@ class DeckConnectionException(Exception):
 
 
 class DeckConnection:
-    BASE_URL = f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/index.php/apps/deck'
+    BASE_URL = f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/index.php/apps/deck/api/v1.0'
     HEADERS = {'OCS-APIRequest': 'true', 'Accept': 'application/json'}
     API_PARAMS = {'auth': settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH, 'headers': HEADERS}
 
@@ -46,20 +46,24 @@ class DeckConnection:
         if group.nextcloud_deck_board_id:
             # Group already has a deck board created.
             return
+
+        # create the board
         data = {'title': group.name, 'color': 'ffffff'}
         response = self._api_post('/boards', data=data)
         if response.status_code != 200:
-            logger.error('Deck: Board creation failed!', extra={'response': response})
+            logger.warning('Deck: Board creation failed!', extra={'response': response})
             raise DeckConnectionException()
         try:
             response_json = response.json()
             board_id = response_json.get('id')
         except Exception:
-            logger.error('Deck: Invalid response received!', extra={'response': response})
+            logger.warning('Deck: Invalid response received!', extra={'response': response})
             raise DeckConnectionException()
         if not board_id:
-            logger.error('Deck: No board id returned!', extra={'response': response})
+            logger.warning('Deck: No board id returned!', extra={'response': response})
             raise DeckConnectionException()
+
+        # give group permissions to the new board
         data = {
             'type': 1,
             'participant': group.nextcloud_group_id,
@@ -69,12 +73,18 @@ class DeckConnection:
         }
         response = self._api_post(f'/boards/{board_id}/acl', data=data)
         if response.status_code != 200:
-            logger.error(
+            logger.warning(
                 'Deck: Adding group permissions to board failed!', extra={'response': response, 'board_id': board_id}
             )
             raise DeckConnectionException()
-        group.nextcloud_deck_board_id = board_id
-        type(group).objects.filter(pk=group.pk).update(nextcloud_deck_board_id=group.nextcloud_deck_board_id)
+
+        # save board id for the group
+        group.refresh_from_db()
+        if not group.nextcloud_deck_board_id:
+            # no board was created in parallel.
+            group.nextcloud_deck_board_id = board_id
+            type(group).objects.filter(pk=group.pk).update(nextcloud_deck_board_id=group.nextcloud_deck_board_id)
+            group.clear_cache()
 
     def group_board_update(self, group):
         """Updates the group board name and archived status."""
@@ -90,7 +100,7 @@ class DeckConnection:
         }
         response = self._api_put(f'/boards/{group.nextcloud_deck_board_id}', data=data)
         if response.status_code != 200:
-            logger.error(
+            logger.warning(
                 'Deck: Board update failed!', extra={'response': response, 'board_id': group.nextcloud_deck_board_id}
             )
             raise DeckConnectionException()
@@ -99,6 +109,105 @@ class DeckConnection:
         """Deletes the group board."""
         response = self._api_delete(f'/boards/{group_board_id}')
         if response.status_code != 200:
-            # TODO: handle already deleted
-            logger.error('Deck: Board deletion failed!', extra={'response': response, 'board_id': group_board_id})
+            logger.warning('Deck: Board deletion failed!', extra={'response': response, 'board_id': group_board_id})
             raise DeckConnectionException()
+
+    def stack_create(self, group_board_id, title, order, raise_deck_connection_exception=True):
+        """
+        Creates a board stack.
+        Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        """
+        data = {
+            'title': title,
+            'order': order,
+        }
+        response = self._api_post(f'/boards/{group_board_id}/stacks', data=data)
+        if response.status_code != 200:
+            logger.warning('Deck: Stack creation failed!', extra={'response': response, 'board_id': group_board_id})
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+        return response
+
+    def stack_update(self, group_board_id, stack_id, title, order, raise_deck_connection_exception=True):
+        """
+        Updates a board stack.
+        Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        """
+        data = {
+            'title': title,
+            'order': order,
+        }
+        response = self._api_put(f'/boards/{group_board_id}/stacks/{stack_id}', data=data)
+        if response.status_code != 200:
+            logger.warning(
+                'Deck: Stack update failed!',
+                extra={'response': response, 'board_id': group_board_id, 'stack_id': stack_id},
+            )
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+        return response
+
+    def stack_delete(self, group_board_id, stack_id, raise_deck_connection_exception=True):
+        """
+        Deletes a board stack.
+        Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        """
+        response = self._api_delete(f'/boards/{group_board_id}/stacks/{stack_id}')
+        if response.status_code != 200:
+            logger.warning(
+                'Deck: Stack delete failed!',
+                extra={'response': response, 'board_id': group_board_id, 'stack_id': stack_id},
+            )
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+        return response
+
+    def label_create(self, group_board_id, title, color, raise_deck_connection_exception=True):
+        """
+        Creates a board label.
+        Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        """
+        data = {
+            'title': title,
+            'color': color,
+        }
+        response = self._api_post(f'/boards/{group_board_id}/labels', data=data)
+        if response.status_code != 200:
+            logger.warning('Deck: Label creation failed!', extra={'response': response, 'board_id': group_board_id})
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+        return response
+
+    def label_update(self, group_board_id, label_id, title, color, raise_deck_connection_exception=True):
+        """
+        Updates a board label.
+        Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        """
+        data = {
+            'title': title,
+            'color': color,
+        }
+        response = self._api_put(f'/boards/{group_board_id}/labels/{label_id}', data=data)
+        if response.status_code != 200:
+            logger.warning(
+                'Deck: Label update failed!',
+                extra={'response': response, 'board_id': group_board_id, 'label_id': label_id},
+            )
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+        return response
+
+    def label_delete(self, group_board_id, label_id, raise_deck_connection_exception=True):
+        """
+        Deletes a board label.
+        Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        """
+        response = self._api_delete(f'/boards/{group_board_id}/labels/{label_id}')
+        if response.status_code != 200:
+            logger.warning(
+                'Deck: Label delete failed!',
+                extra={'response': response, 'board_id': group_board_id, 'label_id': label_id},
+            )
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+        return response

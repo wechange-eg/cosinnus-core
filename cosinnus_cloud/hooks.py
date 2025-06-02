@@ -363,41 +363,37 @@ if settings.COSINNUS_CLOUD_ENABLED:
         """
         if not created:
             group = kwargs.get('instance')
-            if (
-                is_cloud_enabled_for_group(group)
-                and group.nextcloud_group_id
-                and group.nextcloud_groupfolder_name
-                and group.nextcloud_groupfolder_id
-            ):
-                # just softly generate a new folder name first, and see if it has to be changed (because of a group
-                # rename)
-                old_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
-                generate_group_nextcloud_groupfolder_name(group, save=False, force_generate=True)
-                new_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
-                # rename the folder if the name would be a different one
-                if new_nextcloud_groupfolder_name != old_nextcloud_groupfolder_name:
-                    result = False
-                    try:
-                        result = rename_group_folder(group.nextcloud_groupfolder_id, new_nextcloud_groupfolder_name)
-                    except Exception as e:
-                        logger.warning('Could not rename Nextcloud group folder.', extra={'exc': e})
-                    # if the rename was successful, save the new group folder name.
-                    # otherwise, reload it to discard the newly generated folder name on the object
-                    if result is True:
-                        # Save the new group folder name. Not calling save() as it would re-trigger signals and also
-                        # overwrite possible changes to group type during group type conversion.
-                        get_cosinnus_group_model().objects.filter(pk=group.pk).update(
-                            nextcloud_groupfolder_name=new_nextcloud_groupfolder_name
-                        )
-
-                        # change the group display name
+            if is_cloud_enabled_for_group(group):
+                if group.nextcloud_group_id and group.nextcloud_groupfolder_name and group.nextcloud_groupfolder_id:
+                    # just softly generate a new folder name first, and see if it has to be changed (because of a group
+                    # rename)
+                    old_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
+                    generate_group_nextcloud_groupfolder_name(group, save=False, force_generate=True)
+                    new_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
+                    # rename the folder if the name would be a different one
+                    if new_nextcloud_groupfolder_name != old_nextcloud_groupfolder_name:
+                        result = False
                         try:
-                            set_group_display_name(group.nextcloud_group_id, new_nextcloud_groupfolder_name)
+                            result = rename_group_folder(group.nextcloud_groupfolder_id, new_nextcloud_groupfolder_name)
                         except Exception as e:
-                            logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
+                            logger.warning('Could not rename Nextcloud group folder.', extra={'exc': e})
+                        # if the rename was successful, save the new group folder name.
+                        # otherwise, reload it to discard the newly generated folder name on the object
+                        if result is True:
+                            # Save the new group folder name. Not calling save() as it would re-trigger signals and also
+                            # overwrite possible changes to group type during group type conversion.
+                            get_cosinnus_group_model().objects.filter(pk=group.pk).update(
+                                nextcloud_groupfolder_name=new_nextcloud_groupfolder_name
+                            )
 
-                        return
-                group.refresh_from_db()
+                            # change the group display name
+                            try:
+                                set_group_display_name(group.nextcloud_group_id, new_nextcloud_groupfolder_name)
+                            except Exception as e:
+                                logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
+
+                            return
+                    group.refresh_from_db()
 
             elif is_cloud_group_required_for_group(group) and group.nextcloud_group_id:
                 # Cloud is required but cloud app is not enabled, update the group display name.
@@ -406,11 +402,14 @@ if settings.COSINNUS_CLOUD_ENABLED:
                 generate_group_nextcloud_groupfolder_name(group, save=False, force_generate=True)
                 new_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
 
-                # set the group display name
+                # Set the group display name.
+                # Note: Did not find an API to get the current display name, so we just update it.
                 try:
                     set_group_display_name(group.nextcloud_group_id, new_nextcloud_groupfolder_name)
                 except Exception as e:
-                    logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
+                    if '404' not in str(e):
+                        # Ignore non-existing group in renaming hook.
+                        logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
 
                 # the folder name was used just to get the new display name, reset the group instance.
                 group.refresh_from_db()
