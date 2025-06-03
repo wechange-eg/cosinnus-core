@@ -58,6 +58,10 @@ class ExchangeSerializerMixin(serializers.Serializer):
     def get_mt_topics(self, obj):
         return list(filter(None, [TOPIC_CHOICES_MAP.get(t, None) for t in obj['topics']]))
 
+    def include_instance(self, obj):
+        """Used by the backend to check if this instance should be included in the results."""
+        return True
+
 
 class ExchangeGroupSerializer(ExchangeSerializerMixin, serializers.Serializer):
     title = serializers.CharField(source='name')
@@ -271,6 +275,10 @@ class ExchangeDipasSerializer(ExchangeSerializerMixin, serializers.Serializer):
         self.detail_data = {}
         self.descriptions = {}
         self.image_thumbnails = {}
+
+    def include_instance(self, obj):
+        """Only active projects are included."""
+        return obj.get('properties', {}).get('proceedingState') == 'active'
 
     def _get_project_base_url(self, obj):
         """Returns the base project URL for the additional APIs."""
