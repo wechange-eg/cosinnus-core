@@ -117,9 +117,12 @@ class ExchangeBackend:
         for i, result in enumerate(results):
             try:
                 serialized_result = self.serializer.to_representation(instance=result)
-                serialized_results.append(serialized_result)
-                if settings.DEBUG:
-                    print(f'>> pulled: {serialized_result.get("url")}')
+                if self.serializer.include_instance(result):
+                    serialized_results.append(serialized_result)
+                    if settings.DEBUG:
+                        print(f'>> pulled: {serialized_result.get("url")}')
+                elif settings.DEBUG:
+                    print(f'>> ignored: {serialized_result.get("url")}')
             except Exception as e:
                 logger.warn(
                     'An external data object could not be pulled in for cosinnus exchange!',
