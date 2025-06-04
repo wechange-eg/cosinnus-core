@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-07 10:52+0200\n"
+"POT-Creation-Date: 2025-06-04 17:15+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -374,10 +374,10 @@ msgid "This will be used as your login. Notification emails will be sent to this
 msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-E-Mails geschickt (wenn du das möchtest)"
 
 msgid "fields.managed_tags.label"
-msgstr ""
+msgstr "fields.managed_tags.label"
 
 msgid "fields.managed_tags.description"
-msgstr ""
+msgstr "fields.managed_tags.description"
 
 #, python-format
 msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
@@ -1971,6 +1971,33 @@ msgstr "Durch Kommata getrennte Liste von Phrasen, für die die automatische Ver
 msgid "Is Moderator"
 msgstr "Ist Moderator"
 
+msgid "Fits us"
+msgstr "Passt zu uns"
+
+msgid "Partly fits us"
+msgstr "Passt teilweise"
+
+msgid "Does not fit us"
+msgstr "Passt nicht"
+
+msgid "Group for Mitwirk-O-Mat Settings"
+msgstr "Gruppe für Mitwirk-O-Mat Settings"
+
+msgid "Determines if the Mitwirk-O-Mat data for this group should displayed in the API."
+msgstr "Legt fest, ob die Mitwirk-O-Mat-Daten für diese Gruppe in der API angezeigt werden sollen."
+
+msgid "Replacement description for the group description. If empty, falls back to `group.description_long` which falls back to `group.description`."
+msgstr "Ersatzbeschreibung für die Gruppenbeschreibung. Falls leer, wird auf `group.description_long` zurückgegriffen, die wiederum auf `group.description` zurückgreift."
+
+msgid "Replacement avatar for the group avatar. If empty, falls back to group.avatar."
+msgstr "Ersatzavatar für den Gruppenavatar. Wenn leer, fällt auf group.avatar zurück."
+
+msgid "User-set answers to Mitwirk-O-Mat questions"
+msgstr "Benutzer-gewählte Antworten zu den Mitwirk-O-Mat Fragen"
+
+msgid "Mitwirk-O-Mat Settings"
+msgstr "Mitwirk-O-Mat Einstellungen"
+
 msgid "ToS accepted"
 msgstr "ToS angenommen"
 
@@ -3018,8 +3045,15 @@ msgstr "Temporäre Benutzerkonten verwalten"
 msgid "Members"
 msgstr "Mitglieder"
 
+msgid "Volunteer-O-Matic"
+msgstr "Mitwirk-O-Mat"
+
 msgid "Settings"
 msgstr "Einstellungen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
+msgstr "Anstößigen Inhalt melden"
 
 msgid "Drag and Drop files here..."
 msgstr "Dateien vom Computer hierher ziehen..."
@@ -4169,10 +4203,6 @@ msgstr "Bitte bestätige deine E-Mail-Adresse!"
 msgid "Close"
 msgstr "Schließen"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Report offensive content"
-msgstr "Anstößigen Inhalt melden"
-
 msgid "Sorry, this feature is only available for registered members."
 msgstr "Tut uns leid, diese Funktion ist nur für registrierte Mitglieder verfügbar."
 
@@ -4894,6 +4924,15 @@ msgstr "Die Facebook-Integration wird verfügbar sobald du das Projekt erstellt 
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Das hier eingegebene HTML wird auf dem Gruppen/Projektdashboard dargestellt (nur für Mitglieder)"
+
+msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
+msgstr "Der Mitwirk-O-Mat ist ein spielerisches Matching-Tool, das Nutzer/innen dabei hilft, passende Gruppen und Projekte zu finden, wo sie sich engagieren können. Gleichzeitig kann der Mitwirk-O-Mat Gruppen und Projekten wie eurem dabei helfen, neue Freiwillige zu finden."
+
+msgid "Go to the Matching Settings for the Volunteer-O-Matic Settings now"
+msgstr "Jetzt zu den Matching-Einstellungen für den Mitwirk-O-Mat gehen"
+
+msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
+msgstr "Du kannst zu den Matching-Einstellungen für den Mitwirk-O-Mat gehen, nachdem du gespeichert hast."
 
 msgid "About me"
 msgstr "Über mich"
@@ -5921,6 +5960,46 @@ msgstr "Nur eingeloggte Mitglieder"
 
 msgid "Everybody"
 msgstr "Jeder"
+
+msgid "Matching Settings for the Volunteer-O-Matic"
+msgstr "Matching-Einstellungen für den Mitwirk-O-Mat"
+
+msgid "here"
+msgstr "hier"
+
+#, python-format
+msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
+msgstr "Der Mitwirk-O-Mat ist %(here_link)s veröffentlicht. Nutzer/innen beantworten die kurzen Fragen zu ihren Stärken und Interessen. Basierend auf den Antworten berechnet der Algorithmus die Übereinstimmung zwischen Nutzer:in und allen teilnehmenden Gruppen und Projekten. Diejenigen Gruppen und Projekte mit der höchsten Übereinstimmung werden den Nutzer:innen in ihrem persönlichen Ranking vorgeschlagen. Die Nutzer/innen können sich nun über ihre \"Matches\" informieren und zu ihren Favoriten Kontakt aufnehmen."
+
+msgid "Participate in the Volunteer-O-Matic with "
+msgstr "Am Mitwirk-O-Mat teilnehmen mit"
+
+#, python-format
+msgid "Enter only if you want to set a different name than the one in your %(settings_link)s."
+msgstr "Nur ausfüllen, falls ihr einen anderen Namen verwenden möchtet als den in euren %(settings_link)s."
+
+#, python-format
+msgid "Enter only if you want to set a different description than the one in your %(settings_link)s."
+msgstr "Nur ausfüllen, falls ihr eine andere Beschreibung verwenden möchtet als die in euren %(settings_link)s."
+
+msgid "Character limit"
+msgstr "Zeichenlimit"
+
+#, python-format
+msgid "Enter only if you want to set a different logo than the one in your %(settings_link)s."
+msgstr "ur auswählen, falls ihr ein anderes Logo verwenden möchtet als den Avatar in euren %(settings_link)s."
+
+msgid "Image preview"
+msgstr "Bildvorschau"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Please choose the answers that best fit you."
+msgstr "Bitte wählt die Antworten, die am besten zu euch passen."
+
+msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
+msgstr "Bitte beachtet, dass eure Änderungen in diesem Formular nicht sofort übertragen werden. Es kann bis zu einem Tag dauern, bis die Änderungen im Mitwirk-O-Mat erscheinen."
 
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
@@ -7959,6 +8038,9 @@ msgstr "Projektdashboard"
 msgid "in the Project Dashboard"
 msgstr "im Projektdashboard"
 
+msgid "Project settings"
+msgstr "Projekteinstellungen"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Organisiere dich effizient mit MitstreiterInnen aus deinem Projekt oder deiner Initiative. Alle wichtigen Tools für eine gute Zusammenarbeit, wie Neuigkeiten, Pads, Kalender, Aufgaben, etc. an einem Ort."
 
@@ -8061,6 +8143,24 @@ msgstr "Nur Mitglieder dieses Projekts können diesen Inhalt sehen. Stelle jetzt
 msgid "Note: New recordings can only be made if you have booked premium features for this project."
 msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für dieses Project gebucht wurde."
 
+msgid "If you want your project to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr "Wenn ihr mit eurem Projekt am Mitwirk-O-Mat teilnehmen möchtet, müsst ihr lediglich das folgende Formular ausfüllen."
+
+msgid "Name of your project in the Volunteer-O-Matic"
+msgstr "Name eures Projektes im Mitwirk-O-Mat"
+
+msgid "Description of your project in the Volunteer-O-Matic"
+msgstr "Beschreibung eures Projektes im Mitwirk-O-Mat"
+
+msgid "Logo of your project in the Volunteer-O-Matic"
+msgstr "Logo eures Projektes im Mitwirk-O-Mat"
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your project. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr "Euer Eintrag im Mitwirk-O-Mat verlinkt auf die Microsite eures Projektes. Daher solltet ihr darauf achten, dass diese aktuell, informativ und ansprechend gestaltet ist. Ihr könnt von eurer Microsite auch auf eine externe Website verlinken."
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
+msgstr "Eure Antworten auf die folgenden Fragen entscheiden darüber, wie ihr vom Algorithmus mit den Nutzer/innen gematched werdet. Stellt euch für jede der Aussagen die Frage: Würde eine Person, die der Aussage zustimmt, in dieser Hinsicht zu eurem Projekt passen? Anders ausgedrückt: Ist der Aspekt, um den es in der Aussage geht, charakteristisch für euer Projekt?"
+
 msgid "You are not currently in any Groups"
 msgstr "Du bist noch in keinen Gruppen Mitglied"
 
@@ -8075,6 +8175,9 @@ msgstr "Gruppendashboard"
 
 msgid "in the Group Dashboard"
 msgstr "im Gruppendashboard"
+
+msgid "Group settings"
+msgstr "Gruppeneinstellungen"
 
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
@@ -8169,6 +8272,24 @@ msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt e
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Gruppe gebucht wurde."
 
+msgid "If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr "Wenn ihr mit eurer Gruppe am Mitwirk-O-Mat teilnehmen möchtet, müsst ihr lediglich das folgende Formular ausfüllen."
+
+msgid "Name of your group in the Volunteer-O-Matic"
+msgstr "Name eurer Gruppe im Mitwirk-O-Mat"
+
+msgid "Description of your group in the Volunteer-O-Matic"
+msgstr "Beschreibung eurer Gruppe im Mitwirk-O-Mat"
+
+msgid "Logo of your group in the Volunteer-O-Matic"
+msgstr "Logo eurer Gruppe im Mitwirk-O-Mat"
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr "Euer Eintrag im Mitwirk-O-Mat verlinkt auf die Microsite eurer Gruppe. Daher solltet ihr darauf achten, dass diese aktuell, informativ und ansprechend gestaltet ist. Ihr könnt von eurer Microsite auch auf eine externe Website verlinken."
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
+msgstr "Eure Antworten auf die folgenden Fragen entscheiden darüber, wie ihr vom Algorithmus mit den Nutzer/innen gematched werdet. Stellt euch für jede der Aussagen die Frage: Würde eine Person, die der Aussage zustimmt, in dieser Hinsicht zu eurer Gruppe passen? Anders ausgedrückt: Ist der Aspekt, um den es in der Aussage geht, charakteristisch für eure Gruppe?"
+
 msgid "You are not currently attending any Conferences"
 msgstr "Du nimmst aktuell noch noch an keinen Tagungen teil"
 
@@ -8177,6 +8298,9 @@ msgstr "Meine anstehenden Tagungen"
 
 msgid "Conference Menu"
 msgstr "Tagungsmenü"
+
+msgid "Conference settings"
+msgstr "Tagung-Einstellungen"
 
 msgid "Browse all Conferences"
 msgstr "Alle Tagungen anzeigen"
@@ -8398,8 +8522,8 @@ msgid ""
 "- Further minor bugfixes have been made."
 msgstr ""
 "- Es wurde ein Fehler behoben, bei dem der Gastzugang zu BBB-Meetings manchmal nicht möglich war.\n"
-"- Es wurde ein Fehler behoben, bei dem Benutzer*innen manchmal nicht per E-Mail zu Gruppen oder Projekten eingeladen werden konnten.\n"
-"- Es wurde ein Fehler behoben, bei dem manche Benutzer*innen ihre Passwörter nicht zurücksetzen oder ändern konnten.\n"
+"- Es wurde ein Fehler behoben, bei dem Benutzer/innen manchmal nicht per E-Mail zu Gruppen oder Projekten eingeladen werden konnten.\n"
+"- Es wurde ein Fehler behoben, bei dem manche Benutzer/innen ihre Passwörter nicht zurücksetzen oder ändern konnten.\n"
 "- Es wurde ein Fehler behoben, bei dem der Inhalt von Textboxen des Markdown-Editors erst angezeigt wurde, wenn die Textbox fokussiert wurde.\n"
 "- Es wurde ein Fehler behoben, bei dem iCal-Kalender-Feeds manchmal nicht zugänglich waren.\n"
 "- Weitere kleinere Fehlerbehebungen wurden vorgenommen."
@@ -8478,9 +8602,9 @@ msgid ""
 "- Fixed an issue in the legacy messaging system where the autocomplete function would never finish when entering a recipient.\n"
 "- Fixed an issue where attached images and metadata of todo entries would be removed if completing them from the detail page.\n"
 msgstr ""
-"- Es wurde ein Problem behoben, bei dem direkt eingeladene Benutzer*innen ihr initiales Passwort nicht eingeben konnten.\n"
+"- Es wurde ein Problem behoben, bei dem direkt eingeladene Benutzer/innen ihr initiales Passwort nicht eingeben konnten.\n"
 "- Es wurde ein Problem behoben, bei dem der Link zum Zurücksetzen des Passworts in manchen Fällen nicht funktionierte.\n"
-"- Es wurde ein Problem behoben, bei dem Benutzer*innen nach der Anmeldung nicht korrekt zum Benutzerdashboard weitergeleitet wurden.\n"
+"- Es wurde ein Problem behoben, bei dem Benutzer/innen nach der Anmeldung nicht korrekt zum Benutzerdashboard weitergeleitet wurden.\n"
 "- Es wurde ein Problem behoben, bei dem iCal-Feeds manchmal nicht von externen Kalenderanwendungen aus zugänglich waren.\n"
 "- Es wurde ein Problem behoben, bei dem der direkte Zugriff auf geteilte Pad-URLs zu einer Fehlermeldung führte.\n"
 "- Es wurde ein Problem behoben, bei dem Gastkonten nicht auf Videokonferenzen zugreifen konnten (falls aktiviert).\n"
@@ -8966,6 +9090,12 @@ msgstr "Deine Nachricht wurde abgeschickt."
 
 msgid "Something went wrong. Your message was not sent."
 msgstr "Etwas ging schief. Deine Nachricht wurde nicht abgeschickt."
+
+msgid "This function is not enabled for this group type."
+msgstr "Diese Funktion ist für diesen Gruppentyp nicht aktiviert."
+
+msgid "Your Matching Settings for the Volunteer-O-Matic have been saved."
+msgstr "Deine Matching-Einstellungen für den Mitwirk-O-Mat wurden gespeichert."
 
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Es gab einen Fehler beim Verarbeiten der Avatar-Auswahl. Bitte stell sicher dass du einen gültigen und ausreichend großen Bereich im Bild ausgewählt hast!"

@@ -141,7 +141,7 @@
                         <li {% if request.GET.tab == 'mitwirkomat' %}class="active"{% endif %}>
                             <a href="#mitwirkomat" class="_group-form-tab" role="tab" data-toggle="tab">
                                 <i class="fas fa-comment-alt"></i>
-                                {% trans "Mitwirk-O-Mat Settings" %}
+                                {% trans "Volunteer-O-Matic" %}
                             </a>
                         </li>
 	                {% endif %}
@@ -790,10 +790,7 @@
                             {% block group_mitwirkomat_settings_tab %}
                                 <div class="v-spacer-l">
                                     <p class="textfield transparent">
-                                        {% trans "Let people find you in the Mitwirk-O-Mat!" %}
-                                    </p>
-                                    <p class="textfield transparent">
-                                        {% trans "THIS FRIENDLY INTRO TEXT TELLS YOU ALL ABOUT IT! TODO" %}
+                                        {% trans "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers." %}
                                     </p>
                                 </div>
 
@@ -801,11 +798,11 @@
                                 <p class="textfield transparent">
                                     {% if group %}
                                         <a href="{% group_url 'cosinnus:mitwirkomat-settings' group=group %}" class="transparent" target="_blank">
-                                            {% trans "Go to the Mitwirk-O-Mat Settings now" %}
+                                            {% trans "Go to the Matching Settings for the Volunteer-O-Matic Settings now" %}
                                             <i class="fa fa-external-link"></i>
                                         </a>
                                     {% else %}
-                                            <i>({% trans "You can visit the Mitwirk-O-Mat Settings after saving." %})</i>
+                                            <i>({% trans "You can visit the Matching Settings for the Volunteer-O-Matic after saving." %})</i>
                                     {% endif %}
                                 </p>
                                 </div>

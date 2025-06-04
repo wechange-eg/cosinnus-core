@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-07 10:52+0200\n"
+"POT-Creation-Date: 2025-06-04 17:15+0200\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2067,6 +2067,35 @@ msgstr ""
 msgid "Is Moderator"
 msgstr "Moderatordur"
 
+msgid "Fits us"
+msgstr ""
+
+msgid "Partly fits us"
+msgstr ""
+
+msgid "Does not fit us"
+msgstr ""
+
+msgid "Group for Mitwirk-O-Mat Settings"
+msgstr ""
+
+msgid "Determines if the Mitwirk-O-Mat data for this group should displayed in the API."
+msgstr ""
+
+msgid "Replacement description for the group description. If empty, falls back to `group.description_long` which falls back to `group.description`."
+msgstr ""
+
+msgid "Replacement avatar for the group avatar. If empty, falls back to group.avatar."
+msgstr ""
+
+#, fuzzy
+#| msgid ", for the following reason:"
+msgid "User-set answers to Mitwirk-O-Mat questions"
+msgstr ", aşağıdakı səbəblərə görə:"
+
+msgid "Mitwirk-O-Mat Settings"
+msgstr ""
+
 #, fuzzy
 msgid "ToS accepted"
 msgstr "ToS qəbul edildi?"
@@ -3177,8 +3206,15 @@ msgstr "Komandanın Təsviri"
 msgid "Members"
 msgstr "Üzvlər"
 
+msgid "Volunteer-O-Matic"
+msgstr ""
+
 msgid "Settings"
 msgstr "Parametrlər"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
+msgstr "Təhqiramiz məzmunu bildirin"
 
 msgid "Drag and Drop files here..."
 msgstr "Faylları daşıyıb buraya salın..."
@@ -4396,10 +4432,6 @@ msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsi
 msgid "Close"
 msgstr "Bağlayın"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Report offensive content"
-msgstr "Təhqiramiz məzmunu bildirin"
-
 #, fuzzy
 msgid "Sorry, this feature is only available for registered members."
 msgstr "Telefon nömrəniz yalnız qeydiyyatdan keçmiş istifadəçilər üçün görünür"
@@ -5167,6 +5199,15 @@ msgid "Facebook integration is available after you created the project!"
 msgstr "Layihəni yaratdıqdan sonra Facebook inteqrasiyası mümkündür!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
+msgstr ""
+
+msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
+msgstr ""
+
+msgid "Go to the Matching Settings for the Volunteer-O-Matic Settings now"
+msgstr ""
+
+msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
 msgstr ""
 
 msgid "About me"
@@ -6188,6 +6229,52 @@ msgstr "Yalnız daxil olan Üzvlər"
 
 msgid "Everybody"
 msgstr "Hər kəs"
+
+msgid "Matching Settings for the Volunteer-O-Matic"
+msgstr ""
+
+#, fuzzy
+#| msgid "Where"
+msgid "here"
+msgstr "Hara"
+
+#, python-format
+msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
+msgstr ""
+
+msgid "Participate in the Volunteer-O-Matic with "
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different name than the one in your %(settings_link)s."
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different description than the one in your %(settings_link)s."
+msgstr ""
+
+msgid "Character limit"
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different logo than the one in your %(settings_link)s."
+msgstr ""
+
+#, fuzzy
+#| msgid "Open Preview"
+msgid "Image preview"
+msgstr "İlkin baxışı açın"
+
+#, fuzzy
+#| msgid "Link URL"
+msgid "Link"
+msgstr "Linkin URL-ı"
+
+msgid "Please choose the answers that best fit you."
+msgstr ""
+
+msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
+msgstr ""
 
 msgid "Toggle navigation"
 msgstr "Naviqasiyanı keçirin"
@@ -8307,6 +8394,11 @@ msgstr "İdarə paneli"
 msgid "in the Project Dashboard"
 msgstr "İdarə paneli"
 
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Project settings"
+msgstr "Məxfilik parametrləri"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Layihələrinizi və ya təşəbbüslərinizi həmkarlarınızla səmərəli şəkildə təşkil edin. Bir yerdə işləmək üçün bütün vacib vasitələr: Xəbərlər, Yastıqcıqlar, Tədbirlər, Etməli olduğumuzların siyahısı və və s."
 
@@ -8418,6 +8510,24 @@ msgstr "Tələb etdiyiniz məzmunu yalnız komanda üzvləri görə bilər. İnd
 msgid "Note: New recordings can only be made if you have booked premium features for this project."
 msgstr ""
 
+msgid "If you want your project to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Name of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your project. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
+msgstr ""
+
 #, fuzzy
 msgid "You are not currently in any Groups"
 msgstr "Hələ heç bir qrupda və ya layihədə deyilsiniz"
@@ -8437,6 +8547,11 @@ msgstr "İdarə paneli"
 #, fuzzy
 msgid "in the Group Dashboard"
 msgstr "İdarə paneli"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Group settings"
+msgstr "Məxfilik parametrləri"
 
 #, fuzzy
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
@@ -8541,6 +8656,24 @@ msgstr "Tələb etdiyiniz məzmunu yalnız komanda üzvləri görə bilər. İnd
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr ""
 
+msgid "If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Name of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
+msgstr ""
+
 #, fuzzy
 msgid "You are not currently attending any Conferences"
 msgstr "Heç bir Tədbir dəvətinə cavab verməmisiniz."
@@ -8551,6 +8684,10 @@ msgstr "Video konfrans Serveri"
 
 #, fuzzy
 msgid "Conference Menu"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Conference settings"
 msgstr "Video konfrans Serveri"
 
 #, fuzzy
@@ -9293,6 +9430,13 @@ msgid "Your message has been sent."
 msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 
 msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
+#, fuzzy
+msgid "This function is not enabled for this group type."
+msgstr "Layihə üçün bir ad daxil edin."
+
+msgid "Your Matching Settings for the Volunteer-O-Matic have been saved."
 msgstr ""
 
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"

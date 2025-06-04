@@ -37,7 +37,7 @@
 
     {% if group.show_mitwirkomat_settings %}
 	    {% captureas href %}{% group_url 'cosinnus:mitwirkomat-settings' group=group %}{% endcaptureas %}
-        {% captureas label %}{% trans "Mitwirk-O-Mat Settings" %}{% endcaptureas %}
+        {% captureas label %}{% trans "Volunteer-O-Matic" %}{% endcaptureas %}
         {% include "cosinnus/leftnav_button.html" with active=is_mitwirkomat_settings extra_classes="fine-space" icon_full_class="fas fa-comment-alt" label=label href=href  %}
     {% endif %}
 {% endif %}

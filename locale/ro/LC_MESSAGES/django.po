@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-07 10:52+0200\n"
+"POT-Creation-Date: 2025-06-04 17:15+0200\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2061,6 +2061,35 @@ msgstr ""
 msgid "Is Moderator"
 msgstr "Este Moderator"
 
+msgid "Fits us"
+msgstr ""
+
+msgid "Partly fits us"
+msgstr ""
+
+msgid "Does not fit us"
+msgstr ""
+
+msgid "Group for Mitwirk-O-Mat Settings"
+msgstr ""
+
+msgid "Determines if the Mitwirk-O-Mat data for this group should displayed in the API."
+msgstr ""
+
+msgid "Replacement description for the group description. If empty, falls back to `group.description_long` which falls back to `group.description`."
+msgstr ""
+
+msgid "Replacement avatar for the group avatar. If empty, falls back to group.avatar."
+msgstr ""
+
+#, fuzzy
+#| msgid ", for the following reason:"
+msgid "User-set answers to Mitwirk-O-Mat questions"
+msgstr ", din următoarele motive:"
+
+msgid "Mitwirk-O-Mat Settings"
+msgstr ""
+
 #, fuzzy
 msgid "ToS accepted"
 msgstr "ToS admis?"
@@ -3175,8 +3204,15 @@ msgstr "Descrierea Echipei"
 msgid "Members"
 msgstr "Membrii"
 
+msgid "Volunteer-O-Matic"
+msgstr ""
+
 msgid "Settings"
 msgstr "Setări"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
+msgstr "Raportați conținutul ofensator"
 
 msgid "Drag and Drop files here..."
 msgstr "Trageți și aruncați fișierele aici..."
@@ -4401,10 +4437,6 @@ msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
 msgid "Close"
 msgstr "Închide"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Report offensive content"
-msgstr "Raportați conținutul ofensator"
-
 #, fuzzy
 msgid "Sorry, this feature is only available for registered members."
 msgstr "Numărul dvs.de telefon este vizibil numai pentru utilizatorii înregistrați"
@@ -5173,6 +5205,15 @@ msgstr "Integrarea Facebook este disponibilă după ce ați creat proiectul!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Codul HTML introdus aici va fi afișat pe tabloul de board al grupului/proiectului (numai pentru membri)"
+
+msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
+msgstr ""
+
+msgid "Go to the Matching Settings for the Volunteer-O-Matic Settings now"
+msgstr ""
+
+msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
+msgstr ""
 
 msgid "About me"
 msgstr "Despre mine"
@@ -6199,6 +6240,52 @@ msgstr "Autentificat numai Membrii"
 
 msgid "Everybody"
 msgstr "Toată lumea"
+
+msgid "Matching Settings for the Volunteer-O-Matic"
+msgstr ""
+
+#, fuzzy
+#| msgid "Where"
+msgid "here"
+msgstr "Unde"
+
+#, python-format
+msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
+msgstr ""
+
+msgid "Participate in the Volunteer-O-Matic with "
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different name than the one in your %(settings_link)s."
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different description than the one in your %(settings_link)s."
+msgstr ""
+
+msgid "Character limit"
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different logo than the one in your %(settings_link)s."
+msgstr ""
+
+#, fuzzy
+#| msgid "Open Preview"
+msgid "Image preview"
+msgstr "Deschideți Previzualizarea"
+
+#, fuzzy
+#| msgid "Link URL"
+msgid "Link"
+msgstr "Link-ul URL-lui"
+
+msgid "Please choose the answers that best fit you."
+msgstr ""
+
+msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
+msgstr ""
 
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
@@ -8312,6 +8399,11 @@ msgstr "Proiectul Bordului de Tablou"
 msgid "in the Project Dashboard"
 msgstr "Proiectul Bordului de Tablou"
 
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Project settings"
+msgstr "Setările de confidențialitate"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Organizează-ți eficient proiectele sau inițiativele împreună cu colegii de campanie. Toate instrumentele importante pentru colaborarea într-un singur loc: Știri, PAD-uri, Evenimente, Todos și multe altele."
 
@@ -8423,6 +8515,24 @@ msgstr "Numai membrii echipei pot vedea conținutul pe care l-ați solicitat. Ap
 msgid "Note: New recordings can only be made if you have booked premium features for this project."
 msgstr ""
 
+msgid "If you want your project to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Name of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your project. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
+msgstr ""
+
 #, fuzzy
 msgid "You are not currently in any Groups"
 msgstr "Nu sunteți încă în nici un grup sau proiect"
@@ -8440,6 +8550,11 @@ msgstr "Grupului de Bord al Tablou"
 #, fuzzy
 msgid "in the Group Dashboard"
 msgstr "Grupului de Bord al Tablou"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Group settings"
+msgstr "Setările de confidențialitate"
 
 #, fuzzy
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
@@ -8544,6 +8659,24 @@ msgstr "Numai membrii echipei pot vedea conținutul pe care l-ați solicitat. Ap
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr ""
 
+msgid "If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Name of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
+msgstr ""
+
 #, fuzzy
 msgid "You are not currently attending any Conferences"
 msgstr "Nu ați creat încă nicio organizație."
@@ -8555,6 +8688,10 @@ msgstr "Este conferință"
 #, fuzzy
 msgid "Conference Menu"
 msgstr "Pagina Conferinței"
+
+#, fuzzy
+msgid "Conference settings"
+msgstr "Setările Conferinței"
 
 #, fuzzy
 msgid "Browse all Conferences"
@@ -9298,6 +9435,13 @@ msgid "Your message has been sent."
 msgstr "Schimbările tale au fost salvate."
 
 msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
+#, fuzzy
+msgid "This function is not enabled for this group type."
+msgstr "Introduceți un nume pentru proiect."
+
+msgid "Your Matching Settings for the Volunteer-O-Matic have been saved."
 msgstr ""
 
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"

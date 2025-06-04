@@ -1603,6 +1603,10 @@ class CosinnusConf(AppConf):
         1,  # CosinnusBaseGroup.TYPE_SOCIETY,
     ]
 
+    # the outgoing target link of where the actual Mitwirk-O-Mat website for this portal is.
+    # Used in explanatory texts for the user only.
+    MITWIRKOMAT_EXTERNAL_LINK = 'https://TODOADDURL.com'
+
     # the label dict for the Mitwirk-O-Mat integration when `MITWIRKOMAT_INTEGRATION_ENABLED=True`
     # note: since this is a dict, the order is given by the numeric key sort order,
     # not by how these are listed! reordering these will not change anything, neither in form nor in the export.

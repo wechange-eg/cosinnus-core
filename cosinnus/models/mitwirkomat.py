@@ -18,9 +18,9 @@ class MitwirkomatSettings(models.Model):
     QUESTION_VALUE_MATCH = '1'
 
     QUESTION_CHOICES = (
-        (QUESTION_VALUE_NO_MATCH, _('Does not fit us')),
-        (QUESTION_VALUE_PARTIAL_MATCH, _('Partly fits us')),
         (QUESTION_VALUE_MATCH, _('Fits us')),
+        (QUESTION_VALUE_PARTIAL_MATCH, _('Partly fits us')),
+        (QUESTION_VALUE_NO_MATCH, _('Does not fit us')),
     )
     QUESTION_DEFAULT = QUESTION_VALUE_PARTIAL_MATCH
 
