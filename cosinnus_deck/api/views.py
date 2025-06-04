@@ -32,14 +32,21 @@ class DeckProxyApiMixin:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         return None
 
-    def proxy_api_call(self, api_func, *args, **kwargs):
+    def proxy_api_call(self, request, api_func, *args, **kwargs):
         """
         Wrapper for DeckConnection API calls.
         Creates a DRF Response using the status code and json content from the API.
         """
+
+        # proxy the x-nc-deck-session header
+        extra_header = {}
+        x_nc_deck_session_header_value = request.META.get('HTTP_X_NC_DECK_SESSION')
+        if x_nc_deck_session_header_value:
+            extra_header['x-nc-deck-session'] = x_nc_deck_session_header_value
+
         response_status = status.HTTP_500_INTERNAL_SERVER_ERROR
         try:
-            deck = DeckConnection()
+            deck = DeckConnection(extra_header=extra_header)
             response = getattr(deck, api_func)(*args, **kwargs)
             response_status = response.status_code
             response_json = response.json()
@@ -82,6 +89,7 @@ class DeckStacksView(DeckProxyApiMixin, APIView):
 
         # return proxy api response
         response = self.proxy_api_call(
+            request,
             'stack_create',
             board_id,
             serializer.validated_data['title'],
@@ -123,6 +131,7 @@ class DeckStackView(DeckProxyApiMixin, APIView):
 
         # return proxy api response
         response = self.proxy_api_call(
+            request,
             'stack_update',
             board_id,
             stack_id,
@@ -142,6 +151,7 @@ class DeckStackView(DeckProxyApiMixin, APIView):
 
         # return proxy api response
         response = self.proxy_api_call(
+            request,
             'stack_delete',
             board_id,
             stack_id,
@@ -182,6 +192,7 @@ class DeckLabelsView(DeckProxyApiMixin, APIView):
 
         # return proxy api response
         response = self.proxy_api_call(
+            request,
             'label_create',
             board_id,
             serializer.validated_data['title'],
@@ -223,6 +234,7 @@ class DeckLabelView(DeckProxyApiMixin, APIView):
 
         # return proxy api response
         response = self.proxy_api_call(
+            request,
             'label_update',
             board_id,
             label_id,
@@ -242,6 +254,7 @@ class DeckLabelView(DeckProxyApiMixin, APIView):
 
         # return proxy api response
         response = self.proxy_api_call(
+            request,
             'label_delete',
             board_id,
             label_id,

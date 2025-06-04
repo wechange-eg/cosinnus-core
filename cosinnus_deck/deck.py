@@ -15,24 +15,31 @@ class DeckConnectionException(Exception):
 
 class DeckConnection:
     BASE_URL = f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/index.php/apps/deck/api/v1.0'
-    HEADERS = {'OCS-APIRequest': 'true', 'Accept': 'application/json'}
-    API_PARAMS = {'auth': settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH, 'headers': HEADERS}
+
+    # API parameter including auth and header set in __init__
+    _api_params = None
+
+    def __init__(self, extra_header=None):
+        headers = {'OCS-APIRequest': 'true', 'Accept': 'application/json'}
+        if extra_header:
+            headers.update(**extra_header)
+        self._api_params = {'auth': settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH, 'headers': headers}
 
     def _api_get(self, url):
         """API GET wrapper."""
-        return requests.get(self.BASE_URL + url, **self.API_PARAMS)
+        return requests.get(self.BASE_URL + url, **self._api_params)
 
     def _api_post(self, url, data):
         """API POST wrapper."""
-        return requests.post(self.BASE_URL + url, json=data, **self.API_PARAMS)
+        return requests.post(self.BASE_URL + url, json=data, **self._api_params)
 
     def _api_put(self, url, data):
         """API PUT wrapper."""
-        return requests.put(self.BASE_URL + url, json=data, **self.API_PARAMS)
+        return requests.put(self.BASE_URL + url, json=data, **self._api_params)
 
     def _api_delete(self, url):
         """API DELETE wrapper."""
-        return requests.delete(self.BASE_URL + url, **self.API_PARAMS)
+        return requests.delete(self.BASE_URL + url, **self._api_params)
 
     def _is_deck_app_active_for_group(self, group):
         """Check if the deck app activated in a group."""
