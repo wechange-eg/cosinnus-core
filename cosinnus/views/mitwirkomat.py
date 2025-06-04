@@ -86,7 +86,7 @@ class MitwirkomatSettingsView(
             instance = form.save()
             self.json_field_formset_pre_save_hook(instance)
             instance.save()
-        messages.success(self.request, _('Your Mitwirk-O-Mat settings have been saved.'))
+        messages.success(self.request, _('Your Matching Settings for the Volunteer-O-Matic have been saved.'))
 
         return HttpResponseRedirect(self.get_success_url())
 

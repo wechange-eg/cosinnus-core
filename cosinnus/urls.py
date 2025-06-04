@@ -665,7 +665,7 @@ for url_key in group_model_registry:
     if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
         urlpatterns += [
             path(
-                f'{url_key}/<str:group>/mitwirkomat/',
+                f'{url_key}/<str:group>/matching_settings/',
                 mitwirkomat.mitwirkomat_settings_view,
                 name=prefix + 'mitwirkomat-settings',
             ),

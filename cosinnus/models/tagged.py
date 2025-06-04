@@ -892,7 +892,10 @@ def ensure_container(sender, **kwargs):
     created = kwargs.get('created', False)
     if created:
         for model_class in BaseHierarchicalTaggableObjectModel.__subclasses__():
-            if not model_class._meta.abstract:
+            if (
+                not model_class._meta.abstract
+                and model_class._meta.app_label not in settings.COSINNUS_DISABLED_COSINNUS_APPS
+            ):
                 model_class.objects.create(
                     group=kwargs.get('instance'), slug='_root_', title='_root_', path='/', is_container=True
                 )
