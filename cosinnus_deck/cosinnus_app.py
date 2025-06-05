@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.core.exceptions import ImproperlyConfigured
 
-from cosinnus.conf import settings
+from cosinnus_deck.conf import settings
 
 
 def register():
