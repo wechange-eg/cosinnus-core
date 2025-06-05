@@ -126,7 +126,7 @@ class DeckIntegrationHandler(CosinnusBaseIntegrationHandler):
         group = CosinnusGroup.objects.filter(pk=group_id).first()
         if group and group.nextcloud_group_id and not group.nextcloud_deck_board_id:
             deck = DeckConnection()
-            deck.group_board_create(group)
+            deck.group_board_create(group, initialize_board_content=True)
 
     @staticmethod
     @celery_app.task(base=DeckTask)
