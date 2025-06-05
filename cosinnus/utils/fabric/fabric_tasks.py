@@ -62,44 +62,6 @@ def do_things(c):
 
 
 @task
-def __deprecated__deploy(_ctx, do_maintenance=True):
-    """
-    Note: not used anymore since we have been using poetry, as inplace `poetry update`s are a bad idea.
-          Use `hotdeploy` or `fulldeploy` instead!
-
-    Main deploy command, full deploy with dependency update, raising a downtime banner
-    on the entire site, blocking any user access.
-
-    Will do the following in order:
-        * pull up a maintenance notice page
-        * stop the servers
-        * do a DB backup
-        * pull from git
-        * pip update
-        * migrate
-        * start the servers
-        * remove the maintenance notice page
-    """
-    check_confirmation()
-    backup(_ctx)
-    if do_maintenance:
-        maintenanceon(_ctx)
-    stop(_ctx)
-    _pull_and_update()
-    enablegitremoteoncore()
-    # restart_db()
-    migrate(_ctx)
-    start(_ctx)
-    clearportalcache(_ctx)
-    compilewebpack(_ctx)
-    collectstatic(_ctx)
-    compileless(_ctx)
-    if do_maintenance:
-        maintenanceoff(_ctx)
-    print('\n\n>> Deploy has finished successfully.\n')
-
-
-@task
 def hotdeploy(_ctx):
     """Fast deploy with poetry update and soft server restarts. No downtime-banner raised.
     Recommended only for hotfixes that do not require dependency package updates."""
@@ -525,6 +487,7 @@ def _pull_and_update(use_poetry_update=False, fresh_install=False):
         c.run('git pull')
         if fresh_install:
             c.run('poetry install')
+            enablegitremoteoncore()
         else:
             with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
                 if env.legacy_mode:
