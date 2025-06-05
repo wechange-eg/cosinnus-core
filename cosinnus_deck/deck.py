@@ -121,12 +121,17 @@ class DeckConnection:
                 logger.warning('Deck: Invalid response received!', extra={'response': response})
 
         # delete default labels
-        if board_details:
+        if board_details and settings.COSINNUS_DECK_GROUP_BOARD_DELETE_DEFAULT_LABELS:
             default_labels = board_details.get('labels')
             if default_labels:
                 for label in default_labels:
+                    label_title = label.get('title')
                     label_id = label.get('id')
-                    if label_id:
+                    if (
+                        label_id
+                        and label_title
+                        and label_title in settings.COSINNUS_DECK_GROUP_BOARD_DELETE_DEFAULT_LABELS
+                    ):
                         self.label_delete(board_id, label_id, raise_deck_connection_exception=False)
 
         # create initial stacks

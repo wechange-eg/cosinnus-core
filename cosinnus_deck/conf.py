@@ -11,6 +11,9 @@ class CosinnusDeckDefaultSettings(AppConf):
     class Meta(object):
         prefix = ''
 
+    # Default labels created by the Deck app that are be automatically deleted when initializing a group board.
+    COSINNUS_DECK_GROUP_BOARD_DELETE_DEFAULT_LABELS = ['Action needed', 'Finished', 'Later', 'To review']
+
     # Initial labels, stacks and cards that are automatically created for a new group board.
     # Available variables in card description: %(portal_url)s
     COSINNUS_DECK_GROUP_BOARD_INITIAL_CONTENT = {
