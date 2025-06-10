@@ -13,6 +13,7 @@ from django.utils.translation import pgettext
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import ValidationError
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -871,6 +872,68 @@ class AlertsView(APIView):
                 icon_or_image_url = domain + icon_or_image_url
             serialized_alert[key_prefix + 'image'] = icon_or_image_url
             serialized_alert[key_prefix + 'icon'] = None
+
+
+class AlertsMarkAllReadView(APIView):
+    """
+    An endpoint that simply marks all of the user's alerts as read and
+    returns the number of previously unread alerts that were newly marked as read.
+    """
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+
+    @swagger_auto_schema(
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'marked_as_read': 12,
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            )
+        },
+    )
+    def post(self, request):
+        marked_as_read = 0
+        if request.user.is_authenticated:
+            queryset = self.get_queryset()
+            # mark alerts as read
+            marked_as_read = queryset.update(seen=True)
+
+            # delete cache for user's alerts
+            unread_alerts_cache_key = UNREAD_ALERTS_USER_CACHE_KEY % (
+                CosinnusPortal.get_current().id,
+                request.user.pk,
+            )
+            cache.delete(unread_alerts_cache_key)
+
+        response = {
+            'marked_as_read': marked_as_read,
+        }
+        return Response(response)
+
+    def get_queryset(self):
+        """Returns all unseen alerts for the user"""
+        alerts_qs = NotificationAlert.objects.filter(
+            portal=CosinnusPortal.get_current(), user=self.request.user, seen=False, action_user__is_active=True
+        )
+        return alerts_qs
 
 
 class MembershipAlertsView(APIView):
