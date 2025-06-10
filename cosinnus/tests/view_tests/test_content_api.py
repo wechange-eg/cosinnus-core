@@ -173,7 +173,8 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertEqual(sub_navigation_apps['icon'], 'icon_apps_2')
         # note: "active" means it is the active app's item, not selected with a caret!
         self.assertFalse(sub_navigation_apps['selected'])
-        self.assertEqual(len(sub_navigation_apps['sub_items']), 4)
+
+        self.assertEqual(len(sub_navigation_apps['sub_items']), 5)
         # check Action button that will be added to the active app button as context action
         self.assertEqual(len(sub_navigation_apps['actions']), 1)
         sub_navigation1_action = sub_navigation_apps['actions'][0]
@@ -192,9 +193,19 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertEqual(sub_navigation1['url'], '/leftnav-button-link/')
         self.assertEqual(sub_navigation1['icon'], 'icon1')
         self.assertTrue(sub_navigation1['selected'])
+        self.assertEqual(sub_navigation1.get('type', None), None)
+
+        # check other, regular leftnav button, with custom type="download"
+        sub_navigation_dl = sub_items[1]
+        self.assertIn('Sidebar-', sub_navigation_dl['id'])
+        self.assertEqual(sub_navigation_dl['label'], 'Leftnav Button Download')
+        self.assertEqual(sub_navigation_dl['url'], '/leftnav-button-link-download/')
+        self.assertEqual(sub_navigation_dl['icon'], 'fa-download')
+        self.assertFalse(sub_navigation_dl['selected'])
+        self.assertEqual(sub_navigation_dl['type'], 'download')
 
         # check other, regular leftnav button, with overridden icon
-        sub_navigation2 = sub_items[1]
+        sub_navigation2 = sub_items[2]
         self.assertIn('Sidebar-', sub_navigation2['id'])
         self.assertEqual(sub_navigation2['label'], 'Leftnav Button 2')
         self.assertEqual(sub_navigation2['url'], '/leftnav-button-link-2/')
@@ -202,7 +213,7 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertFalse(sub_navigation2['selected'])
 
         # check leftnav button with number badge
-        sub_navigation3 = sub_items[2]
+        sub_navigation3 = sub_items[3]
         self.assertIn('Sidebar-', sub_navigation3['id'])
         self.assertEqual(sub_navigation3['label'], 'Leftnav Button 3')
         self.assertEqual(sub_navigation3['url'], '/leftnav-button-link-3/')
@@ -211,7 +222,7 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertFalse(sub_navigation3['selected'])
 
         # check leftnav button which will have an acction attached because of the 2nd button below it
-        sub_navigation4 = sub_items[3]
+        sub_navigation4 = sub_items[4]
         self.assertIn('Sidebar-', sub_navigation4['id'])
         self.assertEqual(sub_navigation4['label'], 'Leftnav Button 4')
         self.assertEqual(sub_navigation4['url'], '/leftnav-button-link-4/')
