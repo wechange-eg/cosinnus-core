@@ -107,6 +107,7 @@ class CosinnusProjectTransBase(object):
         'If you want your project to participate in the Volunteer-O-Matic, '
         'you only have to fill out the following form.'
     )
+    MITWIRKOMAT_GO_TO_SETTINGS_LINK = _('Go to the Matching Settings of your project for the Volunteer-O-Matic')
     MITWIRKOMAT_FIELD_NAME_LABEL = _('Name of your project in the Volunteer-O-Matic')
     MITWIRKOMAT_FIELD_DESCRIPTION_LABEL = _('Description of your project in the Volunteer-O-Matic')
     MITWIRKOMAT_FIELD_AVATAR_LABEL = _('Logo of your project in the Volunteer-O-Matic')
@@ -220,6 +221,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     MITWIRKOMAT_PARTICIPATE = _(
         'If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form.'
     )
+    MITWIRKOMAT_GO_TO_SETTINGS_LINK = _('Go to the Matching Settings of your group for the Volunteer-O-Matic')
     MITWIRKOMAT_FIELD_NAME_LABEL = _('Name of your group in the Volunteer-O-Matic')
     MITWIRKOMAT_FIELD_DESCRIPTION_LABEL = _('Description of your group in the Volunteer-O-Matic')
     MITWIRKOMAT_FIELD_AVATAR_LABEL = _('Logo of your group in the Volunteer-O-Matic')
@@ -332,6 +334,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     )
 
     MITWIRKOMAT_PARTICIPATE = ''  # not availablle for conferences
+    MITWIRKOMAT_GO_TO_SETTINGS_LINK = ''  # not availablle for conferences
     MITWIRKOMAT_FIELD_NAME_LABEL = ''  # not availablle for conferences
     MITWIRKOMAT_FIELD_DESCRIPTION_LABEL = ''  # not availablle for conferences
     MITWIRKOMAT_FIELD_AVATAR_LABEL = ''  # not availablle for conferences

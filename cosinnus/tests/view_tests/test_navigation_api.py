@@ -327,6 +327,7 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.api_url = reverse('cosinnus:frontend-api:api-navigation-alerts')
+        cls.api_mark_all_url = reverse('cosinnus:frontend-api:api-navigation-alerts-mark-all-read')
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
@@ -415,6 +416,15 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
         response = self.client.get(self.api_url)
         self.assertTrue(response.data['items'][0]['is_emphasized'])
         response = self.client.get(self.api_url + '?mark_as_read=true')
+        self.assertFalse(response.data['items'][0]['is_emphasized'])
+
+    def test_alerts_mark_all_as_read(self):
+        self.client.force_login(self.test_user)
+        self.create_test_alert()
+        response = self.client.get(self.api_url)
+        self.assertTrue(response.data['items'][0]['is_emphasized'])
+        response = self.client.post(self.api_mark_all_url, data={})
+        response = self.client.get(self.api_url)
         self.assertFalse(response.data['items'][0]['is_emphasized'])
 
     def test_alerts_anonymous(self):

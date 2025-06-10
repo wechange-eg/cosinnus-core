@@ -5401,6 +5401,12 @@ msgstr ""
 msgid "Go to the Matching Settings for the Volunteer-O-Matic Settings now"
 msgstr ""
 
+msgid "Go to the Matching Settings of your group for the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Go to the Matching Settings of your project for the Volunteer-O-Matic"
+msgstr ""
+
 msgid "Going"
 msgstr ""
 
