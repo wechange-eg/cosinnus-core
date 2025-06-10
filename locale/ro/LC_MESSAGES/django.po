@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-04 17:15+0200\n"
+"POT-Creation-Date: 2025-06-10 09:36+0200\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5209,9 +5209,6 @@ msgstr "Codul HTML introdus aici va fi afișat pe tabloul de board al grupului/p
 msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
 msgstr ""
 
-msgid "Go to the Matching Settings for the Volunteer-O-Matic Settings now"
-msgstr ""
-
 msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
 msgstr ""
 
@@ -8518,6 +8515,9 @@ msgstr ""
 msgid "If you want your project to participate in the Volunteer-O-Matic, you only have to fill out the following form."
 msgstr ""
 
+msgid "Go to the Matching Settings of your project for the Volunteer-O-Matic"
+msgstr ""
+
 msgid "Name of your project in the Volunteer-O-Matic"
 msgstr ""
 
@@ -8660,6 +8660,9 @@ msgid "Note: New recordings can only be made if you have booked premium features
 msgstr ""
 
 msgid "If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Go to the Matching Settings of your group for the Volunteer-O-Matic"
 msgstr ""
 
 msgid "Name of your group in the Volunteer-O-Matic"

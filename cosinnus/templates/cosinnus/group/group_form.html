@@ -798,7 +798,7 @@
                                 <p class="textfield transparent">
                                     {% if group %}
                                         <a href="{% group_url 'cosinnus:mitwirkomat-settings' group=group %}" class="transparent" target="_blank">
-                                            {% trans "Go to the Matching Settings for the Volunteer-O-Matic Settings now" %}
+                                            {{ group_model_class.get_trans.MITWIRKOMAT_GO_TO_SETTINGS_LINK }}
                                             <i class="fa fa-external-link"></i>
                                         </a>
                                     {% else %}

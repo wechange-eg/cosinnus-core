@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-04 17:15+0200\n"
+"POT-Creation-Date: 2025-06-10 09:36+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4926,10 +4926,7 @@ msgid "The HTML entered here will be displayed on the group/project dashboard (o
 msgstr "Das hier eingegebene HTML wird auf dem Gruppen/Projektdashboard dargestellt (nur für Mitglieder)"
 
 msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
-msgstr "Der Mitwirk-O-Mat ist ein spielerisches Matching-Tool, das Nutzer/innen dabei hilft, passende Gruppen und Projekte zu finden, wo sie sich engagieren können. Gleichzeitig kann der Mitwirk-O-Mat Gruppen und Projekten wie eurem dabei helfen, neue Freiwillige zu finden."
-
-msgid "Go to the Matching Settings for the Volunteer-O-Matic Settings now"
-msgstr "Jetzt zu den Matching-Einstellungen für den Mitwirk-O-Mat gehen"
+msgstr "Der Mitwirk-O-Mat ist ein spielerisches Matching-Tool, das Nutzer/innen dabei hilft, passende Gruppen und Projekte zu finden, bei denen sie sich engagieren können. Gleichzeitig kann der Mitwirk-O-Mat Gruppen und Projekten wie eurem dabei helfen, neue Freiwillige zu finden."
 
 msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
 msgstr "Du kannst zu den Matching-Einstellungen für den Mitwirk-O-Mat gehen, nachdem du gespeichert hast."
@@ -5969,7 +5966,7 @@ msgstr "hier"
 
 #, python-format
 msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
-msgstr "Der Mitwirk-O-Mat ist %(here_link)s veröffentlicht. Nutzer/innen beantworten die kurzen Fragen zu ihren Stärken und Interessen. Basierend auf den Antworten berechnet der Algorithmus die Übereinstimmung zwischen Nutzer:in und allen teilnehmenden Gruppen und Projekten. Diejenigen Gruppen und Projekte mit der höchsten Übereinstimmung werden den Nutzer:innen in ihrem persönlichen Ranking vorgeschlagen. Die Nutzer/innen können sich nun über ihre \"Matches\" informieren und zu ihren Favoriten Kontakt aufnehmen."
+msgstr "Der Mitwirk-O-Mat ist %(here_link)s veröffentlicht. Nutzer/innen beantworten die kurzen Fragen zu ihren Stärken und Interessen. Basierend auf den Antworten berechnet der Algorithmus die Übereinstimmung zwischen Nutzer/in und allen teilnehmenden Gruppen und Projekten. Diejenigen Gruppen und Projekte mit der höchsten Übereinstimmung werden den Nutzer/innen in ihrem persönlichen Ranking vorgeschlagen. Die Nutzer/innen können sich nun über ihre \"Matches\" informieren und zu ihren Favoriten Kontakt aufnehmen."
 
 msgid "Participate in the Volunteer-O-Matic with "
 msgstr "Am Mitwirk-O-Mat teilnehmen mit"
@@ -5987,7 +5984,7 @@ msgstr "Zeichenlimit"
 
 #, python-format
 msgid "Enter only if you want to set a different logo than the one in your %(settings_link)s."
-msgstr "ur auswählen, falls ihr ein anderes Logo verwenden möchtet als den Avatar in euren %(settings_link)s."
+msgstr "Nur auswählen, falls ihr ein anderes Logo verwenden möchtet als den Avatar in euren %(settings_link)s."
 
 msgid "Image preview"
 msgstr "Bildvorschau"
@@ -8146,6 +8143,9 @@ msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premiu
 msgid "If you want your project to participate in the Volunteer-O-Matic, you only have to fill out the following form."
 msgstr "Wenn ihr mit eurem Projekt am Mitwirk-O-Mat teilnehmen möchtet, müsst ihr lediglich das folgende Formular ausfüllen."
 
+msgid "Go to the Matching Settings of your project for the Volunteer-O-Matic"
+msgstr "Zu den Matching-Einstellungen eures Projektes für den Mitwirk-O-Mat"
+
 msgid "Name of your project in the Volunteer-O-Matic"
 msgstr "Name eures Projektes im Mitwirk-O-Mat"
 
@@ -8274,6 +8274,9 @@ msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premiu
 
 msgid "If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form."
 msgstr "Wenn ihr mit eurer Gruppe am Mitwirk-O-Mat teilnehmen möchtet, müsst ihr lediglich das folgende Formular ausfüllen."
+
+msgid "Go to the Matching Settings of your group for the Volunteer-O-Matic"
+msgstr "Zu den Matching-Einstellungen eurer Gruppe für den Mitwirk-O-Mat"
 
 msgid "Name of your group in the Volunteer-O-Matic"
 msgstr "Name eurer Gruppe im Mitwirk-O-Mat"
