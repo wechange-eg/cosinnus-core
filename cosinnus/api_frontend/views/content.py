@@ -599,8 +599,10 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         """Extracts a menu_item from all proper links contained in the given HTML soup,
         with a heuristic for icons/labels.
         Possible HTML properties on buttons that are v3-specific and change button behaviour:
-            - attribute "data-v3-id": if present the button needs to href to be included and its returned id property
+            - attribute "data-v3-id": if present, the button needs to href to be included and its returned id property
                 is set to it
+            - attribute "data-v3-type": if present, the supplied value will be passed along the sidebare menu item
+                as `type="value"` property. Used for example to signify a `type="download"` link
             - attribute "data-toggle" in combination with "data-target": bootstrap modal buttons are included and
                 these two attributes are passed along in the "attributes" attribute
             - CSS classes "x-v3-leftnav-action-button", "x-v3-leftnav-action-target-active-app",
@@ -627,8 +629,9 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             if leftnav_link.get('onclick'):
                 attributes.update({'onclick': leftnav_link.get('onclick')})
 
-            # extract v3-specific id if present
+            # extract v3-specific id and type if present
             v3_id = leftnav_link.get('data-v3-id', None)
+            v3_type = leftnav_link.get('data-v3-type', None)
             # skip link-less buttons (like the dropdown trigger), unless they have modal data attributes
             href = leftnav_link.get('href')
             if not href and not attributes and not v3_id:
@@ -702,6 +705,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                     is_external=bool(leftnav_link.get('target', None) == '_blank'),
                     sub_items=sub_items,
                     selected=selected,
+                    type=v3_type or None,
                     attributes=attributes if attributes else None,
                 )
             # attach the id, CSS classes, and data-target to the menu item for internal use

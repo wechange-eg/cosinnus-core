@@ -132,6 +132,7 @@ class MenuItem(dict):
         is_external=False,
         id=None,
         selected=False,
+        type=None,
         attributes=None,
         sub_items=None,
         actions=None,
@@ -152,6 +153,7 @@ class MenuItem(dict):
         self['badge'] = badge
         self['attributes'] = attributes
         self['selected'] = selected
+        self['type'] = type
         # only add sub_items as a key if it is actually given
         if sub_items is not None:
             self['sub_items'] = sub_items
