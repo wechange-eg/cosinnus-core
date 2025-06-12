@@ -1,6 +1,7 @@
 publiccodeYmlVersion: "0.4"
 name: "Cosinnus"
 url: "https://github.com/wechange-eg/cosinnus-core.git"
+softwareVersion: "r-WE-020.5"
 releaseDate: "2024-05-12"
 platforms:
   - web
@@ -27,6 +28,10 @@ description:
     genericName: "Cosinnus"
     shortDescription: "Main codebase for the WECHANGE suite.  Contains the core functionality and models: user account management, groups/projects, map, search etc."
     longDescription: "Main codebase for the WECHANGE suite. Contains the core functionality and models: user account management, groups/projects, ideas, user-dashboard, map, search, and all base templates, forms, and stylesheets. Cosinnus is the heart of the collaboration software to implement many of the best Free and Open Source Software to work together. It include chat, file sharing, project management, video conferencing and much more with focus real privacy. There a no cookies or something else thats connect to Google or etc. All services can be self hosted."
+    features:
+      - "Productivity"
+      - "Collaboration"
+      - "Communication"
 legal:
   license: "AGPL-3.0-or-later"
 maintenance:
@@ -35,6 +40,7 @@ maintenance:
     - name: "wechange eG"
       until: "2027-02-03"
       website: "https://wechange.coop"
+      email: "info@wechange.de"
 localisation:
   localisationReady: true
   availableLanguages:
