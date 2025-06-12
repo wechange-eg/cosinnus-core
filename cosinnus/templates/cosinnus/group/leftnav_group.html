@@ -38,7 +38,8 @@
     {% if group.show_mitwirkomat_settings %}
 	    {% captureas href %}{% group_url 'cosinnus:mitwirkomat-settings' group=group %}{% endcaptureas %}
         {% captureas label %}{% trans "Volunteer-O-Matic" %}{% endcaptureas %}
-        {% include "cosinnus/leftnav_button.html" with active=is_mitwirkomat_settings extra_classes="fine-space" icon_full_class="fas fa-comment-alt" label=label href=href  %}
+        {% captureas icon_full_class %}{% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}fas fa-comment-alt-check{% else %}fas fa-comment-alt{% endif %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_mitwirkomat_settings extra_classes="fine-space" icon_full_class=icon_full_class label=label href=href  %}
     {% endif %}
 {% endif %}
 
