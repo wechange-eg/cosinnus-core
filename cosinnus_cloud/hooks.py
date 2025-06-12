@@ -125,9 +125,14 @@ def update_user_from_obj(user):
 
 
 def get_email_for_user(user):
-    """We currently set the user email to None, Nextcloud needs to send no emails anyways
+    """Get the email that is set as email the nextcloud user profile.
+    Default is to set the user email to None, Nextcloud needs to send no emails anyways
     and this way it's more secure."""
-    return ''
+    email = ''
+    email_func = settings.COSINNUS_CLOUD_USER_PROFILE_EMAIL_FUNC
+    if email_func is not None and callable(email_func):
+        email = email_func(user)
+    return email
 
 
 def generate_group_nextcloud_id(group, save=True, force_generate=False):

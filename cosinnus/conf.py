@@ -1253,6 +1253,12 @@ class CosinnusConf(AppConf):
         'DISABLE_APP_IDS': ['photos', 'activity', 'systemtags', 'dashboard'],  # list of string app ids
     }
 
+    # can be set to a function receiving `user` as only argument,
+    # to modify the email that is set as email the nextcloud user profile.
+    # by default this returns an empty string so no emails are transferred to nextcloud.
+    # default if None: `''`
+    CLOUD_USER_PROFILE_EMAIL_FUNC = None
+
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
     FORUM_GROUP_CUSTOM_BACKGROUND = None
