@@ -165,7 +165,7 @@
                 {% if False and group.show_mitwirkomat_settings %}
                     <li class="app-main appnavi-listelement {% if request.path == group_mitwirkomat_settings_page %}active{% endif %}">
                         <a href="{{ group_mitwirkomat_settings_page }}">
-                            <i class="fas fa-comment-alt"></i>
+                            <i class="{% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}fas fa-comment-alt-check{% else %}fas fa-comment-alt{% endif %}"></i>
                             {% trans "Volunteer-O-Matic" %}
                         </a>
                     </li>

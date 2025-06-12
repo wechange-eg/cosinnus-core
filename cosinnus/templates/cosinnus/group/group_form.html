@@ -140,7 +140,7 @@
                     {% if SETTINGS.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED  %}
                         <li {% if request.GET.tab == 'mitwirkomat' %}class="active"{% endif %}>
                             <a href="#mitwirkomat" class="_group-form-tab" role="tab" data-toggle="tab">
-                                <i class="fas fa-comment-alt"></i>
+                                <i class="{% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}fas fa-comment-alt-check{% else %}fas fa-comment-alt{% endif %}"></i>
                                 {% trans "Volunteer-O-Matic" %}
                             </a>
                         </li>
@@ -785,7 +785,7 @@
                     {% endif %}
 
 
-                    {% if SETTINGS.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED and user|is_superuser %}
+                    {% if SETTINGS.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED %}
                         <div class="tab-pane {% if request.GET.tab == 'mitwirkomat' %}active{% endif %}" id="mitwirkomat" >
                             {% block group_mitwirkomat_settings_tab %}
                                 <div class="v-spacer-l">
