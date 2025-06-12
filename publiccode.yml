@@ -32,6 +32,14 @@ description:
       - "Productivity"
       - "Collaboration"
       - "Communication"
+  de:
+    genericName: "Cosinnus"
+    shortDescription: "Hauptcodebasis für die WECHANGE-Suite. Enthält die Kernfunktionen und Modelle: Benutzerkontenverwaltung, Gruppen/Projekte, Karte, Suche usw."
+    longDescription: "Hauptcodebasis für die WECHANGE-Suite. Sie enthält die Kernfunktionen und -modelle: Benutzerkontenverwaltung, Gruppen/Projekte, Ideen, Benutzer-Dashboard, Karte, Suche und alle Basisvorlagen, Formulare und Stylesheets. Cosinnus ist das Herzstück der Kollaborationssoftware, um viele der besten Freien und Open Source Software zur Zusammenarbeit zu implementieren. Es umfasst Chat, Dateifreigabe, Projektmanagement, Videokonferenzen und vieles mehr mit Fokus auf echten Datenschutz. Es gibt keine Cookies oder sonstiges, welches mit Google oder ähnlichem verbunden sind. Alle Dienste können selbst gehostet werden."
+    features:
+      - "Produktivität"
+      - "Kollaboration"
+      - "Kommunikation"
 legal:
   license: "AGPL-3.0-or-later"
 maintenance:
