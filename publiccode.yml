@@ -1,6 +1,7 @@
 publiccodeYmlVersion: "0.4"
 name: "Cosinnus"
 url: "https://github.com/wechange-eg/cosinnus-core.git"
+softwareVersion: "r-WE-020.5"
 releaseDate: "2024-05-12"
 platforms:
   - web
@@ -27,6 +28,18 @@ description:
     genericName: "Cosinnus"
     shortDescription: "Main codebase for the WECHANGE suite.  Contains the core functionality and models: user account management, groups/projects, map, search etc."
     longDescription: "Main codebase for the WECHANGE suite. Contains the core functionality and models: user account management, groups/projects, ideas, user-dashboard, map, search, and all base templates, forms, and stylesheets. Cosinnus is the heart of the collaboration software to implement many of the best Free and Open Source Software to work together. It include chat, file sharing, project management, video conferencing and much more with focus real privacy. There a no cookies or something else thats connect to Google or etc. All services can be self hosted."
+    features:
+      - "Productivity"
+      - "Collaboration"
+      - "Communication"
+  de:
+    genericName: "Cosinnus"
+    shortDescription: "Hauptcodebasis für die WECHANGE-Suite. Enthält die Kernfunktionen und Modelle: Benutzerkontenverwaltung, Gruppen/Projekte, Karte, Suche usw."
+    longDescription: "Hauptcodebasis für die WECHANGE-Suite. Sie enthält die Kernfunktionen und -modelle: Benutzerkontenverwaltung, Gruppen/Projekte, Ideen, Benutzer-Dashboard, Karte, Suche und alle Basisvorlagen, Formulare und Stylesheets. Cosinnus ist das Herzstück der Kollaborationssoftware, um viele der besten Freien und Open Source Software zur Zusammenarbeit zu implementieren. Es umfasst Chat, Dateifreigabe, Projektmanagement, Videokonferenzen und vieles mehr mit Fokus auf echten Datenschutz. Es gibt keine Cookies oder sonstiges, welches mit Google oder ähnlichem verbunden sind. Alle Dienste können selbst gehostet werden."
+    features:
+      - "Produktivität"
+      - "Kollaboration"
+      - "Kommunikation"
 legal:
   license: "AGPL-3.0-or-later"
 maintenance:
@@ -35,6 +48,7 @@ maintenance:
     - name: "wechange eG"
       until: "2027-02-03"
       website: "https://wechange.coop"
+      email: "info@wechange.de"
 localisation:
   localisationReady: true
   availableLanguages:
