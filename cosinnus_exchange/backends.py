@@ -183,7 +183,7 @@ class ExchangeBackend:
         Returns the IDs of currently indexed results for the backends model and source.
         Note: Using "pk" as it contains the url/slug of the instance, while "id" has the additional model-name prefix.
         """
-        sqs = SearchQuerySet().models(self.model).filter(source=self.source).all()
+        sqs = SearchQuerySet().models(self.model).filter(source__exact=self.source).all()
         ids = [result.pk for result in sqs]
         return ids
 
