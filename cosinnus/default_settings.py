@@ -173,6 +173,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.time_zone_middleware.TimezoneMiddleware',
         'cosinnus.core.middleware.frontend_middleware.FrontendMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
+        'cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware',
     ]
 
     TEMPLATES = [
