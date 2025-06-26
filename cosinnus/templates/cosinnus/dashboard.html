@@ -142,7 +142,7 @@
 			    </div>
 		    {% endif %}
 	    {% endif %}
-	    
+
 	    {% captureas cloud_hide_pref %}cloud_group_teaser_{{ group.id }}{% endcaptureas %}
         {% captureas cloud_hide_value %}cloud_group_teaser_{{ group.id }}:true{% endcaptureas %}
 	    {% if SETTINGS.COSINNUS_CLOUD_ENABLED and user.pk in group.admins and 'cosinnus_cloud' in group.get_deactivated_apps and not user|cosinnus_setting:cloud_hide_pref %}
@@ -192,7 +192,37 @@
 			    </div>
 		    {% endif %}
 	    {% endif %}
-	
+
+
+        {% captureas deck_hide_pref %}deck_group_teaser_{{ group.id }}{% endcaptureas %}
+        {% captureas deck_hide_value %}deck_group_teaser_{{ group.id }}:true{% endcaptureas %}
+        {% if SETTINGS.COSINNUS_DECK_ENABLED and user.pk in group.admins and 'cosinnus_deck' in group.get_deactivated_apps and not user|cosinnus_setting:deck_hide_pref %}
+            <div class="large-space deck-teaser-frame">
+                <div class="alert alert-black-white no-margin alert-dismissable">
+                    <i class="fa fa-sticky-note fa-3x"></i>
+                    <button id="close_button" type="button" class="close" onclick="$('.deck-teaser-frame').hide();" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value=deck_hide_value %}>&#215;</button>
+                    {% include 'cosinnus/texts/group_dashboard_deck_teaser_text.html' %}
+                </div>
+
+                <form method="POST" action="{% group_url 'cosinnus:group-activate-app' group=group %}" class="cosinnus-form form-horizontal app-main">{% csrf_token %}
+                    <input type="hidden" name="app" value="cosinnus_deck" />
+                    <button type="submit" class="btn btn-autosize btn-emphasized">
+                        <ul class="media-list">
+                            <li class="media">
+			                    <span class="pull-left">
+			                        <i class="fa fa-sticky-note"></i>
+			                    </span>
+                                <div class="media-body">
+                                    {% trans "Activate Task-Board" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        {% endif %}
+
 	{% endblock group_announcements %}
 
 
