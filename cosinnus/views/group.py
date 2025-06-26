@@ -182,6 +182,11 @@ class CosinnusGroupFormMixin(object):
     )
     template_name = 'cosinnus/group/group_form.html'
 
+    # Deprecated apps can only be disabled in the group settings, but not enabled.
+    DEPRECATED_APPS = []
+    if settings.COSINNUS_DECK_ENABLED:
+        DEPRECATED_APPS += ['cosinnus_todo']
+
     def get_form_kwargs(self):
         kwargs = super(CosinnusGroupFormMixin, self).get_form_kwargs()
         kwargs['request'] = self.request
@@ -295,6 +300,10 @@ class CosinnusGroupFormMixin(object):
                     self.group_model_class.GROUP_MODEL_TYPE != CosinnusGroup.TYPE_SOCIETY
                     and app_registry.is_activatable_for_groups_only(app_name)
                 )
+
+                # Deprecated apps are only shown if active to allow deactivation.
+                app_deprecated = app_name in self.DEPRECATED_APPS
+
                 group_label = app_registry.get_label(app_name)
                 if app_name in settings.COSINNUS_GROUP_APPS_WIDGET_SETTING_ONLY:
                     group_label = f'{group_label} ({self.group_model_class.get_trans().DASHBOARD_LABEL})'
@@ -305,6 +314,7 @@ class CosinnusGroupFormMixin(object):
                         'label': group_label,
                         'checked': app_is_active,
                         'app_not_activatable': app_not_activatable,
+                        'app_deprecated': app_deprecated,
                     }
                 )
                 app_disabled_for_microsite = app_name in settings.COSINNUS_GROUP_APPS_WIDGETS_MICROSITE_DISABLED
