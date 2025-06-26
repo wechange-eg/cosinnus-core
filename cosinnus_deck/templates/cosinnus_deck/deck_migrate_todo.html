@@ -1,0 +1,68 @@
+{% extends "cosinnus_deck/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail djajax_tags %}
+
+{% block page_title %}
+    {% trans "Migrate Todos" %} - {{ block.super }}
+{% endblock page_title %}
+
+{% block content %}
+    <div class="content-box">
+        <h2>{% trans "Migrate Todos to Task-Board" %} - <i>{{ group.name }}</i></h2>
+        <div class="textfield transparent">
+            {% if not deck_migration_status %}
+                <p class="textfield transparent">
+                    {% trans "Start the migration of Todos to the Task-Board in the background." %}
+                </p>
+                <p class="textfield transparent">
+                    {% trans "The Todo app will be automatically deactivated is finished." %}
+                </p>
+                <p class="textfield transparent">
+                    {% trans "This page will automatically refresh when the process is done." %}
+                </p>
+            {% elif deck_migration_status == 'in_progress' %}
+                <p class="textfield transparent">
+                    {% trans "Migration is in progress..." %}
+                </p>
+            {% elif deck_migration_status == 'failed' %}
+                <p class="textfield transparent">
+                    {% trans "An error occurred during the migration. Some Todos might not have been migrated." %}
+                </p>
+                <p class="textfield transparent">
+                    {% trans "Please, retry the migration. If the errors persist, please contact the support!" %}
+                </p>
+            {% elif deck_migration_status == 'success' %}
+                <p class="textfield transparent">
+                    {% captureas deck_link %}<a href="{% group_url "cosinnus:deck:index" group=group %}" class="transparent">{% trans "Task-Board" %}</a>{% endcaptureas %}
+                    {% blocktrans %}Migration to {{ deck_link }} successfully finished. {% endblocktrans %}
+                </p>
+            {% endif %}
+            <div class="clearfix v-spacer-s"></div>
+        </div>
+    </div><!-- content-box -->
+
+    {% if group.deck_todo_migration_allowed %}
+        <form method="POST" action="." class="cosinnus-form form-horizontal">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-emphasized btn-autosize">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-clock"></i>
+                        </span>
+                        <div class="media-body">
+                            {% if not deck_migration_status  %}
+                                {% trans "Start migration" %}
+                            {% else %}
+                                {% trans "Retry migration" %}
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        </form>
+    {% endif %}
+    {% comment %} Refresh every 10 seconds {% endcomment %}
+    <script type="text/javascript">
+        setTimeout(function () { location.reload(); }, 10000);
+    </script>
+{% endblock content %}
