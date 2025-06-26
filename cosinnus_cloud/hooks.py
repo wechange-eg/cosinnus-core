@@ -342,18 +342,19 @@ if settings.COSINNUS_CLOUD_ENABLED:
             submit_with_retry(initialize_nextcloud_for_group, group)
 
     @receiver(signals.group_apps_activated)
-    def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
-        """Listen for the cloud app being activated"""
-        if 'cosinnus_cloud' in apps and is_cloud_group_required_for_group(group):
+    def group_cloud_or_deck_app_activated_sub(sender, group, apps, **kwargs):
+        """Listen for the cloud app or deck app being activated"""
+        if 'cosinnus_cloud' in apps or 'cosinnus_deck' in apps:
+            if is_cloud_group_required_for_group(group):
 
-            def _conurrent_wrap():
-                initialize_nextcloud_for_group(group)
-                for user in group.actual_members:
-                    submit_with_retry(nextcloud.add_user_to_group, get_nc_user_id(user), group.nextcloud_group_id)
-                    # we don't need to remove users who have left the group while the app was deactivated here,
-                    # because that listener is always active
+                def _conurrent_wrap():
+                    initialize_nextcloud_for_group(group)
+                    for user in group.actual_members:
+                        submit_with_retry(nextcloud.add_user_to_group, get_nc_user_id(user), group.nextcloud_group_id)
+                        # we don't need to remove users who have left the group while the app was deactivated here,
+                        # because that listener is always active
 
-            submit_with_retry(_conurrent_wrap)
+                submit_with_retry(_conurrent_wrap)
 
     @receiver(signals.group_apps_deactivated)
     def group_cloud_app_deactivated_sub(sender, group, apps, **kwargs):
