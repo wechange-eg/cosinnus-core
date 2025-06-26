@@ -496,6 +496,7 @@ class CosinnusConf(AppConf):
     GROUP_APPS_WIDGETS_MICROSITE_DISABLED = [
         'cosinnus_cloud',
         'cosinnus_message',
+        'cosinnus_deck',
     ]
 
     # a map of class dropins for the typed group trans classes
