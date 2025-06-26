@@ -37,7 +37,7 @@ class CosinnusDeckDefaultSettings(AppConf):
                             '> ⚠️ **Permissions**: Only group/project admins can create, edit or delete lists and labels. However, individual tasks can be created, edited or deleted by all members (even tasks that were created by others). Non-members do not have access to your board and the tasks it contains.\n\n'
                             '* Specify a **due date** for each of your tasks so that you can keep track of your deadlines.\n'
                             '* By **assigning tasks to the responsible members**, you can keep track of who is taking care of what. The assigned members will also see their tasks in their [personal task board](%(portal_url)s/personal-board) ↗.\n'
-                            "* Using the board's ** filter function ** (bottom left), you can filter tasks by label, assignee and due date. This allows you to keep track of even very full boards that are used by many members for different topics.\n"
+                            "* Using the board's **filter function** (bottom left), you can filter tasks by label, assignee and due date. This allows you to keep track of even very full boards that are used by many members for different topics.\n"
                             '* The text fields for the task description and comments offer you a **wide range of text formatting options** that you can insert using the toolbar, including:\n'
                             '   * <u>Checkbox lists</u> for subtasks\n'
                             '   * <u>Tables</u>\n'
@@ -60,7 +60,7 @@ class CosinnusDeckDefaultSettings(AppConf):
                             '> ⚠️ **Berechtigungen**: Nur Gruppen-/Projekt-Admins können Listen und Labels erstellen, bearbeiten oder löschen. Einzelne Aufgaben können jedoch von allen Mitgliedern erstellt, bearbeitet oder gelöscht werden (auch Aufgaben, die andere erstellt haben). Nicht-Mitglieder haben keinen Zugriff auf euer Board und die Aufgaben darin.\n'
                             '* Gebt bei euren Aufgaben jeweils ein **Fälligkeitsdatum** an, damit ihr eure Deadlines im Blick habt.\n'
                             '* Indem ihr eure Aufgaben den **zuständigen Mitgliedern zuweist**, behaltet ihr den Überlick darüber, wer sich worum kümmert. Die zugewiesenen Mitglieder bekommen ihre Aufgaben auch in ihrem [persönlichen Aufgaben-Board](%(portal_url)s/personal-board) ↗ angezeigt.\n'
-                            '* Über die **Filter-Funktion** des Boards (links unten) könnt ihr die Aufgabe nach Labels, Zugewiesenen und Fälligkeitsdatum filtern. Dadurch könnt ihr auch auf sehr vollen Boards, die von vielen Mitgliedern für verschiedene Themenbereiche genutzt werden, immer den Überblick behalten.\n'
+                            '* Über die **Filter-Funktion** des Boards (links unten) könnt ihr eure Aufgaben nach Labels, Zugewiesenen und Fälligkeitsdatum filtern. Dadurch könnt ihr auch auf sehr vollen Boards, die von vielen Mitgliedern für verschiedene Themenbereiche genutzt werden, immer den Überblick behalten.\n'
                             '* Die Textfelder der Aufgaben-Beschreibung und der Kommentare bieten euch **vielfältige Möglichkeiten der Text-Formatierung**, die ihr über die Werkzeug-Leiste einfügen könnt, darunter:\n'
                             '   * <u>Checkbox-Listen</u> für Unter-Aufgaben\n'
                             '   * <u>Tabellen</u>\n'
