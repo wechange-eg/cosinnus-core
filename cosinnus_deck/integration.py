@@ -115,6 +115,10 @@ class DeckIntegrationHandler(CosinnusBaseIntegrationHandler):
         if group.nextcloud_deck_board_id:
             self._do_group_update.delay(group.pk)
 
+    def do_group_migrate_todo(self, group):
+        """Migrate groups todos to deck."""
+        self._do_group_migrate_todo.delay(group.pk)
+
     """
     Celery tasks
     """
@@ -143,3 +147,12 @@ class DeckIntegrationHandler(CosinnusBaseIntegrationHandler):
         """Delete a Deck for a group."""
         deck = DeckConnection()
         deck.group_board_delete(group_board_id)
+
+    @staticmethod
+    @celery_app.task(base=DeckTask)
+    def _do_group_migrate_todo(group_id):
+        """Migrate todos to the group board"""
+        group = CosinnusGroup.objects.filter(pk=group_id).first()
+        if group and not group.deck_todo_migration_in_progress():
+            deck = DeckConnection()
+            deck.group_migrate_todo(group)

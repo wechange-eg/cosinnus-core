@@ -1,8 +1,15 @@
+import datetime
 import logging
+from datetime import timezone
 
 import requests
+from django.utils import timezone as django_timezone
 
 from cosinnus.conf import settings
+from cosinnus.models.tagged import BaseTagObject
+from cosinnus_cloud.hooks import get_nc_user_id, initialize_nextcloud_for_group
+from cosinnus_cloud.utils.nextcloud import add_user_to_group
+from cosinnus_todo.models import TodoList
 
 logger = logging.getLogger(__name__)
 
@@ -248,6 +255,21 @@ class DeckConnection:
                 raise DeckConnectionException()
         return response
 
+    def stack_list(self, group_board_id, raise_deck_connection_exception=True):
+        """
+        Get the board stacks.
+        Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        """
+        response = self._api_get(f'/boards/{group_board_id}/stacks')
+        if response.status_code != 200:
+            logger.warning(
+                'Deck: Stack list failed!',
+                extra={'response': response, 'board_id': group_board_id},
+            )
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+        return response
+
     def label_create(self, group_board_id, title, color, raise_deck_connection_exception=True):
         """
         Creates a board label.
@@ -298,11 +320,25 @@ class DeckConnection:
                 raise DeckConnectionException()
         return response
 
+    def _get_utc_datetime(self, date):
+        """Helper to get a date/datetime instance into the utc format used by nextcloud."""
+        if isinstance(date, datetime.date):
+            date = datetime.datetime(date.year, date.month, date.day)
+        return django_timezone.make_aware(date).astimezone(timezone.utc).isoformat()
+
     def card_create(
-        self, group_board_id, stack_id, title, order, description=None, raise_deck_connection_exception=True
+        self,
+        group_board_id,
+        stack_id,
+        title,
+        order,
+        description=None,
+        due_date=None,
+        raise_deck_connection_exception=True,
     ):
         """
         Creates a board card.
+        @param due_date: Optional date or datetime instance
         Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
         """
         data = {
@@ -311,6 +347,8 @@ class DeckConnection:
         }
         if description:
             data['description'] = description
+        if due_date:
+            data['duedate'] = self._get_utc_datetime(due_date)
         response = self._api_post(f'/boards/{group_board_id}/stacks/{stack_id}/cards', data=data)
         if response.status_code != 200:
             logger.warning(
@@ -320,3 +358,164 @@ class DeckConnection:
             if raise_deck_connection_exception:
                 raise DeckConnectionException()
         return response
+
+    def card_assign_user(self, group_board_id, stack_id, card_id, user, raise_deck_connection_exception=True):
+        """
+        Assign a user to a card.
+        Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        """
+        data = {
+            'userId': get_nc_user_id(user),
+        }
+        response = self._api_put(f'/boards/{group_board_id}/stacks/{stack_id}/cards/{card_id}/assignUser', data=data)
+        if response.status_code != 200:
+            logger.warning(
+                'Deck: Card user assignment failed!',
+                extra={'response': response, 'board_id': group_board_id, 'stack_id': stack_id, 'card_id': card_id},
+            )
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+        return response
+
+    def card_set_done(
+        self, group_board_id, stack_id, card_id, done_datetime=None, raise_deck_connection_exception=True
+    ):
+        """
+        Sets the done status of a card.
+        Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        """
+        response = self._api_get(f'/boards/{group_board_id}/stacks/{stack_id}/cards/{card_id}')
+        if response.status_code != 200:
+            logger.warning(
+                'Deck: Card setting done failed!',
+                extra={'response': response, 'board_id': group_board_id, 'stack_id': stack_id, 'card_id': card_id},
+            )
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+            else:
+                return response
+        try:
+            data = response.json()
+        except Exception:
+            logger.warning('Deck: Invalid response received!', extra={'response': response})
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+            else:
+                return response
+        data['done'] = self._get_utc_datetime(done_datetime) if done_datetime else None
+        response = self._api_put(f'/boards/{group_board_id}/stacks/{stack_id}/cards/{card_id}', data=data)
+        if response.status_code != 200:
+            logger.warning(
+                'Deck: Card setting done failed!',
+                extra={'response': response, 'board_id': group_board_id, 'stack_id': stack_id, 'card_id': card_id},
+            )
+            if raise_deck_connection_exception:
+                raise DeckConnectionException()
+        return response
+
+    def group_migrate_todo(self, group):
+        """Migrate todos to deck app."""
+
+        # set migration status
+        group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_IN_PROGRESS)
+        try:
+            if not group.nextcloud_group_id:
+                # initialize nextcloud group
+                initialize_nextcloud_for_group(group, send_initialized_signal=False)
+                for user in group.actual_members:
+                    add_user_to_group(get_nc_user_id(user), group.nextcloud_group_id)
+
+            if not group.nextcloud_deck_board_id:
+                # initialize deck
+                self.group_board_create(group, initialize_board_content=True)
+
+            # get the next free stack order
+            response = self.stack_list(group_board_id=group.nextcloud_deck_board_id)
+            stack_order = len(response.json())
+
+            # migrate todos to the deck
+            todo_lists = TodoList.objects.filter(group=group)
+            for todo_list in todo_lists:
+                todo_query = todo_list.todos.exclude(media_tag__visibility=BaseTagObject.VISIBILITY_USER)
+                todo_query = todo_query.filter(media_tag__migrated=False)
+                if not todo_query.exists():
+                    # nothing to migrate
+                    continue
+
+                list_title = todo_list.title if not todo_list.is_general_list() else 'General'
+                response = self.stack_create(
+                    group_board_id=group.nextcloud_deck_board_id,
+                    title=list_title,
+                    order=stack_order,
+                )
+                stack_id = response.json()['id']
+
+                stack_order += 1
+                card_order = 0
+
+                for todo in todo_query.filter(media_tag__migrated=False):
+                    # get description with comments and attached objects
+                    description = todo.note
+                    if todo.attached_objects.exists():
+                        attachments = '\n\nAttachments:\n\n'
+                        for attachment in todo.attached_objects.all():
+                            if hasattr(attachment.target_object, 'get_absolute_url'):
+                                url = attachment.target_object.get_absolute_url()
+                                attachments += f'- [{url}]({url})\n'
+                        attachments += '\n\n'
+                        description += attachments
+                    if todo.comments.exists():
+                        comments = '\n\nComments:\n\n'
+                        for comment in todo.comments.all():
+                            creator = comment.creator.get_full_name()
+                            comments += f'- {creator}: {comment.text}\n'
+                        description += comments
+
+                    response = self.card_create(
+                        group_board_id=group.nextcloud_deck_board_id,
+                        stack_id=stack_id,
+                        title=todo.title,
+                        order=card_order,
+                        description=description,
+                        due_date=todo.due_date,
+                    )
+                    card_id = response.json()['id']
+
+                    # assign user
+                    if todo.assigned_to:
+                        self.card_assign_user(
+                            group_board_id=group.nextcloud_deck_board_id,
+                            stack_id=stack_id,
+                            card_id=card_id,
+                            user=todo.assigned_to,
+                        )
+
+                    # set done
+                    if todo.completed_date:
+                        self.card_set_done(
+                            group_board_id=group.nextcloud_deck_board_id,
+                            stack_id=stack_id,
+                            card_id=card_id,
+                            done_datetime=todo.completed_date,
+                        )
+
+                    # mark todos as migrated
+                    todo.media_tag.migrated = True
+                    todo.media_tag.save()
+
+            # deactivate todos and activate deck, if not active
+            deactivate_apps = set(group.get_deactivated_apps())
+            deactivate_apps.add('cosinnus_todo')
+            if 'cosinnus_deck' in deactivate_apps:
+                deactivate_apps.remove('cosinnus_deck')
+            group.deactivated_apps = deactivate_apps
+            type(group).objects.filter(pk=group.pk).update(deactivated_apps=group.deactivated_apps)
+
+            # set migration status
+            group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_SUCCESS)
+        except Exception as e:
+            logger.warning(
+                'Deck: Todo migration failed!',
+                extra={'group': group.id, 'board_id': group.nextcloud_deck_board_id, 'exception': e},
+            )
+            group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_FAILED)
