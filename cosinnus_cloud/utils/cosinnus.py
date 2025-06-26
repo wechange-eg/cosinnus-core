@@ -26,7 +26,7 @@ def is_deck_enabled_for_group(group):
 
     if not settings.COSINNUS_DECK_ENABLED:
         return False
-    return DECK_SINGLETON.is_app_enabled_for_group(group)
+    return DECK_SINGLETON.is_app_integrated_in_group(group)
 
 
 def is_cloud_group_required_for_group(group):

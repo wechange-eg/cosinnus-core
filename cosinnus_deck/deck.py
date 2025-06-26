@@ -225,6 +225,7 @@ class DeckConnection:
         """
         Updates a board stack.
         Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        Note: Used in the DeckStackView proxy API view.
         """
         data = {
             'title': title,
@@ -244,6 +245,7 @@ class DeckConnection:
         """
         Deletes a board stack.
         Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        Note: Used in the DeckStackView proxy API view.
         """
         response = self._api_delete(f'/boards/{group_board_id}/stacks/{stack_id}')
         if response.status_code != 200:
@@ -274,6 +276,7 @@ class DeckConnection:
         """
         Creates a board label.
         Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        Note: Used in the DeckStackView proxy API view.
         """
         data = {
             'title': title,
@@ -290,6 +293,7 @@ class DeckConnection:
         """
         Updates a board label.
         Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        Note: Used in the DeckStackView proxy API view.
         """
         data = {
             'title': title,
@@ -309,6 +313,7 @@ class DeckConnection:
         """
         Deletes a board label.
         Returns the response. Pass raise_deck_connection_exception=False to receive error response instead of exception.
+        Note: Used in the DeckStackView proxy API view.
         """
         response = self._api_delete(f'/boards/{group_board_id}/labels/{label_id}')
         if response.status_code != 200:
