@@ -143,9 +143,10 @@ class DeckConnection:
 
             # create stacks
             portal_url = group.portal.get_domain()
+            stack_order = 0
             for stack in initial_content.get('stacks'):
                 response = self.stack_create(
-                    board_id, stack['title'], stack['order'], raise_deck_connection_exception=False
+                    board_id, stack['title'], stack_order, raise_deck_connection_exception=False
                 )
                 if response.status_code != 200:
                     continue
@@ -154,8 +155,10 @@ class DeckConnection:
                 except Exception:
                     logger.warning('Deck: Invalid response received!', extra={'response': response})
                     continue
+                stack_order += 1
 
                 # create cards
+                card_order = 0
                 for card in stack.get('cards', []):
                     # render description with portal_url
                     description = card['description'] % {'portal_url': portal_url}
@@ -163,10 +166,11 @@ class DeckConnection:
                         board_id,
                         stack_id,
                         card['title'],
-                        card['order'],
+                        card_order,
                         description=description,
                         raise_deck_connection_exception=False,
                     )
+                    card_order += 1
 
     def group_board_update(self, group):
         """Updates the group board name and archived status."""

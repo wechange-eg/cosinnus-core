@@ -21,11 +21,9 @@ class CosinnusDeckDefaultSettings(AppConf):
         'stacks': [
             {
                 'title': 'To Do',
-                'order': 0,
                 'cards': [
                     {
                         'title': 'HOW TO...',
-                        'order': 0,
                         'description': (
                             '<details><summary>Show English version...</summary>\n\n'
                             '## Welcome to your task board!\n\n'
@@ -79,12 +77,10 @@ class CosinnusDeckDefaultSettings(AppConf):
             },
             {
                 'title': 'Doing',
-                'order': 1,
                 'cards': [],
             },
             {
                 'title': 'Done',
-                'order': 2,
                 'cards': [],
             },
         ],
