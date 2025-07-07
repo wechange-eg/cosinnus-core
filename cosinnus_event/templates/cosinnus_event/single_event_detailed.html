@@ -4,7 +4,7 @@
 {% addtoblock "js" %}
 	{% if event.state == 1 and user.is_authenticated and user|has_read_access:event %}
         {% if not user.is_guest or SETTINGS.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS %}
-		    <script src="{% static 'js/cosinnus_event/event_attendance.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+		    <script src="{% static 'js/cosinnus_event/event_attendance.js' %}?js_v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
         {% endif %}
 	{% endif %}
 {% endaddtoblock %}

@@ -56,15 +56,15 @@
                 <script src="{% static "js/vendor/less.min.js" %}"></script>
 			{% else %}
                 {% if COSINNUS_V3_API_CONTENT_ACTIVE %}
-                    <link href="{% static 'css/cosinnus-v3-scoped.css' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
+                    <link href="{% static 'css/cosinnus-v3-scoped.css' %}?js_v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
                 {% else %}
-		            <link href="{% static 'css/cosinnus.css' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
+		            <link href="{% static 'css/cosinnus.css' %}?js_v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
                 {% endif %}
 			{% endif %}
 
 
-	        <link href="{% static 'css/cosinnus_portal_style.css' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
-	        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
+	        <link href="{% static 'css/cosinnus_portal_style.css' %}?js_v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
+	        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?js_v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}" rel="stylesheet">
         {% endblock csshead %}
 
         {% block base_jshead %}
@@ -134,13 +134,13 @@
                 var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
                 var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
             </script>
-            <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+            <script src="{% static 'js/cosinnus.js' %}?js_v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
             {% if request.LANGUAGE_CODE in 'de,en,ru,uk,pl' %}
 	        <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
 	        {% else %}
-	        <script src="{% static 'js/locale/en/cosinnus_formats.js' %}?lang=en&v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+	        <script src="{% static 'js/locale/en/cosinnus_formats.js' %}?lang=en&js_v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
 	        {% endif %}
-            <script src="{% static 'js/cosinnus.feedback.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+            <script src="{% static 'js/cosinnus.feedback.js' %}?js_v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
 
             {% include 'cosinnus/common/simplemde_dependencies.html' with lazy=True %}
         {% endblock cosinnus_jshead %}
