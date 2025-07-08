@@ -1194,6 +1194,12 @@ class CosinnusBaseGroup(
 
     def __init__(self, *args, **kwargs):
         super(CosinnusBaseGroup, self).__init__(*args, **kwargs)
+
+        # set type to the class' GROUP_MODEL_TYPE as defined in the implementing group classes like `CosinnusSociety`
+        if not self.pk:
+            self.type = self.GROUP_MODEL_TYPE
+
+        # save attributes for before/after save difference checks
         self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
