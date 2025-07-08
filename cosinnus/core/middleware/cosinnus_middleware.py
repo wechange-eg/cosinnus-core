@@ -31,7 +31,9 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
 from cosinnus.core.decorators.views import get_group_for_request, redirect_to_not_logged_in
+from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import UserOnlineOnDay
+from cosinnus.utils.http import remove_url_param
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse, redirect_next_or
 from cosinnus.views.user import send_user_email_to_verify
@@ -81,6 +83,9 @@ LOGIN_URLS = settings.COSINNUS_NEVER_REDIRECT_URLS + [
 # to complete the login
 EXEMPTED_URLS_FOR_2FA = [
     '/two_factor_auth/token_login/',
+    '/two_factor_auth/token_login/backup/',
+    '/two_factor_auth/qrcode/',
+    '/two_factor_auth/settings/setup/',
     '/administration/login-2fa/',
     '/logout/',
     '/admin/logout/',
@@ -91,6 +96,7 @@ EXEMPTED_URLS_FOR_2FA = [
     '/api/v3/portal/settings',
     '/api/v3/navigation',
     '/api/v3/content/main',
+    '/favicon.ico',
 ]
 
 # list of url patterns that are not permitted to be accessed during guest login
@@ -186,7 +192,13 @@ class AdminOTPMiddleware(MiddlewareMixin):
         ):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if not user.is_verified():
-                next_url = urlencode(request.get_full_path())
+                next_url = request.get_full_path()
+                # remove the v3-exempt parameter from the resolved URL,
+                # incase this redirect came from within the v3 main content
+                next_url = remove_url_param(
+                    next_url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt
+                )
+                next_url = urlencode(next_url)
                 return redirect(
                     reverse('cosinnus:login-2fa')
                     + (
