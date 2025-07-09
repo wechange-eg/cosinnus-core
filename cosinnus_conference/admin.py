@@ -17,7 +17,7 @@ from cosinnus.models.conference import (
 )
 from cosinnus.models.group_extra import CosinnusConference
 
-if settings.COSINNUS_CONFERENCES_ENABLED:
+if settings.COSINNUS_CONFERENCES_ENABLED or settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
 
     def restart_bbb_rooms(modeladmin, request, queryset):
         for bbb_room in queryset.all():
@@ -37,6 +37,16 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         change_form_template = 'admin/bbbroom/change_form.html'
 
     admin.site.register(BBBRoom, CosinnusBBBRoomAdmin)
+
+    class BBBRoomVisitStatisticsAdmin(admin.ModelAdmin):
+        list_display = ('user', 'bbb_room', 'group', 'visit_datetime')
+        list_filter = ('bbb_room',)
+        search_fields = ('bbb_room__name', 'group__name')
+
+    admin.site.register(BBBRoomVisitStatistics, BBBRoomVisitStatisticsAdmin)
+
+
+if settings.COSINNUS_CONFERENCES_ENABLED:
 
     class CosinnusConferenceRoomAdmin(admin.ModelAdmin):
         list_display = ('title', 'id', 'type', 'group', 'sort_index')
@@ -59,13 +69,6 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         search_fields = ('conference__name',)
 
     admin.site.register(CosinnusConferenceApplication, CosinnusConferenceApplicationAdmin)
-
-    class BBBRoomVisitStatisticsAdmin(admin.ModelAdmin):
-        list_display = ('user', 'bbb_room', 'group', 'visit_datetime')
-        list_filter = ('bbb_room',)
-        search_fields = ('bbb_room__name', 'group__name')
-
-    admin.site.register(BBBRoomVisitStatistics, BBBRoomVisitStatisticsAdmin)
 
     class CosinnusConferencePremiumBlockInline(admin.StackedInline):
         model = CosinnusConferencePremiumBlock
