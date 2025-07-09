@@ -90,7 +90,7 @@ class CleanAppSettingsMixin(object):
         active_apps = self.data.getlist('deactivated_apps')
 
         # if this is not a group, remove from the choices all apps that are group-only
-        if not isinstance(self.instance, CosinnusSociety):
+        if self.instance.type != CosinnusSociety.TYPE_SOCIETY:
             active_apps = [app for app in active_apps if app not in app_registry.get_activatable_for_groups_only_apps()]
 
         deactivated_apps = [option_app for option_app in deactivatable_apps if option_app not in active_apps]
