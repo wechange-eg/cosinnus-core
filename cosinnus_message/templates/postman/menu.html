@@ -10,7 +10,7 @@
 {% url 'postman:sent' as sent_url %}
 {% url 'postman:archives' as archives_url %}
 {% url 'postman:trash' as trash_url %}
-{% url 'postman:write' as write_url %}
+{% captureas write_url %}{% url 'postman:write' %}?next=/nachrichten/gesendet/{% endcaptureas %}
 
 {% captureas active %}{% if request.get_full_path == inbox_url %}True{% endif %}{% endcaptureas %}
 {% captureas label %}{% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}{% endcaptureas %}
