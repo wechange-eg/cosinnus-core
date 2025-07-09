@@ -8,6 +8,7 @@ from django.utils import timezone as django_timezone
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import BaseTagObject
+from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus_cloud.hooks import get_nc_user_id, initialize_nextcloud_for_group
 from cosinnus_cloud.utils.nextcloud import add_user_to_group
 from cosinnus_todo.models import TodoList
@@ -471,6 +472,9 @@ class DeckConnection:
                             creator = comment.creator.get_full_name()
                             comments += f'- {creator}:\n{comment.text}\n'
                         description += comments
+
+                    # convert to html
+                    description = textfield(description)
 
                     response = self.card_create(
                         group_board_id=group.nextcloud_deck_board_id,
