@@ -6,6 +6,7 @@ import requests
 from django.utils import timezone as django_timezone
 
 from cosinnus.conf import settings
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus_cloud.hooks import get_nc_user_id, initialize_nextcloud_for_group
 from cosinnus_cloud.utils.nextcloud import add_user_to_group
@@ -93,6 +94,10 @@ class DeckConnection:
             )
             raise DeckConnectionException()
 
+        # create initial board content
+        if initialize_board_content:
+            self.group_board_initialize(board_id, board_details=board_details)
+
         # save board id for the group
         group.refresh_from_db()
         if not group.nextcloud_deck_board_id:
@@ -101,26 +106,17 @@ class DeckConnection:
             type(group).objects.filter(pk=group.pk).update(nextcloud_deck_board_id=group.nextcloud_deck_board_id)
             group.clear_cache()
 
-        # create initial board content
-        if initialize_board_content:
-            self.group_board_initialize(group, board_details=board_details)
-
-    def group_board_initialize(self, group, board_details=None):
+    def group_board_initialize(self, group_board_id, board_details=None):
         """
         Initialize group board with content from COSINNUS_DECK_GROUP_BOARD_INITIAL_CONTENT.
         @param board_details: Response data from the board create/get call containing board details.
         """
-        if not group.nextcloud_deck_board_id:
-            # The group deck board id must be set.
-            return
-        board_id = group.nextcloud_deck_board_id
-
         # get board details if not provided
         if not board_details:
-            response = self._api_get(f'/boards/{board_id}')
+            response = self._api_get(f'/boards/{group_board_id}')
             if response.status_code != 200:
                 logger.warning(
-                    'Deck: Getting board details failed!', extra={'response': response, 'board_id': board_id}
+                    'Deck: Getting board details failed!', extra={'response': response, 'board_id': group_board_id}
                 )
             try:
                 board_details = response.json()
@@ -139,21 +135,21 @@ class DeckConnection:
                         and label_title
                         and label_title in settings.COSINNUS_DECK_GROUP_BOARD_DELETE_DEFAULT_LABELS
                     ):
-                        self.label_delete(board_id, label_id, raise_deck_connection_exception=False)
+                        self.label_delete(group_board_id, label_id, raise_deck_connection_exception=False)
 
         # create initial stacks
         initial_content = settings.COSINNUS_DECK_GROUP_BOARD_INITIAL_CONTENT
         if initial_content:
             # create labels
             for label_title, label_color in initial_content.get('labels'):
-                self.label_create(board_id, label_title, label_color, raise_deck_connection_exception=False)
+                self.label_create(group_board_id, label_title, label_color, raise_deck_connection_exception=False)
 
             # create stacks
-            portal_url = group.portal.get_domain()
+            portal_url = CosinnusPortal.get_current().get_domain()
             stack_order = 0
             for stack in initial_content.get('stacks'):
                 response = self.stack_create(
-                    board_id, stack['title'], stack_order, raise_deck_connection_exception=False
+                    group_board_id, stack['title'], stack_order, raise_deck_connection_exception=False
                 )
                 if response.status_code != 200:
                     continue
@@ -170,7 +166,7 @@ class DeckConnection:
                     # render description with portal_url
                     description = card['description'] % {'portal_url': portal_url}
                     self.card_create(
-                        board_id,
+                        group_board_id,
                         stack_id,
                         card['title'],
                         card_order,
@@ -473,7 +469,7 @@ class DeckConnection:
                         comments = '\n\nComments:\n\n'
                         for comment in todo.comments.all():
                             creator = comment.creator.get_full_name()
-                            comments += f'- {creator}: {comment.text}\n'
+                            comments += f'- {creator}:\n{comment.text}\n'
                         description += comments
 
                     response = self.card_create(
