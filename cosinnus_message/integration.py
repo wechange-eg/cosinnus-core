@@ -355,7 +355,7 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
     def _do_conference_room_membership_update(room_id, user_id, group_id):
         """Update the user membership for a conference room channel in RocketChat."""
         rocket = RocketChatConnection()
-        room = CosinnusConferenceRoom.objects.get(pk=room_id)
+        room = CosinnusConferenceRoom.objects.filter(pk=room_id).first()
         user = get_user_model().objects.filter(pk=user_id).first()
         if room and user:
             # In case the room channel was not created because of an error, recreate it.
