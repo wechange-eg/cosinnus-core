@@ -2,6 +2,7 @@
 from datetime import datetime
 
 import pytz
+from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
@@ -18,6 +19,21 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.5.0': {
+        'datetime': datetime(2025, 7, 16, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.5.0'),
+        'short_text': _('This update includes several bugfixes:'),
+        'full_text': _(
+            '- Fixed a bug where newly invited group/project members could not join a BBB meeting.\n'
+            '- Fixed a bug where admins would see a broken page layout once after logging in.\n'
+            '- Fixed a visual bug in the administration interface after clicking a download-link.\n'
+            '- Fixed a bug where notifications would not be marked as read when they were too far down in the list.\n'
+            '- Added an option to the notification list to mark all notifications as read.\n'
+            '- Fixed a bug where event polls could not be created if the user interface was set to certain languages.\n'
+            '- Fixed a bug in the legacy messaging system that sometimes prevented writing a new message.\n'
+            '- (RocketChat) further improved the stability and performance of the integration with RocketChat.\n'
+        ),
+    },
     '2.4.0': {
         'datetime': datetime(2025, 5, 7, tzinfo=pytz.utc),
         'title': _('Version 2.4.0 released'),
