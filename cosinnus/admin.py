@@ -21,6 +21,7 @@ from django.utils import translation
 from django.utils.crypto import get_random_string
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+from django_otp import devices_for_user
 from django_reverse_admin import ReverseModelAdmin
 
 from cosinnus.backends import elastic_threading_disabled
@@ -1176,6 +1177,10 @@ class UserAdmin(DjangoUserAdmin):
     def log_in_as_user(self, request, queryset):
         user = queryset[0]
         user.backend = 'cosinnus.backends.EmailAuthBackend'
+        # if the user has an OTP device, we automatically verify it here so the admin doesn't need to do the challenge
+        user_otp_device = next(iter(devices_for_user(user)), None)
+        if user_otp_device:
+            user.otp_device = user_otp_device
         django_login(request, user)
 
     def refresh_group_memberships(self, request, queryset):
