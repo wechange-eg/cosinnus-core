@@ -8,7 +8,6 @@ from datetime import timedelta
 from django.template.defaultfilters import date
 from django.urls import Resolver404, resolve, reverse
 from django.utils import timezone
-from django.utils.formats import get_format
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
@@ -21,6 +20,7 @@ from cosinnus.models.managed_tags import CosinnusManagedTag
 from cosinnus.models.profile import GlobalBlacklistedEmail
 from cosinnus.trans.exchange import CosinnusExternalResourceTrans
 from cosinnus.trans.group import get_group_trans_by_type
+from cosinnus.utils.lanugages import get_format_safe
 from cosinnus.utils.permissions import check_user_verified
 from cosinnus.utils.user import check_user_has_accepted_portal_tos, get_user_tos_accepted_date
 from cosinnus.utils.version_history import get_version_history_for_user
@@ -118,14 +118,14 @@ def cosinnus(request):
     context = {
         'COSINNUS_BASE_URL': base_url,
         'COSINNUS_CURRENT_APP': current_app_name,
-        'COSINNUS_DATE_FORMAT': get_format('COSINNUS_DATETIMEPICKER_DATE_FORMAT'),
-        'COSINNUS_DATETIME_FORMAT': get_format('COSINNUS_DATETIMEPICKER_DATETIME_FORMAT'),
-        'COSINNUS_TIME_FORMAT': get_format('COSINNUS_DATETIMEPICKER_TIME_FORMAT'),
-        'COSINNUS_DJANGO_DATETIME_FORMAT': get_format('COSINNUS_DJANGO_DATETIME_FORMAT'),
-        'COSINNUS_DJANGO_DATE_FORMAT': get_format('COSINNUS_DJANGO_DATE_FORMAT'),
-        'COSINNUS_DJANGO_DATE_SHORT_FORMAT': get_format('COSINNUS_DJANGO_DATE_SHORT_FORMAT'),
-        'COSINNUS_DJANGO_DATE_SHORT_CLEAR_FORMAT': get_format('COSINNUS_DJANGO_DATE_SHORT_CLEAR_FORMAT'),
-        'COSINNUS_DJANGO_TIME_FORMAT': get_format('COSINNUS_DJANGO_TIME_FORMAT'),
+        'COSINNUS_DATE_FORMAT': get_format_safe('COSINNUS_DATETIMEPICKER_DATE_FORMAT'),
+        'COSINNUS_DATETIME_FORMAT': get_format_safe('COSINNUS_DATETIMEPICKER_DATETIME_FORMAT'),
+        'COSINNUS_TIME_FORMAT': get_format_safe('COSINNUS_DATETIMEPICKER_TIME_FORMAT'),
+        'COSINNUS_DJANGO_DATETIME_FORMAT': get_format_safe('COSINNUS_DJANGO_DATETIME_FORMAT'),
+        'COSINNUS_DJANGO_DATE_FORMAT': get_format_safe('COSINNUS_DJANGO_DATE_FORMAT'),
+        'COSINNUS_DJANGO_DATE_SHORT_FORMAT': get_format_safe('COSINNUS_DJANGO_DATE_SHORT_FORMAT'),
+        'COSINNUS_DJANGO_DATE_SHORT_CLEAR_FORMAT': get_format_safe('COSINNUS_DJANGO_DATE_SHORT_CLEAR_FORMAT'),
+        'COSINNUS_DJANGO_TIME_FORMAT': get_format_safe('COSINNUS_DJANGO_TIME_FORMAT'),
         'COSINNUS_USER': user_json,
         'COSINNUS_UNREAD_MESSAGE_COUNT': unread_count,
         'COSINNUS_STREAM_UNSEEN_COUNT': stream_unseen_count,
