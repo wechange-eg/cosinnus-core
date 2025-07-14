@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 
 from builtins import object
 
-from django.utils.formats import get_format
 from rest_framework.fields import DateField, DateTimeField, TimeField
 
 from cosinnus.utils.dates import datetime_format_js2py
+from cosinnus.utils.lanugages import get_format_safe
 
 __all__ = ('BaseL10NField', 'DateL10nField', 'DateTimeL10nField', 'TimeL10nField')
 
@@ -16,7 +16,7 @@ class BaseL10NField(object):
 
     def to_native(self, value):
         if value is not None and self.format_key is not None:
-            format_string = get_format(self.format_key)
+            format_string = get_format_safe(self.format_key)
             format = datetime_format_js2py(format_string)
             return value.strftime(format)
         return super(BaseL10NField, self).to_native(value)

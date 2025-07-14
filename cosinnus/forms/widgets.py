@@ -6,10 +6,10 @@ import json
 from bootstrap3_datetime.widgets import DateTimePicker
 from django.forms import widgets
 from django.forms.widgets import DateInput, SplitDateTimeWidget, TimeInput
-from django.utils.formats import get_format
 from django.utils.translation import get_language
 
 from cosinnus.utils.dates import datetime_format_js2py
+from cosinnus.utils.lanugages import get_format_safe
 
 
 def _is_number(s):
@@ -25,7 +25,7 @@ class BaseL10NPicker(DateTimePicker):
 
     def render(self, name, value, attrs=None, renderer=None):
         if self.js_format_key is not None and self.options:
-            js_format_string = get_format(self.js_format_key)
+            js_format_string = get_format_safe(self.js_format_key)
             self.options.update(
                 {
                     'format': js_format_string,
