@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from builtins import object
 
 from django.core.exceptions import FieldDoesNotExist
+from django.utils.formats import get_format
 from django.utils.translation import get_language
 
 from cosinnus.conf import settings
@@ -47,3 +48,18 @@ class MultiLanguageFieldValidationFormMixin(object):
                 name = self.cleaned_data.get(other_name_field)
                 break
         return name
+
+
+def get_format_safe(format_type, lang=None, use_l10n=None):
+    """Wrapper for django.utils.formats.get_format Django get_format returns the format-type string unchanged,
+    if the format is not defined for the given language. This wrapper uses the sites default language as a fallback
+    when this happens.
+    """
+    format_primary = get_format(format_type, lang=lang, use_l10n=use_l10n)
+
+    # get and return the format for the default-language, if the primary format is invalid,
+    # i.e. matches the given format string
+    if format_primary == format_type:
+        return get_format(format_type, lang=settings.LANGUAGE_CODE, use_l10n=use_l10n)
+
+    return format_primary
