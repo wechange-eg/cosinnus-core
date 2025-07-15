@@ -279,21 +279,34 @@ class BBBRoomGuestAccessView(TemplateView):
         return HttpResponseRedirect(resolved_room_url)
 
     def get(self, request, *args, **kwargs):
-        self.guest_token = kwargs.pop('guest_token', '').strip()
         # check if guest token exists
+        self.guest_token = kwargs.pop('guest_token', '').strip()
         if not self.guest_token:
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
+
+        # match correct BBB room
         current_portal = CosinnusPortal.get_current()
-        # match correct bbb room
         self.bbb_room = get_object_or_None(BBBRoom, portal=current_portal, guest_token=self.guest_token)
         if not self.bbb_room:
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
 
-        user = self.request.user
+        # get source_obj BBBRoomMixin if exists and make sure BBB is enabled
         self.source_obj = self.bbb_room.source_object
+        if not (self.source_obj and self.source_obj.can_have_bbb_room()):
+            messages.warning(request, self.msg_invalid_token)
+            return redirect_to_error_page(request, view=self)
+
+        # make sure, source group exists and is active
+        # FIXME this does not check for restricted BBB access due to the current premium-state of the source group
+        #   maybe check for `bbb_restricted` like `cosinnus/templates/cosinnus/fields/video_conference_type_field.html`
         self.source_group = self.get_source_group(self.source_obj)
+        if not (self.source_group and self.source_group.is_active):
+            messages.warning(request, self.msg_invalid_token)
+            return redirect_to_error_page(request, view=self)
+
+        user = self.request.user
         if user.is_authenticated:
             # check if user is member of the bbb-room's source object and if so, redirect them to the room directly
             if self.source_group and self.source_group.is_member(user) and hasattr(self.source_obj, 'get_absolute_url'):
