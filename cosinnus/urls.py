@@ -695,6 +695,17 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
+
+# TODO: cleanup imports/pattern locations
+from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
+
+router.register('devices', FCMDeviceAuthorizedViewSet)
+urlpatterns += [
+    # URLs will show up at <api_root>/devices
+    # DRF browsable API which lists all available endpoints
+    path('fcm/', include(router.urls)),
+]
+
 router.register(r'public_conferences', PublicConferenceViewSet, basename='public_conference')
 router.register(r'conferences', ConferenceViewSet, basename='conference')
 router.register(r'groups', CosinnusSocietyViewSet, basename='group')

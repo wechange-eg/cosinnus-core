@@ -368,6 +368,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'taggit',
         'django_clamd',
         'rest_framework_simplejwt.token_blacklist',
+        'fcm_django',
     ]
 
     """ --------------- SENTRY/RAVEN LOGGING ---------------- """
