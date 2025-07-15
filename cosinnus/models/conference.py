@@ -283,6 +283,8 @@ class CosinnusConferenceSettings(models.Model):
                 parent_object = get_parent_object_in_conference_setting_chain(obj)
                 if parent_object:
                     setting_obj = cls.get_for_object(parent_object, recursed=True)
+                else:
+                    setting_obj = None
 
             # at this point, the recursion has completed and is only on its way outside.
             # while going up, we collect the premium state (if one part of the hierarchy is premium, all are)
