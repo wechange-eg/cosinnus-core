@@ -62,43 +62,6 @@ def do_things(c):
 
 
 @task
-def __deprecated__deploy(_ctx, do_maintenance=True):
-    """
-    Note: not used anymore since we have been using poetry, as inplace `poetry update`s are a bad idea.
-          Use `hotdeploy` or `fulldeploy` instead!
-
-    Main deploy command, full deploy with dependency update, raising a downtime banner
-    on the entire site, blocking any user access.
-
-    Will do the following in order:
-        * pull up a maintenance notice page
-        * stop the servers
-        * do a DB backup
-        * pull from git
-        * pip update
-        * migrate
-        * start the servers
-        * remove the maintenance notice page
-    """
-    check_confirmation()
-    backup(_ctx)
-    if do_maintenance:
-        maintenanceon(_ctx)
-    stop(_ctx)
-    _pull_and_update()
-    # restart_db()
-    migrate(_ctx)
-    start(_ctx)
-    clearportalcache(_ctx)
-    compilewebpack(_ctx)
-    collectstatic(_ctx)
-    compileless(_ctx)
-    if do_maintenance:
-        maintenanceoff(_ctx)
-    print('\n\n>> Deploy has finished successfully.\n')
-
-
-@task
 def hotdeploy(_ctx):
     """Fast deploy with poetry update and soft server restarts. No downtime-banner raised.
     Recommended only for hotfixes that do not require dependency package updates."""
@@ -132,6 +95,46 @@ def fastpull(_ctx):
         c.run(f'git checkout {env.pull_branch}')
         c.run('git pull')
     print('\n\n>> Fastpull has finished successfully.\n')
+
+
+@task
+def diffbase(_ctx):
+    """Prints out the diff of the base project - basically the changes that would happen if fastpull (or the
+    base project part of hotdeploy) would be executed right now.
+    This can be executed safely and does not cause any changes on the server."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        c.run('git fetch --all')
+        c.run(f'git log HEAD..origin/{env.pull_branch}')
+        c.run(f'git diff HEAD...origin/{env.pull_branch}')
+    print('\n\n>> diffbase has finished successfully.\n')
+
+
+@task
+def diffcore(_ctx):
+    """Prints out the diff of cosinnus-core - basically the changes that would happen if hotdeploy would be executed
+    right now.
+    This can be executed safely and does not cause any changes on the server."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.cd(f'{env.cosinnus_src_path}'):
+            c.run('git fetch --all')
+            c.run(f'git log HEAD..origin/{env.cosinnus_pull_branch}')
+            c.run(f'git diff HEAD...origin/{env.cosinnus_pull_branch}')
+    print('\n\n>> diffcore has finished successfully.\n')
+
+
+@task
+def enablegitremoteoncore(_ctx):
+    """Enables the cosinnus-core git to read properly from the remote.
+    This is neccessary after a fuldeploy because poetry doesn't configures remote.origin.fetch in the editable repos."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.cd(f'{env.cosinnus_src_path}'):
+            c.run('git config --local --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*')
 
 
 @task
@@ -484,6 +487,7 @@ def _pull_and_update(use_poetry_update=False, fresh_install=False):
         c.run('git pull')
         if fresh_install:
             c.run('poetry install')
+            enablegitremoteoncore()
         else:
             with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
                 if env.legacy_mode:
@@ -492,8 +496,6 @@ def _pull_and_update(use_poetry_update=False, fresh_install=False):
                     c.run('poetry update')
                 else:
                     with c.cd(f'{env.cosinnus_src_path}'):
-                        # this is neccessary because poetry doesn't configures remote.origin.fetch in the editable repos
-                        c.run('git config --local --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*')
                         c.run('git fetch --all')
                         c.run('git stash')
                         c.run(

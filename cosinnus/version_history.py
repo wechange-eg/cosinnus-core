@@ -2,6 +2,7 @@
 from datetime import datetime
 
 import pytz
+from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
@@ -18,6 +19,39 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.5.0': {
+        'datetime': datetime(2025, 7, 16, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.5.0'),
+        'short_text': _('This update includes several bugfixes:'),
+        'full_text': [
+            _(
+                '- Fixed a bug where newly invited group/project members could not join a BBB meeting.\n'
+                '- Fixed a bug where admins would see a broken page layout once after logging in.\n'
+                '- Fixed a visual bug in the administration interface after clicking a download-link.\n'
+                '- Fixed a bug where notifications would not be marked as read when they were too far down in the list.\n'
+                '- Added an option to the notification list to mark all notifications as read.\n'
+                '- Fixed a bug where event polls could not be created if the user interface was set to certain languages.\n'
+                '- Fixed a bug in the legacy messaging system that sometimes prevented writing a new message.\n'
+                '- (RocketChat) further improved the stability and performance of the integration with RocketChat.\n'
+            ),
+            # default password validator settings only
+            _(
+                '- The password requirements have been changed: Now a password must consist of at least 12 characters. '
+                'Otherwise, there are no further requirements regarding the chosen characters. '
+                'Passwords are still checked against a list of frequently used passwords.\n'
+            )
+            if len(settings.AUTH_PASSWORD_VALIDATORS) <= 2
+            else '',
+            # v3 frontend only
+            _(
+                '- Fixed a bug that prevented users from completing the intro tour on mobile devices running iOS 18.\n'
+                '- Fixed a bug that sometimes prevented entries from being displayed in the '
+                'lower part of the sidebar on mobile devices.\n'
+            )
+            if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
+            else '',
+        ],
+    },
     '2.4.0': {
         'datetime': datetime(2025, 5, 7, tzinfo=pytz.utc),
         'title': _('Version 2.4.0 released'),

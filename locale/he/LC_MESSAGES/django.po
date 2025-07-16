@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-07 10:52+0200\n"
+"POT-Creation-Date: 2025-07-16 11:01+0200\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2024,6 +2024,35 @@ msgstr "רשימת ביטויים המופרדת בפסיקים שעבורם ה�
 msgid "Is Moderator"
 msgstr "הוא מנהל פורום"
 
+msgid "Fits us"
+msgstr ""
+
+msgid "Partly fits us"
+msgstr ""
+
+msgid "Does not fit us"
+msgstr ""
+
+msgid "Group for Mitwirk-O-Mat Settings"
+msgstr ""
+
+msgid "Determines if the Mitwirk-O-Mat data for this group should displayed in the API."
+msgstr ""
+
+msgid "Replacement description for the group description. If empty, falls back to `group.description_long` which falls back to `group.description`."
+msgstr ""
+
+msgid "Replacement avatar for the group avatar. If empty, falls back to group.avatar."
+msgstr ""
+
+#, fuzzy
+#| msgid ", for the following reason:"
+msgid "User-set answers to Mitwirk-O-Mat questions"
+msgstr ", מהסיבה הבאה:"
+
+msgid "Mitwirk-O-Mat Settings"
+msgstr ""
+
 #, fuzzy
 msgid "ToS accepted"
 msgstr "תנאי השימוש אושרו?"
@@ -3101,8 +3130,15 @@ msgstr "חשבונות משתמשים זמניים"
 msgid "Members"
 msgstr "חברים"
 
+msgid "Volunteer-O-Matic"
+msgstr ""
+
 msgid "Settings"
 msgstr "הגדרות"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
+msgstr "דווח על תוכן פוגעני"
 
 msgid "Drag and Drop files here..."
 msgstr "גרור ושחרר קבצים כאן..."
@@ -4292,10 +4328,6 @@ msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
 msgid "Close"
 msgstr "סגור"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Report offensive content"
-msgstr "דווח על תוכן פוגעני"
-
 #, fuzzy
 msgid "Sorry, this feature is only available for registered members."
 msgstr "מספר הטלפון שלך גלוי רק עבור משתמשים רשומים"
@@ -5045,6 +5077,12 @@ msgstr "שילוב פייסבוק זמין לאחר שיצרת את הפרויי
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "ה- HTML שהוזן כאן יוצג בלוח הכלים של הקבוצה/פרויקט (לחברים בלבד)"
+
+msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
+msgstr ""
+
+msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
+msgstr ""
 
 msgid "About me"
 msgstr "כמה מילים עלי"
@@ -6069,6 +6107,52 @@ msgstr "חברים מחוברים בלבד"
 
 msgid "Everybody"
 msgstr "כולם"
+
+msgid "Matching Settings for the Volunteer-O-Matic"
+msgstr ""
+
+#, fuzzy
+#| msgid "Where"
+msgid "here"
+msgstr "איפה"
+
+#, python-format
+msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
+msgstr ""
+
+msgid "Participate in the Volunteer-O-Matic with "
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different name than the one in your %(settings_link)s."
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different description than the one in your %(settings_link)s."
+msgstr ""
+
+msgid "Character limit"
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different logo than the one in your %(settings_link)s."
+msgstr ""
+
+#, fuzzy
+#| msgid "Open Preview"
+msgid "Image preview"
+msgstr "פתח תצוגה מקדימה"
+
+#, fuzzy
+#| msgid "Link URL"
+msgid "Link"
+msgstr "כתובת קישור"
+
+msgid "Please choose the answers that best fit you."
+msgstr ""
+
+msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
+msgstr ""
 
 msgid "Toggle navigation"
 msgstr "החלף מצב ניווט"
@@ -8153,6 +8237,11 @@ msgstr "לוח כלים של הפרויקט"
 msgid "in the Project Dashboard"
 msgstr "לוח כלים של הפרויקט"
 
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Project settings"
+msgstr "הגדרות פרטיות"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "ארגן את הפרויקטים או היוזמות שלך ביעילות עם שותפיך. כל הכלים החשובים לשיתוף פעולה במקום אחד: חדשות, לוחות עריכה משותפת, אירועים, מטלות, ועוד."
 
@@ -8254,6 +8343,27 @@ msgstr "רק חברי פרוייקט יכולים לראות את התוכן ש�
 msgid "Note: New recordings can only be made if you have booked premium features for this project."
 msgstr ""
 
+msgid "If you want your project to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Go to the Matching Settings of your project for the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Name of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your project. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr "אינך נמצא כעת באף קבוצה"
 
@@ -8269,6 +8379,11 @@ msgstr "לוח כלים של הקבוצה"
 #, fuzzy
 msgid "in the Group Dashboard"
 msgstr "לוח כלים של הקבוצה"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Group settings"
+msgstr "הגדרות פרטיות"
 
 #, fuzzy
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
@@ -8364,6 +8479,27 @@ msgstr "רק חברי קבוצה יכולים לראות את התוכן שבי�
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr ""
 
+msgid "If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Go to the Matching Settings of your group for the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Name of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
+msgstr ""
+
 msgid "You are not currently attending any Conferences"
 msgstr "אינך משתתף כעת בשיחות ועידה כלשהן"
 
@@ -8372,6 +8508,11 @@ msgstr "הועידות הקרובות שלי"
 
 msgid "Conference Menu"
 msgstr "תפריט ועידה"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference settings"
+msgstr "הגדרות ועידה"
 
 msgid "Browse all Conferences"
 msgstr "עיין בכל הוועידות"
@@ -8553,6 +8694,32 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+#, python-brace-format
+msgid "Version {version_number} released"
+msgstr ""
+
+msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed a bug where newly invited group/project members could not join a BBB meeting.\n"
+"- Fixed a bug where admins would see a broken page layout once after logging in.\n"
+"- Fixed a visual bug in the administration interface after clicking a download-link.\n"
+"- Fixed a bug where notifications would not be marked as read when they were too far down in the list.\n"
+"- Added an option to the notification list to mark all notifications as read.\n"
+"- Fixed a bug where event polls could not be created if the user interface was set to certain languages.\n"
+"- Fixed a bug in the legacy messaging system that sometimes prevented writing a new message.\n"
+"- (RocketChat) further improved the stability and performance of the integration with RocketChat.\n"
+msgstr ""
+
+msgid "- The password requirements have been changed: Now a password must consist of at least 12 characters. Otherwise, there are no further requirements regarding the chosen characters. Passwords are still checked against a list of frequently used passwords.\n"
+msgstr ""
+
+msgid ""
+"- Fixed a bug that prevented users from completing the intro tour on mobile devices running iOS 18.\n"
+"- Fixed a bug that sometimes prevented entries from being displayed in the lower part of the sidebar on mobile devices.\n"
+msgstr ""
+
 msgid "Version 2.4.0 released"
 msgstr ""
 
@@ -8579,9 +8746,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 2.2.5 released"
-msgstr ""
-
-msgid "This update includes several bugfixes:"
 msgstr ""
 
 msgid ""
@@ -9089,6 +9253,14 @@ msgid "Your message has been sent."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
 
 msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
+#, fuzzy
+#| msgid "This function is not enabled for this conference."
+msgid "This function is not enabled for this group type."
+msgstr "פונקציה זו אינה זמינה עבור ועידה זו."
+
+msgid "Your Matching Settings for the Volunteer-O-Matic have been saved."
 msgstr ""
 
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
@@ -14122,6 +14294,16 @@ msgstr "האם אתה בטוח שברצונך למחוק צוות זה?"
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "האם אתה בטוח שברצונך למחוק צוות זה?"
+
+#, fuzzy
+#~| msgid "Nextcloud Group ID"
+#~ msgid "Nextcloud Deck Board ID"
+#~ msgstr "מזהה קבוצת Nextcloud"
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Task-Board"
+#~ msgstr "לוח כלים"
 
 #~ msgid "In my Cloud Files"
 #~ msgstr "בקבצי הענן שלי"

@@ -41,7 +41,7 @@ def update_bbb_room_memberships(group_membership, deleted):
 def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
     """Called after a CosinusGroupMembership is changed, to threaded apply membership permission
     changes to BBBRoom of all events in this group"""
-    if settings.COSINNUS_CONFERENCES_ENABLED:
+    if settings.COSINNUS_CONFERENCES_ENABLED or settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
 
         class CreateBBBRoomUpdateThread(Thread):
             def run(self):

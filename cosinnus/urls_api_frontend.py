@@ -5,6 +5,7 @@ from django.urls import path
 
 from cosinnus.api_frontend.views.content import MainContentView
 from cosinnus.api_frontend.views.navigation import (
+    AlertsMarkAllReadView,
     AlertsView,
     BookmarksView,
     HelpView,
@@ -80,6 +81,11 @@ urlpatterns += [
     path('api/v3/navigation/unread_messages/', UnreadMessagesView.as_view(), name='api-navigation-unread-messages'),
     path('api/v3/navigation/unread_alerts/', UnreadAlertsView.as_view(), name='api-navigation-unread-alerts'),
     path('api/v3/navigation/alerts/', AlertsView.as_view(), name='api-navigation-alerts'),
+    path(
+        'api/v3/navigation/mark_all_alerts_read/',
+        AlertsMarkAllReadView.as_view(),
+        name='api-navigation-alerts-mark-all-read',
+    ),
     path(
         'api/v3/navigation/membership_alerts/', MembershipAlertsView.as_view(), name='api-navigation-membership-alerts'
     ),

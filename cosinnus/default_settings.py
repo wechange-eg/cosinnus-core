@@ -634,7 +634,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
             {
                 'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
                 'OPTIONS': {
-                    'min_length': 8,
+                    'min_length': 12,
                 },
             },
             {

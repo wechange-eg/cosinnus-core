@@ -595,8 +595,10 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         """Extracts a menu_item from all proper links contained in the given HTML soup,
         with a heuristic for icons/labels.
         Possible HTML properties on buttons that are v3-specific and change button behaviour:
-            - attribute "data-v3-id": if present the button needs to href to be included and its returned id property
+            - attribute "data-v3-id": if present, the button needs to href to be included and its returned id property
                 is set to it
+            - attribute "data-v3-type": if present, the supplied value will be passed along the sidebare menu item
+                as `type="value"` property. Used for example to signify a `type="download"` link
             - attribute "data-toggle" in combination with "data-target": bootstrap modal buttons are included and
                 these two attributes are passed along in the "attributes" attribute
             - CSS classes "x-v3-leftnav-action-button", "x-v3-leftnav-action-target-active-app",
@@ -619,15 +621,23 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                 attributes.update(
                     {'data-toggle': leftnav_link.get('data-toggle'), 'data-target': leftnav_link.get('data-target')}
                 )
-            # extract v3-specific id if present
+            # detect onclick attribute buttons like the report content modal link
+            if leftnav_link.get('onclick'):
+                attributes.update({'onclick': leftnav_link.get('onclick')})
+
+            # extract v3-specific id and type if present
             v3_id = leftnav_link.get('data-v3-id', None)
+            v3_type = leftnav_link.get('data-v3-type', None)
             # skip link-less buttons (like the dropdown trigger), unless they have modal data attributes
             href = leftnav_link.get('href')
             if not href and not attributes and not v3_id:
                 continue
             # ignore some links depending on their class
             if leftnav_link.get('class') and any(
-                [blacklisted_class in leftnav_link.get('class') for blacklisted_class in ['fadedown-clickarea']]
+                [
+                    blacklisted_class in leftnav_link.get('class')
+                    for blacklisted_class in ['x-v3-leftnav-hidden', 'fadedown-clickarea']
+                ]
             ):
                 continue
             link_label = '(Link)'
@@ -691,6 +701,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                     is_external=bool(leftnav_link.get('target', None) == '_blank'),
                     sub_items=sub_items,
                     selected=selected,
+                    type=v3_type or None,
                     attributes=attributes if attributes else None,
                 )
             # attach the id, CSS classes, and data-target to the menu item for internal use
@@ -804,7 +815,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                                     )  # make sure actions list exists
                                     target_subnav = find_target_button['actions']
                 elif not menu_item['url']:
-                    # non url buttons like help popups go in the bottom list
+                    # non url buttons like help popups and modal boxes go in the bottom list
                     target_subnav = bottom
                 elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS):
                     target_subnav = bottom

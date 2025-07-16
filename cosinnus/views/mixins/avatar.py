@@ -21,8 +21,13 @@ class AvatarFormMixin(object):
         elif self.avatar_field_name + '-ratio' in form.data and form.data[self.avatar_field_name + '-ratio']:
             avatar_field = AvatarField()
             avatar_field.name = self.avatar_field_name
+            if 'obj' in form.cleaned_data:
+                obj_cleaned_data = form.cleaned_data['obj']
+            else:
+                obj_cleaned_data = form.cleaned_data
+
             try:
-                avatar_field.save_form_data(form.instance, form.cleaned_data['obj'][self.avatar_field_name])
+                avatar_field.save_form_data(form.instance, obj_cleaned_data[self.avatar_field_name])
             except SystemError:
                 messages.error(
                     self.request,

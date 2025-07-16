@@ -24,18 +24,12 @@ class UserDayOnlineTest(APITestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.api_url = reverse('cosinnus:frontend-api:api-navigation-profile')
-        cls.test_user = User.objects.create(**TEST_USER_DATA)
         # recreate portal, as objects created by migrations are droped by the TransactionTestCase teardown.
         CosinnusPortal.objects.get_or_create(
             id=1, defaults={'name': 'default portal', 'slug': 'default', 'public': True, 'site': Site.objects.first()}
         )
         cls.portal = CosinnusPortal.get_current()
         cls.credential = 'admin'
-        try:
-            User.objects.get(**TEST_USER_DATA).delete()
-            User.objects.get(**TEST_USER_DATA2).delete()
-        except Exception:
-            pass
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.test_user.cosinnus_profile.email_verified = True
         cls.test_user.cosinnus_profile.save()

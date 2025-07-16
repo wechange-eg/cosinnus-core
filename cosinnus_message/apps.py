@@ -12,4 +12,7 @@ class CosinnusMessageAppConfig(AppConfig):
 
         cosinnus_app.register()
         if settings.COSINNUS_ROCKET_ENABLED:
-            import cosinnus_message.hooks  # noqa
+            from cosinnus_message.integration import RocketChatIntegrationHandler  # noqa
+
+            # initialize integration handler
+            RocketChatIntegrationHandler()

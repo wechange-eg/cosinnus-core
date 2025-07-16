@@ -18,7 +18,7 @@ logger = logging.getLogger('cosinnus')
 
 
 class Command(BaseCommand):
-    help = 'Checks all active users to create any missing nextcloud user accounts'
+    help = 'Checks all active users to create any missing nextcloud user accounts. Will not update existing users.'
 
     def handle(self, *args, **options):
         try:

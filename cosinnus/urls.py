@@ -45,6 +45,7 @@ from cosinnus.views import (
     map,
     map_api,
     microsite,
+    mitwirkomat,
     profile,
     search,
     statistics,
@@ -661,6 +662,14 @@ for url_key in group_model_registry:
             name=prefix + 'attached_object_select2_view',
         ),
     ]
+    if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
+        urlpatterns += [
+            path(
+                f'{url_key}/<str:group>/matching_settings/',
+                mitwirkomat.mitwirkomat_settings_view,
+                name=prefix + 'mitwirkomat-settings',
+            ),
+        ]
 
 urlpatterns += url_registry.urlpatterns
 
