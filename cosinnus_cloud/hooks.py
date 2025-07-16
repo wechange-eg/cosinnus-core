@@ -175,7 +175,7 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
     elif not filtered_name or is_number(filtered_name):
         filtered_name = "Folder" + filtered_name
     # max length for nextcloud groups (group folders could be longer, but lets keep it like that)
-    filtered_name = filtered_name[:64]  
+    filtered_name = filtered_name[:64].strip()
 
     # uniquify the id-name in case it clashes
     all_names = list(set(
