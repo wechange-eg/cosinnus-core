@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-11 11:49+0200\n"
+"POT-Creation-Date: 2025-07-16 11:01+0200\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8974,6 +8974,14 @@ msgid ""
 "- Fixed a bug where event polls could not be created if the user interface was set to certain languages.\n"
 "- Fixed a bug in the legacy messaging system that sometimes prevented writing a new message.\n"
 "- (RocketChat) further improved the stability and performance of the integration with RocketChat.\n"
+msgstr ""
+
+msgid "- The password requirements have been changed: Now a password must consist of at least 12 characters. Otherwise, there are no further requirements regarding the chosen characters. Passwords are still checked against a list of frequently used passwords.\n"
+msgstr ""
+
+msgid ""
+"- Fixed a bug that prevented users from completing the intro tour on mobile devices running iOS 18.\n"
+"- Fixed a bug that sometimes prevented entries from being displayed in the lower part of the sidebar on mobile devices.\n"
 msgstr ""
 
 msgid "Version 2.4.0 released"

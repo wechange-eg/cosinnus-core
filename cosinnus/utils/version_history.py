@@ -3,6 +3,7 @@ from operator import itemgetter
 
 from dateutil import parser
 from django.urls import reverse
+from django.utils.encoding import force_str
 from django.utils.text import slugify
 from django.utils.timezone import now
 
@@ -27,6 +28,9 @@ def _version_list(updates):
                 'url': f'{version_history_url}#{anchor}',
             }
         )
+        # `full_text` can be a string or a list of strings
+        if isinstance(version_details.get('full_text', ''), list):
+            version_details['full_text'] = ''.join([force_str(text) for text in version_details['full_text']])
         version_list.append(version_details)
     return version_list
 
