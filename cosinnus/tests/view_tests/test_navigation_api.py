@@ -555,6 +555,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
                     settings.COSINNUS_V3_MENU_HOME_LINK,
                     'fa-info-circle',
                     id='About',
+                    is_external=True,
                 ),
                 MenuItem('Logout', '/logout/', 'fa-right-from-bracket', id='Logout'),
             ],

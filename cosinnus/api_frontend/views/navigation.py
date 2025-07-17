@@ -1327,7 +1327,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     'portal_name': settings.COSINNUS_BASE_PAGE_TITLE_TRANS
                 }
                 about_item = MenuItem(
-                    about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About'
+                    about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About', is_external=True
                 )
                 profile_menu.append(about_item)
 
