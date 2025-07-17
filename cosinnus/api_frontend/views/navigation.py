@@ -1487,7 +1487,11 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         # home
         current_portal = CosinnusPortal.get_current()
         home_image = '%s%s' % (current_portal.get_domain(), static(settings.COSINNUS_PORTAL_LOGO_NAVBAR_IMAGE_URL))
-        if settings.COSINNUS_V3_MENU_HOME_LINK:
+        if settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE:
+            home_item = MenuItem(
+                _('Home'), settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE, icon='fa-home', image=home_image, id='Home'
+            )
+        elif settings.COSINNUS_V3_MENU_HOME_LINK:
             home_item = MenuItem(
                 _('Home'), settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-home', image=home_image, id='Home'
             )
