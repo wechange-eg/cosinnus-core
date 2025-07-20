@@ -30,7 +30,7 @@ from cosinnus.models.user_dashboard import FONT_AWESOME_CLASS_FILTER, MenuItem
 from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 from cosinnus.utils.functions import clean_single_line_text, is_number, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
-from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
+from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 
 logger = logging.getLogger('cosinnus')
@@ -839,8 +839,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         else:
             middle.extend(middle_from_buttons_area)
 
-        # add sidebar third party tools if it exists in group data
-        if self.group and self.group.third_party_tools:
+        # add sidebar third party tools if it exists in group data and user has read_access
+        if self.group and self.group.third_party_tools and check_object_read_access(self.group, self.request.user):
             for third_party_tool in self.group.third_party_tools:
                 try:
                     middle.append(
