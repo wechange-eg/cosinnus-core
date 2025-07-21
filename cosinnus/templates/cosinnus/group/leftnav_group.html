@@ -38,8 +38,8 @@
     {% if group.show_mitwirkomat_settings %}
 	    {% captureas href %}{% group_url 'cosinnus:mitwirkomat-settings' group=group %}{% endcaptureas %}
         {% captureas label %}{% trans "Volunteer-O-Matic" %}{% endcaptureas %}
-        {% captureas icon_full_class %}{% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}fas fa-comment-alt-check{% else %}fas fa-comment-alt{% endif %}{% endcaptureas %}
-        {% include "cosinnus/leftnav_button.html" with active=is_mitwirkomat_settings extra_classes="fine-space" icon_full_class=icon_full_class label=label href=href  %}
+        {% captureas icon_full_class_mitwirkomat %}{% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}fas fa-comment-alt-check{% else %}fas fa-comment-alt{% endif %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_mitwirkomat_settings extra_classes="fine-space" icon_full_class=icon_full_class_mitwirkomat label=label href=href  %}
     {% endif %}
 {% endif %}
 
@@ -110,8 +110,8 @@
 
 {% if user.pk in object.members or user.pk in object.admins %}
     {% captureas label %}{% trans "Leave" %}{% endcaptureas %}
-    {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#"  %}
+    {% captureas extra_atts_modal %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#" extra_atts=extra_atts_modal %}
 
     {% captureas label %}{% blocktrans with title=object.name %}Do you really want to leave „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
     {% captureas title %}{% trans "Leave" %}{% endcaptureas %}
@@ -120,8 +120,8 @@
     {% include "cosinnus/modal_box.html" with id="leave_join_group_modal" label=label title=title form_action=action %}
 {% elif user.pk in group.pendings %}
     {% captureas label %}{% trans "Withdraw Request" %}{% endcaptureas %}
-    {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#"  %}
+    {% captureas extra_atts_modal %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#" extra_atts=extra_atts_modal %}
 
     {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
     {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
@@ -130,8 +130,8 @@
     {% include "cosinnus/modal_box.html" with id="leave_join_group_modal" label=label title=title form_action=action %}
 {% elif object.members %}
     {% captureas label %}{% trans "Join" %}{% endcaptureas %}
-    {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-in" label=label href="#" %}
+    {% captureas extra_atts_modal %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-in" label=label href="#" extra_atts=extra_atts_modal %}
 
     {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
     {% captureas title %}{% trans "Join" %}{% endcaptureas %}
