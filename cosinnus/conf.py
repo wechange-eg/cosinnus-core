@@ -1649,6 +1649,9 @@ class CosinnusConf(AppConf):
     # default value for the answers for an unfilled form, see `MitwirkomatSettings.QUESTION_CHOICES`
     MITWIRKOMAT_QUESTION_DEFAULT_VALUE = '0'
 
+    # disable the group banner nag screen
+    MITWIRKOMAT_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
+
 
 class CosinnusDefaultSettings(AppConf):
     """Settings without a prefix namespace to provide default setting values for other apps.
