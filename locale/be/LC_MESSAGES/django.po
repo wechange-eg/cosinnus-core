@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-16 11:01+0200\n"
+"POT-Creation-Date: 2025-07-23 13:37+0200\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1843,6 +1843,10 @@ msgstr "Ідэнтыфікатар Facebook-групы"
 
 #, fuzzy
 msgid "Nextcloud Groupfolder ID"
+msgstr "Ідэнтыфікатар Facebook-групы"
+
+#, fuzzy
+msgid "Nextcloud Deck Board ID"
 msgstr "Ідэнтыфікатар Facebook-групы"
 
 msgid "Is conference"
@@ -4329,6 +4333,18 @@ msgstr "пачніце адсюль..."
 msgid "Activate Cloud"
 msgstr "Узнавіць"
 
+msgid "Looking for new members? Join the Volunteer-O-Matic!"
+msgstr ""
+
+msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
+msgstr ""
+
+#, fuzzy
+#| msgid "Join now!"
+msgctxt "Mitwirkomat"
+msgid "Join now"
+msgstr "Далучыцеся зараз!"
+
 #, fuzzy
 msgid "Members-Map"
 msgstr "Чальцы"
@@ -5220,9 +5236,6 @@ msgid "Facebook integration is available after you created the project!"
 msgstr "Інтэграцыя з Facebook стане даступнай пасля стварэння праекта!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
-msgstr ""
-
-msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
 msgstr ""
 
 msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
@@ -10009,6 +10022,21 @@ msgstr "Стан"
 msgid "Attendance data is not available for this conference."
 msgstr "Увядзіце назву праекта."
 
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Task-Board"
+msgstr "Панэль кіравання"
+
+msgctxt "the_app"
+msgid "deck"
+msgstr ""
+
+msgid "The task-board creation is in progress..."
+msgstr ""
+
+msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
+msgstr ""
+
 msgid "The following Pads were re-initialized:"
 msgstr "Наступныя нататнікі паўторна ініцыялізаваныя:"
 
@@ -14667,15 +14695,6 @@ msgstr "Вы сапраўды хочаце выдаліць гэту каман�
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "Вы сапраўды хочаце выдаліць гэту каманду?"
-
-#, fuzzy
-#~ msgid "Nextcloud Deck Board ID"
-#~ msgstr "Ідэнтыфікатар Facebook-групы"
-
-#, fuzzy
-#~| msgid "Dashboard"
-#~ msgid "Task-Board"
-#~ msgstr "Панэль кіравання"
 
 #, fuzzy
 #~ msgid "In my Cloud Files"
