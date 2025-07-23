@@ -68,7 +68,7 @@ class MainContentViewTest(APILiveServerTestCase):
             'js_urls only contain .js items',
         )
         self.assertTrue(
-            all([css_item.endswith('.css') for css_item in response.data['css_urls']]),
+            all([re.match('^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
             'css_urls only contain .css items',
         )
         self.assertIn('var ', response.data['scripts'], 'scripts response contains some JS')
@@ -111,11 +111,12 @@ class MainContentViewTest(APILiveServerTestCase):
             'js_urls only contain .js items',
         )
         self.assertTrue(
-            all([css_item.endswith('.css') for css_item in response.data['css_urls']]),
+            all([re.match('^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
             'css_urls only contain .css items',
         )
         self.assertIn('var ', response.data['scripts'], 'scripts response contains some JS')
-        self.assertIn('<meta ', response.data['meta'], 'at least one meta item in meta resposne')
+        self.assertIn('<meta ', response.data['meta'], 'at least one meta item in meta response')
+        self.assertIn('rel="apple-touch-icon"', response.data['meta'], 'one rel-link in meta response')
         self.assertEqual(response.data['sub_navigation'], None, 'no subnavigation in dashboard')
         self.assertEqual(response.data['main_menu']['label'], 'Personal Dashboard')
         self.assertEqual(

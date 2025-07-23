@@ -67,8 +67,14 @@ app_name = 'cosinnus'
 urlpatterns = [
     # we do not define an index anymore and let CMS handle that.
     path('favicon.ico', RedirectView.as_view(url=static('images/favicon.ico'), permanent=False)),
-    path('apple-touch-icon.png', RedirectView.as_view(url=static('images/apple-touch-icon-114x114-precomposed.png'), permanent=False)),
-    path('apple-touch-icon-precomposed.png', RedirectView.as_view(url=static('images/apple-touch-icon-114x114-precomposed.png'), permanent=False)),
+    path(
+        'apple-touch-icon.png',
+        RedirectView.as_view(url=static('images/apple-touch-icon-114x114-precomposed.png'), permanent=False),
+    ),
+    path(
+        'apple-touch-icon-precomposed.png',
+        RedirectView.as_view(url=static('images/apple-touch-icon-114x114-precomposed.png'), permanent=False),
+    ),
     path('users/', map.tile_view, name='user-list', kwargs={'types': ['people']}),
     path('portal/admins/', user.portal_admin_list, name='portal-admin-list'),
     path('user/<str:username>/', profile.detail_view, name='profile-detail'),

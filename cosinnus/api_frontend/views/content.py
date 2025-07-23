@@ -1,3 +1,4 @@
+import itertools
 import logging
 import re
 from copy import copy
@@ -321,7 +322,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         css_urls = self._parse_css_urls(html_soup)
         script_constants = self._parse_inline_tag_contents(html_soup, 'script', class_='v3-constants')
         scripts = self._parse_inline_tag_contents(html_soup, 'script', class_=False)
-        meta = self._parse_tags(html_soup, 'meta')
+        meta = self._parse_meta_urls(html_soup)
         styles = self._parse_inline_tag_contents(html_soup, 'style')
         sub_navigation = self._parse_leftnav_menu(html_soup)
 
@@ -878,6 +879,16 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         js_urls = [self._format_static_link(link) for link in js_urls]
         js_urls = uniquify_list(js_urls)
         return js_urls
+
+    def _parse_meta_urls(self, html_soup):
+        """Adds all <meta> elements and all <link rel="VAL"> elements where VAL in `INCLUDED_REL_VALUES`"""
+        INCLUDED_REL_VALUES = ['shortcut icon', 'apple-touch-icon', 'apple-touch-icon-precomposed']
+        meta_str = self._parse_tags(html_soup, 'meta')
+        rel_links = itertools.chain.from_iterable(
+            [html_soup.find_all('link', rel=rel_val) for rel_val in INCLUDED_REL_VALUES]
+        )
+        rel_str = '\n'.join([str(tag).strip() for tag in rel_links])
+        return '\n'.join([concat for concat in [meta_str, rel_str] if concat])
 
     def _parse_tags(self, html_soup, tag_name):
         """Parses all tags of a given tag name and returns them, including their tag definition,
