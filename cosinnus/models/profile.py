@@ -1100,3 +1100,50 @@ class UserMatchObject(models.Model):
     def get_match_user_url(self):
         url = reverse('cosinnus:user-match') + f'?user={self.from_user.pk}'
         return url
+
+
+class UserBlock(models.Model):
+    """
+    Models the relation of one user blocking another users.
+    Note that the existence of an instance of this model signifies the blocking,
+    an "unblock" means deleting the instance.
+    If an instance of this exists, `user` will no longer see any posts created by `blocked_user`.
+    """
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='Source User',
+        help_text='User who has marked a target user as blocked.',
+        on_delete=models.CASCADE,
+        related_name='user_blocks',
+    )
+    blocked_user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='Target User',
+        help_text='The target user for the block.',
+        on_delete=models.CASCADE,
+        related_name='blocked_by',
+    )
+
+    last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
+
+    class Meta(object):
+        app_label = 'cosinnus'
+        verbose_name = _('User-Block')
+        verbose_name_plural = _('User-Blocks')
+        unique_together = (('user', 'blocked_user'),)
+
+    def __str__(self):
+        return f'User-Block: {self.user} --> {self.blocked_user}'
+
+    @classmethod
+    def block_user(cls, blocking_user, blocked_user):
+        """Blocks a user by creating the corresponding instance of this model.
+        Does nothing if the user is already blocked."""
+        cls.objects.get_or_create(user=blocking_user, blocked_user=blocked_user)
+
+    @classmethod
+    def unblock_user(cls, blocking_user, unblocked_user):
+        """Unblocks a user by deleting the corresponding instance of this model.
+        Does nothing if the user is not blocked."""
+        cls.objects.filter(user=blocking_user, blocked_user=unblocked_user).delete()

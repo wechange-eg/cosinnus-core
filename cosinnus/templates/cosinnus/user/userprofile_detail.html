@@ -14,7 +14,9 @@
 {% endblock leftnav %}
 
 {% block breadcrumb %}
+    {% if request.user.is_authenticated and request.user == this_user %}
         <li class="active">{% trans "Your Profile" %}</li>
+    {% endif %}
 {% endblock %}
 
 {% block og_url %}{{ block.super }}{% endblock og_url %}
@@ -57,11 +59,13 @@
       </legend>
             
 			{% block buttons %}
-				{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
-					{% if request.user.is_authenticated and not this_user == request.user %}
-						{% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=this_user.cosinnus_profile %}
-					{% endif %}
-				{% endif %}
+                {% if not user_is_blocked %}
+                    {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
+                        {% if request.user.is_authenticated and not this_user == request.user %}
+                            {% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=this_user.cosinnus_profile %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
 	
 		        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 		        	{# Buttons for my userprofile #}
@@ -83,46 +87,84 @@
 	                {% endif %}
 	                
 		        {% else %}
-		        	{# Buttons for other users' profiles #}
-		        
-		            {% comment %} Abonnieren is out for now 
-		            <button type="button" class="btn btn-default">
-		                <ul class="media-list">
-		                    <li class="media">
-		                        <span class="pull-left">
-		                            <i class="fa fa-hand-o-right "></i>
-		                        </span>
-		                        <div class="media-body">
-		                            <!-- <a href="#"> -->
-		                                {% trans "Abonnieren" %}
-		                            <!-- </a> -->
-		                        </div>
-		                    </li>
-		                </ul>
-		            </button>
-		             {% endcomment %}
-		            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-		                {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
-				            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" 
-				                    {% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
-				                    href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
-				                    
-				                <ul class="media-list">
-				                    <li class="media">
-				                        <span class="pull-left">
-				                            <i class="fa fa-envelope"></i>
-				                        </span>
-				                        <div class="media-body">
-				                            {% trans "Send Message" %}
-				                        </div>
-				                    </li>
-				                </ul>
-				            </button>
-			            {% endif %}
-	                {% endif %}
-		            
+                    {% if not user_is_blocked %}
+                        {# Buttons for other users' profiles #}
+
+                        {% comment %} Abonnieren is out for now
+                        <button type="button" class="btn btn-default">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <span class="pull-left">
+                                        <i class="fa fa-hand-o-right "></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <!-- <a href="#"> -->
+                                            {% trans "Abonnieren" %}
+                                        <!-- </a> -->
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
+                         {% endcomment %}
+                        {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+                            {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+                                <button type="button" class="btn btn-emphasized btn-autosize v-offset-s"
+                                        {% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
+                                        href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
+
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <span class="pull-left">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                            <div class="media-body">
+                                                {% trans "Send Message" %}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </button>
+                            {% endif %}
+                        {% endif %}
+		            {% endif %}  {# endif user_is_blocked #}
+
 		            {% if request.user.is_authenticated %}
 		                {% include 'cosinnus/feedback/report_button_btn.html' with object=this_user extra_classes="v-offset-s" %}
+
+                        {% if SETTINGS.COSINNUS_ENABLE_USER_BLOCK %}
+                            {% if user_is_blocked %}
+                                {# This is a large button, the block button is a small button #}
+                                <form method="POST" action="{% url 'cosinnus:unblock-user' username=this_user.username %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-emphasized btn-autosize v-offset-s"
+                                            style="margin-left: 20px;" title="{% trans "Unblock user" %}">
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <span class="pull-left">
+                                                    <i class="fa fa-minus-circle"></i>
+                                                </span>
+                                                <div class="media-body">
+                                                    {% trans "Unblock user" %}
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </button>
+                                </form>
+                            {% else %}
+                                <form method="POST" action="{% url 'cosinnus:block-user' username=this_user.username %}">
+                                    {% csrf_token %}
+                                    <button type="submit" style="width: auto !important; margin-left: 20px;" class="btn btn-emphasized v-offset-s"
+                                            title="{% trans "Block user" %}">
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <span class="pull-left" style="cursor: pointer;" >
+                                                    <i class="fa fa-minus-circle"></i>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
 		            {% endif %}
 
 				{% endif %}
@@ -131,118 +173,124 @@
 	
 	
 	</div><!-- row -->
-	
-	
-	<div class="row">
-	    <div class="col-md-6 col-lg-4 large-space">
-	
-			{% block left_column %}
-	        <div type="button" class="btn btn-emphasized btn-headline btn-no-interact">
-	            <ul class="media-list">
-	                <li class="media">
-	                    <span class="pull-left">
-	                        <i class="fa fa-user"></i>
-	                    </span>
-	                    <div class="media-body">
-	                        {% trans "About me" %}
-	                    </div>
-	                </li>
-	            </ul>
-	        </div><!-- btn -->
-	        <div class="content-box large-space">
-	        	{% block userprofile_content %}
-		            <div class="textfield transparent">
-			            {% if profile.description %} 
-			                {{ profile.description|textfield }}
-			            {% else %}
-                            <i>{% trans "No Description set" %}</i>
-			            {% endif %}
-		            </div>
-		            
-		            
-					{% if SETTINGS.COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD %}
-						<legend>{% trans "Cooperation requests" %}</legend>
-			            <p class="transparent">
-			            	{% if profile.may_be_contacted %}
-			            		<i class="fa fa-fw fa-commenting-o"></i> {% trans "I am open to be contacted about potential collaboration opportunities!" %}
-			            	{% else %}
-			            		<i class="fa fa-fw fa-ban"></i> {% trans "I do NOT wish to be contacted for potential collaboration!" %}
-			            	{% endif %}
-			            </p>
-					{% endif %}
-			            
-		            
-		            {% if profile.website %}
-			            <legend>{% trans "My Website" %}</legend>
-			            <p class="transparent">
-			                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
-			            </p>
-		            {% endif %}
+
+	{% if user_is_blocked %}
+        <div class="row">
+            <p>
+                {% trans "You are blocking this user. Their content will not be visible to you." %}
+            </p>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-6 col-lg-4 large-space">
+
+                {% block left_column %}
+                <div type="button" class="btn btn-emphasized btn-headline btn-no-interact">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "About me" %}
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+                <div class="content-box large-space">
+                    {% block userprofile_content %}
+                        <div class="textfield transparent">
+                            {% if profile.description %}
+                                {{ profile.description|textfield }}
+                            {% else %}
+                                <i>{% trans "No Description set" %}</i>
+                            {% endif %}
+                        </div>
 
 
-					{% if SETTINGS.COSINNUS_TIMEZONE_SHOW_IN_USERPROFILE and profile.timezone %}
-						<legend>{% trans "My time zone" %}</legend>
-						<p class="transparent">
-							<i class="fa fa-clock"></i> {{ profile.timezone }}
-						</p>
-					{% endif %}
+                        {% if SETTINGS.COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD %}
+                            <legend>{% trans "Cooperation requests" %}</legend>
+                            <p class="transparent">
+                                {% if profile.may_be_contacted %}
+                                    <i class="fa fa-fw fa-commenting-o"></i> {% trans "I am open to be contacted about potential collaboration opportunities!" %}
+                                {% else %}
+                                    <i class="fa fa-fw fa-ban"></i> {% trans "I do NOT wish to be contacted for potential collaboration!" %}
+                                {% endif %}
+                            </p>
+                        {% endif %}
 
-		            
-	                {% comment %} 
-	                    If a portal defines dynamic user profile form fields with the 
-	                    `COSINNUS_USERPROFILE_EXTRA_FIELDS` setting, you can to use
-	                    this block to define the detail view display of those feels, if wished.
-	                {% endcomment %}
-					{% block portal_specific_userprofile_extra_fields %}
-                        {% include 'cosinnus/user/user_profile_dynamic_fields.html' with profile_values=profile.dynamic_fields profile=profile extra_textfield=profile.description labels=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS %}
-		            {% endblock %}
-		            
-		            {% comment %}  
-		                For portals that have COSINNUS_MANAGED_TAGS_ENABLED enabled, show the tags here
-		            {% endcomment %}
-		            {% block managed_tag_userprofile_field %}
-		                {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
-		                    {% with managed_tags=profile.get_managed_tags %}
-		                        {% if managed_tags %}
-				                    <legend>{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME }}</legend>
-						            {% for tag in managed_tags %}
-					                    {% include 'cosinnus/fields/managed_tag_field_readonly.html' with tag=tag visible=True %}
-					                {% endfor %}
-					            {% endif %}
-					        {% endwith %}
-			            {% endif %}
-                    {% endblock %}
 
-		            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
-					{% block extra_fields %}{% endblock %}
-	            {% endblock userprofile_content %}
-			</div><!-- content-box -->
-			{% endblock %}
-	    </div><!-- column -->
-	
-	    <div class="col-md-6 col-lg-4 large-space">
-			{% block middle_column %}
-		        {% include 'cosinnus/user/userprofile_detail_groups_widget.html' %}
-		        
-		        {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
-                    {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
-                {% endif %}
-			{% endblock %}
-	    </div><!-- column -->
-	    
-	    <div class="col-md-6 col-lg-4 large-space">
-			{% block right_column %}
-                {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
-                    {% include 'cosinnus/user/userprofile_detail_conferences_widget.html' with conferences=conferences %}
-                {% else %}
-	                {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
-                {% endif %}
-    
-			{% endblock %}
-        </div><!-- column -->
-	
-	</div><!-- row -->
-			
+                        {% if profile.website %}
+                            <legend>{% trans "My Website" %}</legend>
+                            <p class="transparent">
+                                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
+                            </p>
+                        {% endif %}
+
+
+                        {% if SETTINGS.COSINNUS_TIMEZONE_SHOW_IN_USERPROFILE and profile.timezone %}
+                            <legend>{% trans "My time zone" %}</legend>
+                            <p class="transparent">
+                                <i class="fa fa-clock"></i> {{ profile.timezone }}
+                            </p>
+                        {% endif %}
+
+
+                        {% comment %}
+                            If a portal defines dynamic user profile form fields with the
+                            `COSINNUS_USERPROFILE_EXTRA_FIELDS` setting, you can to use
+                            this block to define the detail view display of those feels, if wished.
+                        {% endcomment %}
+                        {% block portal_specific_userprofile_extra_fields %}
+                            {% include 'cosinnus/user/user_profile_dynamic_fields.html' with profile_values=profile.dynamic_fields profile=profile extra_textfield=profile.description labels=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS %}
+                        {% endblock %}
+
+                        {% comment %}
+                            For portals that have COSINNUS_MANAGED_TAGS_ENABLED enabled, show the tags here
+                        {% endcomment %}
+                        {% block managed_tag_userprofile_field %}
+                            {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
+                                {% with managed_tags=profile.get_managed_tags %}
+                                    {% if managed_tags %}
+                                        <legend>{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME }}</legend>
+                                        {% for tag in managed_tags %}
+                                            {% include 'cosinnus/fields/managed_tag_field_readonly.html' with tag=tag visible=True %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            {% endif %}
+                        {% endblock %}
+
+                        {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
+                        {% block extra_fields %}{% endblock %}
+                    {% endblock userprofile_content %}
+                </div><!-- content-box -->
+                {% endblock %}
+            </div><!-- column -->
+
+            <div class="col-md-6 col-lg-4 large-space">
+                {% block middle_column %}
+                    {% include 'cosinnus/user/userprofile_detail_groups_widget.html' %}
+
+                    {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+                        {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
+                    {% endif %}
+                {% endblock %}
+            </div><!-- column -->
+
+            <div class="col-md-6 col-lg-4 large-space">
+                {% block right_column %}
+                    {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+                        {% include 'cosinnus/user/userprofile_detail_conferences_widget.html' with conferences=conferences %}
+                    {% else %}
+                        {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
+                    {% endif %}
+
+                {% endblock %}
+            </div><!-- column -->
+
+        </div><!-- row -->
+    {% endif %}
   
 {% endblock content %}
   
