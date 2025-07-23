@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 13:45+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2025-07-23 13:37+0200\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 
 msgid "Info"
@@ -374,10 +374,10 @@ msgid "This will be used as your login. Notification emails will be sent to this
 msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-E-Mails geschickt (wenn du das möchtest)"
 
 msgid "fields.managed_tags.label"
-msgstr ""
+msgstr "fields.managed_tags.label"
 
 msgid "fields.managed_tags.description"
-msgstr ""
+msgstr "fields.managed_tags.description"
 
 #, python-format
 msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
@@ -1340,6 +1340,9 @@ msgstr "Prioritätswahl aktiviert"
 msgid "Participation applications are open."
 msgstr "Anmeldung geöffnet."
 
+msgid "Participation applications are disabled."
+msgstr "Anmeldung ist deaktiviert."
+
 msgid "Participation application has not started yet."
 msgstr "Die Anmeldefrist hat noch nicht begonnen."
 
@@ -1758,6 +1761,9 @@ msgstr "Nextcloud Gruppenordner-Name"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Gruppenordner-ID"
 
+msgid "Nextcloud Deck Board ID"
+msgstr "Nextcloud Deck Board-ID"
+
 msgid "Is conference"
 msgstr "Ist Tagung"
 
@@ -1968,6 +1974,33 @@ msgstr "Durch Kommata getrennte Liste von Phrasen, für die die automatische Ver
 msgid "Is Moderator"
 msgstr "Ist Moderator"
 
+msgid "Fits us"
+msgstr "Passt zu uns"
+
+msgid "Partly fits us"
+msgstr "Passt teilweise"
+
+msgid "Does not fit us"
+msgstr "Passt nicht"
+
+msgid "Group for Mitwirk-O-Mat Settings"
+msgstr "Gruppe für Mitwirk-O-Mat Settings"
+
+msgid "Determines if the Mitwirk-O-Mat data for this group should displayed in the API."
+msgstr "Legt fest, ob die Mitwirk-O-Mat-Daten für diese Gruppe in der API angezeigt werden sollen."
+
+msgid "Replacement description for the group description. If empty, falls back to `group.description_long` which falls back to `group.description`."
+msgstr "Ersatzbeschreibung für die Gruppenbeschreibung. Falls leer, wird auf `group.description_long` zurückgegriffen, die wiederum auf `group.description` zurückgreift."
+
+msgid "Replacement avatar for the group avatar. If empty, falls back to group.avatar."
+msgstr "Ersatzavatar für den Gruppenavatar. Wenn leer, fällt auf group.avatar zurück."
+
+msgid "User-set answers to Mitwirk-O-Mat questions"
+msgstr "Benutzer-gewählte Antworten zu den Mitwirk-O-Mat Fragen"
+
+msgid "Mitwirk-O-Mat Settings"
+msgstr "Mitwirk-O-Mat Einstellungen"
+
 msgid "ToS accepted"
 msgstr "ToS angenommen"
 
@@ -2066,6 +2099,12 @@ msgstr "Ihr wurdet gematcht!"
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr "Ihr beide habt ähnliche Interessen und wurdet gematcht, sehr schön! Was hat dich an dem Profil der anderen Person angesprochen? Woran arbeitet ihr gerade? Welche Themen beschäftigen euch aktuell?"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "User Online on Day"
+msgstr "User Online an Tag"
 
 msgid "Deletion after"
 msgstr "Wird gelöscht nach"
@@ -3009,8 +3048,15 @@ msgstr "Temporäre Benutzerkonten verwalten"
 msgid "Members"
 msgstr "Mitglieder"
 
+msgid "Volunteer-O-Matic"
+msgstr "Mitwirk-O-Mat"
+
 msgid "Settings"
 msgstr "Einstellungen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
+msgstr "Anstößigen Inhalt melden"
 
 msgid "Drag and Drop files here..."
 msgstr "Dateien vom Computer hierher ziehen..."
@@ -4044,6 +4090,16 @@ msgstr "direkt hier..."
 msgid "Activate Cloud"
 msgstr "Cloud aktivieren"
 
+msgid "Looking for new members? Join the Volunteer-O-Matic!"
+msgstr "Auf der Suche nach neuen Mitgliedern? Macht mit beim Mitwirk-O-Mat!"
+
+msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
+msgstr "Der Mitwirk-O-Mat ist ein spielerisches Matching-Tool, das Nutzer/innen dabei hilft, passende Gruppen und Projekte zu finden, bei denen sie sich engagieren können. Gleichzeitig kann der Mitwirk-O-Mat Gruppen und Projekten wie eurem dabei helfen, neue Freiwillige zu finden."
+
+msgctxt "Mitwirkomat"
+msgid "Join now"
+msgstr "Jetzt mitmachen"
+
 #
 msgid "Members-Map"
 msgstr "Mitglieder-Karte"
@@ -4160,10 +4216,6 @@ msgstr "Bitte bestätige deine E-Mail-Adresse!"
 msgid "Close"
 msgstr "Schließen"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Report offensive content"
-msgstr "Anstößigen Inhalt melden"
-
 msgid "Sorry, this feature is only available for registered members."
 msgstr "Tut uns leid, diese Funktion ist nur für registrierte Mitglieder verfügbar."
 
@@ -4209,9 +4261,6 @@ msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
 
 msgid "Change email address"
 msgstr "E-Mail Adresse ändern"
-
-msgid "Date"
-msgstr "Datum"
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -4889,6 +4938,9 @@ msgstr "Die Facebook-Integration wird verfügbar sobald du das Projekt erstellt 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Das hier eingegebene HTML wird auf dem Gruppen/Projektdashboard dargestellt (nur für Mitglieder)"
 
+msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
+msgstr "Du kannst zu den Matching-Einstellungen für den Mitwirk-O-Mat gehen, nachdem du gespeichert hast."
+
 msgid "About me"
 msgstr "Über mich"
 
@@ -5087,9 +5139,6 @@ msgstr "Ansehen"
 
 msgid "Register and apply!"
 msgstr "Registrieren und Teilnahme beantragen!"
-
-msgid "Participation applications are disabled."
-msgstr "Anmeldung ist deaktiviert."
 
 msgid "Late registration possible"
 msgstr "Spätanmeldung ermöglicht"
@@ -5919,6 +5968,46 @@ msgstr "Nur eingeloggte Mitglieder"
 msgid "Everybody"
 msgstr "Jeder"
 
+msgid "Matching Settings for the Volunteer-O-Matic"
+msgstr "Matching-Einstellungen für den Mitwirk-O-Mat"
+
+msgid "here"
+msgstr "hier"
+
+#, python-format
+msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
+msgstr "Der Mitwirk-O-Mat ist %(here_link)s veröffentlicht. Nutzer/innen beantworten die kurzen Fragen zu ihren Stärken und Interessen. Basierend auf den Antworten berechnet der Algorithmus die Übereinstimmung zwischen Nutzer/in und allen teilnehmenden Gruppen und Projekten. Diejenigen Gruppen und Projekte mit der höchsten Übereinstimmung werden den Nutzer/innen in ihrem persönlichen Ranking vorgeschlagen. Die Nutzer/innen können sich nun über ihre \"Matches\" informieren und zu ihren Favoriten Kontakt aufnehmen."
+
+msgid "Participate in the Volunteer-O-Matic with "
+msgstr "Am Mitwirk-O-Mat teilnehmen mit"
+
+#, python-format
+msgid "Enter only if you want to set a different name than the one in your %(settings_link)s."
+msgstr "Nur ausfüllen, falls ihr einen anderen Namen verwenden möchtet als den in euren %(settings_link)s."
+
+#, python-format
+msgid "Enter only if you want to set a different description than the one in your %(settings_link)s."
+msgstr "Nur ausfüllen, falls ihr eine andere Beschreibung verwenden möchtet als die in euren %(settings_link)s."
+
+msgid "Character limit"
+msgstr "Zeichenlimit"
+
+#, python-format
+msgid "Enter only if you want to set a different logo than the one in your %(settings_link)s."
+msgstr "Nur auswählen, falls ihr ein anderes Logo verwenden möchtet als den Avatar in euren %(settings_link)s."
+
+msgid "Image preview"
+msgstr "Bildvorschau"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Please choose the answers that best fit you."
+msgstr "Bitte wählt die Antworten, die am besten zu euch passen."
+
+msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
+msgstr "Bitte beachtet, dass eure Änderungen in diesem Formular nicht sofort übertragen werden. Es kann bis zu einem Tag dauern, bis die Änderungen im Mitwirk-O-Mat erscheinen."
+
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
 
@@ -6297,6 +6386,9 @@ msgstr "Speicherbedarf Gruppen"
 msgid "HD space used by projects"
 msgstr "Speicherbedarf Projekte"
 
+msgid "User Activity Timeline"
+msgstr "Benutzeraktivitäts-Timeline"
+
 msgid "User statistics (min 1x logged in)"
 msgstr "Benutzerstatistiken (mind. 1x eingeloggt)"
 
@@ -6595,10 +6687,6 @@ msgid "In my Groups and Projects"
 msgstr "In meinen Gruppen und Projekten"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "In my Cloud Files"
-msgstr "In meinen Cloud-Dateien"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
 msgstr "Thema"
 
@@ -6815,8 +6903,8 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr "Hier findest du in Zukunft eine Übersicht über deine Gruppen und Projekte. Noch bist du in keiner Gruppe oder einem Projekt aktiv."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
-msgstr "Du kannst eigene Gruppen oder Projekte über den '+'-Button im Header anlegen."
+msgid "You can create Groups or Projects via the main menu in the header."
+msgstr "Du kannst eigene Gruppen oder Projekte über das Hauptmenü im Header anlegen."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I like"
@@ -6827,8 +6915,8 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr "Hier findest du in Zukunft eine Übersicht über Ideen, die dir gefallen."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
-msgstr "Du kannst eigene Ideen über den '+'-Button im Header anlegen oder bestehende Ideen hier entdecken"
+msgid "You can create your own Ideas and discover existing Ideas here"
+msgstr "Du kannst eigene Ideen anlegen oder bestehende Ideen hier entdecken"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Filter"
@@ -7957,6 +8045,9 @@ msgstr "Projektdashboard"
 msgid "in the Project Dashboard"
 msgstr "im Projektdashboard"
 
+msgid "Project settings"
+msgstr "Projekteinstellungen"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Organisiere dich effizient mit MitstreiterInnen aus deinem Projekt oder deiner Initiative. Alle wichtigen Tools für eine gute Zusammenarbeit, wie Neuigkeiten, Pads, Kalender, Aufgaben, etc. an einem Ort."
 
@@ -8059,6 +8150,27 @@ msgstr "Nur Mitglieder dieses Projekts können diesen Inhalt sehen. Stelle jetzt
 msgid "Note: New recordings can only be made if you have booked premium features for this project."
 msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für dieses Project gebucht wurde."
 
+msgid "If you want your project to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr "Wenn ihr mit eurem Projekt am Mitwirk-O-Mat teilnehmen möchtet, müsst ihr lediglich das folgende Formular ausfüllen."
+
+msgid "Go to the Matching Settings of your project for the Volunteer-O-Matic"
+msgstr "Zu den Matching-Einstellungen eures Projektes für den Mitwirk-O-Mat"
+
+msgid "Name of your project in the Volunteer-O-Matic"
+msgstr "Name eures Projektes im Mitwirk-O-Mat"
+
+msgid "Description of your project in the Volunteer-O-Matic"
+msgstr "Beschreibung eures Projektes im Mitwirk-O-Mat"
+
+msgid "Logo of your project in the Volunteer-O-Matic"
+msgstr "Logo eures Projektes im Mitwirk-O-Mat"
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your project. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr "Euer Eintrag im Mitwirk-O-Mat verlinkt auf die Microsite eures Projektes. Daher solltet ihr darauf achten, dass diese aktuell, informativ und ansprechend gestaltet ist. Ihr könnt von eurer Microsite auch auf eine externe Website verlinken."
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
+msgstr "Eure Antworten auf die folgenden Fragen entscheiden darüber, wie ihr vom Algorithmus mit den Nutzer/innen gematched werdet. Stellt euch für jede der Aussagen die Frage: Würde eine Person, die der Aussage zustimmt, in dieser Hinsicht zu eurem Projekt passen? Anders ausgedrückt: Ist der Aspekt, um den es in der Aussage geht, charakteristisch für euer Projekt?"
+
 msgid "You are not currently in any Groups"
 msgstr "Du bist noch in keinen Gruppen Mitglied"
 
@@ -8073,6 +8185,9 @@ msgstr "Gruppendashboard"
 
 msgid "in the Group Dashboard"
 msgstr "im Gruppendashboard"
+
+msgid "Group settings"
+msgstr "Gruppeneinstellungen"
 
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
@@ -8167,6 +8282,27 @@ msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt e
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Gruppe gebucht wurde."
 
+msgid "If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr "Wenn ihr mit eurer Gruppe am Mitwirk-O-Mat teilnehmen möchtet, müsst ihr lediglich das folgende Formular ausfüllen."
+
+msgid "Go to the Matching Settings of your group for the Volunteer-O-Matic"
+msgstr "Zu den Matching-Einstellungen eurer Gruppe für den Mitwirk-O-Mat"
+
+msgid "Name of your group in the Volunteer-O-Matic"
+msgstr "Name eurer Gruppe im Mitwirk-O-Mat"
+
+msgid "Description of your group in the Volunteer-O-Matic"
+msgstr "Beschreibung eurer Gruppe im Mitwirk-O-Mat"
+
+msgid "Logo of your group in the Volunteer-O-Matic"
+msgstr "Logo eurer Gruppe im Mitwirk-O-Mat"
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr "Euer Eintrag im Mitwirk-O-Mat verlinkt auf die Microsite eurer Gruppe. Daher solltet ihr darauf achten, dass diese aktuell, informativ und ansprechend gestaltet ist. Ihr könnt von eurer Microsite auch auf eine externe Website verlinken."
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
+msgstr "Eure Antworten auf die folgenden Fragen entscheiden darüber, wie ihr vom Algorithmus mit den Nutzer/innen gematched werdet. Stellt euch für jede der Aussagen die Frage: Würde eine Person, die der Aussage zustimmt, in dieser Hinsicht zu eurer Gruppe passen? Anders ausgedrückt: Ist der Aspekt, um den es in der Aussage geht, charakteristisch für eure Gruppe?"
+
 msgid "You are not currently attending any Conferences"
 msgstr "Du nimmst aktuell noch noch an keinen Tagungen teil"
 
@@ -8175,6 +8311,9 @@ msgstr "Meine anstehenden Tagungen"
 
 msgid "Conference Menu"
 msgstr "Tagungsmenü"
+
+msgid "Conference settings"
+msgstr "Tagung-Einstellungen"
 
 msgid "Browse all Conferences"
 msgstr "Alle Tagungen anzeigen"
@@ -8354,14 +8493,53 @@ msgstr "Bitte gib auch ein Enddatum an"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 
+#, python-brace-format
+msgid "Version {version_number} released"
+msgstr "Version {version_number} veröffentlicht"
+
+msgid "This update includes several bugfixes:"
+msgstr "Das Update enthält mehrere Bugfixes:"
+
+msgid ""
+"- Fixed a bug where newly invited group/project members could not join a BBB meeting.\n"
+"- Fixed a bug where admins would see a broken page layout once after logging in.\n"
+"- Fixed a visual bug in the administration interface after clicking a download-link.\n"
+"- Fixed a bug where notifications would not be marked as read when they were too far down in the list.\n"
+"- Added an option to the notification list to mark all notifications as read.\n"
+"- Fixed a bug where event polls could not be created if the user interface was set to certain languages.\n"
+"- Fixed a bug in the legacy messaging system that sometimes prevented writing a new message.\n"
+"- (RocketChat) further improved the stability and performance of the integration with RocketChat.\n"
+msgstr ""
+"- Es wurde ein Fehler behoben, durch den neu eingeladene Gruppen-/Projektmitglieder einem BBB-Meeting nicht beitreten konnten.\n"
+"- Es wurde ein Fehler behoben, bei dem Administrator/innen nach dem Einloggen ein fehlerhaftes Seitenlayout sahen.\n"
+"- Ein visueller Fehler in der Administrationsoberfläche nach dem Anklicken eines Download-Links wurde behoben.\n"
+"- Es wurde ein Fehler behoben, bei dem Benachrichtigungen nicht als gelesen markiert wurden, wenn sie zu weit unten in der Liste standen.\n"
+"- In der Benachrichtigungsliste wurde eine Option hinzugefügt, um alle Benachrichtigungen als gelesen zu markieren.\n"
+"- Es wurde ein Fehler behoben, bei dem Terminabstimmungen nicht erstellt werden konnten, wenn die Benutzeroberfläche auf bestimmte Sprachen eingestellt war.\n"
+"- Es wurde ein Fehler im alten Nachrichtensystem behoben, der manchmal das Schreiben einer neuen Nachricht verhinderte.\n"
+"- (RocketChat) Die Stabilität und Leistung der Integration mit RocketChat wurde weiter verbessert.\n"
+
+msgid "- The password requirements have been changed: Now a password must consist of at least 12 characters. Otherwise, there are no further requirements regarding the chosen characters. Passwords are still checked against a list of frequently used passwords.\n"
+msgstr "- Die Anforderungen an Passwörtern wurden geändert: Nun muss ein Passwort aus mindestens 12 Zeichen bestehen. Ansonsten gibt es keine weiteren Anforderungen bezüglich der gewählten Zeichen. Passwörter werden weiterhin gegen eine Liste häufig verwendeter Passwörter geprüft.\n"
+
+msgid ""
+"- Fixed a bug that prevented users from completing the intro tour on mobile devices running iOS 18.\n"
+"- Fixed a bug that sometimes prevented entries from being displayed in the lower part of the sidebar on mobile devices.\n"
+msgstr ""
+"- Es wurde ein Fehler behoben, der bei mobilen Geräten unter iOS 18 dazu führte, dass man die Introtour nicht abschließen konnte.\n"
+"- Es wurde ein Fehler behoben, bei dem auf mobilen Geräten Einträge im unteren Teil der Seitenleiste manchmal nicht angezeigt wurden.\n"
+
+msgid "Version 2.4.0 released"
+msgstr "Version 2.4.0 veröffentlicht"
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr "Dieses Update enthält mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
+
 msgid "Version 2.3.0 released"
 msgstr "Version 2.3.0 veröffentlicht"
 
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
 msgstr "Dieses Update enthält viele visuelle Verbesserungen für das neue Redesign und mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
-
-msgid "This update provides several small bugfixes and stability improvements."
-msgstr "Dieses Update enthält mehrere kleine Fehlerbehebungen und Stabilitätsverbesserungen."
 
 msgid "Redesign Update"
 msgstr "Redesign-Update"
@@ -8381,9 +8559,6 @@ msgstr ""
 msgid "Version 2.2.5 released"
 msgstr "Version 2.2.5 veröffentlicht"
 
-msgid "This update includes several bugfixes:"
-msgstr "Das Update enthält mehrere Bugfixes:"
-
 msgid ""
 "- Fixed a bug where guest access to BBB meetings was sometimes not possible.\n"
 "- Fixed a bug where users could sometimes not be invited to groups or projects by e-mail.\n"
@@ -8393,8 +8568,8 @@ msgid ""
 "- Further minor bugfixes have been made."
 msgstr ""
 "- Es wurde ein Fehler behoben, bei dem der Gastzugang zu BBB-Meetings manchmal nicht möglich war.\n"
-"- Es wurde ein Fehler behoben, bei dem Benutzer*innen manchmal nicht per E-Mail zu Gruppen oder Projekten eingeladen werden konnten.\n"
-"- Es wurde ein Fehler behoben, bei dem manche Benutzer*innen ihre Passwörter nicht zurücksetzen oder ändern konnten.\n"
+"- Es wurde ein Fehler behoben, bei dem Benutzer/innen manchmal nicht per E-Mail zu Gruppen oder Projekten eingeladen werden konnten.\n"
+"- Es wurde ein Fehler behoben, bei dem manche Benutzer/innen ihre Passwörter nicht zurücksetzen oder ändern konnten.\n"
 "- Es wurde ein Fehler behoben, bei dem der Inhalt von Textboxen des Markdown-Editors erst angezeigt wurde, wenn die Textbox fokussiert wurde.\n"
 "- Es wurde ein Fehler behoben, bei dem iCal-Kalender-Feeds manchmal nicht zugänglich waren.\n"
 "- Weitere kleinere Fehlerbehebungen wurden vorgenommen."
@@ -8473,9 +8648,9 @@ msgid ""
 "- Fixed an issue in the legacy messaging system where the autocomplete function would never finish when entering a recipient.\n"
 "- Fixed an issue where attached images and metadata of todo entries would be removed if completing them from the detail page.\n"
 msgstr ""
-"- Es wurde ein Problem behoben, bei dem direkt eingeladene Benutzer*innen ihr initiales Passwort nicht eingeben konnten.\n"
+"- Es wurde ein Problem behoben, bei dem direkt eingeladene Benutzer/innen ihr initiales Passwort nicht eingeben konnten.\n"
 "- Es wurde ein Problem behoben, bei dem der Link zum Zurücksetzen des Passworts in manchen Fällen nicht funktionierte.\n"
-"- Es wurde ein Problem behoben, bei dem Benutzer*innen nach der Anmeldung nicht korrekt zum Benutzerdashboard weitergeleitet wurden.\n"
+"- Es wurde ein Problem behoben, bei dem Benutzer/innen nach der Anmeldung nicht korrekt zum Benutzerdashboard weitergeleitet wurden.\n"
 "- Es wurde ein Problem behoben, bei dem iCal-Feeds manchmal nicht von externen Kalenderanwendungen aus zugänglich waren.\n"
 "- Es wurde ein Problem behoben, bei dem der direkte Zugriff auf geteilte Pad-URLs zu einer Fehlermeldung führte.\n"
 "- Es wurde ein Problem behoben, bei dem Gastkonten nicht auf Videokonferenzen zugreifen konnten (falls aktiviert).\n"
@@ -8962,6 +9137,12 @@ msgstr "Deine Nachricht wurde abgeschickt."
 msgid "Something went wrong. Your message was not sent."
 msgstr "Etwas ging schief. Deine Nachricht wurde nicht abgeschickt."
 
+msgid "This function is not enabled for this group type."
+msgstr "Diese Funktion ist für diesen Gruppentyp nicht aktiviert."
+
+msgid "Your Matching Settings for the Volunteer-O-Matic have been saved."
+msgstr "Deine Matching-Einstellungen für den Mitwirk-O-Mat wurden gespeichert."
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Es gab einen Fehler beim Verarbeiten der Avatar-Auswahl. Bitte stell sicher dass du einen gültigen und ausreichend großen Bereich im Bild ausgewählt hast!"
 
@@ -9245,9 +9426,6 @@ msgstr "Cloud Stub"
 msgid "Click here to view the files directly in the cloud."
 msgstr "Klicke hier, um die Dateien direkt in der Cloud anzusehen."
 
-msgid "There are no cloud files yet"
-msgstr "Es gibt noch keine Cloud-Dateien"
-
 msgid "Restart"
 msgstr "Neustart"
 
@@ -9403,6 +9581,19 @@ msgstr "Status"
 
 msgid "Attendance data is not available for this conference."
 msgstr "Es stehen keine Teilnahme-Daten für diese Konferenz zur verfügung."
+
+msgid "Task-Board"
+msgstr "Aufgaben-Board"
+
+msgctxt "the_app"
+msgid "deck"
+msgstr "Aufgaben-Board"
+
+msgid "The task-board creation is in progress..."
+msgstr "Das Aufgaben-Board wird erstellt..."
+
+msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
+msgstr "Wenn das Aufgaben-Board nicht innerhalb einiger Minuten verfügbar wird, gibt es technische Probleme mit dem Board-Service. Versuche die Aufgaben-Board App in den Einstellungen zu deaktivieren und zu reaktivieren. Falls das Problem bleibt, melde dich beim Support. Wir entschuldigen uns für die Unannehmlichkeiten!"
 
 msgid "The following Pads were re-initialized:"
 msgstr "The following Pads were re-initialized:"
@@ -13916,30 +14107,6 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
-#~ msgid "Please provide your motivation for applying"
-#~ msgstr "Bitte gib deine Motivation für die Teilnahme an"
-
-#~ msgid "Debug"
-#~ msgstr "Fehlersuche"
-
-#~ msgid "Administrators unknown"
-#~ msgstr "Administrator/innen unbekannt"
-
-#~ msgid "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
-#~ msgstr "%(sender_name)s findet dich und deine Aktivitäten interessant. Schaue dir das Nutzer/innen-Profil an"
-
-#~ msgid "Community"
-#~ msgstr "Community"
-
-#~ msgid "Password reset successful"
-#~ msgstr "Passwort erfolgreich geändert"
-
-#~ msgid "Personal"
-#~ msgstr "Persönlich"
-
-#~ msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
-#~ msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer/innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner/innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer/innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
-
 #~ msgid "%(numfiles)d files were deleted successfully."
 #~ msgstr "%(numfiles)d Dateien wurden erfolgreich gelöscht."
 
@@ -13957,6 +14124,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "%(sender_name)s completed a poll you are following"
 #~ msgstr "%(sender_name)s hat eine Umfrage (dem du folgst) beendet"
+
+#~ msgid "%(sender_name)s finds you and your activities interesting. Check out the users' profile"
+#~ msgstr "%(sender_name)s findet dich und deine Aktivitäten interessant. Schaue dir das Nutzer/innen-Profil an"
 
 #~ msgid "%(sender_name)s invited you to apply for %(team_name)s"
 #~ msgstr "%(sender_name)s hat dich eingeladen, bei %(team_name)s Teilnahme zu beantragen"
@@ -13999,6 +14169,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Add workshop"
 #~ msgstr "Workshop hinzufügen"
+
+#~ msgid "Administrators unknown"
+#~ msgstr "Administrator/innen unbekannt"
 
 #~ msgid "All groups"
 #~ msgstr "Alle Gruppen"
@@ -14123,6 +14296,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 #~ msgid "Clear results and start a new import!"
 #~ msgstr "Ergebnisse löschen und den Import neu starten!"
 
+#~ msgid "Community"
+#~ msgstr "Community"
+
 #~ msgid "Conference Dashboard"
 #~ msgstr "Tagung Dashboard"
 
@@ -14181,6 +14357,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Deactivated Projects and Groups"
 #~ msgstr "Deaktivierte Projekte und Gruppen"
+
+#~ msgid "Debug"
+#~ msgstr "Fehlersuche"
 
 #~ msgid "Delimiter of the CSV file"
 #~ msgstr "Trennzeichen der CSV-Datei"
@@ -14467,6 +14646,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 #~ msgid "Important messages:"
 #~ msgstr "Wichtige Nachrichten:"
 
+#~ msgid "In my Cloud Files"
+#~ msgstr "In meinen Cloud-Dateien"
+
 #~ msgid "Info messages:"
 #~ msgstr "Info-Meldungen:"
 
@@ -14602,14 +14784,23 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 #~ msgid "PIWIK configuration incomplete for tracking."
 #~ msgstr "PIWIK Konfiguration ist unvollständig zum Tracking."
 
+#~ msgid "Password reset successful"
+#~ msgstr "Passwort erfolgreich geändert"
+
 #~ msgid "Password set"
 #~ msgstr "Passwort gesetzt"
+
+#~ msgid "Personal"
+#~ msgstr "Persönlich"
 
 #~ msgid "Phone number (optional)"
 #~ msgstr "Mobilnumer (optional)"
 
 #~ msgid "Please enter a title for the task!"
 #~ msgstr "Bitte gib einen Titel für die Aufgabe an!"
+
+#~ msgid "Please provide your motivation for applying"
+#~ msgstr "Bitte gib deine Motivation für die Teilnahme an"
 
 #~ msgid "Please select a recipient for the message!"
 #~ msgstr "Bitte wählen sie mindestens einen Empfänger aus!"
@@ -14667,6 +14858,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Reminder emails"
 #~ msgstr "Erinnerungs-E-Mails"
+
+#~ msgid "Require applicants to answer questions about their motivation for applying"
+#~ msgstr "Antragsstellende müssen Fragen über ihre Motiviation für die Teilnahme beantworten"
 
 #~ msgid "Romanian--NATIVE-LANGUAGE"
 #~ msgstr "Română"
@@ -14754,6 +14948,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 #~ msgid "Temporary restrictions"
 #~ msgstr "Temporäre Einschränkungen"
 
+#~ msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
+#~ msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer/innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner/innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer/innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
+
 #~ msgid "The CSV file was read successfully and the import is currently running on the server!"
 #~ msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
 
@@ -14780,6 +14977,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
 #~ msgstr "Füge dann für jedes Konto, das du hinzufügen möchtest, eine Zeile hinzu. Du musst eine eindeutige Benutzerkennung hinzufügen, aber Vor- und Nachname können leer sein. Füge dann allen Workshop-Spalten eine 1 hinzu, wenn der Benutzer ein normales Mitglied sein soll, oder eine 2, wenn dieser Benutzer Workshop-Admin sein soll."
+
+#~ msgid "There are no cloud files yet"
+#~ msgstr "Es gibt noch keine Cloud-Dateien"
 
 #~ msgid "There are no events to be scheduled."
 #~ msgstr "Es gibt keine aktuellen Terminabstimmungen."
@@ -14884,6 +15084,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 #~ msgid "Waitlist"
 #~ msgstr "Warteliste"
 
+#~ msgid "We are currently experiencing some technical difficulties with the Deck service. Please try again later. We apologize for the inconveniences!"
+#~ msgstr "Momentan gibt es technische Probleme mit dem Deck Dienst. Bitte versuche es später noch einmal. Wir entschuldigen uns für die Unannehmlichkeiten!"
+
 #~ msgid "We could not post this news post on your Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least \"Friends\". If this doesn't work, contact this project/group's administrator!"
 #~ msgstr "Wir konnten deine Neuigkeit nicht auf der Facebook Gruppe/Fan-Seite posten. Wenn dieses Problem bestehen bleibt, versuche dein Facebook-Konto zu trennen und erneut zu verbinden und stelle sicher dass du uns die Post-Berechtigung mit Sichtbarkeit von mindestens \"Freunde\" erteilst! Wenn dass nicht funktioniert, kontaktiere bitte den Administrator dieses Projekts/Gruppe!"
 
@@ -14922,6 +15125,12 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
 #~ msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
 #~ msgstr "Du bist im Begriff, dein Sicherheitsniveau auf die nächste Ebene zu bringen. <br> Um die 2FA-Einstellung zu benutzen, brauchst du die ´free otp´ App auf dein Handy zu installieren und danach den QR- Code einzuscannen. Wir haben momentan keine weitere 2FA-Optionen, aber werden dich über eventuelle Änderungen informieren."
+
+#~ msgid "You can create Groups or Projects via the '+' button in the header."
+#~ msgstr "Du kannst eigene Gruppen oder Projekte über den '+'-Button im Header anlegen."
+
+#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#~ msgstr "Du kannst eigene Ideen über den '+'-Button im Header anlegen oder bestehende Ideen hier entdecken"
 
 #~ msgid "You can only pick one workshop as first priority."
 #~ msgstr "Du kannst nur einen Workshop als erste Priorität auswählen."

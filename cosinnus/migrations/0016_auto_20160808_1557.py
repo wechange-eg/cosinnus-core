@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cosinnusportal',
             name='email_needs_verification',
-            field=models.BooleanField(default=False, help_text='If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them.', verbose_name='Emails Need Verification'),
+            field=models.BooleanField(default=True, help_text='If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them.', verbose_name='Emails Need Verification'),
         ),
         migrations.AlterField(
             model_name='cosinnusgroupmembership',

@@ -1,22 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 12:37+0100\n"
-"PO-Revision-Date: 2023-04-18 18:29+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2025-07-23 13:37+0200\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
 
 msgid "Info"
 msgstr "Информация"
@@ -100,6 +89,28 @@ msgstr "Кроме того, данные члены были удалены с�
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Переместить всех членов на текущий портал (все другие членства будут удалены!)"
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud group id set."
+msgstr ""
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
+msgstr ""
+
+#, python-format
+msgid "Could not change Nextcloud group name for group \"%(group)s\"."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(count)d Users' group memberships were refreshed."
+msgid "%(count)d Groups' Nextcloud group names were updated."
+msgstr "%(count)d пользовательских групп было обновлено."
+
+#, fuzzy
+#| msgid "Nextcloud Groupfolder Name"
+msgid "Nextcloud: Update group names"
+msgstr "Имя папки группы Nextcloud"
 
 msgid "Move selected groups and their subprojects to current portal"
 msgstr "Переместить выбранные группы и их подпроекты на текущий портал"
@@ -185,7 +196,6 @@ msgid "%(count)d Users were logged out."
 msgstr ""
 
 #, fuzzy
-#| msgid "Logout"
 msgid "Logout users"
 msgstr "Выход из системы"
 
@@ -221,27 +231,22 @@ msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Исправить недостающие членства для пользователей комнат RocketChat"
 
 #, fuzzy, python-format
-#| msgid "%d Users were made RocketChat admins."
 msgid "%d Users were made Nextcloud admins."
 msgstr "%d Пользователей сделали администраторами RocketChat."
 
 #, fuzzy
-#| msgid "Rocket: Make user RocketChat admin"
 msgid "Nextcloud: Make user Nextcloud admin"
 msgstr "Сделал вас администратором"
 
 #, fuzzy
-#| msgid "Recipients"
 msgid "Recipients Count"
 msgstr "Адресаты"
 
 #, fuzzy
-#| msgid "Recipients"
 msgid "Recipients Send Count"
 msgstr "Адресаты"
 
 #, fuzzy
-#| msgid "Last accessed"
 msgid "Guest access URL"
 msgstr "Последние открытые"
 
@@ -256,7 +261,6 @@ msgid "Go To..."
 msgstr ""
 
 #, fuzzy
-#| msgid "Personal info"
 msgid "My Personal Space"
 msgstr "Персональная информация"
 
@@ -275,7 +279,6 @@ msgid "Users"
 msgstr "Пользователи"
 
 #, fuzzy
-#| msgid "Content"
 msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Контент"
@@ -299,7 +302,6 @@ msgid "My Profile"
 msgstr "Мой профиль"
 
 #, fuzzy
-#| msgid "Delete Account"
 msgid "My Guest Account"
 msgstr "Удалить аккаунт"
 
@@ -313,8 +315,6 @@ msgid "Administration"
 msgstr "Администрирование"
 
 #, fuzzy, python-format
-#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-#| msgid "to %(portal_name)s"
 msgid "About %(portal_name)s"
 msgstr "на %(portal_name)s"
 
@@ -322,7 +322,6 @@ msgid "Logout"
 msgstr "Выход из системы"
 
 #, fuzzy
-#| msgid "Last accessed"
 msgid "Leave guest access"
 msgstr "Последние открытые"
 
@@ -336,7 +335,6 @@ msgid "Search"
 msgstr "Поиск"
 
 #, fuzzy
-#| msgid "Bookmark"
 msgid "Bookmarks"
 msgstr "Добавить в закладки"
 
@@ -531,12 +529,10 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Вы были выведены из системы, так как Ваш аккаунт неактивен."
 
 #, fuzzy
-#| msgid "This account is no longer active. You have been logged out."
 msgid "Your guest access has expired. You have been logged out."
 msgstr "Вы были выведены из системы, так как Ваш аккаунт неактивен."
 
 #, fuzzy
-#| msgid "You have been logged out. See you again soon!"
 msgid "You have been logged out for security reasons, please log in again."
 msgstr "Был произведен выход из твоей учётной записи. До скорой встречи снова!"
 
@@ -550,7 +546,6 @@ msgid "The action you tried to perform is not allowed for guest accounts."
 msgstr ""
 
 #, fuzzy
-#| msgid "The page you requested is not available for this event at this time."
 msgid "The page you tried to visit is not available for guest accounts."
 msgstr "Запрашиваемая Вами страница в данный момент времени не доступна."
 
@@ -1043,7 +1038,6 @@ msgid "The selected choice was not found or invalid! Please choose a different v
 msgstr "Выбранный вариант не найден или недействителен! Выберите другое значение!"
 
 #, fuzzy
-#| msgid "Set your password"
 msgid "Your password"
 msgstr "Переустановить пароль"
 
@@ -1102,7 +1096,6 @@ msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "Некоторые обязательные столбцы отсутствуют в файле CSV: {missing_headers}!"
 
 #, fuzzy, python-format
-#| msgid "Rows on these line numbers did not have the same number of items ({len(processed_header)}) as the header: {\", \".join(mismatched_rows)}!"
 msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
 msgstr "Количество элементов ({len(processed_header)}) в строках с этими номерами отличается от количества элементов заголовка: {\", \".join(mismatched_rows)}!"
 
@@ -1346,7 +1339,6 @@ msgid "Request user information"
 msgstr "Создать организацию"
 
 #, fuzzy
-#| msgid "Cooperation requests"
 msgid "User motivation questions"
 msgstr "Заявки насчет сотрудничества"
 
@@ -1359,11 +1351,21 @@ msgstr "Приоритетный выбор активирован"
 msgid "Participation applications are open."
 msgstr "Подача заявок на участие открыта."
 
+#, fuzzy
+#| msgid "Participation applications are open."
+msgid "Participation applications are disabled."
+msgstr "Подача заявок на участие открыта."
+
 msgid "Participation application has not started yet."
 msgstr "Подача заявок на участие еще не началась."
 
 msgid "Participation application is over."
 msgstr "Подача заявок на участие завершена."
+
+#, fuzzy
+#| msgid "The conference %(object_name)s has been updated"
+msgid "The conference has ended."
+msgstr "Конференция “%(object_name)s” была обновлена"
 
 msgctxt "a conference application status"
 msgid "Invalid"
@@ -1542,7 +1544,6 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Введите допустимое имя. Косую черту не допускается."
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Is Late Invitation"
 msgstr "Приглашения"
 
@@ -1674,12 +1675,10 @@ msgid "Project Type"
 msgstr "Тип проекта"
 
 #, fuzzy
-#| msgid "Untitled"
 msgid "Subtitle"
 msgstr "Без названия"
 
 #, fuzzy
-#| msgid "HD space used by conferences"
 msgid "Subtitle used for conferences."
 msgstr "Хранилище, используемое конференциями"
 
@@ -1781,6 +1780,11 @@ msgstr "Имя папки группы Nextcloud"
 
 msgid "Nextcloud Groupfolder ID"
 msgstr "ID папки группы Nextcloud"
+
+#, fuzzy
+#| msgid "Nextcloud Group ID"
+msgid "Nextcloud Deck Board ID"
+msgstr "ID Nextcloud группы"
 
 msgid "Is conference"
 msgstr "Конференция"
@@ -1909,8 +1913,6 @@ msgid "Cosinnus Ideas"
 msgstr "Cosinnus идеи"
 
 #, fuzzy
-#| msgctxt "subject of an E-Mail"
-#| msgid "Subject"
 msgid "Subject"
 msgstr "Тема"
 
@@ -1921,7 +1923,6 @@ msgid "Recipients"
 msgstr "Адресаты"
 
 #, fuzzy
-#| msgid "Additional Recipients"
 msgid "Mails sent to Recipients"
 msgstr "Дополнительные адресаты"
 
@@ -1929,7 +1930,6 @@ msgid "Mail function kwargs"
 msgstr ""
 
 #, fuzzy
-#| msgid "Dry run in progress"
 msgid "Sending in Progress"
 msgstr "Выполняется тестовый прогон"
 
@@ -1999,8 +1999,36 @@ msgstr "Список разделенных запятыми фраз, для к
 msgid "Is Moderator"
 msgstr "Является модератором"
 
+msgid "Fits us"
+msgstr ""
+
+msgid "Partly fits us"
+msgstr ""
+
+msgid "Does not fit us"
+msgstr ""
+
+msgid "Group for Mitwirk-O-Mat Settings"
+msgstr ""
+
+msgid "Determines if the Mitwirk-O-Mat data for this group should displayed in the API."
+msgstr ""
+
+msgid "Replacement description for the group description. If empty, falls back to `group.description_long` which falls back to `group.description`."
+msgstr ""
+
+msgid "Replacement avatar for the group avatar. If empty, falls back to group.avatar."
+msgstr ""
+
 #, fuzzy
-#| msgid "ToS accepted?"
+#| msgid "Please also fill in the following information:"
+msgid "User-set answers to Mitwirk-O-Mat questions"
+msgstr "Пожалуйста, укажи следующую информацию:"
+
+msgid "Mitwirk-O-Mat Settings"
+msgstr ""
+
+#, fuzzy
 msgid "ToS accepted"
 msgstr "ToS принят?"
 
@@ -2082,12 +2110,10 @@ msgid "Match type"
 msgstr "Тип совпадения"
 
 #, fuzzy
-#| msgid "Match"
 msgid "User-Match"
 msgstr "Совпадение"
 
 #, fuzzy
-#| msgid "Matches"
 msgid "User-Matches"
 msgstr "Совпадения"
 
@@ -2104,8 +2130,13 @@ msgstr ""
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
 
+msgid "Date"
+msgstr "Дата"
+
+msgid "User Online on Day"
+msgstr ""
+
 #, fuzzy
-#| msgid "Delete offer"
 msgid "Deletion after"
 msgstr "Удалить объявление"
 
@@ -2113,7 +2144,6 @@ msgid "Data"
 msgstr ""
 
 #, fuzzy
-#| msgid "Import Data"
 msgid "Temporary Data"
 msgstr "Сообщения"
 
@@ -2609,7 +2639,6 @@ msgid "(The reported item has been deleted.)"
 msgstr "(Элемент, на который поступила жалоба, удален)"
 
 #, fuzzy
-#| msgid "User Administration"
 msgid "Edit in User Administration"
 msgstr "Администрирование"
 
@@ -2859,7 +2888,6 @@ msgid "User Import"
 msgstr "Импорт пользователей"
 
 #, fuzzy
-#| msgid "User Import"
 msgid "User Export"
 msgstr "Импорт пользователей"
 
@@ -2926,7 +2954,6 @@ msgid "Sent at:"
 msgstr "Получатель:"
 
 #, fuzzy
-#| msgid "Newsletter has been copied."
 msgid "Newsletter is being sent in the background."
 msgstr "Информационное письмо скопировано."
 
@@ -3057,8 +3084,15 @@ msgstr "Настройки временных аккаунтов пользов�
 msgid "Members"
 msgstr "Члены"
 
+msgid "Volunteer-O-Matic"
+msgstr ""
+
 msgid "Settings"
 msgstr "Настройки"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
+msgstr "Пожаловаться"
 
 msgid "Drag and Drop files here..."
 msgstr "Перетащите файлы сюда..."
@@ -3192,7 +3226,6 @@ msgid "Shrink"
 msgstr "Уменьшить"
 
 #, fuzzy
-#| msgid "Share on Facebook"
 msgid "Share on Mastodon"
 msgstr "Поделиться на Фейсбуке"
 
@@ -3360,8 +3393,10 @@ msgstr "Ваш профиль"
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
 msgstr "Вы получите уведомление по электронной почте и на сайте, когда организаторы рассмотрят Вашу заявку. Убедитесь, что Ваши настройки уведомлений разрешают получать электронные письма от нас!"
 
-msgid "Please provide your motivation for applying"
-msgstr "Укажите Вашу мотивацию участия"
+#, fuzzy
+#| msgid "Please also fill in the following information:"
+msgid "Please answer the following questions"
+msgstr "Пожалуйста, укажи следующую информацию:"
 
 msgid "Optional contact information"
 msgstr "Контактная информация"
@@ -3541,17 +3576,14 @@ msgid "No, do not send"
 msgstr "Нет, отменить"
 
 #, fuzzy
-#| msgid "Accept invitation"
 msgid "Copy invitation"
 msgstr "Принять приглашение"
 
 #, fuzzy
-#| msgid "Accept invitation"
 msgid "Copy guest invitation"
 msgstr "Принять приглашение"
 
 #, fuzzy
-#| msgid "There are no groups."
 msgid "There was an error."
 msgstr "Групп нет."
 
@@ -3590,6 +3622,11 @@ msgstr "Вы и другие организаторы можете обраба�
 msgid " If you would prefer to use simple membership requests as they are used in projects/groups, you can disable the setting \"%(application_setting_label)s\" in the conference settings."
 msgstr " Если желаете воспользоваться простой заявкой на членство, которая используется для проектов/групп, Вы можете отключить параметр \"%(application_setting_label)s\" в настройках конференции."
 
+#, fuzzy
+#| msgid "Participation applications are open."
+msgid "Participation applications are enabled"
+msgstr "Подача заявок на участие открыта."
+
 msgid "Application period"
 msgstr "Название приложения"
 
@@ -3607,7 +3644,7 @@ msgstr "(лимит не выбран)"
 
 #, fuzzy
 #| msgid "Require applicants to submit a text about their motivation for applying"
-msgid "Require applicants to answer questions about their motivation for applying"
+msgid "Applicants must answer questions about participation"
 msgstr "Требует от заявителей указать мотивацию для подачи заявки"
 
 msgid "Provide a list of questions that the applicants should answer."
@@ -3618,12 +3655,10 @@ msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr "Применимо, только если выбрано \"%(other_option)s\"."
 
 #, fuzzy
-#| msgid "Remove button"
 msgid "Remove question"
 msgstr "Удалить клавишу"
 
 #, fuzzy
-#| msgid "Add button"
 msgid "Add question"
 msgstr "Добавить клавишу"
 
@@ -3634,17 +3669,14 @@ msgid "Choose one or more options that will be displayed on the application form
 msgstr "Выберите один или несколько вариантов, которые будут отображаться в форме заявки. Заявители смогут выбрать один из этих вариантов во время подачи заявки."
 
 #, fuzzy
-#| msgid "Additional options"
 msgid "Define additional custom options."
 msgstr "Дополнительные опции"
 
 #, fuzzy
-#| msgid "Remove location"
 msgid "Remove option"
 msgstr "Убрать местоположение"
 
 #, fuzzy
-#| msgid "Add location"
 msgid "Add option"
 msgstr "Добавить местоположение"
 
@@ -3858,32 +3890,26 @@ msgid "Allow recording"
 msgstr "Разрешить запись"
 
 #, fuzzy
-#| msgid "Send Message"
 msgid "Welcome Message"
 msgstr "Отправить сообщение"
 
 #, fuzzy
-#| msgid "the rooms welcome message"
 msgid "Define a custom welcome message."
 msgstr "приветственное слово комнаты"
 
 #, fuzzy
-#| msgid "Conference Settings"
 msgid "Conference Statistics"
 msgstr "Настройки конференции"
 
 #, fuzzy
-#| msgid "Conference name"
 msgid "Conference Name"
 msgstr "Страница конференции"
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Num. Invitations"
 msgstr "Приглашения"
 
 #, fuzzy
-#| msgid "Administration"
 msgid "Num. Registrations"
 msgstr "Администрирование"
 
@@ -3897,12 +3923,10 @@ msgid "Download"
 msgstr "Скачать"
 
 #, fuzzy
-#| msgid "Conference Events"
 msgid "Conference Event Statistics"
 msgstr "События конференции"
 
 #, fuzzy
-#| msgid "Event date"
 msgid "Event Name"
 msgstr "Дата события"
 
@@ -3910,7 +3934,6 @@ msgid "Room Type"
 msgstr "Тип комнаты"
 
 #, fuzzy
-#| msgid "Description"
 msgid "Duration"
 msgstr "Описание"
 
@@ -3921,7 +3944,6 @@ msgid "Attendance Percentage"
 msgstr ""
 
 #, fuzzy
-#| msgid "Download Statistics"
 msgid "Attendee Data Statistics"
 msgstr "Простая статистика"
 
@@ -4053,7 +4075,6 @@ msgid "Answer"
 msgstr "Ответ"
 
 #, fuzzy
-#| msgid "Suggestion"
 msgid "Question"
 msgstr "Предложение"
 
@@ -4118,6 +4139,18 @@ msgstr "начните прямо тут…"
 
 msgid "Activate Cloud"
 msgstr "Активировать облако"
+
+msgid "Looking for new members? Join the Volunteer-O-Matic!"
+msgstr ""
+
+msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
+msgstr ""
+
+#, fuzzy
+#| msgid "Join now!"
+msgctxt "Mitwirkomat"
+msgid "Join now"
+msgstr "Присоединяйтесь сейчас!"
 
 msgid "Members-Map"
 msgstr "Карта участников"
@@ -4235,12 +4268,7 @@ msgstr "Пожалуйста, подтвердите Ваш электронны
 msgid "Close"
 msgstr "Закрыть"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Report offensive content"
-msgstr "Пожаловаться"
-
 #, fuzzy
-#| msgid "Your phone number is only visible for registered users"
 msgid "Sorry, this feature is only available for registered members."
 msgstr "Ваш номер телефона виден только зарегистрированным пользователям"
 
@@ -4276,27 +4304,20 @@ msgid "If present, the translations below will be shown according to the users' 
 msgstr "Если заполнено, перевод ниже будет показан в соответствии с локальными языковыми настройками пользователя. Они не отражаются в поиске."
 
 #, fuzzy
-#| msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
 msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
 msgstr "Содержимое поля выше будет доступно в выдаче внутреннего поиска платформы. Оно будет показано, если только не будет переписано переводом (ниже)."
 
 #, fuzzy
-#| msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
 msgid "If present, the translations below will be shown according to the users' local language settings."
 msgstr "Если заполнено, перевод ниже будет показан в соответствии с локальными языковыми настройками пользователя. Они не отражаются в поиске."
 
 #, fuzzy
-#| msgid "You have just changed your email address at %(site_name)s."
 msgid "If you would like to change your email address, you can do it here:"
 msgstr "Вы только что изменили адрес электронной почты на %(site_name)s."
 
 #, fuzzy
-#| msgid "email address"
 msgid "Change email address"
 msgstr "адрес электронной почты"
-
-msgid "Date"
-msgstr "Дата"
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -4354,7 +4375,6 @@ msgid "Include a video conference"
 msgstr "Включить видео-конференцию"
 
 #, fuzzy
-#| msgid "Choose the type of the video conference you would like for the event"
 msgid "Choose the type of video conference you would like."
 msgstr "Выберите тип видеоконференции"
 
@@ -4368,7 +4388,6 @@ msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-#| msgid "Activate Conference"
 msgid "Activation required"
 msgstr "Активировать проект"
 
@@ -4377,6 +4396,16 @@ msgstr "Максимум участников за кофейным столик
 
 msgid "About the conference"
 msgstr "О проекте"
+
+#, fuzzy
+#| msgid "Delete event"
+msgid "On-site event"
+msgstr "Удалить cобытие"
+
+#, fuzzy
+#| msgid "Delete event"
+msgid "Online event"
+msgstr "Удалить cобытие"
 
 msgid "More infos..."
 msgstr "Контактная информация."
@@ -4489,7 +4518,6 @@ msgid "Invited to be a member"
 msgstr "Приглашены стать участником"
 
 #, fuzzy
-#| msgid "Delete invitation"
 msgid "late invitation"
 msgstr "Удалить приглашение"
 
@@ -4568,7 +4596,6 @@ msgid "There are no new membership requests."
 msgstr "Новых заявок на вступление нет."
 
 #, fuzzy
-#| msgid "Delete user account"
 msgid "Guest user access"
 msgstr "Удалить аккаунт пользователя"
 
@@ -4697,17 +4724,14 @@ msgid "Select Projects/Groups"
 msgstr "Выбрать родственный проект или группу"
 
 #, fuzzy
-#| msgid "Conferences"
 msgid "Conference subtitle"
 msgstr "Конференция"
 
 #, fuzzy
-#| msgid "Will be shown as a header in the conference lobby and on the conference microsite."
 msgid "The subtitle is shown in the conference and on the conference micro site."
 msgstr "Будет отображаться как верхний колонтитул в фойе конференции и на микросайте конференции."
 
 #, fuzzy
-#| msgid "Enter a title for the conference event."
 msgid "Add a subtitle for the conference."
 msgstr "Введите название события конференции."
 
@@ -4792,6 +4816,9 @@ msgstr "Убрать местоположение"
 msgid "Add location"
 msgstr "Добавить местоположение"
 
+msgid "If no location is specified, the event is interpreted as an online event."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "К какой группе относится проект?"
 
@@ -4814,17 +4841,14 @@ msgid "Create invite token"
 msgstr "Создать гостевой токен"
 
 #, fuzzy
-#| msgid "Check this to generate an invite token which allows a user to join the group directly."
 msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
 msgstr "Отметь, чтобы сгенерировать пригласительный токен, который позволит пользователю присоединиться к группе напрямую."
 
 #, fuzzy
-#| msgid "Check this to generate an invite token which allows a user to join the project directly."
 msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
 msgstr "Отметь, чтобы сгенерировать пригласительный токен, который позволит пользователю присоединиться к проекту напрямую."
 
 #, fuzzy
-#| msgid "Check this to generate an invite token which allows a user to join the conference directly."
 msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
 msgstr "Отметь, чтобы сгенерировать пригласительный токен, который позволит пользователю принять участие в конференции напрямую."
 
@@ -4983,6 +5007,9 @@ msgstr "Фейсбук-Интеграция будет доступна, как 
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "HTML, введенный здесь, будет отображаться на панеле управления группы/проекта (только для членов)"
+
+msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
+msgstr ""
 
 msgid "About me"
 msgstr "Обо мне"
@@ -5183,7 +5210,6 @@ msgid "Register and apply!"
 msgstr "Зарегистрируйтесь и присоединитесь!"
 
 #, fuzzy
-#| msgid "Presentation file"
 msgid "Late registration possible"
 msgstr "Файл презентации"
 
@@ -5221,7 +5247,6 @@ msgid "All Projects"
 msgstr "Все проекты"
 
 #, fuzzy
-#| msgid "Simple Statistics"
 msgid "Statistics"
 msgstr "Простая статистика"
 
@@ -5382,7 +5407,6 @@ msgid "OK"
 msgstr "OK"
 
 #, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Enter a new name for the folder"
 msgstr "Введите название проекта."
 
@@ -5420,7 +5444,6 @@ msgid "New folder name"
 msgstr "Новое название папки"
 
 #, fuzzy
-#| msgid "Enter a name for the conference."
 msgid "Enter a name for the new folder"
 msgstr "Введите название проекта."
 
@@ -5792,17 +5815,6 @@ msgid "New user request: %(user_name)s wants to join %(site_name)s!"
 msgstr "Новый запрос: %(user_name)s пожелал(а) присоединиться к %(site_name)s!"
 
 #, fuzzy, python-format
-#| msgid ""
-#| "Hello, %(user_name)s! \n"
-#| "\n"
-#| "Welcome to %(site_name)s! Your user account was approved.\n"
-#| "\n"
-#| "You can now log in at %(domain_url)s.\n"
-#| "\n"
-#| "\n"
-#| "Best regards,\n"
-#| "\n"
-#| "the %(site_name)s Team"
 msgid ""
 "Hello, %(user_name)s! \n"
 "\n"
@@ -6026,6 +6038,52 @@ msgstr "Только зарегистрированные члены"
 msgid "Everybody"
 msgstr "Все"
 
+msgid "Matching Settings for the Volunteer-O-Matic"
+msgstr ""
+
+#, fuzzy
+#| msgid "Where"
+msgid "here"
+msgstr "Где"
+
+#, python-format
+msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
+msgstr ""
+
+msgid "Participate in the Volunteer-O-Matic with "
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different name than the one in your %(settings_link)s."
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different description than the one in your %(settings_link)s."
+msgstr ""
+
+msgid "Character limit"
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different logo than the one in your %(settings_link)s."
+msgstr ""
+
+#, fuzzy
+#| msgid "Open Preview"
+msgid "Image preview"
+msgstr "Открыть просмотр"
+
+#, fuzzy
+#| msgid "Link URL"
+msgid "Link"
+msgstr "Ссылка URL"
+
+msgid "Please choose the answers that best fit you."
+msgstr ""
+
+msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
+msgstr ""
+
 msgid "Toggle navigation"
 msgstr "Включить/выключить навигацию"
 
@@ -6108,7 +6166,6 @@ msgid "You have been logged out. See you again soon!"
 msgstr "Был произведен выход из твоей учётной записи. До скорой встречи снова!"
 
 #, fuzzy
-#| msgid "Redirect Logged in Users"
 msgid "Redirecting you in 3 seconds..."
 msgstr "Перенаправление зарегистрированных пользователей"
 
@@ -6405,11 +6462,15 @@ msgstr "HD место, используемое группами"
 msgid "HD space used by projects"
 msgstr "HD место, используемое проектами"
 
+#, fuzzy
+#| msgid "Users Need Activation"
+msgid "User Activity Timeline"
+msgstr "Необходимо активировать новых пользователей"
+
 msgid "User statistics (min 1x logged in)"
 msgstr "Пользовательская статистика (в минуту 1х входов)"
 
 #, fuzzy
-#| msgid "User statistics (min 1x logged in)"
 msgid "User domains (min 1x logged in)"
 msgstr "Пользовательская статистика (в минуту 1х входов)"
 
@@ -6702,10 +6763,6 @@ msgid "In my Groups and Projects"
 msgstr "В моих группах и проектах"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "In my Cloud Files"
-msgstr "Поиск в облачных файлах"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
 msgstr "Тема"
 
@@ -6921,7 +6978,9 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr "Здесь ты найдешь обзор выбранных тобой групп и проектов, сразу после твоих первых активных шагов в нескольких из них."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
+#, fuzzy
+#| msgid "You can create Groups or Projects via the '+' button in the header."
+msgid "You can create Groups or Projects via the main menu in the header."
 msgstr "Ты можешь создать свои собственные группы или проекты с помощью кнопки '+' в верхней правой части страницы."
 
 #. Translators: __INCLUDE_JS_PO__
@@ -6933,7 +6992,9 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr "Здесь ты найдешь обзор идей, которые тебе понравились."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#, fuzzy
+#| msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr "Ты можешь создать свои собственные идеи с помощью кнопки '+' в верхней правой части страницы или ознакомиться с уже существующими"
 
 #. Translators: __INCLUDE_JS_PO__
@@ -6989,12 +7050,10 @@ msgid "For example"
 msgstr "Например"
 
 #, fuzzy
-#| msgid "Restricted"
 msgid "Restricted Guest Access"
 msgstr "Ограниченный"
 
 #, fuzzy
-#| msgid "successfully deactivated all user accounts."
 msgid "Access restricted for guest accounts"
 msgstr "Все учётные записи успешно деактивированы."
 
@@ -7005,7 +7064,6 @@ msgid "As a guest, many features on this site are not available to you, such as 
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you also want to copy your profile data?"
 msgid "You cannot customize your user profile either."
 msgstr "Скопировать данные профиля?"
 
@@ -7019,7 +7077,6 @@ msgid "Note: After signup you will have to apply or be invited to become a full 
 msgstr ""
 
 #, fuzzy
-#| msgid "Create and create another"
 msgid "Leave guest access and create an account"
 msgstr "Создать, а затем создать другое событие"
 
@@ -7030,7 +7087,6 @@ msgid "You may create a full account at any time by logging out of your guest ac
 msgstr ""
 
 #, fuzzy
-#| msgid "Join BBB Meeting as guest"
 msgid "Join as a Guest"
 msgstr "Принять участие в ВВВ встрече в качестве гостя"
 
@@ -7067,7 +7123,6 @@ msgid "User overview"
 msgstr "Обзор пользователей"
 
 #, fuzzy
-#| msgid "Your email address"
 msgid "Change your email address"
 msgstr "Ваш адрес электронной почты"
 
@@ -7078,12 +7133,10 @@ msgid "Changes to your email address need to be verified by clicking a link in a
 msgstr "Изменения Вашего адреса электронной почты должны быть верифицированы посредством перехода по ссылке в письме, отправленном Вам на Ваш новый адрес."
 
 #, fuzzy
-#| msgid "Your email address"
 msgid "Enter new email address"
 msgstr "Ваш адрес электронной почты"
 
 #, fuzzy
-#| msgid "email address"
 msgid "New email address"
 msgstr "адрес электронной почты"
 
@@ -7091,7 +7144,6 @@ msgid "This email address serves as login for your user account and notification
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter old password"
 msgid "Enter your password"
 msgstr "Введите старый пароль"
 
@@ -7099,12 +7151,10 @@ msgid "It seems you do not currently have an email change pending!"
 msgstr ""
 
 #, fuzzy
-#| msgid "Success"
 msgid "Success!"
 msgstr "Успешно"
 
 #, fuzzy
-#| msgid "Your email address %(email)s was successfully confirmed!"
 msgid "Your email address was successfully changed to:"
 msgstr "Адрес Вашей электронной почты %(email)s успешно подтверждён! Добро пожаловать в сообщество!"
 
@@ -7148,7 +7198,6 @@ msgid "You have already specified that you have no common interests with this pe
 msgstr ""
 
 #, fuzzy
-#| msgid "Wonderful, we definetely have so much to discuss!"
 msgid "Wonderful, we definitely have so much to discuss!"
 msgstr "Прекрасно, у нас наверняка найдется о чём поговорить!"
 
@@ -7268,7 +7317,6 @@ msgid "I am open for cooperation requests"
 msgstr "Я открыт(а) к заявкам насчет сотрудничества"
 
 #, fuzzy
-#| msgid "Create Newsletter"
 msgid "News via the newsletter"
 msgstr "Создать пользователя"
 
@@ -7534,7 +7582,6 @@ msgid "There are no announcements yet."
 msgstr "Пока нет анонсов."
 
 #, fuzzy
-#| msgid "Start the Import?"
 msgid "Start user export"
 msgstr "Начать импорт?"
 
@@ -7542,7 +7589,6 @@ msgid "You can start a user export. As soon as the export is finished it will be
 msgstr ""
 
 #, fuzzy
-#| msgid "The import is currently running..."
 msgid "The export is currently running..."
 msgstr "Выполняется импорт..."
 
@@ -7551,7 +7597,6 @@ msgstr ""
 
 # ???
 #, fuzzy
-#| msgid "Import finished"
 msgid "User export finished"
 msgstr "Поле сортировки"
 
@@ -7559,12 +7604,10 @@ msgid "You can download the latest user export data."
 msgstr ""
 
 #, fuzzy
-#| msgid "Download User credentials"
 msgid "Download user exports from"
 msgstr "Скачать данные пользователей"
 
 #, fuzzy
-#| msgid "Download User credentials"
 msgid "Download user export as"
 msgstr "Скачать данные пользователей"
 
@@ -7572,17 +7615,14 @@ msgid "Please note that for security reasons the export data will be only availa
 msgstr ""
 
 #, fuzzy
-#| msgid "An internal error occured."
 msgid "An error has occurred"
 msgstr "Случилась внутренняя ошибка."
 
 #, fuzzy
-#| msgid "There was an error while trying to submit your report. Please try again in a moment."
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr "Произошла ошибка при отправке жалобы. Пожалуйста, попробуйте снова через несколько секунд."
 
 #, fuzzy
-#| msgid "Delete uploaded data and upload a new CSV file"
 msgid "Delete export data and start new user export"
 msgstr "Удалить загруженные данные и загрузить новый файл CSV"
 
@@ -7590,7 +7630,6 @@ msgid "Retry user export"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete reported item..."
 msgid "Delete exported data"
 msgstr "Удалить элемент, на который поступила жалоба..."
 
@@ -8079,17 +8118,14 @@ msgid "Click here to view external image \"%(image_name)s\""
 msgstr ""
 
 #, fuzzy
-#| msgid "Click here to send the validation link again."
 msgid "Click here to view external image"
 msgstr "Нажмите сюда, чтобы повторить отправку ссылки на валидацию."
 
 #, fuzzy
-#| msgid "External contents"
 msgid "External Resource"
 msgstr "Внешний контент"
 
 #, fuzzy
-#| msgid "External contents"
 msgid "External Resources"
 msgstr "Внешний контент"
 
@@ -8107,6 +8143,11 @@ msgstr "Панель управления проекта"
 
 msgid "in the Project Dashboard"
 msgstr "в панели управления проектом"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Project settings"
+msgstr "Настройки приватности"
 
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr "Реализовывайте проекты и инициативы эффективно вместе с единомышленниками. Все важные инструменты для этого сотрудничества Вы найдете в одном месте: Новости, Документы, События, Задания и многоe другоe."
@@ -8157,17 +8198,14 @@ msgid "Where is the project active?"
 msgstr "Где Вы проводите свой проект?"
 
 #, fuzzy
-#| msgid "Group/Project is publicly visible"
 msgid "Project is publicly visible"
 msgstr "Общедоступность группы/проекта"
 
 #, fuzzy
-#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgid "Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgstr "Должны ли Ваша группа / Ваш проект быть доступны для анонимных пользователей? Микросайт может быть найден через поиск Интернета и внутренний поиск портала."
 
 #, fuzzy
-#| msgid "Enable the public visibility of your group/project"
 msgid "Enable the public visibility of your project"
 msgstr "Сделать группу/проект общедоступным"
 
@@ -8193,7 +8231,6 @@ msgid "You can access and browse the project that invited you"
 msgstr ""
 
 #, fuzzy
-#| msgid "There is no description for this project yet."
 msgid "This is only visible to admins of this project."
 msgstr "Описания для этого проекта пока нет."
 
@@ -8204,7 +8241,6 @@ msgid "You can invite an unregistered user to instantly join the platform by sha
 msgstr ""
 
 #, fuzzy
-#| msgid "You are now in a private channel with the admins of this project."
 msgid "You are joining as a guest and will get read-only access to the project"
 msgstr "Вы находитесь в приватном канале с администраторами проекта."
 
@@ -8220,6 +8256,27 @@ msgstr "Данный контент доступен только для чле�
 msgid "Note: New recordings can only be made if you have booked premium features for this project."
 msgstr "Учитывай, что новые записи будут созданы только в том случае, если для проекта был куплен премиум-статус."
 
+msgid "If you want your project to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Go to the Matching Settings of your project for the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Name of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your project. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr "Тебя пока нет ни в одной группе"
 
@@ -8234,6 +8291,11 @@ msgstr "Панель управления группы"
 
 msgid "in the Group Dashboard"
 msgstr "на панели управления группой"
+
+#, fuzzy
+#| msgid "Privacy settings"
+msgid "Group settings"
+msgstr "Настройки приватности"
 
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Группы помогают улучшить связь и сотрудничество в большой сети или организации. Внутри одной группы Вы можете объединить несколько небольших проектов или рабочих групп."
@@ -8284,17 +8346,14 @@ msgid "Where is the group active?"
 msgstr "Где Вы проводите свой проект?"
 
 #, fuzzy
-#| msgid "Group/Project is publicly visible"
 msgid "Group is publicly visible"
 msgstr "Общедоступность группы/проекта"
 
 #, fuzzy
-#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgid "Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgstr "Должны ли Ваша группа / Ваш проект быть доступны для анонимных пользователей? Микросайт может быть найден через поиск Интернета и внутренний поиск портала."
 
 #, fuzzy
-#| msgid "Enable the public visibility of your group/project"
 msgid "Enable the public visibility of your group"
 msgstr "Сделать группу/проект общедоступным"
 
@@ -8311,7 +8370,6 @@ msgid "You can access and browse the group that invited you"
 msgstr ""
 
 #, fuzzy
-#| msgid "There is no description for this group yet."
 msgid "This is only visible to admins of this group."
 msgstr "Описания для этой группы пока нет."
 
@@ -8322,7 +8380,6 @@ msgid "You can invite an unregistered user to instantly join the platform by sha
 msgstr ""
 
 #, fuzzy
-#| msgid "You are now in a private channel with the admins of this group."
 msgid "You are joining as a guest and will get read-only access to the group"
 msgstr "Вы находитесь в приватном канале с администраторами группы."
 
@@ -8338,6 +8395,27 @@ msgstr "Данный контент доступен только для чле�
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr "Учитывай, что новые записи будут созданы только в том случае, если для группы был куплен премиум-статус."
 
+msgid "If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Go to the Matching Settings of your group for the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Name of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
+msgstr ""
+
 msgid "You are not currently attending any Conferences"
 msgstr "Вы не участвуете ни в одной конференции"
 
@@ -8346,6 +8424,11 @@ msgstr "Конференция"
 
 msgid "Conference Menu"
 msgstr "Страница конференции"
+
+#, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference settings"
+msgstr "Настройки конференции"
 
 msgid "Browse all Conferences"
 msgstr "Просмотреть все конференции"
@@ -8412,17 +8495,14 @@ msgid "Where is the conference active?"
 msgstr "Где Вы проводите свой проект?"
 
 #, fuzzy
-#| msgid "Group/Project is publicly visible"
 msgid "Conference is publicly visible"
 msgstr "Общедоступность группы/проекта"
 
 #, fuzzy
-#| msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgid "Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
 msgstr "Должны ли Ваша группа / Ваш проект быть доступны для анонимных пользователей? Микросайт может быть найден через поиск Интернета и внутренний поиск портала."
 
 #, fuzzy
-#| msgid "Enable the public visibility of your group/project"
 msgid "Enable the public visibility of your conference"
 msgstr "Сделать группу/проект общедоступным"
 
@@ -8448,7 +8528,6 @@ msgid "You can access and participate in the conference that invited you"
 msgstr ""
 
 #, fuzzy
-#| msgid "This function is not enabled for this conference."
 msgid "This is only visible to admins of this conference."
 msgstr "Эта функция недоступна для этой конференции."
 
@@ -8459,7 +8538,6 @@ msgid "You can invite an unregistered user to instantly join the platform by sha
 msgstr ""
 
 #, fuzzy
-#| msgid "You are now in a private channel with the organizers of this conference."
 msgid "You are joining as a guest and will get read-only access to the conference"
 msgstr "Вы находитесь в приватном канале с администраторами конференции."
 
@@ -8502,7 +8580,6 @@ msgid "Question about"
 msgstr "Вопрос о"
 
 #, fuzzy
-#| msgid "Please enter a token!"
 msgid "Please enter your OTP token."
 msgstr "Пожалуйста, введите токен!"
 
@@ -8537,20 +8614,48 @@ msgstr "Пожалуйста, укажите дату конца"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Убедись, что твоё имя не содержит недопустимые символы."
 
+#, python-brace-format
+msgid "Version {version_number} released"
+msgstr ""
+
+msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed a bug where newly invited group/project members could not join a BBB meeting.\n"
+"- Fixed a bug where admins would see a broken page layout once after logging in.\n"
+"- Fixed a visual bug in the administration interface after clicking a download-link.\n"
+"- Fixed a bug where notifications would not be marked as read when they were too far down in the list.\n"
+"- Added an option to the notification list to mark all notifications as read.\n"
+"- Fixed a bug where event polls could not be created if the user interface was set to certain languages.\n"
+"- Fixed a bug in the legacy messaging system that sometimes prevented writing a new message.\n"
+"- (RocketChat) further improved the stability and performance of the integration with RocketChat.\n"
+msgstr ""
+
+msgid "- The password requirements have been changed: Now a password must consist of at least 12 characters. Otherwise, there are no further requirements regarding the chosen characters. Passwords are still checked against a list of frequently used passwords.\n"
+msgstr ""
+
+msgid ""
+"- Fixed a bug that prevented users from completing the intro tour on mobile devices running iOS 18.\n"
+"- Fixed a bug that sometimes prevented entries from being displayed in the lower part of the sidebar on mobile devices.\n"
+msgstr ""
+
+msgid "Version 2.4.0 released"
+msgstr ""
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr ""
+
 msgid "Version 2.3.0 released"
 msgstr ""
 
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
 msgstr ""
 
-msgid "This update provides several small bugfixes and stability improvements."
-msgstr ""
-
 msgid "Redesign Update"
 msgstr ""
 
 #, fuzzy
-#| msgid "This description will be visible on the entire portal."
 msgid "The redesign has been launched across the platform!"
 msgstr "Это описание будет видимо всем зарегистрированным пользователям."
 
@@ -8561,9 +8666,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 2.2.5 released"
-msgstr ""
-
-msgid "This update includes several bugfixes:"
 msgstr ""
 
 msgid ""
@@ -8760,7 +8862,6 @@ msgid "You do not have any backup tokens set up. Please log in using your OTP to
 msgstr "Вы еще не сгенерировали резервные токены. Войдите, используя одноразовый пароль."
 
 #, fuzzy
-#| msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
 msgid "You have successfully disabled two-factor authentication for your account."
 msgstr "Отключение двухфакторной аутентификации настоятельно не рекомендуется, однако при желании вы можете отключить ее для своего аккаунта."
 
@@ -8867,7 +8968,6 @@ msgid "The %(team_type)s was changed successfully."
 msgstr "Изменения в %(team_type)s приняты."
 
 #, fuzzy
-#| msgid "Edit"
 msgid "Edited."
 msgstr "Редактировать"
 
@@ -8922,7 +9022,6 @@ msgid "All members of groups/projects you selected had already been invited or h
 msgstr "Все выбранные члены групп/проектов уже были приглашены или уже подали заявку. Новые приглашения не отправлялись."
 
 #, fuzzy, python-format
-#| msgid "Invite unregistered users..."
 msgid "Invited user \"%(user)s\"."
 msgstr "Пригласить незарегистрированных пользователей..."
 
@@ -8934,7 +9033,6 @@ msgid "You cannot remove “%(username)s” form this team. Only one admin left.
 msgstr "Вы не можете удалить “%(username)s” из этого проекта. Остался только один администратор."
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "Accepted user \"%(user)s\" as  member."
 msgstr "Пользователь \"%(username)s\" больше не является членом."
 
@@ -8943,7 +9041,6 @@ msgid "Made user \"%(user)s\" admin."
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "Made user \"%(user)s\" member."
 msgstr "Пользователь \"%(username)s\" больше не является членом."
 
@@ -8992,12 +9089,10 @@ msgid "This project/group is already inactive!"
 msgstr "Проект/группа уже неактивны!"
 
 #, fuzzy
-#| msgid "Activate"
 msgid "Activated."
 msgstr "Активировать"
 
 #, fuzzy
-#| msgid "Deactivate"
 msgid "Deactivated."
 msgstr "Деактивировать"
 
@@ -9036,7 +9131,6 @@ msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Получилось! Сейчас мы отправляем приглашение на следующие электронные адреса: %s"
 
 #, fuzzy, python-format
-#| msgid "Invited Admins"
 msgid "Invited \"%(emails)s\"."
 msgstr "Приглашенные администраторы"
 
@@ -9077,6 +9171,14 @@ msgstr "Ваше сообщение было отправлено."
 
 msgid "Something went wrong. Your message was not sent."
 msgstr "Что-то пошло не так. Ваше сообщение не было отправлено."
+
+#, fuzzy
+#| msgid "This function is not enabled for this conference."
+msgid "This function is not enabled for this group type."
+msgstr "Эта функция недоступна для этой конференции."
+
+msgid "Your Matching Settings for the Volunteer-O-Matic have been saved."
+msgstr ""
 
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "При обработке Вашего аватара произошла ошибка. Пожалуйста, убедитесь, что Вы выбрали деталь изображения достаточного размера!"
@@ -9121,7 +9223,6 @@ msgid "No %(verbose_name)s found matching the query"
 msgstr "По запросу не найдено %(verbose_name)s"
 
 #, fuzzy
-#| msgid "There is no description for this project yet."
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "Описания для этого проекта пока нет."
 
@@ -9309,7 +9410,6 @@ msgid "Your Announcement was deactivated successfully."
 msgstr "Ваше объявление было успешно деактивировано."
 
 #, fuzzy
-#| msgid "Another import is currently running!"
 msgid "Another export is currently running!"
 msgstr "В этот момент выполняется другой импорт!"
 
@@ -9364,12 +9464,8 @@ msgid "Cloud Stub"
 msgstr "Облачная заглушка"
 
 #, fuzzy
-#| msgid "Click here to send the validation link again."
 msgid "Click here to view the files directly in the cloud."
 msgstr "Нажмите сюда, чтобы повторить отправку ссылки на валидацию."
-
-msgid "There are no cloud files yet"
-msgstr "Облачных файлов пока нет"
 
 msgid "Restart"
 msgstr "Ограниченный"
@@ -9523,9 +9619,23 @@ msgid "Status"
 msgstr "Статус"
 
 #, fuzzy
-#| msgid "This function is not enabled for this conference."
 msgid "Attendance data is not available for this conference."
 msgstr "Эта функция недоступна для этой конференции."
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Task-Board"
+msgstr "Панель управления"
+
+msgctxt "the_app"
+msgid "deck"
+msgstr ""
+
+msgid "The task-board creation is in progress..."
+msgstr ""
+
+msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
+msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "Проведена реинициализация следующих документов:"
@@ -9678,7 +9788,6 @@ msgid "There are no etherpads yet"
 msgstr "Документов ещё нет"
 
 #, fuzzy
-#| msgid "This action is not permitted for this poll at this stage!"
 msgid "Editing is not permitted for guest accounts."
 msgstr "Это действие не разрешено для этого опроса на этой стадии!"
 
@@ -9947,6 +10056,15 @@ msgstr "Ближайшее событие"
 msgid "Newest Created"
 msgstr "Последнее из созданных событий"
 
+msgid "Online/On-Site"
+msgstr ""
+
+msgid "Online (has no location)"
+msgstr ""
+
+msgid "On-Site (has location)"
+msgstr ""
+
 msgid "Presenters"
 msgstr "Презентаторы"
 
@@ -10107,22 +10225,18 @@ msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
 
 #, fuzzy
-#| msgid "Started"
 msgid "Start-Time"
 msgstr "Начавшиеся"
 
 #, fuzzy
-#| msgid "Time"
 msgid "End-Time"
 msgstr "Время"
 
 #, fuzzy
-#| msgid "Conference Event Management"
 msgid "Conference Event Attendance Tracking"
 msgstr "Управление событиями конференции"
 
 #, fuzzy
-#| msgid "Conference Event Management"
 msgid "Conference Event Attendance Trackings"
 msgstr "Управление событиями конференции"
 
@@ -11464,7 +11578,6 @@ msgid "Contact request"
 msgstr "Контактный запрос"
 
 #, fuzzy
-#| msgid "Account connection has been removed"
 msgid "This content has been hidden or removed."
 msgstr "Подключение к учётной записи было удалено"
 
@@ -12487,12 +12600,10 @@ msgid "CosinnusOrganizationSocialMedia"
 msgstr ""
 
 #, fuzzy
-#| msgid "CosinnusLocation"
 msgid "CosinnusOrganizationLocation"
 msgstr "CosinnusМесто"
 
 #, fuzzy
-#| msgid "CosinnusLocations"
 msgid "CosinnusOrganizationLocations"
 msgstr "CosinnusМеста"
 
@@ -14037,12 +14148,10 @@ msgid "You cannot delete this folder because you do not have permission to delet
 msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся!"
 
 #, fuzzy
-#| msgid "Add project"
 msgid "Add object"
 msgstr "Добавить проект"
 
 #, fuzzy
-#| msgid "Create content"
 msgid "Create container"
 msgstr "Создать контент"
 
@@ -14050,392 +14159,367 @@ msgid "ROOT"
 msgstr ""
 
 #, fuzzy
-#| msgid "Show all"
 msgid "Show"
 msgstr "Показать все"
 
 #, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this container and all objects in it?"
 msgstr "Вы уверены, что хотите удалить этот проект?"
 
 #, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Вы уверены, что хотите удалить этот проект?"
 
-#~ msgid "Debug"
-#~ msgstr "Тестирование"
+#~ msgid "In my Cloud Files"
+#~ msgstr "Поиск в облачных файлах"
+
+#~ msgid "Please provide your motivation for applying"
+#~ msgstr "Укажите Вашу мотивацию участия"
 
 #, fuzzy
-#~| msgid "Comment"
-#~ msgid "Community"
-#~ msgstr "Комментарий"
+#~ msgid "Require applicants to answer questions about their motivation for applying"
+#~ msgstr "Требует от заявителей указать мотивацию для подачи заявки"
 
-#, fuzzy
-#~| msgid "Persons"
-#~ msgid "Personal"
-#~ msgstr "Люди"
+#~ msgid "There are no cloud files yet"
+#~ msgstr "Облачных файлов пока нет"
 
-#~ msgid "Password reset successful"
-#~ msgstr "Пароль был успешно переустановлен"
+#~ msgid "You can create Groups or Projects via the '+' button in the header."
+#~ msgstr "Ты можешь создать свои собственные группы или проекты с помощью кнопки '+' в верхней правой части страницы."
 
-#~ msgid "Administrators unknown"
-#~ msgstr "Администраторы не известны"
+#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#~ msgstr "Ты можешь создать свои собственные идеи с помощью кнопки '+' в верхней правой части страницы или ознакомиться с уже существующими"
 
-#~ msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-#~ msgstr "Запросить информацию напрямую от Nextcloud сейчас невозможно. Нажми здесь, чтобы перейти к файлам напрямую в облаке."
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
 
-#~ msgid "Edit my Profile"
-#~ msgstr "Редактировать мой профиль"
+#~ msgid "%(sender_name)s completed a poll"
+#~ msgstr "%(sender_name)s завершил(а) опрос"
 
-#~ msgid "New!"
-#~ msgstr "Новинка!"
+#~ msgid "%(sender_name)s completed a poll you are following"
+#~ msgstr "%(sender_name)s завершил(a) опрос, за которым Вы следите"
 
-#~ msgid "Set up your Profile"
-#~ msgstr "Создать профиль"
+#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s только что создал(а) проект/группу “%(team_name)s” on %(portal_name)s!"
 
-#, fuzzy
-#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-#~ msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
-#~ msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
+#~ msgid "%(sender_name)s voted in"
+#~ msgstr "%(sender_name)s проголосовал"
 
-#~ msgid "This project shall be made publicly findable via other platforms."
-#~ msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
-
-#, fuzzy
-#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-#~ msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
-#~ msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
-
-#, fuzzy
-#~| msgid "This project shall be made publicly findable via other platforms."
-#~ msgid "This group shall be made publicly findable via other platforms."
-#~ msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
-
-#, fuzzy
-#~| msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href=\"#\" target=\"_blank\">partner platforms</a> by WECHANGE."
-#~ msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
-#~ msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
-
-#, fuzzy
-#~| msgid "This project shall be made publicly findable via other platforms."
-#~ msgid "This conference shall be made publicly findable via other platforms."
-#~ msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
-
-#~ msgid "Your match with %(sender_name)s has just been established!"
-#~ msgstr "Твоё совпадение с %(sender_name)s было установлено!"
-
-#~ msgid "Pre-filled content for the information field"
-#~ msgstr "Предварительно заполняемое содержание для информационного поля"
-
-#~ msgid "Describe why you wish to participate"
-#~ msgstr "Опишите, почему Вы хотите участвовать"
-
-#~ msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
-#~ msgstr "Текстовое поле для мотивации будет заполнено текстом, который Вы здесь введете. Вы можете использовать это поле, чтобы написать инструкцию или список вопросов, на которые заявители должны ответить."
-
-#~ msgid "Enter text to pre-fill or leave empty"
-#~ msgstr "Введите текст или оставьте пустым"
-
-#~ msgid "Direct Contact"
-#~ msgstr "Прямой контакт"
-
-#~ msgid "Newsletter sent."
-#~ msgstr "Информационное письмо отправлено."
-
-#~ msgid "BBB-Meetings are a premium feature."
-#~ msgstr "BBB-сессии являются премиальными."
-
-#~ msgid "Premium Bookings"
-#~ msgstr "Премиум статус"
-
-#~ msgid ""
-#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
-#~ "\n"
-#~ "Our administrators will review your request and approve your user account soon!\n"
-#~ "\n"
-#~ "Until then, with warm greetings, \n"
-#~ "your %(site_name)s Team"
-#~ msgstr ""
-#~ "Здравствуйте! Мы рады, что Вы хотите присоединиться к %(site_name)s. \n"
-#~ "\n"
-#~ "Наши администраторы рассмотрят Ваш запрос и подтвердят Ваш аккаунт в ближайшее время!\n"
-#~ "\n"
-#~ "До скорого, \n"
-#~ "Ваша команда %(site_name)s"
-
-#~ msgid "Go to chat"
-#~ msgstr "Перейти к чату"
-
-#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-#~ msgstr "Вы изменили адрес электронной почты. Мы вышлем Вам на этот адрес письмо, содержащее ссылку на подтверждение адреса. До тех пор, пока Вы не нажмёте на ссылку, в Вашем профиле будет сохранён старый адрес электронной почты!"
-
-#~ msgid "Type of educational institution"
-#~ msgstr "Тип образовательной организации"
-
-#~ msgid "Function"
-#~ msgstr "Функция"
-
-#~ msgid "Position"
-#~ msgstr "Должность"
-
-#~ msgid "Name of educational institution"
-#~ msgstr "Название образовательного учреждения"
-
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Индивидуальная страница Wagtail"
-
-#~ msgid "Tools"
-#~ msgstr "Инструменты"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Импортировать Проекты и Группы или Пользователей"
-
-# ???
-#~ msgid "Import from a CSV File"
-#~ msgstr "Импортировать из CSV файла"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "CSV файл для импорта Проекта/Группы"
-
-#~ msgid "User CSV File"
-#~ msgstr "CSV файл для импорта Пользователей"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Шифрование файла CSV"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Определение CSV файла"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Загрузка и импорт…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Импорт Проектов и Групп"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Отчистить результаты и начать новый импорт!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Результаты импорта CSV файла"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Импорт был завершен. Получены следующие результаты:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Ошибки чтения:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Сохраненные элементы:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Важные сообщения:"
-
-#~ msgid "Errors:"
-#~ msgstr "Ошибки:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Информационные сообщения:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "По окончании импорта результаты отобразятся на этой странице.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
-#~ "Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Прогресс:"
-
-#~ msgid "send immediately"
-#~ msgstr "отправить незамедлительно"
-
-#~ msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-#~ msgstr "BBB-видеоконференции не могут быть использованы незарегистрированными пользователями. Для участия необходима регистрация или вход под своей учетной записью."
-
-#~ msgid "Recording of meetings is only available for premium conferences!"
-#~ msgstr "Запись сессий доступна только для премиум- конференций!"
-
-#~ msgid "Choose the type of the video conference you would like to include in the dashboard"
-#~ msgstr "Выберите тип видео-конференции, которая будет отражена в дашборде"
-
-#~ msgid "Umwelt"
-#~ msgstr "Окружающая среда"
-
-#~ msgid "Bildung"
-#~ msgstr "Образование"
-
-#~ msgid "Gesundheit"
-#~ msgstr "Здравоохранение"
-
-#~ msgid "Ernährung und Konsum"
-#~ msgstr "Питание и потребление"
-
-#~ msgid "Kunst und Kultur"
-#~ msgstr "Искусство и культура"
-
-#~ msgid "Arbeit und Recht"
-#~ msgstr "Труд и право"
-
-#~ msgid "Bauen und Wohnen"
-#~ msgstr "Строительство и жильё"
-
-#~ msgid "Klimaschutz"
-#~ msgstr "Защита окружающей среды"
-
-#~ msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
-#~ msgstr "Активировав двухфакторную аутентификацию, вы повысите уровень безопасности своего аккаунта. <br> Чтобы использовать функцию, установите приложение ´free otp´ на свой смартфон и отсканируйте полученный QR код. В данный момент мы не предлагает иных опций по использованию двухфакторной аутентификации, но обязательно проинформируем вас в случае появления таковых."
-
-#~ msgid "Back to your profile"
-#~ msgstr "Назад к профилю"
-
-#~ msgid "Message Group"
-#~ msgstr "Отправить сообщение группе"
-
-#~ msgid "Message Project"
-#~ msgstr "Отправить сообщение проекту"
-
-#~ msgid "The invite token you have used does not exist!"
-#~ msgstr "Токен приглашения, который Вы использовали, не существует!"
-
-#~ msgid "Ok"
-#~ msgstr "Ок"
-
-#~ msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
-#~ msgstr "При нажатии кнопки “Продолжить”, вы подтверждаете свое согласие на то, что эта видео-конференция будет записана."
-
-#~ msgid "You have to consent to being recorded to join this meeting."
-#~ msgstr "Вы должны подтвердить, разрешаете ли вы запись, чтобы присоединиться к сессии."
-
-#~ msgid "Active"
-#~ msgstr "Активный"
-
-#~ msgid "Allow temporary users accounts for this conference."
-#~ msgstr "Разрешить временным пользовательским аккаунтам доступ к этой конференции."
-
-#~ msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-#~ msgstr "Если разрешено, администраторы конференции могут создавать временные пользовательские аккаунты, который можно активировать и деактивировать."
-
-#~ msgid "Conference accounts active"
-#~ msgstr "Управление конференцией"
-
-#~ msgid "If enabled, temporary user accounts for this conference are active and can log in."
-#~ msgstr "Если разрешено, временные пользовательские аккаунты для этой конференции активны, и пользователи могут войти в систему."
-
-#, fuzzy
-#~| msgid "options for the room, that are represented in the bigbluebutton API"
-#~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
-#~ msgstr "опции для комнат, которые представлены в bigbluebutton API"
-
-#, fuzzy
-#~| msgid "the welcome message, that is displayed to attendees"
-#~ msgid "DEPRECATED! the welcome message, that is displayed to attendees"
-#~ msgstr "приветсвенное слово, отображаемое участникам"
-
-#, fuzzy
-#~| msgid "Participants"
-#~ msgid "participants"
-#~ msgstr "Участники"
-
-#, fuzzy
-#~| msgid "Temporary User Accounts"
-#~ msgid "Temporary restrictions"
-#~ msgstr "Временные аккаунты пользователей"
-
-#, fuzzy
-#~| msgid "Portal Administrators"
-#~ msgid "Portal administrators"
-#~ msgstr "Администраторы портала"
-
-#~ msgid "Conference successfully started and user accounts activated"
-#~ msgstr "Конференция успешно началась и пользовательсике аккаунты активированы"
-
-#~ msgid "Conference successfully finished and user accounts deactivated"
-#~ msgstr "Конференция успешно завершена и пользовательские аккаунты деактивированы"
-
-#, fuzzy
-#~| msgid "Workshop username"
-#~ msgid "name and email"
-#~ msgstr "Название воркшопа"
-
-#, fuzzy
-#~| msgid "Password reset"
-#~ msgid "Password set"
-#~ msgstr "Переустановить пароль"
-
-#, fuzzy
-#~| msgid "Password"
-#~ msgid "no Password"
-#~ msgstr "Пароль"
-
-#~ msgid "Can't find workshop with slug '{}'"
-#~ msgstr "Не найден воркшоп с идентификатором '{}'"
-
-#~ msgid "Conference Management"
-#~ msgstr "Управление конференцией"
-
-#~ msgid "Conference is running"
-#~ msgstr "Проходит конференция"
-
-#~ msgid "Conference is not running"
-#~ msgstr "Проходит конференция"
+#~ msgid "%(team_name)s was deactivated successfully!"
+#~ msgstr "Деактивация %(team_name)s прошла успешно!"
 
 #~ msgid "Accounts from CSV Upload"
 #~ msgstr "Аккаунты из загруженного файла CSV"
 
-#~ msgid "Upload Participants"
-#~ msgstr "Участники"
+#~ msgid "Active"
+#~ msgstr "Активный"
 
-#~ msgid "no login yet"
-#~ msgstr "вход еще не выполнен"
+#~ msgid "Add Photos or Files"
+#~ msgstr "Добавить фотографии или файлы"
 
-#~ msgid "not active"
-#~ msgstr "(неактивно)"
+#, fuzzy
+#~ msgid "Add workshop"
+#~ msgstr "Воркшопы"
 
-#~ msgid "User participates in the following workshops:"
-#~ msgstr "Пользователь участвует в следующих воркшопах:"
+#, fuzzy
+#~ msgid "Administration Area"
+#~ msgstr "Администратор"
 
-#~ msgid "deactivate member"
-#~ msgstr "деактивировать участника"
+#~ msgid "Administrators unknown"
+#~ msgstr "Администраторы не известны"
 
-# ???
-#~ msgid "activate member"
-#~ msgstr "активировать участника"
+#~ msgid "All groups"
+#~ msgstr "Все группы"
 
-#~ msgid "Finish conference and deactivate user accounts"
-#~ msgstr "Аккаунт пользователя успешно деактивирован"
+#~ msgid "All projects"
+#~ msgstr "Все проекты"
 
-#~ msgid "Start conference and activate user accounts"
-#~ msgstr "Аккаунт пользователя успешно деактивирован"
+#~ msgid "All societies"
+#~ msgstr "Все сообщества"
+
+#~ msgid "Allow temporary users accounts for this conference."
+#~ msgstr "Разрешить временным пользовательским аккаунтам доступ к этой конференции."
+
+#~ msgid "Arabic--NATIVE-LANGUAGE"
+#~ msgstr "العربية"
+
+#~ msgid "Arbeit und Recht"
+#~ msgstr "Труд и право"
+
+#~ msgid "Armenian--NATIVE-LANGUAGE"
+#~ msgstr "Հայոց լեզու"
+
+#~ msgid "Attach existing Files..."
+#~ msgstr "Приложить имеющиеся файлы…"
+
+#~ msgid "Azerbaijani--NATIVE-LANGUAGE"
+#~ msgstr "Azerbaycan dili"
+
+#~ msgid "BBB-Meetings are a premium feature."
+#~ msgstr "BBB-сессии являются премиальными."
+
+#~ msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+#~ msgstr "BBB-видеоконференции не могут быть использованы незарегистрированными пользователями. Для участия необходима регистрация или вход под своей учетной записью."
+
+#~ msgid "Back to your profile"
+#~ msgstr "Назад к профилю"
+
+#~ msgid "Banner Image"
+#~ msgstr "Фоновое изображение"
+
+#~ msgid "Bauen und Wohnen"
+#~ msgstr "Строительство и жильё"
+
+#~ msgid "Belarussian--NATIVE-LANGUAGE"
+#~ msgstr "Беларуская"
+
+#~ msgid "Bildung"
+#~ msgstr "Образование"
+
+#~ msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
+#~ msgstr "При нажатии кнопки “Продолжить”, вы подтверждаете свое согласие на то, что эта видео-конференция будет записана."
+
+#~ msgid "CSV Import Results"
+#~ msgstr "Результаты импорта CSV файла"
+
+#~ msgid "Can't find workshop with slug '{}'"
+#~ msgstr "Не найден воркшоп с идентификатором '{}'"
+
+#~ msgid "Choose App"
+#~ msgstr "Выбрать приложение"
+
+#~ msgid "Choose the type of the video conference you would like to include in the dashboard"
+#~ msgstr "Выберите тип видео-конференции, которая будет отражена в дашборде"
+
+#~ msgid "Clear results and start a new import!"
+#~ msgstr "Отчистить результаты и начать новый импорт!"
+
+#, fuzzy
+#~ msgid "Community"
+#~ msgstr "Комментарий"
+
+#, fuzzy
+#~ msgid "Conference Dashboard"
+#~ msgstr "Панель управления проекта"
+
+#~ msgid "Conference Management"
+#~ msgstr "Управление конференцией"
+
+#~ msgid "Conference accounts active"
+#~ msgstr "Управление конференцией"
+
+#~ msgid "Conference is not running"
+#~ msgstr "Проходит конференция"
+
+#~ msgid "Conference is running"
+#~ msgstr "Проходит конференция"
 
 #~ msgid "Conference reminders"
 #~ msgstr "Настройки конференции"
 
-#, fuzzy
-#~| msgid "Only conference members can see the content you requested. Apply to become a member now!"
-#~ msgid "Only conference members can see the event\\'s description."
-#~ msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
+#~ msgid "Conference successfully finished and user accounts deactivated"
+#~ msgstr "Конференция успешно завершена и пользовательские аккаунты деактивированы"
 
-#~ msgid "Reminder emails"
-#~ msgstr "Электронные письма с напоминанием"
+#~ msgid "Conference successfully started and user accounts activated"
+#~ msgstr "Конференция успешно началась и пользовательсике аккаунты активированы"
+
+#~ msgid "Custom Wagtail Page"
+#~ msgstr "Индивидуальная страница Wagtail"
+
+#~ msgid "Czech--NATIVE-LANGUAGE"
+#~ msgstr "Čeština"
+
+#, fuzzy
+#~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
+#~ msgstr "опции для комнат, которые представлены в bigbluebutton API"
+
+#, fuzzy
+#~ msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+#~ msgstr "приветсвенное слово, отображаемое участникам"
+
+#~ msgid "Deactivate Project/Group"
+#~ msgstr "Деактивировать проект или группу"
+
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "Деактивировать выделенных пользователей (все элементы, созданные ими на сайте, будут сохранены)"
+
+#~ msgid "Deactivated Projects and Groups"
+#~ msgstr "Деактивировать проекты и группы"
+
+#~ msgid "Debug"
+#~ msgstr "Тестирование"
+
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "Определение CSV файла"
+
+#~ msgid "Describe this option"
+#~ msgstr "Опишите этот параметр"
+
+#~ msgid "Describe why you wish to participate"
+#~ msgstr "Опишите, почему Вы хотите участвовать"
+
+#~ msgid "Determins if application management is visible in conference administration."
+#~ msgstr "Определяет, отображается ли управление заявками на панели администрирования конференции."
+
+#~ msgid "Determins whether a group that is marked as conference is running"
+#~ msgstr "Определяет, работает ли группа, помеченная как конференция"
+
+#~ msgid "Deutsch--NATIVE-LANGUAGE"
+#~ msgstr "Deutsch"
+
+#~ msgid "Direct Contact"
+#~ msgstr "Прямой контакт"
+
+#~ msgid "Dutch--NATIVE-LANGUAGE"
+#~ msgstr "Nederlands"
+
+#~ msgid "Edit Poll Option"
+#~ msgstr "Изменить параметры опроса"
+
+#~ msgid "Edit my Profile"
+#~ msgstr "Редактировать мой профиль"
+
+#~ msgid "Encoding of the CSV file"
+#~ msgstr "Шифрование файла CSV"
+
+#~ msgid "English--NATIVE-LANGUAGE"
+#~ msgstr "English"
+
+#~ msgid "Enter text to pre-fill or leave empty"
+#~ msgstr "Введите текст или оставьте пустым"
+
+#~ msgid "Enter the title for the file."
+#~ msgstr "Введите название файла"
+
+#~ msgid "Ernährung und Konsum"
+#~ msgstr "Питание и потребление"
+
+#~ msgid "Errors:"
+#~ msgstr "Ошибки:"
+
+#~ msgid "Event is confidential"
+#~ msgstr "Событие конфиденциально"
+
+#~ msgid "Event poll updated by %(sender_name)s"
+#~ msgstr "Опрос о событии был обновлен %(sender_name)s"
+
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "Пример: https://www.youtube.com/watch?v=12345"
+
+#~ msgid "External"
+#~ msgstr "Внешний"
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "Невозможно добавить файл „%(title)s“."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "Невозможно загрузить файл \"%(title)s“."
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "Файл \"%(title)s\" успешно загружен."
+
+#~ msgid "File description"
+#~ msgstr "Описание файла"
+
+#~ msgid "File title"
+#~ msgstr "Название файла"
+
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Аккаунт пользователя успешно деактивирован"
+
+#~ msgid "French--NATIVE-LANGUAGE"
+#~ msgstr "Français"
+
+#~ msgid "Function"
+#~ msgstr "Функция"
+
+#~ msgid "Georgian--NATIVE-LANGUAGE"
+#~ msgstr "ქართული ენა"
+
+#~ msgid "Gesundheit"
+#~ msgstr "Здравоохранение"
+
+#~ msgid "Go to chat"
+#~ msgstr "Перейти к чату"
+
+#~ msgid "Group:"
+#~ msgstr "Группа:"
+
+#~ msgid ""
+#~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
+#~ "\n"
+#~ "Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
+#~ "\n"
+#~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
+#~ "\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "\n"
+#~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
+#~ "\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "\n"
+#~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
+#~ "\n"
+#~ "Viele Grüße und viel Spaß hier,\n"
+#~ "das %(site_name)s Team"
+#~ msgstr ""
+#~ "Здравствуйте, %(user_name)s! Добро пожаловать на %(site_name)s! \n"
+#~ "\n"
+#~ "С данного момента Вы можете залогиниться, используя %(domain_url)s.\n"
+#~ "\n"
+#~ "Мы рады, что Вы хотите воспользоваться нашей платформой. Чтобы ознакомиться с её самыми важными функциями, Вы можете посмотреть видео на нашей стартовой странице, если Вы еще не успели этого сделать. Попасть на неё можно, нажав на логотип портала в левой верхней части экрана.\n"
+#~ "\n"
+#~ "Заранее сообщаем, что зарегистрировавшись здесь, Вы автоматически стали членом группы „Блог“, в которую поступает вся информация портала. Чтобы Вам легче было понять, что здесь происходит, в настройках уведомлений по умолчанию включена настройка „Все новости“. Настройки можно очень просто изменить в соответствии с вашими индивидуальными потребностями (нажать на свое имя в правой верхней части экрана), чтобы не получать нежелательных сообщений на электронную почту.\n"
+#~ "\n"
+#~ "Еще полезно знать следующее: данный портал - один из многих на wechange.de. Если Вам хочется познакомиться с другими порталами, это можно сделать с помощью вашего логина. Если Вы зарегистрированы на нескольких порталах, то в рубрике „Лента“ (в левом верхнем углу меню) вы будете получать все обновления групп и проектов, членами которых Вы являетесь. Перемещаться с одного портала на другой можно нажимая на их логотипы. Если Вы хотите стать членом группы „Блог“ на другом портале, вам надо будет просто подать заявку на членство.\n"
+#~ "\n"
+#~ "Если у Вас появятся вопросы, технические рекомендации, Вы захотите сообщить об ошибке или поделиться своими пожеланиями, обращайтесь к администраторам портала.\n"
+#~ "\n"
+#~ "Удачи и успешной работы,\n"
+#~ "Ваша команда %(site_name)s"
+
+#~ msgid "Hebrew--NATIVE-LANGUAGE"
+#~ msgstr "עברית"
+
+#, fuzzy
+#~ msgid "Here you can control whether the publicly visible information about your conference, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
+
+#, fuzzy
+#~ msgid "Here you can control whether the publicly visible information about your group, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
+
+#, fuzzy
+#~ msgid "Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to partner platforms by WECHANGE."
+#~ msgstr "Здесь Вы можете проконтролировать будет ли общедоступная информация о Вашем проекте, такие как имя и адрес, перенаправляться на <a href=\"#\" target=\"_blank\"> партнерские платформы </a> со стороны WECHANGE."
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Здравствуйте, %(user_name)s,\n"
+#~ "\n"
+#~ "Вы только что изменили адрес Вашей электронной почты на %(site_name)s.\n"
+#~ "\n"
+#~ "Для того чтобы изменения вступили в силу, Вам необходимо подтвердить Ваш новый электронный адрес %(user_email)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Пожалуйста, нажмите на следующую ссылку, чтобы подтвердить адрес Вашей электронной почты (или скопируйте ссылку и откройте её в Вашем браузере):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Ваша команда %(site_name)s"
 
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
@@ -14471,287 +14555,90 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #~ "Ваша команда %(site_name)s"
 
 #~ msgid ""
-#~ "Hi %(user_name)s,\n"
+#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 #~ "\n"
-#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "Our administrators will review your request and approve your user account soon!\n"
 #~ "\n"
-#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
-#~ "\n"
-#~ "\n"
-#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-#~ "%(domain_url)s%(user_verification_url)s\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "Your %(site_name)s Team"
+#~ "Until then, with warm greetings, \n"
+#~ "your %(site_name)s Team"
 #~ msgstr ""
-#~ "Здравствуйте, %(user_name)s,\n"
+#~ "Здравствуйте! Мы рады, что Вы хотите присоединиться к %(site_name)s. \n"
 #~ "\n"
-#~ "Вы только что изменили адрес Вашей электронной почты на %(site_name)s.\n"
+#~ "Наши администраторы рассмотрят Ваш запрос и подтвердят Ваш аккаунт в ближайшее время!\n"
 #~ "\n"
-#~ "Для того чтобы изменения вступили в силу, Вам необходимо подтвердить Ваш новый электронный адрес %(user_email)s\n"
-#~ "\n"
-#~ "\n"
-#~ "Пожалуйста, нажмите на следующую ссылку, чтобы подтвердить адрес Вашей электронной почты (или скопируйте ссылку и откройте её в Вашем браузере):\n"
-#~ "%(domain_url)s%(user_verification_url)s\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "Ваша команда %(site_name)s"
-
-#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-#~ msgstr "Ваш аккаунт был успешно зарегистрирован. Аккаунт должен быть одобрен администратором, прежде чем Вы сможете войти. Когда это произойдет, мы отправим емейл на Ваш адрес."
-
-#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-#~ msgstr "Ваш аккаунт был успешно зарегистрирован. Через несколько минут Вы получите от нас емейл с активацией. Вам необходимо подтвердить емейл, прежде чем Вы сможете войти."
-
-#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-#~ msgstr "Пользователь \"%(email)s\" был успешно зарегистрирован. В ближайшее время Вы получите от нас емейл активации. Вам необходимо подтвердить емейл, прежде чем Вы сможете войти на сайт."
-
-#~ msgid "Is premium"
-#~ msgstr "Премиум"
-
-#~ msgid "Group:"
-#~ msgstr "Группа:"
-
-#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Вы собираетесь деактивировать проект или группу. Они будут скрыты на сайте и невидимы для всех пользователей, включая Вас."
-
-#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-#~ msgstr "Этот процесс обратим. Ты можешь в любое время заново активировать проект или группу на своей странице."
-
-#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Вы собираетесь деактивировать проект или группу. Они будут скрыты на сайте и невидимы для всех пользователей, включая Вас."
-
-#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-#~ msgstr "Этот процесс обратим. Ты можешь в любое время заново активировать проект или группу на своей странице."
-
-#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Вы собираетесь деактивировать проект или группу. Они будут скрыты на сайте и невидимы для всех пользователей, включая Вас."
-
-#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-#~ msgstr "Этот процесс обратим. Ты можешь в любое время заново активировать проект или группу на своей странице."
-
-#~ msgid "%(team_name)s was deactivated successfully!"
-#~ msgstr "Деактивация %(team_name)s прошла успешно!"
-
-#, fuzzy
-#~| msgid "No Tag selected"
-#~ msgid "nothing selected"
-#~ msgstr "Ни один тег не выбран"
-
-#~ msgid "Deactivate users (will keep all all items they created on the site)"
-#~ msgstr "Деактивировать выделенных пользователей (все элементы, созданные ими на сайте, будут сохранены)"
-
-#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-#~ msgstr "Если Вы хотите удалить что-либо из Вашего контента, пожалуйста, вернитесь и сделайте это сейчас. Как только Вы удалите свой профиль, Вы потеряете доступ ко всему, что Вы создали на этом аккаунте."
-
-#~ msgid "Deutsch--NATIVE-LANGUAGE"
-#~ msgstr "Deutsch"
-
-#~ msgid "English--NATIVE-LANGUAGE"
-#~ msgstr "English"
-
-#~ msgid "Russian--NATIVE-LANGUAGE"
-#~ msgstr "Русский"
-
-#~ msgid "Ukrainian--NATIVE-LANGUAGE"
-#~ msgstr "Українська"
-
-#~ msgid "French--NATIVE-LANGUAGE"
-#~ msgstr "Français"
-
-#~ msgid "Polish--NATIVE-LANGUAGE"
-#~ msgstr "Polski"
-
-#~ msgid "Spanish--NATIVE-LANGUAGE"
-#~ msgstr "Español"
-
-#~ msgid "Romanian--NATIVE-LANGUAGE"
-#~ msgstr "Română"
-
-#~ msgid "Belarussian--NATIVE-LANGUAGE"
-#~ msgstr "Беларуская"
-
-#~ msgid "Dutch--NATIVE-LANGUAGE"
-#~ msgstr "Nederlands"
-
-#~ msgid "Czech--NATIVE-LANGUAGE"
-#~ msgstr "Čeština"
-
-#~ msgid "Azerbaijani--NATIVE-LANGUAGE"
-#~ msgstr "Azerbaycan dili"
-
-#~ msgid "Armenian--NATIVE-LANGUAGE"
-#~ msgstr "Հայոց լեզու"
-
-#~ msgid "Georgian--NATIVE-LANGUAGE"
-#~ msgstr "ქართული ენა"
-
-#~ msgid "Kazakh--NATIVE-LANGUAGE"
-#~ msgstr "Қазақ тілі"
-
-#~ msgid "Arabic--NATIVE-LANGUAGE"
-#~ msgstr "العربية"
-
-#~ msgid "Hebrew--NATIVE-LANGUAGE"
-#~ msgstr "עברית"
-
-#~ msgid "Attach existing Files..."
-#~ msgstr "Приложить имеющиеся файлы…"
-
-#~ msgid "External"
-#~ msgstr "Внешний"
-
-#~ msgid "Banner Image"
-#~ msgstr "Фоновое изображение"
-
-#~ msgid "Determins if application management is visible in conference administration."
-#~ msgstr "Определяет, отображается ли управление заявками на панели администрирования конференции."
-
-#~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-#~ msgstr "%(sender_name)s только что создал(а) проект/группу “%(team_name)s” on %(portal_name)s!"
-
-#~ msgid "All societies"
-#~ msgstr "Все сообщества"
-
-#~ msgid "All projects"
-#~ msgstr "Все проекты"
-
-#, fuzzy
-#~| msgid "Project Dashboard"
-#~ msgid "Conference Dashboard"
-#~ msgstr "Панель управления проекта"
-
-#~ msgid "The following Groups were converted to Projects:"
-#~ msgstr "Следующие группы были преобразованы в проекты:"
-
-#~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
-#~ msgstr "Если группа отмечена как конференция, то возможно генерировать аккаунты для участников воркшопа автоматически"
-
-#~ msgid "Determins whether a group that is marked as conference is running"
-#~ msgstr "Определяет, работает ли группа, помеченная как конференция"
-
-#, fuzzy
-#~| msgid "Search for Ideas"
-#~ msgid "Search for email"
-#~ msgstr "Поиск идей"
-
-#, fuzzy
-#~| msgid "Workshops"
-#~ msgid "Add workshop"
-#~ msgstr "Воркшопы"
-
-#~ msgid "Re-Activate Project/Group"
-#~ msgstr "Заново активировать проект или группу"
-
-#~ msgid "Deactivate Project/Group"
-#~ msgstr "Деактивировать проект или группу"
-
-#~ msgid "Deactivated Projects and Groups"
-#~ msgstr "Деактивировать проекты и группы"
-
-#~ msgid "Public Group"
-#~ msgstr "Группа в открытом доступе"
-
-#~ msgid "All groups"
-#~ msgstr "Все группы"
-
-#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
-#~ msgstr "Мы отправили Вам инструкцию по установке пароля по электронной почте. Вы должны получить её в ближайшее время."
-
-#~ msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-#~ msgstr "Загрузка CSV вызовет создание аккаунтов и членство аккаунтов в воркшопе и приведет к прямому скачиванию CSV с вновь созданными аккаунтами и паролями. Пароли будут включены только после создания аккаунта. Пожалуйста, обновите страницу после скачивания."
-
-#~ msgid "Workshop Participant File Upload"
-#~ msgstr "Загрузить файлы участников воркшопа"
-
-#~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
-#~ msgstr "Ваше приглашение %(team_type)s “%(team_name)s” было отклонено."
-
-#, fuzzy
-#~ msgid "Administration Area"
-#~ msgstr "Администратор"
-
-#~ msgid "Choose App"
-#~ msgstr "Выбрать приложение"
-
-#~ msgid ""
-#~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
-#~ "\n"
-#~ "Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
-#~ "\n"
-#~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
-#~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
-#~ "\n"
-#~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
-#~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
-#~ "\n"
-#~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
-#~ "\n"
-#~ "Viele Grüße und viel Spaß hier,\n"
-#~ "das %(site_name)s Team"
-#~ msgstr ""
-#~ "Здравствуйте, %(user_name)s! Добро пожаловать на %(site_name)s! \n"
-#~ "\n"
-#~ "С данного момента Вы можете залогиниться, используя %(domain_url)s.\n"
-#~ "\n"
-#~ "Мы рады, что Вы хотите воспользоваться нашей платформой. Чтобы ознакомиться с её самыми важными функциями, Вы можете посмотреть видео на нашей стартовой странице, если Вы еще не успели этого сделать. Попасть на неё можно, нажав на логотип портала в левой верхней части экрана.\n"
-#~ "\n"
-#~ "Заранее сообщаем, что зарегистрировавшись здесь, Вы автоматически стали членом группы „Блог“, в которую поступает вся информация портала. Чтобы Вам легче было понять, что здесь происходит, в настройках уведомлений по умолчанию включена настройка „Все новости“. Настройки можно очень просто изменить в соответствии с вашими индивидуальными потребностями (нажать на свое имя в правой верхней части экрана), чтобы не получать нежелательных сообщений на электронную почту.\n"
-#~ "\n"
-#~ "Еще полезно знать следующее: данный портал - один из многих на wechange.de. Если Вам хочется познакомиться с другими порталами, это можно сделать с помощью вашего логина. Если Вы зарегистрированы на нескольких порталах, то в рубрике „Лента“ (в левом верхнем углу меню) вы будете получать все обновления групп и проектов, членами которых Вы являетесь. Перемещаться с одного портала на другой можно нажимая на их логотипы. Если Вы хотите стать членом группы „Блог“ на другом портале, вам надо будет просто подать заявку на членство.\n"
-#~ "\n"
-#~ "Если у Вас появятся вопросы, технические рекомендации, Вы захотите сообщить об ошибке или поделиться своими пожеланиями, обращайтесь к администраторам портала.\n"
-#~ "\n"
-#~ "Удачи и успешной работы,\n"
+#~ "До скорого, \n"
 #~ "Ваша команда %(site_name)s"
 
 #~ msgid "Hi,"
 #~ msgstr "Здравствуйте,"
 
+#, fuzzy
+#~ msgid "I wish to receive RocketChat notification emails"
+#~ msgstr "Я хочу получать электронные письма-уведомления"
+
+#~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
+#~ msgstr "Если группа отмечена как конференция, то возможно генерировать аккаунты для участников воркшопа автоматически"
+
+#~ msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+#~ msgstr "Если разрешено, администраторы конференции могут создавать временные пользовательские аккаунты, который можно активировать и деактивировать."
+
+#~ msgid "If enabled, temporary user accounts for this conference are active and can log in."
+#~ msgstr "Если разрешено, временные пользовательские аккаунты для этой конференции активны, и пользователи могут войти в систему."
+
 #~ msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
 #~ msgstr "Если установить, этот текст заменит стандартный текст приветственного письма, который будет рассылаться на порталы, отмеченные \"Пользователи требуют активации\"."
+
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "Если Вы хотите удалить что-либо из Вашего контента, пожалуйста, вернитесь и сделайте это сейчас. Как только Вы удалите свой профиль, Вы потеряете доступ ко всему, что Вы создали на этом аккаунте."
+
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Импорт Проектов и Групп"
+
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Импортировать Проекты и Группы или Пользователей"
+
+# ???
+#~ msgid "Import from a CSV File"
+#~ msgstr "Импортировать из CSV файла"
+
+#~ msgid "Important messages:"
+#~ msgstr "Важные сообщения:"
+
+#~ msgid "Info messages:"
+#~ msgstr "Информационные сообщения:"
 
 #~ msgid "Invited you"
 #~ msgstr "Пригласил(а) Вас"
 
+#~ msgid "Is premium"
+#~ msgstr "Премиум"
+
+#~ msgid "Kalender"
+#~ msgstr "Календарь"
+
+#~ msgid "Kazakh--NATIVE-LANGUAGE"
+#~ msgstr "Қазақ тілі"
+
+#~ msgid "Klimaschutz"
+#~ msgstr "Защита окружающей среды"
+
+#~ msgid "Kunst und Kultur"
+#~ msgstr "Искусство и культура"
+
+#~ msgid "Location (optional)."
+#~ msgstr "Место (необязательно)"
+
+#~ msgid "Message Group"
+#~ msgstr "Отправить сообщение группе"
+
+#~ msgid "Message Project"
+#~ msgstr "Отправить сообщение проекту"
+
 #~ msgid "Nachrichten"
 #~ msgstr "Новости"
 
-#~ msgid "Revoked your admin status"
-#~ msgstr "Отзыв статуса администратора"
-
-#, fuzzy
-#~ msgid "Society Dashboard"
-#~ msgstr "Панель управления"
-
-#~ msgid "What's the latest news?"
-#~ msgstr "Какие последние новости?"
-
-#~ msgid "You cannot change your own admin status."
-#~ msgstr "Вы не можете изменить свой собственный статус администратора."
-
-#~ msgid "You were tagged by %(sender_name)s"
-#~ msgstr "Вас отметил %(sender_name)s"
-
-#~ msgid "Your privacy settings were saved. Welcome!"
-#~ msgstr "Ваши настройки приватности сохранены. Добро пожаловать!"
-
-#, fuzzy
-#~ msgid "has logged in"
-#~ msgstr "Уже заходил в систему"
-
-#~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-#~ msgstr "Загрузите файл CSV со следующими столбцами: уникальный идентификатор пользователя, имя, фамилия и один столбец для каждого воркшопа с идентификатором. В качестве примера можно скачать шаблон <a href=\"%(workshop_participants_upload_skeleton)s\">здесь</a>"
-
-#~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-#~ msgstr "Затем добавьте строку для каждого аккаунта, который хотите добавить. Нужно указать уникальный идентификатор пользователя, а имя и фамилию можно не указывать. Затем поставьте 1 во всех столбцах для воркшопов, во время которых пользователь должен быть обычным участником, или 2, если пользователь должен быть администратором воркшопа."
-
-#~ msgid "Workshop username"
-#~ msgstr "Название воркшопа"
+#~ msgid "Name of educational institution"
+#~ msgstr "Название образовательного учреждения"
 
 #~ msgid "New etherpad by %(sender_name)s"
 #~ msgstr "Новый документ создан %(sender_name)s"
@@ -14759,59 +14646,17 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #~ msgid "New etherpad by %(sender_name)s in %(team_name)s (which you follow)"
 #~ msgstr "Новый документ создан %(sender_name)s в команде %(team_name)s (за которой вы следите)"
 
-#~ msgid "Event is confidential"
-#~ msgstr "Событие конфиденциально"
-
-#~ msgid "Start/join BBB video conference for this event"
-#~ msgstr "Начать/присоединиться к BBB- видеоконференции этого события"
-
-#~ msgid "Start/join video chat for this event"
-#~ msgstr "Начать/присоединиться к видео чату этого события"
-
-#~ msgid "Video Chat"
-#~ msgstr "Видео-чат"
-
-#~ msgid "Stop Video Chat"
-#~ msgstr "Остановить видео чат"
-
-#~ msgid "Example: https://www.youtube.com/watch?v=12345"
-#~ msgstr "Пример: https://www.youtube.com/watch?v=12345"
-
-#~ msgid "Kalender"
-#~ msgstr "Календарь"
-
 #~ msgid "New event by %(sender_name)s"
 #~ msgstr "Новое событие у %(sender_name)s"
-
-#~ msgid "New event poll by %(sender_name)s"
-#~ msgstr "Новое предложение даты мероприятия у %(sender_name)s"
-
-#~ msgid "%(sender_name)s"
-#~ msgstr "%(sender_name)s"
 
 #~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
 #~ msgstr "Новое событие у %(sender_name)s в %(team_name)s (за которой Вы следите)"
 
+#~ msgid "New event poll by %(sender_name)s"
+#~ msgstr "Новое предложение даты мероприятия у %(sender_name)s"
+
 #~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
 #~ msgstr "Новый опрос о мероприятия от мероприятия от %(sender_name)s в %(team_name)s (за которой вы следите)"
-
-#~ msgid "Event poll updated by %(sender_name)s"
-#~ msgstr "Опрос о событии был обновлен %(sender_name)s"
-
-#~ msgid "%(sender_name)s voted in"
-#~ msgstr "%(sender_name)s проголосовал"
-
-#~ msgid "Schedule an event"
-#~ msgstr "Запланировать событие"
-
-#~ msgid "Upcoming events in"
-#~ msgstr "Ближайшие события в"
-
-#~ msgid "Location (optional)."
-#~ msgstr "Место (необязательно)"
-
-#~ msgid "Add Photos or Files"
-#~ msgstr "Добавить фотографии или файлы"
 
 #~ msgid "New file by %(sender_name)s"
 #~ msgstr "Новый файл от %(sender_name)s"
@@ -14819,26 +14664,11 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
 #~ msgstr "Новый файл от %(sender_name)s в %(team_name)s (за которой Вы следите)"
 
-#~ msgid "File title"
-#~ msgstr "Название файла"
+#~ msgid "New news post by %(sender_name)s"
+#~ msgstr "Пользователь %(sender_name)s опубликовал пост"
 
-#~ msgid "File description"
-#~ msgstr "Описание файла"
-
-#~ msgid "File \"%(title)s\" was uploaded successfully."
-#~ msgstr "Файл \"%(title)s\" успешно загружен."
-
-#~ msgid "File \"%(title)s\" could not be uploaded."
-#~ msgstr "Невозможно загрузить файл \"%(title)s“."
-
-#~ msgid "File \"%(title)s\" could not be added."
-#~ msgstr "Невозможно добавить файл „%(title)s“."
-
-#~ msgid "Enter the title for the file."
-#~ msgstr "Введите название файла"
-
-#~ msgid "Upload a file or document."
-#~ msgstr "Загрузить файл или документ."
+#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новость от %(sender_name)s в %(team_name)s (за которой Вы следите)"
 
 #~ msgid "New offer by %(sender_name)s"
 #~ msgstr "Новое объявление у %(sender_name)s"
@@ -14846,49 +14676,323 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #~ msgid "New offer by %(sender_name)s in %(team_name)s (which you follow)"
 #~ msgstr "Новое объявление у %(sender_name)s в %(team_name)s (за которой Вы следите)"
 
-#~ msgid "Phone number (optional)"
-#~ msgstr "Номер телефона (необязательно)"
-
-#~ msgid "You have received a copy of a response from the user '%(sender_first)s %(sender_last)s'."
-#~ msgstr "Вы получили копию ответа от пользователя '%(sender_first)s %(sender_last)s'"
-
-#~ msgid "New news post by %(sender_name)s"
-#~ msgstr "Пользователь %(sender_name)s опубликовал пост"
-
-#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "Новость от %(sender_name)s в %(team_name)s (за которой Вы следите)"
-
-#~ msgid "Read more..."
-#~ msgstr "Подробнее..."
-
-#~ msgid "Your news post was also posted on the Facebook Group/Fan-Page."
-#~ msgstr "Ваша новость была опубликована в Фейсбук-группе или Фан-странице."
-
-#~ msgid "We could not post this news post on your Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least \"Friends\". If this doesn't work, contact this project/group's administrator!"
-#~ msgstr "Мы не смогли опубликовать вашу новость в Фейсбук-группе или Фан-странице.\" Еслиэта проблема повторяется, то попробуйте выйти из Вашего Фейсбук-аккаунта и снова зайти в негоубедитесь, что Вы дали нам полномочия размещать посты с видмостью, по крайней мере, как \"Друзья\".Если это не работает, то обратитесь к администратору этого проекта/группы."
-
-#, fuzzy
-#~| msgid "I wish to receive notification emails"
-#~ msgid "I wish to receive RocketChat notification emails"
-#~ msgstr "Я хочу получать электронные письма-уведомления"
-
 #~ msgid "New poll by %(sender_name)s"
 #~ msgstr "Новый опрос у %(sender_name)s"
-
-#~ msgid "%(sender_name)s completed a poll"
-#~ msgstr "%(sender_name)s завершил(а) опрос"
 
 #~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
 #~ msgstr "Новый опрос от %(sender_name)s в %(team_name)s (за которой Вы следите)"
 
-#~ msgid "%(sender_name)s completed a poll you are following"
-#~ msgstr "%(sender_name)s завершил(a) опрос, за которым Вы следите"
-
-#~ msgid "Edit Poll Option"
-#~ msgstr "Изменить параметры опроса"
-
-#~ msgid "Describe this option"
-#~ msgstr "Опишите этот параметр"
-
 #~ msgid "New todo by %(sender_name)s"
 #~ msgstr "Новая задача от %(sender_name)s"
+
+#~ msgid "New!"
+#~ msgstr "Новинка!"
+
+#~ msgid "Newsletter sent."
+#~ msgstr "Информационное письмо отправлено."
+
+#~ msgid "Ok"
+#~ msgstr "Ок"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
+
+#~ msgid "Password reset successful"
+#~ msgstr "Пароль был успешно переустановлен"
+
+#, fuzzy
+#~ msgid "Password set"
+#~ msgstr "Переустановить пароль"
+
+#, fuzzy
+#~ msgid "Personal"
+#~ msgstr "Люди"
+
+#~ msgid "Phone number (optional)"
+#~ msgstr "Номер телефона (необязательно)"
+
+#~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
+#~ msgstr "Загрузите файл CSV со следующими столбцами: уникальный идентификатор пользователя, имя, фамилия и один столбец для каждого воркшопа с идентификатором. В качестве примера можно скачать шаблон <a href=\"%(workshop_participants_upload_skeleton)s\">здесь</a>"
+
+#~ msgid "Polish--NATIVE-LANGUAGE"
+#~ msgstr "Polski"
+
+#, fuzzy
+#~ msgid "Portal administrators"
+#~ msgstr "Администраторы портала"
+
+#~ msgid "Position"
+#~ msgstr "Должность"
+
+#~ msgid "Pre-filled content for the information field"
+#~ msgstr "Предварительно заполняемое содержание для информационного поля"
+
+#~ msgid "Premium Bookings"
+#~ msgstr "Премиум статус"
+
+#~ msgid "Progress:"
+#~ msgstr "Прогресс:"
+
+#~ msgid "Project/group CSV File"
+#~ msgstr "CSV файл для импорта Проекта/Группы"
+
+#~ msgid "Public Group"
+#~ msgstr "Группа в открытом доступе"
+
+#~ msgid "Re-Activate Project/Group"
+#~ msgstr "Заново активировать проект или группу"
+
+#~ msgid "Read errors:"
+#~ msgstr "Ошибки чтения:"
+
+#~ msgid "Read more..."
+#~ msgstr "Подробнее..."
+
+#~ msgid "Recording of meetings is only available for premium conferences!"
+#~ msgstr "Запись сессий доступна только для премиум- конференций!"
+
+#~ msgid "Reminder emails"
+#~ msgstr "Электронные письма с напоминанием"
+
+#~ msgid "Revoked your admin status"
+#~ msgstr "Отзыв статуса администратора"
+
+#~ msgid "Romanian--NATIVE-LANGUAGE"
+#~ msgstr "Română"
+
+#~ msgid "Russian--NATIVE-LANGUAGE"
+#~ msgstr "Русский"
+
+#~ msgid "Saved items:"
+#~ msgstr "Сохраненные элементы:"
+
+#~ msgid "Schedule an event"
+#~ msgstr "Запланировать событие"
+
+#, fuzzy
+#~ msgid "Search for email"
+#~ msgstr "Поиск идей"
+
+#~ msgid "Set up your Profile"
+#~ msgstr "Создать профиль"
+
+#, fuzzy
+#~ msgid "Society Dashboard"
+#~ msgstr "Панель управления"
+
+#~ msgid "Spanish--NATIVE-LANGUAGE"
+#~ msgstr "Español"
+
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Аккаунт пользователя успешно деактивирован"
+
+#~ msgid "Start/join BBB video conference for this event"
+#~ msgstr "Начать/присоединиться к BBB- видеоконференции этого события"
+
+#~ msgid "Start/join video chat for this event"
+#~ msgstr "Начать/присоединиться к видео чату этого события"
+
+#~ msgid "Stop Video Chat"
+#~ msgstr "Остановить видео чат"
+
+#, fuzzy
+#~ msgid "Temporary restrictions"
+#~ msgstr "Временные аккаунты пользователей"
+
+#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
+#~ msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
+
+#~ msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
+#~ msgstr "Загрузка CSV вызовет создание аккаунтов и членство аккаунтов в воркшопе и приведет к прямому скачиванию CSV с вновь созданными аккаунтами и паролями. Пароли будут включены только после создания аккаунта. Пожалуйста, обновите страницу после скачивания."
+
+#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+#~ msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
+
+#~ msgid "The following Groups were converted to Projects:"
+#~ msgstr "Следующие группы были преобразованы в проекты:"
+
+#~ msgid "The import has finished. Here are the results:"
+#~ msgstr "Импорт был завершен. Получены следующие результаты:"
+
+#~ msgid "The invite token you have used does not exist!"
+#~ msgstr "Токен приглашения, который Вы использовали, не существует!"
+
+#~ msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+#~ msgstr "Текстовое поле для мотивации будет заполнено текстом, который Вы здесь введете. Вы можете использовать это поле, чтобы написать инструкцию или список вопросов, на которые заявители должны ответить."
+
+#~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
+#~ msgstr "Затем добавьте строку для каждого аккаунта, который хотите добавить. Нужно указать уникальный идентификатор пользователя, а имя и фамилию можно не указывать. Затем поставьте 1 во всех столбцах для воркшопов, во время которых пользователь должен быть обычным участником, или 2, если пользователь должен быть администратором воркшопа."
+
+#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+#~ msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
+
+#, fuzzy
+#~ msgid "This conference shall be made publicly findable via other platforms."
+#~ msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
+
+#, fuzzy
+#~ msgid "This group shall be made publicly findable via other platforms."
+#~ msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
+
+#~ msgid ""
+#~ "This page will show the results when the import is finished.\n"
+#~ "\t\t\n"
+#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+#~ "\t\t\t"
+#~ msgstr ""
+#~ "По окончании импорта результаты отобразятся на этой странице.\n"
+#~ "\t\t\n"
+#~ "\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
+#~ "Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
+#~ "\t\t\t"
+
+#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+#~ msgstr "Этот процесс обратим. Ты можешь в любое время заново активировать проект или группу на своей странице."
+
+#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+#~ msgstr "Этот процесс обратим. Ты можешь в любое время заново активировать проект или группу на своей странице."
+
+#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+#~ msgstr "Этот процесс обратим. Ты можешь в любое время заново активировать проект или группу на своей странице."
+
+#~ msgid "This project shall be made publicly findable via other platforms."
+#~ msgstr "Этот проект должен быть доступен для публичного поиска через другие платформы."
+
+#~ msgid "Tools"
+#~ msgstr "Инструменты"
+
+#~ msgid "Type of educational institution"
+#~ msgstr "Тип образовательной организации"
+
+#~ msgid "Ukrainian--NATIVE-LANGUAGE"
+#~ msgstr "Українська"
+
+#~ msgid "Umwelt"
+#~ msgstr "Окружающая среда"
+
+#~ msgid "Upcoming events in"
+#~ msgstr "Ближайшие события в"
+
+#~ msgid "Upload Participants"
+#~ msgstr "Участники"
+
+#~ msgid "Upload a file or document."
+#~ msgstr "Загрузить файл или документ."
+
+#~ msgid "Upload and Import..."
+#~ msgstr "Загрузка и импорт…"
+
+#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+#~ msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
+
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Пользователь \"%(email)s\" был успешно зарегистрирован. В ближайшее время Вы получите от нас емейл активации. Вам необходимо подтвердить емейл, прежде чем Вы сможете войти на сайт."
+
+#~ msgid "User CSV File"
+#~ msgstr "CSV файл для импорта Пользователей"
+
+#~ msgid "User participates in the following workshops:"
+#~ msgstr "Пользователь участвует в следующих воркшопах:"
+
+#~ msgid "Video Chat"
+#~ msgstr "Видео-чат"
+
+#~ msgid "We could not post this news post on your Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least \"Friends\". If this doesn't work, contact this project/group's administrator!"
+#~ msgstr "Мы не смогли опубликовать вашу новость в Фейсбук-группе или Фан-странице.\" Еслиэта проблема повторяется, то попробуйте выйти из Вашего Фейсбук-аккаунта и снова зайти в негоубедитесь, что Вы дали нам полномочия размещать посты с видмостью, по крайней мере, как \"Друзья\".Если это не работает, то обратитесь к администратору этого проекта/группы."
+
+#~ msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+#~ msgstr "Запросить информацию напрямую от Nextcloud сейчас невозможно. Нажми здесь, чтобы перейти к файлам напрямую в облаке."
+
+#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+#~ msgstr "Мы отправили Вам инструкцию по установке пароля по электронной почте. Вы должны получить её в ближайшее время."
+
+#~ msgid "What's the latest news?"
+#~ msgstr "Какие последние новости?"
+
+#~ msgid "Workshop Participant File Upload"
+#~ msgstr "Загрузить файлы участников воркшопа"
+
+#~ msgid "Workshop username"
+#~ msgstr "Название воркшопа"
+
+#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Вы собираетесь деактивировать проект или группу. Они будут скрыты на сайте и невидимы для всех пользователей, включая Вас."
+
+#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Вы собираетесь деактивировать проект или группу. Они будут скрыты на сайте и невидимы для всех пользователей, включая Вас."
+
+#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Вы собираетесь деактивировать проект или группу. Они будут скрыты на сайте и невидимы для всех пользователей, включая Вас."
+
+#~ msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+#~ msgstr "Активировав двухфакторную аутентификацию, вы повысите уровень безопасности своего аккаунта. <br> Чтобы использовать функцию, установите приложение ´free otp´ на свой смартфон и отсканируйте полученный QR код. В данный момент мы не предлагает иных опций по использованию двухфакторной аутентификации, но обязательно проинформируем вас в случае появления таковых."
+
+#~ msgid "You cannot change your own admin status."
+#~ msgstr "Вы не можете изменить свой собственный статус администратора."
+
+#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
+#~ msgstr "Вы изменили адрес электронной почты. Мы вышлем Вам на этот адрес письмо, содержащее ссылку на подтверждение адреса. До тех пор, пока Вы не нажмёте на ссылку, в Вашем профиле будет сохранён старый адрес электронной почты!"
+
+#~ msgid "You have received a copy of a response from the user '%(sender_first)s %(sender_last)s'."
+#~ msgstr "Вы получили копию ответа от пользователя '%(sender_first)s %(sender_last)s'"
+
+#~ msgid "You have to consent to being recorded to join this meeting."
+#~ msgstr "Вы должны подтвердить, разрешаете ли вы запись, чтобы присоединиться к сессии."
+
+#~ msgid "You were tagged by %(sender_name)s"
+#~ msgstr "Вас отметил %(sender_name)s"
+
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "Ваш аккаунт был успешно зарегистрирован. Аккаунт должен быть одобрен администратором, прежде чем Вы сможете войти. Когда это произойдет, мы отправим емейл на Ваш адрес."
+
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Ваш аккаунт был успешно зарегистрирован. Через несколько минут Вы получите от нас емейл с активацией. Вам необходимо подтвердить емейл, прежде чем Вы сможете войти."
+
+#~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
+#~ msgstr "Ваше приглашение %(team_type)s “%(team_name)s” было отклонено."
+
+#~ msgid "Your match with %(sender_name)s has just been established!"
+#~ msgstr "Твоё совпадение с %(sender_name)s было установлено!"
+
+#~ msgid "Your news post was also posted on the Facebook Group/Fan-Page."
+#~ msgstr "Ваша новость была опубликована в Фейсбук-группе или Фан-странице."
+
+#~ msgid "Your privacy settings were saved. Welcome!"
+#~ msgstr "Ваши настройки приватности сохранены. Добро пожаловать!"
+
+# ???
+#~ msgid "activate member"
+#~ msgstr "активировать участника"
+
+#~ msgid "deactivate member"
+#~ msgstr "деактивировать участника"
+
+#, fuzzy
+#~ msgid "has logged in"
+#~ msgstr "Уже заходил в систему"
+
+#, fuzzy
+#~ msgid "name and email"
+#~ msgstr "Название воркшопа"
+
+#, fuzzy
+#~ msgid "no Password"
+#~ msgstr "Пароль"
+
+#~ msgid "no login yet"
+#~ msgstr "вход еще не выполнен"
+
+#~ msgid "not active"
+#~ msgstr "(неактивно)"
+
+#, fuzzy
+#~ msgid "nothing selected"
+#~ msgstr "Ни один тег не выбран"
+
+#, fuzzy
+#~ msgid "participants"
+#~ msgstr "Участники"
+
+#~ msgid "send immediately"
+#~ msgstr "отправить незамедлительно"

@@ -1,44 +1,15 @@
 {% load i18n cosinnus_tags %}
 
 {# Temporarily ALWAYS show the cloud error message in the widget! #}
-{% if False and rows %}
-    {% include 'cosinnus_cloud/attached_cloud_files.html' with objects=rows no_indent=1 %}
-{% elif True or had_error %}
-    <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space" href="{% group_url 'cosinnus:cloud:index' group=group %}">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa fa-cloud"></i>
-                </a>
-                <div class="media-body">
-                    <a>{% trans "Click here to view the files directly in the cloud." %}</a>
-                </div>
-            </li>
-        </ul>
-    </div><!-- btn -->
-{% else %}
-	<div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
-	    <ul class="media-list">
-	        <li class="media">
-	            <a class="pull-left" href="#">
-	                <i class="fa fa-cloud"></i>
-	            </a>
-	            <div class="media-body">
-	                {% trans "There are no cloud files yet" %}
-	            </div>
-	        </li>
-	    </ul>
-	</div><!-- btn -->
-{% endif %}
-
-{% comment %}
-    The updating of the cloud file counter is disabled because of recurring bugs with it.
-
-    {% if total_count or total_count == 0 or total_count == ' ' %}
-        {# Monkeypatch in the received total count for the cloud files in project dashboard links header #}
-        <script type="text/javascript">
-            $('.dashboard-header-link.app-cloud span').text("{{ total_count }}");
-        </script>
-    {% endif %}
-{% endcomment %}
-
+<div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space" href="{% group_url 'cosinnus:cloud:index' group=group %}">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-cloud"></i>
+            </a>
+            <div class="media-body">
+                <a>{% trans "Click here to view the files directly in the cloud." %}</a>
+            </div>
+        </li>
+    </ul>
+</div><!-- btn -->

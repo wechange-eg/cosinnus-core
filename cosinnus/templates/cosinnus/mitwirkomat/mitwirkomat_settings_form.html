@@ -1,0 +1,154 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block page_title %}{% trans "Matching Settings for the Volunteer-O-Matic" %} - {{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li><a href="{{ group.get_edit_url }}">{{ group.trans.EDIT }}</a></li>
+        <li class="active">{% trans "Matching Settings for the Volunteer-O-Matic" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html" with current_page="mitwirkomat_settings" object=group %}
+{% endblock leftnav %}
+
+{% block content %}
+    {% captureas settings_link %}<a href="{{ group.get_edit_url }}" target="_blank">{{ group.trans.SETTINGS_LABEL }} <i class="fa fa-external-link"></i></a>{% endcaptureas %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+            {{ form.errors }}
+        </div>
+    {% endif %}
+
+    <form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.non_field_errors }}
+
+        <div class="content-box">
+            <h2>{% trans "Matching Settings for the Volunteer-O-Matic" %} - <i>{{ group.name }}</i></h2>
+
+            {% block notice_text %}
+                <div class="textfield transparent">
+                    <p class="textfield transparent">
+                        {% trans "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers." %}
+                    </p>
+                    <div class="clearfix v-spacer-s"></div>
+
+                    <p class="textfield transparent">
+                        {% captureas here_link %}<a href="{{ SETTINGS.COSINNUS_MITWIRKOMAT_EXTERNAL_LINK }}" target="_blank" class="transparent">{% trans "here" %} <i class="fa fa-external-link"></i></a>{% endcaptureas %}
+                        {% blocktrans %}The Volunteer-O-Matic is published {{ here_link }}. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites.{% endblocktrans %}
+                    </p>
+                    <div class="clearfix v-spacer-s"></div>
+
+                    <p class="textfield transparent">
+                        {{ group.trans.MITWIRKOMAT_PARTICIPATE }}
+                    </p>
+                    <div class="clearfix v-spacer-s"></div>
+                </div>
+                <div class="large-space"></div>
+            {% endblock notice_text %}
+
+            {# Is_active Field #}
+            {% captureas is_active_checkbox_label %}{% trans "Participate in the Volunteer-O-Matic with " %} <i>{{ group.name }}</i>{% endcaptureas %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_active label=is_active_checkbox_label checkbox_label=is_active_checkbox_label hide_optional=True %}
+
+            <hr style="margin: 10px 0;"/>
+
+            {# Name Field #}
+            {% captureas name_label %}{{ group.trans.MITWIRKOMAT_FIELD_NAME_LABEL }}{% endcaptureas %}
+            {% captureas name_legend %}{% blocktrans %}Enter only if you want to set a different name than the one in your {{ settings_link }}.{% endblocktrans %}{% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.name placeholder=group.name label=name_label legend=name_legend %}
+
+            {# Description Field #}
+            {% captureas description_label %}{{ group.trans.MITWIRKOMAT_FIELD_DESCRIPTION_LABEL }}{% endcaptureas %}
+            {% captureas description_legend %}{% blocktrans %}Enter only if you want to set a different description than the one in your {{ settings_link }}.{% endblocktrans %} {% trans "Character limit" %}: 750{% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with label=description_label legend=description_legend %}
+            {% comment %}
+                Uncomment this to show the inherited description as textfield
+                <div class="truncated-textfield">
+                    <div class="textfield transparent">
+                        {% if group.description_long %}
+                            {{ group.description_long|textfield }}
+                        {% else %}
+                            {{ group.description|textfield }}
+                        {% endif %}
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $.cosinnus.truncatedTextfield();
+                </script>
+            {% endcomment %}
+            {% captureas description_placeholder %}{% if group.description_long %}{{ group.description_long }}{% else %}{% if group.description %}{{ group.description }}{% else %}{{ description_label }}{% endif %}{% endif %}{% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.description large_field=True placeholder=description_placeholder %}
+
+            {# Avatar Field #}
+            {% captureas avatar_label %}{{ group.trans.MITWIRKOMAT_FIELD_AVATAR_LABEL }}{% endcaptureas %}
+            {% captureas avatar_legend %}
+                {% blocktrans %}Enter only if you want to set a different logo than the one in your {{ settings_link }}.{% endblocktrans %}
+                <br/>
+                {% include 'cosinnus/texts/image_upload_legend_avatar.html' %}
+            {% endcaptureas %}
+            {% captureas preview_html %}
+                {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.select_area_width}}px;height:{{SETTINGS.AWESOME_AVATAR.select_area_height}}px{% endcaptureas %}
+                <span>{% trans "Image preview" %}:</span>
+                <div id="id_avatar-preview" class="awesome-avatar-preview regular-space" style="{{ preview_style }}">
+                    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.select_area_width}}px;height:{{SETTINGS.AWESOME_AVATAR.select_area_height}}px{% endcaptureas %}
+                    {% if form.instance and form.instance.avatar %}
+                        {% include "cosinnus/group/group_avatar_image.html" with group=form.instance extra_style=preview_style %}
+                    {% else %}
+                        {% captureas group_avatar_type %}{% if group.type == 1 %}group{% else %}project{% endif %}{% endcaptureas %}
+                        {% include "cosinnus/group/group_avatar_image.html" with group=group extra_style=preview_style group_avatar_type=group_avatar_type %}
+                    {% endif %}
+                </div>
+            {% endcaptureas %}
+            {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
+
+            {# Link explanation Field #}
+            {% trans "Link" as link_label %}
+            {% captureas link_legend %}
+                <p class="textfield transparent">
+                    {{ group.trans.MITWIRKOMAT_FIELD_LINK_LABEL }}
+                </p>
+                <p class="textfield transparent">
+                    {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
+                </p>
+            {% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with label=link_label legend=link_legend %}
+
+            <div class="ultra-space"> </div>
+
+            {# Questions fieldset #}
+            {% trans "Please choose the answers that best fit you." as questions_label %}
+            {% captureas questions_legend %}{{ group.trans.MITWIRKOMAT_FIELD_QUESTIONS_LEGEND }}{% endcaptureas %}
+            {% include 'cosinnus/fields/inlineform_field.html' with inline_form=questions_formset label=questions_label legend=questions_legend content_template='cosinnus/mitwirkomat/mitwirkomat_questions_inline.html' unique_id='questions' alternate_field_class=" " %}
+
+            <hr style="margin: 10px 0 16px 0;"/>
+
+            <p class="textfield transparent">
+                {% trans "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic." %}
+            </p>
+        </div>
+
+        <button type="submit" class="btn btn-emphasized btn-autosize">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    <div class="media-body">
+                        {% if form.instance.id %}
+                            {% trans "Save changes" %}
+                        {% else %}
+                            {% trans "Save" %}
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    </form>
+{% endblock %}

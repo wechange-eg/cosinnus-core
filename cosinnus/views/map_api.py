@@ -29,7 +29,6 @@ from cosinnus.models.map import (
     SEARCH_MODEL_NAMES_REVERSE,
     SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS,
     SEARCH_RESULT_DETAIL_TYPE_MAP,
-    CloudfileMapCard,
     HaystackMapResult,
     build_date_time,
     filter_event_or_conference_happening_during,
@@ -125,7 +124,7 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
             'conferences': True,
         }
     )
-if settings.COSINNUS_CLOUD_ENABLED:
+if settings.COSINNUS_CLOUD_SEARCH_ENABLED:
     MAP_CONTENT_TYPE_SEARCH_PARAMETERS.update(
         {
             'cloudfiles': True,
@@ -475,32 +474,10 @@ class MapMatchingView(SearchQuerySetMixin, APIView):
 
 
 class MapCloudfilesView(SearchQuerySetMixin, APIView):
+    """Search NextCloud. Stubbed as the respective API is not available anymore."""
+
     def get(self, request):
-        from cosinnus_cloud.hooks import get_nc_user_id
-        from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
-
-        query = force_str(self.params['q'])
-        limit = self.params['limit']
-        page = self.params['page']
-
-        result = perform_fulltext_search(get_nc_user_id(request.user), query, page=page + 1, page_size=limit)
-
-        if result['documents']:
-            total_count = result['meta']['total']
-            count = result['meta']['count']
-            page_obj = {
-                'index': page,
-                'count': count,
-                'total_count': total_count,
-                'start': (limit * page) + 1,
-                'end': (limit * page) + count,
-                'has_next': total_count > (limit * (page + 1)),
-                'has_previous': page > 0,
-            }
-        else:
-            page_obj = None
-
-        data = {'results': [CloudfileMapCard(doc, query) for doc in result['documents']], 'page': page_obj}
+        data = {'results': [], 'page': None}
         return Response(data)
 
 

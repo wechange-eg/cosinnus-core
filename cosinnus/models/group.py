@@ -1082,6 +1082,13 @@ class CosinnusBaseGroup(
         null=True,
         help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.',
     )
+    nextcloud_deck_board_id = models.PositiveIntegerField(
+        _('Nextcloud Deck Board ID'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='Internal ID of the nextcloud deck board for the group. Set after the deck is created.',
+    )
 
     # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(
@@ -1224,6 +1231,12 @@ class CosinnusBaseGroup(
 
     def __init__(self, *args, **kwargs):
         super(CosinnusBaseGroup, self).__init__(*args, **kwargs)
+
+        # set type to the class' GROUP_MODEL_TYPE as defined in the implementing group classes like `CosinnusSociety`
+        if not self.pk:
+            self.type = self.GROUP_MODEL_TYPE
+
+        # save attributes for before/after save difference checks
         self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
@@ -1445,6 +1458,15 @@ class CosinnusBaseGroup(
     @property
     def has_premium_rights(self):
         return self.has_premium_blocks or self.is_premium_permanently
+
+    @property
+    def show_mitwirkomat_settings(self):
+        """Returns true if Mitwirk-O-Mat the settings view and links are shown for this group,
+        depending on conf settings and the group type"""
+        return (
+            settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED
+            and self.type in settings.COSINNUS_MITWIRKOMAT_ENABLED_FOR_GROUP_TYPES
+        )
 
     def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER, is_late_invitation=False):
         """ "Makes the user a group member".

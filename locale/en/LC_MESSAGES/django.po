@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 13:45+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2025-07-23 13:37+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
 
 msgid "Info"
 msgstr ""
@@ -1396,6 +1390,10 @@ msgstr ""
 msgid "Participation applications are open."
 msgstr ""
 
+#, fuzzy
+msgid "Participation applications are disabled."
+msgstr "There are no groups."
+
 msgid "Participation application has not started yet."
 msgstr ""
 
@@ -1826,6 +1824,9 @@ msgstr ""
 msgid "Nextcloud Groupfolder ID"
 msgstr ""
 
+msgid "Nextcloud Deck Board ID"
+msgstr ""
+
 msgid "Is conference"
 msgstr ""
 
@@ -2055,6 +2056,33 @@ msgstr ""
 msgid "Is Moderator"
 msgstr ""
 
+msgid "Fits us"
+msgstr ""
+
+msgid "Partly fits us"
+msgstr ""
+
+msgid "Does not fit us"
+msgstr ""
+
+msgid "Group for Mitwirk-O-Mat Settings"
+msgstr ""
+
+msgid "Determines if the Mitwirk-O-Mat data for this group should displayed in the API."
+msgstr ""
+
+msgid "Replacement description for the group description. If empty, falls back to `group.description_long` which falls back to `group.description`."
+msgstr ""
+
+msgid "Replacement avatar for the group avatar. If empty, falls back to group.avatar."
+msgstr ""
+
+msgid "User-set answers to Mitwirk-O-Mat questions"
+msgstr ""
+
+msgid "Mitwirk-O-Mat Settings"
+msgstr ""
+
 msgid "ToS accepted"
 msgstr ""
 
@@ -2153,6 +2181,12 @@ msgid "You've matched!"
 msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "User Online on Day"
 msgstr ""
 
 #, fuzzy
@@ -3129,7 +3163,14 @@ msgstr ""
 msgid "Members"
 msgstr ""
 
+msgid "Volunteer-O-Matic"
+msgstr ""
+
 msgid "Settings"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
 msgstr ""
 
 msgid "Drag and Drop files here..."
@@ -4203,6 +4244,17 @@ msgstr ""
 msgid "Activate Cloud"
 msgstr "Create Project"
 
+msgid "Looking for new members? Join the Volunteer-O-Matic!"
+msgstr ""
+
+msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers."
+msgstr ""
+
+#, fuzzy
+msgctxt "Mitwirkomat"
+msgid "Join now"
+msgstr "Join Project"
+
 msgid "Members-Map"
 msgstr ""
 
@@ -4319,10 +4371,6 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Report offensive content"
-msgstr ""
-
 msgid "Sorry, this feature is only available for registered members."
 msgstr ""
 
@@ -4369,9 +4417,6 @@ msgstr ""
 #, fuzzy
 msgid "Change email address"
 msgstr "Create Project"
-
-msgid "Date"
-msgstr ""
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -5072,6 +5117,9 @@ msgstr ""
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
 
+msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
+msgstr ""
+
 msgid "About me"
 msgstr ""
 
@@ -5282,10 +5330,6 @@ msgstr ""
 
 msgid "Register and apply!"
 msgstr ""
-
-#, fuzzy
-msgid "Participation applications are disabled."
-msgstr "There are no groups."
 
 msgid "Late registration possible"
 msgstr ""
@@ -5970,6 +6014,47 @@ msgstr ""
 msgid "Everybody"
 msgstr ""
 
+msgid "Matching Settings for the Volunteer-O-Matic"
+msgstr ""
+
+msgid "here"
+msgstr ""
+
+#, python-format
+msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
+msgstr ""
+
+msgid "Participate in the Volunteer-O-Matic with "
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different name than the one in your %(settings_link)s."
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different description than the one in your %(settings_link)s."
+msgstr ""
+
+msgid "Character limit"
+msgstr ""
+
+#, python-format
+msgid "Enter only if you want to set a different logo than the one in your %(settings_link)s."
+msgstr ""
+
+#, fuzzy
+msgid "Image preview"
+msgstr "Project overview"
+
+msgid "Link"
+msgstr ""
+
+msgid "Please choose the answers that best fit you."
+msgstr ""
+
+msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
+msgstr ""
+
 msgid "Toggle navigation"
 msgstr ""
 
@@ -6354,6 +6439,9 @@ msgstr ""
 msgid "HD space used by projects"
 msgstr ""
 
+msgid "User Activity Timeline"
+msgstr ""
+
 msgid "User statistics (min 1x logged in)"
 msgstr ""
 
@@ -6672,10 +6760,6 @@ msgid "In my Groups and Projects"
 msgstr "My Projects"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "In my Cloud Files"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Topic"
 msgstr ""
 
@@ -6900,7 +6984,7 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create Groups or Projects via the '+' button in the header."
+msgid "You can create Groups or Projects via the main menu in the header."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -6912,7 +6996,7 @@ msgid "Here you can find an overview of Ideas you have liked."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -8075,6 +8159,10 @@ msgstr "Project Type"
 msgid "in the Project Dashboard"
 msgstr "Project Type"
 
+#, fuzzy
+msgid "Project settings"
+msgstr "Project Type"
+
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
 msgstr ""
 
@@ -8183,6 +8271,27 @@ msgstr ""
 msgid "Note: New recordings can only be made if you have booked premium features for this project."
 msgstr ""
 
+msgid "If you want your project to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Go to the Matching Settings of your project for the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Name of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your project in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your project. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr ""
 
@@ -8201,6 +8310,10 @@ msgstr "Project Type"
 #, fuzzy
 msgid "in the Group Dashboard"
 msgstr "Project Type"
+
+#, fuzzy
+msgid "Group settings"
+msgstr "Group"
 
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr ""
@@ -8299,6 +8412,27 @@ msgstr ""
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr ""
 
+msgid "If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form."
+msgstr ""
+
+msgid "Go to the Matching Settings of your group for the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Name of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Description of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Logo of your group in the Volunteer-O-Matic"
+msgstr ""
+
+msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
+msgstr ""
+
+msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
+msgstr ""
+
 msgid "You are not currently attending any Conferences"
 msgstr ""
 
@@ -8309,6 +8443,10 @@ msgstr "Create Project"
 #, fuzzy
 msgid "Conference Menu"
 msgstr "Create Project"
+
+#, fuzzy
+msgid "Conference settings"
+msgstr "Projects"
 
 #, fuzzy
 msgid "Browse all Conferences"
@@ -8499,13 +8637,42 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+#, python-brace-format
+msgid "Version {version_number} released"
+msgstr ""
+
+msgid "This update includes several bugfixes:"
+msgstr ""
+
+msgid ""
+"- Fixed a bug where newly invited group/project members could not join a BBB meeting.\n"
+"- Fixed a bug where admins would see a broken page layout once after logging in.\n"
+"- Fixed a visual bug in the administration interface after clicking a download-link.\n"
+"- Fixed a bug where notifications would not be marked as read when they were too far down in the list.\n"
+"- Added an option to the notification list to mark all notifications as read.\n"
+"- Fixed a bug where event polls could not be created if the user interface was set to certain languages.\n"
+"- Fixed a bug in the legacy messaging system that sometimes prevented writing a new message.\n"
+"- (RocketChat) further improved the stability and performance of the integration with RocketChat.\n"
+msgstr ""
+
+msgid "- The password requirements have been changed: Now a password must consist of at least 12 characters. Otherwise, there are no further requirements regarding the chosen characters. Passwords are still checked against a list of frequently used passwords.\n"
+msgstr ""
+
+msgid ""
+"- Fixed a bug that prevented users from completing the intro tour on mobile devices running iOS 18.\n"
+"- Fixed a bug that sometimes prevented entries from being displayed in the lower part of the sidebar on mobile devices.\n"
+msgstr ""
+
+msgid "Version 2.4.0 released"
+msgstr ""
+
+msgid "This update provides several small bugfixes and stability improvements."
+msgstr ""
+
 msgid "Version 2.3.0 released"
 msgstr ""
 
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
-msgstr ""
-
-msgid "This update provides several small bugfixes and stability improvements."
 msgstr ""
 
 msgid "Redesign Update"
@@ -8521,9 +8688,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 2.2.5 released"
-msgstr ""
-
-msgid "This update includes several bugfixes:"
 msgstr ""
 
 msgid ""
@@ -9027,6 +9191,12 @@ msgstr ""
 msgid "Something went wrong. Your message was not sent."
 msgstr ""
 
+msgid "This function is not enabled for this group type."
+msgstr ""
+
+msgid "Your Matching Settings for the Volunteer-O-Matic have been saved."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr ""
 
@@ -9308,9 +9478,6 @@ msgstr ""
 msgid "Click here to view the files directly in the cloud."
 msgstr ""
 
-msgid "There are no cloud files yet"
-msgstr ""
-
 msgid "Restart"
 msgstr ""
 
@@ -9468,6 +9635,19 @@ msgstr ""
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "Enter a name for the project."
+
+msgid "Task-Board"
+msgstr ""
+
+msgctxt "the_app"
+msgid "deck"
+msgstr "Task-Board"
+
+msgid "The task-board creation is in progress..."
+msgstr ""
+
+msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
+msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr ""

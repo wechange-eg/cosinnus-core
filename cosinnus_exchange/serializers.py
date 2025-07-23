@@ -58,6 +58,10 @@ class ExchangeSerializerMixin(serializers.Serializer):
     def get_mt_topics(self, obj):
         return list(filter(None, [TOPIC_CHOICES_MAP.get(t, None) for t in obj['topics']]))
 
+    def include_instance(self, obj):
+        """Used by the backend to check if this instance should be included in the results."""
+        return True
+
 
 class ExchangeGroupSerializer(ExchangeSerializerMixin, serializers.Serializer):
     title = serializers.CharField(source='name')
@@ -65,8 +69,8 @@ class ExchangeGroupSerializer(ExchangeSerializerMixin, serializers.Serializer):
     mt_location_lat = serializers.SerializerMethodField()
     mt_location_lon = serializers.SerializerMethodField()
     icon_image_url = serializers.URLField(source='avatar')
-    background_image_small_url = serializers.URLField(source='background_image_small')
-    background_image_large_url = serializers.URLField(source='background_image_large')
+    background_image_small_url = serializers.URLField(source='background_image_small', required=False)
+    background_image_large_url = serializers.URLField(source='background_image_large', required=False)
 
     def get_mt_location(self, obj):
         if len(obj.get('locations', [])) > 0:
@@ -271,6 +275,10 @@ class ExchangeDipasSerializer(ExchangeSerializerMixin, serializers.Serializer):
         self.detail_data = {}
         self.descriptions = {}
         self.image_thumbnails = {}
+
+    def include_instance(self, obj):
+        """Only active projects are included."""
+        return obj.get('properties', {}).get('proceedingState') == 'active'
 
     def _get_project_base_url(self, obj):
         """Returns the base project URL for the additional APIs."""

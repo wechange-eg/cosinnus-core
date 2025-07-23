@@ -5,9 +5,11 @@ from datetime import datetime
 
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.utils.formats import localize
 from django.views.generic.edit import FormView
 
 from cosinnus.forms.statistics import SimpleStatisticsForm
+from cosinnus.models import UserOnlineOnDay
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.utils.user import filter_active_users
@@ -41,6 +43,17 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
 
     def get_statistics(self, from_date, to_date):
         """Actual collection of data"""
+        # deduplicte by user
+        online_day_users = (
+            UserOnlineOnDay.objects.filter(user_id__in=CosinnusPortal.get_current().members)
+            .filter(date__gte=from_date, date__lte=to_date)
+            .values('user__id')
+            .distinct()
+            .count()
+        )
+        # the first recorded user online date (when the feature went live)
+        first_online_date = UserOnlineOnDay.objects.all().order_by('date').first().date
+        first_online_str = f'(recorded only from {localize(first_online_date)} onwards)'
         created_users = (
             filter_active_users(get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members))
             .filter(date_joined__gte=from_date, date_joined__lte=to_date)
@@ -80,15 +93,16 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
         )
 
         statistics = {
-            '01. New Registered User Accounts in this period': created_users,
-            '02. Total Enabled User Accounts (at least 1x logged in)': active_users,
-            '03. Newly Created Projects in this period': created_projects,
-            '04. Total Enabled Projects': active_projects,
-            '05. Newly Created Groups in this period': created_groups,
-            '06. Total Enabled Groups': active_groups,
-            '07. Newly Created Conferences in this period': created_conferences,
-            '08. Total Enabled Conferences': active_conferences,
-            '09. Running (scheduled) Conferences in this period': running_conferences,
+            f'01. Unique, registered users that were active in this period {first_online_str}': online_day_users,
+            '02. New Registered User Accounts in this period': created_users,
+            '03. Total Enabled User Accounts (at least 1x logged in)': active_users,
+            '04. Newly Created Projects in this period': created_projects,
+            '05. Total Enabled Projects': active_projects,
+            '06. Newly Created Groups in this period': created_groups,
+            '07. Total Enabled Groups': active_groups,
+            '08. Newly Created Conferences in this period': created_conferences,
+            '09. Total Enabled Conferences': active_conferences,
+            '10. Running (scheduled) Conferences in this period': running_conferences,
         }
         try:
             from cosinnus_event.models import Event
@@ -98,7 +112,7 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
             ).count()
             statistics.update(
                 {
-                    '10. Newly Created Events in this period': created_event_count,
+                    '11. Newly Created Events in this period': created_event_count,
                 }
             )
         except Exception:
@@ -112,7 +126,7 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
             ).count()
             statistics.update(
                 {
-                    '11. Newly Created News in this period': created_note_count,
+                    '12. Newly Created News in this period': created_note_count,
                 }
             )
         except Exception:

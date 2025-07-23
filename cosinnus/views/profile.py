@@ -315,7 +315,9 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         return super(UserProfileDeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('login')
+        # param `message=userDeactivated` is used as a flag for the v3 frontend to display an info message like
+        # `message_success` on the login screen. it is non-functional and ignored in the django frontend.
+        return reverse('login') + '?message=userDeactivated'
 
     def _validate_user_delete_safe(self, user):
         is_safe = user.is_authenticated

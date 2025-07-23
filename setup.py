@@ -42,6 +42,7 @@ packages = [
     'cosinnus',
     'cosinnus_cloud',
     'cosinnus_conference',
+    'cosinnus_deck',
     'cosinnus_etherpad',
     'cosinnus_event',
     'cosinnus_exchange',

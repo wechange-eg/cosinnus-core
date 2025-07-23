@@ -27,6 +27,8 @@ class CosinnusProjectTransBase(object):
     MENU_LABEL = _('Project Menu')
     DASHBOARD_LABEL = _('Project Dashboard')
     DASHBOARD_LABEL_ON = _('in the Project Dashboard')
+    SETTINGS_LABEL = _('Project settings')
+
     BROWSE_ALL = _('Browse all Projects')
     CREATE = _('Create Project')
     CREATE_NEW = _('Create new Project')
@@ -111,9 +113,27 @@ class CosinnusProjectTransBase(object):
         'administrators to deactivate it for you. Below you can find a listing of all administrators.'
     )
     MESSAGE_MEMBERS_ONLY = _('Only project members can see the content you requested. Apply to become a member now!')
-
     MESSAGE_RECORDINGS_ONLY_FOR_PREMIUM = _(
         'Note: New recordings can only be made if you have booked premium features for this project.'
+    )
+
+    MITWIRKOMAT_PARTICIPATE = _(
+        'If you want your project to participate in the Volunteer-O-Matic, '
+        'you only have to fill out the following form.'
+    )
+    MITWIRKOMAT_GO_TO_SETTINGS_LINK = _('Go to the Matching Settings of your project for the Volunteer-O-Matic')
+    MITWIRKOMAT_FIELD_NAME_LABEL = _('Name of your project in the Volunteer-O-Matic')
+    MITWIRKOMAT_FIELD_DESCRIPTION_LABEL = _('Description of your project in the Volunteer-O-Matic')
+    MITWIRKOMAT_FIELD_AVATAR_LABEL = _('Logo of your project in the Volunteer-O-Matic')
+    MITWIRKOMAT_FIELD_LINK_LABEL = _(
+        'Your entry in the Volunteer-O-Matic links to the microsite of your project. '
+        'It is therefore best to ensure that this is up-to-date, informative and attractively designed. '
+        'You can also link to an external website from your microsite.'
+    )
+    MITWIRKOMAT_FIELD_QUESTIONS_LEGEND = _(
+        'Your answers to the following questions determine how you are matched with the users by the algorithm. '
+        'For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in '
+        'this regard? In other words: Is the aspect that the statement is about characteristic for your project?'
     )
 
 
@@ -136,6 +156,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     MENU_LABEL = _('Group Menu')
     DASHBOARD_LABEL = _('Group Dashboard')
     DASHBOARD_LABEL_ON = _('in the Group Dashboard')
+    SETTINGS_LABEL = _('Group settings')
 
     BROWSE_ALL = _('Browse all Groups')
     CREATE = _('Create Group')
@@ -221,9 +242,26 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
         'to deactivate it for you. Below you can find a listing of all administrators.'
     )
     MESSAGE_MEMBERS_ONLY = _('Only group members can see the content you requested. Apply to become a member now!')
-
     MESSAGE_RECORDINGS_ONLY_FOR_PREMIUM = _(
         'Note: New recordings can only be made if you have booked premium features for this group.'
+    )
+
+    MITWIRKOMAT_PARTICIPATE = _(
+        'If you want your group to participate in the Volunteer-O-Matic, you only have to fill out the following form.'
+    )
+    MITWIRKOMAT_GO_TO_SETTINGS_LINK = _('Go to the Matching Settings of your group for the Volunteer-O-Matic')
+    MITWIRKOMAT_FIELD_NAME_LABEL = _('Name of your group in the Volunteer-O-Matic')
+    MITWIRKOMAT_FIELD_DESCRIPTION_LABEL = _('Description of your group in the Volunteer-O-Matic')
+    MITWIRKOMAT_FIELD_AVATAR_LABEL = _('Logo of your group in the Volunteer-O-Matic')
+    MITWIRKOMAT_FIELD_LINK_LABEL = _(
+        'Your entry in the Volunteer-O-Matic links to the microsite of your group. '
+        'It is therefore best to ensure that this is up-to-date, informative and attractively designed. '
+        'You can also link to an external website from your microsite.'
+    )
+    MITWIRKOMAT_FIELD_QUESTIONS_LEGEND = _(
+        'Your answers to the following questions determine how you are matched with the users by the algorithm. '
+        'For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this '
+        'regard? In other words: Is the aspect that the statement is about characteristic for your group?'
     )
 
 
@@ -246,6 +284,8 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     MENU_LABEL = _('Conference Menu')
     DASHBOARD_LABEL = VERBOSE_NAME
     DASHBOARD_LABEL_ON = VERBOSE_NAME
+    SETTINGS_LABEL = _('Conference settings')
+
     BROWSE_ALL = _('Browse all Conferences')
     CREATE = _('Create Conference')
     CREATE_NEW = _('Create new Conference')
@@ -335,6 +375,14 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     MESSAGE_RECORDINGS_ONLY_FOR_PREMIUM = _(
         'Note: New recordings can only be made if you have booked premium features for this conference.'
     )
+
+    MITWIRKOMAT_PARTICIPATE = ''  # not availablle for conferences
+    MITWIRKOMAT_GO_TO_SETTINGS_LINK = ''  # not availablle for conferences
+    MITWIRKOMAT_FIELD_NAME_LABEL = ''  # not availablle for conferences
+    MITWIRKOMAT_FIELD_DESCRIPTION_LABEL = ''  # not availablle for conferences
+    MITWIRKOMAT_FIELD_AVATAR_LABEL = ''  # not availablle for conferences
+    MITWIRKOMAT_FIELD_LINK_LABEL = ''  # not availablle for conferences
+    MITWIRKOMAT_FIELD_QUESTIONS_LEGEND = ''  # not availablle for conferences
 
 
 # allow dropin of trans classes

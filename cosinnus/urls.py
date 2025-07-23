@@ -45,6 +45,7 @@ from cosinnus.views import (
     map,
     map_api,
     microsite,
+    mitwirkomat,
     profile,
     search,
     statistics,
@@ -66,6 +67,14 @@ app_name = 'cosinnus'
 urlpatterns = [
     # we do not define an index anymore and let CMS handle that.
     path('favicon.ico', RedirectView.as_view(url=static('images/favicon.ico'), permanent=False)),
+    path(
+        'apple-touch-icon.png',
+        RedirectView.as_view(url=static('images/apple-touch-icon-114x114-precomposed.png'), permanent=False),
+    ),
+    path(
+        'apple-touch-icon-precomposed.png',
+        RedirectView.as_view(url=static('images/apple-touch-icon-114x114-precomposed.png'), permanent=False),
+    ),
     path('users/', map.tile_view, name='user-list', kwargs={'types': ['people']}),
     path('portal/admins/', user.portal_admin_list, name='portal-admin-list'),
     path('user/<str:username>/', profile.detail_view, name='profile-detail'),
@@ -266,6 +275,7 @@ urlpatterns = [
     path('housekeeping/fillcache/<str:number>/', housekeeping.fillcache, name='housekeeping-fillcache'),
     path('housekeeping/getcache', housekeeping.getcache, name='housekeeping-getcache'),
     path('housekeeping/deletecache', housekeeping.deletecache, name='housekeeping-deletecache'),
+    path('housekeeping/users_online_today/', housekeeping.users_online_today, name='housekeeping-users_online_today'),
     path('housekeeping/test_logging/', housekeeping.test_logging, name='housekeeping-test-logging'),
     path(
         'housekeeping/test_logging/info/',
@@ -391,23 +401,11 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
     settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False
 ):
     dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
-    if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
-        import cosinnus_cloud.views as cosinnus_cloud_views  # noqa
-
+    if getattr(settings, 'COSINNUS_CLOUD_SEARCH_ENABLED', False):
         urlpatterns += [
-            path(
-                'dashboard/api/user_typed_content/cloud_files/',
-                cosinnus_cloud_views.api_user_cloud_files_content,
-                name='user-dashboard-api-typed-content-cloud',
-            ),
-            path(
-                'dashboard/api/user_typed_content/recent/cloud_files/',
-                cosinnus_cloud_views.api_user_cloud_files_content,
-                name='user-dashboard-api-typed-content-cloud',
-                kwargs={'show_recent': True},
-            ),
             path('search/cloudfiles/', map.tile_view, name='cloudfiles-search', kwargs={'types': ['cloudfiles']}),
         ]
+
     urlpatterns += [
         path(f'{dashboard_url}/', user_dashboard.user_dashboard_view, name='user-dashboard'),
         path('dashboard/api/user_groups/', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
@@ -677,6 +675,14 @@ for url_key in group_model_registry:
             name=prefix + 'attached_object_select2_view',
         ),
     ]
+    if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
+        urlpatterns += [
+            path(
+                f'{url_key}/<str:group>/matching_settings/',
+                mitwirkomat.mitwirkomat_settings_view,
+                name=prefix + 'mitwirkomat-settings',
+            ),
+        ]
 
 urlpatterns += url_registry.urlpatterns
 
@@ -799,3 +805,12 @@ urlpatterns += [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api/v2/docs/', RedirectView.as_view(url='/swagger/', permanent=False)),
 ]
+
+
+if getattr(settings, 'TESTING', False):
+    from cosinnus.tests.view_tests.views import main_content_form_test_view, main_content_test_view
+
+    urlpatterns += [
+        path('test/main-content-test-view/', main_content_test_view, name='main-content-test'),
+        path('test/main-content-form-test-view/', main_content_form_test_view, name='main-content-form-test'),
+    ]

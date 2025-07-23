@@ -1,3 +1,4 @@
+import itertools
 import logging
 import re
 from copy import copy
@@ -30,6 +31,7 @@ from cosinnus.models.user_dashboard import FONT_AWESOME_CLASS_FILTER, MenuItem
 from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 from cosinnus.utils.functions import clean_single_line_text, is_number, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
+from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 
 logger = logging.getLogger('cosinnus')
@@ -141,6 +143,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'image': None,  # exclusive with `main_menu_icon`, only one can be non-None!
         },
         'announcements': [],
+        'space': None,
     }
 
     # todo: generate proper response, by either putting the entire response into a
@@ -319,7 +322,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         css_urls = self._parse_css_urls(html_soup)
         script_constants = self._parse_inline_tag_contents(html_soup, 'script', class_='v3-constants')
         scripts = self._parse_inline_tag_contents(html_soup, 'script', class_=False)
-        meta = self._parse_tags(html_soup, 'meta')
+        meta = self._parse_meta_urls(html_soup)
         styles = self._parse_inline_tag_contents(html_soup, 'style')
         sub_navigation = self._parse_leftnav_menu(html_soup)
 
@@ -350,6 +353,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'image': self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
         }
         data['announcements'] = self._get_announcements(self.django_request)
+        if self.group:
+            data['space'] = self._get_space_context(request.user)
 
         # set cookies on rest response from the requests response
         # note: we seem to be losing all meta-infos like max-age here,
@@ -595,8 +600,10 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         """Extracts a menu_item from all proper links contained in the given HTML soup,
         with a heuristic for icons/labels.
         Possible HTML properties on buttons that are v3-specific and change button behaviour:
-            - attribute "data-v3-id": if present the button needs to href to be included and its returned id property
+            - attribute "data-v3-id": if present, the button needs to href to be included and its returned id property
                 is set to it
+            - attribute "data-v3-type": if present, the supplied value will be passed along the sidebare menu item
+                as `type="value"` property. Used for example to signify a `type="download"` link
             - attribute "data-toggle" in combination with "data-target": bootstrap modal buttons are included and
                 these two attributes are passed along in the "attributes" attribute
             - CSS classes "x-v3-leftnav-action-button", "x-v3-leftnav-action-target-active-app",
@@ -619,15 +626,23 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                 attributes.update(
                     {'data-toggle': leftnav_link.get('data-toggle'), 'data-target': leftnav_link.get('data-target')}
                 )
-            # extract v3-specific id if present
+            # detect onclick attribute buttons like the report content modal link
+            if leftnav_link.get('onclick'):
+                attributes.update({'onclick': leftnav_link.get('onclick')})
+
+            # extract v3-specific id and type if present
             v3_id = leftnav_link.get('data-v3-id', None)
+            v3_type = leftnav_link.get('data-v3-type', None)
             # skip link-less buttons (like the dropdown trigger), unless they have modal data attributes
             href = leftnav_link.get('href')
             if not href and not attributes and not v3_id:
                 continue
             # ignore some links depending on their class
             if leftnav_link.get('class') and any(
-                [blacklisted_class in leftnav_link.get('class') for blacklisted_class in ['fadedown-clickarea']]
+                [
+                    blacklisted_class in leftnav_link.get('class')
+                    for blacklisted_class in ['x-v3-leftnav-hidden', 'fadedown-clickarea']
+                ]
             ):
                 continue
             link_label = '(Link)'
@@ -685,12 +700,13 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                 menu_item = MenuItem(
                     link_label,
                     url=href if href else None,
-                    icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
+                    icon=self._extract_fa_icon(leftnav_link),
                     badge=badge_label if badge_label and badge_label != link_label else None,
                     id=v3_id or ('Sidebar-' + get_random_string(8)),
                     is_external=bool(leftnav_link.get('target', None) == '_blank'),
                     sub_items=sub_items,
                     selected=selected,
+                    type=v3_type or None,
                     attributes=attributes if attributes else None,
                 )
             # attach the id, CSS classes, and data-target to the menu item for internal use
@@ -777,10 +793,18 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                     if 'x-v3-leftnav-action-target-active-app' in [
                         subclass for subclass in getattr(menu_item, '_original_css_class', [])
                     ]:
-                        active_menu_item['actions'] = active_menu_item.get(
-                            'actions', []
-                        )  # make sure actions list exists
-                        target_subnav = active_menu_item['actions']
+                        if active_menu_item:
+                            active_menu_item['actions'] = active_menu_item.get(
+                                'actions', []
+                            )  # make sure actions list exists
+                            target_subnav = active_menu_item['actions']
+                        else:
+                            target_subnav = None
+                            logger.warning(
+                                'Main content: A v3 leftnav button with "x-v3-leftnav-action-target-active-app" could '
+                                'not be sorted as no active app button was found! This action will not be displayed in '
+                                'the UI now!'
+                            )
                     elif 'x-v3-leftnav-action-target-active-subitem' in [
                         subclass for subclass in getattr(menu_item, '_original_css_class', [])
                     ]:
@@ -796,13 +820,14 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                                     )  # make sure actions list exists
                                     target_subnav = find_target_button['actions']
                 elif not menu_item['url']:
-                    # non url buttons like help popups go in the bottom list
+                    # non url buttons like help popups and modal boxes go in the bottom list
                     target_subnav = bottom
                 elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_BOTTOM_SIDEBAR_URL_PATTERNS):
                     target_subnav = bottom
                 elif any(re.match(pattern, menu_item['url']) for pattern in V3_CONTENT_TOP_SIDEBAR_URL_PATTERNS):
                     target_subnav = top
-                target_subnav.append(menu_item)
+                if target_subnav is not None:
+                    target_subnav.append(menu_item)
 
         _sort_menu_items(appsmenu_items, middle)
         _sort_menu_items(buttons_items, middle_from_buttons_area)
@@ -815,8 +840,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         else:
             middle.extend(middle_from_buttons_area)
 
-        # add sidebar third party tools if it exists in group data
-        if self.group and self.group.third_party_tools:
+        # add sidebar third party tools if it exists in group data and user has read_access
+        if self.group and self.group.third_party_tools and check_object_read_access(self.group, self.request.user):
             for third_party_tool in self.group.third_party_tools:
                 try:
                     middle.append(
@@ -854,6 +879,16 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         js_urls = [self._format_static_link(link) for link in js_urls]
         js_urls = uniquify_list(js_urls)
         return js_urls
+
+    def _parse_meta_urls(self, html_soup):
+        """Adds all <meta> elements and all <link rel="VAL"> elements where VAL in `INCLUDED_REL_VALUES`"""
+        INCLUDED_REL_VALUES = ['shortcut icon', 'apple-touch-icon', 'apple-touch-icon-precomposed']
+        meta_str = self._parse_tags(html_soup, 'meta')
+        rel_links = itertools.chain.from_iterable(
+            [html_soup.find_all('link', rel=rel_val) for rel_val in INCLUDED_REL_VALUES]
+        )
+        rel_str = '\n'.join([str(tag).strip() for tag in rel_links])
+        return '\n'.join([concat for concat in [meta_str, rel_str] if concat])
 
     def _parse_tags(self, html_soup, tag_name):
         """Parses all tags of a given tag name and returns them, including their tag definition,
@@ -893,3 +928,22 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         if 'user_guest_announcement' in context:
             announcements.append(context['user_guest_announcement'])
         return announcements
+
+    def _get_space_context(self, user):
+        if not self.group:
+            return None
+
+        # add the group permissions.
+        permissions = {
+            'read': False,
+            'write': False,
+        }
+        if user.is_authenticated:
+            if user.is_superuser or check_ug_admin(user, self.group):
+                permissions['read'] = True
+                permissions['write'] = True
+            elif check_ug_membership(user, self.group):
+                permissions['read'] = True
+
+        data = {'permissions': permissions}
+        return data

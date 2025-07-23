@@ -13,7 +13,7 @@ from oauth2_provider.models import Application
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
-from cosinnus_cloud.models import CloudFile, SimpleCloudFile
+from cosinnus_cloud.models import CloudFile
 from cosinnus_cloud.utils.text import utf8_encode
 
 logger = logging.getLogger('cosinnus')
@@ -263,7 +263,7 @@ def create_group_folder(name: str, group_id: str, group, raise_on_existing_name=
         if not group.nextcloud_groupfolder_id:
             logger.info('Group had its nextcloud groupfolder id missing - corrected it with matched folder!')
             group.nextcloud_groupfolder_id = int(same_name_entries[0].get('id'))
-            group.save()
+            group.save(update_fields=['nextcloud_groupfolder_id'])
 
         if raise_on_existing_name:
             raise ValueError('A groupfolder with that name already exists')
@@ -288,7 +288,7 @@ def create_group_folder(name: str, group_id: str, group, raise_on_existing_name=
     folder_id = response.data['id']
     if folder_id:
         group.nextcloud_groupfolder_id = int(folder_id)
-        group.save()
+        group.save(update_fields=['nextcloud_groupfolder_id'])
     else:
         logger.error(
             'Nextcloud folder creation did not return a folder id!',
@@ -798,109 +798,6 @@ def perform_fulltext_search(userid: str, query: str, page=1, page_size=20, *, se
     response.raise_for_status()
 
     return response.json()['result'][0]
-
-
-def find_files(
-    userid: str,
-    folder: str = '',
-    name_query: str = None,
-    page=1,
-    page_size=5,
-    also_search_content=False,
-    search_options=None,
-    *,
-    session=None,
-):
-    """
-    Finds files by name, unlike "perform_fulltext_search", by default, this function does only search in the filename,
-    not the content
-    """
-
-    options = {
-        'files_within_dir': folder,
-        # "files_local": "",
-        # "files_external": "",
-        # "files_group_folder": "",
-        # "files_extension": "",
-    }
-
-    if not also_search_content:
-        options['search_only'] = ['title']
-
-    options.update(search_options or {})
-
-    search_request = {
-        'author': userid,
-        'providers': 'files',
-        'page': page,
-        'size': page_size,
-        'options': options,
-    }
-
-    if name_query and name_query.strip():
-        name_query = name_query.strip()
-        search_request['search'] = ' '.join(f'+{word}' for word in name_query.split(' '))
-    else:
-        search_request['empty_search'] = True
-
-    client = session or _session
-
-    response = client.get(
-        f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/apps/fulltextsearch_admin-api/v1/remote',
-        auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
-        headers=HEADERS,
-        params={'request': json.dumps(search_request)},
-    )
-
-    response.raise_for_status()
-    return response.json()['result'][0]
-
-
-def find_newest_files(
-    userid: str,
-    folder: str = '',
-    name_query: str = None,
-    page=1,
-    page_size=5,
-    also_search_content=False,
-    *,
-    session=None,
-):
-    return find_files(
-        userid=userid,
-        folder=folder,
-        name_query=name_query,
-        page=page,
-        page_size=page_size,
-        also_search_content=also_search_content,
-        search_options={'sort': [{'mtime': {'order': 'desc', 'unmapped_type': 'long'}}]},
-        session=session,
-    )
-
-
-def get_groupfiles_match_list(
-    userid: str,
-    folder: str = '',
-    name_query: str = None,
-    page=1,
-    page_size=10,
-    *,
-    session=None,
-) -> List[SimpleCloudFile]:
-    """Convenience function that calls "find_newest_files" and returns a SimpleCloudFile object."""
-
-    results = find_newest_files(
-        userid=userid,
-        folder=folder,
-        name_query=name_query,
-        page=page,
-        page_size=page_size,
-        session=session,
-    )
-    return [
-        SimpleCloudFile(id=int(doc['id']), filename=doc['info']['file'], dirname=doc['info']['path'])
-        for doc in results['documents']
-    ]
 
 
 def get_permalink_for_file_id(id: int):

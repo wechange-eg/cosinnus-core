@@ -23,9 +23,7 @@ class CosinnusEventConf(AppConf):
     # Differentiate online vs on-site events. Online events have no location set, on-site events have one set.
     # Adds a hint to the locations field in event and compact mode conference forms and to the compact mode conference
     # microsite.
-    # Note: Make sure to remove the "online_or_onsite" filter from the EVENT_LIST_HIDDEN_FILTERS settings if enabled.
     DIFFERENTIATE_ONLINE_AND_ONSITE_EVENTS = False
 
     # Hide event list filters (e.g. 'o', 'creator', see EventFilter class).
-    # The online/on-site filter is hidden per default.
-    EVENT_LIST_HIDDEN_FILTERS = ['online_or_onsite']
+    EVENT_LIST_HIDDEN_FILTERS = []

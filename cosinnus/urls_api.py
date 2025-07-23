@@ -3,16 +3,8 @@ from __future__ import unicode_literals
 
 from django.urls import re_path
 
+import cosinnus.api.views.mitwirkomat as mitwirkomat_views
 import cosinnus.api.views.portal as portal_views
-from cosinnus.api.views.portal import (
-    SimpleStatisticsBBBRoomVisitsView,
-    SimpleStatisticsConferenceStorageReportView,
-    SimpleStatisticsGroupStorageReportView,
-    SimpleStatisticsProjectStorageReportView,
-    SimpleStatisticsUserActivityInfoView,
-    StatisticsManagedTagFilteredView,
-    StatisticsView,
-)
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.utils.url_patterns import api_patterns
@@ -22,33 +14,40 @@ urlpatterns = api_patterns(
     1,
     None,
     False,
-    re_path(r'^statistics/general/$', StatisticsView.as_view(), name='statistics-general'),
+    re_path(r'^statistics/general/$', portal_views.StatisticsView.as_view(), name='statistics-general'),
     re_path(
         r'^statistics/general/group_storage_info/',
-        SimpleStatisticsGroupStorageReportView.as_view(),
+        portal_views.SimpleStatisticsGroupStorageReportView.as_view(),
         name='statistics-group-storage-info',
     ),
     re_path(
         r'^statistics/general/conference_storage_info/',
-        SimpleStatisticsConferenceStorageReportView.as_view(),
+        portal_views.SimpleStatisticsConferenceStorageReportView.as_view(),
         name='statistics-conference-storage-info',
     ),
     re_path(
         r'^statistics/general/project_storage_info/',
-        SimpleStatisticsProjectStorageReportView.as_view(),
+        portal_views.SimpleStatisticsProjectStorageReportView.as_view(),
         name='statistics-project-storage-info',
     ),
     re_path(
         r'^statistics/general/user_activity_info/',
-        SimpleStatisticsUserActivityInfoView.as_view(),
+        portal_views.SimpleStatisticsUserActivityInfoView.as_view(),
         name='user-activity-info',
     ),
     re_path(
-        r'^statistics/general/bbb_room_visits/', SimpleStatisticsBBBRoomVisitsView.as_view(), name='bbb-room-visits'
+        r'^statistics/general/user_activity_timeline/',
+        portal_views.SimpleStatisticsUserActivityTimelineView.as_view(),
+        name='user-activity-timeline',
+    ),
+    re_path(
+        r'^statistics/general/bbb_room_visits/',
+        portal_views.SimpleStatisticsBBBRoomVisitsView.as_view(),
+        name='bbb-room-visits',
     ),
     re_path(
         r'^statistics/general/managed_tag/(?P<slug>[^/]+)/$',
-        StatisticsManagedTagFilteredView.as_view(),
+        portal_views.StatisticsManagedTagFilteredView.as_view(),
         name='statistics-general-managed-tags',
     ),
     re_path(r'^user/me/$', user.user_api_me, name='user-api-me'),
@@ -64,6 +63,18 @@ if settings.COSINNUS_ENABLE_ADMIN_USER_DOMAIN_INFO_CSV_DOWNLOADS:
             r'^statistics/general/user_domain_info/',
             portal_views.SimpleStatisticsUserDomainInfoView.as_view(),
             name='user-domain-info',
+        ),
+    )
+
+if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
+    urlpatterns += api_patterns(
+        1,
+        None,
+        False,
+        re_path(
+            r'^mitwirkomat/export/',
+            mitwirkomat_views.MitwirkomatExportView.as_view(),
+            name='mitwirkomat-export',
         ),
     )
 

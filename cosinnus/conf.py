@@ -63,6 +63,8 @@ class CosinnusConf(AppConf):
         '/api/v3/guest_login',
         '/api/v3/content/main',
         '/favicon.ico',
+        '/apple-touch-icon.png',
+        '/apple-touch-icon-precomposed.png',
         '/robots.txt',
         '/o/',
         '/cloud/oauth2/profile/',
@@ -224,6 +226,7 @@ class CosinnusConf(AppConf):
         'cosinnus_etherpad',
         'cosinnus_file',
         'cosinnus_cloud',
+        'cosinnus_deck',
     ]
 
     # a list of groups slugs for a portal, that do not require the group
@@ -1214,11 +1217,9 @@ class CosinnusConf(AppConf):
 
     # whether to enable the cosinnus cloud app
     CLOUD_ENABLED = False
-    # whether to show the cosinnus cloud dashboard widget
-    CLOUD_DASHBOARD_WIDGET_ENABLED = True
-    # whether the quicksearch includes cloud results.
-    # comes with a large reduction in search speed as nextcloud is slow
-    CLOUD_QUICKSEARCH_ENABLED = False
+    # Whether to enable cloud search in the map.
+    # Currently not available, as the respective NextCloud search API is not available.
+    CLOUD_SEARCH_ENABLED = False
 
     # base url of the nextcloud service, without trailing slash
     CLOUD_NEXTCLOUD_URL = None
@@ -1257,6 +1258,15 @@ class CosinnusConf(AppConf):
         ],  # list of string app ids
         'DISABLE_APP_IDS': ['photos', 'activity', 'systemtags', 'dashboard'],  # list of string app ids
     }
+
+    # can be set to a function receiving `user` as only argument,
+    # to modify the email that is set as email the nextcloud user profile.
+    # by default this returns an empty string so no emails are transferred to nextcloud.
+    # default if None: `''`
+    CLOUD_USER_PROFILE_EMAIL_FUNC = None
+
+    # whether to enable the cosinnus deck app
+    DECK_ENABLED = False
 
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
@@ -1610,6 +1620,53 @@ class CosinnusConf(AppConf):
 
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
+
+    # enable the Mitwirk-O-Mat integration groups settings view and API endpoints
+    MITWIRKOMAT_INTEGRATION_ENABLED = False
+
+    # if `MITWIRKOMAT_INTEGRATION_ENABLED=True`, this determines the group types
+    # the Mitwirk-O-Mat views are enabled for
+    MITWIRKOMAT_ENABLED_FOR_GROUP_TYPES = [
+        0,  # CosinnusBaseGroup.TYPE_PROJECT,
+        1,  # CosinnusBaseGroup.TYPE_SOCIETY,
+    ]
+
+    # the outgoing target link of where the actual Mitwirk-O-Mat website for this portal is.
+    # Used in explanatory texts for the user only.
+    MITWIRKOMAT_EXTERNAL_LINK = 'https://TODOADDURL.com'
+
+    # the label dict for the Mitwirk-O-Mat integration when `MITWIRKOMAT_INTEGRATION_ENABLED=True`
+    # note: since this is a dict, the order is given by the numeric key sort order,
+    # not by how these are listed! reordering these will not change anything, neither in form nor in the export.
+    # note: do not swap the keys for questions, because answers are saved by-key!
+    MITWIRKOMAT_QUESTION_LABELS = {
+        '0': 'Placeholder question 1',
+        '1': 'Placeholder question 2',
+        '2': 'Placeholder question 3',
+        '3': 'Placeholder question 4',
+        '4': 'Placeholder question 5',
+        '5': 'Placeholder question 6',
+        '6': 'Placeholder question 7',
+        '7': 'Placeholder question 8',
+        '8': 'Placeholder question 9',
+        '9': 'Placeholder question 10',
+        '10': 'Placeholder question 11',
+        '11': 'Placeholder question 12',
+        '12': 'Placeholder question 13',
+        '13': 'Placeholder question 14',
+        '14': 'Placeholder question 15',
+        '15': 'Placeholder question 16',
+        '16': 'Placeholder question 17',
+        '17': 'Placeholder question 18',
+        '18': 'Placeholder question 19',
+        '19': 'Placeholder question 20',
+    }
+
+    # default value for the answers for an unfilled form, see `MitwirkomatSettings.QUESTION_CHOICES`
+    MITWIRKOMAT_QUESTION_DEFAULT_VALUE = '0'
+
+    # disable the group banner nag screen
+    MITWIRKOMAT_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
 
 
 class CosinnusDefaultSettings(AppConf):

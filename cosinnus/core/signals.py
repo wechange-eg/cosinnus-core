@@ -99,6 +99,9 @@ group_apps_deactivated = dispatch.Signal()  # providing_args=["group", "apps"]
 """ Called after a CosinnusGroupMembership for a user has changed """
 group_membership_has_changed = dispatch.Signal()  # providing_args=["instance", "deleted"]
 
+""" Called after the nextcloud group has been initialized """
+group_nextcloud_group_initialized = dispatch.Signal()  # providing_args=["group"]
+
 
 """ Called when a group was invited to an organization """
 organization_group_invited = dispatch.Signal()  # providing_args=["organization", "group"]

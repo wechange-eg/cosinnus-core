@@ -16,7 +16,7 @@ logger = logging.getLogger('cosinnus')
 
 
 class Command(BaseCommand):
-    help = "Updates all users' email addresses. Was used once to set all emails to empty. "
+    help = "Set all nextcloud users' email addresses to empty. "
 
     def handle(self, *args, **options):
         try:

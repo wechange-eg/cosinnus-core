@@ -1,0 +1,166 @@
+{% load static cosinnus_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Test-Title</title>
+        {# test meta tags #}
+        <meta charset="utf-8"/>
+        {#  test vendor scripts #}
+        <script src="{% static "js/vendor/test.js" %}"></script>
+        {# test non-vendedor script #}
+        <script src="{% static 'js/cosinnus.js' %}"></script>
+        {# test script constants #}
+        <script type="text/javascript" class="v3-constants">
+            var constant;
+        </script>
+        {# test head inline script #}
+        <script type="text/javascript">
+            var head_script;
+        </script>
+        {# test css #}
+        <link href="{% static 'css/test.css' %}" rel="stylesheet">
+        {# test style #}
+        <style>
+            .test_style {}
+        </style>
+    </head>
+    <body>
+        <div class="x-v3-container">
+            {# test leftnav #}
+            {# FIME test active #}
+            <div class="x-v3-leftnav">
+                <div class="x-v3-leftnav-appsmenu">
+                    <ul>
+                        <li>
+                            <a href="/appsmenu-link-1/">
+                                <i class="icon_apps_1"></i>
+                                Appsmenu Link 1
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="/appsmenu-link-2/">
+                                <i class="icon_apps_2"></i>
+                                Appsmenu Link 2 Active
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="x-v3-leftnav-buttons">
+                    {# "selected" (current) leftnav button #}
+                    <button type="button" href="/leftnav-button-link/">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="icon1"></i>
+                                </span>
+                                <span class="pull-right">
+                                    <i class="fa fa-caret-right"></i>
+                                </span>
+                                <div class="media-body">
+                                    Leftnav Button 1
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+
+                    {# other, regular leftnav button, with custom type="download" #}
+                    <button type="button" href="/leftnav-button-link-download/" data-v3-type="download">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-download"></i>
+                                </span>
+                                <div class="media-body">
+                                    Leftnav Button Download
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+
+                    {# other, regular leftnav button, with overridden icon #}
+                    <button type="button" href="/leftnav-button-link-2/" data-v3-icon="chosen-icon">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="ignored-icon"></i>
+                                </span>
+                                <div class="media-body">
+                                    Leftnav Button 2
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+
+                    {# leftnav button with number badge #}
+                    <button type="button" href="/leftnav-button-link-3/">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    12345
+                                    <i class="icon3"></i>
+                                </span>
+                                <div class="media-body">
+                                    Leftnav Button 3
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+
+                    {# leftnav button which will have an acction attached because of the 2nd button below it #}
+                    <button id="parent_button_id" type="button" href="/leftnav-button-link-4/">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="icon4"></i>
+                                </span>
+                                <div class="media-body">
+                                    Leftnav Button 4
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                    {# this button will not be in the leftnav buttons list but instead attach itself as element in the button's actions that has the data-v3-parent id #}
+                    <button type="button" class="btn btn-emphasized fine-space x-v3-leftnav-action-button x-v3-leftnav-action-target-active-subitem"
+                              data-toggle="modal" data-target="#edit_popup_target" data-v3-parent="parent_button_id">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-right btn-extra-emphasized" href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <div class="media-body">
+                                    Edit Action
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+
+                    {# language selector pythonically generated item #}
+                    <button type="button" class="btn w100 btn-emphasized regular-space" data-v3-id="ChangeLanguage">
+                        {# this is a required positional placeholder item and will be hardcoded-generated by the main content API endpoint #}
+                        {# See `MainContentView._generate_hardcoded_menu_item_by_id()` #}
+                    </button>
+
+                    {# Modal popup button with extra attributes that get transfered in the main content data #}
+                    {% captureas extra_atts %}data-toggle="modal" data-target="#help_popup"{% endcaptureas %}
+                    {% include "cosinnus/leftnav_button.html" with icon="fa-question-circle-o" extra_atts=extra_atts label="Help" %}
+
+                    {# Action button that will be added to the active app button as context action #}
+                    {% include "cosinnus/leftnav_button.html" with icon="fa-plus" label="Create Action" extra_atts='data-toggle="modal" data-target="#create_folder_modal"' extra_classes="x-v3-leftnav-action-button x-v3-leftnav-action-target-active-app" %}
+                </div>
+            </div>
+            {# test content #}
+            <div class="x-v3-content">
+                Test-Content
+                {# test inline script #}
+                <script type="text/javascript">
+                    var body_script;
+                </script>
+            </div>
+        </div>
+    </body>
+    <div class="x-v3-footer">
+        Test-Footer
+    </div>
+</html>

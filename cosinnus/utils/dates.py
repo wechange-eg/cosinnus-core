@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from datetime import datetime
+from datetime import date, datetime, timedelta
 
 import pytz
 from django.template.defaultfilters import date as django_date_filter
@@ -148,3 +148,14 @@ class HumanizedEventTimeObject(HumanizedEventTimeMixin):
         # localize naive datetimes
         self.from_date = from_date
         self.to_date = to_date
+
+
+def daterange(start_date: date, end_date: date, include_end_date=False):
+    """An iterator over the days of a given date range.
+    Note, this stops BEFORE the end date, as a range would.
+    To include the end date, provide include_end_date=True."""
+    if include_end_date:
+        end_date = end_date + timedelta(days=1)
+    days = int((end_date - start_date).days)
+    for n in range(days):
+        yield start_date + timedelta(n)

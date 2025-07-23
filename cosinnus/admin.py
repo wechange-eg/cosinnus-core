@@ -21,6 +21,7 @@ from django.utils import translation
 from django.utils.crypto import get_random_string
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+from django_otp import devices_for_user
 from django_reverse_admin import ReverseModelAdmin
 
 from cosinnus.backends import elastic_threading_disabled
@@ -47,6 +48,7 @@ from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment, CosinnusManagedTagType
 from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
+from cosinnus.models.mitwirkomat import MitwirkomatSettings
 from cosinnus.models.newsletter import GroupsNewsletter, Newsletter
 from cosinnus.models.profile import (
     GlobalBlacklistedEmail,
@@ -405,6 +407,16 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     exclude = [
         'is_conference',
     ]
+    if not settings.COSINNUS_CLOUD_ENABLED:
+        exclude += [
+            'nextcloud_group_id',
+            'nextcloud_groupfolder_name',
+            'nextcloud_groupfolder_id',
+        ]
+    if not settings.COSINNUS_DECK_ENABLED:
+        exclude += [
+            'nextcloud_deck_board_id',
+        ]
     if settings.COSINNUS_CONFERENCES_ENABLED:
         inlines = [CosinnusConferenceSettingsInline]
 
@@ -700,7 +712,7 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
         'move_society_and_subprojects_to_portal',
         'move_society_and_subprojects_to_portal_and_message_users',
     ]
-    exclude = None
+    exclude = CosinnusProjectAdmin.exclude + ['parent']
 
     def get_actions(self, request):
         actions = super(CosinnusSocietyAdmin, self).get_actions(request)
@@ -737,10 +749,6 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
         super(CosinnusSocietyAdmin, self).deactivate_groups(request, queryset)
 
     deactivate_groups.short_description = CosinnusSociety.get_trans().DEACTIVATE
-
-    def get_form(self, request, obj=None, **kwargs):
-        self.exclude = ('parent',)
-        return super(CosinnusSocietyAdmin, self).get_form(request, obj, **kwargs)
 
 
 admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
@@ -1244,6 +1252,10 @@ class UserAdmin(DjangoUserAdmin):
     def log_in_as_user(self, request, queryset):
         user = queryset[0]
         user.backend = 'cosinnus.backends.EmailAuthBackend'
+        # if the user has an OTP device, we automatically verify it here so the admin doesn't need to do the challenge
+        user_otp_device = next(iter(devices_for_user(user)), None)
+        if user_otp_device:
+            user.otp_device = user_otp_device
         django_login(request, user)
 
     def refresh_group_memberships(self, request, queryset):
@@ -1647,3 +1659,19 @@ if settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
             return form
 
     admin.site.register(UserGroupGuestAccess, UserGroupGuestAccessAdmin)
+
+
+if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
+
+    class MitwirkomatSettingsAdmin(admin.ModelAdmin):
+        list_display = (
+            'group',
+            'is_active',
+            'creator',
+            'last_modified',
+        )
+        search_fields = ('creator__first_name', 'creator__last_name', 'creator__email', 'group__name')
+        raw_id_fields = ('creator',)
+        list_filter = ('is_active',)
+
+    admin.site.register(MitwirkomatSettings, MitwirkomatSettingsAdmin)

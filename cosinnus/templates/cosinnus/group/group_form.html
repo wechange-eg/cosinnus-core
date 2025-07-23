@@ -122,20 +122,28 @@
 						{% endif %}
 					{% endif %}
 					{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED %}
-					<li {% if request.GET.tab == 'facebook' %}class="active"{% endif %}>
-						<a href="#facebook" class="_group-form-tab" role="tab" data-toggle="tab">
-							<i class="fa fa-facebook"></i>
-							{% trans "Facebook-Integration" %}
-						</a>
-					</li>
+                        <li {% if request.GET.tab == 'facebook' %}class="active"{% endif %}>
+                            <a href="#facebook" class="_group-form-tab" role="tab" data-toggle="tab">
+                                <i class="fa fa-facebook"></i>
+                                {% trans "Facebook-Integration" %}
+                            </a>
+                        </li>
 					{% endif %}
 					{% if SETTINGS.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED and user|is_superuser  %}
-	                <li {% if request.GET.tab == 'dashboard' %}class="active"{% endif %}>
-	                    <a href="#dashboard" class="_group-form-tab" role="tab" data-toggle="tab">
-	                        <i class="fa fa-columns"></i>
-	                        {{ group_model_class.get_trans.DASHBOARD_LABEL }}
-	                    </a>
-	                </li>
+                        <li {% if request.GET.tab == 'dashboard' %}class="active"{% endif %}>
+                            <a href="#dashboard" class="_group-form-tab" role="tab" data-toggle="tab">
+                                <i class="fa fa-columns"></i>
+                                {{ group_model_class.get_trans.DASHBOARD_LABEL }}
+                            </a>
+                        </li>
+	                {% endif %}
+                    {% if SETTINGS.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED  %}
+                        <li {% if request.GET.tab == 'mitwirkomat' %}class="active"{% endif %}>
+                            <a href="#mitwirkomat" class="_group-form-tab" role="tab" data-toggle="tab">
+                                <i class="{% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}fas fa-comment-alt-check{% else %}fas fa-comment-alt{% endif %}"></i>
+                                {% trans "Volunteer-O-Matic" %}
+                            </a>
+                        </li>
 	                {% endif %}
 				{% endblock group_form_navtabs %}
 			</ul>
@@ -773,6 +781,32 @@
 				                    [[user_full_name]]
 				                </p>
                             {% endblock group_dashboard_tab %}
+                        </div>
+                    {% endif %}
+
+
+                    {% if SETTINGS.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED %}
+                        <div class="tab-pane {% if request.GET.tab == 'mitwirkomat' %}active{% endif %}" id="mitwirkomat" >
+                            {% block group_mitwirkomat_settings_tab %}
+                                <div class="v-spacer-l">
+                                    <p class="textfield transparent">
+                                        {% trans "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers." %}
+                                    </p>
+                                </div>
+
+                                <div>
+                                <p class="textfield transparent">
+                                    {% if group %}
+                                        <a href="{% group_url 'cosinnus:mitwirkomat-settings' group=group %}" class="transparent" target="_blank">
+                                            {{ group_model_class.get_trans.MITWIRKOMAT_GO_TO_SETTINGS_LINK }}
+                                            <i class="fa fa-external-link"></i>
+                                        </a>
+                                    {% else %}
+                                            <i>({% trans "You can visit the Matching Settings for the Volunteer-O-Matic after saving." %})</i>
+                                    {% endif %}
+                                </p>
+                                </div>
+                            {% endblock group_mitwirkomat_settings_tab %}
                         </div>
                     {% endif %}
 

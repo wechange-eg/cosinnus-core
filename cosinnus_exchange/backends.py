@@ -117,9 +117,12 @@ class ExchangeBackend:
         for i, result in enumerate(results):
             try:
                 serialized_result = self.serializer.to_representation(instance=result)
-                serialized_results.append(serialized_result)
-                if settings.DEBUG:
-                    print(f'>> pulled: {serialized_result.get("url")}')
+                if self.serializer.include_instance(result):
+                    serialized_results.append(serialized_result)
+                    if settings.DEBUG:
+                        print(f'>> pulled: {serialized_result.get("url")}')
+                elif settings.DEBUG:
+                    print(f'>> ignored: {serialized_result.get("url")}')
             except Exception as e:
                 logger.warn(
                     'An external data object could not be pulled in for cosinnus exchange!',
@@ -180,7 +183,7 @@ class ExchangeBackend:
         Returns the IDs of currently indexed results for the backends model and source.
         Note: Using "pk" as it contains the url/slug of the instance, while "id" has the additional model-name prefix.
         """
-        sqs = SearchQuerySet().models(self.model).filter(source=self.source).all()
+        sqs = SearchQuerySet().models(self.model).filter(source__exact=self.source).all()
         ids = [result.pk for result in sqs]
         return ids
 
