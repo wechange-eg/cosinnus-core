@@ -63,6 +63,8 @@ class CosinnusConf(AppConf):
         '/api/v3/guest_login',
         '/api/v3/content/main',
         '/favicon.ico',
+        '/apple-touch-icon.png',
+        '/apple-touch-icon-precomposed.png',
         '/robots.txt',
         '/o/',
         '/cloud/oauth2/profile/',

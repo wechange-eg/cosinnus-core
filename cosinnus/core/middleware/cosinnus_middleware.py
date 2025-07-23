@@ -97,6 +97,8 @@ EXEMPTED_URLS_FOR_2FA = [
     '/api/v3/navigation',
     '/api/v3/content/main',
     '/favicon.ico',
+    '/apple-touch-icon.png',
+    '/apple-touch-icon-precomposed.png',
 ]
 
 # list of url patterns that are not permitted to be accessed during guest login
