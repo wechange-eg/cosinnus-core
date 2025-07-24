@@ -13,6 +13,7 @@ from django_filters.filterset import FilterSet
 from django_filters.views import FilterMixin
 
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
+from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
 
 
 class CosinnusFilterMixin(FilterMixin):
@@ -32,6 +33,10 @@ class CosinnusFilterMixin(FilterMixin):
         # support for Containers in BaseHierarchical models (keep Containers in QS!)
         if BaseHierarchicalTaggableObjectModel in self.model.__bases__:
             qs = base_qs.filter(is_container=True) | qs
+
+        # support for filtering out blocked users' content
+        print('>>>> FILTER in mixins/filters.py')
+        qs = filter_base_taggable_qs_for_blocked_user_content(qs, self.request.user)
 
         return qs
 
