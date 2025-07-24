@@ -1,24 +1,27 @@
 {% load i18n cosinnus_tags widget_tweaks %}
 
 {% captureas condensed_radio_html %}
-    <label for="{{ field.auto_id }}" class="{% if label_class %}{{ label_class }}{% endif %}">
-        {{ label }}
-    </label>
-    
-    <div class="condensed-radio-input">
-	    {# please keep this linebreak formatting so that no spaces exit between the <label> elements! #}
-	    {% for value, label in field.field.choices %}<label class="notification-options-label">
-	            <input type="radio" name="{{ field.html_name }}" value="{{ value }}" id="{{ field.auto_id }}"
-	                     {% if field.value == value or value|stringify == field.value %}checked="checked"{% endif %}>
-	            <span class="">
-	                {% if value == 9999 %}
-	                    {% trans "Default" %}
-	                {% else %}
-		                {{ label }}
-	                {% endif %}
-	            </span>
-	                    
-	        </label>{% endfor %}
+    <div class="condensed-field-container">
+        <div class="condensed-field-label-container">
+            <label for="{{ field.auto_id }}" class="{% if label_class %}{{ label_class }}{% endif %}">
+                {{ label }}
+            </label>
+        </div>
+        <div class="condensed-radio-input">
+            {# please keep this linebreak formatting so that no spaces exit between the <label> elements! #}
+            {% for value, label in field.field.choices %}<label class="notification-options-label">
+                    <input type="radio" name="{{ field.html_name }}" value="{{ value }}" id="{{ field.auto_id }}"
+                             {% if field.value == value or value|stringify == field.value %}checked="checked"{% endif %}>
+                    <span class="">
+                        {% if value == 9999 %}
+                            {% trans "Default" %}
+                        {% else %}
+                            {{ label }}
+                        {% endif %}
+                    </span>
+
+                </label>{% endfor %}
+        </div>
     </div>
 {% endcaptureas %}
-{% include 'cosinnus/fields/default_field.html' with field_html=condensed_radio_html field=field label="" legend="" field_classes="condensed-radio-field transparent" %}
+{% include 'cosinnus/fields/default_field.html' with field_html=condensed_radio_html field=field large_field=True label="" legend="" field_classes="condensed-radio-field transparent" %}
