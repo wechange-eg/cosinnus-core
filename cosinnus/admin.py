@@ -53,6 +53,7 @@ from cosinnus.models.newsletter import GroupsNewsletter, Newsletter
 from cosinnus.models.profile import (
     GlobalBlacklistedEmail,
     GlobalUserNotificationSetting,
+    UserBlock,
     UserMatchObject,
     get_user_profile_model,
 )
@@ -1606,3 +1607,11 @@ if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
         list_filter = ('is_active',)
 
     admin.site.register(MitwirkomatSettings, MitwirkomatSettingsAdmin)
+
+
+if settings.DEBUG and settings.COSINNUS_ENABLE_USER_BLOCK:
+
+    class UserBlockAdmin(admin.ModelAdmin):
+        pass
+
+    admin.site.register(UserBlock, UserBlockAdmin)

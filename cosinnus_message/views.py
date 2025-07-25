@@ -16,7 +16,9 @@ from django.views.generic.base import View
 from django.views.generic.edit import FormView
 
 from cosinnus.models.group import CosinnusGroup
+from cosinnus.utils.permissions import check_user_blocks_user
 from cosinnus.utils.urls import group_aware_reverse, safe_redirect
+from cosinnus.views.mixins.filters import DisallowBlockedUserViewMixin
 from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException, is_rocket_down
 from postman.models import Message
 from postman.views import ConversationView, MessageView, _get_referer, csrf_protect_m, login_required_m
@@ -174,13 +176,16 @@ class RocketChatIndexView(BaseRocketChatView):
     pass
 
 
-class RocketChatWriteView(BaseRocketChatView):
+class RocketChatWriteView(DisallowBlockedUserViewMixin, BaseRocketChatView):
     def get_rocket_chat_url(self):
         user = None
         username = self.kwargs.get('username')
         if username:
             user = get_user_model().objects.filter(username=username).first()
         if user:
+            # check for user blocks with `DisallowBlockedUserViewMixin`
+            if check_user_blocks_user(user, self.request.user):
+                self.user_is_blocked = True
             profile = user.cosinnus_profile
             if not profile:
                 return self.base_url

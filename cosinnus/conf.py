@@ -1585,6 +1585,9 @@ class CosinnusConf(AppConf):
     # if True, the User Match feature will be enabled
     ENABLE_USER_MATCH = False
 
+    # if True, the User Block feature will be enabled
+    ENABLE_USER_BLOCK = False
+
     # whether to require a valid hcaptcha on the signup API endpoint
     USE_HCAPTCHA = True
 

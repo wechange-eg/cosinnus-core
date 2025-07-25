@@ -12,7 +12,7 @@ from rest_framework.permissions import BasePermission, IsAdminUser
 from cosinnus.models import MEMBER_STATUS, MEMBERSHIP_ADMIN, MEMBERSHIP_PENDING
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.models.profile import BaseUserProfile, GlobalBlacklistedEmail, GlobalUserNotificationSetting
+from cosinnus.models.profile import BaseUserProfile, GlobalBlacklistedEmail, GlobalUserNotificationSetting, UserBlock
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel, BaseTaggableObjectModel, BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
 from cosinnus_organization.models import CosinnusOrganization
@@ -250,6 +250,17 @@ def check_user_can_see_user(user, target_user):
     return False
 
 
+def check_user_blocks_user(blocking_user, blocked_user):
+    """Returns True if `blocking_user` has opted to block `blocked_user` and user blocking is active,
+    False otherwise.
+    If `COSINNUS_ENABLE_USER_BLOCK` is False, this always returns False."""
+    if settings.COSINNUS_ENABLE_USER_BLOCK:
+        if blocking_user.id and blocked_user.id:
+            if UserBlock.objects.filter(user=blocking_user, blocked_user=blocked_user).count() > 0:
+                return True
+    return False
+
+
 def check_user_superuser(user, portal=None):
     """Main function to determine whether a user has superuser rights to access and change almost
         any view and object on the site.
@@ -370,7 +381,24 @@ def filter_tagged_object_queryset_for_user(qs, user):
         q |= Q(  # all tagged objects of the user himself
             media_tag__visibility=BaseTagObject.VISIBILITY_USER, creator__id=user.id
         )
+
+        # support for filtering out blocked users' content
+        qs = filter_base_taggable_qs_for_blocked_user_content(qs, user)
+
     return qs.filter(q).distinct()
+
+
+def filter_base_taggable_qs_for_blocked_user_content(qs, source_user):
+    """Will filter a queryset of `BaseTaggableObjectModel` to exclude any items that
+    have been created by users that the `source_user` is currently blocking.
+    Will do nothing if `COSINNUS_ENABLE_USER_BLOCK` is False."""
+
+    if settings.COSINNUS_ENABLE_USER_BLOCK:
+        if source_user.is_authenticated:
+            blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(source_user)
+            if blocked_user_ids:
+                qs = qs.exclude(creator__id__in=blocked_user_ids)
+    return qs
 
 
 def get_user_token(user, token_name):

@@ -134,13 +134,15 @@
 				<div class="timeline-item-row meta-row text-small flex-row plain-links remove-if-empty">
 					<div class="timeline-tags flex-grow">
 						{% if comments %}
-							{% with comment_count=comments.count %}
-								{% if comment_count > 0 %}
-									<span>
-										<i class="fas fa-fw fa-comments"></i>
-										{{ comment_count }}
-									</span>
-								{% endif %}
+							{% with comments_filtered=comments|filter_comments_for_user:request.user %}
+                                {% with comment_count=comments_filtered.count %}
+                                    {% if comment_count > 0 %}
+                                        <span>
+                                            <i class="fas fa-fw fa-comments"></i>
+                                            {{ comment_count }}
+                                        </span>
+                                    {% endif %}
+                                {% endwith %}
 							{% endwith %}
 						{% endif %}
 						{% block topics_content %}
@@ -172,7 +174,7 @@
 				<hr class="seperator {% if not comments %}remove-if-prev-empty{% endif %}" />
 			
 				{% if comments %}
-					{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item comments=comments.all %}
+					{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item comments=comments.all|filter_comments_for_user:request.user %}
 				{% endif %}
 			{% endwith %}
 			
