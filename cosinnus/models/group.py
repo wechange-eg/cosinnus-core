@@ -1539,8 +1539,6 @@ class CosinnusBaseGroup(
             return True
         if self.group_is_bbb_enabled:
             return True
-        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and 'premium_features_expired_on' in self.settings:
-            return True
         if self.settings.get('may_have_bbb_recordings', False):
             return True
         return False
