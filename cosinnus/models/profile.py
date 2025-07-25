@@ -1140,10 +1140,28 @@ class UserBlock(models.Model):
     def block_user(cls, blocking_user, blocked_user):
         """Blocks a user by creating the corresponding instance of this model.
         Does nothing if the user is already blocked."""
+        if not blocking_user.pk or not blocked_user.pk:
+            return
         cls.objects.get_or_create(user=blocking_user, blocked_user=blocked_user)
 
     @classmethod
     def unblock_user(cls, blocking_user, unblocked_user):
         """Unblocks a user by deleting the corresponding instance of this model.
         Does nothing if the user is not blocked."""
+        if not blocking_user.pk or not unblocked_user.pk:
+            return
         cls.objects.filter(user=blocking_user, blocked_user=unblocked_user).delete()
+
+    @classmethod
+    def get_blocked_user_ids_for_user(cls, blocking_user):
+        """Returns a list of user_ids of users that `blocking_user` has opted to block."""
+        if not blocking_user.id:
+            return []
+        return list(cls.objects.filter(user=blocking_user).values_list('blocked_user__id', flat=True))
+
+    @classmethod
+    def get_blocking_user_ids_for_user(cls, blocked_user):
+        """Returns a list of user_ids of users that are blocking `blocked_user`."""
+        if not blocked_user.id:
+            return []
+        return list(cls.objects.filter(blocked_user=blocked_user).values_list('user__id', flat=True))

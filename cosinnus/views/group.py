@@ -83,6 +83,7 @@ from cosinnus.models.membership import (
     MEMBERSHIP_PENDING,
     MembershipClassMixin,
 )
+from cosinnus.models.profile import UserBlock
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from cosinnus.templatetags.cosinnus_tags import full_name, is_superuser
@@ -98,6 +99,7 @@ from cosinnus.utils.permissions import (
     check_object_write_access,
     check_ug_admin,
     check_ug_membership,
+    check_user_blocks_user,
     check_user_can_create_conferences,
     check_user_can_see_user,
     check_user_superuser,
@@ -1037,6 +1039,17 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
         if self.object.group_is_conference and self.object.use_conference_applications:
             raise PermissionDenied()
         self.referer = request.META.get('HTTP_REFERER', self.referer_url)
+
+        # support for user blocking, prevent requesting joining a group where an active admin is blocking you
+        if settings.COSINNUS_ENABLE_USER_BLOCK:
+            admins = self.membership_class.objects.get_admins(group=self.object)
+            active_admins = filter_active_users(get_user_model().objects.filter(id__in=admins))
+            if UserBlock.objects.filter(user__in=active_admins, blocked_user=self.request.user).count() > 0:
+                messages.error(
+                    self.request,
+                    _('You cannot request to be member of this group because at least one admin is blocking you.'),
+                )
+                return redirect(self.get_success_url())
         return super(GroupUserJoinView, self).post(request, *args, **kwargs)
 
     def get_success_url(self):
@@ -1266,7 +1279,7 @@ class UserSelectMixin(object):
 
 
 class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin, CreateView):
-    # TODONEXT: delete this view probably!
+    # DEPRECTATED! delete this view probably!
 
     template_name = 'cosinnus/group/group_detail.html'
     invite_subject = _('I invited you to join "%(team_name)s"!')
@@ -1423,11 +1436,22 @@ class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormV
     def get_form_kwargs(self):
         kwargs = super(GroupUserInviteMultipleView, self).get_form_kwargs()
         kwargs['group'] = self.group
+        kwargs['user'] = self.request.user
         return kwargs
 
     def form_valid(self, form):
         users = form.cleaned_data.get('users')
         for user in users:
+            # support for user blocking, prevent inviting a user that has the sending user blocked
+            if settings.COSINNUS_ENABLE_USER_BLOCK:
+                if check_user_blocks_user(user, self.request.user):
+                    messages.error(
+                        self.request,
+                        _('Could not invite user "%(user)s" because they are blocking you.')
+                        % {'user': user.get_full_name()},
+                    )
+                    continue
+
             self.do_invite_valid_user(user, form)
 
             # create admin logentry.
@@ -1874,6 +1898,16 @@ def group_user_recruit(
         # from here on, we have a real email. check if a user with that email exists
         existing_user = get_object_or_None(get_user_model(), email__iexact=email)
         if existing_user:
+            # support for user blocking, prevent inviting a user that has the sending user blocked
+            if settings.COSINNUS_ENABLE_USER_BLOCK:
+                if check_user_blocks_user(existing_user, request.user):
+                    messages.error(
+                        request,
+                        _('Could not invite user "%(user)s" because they are blocking you.')
+                        % {'user': existing_user.get_full_name()},
+                    )
+                    continue
+
             # check if there is already a group membership for this user
             membership = get_object_or_None(membership_class, group=group, user=existing_user)
             if not membership:

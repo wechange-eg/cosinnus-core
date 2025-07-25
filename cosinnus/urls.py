@@ -625,7 +625,8 @@ for url_key in group_model_registry:
             name=prefix + 'group-organization-request-select2',
         ),
         path(f'{url_key}/<str:group>/users/', group.group_user_list, name=prefix + 'group-user-list'),
-        path(f'{url_key}/<str:group>/users/add/', group.group_user_add, name=prefix + 'group-user-add-generic'),
+        # Deprecated
+        # path(f'{url_key}/<str:group>/users/add/', group.group_user_add, name=prefix + 'group-user-add-generic'),
         path(
             f'{url_key}/<str:group>/users/add-multiple/',
             group.group_user_add_multiple,

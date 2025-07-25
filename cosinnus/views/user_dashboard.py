@@ -847,7 +847,6 @@ class TimelineView(ModelRetrievalMixin, View):
             combined_qs = combined_qs.distinct()
 
         # support for filtering out blocked users' content
-        print('>>>> FILTER in views/user_dashboard.py')
         combined_qs = filter_base_taggable_qs_for_blocked_user_content(combined_qs, self.request.user)
         return combined_qs
 

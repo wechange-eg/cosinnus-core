@@ -79,7 +79,6 @@ class DashboardWidget(object):
             qs = filter_tagged_object_queryset_for_user(qs, self.request.user)
 
         # support for filtering out blocked users' content
-        print('>>>> FILTER in utils/dashboard.py')
         qs = filter_base_taggable_qs_for_blocked_user_content(qs, self.request.user)
         return qs
 

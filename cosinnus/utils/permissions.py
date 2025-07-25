@@ -250,6 +250,17 @@ def check_user_can_see_user(user, target_user):
     return False
 
 
+def check_user_blocks_user(blocking_user, blocked_user):
+    """Returns True if `blocking_user` has opted to block `blocked_user` and user blocking is active,
+    False otherwise.
+    If `COSINNUS_ENABLE_USER_BLOCK` is False, this always returns False."""
+    if settings.COSINNUS_ENABLE_USER_BLOCK:
+        if blocking_user.id and blocked_user.id:
+            if UserBlock.objects.filter(user=blocking_user, blocked_user=blocked_user).count() > 0:
+                return True
+    return False
+
+
 def check_user_superuser(user, portal=None):
     """Main function to determine whether a user has superuser rights to access and change almost
         any view and object on the site.
@@ -372,7 +383,6 @@ def filter_tagged_object_queryset_for_user(qs, user):
         )
 
         # support for filtering out blocked users' content
-        print('>>>> FILTER in utils/permissions.py')
         qs = filter_base_taggable_qs_for_blocked_user_content(qs, user)
 
     return qs.filter(q).distinct()
@@ -385,7 +395,7 @@ def filter_base_taggable_qs_for_blocked_user_content(qs, source_user):
 
     if settings.COSINNUS_ENABLE_USER_BLOCK:
         if source_user.is_authenticated:
-            blocked_user_ids = UserBlock.objects.filter(user=source_user).values_list('blocked_user__id', flat=True)
+            blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(source_user)
             if blocked_user_ids:
                 qs = qs.exclude(creator__id__in=blocked_user_ids)
     return qs

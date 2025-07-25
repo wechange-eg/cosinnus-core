@@ -28,7 +28,7 @@ from cosinnus.core.decorators.views import require_logged_in
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.group_extra import CosinnusConference
-from cosinnus.models.profile import GlobalUserNotificationSetting
+from cosinnus.models.profile import GlobalUserNotificationSetting, UserBlock
 from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetime
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.permissions import check_user_portal_admin, check_user_portal_moderator
@@ -373,10 +373,13 @@ class AlertsRetrievalView(BasePagedOffsetWidgetView):
 
     def get_queryset(self):
         alerts_qs = NotificationAlert.objects.filter(
-            portal=CosinnusPortal.get_current(),
-            user=self.request.user,
-            action_user__is_active=True
+            portal=CosinnusPortal.get_current(), user=self.request.user, action_user__is_active=True
         )
+        # support for user blocking, filter out all audience members that have the sending user blocked
+        if settings.COSINNUS_ENABLE_USER_BLOCK:
+            blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(self.request.user)
+            if blocked_user_ids:
+                alerts_qs = alerts_qs.exclude(action_user__id__in=blocked_user_ids)
         # retrieve number of unseen alerts from ALL alerts (before pagination) unless we're loading "more..." paged
         # items
         self.unseen_count = -1
