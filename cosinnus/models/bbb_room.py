@@ -366,6 +366,11 @@ class BBBRoom(models.Model):
         guest_token = self.get_guest_token()
         create_params = self.__class__.add_guest_link_moderator_only_message_to_params(create_params, guest_token)
 
+        # flag source-group as "may have recordings" if source-object is present and recordings are actually possible
+        # create_params are expected to be lower case string values
+        if source_obj and create_params.get('record', 'false') == 'true':
+            source_obj.get_group_for_bbb_room().set_may_have_bbb_recordings()
+
         m_xml = self.bbb_api.start(
             name=self.name,
             meeting_id=self.meeting_id,
@@ -451,6 +456,11 @@ class BBBRoom(models.Model):
         # param exists
         guest_token = cls._generate_guest_token(source_object)
         create_params = cls.add_guest_link_moderator_only_message_to_params(create_params, guest_token)
+
+        # flag source-group as "may have recordings" if source-object is present and recordings are actually possible
+        # create_params are expected to be lower case string values
+        if source_object and create_params.get('record', 'false') == 'true':
+            source_object.get_group_for_bbb_room().set_may_have_bbb_recordings()
 
         m_xml = bbb_api.start(
             name=name,

@@ -2033,6 +2033,24 @@ class CosinnusBaseGroup(
                     },
                 )
 
+    def set_may_have_bbb_recordings(self):
+        """
+        Saves a flag, that this group may have bbb recordings associated with it.
+
+        This flag is used by `group_can_access_recorded_meetings()` to determine if
+        the list of available recordings should be shown.
+        """
+
+        # do nothing if it is already set True
+        if self.settings.get('may_have_bbb_recordings', False):
+            return
+
+        self.settings.update({'may_have_bbb_recordings': True})
+        # update DB directly to avoid signals
+        type(self).objects.filter(pk=self.pk).update(settings=self.settings)
+        # group-cache must be cleared for the change to take effect
+        self.clear_cache()
+
 
 class CosinnusGroup(CosinnusBaseGroup):
     """Swappable group model implementation."""
