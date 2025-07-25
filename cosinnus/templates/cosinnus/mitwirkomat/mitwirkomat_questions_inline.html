@@ -4,7 +4,7 @@
 
 {# Hide answers with a label, as those have been removed from COSINNUS_MITWIRKOMAT_QUESTION_LABELS but should still be carried over on save #}
 <div {% if not answer_label %} style="display: none;"{% endif %}>
-    {% include 'cosinnus/fields/condensed_radio_field.html' with field=inlineform.answer label=answer_label label_class="textfield transparent no-margin" %}
+    {% include 'cosinnus/fields/condensed_radio_field.html' with field=inlineform.answer label=answer_label label_class="textfield transparent no-margin" label_container_extra_class="condensed-radio-field-label-left-align" %}
 
     {# hidden input, required to save the value of the question #}
     {{ inlineform.question }}

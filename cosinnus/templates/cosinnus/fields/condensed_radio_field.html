@@ -2,7 +2,7 @@
 
 {% captureas condensed_radio_html %}
     <div class="condensed-field-container">
-        <div class="condensed-field-label-container">
+        <div class="condensed-field-label-container {{ label_container_extra_class }}">
             <label for="{{ field.auto_id }}" class="{% if label_class %}{{ label_class }}{% endif %}">
                 {{ label }}
             </label>
