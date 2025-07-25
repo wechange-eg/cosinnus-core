@@ -1693,9 +1693,9 @@ class CosinnusDefaultSettings(AppConf):
 
     # the default BBB create-call parameters for all room types
     BBB_DEFAULT_CREATE_PARAMETERS = {
-        'record': False,
-        'autoStartRecording': False,
-        'allowStartStopRecording': True,
+        'record': 'false',
+        'autoStartRecording': 'false',
+        'allowStartStopRecording': 'true',
         'guestPolicy': 'ALWAYS_ACCEPT',  # always by default allow guest access
     }
 
