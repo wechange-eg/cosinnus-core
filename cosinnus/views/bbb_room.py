@@ -294,7 +294,7 @@ class BBBRoomGuestAccessView(TemplateView):
 
         # get source_obj BBBRoomMixin if exists and make sure BBB is enabled
         self.source_obj = self.bbb_room.source_object
-        if not (self.source_obj and self.source_obj.can_have_bbb_room()):
+        if not self.source_obj or not self.source_obj.can_have_bbb_room():
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
 
@@ -302,7 +302,7 @@ class BBBRoomGuestAccessView(TemplateView):
         # FIXME this does not check for restricted BBB access due to the current premium-state of the source group
         #   maybe check for `bbb_restricted` like `cosinnus/templates/cosinnus/fields/video_conference_type_field.html`
         self.source_group = self.get_source_group(self.source_obj)
-        if not (self.source_group and self.source_group.is_active):
+        if not self.source_group or not self.source_group.is_active:
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
 
