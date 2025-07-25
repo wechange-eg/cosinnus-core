@@ -7,12 +7,17 @@ Created on 30.07.2014
 from builtins import str
 
 from django import forms
+from django.contrib import messages
 from django.http.request import QueryDict
+from django.utils.translation import gettext_lazy as _
 from django_filters.filters import OrderingFilter
 from django_filters.filterset import FilterSet
 from django_filters.views import FilterMixin
 
+from cosinnus.conf import settings
+from cosinnus.core.decorators.views import redirect_to_error_page
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
+from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
 
 
 class CosinnusFilterMixin(FilterMixin):
@@ -32,6 +37,9 @@ class CosinnusFilterMixin(FilterMixin):
         # support for Containers in BaseHierarchical models (keep Containers in QS!)
         if BaseHierarchicalTaggableObjectModel in self.model.__bases__:
             qs = base_qs.filter(is_container=True) | qs
+
+        # support for filtering out blocked users' content
+        qs = filter_base_taggable_qs_for_blocked_user_content(qs, self.request.user)
 
         return qs
 
@@ -104,3 +112,22 @@ class CosinnusOrderingFilter(OrderingFilter):
         if not value and self.default:
             return qs.order_by(self.default)
         return super(CosinnusOrderingFilter, self).filter(qs, value)
+
+
+class DisallowBlockedUserViewMixin(object):
+    """A mixin that adds functionality for redirecting the user to an error page if they are blocked by a user,
+    instead of following through to the actual URL. Note that any persistent changes made in the view will still happen,
+    as this only checks for the block condition at the very end. So do not use this in FormViews.
+    Still useful for simple views where it's not easy to add a dispatch check in.
+    Use by adding this mixin to the view, and somewhere in your view setting `self.user_is_blocked=True` if the
+    block condition occurs."""
+
+    user_is_blocked = False
+    user_is_blocked_error_message = _('You cannot do this because this user is blocking you.')
+
+    def dispatch(self, request, *args, **kwargs):
+        ret = super().dispatch(request, *args, **kwargs)
+        if settings.COSINNUS_ENABLE_USER_BLOCK and self.user_is_blocked:
+            messages.error(self.request, self.user_is_blocked_error_message)
+            return redirect_to_error_page(request, view=self)
+        return ret

@@ -30,6 +30,7 @@ from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.forms.mixins import AdditionalFormsMixin
 from cosinnus.forms.translations import TranslatedFieldsFormMixin
 from cosinnus.forms.widgets import SplitHiddenDateWidget
+from cosinnus.models import UserBlock
 from cosinnus.models.group import (
     SDG_CHOICES,
     CosinnusBaseGroup,
@@ -611,12 +612,19 @@ class MultiUserSelectForm(MultiSelectForm):
 
     def __init__(self, *args, **kwargs):
         self.group = kwargs.pop('group')
+        self.user = kwargs.pop('user', None)
         super(MultiUserSelectForm, self).__init__(*args, **kwargs)
 
     def get_queryset(self):
         include_uids = CosinnusPortal.get_current().members
         exclude_uids = self.group.members
-        return filter_active_users(get_user_model().objects.filter(id__in=include_uids).exclude(id__in=exclude_uids))
+        users = filter_active_users(get_user_model().objects.filter(id__in=include_uids).exclude(id__in=exclude_uids))
+        # support for user blocking, filter out all audience members that have the sending user blocked
+        if settings.COSINNUS_ENABLE_USER_BLOCK and self.user:
+            blocked_user_ids = UserBlock.get_blocking_user_ids_for_user(self.user)
+            if blocked_user_ids:
+                users = users.exclude(id__in=blocked_user_ids)
+        return users
 
     def get_select2_pills(self, items, text_only=False):
         return get_user_select2_pills(items, text_only=text_only)

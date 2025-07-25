@@ -457,6 +457,12 @@ if getattr(settings, 'COSINNUS_ENABLE_USER_MATCH', True):
         path('user_match_assign/', user_match.match_create_view, name='user-match-match'),
     ]
 
+if getattr(settings, 'COSINNUS_ENABLE_USER_BLOCK', True):
+    urlpatterns += [
+        path('user/<str:username>/block/', profile.user_block_view, name='block-user'),
+        path('user/<str:username>/unblock/', profile.user_unblock_view, name='unblock-user'),
+    ]
+
 if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:
     urlpatterns += [
         path('two_factor_auth/token_login/', authentication.user_otp_token_validation, name='two-factor-auth-token'),
@@ -611,7 +617,8 @@ for url_key in group_model_registry:
             name=prefix + 'group-organization-request-select2',
         ),
         path(f'{url_key}/<str:group>/users/', group.group_user_list, name=prefix + 'group-user-list'),
-        path(f'{url_key}/<str:group>/users/add/', group.group_user_add, name=prefix + 'group-user-add-generic'),
+        # Deprecated
+        # path(f'{url_key}/<str:group>/users/add/', group.group_user_add, name=prefix + 'group-user-add-generic'),
         path(
             f'{url_key}/<str:group>/users/add-multiple/',
             group.group_user_add_multiple,

@@ -41,7 +41,11 @@ from cosinnus.utils.filters import exclude_special_folders
 from cosinnus.utils.functions import is_number, sort_key_strcoll_attr
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.pagination import QuerysetLazyCombiner
-from cosinnus.utils.permissions import check_user_superuser, filter_tagged_object_queryset_for_user
+from cosinnus.utils.permissions import (
+    check_user_superuser,
+    filter_base_taggable_qs_for_blocked_user_content,
+    filter_tagged_object_queryset_for_user,
+)
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
@@ -841,6 +845,9 @@ class TimelineView(ModelRetrievalMixin, View):
             for extra_qs in querysets:
                 combined_qs = combined_qs | extra_qs
             combined_qs = combined_qs.distinct()
+
+        # support for filtering out blocked users' content
+        combined_qs = filter_base_taggable_qs_for_blocked_user_content(combined_qs, self.request.user)
         return combined_qs
 
     def _mix_items_from_querysets(self, *streams):
