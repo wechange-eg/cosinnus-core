@@ -49,6 +49,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, CommaSeparatedSelect2MultipleWidget
+from cosinnus.models import UserBlock
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.group import (
     CosinnusGroup,
@@ -1682,3 +1683,16 @@ def get_forum_group():
     forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
     return forum_group
+
+
+@register.filter
+def filter_comments_for_user(qs, user):
+    """Filters comments of model Comment for BaseTaggableObjects so that comments by users blocked by `user`
+    are excluded."""
+    # support for user blocking, filter out all audience members that have the sending user blocked
+    print('>> filter for', user)
+    if settings.COSINNUS_ENABLE_USER_BLOCK:
+        blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(user)
+        if blocked_user_ids:
+            qs = qs.exclude(creator__id__in=blocked_user_ids)
+    return qs
