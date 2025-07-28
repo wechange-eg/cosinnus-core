@@ -11,6 +11,9 @@ class CosinnusDeckDefaultSettings(AppConf):
     class Meta(object):
         prefix = ''
 
+    # Enable migration of user decks to group boards. Only needed if users could create decks directly in the nc app.
+    COSINNUS_DECK_MIGRATE_USER_DECKS = False
+
     # Default labels created by the Deck app that are be automatically deleted when initializing a group board.
     COSINNUS_DECK_GROUP_BOARD_DELETE_DEFAULT_LABELS = ['Action needed', 'Finished', 'Later', 'To review']
 

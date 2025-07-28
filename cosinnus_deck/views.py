@@ -1,12 +1,15 @@
+import json
+
 from django.contrib import messages
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_ug_admin
-from cosinnus.views.mixins.group import RequireReadMixin, RequireWriteGrouplessMixin
+from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireReadMixin, RequireWriteGrouplessMixin
 from cosinnus_todo.models import TodoEntry
 
 
@@ -73,3 +76,49 @@ class DeckMigrateTodoView(RequireWriteGrouplessMixin, TemplateView):
 
 
 deck_migrate_todo_view = DeckMigrateTodoView.as_view()
+
+
+class DeckMigrateUserDecksView(RequireLoggedInMixin, TemplateView):
+    template_name = 'cosinnus_deck/deck_migrate_user_decks.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DeckMigrateUserDecksView, self).get_context_data(**kwargs)
+        user_admin_groups = [
+            [group.pk, group.name]
+            for group in CosinnusGroup.objects.get_for_user_group_admin(self.request.user)
+            if group.type in [CosinnusGroup.TYPE_PROJECT, CosinnusGroup.TYPE_SOCIETY]
+        ]
+        context['user_admin_groups'] = json.dumps(user_admin_groups)
+        context['migration_in_progress'] = self.request.user.cosinnus_profile.deck_migration_in_progress()
+        return context
+
+
+deck_migrate_user_decks_view = DeckMigrateUserDecksView.as_view()
+
+
+class DeckMigrateUserDecksApiView(RequireLoggedInMixin, View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        migration_data = json.loads(request.body)
+        admin_group_ids = list(CosinnusGroup.objects.get_for_user_group_admin_pks(user))
+        # check group permissions
+        for board_data in migration_data:
+            group_id = board_data['group']
+            if group_id not in admin_group_ids:
+                return HttpResponse(status=403)
+        profile = user.cosinnus_profile
+        if profile.deck_migration_allowed():
+            # start the migration task
+            from cosinnus_deck.integration import DECK_SINGLETON
+
+            profile.deck_migration_set_status(profile.DECK_MIGRATION_STATUS_STARTED)
+            DECK_SINGLETON.do_migrate_user_decks(user, migration_data)
+        return HttpResponse(status=200)
+
+    def get(self, request, *args, **kwargs):
+        status = request.user.cosinnus_profile.deck_migration_status()
+        data = {'status': status}
+        return JsonResponse(data=data)
+
+
+deck_migrate_user_decks_api_view = DeckMigrateUserDecksApiView.as_view()

@@ -421,6 +421,12 @@ class CosinnusGroupManager(models.Manager):
             includeInactive=includeInactive,
         )
 
+    def get_for_user_group_admin(self, user, **kwargs):
+        """
+        :returns: a list of :class:`CosinnusGroup` the given user is a admin of.
+        """
+        return self.get_cached(pks=self.get_for_user_group_admin_pks(user, **kwargs))
+
     def get_deactivated_for_user(self, user):
         """Returns for a user all groups and projects they are admin of that have been deactivated.
         For superusers, returns *all* deactivated groups and projects!
