@@ -1,5 +1,6 @@
 import logging
 
+from django.contrib.auth import get_user_model
 from requests.exceptions import ConnectionError, Timeout
 
 from cosinnus.celery import app as celery_app
@@ -119,6 +120,10 @@ class DeckIntegrationHandler(CosinnusBaseIntegrationHandler):
         """Migrate groups todos to deck."""
         self._do_group_migrate_todo.delay(group.pk)
 
+    def do_migrate_user_decks(self, user, selected_decks):
+        """Migrate user decks to group decks."""
+        self._do_migrate_user_decks.delay(user.pk, selected_decks)
+
     """
     Celery tasks
     """
@@ -156,3 +161,12 @@ class DeckIntegrationHandler(CosinnusBaseIntegrationHandler):
         if group and not group.deck_todo_migration_in_progress():
             deck = DeckConnection()
             deck.group_migrate_todo(group)
+
+    @staticmethod
+    @celery_app.task(base=DeckTask)
+    def _do_migrate_user_decks(user_id, selected_decks):
+        """Migrate user decks to the group boards"""
+        user = get_user_model().objects.filter(pk=user_id).first()
+        if user and not user.cosinnus_profile.deck_migration_in_progress():
+            deck = DeckConnection()
+            deck.migrate_user_decks(user, selected_decks)

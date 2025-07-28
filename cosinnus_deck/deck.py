@@ -6,7 +6,7 @@ import requests
 from django.utils import timezone as django_timezone
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus_cloud.hooks import get_nc_user_id, initialize_nextcloud_for_group
@@ -524,3 +524,203 @@ class DeckConnection:
                 extra={'group': group.id, 'board_id': group.nextcloud_deck_board_id, 'exception': e},
             )
             group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_FAILED)
+
+    def migrate_user_decks(self, user, selected_decks):
+        """
+        Migrate user decks to group decks.
+        @param selected_decks: List of dicts containing board- and group-ids, e.g. [{"board": 1, "group": 2 }, ...].
+        """
+
+        # set migration status
+        user.cosinnus_profile.deck_migration_set_status(user.cosinnus_profile.DECK_MIGRATION_STATUS_IN_PROGRESS)
+        try:
+            for selected_deck in selected_decks:
+                board_id = selected_deck['board']
+                group_id = selected_deck['group']
+
+                # get group
+                group = CosinnusGroup.objects.get(pk=group_id)
+
+                if not group.nextcloud_group_id:
+                    # initialize nextcloud group
+                    initialize_nextcloud_for_group(group, send_initialized_signal=False)
+                    for user in group.actual_members:
+                        add_user_to_group(get_nc_user_id(user), group.nextcloud_group_id)
+
+                if not group.nextcloud_deck_board_id:
+                    # initialize deck
+                    self.group_board_create(group, initialize_board_content=True)
+                group_board_id = group.nextcloud_deck_board_id
+
+                # get group board data
+                response = self._api_get(f'/boards/{group_board_id}')
+                if response.status_code != 200:
+                    raise DeckConnectionException('Get group board failed.')
+                group_board_data = response.json()
+
+                # get existing labels as duplicates are not allowed by the api
+                existing_labels = {label['title']: label['id'] for label in group_board_data.get('labels', [])}
+
+                # get last stack number to add new stacks after it
+                if group_board_data['stacks']:
+                    stack_order = max(stack['order'] for stack in group_board_data['stacks']) + 1
+                else:
+                    stack_order = 1
+
+                # get user board
+                response = self._api_get(f'/boards/{board_id}')
+                if response.status_code != 200:
+                    raise DeckConnectionException('Failed to get user board.')
+                board_data = response.json()
+
+                # add users to group board to be able to assign them to cards before they join the group.
+                group_board_users = [settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, group.nextcloud_group_id]
+                for acl_data in group_board_data['acl']:
+                    if acl_data['participant']['uid'] in group_board_users:
+                        # ignore existing default participants
+                        continue
+                    migrated_acl_data = {
+                        'type': acl_data['type'],
+                        'participant': acl_data['particpant'],
+                        'permissionEdit': False,
+                        'permissionShare': False,
+                        'permissionManage': False,
+                    }
+                    response = self._api_post(f'/boards/{group_board_id}/acl', data=migrated_acl_data)
+                    if response.status_code != 200:
+                        raise DeckConnectionException('Acl migration failed.')
+
+                # migrate labels, save label ids in dict to be used in assignment
+                labels = existing_labels.copy()
+                for label_data in board_data['labels']:
+                    if label_data['title'] in existing_labels.keys():
+                        continue
+                    migrated_label_data = {'title': label_data['title'], 'color': label_data['color']}
+                    response = self._api_post(f'/boards/{group_board_id}/labels', data=migrated_label_data)
+                    if response.status_code != 200:
+                        raise DeckConnectionException('Label migration failed.')
+                    migrated_label_data = response.json()
+                    labels[migrated_label_data['title']] = migrated_label_data['id']
+
+                # migrate stacks and cards
+                response = self.stack_list(group_board_id=board_id)
+                if response.status_code != 200:
+                    raise DeckConnectionException('Failed to get stacks.')
+                stacks_data = response.json()
+                for stack_data in stacks_data:
+                    # migrate stack
+                    migrated_stack_data = {'title': stack_data['title'], 'order': stack_order}
+                    stack_order += 1
+                    response = self._api_post(f'/boards/{group_board_id}/stacks', data=migrated_stack_data)
+                    if response.status_code != 200:
+                        raise DeckConnectionException('Stack migration failed.')
+                    migrated_stack_data = response.json()
+                    migrated_stack_id = migrated_stack_data['id']
+
+                    for card_data in stack_data.get('cards', []):
+                        card_id = card_data['id']
+
+                        # Get attachments (attachment API did not return any files, falling back to the FE url).
+                        # There is no way to migrate attachments, so we just add links to the files to the description.
+                        attachment_list = ''
+                        attachment_url = (
+                            f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/apps/deck/cards/{card_id}/attachments'
+                        )
+                        response = requests.get(attachment_url, **self._api_params)
+                        if response.status_code != 200:
+                            raise DeckConnectionException('Get attachments failed.')
+                        attachments_data = response.json()
+                        if attachments_data:
+                            attachment_list = '\n\nAttachments:\n\n'
+                            for attachment_data in attachments_data:
+                                fileid = attachment_data.get('extendedData', {}).get('fileid')
+                                filename = attachment_data.get('data')
+                                if fileid and filename:
+                                    attachment_list += (
+                                        f'- [{filename}]({settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/f/{fileid})'
+                                    )
+
+                        # append attachments to description
+                        description = card_data.get('description', '')
+                        if attachment_list:
+                            description += attachment_list
+
+                        # convert description to html
+                        if description:
+                            description = textfield(description)
+
+                        migrated_card_data = {
+                            'title': card_data['title'],
+                            'order': card_data['order'],
+                            'description': description,
+                            'duedate': card_data['duedate'],
+                        }
+                        response = self._api_post(
+                            f'/boards/{group_board_id}/stacks/{migrated_stack_id}/cards', data=migrated_card_data
+                        )
+                        if response.status_code != 200:
+                            raise DeckConnectionException('Label migration failed.')
+                        migrated_card_data = response.json()
+                        migrated_card_id = migrated_card_data['id']
+
+                        # set done (does not work in the initial create post)
+                        if card_data['done']:
+                            migrated_card_data['done'] = card_data['done']
+                            response = self._api_put(
+                                f'/boards/{group_board_id}/stacks/{migrated_stack_id}/cards/{migrated_card_id}',
+                                data=migrated_card_data,
+                            )
+                            if response.status_code != 200:
+                                raise DeckConnectionException('Setting card as done failed.')
+
+                        # assign users
+                        for assigned_user_data in card_data['assignedUsers']:
+                            migrate_assigned_user_data = {'userId': assigned_user_data['participant']['uid']}
+                            response = self._api_put(
+                                f'/boards/{group_board_id}/stacks/{migrated_stack_id}/cards/{migrated_card_id}/assignUser',
+                                data=migrate_assigned_user_data,
+                            )
+                            if response.status_code != 200:
+                                raise DeckConnectionException('Assigned user migration failed.')
+
+                        # migrate card label
+                        for label_data in card_data.get('labels', []):
+                            migrated_label_data = {'labelId': labels[label_data['title']]}
+                            response = self._api_put(
+                                f'/boards/{group_board_id}/stacks/{migrated_stack_id}/cards/{migrated_card_id}/assignLabel',
+                                data=migrated_label_data,
+                            )
+                            if response.status_code != 200:
+                                raise DeckConnectionException('Card label migration failed.')
+
+                        # migrate comments (not part of the deck api)
+                        comments_url = (
+                            f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}'
+                            f'/ocs/v2.php/apps/deck/api/v1.0/cards/{card_id}/comments'
+                        )
+                        migrated_comments_url = (
+                            f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}'
+                            f'/ocs/v2.php/apps/deck/api/v1.0/cards/{migrated_card_id}/comments'
+                        )
+                        response = requests.get(comments_url, **self._api_params)
+                        if response.status_code != 200:
+                            raise DeckConnectionException('Get card comments failed.')
+                        comments_data = response.json()
+                        for comment_data in reversed(comments_data['ocs']['data']):
+                            comment_user = comment_data['actorDisplayName']
+                            comment_message = comment_data['message']
+                            migrated_comment_data = {'message': f'{comment_user}: {comment_message}'}
+                            response = requests.post(
+                                migrated_comments_url, json=migrated_comment_data, **self._api_params
+                            )
+                            if response.status_code != 200:
+                                raise DeckConnectionException('Migrating card comments failed.')
+
+            # set migration status
+            user.cosinnus_profile.deck_migration_set_status(user.cosinnus_profile.DECK_MIGRATION_STATUS_SUCCESS)
+        except Exception as e:
+            logger.warning(
+                'Deck: User deck migration failed!',
+                extra={'user': user.id, 'selected_decks': selected_decks, 'exception': e},
+            )
+            user.cosinnus_profile.deck_migration_set_status(user.cosinnus_profile.DECK_MIGRATION_STATUS_FAILED)
