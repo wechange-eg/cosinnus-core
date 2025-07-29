@@ -496,6 +496,7 @@ class CosinnusConf(AppConf):
     GROUP_APPS_WIDGETS_MICROSITE_DISABLED = [
         'cosinnus_cloud',
         'cosinnus_message',
+        'cosinnus_deck',
     ]
 
     # a map of class dropins for the typed group trans classes
@@ -1263,6 +1264,7 @@ class CosinnusConf(AppConf):
     CLOUD_USER_PROFILE_EMAIL_FUNC = None
 
     # whether to enable the cosinnus deck app
+    # Note: COSINNUS_CLOUD_ENABLED must also be set, as the deck app depends on the cloud integration.
     DECK_ENABLED = False
 
     # if set to a hex color string,

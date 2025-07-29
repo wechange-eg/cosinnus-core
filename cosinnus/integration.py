@@ -201,7 +201,7 @@ class CosinnusBaseIntegrationHandler:
     Groups integration
     """
 
-    def _is_integrated_group(self, group):
+    def _is_group_type_integrated(self, group):
         """Check the group type for CosinnusGroup signals."""
         return group.type in self._integrated_group_types
 
@@ -209,13 +209,13 @@ class CosinnusBaseIntegrationHandler:
         """Check if the integrated app is enabled in the group."""
         return self._app_name not in group.get_deactivated_apps()
 
-    def is_app_enabled_for_group(self, group):
+    def is_app_integrated_in_group(self, group):
         """Check if the group type is integrated and the app enabled."""
-        return self._is_integrated_group(group) and self._is_app_enabled_for_group(group)
+        return self._is_group_type_integrated(group) and self._is_app_enabled_for_group(group)
 
     def _handle_group_created(self, sender, instance, created, **kwargs):
         """Group create hook."""
-        if created and self._is_integrated_group(instance):
+        if created and self._is_group_type_integrated(instance):
             self.do_group_create(instance)
 
     def do_group_create(self, group):
@@ -226,7 +226,7 @@ class CosinnusBaseIntegrationHandler:
         """Group update hook."""
         if instance.pk is not None:
             instance = ensure_group_type(instance)
-            if self._is_integrated_group(instance) and self._has_instance_changed(instance):
+            if self._is_group_type_integrated(instance) and self._has_instance_changed(instance):
                 self.do_group_update(instance)
 
     def do_group_update(self, group):
@@ -235,7 +235,7 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_group_deleted(self, sender, instance, **kwargs):
         """Group delete hook."""
-        if self._is_integrated_group(instance):
+        if self._is_group_type_integrated(instance):
             self.do_group_delete(instance)
 
     def do_group_delete(self, group):
@@ -244,7 +244,7 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_group_activated(self, sender, group, **kwargs):
         """Group (re-)activation hook."""
-        if self._is_integrated_group(group):
+        if self._is_group_type_integrated(group):
             self.do_group_activate(group)
 
     def do_group_activate(self, group):
@@ -253,7 +253,7 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_group_deactivated(self, sender, group, **kwargs):
         """Group deactivation hook."""
-        if self._is_integrated_group(group):
+        if self._is_group_type_integrated(group):
             self.do_group_deactivate(group)
 
     def do_group_deactivate(self, group):
@@ -262,7 +262,7 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_group_apps_activated(self, sender, group, apps, **kwargs):
         """Group apps activation hook."""
-        if self._is_integrated_group(group) and self._app_name in apps:
+        if self._is_group_type_integrated(group) and self._app_name in apps:
             self.do_group_app_activate(group)
 
     def do_group_app_activate(self, group):
@@ -271,7 +271,7 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_group_apps_deactivated(self, sender, group, apps, **kwargs):
         """Group apps deactivation hook."""
-        if self._is_integrated_group(group) and self._app_name in apps:
+        if self._is_group_type_integrated(group) and self._app_name in apps:
             self.do_group_app_deactivate(group)
 
     def do_group_app_deactivate(self, group):

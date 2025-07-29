@@ -421,6 +421,12 @@ class CosinnusGroupManager(models.Manager):
             includeInactive=includeInactive,
         )
 
+    def get_for_user_group_admin(self, user, **kwargs):
+        """
+        :returns: a list of :class:`CosinnusGroup` the given user is a admin of.
+        """
+        return self.get_cached(pks=self.get_for_user_group_admin_pks(user, **kwargs))
+
     def get_deactivated_for_user(self, user):
         """Returns for a user all groups and projects they are admin of that have been deactivated.
         For superusers, returns *all* deactivated groups and projects!
@@ -2060,6 +2066,34 @@ class CosinnusBaseGroup(
         type(self).objects.filter(pk=self.pk).update(settings=self.settings)
         # group-cache must be cleared for the change to take effect
         self.clear_cache()
+
+    # deck todos migration status definition
+    DECK_TODO_MIGRATION_STATUS_STARTED = 'started'
+    DECK_TODO_MIGRATION_STATUS_IN_PROGRESS = 'in_progress'
+    DECK_TODO_MIGRATION_STATUS_SUCCESS = 'success'
+    DECK_TODO_MIGRATION_STATUS_FAILED = 'failed'
+
+    def deck_todo_migration_set_status(self, status):
+        """Set the todos to deck migration status."""
+        self.refresh_from_db()
+        self.settings.update({'deck_todo_migration_status': status})
+        self.save(update_fields=['settings'])
+
+    def deck_todo_migration_status(self):
+        """Get the todos to deck migration status."""
+        return self.settings.get('deck_todo_migration_status')
+
+    def deck_todo_migration_allowed(self):
+        """
+        Check if the todos migration can be started.
+        The migration is allowed if it has not already started or if it has finished with an error.
+        """
+        status = self.deck_todo_migration_status()
+        return status is None or status == self.DECK_TODO_MIGRATION_STATUS_FAILED
+
+    def deck_todo_migration_in_progress(self):
+        """Check if the migration is in progress."""
+        return self.deck_todo_migration_status() == self.DECK_TODO_MIGRATION_STATUS_IN_PROGRESS
 
 
 class CosinnusGroup(CosinnusBaseGroup):

@@ -49,7 +49,7 @@ from cosinnus.utils.permissions import (
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
-from cosinnus.views.ui_prefs import get_ui_prefs_for_user
+from cosinnus.views.ui_prefs import UI_PREF_DASHBOARD_DECK_MIGRATION_DONE, get_ui_prefs_for_user
 
 logger = logging.getLogger('cosinnus')
 
@@ -106,8 +106,9 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
         )
         welcome_screen_enabled = getattr(settings, 'COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_ENABLED', True)
 
+        ui_prefs = get_ui_prefs_for_user(user)
         options = {
-            'ui_prefs': get_ui_prefs_for_user(user),
+            'ui_prefs': ui_prefs,
             'force_only_mine': getattr(settings, 'COSINNUS_USERDASHBOARD_FORCE_ONLY_MINE', False)
             or getattr(settings, 'COSINNUS_FORUM_DISABLED', False),
         }
@@ -146,6 +147,8 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
                 (appl.conference, appl.get_icon()) for appl in user.user_applications.pending_current()
             ]
             ctx['my_upcoming_conferences_with_icons'] = my_pending_conference_applications + my_current_conferences
+        if settings.COSINNUS_DECK_ENABLED and settings.COSINNUS_DECK_MIGRATE_USER_DECKS:
+            ctx['deck_migration_done'] = ui_prefs.get(UI_PREF_DASHBOARD_DECK_MIGRATION_DONE, False)
         return ctx
 
 

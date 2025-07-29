@@ -677,6 +677,34 @@ class BaseUserProfile(
             objects.append(obj)
         return objects
 
+    # user deck migration status definition
+    DECK_MIGRATION_STATUS_STARTED = 'started'
+    DECK_MIGRATION_STATUS_IN_PROGRESS = 'in_progress'
+    DECK_MIGRATION_STATUS_SUCCESS = 'success'
+    DECK_MIGRATION_STATUS_FAILED = 'failed'
+
+    def deck_migration_set_status(self, status):
+        """Set the user deck migration status."""
+        self.refresh_from_db()
+        self.settings.update({'deck_migration_status': status})
+        self.save(update_fields=['settings'])
+
+    def deck_migration_status(self):
+        """Get the user deck migration status."""
+        return self.settings.get('deck_migration_status')
+
+    def deck_migration_allowed(self):
+        """
+        Check if the user deck migration can be started.
+        The migration is allowed if it has not already started or if it has finished with an error.
+        """
+        status = self.deck_migration_status()
+        return status is None or status in [self.DECK_MIGRATION_STATUS_FAILED, self.DECK_MIGRATION_STATUS_SUCCESS]
+
+    def deck_migration_in_progress(self):
+        """Check if the migration is in progress."""
+        return self.deck_migration_status() == self.DECK_MIGRATION_STATUS_IN_PROGRESS
+
 
 class UserProfile(BaseUserProfile):
     """Default implementation of the `BaseUserProfile`."""
