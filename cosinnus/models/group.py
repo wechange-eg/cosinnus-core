@@ -1525,13 +1525,23 @@ class CosinnusBaseGroup(
 
     @property
     def group_can_access_recorded_meetings(self):
-        """Check if the recorded meetings page should be shown and be accessible for this group, due to having
-        BBB enabled (and being premium if this portal requires ist) or being a conference."""
+        """
+        Returns True if this group may have BBB recordings associated with it.
+        This is determined by the flag `may_have_bbb_recordings` in `group.settings`, which is set when meetings are
+        created where recording is actually possible.
+
+        Returns True also, if this group is a conference or the group-specific BBB-room is enabled
+
+        Note: The current setting for this groups premium-state is ignored here,
+        so that created recordings remain accessible, regardless of how the settings are changed later.
+        """
         if self.group_is_conference:
             return True
         if self.group_is_bbb_enabled:
             return True
         if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and 'premium_features_expired_on' in self.settings:
+            return True
+        if self.settings.get('may_have_bbb_recordings', False):
             return True
         return False
 
@@ -2032,6 +2042,24 @@ class CosinnusBaseGroup(
                         'token': self.settings.get('invite_token', None),
                     },
                 )
+
+    def set_may_have_bbb_recordings(self):
+        """
+        Saves a flag, that this group may have bbb recordings associated with it.
+
+        This flag is used by `group_can_access_recorded_meetings()` to determine if
+        the list of available recordings should be shown.
+        """
+
+        # do nothing if it is already set True
+        if self.settings.get('may_have_bbb_recordings', False):
+            return
+
+        self.settings.update({'may_have_bbb_recordings': True})
+        # update DB directly to avoid signals
+        type(self).objects.filter(pk=self.pk).update(settings=self.settings)
+        # group-cache must be cleared for the change to take effect
+        self.clear_cache()
 
 
 class CosinnusGroup(CosinnusBaseGroup):
