@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('cosinnus_deck', '0001_initial'),
-        ('cosinnus', '0155_tagobject_add_migrated'),
+        ('cosinnus', '0156_tagobject_add_migrated'),
     ]
 
     operations = [

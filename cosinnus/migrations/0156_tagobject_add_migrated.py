@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cosinnus', '0154_cosinnusgroup_add_nextcloud_deck_board_id'),
+        ('cosinnus', '0155_cosinnusconference_alter_cosinnusmanagedtag_options_and_more'),
     ]
 
     operations = [
