@@ -6,7 +6,6 @@ from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.core.exceptions import ImproperlyConfigured
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -322,7 +321,9 @@ class BBBRoom(models.Model):
         """Attempts to find the source object for this BBBRoom, i.e. the
         Model instance with the media_tag attached that this BBBRoom is attached to.
         That instance should also have a CosinnusConferenceSettings attached.
-        Note: if other event types can carry BBBRooms, replace the `ConferenceEvent` here!"""
+        Note: if other event types can carry BBBRooms, replace the `ConferenceEvent` here!
+
+        :returns: the source object or `None` if no supported source object was found."""
         if self._source_obj == '__unset__':
             # try Conference Event
             from cosinnus_event.models import ConferenceEvent  # noqa
@@ -348,8 +349,12 @@ class BBBRoom(models.Model):
             if self._source_obj:
                 return self._source_obj
 
-            if settings.DEBUG:
-                raise ImproperlyConfigured('NYI: This bbb room source object type for BBBRooms is not yet supported!')
+            logger.error(
+                (
+                    f'No supported source object found for BBBRoom "{self}". '
+                    'Maybe it got deleted? This should have been caught elsewhere! Exceptions will follow...'
+                )
+            )
             self._source_obj = None
         return self._source_obj
 
