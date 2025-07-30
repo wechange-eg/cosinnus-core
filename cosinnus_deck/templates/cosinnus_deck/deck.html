@@ -6,5 +6,13 @@
 {% block content %}
     {% if group.nextcloud_deck_board_id %}
         <div id="deck-group-root" data-board-id="{{ group.nextcloud_deck_board_id }}"></div>
+    {% else %}
+        <p class="textfield transparent">
+            {% trans "The task-board creation is in progress..." %}
+        </p>
+        {% comment %} Refresh every 10 seconds {% endcomment %}
+        <script type="text/javascript">
+            setTimeout(function () { location.reload(); }, 10000);
+        </script>
     {% endif %}
 {% endblock content %}
