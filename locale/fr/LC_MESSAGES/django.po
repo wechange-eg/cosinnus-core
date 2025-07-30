@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:37+0200\n"
+"POT-Creation-Date: 2025-07-30 18:58+0200\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1805,11 +1805,6 @@ msgstr "Nom du dossier du groupe Nextcloud"
 msgid "Nextcloud Groupfolder ID"
 msgstr "ID du dossier du groupe Nextcloud"
 
-#, fuzzy
-#| msgid "Nextcloud Group ID"
-msgid "Nextcloud Deck Board ID"
-msgstr "Id du groupe Nextcloud"
-
 msgid "Is conference"
 msgstr "Est la conférence"
 
@@ -2157,6 +2152,16 @@ msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+#| msgid "User token"
+msgid "User-Block"
+msgstr "Jeton utilisateur"
+
+#, fuzzy
+#| msgid "Users"
+msgid "User-Blocks"
+msgstr "Utilisateurs"
 
 msgid "Date"
 msgstr "Date"
@@ -7351,6 +7356,19 @@ msgstr "Profil de l'utilisateur : %(username)s"
 msgid "(ADMIN) View in Admin"
 msgstr ""
 
+msgid "Unblock user"
+msgstr ""
+
+#, fuzzy
+#| msgid "All users"
+msgid "Block user"
+msgstr "Tous les utilisateurs"
+
+#, fuzzy
+#| msgid "You are following this content or its Project or Group"
+msgid "You are blocking this user. Their content will not be visible to you."
+msgstr "Tu suis ce contenu ou son Projet ou Groupe"
+
 msgid "Cooperation requests"
 msgstr "Demandes de coopération"
 
@@ -9081,6 +9099,9 @@ msgstr "Cette action n'est pas disponible directement !"
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
 msgstr "Tu as demandé à rejoindre %(team_type)s “%(team_name)s”. Tu recevras un e-mail dès qu'un admin répond à ta demande."
 
+msgid "You cannot request to be member of this group because at least one admin is blocking you."
+msgstr ""
+
 #, python-format
 msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
 msgstr "Tu as déjà été invité à rejoindre \"%(team_name)s\" et tu viens d'en devenir membre !"
@@ -9123,6 +9144,10 @@ msgstr "Les utilisateurs suivants ont été invités à présenter une demande :
 
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Tous les membres des groupes/projets que tu as sélectionnés avaient déjà été invités ou ont déjà présenté une demande. Aucune nouvelle invitation n’a été envoyée."
+
+#, python-format
+msgid "Could not invite user \"%(user)s\" because they are blocking you."
+msgstr ""
 
 #, fuzzy, python-format
 msgid "Invited user \"%(user)s\"."
@@ -9285,6 +9310,9 @@ msgstr "Il y a eu une erreur pendant la création de ton avatar. Assure-toi d'av
 msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
 msgstr "Il y a eu une erreur pendant la création de ton avatar. Le fichier image est peut-être endommagé ou le transfert du fichier a été interrompu."
 
+msgid "You cannot do this because this user is blocking you."
+msgstr ""
+
 msgid "<Root folder>"
 msgstr "<Fichier racine>"
 
@@ -9357,6 +9385,30 @@ msgstr ""
 #, fuzzy
 msgid "Information about the deletion of your user account"
 msgstr "Tu es sur le point de supprimer ton compte utilisateur du site !"
+
+#, fuzzy
+msgid "The user was not found."
+msgstr "Il n'y a pas de groupes."
+
+#, fuzzy, python-format
+#| msgid "User was not created"
+msgid "User %s is now blocked."
+msgstr "L'utilisateur n'a pas été créé"
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error blocking user %s."
+msgstr "Une erreur est survenue lors du chargement du widget"
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "User %s is no longer blocked."
+msgstr "L'utilisateur %(username)s n'est plus membre."
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error unblocking user %s."
+msgstr "Une erreur est survenue lors du chargement du widget"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "Désolé, nous n'avons pas pu connecter ton compte en raison d'une erreur interne. Contacte un admin du système !"
@@ -9731,21 +9783,6 @@ msgstr "Statut"
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "Cette fonction n’est pas activée pour cette conférence."
-
-#, fuzzy
-#| msgid "Dashboard"
-msgid "Task-Board"
-msgstr "Tableau de bord"
-
-msgctxt "the_app"
-msgid "deck"
-msgstr ""
-
-msgid "The task-board creation is in progress..."
-msgstr ""
-
-msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
-msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "Les pads suivants ont été réinitialisés :"
@@ -14323,6 +14360,16 @@ msgstr "Veux-tu vraiment supprimer cette équipe ?"
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "Veux-tu vraiment supprimer cette équipe ?"
+
+#, fuzzy
+#~| msgid "Nextcloud Group ID"
+#~ msgid "Nextcloud Deck Board ID"
+#~ msgstr "Id du groupe Nextcloud"
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Task-Board"
+#~ msgstr "Tableau de bord"
 
 #~ msgid "In my Cloud Files"
 #~ msgstr "Dans mes fichiers Cloud"

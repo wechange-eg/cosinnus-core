@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:37+0200\n"
+"POT-Creation-Date: 2025-07-30 18:58+0200\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1808,11 +1808,6 @@ msgstr "שם תיקיית קבוצת Nextcloud"
 msgid "Nextcloud Groupfolder ID"
 msgstr "מזהה תיקיית קבוצת Nextcloud"
 
-#, fuzzy
-#| msgid "Nextcloud Group ID"
-msgid "Nextcloud Deck Board ID"
-msgstr "מזהה קבוצת Nextcloud"
-
 msgid "Is conference"
 msgstr "היא וועידה"
 
@@ -2160,6 +2155,16 @@ msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+#| msgid "User token"
+msgid "User-Block"
+msgstr "אסימון משתמש"
+
+#, fuzzy
+#| msgid "Users"
+msgid "User-Blocks"
+msgstr "משתמשים"
 
 msgid "Date"
 msgstr "תאריך"
@@ -7353,6 +7358,19 @@ msgstr "פרופיל משתמש: %(username)s"
 msgid "(ADMIN) View in Admin"
 msgstr ""
 
+msgid "Unblock user"
+msgstr ""
+
+#, fuzzy
+#| msgid "All users"
+msgid "Block user"
+msgstr "כל המשתמשים"
+
+#, fuzzy
+#| msgid "You are following this content or its Project or Group"
+msgid "You are blocking this user. Their content will not be visible to you."
+msgstr "אתם עוקבים אחר תוכן זה או הפרויקט או הקבוצה שלו"
+
 msgid "Cooperation requests"
 msgstr "בקשות לשיתוף פעולה"
 
@@ -9078,6 +9096,9 @@ msgstr "פעולה זו אינה זמינה ישירות!"
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
 msgstr "ביקשת להצטרף ל-%(team_type)s “%(team_name)s”. אתה תקבל הודעת דואר אלקטרוני ברגע שמנהל צוות יגיב לבקשתך."
 
+msgid "You cannot request to be member of this group because at least one admin is blocking you."
+msgstr ""
+
 #, python-format
 msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
 msgstr "כבר הוזמנת ל-\"%(team_name)s\" וכעת הפכת לחבר באופן מיידי!"
@@ -9120,6 +9141,10 @@ msgstr "המשתמשים הבאים הוזמנו להגיש בקשה: %s"
 
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "כל החברים בקבוצות/פרוייקטים שבחרת כבר הוזמנו או שכבר הוחלו. לא נשלחו הזמנות חדשות."
+
+#, python-format
+msgid "Could not invite user \"%(user)s\" because they are blocking you."
+msgstr ""
 
 #, fuzzy, python-format
 msgid "Invited user \"%(user)s\"."
@@ -9283,6 +9308,9 @@ msgstr "אירעה שגיאה בעת עיבוד האווטאר שלך. נא וד
 msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
 msgstr "אירעה שגיאה בעת עיבוד האווטאר שלך. ייתכן שקובץ התמונה אינו שלם או שהעברת הקובץ הופסקה באמצע."
 
+msgid "You cannot do this because this user is blocking you."
+msgstr ""
+
 msgid "<Root folder>"
 msgstr "<Root folder>"
 
@@ -9355,6 +9383,30 @@ msgstr ""
 #, fuzzy
 msgid "Information about the deletion of your user account"
 msgstr "אתה עומד למחוק את חשבון המשתמש שלך מהאתר!"
+
+#, fuzzy
+msgid "The user was not found."
+msgstr "אין קבוצות."
+
+#, fuzzy, python-format
+#| msgid "User was not created"
+msgid "User %s is now blocked."
+msgstr "המשתמש לא נוצר"
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error blocking user %s."
+msgstr "אירעה שגיאה בטעינת היישומון"
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "User %s is no longer blocked."
+msgstr "המשתמש \"%(username)s\" אינו חבר יותר."
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error unblocking user %s."
+msgstr "אירעה שגיאה בטעינת היישומון"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "מצטערים, לא היתה אפשרות לחבר את חשבון המשתמש שלך עקב שגיאה פנימית. נא פנה למנהל מערכת!"
@@ -9729,21 +9781,6 @@ msgstr "מצב"
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "פונקציה זו אינה זמינה עבור ועידה זו."
-
-#, fuzzy
-#| msgid "Dashboard"
-msgid "Task-Board"
-msgstr "לוח כלים"
-
-msgctxt "the_app"
-msgid "deck"
-msgstr ""
-
-msgid "The task-board creation is in progress..."
-msgstr ""
-
-msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
-msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "הפנקסים הבאים אותחלו מחדש:"
@@ -14323,6 +14360,16 @@ msgstr "האם אתה בטוח שברצונך למחוק צוות זה?"
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "האם אתה בטוח שברצונך למחוק צוות זה?"
+
+#, fuzzy
+#~| msgid "Nextcloud Group ID"
+#~ msgid "Nextcloud Deck Board ID"
+#~ msgstr "מזהה קבוצת Nextcloud"
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Task-Board"
+#~ msgstr "לוח כלים"
 
 #~ msgid "In my Cloud Files"
 #~ msgstr "בקבצי הענן שלי"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:37+0200\n"
+"POT-Creation-Date: 2025-07-30 18:58+0200\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1804,11 +1804,6 @@ msgstr "Όνομα Nextcloud Groupfolder"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Ταυτότητα Nextcloud Groupfolder"
 
-#, fuzzy
-#| msgid "Nextcloud Group ID"
-msgid "Nextcloud Deck Board ID"
-msgstr "Ταυτότητα Ομάδας Nextcloud"
-
 msgid "Is conference"
 msgstr "Είναι σύσκεψη"
 
@@ -2156,6 +2151,16 @@ msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+#| msgid "User token"
+msgid "User-Block"
+msgstr "Διακριτικό Χρήστη"
+
+#, fuzzy
+#| msgid "Users"
+msgid "User-Blocks"
+msgstr "Χρήστες"
 
 msgid "Date"
 msgstr "Ημερομηνία"
@@ -7343,6 +7348,19 @@ msgstr "Προφίλ χρήστη: %(username)s"
 msgid "(ADMIN) View in Admin"
 msgstr ""
 
+msgid "Unblock user"
+msgstr ""
+
+#, fuzzy
+#| msgid "All users"
+msgid "Block user"
+msgstr "Όλοι οι χρήστες"
+
+#, fuzzy
+#| msgid "You are following this content or its Project or Group"
+msgid "You are blocking this user. Their content will not be visible to you."
+msgstr "Ακολουθείτε αυτό το περιεχόμενο ή το Έργο ή την Ομάδα του"
+
 msgid "Cooperation requests"
 msgstr "Αιτήματα συνεργασίας"
 
@@ -9066,6 +9084,9 @@ msgstr "Αυτή η ενέργεια δεν είναι άμεσα διαθέσι
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
 msgstr "Έχετε ζητήσει να συμμετάσχετε σε %(team_type)s “%(team_name)s”. Θα λάβετε ένα email μόλις ο διαχειριστής της ομάδας απαντήσει στο αίτημά σας."
 
+msgid "You cannot request to be member of this group because at least one admin is blocking you."
+msgstr ""
+
 #, python-format
 msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
 msgstr "Έχετε ήδη προσκληθεί σε \"%(team_name)s\" και έχετε τώρα γίνει μέλος άμεσα!"
@@ -9108,6 +9129,10 @@ msgstr "Οι παρακάτω χρήστες προσκλήθηκαν να υπ�
 
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Όλα τα μέλη των ομάδων/έργων που επιλέξατε έχουν ήδη προσκληθεί ή έχουν ήδη απαντήσει. Δεν έχουν σταλεί νέες προσκλήσεις."
+
+#, python-format
+msgid "Could not invite user \"%(user)s\" because they are blocking you."
+msgstr ""
 
 #, fuzzy, python-format
 msgid "Invited user \"%(user)s\"."
@@ -9271,6 +9296,9 @@ msgstr "Υπήρξε ένα σφάλμα κατά την επεξεργασία 
 msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
 msgstr "Υπήρξε ένα σφάλμα κατά την επεξεργασία του avatar σας. Το αρχείο εικόνας μπορεί να είναι σπασμένο ή η μεταφορά αρχείου να διακόπηκε."
 
+msgid "You cannot do this because this user is blocking you."
+msgstr ""
+
 msgid "<Root folder>"
 msgstr "<Βασικός φάκελος>"
 
@@ -9343,6 +9371,30 @@ msgstr ""
 #, fuzzy
 msgid "Information about the deletion of your user account"
 msgstr "Πρόκειται να διαγράψετε τον λογαριασμό χρήστη σας από τον ιστότοπο!"
+
+#, fuzzy
+msgid "The user was not found."
+msgstr "Δεν υπάρχουν ομάδες."
+
+#, fuzzy, python-format
+#| msgid "User was not created"
+msgid "User %s is now blocked."
+msgstr "Δεν δημιουργήθηκε χρήστης"
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error blocking user %s."
+msgstr "Υπήρξε σφάλμα κατά τη φόρτωση του widget"
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "User %s is no longer blocked."
+msgstr "Ο χρήστης \"%(username)s\" δεν είναι πλέον μέλος."
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error unblocking user %s."
+msgstr "Υπήρξε σφάλμα κατά τη φόρτωση του widget"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "Λυπούμαστε, δεν μπορέσαμε να συνδέσουμε τον λογαριασμό χρήστη σας λόγω ενός εσωτερικού σφάλματος. Παρακαλούμε επικοινωνήστε με τον διαχειριστή του συστήματος!"
@@ -9717,21 +9769,6 @@ msgstr "Κατάσταση"
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "Η συγκεκριμένη λειτουργία δεν έχει ενεργοποιηθεί για αυτή τη σύσκεψη."
-
-#, fuzzy
-#| msgid "Dashboard"
-msgid "Task-Board"
-msgstr "Πίνακας"
-
-msgctxt "the_app"
-msgid "deck"
-msgstr ""
-
-msgid "The task-board creation is in progress..."
-msgstr ""
-
-msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
-msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "Τα παρακάτω Pad επανεκκινήθηκαν εκ νέου:"
@@ -14312,6 +14349,16 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την ομάδα;"
+
+#, fuzzy
+#~| msgid "Nextcloud Group ID"
+#~ msgid "Nextcloud Deck Board ID"
+#~ msgstr "Ταυτότητα Ομάδας Nextcloud"
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Task-Board"
+#~ msgstr "Πίνακας"
 
 #~ msgid "In my Cloud Files"
 #~ msgstr "Στα Αρχεία Cloud"
