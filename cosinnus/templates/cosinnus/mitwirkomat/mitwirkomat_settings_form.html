@@ -125,7 +125,7 @@
             {# Questions fieldset #}
             {% trans "Please choose the answers that best fit you." as questions_label %}
             {% captureas questions_legend %}{{ group.trans.MITWIRKOMAT_FIELD_QUESTIONS_LEGEND }}{% endcaptureas %}
-            {% include 'cosinnus/fields/inlineform_field.html' with inline_form=questions_formset label=questions_label legend=questions_legend content_template='cosinnus/mitwirkomat/mitwirkomat_questions_inline.html' unique_id='questions' alternate_field_class=" " %}
+            {% include 'cosinnus/fields/inlineform_field.html' with inline_form=questions_formset label=questions_label legend=questions_legend legend_class="v-spacer-l-important" content_template='cosinnus/mitwirkomat/mitwirkomat_questions_inline.html' unique_id='questions' alternate_field_class=" " %}
 
             <hr style="margin: 10px 0 16px 0;"/>
 

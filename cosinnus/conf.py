@@ -1060,6 +1060,9 @@ class CosinnusConf(AppConf):
     # Label for the link of the brand / home button in the main navigation. If set to None "About PORTALNAME" is used.
     V3_MENU_HOME_LINK_LABEL = None
 
+    # if set, V3_MENU_HOME_LINK is only used for the "About" link, but this is instead used for the top let button
+    V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE = None
+
     # Header label of the top left menu für the community space
     # default if None: "PORTALNAME Community"
     V3_COMMUNITY_HEADER_CUSTOM_LABEL = None

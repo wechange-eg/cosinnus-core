@@ -143,10 +143,10 @@ class CosinnusBaseIntegrationHandler:
         """User login handler."""
         pass  # Implement me
 
-    def _handle_user_password_changed(self, sender, instance, **kwargs):
+    def _handle_user_password_changed(self, sender, user, **kwargs):
         """Password changed hook triggering the user logout hook."""
-        if self._is_integrated_user(instance):
-            self.do_user_logout(instance)
+        if self._is_integrated_user(user):
+            self.do_user_logout(user)
 
     def do_user_logout(self, user):
         """User logout hook."""
