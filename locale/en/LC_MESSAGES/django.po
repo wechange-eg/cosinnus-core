@@ -9690,7 +9690,7 @@ msgstr ""
 msgid "Start the migration of Todos to the Task-Board in the background."
 msgstr ""
 
-msgid "The Todo app will be automatically deactivated is finished."
+msgid "The Todo app will be automatically deactivated when finished."
 msgstr ""
 
 msgid "Migration is in progress..."

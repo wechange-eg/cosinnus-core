@@ -66,139 +66,141 @@
         </div>
     </div>
     <script>
-        const doNotMigrateLabel = '{% trans "Do not migrate" %}'
-        const migrationInProgress = '{{ migration_in_progress }}' === 'True'
-        const csrftoken = Cosinnus.getCookie('csrftoken')
-        const userGroups = {{ user_admin_groups|safe }}
-        const ncAdmin = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME }}'
-        const ncUrl = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}'
-        let userBoards = null
-        let ncToken = null
-        let selectedUserBoards = []
-        let statusUpdateInterval = null
-        function isUserBoard(board) {
-            /* Filter for user boards where the user has manage and share permissions. */
-            return board.owner.uid !== ncAdmin && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE
-        }
-        async function getUserBoards() {
-            /* Get the user boards. */
-            try {
-                await fetch(`${ncUrl}/login`, { credentials: "include", mode: "no-cors" })
-                ncToken = await fetch(
-                    `${ncUrl}/csrftoken`, {credentials: "include"}
-                ).then(r => r.json()).then(r => r.token);
-                let boards = await fetch(`${ncUrl}/apps/deck/boards?requesttoken=${encodeURIComponent(ncToken)}`, { credentials: "include" }).then(r => r.json())
-                return boards.filter(isUserBoard)
-            } catch (error) {
-                console.error(error.message)
-                statusFailed()
+        (() => {
+            const doNotMigrateLabel = '{% trans "Do not migrate" %}'
+            const migrationInProgress = '{{ migration_in_progress }}' === 'True'
+            const csrftoken = Cosinnus.getCookie('csrftoken')
+            const userGroups = {{ user_admin_groups|safe }}
+            const ncAdmin = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME }}'
+            const ncUrl = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}'
+            let userBoards = null
+            let ncToken = null
+            let selectedUserBoards = []
+            let statusUpdateInterval = null
+            function isUserBoard(board) {
+                /* Filter for user boards where the user has manage and share permissions. */
+                return board.owner.uid !== ncAdmin && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE
             }
-        }
-        async function addDeckSelection() {
-            /* Add group selection for user boards. */
-            console.debug('adding deck group selection...')
-            try {
-                userBoards = await getUserBoards()
-                let group_select_options = `<option value="">${doNotMigrateLabel}</option>`
-                userGroups.forEach((group) => {
-                    group_select_options += `<option value="${group[0]}">${group[1]}</option>`
-                });
-                var deck_group_ul = document.getElementById("deck-group-selection");
-                userBoards.forEach((board) => {
-                    var li = document.createElement('li');
-                    li.style.marginBottom = "2px"
-                    li.innerHTML =`${board.title} → <select id="group-select-${board.id}">${group_select_options}</select>`
-                    deck_group_ul.appendChild(li);
-                })
-            } catch (error) {
-                console.error(error.message)
-                statusFailed()
-            }
-        }
-        async function shareBoardWithAdmin(boardID) {
-            /* Share board with admin user such that the migration can continue in the backend. */
-            await fetch(`${ncUrl}/apps/deck/boards/${boardID}/acl?requesttoken=${encodeURIComponent(ncToken)}`, {
-                method: "POST",
-                credentials: "include",
-                 headers: {
-                    "Content-Type": "application/json",
-                 },
-                body: JSON.stringify({
-                    "type": 0,
-                    "participant": ncAdmin,
-                    "permissionEdit": false,
-                    "permissionShare": false,
-                    "permissionManage": false,
-                    "boardId": `${boardID}`,
-                }),
-            })
-        }
-        function statusSuccess() {
-            /* Migration successful */
-            clearInterval(statusUpdateInterval)
-            document.getElementById('status-in-progress').style.display = "none"
-            document.getElementById('status-success').style.display = "block"
-        }
-        function statusFailed() {
-            /* Migration failed */
-            if (statusUpdateInterval) {
-                clearInterval(statusUpdateInterval)
-            }
-            document.getElementById('status-in-progress').style.display = "none"
-            document.getElementById('status-failed').style.display = "block"
-        }
-        async function updateStatus() {
-            /* Check the migration task status. */
-            let response = await fetch('/migrate/user_decks/api/',{
-                headers: {
-                    'X-CSRFToken': csrftoken,
-                },
-                mode: 'same-origin',
-            }).then(r => r.json())
-            let migrationStatus = response.status
-            if (migrationStatus === 'success') {
-                statusSuccess()
-            } else if (migrationStatus === 'failed') {
-                statusFailed()
-            }
-        }
-        async function startMigration() {
-            /* Start the migration for the selected boards/groups. */
-            try {
-                for (const board of userBoards)  {
-                    var deck_group_select = document.getElementById(`group-select-${board.id}`);
-                    if (deck_group_select.value) {
-                        selectedUserBoards.push({"board": board, "group": deck_group_select.value})
-                    }
+            async function getUserBoards() {
+                /* Get the user boards. */
+                try {
+                    await fetch(`${ncUrl}/login`, { credentials: "include", mode: "no-cors" })
+                    ncToken = await fetch(
+                        `${ncUrl}/csrftoken`, {credentials: "include"}
+                    ).then(r => r.json()).then(r => r.token);
+                    let boards = await fetch(`${ncUrl}/apps/deck/boards?requesttoken=${encodeURIComponent(ncToken)}`, { credentials: "include" }).then(r => r.json())
+                    return boards.filter(isUserBoard)
+                } catch (error) {
+                    console.error(error.message)
+                    statusFailed()
                 }
-                var migrationData = []
-                for (selectedBoard of selectedUserBoards) {
-                    if (!selectedBoard.board.acl.some((acl) => acl.participant.uid === ncAdmin)) {
-                        await shareBoardWithAdmin(selectedBoard.board.id)
-                    }
-                    migrationData.push({"board": Number(selectedBoard.board.id), "group": Number(selectedBoard.group)})
+            }
+            async function addDeckSelection() {
+                /* Add group selection for user boards. */
+                console.debug('adding deck group selection...')
+                try {
+                    userBoards = await getUserBoards()
+                    let group_select_options = `<option value="">${doNotMigrateLabel}</option>`
+                    userGroups.forEach((group) => {
+                        group_select_options += `<option value="${group[0]}">${group[1]}</option>`
+                    });
+                    var deck_group_ul = document.getElementById("deck-group-selection");
+                    userBoards.forEach((board) => {
+                        var li = document.createElement('li');
+                        li.style.marginBottom = "2px"
+                        li.innerHTML =`${board.title} → <select id="group-select-${board.id}">${group_select_options}</select>`
+                        deck_group_ul.appendChild(li);
+                    })
+                } catch (error) {
+                    console.error(error.message)
+                    statusFailed()
                 }
-                await fetch('/migrate/user_decks/api/',{
+            }
+            async function shareBoardWithAdmin(boardID) {
+                /* Share board with admin user such that the migration can continue in the backend. */
+                await fetch(`${ncUrl}/apps/deck/boards/${boardID}/acl?requesttoken=${encodeURIComponent(ncToken)}`, {
                     method: "POST",
-                    headers: {
+                    credentials: "include",
+                     headers: {
                         "Content-Type": "application/json",
+                     },
+                    body: JSON.stringify({
+                        "type": 0,
+                        "participant": ncAdmin,
+                        "permissionEdit": false,
+                        "permissionShare": false,
+                        "permissionManage": false,
+                        "boardId": `${boardID}`,
+                    }),
+                })
+            }
+            function statusSuccess() {
+                /* Migration successful */
+                clearInterval(statusUpdateInterval)
+                document.getElementById('status-in-progress').style.display = "none"
+                document.getElementById('status-success').style.display = "block"
+            }
+            function statusFailed() {
+                /* Migration failed */
+                if (statusUpdateInterval) {
+                    clearInterval(statusUpdateInterval)
+                }
+                document.getElementById('status-in-progress').style.display = "none"
+                document.getElementById('status-failed').style.display = "block"
+            }
+            async function updateStatus() {
+                /* Check the migration task status. */
+                let response = await fetch('/migrate/user_decks/api/',{
+                    headers: {
                         'X-CSRFToken': csrftoken,
                     },
-                    body: JSON.stringify(migrationData),
                     mode: 'same-origin',
-                })
-                document.getElementById('start-frame').style.display = "none"
-                document.getElementById('status-frame').style.display = "block"
-                statusUpdateInterval = setInterval(updateStatus, 1000);
-            } catch (error) {
-                console.error(error.message)
-                statusFailed()
+                }).then(r => r.json())
+                let migrationStatus = response.status
+                if (migrationStatus === 'success') {
+                    statusSuccess()
+                } else if (migrationStatus === 'failed') {
+                    statusFailed()
+                }
             }
-        }
-        if (!migrationInProgress) {
-            addDeckSelection()
-        } else {
-            statusUpdateInterval = setInterval(updateStatus, 1000);
-        }
+            async function startMigration() {
+                /* Start the migration for the selected boards/groups. */
+                try {
+                    for (const board of userBoards)  {
+                        var deck_group_select = document.getElementById(`group-select-${board.id}`);
+                        if (deck_group_select.value) {
+                            selectedUserBoards.push({"board": board, "group": deck_group_select.value})
+                        }
+                    }
+                    var migrationData = []
+                    for (selectedBoard of selectedUserBoards) {
+                        if (!selectedBoard.board.acl.some((acl) => acl.participant.uid === ncAdmin)) {
+                            await shareBoardWithAdmin(selectedBoard.board.id)
+                        }
+                        migrationData.push({"board": Number(selectedBoard.board.id), "group": Number(selectedBoard.group)})
+                    }
+                    await fetch('/migrate/user_decks/api/',{
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            'X-CSRFToken': csrftoken,
+                        },
+                        body: JSON.stringify(migrationData),
+                        mode: 'same-origin',
+                    })
+                    document.getElementById('start-frame').style.display = "none"
+                    document.getElementById('status-frame').style.display = "block"
+                    statusUpdateInterval = setInterval(updateStatus, 1000);
+                } catch (error) {
+                    console.error(error.message)
+                    statusFailed()
+                }
+            }
+            if (!migrationInProgress) {
+                addDeckSelection()
+            } else {
+                statusUpdateInterval = setInterval(updateStatus, 1000);
+            }
+        })();
     </script>
 {% endblock content %}

@@ -9636,9 +9636,9 @@ msgid "Migrate Todos to Task-Board"
 msgstr "Migriere Aufgaben ins Aufgaben-Board"
 
 msgid "Start the migration of Todos to the Task-Board in the background."
-msgstr "Starte die Migration von Aufgaben zum Aufgaben-Baord im Hintergrund."
+msgstr "Starte die Migration von Aufgaben zum Aufgaben-Board im Hintergrund."
 
-msgid "The Todo app will be automatically deactivated is finished."
+msgid "The Todo app will be automatically deactivated when finished."
 msgstr "Die Aufgaben-App wird am Ende automatisch deaktiviert."
 
 msgid "Migration is in progress..."
