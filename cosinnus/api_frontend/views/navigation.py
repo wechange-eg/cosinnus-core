@@ -22,6 +22,7 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
+from cosinnus.models import UserBlock
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.group import (
     CosinnusGroupMembership,
@@ -569,6 +570,11 @@ class UnreadAlertsView(APIView):
         alerts_qs = NotificationAlert.objects.filter(
             portal=CosinnusPortal.get_current(), user=user, action_user__is_active=True
         )
+        # support for user blocking, filter out all audience members that have the sending user blocked
+        if settings.COSINNUS_ENABLE_USER_BLOCK:
+            blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(self.request.user)
+            if blocked_user_ids:
+                alerts_qs = alerts_qs.exclude(action_user__id__in=blocked_user_ids)
         unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
         alerts_count = unseen_aggr.get('seen_count', 0)
         return alerts_count
@@ -835,6 +841,11 @@ class AlertsView(APIView):
         alerts_qs = NotificationAlert.objects.filter(
             portal=CosinnusPortal.get_current(), user=self.request.user, action_user__is_active=True
         )
+        # support for user blocking, filter out all audience members that have the sending user blocked
+        if settings.COSINNUS_ENABLE_USER_BLOCK:
+            blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(self.request.user)
+            if blocked_user_ids:
+                alerts_qs = alerts_qs.exclude(action_user__id__in=blocked_user_ids)
         if self.newer_than_timestamp:
             after_dt = datetime_from_timestamp(self.newer_than_timestamp)
             alerts_qs = alerts_qs.filter(last_event_at__gt=after_dt)

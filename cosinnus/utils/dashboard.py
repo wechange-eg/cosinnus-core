@@ -20,7 +20,10 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject, BaseTagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.compat import atomic
-from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+from cosinnus.utils.permissions import (
+    filter_base_taggable_qs_for_blocked_user_content,
+    filter_tagged_object_queryset_for_user,
+)
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import filter_active_users
 
@@ -74,6 +77,9 @@ class DashboardWidget(object):
         qs = self.model._default_manager.filter(**self.get_queryset_filter())
         if not skipFilter:
             qs = filter_tagged_object_queryset_for_user(qs, self.request.user)
+
+        # support for filtering out blocked users' content
+        qs = filter_base_taggable_qs_for_blocked_user_content(qs, self.request.user)
         return qs
 
     def get_queryset_filter(self, **kwargs):

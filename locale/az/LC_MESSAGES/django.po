@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:37+0200\n"
+"POT-Creation-Date: 2025-07-30 18:58+0200\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1841,11 +1841,6 @@ msgstr "Nekstklaud Qrupu Kimliyi"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nekstklaud Qrupu Kimliyi"
 
-#, fuzzy
-#| msgid "Nextcloud Group ID"
-msgid "Nextcloud Deck Board ID"
-msgstr "Nekstklaud Qrupu Kimliyi"
-
 msgid "Is conference"
 msgstr ""
 
@@ -2204,6 +2199,15 @@ msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+msgid "User-Block"
+msgstr "Markeri daxil edin:"
+
+#, fuzzy
+#| msgid "Users"
+msgid "User-Blocks"
+msgstr "İstifadəçilər"
 
 msgid "Date"
 msgstr "Tarix"
@@ -7499,6 +7503,19 @@ msgstr "İstifadəçi profili: %(username)s"
 msgid "(ADMIN) View in Admin"
 msgstr ""
 
+msgid "Unblock user"
+msgstr ""
+
+#, fuzzy
+#| msgid "All users"
+msgid "Block user"
+msgstr "Bütün istifadəçilər"
+
+#, fuzzy
+#| msgid "You are following this content or its Project or Group"
+msgid "You are blocking this user. Their content will not be visible to you."
+msgstr "Bu məzmunu və ya onun Layihəsini və ya Qrupunu izləyirsiniz"
+
 msgid "Cooperation requests"
 msgstr "Əməkdaşlıq istəkləri"
 
@@ -9281,6 +9298,9 @@ msgstr "Bu fəaliyyət birbaşa mümkün deyil!"
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
 msgstr "Siz %(team_type)s “%(team_name)s” komandasına qoşulmağı xahiş etdiniz. Bir komanda admini istəyinizə cavab verdikdən sonra bir e-poçt alacaqsınız."
 
+msgid "You cannot request to be member of this group because at least one admin is blocking you."
+msgstr ""
+
 #, python-format
 msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
 msgstr "Siz artıq \"%(team_name)s\" komandasına dəvət edilmişdiniz və indi dərhal üzv oldunuz!"
@@ -9322,6 +9342,10 @@ msgid "The following users were invited to apply: %s"
 msgstr "Aşağdakı İstifadəçilər bu portala əlavə edilmişdir:"
 
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
+msgstr ""
+
+#, python-format
+msgid "Could not invite user \"%(user)s\" because they are blocking you."
 msgstr ""
 
 #, fuzzy, python-format
@@ -9485,6 +9509,9 @@ msgstr "Avatarınızı işləyərkən xəta oldu. Zəhmət olmasa görüntünün
 msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
 msgstr "Avatarınızı işləyərkən xəta oldu. Şəkil faylı qırıldı və ya fayl ötürülməsi kəsildi."
 
+msgid "You cannot do this because this user is blocking you."
+msgstr ""
+
 msgid "<Root folder>"
 msgstr "<Root folder>"
 
@@ -9557,6 +9584,29 @@ msgstr ""
 #, fuzzy
 msgid "Information about the deletion of your user account"
 msgstr "İstifadəçi hesabınızı saytdan silmək üzrəsiniz!"
+
+#, fuzzy
+msgid "The user was not found."
+msgstr "Heç bir qrup yoxdur."
+
+#, fuzzy, python-format
+msgid "User %s is now blocked."
+msgstr "Yaratdı"
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error blocking user %s."
+msgstr "Widjet yüklənərkən xəta baş verdi"
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "User %s is no longer blocked."
+msgstr "İstifadəçi \"%(username)s\" artıq üzv deyil."
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error unblocking user %s."
+msgstr "Widjet yüklənərkən xəta baş verdi"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "Üzr istəyirik, daxili xəta olduğundan istifadəçi hesabınızı bağlaya bilmədik. Zəhmət olmasa bir sistem rəhbərinə müraciət edin!"
@@ -9953,21 +10003,6 @@ msgstr "Status"
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "Layihə üçün bir ad daxil edin."
-
-#, fuzzy
-#| msgid "Dashboard"
-msgid "Task-Board"
-msgstr "İdarə paneli"
-
-msgctxt "the_app"
-msgid "deck"
-msgstr ""
-
-msgid "The task-board creation is in progress..."
-msgstr ""
-
-msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
-msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "Aşağıdakı Yastıqcıqlar yenidən işə salındı:"
@@ -14561,6 +14596,16 @@ msgstr "Bu komandanı silmək istədiyinizə əminsiniz?"
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "Bu komandanı silmək istədiyinizə əminsiniz?"
+
+#, fuzzy
+#~| msgid "Nextcloud Group ID"
+#~ msgid "Nextcloud Deck Board ID"
+#~ msgstr "Nekstklaud Qrupu Kimliyi"
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Task-Board"
+#~ msgstr "İdarə paneli"
 
 #, fuzzy
 #~ msgid "In my Cloud Files"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:37+0200\n"
+"POT-Creation-Date: 2025-07-30 18:58+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1783,9 +1783,6 @@ msgstr ""
 msgid "Nextcloud Groupfolder ID"
 msgstr ""
 
-msgid "Nextcloud Deck Board ID"
-msgstr ""
-
 msgid "Is conference"
 msgstr ""
 
@@ -2122,6 +2119,14 @@ msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+msgid "User-Block"
+msgstr ""
+
+#, fuzzy
+#| msgid "Users"
+msgid "User-Blocks"
+msgstr "کاربرها"
 
 msgid "Date"
 msgstr ""
@@ -7046,6 +7051,15 @@ msgstr ""
 msgid "(ADMIN) View in Admin"
 msgstr ""
 
+msgid "Unblock user"
+msgstr ""
+
+msgid "Block user"
+msgstr ""
+
+msgid "You are blocking this user. Their content will not be visible to you."
+msgstr ""
+
 msgid "Cooperation requests"
 msgstr ""
 
@@ -8728,6 +8742,9 @@ msgstr ""
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
 msgstr ""
 
+msgid "You cannot request to be member of this group because at least one admin is blocking you."
+msgstr ""
+
 #, python-format
 msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
 msgstr ""
@@ -8769,6 +8786,10 @@ msgid "The following users were invited to apply: %s"
 msgstr ""
 
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
+msgstr ""
+
+#, python-format
+msgid "Could not invite user \"%(user)s\" because they are blocking you."
 msgstr ""
 
 #, fuzzy, python-format
@@ -8933,6 +8954,9 @@ msgstr ""
 msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
 msgstr ""
 
+msgid "You cannot do this because this user is blocking you."
+msgstr ""
+
 msgid "<Root folder>"
 msgstr ""
 
@@ -9000,6 +9024,28 @@ msgid ""
 msgstr ""
 
 msgid "Information about the deletion of your user account"
+msgstr ""
+
+#, fuzzy
+#| msgid "User was not created"
+msgid "The user was not found."
+msgstr "کار با موفقیت ساخته نشد"
+
+#, fuzzy, python-format
+#| msgid "User was not created"
+msgid "User %s is now blocked."
+msgstr "کار با موفقیت ساخته نشد"
+
+#, python-format
+msgid "There was an error blocking user %s."
+msgstr ""
+
+#, python-format
+msgid "User %s is no longer blocked."
+msgstr ""
+
+#, python-format
+msgid "There was an error unblocking user %s."
 msgstr ""
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
@@ -9367,19 +9413,6 @@ msgstr "وضعیت"
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "این کارایی برای کنفرانس فعال نشده است."
-
-msgid "Task-Board"
-msgstr ""
-
-msgctxt "the_app"
-msgid "deck"
-msgstr ""
-
-msgid "The task-board creation is in progress..."
-msgstr ""
-
-msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
-msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "یادداشت‌های روبرو از نو آغاز شده‌اند:"

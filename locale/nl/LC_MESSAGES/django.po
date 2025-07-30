@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:37+0200\n"
+"POT-Creation-Date: 2025-07-30 18:58+0200\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1833,11 +1833,6 @@ msgstr "Facebook Groep folder naam"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Groep folder ID"
 
-#, fuzzy
-#| msgid "Nextcloud Group ID"
-msgid "Nextcloud Deck Board ID"
-msgstr "Nextcloud Groep ID"
-
 msgid "Is conference"
 msgstr "Is conferentie"
 
@@ -2194,6 +2189,15 @@ msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+msgid "User-Block"
+msgstr "Voer een token in:"
+
+#, fuzzy
+#| msgid "Users"
+msgid "User-Blocks"
+msgstr "Gebruikers"
 
 msgid "Date"
 msgstr "Datum"
@@ -7491,6 +7495,19 @@ msgstr "Gebruikersprofiel: %(username)s"
 msgid "(ADMIN) View in Admin"
 msgstr ""
 
+msgid "Unblock user"
+msgstr ""
+
+#, fuzzy
+#| msgid "All users"
+msgid "Block user"
+msgstr "Alle gebruikers"
+
+#, fuzzy
+#| msgid "You are following this content or its Project or Group"
+msgid "You are blocking this user. Their content will not be visible to you."
+msgstr "Je volgt deze inhoud of bijbehorende project of groep"
+
 msgid "Cooperation requests"
 msgstr "Samenwerkingsverzoeken"
 
@@ -9272,6 +9289,9 @@ msgstr "Deze actie is niet direct beschikbaar!"
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
 msgstr "Je hebt gevraagd om lid te worden van de %(team_type)s“%(team_name)s”. Je ontvangt een e-mail zodra een van de teambeheerders op je verzoek reageert."
 
+msgid "You cannot request to be member of this group because at least one admin is blocking you."
+msgstr ""
+
 #, python-format
 msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
 msgstr "Je was al uitgenodigd voor “%(team_name)s” en je bent nu direct lid geworden!"
@@ -9313,6 +9333,10 @@ msgid "The following users were invited to apply: %s"
 msgstr "De volgende gebruikers zijn aan dit portal toegevoegd:"
 
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
+msgstr ""
+
+#, python-format
+msgid "Could not invite user \"%(user)s\" because they are blocking you."
 msgstr ""
 
 #, fuzzy, python-format
@@ -9476,6 +9500,9 @@ msgstr "Er is een fout opgetreden bij het verwerken van je avatar. Zorg ervoor d
 msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
 msgstr "Er is een fout opgetreden bij het verwerken van je avatar. Het beeldbestand is mogelijk defect of de bestandsoverdracht is onderbroken."
 
+msgid "You cannot do this because this user is blocking you."
+msgstr ""
+
 msgid "<Root folder>"
 msgstr "<Hoofdmap>"
 
@@ -9548,6 +9575,30 @@ msgstr ""
 #, fuzzy
 msgid "Information about the deletion of your user account"
 msgstr "Je staat op het punt je gebruikersaccount van de site te verwijderen!"
+
+#, fuzzy
+msgid "The user was not found."
+msgstr "Er zijn geen groepen."
+
+#, fuzzy, python-format
+#| msgid "User was not created"
+msgid "User %s is now blocked."
+msgstr "Gebruiker is niet aangemaakt"
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error blocking user %s."
+msgstr "Er is een fout opgetreden bij het laden van de widget"
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "User %s is no longer blocked."
+msgstr "Gebruiker “%(username)s” is geen lid meer."
+
+#, fuzzy, python-format
+#| msgid "There was an error loading the widget"
+msgid "There was an error unblocking user %s."
+msgstr "Er is een fout opgetreden bij het laden van de widget"
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
 msgstr "Sorry, we konden je gebruikersaccount niet verbinden vanwege een interne fout. Neem contact op met een systeembeheerder!"
@@ -9940,21 +9991,6 @@ msgstr "Status"
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "Voer een naam in voor het project."
-
-#, fuzzy
-#| msgid "Dashboard"
-msgid "Task-Board"
-msgstr "Dashboard"
-
-msgctxt "the_app"
-msgid "deck"
-msgstr ""
-
-msgid "The task-board creation is in progress..."
-msgstr ""
-
-msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
-msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "The following Pads were re-initialized:"
@@ -14542,6 +14578,16 @@ msgstr "Weet je zeker dat je dit team wilt verwijderen?"
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "Weet je zeker dat je dit team wilt verwijderen?"
+
+#, fuzzy
+#~| msgid "Nextcloud Group ID"
+#~ msgid "Nextcloud Deck Board ID"
+#~ msgstr "Nextcloud Groep ID"
+
+#, fuzzy
+#~| msgid "Dashboard"
+#~ msgid "Task-Board"
+#~ msgstr "Dashboard"
 
 #, fuzzy
 #~ msgid "In my Cloud Files"
