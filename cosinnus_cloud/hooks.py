@@ -126,6 +126,28 @@ def update_user_from_obj(user):
     )
 
 
+def update_user_profile_avatar(profile, retry=False):
+    """Update user avatar"""
+    if profile.avatar:
+        # avatar changed, using a thumbnail the same size as the avatar in NextCloud
+        avatar_file = profile.get_avatar_thumbnail(size=(512, 512))
+        with avatar_file.open() as file:
+            avatar_content = file.read()
+    else:
+        # avatar deleted, using jane-doe image as the nc plugin does not provide avatar deletion
+        avatar_file = staticfiles_storage.path('images/jane-doe.png')
+        with open(avatar_file, 'rb') as file:
+            avatar_content = file.read()
+
+    if avatar_content:
+        nc_user_id = get_nc_user_id(profile.user)
+        avatar_encoded = b64encode(avatar_content)
+        if retry:
+            submit_with_retry(nextcloud.update_user_avatar, nc_user_id, avatar_encoded)
+        else:
+            nextcloud.update_user_avatar(nc_user_id, avatar_encoded)
+
+
 def get_email_for_user(user):
     """Get the email that is set as email the nextcloud user profile.
     Default is to set the user email to None, Nextcloud needs to send no emails anyways
@@ -343,20 +365,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
     @receiver(signals.userprofile_avatar_updated)
     def handle_profile_avatar_updated(sender, profile, **kwargs):
         """Update the user avatar."""
-        if profile.avatar:
-            # avatar changed, using a thumbnail the same size as the avatar in NextCloud
-            avatar_file = profile.get_avatar_thumbnail(size=(512, 512))
-            with avatar_file.open() as file:
-                avatar_content = file.read()
-        else:
-            # avatar deleted, using jane-doe image as the nc plugin does not provide avatar deletion
-            avatar_file = staticfiles_storage.path('images/jane-doe.png')
-            with open(avatar_file, 'rb') as file:
-                avatar_content = file.read()
-
-        if avatar_content:
-            avatar_encoded = b64encode(avatar_content)
-            submit_with_retry(nextcloud.update_user_avatar, get_nc_user_id(profile.user), avatar_encoded)
+        update_user_profile_avatar(profile, retry=True)
 
     @receiver(signals.group_object_created)
     def group_created_sub(sender, group, **kwargs):

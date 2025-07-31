@@ -11,7 +11,7 @@ from cosinnus.core.middleware.cosinnus_middleware import (
     initialize_cosinnus_after_startup,
 )
 from cosinnus.utils.user import filter_active_users, filter_portal_users
-from cosinnus_cloud.hooks import get_nc_user_id, update_user_from_obj
+from cosinnus_cloud.hooks import get_nc_user_id, update_user_from_obj, update_user_profile_avatar
 from cosinnus_cloud.utils.nextcloud import OCSException, list_all_users
 
 logger = logging.getLogger('cosinnus')
@@ -45,6 +45,8 @@ class Command(BaseCommand):
 
                 try:
                     update_user_from_obj(user)
+                    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile.avatar:
+                        update_user_profile_avatar(user.cosinnus_profile, retry=False)
                     updated += 1
                 except OCSException as e:
                     errors += 1
