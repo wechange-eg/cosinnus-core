@@ -24,6 +24,7 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.encoding import force_str
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_otp import user_has_device
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -32,6 +33,7 @@ from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
 from cosinnus.core.decorators.views import get_group_for_request, redirect_to_not_logged_in
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
+from cosinnus.core.registries import app_registry
 from cosinnus.models import UserOnlineOnDay
 from cosinnus.utils.http import remove_url_param
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership, check_user_superuser
@@ -762,3 +764,37 @@ class UserOnlineStatisticsMiddleware(MiddlewareMixin):
                         seconds_until_tomorrow = (datetime.datetime.combine(_tomorrow, datetime.time.min) - now).seconds
                         cache.set(self.CACHE_KEY % user.id, True, seconds_until_tomorrow)
         return response
+
+
+class DeprecatedAppMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
+    """Makes apps readonly and shows migration related messages."""
+
+    def process_request(self, request):
+        if settings.COSINNUS_DECK_ENABLED and 'cosinnus_todo' in app_registry:
+            group_todo_url_pattern = r'^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/todo/'
+            if re.match(group_todo_url_pattern, request.path):
+                group = self.get_group(request)
+                if group:
+                    message = _(
+                        'The Todo app is replaced by the Task-Board app. Editing existing Todos or creating new Todos '
+                        'has been disabled. '
+                    )
+                    if check_ug_admin(request.user, group):
+                        migration_url = reverse('cosinnus:deck-migrate-todo', kwargs={'group': group.slug})
+                        migration_link_label = _('here')
+                        migration_link = f'[{migration_link_label}]({migration_url})'
+                        message += _('You can migrate existing Todos %(here_link)s.') % {'here_link': migration_link}
+                    else:
+                        message += _('Existing Todos can be migrated by the %s(group_type)s admins.') % {
+                            'group_type': group.get_trans().VERBOSE_NAME
+                        }
+                    # add message if not already added before a redirect
+                    message_exists = any(
+                        existing_message.message == message for existing_message in messages.get_messages(request)
+                    )
+                    if not message_exists:
+                        messages.warning(request, mark_safe(message))
+
+                    # make cosinnus_todo app readonly
+                    if request.method == 'POST':
+                        return redirect(request.path)

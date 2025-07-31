@@ -6,14 +6,16 @@ from builtins import str
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import get_user_model, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.http.response import Http404, HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+from django.views import View
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import DeleteView
@@ -21,9 +23,9 @@ from django.views.generic.edit import DeleteView
 from cosinnus.core.decorators.views import redirect_to_error_page, redirect_to_not_logged_in
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
-from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.profile import UserBlock, get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion
+from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.permissions import (
     check_user_can_see_user,
     check_user_integrated_portal_member,
@@ -31,7 +33,8 @@ from cosinnus.utils.permissions import (
 )
 from cosinnus.utils.user import filter_active_users
 from cosinnus.views.mixins.avatar import AvatarFormMixin
-
+from cosinnus.views.mixins.group import RequireLoggedInMixin
+from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion
 
 logger = logging.getLogger('cosinnus')
 
@@ -155,11 +158,15 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
         profile = context['object']
+        is_blocked = False
+        if settings.COSINNUS_ENABLE_USER_BLOCK and self.request.user.is_authenticated:
+            is_blocked = UserBlock.objects.filter(user=self.request.user, blocked_user=profile.user).exists()
         context.update(
             {
                 'optional_fields': profile.get_optional_fields(),
                 'profile': profile,
                 'this_user': profile.user,
+                'user_is_blocked': is_blocked,
                 'conferences': self.get_conferences_for_user(profile),
             }
         )
@@ -359,3 +366,71 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
 
 
 delete_view = UserProfileDeleteView.as_view()
+
+
+class UserBlockViewMixin(object):
+    http_method_names = ['post']
+
+    def dispatch(self, request, username, *args, **kwargs):
+        return super().dispatch(request, username, *args, **kwargs)
+
+    def post(self, request, username, *args, **kwargs):
+        username = username.strip()
+        try:
+            target_user = get_user_model().objects.get(username=username)
+        except Exception:
+            target_user = None
+        if not target_user:
+            messages.error(request, _('The user was not found.'))
+            return redirect_to_error_page(request)
+
+        success = False
+        try:
+            self.do_block_action(target_user)
+            success = True
+        except Exception as e:
+            logger.warning(
+                'An error occured when trying to block/unblock a user.',
+                extra={'exception': e, 'target_user_id': target_user.id},
+            )
+
+        if success:
+            messages.success(request, self.success_message % full_name(target_user))
+            return redirect('cosinnus:profile-detail', username=username)
+        else:
+            messages.error(request, self.error_message % username)
+            return redirect_to_error_page(request)
+
+    def do_block_action(self, target_user):
+        """Stub, implement block or unblock"""
+        pass
+
+
+class CosinnusUserBlockView(RequireLoggedInMixin, UserBlockViewMixin, View):
+    """Marks a user as blocked for the current user.
+    Note: you *can* in principle block inactive users! (Leaving this functionality to hide deleted user posts)."""
+
+    success_message = _('User %s is now blocked.')
+    error_message = _('There was an error blocking user %s.')
+
+    def do_block_action(self, target_user):
+        """Block the user"""
+        UserBlock.block_user(self.request.user, target_user)
+
+
+user_block_view = CosinnusUserBlockView.as_view()
+
+
+class CosinnusUserUnblockView(RequireLoggedInMixin, UserBlockViewMixin, View):
+    """Marks a user as unblocked for the current user.
+    Note: you *can* in principle block inactive users! (Leaving this functionality to hide deleted user posts)."""
+
+    success_message = _('User %s is no longer blocked.')
+    error_message = _('There was an error unblocking user %s.')
+
+    def do_block_action(self, target_user):
+        """Unblock the user"""
+        UserBlock.unblock_user(self.request.user, target_user)
+
+
+user_unblock_view = CosinnusUserUnblockView.as_view()

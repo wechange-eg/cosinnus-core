@@ -496,6 +496,7 @@ class CosinnusConf(AppConf):
     GROUP_APPS_WIDGETS_MICROSITE_DISABLED = [
         'cosinnus_cloud',
         'cosinnus_message',
+        'cosinnus_deck',
     ]
 
     # a map of class dropins for the typed group trans classes
@@ -1062,6 +1063,9 @@ class CosinnusConf(AppConf):
     # Label for the link of the brand / home button in the main navigation. If set to None "About PORTALNAME" is used.
     V3_MENU_HOME_LINK_LABEL = None
 
+    # if set, V3_MENU_HOME_LINK is only used for the "About" link, but this is instead used for the top let button
+    V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE = None
+
     # Header label of the top left menu für the community space
     # default if None: "PORTALNAME Community"
     V3_COMMUNITY_HEADER_CUSTOM_LABEL = None
@@ -1266,6 +1270,7 @@ class CosinnusConf(AppConf):
     CLOUD_USER_PROFILE_EMAIL_FUNC = None
 
     # whether to enable the cosinnus deck app
+    # Note: COSINNUS_CLOUD_ENABLED must also be set, as the deck app depends on the cloud integration.
     DECK_ENABLED = False
 
     # if set to a hex color string,
@@ -1588,6 +1593,9 @@ class CosinnusConf(AppConf):
     # if True, the User Match feature will be enabled
     ENABLE_USER_MATCH = False
 
+    # if True, the User Block feature will be enabled
+    ENABLE_USER_BLOCK = False
+
     # whether to require a valid hcaptcha on the signup API endpoint
     USE_HCAPTCHA = True
 
@@ -1709,9 +1717,9 @@ class CosinnusDefaultSettings(AppConf):
 
     # the default BBB create-call parameters for all room types
     BBB_DEFAULT_CREATE_PARAMETERS = {
-        'record': False,
-        'autoStartRecording': False,
-        'allowStartStopRecording': True,
+        'record': 'false',
+        'autoStartRecording': 'false',
+        'allowStartStopRecording': 'true',
         'guestPolicy': 'ALWAYS_ACCEPT',  # always by default allow guest access
     }
 

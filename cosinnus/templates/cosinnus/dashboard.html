@@ -142,7 +142,7 @@
 			    </div>
 		    {% endif %}
 	    {% endif %}
-	    
+
 	    {% captureas cloud_hide_pref %}cloud_group_teaser_{{ group.id }}{% endcaptureas %}
         {% captureas cloud_hide_value %}cloud_group_teaser_{{ group.id }}:true{% endcaptureas %}
 	    {% if SETTINGS.COSINNUS_CLOUD_ENABLED and user.pk in group.admins and 'cosinnus_cloud' in group.get_deactivated_apps and not user|cosinnus_setting:cloud_hide_pref %}
@@ -175,24 +175,56 @@
 	    {% captureas nag_mitwirkomat_setting %}microsite_hide_mitwirkomat_nag__{{ group.id }}{% endcaptureas %}
         {% captureas nag_mitwirkomat_setting_value %}microsite_hide_mitwirkomat_nag__{{ group.id }}:true{% endcaptureas %}
 	    {% if SETTINGS.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED and not SETTINGS.COSINNUS_MITWIRKOMAT_DISABLE_NEEDS_LOVE_NAG_SCREEN and not user|cosinnus_setting:nag_mitwirkomat_setting %}
-		    {% if user.is_authenticated and user.pk in group.admins and not group.description_long %}
-			    <div class="alert alert-warning alert-dismissable">
-		            <i class="{% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}fas fa-comment-alt-check{% else %}fas fa-comment-alt{% endif %} fa-3x"></i>
-		            <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value=nag_mitwirkomat_setting_value %}>&#215;</button>
+            {% if not group.mitwirkomat_settings or not group.mitwirkomat_settings.is_active %} {# hide the nag screen if MoM-settings are actually active #}
+                {% if user.is_authenticated and user.pk in group.admins and not group.description_long %}
+                    <div class="alert alert-warning alert-dismissable">
+                        <i class="{% if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}fas fa-comment-alt-check{% else %}fas fa-comment-alt{% endif %} fa-3x"></i>
+                        <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value=nag_mitwirkomat_setting_value %}>&#215;</button>
 
-		            <h4>{% trans "Looking for new members? Join the Volunteer-O-Matic!" %}</h4>
-		            <div class="v-offset-s">
-			        <p>
-                        {% trans "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers." %}
-			        </p>
-			        <p>
-						<a href="{% group_url 'cosinnus:mitwirkomat-settings' group=group %}">{% trans "Join now" context "Mitwirkomat" %}</a>
-					</p>
-					</div>
-			    </div>
-		    {% endif %}
+                        <h4>{% trans "Looking for new members? Join the Volunteer-O-Matic!" %}</h4>
+                        <div class="v-offset-s">
+                        <p>
+                            {% trans "The Volunteer-O-Matic is a playful matching tool that helps users to find groups and projects where they can get involved. Simultaneously, the tool can help groups and projects like yours to find new volunteers." %}
+                        </p>
+                        <p>
+                            <a href="{% group_url 'cosinnus:mitwirkomat-settings' group=group %}">{% trans "Join now" context "Mitwirkomat" %}</a>
+                        </p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
 	    {% endif %}
 	
+
+        {% captureas deck_hide_pref %}deck_group_teaser_{{ group.id }}{% endcaptureas %}
+        {% captureas deck_hide_value %}deck_group_teaser_{{ group.id }}:true{% endcaptureas %}
+        {% if SETTINGS.COSINNUS_DECK_ENABLED and user.pk in group.admins and 'cosinnus_deck' in group.get_deactivated_apps and not user|cosinnus_setting:deck_hide_pref %}
+            <div class="large-space deck-teaser-frame">
+                <div class="alert alert-black-white no-margin alert-dismissable">
+                    <i class="fa fa-sticky-note fa-3x"></i>
+                    <button id="close_button" type="button" class="close" onclick="$('.deck-teaser-frame').hide();" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value=deck_hide_value %}>&#215;</button>
+                    {% include 'cosinnus/texts/group_dashboard_deck_teaser_text.html' %}
+                </div>
+
+                <form method="POST" action="{% group_url 'cosinnus:group-activate-app' group=group %}" class="cosinnus-form form-horizontal app-main">{% csrf_token %}
+                    <input type="hidden" name="app" value="cosinnus_deck" />
+                    <button type="submit" class="btn btn-autosize btn-emphasized">
+                        <ul class="media-list">
+                            <li class="media">
+			                    <span class="pull-left">
+			                        <i class="fa fa-sticky-note"></i>
+			                    </span>
+                                <div class="media-body">
+                                    {% trans "Activate Task-Board" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        {% endif %}
+
 	{% endblock group_announcements %}
 
 

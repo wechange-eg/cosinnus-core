@@ -40,6 +40,7 @@ from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_grou
 from cosinnus.utils.html import replace_non_portal_urls
 from cosinnus.utils.permissions import (
     check_object_read_access,
+    check_user_blocks_user,
     check_user_can_receive_emails,
     check_user_portal_admin,
     check_user_portal_moderator,
@@ -1242,6 +1243,9 @@ def notification_receiver(sender, user, obj, audience, session_id=None, end_sess
     audience = [
         aud_user for aud_user in audience if ((aud_user.is_active or not aud_user.is_authenticated) and aud_user.email)
     ]
+    # support for user blocking, filter out all audience members that have the sending user blocked
+    if settings.COSINNUS_ENABLE_USER_BLOCK:
+        audience = [aud_user for aud_user in audience if not check_user_blocks_user(aud_user, user)]
 
     if not session_id:
         # we start this notification thread instantly and alone

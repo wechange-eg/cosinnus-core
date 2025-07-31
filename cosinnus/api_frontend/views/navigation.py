@@ -22,6 +22,7 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
+from cosinnus.models import UserBlock
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.group import (
     CosinnusGroupMembership,
@@ -569,6 +570,11 @@ class UnreadAlertsView(APIView):
         alerts_qs = NotificationAlert.objects.filter(
             portal=CosinnusPortal.get_current(), user=user, action_user__is_active=True
         )
+        # support for user blocking, filter out all audience members that have the sending user blocked
+        if settings.COSINNUS_ENABLE_USER_BLOCK:
+            blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(self.request.user)
+            if blocked_user_ids:
+                alerts_qs = alerts_qs.exclude(action_user__id__in=blocked_user_ids)
         unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
         alerts_count = unseen_aggr.get('seen_count', 0)
         return alerts_count
@@ -835,6 +841,11 @@ class AlertsView(APIView):
         alerts_qs = NotificationAlert.objects.filter(
             portal=CosinnusPortal.get_current(), user=self.request.user, action_user__is_active=True
         )
+        # support for user blocking, filter out all audience members that have the sending user blocked
+        if settings.COSINNUS_ENABLE_USER_BLOCK:
+            blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(self.request.user)
+            if blocked_user_ids:
+                alerts_qs = alerts_qs.exclude(action_user__id__in=blocked_user_ids)
         if self.newer_than_timestamp:
             after_dt = datetime_from_timestamp(self.newer_than_timestamp)
             alerts_qs = alerts_qs.filter(last_event_at__gt=after_dt)
@@ -1327,7 +1338,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     'portal_name': settings.COSINNUS_BASE_PAGE_TITLE_TRANS
                 }
                 about_item = MenuItem(
-                    about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About'
+                    about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About', is_external=True
                 )
                 profile_menu.append(about_item)
 
@@ -1487,7 +1498,11 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         # home
         current_portal = CosinnusPortal.get_current()
         home_image = '%s%s' % (current_portal.get_domain(), static(settings.COSINNUS_PORTAL_LOGO_NAVBAR_IMAGE_URL))
-        if settings.COSINNUS_V3_MENU_HOME_LINK:
+        if settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE:
+            home_item = MenuItem(
+                _('Home'), settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE, icon='fa-home', image=home_image, id='Home'
+            )
+        elif settings.COSINNUS_V3_MENU_HOME_LINK:
             home_item = MenuItem(
                 _('Home'), settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-home', image=home_image, id='Home'
             )

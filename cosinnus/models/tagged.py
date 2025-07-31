@@ -174,6 +174,10 @@ class BaseTagObject(models.Model):
         verbose_name=_('BigBlueButton conversation room'),
     )
 
+    # generic flag used to indicate the successful migration of the tagged object
+    # e.g. used when migrating todos to the deck app.
+    migrated = models.BooleanField(default=False)
+
     def save(self, *args, **kwargs):
         # update like count
         if self.pk:

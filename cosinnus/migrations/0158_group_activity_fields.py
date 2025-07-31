@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cosinnus', '0150_group_scheduled_for_deletion'),
+        ('cosinnus', '0157_group_scheduled_for_deletion'),
     ]
 
     operations = [

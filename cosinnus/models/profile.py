@@ -683,6 +683,34 @@ class BaseUserProfile(
             objects.append(obj)
         return objects
 
+    # user deck migration status definition
+    DECK_MIGRATION_STATUS_STARTED = 'started'
+    DECK_MIGRATION_STATUS_IN_PROGRESS = 'in_progress'
+    DECK_MIGRATION_STATUS_SUCCESS = 'success'
+    DECK_MIGRATION_STATUS_FAILED = 'failed'
+
+    def deck_migration_set_status(self, status):
+        """Set the user deck migration status."""
+        self.refresh_from_db()
+        self.settings.update({'deck_migration_status': status})
+        self.save(update_fields=['settings'])
+
+    def deck_migration_status(self):
+        """Get the user deck migration status."""
+        return self.settings.get('deck_migration_status')
+
+    def deck_migration_allowed(self):
+        """
+        Check if the user deck migration can be started.
+        The migration is allowed if it has not already started or if it has finished with an error.
+        """
+        status = self.deck_migration_status()
+        return status is None or status in [self.DECK_MIGRATION_STATUS_FAILED, self.DECK_MIGRATION_STATUS_SUCCESS]
+
+    def deck_migration_in_progress(self):
+        """Check if the migration is in progress."""
+        return self.deck_migration_status() == self.DECK_MIGRATION_STATUS_IN_PROGRESS
+
 
 class UserProfile(BaseUserProfile):
     """Default implementation of the `BaseUserProfile`."""
@@ -1106,3 +1134,68 @@ class UserMatchObject(models.Model):
     def get_match_user_url(self):
         url = reverse('cosinnus:user-match') + f'?user={self.from_user.pk}'
         return url
+
+
+class UserBlock(models.Model):
+    """
+    Models the relation of one user blocking another users.
+    Note that the existence of an instance of this model signifies the blocking,
+    an "unblock" means deleting the instance.
+    If an instance of this exists, `user` will no longer see any posts created by `blocked_user`.
+    """
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='Source User',
+        help_text='User who has marked a target user as blocked.',
+        on_delete=models.CASCADE,
+        related_name='user_blocks',
+    )
+    blocked_user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='Target User',
+        help_text='The target user for the block.',
+        on_delete=models.CASCADE,
+        related_name='blocked_by',
+    )
+
+    last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
+
+    class Meta(object):
+        app_label = 'cosinnus'
+        verbose_name = _('User-Block')
+        verbose_name_plural = _('User-Blocks')
+        unique_together = (('user', 'blocked_user'),)
+
+    def __str__(self):
+        return f'User-Block: {self.user} --> {self.blocked_user}'
+
+    @classmethod
+    def block_user(cls, blocking_user, blocked_user):
+        """Blocks a user by creating the corresponding instance of this model.
+        Does nothing if the user is already blocked."""
+        if not blocking_user.pk or not blocked_user.pk:
+            return
+        cls.objects.get_or_create(user=blocking_user, blocked_user=blocked_user)
+
+    @classmethod
+    def unblock_user(cls, blocking_user, unblocked_user):
+        """Unblocks a user by deleting the corresponding instance of this model.
+        Does nothing if the user is not blocked."""
+        if not blocking_user.pk or not unblocked_user.pk:
+            return
+        cls.objects.filter(user=blocking_user, blocked_user=unblocked_user).delete()
+
+    @classmethod
+    def get_blocked_user_ids_for_user(cls, blocking_user):
+        """Returns a list of user_ids of users that `blocking_user` has opted to block."""
+        if not blocking_user.id:
+            return []
+        return list(cls.objects.filter(user=blocking_user).values_list('blocked_user__id', flat=True))
+
+    @classmethod
+    def get_blocking_user_ids_for_user(cls, blocked_user):
+        """Returns a list of user_ids of users that are blocking `blocked_user`."""
+        if not blocked_user.id:
+            return []
+        return list(cls.objects.filter(blocked_user=blocked_user).values_list('user__id', flat=True))

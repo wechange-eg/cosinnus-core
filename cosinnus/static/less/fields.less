@@ -192,6 +192,19 @@
         vertical-align: middle;
         margin: 5px 0;
     }
+    /* Flexbox for condensed field */
+    .condensed-field-container {
+        display: flex;
+        align-items: flex-start;
+    }
+    .condensed-field-label-container {
+        flex: 1;
+        overflow-wrap: break-word;
+
+        &.condensed-radio-field-label-left-align {
+            text-align: left;
+        }
+    }
     .cosinnus-field-input.condensed-radio-field {
         text-align: right;
         

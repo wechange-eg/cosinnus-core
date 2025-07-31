@@ -570,7 +570,7 @@
 	                                                    {{ app_option.label }}
 	                                                </span>
 	                                            </span>
-	                                        {% else %}
+	                                        {% elif not app_option.app_deprecated or app_option.checked %}
 	                                            <a class="app-background small-padding"><input id="checkbox_{{ app_option.app_name }}" type="checkbox" name="deactivated_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
 	                                            ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_{{ app_option.app_name }}').prop('checked', !($('#checkbox_{{ app_option.app_name }}').prop('checked')));">
 	                                                {{ app_option.label }}
@@ -654,7 +654,7 @@
 			                                    <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
 			                                        <a class="app-background small-padding"><input id="checkbox_microsite_{{ app_option.app_name }}" type="checkbox" name="microsite_public_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
 			                                        ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_microsite_{{ app_option.app_name }}').prop('checked', !($('#checkbox_microsite_{{ app_option.app_name }}').prop('checked')));">
-			                                            {{ app_option.label }}
+			                                            {{ app_option.label }} {{ app_option.is_hidden }}
 			                                        </span>
 			                                    </span>
 			                                {% endif %}

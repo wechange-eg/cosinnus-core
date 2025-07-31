@@ -196,10 +196,12 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
     return unique_name
 
 
-def initialize_nextcloud_for_group(group):
+def initialize_nextcloud_for_group(group, send_initialized_signal=True):
     """Initializes a nextcloud groupfolder for a group.
     Safe to call on already initialized folders. If called on a pre-existing folder that is
-    "disabled" (group has no more access to it), the group's access will be re-enabled for the folder."""
+    "disabled" (group has no more access to it), the group's access will be re-enabled for the folder.
+    @param send_initialized_signal: Sending of initialized signal can be disabled to avoid concurrency issues.
+    """
     if not is_cloud_group_required_for_group(group):
         # No app requires the nextcloud integration
         return
@@ -223,8 +225,9 @@ def initialize_nextcloud_for_group(group):
     # add admin user to group
     nextcloud.add_user_to_group(settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, group.nextcloud_group_id)
 
-    # send signal
-    signals.group_nextcloud_group_initialized.send(sender=group.__class__, group=group)
+    # send initialized signal
+    if send_initialized_signal:
+        signals.group_nextcloud_group_initialized.send(sender=group.__class__, group=group)
 
     logger.debug(
         'Creating new group folder [%s] in Nextcloud (wechange group name [%s])',
@@ -342,18 +345,19 @@ if settings.COSINNUS_CLOUD_ENABLED:
             submit_with_retry(initialize_nextcloud_for_group, group)
 
     @receiver(signals.group_apps_activated)
-    def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
-        """Listen for the cloud app being activated"""
-        if 'cosinnus_cloud' in apps and is_cloud_group_required_for_group(group):
+    def group_cloud_or_deck_app_activated_sub(sender, group, apps, **kwargs):
+        """Listen for the cloud app or deck app being activated"""
+        if 'cosinnus_cloud' in apps or 'cosinnus_deck' in apps:
+            if is_cloud_group_required_for_group(group):
 
-            def _conurrent_wrap():
-                initialize_nextcloud_for_group(group)
-                for user in group.actual_members:
-                    submit_with_retry(nextcloud.add_user_to_group, get_nc_user_id(user), group.nextcloud_group_id)
-                    # we don't need to remove users who have left the group while the app was deactivated here,
-                    # because that listener is always active
+                def _conurrent_wrap():
+                    initialize_nextcloud_for_group(group)
+                    for user in group.actual_members:
+                        submit_with_retry(nextcloud.add_user_to_group, get_nc_user_id(user), group.nextcloud_group_id)
+                        # we don't need to remove users who have left the group while the app was deactivated here,
+                        # because that listener is always active
 
-            submit_with_retry(_conurrent_wrap)
+                submit_with_retry(_conurrent_wrap)
 
     @receiver(signals.group_apps_deactivated)
     def group_cloud_app_deactivated_sub(sender, group, apps, **kwargs):

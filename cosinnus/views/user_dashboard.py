@@ -41,11 +41,15 @@ from cosinnus.utils.filters import exclude_special_folders
 from cosinnus.utils.functions import is_number, sort_key_strcoll_attr
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.pagination import QuerysetLazyCombiner
-from cosinnus.utils.permissions import check_user_superuser, filter_tagged_object_queryset_for_user
+from cosinnus.utils.permissions import (
+    check_user_superuser,
+    filter_base_taggable_qs_for_blocked_user_content,
+    filter_tagged_object_queryset_for_user,
+)
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
-from cosinnus.views.ui_prefs import get_ui_prefs_for_user
+from cosinnus.views.ui_prefs import UI_PREF_DASHBOARD_DECK_MIGRATION_DONE, get_ui_prefs_for_user
 
 logger = logging.getLogger('cosinnus')
 
@@ -102,8 +106,9 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
         )
         welcome_screen_enabled = getattr(settings, 'COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_ENABLED', True)
 
+        ui_prefs = get_ui_prefs_for_user(user)
         options = {
-            'ui_prefs': get_ui_prefs_for_user(user),
+            'ui_prefs': ui_prefs,
             'force_only_mine': getattr(settings, 'COSINNUS_USERDASHBOARD_FORCE_ONLY_MINE', False)
             or getattr(settings, 'COSINNUS_FORUM_DISABLED', False),
         }
@@ -142,6 +147,8 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
                 (appl.conference, appl.get_icon()) for appl in user.user_applications.pending_current()
             ]
             ctx['my_upcoming_conferences_with_icons'] = my_pending_conference_applications + my_current_conferences
+        if settings.COSINNUS_DECK_ENABLED and settings.COSINNUS_DECK_MIGRATE_USER_DECKS:
+            ctx['deck_migration_done'] = ui_prefs.get(UI_PREF_DASHBOARD_DECK_MIGRATION_DONE, False)
         return ctx
 
 
@@ -841,6 +848,9 @@ class TimelineView(ModelRetrievalMixin, View):
             for extra_qs in querysets:
                 combined_qs = combined_qs | extra_qs
             combined_qs = combined_qs.distinct()
+
+        # support for filtering out blocked users' content
+        combined_qs = filter_base_taggable_qs_for_blocked_user_content(combined_qs, self.request.user)
         return combined_qs
 
     def _mix_items_from_querysets(self, *streams):

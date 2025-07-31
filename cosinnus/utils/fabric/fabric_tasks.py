@@ -66,7 +66,7 @@ def hotdeploy(_ctx):
     """Fast deploy with poetry update and soft server restarts. No downtime-banner raised.
     Recommended only for hotfixes that do not require dependency package updates."""
     check_confirmation()
-    _pull_and_update()
+    _pull_and_update(_ctx)
     migrate(_ctx)
     restart(_ctx)
     compilewebpack(_ctx)
@@ -141,7 +141,7 @@ def enablegitremoteoncore(_ctx):
 def deployfrontend(_ctx):
     """Only does a git pull on the base project repository"""
     check_confirmation()
-    _pull_and_update_frontend()
+    _pull_and_update_frontend(_ctx)
     restartfrontend(_ctx)
     print('\n\n>> Deployfrontend has finished successfully.\n')
 
@@ -173,7 +173,7 @@ def fulldeploy(_ctx):
         c.run(f'mv .venv ~/{foldername}/movedvenv.venv')
         c.run('touch poetry.lock')  # create if not exists
         c.run(f'mv poetry.lock ~/{foldername}/movedpoetry.lock')
-    _pull_and_update(fresh_install=True)
+    _pull_and_update(_ctx, fresh_install=True)
     migrate(_ctx)
     restart(_ctx)
     compilewebpack(_ctx)
@@ -459,7 +459,7 @@ def pipfreeze(_ctx):
             c.run('pip freeze')
 
 
-def _pull_and_update(use_poetry_update=False, fresh_install=False):
+def _pull_and_update(ctx, use_poetry_update=False, fresh_install=False):
     """
     Does a git pull on the main project repository, then performs
     a poetry update to update dependencies.
@@ -487,7 +487,7 @@ def _pull_and_update(use_poetry_update=False, fresh_install=False):
         c.run('git pull')
         if fresh_install:
             c.run('poetry install')
-            enablegitremoteoncore()
+            enablegitremoteoncore(ctx)
         else:
             with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
                 if env.legacy_mode:
@@ -504,7 +504,7 @@ def _pull_and_update(use_poetry_update=False, fresh_install=False):
                         c.run('git pull')
 
 
-def _pull_and_update_frontend():
+def _pull_and_update_frontend(ctx):
     """
     Does a git pull on the frontend repository, then performs
     a poetry update to update dependencies.

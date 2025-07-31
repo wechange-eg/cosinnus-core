@@ -3,7 +3,7 @@
 {% captureas button_classes %}{% if full_view %}btn btn-default w100 {% if not no_indent %}indented{% endif %}{% else %}btn btn-default dashboard-appwidget-contentline-indented{% endif %}{% endcaptureas %}
 
 <div class="{% if not comments_expanded == "True" %}fadedown {% endif %}large-space"  >
-    {% with comments=poll.comments.all %}
+    {% with comments=poll.comments.all|filter_comments_for_user:request.user %}
             <div type="button" class="{{ button_classes }}">
                 <ul class="media-list fine-space">
                     <li class="media">
