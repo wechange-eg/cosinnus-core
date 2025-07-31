@@ -20,6 +20,9 @@ idea_object_created = dispatch.Signal()  # providing_args=["idea"]
 """ Called after a new user and their profile is freshly created """
 userprofile_created = dispatch.Signal()  # providing_args=["profile"]
 
+""" Called after a user profile avatar is changed """
+userprofile_avatar_updated = dispatch.Signal()  # providing_args=["profile"]
+
 """ Called after a new user voluntarily signs up on the portal, using the web frontend """
 user_registered = dispatch.Signal()  # providing_args=["user"]
 
