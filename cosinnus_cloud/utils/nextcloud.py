@@ -151,6 +151,21 @@ def update_user_name(userid: str, display_name: str) -> OCSResponse:
     )
 
 
+def update_user_avatar(userid: str, avatar_b64_encoded: bytes) -> OCSResponse:
+    data = {
+        'userId': userid,
+        'avatar': avatar_b64_encoded,
+    }
+    return _response_or_raise(
+        requests.post(
+            f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/ocs/v2.php/apps/wechange_tools/update-avatar',
+            auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+            headers=HEADERS,
+            data=data,
+        )
+    )
+
+
 def disable_user(userid: str) -> OCSResponse:
     return _response_or_raise(
         requests.put(

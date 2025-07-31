@@ -239,6 +239,7 @@ class BaseUserProfile(
         super(BaseUserProfile, self).__init__(*args, **kwargs)
         self._settings = copy.deepcopy(self.settings)
         self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
+        self._avatar_name = self.avatar.name
 
     def __str__(self):
         return six.text_type(self.user)
@@ -330,8 +331,14 @@ class BaseUserProfile(
                     'cosinnus/mail/user_terms_of_services.html',
                     data,
                 )
+
+        # trigger avatar updated signal
+        if not created and self._avatar_name != self.avatar.name:
+            signals.userprofile_avatar_updated.send(sender=self.__class__, profile=self)
+
         self._settings = copy.deepcopy(self.settings)
         self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
+        self._avatar_name = self.avatar.name
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
