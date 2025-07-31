@@ -145,7 +145,7 @@
 			{% endif %}
 			
 			{% if user|has_write_access:todo %}
-                <button class="btn btn-emphasized regular-space" data-toggle="modal" data-target="#deleteTodo_{{todo.pk}}" href="#" title="{% trans "Delete todo" %}">
+                <button class="btn btn-emphasized regular-space" data-toggle="modal" data-target="#deleteTodo_{{todo.pk}}" title="{% trans "Delete todo" %}">
                     <ul class="media-list">
                         <li class="media">
                             <span class="pull-left">
