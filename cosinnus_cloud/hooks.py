@@ -3,11 +3,13 @@ from __future__ import unicode_literals
 
 import logging
 import re
+from base64 import b64encode
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import wraps
 from threading import Thread
 from time import sleep
 
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.db.models.signals import post_delete, post_save
 from django.db.utils import DatabaseError
 from django.dispatch.dispatcher import receiver
@@ -337,6 +339,24 @@ if settings.COSINNUS_CLOUD_ENABLED:
                     logger.warning('Could not update Nextcloud user on profile update.', extra={'exc': e})
 
         UpdateNCUserThread().start()
+
+    @receiver(signals.userprofile_avatar_updated)
+    def handle_profile_avatar_updated(sender, profile, **kwargs):
+        """Update the user avatar."""
+        if profile.avatar:
+            # avatar changed, using a thumbnail the same size as the avatar in NextCloud
+            avatar_file = profile.get_avatar_thumbnail(size=(512, 512))
+            with avatar_file.open() as file:
+                avatar_content = file.read()
+        else:
+            # avatar deleted, using jane-doe image as the nc plugin does not provide avatar deletion
+            avatar_file = staticfiles_storage.path('images/jane-doe.png')
+            with open(avatar_file, 'rb') as file:
+                avatar_content = file.read()
+
+        if avatar_content:
+            avatar_encoded = b64encode(avatar_content)
+            submit_with_retry(nextcloud.update_user_avatar, get_nc_user_id(profile.user), avatar_encoded)
 
     @receiver(signals.group_object_created)
     def group_created_sub(sender, group, **kwargs):
