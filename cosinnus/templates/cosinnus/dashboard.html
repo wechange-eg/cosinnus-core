@@ -145,7 +145,7 @@
 
 	    {% captureas cloud_hide_pref %}cloud_group_teaser_{{ group.id }}{% endcaptureas %}
         {% captureas cloud_hide_value %}cloud_group_teaser_{{ group.id }}:true{% endcaptureas %}
-	    {% if SETTINGS.COSINNUS_CLOUD_ENABLED and user.pk in group.admins and 'cosinnus_cloud' in group.get_deactivated_apps and not user|cosinnus_setting:cloud_hide_pref %}
+	    {% if SETTINGS.COSINNUS_CLOUD_ENABLED and SETTINGS.COSINNUS_CLOUD_SHOW_GROUP_DASHBOARD_NAG_BANNER and user.pk in group.admins and 'cosinnus_cloud' in group.get_deactivated_apps and not user|cosinnus_setting:cloud_hide_pref %}
 	       <div class="large-space cloud-teaser-frame">
 		        <div class="alert alert-black-white no-margin alert-dismissable">
 	                <i class="fa fa-cloud fa-3x"></i>

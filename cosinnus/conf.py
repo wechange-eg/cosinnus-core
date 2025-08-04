@@ -1242,6 +1242,9 @@ class CosinnusConf(AppConf):
     CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = 1024 * 1024 * 1024
     # timeout for nextcloud webdav requests in seconds
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
+    # whether to show the "The Cloud is here" banner for group admins on the group dashboard if
+    # if the cloud app is not enabled for the group
+    CLOUD_SHOW_GROUP_DASHBOARD_NAG_BANNER = False
 
     # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
     # DEPRECATED: now handled by Ansible.
