@@ -347,8 +347,8 @@
                 <div class="spacer-large">&nbsp;</div>
                 <h2>
                     <a class="pale-color pale-bold pale-with-highlight"
-                        data-target="ui-pref" data-ui-pref="adashboard_deck_migration__hidden"
-                        data-ui-pref-value="true" data-hide-after=".dashboard-announcement-frame">
+                        data-target="ui-pref" data-ui-pref="dashboard_deck_migration__hidden"
+                        data-ui-pref-value="true" data-hide-after=".dashboard-announcement-deck-migration">
                         {% trans "Do not show this again" %}</a>
                 </h2>
             </div>
@@ -362,7 +362,7 @@
                         return board.owner.uid !== ncAdmin && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE
                     }
                     async function getUserBoards() {
-                        /* get the user baords from next cloud */
+                        /* get the user boards from next cloud */
                         try {
                             await fetch(`${ncUrl}/login`, { credentials: "include", mode: "no-cors" })
                             let token = await fetch(`${ncUrl}/csrftoken`, {credentials: "include"}).then(r => r.json()).then(r => r.token);
