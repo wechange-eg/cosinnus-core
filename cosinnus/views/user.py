@@ -653,9 +653,12 @@ class CosinnusGroupInviteTokenView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         self.token = kwargs.get('token', None)
-        if settings.COSINNUS_V3_FRONTEND_ENABLED:
-            # in v3 the /signup/ page handles the invite token
+
+        # in v3, unauthenticated users are handled directly by the /signup/ page
+        if not request.user.is_authenticated and settings.COSINNUS_V3_FRONTEND_ENABLED:
             return redirect(f'/signup/?invite_token={self.token}')
+
+        # v2 handles authenticated and (unauthenticated if v3 is disabled)
         self.invite = get_object_or_None(
             CosinnusGroupInviteToken, token__iexact=self.token, portal=CosinnusPortal.get_current()
         )
