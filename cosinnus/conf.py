@@ -1112,6 +1112,12 @@ class CosinnusConf(AppConf):
     # (does not affect mails if USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN is True)
     USER_SIGNUP_SEND_VERIFICATION_MAIL_INSTANTLY = False
 
+    # if True, enable setting the `accounts_need_verification` option
+    # in the CosinnusPortal admin, restricting newly signed up users
+    # to only be able to post in the Forum and other autojoin groups after admin approval.
+    # only self-registered users will be flagged as unverified, admin-created ones will not.
+    USER_ACCOUNTS_NEED_VERIFICATION_ENABLED = False
+
     # if True, hides the portal completey from external visitors.
     # "logged in only" mode for the portal
     USER_EXTERNAL_USERS_FORBIDDEN = False

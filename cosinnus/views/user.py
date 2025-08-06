@@ -453,6 +453,15 @@ class UserSignupTriggerEventsMixin(object):
                 if not skip_messages:
                     messages.success(request, self.message_success % {'user': user.email})
 
+            # set the user account_verified flag to False if the feature is enabled and activated in the portal
+            if (
+                settings.COSINNUS_USER_ACCOUNTS_NEED_VERIFICATION_ENABLED
+                and CosinnusPortal.get_current().accounts_need_verification
+            ):
+                user_profile = user.cosinnus_profile
+                # soft save, this change does not need to trigger any hooks
+                type(user_profile).objects.filter(pk=user_profile.pk).update(account_verified=False)
+
             if do_login:
                 # log the user in
                 user.backend = 'cosinnus.backends.EmailAuthBackend'

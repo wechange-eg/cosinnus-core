@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-30 18:58+0200\n"
+"POT-Creation-Date: 2025-08-06 15:13+0200\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -508,6 +508,10 @@ msgstr "Используй эту ссылку, чтобы пригласить 
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr "Вы должны верифицировать свою электронную почту, прежде чем Вы сможете пользоваться этой частью сайта. Пожалуйста, проверьте свои входящие и перейдите по ссылке из письма, что Вы получили он нас. Вы также можете запросить новое письмо, кликнув на ссылку ниже."
+
+#, python-format
+msgid "For spam protection reasons, new accounts are not initially allowed to make posts here. If you would like to post something, please write a short email to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Данный контент доступен только зарегистрированным членам. Войдите на платформу или зарегистрируйтесь прямо сейчас!"
@@ -1613,6 +1617,14 @@ msgstr "Необходимо проверить адреса электронн�
 msgid "If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them."
 msgstr "Чтобы активировать новых пользователей и пользователей, которые меняют адрес электронной почты, им необходимо подтвердить адрес электронной почты, нажав на ссылку, отправленную на указанный ими электронный адрес."
 
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "Необходимо проверить адреса электронной почты"
+
+msgid "If activated, newly registered users will not be able to post in the Forum and other autojoin until specifically approved by an admin (checkbox `account_verified` in the user profile)."
+msgstr ""
+
 msgid "ToS Version"
 msgstr "ToS Версия"
 
@@ -2021,6 +2033,17 @@ msgid "User-set answers to Mitwirk-O-Mat questions"
 msgstr "Пожалуйста, укажи следующую информацию:"
 
 msgid "Mitwirk-O-Mat Settings"
+msgstr ""
+
+msgid "Whether this user's email address has been verified. Non-verified users do not receive emails and depending on portal settings, may not create certain public content."
+msgstr ""
+
+#, fuzzy
+#| msgid "Account deactivated"
+msgid "Account verified"
+msgstr "Деактивировать"
+
+msgid "Whether admin approval for newly registered accounts has been given that this user may post in the Forum and other autojoin groups."
 msgstr ""
 
 #, fuzzy
@@ -6083,9 +6106,6 @@ msgid "Link"
 msgstr "Ссылка URL"
 
 msgid "Please choose the answers that best fit you."
-msgstr ""
-
-msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
 msgstr ""
 
 msgid "Toggle navigation"

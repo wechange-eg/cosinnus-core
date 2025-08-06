@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-30 18:58+0200\n"
+"POT-Creation-Date: 2025-08-06 15:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -507,6 +507,10 @@ msgstr "Um externe Gäste einzuladen, teile diesen Link:"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr "Um diesen Teil der Webseite zu benutzen, muss deine E-Mail-Adresse erst verifiziert werden! Bitte prüfen deine eingehenden E-Mails und klicke dann auf den Link in der Verifikations-E-Mail, die du von uns erhalten hast. Alternativ kannst du eine neue Verifikations-E-Mail anfordern, indem du den Link unten klickst."
+
+#, python-format
+msgid "For spam protection reasons, new accounts are not initially allowed to make posts here. If you would like to post something, please write a short email to %(support_email_link)s and we will be happy to approve your account!"
+msgstr "Aus Spam-Schutz-Gründen können neue Benutzer/innen-Konten hier zunächst keine Beiträge veröffentlichen. Wenn du etwas posten möchtest, schreibe bitte eine kurze E-Mail an %(support_email_link)s, und wir werden dein Konto gerne freischalten!"
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Nur registrierte Benutzer/innen  können diesen Inhalt sehen! Log dich ein oder erstelle jetzt ein Benutzerkonto!"
@@ -1595,6 +1599,12 @@ msgstr "Benutzermails müssen verifiziert werden"
 msgid "If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them."
 msgstr "Wenn aktiv, müssen neu registrierte Benutzer/innen oder die, die ihre E-Mail ändern, einen Bestätigungslink klicken den sie per E-Mail erhalten, um ihre E-Mail-Adresse zu bestätigen."
 
+msgid "Accounts Need Verification"
+msgstr "Benutzeraccounts müssen verifiziert werden"
+
+msgid "If activated, newly registered users will not be able to post in the Forum and other autojoin until specifically approved by an admin (checkbox `account_verified` in the user profile)."
+msgstr "Wenn aktiviert, können neu registrierte Benutzer/innen erst dann Beiträge im Forum und anderen offenen Gruppen posten, wenn sie von einem Administrator freigegeben wurden (Häkchen \"account_verified\" im Benutzerprofil)."
+
 msgid "ToS Version"
 msgstr "AGB Version"
 
@@ -1997,6 +2007,15 @@ msgstr "Benutzer-gewählte Antworten zu den Mitwirk-O-Mat Fragen"
 
 msgid "Mitwirk-O-Mat Settings"
 msgstr "Mitwirk-O-Mat Einstellungen"
+
+msgid "Whether this user's email address has been verified. Non-verified users do not receive emails and depending on portal settings, may not create certain public content."
+msgstr "Ob die E-Mail-Adresse dieser Benutzerin / dieses Benutzers verifiziert wurde. Nicht verifizierte Benutzer/innen erhalten keine E-Mails und können je nach Portaleinstellungen möglicherweise bestimmte öffentliche Inhalte nicht erstellen."
+
+msgid "Account verified"
+msgstr "Account verifiziert"
+
+msgid "Whether admin approval for newly registered accounts has been given that this user may post in the Forum and other autojoin groups."
+msgstr "Ob Freigabe durch eine/n Administrator/in gegeben wurde, dass dieser Account im Forum und anderen offenen Gruppen posten darf."
 
 msgid "ToS accepted"
 msgstr "ToS angenommen"
@@ -6007,9 +6026,6 @@ msgstr "Link"
 
 msgid "Please choose the answers that best fit you."
 msgstr "Bitte wählt die Antworten, die am besten zu euch passen."
-
-msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
-msgstr "Bitte beachtet, dass eure Änderungen in diesem Formular nicht sofort übertragen werden. Es kann bis zu einem Tag dauern, bis die Änderungen im Mitwirk-O-Mat erscheinen."
 
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
@@ -14134,6 +14150,9 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
+#~ msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
+#~ msgstr "Bitte beachtet, dass eure Änderungen in diesem Formular nicht sofort übertragen werden. Es kann bis zu einem Tag dauern, bis die Änderungen im Mitwirk-O-Mat erscheinen."
 
 #~ msgid "If the task-board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the task-board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
 #~ msgstr "Wenn das Aufgaben-Board nicht innerhalb einiger Minuten verfügbar wird, gibt es technische Probleme mit dem Board-Service. Versuche die Aufgaben-Board App in den Einstellungen zu deaktivieren und zu reaktivieren. Falls das Problem bleibt, melde dich beim Support. Wir entschuldigen uns für die Unannehmlichkeiten!"
