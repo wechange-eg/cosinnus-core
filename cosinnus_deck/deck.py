@@ -419,7 +419,7 @@ class DeckConnection:
         """Migrate todos to deck app."""
 
         # set migration status
-        group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_IN_PROGRESS)
+        group.deck_migration_set_status(group.DECK_MIGRATION_STATUS_IN_PROGRESS)
         try:
             if not group.nextcloud_group_id:
                 # initialize nextcloud group
@@ -517,7 +517,7 @@ class DeckConnection:
             type(group).objects.filter(pk=group.pk).update(deactivated_apps=group.deactivated_apps)
 
             # set migration status
-            group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_SUCCESS)
+            group.deck_migration_set_status(group.DECK_MIGRATION_STATUS_SUCCESS)
 
             # clear group cache
             group._clear_cache(group=group)
@@ -526,7 +526,7 @@ class DeckConnection:
                 'Deck: Todo migration failed!',
                 extra={'group': group.id, 'board_id': group.nextcloud_deck_board_id, 'exception': e},
             )
-            group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_FAILED)
+            group.deck_migration_set_status(group.DECK_MIGRATION_STATUS_FAILED)
 
     def migrate_user_decks(self, user, selected_decks):
         """

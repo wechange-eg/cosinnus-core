@@ -50,11 +50,11 @@ class DeckMigrateTodoView(RequireWriteGrouplessMixin, TemplateView):
         return super(DeckMigrateTodoView, self).dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        if self.group.deck_todo_migration_allowed():
+        if self.group.deck_migration_allowed():
             # start the migration task
             from cosinnus_deck.integration import DECK_SINGLETON
 
-            self.group.deck_todo_migration_set_status(self.group.DECK_TODO_MIGRATION_STATUS_STARTED)
+            self.group.deck_migration_set_status(self.group.DECK_MIGRATION_STATUS_STARTED)
             DECK_SINGLETON.do_group_migrate_todo(self.group)
         return self.get(request, *args, **kwargs)
 
@@ -68,7 +68,7 @@ class DeckMigrateTodoView(RequireWriteGrouplessMixin, TemplateView):
             {
                 'group': self.group,
                 'deck_migrated_required': migration_required,
-                'deck_migration_status': self.group.deck_todo_migration_status(),
+                'deck_migration_status': self.group.deck_migration_status(),
             }
         )
 

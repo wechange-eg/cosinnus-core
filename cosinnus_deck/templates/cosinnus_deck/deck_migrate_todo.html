@@ -38,7 +38,7 @@
         </div>
     </div><!-- content-box -->
 
-    {% if group.deck_todo_migration_allowed %}
+    {% if group.deck_migration_allowed %}
         <form method="POST" action="." class="cosinnus-form form-horizontal">
             {% csrf_token %}
             <button type="submit" class="btn btn-emphasized btn-autosize">
