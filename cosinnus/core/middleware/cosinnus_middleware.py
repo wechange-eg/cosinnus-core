@@ -780,12 +780,12 @@ class DeprecatedAppMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
                         'has been disabled. '
                     )
                     if check_ug_admin(request.user, group):
-                        migration_url = reverse('cosinnus:deck-migrate-todo', kwargs={'group': group.slug})
+                        migration_url = group_aware_reverse('cosinnus:deck:migrate-todos', kwargs={'group': group})
                         migration_link_label = _('here')
                         migration_link = f'[{migration_link_label}]({migration_url})'
                         message += _('You can migrate existing Todos %(here_link)s.') % {'here_link': migration_link}
                     else:
-                        message += _('Existing Todos can be migrated by the %s(group_type)s admins.') % {
+                        message += _('Existing Todos can be migrated by the %(group_type)s admins.') % {
                             'group_type': group.get_trans().VERBOSE_NAME
                         }
                     # add message if not already added before a redirect

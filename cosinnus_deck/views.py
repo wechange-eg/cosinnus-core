@@ -2,14 +2,12 @@ import json
 
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView, View
 
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import check_ug_admin
-from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireReadMixin, RequireWriteGrouplessMixin
+from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireReadMixin, RequireWriteMixin
 from cosinnus_todo.models import TodoEntry
 
 
@@ -33,21 +31,12 @@ class DeckView(RequireReadMixin, TemplateView):
 deck_view = DeckView.as_view()
 
 
-class DeckMigrateTodoView(RequireWriteGrouplessMixin, TemplateView):
-    """
-    Allows users to migrate cosinnus_todo lists and tasks to the group board.
-    Note: Implemented as groupless view as the deck app might be disabled in the beginning.
-    """
+class DeckMigrateTodoView(RequireWriteMixin, TemplateView):
+    """Allows users to migrate cosinnus_todo lists and tasks to the group board."""
 
     template_name = 'cosinnus_deck/deck_migrate_todo.html'
-    group = None
-
-    def dispatch(self, request, *args, **kwargs):
-        group_slug = kwargs.get('group')
-        self.group = get_object_or_404(
-            get_cosinnus_group_model(), slug=group_slug, portal_id=CosinnusPortal.get_current().id
-        )
-        return super(DeckMigrateTodoView, self).dispatch(request, *args, **kwargs)
+    # the view can be accessed before the deck app is activated
+    ALLOW_VIEW_ACCESS_WHEN_GROUP_APP_DEACTIVATED = True
 
     def post(self, request, *args, **kwargs):
         if self.group.deck_migration_allowed():
@@ -58,20 +47,15 @@ class DeckMigrateTodoView(RequireWriteGrouplessMixin, TemplateView):
             DECK_SINGLETON.do_group_migrate_todo(self.group)
         return self.get(request, *args, **kwargs)
 
-    def get_object(self, *args, **kwargs):
-        return self.group
-
     def get_context_data(self, **kwargs):
         context = super(DeckMigrateTodoView, self).get_context_data(**kwargs)
         migration_required = TodoEntry.objects.filter(todolist__group=self.group, media_tag__migrated=False).exists()
         context.update(
             {
-                'group': self.group,
                 'deck_migrated_required': migration_required,
                 'deck_migration_status': self.group.deck_migration_status(),
             }
         )
-
         return context
 
 
