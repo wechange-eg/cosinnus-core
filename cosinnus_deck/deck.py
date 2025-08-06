@@ -455,7 +455,7 @@ class DeckConnection:
                 stack_order += 1
                 card_order = 0
 
-                for todo in todo_query.filter(media_tag__migrated=False):
+                for todo in todo_query:
                     # get description with comments and attached objects
                     description = todo.note
                     if todo.attached_objects.exists():
@@ -518,6 +518,9 @@ class DeckConnection:
 
             # set migration status
             group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_SUCCESS)
+
+            # clear group cache
+            group._clear_cache(group=group)
         except Exception as e:
             logger.warning(
                 'Deck: Todo migration failed!',
