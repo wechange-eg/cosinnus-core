@@ -1,4 +1,5 @@
 import json
+import logging
 
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
@@ -9,6 +10,8 @@ from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import check_ug_admin
 from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireReadMixin, RequireWriteMixin
 from cosinnus_todo.models import TodoEntry
+
+logger = logging.getLogger(__name__)
 
 
 class DeckView(RequireReadMixin, TemplateView):
@@ -41,10 +44,14 @@ class DeckMigrateTodoView(RequireWriteMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         if self.group.deck_migration_allowed():
             # start the migration task
-            from cosinnus_deck.integration import DECK_SINGLETON
-
             self.group.deck_migration_set_status(self.group.DECK_MIGRATION_STATUS_STARTED)
-            DECK_SINGLETON.do_group_migrate_todo(self.group)
+            try:
+                from cosinnus_deck.integration import DECK_SINGLETON
+
+                DECK_SINGLETON.do_group_migrate_todo(self.group)
+            except Exception as e:
+                self.group.deck_migration_set_status(self.group.DECK_MIGRATION_STATUS_FAILED)
+                logger.exception(e)
         return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -93,10 +100,14 @@ class DeckMigrateUserDecksApiView(RequireLoggedInMixin, View):
         profile = user.cosinnus_profile
         if profile.deck_migration_allowed():
             # start the migration task
-            from cosinnus_deck.integration import DECK_SINGLETON
-
             profile.deck_migration_set_status(profile.DECK_MIGRATION_STATUS_STARTED)
-            DECK_SINGLETON.do_migrate_user_decks(user, migration_data)
+            try:
+                from cosinnus_deck.integration import DECK_SINGLETON
+
+                DECK_SINGLETON.do_migrate_user_decks(user, migration_data)
+            except Exception as e:
+                profile.deck_migration_set_status(profile.DECK_MIGRATION_STATUS_FAILED)
+                logger.exception(e)
         return HttpResponse(status=200)
 
     def get(self, request, *args, **kwargs):
