@@ -132,8 +132,11 @@
                         "permissionManage": false,
                         "boardId": `${boardID}`,
                     })
+                }).then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`shareBoardWithAdmin failed with status ${response.status}`);
+                    }
                 })
-                // TODO: check status
             }
             function statusSuccess() {
                 /* Migration successful */
@@ -146,6 +149,8 @@
                 if (statusUpdateInterval) {
                     clearInterval(statusUpdateInterval);
                 }
+                document.getElementById('start-frame').style.display = "none";
+                document.getElementById('status-frame').style.display = "block";
                 document.getElementById('status-in-progress').style.display = "none";
                 document.getElementById('status-failed').style.display = "block";
             }
