@@ -105,12 +105,26 @@ class DeckMigrateUserDecksApiView(RequireLoggedInMixin, View):
         """Start the migration task in the backend for the selected boards and groups."""
         user = request.user
         migration_data = json.loads(request.body)
-        admin_group_ids = list(CosinnusGroup.objects.get_for_user_group_admin_pks(user))
+
+        # validate migration data
+        try:
+            assert isinstance(migration_data, list)
+            for board_data in migration_data:
+                assert 'board' in board_data
+                assert isinstance(board_data['board'], int)
+                assert 'group' in board_data
+                assert isinstance(board_data['group'], int)
+        except AssertionError as e:
+            logger.warning('Migrate User Deck API: Invalid request!', extra={'exception': e})
+            return HttpResponse(status=400)
+
         # check group permissions
+        admin_group_ids = list(CosinnusGroup.objects.get_for_user_group_admin_pks(user))
         for board_data in migration_data:
             group_id = board_data['group']
             if group_id not in admin_group_ids:
                 return HttpResponse(status=403)
+
         profile = user.cosinnus_profile
         if profile.deck_migration_allowed():
             # start the migration task
