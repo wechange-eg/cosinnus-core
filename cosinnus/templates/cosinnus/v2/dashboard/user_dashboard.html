@@ -273,56 +273,7 @@
 			</div> {% comment %} end dashboard-welcome-frame {% endcomment %}
 		{% endif %}
 
-		{% if announcement %}
-			<div class="dashboard-announcement-frame" style="display: none">
-			    {% if announcement_is_preview %}
-	                <h2><i>({% trans "Preview" %})</i></h2>
-	            {% endif %}
-			    {% if announcement.type == 0 %}
-			        {% if not announcement_is_preview %}
-			            <div class="aside-link text-small">
-			                <a class="pale-color pale-with-highlight"
-			                    data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
-			                    data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
-			                    <i class="fas fa-close"></i>
-			                </a>
-			            </div>
-		            {% endif %}
-		            {% if announcement.category > 0 %}
-    		            <h2>{{ announcement.category_text }}</h2>
-    		        {% endif %}
-    		        {% if announcement.image %}
-    		            {% if announcement.url %}
-    		            <a href="{{ announcement.url }}">
-    		            {% endif %}
-    		                <img class="image" src="{{ announcement.static_image_url }}" />
-    		            {% if announcement.url %}
-                        </a>
-                        {% endif %}
-    		        {% endif %}
-		            <div class="v2-textfield transparent">
-                        {{ announcement.text|textfield }}
-                    </div>
-                    {% if announcement.url or not announcement_is_preview %}
-                        <div class="spacer-large">&nbsp;</div>
-                        <h2>
-	                        {% if announcement.url %}
-                                <a href="{{ announcement.url }}" target="_blank" rel="nofollow">
-                                    {% trans "Continue reading" %}</a>
-                            {% endif %}
-                            {% if not announcement_is_preview %}
-                                <a class="pale-color pale-bold pale-with-highlight"
-	                                data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
-	                                data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
-	                                {% trans "Do not show this again" %}</a>
-                            {% endif %}
-                        </h2>
-                    {% endif %}
-		        {% else %}
-		            {% render_announcement_html announcement %}
-		        {% endif %}
-	        </div> {% comment %} end dashboard-announcement-frame {% endcomment %}
-        {% elif SETTINGS.COSINNUS_DECK_ENABLED and SETTINGS.COSINNUS_DECK_MIGRATE_USER_DECKS and not deck_migration_hidden %}
+        {% if SETTINGS.COSINNUS_DECK_ENABLED and SETTINGS.COSINNUS_DECK_MIGRATE_USER_DECKS and not deck_migration_hidden %}
             <div id="deck-migration-frame" class="dashboard-announcement-deck-migration" style="display: none">
                 <div class="aside-link text-small">
                     <a class="pale-color pale-with-highlight"
@@ -396,6 +347,57 @@
                     checkUserBoards();
                 })();
             </script>
+        {% endif %}
+
+		{% if announcement %}
+			<div class="dashboard-announcement-frame" style="display: none">
+			    {% if announcement_is_preview %}
+	                <h2><i>({% trans "Preview" %})</i></h2>
+	            {% endif %}
+			    {% if announcement.type == 0 %}
+			        {% if not announcement_is_preview %}
+			            <div class="aside-link text-small">
+			                <a class="pale-color pale-with-highlight"
+			                    data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
+			                    data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
+			                    <i class="fas fa-close"></i>
+			                </a>
+			            </div>
+		            {% endif %}
+		            {% if announcement.category > 0 %}
+    		            <h2>{{ announcement.category_text }}</h2>
+    		        {% endif %}
+    		        {% if announcement.image %}
+    		            {% if announcement.url %}
+    		            <a href="{{ announcement.url }}">
+    		            {% endif %}
+    		                <img class="image" src="{{ announcement.static_image_url }}" />
+    		            {% if announcement.url %}
+                        </a>
+                        {% endif %}
+    		        {% endif %}
+		            <div class="v2-textfield transparent">
+                        {{ announcement.text|textfield }}
+                    </div>
+                    {% if announcement.url or not announcement_is_preview %}
+                        <div class="spacer-large">&nbsp;</div>
+                        <h2>
+	                        {% if announcement.url %}
+                                <a href="{{ announcement.url }}" target="_blank" rel="nofollow">
+                                    {% trans "Continue reading" %}</a>
+                            {% endif %}
+                            {% if not announcement_is_preview %}
+                                <a class="pale-color pale-bold pale-with-highlight"
+	                                data-target="ui-pref" data-ui-pref="dashboard_announcements__hidden"
+	                                data-ui-pref-value="{{ announcement.id }}" data-hide-after=".dashboard-announcement-frame">
+	                                {% trans "Do not show this again" %}</a>
+                            {% endif %}
+                        </h2>
+                    {% endif %}
+		        {% else %}
+		            {% render_announcement_html announcement %}
+		        {% endif %}
+	        </div> {% comment %} end dashboard-announcement-frame {% endcomment %}
         {% endif %}
 
 		<div class="dashboard-news-create-frame">
