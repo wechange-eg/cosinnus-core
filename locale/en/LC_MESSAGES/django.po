@@ -1999,6 +1999,13 @@ msgid "Account deactivated"
 msgstr ""
 
 #, fuzzy
+msgid "Account verified"
+msgstr "Create Project"
+
+msgid "Accounts Need Verification"
+msgstr ""
+
+#, fuzzy
 msgid "Activate"
 msgstr "Create Project"
 
@@ -5386,6 +5393,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -6457,6 +6471,12 @@ msgstr ""
 msgid ""
 "If activated, newly registered users need to be approved by a portal admin "
 "before being able to log in."
+msgstr ""
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -13487,6 +13507,17 @@ msgid "Where is the project active?"
 msgstr ""
 
 msgid "Where would your idea be realized?"
+msgstr ""
+
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
 msgstr ""
 
 msgid "Which Group does the group belong to?"

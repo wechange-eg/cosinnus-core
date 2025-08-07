@@ -3,8 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
 
 #, python-format
 msgid ""
@@ -2176,6 +2174,16 @@ msgstr "Twoja aplikacja została przyjęta!"
 msgid "Account deactivated"
 msgstr "Konto nieaktywne"
 
+#, fuzzy
+#| msgid "Account deactivated"
+msgid "Account verified"
+msgstr "Konto nieaktywne"
+
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "E-mail Wymaga Weryfikacji"
+
 msgid "Activate"
 msgstr "Aktywuj"
 
@@ -3034,7 +3042,6 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Zaakceptuj nasze warunki korzystania z usług"
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Wszyscy użytkownicy"
 
@@ -5633,6 +5640,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -7144,6 +7158,12 @@ msgid ""
 msgstr ""
 "To ustawienie sprawia, że nowi użytkownicy muszą być zaakceptowani przez "
 "administratora portalu przed możliwością zalogowania."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -12847,7 +12867,6 @@ msgid "There was a critical unexpected error during the import"
 msgstr "Wystąpił nieoczekiwany błąd krytyczny podczas importu"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "Podczas ładowania widgetu nastąpił błąd"
 
@@ -12861,7 +12880,6 @@ msgid "There was an error loading the widget"
 msgstr "Podczas ładowania widgetu nastąpił błąd"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "Podczas ładowania widgetu nastąpił błąd"
 
@@ -14035,12 +14053,10 @@ msgid "User %(username)s was successfully invited!"
 msgstr "Użytkownik %(username)s został pomyślnie zaproszony!"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "Użytkownik \"%(username)s\" nie jest już członkiem."
 
 #, fuzzy, python-format
-#| msgid "User was not created"
 msgid "User %s is now blocked."
 msgstr "Użytkownik nie został utworzony"
 
@@ -14133,12 +14149,10 @@ msgid "User who caused this notification event"
 msgstr "Użytkownik, który wywołał to powiadomienie"
 
 #, fuzzy
-#| msgid "User token"
 msgid "User-Block"
 msgstr "Token użytkownika"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Użytkownicy"
 
@@ -14718,6 +14732,17 @@ msgstr "Miejsce aktywności projektu?"
 msgid "Where would your idea be realized?"
 msgstr "Gdzie będziesz realizować swoją ideę?"
 
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "Do jakiej grupy należy projekt?"
 
@@ -15073,7 +15098,6 @@ msgid "You are attending this event"
 msgstr "Podałaś/eś, że weźmiesz udział w tym wydarzeniu."
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Śledzisz tę treść lub tę należącą do Projektu albo Grupy"
 

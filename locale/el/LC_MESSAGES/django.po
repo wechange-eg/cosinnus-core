@@ -2114,6 +2114,16 @@ msgstr "Η αίτησή σας έχει γίνει δεκτή!"
 msgid "Account deactivated"
 msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε"
 
+#, fuzzy
+#| msgid "Account deactivated"
+msgid "Account verified"
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε"
+
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "Τα Email Χρειάζονται Επαλήθευση"
+
 msgid "Activate"
 msgstr "Ενεργοποίηση"
 
@@ -2979,7 +2989,6 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr ""
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Όλοι οι χρήστες"
 
@@ -5625,6 +5634,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -7149,6 +7165,12 @@ msgid ""
 msgstr ""
 "Εάν ενεργοποιηθούν, οι χρήστες που έχουν εγγραφεί πρόσφατα πρέπει να "
 "εγκριθούν από ένα διαχειριστή πύλης πριν να είναι σε θέση να συνδεθούν."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -12897,7 +12919,6 @@ msgid "There was a critical unexpected error during the import"
 msgstr "Υπήρξε ένα σημαντικό απροσδόκητο σφάλμα κατά την εισαγωγή"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "Υπήρξε σφάλμα κατά τη φόρτωση του widget"
 
@@ -12913,7 +12934,6 @@ msgid "There was an error loading the widget"
 msgstr "Υπήρξε σφάλμα κατά τη φόρτωση του widget"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "Υπήρξε σφάλμα κατά τη φόρτωση του widget"
 
@@ -14111,12 +14131,10 @@ msgid "User %(username)s was successfully invited!"
 msgstr "Ο χρήστης %(username)s προσκλήθηκε με επιτυχία!"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "Ο χρήστης \"%(username)s\" δεν είναι πλέον μέλος."
 
 #, fuzzy, python-format
-#| msgid "User was not created"
 msgid "User %s is now blocked."
 msgstr "Δεν δημιουργήθηκε χρήστης"
 
@@ -14209,12 +14227,10 @@ msgid "User who caused this notification event"
 msgstr "Ο χρήστης που ενεργοποίησε αυτό το συμβάν ειδοποίησης"
 
 #, fuzzy
-#| msgid "User token"
 msgid "User-Block"
 msgstr "Διακριτικό Χρήστη"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Χρήστες"
 
@@ -14813,6 +14829,17 @@ msgstr "Πού είναι ενεργό το έργο;"
 msgid "Where would your idea be realized?"
 msgstr "Πού θα υλοποιούνταν η ιδέα σας;"
 
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "Σε ποια Ομάδα ανήκει η ομάδα;"
 
@@ -15167,7 +15194,6 @@ msgid "You are attending this event"
 msgstr "Παρακολουθείτε αυτή την εκδήλωση"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Ακολουθείτε αυτό το περιεχόμενο ή το Έργο ή την Ομάδα του"
 

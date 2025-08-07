@@ -2057,6 +2057,15 @@ msgstr "თქვენი ცვლილებები შენახულ�
 msgid "Account deactivated"
 msgstr "დეაქტივაცია"
 
+#, fuzzy
+msgid "Account verified"
+msgstr "დეაქტივაცია"
+
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "ელ-ფოსტებს ესაჭიროებათ გადამოწმება"
+
 msgid "Activate"
 msgstr "აქტივაცია"
 
@@ -2910,7 +2919,6 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "ყველა მომხმარებელი"
 
@@ -5574,6 +5582,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -7081,6 +7096,12 @@ msgid ""
 msgstr ""
 "აქტივაციის შემთხვევაში, ახალი დარეგისტრირებული მომხმარებლები, სისტემაში "
 "შესვლამდე, უნდა დამტკიცდნენ პორტალის ადმინისტრატორის მიერ."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -12743,7 +12764,6 @@ msgid "There was a critical unexpected error during the import"
 msgstr "შეცდომა დაფიქსირდა ვიჯეტის ჩატვირთვისას"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "შეცდომა დაფიქსირდა ვიჯეტის ჩატვირთვისას"
 
@@ -12759,7 +12779,6 @@ msgid "There was an error loading the widget"
 msgstr "შეცდომა დაფიქსირდა ვიჯეტის ჩატვირთვისას"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "შეცდომა დაფიქსირდა ვიჯეტის ჩატვირთვისას"
 
@@ -13929,7 +13948,6 @@ msgid "User %(username)s was successfully invited!"
 msgstr "მოხმარებელი %(username)s წარმატებით იქნა მოწვეული!"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "მომხმარებელი \"%(username)s\" აღარ არის წევრი."
 
@@ -14034,7 +14052,6 @@ msgid "User-Block"
 msgstr "შეიყვანეთ ტოკენი:"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "მოხმარებლები"
 
@@ -14622,6 +14639,17 @@ msgstr "სად ხართ აქტიური?"
 msgid "Where would your idea be realized?"
 msgstr "სად მოხდება თქვენი იდეის რეალიზება?"
 
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "რომელ ჯგუფს ეკუთვნის ეს ჯგუფი?"
 
@@ -14964,7 +14992,6 @@ msgid "You are attending this event"
 msgstr "თქვენ ესწრებით ამ ღონისძიებას"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "თქვენ გაყევით ამ კონტენტს ან მის პროექტს ან ჯგუფს"
 

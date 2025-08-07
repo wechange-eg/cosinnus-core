@@ -659,6 +659,14 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
         ),
         default=True,
     )
+    accounts_need_verification = models.BooleanField(
+        _('Accounts Need Verification'),
+        help_text=_(
+            'If activated, newly registered users will not be able to post in the Forum and other autojoin '
+            'until specifically approved by an admin (checkbox `account_verified` in the user profile).'
+        ),
+        default=False,
+    )
 
     # The different keys used for this are static variables in CosinnusPortal!
     saved_infos = models.JSONField(default=dict, encoder=DjangoJSONEncoder)
@@ -1770,6 +1778,10 @@ class CosinnusBaseGroup(
     @property
     def is_forum_group(self):
         return self.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+
+    @property
+    def is_forum_or_default_user_group(self):
+        return self.is_default_user_group or self.is_forum_group
 
     @property
     def is_events_group(self):

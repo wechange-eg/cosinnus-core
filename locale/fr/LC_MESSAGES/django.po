@@ -2089,6 +2089,16 @@ msgstr "Ta demande a été acceptée !"
 msgid "Account deactivated"
 msgstr "Compte désactivé"
 
+#, fuzzy
+#| msgid "Account deactivated"
+msgid "Account verified"
+msgstr "Compte désactivé"
+
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "Les adresses email doivent être vérifiées"
+
 msgid "Activate"
 msgstr "Activer"
 
@@ -2947,7 +2957,6 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Accepte nos conditions d'utilisation"
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Tous les utilisateurs"
 
@@ -5579,6 +5588,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -7102,6 +7118,12 @@ msgid ""
 msgstr ""
 "Si activé, les nouveaux utilisateurs enregistrés doivent être approuvés par "
 "un administrateur du portail avant de pouvoir se connecter."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -12853,7 +12875,6 @@ msgid "There was a critical unexpected error during the import"
 msgstr "Une erreur critique inattendue est survenue lors de l’importation"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "Une erreur est survenue lors du chargement du widget"
 
@@ -12867,7 +12888,6 @@ msgid "There was an error loading the widget"
 msgstr "Une erreur est survenue lors du chargement du widget"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "Une erreur est survenue lors du chargement du widget"
 
@@ -14046,12 +14066,10 @@ msgid "User %(username)s was successfully invited!"
 msgstr "L'utilisateur %(username)s a été invité avec succès !"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "L'utilisateur %(username)s n'est plus membre."
 
 #, fuzzy, python-format
-#| msgid "User was not created"
 msgid "User %s is now blocked."
 msgstr "L'utilisateur n'a pas été créé"
 
@@ -14145,12 +14163,10 @@ msgid "User who caused this notification event"
 msgstr "Utilisateur qui a causé cet événement de notification"
 
 #, fuzzy
-#| msgid "User token"
 msgid "User-Block"
 msgstr "Jeton utilisateur"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Utilisateurs"
 
@@ -14738,6 +14754,17 @@ msgstr "Où le projet est-il actif ?"
 msgid "Where would your idea be realized?"
 msgstr "Où serait réalisée ton idée ?"
 
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "A quel groupe appartient ce groupe ?"
 
@@ -15095,7 +15122,6 @@ msgid "You are attending this event"
 msgstr "Tu assistes à cet événement"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Tu suis ce contenu ou son Projet ou Groupe"
 

@@ -2096,6 +2096,15 @@ msgstr "Ձեր փոփոխությունները պահպանվել են."
 msgid "Account deactivated"
 msgstr "Ապաակտիվացնել"
 
+#, fuzzy
+msgid "Account verified"
+msgstr "Ապաակտիվացնել"
+
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "Էլ.փոստերը պետք է հաստատվեն"
+
 msgid "Activate"
 msgstr "Ակտիվացնել"
 
@@ -2955,7 +2964,6 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Բոլոր օգտատերերը"
 
@@ -5620,6 +5628,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -7112,6 +7127,12 @@ msgid ""
 msgstr ""
 "Ակտիվացման դեպքում նոր գրանցված օգտատերերը պետք է հաստատվեն պորտալի "
 "ադմինիստրատորի կողմից, նախքան մուտք գործելը."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -12768,7 +12789,6 @@ msgid "There was a critical unexpected error during the import"
 msgstr "Վիդջեթը բեռնելիս սխալ տեղի ունեցավ"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "Վիդջեթը բեռնելիս սխալ տեղի ունեցավ"
 
@@ -12784,7 +12804,6 @@ msgid "There was an error loading the widget"
 msgstr "Վիդջեթը բեռնելիս սխալ տեղի ունեցավ"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "Վիդջեթը բեռնելիս սխալ տեղի ունեցավ"
 
@@ -13956,7 +13975,6 @@ msgid "User %(username)s was successfully invited!"
 msgstr "%(username)s օգտատերը հաջողությամբ հրավիրվել է!"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "\"%(username)s\" օգտատերը այլևս անդամ չէ."
 
@@ -14061,7 +14079,6 @@ msgid "User-Block"
 msgstr "Մուտքագրեք թոքենը:"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Օգտատերեր"
 
@@ -14648,6 +14665,17 @@ msgstr "Որտե՞ղ եք ակտիվ?"
 msgid "Where would your idea be realized?"
 msgstr "Որտե՞ղ կիրականացվի ձեր գաղափարը?"
 
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "Ո՞ր խմբին է պատկանում այս խումբը?"
 
@@ -14991,7 +15019,6 @@ msgid "You are attending this event"
 msgstr "Դուք մասնակցում եք այս իրադարձությանը"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Դուք հետևում եք այս բովանդակությանը կամ դրա Ծրագրին կամ Խմբին"
 

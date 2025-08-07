@@ -3,8 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && "
-"n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #, python-format
 msgid ""
@@ -2140,6 +2138,14 @@ msgstr "تم حفظ التغييرات."
 msgid "Account deactivated"
 msgstr "تعطيل"
 
+#, fuzzy
+msgid "Account verified"
+msgstr "تعطيل"
+
+#, fuzzy
+msgid "Accounts Need Verification"
+msgstr "تحتاج رسائل البريد الإلكتروني إلى تثبيت"
+
 msgid "Activate"
 msgstr "تفعيل"
 
@@ -2988,7 +2994,6 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "الرجاء قبول شروط الاستخدام الخاصة بنا"
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "كل المستخدمين"
 
@@ -5630,6 +5635,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr "نحتاج إلى إذنك للنشر على الفيسبوك باسمك."
@@ -7102,6 +7114,12 @@ msgid ""
 msgstr ""
 "في حال التفعيل، يحتاج المستخدمون المسجلون حديثًا إلى موافقة مشرف البوابة قبل "
 "التمكن من تسجيل الدخول."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -12778,7 +12796,6 @@ msgid "There was a critical unexpected error during the import"
 msgstr "حدث خطأ أثناء تحميل الأداة"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "حدث خطأ أثناء تحميل الأداة"
 
@@ -12792,7 +12809,6 @@ msgid "There was an error loading the widget"
 msgstr "حدث خطأ أثناء تحميل الأداة"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "حدث خطأ أثناء تحميل الأداة"
 
@@ -13938,12 +13954,10 @@ msgid "User %(username)s was successfully invited!"
 msgstr "تمت دعوة المستخدم %(username)s بنجاح!"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "المستخدم \"%(username)s\" لم يعد عضوًا."
 
 #, fuzzy, python-format
-#| msgid "User was not created"
 msgid "User %s is now blocked."
 msgstr "لم يتم إنشاء المستخدم"
 
@@ -14042,7 +14056,6 @@ msgid "User-Block"
 msgstr "إدخال رمز:"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "المستخدمين"
 
@@ -14614,6 +14627,17 @@ msgstr "أين ينشط المشروع؟"
 msgid "Where would your idea be realized?"
 msgstr "أين ستتحقق فكرتك؟"
 
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "إلى أي مجموعة تنتمي المجموعة؟"
 
@@ -14971,7 +14995,6 @@ msgid "You are attending this event"
 msgstr "أنت ستحضر هذه المناسبة"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "أنت تتابع هذا المحتوى أو مشروعه أو مجموعته"
 

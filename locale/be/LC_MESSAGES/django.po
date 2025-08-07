@@ -3,8 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Language: be\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
 #, python-format
 msgid ""
@@ -2136,6 +2134,15 @@ msgstr "Вашы змены захаваныя."
 msgid "Account deactivated"
 msgstr "Пазначыць як неактыўны"
 
+#, fuzzy
+msgid "Account verified"
+msgstr "Пазначыць як неактыўны"
+
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "Адрасы электроннай пошты патрабуюць пацвярджэння"
+
 msgid "Activate"
 msgstr "Актываваць"
 
@@ -2992,7 +2999,6 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Калі ласка, прыміце Умовы карыстання сайтам"
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Усе карыстальнікі(-цы)"
 
@@ -5654,6 +5660,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -7140,6 +7153,12 @@ msgid ""
 msgstr ""
 "Калі актыўна, новыя зарэгістраваныя карыстальнікі(-цы) мусяць быць ухваленыя "
 "адміністратарам партала перш чым атрымаюць магчымасць увайсці."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -13978,7 +13997,6 @@ msgid "User %(username)s was successfully invited!"
 msgstr "Карыстальнік(-ца) %(username)s паспяхова запрошаны(-ая)!"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "Карыстальнік(-ца) \"%(username)s\" больш не з'яўляецца чальцом."
 
@@ -14083,7 +14101,6 @@ msgid "User-Block"
 msgstr "Увядзіце маркер:"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Карыстальнікі(-цы)"
 
@@ -14663,6 +14680,17 @@ msgstr "У якой мясцовасці вы дзейнічаеце?"
 
 msgid "Where would your idea be realized?"
 msgstr "Дзе, па Вашай задумцы, павінна рэалізоўвацца ідэя?"
+
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
 
 msgid "Which Group does the group belong to?"
 msgstr "Да якой Групы належыць гэта група?"

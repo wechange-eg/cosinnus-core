@@ -719,7 +719,7 @@ class CosinnusPortalAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'site', 'public')
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('saved_infos',)
-    exclude = (
+    exclude = [
         'logo_image',
         'background_image',
         'protocol',
@@ -728,7 +728,12 @@ class CosinnusPortalAdmin(admin.ModelAdmin):
         'description',
         'top_color',
         'bottom_color',
-    )
+    ]
+    if not settings.COSINNUS_USER_ACCOUNTS_NEED_VERIFICATION_ENABLED:
+        exclude += [
+            'accounts_need_verification',
+        ]
+
     if settings.COSINNUS_CONFERENCES_ENABLED or settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
         inlines = [CosinnusConferenceSettingsInline, CosinnusConferencePremiumCapacityInfoInline]
 
@@ -797,6 +802,12 @@ class UserProfileInline(admin.StackedInline):
     )
     show_change_link = True
     view_on_site = False
+    exclude = []
+
+    if not settings.COSINNUS_USER_ACCOUNTS_NEED_VERIFICATION_ENABLED:
+        exclude += [
+            'account_verified',
+        ]
 
 
 class PortalMembershipInline(admin.TabularInline):

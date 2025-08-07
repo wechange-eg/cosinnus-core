@@ -2327,6 +2327,12 @@ msgstr "Die Kontoverbindung wurde entfernt"
 msgid "Account deactivated"
 msgstr "Account deaktiviert"
 
+msgid "Account verified"
+msgstr "Account verifiziert"
+
+msgid "Accounts Need Verification"
+msgstr "Benutzeraccounts müssen verifiziert werden"
+
 msgid "Activate"
 msgstr "Aktivieren"
 
@@ -5787,6 +5793,17 @@ msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 "Für Optionen und Parameter, gehe bitte auf die Adminseite der Veranstaltung"
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+"Aus Spam-Schutz-Gründen können neue Benutzer/innen-Konten hier zunächst keine "
+"Beiträge veröffentlichen. Wenn du etwas posten möchtest, schreibe bitte eine "
+"kurze E-Mail an %(support_email_link)s, und wir werden dein Konto gerne "
+"freischalten!"
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -7369,6 +7386,15 @@ msgstr ""
 "Wenn gewählt müssen neue Benutzerkonten nach dem Registrieren durch einen "
 "Portaladminstrator bestätigt werden bevor sich der/die Benutzer/in einloggen "
 "kann."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
+"Wenn aktiviert, können neu registrierte Benutzer/innen erst dann Beiträge im "
+"Forum und anderen offenen Gruppen posten, wenn sie von einem Administrator "
+"freigegeben wurden (Häkchen \"account_verified\" im Benutzerprofil)."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -15219,6 +15245,23 @@ msgstr "Wo ist das Projekt aktiv?"
 
 msgid "Where would your idea be realized?"
 msgstr "Wo soll deine Idee verwirklicht werden?"
+
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+"Ob Freigabe durch eine/n Administrator/in gegeben wurde, dass dieser Account "
+"im Forum und anderen offenen Gruppen posten darf."
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
+"Ob die E-Mail-Adresse dieser Benutzerin / dieses Benutzers verifiziert wurde. "
+"Nicht verifizierte Benutzer/innen erhalten keine E-Mails und können je nach "
+"Portaleinstellungen möglicherweise bestimmte öffentliche Inhalte nicht "
+"erstellen."
 
 msgid "Which Group does the group belong to?"
 msgstr "Welcher Gruppe gehört das Projekt an?"

@@ -2097,6 +2097,15 @@ msgstr "Je wijzigingen zijn opgeslagen."
 msgid "Account deactivated"
 msgstr "Deactiveren"
 
+#, fuzzy
+msgid "Account verified"
+msgstr "Deactiveren"
+
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "E-mails moeten worden geverifieerd"
+
 msgid "Activate"
 msgstr "Activeren"
 
@@ -2955,7 +2964,6 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Accepteer alsjeblieft onze gebruiksvoorwaarden"
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Alle gebruikers"
 
@@ -5601,6 +5609,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -7105,6 +7120,12 @@ msgid ""
 msgstr ""
 "Indien geactiveerd, moeten nieuw geregistreerde gebruikers worden goedgekeurd "
 "door een portalbeheerder voordat ze kunnen inloggen."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -12753,7 +12774,6 @@ msgid "There was a critical unexpected error during the import"
 msgstr "Er is een fout opgetreden bij het laden van de widget"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "Er is een fout opgetreden bij het laden van de widget"
 
@@ -12769,7 +12789,6 @@ msgid "There was an error loading the widget"
 msgstr "Er is een fout opgetreden bij het laden van de widget"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "Er is een fout opgetreden bij het laden van de widget"
 
@@ -13936,12 +13955,10 @@ msgid "User %(username)s was successfully invited!"
 msgstr "Gebruiker %(username)s is succesvol uitgenodigd!"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "Gebruiker “%(username)s” is geen lid meer."
 
 #, fuzzy, python-format
-#| msgid "User was not created"
 msgid "User %s is now blocked."
 msgstr "Gebruiker is niet aangemaakt"
 
@@ -14043,7 +14060,6 @@ msgid "User-Block"
 msgstr "Voer een token in:"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Gebruikers"
 
@@ -14632,6 +14648,17 @@ msgstr "Waar bent je actief?"
 msgid "Where would your idea be realized?"
 msgstr "Waar zou je idee worden gerealiseerd?"
 
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "Bij welke groep hoort de groep?"
 
@@ -14983,7 +15010,6 @@ msgid "You are attending this event"
 msgstr "Je neemt deel aan dit evenement"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Je volgt deze inhoud of bijbehorende project of groep"
 

@@ -155,7 +155,24 @@ class BaseUserProfile(
         settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_profile', on_delete=models.CASCADE
     )
     # whether this user's email address has been verified. non-verified users do not receive emails
-    email_verified = models.BooleanField(_('Email verified'), default=False, db_index=True)
+    email_verified = models.BooleanField(
+        _('Email verified'),
+        default=False,
+        db_index=True,
+        help_text=_(
+            "Whether this user's email address has been verified. Non-verified users do not "
+            'receive emails and depending on portal settings, may not create certain public content.'
+        ),
+    )
+    account_verified = models.BooleanField(
+        _('Account verified'),
+        default=True,
+        db_index=False,
+        help_text=_(
+            'Whether admin approval for newly registered accounts has been given that this user may '
+            'post in the Forum and other autojoin groups.'
+        ),
+    )
     tos_accepted = models.BooleanField(verbose_name=_('ToS accepted'), default=False, db_index=True)
 
     avatar = models.ImageField(_('Avatar'), null=True, blank=True, upload_to=get_avatar_filename)

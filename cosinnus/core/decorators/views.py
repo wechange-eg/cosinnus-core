@@ -40,6 +40,10 @@ MSG_USER_NOT_VERIFIED = _(
     'You need to verify your email before you can use this part of the site! Please check your emails and click the '
     'link in the verification email you received from us, or request a new email by clicking the link above.'
 )
+MSG_USER_ACCOUNT_NOT_VERIFIED = _(
+    'For spam protection reasons, new accounts are not initially allowed to make posts here. If you would like to '
+    'post something, please write a short email to %(support_email_link)s and we will be happy to approve your account!'
+)
 
 
 def redirect_to_error_page(request, view=None, group=None):

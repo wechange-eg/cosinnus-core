@@ -3,8 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #, python-format
 msgid ""
@@ -2150,6 +2148,16 @@ msgstr "Вашу заявку прийнято!"
 msgid "Account deactivated"
 msgstr "Деактивувати обліковий запис "
 
+#, fuzzy
+#| msgid "Account deactivated"
+msgid "Account verified"
+msgstr "Деактивувати обліковий запис "
+
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "Електронні адреси потребують верифікації"
+
 msgid "Activate"
 msgstr "Активувати"
 
@@ -3002,7 +3010,6 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Будь ласка, прочитайте та погодьтеся з Умовами Користування"
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Усі користувачі"
 
@@ -5605,6 +5612,13 @@ msgstr ""
 msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
+#, python-format
+msgid ""
+"For spam protection reasons, new accounts are not initially allowed to make "
+"posts here. If you would like to post something, please write a short email "
+"to %(support_email_link)s and we will be happy to approve your account!"
+msgstr ""
+
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
@@ -7118,6 +7132,12 @@ msgstr ""
 "Якщо цей параметр активовано, після реєстрації нові облікові записи "
 "користувачів повинен підтвердити адміністратор порталу, перш ніж вони зможуть "
 "увійти в систему."
+
+msgid ""
+"If activated, newly registered users will not be able to post in the Forum "
+"and other autojoin until specifically approved by an admin (checkbox "
+"`account_verified` in the user profile)."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -12829,7 +12849,6 @@ msgid "There was a critical unexpected error during the import"
 msgstr "Під час імпорту сталася несподівана критична помилка"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "Під час завантаження віджету сталася помилка"
 
@@ -12845,7 +12864,6 @@ msgid "There was an error loading the widget"
 msgstr "Під час завантаження віджету сталася помилка"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "Під час завантаження віджету сталася помилка"
 
@@ -14025,12 +14043,10 @@ msgid "User %(username)s was successfully invited!"
 msgstr "Користувача %(username)s було успішно запрошено!"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "Користувач(-ка) \"%(username)s\" більше не є членом."
 
 #, fuzzy, python-format
-#| msgid "User was not created"
 msgid "User %s is now blocked."
 msgstr "Користувача не було створено"
 
@@ -14124,12 +14140,10 @@ msgid "User who caused this notification event"
 msgstr "Користувач, який створив це сповіщення"
 
 #, fuzzy
-#| msgid "User token"
 msgid "User-Block"
 msgstr "Токен користувача"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Користувачі"
 
@@ -14713,6 +14727,17 @@ msgstr "У якій сфері проєкт буде активний?"
 msgid "Where would your idea be realized?"
 msgstr "Де мала би бути реалізована Ваша ідея?"
 
+msgid ""
+"Whether admin approval for newly registered accounts has been given that this "
+"user may post in the Forum and other autojoin groups."
+msgstr ""
+
+msgid ""
+"Whether this user's email address has been verified. Non-verified users do "
+"not receive emails and depending on portal settings, may not create certain "
+"public content."
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "До якої Групи належить проєкт?"
 
@@ -15093,7 +15118,6 @@ msgid "You are attending this event"
 msgstr "Ви берете участь у цій події"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Ви стежите за цим контентом або його проєктом чи групою"
 
