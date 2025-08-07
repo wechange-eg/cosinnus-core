@@ -68,7 +68,7 @@
     <script>
         (() => {
             const groupSelectLabel = '{% trans "Please Select" %}';
-            const migrationInProgress = '{{ migration_in_progress }}' === 'True';
+            const migrationInProgress = {% if migration_in_progress %}true{% else %}false{% endif %};
             const csrftoken = Cosinnus.getCookie('csrftoken');
             const userGroups = {{ user_admin_groups|safe }};
             const ncAdmin = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME }}';
