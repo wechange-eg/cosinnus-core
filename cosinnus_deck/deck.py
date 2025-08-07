@@ -584,23 +584,6 @@ class DeckConnection:
                     raise DeckConnectionException('Failed to get user board.')
                 board_data = response.json()
 
-                # add users to group board to be able to assign them to cards before they join the group.
-                group_board_users = [settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, group.nextcloud_group_id]
-                for acl_data in group_board_data['acl']:
-                    if acl_data['participant']['uid'] in group_board_users:
-                        # ignore existing default participants
-                        continue
-                    migrated_acl_data = {
-                        'type': acl_data['type'],
-                        'participant': acl_data['particpant'],
-                        'permissionEdit': False,
-                        'permissionShare': False,
-                        'permissionManage': False,
-                    }
-                    response = self._api_post(f'/boards/{group_board_id}/acl', data=migrated_acl_data)
-                    if response.status_code != 200:
-                        raise DeckConnectionException('Acl migration failed.')
-
                 # migrate labels, save label ids in dict to be used in assignment
                 labels = existing_labels.copy()
                 for label_data in board_data['labels']:
@@ -692,7 +675,20 @@ class DeckConnection:
                                 data=migrate_assigned_user_data,
                             )
                             if response.status_code != 200:
-                                raise DeckConnectionException('Assigned user migration failed.')
+                                if (
+                                    response.status_code == 400
+                                    and response.json().get('message') == 'The user is not part of the board'
+                                ):
+                                    logger.warning(
+                                        'Deck migration: Cant assign non-group users!',
+                                        extra={
+                                            'group_board_id': group_board_id,
+                                            'board_id': board_id,
+                                            'user_id': assigned_user_data['participant']['uid'],
+                                        },
+                                    )
+                                else:
+                                    raise DeckConnectionException('Assigned user migration failed.')
 
                         # migrate card label
                         for label_data in card_data.get('labels', []):
