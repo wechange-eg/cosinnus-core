@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import itertools
 import logging
 import re
 from builtins import object
@@ -31,7 +32,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
-from cosinnus.core.decorators.views import get_group_for_request, redirect_to_not_logged_in
+from cosinnus.core.decorators.views import get_group_for_request, redirect_to_error_page, redirect_to_not_logged_in
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.core.registries import app_registry
 from cosinnus.models import UserOnlineOnDay
@@ -818,3 +819,35 @@ class DeprecatedAppMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
                     # make cosinnus_todo app readonly
                     if request.method == 'POST':
                         return redirect(group_aware_reverse('cosinnus:todo:list', kwargs={'group': group}))
+
+
+class ManagedTagBlockURLsMiddleware:
+    """Blocks some URLs for users with assigned managed tags,
+    as defined in setting `MANAGED_TAGS_RESTRICT_URLS_BLOCKED`"""
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def get_user_restricted_tag_slugs(self, user):
+        user_managed_tag_slugs = [tag.slug for tag in user.cosinnus_profile.get_managed_tags()]
+        restricted_tags = set(settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.keys())
+        user_tags = set(user_managed_tag_slugs)
+        return restricted_tags.intersection(user_tags)
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED:
+            user = request.user
+            restricted_tag_slugs = self.get_user_restricted_tag_slugs(user)
+            if user.is_authenticated and restricted_tag_slugs:
+                blocked_urls = itertools.chain.from_iterable(
+                    [
+                        settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.get(tag_slug, [])
+                        for tag_slug in restricted_tag_slugs
+                    ]
+                )
+                # if any URL in the blocked urls matches the current URL, redirect to an error page
+                if next(filter(lambda url: request.path.startswith(url), blocked_urls), False):
+                    messages.add_message(request, messages.ERROR, _('Sorry, your account may not access this page.'))
+                    return redirect_to_error_page(request, view=self)
+        return response

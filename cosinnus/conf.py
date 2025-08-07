@@ -1486,6 +1486,15 @@ class CosinnusConf(AppConf):
     # map content types
     MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
 
+    # A mapping of managed tag slugs to lists or URLs that are blocked
+    # for all users who are assigned that managed tag.
+    # e.g.: `{'restrictedtagslug': ['/url1', '/url2', ...], ...}`
+    # used by `ManagedTagBlockURLsMiddleware`
+    # to use this, define some tags and URLs in this setting and
+    # add `'cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware',`
+    # to django's `MIDDLEWARE` setting
+    MANAGED_TAGS_RESTRICT_URLS_BLOCKED = {}
+
     # if True, enables `tag` function in the group/project settins, files, todos, events, etc.
     TAGS_ENABLED = True
 
