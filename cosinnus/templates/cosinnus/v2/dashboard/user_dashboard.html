@@ -354,30 +354,30 @@
             </div>
             <script>
                 (() => {
-                    const ncAdmin = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME }}'
-                    const ncUrl = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}'
-                    const csrftoken = Cosinnus.getCookie('csrftoken')
+                    const ncAdmin = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME }}';
+                    const ncUrl = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}';
+                    const csrftoken = Cosinnus.getCookie('csrftoken');
                     function isUserBoard(board) {
                         /* check if the board is a user board that can be migrated */
-                        return board.owner.uid !== ncAdmin && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE
+                        return board.owner.uid !== ncAdmin && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE;
                     }
                     async function getUserBoards() {
                         /* get the user boards from next cloud */
                         try {
-                            await fetch(`${ncUrl}/login`, { credentials: "include", mode: "no-cors" })
+                            await fetch(`${ncUrl}/login`, { credentials: "include", mode: "no-cors" });
                             let token = await fetch(`${ncUrl}/csrftoken`, {credentials: "include"}).then(r => r.json()).then(r => r.token);
-                            let boards = await fetch(`${ncUrl}/apps/deck/boards?requesttoken=${encodeURIComponent(token)}`, { credentials: "include" }).then(r => r.json())
-                            return boards.filter(isUserBoard)
+                            let boards = await fetch(`${ncUrl}/apps/deck/boards?requesttoken=${encodeURIComponent(token)}`, { credentials: "include" }).then(r => r.json());
+                            return boards.filter(isUserBoard);
                         } catch (error) {
-                            console.error(error.message)
+                            console.error(error.message);
                         }
                     }
                     async function checkUserBoards() {
                         /* check for user boards in nextcloud and display banner or disable check. */
                         try {
-                            let userBoards = await getUserBoards()
+                            let userBoards = await getUserBoards();
                             if (userBoards.length > 0) {
-                                document.getElementById('deck-migration-frame').style.display = "block"
+                                document.getElementById('deck-migration-frame').style.display = "block";
                             } else {
                                 await fetch('/dashboard/api/save_ui_prefs/',{
                                     method: "POST",
@@ -390,7 +390,7 @@
                                 })
                             }
                         } catch (error) {
-                            console.error(error.message)
+                            console.error(error.message);
                         }
                     }
                     checkUserBoards();
