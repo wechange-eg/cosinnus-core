@@ -196,7 +196,7 @@
                     })
                     document.getElementById('start-frame').style.display = "none";
                     document.getElementById('status-frame').style.display = "block";
-                    statusUpdateInterval = setInterval(updateStatus, 1000);
+                    statusUpdateInterval = setInterval(updateStatus, 5000);
                 } catch (error) {
                     console.error(error.message);
                     statusFailed();
@@ -205,7 +205,7 @@
             if (!migrationInProgress) {
                 addDeckSelection();
             } else {
-                statusUpdateInterval = setInterval(updateStatus, 1000);
+                statusUpdateInterval = setInterval(updateStatus, 5000);
             }
         })();
     </script>
