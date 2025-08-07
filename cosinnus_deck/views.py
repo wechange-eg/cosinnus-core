@@ -70,16 +70,27 @@ deck_migrate_todo_view = DeckMigrateTodoView.as_view()
 
 
 class DeckMigrateUserDecksView(RequireLoggedInMixin, TemplateView):
+    """
+    View providing the user deck migration page.
+    The page uses js to fetch the user boards from NextCloud and offers a group selection for the migration. Only
+    groups where the user is admin a shown.
+    When the migration is started the js code shares the board with the admin user in NextCloud, if needed. Then it
+    triggers the backend migration with a post to DeckMigrateUserDecksApiView. While the migration  is in progress the
+    migration status is updated from that view.
+    """
+
     template_name = 'cosinnus_deck/deck_migrate_user_decks.html'
 
     def get_context_data(self, **kwargs):
         context = super(DeckMigrateUserDecksView, self).get_context_data(**kwargs)
+        # get groups where the user is admin, used to select the migration target
         user_admin_groups = [
             [group.pk, group.name]
             for group in CosinnusGroup.objects.get_for_user_group_admin(self.request.user)
             if group.type in [CosinnusGroup.TYPE_PROJECT, CosinnusGroup.TYPE_SOCIETY]
         ]
         context['user_admin_groups'] = json.dumps(user_admin_groups)
+        # add current migration status to context
         context['migration_in_progress'] = self.request.user.cosinnus_profile.deck_migration_in_progress()
         return context
 
@@ -88,7 +99,10 @@ deck_migrate_user_decks_view = DeckMigrateUserDecksView.as_view()
 
 
 class DeckMigrateUserDecksApiView(RequireLoggedInMixin, View):
+    """API used by the DeckMigrateUserDecksView js code to start the backend migration and get the current status."""
+
     def post(self, request, *args, **kwargs):
+        """Start the migration task in the backend for the selected boards and groups."""
         user = request.user
         migration_data = json.loads(request.body)
         admin_group_ids = list(CosinnusGroup.objects.get_for_user_group_admin_pks(user))
@@ -111,6 +125,7 @@ class DeckMigrateUserDecksApiView(RequireLoggedInMixin, View):
         return HttpResponse(status=200)
 
     def get(self, request, *args, **kwargs):
+        """Get the current migration status to show the user the respective info."""
         status = request.user.cosinnus_profile.deck_migration_status()
         data = {'status': status}
         return JsonResponse(data=data)
