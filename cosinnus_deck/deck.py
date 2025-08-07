@@ -418,6 +418,10 @@ class DeckConnection:
     def group_migrate_todo(self, group):
         """Migrate todos to deck app."""
 
+        # make sure that the migration is not already running
+        if group.deck_migration_in_progress():
+            return
+
         # set migration status
         group.deck_migration_set_status(group.DECK_MIGRATION_STATUS_IN_PROGRESS)
         try:
@@ -533,6 +537,10 @@ class DeckConnection:
         Migrate user decks to group decks.
         @param selected_decks: List of dicts containing board- and group-ids, e.g. [{"board": 1, "group": 2 }, ...].
         """
+
+        # make sure that the migration is not already running
+        if user.cosinnus_profile.deck_migration_in_progress():
+            return
 
         # set migration status
         user.cosinnus_profile.deck_migration_set_status(user.cosinnus_profile.DECK_MIGRATION_STATUS_IN_PROGRESS)
