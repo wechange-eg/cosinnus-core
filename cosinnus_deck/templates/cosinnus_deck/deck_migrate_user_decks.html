@@ -21,7 +21,7 @@
                 <ul class="media-list">
                     <li class="media">
                                 <span class="pull-left">
-                                    <i class="fa fa-clock"></i>
+                                    <i class="fa fa-check"></i>
                                 </span>
                         <div class="media-body">
                             {% trans "Start migration" %}
@@ -67,7 +67,7 @@
     </div>
     <script>
         (() => {
-            const doNotMigrateLabel = '{% trans "Do not migrate" %}'
+            const groupSelectLabel = '{% trans "Please Select" %}'
             const migrationInProgress = '{{ migration_in_progress }}' === 'True'
             const csrftoken = Cosinnus.getCookie('csrftoken')
             const userGroups = {{ user_admin_groups|safe }}
@@ -100,7 +100,7 @@
                 console.debug('adding deck group selection...')
                 try {
                     userBoards = await getUserBoards()
-                    let group_select_options = `<option value="">${doNotMigrateLabel}</option>`
+                    let group_select_options = `<option value="">--- ${groupSelectLabel} ---</option>`
                     userGroups.forEach((group) => {
                         group_select_options += `<option value="${group[0]}">${group[1]}</option>`
                     });
@@ -133,6 +133,7 @@
                         "boardId": `${boardID}`,
                     }),
                 })
+                // TODO: check status
             }
             function statusSuccess() {
                 /* Migration successful */
