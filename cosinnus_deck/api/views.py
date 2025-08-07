@@ -261,3 +261,38 @@ class DeckLabelView(DeckProxyApiMixin, APIView):
             raise_deck_connection_exception=False,
         )
         return response
+
+
+class DeckEventsView(APIView):
+    """
+    Handle deck app events. Triggers notifications and syncs follows.
+    """
+
+    renderer_classes = (
+        JSONRenderer,
+        BrowsableAPIRenderer,
+    )
+    # authentication_classes = (CsrfExemptSessionAuthentication,)
+    # permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        return Response()
+
+
+class DeckFollowView(APIView):
+    """
+    Follow/unfollow deck elements.
+    """
+
+    renderer_classes = (
+        JSONRenderer,
+        BrowsableAPIRenderer,
+    )
+    # authentication_classes = (CsrfExemptSessionAuthentication,)
+    # permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        return Response()
+
+    def get(self, request):
+        return Response()
