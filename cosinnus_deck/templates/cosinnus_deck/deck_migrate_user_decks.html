@@ -17,7 +17,7 @@
                 {# populated by the addDeckSelection js function #}
                 <ul id="deck-group-selection"></ul>
             </div>
-            <button class="btn btn-emphasized btn-autosize" onclick="startMigration()">
+            <button class="btn btn-emphasized btn-autosize" onclick="$.cosinnus.startDeckMigration()">
                 <ul class="media-list">
                     <li class="media">
                                 <span class="pull-left">
@@ -164,7 +164,7 @@
                     statusFailed()
                 }
             }
-            async function startMigration() {
+            $.cosinnus['startDeckMigration'] = async function startDeckMigration() {
                 /* Start the migration for the selected boards/groups. */
                 try {
                     for (const board of userBoards)  {
