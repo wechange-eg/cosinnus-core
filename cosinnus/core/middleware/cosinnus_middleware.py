@@ -797,4 +797,4 @@ class DeprecatedAppMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
 
                     # make cosinnus_todo app readonly
                     if request.method == 'POST':
-                        return redirect(request.path)
+                        return redirect(group_aware_reverse('cosinnus:todo:list', kwargs={'group': group}))
