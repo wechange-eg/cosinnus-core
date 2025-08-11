@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 
+from cosinnus.conf import settings
+
 
 def get_full_name_extended(self, force=False):
     """
@@ -35,3 +37,27 @@ def is_guest(self):
 
 
 setattr(get_user_model(), 'is_guest', property(is_guest))
+
+
+def is_account_verified(self):
+    """
+    Extend the user model with an `is_account_verified` property, that returns if the user is a logged in user
+    with `cosinnus_profile.account_verified = True` (if that feature is enabled, otherwise always True when logged in).
+
+    A user without a cosinnus_profile defaults to is_account_verified=False.
+    """
+    from cosinnus.models import CosinnusPortal
+
+    # otherwise retrieve the flag from the user's cosinnus_profile
+    if self.is_authenticated and hasattr(self, 'cosinnus_profile') and self.cosinnus_profile:
+        if (
+            settings.COSINNUS_USER_ACCOUNTS_NEED_VERIFICATION_ENABLED
+            and CosinnusPortal.get_current().accounts_need_verification
+            and not self.cosinnus_profile.account_verified
+        ):
+            return False
+        return True
+    return False
+
+
+setattr(get_user_model(), 'is_account_verified', property(is_account_verified))

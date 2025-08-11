@@ -13,7 +13,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from ajax_forms.ajax_forms import AjaxFormsCommentCreateViewMixin, AjaxFormsCreateViewMixin, AjaxFormsDeleteViewMixin
-from cosinnus.core.decorators.views import MSG_USER_NOT_VERIFIED, redirect_to_403
+from cosinnus.core.decorators.views import MSG_USER_ACCOUNT_NOT_VERIFIED, MSG_USER_NOT_VERIFIED, redirect_to_403
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.pagination import PaginationTemplateMixin
@@ -72,15 +72,23 @@ class NoteCreateView(
         return context
 
     def form_valid(self, form):
-        # special check: if user isn't verified, don't allow posts to the forum group
-        if (
-            not check_user_verified(self.request.user)
-            and CosinnusPortal.get_current().email_needs_verification
-            and (self.group.is_default_user_group or self.group.is_forum_group)
-        ):
-            messages.warning(self.request, MSG_USER_NOT_VERIFIED)
-            form.add_error(None, MSG_USER_NOT_VERIFIED)
-            return self.form_invalid(form)
+        # special check: if user isn't verified, (or the account isn't verified if the feature is enabled),
+        # don't allow posts to the forum group
+        if self.group.is_forum_or_default_user_group:
+            error_message = None
+            email_not_verified = CosinnusPortal.get_current().email_needs_verification and not check_user_verified(
+                self.request.user
+            )
+            if email_not_verified:
+                error_message = MSG_USER_NOT_VERIFIED
+            if not self.request.user.is_account_verified:
+                error_message = MSG_USER_ACCOUNT_NOT_VERIFIED % {
+                    'support_email_link': CosinnusPortal.get_current().support_email
+                }
+            if error_message:
+                messages.warning(self.request, error_message)
+                form.add_error(None, error_message)
+                return self.form_invalid(form)
 
         form.instance.creator = self.request.user
         ret = super(NoteCreateView, self).form_valid(form)

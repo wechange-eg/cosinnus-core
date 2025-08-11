@@ -1,8 +1,10 @@
 {% load i18n cosinnus_tags widget_tweaks %}
 
-{# sadly we have no practical way of a block to extend for this #}
-{% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.text.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.text.html_name %}
-
+{# We display no note form for unverified user accounts #}
+{% if request.user.is_account_verified or not group.is_forum_or_default_user_group %}
+    {# sadly we have no practical way of a block to extend for this #}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.text.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.text.html_name %}
+{% endif %}
 
 {% with id="write-news-modal" form_id="note-create-form" %}
 	{% group_url 'cosinnus:note:add' group=group as action_url %}
@@ -21,9 +23,14 @@
 	                    {% trans "Write a news post" %}
 	                </h4>
 	            </div>
-	            
-		        {% include 'cosinnus_note/v2/note_form_core.html' with form_id=form_id action_url=action_url %}
-	            
+
+                {% if not request.user.is_account_verified and group.is_forum_or_default_user_group %}
+                    {% include 'cosinnus/user/user_warning_account_not_verified.html' %}
+                    {# We display no note form for unverified user accounts #}
+                {% else %}
+		            {% include 'cosinnus_note/v2/note_form_core.html' with form_id=form_id action_url=action_url %}
+                {% endif %}
+
 	        </div>
 	    </div>
 	   

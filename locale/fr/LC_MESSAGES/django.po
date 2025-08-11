@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-30 18:58+0200\n"
+"POT-Creation-Date: 2025-08-06 15:13+0200\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -528,6 +528,10 @@ msgid "To invite external guests, share this link:"
 msgstr ""
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
+msgstr ""
+
+#, python-format
+msgid "For spam protection reasons, new accounts are not initially allowed to make posts here. If you would like to post something, please write a short email to %(support_email_link)s and we will be happy to approve your account!"
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
@@ -1636,6 +1640,14 @@ msgstr "Les adresses email doivent être vérifiées"
 msgid "If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them."
 msgstr "Si activé, les nouveaux utilisateurs enregistrés et les utilisateurs changeant leur adresse email devront confirmer leur email en cliquant sur un lien dans l'email qui leur sera envoyé."
 
+#, fuzzy
+#| msgid "Emails Need Verification"
+msgid "Accounts Need Verification"
+msgstr "Les adresses email doivent être vérifiées"
+
+msgid "If activated, newly registered users will not be able to post in the Forum and other autojoin until specifically approved by an admin (checkbox `account_verified` in the user profile)."
+msgstr ""
+
 msgid "ToS Version"
 msgstr "Version ToS"
 
@@ -2048,6 +2060,17 @@ msgid "User-set answers to Mitwirk-O-Mat questions"
 msgstr ", pour la raison suivante :"
 
 msgid "Mitwirk-O-Mat Settings"
+msgstr ""
+
+msgid "Whether this user's email address has been verified. Non-verified users do not receive emails and depending on portal settings, may not create certain public content."
+msgstr ""
+
+#, fuzzy
+#| msgid "Account deactivated"
+msgid "Account verified"
+msgstr "Compte désactivé"
+
+msgid "Whether admin approval for newly registered accounts has been given that this user may post in the Forum and other autojoin groups."
 msgstr ""
 
 #, fuzzy
@@ -6166,9 +6189,6 @@ msgid "Link"
 msgstr "Lien de l'URL"
 
 msgid "Please choose the answers that best fit you."
-msgstr ""
-
-msgid "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic."
 msgstr ""
 
 msgid "Toggle navigation"
