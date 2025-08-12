@@ -127,6 +127,7 @@ def update_user_from_obj(user):
 
 def update_user_profile_avatar(profile, retry=False):
     """Update user avatar"""
+    avatar_encoded = None
     if profile.avatar:
         # avatar changed, using a thumbnail the same size as the avatar in NextCloud
         avatar_file = profile.get_avatar_thumbnail(size=(512, 512))
