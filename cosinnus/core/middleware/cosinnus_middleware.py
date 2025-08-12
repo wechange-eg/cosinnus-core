@@ -776,16 +776,16 @@ class DeprecatedAppMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
                 group = self.get_group(request)
                 if group:
                     message = _(
-                        'The Todo app is replaced by the Task-Board app. Editing existing Todos or creating new Todos '
+                        'The Todo app is replaced by the Task Board app. Editing existing Todos or creating new Todos '
                         'has been disabled. '
                     )
                     if check_ug_admin(request.user, group):
-                        migration_url = reverse('cosinnus:deck-migrate-todo', kwargs={'group': group.slug})
+                        migration_url = group_aware_reverse('cosinnus:deck:migrate-todos', kwargs={'group': group})
                         migration_link_label = _('here')
                         migration_link = f'[{migration_link_label}]({migration_url})'
                         message += _('You can migrate existing Todos %(here_link)s.') % {'here_link': migration_link}
                     else:
-                        message += _('Existing Todos can be migrated by the %s(group_type)s admins.') % {
+                        message += _('Existing Todos can be migrated by the %(group_type)s admins.') % {
                             'group_type': group.get_trans().VERBOSE_NAME
                         }
                     # add message if not already added before a redirect
@@ -797,4 +797,4 @@ class DeprecatedAppMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
 
                     # make cosinnus_todo app readonly
                     if request.method == 'POST':
-                        return redirect(request.path)
+                        return redirect(group_aware_reverse('cosinnus:todo:list', kwargs={'group': group}))

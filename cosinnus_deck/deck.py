@@ -418,8 +418,12 @@ class DeckConnection:
     def group_migrate_todo(self, group):
         """Migrate todos to deck app."""
 
+        # make sure that the migration is not already running
+        if group.deck_migration_in_progress():
+            return
+
         # set migration status
-        group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_IN_PROGRESS)
+        group.deck_migration_set_status(group.DECK_MIGRATION_STATUS_IN_PROGRESS)
         try:
             if not group.nextcloud_group_id:
                 # initialize nextcloud group
@@ -455,7 +459,7 @@ class DeckConnection:
                 stack_order += 1
                 card_order = 0
 
-                for todo in todo_query.filter(media_tag__migrated=False):
+                for todo in todo_query:
                     # get description with comments and attached objects
                     description = todo.note
                     if todo.attached_objects.exists():
@@ -517,19 +521,26 @@ class DeckConnection:
             type(group).objects.filter(pk=group.pk).update(deactivated_apps=group.deactivated_apps)
 
             # set migration status
-            group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_SUCCESS)
+            group.deck_migration_set_status(group.DECK_MIGRATION_STATUS_SUCCESS)
+
+            # clear group cache
+            group._clear_cache(group=group)
         except Exception as e:
             logger.warning(
                 'Deck: Todo migration failed!',
                 extra={'group': group.id, 'board_id': group.nextcloud_deck_board_id, 'exception': e},
             )
-            group.deck_todo_migration_set_status(group.DECK_TODO_MIGRATION_STATUS_FAILED)
+            group.deck_migration_set_status(group.DECK_MIGRATION_STATUS_FAILED)
 
     def migrate_user_decks(self, user, selected_decks):
         """
         Migrate user decks to group decks.
         @param selected_decks: List of dicts containing board- and group-ids, e.g. [{"board": 1, "group": 2 }, ...].
         """
+
+        # make sure that the migration is not already running
+        if user.cosinnus_profile.deck_migration_in_progress():
+            return
 
         # set migration status
         user.cosinnus_profile.deck_migration_set_status(user.cosinnus_profile.DECK_MIGRATION_STATUS_IN_PROGRESS)
@@ -572,23 +583,6 @@ class DeckConnection:
                 if response.status_code != 200:
                     raise DeckConnectionException('Failed to get user board.')
                 board_data = response.json()
-
-                # add users to group board to be able to assign them to cards before they join the group.
-                group_board_users = [settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, group.nextcloud_group_id]
-                for acl_data in group_board_data['acl']:
-                    if acl_data['participant']['uid'] in group_board_users:
-                        # ignore existing default participants
-                        continue
-                    migrated_acl_data = {
-                        'type': acl_data['type'],
-                        'participant': acl_data['particpant'],
-                        'permissionEdit': False,
-                        'permissionShare': False,
-                        'permissionManage': False,
-                    }
-                    response = self._api_post(f'/boards/{group_board_id}/acl', data=migrated_acl_data)
-                    if response.status_code != 200:
-                        raise DeckConnectionException('Acl migration failed.')
 
                 # migrate labels, save label ids in dict to be used in assignment
                 labels = existing_labels.copy()
@@ -681,7 +675,20 @@ class DeckConnection:
                                 data=migrate_assigned_user_data,
                             )
                             if response.status_code != 200:
-                                raise DeckConnectionException('Assigned user migration failed.')
+                                if (
+                                    response.status_code == 400
+                                    and response.json().get('message') == 'The user is not part of the board'
+                                ):
+                                    logger.warning(
+                                        'Deck migration: Cant assign non-group users!',
+                                        extra={
+                                            'group_board_id': group_board_id,
+                                            'board_id': board_id,
+                                            'user_id': assigned_user_data['participant']['uid'],
+                                        },
+                                    )
+                                else:
+                                    raise DeckConnectionException('Assigned user migration failed.')
 
                         # migrate card label
                         for label_data in card_data.get('labels', []):

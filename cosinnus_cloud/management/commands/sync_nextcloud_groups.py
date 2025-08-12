@@ -54,6 +54,7 @@ class Command(BaseCommand):
                         group.save()
 
                     # create group
+                    nextcloud_group_exists = True
                     try:
                         response = nextcloud.create_group(group.nextcloud_group_id)
                         if response:
@@ -61,14 +62,20 @@ class Command(BaseCommand):
                             current_group_created = True
                     except OCSException as e:
                         if not e.statuscode == 102:  # 102: group already exists
+                            nextcloud_group_exists = False
                             errors += 1
                             self.stdout.write(f"Error (group create): OCSException: '{e.message}' ({e.statuscode})")
                     except Exception as e:
                         if settings.DEBUG:
                             raise
+                        nextcloud_group_exists = False
                         errors += 1
                         self.stdout.write('Error (group create): Exception: ' + str(e))
                         logger.error('Error (nextcloud group create): Exception: ' + str(e), extra={'exc': e})
+
+                    # proceed with next group if the nextcloud group could not be created
+                    if not nextcloud_group_exists:
+                        continue
 
                     # Creating a group folder in a group with an existing one is safe and will not create a new one
                     if current_group_created:
