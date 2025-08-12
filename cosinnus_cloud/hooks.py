@@ -9,7 +9,6 @@ from contextlib import wraps
 from threading import Thread
 from time import sleep
 
-from django.contrib.staticfiles.storage import staticfiles_storage
 from django.db.models.signals import post_delete, post_save
 from django.db.utils import DatabaseError
 from django.dispatch.dispatcher import receiver
@@ -131,17 +130,18 @@ def update_user_profile_avatar(profile, retry=False):
     if profile.avatar:
         # avatar changed, using a thumbnail the same size as the avatar in NextCloud
         avatar_file = profile.get_avatar_thumbnail(size=(512, 512))
-        with avatar_file.open() as file:
-            avatar_content = file.read()
+        try:
+            with avatar_file.open() as file:
+                avatar_content = file.read()
+                avatar_encoded = b64encode(avatar_content)
+        except Exception as e:
+            logger.warning('Could not update Nextcloud user avatar.', extra={'exc': e})
     else:
-        # avatar deleted, using jane-doe image as the nc plugin does not provide avatar deletion
-        avatar_file = staticfiles_storage.path('images/jane-doe.png')
-        with open(avatar_file, 'rb') as file:
-            avatar_content = file.read()
+        # avatar deleted, using jane-doe image base64 encoded as the nc plugin does not provide avatar deletion
+        avatar_encoded = b'iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAylpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjRGMDY2RDBFNjUzMTFFMzg4RTdERDE5MURGRDQ3RTgiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjRGMDY2Q0ZFNjUzMTFFMzg4RTdERDE5MURGRDQ3RTgiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuZGlkOmUzZGE5YjQ1LWMyZGMtNzc0Mi04OGY1LTM0NjU4ZTkwZjdhMSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDplM2RhOWI0NS1jMmRjLTc3NDItODhmNS0zNDY1OGU5MGY3YTEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5KjURpAAAAIVBMVEXM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'  # noqa
 
-    if avatar_content:
+    if avatar_encoded:
         nc_user_id = get_nc_user_id(profile.user)
-        avatar_encoded = b64encode(avatar_content)
         if retry:
             submit_with_retry(nextcloud.update_user_avatar, nc_user_id, avatar_encoded)
         else:

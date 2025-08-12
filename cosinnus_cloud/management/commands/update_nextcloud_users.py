@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
                 try:
                     update_user_from_obj(user)
-                    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile.avatar:
+                    if hasattr(user, 'cosinnus_profile'):
                         update_user_profile_avatar(user.cosinnus_profile, retry=False)
                     updated += 1
                 except OCSException as e:
