@@ -776,7 +776,7 @@ class DeprecatedAppMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
                 group = self.get_group(request)
                 if group:
                     message = _(
-                        'The Todo app is replaced by the Task-Board app. Editing existing Todos or creating new Todos '
+                        'The Todo app is replaced by the Task Board app. Editing existing Todos or creating new Todos '
                         'has been disabled. '
                     )
                     if check_ug_admin(request.user, group):

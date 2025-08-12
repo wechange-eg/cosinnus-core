@@ -23,8 +23,8 @@ class DeckView(RequireReadMixin, TemplateView):
         if not self.group.nextcloud_deck_board_id and check_ug_admin(request.user, self.group):
             # add admin warning
             message = _(
-                'If the task-board is not available withing a few minutes, some technical difficulties occurred with '
-                'the board service. Try disabling and re-enabling the task-board app in the settings. '
+                'If the Task Board is not available withing a few minutes, some technical difficulties occurred with '
+                'the board service. Try disabling and re-enabling the Task Board app in the settings. '
                 'If the problems persist, please contact the support. We apologize for the inconveniences!'
             )
             messages.warning(self.request, message)

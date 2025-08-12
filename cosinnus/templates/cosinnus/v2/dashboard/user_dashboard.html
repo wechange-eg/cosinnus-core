@@ -282,25 +282,32 @@
                         <i class="fas fa-close"></i>
                     </a>
                 </div>
-                <h2>{% trans "Migrate your NextCloud Deck boards to the Task-Board!" %}</h2>
+                <h2>{% trans "Migrate your boards from the Nextcloud Deck app to your groups and projects!" %}</h2>
                 <div class="v2-textfield transparent">
                     <p>
-                        {% captureas here_link %}<a href="{% url 'cosinnus:deck-migrate-user-decks' %}">{% trans "here" %}</a>{% endcaptureas %}
-                        {% blocktrans %}
-                            You have boards in the NextCloud Deck app. The Deck app is replaced by the Task-Board integrated in groups and projects.
-                            You can migrate existing boards {{ here_link }}!
-                        {% endblocktrans %}
+                        {% trans "Until now, you have been able to work with boards in Nextcloud (using the Deck app). We have now moved this feature from the cloud directly into the groups and projects so that all users can work with Task Boards even more easily." %}
                     </p>
                     <p>
-                        {% trans "You must have admin permissions in a group/project to migrate NextCloud Deck boards." %}
+                        {% trans "If you want to continue using your boards from the Nextcloud Deck app, you will need to move them to a group or project." %}
                     </p>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="spacer-large">&nbsp;</div>
                 <h2>
+                    <div class="spacer-large">&nbsp;</div>
                     <a class="pale-color pale-bold pale-with-highlight"
                         data-target="ui-pref" data-ui-pref="dashboard_deck_migration__hidden"
                         data-ui-pref-value="true" data-hide-after=".dashboard-announcement-deck-migration">
                         {% trans "Do not show this again" %}</a>
+                    <button type="button" href="{% url 'cosinnus:deck-migrate-user-decks' %}"
+                        class="btn btn-emphasized btn-autosize pull-right" title="{% trans "Manage applications" %}">
+                        <ul class="media-list">
+                            <li class="media">
+                                <div class="media-body">
+                                    {% trans "Execute Migration" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
                 </h2>
             </div>
             <script>

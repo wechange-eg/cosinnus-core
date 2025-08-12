@@ -2,20 +2,49 @@
 {% load i18n static cosinnus_tags widget_tweaks thumbnail djajax_tags %}
 
 {% block page_title %}
-    {% trans "Migrate NextCloud Deck Boards" %} - {{ block.super }}
+    {% trans "Migrate Nextcloud Boards" %} - {{ block.super }}
 {% endblock page_title %}
 
 {% block content %}
-    <h2>{% trans "Migrate NextCloud Deck Boards to Task-Board" %}</h2>
+    <h2>{% trans "Migrate your boards from the Nextcloud Deck app to your groups and projects!" %}</h2>
     {% if user_admin_groups %}
         {# show at the start of the migration #}
         <div id="start-frame" style="display: {% if migration_in_progress %}none{% else %}block{% endif %}">
             <div class="textfield transparent">
                 <p class="textfield transparent">
-                    {% trans "Select the groups/projects for boards you want to migrate:" %}
+                    {% trans "Until now, you have been able to work with boards in the Deck app within the Nextcloud. We have now moved this feature from the cloud directly into the groups and projects so that all users can work with Task Boards even more easily." %}
                 </p>
+                <p class="textfield transparent">
+                    {% trans "If you want to continue using your boards from the Nextcloud Deck app, you must move them to a group or project. To do this, select the target group/project for each of your boards." %}
+                </p>
+                <p class="textfield transparent">
+                    <storng></storn>{% trans "Notes:" %}</storng>
+                </p>
+                <ul>
+                    <li>
+                        {% trans "You can only migrate boards for which you have either ‘Owner’ permissions or 'Manage' and ‘Share’ permissions. Therefore, some boards that you had access to in the Nextcloud Deck app may not be displayed here (e.g. because you only have ‘Edit’ permissions). In this case, you should ask the person(s) who have the necessary permissions for the board to perform the migration." %}
+                    </li>
+                    <li>
+                        {% trans "You can only select groups and projects in which you are an admin as the destination for the migration." %}
+                    </li>
+                    <li>
+                        {% trans "If a board does not fit into any of your existing groups and projects in terms of content, you can create a new group or project and then select it as the destination for the migration." %}
+                    </li>
+                    <li>
+                        {% trans "If the group/project you select as the migration destination has not yet activated the new ‘Task Board’ app, the app will be activated as part of the migration. If the app is already activated, the lists and tasks from the migrated board will be appended to the existing lists of the Task Board." %}
+                        <strong>{% trans "No content will be overwritten." %}</strong>
+                    </li>
+                    <li>
+                        {% trans "Boards that have already been migrated (by you or another user with the necessary permissions) will continue to appear in the list. There is no indication as to whether a board has already been migrated. This means you can migrate boards to different groups/projects if you wish - or multiple times into the same group/project. If you accidentally migrate a board twice, this is not a problem; you can simply delete the redundant task lists manually." %}
+                    </li>
+                </ul>
                 {# populated by the addDeckSelection js function #}
-                <ul id="deck-group-selection"></ul>
+                <table id="deck-group-selection" class="table">
+                    <tr>
+                        <th>{% trans "Board from the Nextcloud Deck App" %}</th>
+                        <th>{% trans "Group/Project (migration target)" %}</th>
+                    </tr>
+                </table>
             </div>
             <button class="btn btn-emphasized btn-autosize" onclick="$.cosinnus.startDeckMigration()">
                 <ul class="media-list">
@@ -48,7 +77,7 @@
         {# shown when the migration has successfully finished #}
         <div id="status-success" style="display: none">
             <p class="textfield transparent">
-                {% trans "Migration successfully finished. You can access the migrated boards in the Task-Board of the selected groups/projects." %}
+                {% trans "Migration successfully finished. You can access the migrated boards in the Task Board of the selected groups/projects." %}
             </p>
             <p class="textfield transparent">
                 {% trans "Note: You have to add users to a group/project to allow them access to the board." %}
@@ -61,7 +90,7 @@
             </p>
             <p class="textfield transparent">
                 {% captureas retry_link %}<a href="" class="transparent">{% trans "retry" %}</a>{% endcaptureas %}
-                {% blocktrans %}Please, {{ retry_link }} the migration. If the errors persist, please contact the support!{% endblocktrans %}
+                {% blocktrans %}Please, {{ retry_link }} the migration later. If the errors persist, please contact the support!{% endblocktrans %}
             </p>
         </div>
     </div>
@@ -104,12 +133,17 @@
                     userGroups.forEach((group) => {
                         group_select_options += `<option value="${group[0]}">${group[1]}</option>`;
                     });
-                    var deck_group_ul = document.getElementById("deck-group-selection");
+                    var deck_group_table = document.getElementById("deck-group-selection");
                     userBoards.forEach((board) => {
-                        var li = document.createElement('li');
-                        li.style.marginBottom = "2px";
-                        li.innerHTML =`${board.title} → <select id="group-select-${board.id}">${group_select_options}</select>`;
-                        deck_group_ul.appendChild(li);
+                        var tr = document.createElement('tr');
+                        var board_td = document.createElement('td');
+                        board_td.innerHTML = board.title;
+                        tr.appendChild(board_td)
+                        var group_select_td = document.createElement('td');
+                        group_select_td.innerHTML =`<select id="group-select-${board.id}">${group_select_options}</select>`;
+                        group_select_td.style.padding = "2px";
+                        tr.appendChild(group_select_td)
+                        deck_group_table.appendChild(tr);
                     })
                 } catch (error) {
                     console.error(error.message);
