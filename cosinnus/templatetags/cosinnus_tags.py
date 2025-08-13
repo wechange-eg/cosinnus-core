@@ -26,6 +26,7 @@ from django.db.models.query import QuerySet
 from django.http import HttpRequest
 from django.template.base import TemplateSyntaxError
 from django.template.defaultfilters import linebreaksbr
+from django.template.defaultfilters import stringformat as _django_stringformat
 from django.template.defaulttags import URLNode, url
 from django.template.defaulttags import url as url_tag
 from django.template.loader import render_to_string
@@ -1573,7 +1574,14 @@ def stringformat(value, args):
         return dateutil.parser.parse(value)
     except Exception as e:
         logger.error('Exception in cosinnus_tags.py date `stringformat` filter: e', extra={'exception': e})
-        return None
+        return
+
+
+# since stringformat is overwritten,
+# register original django filter with different name to make it accessible in templates
+@register.filter
+def django_stringformat(value, args):
+    return _django_stringformat(value, args)
 
 
 @register.filter

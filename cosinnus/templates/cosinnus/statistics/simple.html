@@ -226,14 +226,77 @@
         <div class="content-box white-content">
             <h3>Showing data for Portal <b>{{ COSINNUS_CURRENT_PORTAL.name }}</b> from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
             <br/>
-            
-            {% for key, val in statistics %}
+
+            {# show totals #}
+            {% for metric in statistics %}
 	            <div class="row regular-space">
-                   <div class="col-xs-8">{{ key }}</div>
-                   <div class="col-xs-4">{{ val }}</div>
+                   <div class="col-xs-8">{{ metric.title }}</div>
+                   <div class="col-xs-4">{{ metric.total }}</div>
 	            </div>
             {% endfor %}
+
+
+            <br/>
+
+            {# show date_buckets as charts #}
+            <script src="{% static 'js/vendor/chart-4.5.0.umd.min.js' %}"></script>
+            <script type="text/javascript">
+                const chart_options = {
+                    responsive: true,
+                    scales:
+                        {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                    plugins: {legend:{display: false}}
+
+                };
+
+            </script>
+            <h3>Detailed Data from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
+            <br/>
+            {% for metric in statistics %}
+                {% if metric.buckets.labels|length == 0 %}
+                    {# continue if the is no chart data #}
+                {% else %}
+                    {% with counter_str=forloop.counter|django_stringformat:"s" %}
+                        {% with chart_id="chart-"|add:counter_str %}
+                            <h4>{{ metric.title }}</h4>
+                            <div><canvas id="{{ chart_id }}" width="400" height="200"></canvas></div>
+                            <br/>
+
+                            <script>
+                                new Chart(document.getElementById('{{ chart_id }}').getContext('2d'), {
+                                        type: 'bar',
+                                        data: {
+                                            labels: {{ metric.buckets.labels|safe }},
+                                            datasets: [{
+                                                {#label: '{{ metric.title }}',#}
+                                                data: {{ metric.buckets.values|safe }},
+                                                backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                                            }]
+                                        },
+                                        options: chart_options
+                                    }
+                                );
+                            </script>
+                        {% endwith %}
+                    {% endwith %}
+                {% endif %}
+            {% endfor %}
+            <!-- Chart.js im Body laden -->
+
+
+
         </div>
+
+
+
+
+
+
+
     {% endif %}
     
 {% endblock %}
