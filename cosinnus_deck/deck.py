@@ -1,6 +1,7 @@
 import datetime
 import logging
 from datetime import timezone
+from operator import itemgetter
 
 import requests
 from django.utils import timezone as django_timezone
@@ -427,7 +428,7 @@ class DeckConnection:
         try:
             if not group.nextcloud_group_id:
                 # initialize nextcloud group
-                initialize_nextcloud_for_group(group, send_initialized_signal=False)
+                initialize_nextcloud_for_group(group, send_initialized_signal=False, check_required_for_group=False)
                 for user in group.actual_members:
                     add_user_to_group(get_nc_user_id(user), group.nextcloud_group_id)
 
@@ -554,7 +555,7 @@ class DeckConnection:
 
                 if not group.nextcloud_group_id:
                     # initialize nextcloud group
-                    initialize_nextcloud_for_group(group, send_initialized_signal=False)
+                    initialize_nextcloud_for_group(group, send_initialized_signal=False, check_required_for_group=False)
                     for user in group.actual_members:
                         add_user_to_group(get_nc_user_id(user), group.nextcloud_group_id)
 
@@ -601,6 +602,10 @@ class DeckConnection:
                 if response.status_code != 200:
                     raise DeckConnectionException('Failed to get stacks.')
                 stacks_data = response.json()
+
+                # order stacks
+                stacks_data = sorted(stacks_data, key=itemgetter('order'))
+
                 for stack_data in stacks_data:
                     # migrate stack
                     migrated_stack_data = {'title': stack_data['title'], 'order': stack_order}
@@ -679,7 +684,7 @@ class DeckConnection:
                                     response.status_code == 400
                                     and response.json().get('message') == 'The user is not part of the board'
                                 ):
-                                    logger.warning(
+                                    logger.debug(
                                         'Deck migration: Cant assign non-group users!',
                                         extra={
                                             'group_board_id': group_board_id,
@@ -722,6 +727,16 @@ class DeckConnection:
                             )
                             if response.status_code != 200:
                                 raise DeckConnectionException('Migrating card comments failed.')
+
+                # activate deck app in group, if not active
+                deactivate_apps = set(group.get_deactivated_apps())
+                if 'cosinnus_deck' in deactivate_apps:
+                    deactivate_apps.remove('cosinnus_deck')
+                group.deactivated_apps = deactivate_apps
+                type(group).objects.filter(pk=group.pk).update(deactivated_apps=group.deactivated_apps)
+
+                # clear group cache
+                group._clear_cache(group=group)
 
             # set migration status
             user.cosinnus_profile.deck_migration_set_status(user.cosinnus_profile.DECK_MIGRATION_STATUS_SUCCESS)

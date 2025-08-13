@@ -71,7 +71,7 @@
         {# shown when the migration is in progress #}
         <div id="status-in-progress">
             <p class="textfield transparent">
-                {% trans "Migration is in progress..." %}
+                {% trans "Migration is in progress. It can take a few minutes ..." %}
             </p>
         </div>
         {# shown when the migration has successfully finished #}
@@ -89,8 +89,7 @@
                 {% trans "An error occurred during the migration. Some boards might not have been fully migrated." %}
             </p>
             <p class="textfield transparent">
-                {% captureas retry_link %}<a href="" class="transparent">{% trans "retry" %}</a>{% endcaptureas %}
-                {% blocktrans %}Please, {{ retry_link }} the migration later. If the errors persist, please contact the support!{% endblocktrans %}
+                {% trans "Please try again later. If the error persists, please contact our support." %}
             </p>
         </div>
     </div>
@@ -227,6 +226,10 @@
                         },
                         body: JSON.stringify(migrationData),
                         mode: 'same-origin',
+                    }).then((response) => {
+                        if (!response.ok) {
+                            throw new Error(`Starting backend migration failed with status ${response.status}`);
+                        }
                     })
                     document.getElementById('start-frame').style.display = "none";
                     document.getElementById('status-frame').style.display = "block";

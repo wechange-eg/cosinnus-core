@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-12 09:25+0200\n"
+"POT-Creation-Date: 2025-08-13 13:44+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9764,7 +9764,7 @@ msgstr ""
 msgid "An error occurred during the migration. Some Todos might not have been migrated."
 msgstr ""
 
-msgid "Please, retry the migration later. If the errors persist, please contact the support!"
+msgid "Please try again later. If the error persists, please contact our support."
 msgstr ""
 
 #, python-format
@@ -9819,6 +9819,9 @@ msgstr ""
 msgid "You must have admin permissions in a group/project to migrate NextCloud Deck boards."
 msgstr ""
 
+msgid "Migration is in progress. It can take a few minutes ..."
+msgstr ""
+
 msgid "Migration successfully finished. You can access the migrated boards in the Task Board of the selected groups/projects."
 msgstr ""
 
@@ -9826,13 +9829,6 @@ msgid "Note: You have to add users to a group/project to allow them access to th
 msgstr ""
 
 msgid "An error occurred during the migration. Some boards might not have been fully migrated."
-msgstr ""
-
-msgid "retry"
-msgstr ""
-
-#, python-format
-msgid "Please, %(retry_link)s the migration later. If the errors persist, please contact the support!"
 msgstr ""
 
 msgid "Please Select"

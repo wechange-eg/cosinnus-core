@@ -221,13 +221,14 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
     return unique_name
 
 
-def initialize_nextcloud_for_group(group, send_initialized_signal=True):
+def initialize_nextcloud_for_group(group, send_initialized_signal=True, check_required_for_group=True):
     """Initializes a nextcloud groupfolder for a group.
     Safe to call on already initialized folders. If called on a pre-existing folder that is
     "disabled" (group has no more access to it), the group's access will be re-enabled for the folder.
     @param send_initialized_signal: Sending of initialized signal can be disabled to avoid concurrency issues.
+    @param check_required_for_group: Check that the initialization is required by group apps.
     """
-    if not is_cloud_group_required_for_group(group):
+    if check_required_for_group and not is_cloud_group_required_for_group(group):
         # No app requires the nextcloud integration
         return
 
