@@ -246,10 +246,14 @@
                     scales:
                         {
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks:{precision:0}
                             }
                         },
-                    plugins: {legend:{display: false}}
+                    plugins: {
+                        legend:{display: false},
+                        tooltip:{enabled: false}
+                    }
 
                 };
 
@@ -257,7 +261,7 @@
             <h3>Detailed Data from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
             <br/>
             {% for metric in statistics %}
-                {% if metric.buckets.labels|length == 0 %}
+                {% if metric.buckets.labels|length == 0 or metric.total == 0 %}
                     {# continue if the is no chart data #}
                 {% else %}
                     {% with counter_str=forloop.counter|django_stringformat:"s" %}

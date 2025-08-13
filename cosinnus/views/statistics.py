@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import calendar
 from datetime import date, datetime, timedelta
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from django.contrib.auth import get_user_model
 from django.db.models import Count, Q, QuerySet
-from django.db.models.functions import TruncDate, TruncMonth, TruncWeek, TruncYear
+from django.db.models.functions import TruncDay, TruncMonth, TruncWeek, TruncYear
 from django.utils.formats import localize
 from django.views.generic.edit import FormView
 
@@ -25,6 +24,7 @@ def _filter_by_date_maybe(
     """
     returns a queryset, filtered according to date_from and date_to, maybe one-sided
 
+    - use datetime objects to ensure all objects are included
     - does return the source queryset unchanged, if both date_from and date_to are None
     """
     # dont filter, if no limits are provided
@@ -41,7 +41,7 @@ def _filter_by_date_maybe(
     return data.filter(**filter_kwargs)
 
 
-def _get_interval_type(date_from: datetime, date_to: datetime) -> str:
+def _get_interval_type(date_from: date, date_to: date) -> str:
     """
     determines the interval type depending on the timedelta between date_from and date_to
     :returns: one of 'day', 'week', 'month', 'year'
@@ -57,36 +57,26 @@ def _get_interval_type(date_from: datetime, date_to: datetime) -> str:
         return 'year'
 
 
-def _get_interval_aligned_from_to_timestamps(
-    date_from: datetime, date_to: datetime, interval_type: str
-) -> Tuple[datetime, datetime]:
+def _get_interval_start(unaligned_date: date, interval_type: str) -> date:
     """
-    align date_from and date_to to interval length
-
-    - the time range is expanded to include whole intervals
-    :return: (date_from, date_to)
+    :return: start of the current interval
     """
     if interval_type == 'day':
-        return date_from, date_to
+        return unaligned_date
     elif interval_type == 'week':
         # week starts on monday
-        # TODO make this configurable?
-        date_from -= timedelta(days=date_from.weekday())
-        date_to += timedelta(days=(6 - date_to.weekday()))
+        start_date = unaligned_date - timedelta(days=unaligned_date.weekday())
     elif interval_type == 'month':
-        date_from = date_from.replace(day=1)
-        last_day = calendar.monthrange(date_to.year, date_to.month)[1]
-        date_to = date_to.replace(day=last_day)
+        start_date = unaligned_date.replace(day=1)
     elif interval_type == 'year':
-        date_from = date(date_from.year, 1, 1)
-        date_to = date(date_to.year, 12, 31)
+        start_date = date(unaligned_date.year, 1, 1)
     else:
         raise ValueError(f'interval type {interval_type} is not supported')
 
-    return date_from, date_to
+    return start_date
 
 
-def _increment_interval(date_current: datetime, interval_type: str) -> datetime:
+def _increment_interval(date_current: date, interval_type: str) -> date:
     """
     increments the interval by one step depending on the interval_type
 
@@ -107,29 +97,41 @@ def _increment_interval(date_current: datetime, interval_type: str) -> datetime:
         raise ValueError('Invalid interval type')
 
 
-def _get_continuos_aligned_interval_data(
-    data_buckets: List[Tuple[date, int]], date_from: datetime, date_to: datetime, interval_type: str
-) -> List[Tuple[date, int]]:
+def _get_continuos_formatted_interval_data(
+    data_buckets: List[Tuple[date, int]], date_from: date, date_to: date, interval_type: str
+) -> List[Tuple[str, int]]:
     """
     ensures that bucket range is ready to be displayed as chart
 
-    - aligns start/end points to be at the beginning or end of an interval
-    - fills gaps in bucket_range with 0 values
+    - formats date value as string depending on the interval_type
+    - handles incomplete intervals at the edges (labels them appropriately)
+    - fills gaps in bucket_range with 0 value-intervals
     :return: continuos range of aligned interval data as 'date:value'
     """
-
-    # FIXME use alignment only for inner buckets and use incomplete buckets at the ends
-    # build lookup dict
-    lookup_table = {entry[0]: entry[1] for entry in data_buckets}
-
-    date_from_aligned, date_to_aligned = _get_interval_aligned_from_to_timestamps(date_from, date_to, interval_type)
+    # not using localize() because we need to distinguish between day, month, year
+    bucket_label_filter = {
+        'day': lambda x: x.strftime('%Y-%m-%d'),
+        'week': lambda x: f"Week {x.isocalendar()[1]}: {x.strftime('%Y-%m-%d')}",
+        'month': lambda x: x.strftime('%Y-%m'),
+        'year': lambda x: x.strftime('%Y'),
+    }.get(interval_type)
 
     # walk the date range by interval, insert bucket values or 0 if missing
+    lookup_table: Dict[date, int] = {entry[0]: entry[1] for entry in data_buckets}
     result = []
-    date_current = date_from_aligned.date()
-    while date_current <= date_to_aligned.date():
-        result.append((date_current, lookup_table.get(date_current, 0)))
-        date_current = _increment_interval(date_current, interval_type)
+    # begin at start of first interval
+    interval_current: date = _get_interval_start(date_from, interval_type)
+    while interval_current <= date_to:
+        bucket_label = bucket_label_filter(interval_current)
+
+        # amend interval label on first/last interval if it is incomplete
+        if date_from > interval_current:
+            bucket_label = f'{bucket_label}\n(since {date_from.isoformat()})'
+        elif date_to < _increment_interval(interval_current, interval_type) - timedelta(days=1):
+            bucket_label = f'{bucket_label}\n(until {date_to.isoformat()})'
+
+        result.append((bucket_label, lookup_table.get(interval_current, 0)))
+        interval_current = _increment_interval(interval_current, interval_type)
     return result
 
 
@@ -142,13 +144,13 @@ def _to_date(value) -> date:
         raise TypeError(f'expected datetime.date or datetime.datetime,got {type(value)}')
 
 
-def _get_statistics_for_model(
+def _get_statistics_for_metric(
     title: str,
     data: QuerySet,
     unique_field: str,
     date_field: str,
-    date_from: Optional[datetime],
-    date_to: Optional[datetime],
+    datetime_from: Optional[datetime],
+    datetime_to: Optional[datetime],
     get_buckets: bool = True,
 ):
     """
@@ -163,12 +165,13 @@ def _get_statistics_for_model(
     - bucket generation
         - is disabled unless both date-limits are set
         - can be disabled via `get_buckets=False`
+    - date conversion does not consider time-zones!
 
-    returns a dict with labels and values for display via `chart.js`.
+    :return: a dict with labels and values for display via `chart.js`.
     """
     # filter the source data by date, if from and/or to is provided
-
-    data_filtered = _filter_by_date_maybe(data, date_field, date_from, date_to)
+    # this uses datetime parameters to ensure, we get all objects
+    data_filtered = _filter_by_date_maybe(data, date_field, datetime_from, datetime_to)
 
     # compute total unique count
     total: int = data_filtered.values(unique_field).distinct().count()
@@ -177,44 +180,46 @@ def _get_statistics_for_model(
     bucket_labels = None
     bucket_values = None
     if get_buckets:
-        if not date_from and not date_to:
+        if not datetime_from and not datetime_to:
             raise ValueError('bucket generation needs date_from and date_to to be set')
+
+        # from here on we only use dates
+        date_from = datetime_from.date()
+        date_to = datetime_to.date()
+
         interval_type = _get_interval_type(date_from, date_to)
 
         # compute buckets
-        bucket_function = {'day': TruncDate, 'week': TruncWeek, 'month': TruncMonth, 'year': TruncYear}.get(
+        bucket_function = {'day': TruncDay, 'week': TruncWeek, 'month': TruncMonth, 'year': TruncYear}.get(
             interval_type
         )
-
-        # FIXME make sure annotated field names are not conflicting with existing field names
-        data_buckets: Optional[QuerySet] = data_filtered.values(__bucket_date=bucket_function(date_field)).annotate(
-            __bucket_count=Count(unique_field, distinct=True)
+        data_buckets: QuerySet = data_filtered.values(_temp_bucket_date=bucket_function(date_field)).annotate(
+            _temp_bucket_count=Count(unique_field, distinct=True)
         )
+        # create list with tuples, ensure date is a proper date object
         buckets_gaps: List[Tuple[date, int]] = [
-            (_to_date(entry['__bucket_date']), entry['__bucket_count']) for entry in data_buckets
+            (_to_date(entry['_temp_bucket_date']), entry['_temp_bucket_count']) for entry in data_buckets
         ]
 
         # empty buckets are not listed in the queryset, we need to add 0 values manually
-        buckets_continuos: List[Tuple[date, int]] = _get_continuos_aligned_interval_data(
+        buckets_formatted: List[Tuple[str, int]] = _get_continuos_formatted_interval_data(
             buckets_gaps, date_from, date_to, interval_type
         )
-        bucket_label_filter = {
-            'day': lambda x: x.strftime('%Y-%m-%d'),
-            'week': lambda x: f"week {x.isocalendar()[1]}: {x.strftime('%Y-%m-%d')}",
-            'month': lambda x: x.strftime('%Y-%m'),
-            'year': lambda x: x.strftime('%Y'),
-        }.get(interval_type)
 
         # format buckets for chart.js if present
-        bucket_labels = [bucket_label_filter(entry[0]) for entry in buckets_continuos]
-        bucket_values = [entry[1] for entry in buckets_continuos]
+        bucket_labels = [entry[0].splitlines() for entry in buckets_formatted]
+        bucket_values = [entry[1] for entry in buckets_formatted]
 
     # return statistics as one dict
     return {'title': title, 'total': total, 'buckets': {'labels': bucket_labels, 'values': bucket_values}}
 
 
 def _get_statistics(from_date: datetime, to_date: datetime) -> list:
-    """Actual collection of data"""
+    """
+    define metrics to be gathered as list items using helper functions
+    - params from_date and to_date are datetime objects to make filtering querysets easier
+    :return: list of metric-data as dicts
+    """
 
     statistics: list = []
 
@@ -226,118 +231,127 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
         f' (recorded only from {localize(first_online_date)} onwards)' if first_online_date > from_date.date() else ''
     )
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title=f'01. Unique, registered users that were active in this period{first_online_str}',
             data=UserOnlineOnDay.objects.filter(user_id__in=CosinnusPortal.get_current().members),
             unique_field='user__id',
             date_field='date',
-            date_from=from_date,
-            date_to=to_date,
+            datetime_from=from_date,
+            datetime_to=to_date,
         )
     )
 
     # registered users
+    # not using cosinnus.utils.user.filter_active_users because we want to deactivated accounts
+    used_user_accounts = (
+        get_user_model()
+        .objects.filter(id__in=CosinnusPortal.get_current().members)
+        .exclude(last_login__exact=None)
+        .exclude(email__icontains='__unverified__')
+        .filter(cosinnus_profile__tos_accepted=True)
+        .exclude(cosinnus_profile___is_guest=True)
+    )
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title='02. New Registered User Accounts in this period',
-            data=filter_active_users(get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members)),
+            data=used_user_accounts,
             unique_field='pk',
             date_field='date_joined',
-            date_from=from_date,
-            date_to=to_date,
+            datetime_from=from_date,
+            datetime_to=to_date,
         )
     )
 
-    # total enabled user-accounts
+    # total enabled user-accounts (excluding deactivated accounts)
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title='03. Total Enabled User Accounts (at least 1x logged in)',
             data=filter_active_users(get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members)),
             unique_field='pk',
             date_field='date_joined',
-            date_from=None,
-            date_to=to_date,
+            datetime_from=None,
+            datetime_to=to_date,
             get_buckets=False,
         )
     )
 
     # created projects
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title='04. Newly Created Projects in this period',
-            data=CosinnusProject.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
+            data=CosinnusProject.objects.filter(portal=CosinnusPortal.get_current()),
             unique_field='pk',
             date_field='created',
-            date_from=from_date,
-            date_to=to_date,
+            datetime_from=from_date,
+            datetime_to=to_date,
         )
     )
 
     # enabled projects
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title='05. Total Enabled Projects',
             data=CosinnusProject.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
             unique_field='pk',
             date_field='created',
-            date_from=None,
-            date_to=to_date,
+            datetime_from=None,
+            datetime_to=to_date,
             get_buckets=False,
         )
     )
 
     # created groups
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title='06. Newly Created Groups in this period',
-            data=CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
+            data=CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current()),
             unique_field='pk',
             date_field='created',
-            date_from=from_date,
-            date_to=to_date,
+            datetime_from=from_date,
+            datetime_to=to_date,
         )
     )
 
     # enabled groups
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title='07. Total Enabled Groups',
             data=CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
             unique_field='pk',
             date_field='created',
-            date_from=None,
-            date_to=to_date,
+            datetime_from=None,
+            datetime_to=to_date,
             get_buckets=False,
         )
     )
 
     # created conferences
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title='08. Newly Created Conferences in this period',
-            data=CosinnusConference.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
+            data=CosinnusConference.objects.filter(portal=CosinnusPortal.get_current()),
             unique_field='pk',
             date_field='created',
-            date_from=from_date,
-            date_to=to_date,
+            datetime_from=from_date,
+            datetime_to=to_date,
         )
     )
 
     # enabled conferences
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title='09. Total Enabled Conferences',
             data=CosinnusConference.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
             unique_field='pk',
             date_field='created',
-            date_from=None,
-            date_to=to_date,
+            datetime_from=None,
+            datetime_to=to_date,
             get_buckets=False,
         )
     )
 
     # scheduled conferences
-    # FIXME buckets need to be calculated differently
+    # TODO implement bucket calculation for date ranges manually
     running_conferences_filtered = CosinnusConference.objects.filter(
         portal=CosinnusPortal.get_current(), is_active=True
     ).filter(
@@ -346,13 +360,13 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
         | (Q(from_date__lte=from_date) & Q(to_date__gte=to_date))
     )
     statistics.append(
-        _get_statistics_for_model(
+        _get_statistics_for_metric(
             title='10. Running (scheduled) Conferences in this period',
             data=running_conferences_filtered,
             unique_field='pk',
             date_field='created',
-            date_from=from_date,
-            date_to=to_date,
+            datetime_from=from_date,
+            datetime_to=to_date,
             get_buckets=False,
         )
     )
@@ -362,13 +376,13 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
         from cosinnus_event.models import Event
 
         statistics.append(
-            _get_statistics_for_model(
+            _get_statistics_for_metric(
                 title='11. Newly Created Events in this period',
                 data=Event.objects.filter(group__portal=CosinnusPortal.get_current()),
                 unique_field='pk',
                 date_field='created',
-                date_from=from_date,
-                date_to=to_date,
+                datetime_from=from_date,
+                datetime_to=to_date,
             )
         )
         return statistics
@@ -380,7 +394,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
         from cosinnus_note.models import Note
 
         statistics.append(
-            _get_statistics_for_model(
+            _get_statistics_for_metric(
                 title='12. Newly Created News in this period',
                 data=Note.objects.filter(group__portal=CosinnusPortal.get_current()),
                 unique_field='pk',
