@@ -514,11 +514,12 @@ class DeckConnection:
                     todo.media_tag.save()
 
             # deactivate todos and activate deck, if not active
-            deactivate_apps = set(group.get_deactivated_apps())
-            deactivate_apps.add('cosinnus_todo')
-            if 'cosinnus_deck' in deactivate_apps:
-                deactivate_apps.remove('cosinnus_deck')
-            group.deactivated_apps = deactivate_apps
+            group.refresh_from_db()
+            deactivated_apps = set(group.get_deactivated_apps())
+            deactivated_apps.add('cosinnus_todo')
+            if 'cosinnus_deck' in deactivated_apps:
+                deactivated_apps.remove('cosinnus_deck')
+            group.deactivated_apps = ','.join(deactivated_apps)
             type(group).objects.filter(pk=group.pk).update(deactivated_apps=group.deactivated_apps)
 
             # set migration status
@@ -729,14 +730,15 @@ class DeckConnection:
                                 raise DeckConnectionException('Migrating card comments failed.')
 
                 # activate deck app in group, if not active
-                deactivate_apps = set(group.get_deactivated_apps())
-                if 'cosinnus_deck' in deactivate_apps:
-                    deactivate_apps.remove('cosinnus_deck')
-                group.deactivated_apps = deactivate_apps
-                type(group).objects.filter(pk=group.pk).update(deactivated_apps=group.deactivated_apps)
+                group.refresh_from_db()
+                deactivated_apps = set(group.get_deactivated_apps())
+                if 'cosinnus_deck' in deactivated_apps:
+                    deactivated_apps.remove('cosinnus_deck')
+                    group.deactivated_apps = ','.join(deactivated_apps)
+                    type(group).objects.filter(pk=group.pk).update(deactivated_apps=group.deactivated_apps)
 
-                # clear group cache
-                group._clear_cache(group=group)
+                    # clear group cache
+                    group._clear_cache(group=group)
 
             # set migration status
             user.cosinnus_profile.deck_migration_set_status(user.cosinnus_profile.DECK_MIGRATION_STATUS_SUCCESS)
@@ -746,3 +748,4 @@ class DeckConnection:
                 extra={'user': user.id, 'selected_decks': selected_decks, 'exception': e},
             )
             user.cosinnus_profile.deck_migration_set_status(user.cosinnus_profile.DECK_MIGRATION_STATUS_FAILED)
+            raise e
