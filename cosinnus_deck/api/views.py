@@ -4,6 +4,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from requests.exceptions import JSONDecodeError
 from rest_framework import status
+from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
 from rest_framework.response import Response
@@ -272,8 +273,8 @@ class DeckEventsView(APIView):
         JSONRenderer,
         BrowsableAPIRenderer,
     )
-    # authentication_classes = (CsrfExemptSessionAuthentication,)
-    # permission_classes = (IsAuthenticated,)
+    authentication_classes = (BasicAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         return Response()
@@ -288,8 +289,8 @@ class DeckFollowView(APIView):
         JSONRenderer,
         BrowsableAPIRenderer,
     )
-    # authentication_classes = (CsrfExemptSessionAuthentication,)
-    # permission_classes = (IsAuthenticated,)
+    authentication_classes = (BasicAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         return Response()
