@@ -261,7 +261,7 @@
             <h3>Detailed Data from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
             <br/>
             {% for metric in statistics %}
-                {% if metric.buckets.labels|length == 0 or metric.total == 0 %}
+                {% if metric.buckets.labels|length < 2 or metric.total == 0 %}
                     {# continue if the is no chart data #}
                 {% else %}
                     {% with counter_str=forloop.counter|django_stringformat:"s" %}
@@ -269,7 +269,6 @@
                             <h4>{{ metric.title }}</h4>
                             <div><canvas id="{{ chart_id }}" width="400" height="200"></canvas></div>
                             <br/>
-
                             <script>
                                 new Chart(document.getElementById('{{ chart_id }}').getContext('2d'), {
                                         type: 'bar',
@@ -289,18 +288,15 @@
                     {% endwith %}
                 {% endif %}
             {% endfor %}
-            <!-- Chart.js im Body laden -->
-
-
-
+        
+            {# display message, if no charts are shown#}
+            <div id="chart_warnings"></div>
+            <script type="text/javascript">
+                const charts = document.querySelectorAll('[id^="chart-"]');
+                if (charts.length === 0) {
+                    document.getElementById("chart_warnings").innerHTML = "<strong>Note:</strong> Please select a different timespan to display more data.";
+                }
+            </script>
         </div>
-
-
-
-
-
-
-
     {% endif %}
-    
 {% endblock %}
