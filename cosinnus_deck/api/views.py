@@ -292,10 +292,7 @@ class DeckFollowView(APIView):
         JSONRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (
-        SessionAuthentication,
-        BasicAuthentication,
-    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
