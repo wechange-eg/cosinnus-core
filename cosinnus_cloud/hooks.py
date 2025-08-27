@@ -9,6 +9,7 @@ from contextlib import wraps
 from threading import Thread
 from time import sleep
 
+from django.contrib.auth import get_user_model
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.db.models.signals import post_delete, post_save
 from django.db.utils import DatabaseError
@@ -72,7 +73,14 @@ def submit_with_retry(fn, *args, **kwargs):
 
 
 def get_nc_user_id(user):
+    """Get the NextCloud user id for a user."""
     return f'wechange-{user.id}'
+
+
+def get_user_by_nc_user_id(nc_user_id):
+    """Get a user for the NextCloud user id."""
+    user_id = nc_user_id.split('-')[-1]
+    return get_user_model().objects.filter(pk=user_id).first()
 
 
 def nc_req_callback(future: Future):
