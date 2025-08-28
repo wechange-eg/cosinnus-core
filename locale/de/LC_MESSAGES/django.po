@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-13 13:44+0200\n"
+"POT-Creation-Date: 2025-08-28 10:35+0200\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9676,6 +9676,126 @@ msgstr "Aufgaben-Board"
 msgctxt "the_app"
 msgid "deck"
 msgstr "Aufgaben-Board"
+
+msgid "A user created a task"
+msgstr "Ein Mitglied hat eine neue Aufgabe erstellt"
+
+msgid "%(sender_name)s created the task %(object_name)s"
+msgstr "%(sender_name)s hat die Aufgabe %(object_name)s erstellt"
+
+msgid "%(sender_name)s created %(count)d tasks"
+msgstr "%(sender_name)s hat %(count)d neue Aufgaben erstellt"
+
+msgid "%(sender_name)s created a task"
+msgstr "%(sender_name)s hat eine neue Aufgabe erstellt"
+
+msgid "%(sender_name)s created a task in %(team_name)s."
+msgstr "%(sender_name)s hat in %(team_name)s eine Aufgabe erstellt."
+
+msgid "A task was assigned to you"
+msgstr "Eine Aufgabe wurde dir zugewiesen"
+
+msgid "%(sender_name)s assigned you the task %(object_name)s"
+msgstr "%(sender_name)s hat dir die Aufgabe %(object_name)s zugewiesen"
+
+msgid "%(sender_name)s assigned you %(count)d tasks"
+msgstr "%(sender_name)s hat dir %(count)d Aufgaben zugewiesen"
+
+msgid "%(sender_name)s assigned you a task"
+msgstr "%(sender_name)s hat dir eine Aufgabe zugewiesen"
+
+msgid "%(sender_name)s assigned you the task %(object_name)s."
+msgstr "%(sender_name)s hat dir die Aufgabe %(object_name)s zugewiesen"
+
+msgid "A task was unassigned from you"
+msgstr "Die Zuweisung einer Aufgabe wurde dich wurde entfernt"
+
+msgid "%(sender_name)s unassigned you from the task %(object_name)s"
+msgstr "%(sender_name)s hat die Zuweisung der Aufgabe %(object_name)s an dich entfernt"
+
+msgid "%(sender_name)s unassigned you from %(count)d tasks"
+msgstr "%(sender_name)s hat die Zuweisung von %(count)d Aufgaben an dich entfernt"
+
+msgid "%(sender_name)s unassigned you from a task"
+msgstr "%(sender_name)s hat die Zuweisung einer Aufgabe an dich entfernt"
+
+msgid "%(sender_name)s unassigned you from the task %(object_name)s."
+msgstr "%(sender_name)s hat die Zuweisung der Aufgabe %(object_name)s an dich entfernt"
+
+msgid "You were mentioned in a task comment"
+msgstr "Du wurdest im Kommentar einer Aufgaben erwähnt"
+
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s"
+msgstr "%(sender_name)s hat dich im Kommentar der Aufgabe %(object_name)s erwähnt"
+
+msgid "%(sender_name)s mentioned you in a comment of %(count)d tasks"
+msgstr "%(sender_name)s hat dich in Kommentaren von %(count)d Aufgaben erwähnt"
+
+msgid "%(sender_name)s mentioned you in a task comment"
+msgstr "%(sender_name)s hat dich im Kommentar einer Aufgaben erwähnt"
+
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s."
+msgstr "%(sender_name)s hat dich im Kommentar der Aufgabe %(object_name)s erwähnt"
+
+msgid "A task has was marked as done"
+msgstr "Eine Aufgabe wurde als erledigt markiert"
+
+msgid "%(sender_name)s marked the task %(object_name)s as done"
+msgstr "%(sender_name)s hat die Aufgabe %(object_name)s als erledigt markiert"
+
+msgid "%(sender_name)s marked %(count)d tasks as done"
+msgstr "%(sender_name)s hat %(count)d Aufgaben als erledigt markiert"
+
+msgid "%(sender_name)s marked a task as done"
+msgstr "%(sender_name)s hat eine Aufgabe als erledigt markiert"
+
+msgid "%(sender_name)s marked the task %(object_name)s as done."
+msgstr "%(sender_name)s hat die Aufgabe %(object_name)s als erledigt markiert"
+
+msgid "A task has was marked as undone"
+msgstr "Eine Aufgabe wurde als unerledigt markiert"
+
+msgid "%(sender_name)s marked the task %(object_name)s as undone"
+msgstr "%(sender_name)s hat die Aufgabe %(object_name)s als unerledigt markiert"
+
+msgid "%(sender_name)s marked %(count)d tasks as undone"
+msgstr "%(sender_name)s hat %(count)d Aufgaben als unerledigt markiert"
+
+msgid "%(sender_name)s marked a task as undone"
+msgstr "%(sender_name)s hat eine Aufgabe als unerledigt markiert"
+
+msgid "%(sender_name)s marked the task %(object_name)s as undone."
+msgstr "%(sender_name)s hat die Aufgabe %(object_name)s als unerledigt markiert"
+
+msgid "A tasks due data was changed"
+msgstr "Das Fälligkeitsdatum einer Aufgabe wurde geändert"
+
+msgid "%(sender_name)s changed the due date of the task %(object_name)s"
+msgstr "%(sender_name)s hat das Fälligkeitsdatum der Aufgabe %(object_name)s geändert"
+
+msgid "%(sender_name)s changed the due data of %(count)d tasks"
+msgstr "%(sender_name)s hat das Fälligkeitsdatum von %(count)d Aufgaben geändert"
+
+msgid "%(sender_name)s change the due date of a task"
+msgstr "%(sender_name)s hat das Fälligkeitsdatum einer Aufgabe geändert"
+
+msgid "%(sender_name)s changed the due date of the task %(object_name)s."
+msgstr "%(sender_name)s hat das Fälligkeitsdatum der Aufgabe %(object_name)s geändert"
+
+msgid "A user commented on a task"
+msgstr "Ein Mitglied hat eine Aufgabe kommentiert"
+
+msgid "%(sender_name)s commented on the task %(object_name)s"
+msgstr "%(sender_name)s hat die Aufgabe %(object_name)s kommentiert"
+
+msgid "%(sender_name)s commented on %(count)d tasks"
+msgstr "%(sender_name)s hat %(count)d Aufgaben kommentiert"
+
+msgid "%(sender_name)s commented on the task"
+msgstr "%(sender_name)s hat eine Aufgabe kommentiert"
+
+msgid "%(sender_name)s commented on the task %(object_name)s."
+msgstr "%(sender_name)s hat die Aufgabe %(object_name)s kommentiert"
 
 msgid "The Task Board creation is in progress..."
 msgstr "Das Aufgaben-Board wird erstellt..."

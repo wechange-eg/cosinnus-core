@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-13 13:44+0200\n"
+"POT-Creation-Date: 2025-08-28 10:35+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9741,6 +9741,201 @@ msgstr "Create Project"
 msgctxt "the_app"
 msgid "deck"
 msgstr "Task-Board"
+
+#, fuzzy
+msgid "A user created a task"
+msgstr "Write a news post..."
+
+#, fuzzy, python-format
+msgid "%(sender_name)s created the task %(object_name)s"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s created %(count)d tasks"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new etherpad"
+msgid "%(sender_name)s created a task"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s created a task in %(team_name)s."
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+msgid "A task was assigned to you"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s assigned you the task %(object_name)s"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s assigned you %(count)d tasks"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s assigned you a task"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
+#, fuzzy, python-format
+msgid "%(sender_name)s assigned you the task %(object_name)s."
+msgstr "%(sender_name)s created a new Pad"
+
+msgid "A task was unassigned from you"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s unassigned you from the task %(object_name)s"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s unassigned you from %(count)d tasks"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s unassigned you from a task"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
+#, fuzzy, python-format
+msgid "%(sender_name)s unassigned you from the task %(object_name)s."
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy
+msgid "You were mentioned in a task comment"
+msgstr "%s - Events"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s"
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s mentioned you in a comment of %(count)d tasks"
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s mentioned you in a task comment"
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s."
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+msgid "A task has was marked as done"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s marked the task %(object_name)s as done"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s marked %(count)d tasks as done"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s marked a task as done"
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s marked the task %(object_name)s as done."
+msgstr "%(sender_name)s created a new Pad"
+
+msgid "A task has was marked as undone"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s marked the task %(object_name)s as undone"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s marked %(count)d tasks as undone"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s marked a task as undone"
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s marked the task %(object_name)s as undone."
+msgstr "%(sender_name)s created a new Pad"
+
+msgid "A tasks due data was changed"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(sender_name)s changed the due date of the task %(object_name)s"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s changed the due data of %(count)d tasks"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s change the due date of a task"
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s changed the due date of the task %(object_name)s."
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy
+msgid "A user commented on a task"
+msgstr "Write a news post..."
+
+#, fuzzy, python-format
+msgid "%(sender_name)s commented on the task %(object_name)s"
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s commented on %(count)d tasks"
+msgstr "%(sender_name)s created a new Pad"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s commented on the task"
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s commented on the task %(object_name)s."
+msgstr ""
+"Hi, %(creator_name)s!\n"
+"\n"
+"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 msgid "The Task Board creation is in progress..."
 msgstr ""
