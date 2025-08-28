@@ -24,6 +24,6 @@ urlpatterns += [
     path('api/v3/boards/<int:board_id>/stacks/<int:stack_id>/', DeckStackView.as_view(), name='deck-stack-update'),
     path('api/v3/boards/<int:board_id>/labels/', DeckLabelsView.as_view(), name='deck-labels'),
     path('api/v3/boards/<int:board_id>/labels/<int:label_id>/', DeckLabelView.as_view(), name='deck-label-update'),
+    path('api/v3/boards/<int:board_id>/follow/', DeckFollowView.as_view(), name='deck-follow'),
     path('api/v3/boards/events/', DeckEventsView.as_view(), name='deck-events'),
-    path('api/v3/boards/follow/', DeckFollowView.as_view(), name='deck-follow'),
 ]

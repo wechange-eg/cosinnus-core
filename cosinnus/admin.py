@@ -58,7 +58,7 @@ from cosinnus.models.profile import (
     get_user_profile_model,
 )
 from cosinnus.models.storage import TemporaryData
-from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory, TagObject
+from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory, SyncedExternalObject, TagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -1626,3 +1626,11 @@ if settings.DEBUG and settings.COSINNUS_ENABLE_USER_BLOCK:
         pass
 
     admin.site.register(UserBlock, UserBlockAdmin)
+
+
+if settings.DEBUG and settings.COSINNUS_DECK_ENABLED:
+
+    class SyncedExternalObjectAdmin(admin.ModelAdmin):
+        pass
+
+    admin.site.register(SyncedExternalObject, SyncedExternalObjectAdmin)
