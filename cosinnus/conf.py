@@ -1106,6 +1106,12 @@ class CosinnusConf(AppConf):
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
 
+    # whether profile editing via the view and api should be possible
+    DISABLE_PROFILE_EDITING = False
+
+    # if profile editing is disabled a url can be provided to redirect all profile edit requests
+    EXTERNAL_PROFILE_EDITING_URL = None
+
     # if True, won't let any user log in before verifying their e-mail
     USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN = False
 

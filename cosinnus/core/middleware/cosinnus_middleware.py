@@ -16,7 +16,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.cache import cache
 from django.core.exceptions import MiddlewareNotUsed
 from django.db.models import signals
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.template.defaultfilters import urlencode
 from django.template.response import TemplateResponse
@@ -135,6 +135,14 @@ NO_AUTO_REDIRECTS = (
     reverse('cosinnus:invitations'),
     reverse('cosinnus:welcome-settings'),
 )
+
+# urls for user and profile editing by the user
+PROFILE_EDITING_URLS = [
+    reverse('cosinnus:profile-edit'),
+    reverse('cosinnus:user-change-email'),
+    reverse('cosinnus:user-change-email-pending'),
+    reverse('cosinnus:frontend-api:api-user-profile'),
+]
 
 
 def initialize_cosinnus_after_startup():
@@ -664,6 +672,15 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                 else:
                     messages.warning(request, _('The page you tried to visit is not available for guest accounts.'))
                 return redirect('cosinnus:guest-user-not-allowed')
+
+        if user.is_authenticated and settings.COSINNUS_DISABLE_PROFILE_EDITING:
+            # disable profile editing
+            if any(request.path.startswith(profile_edit_path) for profile_edit_path in PROFILE_EDITING_URLS):
+                redirect_url = settings.COSINNUS_EXTERNAL_PROFILE_EDITING_URL
+                if redirect_url:
+                    return HttpResponseRedirect(redirect_url)
+                else:
+                    return HttpResponseNotFound()
 
         #  ignore urls that should not be redirected
         if any([request.path.startswith(never_path) for never_path in settings.COSINNUS_NEVER_REDIRECT_URLS]):

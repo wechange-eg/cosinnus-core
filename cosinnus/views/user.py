@@ -1271,6 +1271,9 @@ def email_first_login_token_to_user(user, threaded=True):
     user.cosinnus_profile.settings[PROFILE_SETTING_LOGIN_TOKEN_SENT] = timezone.now()
     user.cosinnus_profile.save()
 
+    # return token
+    return str(a_uuid)
+
 
 def user_api_me(request):
     """Returns a JSON dict of publicly available user data about the currently logged-in user.
