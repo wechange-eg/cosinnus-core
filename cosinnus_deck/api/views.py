@@ -476,5 +476,5 @@ class DeckFollowView(DeckSyncedTaskMixin, APIView):
         ]
 
         # return follows
-        data = [{'type': 'card', 'id': card_follow.target_object.object_id} for card_follow in card_follows]
+        data = [{'type': 'card', 'id': int(card_follow.target_object.object_id)} for card_follow in card_follows]
         return Response(data=data)
