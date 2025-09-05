@@ -1001,7 +1001,11 @@ class GroupConfirmMixin(object):
         so that user joins can be automated with a direct link (like after being recruited)"""
         if not self.request.GET.get('direct', None) == '1':
             messages.error(self.request, _('This action is not available directly!'))
-            return redirect(self.get_error_url(**kwargs))
+            try:
+                redirect_url = self.get_error_url(**kwargs)
+            except CosinnusGroup.DoesNotExist:
+                raise Http404
+            return redirect(redirect_url)
         else:
             return self.post(*args, **kwargs)
 
