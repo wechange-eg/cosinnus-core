@@ -835,10 +835,10 @@ class ManagedTagBlockURLsMiddleware:
         return restricted_tags.intersection(user_tags)
 
     def __call__(self, request):
-        if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED:
-            user = request.user
+        user = request.user
+        if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED and user.is_authenticated:
             restricted_tag_slugs = self.get_user_restricted_tag_slugs(user)
-            if user.is_authenticated and restricted_tag_slugs:
+            if restricted_tag_slugs:
                 blocked_urls = itertools.chain.from_iterable(
                     [
                         settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.get(tag_slug, [])
@@ -847,6 +847,13 @@ class ManagedTagBlockURLsMiddleware:
                 )
                 # if any URL in the blocked urls matches the current URL, redirect to an error page
                 if next(filter(lambda url: re.match(url, request.path), blocked_urls), False):
-                    messages.add_message(request, messages.ERROR, _('Sorry, your account may not access this page.'))
+                    messages.add_message(
+                        request,
+                        messages.ERROR,
+                        _(
+                            'Sorry, your account may not access this page. \n'
+                            '\n**TODO:** Add info for restricted users and maybe a [Link](/) to an info page?'
+                        ),
+                    )
                     return redirect_to_error_page(request, view=self)
         return self.get_response(request)

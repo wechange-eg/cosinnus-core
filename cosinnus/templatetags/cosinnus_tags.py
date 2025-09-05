@@ -1407,6 +1407,22 @@ def managed_tags_for_user(user):
         return managed_tags
 
 
+@register.filter
+def user_has_managed_tags(user, tag_or_tags):
+    """
+    Template filter that returns True if a user is assigned *all* managed tags provided.
+    @param tag_or_tags: str or list of managed tags.
+    """
+    if not user.is_authenticated:
+        return False
+    user_managed_tags = [tag.slug for tag in user.cosinnus_profile.get_managed_tags()]
+    if not tag_or_tags:
+        return True
+    if isinstance(tag_or_tags, six.string_types):
+        tag_or_tags = [tag_or_tags]
+    return all([tag in user_managed_tags for tag in tag_or_tags])
+
+
 @register.simple_tag()
 def get_non_cms_root_url():
     """Returns the root URL for this portal that isn't the cms page"""
