@@ -254,27 +254,38 @@
     {% if statistics %}
         <!-- a box with semi transparent background -->
         <div class="content-box white-content">
-            <h3 class="ultra-space">Showing data for Portal <b>{{ COSINNUS_CURRENT_PORTAL.name }}</b> from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
+            <h3 class="ultra-space">
+                {# Translators: keep formatting verbatim (html-tags) #}
+                {% blocktrans trimmed with portal_name=COSINNUS_CURRENT_PORTAL.name from_date=form.from_date.value|date:"d.m.Y" to_date=form.to_date.value|date:"d.m.Y" %}
+                	Data for Portal <b>{{ portal_name }}</b> from {{ from_date }} to {{ to_date }}
+                {% endblocktrans %}
+            </h3>
 
             {# show totals #}
             <div class="ultra-space">
                 {% for metric in statistics %}
-                    <div class="row regular-space">
-                       <div class="col-xs-8">{{ metric.title }}</div>
-                       <div class="col-xs-4">{{ metric.total }}</div>
-                    </div>
+                    {% with counter_str=forloop.counter|django_stringformat:"02d" %}
+                        <div class="row regular-space">
+                            <div class="col-xs-8">{{ counter_str }}. {{ metric.title | safe }}</div>
+                           <div class="col-xs-4">{{ metric.total }}</div>
+                        </div>
+                    {% endwith %}
                 {% endfor %}
             </div>
 
             {# show date_buckets as charts #}
-            <h3 class="ultra-space">Detailed Data from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
+            <h3 class="ultra-space">
+                {% blocktrans trimmed with portal_name=COSINNUS_CURRENT_PORTAL.name from_date=form.from_date.value|date:"d.m.Y" to_date=form.to_date.value|date:"d.m.Y" %}
+                	Detailed Data from {{ from_date }} to {{ to_date }}
+                {% endblocktrans %}
+            </h3>
             {% for metric in statistics %}
                 {% if metric.buckets.labels|length < 2 or metric.total == 0 %}
                     {# continue if the is no chart data #}
                 {% else %}
-                    {% with counter_str=forloop.counter|django_stringformat:"s" %}
+                    {% with counter_str=forloop.counter|django_stringformat:"02d" %}
                         {% with chart_id="chart-"|add:counter_str %}
-                            <h4>{{ metric.title }}</h4>
+                            <h4>{{ counter_str }}. {{ metric.title | safe }}</h4>
                             <div class="ultra-space"><canvas id="{{ chart_id }}" width="400" height="200"></canvas></div>
                             <script>
                                 new Chart(document.getElementById('{{ chart_id }}').getContext('2d'), {
@@ -302,7 +313,8 @@
             <script type="text/javascript">
                 const charts = document.querySelectorAll('[id^="chart-"]');
                 if (charts.length === 0) {
-                    document.getElementById("chart_warnings").innerHTML = "<strong>Note:</strong> Please select a different timespan to display more data.";
+                    {# Translators: keep formatting verbatim (html-tags) #}
+                    document.getElementById("chart_warnings").innerHTML = "{% trans '<strong>Note:</strong> Please select a different timespan to display more data.' %}";
                 }
             </script>
         </div>

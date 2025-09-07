@@ -11,6 +11,7 @@ from django.db.models import Count, Q, QuerySet
 from django.db.models.functions.datetime import TruncBase, TruncDay, TruncMonth, TruncWeek, TruncYear
 from django.http import HttpResponseRedirect
 from django.utils.formats import localize
+from django.utils.translation import gettext as _
 from django.views.generic.edit import FormView
 
 from cosinnus.forms.statistics import SimpleStatisticsForm
@@ -93,7 +94,9 @@ class WeekInterval(BaseInterval):
 
     @classmethod
     def format_label(cls, reference_date: date) -> str:
-        return f"Week {reference_date.isocalendar()[1]}: {reference_date.strftime('%Y-%m-%d')}"
+        return '{week} {week_number}: {week_date}'.format(
+            week=_('Week'), week_number=reference_date.isocalendar()[1], week_date=reference_date.strftime('%Y-%m-%d')
+        )
 
     @classmethod
     def get_current_start(cls, unaligned_date: date) -> date:
@@ -155,14 +158,18 @@ def _get_continuos_formatted_interval_data(
     # begin at start of first interval
     interval_current: date = interval_type.get_current_start(date_from)
     while interval_current <= date_to:
-        # not using localize() because we need to format by interval_type
+        # not using localize(), we format as iso-dates according to interval_type for better chart-layout
         bucket_label = interval_type.format_label(interval_current)
 
         # amend interval label on first/last interval if it is incomplete
         if date_from > interval_current:
-            bucket_label = f'{bucket_label}\n(since {date_from.isoformat()})'
+            bucket_label = '{bucket_label}\n({since} {date_from})'.format(
+                bucket_label=bucket_label, since=_('since'), date_from=date_from.isoformat()
+            )
         elif date_to < interval_type.get_next_start(interval_current) - timedelta(days=1):
-            bucket_label = f'{bucket_label}\n(until {date_to.isoformat()})'
+            bucket_label = '{bucket_label}\n({until} {date_from})'.format(
+                bucket_label=bucket_label, until=_('until'), date_from=date_to.isoformat()
+            )
 
         result.append((bucket_label, lookup_table.get(interval_current, 0)))
         interval_current = interval_type.get_next_start(interval_current)
@@ -263,12 +270,21 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     # the first recorded user online date (when the feature went live)
     first_online_date: date = UserOnlineOnDay.objects.all().order_by('date').first().date
     # only show the info, if this affects the current request
+
     first_online_str = (
-        f' (recorded only from {localize(first_online_date)} onwards)' if first_online_date > from_date.date() else ''
+        # Translators: keep formatting verbatim (space, parenthesis and html-tags)
+        _(' (recorded only from <span style="white-space: nowrap;">{first_online_date}</span> onwards)').format(
+            first_online_date=localize(first_online_date)
+        )
+        if first_online_date > from_date.date()
+        else ''
     )
     statistics.append(
         _get_statistics_for_metric(
-            title=f'01. Unique, registered users that were active in this period{first_online_str}',
+            # FIXME localize
+            title=_('Unique, registered users that were active in this period{first_online_str}').format(
+                first_online_str=first_online_str
+            ),
             data=UserOnlineOnDay.objects.filter(user_id__in=CosinnusPortal.get_current().members),
             unique_field='user__id',
             date_field='date',
@@ -289,7 +305,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     )
     statistics.append(
         _get_statistics_for_metric(
-            title='02. New Registered User Accounts in this period',
+            title=_('New Registered User Accounts in this period'),
             data=used_user_accounts,
             unique_field='pk',
             date_field='date_joined',
@@ -301,7 +317,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     # total enabled user-accounts (excluding deactivated accounts)
     statistics.append(
         _get_statistics_for_metric(
-            title='03. Total Enabled User Accounts (at least 1x logged in)',
+            title=_('Total Enabled User Accounts (at least 1x logged in)'),
             data=filter_active_users(get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members)),
             unique_field='pk',
             date_field='date_joined',
@@ -314,7 +330,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     # created projects
     statistics.append(
         _get_statistics_for_metric(
-            title='04. Newly Created Projects in this period',
+            title=_('Newly Created Projects in this period'),
             data=CosinnusProject.objects.filter(portal=CosinnusPortal.get_current()),
             unique_field='pk',
             date_field='created',
@@ -326,7 +342,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     # enabled projects
     statistics.append(
         _get_statistics_for_metric(
-            title='05. Total Enabled Projects',
+            title=_('Total Enabled Projects'),
             data=CosinnusProject.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
             unique_field='pk',
             date_field='created',
@@ -339,7 +355,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     # created groups
     statistics.append(
         _get_statistics_for_metric(
-            title='06. Newly Created Groups in this period',
+            title=_('Newly Created Groups in this period'),
             data=CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current()),
             unique_field='pk',
             date_field='created',
@@ -351,7 +367,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     # enabled groups
     statistics.append(
         _get_statistics_for_metric(
-            title='07. Total Enabled Groups',
+            title=_('Total Enabled Groups'),
             data=CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
             unique_field='pk',
             date_field='created',
@@ -365,7 +381,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
         # created conferences
         statistics.append(
             _get_statistics_for_metric(
-                title='08. Newly Created Conferences in this period',
+                title=_('Newly Created Conferences in this period'),
                 data=CosinnusConference.objects.filter(portal=CosinnusPortal.get_current()),
                 unique_field='pk',
                 date_field='created',
@@ -377,7 +393,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
         # enabled conferences
         statistics.append(
             _get_statistics_for_metric(
-                title='09. Total Enabled Conferences',
+                title=_('Total Enabled Conferences'),
                 data=CosinnusConference.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
                 unique_field='pk',
                 date_field='created',
@@ -398,7 +414,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
         )
         statistics.append(
             _get_statistics_for_metric(
-                title='10. Running (scheduled) Conferences in this period',
+                title=_('Running (scheduled) Conferences in this period'),
                 data=running_conferences_filtered,
                 unique_field='pk',
                 date_field='created',
@@ -414,7 +430,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
 
         statistics.append(
             _get_statistics_for_metric(
-                title='11. Newly Created Events in this period',
+                title=_('Newly Created Events in this period'),
                 data=Event.objects.filter(group__portal=CosinnusPortal.get_current()),
                 unique_field='pk',
                 date_field='created',
@@ -432,7 +448,7 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
 
         statistics.append(
             _get_statistics_for_metric(
-                title='12. Newly Created News in this period',
+                title=_('Newly Created News in this period'),
                 data=Note.objects.filter(group__portal=CosinnusPortal.get_current()),
                 unique_field='pk',
                 date_field='created',
