@@ -8,6 +8,7 @@ from typing import Dict, List, Optional, Tuple, Type
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import Count, Q, QuerySet
+from django.db.models.fields import DateField
 from django.db.models.functions.datetime import TruncBase, TruncDay, TruncMonth, TruncWeek, TruncYear
 from django.http import HttpResponseRedirect
 from django.utils.formats import localize
@@ -25,7 +26,7 @@ from cosinnus.views.mixins.group import RequirePortalManagerMixin
 DATE_RANGE_DEFAULT_PAST_DAYS = 30
 
 
-class BaseInterval(ABC):
+class _BaseInterval(ABC):
     """encapsulates interval_type specific logic"""
 
     trunc_function: Type[TruncBase]
@@ -58,22 +59,22 @@ class BaseInterval(ABC):
         return cls.trunc_function
 
     @classmethod
-    def get_interval_type_from_date_range(cls, date_from: date, date_to: date) -> Type['BaseInterval']:
+    def get_interval_type_from_date_range(cls, date_from: date, date_to: date) -> Type['_BaseInterval']:
         """
         returns an interval-type class depending on the timedelta between date_from and date_to
         """
         timedelta_days = (date_to - date_from).days
         if timedelta_days < 30:
-            return DayInterval
+            return _DayInterval
         elif timedelta_days < 90:
-            return WeekInterval
+            return _WeekInterval
         elif timedelta_days < 1080:
-            return MonthInterval
+            return _MonthInterval
         else:
-            return YearInterval
+            return _YearInterval
 
 
-class DayInterval(BaseInterval):
+class _DayInterval(_BaseInterval):
     trunc_function = TruncDay
 
     @classmethod
@@ -89,7 +90,7 @@ class DayInterval(BaseInterval):
         return aligned_date + timedelta(days=1)
 
 
-class WeekInterval(BaseInterval):
+class _WeekInterval(_BaseInterval):
     trunc_function = TruncWeek
 
     @classmethod
@@ -107,7 +108,7 @@ class WeekInterval(BaseInterval):
         return aligned_date + timedelta(weeks=1)
 
 
-class MonthInterval(BaseInterval):
+class _MonthInterval(_BaseInterval):
     trunc_function = TruncMonth
 
     @classmethod
@@ -125,7 +126,7 @@ class MonthInterval(BaseInterval):
         return aligned_date.replace(year=year, month=month, day=1)
 
 
-class YearInterval(BaseInterval):
+class _YearInterval(_BaseInterval):
     trunc_function = TruncYear
 
     @classmethod
@@ -141,19 +142,29 @@ class YearInterval(BaseInterval):
         return date(aligned_date.year + 1, 1, 1)
 
 
-def _get_continuos_formatted_interval_data(
-    data_buckets: List[Tuple[date, int]], date_from: date, date_to: date, interval_type: Type[BaseInterval]
+def _get_formatted_interval_data(
+    data: QuerySet, unique_field: str, date_field: str, date_from: date, date_to: date
 ) -> List[Tuple[str, int]]:
     """
-    ensures that bucket range is ready to be displayed as chart
+    queries interval-data aggregated in buckets, formats to be displayed as chart
 
     - formats date value as string depending on the interval_type
     - handles incomplete intervals at the edges (labels them appropriately)
     - fills gaps in bucket_range with 0 value-intervals
-    :return: continuos range of aligned interval data as 'date:value'
+    :return: continuous range of aligned interval data as '(date,value)'
     """
+    # get interval class for date range to lookup interval-specific functions
+    interval_type = _BaseInterval.get_interval_type_from_date_range(date_from, date_to)
+
+    # query database aggregating to buckets, ensure date is type datime.date, returning as list of tuples
+    data_buckets_list = (
+        data.values(_temp_bucket_date=interval_type.get_trunc_function()(date_field, output_field=DateField()))
+        .annotate(_temp_bucket_count=Count(unique_field, distinct=True))
+        .values_list('_temp_bucket_date', '_temp_bucket_count')
+    )
+
     # walk the date range by interval, insert bucket values or 0 if missing
-    lookup_table: Dict[date, int] = {entry[0]: entry[1] for entry in data_buckets}
+    data_buckets_lookup: Dict[date, int] = dict(data_buckets_list)
     result = []
     # begin at start of first interval
     interval_current: date = interval_type.get_current_start(date_from)
@@ -171,18 +182,9 @@ def _get_continuos_formatted_interval_data(
                 bucket_label=bucket_label, until=_('until'), date_from=date_to.isoformat()
             )
 
-        result.append((bucket_label, lookup_table.get(interval_current, 0)))
+        result.append((bucket_label, data_buckets_lookup.get(interval_current, 0)))
         interval_current = interval_type.get_next_start(interval_current)
     return result
-
-
-def _to_date(value) -> date:
-    if isinstance(value, datetime):
-        return value.date()
-    elif isinstance(value, date):
-        return value
-    else:
-        raise TypeError(f'expected datetime.date or datetime.datetime,got {type(value)}')
 
 
 def _get_statistics_for_metric(
@@ -222,7 +224,7 @@ def _get_statistics_for_metric(
     # compute total unique count
     total: int = data_filtered.values(unique_field).distinct().count()
 
-    # compute buckets according to buckets if date_field is provided
+    # compute buckets
     bucket_labels = None
     bucket_values = None
     if get_buckets:
@@ -233,20 +235,9 @@ def _get_statistics_for_metric(
         date_from = datetime_from.date()
         date_to = datetime_to.date()
 
-        interval_type = BaseInterval.get_interval_type_from_date_range(date_from, date_to)
-
-        # compute buckets
-        data_buckets: QuerySet = data_filtered.values(
-            _temp_bucket_date=interval_type.get_trunc_function()(date_field)
-        ).annotate(_temp_bucket_count=Count(unique_field, distinct=True))
-        # create list with tuples, ensure date is a proper date object
-        buckets_gaps: List[Tuple[date, int]] = [
-            (_to_date(entry['_temp_bucket_date']), entry['_temp_bucket_count']) for entry in data_buckets
-        ]
-
-        # empty buckets are not listed in the queryset, we need to add 0 values manually
-        buckets_formatted: List[Tuple[str, int]] = _get_continuos_formatted_interval_data(
-            buckets_gaps, date_from, date_to, interval_type
+        # get formatted bucket data
+        buckets_formatted: List[Tuple[str, int]] = _get_formatted_interval_data(
+            data_filtered, unique_field, date_field, date_from, date_to
         )
 
         # format buckets for chart.js if present
