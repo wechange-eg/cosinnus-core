@@ -9,6 +9,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import Count, Q, QuerySet
 from django.db.models.functions import TruncDay, TruncMonth, TruncWeek, TruncYear
+from django.http import HttpResponseRedirect
 from django.utils.formats import localize
 from django.views.generic.edit import FormView
 
@@ -18,6 +19,9 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.utils.user import filter_active_users
 from cosinnus.views.mixins.group import RequirePortalManagerMixin
+
+# how many past days to show by default
+DATE_RANGE_DEFAULT_PAST_DAYS = 30
 
 
 class IntervalType(Enum):
@@ -408,6 +412,21 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
 
     form_class = SimpleStatisticsForm
     template_name = 'cosinnus/statistics/simple.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        # add default date range if none is given
+        if request.method == 'GET' and ('from' not in request.GET or 'to' not in request.GET):
+            date_to = datetime.now().replace(hour=23, minute=59)
+            date_from = (datetime.now() - timedelta(days=DATE_RANGE_DEFAULT_PAST_DAYS)).replace(hour=0, minute=0)
+
+            parameters = request.GET.copy()
+            parameters['to'] = date_to.strftime(self.DATE_FORMAT)
+            parameters['from'] = date_from.strftime(self.DATE_FORMAT)
+            redirect_url = f'{request.path}?{parameters.urlencode()}'
+
+            return HttpResponseRedirect(redirect_url)
+
+        return super().dispatch(request, *args, **kwargs)
 
     def get_initial(self, *args, **kwargs):
         initial = super(SimpleStatisticsView, self).get_initial(*args, **kwargs)
