@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from abc import ABC, abstractmethod
 from datetime import date, datetime, timedelta
-from enum import Enum
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Type
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import Count, Q, QuerySet
-from django.db.models.functions import TruncDay, TruncMonth, TruncWeek, TruncYear
+from django.db.models.functions.datetime import TruncBase, TruncDay, TruncMonth, TruncWeek, TruncYear
 from django.http import HttpResponseRedirect
 from django.utils.formats import localize
 from django.views.generic.edit import FormView
@@ -24,80 +24,122 @@ from cosinnus.views.mixins.group import RequirePortalManagerMixin
 DATE_RANGE_DEFAULT_PAST_DAYS = 30
 
 
-class IntervalType(Enum):
-    DAY = 1
-    WEEK = 2
-    MONTH = 3
-    YEAR = 4
+class BaseInterval(ABC):
+    """encapsulates interval_type specific logic"""
+
+    trunc_function: Type[TruncBase]
+
+    @classmethod
+    @abstractmethod
+    def format_label(cls, reference_date: date) -> str:
+        """format the date as string according to interval_type"""
+        pass
+
+    @classmethod
+    @abstractmethod
+    def get_current_start(cls, reference_date: date) -> date:
+        """return start date of current interval possibly in the past"""
+        pass
+
+    @classmethod
+    @abstractmethod
+    def get_next_start(cls, aligned_date: date) -> date:
+        """
+        return the start date of the next interval
+
+        Note: argument must be aligned to interval start
+        """
+        pass
+
+    @classmethod
+    def get_trunc_function(cls) -> Type[TruncBase]:
+        """return trunc function-class to filter a django queryset"""
+        return cls.trunc_function
+
+    @classmethod
+    def get_interval_type_from_date_range(cls, date_from: date, date_to: date) -> Type['BaseInterval']:
+        """
+        returns an interval-type class depending on the timedelta between date_from and date_to
+        """
+        timedelta_days = (date_to - date_from).days
+        if timedelta_days < 30:
+            return DayInterval
+        elif timedelta_days < 90:
+            return WeekInterval
+        elif timedelta_days < 1080:
+            return MonthInterval
+        else:
+            return YearInterval
 
 
-BUCKET_FUNCTIONS = {
-    IntervalType.DAY: TruncDay,
-    IntervalType.WEEK: TruncWeek,
-    IntervalType.MONTH: TruncMonth,
-    IntervalType.YEAR: TruncYear,
-}
+class DayInterval(BaseInterval):
+    trunc_function = TruncDay
 
-BUCKET_LABEL_FORMATTERS = {
-    IntervalType.DAY: lambda x: x.strftime('%Y-%m-%d'),
-    IntervalType.WEEK: lambda x: f"Week {x.isocalendar()[1]}: {x.strftime('%Y-%m-%d')}",
-    IntervalType.MONTH: lambda x: x.strftime('%Y-%m'),
-    IntervalType.YEAR: lambda x: x.strftime('%Y'),
-}
+    @classmethod
+    def format_label(cls, reference_date: date) -> str:
+        return reference_date.strftime('%Y-%m-%d')
 
+    @classmethod
+    def get_current_start(cls, reference_date: date) -> date:
+        return reference_date
 
-def _get_interval_type(date_from: date, date_to: date) -> IntervalType:
-    """
-    determines the interval type depending on the timedelta between date_from and date_to
-    :returns: one of 'day', 'week', 'month', 'year'
-    """
-    timedelta_days = (date_to - date_from).days
-    if timedelta_days < 30:
-        return IntervalType.DAY
-    elif timedelta_days < 90:
-        return IntervalType.WEEK
-    elif timedelta_days < 1080:
-        return IntervalType.MONTH
-    else:
-        return IntervalType.YEAR
+    @classmethod
+    def get_next_start(cls, aligned_date: date) -> date:
+        return aligned_date + timedelta(days=1)
 
 
-def _get_interval_start(unaligned_date: date, interval_type: IntervalType) -> date:
-    """
-    :return: start of the current interval
-    """
-    if interval_type == IntervalType.DAY:
-        return unaligned_date
-    elif interval_type == IntervalType.WEEK:
-        # week starts on monday
+class WeekInterval(BaseInterval):
+    trunc_function = TruncWeek
+
+    @classmethod
+    def format_label(cls, reference_date: date) -> str:
+        return f"Week {reference_date.isocalendar()[1]}: {reference_date.strftime('%Y-%m-%d')}"
+
+    @classmethod
+    def get_current_start(cls, unaligned_date: date) -> date:
         return unaligned_date - timedelta(days=unaligned_date.weekday())
-    elif interval_type == IntervalType.MONTH:
+
+    @classmethod
+    def get_next_start(cls, aligned_date: date) -> date:
+        return aligned_date + timedelta(weeks=1)
+
+
+class MonthInterval(BaseInterval):
+    trunc_function = TruncMonth
+
+    @classmethod
+    def format_label(cls, reference_date: date) -> str:
+        return reference_date.strftime('%Y-%m')
+
+    @classmethod
+    def get_current_start(cls, unaligned_date: date) -> date:
         return unaligned_date.replace(day=1)
-    elif interval_type == IntervalType.YEAR:
-        return date(unaligned_date.year, 1, 1)
+
+    @classmethod
+    def get_next_start(cls, aligned_date: date) -> date:
+        year = aligned_date.year + (aligned_date.month // 12)
+        month = (aligned_date.month % 12) + 1
+        return aligned_date.replace(year=year, month=month, day=1)
 
 
-def _increment_interval(date_current: date, interval_type: IntervalType) -> date:
-    """
-    increments the interval by one step depending on the interval_type
+class YearInterval(BaseInterval):
+    trunc_function = TruncYear
 
-    :return: start of the next interval
-    """
+    @classmethod
+    def format_label(cls, reference_date: date) -> str:
+        return reference_date.strftime('%Y')
 
-    if interval_type == IntervalType.DAY:
-        return date_current + timedelta(days=1)
-    elif interval_type == IntervalType.WEEK:
-        return date_current + timedelta(weeks=1)
-    elif interval_type == IntervalType.MONTH:
-        year = date_current.year + (date_current.month // 12)
-        month = (date_current.month % 12) + 1
-        return date_current.replace(year=year, month=month, day=1)
-    elif interval_type == IntervalType.YEAR:
-        return date(date_current.year + 1, 1, 1)
+    @classmethod
+    def get_current_start(cls, unaligned_date: date) -> date:
+        return unaligned_date.replace(month=1, day=1)
+
+    @classmethod
+    def get_next_start(cls, aligned_date: date) -> date:
+        return date(aligned_date.year + 1, 1, 1)
 
 
 def _get_continuos_formatted_interval_data(
-    data_buckets: List[Tuple[date, int]], date_from: date, date_to: date, interval_type: IntervalType
+    data_buckets: List[Tuple[date, int]], date_from: date, date_to: date, interval_type: Type[BaseInterval]
 ) -> List[Tuple[str, int]]:
     """
     ensures that bucket range is ready to be displayed as chart
@@ -107,25 +149,23 @@ def _get_continuos_formatted_interval_data(
     - fills gaps in bucket_range with 0 value-intervals
     :return: continuos range of aligned interval data as 'date:value'
     """
-    # not using localize() because we need to distinguish between day, month, year
-    bucket_label_formatter = BUCKET_LABEL_FORMATTERS.get(interval_type)
-
     # walk the date range by interval, insert bucket values or 0 if missing
     lookup_table: Dict[date, int] = {entry[0]: entry[1] for entry in data_buckets}
     result = []
     # begin at start of first interval
-    interval_current: date = _get_interval_start(date_from, interval_type)
+    interval_current: date = interval_type.get_current_start(date_from)
     while interval_current <= date_to:
-        bucket_label = bucket_label_formatter(interval_current)
+        # not using localize() because we need to format by interval_type
+        bucket_label = interval_type.format_label(interval_current)
 
         # amend interval label on first/last interval if it is incomplete
         if date_from > interval_current:
             bucket_label = f'{bucket_label}\n(since {date_from.isoformat()})'
-        elif date_to < _increment_interval(interval_current, interval_type) - timedelta(days=1):
+        elif date_to < interval_type.get_next_start(interval_current) - timedelta(days=1):
             bucket_label = f'{bucket_label}\n(until {date_to.isoformat()})'
 
         result.append((bucket_label, lookup_table.get(interval_current, 0)))
-        interval_current = _increment_interval(interval_current, interval_type)
+        interval_current = interval_type.get_next_start(interval_current)
     return result
 
 
@@ -186,13 +226,12 @@ def _get_statistics_for_metric(
         date_from = datetime_from.date()
         date_to = datetime_to.date()
 
-        interval_type = _get_interval_type(date_from, date_to)
+        interval_type = BaseInterval.get_interval_type_from_date_range(date_from, date_to)
 
         # compute buckets
-        bucket_function = BUCKET_FUNCTIONS.get(interval_type)
-        data_buckets: QuerySet = data_filtered.values(_temp_bucket_date=bucket_function(date_field)).annotate(
-            _temp_bucket_count=Count(unique_field, distinct=True)
-        )
+        data_buckets: QuerySet = data_filtered.values(
+            _temp_bucket_date=interval_type.get_trunc_function()(date_field)
+        ).annotate(_temp_bucket_count=Count(unique_field, distinct=True))
         # create list with tuples, ensure date is a proper date object
         buckets_gaps: List[Tuple[date, int]] = [
             (_to_date(entry['_temp_bucket_date']), entry['_temp_bucket_count']) for entry in data_buckets
