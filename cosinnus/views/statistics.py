@@ -5,6 +5,7 @@ from datetime import date, datetime, timedelta
 from enum import Enum
 from typing import Dict, List, Optional, Tuple
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import Count, Q, QuerySet
 from django.db.models.functions import TruncDay, TruncMonth, TruncWeek, TruncYear
@@ -317,51 +318,52 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
         )
     )
 
-    # created conferences
-    statistics.append(
-        _get_statistics_for_metric(
-            title='08. Newly Created Conferences in this period',
-            data=CosinnusConference.objects.filter(portal=CosinnusPortal.get_current()),
-            unique_field='pk',
-            date_field='created',
-            datetime_from=from_date,
-            datetime_to=to_date,
+    if settings.COSINNUS_CONFERENCES_ENABLED:
+        # created conferences
+        statistics.append(
+            _get_statistics_for_metric(
+                title='08. Newly Created Conferences in this period',
+                data=CosinnusConference.objects.filter(portal=CosinnusPortal.get_current()),
+                unique_field='pk',
+                date_field='created',
+                datetime_from=from_date,
+                datetime_to=to_date,
+            )
         )
-    )
 
-    # enabled conferences
-    statistics.append(
-        _get_statistics_for_metric(
-            title='09. Total Enabled Conferences',
-            data=CosinnusConference.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
-            unique_field='pk',
-            date_field='created',
-            datetime_from=None,
-            datetime_to=to_date,
-            get_buckets=False,
+        # enabled conferences
+        statistics.append(
+            _get_statistics_for_metric(
+                title='09. Total Enabled Conferences',
+                data=CosinnusConference.objects.filter(portal=CosinnusPortal.get_current(), is_active=True),
+                unique_field='pk',
+                date_field='created',
+                datetime_from=None,
+                datetime_to=to_date,
+                get_buckets=False,
+            )
         )
-    )
 
-    # scheduled conferences
-    # TODO implement bucket calculation for date ranges manually
-    running_conferences_filtered = CosinnusConference.objects.filter(
-        portal=CosinnusPortal.get_current(), is_active=True
-    ).filter(
-        (Q(from_date__gte=from_date) & Q(to_date__lte=to_date))
-        | (Q(to_date__gte=from_date) & Q(to_date__lte=to_date))
-        | (Q(from_date__lte=from_date) & Q(to_date__gte=to_date))
-    )
-    statistics.append(
-        _get_statistics_for_metric(
-            title='10. Running (scheduled) Conferences in this period',
-            data=running_conferences_filtered,
-            unique_field='pk',
-            date_field='created',
-            datetime_from=from_date,
-            datetime_to=to_date,
-            get_buckets=False,
+        # scheduled conferences
+        # TODO implement bucket calculation for date ranges manually
+        running_conferences_filtered = CosinnusConference.objects.filter(
+            portal=CosinnusPortal.get_current(), is_active=True
+        ).filter(
+            (Q(from_date__gte=from_date) & Q(to_date__lte=to_date))
+            | (Q(to_date__gte=from_date) & Q(to_date__lte=to_date))
+            | (Q(from_date__lte=from_date) & Q(to_date__gte=to_date))
         )
-    )
+        statistics.append(
+            _get_statistics_for_metric(
+                title='10. Running (scheduled) Conferences in this period',
+                data=running_conferences_filtered,
+                unique_field='pk',
+                date_field='created',
+                datetime_from=from_date,
+                datetime_to=to_date,
+                get_buckets=False,
+            )
+        )
 
     # optional: 11. Newly Created Events in this period
     try:
