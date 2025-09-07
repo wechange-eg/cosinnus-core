@@ -9416,30 +9416,23 @@ msgstr ""
 msgid "Total Enabled User Accounts (at least 1x logged in)"
 msgstr ""
 
-#, fuzzy
 msgid "Newly Created Projects in this period"
-msgstr "Other Projects"
+msgstr ""
 
-#, fuzzy
-#| msgid "All Projects"
 msgid "Total Enabled Projects"
-msgstr "All Projects"
+msgstr ""
 
 msgid "Newly Created Groups in this period"
 msgstr ""
 
-#, fuzzy
-#| msgid "All Groups"
 msgid "Total Enabled Groups"
-msgstr "All Groups"
+msgstr ""
 
-#, fuzzy
 msgid "Newly Created Conferences in this period"
-msgstr "Create Project"
+msgstr ""
 
-#, fuzzy
 msgid "Total Enabled Conferences"
-msgstr "My Projects"
+msgstr ""
 
 msgid "Running (scheduled) Conferences in this period"
 msgstr ""
