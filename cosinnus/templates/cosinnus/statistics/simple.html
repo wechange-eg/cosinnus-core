@@ -3,6 +3,36 @@
 
 {% block page_title %}{% trans "Simple Statistics" %}{% endblock %}
 
+{% block jshead %}
+    {{ block.super }}
+    <script src="{% static 'js/vendor/chart-4.5.0.umd.min.js' %}"></script>
+    <script type="text/javascript">
+        const chart_options = {
+            responsive: true,
+            scales:
+                {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {precision: 0}
+                    }
+                },
+            plugins: {
+                legend: {display: false},
+                tooltip: {
+                    enabled: true,
+                    callbacks: {
+                        title: function (context) {
+                            // reformat labels of incomplete intervals
+                            const label = context[0]?.label ?? '';
+                            return label.replace(/,/g, '\n');
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+{% endblock jshead %}
+
 {% block leftnav %}
     <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:administration' %}">
 	    <ul class="media-list">
@@ -224,42 +254,20 @@
     {% if statistics %}
         <!-- a box with semi transparent background -->
         <div class="content-box white-content">
-            <h3>Showing data for Portal <b>{{ COSINNUS_CURRENT_PORTAL.name }}</b> from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
-            <br/>
+            <h3 class="ultra-space">Showing data for Portal <b>{{ COSINNUS_CURRENT_PORTAL.name }}</b> from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
 
             {# show totals #}
-            {% for metric in statistics %}
-	            <div class="row regular-space">
-                   <div class="col-xs-8">{{ metric.title }}</div>
-                   <div class="col-xs-4">{{ metric.total }}</div>
-	            </div>
-            {% endfor %}
-
-
-            <br/>
+            <div class="ultra-space">
+                {% for metric in statistics %}
+                    <div class="row regular-space">
+                       <div class="col-xs-8">{{ metric.title }}</div>
+                       <div class="col-xs-4">{{ metric.total }}</div>
+                    </div>
+                {% endfor %}
+            </div>
 
             {# show date_buckets as charts #}
-            <script src="{% static 'js/vendor/chart-4.5.0.umd.min.js' %}"></script>
-            <script type="text/javascript">
-                const chart_options = {
-                    responsive: true,
-                    scales:
-                        {
-                            y: {
-                                beginAtZero: true,
-                                ticks:{precision:0}
-                            }
-                        },
-                    plugins: {
-                        legend:{display: false},
-                        tooltip:{enabled: false}
-                    }
-
-                };
-
-            </script>
-            <h3>Detailed Data from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
-            <br/>
+            <h3 class="ultra-space">Detailed Data from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
             {% for metric in statistics %}
                 {% if metric.buckets.labels|length < 2 or metric.total == 0 %}
                     {# continue if the is no chart data #}
@@ -267,15 +275,15 @@
                     {% with counter_str=forloop.counter|django_stringformat:"s" %}
                         {% with chart_id="chart-"|add:counter_str %}
                             <h4>{{ metric.title }}</h4>
-                            <div><canvas id="{{ chart_id }}" width="400" height="200"></canvas></div>
-                            <br/>
+                            <div class="ultra-space"><canvas id="{{ chart_id }}" width="400" height="200"></canvas></div>
                             <script>
                                 new Chart(document.getElementById('{{ chart_id }}').getContext('2d'), {
                                         type: 'bar',
                                         data: {
                                             labels: {{ metric.buckets.labels|safe }},
                                             datasets: [{
-                                                {#label: '{{ metric.title }}',#}
+                                                {# title is already shown as html heading #}
+                                                {# label: '{{ metric.title }}', #}
                                                 data: {{ metric.buckets.values|safe }},
                                                 backgroundColor: 'rgba(54, 162, 235, 0.6)'
                                             }]
