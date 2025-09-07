@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from datetime import date, datetime, timedelta
+from enum import Enum
 from typing import Dict, List, Optional, Tuple
 
 from django.contrib.auth import get_user_model
@@ -18,87 +19,80 @@ from cosinnus.utils.user import filter_active_users
 from cosinnus.views.mixins.group import RequirePortalManagerMixin
 
 
-def _filter_by_date_maybe(
-    data: QuerySet, date_field: str, date_from: Optional[datetime], date_to: Optional[datetime]
-) -> QuerySet:
-    """
-    returns a queryset, filtered according to date_from and date_to, maybe one-sided
-
-    - use datetime objects to ensure all objects are included
-    - does return the source queryset unchanged, if both date_from and date_to are None
-    """
-    # dont filter, if no limits are provided
-    if not date_from and not date_to:
-        return data
-
-    # construct filter arguments
-    filter_kwargs = {}
-    if date_from:
-        filter_kwargs.update({f'{date_field}__gte': date_from})
-    if date_to:
-        filter_kwargs.update({f'{date_field}__lte': date_to})
-
-    return data.filter(**filter_kwargs)
+class IntervalType(Enum):
+    DAY = 1
+    WEEK = 2
+    MONTH = 3
+    YEAR = 4
 
 
-def _get_interval_type(date_from: date, date_to: date) -> str:
+BUCKET_FUNCTIONS = {
+    IntervalType.DAY: TruncDay,
+    IntervalType.WEEK: TruncWeek,
+    IntervalType.MONTH: TruncMonth,
+    IntervalType.YEAR: TruncYear,
+}
+
+BUCKET_LABEL_FORMATTERS = {
+    IntervalType.DAY: lambda x: x.strftime('%Y-%m-%d'),
+    IntervalType.WEEK: lambda x: f"Week {x.isocalendar()[1]}: {x.strftime('%Y-%m-%d')}",
+    IntervalType.MONTH: lambda x: x.strftime('%Y-%m'),
+    IntervalType.YEAR: lambda x: x.strftime('%Y'),
+}
+
+
+def _get_interval_type(date_from: date, date_to: date) -> IntervalType:
     """
     determines the interval type depending on the timedelta between date_from and date_to
     :returns: one of 'day', 'week', 'month', 'year'
     """
     timedelta_days = (date_to - date_from).days
     if timedelta_days < 30:
-        return 'day'
+        return IntervalType.DAY
     elif timedelta_days < 90:
-        return 'week'
+        return IntervalType.WEEK
     elif timedelta_days < 1080:
-        return 'month'
+        return IntervalType.MONTH
     else:
-        return 'year'
+        return IntervalType.YEAR
 
 
-def _get_interval_start(unaligned_date: date, interval_type: str) -> date:
+def _get_interval_start(unaligned_date: date, interval_type: IntervalType) -> date:
     """
     :return: start of the current interval
     """
-    if interval_type == 'day':
+    if interval_type == IntervalType.DAY:
         return unaligned_date
-    elif interval_type == 'week':
+    elif interval_type == IntervalType.WEEK:
         # week starts on monday
-        start_date = unaligned_date - timedelta(days=unaligned_date.weekday())
-    elif interval_type == 'month':
-        start_date = unaligned_date.replace(day=1)
-    elif interval_type == 'year':
-        start_date = date(unaligned_date.year, 1, 1)
-    else:
-        raise ValueError(f'interval type {interval_type} is not supported')
-
-    return start_date
+        return unaligned_date - timedelta(days=unaligned_date.weekday())
+    elif interval_type == IntervalType.MONTH:
+        return unaligned_date.replace(day=1)
+    elif interval_type == IntervalType.YEAR:
+        return date(unaligned_date.year, 1, 1)
 
 
-def _increment_interval(date_current: date, interval_type: str) -> date:
+def _increment_interval(date_current: date, interval_type: IntervalType) -> date:
     """
     increments the interval by one step depending on the interval_type
 
     :return: start of the next interval
     """
 
-    if interval_type == 'day':
+    if interval_type == IntervalType.DAY:
         return date_current + timedelta(days=1)
-    elif interval_type == 'week':
+    elif interval_type == IntervalType.WEEK:
         return date_current + timedelta(weeks=1)
-    elif interval_type == 'month':
+    elif interval_type == IntervalType.MONTH:
         year = date_current.year + (date_current.month // 12)
         month = (date_current.month % 12) + 1
         return date_current.replace(year=year, month=month, day=1)
-    elif interval_type == 'year':
+    elif interval_type == IntervalType.YEAR:
         return date(date_current.year + 1, 1, 1)
-    else:
-        raise ValueError('Invalid interval type')
 
 
 def _get_continuos_formatted_interval_data(
-    data_buckets: List[Tuple[date, int]], date_from: date, date_to: date, interval_type: str
+    data_buckets: List[Tuple[date, int]], date_from: date, date_to: date, interval_type: IntervalType
 ) -> List[Tuple[str, int]]:
     """
     ensures that bucket range is ready to be displayed as chart
@@ -109,12 +103,7 @@ def _get_continuos_formatted_interval_data(
     :return: continuos range of aligned interval data as 'date:value'
     """
     # not using localize() because we need to distinguish between day, month, year
-    bucket_label_filter = {
-        'day': lambda x: x.strftime('%Y-%m-%d'),
-        'week': lambda x: f"Week {x.isocalendar()[1]}: {x.strftime('%Y-%m-%d')}",
-        'month': lambda x: x.strftime('%Y-%m'),
-        'year': lambda x: x.strftime('%Y'),
-    }.get(interval_type)
+    bucket_label_formatter = BUCKET_LABEL_FORMATTERS.get(interval_type)
 
     # walk the date range by interval, insert bucket values or 0 if missing
     lookup_table: Dict[date, int] = {entry[0]: entry[1] for entry in data_buckets}
@@ -122,7 +111,7 @@ def _get_continuos_formatted_interval_data(
     # begin at start of first interval
     interval_current: date = _get_interval_start(date_from, interval_type)
     while interval_current <= date_to:
-        bucket_label = bucket_label_filter(interval_current)
+        bucket_label = bucket_label_formatter(interval_current)
 
         # amend interval label on first/last interval if it is incomplete
         if date_from > interval_current:
@@ -170,8 +159,13 @@ def _get_statistics_for_metric(
     :return: a dict with labels and values for display via `chart.js`.
     """
     # filter the source data by date, if from and/or to is provided
-    # this uses datetime parameters to ensure, we get all objects
-    data_filtered = _filter_by_date_maybe(data, date_field, datetime_from, datetime_to)
+    #   this uses datetime parameters to ensure, we get all objects
+    filter_kwargs = {}
+    if datetime_from:
+        filter_kwargs.update({f'{date_field}__gte': datetime_from})
+    if datetime_to:
+        filter_kwargs.update({f'{date_field}__lte': datetime_to})
+    data_filtered = data.filter(**filter_kwargs)
 
     # compute total unique count
     total: int = data_filtered.values(unique_field).distinct().count()
@@ -190,9 +184,7 @@ def _get_statistics_for_metric(
         interval_type = _get_interval_type(date_from, date_to)
 
         # compute buckets
-        bucket_function = {'day': TruncDay, 'week': TruncWeek, 'month': TruncMonth, 'year': TruncYear}.get(
-            interval_type
-        )
+        bucket_function = BUCKET_FUNCTIONS.get(interval_type)
         data_buckets: QuerySet = data_filtered.values(_temp_bucket_date=bucket_function(date_field)).annotate(
             _temp_bucket_count=Count(unique_field, distinct=True)
         )
