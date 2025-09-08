@@ -1018,6 +1018,7 @@ class UserAdmin(DjangoUserAdmin):
         EmailVerifiedFilter,
         IsGuestFilter,
     ]
+    search_fields = ['username', 'first_name', 'last_name', 'email', 'cosinnus_profile__dynamic_fields']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
