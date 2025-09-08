@@ -478,7 +478,7 @@ class SignupView(UserSignupTriggerEventsMixin, SignupApiMixin, APIView):
 
 
 class UserSerializationMixin:
-    """Mixing for user and profile serialization."""
+    """Mixin for user and profile serialization."""
 
     def get_user_data(self, request, user, user_serializer_class):
         """Return the serialized user data."""

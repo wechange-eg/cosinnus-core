@@ -1237,6 +1237,7 @@ def send_user_email_to_verify(user, new_email, request=None, user_has_just_regis
 def email_first_login_token_to_user(user, threaded=True):
     """Sets the profile variables for a user to login without a set password,
     and sends out an email with a verification URL to the user.
+    @return: the login token as string
     """
 
     # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile

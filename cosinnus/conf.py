@@ -1496,6 +1496,9 @@ class CosinnusConf(AppConf):
     # only applies when `PLATFORM_ADMIN_CAN_EDIT_PROFILES=True`
     USERPROFILE_FIELDS_SEARCHABLE_IN_ADMINISTRATION = []
 
+    # if True, enable the portal admin APIs for user create (/api/v3/user/create/) and update (/api/v3/user/update/).
+    ADMIN_USER_APIS_ENABLED = False
+
     # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False
     # should the group dashboard widget grid calendar allow drag & drop of events

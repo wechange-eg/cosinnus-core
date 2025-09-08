@@ -467,8 +467,8 @@ class CosinnusHybridUserAdminCreateSerializer(UserSignupFinalizeMixin, CosinnusH
             raise ValidationError({'email': self.fields['email'].error_messages['required']})
         if not attrs.get('first_name'):
             raise ValidationError({'first_name': self.fields['first_name'].error_messages['required']})
-        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED and not attrs.get('first_name'):
-            raise ValidationError({'first_name': self.fields['last_name'].error_messages['required']})
+        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED and not attrs.get('last_name'):
+            raise ValidationError({'last_name': self.fields['last_name'].error_messages['required']})
         attrs = super(CosinnusHybridUserAdminCreateSerializer, self).validate(attrs)
         return attrs
 

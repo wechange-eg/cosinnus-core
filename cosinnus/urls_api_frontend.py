@@ -62,8 +62,6 @@ urlpatterns += [
     path('api/v3/set_initial_password/<str:token>/', SetInitialPasswordView.as_view(), name='api-set-initial-password'),
     path('api/v3/group_invite/<str:token>/', GroupInviteTokenView.as_view(), name='api-group-invite-token'),
     path('api/v3/user/profile/', UserProfileView.as_view(), name='api-user-profile'),
-    path('api/v3/user/create/', UserAdminCreateView.as_view(), name='api-user-admin-create'),
-    path('api/v3/user/update/<int:user_id>/', UserAdminUpdateView.as_view(), name='api-user-admin-update'),
     path('api/v3/user/ui_flags/', UserUIFlagsView.as_view(), name='api-user-ui-flags'),
     path('api/v3/portal/topics/', PortalTopicsView.as_view(), name='api-portal-topics'),
     path('api/v3/portal/tags/', PortalTagsView.as_view(), name='api-portal-tags'),
@@ -103,6 +101,13 @@ urlpatterns += [
         name='api-navigation-unread-version-history',
     ),
 ]
+
+if settings.COSINNUS_ADMIN_USER_APIS_ENABLED:
+    urlpatterns += [
+        path('api/v3/user/create/', UserAdminCreateView.as_view(), name='api-user-admin-create'),
+        path('api/v3/user/update/<int:user_id>/', UserAdminUpdateView.as_view(), name='api-user-admin-update'),
+    ]
+
 
 if settings.COSINNUS_DECK_ENABLED:
     urlpatterns += [

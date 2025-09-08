@@ -16,7 +16,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.cache import cache
 from django.core.exceptions import MiddlewareNotUsed
 from django.db.models import signals
-from django.http.response import HttpResponseNotFound, HttpResponseRedirect
+from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.template.defaultfilters import urlencode
 from django.template.response import TemplateResponse
@@ -680,7 +680,7 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                 if redirect_url:
                     return HttpResponseRedirect(redirect_url)
                 else:
-                    return HttpResponseNotFound()
+                    raise Http404
 
         #  ignore urls that should not be redirected
         if any([request.path.startswith(never_path) for never_path in settings.COSINNUS_NEVER_REDIRECT_URLS]):
