@@ -6,7 +6,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from requests.exceptions import JSONDecodeError
 from rest_framework import serializers, status
-from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
 from rest_framework.response import Response
@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models.group import get_cosinnus_group_model
 from cosinnus.models.tagged import LikeObject, SyncedExternalObject
-from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
+from cosinnus.utils.permissions import IsNextCloudApiUser, check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.common import apply_follow_object
 from cosinnus_cloud.hooks import get_user_by_nc_user_id
@@ -313,12 +313,8 @@ class DeckEventsView(DeckSyncedTaskMixin, APIView):
         JSONRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (
-        SessionAuthentication,
-        BasicAuthentication,
-    )
-    # TODO use django group permissions
-    permission_classes = (IsAuthenticated,)
+    authentication_classes = (BasicAuthentication,)
+    permission_classes = (IsNextCloudApiUser,)
 
     @swagger_auto_schema(
         request_body=deck_serializers.DeckEventSerializer,

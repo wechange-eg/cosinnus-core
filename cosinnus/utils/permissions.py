@@ -477,3 +477,14 @@ class AllowNone(BasePermission):
 
     def has_permission(self, request, view):
         return False
+
+
+class IsNextCloudApiUser(BasePermission):
+    """
+    Allow access only to user in the 'NextCloudApiUser' group.
+    """
+
+    GROUP_NAME = 'NextCloudApiUser'
+
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.groups.filter(name=self.GROUP_NAME).exists()
