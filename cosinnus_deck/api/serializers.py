@@ -42,8 +42,8 @@ class DeckEventSerializer(serializers.Serializer):
     """
 
     type = serializers.ChoiceField(choices=DECK_EVENT_TYPE_CHOICES)
-    id = serializers.IntegerField()
-    requestedUserId = serializers.CharField()
+    id = serializers.CharField()
+    requestUserId = serializers.CharField()
 
 
 class DeckTaskDataSerializer(serializers.Serializer):

@@ -336,7 +336,7 @@ class DeckEventsView(DeckSyncedTaskMixin, APIView):
         event = serializer.validated_data
 
         # get the user
-        nc_user_id = event['requestedUserId']
+        nc_user_id = event['requestUserId']
         user = get_user_by_nc_user_id(nc_user_id)
         if not user:
             raise serializers.ValidationError('User does not exist.')
