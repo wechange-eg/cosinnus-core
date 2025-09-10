@@ -634,7 +634,7 @@ class CosinnusConf(AppConf):
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
     # GeoJSON can be generated using http://opendatalab.de/projects/geojson-utilities/
-    COSINNUS_MAP_OPTIONS = {
+    MAP_OPTIONS = {
         'default_coordinates': {
             'ne_lat': 55.32,  # north,
             'ne_lon': 15.56,  # east,
