@@ -1312,6 +1312,11 @@ class CosinnusConf(AppConf):
     # the "more" link.
     GROUP_DASHBOARD_HEADER_TEXT_EXPANDED = False
 
+    # a list of <str> 'app_name.widget_name' id entries for each widget that should
+    # be hidden in the group dashboard of all groups, no matter which apps are enabled.
+    # see `DashboardWidgetMixin.default_widget_order` for a list of widget ids
+    GROUP_DASHBOARD_HIDE_WIDGETS = []
+
     # enable e-mail downloads of newsletter-enabled users in the administration area
     # if enabled, this allows all portal-admins to download user emails, this might be
     # *VERY* risky, so use cautiously
