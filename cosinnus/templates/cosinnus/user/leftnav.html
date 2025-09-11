@@ -214,7 +214,7 @@
 {% endfor %}
 {% endif %}
 
-{% if view == "edit_profile" or view == "delete_profile" %}
+{% if view == "edit_profile" or view == "delete_profile" or SETTINGS.COSINNUS_DISABLE_PROFILE_EDITING  %}
 <button type="button" class="btn w100 btn-{% if view == "delete_profile" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
     <ul class="media-list">
         <li class="media">
