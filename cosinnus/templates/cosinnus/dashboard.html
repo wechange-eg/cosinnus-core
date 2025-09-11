@@ -331,7 +331,7 @@
                             {% endblock event_app %}
                             {% block note_app %}
                                 {% if "note" in object_counts %}
-                                    <div class="dashboard-header-link app-main mobile-hidden">
+                                    <div class="dashboard-header-link app-note mobile-hidden">
                                         <a href="{% group_url 'cosinnus:note:list' group=group %}">
                                             <i class="fas fa-broadcast-tower"></i>
                                             <span>{{ object_counts.note }}</span>

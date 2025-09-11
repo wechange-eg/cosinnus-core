@@ -6,7 +6,7 @@
 {% endcomment %}
 
 <div class="dashboard-widget large-space clearfix" {% if widget_conf_id %}data-widget-id="{{ widget_conf_id }}"{% endif %} data-type="widget" data-widget-priority="{% if sort_field %}{{ sort_field }}{% else %}1000{% endif %}"><!-- left column -->
-    <div class="{% if widget_class %}{{widget_class}}{% else %}{% if app_name == 'todo' %}app-todos{% elif app_name == 'note' %}app-main{% elif app_name == 'file' %}app-files{% elif app_name == 'event' %}app-calendar{% elif app_name == 'cosinnus' %}app-main{% elif app_name %}app-{{ app_name }}{% else %}app-main{% endif %}{% endif %}"  >
+    <div class="{% if widget_class %}{{widget_class}}{% else %}{% if app_name == 'todo' %}app-todos{% elif app_name == 'note' %}app-note{% elif app_name == 'file' %}app-files{% elif app_name == 'event' %}app-calendar{% elif app_name == 'cosinnus' %}app-main{% elif app_name %}app-{{ app_name }}{% else %}app-main{% endif %}{% endif %}"  >
         
         {% block base_widget_content %}
             {% comment %} 
