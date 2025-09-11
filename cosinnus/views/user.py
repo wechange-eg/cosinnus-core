@@ -575,13 +575,17 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
                     except Exception as e:
                         logger.exception(e)
                 self.notification_setting.save()
+
             # save visibility setting:
             visibility_setting = request.POST.get('visibility_setting', None)
-            if visibility_setting is not None and int(visibility_setting) in (
+            # do not change the userprofile visibility field if it is locked
+            if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+                self.media_tag.visibility = settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+            elif visibility_setting is not None and int(visibility_setting) in (
                 choice for choice, label in self.visibility_choices
             ):
                 self.media_tag.visibility = int(visibility_setting)
-                self.media_tag.save()
+            self.media_tag.save()
 
         messages.success(request, self.message_success)
 
