@@ -803,6 +803,9 @@ class CosinnusConf(AppConf):
     # whether or not to redirect to the welcome settings page after a user registers
     SHOW_WELCOME_SETTINGS_PAGE = True
 
+    # whether or not to show the /signup/welcome/ profile setup in the new frontend
+    SHOW_V3_WELCOME_PROFILE_SETUP_PAGE = True
+
     # the duration of the user stream (must be very short, otherwise notifications will not appear)
     STREAM_SHORT_CACHE_TIMEOUT = 30
 
