@@ -486,6 +486,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME,
         env('WECHANGE_COSINNUS_CLOUD_PASSWORD', default=''),
     )
+    COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN = env('WECHANGE_COSINNUS_CLOUD_API_TOKEN', default='')
 
     """ --------------- EXTERNAL SERVICES  ---------------- """
 

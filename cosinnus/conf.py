@@ -1283,6 +1283,8 @@ class CosinnusConf(AppConf):
     # by default this returns an empty string so no emails are transferred to nextcloud.
     # default if None: `''`
     CLOUD_USER_PROFILE_EMAIL_FUNC = None
+    # API Token used by NextCloud to access internal APIs (e.g. DeckEventsView)
+    CLOUD_NEXTCLOUD_API_TOKEN = None
 
     # whether to enable the cosinnus deck app
     # Note: COSINNUS_CLOUD_ENABLED must also be set, as the deck app depends on the cloud integration.

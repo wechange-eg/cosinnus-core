@@ -6,7 +6,9 @@ from uuid import uuid1
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.db.models import Q
+from rest_framework.authentication import get_authorization_header
 from rest_framework.permissions import BasePermission, IsAdminUser
 
 from cosinnus.models import MEMBER_STATUS, MEMBERSHIP_ADMIN, MEMBERSHIP_PENDING
@@ -479,12 +481,36 @@ class AllowNone(BasePermission):
         return False
 
 
-class IsNextCloudApiUser(BasePermission):
+class IsNextCloudApiTokenValid(BasePermission):
     """
-    Allow access only to user in the 'NextCloudApiUser' group.
+    Allow access only if the request contains the nextcloud API token as in the Authorization header:
+    Authorization: Token <token>
+
+    Based on the DRF TokenAuthentication code.
     """
 
-    GROUP_NAME = 'NextCloudApiUser'
+    keyword = 'Token'
 
     def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.groups.filter(name=self.GROUP_NAME).exists()
+        if not settings.COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN:
+            # make sure the token is defined
+            raise ImproperlyConfigured('NextCloud API is enabled but COSINNUS_LOUD_NEXTCLOUD_API_TOKEN is not defined.')
+
+        auth = get_authorization_header(request).split()
+        if not auth or auth[0].lower() != self.keyword.lower().encode():
+            # invalid header key
+            return False
+
+        if len(auth) == 1 or len(auth) > 2:
+            # invalid header format
+            return False
+
+        try:
+            token = auth[1].decode()
+        except UnicodeError:
+            # invalid token
+            return False
+
+        if token == settings.COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN:
+            return True
+        return False
