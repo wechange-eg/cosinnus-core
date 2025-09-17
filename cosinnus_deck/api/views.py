@@ -393,6 +393,12 @@ class DeckEventsView(DeckSyncedTaskMixin, APIView):
         elif event['type'] == deck_serializers.DECK_EVENT_TYPE_TASK_COMMENT_CREATED:
             # task comment posted
             audience = synced_task.get_followed_users().exclude(id=user.id)
+            mentioned_user_ids = [get_user_by_nc_user_id(nc_user_id).id for nc_user_id in event['data']['mentions']]
+            if mentioned_user_ids:
+                # Exclude the mentioned users from the audience as they already get the mentioned notification.
+                # Note: we cant use notification sessions to deduplicate notifications here in the api.
+                # TODO: Consider the edge case where a user has disabled "mentioned" notifications but not "commented"
+                audience = audience.exclude(id__in=mentioned_user_ids)
             notifications_signal = cosinnus_notifications.following_deck_task_comment_posted
             apply_follow_object(synced_task, user, follow=True)
 
@@ -401,10 +407,9 @@ class DeckEventsView(DeckSyncedTaskMixin, APIView):
             mentioned_user = get_user_by_nc_user_id(event['data']['userId'])
             if not mentioned_user:
                 raise serializers.ValidationError('User does not exist.')
-            if mentioned_user != user:
-                audience = [mentioned_user]
-                notifications_signal = cosinnus_notifications.deck_task_user_mentioned
-                apply_follow_object(synced_task, mentioned_user, follow=True)
+            audience = [mentioned_user]
+            notifications_signal = cosinnus_notifications.deck_task_user_mentioned
+            apply_follow_object(synced_task, mentioned_user, follow=True)
 
         elif event['type'] == deck_serializers.DECK_EVENT_TYPE_TASK_DELETED:
             # task deleted

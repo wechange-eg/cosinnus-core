@@ -97,6 +97,18 @@ class DeckTaskAssigneeChangedEventSerializer(DeckEventSerializer):
     data = DeckTaskAssigneeDataSerializer()
 
 
+class DeckTaskCommentCreatedDataSerializer(DeckTaskDataSerializer):
+    """Data of the comment created event."""
+
+    mentions = serializers.ListField(child=serializers.CharField())
+
+
+class DeckTaskCommentCreatedEventSerializer(DeckEventSerializer):
+    """Comment created event serializer."""
+
+    data = DeckTaskCommentCreatedDataSerializer()
+
+
 class DeckTaskMentionDataSerializer(DeckTaskDataSerializer):
     """Data of the user mentioned event."""
 
@@ -116,7 +128,7 @@ def get_deck_event_serializer(event_type, data):
         DECK_EVENT_TYPE_TASK_STATUS_CHANGED: DeckTaskStatusChangedEventSerializer,
         DECK_EVENT_TYPE_TASK_DUE_DATE_CHANGED: DeckTaskDueDateChangedEventSerializer,
         DECK_EVENT_TYPE_TASK_ASSIGNEE_CHANGED: DeckTaskAssigneeChangedEventSerializer,
-        DECK_EVENT_TYPE_TASK_COMMENT_CREATED: DeckTaskEventSerializer,
+        DECK_EVENT_TYPE_TASK_COMMENT_CREATED: DeckTaskCommentCreatedEventSerializer,
         DECK_EVENT_TYPE_TASK_USER_MENTIONED: DeckTaskUserMentionedEventSerializer,
         DECK_EVENT_TYPE_TASK_DELETED: DeckTaskEventSerializer,
     }
