@@ -327,6 +327,25 @@ def rocketsyncupdatesetting(_ctx):
 
 
 @task
+def updatedjango(_ctx):
+    """A temporary task used to quickly update only the Django requirement using pip and restart the server."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        foldername = f'_DELETEME_backuped_env_{get_random_string(length=6).lower()}'
+        with c.cd(env.path):
+            c.run(f'mkdir ~/{foldername}')
+            c.run('mkdir -p .venv')  # create if not exists
+            c.run(f'cp -R .venv ~/{foldername}/copiedvenv.venv')
+            c.run('touch poetry.lock')  # create if not exists
+            c.run(f'cp -R poetry.lock ~/{foldername}/copiedpoetry.lock')
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('pip install Django==4.2.24')
+            c.run('pip freeze | grep Django=')
+    restart(_ctx)
+
+
+@task
 def staticown(_ctx):
     """Chowns all media files and collected-static files. Useful only after a portal transfer/copy"""
     env = get_env()

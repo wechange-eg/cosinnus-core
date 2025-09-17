@@ -87,7 +87,7 @@ setup(
     packages=find_packages(exclude=['tests']),
     data_files=data_files,
     install_requires=[
-        'Django>=4.2.11,<4.3',
+        'Django>=4.2.24,<4.3',
         'MarkupSafe==2.1.5',
         'Pillow==10.3.0',
         'celery==5.2.7',
