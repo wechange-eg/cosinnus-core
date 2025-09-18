@@ -157,8 +157,12 @@ def _get_formatted_interval_data(
     interval_type = _BaseInterval.get_interval_type_from_date_range(date_from, date_to)
 
     # query database aggregating to buckets, ensure date is type datime.date, returning as list of tuples
+    #   the first .values() annotates with _temp_bucket_date and specifies its fields as group_by-fields
+    #   the .annotate() adds the counts
+    #   the .values_list() makes the result format explicit
+    trunc_function = interval_type.get_trunc_function()
     data_buckets_list = (
-        data.values(_temp_bucket_date=interval_type.get_trunc_function()(date_field, output_field=DateField()))
+        data.values(_temp_bucket_date=trunc_function(date_field, output_field=DateField()))
         .annotate(_temp_bucket_count=Count(unique_field, distinct=True))
         .values_list('_temp_bucket_date', '_temp_bucket_count')
     )
