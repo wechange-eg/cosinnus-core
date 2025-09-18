@@ -255,10 +255,11 @@
         <!-- a box with semi transparent background -->
         <div class="content-box white-content">
             <h3 class="ultra-space">
-                {# Translators: keep formatting verbatim (html-tags) #}
-                {% blocktrans trimmed with portal_name=COSINNUS_CURRENT_PORTAL.name from_date=form.from_date.value|date:"d.m.Y" to_date=form.to_date.value|date:"d.m.Y" %}
-                	Data for Portal <b>{{ portal_name }}</b> from {{ from_date }} to {{ to_date }}
-                {% endblocktrans %}
+                {% with wrapped_portal_name='<b>'|add:COSINNUS_CURRENT_PORTAL.name|add:'</b>' %}
+                    {% blocktrans trimmed with portal_name=wrapped_portal_name|safe from_date=form.from_date.value|date:"d.m.Y" to_date=form.to_date.value|date:"d.m.Y" %}
+                        Data for Portal {{ portal_name }} from {{ from_date }} to {{ to_date }}
+                    {% endblocktrans %}
+                {% endwith %}
             </h3>
 
             {# show totals #}
@@ -313,8 +314,7 @@
             <script type="text/javascript">
                 const charts = document.querySelectorAll('[id^="chart-"]');
                 if (charts.length === 0) {
-                    {# Translators: keep formatting verbatim (html-tags) #}
-                    document.getElementById("chart_warnings").innerHTML = "{% trans '<strong>Note:</strong> Please select a different timespan to display more data.' %}";
+                    document.getElementById("chart_warnings").innerHTML = "<strong>{% trans 'Note' context "notice, used at beginning of a paragraph" %}:</strong> {% trans 'Please select a different timespan to display more data.' %}";
                 }
             </script>
         </div>

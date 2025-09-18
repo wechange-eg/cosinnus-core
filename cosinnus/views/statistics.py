@@ -95,8 +95,8 @@ class _WeekInterval(_BaseInterval):
 
     @classmethod
     def format_label(cls, reference_date: date) -> str:
-        return '{week} {week_number}: {week_date}'.format(
-            week=_('Week'), week_number=reference_date.isocalendar()[1], week_date=reference_date.strftime('%Y-%m-%d')
+        return _('Week {week_number}: {week_start_date}').format(
+            week_number=reference_date.isocalendar()[1], week_start_date=reference_date.strftime('%Y-%m-%d')
         )
 
     @classmethod
@@ -173,14 +173,11 @@ def _get_formatted_interval_data(
         bucket_label = interval_type.format_label(interval_current)
 
         # amend interval label on first/last interval if it is incomplete
+        #   put actual limit dates on new line in parentheses
         if date_from > interval_current:
-            bucket_label = '{bucket_label}\n({since} {date_from})'.format(
-                bucket_label=bucket_label, since=_('since'), date_from=date_from.isoformat()
-            )
+            bucket_label = bucket_label + '\n(' + _('since %(date_from)s') % {'date_from': date_from.isoformat()} + ')'
         elif date_to < interval_type.get_next_start(interval_current) - timedelta(days=1):
-            bucket_label = '{bucket_label}\n({until} {date_from})'.format(
-                bucket_label=bucket_label, until=_('until'), date_from=date_to.isoformat()
-            )
+            bucket_label = bucket_label + '\n(' + _('until %(date_to)s') % {'date_to': date_to.isoformat()} + ')'
 
         result.append((bucket_label, data_buckets_lookup.get(interval_current, 0)))
         interval_current = interval_type.get_next_start(interval_current)
@@ -271,19 +268,17 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     # only show the info, if this affects the current request
 
     first_online_str = (
-        # Translators: keep formatting verbatim (space, parenthesis and html-tags)
-        _(' (recorded only from <span style="white-space: nowrap;">{first_online_date}</span> onwards)').format(
-            first_online_date=localize(first_online_date)
+        # Translators: keep formatting verbatim (space, parenthesis)
+        _(' (recorded only from {first_online_date} onwards)').format(
+            first_online_date=f'<span style="white-space: nowrap;">{localize(first_online_date)}</span>'
         )
         if first_online_date > from_date.date()
         else ''
     )
     statistics.append(
         _get_statistics_for_metric(
-            # FIXME localize
-            title=_('Unique, registered users that were active in this period{first_online_str}').format(
-                first_online_str=first_online_str
-            ),
+            # Translators: no punctuation at the end
+            title=_('Unique, registered users that were active in this period') + first_online_str,
             data=UserOnlineOnDay.objects.filter(user_id__in=CosinnusPortal.get_current().members),
             unique_field='user__id',
             date_field='date',
