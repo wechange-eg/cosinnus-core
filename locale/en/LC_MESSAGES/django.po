@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 10:35+0200\n"
+"POT-Creation-Date: 2025-09-18 13:45+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6501,6 +6501,23 @@ msgstr ""
 msgid "Select the date range for which you would like statistics"
 msgstr ""
 
+#, python-format
+msgid "Data for Portal %(portal_name)s from %(from_date)s to %(to_date)s"
+msgstr ""
+
+#, python-format
+msgid "Detailed Data from %(from_date)s to %(to_date)s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Notes"
+msgctxt "notice, used at beginning of a paragraph"
+msgid "Note"
+msgstr "News"
+
+msgid "Please select a different timespan to display more data."
+msgstr ""
+
 msgid "The WE-Cloud is here!"
 msgstr ""
 
@@ -9377,6 +9394,60 @@ msgid "Sorry, we could not connect your user account, because we could not retri
 msgstr ""
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
+msgstr ""
+
+#, python-brace-format
+msgid "Week {week_number}: {week_start_date}"
+msgstr ""
+
+#, python-format
+msgid "since %(date_from)s"
+msgstr ""
+
+#, python-format
+msgid "until %(date_to)s"
+msgstr ""
+
+#. Translators: keep formatting verbatim (space, parenthesis)
+#, python-brace-format
+msgid " (recorded only from {first_online_date} onwards)"
+msgstr ""
+
+#. Translators: no punctuation at the end
+msgid "Unique, registered users that were active in this period"
+msgstr ""
+
+msgid "New Registered User Accounts in this period"
+msgstr ""
+
+msgid "Total Enabled User Accounts (at least 1x logged in)"
+msgstr ""
+
+msgid "Newly Created Projects in this period"
+msgstr ""
+
+msgid "Total Enabled Projects"
+msgstr ""
+
+msgid "Newly Created Groups in this period"
+msgstr ""
+
+msgid "Total Enabled Groups"
+msgstr ""
+
+msgid "Newly Created Conferences in this period"
+msgstr ""
+
+msgid "Total Enabled Conferences"
+msgstr ""
+
+msgid "Running (scheduled) Conferences in this period"
+msgstr ""
+
+msgid "Newly Created Events in this period"
+msgstr ""
+
+msgid "Newly Created News in this period"
 msgstr ""
 
 msgid "You are already logged in. This function is only available to set up your account for the first time!"
