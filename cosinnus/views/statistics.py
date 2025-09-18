@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from abc import ABC, abstractmethod
 from datetime import date, datetime, timedelta
-from typing import Dict, List, Optional, Tuple, Type
+from typing import Dict, List, Optional, Tuple, Type, Union
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -195,22 +195,30 @@ def _get_statistics_for_metric(
     datetime_from: Optional[datetime],
     datetime_to: Optional[datetime],
     get_buckets: bool = True,
-):
+) -> Dict[str, Union[str, int, Dict[Optional[List[str]], Optional[List[int]]]]]:
     """
     Computes metrics for the given model and `unique_field`
-
-    metrics:
     - distinct total count
-    - series with bucket counts aggregated on given `date_field` by day/week/month/year depending on the date-slice
+    - (optional) series with bucket counts aggregated on given
+      `date_field` by day/week/month/year depending on the range of the date-slice
 
     notes:
+    - counts distinct entries, filtered according to `unique_field`
     - filters results to the given date-slice (limit can be set on one or both sides, none to disable)
     - bucket generation
         - is disabled unless both date-limits are set
         - can be disabled via `get_buckets=False`
     - date conversion does not consider time-zones!
 
-    :return: a dict with labels and values for display via `chart.js`.
+    :param title: title of the metric
+    :param data: data to be aggregated, series of entries with a date/datetime field
+    :param unique_field: field name in the `data` queryset, used to customize counting distinct items
+                        (can be set to `pk` to count all items)
+    :param date_field: field name in the `data` queryset, used to filter the data and to create date-intervals
+    :param datetime_from: disregard all entries before (set time to 00:00)
+    :param datetime_to: disregard all entries after (set time to 23:59)
+    :param get_buckets: whether to compute buckets per interval for drawing a chart
+    :returns: a dict with title, labels and values for display via `chart.js`.
     """
     # filter the source data by date, if from and/or to is provided
     #   this uses datetime parameters to ensure, we get all objects
