@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-07 21:11+0200\n"
+"POT-Creation-Date: 2025-09-18 13:45+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6501,17 +6501,21 @@ msgstr ""
 msgid "Select the date range for which you would like statistics"
 msgstr ""
 
-#. Translators: keep formatting verbatim (html-tags)
 #, python-format
-msgid "Data for Portal <b>%(portal_name)s</b> from %(from_date)s to %(to_date)s"
+msgid "Data for Portal %(portal_name)s from %(from_date)s to %(to_date)s"
 msgstr ""
 
 #, python-format
 msgid "Detailed Data from %(from_date)s to %(to_date)s"
 msgstr ""
 
-#. Translators: keep formatting verbatim (html-tags)
-msgid "<strong>Note:</strong> Please select a different timespan to display more data."
+#, fuzzy
+#| msgid "Notes"
+msgctxt "notice, used at beginning of a paragraph"
+msgid "Note"
+msgstr "News"
+
+msgid "Please select a different timespan to display more data."
 msgstr ""
 
 msgid "The WE-Cloud is here!"
@@ -9392,22 +9396,25 @@ msgstr ""
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr ""
 
-msgid "Week"
-msgstr ""
-
-msgid "since"
-msgstr ""
-
-msgid "until"
-msgstr ""
-
-#. Translators: keep formatting verbatim (space, parenthesis and html-tags)
 #, python-brace-format
-msgid " (recorded only from <span style=\"white-space: nowrap;\">{first_online_date}</span> onwards)"
+msgid "Week {week_number}: {week_start_date}"
 msgstr ""
 
+#, python-format
+msgid "since %(date_from)s"
+msgstr ""
+
+#, python-format
+msgid "until %(date_to)s"
+msgstr ""
+
+#. Translators: keep formatting verbatim (space, parenthesis)
 #, python-brace-format
-msgid "Unique, registered users that were active in this period{first_online_str}"
+msgid " (recorded only from {first_online_date} onwards)"
+msgstr ""
+
+#. Translators: no punctuation at the end
+msgid "Unique, registered users that were active in this period"
 msgstr ""
 
 msgid "New Registered User Accounts in this period"
@@ -10703,6 +10710,9 @@ msgid "Conference Event Attendance Trackings"
 msgstr "%s - Events"
 
 msgid "Would you like to create an event"
+msgstr ""
+
+msgid "until"
 msgstr ""
 
 msgctxt "time"

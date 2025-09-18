@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-07 21:08+0200\n"
+"POT-Creation-Date: 2025-09-18 14:49+0200\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6439,18 +6439,20 @@ msgstr "E-Mails ALLER aktiven Benutzer/innen"
 msgid "Select the date range for which you would like statistics"
 msgstr "Wähle einen Zeitraum, für den du den Überblick bekommen möchtest"
 
-#. Translators: keep formatting verbatim (html-tags)
 #, python-format
-msgid "Data for Portal <b>%(portal_name)s</b> from %(from_date)s to %(to_date)s"
-msgstr "Daten für Portal <b>%(portal_name)s</b> von %(from_date)s bis %(to_date)s"
+msgid "Data for Portal %(portal_name)s from %(from_date)s to %(to_date)s"
+msgstr "Daten für Portal %(portal_name)s von %(from_date)s bis %(to_date)s"
 
 #, python-format
 msgid "Detailed Data from %(from_date)s to %(to_date)s"
 msgstr "Detaillierte Daten von %(from_date)s bis %(to_date)s"
 
-#. Translators: keep formatting verbatim (html-tags)
-msgid "<strong>Note:</strong> Please select a different timespan to display more data."
-msgstr "<strong>Hinweis:</strong> Bitte wählen Sie einen anderen Zeitraum, um mehr Daten anzuzeigen."
+msgctxt "notice, used at beginning of a paragraph"
+msgid "Note"
+msgstr "Hinweis"
+
+msgid "Please select a different timespan to display more data."
+msgstr "Bitte wählen Sie einen anderen Zeitraum, um mehr Daten anzuzeigen."
 
 msgid "The WE-Cloud is here!"
 msgstr "Die WE-Cloud ist da!"
@@ -9331,23 +9333,26 @@ msgstr "Entschuldige, wir konnten dein Benutzerkonto nicht einloggen, weil wir B
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Entschuldige, du kannst dich nicht einloggen, weil dein Benutzerkonto gesperrt wurde. Bitte kontaktiere eine/n Administrator/in!"
 
-msgid "Week"
-msgstr "Woche"
-
-msgid "since"
-msgstr "seit"
-
-msgid "until"
-msgstr "bis"
-
-#. Translators: keep formatting verbatim (space, parenthesis and html-tags)
 #, python-brace-format
-msgid " (recorded only from <span style=\"white-space: nowrap;\">{first_online_date}</span> onwards)"
-msgstr " (erfasst erst ab <span style=\"white-space: nowrap;\">{first_online_date}</span>)"
+msgid "Week {week_number}: {week_start_date}"
+msgstr "Woche {week_number}: {week_start_date}"
 
+#, python-format
+msgid "since %(date_from)s"
+msgstr "seit %(date_from)s"
+
+#, python-format
+msgid "until %(date_to)s"
+msgstr "bis %(date_to)s"
+
+#. Translators: keep formatting verbatim (space, parenthesis)
 #, python-brace-format
-msgid "Unique, registered users that were active in this period{first_online_str}"
-msgstr "Eindeutige registrierte Benutzer, die in diesem Zeitraum aktiv waren{first_online_str}"
+msgid " (recorded only from {first_online_date} onwards)"
+msgstr " (erfasst erst ab {first_online_date})"
+
+#. Translators: no punctuation at the end
+msgid "Unique, registered users that were active in this period"
+msgstr "Eindeutige registrierte Benutzer, die in diesem Zeitraum aktiv waren"
 
 msgid "New Registered User Accounts in this period"
 msgstr "Neue registrierte Benutzerkonten in diesem Zeitraum"
@@ -9368,13 +9373,13 @@ msgid "Total Enabled Groups"
 msgstr "Gesamtanzahl aktivierter Gruppen"
 
 msgid "Newly Created Conferences in this period"
-msgstr "Neu erstellte Konferenzen in diesem Zeitraum"
+msgstr "Neu erstellte Tagungen in diesem Zeitraum"
 
 msgid "Total Enabled Conferences"
-msgstr "Gesamtanzahl aktivierter Konferenzen"
+msgstr "Gesamtanzahl aktivierter Tagungen"
 
 msgid "Running (scheduled) Conferences in this period"
-msgstr "Laufende (geplante) Konferenzen in diesem Zeitraum"
+msgstr "Laufende (geplante) Tagungen in diesem Zeitraum"
 
 msgid "Newly Created Events in this period"
 msgstr "Neu erstellte Veranstaltungen in diesem Zeitraum"
@@ -9744,120 +9749,152 @@ msgstr "Aufgaben-Board"
 msgid "A user created a task"
 msgstr "Ein Mitglied hat eine neue Aufgabe erstellt"
 
+#, python-format
 msgid "%(sender_name)s created the task %(object_name)s"
 msgstr "%(sender_name)s hat die Aufgabe %(object_name)s erstellt"
 
+#, python-format
 msgid "%(sender_name)s created %(count)d tasks"
 msgstr "%(sender_name)s hat %(count)d neue Aufgaben erstellt"
 
+#, python-format
 msgid "%(sender_name)s created a task"
 msgstr "%(sender_name)s hat eine neue Aufgabe erstellt"
 
+#, python-format
 msgid "%(sender_name)s created a task in %(team_name)s."
 msgstr "%(sender_name)s hat in %(team_name)s eine Aufgabe erstellt."
 
 msgid "A task was assigned to you"
 msgstr "Eine Aufgabe wurde dir zugewiesen"
 
+#, python-format
 msgid "%(sender_name)s assigned you the task %(object_name)s"
 msgstr "%(sender_name)s hat dir die Aufgabe %(object_name)s zugewiesen"
 
+#, python-format
 msgid "%(sender_name)s assigned you %(count)d tasks"
 msgstr "%(sender_name)s hat dir %(count)d Aufgaben zugewiesen"
 
+#, python-format
 msgid "%(sender_name)s assigned you a task"
 msgstr "%(sender_name)s hat dir eine Aufgabe zugewiesen"
 
+#, python-format
 msgid "%(sender_name)s assigned you the task %(object_name)s."
 msgstr "%(sender_name)s hat dir die Aufgabe %(object_name)s zugewiesen"
 
 msgid "A task was unassigned from you"
 msgstr "Die Zuweisung einer Aufgabe wurde dich wurde entfernt"
 
+#, python-format
 msgid "%(sender_name)s unassigned you from the task %(object_name)s"
 msgstr "%(sender_name)s hat die Zuweisung der Aufgabe %(object_name)s an dich entfernt"
 
+#, python-format
 msgid "%(sender_name)s unassigned you from %(count)d tasks"
 msgstr "%(sender_name)s hat die Zuweisung von %(count)d Aufgaben an dich entfernt"
 
+#, python-format
 msgid "%(sender_name)s unassigned you from a task"
 msgstr "%(sender_name)s hat die Zuweisung einer Aufgabe an dich entfernt"
 
+#, python-format
 msgid "%(sender_name)s unassigned you from the task %(object_name)s."
 msgstr "%(sender_name)s hat die Zuweisung der Aufgabe %(object_name)s an dich entfernt"
 
 msgid "You were mentioned in a task comment"
 msgstr "Du wurdest im Kommentar einer Aufgaben erwähnt"
 
+#, python-format
 msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s"
 msgstr "%(sender_name)s hat dich im Kommentar der Aufgabe %(object_name)s erwähnt"
 
+#, python-format
 msgid "%(sender_name)s mentioned you in a comment of %(count)d tasks"
 msgstr "%(sender_name)s hat dich in Kommentaren von %(count)d Aufgaben erwähnt"
 
+#, python-format
 msgid "%(sender_name)s mentioned you in a task comment"
 msgstr "%(sender_name)s hat dich im Kommentar einer Aufgaben erwähnt"
 
+#, python-format
 msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s."
 msgstr "%(sender_name)s hat dich im Kommentar der Aufgabe %(object_name)s erwähnt"
 
 msgid "A task has was marked as done"
 msgstr "Eine Aufgabe wurde als erledigt markiert"
 
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as done"
 msgstr "%(sender_name)s hat die Aufgabe %(object_name)s als erledigt markiert"
 
+#, python-format
 msgid "%(sender_name)s marked %(count)d tasks as done"
 msgstr "%(sender_name)s hat %(count)d Aufgaben als erledigt markiert"
 
+#, python-format
 msgid "%(sender_name)s marked a task as done"
 msgstr "%(sender_name)s hat eine Aufgabe als erledigt markiert"
 
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as done."
 msgstr "%(sender_name)s hat die Aufgabe %(object_name)s als erledigt markiert"
 
 msgid "A task has was marked as undone"
 msgstr "Eine Aufgabe wurde als unerledigt markiert"
 
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as undone"
 msgstr "%(sender_name)s hat die Aufgabe %(object_name)s als unerledigt markiert"
 
+#, python-format
 msgid "%(sender_name)s marked %(count)d tasks as undone"
 msgstr "%(sender_name)s hat %(count)d Aufgaben als unerledigt markiert"
 
+#, python-format
 msgid "%(sender_name)s marked a task as undone"
 msgstr "%(sender_name)s hat eine Aufgabe als unerledigt markiert"
 
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as undone."
 msgstr "%(sender_name)s hat die Aufgabe %(object_name)s als unerledigt markiert"
 
 msgid "A tasks due data was changed"
 msgstr "Das Fälligkeitsdatum einer Aufgabe wurde geändert"
 
+#, python-format
 msgid "%(sender_name)s changed the due date of the task %(object_name)s"
 msgstr "%(sender_name)s hat das Fälligkeitsdatum der Aufgabe %(object_name)s geändert"
 
+#, python-format
 msgid "%(sender_name)s changed the due data of %(count)d tasks"
 msgstr "%(sender_name)s hat das Fälligkeitsdatum von %(count)d Aufgaben geändert"
 
+#, python-format
 msgid "%(sender_name)s change the due date of a task"
 msgstr "%(sender_name)s hat das Fälligkeitsdatum einer Aufgabe geändert"
 
+#, python-format
 msgid "%(sender_name)s changed the due date of the task %(object_name)s."
 msgstr "%(sender_name)s hat das Fälligkeitsdatum der Aufgabe %(object_name)s geändert"
 
 msgid "A user commented on a task"
 msgstr "Ein Mitglied hat eine Aufgabe kommentiert"
 
+#, python-format
 msgid "%(sender_name)s commented on the task %(object_name)s"
 msgstr "%(sender_name)s hat die Aufgabe %(object_name)s kommentiert"
 
+#, python-format
 msgid "%(sender_name)s commented on %(count)d tasks"
 msgstr "%(sender_name)s hat %(count)d Aufgaben kommentiert"
 
+#, python-format
 msgid "%(sender_name)s commented on the task"
 msgstr "%(sender_name)s hat eine Aufgabe kommentiert"
 
+#, python-format
 msgid "%(sender_name)s commented on the task %(object_name)s."
 msgstr "%(sender_name)s hat die Aufgabe %(object_name)s kommentiert"
 
@@ -10552,6 +10589,12 @@ msgstr "Tagungsveranstaltungs-Teilname-Tracking"
 
 msgid "Would you like to create an event"
 msgstr "Möchtest du eine Veranstaltung anlegen"
+
+#, fuzzy
+#| msgctxt "time"
+#| msgid "until"
+msgid "until"
+msgstr "bis"
 
 msgctxt "time"
 msgid "all day"
@@ -14460,6 +14503,12 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
+#~ msgid "Week"
+#~ msgstr "Woche"
+
+#~ msgid "since"
+#~ msgstr "seit"
 
 #~ msgid "retry"
 #~ msgstr "erneut versuchen"
