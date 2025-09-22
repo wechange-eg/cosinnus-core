@@ -427,10 +427,19 @@
 	z-index: 3;
 	
 	&, i.fas {
-		color: @text-color-extra-pale;
+		color: @text-color-pale;
 	}
+
 	a.dropdown-toggle {
 		padding: 10px;
+		&:hover, &:hover i.fas {
+			color: @text-highlight-color;
+		}
+	}
+
+	button.dropdown-toggle {
+		border: none;
+		background-color: transparent;
 		&:hover, &:hover i.fas {
 			color: @text-highlight-color;
 		}

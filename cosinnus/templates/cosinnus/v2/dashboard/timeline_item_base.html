@@ -5,9 +5,9 @@
 			data-target="ajax-form-delete-element" data-ajax-form-id="{{ delete_form_id }}">
 	
 		<div class="header-dropdown v2-dropdown dropdown">
-	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	            <i class="fas fa-ellipsis-h"></i>
-	        </a>
+               <button class="dropdown-toggle" data-toggle="dropdown">
+                 <i class="fas fa-ellipsis-h"></i>
+               </button>
 	        <ul class="dropdown-menu">
 	        	{% if user|has_write_access:item %}
 	        		{% block edit_button_frame %}
