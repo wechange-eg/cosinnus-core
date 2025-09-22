@@ -13,7 +13,7 @@
                         <input type="checkbox" name="onoffswitch-only-forum"
                              class="onoffswitch-checkbox toggle-only-forum" id="check-only-forum" 
                              {% if onlyForum %}checked{% endif %}>
-                        <label class="onoffswitch-label" for="check-only-forum">
+                        <label class="onoffswitch-label" for="check-only-forum" aria-label="{% trans 'Content from the Forum' %}">
                             <span class="onoffswitch-inner"></span>
                             <span class="onoffswitch-switch"></span>
                         </label>
@@ -33,7 +33,7 @@
                         <input type="checkbox" name="onoffswitch-only-mine"
                              class="onoffswitch-checkbox toggle-only-mine" id="check-only-mine" 
                              {% if onlyMine %}checked{% endif %}>
-                        <label class="onoffswitch-label" for="check-only-mine">
+                        <label class="onoffswitch-label" for="check-only-mine" aria-label="{% trans 'Content from my Groups and Projects' %}">
                             <span class="onoffswitch-inner"></span>
                             <span class="onoffswitch-switch"></span>
                         </label>
@@ -53,7 +53,7 @@
                         <input type="checkbox" name="onoffswitch-only-public"
                              class="onoffswitch-checkbox toggle-only-public" id="check-only-public" 
                              {% if onlyPublic %}checked{% endif %}>
-                        <label class="onoffswitch-label" for="check-only-public">
+                        <label class="onoffswitch-label" for="check-only-public" aria-label='{% if COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}{# Translators: __INCLUDE_JS_PO__ #}{% trans "Platform content" %}{% else %}{# Translators: __INCLUDE_JS_PO__ #}{% trans "Public content" %}{% endif %}'>
                             <span class="onoffswitch-inner"></span>
                             <span class="onoffswitch-switch"></span>
                         </label>
