@@ -46,6 +46,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
+from cosinnus_deck.models import DeckMigrationMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -109,6 +110,7 @@ class BaseUserProfile(
     TranslateableFieldsModelMixin,
     LikeableObjectMixin,
     CosinnusManagedTagAssignmentModelMixin,
+    DeckMigrationMixin,
     models.Model,
 ):
     """
@@ -247,6 +249,9 @@ class BaseUserProfile(
     # on the platform, no matter their visibility settings, and thus subject to moderation
     cosinnus_always_visible_by_users_moderator_flag = True
 
+    # User deck migration can be rerun after success (DeckMigrationMixin parameter)
+    deck_migration_rerun_allowed = True
+
     _settings = None
 
     class Meta(object):
@@ -256,6 +261,7 @@ class BaseUserProfile(
         super(BaseUserProfile, self).__init__(*args, **kwargs)
         self._settings = copy.deepcopy(self.settings)
         self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
+        self._avatar_name = self.avatar.name
 
     def __str__(self):
         return six.text_type(self.user)
@@ -347,8 +353,14 @@ class BaseUserProfile(
                     'cosinnus/mail/user_terms_of_services.html',
                     data,
                 )
+
+        # trigger avatar updated signal
+        if not created and self._avatar_name != self.avatar.name:
+            signals.userprofile_avatar_updated.send(sender=self.__class__, profile=self)
+
         self._settings = copy.deepcopy(self.settings)
         self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
+        self._avatar_name = self.avatar.name
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})

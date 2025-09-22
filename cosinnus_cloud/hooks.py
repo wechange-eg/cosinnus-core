@@ -3,11 +3,14 @@ from __future__ import unicode_literals
 
 import logging
 import re
+from base64 import b64encode
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import wraps
 from threading import Thread
 from time import sleep
 
+from django.contrib.auth import get_user_model
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.db.models.signals import post_delete, post_save
 from django.db.utils import DatabaseError
 from django.dispatch.dispatcher import receiver
@@ -19,7 +22,7 @@ from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, Cos
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import is_user_active
-from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group
+from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group, is_cloud_group_required_for_group
 from cosinnus_cloud.utils.nextcloud import rename_group_folder, set_group_display_name
 
 from .utils import nextcloud
@@ -70,7 +73,14 @@ def submit_with_retry(fn, *args, **kwargs):
 
 
 def get_nc_user_id(user):
+    """Get the NextCloud user id for a user."""
     return f'wechange-{user.id}'
+
+
+def get_user_by_nc_user_id(nc_user_id):
+    """Get a user for the NextCloud user id."""
+    user_id = nc_user_id.split('-')[-1]
+    return get_user_model().objects.filter(pk=user_id).first()
 
 
 def nc_req_callback(future: Future):
@@ -124,6 +134,32 @@ def update_user_from_obj(user):
     )
 
 
+def update_user_profile_avatar(profile, retry=False):
+    """Update user avatar"""
+    avatar_content = None
+    try:
+        if profile.avatar:
+            # avatar changed, using a thumbnail the same size as the avatar in NextCloud
+            avatar_file = profile.get_avatar_thumbnail(size=(512, 512))
+            with avatar_file.open() as file:
+                avatar_content = file.read()
+        else:
+            # avatar deleted, using jane-doe image as the nc plugin does not provide avatar deletion
+            avatar_file = staticfiles_storage.path('images/jane-doe.png')
+            with open(avatar_file, 'rb') as file:
+                avatar_content = file.read()
+    except Exception as e:
+        logger.warning('Could not update Nextcloud user avatar.', extra={'exc': e})
+
+    if avatar_content:
+        nc_user_id = get_nc_user_id(profile.user)
+        avatar_encoded = b64encode(avatar_content)
+        if retry:
+            submit_with_retry(nextcloud.update_user_avatar, nc_user_id, avatar_encoded)
+        else:
+            nextcloud.update_user_avatar(nc_user_id, avatar_encoded)
+
+
 def get_email_for_user(user):
     """Get the email that is set as email the nextcloud user profile.
     Default is to set the user email to None, Nextcloud needs to send no emails anyways
@@ -153,7 +189,7 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
     anything that is not an alphanumeric.
     @param field: The field for which a unique nextcloud name should be generated. Usually
         either `nextcloud_group_id` or `nextcloud_groupfolder_name`
-    @param save: If True, the group will be saved to DB after generation
+    @param save: If True, the group field will be saved to DB after generation
     @param force_generate: Generates a new id, even if one already exists
     """
     if hasattr(group, field) and getattr(group, field) and not force_generate:
@@ -192,45 +228,71 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
 
     setattr(group, field, unique_name)
     if save is True:
-        group.save()
+        group.save(update_fields=[field])
     return unique_name
 
 
-def initialize_nextcloud_for_group(group):
+def initialize_nextcloud_for_group(group, send_initialized_signal=True, check_required_for_group=True):
     """Initializes a nextcloud groupfolder for a group.
     Safe to call on already initialized folders. If called on a pre-existing folder that is
-    "disabled" (group has no more access to it), the group's access will be re-enabled for the folder."""
-    if not is_cloud_enabled_for_group(group):
+    "disabled" (group has no more access to it), the group's access will be re-enabled for the folder.
+    @param send_initialized_signal: Sending of initialized signal can be disabled to avoid concurrency issues.
+    @param check_required_for_group: Check that the initialization is required by group apps.
+    """
+    if check_required_for_group and not is_cloud_group_required_for_group(group):
+        # No app requires the nextcloud integration
         return
-    # generate group and groupfolder name if the group doesn't have one yet, or use the existing one
+
+    # generate group if the group doesn't have one yet, or use the existing one
     generate_group_nextcloud_id(group, save=False)
-    generate_group_nextcloud_groupfolder_name(group, save=False)
     try:
         # we need to only update these fields, as otherwise we could get save conflicts
         # if this method is called during group creation (m2m race conditions)
-        group.save(update_fields=['nextcloud_group_id', 'nextcloud_groupfolder_name'])
+        group.save(update_fields=['nextcloud_group_id'])
     except DatabaseError as e:
         # we ignore save errors if the field values were unchanged
         if 'did not affect any rows' not in str(e):
             raise
 
+    logger.debug('Creating new group [%s] in Nextcloud.', group.nextcloud_group_id)
+
+    # create nextcloud group
+    nextcloud.create_group(group.nextcloud_group_id)
+
+    # add admin user to group
+    nextcloud.add_user_to_group(settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, group.nextcloud_group_id)
+
+    # send initialized signal
+    if send_initialized_signal:
+        signals.group_nextcloud_group_initialized.send(sender=group.__class__, group=group)
+
     logger.debug(
-        'Creating new group [%s] in Nextcloud (wechange group name [%s])',
+        'Creating new group folder [%s] in Nextcloud (wechange group name [%s])',
         group.nextcloud_groupfolder_name,
         group.nextcloud_group_id,
     )
 
-    # create nextcloud group
-    nextcloud.create_group(group.nextcloud_group_id)
-    # create nextcloud group folder
-    nextcloud.create_group_folder(
-        group.nextcloud_groupfolder_name,
-        group.nextcloud_group_id,
-        group,
-        raise_on_existing_name=False,
-    )
-    # add admin user to group
-    nextcloud.add_user_to_group(settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, group.nextcloud_group_id)
+    if is_cloud_enabled_for_group(group):
+        # The cloud app is enabled for the group, create the group folder.
+
+        # generate groupfolder name if the group doesn't have one yet, or use the existing one
+        generate_group_nextcloud_groupfolder_name(group, save=False)
+        try:
+            # we need to only update these field, as otherwise we could get save conflicts
+            # if this method is called during group creation (m2m race conditions)
+            group.save(update_fields=['nextcloud_groupfolder_name'])
+        except DatabaseError as e:
+            # we ignore save errors if the field values were unchanged
+            if 'did not affect any rows' not in str(e):
+                raise
+
+        # create nextcloud group folder
+        nextcloud.create_group_folder(
+            group.nextcloud_groupfolder_name,
+            group.nextcloud_group_id,
+            group,
+            raise_on_existing_name=False,
+        )
 
 
 # only activate these hooks when the cloud is enabled
@@ -242,7 +304,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
         # only initialize if the cosinnus-app is actually activated
         if user.is_guest:
             return
-        if is_cloud_enabled_for_group(group):
+        if is_cloud_group_required_for_group(group):
             if group.nextcloud_group_id is not None:
                 logger.debug(
                     'User [%s] joined group [%s], adding him/her to Nextcloud',
@@ -313,25 +375,31 @@ if settings.COSINNUS_CLOUD_ENABLED:
 
         UpdateNCUserThread().start()
 
+    @receiver(signals.userprofile_avatar_updated)
+    def handle_profile_avatar_updated(sender, profile, **kwargs):
+        """Update the user avatar."""
+        update_user_profile_avatar(profile, retry=True)
+
     @receiver(signals.group_object_created)
     def group_created_sub(sender, group, **kwargs):
         # only initialize if the cosinnus-app is actually activated
-        if is_cloud_enabled_for_group(group):
+        if is_cloud_group_required_for_group(group):
             submit_with_retry(initialize_nextcloud_for_group, group)
 
     @receiver(signals.group_apps_activated)
-    def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
-        """Listen for the cloud app being activated"""
-        if 'cosinnus_cloud' in apps and is_cloud_enabled_for_group(group):
+    def group_cloud_or_deck_app_activated_sub(sender, group, apps, **kwargs):
+        """Listen for the cloud app or deck app being activated"""
+        if 'cosinnus_cloud' in apps or 'cosinnus_deck' in apps:
+            if is_cloud_group_required_for_group(group):
 
-            def _conurrent_wrap():
-                initialize_nextcloud_for_group(group)
-                for user in group.actual_members:
-                    submit_with_retry(nextcloud.add_user_to_group, get_nc_user_id(user), group.nextcloud_group_id)
-                    # we don't need to remove users who have left the group while the app was deactivated here,
-                    # because that listener is always active
+                def _conurrent_wrap():
+                    initialize_nextcloud_for_group(group)
+                    for user in group.actual_members:
+                        submit_with_retry(nextcloud.add_user_to_group, get_nc_user_id(user), group.nextcloud_group_id)
+                        # we don't need to remove users who have left the group while the app was deactivated here,
+                        # because that listener is always active
 
-            submit_with_retry(_conurrent_wrap)
+                submit_with_retry(_conurrent_wrap)
 
     @receiver(signals.group_apps_deactivated)
     def group_cloud_app_deactivated_sub(sender, group, apps, **kwargs):
@@ -346,41 +414,58 @@ if settings.COSINNUS_CLOUD_ENABLED:
         """
         if not created:
             group = kwargs.get('instance')
-            if (
-                is_cloud_enabled_for_group(group)
-                and group.nextcloud_group_id
-                and group.nextcloud_groupfolder_name
-                and group.nextcloud_groupfolder_id
-            ):
-                # just softly generate a new folder name first, and see if it has to be changed (because of a group
-                # rename)
-                old_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
+            if is_cloud_enabled_for_group(group):
+                if group.nextcloud_group_id and group.nextcloud_groupfolder_name and group.nextcloud_groupfolder_id:
+                    # just softly generate a new folder name first, and see if it has to be changed (because of a group
+                    # rename)
+                    old_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
+                    generate_group_nextcloud_groupfolder_name(group, save=False, force_generate=True)
+                    new_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
+                    # rename the folder if the name would be a different one
+                    if new_nextcloud_groupfolder_name != old_nextcloud_groupfolder_name:
+                        result = False
+                        try:
+                            result = rename_group_folder(group.nextcloud_groupfolder_id, new_nextcloud_groupfolder_name)
+                        except Exception as e:
+                            logger.warning('Could not rename Nextcloud group folder.', extra={'exc': e})
+                        # if the rename was successful, save the new group folder name.
+                        # otherwise, reload it to discard the newly generated folder name on the object
+                        if result is True:
+                            # Save the new group folder name. Not calling save() as it would re-trigger signals and also
+                            # overwrite possible changes to group type during group type conversion.
+                            get_cosinnus_group_model().objects.filter(pk=group.pk).update(
+                                nextcloud_groupfolder_name=new_nextcloud_groupfolder_name
+                            )
+
+                            # change the group display name
+                            try:
+                                set_group_display_name(group.nextcloud_group_id, new_nextcloud_groupfolder_name)
+                            except Exception as e:
+                                logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
+
+                            return
+                    group.refresh_from_db()
+
+            elif is_cloud_group_required_for_group(group) and group.nextcloud_group_id:
+                # Cloud is required but cloud app is not enabled, update the group display name.
+
+                # Temporary generate a groupfolder name to use as display name
                 generate_group_nextcloud_groupfolder_name(group, save=False, force_generate=True)
                 new_nextcloud_groupfolder_name = group.nextcloud_groupfolder_name
-                # rename the folder if the name would be a different one
-                if new_nextcloud_groupfolder_name != old_nextcloud_groupfolder_name:
-                    result = False
-                    try:
-                        result = rename_group_folder(group.nextcloud_groupfolder_id, new_nextcloud_groupfolder_name)
-                    except Exception as e:
-                        logger.warning('Could not rename Nextcloud group folder.', extra={'exc': e})
-                    # if the rename was successful, save the new group folder name.
-                    # otherwise, reload it to discard the newly generated folder name on the object
-                    if result is True:
-                        # Save the new group folder name. Not calling save() as it would re-trigger signals and also
-                        # overwrite possible changes to group type during group type conversion.
-                        get_cosinnus_group_model().objects.filter(pk=group.pk).update(
-                            nextcloud_groupfolder_name=new_nextcloud_groupfolder_name
-                        )
 
-                        # change the group display name
-                        try:
-                            set_group_display_name(group.nextcloud_group_id, new_nextcloud_groupfolder_name)
-                        except Exception as e:
-                            logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
+                # Set the group display name.
+                # Note: Did not find an API to get the current display name, so we just update it.
+                try:
+                    set_group_display_name(group.nextcloud_group_id, new_nextcloud_groupfolder_name)
+                except Exception as e:
+                    if '404' not in str(e):
+                        # Ignore non-existing group in renaming hook.
+                        logger.warning('Could not change Nextcloud group display name.', extra={'exc': e})
 
-                        return
+                # the folder name was used just to get the new display name, reset the group instance.
                 group.refresh_from_db()
+
+        return
 
     post_save.connect(rename_nextcloud_group_and_groupfolder_on_group_rename, sender=get_cosinnus_group_model())
     post_save.connect(rename_nextcloud_group_and_groupfolder_on_group_rename, sender=CosinnusProject)

@@ -63,6 +63,8 @@ class CosinnusConf(AppConf):
         '/api/v3/guest_login',
         '/api/v3/content/main',
         '/favicon.ico',
+        '/apple-touch-icon.png',
+        '/apple-touch-icon-precomposed.png',
         '/robots.txt',
         '/o/',
         '/cloud/oauth2/profile/',
@@ -224,6 +226,7 @@ class CosinnusConf(AppConf):
         'cosinnus_etherpad',
         'cosinnus_file',
         'cosinnus_cloud',
+        'cosinnus_deck',
     ]
 
     # a list of groups slugs for a portal, that do not require the group
@@ -493,6 +496,7 @@ class CosinnusConf(AppConf):
     GROUP_APPS_WIDGETS_MICROSITE_DISABLED = [
         'cosinnus_cloud',
         'cosinnus_message',
+        'cosinnus_deck',
     ]
 
     # a map of class dropins for the typed group trans classes
@@ -630,7 +634,7 @@ class CosinnusConf(AppConf):
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
     # GeoJSON can be generated using http://opendatalab.de/projects/geojson-utilities/
-    COSINNUS_MAP_OPTIONS = {
+    MAP_OPTIONS = {
         'default_coordinates': {
             'ne_lat': 55.32,  # north,
             'ne_lon': 15.56,  # east,
@@ -798,6 +802,9 @@ class CosinnusConf(AppConf):
 
     # whether or not to redirect to the welcome settings page after a user registers
     SHOW_WELCOME_SETTINGS_PAGE = True
+
+    # whether or not to show the /signup/welcome/ profile setup in the new frontend
+    SHOW_V3_WELCOME_PROFILE_SETUP_PAGE = True
 
     # the duration of the user stream (must be very short, otherwise notifications will not appear)
     STREAM_SHORT_CACHE_TIMEOUT = 30
@@ -1102,6 +1109,12 @@ class CosinnusConf(AppConf):
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
 
+    # whether profile editing via the view and api should be possible
+    DISABLE_PROFILE_EDITING = False
+
+    # if profile editing is disabled a url can be provided to redirect all profile edit requests
+    EXTERNAL_PROFILE_EDITING_URL = None
+
     # if True, won't let any user log in before verifying their e-mail
     USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN = False
 
@@ -1244,6 +1257,9 @@ class CosinnusConf(AppConf):
     CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = 1024 * 1024 * 1024
     # timeout for nextcloud webdav requests in seconds
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
+    # whether to show the "The Cloud is here" banner for group admins on the group dashboard if
+    # if the cloud app is not enabled for the group
+    CLOUD_SHOW_GROUP_DASHBOARD_NAG_BANNER = False
 
     # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
     # DEPRECATED: now handled by Ansible.
@@ -1267,6 +1283,12 @@ class CosinnusConf(AppConf):
     # by default this returns an empty string so no emails are transferred to nextcloud.
     # default if None: `''`
     CLOUD_USER_PROFILE_EMAIL_FUNC = None
+    # API Token used by NextCloud to access internal APIs (e.g. DeckEventsView)
+    CLOUD_NEXTCLOUD_API_TOKEN = None
+
+    # whether to enable the cosinnus deck app
+    # Note: COSINNUS_CLOUD_ENABLED must also be set, as the deck app depends on the cloud integration.
+    DECK_ENABLED = False
 
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
@@ -1294,6 +1316,11 @@ class CosinnusConf(AppConf):
     # If enabled the full dashboard header text is shown, otherwise the height is limited and can be expaneded with
     # the "more" link.
     GROUP_DASHBOARD_HEADER_TEXT_EXPANDED = False
+
+    # a list of <str> 'app_name.widget_name' id entries for each widget that should
+    # be hidden in the group dashboard of all groups, no matter which apps are enabled.
+    # see `DashboardWidgetMixin.default_widget_order` for a list of widget ids
+    GROUP_DASHBOARD_HIDE_WIDGETS = []
 
     # enable e-mail downloads of newsletter-enabled users in the administration area
     # if enabled, this allows all portal-admins to download user emails, this might be
@@ -1478,6 +1505,9 @@ class CosinnusConf(AppConf):
     # Don't go overboard here, this is an expensive search!
     # only applies when `PLATFORM_ADMIN_CAN_EDIT_PROFILES=True`
     USERPROFILE_FIELDS_SEARCHABLE_IN_ADMINISTRATION = []
+
+    # if True, enable the portal admin APIs for user create (/api/v3/user/create/) and update (/api/v3/user/update/).
+    ADMIN_USER_APIS_ENABLED = False
 
     # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False
@@ -1699,9 +1729,9 @@ class CosinnusDefaultSettings(AppConf):
 
     # the default BBB create-call parameters for all room types
     BBB_DEFAULT_CREATE_PARAMETERS = {
-        'record': False,
-        'autoStartRecording': False,
-        'allowStartStopRecording': True,
+        'record': 'false',
+        'autoStartRecording': 'false',
+        'allowStartStopRecording': 'true',
         'guestPolicy': 'ALWAYS_ACCEPT',  # always by default allow guest access
     }
 

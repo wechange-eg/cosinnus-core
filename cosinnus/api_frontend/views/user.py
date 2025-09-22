@@ -3,7 +3,7 @@ import logging
 from urllib.parse import unquote
 
 from annoying.functions import get_object_or_None
-from django.contrib.auth import login, logout
+from django.contrib.auth import get_user_model, login, logout
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.http import Http404
 from django.urls.base import reverse
@@ -29,6 +29,8 @@ from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.user import (
     CosinnusGuestLoginSerializer,
+    CosinnusHybridUserAdminCreateSerializer,
+    CosinnusHybridUserAdminUpdateSerializer,
     CosinnusHybridUserSerializer,
     CosinnusSetInitialPasswordSerializer,
     CosinnusUserLoginSerializer,
@@ -36,11 +38,11 @@ from cosinnus.api_frontend.serializers.user import (
 )
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
-from cosinnus.models import CosinnusPortal
+from cosinnus.models import CosinnusPortal, get_domain_for_portal
 from cosinnus.models.group import CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
-from cosinnus.utils.permissions import AllowNone, IsNotAuthenticated
+from cosinnus.utils.permissions import AllowNone, IsCosinnusAdminUser, IsNotAuthenticated
 from cosinnus.utils.urls import redirect_with_next
 from cosinnus.utils.user import create_guest_user_and_login, get_user_from_set_password_token
 from cosinnus.views.common import (
@@ -52,6 +54,7 @@ from cosinnus.views.user import (
     GuestAccessMixin,
     SetInitialPasswordMixin,
     UserSignupTriggerEventsMixin,
+    email_first_login_token_to_user,
 )
 
 logger = logging.getLogger('cosinnus')
@@ -474,8 +477,29 @@ class SignupView(UserSignupTriggerEventsMixin, SignupApiMixin, APIView):
         return Response(data)
 
 
+class UserSerializationMixin:
+    """Mixin for user and profile serialization."""
+
+    def get_user_data(self, request, user, user_serializer_class):
+        """Return the serialized user data."""
+        user_serializer = user_serializer_class(user, context={'request': request})
+        return {
+            'user': user_serializer.data,
+        }
+
+    def update_user_data(self, request, user, user_serializer_class):
+        """Saves the user data using the serializer and return the serialized user data."""
+        user_serializer = user_serializer_class(user, data=request.data, partial=True)
+        user_serializer.is_valid(raise_exception=True)
+        # this save() will update the existing user, user.cosinnus_profile,
+        #     and cosinnus_profile.media_tag instances.
+        user = user_serializer.save()
+        # return data from a freshly serialized user object so all fields show up
+        return self.get_user_data(request, user, user_serializer_class)
+
+
 @swagger_auto_schema(request_body=CosinnusHybridUserSerializer)
-class UserProfileView(UserSignupTriggerEventsMixin, APIView):
+class UserProfileView(UserSerializationMixin, APIView):
     """For GETs, returns the logged in user's profile information.
     For POSTs, allows changing the logged in user's own profile fields,
         one or many fields at a time."""
@@ -488,11 +512,6 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
     authentication_classes = (CsrfExemptSessionAuthentication, JWTAuthentication)
 
-    def get_data(self, user_serializer):
-        return {
-            'user': user_serializer.data,
-        }
-
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
     #       Note: Also needs docs on our custom data/timestamp/version wrapper!
@@ -501,8 +520,7 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     @swagger_auto_schema(responses={'200': CosinnusHybridUserSerializer})
     def get(self, request):
         user = request.user
-        user_serializer = CosinnusHybridUserSerializer(user, context={'request': request})
-        data = self.get_data(user_serializer)
+        data = self.get_user_data(request, user, CosinnusHybridUserSerializer)
         return Response(data)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -548,13 +566,139 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     )
     def post(self, request):
         user = request.user
-        user_serializer = CosinnusHybridUserSerializer(user, data=request.data, partial=True)
-        user_serializer.is_valid(raise_exception=True)
-        # this save() will update the existing user, user.cosinnus_profile,
-        #     and cosinnus_profile.media_tag instances.
-        user = user_serializer.save()
-        # return data from a freshly serialized user object so all fields show up
-        data = self.get_data(CosinnusHybridUserSerializer(user, context={'request': request}))
+        data = self.update_user_data(request, user, CosinnusHybridUserSerializer)
+        return Response(data)
+
+
+@swagger_auto_schema(request_body=CosinnusHybridUserAdminCreateSerializer)
+class UserAdminCreateView(UserSignupTriggerEventsMixin, UserSerializationMixin, SignupApiMixin, APIView):
+    """An admin api endpoint to create users."""
+
+    permission_classes = (IsCosinnusAdminUser,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    @swagger_auto_schema(
+        request_body=CosinnusHybridUserAdminCreateSerializer,
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'id': 10,
+                            'set_password_url': 'http://127.0.0.1:8000/password_set_initial/5d7de4f7-11ab-4e0c-845a-1288afae2933',
+                            'user': {
+                                'avatar': 'http://127.0.0.1:8000/media/cosinnus_portals/portal_wechange/avatars/user/b59566c332f95fa6b010ab42e2ab66f5d51cd2e6.png',
+                                'avatar_color': 'ffaa22',
+                                'contact_infos': [
+                                    {'type': 'email', 'value': 'test@mail.com'},
+                                    {'type': 'url', 'value': 'https://openstreetmap.org'},
+                                ],
+                                'description': 'my bio',
+                                'email': 'newuser@gmail.com',
+                                'first_name': 'NewUser',
+                                'last_name': 'Usre',
+                                'location': 'Amsterdam',
+                                'location_lat': 52.3727598,
+                                'location_lon': 4.8936041,
+                                'tags': ['testtag', 'anothertag'],
+                                'topics': [2, 5, 6],
+                                'visibility': 2,
+                                'ui_flags': {},
+                                'is_guest': False,
+                            },
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658415026.545203,
+                    }
+                },
+            )
+        },
+    )
+    def post(self, request):
+        # serialize data
+        serializer = CosinnusHybridUserAdminCreateSerializer(data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.create(serializer.validated_data)
+        # send email to set the password
+        token = email_first_login_token_to_user(user)
+        set_password_url = get_domain_for_portal(CosinnusPortal.get_current()) + reverse(
+            'password_set_initial', kwargs={'token': token}
+        )
+        data = self.get_user_data(request, user, CosinnusHybridUserAdminCreateSerializer)
+        # add user id and password-url to response
+        data.update({'id': user.pk, 'set_password_url': set_password_url})
+        return Response(data)
+
+
+@swagger_auto_schema(request_body=CosinnusHybridUserAdminUpdateSerializer)
+class UserAdminUpdateView(UserSerializationMixin, APIView):
+    """For GETs, returns a user's profile information from url.
+    For POSTs, allows changing a user's own profile fields, one or many fields at a time."""
+
+    permission_classes = (IsCosinnusAdminUser,)
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
+    authentication_classes = (CsrfExemptSessionAuthentication, JWTAuthentication)
+
+    @swagger_auto_schema(responses={'200': CosinnusHybridUserAdminUpdateSerializer})
+    def get(self, request, user_id):
+        # get user from id in the url
+        user = get_object_or_None(get_user_model(), pk=user_id)
+        if not user:
+            raise Http404
+        # return serialized user data
+        data = self.get_user_data(request, user, CosinnusHybridUserAdminUpdateSerializer)
+        return Response(data)
+
+    @swagger_auto_schema(
+        request_body=CosinnusHybridUserAdminUpdateSerializer,
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'avatar': 'http://127.0.0.1:8000/media/cosinnus_portals/portal_wechange/avatars/user/b59566c332f95fa6b010ab42e2ab66f5d51cd2e6.png',
+                            'avatar_color': 'ffaa22',
+                            'contact_infos': [
+                                {'type': 'email', 'value': 'test@mail.com'},
+                                {'type': 'url', 'value': 'https://openstreetmap.org'},
+                            ],
+                            'description': 'my bio',
+                            'email': 'newuser@gmail.com',
+                            'first_name': 'NewUser',
+                            'last_name': 'Usre',
+                            'location': 'Amsterdam',
+                            'location_lat': 52.3727598,
+                            'location_lon': 4.8936041,
+                            'tags': ['testtag', 'anothertag'],
+                            'topics': [2, 5, 6],
+                            'visibility': 2,
+                            'ui_flags': {},
+                            'is_guest': False,
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658415026.545203,
+                    }
+                },
+            )
+        },
+    )
+    def post(self, request, user_id):
+        # get user from id in the url
+        user = get_object_or_None(get_user_model(), pk=user_id)
+        if not user:
+            raise Http404
+        # update the user using the serializer
+        data = self.update_user_data(request, user, CosinnusHybridUserAdminUpdateSerializer)
         return Response(data)
 
 

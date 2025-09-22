@@ -67,7 +67,7 @@
             {% include 'cosinnus/common/filter_controls.html' %}  
             
             
-            {% if active_todolist and user|can_create_objects_in:group %}
+            {% if active_todolist and user|can_create_objects_in:group and not SETTINGS.COSINNUS_DECK_ENABLED %}
                 <form id="create_todo_form" action="{% group_url 'cosinnus:todo:entry-add' listslug=active_todolist.slug group=group %}" method="GET" class="form-horizontal clearfix">
             
                     <div type="submit" class="btn btn-default w100 large-space">
@@ -122,7 +122,7 @@
                                 </select>
                             </a>
                             
-                            {% if user|has_write_access:todo %}
+                            {% if user|has_write_access:todo and not SETTINGS.COSINNUS_DECK_ENABLED %}
                                 <a class="pull-right" href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}" title="{% trans "Edit" %}">
                                     <i class="fa fa-pencil"></i>
                                 </a>

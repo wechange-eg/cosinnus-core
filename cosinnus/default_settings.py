@@ -173,6 +173,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.time_zone_middleware.TimezoneMiddleware',
         'cosinnus.core.middleware.frontend_middleware.FrontendMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
+        'cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware',
     ]
 
     TEMPLATES = [
@@ -292,6 +293,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus_organization',
         'cosinnus_oauth_client',
         'cosinnus_cloud',
+        'cosinnus_deck',
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
@@ -484,6 +486,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME,
         env('WECHANGE_COSINNUS_CLOUD_PASSWORD', default=''),
     )
+    COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN = env('WECHANGE_COSINNUS_CLOUD_API_TOKEN', default='')
 
     """ --------------- EXTERNAL SERVICES  ---------------- """
 

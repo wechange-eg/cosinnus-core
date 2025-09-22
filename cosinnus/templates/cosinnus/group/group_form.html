@@ -561,7 +561,7 @@
 			                {% captureas apps_html %}
 			                    <div class="input-area" style="padding: 5px;">
 				                    {% for app_option in deactivated_app_selection %}
-	                                    {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-main{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
+	                                    {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-note{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
 	                                    <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
 	                                        {% if app_option.app_not_activatable %}
 	                                            <span class="select-disabled" title="{% trans "This App can only be activated for a Group, but not for a Project!" %}">
@@ -570,7 +570,7 @@
 	                                                    {{ app_option.label }}
 	                                                </span>
 	                                            </span>
-	                                        {% else %}
+	                                        {% elif not app_option.app_deprecated or app_option.checked %}
 	                                            <a class="app-background small-padding"><input id="checkbox_{{ app_option.app_name }}" type="checkbox" name="deactivated_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
 	                                            ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_{{ app_option.app_name }}').prop('checked', !($('#checkbox_{{ app_option.app_name }}').prop('checked')));">
 	                                                {{ app_option.label }}
@@ -650,7 +650,7 @@
 				                    <div class="input-area" style="padding: 5px;">
 		                                {% for app_option in microsite_public_apps_selection %}
 		                                    {% if not app_option.app == 'note' %} {% comment %} Fix "MICROSITE_DOUBLE_NEWSBOX": hide note checkbox {% endcomment %}
-			                                    {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-main{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
+			                                    {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-note{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
 			                                    <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
 			                                        <a class="app-background small-padding"><input id="checkbox_microsite_{{ app_option.app_name }}" type="checkbox" name="microsite_public_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
 			                                        ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_microsite_{{ app_option.app_name }}').prop('checked', !($('#checkbox_microsite_{{ app_option.app_name }}').prop('checked')));">

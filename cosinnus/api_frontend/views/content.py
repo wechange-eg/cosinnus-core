@@ -1,3 +1,4 @@
+import itertools
 import logging
 import re
 from copy import copy
@@ -30,6 +31,7 @@ from cosinnus.models.user_dashboard import FONT_AWESOME_CLASS_FILTER, MenuItem
 from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 from cosinnus.utils.functions import clean_single_line_text, is_number, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
+from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import check_url_v3_everywhere_exempt
 
 logger = logging.getLogger('cosinnus')
@@ -141,6 +143,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'image': None,  # exclusive with `main_menu_icon`, only one can be non-None!
         },
         'announcements': [],
+        'space': None,
     }
 
     # todo: generate proper response, by either putting the entire response into a
@@ -319,7 +322,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         css_urls = self._parse_css_urls(html_soup)
         script_constants = self._parse_inline_tag_contents(html_soup, 'script', class_='v3-constants')
         scripts = self._parse_inline_tag_contents(html_soup, 'script', class_=False)
-        meta = self._parse_tags(html_soup, 'meta')
+        meta = self._parse_meta_urls(html_soup)
         styles = self._parse_inline_tag_contents(html_soup, 'style')
         sub_navigation = self._parse_leftnav_menu(html_soup)
 
@@ -350,6 +353,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'image': self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
         }
         data['announcements'] = self._get_announcements(self.django_request)
+        if self.group:
+            data['space'] = self._get_space_context(request.user)
 
         # set cookies on rest response from the requests response
         # note: we seem to be losing all meta-infos like max-age here,
@@ -632,11 +637,13 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             href = leftnav_link.get('href')
             if not href and not attributes and not v3_id:
                 continue
-            # ignore some links depending on their class
+            # ignore some links depending on their class:
+            # - 'x-v3-leftnav-hidden': manually blacklisted buttons that we don't want in the v3 leftnav
+            # - 'fadedown-clickarea', 'submit-btn-x': functional buttons from modals/fadedown
             if leftnav_link.get('class') and any(
                 [
                     blacklisted_class in leftnav_link.get('class')
-                    for blacklisted_class in ['x-v3-leftnav-hidden', 'fadedown-clickarea']
+                    for blacklisted_class in ['x-v3-leftnav-hidden', 'fadedown-clickarea', 'submit-btn-x']
                 ]
             ):
                 continue
@@ -835,8 +842,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         else:
             middle.extend(middle_from_buttons_area)
 
-        # add sidebar third party tools if it exists in group data
-        if self.group and self.group.third_party_tools:
+        # add sidebar third party tools if it exists in group data and user has read_access
+        if self.group and self.group.third_party_tools and check_object_read_access(self.group, self.request.user):
             for third_party_tool in self.group.third_party_tools:
                 try:
                     middle.append(
@@ -874,6 +881,16 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         js_urls = [self._format_static_link(link) for link in js_urls]
         js_urls = uniquify_list(js_urls)
         return js_urls
+
+    def _parse_meta_urls(self, html_soup):
+        """Adds all <meta> elements and all <link rel="VAL"> elements where VAL in `INCLUDED_REL_VALUES`"""
+        INCLUDED_REL_VALUES = ['shortcut icon', 'apple-touch-icon', 'apple-touch-icon-precomposed']
+        meta_str = self._parse_tags(html_soup, 'meta')
+        rel_links = itertools.chain.from_iterable(
+            [html_soup.find_all('link', rel=rel_val) for rel_val in INCLUDED_REL_VALUES]
+        )
+        rel_str = '\n'.join([str(tag).strip() for tag in rel_links])
+        return '\n'.join([concat for concat in [meta_str, rel_str] if concat])
 
     def _parse_tags(self, html_soup, tag_name):
         """Parses all tags of a given tag name and returns them, including their tag definition,
@@ -913,3 +930,22 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         if 'user_guest_announcement' in context:
             announcements.append(context['user_guest_announcement'])
         return announcements
+
+    def _get_space_context(self, user):
+        if not self.group:
+            return None
+
+        # add the group permissions.
+        permissions = {
+            'read': False,
+            'write': False,
+        }
+        if user.is_authenticated:
+            if user.is_superuser or check_ug_admin(user, self.group):
+                permissions['read'] = True
+                permissions['write'] = True
+            elif check_ug_membership(user, self.group):
+                permissions['read'] = True
+
+        data = {'permissions': permissions}
+        return data

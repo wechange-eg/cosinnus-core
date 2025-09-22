@@ -174,6 +174,10 @@ class BaseTagObject(models.Model):
         verbose_name=_('BigBlueButton conversation room'),
     )
 
+    # generic flag used to indicate the successful migration of the tagged object
+    # e.g. used when migrating todos to the deck app.
+    migrated = models.BooleanField(default=False)
+
     def save(self, *args, **kwargs):
         # update like count
         if self.pk:
@@ -921,3 +925,29 @@ def get_tag_object_model():
             % settings.COSINNUS_TAG_OBJECT_MODEL
         )
     return tag_model
+
+
+class SyncedExternalObject(LikeableObjectMixin, BaseTaggableObjectModel):
+    """
+    Representation of an external object (e.g. NextCloud deck card).
+    Used in notifications with title, url and icon. Also used to implement following of external objects.
+    NOTE: When using a new synced external object make sure to add the icon as an image to static/images/fa-icons/small/
+          as they are linked in the digest emails.
+    """
+
+    object_type = models.CharField(max_length=250)
+    object_id = models.CharField(max_length=250)
+    url = models.URLField(null=True)
+    icon = models.CharField(max_length=250)
+
+    class Meta(object):
+        unique_together = ('object_type', 'object_id')
+
+    def get_absolute_url(self):
+        return self.url
+
+    def get_icon(self):
+        return self.icon
+
+    def __str__(self):
+        return f'{self.object_type}_{self.object_id}'

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-06 15:13+0200\n"
+"POT-Creation-Date: 2025-09-18 13:45+0200\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,12 +103,10 @@ msgid "Could not change Nextcloud group name for group \"%(group)s\"."
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%(count)d Users' group memberships were refreshed."
 msgid "%(count)d Groups' Nextcloud group names were updated."
 msgstr "%(count)d пользовательских групп было обновлено."
 
 #, fuzzy
-#| msgid "Nextcloud Groupfolder Name"
 msgid "Nextcloud: Update group names"
 msgstr "Имя папки группы Nextcloud"
 
@@ -555,6 +553,21 @@ msgstr "Запрашиваемая Вами страница в данный м�
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr "Ты не можешь войти в панель администрации, т.к. твоя учётная запись не имеет доступа сотрудника (staff) даже при условии наличия статуса глобального статуса (superuser). Пожалуйста, обратись к другому администратору для получения доступа сотрудника."
+
+msgid "The Todo app is replaced by the Task Board app. Editing existing Todos or creating new Todos has been disabled. "
+msgstr ""
+
+#, fuzzy
+msgid "here"
+msgstr "Где"
+
+#, python-format
+msgid "You can migrate existing Todos %(here_link)s."
+msgstr ""
+
+#, python-format
+msgid "Existing Todos can be migrated by the %(group_type)s admins."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Вы автоматически вышли из системы, так как были некоторое время неактивны."
@@ -1356,7 +1369,6 @@ msgid "Participation applications are open."
 msgstr "Подача заявок на участие открыта."
 
 #, fuzzy
-#| msgid "Participation applications are open."
 msgid "Participation applications are disabled."
 msgstr "Подача заявок на участие открыта."
 
@@ -1367,7 +1379,6 @@ msgid "Participation application is over."
 msgstr "Подача заявок на участие завершена."
 
 #, fuzzy
-#| msgid "The conference %(object_name)s has been updated"
 msgid "The conference has ended."
 msgstr "Конференция “%(object_name)s” была обновлена"
 
@@ -1793,6 +1804,10 @@ msgstr "Имя папки группы Nextcloud"
 msgid "Nextcloud Groupfolder ID"
 msgstr "ID папки группы Nextcloud"
 
+#, fuzzy
+msgid "Nextcloud Deck Board ID"
+msgstr "ID Nextcloud группы"
+
 msgid "Is conference"
 msgstr "Конференция"
 
@@ -2028,7 +2043,6 @@ msgid "Replacement avatar for the group avatar. If empty, falls back to group.av
 msgstr ""
 
 #, fuzzy
-#| msgid "Please also fill in the following information:"
 msgid "User-set answers to Mitwirk-O-Mat questions"
 msgstr "Пожалуйста, укажи следующую информацию:"
 
@@ -2153,7 +2167,6 @@ msgid "User-Block"
 msgstr "Совпадение"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Пользователи"
 
@@ -3421,7 +3434,6 @@ msgid "You will receive a notification e-mail and on-site notification when the 
 msgstr "Вы получите уведомление по электронной почте и на сайте, когда организаторы рассмотрят Вашу заявку. Убедитесь, что Ваши настройки уведомлений разрешают получать электронные письма от нас!"
 
 #, fuzzy
-#| msgid "Please also fill in the following information:"
 msgid "Please answer the following questions"
 msgstr "Пожалуйста, укажи следующую информацию:"
 
@@ -3650,7 +3662,6 @@ msgid " If you would prefer to use simple membership requests as they are used i
 msgstr " Если желаете воспользоваться простой заявкой на членство, которая используется для проектов/групп, Вы можете отключить параметр \"%(application_setting_label)s\" в настройках конференции."
 
 #, fuzzy
-#| msgid "Participation applications are open."
 msgid "Participation applications are enabled"
 msgstr "Подача заявок на участие открыта."
 
@@ -3670,7 +3681,6 @@ msgid "(no limit selected)"
 msgstr "(лимит не выбран)"
 
 #, fuzzy
-#| msgid "Require applicants to submit a text about their motivation for applying"
 msgid "Applicants must answer questions about participation"
 msgstr "Требует от заявителей указать мотивацию для подачи заявки"
 
@@ -4174,10 +4184,19 @@ msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find
 msgstr ""
 
 #, fuzzy
-#| msgid "Join now!"
 msgctxt "Mitwirkomat"
 msgid "Join now"
 msgstr "Присоединяйтесь сейчас!"
+
+#, fuzzy
+#| msgid "The WE-Cloud is here!"
+msgid "The Task Board is here!"
+msgstr "WE-облако здесь!"
+
+#, fuzzy
+#| msgid "Activate Cloud"
+msgid "Activate Task Board"
+msgstr "Активировать облако"
 
 msgid "Members-Map"
 msgstr "Карта участников"
@@ -4425,12 +4444,10 @@ msgid "About the conference"
 msgstr "О проекте"
 
 #, fuzzy
-#| msgid "Delete event"
 msgid "On-site event"
 msgstr "Удалить cобытие"
 
 #, fuzzy
-#| msgid "Delete event"
 msgid "Online event"
 msgstr "Удалить cобытие"
 
@@ -6068,11 +6085,6 @@ msgstr "Все"
 msgid "Matching Settings for the Volunteer-O-Matic"
 msgstr ""
 
-#, fuzzy
-#| msgid "Where"
-msgid "here"
-msgstr "Где"
-
 #, python-format
 msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
 msgstr ""
@@ -6096,12 +6108,10 @@ msgid "Enter only if you want to set a different logo than the one in your %(set
 msgstr ""
 
 #, fuzzy
-#| msgid "Open Preview"
 msgid "Image preview"
 msgstr "Открыть просмотр"
 
 #, fuzzy
-#| msgid "Link URL"
 msgid "Link"
 msgstr "Ссылка URL"
 
@@ -6487,7 +6497,6 @@ msgid "HD space used by projects"
 msgstr "HD место, используемое проектами"
 
 #, fuzzy
-#| msgid "Users Need Activation"
 msgid "User Activity Timeline"
 msgstr "Необходимо активировать новых пользователей"
 
@@ -6509,6 +6518,26 @@ msgstr "Емейлы ВСЕХ активных пользователей"
 
 msgid "Select the date range for which you would like statistics"
 msgstr "Выбери временной промежуток для получения статистики"
+
+#, python-format
+msgid "Data for Portal %(portal_name)s from %(from_date)s to %(to_date)s"
+msgstr ""
+
+#, python-format
+msgid "Detailed Data from %(from_date)s to %(to_date)s"
+msgstr ""
+
+# ???
+#, fuzzy
+#| msgid "Note"
+msgctxt "notice, used at beginning of a paragraph"
+msgid "Note"
+msgstr "Описание"
+
+#, fuzzy
+#| msgid "Please select or create a todo list."
+msgid "Please select a different timespan to display more data."
+msgstr "Пожалуйста, выберите или создайте список задач."
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-облако здесь!"
@@ -7003,7 +7032,6 @@ msgstr "Здесь ты найдешь обзор выбранных тобой 
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "You can create Groups or Projects via the '+' button in the header."
 msgid "You can create Groups or Projects via the main menu in the header."
 msgstr "Ты можешь создать свои собственные группы или проекты с помощью кнопки '+' в верхней правой части страницы."
 
@@ -7017,7 +7045,6 @@ msgstr "Здесь ты найдешь обзор идей, которые те�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
 msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr "Ты можешь создать свои собственные идеи с помощью кнопки '+' в верхней правой части страницы или ознакомиться с уже существующими"
 
@@ -7290,12 +7317,10 @@ msgid "Unblock user"
 msgstr ""
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Все пользователи"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Вы следите за этим контентом или его проектом или группой"
 
@@ -7983,6 +8008,18 @@ msgstr "Не показывать это снова"
 msgid "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!"
 msgstr "Являетесь ли Вы частью интеерсной компании, НГО или ассоциации? Разместите Вашу организацию на карте и создайте ее видимость!"
 
+msgid "Migrate your boards from the Nextcloud Deck app to your groups and projects!"
+msgstr ""
+
+msgid "Until now, you have been able to work with boards in Nextcloud (using the Deck app). We have now moved this feature from the cloud directly into the groups and projects so that all users can work with Task Boards even more easily."
+msgstr ""
+
+msgid "If you want to continue using your boards from the Nextcloud Deck app, you will need to move them to a group or project."
+msgstr ""
+
+msgid "Execute Migration"
+msgstr ""
+
 msgid "Preview"
 msgstr "Предварительный просмотр"
 
@@ -8182,7 +8219,6 @@ msgid "in the Project Dashboard"
 msgstr "в панели управления проектом"
 
 #, fuzzy
-#| msgid "Privacy settings"
 msgid "Project settings"
 msgstr "Настройки приватности"
 
@@ -8314,6 +8350,9 @@ msgstr ""
 msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
 msgstr ""
 
+msgid "With the new app, you can organise the collaboration in your project – it's easy, flexible and clear (thanks to Kanban logic). Try out the wide range of functions and become more effective with agile project management! As an admin, you can activate the Task Board for your project."
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr "Тебя пока нет ни в одной группе"
 
@@ -8330,7 +8369,6 @@ msgid "in the Group Dashboard"
 msgstr "на панели управления группой"
 
 #, fuzzy
-#| msgid "Privacy settings"
 msgid "Group settings"
 msgstr "Настройки приватности"
 
@@ -8453,6 +8491,9 @@ msgstr ""
 msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
 msgstr ""
 
+msgid "With the new app, you can organise the collaboration in your group – it's easy, flexible and clear (thanks to Kanban logic). Try out the wide range of functions and become more effective with agile project management! As an admin, you can activate the Task Board for your group."
+msgstr ""
+
 msgid "You are not currently attending any Conferences"
 msgstr "Вы не участвуете ни в одной конференции"
 
@@ -8463,7 +8504,6 @@ msgid "Conference Menu"
 msgstr "Страница конференции"
 
 #, fuzzy
-#| msgid "Conference Settings"
 msgid "Conference settings"
 msgstr "Настройки конференции"
 
@@ -9217,7 +9257,6 @@ msgid "Something went wrong. Your message was not sent."
 msgstr "Что-то пошло не так. Ваше сообщение не было отправлено."
 
 #, fuzzy
-#| msgid "This function is not enabled for this conference."
 msgid "This function is not enabled for this group type."
 msgstr "Эта функция недоступна для этой конференции."
 
@@ -9312,22 +9351,18 @@ msgid "The user was not found."
 msgstr "Групп нет."
 
 #, fuzzy, python-format
-#| msgid "User was not created"
 msgid "User %s is now blocked."
 msgstr "Пользователь не создан"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "При попытке загрузить виджет произошла ошибка"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "Пользователь \"%(username)s\" больше не является членом."
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "При попытке загрузить виджет произошла ошибка"
 
@@ -9339,6 +9374,70 @@ msgstr "Извините, мы не связаться с Вашим аккау�
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Извините, вы не можете войти, потому, что с аккаунта осуществлялась подозрительная активность. Пожалуйста, обратитесь к администратору!"
+
+#, python-brace-format
+msgid "Week {week_number}: {week_start_date}"
+msgstr ""
+
+#, python-format
+msgid "since %(date_from)s"
+msgstr ""
+
+#, python-format
+msgid "until %(date_to)s"
+msgstr ""
+
+#. Translators: keep formatting verbatim (space, parenthesis)
+#, python-brace-format
+msgid " (recorded only from {first_online_date} onwards)"
+msgstr ""
+
+#. Translators: no punctuation at the end
+msgid "Unique, registered users that were active in this period"
+msgstr ""
+
+msgid "New Registered User Accounts in this period"
+msgstr ""
+
+msgid "Total Enabled User Accounts (at least 1x logged in)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show more Projects of this Group"
+msgid "Newly Created Projects in this period"
+msgstr "Показать больше проектов этой группы"
+
+#, fuzzy
+#| msgid "All Projects"
+msgid "Total Enabled Projects"
+msgstr "Все проекты"
+
+msgid "Newly Created Groups in this period"
+msgstr ""
+
+#, fuzzy
+#| msgid "All Groups"
+msgid "Total Enabled Groups"
+msgstr "Все группы"
+
+#, fuzzy
+#| msgid "Create Conference Event"
+msgid "Newly Created Conferences in this period"
+msgstr "Создать событие"
+
+#, fuzzy
+#| msgid "All Conferences"
+msgid "Total Enabled Conferences"
+msgstr "Конференция"
+
+msgid "Running (scheduled) Conferences in this period"
+msgstr ""
+
+msgid "Newly Created Events in this period"
+msgstr ""
+
+msgid "Newly Created News in this period"
+msgstr ""
 
 msgid "You are already logged in. This function is only available to set up your account for the first time!"
 msgstr "Вы уже залогинены. Эта функция доступна только при первичной настройке!"
@@ -9692,6 +9791,313 @@ msgstr "Статус"
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "Эта функция недоступна для этой конференции."
+
+#, fuzzy
+msgid "Task Board"
+msgstr "Панель управления"
+
+msgctxt "the_app"
+msgid "deck"
+msgstr ""
+
+#, fuzzy
+#| msgid "A user created a new todo"
+msgid "A user created a task"
+msgstr "Пользователь создал новую задачу"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s created the task %(object_name)s"
+msgstr "%(sender_name)s создал новый документ %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d pads"
+msgid "%(sender_name)s created %(count)d tasks"
+msgstr "%(sender_name)s создал %(count)d документов"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created a task"
+msgstr "%(sender_name)s создал новую задачу"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s posted in %(team_name)s:"
+msgid "%(sender_name)s created a task in %(team_name)s."
+msgstr "Пользователь %(sender_name)s опубликовал пост в %(team_name)s:"
+
+#, fuzzy
+#| msgid "A todo was assigned to me"
+msgid "A task was assigned to you"
+msgstr "Мне было поручено задание"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s assigned you the task %(object_name)s"
+msgstr "%(sender_name)s назначил(а) задачу %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned %(count)d todos"
+msgid "%(sender_name)s assigned you %(count)d tasks"
+msgstr "%(sender_name)s назначил %(count)d задач"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s assigned you a task"
+msgstr "%(sender_name)s отметил(а) Вас в"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s assigned you the task %(object_name)s."
+msgstr "%(sender_name)s назначил(а) задачу %(object_name)s"
+
+#, fuzzy
+#| msgid "A todo was assigned to me"
+msgid "A task was unassigned from you"
+msgstr "Мне было поручено задание"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s unassigned you from the task %(object_name)s"
+msgstr "%(sender_name)s назначил(а) задачу %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned %(count)d todos"
+msgid "%(sender_name)s unassigned you from %(count)d tasks"
+msgstr "%(sender_name)s назначил %(count)d задач"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s unassigned you from a task"
+msgstr "Пользователь %(sender_name)s назначил Вам задачу"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s unassigned you from the task %(object_name)s."
+msgstr "%(sender_name)s назначил(а) задачу %(object_name)s"
+
+#, fuzzy
+#| msgid "You were tagged in this event"
+msgid "You were mentioned in a task comment"
+msgstr "Вас отметили в этом событии"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s"
+msgstr "%(sender_name)s прокомментировал(а) задачу %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in %(count)d items"
+msgid "%(sender_name)s mentioned you in a comment of %(count)d tasks"
+msgstr "%(sender_name)s отметил(а) Вас в %(count)d пункте"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post"
+msgid "%(sender_name)s mentioned you in a task comment"
+msgstr "%(sender_name)s прокомментировал новый пост"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s."
+msgstr "%(sender_name)s прокомментировал(а) задачу %(object_name)s"
+
+msgid "A task has was marked as done"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as done"
+msgstr "%(sender_name)s создал новый документ %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d todos"
+msgid "%(sender_name)s marked %(count)d tasks as done"
+msgstr "%(sender_name)s создал %(count)d задач"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin"
+msgid "%(sender_name)s marked a task as done"
+msgstr "%(sender_name)s сделал(а) вас администратором"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as done."
+msgstr "%(sender_name)s создал новый документ %(object_name)s"
+
+msgid "A task has was marked as undone"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as undone"
+msgstr "%(sender_name)s создал новый документ %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d todos"
+msgid "%(sender_name)s marked %(count)d tasks as undone"
+msgstr "%(sender_name)s создал %(count)d задач"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin"
+msgid "%(sender_name)s marked a task as undone"
+msgstr "%(sender_name)s сделал(а) вас администратором"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as undone."
+msgstr "%(sender_name)s создал новый документ %(object_name)s"
+
+msgid "A tasks due data was changed"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgid "%(sender_name)s changed the due date of the task %(object_name)s"
+msgstr "%(sender_name)s изменил событии о подсчете голосов %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d pads"
+msgid "%(sender_name)s changed the due data of %(count)d tasks"
+msgstr "%(sender_name)s создал %(count)d документов"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgid "%(sender_name)s change the due date of a task"
+msgstr "%(sender_name)s изменил событии о подсчете голосов %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgid "%(sender_name)s changed the due date of the task %(object_name)s."
+msgstr "%(sender_name)s изменил событии о подсчете голосов %(object_name)s"
+
+#, fuzzy
+#| msgid "A user commented on a news post"
+msgid "A user commented on a task"
+msgstr "Пользователь прокомментировал новый пост"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s commented on the task %(object_name)s"
+msgstr "%(sender_name)s прокомментировал(а) задачу %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed %(count)d todos"
+msgid "%(sender_name)s commented on %(count)d tasks"
+msgstr "%(sender_name)s выполнил(а) %(count)d задач"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post"
+msgid "%(sender_name)s commented on the task"
+msgstr "%(sender_name)s прокомментировал новый пост"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s commented on the task %(object_name)s."
+msgstr "%(sender_name)s прокомментировал(а) задачу %(object_name)s"
+
+msgid "The Task Board creation is in progress..."
+msgstr ""
+
+#, fuzzy
+#| msgid "My Todos"
+msgid "Migrate Todos"
+msgstr "Мои задачи"
+
+msgid "Migrate Todos to Task Board"
+msgstr ""
+
+msgid "Start the migration of Todos to the Task Board in the background."
+msgstr ""
+
+msgid "The Todo app will be automatically deactivated when finished."
+msgstr ""
+
+#, fuzzy
+#| msgid "Dry run in progress"
+msgid "Migration is in progress..."
+msgstr "Выполняется тестовый прогон"
+
+msgid "An error occurred during the migration. Some Todos might not have been migrated."
+msgstr ""
+
+#, fuzzy
+#| msgid "The error has been logged in the system, please contact our support for help!"
+msgid "Please try again later. If the error persists, please contact our support."
+msgstr "Ошибка зарегистрирована в системе, свяжитесь с нашей службой поддержки!"
+
+#, fuzzy, python-format
+#| msgid "Project/group %(name)s was successfully invited."
+msgid "Migration to %(deck_link)s successfully finished. "
+msgstr "Проект / группа %(name)s был(а) успешно приглашена."
+
+#, fuzzy
+#| msgid "Start Datetime"
+msgid "Start migration"
+msgstr "Дата начала"
+
+#, fuzzy
+#| msgid "User Administration"
+msgid "Retry migration"
+msgstr "Администрирование"
+
+#, fuzzy
+msgid "Migrate Nextcloud Boards"
+msgstr "ID Nextcloud группы"
+
+msgid "Until now, you have been able to work with boards in the Deck app within the Nextcloud. We have now moved this feature from the cloud directly into the groups and projects so that all users can work with Task Boards even more easily."
+msgstr ""
+
+msgid "If you want to continue using your boards from the Nextcloud Deck app, you must move them to a group or project. To do this, select the target group/project for each of your boards."
+msgstr ""
+
+#, fuzzy
+#| msgid "Notes"
+msgid "Notes:"
+msgstr "Новости"
+
+msgid "You can only migrate boards for which you have either ‘Owner’ permissions or 'Manage' and ‘Share’ permissions. Therefore, some boards that you had access to in the Nextcloud Deck app may not be displayed here (e.g. because you only have ‘Edit’ permissions). In this case, you should ask the person(s) who have the necessary permissions for the board to perform the migration."
+msgstr ""
+
+msgid "You can only select groups and projects in which you are an admin as the destination for the migration."
+msgstr ""
+
+msgid "If a board does not fit into any of your existing groups and projects in terms of content, you can create a new group or project and then select it as the destination for the migration."
+msgstr ""
+
+msgid "If the group/project you select as the migration destination has not yet activated the new ‘Task Board’ app, the app will be activated as part of the migration. If the app is already activated, the lists and tasks from the migrated board will be appended to the existing lists of the Task Board."
+msgstr ""
+
+msgid "No content will be overwritten."
+msgstr ""
+
+msgid "Boards that have already been migrated (by you or another user with the necessary permissions) will continue to appear in the list. There is no indication as to whether a board has already been migrated. This means you can migrate boards to different groups/projects if you wish - or multiple times into the same group/project. If you accidentally migrate a board twice, this is not a problem; you can simply delete the redundant task lists manually."
+msgstr ""
+
+msgid "Board from the Nextcloud Deck App"
+msgstr ""
+
+msgid "Group/Project (migration target)"
+msgstr ""
+
+msgid "You must have admin permissions in a group/project to migrate NextCloud Deck boards."
+msgstr ""
+
+msgid "Migration is in progress. It can take a few minutes ..."
+msgstr ""
+
+msgid "Migration successfully finished. You can access the migrated boards in the Task Board of the selected groups/projects."
+msgstr ""
+
+msgid "Note: You have to add users to a group/project to allow them access to the board."
+msgstr ""
+
+msgid "An error occurred during the migration. Some boards might not have been fully migrated."
+msgstr ""
+
+msgid "Please Select"
+msgstr ""
+
+msgid "If the Task Board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the Task Board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
+msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "Проведена реинициализация следующих документов:"
@@ -14226,35 +14632,6 @@ msgstr "Вы уверены, что хотите удалить этот про�
 msgid "Are you sure you want to delete this object?"
 msgstr "Вы уверены, что хотите удалить этот проект?"
 
-#, fuzzy
-#~| msgid "Nextcloud Group ID"
-#~ msgid "Nextcloud Deck Board ID"
-#~ msgstr "ID Nextcloud группы"
-
-#, fuzzy
-#~| msgid "Dashboard"
-#~ msgid "Task-Board"
-#~ msgstr "Панель управления"
-
-#~ msgid "In my Cloud Files"
-#~ msgstr "Поиск в облачных файлах"
-
-#~ msgid "Please provide your motivation for applying"
-#~ msgstr "Укажите Вашу мотивацию участия"
-
-#, fuzzy
-#~ msgid "Require applicants to answer questions about their motivation for applying"
-#~ msgstr "Требует от заявителей указать мотивацию для подачи заявки"
-
-#~ msgid "There are no cloud files yet"
-#~ msgstr "Облачных файлов пока нет"
-
-#~ msgid "You can create Groups or Projects via the '+' button in the header."
-#~ msgstr "Ты можешь создать свои собственные группы или проекты с помощью кнопки '+' в верхней правой части страницы."
-
-#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
-#~ msgstr "Ты можешь создать свои собственные идеи с помощью кнопки '+' в верхней правой части страницы или ознакомиться с уже существующими"
-
 #~ msgid "%(sender_name)s"
 #~ msgstr "%(sender_name)s"
 
@@ -14670,6 +15047,9 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #~ msgid "Important messages:"
 #~ msgstr "Важные сообщения:"
 
+#~ msgid "In my Cloud Files"
+#~ msgstr "Поиск в облачных файлах"
+
 #~ msgid "Info messages:"
 #~ msgstr "Информационные сообщения:"
 
@@ -14778,6 +15158,9 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #~ msgid "Phone number (optional)"
 #~ msgstr "Номер телефона (необязательно)"
 
+#~ msgid "Please provide your motivation for applying"
+#~ msgstr "Укажите Вашу мотивацию участия"
+
 #~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 #~ msgstr "Загрузите файл CSV со следующими столбцами: уникальный идентификатор пользователя, имя, фамилия и один столбец для каждого воркшопа с идентификатором. В качестве примера можно скачать шаблон <a href=\"%(workshop_participants_upload_skeleton)s\">здесь</a>"
 
@@ -14820,6 +15203,10 @@ msgstr "Вы уверены, что хотите удалить этот про�
 
 #~ msgid "Reminder emails"
 #~ msgstr "Электронные письма с напоминанием"
+
+#, fuzzy
+#~ msgid "Require applicants to answer questions about their motivation for applying"
+#~ msgstr "Требует от заявителей указать мотивацию для подачи заявки"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "Отзыв статуса администратора"
@@ -14889,6 +15276,9 @@ msgstr "Вы уверены, что хотите удалить этот про�
 
 #~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
 #~ msgstr "Затем добавьте строку для каждого аккаунта, который хотите добавить. Нужно указать уникальный идентификатор пользователя, а имя и фамилию можно не указывать. Затем поставьте 1 во всех столбцах для воркшопов, во время которых пользователь должен быть обычным участником, или 2, если пользователь должен быть администратором воркшопа."
+
+#~ msgid "There are no cloud files yet"
+#~ msgstr "Облачных файлов пока нет"
 
 #~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
 #~ msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
@@ -14993,6 +15383,12 @@ msgstr "Вы уверены, что хотите удалить этот про�
 
 #~ msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
 #~ msgstr "Активировав двухфакторную аутентификацию, вы повысите уровень безопасности своего аккаунта. <br> Чтобы использовать функцию, установите приложение ´free otp´ на свой смартфон и отсканируйте полученный QR код. В данный момент мы не предлагает иных опций по использованию двухфакторной аутентификации, но обязательно проинформируем вас в случае появления таковых."
+
+#~ msgid "You can create Groups or Projects via the '+' button in the header."
+#~ msgstr "Ты можешь создать свои собственные группы или проекты с помощью кнопки '+' в верхней правой части страницы."
+
+#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#~ msgstr "Ты можешь создать свои собственные идеи с помощью кнопки '+' в верхней правой части страницы или ознакомиться с уже существующими"
 
 #~ msgid "You cannot change your own admin status."
 #~ msgstr "Вы не можете изменить свой собственный статус администратора."

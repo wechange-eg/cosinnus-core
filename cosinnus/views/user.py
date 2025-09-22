@@ -575,13 +575,17 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
                     except Exception as e:
                         logger.exception(e)
                 self.notification_setting.save()
+
             # save visibility setting:
             visibility_setting = request.POST.get('visibility_setting', None)
-            if visibility_setting is not None and int(visibility_setting) in (
+            # do not change the userprofile visibility field if it is locked
+            if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+                self.media_tag.visibility = settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+            elif visibility_setting is not None and int(visibility_setting) in (
                 choice for choice, label in self.visibility_choices
             ):
                 self.media_tag.visibility = int(visibility_setting)
-                self.media_tag.save()
+            self.media_tag.save()
 
         messages.success(request, self.message_success)
 
@@ -662,9 +666,12 @@ class CosinnusGroupInviteTokenView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         self.token = kwargs.get('token', None)
-        if settings.COSINNUS_V3_FRONTEND_ENABLED:
-            # in v3 the /signup/ page handles the invite token
+
+        # in v3, unauthenticated users are handled directly by the /signup/ page
+        if not request.user.is_authenticated and settings.COSINNUS_V3_FRONTEND_ENABLED:
             return redirect(f'/signup/?invite_token={self.token}')
+
+        # v2 handles authenticated and (unauthenticated if v3 is disabled)
         self.invite = get_object_or_None(
             CosinnusGroupInviteToken, token__iexact=self.token, portal=CosinnusPortal.get_current()
         )
@@ -1234,6 +1241,7 @@ def send_user_email_to_verify(user, new_email, request=None, user_has_just_regis
 def email_first_login_token_to_user(user, threaded=True):
     """Sets the profile variables for a user to login without a set password,
     and sends out an email with a verification URL to the user.
+    @return: the login token as string
     """
 
     # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile
@@ -1267,6 +1275,9 @@ def email_first_login_token_to_user(user, threaded=True):
 
     user.cosinnus_profile.settings[PROFILE_SETTING_LOGIN_TOKEN_SENT] = timezone.now()
     user.cosinnus_profile.save()
+
+    # return token
+    return str(a_uuid)
 
 
 def user_api_me(request):

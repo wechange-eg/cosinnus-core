@@ -41,6 +41,12 @@ class FrontendMiddleware(MiddlewareMixin):
             if request.GET.get(self.force_disable_key, None) is not None:
                 return
 
+            # if the v3 welcome profile setup screen is disabled, redirect away from it
+            if not settings.COSINNUS_SHOW_V3_WELCOME_PROFILE_SETUP_PAGE and request.path.startswith('/signup/welcome'):
+                if request.user.is_authenticated:
+                    return redirect('cosinnus:user-dashboard')
+                return redirect('login')
+
             request_tokens = request.build_absolute_uri().split('/')
             # if the workaround language-prefix request from the frontend has arrived at the server,
             # strip the prefixed language AND switch to that language
@@ -152,7 +158,7 @@ class FrontendMiddleware(MiddlewareMixin):
                 # do not redirect the POST if it was an ecempted frontend URL (API or necesseray direct calls)
                 if check_url_v3_everywhere_exempt(request.path, request):
                     return response
-                
+
                 # save response to cache and redirect with the cache
                 if hasattr(response, '_is_rendered') and not response._is_rendered:
                     response.render()

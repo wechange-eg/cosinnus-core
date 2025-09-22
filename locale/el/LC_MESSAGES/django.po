@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-06 15:13+0200\n"
+"POT-Creation-Date: 2025-09-18 13:45+0200\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,12 +109,10 @@ msgid "Could not change Nextcloud group name for group \"%(group)s\"."
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%d Users' rocketchat room memberships were re-done."
 msgid "%(count)d Groups' Nextcloud group names were updated."
 msgstr "Έγινε αναδημιουργία %d συνδρομών χρηστών για δωμάτιο rocketchat."
 
 #, fuzzy
-#| msgid "Nextcloud Groupfolder Name"
 msgid "Nextcloud: Update group names"
 msgstr "Όνομα Nextcloud Groupfolder"
 
@@ -572,6 +570,21 @@ msgid "The page you tried to visit is not available for guest accounts."
 msgstr "Η σελίδα που ζητήσατε δεν είναι διαθέσιμη για αυτή την εκδήλωση τη συγκεκριμένη ώρα."
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
+msgstr ""
+
+msgid "The Todo app is replaced by the Task Board app. Editing existing Todos or creating new Todos has been disabled. "
+msgstr ""
+
+#, fuzzy
+msgid "here"
+msgstr "Πού"
+
+#, python-format
+msgid "You can migrate existing Todos %(here_link)s."
+msgstr ""
+
+#, python-format
+msgid "Existing Todos can be migrated by the %(group_type)s admins."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1374,7 +1387,6 @@ msgid "Participation applications are open."
 msgstr "Οι αιτήσεις συμμετοχής είναι ανοιχτές."
 
 #, fuzzy
-#| msgid "Participation applications are open."
 msgid "Participation applications are disabled."
 msgstr "Οι αιτήσεις συμμετοχής είναι ανοιχτές."
 
@@ -1385,7 +1397,6 @@ msgid "Participation application is over."
 msgstr "Η αίτηση συμμετοχής έχει ολοκληρωθεί."
 
 #, fuzzy
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgid "The conference has ended."
 msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
 
@@ -1816,6 +1827,10 @@ msgstr "Όνομα Nextcloud Groupfolder"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Ταυτότητα Nextcloud Groupfolder"
 
+#, fuzzy
+msgid "Nextcloud Deck Board ID"
+msgstr "Ταυτότητα Ομάδας Nextcloud"
+
 msgid "Is conference"
 msgstr "Είναι σύσκεψη"
 
@@ -2054,7 +2069,6 @@ msgid "Replacement avatar for the group avatar. If empty, falls back to group.av
 msgstr ""
 
 #, fuzzy
-#| msgid ", for the following reason:"
 msgid "User-set answers to Mitwirk-O-Mat questions"
 msgstr ", για τον παρακάτω λόγο:"
 
@@ -2176,12 +2190,10 @@ msgid "You both have similar interests and were matched, very nice! What appeale
 msgstr ""
 
 #, fuzzy
-#| msgid "User token"
 msgid "User-Block"
 msgstr "Διακριτικό Χρήστη"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Χρήστες"
 
@@ -3462,7 +3474,6 @@ msgid "You will receive a notification e-mail and on-site notification when the 
 msgstr "Θα λάβετε ένα email ειδοποίησης και μια ειδοποίηση εκείνη την στιγμή όταν οι διοργανωτές θα έχουν επεξεργαστεί την αίτησή σας. Βεβαιωθείτε ότι οι ρυθμίσεις ειδοποίησης έχουν εγκατασταθεί σωστά για να λαμβάνετε email από εμάς!"
 
 #, fuzzy
-#| msgid ", for the following reason:"
 msgid "Please answer the following questions"
 msgstr ", για τον παρακάτω λόγο:"
 
@@ -3687,7 +3698,6 @@ msgid " If you would prefer to use simple membership requests as they are used i
 msgstr " Σε περίπτωση που θα προτιμούσατε να χρησιμοποιήσετε αιτήματα απλής συνδρομής όπως χρησιμοποιούνται σε έργα/ομάδες, μπορείτε να απενεργοποιήσετε τη ρύθμιση \"%(application_setting_label)s\" στις ρυθμίσεις σύσκεψης."
 
 #, fuzzy
-#| msgid "Participation applications are open."
 msgid "Participation applications are enabled"
 msgstr "Οι αιτήσεις συμμετοχής είναι ανοιχτές."
 
@@ -3707,7 +3717,6 @@ msgid "(no limit selected)"
 msgstr "(δεν έχει επιλεγεί όριο)"
 
 #, fuzzy
-#| msgid "Require applicants to submit a text about their motivation for applying"
 msgid "Applicants must answer questions about participation"
 msgstr "Απαίτηση προς τους υποψηφίους να υποβάλλουν ένα κείμενο σχετικά με το κίνητρο της αίτησής τους"
 
@@ -4239,10 +4248,19 @@ msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find
 msgstr ""
 
 #, fuzzy
-#| msgid "Join now!"
 msgctxt "Mitwirkomat"
 msgid "Join now"
 msgstr "Συμμετάσχετε τώρα!"
+
+#, fuzzy
+#| msgid "The WE-Cloud is here!"
+msgid "The Task Board is here!"
+msgstr "Το WE-Cloud είναι εδώ!"
+
+#, fuzzy
+#| msgid "Activate Cloud"
+msgid "Activate Task Board"
+msgstr "Ενεργοποίηση Cloud"
 
 #, fuzzy
 msgid "Members-Map"
@@ -4493,12 +4511,10 @@ msgid "About the conference"
 msgstr "Σχετικά με τη σύσκεψη"
 
 #, fuzzy
-#| msgid "Delete event"
 msgid "On-site event"
 msgstr "Διαγραφή εκδήλωσης"
 
 #, fuzzy
-#| msgid "Delete event"
 msgid "Online event"
 msgstr "Διαγραφή εκδήλωσης"
 
@@ -6143,11 +6159,6 @@ msgstr "Όλοι"
 msgid "Matching Settings for the Volunteer-O-Matic"
 msgstr ""
 
-#, fuzzy
-#| msgid "Where"
-msgid "here"
-msgstr "Πού"
-
 #, python-format
 msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
 msgstr ""
@@ -6171,12 +6182,10 @@ msgid "Enter only if you want to set a different logo than the one in your %(set
 msgstr ""
 
 #, fuzzy
-#| msgid "Open Preview"
 msgid "Image preview"
 msgstr "Άνοιγμα Προεπισκόπησης"
 
 #, fuzzy
-#| msgid "Link URL"
 msgid "Link"
 msgstr "Σύνδεσμος URL"
 
@@ -6566,7 +6575,6 @@ msgid "HD space used by projects"
 msgstr "Χώρος HD που χρησιμοποιείται από έργα"
 
 #, fuzzy
-#| msgid "Users Need Activation"
 msgid "User Activity Timeline"
 msgstr "Οι Χρήστες Χρειάζονται Ενεργοποίηση"
 
@@ -6588,6 +6596,25 @@ msgstr "E-Mail από ΟΛΟΥΣ τους ενεργούς χρήστες"
 
 msgid "Select the date range for which you would like statistics"
 msgstr ""
+
+#, python-format
+msgid "Data for Portal %(portal_name)s from %(from_date)s to %(to_date)s"
+msgstr ""
+
+#, python-format
+msgid "Detailed Data from %(from_date)s to %(to_date)s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Note"
+msgctxt "notice, used at beginning of a paragraph"
+msgid "Note"
+msgstr "Σημείωση"
+
+#, fuzzy
+#| msgid "Please select or create a todo list."
+msgid "Please select a different timespan to display more data."
+msgstr "Παρακαλούμε επιλέξτε ή δημιουργήστε μια λίστα καθηκόντων."
 
 msgid "The WE-Cloud is here!"
 msgstr "Το WE-Cloud είναι εδώ!"
@@ -7083,7 +7110,6 @@ msgstr "Εδώ μπορείτε να βρείτε μια επισκόπηση τ
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "You can create Groups or Projects via the '+' button in the header."
 msgid "You can create Groups or Projects via the main menu in the header."
 msgstr "Μπορείτε να δημιουργήσετε Ομάδες ή Έργα με το πλήκτρο \"+\" στην επικεφαλίδα."
 
@@ -7097,7 +7123,6 @@ msgstr "Εδώ μπορείτε να βρείτε μια σύνοψη των Ι�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
 msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr "Μπορείτε να δημιουργήσετε τις δικές σας Ιδέες μέσω του πλήκτρου \"+\" στην επικεφαλίδα ή μπορείτε να ανακαλύψετε υπάρχουσες Ιδέες εδώ"
 
@@ -7372,12 +7397,10 @@ msgid "Unblock user"
 msgstr ""
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Όλοι οι χρήστες"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Ακολουθείτε αυτό το περιεχόμενο ή το Έργο ή την Ομάδα του"
 
@@ -8079,6 +8102,18 @@ msgstr "Να μην εμφανιστεί αυτό ξανά"
 msgid "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!"
 msgstr "Είστε μέρος κάποιας ενδιαφέρουσας εταιρείας, Μη Κυβερνητικού Οργανισμού ή ένωσης; Βάλτε τον οργανισμό σας στο χάρτη και επιτρέψτε να είναι ορατός!"
 
+msgid "Migrate your boards from the Nextcloud Deck app to your groups and projects!"
+msgstr ""
+
+msgid "Until now, you have been able to work with boards in Nextcloud (using the Deck app). We have now moved this feature from the cloud directly into the groups and projects so that all users can work with Task Boards even more easily."
+msgstr ""
+
+msgid "If you want to continue using your boards from the Nextcloud Deck app, you will need to move them to a group or project."
+msgstr ""
+
+msgid "Execute Migration"
+msgstr ""
+
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
@@ -8279,7 +8314,6 @@ msgid "in the Project Dashboard"
 msgstr "Πίνακας Έργου"
 
 #, fuzzy
-#| msgid "Privacy settings"
 msgid "Project settings"
 msgstr "Ρυθμίσεις απορρήτου"
 
@@ -8405,6 +8439,9 @@ msgstr ""
 msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
 msgstr ""
 
+msgid "With the new app, you can organise the collaboration in your project – it's easy, flexible and clear (thanks to Kanban logic). Try out the wide range of functions and become more effective with agile project management! As an admin, you can activate the Task Board for your project."
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr "Δεν είστε αυτή τη στιγμή σε κάποια Ομάδα"
 
@@ -8422,7 +8459,6 @@ msgid "in the Group Dashboard"
 msgstr "Πίνακας Ομάδας"
 
 #, fuzzy
-#| msgid "Privacy settings"
 msgid "Group settings"
 msgstr "Ρυθμίσεις απορρήτου"
 
@@ -8540,6 +8576,9 @@ msgstr ""
 msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
 msgstr ""
 
+msgid "With the new app, you can organise the collaboration in your group – it's easy, flexible and clear (thanks to Kanban logic). Try out the wide range of functions and become more effective with agile project management! As an admin, you can activate the Task Board for your group."
+msgstr ""
+
 msgid "You are not currently attending any Conferences"
 msgstr "Δεν παρακολουθείτε αυτή τη στιγμή κάποια Σύσκεψη"
 
@@ -8550,7 +8589,6 @@ msgid "Conference Menu"
 msgstr "Μενού Σύσκεψης"
 
 #, fuzzy
-#| msgid "Conference Settings"
 msgid "Conference settings"
 msgstr "Ρυθμίσεις Σύσκεψης"
 
@@ -9303,7 +9341,6 @@ msgid "Something went wrong. Your message was not sent."
 msgstr ""
 
 #, fuzzy
-#| msgid "This function is not enabled for this conference."
 msgid "This function is not enabled for this group type."
 msgstr "Η συγκεκριμένη λειτουργία δεν έχει ενεργοποιηθεί για αυτή τη σύσκεψη."
 
@@ -9397,22 +9434,18 @@ msgid "The user was not found."
 msgstr "Δεν υπάρχουν ομάδες."
 
 #, fuzzy, python-format
-#| msgid "User was not created"
 msgid "User %s is now blocked."
 msgstr "Δεν δημιουργήθηκε χρήστης"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "Υπήρξε σφάλμα κατά τη φόρτωση του widget"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "Ο χρήστης \"%(username)s\" δεν είναι πλέον μέλος."
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "Υπήρξε σφάλμα κατά τη φόρτωση του widget"
 
@@ -9424,6 +9457,70 @@ msgstr "Λυπούμαστε, δεν μπορέσαμε να συνδέσουμ�
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Λυπούμαστε, δεν μπορείτε να συνδεθείτε επειδή ο λογαριασμό σας είναι σε αναστολή. Παρακαλούμε επικοινωνήστε με τον διαχειριστή του συστήματος!"
+
+#, python-brace-format
+msgid "Week {week_number}: {week_start_date}"
+msgstr ""
+
+#, python-format
+msgid "since %(date_from)s"
+msgstr ""
+
+#, python-format
+msgid "until %(date_to)s"
+msgstr ""
+
+#. Translators: keep formatting verbatim (space, parenthesis)
+#, python-brace-format
+msgid " (recorded only from {first_online_date} onwards)"
+msgstr ""
+
+#. Translators: no punctuation at the end
+msgid "Unique, registered users that were active in this period"
+msgstr ""
+
+msgid "New Registered User Accounts in this period"
+msgstr ""
+
+msgid "Total Enabled User Accounts (at least 1x logged in)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show more Projects of this Group"
+msgid "Newly Created Projects in this period"
+msgstr "Εμφάνιση περισσότερων Έργων αυτής της Ομάδας"
+
+#, fuzzy
+#| msgid "All Projects"
+msgid "Total Enabled Projects"
+msgstr "Όλα τα Έργα"
+
+msgid "Newly Created Groups in this period"
+msgstr ""
+
+#, fuzzy
+#| msgid "All Groups"
+msgid "Total Enabled Groups"
+msgstr "Όλες οι Ομάδες"
+
+#, fuzzy
+#| msgid "Create Conference Event"
+msgid "Newly Created Conferences in this period"
+msgstr "Δημιουργία Εκδήλωσης Σύσκεψης"
+
+#, fuzzy
+#| msgid "All Conferences"
+msgid "Total Enabled Conferences"
+msgstr "Όλες οι Συσκέψεις"
+
+msgid "Running (scheduled) Conferences in this period"
+msgstr ""
+
+msgid "Newly Created Events in this period"
+msgstr ""
+
+msgid "Newly Created News in this period"
+msgstr ""
 
 msgid "You are already logged in. This function is only available to set up your account for the first time!"
 msgstr ""
@@ -9789,6 +9886,312 @@ msgstr "Κατάσταση"
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "Η συγκεκριμένη λειτουργία δεν έχει ενεργοποιηθεί για αυτή τη σύσκεψη."
+
+#, fuzzy
+msgid "Task Board"
+msgstr "Πίνακας"
+
+msgctxt "the_app"
+msgid "deck"
+msgstr ""
+
+#, fuzzy
+#| msgid "A user created a new todo"
+msgid "A user created a task"
+msgstr "Ένας χρήστης δημιούργησε ένα νέο καθήκον"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s created the task %(object_name)s"
+msgstr "Ο/η %(sender_name)s δημιούργησε το pad %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d pads"
+msgid "%(sender_name)s created %(count)d tasks"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d pad"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created a task"
+msgstr "Ο/η %(sender_name)s δημιούργησε ένα νέο καθήκον"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s posted in %(team_name)s:"
+msgid "%(sender_name)s created a task in %(team_name)s."
+msgstr "Ο/η %(sender_name)s ανάρτησε μια δημοσίευση σε %(team_name)s:"
+
+#, fuzzy
+#| msgid "A todo was assigned to me"
+msgid "A task was assigned to you"
+msgstr "Ένα καθήκον ανατέθηκε σε εμένα"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s assigned you the task %(object_name)s"
+msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου το καθήκον %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned %(count)d todos"
+msgid "%(sender_name)s assigned you %(count)d tasks"
+msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου %(count)d καθήκοντα"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s assigned you a task"
+msgstr "Ο/η %(sender_name)s σας πρόσθεσε με ετικέτα"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s assigned you the task %(object_name)s."
+msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου το καθήκον %(object_name)s"
+
+#, fuzzy
+#| msgid "A todo was assigned to me"
+msgid "A task was unassigned from you"
+msgstr "Ένα καθήκον ανατέθηκε σε εμένα"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s unassigned you from the task %(object_name)s"
+msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου το καθήκον %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned %(count)d todos"
+msgid "%(sender_name)s unassigned you from %(count)d tasks"
+msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου %(count)d καθήκοντα"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s unassigned you from a task"
+msgstr "Ο/η %(sender_name)s ανέθεσε ένα καθήκον σε εσάς"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s unassigned you from the task %(object_name)s."
+msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου το καθήκον %(object_name)s"
+
+#, fuzzy
+#| msgid "You were tagged in this event"
+msgid "You were mentioned in a task comment"
+msgstr "Προστεθήκατε με ετικέτα σε αυτή την εκδήλωση"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in %(count)d items"
+msgid "%(sender_name)s mentioned you in a comment of %(count)d tasks"
+msgstr "Ο/η %(sender_name)s σας πρόσθεσε με ετικέτα σε %(count)d στοιχεία"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post"
+msgid "%(sender_name)s mentioned you in a task comment"
+msgstr "Ο/η %(sender_name)s σχολίασε μια ανάρτηση ειδήσεων"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s."
+msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s"
+
+msgid "A task has was marked as done"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as done"
+msgstr "Ο/η %(sender_name)s δημιούργησε το pad %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d todos"
+msgid "%(sender_name)s marked %(count)d tasks as done"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d καθήκοντα"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin"
+msgid "%(sender_name)s marked a task as done"
+msgstr "Ο/η %(sender_name)s σας όρισε διαχειριστή"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as done."
+msgstr "Ο/η %(sender_name)s δημιούργησε το pad %(object_name)s"
+
+msgid "A task has was marked as undone"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as undone"
+msgstr "Ο/η %(sender_name)s δημιούργησε το pad %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d todos"
+msgid "%(sender_name)s marked %(count)d tasks as undone"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d καθήκοντα"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin"
+msgid "%(sender_name)s marked a task as undone"
+msgstr "Ο/η %(sender_name)s σας όρισε διαχειριστή"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as undone."
+msgstr "Ο/η %(sender_name)s δημιούργησε το pad %(object_name)s"
+
+msgid "A tasks due data was changed"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgid "%(sender_name)s changed the due date of the task %(object_name)s"
+msgstr "Ο/η %(sender_name)s άλλαξαν την δημοσκόπηση για εκδήλωση %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d pads"
+msgid "%(sender_name)s changed the due data of %(count)d tasks"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d pad"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgid "%(sender_name)s change the due date of a task"
+msgstr "Ο/η %(sender_name)s άλλαξαν την δημοσκόπηση για εκδήλωση %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgid "%(sender_name)s changed the due date of the task %(object_name)s."
+msgstr "Ο/η %(sender_name)s άλλαξαν την δημοσκόπηση για εκδήλωση %(object_name)s"
+
+#, fuzzy
+#| msgid "A user commented on a news post"
+msgid "A user commented on a task"
+msgstr "Ένα χρήστης σχολίασε μια ανάρτηση ειδήσεων"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s commented on the task %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed %(count)d todos"
+msgid "%(sender_name)s commented on %(count)d tasks"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε %(count)d καθήκοντα"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post"
+msgid "%(sender_name)s commented on the task"
+msgstr "Ο/η %(sender_name)s σχολίασε μια ανάρτηση ειδήσεων"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s commented on the task %(object_name)s."
+msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s"
+
+msgid "The Task Board creation is in progress..."
+msgstr ""
+
+#, fuzzy
+#| msgid "My Todos"
+msgid "Migrate Todos"
+msgstr "Τα Καθήκοντά Μου"
+
+msgid "Migrate Todos to Task Board"
+msgstr ""
+
+msgid "Start the migration of Todos to the Task Board in the background."
+msgstr ""
+
+msgid "The Todo app will be automatically deactivated when finished."
+msgstr ""
+
+#, fuzzy
+#| msgid "Dry run in progress"
+msgid "Migration is in progress..."
+msgstr "Δοκιμή σε εξέλιξη"
+
+msgid "An error occurred during the migration. Some Todos might not have been migrated."
+msgstr ""
+
+#, fuzzy
+#| msgid "The error has been logged in the system, please contact our support for help!"
+msgid "Please try again later. If the error persists, please contact our support."
+msgstr "Το σφάλμα έχει καταχωρηθεί στο σύστημα, παρακαλούμε επικοινωνήστε με το τμήμα υποστήριξης για βοήθεια!"
+
+#, fuzzy, python-format
+msgid "Migration to %(deck_link)s successfully finished. "
+msgstr "Ο χρήστης %(username)s προσκλήθηκε με επιτυχία!"
+
+#, fuzzy
+#| msgid "Start Datetime"
+msgid "Start migration"
+msgstr "Έναρξη Datetime"
+
+#, fuzzy
+#| msgid "User Administration"
+msgid "Retry migration"
+msgstr "Διαχείριση Χρήστη"
+
+#, fuzzy
+msgid "Migrate Nextcloud Boards"
+msgstr "Ταυτότητα Ομάδας Nextcloud"
+
+msgid "Until now, you have been able to work with boards in the Deck app within the Nextcloud. We have now moved this feature from the cloud directly into the groups and projects so that all users can work with Task Boards even more easily."
+msgstr ""
+
+msgid "If you want to continue using your boards from the Nextcloud Deck app, you must move them to a group or project. To do this, select the target group/project for each of your boards."
+msgstr ""
+
+#, fuzzy
+#| msgid "Notes"
+msgid "Notes:"
+msgstr "Σημειώσεις"
+
+msgid "You can only migrate boards for which you have either ‘Owner’ permissions or 'Manage' and ‘Share’ permissions. Therefore, some boards that you had access to in the Nextcloud Deck app may not be displayed here (e.g. because you only have ‘Edit’ permissions). In this case, you should ask the person(s) who have the necessary permissions for the board to perform the migration."
+msgstr ""
+
+msgid "You can only select groups and projects in which you are an admin as the destination for the migration."
+msgstr ""
+
+msgid "If a board does not fit into any of your existing groups and projects in terms of content, you can create a new group or project and then select it as the destination for the migration."
+msgstr ""
+
+msgid "If the group/project you select as the migration destination has not yet activated the new ‘Task Board’ app, the app will be activated as part of the migration. If the app is already activated, the lists and tasks from the migrated board will be appended to the existing lists of the Task Board."
+msgstr ""
+
+msgid "No content will be overwritten."
+msgstr ""
+
+msgid "Boards that have already been migrated (by you or another user with the necessary permissions) will continue to appear in the list. There is no indication as to whether a board has already been migrated. This means you can migrate boards to different groups/projects if you wish - or multiple times into the same group/project. If you accidentally migrate a board twice, this is not a problem; you can simply delete the redundant task lists manually."
+msgstr ""
+
+msgid "Board from the Nextcloud Deck App"
+msgstr ""
+
+msgid "Group/Project (migration target)"
+msgstr ""
+
+msgid "You must have admin permissions in a group/project to migrate NextCloud Deck boards."
+msgstr ""
+
+msgid "Migration is in progress. It can take a few minutes ..."
+msgstr ""
+
+msgid "Migration successfully finished. You can access the migrated boards in the Task Board of the selected groups/projects."
+msgstr ""
+
+msgid "Note: You have to add users to a group/project to allow them access to the board."
+msgstr ""
+
+msgid "An error occurred during the migration. Some boards might not have been fully migrated."
+msgstr ""
+
+msgid "Please Select"
+msgstr ""
+
+msgid "If the Task Board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the Task Board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
+msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "Τα παρακάτω Pad επανεκκινήθηκαν εκ νέου:"
@@ -14370,35 +14773,6 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 msgid "Are you sure you want to delete this object?"
 msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την ομάδα;"
 
-#, fuzzy
-#~| msgid "Nextcloud Group ID"
-#~ msgid "Nextcloud Deck Board ID"
-#~ msgstr "Ταυτότητα Ομάδας Nextcloud"
-
-#, fuzzy
-#~| msgid "Dashboard"
-#~ msgid "Task-Board"
-#~ msgstr "Πίνακας"
-
-#~ msgid "In my Cloud Files"
-#~ msgstr "Στα Αρχεία Cloud"
-
-#~ msgid "Please provide your motivation for applying"
-#~ msgstr "Παρακαλούμε αναφέρατε το κίνητρο της αίτησής σας"
-
-#, fuzzy
-#~ msgid "Require applicants to answer questions about their motivation for applying"
-#~ msgstr "Απαίτηση προς τους υποψηφίους να υποβάλλουν ένα κείμενο σχετικά με το κίνητρο της αίτησής τους"
-
-#~ msgid "There are no cloud files yet"
-#~ msgstr "Δεν υπάρχουν ακόμη αρχεία cloud"
-
-#~ msgid "You can create Groups or Projects via the '+' button in the header."
-#~ msgstr "Μπορείτε να δημιουργήσετε Ομάδες ή Έργα με το πλήκτρο \"+\" στην επικεφαλίδα."
-
-#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
-#~ msgstr "Μπορείτε να δημιουργήσετε τις δικές σας Ιδέες μέσω του πλήκτρου \"+\" στην επικεφαλίδα ή μπορείτε να ανακαλύψετε υπάρχουσες Ιδέες εδώ"
-
 #~ msgid "%(team_name)s was deactivated successfully!"
 #~ msgstr "Ο/η %(team_name)s απενεργοποιήθηκε με επιτυχία!"
 
@@ -14684,6 +15058,9 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #~ msgid "Important messages:"
 #~ msgstr "Το όνομά σας"
 
+#~ msgid "In my Cloud Files"
+#~ msgstr "Στα Αρχεία Cloud"
+
 #, fuzzy
 #~ msgid "Info messages:"
 #~ msgstr "Το όνομά σας"
@@ -14725,6 +15102,9 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #~ msgid "Personal"
 #~ msgstr "Άτομα"
 
+#~ msgid "Please provide your motivation for applying"
+#~ msgstr "Παρακαλούμε αναφέρατε το κίνητρο της αίτησής σας"
+
 #~ msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
 #~ msgstr "Παρακαλούμε ανεβάστε ένα CSV με τις παρακάτω στήλες: αναγνωριστικό μοναδικού χρήστη, όνομα, επώνυμο και μία στήλη για κάθε σεμινάριο που αναγνωρίζεται από το slug του σεμιναρίου. Για Βοήθεια μπορείτε να κατεβάσετε ένα πρότυπο <a href=\"%(workshop_participants_upload_skeleton)s\">εδώ</a>"
 
@@ -14759,6 +15139,10 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 
 #~ msgid "Reminder emails"
 #~ msgstr "Email υπενθύμισης"
+
+#, fuzzy
+#~ msgid "Require applicants to answer questions about their motivation for applying"
+#~ msgstr "Απαίτηση προς τους υποψηφίους να υποβάλλουν ένα κείμενο σχετικά με το κίνητρο της αίτησής τους"
 
 #~ msgid "Romanian--NATIVE-LANGUAGE"
 #~ msgstr "Ρουμάνικα--ΜΗΤΡΙΚΗ ΓΛΩΣΣΑ"
@@ -14805,6 +15189,9 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 
 #~ msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
 #~ msgstr "Στη συνέχεια προσθέστε μια σειρά για κάθε λογαριασμό που θέλετε να προσθέσετε. Θα πρέπει να προσθέσετε ένα αναγνωριστικό μοναδικού χρήστη, αλλά το όνομα και το επώνυμο μπορεί να παραμείνει κενό. Στη συνέχεια προσθέστε το 1 σε όλες τις στήλες του σεμιναρίου όπου ο χρήστης θα πρέπει να είναι κανονικό μέλος ή το 2 εάν ο χρήστης θα πρέπει να είναι διαχειριστής του σεμιναρίου."
+
+#~ msgid "There are no cloud files yet"
+#~ msgstr "Δεν υπάρχουν ακόμη αρχεία cloud"
 
 #, fuzzy
 #~ msgid "This conference shall be made publicly findable via other platforms."
@@ -14867,6 +15254,12 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Πρόκειται να απενεργοποιήστε αυτό το έργο. Αυτό και όλο του το περιεχόμενο θα είναι κρυμμένο στην ιστοσελίδα και μη ορατό σε όλους, μαζί με εσάς."
+
+#~ msgid "You can create Groups or Projects via the '+' button in the header."
+#~ msgstr "Μπορείτε να δημιουργήσετε Ομάδες ή Έργα με το πλήκτρο \"+\" στην επικεφαλίδα."
+
+#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#~ msgstr "Μπορείτε να δημιουργήσετε τις δικές σας Ιδέες μέσω του πλήκτρου \"+\" στην επικεφαλίδα ή μπορείτε να ανακαλύψετε υπάρχουσες Ιδέες εδώ"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Έχετε αλλάξει την διεύθυνση email σας. Σύντομα θα σας στείλουμε ένα email σε αυτή την διεύθυνση με ένα σύνδεσμο επιβεβαίωσης. Μέχρι να κάνετε κλικ σε αυτό τον σύνδεσμο, το προφίλ θα κρατήσει την παλιά διεύθυνση email!"

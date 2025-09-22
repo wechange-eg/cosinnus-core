@@ -82,6 +82,7 @@ from cosinnus.utils.functions import (
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus.views.mixins.media import FlickrEmbedFieldMixin, VideoEmbedFieldMixin
+from cosinnus_deck.models import DeckMigrationMixin
 from cosinnus_event.mixins import BBBRoomMixin  # noqa
 
 logger = logging.getLogger('cosinnus')
@@ -420,6 +421,12 @@ class CosinnusGroupManager(models.Manager):
             ],
             includeInactive=includeInactive,
         )
+
+    def get_for_user_group_admin(self, user, **kwargs):
+        """
+        :returns: a list of :class:`CosinnusGroup` the given user is a admin of.
+        """
+        return self.get_cached(pks=self.get_for_user_group_admin_pks(user, **kwargs))
 
     def get_deactivated_for_user(self, user):
         """Returns for a user all groups and projects they are admin of that have been deactivated.
@@ -853,6 +860,7 @@ class CosinnusBaseGroup(
     VideoEmbedFieldMixin,
     MembersManagerMixin,
     BBBRoomMixin,
+    DeckMigrationMixin,
     AttachableObjectModel,
 ):
     """Abstract base group model implementation. Provides common functionality for all groups."""
@@ -1089,6 +1097,13 @@ class CosinnusBaseGroup(
         blank=True,
         null=True,
         help_text='The boolean internal nextcloud id for the groupfolder. Only set once a groupfolder is created.',
+    )
+    nextcloud_deck_board_id = models.PositiveIntegerField(
+        _('Nextcloud Deck Board ID'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='Internal ID of the nextcloud deck board for the group. Set after the deck is created.',
     )
 
     # NOTE: deprecated, do not use!
@@ -1526,13 +1541,23 @@ class CosinnusBaseGroup(
 
     @property
     def group_can_access_recorded_meetings(self):
-        """Check if the recorded meetings page should be shown and be accessible for this group, due to having
-        BBB enabled (and being premium if this portal requires ist) or being a conference."""
+        """
+        Returns True if this group may have BBB recordings associated with it.
+        This is determined by the flag `may_have_bbb_recordings` in `group.settings`, which is set when meetings are
+        created where recording is actually possible.
+
+        Returns True also, if this group is a conference or the group-specific BBB-room is enabled
+
+        Note: The current setting for this groups premium-state is ignored here,
+        so that created recordings remain accessible, regardless of how the settings are changed later.
+        """
         if self.group_is_conference:
             return True
         if self.group_is_bbb_enabled:
             return True
         if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and 'premium_features_expired_on' in self.settings:
+            return True
+        if self.settings.get('may_have_bbb_recordings', False):
             return True
         return False
 
@@ -2037,6 +2062,24 @@ class CosinnusBaseGroup(
                         'token': self.settings.get('invite_token', None),
                     },
                 )
+
+    def set_may_have_bbb_recordings(self):
+        """
+        Saves a flag, that this group may have bbb recordings associated with it.
+
+        This flag is used by `group_can_access_recorded_meetings()` to determine if
+        the list of available recordings should be shown.
+        """
+
+        # do nothing if it is already set True
+        if self.settings.get('may_have_bbb_recordings', False):
+            return
+
+        self.settings.update({'may_have_bbb_recordings': True})
+        # update DB directly to avoid signals
+        type(self).objects.filter(pk=self.pk).update(settings=self.settings)
+        # group-cache must be cleared for the change to take effect
+        self.clear_cache()
 
 
 class CosinnusGroup(CosinnusBaseGroup):

@@ -3,6 +3,36 @@
 
 {% block page_title %}{% trans "Simple Statistics" %}{% endblock %}
 
+{% block jshead %}
+    {{ block.super }}
+    <script src="{% static 'js/vendor/chart-4.5.0.umd.min.js' %}"></script>
+    <script type="text/javascript">
+        const chart_options = {
+            responsive: true,
+            scales:
+                {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {precision: 0}
+                    }
+                },
+            plugins: {
+                legend: {display: false},
+                tooltip: {
+                    enabled: true,
+                    callbacks: {
+                        title: function (context) {
+                            // reformat labels of incomplete intervals
+                            const label = context[0]?.label ?? '';
+                            return label.replace(/,/g, '\n');
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+{% endblock jshead %}
+
 {% block leftnav %}
     <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:administration' %}">
 	    <ul class="media-list">
@@ -224,16 +254,69 @@
     {% if statistics %}
         <!-- a box with semi transparent background -->
         <div class="content-box white-content">
-            <h3>Showing data for Portal <b>{{ COSINNUS_CURRENT_PORTAL.name }}</b> from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
-            <br/>
-            
-            {% for key, val in statistics %}
-	            <div class="row regular-space">
-                   <div class="col-xs-8">{{ key }}</div>
-                   <div class="col-xs-4">{{ val }}</div>
-	            </div>
+            <h3 class="ultra-space">
+                {% with wrapped_portal_name='<b>'|add:COSINNUS_CURRENT_PORTAL.name|add:'</b>' %}
+                    {% blocktrans trimmed with portal_name=wrapped_portal_name|safe from_date=form.from_date.value|date:"d.m.Y" to_date=form.to_date.value|date:"d.m.Y" %}
+                        Data for Portal {{ portal_name }} from {{ from_date }} to {{ to_date }}
+                    {% endblocktrans %}
+                {% endwith %}
+            </h3>
+
+            {# show totals #}
+            <div class="ultra-space">
+                {% for metric in statistics %}
+                    {% with counter_str=forloop.counter|django_stringformat:"02d" %}
+                        <div class="row regular-space">
+                            <div class="col-xs-8">{{ counter_str }}. {{ metric.title | safe }}</div>
+                           <div class="col-xs-4">{{ metric.total }}</div>
+                        </div>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+
+            {# show date_buckets as charts #}
+            <h3 class="ultra-space">
+                {% blocktrans trimmed with portal_name=COSINNUS_CURRENT_PORTAL.name from_date=form.from_date.value|date:"d.m.Y" to_date=form.to_date.value|date:"d.m.Y" %}
+                	Detailed Data from {{ from_date }} to {{ to_date }}
+                {% endblocktrans %}
+            </h3>
+            {% for metric in statistics %}
+                {% if metric.buckets.labels|length < 2 or metric.total == 0 %}
+                    {# continue if the is no chart data #}
+                {% else %}
+                    {% with counter_str=forloop.counter|django_stringformat:"02d" %}
+                        {% with chart_id="chart-"|add:counter_str %}
+                            <h4>{{ counter_str }}. {{ metric.title | safe }}</h4>
+                            <div class="ultra-space"><canvas id="{{ chart_id }}" width="400" height="200"></canvas></div>
+                            <script>
+                                new Chart(document.getElementById('{{ chart_id }}').getContext('2d'), {
+                                        type: 'bar',
+                                        data: {
+                                            labels: {{ metric.buckets.labels|safe }},
+                                            datasets: [{
+                                                {# title is already shown as html heading #}
+                                                {# label: '{{ metric.title }}', #}
+                                                data: {{ metric.buckets.values|safe }},
+                                                backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                                            }]
+                                        },
+                                        options: chart_options
+                                    }
+                                );
+                            </script>
+                        {% endwith %}
+                    {% endwith %}
+                {% endif %}
             {% endfor %}
+        
+            {# display message, if no charts are shown#}
+            <div id="chart_warnings"></div>
+            <script type="text/javascript">
+                const charts = document.querySelectorAll('[id^="chart-"]');
+                if (charts.length === 0) {
+                    document.getElementById("chart_warnings").innerHTML = "<strong>{% trans 'Note' context "notice, used at beginning of a paragraph" %}:</strong> {% trans 'Please select a different timespan to display more data.' %}";
+                }
+            </script>
         </div>
     {% endif %}
-    
 {% endblock %}

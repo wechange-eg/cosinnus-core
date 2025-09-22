@@ -20,6 +20,9 @@ idea_object_created = dispatch.Signal()  # providing_args=["idea"]
 """ Called after a new user and their profile is freshly created """
 userprofile_created = dispatch.Signal()  # providing_args=["profile"]
 
+""" Called after a user profile avatar is changed """
+userprofile_avatar_updated = dispatch.Signal()  # providing_args=["profile"]
+
 """ Called after a new user voluntarily signs up on the portal, using the web frontend """
 user_registered = dispatch.Signal()  # providing_args=["user"]
 
@@ -98,6 +101,9 @@ group_apps_deactivated = dispatch.Signal()  # providing_args=["group", "apps"]
 
 """ Called after a CosinnusGroupMembership for a user has changed """
 group_membership_has_changed = dispatch.Signal()  # providing_args=["instance", "deleted"]
+
+""" Called after the nextcloud group has been initialized """
+group_nextcloud_group_initialized = dispatch.Signal()  # providing_args=["group"]
 
 
 """ Called when a group was invited to an organization """
