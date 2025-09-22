@@ -198,6 +198,12 @@ class BaseUserProfile(
             'Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`'
         ),
     )
+    inactivity_notification_sent_at = models.DateTimeField(
+        _('Inactivity notification sent at'),
+        default=None,
+        blank=True,
+        null=True,
+    )
     scheduled_for_deletion_at = models.DateTimeField(
         _('Scheduled for Deletion at'),
         default=None,
