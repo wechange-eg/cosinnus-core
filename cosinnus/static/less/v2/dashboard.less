@@ -544,26 +544,36 @@
 			line-height: 35px;
 			width: 100%;
 			white-space: nowrap;
-			color: @background-color;
-			background-color: @text-color-extra-pale;
+			color: @text-color;
+			background-color: @color-light-gray;
 			font-weight: normal;
+			border: 1px solid @color-medium-gray;
 			
 			&:hover, &:active, &:focus {
 				text-decoration: none;
 			}
+
 			&:hover, &:active {
 				background-color: @text-highlight-color;
+				border-color: @text-highlight-color;
+				color: @background-color;
+				
+				.attached-icon {
+					i.fas {
+						color: @background-color;
+					}
+				}
 			}
 			
 			.attached-icon {
 							
 				i.fas {
-					color: @background-color;
+					color: @text-color;
 					font-size: 14px;
 					margin: 4px 0px 0 5px;
 					vertical-align: middle;
 				}
-			} 
+			}
 			&>div {
 				margin: 0 5px;
 			}
@@ -585,10 +595,6 @@
 				padding: 0 5px;
 				i.fas {
 					font-size: 16px;
-				}
-				&:hover i.fas {
-					
-					color: @text-color-extra-pale;
 				}
 			}
 		}
