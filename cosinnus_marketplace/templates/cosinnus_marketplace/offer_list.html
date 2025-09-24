@@ -16,10 +16,6 @@
 
 {% block content %}
 	{{ block.super }}
-	
-	{% comment %}  
-	Disabled for now to keep the view more compact. There is an add button in the left navbar.
-	
     {% if user|can_create_objects_in:group %} 
 	    <!-- a box with semi transparent background -->
 	    <div class="content-box regular-space">
@@ -55,8 +51,6 @@
 	        </form>
 	    </div>    
     {% endif %}
-	{% endcomment %}
-    
     
     {% trans "Delete" as btn_label %}
     {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_delete_element($.cosinnus.getListOfCheckedItems());{% endcaptureas %}

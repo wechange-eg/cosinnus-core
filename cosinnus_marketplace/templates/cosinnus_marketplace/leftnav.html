@@ -63,21 +63,6 @@
             </li>
         </ul>
     </button>
-
-    {% if user|can_create_objects_in:group %}
-        <button type="button" class="btn w100 btn-emphasized large-space" href="{{ marketplace_add_page }}">
-            <ul class="media-list">
-                <li class="media">
-                    <span class="pull-left">
-                        <i class="fa fa-plus"></i>
-                    </span>
-                    <div class="media-body">
-                        {% trans "Add Offer" %}
-                    </div>
-                </li>
-            </ul>
-        </button>
-    {% endif %}
 {% endif %}
 
 {% block leftnav_extra %}{% endblock leftnav_extra %}
