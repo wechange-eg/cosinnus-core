@@ -9,9 +9,10 @@
 			data-target="ajax-form-delete-element" data-ajax-form-id="{{ delete_form_id }}">
 						
 		<div class="comment-dropdown v2-dropdown dropdown">
-	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	            <i class="fas fa-ellipsis-h"></i>
-	        </a>
+				{# TODO(a11y): i18n the aria label #}
+				<button class="dropdown-toggle" data-toggle="dropdown" aria-label="toggle dropdown">
+					<i class="fas fa-ellipsis-h"></i>
+				</button>
 	        <ul class="dropdown-menu">
 	        	{% if user|has_write_access:object %}
 		        	<li>
