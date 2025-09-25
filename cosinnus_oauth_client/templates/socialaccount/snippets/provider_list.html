@@ -7,15 +7,15 @@
 			{% if socialaccount_providers|length == 1 %}
 				{% if type == 'signup'%}
 					{% if socialaccount_providers.0.id == 'wechange' %}
-					<h2>{% trans 'Sign up with' %} <img src="{% static 'images/sso-logo.png'%}" class="sso-icon"></h2>
+                        <h2>{% trans 'Sign up with' %} <img src="{% static 'images/sso-logo.png'%}" class="sso-icon"></h2>
 					{% else %}
-					<h2>{% blocktrans with provider=socialaccount_providers.0.id %}Sign up with {{ provider}} Account{% endblocktrans %}</h2>
+                        <h2>{% blocktrans with provider=socialaccount_providers.0.name %}Sign up with {{ provider}} Account{% endblocktrans %}</h2>
 					{% endif %}
 				{% elif type == 'login' %}
 					{% if socialaccount_providers.0.id == 'wechange' %}
-					<h2>{% trans 'Log in with' %} <img src="{% static 'images/sso-logo.png'%}" class="sso-icon"></h2>
+                        <h2>{% trans 'Log in with' %} <img src="{% static 'images/sso-logo.png'%}" class="sso-icon"></h2>
 					{% else %}
-					<h2>{% blocktrans with provider=socialaccount_providers.0.id %}Log in with {{ provider}} Account{% endblocktrans %}</h2>
+                        <h2>{% blocktrans with provider=socialaccount_providers.0.name %}Log in with {{ provider}} Account{% endblocktrans %}</h2>
 					{% endif %}
 				{% endif %}
 			{% else %}
@@ -28,11 +28,14 @@
 
 			<div class="cosinnus-field">
 				<div class="field-description">
-				{% if socialaccount_providers|length == 1 %}
-				{% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME provider=socialaccount_providers.0.id|upper %} {{ portal_name }} is part of the {{provider }} community. You can use your {{provider}} account to login on {{ portal_name }}.{% endblocktrans %}
-
+            {% if socialaccount_providers|length == 1 %}
+                    {% if socialaccount_providers.0.id == 'wechange' %}
+                        {% blocktrans with portal_name=COSINNUS_CURRENT_PORTAL.name provider=socialaccount_providers.0.id|upper %} {{ portal_name }} is part of the {{provider }} community. You can use your {{provider}} account to login on {{ portal_name }}.{% endblocktrans %}
+                    {% else %}
+                        {% blocktrans with portal_name=COSINNUS_CURRENT_PORTAL.name provider=socialaccount_providers.0.name %}You can use your {{provider}} account to login on {{ portal_name }}.{% endblocktrans %}
+                    {% endif %}
 				{% else %}
-				{% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %} {{ portal_name }} is part of the following communities. If you have an account on one of these communities you can use it to login on {{ portal_name }}. {% endblocktrans %}
+                    {% blocktrans with portal_name=COSINNUS_CURRENT_PORTAL.name %} {{ portal_name }} is part of the following communities. If you have an account on one of these communities you can use it to login on {{ portal_name }}. {% endblocktrans %}
 				{% endif %}
 				</div>
 			</div>
@@ -45,9 +48,9 @@
 						<i class="fa fa-hand-o-right"></i>
 					</span>
 					{% if type == 'signup'%}
-					<div class="media-body">{% blocktrans with provider_id=provider.id|upper %}Sign up with {{ provider_id }}{% endblocktrans %}</div>
+                        <div class="media-body">{% blocktrans with provider_id=provider.name %}Sign up with {{ provider_id }}{% endblocktrans %}</div>
 					{% elif type == 'login' %}
-					<div class="media-body">{% blocktrans with provider_id=provider.id|upper %}Login with {{ provider_id }}{% endblocktrans %}</div>
+                        <div class="media-body">{% blocktrans with provider_id=provider.name %}Login with {{ provider_id }}{% endblocktrans %}</div>
 					{% endif %}
 				</li>
 			</ul>
