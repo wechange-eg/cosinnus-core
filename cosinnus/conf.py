@@ -1098,6 +1098,10 @@ class CosinnusConf(AppConf):
     # (str classpath)
     V3_MENU_PORTAL_LINKS_DROPIN = None
 
+    # SSO provider infos used in the v3 frontend
+    # Example: [{'login_url': '/oidc/keycloak/login/?process=login', 'name': 'Keycloak'}]
+    V3_SSO_PROVIDER = []
+
     # default CosinnusPortal logo image url, shown in the top left navigation bar
     # (will be used with a `static()`) call
     PORTAL_LOGO_NAVBAR_IMAGE_URL = 'img/v2_navbar_brand.png'
@@ -1108,6 +1112,9 @@ class CosinnusConf(AppConf):
 
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
+
+    # whether to disable the login in the v3 frontend and hide the login form
+    USER_LOGIN_DISABLED = False
 
     # whether profile editing via the view and api should be possible
     DISABLE_PROFILE_EDITING = False
@@ -1349,12 +1356,15 @@ class CosinnusConf(AppConf):
     # set to True if you want to use this instance as oauth provider for other platforms
     IS_OAUTH_PROVIDER = False
 
-    # set to True if you want to enable oauth2 social login with another instance (this other
-    # instance then has to have IS_OAUTH_PROVIDER to True). Add the url of the other instane as
-    # OAUTH_SERVER_BASEURL
+    # set to True if you want to enable oauth2 social login with another instance (this other instance then has to have
+    # IS_OAUTH_PROVIDER to True). Add the url of the other instane as OAUTH_SERVER_BASEURL
+    # Also supports other SSO client behaviour via the allauth SOCIALACCOUNT_PROVIDERS setting.
     IS_OAUTH_CLIENT = False
     OAUTH_SERVER_BASEURL = None
     OAUTH_SERVER_PROVIDER_NAME = 'wechange'
+
+    # Enable connecting / disconnecting allauch social-accounts with portal accounts
+    SSO_ENABLE_CONNECTING_ACCOUNT = False
 
     # whether SDGs should be shown in group/project forms and detail templates
     ENABLE_SDGS = False
