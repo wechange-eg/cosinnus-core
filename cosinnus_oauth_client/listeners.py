@@ -1,4 +1,4 @@
-from allauth.socialaccount.signals import social_account_added, social_account_removed
+from allauth.socialaccount.signals import social_account_added, social_account_removed, social_account_updated
 from django.contrib import messages
 from django.dispatch import receiver
 from django.template.loader import render_to_string
@@ -43,3 +43,17 @@ def notify_user_on_successfull_disconnect(sender, **kwargs):
     user = request.user
     provider = kwargs.get('socialaccount').provider
     send_disconnect_mail(user, provider, request)
+
+
+@receiver(social_account_updated)
+def sync_user_email(sender, **kwargs):
+    """
+    Syncs the provider email with the user email.
+    This hook triggers after an SSO login and provides user emails in the SSO provider.
+    """
+    sociallogin = kwargs.get('sociallogin')
+    if sociallogin and sociallogin.email_addresses:
+        user = sociallogin.user
+        if user.email not in sociallogin.email_addresses:
+            user.email = sociallogin.email_addresses[0].email
+            user.save()
