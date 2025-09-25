@@ -502,10 +502,15 @@ if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:
 if not is_integrated_portal() and not is_sso_portal():
     urlpatterns += [
         path('profile/edit/', profile.update_view, name='profile-edit'),
-        path('profile/change_email/', user.change_email_view, name='user-change-email'),
-        path('profile/change_email/pending/', user.change_email_pending_view, name='user-change-email-pending'),
         path('signup/', user.user_create, name='user-add'),
     ]
+
+    if not settings.COSINNUS_IS_OAUTH_CLIENT and not settings.COSINNUS_USER_LOGIN_DISABLED:
+        # disable email change in SSO client mode without login
+        urlpatterns += [
+            path('profile/change_email/', user.change_email_view, name='user-change-email'),
+            path('profile/change_email/pending/', user.change_email_pending_view, name='user-change-email-pending'),
+        ]
 
 # some more user management not allowed in integrated mode
 if not is_integrated_portal():
