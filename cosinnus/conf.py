@@ -1051,6 +1051,8 @@ class CosinnusConf(AppConf):
         '^/.*/.*/conference/feed/.*/',
         # old captcha
         '^/captcha/',
+        # allauth provider urls
+        '^/oidc/*',
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
