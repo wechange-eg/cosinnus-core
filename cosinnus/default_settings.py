@@ -335,6 +335,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'allauth',
         'allauth.account',
         'allauth.socialaccount',
+        'allauth.socialaccount.providers.openid_connect',
         # 'django_extensions',
         'django_filters',
         'django_select2',
