@@ -852,6 +852,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     ACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusAccountAdapter'
     SOCIALACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusSocialAccountAdapter'
     SOCIALACCOUNT_AUTO_SIGNUP = False
+    SOCIALACCOUNT_LOGIN_ON_GET = True
     SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
     SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
