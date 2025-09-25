@@ -1221,10 +1221,6 @@ class CosinnusConf(AppConf):
     # usage: see `USERPROFILE_EXTRA_FIELDS`
     GROUP_EXTRA_FIELDS = {}
 
-    # extra fields for the MitwirkomatSettings model.
-    # usage: see `USERPROFILE_EXTRA_FIELDS`
-    MITWIRKOMAT_EXTRA_FIELDS = {}
-
     # a i18n str that explains the special password rules to the user,
     # can be markdown.
     # will display default field legend if None
@@ -1688,6 +1684,14 @@ class CosinnusConf(AppConf):
 
     # default value for the answers for an unfilled form, see `MitwirkomatSettings.QUESTION_CHOICES`
     MITWIRKOMAT_QUESTION_DEFAULT_VALUE = '0'
+
+    # extra fields for the MitwirkomatSettings model.
+    # usage: see `USERPROFILE_EXTRA_FIELDS`
+    MITWIRKOMAT_EXTRA_FIELDS = {}
+
+    # options and to-export-string conversion settings for defined `MITWIRKOMAT_EXTRA_FIELDS`
+    # see `` for docs
+    MITWIRKOMAT_FILTER_OPTIONS = {}
 
     # disable the group banner nag screen
     MITWIRKOMAT_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
