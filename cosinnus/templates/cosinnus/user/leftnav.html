@@ -132,7 +132,7 @@
     </ul>
 </button>
 
-{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL and not SETTINGS.COSINNUS_USER_LOGIN_DISABLED %}
 	{% if request.user.has_usable_password %}
 	<button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized fine-space" href="{% url 'password_change' %}">
 	    <ul class="media-list">
