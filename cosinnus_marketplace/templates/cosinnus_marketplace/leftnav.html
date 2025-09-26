@@ -78,53 +78,6 @@
             </ul>
         </button>
     {% endif %}
-    
-    {% if filter.get_categories_grouped %}
-		<form action="." method="GET" class="regular-space clearfix" >
-		
-		    <!-- a box with semi transparent background -->
-		    <div class="content-box">
-		    	<input type="hidden" id="input_tab_param" name="tab" value="{{ request.GET.tab }}" />
-		    
-				{# set all existing filters as inputs for the GET request #}        
-		        {% for filter_key in 'o,creator'|makelist %}
-		        	{% for filter_value in filter.data|querydictlist:filter_key %}
-		        		<input type="hidden" name="{{ filter_key }}" value="{{ filter_value }}" />
-		        	{% endfor %}
-		        {% endfor %}
-		        
-	    		<div class="row large-space">
-	    			{% for group, categories in filter.get_categories_grouped %}
-			            <div class="col-xs-12 large-space">
-		    				<b>{% if group == 'zzz_misc' %}{% trans "Misc" %}{% else %}{{ group }}{% endif %}</b>
-				        	{% for category in categories %}
-				        		<br/>
-					            <label for="id_categories_{{ category.id }}">
-					            	<input id="id_categories_{{ category.id }}" name="categories" 
-					            			type="checkbox" value="{{ category.id }}"{% if category.id in filter.data|querydictlist:'categories' or category.id|stringify in filter.data|querydictlist:'categories' %}checked="checked"{% endif %}>
-					            	<span>{{ category.name }}</span>
-					        	</label>
-				        	{% endfor %}
-			        	</div>
-			        {% endfor %}
-		        </div>
-	    	</div>
-			<button type="submit" class="btn btn-emphasized large-space">
-	            <ul class="media-list">
-	                <li class="media">
-	                    <span class="pull-left">
-	                        <i class="fa fa-filter"></i>
-	                    </span>
-	                    <div class="media-body">
-	                        {% trans "Filter" %}
-	                    </div>
-	                </li>
-	            </ul>
-	        </button>        
-	        
-	    </form>
-    {% endif %}
-    
 {% endif %}
 
 {% block leftnav_extra %}{% endblock leftnav_extra %}
