@@ -46,7 +46,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "From" %}
 					<i class="fa fa-calendar"></i>
-					<input readonly ="readonly" class="calendar-date-time-chooser-date" />
+					<input readonly ="readonly" class="calendar-date-time-chooser-date" aria-label="{#Translators: __INCLUDE_JS_PO__#}{% trans "From" %}" />
 					<input class="calendar-date-time-chooser-hiddendate" id="id_start_0" name="start_0"
 						type="hidden" value="{{ fromDate }}"
 					>
@@ -170,7 +170,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	                    <td>
 	                        <div class="onoffswitch">
 	                            <input type="checkbox" name="onoffswitch-exchange" class="onoffswitch-checkbox check-exchange" id="check-exchange" {% if exchange %}checked{% endif %}>
-	                            <label class="onoffswitch-label" for="check-exchange">
+	                            <label class="onoffswitch-label" for="check-exchange" aria-label="{% trans "Include content from other platforms" %}">
 	                                <span class="onoffswitch-inner"></span>
 	                                <span class="onoffswitch-switch"></span>
 	                            </label>
@@ -195,7 +195,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 						<td>
 							<div class="onoffswitch">
 								<input type="checkbox" name="onoffswitch-ignore-location" class="onoffswitch-checkbox check-ignore-location" id="check-ignore-location" {% if not ignoreLocation %}checked{% endif %}>
-								<label class="onoffswitch-label" for="check-ignore-location">
+								<label class="onoffswitch-label" for="check-ignore-location" aria-label="{% trans "In map area" %}">
 									<span class="onoffswitch-inner"></span>
 									<span class="onoffswitch-switch"></span>
 								</label>
