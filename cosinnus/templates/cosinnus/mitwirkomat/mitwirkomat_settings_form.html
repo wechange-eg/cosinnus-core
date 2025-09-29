@@ -86,12 +86,6 @@
             {% captureas description_placeholder %}{% if group.description_long %}{{ group.description_long }}{% else %}{% if group.description %}{{ group.description }}{% else %}{{ description_label }}{% endif %}{% endif %}{% endcaptureas %}
             {% include 'cosinnus/fields/default_field.html' with field=form.description large_field=True placeholder=description_placeholder %}
 
-            {# Dynamic Filter Fields #}
-            {% comment %} The fields in this block are generated from `settings.COSINNUS_MITWIRKOMAT_EXTRA_FIELDS` {% endcomment %}
-            {% block mitwirkomat_dynamic_fields %}
-                {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form %}
-            {% endblock %}
-
             {# Avatar Field #}
             {% captureas avatar_label %}{{ group.trans.MITWIRKOMAT_FIELD_AVATAR_LABEL }}{% endcaptureas %}
             {% captureas avatar_legend %}
@@ -113,6 +107,12 @@
                 </div>
             {% endcaptureas %}
             {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
+
+            {# Dynamic Filter Fields #}
+            {% comment %} The fields in this block are generated from `settings.COSINNUS_MITWIRKOMAT_EXTRA_FIELDS` {% endcomment %}
+            {% block mitwirkomat_dynamic_fields %}
+                {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form %}
+            {% endblock %}
 
             {# Link explanation Field #}
             {% trans "Link" as link_label %}
