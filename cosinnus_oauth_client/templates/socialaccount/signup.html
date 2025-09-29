@@ -6,7 +6,7 @@
 {% block main_page %}
 
 {% captureas title %}
-{% blocktrans with provider=account.get_provider.id|upper %}Login with {{ provider }}{% endblocktrans %}
+{% blocktrans with provider=account.get_provider.name %}Login with {{ provider }}{% endblocktrans %}
 {% endcaptureas %}
 
 
@@ -53,7 +53,7 @@
 </div>
 
 <p class="no-horizontal-padding no-vertical-padding large-space">
-	{% blocktrans with provider_name=account.get_provider.id|upper portal_name=SETTINGS.COSINNUS_PORTAL_NAME %} {{ portal_name }} wants access to the following information of your {{ provider_name }} account{% endblocktrans %}:
+	{% blocktrans with provider_name=account.get_provider.name portal_name=COSINNUS_CURRENT_PORTAL.name %} {{ portal_name }} wants access to the following information of your {{ provider_name }} account{% endblocktrans %}:
 </p>
 
 <div class="large-space">

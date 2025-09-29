@@ -142,7 +142,7 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
 
     def send_welcome_mail(self, user, request):
         data = get_common_mail_context(request)
-        provider = self.sociallogin.account.provider
+        provider = self.sociallogin.account.get_provider().name
         data.update({'user': user, 'provider': provider})
         subj_user = render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup_subj.txt', data)
         text = textfield(render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup.html', data))
