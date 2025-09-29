@@ -9,7 +9,7 @@ from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.mitwirkomat import MitwirkomatSettings
 from cosinnus.templatetags.cosinnus_tags import safe_text
-from cosinnus.utils.mitwirkomat import MitwirkomatFilterDirectGenerator
+from cosinnus.utils.mitwirkomat import MitwirkomatFilterExporterUnformatted
 
 if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
 
@@ -81,7 +81,7 @@ if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
                 #   data-b='123'></span>"`.
                 # It is important to use single quotes for the attributes.
                 beschreibung_filter = ''  # `<span class='filter-values' data-a='xyz' data-b='123'></span>`
-                filter_attr_str = self._generate_filter_attribute_str(mom)
+                filter_attr_str = self._export_filter_attribute_str(mom)
                 if filter_attr_str:
                     beschreibung_filter = f"<span class='filter-values' {filter_attr_str}></span>"
 
@@ -98,7 +98,7 @@ if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
                 all_rows.extend(rows)
             return all_rows
 
-        def _generate_filter_attribute_str(self, mom):
+        def _export_filter_attribute_str(self, mom):
             """For a given MitwirkomatSettings instance, return a generated filter string for the mitwirkomat CSV.
             @param mom: instance of `MitwirkomatSettings`
             @return: str like "# `data-a='xyz' data-b='123'`", empty string if not set and no fallback set or available
@@ -110,8 +110,8 @@ if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
                     # TODO get fallback value
                     pass
 
-                generator = field_class.mom_filter_generator or MitwirkomatFilterDirectGenerator
-                filter_attrs.append(generator.generate_attribute_str_from_value(field_value, field_class, mom))
+                exporter = field_class.mom_filter_exporter or MitwirkomatFilterExporterUnformatted
+                filter_attrs.append(exporter.export_mom_attribute(field_value, field_class, mom))
             return ''.join(filter_attrs)
 
         def finalize_response(self, request, response, *args, **kwargs):
