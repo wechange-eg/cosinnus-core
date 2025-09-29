@@ -112,7 +112,7 @@ if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
 
                 exporter = field_class.mom_filter_exporter or MitwirkomatFilterExporterUnformatted
                 filter_attrs.append(exporter.export_mom_attribute(field_value, field_class, mom))
-            return ''.join(filter_attrs)
+            return ' '.join(filter_attrs)
 
         def finalize_response(self, request, response, *args, **kwargs):
             """
