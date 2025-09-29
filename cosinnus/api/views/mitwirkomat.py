@@ -110,7 +110,7 @@ if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
                     # TODO get fallback value
                     pass
 
-                generator = field_class.mom_generator or MitwirkomatFilterDirectGenerator
+                generator = field_class.mom_filter_generator or MitwirkomatFilterDirectGenerator
                 filter_attrs.append(generator.generate_attribute_str_from_value(field_value, field_class, mom))
             return ''.join(filter_attrs)
 

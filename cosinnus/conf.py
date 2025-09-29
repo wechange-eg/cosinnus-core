@@ -1689,10 +1689,6 @@ class CosinnusConf(AppConf):
     # usage: see `USERPROFILE_EXTRA_FIELDS`
     MITWIRKOMAT_EXTRA_FIELDS = {}
 
-    # options and to-export-string conversion settings for defined `MITWIRKOMAT_EXTRA_FIELDS`
-    # see `` for docs
-    MITWIRKOMAT_FILTER_OPTIONS = {}
-
     # disable the group banner nag screen
     MITWIRKOMAT_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
 

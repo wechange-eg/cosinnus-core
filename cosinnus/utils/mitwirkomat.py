@@ -11,7 +11,7 @@ class MitwirkomatFilterDirectGenerator:
 
     @classmethod
     def generate_attribute_str_from_value(cls, value, field_class, mom):
-        return f"{field_class.mom_attr_name}='{value}'"
+        return f"{field_class.mom_filter_attr_name}='{value}'"
 
 
 class MitwirkomatFilterGeneratorMultipleCombined(MitwirkomatFilterDirectGenerator):
@@ -21,19 +21,19 @@ class MitwirkomatFilterGeneratorMultipleCombined(MitwirkomatFilterDirectGenerato
 
     @classmethod
     def generate_attribute_str_from_value(cls, value, field_class, mom):
-        return f"{field_class.mom_attr_name}='{' '.join(value)}'"
+        return f"{field_class.mom_filter_attr_name}='{' '.join(value)}'"
 
 
 class CosinnusMitwirkomatDynamicField(CosinnusDynamicField):
     """Definition for an extended dynamic extra field, e.g. for `settings.COSINNUS_MITWIRKOMAT_EXTRA_FIELDS`"""
 
-    mom_generator = None  # a class ref to an implementing class of MitwirkomatFilterGeneratorBase
-    mom_attr_name = None  # for filter generators that generate a single tag, the complete name of that tag
+    mom_filter_generator = None  # a class ref to an implementing class of MitwirkomatFilterGeneratorBase
+    mom_filter_attr_name = None  # for filter generators that generate a single tag, the complete name of that tag
 
     def __init__(self, **kwargs):
         # sanity check
         super().__init__(**kwargs)
-        if not self.mom_generator:
+        if not self.mom_filter_generator:
             raise ImproperlyConfigured(
-                f'CosinnusMitwirkomatDynamicField "{self.name}" requires kwarg "mom_generator" to be set!'
+                f'CosinnusMitwirkomatDynamicField "{self.name}" requires kwarg "mom_filter_generator" to be set!'
             )
