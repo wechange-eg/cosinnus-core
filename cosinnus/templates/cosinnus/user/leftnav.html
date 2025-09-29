@@ -132,7 +132,7 @@
     </ul>
 </button>
 
-{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL and not SETTINGS.COSINNUS_USER_LOGIN_DISABLED %}
 	{% if request.user.has_usable_password %}
 	<button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized fine-space" href="{% url 'password_change' %}">
 	    <ul class="media-list">
@@ -196,7 +196,7 @@
 </button>
 {% endif %}
 
-{% if SETTINGS.COSINNUS_IS_OAUTH_CLIENT %}
+{% if SETTINGS.COSINNUS_IS_OAUTH_CLIENT and SETTINGS.COSINNUS_SSO_ENABLE_CONNECTING_ACCOUNT %}
 {% get_providers as socialaccount_providers %}
 {% for provider in socialaccount_providers %}
 <button type="button" class="btn w100 btn-{% if view == "socialaccount_connections" %}extra-{% endif %}emphasized regular-space" href="{% url 'socialaccount_connections' %}?provider={{ provider.id }}">

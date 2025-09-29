@@ -139,10 +139,13 @@ NO_AUTO_REDIRECTS = (
 # urls for user and profile editing by the user
 PROFILE_EDITING_URLS = [
     reverse('cosinnus:profile-edit'),
-    reverse('cosinnus:user-change-email'),
-    reverse('cosinnus:user-change-email-pending'),
     reverse('cosinnus:frontend-api:api-user-profile'),
 ]
+if not settings.COSINNUS_IS_OAUTH_CLIENT and not settings.COSINNUS_USER_LOGIN_DISABLED:
+    PROFILE_EDITING_URLS += [
+        reverse('cosinnus:user-change-email'),
+        reverse('cosinnus:user-change-email-pending'),
+    ]
 
 
 def initialize_cosinnus_after_startup():
