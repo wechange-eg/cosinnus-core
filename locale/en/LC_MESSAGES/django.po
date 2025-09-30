@@ -4441,6 +4441,9 @@ msgstr ""
 msgid "Change email address"
 msgstr "Create Project"
 
+msgid "The email address can be changed in the SSO provider."
+msgstr ""
+
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
 msgstr ""
@@ -12880,6 +12883,10 @@ msgstr ""
 
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+msgstr ""
+
+#, python-format
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
 
 #, python-format

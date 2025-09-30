@@ -586,12 +586,15 @@ class PortalSettingsView(APIView):
             },
             'cosinnusIsPrivatePortal': settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN,
             'cosinnusIsSignupDisabled': not settings.COSINNUS_USER_SIGNUP_ENABLED,
+            'cosinnusIsLoginDisabled': settings.COSINNUS_USER_LOGIN_DISABLED,
             'cosinnusCloudEnabled': settings.COSINNUS_CLOUD_ENABLED,
             'cosinnusCloudNextcloudUrl': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
             'signupCredentialsScreenMessage': None,
             'usersNeedActivation': portal.users_need_activation,
             'currentLanguage': get_language(),
             'userProfileVisibilityLocked': bool(settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None),
+            'cosinnusIsSSOLoginEnabled': settings.COSINNUS_IS_OAUTH_CLIENT,
+            'cosinnusSSOProvider': settings.COSINNUS_V3_SSO_PROVIDER,
             # 'setup': {'additionalSteps': ... }},  # set manually
             # 'theme': {...},  # set manually. example:
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},

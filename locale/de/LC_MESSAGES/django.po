@@ -4283,6 +4283,9 @@ msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
 msgid "Change email address"
 msgstr "E-Mail Adresse ändern"
 
+msgid "The email address can be changed in the SSO provider."
+msgstr "Die E-Mail-Adresse kann im SSO Anbieter geädert werden."
+
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
 msgstr "Zeitzone: %(TIME_ZONE)s"
@@ -12881,6 +12884,9 @@ msgstr "Mit Facebook einloggen"
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
 msgstr " %(portal_name)s ist Teil der %(provider)s Gemeinde. Du kannst sich mit deinem %(provider)s-Konto bei %(portal_name)s anmelden."
+
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
+msgstr "Du kannst sich mit deinem %(provider)s-Konto bei %(portal_name)s anmelden."
 
 #, python-format
 msgid " %(portal_name)s is part of the following communities. If you have an account on one of these communities you can use it to login on %(portal_name)s. "
