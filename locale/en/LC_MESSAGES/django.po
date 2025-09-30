@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-18 13:45+0200\n"
+"POT-Creation-Date: 2025-09-30 14:43+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2757,44 +2757,6 @@ msgstr "Edit Project"
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr ""
 
-msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
-msgstr ""
-
-msgid "Done"
-msgstr ""
-
-msgid "Configure"
-msgstr ""
-
-msgid "Withdraw request"
-msgstr ""
-
-msgid "Join"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to withdraw your join request to „%(title)s“?"
-msgstr "Do you really want to withdraw your join request to project „%(title)s“?"
-
-msgid "Withdraw Join Request"
-msgstr ""
-
-#, python-format
-msgid "Do you wish to request to join „%(title)s“?"
-msgstr ""
-
-msgid "Add widget"
-msgstr ""
-
-msgid "Informations"
-msgstr ""
-
-msgid "No informations set"
-msgstr ""
-
-msgid "Back to Project Overview"
-msgstr ""
-
 msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
 msgstr ""
 
@@ -4359,12 +4321,26 @@ msgctxt "join request pending team button second item"
 msgid "Requested"
 msgstr ""
 
+#, python-format
+msgid "Do you really want to withdraw your join request to „%(title)s“?"
+msgstr "Do you really want to withdraw your join request to project „%(title)s“?"
+
+msgid "Withdraw Join Request"
+msgstr ""
+
 msgctxt "join team button first item"
 msgid "Join"
 msgstr ""
 
 msgctxt "join team button second item"
 msgid "Now"
+msgstr ""
+
+#, python-format
+msgid "Do you wish to request to join „%(title)s“?"
+msgstr ""
+
+msgid "Join"
 msgstr ""
 
 msgid "View on Facebook"
@@ -6089,6 +6065,20 @@ msgstr ""
 #, fuzzy
 msgid "Image preview"
 msgstr "Project overview"
+
+#, python-format
+msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
+msgstr ""
+
+msgid "Currently set as location"
+msgstr ""
+
+msgid "No location set yet"
+msgstr ""
+
+#, python-format
+msgid "Change location in %(group_settings_label)s"
+msgstr ""
 
 msgid "Link"
 msgstr ""
@@ -8681,6 +8671,9 @@ msgid "Team Description"
 msgstr ""
 
 msgid "About Us"
+msgstr ""
+
+msgid "Informations"
 msgstr ""
 
 msgid "Now"
