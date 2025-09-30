@@ -83,45 +83,11 @@
 
     <div class="content-box large-space">
         <div>
-            {#  filter-dropdowns are shown first in single column, second in two-column #}
-            <div class="offer-filter-dropdowns">
-                {% for field in filter.form %}
+            {% for field in filter.form %}
                 {% if field.name == 'creator' or field.name == 'o' %}
                     {{ field }}
                 {% endif %}
             {% endfor %}
-            </div>
-            {% if filter.get_categories_grouped %}
-                <div class="category-form-container">
-                    <form action="." method="GET">
-
-                        <input type="hidden" id="input_tab_param" name="tab" value="{{ request.GET.tab }}"/>
-
-                        {# set all existing filters as inputs for the GET request #}
-                        {% for filter_key in 'o,creator'|makelist %}
-                            {% for filter_value in filter.data|querydictlist:filter_key %}
-                                <input type="hidden" name="{{ filter_key }}" value="{{ filter_value }}"/>
-                            {% endfor %}
-                        {% endfor %}
-
-                        {% for group, categories in filter.get_categories_grouped %}
-                            <label><b>{% if group == 'zzz_misc' %}{% trans "Misc" %}{% else %}
-                                {{ group }}{% endif %}</b></label>
-
-                            {% for category in categories %}
-                                <label for="id_categories_{{ category.id }}">
-                                    <input id="id_categories_{{ category.id }}" name="categories"
-                                           onchange="this.form.submit()"
-                                           type="checkbox" value="{{ category.id }}"
-                                           {% if category.id in filter.data|querydictlist:'categories' or category.id|stringify in filter.data|querydictlist:'categories' %}checked="checked"{% endif %}>
-                                    <span>{{ category.name }}</span>
-                                </label>
-                            {% endfor %}
-                            <br/>
-                        {% endfor %}
-                    </form>
-                </div>
-            {% endif %}
 
             {% for filter_param, chosen_value, label, type in active_filters %}
                 <span class="inline-list nowrap">
@@ -136,7 +102,42 @@
 				        </span>
 				    </span>
             {% endfor %}
-		</div>
+            <div class="clearfix"></div>
+
+            {% if filter.get_categories_grouped %}
+                <form action="." method="GET">
+                    <input type="hidden" id="input_tab_param" name="tab" value="{{ request.GET.tab }}"/>
+                    {# set all existing filters as inputs for the GET request #}
+                    {% for filter_key in 'o,creator'|makelist %}
+                        {% for filter_value in filter.data|querydictlist:filter_key %}
+                            <input type="hidden" name="{{ filter_key }}" value="{{ filter_value }}"/>
+                        {% endfor %}
+                    {% endfor %}
+
+                    <div class="marketplace-category-filter">
+                        {% for group, categories in filter.get_categories_grouped %}
+                            <div class="category_group">
+                                <label><b>{% if group == 'zzz_misc' %}{% trans "Misc" %}{% else %}
+                                    {{ group }}{% endif %}</b></label>
+                                <div class="category_list">
+                                    {% for category in categories %}
+                                        <div>
+                                            <label for="id_categories_{{ category.id }}">
+                                                <input id="id_categories_{{ category.id }}" name="categories"
+                                                       onchange="this.form.submit()"
+                                                       type="checkbox" value="{{ category.id }}"
+                                                       {% if category.id in filter.data|querydictlist:'categories' or category.id|stringify in filter.data|querydictlist:'categories' %}checked="checked"{% endif %}>
+                                                <span>{{ category.name }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            {% endif %}
+        </div>
         
         <div class="tab-content">
 			<div class="tab-pane {% if not request.GET.tab or request.GET.tab == 'all' %}active{% endif %}" id="all" >
