@@ -1697,6 +1697,14 @@ class CosinnusConf(AppConf):
     # default value for the answers for an unfilled form, see `MitwirkomatSettings.QUESTION_CHOICES`
     MITWIRKOMAT_QUESTION_DEFAULT_VALUE = '0'
 
+    # extra fields for the MitwirkomatSettings model.
+    # usage: see `USERPROFILE_EXTRA_FIELDS`
+    MITWIRKOMAT_EXTRA_FIELDS = {}
+
+    # if set, include the inherited first group location as a span filter in the
+    # mitwirkomat API and show the location info field in the settings form
+    MITWIRKOMAT_INCLUDE_LOCATION = True
+
     # disable the group banner nag screen
     MITWIRKOMAT_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
 

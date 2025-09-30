@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-29 12:57+0200\n"
+"POT-Creation-Date: 2025-09-30 14:43+0200\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6068,6 +6068,20 @@ msgstr ""
 #, fuzzy
 msgid "Image preview"
 msgstr "Project overview"
+
+#, python-format
+msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
+msgstr ""
+
+msgid "Currently set as location"
+msgstr ""
+
+msgid "No location set yet"
+msgstr ""
+
+#, python-format
+msgid "Change location in %(group_settings_label)s"
+msgstr ""
 
 msgid "Link"
 msgstr ""

@@ -72,6 +72,16 @@ class MitwirkomatSettings(models.Model):
         verbose_name=_('User-set answers to Mitwirk-O-Mat questions'),
     )
 
+    # dynamic fields for extra filters per portal. default are none
+    dynamic_fields = models.JSONField(
+        default=dict,
+        blank=True,
+        verbose_name=_('Dynamic extra fields'),
+        help_text='Extra mitwirkomat filter fields for each portal, '
+        'as defined in `settings.COSINNUS_MITWIRKOMAT_EXTRA_FIELDS`',
+        encoder=DjangoJSONEncoder,
+    )
+
     class Meta:
         verbose_name = _('Mitwirk-O-Mat Settings')
         verbose_name_plural = _('Mitwirk-O-Mat Settings')
