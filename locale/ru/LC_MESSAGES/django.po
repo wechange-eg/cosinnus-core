@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-18 13:45+0200\n"
+"POT-Creation-Date: 2025-09-30 14:43+0200\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2700,44 +2700,6 @@ msgstr "Посмотреть на странице"
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Введите 4 заглавных буквы искривленного изображения"
 
-msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
-msgstr "Скоро здесь появится новый микросайт. Страница находится на стадии активной разработки, поэтому просим прощения, если что-то пока работает не так, как нужно!"
-
-msgid "Done"
-msgstr "Готово"
-
-msgid "Configure"
-msgstr "Настроить"
-
-msgid "Withdraw request"
-msgstr "Отозвать запрос"
-
-msgid "Join"
-msgstr "Присоединиться"
-
-#, python-format
-msgid "Do you really want to withdraw your join request to „%(title)s“?"
-msgstr "Вы действительно хотите отозвать свой запрос на присоединение к проекту „%(title)s“?"
-
-msgid "Withdraw Join Request"
-msgstr "Отозвать мой запрос на присоединение"
-
-#, python-format
-msgid "Do you wish to request to join „%(title)s“?"
-msgstr "Вы хотите отправить запрос, чтобы присоединиться к „%(title)s“?"
-
-msgid "Add widget"
-msgstr "Добавить виджет"
-
-msgid "Informations"
-msgstr "Информация"
-
-msgid "No informations set"
-msgstr "Информация не предоставлена"
-
-msgid "Back to Project Overview"
-msgstr "Вернуться к обзору проекта"
-
 msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
 msgstr "Во время, указанное в одном из блоков, конференция будет запущена в премиальном режиме. Во время этого работы в этом режиме, настройки премиального ВВВ сервера будут использоваться для всех комнат конференции."
 
@@ -4256,6 +4218,13 @@ msgctxt "join request pending team button second item"
 msgid "Requested"
 msgstr "Запрос отправлен"
 
+#, python-format
+msgid "Do you really want to withdraw your join request to „%(title)s“?"
+msgstr "Вы действительно хотите отозвать свой запрос на присоединение к проекту „%(title)s“?"
+
+msgid "Withdraw Join Request"
+msgstr "Отозвать мой запрос на присоединение"
+
 msgctxt "join team button first item"
 msgid "Join"
 msgstr "Присоединиться"
@@ -4263,6 +4232,13 @@ msgstr "Присоединиться"
 msgctxt "join team button second item"
 msgid "Now"
 msgstr "Сейчас"
+
+#, python-format
+msgid "Do you wish to request to join „%(title)s“?"
+msgstr "Вы хотите отправить запрос, чтобы присоединиться к „%(title)s“?"
+
+msgid "Join"
+msgstr "Присоединиться"
 
 msgid "View on Facebook"
 msgstr "Просмотреть на Фейсбуке"
@@ -6110,6 +6086,35 @@ msgstr ""
 #, fuzzy
 msgid "Image preview"
 msgstr "Открыть просмотр"
+
+#, python-format
+msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
+msgstr ""
+
+#, fuzzy
+#| msgid "Currently set Email Text"
+msgid "Currently set as location"
+msgstr "Текущая настройка текста приветственного емейла"
+
+#, fuzzy
+#| msgid "No informations set"
+msgid "No location set yet"
+msgstr "Информация не предоставлена"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                        Yes, send immediately to one user.\n"
+#| "                        "
+#| msgid_plural ""
+#| "\n"
+#| "                        Yes, send immediately to %(count)s users.\n"
+#| "                        "
+msgid "Change location in %(group_settings_label)s"
+msgstr ""
+"\n"
+"                        Да, отправить одному пользователю.\n"
+"                        "
 
 #, fuzzy
 msgid "Link"
@@ -8649,6 +8654,9 @@ msgstr "Описание проекта"
 
 msgid "About Us"
 msgstr "О нас"
+
+msgid "Informations"
+msgstr "Информация"
 
 msgid "Now"
 msgstr "Сейчас"
@@ -14631,6 +14639,24 @@ msgstr "Вы уверены, что хотите удалить этот про�
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "Вы уверены, что хотите удалить этот проект?"
+
+#~ msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
+#~ msgstr "Скоро здесь появится новый микросайт. Страница находится на стадии активной разработки, поэтому просим прощения, если что-то пока работает не так, как нужно!"
+
+#~ msgid "Done"
+#~ msgstr "Готово"
+
+#~ msgid "Configure"
+#~ msgstr "Настроить"
+
+#~ msgid "Withdraw request"
+#~ msgstr "Отозвать запрос"
+
+#~ msgid "Add widget"
+#~ msgstr "Добавить виджет"
+
+#~ msgid "Back to Project Overview"
+#~ msgstr "Вернуться к обзору проекта"
 
 #~ msgid "%(sender_name)s"
 #~ msgstr "%(sender_name)s"

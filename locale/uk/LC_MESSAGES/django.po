@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-18 13:45+0200\n"
+"POT-Creation-Date: 2025-09-30 14:43+0200\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2726,44 +2726,6 @@ msgstr "Переглянути на сторінці"
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Введіть 4 великі літери із зашифрованого зображення"
 
-msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
-msgstr "Дана сторінка - це попередній перегляд багатьох хороших речей, які мають відбутися! Вона значною мірою ще перебуває у розробці, тому багато функцій неповні або можуть ще не працювати належним чином!"
-
-msgid "Done"
-msgstr "Виконано"
-
-msgid "Configure"
-msgstr "Налаштувати"
-
-msgid "Withdraw request"
-msgstr "Відкликати запит"
-
-msgid "Join"
-msgstr "Долучитися"
-
-#, python-format
-msgid "Do you really want to withdraw your join request to „%(title)s“?"
-msgstr "Ви справді бажаєте відкликати ваш запит на членство в проєкті «%(title)s»?"
-
-msgid "Withdraw Join Request"
-msgstr "Відкликати запит на приєднання"
-
-#, python-format
-msgid "Do you wish to request to join „%(title)s“?"
-msgstr "Бажаєте долучитися до «%(title)s»?"
-
-msgid "Add widget"
-msgstr "Додати віджет"
-
-msgid "Informations"
-msgstr "Інформація"
-
-msgid "No informations set"
-msgstr "Інформація не встановлена"
-
-msgid "Back to Project Overview"
-msgstr "Назад до Огляду Проєкту"
-
 msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
 msgstr "Під час дії будь-якого з цих блоків конференція буде в режимі преміум-класу. У режимі преміум-класу налаштування сервера преміум BBB використовуються для всіх приміщень BBB всередині цієї конференції."
 
@@ -4311,6 +4273,13 @@ msgctxt "join request pending team button second item"
 msgid "Requested"
 msgstr "Запитували"
 
+#, python-format
+msgid "Do you really want to withdraw your join request to „%(title)s“?"
+msgstr "Ви справді бажаєте відкликати ваш запит на членство в проєкті «%(title)s»?"
+
+msgid "Withdraw Join Request"
+msgstr "Відкликати запит на приєднання"
+
 msgctxt "join team button first item"
 msgid "Join"
 msgstr "Долучитися"
@@ -4318,6 +4287,13 @@ msgstr "Долучитися"
 msgctxt "join team button second item"
 msgid "Now"
 msgstr "Зараз"
+
+#, python-format
+msgid "Do you wish to request to join „%(title)s“?"
+msgstr "Бажаєте долучитися до «%(title)s»?"
+
+msgid "Join"
+msgstr "Долучитися"
 
 msgid "View on Facebook"
 msgstr "Переглянути на Facebook"
@@ -6174,6 +6150,24 @@ msgstr ""
 #, fuzzy
 msgid "Image preview"
 msgstr "Відкрити Попередній Перегляд"
+
+#, python-format
+msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
+msgstr ""
+
+#, fuzzy
+#| msgid "Currently set Email Text"
+msgid "Currently set as location"
+msgstr "Поточний встановлений текст електронної пошти"
+
+#, fuzzy
+#| msgid "No informations set"
+msgid "No location set yet"
+msgstr "Інформація не встановлена"
+
+#, python-format
+msgid "Change location in %(group_settings_label)s"
+msgstr ""
 
 #, fuzzy
 msgid "Link"
@@ -8724,6 +8718,9 @@ msgstr "Опис Команди"
 
 msgid "About Us"
 msgstr "Про нас"
+
+msgid "Informations"
+msgstr "Інформація"
 
 msgid "Now"
 msgstr "Зараз"
@@ -14780,6 +14777,24 @@ msgstr "Ви справді бажаєте видалити цю команду?
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "Ви справді бажаєте видалити цю команду?"
+
+#~ msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
+#~ msgstr "Дана сторінка - це попередній перегляд багатьох хороших речей, які мають відбутися! Вона значною мірою ще перебуває у розробці, тому багато функцій неповні або можуть ще не працювати належним чином!"
+
+#~ msgid "Done"
+#~ msgstr "Виконано"
+
+#~ msgid "Configure"
+#~ msgstr "Налаштувати"
+
+#~ msgid "Withdraw request"
+#~ msgstr "Відкликати запит"
+
+#~ msgid "Add widget"
+#~ msgstr "Додати віджет"
+
+#~ msgid "Back to Project Overview"
+#~ msgstr "Назад до Огляду Проєкту"
 
 #~ msgid "%(sender_name)s"
 #~ msgstr "%(sender_name)s"

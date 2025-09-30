@@ -1,10 +1,17 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-29 12:57+0200\n"
+"POT-Creation-Date: 2025-09-30 14:43+0200\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid "Info"
 msgstr "Information"
@@ -2657,44 +2664,6 @@ msgstr "Auf der Website anschauen"
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Gib die 4 Großbuchstaben aus dem Bild ein"
 
-msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
-msgstr "Diese Seite ist eine Vorschau der zukünftigen Microsite. Die Seite befindet sich noch mitten im Aufbau und an vielen Features wird noch aktiv gearbeitet. Vieles ist daher noch nicht fertig gestellt, und es kann vorkommen dass noch vereinzelte Fehler auftreten. Wir bitten um Verständnis!"
-
-msgid "Done"
-msgstr "Fertig"
-
-msgid "Configure"
-msgstr "Konfigurieren"
-
-msgid "Withdraw request"
-msgstr "Anfrage zurückziehen"
-
-msgid "Join"
-msgstr "Beitreten"
-
-#, python-format
-msgid "Do you really want to withdraw your join request to „%(title)s“?"
-msgstr "Möchtest du deine Beitrittsanfrage für “%(title)s” zurückziehen?"
-
-msgid "Withdraw Join Request"
-msgstr "Beitrittsanfrage zurückziehen"
-
-#, python-format
-msgid "Do you wish to request to join „%(title)s“?"
-msgstr "Möchtest du %(title)s beitreten?"
-
-msgid "Add widget"
-msgstr "Widget hinzufügen"
-
-msgid "Informations"
-msgstr "Informationen"
-
-msgid "No informations set"
-msgstr "Keine Beschreibung verfasst"
-
-msgid "Back to Project Overview"
-msgstr "Zurück zur Übersicht"
-
 msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
 msgstr "Im angegebenen Zeitraum von einem dieser Blöcke, wird die Tagung im Premium-Modus sein. Im Laufe von diesem Premium-Modus, wird der Premium-BBB-Server für all die Räume der Tagung eingeschaltet."
 
@@ -4196,6 +4165,13 @@ msgctxt "join request pending team button second item"
 msgid "Requested"
 msgstr "Gestellt"
 
+#, python-format
+msgid "Do you really want to withdraw your join request to „%(title)s“?"
+msgstr "Möchtest du deine Beitrittsanfrage für “%(title)s” zurückziehen?"
+
+msgid "Withdraw Join Request"
+msgstr "Beitrittsanfrage zurückziehen"
+
 msgctxt "join team button first item"
 msgid "Join"
 msgstr "Beitritt"
@@ -4203,6 +4179,13 @@ msgstr "Beitritt"
 msgctxt "join team button second item"
 msgid "Now"
 msgstr "Beantragen"
+
+#, python-format
+msgid "Do you wish to request to join „%(title)s“?"
+msgstr "Möchtest du %(title)s beitreten?"
+
+msgid "Join"
+msgstr "Beitreten"
 
 msgid "View on Facebook"
 msgstr "Auf Facebook ansehen"
@@ -6036,6 +6019,20 @@ msgstr "Nur auswählen, falls ihr ein anderes Logo verwenden möchtet als den Av
 
 msgid "Image preview"
 msgstr "Bildvorschau"
+
+#, python-format
+msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
+msgstr "Die Nutzer/innen können ihre Ergebnisse im Mitwirk-O-Mat nach Entfernung filtern, damit nur Gruppen und Projekte in der Nähe vorgeschlagen werden. Hierfür wird der Standort verwendet, den ihr in euren %(group_settings_label)s angegeben habt."
+
+msgid "Currently set as location"
+msgstr "Aktuell ist als Ort eingestellt"
+
+msgid "No location set yet"
+msgstr "Noch kein Standort gewählt"
+
+#, python-format
+msgid "Change location in %(group_settings_label)s"
+msgstr "Standort ändern in den %(group_settings_label)s"
 
 msgid "Link"
 msgstr "Link"
@@ -8530,6 +8527,9 @@ msgstr "Projektbeschreibung"
 msgid "About Us"
 msgstr "Über uns"
 
+msgid "Informations"
+msgstr "Informationen"
+
 msgid "Now"
 msgstr "Jetzt"
 
@@ -10593,9 +10593,6 @@ msgstr "Tagungsveranstaltungs-Teilname-Tracking"
 msgid "Would you like to create an event"
 msgstr "Möchtest du eine Veranstaltung anlegen"
 
-#, fuzzy
-#| msgctxt "time"
-#| msgid "until"
 msgid "until"
 msgstr "bis"
 
@@ -14510,6 +14507,24 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
+#~ msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
+#~ msgstr "Diese Seite ist eine Vorschau der zukünftigen Microsite. Die Seite befindet sich noch mitten im Aufbau und an vielen Features wird noch aktiv gearbeitet. Vieles ist daher noch nicht fertig gestellt, und es kann vorkommen dass noch vereinzelte Fehler auftreten. Wir bitten um Verständnis!"
+
+#~ msgid "Done"
+#~ msgstr "Fertig"
+
+#~ msgid "Configure"
+#~ msgstr "Konfigurieren"
+
+#~ msgid "Withdraw request"
+#~ msgstr "Anfrage zurückziehen"
+
+#~ msgid "Add widget"
+#~ msgstr "Widget hinzufügen"
+
+#~ msgid "Back to Project Overview"
+#~ msgstr "Zurück zur Übersicht"
+
 #~ msgid "Week"
 #~ msgstr "Woche"
 
@@ -14519,11 +14534,9 @@ msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 #~ msgid "retry"
 #~ msgstr "erneut versuchen"
 
-#, python-format
 #~ msgid "Please, %(retry_link)s the migration later. If the errors persist, please contact the support!"
 #~ msgstr "Bitte, die Migration später %(retry_link)s. Wenn es weiterhin Fehler gibt, bitte, melde dich beim Support!"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                            You have boards in the NextCloud Deck app. The Deck app is replaced by the Task-Board integrated in groups and projects.\n"

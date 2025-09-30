@@ -90,7 +90,7 @@
     
     
         {% trans "Offer Title" as title_label %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title label=title_label placeholder=title_label %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title label=title_label placeholder=title_label field_value=request.GET.title %}
         
         
         {# SimpleMDE Description Field (gets initialized in extrahead) #}                                   
