@@ -43,11 +43,11 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
     def get_managed_tag(self):
         return None
 
-    def get_current_filter_list(self, filter):
-        return self.request.GET.getlist(filter)
+    def get_current_filter_list(self, name):
+        return self.request.GET.getlist(name)
 
-    def get_current_filters(self, filter):
-        return self.request.GET.get(filter)
+    def get_current_filters(self, name):
+        return self.request.GET.get(name)
 
     def get_filter_label(self, name, dynamic_field):
         if name in self.FILTER_LABEL_OVERWRITES:
@@ -95,22 +95,22 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
         if filter_type == 'and' and active_filters:
             q_objects = Q()
             for key, value in active_filters.items():
+                q_filter = Q()
                 for entry in value:
-                    filter = {}
-                    filter[key] = entry
-                    q_objects &= Q(**filter)
+                    q_filter |= Q(**{key: entry})
+                q_objects &= q_filter
             return queryset.filter(q_objects)
         elif filter_type == 'or':
             q_objects = Q()
             for key, value in active_filters.items():
+                q_filter = Q()
                 for entry in value:
-                    filter = {}
-                    filter[key] = entry
-                q_objects |= Q(**filter)
+                    q_filter = Q(**{key: entry})
+                q_objects |= q_filter
             if not self.get_current_filters('q'):
                 return queryset.filter(q_objects)
             else:
-                mentors_query_string = queryset
+                experts_query_string = queryset
                 get_params = self.request.GET
                 user = self.request.user
                 request = HttpRequest()
@@ -119,10 +119,10 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
                 for key, value in get_params.items():
                     if not key == 'q':
                         request.GET[key] = value
-                all_mentors = self.get_data_from_api_endpoint(request)
+                all_experts = self.get_data_from_api_endpoint(request)
                 if len(active_filters) > 0:
-                    mentors_query_string = mentors_query_string | all_mentors.filter(q_objects)
-                return mentors_query_string
+                    experts_query_string = experts_query_string | all_experts.filter(q_objects)
+                return experts_query_string
         return queryset
 
     def get_data_from_api_endpoint(self, request):
@@ -135,7 +135,6 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
             for key, value in get_params.items():
                 if not key == 'page':
                     request.GET[key] = value
-        # add managed tag param
         request.GET._mutable = True
         if self.get_managed_tag():
             request.GET['managed_tags'] = str(self.get_managed_tag().id)
