@@ -8,7 +8,6 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView
 
 from cosinnus.conf import settings
-from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.views.map_api import map_search_endpoint
 from cosinnus.views.mixins.group import EndlessPaginationMixin, RequireLoggedInMixin
@@ -50,42 +49,41 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
     def get_current_filters(self, filter):
         return self.request.GET.get(filter)
 
-    def get_filter_options(self, name):
-        dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[name]
-        if dynamic_field.type == dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT:
-            choices = dynamic_field.choices
-        else:
-            # extend for other types of dynamic field choices, e.g. admin defined choices
-            raise NotImplementedError()
-        return choices
-
-    def get_filter_label(self, name):
+    def get_filter_label(self, name, dynamic_field):
         if name in self.FILTER_LABEL_OVERWRITES:
             return self.FILTER_LABEL_OVERWRITES[name]
-        dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[name]
         return dynamic_field.label
 
     def get_filters(self):
         filters = []
         for name in self.FILTERS:
-            filters.append(
-                {
-                    'name': name,
-                    'label': self.get_filter_label(name),
-                    'options': self.get_filter_options(name),
-                    'current': self.get_current_filter_list(name),
-                }
-            )
+            dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[name]
+            filter_options = {
+                'name': name,
+                'label': self.get_filter_label(name, dynamic_field),
+            }
+            if dynamic_field.multiple:
+                filter_options['current'] = self.get_current_filter_list(name)
+                filter_options['options'] = dynamic_field.choices
+            else:
+                filter_options['current'] = self.get_current_filters(name)
+            filters.append(filter_options)
         return filters
 
     def get_active_filters(self):
         filters = defaultdict(list)
-        for filter_name in self.FILTERS:
-            # TODO: consider text filter
-            filter_values = self.get_current_filter_list(filter_name)
-            for value in filter_values:
-                query_paramter = 'dynamic_fields__{}__contains'.format(filter_name)
-                filters[query_paramter].append(value)
+        for name in self.FILTERS:
+            dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[name]
+            if dynamic_field.multiple:
+                filter_values = self.get_current_filter_list(name)
+                for value in filter_values:
+                    query_parameter = 'dynamic_fields__{}__contains'.format(name)
+                    filters[query_parameter].append(value)
+            else:
+                filter_value = self.get_current_filters(name)
+                if filter_value:
+                    query_parameter = 'dynamic_fields__{}__icontains'.format(name)
+                    filters[query_parameter].append(filter_value)
         return filters
 
     def get_filter_type(self):
