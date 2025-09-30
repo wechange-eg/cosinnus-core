@@ -13,7 +13,12 @@ class AbstractMitwirkomatFilterExporter(abc.ABC):
         """
         Export the dynamic `CosinnusMitwirkomatDynamicField` as a filter for the Mitwirkomat, in the
         span-with-attributes format that is extended onto the description CSV field.
-        @param value: the dynamic field value as saved in the model's `dynamic_fields`.
+        This method should always return its full spectrum of attributes, even if the value in the mom settings are
+        empty (in this case with empty attribute values).
+        It is important to use single quotes for the attributes!
+
+        @param value: the dynamic field value as saved in the model's `dynamic_fields`. This can be empty or None and
+            must be handled accordingly!
         @param field_class: the `CosinnusMitwirkomatDynamicField` definition for the handled field
         @param mom: the `MitwirkomatSettings` instance which is being exported.
         @return: A string consisting of a string of one or more data-attributes in HTML style, or an empty string.
@@ -31,7 +36,7 @@ class MitwirkomatFilterExporterUnformatted(AbstractMitwirkomatFilterExporter):
 
     @classmethod
     def export_mom_attribute(cls, value, field_class, mom):
-        return f"{field_class.mom_filter_attr_name}='{value}'"
+        return f"{field_class.mom_filter_attr_name}='{value or ''}'"
 
 
 class MitwirkomatFilterExporterMultipleCombined(AbstractMitwirkomatFilterExporter):
@@ -79,7 +84,7 @@ class CosinnusMitwirkomatDynamicField(CosinnusDynamicField):
     mom_filter_attr_name = None  # for filter exporters that export a single tag: the complete name of that tag
 
     def __init__(self, **kwargs):
-        # sanity check
+        # sanity check for required class attributes
         super().__init__(**kwargs)
         if not self.mom_filter_exporter:
             raise ImproperlyConfigured(
