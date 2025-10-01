@@ -9,8 +9,12 @@
 {% if splitscreen %}
 placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 {% trans "Search for Names, Topics and Places..." %}"
+aria-label="{# Translators: __INCLUDE_JS_PO__ #}
+{% trans "Search for Names, Topics and Places..." %}"
 {% else %}
 placeholder="{# Translators: __INCLUDE_JS_PO__ #}
+{% trans "Search for Names and Topics..." %}"
+aria-label="{# Translators: __INCLUDE_JS_PO__ #}
 {% trans "Search for Names and Topics..." %}"
 {% endif %}
                     value="{{ q }}" autocomplete="off" />
@@ -46,13 +50,20 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "From" %}
 					<i class="fa fa-calendar"></i>
-					<input readonly ="readonly" class="calendar-date-time-chooser-date" aria-label="{#Translators: __INCLUDE_JS_PO__#}{% trans "From" %}" />
+					<input readonly ="readonly" class="calendar-date-time-chooser-date"
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "Start date." %}"
+					/>
 					<input class="calendar-date-time-chooser-hiddendate" id="id_start_0" name="start_0"
 						type="hidden" value="{{ fromDate }}"
-					>
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "Start date." %}"
+					/>
 					<input class="calendar-date-time-chooser-time" id="id_start_1" name="start_1"
 						placeholder="00:00" type="text" value="{{ fromTime }}"
-					>
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "Start-Time" %}"
+					/>
 					<div class="small-calendar"></div>
 				</li>
 
@@ -60,13 +71,20 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Until" %}
 					<i class="fa fa-calendar"></i>
-					<input readonly ="readonly" class="calendar-date-time-chooser-date" />
+					<input readonly ="readonly" class="calendar-date-time-chooser-date"
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "End date." %}"
+					/>
 					<input class="calendar-date-time-chooser-hiddendate" id="id_end_0" name="end_0"
 						type="hidden" value="{{ toDate }}"
-					>
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "End date." %}"
+					/>
 					<input class="calendar-date-time-chooser-time" id="id_end_1" name="end_1"
 						placeholder="00:00" type="text" value="{{ toTime }}"
-					>
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "End-Time" %}"
+					/>
 					<div class="small-calendar"></div>
 				</li>
 			</ol>
