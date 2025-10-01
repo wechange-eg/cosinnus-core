@@ -34,9 +34,9 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 			{% if availableFilterList|length > 1 %}
 				<div class="button-list">
 					{% for filter_type in availableFilterList %}
-						<a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if typeFiltersActive and activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
+						<button class="rounded-button button-color-{{ filter_type }} result-filter-button {% if typeFiltersActive and activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
 							{{ macros.typeLabel(filter_type, "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-						</a>
+						</button>
 					{% endfor %}
 				</div>
 			{% endif %}
@@ -145,11 +145,11 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 				<div class="button-list">
 					{% for topic_id, topic in allTopics %}
 						{% if topic_id != "" and topic %}
-							<a class="rounded-button button-color-topic topic-button {% if topic_id|int in activeTopicIds %}selected{% endif %}" data-topic-id="{{ topic_id }}">
+							<button class="rounded-button button-color-topic topic-button {% if topic_id|int in activeTopicIds %}selected{% endif %}" data-topic-id="{{ topic_id }}">
 								<span class="rounded-button-inner">
 									{{ topic }}
 								</span>
-							</a>
+							</button>
 						{% endif %}
 					{% endfor %}
 				</div>
@@ -214,19 +214,19 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 
 		<div class="apply-buttons">
 			<div class="button-list">
-				<a class="rounded-button button-color-action button-search query-search-button disabled">
+				<button class="rounded-button button-color-action button-search query-search-button disabled">
 					<span class="rounded-button-inner">
 						{# Translators: __INCLUDE_JS_PO__ #}
 						{% trans "Apply Filters" %}
 					</span>
-				</a>
+				</button>
 
-				<a class="rounded-button button-color-action reset-type-and-topic-filters">
+				<button class="rounded-button button-color-action reset-type-and-topic-filters">
 					<span class="rounded-button-inner">
 						{# Translators: __INCLUDE_JS_PO__ #}
 						{% trans "Clear Filters" %}
 					</span>
-				</a>
+				</button>
 			</div>
 
 			{# some more space to scroll over the floating search-buttons on mobile #}
