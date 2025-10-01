@@ -161,23 +161,17 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	                {% trans "External contents" %}
 	            </h1>
 
-	            <table class="onoffswitch-frame small-space">
-	                <tr>
-	                    <td class="onoffswitch-text-label">
-	                        {# Translators: __INCLUDE_JS_PO__ #}
-	                        {% trans "Include contents from other platforms" %}
-	                    </td>
-	                    <td>
-	                        <div class="onoffswitch">
-	                            <input type="checkbox" name="onoffswitch-exchange" class="onoffswitch-checkbox check-exchange" id="check-exchange" {% if exchange %}checked{% endif %}>
-	                            <label class="onoffswitch-label" for="check-exchange" aria-label="{% trans "Include content from other platforms" %}">
-	                                <span class="onoffswitch-inner"></span>
-	                                <span class="onoffswitch-switch"></span>
-	                            </label>
-	                        </div>
-	                    </td>
-	                </tr>
-	            </table>
+              <label for="check-exchange" class="onoffswitch-frame">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Include contents from other platforms" %}
+                <input id="check-exchange" type="checkbox" name="onoffswitch-exchange" class="onoffswitch-checkbox check-exchange" {% if exchange %}checked{% endif %}>
+                <div class="onoffswitch">
+                  <div class="onoffswitch-label">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </div>
+                </div>
+              </label>
 	        {% endif %}
 
 			{% if splitscreen %}
@@ -186,23 +180,17 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Where" %}
 				</h1>
 
-				<table class="onoffswitch-frame small-space">
-					<tr>
-						<td class="onoffswitch-text-label">
-							{# Translators: __INCLUDE_JS_PO__ #}
-							{% trans "In map area" %}
-						</td>
-						<td>
-							<div class="onoffswitch">
-								<input type="checkbox" name="onoffswitch-ignore-location" class="onoffswitch-checkbox check-ignore-location" id="check-ignore-location" {% if not ignoreLocation %}checked{% endif %}>
-								<label class="onoffswitch-label" for="check-ignore-location" aria-label="{% trans "In map area" %}">
-									<span class="onoffswitch-inner"></span>
-									<span class="onoffswitch-switch"></span>
-								</label>
-							</div>
-						</td>
-					</tr>
-				</table>
+        <label for="check-ignore-location" class="onoffswitch-frame">
+          {# Translators: __INCLUDE_JS_PO__ #}
+          {% trans "In map area" %}
+          <input id="check-ignore-location" type="checkbox" name="onoffswitch-ignore-location" class="onoffswitch-checkbox check-ignore-location" {% if not ignoreLocation %}checked{% endif %}>
+          <div class="onoffswitch">
+            <div class="onoffswitch-label">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </div>
+          </div>
+        </label>
 				<div class="pale-color">
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "If active, searching will be restricted to the visible map area." %}
