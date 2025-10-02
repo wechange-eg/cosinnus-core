@@ -1053,6 +1053,8 @@ class CosinnusConf(AppConf):
         '^/captcha/',
         # allauth provider urls
         '^/oidc/*',
+        # firebase fcm-django urls
+        '^/fcm/*',
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
@@ -1707,6 +1709,12 @@ class CosinnusConf(AppConf):
 
     # disable the group banner nag screen
     MITWIRKOMAT_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
+
+    # whether to enable the firebase integration for simple notification sending
+    # using fcm-django
+    # Important: this conf setting needs to be put at the start of your project's conf file,
+    # *before* `def define_cosinnus_project_settings(...` !
+    FIREBASE_ENABLED = False
 
 
 class CosinnusDefaultSettings(AppConf):

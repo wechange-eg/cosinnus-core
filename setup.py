@@ -198,21 +198,3 @@ setup(
     zip_safe=False,
     include_package_data=True,
 )
-
-"""
-TODO: pip incompatibilities for fcm-django-2.2.1:
-
-ERROR: pip's dependency resolver does not currently take into account all the packages that are installed.
-This behaviour is the source of the following dependency conflicts.
-djangorestframework-jwt 1.11.0 requires PyJWT<2.0.0,>=1.5.2, but you have pyjwt 2.9.0 which is incompatible.
-cosinnus 1.19.6 requires djangorestframework==3.14.0, but you have djangorestframework 3.15.2 which is incompatible.
-cosinnus 1.19.6 requires dnspython==1.15.0, but you have dnspython 2.6.1 which is incompatible.
-cosinnus 1.19.6 requires ecdsa==0.14, but you have ecdsa 0.18.0 which is incompatible.
-cosinnus 1.19.6 requires MarkupSafe==1.1, but you have markupsafe 2.1.5 which is incompatible.
-cosinnus 1.19.6 requires Pillow==10.0.1, but you have pillow 10.3.0 which is incompatible.
-cosinnus 1.19.6 requires python-dateutil==2.4.1, but you have python-dateutil 2.9.0.post0 which is incompatible.
-cosinnus 1.19.6 requires requests==2.28.2, but you have requests 2.32.3 which is incompatible.
-cosinnus 1.19.6 requires sqlparse==0.4.4, but you have sqlparse 0.5.0 which is incompatible.
-cosinnus 1.19.6 requires urllib3==1.26.15, but you have urllib3 1.26.19 which is incompatible.
-
-"""
