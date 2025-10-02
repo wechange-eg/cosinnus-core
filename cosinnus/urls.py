@@ -325,6 +325,11 @@ urlpatterns = [
     path('housekeeping/send_testmail/', housekeeping.send_testmail, name='housekeeping-send-testmail'),
     path('housekeeping/print_testmail/', housekeeping.print_testmail, name='housekeeping-print-testmail'),
     path(
+        'housekeeping/print_test_registration_notification_mail/',
+        housekeeping.print_test_registration_notification_mail,
+        name='housekeeping-print-test-registration-notification-mail',
+    ),
+    path(
         'housekeeping/print_digest_daily/', housekeeping.print_testdigest_daily, name='housekeeping-print-digest-daily'
     ),
     path(
