@@ -14,6 +14,11 @@ from cosinnus.views.mixins.group import EndlessPaginationMixin, RequireLoggedInM
 
 
 class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin, ListView):
+    """
+    Search users via filters based on dynamic fields.
+    Overwrite in a portal and define the FILTERS list.
+    """
+
     model = get_user_profile_model()
     template_name = 'cosinnus/expert_search/user_list.html'
     items_template = 'cosinnus/expert_search/user_list_items.html'
@@ -36,25 +41,31 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
         return super().get_queryset()
 
     def get_queryset(self):
+        """Get experts from the search API and apply filters."""
         qs = self.get_data_from_api_endpoint(self.request)
         qs = self.apply_filters(qs)
         return qs
 
     def get_managed_tag(self):
+        """Optionally define managed tag that are applied for the search query."""
         return None
 
     def get_current_filter_list(self, name):
+        """Get values of a multiple value filter."""
         return self.request.GET.getlist(name)
 
     def get_current_filters(self, name):
+        """Get values of a single value filter."""
         return self.request.GET.get(name)
 
     def get_filter_label(self, name, dynamic_field):
+        """Get filter label for dynamic field considering custom overwrites."""
         if name in self.FILTER_LABEL_OVERWRITES:
             return self.FILTER_LABEL_OVERWRITES[name]
         return dynamic_field.label
 
     def get_filters(self):
+        """Get data for all filters."""
         filters = []
         for name in self.FILTERS:
             dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[name]
@@ -70,7 +81,8 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
             filters.append(filter_options)
         return filters
 
-    def get_active_filters(self):
+    def get_active_filter_queries(self):
+        """Get the list of filter queries and values for active filters."""
         filters = defaultdict(list)
         for name in self.FILTERS:
             dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[name]
@@ -87,12 +99,15 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
         return filters
 
     def get_filter_type(self):
+        """Get filter type (or/and) depending on parameter of default."""
         return self.get_current_filters('filter_type') or self.default_filter_type
 
     def apply_filters(self, queryset):
+        """Filter a queryset based on the current filters."""
         filter_type = self.get_filter_type()
-        active_filters = self.get_active_filters()
+        active_filters = self.get_active_filter_queries()
         if filter_type == 'and' and active_filters:
+            # combine individual filter with "and"
             q_objects = Q()
             for key, value in active_filters.items():
                 q_filter = Q()
@@ -101,6 +116,7 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
                 q_objects &= q_filter
             return queryset.filter(q_objects)
         elif filter_type == 'or':
+            # combine individual filters with "or"
             q_objects = Q()
             for key, value in active_filters.items():
                 q_filter = Q()
@@ -110,6 +126,7 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
             if not self.get_current_filters('q'):
                 return queryset.filter(q_objects)
             else:
+                # As the queryset is filtered by the "q" parameter, combine it with a second search.
                 experts_query_string = queryset
                 get_params = self.request.GET
                 user = self.request.user
@@ -126,6 +143,7 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
         return queryset
 
     def get_data_from_api_endpoint(self, request):
+        """Get user from the search api."""
         if 'page' in request.GET:
             get_params = request.GET
             user = request.user
