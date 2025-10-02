@@ -117,8 +117,12 @@
                     <div class="marketplace-category-filter">
                         {% for group, categories in filter.get_categories_grouped %}
                             <div class="category_group">
-                                <label><b>{% if group == 'zzz_misc' %}{% trans "Misc" %}{% else %}
-                                    {{ group }}{% endif %}</b></label>
+                                <label><b>
+                                    {% if group == 'zzz_misc' %}
+                                        {% if filter.get_categories_grouped|length == 1 %}
+                                            {% trans "Categories" %}
+                                        {% else %}{% trans "Misc" %}{% endif %}
+                                    {% else %}{{ group }}{% endif %}</b></label>
                                 <div class="category_list">
                                     {% for category in categories %}
                                         <div>
