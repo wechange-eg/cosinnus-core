@@ -8,46 +8,41 @@
     <div class="regular-space">
         <div class="expert-profile-list-item fadedown large-space">
 
-            <div class="div">
-                <div class="row">
-                    <div class="dashboard-header">
-                        <div class="dashboard-header-image">
-                            {% include "cosinnus/user/user_avatar_image.html" with user=profile.user image_size="large" %}
-                        </div>
-                        <div class="dashboard-header-text">
-                            {% block user_details %}
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="expert-profile-list-item-title">
-                                            <h2>{{ profile.user|full_name }}</h2>
-                                        </div>
-
-                                        {% if profile.media_tag.location %}
-                                            <p>Ort: <b><i class="fa fa-fw fa-map-marker"></i>{{ profile.media_tag.location }}</b>
-                                        {% endif %}
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="expert-profile-list-item-topics">
-                                            {% for filter in filters %}
-                                                {% for key, value in profile.dynamic_fields.items %}
-                                                    {% with type=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS|get_item:key|get_attr:'type' %}
-                                                        {% if type == 'predefined_choice_text' and key == filter.name %}
-                                                            {% for list_item in value %}
-                                                                <span class="badge">{{ list_item }} </span>
-                                                            {% endfor %}
-                                                        {% endif %}
-                                                    {% endwith %}
-                                                {% endfor %}
-                                            {% endfor %}
-                                        </div>
-                                    </div>
+            <div class="row">
+                <div class="dashboard-header">
+                    <div class="dashboard-header-image">
+                        {% include "cosinnus/user/user_avatar_image.html" with user=profile.user image_size="large" %}
+                    </div>
+                    <div class="dashboard-header-text expert-profile-list-item-header-text">
+                        {% block user_details %}
+                            <div class="row">
+                                <div class="col-md-6 expert-profile-list-item-title">
+                                    <h2>{{ profile.user|full_name }}</h2>
                                 </div>
-                            {% endblock %}
-                            <a class="fadedown-clickarea" href="#">
-                                <i class="fa fa-chevron-down"></i>
-                            </a>
-                        </div>
+                                {% if profile.media_tag.location %}
+                                    <div class="col-md-6 expert-profile-list-item-location">
+                                        Ort: <b><i class="fa fa-fw fa-map-marker"></i>{{ profile.media_tag.location }}</b>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="expert-profile-list-item-topics">
+                                {% for filter in filters %}
+                                    {% for key, value in profile.dynamic_fields.items %}
+                                        {% with type=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS|get_item:key|get_attr:'type' %}
+                                            {% if type == 'predefined_choice_text' and key == filter.name %}
+                                                {% for choice_value in value %}
+                                                    <span class="badge">{{ choice_value|get_dynamic_field_value:key }} </span>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        {% endblock %}
+                        <a class="fadedown-clickarea" href="#">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
                     </div>
                 </div>
             </div>
