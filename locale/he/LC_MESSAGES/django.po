@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
+"POT-Creation-Date: 2025-10-07 13:50+0200\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4416,6 +4416,11 @@ msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
 #, fuzzy
 msgid "Change email address"
 msgstr "כתובת דוא\"ל"
+
+#, fuzzy
+#| msgid "The email-address is duplicated and already contained in the CSV!"
+msgid "The email address can be changed in the SSO provider."
+msgstr "כתובת הדוא\"ל משוכפלת וכבר כלולה ב- CSV!"
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -11949,12 +11954,6 @@ msgstr "חזרה להצעות"
 msgid "My Offers"
 msgstr "ההצעות שלי"
 
-msgid "Add Offer"
-msgstr "הוסף הצעה"
-
-msgid "Misc"
-msgstr "שונות"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s מחפש אחר"
@@ -12000,6 +11999,9 @@ msgstr "הפוך הצעה לפעילה"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "הצעה זו אינה פעילה. היא רק גלויה לך ואינה זמינה בזירת המסחר. אתם יכולים להפעילה מחדש להלן."
 
+msgid "Add Offer"
+msgstr "הוסף הצעה"
+
 #, python-format
 msgid ""
 "\n"
@@ -12026,6 +12028,9 @@ msgstr "מספר הטלפון שלך גלוי רק עבור משתמשים רש�
 msgid "Check all categories that fit your offer"
 msgstr "בדקו את כל הקטגוריות המתאימות להצעה שלכם"
 
+msgid "Misc"
+msgstr "שונות"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "התמונה הראשונה שהועלתה תוצג כטפט"
 
@@ -12037,6 +12042,11 @@ msgstr "רק הצעות פעילות יופיעו בזירת המסחר."
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "רק הצעות פעילות יופיעו בזירת המסחר. ההצעה שלכם תישאר פעילה במשך 4 שבועות. לאחר מכן, אתם יכולים להפעיל אותה מחדש בכל עת."
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "הזן את הכותרת עבור מסמך חדש."
 
 msgid "Wanted"
 msgstr "מבוקש"
@@ -13121,6 +13131,11 @@ msgstr "התחבר/י עם פייסבוק"
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
+msgstr "על מנת להשתמש בחשבון %(portal_name)s שלך כדי להתחבר לפלטפורמה נוספת עליך להתחבר ב-%(portal_name)s תחילה."
 
 #, python-format
 msgid " %(portal_name)s is part of the following communities. If you have an account on one of these communities you can use it to login on %(portal_name)s. "

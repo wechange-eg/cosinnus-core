@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
+"POT-Creation-Date: 2025-10-07 13:50+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4310,6 +4310,9 @@ msgstr ""
 #, fuzzy
 msgid "Change email address"
 msgstr "نشانی ایمیل"
+
+msgid "The email address can be changed in the SSO provider."
+msgstr ""
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -11430,12 +11433,6 @@ msgstr ""
 msgid "My Offers"
 msgstr ""
 
-msgid "Add Offer"
-msgstr ""
-
-msgid "Misc"
-msgstr ""
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr ""
@@ -11481,6 +11478,9 @@ msgstr ""
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr ""
 
+msgid "Add Offer"
+msgstr ""
+
 #, python-format
 msgid ""
 "\n"
@@ -11507,6 +11507,9 @@ msgstr ""
 msgid "Check all categories that fit your offer"
 msgstr ""
 
+msgid "Misc"
+msgstr ""
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr ""
 
@@ -11518,6 +11521,11 @@ msgstr ""
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr ""
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "عنوان را برای سند تازه وارد کن."
 
 msgid "Wanted"
 msgstr ""
@@ -12570,6 +12578,10 @@ msgstr ""
 
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+msgstr ""
+
+#, python-format
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
 
 #, python-format

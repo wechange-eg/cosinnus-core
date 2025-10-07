@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
+"POT-Creation-Date: 2025-10-07 13:50+0200\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4514,6 +4514,9 @@ msgstr "Controleer je e-mailadres voor %(site_name)s!"
 #, fuzzy
 msgid "Change email address"
 msgstr "e-mailadres"
+
+msgid "The email address can be changed in the SSO provider."
+msgstr ""
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -12144,12 +12147,6 @@ msgstr "Terug naar aanbiedingen"
 msgid "My Offers"
 msgstr "Mijn aanbiedingen"
 
-msgid "Add Offer"
-msgstr "Aanbieding toevoegen"
-
-msgid "Misc"
-msgstr "Overig"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s zoekt"
@@ -12195,6 +12192,9 @@ msgstr "Aanbieding activeren"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Deze aanbieding is inactief. Hij is alleen zichtbaar voor jou en wordt dus niet getoond op de marktplaats. Je kunt hem hieronder reactiveren."
 
+msgid "Add Offer"
+msgstr "Aanbieding toevoegen"
+
 #, python-format
 msgid ""
 "\n"
@@ -12221,6 +12221,9 @@ msgstr "Je telefoonnummer is alleen zichtbaar voor geregistreerde gebruikers"
 msgid "Check all categories that fit your offer"
 msgstr "Vink alle categorieën aan die bij je aanbieding passen"
 
+msgid "Misc"
+msgstr "Overig"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "De eerst geüploade afbeelding wordt als achtergrond weergegeven"
 
@@ -12232,6 +12235,11 @@ msgstr ""
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Alleen actieve aanbiedingen worden op de marktplaats weergegeven. Je aanbieding blijft 4 weken actief. Daarna kun je hem op elk gewenst moment opnieuw activeren."
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "Voer een titel in voor een nieuw document."
 
 msgid "Wanted"
 msgstr "Gezocht"
@@ -13319,6 +13327,11 @@ msgstr "Inloggen met Facebook"
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
+msgstr "Om je %(portal_name)s account te gebruiken om in te loggen op een ander platform moet je eerst inloggen op %(portal_name)s."
 
 #, python-format
 msgid " %(portal_name)s is part of the following communities. If you have an account on one of these communities you can use it to login on %(portal_name)s. "

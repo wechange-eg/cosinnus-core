@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
+"POT-Creation-Date: 2025-10-07 13:50+0200\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4540,6 +4540,9 @@ msgstr "Калі ласка, пацвердзіце свой адрас элек
 #, fuzzy
 msgid "Change email address"
 msgstr "адрас электроннай пошты"
+
+msgid "The email address can be changed in the SSO provider."
+msgstr ""
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -12238,12 +12241,6 @@ msgstr "Вярнуцца да прапаноў"
 msgid "My Offers"
 msgstr "Мае прапановы"
 
-msgid "Add Offer"
-msgstr "Дадаць прапанову"
-
-msgid "Misc"
-msgstr "Рознае"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s шукае"
@@ -12289,6 +12286,9 @@ msgstr "Актываваць прапанову"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Гэта прапанова неактыўная. Яна бачная толькі вам і не адлюстроўваецца на дошцы аб'яў. Вы можаце ўзнавіць яе ніжэй."
 
+msgid "Add Offer"
+msgstr "Дадаць прапанову"
+
 #, python-format
 msgid ""
 "\n"
@@ -12315,6 +12315,9 @@ msgstr "Ваш нумар тэлефона бачны толькі зарэгі�
 msgid "Check all categories that fit your offer"
 msgstr "Адзначце ўсе катэгорыі, што падыходзяць да Вашай прапановы"
 
+msgid "Misc"
+msgstr "Рознае"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "Першая зацягнутая выява будзе адлюстроўвацца ў якасці фонавай"
 
@@ -12326,6 +12329,11 @@ msgstr ""
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Толькі актыўныя прапановы будуць адлюстроўвацца на Дошцы аб'яў. Ваша прапанова будзе актыўнай на працягу 4 тыдняў. Пасля гэтага Вы зможаце яе ўзнавіць у любы момант."
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "Увядзіце назву новага дакумента."
 
 msgid "Wanted"
 msgstr "Патрабуецца"
@@ -13424,6 +13432,10 @@ msgstr "Увайсці праз Facebook"
 
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+msgstr ""
+
+#, python-format
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
 
 #, python-format
