@@ -74,6 +74,7 @@ class CosinnusUserSignupSerializer(
     )
     last_name = serializers.CharField(
         required=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
+        allow_blank=not bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
         validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
     )
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
