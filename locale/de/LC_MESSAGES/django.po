@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 13:50+0200\n"
+"POT-Creation-Date: 2025-10-08 10:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4219,6 +4219,25 @@ msgstr "Gib die Auswahlmöglichkeiten als Semikolon-getrennte Werte ein"
 msgid "Enter your choices"
 msgstr "Gib deine Auswahlmöglichkeiten ein"
 
+msgid "Multiple selections allowed"
+msgstr "Mehrere Auswahlen sind möglich"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr "Allgemeine Profilinformation (z.B. Name, Themen, Über mich)"
+
+msgid "Search term"
+msgstr "Suchbegriff"
+
+msgid "Reset fields"
+msgstr "Felder zurücksetzen"
+
+msgid "Go to Profile"
+msgstr "Zum Profil"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Nachricht schicken"
+
 msgid "Please verify your email address to continue using your account."
 msgstr "Bitte bestätige deine E-Mail-Adresse, um dein Konto weiter zu benutzen."
 
@@ -4566,10 +4585,6 @@ msgstr "inaktiv"
 
 msgid "Message all members"
 msgstr "Nachricht an alle Mitglieder"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Nachricht schicken"
 
 msgid "Admin"
 msgstr "Administrator/in"
@@ -8951,6 +8966,12 @@ msgstr "Premiumblock erfolgreich gelöscht"
 msgid "Your data was saved successfully!"
 msgstr "Die Werte wurden erfolgreich gespeichert!"
 
+msgid "Search for Experts"
+msgstr "Nach Expert/innen suchen"
+
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Hier können Sie Expert/innen finden, die genau Ihren Kriterien entsprechen."
+
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
 
@@ -12658,6 +12679,9 @@ msgstr "Deine RocketChat-Einstellungen konnten nicht gespeichert werden. Wenn di
 
 msgid "Your notifications preferences were reset to default!"
 msgstr "Deine Benachrichtigungseinstellungen wurden erfolgreich zurückgesetzt!"
+
+msgid "Oauth Client"
+msgstr ""
 
 msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
 msgstr "Es existiert bereits ein Konto mit dieser E-Mail-Adresse. Um sicherzustellen, dass du der Eigentümer dieses Kontos bist, melde dich bitte zuerst bei diesem Konto an und verbinde dann dein Konto."
