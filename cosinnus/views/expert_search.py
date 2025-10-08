@@ -73,7 +73,7 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
                 'name': name,
                 'label': self.get_filter_label(name, dynamic_field),
             }
-            if dynamic_field.multiple:
+            if dynamic_field.choices:
                 filter_options['current'] = self.get_current_filter_list(name)
                 filter_options['options'] = dynamic_field.choices
             else:
@@ -86,7 +86,7 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
         filters = defaultdict(list)
         for name in self.FILTERS:
             dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[name]
-            if dynamic_field.multiple:
+            if dynamic_field.choices:
                 filter_values = self.get_current_filter_list(name)
                 for value in filter_values:
                     query_parameter = 'dynamic_fields__{}__contains'.format(name)

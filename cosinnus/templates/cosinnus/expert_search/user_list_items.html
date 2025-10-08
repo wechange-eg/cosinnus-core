@@ -29,11 +29,15 @@
                             <div class="expert-profile-list-item-topics">
                                 {% for filter in filters %}
                                     {% for key, value in profile.dynamic_fields.items %}
-                                        {% with type=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS|get_item:key|get_attr:'type' %}
+                                        {% with type=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS|get_item:key|get_attr:'type' multiple=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS|get_item:key|get_attr:'multiple'%}
                                             {% if type == 'predefined_choice_text' and key == filter.name %}
-                                                {% for choice_value in value %}
-                                                    <span class="badge">{{ choice_value|get_dynamic_field_value:key }} </span>
-                                                {% endfor %}
+                                                {% if multiple %}
+                                                    {% for choice_value in value %}
+                                                        <span class="badge">{{ choice_value|get_dynamic_field_value:key }} </span>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <span class="badge">{{ value|get_dynamic_field_value:key }} </span>
+                                                {% endif %}
                                             {% endif %}
                                         {% endwith %}
                                     {% endfor %}
