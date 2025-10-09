@@ -5,12 +5,14 @@ import logging
 from typing import List, Tuple
 
 from django.contrib.auth import get_user_model
+from django.dispatch import receiver
 from fcm_django.models import FCMDevice, FirebaseResponseDict
 from firebase_admin import messaging
 from firebase_admin.messaging import SendResponse
 
 from cosinnus.celery import app as celery_app
 from cosinnus.conf import settings
+from cosinnus.core import signals
 from cosinnus.tasks import CeleryThreadTask
 from cosinnus.utils.user import is_user_active
 
@@ -39,7 +41,7 @@ def _send_firebase_message_direct(user) -> Tuple[List[SendResponse], List[SendRe
     failed_responses: List[SendResponse] = [resp for resp in send_responses if not resp.success]
     if settings.DEBUG:
         debug_print = (
-            'Sent an empty firebase message to:\t\t'
+            'DEBUG INFO: Sent an empty firebase message to:\t\t'
             + 'user account '
             + str(user.email)
             + '\t\t'
@@ -76,3 +78,15 @@ def send_firebase_message_threaded(user_ids: List[int]):
     if not settings.COSINNUS_FIREBASE_ENABLED or not user_ids:
         return
     _send_firebase_messages_task.delay(user_ids)
+
+
+if settings.COSINNUS_FIREBASE_ENABLED:
+    
+    @receiver(signals.users_received_notification_alert)
+    def users_received_notification_alert_hook(sender, user_ids, **kwargs):
+        """ A signal receiver that sends out empty firebase messages to each user that has just received
+        a new `NotificationAlert`. """
+        print(f'Got signal for users_received_notification_alert with {user_ids}')  # FIXME REMOVEME
+        if user_ids:
+            send_firebase_message_threaded(user_ids)
+
