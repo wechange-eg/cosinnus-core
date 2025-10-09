@@ -888,7 +888,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
 
     # fcm-django Firebase configuration
     _firebase_enabled = project_settings.get('COSINNUS_FIREBASE_ENABLED', False)
-    print('>> fire enabled?', _firebase_enabled)
     if _firebase_enabled:
         from firebase_admin import credentials, initialize_app
         from google.auth import load_credentials_from_dict
@@ -921,7 +920,12 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
                 'COSINNUS_FIREBASE_ENABLED is True, but no Google Auth dict could be found in '
                 '.env as "WECHANGE_FIREBASE_GOOGLE_APPLICATION_CREDENTIALS_DICT"!'
             )
-        print('>> firebase dict loaded', type(firebase_env_credentials_dict), firebase_env_credentials_dict)
+        if DEBUG:
+            print(
+                '>> DEBUG INFO: Firebase dict loaded',
+                type(firebase_env_credentials_dict),
+                firebase_env_credentials_dict,
+            )
         custom_credentials = CustomFirebaseCredentials(firebase_env_credentials_dict)
         FIREBASE_APP = initialize_app(custom_credentials)  # , name='messaging')
         # TODO cleanup all this block, prints and unused definitions!
