@@ -759,10 +759,10 @@ def users_online_today(request):
 
 
 def firebase_send_testpush(request):
-    """Sends an empty firebase message to all of the current user's devices, unthreaded,
+    """Sends an empty firebase message to all of the current user's devices, unthreaded, unthrottled
     and shows the responses for each.
-    If the GET-param "user_ids" is supplied as comma-seperated list of ints, a threaded call will instead be done for
-    all those users and no response shown."""
+    If the GET-param "user_ids" is supplied as comma-seperated list of ints, a regular threaded call will instead be
+    made for all those users and no response shown."""
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     if not settings.COSINNUS_FIREBASE_ENABLED:
@@ -777,7 +777,7 @@ def firebase_send_testpush(request):
         except Exception as e:
             return HttpResponse(f'Exception: {e}')
     else:
-        successful_responses, failed_responses = _send_firebase_message_direct(request.user)
+        successful_responses, failed_responses = _send_firebase_message_direct(request.user, ignore_throttle=True)
         resp = (
             '<pre>'
             + 'Sent an empty firebase message (direct, unthreaded) to:<br/><br/>'

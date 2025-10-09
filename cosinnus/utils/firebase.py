@@ -5,6 +5,7 @@ import logging
 from typing import List, Tuple
 
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.dispatch import receiver
 from fcm_django.models import FCMDevice, FirebaseResponseDict
 from firebase_admin import messaging
@@ -18,8 +19,10 @@ from cosinnus.utils.user import is_user_active
 
 logger = logging.getLogger('cosinnus')
 
+FIREBASE_USER_THROTTLE_CACHE_KEY = 'cosinnus/core/firebase/user_throttle/%(user_id)s'
 
-def _send_firebase_message_direct(user) -> Tuple[List[SendResponse], List[SendResponse]]:
+
+def _send_firebase_message_direct(user, ignore_throttle=False) -> Tuple[List[SendResponse], List[SendResponse]]:
     """Directly send an empty firebase message to all devices of a single user if the account is active.
     This method does not worry about whether the messaged were sent successfully.
     Does nothing if the user has no registered FCMDevice(s).
@@ -29,6 +32,13 @@ def _send_firebase_message_direct(user) -> Tuple[List[SendResponse], List[SendRe
     # never send Messages to inactive users
     if not user or not user.is_authenticated or not is_user_active(user):
         return [], []  # we're not logging anything here
+    # check throttle cache key to see if the user has just gotten an empty message and should not receive another yet
+    user_throttle_cache_key = FIREBASE_USER_THROTTLE_CACHE_KEY % {'user_id': user.id}
+    if settings.COSINNUS_FIREBASE_EMPTY_MESSAGE_USER_THROTTLE_SECONDS and not ignore_throttle:
+        if cache.get(user_throttle_cache_key, False):
+            if settings.DEBUG:
+                print(f'DEBUG INFO: Not sending a firebase message as it was throttled for user id: {user.id}.')
+            return [], []
 
     empty_message = messaging.Message()
     user_devices = FCMDevice.objects.filter(user=user)
@@ -36,6 +46,10 @@ def _send_firebase_message_direct(user) -> Tuple[List[SendResponse], List[SendRe
     # does nothing if there are no devices for this user
     responsedict: FirebaseResponseDict = user_devices.send_message(empty_message)
     send_responses: List[SendResponse] = responsedict.response.responses
+
+    # set throttle cache key
+    if settings.COSINNUS_FIREBASE_EMPTY_MESSAGE_USER_THROTTLE_SECONDS:
+        cache.set(user_throttle_cache_key, True, settings.COSINNUS_FIREBASE_EMPTY_MESSAGE_USER_THROTTLE_SECONDS)
 
     successful_responses: List[SendResponse] = [resp for resp in send_responses if resp.success]
     failed_responses: List[SendResponse] = [resp for resp in send_responses if not resp.success]
@@ -74,19 +88,17 @@ def _send_firebase_messages_task(user_ids):
 
 
 def send_firebase_message_threaded(user_ids: List[int]):
-    """In a Celery task / thread, send an empty Firebase message to each user, to all of their registered devices."""
+    """Send an empty Firebase message to users (in a Celery task / thread), to all of their registered devices."""
     if not settings.COSINNUS_FIREBASE_ENABLED or not user_ids:
         return
     _send_firebase_messages_task.delay(user_ids)
 
 
 if settings.COSINNUS_FIREBASE_ENABLED:
-    
+
     @receiver(signals.users_received_notification_alert)
     def users_received_notification_alert_hook(sender, user_ids, **kwargs):
-        """ A signal receiver that sends out empty firebase messages to each user that has just received
-        a new `NotificationAlert`. """
-        print(f'Got signal for users_received_notification_alert with {user_ids}')  # FIXME REMOVEME
+        """A signal receiver that sends out empty firebase messages to each user that has just received
+        a new `NotificationAlert`."""
         if user_ids:
             send_firebase_message_threaded(user_ids)
-

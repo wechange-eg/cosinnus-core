@@ -1716,6 +1716,11 @@ class CosinnusConf(AppConf):
     # *before* `def define_cosinnus_project_settings(...` !
     FIREBASE_ENABLED = False
 
+    # if COSINNUS_FIREBASE_ENABLED, the amount of seconds of a timeframe within which
+    # a user will not receive any more empty Firebase messages beyond the first.
+    # set to 0 to disable throttling for empty Firebase messages.
+    FIREBASE_EMPTY_MESSAGE_USER_THROTTLE_SECONDS = 10
+
 
 class CosinnusDefaultSettings(AppConf):
     """Settings without a prefix namespace to provide default setting values for other apps.
