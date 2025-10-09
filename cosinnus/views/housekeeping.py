@@ -45,6 +45,7 @@ from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.dashboard import create_initial_group_widgets
+from cosinnus.utils.firebase import send_firebase_message
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.group import move_group_content as move_group_content_utils
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
@@ -758,46 +759,23 @@ def users_online_today(request):
 
 
 def firebase_send_testpush(request):
+    """Sends an empty firebase message to all of the current user's devices and shows the responses for each."""
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     if not settings.COSINNUS_FIREBASE_ENABLED:
         return HttpResponse('Error: COSINNUS_FIREBASE_ENABLED is not True!')
 
-    from fcm_django.models import FCMDevice
-    from firebase_admin import messaging
-
-    empty_message = messaging.Message()
-    user_devices = FCMDevice.objects.filter(user=request.user)
-    device_count = user_devices.count()
-    responsedict = user_devices.send_message(empty_message)  # firebase_admin.messaging.FirebaseResponseDict
-
-    multi_resp_str = ''
-    for single_response in responsedict.response.responses:  # firebase_admin.messaging.SendResponse
-        multi_resp_str += str(
-            (
-                'message_id',
-                single_response.message_id,
-                'success',
-                single_response.success,
-                'exception',
-                single_response.exception,
-                '<br/>',
-            )
-        )
-
+    successful_responses, failed_responses = send_firebase_message(request.user)
     resp = (
         '<pre>'
         + 'Sent an empty firebase message to:<br/><br/>'
         + 'user account '
         + str(request.user.email)
-        + '<br/>'
-        + str(device_count)
-        + ' user devices<br/>'
-        + 'return was '
-        + str(responsedict)
-        + '<br/>'
-        + 'single responses were --> <br/><br/>'
-        + multi_resp_str
-        + '</pre>'
+        + '<br/><br/>'
+        + 'successful responses were --> '
+        + str([resp.message_id for resp in successful_responses])
+        + '<br/>failed responses were --> '
+        + str([str((resp.message_id, str(resp.exception))) for resp in failed_responses])
+        + '<br/></pre>'
     )
     return HttpResponse(resp)
