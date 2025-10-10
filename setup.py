@@ -126,7 +126,6 @@ setup(
         'django-widget-tweaks==1.4.9',
         'djangorestframework==3.15.2',
         'djangorestframework-csv==2.1.1',
-        'djangorestframework-jwt==1.11.0',
         'dnspython==2.6.1',
         'drf-extra-fields==3.4.0',
         'drf-yasg==1.21.7',
@@ -185,6 +184,7 @@ setup(
         'django-bootstrap3-datetimepicker-3 @ git+https://github.com/wechange-eg/django-bootstrap3-datetimepicker-3.git@django-update-4-2#egg=django-bootstrap3-datetimepicker-3',
         'wagtail @ git+https://github.com/wechange-eg/wagtail.git@django-update-4-2#egg=wagtail',
         'django-clamd @ git+https://github.com/wechange-eg/django-clamd.git@master#egg=django-clamd',
+        'djangorestframework-jwt @ git+https://github.com/wechange-eg/django-rest-framework-jwt.git@master#egg=djangorestframework-jwt',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
