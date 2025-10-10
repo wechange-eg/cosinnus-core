@@ -24,7 +24,7 @@ FIREBASE_USER_THROTTLE_CACHE_KEY = 'cosinnus/core/firebase/user_throttle/%(user_
 
 def _send_firebase_message_direct(user, ignore_throttle=False) -> Tuple[List[SendResponse], List[SendResponse]]:
     """Directly send an empty firebase message to all devices of a single user if the account is active.
-    This method does not worry about whether the messaged were sent successfully.
+    This method does not worry about whether the messages were sent successfully.
     Does nothing if the user has no registered FCMDevice(s).
     @return: a tuple of (successful_responses, failed_responses)"""
     if not settings.COSINNUS_FIREBASE_ENABLED:

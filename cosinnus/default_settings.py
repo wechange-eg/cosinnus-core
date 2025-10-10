@@ -893,7 +893,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         from google.auth import load_credentials_from_dict
         from google.oauth2.service_account import Credentials  # noqa
 
-        # create a custom Credentials class to load a non-default google service account JSON
+        # create a custom Credentials class to load a non-default google service account JSON from a dict
         class CustomFirebaseCredentials(credentials.ApplicationDefault):
             _account_dict = None
 
@@ -907,13 +907,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
                         self._account_dict, scopes=credentials._scopes
                     )
 
-        # init default firebase app
-        # this loads the default google service account with GOOGLE_APPLICATION_CREDENTIALS env variable
-        # FIREBASE_APP = initialize_app()
-
-        # init second firebase app for fcm-django
-        # the environment variable contains a path to the custom google service account JSON
-
         firebase_env_credentials_dict = env.json('WECHANGE_FIREBASE_GOOGLE_APPLICATION_CREDENTIALS_DICT', default=None)
         if not firebase_env_credentials_dict:
             raise ImproperlyConfigured(
@@ -926,10 +919,10 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
                 type(firebase_env_credentials_dict),
                 firebase_env_credentials_dict,
             )
+        # init default firebase app for fcm-django
+        # the env variable contains the custom google service account JSON as single dict variable
         custom_credentials = CustomFirebaseCredentials(firebase_env_credentials_dict)
-        FIREBASE_APP = initialize_app(custom_credentials)  # , name='messaging')
-        # TODO cleanup all this block, prints and unused definitions!
-
+        FIREBASE_APP = initialize_app(custom_credentials)
         FCM_DJANGO_SETTINGS = {
             'DEFAULT_FIREBASE_APP': FIREBASE_APP,
             'DELETE_INACTIVE_DEVICES': True,
