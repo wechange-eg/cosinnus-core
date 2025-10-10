@@ -27,6 +27,7 @@ from django.utils.timezone import localtime
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
+from cosinnus.core import signals
 from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
@@ -911,10 +912,16 @@ class NotificationsThread(Thread):
             )
 
         if len(self.next_session_args) > 0:
+            # we have more session frames, start the next one
             self._apply_next_session_frame_and_run()
         else:
+            # we just finished the last (or only) session frame, finish up
             # log current thread for debugging
             self._debug_threading('ended')
+            
+            # if any users were notified during this session, trigger a signal with their ids
+            if self.already_alerted_user_ids:
+                signals.users_received_notification_alert.send(sender=self.user, user_ids=self.already_alerted_user_ids)
         return
 
 
