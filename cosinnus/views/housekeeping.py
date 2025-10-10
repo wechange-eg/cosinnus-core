@@ -491,14 +491,9 @@ def print_testmail(request):
 
 def print_test_registration_notification_mail(request):
     """Displays a text-email like it would be sent to an admin user when there is a new registration notification"""
-    data = get_common_mail_context(request)
-    data.update(
-        {
-            'user': request.user,
-        }
-    )
-    subject = render_to_string('cosinnus/mail/user_register_notification_subj.txt', data)
-    body = render_to_string('cosinnus/mail/user_register_notification.html', data)
+    context = get_common_mail_context(request, user=request.user)
+    subject = render_to_string('cosinnus/mail/user_register_notification_subj.txt', context)
+    body = render_to_string('cosinnus/mail/user_register_notification.html', context)
     email_text = f'{subject}\n\n{body}'
     html = textfield(email_text)
     return HttpResponse(html)
