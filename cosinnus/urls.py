@@ -343,6 +343,11 @@ urlpatterns = [
         housekeeping.group_admin_emails,
         name='housekeeping-group-admin-emails',
     ),
+    path(
+        'housekeeping/firebase_send_testpush/',
+        housekeeping.firebase_send_testpush,
+        name='housekeeping-firebase-send-testpush',
+    ),
     path('error/', common.generic_error_page_view, name='generic-error-page'),
     path('select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
     path('robots.txt', common.robots_text, name='robots-text'),
@@ -695,6 +700,7 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
+
 router.register(r'public_conferences', PublicConferenceViewSet, basename='public_conference')
 router.register(r'conferences', ConferenceViewSet, basename='conference')
 router.register(r'groups', CosinnusSocietyViewSet, basename='group')
@@ -733,6 +739,16 @@ if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
     except Exception:
         pass
 
+# Firebase fcm-django urls
+if settings.COSINNUS_FIREBASE_ENABLED:
+    from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
+
+    router.register('devices', FCMDeviceAuthorizedViewSet)
+    urlpatterns += [
+        # URLs will show up at <api_root>/devices
+        # DRF browsable API which lists all available endpoints
+        path('fcm/', include(router.urls)),
+    ]
 
 if settings.COSINNUS_V3_FRONTEND_ENABLED:
     # frontend only URLs. these URLs do not have real views, because the frontend server will catch the paths
