@@ -754,3 +754,75 @@ a.portal-inlink:hover img {
         }
     }
 }
+
+
+/* expert search */
+.expert-profile-list {
+    padding: 15px;
+}
+
+.expert-profile-list-item {
+    clear: both;
+
+    .fadedown-clickarea {
+        font-size: 24px;
+        color: @text-color;
+        display: none;
+        opacity: 0.85;
+    }
+
+    .margin-right {
+        margin-right: 10px;
+    }
+
+    .dashboard-header {
+        margin-bottom: 0;
+        background-color:fadeout(@app-neutral-color-light, 30);
+    }
+
+    .dashboard-header:hover {
+        cursor: pointer;
+        background-color: @color-dark-medium-gray;
+        .fadedown-clickarea {
+            display: inherit;
+        }
+    }
+
+    .dashboard-header-text {
+        position: relative;
+        min-height: 130px;
+        height: auto;
+
+        a {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            text-align: center;
+        }
+    }
+
+    .expert-profile {
+        margin-top: 10px;
+    }
+
+    .expert-profile-list-item-header-text {
+        height: auto !important;
+    }
+
+    .expert-profile-list-item-title {
+        margin-bottom: 5px;
+    }
+
+    .expert-profile-list-item-location {
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+
+    .expert-profile-list-item-topics {
+        margin: 5px 5px 5px 0;
+
+        .badge {
+            margin-bottom: 2px;
+        }
+    }
+}

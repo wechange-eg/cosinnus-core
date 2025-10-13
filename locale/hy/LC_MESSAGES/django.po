@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
+"POT-Creation-Date: 2025-10-07 13:50+0200\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4524,6 +4524,9 @@ msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասց�
 #, fuzzy
 msgid "Change email address"
 msgstr "էլեկտրոնային հասցե"
+
+msgid "The email address can be changed in the SSO provider."
+msgstr ""
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -12161,12 +12164,6 @@ msgstr "Վերադառնալ առաջարկներին"
 msgid "My Offers"
 msgstr "Իմ առաջարկները"
 
-msgid "Add Offer"
-msgstr "Ավելացնել առաջարկ"
-
-msgid "Misc"
-msgstr "Misc"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s փնտրում է"
@@ -12212,6 +12209,9 @@ msgstr "Ակտիվացնել առաջարկը"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Այս առաջարկը ակտիվ չէ: Այն միայն տեսանելի է ձեզ համար և նշված չէ առևտրական հարթակում: Կարող եք վերաակտիվացնել այն ստորև."
 
+msgid "Add Offer"
+msgstr "Ավելացնել առաջարկ"
+
 #, python-format
 msgid ""
 "\n"
@@ -12238,6 +12238,9 @@ msgstr "Ձեր հեռախոսահամարը տեսանելի է միայն գր�
 msgid "Check all categories that fit your offer"
 msgstr "Տեսնել ձեր առաջարկին համապատասխանող բոլոր կատեգորիաները"
 
+msgid "Misc"
+msgstr "Misc"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "Առաջին վերբեռնված պատկերը կցուցադրվի որպես էջի գլխավոր պաստառ"
 
@@ -12249,6 +12252,11 @@ msgstr ""
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Միայն ակտիվ առաջարկներն են թվարկվելու առևտրական հարթակում: Ձեր առաջարկը ակտիվ կմնա 4 շաբաթ: Դրանից հետո ցանկացած պահի կարող եք վերաակտիվացնել այն."
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "Մուտքագրեք վերնագիր նոր փաստաթղթի համար."
 
 msgid "Wanted"
 msgstr "Փնտրվում է"
@@ -13332,6 +13340,10 @@ msgstr "Մուտք գործել Facebook- ի Էջով"
 
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+msgstr ""
+
+#, python-format
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
 
 #, python-format

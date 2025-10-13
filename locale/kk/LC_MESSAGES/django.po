@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
+"POT-Creation-Date: 2025-10-07 13:50+0200\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4524,6 +4524,9 @@ msgstr "Электрондық пошта мекенжайыңызды %(site_na
 #, fuzzy
 msgid "Change email address"
 msgstr "электрондық пошта мекенжайы"
+
+msgid "The email address can be changed in the SSO provider."
+msgstr ""
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -12144,12 +12147,6 @@ msgstr "Шараларға оралу"
 msgid "My Offers"
 msgstr "Менің ұсыныстарым"
 
-msgid "Add Offer"
-msgstr "Ұсыныс қосу"
-
-msgid "Misc"
-msgstr "Басқа"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s ізделуде"
@@ -12195,6 +12192,9 @@ msgstr "Ұсынысты іске қосу"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Бұл ұсыныс жарамсыз. Бұл тек сізге көрінеді және маркетплейсте көрсетілмеген. Оны төменде іске қосуға болады."
 
+msgid "Add Offer"
+msgstr "Ұсыныс қосу"
+
 #, python-format
 msgid ""
 "\n"
@@ -12221,6 +12221,9 @@ msgstr "Сіздің телефон нөміріңіз тек тіркелген
 msgid "Check all categories that fit your offer"
 msgstr "Ұсынысыңызға сәйкес келетін барлық санаттарды тексеріңіз"
 
+msgid "Misc"
+msgstr "Басқа"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "Алғашқы жүктелген сурет тұсқағаз ретінде көрсетіледі"
 
@@ -12232,6 +12235,11 @@ msgstr ""
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Маркетплейсте тек белсенді ұсыныстар көрсетіледі. Сіздің ұсынысыңыз 4 апта бойы жарамды болады. Содан кейін сіз оны кез-келген уақытта қайтадан іске қоса аласыз."
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "Жаңа құжаттың атауын енгізіңіз."
 
 msgid "Wanted"
 msgstr "Қажет"
@@ -13316,6 +13324,10 @@ msgstr "Facebook арқылы кіріңіз"
 
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+msgstr ""
+
+#, python-format
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
 
 #, python-format

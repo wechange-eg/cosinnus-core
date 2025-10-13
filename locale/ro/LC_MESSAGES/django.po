@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
+"POT-Creation-Date: 2025-10-07 13:50+0200\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4528,6 +4528,9 @@ msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
 #, fuzzy
 msgid "Change email address"
 msgstr "adresa de e-mail"
+
+msgid "The email address can be changed in the SSO provider."
+msgstr ""
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -12167,12 +12170,6 @@ msgstr "Înapoi la Oferte"
 msgid "My Offers"
 msgstr "Ofertele Mele"
 
-msgid "Add Offer"
-msgstr "Adaugă Ofertă"
-
-msgid "Misc"
-msgstr "Misc"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s caută"
@@ -12218,6 +12215,9 @@ msgstr "Activarea ofertei"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Această ofertă este inactivă. Este doar vizibil pentru dvs. și nu este listat pe piață. Puteți să îl reactivați mai jos."
 
+msgid "Add Offer"
+msgstr "Adaugă Ofertă"
+
 #, python-format
 msgid ""
 "\n"
@@ -12244,6 +12244,9 @@ msgstr "Numărul dvs.de telefon este vizibil numai pentru utilizatorii înregist
 msgid "Check all categories that fit your offer"
 msgstr "Verificați toate categoriile care se potrivesc ofertei dvs"
 
+msgid "Misc"
+msgstr "Misc"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "Prima imagine încărcată va fi afișată ca tapet"
 
@@ -12255,6 +12258,11 @@ msgstr ""
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Numai ofertele active vor fi listate pe Marketplace. Oferta dvs. va rămâne activă timp de 4 săptămâni. După aceea, o puteți reactiva oricând."
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "Introduceți titlul pentru un nou Document."
 
 msgid "Wanted"
 msgstr "Dorit"
@@ -13342,6 +13350,11 @@ msgstr "Logheaza-te cu Facebook"
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
+msgstr "Pentru a vă folosi %(portal_name)s cont pentru a vă conecta la o altă platformă pe care trebuie să vă conectați %(portal_name)s primul."
 
 #, python-format
 msgid " %(portal_name)s is part of the following communities. If you have an account on one of these communities you can use it to login on %(portal_name)s. "

@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
-"Language: de\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-08 10:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
 msgid "Info"
@@ -4219,6 +4219,25 @@ msgstr "Gib die Auswahlmöglichkeiten als Semikolon-getrennte Werte ein"
 msgid "Enter your choices"
 msgstr "Gib deine Auswahlmöglichkeiten ein"
 
+msgid "Multiple selections allowed"
+msgstr "Mehrere Auswahlen sind möglich"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr "Allgemeine Profilinformation (z.B. Name, Themen, Über mich)"
+
+msgid "Search term"
+msgstr "Suchbegriff"
+
+msgid "Reset fields"
+msgstr "Felder zurücksetzen"
+
+msgid "Go to Profile"
+msgstr "Zum Profil"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Nachricht schicken"
+
 msgid "Please verify your email address to continue using your account."
 msgstr "Bitte bestätige deine E-Mail-Adresse, um dein Konto weiter zu benutzen."
 
@@ -4566,10 +4585,6 @@ msgstr "inaktiv"
 
 msgid "Message all members"
 msgstr "Nachricht an alle Mitglieder"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Nachricht schicken"
 
 msgid "Admin"
 msgstr "Administrator/in"
@@ -8951,6 +8966,12 @@ msgstr "Premiumblock erfolgreich gelöscht"
 msgid "Your data was saved successfully!"
 msgstr "Die Werte wurden erfolgreich gespeichert!"
 
+msgid "Search for Experts"
+msgstr "Nach Expert/innen suchen"
+
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Hier können Sie Expert/innen finden, die genau Ihren Kriterien entsprechen."
+
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
 
@@ -11715,12 +11736,6 @@ msgstr "Zurück zu Inseraten"
 msgid "My Offers"
 msgstr "Meine Inserate"
 
-msgid "Add Offer"
-msgstr "Inserat erstellen"
-
-msgid "Misc"
-msgstr "Verschiedenes"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s sucht nach"
@@ -11766,6 +11781,9 @@ msgstr "Inserat aktivieren"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Dieses Inserat is inaktiv. Es ist nur für dich sichtbar und wird nicht im Marktplatz angezeigt. Du kannst es unten reaktivieren."
 
+msgid "Add Offer"
+msgstr "Inserat erstellen"
+
 #, python-format
 msgid ""
 "\n"
@@ -11796,6 +11814,9 @@ msgstr "Deine Telefonnummer ist nur für registrierte Benutzer/innen sichtbar"
 msgid "Check all categories that fit your offer"
 msgstr "Markiere alle Kategorien, die auf dein Inserat zutreffen"
 
+msgid "Misc"
+msgstr "Verschiedenes"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "Das erste hochgeladene Bild wird als Hintergrundbild angezeigt"
 
@@ -11807,6 +11828,9 @@ msgstr "Nur aktive Inserate werden im Marktplatz angezeigt."
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Nur aktive Inserate werden im Marktplatz angezeigt. Dein Inserat wird 4 Wochen lang aktiv bleiben. Danach kannst du es jederzeit reaktivieren."
+
+msgid "Enter the title for a new offer."
+msgstr "Gib den Titel für ein neues Inserat ein."
 
 msgid "Wanted"
 msgstr "Suche"
@@ -12656,6 +12680,9 @@ msgstr "Deine RocketChat-Einstellungen konnten nicht gespeichert werden. Wenn di
 msgid "Your notifications preferences were reset to default!"
 msgstr "Deine Benachrichtigungseinstellungen wurden erfolgreich zurückgesetzt!"
 
+msgid "Oauth Client"
+msgstr ""
+
 msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
 msgstr "Es existiert bereits ein Konto mit dieser E-Mail-Adresse. Um sicherzustellen, dass du der Eigentümer dieses Kontos bist, melde dich bitte zuerst bei diesem Konto an und verbinde dann dein Konto."
 
@@ -12885,6 +12912,7 @@ msgstr "Mit Facebook einloggen"
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
 msgstr " %(portal_name)s ist Teil der %(provider)s Gemeinde. Du kannst sich mit deinem %(provider)s-Konto bei %(portal_name)s anmelden."
 
+#, python-format
 msgid "You can use your %(provider)s account to login on %(portal_name)s."
 msgstr "Du kannst sich mit deinem %(provider)s-Konto bei %(portal_name)s anmelden."
 

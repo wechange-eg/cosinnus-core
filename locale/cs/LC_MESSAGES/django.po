@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
+"POT-Creation-Date: 2025-10-07 13:50+0200\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4469,6 +4469,11 @@ msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
 #, fuzzy
 msgid "Change email address"
 msgstr "e-mailová adresa"
+
+#, fuzzy
+#| msgid "The email-address is duplicated and already contained in the CSV!"
+msgid "The email address can be changed in the SSO provider."
+msgstr "Tato e-mailová adresa je duplikovaná a již obsažená v souboru CSV!"
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -12023,12 +12028,6 @@ msgstr "Zpět na nabídky"
 msgid "My Offers"
 msgstr "Moje nabídky"
 
-msgid "Add Offer"
-msgstr "Přidat nabídku"
-
-msgid "Misc"
-msgstr "Různé"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s hledá"
@@ -12074,6 +12073,9 @@ msgstr "Aktivovat nabídku"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Tato nabídka je neaktivní. Je viditelná pouze pro vás a není uvedena na tržišti. Můžete ji znovu aktivovat níže."
 
+msgid "Add Offer"
+msgstr "Přidat nabídku"
+
 #, python-format
 msgid ""
 "\n"
@@ -12100,6 +12102,9 @@ msgstr "Vaše telefonní číslo je viditelné pouze pro registrované uživatel
 msgid "Check all categories that fit your offer"
 msgstr "Zaškrtněte všechny kategorie, které odpovídají vaší nabídce"
 
+msgid "Misc"
+msgstr "Různé"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "První nahraný obrázek se zobrazí jako tapeta"
 
@@ -12111,6 +12116,11 @@ msgstr "Pouze aktivní nabídky budou umístěny na seznam v tržišti."
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Na tržišti budou uvedeny pouze aktivní nabídky. Vaše nabídka zůstane aktivní po dobu 4 týdnů. Poté ji můžete kdykoli znovu aktivovat."
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "Zadejte název nového dokumentu."
 
 msgid "Wanted"
 msgstr "Hledá se"
@@ -13202,6 +13212,11 @@ msgstr "Přihlásit se pomocí Facebooku"
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
+msgstr "Abyste mohli použít svůj účet %(portal_name)s k přihlášení na jinou platformu, musíte se nejprve přihlásit na %(portal_name)s."
 
 #, python-format
 msgid " %(portal_name)s is part of the following communities. If you have an account on one of these communities you can use it to login on %(portal_name)s. "

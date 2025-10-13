@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
+"POT-Creation-Date: 2025-10-07 13:50+0200\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4281,6 +4281,11 @@ msgstr "Si te gustaría cambiar tu dirección de correo electrónico, puedes hac
 
 msgid "Change email address"
 msgstr "Cambiar dirección de correo electrónico"
+
+#, fuzzy
+#| msgid "The email-address is duplicated and already contained in the CSV!"
+msgid "The email address can be changed in the SSO provider."
+msgstr "La dirección de correo electrónico está duplicada y ya está contenida en el CSV!"
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -11769,12 +11774,6 @@ msgstr "Volver a ofertas"
 msgid "My Offers"
 msgstr "Mis ofertas"
 
-msgid "Add Offer"
-msgstr "Añadir oferta"
-
-msgid "Misc"
-msgstr "Otros"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s está mirando por"
@@ -11820,6 +11819,9 @@ msgstr "Activar oferta"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Esta oferta está ináctiva. Solo es visible para tí y no está alistada en el mercado. La puedes reactivar abajo."
 
+msgid "Add Offer"
+msgstr "Añadir oferta"
+
 #, python-format
 msgid ""
 "\n"
@@ -11849,6 +11851,9 @@ msgstr "Tu número de teléfono solo es visible para usarios registrados"
 msgid "Check all categories that fit your offer"
 msgstr "Comprueba todas las categorías que se ajusten a tu oferta"
 
+msgid "Misc"
+msgstr "Otros"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "La imágen primer subida será denotada como wallpaper"
 
@@ -11860,6 +11865,11 @@ msgstr "Solo las ofertas activas se enumerarán en el mercado."
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Solo ofertas activas serán alistadas en el Mercado. Tu oferta será activa para 4 semanas. Después, la puedes reactivar en cualquier momento."
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "Introduce el título para un nuevo documento."
 
 msgid "Wanted"
 msgstr "Queridos"
@@ -12934,6 +12944,11 @@ msgstr "Inicia sesión con cuenta social"
 
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+msgstr " %(portal_name)s es parte de la comunidad %(provider)s. Puedes usar tu cuenta %(provider)s para iniciar sesión en %(portal_name)s."
+
+#, fuzzy, python-format
+#| msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
 msgstr " %(portal_name)s es parte de la comunidad %(provider)s. Puedes usar tu cuenta %(provider)s para iniciar sesión en %(portal_name)s."
 
 #, python-format
