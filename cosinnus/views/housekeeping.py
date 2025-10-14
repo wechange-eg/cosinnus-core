@@ -24,6 +24,7 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 
 from cosinnus.core.mail import (
+    get_common_mail_context,
     render_notification_item_html_mail,
     send_html_mail_threaded,
     send_mail,
@@ -486,6 +487,16 @@ def print_testmail(request):
             content_html = render_digest_item_for_notification_event(notification_event)
 
     html = render_notification_item_html_mail(request.user, subject, content_html)
+    return HttpResponse(html)
+
+
+def print_test_registration_notification_mail(request):
+    """Displays a text-email like it would be sent to an admin user when there is a new registration notification"""
+    context = get_common_mail_context(request, user=request.user)
+    subject = render_to_string('cosinnus/mail/user_register_notification_subj.txt', context)
+    body = render_to_string('cosinnus/mail/user_register_notification.html', context)
+    email_text = f'{subject}\n\n{body}'
+    html = textfield(email_text)
     return HttpResponse(html)
 
 
