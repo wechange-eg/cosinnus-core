@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 13:50+0200\n"
+"POT-Creation-Date: 2025-10-14 16:16+0200\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4341,6 +4341,32 @@ msgid "Enter your choices"
 msgstr "Entre tes choix"
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Plusieurs réponses possibles"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Rechercher dans les équipes"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Derniers fichiers"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "Ton profil"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Envoyer un message"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "Vérifie ton adresse e-mail pour %(site_name)s !"
 
@@ -4700,10 +4726,6 @@ msgstr "inactif"
 
 msgid "Message all members"
 msgstr "Envoyer un message à tous les membres"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Envoyer un message"
 
 msgid "Admin"
 msgstr "Administrateur"
@@ -8804,6 +8826,26 @@ msgstr ""
 msgid "Version {version_number} released"
 msgstr ""
 
+msgid "This update includes several features and bugfixes:"
+msgstr ""
+
+msgid "- Introducing the task board. You can now enable the modern task board in your groups and projects, which replaces the todo app. You can migrate your todos from the todos app, as well as any personal nextcloud boards you might have had.\n"
+msgstr ""
+
+msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
+msgstr ""
+
+msgid ""
+"- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n"
+"- Fixed a bug where the user avatar was sometimes not synced with some integrated services.\n"
+"- Fixed a bug where the platform font face was not applied on some pages.\n"
+"- Fixed a bug where third-party-tool links where sometimes not displayed on the microsite.\n"
+"- Nextcloud groups will now properly be renamed along with their corresponding group/project folder when their group/project is renamed on the platform.\n"
+"- (BBB) Fixed a bug where existing recorded BBB meetings were not accessible anymore after disabling BBB meetings for that group/project.\n"
+"- (BBB) Fixed a bug where links to inaccessible BBB meetings would show a server error instead of an informative error page.\n"
+"- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+
 msgid "This update includes several bugfixes:"
 msgstr ""
 
@@ -8864,9 +8906,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 2.2.0 released"
-msgstr ""
-
-msgid "This update includes several features and bugfixes:"
 msgstr ""
 
 msgid ""
@@ -9096,6 +9135,16 @@ msgstr "Compte utilisateur désactivé avec succès"
 
 msgid "Your data was saved successfully!"
 msgstr "Tes données ont été enregistrées avec succès !"
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Rechercher utilisateurs"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Tu trouveras ici un aperçu des idées que tu as aimées."
 
 msgid "No model given to export data from."
 msgstr "Pas de modèle donné pour exporter les données."
