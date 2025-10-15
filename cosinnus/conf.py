@@ -330,6 +330,7 @@ class CosinnusConf(AppConf):
     DEFAULT_ACTIVE_GROUP_APPS = [
         'cosinnus_cloud',
         'cosinnus_conference',
+        'cosinnus_deck',
         'cosinnus_etherpad',
         'cosinnus_event',
     ]
