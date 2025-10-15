@@ -15,66 +15,75 @@
 {% block main_page %}
     <div class="row">
         <!-- now the content -->
-        <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
-            
-            <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" class="cosinnus-form form-horizontal " role="form" style="border: 1px solid #cfcfcf;">
-                {% csrf_token %}
-                    
-	            <!-- a box with semi transparent background -->
-			    <div class="v2-content">
-			        <h1>{{ SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS }}</h1>
-			        
-			        <p class="large-space">
-			            {% blocktrans with portal_name=SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}Sign in now using your {{ portal_name }} account.{% endblocktrans %}
-			        </p>
-			        
-	                
-                    {{ form.non_field_errors }}
-	                
-	                {# Regular Field #}
-                    {% trans "Email" as login_label %}
-                    {% trans "Email" as login_placeholder %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.username label=login_label placeholder=login_placeholder first=True %}
-                        
-                    {# Regular Field #}
-                    {% trans "Password" as password_label %}
-                    {% trans "Password" as password_placeholder %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.password label=password_label placeholder=password_placeholder %}
-                        
-                    
-	                <div class="button-section clearfix">
-			            <button type="submit" class="pull-right rounded-button button-color-primary-inverted">
-			                <span class="rounded-button-inner">
-                                {% trans "Log in" %}
-			                </span>
-			            </button>
-			            <a onclick="history.back()" class="pull-left rounded-button button-color-tertiary">
-			                <span class="rounded-button-inner">
-			                    {% trans "Cancel" %}
-			                </span>
-			            </a>
-			        </div>
-			        
-			        <hr class="invisible" />
-			        
-			        <div class="button-section clearfix centered">
-                        <a href="{% url "cosinnus:user-add" %}?next={{ request.GET.next|urlencode }}" class="">
-                            <span class="rounded-button-inner">
-                                {% blocktrans with portal_name=SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}You don't have a {{ portal_name }} account yet?{% endblocktrans %}
-                            </span>
-                        </a>
-                        <div class="clearfix v-spacer-s"></div>
-                        <a href="{% url "password_reset" %}" target="_blank">
-                            <span class="rounded-button-inner">
-                                {% trans "Forgot password?" %}
-                            </span>
-                        </a>
-                    </div>
-			        
-	            </div>		
-            
-            </form>
-            
+        <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3" style="border: 1px solid #cfcfcf;">
+
+            <!-- a box with semi transparent background -->
+            <div class="v2-content">
+                <h1>{{ SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS }}</h1>
+
+                {% if not SETTINGS.COSINNUS_USER_LOGIN_DISABLED %}
+                    <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" class="cosinnus-form form-horizontal " role="form">
+                        {% csrf_token %}
+
+
+                        <p class="large-space">
+                            {% blocktrans with portal_name=SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}Sign in now using your {{ portal_name }} account.{% endblocktrans %}
+                        </p>
+
+
+                        {{ form.non_field_errors }}
+
+                        {# Regular Field #}
+                        {% trans "Email" as login_label %}
+                        {% trans "Email" as login_placeholder %}
+                        {% include 'cosinnus/fields/default_field.html' with field=form.username label=login_label placeholder=login_placeholder first=True %}
+
+                        {# Regular Field #}
+                        {% trans "Password" as password_label %}
+                        {% trans "Password" as password_placeholder %}
+                        {% include 'cosinnus/fields/default_field.html' with field=form.password label=password_label placeholder=password_placeholder %}
+
+
+                        <div class="button-section clearfix">
+                            <button type="submit" class="pull-right rounded-button button-color-primary-inverted">
+                                <span class="rounded-button-inner">
+                                    {% trans "Log in" %}
+                                </span>
+                            </button>
+                            <a onclick="history.back()" class="pull-left rounded-button button-color-tertiary">
+                                <span class="rounded-button-inner">
+                                    {% trans "Cancel" %}
+                                </span>
+                            </a>
+                        </div>
+
+                        <hr class="invisible" />
+
+                        <div class="button-section clearfix centered">
+                            <a href="{% url "cosinnus:user-add" %}?next={{ request.GET.next|urlencode }}" class="">
+                                <span class="rounded-button-inner">
+                                    {% blocktrans with portal_name=SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}You don't have a {{ portal_name }} account yet?{% endblocktrans %}
+                                </span>
+                            </a>
+                            <div class="clearfix v-spacer-s"></div>
+                            <a href="{% url "password_reset" %}" target="_blank">
+                                <span class="rounded-button-inner">
+                                    {% trans "Forgot password?" %}
+                                </span>
+                            </a>
+                        </div>
+
+                    </form>
+                {% endif %}
+
+                {% if SETTINGS.COSINNUS_IS_OAUTH_CLIENT %}
+                    <div class="large-space"></div>
+                    {% include "socialaccount/snippets/provider_list.html" with process="login" type="login" %}
+                {% endif %}
+
+
+            </div>
+
 			
 		</div>
 	</div>
