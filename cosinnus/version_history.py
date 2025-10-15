@@ -38,9 +38,11 @@ UPDATES = {
             else '',
             _(
                 '- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n'
+                '- Fixed a bug where group/project invite links would sometimes not work on signing up and could not '
+                'be used by logged in users.\n'
                 '- Fixed a bug where the user avatar was sometimes not synced with some integrated services.\n'
                 '- Fixed a bug where the platform font face was not applied on some pages.\n'
-                '- Fixed a bug where third-party-tool links where sometimes not displayed on the microsite.\n'
+                '- Fixed a bug where third-party-tool links where sometimes erroneously displayed on the microsite.\n'
                 '- Nextcloud groups will now properly be renamed along with their corresponding group/project folder '
                 'when their group/project is renamed on the platform.\n'
                 '- (BBB) Fixed a bug where existing recorded BBB meetings were not accessible anymore after disabling '
