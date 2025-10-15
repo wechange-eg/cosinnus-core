@@ -26,6 +26,7 @@ from django.db.models.query import QuerySet
 from django.http import HttpRequest
 from django.template.base import TemplateSyntaxError
 from django.template.defaultfilters import linebreaksbr
+from django.template.defaultfilters import stringformat as _django_stringformat
 from django.template.defaulttags import URLNode, url
 from django.template.defaulttags import url as url_tag
 from django.template.loader import render_to_string
@@ -1121,6 +1122,15 @@ def linebreaksoneline(text, arg=''):
 
 
 @register.filter
+def remove_blank_lines(text):
+    """Removes all blank lines including lines with whitespace only."""
+    if not text:
+        return ''
+    text = '\n'.join(filter(str.strip, text.splitlines()))
+    return text
+
+
+@register.filter
 def add_domain(url):
     """Adds the current domain to a given URL, unless it already starts with http"""
     return url if url.startswith('http') else CosinnusPortal.get_current().get_domain() + url
@@ -1557,6 +1567,12 @@ def get_dynamic_field_value(dynamic_field_key, dynamic_field_name):
     return dynamic_field_value
 
 
+@register.filter
+def get_dynamic_field_label(dynamic_field_name):
+    dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.get(dynamic_field_name)
+    return dynamic_field.label
+
+
 @register.simple_tag
 def get_setting(name):
     return getattr(settings, name, '')
@@ -1573,7 +1589,14 @@ def stringformat(value, args):
         return dateutil.parser.parse(value)
     except Exception as e:
         logger.error('Exception in cosinnus_tags.py date `stringformat` filter: e', extra={'exception': e})
-        return None
+        return
+
+
+# since stringformat is overwritten,
+# register original django filter with different name to make it accessible in templates
+@register.filter
+def django_stringformat(value, args):
+    return _django_stringformat(value, args)
 
 
 @register.filter

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-06 15:13+0200\n"
+"POT-Creation-Date: 2025-10-15 10:55+0200\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -574,6 +574,21 @@ msgid "The page you tried to visit is not available for guest accounts."
 msgstr "Ձեր հայցված էջն այս պահին հասանելի չէ այս իրադարձության համար."
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
+msgstr ""
+
+msgid "The Todo app is replaced by the Task Board app. Editing existing Todos or creating new Todos has been disabled. "
+msgstr ""
+
+#, fuzzy
+msgid "here"
+msgstr "Որտեղ"
+
+#, python-format
+msgid "You can migrate existing Todos %(here_link)s."
+msgstr ""
+
+#, python-format
+msgid "Existing Todos can be migrated by the %(group_type)s admins."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1853,6 +1868,10 @@ msgstr "Nextcloud Խմբի ID- ն"
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Խմբի ID- ն"
 
+#, fuzzy
+msgid "Nextcloud Deck Board ID"
+msgstr "Nextcloud Խմբի ID- ն"
+
 msgid "Is conference"
 msgstr ""
 
@@ -2101,7 +2120,6 @@ msgid "Replacement avatar for the group avatar. If empty, falls back to group.av
 msgstr ""
 
 #, fuzzy
-#| msgid ", for the following reason:"
 msgid "User-set answers to Mitwirk-O-Mat questions"
 msgstr "՝ հետևյալ պատճառով:"
 
@@ -2227,7 +2245,6 @@ msgid "User-Block"
 msgstr "Մուտքագրեք թոքենը:"
 
 #, fuzzy
-#| msgid "Users"
 msgid "User-Blocks"
 msgstr "Օգտատերեր"
 
@@ -2769,44 +2786,6 @@ msgstr "Դիտել էջում"
 
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Մուտքագրեք 4 մեծատառ սկրամբլավորված պատկերման մեջ"
-
-msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
-msgstr "Այս էջը շատ լավ սպասումների նախադիտում է: Այն գտնվում է մշակման փուլում, և շատ առանձնահատկություններ թերի են, կամ կարող են դեռևս ճիշտ չգործել!"
-
-msgid "Done"
-msgstr "Կատարված է"
-
-msgid "Configure"
-msgstr "Կարգավորել"
-
-msgid "Withdraw request"
-msgstr "Չեղարկել հայտը"
-
-msgid "Join"
-msgstr "Միանալ"
-
-#, python-format
-msgid "Do you really want to withdraw your join request to „%(title)s“?"
-msgstr "Դուք իսկապե՞ս ցանկանում եք չեղարկել ձեր „%(title)s“-ին միանալու հայցը?"
-
-msgid "Withdraw Join Request"
-msgstr "Չեղարկել ՄԻանալու հայտը"
-
-#, python-format
-msgid "Do you wish to request to join „%(title)s“?"
-msgstr "Ցանկանու՞մ եք „%(title)s“-ին միանալու հարցում ուղարկել?"
-
-msgid "Add widget"
-msgstr "Ավելացնել վիդջեթ"
-
-msgid "Informations"
-msgstr "Տեղեկատվություն"
-
-msgid "No informations set"
-msgstr "Ոչ մի տեղեկություն սահմանված չէ"
-
-msgid "Back to Project Overview"
-msgstr "Վերադառնալ Ծրագրի Դիտմանը"
 
 msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
 msgstr ""
@@ -3545,7 +3524,6 @@ msgid "You will receive a notification e-mail and on-site notification when the 
 msgstr ""
 
 #, fuzzy
-#| msgid ", for the following reason:"
 msgid "Please answer the following questions"
 msgstr "՝ հետևյալ պատճառով:"
 
@@ -4350,10 +4328,18 @@ msgid "The Volunteer-O-Matic is a playful matching tool that helps users to find
 msgstr ""
 
 #, fuzzy
-#| msgid "Join now!"
 msgctxt "Mitwirkomat"
 msgid "Join now"
 msgstr "Միացիր հիմա!"
+
+#, fuzzy
+#| msgid "We make your ideas heard!"
+msgid "The Task Board is here!"
+msgstr "Մենք օգնում ենք լսելի դարձնել ձեր գաղափարները!"
+
+#, fuzzy
+msgid "Activate Task Board"
+msgstr "Ակտիվացնել"
 
 #, fuzzy
 msgid "Members-Map"
@@ -4413,6 +4399,13 @@ msgctxt "join request pending team button second item"
 msgid "Requested"
 msgstr "Հայցված"
 
+#, python-format
+msgid "Do you really want to withdraw your join request to „%(title)s“?"
+msgstr "Դուք իսկապե՞ս ցանկանում եք չեղարկել ձեր „%(title)s“-ին միանալու հայցը?"
+
+msgid "Withdraw Join Request"
+msgstr "Չեղարկել ՄԻանալու հայտը"
+
 msgctxt "join team button first item"
 msgid "Join"
 msgstr "Միանալ"
@@ -4420,6 +4413,13 @@ msgstr "Միանալ"
 msgctxt "join team button second item"
 msgid "Now"
 msgstr "Հիմա"
+
+#, python-format
+msgid "Do you wish to request to join „%(title)s“?"
+msgstr "Ցանկանու՞մ եք „%(title)s“-ին միանալու հարցում ուղարկել?"
+
+msgid "Join"
+msgstr "Միանալ"
 
 msgid "View on Facebook"
 msgstr "Դիտել Facebook-ում"
@@ -4454,6 +4454,32 @@ msgstr ""
 
 msgid "Enter your choices"
 msgstr ""
+
+#, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Բազմակի ընտրանքներ քվեարկելի են"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Որոնել թիմերում"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Վերջին ֆայլերը"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "Քո պրոֆիլը"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Ուղարկել հաղորդագրությունը"
 
 #, fuzzy
 msgid "Please verify your email address to continue using your account."
@@ -4524,6 +4550,9 @@ msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասց�
 #, fuzzy
 msgid "Change email address"
 msgstr "էլեկտրոնային հասցե"
+
+msgid "The email address can be changed in the SSO provider."
+msgstr ""
 
 #, python-format
 msgid "Time zone: %(TIME_ZONE)s"
@@ -4609,12 +4638,10 @@ msgid "About the conference"
 msgstr "Նախագծի մասին"
 
 #, fuzzy
-#| msgid "Delete event"
 msgid "On-site event"
 msgstr "Ջնջել իրադարձությունը"
 
 #, fuzzy
-#| msgid "Delete event"
 msgid "Online event"
 msgstr "Ջնջել իրադարձությունը"
 
@@ -4828,10 +4855,6 @@ msgstr "ոչ ակտիվ"
 
 msgid "Message all members"
 msgstr "Հաղորդագրություն ուղարկել բոլոր անդամներին"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Ուղարկել հաղորդագրությունը"
 
 msgid "Admin"
 msgstr "Ադմինիստրատոր"
@@ -6268,11 +6291,6 @@ msgstr "Բոլորը"
 msgid "Matching Settings for the Volunteer-O-Matic"
 msgstr ""
 
-#, fuzzy
-#| msgid "Where"
-msgid "here"
-msgstr "Որտեղ"
-
 #, python-format
 msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
 msgstr ""
@@ -6296,12 +6314,27 @@ msgid "Enter only if you want to set a different logo than the one in your %(set
 msgstr ""
 
 #, fuzzy
-#| msgid "Open Preview"
 msgid "Image preview"
 msgstr "Բացել նախադիտումը"
 
+#, python-format
+msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
+msgstr ""
+
 #, fuzzy
-#| msgid "Link URL"
+msgid "Currently set as location"
+msgstr "Ներկայումս սահմանված Ողջույնի նամակի տեքստը"
+
+#, fuzzy
+#| msgid "No informations set"
+msgid "No location set yet"
+msgstr "Ոչ մի տեղեկություն սահմանված չէ"
+
+#, python-format
+msgid "Change location in %(group_settings_label)s"
+msgstr ""
+
+#, fuzzy
 msgid "Link"
 msgstr "URL հղում"
 
@@ -6701,7 +6734,6 @@ msgid "HD space used by projects"
 msgstr ""
 
 #, fuzzy
-#| msgid "Users Need Activation"
 msgid "User Activity Timeline"
 msgstr "Օգտատերերին անհրաժեշտ է ակտիվացում"
 
@@ -6722,6 +6754,25 @@ msgstr ""
 
 msgid "Select the date range for which you would like statistics"
 msgstr ""
+
+#, python-format
+msgid "Data for Portal %(portal_name)s from %(from_date)s to %(to_date)s"
+msgstr ""
+
+#, python-format
+msgid "Detailed Data from %(from_date)s to %(to_date)s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Note"
+msgctxt "notice, used at beginning of a paragraph"
+msgid "Note"
+msgstr "Նշում"
+
+#, fuzzy
+#| msgid "Please select or create a todo list."
+msgid "Please select a different timespan to display more data."
+msgstr "Խնդրում ենք ընտրել կամ ստեղծել անելիքների ցանկ."
 
 msgid "The WE-Cloud is here!"
 msgstr ""
@@ -7236,7 +7287,6 @@ msgstr "Այստեղ կարող եք գտնել ձեր Խմբերի և նախա�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "You can create Groups or Projects via the '+' button in the header."
 msgid "You can create Groups or Projects via the main menu in the header."
 msgstr "Դուք կարող եք ստեղծել Խմբեր կամ Նախագծեր վերևում գտնվող '+' կոճակի միջոցով."
 
@@ -7250,7 +7300,6 @@ msgstr "Այստեղ կարող եք գտնել ձեր հավանած գաղափ
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
 msgid "You can create your own Ideas and discover existing Ideas here"
 msgstr "Դուք կարող եք ստեղծել ձեր սեփական գաղափարները սեղմելով վերևում գտնվող «+» կոճակը կամ կարող եք գտնել այստեղ առկա գաղափարներ"
 
@@ -7524,12 +7573,10 @@ msgid "Unblock user"
 msgstr ""
 
 #, fuzzy
-#| msgid "All users"
 msgid "Block user"
 msgstr "Բոլոր օգտատերերը"
 
 #, fuzzy
-#| msgid "You are following this content or its Project or Group"
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Դուք հետևում եք այս բովանդակությանը կամ դրա Ծրագրին կամ Խմբին"
 
@@ -8237,6 +8284,18 @@ msgstr "Սա նորից չցուցադրել"
 msgid "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!"
 msgstr ""
 
+msgid "Migrate your boards from the Nextcloud Deck app to your groups and projects!"
+msgstr ""
+
+msgid "Until now, you have been able to work with boards in Nextcloud (using the Deck app). We have now moved this feature from the cloud directly into the groups and projects so that all users can work with Task Boards even more easily."
+msgstr ""
+
+msgid "If you want to continue using your boards from the Nextcloud Deck app, you will need to move them to a group or project."
+msgstr ""
+
+msgid "Execute Migration"
+msgstr ""
+
 msgid "Preview"
 msgstr "Նախադիտում"
 
@@ -8441,7 +8500,6 @@ msgid "in the Project Dashboard"
 msgstr "Կառավարման վահանակ"
 
 #, fuzzy
-#| msgid "Privacy settings"
 msgid "Project settings"
 msgstr "Գաղտնիության կարգավորումներ"
 
@@ -8577,6 +8635,9 @@ msgstr ""
 msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our project in this regard? In other words: Is the aspect that the statement is about characteristic for your project?"
 msgstr ""
 
+msgid "With the new app, you can organise the collaboration in your project – it's easy, flexible and clear (thanks to Kanban logic). Try out the wide range of functions and become more effective with agile project management! As an admin, you can activate the Task Board for your project."
+msgstr ""
+
 #, fuzzy
 msgid "You are not currently in any Groups"
 msgstr "Դուք որևէ խմբում կամ նախագծում դեռ կայացած չեք"
@@ -8598,7 +8659,6 @@ msgid "in the Group Dashboard"
 msgstr "Կառավարման վահանակ"
 
 #, fuzzy
-#| msgid "Privacy settings"
 msgid "Group settings"
 msgstr "Գաղտնիության կարգավորումներ"
 
@@ -8724,6 +8784,9 @@ msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group.
 msgstr ""
 
 msgid "Your answers to the following questions determine how you are matched with the users by the algorithm. For each of the statements, ask yourself: Would a user who agrees with the statement fit to our group in this regard? In other words: Is the aspect that the statement is about characteristic for your group?"
+msgstr ""
+
+msgid "With the new app, you can organise the collaboration in your group – it's easy, flexible and clear (thanks to Kanban logic). Try out the wide range of functions and become more effective with agile project management! As an admin, you can activate the Task Board for your group."
 msgstr ""
 
 #, fuzzy
@@ -8902,6 +8965,9 @@ msgstr "Թիմի նկարագրություն"
 msgid "About Us"
 msgstr "Մեր մասին"
 
+msgid "Informations"
+msgstr "Տեղեկատվություն"
+
 #, fuzzy
 msgid "Now"
 msgstr "Հիմա"
@@ -8946,6 +9012,27 @@ msgstr ""
 
 #, python-brace-format
 msgid "Version {version_number} released"
+msgstr ""
+
+msgid "This update includes several features and bugfixes:"
+msgstr ""
+
+msgid "- Introducing the task board. You can now enable the modern task board in your groups and projects, which replaces the todo app. You can migrate your todos from the todos app, as well as any personal nextcloud boards you might have had.\n"
+msgstr ""
+
+msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
+msgstr ""
+
+msgid ""
+"- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n"
+"- Fixed a bug where group/project invite links would sometimes not work on signing up and could not be used by logged in users.\n"
+"- Fixed a bug where the user avatar was sometimes not synced with some integrated services.\n"
+"- Fixed a bug where the platform font face was not applied on some pages.\n"
+"- Fixed a bug where third-party-tool links where sometimes erroneously displayed on the microsite.\n"
+"- Nextcloud groups will now properly be renamed along with their corresponding group/project folder when their group/project is renamed on the platform.\n"
+"- (BBB) Fixed a bug where existing recorded BBB meetings were not accessible anymore after disabling BBB meetings for that group/project.\n"
+"- (BBB) Fixed a bug where links to inaccessible BBB meetings would show a server error instead of an informative error page.\n"
+"- Further minor bugfixes and stability improvements have been made."
 msgstr ""
 
 msgid "This update includes several bugfixes:"
@@ -9008,9 +9095,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 2.2.0 released"
-msgstr ""
-
-msgid "This update includes several features and bugfixes:"
 msgstr ""
 
 msgid ""
@@ -9242,6 +9326,16 @@ msgstr "Ջնջել օգտատիրոջ անձնական էջը"
 #, fuzzy
 msgid "Your data was saved successfully!"
 msgstr "Ձեր գաղափարը հաջողությամբ ջնջվել է."
+
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Օգտատերերի որոնում"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Այստեղ կարող եք գտնել ձեր հավանած գաղափարների ակնարկը."
 
 msgid "No model given to export data from."
 msgstr "Ոչ մի մոդել չի տրվել տվյալների արտահանման համար."
@@ -9612,17 +9706,14 @@ msgid "User %s is now blocked."
 msgstr "Ստեղշծեց"
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error blocking user %s."
 msgstr "Վիդջեթը բեռնելիս սխալ տեղի ունեցավ"
 
 #, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
 msgid "User %s is no longer blocked."
 msgstr "\"%(username)s\" օգտատերը այլևս անդամ չէ."
 
 #, fuzzy, python-format
-#| msgid "There was an error loading the widget"
 msgid "There was an error unblocking user %s."
 msgstr "Վիդջեթը բեռնելիս սխալ տեղի ունեցավ"
 
@@ -9634,6 +9725,68 @@ msgstr "Ներեցեք, մենք չկարողացանք միանալ ձեր օգ
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Ներեցեք, դուք չեք կարող մուտք գործել, քանի որ ձեր էջը կասեցված է: Խնդրում ենք կապվել համակարգի ադմինիստրատորի հետ!"
+
+#, python-brace-format
+msgid "Week {week_number}: {week_start_date}"
+msgstr ""
+
+#, python-format
+msgid "since %(date_from)s"
+msgstr ""
+
+#, python-format
+msgid "until %(date_to)s"
+msgstr ""
+
+#. Translators: keep formatting verbatim (space, parenthesis)
+#, python-brace-format
+msgid " (recorded only from {first_online_date} onwards)"
+msgstr ""
+
+#. Translators: no punctuation at the end
+msgid "Unique, registered users that were active in this period"
+msgstr ""
+
+msgid "New Registered User Accounts in this period"
+msgstr ""
+
+msgid "Total Enabled User Accounts (at least 1x logged in)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show more Projects of this Group"
+msgid "Newly Created Projects in this period"
+msgstr "Ցուցադրել այս խմբի ավելի շատ նախագծեր"
+
+#, fuzzy
+#| msgid "All Projects"
+msgid "Total Enabled Projects"
+msgstr "Բոլոր Նախագծերը"
+
+msgid "Newly Created Groups in this period"
+msgstr ""
+
+#, fuzzy
+#| msgid "All Groups"
+msgid "Total Enabled Groups"
+msgstr "Բոլոր Խմբերը"
+
+#, fuzzy
+msgid "Newly Created Conferences in this period"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy
+msgid "Total Enabled Conferences"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "Running (scheduled) Conferences in this period"
+msgstr ""
+
+msgid "Newly Created Events in this period"
+msgstr ""
+
+msgid "Newly Created News in this period"
+msgstr ""
 
 msgid "You are already logged in. This function is only available to set up your account for the first time!"
 msgstr ""
@@ -10021,6 +10174,306 @@ msgstr "Ստատուս"
 #, fuzzy
 msgid "Attendance data is not available for this conference."
 msgstr "Մուտքագրեք անուն նախագծի համար."
+
+#, fuzzy
+msgid "Task Board"
+msgstr "Կառավարման վահանակ"
+
+msgctxt "the_app"
+msgid "deck"
+msgstr ""
+
+#, fuzzy
+#| msgid "A user created a new todo"
+msgid "A user created a task"
+msgstr "Օգտատերը ստեղծել է նոր անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s created the task %(object_name)s"
+msgstr "%(sender_name)s-ը ստեղծել է %(object_name)s պահոց"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d pads"
+msgid "%(sender_name)s created %(count)d tasks"
+msgstr "%(sender_name)s-ը ստեղծել է %(count)d պահոց"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created a task"
+msgstr "%(sender_name)s -ը ստեղծել է նոր անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s posted in %(team_name)s:"
+msgid "%(sender_name)s created a task in %(team_name)s."
+msgstr "%(sender_name)s-ը հրապարակեց %(team_name)s -ում:"
+
+#, fuzzy
+#| msgid "A todo was assigned to me"
+msgid "A task was assigned to you"
+msgstr "Ինձ հանձնարարվել է անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s assigned you the task %(object_name)s"
+msgstr "%(sender_name)s -ը վերահանձնարարել է %(object_name)s անելիքների ցանկը"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned %(count)d todos"
+msgid "%(sender_name)s assigned you %(count)d tasks"
+msgstr "%(sender_name)s -ը վերահանձնարարել է %(count)d անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in"
+msgid "%(sender_name)s assigned you a task"
+msgstr "%(sender_name)s-ը նշել է ձեզ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s assigned you the task %(object_name)s."
+msgstr "%(sender_name)s -ը վերահանձնարարել է %(object_name)s անելիքների ցանկը"
+
+#, fuzzy
+#| msgid "A todo was assigned to me"
+msgid "A task was unassigned from you"
+msgstr "Ինձ հանձնարարվել է անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s unassigned you from the task %(object_name)s"
+msgstr "%(sender_name)s -ը վերահանձնարարել է %(object_name)s անելիքների ցանկը"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned %(count)d todos"
+msgid "%(sender_name)s unassigned you from %(count)d tasks"
+msgstr "%(sender_name)s -ը վերահանձնարարել է %(count)d անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s unassigned you from a task"
+msgstr "%(sender_name)s -ը հանձնարարել է ձեզ անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgid "%(sender_name)s unassigned you from the task %(object_name)s."
+msgstr "%(sender_name)s -ը վերահանձնարարել է %(object_name)s անելիքների ցանկը"
+
+#, fuzzy
+#| msgid "You were tagged in this event"
+msgid "You were mentioned in a task comment"
+msgstr "Դուք նշված եք այս իրադարձության մեջ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s"
+msgstr "%(sender_name)s -ը մեկնաբանել է %(object_name)s անելիքների ցանկը"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s tagged you in %(count)d items"
+msgid "%(sender_name)s mentioned you in a comment of %(count)d tasks"
+msgstr "%(sender_name)s-ը նշել է ձեզ %(count)d կետերում"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post"
+msgid "%(sender_name)s mentioned you in a task comment"
+msgstr "%(sender_name)s -ը մեկնաբանել է լրատվական գրառումը"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s."
+msgstr "%(sender_name)s -ը մեկնաբանել է %(object_name)s անելիքների ցանկը"
+
+msgid "A task has was marked as done"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as done"
+msgstr "%(sender_name)s-ը ստեղծել է %(object_name)s պահոց"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d todos"
+msgid "%(sender_name)s marked %(count)d tasks as done"
+msgstr "%(sender_name)s ստեղծել է %(count)d անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin"
+msgid "%(sender_name)s marked a task as done"
+msgstr "%(sender_name)s-ը նշանակեց ձեզ ադմինիստրատոր"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as done."
+msgstr "%(sender_name)s-ը ստեղծել է %(object_name)s պահոց"
+
+msgid "A task has was marked as undone"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as undone"
+msgstr "%(sender_name)s-ը ստեղծել է %(object_name)s պահոց"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d todos"
+msgid "%(sender_name)s marked %(count)d tasks as undone"
+msgstr "%(sender_name)s ստեղծել է %(count)d անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin"
+msgid "%(sender_name)s marked a task as undone"
+msgstr "%(sender_name)s-ը նշանակեց ձեզ ադմինիստրատոր"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created the pad %(object_name)s"
+msgid "%(sender_name)s marked the task %(object_name)s as undone."
+msgstr "%(sender_name)s-ը ստեղծել է %(object_name)s պահոց"
+
+msgid "A tasks due data was changed"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgid "%(sender_name)s changed the due date of the task %(object_name)s"
+msgstr "%(sender_name)s -ը փոխել է %(object_name)s իրադարձության հարցումը"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created %(count)d pads"
+msgid "%(sender_name)s changed the due data of %(count)d tasks"
+msgstr "%(sender_name)s-ը ստեղծել է %(count)d պահոց"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgid "%(sender_name)s change the due date of a task"
+msgstr "%(sender_name)s -ը փոխել է %(object_name)s իրադարձության հարցումը"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgid "%(sender_name)s changed the due date of the task %(object_name)s."
+msgstr "%(sender_name)s -ը փոխել է %(object_name)s իրադարձության հարցումը"
+
+#, fuzzy
+#| msgid "A user commented on a news post"
+msgid "A user commented on a task"
+msgstr "Օգտատերը մեկնաբանել է լրատվական գրառումը"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s commented on the task %(object_name)s"
+msgstr "%(sender_name)s -ը մեկնաբանել է %(object_name)s անելիքների ցանկը"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed %(count)d todos"
+msgid "%(sender_name)s commented on %(count)d tasks"
+msgstr "%(sender_name)s -ը ավարտել է %(count)d անելիքների ցանկ"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post"
+msgid "%(sender_name)s commented on the task"
+msgstr "%(sender_name)s -ը մեկնաբանել է լրատվական գրառումը"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgid "%(sender_name)s commented on the task %(object_name)s."
+msgstr "%(sender_name)s -ը մեկնաբանել է %(object_name)s անելիքների ցանկը"
+
+msgid "The Task Board creation is in progress..."
+msgstr ""
+
+#, fuzzy
+#| msgid "My Todos"
+msgid "Migrate Todos"
+msgstr "Իմ անելիքների ցանկերը"
+
+msgid "Migrate Todos to Task Board"
+msgstr ""
+
+msgid "Start the migration of Todos to the Task Board in the background."
+msgstr ""
+
+msgid "The Todo app will be automatically deactivated when finished."
+msgstr ""
+
+msgid "Migration is in progress..."
+msgstr ""
+
+msgid "An error occurred during the migration. Some Todos might not have been migrated."
+msgstr ""
+
+msgid "Please try again later. If the error persists, please contact our support."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Migration to %(deck_link)s successfully finished. "
+msgstr "%(username)s օգտատերը հաջողությամբ հրավիրվել է!"
+
+#, fuzzy
+msgid "Start migration"
+msgstr "Մեկնարկի ամսաթիվ."
+
+#, fuzzy
+msgid "Retry migration"
+msgstr "Ադմինիստրացիա"
+
+#, fuzzy
+msgid "Migrate Nextcloud Boards"
+msgstr "Nextcloud Խմբի ID- ն"
+
+msgid "Until now, you have been able to work with boards in the Deck app within the Nextcloud. We have now moved this feature from the cloud directly into the groups and projects so that all users can work with Task Boards even more easily."
+msgstr ""
+
+msgid "If you want to continue using your boards from the Nextcloud Deck app, you must move them to a group or project. To do this, select the target group/project for each of your boards."
+msgstr ""
+
+#, fuzzy
+#| msgid "Notes"
+msgid "Notes:"
+msgstr "Նշումներ"
+
+msgid "You can only migrate boards for which you have either ‘Owner’ permissions or 'Manage' and ‘Share’ permissions. Therefore, some boards that you had access to in the Nextcloud Deck app may not be displayed here (e.g. because you only have ‘Edit’ permissions). In this case, you should ask the person(s) who have the necessary permissions for the board to perform the migration."
+msgstr ""
+
+msgid "You can only select groups and projects in which you are an admin as the destination for the migration."
+msgstr ""
+
+msgid "If a board does not fit into any of your existing groups and projects in terms of content, you can create a new group or project and then select it as the destination for the migration."
+msgstr ""
+
+msgid "If the group/project you select as the migration destination has not yet activated the new ‘Task Board’ app, the app will be activated as part of the migration. If the app is already activated, the lists and tasks from the migrated board will be appended to the existing lists of the Task Board."
+msgstr ""
+
+msgid "No content will be overwritten."
+msgstr ""
+
+msgid "Boards that have already been migrated (by you or another user with the necessary permissions) will continue to appear in the list. There is no indication as to whether a board has already been migrated. This means you can migrate boards to different groups/projects if you wish - or multiple times into the same group/project. If you accidentally migrate a board twice, this is not a problem; you can simply delete the redundant task lists manually."
+msgstr ""
+
+msgid "Board from the Nextcloud Deck App"
+msgstr ""
+
+msgid "Group/Project (migration target)"
+msgstr ""
+
+msgid "You must have admin permissions in a group/project to migrate NextCloud Deck boards."
+msgstr ""
+
+msgid "Migration is in progress. It can take a few minutes ..."
+msgstr ""
+
+msgid "Migration successfully finished. You can access the migrated boards in the Task Board of the selected groups/projects."
+msgstr ""
+
+msgid "Note: You have to add users to a group/project to allow them access to the board."
+msgstr ""
+
+msgid "An error occurred during the migration. Some boards might not have been fully migrated."
+msgstr ""
+
+msgid "Please Select"
+msgstr ""
+
+msgid "If the Task Board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the Task Board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
+msgstr ""
 
 msgid "The following Pads were re-initialized:"
 msgstr "Վերահաստատվել են հետևյալ Պահոցները:"
@@ -11761,12 +12214,6 @@ msgstr "Վերադառնալ առաջարկներին"
 msgid "My Offers"
 msgstr "Իմ առաջարկները"
 
-msgid "Add Offer"
-msgstr "Ավելացնել առաջարկ"
-
-msgid "Misc"
-msgstr "Misc"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s փնտրում է"
@@ -11812,6 +12259,9 @@ msgstr "Ակտիվացնել առաջարկը"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Այս առաջարկը ակտիվ չէ: Այն միայն տեսանելի է ձեզ համար և նշված չէ առևտրական հարթակում: Կարող եք վերաակտիվացնել այն ստորև."
 
+msgid "Add Offer"
+msgstr "Ավելացնել առաջարկ"
+
 #, python-format
 msgid ""
 "\n"
@@ -11838,6 +12288,9 @@ msgstr "Ձեր հեռախոսահամարը տեսանելի է միայն գր�
 msgid "Check all categories that fit your offer"
 msgstr "Տեսնել ձեր առաջարկին համապատասխանող բոլոր կատեգորիաները"
 
+msgid "Misc"
+msgstr "Misc"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "Առաջին վերբեռնված պատկերը կցուցադրվի որպես էջի գլխավոր պաստառ"
 
@@ -11849,6 +12302,11 @@ msgstr ""
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Միայն ակտիվ առաջարկներն են թվարկվելու առևտրական հարթակում: Ձեր առաջարկը ակտիվ կմնա 4 շաբաթ: Դրանից հետո ցանկացած պահի կարող եք վերաակտիվացնել այն."
+
+#, fuzzy
+#| msgid "Enter the title for a new Document."
+msgid "Enter the title for a new offer."
+msgstr "Մուտքագրեք վերնագիր նոր փաստաթղթի համար."
 
 msgid "Wanted"
 msgstr "Փնտրվում է"
@@ -12932,6 +13390,10 @@ msgstr "Մուտք գործել Facebook- ի Էջով"
 
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+msgstr ""
+
+#, python-format
+msgid "You can use your %(provider)s account to login on %(portal_name)s."
 msgstr ""
 
 #, python-format
@@ -14608,25 +15070,23 @@ msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս 
 msgid "Are you sure you want to delete this object?"
 msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս թիմը?"
 
-#, fuzzy
-#~| msgid "Nextcloud Group ID"
-#~ msgid "Nextcloud Deck Board ID"
-#~ msgstr "Nextcloud Խմբի ID- ն"
+#~ msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
+#~ msgstr "Այս էջը շատ լավ սպասումների նախադիտում է: Այն գտնվում է մշակման փուլում, և շատ առանձնահատկություններ թերի են, կամ կարող են դեռևս ճիշտ չգործել!"
 
-#, fuzzy
-#~| msgid "Dashboard"
-#~ msgid "Task-Board"
-#~ msgstr "Կառավարման վահանակ"
+#~ msgid "Done"
+#~ msgstr "Կատարված է"
 
-#, fuzzy
-#~ msgid "In my Cloud Files"
-#~ msgstr "Որոնել թիմերում"
+#~ msgid "Configure"
+#~ msgstr "Կարգավորել"
 
-#~ msgid "You can create Groups or Projects via the '+' button in the header."
-#~ msgstr "Դուք կարող եք ստեղծել Խմբեր կամ Նախագծեր վերևում գտնվող '+' կոճակի միջոցով."
+#~ msgid "Withdraw request"
+#~ msgstr "Չեղարկել հայտը"
 
-#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
-#~ msgstr "Դուք կարող եք ստեղծել ձեր սեփական գաղափարները սեղմելով վերևում գտնվող «+» կոճակը կամ կարող եք գտնել այստեղ առկա գաղափարներ"
+#~ msgid "Add widget"
+#~ msgstr "Ավելացնել վիդջեթ"
+
+#~ msgid "Back to Project Overview"
+#~ msgstr "Վերադառնալ Ծրագրի Դիտմանը"
 
 #~ msgid "%(sender_name)s"
 #~ msgstr "%(sender_name)s"
@@ -14955,6 +15415,10 @@ msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս 
 #~ msgstr "Նամակներ"
 
 #, fuzzy
+#~ msgid "In my Cloud Files"
+#~ msgstr "Որոնել թիմերում"
+
+#, fuzzy
 #~ msgid "Info messages:"
 #~ msgstr "Նամակներ"
 
@@ -15193,6 +15657,12 @@ msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս 
 #, fuzzy
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը անտեսանելի կլինեն կայքում."
+
+#~ msgid "You can create Groups or Projects via the '+' button in the header."
+#~ msgstr "Դուք կարող եք ստեղծել Խմբեր կամ Նախագծեր վերևում գտնվող '+' կոճակի միջոցով."
+
+#~ msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+#~ msgstr "Դուք կարող եք ստեղծել ձեր սեփական գաղափարները սեղմելով վերևում գտնվող «+» կոճակը կամ կարող եք գտնել այստեղ առկա գաղափարներ"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Դուք փոխել եք ձեր էլ. փոստի հասցեն: Մենք շուտով ձեր էլ․հասցեյին կուղարկենք հաստատման հղումը։ Մինչ այդ հղումով անցնելը, ձեր պրոֆիլը կպահպանի ձեր հին էլ. փոստի հասցեն!"

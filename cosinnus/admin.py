@@ -58,7 +58,7 @@ from cosinnus.models.profile import (
     get_user_profile_model,
 )
 from cosinnus.models.storage import TemporaryData
-from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory, TagObject
+from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory, SyncedExternalObject, TagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -362,6 +362,16 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     exclude = [
         'is_conference',
     ]
+    if not settings.COSINNUS_CLOUD_ENABLED:
+        exclude += [
+            'nextcloud_group_id',
+            'nextcloud_groupfolder_name',
+            'nextcloud_groupfolder_id',
+        ]
+    if not settings.COSINNUS_DECK_ENABLED:
+        exclude += [
+            'nextcloud_deck_board_id',
+        ]
     if settings.COSINNUS_CONFERENCES_ENABLED:
         inlines = [CosinnusConferenceSettingsInline]
 
@@ -657,7 +667,7 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
         'move_society_and_subprojects_to_portal',
         'move_society_and_subprojects_to_portal_and_message_users',
     ]
-    exclude = None
+    exclude = CosinnusProjectAdmin.exclude + ['parent']
 
     def get_actions(self, request):
         actions = super(CosinnusSocietyAdmin, self).get_actions(request)
@@ -694,10 +704,6 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
         super(CosinnusSocietyAdmin, self).deactivate_groups(request, queryset)
 
     deactivate_groups.short_description = CosinnusSociety.get_trans().DEACTIVATE
-
-    def get_form(self, request, obj=None, **kwargs):
-        self.exclude = ('parent',)
-        return super(CosinnusSocietyAdmin, self).get_form(request, obj, **kwargs)
 
 
 admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
@@ -1621,3 +1627,11 @@ if settings.DEBUG and settings.COSINNUS_ENABLE_USER_BLOCK:
         pass
 
     admin.site.register(UserBlock, UserBlockAdmin)
+
+
+if settings.DEBUG and settings.COSINNUS_DECK_ENABLED:
+
+    class SyncedExternalObjectAdmin(admin.ModelAdmin):
+        pass
+
+    admin.site.register(SyncedExternalObject, SyncedExternalObjectAdmin)

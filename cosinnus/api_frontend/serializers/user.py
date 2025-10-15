@@ -74,6 +74,7 @@ class CosinnusUserSignupSerializer(
     )
     last_name = serializers.CharField(
         required=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
+        allow_blank=not bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
         validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
     )
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
@@ -443,6 +444,64 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
                 managed_tag_ids = profile_data.get('get_managed_tag_slugs', [])
                 CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, managed_tag_ids)
         return instance
+
+
+class CosinnusHybridUserAdminCreateSerializer(UserSignupFinalizeMixin, CosinnusHybridUserSerializer):
+    """
+    Extends the CosinnusHybridUserSerializer for user creation by admins.
+    Adds email, first_name and last_name fields as required and a create function.
+    """
+
+    email = serializers.EmailField(required=True, validators=[MaxLengthValidator(220)])
+    first_name = serializers.CharField(
+        required=True,
+        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
+    )
+    last_name = serializers.CharField(
+        required=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
+        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
+    )
+
+    def validate(self, attrs):
+        # manually validate required fields, as we use partial serializer that does not validate missing fields
+        if not attrs.get('email'):
+            raise ValidationError({'email': self.fields['email'].error_messages['required']})
+        if not attrs.get('first_name'):
+            raise ValidationError({'first_name': self.fields['first_name'].error_messages['required']})
+        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED and not attrs.get('last_name'):
+            raise ValidationError({'last_name': self.fields['last_name'].error_messages['required']})
+        attrs = super(CosinnusHybridUserAdminCreateSerializer, self).validate(attrs)
+        return attrs
+
+    def create(self, validated_data):
+        # create a user, add fake username first before we know the user id
+        user = get_user_model().objects.create(
+            username=str(random.randint(100000000000, 999999999999)),
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data.get('last_name', ''),
+        )
+        # finalize user creation
+        self.finalize_user_object_after_signup(user, validated_data)
+        # set all other fields using the update function of the CosinnusHybridUserSerializer
+        user = self.update(user, validated_data)
+        return user
+
+
+class CosinnusHybridUserAdminUpdateSerializer(CosinnusHybridUserSerializer):
+    """
+    Extends the CosinnusHybridUserSerializer for user update by admins.
+    Allows to update the user email.
+    """
+
+    email = serializers.EmailField(required=False, validators=[MaxLengthValidator(220)])
+
+    def update(self, instance, validated_data):
+        user = super(CosinnusHybridUserAdminUpdateSerializer, self).update(instance, validated_data)
+        if validated_data.get('email'):
+            user.email = validated_data['email']
+            user.save()
+        return user
 
 
 class CosinnusGuestLoginSerializer(serializers.Serializer):

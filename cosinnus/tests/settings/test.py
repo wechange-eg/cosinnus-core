@@ -50,3 +50,7 @@ COSINNUS_PAYMENTS_ENABLED = False
 
 # enable tested features
 COSINNUS_USER_GUEST_ACCOUNTS_ENABLED = True
+COSINNUS_ADMIN_USER_APIS_ENABLED = True
+
+# set elastic to run without threads during testing
+COSINNUS_ELASTIC_BACKEND_RUN_THREADED = False

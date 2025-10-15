@@ -10,6 +10,7 @@ def get_all_dynamic_field_settings():
     all_dynamic_field_settings = {}
     all_dynamic_field_settings.update(settings.COSINNUS_USERPROFILE_EXTRA_FIELDS)
     all_dynamic_field_settings.update(settings.COSINNUS_GROUP_EXTRA_FIELDS)
+    all_dynamic_field_settings.update(settings.COSINNUS_MITWIRKOMAT_EXTRA_FIELDS)
     return all_dynamic_field_settings
 
 

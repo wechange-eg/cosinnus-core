@@ -68,7 +68,7 @@ class MainContentViewTest(APILiveServerTestCase):
             'js_urls only contain .js items',
         )
         self.assertTrue(
-            all([css_item.endswith('.css') for css_item in response.data['css_urls']]),
+            all([re.match('^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
             'css_urls only contain .css items',
         )
         self.assertIn('var ', response.data['scripts'], 'scripts response contains some JS')
@@ -89,6 +89,11 @@ class MainContentViewTest(APILiveServerTestCase):
             self.test_group.trans.ICON,
             'main menu button is present and has the default group icon',
         )
+        self.assertEqual(
+            response.data['space'],
+            {'permissions': {'read': True, 'write': False}},
+            'group permissions are reflected in space element.',
+        )
 
     def test_personal_dashboard(self):
         """Basic test for accessing the personal dashboard."""
@@ -106,16 +111,18 @@ class MainContentViewTest(APILiveServerTestCase):
             'js_urls only contain .js items',
         )
         self.assertTrue(
-            all([css_item.endswith('.css') for css_item in response.data['css_urls']]),
+            all([re.match('^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
             'css_urls only contain .css items',
         )
         self.assertIn('var ', response.data['scripts'], 'scripts response contains some JS')
-        self.assertIn('<meta ', response.data['meta'], 'at least one meta item in meta resposne')
+        self.assertIn('<meta ', response.data['meta'], 'at least one meta item in meta response')
+        self.assertIn('rel="apple-touch-icon"', response.data['meta'], 'one rel-link in meta response')
         self.assertEqual(response.data['sub_navigation'], None, 'no subnavigation in dashboard')
         self.assertEqual(response.data['main_menu']['label'], 'Personal Dashboard')
         self.assertEqual(
             response.data['main_menu']['icon'], 'fa-user', 'main menu button is present and has the user ico'
         )
+        self.assertIsNone(response.data['space'], 'no space element without group.')
 
     def test_template_processing(self):
         """

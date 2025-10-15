@@ -111,7 +111,7 @@
         
         {% include 'cosinnus/media_tags_readonly.html' with object=todo list_view="True" %}
             
-        {% if user|has_write_access:todo %}
+        {% if user|has_write_access:todo and not SETTINGS.COSINNUS_DECK_ENABLED %}
             {% if todo.is_completed %}
                 <form action="{% group_url 'cosinnus:todo:entry-incomplete' group=object.group slug=object.slug %}" method="POST">{% csrf_token %}
                     <button type="submit" class="btn btn-emphasized regular-space">
@@ -144,7 +144,7 @@
 			    </form>
 			{% endif %}
 			
-			{% if user|has_write_access:todo %}
+			{% if user|has_write_access:todo and not SETTINGS.COSINNUS_DECK_ENABLED %}
                 <button class="btn btn-emphasized regular-space" data-toggle="modal" data-target="#deleteTodo_{{todo.pk}}" title="{% trans "Delete todo" %}">
                     <ul class="media-list">
                         <li class="media">

@@ -47,7 +47,8 @@ body div, .x-v3-container div, .x-v3-content div {
 		.select2-search-choice {
 		    div {
 		        line-height: 20px;
-                font-size: 16px;    
+                font-size: 16px;
+                word-break: keep-all;
 		    }
 		    .select2-search-choice-close {
 		        top: 7px;
@@ -130,6 +131,9 @@ body div, .x-v3-container div, .x-v3-content div {
 
 	.app-main-attachment {
 		.select2attachment(@app-main-color-light,@app-main-color,@app-main-color-dark);
+	}
+	.app-note-attachment {
+		.select2attachment(@app-note-color-light,@app-note-color,@app-note-color-dark);
 	}
 	.app-calendar-attachment {
 		.select2attachment(@app-calendar-color-light,@app-calendar-color,@app-calendar-color-dark);

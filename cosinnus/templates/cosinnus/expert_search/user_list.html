@@ -1,0 +1,121 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n thumbnail cosinnus_tags cosinnus_map_tags static %}
+
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+    <script>
+        $(function () {
+            $.endlessPaginate({
+                paginateOnScroll: true,
+                paginateOnScrollMargin: 250,
+                onCompleted: $.cosinnus.fadedown
+            });
+            $('body').on('click', '.expert-profile-list-item .dashboard-header', function (event) {
+                $(this).find('.fadedown-clickarea').trigger('click');
+            });
+        });
+        $(document).ready(function () {
+            $('.expert-filter').select2({
+                'placeholder': "{% trans 'Multiple selections allowed' %}",
+                'closeOnSelect': false
+            });
+        });
+    </script>
+{% endblock extrahead %}
+
+{% block content_class %}class="col-lg-8 col-md-8 col-md-offset-2 col-lg-offset-2"{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="content-box">
+                <div class="centered">
+                    <h1>{{ title }}</h1>
+                    <p class="textfield transparent">
+                        {{ description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="get" class="large-space">
+
+        <div class="content-box">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="{% if show_filter_type_select %} col-md-9 {% else %} col-md-12 {% endif %}">
+                        <div class="cosinnus-field">
+                            <label>{% trans 'General profile information (e.g. name, topics, about me)' %}</label>
+                            <div class="cosinnus-field-input regular-field ">
+                                <input type="text" {% if current_search %}value="{{ current_search }}"{% endif %}
+                                    name="q" placeholder="{% trans 'Search term' %}">
+                            </div>
+                        </div>
+                    </div>
+                    {% if show_filter_type_select %}
+                        <div class="col-md-3">
+                            <div class="cosinnus-field">
+                                <label>Filter</label>
+                                <div class="cosinnus-field-input large-field">
+                                    <select name="filter_type">
+                                        <option value="and" {% if current_type == 'and'%}selected{% endif %}>Und-Filter</option>
+                                        <option value="or" {% if current_type == 'or'%}selected{% endif %}>Oder-Filter</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                {% for filter in filters %}
+                    <div class="{% if filter.options %} col-md-6 {% else %} col-md-12 {% endif %}">
+                        <div class="cosinnus-field">
+                            <label>{{ filter.label }}</label>
+                            <div class="cosinnus-field-input large-field">
+                                {% if filter.options %}
+                                    <select class="expert-filter" name="{{ filter.name }}" multiple>
+                                        {% for option in filter.options %}
+                                            <option value="{{ option.0 }}" {% if option.0 in filter.current %}selected{% endif %}>{{ option.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                {% else %}
+                                    <input type="text" {% if filter.current %}value="{{ filter.current }}"{% endif %} name="{{ filter.name }}" placeholder="{% trans 'Search term' %}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <a class="btn btn-default pull-left no-margin" title="reset fields" href="{{ request.path }}">
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-body">
+                        {% trans 'Reset fields' %}
+                    </div>
+                </li>
+            </ul>
+        </a>
+        <button type="submit" class="btn btn-emphasized" title="search">
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-body">
+                        {% trans 'Search' %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    </form>
+    <div class="clearfix v-spacer-m"></div>
+
+    <div class="expert-profile-list">
+        {% include items_template %}
+    </div>
+
+{% endblock %}

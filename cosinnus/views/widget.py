@@ -231,7 +231,8 @@ def widget_edit(request, id, app_name=None, widget_name=None):
 
 class DashboardWidgetMixin(object):
     # any 'app_name.widget_name' entries in here will be filtered out of the context_data
-    disallowed_widgets = []
+    disallowed_widgets = settings.COSINNUS_GROUP_DASHBOARD_HIDE_WIDGETS
+
     # fallback ordering of 'app_name.widget_name' for when some widgets have the same sort_field value
     default_widget_order = [
         'note.detailed_news_list',
