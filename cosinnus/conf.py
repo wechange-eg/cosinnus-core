@@ -330,6 +330,7 @@ class CosinnusConf(AppConf):
     DEFAULT_ACTIVE_GROUP_APPS = [
         'cosinnus_cloud',
         'cosinnus_conference',
+        'cosinnus_deck',
         'cosinnus_etherpad',
         'cosinnus_event',
     ]
@@ -1298,7 +1299,7 @@ class CosinnusConf(AppConf):
 
     # whether to enable the cosinnus deck app
     # Note: COSINNUS_CLOUD_ENABLED must also be set, as the deck app depends on the cloud integration.
-    DECK_ENABLED = True
+    DECK_ENABLED = False
 
     # if set to a hex color string,
     # the group with `NEWW_FORUM_GROUP_SLUG` will receive a custom background color on all pages
