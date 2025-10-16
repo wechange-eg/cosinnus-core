@@ -4,13 +4,23 @@
     <head>
         <script type="text/javascript">
             var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
+            var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
+            var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
+            var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
             var COSINNUS_MAP_TOPICS_JSON = {% if SETTINGS.COSINNUS_TOPICS_SHOW_AS_MAP_FILTERS %}{% render_cosinnus_topics_json %}{% else %}{}{% endif %};
+            var COSINNUS_MAP_TEXT_TOPICS_JSON = {% render_cosinnus_text_topics_json %}
             {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
-              var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
+            var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
             {% endif %}
             {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP %}
-                var COSINNUS_MANAGED_TAGS_JSON = {% render_managed_tags_json %};
-                var COSINNUS_MANAGED_TAGS_LABELS_JSON = {{ COSINNUS_MANAGED_TAG_LABELS.get_labels_dict|json|safe }};
+            var COSINNUS_MANAGED_TAGS_JSON = {% render_managed_tags_json %};
+            var COSINNUS_MANAGED_TAGS_LABELS_JSON = {{ COSINNUS_MANAGED_TAG_LABELS.get_labels_dict|json|safe }};
+            {% endif %}
+            {% if SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED and SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED %}
+            var COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = [{% for type in SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED %}"{{type}}"{% if not forloop.last %}, {% endif %}{% endfor %}]
+            {% endif %}
+            {% if SETTINGS.COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED and SETTINGS.COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED %}
+            var COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = [{% for type in SETTINGS.COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED %}"{{type}}"{% if not forloop.last %}, {% endif %}{% endfor %}]
             {% endif %}
             var COSINNUS_MAP_OPTIONS = {{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }};
             var COSINNUS_MAP_USE_MODERN_TILESET = {% if SETTINGS.COSINNUS_MAP_USE_MODERN_TILESET %}true{% else %}false{% endif %};
@@ -21,7 +31,7 @@
             var COSINNUS_SHOW_PROJECT_AND_GROUP_CREATE_BUTTONS = {% if SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS and not user|is_superuser %}false{% else %}true{% endif %};
             var COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE = {% if SETTINGS.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE %}true{% else %}false{% endif %};
             var COSINNUS_ROCKET_ENABLED = {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}true{% else %}false{% endif %};
-            var COSINNUS_MESSAGES_ENABLED = {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}true{% else %}false {% endif %};
+            var COSINNUS_MESSAGES_ENABLED = {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}true{% else %}false{% endif %};
             var COSINNUS_CLOUD_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_CLOUD_SEARCH_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_SEARCH_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_EXCHANGE_ENABLED = {% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}true{% else %}false{% endif %};
@@ -29,16 +39,13 @@
             var COSINNUS_EXCHANGE_PORTAL_ID = {{ SETTINGS.COSINNUS_EXCHANGE_PORTAL_ID }};
             var COSINNUS_MATCHING_ENABLED = {% if SETTINGS.COSINNUS_MATCHING_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and user.is_authenticated and not user.is_guest %}true{% else %}false{% endif %};
-            var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
-            var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
-            var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
             var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
             var COSINNUS_STARRED_STAR_LABEL = "{% get_setting 'COSINNUS_STARRED_STAR_LABEL' %}";
             var COSINNUS_STARRED_STARRING_LABEL = "{% get_setting 'COSINNUS_STARRED_STARRING_LABEL' %}";
             var COSINNUS_STARRED_OBJECTS_LIST = "{% get_setting 'COSINNUS_STARRED_OBJECTS_LIST' %}";
             var COSINNUS_STARRED_USERS_LIST = "{% get_setting 'COSINNUS_STARRED_USERS_LIST' %}";
             var COSINNUS_TRANS_MY_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.MY_LIST }}";
-            var COSINNUS_TRANS_MY_CONFERENCES_EMPTY = "{{ COSINNUS_CONFERENCE_TRANS.MY_LIST_EMPTY }}";
+            const COSINNUS_TRANS_MY_CONFERENCES_EMPTY = "{{ COSINNUS_CONFERENCE_TRANS.MY_LIST_EMPTY }}";
             var COSINNUS_TRANS_CONFERENCE = "{{ COSINNUS_CONFERENCE_TRANS.VERBOSE_NAME }}";
             var COSINNUS_TRANS_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.VERBOSE_NAME_PLURAL }}";
             var COSINNUS_TRANS_ALL_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.ALL_LIST }}";
