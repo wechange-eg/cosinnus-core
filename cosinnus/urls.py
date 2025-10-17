@@ -46,6 +46,7 @@ from cosinnus.views import (
     map_api,
     microsite,
     mitwirkomat,
+    model_export,
     profile,
     search,
     statistics,
@@ -390,6 +391,26 @@ if getattr(settings, 'COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False)
             'administration/user_export/download/xlsx/',
             user_export.user_export_xlsx_download_view,
             name='administration-user-export-xlsx-download',
+        ),
+    ]
+
+
+if getattr(settings, 'COSINNUS_MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
+    urlpatterns += [
+        path(
+            'administration/model_export/<str:slug>/',
+            model_export.model_export_view,
+            name='administration-model-export',
+        ),
+        path(
+            'administration/model_export/<str:slug>/download/csv/',
+            model_export.model_export_csv_download_view,
+            name='administration-model-export-csv-download',
+        ),
+        path(
+            'administration/model_export/<str:slug>/download/xlsx/',
+            model_export.model_export_xlsx_download_view,
+            name='administration-model-export-xlsx-download',
         ),
     ]
 
