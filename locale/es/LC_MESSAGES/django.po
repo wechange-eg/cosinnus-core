@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 13:50+0200\n"
+"POT-Creation-Date: 2025-10-22 18:22+0200\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -451,6 +451,14 @@ msgstr "Forum"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Descubrir"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Usario"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Grupo"
 
 msgid "Overnight stay required"
 msgstr "Se requiere pernoctación"
@@ -1203,10 +1211,6 @@ msgstr "SALA BBB"
 
 msgid "Visitor"
 msgstr "Visitante"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Grupo"
 
 msgid "Created"
 msgstr "Creado"
@@ -2106,10 +2110,6 @@ msgstr "gustar"
 
 msgid "ignored"
 msgstr "ignorado"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Usario"
 
 msgid "Match subject"
 msgstr "Coincidir tema"
@@ -4218,6 +4218,33 @@ msgstr "Inserta tus selecciones como valores separados por punto y coma"
 msgid "Enter your choices"
 msgstr "Inserta tus selecciones"
 
+#, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Múltiples opciones votables"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Buscar en equipos"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Ultimos archivos"
+
+#, fuzzy
+#| msgid "To Profile"
+msgid "Go to Profile"
+msgstr "A perfil"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Enviar mensaje"
+
 msgid "Please verify your email address to continue using your account."
 msgstr "Por favor verifica tu dirección de correo electrónico para continuar usando tu cuenta."
 
@@ -4569,10 +4596,6 @@ msgstr "inactivo"
 
 msgid "Message all members"
 msgstr "Mandar mensaje a todos los miembros"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Enviar mensaje"
 
 msgid "Admin"
 msgstr "Administrador"
@@ -6062,6 +6085,68 @@ msgstr "Enlace URL"
 
 msgid "Please choose the answers that best fit you."
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Start user export"
+msgid "Start %(export_title)s"
+msgstr "Comenzar exportación de usario"
+
+#, fuzzy, python-format
+#| msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgid "You can start a %(export_title)s. As soon as the export is finished it will be available here."
+msgstr "Puedes comenzar a exportar usario. Tan pronto como la exportación es terminada, será disponible aquí."
+
+msgid "The export is currently running..."
+msgstr "La exportación se está ejecutando actualmente..."
+
+#, fuzzy, python-format
+#| msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgid "A %(export_title)s is in progress. As soon as the export is finished it will be available here."
+msgstr "Un exportación de usario está en progreso. Tan pronto como el exportación es terminado, estará disponible aquí."
+
+#, fuzzy, python-format
+#| msgid "User export finished"
+msgid "%(export_title)s finished"
+msgstr "Exportar de usario terminado"
+
+#, fuzzy, python-format
+#| msgid "You can download the latest user export data."
+msgid "You can download the latest %(export_title)s data."
+msgstr "Puedes descargar los datos de exportación de usario."
+
+#, fuzzy, python-format
+#| msgid "Download user exports from"
+msgid "Download %(export_title)s from"
+msgstr "Descargar exportaciones de usario de"
+
+#, fuzzy, python-format
+#| msgid "Download user export as"
+msgid "Download %(export_title)s as"
+msgstr "Descargar exportación de usario como"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr "Ten en cuenta que por razones de seguridad, los datos exportados solo estarán disponibles temporalmente y se eliminarán automáticamente después de algún tiempo."
+
+msgid "An error has occurred"
+msgstr "Ha ocurrido un error"
+
+#, fuzzy, python-format
+#| msgid "Sorry, an error occurred during the user export. Please try again later."
+msgid "Sorry, an error occurred during the %(export_title)s. Please try again later."
+msgstr "Lo siento, ocurrió un error durante la exportación del usario. Por favor, inténtalo de nuevo más tarde."
+
+#, fuzzy, python-format
+#| msgid "Delete export data and start new user export"
+msgid "Delete export data and start new %(export_title)s"
+msgstr "Eliminar datos de exportación y comenzar nueva exportación de usario"
+
+#, fuzzy, python-format
+#| msgid "Retry user export"
+msgid "Retry %(export_title)s"
+msgstr "Reintentar exportación de usario"
+
+msgid "Delete exported data"
+msgstr "Eliminar datos exportados"
 
 msgid "Toggle navigation"
 msgstr "Alterna navigación"
@@ -7578,9 +7663,6 @@ msgstr "Comenzar exportación de usario"
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr "Puedes comenzar a exportar usario. Tan pronto como la exportación es terminada, será disponible aquí."
 
-msgid "The export is currently running..."
-msgstr "La exportación se está ejecutando actualmente..."
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr "Un exportación de usario está en progreso. Tan pronto como el exportación es terminado, estará disponible aquí."
 
@@ -7596,12 +7678,6 @@ msgstr "Descargar exportaciones de usario de"
 msgid "Download user export as"
 msgstr "Descargar exportación de usario como"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr "Ten en cuenta que por razones de seguridad, los datos exportados solo estarán disponibles temporalmente y se eliminarán automáticamente después de algún tiempo."
-
-msgid "An error has occurred"
-msgstr "Ha ocurrido un error"
-
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr "Lo siento, ocurrió un error durante la exportación del usario. Por favor, inténtalo de nuevo más tarde."
 
@@ -7610,9 +7686,6 @@ msgstr "Eliminar datos de exportación y comenzar nueva exportación de usario"
 
 msgid "Retry user export"
 msgstr "Reintentar exportación de usario"
-
-msgid "Delete exported data"
-msgstr "Eliminar datos exportados"
 
 msgid "User Import Archive"
 msgstr "Archivo de importación de usario"
@@ -8954,6 +9027,16 @@ msgstr "Se elimino con exito bloque premium"
 msgid "Your data was saved successfully!"
 msgstr "¡Tus datos se han guardado con éxito!"
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Buscar usarios"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Aquí puedes encontrar una visión general de ideas que te han gustado."
+
 msgid "No model given to export data from."
 msgstr "Ningún modelo dado para exportar datos."
 
@@ -9271,6 +9354,9 @@ msgstr "Objeto \"%(title)s\" fue eliminado con éxito."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d otros objetos han sido eleminados."
 
+msgid "Another export is currently running!"
+msgstr "¡Otro exportación se está ejecutando!"
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "No se encontró %(verbose_name)s que coincida con la consulta"
@@ -9545,9 +9631,6 @@ msgstr "Tu anuncio fue activado con éxito."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Tu anuncio fue desactivado con éxito."
-
-msgid "Another export is currently running!"
-msgstr "¡Otro exportación se está ejecutando!"
 
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "La entrada de importación de usario archivado fue eliminada con éxito."
@@ -14567,6 +14650,11 @@ msgstr "Estas seguro de que quieres eliminar este contenedor y todos los objetos
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Estas seguro de que quieres eliminar este objeto?"
+
+#, fuzzy, python-format
+#~| msgid "Start user export"
+#~ msgid "Start %(mytitle)s"
+#~ msgstr "Comenzar exportación de usario"
 
 #~ msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 #~ msgstr "Esta página es una previsión the muchas cosas chulas que vendrán!"

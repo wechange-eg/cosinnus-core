@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 10:20+0200\n"
+"POT-Creation-Date: 2025-10-22 18:22+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -459,6 +459,14 @@ msgstr "Forum"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Entdecken"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Benutzer/in"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Gruppe"
 
 msgid "Overnight stay required"
 msgstr "Übernachtung benötigt"
@@ -1207,10 +1215,6 @@ msgstr "BBB Raum"
 
 msgid "Visitor"
 msgstr "Besucher"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Gruppe"
 
 msgid "Created"
 msgstr "Erstellt"
@@ -2100,10 +2104,6 @@ msgstr "Like"
 
 msgid "ignored"
 msgstr "ignoriert"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Benutzer/in"
 
 msgid "Match subject"
 msgstr "Betreff"
@@ -6055,6 +6055,58 @@ msgstr "Link"
 msgid "Please choose the answers that best fit you."
 msgstr "Bitte wählt die Antworten, die am besten zu euch passen."
 
+#, python-format
+msgid "Start %(export_title)s"
+msgstr "%(export_title)s starten"
+
+#, python-format
+msgid "You can start a %(export_title)s. As soon as the export is finished it will be available here."
+msgstr "Der %(export_title)s kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+msgid "The export is currently running..."
+msgstr "Der Export läuft gerade..."
+
+#, python-format
+msgid "A %(export_title)s is in progress. As soon as the export is finished it will be available here."
+msgstr "Der %(export_title)s wird gerade erstellt. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+#, python-format
+msgid "%(export_title)s finished"
+msgstr "%(export_title)s abgeschlossen"
+
+#, python-format
+msgid "You can download the latest %(export_title)s data."
+msgstr "Der zuletzt erstellte %(export_title)s kann heruntergeladen werden."
+
+#, python-format
+msgid "Download %(export_title)s from"
+msgstr "%(export_title)s herunterladen vom"
+
+#, python-format
+msgid "Download %(export_title)s as"
+msgstr "%(export_title)s herunterladen als"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr "Achtung: Aus Sicherheitsgründen sind die Export-Daten nur temporär verfügbar und werden automatisch nach einer gewissen Zeit gelöscht."
+
+msgid "An error has occurred"
+msgstr "Ein Fehler ist aufgetreten."
+
+#, python-format
+msgid "Sorry, an error occurred during the %(export_title)s. Please try again later."
+msgstr "Leider ist bei dem %(export_title)s ein Fehler aufgetreten. Bitte versuch es später erneut."
+
+#, python-format
+msgid "Delete export data and start new %(export_title)s"
+msgstr "Export-Daten löschen und neuen %(export_title)s starten"
+
+#, python-format
+msgid "Retry %(export_title)s"
+msgstr "%(export_title)s erneut starten"
+
+msgid "Delete exported data"
+msgstr "Export-Daten löschen"
+
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
 
@@ -7571,9 +7623,6 @@ msgstr "Benutzer/innen-Export starten"
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr "Benutzer/innen-Export kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
 
-msgid "The export is currently running..."
-msgstr "Benutzer/innen-Export läuft gerade..."
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
 
@@ -7589,12 +7638,6 @@ msgstr "Benutzer/innen-Export herunterladen vom"
 msgid "Download user export as"
 msgstr "Benutzer/innen-Export herunterladen als"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr "Achtung: Aus Sicherheitsgründen sind die Export-Daten nur temporär verfügbar und werden automatisch nach einer gewissen Zeit gelöscht."
-
-msgid "An error has occurred"
-msgstr "Ein Fehler ist aufgetreten."
-
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr "Leider ist bei dem Benutzer/innen-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
 
@@ -7603,9 +7646,6 @@ msgstr "Export-Daten löschen und neuen Benutzer/innen-Export starten"
 
 msgid "Retry user export"
 msgstr "Benutzer/innen-Export erneut starten"
-
-msgid "Delete exported data"
-msgstr "Export-Daten löschen"
 
 msgid "User Import Archive"
 msgstr "Benutzer/in Import Archiv"
@@ -9288,6 +9328,9 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
+msgid "Another export is currently running!"
+msgstr "Ein anderer Export läuft gerade!"
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Kein passender %(verbose_name)s für die Anfrage gefunden"
@@ -9550,9 +9593,6 @@ msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
-
-msgid "Another export is currently running!"
-msgstr "Ein anderer Export läuft gerade!"
 
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Der archivierte Benutzerimport-Eintrag wurde erfolgreich gelöscht."
@@ -12679,9 +12719,6 @@ msgstr "Deine RocketChat-Einstellungen konnten nicht gespeichert werden. Wenn di
 
 msgid "Your notifications preferences were reset to default!"
 msgstr "Deine Benachrichtigungseinstellungen wurden erfolgreich zurückgesetzt!"
-
-msgid "Oauth Client"
-msgstr ""
 
 msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
 msgstr "Es existiert bereits ein Konto mit dieser E-Mail-Adresse. Um sicherzustellen, dass du der Eigentümer dieses Kontos bist, melde dich bitte zuerst bei diesem Konto an und verbinde dann dein Konto."

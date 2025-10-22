@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 13:50+0200\n"
+"POT-Creation-Date: 2025-10-22 18:22+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -457,6 +457,14 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "گروه"
 
 msgid "Overnight stay required"
 msgstr "اقامت شبانه مورد نیاز است"
@@ -1213,10 +1221,6 @@ msgstr "اتاق BBB"
 
 msgid "Visitor"
 msgstr "ملاقات‌کننده"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "گروه"
 
 msgid "Created"
 msgstr "ساخته‌شده"
@@ -2118,10 +2122,6 @@ msgid "like"
 msgstr ""
 
 msgid "ignored"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
 msgstr ""
 
 msgid "Match subject"
@@ -4245,6 +4245,29 @@ msgstr ""
 msgid "Enter your choices"
 msgstr ""
 
+msgid "Multiple selections allowed"
+msgstr ""
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+msgid "Search term"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sort field"
+msgid "Reset fields"
+msgstr "زمینه را دسته‌بندی کن"
+
+#, fuzzy
+#| msgid "Go to conference"
+msgid "Go to Profile"
+msgstr "برو به کنفرانس"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr ""
+
 msgid "Please verify your email address to continue using your account."
 msgstr ""
 
@@ -4595,10 +4618,6 @@ msgid "inactive"
 msgstr ""
 
 msgid "Message all members"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
 msgstr ""
 
 msgid "Admin"
@@ -5909,6 +5928,59 @@ msgstr ""
 
 msgid "Please choose the answers that best fit you."
 msgstr ""
+
+#, python-format
+msgid "Start %(export_title)s"
+msgstr ""
+
+#, python-format
+msgid "You can start a %(export_title)s. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "The export is currently running..."
+msgstr ""
+
+#, python-format
+msgid "A %(export_title)s is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(export_title)s finished"
+msgstr "نشانه‌ی پایان‌یافته بگذارید"
+
+#, python-format
+msgid "You can download the latest %(export_title)s data."
+msgstr ""
+
+#, python-format
+msgid "Download %(export_title)s from"
+msgstr ""
+
+#, python-format
+msgid "Download %(export_title)s as"
+msgstr ""
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+#, python-format
+msgid "Sorry, an error occurred during the %(export_title)s. Please try again later."
+msgstr ""
+
+#, python-format
+msgid "Delete export data and start new %(export_title)s"
+msgstr ""
+
+#, python-format
+msgid "Retry %(export_title)s"
+msgstr ""
+
+#, fuzzy
+msgid "Delete exported data"
+msgstr "مورد گزارش‌شده را پاک کن..."
 
 msgid "Toggle navigation"
 msgstr ""
@@ -7430,9 +7502,6 @@ msgstr ""
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr ""
 
-msgid "The export is currently running..."
-msgstr ""
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr ""
 
@@ -7449,12 +7518,6 @@ msgstr ""
 msgid "Download user export as"
 msgstr ""
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr ""
 
@@ -7463,10 +7526,6 @@ msgstr ""
 
 msgid "Retry user export"
 msgstr ""
-
-#, fuzzy
-msgid "Delete exported data"
-msgstr "مورد گزارش‌شده را پاک کن..."
 
 msgid "User Import Archive"
 msgstr ""
@@ -8731,6 +8790,12 @@ msgstr ""
 msgid "Your data was saved successfully!"
 msgstr ""
 
+msgid "Search for Experts"
+msgstr ""
+
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr ""
+
 msgid "No model given to export data from."
 msgstr ""
 
@@ -9049,6 +9114,9 @@ msgstr ""
 msgid "%(numobjects)d other objects were deleted."
 msgstr ""
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
@@ -9310,9 +9378,6 @@ msgid "Your Announcement was activated successfully."
 msgstr ""
 
 msgid "Your Announcement was deactivated successfully."
-msgstr ""
-
-msgid "Another export is currently running!"
 msgstr ""
 
 msgid "The Archived User Import Entry was deleted successfully."

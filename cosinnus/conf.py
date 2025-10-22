@@ -1175,7 +1175,7 @@ class CosinnusConf(AppConf):
 
     # if True, the model export views will be shown
     # they require a per-portal implementation of the exporter class
-    MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED = True
+    MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED = False
 
     # Exporter definitions with customized exporter classes
     # derived from cosinnus.models.model_export.ModelExportProcessor or a subclass
