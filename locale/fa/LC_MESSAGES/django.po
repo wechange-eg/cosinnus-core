@@ -383,6 +383,14 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "گروه"
+
 msgid "Overnight stay required"
 msgstr "اقامت شبانه مورد نیاز است"
 
@@ -1122,10 +1130,6 @@ msgstr "اتاق BBB"
 
 msgid "Visitor"
 msgstr "ملاقات‌کننده"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "گروه"
 
 msgid "Created"
 msgstr "ساخته‌شده"
@@ -1974,10 +1978,6 @@ msgid "like"
 msgstr ""
 
 msgid "ignored"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
 msgstr ""
 
 msgid "Match subject"
@@ -4091,6 +4091,29 @@ msgstr ""
 msgid "Enter your choices"
 msgstr ""
 
+msgid "Multiple selections allowed"
+msgstr ""
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+msgid "Search term"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sort field"
+msgid "Reset fields"
+msgstr "زمینه را دسته‌بندی کن"
+
+#, fuzzy
+#| msgid "Go to conference"
+msgid "Go to Profile"
+msgstr "برو به کنفرانس"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr ""
+
 msgid "Please verify your email address to continue using your account."
 msgstr ""
 
@@ -4429,10 +4452,6 @@ msgid "inactive"
 msgstr ""
 
 msgid "Message all members"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
 msgstr ""
 
 msgid "Admin"
@@ -7203,9 +7222,6 @@ msgstr ""
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr ""
 
-msgid "The export is currently running..."
-msgstr ""
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr ""
 
@@ -7221,12 +7237,6 @@ msgid "Download user exports from"
 msgstr ""
 
 msgid "Download user export as"
-msgstr ""
-
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
-msgid "An error has occurred"
 msgstr ""
 
 msgid "Sorry, an error occurred during the user export. Please try again later."
@@ -8299,6 +8309,12 @@ msgstr ""
 msgid "Your data was saved successfully!"
 msgstr ""
 
+msgid "Search for Experts"
+msgstr ""
+
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr ""
+
 msgid "No model given to export data from."
 msgstr ""
 
@@ -8603,6 +8619,9 @@ msgstr ""
 msgid "%(numobjects)d other objects were deleted."
 msgstr ""
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
@@ -8791,9 +8810,6 @@ msgid "Your Announcement was activated successfully."
 msgstr ""
 
 msgid "Your Announcement was deactivated successfully."
-msgstr ""
-
-msgid "Another export is currently running!"
 msgstr ""
 
 msgid "The Archived User Import Entry was deleted successfully."

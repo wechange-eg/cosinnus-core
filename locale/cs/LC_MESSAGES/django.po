@@ -428,6 +428,14 @@ msgstr "Fórum"
 msgid "Map"
 msgstr "Mapa"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Uživatel"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Skupina"
+
 msgid "Overnight stay required"
 msgstr "Vyžadován nocleh"
 
@@ -1183,10 +1191,6 @@ msgstr "BBB ROOM"
 
 msgid "Visitor"
 msgstr "Návštěvník"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Skupina"
 
 msgid "Created"
 msgstr "Vytvořeno"
@@ -2052,10 +2056,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Uživatel"
 
 #, fuzzy
 msgid "Match subject"
@@ -4284,6 +4284,32 @@ msgid "Enter your choices"
 msgstr "Vložte své výběry"
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Je možno zvolit více možností"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Hledat v týmech"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Nejnovější soubory"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "Váš profil"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Poslat zprávu"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
 
@@ -4630,10 +4656,6 @@ msgstr "neaktivní"
 
 msgid "Message all members"
 msgstr "Poslat zprávu všem členům"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Poslat zprávu"
 
 msgid "Admin"
 msgstr "Správce"
@@ -7660,9 +7682,6 @@ msgstr "Stáhněte si podmínky"
 msgid "Download user export as"
 msgstr "Stáhněte si podmínky"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
 #, fuzzy
 #| msgid "An internal error occured."
 msgid "An error has occurred"
@@ -8770,6 +8789,16 @@ msgstr "Uživatelský účet byl úspěšně deaktivován"
 msgid "Your data was saved successfully!"
 msgstr "Vaše data byla úspěšně uložena!"
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Hledat uživatele"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Zde najdete přehled nápadů, které se vám líbily."
+
 msgid "No model given to export data from."
 msgstr "Pro export dat z nebyl zadán žádný model."
 
@@ -9077,6 +9106,10 @@ msgstr "Objekt \"%(title)s\" byl úspěšně smazán."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d dalších objektů bylo úspěšně smazáno."
+
+#, fuzzy
+msgid "Another export is currently running!"
+msgstr "V současnosti probíhá další import!"
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"

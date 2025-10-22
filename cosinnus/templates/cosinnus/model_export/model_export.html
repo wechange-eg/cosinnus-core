@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags cosinnus_map_tags static thumbnail %}
 
-{% block page_title %}{{ export_title }} {% trans "Export" %} {{ block.super }}{% endblock page_title %}
+{% block page_title %}{{ export_title }}{{ block.super }}{% endblock page_title %}
 
 {% block leftnav %}
     {% include 'cosinnus/administration/leftnav.html' %}
@@ -9,7 +9,7 @@
 
 {% block breadcrumb %}
     <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
-    <li class="active">{% blocktrans %}{{ export_title }} Export{% endblocktrans %}</li>
+    <li class="active">{{ export_title }}</li>
 {% endblock %}
 
 {% block content %}
@@ -17,17 +17,16 @@
     <div class="content-box">
 
         {% if export_state == 'ready' %}
-
-            <h2>{% blocktrans %}Start {{ export_title }} export{% endblocktrans %}</h2>
+            <h2>{% blocktrans with export_title=export_title %}Start {{ export_title }}{% endblocktrans %}</h2>
             <p class="textfield transparent">
-                {% blocktrans %}You can start a {{ export_title }} export. As soon as the export is finished it will be available here.{% endblocktrans %}
+                {% blocktrans with export_title=export_title %}You can start a {{ export_title }}. As soon as the export is finished it will be available here.{% endblocktrans %}
             </p>
 
         {% elif export_state == 'running' %}
 
             <h2>{% trans "The export is currently running..." %}</h2>
             <p class="textfield transparent">
-                {% blocktrans %}A {{ export_title }} export is in progress. As soon as the export is finished it will be available here.{% endblocktrans %}
+                {% blocktrans with export_title=export_title %}A {{ export_title }} is in progress. As soon as the export is finished it will be available here.{% endblocktrans %}
             </p>
             {% comment %} Refresh every 10 seconds {% endcomment %}
             <script type="text/javascript">
@@ -36,16 +35,16 @@
 
         {% elif export_state == 'finished' %}
 
-            <h2>{% blocktrans %}{{ export_title }} export finished{% endblocktrans %}</h2>
+            <h2>{% blocktrans with export_title=export_title %}{{ export_title }} finished{% endblocktrans %}</h2>
             <p class="textfield transparent">
-                {% blocktrans %}You can download the latest {{ export_title }} export data.{% endblocktrans %}
+                {% blocktrans with export_title=export_title %}You can download the latest {{ export_title }} data.{% endblocktrans %}
             </p>
             <div class="white-content">
                 <p class="textfield transparent">
-                    {% blocktrans %}Download {{ export_title }} exports from{% endblocktrans %} <strong>{{ export_timestamp }}</strong>:
+                    {% blocktrans with export_title=export_title %}Download {{ export_title }} from{% endblocktrans %} <strong>{{ export_timestamp }}</strong>:
                 </p>
                 <ul class="item-list">
-                    {% captureas download_as_label %}{% blocktrans %}Download {{ export_title }} export as{% endblocktrans %}{% endcaptureas %}
+                    {% captureas download_as_label %}{% blocktrans with export_title=export_title %}Download {{ export_title }} as{% endblocktrans %}{% endcaptureas %}
                     <li>
                         <a class="transparent" href="{% url 'cosinnus:administration-model-export-csv-download' slug=slug %}">
                             {{ download_as_label }} CSV
@@ -68,14 +67,14 @@
 
             <h2>{% trans "An error has occurred" %}</h2>
             <p class="textfield transparent">
-                {% blocktrans %}Sorry, an error occurred during the {{ export_title }} export. Please try again later.{% endblocktrans %}
+                {% blocktrans with export_title=export_title %}Sorry, an error occurred during the {{ export_title }}. Please try again later.{% endblocktrans %}
             </p>
 
         {% endif %}
     </div>
 
     {% if export_state == 'ready' or export_state == 'finished' or export_state == 'error' %}
-        <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" enctype="multipart/form-data">
+        <form action="." method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <input type="hidden" name="action" value="start"/>
@@ -92,11 +91,11 @@
                             </span>
                         <div class="media-body">
                             {% if export_state == 'ready' %}
-                                {% blocktrans %}Start {{ export_title }} export{% endblocktrans %}
+                                {% blocktrans with export_title=export_title %}Start {{ export_title }}{% endblocktrans %}
                             {% elif export_state == 'finished' %}
-                                {% blocktrans %}Delete export data and start new {{ export_title }} export{% endblocktrans %}
+                                {% blocktrans with export_title=export_title %}Delete export data and start new {{ export_title }}{% endblocktrans %}
                             {% else %}
-                                {% blocktrans %}Retry {{ export_title }} export{% endblocktrans %}
+                                {% blocktrans with export_title=export_title %}Retry {{ export_title }}{% endblocktrans %}
                             {% endif %}
                         </div>
                     </li>

@@ -425,6 +425,14 @@ msgstr "المنتدى"
 msgid "Map"
 msgstr "خارطة"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "مستعمل"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "مجموعة"
+
 msgid "Overnight stay required"
 msgstr "مطلوب البقاء طوال الليل"
 
@@ -1202,10 +1210,6 @@ msgstr "غرفة BBB"
 
 msgid "Visitor"
 msgstr "زائر"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "مجموعة"
 
 msgid "Created"
 msgstr "المُنشئ"
@@ -2123,10 +2127,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "مستعمل"
 
 #, fuzzy
 msgid "Match subject"
@@ -4393,6 +4393,32 @@ msgid "Enter your choices"
 msgstr "أدخل اختياراتك"
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "خيارات متعددة قابلة للتصويت"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "البحث في فرق"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "أحدث الملفات"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "صفحتك الشخصية"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "أرسل رسالة"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
 
@@ -4757,10 +4783,6 @@ msgstr "غير نشط"
 
 msgid "Message all members"
 msgstr "أرسل رسالة إلى جميع الأعضاء"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "أرسل رسالة"
 
 msgid "Admin"
 msgstr "مشرف"
@@ -7786,9 +7808,6 @@ msgstr "قم بتنزيل الشروط"
 msgid "Download user export as"
 msgstr "قم بتنزيل الشروط"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
 #, fuzzy
 #| msgid "An internal error occured."
 msgid "An error has occurred"
@@ -8937,6 +8956,16 @@ msgstr "تم إلغاء تنشيط حساب المستخدم بنجاح"
 msgid "Your data was saved successfully!"
 msgstr "تم حفظ بياناتك بنجاح!"
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "ابحث عن المستخدمين"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "هنا يمكنك أن تجد نظرة عامة على الأفكار التي أعجبتك."
+
 msgid "No model given to export data from."
 msgstr "لم يتم إعطاء نموذج لتصدير البيانات منه."
 
@@ -9245,6 +9274,10 @@ msgstr "تم حذف \"%(title)s\" بنجاح."
 #, fuzzy, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "تم حذف %(numobjects)d أشياء أخرى."
+
+#, fuzzy
+msgid "Another export is currently running!"
+msgstr "استيراد آخر قيد التشغيل حاليًا!"
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
@@ -14500,6 +14533,10 @@ msgstr "هل أنت متأكد أنك تريد حذف هذا الفريق؟"
 #| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete this object?"
 msgstr "هل أنت متأكد أنك تريد حذف هذا الفريق؟"
+
+#, fuzzy, python-format
+#~ msgid "Start %(mytitle)s"
+#~ msgstr "إبدء الاستيراد؟"
 
 #, fuzzy
 #~| msgid "Redirect Logged in Users"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 10:42+0100\n"
+"POT-Creation-Date: 2025-10-22 18:22+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -371,6 +371,14 @@ msgstr "Forum"
 
 msgid "Map"
 msgstr "Karte"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Benutzer/in"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Gruppe"
 
 msgid "Overnight stay required"
 msgstr "Übernachtung benötigt"
@@ -1097,10 +1105,6 @@ msgstr "BBB Raum"
 
 msgid "Visitor"
 msgstr "Besucher"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Gruppe"
 
 msgid "Created"
 msgstr "Erstellt"
@@ -1939,10 +1943,6 @@ msgstr "Like"
 
 msgid "ignored"
 msgstr "ignoriert"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Benutzer_in"
 
 msgid "Match subject"
 msgstr "Betreff"
@@ -5807,6 +5807,103 @@ msgstr "Jeder"
 msgid "OK"
 msgstr "OK"
 
+#, python-format
+msgid "The Volunteer-O-Matic is published %(here_link)s. Users answer the short questions about their strengths and interests. Based on their answers, the algorithm calculates the match between the user and each participating group and project. Those groups and projects with the highest match are suggested to the user in their personal ranking. The user can now inform themselves about their matches and reach out to their favorites."
+msgstr "Der Mitwirk-O-Mat ist %(here_link)s veröffentlicht. Nutzer/innen beantworten die kurzen Fragen zu ihren Stärken und Interessen. Basierend auf den Antworten berechnet der Algorithmus die Übereinstimmung zwischen Nutzer/in und allen teilnehmenden Gruppen und Projekten. Diejenigen Gruppen und Projekte mit der höchsten Übereinstimmung werden den Nutzer/innen in ihrem persönlichen Ranking vorgeschlagen. Die Nutzer/innen können sich nun über ihre \"Matches\" informieren und zu ihren Favoriten Kontakt aufnehmen."
+
+msgid "Participate in the Volunteer-O-Matic with "
+msgstr "Am Mitwirk-O-Mat teilnehmen mit"
+
+#, python-format
+msgid "Enter only if you want to set a different name than the one in your %(settings_link)s."
+msgstr "Nur ausfüllen, falls ihr einen anderen Namen verwenden möchtet als den in euren %(settings_link)s."
+
+#, python-format
+msgid "Enter only if you want to set a different description than the one in your %(settings_link)s."
+msgstr "Nur ausfüllen, falls ihr eine andere Beschreibung verwenden möchtet als die in euren %(settings_link)s."
+
+msgid "Character limit"
+msgstr "Zeichenlimit"
+
+#, python-format
+msgid "Enter only if you want to set a different logo than the one in your %(settings_link)s."
+msgstr "Nur auswählen, falls ihr ein anderes Logo verwenden möchtet als den Avatar in euren %(settings_link)s."
+
+msgid "Image preview"
+msgstr "Bildvorschau"
+
+#, python-format
+msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
+msgstr "Die Nutzer/innen können ihre Ergebnisse im Mitwirk-O-Mat nach Entfernung filtern, damit nur Gruppen und Projekte in der Nähe vorgeschlagen werden. Hierfür wird der Standort verwendet, den ihr in euren %(group_settings_label)s angegeben habt."
+
+msgid "Currently set as location"
+msgstr "Aktuell ist als Ort eingestellt"
+
+msgid "No location set yet"
+msgstr "Noch kein Standort gewählt"
+
+#, python-format
+msgid "Change location in %(group_settings_label)s"
+msgstr "Standort ändern in den %(group_settings_label)s"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Please choose the answers that best fit you."
+msgstr "Bitte wählt die Antworten, die am besten zu euch passen."
+
+#, python-format
+msgid "Start %(export_title)s"
+msgstr "%(export_title)s starten"
+
+#, python-format
+msgid "You can start a %(export_title)s. As soon as the export is finished it will be available here."
+msgstr "Der %(export_title)s kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+msgid "The export is currently running..."
+msgstr "Der Export läuft gerade..."
+
+#, python-format
+msgid "A %(export_title)s is in progress. As soon as the export is finished it will be available here."
+msgstr "Der %(export_title)s wird gerade erstellt. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+#, python-format
+msgid "%(export_title)s finished"
+msgstr "%(export_title)s abgeschlossen"
+
+#, python-format
+msgid "You can download the latest %(export_title)s data."
+msgstr "Der zuletzt erstellte %(export_title)s kann heruntergeladen werden."
+
+#, python-format
+msgid "Download %(export_title)s from"
+msgstr "%(export_title)s herunterladen vom"
+
+#, python-format
+msgid "Download %(export_title)s as"
+msgstr "%(export_title)s herunterladen als"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr "Achtung: Aus Sicherheitsgründen sind die Export-Daten nur temporär verfügbar und werden automatisch nach einer gewissen Zeit gelöscht."
+
+msgid "An error has occurred"
+msgstr "Ein Fehler ist aufgetreten."
+
+#, python-format
+msgid "Sorry, an error occurred during the %(export_title)s. Please try again later."
+msgstr "Leider ist bei dem %(export_title)s ein Fehler aufgetreten. Bitte versuch es später erneut."
+
+#, python-format
+msgid "Delete export data and start new %(export_title)s"
+msgstr "Export-Daten löschen und neuen %(export_title)s starten"
+
+#, python-format
+msgid "Retry %(export_title)s"
+msgstr "%(export_title)s erneut starten"
+
+msgid "Delete exported data"
+msgstr "Export-Daten löschen"
+
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
 
@@ -7303,9 +7400,6 @@ msgstr "Benutzer-Export starten"
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr "Benutzer-Export kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
 
-msgid "The export is currently running..."
-msgstr "Benutzer-Export läuft gerade..."
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr "Der Benutzer-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
 
@@ -7321,12 +7415,6 @@ msgstr "Benutzer-Export herunterladen vom"
 msgid "Download user export as"
 msgstr "Benutzer-Export herunterladen als"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr "Achtung: Aus Sicherheitsgründen sind die Export-Daten nur temporär verfügbar und werden automatisch nach einer gewissen Zeit gelöscht."
-
-msgid "An error has occurred"
-msgstr "Ein Fehler ist aufgetreten."
-
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr "Leider ist bei dem Benutzer-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
 
@@ -7335,9 +7423,6 @@ msgstr "Export-Daten löschen und neuen Benutzer-Export starten"
 
 msgid "Retry user export"
 msgstr "Benutzer-Export erneut starten"
-
-msgid "Delete exported data"
-msgstr "Export-Daten löschen"
 
 msgid "User Import Archive"
 msgstr "User Import Archiv"
@@ -8756,6 +8841,9 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
+msgid "Another export is currently running!"
+msgstr "Ein anderer Export läuft gerade!"
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Kein passender %(verbose_name)s für die Anfrage gefunden"
@@ -8948,9 +9036,6 @@ msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
-
-msgid "Another export is currently running!"
-msgstr "Ein anderer Export läuft gerade!"
 
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Der archivierte Benutzerimport-Eintrag wurde erfolgreich gelöscht."

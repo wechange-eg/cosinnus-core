@@ -423,6 +423,14 @@ msgstr "Forum"
 msgid "Map"
 msgstr "Hartă"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Utilizator"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Grup"
+
 msgid "Overnight stay required"
 msgstr ""
 
@@ -1171,10 +1179,6 @@ msgstr ""
 #, fuzzy
 msgid "Visitor"
 msgstr "Vizitat"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Grup"
 
 msgid "Created"
 msgstr "Creată"
@@ -2066,10 +2070,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Utilizator"
 
 #, fuzzy
 msgid "Match subject"
@@ -4322,6 +4322,32 @@ msgid "Enter your choices"
 msgstr ""
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Opțiuni multiple eligibile"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Căutare în Echipe"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Cele mai recente fișiere"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "Profilul Tău"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Trimite mesaj"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
 
@@ -4683,10 +4709,6 @@ msgstr "inactivat"
 
 msgid "Message all members"
 msgstr "Mesaj tuturor membrilor"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Trimite mesaj"
 
 msgid "Admin"
 msgstr "Administrator"
@@ -7708,9 +7730,6 @@ msgstr ""
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr ""
 
-msgid "The export is currently running..."
-msgstr ""
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr ""
 
@@ -7728,9 +7747,6 @@ msgstr "Statistici Simple"
 #, fuzzy
 msgid "Download user export as"
 msgstr "Statistici Simple"
-
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
 
 #, fuzzy
 #| msgid "An internal error occured."
@@ -8896,6 +8912,16 @@ msgstr "Cont de utilizator dezactivat cu succes"
 msgid "Your data was saved successfully!"
 msgstr "Ideea ta a fost ștearsă cu succes."
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Căutați Utilizatori"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Aici puteți găsi o imagine o imagine de ansamblu a Ideilor care v-au plăcut."
+
 msgid "No model given to export data from."
 msgstr "Niciun model dat la exportul de date din."
 
@@ -9204,6 +9230,9 @@ msgstr "Obiectul ”%(title)s” a fost șters cu succes."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d alte obiecte au fost șterse."
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Nu %(verbose_name)s s-a găsit nici o potrivire cu interogare"
@@ -9398,9 +9427,6 @@ msgstr "Anunțul dvs., a fost activat cu succes."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Anunțul dvs., a fost dezactivat cu succes."
-
-msgid "Another export is currently running!"
-msgstr ""
 
 #, fuzzy
 msgid "The Archived User Import Entry was deleted successfully."
