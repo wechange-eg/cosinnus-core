@@ -84,6 +84,29 @@
     {% endif %}
 
 
+    {% if SETTINGS.COSINNUS_MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED %}
+        {% for slug, config in SETTINGS.COSINNUS_MODEL_EXPORTERS.items %}
+            {% url 'cosinnus:administration-model-export' slug=slug as url_model_export %}
+            <button type="button" class="btn w100 btn-emphasized fine-space" href="{{ url_model_export }}">
+                <ul class="media-list">
+                    <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-download"></i>
+                    </span>
+                        <span class="pull-right">
+                        {% if request.path|startswith:url_model_export %}
+                            <i class="fa fa-caret-right"></i>
+                        {% endif %}
+                    </span>
+                        <div class="media-body">
+                            {{ config.title }} {% trans "Export" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        {% endfor %}
+    {% endif %}
+
     {% if SETTINGS.COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED %}
     <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-dynamic-fields' %}">
         <ul class="media-list">
