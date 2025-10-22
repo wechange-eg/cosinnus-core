@@ -9,8 +9,12 @@
 {% if splitscreen %}
 placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 {% trans "Search for Names, Topics and Places..." %}"
+aria-label="{# Translators: __INCLUDE_JS_PO__ #}
+{% trans "Search for Names, Topics and Places..." %}"
 {% else %}
 placeholder="{# Translators: __INCLUDE_JS_PO__ #}
+{% trans "Search for Names and Topics..." %}"
+aria-label="{# Translators: __INCLUDE_JS_PO__ #}
 {% trans "Search for Names and Topics..." %}"
 {% endif %}
                     value="{{ q }}" autocomplete="off" />
@@ -34,9 +38,9 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 			{% if availableFilterList|length > 1 %}
 				<div class="button-list">
 					{% for filter_type in availableFilterList %}
-						<a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if typeFiltersActive and activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
+						<button class="rounded-button button-color-{{ filter_type }} result-filter-button {% if typeFiltersActive and activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
 							{{ macros.typeLabel(filter_type, "rounded-button-inner", button=1, COSINNUS_TRANS=COSINNUS_TRANS) }}
-						</a>
+						</button>
 					{% endfor %}
 				</div>
 			{% endif %}
@@ -46,13 +50,20 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "From" %}
 					<i class="fa fa-calendar"></i>
-					<input readonly ="readonly" class="calendar-date-time-chooser-date" />
+					<input readonly ="readonly" class="calendar-date-time-chooser-date"
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "Start date." %}"
+					/>
 					<input class="calendar-date-time-chooser-hiddendate" id="id_start_0" name="start_0"
 						type="hidden" value="{{ fromDate }}"
-					>
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "Start date." %}"
+					/>
 					<input class="calendar-date-time-chooser-time" id="id_start_1" name="start_1"
 						placeholder="00:00" type="text" value="{{ fromTime }}"
-					>
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "Start-Time" %}"
+					/>
 					<div class="small-calendar"></div>
 				</li>
 
@@ -60,13 +71,20 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Until" %}
 					<i class="fa fa-calendar"></i>
-					<input readonly ="readonly" class="calendar-date-time-chooser-date" />
+					<input readonly ="readonly" class="calendar-date-time-chooser-date"
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "End date." %}"
+					/>
 					<input class="calendar-date-time-chooser-hiddendate" id="id_end_0" name="end_0"
 						type="hidden" value="{{ toDate }}"
-					>
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "End date." %}"
+					/>
 					<input class="calendar-date-time-chooser-time" id="id_end_1" name="end_1"
 						placeholder="00:00" type="text" value="{{ toTime }}"
-					>
+aria-label="{#Translators: __INCLUDE_JS_PO__#}
+{% trans "End-Time" %}"
+					/>
 					<div class="small-calendar"></div>
 				</li>
 			</ol>
@@ -145,11 +163,11 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 				<div class="button-list">
 					{% for topic_id, topic in allTopics %}
 						{% if topic_id != "" and topic %}
-							<a class="rounded-button button-color-topic topic-button {% if topic_id|int in activeTopicIds %}selected{% endif %}" data-topic-id="{{ topic_id }}">
+							<button class="rounded-button button-color-topic topic-button {% if topic_id|int in activeTopicIds %}selected{% endif %}" data-topic-id="{{ topic_id }}">
 								<span class="rounded-button-inner">
 									{{ topic }}
 								</span>
-							</a>
+							</button>
 						{% endif %}
 					{% endfor %}
 				</div>
@@ -161,23 +179,17 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	                {% trans "External contents" %}
 	            </h1>
 
-	            <table class="onoffswitch-frame small-space">
-	                <tr>
-	                    <td class="onoffswitch-text-label">
-	                        {# Translators: __INCLUDE_JS_PO__ #}
-	                        {% trans "Include contents from other platforms" %}
-	                    </td>
-	                    <td>
-	                        <div class="onoffswitch">
-	                            <input type="checkbox" name="onoffswitch-exchange" class="onoffswitch-checkbox check-exchange" id="check-exchange" {% if exchange %}checked{% endif %}>
-	                            <label class="onoffswitch-label" for="check-exchange">
-	                                <span class="onoffswitch-inner"></span>
-	                                <span class="onoffswitch-switch"></span>
-	                            </label>
-	                        </div>
-	                    </td>
-	                </tr>
-	            </table>
+              <label for="check-exchange" class="onoffswitch-frame">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Include contents from other platforms" %}
+                <input id="check-exchange" type="checkbox" name="onoffswitch-exchange" class="onoffswitch-checkbox check-exchange" {% if exchange %}checked{% endif %}>
+                <div class="onoffswitch">
+                  <div class="onoffswitch-label">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                  </div>
+                </div>
+              </label>
 	        {% endif %}
 
 			{% if splitscreen %}
@@ -186,23 +198,17 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Where" %}
 				</h1>
 
-				<table class="onoffswitch-frame small-space">
-					<tr>
-						<td class="onoffswitch-text-label">
-							{# Translators: __INCLUDE_JS_PO__ #}
-							{% trans "In map area" %}
-						</td>
-						<td>
-							<div class="onoffswitch">
-								<input type="checkbox" name="onoffswitch-ignore-location" class="onoffswitch-checkbox check-ignore-location" id="check-ignore-location" {% if not ignoreLocation %}checked{% endif %}>
-								<label class="onoffswitch-label" for="check-ignore-location">
-									<span class="onoffswitch-inner"></span>
-									<span class="onoffswitch-switch"></span>
-								</label>
-							</div>
-						</td>
-					</tr>
-				</table>
+        <label for="check-ignore-location" class="onoffswitch-frame">
+          {# Translators: __INCLUDE_JS_PO__ #}
+          {% trans "In map area" %}
+          <input id="check-ignore-location" type="checkbox" name="onoffswitch-ignore-location" class="onoffswitch-checkbox check-ignore-location" {% if not ignoreLocation %}checked{% endif %}>
+          <div class="onoffswitch">
+            <div class="onoffswitch-label">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </div>
+          </div>
+        </label>
 				<div class="pale-color">
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "If active, searching will be restricted to the visible map area." %}
@@ -214,19 +220,19 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 
 		<div class="apply-buttons">
 			<div class="button-list">
-				<a class="rounded-button button-color-action button-search query-search-button disabled">
+				<button class="rounded-button button-color-action button-search query-search-button disabled">
 					<span class="rounded-button-inner">
 						{# Translators: __INCLUDE_JS_PO__ #}
 						{% trans "Apply Filters" %}
 					</span>
-				</a>
+				</button>
 
-				<a class="rounded-button button-color-action reset-type-and-topic-filters">
+				<button class="rounded-button button-color-action reset-type-and-topic-filters">
 					<span class="rounded-button-inner">
 						{# Translators: __INCLUDE_JS_PO__ #}
 						{% trans "Clear Filters" %}
 					</span>
-				</a>
+				</button>
 			</div>
 
 			{# some more space to scroll over the floating search-buttons on mobile #}
