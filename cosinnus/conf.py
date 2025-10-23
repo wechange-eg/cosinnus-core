@@ -1494,11 +1494,11 @@ class CosinnusConf(AppConf):
     # add `'cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware',`
     # to django's `MIDDLEWARE` setting
     MANAGED_TAGS_RESTRICT_URLS_BLOCKED = {}
-    
+
     # If managed tags are enabled and this is `True`, when sending out the admin-approval email for new signups,
     # only send it to admins that have a common managed tag with the user
     MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY = False
-    
+
     # if managed tags are enabled, for each entry in this list, add an additional
     # approval link in the admin-approval email for new signups that will accept the user
     # and automatically assign the managed tags to the accepted user from that comma-seperated entry.
