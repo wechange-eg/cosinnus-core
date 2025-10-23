@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-15 10:55+0200\n"
+"POT-Creation-Date: 2025-10-22 12:11+0200\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -379,7 +379,9 @@ msgstr "Тегі"
 msgid "Display name"
 msgstr "Көрсетілетін Аты"
 
-msgid "Help other members find you and use your real name."
+#, fuzzy
+#| msgid "Help other members find you and use your real name."
+msgid "Help others find you and use your real name."
 msgstr "Басқа мүшелерге сені жылдам табу үшін және толық атыңды беру үшін атыңды көрсет."
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."

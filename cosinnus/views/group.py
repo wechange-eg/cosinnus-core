@@ -291,8 +291,11 @@ class CosinnusGroupFormMixin(object):
             app = app_name.split('_')[-1]  # eg 'todo'
             # filter for cosinnus app being deactivatable (and not group-only if this is not a group)
             if app_registry.is_deactivatable(app_name):
+                # Deprecated apps are only shown if active to allow deactivation.
+                app_deprecated = app_name in self.DEPRECATED_APPS
+
                 if not self.object:
-                    app_is_active = app_registry.is_active_by_default(app_name)
+                    app_is_active = app_registry.is_active_by_default(app_name) and not app_deprecated
                 else:
                     app_is_active = not self.object.deactivated_apps or app_name not in deactivated_apps
 
@@ -300,9 +303,6 @@ class CosinnusGroupFormMixin(object):
                     self.group_model_class.GROUP_MODEL_TYPE != CosinnusGroup.TYPE_SOCIETY
                     and app_registry.is_activatable_for_groups_only(app_name)
                 )
-
-                # Deprecated apps are only shown if active to allow deactivation.
-                app_deprecated = app_name in self.DEPRECATED_APPS
 
                 group_label = app_registry.get_label(app_name)
                 if app_name in settings.COSINNUS_GROUP_APPS_WIDGET_SETTING_ONLY:
@@ -1545,7 +1545,7 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
         elif current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN and len(self.group.admins) <= 1:
             messages.error(
                 self.request,
-                _('You cannot remove “%(username)s” form ' 'this team. Only one admin left.')
+                _('You cannot remove “%(username)s” form this team. Only one admin left.')
                 % {'username': full_name(user)},
             )
         else:
@@ -1614,7 +1614,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
         else:
             messages.error(
                 self.request,
-                _('You cannot remove "%(username)s" form ' 'this team. Only one admin left.')
+                _('You cannot remove "%(username)s" form this team. Only one admin left.')
                 % {'username': user.get_full_name()},
             )
             return HttpResponseRedirect(self.get_success_url())
