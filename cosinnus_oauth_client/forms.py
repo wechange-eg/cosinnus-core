@@ -43,6 +43,7 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
             del self.fields['copy_profile']
 
     def custom_signup(self, request, user):
+        user = self.set_username(user)
         profile = self.setup_profile(user)
         accept_user_tos_for_portal(user)
         base_profile = self.set_base_profile_data(profile, request)
@@ -69,6 +70,12 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
         except forms.ValidationError:
             provider = self.sociallogin.account.get_provider()
             raise forms.ValidationError(self.error_messages['email_taken'].format(provider.name))
+
+    def set_username(self, user):
+        """Set username to id instead of username from provider"""
+        user.username = str(user.id)
+        user.save()
+        return user
 
     def setup_profile(self, user):
         if not user.cosinnus_profile:

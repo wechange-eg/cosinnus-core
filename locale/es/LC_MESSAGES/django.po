@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-15 10:55+0200\n"
+"POT-Creation-Date: 2025-10-22 12:11+0200\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -359,7 +359,7 @@ msgstr "Apellido"
 msgid "Display name"
 msgstr "Tipo de pantalla"
 
-msgid "Help other members find you and use your real name."
+msgid "Help others find you and use your real name."
 msgstr ""
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
