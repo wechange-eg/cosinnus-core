@@ -65,7 +65,7 @@ from cosinnus.forms.user import (
     UserGroupGuestAccessForm,
     ValidatedPasswordChangeForm,
 )
-from cosinnus.models import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING
+from cosinnus.models import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING, CosinnusManagedTag
 from cosinnus.models.group import (
     CosinnusGroupInviteToken,
     CosinnusGroupMembership,
@@ -74,6 +74,7 @@ from cosinnus.models.group import (
     UserGroupGuestAccess,
 )
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models.profile import (
     PROFILE_SETTING_EMAIL_TO_VERIFY,
@@ -119,7 +120,7 @@ USER_MODEL = get_user_model()
 def email_portal_admins(subject, template, data, user=None):
     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
     text = textfield(render_to_string(template, data))
-    
+
     for admin in admins:
         # If managed tags and `COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY` are enabled,
         # consider only admins that have a common managed tag with the user
@@ -812,7 +813,7 @@ def approve_user(request, user_id):
     user.is_active = True
     user.save()
 
-    # message user for accepeted request
+    # message user for accepted request
     data = get_common_mail_context(request)
     data.update(
         {
@@ -847,6 +848,34 @@ def approve_user(request, user_id):
         )
         % {'username': full_name_force(user), 'email': user.email},
     )
+
+    # if this view was called with a `add_managed_tag` param that is contained in
+    # `COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN`, assign those tag slugs to the user
+    # if this fails, only show a warning message
+    managed_tag_slugs = request.GET.get('add_managed_tag', '').strip()
+    if managed_tag_slugs and managed_tag_slugs in settings.COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN:
+        added_tags = []
+        failed_tag_slugs = []
+        for tagslug in managed_tag_slugs.split(','):
+            try:
+                # doing a fetch so we exception out if it doesn't exist
+                tag = CosinnusManagedTag.objects.get(slug=tagslug)
+                CosinnusManagedTagAssignment.assign_managed_tag_to_object(user.cosinnus_profile, tag.slug)
+                added_tags.append(tag)
+            except Exception:
+                failed_tag_slugs.append(tagslug)
+                if settings.DEBUG:
+                    raise
+        if added_tags:
+            tag_urls = ', '.join([f'[{tag.name}]({tag.get_user_management_url()})' for tag in added_tags])
+            messages.success(request, str(_('The following roles were assigned to the account:')) + ' ' + tag_urls)
+        if failed_tag_slugs:
+            messages.warning(
+                request,
+                str(_('The following roles could not be assigned to the account and need to be assigned manually:'))
+                + ','.join(failed_tag_slugs),
+            )
+
     return redirect(reverse('cosinnus:profile-detail', kwargs={'username': user.username}) + '?force_show=1')
 
 

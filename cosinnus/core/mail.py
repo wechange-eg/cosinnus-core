@@ -255,6 +255,7 @@ def get_common_mail_context(request, group=None, user=None):
         'protocol': protocol,
         'domain_url': portal.get_domain(),
         'portal': portal,
+        'SETTINGS': settings,
     }
     if group:
         context.update(

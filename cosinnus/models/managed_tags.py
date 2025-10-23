@@ -426,6 +426,9 @@ class CosinnusManagedTag(models.Model):
         """Returns the assigned url field's url"""
         return self.url or ''
 
+    def get_user_management_url(self):
+        return reverse('cosinnus:administration-users') + f'?managed_tag={self.id}'
+
     def get_search_url(self):
         """Returns the filtered search view for this tag"""
         return reverse('cosinnus:map') + f'?managed_tags={self.id}'
