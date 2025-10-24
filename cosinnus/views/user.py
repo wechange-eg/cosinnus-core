@@ -119,10 +119,15 @@ USER_MODEL = get_user_model()
 def email_portal_admins(subject, template, data, user=None):
     admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
     text = textfield(render_to_string(template, data))
-
+    
     for admin in admins:
-        # If managed tags are enabled consider only admins that have a common managed tag with the user
-        if user and settings.COSINNUS_MANAGED_TAGS_ENABLED:
+        # If managed tags and `COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY` are enabled,
+        # consider only admins that have a common managed tag with the user
+        if (
+            user
+            and settings.COSINNUS_MANAGED_TAGS_ENABLED
+            and settings.COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY
+        ):
             user_managed_tags = set(user.cosinnus_profile.get_managed_tag_ids())
             admin_managed_tags = set(admin.cosinnus_profile.get_managed_tag_ids())
             common_managed_tags = user_managed_tags.intersection(admin_managed_tags)
