@@ -75,7 +75,9 @@
 					{% trans "E-Mail" as  email_placeholder %}
 					{% captureas email_legend %}{% trans "This email address serves as login for your user account and notifications and newsletters are sent to this address." %}{% endcaptureas %}
 					{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder legend=email_legend %}
-					{% include 'cosinnus/fields/email_field_change_link_snippet.html' %}
+                    {% if not is_admin_elevated_view %}
+					    {% include 'cosinnus/fields/email_field_change_link_snippet.html' %}
+                    {% endif %}
                 {% endblock %}
 
                 {% block avatar %}
