@@ -2855,6 +2855,9 @@ msgstr "Benutzer/innen-Import"
 msgid "User Export"
 msgstr "Benutzer/innen-Export"
 
+msgid "Group Export"
+msgstr "Gruppen-Export"
+
 msgid "User Profile Field Choices"
 msgstr "Benutzerprofil-Feldwerte"
 

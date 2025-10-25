@@ -1176,8 +1176,8 @@ class CosinnusConf(AppConf):
     # derived from cosinnus.models.model_export.ModelExportProcessor or a subclass
     MODEL_EXPORTERS = {
         # 'slug': {'title': _('l18n-title'), 'classpath': 'apps.core.user_export.PortalNameUserExportProcessor'},
-        'user': {'title': _('User'), 'classpath': 'cosinnus.models.model_export.UserExportProcessorBase'},
-        'group': {'title': _('Group'), 'classpath': 'cosinnus.models.model_export.GroupExportProcessorBase'},
+        'user': {'title': _('User Export'), 'classpath': 'cosinnus.models.model_export.UserExportProcessorBase'},
+        'group': {'title': _('Group Export'), 'classpath': 'cosinnus.models.model_export.GroupExportProcessorBase'},
     }
 
     # if true, during signup and in the user profile, an additional
