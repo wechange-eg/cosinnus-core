@@ -419,6 +419,14 @@ msgstr "Forum"
 msgid "Map"
 msgstr "Xəritə"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "İstifadəçi"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Qrup"
+
 msgid "Overnight stay required"
 msgstr ""
 
@@ -1164,10 +1172,6 @@ msgstr ""
 #, fuzzy
 msgid "Visitor"
 msgstr "Ziyarət edən"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Qrup"
 
 msgid "Created"
 msgstr "Yaradıldı"
@@ -2070,10 +2074,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "İstifadəçi"
 
 #, fuzzy
 msgid "Match subject"
@@ -4314,6 +4314,32 @@ msgid "Enter your choices"
 msgstr ""
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Birdən çox seçim səsvermə ilədir"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Komandalarda axtarın"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Ən son fayllar"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "Sizin profiliniz"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Mesaj Göndərin"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
 
@@ -4675,10 +4701,6 @@ msgstr "fəaliyyətsiz"
 
 msgid "Message all members"
 msgstr "Bütün üzvləri mesaj göndərin"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Mesaj Göndərin"
 
 msgid "Admin"
 msgstr "Admin"
@@ -7684,9 +7706,6 @@ msgstr ""
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr ""
 
-msgid "The export is currently running..."
-msgstr ""
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr ""
 
@@ -7704,9 +7723,6 @@ msgstr "Sadə Statistika"
 #, fuzzy
 msgid "Download user export as"
 msgstr "Sadə Statistika"
-
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
 
 #, fuzzy
 #| msgid "An internal error occured."
@@ -8873,6 +8889,16 @@ msgstr "İstifadəçi hesabını silin"
 msgid "Your data was saved successfully!"
 msgstr "İdeyaınız uğurla silindi."
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "İstifadəçilər üçün axtarış"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Burada bəyəndiyiniz ideyaların ümumi icmalını tapa bilərsiniz."
+
 msgid "No model given to export data from."
 msgstr "Verilənləri eksport etmək üçün heç bir model verilmir."
 
@@ -9181,6 +9207,9 @@ msgstr "\"%(title)s\" obyekti uğurla silindi."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d digər obyektlər uğurla silindi."
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Sorğuya uyğun %(verbose_name)s tapılmadı"
@@ -9375,9 +9404,6 @@ msgstr "Sizin Elanınız uğurla aktiv edildi."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Sizin Elanınız uğurla deaktiv edildi."
-
-msgid "Another export is currently running!"
-msgstr ""
 
 #, fuzzy
 msgid "The Archived User Import Entry was deleted successfully."

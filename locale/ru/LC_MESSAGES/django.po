@@ -395,6 +395,14 @@ msgstr "Форум"
 msgid "Map"
 msgstr "Карта"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Пользователь"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Группа"
+
 msgid "Overnight stay required"
 msgstr "Требуется жилье"
 
@@ -1129,10 +1137,6 @@ msgstr "КОМНАТА BBB"
 
 msgid "Visitor"
 msgstr "Посещено"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Группа"
 
 msgid "Created"
 msgstr "Создано"
@@ -1987,10 +1991,6 @@ msgstr "нравится"
 
 msgid "ignored"
 msgstr "игнорированный"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Пользователь"
 
 msgid "Match subject"
 msgstr "Субъект совпадения"
@@ -4120,6 +4120,33 @@ msgstr "Введите Ваш выбор в виде значений, разд�
 msgid "Enter your choices"
 msgstr "Введите Ваш выбор"
 
+#, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Несколько вариантов голосования"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Поиск в группах"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Последние файлы"
+
+#, fuzzy
+#| msgid "To Profile"
+msgid "Go to Profile"
+msgstr "К профилю"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Отправить сообщение"
+
 msgid "Please verify your email address to continue using your account."
 msgstr "Пожалуйста, подтвердите Ваш электронный адрес для дальнейшего использования аккаунта."
 
@@ -4471,10 +4498,6 @@ msgstr "неактивно"
 
 msgid "Message all members"
 msgstr "Написать сообщение всем членам"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Отправить сообщение"
 
 msgid "Admin"
 msgstr "Администратор"
@@ -7464,9 +7487,6 @@ msgstr "Скачать данные пользователей"
 msgid "Download user export as"
 msgstr "Скачать данные пользователей"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
 #, fuzzy
 #| msgid "An internal error occured."
 msgid "An error has occurred"
@@ -8568,6 +8588,16 @@ msgstr "Премиум-блок успешно удален"
 msgid "Your data was saved successfully!"
 msgstr "Ваша информация была успешно сохранена!"
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Поиск пользователей"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Здесь ты найдешь обзор идей, которые тебе понравились."
+
 msgid "No model given to export data from."
 msgstr "Не указана модель экспорта данных."
 
@@ -8879,6 +8909,10 @@ msgstr "Объект \"%(title)s\" успешно удален."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d объект(а/ов) был(о) удален(о)"
+
+#, fuzzy
+msgid "Another export is currently running!"
+msgstr "В этот момент выполняется другой импорт!"
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"

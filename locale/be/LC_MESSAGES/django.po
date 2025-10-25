@@ -418,6 +418,14 @@ msgstr "Форум"
 msgid "Map"
 msgstr "Карта"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Карыстальнік(-ца)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Група"
+
 msgid "Overnight stay required"
 msgstr ""
 
@@ -1167,10 +1175,6 @@ msgstr ""
 #, fuzzy
 msgid "Visitor"
 msgstr "Мікрасайт"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Група"
 
 msgid "Created"
 msgstr "Створана"
@@ -2064,10 +2068,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Карыстальнік(-ца)"
 
 #, fuzzy
 msgid "Match subject"
@@ -4320,6 +4320,32 @@ msgid "Enter your choices"
 msgstr ""
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Магчыма галасаванне за некалькі варыянтаў"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Шукаць ў камандах"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Апошнія файлы"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "Ваш профіль"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Даслаць паведамленне"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "Калі ласка, пацвердзіце свой адрас электроннай пошты для %(site_name)s!"
 
@@ -4686,10 +4712,6 @@ msgstr "(Неактыўная)"
 
 msgid "Message all members"
 msgstr "Даслаць паведамленне ўсім чальцам"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Даслаць паведамленне"
 
 msgid "Admin"
 msgstr "Адміністратар"
@@ -7725,9 +7747,6 @@ msgstr ""
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr ""
 
-msgid "The export is currently running..."
-msgstr ""
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr ""
 
@@ -7745,9 +7764,6 @@ msgstr "Простая статыстыка"
 #, fuzzy
 msgid "Download user export as"
 msgstr "Простая статыстыка"
-
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
 
 #, fuzzy
 #| msgid "An internal error occured."
@@ -8924,6 +8940,14 @@ msgstr "Выдаліць уліковы запіс карыстальніка(-�
 msgid "Your data was saved successfully!"
 msgstr "Ваша ідэя паспяхова выдаленая."
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Шукаць карыстальнікаў(-ц)"
+
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr ""
+
 msgid "No model given to export data from."
 msgstr "Для экспарту даных не прызначана мадэль."
 
@@ -9231,6 +9255,9 @@ msgstr "Аб'ект \"%(title)s\" паспяхова выдалены."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d іншых(-я) аб'ектаў(-ы) выдалена(-ыя)."
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "%(verbose_name)s, адпавядаючых гэтаму запыту, не знойдзена"
@@ -9430,9 +9457,6 @@ msgstr "Ваш профіль паспяхова адрэдагаваны."
 #, fuzzy
 msgid "Your Announcement was deactivated successfully."
 msgstr "Ваш профіль паспяхова адрэдагаваны."
-
-msgid "Another export is currently running!"
-msgstr ""
 
 #, fuzzy
 msgid "The Archived User Import Entry was deleted successfully."

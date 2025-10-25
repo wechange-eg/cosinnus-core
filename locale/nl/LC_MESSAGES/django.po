@@ -423,6 +423,14 @@ msgstr "Forum"
 msgid "Map"
 msgstr "Kaart"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Gebruiker"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Groep"
+
 msgid "Overnight stay required"
 msgstr ""
 
@@ -1169,10 +1177,6 @@ msgstr ""
 #, fuzzy
 msgid "Visitor"
 msgstr "Bezocht"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Groep"
 
 msgid "Created"
 msgstr "Aangemaakt"
@@ -2062,10 +2066,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Gebruiker"
 
 #, fuzzy
 msgid "Match subject"
@@ -4308,6 +4308,32 @@ msgid "Enter your choices"
 msgstr ""
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Meerdere opties stembaar"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Zoeken in teams"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Nieuwste bestanden"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "Jouw profiel"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Bericht versturen"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "Controleer je e-mailadres voor %(site_name)s!"
 
@@ -4668,10 +4694,6 @@ msgstr "niet actief"
 
 msgid "Message all members"
 msgstr "Bericht versturen aan alle leden"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Bericht versturen"
 
 msgid "Admin"
 msgstr "Beheerder"
@@ -7695,9 +7717,6 @@ msgstr ""
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr ""
 
-msgid "The export is currently running..."
-msgstr ""
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr ""
 
@@ -7715,9 +7734,6 @@ msgstr "Simpele Statistiek"
 #, fuzzy
 msgid "Download user export as"
 msgstr "Simpele Statistiek"
-
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
 
 #, fuzzy
 #| msgid "An internal error occured."
@@ -8882,6 +8898,16 @@ msgstr "Gebruikersaccount succesvol gedeactiveerd"
 msgid "Your data was saved successfully!"
 msgstr "Je idee is succesvol verwijderd."
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Zoek naar gebruikers"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Hier vind je een overzicht van ideeën die je leuk vindt."
+
 msgid "No model given to export data from."
 msgstr "Geen model gegeven om gegevens van te exporteren."
 
@@ -9190,6 +9216,9 @@ msgstr "Object “%(title)s” is succesvol verwijderd."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere objecten zijn verwijderd."
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Geen %(verbose_name)s gevonden die past bij deze vraag"
@@ -9384,9 +9413,6 @@ msgstr "Je aankondiging is succesvol geactiveerd."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Je aankondiging is succesvol gedeactiveerd."
-
-msgid "Another export is currently running!"
-msgstr ""
 
 #, fuzzy
 msgid "The Archived User Import Entry was deleted successfully."
