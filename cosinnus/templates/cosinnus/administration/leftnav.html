@@ -92,27 +92,6 @@
         </button>
     {% endif %}
 
-    {% if SETTINGS.COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED %}
-        {% url 'cosinnus:administration-user-export' as url_user_export %}
-        <button type="button" class="btn w100 btn-emphasized fine-space" href="{{ url_user_export }}">
-            <ul class="media-list">
-                <li class="media">
-                    <span class="pull-left">
-                        <i class="fa fa-download"></i>
-                    </span>
-                    <span class="pull-right">
-                        {% if request.path|startswith:url_user_export %}
-                          <i class="fa fa-caret-right"></i>
-                        {% endif %}
-                    </span>
-                    <div class="media-body">
-                        {% trans "User Export" %}
-                    </div>
-                </li>
-            </ul>
-        </button>
-    {% endif %}
-
 
     {% if SETTINGS.COSINNUS_MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED %}
         {% for slug, config in SETTINGS.COSINNUS_MODEL_EXPORTERS.items %}

@@ -54,7 +54,6 @@ from cosinnus.views import (
     user,
     user_dashboard,
     user_dashboard_announcement,
-    user_export,
     user_import,
     user_match,
     version_history,
@@ -368,22 +367,6 @@ if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False)
             name='administration-archived-user-import-delete',
         ),
     ]
-
-if getattr(settings, 'COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
-    urlpatterns += [
-        path('administration/user_export/', user_export.user_export_view, name='administration-user-export'),
-        path(
-            'administration/user_export/download/csv/',
-            user_export.user_export_csv_download_view,
-            name='administration-user-export-csv-download',
-        ),
-        path(
-            'administration/user_export/download/xlsx/',
-            user_export.user_export_xlsx_download_view,
-            name='administration-user-export-xlsx-download',
-        ),
-    ]
-
 
 if getattr(settings, 'COSINNUS_MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
     urlpatterns += [

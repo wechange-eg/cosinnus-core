@@ -1165,14 +1165,6 @@ class CosinnusConf(AppConf):
     # (str classpath)
     USER_IMPORT_PROCESSOR_CLASS_DROPIN = None
 
-    # if True, the user export views will be shown
-    # they require a per-portal implementation of the importer class
-    USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED = False
-
-    # a class dropin to replace CosinnusUserExportProcessorBase as user export processor
-    # (str classpath)
-    USER_EXPORT_PROCESSOR_CLASS_DROPIN = None
-
     # if True, the model export views will be shown
     # they require a per-portal implementation of the exporter class
     MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED = False
