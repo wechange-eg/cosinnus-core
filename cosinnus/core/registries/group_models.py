@@ -126,9 +126,11 @@ class GroupModelRegistry(DictBaseRegistry):
         return prefix
 
     def get_url_name_prefix_by_type(self, group_type, default=None):
-        _, prefix, _, _ = super(GroupModelRegistry, self).get(
-            self.group_type_index[group_type], (None, default, None, None)
-        )
+        try:
+            url_key = self.group_type_index[group_type]
+        except KeyError:
+            raise ImproperlyConfigured(f'group_type is not registered: {group_type}')
+        _, prefix, _, _ = super(GroupModelRegistry, self).get(url_key, (None, default, None, None))
         return prefix
 
     def get_plural_url_key(self, url_key, default=None):
