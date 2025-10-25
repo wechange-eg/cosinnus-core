@@ -1122,6 +1122,15 @@ def linebreaksoneline(text, arg=''):
 
 
 @register.filter
+def remove_blank_lines(text):
+    """Removes all blank lines including lines with whitespace only."""
+    if not text:
+        return ''
+    text = '\n'.join(filter(str.strip, text.splitlines()))
+    return text
+
+
+@register.filter
 def add_domain(url):
     """Adds the current domain to a given URL, unless it already starts with http"""
     return url if url.startswith('http') else CosinnusPortal.get_current().get_domain() + url
@@ -1556,6 +1565,12 @@ def get_dynamic_field_value(dynamic_field_key, dynamic_field_name):
                     break
         dynamic_field_value = ', '.join(dynamic_key_values)
     return dynamic_field_value
+
+
+@register.filter
+def get_dynamic_field_label(dynamic_field_name):
+    dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.get(dynamic_field_name)
+    return dynamic_field.label
 
 
 @register.simple_tag

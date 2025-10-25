@@ -317,7 +317,11 @@
                     const csrftoken = Cosinnus.getCookie('csrftoken');
                     function isUserBoard(board) {
                         /* check if the board is a user board that can be migrated */
-                        return board.owner.uid !== ncAdmin && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE;
+                        return (
+                            board.owner.uid !== ncAdmin
+                            && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE
+                            && !['Welcome to Nextcloud Deck!', 'Personal', 'Willkommen bei Nextcloud Deck!', 'Persönlich'].includes(board.title)
+                        );
                     }
                     async function getUserBoards() {
                         /* get the user boards from next cloud */

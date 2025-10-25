@@ -19,6 +19,40 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.6.0': {
+        'datetime': datetime(2025, 10, 13, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.6.0'),
+        'short_text': _('This update includes several features and bugfixes:'),
+        'full_text': [
+            # Deck integration only
+            _(
+                '- Introducing the task board. You can now enable the modern task board in your groups '
+                'and projects, which replaces the todo app. You can migrate your todos from the todos app, '
+                'as well as any personal nextcloud boards you might have had.\n'
+            )
+            if settings.COSINNUS_DECK_ENABLED
+            else '',
+            # Firebase only
+            _('- Added Firebase push integration for push notifications to mobile devices.\n')
+            if settings.COSINNUS_FIREBASE_ENABLED
+            else '',
+            _(
+                '- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n'
+                '- Fixed a bug where group/project invite links would sometimes not work on signing up and could not '
+                'be used by logged in users.\n'
+                '- Fixed a bug where the user avatar was sometimes not synced with some integrated services.\n'
+                '- Fixed a bug where the platform font face was not applied on some pages.\n'
+                '- Fixed a bug where third-party-tool links where sometimes erroneously displayed on the microsite.\n'
+                '- Nextcloud groups will now properly be renamed along with their corresponding group/project folder '
+                'when their group/project is renamed on the platform.\n'
+                '- (BBB) Fixed a bug where existing recorded BBB meetings were not accessible anymore after disabling '
+                'BBB meetings for that group/project.\n'
+                '- (BBB) Fixed a bug where links to inaccessible BBB meetings would show a server error instead of '
+                'an informative error page.\n'
+                '- Further minor bugfixes and stability improvements have been made.'
+            ),
+        ],
+    },
     '2.5.0': {
         'datetime': datetime(2025, 7, 16, tzinfo=pytz.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.5.0'),

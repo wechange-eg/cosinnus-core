@@ -69,7 +69,6 @@ user_group_join_accepted = dispatch.Signal()  # providing_args=["user", "obj", "
 """ Called when an admin declines a user membership request of a group """
 user_group_join_declined = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
-
 """ Called when a user was invited to a group """
 user_group_invited = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
@@ -79,10 +78,13 @@ user_group_invitation_accepted = dispatch.Signal()  # providing_args=["user", "o
 """ Called when an admin declines a group invitation """
 user_group_invitation_declined = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
-
 """ Called when a person (not a user yet) is being recruited for a group """
 user_group_recruited = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
+""" Called after a notification event has been completey processed and
+    one or more users have just received a new `NotificationAlert`.
+    `sender` is the user that caused the notification event. """
+users_received_notification_alert = dispatch.Signal()  # providing_args=["user_ids"]
 
 """ Called when a group is moved to the current portal, serves as a notifcation message for users """
 group_moved_to_portal = dispatch.Signal()  # providing_args=["user", "obj", "audience"]

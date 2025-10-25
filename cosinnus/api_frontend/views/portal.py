@@ -660,7 +660,7 @@ class PortalSettingsView(APIView):
                     'multiple': False,
                     'type': 'text',
                     'label': _('Display name'),
-                    'legend': _('Help other members find you and use your real name.'),
+                    'legend': _('Help others find you and use your real name.'),
                     'placeholder': None,
                     'is_group_header': False,
                     'parent_group_field_name': None,

@@ -367,8 +367,8 @@ msgstr "Nachname"
 msgid "Display name"
 msgstr "Anzeigename"
 
-msgid "Help other members find you and use your real name."
-msgstr "Hilf anderen Mitgliedern dich schneller zu finden und gebe deinen Klarnamen an."
+msgid "Help others find you and use your real name."
+msgstr "Hilf anderen Mitgliedern, dich schneller zu finden, und gib deinen Klarnamen an."
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
 msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-E-Mails geschickt (wenn du das möchtest)"
@@ -8629,6 +8629,36 @@ msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 msgid "Version {version_number} released"
 msgstr "Version {version_number} veröffentlicht"
 
+msgid "This update includes several features and bugfixes:"
+msgstr "Das Update enthält mehrere Features und Bugfixes:"
+
+msgid "- Introducing the task board. You can now enable the modern task board in your groups and projects, which replaces the todo app. You can migrate your todos from the todos app, as well as any personal nextcloud boards you might have had.\n"
+msgstr "- Das Aufgaben-Board wurde eingeführt. Das moderne Aufgaben-Board kann nun in Gruppen und Projekten aktiviert werden und ersetzt die Aufgaben-App. Aufgaben aus der Aufgaben-App sowie alle persönlichen Nextcloud-Boards können migriert werden.\n"
+
+msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
+msgstr "- Es wurde eine Firebase-Push-Integration für Push-Benachrichtigungen an mobile Geräte hinzugefügt.\n"
+
+msgid ""
+"- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n"
+"- Fixed a bug where group/project invite links would sometimes not work on signing up and could not be used by logged in users.\n"
+"- Fixed a bug where the user avatar was sometimes not synced with some integrated services.\n"
+"- Fixed a bug where the platform font face was not applied on some pages.\n"
+"- Fixed a bug where third-party-tool links where sometimes erroneously displayed on the microsite.\n"
+"- Nextcloud groups will now properly be renamed along with their corresponding group/project folder when their group/project is renamed on the platform.\n"
+"- (BBB) Fixed a bug where existing recorded BBB meetings were not accessible anymore after disabling BBB meetings for that group/project.\n"
+"- (BBB) Fixed a bug where links to inaccessible BBB meetings would show a server error instead of an informative error page.\n"
+"- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+"- (Admin-Interface) Die Portal-Statistik-Seite wurde verbessert und um mehrere Diagramme erweitert.\n"
+"- Es wurde ein Fehler behoben, durch den Einladungslinks für Gruppen/Projekte bei der Anmeldung manchmal nicht funktionierten und von angemeldeten Benutzer/innen nicht benutzt werden konnten.\n"
+"- Es wurde ein Fehler behoben, durch den der Benutzer-Avatar manchmal nicht mit manchen integrierten Diensten synchronisiert wurde.\n"
+"- Es wurde ein Fehler behoben, durch den die Schriftart der Plattform auf einigen Seiten nicht angewendet wurde.\n"
+"- Es wurde ein Fehler behoben, durch den Links zu Tools von Drittanbietern manchmal fälschlicherweise auf der Microsite angezeigt wurden.\n"
+"- Nextcloud-Gruppen werden nun zusammen mit ihrem entsprechenden Gruppen-/Projektordner korrekt umbenannt, wenn ihre Gruppe/ihr Projekt auf der Plattform umbenannt wird.\n"
+"- (BBB) Es wurde ein Fehler behoben, durch den vorhandene aufgezeichnete BBB-Meetings nach Deaktivierung von BBB-Meetings für die Gruppe/das Projekt nicht mehr zugänglich waren.\n"
+"- (BBB) Es wurde ein Fehler behoben, durch den Links zu nicht zugänglichen BBB-Meetings einen Serverfehler anstelle einer informativen Fehlerseite anzeigten.\n"
+"- Weitere kleinere Fehlerbehebungen und Stabilitätsverbesserungen wurden vorgenommen."
+
 msgid "This update includes several bugfixes:"
 msgstr "Das Update enthält mehrere Bugfixes:"
 
@@ -8708,9 +8738,6 @@ msgstr ""
 
 msgid "Version 2.2.0 released"
 msgstr "Version 2.2.0 veröffentlicht"
-
-msgid "This update includes several features and bugfixes:"
-msgstr "Das Update enthält mehrere Features und Bugfixes:"
 
 msgid ""
 "- Several improvements have been made to the redesign user interface, and an introductory tooltip tour has been added.\n"

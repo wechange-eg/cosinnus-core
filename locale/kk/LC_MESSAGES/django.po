@@ -379,7 +379,9 @@ msgstr "Тегі"
 msgid "Display name"
 msgstr "Көрсетілетін Аты"
 
-msgid "Help other members find you and use your real name."
+#, fuzzy
+#| msgid "Help other members find you and use your real name."
+msgid "Help others find you and use your real name."
 msgstr "Басқа мүшелерге сені жылдам табу үшін және толық атыңды беру үшін атыңды көрсет."
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
@@ -9055,6 +9057,27 @@ msgstr ""
 msgid "Version {version_number} released"
 msgstr ""
 
+msgid "This update includes several features and bugfixes:"
+msgstr ""
+
+msgid "- Introducing the task board. You can now enable the modern task board in your groups and projects, which replaces the todo app. You can migrate your todos from the todos app, as well as any personal nextcloud boards you might have had.\n"
+msgstr ""
+
+msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
+msgstr ""
+
+msgid ""
+"- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n"
+"- Fixed a bug where group/project invite links would sometimes not work on signing up and could not be used by logged in users.\n"
+"- Fixed a bug where the user avatar was sometimes not synced with some integrated services.\n"
+"- Fixed a bug where the platform font face was not applied on some pages.\n"
+"- Fixed a bug where third-party-tool links where sometimes erroneously displayed on the microsite.\n"
+"- Nextcloud groups will now properly be renamed along with their corresponding group/project folder when their group/project is renamed on the platform.\n"
+"- (BBB) Fixed a bug where existing recorded BBB meetings were not accessible anymore after disabling BBB meetings for that group/project.\n"
+"- (BBB) Fixed a bug where links to inaccessible BBB meetings would show a server error instead of an informative error page.\n"
+"- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+
 msgid "This update includes several bugfixes:"
 msgstr ""
 
@@ -9115,9 +9138,6 @@ msgid ""
 msgstr ""
 
 msgid "Version 2.2.0 released"
-msgstr ""
-
-msgid "This update includes several features and bugfixes:"
 msgstr ""
 
 msgid ""

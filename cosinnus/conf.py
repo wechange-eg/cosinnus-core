@@ -330,6 +330,7 @@ class CosinnusConf(AppConf):
     DEFAULT_ACTIVE_GROUP_APPS = [
         'cosinnus_cloud',
         'cosinnus_conference',
+        'cosinnus_deck',
         'cosinnus_etherpad',
         'cosinnus_event',
     ]
@@ -1052,6 +1053,8 @@ class CosinnusConf(AppConf):
         '^/captcha/',
         # allauth provider urls
         '^/oidc/*',
+        # firebase fcm-django urls
+        '^/fcm/*',
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
@@ -1710,6 +1713,17 @@ class CosinnusConf(AppConf):
 
     # disable the group banner nag screen
     MITWIRKOMAT_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
+
+    # whether to enable the firebase integration for simple notification sending
+    # using fcm-django
+    # Important: this conf setting needs to be put at the start of your project's conf file,
+    # *before* `def define_cosinnus_project_settings(...` !
+    FIREBASE_ENABLED = False
+
+    # if COSINNUS_FIREBASE_ENABLED, the amount of seconds of a timeframe within which
+    # a user will not receive any more empty Firebase messages beyond the first.
+    # set to 0 to disable throttling for empty Firebase messages.
+    FIREBASE_EMPTY_MESSAGE_USER_THROTTLE_SECONDS = 10
 
 
 class CosinnusDefaultSettings(AppConf):
