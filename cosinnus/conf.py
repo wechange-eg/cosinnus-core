@@ -1168,13 +1168,17 @@ class CosinnusConf(AppConf):
     # (str classpath)
     USER_IMPORT_PROCESSOR_CLASS_DROPIN = None
 
-    # if True, the user export views will be shown
-    # they require a per-portal implementation of the importer class
-    USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED = False
+    # if True, the model export views will be shown
+    # they require a per-portal implementation of the exporter class
+    MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED = False
 
-    # a class dropin to replace CosinnusUserExportProcessorBase as user export processor
-    # (str classpath)
-    USER_EXPORT_PROCESSOR_CLASS_DROPIN = None
+    # Exporter definitions with customized exporter classes
+    # derived from cosinnus.models.model_export.ModelExportProcessor or a subclass
+    MODEL_EXPORTERS = {
+        # 'slug': {'title': _('l18n-title'), 'classpath': 'apps.core.user_export.PortalNameUserExportProcessor'},
+        'user': {'title': _('User Export'), 'classpath': 'cosinnus.models.model_export.UserExportProcessorBase'},
+        'group': {'title': _('Group Export'), 'classpath': 'cosinnus.models.model_export.GroupExportProcessorBase'},
+    }
 
     # if true, during signup and in the user profile, an additional
     # opt-in checkbox will be shown to let the user choose if they wish to
