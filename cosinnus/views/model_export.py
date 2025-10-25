@@ -26,15 +26,16 @@ logger = logging.getLogger('cosinnus')
 #     'slug': {'title': title-string, 'exporter': export-processor-instance},
 #     ...
 # }
-CONFIG = None
+MODEL_EXPORT_CONFIG = None
 
 
 def _init_config() -> Optional[dict]:
-    if CONFIG is not None:
-        raise ImproperlyConfigured('Already configured, init should only be called once')
+    if MODEL_EXPORT_CONFIG is not None:
+        logger.warning('ModelExporter already configured, ignoring...')
+        return MODEL_EXPORT_CONFIG
 
     if not getattr(settings, 'COSINNUS_MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
-        return None
+        return {}
 
     config_items = getattr(settings, 'COSINNUS_MODEL_EXPORTERS', {}).items()
     if not config_items:
@@ -65,7 +66,7 @@ class CosinnusModelExportView(RequireSuperuserMixin, TemplateView):
 
         slug = kwargs['slug']
         try:
-            config = CONFIG[slug]
+            config = MODEL_EXPORT_CONFIG[slug]
         except KeyError:
             raise Http404()
 
@@ -115,7 +116,7 @@ class CosinnusModelExportDownloadBaseView(RequireSuperuserMixin, View):
 
         slug = kwargs['slug']
         try:
-            config = CONFIG[slug]
+            config = MODEL_EXPORT_CONFIG[slug]
         except KeyError:
             raise Http404()
 
@@ -148,4 +149,4 @@ model_export_xlsx_download_view = CosinnusModelExportXLSXDownloadView.as_view()
 
 # initialize config on import
 # noinspection PyRedeclaration
-CONFIG = _init_config()
+MODEL_EXPORT_CONFIG = _init_config()
