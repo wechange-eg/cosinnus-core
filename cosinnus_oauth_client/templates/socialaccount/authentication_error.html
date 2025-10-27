@@ -4,6 +4,14 @@
 
 {% block head_title %}{% trans "Social Network Login Failure" %}{% endblock %}
 
+{% block jshead %}
+    {% comment %} This page deals with authentication data and loads only the most necessary vendor scripts! {% endcomment %}
+{% endblock jshead %}
+
+{% block cosinnus_navbar %}
+    {% comment %} Navbar is disabled for SSO screens {% endcomment %}
+{% endblock cosinnus_navbar %}
+
 {% block content %}
 <h1>{% trans "Social Network Login Failure" %}</h1>
 
