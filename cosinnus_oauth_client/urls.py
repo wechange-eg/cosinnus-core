@@ -14,7 +14,7 @@ urlpatterns = default_urlpatterns(CosinnusOauthClientProvider)
 urlpatterns += [
     path('social/connections/', custom_connections, name='socialaccount_connections'),
     path('password/set/', custom_password_set, name='account_set_password'),
-    path('welcome/', welcome_oauth, name='welcome_oauth'),
+    path('social/welcome/', welcome_oauth, name='welcome_oauth'),
     # social/signup/ is used in the OpenID Connect flow
     path('social/signup/', signup, name='socialaccount_signup'),
     # include openid_connect urls
