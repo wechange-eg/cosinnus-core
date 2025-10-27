@@ -218,6 +218,7 @@ class UserExportProcessorBase(ModelExportProcessor):
     def get_model_queryset(self) -> QuerySet:
         """User queryset used for the user export."""
         qs = get_user_model().objects.all()
+        qs = qs.exclude(cosinnus_profile__isnull=True)
         qs = qs.select_related('cosinnus_profile').all()
         qs = qs.order_by('last_name', 'first_name')
         return qs
