@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 
 import datetime
 import logging
+from _collections import defaultdict
 from builtins import str
 from copy import copy
 from importlib import import_module
 from threading import Thread
 
 import sentry_sdk
-from _collections import defaultdict
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
@@ -918,7 +918,7 @@ class NotificationsThread(Thread):
             # we just finished the last (or only) session frame, finish up
             # log current thread for debugging
             self._debug_threading('ended')
-            
+
             # if any users were notified during this session, trigger a signal with their ids
             if self.already_alerted_user_ids:
                 signals.users_received_notification_alert.send(sender=self.user, user_ids=self.already_alerted_user_ids)

@@ -481,6 +481,14 @@ msgstr "ფორუმი"
 msgid "Discover"
 msgstr "ძებნა"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "მომხმარებელი"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "ჯგუფი"
+
 msgid "Overnight stay required"
 msgstr ""
 
@@ -1245,10 +1253,6 @@ msgstr ""
 #, fuzzy
 msgid "Visitor"
 msgstr "ეწვია"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "ჯგუფი"
 
 msgid "Created"
 msgstr "შექმნილი"
@@ -2206,10 +2210,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "მომხმარებელი"
 
 #, fuzzy
 msgid "Match subject"
@@ -6339,6 +6339,62 @@ msgstr "ლინკის URL"
 msgid "Please choose the answers that best fit you."
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Vote for %(title)s"
+msgid "Start %(export_title)s"
+msgstr "ხმის მიცემა %(title)s-თვის"
+
+#, python-format
+msgid "You can start a %(export_title)s. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "The export is currently running..."
+msgstr ""
+
+#, python-format
+msgid "A %(export_title)s is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(export_title)s finished"
+msgstr "დახარისხების ველი"
+
+#, python-format
+msgid "You can download the latest %(export_title)s data."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Download %(export_title)s from"
+msgstr "უბრალო სტატისტიკა"
+
+#, fuzzy, python-format
+msgid "Download %(export_title)s as"
+msgstr "უბრალო სტატისტიკა"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+#, fuzzy
+msgid "An error has occurred"
+msgstr "დაფიქსირდა შიდა შეცდომა."
+
+#, fuzzy, python-format
+msgid "Sorry, an error occurred during the %(export_title)s. Please try again later."
+msgstr "შეცდომა დაფიქსირდა თქვენი ანგარიშის დამახსოვრების პროცესში. გთხოვთ კიდევ სცადოთ რამდენიმე წუთში."
+
+#, python-format
+msgid "Delete export data and start new %(export_title)s"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Vote for %(title)s"
+msgid "Retry %(export_title)s"
+msgstr "ხმის მიცემა %(title)s-თვის"
+
+#, fuzzy
+msgid "Delete exported data"
+msgstr "გამოვლენილი საგნის წაშლა..."
+
 msgid "Toggle navigation"
 msgstr "Toggle navigation"
 
@@ -7916,9 +7972,6 @@ msgstr ""
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr ""
 
-msgid "The export is currently running..."
-msgstr ""
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr ""
 
@@ -7937,13 +7990,6 @@ msgstr "უბრალო სტატისტიკა"
 msgid "Download user export as"
 msgstr "უბრალო სტატისტიკა"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
-#, fuzzy
-msgid "An error has occurred"
-msgstr "დაფიქსირდა შიდა შეცდომა."
-
 #, fuzzy
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr "შეცდომა დაფიქსირდა თქვენი ანგარიშის დამახსოვრების პროცესში. გთხოვთ კიდევ სცადოთ რამდენიმე წუთში."
@@ -7953,10 +7999,6 @@ msgstr ""
 
 msgid "Retry user export"
 msgstr ""
-
-#, fuzzy
-msgid "Delete exported data"
-msgstr "გამოვლენილი საგნის წაშლა..."
 
 msgid "User Import Archive"
 msgstr ""
@@ -9652,6 +9694,9 @@ msgstr "ობიექტი \"%(title)s\"  წაიშალა წარმ�
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d სხვა ობიექტები წაიშალა."
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "ვერცერთმა %(verbose_name)s-მა ვერ ნახა შესაბამისი გამოკითხვა"
@@ -9925,9 +9970,6 @@ msgstr "თქვენი განცხადება წარმატე�
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "თქვენი განცხადების დეაქტივაცია წარმატებით განხორციელდა."
-
-msgid "Another export is currently running!"
-msgstr ""
 
 #, fuzzy
 msgid "The Archived User Import Entry was deleted successfully."
@@ -15060,6 +15102,11 @@ msgstr "დარწმუნებული ხართ, რომ გსუ�
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "დარწმუნებული ხართ, რომ გსურთ წაშალოთ ეს გუნდი?"
+
+#, fuzzy, python-format
+#~| msgid "Vote for %(title)s"
+#~ msgid "Start %(mytitle)s"
+#~ msgstr "ხმის მიცემა %(title)s-თვის"
 
 #~ msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 #~ msgstr "გვერდი წარმოადგენს იმის ესკიზს რაც წინ გელოდებათ ! იგი არის განვითარების პროცესში და ბევრი რამ არ არის დასრულებული ან გამართულად არ მუშაობს !"
