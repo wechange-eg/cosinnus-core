@@ -13,7 +13,9 @@
 {% endblock cosinnus_navbar %}
 
 {% block content %}
-<h1>{% trans "Social Network Login Failure" %}</h1>
+    <h1>{% trans "Social Network Login Failure" %}</h1>
 
-<p>{% trans "An error occurred while attempting to login via your social network account." %}</p>
+    <p>{% trans "An error occurred while attempting to login via your social network account." %}</p>
+
+    <p><a href="{% url "login" %}">{% trans "Back to Login" %}</a></p>
 {% endblock %}
