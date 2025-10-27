@@ -425,6 +425,14 @@ msgstr "Forum"
 msgid "Map"
 msgstr "Plan"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Utilisateur"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Groupe"
+
 msgid "Overnight stay required"
 msgstr "Nuitée requise"
 
@@ -1171,10 +1179,6 @@ msgstr "SALLE BBB"
 
 msgid "Visitor"
 msgstr "Visiteur"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Groupe"
 
 msgid "Created"
 msgstr "Créé"
@@ -2039,10 +2043,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Utilisateur"
 
 #, fuzzy
 msgid "Match subject"
@@ -4223,6 +4223,32 @@ msgid "Enter your choices"
 msgstr "Entre tes choix"
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Plusieurs réponses possibles"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Rechercher dans les équipes"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Derniers fichiers"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "Ton profil"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Envoyer un message"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "Vérifie ton adresse e-mail pour %(site_name)s !"
 
@@ -4569,10 +4595,6 @@ msgstr "inactif"
 
 msgid "Message all members"
 msgstr "Envoyer un message à tous les membres"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Envoyer un message"
 
 msgid "Admin"
 msgstr "Administrateur"
@@ -7601,9 +7623,6 @@ msgstr "Télécharger les conditions"
 msgid "Download user export as"
 msgstr "Télécharger les conditions"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
 #, fuzzy
 #| msgid "An internal error occured."
 msgid "An error has occurred"
@@ -8711,6 +8730,16 @@ msgstr "Compte utilisateur désactivé avec succès"
 msgid "Your data was saved successfully!"
 msgstr "Tes données ont été enregistrées avec succès !"
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Rechercher utilisateurs"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Tu trouveras ici un aperçu des idées que tu as aimées."
+
 msgid "No model given to export data from."
 msgstr "Pas de modèle donné pour exporter les données."
 
@@ -9017,6 +9046,10 @@ msgstr "L'objet \"%(title)s\" a été supprimé avec succès."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d autres objets ont été supprimés."
+
+#, fuzzy
+msgid "Another export is currently running!"
+msgstr "Une autre importation est actuellement en cours d’exécution !"
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"

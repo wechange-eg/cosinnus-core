@@ -26,7 +26,7 @@ from cosinnus.views import bbb_room, user_export, user_import, user_match
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
     user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields, \
-    conference_administration, version_history
+    conference_administration, version_history, model_export
 from cosinnus_conference.api.views import ConferenceViewSet, \
     PublicConferenceViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
@@ -189,7 +189,27 @@ if getattr(settings, 'COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False)
         path('administration/user_export/download/xlsx/', user_export.user_export_xlsx_download_view, name='administration-user-export-xlsx-download'),
     ]
 
-if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', False): 
+
+if getattr(settings, 'COSINNUS_MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
+    urlpatterns += [
+        path(
+            'administration/model_export/<str:slug>/',
+            model_export.model_export_view,
+            name='administration-model-export',
+        ),
+        path(
+            'administration/model_export/<str:slug>/download/csv/',
+            model_export.model_export_csv_download_view,
+            name='administration-model-export-csv-download',
+        ),
+        path(
+            'administration/model_export/<str:slug>/download/xlsx/',
+            model_export.model_export_xlsx_download_view,
+            name='administration-model-export-xlsx-download',
+        ),
+    ]
+
+if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', False):
     urlpatterns += [
         path('administration/admin_dynamic_fields/edit/', dynamic_fields.dynamic_field_admin_choices_form_view, name='administration-dynamic-fields'),
     ]

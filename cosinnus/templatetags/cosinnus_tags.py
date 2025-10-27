@@ -268,6 +268,12 @@ def stringify(value):
     """Template filter to stringify a value """
     return str(value)
 
+
+@register.filter
+def startswith(item, value):
+    """Template filter to check if an iterable contains an item, just like the `in` keyword"""
+    return item.startswith(value)
+
 @register.filter
 def contains(iterable, item):
     """Template filter to check if an iterable contains an item, just like the `in` keyword """

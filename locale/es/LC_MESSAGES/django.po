@@ -381,6 +381,14 @@ msgstr "Forum"
 msgid "Map"
 msgstr "Mapa"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Usario"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Grupo"
+
 msgid "Overnight stay required"
 msgstr "Se requiere pernoctación"
 
@@ -1067,10 +1075,6 @@ msgstr "SALA BBB"
 
 msgid "Visitor"
 msgstr "Visitante"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Grupo"
 
 msgid "Created"
 msgstr "Creado"
@@ -1861,10 +1865,6 @@ msgstr "gustar"
 
 msgid "ignored"
 msgstr "ignorado"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Usario"
 
 msgid "Match subject"
 msgstr "Coincidir tema"
@@ -3835,6 +3835,33 @@ msgstr "Inserta tus selecciones como valores separados por punto y coma"
 msgid "Enter your choices"
 msgstr "Inserta tus selecciones"
 
+#, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Múltiples opciones votables"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Buscar en equipos"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Ultimos archivos"
+
+#, fuzzy
+#| msgid "To Profile"
+msgid "Go to Profile"
+msgstr "A perfil"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Enviar mensaje"
+
 msgid "Please verify your email address to continue using your account."
 msgstr "Por favor verifica tu dirección de correo electrónico para continuar usando tu cuenta."
 
@@ -4164,10 +4191,6 @@ msgstr "inactivo"
 
 msgid "Message all members"
 msgstr "Mandar mensaje a todos los miembros"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Enviar mensaje"
 
 msgid "Admin"
 msgstr "Administrador"
@@ -7086,9 +7109,6 @@ msgstr "Comenzar exportación de usario"
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr "Puedes comenzar a exportar usario. Tan pronto como la exportación es terminada, será disponible aquí."
 
-msgid "The export is currently running..."
-msgstr "La exportación se está ejecutando actualmente..."
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr "Un exportación de usario está en progreso. Tan pronto como el exportación es terminado, estará disponible aquí."
 
@@ -8194,6 +8214,16 @@ msgstr "Se elimino con exito bloque premium"
 msgid "Your data was saved successfully!"
 msgstr "¡Tus datos se han guardado con éxito!"
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Buscar usarios"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Aquí puedes encontrar una visión general de ideas que te han gustado."
+
 msgid "No model given to export data from."
 msgstr "Ningún modelo dado para exportar datos."
 
@@ -8500,6 +8530,9 @@ msgstr "Objeto \"%(title)s\" fue eliminado con éxito."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d otros objetos han sido eleminados."
 
+msgid "Another export is currently running!"
+msgstr "¡Otro exportación se está ejecutando!"
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "No se encontró %(verbose_name)s que coincida con la consulta"
@@ -8693,9 +8726,6 @@ msgstr "Tu anuncio fue activado con éxito."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Tu anuncio fue desactivado con éxito."
-
-msgid "Another export is currently running!"
-msgstr "¡Otro exportación se está ejecutando!"
 
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "La entrada de importación de usario archivado fue eliminada con éxito."

@@ -425,6 +425,14 @@ msgstr "פורום"
 msgid "Map"
 msgstr "מפה"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "משתמש"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "קבוצה"
+
 msgid "Overnight stay required"
 msgstr "נדרשת לינת לילה"
 
@@ -1173,10 +1181,6 @@ msgstr "חדר BBB"
 
 msgid "Visitor"
 msgstr "מבקר"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "קבוצה"
 
 msgid "Created"
 msgstr "נוצר"
@@ -2042,10 +2046,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "משתמש"
 
 #, fuzzy
 msgid "Match subject"
@@ -4230,6 +4230,32 @@ msgid "Enter your choices"
 msgstr "הזן את הבחירות שלך"
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "אפשרויות הצבעה מרובות"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "חפש בצוותים"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "הקבצים האחרונים"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "הפרופיל שלך"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "שלח הודעה"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
 
@@ -4577,10 +4603,6 @@ msgstr "לא פעיל"
 
 msgid "Message all members"
 msgstr "שלח הודעה לכל החברים"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "שלח הודעה"
 
 msgid "Admin"
 msgstr "מנהל מערכת"
@@ -7602,9 +7624,6 @@ msgstr "הורד את התנאים"
 msgid "Download user export as"
 msgstr "הורד את התנאים"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
 #, fuzzy
 #| msgid "An internal error occured."
 msgid "An error has occurred"
@@ -8712,6 +8731,16 @@ msgstr "חשבון משתמש הושבת בהצלחה"
 msgid "Your data was saved successfully!"
 msgstr "הנתונים שלך נשמרו בהצלחה!"
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "חפש משתמשים"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "כאן ניתן למצוא סקירה כללית של רעיונות שאהבת."
+
 msgid "No model given to export data from."
 msgstr "לא ניתן מודל לייצוא נתונים מ.."
 
@@ -9019,6 +9048,10 @@ msgstr "הפריט \"%(title)s\" נמחק בהצלחה."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d פריטים אחרים נמחקו."
+
+#, fuzzy
+msgid "Another export is currently running!"
+msgstr "ייבוא אחר פועל כעת!"
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"

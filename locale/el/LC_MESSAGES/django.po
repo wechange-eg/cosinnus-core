@@ -421,6 +421,14 @@ msgstr "Φόρουμ"
 msgid "Map"
 msgstr "Χάρτης"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Χρήστης"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Ομάδα"
+
 msgid "Overnight stay required"
 msgstr "Απαιτείται διανυκτέρευση"
 
@@ -1167,10 +1175,6 @@ msgstr "ΔΩΜΑΤΙΟ ΒΒΒ"
 
 msgid "Visitor"
 msgstr "Επισκέπτης"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Ομάδα"
 
 msgid "Created"
 msgstr "Δημιουργήθηκε"
@@ -2036,10 +2040,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Χρήστης"
 
 #, fuzzy
 msgid "Match subject"
@@ -4219,6 +4219,32 @@ msgid "Enter your choices"
 msgstr "Εισάγετε τις επιλογές σας"
 
 #, fuzzy
+#| msgid "Multiple options votable"
+msgid "Multiple selections allowed"
+msgstr "Μπορούν να ψηφιστούν πολλές επιλογές"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search term"
+msgstr "Αναζήτηση σε ομάδες"
+
+#, fuzzy
+#| msgid "Latest files"
+msgid "Reset fields"
+msgstr "Τελευταία αρχεία"
+
+#, fuzzy
+msgid "Go to Profile"
+msgstr "Το Προφίλ Σας"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Αποστολή Μηνύματος"
+
+#, fuzzy
 msgid "Please verify your email address to continue using your account."
 msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
 
@@ -4565,10 +4591,6 @@ msgstr "ανενεργός"
 
 msgid "Message all members"
 msgstr "Αποστολή μηνύματος σε όλα τα μέλη"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Αποστολή Μηνύματος"
 
 msgid "Admin"
 msgstr "Διαχειριστής"
@@ -7589,9 +7611,6 @@ msgstr "Λήψη των όρων"
 msgid "Download user export as"
 msgstr "Λήψη των όρων"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
 #, fuzzy
 #| msgid "An internal error occured."
 msgid "An error has occurred"
@@ -8698,6 +8717,16 @@ msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε 
 msgid "Your data was saved successfully!"
 msgstr "Τα δεδομένα σας αποθηκεύτηκαν με επιτυχία!"
 
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Experts"
+msgstr "Αναζήτηση για Χρήστες"
+
+#, fuzzy
+#| msgid "Here you can find an overview of Ideas you have liked."
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Εδώ μπορείτε να βρείτε μια σύνοψη των Ιδεών που σας άρεσαν."
+
 msgid "No model given to export data from."
 msgstr "Δεν έχει δοθεί μοντέλο για την εξαγωγή των δεδομένων."
 
@@ -9005,6 +9034,10 @@ msgstr "Το αντικείμενο \"%(title)s\" διαγράφηκε με επ
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d άλλα αντικείμενα διαγράφηκαν."
+
+#, fuzzy
+msgid "Another export is currently running!"
+msgstr "Μια άλλη εισαγωγή πραγματοποιείται αυτή τη στιγμή!"
 
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
