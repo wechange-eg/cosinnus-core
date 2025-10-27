@@ -486,6 +486,14 @@ msgstr "المنتدى"
 msgid "Discover"
 msgstr "اكتشف"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "مستعمل"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "مجموعة"
+
 msgid "Overnight stay required"
 msgstr "مطلوب البقاء طوال الليل"
 
@@ -1279,10 +1287,6 @@ msgstr "غرفة BBB"
 
 msgid "Visitor"
 msgstr "زائر"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "مجموعة"
 
 msgid "Created"
 msgstr "المُنشئ"
@@ -2251,10 +2255,6 @@ msgstr ""
 
 msgid "ignored"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "مستعمل"
 
 #, fuzzy
 msgid "Match subject"
@@ -6411,6 +6411,62 @@ msgstr "رابط URL"
 msgid "Please choose the answers that best fit you."
 msgstr ""
 
+#, fuzzy, python-format
+msgid "Start %(export_title)s"
+msgstr "إبدء الاستيراد؟"
+
+#, python-format
+msgid "You can start a %(export_title)s. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy
+msgid "The export is currently running..."
+msgstr "الاستيراد قيد التشغيل حاليًا ..."
+
+#, python-format
+msgid "A %(export_title)s is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(export_title)s finished"
+msgstr "انتهى الاستيراد"
+
+#, python-format
+msgid "You can download the latest %(export_title)s data."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Download %(export_title)s from"
+msgstr "قم بتنزيل الشروط"
+
+#, fuzzy, python-format
+msgid "Download %(export_title)s as"
+msgstr "قم بتنزيل الشروط"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+#, fuzzy
+msgid "An error has occurred"
+msgstr "حدث خطأ داخلي."
+
+#, fuzzy, python-format
+msgid "Sorry, an error occurred during the %(export_title)s. Please try again later."
+msgstr "حدث خطأ أثناء محاولة إرسال التقرير الخاص بك. يرجى المحاولة مرة أخرى بعد قليل."
+
+#, fuzzy, python-format
+msgid "Delete export data and start new %(export_title)s"
+msgstr "احذف البيانات التي تم تحميلها وحمِّل ملف CSV جديدًا"
+
+#, fuzzy, python-format
+#| msgid "Vote for %(title)s"
+msgid "Retry %(export_title)s"
+msgstr "صوت لـ %(title)s"
+
+#, fuzzy
+msgid "Delete exported data"
+msgstr "حذف العنصر المبلغ عنه..."
+
 msgid "Toggle navigation"
 msgstr "تبديل التنقل"
 
@@ -7976,10 +8032,6 @@ msgstr "إبدء الاستيراد؟"
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr ""
 
-#, fuzzy
-msgid "The export is currently running..."
-msgstr "الاستيراد قيد التشغيل حاليًا ..."
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr ""
 
@@ -7998,13 +8050,6 @@ msgstr "قم بتنزيل الشروط"
 msgid "Download user export as"
 msgstr "قم بتنزيل الشروط"
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
-#, fuzzy
-msgid "An error has occurred"
-msgstr "حدث خطأ داخلي."
-
 #, fuzzy
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr "حدث خطأ أثناء محاولة إرسال التقرير الخاص بك. يرجى المحاولة مرة أخرى بعد قليل."
@@ -8015,10 +8060,6 @@ msgstr "احذف البيانات التي تم تحميلها وحمِّل مل
 
 msgid "Retry user export"
 msgstr ""
-
-#, fuzzy
-msgid "Delete exported data"
-msgstr "حذف العنصر المبلغ عنه..."
 
 msgid "User Import Archive"
 msgstr "أرشيف استيراد المستخدم"
@@ -9694,6 +9735,10 @@ msgstr "تم حذف \"%(title)s\" بنجاح."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "تم حذف %(numobjects)d أشياء أخرى."
 
+#, fuzzy
+msgid "Another export is currently running!"
+msgstr "استيراد آخر قيد التشغيل حاليًا!"
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "لم يتم العثور على %(verbose_name)s تطابق الاستعلام"
@@ -9971,10 +10016,6 @@ msgstr "تم تنشيط الإعلان الخاص بك بنجاح."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "تم إلغاء تنشيط الإعلان الخاص بك بنجاح."
-
-#, fuzzy
-msgid "Another export is currently running!"
-msgstr "استيراد آخر قيد التشغيل حاليًا!"
 
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "تم حذف إدخال استيراد المستخدم المؤرشف بنجاح."
@@ -15241,6 +15282,10 @@ msgstr "هل أنت متأكد أنك تريد حذف هذا الفريق؟"
 #, fuzzy
 msgid "Are you sure you want to delete this object?"
 msgstr "هل أنت متأكد أنك تريد حذف هذا الفريق؟"
+
+#, fuzzy, python-format
+#~ msgid "Start %(mytitle)s"
+#~ msgstr "إبدء الاستيراد؟"
 
 #, fuzzy
 #~ msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"

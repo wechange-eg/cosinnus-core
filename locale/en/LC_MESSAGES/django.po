@@ -466,6 +466,14 @@ msgstr ""
 msgid "Discover"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Group"
+
 msgid "Overnight stay required"
 msgstr ""
 
@@ -1255,10 +1263,6 @@ msgstr ""
 
 msgid "Visitor"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Group"
 
 msgid "Created"
 msgstr ""
@@ -2184,10 +2188,6 @@ msgid "like"
 msgstr ""
 
 msgid "ignored"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
 msgstr ""
 
 msgid "Match subject"
@@ -6108,6 +6108,59 @@ msgstr ""
 msgid "Please choose the answers that best fit you."
 msgstr ""
 
+#, python-format
+msgid "Start %(export_title)s"
+msgstr ""
+
+#, python-format
+msgid "You can start a %(export_title)s. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "The export is currently running..."
+msgstr ""
+
+#, python-format
+msgid "A %(export_title)s is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, python-format
+msgid "%(export_title)s finished"
+msgstr ""
+
+#, python-format
+msgid "You can download the latest %(export_title)s data."
+msgstr ""
+
+#, python-format
+msgid "Download %(export_title)s from"
+msgstr ""
+
+#, python-format
+msgid "Download %(export_title)s as"
+msgstr ""
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+#, python-format
+msgid "Sorry, an error occurred during the %(export_title)s. Please try again later."
+msgstr ""
+
+#, python-format
+msgid "Delete export data and start new %(export_title)s"
+msgstr ""
+
+#, python-format
+msgid "Retry %(export_title)s"
+msgstr ""
+
+#, fuzzy
+msgid "Delete exported data"
+msgstr "There are no groups."
+
 msgid "Toggle navigation"
 msgstr ""
 
@@ -7672,9 +7725,6 @@ msgstr ""
 msgid "You can start a user export. As soon as the export is finished it will be available here."
 msgstr ""
 
-msgid "The export is currently running..."
-msgstr ""
-
 msgid "A user export is in progress. As soon as the export is finished it will be available here."
 msgstr ""
 
@@ -7690,12 +7740,6 @@ msgstr ""
 msgid "Download user export as"
 msgstr ""
 
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr ""
 
@@ -7704,10 +7748,6 @@ msgstr ""
 
 msgid "Retry user export"
 msgstr ""
-
-#, fuzzy
-msgid "Delete exported data"
-msgstr "There are no groups."
 
 msgid "User Import Archive"
 msgstr ""
@@ -9370,6 +9410,9 @@ msgstr ""
 msgid "%(numobjects)d other objects were deleted."
 msgstr ""
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
@@ -9628,9 +9671,6 @@ msgid "Your Announcement was activated successfully."
 msgstr ""
 
 msgid "Your Announcement was deactivated successfully."
-msgstr ""
-
-msgid "Another export is currently running!"
 msgstr ""
 
 msgid "The Archived User Import Entry was deleted successfully."

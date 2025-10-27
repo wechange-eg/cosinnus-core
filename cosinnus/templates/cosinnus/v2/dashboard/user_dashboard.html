@@ -320,7 +320,7 @@
                         return (
                             board.owner.uid !== ncAdmin
                             && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE
-                            && !['Welcome to Nextcloud Deck!', 'Personal'].includes(board.title)
+                            && !['Welcome to Nextcloud Deck!', 'Personal', 'Willkommen bei Nextcloud Deck!', 'Persönlich'].includes(board.title)
                         );
                     }
                     async function getUserBoards() {

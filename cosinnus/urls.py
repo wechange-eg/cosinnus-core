@@ -46,6 +46,7 @@ from cosinnus.views import (
     map_api,
     microsite,
     mitwirkomat,
+    model_export,
     profile,
     search,
     statistics,
@@ -53,7 +54,6 @@ from cosinnus.views import (
     user,
     user_dashboard,
     user_dashboard_announcement,
-    user_export,
     user_import,
     user_match,
     version_history,
@@ -378,18 +378,22 @@ if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False)
         ),
     ]
 
-if getattr(settings, 'COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
+if getattr(settings, 'COSINNUS_MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
     urlpatterns += [
-        path('administration/user_export/', user_export.user_export_view, name='administration-user-export'),
         path(
-            'administration/user_export/download/csv/',
-            user_export.user_export_csv_download_view,
-            name='administration-user-export-csv-download',
+            'administration/model_export/<str:slug>/',
+            model_export.model_export_view,
+            name='administration-model-export',
         ),
         path(
-            'administration/user_export/download/xlsx/',
-            user_export.user_export_xlsx_download_view,
-            name='administration-user-export-xlsx-download',
+            'administration/model_export/<str:slug>/download/csv/',
+            model_export.model_export_csv_download_view,
+            name='administration-model-export-csv-download',
+        ),
+        path(
+            'administration/model_export/<str:slug>/download/xlsx/',
+            model_export.model_export_xlsx_download_view,
+            name='administration-model-export-xlsx-download',
         ),
     ]
 
