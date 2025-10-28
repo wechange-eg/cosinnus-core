@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 14:43+0200\n"
-"Language: de\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 11:22+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
 msgid "Info"
@@ -367,8 +367,8 @@ msgstr "Nachname"
 msgid "Display name"
 msgstr "Anzeigename"
 
-msgid "Help other members find you and use your real name."
-msgstr "Hilf anderen Mitgliedern dich schneller zu finden und gebe deinen Klarnamen an."
+msgid "Help others find you and use your real name."
+msgstr "Hilf anderen Mitgliedern, dich schneller zu finden, und gib deinen Klarnamen an."
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
 msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-E-Mails geschickt (wenn du das möchtest)"
@@ -459,6 +459,12 @@ msgstr "Forum"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
 msgstr "Entdecken"
+
+msgid "User Export"
+msgstr "Benutzer/innen-Export"
+
+msgid "Group Export"
+msgstr "Gruppen-Export"
 
 msgid "Overnight stay required"
 msgstr "Übernachtung benötigt"
@@ -2852,9 +2858,6 @@ msgstr "Benutzermanagement"
 msgid "User Import"
 msgstr "Benutzer/innen-Import"
 
-msgid "User Export"
-msgstr "Benutzer/innen-Export"
-
 msgid "User Profile Field Choices"
 msgstr "Benutzerprofil-Feldwerte"
 
@@ -4219,6 +4222,25 @@ msgstr "Gib die Auswahlmöglichkeiten als Semikolon-getrennte Werte ein"
 msgid "Enter your choices"
 msgstr "Gib deine Auswahlmöglichkeiten ein"
 
+msgid "Multiple selections allowed"
+msgstr "Mehrere Auswahlen sind möglich"
+
+msgid "General profile information (e.g. name, topics, about me)"
+msgstr "Allgemeine Profilinformation (z.B. Name, Themen, Über mich)"
+
+msgid "Search term"
+msgstr "Suchbegriff"
+
+msgid "Reset fields"
+msgstr "Felder zurücksetzen"
+
+msgid "Go to Profile"
+msgstr "Zum Profil"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Nachricht schicken"
+
 msgid "Please verify your email address to continue using your account."
 msgstr "Bitte bestätige deine E-Mail-Adresse, um dein Konto weiter zu benutzen."
 
@@ -4566,10 +4588,6 @@ msgstr "inaktiv"
 
 msgid "Message all members"
 msgstr "Nachricht an alle Mitglieder"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Send Message"
-msgstr "Nachricht schicken"
 
 msgid "Admin"
 msgstr "Administrator/in"
@@ -6039,6 +6057,58 @@ msgstr "Link"
 
 msgid "Please choose the answers that best fit you."
 msgstr "Bitte wählt die Antworten, die am besten zu euch passen."
+
+#, python-format
+msgid "Start %(export_title)s"
+msgstr "%(export_title)s starten"
+
+#, python-format
+msgid "You can start a %(export_title)s. As soon as the export is finished it will be available here."
+msgstr "Der %(export_title)s kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+msgid "The export is currently running..."
+msgstr "Der Export läuft gerade..."
+
+#, python-format
+msgid "A %(export_title)s is in progress. As soon as the export is finished it will be available here."
+msgstr "Der %(export_title)s wird gerade erstellt. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+#, python-format
+msgid "%(export_title)s finished"
+msgstr "%(export_title)s abgeschlossen"
+
+#, python-format
+msgid "You can download the latest %(export_title)s data."
+msgstr "Der zuletzt erstellte %(export_title)s kann heruntergeladen werden."
+
+#, python-format
+msgid "Download %(export_title)s from"
+msgstr "%(export_title)s herunterladen vom"
+
+#, python-format
+msgid "Download %(export_title)s as"
+msgstr "%(export_title)s herunterladen als"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr "Achtung: Aus Sicherheitsgründen sind die Export-Daten nur temporär verfügbar und werden automatisch nach einer gewissen Zeit gelöscht."
+
+msgid "An error has occurred"
+msgstr "Ein Fehler ist aufgetreten."
+
+#, python-format
+msgid "Sorry, an error occurred during the %(export_title)s. Please try again later."
+msgstr "Leider ist bei dem %(export_title)s ein Fehler aufgetreten. Bitte versuch es später erneut."
+
+#, python-format
+msgid "Delete export data and start new %(export_title)s"
+msgstr "Export-Daten löschen und neuen %(export_title)s starten"
+
+#, python-format
+msgid "Retry %(export_title)s"
+msgstr "%(export_title)s erneut starten"
+
+msgid "Delete exported data"
+msgstr "Export-Daten löschen"
 
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
@@ -7550,48 +7620,6 @@ msgstr "Benutzer/in kann eine Ankündigungen wegklicken, woraufhin sie verschwin
 msgid "There are no announcements yet."
 msgstr "Noch keine Ankündigungen vorhanden."
 
-msgid "Start user export"
-msgstr "Benutzer/innen-Export starten"
-
-msgid "You can start a user export. As soon as the export is finished it will be available here."
-msgstr "Benutzer/innen-Export kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
-
-msgid "The export is currently running..."
-msgstr "Benutzer/innen-Export läuft gerade..."
-
-msgid "A user export is in progress. As soon as the export is finished it will be available here."
-msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
-
-msgid "User export finished"
-msgstr "Benutzer/innen-Export abgeschlossen"
-
-msgid "You can download the latest user export data."
-msgstr "Der zuletzt erstellte Benutzer/innen-Export kann heruntergeladen werden."
-
-msgid "Download user exports from"
-msgstr "Benutzer/innen-Export herunterladen vom"
-
-msgid "Download user export as"
-msgstr "Benutzer/innen-Export herunterladen als"
-
-msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
-msgstr "Achtung: Aus Sicherheitsgründen sind die Export-Daten nur temporär verfügbar und werden automatisch nach einer gewissen Zeit gelöscht."
-
-msgid "An error has occurred"
-msgstr "Ein Fehler ist aufgetreten."
-
-msgid "Sorry, an error occurred during the user export. Please try again later."
-msgstr "Leider ist bei dem Benutzer/innen-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
-
-msgid "Delete export data and start new user export"
-msgstr "Export-Daten löschen und neuen Benutzer/innen-Export starten"
-
-msgid "Retry user export"
-msgstr "Benutzer/innen-Export erneut starten"
-
-msgid "Delete exported data"
-msgstr "Export-Daten löschen"
-
 msgid "User Import Archive"
 msgstr "Benutzer/in Import Archiv"
 
@@ -8574,6 +8602,36 @@ msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 msgid "Version {version_number} released"
 msgstr "Version {version_number} veröffentlicht"
 
+msgid "This update includes several features and bugfixes:"
+msgstr "Das Update enthält mehrere Features und Bugfixes:"
+
+msgid "- Introducing the task board. You can now enable the modern task board in your groups and projects, which replaces the todo app. You can migrate your todos from the todos app, as well as any personal nextcloud boards you might have had.\n"
+msgstr "- Das Aufgaben-Board wurde eingeführt. Das moderne Aufgaben-Board kann nun in Gruppen und Projekten aktiviert werden und ersetzt die Aufgaben-App. Aufgaben aus der Aufgaben-App sowie alle persönlichen Nextcloud-Boards können migriert werden.\n"
+
+msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
+msgstr "- Es wurde eine Firebase-Push-Integration für Push-Benachrichtigungen an mobile Geräte hinzugefügt.\n"
+
+msgid ""
+"- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n"
+"- Fixed a bug where group/project invite links would sometimes not work on signing up and could not be used by logged in users.\n"
+"- Fixed a bug where the user avatar was sometimes not synced with some integrated services.\n"
+"- Fixed a bug where the platform font face was not applied on some pages.\n"
+"- Fixed a bug where third-party-tool links where sometimes erroneously displayed on the microsite.\n"
+"- Nextcloud groups will now properly be renamed along with their corresponding group/project folder when their group/project is renamed on the platform.\n"
+"- (BBB) Fixed a bug where existing recorded BBB meetings were not accessible anymore after disabling BBB meetings for that group/project.\n"
+"- (BBB) Fixed a bug where links to inaccessible BBB meetings would show a server error instead of an informative error page.\n"
+"- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+"- (Admin-Interface) Die Portal-Statistik-Seite wurde verbessert und um mehrere Diagramme erweitert.\n"
+"- Es wurde ein Fehler behoben, durch den Einladungslinks für Gruppen/Projekte bei der Anmeldung manchmal nicht funktionierten und von angemeldeten Benutzer/innen nicht benutzt werden konnten.\n"
+"- Es wurde ein Fehler behoben, durch den der Benutzer-Avatar manchmal nicht mit manchen integrierten Diensten synchronisiert wurde.\n"
+"- Es wurde ein Fehler behoben, durch den die Schriftart der Plattform auf einigen Seiten nicht angewendet wurde.\n"
+"- Es wurde ein Fehler behoben, durch den Links zu Tools von Drittanbietern manchmal fälschlicherweise auf der Microsite angezeigt wurden.\n"
+"- Nextcloud-Gruppen werden nun zusammen mit ihrem entsprechenden Gruppen-/Projektordner korrekt umbenannt, wenn ihre Gruppe/ihr Projekt auf der Plattform umbenannt wird.\n"
+"- (BBB) Es wurde ein Fehler behoben, durch den vorhandene aufgezeichnete BBB-Meetings nach Deaktivierung von BBB-Meetings für die Gruppe/das Projekt nicht mehr zugänglich waren.\n"
+"- (BBB) Es wurde ein Fehler behoben, durch den Links zu nicht zugänglichen BBB-Meetings einen Serverfehler anstelle einer informativen Fehlerseite anzeigten.\n"
+"- Weitere kleinere Fehlerbehebungen und Stabilitätsverbesserungen wurden vorgenommen."
+
 msgid "This update includes several bugfixes:"
 msgstr "Das Update enthält mehrere Bugfixes:"
 
@@ -8653,9 +8711,6 @@ msgstr ""
 
 msgid "Version 2.2.0 released"
 msgstr "Version 2.2.0 veröffentlicht"
-
-msgid "This update includes several features and bugfixes:"
-msgstr "Das Update enthält mehrere Features und Bugfixes:"
 
 msgid ""
 "- Several improvements have been made to the redesign user interface, and an introductory tooltip tour has been added.\n"
@@ -8950,6 +9005,12 @@ msgstr "Premiumblock erfolgreich gelöscht"
 
 msgid "Your data was saved successfully!"
 msgstr "Die Werte wurden erfolgreich gespeichert!"
+
+msgid "Search for Experts"
+msgstr "Nach Expert/innen suchen"
+
+msgid "Here you can find experts who exactly fit your criteria."
+msgstr "Hier können Sie Expert/innen finden, die genau Ihren Kriterien entsprechen."
 
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
@@ -9267,6 +9328,9 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
+msgid "Another export is currently running!"
+msgstr "Ein anderer Export läuft gerade!"
+
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Kein passender %(verbose_name)s für die Anfrage gefunden"
@@ -9529,9 +9593,6 @@ msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
-
-msgid "Another export is currently running!"
-msgstr "Ein anderer Export läuft gerade!"
 
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Der archivierte Benutzerimport-Eintrag wurde erfolgreich gelöscht."
@@ -11715,12 +11776,6 @@ msgstr "Zurück zu Inseraten"
 msgid "My Offers"
 msgstr "Meine Inserate"
 
-msgid "Add Offer"
-msgstr "Inserat erstellen"
-
-msgid "Misc"
-msgstr "Verschiedenes"
-
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
 msgstr "%(link_start)s%(username)s%(link_end)s sucht nach"
@@ -11766,6 +11821,9 @@ msgstr "Inserat aktivieren"
 msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
 msgstr "Dieses Inserat is inaktiv. Es ist nur für dich sichtbar und wird nicht im Marktplatz angezeigt. Du kannst es unten reaktivieren."
 
+msgid "Add Offer"
+msgstr "Inserat erstellen"
+
 #, python-format
 msgid ""
 "\n"
@@ -11796,6 +11854,9 @@ msgstr "Deine Telefonnummer ist nur für registrierte Benutzer/innen sichtbar"
 msgid "Check all categories that fit your offer"
 msgstr "Markiere alle Kategorien, die auf dein Inserat zutreffen"
 
+msgid "Misc"
+msgstr "Verschiedenes"
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "Das erste hochgeladene Bild wird als Hintergrundbild angezeigt"
 
@@ -11807,6 +11868,9 @@ msgstr "Nur aktive Inserate werden im Marktplatz angezeigt."
 
 msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
 msgstr "Nur aktive Inserate werden im Marktplatz angezeigt. Dein Inserat wird 4 Wochen lang aktiv bleiben. Danach kannst du es jederzeit reaktivieren."
+
+msgid "Enter the title for a new offer."
+msgstr "Gib den Titel für ein neues Inserat ein."
 
 msgid "Wanted"
 msgstr "Suche"
@@ -12791,11 +12855,11 @@ msgstr "Jemand hat sich auf %(site_name)s mit deinem %(provider)s-Konto registri
 msgid "Welcome"
 msgstr "Willkommen"
 
-msgid "WECHANGE Account connected"
-msgstr "WECHANGE Konto verbunden"
+msgid "SSO Account connected"
+msgstr "SSO-Konto verbunden"
 
-msgid " This data we received from your WECHANGE account"
-msgstr " Diese Daten haben wir von deinem WECHANGE-Konto erhalten"
+msgid " This data we received from your SSO account"
+msgstr " Diese Daten haben wir von deinem SSO-Konto erhalten"
 
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr "Dein Avatar und andere Einstellungen aus deinem Profil wurden ebenfalls kopiert."
@@ -12808,6 +12872,9 @@ msgstr "Anmeldung bei einem sozialen Netzwerk fehlgeschlagen"
 
 msgid "An error occurred while attempting to login via your social network account."
 msgstr "Beim Versuch, sich über dein soziales Netzwerkkonto anzumelden, ist ein Fehler aufgetreten."
+
+msgid "Back to Login"
+msgstr "Zurück zum Login"
 
 msgid "Account Connections"
 msgstr "Kontoverbindungen"
@@ -12885,6 +12952,7 @@ msgstr "Mit Facebook einloggen"
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
 msgstr " %(portal_name)s ist Teil der %(provider)s Gemeinde. Du kannst sich mit deinem %(provider)s-Konto bei %(portal_name)s anmelden."
 
+#, python-format
 msgid "You can use your %(provider)s account to login on %(portal_name)s."
 msgstr "Du kannst sich mit deinem %(provider)s-Konto bei %(portal_name)s anmelden."
 
@@ -14506,6 +14574,39 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
+#~ msgid "Start user export"
+#~ msgstr "Benutzer/innen-Export starten"
+
+#~ msgid "You can start a user export. As soon as the export is finished it will be available here."
+#~ msgstr "Benutzer/innen-Export kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+#~ msgid "A user export is in progress. As soon as the export is finished it will be available here."
+#~ msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+#~ msgid "User export finished"
+#~ msgstr "Benutzer/innen-Export abgeschlossen"
+
+#~ msgid "You can download the latest user export data."
+#~ msgstr "Der zuletzt erstellte Benutzer/innen-Export kann heruntergeladen werden."
+
+#~ msgid "Download user exports from"
+#~ msgstr "Benutzer/innen-Export herunterladen vom"
+
+#~ msgid "Download user export as"
+#~ msgstr "Benutzer/innen-Export herunterladen als"
+
+#~ msgid "Sorry, an error occurred during the user export. Please try again later."
+#~ msgstr "Leider ist bei dem Benutzer/innen-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
+
+#~ msgid "Delete export data and start new user export"
+#~ msgstr "Export-Daten löschen und neuen Benutzer/innen-Export starten"
+
+#~ msgid "Retry user export"
+#~ msgstr "Benutzer/innen-Export erneut starten"
+
+#~ msgid "WECHANGE Account connected"
+#~ msgstr "WECHANGE Konto verbunden"
 
 #~ msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 #~ msgstr "Diese Seite ist eine Vorschau der zukünftigen Microsite. Die Seite befindet sich noch mitten im Aufbau und an vielen Features wird noch aktiv gearbeitet. Vieles ist daher noch nicht fertig gestellt, und es kann vorkommen dass noch vereinzelte Fehler auftreten. Wir bitten um Verständnis!"
