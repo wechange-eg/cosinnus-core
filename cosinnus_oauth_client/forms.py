@@ -83,6 +83,9 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
         return user.cosinnus_profile
 
     def set_base_profile_data(self, profile, request):
+        # set email verified, as we trust the emails from the sso provider
+        profile.email_verified = True
+
         # set language
         lang = get_language()
         profile.language = lang
