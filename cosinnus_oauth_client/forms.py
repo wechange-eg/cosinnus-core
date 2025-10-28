@@ -61,7 +61,8 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
                     setattr(base_profile, key, value)
             base_profile.save()
 
-        self.send_welcome_mail(user, request)
+        if settings.COSINNUS_SSO_SEND_WELCOME_MAIL:
+            self.send_welcome_mail(user, request)
         messages.add_message(request, messages.SUCCESS, _('Successfully signed in as {}.').format(user.get_full_name()))
 
     def validate_unique_email(self, value):
