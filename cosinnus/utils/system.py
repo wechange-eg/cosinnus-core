@@ -9,6 +9,7 @@ TEST_ROCKET_CHAT_ARG = '--test-rocketchat'
 TEST_BBB_ARG = '--test-bbb'
 TEST_ETHERPAD_ARG = '--test-etherpad'
 TEST_PAYMENTS_ARG = '--test-payments'
+TEST_DECK_ARG = '--test-deck'
 TEST_PRINT_TIME_ARG = '--print-time'
 
 # test apps
@@ -17,6 +18,7 @@ TEST_APPS_ROCKET_CHAT = ['cosinnus.tests.test_rocketchat']
 TEST_APPS_BBB = ['cosinnus.tests.test_bbbroom']
 TEST_APPS_ETHERPAD = ['cosinnus_etherpad']
 TEST_APPS_PAYMENTS = ['wechange_payments']
+TEST_APPS_DECK = ['cosinnus.tests.test_deck']
 
 TEST_REQUIRED_ENV_SETTINGS = {
     'RocketChat': [
@@ -38,6 +40,9 @@ TEST_REQUIRED_ENV_SETTINGS = {
         'WECHANGE_PAYMENTS_BETTERPAYMENT_INCOMING_KEY',
         'WECHANGE_PAYMENTS_BETTERPAYMENT_OUTGOING_KEY',
         'WECHANGE_PAYMENTS_INVOICE_BACKEND_AUTH_DATA',
+    ],
+    'Deck': [
+        'WECHANGE_COSINNUS_CLOUD_PASSWORD',
     ],
 }
 
@@ -127,6 +132,12 @@ def cosinnus_manage(base_path):
             if not custom_test:
                 args.extend(TEST_APPS_PAYMENTS)
             args.remove(TEST_PAYMENTS_ARG)
+        elif TEST_DECK_ARG in args:
+            _check_test_env_settings(env, 'Deck')
+            settings_module = 'cosinnus.tests.settings.test_deck'
+            if not custom_test:
+                args.extend(TEST_APPS_DECK)
+            args.remove(TEST_DECK_ARG)
         elif not custom_test:
             args.extend(TEST_APPS_BASE)
         os.environ['DJANGO_SETTINGS_MODULE'] = settings_module
