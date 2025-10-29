@@ -81,7 +81,7 @@ def get_user_by_nc_user_id(nc_user_id):
     """Get a user for the NextCloud user id."""
     user = None
     user_id = nc_user_id.split('-')[-1]
-    if isinstance(user_id, int):
+    if user_id.isdigit():
         user = get_user_model().objects.filter(pk=user_id).first()
     return user
 
