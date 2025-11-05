@@ -60,3 +60,15 @@ def reload_urlconf(urlconf=None):
         reload(sys.modules[urlconf])
     else:
         import_module(urlconf)
+
+
+class CeleryTaskTestMixin:
+    """Mixin to run Celery Tasks in test cases."""
+
+    def runCeleryTasks(cls):
+        """
+        Our CeleryThreadTasks use on_commit callbacks that are not triggered in (non-transitional) test-cases.
+        For this case Django defines the captureOnCommitCallbacks contextmanagers. We just give it another name for
+        better test readability.
+        """
+        return cls.captureOnCommitCallbacks(execute=True)

@@ -5826,7 +5826,6 @@ msgid "Group Dashboard"
 msgstr "Project Type"
 
 #, fuzzy
-#| msgid "Group overview"
 msgid "Group Export"
 msgstr "Group overview"
 
