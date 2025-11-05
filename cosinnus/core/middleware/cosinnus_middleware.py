@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 import datetime
-import itertools
 import logging
 import re
 from builtins import object
@@ -828,25 +827,23 @@ class ManagedTagBlockURLsMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
-    def get_user_restricted_tag_slugs(self, user):
-        user_managed_tag_slugs = [tag.slug for tag in user.cosinnus_profile.get_managed_tags()]
-        restricted_tags = set(settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.keys())
-        user_tags = set(user_managed_tag_slugs)
-        return restricted_tags.intersection(user_tags)
+    def get_user_restricted_tag_urls(self, user):
+        restricted_tag_urls = []
+        if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED and user.is_authenticated:
+            user_managed_tag_slugs = user.cosinnus_profile.get_managed_tag_slugs()
+            for tagslug, _restricted_urls in settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.items():
+                if tagslug in user_managed_tag_slugs:
+                    restricted_tag_urls.extend(_restricted_urls)
+            restricted_tag_urls = list(set(restricted_tag_urls))
+        return restricted_tag_urls
 
     def __call__(self, request):
         user = request.user
         if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED and user.is_authenticated:
-            restricted_tag_slugs = self.get_user_restricted_tag_slugs(user)
-            if restricted_tag_slugs:
-                blocked_urls = itertools.chain.from_iterable(
-                    [
-                        settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.get(tag_slug, [])
-                        for tag_slug in restricted_tag_slugs
-                    ]
-                )
+            restricted_tag_blocked_urls = self.get_user_restricted_tag_urls(user)
+            if restricted_tag_blocked_urls:
                 # if any URL in the blocked urls matches the current URL, redirect to an error page
-                if next(filter(lambda url: re.match(url, request.path), blocked_urls), False):
+                if next(filter(lambda url: re.match(url, request.path), restricted_tag_blocked_urls), False):
                     messages.add_message(
                         request,
                         messages.ERROR,

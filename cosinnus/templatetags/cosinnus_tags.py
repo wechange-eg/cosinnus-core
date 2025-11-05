@@ -1415,7 +1415,7 @@ def user_has_managed_tags(user, tag_or_tags):
     """
     if not user.is_authenticated:
         return False
-    user_managed_tags = [tag.slug for tag in user.cosinnus_profile.get_managed_tags()]
+    user_managed_tags = user.cosinnus_profile.get_managed_tag_slugs()
     if not tag_or_tags:
         return True
     if isinstance(tag_or_tags, six.string_types):
