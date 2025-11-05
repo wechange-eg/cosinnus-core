@@ -61,7 +61,8 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
                     setattr(base_profile, key, value)
             base_profile.save()
 
-        self.send_welcome_mail(user, request)
+        if settings.COSINNUS_SSO_SEND_WELCOME_MAIL:
+            self.send_welcome_mail(user, request)
         messages.add_message(request, messages.SUCCESS, _('Successfully signed in as {}.').format(user.get_full_name()))
 
     def validate_unique_email(self, value):
@@ -83,6 +84,9 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
         return user.cosinnus_profile
 
     def set_base_profile_data(self, profile, request):
+        # set email verified, as we trust the emails from the sso provider
+        profile.email_verified = True
+
         # set language
         lang = get_language()
         profile.language = lang

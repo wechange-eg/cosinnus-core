@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:11+0200\n"
+"POT-Creation-Date: 2025-10-28 11:22+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12885,11 +12885,11 @@ msgstr "Jemand hat sich auf %(site_name)s mit deinem %(provider)s-Konto registri
 msgid "Welcome"
 msgstr "Willkommen"
 
-msgid "WECHANGE Account connected"
-msgstr "WECHANGE Konto verbunden"
+msgid "SSO Account connected"
+msgstr "SSO-Konto verbunden"
 
-msgid " This data we received from your WECHANGE account"
-msgstr " Diese Daten haben wir von deinem WECHANGE-Konto erhalten"
+msgid " This data we received from your SSO account"
+msgstr " Diese Daten haben wir von deinem SSO-Konto erhalten"
 
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr "Dein Avatar und andere Einstellungen aus deinem Profil wurden ebenfalls kopiert."
@@ -12902,6 +12902,9 @@ msgstr "Anmeldung bei einem sozialen Netzwerk fehlgeschlagen"
 
 msgid "An error occurred while attempting to login via your social network account."
 msgstr "Beim Versuch, sich über dein soziales Netzwerkkonto anzumelden, ist ein Fehler aufgetreten."
+
+msgid "Back to Login"
+msgstr "Zurück zum Login"
 
 msgid "Account Connections"
 msgstr "Kontoverbindungen"

@@ -1371,8 +1371,10 @@ class CosinnusConf(AppConf):
     OAUTH_SERVER_BASEURL = None
     OAUTH_SERVER_PROVIDER_NAME = 'wechange'
 
-    # Enable connecting / disconnecting allauch social-accounts with portal accounts
+    # Enable connecting / disconnecting allauth social-accounts with portal accounts
     SSO_ENABLE_CONNECTING_ACCOUNT = False
+    # Send SSO welcome mails informing the user about the SSO signup
+    SSO_SEND_WELCOME_MAIL = False
 
     # whether SDGs should be shown in group/project forms and detail templates
     ENABLE_SDGS = False
