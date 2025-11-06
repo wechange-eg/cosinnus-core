@@ -1206,6 +1206,7 @@ class CosinnusConf(AppConf):
 
     # if set to any value other than None, the userprofile visibility field will be disabled
     # and locked to the value set here
+    # for values, see `BaseTagObject.VISIBILITY_CHOICES`
     USERPROFILE_VISIBILITY_SETTINGS_LOCKED = None
 
     # extra fields for the user profile.
@@ -1500,6 +1501,13 @@ class CosinnusConf(AppConf):
 
     # a list of managed tag slugs, whose users may not start BBB rooms, but rather only join running rooms
     MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS = []
+
+    # akin to `USERPROFILE_VISIBILITY_SETTINGS_LOCKED`,
+    # per managed_tag slug, the userprofile visibility field will be disabled and always set to the value
+    # example:  `{'restricted': 0}`
+    # for values, see `BaseTagObject.VISIBILITY_CHOICES`
+    MANAGED_TAGS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED = {}
+    # COSINNUS_MANAGED_TAGS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
 
     # If managed tags are enabled and this is `True`, when sending out the admin-approval email for new signups,
     # only send it to admins that have a common managed tag with the user

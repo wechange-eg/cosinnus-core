@@ -104,6 +104,7 @@ from cosinnus.utils.user import (
     create_guest_user_and_login,
     filter_active_users,
     get_group_select2_pills,
+    get_locked_profile_visibility_setting_for_user,
     get_newly_registered_user_email,
     get_user_by_email_safe,
     get_user_from_set_password_token,
@@ -584,9 +585,11 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
 
             # save visibility setting:
             visibility_setting = request.POST.get('visibility_setting', None)
+
             # do not change the userprofile visibility field if it is locked
-            if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
-                self.media_tag.visibility = settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+            locked_visibility = get_locked_profile_visibility_setting_for_user(request.user)
+            if locked_visibility is not None:
+                self.media_tag.visibility = locked_visibility
             elif visibility_setting is not None and int(visibility_setting) in (
                 choice for choice, label in self.visibility_choices
             ):

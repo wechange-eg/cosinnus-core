@@ -37,7 +37,7 @@ from cosinnus.utils.permissions import (
     check_user_integrated_portal_member,
     check_user_superuser,
 )
-from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.user import filter_active_users, get_locked_profile_visibility_setting_for_user
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 
@@ -202,7 +202,7 @@ class UserProfileObjectMixin(SingleObjectMixin):
         # If none of those are defined, it's an error.
         else:
             raise AttributeError(
-                'Generic detail view %s must be called with ' 'either an object pk or a slug.' % self.__class__.__name__
+                'Generic detail view %s must be called with either an object pk or a slug.' % self.__class__.__name__
             )
         try:
             # Get the single item from the filtered queryset
@@ -395,8 +395,17 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                         field = sub_form.fields[field_name]
                         field.disabled = True
                         field.required = False
-            # disable the userprofile visibility field if it is locked
+
+            # disable the userprofile visibility field if it is locked globally
+            visibility_field_locked = False
             if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+                visibility_field_locked = True
+            # disable the userprofile visibility field if it is locked for this user, unless an admin is editing it
+            if not visibility_field_locked and not self.is_admin_elevated_view:
+                # check if visibility lock is managed-tag-restriction-specific
+                if get_locked_profile_visibility_setting_for_user(self.request.user) is not None:
+                    visibility_field_locked = True
+            if visibility_field_locked:
                 field = form.forms['media_tag'].fields['visibility']
                 field.disabled = True
                 field.required = False
