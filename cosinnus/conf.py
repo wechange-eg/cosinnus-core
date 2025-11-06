@@ -634,6 +634,20 @@ class CosinnusConf(AppConf):
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
     # GeoJSON can be generated using http://opendatalab.de/projects/geojson-utilities/
+    # geojson config format:
+    #   'geojson_regions': [
+    #       {
+    #           'geojson_region': None,  # path to geojson file
+    #           'geojson_style': {
+    #               'weight': 1,  # stroke-width
+    #               'color': '#DEFINEME',  # stroke-color
+    #               'fillColor': '#DEFINEME',
+    #               'fillOpacity': 0.2,
+    #             }
+    #       },
+    #       ...
+    #   ],
+    # old-style format ('geojson_region' and 'geojson_style' without array) is still supported
     MAP_OPTIONS = {
         'default_coordinates': {
             'ne_lat': 55.32,  # north,
@@ -641,7 +655,7 @@ class CosinnusConf(AppConf):
             'sw_lat': 47.58,  # south,
             'sw_lon': 5.01,  # west,
         },
-        'geojson_region': None,
+        'geojson_regions': None,
         'filter_panel_default_visible': False,  # whether the dropdown filter panel should be visible on load
         'ignore_location_default_activated': False,  # whether the "In map area" button should be off on load
         'exchange_default_activated': True,  # whether the "also show external contents" button should be off on load
