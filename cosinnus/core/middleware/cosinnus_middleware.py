@@ -844,9 +844,8 @@ class ManagedTagBlockURLsMiddleware:
             if restricted_tag_blocked_urls:
                 # if any URL in the blocked urls matches the current URL, redirect to an error page
                 if next(filter(lambda url: re.match(url, request.path), restricted_tag_blocked_urls), False):
-                    messages.add_message(
+                    messages.error(
                         request,
-                        messages.ERROR,
                         _(
                             'Sorry, your account may not access this page. \n'
                             '\n**TODO:** Add info for restricted users and maybe a [Link](/) to an info page?'

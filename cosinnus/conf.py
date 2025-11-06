@@ -1498,6 +1498,9 @@ class CosinnusConf(AppConf):
     # a list of managed tag slugs, whose users may not contact anyone or be contacted directly
     MANAGED_TAGS_RESTRICT_CONTACTING = []
 
+    # a list of managed tag slugs, whose users may not start BBB rooms, but rather only join running rooms
+    MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS = []
+
     # If managed tags are enabled and this is `True`, when sending out the admin-approval email for new signups,
     # only send it to admins that have a common managed tag with the user
     MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY = False

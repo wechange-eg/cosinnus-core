@@ -4,6 +4,7 @@ from datetime import timedelta
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.serializers.json import DjangoJSONEncoder
@@ -701,16 +702,38 @@ class BBBRoom(models.Model):
         """Returns the django admin edit page for this object."""
         return reverse('admin:cosinnus_bbbroom_change', kwargs={'object_id': self.id})
 
-    def get_direct_room_url_for_user(self, user):
+    def get_direct_room_url_for_user(self, user, request):
         """Returns the direct BBB-server URL. This logic is also used by the
         proxy-view used by `get_absolute_url`.
         This should be used as the boilerplate for the room-URL getter for a user,
         as it also handles creating statistics.
-        @param request: (optional)"""
+        @param request: for sending error messages
+        @return:  None if an error happened. In this case a message should bet set this case must be caught by the
+        calling function, and the user redirected properly to an error page.
+        """
+
         if not self.check_user_can_enter_room(user):
+            messages.error(request, _('You do not have permission to enter this room.'))
             return None
 
         if not self.is_running:
+            # we're about to start/restart the room, check if this user may do that
+            if settings.COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS:
+                user_tagslugs = user.cosinnus_profile.get_managed_tag_slugs()
+                if any(
+                    [
+                        tagslug in user_tagslugs
+                        for tagslug in settings.COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS
+                    ]
+                ):
+                    messages.warning(
+                        request,
+                        _(
+                            'This meeting is currently not running and you do not have permission to start it. '
+                            'Please wait and try again once a moderator has started the meeting.'
+                        ),
+                    )
+                    return None
             try:
                 self.restart()
             except Exception as e:
