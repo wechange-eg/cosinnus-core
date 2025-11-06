@@ -1495,6 +1495,9 @@ class CosinnusConf(AppConf):
     # to django's `MIDDLEWARE` setting
     MANAGED_TAGS_RESTRICT_URLS_BLOCKED = {}
 
+    # a list of managed tag slugs, whose users may not contact anyone or be contacted directly
+    MANAGED_TAGS_RESTRICT_CONTACTING = []
+
     # If managed tags are enabled and this is `True`, when sending out the admin-approval email for new signups,
     # only send it to admins that have a common managed tag with the user
     MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY = False

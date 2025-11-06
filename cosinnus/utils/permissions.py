@@ -221,6 +221,11 @@ def check_user_can_see_user(user, target_user):
     # guests are invisible
     if target_user.is_guest:
         return False
+    # restricted users cannot be seen or contacted
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_RESTRICT_CONTACTING:
+        target_user_tagslugs = target_user.cosinnus_profile.get_managed_tag_slugs()
+        if any([tagslug in target_user_tagslugs for tagslug in settings.COSINNUS_MANAGED_TAGS_RESTRICT_CONTACTING]):
+            return False
 
     visibility = target_user.cosinnus_profile.media_tag.visibility
     if visibility == BaseTagObject.VISIBILITY_ALL:
