@@ -656,6 +656,8 @@ class CosinnusConf(AppConf):
             'sw_lon': 5.01,  # west,
         },
         'geojson_regions': None,
+        'geojson_region': None,  # deprecated
+        'geojson_style': None,  # deprecated
         'filter_panel_default_visible': False,  # whether the dropdown filter panel should be visible on load
         'ignore_location_default_activated': False,  # whether the "In map area" button should be off on load
         'exchange_default_activated': True,  # whether the "also show external contents" button should be off on load

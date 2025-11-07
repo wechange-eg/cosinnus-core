@@ -15,30 +15,38 @@ var util = require('lib/util');
 function getGeoRegionConfig(cosinnusMapOptions) {
     var config = cosinnusMapOptions
 
+    // fallback to empty config
+    var result = [];
+
     // return new-style config if present
     if ('geojson_regions' in config) {
-        if (config.geojson_regions === null) {
-            // no regions defined
-            return []
-        }
-        if (! Array.isArray(config.geojson_regions)) {
-            util.log('map-view.js: ERROR - geojson_regions must be an array');
+        if (! Array.isArray(config.geojson_regions) || !config.geojson_regions.length) {
+            util.log('map-view.js: ERROR - geojson_regions must be an array with one or more georegion-definitions');
             return [];
         }
-        return config.geojson_regions;
-    }
-
-    // fallback to old-style config if present
-    if (config.geojson_region && config.geojson_style) {
+        result = config.geojson_regions;
+    } else if ('geojson_region' in config) {
+        // fallback to old-style config if present
         util.log('map-view.js: WARNING - geojson_region and geojson_style are deprecated, define as geojson_regions array instead.');
-        return [{
+        result = [{
             geojson_region: config.geojson_region,
-            geojson_style: config.geojson_style,
+            geojson_style: config.geojson_style,  // may be undefined, renderMap has fallback-values
         }];
     }
 
-    // no config present
-    return [];
+    // ensure valid configuration
+    for (var i = 0; i < result.length; i++) {
+        var item = result[i];
+        if (item.geojson_region == null) {
+            util.log('map-view.js: ERROR - geojson_region must be provided');
+            return [];
+        }
+        if (item.geojson_style === null) {
+            delete item.geojson_style;
+        }
+    };
+
+    return result;
 }
 
 
@@ -601,8 +609,6 @@ module.exports = ContentControlView.extend({
                         util.log('map-view.js: ERROR fetching geojson data: ' + url)
                     });
             })
-
-            self.geoRegionLayerGroup = geoRegionLayerGroup;
         }
 
 
