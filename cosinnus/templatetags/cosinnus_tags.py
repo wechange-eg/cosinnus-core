@@ -482,7 +482,9 @@ def cosinnus_menu_v2(context, template='cosinnus/v2/navbar/navbar.html', request
         context['groups_invited_count'] = len(groups_invited)
 
         # conferences
-        my_conferences = CosinnusConference.objects.get_for_user(request.user)
+        my_conferences = []
+        if settings.COSINNUS_CONFERENCES_ENABLED:
+            my_conferences = CosinnusConference.objects.get_for_user(request.user)
         context['my_conference_groups'] = my_conferences
         context['my_conferences_json_encoded'] = _escape_quotes(
             _json.dumps([DashboardItem(conference) for conference in my_conferences])
