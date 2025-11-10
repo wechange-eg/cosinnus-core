@@ -583,7 +583,7 @@ module.exports = ContentControlView.extend({
                     return util.ifundef(geojsonStyle, {
                         width: 1,
                         weight: 0.5,
-                        fillOpacity: 0.2,
+                        fillOpacity: 0.1,
                     });
                 }
             });
