@@ -5,6 +5,51 @@ var MapLayerButtonsView = require('views/map-layer-buttons-view');
 var popupTemplate = require('map/popup');
 var util = require('lib/util');
 
+
+/**
+ * fetch new-style json-config for multiple geoRegions with fallback to old-style config
+ * You can configure a geojson region here: http://opendatalab.de/projects/geojson-utilities/
+ * @param {object} cosinnusMapOptions map-config object coming from cosinnus
+ * @returns {Array<object>} Array of geoRegion config-objects, may be empty
+ */
+function getGeoRegionConfig(cosinnusMapOptions) {
+    var config = cosinnusMapOptions
+
+    // fallback to empty config
+    var result = [];
+
+    // return new-style config if present
+    if ('geojson_regions' in config) {
+        if (! Array.isArray(config.geojson_regions) || !config.geojson_regions.length) {
+            util.log('map-view.js: ERROR - geojson_regions must be an array with one or more georegion-definitions');
+            return [];
+        }
+        result = config.geojson_regions;
+    } else if ('geojson_region' in config) {
+        // fallback to old-style config if present
+        util.log('map-view.js: WARNING - geojson_region and geojson_style are deprecated, define as geojson_regions array instead.');
+        result = [{
+            geojson_region: config.geojson_region,
+            geojson_style: config.geojson_style,  // may be undefined, renderMap has fallback-values
+        }];
+    }
+
+    // ensure valid configuration
+    for (var i = 0; i < result.length; i++) {
+        var item = result[i];
+        if (item.geojson_region == null) {
+            util.log('map-view.js: ERROR - geojson_region must be provided');
+            return [];
+        }
+        if (item.geojson_style === null) {
+            delete item.geojson_style;
+        }
+    };
+
+    return result;
+}
+
+
 module.exports = ContentControlView.extend({
 
     template: require('map/map'),
@@ -37,10 +82,9 @@ module.exports = ContentControlView.extend({
             }
         },
     },
-    
-    // path to a geojson file in static folder containing regions that should be outlined on the map
-    // You can configure a geojson region here: http://opendatalab.de/projects/geojson-utilities/ 
-    geoRegionUrl: util.ifundef(COSINNUS_MAP_OPTIONS.geojson_region, null), 
+
+    /** @type {Array<object>} */
+    geoRegions: getGeoRegionConfig(COSINNUS_MAP_OPTIONS),
 
     
     // the map Layer Buttons (Sattelite, Street, Terrain)
@@ -530,31 +574,44 @@ module.exports = ContentControlView.extend({
         }
         this.leaflet = L.map('map-container', options);
         this.setLayer(this.options.layer);
-        
-        if (self.geoRegionUrl) {
-            $.ajax({
-                dataType: "json",
-                url: self.geoRegionUrl,
-                success: function(data) {
-                    // style see https://leafletjs.com/reference-1.3.0.html#path-option
-                    var district_boundary = new L.geoJson(null, {
-                        style: function (feature) {
-                            return util.ifundef(COSINNUS_MAP_OPTIONS.geojson_style, {
-                                width: 1,
-                                weight: 0.5,
-                                fillOpacity: 0.035,
-                            });
-                        }
-                    });
-                    district_boundary.addTo(self.leaflet);
-                    $(data.features).each(function(key, data) {
-                        district_boundary.addData(data);
+
+        // adds a new geojson layer with given geojsonData and geojsonStyle to the given mapLayerGroup
+        function addGeoRegion(mapLayerGroup, geojsonStyle, geojsonData) {
+            // style see https://leafletjs.com/reference-1.3.0.html#path-option
+            var district_boundary = new L.geoJson(null, {
+                style: function (feature) {
+                    return util.ifundef(geojsonStyle, {
+                        width: 1,
+                        weight: 0.5,
+                        fillOpacity: 0.1,
                     });
                 }
-            }).fail(function() {});
-            
+            });
+            mapLayerGroup.addLayer(district_boundary);
+            $(geojsonData.features).each(function (key, data) {
+                district_boundary.addData(data);
+            });
+        };
+
+        if (self.geoRegions && self.geoRegions.length > 0) {
+            util.log('map-view.js: initializing georegions: ' + self.geoRegions.length);
+            const geoRegionLayerGroup = L.layerGroup().addTo(self.leaflet)
+            self.geoRegions.forEach(function (geoRegion) {
+                var url = geoRegion.geojson_region
+                $.ajax({
+                    dataType: "json",
+                    url: url,
+                })
+                    .done(function (data) {
+                        addGeoRegion(geoRegionLayerGroup, geoRegion.geojson_style, data);
+                    })
+                    .fail(function () {
+                        util.log('map-view.js: ERROR fetching geojson data: ' + url)
+                    });
+            })
         }
-        
+
+
         
         if (this.options.clusteringEnabled) {
             // Setup the cluster layer
