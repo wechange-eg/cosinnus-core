@@ -30,6 +30,7 @@ from cosinnus.backends import elastic_threading_disabled
 from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.core.registries import attached_object_registry
+from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.widgets import PrettyJSONWidget
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.conference import CosinnusConferencePremiumCapacityInfo, CosinnusConferenceSettings
@@ -836,6 +837,12 @@ class GroupMembershipInline(admin.TabularInline):
 
     @admin.display(description=_('Group'))
     def group_clickable(self, obj: CosinnusGroupMembership):
+        # admin should be robust
+        # return useful info if group-type is unsupported, instead of raising ImproperlyConfigured
+        if obj.group.type not in group_model_registry.group_type_index:
+            logger.error('ERROR: Group type %s not supported' % obj.group.type)
+            return 'unsupported group type %s: %s' % (obj.group.type, escape(obj.group.name))
+
         group_proxy = ensure_group_type(obj.group)
         admin_url = reverse(
             'admin:%s_%s_change' % (group_proxy._meta.app_label, group_proxy._meta.model_name), args=[group_proxy.pk]
@@ -851,6 +858,12 @@ class GroupMembershipInline(admin.TabularInline):
 
     @admin.display(description=_('View on site'))
     def frontend_clickable(self, obj: CosinnusGroupMembership):
+        # admin should be robust
+        # return useful info if group-type is unsupported, instead of raising ImproperlyConfigured
+        if obj.group.type not in group_model_registry.group_type_index:
+            # no logging here, because its already been logged in another field-function
+            return 'unsupported group type %s: %s' % (obj.group.type, escape(obj.group.name))
+
         group_url = obj.group.get_absolute_url()
         return mark_safe('<a href="%(url)s" target="_blank">%(url)s</a>' % dict(url=group_url))
 
