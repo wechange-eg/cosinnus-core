@@ -20,6 +20,7 @@ from django.db.models.signals import post_delete, post_save
 from django.urls import reverse
 from django.utils import translation
 from django.utils.crypto import get_random_string
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_otp import devices_for_user
@@ -845,7 +846,7 @@ class GroupMembershipInline(admin.TabularInline):
         #   '%s (%s)' % (self.name, self.get_absolute_url())
         return mark_safe(
             '<a href="%(admin_url)s">%(name)s (%(site_url)s)</a>'
-            % dict(name=group_proxy.name, admin_url=admin_url, site_url=site_url)
+            % dict(name=escape(group_proxy.name), admin_url=admin_url, site_url=site_url)
         )
 
     @admin.display(description=_('View on site'))
