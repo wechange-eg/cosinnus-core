@@ -840,7 +840,6 @@ class GroupMembershipInline(admin.TabularInline):
         # admin should be robust
         # return useful info if group-type is unsupported, instead of raising ImproperlyConfigured
         if obj.group.type not in group_model_registry.group_type_index:
-            logger.error('ERROR: Group type %s not supported' % obj.group.type)
             return 'unsupported group type %s: %s' % (obj.group.type, escape(obj.group.name))
 
         group_proxy = ensure_group_type(obj.group)
@@ -861,7 +860,6 @@ class GroupMembershipInline(admin.TabularInline):
         # admin should be robust
         # return useful info if group-type is unsupported, instead of raising ImproperlyConfigured
         if obj.group.type not in group_model_registry.group_type_index:
-            # no logging here, because its already been logged in another field-function
             return 'unsupported group type %s: %s' % (obj.group.type, escape(obj.group.name))
 
         group_url = obj.group.get_absolute_url()
