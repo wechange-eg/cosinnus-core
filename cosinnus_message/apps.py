@@ -16,3 +16,6 @@ class CosinnusMessageAppConfig(AppConfig):
 
             # initialize integration handler
             RocketChatIntegrationHandler(app_name=self.name)
+
+            # connect all signal listeners
+            import cosinnus_message.hooks  # noqa

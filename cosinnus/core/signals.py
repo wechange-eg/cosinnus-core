@@ -23,6 +23,9 @@ userprofile_created = dispatch.Signal()  # providing_args=["profile"]
 """ Called after a user profile avatar is changed """
 userprofile_avatar_updated = dispatch.Signal()  # providing_args=["profile"]
 
+""" Called after the assigned managed tags for any object changed """
+managed_tags_changed = dispatch.Signal()  # providing_args=["obj", "tag_slugs_added", "tag_slugs_removed"]
+
 """ Called after a new user voluntarily signs up on the portal, using the web frontend """
 user_registered = dispatch.Signal()  # providing_args=["user"]
 

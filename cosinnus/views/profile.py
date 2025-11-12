@@ -247,8 +247,16 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request)
             if not check_user_can_see_user(user, target_user_profile.user) and not target_user_is_guest:
-                messages.warning(request, _('This profile is not visible to you due to its privacy settings.'))
-                raise PermissionDenied
+                if self.request.GET.get('force_show', False) == '1' and check_user_superuser(self.request.user):
+                    force_show_message = (
+                        _('This profile is not visible to you due to its privacy settings.')
+                        + '\n'
+                        + _('You are only seeing this profile because you are an admin.')
+                    )
+                    messages.warning(request, force_show_message)
+                else:
+                    messages.warning(request, _('This profile is not visible to you due to its privacy settings.'))
+                    raise PermissionDenied
 
         if target_user_is_guest:
             messages.warning(

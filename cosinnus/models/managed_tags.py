@@ -19,6 +19,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
+from cosinnus.core import signals
 from cosinnus.utils.files import get_managed_tag_image_filename, image_thumbnail, image_thumbnail_url
 from cosinnus.utils.functions import clean_single_line_text, resolve_class
 
@@ -212,8 +213,14 @@ class CosinnusManagedTagAssignment(models.Model):
         slugs_to_remove = [slug for slug in assigned_slugs if slug not in tag_slugs_to_assign]
 
         # remove unwanted existing tags
-        cls.objects.filter(content_type=content_type, object_id=obj.id, managed_tag__slug__in=slugs_to_remove).delete()
+        to_remove_qs = cls.objects.filter(
+            content_type=content_type, object_id=obj.id, managed_tag__slug__in=slugs_to_remove
+        )
+        slugs_removed = list(to_remove_qs.values_list('managed_tag__slug', flat=True))
+        to_remove_qs.delete()
+
         # add wanted non-existant tags
+        slugs_assigned = []
         for slug in slugs_to_assign:
             managed_tag = CosinnusManagedTag.objects.get_cached(slug)
             if managed_tag:
@@ -221,6 +228,14 @@ class CosinnusManagedTagAssignment(models.Model):
                 cls.objects.create(
                     content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve
                 )
+                slugs_assigned.append(slug)
+
+        # send a signal for the tag assignment change
+        slugs_removed = [slug for slug in slugs_removed if slug not in slugs_assigned]
+        if slugs_assigned or slugs_removed:
+            signals.managed_tags_changed.send(
+                sender=cls, obj=obj, tag_slugs_added=slugs_assigned, tag_slugs_removed=slugs_removed
+            )
 
     @classmethod
     def assign_managed_tag_to_object(cls, obj, tag_slug_to_assign):
@@ -239,6 +254,7 @@ class CosinnusManagedTagAssignment(models.Model):
         )
 
         # add wanted non-assigned tag
+        slugs_assigned = []
         if tag_slug_to_assign not in assigned_slugs:
             managed_tag = CosinnusManagedTag.objects.get_cached(tag_slug_to_assign)
             if managed_tag:
@@ -246,6 +262,11 @@ class CosinnusManagedTagAssignment(models.Model):
                 cls.objects.create(
                     content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve
                 )
+                slugs_assigned.append(tag_slug_to_assign)
+
+        # send a signal for the tag assignment change
+        if slugs_assigned:
+            signals.managed_tags_changed.send(sender=cls, obj=obj, tag_slugs_added=slugs_assigned, tag_slugs_removed=[])
 
 
 @six.python_2_unicode_compatible

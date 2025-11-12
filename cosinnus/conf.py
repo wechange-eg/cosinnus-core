@@ -1502,6 +1502,9 @@ class CosinnusConf(AppConf):
     # a list of managed tag slugs, whose users may not start BBB rooms, but rather only join running rooms
     MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS = []
 
+    # a list of managed tag slugs, whose users' rocketchat accounts are permanently disabled
+    MANAGED_TAGS_RESTRICT_ROCKETCHAT_ACCOUNT_DISABLED = []
+
     # akin to `USERPROFILE_VISIBILITY_SETTINGS_LOCKED`,
     # per managed_tag slug, the userprofile visibility field will be disabled and always set to the value
     # example:  `{'restricted': 0}`
