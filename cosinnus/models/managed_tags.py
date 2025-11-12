@@ -122,7 +122,8 @@ class CosinnusManagedTagManager(models.Manager):
 
         tags = []
         for pk_or_slug in pk_or_id_or_list:
-            tags.append(tag_dict.get(pk_or_slug, None))
+            if pk_or_slug in tag_dict:
+                tags.append(tag_dict.get(pk_or_slug))
         if single:
             return tags[0]
         return tags
