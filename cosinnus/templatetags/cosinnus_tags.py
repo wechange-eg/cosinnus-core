@@ -804,7 +804,13 @@ def group_aware_url_name(view_name, group_or_group_slug, portal_id=None):
             )  # 1 year cache
 
     # retrieve that type's prefix and add to URL viewname
-    prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
+    try:
+        prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
+    except ImproperlyConfigured:
+        # view_name can potentially be returned as None for unregistered groups, return None here as generating URLs
+        # is not critical enough for a full server error
+        return None
+
     if ':' in view_name:
         view_name = (':%s' % prefix).join(view_name.rsplit(':', 1))
     else:
@@ -917,6 +923,10 @@ class GroupURLNode(URLNode):
                     % (str(group_arg), view_name, group_slug, portal_id)
                 )
                 raise
+
+            # view_name can potentially be returned as None for unregistered groups, return no url here
+            if not view_name:
+                return ''
 
             self.view_name.var = view_name
             self.view_name.token = "'%s'" % view_name

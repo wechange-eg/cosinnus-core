@@ -17,8 +17,10 @@ from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.exceptions import ValidationError
 from django.db.models import JSONField, Q
 from django.db.models.signals import post_delete, post_save
+from django.urls import reverse
 from django.utils import translation
 from django.utils.crypto import get_random_string
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_otp import devices_for_user
@@ -28,6 +30,7 @@ from cosinnus.backends import elastic_threading_disabled
 from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.core.registries import attached_object_registry
+from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.widgets import PrettyJSONWidget
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.conference import CosinnusConferencePremiumCapacityInfo, CosinnusConferenceSettings
@@ -823,13 +826,44 @@ class GroupMembershipInline(admin.TabularInline):
     model = CosinnusGroupMembership
     extra = 0
     fields = (
-        'group',
+        'group_clickable',
+        'frontend_clickable',
         'status',
     )
-    readonly_fields = ('group',)
+    readonly_fields = ('group_clickable', 'frontend_clickable')
 
     def has_add_permission(self, request, obj=None):
         return False
+
+    @admin.display(description=_('Group'))
+    def group_clickable(self, obj: CosinnusGroupMembership):
+        # admin should be robust
+        # return useful info if group-type is unsupported, instead of raising ImproperlyConfigured
+        if obj.group.type not in group_model_registry.group_type_index:
+            return 'unsupported group type %s: %s' % (obj.group.type, escape(obj.group.name))
+
+        group_proxy = ensure_group_type(obj.group)
+        admin_url = reverse(
+            'admin:%s_%s_change' % (group_proxy._meta.app_label, group_proxy._meta.model_name), args=[group_proxy.pk]
+        )
+        site_url = group_proxy.get_absolute_url()
+
+        # based on __str__ from cosinnus.models.group.CosinnusBaseGroup
+        #   '%s (%s)' % (self.name, self.get_absolute_url())
+        return mark_safe(
+            '<a href="%(admin_url)s">%(name)s (%(site_url)s)</a>'
+            % dict(name=escape(group_proxy.name), admin_url=admin_url, site_url=site_url)
+        )
+
+    @admin.display(description=_('View on site'))
+    def frontend_clickable(self, obj: CosinnusGroupMembership):
+        # admin should be robust
+        # return useful info if group-type is unsupported, instead of raising ImproperlyConfigured
+        if obj.group.type not in group_model_registry.group_type_index:
+            return 'unsupported group type %s: %s' % (obj.group.type, escape(obj.group.name))
+
+        group_url = obj.group.get_absolute_url()
+        return mark_safe('<a href="%(url)s" target="_blank">%(url)s</a>' % dict(url=group_url))
 
 
 class UserToSAcceptedFilter(admin.SimpleListFilter):
