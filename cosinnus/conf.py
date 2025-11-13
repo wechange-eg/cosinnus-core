@@ -592,6 +592,10 @@ class CosinnusConf(AppConf):
 
     """ *******  SSO OAUTH Settings  ******* """
 
+    # a lambda function that can be used as additional per-portal check to additionally restrict user oauth access
+    # callable func of signature (user, oauth_view), see `check_user_can_use_oauth()`
+    OAUTH_ADDITIONAL_USER_ACCESS_CHECK = None
+
     # setting to be overriden by each portal
     # if True, single-sign-on only mode is active:
     #     * manual login/register is disabled. logout is enabled

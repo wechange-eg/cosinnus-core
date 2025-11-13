@@ -359,6 +359,21 @@ def check_user_verified(user):
     )
 
 
+def check_user_can_use_oauth(user, oauth_view_class=None):
+    """Checks if the user may connect to an Oauth service
+    @param oauth_view_class class view that is handling the oauth login. with attribute `OAUTH_VIEW_IDENTIFIER`.
+    attach this so per-portal checks can differentiate between different oauth usecases."""
+    # prevent access for guest users
+    if not user.is_authenticated or user.is_guest:
+        return False
+    # check a per-portal additional callable restriction check function, if set in conf
+    additional_check_func = settings.COSINNUS_OAUTH_ADDITIONAL_USER_ACCESS_CHECK
+    if additional_check_func and callable(additional_check_func):
+        if not additional_check_func(user, oauth_view_class):
+            return False
+    return True
+
+
 def filter_tagged_object_queryset_for_user(qs, user):
     """A queryset filter to filter for TaggableObjects that respects the visibility tag of the object,
     checking group membership of the user and creator information of the object.
