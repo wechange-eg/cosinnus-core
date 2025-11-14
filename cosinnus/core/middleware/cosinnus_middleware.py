@@ -851,5 +851,10 @@ class ManagedTagBlockURLsMiddleware:
                             '\n**TODO:** Add info for restricted users and maybe a [Link](/) to an info page?'
                         ),
                     )
+                    # if this is a POST, return a proper redirect to an error page, as the in-page reloads
+                    # of the v3 frontend wouldn't handle displaying the rendered in-place error page well
+                    if request.method == 'POST':
+                        return redirect('cosinnus:generic-error-page')
+                    # otherwise render the error page in-place
                     return redirect_to_error_page(request, view=self)
         return self.get_response(request)
