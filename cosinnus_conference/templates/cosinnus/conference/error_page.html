@@ -8,21 +8,26 @@
 {% endblock cosinnus_navbar %}
 
 {% block main_page %}
-    <div class="alert alert-danger alert-dismissable">
-        <i class="fa fa-exclamation-triangle fa-3x"></i>
-        <h4>{% trans "Server Error" %}</h4>
-        
-        {% if request.GET %}
-            <p>{% trans "Error message:" %}</p>
-            {% for attr in request.GET %}
-                <p>
-                    <b>{{ attr }}</b>:
-                    {{ request.GET|get_item:attr }}
-                </p>
-            {% endfor %}
-        {% else %}
-	        <p>{% trans "No error message supplied." %}</p>
-        {% endif %}
-        
-    </div>
+    {% if messages %}
+        {% include 'cosinnus/messages.html' %}
+    {% else %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <h4>{% trans "Server Error" %}</h4>
+
+            {% if request.GET %}
+                <p>{% trans "Error message:" %}</p>
+                {% for attr in request.GET %}
+                    <p>
+                        <b>{{ attr }}</b>:
+                        {{ request.GET|get_item:attr }}
+                    </p>
+                {% endfor %}
+            {% else %}
+                <p>{% trans "No error message supplied." %}</p>
+
+            {% endif %}
+
+        </div>
+    {% endif %}
 {% endblock main_page %}

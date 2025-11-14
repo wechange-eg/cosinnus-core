@@ -146,6 +146,27 @@ def cosinnus(request):
                 'COSINNUS_EXTERNAL_RESOURCE_TRANS': CosinnusExternalResourceTrans,
             }
         )
+    # a set of template checks for restricted managed tag features,so they are DRYer
+    if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and user.is_authenticated:
+        user_managed_tag_slugs = user.cosinnus_profile.get_managed_tag_slugs()
+        if any(
+            [
+                tagslug in SETTINGS.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.keys()
+                for tagslug in user_managed_tag_slugs
+            ]
+        ):
+            context.update(
+                {
+                    'COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED__APPLIES': True,
+                }
+            )
+        if any([tagslug in SETTINGS.COSINNUS_MANAGED_TAGS_RESTRICT_CONTACTING for tagslug in user_managed_tag_slugs]):
+            context.update(
+                {
+                    'COSINNUS_MANAGED_TAGS_RESTRICT_CONTACTING__APPLIES': True,
+                }
+            )
+
     return context
 
 

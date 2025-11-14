@@ -23,7 +23,7 @@ from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.profile import GlobalBlacklistedEmail, get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
-from cosinnus.utils.user import accept_user_tos_for_portal
+from cosinnus.utils.user import accept_user_tos_for_portal, get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import validate_username
 
 logger = logging.getLogger('cosinnus')
@@ -122,8 +122,9 @@ class UserSignupFinalizeMixin(object):
         if settings.COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED:
             default_visibility = BaseTagObject.VISIBILITY_ALL
         # set the user's visibility to the locked value if the setting says so
-        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
-            default_visibility = settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+        locked_visibility = get_locked_profile_visibility_setting_for_user(user)
+        if locked_visibility is not None:
+            default_visibility = locked_visibility
         if default_visibility is not None:
             media_tag.visibility = default_visibility
             media_tag_needs_saving = True
@@ -298,11 +299,9 @@ class UserChangeForm(forms.ModelForm):
 
 class UserEmailLoginForm(AuthenticationForm):
     error_messages = {
-        'invalid_login': _(
-            'Please enter a correct email and password. ' 'Note that both fields may be case-sensitive.'
-        ),
+        'invalid_login': _('Please enter a correct email and password. Note that both fields may be case-sensitive.'),
         'no_cookies': _(
-            "Your Web browser doesn't appear to have cookies " 'enabled. Cookies are required for logging in.'
+            "Your Web browser doesn't appear to have cookies enabled. Cookies are required for logging in."
         ),
         'inactive': _('This account is inactive.'),
     }

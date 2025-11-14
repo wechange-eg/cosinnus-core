@@ -27,6 +27,7 @@ from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.profile import PROFILE_DYNAMIC_FIELDS_CONTACTS, PROFILE_SETTINGS_AVATAR_COLOR
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.functions import is_number
+from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
 
 logger = logging.getLogger('cosinnus')
@@ -387,8 +388,12 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         instance.last_name = user_data.get('last_name', last_name_fallback)
         profile.description = profile_data.get('description', profile.description)
         # only update the userprofile visibility field if it is not locked
-        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is None:
+        locked_visibility = get_locked_profile_visibility_setting_for_user(user)
+        if locked_visibility is not None:
+            media_tag.visibility = locked_visibility
+        else:
             media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
+
         profile.avatar = profile_data.get('avatar', profile.avatar)
         avatar_color = profile_data.get('settings', {}).get(PROFILE_SETTINGS_AVATAR_COLOR, None)
         if avatar_color:

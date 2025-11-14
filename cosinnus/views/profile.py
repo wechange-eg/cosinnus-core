@@ -37,7 +37,7 @@ from cosinnus.utils.permissions import (
     check_user_integrated_portal_member,
     check_user_superuser,
 )
-from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.user import filter_active_users, get_locked_profile_visibility_setting_for_user
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 
@@ -202,7 +202,7 @@ class UserProfileObjectMixin(SingleObjectMixin):
         # If none of those are defined, it's an error.
         else:
             raise AttributeError(
-                'Generic detail view %s must be called with ' 'either an object pk or a slug.' % self.__class__.__name__
+                'Generic detail view %s must be called with either an object pk or a slug.' % self.__class__.__name__
             )
         try:
             # Get the single item from the filtered queryset
@@ -247,8 +247,16 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request)
             if not check_user_can_see_user(user, target_user_profile.user) and not target_user_is_guest:
-                messages.warning(request, _('This profile is not visible to you due to its privacy settings.'))
-                raise PermissionDenied
+                if self.request.GET.get('force_show', False) == '1' and check_user_superuser(self.request.user):
+                    force_show_message = (
+                        _('This profile is not visible to you due to its privacy settings.')
+                        + '\n'
+                        + _('You are only seeing this profile because you are an admin.')
+                    )
+                    messages.warning(request, force_show_message)
+                else:
+                    messages.warning(request, _('This profile is not visible to you due to its privacy settings.'))
+                    raise PermissionDenied
 
         if target_user_is_guest:
             messages.warning(
@@ -395,8 +403,17 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                         field = sub_form.fields[field_name]
                         field.disabled = True
                         field.required = False
-            # disable the userprofile visibility field if it is locked
+
+            # disable the userprofile visibility field if it is locked globally
+            visibility_field_locked = False
             if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+                visibility_field_locked = True
+            # disable the userprofile visibility field if it is locked for this user, unless an admin is editing it
+            if not visibility_field_locked and not self.is_admin_elevated_view:
+                # check if visibility lock is managed-tag-restriction-specific
+                if get_locked_profile_visibility_setting_for_user(self.request.user) is not None:
+                    visibility_field_locked = True
+            if visibility_field_locked:
                 field = form.forms['media_tag'].fields['visibility']
                 field.disabled = True
                 field.required = False

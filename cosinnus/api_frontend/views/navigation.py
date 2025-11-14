@@ -1,4 +1,5 @@
 import logging
+import re
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
@@ -70,6 +71,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         BrowsableAPIRenderer,
     )
     authentication_classes = (CsrfExemptSessionAuthentication,)
+    blacklisted_user_urls = None
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -214,7 +216,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             ]
             personal_space = {
                 'header': _('My Personal Space'),
-                'items': personal_space_items,
+                'items': self.filter_items_for_blacklisted_urls(personal_space_items),
                 'actions': [],
             }
         spaces['personal'] = personal_space
@@ -243,8 +245,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         if group_space_items or group_space_actions:
             group_space = {
                 'header': _('My Groups and Projects'),
-                'items': group_space_items,
-                'actions': group_space_actions,
+                'items': self.filter_items_for_blacklisted_urls(group_space_items),
+                'actions': self.filter_items_for_blacklisted_urls(group_space_actions),
             }
         spaces['groups'] = group_space
 
@@ -328,8 +330,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             community_space = {
                 'header': settings.COSINNUS_V3_COMMUNITY_HEADER_CUSTOM_LABEL
                 or f'{settings.COSINNUS_BASE_PAGE_TITLE_TRANS} {_("Community")}',
-                'items': community_space_items,
-                'actions': community_space_actions,
+                'items': self.filter_items_for_blacklisted_urls(community_space_items),
+                'actions': self.filter_items_for_blacklisted_urls(community_space_actions),
             }
         spaces['community'] = community_space
 
@@ -360,13 +362,30 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             if conference_space_items or conference_space_actions:
                 conference_space = {
                     'header': _('My Conferences'),
-                    'items': conference_space_items,
-                    'actions': conference_space_actions,
+                    'items': self.filter_items_for_blacklisted_urls(conference_space_items),
+                    'actions': self.filter_items_for_blacklisted_urls(conference_space_actions),
                 }
             spaces['conference'] = conference_space
-
+        
         return Response(spaces)
-
+    
+    def filter_items_for_blacklisted_urls(self, items):
+        # generate blacklisted urls for user, only once
+        if self.blacklisted_user_urls is None:
+            self.blacklisted_user_urls = []
+            if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED and self.request.user.is_authenticated:
+                user_managed_tag_slugs = self.request.user.cosinnus_profile.get_managed_tag_slugs()
+                for tagslug, restricted_urls in settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.items():
+                    if tagslug in user_managed_tag_slugs:
+                        self.blacklisted_user_urls.extend(restricted_urls)
+                self.blacklisted_user_urls = list(set(self.blacklisted_user_urls))
+        # filter items, drop those that match a blacklisted URL
+        items = [
+            item for item in items
+            if not next(filter(lambda url: re.match(url, item['url']), self.blacklisted_user_urls), False)
+        ]
+        return items
+    
 
 class BookmarksView(APIView):
     """
@@ -1338,7 +1357,11 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     'portal_name': settings.COSINNUS_BASE_PAGE_TITLE_TRANS
                 }
                 about_item = MenuItem(
-                    about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About', is_external=True
+                    about_label,
+                    settings.COSINNUS_V3_MENU_HOME_LINK,
+                    icon='fa-info-circle',
+                    id='About',
+                    is_external=True
                 )
                 profile_menu.append(about_item)
 
@@ -1500,7 +1523,10 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         home_image = '%s%s' % (current_portal.get_domain(), static(settings.COSINNUS_PORTAL_LOGO_NAVBAR_IMAGE_URL))
         if settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE:
             home_item = MenuItem(
-                _('Home'), settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE, icon='fa-home', image=home_image, id='Home'
+                _('Home'),
+                settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE,
+                icon='fa-home',
+                image=home_image, id='Home'
             )
         elif settings.COSINNUS_V3_MENU_HOME_LINK:
             home_item = MenuItem(

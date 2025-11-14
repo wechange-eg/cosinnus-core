@@ -43,12 +43,13 @@
 		                } 
 		            });
 		        });
-		        
-			    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED %}
-	               $("#managed-tag-field").select2({'placeholder': '{{ legend_textonly }}', 'closeOnSelect': false});
-	            {% endif %}
 		    </script>
 		{% endif %}
+        {% if SETTINGS.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED %}
+            <script type="text/javascript">
+               $("#managed-tag-field").select2({'placeholder': '{{ legend_textonly }}', 'closeOnSelect': false});
+            </script>
+        {% endif %}
 	{% endcaptureas %}
 	{% captureas managed_tag_field_html %}
 	    <select name="managed_tag_field" id="managed-tag-field" {% if SETTINGS.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED %}multiple{% endif %}>
