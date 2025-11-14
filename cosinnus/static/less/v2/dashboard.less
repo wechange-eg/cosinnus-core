@@ -457,6 +457,7 @@
 			white-space: nowrap;
 		}
 		.timeline-item-comments {
+
 			&, .v2-textfield {
 				font-size: 12px;
 			}
@@ -484,25 +485,19 @@
 			.comment-form {
 				cursor: text;
 				padding: 0;
-				margin: 0 37px -20px 37px;
+				margin: 0 37px 0px 37px;
 				
 				textarea {
 					border: none;
 					width: 100%;
-					padding-left: 0;
+					padding-left: 4px;
 					padding-right: 0;
 					line-height: 18px;
 					height: 38px;
-					&:focus {
-						outline: none;
-					}
-				}
-				textarea::placeholder {
-					color: @text-color-extra-pale;
 				}
 				i.fas {
 					padding-top: 13px;
-					color: @text-color-extra-pale;
+					color: @text-color-pale;
 				}
 				&:focus-within i.fas {
 					color: @text-color;
@@ -547,26 +542,28 @@
 			line-height: 35px;
 			width: 100%;
 			white-space: nowrap;
-			color: @background-color;
-			background-color: @text-color-extra-pale;
+			color: @text-color;
+			background-color: @color-light-gray;
 			font-weight: normal;
+			border: 1px solid @color-medium-gray;
 			
 			&:hover, &:active, &:focus {
 				text-decoration: none;
 			}
+
 			&:hover, &:active {
-				background-color: @text-highlight-color;
+				background-color: darken(@color-light-gray, 5%);
 			}
 			
 			.attached-icon {
 							
 				i.fas {
-					color: @background-color;
+					color: @text-color;
 					font-size: 14px;
 					margin: 4px 0px 0 5px;
 					vertical-align: middle;
 				}
-			} 
+			}
 			&>div {
 				margin: 0 5px;
 			}
@@ -589,10 +586,6 @@
 				i.fas {
 					font-size: 16px;
 				}
-				&:hover i.fas {
-					
-					color: @text-color-extra-pale;
-				}
 			}
 		}
 		a.action-button {
@@ -606,6 +599,7 @@
 		    text-transform: uppercase;
 		    font-weight: bolder;
 		    cursor: pointer;
+		    box-sizing: content-box;
 			
 			&:hover, &:active, &.selected {
 				color: @text-highlight-color;

@@ -6,7 +6,7 @@
 
 <a class="likefollowstar-button likefollowstar-button-style star-button {% if user|can_likefollowstar:object %}action-do-likefollowstar{% endif %} {% if user.id in object.get_starred_user_ids %}selected{% endif %}"
         data-type="star" data-ct="{{ object.get_content_type }}" data-id="{{ object.id }}"
-        {% if not user|can_likefollowstar:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% endif %}>
+        {% if not user|can_likefollowstar:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% else %}href="#"{% endif %}>
     <span class="show-unselected">
         <i class="far fa-star prevent-click"></i>
         {% get_setting "COSINNUS_STARRED_STAR_LABEL" %}
