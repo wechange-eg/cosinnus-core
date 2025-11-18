@@ -595,6 +595,7 @@ class PortalSettingsView(APIView):
             'userProfileVisibilityLocked': bool(settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None),
             'cosinnusIsSSOLoginEnabled': settings.COSINNUS_IS_OAUTH_CLIENT,
             'cosinnusSSOProvider': settings.COSINNUS_V3_SSO_PROVIDER,
+            'cosinnusV3FrontendEverywhereEnabled': settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED,
             # 'setup': {'additionalSteps': ... }},  # set manually
             # 'theme': {...},  # set manually. example:
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
