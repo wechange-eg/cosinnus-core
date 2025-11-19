@@ -14575,6 +14575,56 @@ msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen
 msgid "Are you sure you want to delete this object?"
 msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
 
+msgid "Sorry, your account may not access this page."
+msgstr "Entschuldige, dein Benutzerkonto darf auf diese Seite nicht zugreifen."
+
+msgid "This meeting is currently not running and you do not have permission to start it. Please wait and try again once a moderator has started the meeting."
+msgstr "Dieses Meeting läuft derzeit nicht und du hast keine Berechtigung, es zu starten. Bitte warte und versuche es erneut, sobald ein Moderator das Meeting gestartet hat."
+
+#, python-format
+msgid ""
+"User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+"\n"
+"The user won't be able to log in until you (or another Portal-Admin) approves of his request."
+msgstr ""
+"Benutzer/in \"%(user_name)s\" (%(user_mail)s) hat eine Registrierungsanfrage für %(site_name)s gestellt.\n"
+"\n"
+"Der/die Benutzer/in kann sich erst einloggen, wenn du oder ein/e andere/r Portal-Administrator/in die Anfrage akzeptiert."
+
+#, python-format
+msgid "Click here if you wish to approve the user's join request for an account with the role"
+msgstr "Klicke hier um die Registrierung zu akzeptieren, mit der Rolle"
+
+#, python-format
+msgid ""
+"You're receiving this email because you are a portal-administrator.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Du hast diese E-Mail bekommen, weil du ein/e Portal-Administrator/in bist. \n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+
+msgid "Click here to deny the request"
+msgstr "Klicke hier um die Registrierung abzulehnen"
+
+msgid "If you wish to approve the user's join request click the following link"
+msgstr "Wenn du die Registrierung akzeptieren möchtest, klicke folgenden Link"
+
+msgid "The following roles could not be assigned to the account and need to be assigned manually:"
+msgstr "Die folgenden Rollen konnten nicht zugewiesen werden und müssen manuell zugewiesen werden:"
+
+msgid "The following roles were assigned to the account:"
+msgstr "Die folgenden Rollen wurden dem Benutzerkonto zugewiesen:"
+
+msgid "You do not have permission to enter this room."
+msgstr "Du hast keine Berechtigung, diesem Raum beizutreten."
+
+msgid "You are only seeing this profile because you are an admin."
+msgstr "Du siehst dieses Profil nur, weil du ein/e Administrator/in bist."
+
 #~ msgid "Start user export"
 #~ msgstr "Benutzer/innen-Export starten"
 

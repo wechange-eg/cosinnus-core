@@ -846,10 +846,7 @@ class ManagedTagBlockURLsMiddleware:
                 if next(filter(lambda url: re.match(url, request.path), restricted_tag_blocked_urls), False):
                     messages.error(
                         request,
-                        _(
-                            'Sorry, your account may not access this page. \n'
-                            '\n**TODO:** Add info for restricted users and maybe a [Link](/) to an info page?'
-                        ),
+                        _('Sorry, your account may not access this page.'),
                     )
                     # if this is a POST, return a proper redirect to an error page, as the in-page reloads
                     # of the v3 frontend wouldn't handle displaying the rendered in-place error page well
