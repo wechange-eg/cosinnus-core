@@ -54,7 +54,37 @@ UNREAD_ALERTS_USER_CACHE_KEY = 'cosinnus/core/portal/%d/user_unread_alerts/%s/'
 UNREAD_ALERTS_USER_CACHE_TIMEOUT = 55
 
 
-class SpacesView(MyGroupsClusteredMixin, APIView):
+class FilterBlacklistedItemsMixin(object):
+    """Mixin that adds filter capabilities for views returning `DashboardItem` and `MenuItem` for filtering the
+    returned items so that only those are kept whose URLs are not blacklisted for the current user.
+    Filters are currently only using `COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED` as blacklist check.
+    Call `filter_items_for_blacklisted_urls(items)` from within the view using this mixin to filter a list."""
+
+    blacklisted_user_urls = None
+
+    def filter_items_for_blacklisted_urls(self, items):
+        """Filter the returned `DashboardItem` and `MenuItem` items so that only those are kept whose URLs are not
+        blacklisted for the current user in `COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED`."""
+        # generate blacklisted urls for user, only once
+        if self.blacklisted_user_urls is None:
+            self.blacklisted_user_urls = []
+            if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED and self.request.user.is_authenticated:
+                user_managed_tag_slugs = self.request.user.cosinnus_profile.get_managed_tag_slugs()
+                for tagslug, restricted_urls in settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.items():
+                    if tagslug in user_managed_tag_slugs:
+                        self.blacklisted_user_urls.extend(restricted_urls)
+                self.blacklisted_user_urls = list(set(self.blacklisted_user_urls))
+        # filter items that have a URL, drop those that match a blacklisted URL
+        items = [
+            item
+            for item in items
+            if not item['url']
+            or not next(filter(lambda url: re.match(url, item['url']), self.blacklisted_user_urls), False)
+        ]
+        return items
+
+
+class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
     """
     An endpoint that provides the user spaces for the main navigation.
     Returns items (menu item list) and actions (menu item list) for the different spaces:
@@ -71,7 +101,6 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         BrowsableAPIRenderer,
     )
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    blacklisted_user_urls = None
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -366,26 +395,9 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                     'actions': self.filter_items_for_blacklisted_urls(conference_space_actions),
                 }
             spaces['conference'] = conference_space
-        
+
         return Response(spaces)
-    
-    def filter_items_for_blacklisted_urls(self, items):
-        # generate blacklisted urls for user, only once
-        if self.blacklisted_user_urls is None:
-            self.blacklisted_user_urls = []
-            if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED and self.request.user.is_authenticated:
-                user_managed_tag_slugs = self.request.user.cosinnus_profile.get_managed_tag_slugs()
-                for tagslug, restricted_urls in settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.items():
-                    if tagslug in user_managed_tag_slugs:
-                        self.blacklisted_user_urls.extend(restricted_urls)
-                self.blacklisted_user_urls = list(set(self.blacklisted_user_urls))
-        # filter items, drop those that match a blacklisted URL
-        items = [
-            item for item in items
-            if not next(filter(lambda url: re.match(url, item['url']), self.blacklisted_user_urls), False)
-        ]
-        return items
-    
+
 
 class BookmarksView(APIView):
     """
@@ -1361,7 +1373,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     settings.COSINNUS_V3_MENU_HOME_LINK,
                     icon='fa-info-circle',
                     id='About',
-                    is_external=True
+                    is_external=True,
                 )
                 profile_menu.append(about_item)
 
@@ -1375,7 +1387,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
         return Response(profile_menu)
 
 
-class MainNavigationView(LanguageMenuItemMixin, APIView):
+class MainNavigationView(FilterBlacklistedItemsMixin, LanguageMenuItemMixin, APIView):
     """
     An endpoint that provides menu items for main navigation.
     It contains pseudo menu items just to indicate the availability of a menu-item (e.g. for spaces and search) or
@@ -1526,7 +1538,8 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 _('Home'),
                 settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE,
                 icon='fa-home',
-                image=home_image, id='Home'
+                image=home_image,
+                id='Home',
             )
         elif settings.COSINNUS_V3_MENU_HOME_LINK:
             home_item = MenuItem(
@@ -1632,10 +1645,10 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             if settings.COSINNUS_USER_SIGNUP_ENABLED:
                 right_navigation_items.append(MenuItem(_('Register'), reverse('cosinnus:user-add'), id='Register'))
 
-        main_navigation_items['left'] = left_navigation_items
-        main_navigation_items['middle'] = middle_navigation_items
-        main_navigation_items['services'] = services_navigation_items
-        main_navigation_items['right'] = right_navigation_items
+        main_navigation_items['left'] = self.filter_items_for_blacklisted_urls(left_navigation_items)
+        main_navigation_items['middle'] = self.filter_items_for_blacklisted_urls(middle_navigation_items)
+        main_navigation_items['services'] = self.filter_items_for_blacklisted_urls(services_navigation_items)
+        main_navigation_items['right'] = self.filter_items_for_blacklisted_urls(right_navigation_items)
 
         # allow portals to add links via a dropin defined in `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`
         main_navigation_items = CosinnusNavigationPortalLinks().modifiy_main_navigation(
