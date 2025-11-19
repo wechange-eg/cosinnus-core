@@ -718,7 +718,9 @@ class BBBRoom(models.Model):
 
         if not self.is_running:
             # we're about to start/restart the room, check if this user may do that
-            if settings.COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS:
+            if settings.COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS and user.is_authenticated:
+                # note: this `user` can be a BBBGuestTokenAnonymousUser here, which has no cosinnus_profile,
+                # so we check for `user.is_authenticated`
                 user_tagslugs = user.cosinnus_profile.get_managed_tag_slugs()
                 if any(
                     [
