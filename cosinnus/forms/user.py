@@ -281,10 +281,19 @@ class UserChangeForm(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
+        if not settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+            instance = kwargs['instance']
+            if instance.last_name:
+                kwargs['initial']['first_name'] = f'{instance.first_name} {instance.last_name}'
+                kwargs['initial']['last_name'] = ''
         super(UserChangeForm, self).__init__(*args, **kwargs)
         self.fields['email'].required = True
         self.fields['first_name'].required = True
-        self.fields['last_name'].required = bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED)
+        if settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+            self.fields['last_name'].required = bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED)
+        else:
+            self.fields['last_name'].required = False
+            self.fields['last_name'].widget = forms.HiddenInput()
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
