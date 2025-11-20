@@ -1677,6 +1677,9 @@ class CosinnusConf(AppConf):
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
 
+    # enable the instant-user-delete action for django admin. should only be enabled on local or test portals!
+    DJANGO_ADMIN_ENABLE_INSTANT_USER_DELETE_ACTION = False
+
     # enable the Mitwirk-O-Mat integration groups settings view and API endpoints
     MITWIRKOMAT_INTEGRATION_ENABLED = False
 
