@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import locale
 import logging
 from builtins import object
-from threading import Thread
 
 import six
 from django.contrib.auth import get_user_model
@@ -20,6 +19,7 @@ from django.utils.translation import gettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.functions import resolve_class
+from cosinnus.utils.threading import DjangoWorkerThread
 
 logger = logging.getLogger('cosinnus')
 
@@ -255,7 +255,7 @@ class CosinnusUserImportProcessorBase(object):
         my_self = self
         if threaded:
 
-            class CosinnusUserImportProcessThread(Thread):
+            class CosinnusUserImportProcessThread(DjangoWorkerThread):
                 def run(self):
                     my_self._start_import(user_import_item, dry_run=dry_run)
 

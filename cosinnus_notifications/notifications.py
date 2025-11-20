@@ -7,7 +7,6 @@ from _collections import defaultdict
 from builtins import str
 from copy import copy
 from importlib import import_module
-from threading import Thread
 
 import sentry_sdk
 from annoying.functions import get_object_or_None
@@ -46,6 +45,7 @@ from cosinnus.utils.permissions import (
     check_user_portal_admin,
     check_user_portal_moderator,
 )
+from cosinnus.utils.threading import DjangoWorkerThread
 from cosinnus_notifications.alerts import create_user_alert
 from cosinnus_notifications.models import (
     NotificationAlert,
@@ -413,7 +413,7 @@ def init_notifications():
     )
 
 
-class NotificationsThread(Thread):
+class NotificationsThread(DjangoWorkerThread):
     """A thread to run on an event that causes notifications to be sent out.
     Handles both sending out mails instantly, and saving a persistent event for later
     re-creation during digest generation.

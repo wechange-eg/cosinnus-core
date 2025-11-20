@@ -3,7 +3,6 @@ import logging
 import pickle
 import zlib
 from abc import ABC, abstractmethod
-from threading import Thread
 from typing import Any, Dict, Iterable, List, Literal, Optional
 
 from django.contrib.auth import get_user_model
@@ -18,6 +17,7 @@ from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.storage import TemporaryData
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.threading import DjangoWorkerThread
 
 
 class ModelExportProcessor(ABC):
@@ -189,7 +189,7 @@ class ModelExportProcessor(ABC):
         if threaded:
             my_self = self
 
-            class CosinnusExportProcessThread(Thread):
+            class CosinnusExportProcessThread(DjangoWorkerThread):
                 def run(self):
                     my_self._start_export(objects)
 
