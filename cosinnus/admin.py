@@ -1028,6 +1028,10 @@ class UserAdmin(DjangoUserAdmin):
             'force_redo_cloud_user_room_memberships',
             'make_user_cloud_admin',
         ]
+    if settings.COSINNUS_DJANGO_ADMIN_ENABLE_INSTANT_USER_DELETE_ACTION:
+        actions += [
+            'instantly_delete_user',
+        ]
     list_display = (
         'email',
         'is_active',
@@ -1113,6 +1117,24 @@ class UserAdmin(DjangoUserAdmin):
         self.message_user(request, message)
 
     deactivate_users.short_description = _('DEACTIVATE user accounts and DELETE them after 30 days')
+
+    if settings.COSINNUS_DJANGO_ADMIN_ENABLE_INSTANT_USER_DELETE_ACTION:
+
+        def instantly_delete_user(self, request, queryset):
+            from cosinnus.views.profile import delete_userprofile
+
+            count = 0
+            for user in queryset:
+                if check_user_superuser(user):
+                    self.message_user(request, 'Skipping deleting a user that is an admin! Careful who you select!')
+                    continue
+                user.is_active = False
+                delete_userprofile(user)
+                count += 1
+            message = _('%(count)d User account(s) were deleted successfully.') % {'count': count}
+            self.message_user(request, message)
+
+        instantly_delete_user.short_description = _('(DEBUG ONLY) DELETE user instantly (TAKE CARE!)')
 
     def reactivate_users(self, request, queryset):
         from cosinnus.views.profile import reactivate_user
