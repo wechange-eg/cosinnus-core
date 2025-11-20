@@ -108,22 +108,33 @@
                 {% trans "Repeat Password" as pass2_placeholder %}
                 {% include 'cosinnus/fields/default_field.html' with field=form.password2 label=pass2_label placeholder=pass2_placeholder first=True %}
             {% endblock password_field %}
-            
+
             {% block first_name %}
                 {# Regular Field #}
-                {% trans "Your name" as firstname_label %}
-                {% trans "This name will be displayed to other users on the site" as firstname_legend %}
-                {% trans "First name" as firstname_placeholder %}
+                {% if SETTINGS.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME %}
+                    {% trans "First name" as firstname_label %}
+                    {% trans "First name" as firstname_placeholder %}
+                {% else %}
+                    {% trans "Display name" as firstname_label %}
+                    {% trans "Display name" as firstname_placeholder %}
+                    {% trans "This name will be displayed to other users on the site" as firstname_legend %}
+                {% endif %}
                 {% include 'cosinnus/fields/default_field.html' with field=form.first_name legend=firstname_legend label=firstname_label placeholder=firstname_placeholder %}
             {% endblock first_name %}
 
-            {% block last_name %}
-            {# Regular Field #}
-            {% trans "Last name" as lastname_label %}
-            {% trans "You can supply your last name to be displayed as well" as lastname_legend %}
-            {% trans "Last name" as lastname_placeholder %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=lastname_label legend=lastname_legend placeholder=lastname_placeholder help_popup="helptext_52_profilelastname" %}
-            {% endblock last_name %}
+            {% if SETTINGS.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME %}
+                {% block last_name %}
+                    {# Regular Field #}
+                    {% trans "Last name" as lastname_label %}
+                    {% trans "Last name" as lastname_placeholder %}
+                    {% if SETTINGS.COSINNUS_USER_FORM_LAST_NAME_REQUIRED %}
+                        {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=lastname_label placeholder=lastname_placeholder %}
+                    {% else %}
+                        {% trans "You can supply your last name to be displayed as well" as lastname_legend %}
+                        {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=lastname_label legend=lastname_legend placeholder=lastname_placeholder help_popup="helptext_52_profilelastname" %}
+                    {% endif %}
+                {% endblock last_name %}
+            {% endif %}
             
             {% block location_field %}
                 {% if SETTINGS.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD %}

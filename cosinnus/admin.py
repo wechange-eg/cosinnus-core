@@ -1063,6 +1063,11 @@ class UserAdmin(DjangoUserAdmin):
         qs = qs.exclude(email__startswith='__deleted_user__')
         return qs
 
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields['first_name'].label = _('First name / Display name')
+        return form
+
     def has_logged_in(self, obj):
         return bool(obj.last_login is not None)
 

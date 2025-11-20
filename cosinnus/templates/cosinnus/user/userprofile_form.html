@@ -49,24 +49,30 @@
                 {% endblock %}
 
                 {% block user_info %}
-                    <div class="row">
-                        <div class="col-sm-6 regular-space">
-                            {# Regular Field #}
-							{% trans "First name" as first_name_label %}
-							{% trans "First name" as  first_name_placeholder %}
-							{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.first_name label=first_name_label placeholder=first_name_placeholder %}
-                        </div>
-                        <div class="col-sm-6 regular-space">
-                            {# Regular Field #}
-							{% trans "Last name" as last_name_label %}
-							{% trans "Last name" as  last_name_placeholder %}
-                            {% if SETTINGS.COSINNUS_USER_FORM_LAST_NAME_REQUIRED %}
-                                {% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder %}
-                            {% else %}
-                                {% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder help_popup="helptext_52_profilelastname" %}
-                            {% endif %}
-                        </div>
-                    </div><!-- row -->
+                    {% if SETTINGS.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME %}
+                        <div class="row">
+                            <div class="col-sm-6 regular-space">
+                                {# Regular Field #}
+                                {% trans "First name" as first_name_label %}
+                                {% trans "First name" as  first_name_placeholder %}
+                                {% include 'cosinnus/fields/default_field.html' with field=form.forms.user.first_name label=first_name_label placeholder=first_name_placeholder %}
+                            </div>
+                            <div class="col-sm-6 regular-space">
+                                {# Regular Field #}
+                                {% trans "Last name" as last_name_label %}
+                                {% trans "Last name" as  last_name_placeholder %}
+                                {% if SETTINGS.COSINNUS_USER_FORM_LAST_NAME_REQUIRED %}
+                                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder %}
+                                {% else %}
+                                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder help_popup="helptext_52_profilelastname" %}
+                                {% endif %}
+                            </div>
+                        </div><!-- row -->
+                    {% else %}
+                        {% trans "Display name" as first_name_label %}
+                        {% trans "Display name" as  first_name_placeholder %}
+                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.user.first_name label=first_name_label placeholder=first_name_placeholder %}
+                    {% endif %}
                 {% endblock user_info %}
 
                 {% block email %}
@@ -74,7 +80,7 @@
 					{% trans "E-Mail" as email_label %}
 					{% trans "E-Mail" as  email_placeholder %}
 					{% captureas email_legend %}{% trans "This email address serves as login for your user account and notifications and newsletters are sent to this address." %}{% endcaptureas %}
-					{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder legend=email_legend %}
+					{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder legend=email_legend hide_optional=True %}
 					{% include 'cosinnus/fields/email_field_change_link_snippet.html' %}
                 {% endblock %}
 
