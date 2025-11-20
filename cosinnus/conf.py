@@ -948,6 +948,9 @@ class CosinnusConf(AppConf):
     # whether to use celery on this instance
     USE_CELERY = False
 
+    # whether to use worker threads
+    USE_WORKER_THREADS = True
+
     # whether to use the new style navbar
     USE_V2_NAVBAR = True
 
