@@ -170,7 +170,9 @@ class UserCreationForm(
 
     class Meta(object):
         model = get_user_model()
-        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'tos_check']
+        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'tos_check']
+        if settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+            fields += ['last_name']
         if (
             settings.COSINNUS_MANAGED_TAGS_ENABLED
             and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
@@ -298,11 +300,9 @@ class UserChangeForm(forms.ModelForm):
 
 class UserEmailLoginForm(AuthenticationForm):
     error_messages = {
-        'invalid_login': _(
-            'Please enter a correct email and password. ' 'Note that both fields may be case-sensitive.'
-        ),
+        'invalid_login': _('Please enter a correct email and password. Note that both fields may be case-sensitive.'),
         'no_cookies': _(
-            "Your Web browser doesn't appear to have cookies " 'enabled. Cookies are required for logging in.'
+            "Your Web browser doesn't appear to have cookies enabled. Cookies are required for logging in."
         ),
         'inactive': _('This account is inactive.'),
     }
