@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 import logging
 import smtplib
-from threading import Thread
 
 import dkim
 from django.contrib import messages
@@ -19,6 +18,7 @@ from urllib3.exceptions import ConnectionError, ProtocolError
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.utils.threading import DjangoWorkerThread
 from cosinnus.utils.user import get_user_by_email_safe
 
 logger = logging.getLogger('cosinnus')
@@ -161,7 +161,7 @@ def threaded_execution_and_catch_error(f):
 
         if _threading_state.is_elastic_threaded():
 
-            class CosinnusElasticsearchExecutionThread(Thread):
+            class CosinnusElasticsearchExecutionThread(DjangoWorkerThread):
                 def run(self):
                     do_execute()
 

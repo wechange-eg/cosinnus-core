@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 import json
 import logging
-from threading import Thread
 from urllib.parse import quote as urlquote
 
 import requests
@@ -11,6 +10,7 @@ from django.utils.encoding import force_str
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
+from cosinnus.utils.threading import DjangoWorkerThread
 from cosinnus.utils.user import get_newly_registered_user_email
 
 logger = logging.getLogger('cosinnus')
@@ -19,7 +19,7 @@ logger = logging.getLogger('cosinnus')
 def signup_user_to_cleverreach_group_receiver(sender, user, **kwargs):
     """Runs a threaded cleverreach signup"""
 
-    class SignupThread(Thread):
+    class SignupThread(DjangoWorkerThread):
         def run(self):
             signup_user_to_cleverreach_group(user)
 
