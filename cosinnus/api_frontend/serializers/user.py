@@ -366,6 +366,14 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         attrs = super().validate(attrs)
         return attrs
 
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        if not settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME and instance.last_name:
+            # Combine first and last name to display name
+            ret['first_name'] = f'{ret["first_name"]} {ret["last_name"]}'
+            ret['last_name'] = ''
+        return ret
+
     def update(self, instance, validated_data):
         user_data = validated_data
         profile_data = validated_data.get('cosinnus_profile', {})
@@ -378,9 +386,9 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         # instance.email = user_data.get('email', instance.email)
         instance.first_name = user_data.get('first_name', instance.first_name)
         # if the first name is being replaced with something new,
-        # and the last name is not given, we set the last name to empty
+        # and the last name is not used, we set the last name to empty
         # (this is for portals who only have one display name)
-        if user_data.get('first_name', None):
+        if not settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME and user_data.get('first_name', None):
             last_name_fallback = ''
         else:
             last_name_fallback = instance.last_name
