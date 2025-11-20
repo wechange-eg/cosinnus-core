@@ -712,22 +712,30 @@ class BBBRoom(models.Model):
         calling function, and the user redirected properly to an error page.
         """
 
+        # check general permission to enter the room at all
         if not self.check_user_can_enter_room(user):
             messages.error(request, _('You do not have permission to enter this room.'))
             return None
 
+        # if the meeting is not running, restart it if the user has permissions, else deny them
         if not self.is_running:
             # we're about to start/restart the room, check if this user may do that
-            if settings.COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS and user.is_authenticated:
-                # note: this `user` can be a BBBGuestTokenAnonymousUser here, which has no cosinnus_profile,
-                # so we check for `user.is_authenticated`
-                user_tagslugs = user.cosinnus_profile.get_managed_tag_slugs()
-                if any(
-                    [
-                        tagslug in user_tagslugs
-                        for tagslug in settings.COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS
-                    ]
-                ):
+            if settings.COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS:
+                # note: this `user` can be a BBBGuestTokenAnonymousUser here, which has no cosinnus_profile
+                bbb_start_denied = False
+                if not user.is_authenticated:
+                    bbb_start_denied = True
+                else:
+                    # check if the user has a managed tag that restricts them from restarting
+                    user_tagslugs = user.cosinnus_profile.get_managed_tag_slugs()
+                    if any(
+                        [
+                            tagslug in user_tagslugs
+                            for tagslug in settings.COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS
+                        ]
+                    ):
+                        bbb_start_denied = True
+                if bbb_start_denied:
                     messages.warning(
                         request,
                         _(
