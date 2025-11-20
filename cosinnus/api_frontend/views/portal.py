@@ -628,15 +628,15 @@ class PortalSettingsView(APIView):
         }
         """
         field_overrides = {}
-        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
-            # for last-name required portals, we make the last name field required and set its label
+        if settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+            # for portals with last name
             defined_name_fields = {
                 'last_name': {
                     'name': 'last_name',
                     'is_multi_language': False,
                     'is_multi_language_sub_field': False,
                     'in_signup': True,
-                    'required': True,
+                    'required': settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED,
                     'multiple': False,
                     'type': 'text',
                     'label': _('Last name'),
