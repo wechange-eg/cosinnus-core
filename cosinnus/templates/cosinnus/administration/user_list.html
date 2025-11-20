@@ -166,20 +166,23 @@
                 {% endif %}
 
 
+                {% captureas first_name_label %}{% if SETTINGS.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME %}{% trans "Firstname" %}{% else %}{% trans "Display Name" %}{% endif %}{% endcaptureas %}
                 {% if request.GET.order_by == 'first_name' %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=-first_name">{% trans "Firstname" %} <i class="fa fa-chevron-down"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=-first_name">{{ first_name_label }} <i class="fa fa-chevron-down"></i></a></th>
                 {% elif request.GET.order_by == '-first_name'%}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=first_name">{% trans "Firstname" %} <i class="fa fa-chevron-up"></i></a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=first_name">{{ first_name_label }} <i class="fa fa-chevron-up"></i></a></th>
                 {% else %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=first_name">{% trans "Firstname" %}</a></th>
+                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=first_name">{{ first_name_label }}</a></th>
                 {% endif %}
 
-                {% if request.GET.order_by == 'last_name' %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=-last_name">{% trans "Lastname" %} <i class="fa fa-chevron-down"></i></a></th>
-                {% elif request.GET.order_by == '-last_name' %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=last_name">{% trans "Lastname" %} <i class="fa fa-chevron-up"></i></a></th>
-                {% else %}
-                <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=last_name">{% trans "Lastname" %}</a></th>
+                {% if SETTINGS.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME %}
+                    {% if request.GET.order_by == 'last_name' %}
+                    <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=-last_name">{% trans "Lastname" %} <i class="fa fa-chevron-down"></i></a></th>
+                    {% elif request.GET.order_by == '-last_name' %}
+                    <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=last_name">{% trans "Lastname" %} <i class="fa fa-chevron-up"></i></a></th>
+                    {% else %}
+                    <th><a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ request.GET.managed_tag }}&order_by=last_name">{% trans "Lastname" %}</a></th>
+                    {% endif %}
                 {% endif %}
 
                 <th>{{ column_header }}</th>
@@ -205,8 +208,13 @@
                 {% endif %}
                 {% block extra_user_data %}{% endblock %}
             </th>
-            <th>{{ user.first_name }}</th>
-            <th>{{ user.last_name }}</th>
+            <th>
+                {{ user.first_name }}
+                {% if not SETTINGS.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME %}{{ user.last_name }}{% endif %}
+            </th>
+            {% if SETTINGS.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME %}
+                <th>{{ user.last_name }}</th>
+            {% endif %}
             <th>{% managed_tags_for_user user as managed_tags %}
                 {% for tag in managed_tags %}
                     <a href="{{ request.path }}?search={{ request.GET.search }}&managed_tag={{ tag.id }}&order_by={{ request.GET.order_by }}">
