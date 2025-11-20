@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-28 11:22+0100\n"
+"POT-Creation-Date: 2025-11-20 14:58+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -162,6 +162,9 @@ msgstr "Persönliche Informationen"
 
 msgid "Permissions"
 msgstr "Berechtigungen"
+
+msgid "First name / Display name"
+msgstr "Vorname / Anzeigename"
 
 msgid "Has Logged In"
 msgstr "Jemals eingeloggt"
@@ -2975,6 +2978,9 @@ msgstr[1] ""
 
 msgid "clear search"
 msgstr "Suche löschen"
+
+msgid "Display Name"
+msgstr "Anzeigename"
 
 msgid "Last Login"
 msgstr "Letzer Login"

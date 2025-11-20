@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-28 11:22+0100\n"
+"POT-Creation-Date: 2025-11-20 14:58+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -118,6 +118,14 @@ msgstr ""
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Group"
+
+#, fuzzy
+msgid "View on site"
+msgstr "Edit Project"
+
 msgid "ToS Accepted"
 msgstr ""
 
@@ -159,6 +167,9 @@ msgid "Personal info"
 msgstr ""
 
 msgid "Permissions"
+msgstr ""
+
+msgid "First name / Display name"
 msgstr ""
 
 msgid "Has Logged In"
@@ -1263,10 +1274,6 @@ msgstr ""
 
 msgid "Visitor"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Group"
 
 msgid "Created"
 msgstr ""
@@ -2760,10 +2767,6 @@ msgstr ""
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr ""
 
-#, fuzzy
-msgid "View on site"
-msgstr "Edit Project"
-
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr ""
 
@@ -3091,6 +3094,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "clear search"
+msgstr ""
+
+msgid "Display Name"
 msgstr ""
 
 msgid "Last Login"
@@ -6441,10 +6447,10 @@ msgstr ""
 msgid "Repeat Password"
 msgstr ""
 
-msgid "This name will be displayed to other users on the site"
+msgid "First name"
 msgstr ""
 
-msgid "First name"
+msgid "This name will be displayed to other users on the site"
 msgstr ""
 
 msgid "You can supply your last name to be displayed as well"
