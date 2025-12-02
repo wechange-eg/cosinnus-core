@@ -229,7 +229,7 @@ class BaseMembership(models.Model):
         # run an empty save on user so userprofile search indices get updated with new memberships through signals
         if hasattr(self, 'user'):
             # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-            if not self.user.cosinnus_profile:
+            if not hasattr(self.user, 'cosinnus_profile') or not self.user.cosinnus_profile:
                 from cosinnus.models import get_user_profile_model
 
                 get_user_profile_model()._default_manager.get_for_user(self.user)

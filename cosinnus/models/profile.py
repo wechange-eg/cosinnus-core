@@ -98,6 +98,8 @@ class BaseUserProfileManager(models.Manager):
                 profile = self.get(user_id=user.id)
             except get_user_profile_model().DoesNotExist:
                 profile = self.create(user_id=user.id)
+                # make the profile instantly available as a foreign key attribute on the user instance
+                user.cosinnus_profile = profile
             return profile
         raise TypeError('user must be of type int or Model but is %s' % type(user))
 
