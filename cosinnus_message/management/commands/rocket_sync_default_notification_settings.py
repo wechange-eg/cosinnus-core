@@ -21,8 +21,8 @@ class Command(BaseCommand):
     as their rocketchat-mail notification preference.
     Users who have saved their preference before are left untouched.
 
-    Use can use the -f parameter to enforce overwriting existing rocket profile settings. This can be used to sync
-    notification settings, if they got out of sync.
+    Use can use the -f parameter to enforce overwriting existing rocket profile settings. This can be used to enforce
+    the default portal notifications setting in RocketChat.
 
     This is not neccessary to run on new portals, as the setting is set on user creation already.
     """
