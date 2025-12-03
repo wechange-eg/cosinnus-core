@@ -852,6 +852,11 @@ a.light-link:hover i { display: inherit; }
         color: @map-button-color !important;
         background-color: @map-action-button-color;
         border: 1px solid @map-action-button-color;
+
+        &:hover {
+          background-color: darken(@map-action-button-color, 5%);
+          border: 1px solid darken(@map-action-button-color, 5%);
+        }
     }
     
     /** Colored action buttons */

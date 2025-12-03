@@ -6,7 +6,7 @@
 
 <button type="button" class="btn btn-emphasized btn-autosize {% if not no_margin %}v-offset-s{% endif %} likefollowstar-button likefollowstar-button-style no-padding no-hover star-button {% if user|can_likefollowstar:object %}action-do-likefollowstar{% endif %} {% if user.id in object.get_starred_user_ids %}selected{% endif %}" 
         data-type="star" data-ct="{{ object.get_content_type }}" data-id="{{ object.id }}"
-        {% if not user|can_likefollowstar:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% endif %}>
+        {% if not user|can_likefollowstar:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% else %}href="#"{% endif %}>
     <ul class="show-unselected media-list">
         <li class="media">
             <span class="pull-left">
