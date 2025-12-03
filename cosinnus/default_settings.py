@@ -396,6 +396,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
             sanitize_keys = [
                 'bic',
                 'iban',
+                'dsn',
             ]
 
         processors = [
