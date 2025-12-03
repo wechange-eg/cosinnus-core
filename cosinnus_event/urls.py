@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import path, re_path
+from django.urls import include, path, re_path
 
+from cosinnus.conf import settings
 from cosinnus_event import views
 
 app_name = 'event'
 
+# TODO: disable old views if the calendar is enabled
 cosinnus_group_patterns = [
     re_path(r'^$', views.index_view, name='index-redirect'),
     re_path(r'^calendar/$', views.list_view, name='index'),
@@ -122,4 +124,10 @@ cosinnus_root_patterns = [
     path('events/feed/all/', views.event_ical_feed_global, name='feed-global'),
     path('events/<int:pk>/update', views.event_api_update, name='event_api_update'),
 ]
+
+if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+    cosinnus_root_patterns += [
+        path('', include(('cosinnus_event.calendar.urls_api_frontend', 'cosinnus'), namespace='frontend-calendar-api')),
+    ]
+
 urlpatterns = cosinnus_group_patterns + cosinnus_root_patterns
