@@ -216,6 +216,9 @@ msgstr ""
 msgid " This data we received from your SSO account"
 msgstr " Diese Daten haben wir von deinem SSO-Konto erhalten"
 
+msgid " This data we received from your WECHANGE account"
+msgstr " Diese Daten haben wir von deinem WECHANGE-Konto erhalten"
+
 #, python-format
 msgid ""
 " You connected your account with your account on %(provider)s. To change "
@@ -2411,6 +2414,13 @@ msgstr ""
 
 msgid "A user created a task"
 msgstr "Ein Mitglied hat eine neue Aufgabe erstellt"
+
+msgid ""
+"A user export is in progress. As soon as the export is finished it will be "
+"available here."
+msgstr ""
+"Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export "
+"abgeschlossen ist, wird er hier zum Download bereit stehen."
 
 msgid "A user has accepted the invitation to this team (admins only)"
 msgstr ""
@@ -4694,6 +4704,9 @@ msgstr "Veranstaltung Löschen"
 msgid "Delete export data and start new %(export_title)s"
 msgstr "Export-Daten löschen und neuen %(export_title)s starten"
 
+msgid "Delete export data and start new user export"
+msgstr "Export-Daten löschen und neuen Benutzer/innen-Export starten"
+
 msgid "Delete exported data"
 msgstr "Export-Daten löschen"
 
@@ -5154,6 +5167,12 @@ msgstr "Bedingungen herunterladen"
 
 msgid "Download this folder"
 msgstr "Diesen Ordner herunterladen"
+
+msgid "Download user export as"
+msgstr "Benutzer/innen-Export herunterladen als"
+
+msgid "Download user exports from"
+msgstr "Benutzer/innen-Export herunterladen vom"
 
 msgid "Downloading failed, the target object was not a folder!"
 msgstr ""
@@ -11513,6 +11532,9 @@ msgstr "%(export_title)s erneut starten"
 msgid "Retry migration"
 msgstr "Migration erneut versuchen"
 
+msgid "Retry user export"
+msgstr "Benutzer/innen-Export erneut starten"
+
 msgid "Return to Archived Event Polls"
 msgstr "Zurück zu Abgeschlossene Terminabstimmungen"
 
@@ -12144,6 +12166,11 @@ msgstr ""
 "Leider ist bei dem %(export_title)s ein Fehler aufgetreten. Bitte versuch es "
 "später erneut."
 
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr ""
+"Leider ist bei dem Benutzer/innen-Export ein Fehler aufgetreten. Bitte "
+"versuch es später erneut."
+
 msgid ""
 "Sorry, but currently, there are no more profiles to show you. Please come "
 "back later!"
@@ -12355,6 +12382,9 @@ msgstr "Import starten?"
 
 msgid "Start the migration of Todos to the Task Board in the background."
 msgstr "Starte die Migration von Aufgaben zum Aufgaben-Board im Hintergrund."
+
+msgid "Start user export"
+msgstr "Benutzer/innen-Export starten"
 
 msgid "Start-Time"
 msgstr "Start-Zeit"
@@ -15019,6 +15049,9 @@ msgstr "Benutzerkonto inaktiv"
 msgid "User domains (min 1x logged in)"
 msgstr "Benutzer/innen-Domains (mind. 1x eingeloggt)"
 
+msgid "User export finished"
+msgstr "Benutzer/innen-Export abgeschlossen"
+
 msgid "User id should be an integer and it should not be None."
 msgstr "Die Benutzer/in-ID muss eine ganze Zahl sein und darf nicht None sein."
 
@@ -15308,6 +15341,9 @@ msgid ""
 "WARNING: Your reply will be sent to all participants of this conversation!"
 msgstr ""
 "ACHTUNG: Deine Antwort wird an alle Teilnehmer dieser Unterhaltung gesendet!"
+
+msgid "WECHANGE Account connected"
+msgstr "WECHANGE Konto verbunden"
 
 msgid "Waitlist"
 msgstr "Warteliste"
@@ -16456,6 +16492,10 @@ msgstr "Das kannst du hier tun"
 msgid "You can download the latest %(export_title)s data."
 msgstr "Der zuletzt erstellte %(export_title)s kann heruntergeladen werden."
 
+msgid "You can download the latest user export data."
+msgstr ""
+"Der zuletzt erstellte Benutzer/innen-Export kann heruntergeladen werden."
+
 msgid "You can find the BBBRoom object for this source object here"
 msgstr "Du kannst das BBB-Raum Objekt für dieses Quellobjekt hier finden"
 
@@ -16590,6 +16630,13 @@ msgid ""
 "be available here."
 msgstr ""
 "Der %(export_title)s kann gestartet werden. Sobald der Export abgeschlossen "
+"ist, wird er hier zum Download bereit stehen."
+
+msgid ""
+"You can start a user export. As soon as the export is finished it will be "
+"available here."
+msgstr ""
+"Benutzer/innen-Export kann gestartet werden. Sobald der Export abgeschlossen "
 "ist, wird er hier zum Download bereit stehen."
 
 msgid "You can supply your last name to be displayed as well"
@@ -18486,13 +18533,6 @@ msgstr "Ja"
 #~ "Menschen von dir das gleiche denken, wird automatisch ein Dialog zum "
 #~ "Austausch gestartet.."
 
-#~ msgid ""
-#~ "A user export is in progress. As soon as the export is finished it will be "
-#~ "available here."
-#~ msgstr ""
-#~ "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export "
-#~ "abgeschlossen ist, wird er hier zum Download bereit stehen."
-
 #~ msgid "Accounts from CSV Upload"
 #~ msgstr "Nutzerkonten aus CSV-Upload"
 
@@ -18747,9 +18787,6 @@ msgstr "Ja"
 #~ msgid "Debug"
 #~ msgstr "Fehlersuche"
 
-#~ msgid "Delete export data and start new user export"
-#~ msgstr "Export-Daten löschen und neuen Benutzer/innen-Export starten"
-
 #~ msgid "Delimiter of the CSV file"
 #~ msgstr "Trennzeichen der CSV-Datei"
 
@@ -18786,12 +18823,6 @@ msgstr "Ja"
 
 #~ msgid "Done"
 #~ msgstr "Fertig"
-
-#~ msgid "Download user export as"
-#~ msgstr "Benutzer/innen-Export herunterladen als"
-
-#~ msgid "Download user exports from"
-#~ msgstr "Benutzer/innen-Export herunterladen vom"
 
 #~ msgid "Dutch--NATIVE-LANGUAGE"
 #~ msgstr "Nederlands"
@@ -19377,9 +19408,6 @@ msgstr "Ja"
 #~ "Antragsstellende müssen Fragen über ihre Motiviation für die Teilnahme "
 #~ "beantworten"
 
-#~ msgid "Retry user export"
-#~ msgstr "Benutzer/innen-Export erneut starten"
-
 #~ msgid "Romanian--NATIVE-LANGUAGE"
 #~ msgstr "Română"
 
@@ -19416,12 +19444,6 @@ msgstr "Ja"
 #~ msgstr "Unterschriftenliste"
 
 #~ msgid ""
-#~ "Sorry, an error occurred during the user export. Please try again later."
-#~ msgstr ""
-#~ "Leider ist bei dem Benutzer/innen-Export ein Fehler aufgetreten. Bitte "
-#~ "versuch es später erneut."
-
-#~ msgid ""
 #~ "Sorry, only portal administrators can create Groups! You can either create "
 #~ "a Project, or write a message to one of the administrators to create a "
 #~ "Group for you. Below you can find a listing of all administrators."
@@ -19447,9 +19469,6 @@ msgstr "Ja"
 
 #~ msgid "Start conference and activate user accounts"
 #~ msgstr "Tagung beginnen und Teilnehmerkonten aktivieren"
-
-#~ msgid "Start user export"
-#~ msgstr "Benutzer/innen-Export starten"
 
 #~ msgid "Start/join BBB video conference for this event"
 #~ msgstr "BBB-Videochat starten/beitreten"
@@ -19741,9 +19760,6 @@ msgstr "Ja"
 #~ msgid "User CSV File"
 #~ msgstr "Benutzer/in CSV-Datei"
 
-#~ msgid "User export finished"
-#~ msgstr "Benutzer/innen-Export abgeschlossen"
-
 #~ msgid "User participates in the following workshops:"
 #~ msgstr "Benutzer_in nimmt an folgenden Workshops teil:"
 
@@ -19753,9 +19769,6 @@ msgstr "Ja"
 #~ msgctxt "the verb"
 #~ msgid "Vote"
 #~ msgstr "Abstimmen"
-
-#~ msgid "WECHANGE Account connected"
-#~ msgstr "WECHANGE Konto verbunden"
 
 #~ msgctxt "a verb"
 #~ msgid "Waitlist"
@@ -19879,22 +19892,11 @@ msgstr "Ja"
 #~ "Du kannst eigene Ideen über den '+'-Button im Header anlegen oder "
 #~ "bestehende Ideen hier entdecken"
 
-#~ msgid "You can download the latest user export data."
-#~ msgstr ""
-#~ "Der zuletzt erstellte Benutzer/innen-Export kann heruntergeladen werden."
-
 #~ msgid "You can only pick one workshop as first priority."
 #~ msgstr "Du kannst nur einen Workshop als erste Priorität auswählen."
 
 #~ msgid "You can only pick one workshop as second priority."
 #~ msgstr "Du kannst nur einen Workshop als zweite Priorität auswählen."
-
-#~ msgid ""
-#~ "You can start a user export. As soon as the export is finished it will be "
-#~ "available here."
-#~ msgstr ""
-#~ "Benutzer/innen-Export kann gestartet werden. Sobald der Export "
-#~ "abgeschlossen ist, wird er hier zum Download bereit stehen."
 
 #~ msgid "You can't change your application anymore."
 #~ msgstr "Du kannst deine Anmeldung nicht mehr ändern."
