@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:11+0200\n"
+"POT-Creation-Date: 2025-12-03 15:33+0100\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -123,6 +123,14 @@ msgstr "انقل المجموعات المحددة ومشاريعها الفرع
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr "انقل المجموعات المحددة ومشاريعها الفرعية إلى البوابة الإلكترونية وراسل الأعضاء"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "مجموعة"
+
+#, fuzzy
+msgid "View on site"
+msgstr "عرض على الصفحة"
+
 #, fuzzy
 msgid "ToS Accepted"
 msgstr "تم قبول بنود الخدمة"
@@ -170,6 +178,11 @@ msgstr "معلومات التواصل"
 msgid "Permissions"
 msgstr "أذونات"
 
+#, fuzzy
+#| msgid "Display name"
+msgid "First name / Display name"
+msgstr "اسم العرض"
+
 msgid "Has Logged In"
 msgstr "قام المستخدم بتسجيل الدخول"
 
@@ -182,6 +195,13 @@ msgid "%(count)d User account(s) were deactivated successfully. They will be del
 msgstr ""
 
 msgid "DEACTIVATE user accounts and DELETE them after 30 days"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(count)d User account(s) were deleted successfully."
+msgstr "%d تم إلغاء تنشيط المستخدمين بنجاح."
+
+msgid "(DEBUG ONLY) DELETE user instantly (TAKE CARE!)"
 msgstr ""
 
 #, fuzzy, python-format
@@ -486,13 +506,13 @@ msgstr "المنتدى"
 msgid "Discover"
 msgstr "اكتشف"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "مستعمل"
+#, fuzzy
+msgid "User Export"
+msgstr "استيراد المستخدم"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "مجموعة"
+#, fuzzy
+msgid "Group Export"
+msgstr "استيراد المستخدم"
 
 msgid "Overnight stay required"
 msgstr "مطلوب البقاء طوال الليل"
@@ -605,6 +625,11 @@ msgstr ""
 #, python-format
 msgid "Existing Todos can be migrated by the %(group_type)s admins."
 msgstr ""
+
+#, fuzzy
+#| msgid "Please log in to access this page."
+msgid "Sorry, your account may not access this page."
+msgstr "الرجاء تسجيل الدخول للدخول إلى هذه الصفحة."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "لقد تم تسجيل خروجك تلقائيًا بعد أن بقيت غير نشط لبعض الوقت."
@@ -1265,6 +1290,14 @@ msgid "pin to enter for telephone participants"
 msgstr "رقم التعريف الشخصي للدخول للمشاركين عبر الهاتف"
 
 msgid "Last create-call parameters"
+msgstr ""
+
+#, fuzzy
+#| msgid "You do not have permission to access this stream."
+msgid "You do not have permission to enter this room."
+msgstr "لا يوجد لديك إذن بالدخول إلى هذا العرض."
+
+msgid "This meeting is currently not running and you do not have permission to start it. Please wait and try again once a moderator has started the meeting."
 msgstr ""
 
 #, python-format
@@ -2256,6 +2289,10 @@ msgstr ""
 msgid "ignored"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "مستعمل"
+
 #, fuzzy
 msgid "Match subject"
 msgstr "موضوع"
@@ -2836,10 +2873,6 @@ msgid "To delete this user account, please go back to the user account list, fin
 msgstr ""
 
 #, fuzzy
-msgid "View on site"
-msgstr "عرض على الصفحة"
-
-#, fuzzy
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "أدخل الأحرف الأربعة الكبيرة في الصورة المشوشة"
 
@@ -3059,10 +3092,6 @@ msgstr "إدارة المؤتمرات"
 msgid "User Import"
 msgstr "استيراد المستخدم"
 
-#, fuzzy
-msgid "User Export"
-msgstr "استيراد المستخدم"
-
 msgid "User Profile Field Choices"
 msgstr "خيارات حقل ملف تعريف المستخدم"
 
@@ -3191,6 +3220,11 @@ msgstr[5] ""
 
 msgid "clear search"
 msgstr "مسح البحث"
+
+#, fuzzy
+#| msgid "Display name"
+msgid "Display Name"
+msgstr "اسم العرض"
 
 #, fuzzy
 msgid "Last Login"
@@ -4632,6 +4666,7 @@ msgstr ""
 msgid "From"
 msgstr "من"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Start date."
 msgstr "تاريخ البدء."
 
@@ -4639,6 +4674,7 @@ msgstr "تاريخ البدء."
 msgid "Until"
 msgstr "حتى"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "End date."
 msgstr "تاريخ الاتهاء."
 
@@ -6093,35 +6129,28 @@ msgstr "%(sender_name)s يريد الانضمام إلى %(team_name)s على %(
 msgid ""
 "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
 "\n"
-"The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
-"\n"
-"If you wish to approve the user's join request click the following link:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
+"The user won't be able to log in until you (or another Portal-Admin) approves of his request."
+msgstr ""
+
+msgid "If you wish to approve the user's join request click the following link"
+msgstr ""
+
+msgid "Click here if you wish to approve the user's join request for an account with the role"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to decline the request?"
+msgid "Click here to deny the request"
+msgstr "هل تريد حقًا رفض الدعوة؟"
+
+#, fuzzy, python-format
+#| msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
+msgid ""
 "You're receiving this email because you are a portal-administrator.\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
-msgstr ""
-"طلب المستخدم \"%(user_name)s\" (%(user_mail)s) الانضمام إلى%(site_name)s.\n"
-"\n"
-"لن يتمكن المستخدم من تسجيل الدخول حتى توافق أنت (أو أي مسؤول بوابة آخر) على طلبه.\n"
-"\n"
-"إذا كنت ترغب في الموافقة على طلب انضمام المستخدم، انقر فوق الراتباط التالي:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"انقر هنا لرفض الطلب: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
-"أنت تتلقى هذا البريد الإلكتروني لأنك مسؤول البوابة.\n"
-"\n"
-"\n"
-"فريق %(site_name)s"
+msgstr "أنت تتلقى هذا البريد الإلكتروني لأنك طلبت إعادة تعيين كلمة السر لحساب المستخدم الخاص بك على %(site_name)s."
 
 #, python-format
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
@@ -6741,11 +6770,11 @@ msgstr "البريد الالكتروني"
 msgid "Repeat Password"
 msgstr "كرر كلمة السر"
 
-msgid "This name will be displayed to other users on the site"
-msgstr "سيتم عرض هذا الاسم للمستخدمين الآخرين على الموقع"
-
 msgid "First name"
 msgstr "الاسم الأول"
+
+msgid "This name will be displayed to other users on the site"
+msgstr "سيتم عرض هذا الاسم للمستخدمين الآخرين على الموقع"
 
 msgid "You can supply your last name to be displayed as well"
 msgstr "يمكنك تقديم اسمك عائلتك ليتم عرضه أيضًا"
@@ -6986,6 +7015,16 @@ msgstr "البحث عن الأسماء والموضوعات والأماكن..."
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names and Topics..."
 msgstr "البحث عن الأسماء والموضوعات..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Start-Time"
+msgstr "مميز بنجمة"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "End-Time"
+msgstr "وقت"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
@@ -8025,42 +8064,6 @@ msgstr "يمكن للمستخدم رفض إعلان، وفي هذه الحالة
 msgid "There are no announcements yet."
 msgstr "لا يوجد اعلان بعد."
 
-#, fuzzy
-msgid "Start user export"
-msgstr "إبدء الاستيراد؟"
-
-msgid "You can start a user export. As soon as the export is finished it will be available here."
-msgstr ""
-
-msgid "A user export is in progress. As soon as the export is finished it will be available here."
-msgstr ""
-
-#, fuzzy
-msgid "User export finished"
-msgstr "انتهى الاستيراد"
-
-msgid "You can download the latest user export data."
-msgstr ""
-
-#, fuzzy
-msgid "Download user exports from"
-msgstr "قم بتنزيل الشروط"
-
-#, fuzzy
-msgid "Download user export as"
-msgstr "قم بتنزيل الشروط"
-
-#, fuzzy
-msgid "Sorry, an error occurred during the user export. Please try again later."
-msgstr "حدث خطأ أثناء محاولة إرسال التقرير الخاص بك. يرجى المحاولة مرة أخرى بعد قليل."
-
-#, fuzzy
-msgid "Delete export data and start new user export"
-msgstr "احذف البيانات التي تم تحميلها وحمِّل ملف CSV جديدًا"
-
-msgid "Retry user export"
-msgstr ""
-
 msgid "User Import Archive"
 msgstr "أرشيف استيراد المستخدم"
 
@@ -8416,6 +8419,10 @@ msgstr "لقد خلقت فكرة"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an idea"
 msgstr "خلق فكرة"
+
+#, fuzzy
+msgid "Logo"
+msgstr "نسجيل خروج"
 
 msgid "Menu"
 msgstr "القائمة"
@@ -9747,6 +9754,11 @@ msgstr "لم يتم العثور على %(verbose_name)s تطابق الاستع
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "لا يوجد وصف لهذا المشروع حتى الآن."
 
+#, fuzzy
+#| msgid "You are seeing this alert because you created this content."
+msgid "You are only seeing this profile because you are an admin."
+msgstr "أنت ترى هذا التنبيه لأنك أنشأت هذا المحتوى."
+
 #, python-format
 msgid "User \"%s\" is a guest user and has no profile."
 msgstr ""
@@ -9931,6 +9943,14 @@ msgstr "تمت الموافقة على حساب المستخدم بالفعل ،
 #, fuzzy, python-format
 msgid "Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site."
 msgstr "شكرًا لك على موافقة المستخدم %(username)s (%(email)s)! تم إرسال بريد إلكتروني تقديمي إليهم ويمكنهم الآن تسجيل الدخول إلى الموقع."
+
+#, fuzzy
+#| msgid "The following Users were added to this portal:"
+msgid "The following roles were assigned to the account:"
+msgstr "تمت إضافة المستخدمين التاليين إلى هذه البوابة:"
+
+msgid "The following roles could not be assigned to the account and need to be assigned manually:"
+msgstr ""
 
 #, fuzzy, python-format
 msgid "The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface."
@@ -11162,14 +11182,6 @@ msgstr "انشاء مناسبة"
 #, fuzzy, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s (معلقة)"
-
-#, fuzzy
-msgid "Start-Time"
-msgstr "مميز بنجمة"
-
-#, fuzzy
-msgid "End-Time"
-msgstr "وقت"
 
 #, fuzzy
 msgid "Conference Event Attendance Tracking"
@@ -13478,10 +13490,11 @@ msgstr ""
 msgid "Welcome"
 msgstr "مرحبًا"
 
-msgid "WECHANGE Account connected"
-msgstr ""
+#, fuzzy
+msgid "SSO Account connected"
+msgstr "تعطيل"
 
-msgid " This data we received from your WECHANGE account"
+msgid " This data we received from your SSO account"
 msgstr ""
 
 msgid "Your Avatar and other settings from your profile were also copied."
@@ -13496,6 +13509,11 @@ msgstr ""
 
 msgid "An error occurred while attempting to login via your social network account."
 msgstr ""
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Back to Login"
+msgstr "عودة الى"
 
 #, fuzzy
 msgid "Account Connections"
@@ -13645,10 +13663,6 @@ msgstr "إزالة الموقع"
 #, fuzzy
 msgid "Organization type"
 msgstr "منظمات"
-
-#, fuzzy
-msgid "Logo"
-msgstr "نسجيل خروج"
 
 #, fuzzy
 msgid "Email Address"
@@ -15283,7 +15297,64 @@ msgstr "هل أنت متأكد أنك تريد حذف هذا الفريق؟"
 msgid "Are you sure you want to delete this object?"
 msgstr "هل أنت متأكد أنك تريد حذف هذا الفريق؟"
 
-#, fuzzy, python-format
+#~ msgid ""
+#~ "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+#~ "\n"
+#~ "The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
+#~ "\n"
+#~ "If you wish to approve the user's join request click the following link:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "You're receiving this email because you are a portal-administrator.\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "طلب المستخدم \"%(user_name)s\" (%(user_mail)s) الانضمام إلى%(site_name)s.\n"
+#~ "\n"
+#~ "لن يتمكن المستخدم من تسجيل الدخول حتى توافق أنت (أو أي مسؤول بوابة آخر) على طلبه.\n"
+#~ "\n"
+#~ "إذا كنت ترغب في الموافقة على طلب انضمام المستخدم، انقر فوق الراتباط التالي:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "انقر هنا لرفض الطلب: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "أنت تتلقى هذا البريد الإلكتروني لأنك مسؤول البوابة.\n"
+#~ "\n"
+#~ "\n"
+#~ "فريق %(site_name)s"
+
+#, fuzzy
+#~ msgid "Start user export"
+#~ msgstr "إبدء الاستيراد؟"
+
+#, fuzzy
+#~ msgid "User export finished"
+#~ msgstr "انتهى الاستيراد"
+
+#, fuzzy
+#~ msgid "Download user exports from"
+#~ msgstr "قم بتنزيل الشروط"
+
+#, fuzzy
+#~ msgid "Download user export as"
+#~ msgstr "قم بتنزيل الشروط"
+
+#, fuzzy
+#~ msgid "Sorry, an error occurred during the user export. Please try again later."
+#~ msgstr "حدث خطأ أثناء محاولة إرسال التقرير الخاص بك. يرجى المحاولة مرة أخرى بعد قليل."
+
+#, fuzzy
+#~ msgid "Delete export data and start new user export"
+#~ msgstr "احذف البيانات التي تم تحميلها وحمِّل ملف CSV جديدًا"
+
+#, fuzzy
 #~ msgid "Start %(mytitle)s"
 #~ msgstr "إبدء الاستيراد؟"
 

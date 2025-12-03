@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:11+0200\n"
+"POT-Creation-Date: 2025-12-03 15:33+0100\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,6 +121,14 @@ msgstr "Ընտրված խմբերը և դրանց ենթածրագրերը տե�
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr "Ընտրված խմբերը և դրանց ենթածրագրերը տեղափոխել ընթացիկ պորտալ և հաղորդագրություն ուղարկել անդամներին"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Խումբ"
+
+#, fuzzy
+msgid "View on site"
+msgstr "Դիտել էջում"
+
 msgid "ToS Accepted"
 msgstr "ToS-ը ընդունված է"
 
@@ -165,6 +173,11 @@ msgstr "Կոնտակտային տվյալներ"
 msgid "Permissions"
 msgstr "Թույլտվություններ"
 
+#, fuzzy
+#| msgid "Display name"
+msgid "First name / Display name"
+msgstr "Ցուցադրվող Անուն"
+
 msgid "Has Logged In"
 msgstr "Մուտք է գործել"
 
@@ -176,6 +189,13 @@ msgid "%(count)d User account(s) were deactivated successfully. They will be del
 msgstr ""
 
 msgid "DEACTIVATE user accounts and DELETE them after 30 days"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(count)d User account(s) were deleted successfully."
+msgstr "%d Օգտատերերը հաջողությամբ ապաակտիվացվել են."
+
+msgid "(DEBUG ONLY) DELETE user instantly (TAKE CARE!)"
 msgstr ""
 
 #, fuzzy, python-format
@@ -481,13 +501,13 @@ msgstr "Ֆորում"
 msgid "Discover"
 msgstr "Բացահայտել"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Օգտատեր"
+#, fuzzy
+msgid "User Export"
+msgstr "Արտահանել"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Խումբ"
+#, fuzzy
+msgid "Group Export"
+msgstr "Արտահանել"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -600,6 +620,11 @@ msgstr ""
 #, python-format
 msgid "Existing Todos can be migrated by the %(group_type)s admins."
 msgstr ""
+
+#, fuzzy
+#| msgid "Please log in to access this page."
+msgid "Sorry, your account may not access this page."
+msgstr "Խնդրում ենք մուտք գործել համակարգ այս էջ մուտք ունենալու համար."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1230,6 +1255,14 @@ msgid "pin to enter for telephone participants"
 msgstr ""
 
 msgid "Last create-call parameters"
+msgstr ""
+
+#, fuzzy
+#| msgid "You do not have permission to access this stream."
+msgid "You do not have permission to enter this room."
+msgstr "Դուք չունեք թույլտվություն այս հոսք մուտք գործելու."
+
+msgid "This meeting is currently not running and you do not have permission to start it. Please wait and try again once a moderator has started the meeting."
 msgstr ""
 
 #, python-format
@@ -2211,6 +2244,10 @@ msgstr ""
 msgid "ignored"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Օգտատեր"
+
 #, fuzzy
 msgid "Match subject"
 msgstr "Հրավերներ"
@@ -2782,10 +2819,6 @@ msgstr ""
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr ""
 
-#, fuzzy
-msgid "View on site"
-msgstr "Դիտել էջում"
-
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Մուտքագրեք 4 մեծատառ սկրամբլավորված պատկերման մեջ"
 
@@ -3004,10 +3037,6 @@ msgstr ""
 msgid "User Import"
 msgstr ""
 
-#, fuzzy
-msgid "User Export"
-msgstr "Արտահանել"
-
 msgid "User Profile Field Choices"
 msgstr ""
 
@@ -3133,6 +3162,11 @@ msgstr[1] ""
 
 msgid "clear search"
 msgstr ""
+
+#, fuzzy
+#| msgid "Display name"
+msgid "Display Name"
+msgstr "Ցուցադրվող Անուն"
 
 #, fuzzy
 msgid "Last Login"
@@ -4564,6 +4598,7 @@ msgstr ""
 msgid "From"
 msgstr "Սկսած"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Start date."
 msgstr "Մեկնարկի ամսաթիվ."
 
@@ -4571,6 +4606,7 @@ msgstr "Մեկնարկի ամսաթիվ."
 msgid "Until"
 msgstr "Մինչև"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "End date."
 msgstr "Ավարտի ամսաթիվ."
 
@@ -6041,35 +6077,27 @@ msgstr "%(sender_name)s - ը ցանկանում է միանալ %(team_name)s %(
 msgid ""
 "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
 "\n"
-"The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
-"\n"
-"If you wish to approve the user's join request click the following link:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
+"The user won't be able to log in until you (or another Portal-Admin) approves of his request."
+msgstr ""
+
+msgid "If you wish to approve the user's join request click the following link"
+msgstr ""
+
+msgid "Click here if you wish to approve the user's join request for an account with the role"
+msgstr ""
+
+#, fuzzy
+msgid "Click here to deny the request"
+msgstr "Ցանկանու՞մ եք արդյոք մերժել հրավերը?"
+
+#, fuzzy, python-format
+#| msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
+msgid ""
 "You're receiving this email because you are a portal-administrator.\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
-msgstr ""
-"\"%(user_name)s\" (%(user_mail)s) օգտատերը հարցում է ուղարկել միանալ %(site_name)s -ին.\n"
-"\n"
-"Օգտատերը չի կարողանա մուտք գործել այնքան ժամանակ, մինչև դուք (կամ մեկ այլ պորտալ-ադմինիստրատոր) հաստատեք նրա հարցումը:\n"
-"\n"
-"Եթե ցանկանում եք հաստատել օգտատիրոջ միանալու հարցումը, սեղմեք հետևյալ հղմանը:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Սեղմեք այստեղ հարցումը մերժելու համար: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
-"Դուք ստանում եք այս էլ. նամակը, քանի որ պորտալ-ադմինիստրատորն եք.\n"
-"\n"
-"\n"
-"Ձեր %(site_name)s թիմ"
+msgstr "Դուք ստանում եք այս էլ. նամակը, քանի որ գաղտնաբառի վերափոխման հարցում եք ուղարկել ձեր %(site_name)s օգտատիրոջ անձնական էջի համար."
 
 #, python-format
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
@@ -6682,11 +6710,11 @@ msgstr "Էլեկտրոնային հասցե"
 msgid "Repeat Password"
 msgstr "Կրկնեք գաղտնաբառը"
 
-msgid "This name will be displayed to other users on the site"
-msgstr "Այս անունը կցուցադրվի կայքի այլ օգտատերերին"
-
 msgid "First name"
 msgstr "Անուն"
+
+msgid "This name will be displayed to other users on the site"
+msgstr "Այս անունը կցուցադրվի կայքի այլ օգտատերերին"
 
 msgid "You can supply your last name to be displayed as well"
 msgstr "Դուք կարող եք տրամադրել ձեր ազգանունը, որը նույնպես կցուցադրվի"
@@ -6933,6 +6961,16 @@ msgstr "Որոնել անուններ, թեմաներ և վայրեր ..."
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names and Topics..."
 msgstr "Որոնել անուններ և թեմաներ ..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Start-Time"
+msgstr "Մեկնարկի ամսաթիվ."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "End-Time"
+msgstr "Ժամանակ"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
@@ -7971,40 +8009,6 @@ msgstr "Օգտատերը կարող է մերժել հայտարարությու
 msgid "There are no announcements yet."
 msgstr "Առայժմ հայտարարություններ չկան."
 
-msgid "Start user export"
-msgstr ""
-
-msgid "You can start a user export. As soon as the export is finished it will be available here."
-msgstr ""
-
-msgid "A user export is in progress. As soon as the export is finished it will be available here."
-msgstr ""
-
-#, fuzzy
-msgid "User export finished"
-msgstr "Տեսակավորել դաշտը"
-
-msgid "You can download the latest user export data."
-msgstr ""
-
-#, fuzzy
-msgid "Download user exports from"
-msgstr "Պարզ վիճակագրություն"
-
-#, fuzzy
-msgid "Download user export as"
-msgstr "Պարզ վիճակագրություն"
-
-#, fuzzy
-msgid "Sorry, an error occurred during the user export. Please try again later."
-msgstr "Ձեր զեկույցը ներկայացնելիս սխալ տեղի ունեցավ: Խնդրում ենք փորձել մի փոքր ուշ."
-
-msgid "Delete export data and start new user export"
-msgstr ""
-
-msgid "Retry user export"
-msgstr ""
-
 msgid "User Import Archive"
 msgstr ""
 
@@ -8358,6 +8362,10 @@ msgstr "Դուք գաղափար եք ստեղծել"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an idea"
 msgstr "ստեղծեց գաղափար"
+
+#, fuzzy
+msgid "Logo"
+msgstr "Ելք"
 
 msgid "Menu"
 msgstr "Ընտրացանկ"
@@ -9710,6 +9718,11 @@ msgstr "Հարցմանը համապատասխանող %(verbose_name)s չի գտ
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "Այս նախագծի համար դեռ նկարագրություն չկա."
 
+#, fuzzy
+#| msgid "You are seeing this alert because you created this content."
+msgid "You are only seeing this profile because you are an admin."
+msgstr "Դուք տեսնում այս ծանուցումը, քանի որ դուք ստեղծել էք այս բովանդակությունը."
+
 #, python-format
 msgid "User \"%s\" is a guest user and has no profile."
 msgstr ""
@@ -9891,6 +9904,14 @@ msgstr "Օգտատիրոջ էջն արդեն հաստատված էր, բայց, 
 #, python-format
 msgid "Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site."
 msgstr "Շնորհակալություն %(username)s (%(email)s) օգտատիրոջը հաստատելու համար: Նրանց ուղարկվեց ներածության նամակ, և նրանք այժմ կարող են մուտք գործել կայք."
+
+#, fuzzy
+#| msgid "The following Users were added to this portal:"
+msgid "The following roles were assigned to the account:"
+msgstr "Հետևյալ Օգտատերերն ավելացվեցին այս պորտալ:"
+
+msgid "The following roles could not be assigned to the account and need to be assigned manually:"
+msgstr ""
 
 #, python-format
 msgid "The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface."
@@ -11109,14 +11130,6 @@ msgstr "Ստեղծել Իրադարձություն"
 #, fuzzy, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s (սպասվող)"
-
-#, fuzzy
-msgid "Start-Time"
-msgstr "Մեկնարկի ամսաթիվ."
-
-#, fuzzy
-msgid "End-Time"
-msgstr "Ժամանակ"
 
 #, fuzzy
 msgid "Conference Event Attendance Tracking"
@@ -13329,10 +13342,11 @@ msgstr ""
 msgid "Welcome"
 msgstr "Բարի գալուստ"
 
-msgid "WECHANGE Account connected"
-msgstr ""
+#, fuzzy
+msgid "SSO Account connected"
+msgstr "Ապաակտիվացնել"
 
-msgid " This data we received from your WECHANGE account"
+msgid " This data we received from your SSO account"
 msgstr ""
 
 msgid "Your Avatar and other settings from your profile were also copied."
@@ -13347,6 +13361,11 @@ msgstr ""
 
 msgid "An error occurred while attempting to login via your social network account."
 msgstr ""
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Back to Login"
+msgstr "Հետ դեպի"
 
 #, fuzzy
 msgid "Account Connections"
@@ -13495,10 +13514,6 @@ msgstr "Հեռացնել գտնվելու վայրը"
 #, fuzzy
 msgid "Organization type"
 msgstr "Հրավերներ"
-
-#, fuzzy
-msgid "Logo"
-msgstr "Ելք"
 
 #, fuzzy
 msgid "Email Address"
@@ -15114,7 +15129,56 @@ msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս 
 msgid "Are you sure you want to delete this object?"
 msgstr "Համոզվա՞ծ եք, որ ցանկանում եք ջնջել այս թիմը?"
 
-#, fuzzy, python-format
+#~ msgid ""
+#~ "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+#~ "\n"
+#~ "The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
+#~ "\n"
+#~ "If you wish to approve the user's join request click the following link:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "You're receiving this email because you are a portal-administrator.\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "\"%(user_name)s\" (%(user_mail)s) օգտատերը հարցում է ուղարկել միանալ %(site_name)s -ին.\n"
+#~ "\n"
+#~ "Օգտատերը չի կարողանա մուտք գործել այնքան ժամանակ, մինչև դուք (կամ մեկ այլ պորտալ-ադմինիստրատոր) հաստատեք նրա հարցումը:\n"
+#~ "\n"
+#~ "Եթե ցանկանում եք հաստատել օգտատիրոջ միանալու հարցումը, սեղմեք հետևյալ հղմանը:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Սեղմեք այստեղ հարցումը մերժելու համար: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Դուք ստանում եք այս էլ. նամակը, քանի որ պորտալ-ադմինիստրատորն եք.\n"
+#~ "\n"
+#~ "\n"
+#~ "Ձեր %(site_name)s թիմ"
+
+#, fuzzy
+#~ msgid "User export finished"
+#~ msgstr "Տեսակավորել դաշտը"
+
+#, fuzzy
+#~ msgid "Download user exports from"
+#~ msgstr "Պարզ վիճակագրություն"
+
+#, fuzzy
+#~ msgid "Download user export as"
+#~ msgstr "Պարզ վիճակագրություն"
+
+#, fuzzy
+#~ msgid "Sorry, an error occurred during the user export. Please try again later."
+#~ msgstr "Ձեր զեկույցը ներկայացնելիս սխալ տեղի ունեցավ: Խնդրում ենք փորձել մի փոքր ուշ."
+
+#, fuzzy
 #~| msgid "Vote for %(title)s"
 #~ msgid "Start %(mytitle)s"
 #~ msgstr "Քվեարկել %(title)s -ի համար"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:11+0200\n"
+"POT-Creation-Date: 2025-12-03 15:33+0100\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -116,6 +116,13 @@ msgstr "Переместить выбранные группы и их подп�
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr "Переместить выбранные группы и их подпроекты на текущий портал и оповестить членов"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Группа"
+
+msgid "View on site"
+msgstr "Посмотреть на странице"
+
 msgid "ToS Accepted"
 msgstr "Пользовательское соглашение принято"
 
@@ -158,6 +165,11 @@ msgstr "Персональная информация"
 msgid "Permissions"
 msgstr "Полномочия"
 
+#, fuzzy
+#| msgid "Display name"
+msgid "First name / Display name"
+msgstr "Отображаемое Имя"
+
 msgid "Has Logged In"
 msgstr "Уже заходил в систему"
 
@@ -170,6 +182,14 @@ msgstr "%(count)d пользовательских аккаунта/ов был�
 
 msgid "DEACTIVATE user accounts and DELETE them after 30 days"
 msgstr "ДЕАКТИВИРОВАТЬ пользовательские аккаунты и УДАЛИТЬ их через 30 дней"
+
+#, fuzzy, python-format
+#| msgid "%(count)d User account(s) were reactivated successfully."
+msgid "%(count)d User account(s) were deleted successfully."
+msgstr "%(count)d пользователей активировано заново."
+
+msgid "(DEBUG ONLY) DELETE user instantly (TAKE CARE!)"
+msgstr ""
 
 #, python-format
 msgid "%(count)d User account(s) were reactivated successfully."
@@ -461,13 +481,13 @@ msgstr "Форум"
 msgid "Discover"
 msgstr "Узнай больше"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Пользователь"
+#, fuzzy
+msgid "User Export"
+msgstr "Импорт пользователей"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Группа"
+#, fuzzy
+msgid "Group Export"
+msgstr "Импорт пользователей"
 
 msgid "Overnight stay required"
 msgstr "Требуется жилье"
@@ -578,6 +598,11 @@ msgstr ""
 #, python-format
 msgid "Existing Todos can be migrated by the %(group_type)s admins."
 msgstr ""
+
+#, fuzzy
+#| msgid "Sorry, only admin accounts may log in at this time."
+msgid "Sorry, your account may not access this page."
+msgstr "В данный момент заходить на портал могут только администраторы."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Вы автоматически вышли из системы, так как были некоторое время неактивны."
@@ -1203,6 +1228,14 @@ msgstr "pin для входа с телефонов участников"
 
 msgid "Last create-call parameters"
 msgstr "Последние параметры create-call"
+
+#, fuzzy
+#| msgid "You do not have permission to access this stream."
+msgid "You do not have permission to enter this room."
+msgstr "У Вас нет разрешения для доступа к этой ленте."
+
+msgid "This meeting is currently not running and you do not have permission to start it. Please wait and try again once a moderator has started the meeting."
+msgstr ""
 
 #, python-format
 msgid "Join \"%(name)s\"!"
@@ -2134,6 +2167,10 @@ msgstr "нравится"
 msgid "ignored"
 msgstr "игнорированный"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Пользователь"
+
 msgid "Match subject"
 msgstr "Субъект совпадения"
 
@@ -2696,9 +2733,6 @@ msgstr "Этот пользовательский профиль деактив�
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr "Чтобы удалить этот пользовательский профиль, вернись к списку профилей пользователей, найди в нем искомый профиль (для поиска может быть использовано имя или адрес электронной почты), и отметь профиль в списке. Затем используй соответствующее действие из списка:"
 
-msgid "View on site"
-msgstr "Посмотреть на странице"
-
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Введите 4 заглавных буквы искривленного изображения"
 
@@ -2891,10 +2925,6 @@ msgstr "Управление конференцией"
 msgid "User Import"
 msgstr "Импорт пользователей"
 
-#, fuzzy
-msgid "User Export"
-msgstr "Импорт пользователей"
-
 msgid "User Profile Field Choices"
 msgstr "Варианты для поля выбора профиля пользователя"
 
@@ -3012,6 +3042,11 @@ msgstr[1] ""
 
 msgid "clear search"
 msgstr "сбросить результаты поиска"
+
+#, fuzzy
+#| msgid "Display name"
+msgid "Display Name"
+msgstr "Отображаемое Имя"
 
 msgid "Last Login"
 msgstr "Логин"
@@ -4383,6 +4418,7 @@ msgstr "Часовой пояс: %(TIME_ZONE)s"
 msgid "From"
 msgstr "От"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Start date."
 msgstr "Дата начала."
 
@@ -4390,6 +4426,7 @@ msgstr "Дата начала."
 msgid "Until"
 msgstr "До"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "End date."
 msgstr "Любая дата."
 
@@ -5830,35 +5867,29 @@ msgstr "%(sender_name)s  пожелал(а) присоединиться к %(te
 msgid ""
 "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
 "\n"
-"The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
-"\n"
-"If you wish to approve the user's join request click the following link:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
+"The user won't be able to log in until you (or another Portal-Admin) approves of his request."
+msgstr ""
+
+#, fuzzy
+#| msgid "Invite users directly via the following link: "
+msgid "If you wish to approve the user's join request click the following link"
+msgstr "Приглашай пользователей напрямую с помощью этой ссылки: "
+
+msgid "Click here if you wish to approve the user's join request for an account with the role"
+msgstr ""
+
+#, fuzzy
+msgid "Click here to deny the request"
+msgstr "Нажмите сюда, чтобы повторить отправку ссылки на валидацию."
+
+#, fuzzy, python-format
+#| msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
+msgid ""
 "You're receiving this email because you are a portal-administrator.\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
-msgstr ""
-"Пользователь \"%(user_name)s\" (%(user_mail)s) попросил(a) разрешение присоединиться к %(site_name)s.\n"
-"\n"
-"Этот пользователь не сможет войти, пока Вы (или другой администратор портала) не примете его заявку.\n"
-"\n"
-"Если Вы хотите принять его заявку, пройдите по следующей ссылке:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Нажмите сюда, если хотите отказать: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
-"Вы получили это сообщение, так как Вы являетесь администратором портала.\n"
-"\n"
-"\n"
-"Ваша команда %(site_name)s"
+msgstr "Вы получили это письмо, так как Вы просили переустановить пароль Вашего аккаунта на  %(site_name)s."
 
 #, python-format
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
@@ -6483,11 +6514,11 @@ msgstr "Адрес электронной почты"
 msgid "Repeat Password"
 msgstr "Повторите пароль"
 
-msgid "This name will be displayed to other users on the site"
-msgstr "Это имя будет отражено на сайте для других пользователей"
-
 msgid "First name"
 msgstr "Имя"
+
+msgid "This name will be displayed to other users on the site"
+msgstr "Это имя будет отражено на сайте для других пользователей"
 
 msgid "You can supply your last name to be displayed as well"
 msgstr "Вы также можете указать Вашу фамилию, чтобы она была отражена"
@@ -6726,6 +6757,16 @@ msgstr "Поиск имен, тем и мест…"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names and Topics..."
 msgstr "Поиск имен и тем…"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Start-Time"
+msgstr "Начавшиеся"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "End-Time"
+msgstr "Время"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
@@ -7735,43 +7776,6 @@ msgstr "Пользователь может отклонить объявлен�
 msgid "There are no announcements yet."
 msgstr "Пока нет анонсов."
 
-#, fuzzy
-msgid "Start user export"
-msgstr "Начать импорт?"
-
-msgid "You can start a user export. As soon as the export is finished it will be available here."
-msgstr ""
-
-msgid "A user export is in progress. As soon as the export is finished it will be available here."
-msgstr ""
-
-# ???
-#, fuzzy
-msgid "User export finished"
-msgstr "Поле сортировки"
-
-msgid "You can download the latest user export data."
-msgstr ""
-
-#, fuzzy
-msgid "Download user exports from"
-msgstr "Скачать данные пользователей"
-
-#, fuzzy
-msgid "Download user export as"
-msgstr "Скачать данные пользователей"
-
-#, fuzzy
-msgid "Sorry, an error occurred during the user export. Please try again later."
-msgstr "Произошла ошибка при отправке жалобы. Пожалуйста, попробуйте снова через несколько секунд."
-
-#, fuzzy
-msgid "Delete export data and start new user export"
-msgstr "Удалить загруженные данные и загрузить новый файл CSV"
-
-msgid "Retry user export"
-msgstr ""
-
 msgid "User Import Archive"
 msgstr "Архив импортов пользователей"
 
@@ -8115,6 +8119,9 @@ msgstr "Ты создал(а) идею"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an idea"
 msgstr "создано идею"
+
+msgid "Logo"
+msgstr "Лого"
 
 msgid "Menu"
 msgstr "Меню"
@@ -9424,6 +9431,11 @@ msgstr "По запросу не найдено %(verbose_name)s"
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "Описания для этого проекта пока нет."
 
+#, fuzzy
+#| msgid "You are seeing this alert because you created this content."
+msgid "You are only seeing this profile because you are an admin."
+msgstr "Вы видите этот извещение, потому что Вы создали этот контент."
+
 #, python-format
 msgid "User \"%s\" is a guest user and has no profile."
 msgstr ""
@@ -9606,6 +9618,14 @@ msgstr "Этот аккаунт уже получил подтверждение
 #, python-format
 msgid "Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site."
 msgstr "Спасибо за подтверждение пользователя %(username)s (%(email)s)! Приветственное письмо уже в пути, и пользователь может войти на сайт."
+
+#, fuzzy
+#| msgid "The following Users were added to this portal:"
+msgid "The following roles were assigned to the account:"
+msgstr "На портал были добавлены следующие пользователи:"
+
+msgid "The following roles could not be assigned to the account and need to be assigned manually:"
+msgstr ""
 
 #, python-format
 msgid "The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface."
@@ -10793,14 +10813,6 @@ msgstr "События конференции"
 #, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
-
-#, fuzzy
-msgid "Start-Time"
-msgstr "Начавшиеся"
-
-#, fuzzy
-msgid "End-Time"
-msgstr "Время"
 
 #, fuzzy
 msgid "Conference Event Attendance Tracking"
@@ -13019,10 +13031,14 @@ msgstr "Кто-то зарегистрировался на %(site_name)s под
 msgid "Welcome"
 msgstr "Добро пожаловать"
 
-msgid "WECHANGE Account connected"
-msgstr "Учётная запись WECHANGE подключена"
+#, fuzzy
+#| msgid "Account connected"
+msgid "SSO Account connected"
+msgstr "Учётная запись подключена"
 
-msgid " This data we received from your WECHANGE account"
+#, fuzzy
+#| msgid " This data we received from your WECHANGE account"
+msgid " This data we received from your SSO account"
 msgstr " Данные, полученные нами от твоей учётной записи WECHANGE"
 
 msgid "Your Avatar and other settings from your profile were also copied."
@@ -13036,6 +13052,11 @@ msgstr "Ошибка входа через социальные сети"
 
 msgid "An error occurred while attempting to login via your social network account."
 msgstr "При попытке входа под твой учётной записью социальной сети возникла ошибка."
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Back to Login"
+msgstr "Вернуться к"
 
 msgid "Account Connections"
 msgstr "Подключения к учётной записи"
@@ -13163,9 +13184,6 @@ msgstr "Название организации"
 
 msgid "Organization type"
 msgstr "Тип организации"
-
-msgid "Logo"
-msgstr "Лого"
 
 msgid "Email Address"
 msgstr "Адрес электронной почты"
@@ -14750,7 +14768,68 @@ msgstr "Вы уверены, что хотите удалить этот про�
 msgid "Are you sure you want to delete this object?"
 msgstr "Вы уверены, что хотите удалить этот проект?"
 
-#, fuzzy, python-format
+#~ msgid ""
+#~ "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+#~ "\n"
+#~ "The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
+#~ "\n"
+#~ "If you wish to approve the user's join request click the following link:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "You're receiving this email because you are a portal-administrator.\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Пользователь \"%(user_name)s\" (%(user_mail)s) попросил(a) разрешение присоединиться к %(site_name)s.\n"
+#~ "\n"
+#~ "Этот пользователь не сможет войти, пока Вы (или другой администратор портала) не примете его заявку.\n"
+#~ "\n"
+#~ "Если Вы хотите принять его заявку, пройдите по следующей ссылке:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Нажмите сюда, если хотите отказать: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Вы получили это сообщение, так как Вы являетесь администратором портала.\n"
+#~ "\n"
+#~ "\n"
+#~ "Ваша команда %(site_name)s"
+
+#, fuzzy
+#~ msgid "Start user export"
+#~ msgstr "Начать импорт?"
+
+# ???
+#, fuzzy
+#~ msgid "User export finished"
+#~ msgstr "Поле сортировки"
+
+#, fuzzy
+#~ msgid "Download user exports from"
+#~ msgstr "Скачать данные пользователей"
+
+#, fuzzy
+#~ msgid "Download user export as"
+#~ msgstr "Скачать данные пользователей"
+
+#, fuzzy
+#~ msgid "Sorry, an error occurred during the user export. Please try again later."
+#~ msgstr "Произошла ошибка при отправке жалобы. Пожалуйста, попробуйте снова через несколько секунд."
+
+#, fuzzy
+#~ msgid "Delete export data and start new user export"
+#~ msgstr "Удалить загруженные данные и загрузить новый файл CSV"
+
+#~ msgid "WECHANGE Account connected"
+#~ msgstr "Учётная запись WECHANGE подключена"
+
+#, fuzzy
 #~ msgid "Start %(mytitle)s"
 #~ msgstr "Начать импорт?"
 
