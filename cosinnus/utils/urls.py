@@ -69,6 +69,10 @@ def group_aware_reverse(
             _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
         domain = get_domain_for_portal(_CosinnusPortal.get_current())
 
+    # view_name can potentially be returned as None for unregistered groups, return no url here
+    if not viewname:
+        return ''
+
     # NOTE: this used to be: reverse(viewname, urlconf, args, kwargs, prefix, current_app) in Django 1.8
     # we simply removed the prefix arg as it should still work
     return ('' if skip_domain else domain) + reverse(viewname, urlconf, args, kwargs, current_app)
@@ -169,15 +173,15 @@ def check_url_v3_everywhere_exempt(url_path, request):
     Returns False if not."""
     request_uri = request.build_absolute_uri()
     request_tokens = request_uri.split('/')
-    
+
     # always consider AJAX requests v3 exempt
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return True
-    
+
     # always exempt endless-pagination reloads (these are hard to filter for if not through their GET param)
     if request.GET.get(settings.EL_PAGINATION_PAGE_LABEL, None):
         return True
-    
+
     # do a special check for the login url if the '/o/authorize' request token is present
     # currently do not affect login requests within the oauth flow
     if (

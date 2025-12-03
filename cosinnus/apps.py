@@ -14,6 +14,8 @@ class CosinnusAppConfig(AppConfig):
 
         url_registry.ready()
 
+        # register system checks
+        import cosinnus.checks  # noqa: F401
         from cosinnus.conf import settings
 
         if settings.COSINNUS_USE_CELERY:

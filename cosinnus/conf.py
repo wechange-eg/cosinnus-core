@@ -1166,7 +1166,12 @@ class CosinnusConf(AppConf):
     # "logged in only" mode for the portal
     USER_EXTERNAL_USERS_FORBIDDEN = False
 
+    # if True, will show two separate "first name" and "last name" fields instead of the default "display name" field.
+    # required to be set to True to set `COSINNUS_USER_FORM_LAST_NAME_REQUIRED` to True
+    USER_FORM_SHOW_SEPARATE_LAST_NAME = False
+
     # whether the "last name" user form field is also required, just like "first name"
+    # requires COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME to be set to True
     USER_FORM_LAST_NAME_REQUIRED = False
 
     # if true, an additional signup form field will be present
@@ -1714,6 +1719,9 @@ class CosinnusConf(AppConf):
 
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
+
+    # enable the instant-user-delete action for django admin. should only be enabled on local or test portals!
+    DJANGO_ADMIN_ENABLE_INSTANT_USER_DELETE_ACTION = False
 
     # enable the Mitwirk-O-Mat integration groups settings view and API endpoints
     MITWIRKOMAT_INTEGRATION_ENABLED = False
