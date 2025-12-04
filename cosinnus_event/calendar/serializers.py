@@ -99,6 +99,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
             {
                 'group': self.context['group'],
                 'creator': self.context['request'].user,
+                'state': Event.STATE_SCHEDULED,
             }
         )
         instance = Event.objects.create(**validated_data)
