@@ -64,6 +64,6 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         if self.action == 'list':
             # apply query parameters
             queryset = queryset.filter(
-                from_date__gte=self.query_params['from_date'], to_date__lte=self.query_params['to_date']
+                from_date__date__gte=self.query_params['from_date'], to_date__date__lte=self.query_params['to_date']
             )
         return queryset
