@@ -39,7 +39,6 @@ class CalendarPublicEventListSerializer(serializers.ModelSerializer):
 class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers.ModelSerializer):
     """Complete Serializer for events in the calendar API."""
 
-    # TODO: prefetch media_tag when adding location & topics
     from_date = serializers.DateTimeField(required=True)
     to_date = serializers.DateTimeField(required=True)
     description = serializers.CharField(source='note')
