@@ -1,8 +1,10 @@
 from rest_framework import serializers
 
 from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializerMixin
+from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.permissions import get_user_token
 from cosinnus_event.models import Event
 
 
@@ -75,6 +77,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
             'string in `location`. If supplied, will only be saved if `location` is also supplied.'
         ),
     )
+    ical_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Event
@@ -89,7 +92,16 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
             'location',
             'location_lat',
             'location_lon',
+            'ical_url',
         )
+
+    def get_ical_url(self, obj):
+        ical_feed_url = obj.get_feed_url()
+        user = self.context['request'].user
+        if user.is_authenticated and not user.is_guest:
+            user_token = get_user_token(user, settings.COSINNUS_EVENT_TOKEN_EVENT_FEED)
+            ical_feed_url += f'?user={user.id}&token={user_token}'
+        return ical_feed_url
 
     def create(self, validated_data):
         # get nested media tag data
