@@ -4521,6 +4521,9 @@ msgstr ""
 msgid "Discussions"
 msgstr ""
 
+msgid "Display Name"
+msgstr ""
+
 msgid "Display contact form."
 msgstr ""
 
@@ -5601,6 +5604,9 @@ msgid "First Name"
 msgstr ""
 
 msgid "First name"
+msgstr ""
+
+msgid "First name / Display name"
 msgstr ""
 
 msgid "Firstname"

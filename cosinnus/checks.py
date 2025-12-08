@@ -1,6 +1,7 @@
-from django.core.checks import Warning, register
+from django.core.checks import Error, Warning, register
 from django.utils import translation
 
+from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.utils.group import get_cosinnus_group_model
 
@@ -36,3 +37,17 @@ def check_unsupported_group_types(app_configs, **kwargs):
                     )
                 )
     return warnings
+
+
+@register()
+def check_settings(app_configs, **kwargs):
+    """Check settings"""
+    errors = []
+    if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED and not settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+        errors.append(
+            Error(
+                'COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME must be enabled to enable '
+                'COSINNUS_USER_FORM_LAST_NAME_REQUIRED.'
+            )
+        )
+    return errors

@@ -1,15 +1,15 @@
-{% load i18n cosinnus_tags %}{% url 'cosinnus:user-approve' user_id=user.id as user_approve_url %}{% url 'cosinnus:user-deny' user_id=user.id as user_deny_url %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force user_mail=user.email %}User "{{ user_name }}" ({{ user_mail }}) has requested to join {{ site_name }}.
+{% load i18n cosinnus_tags %}{% url 'cosinnus:user-approve' user_id=user.id as user_approve_url %}{% url 'cosinnus:user-deny' user_id=user.id as user_deny_url %}{% block mail_header %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force user_mail=user.email %}User "{{ user_name }}" ({{ user_mail }}) has requested to join {{ site_name }}.
 
-The user won't be able to log in until you (or another Portal-Admin) approves of his request.
+The user won't be able to log in until you (or another Portal-Admin) approves of his request.{% endblocktrans %}{% endautoescape %}{% endblock mail_header %}
 
-If you wish to approve the user's join request click the following link:
-{{ domain_url }}{{ user_approve_url }}
+{% block mail_action_links %}{% trans "If you wish to approve the user's join request click the following link" %}: {{ domain_url }}{{ user_approve_url }}
+{% if SETTINGS.COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN %}{% for tagslugs in SETTINGS.COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN %}
+{% trans "Click here if you wish to approve the user's join request for an account with the role" %} **{{ tagslugs|get_managed_tag_names }}**: {{ domain_url }}{{ user_approve_url }}?add_managed_tag={{ tagslugs }}
+
+{% endfor %}{% endif %}
+{% trans "Click here to deny the request" %}: {{ domain_url }}{{ user_deny_url }}{% endblock mail_action_links %}
+
+{% block mail_footer %}{% autoescape off %}{% blocktrans %}You're receiving this email because you are a portal-administrator.
 
 
-Click here to deny the request: {{ domain_url }}{{ user_deny_url }}
-
-
-You're receiving this email because you are a portal-administrator.
-
-
-Your {{ site_name }} Team{% endblocktrans %}{% endautoescape %}
+Your {{ site_name }} Team{% endblocktrans %}{% endautoescape %}{% endblock mail_footer %}

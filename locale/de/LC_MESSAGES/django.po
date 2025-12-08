@@ -3769,6 +3769,15 @@ msgstr ""
 "kannst den Bericht später über die linke Seitennavigation dieser Seite "
 "aufrufen."
 
+#, python-format
+msgid ""
+"Click here if you wish to approve the user's join request for an account with "
+"the role"
+msgstr "Klicke hier um die Registrierung zu akzeptieren, mit der Rolle"
+
+msgid "Click here to deny the request"
+msgstr "Klicke hier um die Registrierung abzulehnen"
+
 msgid "Click here to receive an email with a verification link."
 msgstr "Klicke hier, um eine E-Mail mit einem Verifikationslink zu erhalten."
 
@@ -4868,6 +4877,9 @@ msgstr "Diskussion"
 
 msgid "Discussions"
 msgstr "Diskussionen"
+
+msgid "Display Name"
+msgstr "Anzeigename"
 
 msgid "Display contact form."
 msgstr "Kontaktformular anzeigen."
@@ -5977,6 +5989,9 @@ msgstr "Vorname"
 
 msgid "First name"
 msgstr "Vorname"
+
+msgid "First name / Display name"
+msgstr "Vorname / Anzeigename"
 
 msgid "Firstname"
 msgstr "Vorname"
@@ -8063,6 +8078,9 @@ msgstr ""
 "dir überlegen, sie in die Cloud zu verschieben. Das Verfahren ist einfach und "
 "du kannst deine Dateien hier behalten, bis du mit der Cloud-App zufrieden "
 "bist."
+
+msgid "If you wish to approve the user's join request click the following link"
+msgstr "Wenn du die Registrierung akzeptieren möchtest, klicke folgenden Link"
 
 msgid "If you would like to change your email address, you can do it here:"
 msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
@@ -12300,6 +12318,9 @@ msgstr ""
 "Entschuldige, du kannst dich nicht einloggen, weil dein Benutzerkonto "
 "gesperrt wurde. Bitte kontaktiere eine/n Administrator/in!"
 
+msgid "Sorry, your account may not access this page."
+msgstr "Entschuldige, dein Benutzerkonto darf auf diese Seite nicht zugreifen."
+
 msgid ""
 "Sorry, your profile could not be saved because there was an error while "
 "processing the avatar!"
@@ -13061,6 +13082,16 @@ msgstr "Die folgenden Projekte wurden in %s umgewandelt:"
 
 msgid "The following items were deactivated:"
 msgstr "Die folgenden Inhalte wurden deaktiviert:"
+
+msgid ""
+"The following roles could not be assigned to the account and need to be "
+"assigned manually:"
+msgstr ""
+"Die folgenden Rollen konnten nicht zugewiesen werden und müssen manuell "
+"zugewiesen werden:"
+
+msgid "The following roles were assigned to the account:"
+msgstr "Die folgenden Rollen wurden dem Benutzerkonto zugewiesen:"
 
 #, python-format
 msgid "The following users were accepted and added as members: %s"
@@ -14023,6 +14054,14 @@ msgstr ""
 "Das bedeutet, dass jeder im Internet darauf Zugriff hat und es lesen kann, "
 "und es möglicherweise in Suchmaschinenergebnissen erscheint!"
 
+msgid ""
+"This meeting is currently not running and you do not have permission to start "
+"it. Please wait and try again once a moderator has started the meeting."
+msgstr ""
+"Dieses Meeting läuft derzeit nicht und du hast keine Berechtigung, es zu "
+"starten. Bitte warte und versuche es erneut, sobald ein Moderator das Meeting "
+"gestartet hat."
+
 msgid "This message was sent in a conversation with: "
 msgstr "Diese Nachricht wurde in einer Unterhaltung gesendet mit: "
 
@@ -14885,6 +14924,19 @@ msgstr ""
 "Benutzer/in \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto "
 "muss noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. "
 "Wir senden dir eine E-Mail an \"%(email)s\" wenn es soweit ist."
+
+#, python-format
+msgid ""
+"User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+"\n"
+"The user won't be able to log in until you (or another Portal-Admin) approves "
+"of his request."
+msgstr ""
+"Benutzer/in \"%(user_name)s\" (%(user_mail)s) hat eine Registrierungsanfrage "
+"für %(site_name)s gestellt.\n"
+"\n"
+"Der/die Benutzer/in kann sich erst einloggen, wenn du oder ein/e andere/r "
+"Portal-Administrator/in die Anfrage akzeptiert."
 
 #, python-format
 msgid ""
@@ -16258,6 +16310,9 @@ msgstr ""
 "Du befindest dich jetzt in %(group_name)s. Du wurdest hierhin geleitet über "
 "ein Projekt oder eine Gruppe, die auf diesen Inhalt verweist."
 
+msgid "You are only seeing this profile because you are an admin."
+msgstr "Du siehst dieses Profil nur, weil du ein/e Administrator/in bist."
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are participating"
 msgstr "Du nimmst teil"
@@ -16717,6 +16772,9 @@ msgstr ""
 msgid "You do not have permission to access this stream."
 msgstr "Du hast keine Berechtigung diesen Aktivitäten-Feed anzuschauen."
 
+msgid "You do not have permission to enter this room."
+msgstr "Du hast keine Berechtigung, diesem Raum beizutreten."
+
 #, python-format
 msgid "You do not have permissions to delete \"%(title)s\"."
 msgstr "Sie haben keine Berechtigungen, \"%(title)s\". zu löschen."
@@ -17161,6 +17219,18 @@ msgid "You're currently not member of any project, group or organization."
 msgstr ""
 "Du bist derzeit kein Mitglied eines Projekts, einer Gruppe oder einer "
 "Organisation."
+
+#, python-format
+msgid ""
+"You're receiving this email because you are a portal-administrator.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Du hast diese E-Mail bekommen, weil du ein/e Portal-Administrator/in bist. \n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
 
 #, python-format
 msgid ""

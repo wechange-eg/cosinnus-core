@@ -108,21 +108,24 @@
                          {% endcomment %}
                         {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
                             {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
-                                <button type="button" class="btn btn-emphasized btn-autosize v-offset-s"
-                                        {% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
-                                        href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
+                                {# check if user is not a restricted account #}
+                                {% if not COSINNUS_MANAGED_TAGS_RESTRICT_CONTACTING__APPLIES %}
+                                    <button type="button" class="btn btn-emphasized btn-autosize v-offset-s"
+                                            {% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
+                                            href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
 
-                                    <ul class="media-list">
-                                        <li class="media">
-                                            <span class="pull-left">
-                                                <i class="fa fa-envelope"></i>
-                                            </span>
-                                            <div class="media-body">
-                                                {% trans "Send Message" %}
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </button>
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <span class="pull-left">
+                                                    <i class="fa fa-envelope"></i>
+                                                </span>
+                                                <div class="media-body">
+                                                    {% trans "Send Message" %}
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </button>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
 		            {% endif %}  {# endif user_is_blocked #}

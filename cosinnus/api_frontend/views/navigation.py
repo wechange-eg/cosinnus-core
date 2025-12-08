@@ -1,4 +1,5 @@
 import logging
+import re
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
@@ -53,7 +54,37 @@ UNREAD_ALERTS_USER_CACHE_KEY = 'cosinnus/core/portal/%d/user_unread_alerts/%s/'
 UNREAD_ALERTS_USER_CACHE_TIMEOUT = 55
 
 
-class SpacesView(MyGroupsClusteredMixin, APIView):
+class FilterBlacklistedItemsMixin(object):
+    """Mixin that adds filter capabilities for views returning `DashboardItem` and `MenuItem` for filtering the
+    returned items so that only those are kept whose URLs are not blacklisted for the current user.
+    Filters are currently only using `COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED` as blacklist check.
+    Call `filter_items_for_blacklisted_urls(items)` from within the view using this mixin to filter a list."""
+
+    blacklisted_user_urls = None
+
+    def filter_items_for_blacklisted_urls(self, items):
+        """Filter the returned `DashboardItem` and `MenuItem` items so that only those are kept whose URLs are not
+        blacklisted for the current user in `COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED`."""
+        # generate blacklisted urls for user, only once
+        if self.blacklisted_user_urls is None:
+            self.blacklisted_user_urls = []
+            if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED and self.request.user.is_authenticated:
+                user_managed_tag_slugs = self.request.user.cosinnus_profile.get_managed_tag_slugs()
+                for tagslug, restricted_urls in settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.items():
+                    if tagslug in user_managed_tag_slugs:
+                        self.blacklisted_user_urls.extend(restricted_urls)
+                self.blacklisted_user_urls = list(set(self.blacklisted_user_urls))
+        # filter items that have a URL, drop those that match a blacklisted URL
+        items = [
+            item
+            for item in items
+            if not item['url']
+            or not next(filter(lambda url: re.match(url, item['url']), self.blacklisted_user_urls), False)
+        ]
+        return items
+
+
+class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
     """
     An endpoint that provides the user spaces for the main navigation.
     Returns items (menu item list) and actions (menu item list) for the different spaces:
@@ -214,7 +245,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             ]
             personal_space = {
                 'header': _('My Personal Space'),
-                'items': personal_space_items,
+                'items': self.filter_items_for_blacklisted_urls(personal_space_items),
                 'actions': [],
             }
         spaces['personal'] = personal_space
@@ -243,8 +274,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         if group_space_items or group_space_actions:
             group_space = {
                 'header': _('My Groups and Projects'),
-                'items': group_space_items,
-                'actions': group_space_actions,
+                'items': self.filter_items_for_blacklisted_urls(group_space_items),
+                'actions': self.filter_items_for_blacklisted_urls(group_space_actions),
             }
         spaces['groups'] = group_space
 
@@ -328,8 +359,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             community_space = {
                 'header': settings.COSINNUS_V3_COMMUNITY_HEADER_CUSTOM_LABEL
                 or f'{settings.COSINNUS_BASE_PAGE_TITLE_TRANS} {_("Community")}',
-                'items': community_space_items,
-                'actions': community_space_actions,
+                'items': self.filter_items_for_blacklisted_urls(community_space_items),
+                'actions': self.filter_items_for_blacklisted_urls(community_space_actions),
             }
         spaces['community'] = community_space
 
@@ -360,8 +391,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             if conference_space_items or conference_space_actions:
                 conference_space = {
                     'header': _('My Conferences'),
-                    'items': conference_space_items,
-                    'actions': conference_space_actions,
+                    'items': self.filter_items_for_blacklisted_urls(conference_space_items),
+                    'actions': self.filter_items_for_blacklisted_urls(conference_space_actions),
                 }
             spaces['conference'] = conference_space
 
@@ -1338,7 +1369,11 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                     'portal_name': settings.COSINNUS_BASE_PAGE_TITLE_TRANS
                 }
                 about_item = MenuItem(
-                    about_label, settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-info-circle', id='About', is_external=True
+                    about_label,
+                    settings.COSINNUS_V3_MENU_HOME_LINK,
+                    icon='fa-info-circle',
+                    id='About',
+                    is_external=True,
                 )
                 profile_menu.append(about_item)
 
@@ -1352,7 +1387,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
         return Response(profile_menu)
 
 
-class MainNavigationView(LanguageMenuItemMixin, APIView):
+class MainNavigationView(FilterBlacklistedItemsMixin, LanguageMenuItemMixin, APIView):
     """
     An endpoint that provides menu items for main navigation.
     It contains pseudo menu items just to indicate the availability of a menu-item (e.g. for spaces and search) or
@@ -1500,7 +1535,11 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         home_image = '%s%s' % (current_portal.get_domain(), static(settings.COSINNUS_PORTAL_LOGO_NAVBAR_IMAGE_URL))
         if settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE:
             home_item = MenuItem(
-                _('Home'), settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE, icon='fa-home', image=home_image, id='Home'
+                _('Home'),
+                settings.COSINNUS_V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE,
+                icon='fa-home',
+                image=home_image,
+                id='Home',
             )
         elif settings.COSINNUS_V3_MENU_HOME_LINK:
             home_item = MenuItem(
@@ -1606,10 +1645,10 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             if settings.COSINNUS_USER_SIGNUP_ENABLED:
                 right_navigation_items.append(MenuItem(_('Register'), reverse('cosinnus:user-add'), id='Register'))
 
-        main_navigation_items['left'] = left_navigation_items
-        main_navigation_items['middle'] = middle_navigation_items
-        main_navigation_items['services'] = services_navigation_items
-        main_navigation_items['right'] = right_navigation_items
+        main_navigation_items['left'] = self.filter_items_for_blacklisted_urls(left_navigation_items)
+        main_navigation_items['middle'] = self.filter_items_for_blacklisted_urls(middle_navigation_items)
+        main_navigation_items['services'] = self.filter_items_for_blacklisted_urls(services_navigation_items)
+        main_navigation_items['right'] = self.filter_items_for_blacklisted_urls(right_navigation_items)
 
         # allow portals to add links via a dropin defined in `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`
         main_navigation_items = CosinnusNavigationPortalLinks().modifiy_main_navigation(

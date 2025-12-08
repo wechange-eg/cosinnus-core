@@ -20,6 +20,7 @@ from django.db.models import Q
 from django.http.response import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.template.loader import render_to_string
 from django.utils.encoding import force_str
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 
@@ -544,7 +545,7 @@ def print_settings(request):
     setts = ''
     obfuscated_settings = get_obfuscated_settings_strings()
     for key, val in obfuscated_settings.items():
-        setts += '%s = %s<br/>' % (key, val)
+        setts += '%s = %s<br/>' % (key, escape(val))
     if not request:
         return setts
     return HttpResponse(
