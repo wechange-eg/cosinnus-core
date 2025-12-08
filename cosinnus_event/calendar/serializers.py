@@ -38,6 +38,19 @@ class CalendarPublicEventListSerializer(serializers.ModelSerializer):
         )
 
 
+class CalendarPublicEventBBBEnabledField(serializers.BooleanField):
+    """Custom field that maps the video_conference_type field to bool for BBB meetings."""
+
+    def to_internal_value(self, data):
+        bool_value = super().to_internal_value(data)
+        if bool_value:
+            return Event.BBB_MEETING
+        return Event.NO_VIDEO_CONFERENCE
+
+    def to_representation(self, value):
+        return value == Event.BBB_MEETING
+
+
 class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers.ModelSerializer):
     """Complete Serializer for events in the calendar API."""
 
@@ -79,6 +92,11 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
     )
     ical_url = serializers.SerializerMethodField()
 
+    bbb_available = serializers.SerializerMethodField()
+    bbb_restricted = serializers.SerializerMethodField()
+    bbb_enabled = CalendarPublicEventBBBEnabledField(source='video_conference_type')
+    bbb_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Event
         fields = (
@@ -93,15 +111,11 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
             'location_lat',
             'location_lon',
             'ical_url',
+            'bbb_available',
+            'bbb_restricted',
+            'bbb_enabled',
+            'bbb_url',
         )
-
-    def get_ical_url(self, obj):
-        ical_feed_url = obj.get_feed_url()
-        user = self.context['request'].user
-        if user.is_authenticated and not user.is_guest:
-            user_token = get_user_token(user, settings.COSINNUS_EVENT_TOKEN_EVENT_FEED)
-            ical_feed_url += f'?user={user.id}&token={user_token}'
-        return ical_feed_url
 
     def create(self, validated_data):
         # get nested media tag data
@@ -133,3 +147,33 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
         if media_tag_data:
             self.save_media_tag(instance.media_tag, media_tag_data)
         return instance
+
+    def get_ical_url(self, obj):
+        ical_feed_url = obj.get_feed_url()
+        user = self.context['request'].user
+        if user.is_authenticated and not user.is_guest:
+            user_token = get_user_token(user, settings.COSINNUS_EVENT_TOKEN_EVENT_FEED)
+            ical_feed_url += f'?user={user.id}&token={user_token}'
+        return ical_feed_url
+
+    def get_bbb_available(self, obj):
+        return settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS
+
+    def get_bbb_restricted(self, obj):
+        group = self.context['group']
+        return not group.group_can_be_bbb_enabled
+
+    def get_bbb_url(self, obj):
+        bbb_room_url = None
+        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
+            bbb_room_url = obj.get_bbb_room_url()
+        return bbb_room_url
+
+    def validate_bbb_enabled(self, value):
+        if value == Event.BBB_MEETING:
+            if not settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
+                raise serializers.ValidationError('BBB is disabled in events.')
+            group = self.context['group']
+            if not group.group_can_be_bbb_enabled:
+                raise serializers.ValidationError('BBB creation is restricted for this group.')
+        return value
