@@ -27,6 +27,7 @@ from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.profile import PROFILE_DYNAMIC_FIELDS_CONTACTS, PROFILE_SETTINGS_AVATAR_COLOR
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.functions import is_number
+from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
 
 logger = logging.getLogger('cosinnus')
@@ -366,6 +367,14 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         attrs = super().validate(attrs)
         return attrs
 
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        if not settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME and instance.last_name:
+            # Combine first and last name to display name
+            ret['first_name'] = f'{ret["first_name"]} {ret["last_name"]}'
+            ret['last_name'] = ''
+        return ret
+
     def update(self, instance, validated_data):
         user_data = validated_data
         profile_data = validated_data.get('cosinnus_profile', {})
@@ -378,17 +387,21 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         # instance.email = user_data.get('email', instance.email)
         instance.first_name = user_data.get('first_name', instance.first_name)
         # if the first name is being replaced with something new,
-        # and the last name is not given, we set the last name to empty
+        # and the last name is not used, we set the last name to empty
         # (this is for portals who only have one display name)
-        if user_data.get('first_name', None):
+        if not settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME and user_data.get('first_name', None):
             last_name_fallback = ''
         else:
             last_name_fallback = instance.last_name
         instance.last_name = user_data.get('last_name', last_name_fallback)
         profile.description = profile_data.get('description', profile.description)
         # only update the userprofile visibility field if it is not locked
-        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is None:
+        locked_visibility = get_locked_profile_visibility_setting_for_user(user)
+        if locked_visibility is not None:
+            media_tag.visibility = locked_visibility
+        else:
             media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
+
         profile.avatar = profile_data.get('avatar', profile.avatar)
         avatar_color = profile_data.get('settings', {}).get(PROFILE_SETTINGS_AVATAR_COLOR, None)
         if avatar_color:

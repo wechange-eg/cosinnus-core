@@ -19,6 +19,25 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.7.0': {
+        'datetime': datetime(2025, 12, 10, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.7.0'),
+        'short_text': _('This update includes security updates and small bugfixes:'),
+        'full_text': [
+            _(
+                '- Fixed an inconsistency between the profile name fields on the profile edit page and the '
+                'profile setup wizard.\n'
+            )
+            if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
+            else '',
+            _(
+                '- (RocketChat) fixed an issue where the email notification setting in RocketChat was sometimes '
+                'inconsistent with the one selected in the profile notification settings.\n'
+                '- Upgraded software packages with current security fixes.\n'
+                '- Further minor bugfixes and stability improvements have been made.\n'
+            ),
+        ],
+    },
     '2.6.0': {
         'datetime': datetime(2025, 10, 13, tzinfo=pytz.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.6.0'),

@@ -592,6 +592,10 @@ class CosinnusConf(AppConf):
 
     """ *******  SSO OAUTH Settings  ******* """
 
+    # a lambda function that can be used as additional per-portal check to additionally restrict user oauth access
+    # callable func of signature (user, oauth_view), see `check_user_can_use_oauth()`
+    OAUTH_ADDITIONAL_USER_ACCESS_CHECK = None
+
     # setting to be overriden by each portal
     # if True, single-sign-on only mode is active:
     #     * manual login/register is disabled. logout is enabled
@@ -634,6 +638,20 @@ class CosinnusConf(AppConf):
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
     # GeoJSON can be generated using http://opendatalab.de/projects/geojson-utilities/
+    # geojson config format:
+    #   'geojson_regions': [
+    #       {
+    #           'geojson_region': None,  # path to geojson file
+    #           'geojson_style': {
+    #               'weight': 1,  # stroke-width
+    #               'color': '#DEFINEME',  # stroke-color
+    #               'fillColor': '#DEFINEME',
+    #               'fillOpacity': 0.2,
+    #             }
+    #       },
+    #       ...
+    #   ],
+    # old-style format ('geojson_region' and 'geojson_style' without array) is still supported
     MAP_OPTIONS = {
         'default_coordinates': {
             'ne_lat': 55.32,  # north,
@@ -641,7 +659,9 @@ class CosinnusConf(AppConf):
             'sw_lat': 47.58,  # south,
             'sw_lon': 5.01,  # west,
         },
-        'geojson_region': None,
+        'geojson_regions': None,
+        'geojson_region': None,  # deprecated
+        'geojson_style': None,  # deprecated
         'filter_panel_default_visible': False,  # whether the dropdown filter panel should be visible on load
         'ignore_location_default_activated': False,  # whether the "In map area" button should be off on load
         'exchange_default_activated': True,  # whether the "also show external contents" button should be off on load
@@ -1146,7 +1166,12 @@ class CosinnusConf(AppConf):
     # "logged in only" mode for the portal
     USER_EXTERNAL_USERS_FORBIDDEN = False
 
+    # if True, will show two separate "first name" and "last name" fields instead of the default "display name" field.
+    # required to be set to True to set `COSINNUS_USER_FORM_LAST_NAME_REQUIRED` to True
+    USER_FORM_SHOW_SEPARATE_LAST_NAME = False
+
     # whether the "last name" user form field is also required, just like "first name"
+    # requires COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME to be set to True
     USER_FORM_LAST_NAME_REQUIRED = False
 
     # if true, an additional signup form field will be present
@@ -1190,6 +1215,7 @@ class CosinnusConf(AppConf):
 
     # if set to any value other than None, the userprofile visibility field will be disabled
     # and locked to the value set here
+    # for values, see `BaseTagObject.VISIBILITY_CHOICES`
     USERPROFILE_VISIBILITY_SETTINGS_LOCKED = None
 
     # extra fields for the user profile.
@@ -1371,8 +1397,10 @@ class CosinnusConf(AppConf):
     OAUTH_SERVER_BASEURL = None
     OAUTH_SERVER_PROVIDER_NAME = 'wechange'
 
-    # Enable connecting / disconnecting allauch social-accounts with portal accounts
+    # Enable connecting / disconnecting allauth social-accounts with portal accounts
     SSO_ENABLE_CONNECTING_ACCOUNT = False
+    # Send SSO welcome mails informing the user about the SSO signup
+    SSO_SEND_WELCOME_MAIL = False
 
     # whether SDGs should be shown in group/project forms and detail templates
     ENABLE_SDGS = False
@@ -1467,6 +1495,39 @@ class CosinnusConf(AppConf):
     # managed tag filters will only be shown on the map for these
     # map content types
     MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
+
+    # A mapping of managed tag slugs to lists or URLs that are blocked
+    # for all users who are assigned that managed tag.
+    # e.g.: `{'restrictedtagslug': ['/url1', '/url2', ...], ...}`
+    # used by `ManagedTagBlockURLsMiddleware`
+    # to use this, define some tags and URLs in this setting and
+    # add `'cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware',`
+    # to django's `MIDDLEWARE` setting
+    MANAGED_TAGS_RESTRICT_URLS_BLOCKED = {}
+
+    # a list of managed tag slugs, whose users may not contact anyone or be contacted directly
+    MANAGED_TAGS_RESTRICT_CONTACTING = []
+
+    # a list of managed tag slugs, whose users may not start BBB rooms, but rather only join running rooms
+    MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS = []
+
+    # akin to `USERPROFILE_VISIBILITY_SETTINGS_LOCKED`,
+    # per managed_tag slug, the userprofile visibility field will be disabled and always set to the value
+    # example:  `{'restricted': 0}`
+    # for values, see `BaseTagObject.VISIBILITY_CHOICES`
+    MANAGED_TAGS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED = {}
+    # COSINNUS_MANAGED_TAGS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+
+    # If managed tags are enabled and this is `True`, when sending out the admin-approval email for new signups,
+    # only send it to admins that have a common managed tag with the user
+    MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY = False
+
+    # if managed tags are enabled, for each entry in this list, add an additional
+    # approval link in the admin-approval email for new signups that will accept the user
+    # and automatically assign the managed tags to the accepted user from that comma-seperated entry.
+    # only works if the soft option `CosinnusPortal.users_need_activation` is activated.
+    # example: ['restrictedtagslug1,tag2', 'tag3']
+    MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN = []
 
     # if True, enables `tag` function in the group/project settins, files, todos, events, etc.
     TAGS_ENABLED = True
@@ -1658,6 +1719,9 @@ class CosinnusConf(AppConf):
 
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
+
+    # enable the instant-user-delete action for django admin. should only be enabled on local or test portals!
+    DJANGO_ADMIN_ENABLE_INSTANT_USER_DELETE_ACTION = False
 
     # enable the Mitwirk-O-Mat integration groups settings view and API endpoints
     MITWIRKOMAT_INTEGRATION_ENABLED = False

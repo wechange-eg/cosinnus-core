@@ -6,12 +6,12 @@
 {% block main_page %}
 
 {% captureas title %}
-{% blocktrans %}WECHANGE Account connected{% endblocktrans %}
+{% blocktrans %}SSO Account connected{% endblocktrans %}
 {% endcaptureas %}
 
 {% captureas label %}
 <p class="no-horizontal-padding no-vertical-padding large-space">
-	{% blocktrans %} This data we received from your WECHANGE account{% endblocktrans %}:
+	{% blocktrans %} This data we received from your SSO account{% endblocktrans %}:
 </p>
 
 <div class="large-space">
@@ -34,7 +34,7 @@
 {% endcaptureas %}
 
 {% captureas custom_button_html %}
-<button class="pull-right btn btn-emphasized btn-autosize" {% if SETTINGS.COSINNUS_SHOW_WELCOME_SETTINGS_PAGE %}href="{% url 'cosinnus:welcome-settings' %}" {% else %}href="{% url 'cosinnus:user-dashboard' %}" {% endif %}>
+<button class="pull-right btn btn-emphasized btn-autosize" {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}href="{% url 'cosinnus:v3-frontend-setup-profile' %}" {% elif SETTINGS.COSINNUS_SHOW_WELCOME_SETTINGS_PAGE %}href="{% url 'cosinnus:welcome-settings' %}" {% else %}href="{% url 'cosinnus:user-dashboard' %}" {% endif %}>
     <ul class="media-list">
         <li class="media">
             <span class="pull-left">

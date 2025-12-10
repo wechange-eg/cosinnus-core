@@ -14,6 +14,7 @@ from cosinnus.conf import settings
 from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER
 
 from ...models import MEMBERSHIP_MEMBER, CosinnusGroup, CosinnusGroupMembership, get_user_profile_model
+from ...utils.permissions import check_user_can_use_oauth
 from ..serializers.user import UserCreateUpdateSerializer, UserSerializer
 
 User = get_user_model()
@@ -92,9 +93,11 @@ class OAuthUserView(APIView):
     Used by Oauth2 authentication (Rocket.Chat) to retrieve user details
     """
 
+    OAUTH_VIEW_IDENTIFIER = 'cosinnus_rocketchat'
+
     def get(self, request):
         # prevent access for guest users
-        if request.user.is_authenticated and not request.user.is_guest:
+        if check_user_can_use_oauth(request.user, oauth_view_class=OAuthUserView):
             user = request.user
             avatar_url = (
                 user.cosinnus_profile.get_avatar_thumbnail_url(size=(200, 200)) if user.cosinnus_profile.avatar else ''
@@ -150,7 +153,7 @@ class OAuthUserView(APIView):
 @protected_resource(scopes=['read'])
 def oauth_user(request):
     # prevent access for guest users
-    if not request.resource_owner.is_authenticated or request.resource_owner.is_guest:
+    if not check_user_can_use_oauth(request.user, oauth_view_class=OAuthUserView):
         return HttpResponseForbidden()
     return HttpResponse(
         json.dumps(
@@ -169,7 +172,7 @@ def oauth_user(request):
 @protected_resource(scopes=['read'])
 def oauth_profile(request):
     # prevent access for guest users
-    if not request.resource_owner.is_authenticated or request.user.is_guest:
+    if not check_user_can_use_oauth(request.user, oauth_view_class=OAuthUserView):
         return HttpResponseForbidden()
     profile = request.resource_owner.cosinnus_profile
     media_tag_fields = [

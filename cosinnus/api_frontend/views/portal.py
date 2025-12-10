@@ -25,6 +25,7 @@ from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIEL
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
 from cosinnus.utils.functions import clean_single_line_text, is_number, update_dict_recursive
+from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.views.common import SwitchLanguageView
 
 
@@ -556,8 +557,18 @@ class PortalSettingsView(APIView):
             settings_dict = self.build_settings_dict(request)
             timeout = self.CACHE_TIMEOUT_DEV if settings.COSINNUS_IS_TEST_SERVER else self.CACHE_TIMEOUT
             cache.set(self.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % current_language, settings_dict, timeout)
+
         # update any settings delivered from `COSINNUS_V3_PORTAL_SETTINGS` recursively, uncached
         update_dict_recursive(settings_dict, settings.COSINNUS_V3_PORTAL_SETTINGS, extend_lists=True)
+        # more uncached settings values (or cached deeper within)
+        settings_dict.update(
+            {
+                'userProfileVisibilityLocked': bool(
+                    get_locked_profile_visibility_setting_for_user(request.user) is not None
+                ),
+            }
+        )
+
         response = Response(settings_dict)
         # set language cookie if not present
         if settings.LANGUAGE_COOKIE_NAME not in request.COOKIES:
@@ -592,9 +603,9 @@ class PortalSettingsView(APIView):
             'signupCredentialsScreenMessage': None,
             'usersNeedActivation': portal.users_need_activation,
             'currentLanguage': get_language(),
-            'userProfileVisibilityLocked': bool(settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None),
             'cosinnusIsSSOLoginEnabled': settings.COSINNUS_IS_OAUTH_CLIENT,
             'cosinnusSSOProvider': settings.COSINNUS_V3_SSO_PROVIDER,
+            'cosinnusV3FrontendEverywhereEnabled': settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED,
             # 'setup': {'additionalSteps': ... }},  # set manually
             # 'theme': {...},  # set manually. example:
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
@@ -627,15 +638,15 @@ class PortalSettingsView(APIView):
         }
         """
         field_overrides = {}
-        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
-            # for last-name required portals, we make the last name field required and set its label
+        if settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+            # for portals with last name
             defined_name_fields = {
                 'last_name': {
                     'name': 'last_name',
                     'is_multi_language': False,
                     'is_multi_language_sub_field': False,
                     'in_signup': True,
-                    'required': True,
+                    'required': settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED,
                     'multiple': False,
                     'type': 'text',
                     'label': _('Last name'),

@@ -4,6 +4,14 @@
 
 {% block head_title %}{% trans "Login Cancelled" %}{% endblock %}
 
+{% block jshead %}
+    {% comment %} This page deals with authentication data and loads only the most necessary vendor scripts! {% endcomment %}
+{% endblock jshead %}
+
+{% block cosinnus_navbar %}
+    {% comment %} Navbar is disabled for SSO screens {% endcomment %}
+{% endblock cosinnus_navbar %}
+
 {% block content %}
 
 <h1>{% trans "Login Cancelled" %}</h1>

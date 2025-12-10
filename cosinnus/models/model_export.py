@@ -210,10 +210,21 @@ class UserExportProcessorBase(ModelExportProcessor):
 
     CSV_EXPORT_COLUMNS_TO_FIELD_MAP = {
         'id': 'id',
-        'first_name': 'first_name',
-        'last_name': 'last_name',
         'email': 'email',
     }
+    if settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+        CSV_EXPORT_COLUMNS_TO_FIELD_MAP.update(
+            {
+                'first_name': 'first_name',
+                'last_name': 'last_name',
+            }
+        )
+    else:
+        CSV_EXPORT_COLUMNS_TO_FIELD_MAP.update(
+            {
+                'display_name': 'first_name',
+            }
+        )
 
     def get_model_queryset(self) -> QuerySet:
         """User queryset used for the user export."""

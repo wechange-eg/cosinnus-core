@@ -580,3 +580,22 @@ def create_guest_user_and_login(guest_access, username, request=None):
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         login(request, user)
     return True
+
+
+def get_locked_profile_visibility_setting_for_user(user):
+    """Returns for a given user, the profile visibility setting they are locked to.
+    This can be portal-wide by `USERPROFILE_VISIBILITY_SETTINGS_LOCKED` being set or
+    user-specific by `COSINNUS_MANAGED_TAGS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED` being set.
+    Returns `None` if no locks apply."""
+
+    if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+        return settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+    if not user or not user.is_authenticated:
+        return None
+    elif settings.COSINNUS_MANAGED_TAGS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED:
+        # check if visibility lock is managed-tag-restriction-specific
+        user_tag_slugs = user.cosinnus_profile.get_managed_tag_slugs()
+        for tagslug, visibility_value in settings.COSINNUS_MANAGED_TAGS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED.items():
+            if tagslug in user_tag_slugs:
+                return visibility_value
+    return None

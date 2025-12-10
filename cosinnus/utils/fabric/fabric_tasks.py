@@ -68,7 +68,7 @@ def hotdeploy(_ctx):
     check_confirmation()
     _pull_and_update(_ctx)
     migrate(_ctx)
-    restart(_ctx)
+    restart(_ctx, skip_check=True)
     compilewebpack(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
@@ -136,7 +136,7 @@ def enablegitremoteoncore(_ctx):
         with c.cd(f'{env.cosinnus_src_path}'):
             c.run('git config --local --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*')
             c.run('git fetch')
-            c.run(f'git checkout {env.pull_branch}')
+            c.run(f'git checkout {env.cosinnus_pull_branch}')
             c.run('git pull')
 
 
@@ -178,7 +178,7 @@ def fulldeploy(_ctx):
         c.run(f'mv poetry.lock ~/{foldername}/movedpoetry.lock')
     _pull_and_update(_ctx, fresh_install=True)
     migrate(_ctx)
-    restart(_ctx)
+    restart(_ctx, skip_check=True)
     compilewebpack(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
@@ -204,10 +204,13 @@ def check_confirmation():
 
 
 @task
-def restart(_ctx):
+def restart(_ctx, skip_check=False):
     """Restart the django service"""
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
+    if not skip_check:
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run(f'{env.path}/manage.py check')
     c.run(env.reload_command)
     clearportalcache(_ctx)
 
@@ -286,6 +289,7 @@ def migrate(_ctx):
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
     with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+        c.run(f'{env.path}/manage.py check')
         c.run(f'{env.path}/manage.py migrate --fake-initial')
 
 

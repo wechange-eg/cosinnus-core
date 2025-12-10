@@ -482,7 +482,9 @@ def cosinnus_menu_v2(context, template='cosinnus/v2/navbar/navbar.html', request
         context['groups_invited_count'] = len(groups_invited)
 
         # conferences
-        my_conferences = CosinnusConference.objects.get_for_user(request.user)
+        my_conferences = []
+        if settings.COSINNUS_CONFERENCES_ENABLED:
+            my_conferences = CosinnusConference.objects.get_for_user(request.user)
         context['my_conference_groups'] = my_conferences
         context['my_conferences_json_encoded'] = _escape_quotes(
             _json.dumps([DashboardItem(conference) for conference in my_conferences])
@@ -802,7 +804,13 @@ def group_aware_url_name(view_name, group_or_group_slug, portal_id=None):
             )  # 1 year cache
 
     # retrieve that type's prefix and add to URL viewname
-    prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
+    try:
+        prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
+    except ImproperlyConfigured:
+        # view_name can potentially be returned as None for unregistered groups, return None here as generating URLs
+        # is not critical enough for a full server error
+        return None
+
     if ':' in view_name:
         view_name = (':%s' % prefix).join(view_name.rsplit(':', 1))
     else:
@@ -915,6 +923,10 @@ class GroupURLNode(URLNode):
                     % (str(group_arg), view_name, group_slug, portal_id)
                 )
                 raise
+
+            # view_name can potentially be returned as None for unregistered groups, return no url here
+            if not view_name:
+                return ''
 
             self.view_name.var = view_name
             self.view_name.token = "'%s'" % view_name
@@ -1403,6 +1415,33 @@ def managed_tags_for_user(user):
 
         managed_tags = CosinnusManagedTag.objects.filter(slug__in=assignments).distinct()
         return managed_tags
+
+
+@register.filter
+def user_has_managed_tags(user, tag_or_tags):
+    """
+    Template filter that returns True if a user is assigned *all* managed tags provided.
+    @param tag_or_tags: str or list of managed tags.
+    """
+    if not user.is_authenticated:
+        return False
+    user_managed_tags = user.cosinnus_profile.get_managed_tag_slugs()
+    if not tag_or_tags:
+        return True
+    if isinstance(tag_or_tags, six.string_types):
+        tag_or_tags = [tag_or_tags]
+    return all([tag in user_managed_tags for tag in tag_or_tags])
+
+
+@register.filter
+def get_managed_tag_names(commaseperated_tag_slugs):
+    """
+    Template filter that returns the managed tag names for all supplied tag slug(s)
+    """
+    if not commaseperated_tag_slugs or not isinstance(commaseperated_tag_slugs, str):
+        return ''
+    tag_names = CosinnusManagedTag.objects.get_cached(commaseperated_tag_slugs.split(','))
+    return '. '.join([tag.name for tag in tag_names])
 
 
 @register.simple_tag()
