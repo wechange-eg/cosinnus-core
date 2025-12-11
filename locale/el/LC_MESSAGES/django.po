@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:11+0200\n"
+"POT-Creation-Date: 2025-12-11 14:33+0100\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,6 +122,14 @@ msgstr "Μετακινήστε τις επιλεγμένες ομάδες και
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr "Μετακινήστε τις επιλεγμένες ομάδες και τα υποέργα τους στην τρέχουσα πύλη και αποστείλατε μήνυμα στα μέλη"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Ομάδα"
+
+#, fuzzy
+msgid "View on site"
+msgstr "Προβολή στη σελίδα"
+
 msgid "ToS Accepted"
 msgstr "Το ToS Έγινε Δεκτό"
 
@@ -166,6 +174,11 @@ msgstr "Πληροφορίες Επικοινωνίας"
 msgid "Permissions"
 msgstr "Άδειες"
 
+#, fuzzy
+#| msgid "Display name"
+msgid "First name / Display name"
+msgstr "Εμφανιζόμενο Όνομα"
+
 msgid "Has Logged In"
 msgstr "Έχει Συνδεθεί"
 
@@ -177,6 +190,13 @@ msgid "%(count)d User account(s) were deactivated successfully. They will be del
 msgstr ""
 
 msgid "DEACTIVATE user accounts and DELETE them after 30 days"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(count)d User account(s) were deleted successfully."
+msgstr "%d Χρήστες απενεργοποιήθηκαν με επιτυχία."
+
+msgid "(DEBUG ONLY) DELETE user instantly (TAKE CARE!)"
 msgstr ""
 
 #, fuzzy, python-format
@@ -478,13 +498,13 @@ msgstr "Φόρουμ"
 msgid "Discover"
 msgstr "Ανακαλύψτε"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Χρήστης"
+#, fuzzy
+msgid "User Export"
+msgstr "Εισαγωγή Χρήστη"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Ομάδα"
+#, fuzzy
+msgid "Group Export"
+msgstr "Εισαγωγή Χρήστη"
 
 msgid "Overnight stay required"
 msgstr "Απαιτείται διανυκτέρευση"
@@ -596,6 +616,11 @@ msgstr ""
 #, python-format
 msgid "Existing Todos can be migrated by the %(group_type)s admins."
 msgstr ""
+
+#, fuzzy
+#| msgid "Please log in to access this page."
+msgid "Sorry, your account may not access this page."
+msgstr "Παρακαλούμε συνδεθείτε για να εισέλθετε σε αυτή τη σελίδα."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Έχετε αυτόματα αποσυνδεθεί εφόσον ήσασταν ανενεργός για κάποιο διάστημα."
@@ -1222,6 +1247,14 @@ msgid "pin to enter for telephone participants"
 msgstr "κωδικός pin για να εισάγουν οι συμμετέχοντες μέσω τηλεφώνου"
 
 msgid "Last create-call parameters"
+msgstr ""
+
+#, fuzzy
+#| msgid "You do not have permission to access this stream."
+msgid "You do not have permission to enter this room."
+msgstr "Δεν έχετε άδεια για να αποκτήσετε πρόσβαση σε αυτή τη ζωντανή μετάδοση."
+
+msgid "This meeting is currently not running and you do not have permission to start it. Please wait and try again once a moderator has started the meeting."
 msgstr ""
 
 #, python-format
@@ -2161,6 +2194,10 @@ msgstr ""
 msgid "ignored"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Χρήστης"
+
 #, fuzzy
 msgid "Match subject"
 msgstr "Θέμα"
@@ -2723,10 +2760,6 @@ msgstr ""
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr ""
 
-#, fuzzy
-msgid "View on site"
-msgstr "Προβολή στη σελίδα"
-
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Εισάγετε τα 4 κεφαλαία γράμματα στην κωδικοποιημένη εικόνα"
 
@@ -2932,10 +2965,6 @@ msgstr "Διαχείριση Χρήστη"
 msgid "User Import"
 msgstr "Εισαγωγή Χρήστη"
 
-#, fuzzy
-msgid "User Export"
-msgstr "Εισαγωγή Χρήστη"
-
 msgid "User Profile Field Choices"
 msgstr "Επιλογές Πεδίου Προφίλ Χρήστη"
 
@@ -3057,6 +3086,11 @@ msgstr[1] ""
 
 msgid "clear search"
 msgstr "εκκαθάριση αναζήτησης"
+
+#, fuzzy
+#| msgid "Display name"
+msgid "Display Name"
+msgstr "Εμφανιζόμενο Όνομα"
 
 msgid "Last Login"
 msgstr "Τελευταία Σύνδεση"
@@ -4449,6 +4483,7 @@ msgstr ""
 msgid "From"
 msgstr "Από"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Start date."
 msgstr "Ημερομηνία έναρξης."
 
@@ -4456,6 +4491,7 @@ msgstr "Ημερομηνία έναρξης."
 msgid "Until"
 msgstr "Έως"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "End date."
 msgstr "Ημερομηνία λήξης."
 
@@ -5902,35 +5938,28 @@ msgstr "Ο/η %(sender_name)s θέλει να συμμετάσχει σε %(team
 msgid ""
 "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
 "\n"
-"The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
-"\n"
-"If you wish to approve the user's join request click the following link:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
+"The user won't be able to log in until you (or another Portal-Admin) approves of his request."
+msgstr ""
+
+msgid "If you wish to approve the user's join request click the following link"
+msgstr ""
+
+msgid "Click here if you wish to approve the user's join request for an account with the role"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to decline the request?"
+msgid "Click here to deny the request"
+msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το αίτημα;"
+
+#, fuzzy, python-format
+#| msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
+msgid ""
 "You're receiving this email because you are a portal-administrator.\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
-msgstr ""
-"Ο χρήστης \"%(user_name)s\" (%(user_mail)s) έχει ζητήσεις να συμμετάσχει σε %(site_name)s.\n"
-"\n"
-"Ο χρήστης δε θα μπορεί να συνδεθεί μέχρι εσείς (ή άλλος Διαχειριστής Πύλης) να εγκρίνετε το αίτημά του.\n"
-"\n"
-"Εάν θέλετε να εγκρίνετε το αίτημα συμμετοχής του χρήστη κάντε κλικ στον παρακάτω σύνδεσμο:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Κάντε κλικ εδώ για να αρνηθείτε το αίτημα: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
-"Λαμβάνετε αυτό το email επειδή είστε διαχειριστής της πύλης.\n"
-"\n"
-"\n"
-"Η Ομάδα %(site_name)s"
+msgstr "Λαμβάνετε αυτό το email επειδή ζητήσατε επαναφορά κωδικού πρόσβασης για τον λογαριασμό χρήστη σας σε %(site_name)s."
 
 #, python-format
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
@@ -6556,11 +6585,11 @@ msgstr "Διεύθυνση email"
 msgid "Repeat Password"
 msgstr "Επανάληψη Κωδικού Πρόσβασης"
 
-msgid "This name will be displayed to other users on the site"
-msgstr "Αυτό το όνομα θα εμφανίζεται σε άλλους χρήστες στον ιστότοπο"
-
 msgid "First name"
 msgstr "Όνομα"
+
+msgid "This name will be displayed to other users on the site"
+msgstr "Αυτό το όνομα θα εμφανίζεται σε άλλους χρήστες στον ιστότοπο"
 
 msgid "You can supply your last name to be displayed as well"
 msgstr "Μπορείτε να εισάγετε το επώνυμό σας έτσι ώστε να εμφανίζεται επίσης"
@@ -6801,6 +6830,16 @@ msgstr "Αναζήτηση για Ονόματα, Θέματα και Τόπου
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names and Topics..."
 msgstr "Αναζήτηση για Ονόματα και Θέματα..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Start-Time"
+msgstr "Με αστερίσκο"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "End-Time"
+msgstr "Ώρα"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
@@ -7826,42 +7865,6 @@ msgstr "Ένας χρήστης μπορεί να απορρίψει μια αν
 msgid "There are no announcements yet."
 msgstr "Δεν υπάρχουν ακόμη ανακοινώσεις."
 
-#, fuzzy
-msgid "Start user export"
-msgstr "Να ξεκινήσει η Εισαγωγή;"
-
-msgid "You can start a user export. As soon as the export is finished it will be available here."
-msgstr ""
-
-msgid "A user export is in progress. As soon as the export is finished it will be available here."
-msgstr ""
-
-#, fuzzy
-msgid "User export finished"
-msgstr "Η εισαγωγή ολοκληρώθηκε"
-
-msgid "You can download the latest user export data."
-msgstr ""
-
-#, fuzzy
-msgid "Download user exports from"
-msgstr "Λήψη των όρων"
-
-#, fuzzy
-msgid "Download user export as"
-msgstr "Λήψη των όρων"
-
-#, fuzzy
-msgid "Sorry, an error occurred during the user export. Please try again later."
-msgstr "Υπήρξε σφάλμα κατά την προσπάθειά σας να υποβάλλετε την έκθεσή σας. Παρακαλούμε προσπαθήστε ξανά σε ένα λεπτό."
-
-#, fuzzy
-msgid "Delete export data and start new user export"
-msgstr "Διαγραφή ανεβασμένων δεδομένων και φόρτωση ενός νέου αρχείου CSV"
-
-msgid "Retry user export"
-msgstr ""
-
 msgid "User Import Archive"
 msgstr "Αρχείο Εισαγωγής Χρήστη"
 
@@ -8207,6 +8210,10 @@ msgstr "Δημιουργήσατε μια ιδέα"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an idea"
 msgstr "δημιούργησε μια ιδέα"
+
+#, fuzzy
+msgid "Logo"
+msgstr "Αποσύνδεση"
 
 msgid "Menu"
 msgstr "Μενού"
@@ -8852,6 +8859,18 @@ msgstr ""
 
 #, python-brace-format
 msgid "Version {version_number} released"
+msgstr ""
+
+msgid "This update includes security updates and small bugfixes:"
+msgstr ""
+
+msgid "- Fixed an inconsistency between the profile name fields on the profile edit page and the profile setup wizard.\n"
+msgstr ""
+
+msgid ""
+"- (RocketChat) fixed an issue where the email notification setting in RocketChat was sometimes inconsistent with the one selected in the profile notification settings.\n"
+"- Upgraded software packages with current security fixes.\n"
+"- Further minor bugfixes and stability improvements have been made.\n"
 msgstr ""
 
 msgid "This update includes several features and bugfixes:"
@@ -9505,6 +9524,11 @@ msgstr "Δεν βρέθηκε %(verbose_name)s που να ταιριάζει μ
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "Δεν υπάρχει περιγραφή για αυτό το έργο ακόμη."
 
+#, fuzzy
+#| msgid "You are seeing this alert because you created this content."
+msgid "You are only seeing this profile because you are an admin."
+msgstr "Βλέπετε αυτή την προειδοποίηση επειδή δημιουργήσατε αυτό το περιεχόμενο."
+
 #, python-format
 msgid "User \"%s\" is a guest user and has no profile."
 msgstr ""
@@ -9688,6 +9712,14 @@ msgstr "Ο λογαριασμός χρήστη έχει ήδη γίνει δεκ
 #, python-format
 msgid "Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site."
 msgstr "Ευχαριστούμε που εγκρίνετε τον χρήστη %(username)s (%(email)s)! Ένα email εισαγωγής εστάλη σε αυτόν και μπορεί τώρα να συνδεθεί με τον ιστότοπο."
+
+#, fuzzy
+#| msgid "The following Users were added to this portal:"
+msgid "The following roles were assigned to the account:"
+msgstr "Οι παρακάτω Χρήστες προστέθηκαν σε αυτή την πύλη:"
+
+msgid "The following roles could not be assigned to the account and need to be assigned manually:"
+msgstr ""
 
 #, python-format
 msgid "The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface."
@@ -10886,14 +10918,6 @@ msgstr "Εκδηλώσεις Σύσκεψης"
 #, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
-
-#, fuzzy
-msgid "Start-Time"
-msgstr "Με αστερίσκο"
-
-#, fuzzy
-msgid "End-Time"
-msgstr "Ώρα"
 
 #, fuzzy
 msgid "Conference Event Attendance Tracking"
@@ -13103,10 +13127,11 @@ msgstr ""
 msgid "Welcome"
 msgstr "Καλώς ήρθατε"
 
-msgid "WECHANGE Account connected"
-msgstr ""
+#, fuzzy
+msgid "SSO Account connected"
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε"
 
-msgid " This data we received from your WECHANGE account"
+msgid " This data we received from your SSO account"
 msgstr ""
 
 msgid "Your Avatar and other settings from your profile were also copied."
@@ -13121,6 +13146,11 @@ msgstr ""
 
 msgid "An error occurred while attempting to login via your social network account."
 msgstr ""
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Back to Login"
+msgstr "Πίσω σε"
 
 #, fuzzy
 msgid "Account Connections"
@@ -13270,10 +13300,6 @@ msgstr "Αφαίρεση οργανισμού"
 #, fuzzy
 msgid "Organization type"
 msgstr "Οργανισμός"
-
-#, fuzzy
-msgid "Logo"
-msgstr "Αποσύνδεση"
 
 #, fuzzy
 msgid "Email Address"
@@ -14889,7 +14915,64 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 msgid "Are you sure you want to delete this object?"
 msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την ομάδα;"
 
-#, fuzzy, python-format
+#~ msgid ""
+#~ "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+#~ "\n"
+#~ "The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
+#~ "\n"
+#~ "If you wish to approve the user's join request click the following link:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "You're receiving this email because you are a portal-administrator.\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Ο χρήστης \"%(user_name)s\" (%(user_mail)s) έχει ζητήσεις να συμμετάσχει σε %(site_name)s.\n"
+#~ "\n"
+#~ "Ο χρήστης δε θα μπορεί να συνδεθεί μέχρι εσείς (ή άλλος Διαχειριστής Πύλης) να εγκρίνετε το αίτημά του.\n"
+#~ "\n"
+#~ "Εάν θέλετε να εγκρίνετε το αίτημα συμμετοχής του χρήστη κάντε κλικ στον παρακάτω σύνδεσμο:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Κάντε κλικ εδώ για να αρνηθείτε το αίτημα: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Λαμβάνετε αυτό το email επειδή είστε διαχειριστής της πύλης.\n"
+#~ "\n"
+#~ "\n"
+#~ "Η Ομάδα %(site_name)s"
+
+#, fuzzy
+#~ msgid "Start user export"
+#~ msgstr "Να ξεκινήσει η Εισαγωγή;"
+
+#, fuzzy
+#~ msgid "User export finished"
+#~ msgstr "Η εισαγωγή ολοκληρώθηκε"
+
+#, fuzzy
+#~ msgid "Download user exports from"
+#~ msgstr "Λήψη των όρων"
+
+#, fuzzy
+#~ msgid "Download user export as"
+#~ msgstr "Λήψη των όρων"
+
+#, fuzzy
+#~ msgid "Sorry, an error occurred during the user export. Please try again later."
+#~ msgstr "Υπήρξε σφάλμα κατά την προσπάθειά σας να υποβάλλετε την έκθεσή σας. Παρακαλούμε προσπαθήστε ξανά σε ένα λεπτό."
+
+#, fuzzy
+#~ msgid "Delete export data and start new user export"
+#~ msgstr "Διαγραφή ανεβασμένων δεδομένων και φόρτωση ενός νέου αρχείου CSV"
+
+#, fuzzy
 #~ msgid "Start %(mytitle)s"
 #~ msgstr "Να ξεκινήσει η Εισαγωγή;"
 
