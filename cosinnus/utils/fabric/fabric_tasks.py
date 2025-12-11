@@ -378,6 +378,15 @@ def rocketupdateusernotificationsresults(_ctx):
 
 
 @task
+def poetryversion(_ctx):
+    """Prints out the poetry version used on the server. Can be used as check if the poetry binary is configured
+    correctly."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run(f'{env.poetry_binary} -V')
+
+
+@task
 def updatedjango(_ctx):
     """A temporary task used to quickly update only the Django requirement using pip and restart the server."""
     env = get_env()
@@ -556,14 +565,14 @@ def _pull_and_update(ctx, use_poetry_update=False, fresh_install=False):
         c.run(f'git checkout {env.pull_branch}')
         c.run('git pull')
         if fresh_install:
-            c.run('poetry install')
+            c.run(f'{env.poetry_binary} install')
             enablegitremoteoncore(ctx)
         else:
             with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
                 if env.legacy_mode:
                     c.run(f'pip install -Ur {env.special_requirements}')
                 elif use_poetry_update:
-                    c.run('poetry update')
+                    c.run(f'{env.poetry_binary} update')
                 else:
                     with c.cd(f'{env.cosinnus_src_path}'):
                         c.run('git fetch --all')
