@@ -348,10 +348,33 @@ def nextcloudupdateusers(_ctx):
 
 @task
 def nextcloudupdateusersresults(_ctx):
-    """A temporary task used to update a single rocketchat setting. Can be removed after it has run on all portals."""
+    """Checks and prints the last lines of the logs written for task `nextcloudupdateusers`."""
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
     c.run('tail ~/nextcloudsynclog.log')
+
+
+@task
+def rocketupdateusernotifications(_ctx):
+    """A temporary task used to run the management command `rocketupdateusernotifications` on the server
+    and write the output to a log file.
+    This fabric task can be started from your local shell and the shell can be closed (if you do not send ctrl+c),
+    so it can run overnight. Run `rocketupdateusernotificationsresults` the next day to check the logs."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run(
+                'echo "yes" | ./manage.py rocket_force_update_portal_notification_settings  > ~/rocketupdatelog.log 2>&1'
+            )
+
+
+@task
+def rocketupdateusernotificationsresults(_ctx):
+    """Checks and prints the last lines of the logs written for task `rocketupdateusernotifications`."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run('tail ~/rocketupdatelog.log')
 
 
 @task
