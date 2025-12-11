@@ -24,3 +24,9 @@ def register():
 
     # makemessages replacement protection
     name = pgettext_lazy('the_app', 'event')  # noqa
+
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        from cosinnus_event.calendar.integration import CalendarIntegrationHandler
+
+        # initialize integration handler
+        CalendarIntegrationHandler(app_name='cosinnus_event')
