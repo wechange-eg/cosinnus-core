@@ -334,6 +334,27 @@ def rocketsyncupdatesetting(_ctx):
 
 
 @task
+def nextcloudupdateusers(_ctx):
+    """A temporary task used to run the management command `update_nextcloud_users` on the server
+    and write the output to a log file.
+    This fabric task can be started from your local shell and the shell can be closed (if you do not send ctrl+c),
+    so it can run overnight. Run `nextcloudupdateusersresults` the next day to check the logs."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('echo "yes" | ./manage.py update_nextcloud_users  > ~/nextcloudsynclog.log 2>&1')
+
+
+@task
+def nextcloudupdateusersresults(_ctx):
+    """A temporary task used to update a single rocketchat setting. Can be removed after it has run on all portals."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run('tail ~/nextcloudsynclog.log')
+
+
+@task
 def updatedjango(_ctx):
     """A temporary task used to quickly update only the Django requirement using pip and restart the server."""
     env = get_env()
