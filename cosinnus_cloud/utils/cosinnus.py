@@ -8,6 +8,9 @@ from cosinnus.conf import settings
 # default: projects and societies, not conferences
 CLOUD_ENABLED_FOR_GROUP_TYPES = [0, 1]
 
+# Cosinnus group apps that depend on the cloud
+CLOUD_DEPENDENT_APPS = ['cosinnus_cloud', 'cosinnus_deck', 'cosinnus_event']
+
 
 def is_cloud_enabled_for_group(group):
     """Checks if a CosinnusGroup should have a nextcloud folder.
@@ -29,9 +32,21 @@ def is_deck_enabled_for_group(group):
     return DECK_SINGLETON.is_app_integrated_in_group(group)
 
 
+def is_calendar_enabled_for_group(group):
+    """Check if calendar NC integration is enabled in the group using the integration handler."""
+    from cosinnus_event.calendar.integration import CALENDAR_SINGLETON
+
+    if not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        return False
+    return CALENDAR_SINGLETON.is_app_integrated_in_group(group)
+
+
 def is_cloud_group_required_for_group(group):
     """
     Checks if a CosinnusGroup should have a nextcloud group.
-    This is the case if the cloud or the deck app is enabled for the group.
+    This is the case if:
+        - cloud app is enabled
+        - deck app is enabled
+        - the NC calendar is enabled in the events app
     """
-    return is_cloud_enabled_for_group(group) or is_deck_enabled_for_group(group)
+    return is_cloud_enabled_for_group(group) or is_deck_enabled_for_group(group) or is_calendar_enabled_for_group(group)
