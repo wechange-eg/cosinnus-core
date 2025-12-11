@@ -8,6 +8,9 @@ def register():
     if 'cosinnus_event' in getattr(settings, 'COSINNUS_DISABLED_COSINNUS_APPS', []):
         return
 
+    # register system checks
+    import cosinnus_event.checks  # noqa: F401
+
     # Import here to prevent import side effects
     from django.utils.translation import gettext_lazy as _
     from django.utils.translation import pgettext_lazy
