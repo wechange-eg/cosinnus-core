@@ -38,8 +38,8 @@ LANGUAGE_CODE = 'en'
 TESTING = True
 TEMPLATE_DEBUG = False
 
-# disable worker threads
-COSINNUS_USE_WORKER_THREADS = False
+# disable threading for worker threads, so we get proper error messages
+COSINNUS_WORKER_THREADS_DISABLE_THREADING = True
 
 # add test app
 INSTALLED_APPS += ['cosinnus.tests']  # noqa

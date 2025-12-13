@@ -18,7 +18,7 @@ from urllib3.exceptions import ConnectionError, ProtocolError
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.utils.threading import DjangoWorkerThread
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import get_user_by_email_safe
 
 logger = logging.getLogger('cosinnus')
@@ -161,7 +161,7 @@ def threaded_execution_and_catch_error(f):
 
         if _threading_state.is_elastic_threaded():
 
-            class CosinnusElasticsearchExecutionThread(DjangoWorkerThread):
+            class CosinnusElasticsearchExecutionThread(CosinnusWorkerThread):
                 def run(self):
                     do_execute()
 

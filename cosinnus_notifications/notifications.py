@@ -45,7 +45,7 @@ from cosinnus.utils.permissions import (
     check_user_portal_admin,
     check_user_portal_moderator,
 )
-from cosinnus.utils.threading import DjangoWorkerThread
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus_notifications.alerts import create_user_alert
 from cosinnus_notifications.models import (
     NotificationAlert,
@@ -413,7 +413,7 @@ def init_notifications():
     )
 
 
-class NotificationsThread(DjangoWorkerThread):
+class NotificationsThread(CosinnusWorkerThread):
     """A thread to run on an event that causes notifications to be sent out.
     Handles both sending out mails instantly, and saving a persistent event for later
     re-creation during digest generation.

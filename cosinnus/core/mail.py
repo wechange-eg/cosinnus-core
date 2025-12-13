@@ -17,7 +17,7 @@ from django.utils.translation import gettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.html import replace_non_portal_urls
-from cosinnus.utils.threading import DjangoWorkerThread
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import get_list_unsubscribe_url
 
 logger = logging.getLogger('cosinnus')
@@ -276,7 +276,7 @@ def get_common_mail_context(request, group=None, user=None):
     return context
 
 
-class MailThread(DjangoWorkerThread):
+class MailThread(CosinnusWorkerThread):
     def __init__(self, *args, **kwargs):
         self.to = []
         self.subject = []

@@ -79,7 +79,7 @@ from cosinnus.utils.functions import (
     unique_aware_slugify,
 )
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
-from cosinnus.utils.threading import DjangoWorkerThread
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus.views.mixins.media import FlickrEmbedFieldMixin, VideoEmbedFieldMixin
 from cosinnus_deck.models import DeckMigrationMixin
@@ -2479,7 +2479,7 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
     if not user_ids:
         return
 
-    class UserGroupGuestAccessDeleteThread(DjangoWorkerThread):
+    class UserGroupGuestAccessDeleteThread(CosinnusWorkerThread):
         def run(self):
             from cosinnus.views.profile import delete_guest_user
 

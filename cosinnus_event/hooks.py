@@ -12,7 +12,7 @@ from cosinnus.core import signals
 from cosinnus.models.group import MEMBER_STATUS
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject
 from cosinnus.utils.functions import unique_aware_slugify
-from cosinnus.utils.threading import DjangoWorkerThread
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus_event.models import Event
 
 logger = logging.getLogger('cosinnus')
@@ -43,7 +43,7 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
     changes to BBBRoom of all events in this group"""
     if settings.COSINNUS_CONFERENCES_ENABLED or settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
 
-        class CreateBBBRoomUpdateThread(DjangoWorkerThread):
+        class CreateBBBRoomUpdateThread(CosinnusWorkerThread):
             def run(self):
                 update_bbb_room_memberships(instance, deleted)
 
