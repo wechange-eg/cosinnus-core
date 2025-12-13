@@ -20,7 +20,7 @@ from cosinnus.models import UserProfile
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.threading import DjangoWorkerThread
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import is_user_active
 from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group, is_cloud_group_required_for_group
 from cosinnus_cloud.utils.nextcloud import rename_group_folder, set_group_display_name
@@ -361,7 +361,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
             return
 
         # run the update threaded because it is a very slow endpoint
-        class UpdateNCUserThread(DjangoWorkerThread):
+        class UpdateNCUserThread(CosinnusWorkerThread):
             def run(self):
                 try:
                     # we should actually use `update_user_from_obj`, but since

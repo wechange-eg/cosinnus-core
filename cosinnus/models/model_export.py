@@ -17,7 +17,7 @@ from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.storage import TemporaryData
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.threading import DjangoWorkerThread
+from cosinnus.utils.threading import CosinnusWorkerThread
 
 
 class ModelExportProcessor(ABC):
@@ -189,7 +189,7 @@ class ModelExportProcessor(ABC):
         if threaded:
             my_self = self
 
-            class CosinnusExportProcessThread(DjangoWorkerThread):
+            class CosinnusExportProcessThread(CosinnusWorkerThread):
                 def run(self):
                     my_self._start_export(objects)
 

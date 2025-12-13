@@ -29,7 +29,7 @@ from cosinnus.models.tagged import LikeObject, ensure_container
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import ensure_group_widget
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.threading import DjangoWorkerThread
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import assign_user_to_default_auth_group, ensure_user_to_default_portal_groups
 from cosinnus.views.profile import delete_guest_user
 from cosinnus_conference.utils import update_conference_premium_status
@@ -219,7 +219,7 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
     """Called after a CosinusGroupMembership is changed, to apply changes to BBBRoom models in conference"""
 
     # we're Threading this entire hook as it might take a while
-    class MembershipUpdateHookThread(DjangoWorkerThread):
+    class MembershipUpdateHookThread(CosinnusWorkerThread):
         def run(self):
             # everything is only real membership changes, not for non-invitations:
             if deleted or instance.status in MEMBER_STATUS:

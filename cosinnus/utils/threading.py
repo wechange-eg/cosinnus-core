@@ -5,16 +5,16 @@ from django.conf import settings
 from django.db import connections
 
 
-class DjangoWorkerThread(threading.Thread):
+class CosinnusWorkerThread(threading.Thread):
     """
     Custom Thread-Class ensuring that DB-Connections are closed when the thread ends.
 
-    - If `COSINNUS_USE_WORKER_THREADS` is False, the `run` method is called directly in the main thread.
+    - If `COSINNUS_WORKER_THREADS_DISABLE_THREADING` is True, the `run` method is called directly in the main thread.
     - Ensures, the Thread has a descriptive name including the actual class-name.
     """
 
     def start(self):
-        if not getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
+        if getattr(settings, 'COSINNUS_WORKER_THREADS_DISABLE_THREADING', False):
             # run in main thread
             self._original_run()
             return

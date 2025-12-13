@@ -30,7 +30,7 @@ from cosinnus.utils.files import get_conference_conditions_filename, get_present
 from cosinnus.utils.functions import clean_single_line_text, unique_aware_slugify, update_dict_recursive
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
-from cosinnus.utils.threading import DjangoWorkerThread
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.validators import validate_file_infection
 from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
@@ -820,7 +820,7 @@ class CosinnusConferenceRoom(
         room_self = self
 
         # we're Threading this entire hook as it might take a while
-        class MembershipUpdateHookThread(DjangoWorkerThread):
+        class MembershipUpdateHookThread(CosinnusWorkerThread):
             def run(self):
                 for conference_membership in CosinnusGroupMembership.objects.filter(group=room_self.group):
                     result_group_membership = get_object_or_None(
