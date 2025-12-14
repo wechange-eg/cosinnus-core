@@ -15,15 +15,24 @@ if getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
         """
 
         def start(self):
-            if getattr(settings, 'COSINNUS_WORKER_THREADS_DISABLE_THREADING', False):
+            self._running_in_main_thread = getattr(settings, 'COSINNUS_WORKER_THREADS_DISABLE_THREADING', False)
+            if self._running_in_main_thread:
                 # run in main thread
                 self._original_run()
                 return
+
             super().start()
+
+        def join(self, timeout=None):
+            if self._running_in_main_thread:
+                return
+
+            super().join(timeout)
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
 
+            self._running_in_main_thread = None
             if (type_name := type(self).__name__) not in self._name:
                 self._name = f'{type_name}-{self._name}'
 
