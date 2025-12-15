@@ -5,6 +5,30 @@ from django.conf import settings
 from django.db import connections
 
 if getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
+    _thread_local_state = threading.local()
+
+    def is_threaded():
+        """Determines if in the current context, CosinnusWorkerThread should run threaded or not"""
+        if getattr(settings, 'COSINNUS_WORKER_THREADS_DISABLE_THREADING', False):
+            return False
+
+        if getattr(_thread_local_state, 'force_unthreaded', False):
+            return False
+
+        return True
+
+    class cosinnus_worker_thread_threading_disabled:
+        """
+        Context manager that disables threading via CosinnusWorkerThread in its context
+
+        Does nothing if `COSINNUS_USE_WORKER_THREADS` is False.
+        """
+
+        def __enter__(self):
+            _thread_local_state.force_unthreaded = True
+
+        def __exit__(self, type, value, tb):
+            _thread_local_state.force_unthreaded = False
 
     class CosinnusWorkerThread(threading.Thread):
         """
@@ -15,8 +39,10 @@ if getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
         """
 
         def start(self):
-            self._running_in_main_thread = getattr(settings, 'COSINNUS_WORKER_THREADS_DISABLE_THREADING', False)
-            if self._running_in_main_thread:
+            # store threaded-state to skip join later if running unthreaded
+            self._running_threaded = is_threaded()
+
+            if not self._running_threaded:
                 # run in main thread
                 self._original_run()
                 return
@@ -24,15 +50,14 @@ if getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
             super().start()
 
         def join(self, timeout=None):
-            if self._running_in_main_thread:
-                return
-
-            super().join(timeout)
+            if self._running_threaded:
+                super().join(timeout)
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
 
-            self._running_in_main_thread = None
+            self._running_threaded = None
+
             if (type_name := type(self).__name__) not in self._name:
                 self._name = f'{type_name}-{self._name}'
 
@@ -47,6 +72,17 @@ if getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
 
             self.run = wrapped_run
 else:
+
+    class cosinnus_worker_thread_threading_disabled:
+        """
+        Stub-Class for Contextmanager, does nothing.
+        """
+
+        def __enter__(self):
+            pass
+
+        def __exit__(self, type, value, tb):
+            pass
 
     class CosinnusWorkerThread(threading.Thread):
         """Stub-Subclass of vanilla Thread, since WorkerThreads are disabled"""
