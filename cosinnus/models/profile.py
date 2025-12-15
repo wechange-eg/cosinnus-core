@@ -230,6 +230,9 @@ class BaseUserProfile(
 
     objects = BaseUserProfileManager()
 
+    # These fields will not be changed upon `_UserProfileForm` changes via the profile edit view.
+    # Any fields not included in this list and not included in the HTML template form will be reverted
+    # to their modelfield defaults when the user profile edit view is POSTed.
     SKIP_FIELDS = [
         'id',
         'user',
@@ -243,6 +246,8 @@ class BaseUserProfile(
         '_is_guest',
         'guest_access_object',
         'tos_accepted',
+        'email_verified',
+        'account_verified',
     ] + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
 
     # this indicates that objects of this model are in some way always visible by registered users
@@ -370,7 +375,7 @@ class BaseUserProfile(
         even if they have the same names and avatars.
         As a fast solution, will right now simply display the URL fragment to the user's profile."""
         user_id_fragment = self.get_absolute_url().split('/', 3)[-1]
-        return f"@{user_id_fragment.replace('/', '-', 1)[:-1]}"  # -> @user-6 etc.
+        return f'@{user_id_fragment.replace("/", "-", 1)[:-1]}'  # -> @user-6 etc.
 
     @classmethod
     def get_optional_fieldnames(cls):

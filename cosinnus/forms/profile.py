@@ -52,7 +52,6 @@ class _UserProfileForm(
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True, validators=[validate_file_infection])
     website = forms.URLField(widget=forms.TextInput, required=False)
     language = forms.CharField(required=False)
-    email_verified = forms.BooleanField(disabled=True, required=False)
     timezone = TimeZoneFormField(required=False)
 
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
