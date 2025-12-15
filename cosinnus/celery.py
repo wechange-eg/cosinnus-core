@@ -19,5 +19,8 @@ app = Celery(CELERY_NAME, broker=settings.BROKER_URL)
 #   should have a `CELERY_` prefix.
 app.config_from_object('cosinnus.conf:settings', namespace='CELERY')
 
+# don't use Threads inside celery tasks
+COSINNUS_WORKER_THREADS_DISABLE_THREADING = True
+
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
