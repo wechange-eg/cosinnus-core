@@ -670,19 +670,6 @@
             });
         },
         
-        /** Click triggers for labels of onoffSwitches */
-        onoffSwitch: function() {
-        	$('body').off('click', '.onoffswitch-frame').on('click', '.onoffswitch-frame', function(event){
-        	    var $box = $(event.target).closest('.onoffswitch-frame').find('input[type="checkbox"]');
-        	    var checked = Boolean($box.attr("checked"));
-        		$box.attr("checked", !checked);
-        		$box[0].checked = !checked;
-        		$box.trigger('change');
-        		event.preventDefault();
-        		return false;
-        	});
-        },
-        
         /** Click triggers for the .hide-on-click class and
          *  other elements that disappear when an element is clicked. */
         hideOnClick: function() {
@@ -1826,7 +1813,6 @@ if (!String.prototype.format) {
 
 $(function() {
     $.cosinnus.checkBox();
-    $.cosinnus.onoffSwitch();
     $.cosinnus.hideOnClick();
     $.cosinnus.showNextOnHover();
     $.cosinnus.fadedown();
