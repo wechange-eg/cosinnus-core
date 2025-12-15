@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:11+0200\n"
+"POT-Creation-Date: 2025-12-11 14:33+0100\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,6 +121,14 @@ msgstr "Přesunout vybrané skupiny a jejich podprojekty na aktuální portál"
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr "Přesunout vybrané skupiny a jejich podprojekty na aktuální portál a členy zpráv"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Skupina"
+
+#, fuzzy
+msgid "View on site"
+msgstr "Zobrazit na stránce"
+
 msgid "ToS Accepted"
 msgstr "Podmínky služby (ToS) přijaty"
 
@@ -168,6 +176,11 @@ msgstr "Kontaktní informace"
 msgid "Permissions"
 msgstr "Oprávnění"
 
+#, fuzzy
+#| msgid "Display name"
+msgid "First name / Display name"
+msgstr "Zobrazené Jméno"
+
 msgid "Has Logged In"
 msgstr "Se přihlásil"
 
@@ -179,6 +192,13 @@ msgid "%(count)d User account(s) were deactivated successfully. They will be del
 msgstr ""
 
 msgid "DEACTIVATE user accounts and DELETE them after 30 days"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "%(count)d User account(s) were deleted successfully."
+msgstr "%d uživatelů bylo úspěšně deaktivováno."
+
+msgid "(DEBUG ONLY) DELETE user instantly (TAKE CARE!)"
 msgstr ""
 
 #, fuzzy, python-format
@@ -482,13 +502,13 @@ msgstr "Fórum"
 msgid "Discover"
 msgstr "Objevovat"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Uživatel"
+#, fuzzy
+msgid "User Export"
+msgstr "Uživatelský import"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Skupina"
+#, fuzzy
+msgid "Group Export"
+msgstr "Uživatelský import"
 
 msgid "Overnight stay required"
 msgstr "Vyžadován nocleh"
@@ -600,6 +620,11 @@ msgstr ""
 #, python-format
 msgid "Existing Todos can be migrated by the %(group_type)s admins."
 msgstr ""
+
+#, fuzzy
+#| msgid "Please log in to access this page."
+msgid "Sorry, your account may not access this page."
+msgstr "Pro přístup na tuto stránku se prosím přihlaste."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Byli jste automaticky odhlášeni poté, co jste nějaký čas nebyli aktivní."
@@ -1235,6 +1260,14 @@ msgid "pin to enter for telephone participants"
 msgstr "pin pro vstup pro účastníky přes telefon"
 
 msgid "Last create-call parameters"
+msgstr ""
+
+#, fuzzy
+#| msgid "You do not have permissions to delete \"%(title)s\"."
+msgid "You do not have permission to enter this room."
+msgstr "Nemáte oprávnění smazat \"%(title)s\"."
+
+msgid "This meeting is currently not running and you do not have permission to start it. Please wait and try again once a moderator has started the meeting."
 msgstr ""
 
 #, python-format
@@ -2174,6 +2207,10 @@ msgstr ""
 msgid "ignored"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Uživatel"
+
 #, fuzzy
 msgid "Match subject"
 msgstr "Předmět"
@@ -2736,10 +2773,6 @@ msgstr ""
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr ""
 
-#, fuzzy
-msgid "View on site"
-msgstr "Zobrazit na stránce"
-
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Zadejte 4 velká písmena ze zašifrovaného obrázku"
 
@@ -2963,10 +2996,6 @@ msgstr "Řízení uživatele"
 msgid "User Import"
 msgstr "Uživatelský import"
 
-#, fuzzy
-msgid "User Export"
-msgstr "Uživatelský import"
-
 msgid "User Profile Field Choices"
 msgstr "Volby polí uživatelského profilu"
 
@@ -3104,6 +3133,11 @@ msgstr[3] ""
 
 msgid "clear search"
 msgstr "vyčistěte hledání"
+
+#, fuzzy
+#| msgid "Display name"
+msgid "Display Name"
+msgstr "Zobrazené Jméno"
 
 msgid "Last Login"
 msgstr "Poslední přihlášení"
@@ -4511,6 +4545,7 @@ msgstr ""
 msgid "From"
 msgstr "Od"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Start date."
 msgstr "Počáteční datum."
 
@@ -4518,6 +4553,7 @@ msgstr "Počáteční datum."
 msgid "Until"
 msgstr "Do"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "End date."
 msgstr "Konečné datum."
 
@@ -5965,35 +6001,28 @@ msgstr "%(sender_name)s se chce připojit k %(team_name)s na %(site_name)s!"
 msgid ""
 "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
 "\n"
-"The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
-"\n"
-"If you wish to approve the user's join request click the following link:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
+"The user won't be able to log in until you (or another Portal-Admin) approves of his request."
+msgstr ""
+
+msgid "If you wish to approve the user's join request click the following link"
+msgstr ""
+
+msgid "Click here if you wish to approve the user's join request for an account with the role"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to decline the request?"
+msgid "Click here to deny the request"
+msgstr "Opravdu chcete odmítnout žádost?"
+
+#, fuzzy, python-format
+#| msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
+msgid ""
 "You're receiving this email because you are a portal-administrator.\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
-msgstr ""
-"Uživatel \"%(user_name)s\" (%(user_mail)s) požádal o připojení k %(site_name)s.\n"
-"\n"
-"Uživatel se nebude moci přihlásit, dokud vy (nebo jiný správce portálu) neschválíte jeho požadavek.\n"
-"\n"
-"Chcete-li schválit žádost uživatele o připojení, klikněte na následující odkaz:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Kliknutím sem zamítnete žádost: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
-"Tento e-mail jste obdrželi, protože jste správcem portálu.\n"
-"\n"
-"\n"
-"Váš tým %(site_name)s"
+msgstr "Tento e-mail jste obdrželi, protože jste požádali o obnovení hesla pro váš uživatelský účet na %(site_name)s."
 
 #, python-format
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
@@ -6621,11 +6650,11 @@ msgstr "E-mailová adresa"
 msgid "Repeat Password"
 msgstr "Zopakovat heslo"
 
-msgid "This name will be displayed to other users on the site"
-msgstr "Toto jméno se zobrazí ostatním uživatelům na webu"
-
 msgid "First name"
 msgstr "Jméno"
+
+msgid "This name will be displayed to other users on the site"
+msgstr "Toto jméno se zobrazí ostatním uživatelům na webu"
 
 msgid "You can supply your last name to be displayed as well"
 msgstr "Můžete také zadat k zobrazení své příjmení"
@@ -6866,6 +6895,16 @@ msgstr "Hledání jmen, témat a míst..."
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names and Topics..."
 msgstr "Hledání jmen a témat..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Start-Time"
+msgstr "Označené hvězdičkou"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "End-Time"
+msgstr "Čas"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
@@ -7896,42 +7935,6 @@ msgstr "Uživatel může oznámení zrušit, v takovém případě zmizí a už 
 msgid "There are no announcements yet."
 msgstr "Zatím nejsou k dispozici žádná oznámení."
 
-#, fuzzy
-msgid "Start user export"
-msgstr "Zahájit import?"
-
-msgid "You can start a user export. As soon as the export is finished it will be available here."
-msgstr ""
-
-msgid "A user export is in progress. As soon as the export is finished it will be available here."
-msgstr ""
-
-#, fuzzy
-msgid "User export finished"
-msgstr "Import dokončen"
-
-msgid "You can download the latest user export data."
-msgstr ""
-
-#, fuzzy
-msgid "Download user exports from"
-msgstr "Stáhněte si podmínky"
-
-#, fuzzy
-msgid "Download user export as"
-msgstr "Stáhněte si podmínky"
-
-#, fuzzy
-msgid "Sorry, an error occurred during the user export. Please try again later."
-msgstr "Při pokusu o odeslání hlášení došlo k chybě. Zkuste to prosím znovu za chvíli."
-
-#, fuzzy
-msgid "Delete export data and start new user export"
-msgstr "Smažte nahraná data a nahrajte nový CSV soubor"
-
-msgid "Retry user export"
-msgstr ""
-
 msgid "User Import Archive"
 msgstr "Archiv uživatelských importů"
 
@@ -8277,6 +8280,10 @@ msgstr "Vytvořili jste nápad"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an idea"
 msgstr "vytvořil/a nápad"
+
+#, fuzzy
+msgid "Logo"
+msgstr "Odhlásit se"
 
 msgid "Menu"
 msgstr "Menu"
@@ -8922,6 +8929,18 @@ msgstr ""
 
 #, python-brace-format
 msgid "Version {version_number} released"
+msgstr ""
+
+msgid "This update includes security updates and small bugfixes:"
+msgstr ""
+
+msgid "- Fixed an inconsistency between the profile name fields on the profile edit page and the profile setup wizard.\n"
+msgstr ""
+
+msgid ""
+"- (RocketChat) fixed an issue where the email notification setting in RocketChat was sometimes inconsistent with the one selected in the profile notification settings.\n"
+"- Upgraded software packages with current security fixes.\n"
+"- Further minor bugfixes and stability improvements have been made.\n"
 msgstr ""
 
 msgid "This update includes several features and bugfixes:"
@@ -9575,6 +9594,11 @@ msgstr "Nebyly nalezeny žádné %(verbose_name)s odpovídající dotazu"
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "Tento projekt zatím nemá žádný popis."
 
+#, fuzzy
+#| msgid "You are seeing this alert because you created this content."
+msgid "You are only seeing this profile because you are an admin."
+msgstr "Toto upozornění se vám zobrazuje, protože jste vytvořili tento obsah."
+
 #, python-format
 msgid "User \"%s\" is a guest user and has no profile."
 msgstr ""
@@ -9758,6 +9782,14 @@ msgstr "Uživatelský účet byl již schválen, ale přesto děkuji!"
 #, python-format
 msgid "Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site."
 msgstr "Děkujeme za schválení uživatele %(username)s (%(email)s)! Byl mu zaslán úvodní e-mail a nyní se může na web přihlásit."
+
+#, fuzzy
+#| msgid "The following Users were added to this portal:"
+msgid "The following roles were assigned to the account:"
+msgstr "Na tento portál byli přidáni následující uživatelé:"
+
+msgid "The following roles could not be assigned to the account and need to be assigned manually:"
+msgstr ""
 
 #, python-format
 msgid "The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface."
@@ -10964,14 +10996,6 @@ msgstr "Konferenční eventy"
 #, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
-
-#, fuzzy
-msgid "Start-Time"
-msgstr "Označené hvězdičkou"
-
-#, fuzzy
-msgid "End-Time"
-msgstr "Čas"
 
 #, fuzzy
 msgid "Conference Event Attendance Tracking"
@@ -13199,10 +13223,11 @@ msgstr ""
 msgid "Welcome"
 msgstr "Vítejte"
 
-msgid "WECHANGE Account connected"
-msgstr ""
+#, fuzzy
+msgid "SSO Account connected"
+msgstr "Deaktivovaný token"
 
-msgid " This data we received from your WECHANGE account"
+msgid " This data we received from your SSO account"
 msgstr ""
 
 msgid "Your Avatar and other settings from your profile were also copied."
@@ -13217,6 +13242,11 @@ msgstr ""
 
 msgid "An error occurred while attempting to login via your social network account."
 msgstr ""
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Back to Login"
+msgstr "Zpět k"
 
 #, fuzzy
 msgid "Account Connections"
@@ -13366,10 +13396,6 @@ msgstr "Odebrat organizaci"
 #, fuzzy
 msgid "Organization type"
 msgstr "Organizace"
-
-#, fuzzy
-msgid "Logo"
-msgstr "Odhlásit se"
 
 #, fuzzy
 msgid "Email Address"
@@ -14996,7 +15022,64 @@ msgstr "Opravdu chcete tento tým smazat?"
 msgid "Are you sure you want to delete this object?"
 msgstr "Opravdu chcete tento tým smazat?"
 
-#, fuzzy, python-format
+#~ msgid ""
+#~ "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+#~ "\n"
+#~ "The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
+#~ "\n"
+#~ "If you wish to approve the user's join request click the following link:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "You're receiving this email because you are a portal-administrator.\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Uživatel \"%(user_name)s\" (%(user_mail)s) požádal o připojení k %(site_name)s.\n"
+#~ "\n"
+#~ "Uživatel se nebude moci přihlásit, dokud vy (nebo jiný správce portálu) neschválíte jeho požadavek.\n"
+#~ "\n"
+#~ "Chcete-li schválit žádost uživatele o připojení, klikněte na následující odkaz:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Kliknutím sem zamítnete žádost: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Tento e-mail jste obdrželi, protože jste správcem portálu.\n"
+#~ "\n"
+#~ "\n"
+#~ "Váš tým %(site_name)s"
+
+#, fuzzy
+#~ msgid "Start user export"
+#~ msgstr "Zahájit import?"
+
+#, fuzzy
+#~ msgid "User export finished"
+#~ msgstr "Import dokončen"
+
+#, fuzzy
+#~ msgid "Download user exports from"
+#~ msgstr "Stáhněte si podmínky"
+
+#, fuzzy
+#~ msgid "Download user export as"
+#~ msgstr "Stáhněte si podmínky"
+
+#, fuzzy
+#~ msgid "Sorry, an error occurred during the user export. Please try again later."
+#~ msgstr "Při pokusu o odeslání hlášení došlo k chybě. Zkuste to prosím znovu za chvíli."
+
+#, fuzzy
+#~ msgid "Delete export data and start new user export"
+#~ msgstr "Smažte nahraná data a nahrajte nový CSV soubor"
+
+#, fuzzy
 #~ msgid "Start %(mytitle)s"
 #~ msgstr "Zahájit import?"
 

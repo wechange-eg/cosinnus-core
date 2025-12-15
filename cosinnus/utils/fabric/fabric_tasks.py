@@ -334,6 +334,59 @@ def rocketsyncupdatesetting(_ctx):
 
 
 @task
+def nextcloudupdateusers(_ctx):
+    """A temporary task used to run the management command `update_nextcloud_users` on the server
+    and write the output to a log file.
+    This fabric task can be started from your local shell and the shell can be closed (if you do not send ctrl+c),
+    so it can run overnight. Run `nextcloudupdateusersresults` the next day to check the logs."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('echo "yes" | ./manage.py update_nextcloud_users  > ~/nextcloudsynclog.log 2>&1')
+
+
+@task
+def nextcloudupdateusersresults(_ctx):
+    """Checks and prints the last lines of the logs written for task `nextcloudupdateusers`."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run('tail ~/nextcloudsynclog.log')
+
+
+@task
+def rocketupdateusernotifications(_ctx):
+    """A temporary task used to run the management command `rocketupdateusernotifications` on the server
+    and write the output to a log file.
+    This fabric task can be started from your local shell and the shell can be closed (if you do not send ctrl+c),
+    so it can run overnight. Run `rocketupdateusernotificationsresults` the next day to check the logs."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run(
+                'echo "yes" | ./manage.py rocket_force_update_portal_notification_settings  > ~/rocketupdatelog.log 2>&1'
+            )
+
+
+@task
+def rocketupdateusernotificationsresults(_ctx):
+    """Checks and prints the last lines of the logs written for task `rocketupdateusernotifications`."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run('tail ~/rocketupdatelog.log')
+
+
+@task
+def poetryversion(_ctx):
+    """Prints out the poetry version used on the server. Can be used as check if the poetry binary is configured
+    correctly."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run(f'{env.poetry_binary} -V')
+
+
+@task
 def updatedjango(_ctx):
     """A temporary task used to quickly update only the Django requirement using pip and restart the server."""
     env = get_env()
@@ -512,14 +565,14 @@ def _pull_and_update(ctx, use_poetry_update=False, fresh_install=False):
         c.run(f'git checkout {env.pull_branch}')
         c.run('git pull')
         if fresh_install:
-            c.run('poetry install')
+            c.run(f'{env.poetry_binary} install')
             enablegitremoteoncore(ctx)
         else:
             with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
                 if env.legacy_mode:
                     c.run(f'pip install -Ur {env.special_requirements}')
                 elif use_poetry_update:
-                    c.run('poetry update')
+                    c.run(f'{env.poetry_binary} update')
                 else:
                     with c.cd(f'{env.cosinnus_src_path}'):
                         c.run('git fetch --all')

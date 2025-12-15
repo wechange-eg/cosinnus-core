@@ -8,5 +8,5 @@
 
 <form id="{{ form_id }}" action="{{ action_url }}" data-target="ajax-form" method="post">
     {% csrf_token %}
-	<textarea id="id_text" name="text" type="text" placeholder="{% trans "Write comment..." %}"></textarea>
+	<textarea id="id_text" name="text" type="text" placeholder="{% trans "Write comment..." %}" aria-label="{% trans "Write comment..." %}"></textarea>
 </form>

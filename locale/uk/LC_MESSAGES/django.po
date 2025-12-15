@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 12:11+0200\n"
+"POT-Creation-Date: 2025-12-11 14:33+0100\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -118,6 +118,14 @@ msgstr "Перемістити обрані групи та їхні підпр�
 msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr "Перемістити обрані групи та їхні підпроєкти до поточного порталу й повідомити учасників(-ць)"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Проєкт"
+
+#, fuzzy
+msgid "View on site"
+msgstr "Переглянути на сторінці"
+
 msgid "ToS Accepted"
 msgstr "Умови прийнято"
 
@@ -162,6 +170,11 @@ msgstr "Контактна інформація"
 msgid "Permissions"
 msgstr "Дозволи"
 
+#, fuzzy
+#| msgid "Display name"
+msgid "First name / Display name"
+msgstr "Відображуване Ім'я"
+
 msgid "Has Logged In"
 msgstr "Увійшов у систему"
 
@@ -174,6 +187,14 @@ msgstr "%(count)d облікових записів користувачів у�
 
 msgid "DEACTIVATE user accounts and DELETE them after 30 days"
 msgstr "ДЕАКТИВУВАТИ облікові записи користувачів і ВИДАЛИТИ їх через 30 днів"
+
+#, fuzzy, python-format
+#| msgid "%(count)d User account(s) were reactivated successfully."
+msgid "%(count)d User account(s) were deleted successfully."
+msgstr "%(count)d облікових записів користувача(ів) було успішно відновлено"
+
+msgid "(DEBUG ONLY) DELETE user instantly (TAKE CARE!)"
+msgstr ""
 
 #, python-format
 msgid "%(count)d User account(s) were reactivated successfully."
@@ -475,13 +496,13 @@ msgstr "Форум"
 msgid "Discover"
 msgstr "Виявити"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Користувач(-ка)"
+#, fuzzy
+msgid "User Export"
+msgstr "Імпорт користувача"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Group"
-msgstr "Проєкт"
+#, fuzzy
+msgid "Group Export"
+msgstr "Імпорт користувача"
 
 msgid "Overnight stay required"
 msgstr "Потрібен нічліг"
@@ -593,6 +614,11 @@ msgstr ""
 #, python-format
 msgid "Existing Todos can be migrated by the %(group_type)s admins."
 msgstr ""
+
+#, fuzzy
+#| msgid "Please log in to access this page."
+msgid "Sorry, your account may not access this page."
+msgstr "Будь ласка, увійдіть у систему, щоб отримати доступ до цієї сторінки."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Ви автоматично вийшли з системи після певного часу неактивності."
@@ -1224,6 +1250,14 @@ msgid "pin to enter for telephone participants"
 msgstr "pin-код для учасників, що підключаються по телефону"
 
 msgid "Last create-call parameters"
+msgstr ""
+
+#, fuzzy
+#| msgid "You do not have permission to access this stream."
+msgid "You do not have permission to enter this room."
+msgstr "У вас немає права доступу до цього стріму."
+
+msgid "This meeting is currently not running and you do not have permission to start it. Please wait and try again once a moderator has started the meeting."
 msgstr ""
 
 #, python-format
@@ -2158,6 +2192,10 @@ msgstr ""
 msgid "ignored"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Користувач(-ка)"
+
 #, fuzzy
 msgid "Match subject"
 msgstr "Тема"
@@ -2721,10 +2759,6 @@ msgstr ""
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr ""
 
-#, fuzzy
-msgid "View on site"
-msgstr "Переглянути на сторінці"
-
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Введіть 4 великі літери із зашифрованого зображення"
 
@@ -2927,10 +2961,6 @@ msgstr "Надіслати Інформаційний бюлетень"
 msgid "User Import"
 msgstr "Імпорт користувача"
 
-#, fuzzy
-msgid "User Export"
-msgstr "Імпорт користувача"
-
 msgid "User Profile Field Choices"
 msgstr "Вибір полів профілю користувача"
 
@@ -3045,6 +3075,11 @@ msgstr[2] ""
 
 msgid "clear search"
 msgstr "очистити пошук"
+
+#, fuzzy
+#| msgid "Display name"
+msgid "Display Name"
+msgstr "Відображуване Ім'я"
 
 msgid "Last Login"
 msgstr "Останній вхід в систему"
@@ -4442,6 +4477,7 @@ msgstr ""
 msgid "From"
 msgstr "З"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Start date."
 msgstr "Дата початку"
 
@@ -4449,6 +4485,7 @@ msgstr "Дата початку"
 msgid "Until"
 msgstr "До"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "End date."
 msgstr "Кінцева дата."
 
@@ -5891,35 +5928,28 @@ msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(
 msgid ""
 "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
 "\n"
-"The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
-"\n"
-"If you wish to approve the user's join request click the following link:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
+"The user won't be able to log in until you (or another Portal-Admin) approves of his request."
+msgstr ""
+
+msgid "If you wish to approve the user's join request click the following link"
+msgstr ""
+
+msgid "Click here if you wish to approve the user's join request for an account with the role"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to decline the request?"
+msgid "Click here to deny the request"
+msgstr "Ви справді бажаєте відхилити запрошення?"
+
+#, fuzzy, python-format
+#| msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
+msgid ""
 "You're receiving this email because you are a portal-administrator.\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
-msgstr ""
-"Користувач(-ка) «%(user_name)s» (%(user_mail)s) надіслав(-ла) запит на приєднання до %(site_name)s.\n"
-"\n"
-"Користувач(-ка) зможе ввійти в систему лише після того як Ви (або інший адміністратор) підтвердите цей запит.\n"
-"\n"
-"Якщо ви хочете схвалити запит на приєднання користувача(-ки), натисніть на це посилання:\n"
-"%(domain_url)s%(user_approve_url)s\n"
-"\n"
-"\n"
-"Натисніть тут, щоб відхилити запит: %(domain_url)s%(user_deny_url)s\n"
-"\n"
-"\n"
-"Ви отримали цей лист, тому що Ви - адміністратор(-ка) порталу.\n"
-"\n"
-"\n"
-"З повагою, команда %(site_name)s"
+msgstr "Ви отримали цього листа, тому що ви надіслали запит зміни паролю для вашого облікового запису на %(site_name)s."
 
 #, python-format
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
@@ -6536,11 +6566,11 @@ msgstr "Адреса електронної скриньки"
 msgid "Repeat Password"
 msgstr "Повторіть пароль"
 
-msgid "This name will be displayed to other users on the site"
-msgstr "Це ім’я буде показано іншим користувачам на сайті"
-
 msgid "First name"
 msgstr "Ім'я"
+
+msgid "This name will be displayed to other users on the site"
+msgstr "Це ім’я буде показано іншим користувачам на сайті"
 
 msgid "You can supply your last name to be displayed as well"
 msgstr "Ви також можете вказати для відображення Ваше прізвище"
@@ -6779,6 +6809,16 @@ msgstr "Шукати Назви, Теми та Місця…"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names and Topics..."
 msgstr "Шукати Назви та Теми…"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Start-Time"
+msgstr "Позначено зірочкою"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "End-Time"
+msgstr "Час"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
@@ -7803,42 +7843,6 @@ msgstr "Користувач може відхилити оголошення, �
 msgid "There are no announcements yet."
 msgstr "Поки що немає жодного оголошення."
 
-#, fuzzy
-msgid "Start user export"
-msgstr "Почати імпорт?"
-
-msgid "You can start a user export. As soon as the export is finished it will be available here."
-msgstr ""
-
-msgid "A user export is in progress. As soon as the export is finished it will be available here."
-msgstr ""
-
-#, fuzzy
-msgid "User export finished"
-msgstr "Імпорт завершено"
-
-msgid "You can download the latest user export data."
-msgstr ""
-
-#, fuzzy
-msgid "Download user exports from"
-msgstr "Завантажити умови"
-
-#, fuzzy
-msgid "Download user export as"
-msgstr "Завантажити умови"
-
-#, fuzzy
-msgid "Sorry, an error occurred during the user export. Please try again later."
-msgstr "Під час спроби надсилання Вашої заявки сталася помилка. Будь ласка, спробуйте ще раз незабаром."
-
-#, fuzzy
-msgid "Delete export data and start new user export"
-msgstr "Видалити завантажені дані та завантажте новий файл CSV"
-
-msgid "Retry user export"
-msgstr ""
-
 msgid "User Import Archive"
 msgstr "Архів імпорту користувача"
 
@@ -8182,6 +8186,10 @@ msgstr "Ви створили ідею"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an idea"
 msgstr "створено ідею"
+
+#, fuzzy
+msgid "Logo"
+msgstr "Вихід"
 
 msgid "Menu"
 msgstr "Меню"
@@ -8838,6 +8846,18 @@ msgstr ""
 msgid "Version {version_number} released"
 msgstr ""
 
+msgid "This update includes security updates and small bugfixes:"
+msgstr ""
+
+msgid "- Fixed an inconsistency between the profile name fields on the profile edit page and the profile setup wizard.\n"
+msgstr ""
+
+msgid ""
+"- (RocketChat) fixed an issue where the email notification setting in RocketChat was sometimes inconsistent with the one selected in the profile notification settings.\n"
+"- Upgraded software packages with current security fixes.\n"
+"- Further minor bugfixes and stability improvements have been made.\n"
+msgstr ""
+
 msgid "This update includes several features and bugfixes:"
 msgstr ""
 
@@ -9492,6 +9512,11 @@ msgstr "Не знайдено жодного відповідного для з�
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "Для цього проєкту ще немає опису."
 
+#, fuzzy
+#| msgid "You are seeing this alert because you created this content."
+msgid "You are only seeing this profile because you are an admin."
+msgstr "Ви бачите це сповіщення, оскільки ви створили цей контент."
+
 #, python-format
 msgid "User \"%s\" is a guest user and has no profile."
 msgstr ""
@@ -9675,6 +9700,14 @@ msgstr "Обліковий запис уже активовано, але все
 #, python-format
 msgid "Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site."
 msgstr "Дякуємо за активування користувача(-ки) %(username)s (%(email)s)! Користувачу(-ці) було надіслано листа з привітанням. Тепер він/вона може увійти на сайт."
+
+#, fuzzy
+#| msgid "The following Users were added to this portal:"
+msgid "The following roles were assigned to the account:"
+msgstr "Наступні Користувачі долучилися до цього порталу:"
+
+msgid "The following roles could not be assigned to the account and need to be assigned manually:"
+msgstr ""
 
 #, python-format
 msgid "The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface."
@@ -10874,14 +10907,6 @@ msgstr "Події конференції"
 #, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
-
-#, fuzzy
-msgid "Start-Time"
-msgstr "Позначено зірочкою"
-
-#, fuzzy
-msgid "End-Time"
-msgstr "Час"
 
 #, fuzzy
 msgid "Conference Event Attendance Tracking"
@@ -13097,10 +13122,11 @@ msgstr ""
 msgid "Welcome"
 msgstr "Вітаємо"
 
-msgid "WECHANGE Account connected"
-msgstr ""
+#, fuzzy
+msgid "SSO Account connected"
+msgstr "Деактивувати обліковий запис "
 
-msgid " This data we received from your WECHANGE account"
+msgid " This data we received from your SSO account"
 msgstr ""
 
 msgid "Your Avatar and other settings from your profile were also copied."
@@ -13115,6 +13141,11 @@ msgstr ""
 
 msgid "An error occurred while attempting to login via your social network account."
 msgstr ""
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Back to Login"
+msgstr "Назад до"
 
 #, fuzzy
 msgid "Account Connections"
@@ -13264,10 +13295,6 @@ msgstr "Видалити організацію"
 #, fuzzy
 msgid "Organization type"
 msgstr "Організація"
-
-#, fuzzy
-msgid "Logo"
-msgstr "Вихід"
 
 #, fuzzy
 msgid "Email Address"
@@ -14887,7 +14914,64 @@ msgstr "Ви справді бажаєте видалити цю команду?
 msgid "Are you sure you want to delete this object?"
 msgstr "Ви справді бажаєте видалити цю команду?"
 
-#, fuzzy, python-format
+#~ msgid ""
+#~ "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+#~ "\n"
+#~ "The user won't be able to log in until you (or another Portal-Admin) approves of his request.\n"
+#~ "\n"
+#~ "If you wish to approve the user's join request click the following link:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "You're receiving this email because you are a portal-administrator.\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Користувач(-ка) «%(user_name)s» (%(user_mail)s) надіслав(-ла) запит на приєднання до %(site_name)s.\n"
+#~ "\n"
+#~ "Користувач(-ка) зможе ввійти в систему лише після того як Ви (або інший адміністратор) підтвердите цей запит.\n"
+#~ "\n"
+#~ "Якщо ви хочете схвалити запит на приєднання користувача(-ки), натисніть на це посилання:\n"
+#~ "%(domain_url)s%(user_approve_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Натисніть тут, щоб відхилити запит: %(domain_url)s%(user_deny_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "Ви отримали цей лист, тому що Ви - адміністратор(-ка) порталу.\n"
+#~ "\n"
+#~ "\n"
+#~ "З повагою, команда %(site_name)s"
+
+#, fuzzy
+#~ msgid "Start user export"
+#~ msgstr "Почати імпорт?"
+
+#, fuzzy
+#~ msgid "User export finished"
+#~ msgstr "Імпорт завершено"
+
+#, fuzzy
+#~ msgid "Download user exports from"
+#~ msgstr "Завантажити умови"
+
+#, fuzzy
+#~ msgid "Download user export as"
+#~ msgstr "Завантажити умови"
+
+#, fuzzy
+#~ msgid "Sorry, an error occurred during the user export. Please try again later."
+#~ msgstr "Під час спроби надсилання Вашої заявки сталася помилка. Будь ласка, спробуйте ще раз незабаром."
+
+#, fuzzy
+#~ msgid "Delete export data and start new user export"
+#~ msgstr "Видалити завантажені дані та завантажте новий файл CSV"
+
+#, fuzzy
 #~ msgid "Start %(mytitle)s"
 #~ msgstr "Почати імпорт?"
 
