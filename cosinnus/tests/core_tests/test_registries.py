@@ -171,7 +171,7 @@ class TestGroupModelsRegistry(SimpleTestCase):
         self.assertTrue(isinstance(prefix, str), 'group model registry url prefix should be a string')
 
     def test_get_url_name_prefix_by_type_unknown_type(self):
-        unsupported_group_type = len(group_model_registry.group_type_index) - 1
+        unsupported_group_type = len(group_model_registry.group_type_index)
         with self.assertRaises(UnsupportedGroupTypeError) as context_manager:
             group_model_registry.get_url_name_prefix_by_type(unsupported_group_type)
 
