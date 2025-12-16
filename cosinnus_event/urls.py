@@ -1,15 +1,25 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import include, path, re_path
+from django.urls import path, re_path
 
 from cosinnus.conf import settings
 from cosinnus_event import views
+from cosinnus_event.calendar import views as calendar_views
 
 app_name = 'event'
 
-# TODO: disable old views if the calendar is enabled
-cosinnus_group_patterns = [
+
+cosinnus_group_patterns = []
+
+if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+    # TODO: this is temporary, where the v3 calendar is included needs to be discussed.
+    cosinnus_group_patterns += [
+        re_path(r'^v3-calendar/$', calendar_views.calendar_view, name='calendar'),
+    ]
+
+# TODO: disable old views if the calendar is enabled, discuss which are replaced
+cosinnus_group_patterns += [
     re_path(r'^$', views.index_view, name='index-redirect'),
     re_path(r'^calendar/$', views.list_view, name='index'),
     re_path(r'^calendar/$', views.list_view, name='list'),
