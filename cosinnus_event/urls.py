@@ -125,9 +125,4 @@ cosinnus_root_patterns = [
     path('events/<int:pk>/update', views.event_api_update, name='event_api_update'),
 ]
 
-if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
-    cosinnus_root_patterns += [
-        path('', include(('cosinnus_event.calendar.urls_api_frontend', 'cosinnus'), namespace='frontend-calendar-api')),
-    ]
-
 urlpatterns = cosinnus_group_patterns + cosinnus_root_patterns
