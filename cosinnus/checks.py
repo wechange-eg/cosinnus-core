@@ -4,6 +4,7 @@ from django.utils import translation
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.test import is_db_ready, table_exists
 
 
 @register()
@@ -15,6 +16,10 @@ def check_unsupported_group_types(app_configs, **kwargs):
     if app_configs is not None:
         if 'cosinnus' not in [app.label for app in app_configs]:
             return []
+
+    # skip if the database is not initialized
+    if not is_db_ready() or not table_exists('cosinnus_cosinnusgroup'):
+        return []
 
     group_model = get_cosinnus_group_model()
     types = dict(group_model.TYPE_CHOICES)
