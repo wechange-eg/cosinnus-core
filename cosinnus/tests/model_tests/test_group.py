@@ -2,13 +2,22 @@
 from __future__ import unicode_literals
 
 from builtins import range, zip
+from unittest import skip
+from unittest.mock import MagicMock, patch
 
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase
 
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager, CosinnusGroupMembership
-from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus import tasks
+from cosinnus.core.signals import user_deactivated
+from cosinnus.models.group import (
+    CosinnusGroup,
+    CosinnusGroupManager,
+    CosinnusGroupMembership,
+    remove_stale_pending_memberships,
+)
+from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
 
 _GROUP_CACHE_KEY = CosinnusGroupManager._GROUP_CACHE_KEY % (1, 'CosinnusGroupManager', '%s')
 _GROUPS_PK_CACHE_KEY = CosinnusGroupManager._GROUPS_PK_CACHE_KEY % (1, 'CosinnusGroupManager')
@@ -290,3 +299,85 @@ class MembershipCacheTest(TestCase):
         self.assertEqual(group.admins, [])
         self.assertEqual(group.members, [])
         self.assertEqual(group.pendings, [])
+
+
+class MembershipSignalHandlerTest(TestCase):
+    def setUpTestData():
+        group1 = CosinnusGroup.objects.create(name='testgroup1')
+        group2 = CosinnusGroup.objects.create(name='testgroup2')
+        group3 = CosinnusGroup.objects.create(name='testgroup3')
+        user1 = User.objects.create_user('user1')
+        user2 = User.objects.create_user('user2')
+
+        CosinnusGroupMembership.objects.create(user=user1, group=group1, status=MEMBERSHIP_PENDING)
+        CosinnusGroupMembership.objects.create(user=user1, group=group2, status=MEMBERSHIP_INVITED_PENDING)
+        CosinnusGroupMembership.objects.create(user=user1, group=group3, status=MEMBERSHIP_MEMBER)
+
+        CosinnusGroupMembership.objects.create(user=user2, group=group1, status=MEMBERSHIP_PENDING)
+        CosinnusGroupMembership.objects.create(user=user2, group=group2, status=MEMBERSHIP_INVITED_PENDING)
+        CosinnusGroupMembership.objects.create(user=user2, group=group3, status=MEMBERSHIP_MEMBER)
+
+    def setUp(self):
+        self.user1 = User.objects.get(username='user1')
+        self.user1_memberships_before = set(CosinnusGroupMembership.objects.filter(user=self.user1))
+        self.user1_memberships_after = set(
+            CosinnusGroupMembership.objects.filter(user=self.user1, status__in=MEMBER_STATUS)
+        )
+        self.user2 = User.objects.get(username='user2')
+        self.user2_memberships_before = set(CosinnusGroupMembership.objects.filter(user=self.user2))
+        self.user2_memberships_after = self.user2_memberships_before
+
+    def test_remove_pending_memberships_for_user_task(self):
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user1.id)), self.user1_memberships_before
+        )
+        tasks.remove_pending_memberships_for_user_task(self.user1.id)
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user1.id)), self.user1_memberships_after
+        )
+
+    def test_remove_pending_memberships_for_user_task_no_sideeffect(self):
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user1.id)), self.user1_memberships_before
+        )
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user2.id)), self.user2_memberships_before
+        )
+        tasks.remove_pending_memberships_for_user_task(self.user1.id)
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user1.id)), self.user1_memberships_after
+        )
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user2.id)), self.user2_memberships_after
+        )
+
+    @skip('depends on CosinnusWorkerThread non-threaded celery fallback in tests')
+    def test_remove_stale_pending_memberships_for_user_signal_handler(self):
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user1.id)), self.user1_memberships_before
+        )
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user2.id)), self.user2_memberships_before
+        )
+        remove_stale_pending_memberships(None, self.user1)
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user1.id)), self.user1_memberships_after
+        )
+        self.assertEqual(
+            set(CosinnusGroupMembership.objects.filter(user__id=self.user2.id)), self.user2_memberships_after
+        )
+
+    @skip('depends on working TransactionTestCase with fixture restore')
+    def test_user_deactivation_signal(self):
+        mock_handler = MagicMock()
+        user_deactivated.connect(mock_handler)
+        self.user1.is_active = False
+        self.user1.save()
+        mock_handler.assert_called()
+
+    @skip('depends on working TransactionTestCase with fixture restore')
+    def test_remove_stale_pending_memberships_for_user_deactivation(self):
+        with patch('cosinnus.models.group.remove_stale_pending_memberships') as mock_handler:
+            self.user1.is_active = False
+            self.user1.save()
+            mock_handler.assert_called_once_with(sender=self.user1, user=self.user1)

@@ -22,7 +22,7 @@ from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
-from django.db import IntegrityError, models, transaction
+from django.db import IntegrityError, models
 from django.db.models import F, Max, Min, Q
 from django.db.models.fields.json import KeyTextTransform
 from django.db.models.functions import Cast
@@ -52,7 +52,6 @@ from cosinnus.models.membership import (
     MEMBERSHIP_MANAGER,
     MEMBERSHIP_MEMBER,
     MEMBERSHIP_PENDING,
-    PENDING_STATUS,
     BaseMembership,
     MembersManagerMixin,
 )
@@ -2502,30 +2501,13 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
 @receiver(signals.user_deactivated)
 def remove_stale_pending_memberships(sender, user, **kwargs):
     """
-    Detele all pending group memberships for a user on deactivation.
+    Delete all pending group memberships for a user on deactivation.
     """
-    membership_pks = list(
-        CosinnusGroupMembership.objects.filter(user=user, status__in=PENDING_STATUS).values_list('pk', flat=True)
-    )
-    if not membership_pks:
-        return
+    # lazy import to prevent circular import error
+    from cosinnus.tasks import remove_pending_memberships_for_user_task
 
-    class UserDeleteStalePendingMembershipsThread(Thread):
-        def run(self):
-            try:
-                with transaction.atomic():
-                    for membership in CosinnusGroupMembership.objects.filter(pk__in=membership_pks).select_for_update():
-                        membership.delete()
-            except Exception as e:
-                logger.error(
-                    (
-                        'An error occurred during deletion of stale pending group memberships for deactivated user. '
-                        'Exception in extra'
-                    ),
-                    extra={'exc': e},
-                )
-
-    UserDeleteStalePendingMembershipsThread().start()
+    # FIXME remove_pending_memberships_for_user_task.delay(user.pk)
+    remove_pending_memberships_for_user_task.delay(user.id)
 
 
 def replace_swapped_group_model():
