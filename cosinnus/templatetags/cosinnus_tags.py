@@ -48,7 +48,7 @@ from wagtail.core.templatetags.wagtailcore_tags import richtext
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
-from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.core.registries.group_models import UnsupportedGroupTypeError, group_model_registry
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, CommaSeparatedSelect2MultipleWidget
 from cosinnus.models import UserBlock
 from cosinnus.models.conference import CosinnusConferenceApplication
@@ -806,7 +806,7 @@ def group_aware_url_name(view_name, group_or_group_slug, portal_id=None):
     # retrieve that type's prefix and add to URL viewname
     try:
         prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
-    except ImproperlyConfigured:
+    except UnsupportedGroupTypeError:
         # view_name can potentially be returned as None for unregistered groups, return None here as generating URLs
         # is not critical enough for a full server error
         return None
