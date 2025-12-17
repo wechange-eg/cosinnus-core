@@ -50,15 +50,9 @@ def deliver_mail_task(to, subject, message, from_email, bcc=None, is_html=False,
 def remove_pending_memberships_for_user_task(user_id: int):
     """
     Deletes all membership objects in type `PENDING_STATUS` for a given user.
-
-    This is a background task.
     """
     try:
-        with transaction.atomic():
-            for membership in CosinnusGroupMembership.objects.filter(
-                user__id=user_id, status__in=PENDING_STATUS
-            ).select_for_update():
-                membership.delete()
+        CosinnusGroupMembership.objects.filter(user__id=user_id, status__in=PENDING_STATUS).delete()
     except Exception as e:
         logger.error(e)
         logger.error(

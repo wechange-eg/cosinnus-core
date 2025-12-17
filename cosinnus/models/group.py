@@ -2506,7 +2506,6 @@ def remove_stale_pending_memberships(sender, user, **kwargs):
     # lazy import to prevent circular import error
     from cosinnus.tasks import remove_pending_memberships_for_user_task
 
-    # FIXME remove_pending_memberships_for_user_task.delay(user.pk)
     remove_pending_memberships_for_user_task.delay(user.id)
 
 
