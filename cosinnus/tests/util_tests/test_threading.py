@@ -7,140 +7,118 @@ from django.test import TestCase, override_settings
 from cosinnus.utils.threading import CosinnusWorkerThread, cosinnus_worker_thread_threading_disabled, is_threaded
 
 
-@skipIf(not getattr(settings, 'COSINNUS_USE_WORKER_THREADS', False), 'CosinnusWorkerThreads disabled in settings')
-class ThreadingTests(TestCase):
-    def test_threading_activated(self):
-        worker_thread_info = []
+@skipIf(
+    not getattr(settings, 'COSINNUS_USE_WORKER_THREADS', False), 'depends on CosinnusWorkerThreads, which are disabled'
+)
+@override_settings(COSINNUS_WORKER_THREADS_DISABLE_THREADING=False)
+class CosinnusWorkerThreadTests(TestCase):
+    class TestThread(CosinnusWorkerThread):
+        """reusable Thread-Class storing its own name for later evaluation"""
 
-        class TestThread(CosinnusWorkerThread):
-            def run(self):
-                worker_thread_info.append(threading.current_thread().name)
+        def __init__(self, results, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.results = results
 
-        my_thread = TestThread()
+        def run(self):
+            self.results.append(threading.current_thread().name)
 
-        with override_settings(COSINNUS_WORKER_THREADS_DISABLE_THREADING=False):
-            my_thread.start()
-            my_thread.join(timeout=1)
+    def _run_thread(self):
+        """starts a thread and returns the thread-name active during its runtime"""
+        results = []
+        thread = self.TestThread(results)
+        thread.start()
+        thread.join(timeout=1)
+        return results
 
-        self.assertTrue(worker_thread_info[0].startswith('TestThread'), 'Worker thread not used despite enabled')
+    def test_threading_enabled(self):
+        results = self._run_thread()
 
-    def test_threading_deactivated(self):
-        worker_thread_info = []
+        self.assertTrue(results[0].startswith('TestThread'), 'Worker thread not used despite enabled')
 
-        class TestThread(CosinnusWorkerThread):
-            def run(self):
-                worker_thread_info.append(threading.current_thread().name)
+    @override_settings(COSINNUS_WORKER_THREADS_DISABLE_THREADING=True)
+    def test_threading_disabled(self):
+        results = self._run_thread()
 
-        my_thread = TestThread()
+        self.assertTrue(results[0].startswith('MainThread'), 'Worker thread used despite disabled')
 
-        with override_settings(COSINNUS_WORKER_THREADS_DISABLE_THREADING=True):
-            my_thread.start()
-            my_thread.join(timeout=1)
-        self.assertTrue(worker_thread_info[0].startswith('MainThread'), 'Worker thread used despite disabled')
+    def test_threading_disabled_by_contextmanager(self):
+        with cosinnus_worker_thread_threading_disabled():
+            results = self._run_thread()
 
-    def test_threading_contextmanager_thread_local(self):
+        self.assertTrue(results[0].startswith('MainThread'), 'Worker thread used despite disabled by contextmanager')
+
+    def test_threading_disabled_by_contextmanager_locally_only(self):
         """Test if the _thread_local_state is truly thread-local or if other threads are affected"""
-        worker_thread1_info = []
-        worker_thread2_info = []
-        thread1_ready = threading.Event()
-        thread2_ready = threading.Event()
+        other_thread_results = []
+        no_nesting_thread_results = []
 
-        class TestThread1(CosinnusWorkerThread):
+        other_thread_ready = threading.Event()
+        no_nesting_thread_ready = threading.Event()
+
+        class OtherThread(CosinnusWorkerThread):
             def run(self):
                 # print(f'{threading.current_thread().name} started')
-                # print(f'{threading.current_thread().name} waiting for thread2')
-                thread2_ready.wait()
-                worker_thread1_info.append(is_threaded())
-                thread1_ready.set()
+                # print(f'{threading.current_thread().name} waiting for no_nesting_thread')
+                no_nesting_thread_ready.wait()
+                other_thread_results.append(is_threaded())
+                other_thread_ready.set()
 
-        class TestThread2(CosinnusWorkerThread):
+        class NoNestingThread(CosinnusWorkerThread):
             def run(self):
                 # print(f'{threading.current_thread().name} started')
                 with cosinnus_worker_thread_threading_disabled():
-                    worker_thread2_info.append(is_threaded())
+                    no_nesting_thread_results.append(is_threaded())
                     # print(f'{threading.current_thread().name} ready')
-                    thread2_ready.set()
-                    # print(f'{threading.current_thread().name} waiting for thread1')
-                    thread1_ready.wait()
+                    no_nesting_thread_ready.set()
+                    # print(f'{threading.current_thread().name} waiting for other_thread')
+                    other_thread_ready.wait()
 
-        my_thread1 = TestThread1()
-        my_thread2 = TestThread2()
+        other_thread = OtherThread()
+        no_nesting_thread = NoNestingThread()
 
-        # this test blocks if called with threading disabled
-        with override_settings(COSINNUS_WORKER_THREADS_DISABLE_THREADING=False):
-            my_thread1.start()
-            my_thread2.start()
-            my_thread1.join(timeout=1)
-            my_thread2.join(timeout=1)
-        self.assertTrue(worker_thread1_info[0], 'Threading in normal thread disabled, despite enabled')
-        self.assertFalse(worker_thread2_info[0], 'threading in locally disabled context enabled')
+        other_thread.start()
+        no_nesting_thread.start()
 
-    def test_threading_deactivated_by_contextmanager(self):
-        worker_thread_info = []
+        other_thread.join(timeout=1)
+        no_nesting_thread.join(timeout=1)
 
-        class TestThread(CosinnusWorkerThread):
+        self.assertTrue(other_thread_results[0], 'Threading in other thread disabled, despite enabled')
+        self.assertFalse(no_nesting_thread_results[0], 'Threading in locally disabled context enabled')
+
+    def test_threading_nested_enabled(self):
+        results = []
+
+        class OuterThread(CosinnusWorkerThread):
             def run(self):
-                worker_thread_info.append(threading.current_thread().name)
+                results.append(threading.current_thread().name)
+                # noinspection PyTypeChecker
+                inner_thread = CosinnusWorkerThreadTests.TestThread(results, name='InnerThread-TestThread')
+                inner_thread.start()
+                inner_thread.join(timeout=1)
 
-        my_thread = TestThread()
+        outer_thread = OuterThread()
+        outer_thread.start()
+        outer_thread.join(timeout=1)
 
-        with override_settings(COSINNUS_WORKER_THREADS_DISABLE_THREADING=False):
-            with cosinnus_worker_thread_threading_disabled():
-                my_thread.start()
-                my_thread.join(timeout=1)
-        self.assertTrue(
-            worker_thread_info[0].startswith('MainThread'), 'Worker thread used despite disabled by contextmanager'
-        )
+        self.assertTrue(results[0].startswith('OuterThread'), 'Outer thread not used despite enabled')
+        self.assertTrue(results[1].startswith('InnerThread'), 'Inner thread not used despite enabled')
 
-    def test_threading_nested(self):
-        worker_thread_info = []
+    def test_threading_nested_disabled_by_contextmanager(self):
+        results = []
 
-        class TestThread(CosinnusWorkerThread):
+        class OuterThread(CosinnusWorkerThread):
             def run(self):
-                worker_thread_info.append(threading.current_thread().name)
-
-                class TestThreadNested(CosinnusWorkerThread):
-                    def run(self):
-                        worker_thread_info.append(threading.current_thread().name)
-
-                my_thread_nested = TestThreadNested()
-                my_thread_nested.start()
-                my_thread_nested.join(timeout=1)
-
-        my_thread = TestThread()
-        with override_settings(COSINNUS_WORKER_THREADS_DISABLE_THREADING=False):
-            my_thread.start()
-            my_thread.join(timeout=1)
-
-        self.assertTrue(worker_thread_info.pop(0).startswith('TestThread-'), 'Worker thread not used despite enabled')
-        self.assertTrue(
-            worker_thread_info.pop(0).startswith('TestThreadNested-'), 'Nested Worker thread not used despite enabled'
-        )
-
-    def test_threading_deactivated_by_contextmanager_nested(self):
-        worker_thread_info = []
-
-        class TestThread(CosinnusWorkerThread):
-            def run(self):
-                worker_thread_info.append(threading.current_thread().name)
-
-                class TestThreadNested(CosinnusWorkerThread):
-                    def run(self):
-                        worker_thread_info.append(threading.current_thread().name)
-
-                my_thread_nested = TestThreadNested()
+                results.append(threading.current_thread().name)
                 with cosinnus_worker_thread_threading_disabled():
-                    my_thread_nested.start()
-                    my_thread_nested.join(timeout=1)
+                    # noinspection PyTypeChecker
+                    inner_thread = CosinnusWorkerThreadTests.TestThread(results, name='InnerThread-TestThread')
+                    inner_thread.start()
+                    inner_thread.join(timeout=1)
 
-        my_thread = TestThread()
-        with override_settings(COSINNUS_WORKER_THREADS_DISABLE_THREADING=False):
-            my_thread.start()
-            my_thread.join(timeout=1)
-        self.assertTrue(
-            worker_thread_info.pop(0).startswith('TestThread-'), 'Worker thread not used at all despite enabled'
-        )
-        self.assertTrue(
-            worker_thread_info.pop(0).startswith('TestThread-'),
-            'Nested thread used despite disabled by disabled by contextmanager',
-        )
+        outer_thread = OuterThread()
+        outer_thread.start()
+        outer_thread.join(timeout=1)
+
+        self.assertTrue(results[0].startswith('OuterThread'), 'Worker thread not used at all despite enabled')
+        # the inner run-method should run in the outer thread context
+        self.assertEqual(results[0], results[1], 'Nested thread used despite disabled by disabled by contextmanager')
