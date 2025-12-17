@@ -5,7 +5,7 @@ from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.permissions import get_user_token
-from cosinnus_event.models import Event
+from cosinnus_event.models import Event, EventAttendance
 
 
 class CalendarPublicEventListQueryParameterSerializer(serializers.Serializer):
@@ -51,6 +51,31 @@ class CalendarPublicEventBBBEnabledField(serializers.BooleanField):
         return value == Event.BBB_MEETING
 
 
+class CalendarPublicEventAttendancesListSerializer(serializers.ListSerializer):
+    """A custom list serializer used to filter event attendances by going state."""
+
+    def to_representation(self, data):
+        data = data.filter(state=EventAttendance.ATTENDANCE_GOING)
+        return super().to_representation(data)
+
+
+class CalendarPublicEventAttendancesSerializer(serializers.ModelSerializer):
+    """Readonly serializer to list the attendees of an event."""
+
+    name = serializers.CharField(source='user.cosinnus_profile.get_full_name', read_only=True)
+    avatar = serializers.URLField(source='user.cosinnus_profile.get_avatar_thumbnail_url', read_only=True)
+    profile_url = serializers.URLField(source='user.cosinnus_profile.get_absolute_url', read_only=True)
+
+    class Meta:
+        model = EventAttendance
+        list_serializer_class = CalendarPublicEventAttendancesListSerializer
+        fields = (
+            'name',
+            'avatar',
+            'profile_url',
+        )
+
+
 class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers.ModelSerializer):
     """Complete Serializer for events in the calendar API."""
 
@@ -92,6 +117,9 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
     )
     ical_url = serializers.SerializerMethodField()
 
+    attending = serializers.SerializerMethodField()
+    attendances = CalendarPublicEventAttendancesSerializer(many=True, read_only=True)
+
     bbb_available = serializers.SerializerMethodField()
     bbb_restricted = serializers.SerializerMethodField()
     bbb_enabled = CalendarPublicEventBBBEnabledField(source='video_conference_type')
@@ -111,6 +139,8 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
             'location_lat',
             'location_lon',
             'ical_url',
+            'attending',
+            'attendances',
             'bbb_available',
             'bbb_restricted',
             'bbb_enabled',
@@ -143,7 +173,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
         for field, value in validated_data.items():
             setattr(instance, field, value)
         instance.save()
-        # update media tag
+        # save media tag fields
         if media_tag_data:
             self.save_media_tag(instance.media_tag, media_tag_data)
         return instance
@@ -155,6 +185,10 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
             user_token = get_user_token(user, settings.COSINNUS_EVENT_TOKEN_EVENT_FEED)
             ical_feed_url += f'?user={user.id}&token={user_token}'
         return ical_feed_url
+
+    def get_attending(self, obj):
+        user = self.context['request'].user
+        return obj.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
 
     def get_bbb_available(self, obj):
         return settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS
@@ -177,3 +211,9 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
             if not group.group_can_be_bbb_enabled:
                 raise serializers.ValidationError('BBB creation is restricted for this group.')
         return value
+
+
+class CalendarPublicEventAttendanceActionSerializer(serializers.Serializer):
+    """Serializer for the post data of the attendance viewset action."""
+
+    attending = serializers.BooleanField(required=True)

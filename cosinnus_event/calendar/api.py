@@ -1,17 +1,20 @@
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_event.calendar.permissions import CalendarPublicEventPermissions
 from cosinnus_event.calendar.serializers import (
+    CalendarPublicEventAttendanceActionSerializer,
     CalendarPublicEventListQueryParameterSerializer,
     CalendarPublicEventListSerializer,
     CalendarPublicEventSerializer,
 )
-from cosinnus_event.models import Event
+from cosinnus_event.models import Event, EventAttendance
 
 
 class CalendarPublicEventViewSet(viewsets.ModelViewSet):
@@ -24,7 +27,6 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         BrowsableAPIRenderer,
     )
     serializer_class = CalendarPublicEventSerializer
-    serializer_class_query = CalendarPublicEventListQueryParameterSerializer
     permission_classes = (CalendarPublicEventPermissions,)
     pagination_class = None
 
@@ -35,6 +37,8 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         if self.action == 'list':
             # use a different serializer for the list view, containing a subset of fields
             return CalendarPublicEventListSerializer
+        if self.action == 'attendance':
+            return CalendarPublicEventAttendanceActionSerializer
         return self.serializer_class
 
     def get_serializer_context(self):
@@ -53,8 +57,8 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         # validate and set query parameters
         query_params_serializer = CalendarPublicEventListQueryParameterSerializer(data=request.query_params)
-        if query_params_serializer.is_valid(raise_exception=True):
-            self.query_params = query_params_serializer.validated_data
+        query_params_serializer.is_valid(raise_exception=True)
+        self.query_params = query_params_serializer.validated_data
         return super().list(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -69,3 +73,32 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
                 from_date__date__gte=self.query_params['from_date'], to_date__date__lte=self.query_params['to_date']
             )
         return queryset
+
+    @action(detail=True, methods=['post'], permission_classes=[CalendarPublicEventPermissions])
+    def attendance(self, request, group_id, pk=None):
+        """
+        Set event attendance for request user.
+        Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
+              Users with only read permissions to the event should be able to set it.
+        """
+        instance = self.get_object()
+        user = request.user
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        attending = serializer.validated_data['attending']
+        user_attendance = instance.attendances.filter(user=user).first()
+        if attending:
+            # user is attending
+            if user_attendance:
+                if user_attendance.state != EventAttendance.ATTENDANCE_GOING:
+                    # set state to "going" of existing event attendance
+                    user_attendance.state = EventAttendance.ATTENDANCE_GOING
+                    user_attendance.save()
+            else:
+                # no event attendance exists, create a new one
+                instance.attendances.create(user=user, state=EventAttendance.ATTENDANCE_GOING)
+        elif user_attendance and user_attendance.state != EventAttendance.ATTENDANCE_NOT_GOING:
+            # user not attending, but event attendance exists, set state to "not going"
+            user_attendance.state = EventAttendance.ATTENDANCE_NOT_GOING
+            user_attendance.save()
+        return Response()
