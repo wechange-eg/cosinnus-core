@@ -5,6 +5,7 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
+from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_event.calendar.permissions import CalendarPublicEventPermissions
@@ -27,6 +28,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         BrowsableAPIRenderer,
     )
     serializer_class = CalendarPublicEventSerializer
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (CalendarPublicEventPermissions,)
     pagination_class = None
 
@@ -74,7 +76,12 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
             )
         return queryset
 
-    @action(detail=True, methods=['post'], permission_classes=[CalendarPublicEventPermissions])
+    @action(
+        detail=True,
+        methods=['post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CalendarPublicEventPermissions],
+    )
     def attendance(self, request, group_id, pk=None):
         """
         Set event attendance for request user.
