@@ -347,7 +347,7 @@ class RemovePendingMembershipsForUserTaskTests(TestCase):
         self.assertEqual(self.get_memberships(user=self.user_other), self.user_other_memberships_expected)
 
 
-# @skip('depends on working TransactionTestCase with fixture restore')
+@skip('depends on working TransactionTestCase with fixture restore')
 class UserDeactivationRemovesStaleMembershipsTests(TestCase):
     @classmethod
     def setUpTestData(cls):

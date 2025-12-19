@@ -54,7 +54,6 @@ def remove_pending_memberships_for_user_task(user_id: int):
     try:
         CosinnusGroupMembership.objects.filter(user__id=user_id, status__in=PENDING_STATUS).delete()
     except Exception as e:
-        logger.error(e)
         logger.error(
             (
                 'An error occurred during deletion of stale pending group memberships for deactivated user. '
