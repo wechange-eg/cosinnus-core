@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import locale
 import logging
+import traceback
 from builtins import object
 from threading import Thread
 
@@ -358,8 +359,11 @@ class CosinnusUserImportProcessorBase(object):
             else:
                 # if this outside exception happens, the import will be declared as "no data has been imported" and the
                 # errors will be shown
+                stack_trace = traceback.format_exc()
+                stack_trace = '\n'.join([line for line in reversed(stack_trace.split('\n'))])
                 logger.error(
-                    f'User Import: Critical failure during import (dry-run: {dry_run})', extra={'exception': e}
+                    f'User Import: Critical failure during import (dry-run: {dry_run})',
+                    extra={'exception': e, 'stack_trace': stack_trace},
                 )
                 import_failed_overall = True
                 # prepend the error message

@@ -81,7 +81,7 @@ class UserCreationFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
         if commit:
             if hasattr(self, 'cleaned_data'):
                 # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-                if not self.instance.cosinnus_profile:
+                if not hasattr(self.instance, 'cosinnus_profile') or not self.instance.cosinnus_profile:
                     get_user_profile_model()._default_manager.get_for_user(self.instance)
 
                 profile = self.instance.cosinnus_profile

@@ -120,7 +120,7 @@ class UserCreateUpdateSerializer(serializers.ModelSerializer):
 
     def _sanity_check_userprofile(self, user):
         # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-        if not user.cosinnus_profile:
+        if not hasattr(user, 'cosinnus_profile') or not user.cosinnus_profile:
             get_user_profile_model()._default_manager.get_for_user(user)
 
     def get_location(self, obj):
