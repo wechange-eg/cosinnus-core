@@ -12,7 +12,6 @@ from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
-from cosinnus.tests.utils import skipIfFlag
 from cosinnus.tests.view_tests.views import MainContentFormTestView
 from cosinnus.utils.urls import group_aware_reverse
 
@@ -21,8 +20,6 @@ User = get_user_model()
 TEST_USER_DATA = {'username': '1', 'email': 'testuser@example.com', 'first_name': 'Test', 'last_name': 'User'}
 
 
-# mark these tests, since they change the test-db so keepdb cannot be used
-@skipIfFlag('--keepdb')
 class MainContentViewTest(APILiveServerTestCase):
     # Not sure why, but setting available apps to installed apps fixes the database setup.
     # Without this the test database setup fails unable to create wagtail tables.

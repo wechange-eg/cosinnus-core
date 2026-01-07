@@ -830,7 +830,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
         css_path = os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)
         css_file = open(css_path, 'w')
         css_file.write(custom_css)
-        logger.warn(
+        logger.debug(
             'Wrote Custom Portal CSS file to:', extra={'Portal': CosinnusPortal.get_current().id, 'css_path': css_path}
         )
         css_file.close()
