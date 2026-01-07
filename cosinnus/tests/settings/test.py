@@ -61,3 +61,12 @@ COSINNUS_ADMIN_USER_APIS_ENABLED = True
 
 # set elastic to run without threads during testing
 COSINNUS_ELASTIC_BACKEND_RUN_THREADED = False
+
+# Use non-persistent process-local cache to start every test-run with clean cache
+# and not interfere with `normal` cache. This separates caches from parallel processes.
+# see https://code.djangoproject.com/ticket/11505#comment:25
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
