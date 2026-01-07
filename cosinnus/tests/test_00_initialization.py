@@ -1,6 +1,5 @@
 import unittest
 
-from django.conf import settings
 from django.contrib.sites.models import Site
 from django.test import TestCase, TransactionTestCase
 from rest_framework.test import APILiveServerTestCase
@@ -36,14 +35,8 @@ class TestPortalSiteExistInTestCase(TestLogicPortalSiteExistMixin, TestCase):
 
 
 class TestPortalSiteExistInTransactionTestCase(TestLogicPortalSiteExistMixin, TransactionTestCase):
-    # Not sure why, but setting available apps to installed apps fixes the database setup.
-    # Without this the test database setup fails unable to create wagtail tables.
-    available_apps = settings.INSTALLED_APPS
     pass
 
 
 class TestAPILiveServerTestCase(TestLogicPortalSiteExistMixin, APILiveServerTestCase):
-    # Not sure why, but setting available apps to installed apps fixes the database setup.
-    # Without this the test database setup fails unable to create wagtail tables.
-    available_apps = settings.INSTALLED_APPS
     pass

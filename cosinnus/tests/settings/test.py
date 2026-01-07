@@ -44,6 +44,10 @@ COSINNUS_WORKER_THREADS_DISABLE_THREADING = True
 # add test app
 INSTALLED_APPS += ['cosinnus.tests']  # noqa
 
+# add unused wagtail app to mitigate django bug with db-flush in tests
+# see https://github.com/wagtail/wagtail/issues/1824#issuecomment-1271840741
+INSTALLED_APPS += ['wagtail.contrib.search_promotions']  # noqa
+
 # disable services
 COSINNUS_CLOUD_ENABLED = False
 COSINNUS_CONFERENCES_ENABLED = False

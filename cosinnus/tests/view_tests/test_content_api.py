@@ -21,10 +21,6 @@ TEST_USER_DATA = {'username': '1', 'email': 'testuser@example.com', 'first_name'
 
 
 class MainContentViewTest(APILiveServerTestCase):
-    # Not sure why, but setting available apps to installed apps fixes the database setup.
-    # Without this the test database setup fails unable to create wagtail tables.
-    available_apps = settings.INSTALLED_APPS
-
     @classmethod
     def setUpClass(cls):
         cache.clear()
