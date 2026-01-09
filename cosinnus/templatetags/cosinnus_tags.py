@@ -1103,7 +1103,12 @@ def textfield(text, arg=''):
     image_re = r'<img src="(.*?)" alt="\s*(.*?)" />'
     for m in reversed([it for it in re.finditer(image_re, text)]):
         image_url = m.group(1)
-        image_domain = urlparse(image_url).hostname
+        try:
+            image_domain = urlparse(image_url).hostname
+        except Exception:
+            # for some border cases, URL formatting actually causes an error, so we catch-continue here
+            # for example, `htthttps://giphy.com/explore/minions-celebrateps://` causes an error
+            continue
         if (
             image_domain
             and image_domain != settings.COSINNUS_PORTAL_URL
