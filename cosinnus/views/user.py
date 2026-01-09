@@ -869,10 +869,29 @@ def approve_user(request, user_id):
                 tag = CosinnusManagedTag.objects.get(slug=tagslug)
                 CosinnusManagedTagAssignment.assign_managed_tag_to_object(user.cosinnus_profile, tag.slug)
                 added_tags.append(tag)
-            except Exception:
+            except CosinnusManagedTag.DoesNotExist:
+                # catch nonexistant tags attempted to be added
                 failed_tag_slugs.append(tagslug)
-                if settings.DEBUG:
-                    raise
+                logger.error(
+                    'User verification: A configured managed tags could not be added when verifying a user. '
+                    'This tag was probably renamed in the admin. Check the configuration for '
+                    'COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN and '
+                    'compare if those tags exist in the DB!',
+                    extra={'verified_user': user.pk, 'admin_user': request.user.pk, 'tagslug': tagslug},
+                )
+            except Exception as e:
+                # catch any tagging errors, so the user at least gets verified
+                failed_tag_slugs.append(tagslug)
+                logger.error(
+                    'User verification: unexpected error when adding a tag while verifying a user. '
+                    'User was verified but extra tag could not be added!',
+                    extra={
+                        'verified_user': user.pk,
+                        'admin_user': request.user.pk,
+                        'tagslug': tagslug,
+                        'exception': force_str(e),
+                    },
+                )
         if added_tags:
             tag_urls = ', '.join([f'[{tag.name}]({tag.get_user_management_url()})' for tag in added_tags])
             messages.success(request, str(_('The following roles were assigned to the account:')) + ' ' + tag_urls)
