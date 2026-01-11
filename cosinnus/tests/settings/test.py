@@ -70,3 +70,30 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+
+
+def monkey_patch_global_cache_cleanup():
+    # monkey patch SimpleTestCase run method to force cache reset globally after every test
+    # this should be done in a pytest autoload-fixture:
+    # https://code.djangoproject.com/ticket/11505#comment:25
+    from django.conf import settings
+    from django.core.cache import cache
+    from django.test import SimpleTestCase
+
+    original_run = SimpleTestCase.run
+
+    def patched_run(self, result=None):
+        def global_cache_cleanup():
+            if settings.CACHES['default']['BACKEND'] == 'django.core.cache.backends.locmem.LocMemCache':
+                cache.clear()
+
+        self.addCleanup(global_cache_cleanup)
+
+        return original_run(self, result)
+
+    if not getattr(SimpleTestCase, '_cache_cleanup_patched', False):
+        SimpleTestCase._cache_cleanup_patched = True
+        SimpleTestCase.run = patched_run
+
+
+monkey_patch_global_cache_cleanup()
