@@ -2,7 +2,7 @@
 from django.apps import AppConfig
 from django.db.models.signals import post_migrate
 
-from cosinnus.management.initialization import create_default_portal
+from cosinnus.management.initialization import ensure_portal_and_site_exist
 
 
 class CosinnusAppConfig(AppConfig):
@@ -16,7 +16,7 @@ class CosinnusAppConfig(AppConfig):
         from cosinnus.core.registries.urls import url_registry
 
         # make sure, the CosinnusPortal-Object is always present, Tests will fail otherwise
-        post_migrate.connect(create_default_portal, sender=self)
+        post_migrate.connect(ensure_portal_and_site_exist, sender=self)
 
         url_registry.ready()
 

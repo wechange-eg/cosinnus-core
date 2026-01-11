@@ -5,11 +5,12 @@ https://github.com/django/django/blob/030c63d329c4814da221528e823a4aaaaa40e4f1/d
 """
 
 from django.apps import apps as global_apps
+from django.contrib.sites.management import create_default_site
 from django.core.management.color import no_style
 from django.db import DEFAULT_DB_ALIAS, connections, router
 
 
-def create_default_portal(
+def ensure_portal_and_site_exist(
     app_config,
     verbosity=2,
     interactive=True,
@@ -17,6 +18,9 @@ def create_default_portal(
     apps=global_apps,
     **kwargs,
 ):
+    # make sure, site exists
+    create_default_site(app_config, verbosity=verbosity, interactive=interactive, using=using, apps=apps, **kwargs)
+
     try:
         CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
     except LookupError:
@@ -36,7 +40,7 @@ def create_default_portal(
 
         if verbosity >= 2:
             print('Creating default CosinnusPortal object')
-        CosinnusPortal(pk=1, name='default portal', slug='default', site_id=1).save(using=using)
+        CosinnusPortal(pk=1, name='default portal', slug='default', public=True, site_id=1).save(using=using)
 
         # We set an explicit pk instead of relying on auto-incrementation,
         # so we need to reset the database sequence. See #17415.
