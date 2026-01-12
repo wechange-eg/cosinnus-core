@@ -172,6 +172,7 @@ setup(
         'pre-commit==3.5.0',
         'fcm-django==2.2.1',
         'tblib==3.0.0',
+        'django_extended_makemessages==1.7.1',
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django-update-4-2#egg=django-awesome-avatar',
         'django-filer @ git+https://github.com/wechange-eg/django-filer.git@django-update-4-2#egg=django-filer',
