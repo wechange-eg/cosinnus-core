@@ -9,7 +9,6 @@ import re
 import shutil
 from builtins import object
 from collections import OrderedDict
-from threading import Thread
 
 import six
 from annoying.functions import get_object_or_None
@@ -80,6 +79,7 @@ from cosinnus.utils.functions import (
     unique_aware_slugify,
 )
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus.views.mixins.media import FlickrEmbedFieldMixin, VideoEmbedFieldMixin
 from cosinnus_deck.models import DeckMigrationMixin
@@ -830,7 +830,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
         css_path = os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)
         css_file = open(css_path, 'w')
         css_file.write(custom_css)
-        logger.warn(
+        logger.debug(
             'Wrote Custom Portal CSS file to:', extra={'Portal': CosinnusPortal.get_current().id, 'css_path': css_path}
         )
         css_file.close()
@@ -2479,7 +2479,7 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
     if not user_ids:
         return
 
-    class UserGroupGuestAccessDeleteThread(Thread):
+    class UserGroupGuestAccessDeleteThread(CosinnusWorkerThread):
         def run(self):
             from cosinnus.views.profile import delete_guest_user
 
