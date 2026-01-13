@@ -948,6 +948,13 @@ class CosinnusConf(AppConf):
     # whether to use celery on this instance
     USE_CELERY = False
 
+    # if True, use `CosinnusWorkerThread`, otherwise use vanilla `Thread` for Worker Threads
+    USE_WORKER_THREADS = True
+
+    # whether to disable Threading for worker threads
+    # worker functions are run in the main thread
+    WORKER_THREADS_DISABLE_THREADING = False
+
     # whether to use the new style navbar
     USE_V2_NAVBAR = True
 
@@ -1075,6 +1082,8 @@ class CosinnusConf(AppConf):
         '^/oidc/*',
         # firebase fcm-django urls
         '^/fcm/*',
+        # user export downloads
+        '^/administration/model_export/.*/download/',
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted

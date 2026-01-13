@@ -6,7 +6,6 @@ import re
 from base64 import b64encode
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import wraps
-from threading import Thread
 from time import sleep
 
 from django.contrib.auth import get_user_model
@@ -21,6 +20,7 @@ from cosinnus.models import UserProfile
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import is_user_active
 from cosinnus_cloud.utils.cosinnus import (
     CLOUD_DEPENDENT_APPS,
@@ -365,7 +365,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
             return
 
         # run the update threaded because it is a very slow endpoint
-        class UpdateNCUserThread(Thread):
+        class UpdateNCUserThread(CosinnusWorkerThread):
             def run(self):
                 try:
                     # we should actually use `update_user_from_obj`, but since
