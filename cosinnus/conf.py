@@ -1404,6 +1404,10 @@ class CosinnusConf(AppConf):
     # Send SSO welcome mails informing the user about the SSO signup
     SSO_SEND_WELCOME_MAIL = False
 
+    # when welcome email sending is enabled via the django admin portal checkbox,
+    # this subject will be used (if None, the default "Welcome to (PORTAL.NAME)!" string will be used.
+    WELCOME_EMAIL_SUBJECT = None
+
     # whether SDGs should be shown in group/project forms and detail templates
     ENABLE_SDGS = False
 
