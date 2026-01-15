@@ -16,7 +16,7 @@ class CalendarPublicEventListQueryParameterSerializer(serializers.Serializer):
 
     # Limit for the allowed date range between from_date and to_date to avoid db heavy requests (e.g. all events off
     # the forum group).
-    MAX_DATA_RANGE_DAYS = 32
+    MAX_DATA_RANGE_DAYS = 42
 
     def validate(self, data):
         # Validate maximum date range
