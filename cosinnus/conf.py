@@ -1145,6 +1145,10 @@ class CosinnusConf(AppConf):
     # whether profile editing via the view and api should be possible
     DISABLE_PROFILE_EDITING = False
 
+    # "disables" the /setup/profile/ v3 view by blocking the v3 redirect with a redirect to the userprofile,
+    # and removing the links to it in the userprofile
+    DISABLE_V3_PROFILE_SETUP_VIEWS = False
+
     # if profile editing is disabled a url can be provided to redirect all profile edit requests
     EXTERNAL_PROFILE_EDITING_URL = None
 

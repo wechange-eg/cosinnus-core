@@ -762,13 +762,24 @@ if settings.COSINNUS_FIREBASE_ENABLED:
 if settings.COSINNUS_V3_FRONTEND_ENABLED:
     # frontend only URLs. these URLs do not have real views, because the frontend server will catch the paths
     # and serve a different page
-    urlpatterns += [
-        path(
-            'setup/profile/',
-            TemplateView.as_view(template_name='premium_info_page.html'),
-            name='v3-frontend-setup-profile',
-        ),
-    ]
+    if settings.COSINNUS_DISABLE_V3_PROFILE_SETUP_VIEWS:
+        # special case, redirect off of the /profile/setup/ view. this works in conjunction with a conditional check
+        # in `cosinnus.utils.urls.check_url_v3_everywhere_exempt()`
+        urlpatterns += [
+            path(
+                'setup/profile/',
+                RedirectView.as_view(url='/dashboard/', permanent=False),
+                name='v3-frontend-setup-profile',
+            ),
+        ]
+    else:
+        urlpatterns += [
+            path(
+                'setup/profile/',
+                TemplateView.as_view(template_name='premium_info_page.html'),
+                name='v3-frontend-setup-profile',
+            ),
+        ]
 
 if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
     urlpatterns += [
