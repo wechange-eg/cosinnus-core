@@ -4,7 +4,6 @@ from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializ
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.models.tagged import get_tag_object_model
-from cosinnus.utils.permissions import get_user_token
 from cosinnus_event.models import Event, EventAttendance
 
 
@@ -81,7 +80,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
 
     from_date = serializers.DateTimeField(required=True)
     to_date = serializers.DateTimeField(required=True)
-    description = serializers.CharField(source='note')
+    description = serializers.CharField(source='note', required=False)
     topics = serializers.MultipleChoiceField(
         source='media_tag.get_topic_ids',
         required=False,
@@ -179,15 +178,12 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
         return instance
 
     def get_ical_url(self, obj):
-        ical_feed_url = obj.get_feed_url()
-        user = self.context['request'].user
-        if user.is_authenticated and not user.is_guest:
-            user_token = get_user_token(user, settings.COSINNUS_EVENT_TOKEN_EVENT_FEED)
-            ical_feed_url += f'?user={user.id}&token={user_token}'
-        return ical_feed_url
+        return obj.get_feed_url()
 
     def get_attending(self, obj):
         user = self.context['request'].user
+        if not user.is_authenticated:
+            return False
         return obj.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
 
     def get_bbb_available(self, obj):
@@ -198,8 +194,9 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
         return not group.group_can_be_bbb_enabled
 
     def get_bbb_url(self, obj):
+        user = self.context['request'].user
         bbb_room_url = None
-        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
+        if user.is_authenticated and settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
             bbb_room_url = obj.get_bbb_room_url()
         return bbb_room_url
 

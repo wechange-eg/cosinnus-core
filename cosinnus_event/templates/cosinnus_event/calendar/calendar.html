@@ -4,18 +4,22 @@
 {% block page_title %}{% trans "Calendar" %} - {{ group.name }}{% endblock page_title %}
 
 {% block content %}
-    {% if group.nextcloud_calendar_url %}
-        <div id="calendar-group-root"
-            data-group-id="{{ group.pk }}"
-            data-calendar-url="{{ group.nextcloud_calendar_url }}">
-        </div>
+    {% if private_events_available %}
+        {% if group.nextcloud_calendar_url %}
+            <div id="calendar-group-root"
+                data-group-id="{{ group.pk }}"
+                data-calendar-url="{{ group.nextcloud_calendar_url }}">
+            </div>
+        {% else %}
+            <p class="textfield transparent">
+                {% trans "Calendar creation is in progress..." %}
+            </p>
+            {% comment %} Refresh every 10 seconds {% endcomment %}
+            <script type="text/javascript">
+                setTimeout(function () { location.reload(); }, 10000);
+            </script>
+        {% endif %}
     {% else %}
-        <p class="textfield transparent">
-            {% trans "Calendar creation is in progress..." %}
-        </p>
-        {% comment %} Refresh every 10 seconds {% endcomment %}
-        <script type="text/javascript">
-            setTimeout(function () { location.reload(); }, 10000);
-        </script>
+        <div id="calendar-group-root" data-group-id="{{ group.pk }}" data-calendar-url=""></div>
     {% endif %}
 {% endblock content %}
