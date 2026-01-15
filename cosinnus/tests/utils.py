@@ -77,6 +77,7 @@ def reload_urlconf(urlconf=None):
 class CeleryTaskTestMixin:
     """Mixin to run Celery Tasks in test cases."""
 
+    @classmethod
     def runCeleryTasks(cls):
         """
         Our CeleryThreadTasks use on_commit callbacks that are not triggered in (non-transitional) test-cases.
