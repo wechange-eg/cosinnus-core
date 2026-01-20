@@ -364,6 +364,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                     'avatar': self.test_user.cosinnus_profile.get_avatar_thumbnail_url(),
                     'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
                 },
+                'can_edit': False,
                 'image': None,
                 'topics': [1, 2],
                 'location': 'Berlin',
@@ -459,6 +460,34 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(self.test_event.title, new_event_title)
             self.assertEqual(self.test_event.from_date, new_event_from_date)
             self.assertEqual(self.test_event.to_date, new_event_to_date)
+
+        def test_event_can_edit(self):
+            # anonymous cant edit
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertFalse(data['can_edit'])
+
+            # creator can edit
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertTrue(data['can_edit'])
+
+            # other users cant edit
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertFalse(data['can_edit'])
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertFalse(data['can_edit'])
+
+            # admin can edit
+            self.client.force_login(self.test_admin)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertTrue(data['can_edit'])
 
         def test_event_attendance(self):
             # anonymous user cant set attending

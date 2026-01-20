@@ -109,6 +109,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
     to_date = serializers.DateTimeField(required=True)
     description = serializers.CharField(source='note', required=False)
     creator = CalendarPublicEventCreatorSerializer(read_only=True)
+    can_edit = serializers.SerializerMethodField()
     topics = serializers.MultipleChoiceField(
         source='media_tag.get_topic_ids',
         required=False,
@@ -160,6 +161,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             'to_date',
             'description',
             'creator',
+            'can_edit',
             'image',
             'topics',
             'location',
@@ -178,7 +180,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
         data = super().to_representation(instance)
         # appy field level permissions
         user = self.context['request'].user
-        if not user.is_authenticated or not check_object_write_access(instance, user):
+        if not check_object_write_access(instance, user):
             data['attendances'] = []
         return data
 
@@ -212,6 +214,9 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
         if media_tag_data:
             self.save_media_tag(instance.media_tag, media_tag_data)
         return instance
+
+    def get_can_edit(self, obj):
+        return check_object_write_access(obj, self.context['request'].user)
 
     def get_ical_url(self, obj):
         return obj.get_feed_url()
