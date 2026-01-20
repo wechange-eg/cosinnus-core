@@ -4,6 +4,7 @@ from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializ
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.permissions import check_object_write_access
 from cosinnus_event.models import Event, EventAttendance
 
 
@@ -153,6 +154,14 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             'bbb_enabled',
             'bbb_url',
         )
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        # appy field level permissions
+        user = self.context['request'].user
+        if not user.is_authenticated or not check_object_write_access(instance, user):
+            data['attendances'] = []
+        return data
 
     def create(self, validated_data):
         # get nested media tag data

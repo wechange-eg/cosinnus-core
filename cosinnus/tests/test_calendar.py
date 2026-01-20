@@ -465,11 +465,23 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             res = self.client.post(self.event_attendance_url, data={'attending': True})
             self.assertEqual(res.status_code, 200)
 
-            # check attendance in detail api
+            # check attending in detail api
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data['attending'], True)
+
+            # check attending in list api
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data[0]['attending'], True)
+
+            # check attendance readable by event creator
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
             self.assertEqual(
                 data['attendances'],
                 [
@@ -481,29 +493,47 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 ],
             )
 
-            # check attending in list api
-            res = self.client.get(self.event_list_url_with_params)
-            self.assertEqual(res.status_code, 200)
+            # check attendance readable by admin
+            self.client.force_login(self.test_admin)
+            res = self.client.get(self.event_detail_url)
             data = res.json()['data']
-            self.assertEqual(data[0]['attending'], True)
+            self.assertEqual(len(data['attendances']), 1)
+
+            # check attendance not readable by group users
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertEqual(data['attendances'], [])
+
+            # check attendance not readable by non-logged-in users
+            self.client.logout()
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertEqual(data['attendances'], [])
 
             # remove attendance
             self.client.force_login(self.test_non_group_user)
             res = self.client.post(self.event_attendance_url, data={'attending': False})
             self.assertEqual(res.status_code, 200)
 
-            # check removed attendance
+            # check removed attending
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data['attending'], False)
-            self.assertEqual(data['attendances'], [])
 
             # check attending in list api
             res = self.client.get(self.event_list_url_with_params)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data[0]['attending'], False)
+
+            # check removed attendee
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data['attendances'], [])
 
         @override_settings(COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=False)
         def test_event_bbb_disabled(self):
