@@ -1,4 +1,5 @@
 import threading
+import types
 from functools import wraps
 
 from django.conf import settings
@@ -64,14 +65,22 @@ if getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
             self._cosinnus_worker_thread_original_run = self.run
 
             @wraps(self._cosinnus_worker_thread_original_run)
-            def wrapped_run(*_args, **_kwargs):
+            def wrapped_run(self):
                 try:
-                    return self._cosinnus_worker_thread_original_run(*_args, **_kwargs)
+                    return self._cosinnus_worker_thread_original_run()
                 finally:
                     connections.close_all()
 
-            self.run = wrapped_run
+            # assign wrapped_run as proper bound method
+            self.run = types.MethodType(wrapped_run, self)
 else:
+
+    def is_threaded():
+        """
+        Stub-Method for context-getter. Returning always True.
+        :return: True, since threading cannot be disabled
+        """
+        return True
 
     class cosinnus_worker_thread_threading_disabled:
         """
