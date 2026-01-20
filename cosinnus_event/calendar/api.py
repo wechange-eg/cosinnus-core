@@ -65,7 +65,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Event.objects.all()
-        queryset = queryset.prefetch_related('media_tag')
+        queryset = queryset.prefetch_related('media_tag', 'attendances')
         queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
         queryset = queryset.filter(group=self.group)
         queryset = queryset.filter(state=Event.STATE_SCHEDULED)

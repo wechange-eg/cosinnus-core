@@ -312,6 +312,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             cls.event_list_url = reverse(
                 'cosinnus:frontend-api:calendar-api:calendar-event-list', kwargs={'group_id': cls.test_group.id}
             )
+            cls.event_list_url_with_params = f'{cls.event_list_url}?from_date=2026-01-01&to_date=2026-02-01'
             cls.event_detail_url = reverse(
                 'cosinnus:frontend-api:calendar-api:calendar-event-detail',
                 kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
@@ -330,8 +331,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(data['to_date'], ['This parameter is required'])
 
             # event list is public and contains test event
-            event_list_url = f'{self.event_list_url}?from_date=2026-01-01&to_date=2026-02-01'
-            res = self.client.get(event_list_url)
+            res = self.client.get(self.event_list_url_with_params)
             self.assertEqual(res.status_code, 200)
 
             data = res.json()['data']
@@ -343,6 +343,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                         'title': self.test_event.title,
                         'from_date': self.test_event.from_date.astimezone(self.tz).isoformat(),
                         'to_date': self.test_event.to_date.astimezone(self.tz).isoformat(),
+                        'attending': False,
                     }
                 ],
             )
@@ -464,7 +465,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             res = self.client.post(self.event_attendance_url, data={'attending': True})
             self.assertEqual(res.status_code, 200)
 
-            # check attendance
+            # check attendance in detail api
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
@@ -480,6 +481,12 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 ],
             )
 
+            # check attending in list api
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data[0]['attending'], True)
+
             # remove attendance
             self.client.force_login(self.test_non_group_user)
             res = self.client.post(self.event_attendance_url, data={'attending': False})
@@ -491,6 +498,12 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             data = res.json()['data']
             self.assertEqual(data['attending'], False)
             self.assertEqual(data['attendances'], [])
+
+            # check attending in list api
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data[0]['attending'], False)
 
         @override_settings(COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=False)
         def test_event_bbb_disabled(self):

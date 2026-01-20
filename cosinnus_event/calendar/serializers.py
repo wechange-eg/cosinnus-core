@@ -27,6 +27,8 @@ class CalendarPublicEventListQueryParameterSerializer(serializers.Serializer):
 class CalendarPublicEventListSerializer(serializers.ModelSerializer):
     """Serializer for events in the calendar list API view."""
 
+    attending = serializers.SerializerMethodField()
+
     class Meta:
         model = Event
         fields = (
@@ -34,7 +36,14 @@ class CalendarPublicEventListSerializer(serializers.ModelSerializer):
             'title',
             'from_date',
             'to_date',
+            'attending',
         )
+
+    def get_attending(self, obj):
+        user = self.context['request'].user
+        if not user.is_authenticated:
+            return False
+        return obj.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
 
 
 class CalendarPublicEventBBBEnabledField(serializers.BooleanField):
@@ -75,7 +84,7 @@ class CalendarPublicEventAttendancesSerializer(serializers.ModelSerializer):
         )
 
 
-class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers.ModelSerializer):
+class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPublicEventListSerializer):
     """Complete Serializer for events in the calendar API."""
 
     from_date = serializers.DateTimeField(required=True)
@@ -116,7 +125,6 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
     )
     ical_url = serializers.SerializerMethodField()
 
-    attending = serializers.SerializerMethodField()
     attendances = CalendarPublicEventAttendancesSerializer(many=True, read_only=True)
 
     bbb_available = serializers.SerializerMethodField()
@@ -179,12 +187,6 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, serializers
 
     def get_ical_url(self, obj):
         return obj.get_feed_url()
-
-    def get_attending(self, obj):
-        user = self.context['request'].user
-        if not user.is_authenticated:
-            return False
-        return obj.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
 
     def get_bbb_available(self, obj):
         return settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS
