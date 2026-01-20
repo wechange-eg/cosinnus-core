@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializerMixin
@@ -85,12 +86,29 @@ class CalendarPublicEventAttendancesSerializer(serializers.ModelSerializer):
         )
 
 
+class CalendarPublicEventCreatorSerializer(serializers.ModelSerializer):
+    """Readonly serializer for the creator of an event."""
+
+    name = serializers.CharField(source='cosinnus_profile.get_full_name', read_only=True)
+    avatar = serializers.URLField(source='cosinnus_profile.get_avatar_thumbnail_url', read_only=True)
+    profile_url = serializers.URLField(source='cosinnus_profile.get_absolute_url', read_only=True)
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'name',
+            'avatar',
+            'profile_url',
+        )
+
+
 class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPublicEventListSerializer):
     """Complete Serializer for events in the calendar API."""
 
     from_date = serializers.DateTimeField(required=True)
     to_date = serializers.DateTimeField(required=True)
     description = serializers.CharField(source='note', required=False)
+    creator = CalendarPublicEventCreatorSerializer(read_only=True)
     topics = serializers.MultipleChoiceField(
         source='media_tag.get_topic_ids',
         required=False,
@@ -141,6 +159,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             'from_date',
             'to_date',
             'description',
+            'creator',
             'image',
             'topics',
             'location',
