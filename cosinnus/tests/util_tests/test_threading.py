@@ -1,7 +1,13 @@
+import io
+import logging
 import threading
+from functools import wraps
+from threading import current_thread
 from unittest import skipIf
+from unittest.mock import patch
 
 from django.conf import settings
+from django.db import connections
 from django.test import TestCase, override_settings
 
 from cosinnus.utils.threading import CosinnusWorkerThread, cosinnus_worker_thread_threading_disabled, is_threaded
@@ -27,7 +33,7 @@ class CosinnusWorkerThreadTests(TestCase):
         results = []
         thread = self.TestThread(results)
         thread.start()
-        thread.join(timeout=1)
+        thread.join()
         return results
 
     def test_threading_enabled(self):
@@ -79,8 +85,8 @@ class CosinnusWorkerThreadTests(TestCase):
         other_thread.start()
         no_nesting_thread.start()
 
-        other_thread.join(timeout=1)
-        no_nesting_thread.join(timeout=1)
+        other_thread.join()
+        no_nesting_thread.join()
 
         self.assertTrue(other_thread_results[0], 'Threading in other thread disabled, despite enabled')
         self.assertFalse(no_nesting_thread_results[0], 'Threading in locally disabled context enabled')
@@ -94,11 +100,11 @@ class CosinnusWorkerThreadTests(TestCase):
                 # noinspection PyTypeChecker
                 inner_thread = CosinnusWorkerThreadTests.TestThread(results, name='InnerThread-TestThread')
                 inner_thread.start()
-                inner_thread.join(timeout=1)
+                inner_thread.join()
 
         outer_thread = OuterThread()
         outer_thread.start()
-        outer_thread.join(timeout=1)
+        outer_thread.join()
 
         self.assertTrue(results[0].startswith('OuterThread'), 'Outer thread not used despite enabled')
         self.assertTrue(results[1].startswith('InnerThread'), 'Inner thread not used despite enabled')
@@ -113,12 +119,119 @@ class CosinnusWorkerThreadTests(TestCase):
                     # noinspection PyTypeChecker
                     inner_thread = CosinnusWorkerThreadTests.TestThread(results, name='InnerThread-TestThread')
                     inner_thread.start()
-                    inner_thread.join(timeout=1)
+                    inner_thread.join()
 
         outer_thread = OuterThread()
         outer_thread.start()
-        outer_thread.join(timeout=1)
+        outer_thread.join()
 
         self.assertTrue(results[0].startswith('OuterThread'), 'Worker thread not used at all despite enabled')
         # the inner run-method should run in the outer thread context
         self.assertEqual(results[0], results[1], 'Nested thread used despite disabled by disabled by contextmanager')
+
+    # sentry-sdk wraps the run-method to capture Thead-Exceptions
+    # https://github.com/getsentry/sentry-python/blob/e73e600ea1d151cf2dfb9345de8c6c77d7bd9b1f/sentry_sdk/integrations/threading.py#L108
+    def test_wrapping_run_like_sentry(self):
+        results = []
+        thread = self.TestThread(results)
+        logger = logging.getLogger(f'{__name__}.test_wrapping_run_like_sentry')
+        logger.propagate = False
+        original_run = getattr(thread.run, '__func__', self.run)
+
+        @wraps(original_run)
+        def sentry_like_wrapper(*args, **kwargs):
+            logger.debug('sentry_like_wrapper called')
+            _self = current_thread()
+            # noinspection PyBroadException
+            try:
+                return original_run(_self, *args[1:], **kwargs)
+            except Exception:
+                logger.exception('Exception raised while running thread')
+
+        thread.run = sentry_like_wrapper
+
+        with self.assertLogs(logger, level='DEBUG') as cm:
+            thread.start()
+            thread.join()
+
+        self.assertGreater(len(cm.output), 0, 'sentry-like run-wrapper was not called')
+        self.assertFalse(
+            any('ERROR' in entry for entry in cm.output),
+            'Exception raised while running thread with sentry-like wrapped run',
+        )
+
+    @patch.object(connections, 'close_all')
+    def test_db_cleanup_is_called_once_normal(self, mock_close_all):
+        self._run_thread()
+
+        mock_close_all.assert_called_once()
+
+    @patch.object(connections, 'close_all')
+    def test_db_cleanup_is_called_once_on_error(self, mock_close_all):
+        class TestThread(CosinnusWorkerThread):
+            def run(self):
+                raise Exception('TestError')
+
+        thread = TestThread()
+
+        with patch('sys.stderr', new=io.StringIO()) as fake_stderr:
+            thread.start()
+            thread.join()
+
+        self.assertTrue('Exception: TestError' in fake_stderr.getvalue(), 'TestError was not triggered')
+        self.assertEqual(fake_stderr.getvalue().count('Traceback'), 1, 'unexpected Errors occurred')
+        mock_close_all.assert_called_once()
+
+    @patch.object(connections, 'close_all')
+    def test_db_cleanup_is_called_once_subclass_without_super(self, mock_close_all):
+        class TestThread(CosinnusWorkerThread):
+            def run(self):
+                pass
+
+        class SubTestThread(TestThread):
+            def run(self):
+                pass
+
+        thread = SubTestThread()
+
+        thread.start()
+        thread.join()
+        mock_close_all.assert_called_once()
+
+    @patch.object(connections, 'close_all')
+    def test_db_cleanup_is_called_once_subclass_with_super(self, mock_close_all):
+        class TestThread(CosinnusWorkerThread):
+            def run(self):
+                pass
+
+        class SubTestThread(TestThread):
+            def run(self):
+                super().run()
+
+        thread = SubTestThread()
+
+        thread.start()
+        thread.join()
+        mock_close_all.assert_called_once()
+
+    @patch.object(connections, 'close_all')
+    def test_db_cleanup_not_called_in_main_thread(self, mock_close_all):
+        thread = CosinnusWorkerThread()
+
+        thread.run()
+        thread.join()
+        mock_close_all.assert_not_called()
+
+    @patch.object(connections, 'close_all')
+    def test_error_in_db_cleanup(self, mock_close_all):
+        mock_close_all.side_effect = Exception('TestError')
+
+        thread = CosinnusWorkerThread()
+
+        with patch('sys.stderr', new=io.StringIO()) as fake_stderr:
+            thread.start()
+            thread.join()
+
+        self.assertTrue('Exception: TestError' in fake_stderr.getvalue(), 'TestError was not triggered')
+        self.assertEqual(fake_stderr.getvalue().count('Traceback'), 1, 'unexpected Errors occurred')
+        mock_close_all.assert_called_once()
