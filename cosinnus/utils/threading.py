@@ -69,7 +69,8 @@ if getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
                 try:
                     return self._cosinnus_worker_thread_original_run()
                 finally:
-                    connections.close_all()
+                    if threading.current_thread() is not threading.main_thread():
+                        connections.close_all()
 
             # assign wrapped_run as proper bound method
             self.run = types.MethodType(wrapped_run, self)
