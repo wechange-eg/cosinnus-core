@@ -61,6 +61,14 @@ class CosinnusMediaTagSerializerMixin:
                     media_tag.location_lat = location.latitude
                     media_tag.location_lon = location.longitude
 
+        # save location_type
+        if 'location_type' in media_tag_data:
+            media_tag.location_type = media_tag_data['location_type']
+
+        # save external_video_conference_url
+        if 'external_video_conference_url' in media_tag_data:
+            media_tag.external_video_conference_url = media_tag_data['external_video_conference_url']
+
         # save instance
         if save:
             media_tag.save()

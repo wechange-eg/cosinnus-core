@@ -178,6 +178,20 @@ class BaseTagObject(models.Model):
     # e.g. used when migrating todos to the deck app.
     migrated = models.BooleanField(default=False)
 
+    LOCATION_TYPE_ONLINE = 'online'
+    LOCATION_TYPE_ONSITE = 'onsite'
+    LOCATION_TYPE_HYBRID = 'hybrid'
+    LOCATION_TYPE_CHOICES = (
+        (LOCATION_TYPE_ONLINE, _('Online')),
+        (LOCATION_TYPE_ONSITE, _('Onsite')),
+        (LOCATION_TYPE_HYBRID, _('Hybrid')),
+    )
+    location_type = models.CharField(max_length=8, null=True, blank=True, verbose_name=_('Location Type'))
+
+    external_video_conference_url = models.URLField(
+        null=True, blank=True, verbose_name=_('External Video Conference URL')
+    )
+
     def save(self, *args, **kwargs):
         # update like count
         if self.pk:

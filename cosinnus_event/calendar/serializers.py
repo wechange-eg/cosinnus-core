@@ -143,6 +143,22 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             'string in `location`. If supplied, will only be saved if `location` is also supplied.'
         ),
     )
+    location_type = serializers.ChoiceField(
+        source='media_tag.location_type',
+        required=False,
+        default=None,
+        allow_blank=True,
+        allow_null=True,
+        choices=get_tag_object_model().LOCATION_TYPE_CHOICES,
+    )
+    external_video_conference_url = serializers.URLField(
+        source='media_tag.external_video_conference_url',
+        required=False,
+        default=None,
+        allow_blank=True,
+        allow_null=True,
+    )
+
     ical_url = serializers.SerializerMethodField()
 
     attendances = CalendarPublicEventAttendancesSerializer(many=True, read_only=True)
@@ -167,6 +183,8 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             'location',
             'location_lat',
             'location_lon',
+            'location_type',
+            'external_video_conference_url',
             'ical_url',
             'attending',
             'attendances',

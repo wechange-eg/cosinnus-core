@@ -370,6 +370,8 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'location': 'Berlin',
                 'location_lat': None,
                 'location_lon': None,
+                'location_type': None,
+                'external_video_conference_url': None,
                 'ical_url': self.test_event.get_feed_url(),
                 'attending': False,
                 'attendances': [],
@@ -488,6 +490,23 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             res = self.client.get(self.event_detail_url)
             data = res.json()['data']
             self.assertTrue(data['can_edit'])
+
+        def test_event_media_tags(self):
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertIsNone(data['location_type'])
+            self.assertIsNone(data['external_video_conference_url'])
+
+            # change location type and external_video_conference_url
+            media_tag_data = {'location_type': BaseTagObject.LOCATION_TYPE_ONLINE}
+            res = self.client.patch(self.event_detail_url, data=media_tag_data)
+            self.assertEqual(res.status_code, 200)
+
+            # check changed location in detail API
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertEqual(data['location_type'], BaseTagObject.LOCATION_TYPE_ONLINE)
 
         def test_event_attendance(self):
             # anonymous user cant set attending
