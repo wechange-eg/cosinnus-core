@@ -11,6 +11,7 @@ from django.core.cache import cache
 from django.test import TestCase
 
 from cosinnus import tasks
+from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 from cosinnus.core.signals import user_deactivated
 from cosinnus.models.group import (
     CosinnusGroup,
@@ -24,6 +25,9 @@ from cosinnus.tests.utils import catch_signal
 _GROUP_CACHE_KEY = CosinnusGroupManager._GROUP_CACHE_KEY % (1, 'CosinnusGroupManager', '%s')
 _GROUPS_PK_CACHE_KEY = CosinnusGroupManager._GROUPS_PK_CACHE_KEY % (1, 'CosinnusGroupManager')
 _GROUPS_SLUG_CACHE_KEY = CosinnusGroupManager._GROUPS_SLUG_CACHE_KEY % (1, 'CosinnusGroupManager')
+
+# load needed model hooks, since they are loaded in middleware during startup
+initialize_cosinnus_after_startup()
 
 User = get_user_model()
 
