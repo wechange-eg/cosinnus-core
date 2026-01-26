@@ -103,6 +103,7 @@ def setup_env(
     new_unit_commands=DEPRECATED,
     command_unit_directly=True,
     new_poetry_binary=False,
+    uses_celery=False,
 ):
     """
     Sets up the env with all variables needed to run cosinnus
@@ -122,6 +123,7 @@ def setup_env(
         the entire unit service instead of just the django backend (old method).
         set to False to use the old method
     @param new_poetry_binary if True, will use the poetry binary the way the new post Server-Move devops setup requires.
+    @uses_celery if True, will add additional tasks to other tasks, like restarting celery on django restart
 
     """
     if not base_path and domain:
@@ -167,6 +169,7 @@ def setup_env(
     env.db_username = portal_name
     env.confirm = confirm
     env.legacy_mode = False
+    env.uses_celery = uses_celery
 
     # poetry binary usage has changed for all post Server-Move servers
     if new_poetry_binary:

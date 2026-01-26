@@ -212,6 +212,8 @@ def restart(_ctx, skip_check=False):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run(f'{env.path}/manage.py check')
     c.run(env.reload_command)
+    if env.uses_celery:
+        restartcelery(_ctx)
     clearportalcache(_ctx)
 
 
