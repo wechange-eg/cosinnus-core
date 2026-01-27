@@ -3,12 +3,10 @@ from __future__ import unicode_literals
 
 from builtins import range, zip
 from typing import Set
-from unittest import skip
-from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
-from django.test import TestCase
+from django.test import TestCase, TransactionTestCase
 
 from cosinnus import tasks
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
@@ -17,7 +15,6 @@ from cosinnus.models.group import (
     CosinnusGroup,
     CosinnusGroupManager,
     CosinnusGroupMembership,
-    remove_stale_pending_memberships,
 )
 from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
 from cosinnus.tests.utils import catch_signal
@@ -307,7 +304,7 @@ class MembershipCacheTest(TestCase):
         self.assertEqual(group.pendings, [])
 
 
-class RemovePendingMembershipsForUserTaskTests(TestCase):
+class RemovePendingMembershipTestMixin:
     @staticmethod
     def get_memberships(user: User, status__in=None) -> Set[CosinnusGroupMembership]:
         kwargs = dict()
@@ -336,6 +333,8 @@ class RemovePendingMembershipsForUserTaskTests(TestCase):
         cls.user_target_memberships_expected = cls.get_memberships(cls.user_target, status__in=MEMBER_STATUS)
         cls.user_other_memberships_expected = cls.get_memberships(cls.user_other)
 
+
+class RemovePendingMembershipsTaskTests(RemovePendingMembershipTestMixin, TestCase):
     def test_removes_pending_memberships_for_target_user(self):
         tasks.remove_pending_memberships_for_user_task(self.user_target.id)
         self.assertEqual(self.get_memberships(user=self.user_target), self.user_target_memberships_expected)
@@ -344,31 +343,28 @@ class RemovePendingMembershipsForUserTaskTests(TestCase):
         tasks.remove_pending_memberships_for_user_task(self.user_target.id)
         self.assertEqual(self.get_memberships(user=self.user_other), self.user_other_memberships_expected)
 
-    @skip('depends on CosinnusWorkerThread non-threaded celery fallback in tests')
-    def test_signal_handler_affects_only_target_user(self):
-        remove_stale_pending_memberships(None, self.user_target)
-        self.assertEqual(self.get_memberships(user=self.user_target), self.user_target_memberships_expected)
-        self.assertEqual(self.get_memberships(user=self.user_other), self.user_other_memberships_expected)
 
-
-@skip('depends on working TransactionTestCase with fixture restore')
-class UserDeactivationRemovesStaleMembershipsTests(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        cls.user_target = User.objects.create_user('user_target')
-
+class RemovePendingMembersSignalIntegrationTests(RemovePendingMembershipTestMixin, TransactionTestCase):
     def setUp(self):
-        self.user_target.refresh_from_db()
+        self.setUpTestData()
 
     def test_user_deactivation_emits_signal(self):
         with catch_signal(user_deactivated) as handler:
             self.user_target.is_active = False
             self.user_target.save()
 
-        handler.assert_called()
+        handler.assert_called_with(signal=user_deactivated, sender=User, user=self.user_target)
 
-    def test_deactivation_calls_remove_stale_memberships_handler(self):
-        with patch('cosinnus.models.group.remove_stale_pending_memberships') as mock_handler:
-            self.user_target.is_active = False
-            self.user_target.save()
-            mock_handler.assert_called_once_with(sender=self.user_target, user=self.user_target)
+    def test_removes_pending_memberships_for_target_user(self):
+        self.user_target.is_active = False
+        self.user_target.save()
+        self.assertEqual(
+            self.get_memberships(user=self.user_target),
+            self.user_target_memberships_expected,
+            msg='target user memberships were not deactivated',
+        )
+        self.assertEqual(
+            self.get_memberships(user=self.user_other),
+            self.user_other_memberships_expected,
+            msg='other user memberships were deactivated',
+        )
