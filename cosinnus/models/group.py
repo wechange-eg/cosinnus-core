@@ -1105,6 +1105,13 @@ class CosinnusBaseGroup(
         null=True,
         help_text='Internal ID of the nextcloud deck board for the group. Set after the deck is created.',
     )
+    nextcloud_calendar_url = models.URLField(
+        _('Nextcloud Group Calendar CalDAV URL'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='CalDAV URL of the nextcloud calendar for the group. Set after the calendar is created.',
+    )
 
     # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(

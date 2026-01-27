@@ -113,3 +113,9 @@ if settings.COSINNUS_DECK_ENABLED:
     urlpatterns += [
         path('', include(('cosinnus_deck.urls_api_frontend', 'cosinnus'), namespace='deck-api')),
     ]
+
+
+if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+    urlpatterns += [
+        path('', include(('cosinnus_event.calendar.urls_api_frontend', 'cosinnus'), namespace='calendar-api')),
+    ]

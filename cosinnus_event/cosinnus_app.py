@@ -8,6 +8,9 @@ def register():
     if 'cosinnus_event' in getattr(settings, 'COSINNUS_DISABLED_COSINNUS_APPS', []):
         return
 
+    # register system checks
+    import cosinnus_event.checks  # noqa: F401
+
     # Import here to prevent import side effects
     from django.utils.translation import gettext_lazy as _
     from django.utils.translation import pgettext_lazy
@@ -24,3 +27,9 @@ def register():
 
     # makemessages replacement protection
     name = pgettext_lazy('the_app', 'event')  # noqa
+
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        from cosinnus_event.calendar.integration import CalendarIntegrationHandler
+
+        # initialize integration handler
+        CalendarIntegrationHandler(app_name='cosinnus_event')

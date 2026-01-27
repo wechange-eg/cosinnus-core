@@ -10,6 +10,7 @@ TEST_BBB_ARG = '--test-bbb'
 TEST_ETHERPAD_ARG = '--test-etherpad'
 TEST_PAYMENTS_ARG = '--test-payments'
 TEST_DECK_ARG = '--test-deck'
+TEST_CALENDAR_ARG = '--test-calendar'
 TEST_PRINT_TIME_ARG = '--print-time'
 
 # test apps
@@ -19,6 +20,7 @@ TEST_APPS_BBB = ['cosinnus.tests.test_bbbroom']
 TEST_APPS_ETHERPAD = ['cosinnus_etherpad']
 TEST_APPS_PAYMENTS = ['wechange_payments']
 TEST_APPS_DECK = ['cosinnus.tests.test_deck']
+TEST_APPS_CALENDAR = ['cosinnus.tests.test_calendar']
 
 TEST_REQUIRED_ENV_SETTINGS = {
     'RocketChat': [
@@ -43,6 +45,11 @@ TEST_REQUIRED_ENV_SETTINGS = {
     ],
     'Deck': [
         'WECHANGE_COSINNUS_CLOUD_PASSWORD',
+    ],
+    'Calendar': [
+        'WECHANGE_COSINNUS_CLOUD_PASSWORD',
+        'WECHANGE_COSINNUS_BBB_SERVER_CHOICES',
+        'WECHANGE_COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS',
     ],
 }
 
@@ -74,6 +81,8 @@ def cosinnus_manage(base_path):
     --test-bbb:         Run BBB service tests.
     --test-etherpad:    Run Etherpad/Ethercalc service tests.
     --test-payments:    Run wechange-payments tests.
+    --test-deck:        Run deck app tests.
+    --test-calendar:    Run calendar app tests.
     --print-time:       Prints execution time for slow test (>0.5s).
     """
 
@@ -138,6 +147,12 @@ def cosinnus_manage(base_path):
             if not custom_test:
                 args.extend(TEST_APPS_DECK)
             args.remove(TEST_DECK_ARG)
+        elif TEST_CALENDAR_ARG in args:
+            _check_test_env_settings(env, 'Calendar')
+            settings_module = 'cosinnus.tests.settings.test_calendar'
+            if not custom_test:
+                args.extend(TEST_APPS_CALENDAR)
+            args.remove(TEST_CALENDAR_ARG)
         elif not custom_test:
             args.extend(TEST_APPS_BASE)
         os.environ['DJANGO_SETTINGS_MODULE'] = settings_module

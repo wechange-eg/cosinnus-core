@@ -6,7 +6,6 @@ from django.contrib.auth import authenticate, get_user_model, password_validatio
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator, MinLengthValidator, URLValidator
 from drf_extra_fields.fields import Base64ImageField
-from geopy.geocoders.osm import Nominatim
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from taggit.serializers import TaggitSerializer, TagListSerializerField
@@ -20,13 +19,13 @@ from cosinnus.api_frontend.handlers.error_codes import (
     ERROR_SIGNUP_NAME_NOT_ACCEPTABLE,
 )
 from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusUserDynamicFieldsSerializerMixin
+from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializerMixin
 from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, UserSignupFinalizeMixin
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.profile import PROFILE_DYNAMIC_FIELDS_CONTACTS, PROFILE_SETTINGS_AVATAR_COLOR
 from cosinnus.models.tagged import get_tag_object_model
-from cosinnus.utils.functions import is_number
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
 
@@ -223,7 +222,9 @@ def validate_contact_info_pairs(pairs_array):
                     raise ValidationError(f'Contact_infos: A pair ({str(pair_dict)}) had an invalid URL!')
 
 
-class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSerializerMixin, serializers.Serializer):
+class CosinnusHybridUserSerializer(
+    TaggitSerializer, CosinnusUserDynamicFieldsSerializerMixin, CosinnusMediaTagSerializerMixin, serializers.Serializer
+):
     """A serializer that accepts and returns user fields as unprefixed fields,
     no matter if they are in the User, UserProfile or CosinnusTagObject models,
     so that one doesn't have to worry about database structures when changing user
@@ -395,50 +396,19 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
             last_name_fallback = instance.last_name
         instance.last_name = user_data.get('last_name', last_name_fallback)
         profile.description = profile_data.get('description', profile.description)
-        # only update the userprofile visibility field if it is not locked
-        locked_visibility = get_locked_profile_visibility_setting_for_user(user)
-        if locked_visibility is not None:
-            media_tag.visibility = locked_visibility
-        else:
-            media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
 
         profile.avatar = profile_data.get('avatar', profile.avatar)
         avatar_color = profile_data.get('settings', {}).get(PROFILE_SETTINGS_AVATAR_COLOR, None)
         if avatar_color:
             profile.settings[PROFILE_SETTINGS_AVATAR_COLOR] = avatar_color.strip('#')
-        topics = media_tag_data.get('get_topic_ids', None)
-        if topics:
-            media_tag.topics = ','.join([str(topic) for topic in topics])
-        tags = media_tag_data.get('tags', None)
-        if tags:
-            media_tag.tags.set(*tags, clear=True)
         # allow resetting the field if an empty value is given
         if PROFILE_DYNAMIC_FIELDS_CONTACTS in profile_data.get('dynamic_fields', {}):
             contact_infos = profile_data.get('dynamic_fields', {}).get(PROFILE_DYNAMIC_FIELDS_CONTACTS, []) or []
             profile.dynamic_fields[PROFILE_DYNAMIC_FIELDS_CONTACTS] = contact_infos
-        if 'location' in media_tag_data:
-            location_str = media_tag_data['location']
-            location_lat = media_tag_data.get('location_lat', None)
-            location_lon = media_tag_data.get('location_lon', None)
-            if not location_str or not location_str.strip():
-                # reset location
-                media_tag.location = None
-                media_tag.location_lat = None
-                media_tag.location_lon = None
-            elif location_lat and location_lon and is_number(location_lat) and is_number(location_lon):
-                # if the location string and location_lat and location_lon coordinates are given, simply save them
-                media_tag.location = location_str.strip()
-                media_tag.location_lat = float(location_lat)
-                media_tag.location_lon = float(location_lon)
-            else:
-                # use nominatim service to determine an actual location from the given string
-                # TODO: extract nominatim URL and use ours for production!
-                geolocator = Nominatim(domain='nominatim.openstreetmap.org', user_agent='wechange')
-                location = geolocator.geocode(location_str.strip(), timeout=5)
-                if location:
-                    media_tag.location = location_str
-                    media_tag.location_lat = location.latitude
-                    media_tag.location_lon = location.longitude
+
+        # Save media_tag fields. Only update the userprofile visibility field if it is not locked.
+        locked_visibility = get_locked_profile_visibility_setting_for_user(user)
+        self.save_media_tag(media_tag, media_tag_data, locked_visibility=locked_visibility, save=False)
 
         # for `CosinnusUserDynamicFieldsSerializerMixin`
         self.save_dynamic_fields(validated_data, profile, save=False)

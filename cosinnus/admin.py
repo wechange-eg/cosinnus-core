@@ -375,6 +375,10 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         exclude += [
             'nextcloud_deck_board_id',
         ]
+    if not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        exclude += [
+            'nextcloud_calendar_url',
+        ]
     if settings.COSINNUS_CONFERENCES_ENABLED:
         inlines = [CosinnusConferenceSettingsInline]
 
