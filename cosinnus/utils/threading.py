@@ -1,4 +1,5 @@
 import threading
+import types
 from functools import wraps
 
 from django.conf import settings
@@ -40,38 +41,47 @@ if getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
 
         def start(self):
             # store threaded-state to skip join later if running unthreaded
-            self._running_threaded = is_threaded()
+            self._cosinnus_worker_thread_running_threaded = is_threaded()
 
-            if not self._running_threaded:
+            if not self._cosinnus_worker_thread_running_threaded:
                 # run in main thread
-                self._original_run()
+                self._cosinnus_worker_thread_original_run()
                 return
 
             super().start()
 
         def join(self, timeout=None):
-            if self._running_threaded:
+            if self._cosinnus_worker_thread_running_threaded:
                 super().join(timeout)
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
 
-            self._running_threaded = None
+            self._cosinnus_worker_thread_running_threaded = None
 
             if (type_name := type(self).__name__) not in self._name:
                 self._name = f'{type_name}-{self._name}'
 
-            self._original_run = self.run
+            self._cosinnus_worker_thread_original_run = self.run
 
-            @wraps(self._original_run)
-            def wrapped_run():
+            @wraps(self._cosinnus_worker_thread_original_run)
+            def wrapped_run(self):
                 try:
-                    return self._original_run()
+                    return self._cosinnus_worker_thread_original_run()
                 finally:
-                    connections.close_all()
+                    if threading.current_thread() is not threading.main_thread():
+                        connections.close_all()
 
-            self.run = wrapped_run
+            # assign wrapped_run as proper bound method
+            self.run = types.MethodType(wrapped_run, self)
 else:
+
+    def is_threaded():
+        """
+        Stub-Method for context-getter. Returning always True.
+        :return: True, since threading cannot be disabled
+        """
+        return True
 
     class cosinnus_worker_thread_threading_disabled:
         """
