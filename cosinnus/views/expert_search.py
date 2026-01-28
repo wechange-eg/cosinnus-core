@@ -80,12 +80,14 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
         filters = []
         # add topic filter
         if self.show_cosinnus_topics_filter:
+            topic_tuple = list((str(key), val) for (key, val) in settings.COSINNUS_TOPIC_CHOICES)
             filters.append(
                 {
                     'name': self._cosinnus_topics_field_name,
                     'label': self.get_filter_label(self._cosinnus_topics_field_name, None),
                     'current': self.get_current_filter_list(self._cosinnus_topics_field_name),
-                    'options': list(((str(key), val) for (key, val) in settings.COSINNUS_TOPIC_CHOICES)),
+                    'options': topic_tuple,
+                    'topics_dict': dict(topic_tuple),
                 }
             )
         # add dynamic field filters
@@ -212,6 +214,8 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
                 'current_search': self.get_current_filters('q'),
                 'show_filter_type_select': self.filter_type_select_enabled and filters,
                 'current_type': self.get_filter_type(),
+                'show_cosinnus_topics_filter': self.show_cosinnus_topics_filter,
+                'topics_field_name': self._cosinnus_topics_field_name,
             }
         )
         return context
