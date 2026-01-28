@@ -1522,7 +1522,7 @@ class CosinnusConf(AppConf):
     # to django's `MIDDLEWARE` setting
     MANAGED_TAGS_RESTRICT_URLS_BLOCKED = {}
 
-    # a list of managed tag slugs, whose users may not contact anyone or be contacted directly
+    # a list of managed tag slugs, whose users may not be seen or be contacted directly
     MANAGED_TAGS_RESTRICT_CONTACTING = []
 
     # a list of managed tag slugs, whose users may not start BBB rooms, but rather only join running rooms
