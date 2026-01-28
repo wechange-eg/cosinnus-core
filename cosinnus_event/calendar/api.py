@@ -1,10 +1,12 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound
+from rest_framework.parsers import MultiPartParser
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
+from cosinnus.api_frontend.serializers.attached_objects import AttachFileSerializer, DeleteAttachedFileSerializer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -39,8 +41,12 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         if self.action == 'list':
             # use a different serializer for the list view, containing a subset of fields
             return CalendarPublicEventListSerializer
-        if self.action == 'attendance':
+        elif self.action == 'attendance':
             return CalendarPublicEventAttendanceActionSerializer
+        elif self.action == 'attach_file':
+            return AttachFileSerializer
+        elif self.action == 'delete_attached_file':
+            return DeleteAttachedFileSerializer
         return self.serializer_class
 
     def get_serializer_context(self):
@@ -85,6 +91,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
     def attendance(self, request, group_id, pk=None):
         """
         Set event attendance for request user.
+        Serializer is set in get_serializer_class.
         Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
               Users with only read permissions to the event should be able to set it.
         """
@@ -108,4 +115,39 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
             # user not attending, but event attendance exists, set state to "not going"
             user_attendance.state = EventAttendance.ATTENDANCE_NOT_GOING
             user_attendance.save()
+        return Response()
+
+    @action(
+        detail=True,
+        methods=['post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CalendarPublicEventPermissions],
+        parser_classes=[MultiPartParser],
+    )
+    def attach_file(self, request, group_id, pk=None):
+        """
+        Action to upload an attachment for an event.
+        Serializer is set in get_serializer_class.
+        """
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response()
+
+    @action(
+        detail=True,
+        methods=['post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CalendarPublicEventPermissions],
+    )
+    def delete_attached_file(self, request, group_id, pk=None):
+        """
+        Action to delete an attachment.
+        Serializer is set in get_serializer_class.
+        """
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response()

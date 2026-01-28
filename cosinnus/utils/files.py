@@ -190,3 +190,15 @@ def get_image_url_for_icon(icon_name, large=False):
     @param icon_name: e.g. "fa-user" """
     file_path = 'images/fa-icons/%s/%s.png' % ('large' if large else 'small', icon_name)
     return static(file_path)
+
+
+def shorten_file_name(file, max_length):
+    """shorten file name before its file suffix if it is too long"""
+    name = file._name
+    if len(name) > max_length:
+        if '.' in name:
+            filename, suffix = name.rsplit('.', 1)
+            test = '.'.join([filename[: max_length - len(suffix) - 1], suffix])
+            file._name = test
+        else:
+            file._name = name[:max_length]

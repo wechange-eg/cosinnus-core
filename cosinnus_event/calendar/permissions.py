@@ -23,7 +23,7 @@ class CalendarPublicEventPermissions(BasePermission):
         return True
 
     def has_object_permission(self, request, view, obj):
-        if view.action in ['update', 'partial_update', 'destroy']:
+        if view.action in ['update', 'partial_update', 'destroy', 'attach_file', 'delete_attached_file']:
             # Check write permissions
             return check_object_write_access(obj, request.user)
         # All other actions are allowed for public events.

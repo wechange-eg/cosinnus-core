@@ -365,7 +365,6 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                     'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
                 },
                 'can_edit': False,
-                'image': None,
                 'topics': [1, 2],
                 'location': 'Berlin',
                 'location_lat': None,
@@ -379,6 +378,8 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'bbb_restricted': True,
                 'bbb_enabled': False,
                 'bbb_url': None,
+                'image': None,
+                'attached_files': [],
             }
             self.assertEqual(data, expected_event_data)
 
