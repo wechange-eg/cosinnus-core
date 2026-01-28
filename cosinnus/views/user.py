@@ -790,7 +790,11 @@ def _send_user_welcome_email_if_enabled(user, force=False):
 
     # render the text as markdown
     text = textfield(render_html_with_variables(user, text))
-    subj_user = _('Welcome to %(portal_name)s!') % {'portal_name': portal.name}
+    if settings.COSINNUS_WELCOME_EMAIL_SUBJECT:
+        subj_user = force_str(settings.COSINNUS_WELCOME_EMAIL_SUBJECT)
+    else:
+        subj_user = _('Welcome to %(portal_name)s!') % {'portal_name': portal.name}
+
     send_html_mail_threaded(user, subj_user, text, topic_instead_of_subject='')
 
 
