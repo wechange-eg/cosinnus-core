@@ -982,7 +982,7 @@ class CosinnusConf(AppConf):
     V2_DASHBOARD_WELCOME_SCREEN_ENABLED = True
 
     # default duration for which the welcome screen should be shown on the user dashboard, unless clicked aways
-    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 7
+    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 365 * 10  # 10 years
 
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
