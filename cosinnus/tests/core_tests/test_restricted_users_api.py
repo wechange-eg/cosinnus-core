@@ -21,8 +21,6 @@ TEST_USER_RESTRICTED_DATA = {
     'first_name': 'Restricted',
     'last_name': 'TestUser',
 }
-RESTRICTED_TAG_SLUG = 'restricted'
-RESTRICTED_URL = '/search/'
 
 
 # override V3 settings so V3 redirects do not confound us
@@ -42,6 +40,9 @@ class RestrictedUsersTest(APITestCase):
     This test suite performs negative-tests as well, to make sure these restrictions don't leak over when the same tag
     is assigned, but the settings are not configured for this portal. This uses the `should_be_restricted` arg."""
 
+    RESTRICTED_TAG_SLUG = 'restricted'
+    RESTRICTED_URL = '/search/'
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -49,17 +50,19 @@ class RestrictedUsersTest(APITestCase):
         cls.portal = CosinnusPortal.get_current()
         cls.test_user_unrestricted = User.objects.create(**TEST_USER_UNRESTRICTED_DATA)
         cls.test_user_restricted = User.objects.create(**TEST_USER_RESTRICTED_DATA)
+        cls.test_user_restricted.cosinnus_profile.email_verified = True
+        cls.test_user_restricted.cosinnus_profile.save()
         cls.restricted_tag = CosinnusManagedTag.objects.create(
-            portal=cls.portal, slug=RESTRICTED_TAG_SLUG, name='Restricted'
+            portal=cls.portal, slug=cls.RESTRICTED_TAG_SLUG, name='Restricted'
         )
         CosinnusManagedTagAssignment.assign_managed_tag_to_object(
             cls.test_user_restricted.cosinnus_profile, cls.restricted_tag.slug
         )
 
     def test_testsetup_restriced_tag_assignment(self):
-        """Preflight tests if the test setup is correct"""
+        """General tests if the test setup is correct"""
         slugs = self.test_user_restricted.cosinnus_profile.get_managed_tag_slugs()
-        self.assertListEqual(slugs, [RESTRICTED_TAG_SLUG], 'the restricted user is assigned the restricted tag')
+        self.assertListEqual(slugs, [self.RESTRICTED_TAG_SLUG], 'the restricted user is assigned the restricted tag')
         slugs = self.test_user_unrestricted.cosinnus_profile.get_managed_tag_slugs()
         self.assertListEqual(slugs, [], 'the unrestricted user is assigned no tag')
 
@@ -67,13 +70,36 @@ class RestrictedUsersTest(APITestCase):
         """Tests restricted URLs access for restricted and non-restricted users"""
         # restricted users can't access some restriced sites
         self.client.force_login(self.test_user_restricted)
-        response = self.client.get(RESTRICTED_URL)
+        response = self.client.get(self.RESTRICTED_URL)
         self.assertEqual(
             response.status_code == 403,
             should_be_restricted,
             f'Restricted view ({response.status_code}) is restricted for a restricted user'
             + (' (NEGATIVE)' if not should_be_restricted else ''),
         )
+        # even if this is a non-postable URL, this works for our tests
+        response = self.client.post(self.RESTRICTED_URL, data={})
+        if not should_be_restricted:
+            self.assertEqual(
+                response.status_code,
+                200,
+                f'POSTs ({response.status_code}) are fine for unrestricted usecases'
+                + '(if this fails, the test for restricted usecases is not reliable)'
+                + (' (NEGATIVE)' if not should_be_restricted else ''),
+            )
+        else:
+            self.assertEqual(
+                response.status_code,
+                302,
+                f'POSTs ({response.status_code}) are also restricted for a restricted user and get redirected'
+                + (' (NEGATIVE)' if not should_be_restricted else ''),
+            )
+            self.assertEqual(
+                response.url,
+                reverse('cosinnus:generic-error-page'),
+                f'POSTs ({response.status_code}) are also restricted for a restricted user and get redirected'
+                + (' (NEGATIVE)' if not should_be_restricted else ''),
+            )
         response = self.client.get(self.map_url)
         self.assertEqual(
             response.status_code,
@@ -85,7 +111,7 @@ class RestrictedUsersTest(APITestCase):
         # but regular users can access them
         self.client.logout()
         self.client.force_login(self.test_user_unrestricted)
-        response = self.client.get(RESTRICTED_URL)
+        response = self.client.get(self.RESTRICTED_URL)
         self.assertEqual(
             response.status_code == 403,
             False,
@@ -108,8 +134,10 @@ class RestrictedUsersTest(APITestCase):
         }
     )
     def test_blocked_urls(self):
+        """Tests restricted URLs access for restricted users"""
         self._blocked_url_test()
 
     @override_settings(COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED={})
     def test_blocked_urls_negative(self):
+        """Tests restricted URLs access for non-restricted users"""
         self._blocked_url_test(should_be_restricted=False)
