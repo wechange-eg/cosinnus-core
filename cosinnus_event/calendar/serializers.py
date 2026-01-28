@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from cosinnus.api_frontend.serializers.attached_objects import AttachedFileSerializer
 from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializerMixin
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
@@ -168,6 +169,9 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
     bbb_enabled = CalendarPublicEventBBBEnabledField(source='video_conference_type')
     bbb_url = serializers.SerializerMethodField()
 
+    attached_files = serializers.SerializerMethodField()
+    # TODO: add image as base 64 field, see avatar
+
     class Meta:
         model = Event
         fields = (
@@ -192,6 +196,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             'bbb_restricted',
             'bbb_enabled',
             'bbb_url',
+            'attached_files',
         )
 
     def to_representation(self, instance):
@@ -252,6 +257,19 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
         if user.is_authenticated and settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
             bbb_room_url = obj.get_bbb_room_url()
         return bbb_room_url
+
+    def get_attached_image(self, obj):
+        attached_image = obj.attached_image
+        if attached_image:
+            return attached_image.static_image_url()
+        return None
+
+    def get_attached_files(self, obj):
+        attached_files = []
+        for attached_object in obj.file_attachments:
+            serialized_attached_object = AttachedFileSerializer(attached_object).data
+            attached_files.append(serialized_attached_object)
+        return attached_files
 
     def validate_bbb_enabled(self, value):
         if value == Event.BBB_MEETING:

@@ -379,6 +379,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'bbb_restricted': True,
                 'bbb_enabled': False,
                 'bbb_url': None,
+                'attached_files': [],
             }
             self.assertEqual(data, expected_event_data)
 

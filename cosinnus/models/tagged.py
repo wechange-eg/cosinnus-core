@@ -327,6 +327,18 @@ class AttachableObjectModel(models.Model):
                 cloud_files.append(attached_file.target_object)
         return cloud_files
 
+    @cached_property
+    def file_attachments(self):
+        """Return the attached objects filtered by files."""
+        file_attachments = []
+        for attached_object in self.attached_objects.all():
+            if (
+                attached_object.model_name in ['cosinnus_file.FileEntry', 'cosinnus_cloud.LinkedCloudFile']
+                and attached_object.target_object is not None
+            ):
+                file_attachments.append(attached_object)
+        return file_attachments
+
     def get_attached_objects_hash(self):
         """Returns a hashable tuple of sorted list of ids of all attached objects.
         Usuable to compare equality of attached files to objects."""
