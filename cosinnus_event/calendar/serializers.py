@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 
 from cosinnus.api_frontend.serializers.attached_objects import AttachedFileSerializer
@@ -169,8 +170,8 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
     bbb_enabled = CalendarPublicEventBBBEnabledField(source='video_conference_type')
     bbb_url = serializers.SerializerMethodField()
 
+    image = Base64ImageField(required=False, default=None)
     attached_files = serializers.SerializerMethodField()
-    # TODO: add image as base 64 field, see avatar
 
     class Meta:
         model = Event
@@ -182,7 +183,6 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             'description',
             'creator',
             'can_edit',
-            'image',
             'topics',
             'location',
             'location_lat',
@@ -196,6 +196,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             'bbb_restricted',
             'bbb_enabled',
             'bbb_url',
+            'image',
             'attached_files',
         )
 
@@ -205,6 +206,9 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
         user = self.context['request'].user
         if not check_object_write_access(instance, user):
             data['attendances'] = []
+        # Use fallback image if needed.
+        if not data['image']:
+            data['image'] = self.get_fallback_attached_image(instance)
         return data
 
     def create(self, validated_data):
@@ -258,12 +262,6 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             bbb_room_url = obj.get_bbb_room_url()
         return bbb_room_url
 
-    def get_attached_image(self, obj):
-        attached_image = obj.attached_image
-        if attached_image:
-            return attached_image.static_image_url()
-        return None
-
     def get_attached_files(self, obj):
         attached_files = []
         for attached_object in obj.file_attachments:
@@ -279,6 +277,17 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             if not group.group_can_be_bbb_enabled:
                 raise serializers.ValidationError('BBB creation is restricted for this group.')
         return value
+
+    def get_fallback_attached_image(self, obj):
+        """
+        Returns the image from attached files for backwords compatibility.
+        We use the event image field for the image here, but need to support old events where the image is in the
+        attached files.
+        """
+        attached_image = obj.attached_image
+        if attached_image:
+            return attached_image.static_image_url()
+        return None
 
 
 class CalendarPublicEventAttendanceActionSerializer(serializers.Serializer):
