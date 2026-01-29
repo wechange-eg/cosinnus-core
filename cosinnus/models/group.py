@@ -1196,6 +1196,36 @@ class CosinnusBaseGroup(
         default=False,
         help_text='If enabled, allows the creation of invite tokens in non-admin area',
     )
+    last_activity = models.DateTimeField(
+        _('Last activity'),
+        default=None,
+        blank=True,
+        null=True,
+    )
+    inactivity_notification_sent_at = models.DateTimeField(
+        _('Inactivity notification sent at'),
+        default=None,
+        blank=True,
+        null=True,
+    )
+    scheduled_for_deletion_at = models.DateTimeField(
+        _('Scheduled for Deletion at'),
+        default=None,
+        blank=True,
+        null=True,
+        help_text=_(
+            'The date this group is scheduled for deletion. Will be deleted after this date (ONLY IF the group is set '
+            'to inactive!)'
+        ),
+    )
+    deletion_triggered_by = models.ForeignKey(
+        get_user_model(),
+        verbose_name=_('Scheduled for Deletion by'),
+        related_name='+',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
 
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
 
@@ -1686,17 +1716,24 @@ class CosinnusBaseGroup(
     def clear_cache(self):
         self._clear_cache(group=self)
 
-    def get_all_objects_for_group(self):
-        """Returns in a list all the BaseTaggableObjects for this group"""
+    def get_registered_base_taggable_models(self):
+        """Returns a list of all registered models that inherit from BaseTaggableObjects."""
         from cosinnus.models.tagged import BaseTaggableObjectModel
 
-        base_taggable_objects = []
+        base_taggable_object_models = []
         for full_model_name in attached_object_registry:
             app_label, model_name = full_model_name.split('.')
             model = apps.get_model(app_label, model_name)
             if issubclass(model, BaseTaggableObjectModel):
-                instances = model.objects.filter(group=self)
-                base_taggable_objects.extend(list(instances))
+                base_taggable_object_models.append(model)
+        return base_taggable_object_models
+
+    def get_all_objects_for_group(self):
+        """Returns in a list all the BaseTaggableObjects for this group"""
+        base_taggable_objects = []
+        for base_taggable_model in self.get_registered_base_taggable_models():
+            instances = base_taggable_model.objects.filter(group=self)
+            base_taggable_objects.extend(list(instances))
         return base_taggable_objects
 
     def remove_index_for_all_group_objects(self):
@@ -2481,7 +2518,7 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
 
     class UserGroupGuestAccessDeleteThread(CosinnusWorkerThread):
         def run(self):
-            from cosinnus.views.profile import delete_guest_user
+            from cosinnus.views.profile_deletion import delete_guest_user
 
             for user in get_user_model().objects.filter(id__in=user_ids):
                 try:

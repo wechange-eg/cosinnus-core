@@ -137,7 +137,7 @@ def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=
         print(render_to_string(template, data))
 
 
-def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
+def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is_html=False, raise_on_error=False):
     # remove newlines from header
     subject = subject.replace('\n', ' ').replace('\r', ' ')
 
@@ -154,13 +154,17 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
         except Exception:
             extra.update({'sys_except': 'could not print'})
         logger.warn('Cosinnus.core.mail: Failed to send mail!', extra=extra)
+        if raise_on_error:
+            raise
         if settings.DEBUG:
             print(('>> extra:', extra))
             raise
             _mail_print(to, subject, template, data, from_email, bcc, is_html)
 
 
-def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc=None, is_html=False):
+def send_mail_or_fail_threaded(
+    to, subject, template, data, from_email=None, bcc=None, is_html=False, raise_on_error=False
+):
     if False and settings.COSINNUS_USE_CELERY:
         # We enabled Celery to RocketChat tasks. But we do not want to enable email tasks with it.
         # TODO: Remove the "False" check to enable the email task.
@@ -173,7 +177,7 @@ def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc
         mail_thread.start()
 
 
-def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None, threaded=False):
+def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None, threaded=False, raise_on_error=False):
     """Sends out a pretty html to an email-address.
     The given `html_content` will be placed inside the notification html template,
     and the style will be a "from-portal" style (instead of a "from-group" style.
@@ -189,7 +193,7 @@ def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None
         send_mail_func = send_mail_or_fail_threaded
     else:
         send_mail_func = send_mail_or_fail
-    send_mail_func(to_user.email, subject, template, data, is_html=True)
+    send_mail_func(to_user.email, subject, template, data, is_html=True, raise_on_error=raise_on_error)
 
 
 def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_subject=None):

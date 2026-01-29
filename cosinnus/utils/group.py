@@ -105,6 +105,15 @@ def get_default_user_group_ids():
     return list(default_user_groups.values_list('id', flat=True))
 
 
+def get_default_portal_group_slugs():
+    """Returns the slugs of forum, events and default user groups."""
+    default_portal_group_slugs = set()
+    default_portal_group_slugs.update(getattr(settings, 'NEWW_FORUM_GROUP_SLUG', []))
+    default_portal_group_slugs.update(getattr(settings, 'NEWW_EVENTS_GROUP_SLUG', []))
+    default_portal_group_slugs.update(get_default_user_group_slugs())
+    return default_portal_group_slugs
+
+
 def get_group_query_filter_for_search_terms(terms):
     """Returns a django Q filter for use on GROUP_MODEL that returns all projects/groups with matching
     names, given an array of search terms. Each search term needs to be matched (AND)
