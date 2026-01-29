@@ -893,6 +893,12 @@ def approve_user(request, user_id):
                     },
                 )
         if added_tags:
+            # change the userprofile visibility field if it is locked for any of the assigned tags
+            locked_visibility = get_locked_profile_visibility_setting_for_user(user)
+            if locked_visibility is not None:
+                user.cosinnus_profile.media_tag.visibility = locked_visibility
+                user.cosinnus_profile.media_tag.save()
+
             tag_urls = ', '.join([f'[{tag.name}]({tag.get_user_management_url()})' for tag in added_tags])
             messages.success(request, str(_('The following roles were assigned to the account:')) + ' ' + tag_urls)
         if failed_tag_slugs:
