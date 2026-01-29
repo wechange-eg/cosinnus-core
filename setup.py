@@ -171,7 +171,7 @@ setup(
         'ruff==0.4.4',
         'pre-commit==3.5.0',
         'fcm-django==2.2.1',
-        'tblib==3.0.0'
+        'tblib==3.0.0',
         # test requirements
         'freezegun==1.5.1',
         # requirements loaded in from github
