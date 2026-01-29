@@ -2,6 +2,7 @@ from config.settings.base import *  # noqa
 
 SITE_ID = 1
 COSINNUS_PORTAL_URL = 'localhost'
+COSINNUS_ENV_FILE = '.env.test'
 
 # import the settings from this project's "config.base"
 # the settings hierarchy is:

@@ -1798,6 +1798,11 @@ class CosinnusConf(AppConf):
     # set to 0 to disable throttling for empty Firebase messages.
     FIREBASE_EMPTY_MESSAGE_USER_THROTTLE_SECONDS = 10
 
+    # Env file used by project, e.g. read .env.test in default_settings.
+    # Important: this conf setting needs to be put at the start of your project's conf file,
+    # *before* `def define_cosinnus_project_settings(...` !
+    COSINNUS_ENV_FILE = '.env'
+
 
 class CosinnusDefaultSettings(AppConf):
     """Settings without a prefix namespace to provide default setting values for other apps.
