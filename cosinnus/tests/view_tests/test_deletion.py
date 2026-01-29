@@ -103,7 +103,7 @@ class UserManualDeletionTest(TestUserMixin, TestCase):
         user_delete_url = reverse('cosinnus:profile-delete')
         response = self.client.post(user_delete_url)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(reverse('login'), response.get('location'))
+        self.assertTrue(response.get('location').startswith(reverse('login')))  # allow subpaths/GET-params in URL
         self.test_user.refresh_from_db()
 
         # check the user is deactivated and scheduled for deletion
