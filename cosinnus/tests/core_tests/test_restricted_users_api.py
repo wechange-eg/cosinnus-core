@@ -273,7 +273,8 @@ class RestrictedUsersTest(APITestCase):
             BaseTagObject.VISIBILITY_GROUP,
             'Regular user has their profile visibility set to the default',
         )
-        # an admin accepts the signup request and makes the user a restricted user directly
+
+        # an admin logs in and accepts the signup request and makes the user a restricted user directly
         accept_url = (
             reverse('cosinnus:user-approve', kwargs={'user_id': signed_up_test_user.pk})
             + f'?add_managed_tag={self.RESTRICTED_TAG_SLUG}'
@@ -285,8 +286,6 @@ class RestrictedUsersTest(APITestCase):
             response.url.startswith(f'/user/{signed_up_test_user.pk}/'),
             "Admin could accept restricted user's signup request and is redirected to the user\s profile page",
         )
-
-        # TODO next:
 
         profile.refresh_from_db()
         profile.media_tag.refresh_from_db()
@@ -302,7 +301,7 @@ class RestrictedUsersTest(APITestCase):
         )
         self.client.logout()
 
-        # TODO restricted user tries to change visibility, but can't\
+        # restricted user tries to change visibility, but can't
         self.client.force_login(signed_up_test_user)
         test_user_update_data = {
             'first_name': 'Test User Updated Now',
@@ -326,5 +325,5 @@ class RestrictedUsersTest(APITestCase):
         self.assertEqual(
             profile.media_tag.visibility,
             self.LOCKED_VISIBLITY_SETTING,
-            '...but the user profile visibility remained at the locked state for that user',
+            '...and the user profile visibility is still set to the locked visiblity setting for that user',
         )
