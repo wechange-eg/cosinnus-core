@@ -57,7 +57,7 @@
             {% endif %}
 
       {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
-          {% if not SETTINGS.COSINNUS_DISABLE_PROFILE_EDITING %}
+          {% if not SETTINGS.COSINNUS_DISABLE_PROFILE_EDITING and not SETTINGS.COSINNUS_DISABLE_V3_PROFILE_SETUP_VIEWS %}
               <button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:v3-frontend-setup-profile' %}">
                   <ul class="media-list">
                       <li class="media">
