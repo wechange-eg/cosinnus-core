@@ -17,41 +17,43 @@
 	        </p>
         {% endblock description %}
 	    {% block visibility_setting %}
-	        <h3>
-	            {% trans "Who is allowed to see you on the platform?" %}
-				{% if not SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
-	            	{% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_50_profileprivacy" %}
-				{% else %}
-					{% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_50_profileprivacy_external_users_forbidden" %}
-				{% endif %}
-	        </h3>
-	        <select id="id_visibility_setting" name="visibility_setting" class="form-control form-control-heavy">
-	            {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=visibility_setting %}
-	        </select>
-	        
-	        <div class="group-public-warning-area" {% if not visibility_setting == 2 %}style="display: none;"{% endif %} id="user-visibility-warning">
-		        <i class="fa fa-fw fa-eye"></i>
-		        {% trans "Your profile will be set to be publicly visible!" %}
-		        <br/><br/>
-		        {% trans "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!" %}
-		    </div>
-		    <script type="text/javascript">
-		        {# show or hide a visibility warning #}
-		        $(function(){
-		            $('#id_visibility_setting').on('change', function(){
-	                    if ($(this).val() == 2) {
-	                        $('#user-visibility-warning').show();
-	                    } else {
-	                        $('#user-visibility-warning').hide();
-	                    } 
-	                });
-		        });
-		    </script>
-	        
-	        <em class="small">
-	           {% trans "You can change this setting later in your profile settings" %}
-	           ({% trans "in the top right menu" %})
-	        </em>
+            {% if not SETTINGS.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED %}
+                <h3>
+                    {% trans "Who is allowed to see you on the platform?" %}
+                    {% if not SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+                        {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_50_profileprivacy" %}
+                    {% else %}
+                        {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_50_profileprivacy_external_users_forbidden" %}
+                    {% endif %}
+                </h3>
+                <select id="id_visibility_setting" name="visibility_setting" class="form-control form-control-heavy">
+                    {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=visibility_setting %}
+                </select>
+
+                <div class="group-public-warning-area" {% if not visibility_setting == 2 %}style="display: none;"{% endif %} id="user-visibility-warning">
+                    <i class="fa fa-fw fa-eye"></i>
+                    {% trans "Your profile will be set to be publicly visible!" %}
+                    <br/><br/>
+                    {% trans "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!" %}
+                </div>
+                <script type="text/javascript">
+                    {# show or hide a visibility warning #}
+                    $(function(){
+                        $('#id_visibility_setting').on('change', function(){
+                            if ($(this).val() == 2) {
+                                $('#user-visibility-warning').show();
+                            } else {
+                                $('#user-visibility-warning').hide();
+                            }
+                        });
+                    });
+                </script>
+
+                <em class="small">
+                   {% trans "You can change this setting later in your profile settings" %}
+                   ({% trans "in the top right menu" %})
+                </em>
+            {% endif %}
 	    {% endblock visibility_setting %}
         
         {% block notification_setting %}

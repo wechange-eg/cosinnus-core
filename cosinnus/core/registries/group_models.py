@@ -3,12 +3,27 @@ from __future__ import unicode_literals
 
 from builtins import next
 from importlib import import_module
+from typing import Optional
 
 import six
 from django.core.exceptions import ImproperlyConfigured
 
 from cosinnus.conf import settings
 from cosinnus.core.registries.base import DictBaseRegistry
+
+
+class UnsupportedGroupTypeError(LookupError):
+    """A group type stored in the database is not configured in the application settings.
+
+    Attributes:
+        group_type: The group type that could not be resolved.
+    """
+
+    def __init__(self, group_type: int, message: Optional[str] = None):
+        self.group_type = group_type
+        if message is None:
+            message = f'Group type "{group_type}" is not configured in the application settings.'
+        super().__init__(message)
 
 
 class GroupModelRegistry(DictBaseRegistry):
@@ -126,9 +141,11 @@ class GroupModelRegistry(DictBaseRegistry):
         return prefix
 
     def get_url_name_prefix_by_type(self, group_type, default=None):
-        _, prefix, _, _ = super(GroupModelRegistry, self).get(
-            self.group_type_index[group_type], (None, default, None, None)
-        )
+        try:
+            url_key = self.group_type_index[group_type]
+        except KeyError:
+            raise UnsupportedGroupTypeError(group_type)
+        _, prefix, _, _ = super(GroupModelRegistry, self).get(url_key, (None, default, None, None))
         return prefix
 
     def get_plural_url_key(self, url_key, default=None):

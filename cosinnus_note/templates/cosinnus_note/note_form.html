@@ -3,7 +3,11 @@
 
 {% block extrahead %}
     {{ block.super }}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.text.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.text.html_name %}
+
+    {# We display no note form for unverified user accounts #}
+    {% if request.user.is_account_verified or not group.is_forum_or_default_user_group %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.text.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.text.html_name %}
+    {% endif %}
 {% endblock %}
 
 
@@ -36,34 +40,36 @@
     
     <!-- a box with semi transparent background -->
     <div class="content-box">
-        
-        <form action="{% if form_view == 'add' %}{% group_url 'cosinnus:note:add' group=group.slug %}?next={% group_url 'cosinnus:note:list' group=group.slug %}{% else %}{% group_url 'cosinnus:note:update' group=object.group slug=object.slug %}{% endif %}" method="POST" id="note_edit_form" class="cosinnus-form form-horizontal">{% csrf_token %}
-	        <div class="app-main">
-	            <div class="large-space">
-	            
-		            <div>
-                        {% include 'cosinnus_note/note_form_core.html' %}
-		            </div>
-		
-		            <button type="submit" class="btn btn-emphasized">
-		                <ul class="media-list">
-		                    <li class="media">
-		                        <span class="pull-left">
-		                            <i class="fa fa-pencil"></i>
-		                        </span>
-		                        <div class="media-body">
-		                            {% if form_view == 'add' %}{% trans "Post" %}{% else %}{% trans "Save changes" %}{% endif %}
-		                        </div>
-		                    </li>
-		                </ul>
-		            </button>
-	            </div>
-	            
-	            <!-- xxxxxx -->
-	        
-	        </div>
-        </form>
-        
+
+        {% if not request.user.is_account_verified and group.is_forum_or_default_user_group %}
+            {# We display no note form for unverified user accounts #}
+            {% include 'cosinnus/user/user_warning_account_not_verified.html' %}
+        {% else %}
+            <form action="{% if form_view == 'add' %}{% group_url 'cosinnus:note:add' group=group.slug %}?next={% group_url 'cosinnus:note:list' group=group.slug %}{% else %}{% group_url 'cosinnus:note:update' group=object.group slug=object.slug %}{% endif %}" method="POST" id="note_edit_form" class="cosinnus-form form-horizontal">{% csrf_token %}
+                <div class="app-note">
+                    <div class="large-space">
+
+                        <div>
+                            {% include 'cosinnus_note/note_form_core.html' %}
+                        </div>
+
+                        <button type="submit" class="btn btn-emphasized">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <span class="pull-left">
+                                        <i class="fa fa-pencil"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        {% if form_view == 'add' %}{% trans "Post" %}{% else %}{% trans "Save changes" %}{% endif %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+
     
     
     </div><!-- content-box -->

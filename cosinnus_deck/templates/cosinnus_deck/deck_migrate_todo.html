@@ -7,11 +7,11 @@
 
 {% block content %}
     <div class="content-box white-content">
-        <h2>{% trans "Migrate Todos to Task-Board" %} - <i>{{ group.name }}</i></h2>
+        <h2>{% trans "Migrate Todos to Task Board" %} - <i>{{ group.name }}</i></h2>
         <div class="textfield transparent">
             {% if not deck_migration_status %}
                 <p class="textfield transparent">
-                    {% trans "Start the migration of Todos to the Task-Board in the background." %}
+                    {% trans "Start the migration of Todos to the Task Board in the background." %}
                 </p>
                 <p class="textfield transparent">
                     {% trans "This page will automatically refresh when the process is done." %}
@@ -26,11 +26,11 @@
                     {% trans "An error occurred during the migration. Some Todos might not have been migrated." %}
                 </p>
                 <p class="textfield transparent">
-                    {% trans "Please, retry the migration. If the errors persist, please contact the support!" %}
+                    {% trans "Please try again later. If the error persists, please contact our support." %}
                 </p>
             {% elif deck_migration_status == 'success' %}
                 <p class="textfield transparent">
-                    {% captureas deck_link %}<a href="{% group_url "cosinnus:deck:index" group=group %}" class="transparent">{% trans "Task-Board" %}</a>{% endcaptureas %}
+                    {% captureas deck_link %}<a href="{% group_url "cosinnus:deck:index" group=group %}" class="transparent">{% trans "Task Board" %}</a>{% endcaptureas %}
                     {% blocktrans %}Migration to {{ deck_link }} successfully finished. {% endblocktrans %}
                 </p>
             {% endif %}
@@ -38,14 +38,14 @@
         </div>
     </div><!-- content-box -->
 
-    {% if group.deck_todo_migration_allowed %}
+    {% if group.deck_migration_allowed %}
         <form method="POST" action="." class="cosinnus-form form-horizontal">
             {% csrf_token %}
             <button type="submit" class="btn btn-emphasized btn-autosize">
                 <ul class="media-list">
                     <li class="media">
                         <span class="pull-left">
-                            <i class="fa fa-clock"></i>
+                            <i class="fa fa-check"></i>
                         </span>
                         <div class="media-body">
                             {% if not deck_migration_status  %}

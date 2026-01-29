@@ -136,6 +136,12 @@ class CosinnusProjectTransBase(object):
         'this regard? In other words: Is the aspect that the statement is about characteristic for your project?'
     )
 
+    DECK_TEASER = _(
+        "With the new app, you can organise the collaboration in your project – it's easy, flexible and clear "
+        '(thanks to Kanban logic). Try out the wide range of functions and become more effective with agile project '
+        'management! As an admin, you can activate the Task Board for your project.'
+    )
+
 
 class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     """A class containing all type-specific translation strings for the abstract typed
@@ -264,6 +270,12 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
         'regard? In other words: Is the aspect that the statement is about characteristic for your group?'
     )
 
+    DECK_TEASER = _(
+        "With the new app, you can organise the collaboration in your group – it's easy, flexible and clear "
+        '(thanks to Kanban logic). Try out the wide range of functions and become more effective with agile project '
+        'management! As an admin, you can activate the Task Board for your group.'
+    )
+
 
 class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     """A class containing all type-specific translation strings for the abstract typed
@@ -383,6 +395,8 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     MITWIRKOMAT_FIELD_AVATAR_LABEL = ''  # not availablle for conferences
     MITWIRKOMAT_FIELD_LINK_LABEL = ''  # not availablle for conferences
     MITWIRKOMAT_FIELD_QUESTIONS_LEGEND = ''  # not availablle for conferences
+
+    DECK_TEASER = ''  # not availablle for conferences
 
 
 # allow dropin of trans classes

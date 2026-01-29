@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
+from cosinnus.utils.permissions import check_user_can_use_oauth
 from cosinnus.views.mixins.group import RequireReadMixin
 from cosinnus_cloud.hooks import get_email_for_user
 
@@ -60,8 +61,10 @@ class OAuthView(APIView):
     Used by Oauth2 authentication of Nextcloud to retrieve user details
     """
 
+    OAUTH_VIEW_IDENTIFIER = 'cosinnus_nextcloud'
+
     def get(self, request, **kwargs):
-        if request.user.is_authenticated and not request.user.is_guest:
+        if check_user_can_use_oauth(request.user, oauth_view_class=OAuthView):
             user = request.user
             avatar_url = user.cosinnus_profile.avatar.url if user.cosinnus_profile.avatar else ''
             if avatar_url:

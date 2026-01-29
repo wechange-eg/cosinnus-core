@@ -1,18 +1,22 @@
 {% load i18n cosinnus_tags %}
 
 <div class="cosinnus-field textfield transparent">
-    {% trans "If you would like to change your email address, you can do it here:" %}
-    
-    <button href="{% url 'cosinnus:user-change-email' %}" target="_blank"  type="button" class="btn btn-emphasized btn-small btn-autosize regular-space">
-        <ul class="media-list">
-            <li class="media">
-                <span class="pull-left">
-                    <i class="fa fa-pencil"></i>
-                </span>
-                <div class="media-body">
-			        {% trans "Change email address" %}
-                </div>
-            </li>
-        </ul>
-    </button>       
+    {% if not SETTINGS.COSINNUS_IS_OAUTH_CLIENT and not SETTINGS.COSINNUS_USER_LOGIN_DISABLED %}
+        {% trans "If you would like to change your email address, you can do it here:" %}
+
+        <button href="{% url 'cosinnus:user-change-email' %}" target="_blank"  type="button" class="btn btn-emphasized btn-small btn-autosize regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-pencil"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Change email address" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    {% else %}
+        {% trans "The email address can be changed in the SSO provider." %}
+    {% endif %}
 </div>

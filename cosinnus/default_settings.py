@@ -20,6 +20,7 @@ from os.path import dirname, join, realpath
 
 import environ
 from django.conf.global_settings import *  # noqa
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus import VERSION as COSINNUS_VERSION
@@ -60,7 +61,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # COSINNUS_PORTAL_NAME = project_settings["COSINNUS_PORTAL_NAME"] # needs to be configured in project config.base
     # COSINNUS_PORTAL_URL = project_settings["COSINNUS_PORTAL_URL"] # needs to be configured in project config.base
     COSINNUS_DEFAULT_FROM_EMAIL = project_settings.get(
-        'COSINNUS_DEFAULT_FROM_EMAIL', f"noreply@{project_settings['COSINNUS_PORTAL_URL']}"
+        'COSINNUS_DEFAULT_FROM_EMAIL', f'noreply@{project_settings["COSINNUS_PORTAL_URL"]}'
     )  # needs to be configured in project config.base
 
     """ --------------- BASE CONFIG ---------------- """
@@ -78,8 +79,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     BASE_PATH = project_base_path
     COSINNUS_BASE_PATH = realpath(join(dirname(__file__), '..'))
 
+    env_file = project_settings.get('COSINNUS_ENV_FILE', '.env')
     env = environ.Env()
-    env.read_env(BASE_PATH('.env'))
+    env.read_env(BASE_PATH(env_file))
 
     # Absolute filesystem path to the directory that will hold user-uploaded files.
     # Example: "/home/media/media.lawrence.com/media/"
@@ -214,7 +216,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         SECRET_KEY = env('WECHANGE_SECRET_KEY')
     except environ.ImproperlyConfigured:
         SECRET_KEY = ''.join(
-            [random.SystemRandom().choice(f"{string.ascii_letters}{string.digits}{'+-:$;<=>?@^_~'}") for i in range(63)]
+            [random.SystemRandom().choice(f'{string.ascii_letters}{string.digits}{"+-:$;<=>?@^_~"}') for i in range(63)]
         )
         with open('.env', 'a') as envfile:
             envfile.write(f'WECHANGE_SECRET_KEY={SECRET_KEY}\n')
@@ -237,7 +239,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     SESSION_EXPIRE_AT_BROWSER_CLOSE = True
     # session cookie name
     SESSION_COOKIE_DOMAIN = project_settings['COSINNUS_PORTAL_URL']
-    SESSION_COOKIE_NAME = f"{project_settings['COSINNUS_PORTAL_NAME']}-sessionid"
+    SESSION_COOKIE_NAME = f'{project_settings["COSINNUS_PORTAL_NAME"]}-sessionid'
     # session expiry in seconds
     SESSION_COOKIE_AGE = 60 * 60 * 24 * 90  # 90 days
     LANGUAGE_COOKIE_AGE = SESSION_COOKIE_AGE
@@ -335,6 +337,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'allauth',
         'allauth.account',
         'allauth.socialaccount',
+        'allauth.socialaccount.providers.openid_connect',
         # 'django_extensions',
         'django_filters',
         'django_select2',
@@ -367,6 +370,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'taggit',
         'django_clamd',
         'rest_framework_simplejwt.token_blacklist',
+        'fcm_django',
     ]
 
     """ --------------- SENTRY/RAVEN LOGGING ---------------- """
@@ -393,6 +397,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
             sanitize_keys = [
                 'bic',
                 'iban',
+                'dsn',
             ]
 
         processors = [
@@ -435,7 +440,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
             'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
             'LOCATION': env(
                 'WECHANGE_MEMCACHED_LOCATION',
-                default=f"unix:/srv/http/{project_settings['COSINNUS_PORTAL_URL']}/run/memcached.socket",
+                default=f'unix:/srv/http/{project_settings["COSINNUS_PORTAL_URL"]}/run/memcached.socket',
             ),
         }
     }
@@ -460,7 +465,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
 
     # Etherpad config.
     COSINNUS_ETHERPAD_BASE_URL = env(
-        'WECHANGE_COSINNUS_ETHERPAD_BASE_URL', default=f"https://pad.{project_settings['COSINNUS_PORTAL_URL']}/api"
+        'WECHANGE_COSINNUS_ETHERPAD_BASE_URL', default=f'https://pad.{project_settings["COSINNUS_PORTAL_URL"]}/api'
     )
     COSINNUS_ETHERPAD_API_KEY = env('WECHANGE_COSINNUS_ETHERPAD_API_KEY', default='')
 
@@ -468,24 +473,25 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     COSINNUS_ETHERPAD_ENABLE_ETHERCALC = True
     COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = env(
         'WECHANGE_COSINNUS_ETHERPAD_ETHERCALC_BASE_URL',
-        default=f"https://calc.{project_settings['COSINNUS_PORTAL_URL']}",
+        default=f'https://calc.{project_settings["COSINNUS_PORTAL_URL"]}',
     )
 
     # Rocketchat
     COSINNUS_ROCKET_ENABLED = False
-    COSINNUS_CHAT_BASE_URL = f"https://chat.{project_settings['COSINNUS_PORTAL_URL']}"
-    COSINNUS_CHAT_USER = env('WECHANGE_COSINNUS_CHAT_USER', default=f"{project_settings['COSINNUS_PORTAL_NAME']}-bot")
+    COSINNUS_CHAT_BASE_URL = f'https://chat.{project_settings["COSINNUS_PORTAL_URL"]}'
+    COSINNUS_CHAT_USER = env('WECHANGE_COSINNUS_CHAT_USER', default=f'{project_settings["COSINNUS_PORTAL_NAME"]}-bot')
     COSINNUS_CHAT_PASSWORD = env('WECHANGE_COSINNUS_CHAT_PASSWORD', default='')
     COSINNUS_CHAT_SESSION_COOKIE_DOMAIN = project_settings['COSINNUS_PORTAL_URL']
 
     # Nextcloud
     COSINNUS_CLOUD_ENABLED = False
-    COSINNUS_CLOUD_NEXTCLOUD_URL = f"https://cloud.{project_settings['COSINNUS_PORTAL_URL']}"
+    COSINNUS_CLOUD_NEXTCLOUD_URL = f'https://cloud.{project_settings["COSINNUS_PORTAL_URL"]}'
     COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME = env('WECHANGE_COSINNUS_CLOUD_USER', default='admin')
     COSINNUS_CLOUD_NEXTCLOUD_AUTH = (
         COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME,
         env('WECHANGE_COSINNUS_CLOUD_PASSWORD', default=''),
     )
+    COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN = env('WECHANGE_COSINNUS_CLOUD_API_TOKEN', default='')
 
     """ --------------- EXTERNAL SERVICES  ---------------- """
 
@@ -719,9 +725,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # (can be set for each portal individually in their settings.py)
     COSINNUS_MICROSITES_ENABLED = True
 
+    # Celery settings
     COSINNUS_USE_CELERY = False
-    BROKER_URL = f'redis://localhost:6379/{SITE_ID}'
-    CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+    BROKER_URL = 'redis://localhost:6379/44'
     CELERY_ACCEPT_CONTENT = ['application/json']
     CELERY_TASK_SERIALIZER = 'json'
     CELERY_RESULT_SERIALIZER = 'json'
@@ -782,7 +788,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     PHONENUMBER_DEFAULT_REGION = 'DE'
 
     # django_countries settings
-    COUNTRIES_FIRST = ['de', 'at' 'ru', 'ua']
+    COUNTRIES_FIRST = ['de', 'at', 'ua']
     COUNTRIES_FIRST_REPEAT = True
     # single out i18n country strings to differently translate them
     COUNTRIES_OVERRIDE = {
@@ -821,7 +827,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     JWT_AUTH = {'JWT_RESPONSE_PAYLOAD_HANDLER': 'cosinnus.utils.jwt.jwt_response_handler'}
 
     SUIT_CONFIG = {
-        'ADMIN_NAME': f"{project_settings['COSINNUS_PORTAL_NAME']} Admin",
+        'ADMIN_NAME': f'{project_settings["COSINNUS_PORTAL_NAME"]} Admin',
     }
 
     # django-otp settings
@@ -850,6 +856,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     ACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusAccountAdapter'
     SOCIALACCOUNT_ADAPTER = 'cosinnus_oauth_client.views.CosinusSocialAccountAdapter'
     SOCIALACCOUNT_AUTO_SIGNUP = False
+    SOCIALACCOUNT_LOGIN_ON_GET = True
     SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
     SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
@@ -880,6 +887,48 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
                 },
             }
         )
+
+    # fcm-django Firebase configuration
+    _firebase_enabled = project_settings.get('COSINNUS_FIREBASE_ENABLED', False)
+    if _firebase_enabled:
+        from firebase_admin import credentials, initialize_app
+        from google.auth import load_credentials_from_dict
+        from google.oauth2.service_account import Credentials  # noqa
+
+        # create a custom Credentials class to load a non-default google service account JSON from a dict
+        class CustomFirebaseCredentials(credentials.ApplicationDefault):
+            _account_dict = None
+
+            def __init__(self, account_dict: str):
+                super().__init__()
+                self._account_dict = account_dict
+
+            def _load_credential(self):
+                if not self._g_credential:
+                    self._g_credential, self._project_id = load_credentials_from_dict(
+                        self._account_dict, scopes=credentials._scopes
+                    )
+
+        firebase_env_credentials_dict = env.json('WECHANGE_FIREBASE_GOOGLE_APPLICATION_CREDENTIALS_DICT', default=None)
+        if not firebase_env_credentials_dict:
+            raise ImproperlyConfigured(
+                'COSINNUS_FIREBASE_ENABLED is True, but no Google Auth dict could be found in '
+                '.env as "WECHANGE_FIREBASE_GOOGLE_APPLICATION_CREDENTIALS_DICT"!'
+            )
+        if DEBUG:
+            print(
+                '>> DEBUG INFO: Firebase dict loaded',
+                type(firebase_env_credentials_dict),
+                firebase_env_credentials_dict,
+            )
+        # init default firebase app for fcm-django
+        # the env variable contains the custom google service account JSON as single dict variable
+        custom_credentials = CustomFirebaseCredentials(firebase_env_credentials_dict)
+        FIREBASE_APP = initialize_app(custom_credentials)
+        FCM_DJANGO_SETTINGS = {
+            'DEFAULT_FIREBASE_APP': FIREBASE_APP,
+            'DELETE_INACTIVE_DEVICES': True,
+        }
 
     # Organizations
     COSINNUS_ORGANIZATIONS_ENABLED = False

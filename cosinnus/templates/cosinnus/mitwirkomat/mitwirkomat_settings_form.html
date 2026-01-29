@@ -108,6 +108,41 @@
             {% endcaptureas %}
             {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
 
+            {# Dynamic Filter Fields #}
+            {% comment %} The fields in this block are generated from `settings.COSINNUS_MITWIRKOMAT_EXTRA_FIELDS` {% endcomment %}
+            {% block mitwirkomat_dynamic_fields %}
+                {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form %}
+            {% endblock %}
+
+            {# Location inheritance explanation Field #}
+            {% trans "Location" as location_label %}
+            {% captureas location_legend %}
+                <p class="textfield transparent">
+                    {% blocktrans trimmed with group_settings_label=group.trans.SETTINGS_LABEL %}
+                        Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your {{ group_settings_label }} is used.
+                    {% endblocktrans %}
+                </p>
+                <p class="textfield large-space">
+                    {% trans "Currently set as location" %}:
+                    {% if group.locations.exists %}
+                        {% with group_location=group.locations.first %}
+                            <i class="fa fa-fw fa-map-marker"></i> <a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a>
+                        {% endwith %}
+                    {% else %}
+                        <i>({% trans "No location set yet" %})</i>
+                    {% endif %}
+                </p>
+                <p class="textfield transparent">
+                    <a href="{% group_url 'cosinnus:group-edit' group=group %}#locations-wrapper-0" target="_blank" class="transparent">
+                        {% blocktrans trimmed with group_settings_label=group.trans.SETTINGS_LABEL %}
+                            Change location in {{ group_settings_label }}
+                        {% endblocktrans %}
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                </p>
+            {% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with label=location_label legend=location_legend %}
+
             {# Link explanation Field #}
             {% trans "Link" as link_label %}
             {% captureas link_legend %}
@@ -126,12 +161,6 @@
             {% trans "Please choose the answers that best fit you." as questions_label %}
             {% captureas questions_legend %}{{ group.trans.MITWIRKOMAT_FIELD_QUESTIONS_LEGEND }}{% endcaptureas %}
             {% include 'cosinnus/fields/inlineform_field.html' with inline_form=questions_formset label=questions_label legend=questions_legend legend_class="v-spacer-l-important" content_template='cosinnus/mitwirkomat/mitwirkomat_questions_inline.html' unique_id='questions' alternate_field_class=" " %}
-
-            <hr style="margin: 10px 0 16px 0;"/>
-
-            <p class="textfield transparent">
-                {% trans "Please note that your changes in this form will not be transferred immediately. It may take up to one day for your changes to appear on the Volunteer-O-Matic." %}
-            </p>
         </div>
 
         <button type="submit" class="btn btn-emphasized btn-autosize">

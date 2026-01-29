@@ -22,7 +22,7 @@ def register():
 
     active_by_default = 'cosinnus_deck' in settings.COSINNUS_DEFAULT_ACTIVE_GROUP_APPS
     app_registry.register(
-        'cosinnus_deck', 'deck', _('Task-Board'), deactivatable=True, active_by_default=active_by_default
+        'cosinnus_deck', 'deck', _('Task Board'), deactivatable=True, active_by_default=active_by_default
     )
     url_registry.register_urlconf('cosinnus_deck', 'cosinnus_deck.urls', url_app_name_override='board')
 

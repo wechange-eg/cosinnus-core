@@ -1,9 +1,8 @@
 import re
-from urllib.parse import parse_qsl, unquote, urlencode
+from urllib.parse import unquote
 
 from django.core.cache import cache
 from django.shortcuts import redirect
-from django.utils import translation
 from django.utils.crypto import get_random_string
 from django.utils.deprecation import MiddlewareMixin
 
@@ -40,6 +39,12 @@ class FrontendMiddleware(MiddlewareMixin):
             # completely skip any redirects with the force-disable GET key (debug purposes)
             if request.GET.get(self.force_disable_key, None) is not None:
                 return
+
+            # if the v3 welcome profile setup screen is disabled, redirect away from it
+            if not settings.COSINNUS_SHOW_V3_WELCOME_PROFILE_SETUP_PAGE and request.path.startswith('/signup/welcome'):
+                if request.user.is_authenticated:
+                    return redirect('cosinnus:user-dashboard')
+                return redirect('login')
 
             request_tokens = request.build_absolute_uri().split('/')
             # if the workaround language-prefix request from the frontend has arrived at the server,
@@ -114,13 +119,12 @@ class FrontendMiddleware(MiddlewareMixin):
                         matched = True
                         break
 
+            # if we have a match for a qualifying v3 URL, but no v=3 param is present, attach it and redirect
             if matched:
-                params = dict(parse_qsl(request.META['QUERY_STRING']))
+                params = request.GET.copy()
                 if params.get(self.param_key) != self.param_value:
                     params[self.param_key] = self.param_value
-                    request.META['QUERY_STRING'] = urlencode(params)
-                    cur_lang = translation.get_language()  # noqa
-                    redirect_to = request.get_full_path()
+                    redirect_to = f'{request.path}?{params.urlencode()}'
                     return redirect(redirect_to)
 
     def process_response(self, request, response):
@@ -152,7 +156,7 @@ class FrontendMiddleware(MiddlewareMixin):
                 # do not redirect the POST if it was an ecempted frontend URL (API or necesseray direct calls)
                 if check_url_v3_everywhere_exempt(request.path, request):
                     return response
-                
+
                 # save response to cache and redirect with the cache
                 if hasattr(response, '_is_rendered') and not response._is_rendered:
                     response.render()

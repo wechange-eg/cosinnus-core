@@ -6,7 +6,7 @@
 	// Farbklima Netzwerk Wachstumswende
 	// no other colors should be used in the whole project
     
-	// main color and news
+	// main color
 	@app-main-color: #16778D;
 	@app-main-color-dark: #104A59;
 	@app-main-color-light: #CBE7ED;
@@ -14,6 +14,11 @@
 	@app-main-color-yes: #779B48;
 	@app-main-color-maybe: #EFA02D;
 	@app-main-color-no: #E55C55;
+
+    // Note
+    @app-note-color: #16778D;
+    @app-note-color-dark: #104A59;
+    @app-note-color-light: #CBE7ED;
 
     // Calendar
     @app-calendar-color: #779B48;
@@ -89,137 +94,7 @@
 
 }
 
-
-.pink-color-scheme() {
-	// eight years old riding a unicorn
-
-	// main color and news
-	@app-main-color: #FFBAFA;
-	@app-main-color-dark: #00D7C6;
-	@app-main-color-light: #FFFFFF;
-
-	@app-main-color-yes: #00FF00;
-	@app-main-color-maybe: #FFFF00;
-	@app-main-color-no: #fd0000;
-
-	// Calendar
-	@app-calendar-color: @app-main-color;
-	@app-calendar-color-dark: @app-main-color-dark;
-	@app-calendar-color-light: @app-main-color-light;
-
-	// Files
-	@app-files-color: @app-calendar-color;
-	@app-files-color-dark: @app-calendar-color-dark;
-	@app-files-color-light: @app-calendar-color-light;
-
-	// Documents
-	@app-documents-color: @app-calendar-color;
-	@app-documents-color-dark: @app-calendar-color-dark;
-	@app-documents-color-light: @app-calendar-color-light;
-	
-	// Poll
-	@app-poll-color: @app-calendar-color;
-	@app-poll-color-dark: @app-calendar-color-dark;
-	@app-poll-color-light: @app-calendar-color-light;
-    
-    // Marketplace
-	@app-marketplace-color: @app-calendar-color;
-	@app-marketplace-color-dark: @app-calendar-color-dark;
-	@app-marketplace-color-light: @app-calendar-color-light;
-    
-	// Todos
-	@app-todos-color: @app-calendar-color;
-	@app-todos-color-dark: @app-calendar-color-dark;
-	@app-todos-color-light: @app-calendar-color-light;
-
-	// Etherpad
-	@app-etherpad-color: @app-calendar-color;
-	@app-etherpad-color-dark: @app-calendar-color-dark;
-	@app-etherpad-color-light: @app-calendar-color-light;
-
-	// Neutral
-	@app-neutral-color: #FFA5D3;
-	@app-neutral-color-dark: #FF86C5;
-	@app-neutral-color-light: #A2D5E3;
-	@app-neutral-color-white: #E5F6F8;
-
-	// Misc
-	@warning-color: #EFA02D;
-	
-	body {
-		font-family: "Comic Sans MS";
-
-		background-image: url("../images/magic-pony-django-wallpaper.png");
-	//	background-color: #FF56F2;
-
-	}
-	* {
-		border-radius: 2px !important;
-	}
-}
-
-
-.nerd-color-scheme() {
-	// Black and evil
-
-	// main color and news
-	@app-main-color: #16778D;
-	@app-main-color-dark: #104A59;
-	@app-main-color-light: #CBE7ED;
-
-	// Calendar
-	@app-calendar-color: #6F5D17;
-	@app-calendar-color-dark: #B79719;
-	@app-calendar-color-light: #9F841A;
-
-	// Files
-	@app-files-color: #14A085;
-	@app-files-color-dark: #0A5D4E;
-	@app-files-color-light: #9F841A;
-
-	// Documents
-	@app-documents-color: #009EE3;
-	@app-documents-color-dark: #007999;
-	@app-documents-color-light: #D5F3FF;
-	
-	// Poll
-	@app-poll-color: #009EE3;
-	@app-poll-color-dark: #007999;
-	@app-poll-color-light: #D5F3FF;
-    
-    // Marketplace
-	@app-marketplace-color: #009EE3;
-	@app-marketplace-color-dark: #007999;
-	@app-marketplace-color-light: #D5F3FF;
-
-	// Todos
-	@app-todos-color: #EFA02D;
-	@app-todos-color-dark: #AD7E2C;
-	@app-todos-color-light: #FAEBCD;
-
-	// Etherpad
-	@app-etherpad-color: #E55C55;
-	@app-etherpad-color-dark: #933D39;
-	@app-etherpad-color-light: #EDE2E1;
-
-	// Neutral
-	@app-neutral-color: #949494;
-	@app-neutral-color-dark: #FFF;
-	@app-neutral-color-light: #555;
-	@app-neutral-color-white: #000;
-	
-	// Misc
-	@warning-color: #EFA02D;
-	
-	body {
-		font-family: @font-regular, Verdana, Geneva, sans-serif;
-	}
-}
-
-
 .neww-standard-scheme();
-// .pink-color-scheme();
-
 
 /** Map Variables */
 
@@ -227,7 +102,7 @@
 
 @map-scroll-color: #DDDDDD;
 @map-text-color: #333;
-@map-pale-color: #999;
+@map-pale-color: #737373;
 @map-strong-color: #000;
 @map-frame-color: #ebebeb;
 @map-success-color: #92ae76;
@@ -236,19 +111,19 @@
 @map-followed-color: #00d000;
 
 @map-button-color: #FFF;
-@map-action-button-color: #34b4b5;
+@map-action-button-color: #268282;
 
-@map-topic-color: #999;
+@map-topic-color: #000;
 
-@map-people-color: #e66661;
-@map-events-color: #b8c26e;
-@map-projects-color: #e69761;
-@map-groups-color: #92ae76;
-@map-conferences-color: #84c1a3;
-@map-ideas-color: #e7c76d;
-@map-organizations-color: #84c1a3;
+@map-people-color: #da3458;
+@map-events-color: #717a33;
+@map-projects-color: #b95b1d;
+@map-groups-color: #647d4a;
+@map-conferences-color: #418161;
+@map-ideas-color: #626ada;
+@map-organizations-color: #418161;
 @map-cloud-color: #0082c9;
-@map-externalresources-color: #84c1a3;
+@map-externalresources-color: #418161;
 
 
 @map-clickable-icon-color: #aaa;

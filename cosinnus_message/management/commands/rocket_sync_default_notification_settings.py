@@ -1,7 +1,7 @@
 import logging
 
 from django.contrib.auth import get_user_model
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 
 from cosinnus.conf import settings
 from cosinnus.models.profile import PROFILE_SETTING_ROCKET_CHAT_USERNAME, GlobalUserNotificationSetting
@@ -21,6 +21,9 @@ class Command(BaseCommand):
     as their rocketchat-mail notification preference.
     Users who have saved their preference before are left untouched.
 
+    Use can use the -f parameter to enforce overwriting existing rocket profile settings. This can be used to enforce
+    the default portal notifications setting in RocketChat.
+
     This is not neccessary to run on new portals, as the setting is set on user creation already.
     """
 
@@ -31,11 +34,29 @@ class Command(BaseCommand):
             action='store_true',
             help='Infer the rocket setting from the the user notification instead of using the portal default setting',
         )
+        parser.add_argument(
+            '-f',
+            '--force-overwrite',
+            action='store_true',
+            help='Force overwrite the rocket notification settings.',
+        )
 
     def handle(self, *args, **options):
         if not settings.COSINNUS_CHAT_USER:
             return
         use_user_setting = options['use_user_setting']
+        force_overwrite = options['force_overwrite']
+
+        if force_overwrite:
+            # confirm force overwrite
+            message = (
+                '\nThis will overwrite existing user settings in the RocketChat profiles!\n'
+                'Are you sure you want to do this?\n\n'
+                'Type "yes" to continue, or "no" to cancel: '
+            )
+            if input(message) != 'yes':
+                raise CommandError('Notification settings sync canceled.')
+
         default_setting = settings.COSINNUS_DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING
 
         rocket = RocketChatConnection(stdout=self.stdout, stderr=self.stderr)
@@ -51,15 +72,16 @@ class Command(BaseCommand):
         for user in users:
             if not user.cosinnus_profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME, None):
                 self.stdout.write(
-                    f'User {count+1}/{total} ({errors} Errors): Skipping (user has no rocket account yet)'
+                    f'User {count + 1}/{total} ({errors} Errors): Skipping (user has no rocket account yet)'
                 )
                 count += 1
                 continue
 
             try:
                 pref = rocket.get_user_email_preference(user)
-                # if the user hasn't got a definite value set in their profile, we set the portal's default
-                if not pref:
+                # if the user hasn't got a definite value set in their profile, or the force-overwrite parameter was
+                # set, we set the portal's default
+                if not pref or force_overwrite:
                     if use_user_setting:
                         # apply the inferred user notification settings
                         if check_user_can_receive_emails(user):
@@ -71,10 +93,15 @@ class Command(BaseCommand):
                         # apply the default portal settings for unset users instead!
                         target_setting = default_setting
                     save_rocketchat_mail_notification_preference_for_user_setting(user, target_setting)
-                    self.stdout.write(f'User {count+1}/{total} ({errors} Errors): Applied setting {target_setting}')
+                    msg = f'User {count + 1}/{total} ({errors} Errors): Applied setting {target_setting}'
+                    if pref:
+                        msg += f' (they had setting "{pref}")'
+                    self.stdout.write(msg)
                 else:
-                    self.stdout.write(f'User {count+1}/{total} ({errors} Errors): Skipping (they had setting "{pref}")')
+                    self.stdout.write(
+                        f'User {count + 1}/{total} ({errors} Errors): Skipping (they had setting "{pref}")'
+                    )
             except Exception as e:
                 errors += 1
-                self.stdout.write(f'User {count+1}/{total} ({errors} Errors): Error! {str(e)}')
+                self.stdout.write(f'User {count + 1}/{total} ({errors} Errors): Error! {str(e)}')
             count += 1

@@ -637,11 +637,13 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             href = leftnav_link.get('href')
             if not href and not attributes and not v3_id:
                 continue
-            # ignore some links depending on their class
+            # ignore some links depending on their class:
+            # - 'x-v3-leftnav-hidden': manually blacklisted buttons that we don't want in the v3 leftnav
+            # - 'fadedown-clickarea', 'submit-btn-x': functional buttons from modals/fadedown
             if leftnav_link.get('class') and any(
                 [
                     blacklisted_class in leftnav_link.get('class')
-                    for blacklisted_class in ['x-v3-leftnav-hidden', 'fadedown-clickarea']
+                    for blacklisted_class in ['x-v3-leftnav-hidden', 'fadedown-clickarea', 'submit-btn-x']
                 ]
             ):
                 continue

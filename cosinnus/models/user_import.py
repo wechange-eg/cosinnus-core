@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import locale
 import logging
 from builtins import object
-from threading import Thread
 
 import six
 from django.contrib.auth import get_user_model
@@ -20,6 +19,7 @@ from django.utils.translation import gettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.functions import resolve_class
+from cosinnus.utils.threading import CosinnusWorkerThread
 
 logger = logging.getLogger('cosinnus')
 
@@ -195,9 +195,20 @@ class CosinnusUserImportProcessorBase(object):
     # important: the keys are *ALWAYS* lower-case as the CSV importer will lower().strip() them!
     CSV_HEADERS_TO_FIELD_MAP = {
         'email': 'email',
-        'firstname': 'first_name',
-        'lastname': 'last_name',
     }
+    if settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+        CSV_HEADERS_TO_FIELD_MAP.update(
+            {
+                'firstname': 'first_name',
+                'lastname': 'last_name',
+            }
+        )
+    else:
+        CSV_HEADERS_TO_FIELD_MAP.update(
+            {
+                'displayname': 'first_name',
+            }
+        )
 
     # lower case list of all column names known and used for the import
     KNOWN_CSV_IMPORT_COLUMNS_HEADERS = CSV_HEADERS_TO_FIELD_MAP.keys()
@@ -244,7 +255,7 @@ class CosinnusUserImportProcessorBase(object):
         my_self = self
         if threaded:
 
-            class CosinnusUserImportProcessThread(Thread):
+            class CosinnusUserImportProcessThread(CosinnusWorkerThread):
                 def run(self):
                     my_self._start_import(user_import_item, dry_run=dry_run)
 
@@ -264,7 +275,7 @@ class CosinnusUserImportProcessorBase(object):
             # main atomic wrapper, a dry run will this to rollback at the very end
             with transaction.atomic():
                 for item_data in user_import_item.import_data:
-                    user_import_item.set_import_progress_cache(f'{imported_items+failed_items}/{total_items}')
+                    user_import_item.set_import_progress_cache(f'{imported_items + failed_items}/{total_items}')
 
                     # clear user item reports
                     user_import_item.clear_user_report_items()
@@ -425,7 +436,10 @@ class CosinnusUserImportProcessorBase(object):
         # fields are in REQUIRED_FIELDS_FOR_IMPORT so we can assume they exist
         email = item_data.get(self.field_name_map['email']).lower()
         first_name = item_data.get(self.field_name_map['first_name'], '')[:30]
-        last_name = item_data.get(self.field_name_map['last_name'], '')[:30]
+        if settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+            last_name = item_data.get(self.field_name_map['last_name'], '')[:30]
+        else:
+            last_name = None
 
         if not validates(EmailValidator, email):
             user_import_item.add_user_report_item(
@@ -450,6 +464,9 @@ class CosinnusUserImportProcessorBase(object):
             #                                                status=MEMBERSHIP_MEMBER)
 
         del user_kwargs['username']
+        if not settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME:
+            user_kwargs['displayname'] = user_kwargs['first_name']
+            del user_kwargs['first_name']
         user_import_item.add_user_report_item(str(_('New user account: ') + str(user_kwargs)), report_class='info')
         return user
 

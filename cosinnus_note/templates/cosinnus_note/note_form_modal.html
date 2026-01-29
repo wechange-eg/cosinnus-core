@@ -1,28 +1,37 @@
 {% load i18n cosinnus_tags widget_tweaks %}
 
-{# sadly we have no practical way of a block to extend for this #}
-{% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.text.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.text.html_name %}
+{% if request.user.is_account_verified or not group.is_forum_or_default_user_group %}
+    {# sadly we have no practical way of a block to extend for this #}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.text.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.text.html_name %}
 
-{% captureas label %}
-    {% if user|can_create_objects_in:group %}
-        
-        {% include 'cosinnus_note/note_form_core.html' %}
-        
-    {% else %}
-        <div>
-            <p>
-                {% trans "To post in this team you need to" %}
-                <a href="#" data-toggle="modal" data-target="#join_withdraw_modal">
-                    <i class="fa fa-sign-out"></i>
-                    <span>{% trans "request to join" %}</span></a>!
-            </p>
-        </div>
-    {% endif %}
-{% endcaptureas %}
+    {% captureas label %}
+        {% if user|can_create_objects_in:group %}
+            {% include 'cosinnus_note/note_form_core.html' %}
+        {% else %}
+            <div>
+                <p>
+                    {% trans "To post in this team you need to" %}
+                    <a href="#" data-toggle="modal" data-target="#join_withdraw_modal">
+                        <i class="fa fa-sign-out"></i>
+                        <span>{% trans "request to join" %}</span></a>!
+                </p>
+            </div>
+        {% endif %}
+    {% endcaptureas %}
 
+    {% captureas title %}{% trans "Write a news post" %}{% endcaptureas %}
+    {% trans "Cancel" as cancel_button_label %}
+    {% captureas submit_button_label %}{% trans "Post" %}{% endcaptureas %}
+    {% captureas action %}{% group_url 'cosinnus:note:add' group=group %}{% endcaptureas %}
+    {% include "cosinnus/modal_box.html" with id="write-news-modal" label=label form_action=action title=title title_icon="fa-write" extra_modal_classes="modal-lg" %}
 
-{% captureas title %}{% trans "Write a news post" %}{% endcaptureas %}
-{% trans "Cancel" as cancel_button_label %}
-{% captureas submit_button_label %}{% trans "Post" %}{% endcaptureas %}
-{% captureas action %}{% group_url 'cosinnus:note:add' group=group %}{% endcaptureas %}
-{% include "cosinnus/modal_box.html" with id="write-news-modal" label=label form_action=action title=title title_icon="fa-write" extra_modal_classes="modal-lg" %}
+{% else %}
+
+    {# We display no note form for unverified user accounts #}
+    {% captureas label %}
+        {% include 'cosinnus/user/user_warning_account_not_verified.html' %}
+    {% endcaptureas %}
+    {% captureas title %}{% trans "Write a news post" %}{% endcaptureas %}
+    {% include "cosinnus/modal_box.html" with id="write-news-modal" label=label title=title title_icon="fa-write" extra_modal_classes="modal-lg" %}
+    
+{% endif %}

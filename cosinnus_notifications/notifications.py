@@ -3,13 +3,12 @@ from __future__ import unicode_literals
 
 import datetime
 import logging
+from _collections import defaultdict
 from builtins import str
 from copy import copy
 from importlib import import_module
-from threading import Thread
 
 import sentry_sdk
-from _collections import defaultdict
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
@@ -27,6 +26,7 @@ from django.utils.timezone import localtime
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
+from cosinnus.core import signals
 from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
@@ -45,6 +45,7 @@ from cosinnus.utils.permissions import (
     check_user_portal_admin,
     check_user_portal_moderator,
 )
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus_notifications.alerts import create_user_alert
 from cosinnus_notifications.models import (
     NotificationAlert,
@@ -412,7 +413,7 @@ def init_notifications():
     )
 
 
-class NotificationsThread(Thread):
+class NotificationsThread(CosinnusWorkerThread):
     """A thread to run on an event that causes notifications to be sent out.
     Handles both sending out mails instantly, and saving a persistent event for later
     re-creation during digest generation.
@@ -911,10 +912,16 @@ class NotificationsThread(Thread):
             )
 
         if len(self.next_session_args) > 0:
+            # we have more session frames, start the next one
             self._apply_next_session_frame_and_run()
         else:
+            # we just finished the last (or only) session frame, finish up
             # log current thread for debugging
             self._debug_threading('ended')
+
+            # if any users were notified during this session, trigger a signal with their ids
+            if self.already_alerted_user_ids:
+                signals.users_received_notification_alert.send(sender=self.user, user_ids=self.already_alerted_user_ids)
         return
 
 

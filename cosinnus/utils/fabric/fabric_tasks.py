@@ -68,7 +68,7 @@ def hotdeploy(_ctx):
     check_confirmation()
     _pull_and_update(_ctx)
     migrate(_ctx)
-    restart(_ctx)
+    restart(_ctx, skip_check=True)
     compilewebpack(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
@@ -135,6 +135,9 @@ def enablegitremoteoncore(_ctx):
     with c.cd(env.path):
         with c.cd(f'{env.cosinnus_src_path}'):
             c.run('git config --local --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*')
+            c.run('git fetch')
+            c.run(f'git checkout {env.cosinnus_pull_branch}')
+            c.run('git pull')
 
 
 @task
@@ -175,7 +178,7 @@ def fulldeploy(_ctx):
         c.run(f'mv poetry.lock ~/{foldername}/movedpoetry.lock')
     _pull_and_update(_ctx, fresh_install=True)
     migrate(_ctx)
-    restart(_ctx)
+    restart(_ctx, skip_check=True)
     compilewebpack(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
@@ -201,11 +204,16 @@ def check_confirmation():
 
 
 @task
-def restart(_ctx):
+def restart(_ctx, skip_check=False):
     """Restart the django service"""
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
+    if not skip_check:
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run(f'{env.path}/manage.py check')
     c.run(env.reload_command)
+    if env.uses_celery:
+        restartcelery(_ctx)
     clearportalcache(_ctx)
 
 
@@ -283,6 +291,7 @@ def migrate(_ctx):
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
     with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+        c.run(f'{env.path}/manage.py check')
         c.run(f'{env.path}/manage.py migrate --fake-initial')
 
 
@@ -324,6 +333,78 @@ def rocketsyncupdatesetting(_ctx):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('./manage.py rocket_sync_settings --only-settings Update_EnableChecker')
             c.run('./manage.py rocket_sync_settings --only-settings Custom_Script_Logged_In')
+
+
+@task
+def nextcloudupdateusers(_ctx):
+    """A temporary task used to run the management command `update_nextcloud_users` on the server
+    and write the output to a log file.
+    This fabric task can be started from your local shell and the shell can be closed (if you do not send ctrl+c),
+    so it can run overnight. Run `nextcloudupdateusersresults` the next day to check the logs."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('echo "yes" | ./manage.py update_nextcloud_users  > ~/nextcloudsynclog.log 2>&1')
+
+
+@task
+def nextcloudupdateusersresults(_ctx):
+    """Checks and prints the last lines of the logs written for task `nextcloudupdateusers`."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run('tail ~/nextcloudsynclog.log')
+
+
+@task
+def rocketupdateusernotifications(_ctx):
+    """A temporary task used to run the management command `rocketupdateusernotifications` on the server
+    and write the output to a log file.
+    This fabric task can be started from your local shell and the shell can be closed (if you do not send ctrl+c),
+    so it can run overnight. Run `rocketupdateusernotificationsresults` the next day to check the logs."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run(
+                'echo "yes" | ./manage.py rocket_force_update_portal_notification_settings  > ~/rocketupdatelog.log 2>&1'
+            )
+
+
+@task
+def rocketupdateusernotificationsresults(_ctx):
+    """Checks and prints the last lines of the logs written for task `rocketupdateusernotifications`."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run('tail ~/rocketupdatelog.log')
+
+
+@task
+def poetryversion(_ctx):
+    """Prints out the poetry version used on the server. Can be used as check if the poetry binary is configured
+    correctly."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run(f'{env.poetry_binary} -V')
+
+
+@task
+def updatedjango(_ctx):
+    """A temporary task used to quickly update only the Django requirement using pip and restart the server."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        foldername = f'_DELETEME_backuped_env_{get_random_string(length=6).lower()}'
+        with c.cd(env.path):
+            c.run(f'mkdir ~/{foldername}')
+            c.run('mkdir -p .venv')  # create if not exists
+            c.run(f'cp -R .venv ~/{foldername}/copiedvenv.venv')
+            c.run('touch poetry.lock')  # create if not exists
+            c.run(f'cp -R poetry.lock ~/{foldername}/copiedpoetry.lock')
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('pip install Django==4.2.24')
+            c.run('pip freeze | grep Django=')
+    restart(_ctx)
 
 
 @task
@@ -486,14 +567,14 @@ def _pull_and_update(ctx, use_poetry_update=False, fresh_install=False):
         c.run(f'git checkout {env.pull_branch}')
         c.run('git pull')
         if fresh_install:
-            c.run('poetry install')
+            c.run(f'{env.poetry_binary} install')
             enablegitremoteoncore(ctx)
         else:
             with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
                 if env.legacy_mode:
                     c.run(f'pip install -Ur {env.special_requirements}')
                 elif use_poetry_update:
-                    c.run('poetry update')
+                    c.run(f'{env.poetry_binary} update')
                 else:
                     with c.cd(f'{env.cosinnus_src_path}'):
                         c.run('git fetch --all')

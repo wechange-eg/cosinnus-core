@@ -46,6 +46,7 @@ from cosinnus.views import (
     map_api,
     microsite,
     mitwirkomat,
+    model_export,
     profile,
     search,
     statistics,
@@ -53,7 +54,6 @@ from cosinnus.views import (
     user,
     user_dashboard,
     user_dashboard_announcement,
-    user_export,
     user_import,
     user_match,
     version_history,
@@ -325,6 +325,11 @@ urlpatterns = [
     path('housekeeping/send_testmail/', housekeeping.send_testmail, name='housekeeping-send-testmail'),
     path('housekeeping/print_testmail/', housekeeping.print_testmail, name='housekeeping-print-testmail'),
     path(
+        'housekeeping/print_test_registration_notification_mail/',
+        housekeeping.print_test_registration_notification_mail,
+        name='housekeeping-print-test-registration-notification-mail',
+    ),
+    path(
         'housekeeping/print_digest_daily/', housekeeping.print_testdigest_daily, name='housekeeping-print-digest-daily'
     ),
     path(
@@ -342,6 +347,11 @@ urlpatterns = [
         'housekeeping/group_admin_emails/<str:slugs>/',
         housekeeping.group_admin_emails,
         name='housekeeping-group-admin-emails',
+    ),
+    path(
+        'housekeeping/firebase_send_testpush/',
+        housekeeping.firebase_send_testpush,
+        name='housekeeping-firebase-send-testpush',
     ),
     path('error/', common.generic_error_page_view, name='generic-error-page'),
     path('select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
@@ -368,18 +378,22 @@ if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False)
         ),
     ]
 
-if getattr(settings, 'COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
+if getattr(settings, 'COSINNUS_MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
     urlpatterns += [
-        path('administration/user_export/', user_export.user_export_view, name='administration-user-export'),
         path(
-            'administration/user_export/download/csv/',
-            user_export.user_export_csv_download_view,
-            name='administration-user-export-csv-download',
+            'administration/model_export/<str:slug>/',
+            model_export.model_export_view,
+            name='administration-model-export',
         ),
         path(
-            'administration/user_export/download/xlsx/',
-            user_export.user_export_xlsx_download_view,
-            name='administration-user-export-xlsx-download',
+            'administration/model_export/<str:slug>/download/csv/',
+            model_export.model_export_csv_download_view,
+            name='administration-model-export-csv-download',
+        ),
+        path(
+            'administration/model_export/<str:slug>/download/xlsx/',
+            model_export.model_export_xlsx_download_view,
+            name='administration-model-export-xlsx-download',
         ),
     ]
 
@@ -502,10 +516,15 @@ if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:
 if not is_integrated_portal() and not is_sso_portal():
     urlpatterns += [
         path('profile/edit/', profile.update_view, name='profile-edit'),
-        path('profile/change_email/', user.change_email_view, name='user-change-email'),
-        path('profile/change_email/pending/', user.change_email_pending_view, name='user-change-email-pending'),
         path('signup/', user.user_create, name='user-add'),
     ]
+
+    if not settings.COSINNUS_IS_OAUTH_CLIENT and not settings.COSINNUS_USER_LOGIN_DISABLED:
+        # disable email change in SSO client mode without login
+        urlpatterns += [
+            path('profile/change_email/', user.change_email_view, name='user-change-email'),
+            path('profile/change_email/pending/', user.change_email_pending_view, name='user-change-email-pending'),
+        ]
 
 # some more user management not allowed in integrated mode
 if not is_integrated_portal():
@@ -695,6 +714,7 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
+
 router.register(r'public_conferences', PublicConferenceViewSet, basename='public_conference')
 router.register(r'conferences', ConferenceViewSet, basename='conference')
 router.register(r'groups', CosinnusSocietyViewSet, basename='group')
@@ -733,6 +753,16 @@ if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
     except Exception:
         pass
 
+# Firebase fcm-django urls
+if settings.COSINNUS_FIREBASE_ENABLED:
+    from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
+
+    router.register('devices', FCMDeviceAuthorizedViewSet)
+    urlpatterns += [
+        # URLs will show up at <api_root>/devices
+        # DRF browsable API which lists all available endpoints
+        path('fcm/', include(router.urls)),
+    ]
 
 if settings.COSINNUS_V3_FRONTEND_ENABLED:
     # frontend only URLs. these URLs do not have real views, because the frontend server will catch the paths

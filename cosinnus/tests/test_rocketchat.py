@@ -15,6 +15,7 @@ from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
 from cosinnus.models.profile import PROFILE_SETTING_ROCKET_CHAT_ID, PROFILE_SETTING_ROCKET_CHAT_USERNAME
+from cosinnus.tests.utils import CeleryTaskTestMixin
 from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion, delete_userprofile, reactivate_user
 from cosinnus_message.rocket_chat import RocketChatConnection
 
@@ -29,17 +30,6 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
 
     cosinnus_event.hooks.Thread = TestableThreadPatch
     cosinnus.tasks.Thread = TestableThreadPatch
-
-    class CeleryTaskTestMixin:
-        """Mixin to run Celery Tasks in test cases."""
-
-        def runCeleryTasks(cls):
-            """
-            Our CeleryThreadTasks use on_commit callbacks that are not triggered in (non-transitional) test-cases.
-            For this case Django defines the captureOnCommitCallbacks contextmanagers. We just give it another name for
-            better test readability.
-            """
-            return cls.captureOnCommitCallbacks(execute=True)
 
     @override_settings(COSINNUS_ROCKET_ENABLED=True)
     class RocketChatBaseTest(CeleryTaskTestMixin, TestCase):

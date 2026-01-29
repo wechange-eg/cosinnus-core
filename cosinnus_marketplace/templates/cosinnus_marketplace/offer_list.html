@@ -16,10 +16,6 @@
 
 {% block content %}
 	{{ block.super }}
-	
-	{% comment %}  
-	Disabled for now to keep the view more compact. There is an add button in the left navbar.
-	
     {% if user|can_create_objects_in:group %} 
 	    <!-- a box with semi transparent background -->
 	    <div class="content-box regular-space">
@@ -55,8 +51,6 @@
 	        </form>
 	    </div>    
     {% endif %}
-	{% endcomment %}
-    
     
     {% trans "Delete" as btn_label %}
     {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_delete_element($.cosinnus.getListOfCheckedItems());{% endcaptureas %}
@@ -86,27 +80,68 @@
 			</a>
 		</li>
 	</ul>
-	
+
     <div class="content-box large-space">
-    
-    	<div>
-		    {% for field in filter.form %}
-			    {% if field.name == 'creator' or field.name == 'o' %}
-			    	{{ field }}
-			    {% endif %}
-			{% endfor %}
-	        
-	        {% for filter_param, chosen_value, label, type in active_filters %}
-	        	{% if not filter_param == 'categories' %}
-				    <span class="inline-list nowrap">
-				        <a href="?{% strip_params request filter_param %}" class="app-background small-padding"><i class="fa fa-times"></i></a
-				        ><span class="app-background-light dark-color small-padding">
-				            {{ label }}: {{ chosen_value }}
+        <div>
+            {% for field in filter.form %}
+                {% if field.name == 'creator' or field.name == 'o' %}
+                    {{ field }}
+                {% endif %}
+            {% endfor %}
+
+            {% for filter_param, chosen_value, label, type in active_filters %}
+                <span class="inline-list nowrap">
+				        <a href="?{% strip_params request filter_param %}" class="app-background small-padding"><i
+                            class="fa fa-times"></i></a
+                        ><span class="app-background-light dark-color small-padding">
+				           {% if filter_param == 'categories' %}
+                               {{ label }}
+                           {% else %}
+                               {{ label }}: {{ chosen_value }}
+                           {% endif %}
 				        </span>
 				    </span>
-			    {% endif %}
-			{% endfor %}
-		</div>
+            {% endfor %}
+            <div class="clearfix"></div>
+
+            {% if filter.get_categories_grouped %}
+                <form action="." method="GET">
+                    <input type="hidden" id="input_tab_param" name="tab" value="{{ request.GET.tab }}"/>
+                    {# set all existing filters as inputs for the GET request #}
+                    {% for filter_key in 'o,creator'|makelist %}
+                        {% for filter_value in filter.data|querydictlist:filter_key %}
+                            <input type="hidden" name="{{ filter_key }}" value="{{ filter_value }}"/>
+                        {% endfor %}
+                    {% endfor %}
+
+                    <div class="marketplace-category-filter">
+                        {% for group, categories in filter.get_categories_grouped %}
+                            <div class="category_group">
+                                <label><b>
+                                    {% if group == 'zzz_misc' %}
+                                        {% if filter.get_categories_grouped|length == 1 %}
+                                            {% trans "Categories" %}
+                                        {% else %}{% trans "Misc" %}{% endif %}
+                                    {% else %}{{ group }}{% endif %}</b></label>
+                                <div class="category_list">
+                                    {% for category in categories %}
+                                        <div>
+                                            <label for="id_categories_{{ category.id }}">
+                                                <input id="id_categories_{{ category.id }}" name="categories"
+                                                       onchange="this.form.submit()"
+                                                       type="checkbox" value="{{ category.id }}"
+                                                       {% if category.id in filter.data|querydictlist:'categories' or category.id|stringify in filter.data|querydictlist:'categories' %}checked="checked"{% endif %}>
+                                                <span>{{ category.name }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            {% endif %}
+        </div>
         
         <div class="tab-content">
 			<div class="tab-pane {% if not request.GET.tab or request.GET.tab == 'all' %}active{% endif %}" id="all" >

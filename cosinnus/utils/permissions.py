@@ -6,7 +6,9 @@ from uuid import uuid1
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.db.models import Q
+from rest_framework.authentication import get_authorization_header
 from rest_framework.permissions import BasePermission, IsAdminUser
 
 from cosinnus.models import MEMBER_STATUS, MEMBERSHIP_ADMIN, MEMBERSHIP_PENDING
@@ -219,6 +221,11 @@ def check_user_can_see_user(user, target_user):
     # guests are invisible
     if target_user.is_guest:
         return False
+    # restricted users cannot be seen or contacted
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_RESTRICT_CONTACTING:
+        target_user_tagslugs = target_user.cosinnus_profile.get_managed_tag_slugs()
+        if any([tagslug in target_user_tagslugs for tagslug in settings.COSINNUS_MANAGED_TAGS_RESTRICT_CONTACTING]):
+            return False
 
     visibility = target_user.cosinnus_profile.media_tag.visibility
     if visibility == BaseTagObject.VISIBILITY_ALL:
@@ -352,6 +359,21 @@ def check_user_verified(user):
     )
 
 
+def check_user_can_use_oauth(user, oauth_view_class=None):
+    """Checks if the user may connect to an Oauth service
+    @param oauth_view_class class view that is handling the oauth login. with attribute `OAUTH_VIEW_IDENTIFIER`.
+    attach this so per-portal checks can differentiate between different oauth usecases."""
+    # prevent access for guest users
+    if not user.is_authenticated or user.is_guest:
+        return False
+    # check a per-portal additional callable restriction check function, if set in conf
+    additional_check_func = settings.COSINNUS_OAUTH_ADDITIONAL_USER_ACCESS_CHECK
+    if additional_check_func and callable(additional_check_func):
+        if not additional_check_func(user, oauth_view_class):
+            return False
+    return True
+
+
 def filter_tagged_object_queryset_for_user(qs, user):
     """A queryset filter to filter for TaggableObjects that respects the visibility tag of the object,
     checking group membership of the user and creator information of the object.
@@ -476,4 +498,39 @@ class AllowNone(BasePermission):
     """
 
     def has_permission(self, request, view):
+        return False
+
+
+class IsNextCloudApiTokenValid(BasePermission):
+    """
+    Allow access only if the request contains the nextcloud API token as in the Authorization header:
+    Authorization: Token <token>
+
+    Based on the DRF TokenAuthentication code.
+    """
+
+    keyword = 'Token'
+
+    def has_permission(self, request, view):
+        if not settings.COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN:
+            # make sure the token is defined
+            raise ImproperlyConfigured('NextCloud API is enabled but COSINNUS_LOUD_NEXTCLOUD_API_TOKEN is not defined.')
+
+        auth = get_authorization_header(request).split()
+        if not auth or auth[0].lower() != self.keyword.lower().encode():
+            # invalid header key
+            return False
+
+        if len(auth) == 1 or len(auth) > 2:
+            # invalid header format
+            return False
+
+        try:
+            token = auth[1].decode()
+        except UnicodeError:
+            # invalid token
+            return False
+
+        if token == settings.COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN:
+            return True
         return False

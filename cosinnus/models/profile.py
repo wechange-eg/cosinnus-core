@@ -46,6 +46,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
+from cosinnus_deck.models import DeckMigrationMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -109,6 +110,7 @@ class BaseUserProfile(
     TranslateableFieldsModelMixin,
     LikeableObjectMixin,
     CosinnusManagedTagAssignmentModelMixin,
+    DeckMigrationMixin,
     models.Model,
 ):
     """
@@ -155,7 +157,24 @@ class BaseUserProfile(
         settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_profile', on_delete=models.CASCADE
     )
     # whether this user's email address has been verified. non-verified users do not receive emails
-    email_verified = models.BooleanField(_('Email verified'), default=False, db_index=True)
+    email_verified = models.BooleanField(
+        _('Email verified'),
+        default=False,
+        db_index=True,
+        help_text=_(
+            "Whether this user's email address has been verified. Non-verified users do not "
+            'receive emails and depending on portal settings, may not create certain public content.'
+        ),
+    )
+    account_verified = models.BooleanField(
+        _('Account verified'),
+        default=True,
+        db_index=False,
+        help_text=_(
+            'Whether admin approval for newly registered accounts has been given that this user may '
+            'post in the Forum and other autojoin groups.'
+        ),
+    )
     tos_accepted = models.BooleanField(verbose_name=_('ToS accepted'), default=False, db_index=True)
 
     avatar = models.ImageField(_('Avatar'), null=True, blank=True, upload_to=get_avatar_filename)
@@ -217,6 +236,9 @@ class BaseUserProfile(
 
     objects = BaseUserProfileManager()
 
+    # These fields will not be changed upon `_UserProfileForm` changes via the profile edit view.
+    # Any fields not included in this list and not included in the HTML template form will be reverted
+    # to their modelfield defaults when the user profile edit view is POSTed.
     SKIP_FIELDS = [
         'id',
         'user',
@@ -230,11 +252,16 @@ class BaseUserProfile(
         '_is_guest',
         'guest_access_object',
         'tos_accepted',
+        'email_verified',
+        'account_verified',
     ] + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
 
     # this indicates that objects of this model are in some way always visible by registered users
     # on the platform, no matter their visibility settings, and thus subject to moderation
     cosinnus_always_visible_by_users_moderator_flag = True
+
+    # User deck migration can be rerun after success (DeckMigrationMixin parameter)
+    deck_migration_rerun_allowed = True
 
     _settings = None
 
@@ -245,6 +272,7 @@ class BaseUserProfile(
         super(BaseUserProfile, self).__init__(*args, **kwargs)
         self._settings = copy.deepcopy(self.settings)
         self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
+        self._avatar_name = self.avatar.name
 
     def __str__(self):
         return six.text_type(self.user)
@@ -336,8 +364,14 @@ class BaseUserProfile(
                     'cosinnus/mail/user_terms_of_services.html',
                     data,
                 )
+
+        # trigger avatar updated signal
+        if not created and self._avatar_name != self.avatar.name:
+            signals.userprofile_avatar_updated.send(sender=self.__class__, profile=self)
+
         self._settings = copy.deepcopy(self.settings)
         self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
+        self._avatar_name = self.avatar.name
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
@@ -347,7 +381,7 @@ class BaseUserProfile(
         even if they have the same names and avatars.
         As a fast solution, will right now simply display the URL fragment to the user's profile."""
         user_id_fragment = self.get_absolute_url().split('/', 3)[-1]
-        return f"@{user_id_fragment.replace('/', '-', 1)[:-1]}"  # -> @user-6 etc.
+        return f'@{user_id_fragment.replace("/", "-", 1)[:-1]}'  # -> @user-6 etc.
 
     @classmethod
     def get_optional_fieldnames(cls):
@@ -682,34 +716,6 @@ class BaseUserProfile(
                     continue
             objects.append(obj)
         return objects
-
-    # user deck migration status definition
-    DECK_MIGRATION_STATUS_STARTED = 'started'
-    DECK_MIGRATION_STATUS_IN_PROGRESS = 'in_progress'
-    DECK_MIGRATION_STATUS_SUCCESS = 'success'
-    DECK_MIGRATION_STATUS_FAILED = 'failed'
-
-    def deck_migration_set_status(self, status):
-        """Set the user deck migration status."""
-        self.refresh_from_db()
-        self.settings.update({'deck_migration_status': status})
-        self.save(update_fields=['settings'])
-
-    def deck_migration_status(self):
-        """Get the user deck migration status."""
-        return self.settings.get('deck_migration_status')
-
-    def deck_migration_allowed(self):
-        """
-        Check if the user deck migration can be started.
-        The migration is allowed if it has not already started or if it has finished with an error.
-        """
-        status = self.deck_migration_status()
-        return status is None or status in [self.DECK_MIGRATION_STATUS_FAILED, self.DECK_MIGRATION_STATUS_SUCCESS]
-
-    def deck_migration_in_progress(self):
-        """Check if the migration is in progress."""
-        return self.deck_migration_status() == self.DECK_MIGRATION_STATUS_IN_PROGRESS
 
 
 class UserProfile(BaseUserProfile):

@@ -43,6 +43,7 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
             del self.fields['copy_profile']
 
     def custom_signup(self, request, user):
+        user = self.set_username(user)
         profile = self.setup_profile(user)
         accept_user_tos_for_portal(user)
         base_profile = self.set_base_profile_data(profile, request)
@@ -60,7 +61,8 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
                     setattr(base_profile, key, value)
             base_profile.save()
 
-        self.send_welcome_mail(user, request)
+        if settings.COSINNUS_SSO_SEND_WELCOME_MAIL:
+            self.send_welcome_mail(user, request)
         messages.add_message(request, messages.SUCCESS, _('Successfully signed in as {}.').format(user.get_full_name()))
 
     def validate_unique_email(self, value):
@@ -70,12 +72,21 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
             provider = self.sociallogin.account.get_provider()
             raise forms.ValidationError(self.error_messages['email_taken'].format(provider.name))
 
+    def set_username(self, user):
+        """Set username to id instead of username from provider"""
+        user.username = str(user.id)
+        user.save()
+        return user
+
     def setup_profile(self, user):
         if not user.cosinnus_profile:
             return get_user_profile_model()._default_manager.get_for_user(user)
         return user.cosinnus_profile
 
     def set_base_profile_data(self, profile, request):
+        # set email verified, as we trust the emails from the sso provider
+        profile.email_verified = True
+
         # set language
         lang = get_language()
         profile.language = lang
@@ -142,7 +153,7 @@ class SocialSignupProfileSettingsForm(SocialSignupForm, TermsOfServiceFormFields
 
     def send_welcome_mail(self, user, request):
         data = get_common_mail_context(request)
-        provider = self.sociallogin.account.provider
+        provider = self.sociallogin.account.get_provider().name
         data.update({'user': user, 'provider': provider})
         subj_user = render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup_subj.txt', data)
         text = textfield(render_to_string('cosinnus_oauth_client/mail/welcome_after_oauth_signup.html', data))

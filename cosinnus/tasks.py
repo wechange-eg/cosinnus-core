@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from functools import partial
-from threading import Thread
 
 import celery
 from django.db import transaction
@@ -8,6 +7,7 @@ from django.db import transaction
 from cosinnus.celery import app as celery_app
 from cosinnus.conf import settings
 from cosinnus.core.mail import deliver_mail
+from cosinnus.utils.threading import CosinnusWorkerThread
 
 
 class CeleryThreadTask(celery.Task):
@@ -27,7 +27,7 @@ class CeleryThreadTask(celery.Task):
             task_run = super(CeleryThreadTask, self).__call__
 
             def run_task_threaded():
-                class TaskThread(Thread):
+                class TaskThread(CosinnusWorkerThread):
                     def run(self):
                         task_run(*args, **kwargs)
 

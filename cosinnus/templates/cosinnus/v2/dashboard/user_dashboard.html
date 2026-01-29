@@ -273,6 +273,93 @@
 			</div> {% comment %} end dashboard-welcome-frame {% endcomment %}
 		{% endif %}
 
+        {% if SETTINGS.COSINNUS_DECK_ENABLED and SETTINGS.COSINNUS_DECK_MIGRATE_USER_DECKS and not deck_migration_hidden %}
+            <div id="deck-migration-frame" class="dashboard-announcement-deck-migration" style="display: none">
+                <div class="aside-link text-small">
+                    <a class="pale-color pale-with-highlight"
+                        data-target="ui-pref" data-ui-pref="dashboard_deck_migration__hidden"
+                        data-ui-pref-value="true" data-hide-after=".dashboard-announcement-deck-migration">
+                        <i class="fas fa-close"></i>
+                    </a>
+                </div>
+                <h2>{% trans "Migrate your boards from the Nextcloud Deck app to your groups and projects!" %}</h2>
+                <div class="v2-textfield transparent">
+                    <p>
+                        {% trans "Until now, you have been able to work with boards in Nextcloud (using the Deck app). We have now moved this feature from the cloud directly into the groups and projects so that all users can work with Task Boards even more easily." %}
+                    </p>
+                    <p>
+                        {% trans "If you want to continue using your boards from the Nextcloud Deck app, you will need to move them to a group or project." %}
+                    </p>
+                    <div class="clearfix"></div>
+                </div>
+                <h2>
+                    <div class="spacer-large">&nbsp;</div>
+                    <a class="pale-color pale-bold pale-with-highlight"
+                        data-target="ui-pref" data-ui-pref="dashboard_deck_migration__hidden"
+                        data-ui-pref-value="true" data-hide-after=".dashboard-announcement-deck-migration">
+                        {% trans "Do not show this again" %}</a>
+                    <button type="button" href="{% url 'cosinnus:deck-migrate-user-decks' %}"
+                        class="btn btn-emphasized btn-autosize pull-right" title="{% trans "Manage applications" %}">
+                        <ul class="media-list">
+                            <li class="media">
+                                <div class="media-body">
+                                    {% trans "Execute Migration" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </h2>
+            </div>
+            <script>
+                (() => {
+                    const ncAdmin = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME }}';
+                    const ncUrl = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}';
+                    const csrftoken = Cosinnus.getCookie('csrftoken');
+                    function isUserBoard(board) {
+                        /* check if the board is a user board that can be migrated */
+                        return (
+                            board.owner.uid !== ncAdmin
+                            && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE
+                            && !['Welcome to Nextcloud Deck!', 'Personal', 'Willkommen bei Nextcloud Deck!', 'Persönlich'].includes(board.title)
+                        );
+                    }
+                    async function getUserBoards() {
+                        /* get the user boards from next cloud */
+                        try {
+                            await fetch(`${ncUrl}/login`, { credentials: "include", mode: "no-cors" });
+                            let token = await fetch(`${ncUrl}/csrftoken`, {credentials: "include"}).then(r => r.json()).then(r => r.token);
+                            let boards = await fetch(`${ncUrl}/apps/deck/boards?requesttoken=${encodeURIComponent(token)}`, { credentials: "include" }).then(r => r.json());
+                            return boards.filter(isUserBoard);
+                        } catch (error) {
+                            console.error(error.message);
+                        }
+                    }
+                    async function checkUserBoards() {
+                        /* check for user boards in nextcloud and display banner or disable check. */
+                        try {
+                            let userBoards = await getUserBoards();
+                            if (userBoards.length > 0) {
+                                document.getElementById('deck-migration-frame').style.display = "block";
+                            } else {
+                                await fetch('/dashboard/api/save_ui_prefs/',{
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/x-www-form-urlencoded",
+                                        'X-CSRFToken': csrftoken,
+                                    },
+                                    body: new URLSearchParams({'dashboard_deck_migration__hidden': true}),
+                                    mode: 'same-origin',
+                                })
+                            }
+                        } catch (error) {
+                            console.error(error.message);
+                        }
+                    }
+                    checkUserBoards();
+                })();
+            </script>
+        {% endif %}
+
 		{% if announcement %}
 			<div class="dashboard-announcement-frame" style="display: none">
 			    {% if announcement_is_preview %}
@@ -322,80 +409,6 @@
 		            {% render_announcement_html announcement %}
 		        {% endif %}
 	        </div> {% comment %} end dashboard-announcement-frame {% endcomment %}
-        {% elif SETTINGS.COSINNUS_DECK_ENABLED and SETTINGS.COSINNUS_DECK_MIGRATE_USER_DECKS and not deck_migration_done %}
-            <div id="deck-migration-frame" class="dashboard-announcement-deck-migration" style="display: none">
-                <div class="aside-link text-small">
-                    <a class="pale-color pale-with-highlight"
-                        data-target="ui-pref" data-ui-pref="dashboard_deck_migration__hidden"
-                        data-ui-pref-value="true" data-hide-after=".dashboard-announcement-deck-migration">
-                        <i class="fas fa-close"></i>
-                    </a>
-                </div>
-                <h2>{% trans "Migrate your NextCloud Deck boards to the Task-Board!" %}</h2>
-                <div class="v2-textfield transparent">
-                    <p>
-                        {% captureas here_link %}<a href="{% url 'cosinnus:deck-migrate-user-decks' %}">{% trans "here" %}</a>{% endcaptureas %}
-                        {% blocktrans %}
-                            You have boards in the NextCloud Deck app. The Deck app is replaced by the Task-Board integrated in groups and projects.
-                            You can migrate existing boards {{ here_link }}!
-                        {% endblocktrans %}
-                    </p>
-                    <p>
-                        {% trans "You must have admin permissions in a group/project to migrate NextCloud Deck boards." %}
-                    </p>
-                </div>
-                <div class="spacer-large">&nbsp;</div>
-                <h2>
-                    <a class="pale-color pale-bold pale-with-highlight"
-                        data-target="ui-pref" data-ui-pref="adashboard_deck_migration__hidden"
-                        data-ui-pref-value="true" data-hide-after=".dashboard-announcement-frame">
-                        {% trans "Do not show this again" %}</a>
-                </h2>
-            </div>
-            <script>
-                (() => {
-                    const ncAdmin = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME }}'
-                    const ncUrl = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}'
-                    const csrftoken = Cosinnus.getCookie('csrftoken')
-                    function isUserBoard(board) {
-                        /* check if the board is a user board that can be migrated */
-                        return board.owner.uid !== ncAdmin && board.permissions.PERMISSION_MANAGE && board.permissions.PERMISSION_SHARE
-                    }
-                    async function getUserBoards() {
-                        /* get the user baords from next cloud */
-                        try {
-                            await fetch(`${ncUrl}/login`, { credentials: "include", mode: "no-cors" })
-                            let token = await fetch(`${ncUrl}/csrftoken`, {credentials: "include"}).then(r => r.json()).then(r => r.token);
-                            let boards = await fetch(`${ncUrl}/apps/deck/boards?requesttoken=${encodeURIComponent(token)}`, { credentials: "include" }).then(r => r.json())
-                            return boards.filter(isUserBoard)
-                        } catch (error) {
-                            console.error(error.message)
-                        }
-                    }
-                    async function checkUserBoards() {
-                        /* check for user boards in nextcloud and display banner or disable check. */
-                        try {
-                            let userBoards = await getUserBoards()
-                            if (userBoards.length > 0) {
-                                document.getElementById('deck-migration-frame').style.display = "block"
-                            } else {
-                                await fetch('/dashboard/api/save_ui_prefs/',{
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/x-www-form-urlencoded",
-                                        'X-CSRFToken': csrftoken,
-                                    },
-                                    body: new URLSearchParams({'dashboard_deck_migration__hidden': true}),
-                                    mode: 'same-origin',
-                                })
-                            }
-                        } catch (error) {
-                            console.error(error.message)
-                        }
-                    }
-                    checkUserBoards();
-                })();
-            </script>
         {% endif %}
 
     {% include 'cosinnus/messages.html' %}

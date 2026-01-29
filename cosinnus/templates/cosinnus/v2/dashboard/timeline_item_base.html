@@ -5,9 +5,10 @@
 			data-target="ajax-form-delete-element" data-ajax-form-id="{{ delete_form_id }}">
 	
 		<div class="header-dropdown v2-dropdown dropdown">
-	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	            <i class="fas fa-ellipsis-h"></i>
-	        </a>
+               {# TODO(a11y): i18n the aria label #}
+               <button class="dropdown-toggle" data-toggle="dropdown" aria-label="dropdown toggle">
+                 <i class="fas fa-ellipsis-h"></i>
+               </button>
 	        <ul class="dropdown-menu">
 	        	{% if user|has_write_access:item %}
 	        		{% block edit_button_frame %}
@@ -56,9 +57,7 @@
 					</span>
 				</div>
 				<div class="item-date pale-color">
-					<a href="{{ item.get_absolute_url }}">
-						<span class="moment-data-date" data-date="{{ item.created|date:'c' }}" title="{{ item.created|date:'r' }}"></span>
-					</a>
+					<span class="moment-data-date" data-date="{{ item.created|date:'c' }}" title="{{ item.created|date:'r' }}"></span>
 				</div>
 			</div>
 			<div class="header-context truncated-oneline pale-color">
@@ -80,9 +79,7 @@
 		</div>
 		
 		<div class="icon {% block icon_class %}{% comment %} can contain "icon-padded"{% endcomment %}{% endblock %}">
-			<a href="{{ item.get_absolute_url }}">
-				<i class="fas fa-fw {% block icon %}{% endblock %}"></i>
-			</a>
+			<i class="fas fa-fw {% block icon %}{% endblock %}"></i>
 		</div>
 		
 		<div class="timeline-item-row body">

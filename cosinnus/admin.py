@@ -17,8 +17,10 @@ from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.exceptions import ValidationError
 from django.db.models import JSONField, Q
 from django.db.models.signals import post_delete, post_save
+from django.urls import reverse
 from django.utils import translation
 from django.utils.crypto import get_random_string
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django_otp import devices_for_user
@@ -28,6 +30,7 @@ from cosinnus.backends import elastic_threading_disabled
 from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.core.registries import attached_object_registry
+from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.widgets import PrettyJSONWidget
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.conference import CosinnusConferencePremiumCapacityInfo, CosinnusConferenceSettings
@@ -58,7 +61,7 @@ from cosinnus.models.profile import (
     get_user_profile_model,
 )
 from cosinnus.models.storage import TemporaryData
-from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory, TagObject
+from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory, SyncedExternalObject, TagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -765,7 +768,7 @@ class CosinnusPortalAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'site', 'public')
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('saved_infos',)
-    exclude = (
+    exclude = [
         'logo_image',
         'background_image',
         'protocol',
@@ -774,7 +777,12 @@ class CosinnusPortalAdmin(admin.ModelAdmin):
         'description',
         'top_color',
         'bottom_color',
-    )
+    ]
+    if not settings.COSINNUS_USER_ACCOUNTS_NEED_VERIFICATION_ENABLED:
+        exclude += [
+            'accounts_need_verification',
+        ]
+
     if settings.COSINNUS_CONFERENCES_ENABLED or settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
         inlines = [CosinnusConferenceSettingsInline, CosinnusConferencePremiumCapacityInfoInline]
 
@@ -844,6 +852,12 @@ class UserProfileInline(admin.StackedInline):
     )
     show_change_link = True
     view_on_site = False
+    exclude = []
+
+    if not settings.COSINNUS_USER_ACCOUNTS_NEED_VERIFICATION_ENABLED:
+        exclude += [
+            'account_verified',
+        ]
 
 
 class PortalMembershipInline(admin.TabularInline):
@@ -859,13 +873,44 @@ class GroupMembershipInline(admin.TabularInline):
     model = CosinnusGroupMembership
     extra = 0
     fields = (
-        'group',
+        'group_clickable',
+        'frontend_clickable',
         'status',
     )
-    readonly_fields = ('group',)
+    readonly_fields = ('group_clickable', 'frontend_clickable')
 
     def has_add_permission(self, request, obj=None):
         return False
+
+    @admin.display(description=_('Group'))
+    def group_clickable(self, obj: CosinnusGroupMembership):
+        # admin should be robust
+        # return useful info if group-type is unsupported, instead of raising ImproperlyConfigured
+        if obj.group.type not in group_model_registry.group_type_index:
+            return 'unsupported group type %s: %s' % (obj.group.type, escape(obj.group.name))
+
+        group_proxy = ensure_group_type(obj.group)
+        admin_url = reverse(
+            'admin:%s_%s_change' % (group_proxy._meta.app_label, group_proxy._meta.model_name), args=[group_proxy.pk]
+        )
+        site_url = group_proxy.get_absolute_url()
+
+        # based on __str__ from cosinnus.models.group.CosinnusBaseGroup
+        #   '%s (%s)' % (self.name, self.get_absolute_url())
+        return mark_safe(
+            '<a href="%(admin_url)s">%(name)s (%(site_url)s)</a>'
+            % dict(name=escape(group_proxy.name), admin_url=admin_url, site_url=site_url)
+        )
+
+    @admin.display(description=_('View on site'))
+    def frontend_clickable(self, obj: CosinnusGroupMembership):
+        # admin should be robust
+        # return useful info if group-type is unsupported, instead of raising ImproperlyConfigured
+        if obj.group.type not in group_model_registry.group_type_index:
+            return 'unsupported group type %s: %s' % (obj.group.type, escape(obj.group.name))
+
+        group_url = obj.group.get_absolute_url()
+        return mark_safe('<a href="%(url)s" target="_blank">%(url)s</a>' % dict(url=group_url))
 
 
 class UserToSAcceptedFilter(admin.SimpleListFilter):
@@ -1051,6 +1096,10 @@ class UserAdmin(DjangoUserAdmin):
             'force_redo_cloud_user_room_memberships',
             'make_user_cloud_admin',
         ]
+    if settings.COSINNUS_DJANGO_ADMIN_ENABLE_INSTANT_USER_DELETE_ACTION:
+        actions += [
+            'instantly_delete_user',
+        ]
     list_display = (
         'email',
         'is_active',
@@ -1076,11 +1125,17 @@ class UserAdmin(DjangoUserAdmin):
         UserInactivityNotificationSentFilter,
         IsGuestFilter,
     ]
+    search_fields = ['username', 'first_name', 'last_name', 'email', 'cosinnus_profile__dynamic_fields']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         qs = qs.exclude(email__startswith='__deleted_user__')
         return qs
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields['first_name'].label = _('First name / Display name')
+        return form
 
     def has_logged_in(self, obj):
         return bool(obj.last_login is not None)
@@ -1136,6 +1191,24 @@ class UserAdmin(DjangoUserAdmin):
         self.message_user(request, message)
 
     deactivate_users.short_description = _('DEACTIVATE user accounts and DELETE them after 30 days')
+
+    if settings.COSINNUS_DJANGO_ADMIN_ENABLE_INSTANT_USER_DELETE_ACTION:
+
+        def instantly_delete_user(self, request, queryset):
+            from cosinnus.views.profile import delete_userprofile
+
+            count = 0
+            for user in queryset:
+                if check_user_superuser(user):
+                    self.message_user(request, 'Skipping deleting a user that is an admin! Careful who you select!')
+                    continue
+                user.is_active = False
+                delete_userprofile(user)
+                count += 1
+            message = _('%(count)d User account(s) were deleted successfully.') % {'count': count}
+            self.message_user(request, message)
+
+        instantly_delete_user.short_description = _('(DEBUG ONLY) DELETE user instantly (TAKE CARE!)')
 
     def reactivate_users(self, request, queryset):
         from cosinnus.views.profile_deletion import reactivate_user
@@ -1684,3 +1757,11 @@ if settings.DEBUG and settings.COSINNUS_ENABLE_USER_BLOCK:
         pass
 
     admin.site.register(UserBlock, UserBlockAdmin)
+
+
+if settings.DEBUG and settings.COSINNUS_DECK_ENABLED:
+
+    class SyncedExternalObjectAdmin(admin.ModelAdmin):
+        pass
+
+    admin.site.register(SyncedExternalObject, SyncedExternalObjectAdmin)

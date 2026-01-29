@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.apps import AppConfig
+from django.db.models.signals import post_migrate
+
+from cosinnus.management.initialization import ensure_portal_and_site_exist
 
 
 class CosinnusAppConfig(AppConfig):
@@ -12,8 +15,13 @@ class CosinnusAppConfig(AppConfig):
         replace_swapped_group_model()
         from cosinnus.core.registries.urls import url_registry
 
+        # make sure, the CosinnusPortal-Object is always present, Tests will fail otherwise
+        post_migrate.connect(ensure_portal_and_site_exist, sender=self)
+
         url_registry.ready()
 
+        # register system checks
+        import cosinnus.checks  # noqa: F401
         from cosinnus.conf import settings
 
         if settings.COSINNUS_USE_CELERY:

@@ -3,11 +3,13 @@ from __future__ import unicode_literals
 
 import logging
 import re
+from base64 import b64encode
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import wraps
-from threading import Thread
 from time import sleep
 
+from django.contrib.auth import get_user_model
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.db.models.signals import post_delete, post_save
 from django.db.utils import DatabaseError
 from django.dispatch.dispatcher import receiver
@@ -18,6 +20,7 @@ from cosinnus.models import UserProfile
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import is_user_active
 from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group, is_cloud_group_required_for_group
 from cosinnus_cloud.utils.nextcloud import rename_group_folder, set_group_display_name
@@ -70,7 +73,17 @@ def submit_with_retry(fn, *args, **kwargs):
 
 
 def get_nc_user_id(user):
+    """Get the NextCloud user id for a user."""
     return f'wechange-{user.id}'
+
+
+def get_user_by_nc_user_id(nc_user_id):
+    """Get a user for the NextCloud user id."""
+    user = None
+    user_id = nc_user_id.split('-')[-1]
+    if user_id.isdigit():
+        user = get_user_model().objects.filter(pk=user_id).first()
+    return user
 
 
 def nc_req_callback(future: Future):
@@ -122,6 +135,32 @@ def update_user_from_obj(user):
         get_nc_user_id(user),
         get_email_for_user(user),
     )
+
+
+def update_user_profile_avatar(profile, retry=False):
+    """Update user avatar"""
+    avatar_content = None
+    try:
+        if profile.avatar:
+            # avatar changed, using a thumbnail the same size as the avatar in NextCloud
+            avatar_file = profile.get_avatar_thumbnail(size=(512, 512))
+            with avatar_file.open() as file:
+                avatar_content = file.read()
+        else:
+            # avatar deleted, using jane-doe image as the nc plugin does not provide avatar deletion
+            avatar_file = staticfiles_storage.path('images/jane-doe.png')
+            with open(avatar_file, 'rb') as file:
+                avatar_content = file.read()
+    except Exception as e:
+        logger.warning('Could not update Nextcloud user avatar.', extra={'exc': e})
+
+    if avatar_content:
+        nc_user_id = get_nc_user_id(profile.user)
+        avatar_encoded = b64encode(avatar_content)
+        if retry:
+            submit_with_retry(nextcloud.update_user_avatar, nc_user_id, avatar_encoded)
+        else:
+            nextcloud.update_user_avatar(nc_user_id, avatar_encoded)
 
 
 def get_email_for_user(user):
@@ -196,13 +235,14 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
     return unique_name
 
 
-def initialize_nextcloud_for_group(group, send_initialized_signal=True):
+def initialize_nextcloud_for_group(group, send_initialized_signal=True, check_required_for_group=True):
     """Initializes a nextcloud groupfolder for a group.
     Safe to call on already initialized folders. If called on a pre-existing folder that is
     "disabled" (group has no more access to it), the group's access will be re-enabled for the folder.
     @param send_initialized_signal: Sending of initialized signal can be disabled to avoid concurrency issues.
+    @param check_required_for_group: Check that the initialization is required by group apps.
     """
-    if not is_cloud_group_required_for_group(group):
+    if check_required_for_group and not is_cloud_group_required_for_group(group):
         # No app requires the nextcloud integration
         return
 
@@ -321,7 +361,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
             return
 
         # run the update threaded because it is a very slow endpoint
-        class UpdateNCUserThread(Thread):
+        class UpdateNCUserThread(CosinnusWorkerThread):
             def run(self):
                 try:
                     # we should actually use `update_user_from_obj`, but since
@@ -337,6 +377,11 @@ if settings.COSINNUS_CLOUD_ENABLED:
                     logger.warning('Could not update Nextcloud user on profile update.', extra={'exc': e})
 
         UpdateNCUserThread().start()
+
+    @receiver(signals.userprofile_avatar_updated)
+    def handle_profile_avatar_updated(sender, profile, **kwargs):
+        """Update the user avatar."""
+        update_user_profile_avatar(profile, retry=True)
 
     @receiver(signals.group_object_created)
     def group_created_sub(sender, group, **kwargs):

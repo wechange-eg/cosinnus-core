@@ -65,7 +65,7 @@ from cosinnus.forms.user import (
     UserGroupGuestAccessForm,
     ValidatedPasswordChangeForm,
 )
-from cosinnus.models import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING
+from cosinnus.models import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING, CosinnusManagedTag
 from cosinnus.models.group import (
     CosinnusGroupInviteToken,
     CosinnusGroupMembership,
@@ -74,6 +74,7 @@ from cosinnus.models.group import (
     UserGroupGuestAccess,
 )
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models.profile import (
     PROFILE_SETTING_EMAIL_TO_VERIFY,
@@ -103,6 +104,7 @@ from cosinnus.utils.user import (
     create_guest_user_and_login,
     filter_active_users,
     get_group_select2_pills,
+    get_locked_profile_visibility_setting_for_user,
     get_newly_registered_user_email,
     get_user_by_email_safe,
     get_user_from_set_password_token,
@@ -121,8 +123,13 @@ def email_portal_admins(subject, template, data, user=None):
     text = textfield(render_to_string(template, data))
 
     for admin in admins:
-        # If managed tags are enabled consider only admins that have a common managed tag with the user
-        if user and settings.COSINNUS_MANAGED_TAGS_ENABLED:
+        # If managed tags and `COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY` are enabled,
+        # consider only admins that have a common managed tag with the user
+        if (
+            user
+            and settings.COSINNUS_MANAGED_TAGS_ENABLED
+            and settings.COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY
+        ):
             user_managed_tags = set(user.cosinnus_profile.get_managed_tag_ids())
             admin_managed_tags = set(admin.cosinnus_profile.get_managed_tag_ids())
             common_managed_tags = user_managed_tags.intersection(admin_managed_tags)
@@ -453,6 +460,15 @@ class UserSignupTriggerEventsMixin(object):
                 if not skip_messages:
                     messages.success(request, self.message_success % {'user': user.email})
 
+            # set the user account_verified flag to False if the feature is enabled and activated in the portal
+            if (
+                settings.COSINNUS_USER_ACCOUNTS_NEED_VERIFICATION_ENABLED
+                and CosinnusPortal.get_current().accounts_need_verification
+            ):
+                user_profile = user.cosinnus_profile
+                # soft save, this change does not need to trigger any hooks
+                type(user_profile).objects.filter(pk=user_profile.pk).update(account_verified=False)
+
             if do_login:
                 # log the user in
                 user.backend = 'cosinnus.backends.EmailAuthBackend'
@@ -566,13 +582,19 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
                     except Exception as e:
                         logger.exception(e)
                 self.notification_setting.save()
+
             # save visibility setting:
             visibility_setting = request.POST.get('visibility_setting', None)
-            if visibility_setting is not None and int(visibility_setting) in (
+
+            # do not change the userprofile visibility field if it is locked
+            locked_visibility = get_locked_profile_visibility_setting_for_user(request.user)
+            if locked_visibility is not None:
+                self.media_tag.visibility = locked_visibility
+            elif visibility_setting is not None and int(visibility_setting) in (
                 choice for choice, label in self.visibility_choices
             ):
                 self.media_tag.visibility = int(visibility_setting)
-                self.media_tag.save()
+            self.media_tag.save()
 
         messages.success(request, self.message_success)
 
@@ -653,9 +675,12 @@ class CosinnusGroupInviteTokenView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         self.token = kwargs.get('token', None)
-        if settings.COSINNUS_V3_FRONTEND_ENABLED:
-            # in v3 the /signup/ page handles the invite token
+
+        # in v3, unauthenticated users are handled directly by the /signup/ page
+        if not request.user.is_authenticated and settings.COSINNUS_V3_FRONTEND_ENABLED:
             return redirect(f'/signup/?invite_token={self.token}')
+
+        # v2 handles authenticated and (unauthenticated if v3 is disabled)
         self.invite = get_object_or_None(
             CosinnusGroupInviteToken, token__iexact=self.token, portal=CosinnusPortal.get_current()
         )
@@ -791,7 +816,7 @@ def approve_user(request, user_id):
     user.is_active = True
     user.save()
 
-    # message user for accepeted request
+    # message user for accepted request
     data = get_common_mail_context(request)
     data.update(
         {
@@ -826,6 +851,34 @@ def approve_user(request, user_id):
         )
         % {'username': full_name_force(user), 'email': user.email},
     )
+
+    # if this view was called with a `add_managed_tag` param that is contained in
+    # `COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN`, assign those tag slugs to the user
+    # if this fails, only show a warning message
+    managed_tag_slugs = request.GET.get('add_managed_tag', '').strip()
+    if managed_tag_slugs and managed_tag_slugs in settings.COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN:
+        added_tags = []
+        failed_tag_slugs = []
+        for tagslug in managed_tag_slugs.split(','):
+            try:
+                # doing a fetch so we exception out if it doesn't exist
+                tag = CosinnusManagedTag.objects.get(slug=tagslug)
+                CosinnusManagedTagAssignment.assign_managed_tag_to_object(user.cosinnus_profile, tag.slug)
+                added_tags.append(tag)
+            except Exception:
+                failed_tag_slugs.append(tagslug)
+                if settings.DEBUG:
+                    raise
+        if added_tags:
+            tag_urls = ', '.join([f'[{tag.name}]({tag.get_user_management_url()})' for tag in added_tags])
+            messages.success(request, str(_('The following roles were assigned to the account:')) + ' ' + tag_urls)
+        if failed_tag_slugs:
+            messages.warning(
+                request,
+                str(_('The following roles could not be assigned to the account and need to be assigned manually:'))
+                + ','.join(failed_tag_slugs),
+            )
+
     return redirect(reverse('cosinnus:profile-detail', kwargs={'username': user.username}) + '?force_show=1')
 
 
@@ -1225,6 +1278,7 @@ def send_user_email_to_verify(user, new_email, request=None, user_has_just_regis
 def email_first_login_token_to_user(user, threaded=True):
     """Sets the profile variables for a user to login without a set password,
     and sends out an email with a verification URL to the user.
+    @return: the login token as string
     """
 
     # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile
@@ -1258,6 +1312,9 @@ def email_first_login_token_to_user(user, threaded=True):
 
     user.cosinnus_profile.settings[PROFILE_SETTING_LOGIN_TOKEN_SENT] = timezone.now()
     user.cosinnus_profile.save()
+
+    # return token
+    return str(a_uuid)
 
 
 def user_api_me(request):

@@ -76,7 +76,7 @@
         {% captureas types_html %}
             <div class="input-area" style="padding: 5px;">
 		        {% for model_option in stream_model_selection %}
-		            {% captureas cosinnus_css_class %}{% if model_option.app == 'todo' %}app-todos{% elif model_option.app == 'note' %}app-main{% elif model_option.app == 'file' %}app-files{% elif model_option.app == 'event' %}app-calendar{% elif model_option.app %}app-{{ model_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
+		            {% captureas cosinnus_css_class %}{% if model_option.app == 'todo' %}app-todos{% elif model_option.app == 'note' %}app-note{% elif model_option.app == 'file' %}app-files{% elif model_option.app == 'event' %}app-calendar{% elif model_option.app %}app-{{ model_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
 		            <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
 				        <a class="app-background small-padding"><input id="checkbox_{{ model_option.app }}_{{ forloop.counter }}" type="checkbox" name="models" {% if model_option.checked == True %}checked="true"{% endif %} value="{{ model_option.model_name }}" /></a
 				        ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_{{ model_option.app }}_{{ forloop.counter }}').prop('checked', !($('#checkbox_{{ model_option.app }}_{{ forloop.counter }}').prop('checked')));">

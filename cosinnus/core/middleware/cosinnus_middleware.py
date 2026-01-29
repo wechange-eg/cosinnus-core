@@ -16,7 +16,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.cache import cache
 from django.core.exceptions import MiddlewareNotUsed
 from django.db.models import signals
-from django.http.response import HttpResponseRedirect
+from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.template.defaultfilters import urlencode
 from django.template.response import TemplateResponse
@@ -31,7 +31,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
-from cosinnus.core.decorators.views import get_group_for_request, redirect_to_not_logged_in
+from cosinnus.core.decorators.views import get_group_for_request, redirect_to_error_page, redirect_to_not_logged_in
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.core.registries import app_registry
 from cosinnus.models import UserOnlineOnDay
@@ -135,6 +135,17 @@ NO_AUTO_REDIRECTS = (
     reverse('cosinnus:invitations'),
     reverse('cosinnus:welcome-settings'),
 )
+
+# urls for user and profile editing by the user
+PROFILE_EDITING_URLS = [
+    reverse('cosinnus:profile-edit'),
+    reverse('cosinnus:frontend-api:api-user-profile'),
+]
+if not settings.COSINNUS_IS_OAUTH_CLIENT and not settings.COSINNUS_USER_LOGIN_DISABLED:
+    PROFILE_EDITING_URLS += [
+        reverse('cosinnus:user-change-email'),
+        reverse('cosinnus:user-change-email-pending'),
+    ]
 
 
 def initialize_cosinnus_after_startup():
@@ -665,6 +676,15 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                     messages.warning(request, _('The page you tried to visit is not available for guest accounts.'))
                 return redirect('cosinnus:guest-user-not-allowed')
 
+        if user.is_authenticated and settings.COSINNUS_DISABLE_PROFILE_EDITING:
+            # disable profile editing
+            if any(request.path.startswith(profile_edit_path) for profile_edit_path in PROFILE_EDITING_URLS):
+                redirect_url = settings.COSINNUS_EXTERNAL_PROFILE_EDITING_URL
+                if redirect_url:
+                    return HttpResponseRedirect(redirect_url)
+                else:
+                    raise Http404
+
         #  ignore urls that should not be redirected
         if any([request.path.startswith(never_path) for never_path in settings.COSINNUS_NEVER_REDIRECT_URLS]):
             return
@@ -776,16 +796,16 @@ class DeprecatedAppMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
                 group = self.get_group(request)
                 if group:
                     message = _(
-                        'The Todo app is replaced by the Task-Board app. Editing existing Todos or creating new Todos '
+                        'The Todo app is replaced by the Task Board app. Editing existing Todos or creating new Todos '
                         'has been disabled. '
                     )
                     if check_ug_admin(request.user, group):
-                        migration_url = reverse('cosinnus:deck-migrate-todo', kwargs={'group': group.slug})
+                        migration_url = group_aware_reverse('cosinnus:deck:migrate-todos', kwargs={'group': group})
                         migration_link_label = _('here')
                         migration_link = f'[{migration_link_label}]({migration_url})'
                         message += _('You can migrate existing Todos %(here_link)s.') % {'here_link': migration_link}
                     else:
-                        message += _('Existing Todos can be migrated by the %s(group_type)s admins.') % {
+                        message += _('Existing Todos can be migrated by the %(group_type)s admins.') % {
                             'group_type': group.get_trans().VERBOSE_NAME
                         }
                     # add message if not already added before a redirect
@@ -797,4 +817,41 @@ class DeprecatedAppMiddleware(GroupResolvingMiddlewareMixin, MiddlewareMixin):
 
                     # make cosinnus_todo app readonly
                     if request.method == 'POST':
-                        return redirect(request.path)
+                        return redirect(group_aware_reverse('cosinnus:todo:list', kwargs={'group': group}))
+
+
+class ManagedTagBlockURLsMiddleware:
+    """Blocks some URLs for users with assigned managed tags,
+    as defined in setting `MANAGED_TAGS_RESTRICT_URLS_BLOCKED`"""
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def get_user_restricted_tag_urls(self, user):
+        restricted_tag_urls = []
+        if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED and user.is_authenticated:
+            user_managed_tag_slugs = user.cosinnus_profile.get_managed_tag_slugs()
+            for tagslug, _restricted_urls in settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED.items():
+                if tagslug in user_managed_tag_slugs:
+                    restricted_tag_urls.extend(_restricted_urls)
+            restricted_tag_urls = list(set(restricted_tag_urls))
+        return restricted_tag_urls
+
+    def __call__(self, request):
+        user = request.user
+        if settings.COSINNUS_MANAGED_TAGS_RESTRICT_URLS_BLOCKED and user.is_authenticated:
+            restricted_tag_blocked_urls = self.get_user_restricted_tag_urls(user)
+            if restricted_tag_blocked_urls:
+                # if any URL in the blocked urls matches the current URL, redirect to an error page
+                if next(filter(lambda url: re.match(url, request.path), restricted_tag_blocked_urls), False):
+                    messages.error(
+                        request,
+                        _('Sorry, your account may not access this page.'),
+                    )
+                    # if this is a POST, return a proper redirect to an error page, as the in-page reloads
+                    # of the v3 frontend wouldn't handle displaying the rendered in-place error page well
+                    if request.method == 'POST':
+                        return redirect('cosinnus:generic-error-page')
+                    # otherwise render the error page in-place
+                    return redirect_to_error_page(request, view=self)
+        return self.get_response(request)

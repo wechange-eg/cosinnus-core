@@ -118,6 +118,9 @@ p.navi-explanation {
         &.app-main {
             background-color: @special-app-main-color;
         }
+        &.app-note {
+            background-color: @special-app-note-color;
+        }
         &.app-calendar {
             background-color: @special-app-calendar-color;
         }
@@ -165,6 +168,48 @@ p.navi-explanation {
         border: 1px solid @color-highlight;
     }
 }
+
+/** Make widget button backgrounds always white, even if their app-color is not */
+div[data-target="widget-content"] {
+    .btn-emphasized .media,
+    .btn-appnavi .media,
+    .btn-emphasized .media > .media-body,
+    .btn-appnavi .media > .media-body,
+    .btn-emphasized .media > .pull-right,
+    .btn-emphasized.btn-icon-only .media > .pull-left,
+    .btn-appnavi .media > .pull-left,
+    .btn-appnavi .media > .pull-right {
+        background-color: #FFFFFF;
+    }
+
+    .btn-extra-emphasized .media,
+    .btn-emphasized:hover .media,
+    .fadedown.open .btn-emphasized.w100 .media,
+    .btn-appnavi:hover .media,
+    .btn-emphasized:hover .media > .media-body,
+    .fadedown.open .btn-emphasized.w100 .media > .media-body,
+    .btn-appnavi:hover .media > .media-body,
+    .btn-extra-emphasized .media > .media-body,
+    .btn-emphasized:not(.btn-icon-only) .media > .pull-left,
+    .btn-emphasized:hover .media > .pull-left,
+    .media > .pull-left.btn-emphasized,
+    .btn-appnavi .media > .pull-left:first-child,
+    .btn-appnavi:hover .media > .pull-left,
+    .btn-extra-emphasized .media > .pull-left,
+    .media-list > .media > .pull-left.btn-extra-emphasized,
+    .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+    .btn-extra-emphasized .media > .pull-right,
+    .media-list > .media > .btn-extra-emphasized.pull-right,
+    .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
+    .fadedown .btn-extra-emphasized .media > .pull-right,
+    .btn-emphasized:hover .media > .pull-right,
+    .fadedown.open .btn-emphasized.w100 .media > .pull-right,
+    .fadedown .btn-emphasized:hover .media > .pull-right,
+    .btn-appnavi:hover .media > .pull-right {
+        background-color: darken(#FFFFFF, 10%);
+    }
+}
+
 
 
 /* Make all app button colors white */
@@ -238,6 +283,9 @@ p.navi-explanation {
 
 .app-main {
     .special-btn-app-colors(@special-app-main-color-light,@special-app-main-color,@special-app-main-color-dark);
+}
+.app-note {
+    .special-btn-app-colors(@special-app-note-color-light,@special-app-note-color,@special-app-note-color-dark);
 }
 .app-calendar {
     .special-btn-app-colors(@special-app-calendar-color-light,@special-app-calendar-color,@special-app-calendar-color-dark);

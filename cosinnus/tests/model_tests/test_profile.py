@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.utils.encoding import force_str
 
+from cosinnus.models import CosinnusPortal
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.tests.utils import skipIfCustomUserProfile, skipUnlessCustomUserProfile
 
@@ -45,6 +46,13 @@ class UserProfileManager(TestCase):
 
 @skipIfCustomUserProfile
 class DefaultUserProfileTest(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+        domain = CosinnusPortal.get_current().site.domain
+        cls.site_url = f'http://{domain}'
+
     def test_attributes(self):
         user = User.objects.create_user('somebody')
         self.assertEqual(force_str(user.cosinnus_profile), 'somebody')
@@ -52,7 +60,7 @@ class DefaultUserProfileTest(TestCase):
     def test_get_absolute_url(self):
         user = User.objects.create_user('somebody')
         url = user.cosinnus_profile.get_absolute_url()
-        self.assertEqual(url, 'http://default domain/user/somebody/')
+        self.assertEqual(url, f'{self.site_url}/user/somebody/')
 
     def test_get_optional_fieldnames(self):
         optional = UserProfile.get_optional_fieldnames()

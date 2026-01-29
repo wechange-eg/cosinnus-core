@@ -87,7 +87,7 @@ setup(
     packages=find_packages(exclude=['tests']),
     data_files=data_files,
     install_requires=[
-        'Django>=4.2.11,<4.3',
+        'Django<4.3',
         'MarkupSafe==2.1.5',
         'Pillow==10.3.0',
         'celery==5.2.7',
@@ -126,7 +126,6 @@ setup(
         'django-widget-tweaks==1.4.9',
         'djangorestframework==3.15.2',
         'djangorestframework-csv==2.1.1',
-        'djangorestframework-jwt==1.11.0',
         'dnspython==2.6.1',
         'drf-extra-fields==3.4.0',
         'drf-yasg==1.21.7',
@@ -146,12 +145,12 @@ setup(
         'pycountry==20.7.3',
         'raven==6.9.0',
         'redis==5.0.1',
-        'requests==2.32.3',
+        'requests==2.32.4',
         'requests-oauthlib==0.8.0',
         'rocketchat-API==1.30.0',
         'six==1.12.0',
         'sqlparse==0.5.0',
-        'sentry-sdk==1.4.2',
+        'sentry-sdk==1.14.0',
         'python-dateutil==2.9.0.post0',
         'urllib3==1.26.19',
         'pytz==2022.6',
@@ -171,6 +170,8 @@ setup(
         # dev requirements
         'ruff==0.4.4',
         'pre-commit==3.5.0',
+        'fcm-django==2.2.1',
+        'tblib==3.0.0'
         # test requirements
         'freezegun==1.5.1',
         # requirements loaded in from github
@@ -186,6 +187,7 @@ setup(
         'django-bootstrap3-datetimepicker-3 @ git+https://github.com/wechange-eg/django-bootstrap3-datetimepicker-3.git@django-update-4-2#egg=django-bootstrap3-datetimepicker-3',
         'wagtail @ git+https://github.com/wechange-eg/wagtail.git@django-update-4-2#egg=wagtail',
         'django-clamd @ git+https://github.com/wechange-eg/django-clamd.git@master#egg=django-clamd',
+        'djangorestframework-jwt @ git+https://github.com/wechange-eg/django-rest-framework-jwt.git@master#egg=djangorestframework-jwt',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',

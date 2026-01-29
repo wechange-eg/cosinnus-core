@@ -27,6 +27,7 @@ from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.profile import PROFILE_DYNAMIC_FIELDS_CONTACTS, PROFILE_SETTINGS_AVATAR_COLOR
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.functions import is_number
+from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
 
 logger = logging.getLogger('cosinnus')
@@ -74,6 +75,7 @@ class CosinnusUserSignupSerializer(
     )
     last_name = serializers.CharField(
         required=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
+        allow_blank=not bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
         validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
     )
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
@@ -365,6 +367,14 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         attrs = super().validate(attrs)
         return attrs
 
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        if not settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME and instance.last_name:
+            # Combine first and last name to display name
+            ret['first_name'] = f'{ret["first_name"]} {ret["last_name"]}'
+            ret['last_name'] = ''
+        return ret
+
     def update(self, instance, validated_data):
         user_data = validated_data
         profile_data = validated_data.get('cosinnus_profile', {})
@@ -377,17 +387,21 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         # instance.email = user_data.get('email', instance.email)
         instance.first_name = user_data.get('first_name', instance.first_name)
         # if the first name is being replaced with something new,
-        # and the last name is not given, we set the last name to empty
+        # and the last name is not used, we set the last name to empty
         # (this is for portals who only have one display name)
-        if user_data.get('first_name', None):
+        if not settings.COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME and user_data.get('first_name', None):
             last_name_fallback = ''
         else:
             last_name_fallback = instance.last_name
         instance.last_name = user_data.get('last_name', last_name_fallback)
         profile.description = profile_data.get('description', profile.description)
         # only update the userprofile visibility field if it is not locked
-        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is None:
+        locked_visibility = get_locked_profile_visibility_setting_for_user(user)
+        if locked_visibility is not None:
+            media_tag.visibility = locked_visibility
+        else:
             media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
+
         profile.avatar = profile_data.get('avatar', profile.avatar)
         avatar_color = profile_data.get('settings', {}).get(PROFILE_SETTINGS_AVATAR_COLOR, None)
         if avatar_color:
@@ -443,6 +457,64 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
                 managed_tag_ids = profile_data.get('get_managed_tag_slugs', [])
                 CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, managed_tag_ids)
         return instance
+
+
+class CosinnusHybridUserAdminCreateSerializer(UserSignupFinalizeMixin, CosinnusHybridUserSerializer):
+    """
+    Extends the CosinnusHybridUserSerializer for user creation by admins.
+    Adds email, first_name and last_name fields as required and a create function.
+    """
+
+    email = serializers.EmailField(required=True, validators=[MaxLengthValidator(220)])
+    first_name = serializers.CharField(
+        required=True,
+        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
+    )
+    last_name = serializers.CharField(
+        required=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
+        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
+    )
+
+    def validate(self, attrs):
+        # manually validate required fields, as we use partial serializer that does not validate missing fields
+        if not attrs.get('email'):
+            raise ValidationError({'email': self.fields['email'].error_messages['required']})
+        if not attrs.get('first_name'):
+            raise ValidationError({'first_name': self.fields['first_name'].error_messages['required']})
+        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED and not attrs.get('last_name'):
+            raise ValidationError({'last_name': self.fields['last_name'].error_messages['required']})
+        attrs = super(CosinnusHybridUserAdminCreateSerializer, self).validate(attrs)
+        return attrs
+
+    def create(self, validated_data):
+        # create a user, add fake username first before we know the user id
+        user = get_user_model().objects.create(
+            username=str(random.randint(100000000000, 999999999999)),
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data.get('last_name', ''),
+        )
+        # finalize user creation
+        self.finalize_user_object_after_signup(user, validated_data)
+        # set all other fields using the update function of the CosinnusHybridUserSerializer
+        user = self.update(user, validated_data)
+        return user
+
+
+class CosinnusHybridUserAdminUpdateSerializer(CosinnusHybridUserSerializer):
+    """
+    Extends the CosinnusHybridUserSerializer for user update by admins.
+    Allows to update the user email.
+    """
+
+    email = serializers.EmailField(required=False, validators=[MaxLengthValidator(220)])
+
+    def update(self, instance, validated_data):
+        user = super(CosinnusHybridUserAdminUpdateSerializer, self).update(instance, validated_data)
+        if validated_data.get('email'):
+            user.email = validated_data['email']
+            user.save()
+        return user
 
 
 class CosinnusGuestLoginSerializer(serializers.Serializer):

@@ -48,20 +48,27 @@ class Command(BaseCommand):
                         group.save()
 
                     # create group
+                    nextcloud_group_exists = True
                     try:
                         response = nextcloud.create_group(group.nextcloud_group_id)
                         if response:
                             groups_created += 1
                     except OCSException as e:
                         if not e.statuscode == 102:  # 102: group already exists
+                            nextcloud_group_exists = False
                             errors += 1
                             self.stdout.write(f"Error (group create): OCSException: '{e.message}' ({e.statuscode})")
                     except Exception as e:
                         if settings.DEBUG:
                             raise
+                        nextcloud_group_exists = False
                         errors += 1
                         self.stdout.write('Error (group create): Exception: ' + str(e))
                         logger.error('Error (nextcloud group create): Exception: ' + str(e), extra={'exc': e})
+
+                    # proceed with next group if the nextcloud group could not be created
+                    if not nextcloud_group_exists:
+                        continue
 
                     # add members to group
                     nextcloud_user_ids = [get_nc_user_id(member) for member in group.actual_members]

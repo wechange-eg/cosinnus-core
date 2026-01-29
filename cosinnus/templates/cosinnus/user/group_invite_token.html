@@ -21,7 +21,7 @@
             </p>
             
             {% for group in invite_groups %}
-                {% include 'cosinnus/group/single_group.html' with group=group target_blank=True spaced=True disabled=True %}
+                {% include 'cosinnus/group/single_group.html' with group=group target_blank=True spaced=True disabled=group.is_active|negate %}
             {% endfor %}
         {% endcaptureas %}
         {% captureas title %}

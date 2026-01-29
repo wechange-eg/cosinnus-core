@@ -58,7 +58,10 @@ class BBBRoomMeetingView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         """Checks whether a room is running and restarts it if not,
         then returns the rooms join URL for the current user"""
-        return self.room.get_direct_room_url_for_user(self.request.user)
+        redirect_url = self.room.get_direct_room_url_for_user(self.request.user, self.request)
+        if redirect_url is None:
+            return reverse('cosinnus:generic-error-page')
+        return redirect_url
 
 
 bbb_room_meeting = BBBRoomMeetingView.as_view()
@@ -149,9 +152,20 @@ class BBBRoomMeetingQueueAPIView(View):
                 # deny logged in users without a guest token if they have no permission to enter the room
                 return HttpResponseBadRequest('User is not allowed to enter this room.')
 
-            room_url = bbb_room.get_direct_room_url_for_user(user=user)
+            room_url = bbb_room.get_direct_room_url_for_user(user, self.request)
+
+            if room_url is None:
+                # on a None return, an error message will have been generated. we return the error page as "proper"
+                # url, so the error page gets displayed in the iframe
+                data = {
+                    'status': 'DONE',
+                    'url': reverse('cosinnus:generic-error-page'),
+                    'recorded_meeting': False,
+                }
+                return JsonResponse(data)
             if not room_url:
                 return HttpResponseBadRequest('Room membership for this user could not be established.')
+
             # if the URL matches a cluster URL, we check if the room_url returns a http redirect
             # and if so, return the redirect target.
             # this way, we peel the cluster gateway from the URL to be able to insert
@@ -234,7 +248,9 @@ class BBBRoomGuestAccessView(TemplateView):
         """For the given user, directly resolve the BBB room url and return it."""
 
         resolved_room_url = None
-        direct_room_url = self.bbb_room.get_direct_room_url_for_user(user)
+        direct_room_url = self.bbb_room.get_direct_room_url_for_user(user, self.request)
+        if direct_room_url is None:
+            return redirect_to_error_page(self.request, view=self)
 
         class BBBErrorException(Exception):
             pass

@@ -9,7 +9,6 @@ import re
 import shutil
 from builtins import object
 from collections import OrderedDict
-from threading import Thread
 
 import six
 from annoying.functions import get_object_or_None
@@ -80,8 +79,10 @@ from cosinnus.utils.functions import (
     unique_aware_slugify,
 )
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus.views.mixins.media import FlickrEmbedFieldMixin, VideoEmbedFieldMixin
+from cosinnus_deck.models import DeckMigrationMixin
 from cosinnus_event.mixins import BBBRoomMixin  # noqa
 
 logger = logging.getLogger('cosinnus')
@@ -659,6 +660,14 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
         ),
         default=True,
     )
+    accounts_need_verification = models.BooleanField(
+        _('Accounts Need Verification'),
+        help_text=_(
+            'If activated, newly registered users will not be able to post in the Forum and other autojoin '
+            'until specifically approved by an admin (checkbox `account_verified` in the user profile).'
+        ),
+        default=False,
+    )
 
     # The different keys used for this are static variables in CosinnusPortal!
     saved_infos = models.JSONField(default=dict, encoder=DjangoJSONEncoder)
@@ -821,7 +830,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
         css_path = os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)
         css_file = open(css_path, 'w')
         css_file.write(custom_css)
-        logger.warn(
+        logger.debug(
             'Wrote Custom Portal CSS file to:', extra={'Portal': CosinnusPortal.get_current().id, 'css_path': css_path}
         )
         css_file.close()
@@ -851,6 +860,7 @@ class CosinnusBaseGroup(
     VideoEmbedFieldMixin,
     MembersManagerMixin,
     BBBRoomMixin,
+    DeckMigrationMixin,
     AttachableObjectModel,
 ):
     """Abstract base group model implementation. Provides common functionality for all groups."""
@@ -1809,6 +1819,10 @@ class CosinnusBaseGroup(
         return self.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
 
     @property
+    def is_forum_or_default_user_group(self):
+        return self.is_default_user_group or self.is_forum_group
+
+    @property
     def is_events_group(self):
         return self.slug == getattr(settings, 'NEWW_EVENTS_GROUP_SLUG', None)
 
@@ -2103,34 +2117,6 @@ class CosinnusBaseGroup(
         type(self).objects.filter(pk=self.pk).update(settings=self.settings)
         # group-cache must be cleared for the change to take effect
         self.clear_cache()
-
-    # deck todos migration status definition
-    DECK_TODO_MIGRATION_STATUS_STARTED = 'started'
-    DECK_TODO_MIGRATION_STATUS_IN_PROGRESS = 'in_progress'
-    DECK_TODO_MIGRATION_STATUS_SUCCESS = 'success'
-    DECK_TODO_MIGRATION_STATUS_FAILED = 'failed'
-
-    def deck_todo_migration_set_status(self, status):
-        """Set the todos to deck migration status."""
-        self.refresh_from_db()
-        self.settings.update({'deck_todo_migration_status': status})
-        self.save(update_fields=['settings'])
-
-    def deck_todo_migration_status(self):
-        """Get the todos to deck migration status."""
-        return self.settings.get('deck_todo_migration_status')
-
-    def deck_todo_migration_allowed(self):
-        """
-        Check if the todos migration can be started.
-        The migration is allowed if it has not already started or if it has finished with an error.
-        """
-        status = self.deck_todo_migration_status()
-        return status is None or status == self.DECK_TODO_MIGRATION_STATUS_FAILED
-
-    def deck_todo_migration_in_progress(self):
-        """Check if the migration is in progress."""
-        return self.deck_todo_migration_status() == self.DECK_TODO_MIGRATION_STATUS_IN_PROGRESS
 
 
 class CosinnusGroup(CosinnusBaseGroup):
@@ -2530,7 +2516,7 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
     if not user_ids:
         return
 
-    class UserGroupGuestAccessDeleteThread(Thread):
+    class UserGroupGuestAccessDeleteThread(CosinnusWorkerThread):
         def run(self):
             from cosinnus.views.profile_deletion import delete_guest_user
 

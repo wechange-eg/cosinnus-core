@@ -15,8 +15,9 @@ from django.views.generic import TemplateView
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 
+from cosinnus.core.decorators.views import redirect_to_error_page
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.permissions import check_user_blocks_user
+from cosinnus.utils.permissions import check_user_can_see_user
 from cosinnus.utils.urls import group_aware_reverse, safe_redirect
 from cosinnus.views.mixins.filters import DisallowBlockedUserViewMixin
 from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException, is_rocket_down
@@ -177,16 +178,24 @@ class RocketChatIndexView(BaseRocketChatView):
 
 
 class RocketChatWriteView(DisallowBlockedUserViewMixin, BaseRocketChatView):
-    def get_rocket_chat_url(self):
-        user = None
+    target_user = None
+
+    # check for user blocks with `DisallowBlockedUserViewMixin`
+    blocking_user_class_attr_name = 'target_user'
+
+    def dispatch(self, request, *args, **kwargs):
         username = self.kwargs.get('username')
         if username:
-            user = get_user_model().objects.filter(username=username).first()
-        if user:
-            # check for user blocks with `DisallowBlockedUserViewMixin`
-            if check_user_blocks_user(user, self.request.user):
-                self.user_is_blocked = True
-            profile = user.cosinnus_profile
+            self.target_user = get_user_model().objects.filter(username=username).first()
+            # check if the user can be seen by the current user
+            if not check_user_can_see_user(request.user, self.target_user):
+                messages.warning(request, _('This profile is not visible to you due to its privacy settings.'))
+                return redirect_to_error_page(request, view=self)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_rocket_chat_url(self):
+        if self.target_user:
+            profile = self.target_user.cosinnus_profile
             if not profile:
                 return self.base_url
             return f'{self.base_url}/direct/{profile.rocket_username}/'

@@ -20,10 +20,12 @@ from django.db.models import Q
 from django.http.response import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.template.loader import render_to_string
 from django.utils.encoding import force_str
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 
 from cosinnus.core.mail import (
+    get_common_mail_context,
     render_notification_item_html_mail,
     send_html_mail_threaded,
     send_mail,
@@ -45,6 +47,7 @@ from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.dashboard import create_initial_group_widgets
+from cosinnus.utils.firebase import _send_firebase_message_direct, send_firebase_message_threaded
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.group import move_group_content as move_group_content_utils
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
@@ -488,6 +491,16 @@ def print_testmail(request):
     return HttpResponse(html)
 
 
+def print_test_registration_notification_mail(request):
+    """Displays a text-email like it would be sent to an admin user when there is a new registration notification"""
+    context = get_common_mail_context(request, user=request.user)
+    subject = render_to_string('cosinnus/mail/user_register_notification_subj.txt', context)
+    body = render_to_string('cosinnus/mail/user_register_notification.html', context)
+    email_text = f'{subject}\n\n{body}'
+    html = textfield(email_text)
+    return HttpResponse(html)
+
+
 def _print_testdigest(request, digest_setting=None):
     """Displays a HTML email like it would be sent to a user"""
     if not request or not request.user.is_superuser:
@@ -532,7 +545,7 @@ def print_settings(request):
     setts = ''
     obfuscated_settings = get_obfuscated_settings_strings()
     for key, val in obfuscated_settings.items():
-        setts += '%s = %s<br/>' % (key, val)
+        setts += '%s = %s<br/>' % (key, escape(val))
     if not request:
         return setts
     return HttpResponse(
@@ -572,10 +585,11 @@ def newsletter_users(
     never_logged_in_only=False,
     all_portal_users=False,
     file_name='newsletter-user-emails',
+    override_conf_setting=False,
 ):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
-    if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False):
+    if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False) and not override_conf_setting:
         return HttpResponseForbidden('This Feature is currently not enabled!')
 
     headers = [
@@ -755,3 +769,38 @@ def users_online_today(request):
         prints += f'{stat.user_id},<br/>\n'
 
     return HttpResponse(prints)
+
+
+def firebase_send_testpush(request):
+    """Sends an empty firebase message to all of the current user's devices, unthreaded, unthrottled
+    and shows the responses for each.
+    If the GET-param "user_ids" is supplied as comma-seperated list of ints, a regular threaded call will instead be
+    made for all those users and no response shown."""
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    if not settings.COSINNUS_FIREBASE_ENABLED:
+        return HttpResponse('Error: COSINNUS_FIREBASE_ENABLED is not True!')
+
+    user_ids_param = request.GET.get('user_ids', '')
+    if user_ids_param:
+        try:
+            user_ids = [int(part) for part in user_ids_param.split(',')]
+            send_firebase_message_threaded(user_ids)
+            return HttpResponse(f'Triggered a threaded message send to users {user_ids}.')
+        except Exception as e:
+            return HttpResponse(f'Exception: {e}')
+    else:
+        successful_responses, failed_responses = _send_firebase_message_direct(request.user, ignore_throttle=True)
+        resp = (
+            '<pre>'
+            + 'Sent an empty firebase message (direct, unthreaded) to:<br/><br/>'
+            + 'user account '
+            + str(request.user.email)
+            + '<br/><br/>'
+            + 'successful responses were --> '
+            + str([resp.message_id for resp in successful_responses])
+            + '<br/>failed responses were --> '
+            + str([str((resp.message_id, str(resp.exception))) for resp in failed_responses])
+            + '<br/></pre>'
+        )
+    return HttpResponse(resp)

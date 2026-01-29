@@ -8,9 +8,7 @@ from cosinnus_deck import views
 
 app_name = 'deck'
 
-cosinnus_root_patterns = [
-    path('migrate/todo/<slug:group>/', views.deck_migrate_todo_view, name='deck-migrate-todo'),
-]
+cosinnus_root_patterns = []
 
 if settings.COSINNUS_DECK_MIGRATE_USER_DECKS:
     cosinnus_root_patterns += [
@@ -20,6 +18,7 @@ if settings.COSINNUS_DECK_MIGRATE_USER_DECKS:
 
 cosinnus_group_patterns = [
     re_path(r'^$', views.deck_view, name='index'),
+    re_path('^migrate/todos/$', views.deck_migrate_todo_view, name='migrate-todos'),
 ]
 
 urlpatterns = cosinnus_group_patterns + cosinnus_root_patterns

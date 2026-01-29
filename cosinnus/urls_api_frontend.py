@@ -34,6 +34,8 @@ from cosinnus.api_frontend.views.user import (
     LogoutView,
     SetInitialPasswordView,
     SignupView,
+    UserAdminCreateView,
+    UserAdminUpdateView,
     UserAuthInfoView,
     UserProfileView,
     UserUIFlagsView,
@@ -99,6 +101,13 @@ urlpatterns += [
         name='api-navigation-unread-version-history',
     ),
 ]
+
+if settings.COSINNUS_ADMIN_USER_APIS_ENABLED:
+    urlpatterns += [
+        path('api/v3/user/create/', UserAdminCreateView.as_view(), name='api-user-admin-create'),
+        path('api/v3/user/update/<int:user_id>/', UserAdminUpdateView.as_view(), name='api-user-admin-update'),
+    ]
+
 
 if settings.COSINNUS_DECK_ENABLED:
     urlpatterns += [

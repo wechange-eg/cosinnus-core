@@ -26,6 +26,7 @@ from django.db.models.query import QuerySet
 from django.http import HttpRequest
 from django.template.base import TemplateSyntaxError
 from django.template.defaultfilters import linebreaksbr
+from django.template.defaultfilters import stringformat as _django_stringformat
 from django.template.defaulttags import URLNode, url
 from django.template.defaulttags import url as url_tag
 from django.template.loader import render_to_string
@@ -47,7 +48,7 @@ from wagtail.core.templatetags.wagtailcore_tags import richtext
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
-from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.core.registries.group_models import UnsupportedGroupTypeError, group_model_registry
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, CommaSeparatedSelect2MultipleWidget
 from cosinnus.models import UserBlock
 from cosinnus.models.conference import CosinnusConferenceApplication
@@ -481,7 +482,9 @@ def cosinnus_menu_v2(context, template='cosinnus/v2/navbar/navbar.html', request
         context['groups_invited_count'] = len(groups_invited)
 
         # conferences
-        my_conferences = CosinnusConference.objects.get_for_user(request.user)
+        my_conferences = []
+        if settings.COSINNUS_CONFERENCES_ENABLED:
+            my_conferences = CosinnusConference.objects.get_for_user(request.user)
         context['my_conference_groups'] = my_conferences
         context['my_conferences_json_encoded'] = _escape_quotes(
             _json.dumps([DashboardItem(conference) for conference in my_conferences])
@@ -801,7 +804,13 @@ def group_aware_url_name(view_name, group_or_group_slug, portal_id=None):
             )  # 1 year cache
 
     # retrieve that type's prefix and add to URL viewname
-    prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
+    try:
+        prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
+    except UnsupportedGroupTypeError:
+        # view_name can potentially be returned as None for unregistered groups, return None here as generating URLs
+        # is not critical enough for a full server error
+        return None
+
     if ':' in view_name:
         view_name = (':%s' % prefix).join(view_name.rsplit(':', 1))
     else:
@@ -914,6 +923,10 @@ class GroupURLNode(URLNode):
                     % (str(group_arg), view_name, group_slug, portal_id)
                 )
                 raise
+
+            # view_name can potentially be returned as None for unregistered groups, return no url here
+            if not view_name:
+                return ''
 
             self.view_name.var = view_name
             self.view_name.token = "'%s'" % view_name
@@ -1090,7 +1103,12 @@ def textfield(text, arg=''):
     image_re = r'<img src="(.*?)" alt="\s*(.*?)" />'
     for m in reversed([it for it in re.finditer(image_re, text)]):
         image_url = m.group(1)
-        image_domain = urlparse(image_url).hostname
+        try:
+            image_domain = urlparse(image_url).hostname
+        except Exception:
+            # for some border cases, URL formatting actually causes an error, so we catch-continue here
+            # for example, `htthttps://giphy.com/explore/minions-celebrateps://` causes an error
+            continue
         if (
             image_domain
             and image_domain != settings.COSINNUS_PORTAL_URL
@@ -1117,6 +1135,15 @@ def linebreaksoneline(text, arg=''):
     if not text:
         return ''
     text = normalize_newlines(text).replace('\n', ' ')
+    return text
+
+
+@register.filter
+def remove_blank_lines(text):
+    """Removes all blank lines including lines with whitespace only."""
+    if not text:
+        return ''
+    text = '\n'.join(filter(str.strip, text.splitlines()))
     return text
 
 
@@ -1395,6 +1422,33 @@ def managed_tags_for_user(user):
         return managed_tags
 
 
+@register.filter
+def user_has_managed_tags(user, tag_or_tags):
+    """
+    Template filter that returns True if a user is assigned *all* managed tags provided.
+    @param tag_or_tags: str or list of managed tags.
+    """
+    if not user.is_authenticated:
+        return False
+    user_managed_tags = user.cosinnus_profile.get_managed_tag_slugs()
+    if not tag_or_tags:
+        return True
+    if isinstance(tag_or_tags, six.string_types):
+        tag_or_tags = [tag_or_tags]
+    return all([tag in user_managed_tags for tag in tag_or_tags])
+
+
+@register.filter
+def get_managed_tag_names(commaseperated_tag_slugs):
+    """
+    Template filter that returns the managed tag names for all supplied tag slug(s)
+    """
+    if not commaseperated_tag_slugs or not isinstance(commaseperated_tag_slugs, str):
+        return ''
+    tag_names = CosinnusManagedTag.objects.get_cached(commaseperated_tag_slugs.split(','))
+    return '. '.join([tag.name for tag in tag_names])
+
+
 @register.simple_tag()
 def get_non_cms_root_url():
     """Returns the root URL for this portal that isn't the cms page"""
@@ -1557,6 +1611,12 @@ def get_dynamic_field_value(dynamic_field_key, dynamic_field_name):
     return dynamic_field_value
 
 
+@register.filter
+def get_dynamic_field_label(dynamic_field_name):
+    dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.get(dynamic_field_name)
+    return dynamic_field.label
+
+
 @register.simple_tag
 def get_setting(name):
     return getattr(settings, name, '')
@@ -1573,7 +1633,14 @@ def stringformat(value, args):
         return dateutil.parser.parse(value)
     except Exception as e:
         logger.error('Exception in cosinnus_tags.py date `stringformat` filter: e', extra={'exception': e})
-        return None
+        return
+
+
+# since stringformat is overwritten,
+# register original django filter with different name to make it accessible in templates
+@register.filter
+def django_stringformat(value, args):
+    return _django_stringformat(value, args)
 
 
 @register.filter

@@ -297,6 +297,9 @@ ul.appnavi-dropdown-menu {
 .app-main {
 	.btn-app-colors(@app-main-color-light,@app-main-color,@app-main-color-dark);
 }
+.app-note {
+    .btn-app-colors(@app-note-color-light,@app-note-color,@app-note-color-dark);
+}
 .app-calendar {
     .btn-app-colors(@app-calendar-color-light,@app-calendar-color,@app-calendar-color-dark);
 }
@@ -672,6 +675,7 @@ a.light-link:hover i { display: inherit; }
 
 
 .app-main .btn-headline .media-body .group-annotation { color: @app-main-color-light; }
+.app-note .btn-headline .media-body .group-annotation { color: @app-note-color-light; }
 .app-calendar .btn-headline .media-body .group-annotation { color: @app-calendar-color-light; }
 .app-files .btn-headline .media-body .group-annotation { color: @app-files-color-light; }
 .app-documents .btn-headline .media-body .group-annotation { color: @app-documents-color-light; }
@@ -848,6 +852,11 @@ a.light-link:hover i { display: inherit; }
         color: @map-button-color !important;
         background-color: @map-action-button-color;
         border: 1px solid @map-action-button-color;
+
+        &:hover {
+          background-color: darken(@map-action-button-color, 5%);
+          border: 1px solid darken(@map-action-button-color, 5%);
+        }
     }
     
     /** Colored action buttons */

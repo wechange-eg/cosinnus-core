@@ -158,7 +158,7 @@ class DeckIntegrationHandler(CosinnusBaseIntegrationHandler):
     def _do_group_migrate_todo(group_id):
         """Migrate todos to the group board"""
         group = CosinnusGroup.objects.filter(pk=group_id).first()
-        if group and not group.deck_todo_migration_in_progress():
+        if group and not group.deck_migration_in_progress():
             deck = DeckConnection()
             deck.group_migrate_todo(group)
 

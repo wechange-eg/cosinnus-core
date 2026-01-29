@@ -4,7 +4,7 @@ import secrets
 import string
 import urllib
 from datetime import datetime
-from typing import List, Mapping, Optional
+from typing import Mapping, Optional
 from urllib.parse import quote
 
 import requests
@@ -152,6 +152,21 @@ def update_user_name(userid: str, display_name: str) -> OCSResponse:
     )
 
 
+def update_user_avatar(userid: str, avatar_b64_encoded: bytes) -> OCSResponse:
+    data = {
+        'userId': userid,
+        'avatar': avatar_b64_encoded,
+    }
+    return _response_or_raise(
+        requests.post(
+            f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/ocs/v2.php/apps/wechange_tools/update-avatar',
+            auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+            headers=HEADERS,
+            data=data,
+        )
+    )
+
+
 def disable_user(userid: str) -> OCSResponse:
     return _response_or_raise(
         requests.put(
@@ -270,7 +285,11 @@ def create_group_folder(name: str, group_id: str, group, raise_on_existing_name=
         else:
             logger.info('group folder [%s] already exists, doing nothing', name)
             # doing nothing except making sure the group has access to the folder
-            add_group_access_for_folder(group_id, group.nextcloud_groupfolder_id)
+            # NOTE: Checking if the group has already access to the folder, as NextCloud returns 500 when adding an
+            # existing group.
+            folder_groups = get_groupfolder_groups(group.nextcloud_groupfolder_id)
+            if group_id not in folder_groups:
+                add_group_access_for_folder(group_id, group.nextcloud_groupfolder_id)
             return
 
     # create groupfolder
@@ -354,6 +373,18 @@ def get_groupfolder_name(folder_id: int):
         )
     )
     return response.data and response.data.get('mount_point', None) or None
+
+
+def get_groupfolder_groups(folder_id: int):
+    """Retrieves a group folder groups for a given id (int). Returns a list of group IDs."""
+    response = _response_or_raise(
+        requests.get(
+            f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/apps/groupfolders/folders/{folder_id}',
+            headers=HEADERS,
+            auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+        )
+    )
+    return response.data and response.data.get('groups', {}).keys() or None
 
 
 def add_group_access_for_folder(group_id: str, folder_id: int) -> bool:
@@ -465,6 +496,7 @@ def files_search(
             data=utf8_encode(body),
         )
     )
+
 
 def get_group_folder_last_modified(groupfolder_name, timeout=settings.COSINNUS_CLOUD_NEXTCLOUD_REQUEST_TIMEOUT):
     """Returns the last-modified timestamp of a group folder."""
@@ -620,7 +652,7 @@ def create_social_login_apps():
                     provider_arg % 'apiBaseUrl': f'{portal_domain}/o',
                     provider_arg % 'authorizeUrl': f'{portal_domain}/o/authorize/',
                     provider_arg % 'tokenUrl': f'{portal_domain}/o/token/',
-                    provider_arg % 'profileUrl': f'{portal_domain}/group/forum/cloud/oauth2/',
+                    provider_arg % 'profileUrl': f'{portal_domain}/cloud/oauth2/profile/',
                     provider_arg % 'logoutUrl': f'{portal_domain}/logout/',
                     provider_arg % 'clientId': client_id,
                     provider_arg % 'clientSecret': client_secret,

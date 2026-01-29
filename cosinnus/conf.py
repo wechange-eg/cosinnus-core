@@ -330,7 +330,7 @@ class CosinnusConf(AppConf):
     DEFAULT_ACTIVE_GROUP_APPS = [
         'cosinnus_cloud',
         'cosinnus_conference',
-        'cosinnus_exchange',
+        'cosinnus_deck',
         'cosinnus_etherpad',
         'cosinnus_event',
     ]
@@ -595,6 +595,10 @@ class CosinnusConf(AppConf):
 
     """ *******  SSO OAUTH Settings  ******* """
 
+    # a lambda function that can be used as additional per-portal check to additionally restrict user oauth access
+    # callable func of signature (user, oauth_view), see `check_user_can_use_oauth()`
+    OAUTH_ADDITIONAL_USER_ACCESS_CHECK = None
+
     # setting to be overriden by each portal
     # if True, single-sign-on only mode is active:
     #     * manual login/register is disabled. logout is enabled
@@ -637,14 +641,30 @@ class CosinnusConf(AppConf):
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
     # GeoJSON can be generated using http://opendatalab.de/projects/geojson-utilities/
-    COSINNUS_MAP_OPTIONS = {
+    # geojson config format:
+    #   'geojson_regions': [
+    #       {
+    #           'geojson_region': None,  # path to geojson file
+    #           'geojson_style': {
+    #               'weight': 1,  # stroke-width
+    #               'color': '#DEFINEME',  # stroke-color
+    #               'fillColor': '#DEFINEME',
+    #               'fillOpacity': 0.2,
+    #             }
+    #       },
+    #       ...
+    #   ],
+    # old-style format ('geojson_region' and 'geojson_style' without array) is still supported
+    MAP_OPTIONS = {
         'default_coordinates': {
             'ne_lat': 55.32,  # north,
             'ne_lon': 15.56,  # east,
             'sw_lat': 47.58,  # south,
             'sw_lon': 5.01,  # west,
         },
-        'geojson_region': None,
+        'geojson_regions': None,
+        'geojson_region': None,  # deprecated
+        'geojson_style': None,  # deprecated
         'filter_panel_default_visible': False,  # whether the dropdown filter panel should be visible on load
         'ignore_location_default_activated': False,  # whether the "In map area" button should be off on load
         'exchange_default_activated': True,  # whether the "also show external contents" button should be off on load
@@ -806,6 +826,9 @@ class CosinnusConf(AppConf):
     # whether or not to redirect to the welcome settings page after a user registers
     SHOW_WELCOME_SETTINGS_PAGE = True
 
+    # whether or not to show the /signup/welcome/ profile setup in the new frontend
+    SHOW_V3_WELCOME_PROFILE_SETUP_PAGE = True
+
     # the duration of the user stream (must be very short, otherwise notifications will not appear)
     STREAM_SHORT_CACHE_TIMEOUT = 30
 
@@ -928,6 +951,13 @@ class CosinnusConf(AppConf):
     # whether to use celery on this instance
     USE_CELERY = False
 
+    # if True, use `CosinnusWorkerThread`, otherwise use vanilla `Thread` for Worker Threads
+    USE_WORKER_THREADS = True
+
+    # whether to disable Threading for worker threads
+    # worker functions are run in the main thread
+    WORKER_THREADS_DISABLE_THREADING = False
+
     # whether to use the new style navbar
     USE_V2_NAVBAR = True
 
@@ -955,7 +985,7 @@ class CosinnusConf(AppConf):
     V2_DASHBOARD_WELCOME_SCREEN_ENABLED = True
 
     # default duration for which the welcome screen should be shown on the user dashboard, unless clicked aways
-    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 7
+    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 365 * 10  # 10 years
 
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
@@ -1051,6 +1081,12 @@ class CosinnusConf(AppConf):
         '^/.*/.*/conference/feed/.*/',
         # old captcha
         '^/captcha/',
+        # allauth provider urls
+        '^/oidc/*',
+        # firebase fcm-django urls
+        '^/fcm/*',
+        # user export downloads
+        '^/administration/model_export/.*/download/',
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
@@ -1098,6 +1134,10 @@ class CosinnusConf(AppConf):
     # (str classpath)
     V3_MENU_PORTAL_LINKS_DROPIN = None
 
+    # SSO provider infos used in the v3 frontend
+    # Example: [{'login_url': '/oidc/keycloak/login/?process=login', 'name': 'Keycloak'}]
+    V3_SSO_PROVIDER = []
+
     # default CosinnusPortal logo image url, shown in the top left navigation bar
     # (will be used with a `static()`) call
     PORTAL_LOGO_NAVBAR_IMAGE_URL = 'img/v2_navbar_brand.png'
@@ -1109,6 +1149,15 @@ class CosinnusConf(AppConf):
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
 
+    # whether to disable the login in the v3 frontend and hide the login form
+    USER_LOGIN_DISABLED = False
+
+    # whether profile editing via the view and api should be possible
+    DISABLE_PROFILE_EDITING = False
+
+    # if profile editing is disabled a url can be provided to redirect all profile edit requests
+    EXTERNAL_PROFILE_EDITING_URL = None
+
     # if True, won't let any user log in before verifying their e-mail
     USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN = False
 
@@ -1119,11 +1168,22 @@ class CosinnusConf(AppConf):
     # (does not affect mails if USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN is True)
     USER_SIGNUP_SEND_VERIFICATION_MAIL_INSTANTLY = False
 
+    # if True, enable setting the `accounts_need_verification` option
+    # in the CosinnusPortal admin, restricting newly signed up users
+    # to only be able to post in the Forum and other autojoin groups after admin approval.
+    # only self-registered users will be flagged as unverified, admin-created ones will not.
+    USER_ACCOUNTS_NEED_VERIFICATION_ENABLED = False
+
     # if True, hides the portal completey from external visitors.
     # "logged in only" mode for the portal
     USER_EXTERNAL_USERS_FORBIDDEN = False
 
+    # if True, will show two separate "first name" and "last name" fields instead of the default "display name" field.
+    # required to be set to True to set `COSINNUS_USER_FORM_LAST_NAME_REQUIRED` to True
+    USER_FORM_SHOW_SEPARATE_LAST_NAME = False
+
     # whether the "last name" user form field is also required, just like "first name"
+    # requires COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME to be set to True
     USER_FORM_LAST_NAME_REQUIRED = False
 
     # if true, an additional signup form field will be present
@@ -1145,13 +1205,17 @@ class CosinnusConf(AppConf):
     # (str classpath)
     USER_IMPORT_PROCESSOR_CLASS_DROPIN = None
 
-    # if True, the user export views will be shown
-    # they require a per-portal implementation of the importer class
-    USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED = False
+    # if True, the model export views will be shown
+    # they require a per-portal implementation of the exporter class
+    MODEL_EXPORT_ADMINISTRATION_VIEWS_ENABLED = False
 
-    # a class dropin to replace CosinnusUserExportProcessorBase as user export processor
-    # (str classpath)
-    USER_EXPORT_PROCESSOR_CLASS_DROPIN = None
+    # Exporter definitions with customized exporter classes
+    # derived from cosinnus.models.model_export.ModelExportProcessor or a subclass
+    MODEL_EXPORTERS = {
+        # 'slug': {'title': _('l18n-title'), 'classpath': 'apps.core.user_export.PortalNameUserExportProcessor'},
+        'user': {'title': _('User Export'), 'classpath': 'cosinnus.models.model_export.UserExportProcessorBase'},
+        'group': {'title': _('Group Export'), 'classpath': 'cosinnus.models.model_export.GroupExportProcessorBase'},
+    }
 
     # if true, during signup and in the user profile, an additional
     # opt-in checkbox will be shown to let the user choose if they wish to
@@ -1163,6 +1227,7 @@ class CosinnusConf(AppConf):
 
     # if set to any value other than None, the userprofile visibility field will be disabled
     # and locked to the value set here
+    # for values, see `BaseTagObject.VISIBILITY_CHOICES`
     USERPROFILE_VISIBILITY_SETTINGS_LOCKED = None
 
     # extra fields for the user profile.
@@ -1245,6 +1310,9 @@ class CosinnusConf(AppConf):
     CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA = 1024 * 1024 * 1024
     # timeout for nextcloud webdav requests in seconds
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
+    # whether to show the "The Cloud is here" banner for group admins on the group dashboard if
+    # if the cloud app is not enabled for the group
+    CLOUD_SHOW_GROUP_DASHBOARD_NAG_BANNER = False
 
     # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
     # DEPRECATED: now handled by Ansible.
@@ -1268,6 +1336,8 @@ class CosinnusConf(AppConf):
     # by default this returns an empty string so no emails are transferred to nextcloud.
     # default if None: `''`
     CLOUD_USER_PROFILE_EMAIL_FUNC = None
+    # API Token used by NextCloud to access internal APIs (e.g. DeckEventsView)
+    CLOUD_NEXTCLOUD_API_TOKEN = None
 
     # whether to enable the cosinnus deck app
     # Note: COSINNUS_CLOUD_ENABLED must also be set, as the deck app depends on the cloud integration.
@@ -1300,6 +1370,11 @@ class CosinnusConf(AppConf):
     # the "more" link.
     GROUP_DASHBOARD_HEADER_TEXT_EXPANDED = False
 
+    # a list of <str> 'app_name.widget_name' id entries for each widget that should
+    # be hidden in the group dashboard of all groups, no matter which apps are enabled.
+    # see `DashboardWidgetMixin.default_widget_order` for a list of widget ids
+    GROUP_DASHBOARD_HIDE_WIDGETS = []
+
     # enable e-mail downloads of newsletter-enabled users in the administration area
     # if enabled, this allows all portal-admins to download user emails, this might be
     # *VERY* risky, so use cautiously
@@ -1327,12 +1402,17 @@ class CosinnusConf(AppConf):
     # set to True if you want to use this instance as oauth provider for other platforms
     IS_OAUTH_PROVIDER = False
 
-    # set to True if you want to enable oauth2 social login with another instance (this other
-    # instance then has to have IS_OAUTH_PROVIDER to True). Add the url of the other instane as
-    # OAUTH_SERVER_BASEURL
+    # set to True if you want to enable oauth2 social login with another instance (this other instance then has to have
+    # IS_OAUTH_PROVIDER to True). Add the url of the other instane as OAUTH_SERVER_BASEURL
+    # Also supports other SSO client behaviour via the allauth SOCIALACCOUNT_PROVIDERS setting.
     IS_OAUTH_CLIENT = False
     OAUTH_SERVER_BASEURL = None
     OAUTH_SERVER_PROVIDER_NAME = 'wechange'
+
+    # Enable connecting / disconnecting allauth social-accounts with portal accounts
+    SSO_ENABLE_CONNECTING_ACCOUNT = False
+    # Send SSO welcome mails informing the user about the SSO signup
+    SSO_SEND_WELCOME_MAIL = False
 
     # whether SDGs should be shown in group/project forms and detail templates
     ENABLE_SDGS = False
@@ -1428,6 +1508,39 @@ class CosinnusConf(AppConf):
     # map content types
     MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
 
+    # A mapping of managed tag slugs to lists or URLs that are blocked
+    # for all users who are assigned that managed tag.
+    # e.g.: `{'restrictedtagslug': ['/url1', '/url2', ...], ...}`
+    # used by `ManagedTagBlockURLsMiddleware`
+    # to use this, define some tags and URLs in this setting and
+    # add `'cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware',`
+    # to django's `MIDDLEWARE` setting
+    MANAGED_TAGS_RESTRICT_URLS_BLOCKED = {}
+
+    # a list of managed tag slugs, whose users may not contact anyone or be contacted directly
+    MANAGED_TAGS_RESTRICT_CONTACTING = []
+
+    # a list of managed tag slugs, whose users may not start BBB rooms, but rather only join running rooms
+    MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS = []
+
+    # akin to `USERPROFILE_VISIBILITY_SETTINGS_LOCKED`,
+    # per managed_tag slug, the userprofile visibility field will be disabled and always set to the value
+    # example:  `{'restricted': 0}`
+    # for values, see `BaseTagObject.VISIBILITY_CHOICES`
+    MANAGED_TAGS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED = {}
+    # COSINNUS_MANAGED_TAGS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+
+    # If managed tags are enabled and this is `True`, when sending out the admin-approval email for new signups,
+    # only send it to admins that have a common managed tag with the user
+    MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_TAGGED_ADMINS_ONLY = False
+
+    # if managed tags are enabled, for each entry in this list, add an additional
+    # approval link in the admin-approval email for new signups that will accept the user
+    # and automatically assign the managed tags to the accepted user from that comma-seperated entry.
+    # only works if the soft option `CosinnusPortal.users_need_activation` is activated.
+    # example: ['restrictedtagslug1,tag2', 'tag3']
+    MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN = []
+
     # if True, enables `tag` function in the group/project settins, files, todos, events, etc.
     TAGS_ENABLED = True
 
@@ -1483,6 +1596,9 @@ class CosinnusConf(AppConf):
     # Don't go overboard here, this is an expensive search!
     # only applies when `PLATFORM_ADMIN_CAN_EDIT_PROFILES=True`
     USERPROFILE_FIELDS_SEARCHABLE_IN_ADMINISTRATION = []
+
+    # if True, enable the portal admin APIs for user create (/api/v3/user/create/) and update (/api/v3/user/update/).
+    ADMIN_USER_APIS_ENABLED = False
 
     # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False
@@ -1629,6 +1745,9 @@ class CosinnusConf(AppConf):
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
 
+    # enable the instant-user-delete action for django admin. should only be enabled on local or test portals!
+    DJANGO_ADMIN_ENABLE_INSTANT_USER_DELETE_ACTION = False
+
     # enable the Mitwirk-O-Mat integration groups settings view and API endpoints
     MITWIRKOMAT_INTEGRATION_ENABLED = False
 
@@ -1673,8 +1792,32 @@ class CosinnusConf(AppConf):
     # default value for the answers for an unfilled form, see `MitwirkomatSettings.QUESTION_CHOICES`
     MITWIRKOMAT_QUESTION_DEFAULT_VALUE = '0'
 
+    # extra fields for the MitwirkomatSettings model.
+    # usage: see `USERPROFILE_EXTRA_FIELDS`
+    MITWIRKOMAT_EXTRA_FIELDS = {}
+
+    # if set, include the inherited first group location as a span filter in the
+    # mitwirkomat API and show the location info field in the settings form
+    MITWIRKOMAT_INCLUDE_LOCATION = True
+
     # disable the group banner nag screen
     MITWIRKOMAT_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
+
+    # whether to enable the firebase integration for simple notification sending
+    # using fcm-django
+    # Important: this conf setting needs to be put at the start of your project's conf file,
+    # *before* `def define_cosinnus_project_settings(...` !
+    FIREBASE_ENABLED = False
+
+    # if COSINNUS_FIREBASE_ENABLED, the amount of seconds of a timeframe within which
+    # a user will not receive any more empty Firebase messages beyond the first.
+    # set to 0 to disable throttling for empty Firebase messages.
+    FIREBASE_EMPTY_MESSAGE_USER_THROTTLE_SECONDS = 10
+
+    # Env file used by project, e.g. read .env.test in default_settings.
+    # Important: this conf setting needs to be put at the start of your project's conf file,
+    # *before* `def define_cosinnus_project_settings(...` !
+    COSINNUS_ENV_FILE = '.env'
 
 
 class CosinnusDefaultSettings(AppConf):
