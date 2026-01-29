@@ -40,6 +40,10 @@ from cosinnus_event.models import Event
 logger = logging.getLogger('cosinnus')
 
 
+TESTING_ONLY_DURATION_THIRTY_MINUTES = 30
+TESTING_ONLY_DURATION_SIXTY_MINUTES = 60
+
+
 class CosinnusCronJobBase(CronJobBase):
     cosinnus_code = None
 
@@ -96,7 +100,7 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
 class SendUserInactivityNotifications(CosinnusCronJobBase):
     """Queues deactivation notification for inactive users."""
 
-    RUN_EVERY_MINS = 60 * 24  # every day
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus.send_user_inactivity_notifications'
@@ -118,7 +122,7 @@ class SendUserInactivityNotifications(CosinnusCronJobBase):
 class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
     """Marks inactive users for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE day since last login."""
 
-    RUN_EVERY_MINS = 60 * 24  # every day
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus.deactivate_inactive_users'
@@ -308,7 +312,7 @@ class DeleteOldSentEmailLogs(CosinnusCronJobBase):
 class DeleteScheduledGroups(CosinnusCronJobBase):
     """Triggers a group delete on all groups whose `scheduled_for_deletion_at` datetime is in the past."""
 
-    RUN_EVERY_MINS = 60 * 24  # every day
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus.delete_scheduled_groups'
@@ -344,8 +348,8 @@ class DeleteScheduledGroups(CosinnusCronJobBase):
 class UpdateGroupsLastActivity(CosinnusCronJobBase):
     """Updates the last-activity of all active groups."""
 
-    RUN_AT_TIMES = ['02:00']  # Run once a day during the night
-    schedule = Schedule(run_at_times=RUN_AT_TIMES)
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_THIRTY_MINUTES  # ['02:00']  # Run once a day during the night
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus.update_groups_last_activity'
 
@@ -371,7 +375,7 @@ class UpdateGroupsLastActivity(CosinnusCronJobBase):
 class SendGroupsInactivityNotifications(CosinnusCronJobBase):
     """Queues deactivation notification for inactive groups."""
 
-    RUN_EVERY_MINS = 60 * 24  # every day
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus.send_group_inactivity_notifications'
@@ -393,7 +397,7 @@ class SendGroupsInactivityNotifications(CosinnusCronJobBase):
 class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
     """Marks inactive groups for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE days of inactivity."""
 
-    RUN_EVERY_MINS = 60 * 24  # every day
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus.deactivate_inactive_groups'
