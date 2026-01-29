@@ -194,4 +194,8 @@ def check_url_v3_everywhere_exempt(url_path, request):
     for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
         if re.match(url_pattern, url_path):
             return True
+
+    # special case check for letting /profile/setup/ hit the redirect defined in urls.py
+    if settings.COSINNUS_DISABLE_V3_PROFILE_SETUP_VIEWS and re.match('^/setup/profile', url_path):
+        return True
     return False

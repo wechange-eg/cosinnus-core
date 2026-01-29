@@ -31,6 +31,12 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
     # Show filter type selection  ("or", "and")
     filter_type_select_enabled = False
 
+    # Show the filter field for the `TOPIC_CHOICES`
+    show_cosinnus_topics_filter = True
+    # Options for the `TOPIC_CHOICES` filter field
+    cosinnus_topics_label = _('Topics')
+    _cosinnus_topics_field_name = 'topics'
+
     # List of dynamic fields used for filtering
     FILTERS = []
     # Overwrite filter labels, the dynamic field label is used by default
@@ -60,13 +66,31 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
 
     def get_filter_label(self, name, dynamic_field):
         """Get filter label for dynamic field considering custom overwrites."""
+        # topic label
+        if name == self._cosinnus_topics_field_name:
+            return self.cosinnus_topics_label
+        # overridden label
         if name in self.FILTER_LABEL_OVERWRITES:
             return self.FILTER_LABEL_OVERWRITES[name]
+        # default: dynamic field label
         return dynamic_field.label
 
     def get_filters(self):
         """Get data for all filters."""
         filters = []
+        # add topic filter
+        if self.show_cosinnus_topics_filter:
+            topic_tuple = list((str(key), val) for (key, val) in settings.COSINNUS_TOPIC_CHOICES)
+            filters.append(
+                {
+                    'name': self._cosinnus_topics_field_name,
+                    'label': self.get_filter_label(self._cosinnus_topics_field_name, None),
+                    'current': self.get_current_filter_list(self._cosinnus_topics_field_name),
+                    'options': topic_tuple,
+                    'topics_dict': dict(topic_tuple),
+                }
+            )
+        # add dynamic field filters
         for name in self.FILTERS:
             dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[name]
             filter_options = {
@@ -84,6 +108,13 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
     def get_active_filter_queries(self):
         """Get the list of filter queries and values for active filters."""
         filters = defaultdict(list)
+        # topics filter query
+        if self.show_cosinnus_topics_filter:
+            topic_filter_values = self.get_current_filter_list(self._cosinnus_topics_field_name)
+            for value in topic_filter_values:
+                topic_query_parameter = 'media_tag__{}__contains'.format(self._cosinnus_topics_field_name)
+                filters[topic_query_parameter].append(value)
+        # dynamic fields filter queries
         for name in self.FILTERS:
             dynamic_field = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[name]
             if dynamic_field.choices:
@@ -183,6 +214,8 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
                 'current_search': self.get_current_filters('q'),
                 'show_filter_type_select': self.filter_type_select_enabled and filters,
                 'current_type': self.get_filter_type(),
+                'show_cosinnus_topics_filter': self.show_cosinnus_topics_filter,
+                'topics_field_name': self._cosinnus_topics_field_name,
             }
         )
         return context
