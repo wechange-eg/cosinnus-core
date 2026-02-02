@@ -1817,7 +1817,7 @@ class CosinnusConf(AppConf):
     # Env file used by project, e.g. read .env.test in default_settings.
     # Important: this conf setting needs to be put at the start of your project's conf file,
     # *before* `def define_cosinnus_project_settings(...` !
-    COSINNUS_ENV_FILE = '.env'
+    ENV_FILE = '.env'
 
 
 class CosinnusDefaultSettings(AppConf):
