@@ -36,6 +36,7 @@ def create_active_test_user(username='user'):
     test_user.last_login = now()
     test_user.save()
     test_user.cosinnus_profile.tos_accepted = True
+    test_user.cosinnus_profile.email_verified = True
     test_user.cosinnus_profile.save()
     return test_user
 
@@ -147,11 +148,12 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
                 SendUserInactivityNotifications().do()
                 self.assertFalse(send_mail_mock.called)
 
-            # no notification is sent the day after scheduled date
-            day_after_notification = notification_date + timedelta(days=1)
-            with freeze_time(day_after_notification):
-                SendUserInactivityNotifications().do()
-                self.assertFalse(send_mail_mock.called)
+            # no notification is sent the day after scheduled date, if not enabled by settings
+            if (days_before_deactivation - 1) not in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION:
+                day_after_notification = notification_date + timedelta(days=1)
+                with freeze_time(day_after_notification):
+                    SendUserInactivityNotifications().do()
+                    self.assertFalse(send_mail_mock.called)
 
     @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
@@ -240,7 +242,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.test_user.save()
 
         deactivation_date = last_login + timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE, seconds=1)
-        expected_deletion = deactivation_date + timedelta(days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS)
+        expected_deletion = deactivation_date + timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS)
         with freeze_time(deactivation_date):
             self.assertTrue(test_group.is_active)
             MarkInactiveUsersForDeletion().do()
@@ -418,11 +420,12 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 SendGroupsInactivityNotifications().do()
                 self.assertFalse(send_mail_mock.called)
 
-            # no notification is sent the day after scheduled date
-            day_after_notification = notification_date + timedelta(days=1)
-            with freeze_time(day_after_notification):
-                SendGroupsInactivityNotifications().do()
-                self.assertFalse(send_mail_mock.called)
+            # no notification is sent the day after scheduled date, if not enabled by settings
+            if (days_before_deactivation - 1) not in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION:
+                day_after_notification = notification_date + timedelta(days=1)
+                with freeze_time(day_after_notification):
+                    SendGroupsInactivityNotifications().do()
+                    self.assertFalse(send_mail_mock.called)
 
     @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
