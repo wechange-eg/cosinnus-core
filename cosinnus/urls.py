@@ -758,7 +758,7 @@ if settings.COSINNUS_FIREBASE_ENABLED:
     urlpatterns += [
         # URLs will show up at <api_root>/devices
         # DRF browsable API which lists all available endpoints
-        path('fcm/', include(router.urls)),
+        path('fcm/', include((router.urls, 'fcm_django'), namespace='fcm-django')),
     ]
 
 if settings.COSINNUS_V3_FRONTEND_ENABLED:

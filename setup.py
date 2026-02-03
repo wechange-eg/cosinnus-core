@@ -87,7 +87,7 @@ setup(
     packages=find_packages(exclude=['tests']),
     data_files=data_files,
     install_requires=[
-        'Django>=4.2.27,<4.3',
+        'Django<4.3',
         'MarkupSafe==2.1.5',
         'Pillow==10.3.0',
         'celery==5.2.7',
@@ -172,7 +172,7 @@ setup(
         'pre-commit==3.5.0',
         'fcm-django==2.2.1',
         'caldav==2.1.2',
-        'tblib==3.0.0'
+        'tblib==3.0.0',
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django-update-4-2#egg=django-awesome-avatar',
         'django-filer @ git+https://github.com/wechange-eg/django-filer.git@django-update-4-2#egg=django-filer',

@@ -79,8 +79,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     BASE_PATH = project_base_path
     COSINNUS_BASE_PATH = realpath(join(dirname(__file__), '..'))
 
+    env_file = project_settings.get('COSINNUS_ENV_FILE', '.env')
     env = environ.Env()
-    env.read_env(BASE_PATH('.env'))
+    env.read_env(BASE_PATH(env_file))
 
     # Absolute filesystem path to the directory that will hold user-uploaded files.
     # Example: "/home/media/media.lawrence.com/media/"

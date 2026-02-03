@@ -608,10 +608,11 @@ def newsletter_users(
     never_logged_in_only=False,
     all_portal_users=False,
     file_name='newsletter-user-emails',
+    override_conf_setting=False,
 ):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
-    if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False):
+    if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False) and not override_conf_setting:
         return HttpResponseForbidden('This Feature is currently not enabled!')
 
     headers = [
