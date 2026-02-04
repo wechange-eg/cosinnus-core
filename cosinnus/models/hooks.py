@@ -388,4 +388,3 @@ def abort_group_deletion(sender, group, **kwargs):
 
 
 from cosinnus.apis.cleverreach import *  # noqa
-from cosinnus.models.wagtail_models import *  # noqa
