@@ -115,14 +115,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = '/static/'
 
-    # List of finder classes that know how to find static files in
-    # various locations
-    STATICFILES_FINDERS = (
-        'django.contrib.staticfiles.finders.FileSystemFinder',
-        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-        'compressor.finders.CompressorFinder',
-    )
-
     ROOT_URLCONF = 'config.urls'
 
     """ --------------- DJANGO-SPECIFICS ---------------- """
@@ -163,7 +155,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        'wagtail.contrib.redirects.middleware.RedirectMiddleware',
         'allauth.account.middleware.AccountMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
@@ -314,23 +305,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     INSTALLED_APPS += project_settings.get('EXTRA_COSINNUS_APPS', [])
 
     INSTALLED_APPS += [
-        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
         'haystack',
-        # wagtail
-        'wagtail_overextends',
-        'compressor',
-        'modelcluster',
-        'wagtail.core',
-        'wagtail.admin',
-        'wagtail.documents',
-        'wagtail.snippets',
-        'wagtail.users',
-        'wagtail.images',
-        'wagtail.embeds',
-        'wagtail.search',
-        'wagtail.sites',
-        'wagtail.contrib.redirects',
-        'wagtail.contrib.forms',
         'announcements',
         'ajax_forms',
         # SSO
@@ -601,8 +576,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     THUMBNAIL_PROCESSORS = (
         'easy_thumbnails.processors.colorspace',
         'easy_thumbnails.processors.autocrop',
-        # 'easy_thumbnails.processors.scale_and_crop',
-        'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+        'easy_thumbnails.processors.scale_and_crop',
         'easy_thumbnails.processors.filters',
     )
     # this namer prevents exposing the source file in its path
@@ -616,10 +590,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
 
     # detect testing mode
     TESTING = 'test' in sys.argv
-
-    # wagtail
-    WAGTAIL_SITE_NAME = 'Wechange'
-    WAGTAIL_ENABLE_UPDATE_CHECK = False
 
     """ Default non-cosinnus specific settings i.e. for third-party apps.
 

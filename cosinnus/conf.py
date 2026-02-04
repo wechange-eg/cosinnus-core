@@ -87,7 +87,6 @@ class CosinnusConf(AppConf):
         # included services
         '/swagger/',
         '/redoc/',
-        '/cms-admin/',  # wagtail admin
     ]
 
     #: A mapping of ``{'app1.Model1': ['app2.Model2', 'app3.Model3']}`` that
@@ -616,10 +615,6 @@ class CosinnusConf(AppConf):
     SSO_OAUTH_CURRENT_USER_ENDPOINT_URL = None
     # where to redirect when a user is already logged in when initiation the Oauth flow
     SSO_ALREADY_LOGGED_IN_REDIRECT_URL = '/'
-
-    # can a staff user import CosinnusGroups via a CSV upload in the wagtail admin?
-    # and is the button shown?
-    IMPORT_PROJECTS_PERMITTED = False
 
     # shall each individual email be logged as a `CosinnusSentEmailLog`?
     LOG_SENT_EMAILS = True

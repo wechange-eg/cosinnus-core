@@ -60,7 +60,6 @@ packages = [
     'postman',
     'rest_framework_rdf',
     'suit_overextends',
-    'wagtail_overextends',
     'locale',
 ]
 
@@ -110,7 +109,6 @@ setup(
         'django-honeypot==0.9.0',
         'django-ical==1.7.1',
         'django-mailbox==4.9.0',
-        'django-modelcluster==5.2',
         'django-model-utils==1.5.0',
         'django-mptt==0.8.7',
         'django-oauth-toolkit==2.3.0',
@@ -161,8 +159,6 @@ setup(
         'XlsxWriter==1.3.7',
         'django-cors-headers<3.11.0',
         'phonenumbers==8.13.28',
-        # wagtail
-        'django-compressor==3.1',
         # virus file scan validator
         'clamd==1.0.2',
         # requirements for documentation
@@ -171,10 +167,9 @@ setup(
         'ruff==0.4.4',
         'pre-commit==3.5.0',
         'fcm-django==2.2.1',
-        'tblib==3.0.0'
+        'tblib==3.0.0',
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django-update-4-2#egg=django-awesome-avatar',
-        'django-filer @ git+https://github.com/wechange-eg/django-filer.git@django-update-4-2#egg=django-filer',
         'django-multiform @ git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
         'django-djajax @ git+https://github.com/wechange-eg/django-djajax.git@django-update-4-2#egg=django-djajax',
         'django_select2 @ git+https://github.com/wechange-eg/django-select2.git@django-update-4-2#egg=django-select2',
@@ -183,7 +178,6 @@ setup(
         'pydkim @ git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
         'django-suit @ git+https://github.com/wechange-eg/django-suit.git@django-update-4-2#egg=django-suit',
         'django-bootstrap3-datetimepicker-3 @ git+https://github.com/wechange-eg/django-bootstrap3-datetimepicker-3.git@django-update-4-2#egg=django-bootstrap3-datetimepicker-3',
-        'wagtail @ git+https://github.com/wechange-eg/wagtail.git@django-update-4-2#egg=wagtail',
         'django-clamd @ git+https://github.com/wechange-eg/django-clamd.git@master#egg=django-clamd',
         'djangorestframework-jwt @ git+https://github.com/wechange-eg/django-rest-framework-jwt.git@master#egg=djangorestframework-jwt',
     ],
