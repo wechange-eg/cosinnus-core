@@ -371,4 +371,3 @@ def handle_user_group_guest_access_logged_out(sender, user, **kwargs):
 
 
 from cosinnus.apis.cleverreach import *  # noqa
-from cosinnus.models.wagtail_models import *  # noqa

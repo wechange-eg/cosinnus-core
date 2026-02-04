@@ -44,7 +44,6 @@ from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 from django_otp import user_has_device
 from six.moves.urllib.parse import parse_qsl
-from wagtail.core.templatetags.wagtailcore_tags import richtext
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
@@ -1187,15 +1186,6 @@ def tag_group_filtered(tag_object, group='None'):
             tag_object.topics = ','.join([top for top in tag_object.topics.split(',') if top not in group_topics])
         """
     return tag_object
-
-
-@register.filter
-def richtext_or_stream(value):
-    """A safer alternative to the wagtail filter |richtext, which will render a richtext if it got passed one,
-    or just render a streamfield with its innate function if it is one such."""
-    if value and isinstance(value, six.string_types):
-        return richtext(value)
-    return value
 
 
 @register.filter
