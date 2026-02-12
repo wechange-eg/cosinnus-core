@@ -87,6 +87,7 @@ setup(
     data_files=data_files,
     install_requires=[
         'Django<4.3',
+        #'Django<5.3',  # TODO needs python update
         'MarkupSafe==2.1.5',
         'Pillow==10.3.0',
         'celery==5.2.7',
@@ -100,12 +101,14 @@ setup(
         'django-classy-tags==2.0.0',
         'django-countries==7.2.1',
         'django-cron==0.6.0',
+        #'django-cron-django5==0.6.2', TODO needs python update
         'django-embed-video==1.4.9',
         'django-el-pagination==2.1.2',
         'django-extensions==3.1.5',
+        # django-extensions==4.1', TODO needs python update
         'django-extra-views==0.14.0',
         'django-filter==21.1',
-        'django-haystack==3.2.1',
+        'django-haystack==3.3.0',
         'django-honeypot==0.9.0',
         'django-ical==1.7.1',
         'django-mailbox==4.9.0',
@@ -118,16 +121,19 @@ setup(
         'django-reverse-admin==2.9.4',
         'django-sekizai==2.0.0',
         'django-simple-captcha==0.5.20',
-        'django-taggit==1.5.1',
+        'django-taggit==6.1.0',
         'django-timezone-field==4.2.1',
         'django-two-factor-auth==1.14.0',
+        #'django-two-factor-auth==1.18.1',  # TODO: needs python update
         'django-widget-tweaks==1.4.9',
         'djangorestframework==3.15.2',
+        #'djangorestframework==3.16.1',  # TODO: needs python update
         'djangorestframework-csv==2.1.1',
         'dnspython==2.6.1',
         'drf-extra-fields==3.4.0',
         'drf-yasg==1.21.7',
         'easy-thumbnails==2.8.5',
+        #'easy-thumbnails==2.10.1',  # TODO: needs python update
         'elasticsearch==7.17.9',
         'ecdsa==0.18.0',
         'geopy==1.11.0',
@@ -176,10 +182,9 @@ setup(
         'django-osm-field @ git+https://github.com/wechange-eg/django-osm-field.git@django-update-4-2#egg=django-osm-field',
         'markdown2 @ git+https://github.com/wechange-eg/python-markdown2.git@2.4.8-WE#egg=markdown2',
         'pydkim @ git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
-        'django-suit @ git+https://github.com/wechange-eg/django-suit.git@django-update-4-2#egg=django-suit',
+        'django-suit @ git+https://github.com/wechange-eg/django-suit.git@django-update-5-2#egg=django-suit',
         'django-bootstrap3-datetimepicker-3 @ git+https://github.com/wechange-eg/django-bootstrap3-datetimepicker-3.git@django-update-4-2#egg=django-bootstrap3-datetimepicker-3',
         'django-clamd @ git+https://github.com/wechange-eg/django-clamd.git@master#egg=django-clamd',
-        'djangorestframework-jwt @ git+https://github.com/wechange-eg/django-rest-framework-jwt.git@master#egg=djangorestframework-jwt',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
