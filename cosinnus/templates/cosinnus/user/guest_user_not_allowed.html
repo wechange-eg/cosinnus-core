@@ -51,18 +51,21 @@
                 </ul>
             </button>
 
-            <button href="{% url "logout" %}?next={% url "cosinnus:user-add" %}?next={{ request.user.cosinnus_profile.guest_access_object.group.get_absolute_url }}" class="btn btn-emphasized btn-autosize">
-                <ul class="media-list">
-                    <li class="media">
-                        <span class="pull-left">
-                            <i class="fa fa-user-plus"></i>
-                        </span>
-                        <div class="media-body">
-                            {% trans "Leave guest access and create an account" %}
-                        </div>
-                    </li>
-                </ul>
-            </button>
+            <form method="post" action="{% url 'logout' %}?next={% url "cosinnus:user-add" %}?next={{ request.user.cosinnus_profile.guest_access_object.group.get_absolute_url }}">
+                {% csrf_token %}
+                <button class="btn btn-emphasized btn-autosize">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-user-plus"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "Leave guest access and create an account" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            </form>
         </div>
     </div>
 

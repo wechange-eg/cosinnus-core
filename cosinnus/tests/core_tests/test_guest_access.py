@@ -91,7 +91,7 @@ class UserGuestAccessTest(TestCase):
         self.assertEqual(response.status_code, 200, 'guests CAN POST to whitelisted POST targets')
 
         # guest logs out and their user is inactivated
-        response = self.client.get(self.logout_url)
+        response = self.client.post(self.logout_url)
         self.assertEqual(response.status_code, 200, 'guests can log out')
 
         self.assertIsNone(self.client.session.get('_auth_user_id'), 'guest is no longer logged in after signing out')
