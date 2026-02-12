@@ -631,6 +631,8 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
         )
         def test_event_bbb_enabled(self):
+            self.test_group.video_conference_type = self.test_group.BBB_MEETING
+            self.test_group.save()
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']

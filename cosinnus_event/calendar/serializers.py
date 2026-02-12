@@ -249,7 +249,8 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
         return obj.get_feed_url()
 
     def get_bbb_available(self, obj):
-        return settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS
+        group = self.context['group']
+        return group.group_is_bbb_enabled
 
     def get_bbb_restricted(self, obj):
         group = self.context['group']
@@ -274,7 +275,9 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             if not settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
                 raise serializers.ValidationError('BBB is disabled in events.')
             group = self.context['group']
-            if not group.group_can_be_bbb_enabled:
+            if not group.group_is_bbb_enabled:
+                raise serializers.ValidationError('BBB is not enabled in group.')
+            elif not group.group_can_be_bbb_enabled:
                 raise serializers.ValidationError('BBB creation is restricted for this group.')
         return value
 
