@@ -411,7 +411,7 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
             media_tag.topics = ','.join([str(topic) for topic in topics])
         tags = media_tag_data.get('tags', None)
         if tags:
-            media_tag.tags.set(*tags, clear=True)
+            media_tag.tags.set(tags, clear=True)
         # allow resetting the field if an empty value is given
         if PROFILE_DYNAMIC_FIELDS_CONTACTS in profile_data.get('dynamic_fields', {}):
             contact_infos = profile_data.get('dynamic_fields', {}).get(PROFILE_DYNAMIC_FIELDS_CONTACTS, []) or []
