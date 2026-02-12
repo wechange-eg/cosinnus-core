@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.urls import include, path
 
 from cosinnus.api_frontend.views.content import MainContentView
+from cosinnus.api_frontend.views.group import GroupSettingsView
 from cosinnus.api_frontend.views.navigation import (
     AlertsMarkAllReadView,
     AlertsView,
@@ -100,6 +101,7 @@ urlpatterns += [
         VersionHistoryUnreadCountView.as_view(),
         name='api-navigation-unread-version-history',
     ),
+    path('api/v3/group/<int:group_id>/settings/', GroupSettingsView.as_view(), name='api-group-settings'),
 ]
 
 if settings.COSINNUS_ADMIN_USER_APIS_ENABLED:
