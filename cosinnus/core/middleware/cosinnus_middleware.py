@@ -118,6 +118,7 @@ GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
 GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS = [
     r'^/dashboard/api/save_ui_prefs/',  # save ui prefs
     r'^/api/v3/logout/',  # logout via api
+    r'^/logout/',  # logout
 ]
 GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS = [
     r'^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/doodle/(?P<doodle_slug>[^/]+)/',  # event poll votes
@@ -693,6 +694,7 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         if request.path.startswith('/api-auth/login'):
             return redirect('login')
         if request.path.startswith('/api-auth/logout'):
+            # TODO: does not work after logout with get is deprecated.
             return redirect('logout')
 
         if user.is_authenticated:

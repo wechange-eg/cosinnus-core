@@ -24,6 +24,9 @@
         <div class="col-md-8 col-md-offset-2">
             {% include 'cosinnus/messages.html' %}
 
+            <form id="logout_form" method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+            </form>
 		    <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
 		        {% csrf_token %}
 		        
@@ -94,20 +97,20 @@
 		                </li>
 		            </ul>
 		        </button>
-		
-		        <a class="btn btn-emphasized btn-autosize pull-left no-margin" href="{% url "logout" %}">
-		            <ul class="media-list">
-		                <li class="media">
-		                    <span class="pull-left" tabindex="-1">
-		                        <i class="fas fa-sign-out-alt"></i>
-		                    </span>
-		                    <div class="media-body">
-		                        {% trans "Log out" %}
-		                    </div>
-		                </li>
-		            </ul>
-		        </a>
-		
+
+                <button  type="submit" form="logout_form" class="btn btn-emphasized btn-autosize pull-left no-margin">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left" tabindex="-1">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "Log out" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+
 		    </form>
         </div>
     </div>

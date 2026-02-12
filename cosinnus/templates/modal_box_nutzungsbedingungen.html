@@ -49,18 +49,21 @@
                 </div>
                 
                 <div class="app-main">
-	                <button type="button" href="{% url 'logout' %}" class="btn btn-emphasized" >
-	                    <ul class="media-list">
-	                        <li class="media">
-	                            <span class="pull-left">
-	                                <i class="fa fa-times"></i>
-	                            </span>
-	                            <div class="media-body">
-	                                {% trans "Logout" %}
-	                            </div>
-	                        </li>
-	                    </ul>
-	                </button>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="button" class="btn btn-emphasized" >
+                            <ul class="media-list">
+                                <li class="media">
+                                    <span class="pull-left">
+                                        <i class="fa fa-times"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        {% trans "Logout" %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
+                    </form>
                 </div>
                 
                 <script type="text/javascript">
