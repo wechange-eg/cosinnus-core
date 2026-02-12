@@ -264,14 +264,11 @@ class CosinnusLogoutView(LogoutView):
         }
 
     def post(self, *args, **kwargs):
-        """Note: the methods are set equal: get = post in `LogoutView`."""
         self.save_context()
         cosinnus_pre_logout_actions(self.request)
         response = super().post(*args, **kwargs)
         cosinnus_post_logout_actions(self.request, response)
         return response
-
-    get = post
 
 
 cosinnus_logout = CosinnusLogoutView.as_view()

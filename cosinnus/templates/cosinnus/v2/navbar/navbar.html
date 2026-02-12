@@ -453,15 +453,18 @@
 		<div class="nav-flyout-section padded">
 			<ul class="item-list">
 				<li>
-					<a href="{% url 'logout' %}" class="list-item" role="button" titledby=".item-text">
-			    		<div class="item-text">
-                            {% if request.user.is_guest %}
-                                {% trans "Leave guest access" %}
-                            {% else %}
-			    			    {% trans "Logout" %}
-                            {% endif %}
-			    		</div>
-					</a>
+                    <form method="post" action="{% url 'logout' %}">
+                      {% csrf_token %}
+                      <button type="submit" class="list-item">
+                          <div class="item-text">
+                              {% if request.user.is_guest %}
+                                  {% trans "Leave guest access" %}
+                              {% else %}
+                                  {% trans "Logout" %}
+                              {% endif %}
+                          </div>
+                      </button>
+                    </form>
 				</li>
 			</ul>
 		</div>

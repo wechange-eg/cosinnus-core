@@ -336,7 +336,8 @@
 				text-decoration: none;
 			}
 		}
-		a.list-item:not(.list-item-link):not(.inactive) {
+		a.list-item:not(.list-item-link):not(.inactive),
+        button.list-item:not(.inactive) {
 			&:hover, &:hover .li-underdrop {
 				background-color: @text-highlight-color;
 				text-decoration: none;
@@ -345,7 +346,11 @@
 				}
 			}
 		}
-	
+        button.list-item {
+            border: none;
+            background-color: @background-color-secondary;
+            text-align: right;
+        }
 	}
 	
 	.truncated-oneline {
