@@ -27,7 +27,7 @@
 		    {{ priority_formset.management_form }}
 		    {{ priority_formset.non_form_errors }}
 		    <div class="content-box">
-                {% if not form.options and priority_formset.forms|length_is:0 and not form.conditions_accepted %}
+                {% if not form.options and priority_formset.forms|length == 0 and not form.conditions_accepted %}
                     <h2>{% trans 'Apply for participation in' %} <i>{{ group.name }}</i></h2>
                 {% else %}
                     <h2>{% trans 'Edit your application for' %} <i>{{ group.name }}</i></h2>
