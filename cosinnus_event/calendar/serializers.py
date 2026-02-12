@@ -253,7 +253,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
 
     def get_bbb_restricted(self, obj):
         group = self.context['group']
-        return not group.group_can_be_bbb_enabled
+        return group.group_is_bbb_restricted
 
     def get_bbb_url(self, obj):
         user = self.context['request'].user

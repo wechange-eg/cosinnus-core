@@ -248,6 +248,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
         # test data
         test_user = None
         test_admin = None
+        test_non_group_user = None
         test_group = None
         test_event = None
 
@@ -358,6 +359,9 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(data['from_date'], ['This parameter is required'])
             self.assertEqual(data['to_date'], ['This parameter is required'])
 
+        @override_settings(
+            COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
+        )
         def test_event_detail(self):
             # test anonymous access
             res = self.client.get(self.event_detail_url)
@@ -384,8 +388,8 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'ical_url': self.test_event.get_feed_url(),
                 'attending': False,
                 'attendances': [],
-                'bbb_available': True,
-                'bbb_restricted': True,
+                'bbb_available': False,
+                'bbb_restricted': False,
                 'bbb_enabled': False,
                 'bbb_url': None,
                 'image': None,
