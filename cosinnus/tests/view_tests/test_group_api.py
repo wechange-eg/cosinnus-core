@@ -4,6 +4,7 @@ from rest_framework.test import APITestCase, override_settings
 
 from cosinnus.models.group import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusSociety
+from cosinnus.utils.urls import group_aware_reverse
 
 
 class GroupSettingsAPITest(APITestCase):
@@ -73,5 +74,6 @@ class GroupSettingsAPITest(APITestCase):
                 'bbb_available': False,
                 'bbb_restricted': False,
                 'bbb_enabled': False,
+                'events_ical_url': group_aware_reverse('cosinnus:team-feed', kwargs={'team_id': self.test_group.id}),
             },
         )
