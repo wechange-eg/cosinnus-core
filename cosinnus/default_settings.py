@@ -25,6 +25,7 @@ from django.utils.translation import gettext_lazy as _
 
 from cosinnus import VERSION as COSINNUS_VERSION
 
+# TODO: remove after update
 # `django.core.exceptions.ImproperlyConfigured:
 #   PASSWORD_RESET_TIMEOUT_DAYS/PASSWORD_RESET_TIMEOUT are mutually exclusive.`
 # because django.conf.global_settings is being imported directly to be able to modify pre-existing default values.
@@ -32,6 +33,7 @@ from cosinnus import VERSION as COSINNUS_VERSION
 if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
     del globals()['PASSWORD_RESET_TIMEOUT_DAYS']
 
+# TODO: remove after update
 # DEFAULT_FILE_STORAGE/STATICFILES_STORAGE are deprecated and mutually exclusive with STORAGES.
 if 'DEFAULT_FILE_STORAGE' in globals():
     del globals()['DEFAULT_FILE_STORAGE']
@@ -252,9 +254,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # If you set this to False, Django will make some optimizations so as not
     # to load the internationalization machinery.
     USE_I18N = True
-    # If you set this to False, Django will not format dates, numbers and
-    # calendars according to the current locale.
-    USE_L10N = True
     # If you set this to False, Django will not use timezone-aware datetimes.
     USE_TZ = True
 
