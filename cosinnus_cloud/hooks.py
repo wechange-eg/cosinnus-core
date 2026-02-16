@@ -528,6 +528,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
     @receiver(post_delete, sender=CosinnusProject)
     @receiver(post_delete, sender=CosinnusSociety)
     @receiver(post_delete, sender=CosinnusConference)
+    @receiver(post_delete, sender=get_cosinnus_group_model())
     def handle_group_deleted(sender, instance, **kwargs):
         """Trigger to completely delete a group folder when a group is deleted.
         We have CosinnusConference in here as backwards compatibility, because for some conferences,

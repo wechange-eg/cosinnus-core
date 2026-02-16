@@ -10,6 +10,7 @@ import six
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
+from django.utils.dateparse import parse_datetime
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 from oauth2_provider.models import Application
@@ -905,6 +906,26 @@ class RocketChatConnection:
             return None
         group_name = response.get('group', {}).get('name', None)
         return group_name
+
+    def get_group_updated_at(self, group):
+        """Return the last update timestamp for any group room."""
+        updated_at = None
+        room_keys = settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS
+        room_ids = [self.get_group_id(group, room_key=room_key, create_if_not_exists=False) for room_key in room_keys]
+        for room_id in room_ids:
+            if room_id:
+                response = self.rocket.groups_info(room_id=room_id).json()
+                if not response.get('success'):
+                    logger.error(
+                        'RocketChat: groups_info' + response.get('errorType', '<No Error Type>'),
+                        extra={'response': response},
+                    )
+                    continue
+                updated_at_string = response.get('group', {}).get('_updatedAt', '')
+                room_update_at = parse_datetime(updated_at_string)
+                if room_update_at:
+                    updated_at = max(updated_at, room_update_at) if updated_at else room_update_at
+        return updated_at
 
     def _find_or_create_private_channel_for_user_and_group(self, user, group, members, create=False):
         """Used by `self.groups_request`, finds a group contact room for a user

@@ -321,6 +321,48 @@ class MembershipInline(admin.StackedInline):
     extra = 0
 
 
+class ProjectScheduledForDeletionAtFilter(admin.SimpleListFilter):
+    """Will show groups that are scheduled for deletion (or not)"""
+
+    title = _('Scheduled for Deletion?')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'groupscheduledfordeletion'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(scheduled_for_deletion_at__exact=None)
+        if self.value() == 'no':
+            return queryset.filter(scheduled_for_deletion_at__exact=None)
+
+
+class ProjectInactivityNotificationSentFilter(admin.SimpleListFilter):
+    """Will show projects where notification were sent about the pending deletion due to inactivity."""
+
+    title = _('Inactivity Notification Sent?')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'groupinactivitynotificationsent'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(inactivity_notification_sent_at__exact=None)
+        if self.value() == 'no':
+            return queryset.filter(inactivity_notification_sent_at__exact=None)
+
+
 class CosinnusProjectAdmin(admin.ModelAdmin):
     actions = [
         'convert_to_society',
@@ -348,6 +390,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'portal',
         'public',
         'is_active',
+        ProjectScheduledForDeletionAtFilter,
+        ProjectInactivityNotificationSentFilter,
     )
     search_fields = (
         'name',
@@ -360,6 +404,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'last_modified',
         'is_premium_currently',
         'attached_objects',
+        'last_activity',
+        'inactivity_notification_sent_at',
     ]
     raw_id_fields = ('parent',)
     exclude = [
@@ -802,6 +848,7 @@ class UserProfileInline(admin.StackedInline):
         'deletion_triggered_by_self',
         '_is_guest',
         'guest_access_object',
+        'inactivity_notification_sent_at',
     )
     show_change_link = True
     view_on_site = False
@@ -974,6 +1021,27 @@ class UserScheduledForDeletionAtFilter(admin.SimpleListFilter):
 _useradmin_excluded_list_filter = ['groups', 'is_staff']
 
 
+class UserInactivityNotificationSentFilter(admin.SimpleListFilter):
+    """Will show users that were notified on about the pending deletion due to inactivity."""
+
+    title = _('Inactivity Notification Sent?')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'usersinactivitynotificationsent'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(cosinnus_profile__inactivity_notification_sent_at__exact=None)
+        if self.value() == 'no':
+            return queryset.filter(cosinnus_profile__inactivity_notification_sent_at__exact=None)
+
+
 class UserAdmin(DjangoUserAdmin):
     PERMISSION_FIELDS = ('is_active', 'is_superuser', 'is_staff')
 
@@ -1052,8 +1120,9 @@ class UserAdmin(DjangoUserAdmin):
         'date_joined',
         UserHasLoggedInFilter,
         UserToSAcceptedFilter,
-        UserScheduledForDeletionAtFilter,
         EmailVerifiedFilter,
+        UserScheduledForDeletionAtFilter,
+        UserInactivityNotificationSentFilter,
         IsGuestFilter,
     ]
     search_fields = ['username', 'first_name', 'last_name', 'email', 'cosinnus_profile__dynamic_fields']
@@ -1107,7 +1176,7 @@ class UserAdmin(DjangoUserAdmin):
         return False
 
     def deactivate_users(self, request, queryset):
-        from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
+        from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion
 
         count = 0
         for user in queryset:
@@ -1142,7 +1211,7 @@ class UserAdmin(DjangoUserAdmin):
         instantly_delete_user.short_description = _('(DEBUG ONLY) DELETE user instantly (TAKE CARE!)')
 
     def reactivate_users(self, request, queryset):
-        from cosinnus.views.profile import reactivate_user
+        from cosinnus.views.profile_deletion import reactivate_user
 
         count = 0
         for user in queryset:

@@ -527,6 +527,9 @@ class CosinnusConf(AppConf):
     # has been run, previous values of all existing groups will remain unchanged!
     GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
 
+    # the duration in days from which a user deletes a group until its actual deletion is triggered
+    GROUP_DELETION_SCHEDULE_DAYS = 1  # TESTING_ONLY 30
+
     # if True, enables an option to choose related groups/projects in the groups/projects
     # settings showing the chosen ones on microsite and dashboard
     RELATED_GROUPS_PROJECTS_ENABLED = True
@@ -1725,6 +1728,19 @@ class CosinnusConf(AppConf):
 
     # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
     DENY_ALL_ROBOTS = False
+    # Number of days before inactive groups and users are automatically deactivated for deletion.
+    # Note: Ignoring leap years to avoid calendar arithmetics as the exact duration is not crucial for the deactivation.
+    INACTIVE_DEACTIVATION_SCHEDULE = 5  # TESTING ONLY  365 * 10  # 10 years
+    INACTIVE_DEACTIVATION_SCHEDULE_TEXT = _('10 years (5 days for testing)')
+
+    # Notification intervals in days before automatic deactivation of users and groups.
+    # Dictionary with day value and the corresponding user text.
+    INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION = {
+        4: _('1 year (4 days for testing)'),  # 365
+        3: _('6 months (3 days for testing)'),  # 182
+        2: _('2 weeks (2 days for testing)'),  # 14
+        1: _('2 days (1 day for testing)'),  # 2
+    }
 
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False

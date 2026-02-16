@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 import logging
 from builtins import str
-from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
@@ -13,7 +12,6 @@ from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -21,17 +19,13 @@ from django.views import View
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import DeleteView
-from oauth2_provider import models as oauth2_provider_models
 
-from cosinnus.core import signals
 from cosinnus.core.decorators.views import redirect_to_error_page, redirect_to_not_logged_in
-from cosinnus.core.mail import send_html_mail
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.profile import UserBlock, get_user_profile_model
-from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
-from cosinnus.models.widget import WidgetConfig
-from cosinnus.templatetags.cosinnus_tags import full_name, textfield
+from cosinnus.models.tagged import BaseTagObject
+from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.permissions import (
     check_user_can_see_user,
     check_user_integrated_portal_member,
@@ -40,137 +34,9 @@ from cosinnus.utils.permissions import (
 from cosinnus.utils.user import filter_active_users, get_locked_profile_visibility_setting_for_user
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.views.mixins.group import RequireLoggedInMixin
+from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion
 
 logger = logging.getLogger('cosinnus')
-
-
-def deactivate_user(user):
-    """Deactivates a user account"""
-    user.is_active = False
-    user.save()
-    # save the user's profile as well,
-    # as numerous triggers occur on the profile instead of the user object
-    if user.cosinnus_profile:
-        user.cosinnus_profile.save()
-
-
-def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
-    """Deacitvates a user account and marks them for deletion in 30 days"""
-    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
-        # add a marked-for-deletion flag and a cronjob, deleting the profile using this
-        deletion_schedule_time = now() + timedelta(days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS)
-        user.cosinnus_profile.scheduled_for_deletion_at = deletion_schedule_time
-        user.cosinnus_profile.deletion_triggered_by_self = triggered_by_self
-        user.cosinnus_profile.save()
-    deactivate_user(user)
-
-    # send extended deactivation signal
-    signals.user_deactivated_and_marked_for_deletion.send(sender=None, profile=user.cosinnus_profile)
-
-
-def delete_guest_user(user, deactivate_only=True):
-    """Deletes a user account (permanently or deactivate only) if they are a guest user.
-    Used when a guest user account is no longer needed (after logout) or when it has become
-    invalid (when the token or group it belongs to have been deleted).
-
-    @param deactivate_only: if True, the guest account will only be disabled, which will still lead to
-        the session becoming unusable. if False, the account will be irrevocably deleted."""
-    if user.is_guest:
-        if deactivate_only:
-            user.is_active = False
-            user.save()
-        else:
-            user.delete()
-
-
-def reactivate_user(user):
-    """Reactivates a user account and deletes their marked-for-deletion-flag"""
-    user.is_active = True
-    user.save()
-    # save the user's profile as well,
-    # as numerous triggers occur on the profile instead of the user object
-    if user.cosinnus_profile:
-        # delete the marked-for-deletion flag
-        user.cosinnus_profile.scheduled_for_deletion_at = None
-        user.cosinnus_profile.deletion_triggered_by_self = False
-        user.cosinnus_profile.save()
-    else:
-        # create a new userprofile if the old one was already deleted,
-        # so we have a functioning user account again
-        get_user_profile_model()._default_manager.get_for_user(user)
-
-
-def delete_userprofile(user):
-    """Deactivate and completely anonymize a user's profile, name and email,
-    leaving only the empty User object.
-    All content created by the user and foreign-key relations are preserved,
-    but will display ""Deleted User)" as creator.
-    Will not work on userprofiles whose user account is still active!"""
-
-    if user.is_active:
-        logger.warning(
-            'Aborting user profile deletion because the user account was still active!', extra={'user_id': user.id}
-        )
-        return
-
-    profile = user.cosinnus_profile
-
-    # send deletion signal
-    signals.pre_userprofile_delete.send(sender=None, profile=profile)
-
-    # delete user widgets
-    widgets = WidgetConfig.objects.filter(user_id__exact=user.pk)
-    for widget in widgets:
-        widget.delete()
-
-    # leave all groups
-    for membership in CosinnusGroupMembership.objects.filter(user=user):
-        membership.delete()
-
-    # delete user media_tag
-    try:
-        if profile.media_tag:
-            profile.media_tag.delete()
-    except get_tag_object_model().DoesNotExist:
-        pass
-
-    # delete AllAuth user data
-    if settings.COSINNUS_IS_OAUTH_CLIENT:
-        from allauth.account.models import EmailAddress
-        from allauth.socialaccount.models import SocialAccount
-
-        SocialAccount.objects.filter(user=user).delete()
-        EmailAddress.objects.filter(user=user).delete()
-
-    # delete oauth2_provider user tokens and grants
-    try:
-        oauth2_provider_models.get_grant_model().objects.filter(user=user).delete()
-        oauth2_provider_models.get_access_token_model().objects.filter(user=user).delete()
-        oauth2_provider_models.get_refresh_token_model().objects.filter(user=user).delete()
-    except Exception as e:
-        logger.warn(
-            "Userprofile delete: could not delete a user's oauth tokens because of an exception.",
-            extra={'exception': e},
-        )
-
-    # delete user profile
-    if profile.avatar:
-        profile.avatar.delete(False)
-    profile.delete()
-
-    # set user to inactive and anonymize all data.
-    user.first_name = 'deleted'
-    user.last_name = 'user'
-    user.username = user.id
-    # replace e-mail with random address
-    user.email = '__deleted_user__%s@deleted.com' % get_random_string(length=12)
-
-    # we no longer retain a padded version of the user's email
-    # scramble_cutoff = user._meta.get_field('email').max_length - len(scrambled_email_prefix) - 2
-    # scrambled_email_prefix = scrambled_email_prefix[:scramble_cutoff]
-
-    user.is_active = False
-    user.save()
 
 
 class UserProfileObjectMixin(SingleObjectMixin):
@@ -504,20 +370,6 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         self.object = self.get_object()
         if not self._validate_user_delete_safe(request.user):
             return HttpResponseRedirect(reverse('cosinnus:profile-delete'))
-
-        # send a notification email ignoring notification settings
-        text = _(
-            'Your platform profile stored with us under this email has been deactivated by you and was approved for '
-            'deletion. The profile has been removed from the website and we will delete the account completely in 30 '
-            'days.\n\nIf this has happened without your knowledge or if you change your mind in the meantime, please '
-            'contact the portal administrators or the email address given in our imprint. Please note that the '
-            'response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would '
-            'like to keep your profile.'
-        )
-        body_text = textfield(text)
-        send_html_mail(
-            request.user, _('Information about the deletion of your user account'), body_text, threaded=False
-        )
 
         # this no longer immediately deletes the user profile, but instead deactivates it!
         # function after 30 days.

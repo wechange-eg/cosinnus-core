@@ -6,6 +6,7 @@ from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
+from django.db.models import Q
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django_cron import CronJobBase, Schedule
@@ -19,13 +20,28 @@ from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.storage import TemporaryData
 from cosinnus.templatetags.cosinnus_tags import textfield
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_portal_group_slugs
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.views.profile import delete_userprofile
+from cosinnus.views.group_deletion import (
+    delete_group,
+    mark_group_for_deletion,
+    send_group_inactivity_deactivation_notifications,
+    update_group_last_activity,
+)
+from cosinnus.views.profile_deletion import (
+    deactivate_user_and_mark_for_deletion,
+    delete_userprofile,
+    reassign_admins_for_groups_of_deleted_user,
+    send_user_inactivity_deactivation_notifications,
+)
 from cosinnus_conference.utils import update_conference_premium_status
 from cosinnus_event.models import Event
 
 logger = logging.getLogger('cosinnus')
+
+
+TESTING_ONLY_DURATION_THIRTY_MINUTES = 30
+TESTING_ONLY_DURATION_SIXTY_MINUTES = 60
 
 
 class CosinnusCronJobBase(CronJobBase):
@@ -79,6 +95,63 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
                     ),
                     extra={'exception': force_str(e)},
                 )
+
+
+class SendUserInactivityNotifications(CosinnusCronJobBase):
+    """Queues deactivation notification for inactive users."""
+
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.send_user_inactivity_notifications'
+
+    def do(self):
+        users_notified = None
+        try:
+            users_notified = send_user_inactivity_deactivation_notifications()
+        except Exception as e:
+            logger.exception(e)
+
+        if users_notified is not None:
+            message = f'{users_notified} users notified.'
+        else:
+            message = 'An error occurred during cron job execution.'
+        return message
+
+
+class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
+    """Marks inactive users for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE day since last login."""
+
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.deactivate_inactive_users'
+
+    def do(self):
+        users_scheduled = 0
+        errors_occurred = False
+        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
+        inactive_users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
+        inactive_users = inactive_users.filter(
+            Q(last_login__lt=inactivity_deactivation_threshold)
+            | Q(last_login=None, date_joined__lt=inactivity_deactivation_threshold)
+        )
+        for user in inactive_users:
+            try:
+                reassign_admins_for_groups_of_deleted_user(user)
+                deactivate_user_and_mark_for_deletion(user, inactivity_deletion=True)
+                users_scheduled += 1
+            except Exception as e:
+                logger.exception(e)
+                errors_occurred = True
+
+        if users_scheduled > 0:
+            message = f'{users_scheduled} users scheduled for deletion.'
+        else:
+            message = 'No users scheduled for deletion.'
+        if errors_occurred:
+            message += ' Errors occurred during cron job.'
+        return message
 
 
 class UpdateConferencePremiumStatus(CosinnusCronJobBase):
@@ -234,3 +307,122 @@ class DeleteOldSentEmailLogs(CosinnusCronJobBase):
         count = queryset.count()
         queryset.delete()
         return f'Deleted {count} sent-email-logs older than {self.OLD_SENT_EMAIL_LOGS_THRESHOLD_DAYS} days.'
+
+
+class DeleteScheduledGroups(CosinnusCronJobBase):
+    """Triggers a group delete on all groups whose `scheduled_for_deletion_at` datetime is in the past."""
+
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.delete_scheduled_groups'
+
+    def do(self):
+        groups_to_delete = (
+            get_cosinnus_group_model()
+            .objects.exclude(scheduled_for_deletion_at__exact=None)
+            .filter(scheduled_for_deletion_at__lte=now())
+        )
+
+        deleted_groups_count = 0
+        errors_occurred = False
+        for group in groups_to_delete:
+            try:
+                # sanity checks are done within this function, no need to do any here
+                delete_group(group)
+                deleted_groups_count += 1
+                logger.info(
+                    'delete_group() cronjob: group was deleted completely after 30 days',
+                    extra={'group_id': group.id},
+                )
+            except Exception as e:
+                logger.exception(e)
+                errors_occurred = True
+
+        message = f'{deleted_groups_count} groups deleted.' if deleted_groups_count > 0 else 'No groups deleted.'
+        if errors_occurred:
+            message += ' Errors occurred during cron job.'
+        return message
+
+
+class UpdateGroupsLastActivity(CosinnusCronJobBase):
+    """Updates the last-activity of all active groups."""
+
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_THIRTY_MINUTES  # ['02:00']  # Run once a day during the night
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.update_groups_last_activity'
+
+    def do(self):
+        errors_occurred = False
+
+        # update active groups periodically and inactive groups once.
+        groups = get_cosinnus_group_model().objects.filter(Q(is_active=True) | Q(is_active=False, last_activity=None))
+        groups = groups.exclude(slug__in=get_default_portal_group_slugs())
+        for group in groups:
+            try:
+                update_group_last_activity(group)
+            except Exception as e:
+                logger.exception(e)
+                errors_occurred = True
+
+        message = 'Last activity of groups updated.'
+        if errors_occurred:
+            message += ' Errors occurred during cron job.'
+        return message
+
+
+class SendGroupsInactivityNotifications(CosinnusCronJobBase):
+    """Queues deactivation notification for inactive groups."""
+
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.send_group_inactivity_notifications'
+
+    def do(self):
+        groups_notified = None
+        try:
+            groups_notified = send_group_inactivity_deactivation_notifications()
+        except Exception as e:
+            logger.exception(e)
+
+        if groups_notified is not None:
+            message = f'{groups_notified} groups notified.'
+        else:
+            message = 'An error occurred during cron job execution.'
+        return message
+
+
+class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
+    """Marks inactive groups for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE days of inactivity."""
+
+    RUN_EVERY_MINS = TESTING_ONLY_DURATION_SIXTY_MINUTES  # 60 * 24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.deactivate_inactive_groups'
+
+    def do(self):
+        groups_scheduled = 0
+        errors_occurred = False
+        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
+        inactive_groups = get_cosinnus_group_model().objects.filter(
+            scheduled_for_deletion_at=None, last_activity__lt=inactivity_deactivation_threshold
+        )
+        # ignore forum and other default groups
+        inactive_groups = inactive_groups.exclude(slug__in=get_default_portal_group_slugs())
+        for group in inactive_groups:
+            try:
+                mark_group_for_deletion(group)
+                groups_scheduled += 1
+            except Exception as e:
+                logger.exception(e)
+                errors_occurred = True
+
+        if groups_scheduled > 0:
+            message = f'{groups_scheduled} groups scheduled for deletion.'
+        else:
+            message = 'No groups scheduled for deletion.'
+        if errors_occurred:
+            message += ' Errors occurred during cron job.'
+        return message
