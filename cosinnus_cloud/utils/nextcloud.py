@@ -3,12 +3,12 @@ import logging
 import secrets
 import string
 import urllib
-from datetime import datetime
 from typing import Mapping, Optional
 from urllib.parse import quote
 
 import requests
 from bs4 import BeautifulSoup
+from dateutil import parser
 from oauth2_provider.models import Application
 
 from cosinnus.conf import settings
@@ -526,7 +526,7 @@ def get_group_folder_last_modified(groupfolder_name, timeout=settings.COSINNUS_C
     last_modified_xml = soup.find('d:getlastmodified')
     if last_modified_xml:
         last_modified_string = last_modified_xml.get_text()
-        last_modified = datetime.strptime(last_modified_string, '%a, %d %b %Y %H:%M:%S %Z')
+        last_modified = parser.parse(last_modified_string)
     return last_modified
 
 
