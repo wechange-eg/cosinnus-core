@@ -2,10 +2,13 @@
 from __future__ import unicode_literals
 
 import sys
+from contextlib import contextmanager
 from importlib import import_module, reload
 from typing import Callable, TypeVar
 from unittest import skipIf, skipUnless
+from unittest.mock import MagicMock
 
+import django.dispatch
 from django.urls import clear_url_caches
 
 from cosinnus.conf import settings
@@ -84,3 +87,14 @@ class CeleryTaskTestMixin:
         better test readability.
         """
         return cls.captureOnCommitCallbacks(execute=True)
+
+
+@contextmanager
+def catch_signal(signal: django.dispatch.Signal, sender=None) -> MagicMock:
+    """Catch signals temporarily and return them."""
+    handler = MagicMock()
+    signal.connect(handler)
+    try:
+        yield handler
+    finally:
+        signal.disconnect(handler)
