@@ -42,6 +42,15 @@
                     {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.cam_starts_on label=cam_starts_on_label %}
                 {% endif %}
 
+                {% if field_name == 'waiting_room' and form.waiting_room %}
+                    {% captureas waiting_room_label %}
+                        {% trans "Require moderator approval before joning" %}
+                        {% if premium_label %}{{ premium_label }}{% endif %}
+                        ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.waiting_room }})</b>
+                    {% endcaptureas %}
+                    {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.waiting_room label=waiting_room_label %}
+                {% endif %}
+
                 {% if field_name == 'record_meeting' and form.record_meeting %}
                     {% captureas record_meeting_label %}
                         {% trans "Allow recording" %}

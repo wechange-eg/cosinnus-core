@@ -1907,6 +1907,18 @@ class CosinnusDefaultSettings(AppConf):
                 },
             },
         },
+        'waiting_room': {
+            0: {
+                'create': {
+                    'guestPolicy': 'ALWAYS_ACCEPT',
+                },
+            },
+            1: {
+                'create': {
+                    'guestPolicy': 'ASK_MODERATOR',
+                },
+            },
+        },
         'record_meeting': {
             0: {
                 'create': {
@@ -1935,6 +1947,7 @@ class CosinnusDefaultSettings(AppConf):
         'create': {
             'muteOnStart': 'true',  # default preset for 'mic_starts_on': False
             'record': 'false',  # default preset for 'record_meeting'
+            'guestPolicy': 'ASK_MODERATOR',  # default preset for 'waiting_room'
         },
         'join': {
             'userdata-bbb_auto_share_webcam': 'false',  # default preset for 'cam_starts_on': False
@@ -1964,6 +1977,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_PRESET_USER_FORM_FIELDS = [
         'mic_starts_on',
         'cam_starts_on',
+        'waiting_room',
         'welcome_message',
     ]
     # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS

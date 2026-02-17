@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-11 14:33+0100\n"
+"POT-Creation-Date: 2026-02-17 13:56+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4002,6 +4002,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Require moderator approval before joning"
 msgstr ""
 
 msgid "Allow recording"
