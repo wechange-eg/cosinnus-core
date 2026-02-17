@@ -1947,7 +1947,7 @@ class CosinnusDefaultSettings(AppConf):
         'create': {
             'muteOnStart': 'true',  # default preset for 'mic_starts_on': False
             'record': 'false',  # default preset for 'record_meeting'
-            'guestPolicy': 'ASK_MODERATOR',  # default preset for 'waiting_room'
+            'guestPolicy': 'ALWAYS_ACCEPT',  # default preset for 'waiting_room'
         },
         'join': {
             'userdata-bbb_auto_share_webcam': 'false',  # default preset for 'cam_starts_on': False
