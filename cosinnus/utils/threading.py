@@ -40,33 +40,33 @@ if getattr(settings, 'COSINNUS_USE_WORKER_THREADS', True):
 
         def start(self):
             # store threaded-state to skip join later if running unthreaded
-            self._cosinnus_worker_thread_running_threaded = is_threaded()
+            self._running_threaded = is_threaded()
 
-            if not self._cosinnus_worker_thread_running_threaded:
+            if not self._running_threaded:
                 # run in main thread
-                self._cosinnus_worker_thread_original_run()
+                self._original_run()
                 return
 
             super().start()
 
         def join(self, timeout=None):
-            if self._cosinnus_worker_thread_running_threaded:
+            if self._running_threaded:
                 super().join(timeout)
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
 
-            self._cosinnus_worker_thread_running_threaded = None
+            self._running_threaded = None
 
             if (type_name := type(self).__name__) not in self._name:
                 self._name = f'{type_name}-{self._name}'
 
-            self._cosinnus_worker_thread_original_run = self.run
+            self._original_run = self.run
 
-            @wraps(self._cosinnus_worker_thread_original_run)
-            def wrapped_run(*_args, **_kwargs):
+            @wraps(self._original_run)
+            def wrapped_run():
                 try:
-                    return self._cosinnus_worker_thread_original_run(*_args, **_kwargs)
+                    return self._original_run()
                 finally:
                     connections.close_all()
 
