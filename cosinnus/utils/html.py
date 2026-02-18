@@ -55,6 +55,8 @@ def render_html_with_variables(user, html, variables=None):
             'user_full_name': full_name(user),
         }
     )
+    if html is None:
+        html = ''
     for variable_name, variable_value in variables.items():
         html = html.replace('[[%s]]' % variable_name, str(variable_value))
     return mark_safe(html)

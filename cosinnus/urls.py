@@ -276,31 +276,33 @@ urlpatterns = [
     path('housekeeping/getcache', housekeeping.getcache, name='housekeeping-getcache'),
     path('housekeeping/deletecache', housekeeping.deletecache, name='housekeeping-deletecache'),
     path('housekeeping/users_online_today/', housekeeping.users_online_today, name='housekeeping-users_online_today'),
+    # test_logging unthreaded
     path('housekeeping/test_logging/', housekeeping.test_logging, name='housekeeping-test-logging'),
+    *[
+        path(
+            f'housekeeping/test_logging/{level}/',
+            housekeeping.test_logging,
+            name='housekeeping-test-logging',
+            kwargs={'level': level},
+        )
+        for level in ['info', 'warning', 'error', 'exception']
+    ],
+    # test_logging threaded
     path(
-        'housekeeping/test_logging/info/',
+        'housekeeping/test_logging/threaded',
         housekeeping.test_logging,
         name='housekeeping-test-logging',
-        kwargs={'level': 'info'},
+        kwargs={'threaded': True},
     ),
-    path(
-        'housekeeping/test_logging/warning/',
-        housekeeping.test_logging,
-        name='housekeeping-test-logging',
-        kwargs={'level': 'warning'},
-    ),
-    path(
-        'housekeeping/test_logging/error/',
-        housekeeping.test_logging,
-        name='housekeeping-test-logging',
-        kwargs={'level': 'error'},
-    ),
-    path(
-        'housekeeping/test_logging/exception/',
-        housekeeping.test_logging,
-        name='housekeeping-test-logging',
-        kwargs={'level': 'exception'},
-    ),
+    *[
+        path(
+            f'housekeeping/test_logging/threaded/{level}/',
+            housekeeping.test_logging,
+            name='housekeeping-test-logging',
+            kwargs={'level': level, 'threaded': True},
+        )
+        for level in ['info', 'warning', 'error', 'exception']
+    ],
     path(
         'housekeeping/validate_redirects/',
         housekeeping.check_and_delete_loop_redirects,
@@ -756,7 +758,7 @@ if settings.COSINNUS_FIREBASE_ENABLED:
     urlpatterns += [
         # URLs will show up at <api_root>/devices
         # DRF browsable API which lists all available endpoints
-        path('fcm/', include(router.urls)),
+        path('fcm/', include((router.urls, 'fcm_django'), namespace='fcm-django')),
     ]
 
 if settings.COSINNUS_V3_FRONTEND_ENABLED:

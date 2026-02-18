@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-11 14:33+0100\n"
+"POT-Creation-Date: 2026-02-17 13:56+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3869,6 +3869,9 @@ msgstr "Standard"
 
 msgid "Turn on camera on entering"
 msgstr "Kamera beim Betreten aktivieren"
+
+msgid "Require moderator approval before joning"
+msgstr "Zum Betreten ist die Zustimmung eines Moderators erforderlich."
 
 msgid "Allow recording"
 msgstr "Aufnahme erlauben"

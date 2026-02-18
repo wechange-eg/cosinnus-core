@@ -53,6 +53,7 @@ from cosinnus.utils.group import move_group_content as move_group_content_utils
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
 from cosinnus.utils.permissions import check_user_can_receive_emails, check_user_superuser
 from cosinnus.utils.settings import get_obfuscated_settings_strings
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import (
     accept_user_tos_for_portal,
     filter_active_users,
@@ -212,7 +213,7 @@ def deletecache(request):
     return HttpResponse("The cache entry '%s' was deleted." % cache_key)
 
 
-def test_logging(request, level='error'):
+def test_logging(request, level='error', threaded=False):
     harmless = 'my value'
     bic = 'shouldnotbeshown!bic'
     iban = 'shouldnotbeshown!iban'
@@ -223,13 +224,35 @@ def test_logging(request, level='error'):
         'iban': iban,
         'user_password_generated': user_password_generated,
     }
-    if level == 'exception':
-        return 1 / 0
-    if level in ['error', 'warning', 'info']:
-        func = getattr(logger, level)
-        func(f'Test logging event with level: {level}', extra=extra)
-        return HttpResponse(f'Triggered a log message with level {level}.')
-    return HttpResponse(f'Did not trigger a log event because level "{level}" was unknown.')
+
+    def trigger():
+        if level == 'exception':
+            return 1 / 0
+        if level in ['error', 'warning', 'info']:
+            func = getattr(logger, level)
+            func(f'Test logging event with level: {level}', extra=extra)
+            return HttpResponse(f'Triggered a log message with level {level}.')
+        return HttpResponse(f'Did not trigger a log event because level "{level}" was unknown.')
+
+    if threaded:
+        results = {}
+
+        def trigger_wapper():
+            try:
+                results['response'] = trigger()
+            except Exception as e:
+                results['error'] = e
+                raise
+
+        thread = CosinnusWorkerThread(target=trigger_wapper)
+        thread.start()
+        thread.join(timeout=5)
+
+        response = results.get('response')
+        error = results.get('error')
+        return response if response else HttpResponse(f'An error occurred in thread: {error}')
+    else:
+        return trigger()
 
 
 def check_and_delete_loop_redirects(request):
@@ -585,10 +608,11 @@ def newsletter_users(
     never_logged_in_only=False,
     all_portal_users=False,
     file_name='newsletter-user-emails',
+    override_conf_setting=False,
 ):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
-    if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False):
+    if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False) and not override_conf_setting:
         return HttpResponseForbidden('This Feature is currently not enabled!')
 
     headers = [

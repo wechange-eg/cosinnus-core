@@ -982,7 +982,7 @@ class CosinnusConf(AppConf):
     V2_DASHBOARD_WELCOME_SCREEN_ENABLED = True
 
     # default duration for which the welcome screen should be shown on the user dashboard, unless clicked aways
-    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 7
+    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 365 * 10  # 10 years
 
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
@@ -1798,6 +1798,11 @@ class CosinnusConf(AppConf):
     # set to 0 to disable throttling for empty Firebase messages.
     FIREBASE_EMPTY_MESSAGE_USER_THROTTLE_SECONDS = 10
 
+    # Env file used by project, e.g. read .env.test in default_settings.
+    # Important: this conf setting needs to be put at the start of your project's conf file,
+    # *before* `def define_cosinnus_project_settings(...` !
+    ENV_FILE = '.env'
+
 
 class CosinnusDefaultSettings(AppConf):
     """Settings without a prefix namespace to provide default setting values for other apps.
@@ -1902,6 +1907,18 @@ class CosinnusDefaultSettings(AppConf):
                 },
             },
         },
+        'waiting_room': {
+            0: {
+                'create': {
+                    'guestPolicy': 'ALWAYS_ACCEPT',
+                },
+            },
+            1: {
+                'create': {
+                    'guestPolicy': 'ASK_MODERATOR',
+                },
+            },
+        },
         'record_meeting': {
             0: {
                 'create': {
@@ -1930,6 +1947,7 @@ class CosinnusDefaultSettings(AppConf):
         'create': {
             'muteOnStart': 'true',  # default preset for 'mic_starts_on': False
             'record': 'false',  # default preset for 'record_meeting'
+            'guestPolicy': 'ALWAYS_ACCEPT',  # default preset for 'waiting_room'
         },
         'join': {
             'userdata-bbb_auto_share_webcam': 'false',  # default preset for 'cam_starts_on': False
@@ -1959,6 +1977,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_PRESET_USER_FORM_FIELDS = [
         'mic_starts_on',
         'cam_starts_on',
+        'waiting_room',
         'welcome_message',
     ]
     # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
