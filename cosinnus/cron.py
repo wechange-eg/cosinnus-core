@@ -174,7 +174,6 @@ class SendGroupPremiumExpirationWarningEmails(CosinnusCronJobBase):
         today = now().date()
         warning_threshold = today + timedelta(days=settings.COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS)
 
-        # FIXME prüfe limits genau offbyone error?
         candidates = (
             portal_groups
             # in waring period
