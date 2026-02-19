@@ -1,3 +1,4 @@
+from django.template.loader import render_to_string
 from rest_framework import serializers
 
 from cosinnus.conf import settings
@@ -11,6 +12,7 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
     # BBB settings
     bbb_available = serializers.SerializerMethodField()
     bbb_restricted = serializers.SerializerMethodField()
+    bbb_premium_booking_url = serializers.SerializerMethodField()
 
     # Events app settings
     events_ical_url = serializers.SerializerMethodField()
@@ -20,6 +22,7 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
         fields = [
             'bbb_available',
             'bbb_restricted',
+            'bbb_premium_booking_url',
             'events_ical_url',
         ]
 
@@ -28,6 +31,11 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
 
     def get_bbb_restricted(self, obj):
         return obj.group_is_bbb_restricted
+
+    def get_bbb_premium_booking_url(self, obj):
+        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+            return render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html')
+        return ''
 
     def get_events_ical_url(self, obj):
         if 'cosinnus_event' in obj.get_deactivated_apps():
