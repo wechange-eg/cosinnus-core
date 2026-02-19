@@ -1579,6 +1579,14 @@ class CosinnusConf(AppConf):
     # using field `???` before the group admins can enable the BBB option
     BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED = False
 
+    # The number of days before premium expiry to send a warning email
+    # (only active if `BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED` is True).
+    BBB_GROUP_PREMIUM_WARNING_DAYS = 7
+
+    # Send Emails with an expiration warning, when the warning period starts (set by `BBB_GROUP_PREMIUM_WARNING_DAYS`).
+    # (only active if `BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED` is True).
+    BBB_GROUP_PREMIUM_SEND_EXPIRATION_WARNING_EMAILS = True
+
     STARRED_STAR_LABEL = _('Bookmark')
     STARRED_STARRING_LABEL = _('Bookmarked')
     STARRED_OBJECTS_LIST = _('Bookmark list')
