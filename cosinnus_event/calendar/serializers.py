@@ -170,7 +170,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
     bbb_enabled = CalendarPublicEventBBBEnabledField(source='video_conference_type')
     bbb_url = serializers.SerializerMethodField()
 
-    image = Base64ImageField(required=False, default=None)
+    image = Base64ImageField(required=False, default=None, allow_null=True)
     attached_files = serializers.SerializerMethodField()
 
     class Meta:
@@ -206,9 +206,6 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
         user = self.context['request'].user
         if not check_object_write_access(instance, user):
             data['attendances'] = []
-        # Use fallback image if needed.
-        if not data['image']:
-            data['image'] = self.get_fallback_attached_image(instance)
         return data
 
     def create(self, validated_data):
@@ -253,7 +250,7 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
 
     def get_bbb_restricted(self, obj):
         group = self.context['group']
-        return not group.group_can_be_bbb_enabled
+        return group.group_is_bbb_restricted
 
     def get_bbb_url(self, obj):
         user = self.context['request'].user
@@ -277,17 +274,6 @@ class CalendarPublicEventSerializer(CosinnusMediaTagSerializerMixin, CalendarPub
             if not group.group_can_be_bbb_enabled:
                 raise serializers.ValidationError('BBB creation is restricted for this group.')
         return value
-
-    def get_fallback_attached_image(self, obj):
-        """
-        Returns the image from attached files for backwords compatibility.
-        We use the event image field for the image here, but need to support old events where the image is in the
-        attached files.
-        """
-        attached_image = obj.attached_image
-        if attached_image:
-            return attached_image.static_image_url()
-        return None
 
 
 class CalendarPublicEventAttendanceActionSerializer(serializers.Serializer):

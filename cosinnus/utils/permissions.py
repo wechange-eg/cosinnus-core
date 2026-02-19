@@ -534,3 +534,17 @@ class IsNextCloudApiTokenValid(BasePermission):
         if token == settings.COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN:
             return True
         return False
+
+
+class IsCosinnusGroupUser(BasePermission):
+    """Check group read permissions"""
+
+    def has_permission(self, request, view):
+        return check_object_read_access(view.group, request.user)
+
+
+class IsCosinnusGroupAdmin(BasePermission):
+    """Check group write permissions"""
+
+    def has_permission(self, request, view):
+        return check_object_write_access(view.group, request.user)

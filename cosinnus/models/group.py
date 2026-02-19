@@ -1547,6 +1547,14 @@ class CosinnusBaseGroup(
         return False
 
     @property
+    def group_is_bbb_restricted(self):
+        """Checks if BBB is restricted."""
+        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+            if not self.enable_user_premium_choices_until or now().date() > self.enable_user_premium_choices_until:
+                return True
+        return False
+
+    @property
     def group_can_access_recorded_meetings(self):
         """
         Returns True if this group may have BBB recordings associated with it.

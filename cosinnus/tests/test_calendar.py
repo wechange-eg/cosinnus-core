@@ -248,6 +248,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
         # test data
         test_user = None
         test_admin = None
+        test_non_group_user = None
         test_group = None
         test_event = None
 
@@ -323,14 +324,17 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             )
 
         def test_event_list(self):
-            # event list requires from_date and to_date parameters
-            res = self.client.get(self.event_list_url)
-            self.assertEqual(res.status_code, 400)
-            data = res.json()['data']
-            self.assertEqual(data['from_date'], ['This parameter is required'])
-            self.assertEqual(data['to_date'], ['This parameter is required'])
+            # anonymous access not allowed
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 403)
 
-            # event list is public and contains test event
+            # non group users are not allowed
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 403)
+
+            # event list is allowed for group user and contains test event
+            self.client.force_login(self.test_user)
             res = self.client.get(self.event_list_url_with_params)
             self.assertEqual(res.status_code, 200)
 
@@ -348,6 +352,16 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 ],
             )
 
+            # event list requires from_date and to_date parameters
+            res = self.client.get(self.event_list_url)
+            self.assertEqual(res.status_code, 400)
+            data = res.json()['data']
+            self.assertEqual(data['from_date'], ['This parameter is required'])
+            self.assertEqual(data['to_date'], ['This parameter is required'])
+
+        @override_settings(
+            COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
+        )
         def test_event_detail(self):
             # test anonymous access
             res = self.client.get(self.event_detail_url)
@@ -374,8 +388,8 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'ical_url': self.test_event.get_feed_url(),
                 'attending': False,
                 'attendances': [],
-                'bbb_available': True,
-                'bbb_restricted': True,
+                'bbb_available': False,
+                'bbb_restricted': False,
                 'bbb_enabled': False,
                 'bbb_url': None,
                 'image': None,
@@ -518,21 +532,25 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.client.force_login(self.test_non_group_user)
             res = self.client.post(self.event_attendance_url, data={'attending': True})
             self.assertEqual(res.status_code, 200)
+            self.client.force_login(self.test_user)
+            res = self.client.post(self.event_attendance_url, data={'attending': True})
+            self.assertEqual(res.status_code, 200)
 
             # check attending in detail api
+            self.client.force_login(self.test_non_group_user)
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data['attending'], True)
 
             # check attending in list api
+            self.client.force_login(self.test_user)
             res = self.client.get(self.event_list_url_with_params)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data[0]['attending'], True)
 
             # check attendance readable by event creator
-            self.client.force_login(self.test_user)
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
@@ -543,7 +561,12 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                         'name': self.test_non_group_user.cosinnus_profile.get_full_name(),
                         'avatar': self.test_non_group_user.cosinnus_profile.get_avatar_thumbnail_url(),
                         'profile_url': self.test_non_group_user.cosinnus_profile.get_absolute_url(),
-                    }
+                    },
+                    {
+                        'name': self.test_user.cosinnus_profile.get_full_name(),
+                        'avatar': self.test_user.cosinnus_profile.get_avatar_thumbnail_url(),
+                        'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
+                    },
                 ],
             )
 
@@ -551,7 +574,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.client.force_login(self.test_admin)
             res = self.client.get(self.event_detail_url)
             data = res.json()['data']
-            self.assertEqual(len(data['attendances']), 1)
+            self.assertEqual(len(data['attendances']), 2)
 
             # check attendance not readable by group users
             self.client.force_login(self.test_second_group_user)
@@ -569,20 +592,25 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.client.force_login(self.test_non_group_user)
             res = self.client.post(self.event_attendance_url, data={'attending': False})
             self.assertEqual(res.status_code, 200)
+            self.client.force_login(self.test_user)
+            res = self.client.post(self.event_attendance_url, data={'attending': False})
+            self.assertEqual(res.status_code, 200)
 
             # check removed attending
+            self.client.force_login(self.test_non_group_user)
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data['attending'], False)
 
             # check attending in list api
+            self.client.force_login(self.test_user)
             res = self.client.get(self.event_list_url_with_params)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data[0]['attending'], False)
 
-            # check removed attendee
+            # check removed attendances
             self.client.force_login(self.test_user)
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)

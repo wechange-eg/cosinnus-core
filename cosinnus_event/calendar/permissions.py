@@ -2,6 +2,7 @@ from rest_framework.permissions import BasePermission
 
 from cosinnus.utils.permissions import (
     check_group_create_objects_access,
+    check_object_read_access,
     check_object_write_access,
 )
 
@@ -11,8 +12,8 @@ class CalendarPublicEventPermissions(BasePermission):
 
     def has_permission(self, request, view):
         if view.action == 'list':
-            # Listing of public events is allowed for everybody
-            return True
+            # Listing of public events is allowed for group members
+            return check_object_read_access(view.group, request.user)
         elif view.action == 'create':
             # Check create permission for user in the group
             return check_group_create_objects_access(view.group, request.user)
