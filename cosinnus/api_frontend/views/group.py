@@ -40,7 +40,9 @@ class GroupSettingsView(APIView):
                 examples={
                     'application/json': {
                         'data': {
-                            'example_setting': 'example_value',
+                            'bbb_available': True,
+                            'bbb_restricted': False,
+                            'events_ical_url': 'https://localhost:8000/events/team/7/feed/',
                         },
                         'version': COSINNUS_VERSION,
                         'timestamp': 1658414865.057476,

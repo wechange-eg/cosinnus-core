@@ -73,7 +73,6 @@ class GroupSettingsAPITest(APITestCase):
             {
                 'bbb_available': False,
                 'bbb_restricted': False,
-                'bbb_enabled': False,
                 'events_ical_url': group_aware_reverse('cosinnus:team-feed', kwargs={'team_id': self.test_group.id}),
             },
         )

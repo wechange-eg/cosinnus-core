@@ -11,7 +11,6 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
     # BBB settings
     bbb_available = serializers.SerializerMethodField()
     bbb_restricted = serializers.SerializerMethodField()
-    bbb_enabled = serializers.SerializerMethodField()
 
     # Events app settings
     events_ical_url = serializers.SerializerMethodField()
@@ -21,7 +20,6 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
         fields = [
             'bbb_available',
             'bbb_restricted',
-            'bbb_enabled',
             'events_ical_url',
         ]
 
@@ -30,9 +28,6 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
 
     def get_bbb_restricted(self, obj):
         return obj.group_is_bbb_restricted
-
-    def get_bbb_enabled(self, obj):
-        return obj.group_is_bbb_enabled
 
     def get_events_ical_url(self, obj):
         if 'cosinnus_event' in obj.get_deactivated_apps():
