@@ -1,0 +1,7 @@
+{% load i18n cosinnus_tags %}
+{% if group.type == 0 %} {% blocktrans with group_url=group.get_absolute_url group_name=group.name %}Affected Project: [{{ group_name }}]({{ group_url }}){% endblocktrans %}{% else %}{% blocktrans with group_url=group.get_absolute_url group_name=group.name %}Affected Group: [{{ group_name }}]({{ group_url }}){% endblocktrans %}{% endif %}
+
+{% trans "If you would like to extend your booking, please contact us via the following form:" %}
+[{% trans "Extend Videoconference Pro" %}](https://wechange.de/cms/videokonferenz-pro/#formular)
+
+{% blocktrans %}Your {{ site_name }} Team{% endblocktrans %}
