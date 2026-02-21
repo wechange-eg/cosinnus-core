@@ -19,7 +19,6 @@ class TodoEntryAddFormTest(FormTestCase):
                 'persons',
                 'tags',
                 'visibility',
-                'public',
                 'location',
                 'location_lat',
                 'location_lon',
@@ -30,6 +29,7 @@ class TodoEntryAddFormTest(FormTestCase):
                 'topics',
                 'text_topics',
                 'bbb_room',
+                'migrated',
                 'like',
             ],
         }
