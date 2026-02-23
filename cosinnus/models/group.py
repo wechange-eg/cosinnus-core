@@ -1904,6 +1904,9 @@ class CosinnusBaseGroup(
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self})
 
+    def get_microsite_url(self):
+        return group_aware_reverse('cosinnus:group-microsite', kwargs={'group': self})
+
     def get_edit_url(self):
         return group_aware_reverse('cosinnus:group-edit', kwargs={'group': self})
 
