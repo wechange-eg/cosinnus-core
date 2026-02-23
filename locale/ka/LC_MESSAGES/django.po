@@ -13412,6 +13412,10 @@ msgstr "მოთხოვნილი"
 msgid "Requested organizations"
 msgstr "მოწვევის წაშლა"
 
+#: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
+msgid "Require moderator approval before joning"
+msgstr ""
+
 #: cosinnus/models/group.py
 msgid "Require participation applications for this conference"
 msgstr ""

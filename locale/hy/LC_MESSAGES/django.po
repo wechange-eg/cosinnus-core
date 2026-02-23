@@ -13421,6 +13421,10 @@ msgstr "Հայցված"
 msgid "Requested organizations"
 msgstr "Ջնջել հրավերը"
 
+#: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
+msgid "Require moderator approval before joning"
+msgstr ""
+
 #: cosinnus/models/group.py
 msgid "Require participation applications for this conference"
 msgstr ""

@@ -13352,6 +13352,10 @@ msgstr "Zažádáno"
 msgid "Requested organizations"
 msgstr "Organizace, které dostaly žádost"
 
+#: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
+msgid "Require moderator approval before joning"
+msgstr ""
+
 #: cosinnus/models/group.py
 msgid "Require participation applications for this conference"
 msgstr "Vyžádejte si žádosti o účast na této konferenci"

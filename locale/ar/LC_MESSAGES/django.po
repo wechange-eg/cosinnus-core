@@ -13596,6 +13596,10 @@ msgstr "طلب"
 msgid "Requested organizations"
 msgstr "حذف الدعوة"
 
+#: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
+msgid "Require moderator approval before joning"
+msgstr ""
+
 #: cosinnus/models/group.py
 msgid "Require participation applications for this conference"
 msgstr "طلب طلبات المشاركة لهذا المؤتمر"

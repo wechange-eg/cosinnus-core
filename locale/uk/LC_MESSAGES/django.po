@@ -13268,6 +13268,10 @@ msgstr "Запитували"
 msgid "Requested organizations"
 msgstr "Запитувані організації"
 
+#: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
+msgid "Require moderator approval before joning"
+msgstr ""
+
 #: cosinnus/models/group.py
 msgid "Require participation applications for this conference"
 msgstr "Запит щодо заявок на участь у цій конференції"
