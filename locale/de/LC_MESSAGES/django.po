@@ -238,6 +238,11 @@ msgstr "%(count)d Benutzerkonten wurden erfolgreich deaktiviert. Sie werden in 3
 
 #: cosinnus/admin.py
 #, python-format
+msgid "%(count)d User account(s) were deleted successfully."
+msgstr ""
+
+#: cosinnus/admin.py
+#, python-format
 msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "%(count)d Benutzerkonten wurden erfolgreich reaktiviert."
 
