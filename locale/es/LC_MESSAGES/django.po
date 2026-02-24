@@ -184,10 +184,8 @@ msgid " If you would prefer to use simple membership requests as they are used i
 msgstr "Si prefieres usar solicitudes de participación simples como se usan en proyectos/grupos, puedes deshabilitar la configuración \"%(application_setting_label)s\" en la configuración de la conferencia."
 
 #: cosinnus_oauth_client/templates/cosinnus_oauth_client/welcome_oauth.html
-#, fuzzy
-#| msgid " This data we received from your WECHANGE account"
 msgid " This data we received from your SSO account"
-msgstr "Estos datos que recibimos de tu cuenta de WECHANGE"
+msgstr ""
 
 #: cosinnus_oauth_client/templates/cosinnus_oauth_client/connection_detail.html
 #, python-format
@@ -226,9 +224,9 @@ msgstr[0] "%(count)d Archivo se añadió correctamente."
 msgstr[1] "%(count)d Archivos se añadieron correctamente."
 
 #: cosinnus/admin.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)d Groups' Nextcloud group names were updated."
-msgstr "Se actualizó la participación en %(count)d grupos de usario."
+msgstr ""
 
 #: cosinnus/admin.py
 #, python-format
@@ -236,10 +234,9 @@ msgid "%(count)d User account(s) were deactivated successfully. They will be del
 msgstr "%(count)d cuenta(s) de usario ha sido desactivada con éxito. Se eliminarán después de 30 días a partir de ahora."
 
 #: cosinnus/admin.py
-#, fuzzy, python-format
-#| msgid "%(count)d User account(s) were reactivated successfully."
+#, python-format
 msgid "%(count)d User account(s) were deleted successfully."
-msgstr "%(count)d cuenta(s) de usario fue reactivado con éxito."
+msgstr ""
 
 #: cosinnus/admin.py
 #, python-format
@@ -302,10 +299,9 @@ msgid "%(event)s (state unknown)"
 msgstr "%(event)s (estado desconocido)"
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "User export finished"
+#, python-format
 msgid "%(export_title)s finished"
-msgstr "Exportar de usario terminado"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/single_offer_detailed.html
@@ -512,52 +508,44 @@ msgid "%(sender_name)s assigned the todo %(object_name)s to you"
 msgstr "%(sender_name)s asignó el quehacer %(object_name)s a ti"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s reassigned %(count)d todos"
+#, python-format
 msgid "%(sender_name)s assigned you %(count)d tasks"
-msgstr "%(sender_name)s ha vuelto a asignar %(count)d tareas"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s tagged you in"
+#, python-format
 msgid "%(sender_name)s assigned you a task"
-msgstr "%(sender_name)s te etiquetó en"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+#, python-format
 msgid "%(sender_name)s assigned you the task %(object_name)s"
-msgstr "%(sender_name)s ha vuelto a asignar el recordatorio %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+#, python-format
 msgid "%(sender_name)s assigned you the task %(object_name)s."
-msgstr "%(sender_name)s ha vuelto a asignar el recordatorio %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+#, python-format
 msgid "%(sender_name)s change the due date of a task"
-msgstr "%(sender_name)s cambió la encuesta del evento %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created %(count)d pads"
+#, python-format
 msgid "%(sender_name)s changed the due data of %(count)d tasks"
-msgstr "%(sender_name)s creó %(count)d pads"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+#, python-format
 msgid "%(sender_name)s changed the due date of the task %(object_name)s"
-msgstr "%(sender_name)s cambió la encuesta del evento %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s changed the event poll %(object_name)s"
+#, python-format
 msgid "%(sender_name)s changed the due date of the task %(object_name)s."
-msgstr "%(sender_name)s cambió la encuesta del evento %(object_name)s"
+msgstr ""
 
 #: cosinnus_event/cosinnus_notifications.py
 #, python-format
@@ -565,10 +553,9 @@ msgid "%(sender_name)s changed the event poll %(object_name)s"
 msgstr "%(sender_name)s cambió la encuesta del evento %(object_name)s"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s completed %(count)d todos"
+#, python-format
 msgid "%(sender_name)s commented on %(count)d tasks"
-msgstr "%(sender_name)s completó %(count)d tareas"
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/notifications/tagged_event_comment_posted_subject.txt
 #, python-format
@@ -801,22 +788,19 @@ msgid "%(sender_name)s commented on the poll %(object_name)s"
 msgstr "%(sender_name)s comentó en la encuesta %(object_name)s"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a news post"
+#, python-format
 msgid "%(sender_name)s commented on the task"
-msgstr "%(sender_name)s comentó en una publicación de novedades"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+#, python-format
 msgid "%(sender_name)s commented on the task %(object_name)s"
-msgstr "%(sender_name)s comentó sobre la tarea %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+#, python-format
 msgid "%(sender_name)s commented on the task %(object_name)s."
-msgstr "%(sender_name)s comentó sobre la tarea %(object_name)s"
+msgstr ""
 
 #: cosinnus_todo/cosinnus_notifications.py
 #, python-format
@@ -969,10 +953,9 @@ msgid "%(sender_name)s created %(count)d polls"
 msgstr "%(sender_name)s creó %(count)d encuestas"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created %(count)d pads"
+#, python-format
 msgid "%(sender_name)s created %(count)d tasks"
-msgstr "%(sender_name)s creó %(count)d pads"
+msgstr ""
 
 #: cosinnus_todo/cosinnus_notifications.py
 #, python-format
@@ -1055,16 +1038,14 @@ msgid "%(sender_name)s created a new todo"
 msgstr "%(sender_name)s creó una nueva tarea"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new todo"
+#, python-format
 msgid "%(sender_name)s created a task"
-msgstr "%(sender_name)s creó una nueva tarea"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s posted in %(team_name)s:"
+#, python-format
 msgid "%(sender_name)s created a task in %(team_name)s."
-msgstr "%(sender_name)s publicó en %(team_name)s:"
+msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
 #, python-format
@@ -1102,10 +1083,9 @@ msgid "%(sender_name)s created the poll %(object_name)s"
 msgstr "%(sender_name)s creó la encuesta %(object_name)s"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created the pad %(object_name)s"
+#, python-format
 msgid "%(sender_name)s created the task %(object_name)s"
-msgstr "%(sender_name)s creó el bloc %(object_name)s"
+msgstr ""
 
 #: cosinnus_todo/cosinnus_notifications.py
 #, python-format
@@ -1203,76 +1183,64 @@ msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s
 msgstr "%(sender_name)s the hizo un administrador de \"%(team_name)s\" en %(portal_name)s!"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created %(count)d todos"
+#, python-format
 msgid "%(sender_name)s marked %(count)d tasks as done"
-msgstr "%(sender_name)s creó %(count)d tareas"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created %(count)d todos"
+#, python-format
 msgid "%(sender_name)s marked %(count)d tasks as undone"
-msgstr "%(sender_name)s creó %(count)d tareas"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s made you an admin"
+#, python-format
 msgid "%(sender_name)s marked a task as done"
-msgstr "%(sender_name)s te ha hecho administrador"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s made you an admin"
+#, python-format
 msgid "%(sender_name)s marked a task as undone"
-msgstr "%(sender_name)s te ha hecho administrador"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created the pad %(object_name)s"
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as done"
-msgstr "%(sender_name)s creó el bloc %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created the pad %(object_name)s"
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as done."
-msgstr "%(sender_name)s creó el bloc %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created the pad %(object_name)s"
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as undone"
-msgstr "%(sender_name)s creó el bloc %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created the pad %(object_name)s"
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as undone."
-msgstr "%(sender_name)s creó el bloc %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s tagged you in %(count)d items"
+#, python-format
 msgid "%(sender_name)s mentioned you in a comment of %(count)d tasks"
-msgstr "%(sender_name)s te etiquetó en %(count)d elementos"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+#, python-format
 msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s"
-msgstr "%(sender_name)s comentó sobre la tarea %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on the todo %(object_name)s"
+#, python-format
 msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s."
-msgstr "%(sender_name)s comentó sobre la tarea %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a news post"
+#, python-format
 msgid "%(sender_name)s mentioned you in a task comment"
-msgstr "%(sender_name)s comentó en una publicación de novedades"
+msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
 #: cosinnus_note/templates/cosinnus_note/notifications/note_created_subject.txt
@@ -1331,28 +1299,24 @@ msgid "%(sender_name)s tagged you in %(object_name)s"
 msgstr "%(sender_name)s te etiquetó en %(object_name)s"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s reassigned %(count)d todos"
+#, python-format
 msgid "%(sender_name)s unassigned you from %(count)d tasks"
-msgstr "%(sender_name)s ha vuelto a asignar %(count)d tareas"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
+#, python-format
 msgid "%(sender_name)s unassigned you from a task"
-msgstr "%(sender_name)s me asignó una tarea"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+#, python-format
 msgid "%(sender_name)s unassigned you from the task %(object_name)s"
-msgstr "%(sender_name)s ha vuelto a asignar el recordatorio %(object_name)s"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
-#| msgid "%(sender_name)s reassigned the todo %(object_name)s"
+#, python-format
 msgid "%(sender_name)s unassigned you from the task %(object_name)s."
-msgstr "%(sender_name)s ha vuelto a asignar el recordatorio %(object_name)s"
+msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
 #, python-format
@@ -1521,9 +1485,9 @@ msgid "%d Users rocketchat accounts were checked."
 msgstr "Se comprobaron %d usarios de cuentas de rocketchat.."
 
 #: cosinnus/admin.py
-#, fuzzy, python-format
+#, python-format
 msgid "%d Users were made Nextcloud admins."
-msgstr "Se hicieron administradores de RocketChat a %d usario."
+msgstr ""
 
 #: cosinnus/admin.py
 #, python-format
@@ -1541,9 +1505,9 @@ msgid "%d Users' nextcloud folder memberships were re-done."
 msgstr "Se rehicieron las participaciones de carpeta de nextcloud de %d usario."
 
 #: cosinnus/admin.py
-#, fuzzy, python-format
+#, python-format
 msgid "%d Users' rocketchat room memberships were re-done."
-msgstr "Se rehicieron las membresías de la sala de usario(s) en rocketchat."
+msgstr ""
 
 #: cosinnus_message/templates/postman/email_user.txt
 #, python-format
@@ -1874,10 +1838,9 @@ msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i> ¡No se encontró el renderizador para %(model_name)s! </ i>"
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "A user export is in progress. As soon as the export is finished it will be available here."
+#, python-format
 msgid "A %(export_title)s is in progress. As soon as the export is finished it will be available here."
-msgstr "Un exportación de usario está en progreso. Tan pronto como el exportación es terminado, estará disponible aquí."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
@@ -2042,16 +2005,12 @@ msgid "A task has was marked as undone"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy
-#| msgid "A todo was assigned to me"
 msgid "A task was assigned to you"
-msgstr "Una nueva tarea me fue asignada"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy
-#| msgid "A todo was assigned to me"
 msgid "A task was unassigned from you"
-msgstr "Una nueva tarea me fue asignada"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
 msgid "A tasks due data was changed"
@@ -2117,10 +2076,8 @@ msgid "A user commented on a poll you were tagged in"
 msgstr "Un usario comentó en una encuesta en la que has sido marcado"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy
-#| msgid "A user commented on a news post"
 msgid "A user commented on a task"
-msgstr "Un usuario comentó en una publicación de novedades"
+msgstr ""
 
 #: cosinnus_todo/cosinnus_notifications.py
 msgid "A user commented on a todo you are following"
@@ -2243,10 +2200,8 @@ msgid "A user created a news post in a team you are following"
 msgstr "Un usario creó una publicación de novedades en un equipo que estas siguiendo"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy
-#| msgid "A user created a new todo"
 msgid "A user created a task"
-msgstr "Un usuario creó una nueva tarea"
+msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
 msgid "A user has accepted the invitation to this team (admins only)"
@@ -2305,9 +2260,9 @@ msgid "A user voted in an event poll"
 msgstr "Un usario votó en una encuesta de evento"
 
 #: cosinnus/api_frontend/views/navigation.py
-#, fuzzy, python-format
+#, python-format
 msgid "About %(portal_name)s"
-msgstr "a %(portal_name)s"
+msgstr ""
 
 #: cosinnus/utils/dashboard.py
 msgid "About Us"
@@ -2408,16 +2363,12 @@ msgid "Account deactivated"
 msgstr "Cuenta desactivada"
 
 #: cosinnus/models/profile.py
-#, fuzzy
-#| msgid "Account deactivated"
 msgid "Account verified"
-msgstr "Cuenta desactivada"
+msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
-#| msgid "Emails Need Verification"
 msgid "Accounts Need Verification"
-msgstr "Correos electrónicos requieren verificación"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
@@ -2446,10 +2397,8 @@ msgid "Activate Project"
 msgstr "Activar proyecto"
 
 #: cosinnus/templates/cosinnus/dashboard.html
-#, fuzzy
-#| msgid "Activate Cloud"
 msgid "Activate Task Board"
-msgstr "Activar Cloud"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_detail.html
@@ -2984,9 +2933,8 @@ msgid "Applicants have to give their permission to be contacted per email"
 msgstr "Solicitantes tienen que dar su permiso para ser contactados por correo electrónico"
 
 #: cosinnus/templates/cosinnus/conference/conference_participation_management_form.html
-#, fuzzy
 msgid "Applicants must answer questions about participation"
-msgstr "Requerir solicitantes para responder preguntas sobre su motivación para aplicar"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_application_form.html
 msgid "Application"
@@ -3387,10 +3335,8 @@ msgid "Back to Events"
 msgstr "Volver a Eventos"
 
 #: cosinnus_oauth_client/templates/socialaccount/authentication_error.html
-#, fuzzy
-#| msgid "Back to"
 msgid "Back to Login"
-msgstr "Volver a"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/leftnav.html
 msgid "Back to Offers"
@@ -3470,9 +3416,8 @@ msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Por favor acepta nuestros términos de uso"
 
 #: cosinnus/templates/cosinnus/user/userprofile_detail.html
-#, fuzzy
 msgid "Block user"
-msgstr "Todos los usarios"
+msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
 msgid "Board from the Nextcloud Deck App"
@@ -3691,19 +3636,9 @@ msgid "Change language"
 msgstr "Cambiar idioma"
 
 #: cosinnus/templates/cosinnus/mitwirkomat/mitwirkomat_settings_form.html
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                        Yes, send immediately to one user.\n"
-#| "                        "
-#| msgid_plural ""
-#| "\n"
-#| "                        Yes, send immediately to %(count)s users.\n"
-#| "                        "
+#, python-format
 msgid "Change location in %(group_settings_label)s"
 msgstr ""
-"\n"
-"Sí, enviar inmediatamente a un usario."
 
 #: cosinnus/templates/cosinnus/registration/password_change_form.html
 #: cosinnus_oauth_client/templates/account/password_change.html
@@ -3874,9 +3809,8 @@ msgid "Click here if you wish to approve the user's join request for an account 
 msgstr ""
 
 #: cosinnus/templates/cosinnus/mail/user_register_notification.html
-#, fuzzy
 msgid "Click here to deny the request"
-msgstr "Haz clic aquí para enviar de nuevo el enlace de validación."
+msgstr ""
 
 #: cosinnus/utils/context_processors.py
 msgid "Click here to receive an email with a verification link."
@@ -3887,9 +3821,8 @@ msgid "Click here to send the validation link again."
 msgstr "Haz clic aquí para enviar de nuevo el enlace de validación."
 
 #: cosinnus/templatetags/cosinnus_tags.py
-#, fuzzy
 msgid "Click here to view external image"
-msgstr "Haz clic aquí para enviar de nuevo el enlace de validación."
+msgstr ""
 
 #: cosinnus/templatetags/cosinnus_tags.py
 #, python-format
@@ -3897,9 +3830,8 @@ msgid "Click here to view external image \"%(image_name)s\""
 msgstr ""
 
 #: cosinnus_cloud/templates/cosinnus_cloud/widgets/latest.html
-#, fuzzy
 msgid "Click here to view the files directly in the cloud."
-msgstr "Haz clic aquí para enviar de nuevo el enlace de validación."
+msgstr ""
 
 #: cosinnus/html_emails/src/partials/footer.html
 #: cosinnus/templates/cosinnus/html_mail/digest.html
@@ -4185,9 +4117,8 @@ msgid "Conference is permanently premium"
 msgstr "Conferencia es permanentemente premium"
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Conference is publicly visible"
-msgstr "El grupo / proyecto es visible públicamente"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Conference members only"
@@ -4206,9 +4137,8 @@ msgid "Conference reminder settings have been successfully updated."
 msgstr "La configuración de recordatorio de conferencia ha sido actualizada con éxito."
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Conference settings"
-msgstr "Ajustes de conferencia"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Conference start and end date and time"
@@ -4920,10 +4850,8 @@ msgid "Currently set Welcome-Email Text"
 msgstr "Texto del correo electrónico de bienvenida configurado actualmente"
 
 #: cosinnus/templates/cosinnus/mitwirkomat/mitwirkomat_settings_form.html
-#, fuzzy
-#| msgid "Currently set Email Text"
 msgid "Currently set as location"
-msgstr "Texto de correo electrónico configurado actualmente"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/attached/file_upload_button.html
 msgid "Currently, the Browsers supporting folder upload are:"
@@ -5204,10 +5132,9 @@ msgid "Delete event"
 msgstr "Eliminar evento"
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "Delete export data and start new user export"
+#, python-format
 msgid "Delete export data and start new %(export_title)s"
-msgstr "Eliminar datos de exportación y comenzar nueva exportación de usario"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
 msgid "Delete exported data"
@@ -5459,9 +5386,8 @@ msgid "Discussions"
 msgstr "Discusiones"
 
 #: cosinnus/templates/cosinnus/administration/user_list.html
-#, fuzzy
 msgid "Display Name"
-msgstr "Tipo de pantalla"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Display contact form."
@@ -5470,9 +5396,8 @@ msgstr "Mostrar formulario de contacto."
 #: cosinnus/api_frontend/views/portal.py
 #: cosinnus/templates/cosinnus/registration/signup.html
 #: cosinnus/templates/cosinnus/user/userprofile_form.html
-#, fuzzy
 msgid "Display name"
-msgstr "Tipo de pantalla"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/user_dashboard_announcement_form.html
 msgid "Display type"
@@ -5777,9 +5702,8 @@ msgid "Does NOT wish to be contacted for potential collaboration!"
 msgstr "NO desea ser contactado para una colaboración potencial!"
 
 #: cosinnus/models/mitwirkomat.py
-#, fuzzy
 msgid "Does not fit us"
-msgstr "No es un invitado"
+msgstr ""
 
 #: cosinnus_poll/models.py
 msgid "Does this poll allow users to vote on multiple options or just decide for one?"
@@ -5797,16 +5721,14 @@ msgid "Download"
 msgstr "Descargar"
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "Download user export as"
+#, python-format
 msgid "Download %(export_title)s as"
-msgstr "Descargar exportación de usario como"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "Download user exports from"
+#, python-format
 msgid "Download %(export_title)s from"
-msgstr "Descargar exportaciones de usario de"
+msgstr ""
 
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_write.html
 msgid "Download CSV"
@@ -6063,9 +5985,8 @@ msgid "Edit folder"
 msgstr "Editar carpeta"
 
 #: cosinnus/templates/admin/user/change_form.html
-#, fuzzy
 msgid "Edit in User Administration"
-msgstr "Administración de usario"
+msgstr ""
 
 #: cosinnus_note/templates/cosinnus_note/note_form.html
 msgid "Edit news post"
@@ -6206,19 +6127,16 @@ msgid "Enable premium user choices (BBB) until"
 msgstr "Habilitar opciones de usario premium (BBB) hasta"
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Enable the public visibility of your conference"
-msgstr "Habilite la visibilidad pública de su grupo / proyecto"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Enable the public visibility of your group"
-msgstr "Habilite la visibilidad pública de su grupo / proyecto"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Enable the public visibility of your project"
-msgstr "Habilite la visibilidad pública de su grupo / proyecto"
+msgstr ""
 
 #: cosinnus_event/models.py
 msgid "End"
@@ -6291,9 +6209,8 @@ msgid "Enter a name for the group."
 msgstr "Inserta un nombre para el grupo."
 
 #: cosinnus/templates/cosinnus/leftnav_hierarchic_listview.html
-#, fuzzy
 msgid "Enter a name for the new folder"
-msgstr "Inserta un nombre para la conferencia."
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Enter a name for the project."
@@ -6308,9 +6225,8 @@ msgid "Enter a name to find project/groups to invite..."
 msgstr "Inserta un nombre para encontrar proyecto/grupos para invitar..."
 
 #: cosinnus/templates/cosinnus/leftnav_button_editable_folder.html
-#, fuzzy
 msgid "Enter a new name for the folder"
-msgstr "Inserta un nombre para el proyecto."
+msgstr ""
 
 #: cosinnus/forms/dashboard.py
 msgid "Enter a number for sort order"
@@ -6459,10 +6375,8 @@ msgid "Enter the title for a new event or select a day in the Calendar."
 msgstr "Inserta el título para un nuevo evento o elige un día en el calendario."
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_list.html
-#, fuzzy
-#| msgid "Enter the title for a new Document."
 msgid "Enter the title for a new offer."
-msgstr "Introduce el título para un nuevo documento."
+msgstr ""
 
 #: cosinnus_todo/templates/cosinnus_todo/todo_list.html
 msgid "Enter the title for this todo"
@@ -6774,14 +6688,12 @@ msgid "External Link for the event"
 msgstr "Enlace externo  para el evento"
 
 #: cosinnus/trans/exchange.py
-#, fuzzy
 msgid "External Resource"
-msgstr "Contenidos externos"
+msgstr ""
 
 #: cosinnus/trans/exchange.py
-#, fuzzy
 msgid "External Resources"
-msgstr "Contenidos externos"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/search.html
@@ -6945,9 +6857,8 @@ msgid "First name"
 msgstr "Nombre"
 
 #: cosinnus/admin.py
-#, fuzzy
 msgid "First name / Display name"
-msgstr "Tipo de pantalla"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_create_form.html
 #: cosinnus/templates/cosinnus/administration/user_list.html
@@ -7160,10 +7071,8 @@ msgid "Go to Calendar"
 msgstr "Ir a calendario"
 
 #: cosinnus/templates/cosinnus/expert_search/user_list_items.html
-#, fuzzy
-#| msgid "To Profile"
 msgid "Go to Profile"
-msgstr "A perfil"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_list_object.html
 msgid "Go to Room"
@@ -7248,10 +7157,8 @@ msgid "Group Dashboard"
 msgstr "Dashboard de control del grupo"
 
 #: cosinnus/conf.py
-#, fuzzy
-#| msgid "User Export"
 msgid "Group Export"
-msgstr "Exportar usario"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/utils/facebook_integration_group_form.html
 msgid "Group Id or name (example: 1172392116092353)"
@@ -7274,9 +7181,8 @@ msgid "Group for Mitwirk-O-Mat Settings"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Group is publicly visible"
-msgstr "El grupo / proyecto es visible públicamente"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Group members only"
@@ -7287,9 +7193,8 @@ msgid "Group name"
 msgstr "Nombre del grupo"
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Group settings"
-msgstr "Configuración de la privacidad"
+msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
 msgid "Group/Project (migration target)"
@@ -7500,10 +7405,8 @@ msgid "Here you can find an overview of your Groups and Projects once you become
 msgstr "Aquí puedes encontrar una visión general de tus grupos y proyectos una vez que te vuelvas activo en uno o más de ellos."
 
 #: cosinnus/views/expert_search.py
-#, fuzzy
-#| msgid "Here you can find an overview of Ideas you have liked."
 msgid "Here you can find experts who exactly fit your criteria."
-msgstr "Aquí puedes encontrar una visión general de ideas que te han gustado."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/map/map-controls.html
@@ -7821,7 +7724,7 @@ msgstr ""
 "Tu equipo de %(site_name)s"
 
 #: cosinnus/templates/cosinnus/mail/user_email_first_token.html
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi %(user_name)s,\n"
 "\n"
@@ -7838,21 +7741,6 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Hola %(user_name)s,\n"
-"\n"
-"te has registrado una cuenta en %(site_name)s. Nos alegramos te verte!\n"
-"\n"
-"Es necesario que verifiques tu correo electrónico %(user_email)s antes de que puedas iniciar la sesión.\n"
-"\n"
-"\n"
-"Porfavor haz clic en el siguiente enlace para verificar tu dirección del correo electrónico (o copia y pega el enlace en tu navegadora):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Gracias y hasta pronto!\n"
-"\n"
-"Tu equipo de %(site_name)s"
 
 #: cosinnus/templates/cosinnus/mail/user_terms_of_services.html
 #, python-format
@@ -8825,10 +8713,8 @@ msgid "If you wish to access your files from multiple devices, you may want to c
 msgstr "Si deseas acceder a tus archivos desde varios dispositivos, es posible que desees considerar moverlos a la Cloud. El proceso es sencillo y aún puedes conservar tus archivos aquí hasta que estés satisfecho con la Cloud."
 
 #: cosinnus/templates/cosinnus/mail/user_register_notification.html
-#, fuzzy
-#| msgid "Invite users directly via the following link: "
 msgid "If you wish to approve the user's join request click the following link"
-msgstr "Invitar usarios directamente a través del siguiente enlace:"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/fields/email_field_change_link_snippet.html
 msgid "If you would like to change your email address, you can do it here:"
@@ -8847,9 +8733,8 @@ msgid "Image"
 msgstr "Imagen"
 
 #: cosinnus/templates/cosinnus/mitwirkomat/mitwirkomat_settings_form.html
-#, fuzzy
 msgid "Image preview"
-msgstr "Abrir vista preliminar"
+msgstr ""
 
 #: cosinnus_notifications/templates/cosinnus_notifications/notifications_form.html
 msgid "Immediately"
@@ -9248,9 +9133,8 @@ msgid "Is Guest"
 msgstr "Es invitado"
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "Is Late Invitation"
-msgstr "Invitaciones"
+msgstr ""
 
 #: cosinnus/models/membership.py
 msgid "Is Moderator"
@@ -9404,10 +9288,9 @@ msgid "Join meeting in conference frontend"
 msgstr "Participa en reunión en interfaz de conferencia"
 
 #: cosinnus/templates/cosinnus/dashboard.html
-#, fuzzy
 msgctxt "Mitwirkomat"
 msgid "Join now"
-msgstr "Participa ahora!"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Join now and collaborate!"
@@ -9551,9 +9434,8 @@ msgid "Lastname"
 msgstr "Apellido"
 
 #: cosinnus/templates/cosinnus/group/group_microsite_action_buttons_applications.html
-#, fuzzy
 msgid "Late registration possible"
-msgstr "Archivo de presentación"
+msgstr ""
 
 #: cosinnus_todo/models.py cosinnus_todo/templates/cosinnus_todo/todo_list.html
 msgid "Later"
@@ -9666,9 +9548,8 @@ msgid "Limit to teams"
 msgstr "Límite de equipos"
 
 #: cosinnus/templates/cosinnus/mitwirkomat/mitwirkomat_settings_form.html
-#, fuzzy
 msgid "Link"
-msgstr "Enlace URL"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/fields/inlineform_group_call_to_action_button_content.html
 msgid "Link URL"
@@ -9855,9 +9736,8 @@ msgid "Logout"
 msgstr "Cerrar seción"
 
 #: cosinnus/admin.py
-#, fuzzy
 msgid "Logout users"
-msgstr "Cerrar seción"
+msgstr ""
 
 #: cosinnus/forms/user.py cosinnus/models/group.py cosinnus/models/tagged.py
 #: cosinnus_event/models.py cosinnus_organization/models.py
@@ -10250,15 +10130,12 @@ msgid "Microsite Video"
 msgstr "Video del Micrositio"
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
-#, fuzzy
 msgid "Migrate Nextcloud Boards"
-msgstr "Nextcloud ID de grupo"
+msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
-#, fuzzy
-#| msgid "My Todos"
 msgid "Migrate Todos"
-msgstr "Mis tareas"
+msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
 msgid "Migrate Todos to Task Board"
@@ -10274,20 +10151,17 @@ msgid "Migration is in progress. It can take a few minutes ..."
 msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
-#, fuzzy
-#| msgid "Dry run in progress"
 msgid "Migration is in progress..."
-msgstr "Ejecución en seco en progreso"
+msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
 msgid "Migration successfully finished. You can access the migrated boards in the Task Board of the selected groups/projects."
 msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
-#, fuzzy, python-format
-#| msgid "Project/group %(name)s was successfully invited."
+#, python-format
 msgid "Migration to %(deck_link)s successfully finished. "
-msgstr "El proyecto/el grupo %(name)s fue invitado con éxito."
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_form.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_list.html
@@ -10409,10 +10283,8 @@ msgid "Multiple options votable"
 msgstr "Múltiples opciones votables"
 
 #: cosinnus/templates/cosinnus/expert_search/user_list.html
-#, fuzzy
-#| msgid "Multiple options votable"
 msgid "Multiple selections allowed"
-msgstr "Múltiples opciones votables"
+msgstr ""
 
 #: cosinnus_file/forms.py
 msgid "Must supply either a URL or File"
@@ -10682,10 +10554,8 @@ msgid "Newest Pads"
 msgstr "Pads nuevos"
 
 #: cosinnus/views/statistics.py
-#, fuzzy
-#| msgid "Create Conference Event"
 msgid "Newly Created Conferences in this period"
-msgstr "Crear evento de conferencia"
+msgstr ""
 
 #: cosinnus/views/statistics.py
 msgid "Newly Created Events in this period"
@@ -10700,10 +10570,8 @@ msgid "Newly Created News in this period"
 msgstr ""
 
 #: cosinnus/views/statistics.py
-#, fuzzy
-#| msgid "Show more Projects of this Group"
 msgid "Newly Created Projects in this period"
-msgstr "Mostrar más proyectos de este grupo"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/dashboard.html
 #: cosinnus/templates/cosinnus/group/group_microsite.html
@@ -10777,9 +10645,8 @@ msgid "Next week"
 msgstr "Próxima semana"
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "Nextcloud Deck Board ID"
-msgstr "Nextcloud ID de grupo"
+msgstr ""
 
 #: cosinnus/models/group.py
 msgid "Nextcloud Group ID"
@@ -10798,14 +10665,12 @@ msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr "Nextcloud: Arreglar la falta de pertenencia de carpeta de Nextcloud para usarios"
 
 #: cosinnus/admin.py
-#, fuzzy
 msgid "Nextcloud: Make user Nextcloud admin"
-msgstr "Rocket: Hacer usuario RocketChat administrador"
+msgstr ""
 
 #: cosinnus/admin.py
-#, fuzzy
 msgid "Nextcloud: Update group names"
-msgstr "Nombre de carpeta de grupo de Nextcloud"
+msgstr ""
 
 #: cosinnus/admin.py cosinnus/models/conference.py
 #: cosinnus/models/model_export.py cosinnus_event/models.py
@@ -10939,10 +10804,8 @@ msgid "No info."
 msgstr "Ninguna información."
 
 #: cosinnus/templates/cosinnus/mitwirkomat/mitwirkomat_settings_form.html
-#, fuzzy
-#| msgid "No informations set"
 msgid "No location set yet"
-msgstr "No hay información establecid"
+msgstr ""
 
 #: cosinnus_message/templates/postman/base_folder.html
 msgid "No messages"
@@ -11051,11 +10914,9 @@ msgid "Note"
 msgstr "Nota"
 
 #: cosinnus/templates/cosinnus/statistics/simple.html
-#, fuzzy
-#| msgid "Note"
 msgctxt "notice, used at beginning of a paragraph"
 msgid "Note"
-msgstr "Nota"
+msgstr ""
 
 #: cosinnus_note/models.py
 msgid "Note Item"
@@ -11141,10 +11002,8 @@ msgid "Notes"
 msgstr "Apuntes"
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
-#, fuzzy
-#| msgid "Notes"
 msgid "Notes:"
-msgstr "Apuntes"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/userdashboard/followed-objects-widget.html
@@ -11380,9 +11239,8 @@ msgid "On-Site (has location)"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/conference_compact_microsite.html
-#, fuzzy
 msgid "On-site event"
-msgstr "Eliminar evento"
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
 #, python-format
@@ -11442,9 +11300,8 @@ msgid "Online (has no location)"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/conference_compact_microsite.html
-#, fuzzy
 msgid "Online event"
-msgstr "Eliminar evento"
+msgstr ""
 
 #: cosinnus_event/filters.py
 msgid "Online/On-Site"
@@ -11771,14 +11628,12 @@ msgid "Participation application is over."
 msgstr "Solicitud de participación ha terminado."
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Participation applications are disabled."
-msgstr "Las aplicaciones para participar están disponibles."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_participation_management_form.html
-#, fuzzy
 msgid "Participation applications are enabled"
-msgstr "Las aplicaciones para participar están disponibles."
+msgstr ""
 
 #: cosinnus/models/conference.py
 #: cosinnus/templates/cosinnus/group/group_microsite_action_buttons_applications.html
@@ -12006,9 +11861,8 @@ msgid "Please always provide a username"
 msgstr "Por favor, siempre proporciona un nombre de usario"
 
 #: cosinnus/templates/cosinnus/conference/conference_application_form.html
-#, fuzzy
 msgid "Please answer the following questions"
-msgstr "Por favor, rellena también la siguiente información:"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/utils/facebook_integration_group_form.html
 msgid "Please be aware that users can only post to your Group if they would also be permitted post in it on Facebook!"
@@ -12134,10 +11988,8 @@ msgid "Please review the errors encountered, and correct them in the CSV. If you
 msgstr "Por favor revisa los errores encontrados y corregirlos en el CSV."
 
 #: cosinnus/templates/cosinnus/statistics/simple.html
-#, fuzzy
-#| msgid "Please select or create a todo list."
 msgid "Please select a different timespan to display more data."
-msgstr "Por favor selecciona o crea una lista."
+msgstr ""
 
 #: cosinnus_todo/templates/cosinnus_todo/todo_list.html
 msgid "Please select or create a todo list."
@@ -12162,10 +12014,8 @@ msgstr "Por favor, proporciona uno o más destinatarios."
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
-#, fuzzy
-#| msgid "The error has been logged in the system, please contact our support for help!"
 msgid "Please try again later. If the error persists, please contact our support."
-msgstr "El error ha sido registrado en el sistema, ¡contacta a nuestro soporte para ayuda!"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_import/user_import_form.html
 msgid "Please upload a CSV with the following columns (in any order)"
@@ -12476,9 +12326,8 @@ msgid "Project is open for further partner organizations."
 msgstr "El proyecto está abierto para más organizaciones colaboradoras."
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Project is publicly visible"
-msgstr "El grupo / proyecto es visible públicamente"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Project members only"
@@ -12489,9 +12338,8 @@ msgid "Project name"
 msgstr "Nombre del proyecto"
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Project settings"
-msgstr "Configuración de la privacidad"
+msgstr ""
 
 #: cosinnus_message/templates/postman/email_user.txt
 msgid "Project/Group"
@@ -13129,10 +12977,8 @@ msgid "Reset"
 msgstr "Reiniciar"
 
 #: cosinnus/templates/cosinnus/expert_search/user_list.html
-#, fuzzy
-#| msgid "Latest files"
 msgid "Reset fields"
-msgstr "Ultimos archivos"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/password_reset_complete.html
 #: cosinnus/templates/cosinnus/registration/password_reset_done.html
@@ -13176,16 +13022,13 @@ msgid "Retry"
 msgstr "Reintentar"
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "Retry user export"
+#, python-format
 msgid "Retry %(export_title)s"
-msgstr "Reintentar exportación de usario"
+msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
-#, fuzzy
-#| msgid "User Administration"
 msgid "Retry migration"
-msgstr "Administración de usario"
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/leftnav.html
 msgid "Return to Archived Event Polls"
@@ -13296,9 +13139,9 @@ msgid "Root folder"
 msgstr "Carpeta raíz"
 
 #: cosinnus/forms/user_import.py
-#, fuzzy, python-format
+#, python-format
 msgid "Rows on these line numbers did not have the same number of items (%(header_length)s) as the header: %(mismatched_rows)s!"
-msgstr "Las filas en estos números de línea no tenían el mismo número de elementos ({len(processed_header)}) que la cabecera: {\", \".join(mismatched_rows)}!"
+msgstr ""
 
 #: cosinnus/views/statistics.py
 msgid "Running (scheduled) Conferences in this period"
@@ -13319,10 +13162,8 @@ msgid "SDGS"
 msgstr "ODS"
 
 #: cosinnus_oauth_client/templates/cosinnus_oauth_client/welcome_oauth.html
-#, fuzzy
-#| msgid "Account connected"
 msgid "SSO Account connected"
-msgstr "Cuenta conectada"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_premium_block_form.html
 #: cosinnus/templates/cosinnus/administration/user_create_form.html
@@ -13403,10 +13244,8 @@ msgid "Search Synonyms"
 msgstr "Buscar sinónimos"
 
 #: cosinnus/views/expert_search.py
-#, fuzzy
-#| msgid "Search for Users"
 msgid "Search for Experts"
-msgstr "Buscar usarios"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
@@ -13462,10 +13301,8 @@ msgid "Search results from the Cloud app can currently only be displayed in the 
 msgstr "Los resultados de la búsqueda de la aplicación en la Cloud actualmente solo se pueden mostrar en la propia aplicación en la Cloud."
 
 #: cosinnus/templates/cosinnus/expert_search/user_list.html
-#, fuzzy
-#| msgid "Search in teams"
 msgid "Search term"
-msgstr "Buscar en equipos"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/map/pagination-controls.html
@@ -13699,9 +13536,8 @@ msgid "Share on Facebook"
 msgstr "Comparte en Facebook"
 
 #: cosinnus/templates/cosinnus/common/mastodon_share_link.html
-#, fuzzy
 msgid "Share on Mastodon"
-msgstr "Comparte en Facebook"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite.html
 msgid "Share on Twitter"
@@ -13728,19 +13564,16 @@ msgid "Short description"
 msgstr "Breve descripción"
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Should your conference be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr "¿Su grupo / proyecto debería ser visible para los usuarios anónimos? El micrositio se puede encontrar a través de Internet y la búsqueda del portal."
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Should your group be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr "¿Su grupo / proyecto debería ser visible para los usuarios anónimos? El micrositio se puede encontrar a través de Internet y la búsqueda del portal."
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Should your project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr "¿Su grupo / proyecto debería ser visible para los usuarios anónimos? El micrositio se puede encontrar a través de Internet y la búsqueda del portal."
+msgstr ""
 
 #: docs-old/_build/html/_sources/hierarchy.rst.txt
 #: docs/_build/html/_sources/legacy/hierarchy.rst.txt
@@ -14036,10 +13869,9 @@ msgid "Sorry! Something went wrong..."
 msgstr "Perdón! Algo ha ido equivocado..."
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "Sorry, an error occurred during the user export. Please try again later."
+#, python-format
 msgid "Sorry, an error occurred during the %(export_title)s. Please try again later."
-msgstr "Lo siento, ocurrió un error durante la exportación del usario. Por favor, inténtalo de nuevo más tarde."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/user_match_list.html
 msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
@@ -14133,10 +13965,8 @@ msgid "Sorry, you cannot log in because your account is suspended. Please contac
 msgstr "Lo sentimos, no puedes iniciar sesión porque tu cuenta está suspendida. ¡Por favor, póngase en contacto con un administrador del sistema!"
 
 #: cosinnus/core/middleware/cosinnus_middleware.py
-#, fuzzy
-#| msgid "Sorry, only admin accounts may log in at this time."
 msgid "Sorry, your account may not access this page."
-msgstr "Lo sentimos, sólo las cuentas de administrador pueden iniciar sesión en este momento."
+msgstr ""
 
 #: cosinnus/views/profile.py
 msgid "Sorry, your profile could not be saved because there was an error while processing the avatar!"
@@ -14190,10 +14020,9 @@ msgid "Start"
 msgstr "Principio"
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "Start user export"
+#, python-format
 msgid "Start %(export_title)s"
-msgstr "Comenzar exportación de usario"
+msgstr ""
 
 #: cosinnus/models/conference.py cosinnus/models/group.py
 msgid "Start Datetime"
@@ -14211,10 +14040,8 @@ msgstr "Fecha de comienzo."
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
-#, fuzzy
-#| msgid "Start Datetime"
 msgid "Start migration"
-msgstr "Comenzar fecha y hora"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_import/user_import_form.html
 msgid "Start the Import?"
@@ -14443,9 +14270,8 @@ msgstr "Etiquetas"
 #: cosinnus_deck/templates/cosinnus_deck/base.html
 #: cosinnus_deck/templates/cosinnus_deck/deck.html
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
-#, fuzzy
 msgid "Task Board"
-msgstr "Dashboard"
+msgstr ""
 
 #: cosinnus_todo/templates/cosinnus_todo/notifications/user_completed_my_todo_subject.txt
 #, python-format
@@ -14599,9 +14425,8 @@ msgid "The %s-app was activated!"
 msgstr "La aplicación %s fue activada!"
 
 #: cosinnus/templates/cosinnus/user/user_match_list.html
-#, fuzzy
 msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange. If you express interest in another user, this user is notified and gets the ability to do the same with you."
-msgstr "La función de **coincidencia** te ofrece la oportunidad de intercambiar con usuarios de la plataforma que tienen intereses similares. Según la información de perfil que ingresaste, hacemos sugerencias de quiénes podrían ser interesantes compañeros de intercambio para ti. Si estás interesado en intercambiar con usuarios y ellos también, entonces serás emparejado y se abrirá automáticamente un canal de intercambio de Rocket.Chat."
+msgstr ""
 
 #: cosinnus/views/user_import.py
 msgid "The Archived User Import Entry was deleted successfully."
@@ -14662,10 +14487,8 @@ msgid "The Task Board creation is in progress..."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/dashboard.html
-#, fuzzy
-#| msgid "The WE-Cloud is here!"
 msgid "The Task Board is here!"
-msgstr "¡El WE-Cloud está aquí!"
+msgstr ""
 
 #: cosinnus/core/middleware/cosinnus_middleware.py
 msgid "The Todo app is replaced by the Task Board app. Editing existing Todos or creating new Todos has been disabled. "
@@ -14789,9 +14612,8 @@ msgstr ""
 "Tu equipo de conferencias"
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "The conference has ended."
-msgstr "La conferencia %(object_name)s ha sido actualizada"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/fields/default_field.html
 msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
@@ -14831,10 +14653,8 @@ msgid "The document could not be created because the etherpad service is misconf
 msgstr "El documento no pudo crearse porque el servidor del etherpad tiene una configuración errónea. ¡Por favor contacte a un administrador!"
 
 #: cosinnus/templates/cosinnus/fields/email_field_change_link_snippet.html
-#, fuzzy
-#| msgid "The email-address is duplicated and already contained in the CSV!"
 msgid "The email address can be changed in the SSO provider."
-msgstr "La dirección de correo electrónico está duplicada y ya está contenida en el CSV!"
+msgstr ""
 
 #: cosinnus/backends.py
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
@@ -14945,10 +14765,8 @@ msgid "The following roles could not be assigned to the account and need to be a
 msgstr ""
 
 #: cosinnus/views/user.py
-#, fuzzy
-#| msgid "The following Users were added to this portal:"
 msgid "The following roles were assigned to the account:"
-msgstr "Los siguientes miembros fueron añadidos a este portal:"
+msgstr ""
 
 #: cosinnus_conference/views.py
 #, python-format
@@ -15331,9 +15149,8 @@ msgid "The user account you were looking for does not exist! Your registration w
 msgstr "¡La cuenta de usuario que estabas buscando no existe! Es probable que su registro ya se haya denegado o que el token de correo electrónico haya expirado."
 
 #: cosinnus/views/profile.py
-#, fuzzy
 msgid "The user was not found."
-msgstr "No hay grupos."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_meeting_single.html
 #: cosinnus_event/templates/cosinnus_event/single_event_detailed.html
@@ -15539,9 +15356,9 @@ msgid "There was a critical unexpected error during the import"
 msgstr "Se produjo un error crítico e inesperado durante la importación"
 
 #: cosinnus/views/profile.py
-#, fuzzy, python-format
+#, python-format
 msgid "There was an error blocking user %s."
-msgstr "Había un error al cargar el widget"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/welcome_email.html
 #: cosinnus/templates/cosinnus/conference/conference_application_form.html
@@ -15575,9 +15392,9 @@ msgid "There was an error loading the widget"
 msgstr "Había un error al cargar el widget"
 
 #: cosinnus/views/profile.py
-#, fuzzy, python-format
+#, python-format
 msgid "There was an error unblocking user %s."
-msgstr "Había un error al cargar el widget"
+msgstr ""
 
 #: cosinnus_message/utils/utils.py
 msgid "There was an error when processing your message text!"
@@ -15610,9 +15427,8 @@ msgid "There was an error while trying to submit your report. Please try again i
 msgstr "Habido un error al intentar de enviar tu reporte. Porfavor inténtalo otra vez en un momento."
 
 #: cosinnus/templates/cosinnus/conference/conference_invitation_text_buttons.html
-#, fuzzy
 msgid "There was an error."
-msgstr "No hay grupos."
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/notifications/poll_completed.txt
 #: cosinnus_poll/templates/cosinnus_poll/single_poll_detailed.html
@@ -15682,9 +15498,8 @@ msgid "This can happen when its visibility settings have changed recently."
 msgstr "Esto puede suceder cuando su configuración de visibilidad ha cambiado recientemente."
 
 #: cosinnus_message/rocket_chat.py
-#, fuzzy
 msgid "This content has been hidden or removed."
-msgstr "La conexión de cuenta ha sido eliminada"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "This content will be visible for all registered users!"
@@ -15766,9 +15581,8 @@ msgid "This function is not enabled for this conference."
 msgstr "Esta función no está habilitada para esta conferencia."
 
 #: cosinnus/views/mitwirkomat.py
-#, fuzzy
 msgid "This function is not enabled for this group type."
-msgstr "Esta función no está habilitada para esta conferencia."
+msgstr ""
 
 #: cosinnus/views/facebook_integration.py
 msgid "This group does not have a Facebook Fan-Page associated with it!"
@@ -15933,9 +15747,8 @@ msgid "This poll is archived and cannot be edited anymore!"
 msgstr "¡Esta encuesta está archivada y ya no se puede editar!"
 
 #: cosinnus/views/profile.py cosinnus_message/views.py
-#, fuzzy
 msgid "This profile is not visible to you due to its privacy settings."
-msgstr "Esto solo es visible para administradores de este proyecto."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-projects.html
@@ -15980,23 +15793,20 @@ msgid "This todo was completed:"
 msgstr "Esta tarea fue completada:"
 
 #: cosinnus/version_history.py
-#, fuzzy
 msgid "This update includes security updates and small bugfixes:"
-msgstr "Esta actualización incluye varias correcciones de errores:"
+msgstr ""
 
 #: cosinnus/version_history.py
 msgid "This update includes several bugfixes:"
 msgstr "Esta actualización incluye varias correcciones de errores:"
 
 #: cosinnus/version_history.py
-#, fuzzy
 msgid "This update includes several features and bugfixes:"
-msgstr "Esta actualización incluye varias correcciones de errores:"
+msgstr ""
 
 #: cosinnus/version_history.py
-#, fuzzy
 msgid "This update provides several small bugfixes and stability improvements."
-msgstr "Esta actualización incluye varias correcciones de errores:"
+msgstr ""
 
 #: cosinnus/version_history.py
 msgid "This updates provides many visual improvements for the new redesign interface and several small bugfixes and stability improvements."
@@ -16350,22 +16160,16 @@ msgid "Topics we are involved with"
 msgstr "Temas en los que estamos involucrados"
 
 #: cosinnus/views/statistics.py
-#, fuzzy
-#| msgid "All Conferences"
 msgid "Total Enabled Conferences"
-msgstr "Todas las conferencias"
+msgstr ""
 
 #: cosinnus/views/statistics.py
-#, fuzzy
-#| msgid "All Groups"
 msgid "Total Enabled Groups"
-msgstr "Todos los grupos"
+msgstr ""
 
 #: cosinnus/views/statistics.py
-#, fuzzy
-#| msgid "All Projects"
 msgid "Total Enabled Projects"
-msgstr "Todos los proyectos"
+msgstr ""
 
 #: cosinnus/views/statistics.py
 msgid "Total Enabled User Accounts (at least 1x logged in)"
@@ -16790,7 +16594,7 @@ msgstr ""
 "Tu equipo %(site_name)s"
 
 #: cosinnus/templates/cosinnus/mail/user_group_join_requested.html
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "User \"%(sender_name)s\" has requested to join %(team_name)s.\n"
 "\n"
@@ -16804,17 +16608,6 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Usario \"%(sender_name)s\" ha preguntado para participar en %(team_name)s.\n"
-"\n"
-"Por favor vete a la página siguiente para aceptar o rechazar la solicitud:\n"
-"%(domain_url)s%(group_page_url)s\n"
-"\n"
-"Estas recibiendo este correo electrónico porque esres administrador de este equipo.\n"
-"\n"
-"(Sigue este enalce para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
-"\n"
-"\n"
-"Tu equipo %(site_name)s"
 
 #: cosinnus/views/user.py
 #, python-format
@@ -16850,19 +16643,18 @@ msgid "User %(username)s was successfully invited!"
 msgstr "¡Usario\"%(username)s\" ha sido invitado con éxito!"
 
 #: cosinnus/views/profile.py
-#, fuzzy, python-format
+#, python-format
 msgid "User %s is no longer blocked."
-msgstr "Usario\"%(username)s\" ya no es miembro."
+msgstr ""
 
 #: cosinnus/views/profile.py
-#, fuzzy, python-format
+#, python-format
 msgid "User %s is now blocked."
-msgstr "El usario no fue creado"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/statistics/simple.html
-#, fuzzy
 msgid "User Activity Timeline"
-msgstr "Usario requiere activación"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_list.html
 msgid "User Administration"
@@ -16976,14 +16768,12 @@ msgid "User who caused this notification event"
 msgstr "Usuario que causó este evento de notificación"
 
 #: cosinnus/models/profile.py
-#, fuzzy
 msgid "User-Block"
-msgstr "Usuario coincidente"
+msgstr ""
 
 #: cosinnus/models/profile.py
-#, fuzzy
 msgid "User-Blocks"
-msgstr "Usarios"
+msgstr ""
 
 #: cosinnus/models/profile.py
 msgid "User-Match"
@@ -16994,9 +16784,8 @@ msgid "User-Matches"
 msgstr "Coincidencias de usario"
 
 #: cosinnus/models/mitwirkomat.py
-#, fuzzy
 msgid "User-set answers to Mitwirk-O-Mat questions"
-msgstr "Por favor, rellena también la siguiente información:"
+msgstr ""
 
 #: cosinnus_conference/views.py
 msgid "Username"
@@ -17113,39 +16902,33 @@ msgid "Version 1.20.4 released"
 msgstr "Versión 1.20.4 lanzada"
 
 #: cosinnus/version_history.py
-#, fuzzy
 msgid "Version 2.0.0 released"
-msgstr "Versión 1.20.0 lanzada"
+msgstr ""
 
 #: cosinnus/version_history.py
-#, fuzzy
 msgid "Version 2.1.0 released"
-msgstr "Versión 1.20.0 lanzada"
+msgstr ""
 
 #: cosinnus/version_history.py
-#, fuzzy
 msgid "Version 2.2.0 released"
-msgstr "Versión 1.20.0 lanzada"
+msgstr ""
 
 #: cosinnus/version_history.py
-#, fuzzy
 msgid "Version 2.2.5 released"
-msgstr "Versión 1.20.0 lanzada"
+msgstr ""
 
 #: cosinnus/version_history.py
-#, fuzzy
 msgid "Version 2.3.0 released"
-msgstr "Versión 1.20.0 lanzada"
+msgstr ""
 
 #: cosinnus/version_history.py
-#, fuzzy
 msgid "Version 2.4.0 released"
-msgstr "Versión 1.20.0 lanzada"
+msgstr ""
 
 #: cosinnus/version_history.py
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Version {version_number} released"
-msgstr "Versión 1.20.0 lanzada"
+msgstr ""
 
 #: cosinnus/image_formats.py
 msgid "Very Small (100 x *)"
@@ -18008,9 +17791,8 @@ msgid "You are attending this event"
 msgstr "Estás asistiendo a este evento"
 
 #: cosinnus/templates/cosinnus/user/userprofile_detail.html
-#, fuzzy
 msgid "You are blocking this user. Their content will not be visible to you."
-msgstr "Estás siguiendo este contenido o su proyecto o grupo"
+msgstr ""
 
 #: cosinnus/api_frontend/views/user.py cosinnus/views/user.py
 msgid "You are currently logged in. The guest access can only be used if you are not logged in."
@@ -18173,10 +17955,8 @@ msgid "You are now located in %(group_name)s. You were redirected here from anot
 msgstr "Ahora estás localizado en %(group_name)s. Fuiste redirigido aquí desde otro proyecto o grupo que enlaza a este elemento."
 
 #: cosinnus/views/profile.py
-#, fuzzy
-#| msgid "You are seeing this alert because you created this content."
 msgid "You are only seeing this profile because you are an admin."
-msgstr "Estas viendo esta alerta porque has creado este contenido."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-conferences.html
@@ -18267,9 +18047,8 @@ msgstr "Puedes contactar a la administración del proyecto a través de este for
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/userdashboard/group-widget.html
-#, fuzzy
 msgid "You can create Groups or Projects via the main menu in the header."
-msgstr "Puedes crear grupos o proyectos a través del botón '+' en la cabecera."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "You can create a custom twitter timeline here:"
@@ -18277,9 +18056,8 @@ msgstr "Puedes crear una línea de tiempo en twitter aquí:"
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/userdashboard/ideas-widget.html
-#, fuzzy
 msgid "You can create your own Ideas and discover existing Ideas here"
-msgstr "Puedes crear tus propias ideas a través del botón '+' en la cabecera o puedes descubrir ideas existentes aquí"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/admin/conference_premium_capacity_info_help_text_stacked_inline.html
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
@@ -18296,10 +18074,9 @@ msgid "You can do this here"
 msgstr "Puedes hacer esto aquí"
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "You can download the latest user export data."
+#, python-format
 msgid "You can download the latest %(export_title)s data."
-msgstr "Puedes descargar los datos de exportación de usario."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/admin/conference_setting_help_text_stacked_inline.html
 msgid "You can find the BBBRoom object for this source object here"
@@ -18369,10 +18146,9 @@ msgid "You can sign in to your account using any of the following third party ac
 msgstr "Puedes iniciar sesión en tu cuenta usando cualquiera de las siguientes cuentas de terceros:"
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy, python-format
-#| msgid "You can start a user export. As soon as the export is finished it will be available here."
+#, python-format
 msgid "You can start a %(export_title)s. As soon as the export is finished it will be available here."
-msgstr "Puedes comenzar a exportar usario. Tan pronto como la exportación es terminada, será disponible aquí."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/signup.html
 msgid "You can supply your last name to be displayed as well"
@@ -18383,10 +18159,9 @@ msgid "You can then start the import from the report page."
 msgstr "Puedes comenzar la importación desde la página del informe."
 
 #: cosinnus_oauth_client/templates/socialaccount/snippets/provider_list.html
-#, fuzzy, python-format
-#| msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+#, python-format
 msgid "You can use your %(provider)s account to login on %(portal_name)s."
-msgstr " %(portal_name)s es parte de la comunidad %(provider)s. Puedes usar tu cuenta %(provider)s para iniciar sesión en %(portal_name)s."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "You can visit the Matching Settings for the Volunteer-O-Matic after saving."
@@ -18502,10 +18277,8 @@ msgid "You do not have permission to access this stream."
 msgstr "No tienes permiso para acceder a esta secuencia."
 
 #: cosinnus/models/bbb_room.py
-#, fuzzy
-#| msgid "You do not have permission to access this stream."
 msgid "You do not have permission to enter this room."
-msgstr "No tienes permiso para acceder a esta secuencia."
+msgstr ""
 
 #: cosinnus/views/mixins/tagged.py
 #, python-format
@@ -18568,9 +18341,8 @@ msgid "You have been invited to participate!"
 msgstr "Has sido invitado para participar!"
 
 #: cosinnus/core/middleware/cosinnus_middleware.py
-#, fuzzy
 msgid "You have been logged out for security reasons, please log in again."
-msgstr "Se te ha desconectado. ¡Hasta la vista!"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/logged_out.html
 msgid "You have been logged out. See you again soon!"
@@ -18792,10 +18564,8 @@ msgid "You were made an admin of this team"
 msgstr "Has sido hecho un administrador de este equipo"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy
-#| msgid "You were tagged in this event"
 msgid "You were mentioned in a task comment"
-msgstr "Fuiste etiquetado en este evento"
+msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
 #, python-format
@@ -18895,14 +18665,13 @@ msgid "You're currently not member of any project, group or organization."
 msgstr "Actualmente no eres miembro de ningún proyecto, grupo u organización."
 
 #: cosinnus/templates/cosinnus/mail/user_register_notification.html
-#, fuzzy, python-format
-#| msgid "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
+#, python-format
 msgid ""
 "You're receiving this email because you are a portal-administrator.\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
-msgstr "Has recibido este correo eletrónico porque solicitaste un reinico de contraseña para tu cuenta de usuario en %(site_name)s."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/password_reset_email.html
 #, python-format
@@ -19800,9 +19569,8 @@ msgstr "texto de ayuda_10_para hacer"
 
 #: cosinnus/core/middleware/cosinnus_middleware.py
 #: cosinnus/templates/cosinnus/mitwirkomat/mitwirkomat_settings_form.html
-#, fuzzy
 msgid "here"
-msgstr "Donde"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_list_object.html
 msgid "hidden"
@@ -19881,9 +19649,8 @@ msgid "last name (if set)"
 msgstr "apellido (si se establece)"
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
-#, fuzzy
 msgid "late invitation"
-msgstr "Eliminar invitación"
+msgstr ""
 
 #: cosinnus/models/profile.py
 msgid "like"
@@ -20215,16 +19982,8 @@ msgstr "sí"
 #~ msgid "%(team_name)s was deactivated successfully!"
 #~ msgstr "¡%(team_name)s se volvió a desactivar con éxito!"
 
-#, fuzzy
-#~ msgid "2FA Settings"
-#~ msgstr "Ajustes"
-
 #~ msgid "A user export is in progress. As soon as the export is finished it will be available here."
 #~ msgstr "Un exportación de usario está en progreso. Tan pronto como el exportación es terminado, estará disponible aquí."
-
-#, fuzzy
-#~ msgid "Active"
-#~ msgstr "Reactivar"
 
 #~ msgid "Add widget"
 #~ msgstr "Añadir widget"
@@ -20259,14 +20018,6 @@ msgstr "sí"
 #~ msgid "Back to Project Overview"
 #~ msgstr "Volver a la vista del conjunto"
 
-#, fuzzy
-#~ msgid "Back to your profile"
-#~ msgstr "Tu perfil"
-
-#, fuzzy
-#~ msgid "Banner Image"
-#~ msgstr "Imagen de la cabecera"
-
 #~ msgid "Bauen und Wohnen"
 #~ msgstr "Construir y vivir"
 
@@ -20276,30 +20027,14 @@ msgstr "sí"
 #~ msgid "Bildung"
 #~ msgstr "Formación"
 
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Reinicio de contraseña con éxito"
-
 #~ msgid "Choose App"
 #~ msgstr "Escoger aplicación"
 
 #~ msgid "Community"
 #~ msgstr "Comunidad"
 
-#, fuzzy
-#~ msgid "Conference Dashboard"
-#~ msgstr "Tablero"
-
-#, fuzzy
-#~ msgid "Conference accounts active"
-#~ msgstr "Esta cuenta esta inactiva."
-
 #~ msgid "Configure"
 #~ msgstr "Configurar"
-
-#, fuzzy
-#~ msgid "Contact Form on Micropage"
-#~ msgstr "Micropáginas de Cosinnus"
 
 #~ msgid "Czech--NATIVE-LANGUAGE"
 #~ msgstr "Čeština"
@@ -20309,10 +20044,6 @@ msgstr "sí"
 
 #~ msgid "Deactivate users (will keep all all items they created on the site)"
 #~ msgstr "Deactivar miembros (se querdarán todos los elementos que crearon en esa página)"
-
-#, fuzzy
-#~ msgid "Deactivated Projects and Groups"
-#~ msgstr "Desactivar proyecto7grupo"
 
 #~ msgid "Debug"
 #~ msgstr "Depurar"
@@ -20332,14 +20063,6 @@ msgstr "sí"
 #~ msgid "Direct Contact"
 #~ msgstr "Contacto"
 
-#, fuzzy
-#~ msgid "Disable 2FA"
-#~ msgstr "Deshabilitar el editor"
-
-#, fuzzy
-#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
-#~ msgstr "Estas seguro de que quieres eliminar la invitación para \"%(title)s\"?"
-
 #~ msgid "Done"
 #~ msgstr "Terminado"
 
@@ -20355,26 +20078,14 @@ msgstr "sí"
 #~ msgid "Edit my Profile"
 #~ msgstr "Editar mi perfil"
 
-#, fuzzy
-#~ msgid "Email to group administrator"
-#~ msgstr "Administrador del grupo"
-
 #~ msgid "English--NATIVE-LANGUAGE"
 #~ msgstr "English"
 
 #~ msgid "Ernährung und Konsum"
 #~ msgstr "Dieta y consumo"
 
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "¡Error!"
-
 #~ msgid "Event poll updated by %(sender_name)s"
 #~ msgstr "Sondeo de evento actualizado por %(sender_name)s"
-
-#, fuzzy
-#~ msgid "Example: https://www.youtube.com/watch?v=12345"
-#~ msgstr "Ejemplo: : http://mywebsite.com"
 
 #~ msgid "File \"%(title)s\" could not be added."
 #~ msgstr "Archivo \"%(title)s\" no pudo ser añadido."
@@ -20390,10 +20101,6 @@ msgstr "sí"
 
 #~ msgid "File title"
 #~ msgstr "Título del archivo"
-
-#, fuzzy
-#~ msgid "Finish conference and deactivate user accounts"
-#~ msgstr "Eliminar cuenta de usario"
 
 #~ msgid "French--NATIVE-LANGUAGE"
 #~ msgstr "Français"
@@ -20513,22 +20220,6 @@ msgstr "sí"
 #~ "\n"
 #~ "Tu equipo de %(site_name)s"
 
-#, fuzzy
-#~ msgid ""
-#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
-#~ "\n"
-#~ "Our administrators will review your request and approve your user account soon!\n"
-#~ "\n"
-#~ "Until then, with warm greetings, \n"
-#~ "your %(site_name)s Team"
-#~ msgstr ""
-#~ "Hola! Nos alegramos de que quiras unirte a %(site_name)s. \n"
-#~ "\n"
-#~ "Nuestros administradores revisarán tu solicitud y aprobarán tu cuenta de usario pronto!\n"
-#~ "\n"
-#~ "Hasta entonces, con muchos saludos,\n"
-#~ "tu equipo %(site_name)s"
-
 #~ msgid "Hi,"
 #~ msgstr "Hola,"
 
@@ -20541,28 +20232,8 @@ msgstr "sí"
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Si deseas eliminar tu contenido, regresa y hazlo ahora. Una vez que eliminas tu perfil, ya no tendrás acceso a nada que hayas creado con esta cuenta."
 
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Mis proyectos y grupos"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Mis proyectos y grupos"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Ordenar casilla"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Mensajes"
-
 #~ msgid "In my Cloud Files"
 #~ msgstr "En mis archivos en la Cloud"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Mensajes"
 
 #~ msgid "Invited you"
 #~ msgstr "Te invitó"
@@ -20584,14 +20255,6 @@ msgstr "sí"
 
 #~ msgid "Message Project"
 #~ msgstr "Mandar un mensaje al proyecto"
-
-#, fuzzy
-#~ msgid "Microsite Wallpaper"
-#~ msgstr "Wallpaper del micrositio"
-
-#, fuzzy
-#~ msgid "Name of educational institution"
-#~ msgstr "Eliminar localización"
 
 #~ msgid "New etherpad by %(sender_name)s"
 #~ msgstr "Nuevo etherpad de %(sender_name)s"
@@ -20644,16 +20307,8 @@ msgstr "sí"
 #~ msgid "Ok"
 #~ msgstr "Ok"
 
-#, fuzzy
-#~ msgid "Only conference members can see the event\\'s description."
-#~ msgstr "Solo miembros del equipo pueden ver el contenido que solicitaste. ¡Solicita para ser un miembro ahora!"
-
 #~ msgid "Password reset successful"
 #~ msgstr "Reinicio de contraseña con éxito"
-
-#, fuzzy
-#~ msgid "Password set"
-#~ msgstr "Reinicio de contraseña"
 
 #~ msgid "Personal"
 #~ msgstr "Personal"
@@ -20664,30 +20319,14 @@ msgstr "sí"
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
 
-#, fuzzy
-#~ msgid "Portal administrators"
-#~ msgstr "Administratores del portal"
-
 #~ msgid "Position"
 #~ msgstr "Descripción"
-
-#, fuzzy
-#~ msgid "Premium Bookings"
-#~ msgstr "Crear evento"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Proyectos/grupos"
 
 #~ msgid "Public Group"
 #~ msgstr "Grupo público"
 
 #~ msgid "Re-Activate Project/Group"
 #~ msgstr "Escoge y sube una imagen de la galería"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "¡Error!"
 
 #~ msgid "Read more..."
 #~ msgstr "Leer más..."
@@ -20710,16 +20349,8 @@ msgstr "sí"
 #~ msgid "Saved items:"
 #~ msgstr "Item nuevo"
 
-#, fuzzy
-#~ msgid "Search for email"
-#~ msgstr "Buscar usarios"
-
 #~ msgid "Set up your Profile"
 #~ msgstr "Configura tu perfil"
-
-#, fuzzy
-#~ msgid "Society Dashboard"
-#~ msgstr "Tablero"
 
 #~ msgid "Sorry, an error occurred during the user export. Please try again later."
 #~ msgstr "Lo siento, ocurrió un error durante la exportación del usario. Por favor, inténtalo de nuevo más tarde."
@@ -20727,21 +20358,8 @@ msgstr "sí"
 #~ msgid "Spanish--NATIVE-LANGUAGE"
 #~ msgstr "Español"
 
-#, fuzzy
-#~| msgid "Start user export"
-#~ msgid "Start %(mytitle)s"
-#~ msgstr "Comenzar exportación de usario"
-
-#, fuzzy
-#~ msgid "Start conference and activate user accounts"
-#~ msgstr "Eliminar cuenta de usario"
-
 #~ msgid "Start user export"
 #~ msgstr "Comenzar exportación de usario"
-
-#, fuzzy
-#~ msgid "Temporary restrictions"
-#~ msgstr "Descripción del equipo"
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Los siguientes grupos se convirtieron en proyectos:"
@@ -20755,42 +20373,14 @@ msgstr "sí"
 #~ msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 #~ msgstr "Esta página es una previsión the muchas cosas chulas que vendrán!"
 
-#, fuzzy
-#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-#~ msgstr "Este proceso es reversible. Puedes reactvar el proyecto/grupo de la página de listas de proyecto/grupo en cualquier momento."
-
-#, fuzzy
-#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-#~ msgstr "Este proceso es reversible. Puedes reactvar el proyecto/grupo de la página de listas de proyecto/grupo en cualquier momento."
-
-#, fuzzy
-#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-#~ msgstr "Este proceso es reversible. Puedes reactvar el proyecto/grupo de la página de listas de proyecto/grupo en cualquier momento."
-
 #~ msgid "This project shall be made publicly findable via other platforms."
 #~ msgstr "Este proyecto se hará públicamente accesible a través de otras plataformas."
-
-#, fuzzy
-#~ msgid "Type of educational institution"
-#~ msgstr "Buscar usarios"
 
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Українська"
 
 #~ msgid "Umwelt"
 #~ msgstr "Medio ambiente"
-
-#, fuzzy
-#~ msgid "Upload Participants"
-#~ msgstr "Participantes"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Sube una imagen."
-
-#, fuzzy
-#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-#~ msgstr "Usario \"%(user)s\" ha sido registrado con éxito. Te mandaremos un correo electrónico a tu dirección %(email)s\" pronto. Tienes que confirmar tu correo electrónico antes de poder iniciar sesión."
 
 #~ msgid ""
 #~ "User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
@@ -20825,10 +20415,6 @@ msgstr "sí"
 #~ "\n"
 #~ "Tu equipo %(site_name)s"
 
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Proyectos/grupos"
-
 #~ msgid "User export finished"
 #~ msgstr "Exportar de usario terminado"
 
@@ -20843,18 +20429,6 @@ msgstr "sí"
 
 #~ msgid "Withdraw request"
 #~ msgstr "Retirar solicitud"
-
-#, fuzzy
-#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Estas deactivando este proyecto/grupo! Él y todo su contenido será oculto en la página web e invisible para todos, tu incluido."
-
-#, fuzzy
-#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Estas deactivando este proyecto/grupo! Él y todo su contenido será oculto en la página web e invisible para todos, tu incluido."
-
-#, fuzzy
-#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Estas deactivando este proyecto/grupo! Él y todo su contenido será oculto en la página web e invisible para todos, tu incluido."
 
 #~ msgid "You can create Groups or Projects via the '+' button in the header."
 #~ msgstr "Puedes crear grupos o proyectos a través del botón '+' en la cabecera."
@@ -20874,40 +20448,8 @@ msgstr "sí"
 #~ msgid "You were tagged by %(sender_name)s"
 #~ msgstr "Has sido etiquetado de %(sender_name)s"
 
-#, fuzzy
-#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-#~ msgstr "Usario \"%(user)s\" ha sido registrado con éxito. La cuenta tendrá que ser aprobada antes de que puedas iniciar sesión. Te mandaremos un correo electrónico a tu dirección \"%(email)s\" cuando pasará."
-
-#, fuzzy
-#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-#~ msgstr "Usario \"%(user)s\" ha sido registrado con éxito. Te mandaremos un correo electrónico a tu dirección %(email)s\" pronto. Tienes que confirmar tu correo electrónico antes de poder iniciar sesión."
-
 #~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
 #~ msgstr "Tu invitación a %(team_type)s “%(team_name)s” fue rechazada con éxito."
 
 #~ msgid "Your privacy settings were saved. Welcome!"
 #~ msgstr "Tu configuración de privacidad se guardó. ¡Bienvenido!"
-
-#, fuzzy
-#~ msgid "activate member"
-#~ msgstr "Invitar un miembro"
-
-#, fuzzy
-#~ msgid "deactivate member"
-#~ msgstr "Desactivar grupo"
-
-#, fuzzy
-#~ msgid "has logged in"
-#~ msgstr "Ha iniciado sesión"
-
-#, fuzzy
-#~ msgid "no Password"
-#~ msgstr "Contraseña"
-
-#, fuzzy
-#~ msgid "not active"
-#~ msgstr "(Inactivo)"
-
-#, fuzzy
-#~ msgid "participants"
-#~ msgstr "Participantes"
