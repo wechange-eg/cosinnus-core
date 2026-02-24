@@ -469,11 +469,11 @@ def cosinnus_menu_v2(context, template='cosinnus/v2/navbar/navbar.html', request
         projects_invited = CosinnusProject.objects.get_for_user_invited(request.user)
         conferences_invited = CosinnusConference.objects.get_for_user_invited(request.user)
 
-        groups_invited = [DashboardItem(group) for group in societies_invited]
-        groups_invited += [DashboardItem(group) for group in projects_invited]
+        groups_invited = [DashboardItem(group, url=group.get_microsite_url()) for group in societies_invited]
+        groups_invited += [DashboardItem(group, url=group.get_microsite_url()) for group in projects_invited]
         # for conferences, only show invites if becoming a member is currently possible
         groups_invited += [
-            DashboardItem(conference)
+            DashboardItem(conference, url=conference.get_microsite_url())
             for conference in conferences_invited
             if conference.membership_applications_possible
         ]
