@@ -902,7 +902,7 @@ class CosinnusBaseGroup(
     GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON = 2
     """There is an active booking with expiration coming soon."""
     GROUP_PREMIUM_STATE_EXPIRED = 3
-    """The last booking has expired. There is no active booking."""
+    """The booking has expired. There is no active booking. Expiration date may not yet be set."""
 
     NO_VIDEO_CONFERENCE = 0
     BBB_MEETING = 1
@@ -1573,7 +1573,7 @@ class CosinnusBaseGroup(
         return False
 
     @property
-    def group_premium_enabled(self) -> bool:
+    def group_premium_feature_enabled(self) -> bool:
         """
         Return `True` if group premium feature is enabled for this group.
         Does not indicate, that premium-features are currently active.
@@ -1592,20 +1592,23 @@ class CosinnusBaseGroup(
         """
         Returns the current premium-state for this group.
         """
-        if not self.group_premium_enabled:
+        if not self.group_premium_feature_enabled:
             return self.GROUP_PREMIUM_STATE_NONE
 
-        days_left = self.group_premium_days_left
-        if days_left:
-            if days_left > getattr(settings, 'COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS', 7):
+        if not self.enable_user_premium_choices_until and not self.group_premium_expired_on:
+            return self.GROUP_PREMIUM_STATE_NONE
+
+        # we are either ACTIVE or EXPIRED
+
+        # we stay in ACTIVE state until the cron-job deletes `enable_user_premium_choices_until`
+        if self.enable_user_premium_choices_until:
+            if self.group_premium_days_left > getattr(settings, 'COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS', 7):
                 return self.GROUP_PREMIUM_STATE_ACTIVE_FAR
             else:
                 return self.GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON
 
-        if self.group_premium_expired_on:
-            return self.GROUP_PREMIUM_STATE_EXPIRED
-
-        return self.GROUP_PREMIUM_STATE_NONE
+        # we are no longer active, so we are expired
+        return self.GROUP_PREMIUM_STATE_EXPIRED
 
     @property
     def group_premium_expired_on(self) -> Optional[datetime.date]:
@@ -1616,7 +1619,7 @@ class CosinnusBaseGroup(
         - expiry date is unknown or
         - premium restrictions are disabled
         """
-        if not self.group_premium_enabled:
+        if not self.group_premium_feature_enabled:
             return None
 
         if self.group_premium_days_left:
@@ -1633,11 +1636,12 @@ class CosinnusBaseGroup(
         """
         Returns number of days left for premium (`1` means "Today is the last day.")
         Returns `0` if
+        - enable_user_premium_choices_until is in the past or
         - premium is inactive or
         - premium restrictions are disabled
         """
 
-        if not self.group_premium_enabled:
+        if not self.group_premium_feature_enabled:
             return 0
 
         last_day = self.enable_user_premium_choices_until

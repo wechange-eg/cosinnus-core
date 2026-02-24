@@ -2594,6 +2594,18 @@ msgstr ""
 msgid "Advanced BBB-Room Tools"
 msgstr ""
 
+#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
+#, python-format
+msgid "Affected Group: [%(group_name)s](%(group_url)s)"
+msgstr "Betroffene Gruppe: [%(group_name)s](%(group_url)s)"
+
+#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
+#, python-format
+msgid "Affected Project: [%(group_name)s](%(group_url)s)"
+msgstr "Betroffenes Projekt: [%(group_name)s](%(group_url)s)"
+
 #: cosinnus/models/group.py
 msgid "Affordable and Clean Energy"
 msgstr ""
@@ -6600,6 +6612,12 @@ msgstr "Export Project “%(team_name)s”"
 msgid "Export event feed"
 msgstr ""
 
+#: cosinnus/templates/cosinnus/group/group_form.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
+msgid "Extend Videoconference Pro"
+msgstr ""
+
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/user_dashboard_announcement_form.html
 msgid "External Link for a \"Read more\" link"
 msgstr ""
@@ -8284,6 +8302,16 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/fields/email_field_change_link_snippet.html
 msgid "If you would like to change your email address, you can do it here:"
+msgstr ""
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
+msgid "If you would like to extend your booking, please feel free to contact us using the following form:"
+msgstr ""
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
+msgid "If you would like to renew your booking, please feel free to contact us using the following form:"
 msgstr ""
 
 #: cosinnus/models/user_import.py
@@ -14085,6 +14113,46 @@ msgstr ""
 msgid "The administrators' profiles are not visible due to their privacy settings."
 msgstr ""
 
+#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification_subj.txt
+#, python-format
+msgid "The booking for Videoconference Pro for the group \"%(group_name)s\" ends after %(last_day)s (%(days_left)s days)."
+msgstr ""
+
+#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification_subj.txt
+#, python-format
+msgid "The booking for Videoconference Pro for the group \"%(group_name)s\" has ended."
+msgstr ""
+
+#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification_subj.txt
+#, python-format
+msgid "The booking for Videoconference Pro for the project \"%(group_name)s\" ends after %(last_day)s (%(days_left)s days)."
+msgstr ""
+
+#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification_subj.txt
+#, python-format
+msgid "The booking for Videoconference Pro for the project \"%(group_name)s\" has ended."
+msgstr ""
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "The booking for Videoconference Pro for this group ended on %(end_date)s."
+msgstr ""
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "The booking for Videoconference Pro for this group ends after %(last_day)s (%(days_left)s days)"
+msgstr ""
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "The booking for Videoconference Pro for this project ended on %(end_date)s."
+msgstr ""
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "The booking for Videoconference Pro for this project ends after %(last_day)s (%(days_left)s days)"
+msgstr ""
+
 #: cosinnus_event/views.py cosinnus_marketplace/views.py cosinnus_poll/views.py
 msgid "The complete request can only be sent via POST!"
 msgstr ""
@@ -15070,6 +15138,11 @@ msgstr ""
 msgid "This function is not enabled for this group type."
 msgstr ""
 
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "This group currently has Videoconference Pro booked until %(end_date)s"
+msgstr ""
+
 #: cosinnus/views/facebook_integration.py
 msgid "This group does not have a Facebook Fan-Page associated with it!"
 msgstr ""
@@ -15234,6 +15307,11 @@ msgstr ""
 
 #: cosinnus/views/profile.py cosinnus_message/views.py
 msgid "This profile is not visible to you due to its privacy settings."
+msgstr ""
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "This project currently has Videoconference Pro booked until %(end_date)s"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -18111,6 +18189,8 @@ msgstr ""
 msgid "You've matched!"
 msgstr ""
 
+#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
 #: cosinnus/views/user.py
 #, python-format
 msgid "Your %(site_name)s Team"
