@@ -59,22 +59,18 @@
     {% if group.group_premium_state == group.GROUP_PREMIUM_STATE_ACTIVE_FAR %}
         <div class="alert alert-success">
             <i class="fa fa-heart fa-2x fa-check-circle"></i>
-
             <h4>
                 {% if group.type == 0 %}
-                    {% blocktrans with end_date=group.enable_user_premium_choices_until %} Your project
-                        currently
-                        has Videoconference Pro booked until {{ end_date }} {% endblocktrans %}
+                    {% blocktrans trimmed with end_date=group.enable_user_premium_choices_until %}This project
+                        currently has Videoconference Pro booked until {{ end_date }} {% endblocktrans %}
                 {% else %}
-                    {% blocktrans with end_date=group.enable_user_premium_choices_until %} Your group currently
-                        has
-                        Videoconference Pro booked until {{ end_date }} {% endblocktrans %}
+                    {% blocktrans trimmed with end_date=group.enable_user_premium_choices_until %}This group currently
+                        has Videoconference Pro booked until {{ end_date }} {% endblocktrans %}
                 {% endif %}
             </h4>
-
             <div class="v-offset-s">
                 <p>
-                    {% trans "If you would like to extend this period, please feel free to contact us using the following form:" %}
+                    {% trans "If you would like to extend your booking, please feel free to contact us using the following form:" %}
                 </p>
                 <p>
                     <a href="https://wechange.de/cms/videokonferenz-pro/#formular"
@@ -85,24 +81,22 @@
     {% elif group.group_premium_state == group.GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON %}
         <div class="alert alert-warning">
             <i class="fa fa-heart fa-2x fa-info-circle"></i>
-
             <h4>
                 {% with last_day=group.enable_user_premium_choices_until %}
                     {% if group.type == 0 %}
-                        {% blocktrans with days_left=group.group_premium_days_left %} The booking for
-                            Videoconference Pro for your project ends after {{ last_day }} ({{ days_left }} days)
+                        {% blocktrans trimmed with days_left=group.group_premium_days_left %} The booking for
+                            Videoconference Pro for this project ends after {{ last_day }} ({{ days_left }} days)
                         {% endblocktrans %}
                     {% else %}
-                        {% blocktrans with days_left=group.group_premium_days_left %} The booking for
-                            Videoconference Pro for your group ends after {{ last_day }} ({{ days_left }} days)
+                        {% blocktrans trimmed with days_left=group.group_premium_days_left %} The booking for
+                            Videoconference Pro for this group ends after {{ last_day }} ({{ days_left }} days)
                         {% endblocktrans %}
                     {% endif %}
                 {% endwith %}
             </h4>
-
             <div class="v-offset-s">
                 <p>
-                    {% trans "If you would like to renew or extend your booking, please contact us via the following form:" %}
+                    {% trans "If you would like to extend your booking, please feel free to contact us using the following form:" %}
                 </p>
                 <p>
                     <a href="https://wechange.de/cms/videokonferenz-pro/#formular"
@@ -113,30 +107,20 @@
     {% elif group.group_premium_state == group.GROUP_PREMIUM_STATE_EXPIRED %}
         <div class="alert alert-warning">
             <i class="fa fa-heart fa-2x fa-info-circle"></i>
-
             <h4>
-                {% with expiry=group.group_premium_expired_on %}
-                    {% if expiry %}
-                        {% if group.type == 0 %}
-                            {% blocktrans with end_date=expiry %} The booking for
-                                Videoconference Pro for your project ended on {{ end_date }}. {% endblocktrans %}
-                        {% else %}
-                            {% blocktrans with end_date=expiry %} The booking for
-                                Videoconference Pro for your group ended on {{ end_date }}. {% endblocktrans %}
-                        {% endif %}
+                {% with end_date=group.group_premium_expired_on %}
+                    {% if group.type == 0 %}
+                        {% blocktrans trimmed %}The booking for
+                            Videoconference Pro for this project ended on {{ end_date }}. {% endblocktrans %}
                     {% else %}
-                        {% if group.type == 0 %}
-                            {% trans "The booking for Videoconference Pro for your project has ended." %}
-                        {% else %}
-                            {% trans "The booking for Videoconference Pro for your group has ended." %}
-                        {% endif %}
+                        {% blocktrans trimmed %}The booking for
+                            Videoconference Pro for this group ended on {{ end_date }}. {% endblocktrans %}
                     {% endif %}
                 {% endwith %}
             </h4>
-
             <div class="v-offset-s">
                 <p>
-                    {% trans "If you would like to renew your booking, please contact us via the following form:" %}
+                    {% trans "If you would like to renew your booking, please feel free to contact us using the following form:" %}
                 </p>
                 <p>
                     <a href="https://wechange.de/cms/videokonferenz-pro/#formular"
