@@ -237,11 +237,6 @@ msgid "%(count)d User account(s) were deactivated successfully. They will be del
 msgstr "%(count)d Benutzerkonten wurden erfolgreich deaktiviert. Sie werden in 30 Tagen ab jetzt gelöscht."
 
 #: cosinnus/admin.py
-#, fuzzy, python-format
-msgid "%(count)d User account(s) were deleted successfully."
-msgstr "%(count)d Benutzerkonten wurden erfolgreich reaktiviert."
-
-#: cosinnus/admin.py
 #, python-format
 msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "%(count)d Benutzerkonten wurden erfolgreich reaktiviert."
@@ -20365,14 +20360,6 @@ msgstr "Ja"
 #~ msgid "Czech--NATIVE-LANGUAGE"
 #~ msgstr "Čeština"
 
-#, fuzzy
-#~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
-#~ msgstr "Optionen für den Raum, die in der bigbluebutton-API dargestellt werden"
-
-#, fuzzy
-#~ msgid "DEPRECATED! the welcome message, that is displayed to attendees"
-#~ msgstr "die Begrüßungsmeldung, die den Teilnehmenden angezeigt wird"
-
 #~ msgid "Deactivate Project/Group"
 #~ msgstr "Projekt/Gruppe deaktivieren"
 
@@ -20654,10 +20641,6 @@ msgstr "Ja"
 #~ msgid "I accept the conditions"
 #~ msgstr "Ich akzeptiere die Bedingungen"
 
-#, fuzzy
-#~ msgid "I wish to receive RocketChat notification emails"
-#~ msgstr "Ich möchte Benachrichtigungs-Emails erhalten"
-
 #~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
 #~ msgstr "Wenn ein Gruppe als Tagung markiert wurde, ist es möglich Accounts für alle Teilnehmer automatisch zu generieren"
 
@@ -20819,10 +20802,6 @@ msgstr "Ja"
 #~ msgid "Ok"
 #~ msgstr "Ok"
 
-#, fuzzy
-#~ msgid "Only conference members can see the event\\'s description."
-#~ msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
-
 #~ msgid "Only content from my Groups and Projects"
 #~ msgstr "Nur Beiträge aus meinen Gruppen und Projekten"
 
@@ -20934,10 +20913,6 @@ msgstr "Ja"
 
 #~ msgid "Schedule an event"
 #~ msgstr "Termin finden"
-
-#, fuzzy
-#~ msgid "Search for email"
-#~ msgstr "Nach Ideen suchen"
 
 #~ msgid "Select the groups/projects for boards you want to migrate:"
 #~ msgstr "Wähle Gruppen/Projekte for Boards aus die migriert werden sollen:"
@@ -21343,10 +21318,6 @@ msgstr "Ja"
 
 #~ msgid "not active"
 #~ msgstr "inaktiv"
-
-#, fuzzy
-#~ msgid "nothing selected"
-#~ msgstr "Kein Tag ausgewählt"
 
 #~ msgid "participants"
 #~ msgstr "Teilnehmende"
