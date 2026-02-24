@@ -1153,7 +1153,8 @@ class CosinnusBaseGroup(
     is_premium_permanently = models.BooleanField(
         _('Conference is permanently premium'),
         help_text=(
-            'If enabled, this will always be in premium mode, independent of any bookings. WARNING: changing this may '
+            'DOES NOT AFFECT GROUPS/PROJECTS: If enabled, this will always be in premium mode, '
+            'independent of any bookings. WARNING: changing this may '
             '(depending on the event/conference/portal settings) cause new meeting connections to use the new server, '
             'even for ongoing meetings on the old server, essentially splitting a running meeting in two!'
         ),
