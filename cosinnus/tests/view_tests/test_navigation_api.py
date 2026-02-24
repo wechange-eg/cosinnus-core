@@ -470,7 +470,7 @@ class MembershipAlertsViewTest(TestMembershipAlertsMixin, APITestCase):
                             'label': 'Test Group 2',
                             'selected': False,
                             'type': None,
-                            'url': '/group/test-group-2/',
+                            'url': '/group/test-group-2/microsite/',
                         }
                     ],
                 },
