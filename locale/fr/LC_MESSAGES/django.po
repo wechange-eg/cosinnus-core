@@ -10563,7 +10563,6 @@ msgstr "La newsletter a été copiée."
 msgid "Newsletter has been updated."
 msgstr "La newsletter a été mise à jour."
 
-#: cosinnus/templates/cosinnus/administration/managed_tags_newsletter_list.html
 #: cosinnus/views/administration.py
 msgid "Newsletter is being sent in the background."
 msgstr ""

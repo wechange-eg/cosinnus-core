@@ -10568,7 +10568,6 @@ msgstr "Το Newsletter έχει αντιγραφεί."
 msgid "Newsletter has been updated."
 msgstr "Το Newsletter έχει ενημερωθεί."
 
-#: cosinnus/templates/cosinnus/administration/managed_tags_newsletter_list.html
 #: cosinnus/views/administration.py
 msgid "Newsletter is being sent in the background."
 msgstr ""

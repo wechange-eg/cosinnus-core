@@ -2232,7 +2232,6 @@ msgstr ""
 msgid "Accept User"
 msgstr ""
 
-#: cosinnus/cosinnus_notifications.py
 #: cosinnus/templates/cosinnus/group/organizations.html
 msgid "Accept invitation"
 msgstr ""
@@ -2296,7 +2295,6 @@ msgstr ""
 msgid "Accounts Need Verification"
 msgstr ""
 
-#: cosinnus/templates/cosinnus/user_dashboard_announcement/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_detail.html
 msgid "Activate"
@@ -4565,7 +4563,6 @@ msgid "Create Group"
 msgstr "Create Group"
 
 #. Translators: __INCLUDE_JS_PO__
-#: cosinnus/templates/cosinnus/idea/idea_form.html
 #: cosinnus/templates/cosinnus/universal/include/macros.html
 #: cosinnus/templates/cosinnus/universal/map/pagination-controls.html
 msgid "Create Idea"
@@ -9886,7 +9883,6 @@ msgstr ""
 msgid "My Groups"
 msgstr "My Groups"
 
-#. Translators: __INCLUDE_JS_PO__
 #: cosinnus/api_frontend/views/navigation.py
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 msgid "My Groups and Projects"

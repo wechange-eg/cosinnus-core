@@ -8950,7 +8950,6 @@ msgid "Invite new Members"
 msgstr "قم بدعوة أعضاء جدد"
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
-#: cosinnus/templates/cosinnus/widgets/group_members_widget.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
 msgid "Invite people"
 msgstr ""
@@ -10535,7 +10534,6 @@ msgstr "تم نسخ النشرة الإخبارية."
 msgid "Newsletter has been updated."
 msgstr "(تم حذف العنصر المبلغ عنه.)"
 
-#: cosinnus/templates/cosinnus/administration/managed_tags_newsletter_list.html
 #: cosinnus/views/administration.py
 msgid "Newsletter is being sent in the background."
 msgstr ""
