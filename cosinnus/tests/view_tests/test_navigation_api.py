@@ -469,7 +469,8 @@ class MembershipAlertsViewTest(TestMembershipAlertsMixin, APITestCase):
                             'is_external': False,
                             'label': 'Test Group 2',
                             'selected': False,
-                            'url': '/group/test-group-2/',
+                            'type': None,
+                            'url': '/group/test-group-2/microsite/',
                         }
                     ],
                 },
@@ -485,6 +486,7 @@ class MembershipAlertsViewTest(TestMembershipAlertsMixin, APITestCase):
                             'is_external': False,
                             'label': 'Test Group (1)',
                             'selected': False,
+                            'type': None,
                             'url': '/group/test-group/members/?requests=1#requests',
                         }
                     ],

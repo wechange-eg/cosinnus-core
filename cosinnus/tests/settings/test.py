@@ -63,6 +63,11 @@ COSINNUS_ADMIN_USER_APIS_ENABLED = True
 # set elastic to run without threads during testing
 COSINNUS_ELASTIC_BACKEND_RUN_THREADED = False
 
+
+# turn off V3 Frontend to disable redirects on requests
+COSINNUS_V3_FRONTEND_ENABLED = False
+
+
 # Use non-persistent process-local cache to start every test-run with clean cache
 # and not interfere with `normal` cache. This separates caches from parallel processes.
 # see https://code.djangoproject.com/ticket/11505#comment:25

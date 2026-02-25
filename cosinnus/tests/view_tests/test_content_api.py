@@ -4,6 +4,7 @@ from urllib.parse import urlencode
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.core.cache import cache
+from django.test import override_settings
 from django.urls import reverse
 from rest_framework.test import APILiveServerTestCase
 
@@ -20,6 +21,7 @@ User = get_user_model()
 TEST_USER_DATA = {'username': '1', 'email': 'testuser@example.com', 'first_name': 'Test', 'last_name': 'User'}
 
 
+@override_settings(COSINNUS_V3_FRONTEND_ENABLED=True, COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED=True)
 class MainContentViewTest(APILiveServerTestCase):
     @classmethod
     def setUpClass(cls):
