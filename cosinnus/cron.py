@@ -144,9 +144,9 @@ class SwitchGroupPremiumFeatures(CosinnusCronJobBase):
                         'cosinnus/mail/group_premium_expired_notification.html',
                         None,
                     )
-                except Exception:
-                    print(traceback.format_exc())
-                    raise
+                except Exception as e:
+                    logger.error(e, extra={'group': group, 'trace': traceback.format_exc()})
+
                 count += 1
             return f'Expired {count} premium groups.'
         return 'Never ran, premium features are not enabled.'
@@ -206,14 +206,14 @@ class SendGroupPremiumExpirationWarningEmails(CosinnusCronJobBase):
                         'cosinnus/mail/group_premium_expires_soon_notification.html',
                         None,
                     )
-                except Exception:
-                    print(traceback.format_exc())
-                    raise
+                except Exception as e:
+                    logger.error(e, extra={'group': group, 'trace': traceback.format_exc()})
+                else:
+                    # add marker field
+                    group.settings['last_warned_for_premium_choices_until'] = group.enable_user_premium_choices_until
+                    group.save()
+                    count += 1
 
-                # add marker field
-                group.settings['last_warned_for_premium_choices_until'] = group.enable_user_premium_choices_until
-                group.save()
-                count += 1
             return f'Sent {count} warning emails.'
         return 'Never ran, premium features are not enabled.'
 
