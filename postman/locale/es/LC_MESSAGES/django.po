@@ -6,6 +6,7 @@
 # Patrick Samson <maxcom@laposte.net>, 2011
 # Erik Rivera <erik.river@gmail.com>, 2011
 # <matiasherranz@gmail.com>, 2012
+#: postman/models.py
 msgid ""
 msgstr ""
 "Project-Id-Version: django-postman\n"
@@ -20,355 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Sender and Recipient cannot be both undefined."
-msgstr "Remitente y el destinatario no puede ser indefinido."
-
-msgid "Visitor's email is in excess."
-msgstr "Correo del visitante esta en exceso."
-
-msgid "Visitor's email is missing."
-msgstr "Correo del visitante no se encuentra."
-
-msgid "Reading date must be later than sending date."
-msgstr "Fecha de lectura debe ser posterior a la fecha de envío."
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr "Fecha de eliminación por el remitente debe ser posterior a la fecha de envío."
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr "Fecha de eliminación por el destinatario debe ser posterior a la fecha de envío."
-
-msgid "Response date must be later than sending date."
-msgstr "Fecha de respuesta debe ser posterior a la fecha de envío."
-
-msgid "The message cannot be replied without having been read."
-msgstr "El mensaje no puede ser respondido sin haberlo leído."
-
-msgid "Response date must be later than reading date."
-msgstr "Fecha de respuesta debe ser posterior a la fecha de lectura."
-
-msgid "Response date cannot be set without at least one reply."
-msgstr "Fecha de respuesta no se puede establecer sin al menos una respuesta."
-
-msgid "The message cannot be replied without being in a conversation."
-msgstr "El mensaje no puede ser respondido sin estar en una conversación."
-
-msgid "Message"
-msgstr "Mensaje"
-
-msgid "Dates"
-msgstr "Fechas"
-
-msgid "Moderation"
-msgstr "Moderación"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr "Algunos usuarios son desconocidos o no están activos: {users}."
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr "Asegúrese de que este valor tiene mas de {limit_value} elementos distintos (este tiene {show_value})."
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr "Asegúrese de que este valor tiene por lo menos {limit_value} elementos distintos (este tiene {show_value})."
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr "Algunos usuarios son rechazados: {users}."
-
-#, python-brace-format
-msgid "{username}"
-msgstr "{username}"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr "{username} ({reason})"
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr "La escritura a algunos usuarios no es posible: {users}."
-
-msgid "Recipients"
-msgstr "Destinatarios"
-
-msgid "Recipient"
-msgstr "Destinatario"
-
-msgid "Email"
-msgstr "Correo"
-
-msgid "Undefined recipient."
-msgstr "Destinatario no definido."
-
-msgid "Additional recipients"
-msgstr "Destinatarios adicionales"
-
-msgid "Additional recipient"
-msgstr "Destinatario adicional"
-
-msgid "Message Rejected"
-msgstr "Mensaje rechazado"
-
-msgid "Your message has been rejected"
-msgstr "Tu mensaje ha sido rechazada"
-
-msgid "Message Received"
-msgstr "Mensaje recibido"
-
-msgid "You have received a message"
-msgstr "Ha recibido un mensaje"
-
-msgid "Reply Received"
-msgstr "Respuesta recibida"
-
-msgid "You have received a reply"
-msgstr "Ha recibido una respuesta"
-
-msgid "Pending"
-msgstr "Pendiente"
-
-msgid "Accepted"
-msgstr "Aceptado"
-
-msgid "Rejected"
-msgstr "Rechazado"
-
-msgid "subject"
-msgstr "asunto"
-
-msgid "body"
-msgstr "contenido"
-
-msgid "sender"
-msgstr "emisor"
-
-msgid "recipient"
-msgstr "destinatario"
-
-msgid "visitor"
-msgstr "visitante"
-
-msgid "parent message"
-msgstr "mensaje padre"
-
-msgid "root message"
-msgstr "mensaje raíz"
-
-msgid "sent at"
-msgstr "enviado a"
-
-msgid "read at"
-msgstr "leído a"
-
-msgid "replied at"
-msgstr "respondido a"
-
-msgid "archived by sender"
-msgstr "archivado por el remitente"
-
-msgid "archived by recipient"
-msgstr "archivado por el destinatario"
-
-msgid "deleted by sender at"
-msgstr "eliminado por el remitente el"
-
-msgid "deleted by recipient at"
-msgstr "eliminado por el destinatario el"
-
-msgid "status"
-msgstr "estado"
-
-msgid "moderator"
-msgstr "moderador"
-
-msgid "moderated at"
-msgstr "moderado el"
-
-msgid "rejection reason"
-msgstr "motivo de rechazo"
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-msgid "message"
-msgstr "mensaje"
-
-msgid "messages"
-msgstr "mensajes"
-
-msgid "Undefined sender."
-msgstr "Remitente no definido."
-
-msgid "pending message"
-msgstr "mensaje pendiente"
-
-msgid "pending messages"
-msgstr "mensajes pendientes"
-
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] "Por favor, corrija el siguiente error."
-msgstr[1] "Por favor, corrija los siguientes errores."
-
-msgid "Accept"
-msgstr "Aceptar"
-
-msgid "Reject"
-msgstr "Rechazar"
-
-msgid "Archived Messages"
-msgstr "Mensajes archivados"
-
-msgid "Messages in this folder will never be removed. You can use this folder for long term storage."
-msgstr "Los mensajes en esta carpeta no serán eliminados. Puede utilizar esta carpeta para el almacenamiento a largo plazo."
-
-msgid "Messaging"
-msgstr "Mensajería"
-
-msgid "Inbox"
-msgstr "Recibidos"
-
-msgid "Sent Messages"
-msgstr "Mensajes enviados"
-
-msgid "Write"
-msgstr "Escribe"
-
-msgid "Archives"
-msgstr "Archivos"
-
-msgid "Trash"
-msgstr "Papelera"
-
-msgid "Sorry, this page number is invalid."
-msgstr "Lo sentimos, este número de la página no es válida."
-
-msgid "by conversation"
-msgstr "por conversación"
-
-msgid "by message"
-msgstr "por mensaje"
-
-msgid "Delete"
-msgstr "Eliminar"
-
-msgid "Archive"
-msgstr "Archivar"
-
-msgid "Undelete"
-msgstr "Recuperar"
-
-msgid "Action"
-msgstr "Acción"
-
-msgid "Sender"
-msgstr "Emisor"
-
-msgid "Subject"
-msgstr "Asunto"
-
-msgid "Date"
-msgstr "Fecha"
-
-msgid "g:i A,M j,n/j/y"
-msgstr "G:i,j b,j/n/y"
-
-msgid "No messages."
-msgstr "No hay mensajes."
-
-msgid "Send"
-msgstr "Enviar"
-
-msgid "Dear user,"
-msgstr "Estimado usuario,"
-
-#, python-format
-msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
-msgstr "En la fecha %(date)s, solicitaste que se envíe un mensaje al usuario '%(recipient)s'."
-
-msgid "Your message has been rejected by the moderator"
-msgstr "Tu mensaje ha sido rechazado por el moderador"
-
-msgid ", for the following reason:"
-msgstr ", por las siguientes razones:"
-
-#, python-format
-msgid "On %(date)s, you sent a message to the user '%(sender)s'."
-msgstr "En la fecha %(date)s, enviaste un mensaje al usuario '%(sender)s'."
-
-msgid "Your correspondent has given you an answer."
-msgstr "Su interlocutor le ha dado una respuesta."
-
-#, python-format
-msgid "You have received a copy of a response from the user '%(sender)s'."
-msgstr "Usted ha recibido una copia de una respuesta del usuario '%(sender)s'."
-
-#, python-format
-msgid "You have received a message from the user '%(sender)s'."
-msgstr "Ha recibido un mensaje de el usuario '%(sender)s'."
-
-msgid "Thank you again for your interest in our services."
-msgstr "Gracias de nuevo por su interés en nuestros servicios."
-
-msgid "The site administrator"
-msgstr "El administrador del sitio"
-
-msgid ""
-"Note: This message is issued by an automated system.\n"
-"Do not reply, this would not be taken into account."
-msgstr "Nota: Este mensaje es emitido de forma automática. No responda, no se tendrán en cuenta."
-
-#, python-format
-msgid "Message \"%(subject)s\" on the site %(sitename)s"
-msgstr "Mensaje \"%(subject)s\" en el sitio %(sitename)s"
-
-msgid "Dear visitor,"
-msgstr "Estimado visitante,"
-
-msgid "As a reminder, please find below the content of your message."
-msgstr "Como recordatorio, se adjunta a continuación el contenido de su mensaje."
-
-msgid "Please find below the answer from your correspondent."
-msgstr "A continuación encontrará la respuesta de su interlocutor."
-
-msgid "For more comfort, we encourage you to open an account on the site."
-msgstr "Para mayor comodidad, le recomendamos que abra una cuenta en el sitio."
-
-msgid "Received Messages"
-msgstr "Mensajes recibidos"
-
-msgid "Received"
-msgstr "Recibido"
-
-msgid "Reply"
-msgstr "Responder"
-
-msgid "Sent"
-msgstr "Enviado"
-
-msgid "Deleted Messages"
-msgstr "Mensajes eliminados"
-
-msgid "Messages in this folder can be removed from time to time. For long term storage, use instead the archive folder."
-msgstr "Los mensajes en esta carpeta pueden ser borrados de tanto en tanto. No utilice esta carpeta para almacenamiento a largo plazo."
-
-msgid "Conversation"
-msgstr "Conversación"
-
-msgid ":"
-msgstr " :"
-
-msgid "Back"
-msgstr "Volver"
-
-msgid "<me>"
-msgstr "<usuario>"
-
-msgid "> "
-msgstr "> "
-
+#: postman/utils.py
 #, python-brace-format
 msgid ""
 "\n"
@@ -381,27 +34,506 @@ msgstr ""
 "{sender} scribió:\n"
 "{body}\n"
 
+#: postman/templates/postman/email_user.txt
+#: postman/templates/postman/email_visitor.txt
+msgid ", for the following reason:"
+msgstr ", por las siguientes razones:"
+
+#: postman/templates/postman/view.html
+msgid ":"
+msgstr " :"
+
+#: postman/templatetags/postman_tags.py
+msgid "<me>"
+msgstr "<usuario>"
+
+#: postman/utils.py
+msgid "> "
+msgstr "> "
+
+#: postman/templates/admin/postman/pendingmessage/submit_line.html
+msgid "Accept"
+msgstr "Aceptar"
+
+#: postman/models.py
+msgid "Accepted"
+msgstr "Aceptado"
+
+#: postman/templates/postman/base_folder.html
+msgid "Action"
+msgstr "Acción"
+
+#: postman/forms.py
+msgid "Additional recipient"
+msgstr "Destinatario adicional"
+
+#: postman/forms.py
+msgid "Additional recipients"
+msgstr "Destinatarios adicionales"
+
+#: postman/templates/postman/base_folder.html
+#: postman/templates/postman/view.html
+msgid "Archive"
+msgstr "Archivar"
+
+#: postman/templates/postman/archives.html
+msgid "Archived Messages"
+msgstr "Mensajes archivados"
+
+#: postman/templates/postman/base.html
+msgid "Archives"
+msgstr "Archivos"
+
+#: postman/templates/postman/email_visitor.txt
+msgid "As a reminder, please find below the content of your message."
+msgstr "Como recordatorio, se adjunta a continuación el contenido de su mensaje."
+
+#: postman/templates/postman/view.html
+msgid "Back"
+msgstr "Volver"
+
+#: postman/templates/postman/view.html
+msgid "Conversation"
+msgstr "Conversación"
+
+#: postman/templates/postman/base_folder.html
+msgid "Date"
+msgstr "Fecha"
+
+#: postman/admin.py
+msgid "Dates"
+msgstr "Fechas"
+
+#: postman/templates/postman/email_user.txt
+msgid "Dear user,"
+msgstr "Estimado usuario,"
+
+#: postman/templates/postman/email_visitor.txt
+msgid "Dear visitor,"
+msgstr "Estimado visitante,"
+
+#: postman/templates/postman/base_folder.html
+#: postman/templates/postman/view.html
+msgid "Delete"
+msgstr "Eliminar"
+
+#: postman/templates/postman/trash.html
+msgid "Deleted Messages"
+msgstr "Mensajes eliminados"
+
+#: postman/admin.py
+msgid "Deletion date by recipient must be later than sending date."
+msgstr "Fecha de eliminación por el destinatario debe ser posterior a la fecha de envío."
+
+#: postman/admin.py
+msgid "Deletion date by sender must be later than sending date."
+msgstr "Fecha de eliminación por el remitente debe ser posterior a la fecha de envío."
+
+#: postman/models.py
+msgid "Direct Reply Hash"
+msgstr ""
+
+#: postman/forms.py
+msgid "Email"
+msgstr "Correo"
+
+#: postman/fields.py
+#, python-brace-format
+msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
+msgstr "Asegúrese de que este valor tiene por lo menos {limit_value} elementos distintos (este tiene {show_value})."
+
+#: postman/fields.py
+#, python-brace-format
+msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
+msgstr "Asegúrese de que este valor tiene mas de {limit_value} elementos distintos (este tiene {show_value})."
+
+#: postman/templates/postman/email_visitor.txt
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr "Para mayor comodidad, le recomendamos que abra una cuenta en el sitio."
+
+#: postman/templates/postman/base.html
+msgid "Inbox"
+msgstr "Recibidos"
+
+#: postman/admin.py postman/templates/postman/view.html
+msgid "Message"
+msgstr "Mensaje"
+
+#: postman/templates/postman/email_user_subject.txt
+#: postman/templates/postman/email_visitor_subject.txt
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr "Mensaje \"%(subject)s\" en el sitio %(sitename)s"
+
+#: postman/management/__init__.py
+msgid "Message Received"
+msgstr "Mensaje recibido"
+
+#: postman/management/__init__.py
+msgid "Message Rejected"
+msgstr "Mensaje rechazado"
+
+#: postman/views.py
+msgid "Message rejected for at least one recipient."
+msgstr "Mensaje rechazado por al menos un destinatario."
+
+#: postman/views.py
+msgid "Message successfully sent."
+msgstr "Mensaje enviado con éxito."
+
+#: postman/templates/postman/trash.html
+msgid "Messages in this folder can be removed from time to time. For long term storage, use instead the archive folder."
+msgstr "Los mensajes en esta carpeta pueden ser borrados de tanto en tanto. No utilice esta carpeta para almacenamiento a largo plazo."
+
+#: postman/templates/postman/archives.html
+msgid "Messages in this folder will never be removed. You can use this folder for long term storage."
+msgstr "Los mensajes en esta carpeta no serán eliminados. Puede utilizar esta carpeta para el almacenamiento a largo plazo."
+
+#: postman/views.py
+msgid "Messages or conversations successfully archived."
+msgstr "Mensajes o conversaciones archivados con éxito."
+
+#: postman/views.py
+msgid "Messages or conversations successfully deleted."
+msgstr "Mensajes o conversaciones eliminados con éxito."
+
+#: postman/views.py
+msgid "Messages or conversations successfully recovered."
+msgstr "Mensajes o conversaciones recuperados con éxito."
+
+#: postman/templates/postman/base.html
+msgid "Messaging"
+msgstr "Mensajería"
+
+#: postman/admin.py
+msgid "Moderation"
+msgstr "Moderación"
+
+#: postman/templates/postman/base_folder.html
+msgid "No messages."
+msgstr "No hay mensajes."
+
+#: postman/templates/postman/email_user.txt
+#: postman/templates/postman/email_visitor.txt
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr "Nota: Este mensaje es emitido de forma automática. No responda, no se tendrán en cuenta."
+
+#: postman/templates/postman/email_user.txt
+#: postman/templates/postman/email_visitor.txt
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr "En la fecha %(date)s, solicitaste que se envíe un mensaje al usuario '%(recipient)s'."
+
+#: postman/templates/postman/email_user.txt
+#: postman/templates/postman/email_visitor.txt
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender)s'."
+msgstr "En la fecha %(date)s, enviaste un mensaje al usuario '%(sender)s'."
+
+#: postman/views.py
+msgid "Only Administrators may send a message to this project/group!"
+msgstr ""
+
+#: postman/models.py
+msgid "Pending"
+msgstr "Pendiente"
+
+#: postman/templates/admin/postman/pendingmessage/change_form.html
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Por favor, corrija el siguiente error."
+msgstr[1] "Por favor, corrija los siguientes errores."
+
+#: postman/templates/postman/email_visitor.txt
+msgid "Please find below the answer from your correspondent."
+msgstr "A continuación encontrará la respuesta de su interlocutor."
+
+#: postman/utils.py
 #, python-brace-format
 msgid "Re: {subject}"
 msgstr "Re: {subject}"
 
-msgid "Message successfully sent."
-msgstr "Mensaje enviado con éxito."
+#: postman/admin.py
+msgid "Reading date must be later than sending date."
+msgstr "Fecha de lectura debe ser posterior a la fecha de envío."
 
-msgid "Message rejected for at least one recipient."
-msgstr "Mensaje rechazado por al menos un destinatario."
+#: postman/templates/postman/inbox.html
+msgid "Received"
+msgstr "Recibido"
 
-msgid "Only Administrators may send a message to this project/group!"
-msgstr ""
+#: postman/templates/postman/inbox.html
+msgid "Received Messages"
+msgstr "Mensajes recibidos"
 
+#: postman/forms.py postman/templates/postman/base_folder.html
+#: postman/templates/postman/reply.html
+msgid "Recipient"
+msgstr "Destinatario"
+
+#: postman/forms.py
+msgid "Recipients"
+msgstr "Destinatarios"
+
+#: postman/templates/admin/postman/pendingmessage/submit_line.html
+msgid "Reject"
+msgstr "Rechazar"
+
+#: postman/models.py postman/templates/postman/view.html
+msgid "Rejected"
+msgstr "Rechazado"
+
+#: postman/templates/postman/reply.html postman/templates/postman/view.html
+msgid "Reply"
+msgstr "Responder"
+
+#: postman/management/__init__.py
+msgid "Reply Received"
+msgstr "Respuesta recibida"
+
+#: postman/admin.py
+msgid "Response date cannot be set without at least one reply."
+msgstr "Fecha de respuesta no se puede establecer sin al menos una respuesta."
+
+#: postman/admin.py
+msgid "Response date must be later than reading date."
+msgstr "Fecha de respuesta debe ser posterior a la fecha de lectura."
+
+#: postman/admin.py
+msgid "Response date must be later than sending date."
+msgstr "Fecha de respuesta debe ser posterior a la fecha de envío."
+
+#: postman/views.py
 msgid "Select at least one object."
 msgstr "Seleccione al menos un objeto."
 
-msgid "Messages or conversations successfully archived."
-msgstr "Mensajes o conversaciones archivados con éxito."
+#: postman/templates/postman/base_write.html
+msgid "Send"
+msgstr "Enviar"
 
-msgid "Messages or conversations successfully deleted."
-msgstr "Mensajes o conversaciones eliminados con éxito."
+#: postman/templates/postman/base_folder.html
+msgid "Sender"
+msgstr "Emisor"
 
-msgid "Messages or conversations successfully recovered."
-msgstr "Mensajes o conversaciones recuperados con éxito."
+#: postman/admin.py
+msgid "Sender and Recipient cannot be both undefined."
+msgstr "Remitente y el destinatario no puede ser indefinido."
+
+#: postman/templates/postman/sent.html
+msgid "Sent"
+msgstr "Enviado"
+
+#: postman/templates/postman/base.html postman/templates/postman/sent.html
+msgid "Sent Messages"
+msgstr "Mensajes enviados"
+
+#: postman/fields.py
+#, python-brace-format
+msgid "Some usernames are rejected: {users}."
+msgstr "Algunos usuarios son rechazados: {users}."
+
+#: postman/fields.py
+#, python-brace-format
+msgid "Some usernames are unknown or no longer active: {users}."
+msgstr "Algunos usuarios son desconocidos o no están activos: {users}."
+
+#: postman/templates/postman/base_folder.html
+msgid "Sorry, this page number is invalid."
+msgstr "Lo sentimos, este número de la página no es válida."
+
+#: postman/templates/postman/base_folder.html
+msgid "Subject"
+msgstr "Asunto"
+
+#: postman/templates/postman/email_user.txt
+#: postman/templates/postman/email_visitor.txt
+msgid "Thank you again for your interest in our services."
+msgstr "Gracias de nuevo por su interés en nuestros servicios."
+
+#: postman/admin.py
+msgid "The message cannot be replied without being in a conversation."
+msgstr "El mensaje no puede ser respondido sin estar en una conversación."
+
+#: postman/admin.py
+msgid "The message cannot be replied without having been read."
+msgstr "El mensaje no puede ser respondido sin haberlo leído."
+
+#: postman/templates/postman/email_user.txt
+#: postman/templates/postman/email_visitor.txt
+msgid "The site administrator"
+msgstr "El administrador del sitio"
+
+#: postman/templates/postman/base.html
+msgid "Trash"
+msgstr "Papelera"
+
+#: postman/forms.py
+msgid "Undefined recipient."
+msgstr "Destinatario no definido."
+
+#: postman/models.py
+msgid "Undefined sender."
+msgstr "Remitente no definido."
+
+#: postman/templates/postman/base_folder.html
+msgid "Undelete"
+msgstr "Recuperar"
+
+#: postman/admin.py
+msgid "Visitor's email is in excess."
+msgstr "Correo del visitante esta en exceso."
+
+#: postman/admin.py
+msgid "Visitor's email is missing."
+msgstr "Correo del visitante no se encuentra."
+
+#: postman/templates/postman/base.html postman/templates/postman/write.html
+msgid "Write"
+msgstr "Escribe"
+
+#: postman/forms.py
+#, python-brace-format
+msgid "Writing to some users is not possible: {users}."
+msgstr "La escritura a algunos usuarios no es posible: {users}."
+
+#: postman/templates/postman/email_user.txt
+#, python-format
+msgid "You have received a copy of a response from the user '%(sender)s'."
+msgstr "Usted ha recibido una copia de una respuesta del usuario '%(sender)s'."
+
+#: postman/management/__init__.py
+msgid "You have received a message"
+msgstr "Ha recibido un mensaje"
+
+#: postman/templates/postman/email_user.txt
+#, python-format
+msgid "You have received a message from the user '%(sender)s'."
+msgstr "Ha recibido un mensaje de el usuario '%(sender)s'."
+
+#: postman/management/__init__.py
+msgid "You have received a reply"
+msgstr "Ha recibido una respuesta"
+
+#: postman/templates/postman/email_user.txt
+msgid "Your correspondent has given you an answer."
+msgstr "Su interlocutor le ha dado una respuesta."
+
+#: postman/management/__init__.py
+msgid "Your message has been rejected"
+msgstr "Tu mensaje ha sido rechazada"
+
+#: postman/templates/postman/email_user.txt
+#: postman/templates/postman/email_visitor.txt
+msgid "Your message has been rejected by the moderator"
+msgstr "Tu mensaje ha sido rechazado por el moderador"
+
+#: postman/models.py
+msgid "archived by recipient"
+msgstr "archivado por el destinatario"
+
+#: postman/models.py
+msgid "archived by sender"
+msgstr "archivado por el remitente"
+
+#: postman/models.py
+msgid "body"
+msgstr "contenido"
+
+#: postman/templates/postman/base_folder.html
+msgid "by conversation"
+msgstr "por conversación"
+
+#: postman/templates/postman/base_folder.html
+msgid "by message"
+msgstr "por mensaje"
+
+#: postman/models.py
+msgid "deleted by recipient at"
+msgstr "eliminado por el destinatario el"
+
+#: postman/models.py
+msgid "deleted by sender at"
+msgstr "eliminado por el remitente el"
+
+#: postman/templates/postman/base_folder.html
+msgid "g:i A,M j,n/j/y"
+msgstr "G:i,j b,j/n/y"
+
+#: postman/models.py
+msgid "message"
+msgstr "mensaje"
+
+#: postman/models.py
+msgid "messages"
+msgstr "mensajes"
+
+#: postman/models.py
+msgid "moderated at"
+msgstr "moderado el"
+
+#: postman/models.py
+msgid "moderator"
+msgstr "moderador"
+
+#: postman/models.py
+msgid "parent message"
+msgstr "mensaje padre"
+
+#: postman/models.py
+msgid "pending message"
+msgstr "mensaje pendiente"
+
+#: postman/models.py
+msgid "pending messages"
+msgstr "mensajes pendientes"
+
+#: postman/models.py
+msgid "read at"
+msgstr "leído a"
+
+#: postman/models.py
+msgid "recipient"
+msgstr "destinatario"
+
+#: postman/models.py
+msgid "rejection reason"
+msgstr "motivo de rechazo"
+
+#: postman/models.py
+msgid "replied at"
+msgstr "respondido a"
+
+#: postman/models.py
+msgid "root message"
+msgstr "mensaje raíz"
+
+#: postman/models.py
+msgid "sender"
+msgstr "emisor"
+
+#: postman/models.py
+msgid "sent at"
+msgstr "enviado a"
+
+#: postman/models.py
+msgid "status"
+msgstr "estado"
+
+#: postman/models.py
+msgid "subject"
+msgstr "asunto"
+
+#: postman/models.py
+msgid "visitor"
+msgstr "visitante"
+
+#: postman/fields.py postman/forms.py
+#, python-brace-format
+msgid "{username}"
+msgstr "{username}"
+
+#: postman/fields.py postman/forms.py
+#, python-brace-format
+msgid "{username} ({reason})"
+msgstr "{username} ({reason})"

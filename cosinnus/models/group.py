@@ -1919,6 +1919,9 @@ class CosinnusBaseGroup(
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self})
 
+    def get_microsite_url(self):
+        return group_aware_reverse('cosinnus:group-microsite', kwargs={'group': self})
+
     def get_edit_url(self):
         return group_aware_reverse('cosinnus:group-edit', kwargs={'group': self})
 
@@ -2511,6 +2514,17 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
                     )
 
     UserGroupGuestAccessDeleteThread().start()
+
+
+@receiver(signals.user_deactivated)
+def remove_stale_pending_memberships(sender, user, **kwargs):
+    """
+    Delete all pending group memberships for a user on deactivation.
+    """
+    # lazy import to prevent circular import error
+    from cosinnus.tasks import remove_pending_memberships_for_user_task
+
+    remove_pending_memberships_for_user_task.delay(user.id)
 
 
 def replace_swapped_group_model():

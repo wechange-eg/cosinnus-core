@@ -122,14 +122,8 @@ msgstr "Filtruj według kraju"
 msgid "Happening now"
 msgstr "W trakcie"
 
-msgid ""
-"If you click, you will leave the video conference. Are you sure you want to "
-"leave? Tip: Alternatively, you can open the link in a new tab or window and "
-"stay in the event."
-msgstr ""
-"Jeśli klikniesz na „Tak”, to opuścisz wideokonferencję. Jesteś pewna/y, że "
-"chcesz opuścić tę wideokonferencję? Wskazówka: alternatywnie możesz otworzyć"
-" link w nowej zakładce lub w nowym oknie i dalej uczestniczyć w wydarzeniu."
+msgid "If you click, you will leave the video conference. Are you sure you want to leave? Tip: Alternatively, you can open the link in a new tab or window and stay in the event."
+msgstr "Jeśli klikniesz na „Tak”, to opuścisz wideokonferencję. Jesteś pewna/y, że chcesz opuścić tę wideokonferencję? Wskazówka: alternatywnie możesz otworzyć link w nowej zakładce lub w nowym oknie i dalej uczestniczyć w wydarzeniu."
 
 #. [Manage conference]
 #. defaultMessage is:
@@ -305,12 +299,8 @@ msgstr "Nadchodzące wydarzenie"
 msgid "Yes"
 msgstr "Tak"
 
-msgid ""
-"You're currently attending an event. Are you sure you want to leave? Tip: "
-"You can open a new tab or window instead."
-msgstr ""
-"Właśnie uczestniczysz w wydarzeniu. Czy na pewno chcesz opuścić to "
-"wydarzenie? Wskazówka: Zamiast tego możesz otworzyć nową kartę lub okno."
+msgid "You're currently attending an event. Are you sure you want to leave? Tip: You can open a new tab or window instead."
+msgstr "Właśnie uczestniczysz w wydarzeniu. Czy na pewno chcesz opuścić to wydarzenie? Wskazówka: Zamiast tego możesz otworzyć nową kartę lub okno."
 
 #. [hidden]
 #. defaultMessage is:
@@ -345,27 +335,19 @@ msgstr "uczestniczki/ek i uczestnicy/ków"
 msgid "places left"
 msgstr "wolne miejsce/wolne miejsca/wolnych miejsc"
 
-msgid ""
-"Your profile is not shown here or not displayed correctly? Add to your "
-"profile or make yourself visible to other conference participants."
+msgid "Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants."
 msgstr ""
 
 msgid "Edit Profile"
 msgstr ""
 
-msgid ""
-"You can only join this meeting if you accept being recorded. To join this "
-"meeting please reload this page to try again."
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
 msgstr ""
 
 msgid "Do you consent to be recorded?"
 msgstr ""
 
-msgid ""
-"This session may be recorded by the organizers. By continuing, you consent "
-"to be recorded. This includes audio, video, chat, shared notes and "
-"whiteboard activities. The recording may be shared according to the "
-"organizers."
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 
 msgid "Copy invitation"

@@ -10,6 +10,7 @@ from django.core.management.color import no_style
 from django.db import DEFAULT_DB_ALIAS, connections, router
 
 
+# registered as receiver for `post_migration` in cosinnus.apps.CosinnusAppConfig.ready
 def ensure_portal_and_site_exist(
     app_config,
     verbosity=2,
