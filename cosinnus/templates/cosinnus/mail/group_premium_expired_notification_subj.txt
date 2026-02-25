@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %} {% with group_name=group.name %}{% if group.type == 0 %} {% blocktrans %}The booking for Videoconference Pro for the project "{{ group_name }}" has ended.{% endblocktrans %} {% else %} {% blocktrans %}The booking for Videoconference Pro for the group "{{ group_name }}" has ended.{% endblocktrans %} {% endif %}{% endwith %}

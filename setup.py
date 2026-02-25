@@ -151,7 +151,7 @@ setup(
         'six==1.12.0',
         'sqlparse==0.5.0',
         'sentry-sdk==1.14.0',
-        'python-dateutil==2.8.2',
+        'python-dateutil==2.9.0.post0',
         'urllib3==1.26.19',
         'pytz==2022.6',
         'rdflib==5.0.0',
@@ -174,6 +174,8 @@ setup(
         'tblib==3.0.0',
         'django_extended_makemessages==1.7.1',
         'caldav==2.1.2',
+        # test requirements
+        'freezegun==1.5.1',
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django-update-4-2#egg=django-awesome-avatar',
         'django-filer @ git+https://github.com/wechange-eg/django-filer.git@django-update-4-2#egg=django-filer',
