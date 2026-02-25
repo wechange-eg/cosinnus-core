@@ -93,9 +93,8 @@ msgid ""
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "  Describe the project in a few sentences. This description will be publicly visible."
-msgstr "Describe the project in a few sentences."
+msgstr ""
 
 #: cosinnus_oauth_client/templates/socialaccount/snippets/provider_list.html
 #, python-format
@@ -131,9 +130,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: cosinnus_oauth_client/templates/cosinnus_oauth_client/connection_detail.html
-#, fuzzy, python-format
+#, python-format
 msgid " Do you really want to connect your account with the one on %(provider)s ? "
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus_oauth_client/templates/cosinnus_oauth_client/connection_detail.html
 #, python-format
@@ -196,9 +195,9 @@ msgid "%(count)d User account(s) were deactivated successfully. They will be del
 msgstr ""
 
 #: cosinnus/admin.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)d User account(s) were deleted successfully."
-msgstr "Your activity feed was deleted successfully."
+msgstr ""
 
 #: cosinnus/admin.py
 #, python-format
@@ -339,30 +338,18 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
 msgstr[0] ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 msgstr[1] ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
 msgstr[0] ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 msgstr[1] ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 #, python-format
@@ -400,17 +387,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
 msgstr[0] ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 msgstr[1] ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 #, python-format
@@ -477,50 +458,44 @@ msgid "%(sender_name)s assigned the todo %(object_name)s to you"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s assigned you %(count)d tasks"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s assigned you a task"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s assigned you the task %(object_name)s"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s assigned you the task %(object_name)s."
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s change the due date of a task"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s changed the due data of %(count)d tasks"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s changed the due date of the task %(object_name)s"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s changed the due date of the task %(object_name)s."
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_event/cosinnus_notifications.py
 #, python-format
@@ -528,9 +503,9 @@ msgid "%(sender_name)s changed the event poll %(object_name)s"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on %(count)d tasks"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/notifications/tagged_event_comment_posted_subject.txt
 #, python-format
@@ -538,36 +513,24 @@ msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on a news post"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on a news post you commented in"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/templates/cosinnus_note/notifications/note_comment_posted_on_commented_post_subject.txt
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on a news post you commented in, in %(team_name)s."
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on a news posts you are following"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_poll/cosinnus_notifications.py
 #, python-format
@@ -715,20 +678,14 @@ msgid "%(sender_name)s commented on one of your events in %(team_name)s."
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on one of your news posts"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/templates/cosinnus_note/notifications/note_comment_posted_subject.txt
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 #, python-format
@@ -761,20 +718,14 @@ msgid "%(sender_name)s commented on the event %(object_name)s"
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on the news post %(object_name)s"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 #, python-format
@@ -787,28 +738,19 @@ msgid "%(sender_name)s commented on the poll %(object_name)s"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on the task"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on the task %(object_name)s"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on the task %(object_name)s."
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_todo/cosinnus_notifications.py
 #, python-format
@@ -831,20 +773,14 @@ msgid "%(sender_name)s commented on your event %(object_name)s"
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on your news post"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s commented on your news post %(object_name)s"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 #, python-format
@@ -932,12 +868,9 @@ msgid "%(sender_name)s completed your todo"
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created %(count)d conferences"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus_event/cosinnus_notifications.py
 #, python-format
@@ -950,12 +883,9 @@ msgid "%(sender_name)s created %(count)d events"
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created %(count)d news posts"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 #, python-format
@@ -963,9 +893,9 @@ msgid "%(sender_name)s created %(count)d offers"
 msgstr ""
 
 #: cosinnus_etherpad/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created %(count)d pads"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_poll/cosinnus_notifications.py
 #, python-format
@@ -973,9 +903,9 @@ msgid "%(sender_name)s created %(count)d polls"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created %(count)d tasks"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_todo/cosinnus_notifications.py
 #, python-format
@@ -988,9 +918,9 @@ msgid "%(sender_name)s created a new etherpad"
 msgstr "%(sender_name)s created a new Pad"
 
 #: cosinnus_etherpad/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created a new etherpad in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_event/cosinnus_notifications.py
 #, python-format
@@ -1023,20 +953,14 @@ msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created a new news post"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 #, python-format
@@ -1064,25 +988,19 @@ msgid "%(sender_name)s created a new todo"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created a task"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created a task in %(team_name)s."
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created the conference %(object_name)s"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus_event/cosinnus_notifications.py
 #, python-format
@@ -1095,12 +1013,9 @@ msgid "%(sender_name)s created the event poll %(object_name)s"
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created the news post %(object_name)s"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 #, python-format
@@ -1108,9 +1023,9 @@ msgid "%(sender_name)s created the offer %(object_name)s"
 msgstr ""
 
 #: cosinnus_etherpad/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created the pad %(object_name)s"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_poll/cosinnus_notifications.py
 #, python-format
@@ -1118,9 +1033,9 @@ msgid "%(sender_name)s created the poll %(object_name)s"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s created the task %(object_name)s"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_todo/cosinnus_notifications.py
 #, python-format
@@ -1148,20 +1063,14 @@ msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_nam
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s invited you"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/cosinnus_notifications.py
 #, python-format
@@ -1169,12 +1078,9 @@ msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_na
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s invited you to apply for the conference %(team_name)s"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/cosinnus_notifications.py
 #, python-format
@@ -1182,12 +1088,9 @@ msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s invited you to join %(team_name)s"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/cosinnus_notifications.py
 #, python-format
@@ -1195,12 +1098,9 @@ msgid "%(sender_name)s is interested in networking with you. Check out the user'
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/cosinnus_notifications.py
 #, python-format
@@ -1233,99 +1133,75 @@ msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s marked %(count)d tasks as done"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s marked %(count)d tasks as undone"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s marked a task as done"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s marked a task as undone"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as done"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as done."
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as undone"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s marked the task %(object_name)s as undone."
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s mentioned you in a comment of %(count)d tasks"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s mentioned you in a comment on the task %(object_name)s."
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s mentioned you in a task comment"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/cosinnus_notifications.py
 #: cosinnus_note/templates/cosinnus_note/notifications/note_created_subject.txt
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s posted in %(team_name)s:"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_todo/cosinnus_notifications.py
 #, python-format
@@ -1373,35 +1249,29 @@ msgid "%(sender_name)s tagged you in %(object_name)s"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s unassigned you from %(count)d tasks"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s unassigned you from a task"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s unassigned you from the task %(object_name)s"
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s unassigned you from the task %(object_name)s."
-msgstr "%(sender_name)s created a new Pad"
+msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s updated a news post you are following"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_poll/cosinnus_notifications.py
 #, python-format
@@ -1439,12 +1309,9 @@ msgid "%(sender_name)s updated the event %(object_name)s"
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "%(sender_name)s updated the news post %(object_name)s"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 #, python-format
@@ -1510,19 +1377,19 @@ msgid "%(site_name)s CSV import was successful"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy, python-format
+#, python-format
 msgid "%(team_name)s - Admins"
-msgstr "%(team_name)s - Members"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy, python-format
+#, python-format
 msgid "%(team_name)s - Assigned organizations"
-msgstr "%(team_name)s - Members"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy, python-format
+#, python-format
 msgid "%(team_name)s - Assigned projects/groups"
-msgstr "%(team_name)s - Members"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #, python-format
@@ -1661,9 +1528,8 @@ msgid "(one per line or comma-seperated)"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "(re)set password"
-msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/feedback/report_modal.html
 msgid "(required)"
@@ -1924,17 +1790,14 @@ msgid "A message from %(sender_full_name)s"
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus_etherpad/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "A new etherpad: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "A new Pad: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr ""
 
 #: cosinnus_etherpad/cosinnus_notifications.py
 #: cosinnus_etherpad/templates/cosinnus_etherpad/notifications/etherpad_created_subject.txt
@@ -2015,12 +1878,9 @@ msgid "A new verification email has been sent."
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
 msgstr ""
-"Hi, %(creator_name)s!\n"
-"\n"
-"%(user_name)s has posted a comment on a news post you wrote in project %(team_name)s:"
 
 #: cosinnus/models/managed_tags.py
 msgid "A paired group will automatically be joined by all users assigned to this object."
@@ -2126,28 +1986,24 @@ msgid "A user commented on a event you were tagged in"
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy
 msgid "A user commented on a news post"
-msgstr "Write a news post..."
+msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy
 msgid "A user commented on a news post you are following"
-msgstr "Write a news post..."
+msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy
 msgid "A user commented on a news posts you commented in"
-msgstr "Write a news post..."
+msgstr ""
 
 #: cosinnus_poll/cosinnus_notifications.py
 msgid "A user commented on a poll you were tagged in"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy
 msgid "A user commented on a task"
-msgstr "Write a news post..."
+msgstr ""
 
 #: cosinnus_todo/cosinnus_notifications.py
 msgid "A user commented on a todo you are following"
@@ -2222,9 +2078,8 @@ msgid "A user created a new etherpad"
 msgstr "A user created a new document"
 
 #: cosinnus_etherpad/cosinnus_notifications.py
-#, fuzzy
 msgid "A user created a new etherpad in a team you are following"
-msgstr "A user created a new document"
+msgstr ""
 
 #: cosinnus_event/cosinnus_notifications.py
 msgid "A user created a new event"
@@ -2263,19 +2118,16 @@ msgid "A user created a new todo"
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy
 msgid "A user created a news post"
-msgstr "Write a news post..."
+msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy
 msgid "A user created a news post in a team you are following"
-msgstr "Write a news post..."
+msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy
 msgid "A user created a task"
-msgstr "Write a news post..."
+msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
 msgid "A user has accepted the invitation to this team (admins only)"
@@ -2294,9 +2146,8 @@ msgid "A user requested to become a member of this team (admins only)"
 msgstr ""
 
 #: cosinnus_note/cosinnus_notifications.py
-#, fuzzy
 msgid "A user updated a news post"
-msgstr "Write a news post..."
+msgstr ""
 
 #: cosinnus_poll/cosinnus_notifications.py
 msgid "A user updated a poll you are following"
@@ -2350,19 +2201,16 @@ msgid "About me"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite.html
-#, fuzzy
 msgid "About the Group"
-msgstr "About the project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite.html
-#, fuzzy
 msgid "About the Project"
-msgstr "About the project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/conference_compact_microsite.html
-#, fuzzy
 msgid "About the conference"
-msgstr "About the project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/radio_option.html
 msgid "Accept"
@@ -2386,9 +2234,8 @@ msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Accept invitation"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
 msgid "Accept request"
@@ -2442,9 +2289,8 @@ msgid "Account deactivated"
 msgstr ""
 
 #: cosinnus/models/profile.py
-#, fuzzy
 msgid "Account verified"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/group.py
 msgid "Accounts Need Verification"
@@ -2453,39 +2299,32 @@ msgstr ""
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_detail.html
-#, fuzzy
 msgid "Activate"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/dashboard.html
-#, fuzzy
 msgid "Activate Cloud"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Activate Conference"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Activate Group"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Activate Member"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Activate Project"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/dashboard.html
-#, fuzzy
 msgid "Activate Task Board"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_detail.html
@@ -2493,19 +2332,16 @@ msgid "Activate offer"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Activate/Deactivate Users"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/views/group.py
-#, fuzzy
 msgid "Activated."
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/fields/video_conference_type_field.html
-#, fuzzy
 msgid "Activation required"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/media_tags_group_readonly.html
 msgid "Activities and interests"
@@ -2528,32 +2364,28 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
-#, fuzzy
 msgid "Add Event"
-msgstr "All projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
-#, fuzzy
 msgid "Add Event to "
-msgstr "All projects"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_form.html
 msgid "Add Offer"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/leftnav_organization.html
-#, fuzzy
 msgid "Add Organization"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/views/conference_administration.py
 msgid "Add Premium Block to \"{}\""
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_premium_block_form.html
-#, fuzzy
 msgid "Add Premium Block to Conferences"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
 msgid "Add Social Media Account"
@@ -2576,9 +2408,8 @@ msgid "Add a 3rd Party Account"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#, fuzzy
 msgid "Add a subtitle for the conference."
-msgstr "Enter a name for the project."
+msgstr ""
 
 #: cosinnus/admin.py
 msgid "Add all members to current Portal"
@@ -2627,14 +2458,12 @@ msgstr ""
 
 #: docs-old/_build/html/_sources/hierarchy.rst.txt
 #: docs/_build/html/_sources/legacy/hierarchy.rst.txt
-#, fuzzy
 msgid "Add object"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_participation_management_form.html
-#, fuzzy
 msgid "Add option"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/poll_form.html
 msgid "Add poll"
@@ -2704,9 +2533,8 @@ msgid "Address Title"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Address(es) of your organization"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus/templates/cosinnus/group/group_list_items.html
@@ -2744,9 +2572,8 @@ msgstr ""
 #: cosinnus/templates/cosinnus/user_import/user_import_archived_list.html
 #: cosinnus/templates/cosinnus/user_import/user_import_form.html
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
-#, fuzzy
 msgid "Administration"
-msgstr "There are no groups."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-base-group.html
@@ -2762,9 +2589,8 @@ msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/leftnav_organization.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Admins"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/admin/bbbroom/change_form.html
 msgid "Advanced BBB-Room Tools"
@@ -2808,9 +2634,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/include/macros.html
-#, fuzzy
 msgid "All Events"
-msgstr "All projects"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/group/leftnav_all_groups.html
@@ -2841,20 +2666,17 @@ msgid "All Projects"
 msgstr "All Projects"
 
 #: cosinnus/templates/cosinnus/search.html
-#, fuzzy
 msgid "All Projects and Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/include/macros.html
-#, fuzzy
 msgid "All Users"
-msgstr "All projects"
+msgstr ""
 
 #: cosinnus_conference/forms.py
-#, fuzzy
 msgid "All applicants"
-msgstr "All projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/texts/image_upload_legend_avatar.html
 #: cosinnus/templates/cosinnus/texts/image_upload_legend_conference_event.html
@@ -2992,9 +2814,8 @@ msgid "Announcement is enabled"
 msgstr ""
 
 #: announcements/models.py
-#, fuzzy
 msgid "Announcements"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/views/model_export.py
 msgid "Another export is currently running!"
@@ -3046,9 +2867,8 @@ msgid "Application"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_application_form.html
-#, fuzzy
 msgid "Application conditions"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_conference/views.py
 msgid "Application has been withdrawn."
@@ -3182,27 +3002,23 @@ msgid "Are you part of an interesting company, an NGO or an association? Put you
 msgstr ""
 
 #: cosinnus/templates/cosinnus/common/delete_element_modal.html
-#, fuzzy
 msgid "Are you sure you want to delete all selected elements?"
-msgstr "Are you sure you want to delete this prject?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/dashboard/timeline_item_base.html
 #: cosinnus/templates/cosinnus/v2/dashboard/timeline_item_comment.html
-#, fuzzy
 msgid "Are you sure you want to delete the item?"
-msgstr "Are you sure you want to delete this prject?"
+msgstr ""
 
 #: docs-old/_build/html/_sources/hierarchy.rst.txt
 #: docs/_build/html/_sources/legacy/hierarchy.rst.txt
-#, fuzzy
 msgid "Are you sure you want to delete this container and all objects in it?"
-msgstr "Are you sure you want to delete this prject?"
+msgstr ""
 
 #: docs-old/_build/html/_sources/hierarchy.rst.txt
 #: docs/_build/html/_sources/legacy/hierarchy.rst.txt
-#, fuzzy
 msgid "Are you sure you want to delete this object?"
-msgstr "Are you sure you want to delete this prject?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_delete.html
 msgid "Are you sure you want to delete this team?"
@@ -3242,9 +3058,8 @@ msgid "As administrator of a group or project, it is your responsibility to ensu
 msgstr ""
 
 #: cosinnus/templates/cosinnus/widgets/related_groups_widget.html
-#, fuzzy
 msgid "Assign"
-msgstr "Русский"
+msgstr ""
 
 #: cosinnus/models/wagtail_models.py
 msgid "Assigned Portal"
@@ -3258,15 +3073,13 @@ msgid "Assigned To"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Assigned organizations"
-msgstr "List all projects"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
 #: cosinnus_organization/templates/cosinnus/organization/leftnav_organization.html
-#, fuzzy
 msgid "Assigned projects/groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus_todo/models.py
 msgid "Assigned to"
@@ -3314,14 +3127,12 @@ msgid "Attendance Percentage"
 msgstr ""
 
 #: cosinnus_conference/views.py
-#, fuzzy
 msgid "Attendance data is not available for this conference."
-msgstr "Enter a name for the project."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_statistics.html
-#, fuzzy
 msgid "Attendee Data Statistics"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
 msgid "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats."
@@ -3391,9 +3202,8 @@ msgid "BBB Recording API server"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/admin/conference_setting_help_text_stacked_inline.html
-#, fuzzy
 msgid "BBB Room"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/statistics/simple.html
 msgid "BBB Room Visits"
@@ -3410,9 +3220,8 @@ msgstr ""
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
 #: cosinnus/templates/cosinnus/group/group_form.html
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
-#, fuzzy
 msgid "BBB video conference options"
-msgstr "About the project"
+msgstr ""
 
 #: cosinnus/forms/group.py cosinnus/models/group.py
 #: cosinnus/templates/cosinnus/group/group_meeting.html cosinnus_event/forms.py
@@ -3585,16 +3394,14 @@ msgid "Browse"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Browse all Conferences"
-msgstr "My Projects"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Browse all Groups"
-msgstr "List all projects"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
@@ -3603,16 +3410,14 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
-#, fuzzy
 msgid "Browse all Organizations"
-msgstr "List all projects"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Browse all Projects"
-msgstr "My Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/attached/file_upload_button.html
 msgid "Browse..."
@@ -3745,9 +3550,8 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/fields/email_field_change_link_snippet.html
 #: cosinnus/templates/cosinnus/user/user_change_email_pending.html
-#, fuzzy
 msgid "Change email address"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite.html
 msgid "Change it here..."
@@ -3899,14 +3703,12 @@ msgid "City"
 msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Civil society organization"
-msgstr "List all projects"
+msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "Clean Water and Sanitation"
-msgstr "There are no groups."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/map/map-controls.html
@@ -3933,9 +3735,8 @@ msgid "Click here if you wish to approve the user's join request for an account 
 msgstr ""
 
 #: cosinnus/templates/cosinnus/mail/user_register_notification.html
-#, fuzzy
 msgid "Click here to deny the request"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/utils/context_processors.py
 msgid "Click here to receive an email with a verification link."
@@ -3983,9 +3784,8 @@ msgid "Climate Action"
 msgstr ""
 
 #: cosinnus/conf.py
-#, fuzzy
 msgid "Climate Protection"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/extra_body_header.html
 #: cosinnus/templates/cosinnus/feedback/report_modal.html
@@ -4119,9 +3919,8 @@ msgstr ""
 #: cosinnus/models/conference.py cosinnus/models/group.py
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
 #: cosinnus/trans/group.py cosinnus_event/admin.py
-#, fuzzy
 msgid "Conference"
-msgstr "Create Project"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/api_frontend/views/navigation.py
@@ -4133,24 +3932,20 @@ msgstr ""
 #: cosinnus/templates/cosinnus/conference/conference_recorded_meetings.html
 #: cosinnus/templates/cosinnus/conference/conference_room_management.html
 #: cosinnus_conference/api/serializers.py
-#, fuzzy
 msgid "Conference Bookings"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_event/models.py
-#, fuzzy
 msgid "Conference Event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus_event/models.py
-#, fuzzy
 msgid "Conference Event Attendance Tracking"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus_event/models.py
-#, fuzzy
 msgid "Conference Event Attendance Trackings"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/appsmenu.html
 #: cosinnus/templates/cosinnus/group/leftnav_group.html
@@ -4158,9 +3953,8 @@ msgid "Conference Event Management"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_statistics.html
-#, fuzzy
 msgid "Conference Event Statistics"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus_event/models.py
 msgid "Conference Event Type"
@@ -4169,24 +3963,20 @@ msgstr ""
 #: cosinnus_event/models.py
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
 #: cosinnus_event/templates/cosinnus_event/event_list_conference.html
-#, fuzzy
 msgid "Conference Events"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Conference Menu"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_statistics.html
-#, fuzzy
 msgid "Conference Name"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/leftnav.html
-#, fuzzy
 msgid "Conference Overview"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/conference.py
 msgid "Conference Room"
@@ -4209,19 +3999,16 @@ msgid "Conference Rooms"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
-#, fuzzy
 msgid "Conference Setting"
-msgstr "Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
-#, fuzzy
 msgid "Conference Settings"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_statistics.html
-#, fuzzy
 msgid "Conference Statistics"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Conference Theme Color"
@@ -4236,9 +4023,8 @@ msgid "Conference Total Premium Capacity Infos"
 msgstr ""
 
 #: cosinnus/templates/admin/bbbroom/change_form.html
-#, fuzzy
 msgid "Conference admin page"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Conference contact person"
@@ -4257,32 +4043,28 @@ msgid "Conference is permanently premium"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Conference is publicly visible"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Conference members only"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Conference name"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Conference participants"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus_conference/views.py
 msgid "Conference reminder settings have been successfully updated."
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Conference settings"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Conference start and end date and time"
@@ -4301,9 +4083,8 @@ msgid "Conference starts tomorrow: [[name]]"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#, fuzzy
 msgid "Conference subtitle"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/group.py
 msgid "Conference theme color"
@@ -4322,18 +4103,16 @@ msgid "Conferences let you set up and host workshops and events over multiple da
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/leftnav.html
-#, fuzzy
 msgid "Conferences with Custom Settings"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/models/conference.py
 msgid "Confernence Application"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/utils/facebook_integration_group_form.html
-#, fuzzy
 msgid "Confirm now!"
-msgstr "Join Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/user_change_email_pending.html
 msgid "Confirm your new email address: Check your Inbox!"
@@ -4400,9 +4179,8 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/group/group_microsite.html
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-conferences.html
-#, fuzzy
 msgid "Contact Conference Admins"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/models/conference.py
 #: cosinnus/templates/cosinnus/conference/conference_application_form.html
@@ -4442,9 +4220,8 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/group/group_microsite.html
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-projects.html
-#, fuzzy
 msgid "Contact Project Admins"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Contact info"
@@ -4455,9 +4232,8 @@ msgid "Contact organizers"
 msgstr ""
 
 #: cosinnus_message/rocket_chat.py
-#, fuzzy
 msgid "Contact request"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_message/templates/cosinnus_message/contact_message.html
 #, python-format
@@ -4474,10 +4250,9 @@ msgid "Content"
 msgstr ""
 
 #: cosinnus/api_frontend/views/navigation.py
-#, fuzzy
 msgctxt "navigation bookmarks header"
 msgid "Content"
-msgstr "All Projects"
+msgstr ""
 
 #: cosinnus/models/wagtail_models.py
 msgid "Content (center column)"
@@ -4493,9 +4268,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/userdashboard/timeline.html
-#, fuzzy
 msgid "Content from my Groups and Projects"
-msgstr "My Projects"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/userdashboard/timeline.html
@@ -4537,19 +4311,16 @@ msgid "Convert memberships to Member status"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Convert selected items to Conferences"
-msgstr "Convert selected Groups to Projects"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Convert selected items to Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Convert selected items to Projects"
-msgstr "Convert selected Groups to Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/userprofile_detail.html
 msgid "Cooperation requests"
@@ -4564,14 +4335,12 @@ msgid "Copy"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_invitation_text_buttons.html
-#, fuzzy
 msgid "Copy guest invitation"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_invitation_text_buttons.html
-#, fuzzy
 msgid "Copy invitation"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/event_list.html
 msgid "Copy this iCal-link into your calendar application to import current events:"
@@ -4590,78 +4359,64 @@ msgid "Cosinnus CMS Micropage"
 msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Cosinnus Conference Premium Block"
-msgstr "Project"
+msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Cosinnus Conference Premium Blocks"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Cosinnus Conference Setting"
-msgstr "Project"
+msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Cosinnus Conference Settings"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "Cosinnus Group Invite Token"
-msgstr "Group"
+msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "Cosinnus Group Invite Tokens"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus/models/idea.py
-#, fuzzy
 msgid "Cosinnus Idea"
-msgstr "Project"
+msgstr ""
 
 #: cosinnus/models/idea.py
-#, fuzzy
 msgid "Cosinnus Ideas"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/models/cms.py
 msgid "Cosinnus Micropages"
 msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Cosinnus Organization"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Cosinnus Organizations"
-msgstr "List all projects"
+msgstr ""
 
 #: cosinnus/models/user_import.py
-#, fuzzy
 msgid "Cosinnus User Import"
-msgstr "Project"
+msgstr ""
 
 #: cosinnus/models/user_import.py
-#, fuzzy
 msgid "Cosinnus User Imports"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Cosinnus conference application"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Cosinnus conference applications"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus/models/group_extra.py
 msgid "Cosinnus group"
@@ -4688,34 +4443,28 @@ msgid "CosinnusGroup CallToAction Buttons"
 msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "CosinnusGroup GalleryImage"
-msgstr "Group"
+msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "CosinnusGroup GalleryImages"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "CosinnusLocation"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "CosinnusLocations"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "CosinnusOrganizationLocation"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "CosinnusOrganizationLocations"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus_organization/models.py
 msgid "CosinnusOrganizationSocialMedia"
@@ -4782,20 +4531,17 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/user_dashboard_announcement_form.html
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/user_dashboard_announcement_list.html
-#, fuzzy
 msgid "Create Announcement"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Create Conference"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_list_object.html
 #: cosinnus_event/templates/cosinnus_event/event_list_conference.html
-#, fuzzy
 msgid "Create Conference Event"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_list.html
 msgid "Create Ethercalc"
@@ -4808,9 +4554,8 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/include/macros.html
 #: cosinnus_event/templates/cosinnus_event/common/confirm_event_modal.html
-#, fuzzy
 msgid "Create Event"
-msgstr "Create Project"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/include/macros.html
@@ -4823,27 +4568,23 @@ msgstr "Create Group"
 #: cosinnus/templates/cosinnus/idea/idea_form.html
 #: cosinnus/templates/cosinnus/universal/include/macros.html
 #: cosinnus/templates/cosinnus/universal/map/pagination-controls.html
-#, fuzzy
 msgid "Create Idea"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/managed_tags.py
-#, fuzzy
 msgid "Create Managed Tag"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/groups_newsletter_form.html
 #: cosinnus/templates/cosinnus/administration/managed_tags_newsletter_form.html
-#, fuzzy
 msgid "Create Newsletter"
-msgstr "Create Project"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/include/macros.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Create Organization"
-msgstr "There are no groups."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/include/macros.html
@@ -4855,15 +4596,13 @@ msgstr "Create Project"
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-ideas.html
-#, fuzzy
 msgid "Create Project from Idea"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
 #: cosinnus/templates/cosinnus/conference/conference_room_management.html
-#, fuzzy
 msgid "Create Room"
-msgstr "Create Group"
+msgstr ""
 
 #: cosinnus_stream/templates/cosinnus_stream/leftnav.html
 #: cosinnus_stream/templates/cosinnus_stream/stream_form.html
@@ -4873,9 +4612,8 @@ msgstr "Create activity feed"
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/include/macros.html
-#, fuzzy
 msgid "Create User"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_todo/templates/cosinnus_todo/todo_list.html
 msgid "Create a new Todo"
@@ -4894,20 +4632,17 @@ msgid "Create an event from one of the suggestions"
 msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
-#, fuzzy
 msgid "Create and create another"
-msgstr "%s - Events"
+msgstr ""
 
 #: docs-old/_build/html/_sources/hierarchy.rst.txt
 #: docs/_build/html/_sources/legacy/hierarchy.rst.txt
-#, fuzzy
 msgid "Create container"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
-#, fuzzy
 msgid "Create content"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/leftnav_hierarchic_listview.html
 msgid "Create folder"
@@ -4916,58 +4651,49 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/map/mobile-controls.html
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-create-idea.html
-#, fuzzy
 msgid "Create idea"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#, fuzzy
 msgid "Create invite token"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Create new Conference"
-msgstr "Create Project"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Create new Group"
-msgstr "Create Group"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
-#, fuzzy
 msgid "Create new Organization"
-msgstr "Create Group"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Create new Project"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_create_form.html
-#, fuzzy
 msgid "Create new User"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#, fuzzy
 msgid "Create token"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/wagtail_blocks.py
-#, fuzzy
 msgid "Create-Project or Group Button"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/models/bbb_room.py cosinnus/models/conference.py
 #: cosinnus/models/feedback.py cosinnus/models/group.py cosinnus/models/idea.py
@@ -4995,23 +4721,20 @@ msgid "Created By"
 msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/list_object.html
-#, fuzzy
 msgid "Created Event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/models/idea.py
-#, fuzzy
 msgid "Created Projects"
-msgstr "Create Project"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/dashboard.html
 #: cosinnus/templates/cosinnus/group/conference_compact_microsite.html
 #: cosinnus/templates/cosinnus/group/group_microsite.html
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-base.html
-#, fuzzy
 msgid "Created on: "
-msgstr "Create Group"
+msgstr ""
 
 #: cosinnus/models/conference.py cosinnus/models/feedback.py
 #: cosinnus/models/group.py cosinnus/models/idea.py
@@ -5025,19 +4748,16 @@ msgid "Creator"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Current Admins"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/clearable_file_input.html
-#, fuzzy
 msgid "Current File"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
-#, fuzzy
 msgid "Current Members"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus_marketplace/dashboard.py
 msgid "Current Offers"
@@ -5127,24 +4847,20 @@ msgid "Deactivate"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Deactivate Conference"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Deactivate Group"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Deactivate Member"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Deactivate Project"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_detail.html
@@ -5156,9 +4872,8 @@ msgid "Deactivated Apps"
 msgstr ""
 
 #: cosinnus/views/group.py
-#, fuzzy
 msgid "Deactivated."
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_message/templates/postman/email_user.txt
 msgid "Dear user,"
@@ -5178,9 +4893,8 @@ msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Decline Admin"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus/templates/cosinnus/group/group_list_items.html
@@ -5203,9 +4917,8 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy
 msgid "Decline invitation"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
 msgid "Decline request"
@@ -5308,14 +5021,12 @@ msgid "Delete Managed Tag"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Delete Organization"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_premium_block_form.html
-#, fuzzy
 msgid "Delete Premium Block"
-msgstr "Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/userprofile_delete.html
 msgid "Delete Profile"
@@ -5351,9 +5062,8 @@ msgid "Delete export data and start new %(export_title)s"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/model_export/model_export.html
-#, fuzzy
 msgid "Delete exported data"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_file/templates/cosinnus_file/single_file_detailed.html
 msgid "Delete file"
@@ -5365,9 +5075,8 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Delete invitation"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_note/templates/cosinnus_note/single_note_detailed.html
 #: cosinnus_note/templates/cosinnus_note/widgets/detailed_news_content.html
@@ -5411,18 +5120,16 @@ msgid "Delete team “%(team_name)s”"
 msgstr "Delete project “%(team_name)s”"
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Delete this Organization"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_stream/templates/cosinnus_stream/leftnav.html
 msgid "Delete this Stream"
 msgstr "Delete this activity feed"
 
 #: cosinnus/templates/cosinnus/idea/idea_form.html
-#, fuzzy
 msgid "Delete this idea"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_todo/templates/cosinnus_todo/single_todo_detailed.html
 msgid "Delete todo"
@@ -5454,9 +5161,8 @@ msgid "Deleting..."
 msgstr ""
 
 #: cosinnus/models/storage.py
-#, fuzzy
 msgid "Deletion after"
-msgstr "Delete Pad"
+msgstr ""
 
 #: cosinnus/models/profile.py
 msgid "Deletion triggered by self"
@@ -5471,9 +5177,8 @@ msgid "Demote Admin"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Describe the conference in a few sentences."
-msgstr "Describe the project in a few sentences."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html cosinnus/trans/group.py
 msgid "Describe the group in a few sentences."
@@ -5628,9 +5333,8 @@ msgid "Do not show this again"
 msgstr ""
 
 #: cosinnus_oauth_client/templates/socialaccount/signup.html
-#, fuzzy
 msgid "Do you also want to copy your profile data?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/texts/create_offers_description.html
 msgid "Do you have something to share, sell or give away? Are you searching for something?"
@@ -5648,9 +5352,8 @@ msgid "Do you really want to activate offer „%(title)s“?"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Do you really want to activate the member's user account ?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/list_object.html
 #: cosinnus_poll/templates/cosinnus_poll/poll_vote.html
@@ -5675,9 +5378,8 @@ msgid "Do you really want to deactivate offer „%(title)s“?"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Do you really want to deactivate the member's user account ?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
@@ -5692,19 +5394,17 @@ msgstr ""
 #: cosinnus/templates/cosinnus/group/group_microsite_action_buttons_applications.html
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Do you really want to decline the invitation?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Do you really want to decline the request?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/list_object.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to delete announcement \"%(title)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_detail.html
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_edit.html
@@ -5730,9 +5430,9 @@ msgid "Do you really want to delete file „%(title)s“?"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/idea/idea_form.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to delete idea „%(title)s“?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_detail.html
@@ -5741,9 +5441,9 @@ msgid "Do you really want to delete offer „%(title)s“?"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to delete organization „%(name)s“?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/list_object.html
 #: cosinnus_poll/templates/cosinnus_poll/poll_vote.html
@@ -5752,30 +5452,29 @@ msgid "Do you really want to delete poll „%(title)s“?"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/recorded_meeting_list_object.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_list_object.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to delete room \"%(title)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_import/user_import_archived_detail.html
-#, fuzzy
 msgid "Do you really want to delete this Archived User Import Entry?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_premium_block_form.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/leftnav_button_editable_folder.html
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
@@ -5806,14 +5505,12 @@ msgid "Do you really want to demote administrator „%(name)s“ to member?"
 msgstr ""
 
 #: cosinnus_oauth_client/templates/cosinnus_oauth_client/connection_detail.html
-#, fuzzy
 msgid "Do you really want to disconnect your account account ?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Do you really want to download all user credentials?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_list_items.html
 #: cosinnus/templates/cosinnus/group/leftnav_group.html
@@ -5823,14 +5520,12 @@ msgid "Do you really want to leave „%(title)s“?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
-#, fuzzy
 msgid "Do you really want to make this conference premium permanent?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_import/user_import_form.html
-#, fuzzy
 msgid "Do you really want to perform the import of the shown data?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #, python-format
@@ -5850,9 +5545,8 @@ msgid "Do you really want to reactivate offer „%(title)s“?"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Do you really want to remove all users?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
@@ -5861,42 +5555,39 @@ msgid "Do you really want to remove member „%(name)s“ from the team?"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
-#, fuzzy
 msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Do you really want to remove the user?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to remove „%(name)s“ from the organization?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to revoke the invitation for „%(name)s“?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you really want to revoke the request for „%(name)s“?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/groups_newsletter_form.html
 #: cosinnus/templates/cosinnus/administration/managed_tags_newsletter_form.html
-#, fuzzy
 msgid "Do you really want to send the newsletter?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/dashboard.html
 #: cosinnus/templates/cosinnus/group/group_list_items.html
@@ -5913,9 +5604,9 @@ msgid "Do you want to remove the connection between %(portal_name)s and %(provid
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite_action_buttons.html
-#, fuzzy, python-format
+#, python-format
 msgid "Do you wish to join „%(title)s“ now?"
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/dashboard.html
 #: cosinnus/templates/cosinnus/group/group_list_items.html
@@ -6131,9 +5822,9 @@ msgid "Edit"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy, python-format
+#, python-format
 msgid "Edit \"%(organization_name)s\""
-msgstr "Edit activity feed \"%(stream_name)s\""
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
 #, python-format
@@ -6160,9 +5851,8 @@ msgid "Edit Conditions of Participation"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Edit Conference"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Edit Group"
@@ -6177,15 +5867,13 @@ msgid "Edit Managed Tag"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
-#, fuzzy
 msgid "Edit My Profile"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/leftnav_organization.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Edit Organization"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/views/conference_administration.py
 msgid "Edit Premium Block in conference \"{}\""
@@ -6201,14 +5889,13 @@ msgid "Edit Project"
 msgstr "Edit Project"
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
-#, fuzzy
 msgid "Edit Room"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
-#, fuzzy, python-format
+#, python-format
 msgid "Edit Room “%(title)s”"
-msgstr "Edit project “%(team_name)s”"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/widgets/add_widget.html
 msgid "Edit Widget"
@@ -6223,9 +5910,8 @@ msgid "Edit folder"
 msgstr ""
 
 #: cosinnus/templates/admin/user/change_form.html
-#, fuzzy
 msgid "Edit in User Administration"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_note/templates/cosinnus_note/note_form.html
 msgid "Edit news post"
@@ -6304,23 +5990,20 @@ msgid "Email"
 msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Email Address"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/signup.html
 msgid "Email address"
 msgstr ""
 
 #: cosinnus/admin.py
-#, fuzzy
 msgid "Email not verified"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite.html
-#, fuzzy
 msgid "Email the group administrators"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/admin.py cosinnus/models/profile.py
 msgid "Email verified"
@@ -6333,9 +6016,8 @@ msgstr ""
 #: cosinnus/templates/cosinnus/conference/conference_confirm_send_reminders.html
 #: cosinnus/templates/cosinnus/conference/conference_reminders.html
 #: cosinnus/templates/cosinnus/group/leftnav_group.html
-#, fuzzy
 msgid "Emails to conference participants"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Embed Flickr Gallery"
@@ -6402,9 +6084,8 @@ msgid "End-Time"
 msgstr ""
 
 #: cosinnus/conf.py
-#, fuzzy
 msgid "Energy"
-msgstr "Energy"
+msgstr ""
 
 #: cosinnus/default_settings.py
 msgid "English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -6437,18 +6118,16 @@ msgid "Enter a description for your offer."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/idea/idea_form.html
-#, fuzzy
 msgid "Enter a descriptive title for your idea"
-msgstr "Enter a name for the project."
+msgstr ""
 
 #: cosinnus/forms/dashboard.py
 msgid "Enter a label for the widget-button"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Enter a name for the conference."
-msgstr "Enter a name for the project."
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Enter a name for the group."
@@ -6467,9 +6146,8 @@ msgid "Enter a name to find organizations to request..."
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy
 msgid "Enter a name to find project/groups to invite..."
-msgstr "Enter a name for the project."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/leftnav_button_editable_folder.html
 msgid "Enter a new name for the folder"
@@ -6553,9 +6231,8 @@ msgid "Enter backup token"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/user_change_email_form.html
-#, fuzzy
 msgid "Enter new email address"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/password_reset_confirm.html
 msgid "Enter new password"
@@ -6591,9 +6268,8 @@ msgid "Enter the 4 capital letters in the scrambled image"
 msgstr ""
 
 #: cosinnus/templates/admin/bbbroom/change_form.html
-#, fuzzy
 msgid "Enter the BBB meeting in the conference frontend"
-msgstr "Enter a name for the project."
+msgstr ""
 
 #: cosinnus/models/group.py
 msgid "Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)"
@@ -6608,9 +6284,8 @@ msgid "Enter the generated number code from your authenticator app"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Enter the name of your organization"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_list.html
 msgid "Enter the title for a new Document or Table."
@@ -6625,9 +6300,8 @@ msgid "Enter the title for a new event or select a day in the Calendar."
 msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_list.html
-#, fuzzy
 msgid "Enter the title for a new offer."
-msgstr "Enter a title for the activity feed."
+msgstr ""
 
 #: cosinnus_todo/templates/cosinnus_todo/todo_list.html
 msgid "Enter the title for this todo"
@@ -6651,9 +6325,8 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/user/user_change_email_form.html
 #: cosinnus/templates/cosinnus/user_2fa/user_2fa_disable.html
-#, fuzzy
 msgid "Enter your password"
-msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/quicksearch.html
@@ -6897,9 +6570,8 @@ msgid "Exchange"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
-#, fuzzy
 msgid "Execute Migration"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/core/middleware/cosinnus_middleware.py
 #, python-format
@@ -6951,9 +6623,8 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/search.html
 #: cosinnus/templates/cosinnus/universal/map/map-controls.html
-#, fuzzy
 msgid "External contents"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/group.py
 msgid "Extra CSS"
@@ -7186,9 +6857,8 @@ msgid "For content that I am following, I wish to receive notification emails"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/group_invite_token_enter.html
-#, fuzzy
 msgid "For example"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/templates/admin/bbbroom/change_form.html
 msgid "For further options and parameters, go to the parent conference's admin page"
@@ -7255,9 +6925,8 @@ msgid "From Slug"
 msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "From Team Type"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "From which apps should platform-wide items be shown on the microsite?"
@@ -7327,9 +6996,8 @@ msgid "Go to Calendar"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/expert_search/user_list_items.html
-#, fuzzy
 msgid "Go to Profile"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_list_object.html
 msgid "Go to Room"
@@ -7410,33 +7078,28 @@ msgid "Group \"%(group)s\" does not have a Nextcloud group id set."
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Group Dashboard"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/conf.py
-#, fuzzy
 msgid "Group Export"
-msgstr "Group overview"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/utils/facebook_integration_group_form.html
 msgid "Group Id or name (example: 1172392116092353)"
 msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "Group Image"
-msgstr "Group"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Group Menu"
-msgstr "Group"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Group administrator"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/models/mitwirkomat.py
 msgid "Group for Mitwirk-O-Mat Settings"
@@ -7451,14 +7114,12 @@ msgid "Group members only"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Group name"
-msgstr "Group"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Group settings"
-msgstr "Group"
+msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
 msgid "Group/Project (migration target)"
@@ -7483,9 +7144,8 @@ msgstr "Groups"
 #: cosinnus/api_frontend/views/navigation.py
 #: cosinnus/templates/cosinnus/universal/userdashboard/group-widget.html
 #: cosinnus_notifications/digest.py
-#, fuzzy
 msgid "Groups and Projects"
-msgstr "My Projects"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
@@ -7536,9 +7196,8 @@ msgid "Header"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#, fuzzy
 msgid "Header Image"
-msgstr "Group"
+msgstr ""
 
 #: cosinnus/models/wagtail_models.py
 msgid "Header Text"
@@ -7609,14 +7268,12 @@ msgid "Help about groups"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/leftnav_organization.html
-#, fuzzy
 msgid "Help about organizations"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#, fuzzy
 msgid "Help about projects"
-msgstr "All projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Help about the microsite"
@@ -7632,9 +7289,8 @@ msgid "Help for this page"
 msgstr ""
 
 #: cosinnus/api_frontend/views/portal.py
-#, fuzzy
 msgid "Help others find you and use your real name."
-msgstr "Help other members find you and use your real name."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_application_management_form.html
 msgid "Here you and all other organizers can process all applications. Check each application carefully and select your choice of whether to decline or accept an application or put it on the wait list. You may add a reason for waitlisted or declined applications that will be shown to the applicant."
@@ -8642,14 +8298,12 @@ msgstr ""
 #: cosinnus/templates/cosinnus/idea/idea_form.html
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/user_dashboard_announcement_form.html
 #: cosinnus_event/models.py cosinnus_poll/models.py
-#, fuzzy
 msgid "Image"
-msgstr "Group"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/mitwirkomat/mitwirkomat_settings_form.html
-#, fuzzy
 msgid "Image preview"
-msgstr "Project overview"
+msgstr ""
 
 #: cosinnus_notifications/templates/cosinnus_notifications/notifications_form.html
 msgid "Immediately"
@@ -8748,9 +8402,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/quicksearch.html
-#, fuzzy
 msgid "In my Groups and Projects"
-msgstr "My Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_statistics.html
 msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
@@ -8796,9 +8449,8 @@ msgid "Include a project that you use for documentation purposes. Click the link
 msgstr ""
 
 #: cosinnus/templates/cosinnus/fields/video_conference_type_field.html
-#, fuzzy
 msgid "Include a video conference"
-msgstr "Enter a name for the project."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/search.html
@@ -8848,9 +8500,8 @@ msgid "Informations"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/admin/conference_setting_help_text_stacked_inline.html
-#, fuzzy
 msgid "Inherited BBB-Parameters"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area."
@@ -8903,9 +8554,8 @@ msgid "Invitation subject"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_reminders.html
-#, fuzzy
 msgid "Invitation text"
-msgstr "There are no groups."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/api_frontend/views/navigation.py
@@ -8915,14 +8565,12 @@ msgid "Invitations"
 msgstr ""
 
 #: cosinnus/conf.py
-#, fuzzy
 msgid "Invitations to Conferences"
-msgstr "Convert selected Groups to Projects"
+msgstr ""
 
 #: cosinnus/conf.py
-#, fuzzy
 msgid "Invitations to Groups and Projects"
-msgstr "My Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/common/modal_box_recruit_users.html
 msgid "Invite"
@@ -8939,14 +8587,12 @@ msgid "Invite a member"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
-#, fuzzy
 msgid "Invite groups"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy
 msgid "Invite groups/projects..."
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 msgid "Invite members of groups/projects to apply..."
@@ -8963,19 +8609,16 @@ msgid "Invite people"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy
 msgid "Invite project/group"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy
 msgid "Invite projects/groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
-#, fuzzy
 msgid "Invite registered users to apply..."
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
@@ -8983,9 +8626,8 @@ msgid "Invite registered users..."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
-#, fuzzy
 msgid "Invite unregistered users to apply..."
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
@@ -8994,64 +8636,55 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Invite users"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 msgid "Invite users directly via the following link: "
 msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "Invite-Groups"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Invited"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/views/group.py
-#, fuzzy, python-format
+#, python-format
 msgid "Invited \"%(emails)s\"."
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Invited Admins"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/navbar_buttons_group_menus.html
-#, fuzzy
 msgid "Invited Groups"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 msgid "Invited Members"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/navbar_buttons_group_menus.html
-#, fuzzy
 msgid "Invited Projects"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
-#, fuzzy
 msgid "Invited group/project members"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy
 msgid "Invited groups/projects"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_list_items.html
-#, fuzzy
 msgid "Invited to apply"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus/templates/cosinnus/group/group_list_items.html
@@ -9060,9 +8693,9 @@ msgid "Invited to be a member"
 msgstr ""
 
 #: cosinnus/views/group.py
-#, fuzzy, python-format
+#, python-format
 msgid "Invited user \"%(user)s\"."
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/admin.py
 msgid "Is Guest"
@@ -9185,9 +8818,9 @@ msgid "Join"
 msgstr ""
 
 #: cosinnus/models/bbb_room.py
-#, fuzzy, python-format
+#, python-format
 msgid "Join \"%(name)s\"!"
-msgstr "Edit project “%(team_name)s”"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_bbb_guest_token_page.html
 msgid "Join BBB Meeting as guest"
@@ -9195,9 +8828,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-groups.html
-#, fuzzy
 msgid "Join Group"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_bbb_guest_token_page.html
 msgid "Join Meeting"
@@ -9205,14 +8837,12 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-projects.html
-#, fuzzy
 msgid "Join Project"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/group_invite_token.html
-#, fuzzy
 msgid "Join all now!"
-msgstr "Join Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/guest_user_signup.html
 msgid "Join as a Guest"
@@ -9227,10 +8857,9 @@ msgid "Join meeting in conference frontend"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/dashboard.html
-#, fuzzy
 msgctxt "Mitwirkomat"
 msgid "Join now"
-msgstr "Join Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Join now and collaborate!"
@@ -9241,9 +8870,8 @@ msgid "Join now and participate!"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite_action_buttons.html
-#, fuzzy
 msgid "Join now!"
-msgstr "Join Project"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/leftnav_organization.html
 msgid "Joins"
@@ -9310,9 +8938,8 @@ msgid "Last accessed"
 msgstr ""
 
 #: cosinnus_etherpad/dashboard.py
-#, fuzzy
 msgid "Last accessed Etherpads"
-msgstr "Latest Pads"
+msgstr ""
 
 #: cosinnus/models/bbb_room.py
 msgid "Last create-call parameters"
@@ -9422,14 +9049,12 @@ msgid "Leave guest access"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/guest_user_not_allowed.html
-#, fuzzy
 msgid "Leave guest access and create an account"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/single_event_detailed.html
-#, fuzzy
 msgid "Leave video conference"
-msgstr "About the project"
+msgstr ""
 
 #: cosinnus/models/wagtail_models.py
 msgid "Left Sidebar"
@@ -9574,14 +9199,14 @@ msgid "Log in with"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/login_sso_provider.html
-#, fuzzy, python-format
+#, python-format
 msgid "Log in with %(portal_name)s"
-msgstr "Edit project “%(team_name)s”"
+msgstr ""
 
 #: cosinnus_oauth_client/templates/socialaccount/snippets/provider_list.html
-#, fuzzy, python-format
+#, python-format
 msgid "Log in with %(provider)s Account"
-msgstr "Edit project “%(team_name)s”"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/utils/facebook_integration.html
 msgid "Log in with Facebook"
@@ -9640,14 +9265,14 @@ msgid "Login tokens to all previously uninvited users are now being sent in the 
 msgstr ""
 
 #: cosinnus_oauth_client/templates/socialaccount/signup.html
-#, fuzzy, python-format
+#, python-format
 msgid "Login with %(provider)s"
-msgstr "Edit project “%(team_name)s”"
+msgstr ""
 
 #: cosinnus_oauth_client/templates/socialaccount/snippets/provider_list.html
-#, fuzzy, python-format
+#, python-format
 msgid "Login with %(provider_id)s"
-msgstr "Edit project “%(team_name)s”"
+msgstr ""
 
 #: cosinnus_oauth_client/templates/socialaccount/snippets/provider_list.html
 msgid "Login with Social Account"
@@ -9814,19 +9439,16 @@ msgid "Managed Tag Assignments"
 msgstr ""
 
 #: cosinnus/models/managed_tags.py
-#, fuzzy
 msgid "Managed Tag Type"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/managed_tags.py
-#, fuzzy
 msgid "Managed Tag Types"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/managed_tags.py
-#, fuzzy
 msgid "Managed Tags"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_list_map.html
 #: cosinnus/templates/cosinnus/group/group_members_map.html
@@ -9860,9 +9482,8 @@ msgid "Match between {self.from_user} and {self.to_user} has been successfully e
 msgstr ""
 
 #: cosinnus/models/profile.py
-#, fuzzy
 msgid "Match object"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/profile.py
 msgid "Match subject"
@@ -9966,9 +9587,8 @@ msgid "Members"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/user_visibility_formfield_options.html
-#, fuzzy
 msgid "Members of your projects and groups only"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/dashboard.html
 msgid "Members-Map"
@@ -10012,9 +9632,8 @@ msgstr ""
 #: cosinnus/templates/cosinnus/user/userprofile_readonly_card.html
 #: cosinnus_message/cosinnus_app.py
 #: cosinnus_message/templates/postman/view.html
-#, fuzzy
 msgid "Message"
-msgstr "Create Group"
+msgstr ""
 
 #: cosinnus_message/templates/postman/email_user_subject.txt
 #: cosinnus_message/templates/postman/email_visitor_subject.txt
@@ -10027,9 +9646,8 @@ msgid "Message all members"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/mail/conference_reminder_send_immediately_subject.txt
-#, fuzzy
 msgid "Message to conference participants"
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/api_frontend/views/navigation.py
 #: cosinnus/templates/cosinnus/navbar_icon_buttons.html
@@ -10089,9 +9707,8 @@ msgid "Migrate Todos"
 msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
-#, fuzzy
 msgid "Migrate Todos to Task Board"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
@@ -10135,9 +9752,8 @@ msgid "Mobile Phone Number"
 msgstr ""
 
 #: cosinnus/conf.py
-#, fuzzy
 msgid "Mobility"
-msgstr "Mobility"
+msgstr ""
 
 #: cosinnus_stream/models.py
 msgid "Models"
@@ -10148,9 +9764,8 @@ msgid "Moderator Status (Portal-Admins only)"
 msgstr ""
 
 #: cosinnus/conf.py
-#, fuzzy
 msgid "Money and Finance"
-msgstr "Money and Finance"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/widgets/base_widget.html
 #: cosinnus/templates/cosinnus/widgets/fadedown_base_widget.html
@@ -10161,9 +9776,8 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/group/conference_compact_microsite.html
 #: cosinnus/utils/context_processors.py
-#, fuzzy
 msgid "More infos..."
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_application_management_form.html
 msgid "Motivation for applying"
@@ -10256,16 +9870,14 @@ msgstr ""
 
 #: cosinnus/i18n_fixture_strings.py
 #: cosinnus/templates/cosinnus/v2/navbar/brand_links.html
-#, fuzzy
 msgid "My Dashboard"
-msgstr "Group Dashboard"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/include/macros.html
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
-#, fuzzy
 msgid "My Events"
-msgstr "My Projects"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/navbar_buttons_group_menus.html
@@ -10277,9 +9889,8 @@ msgstr "My Groups"
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/api_frontend/views/navigation.py
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
-#, fuzzy
 msgid "My Groups and Projects"
-msgstr "My Projects"
+msgstr ""
 
 #: cosinnus/api_frontend/views/navigation.py
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
@@ -10291,9 +9902,8 @@ msgstr ""
 #: cosinnus/templates/cosinnus/universal/include/macros.html
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 #: cosinnus/views/map.py
-#, fuzzy
 msgid "My Ideas"
-msgstr "My projects"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/leftnav.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_list.html
@@ -10309,9 +9919,8 @@ msgid "My Organizations"
 msgstr ""
 
 #: cosinnus/api_frontend/views/navigation.py
-#, fuzzy
 msgid "My Personal Space"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/api_frontend/views/navigation.py
 #: cosinnus/templates/cosinnus/navbar.html
@@ -10328,9 +9937,8 @@ msgid "My Projects"
 msgstr "My Projects"
 
 #: cosinnus/templates/cosinnus/search.html
-#, fuzzy
 msgid "My Projects and Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/navbar_icon_buttons.html
 #: cosinnus_stream/templates/cosinnus_stream/leftnav.html
@@ -10353,9 +9961,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/include/macros.html
-#, fuzzy
 msgid "My Users"
-msgstr "My projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/userprofile_detail.html
 msgid "My Website"
@@ -10378,24 +9985,20 @@ msgid "My time zone"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "My upcoming Conferences"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
-#, fuzzy
 msgid "My upcoming Events"
-msgstr "My Projects"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "My upcoming Groups"
-msgstr "My Groups"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "My upcoming Projects"
-msgstr "My Projects"
+msgstr ""
 
 #: cosinnus/forms/hierarchy.py cosinnus/models/group.py
 #: cosinnus/models/managed_tags.py cosinnus/models/mitwirkomat.py
@@ -10417,9 +10020,8 @@ msgstr ""
 
 #: cosinnus_organization/models.py
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Name of the organization"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Name of your group in the Volunteer-O-Matic"
@@ -10469,9 +10071,8 @@ msgid "New email"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/user_change_email_form.html
-#, fuzzy
 msgid "New email address"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/leftnav_hierarchic_listview.html
 msgid "New folder name"
@@ -10482,9 +10083,8 @@ msgid "New item"
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy
 msgid "New link to the moved project/group"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
 #: cosinnus/templates/cosinnus/registration/password_reset_confirm.html
@@ -10500,12 +10100,9 @@ msgid "New user account: "
 msgstr ""
 
 #: cosinnus/templates/cosinnus/mail/user_register_notification_subj.txt
-#, fuzzy, python-format
+#, python-format
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/views/common.py
 msgid "New verification email sent!"
@@ -10569,9 +10166,8 @@ msgid "News text"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/userprofile_form.html
-#, fuzzy
 msgid "News via the newsletter"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/managed_tags_newsletter_list.html
 msgid "Newsletter"
@@ -10697,9 +10293,8 @@ msgid "No cloud files yet"
 msgstr ""
 
 #: cosinnus_conference/views.py
-#, fuzzy
 msgid "No conference applicants found at the moment."
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/conference_compact_microsite.html
 #: cosinnus/templates/cosinnus/group/group_microsite.html
@@ -10803,9 +10398,8 @@ msgid "No offers"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/widgets/related_groups.html
-#, fuzzy
 msgid "No related projects/groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/map/pagination-controls.html
@@ -10830,9 +10424,8 @@ msgstr ""
 
 #: cosinnus/forms/group.py cosinnus/models/group.py cosinnus_event/forms.py
 #: cosinnus_event/models.py
-#, fuzzy
 msgid "No video conference"
-msgstr "About the project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_confirm_send_reminders.html
 msgid "No, do not send"
@@ -10890,15 +10483,13 @@ msgid "Note"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/statistics/simple.html
-#, fuzzy
 msgctxt "notice, used at beginning of a paragraph"
 msgid "Note"
-msgstr "News"
+msgstr ""
 
 #: cosinnus_note/models.py
-#, fuzzy
 msgid "Note Item"
-msgstr "News"
+msgstr ""
 
 #: cosinnus_note/models.py
 msgid "Note Items"
@@ -10978,9 +10569,8 @@ msgid "Notes"
 msgstr "News"
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_user_decks.html
-#, fuzzy
 msgid "Notes:"
-msgstr "News"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/userdashboard/followed-objects-widget.html
@@ -11018,9 +10608,8 @@ msgstr ""
 #: cosinnus/templates/cosinnus/universal/navbar/notification-widget.html
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
 #: cosinnus_notifications/cosinnus_app.py
-#, fuzzy
 msgid "Notifications"
-msgstr "Groups"
+msgstr ""
 
 #: cosinnus_notifications/templates/cosinnus_notifications/notifications_form.html
 msgid "Notifications you set to \"Immediately\" will be e-mailed to you as soon as they happen, with one e-mail per notification."
@@ -11044,14 +10633,12 @@ msgid "Num. Attendees"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_statistics.html
-#, fuzzy
 msgid "Num. Invitations"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_statistics.html
-#, fuzzy
 msgid "Num. Registrations"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
 msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
@@ -11405,52 +10992,45 @@ msgid "Organization"
 msgstr ""
 
 #: cosinnus_organization/views/organization.py
-#, fuzzy, python-format
+#, python-format
 msgid "Organization \"%(name)s\" was created successfully."
-msgstr "Pad \"%(title)s\" was edited successfully."
+msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Organization Invite for Unregistered User"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_organization/models.py
 msgid "Organization Invites for Unregistered Users"
 msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Organization group"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Organization groups"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Organization invitations"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Organization is open for future projects."
-msgstr "Enter a name for the project."
+msgstr ""
 
 #: cosinnus_organization/models.py
 msgid "Organization membership"
 msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Organization memberships"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Organization type"
-msgstr "There are no groups."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/group/leftnav_group.html
@@ -11476,14 +11056,12 @@ msgid "Original filename"
 msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Other"
-msgstr "Other projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/search.html
-#, fuzzy
 msgid "Other Projects and Groups"
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/forms/search.py
 msgid "Other teams"
@@ -11504,9 +11082,8 @@ msgid "Overview"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
-#, fuzzy
 msgid "Overview - All Conferences"
-msgstr "My Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
 msgid "Overview - Conferences, Rooms and Workshops"
@@ -11517,9 +11094,8 @@ msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settin
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
-#, fuzzy
 msgid "Overview - Premium Conferences Only"
-msgstr "My Projects"
+msgstr ""
 
 #: cosinnus_notifications/models.py
 msgid "Owner of the alert"
@@ -11563,9 +11139,8 @@ msgid "Page not found!"
 msgstr ""
 
 #: cosinnus/models/managed_tags.py
-#, fuzzy
 msgid "Paired Group"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/leftnav_example.txt
 msgid "Papierkorb"
@@ -11616,14 +11191,12 @@ msgid "Participation application is over."
 msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Participation applications are disabled."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_participation_management_form.html
-#, fuzzy
 msgid "Participation applications are enabled"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/models/conference.py
 #: cosinnus/templates/cosinnus/group/group_microsite_action_buttons_applications.html
@@ -11704,9 +11277,8 @@ msgstr ""
 #: cosinnus_event/templates/cosinnus_event/event_list_detailed.html
 #: cosinnus_event/templates/cosinnus_event/event_list_detailed_past.html
 #: cosinnus_event/templates/cosinnus_event/leftnav.html
-#, fuzzy
 msgid "Past Events"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/leftnav.html
 msgid "Past Polls"
@@ -11762,9 +11334,8 @@ msgstr "فارسی"
 
 #: cosinnus/api_frontend/views/content.py
 #: cosinnus/api_frontend/views/navigation.py
-#, fuzzy
 msgid "Personal Dashboard"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/common/modal_box_recruit_users.html
 msgid "Personal Message (optional)"
@@ -11813,9 +11384,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/userdashboard/timeline.html
-#, fuzzy
 msgid "Platform content"
-msgstr "All Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Platform-wide (visible for all members of the platform)"
@@ -11965,9 +11535,8 @@ msgid "Please register or log in to continue!"
 msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/single_event_detailed.html
-#, fuzzy
 msgid "Please register or login to join the video conference for this event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/forms/group.py
 msgid "Please remove the whitespace from '{}'"
@@ -12206,23 +11775,20 @@ msgstr ""
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
-#, fuzzy
 msgid "Post new Idea"
-msgstr "Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
-#, fuzzy
 msgid "Post new Offer in "
-msgstr "Project"
+msgstr ""
 
 #: cosinnus/models/managed_tags.py
 msgid "Prefix label"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/leftnav.html
-#, fuzzy
 msgid "Premium Conferences Only"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
 msgid "Premium active"
@@ -12237,9 +11803,8 @@ msgid "Premium inactive, but scheduled"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
-#, fuzzy
 msgid "Premium only"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/conference.py cosinnus_event/models.py
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
@@ -12253,9 +11818,8 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
 #: cosinnus_file/templates/cosinnus_file/file_form_core.html
-#, fuzzy
 msgid "Preview"
-msgstr "Project overview"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_2fa/user_2fa_backup_tokens.html
 msgid "Print these tokens and keep them somewhere safe."
@@ -12290,9 +11854,8 @@ msgstr ""
 #: cosinnus/api_frontend/views/navigation.py
 #: cosinnus/templates/cosinnus/user/userprofile_detail.html
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
-#, fuzzy
 msgid "Profile"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/userprofile_form.html
 msgid "Profile avatar"
@@ -12306,47 +11869,40 @@ msgid "Project"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Project Dashboard"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Project Menu"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/models/group.py
 msgid "Project Type"
 msgstr "Project Type"
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Project administrator"
-msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Project is open for further partner organizations."
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Project is publicly visible"
-msgstr "Public project"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Project members only"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Project name"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Project settings"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus_message/templates/postman/email_user.txt
 msgid "Project/Group"
@@ -12354,9 +11910,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-organizations.html
-#, fuzzy
 msgid "Project/group"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus_organization/views/group.py
 #, python-format
@@ -12379,9 +11934,8 @@ msgid "Project/group %(name)s was successfully invited."
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy
 msgid "Project/group requests"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/models/wagtail_blocks.py
@@ -12406,9 +11960,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-organizations.html
-#, fuzzy
 msgid "Projects and groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
 #, python-format
@@ -12417,9 +11970,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/grid-tile-default.html
-#, fuzzy
 msgid "Projects/Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 msgid "Promote Member"
@@ -12431,9 +11983,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-error-403.html
-#, fuzzy
 msgid "Protected Content"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_participation_management_form.html
 msgid "Provide a list of questions that the applicants should answer."
@@ -12460,20 +12011,17 @@ msgid "Public Stream"
 msgstr "Public Activities"
 
 #: cosinnus_stream/templates/cosinnus_stream/leftnav.html
-#, fuzzy
 msgid "Public Stream in all Portals"
-msgstr "Public Activities"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/userdashboard/timeline.html
-#, fuzzy
 msgid "Public content"
-msgstr "All Projects"
+msgstr ""
 
 #: cosinnus_organization/models.py
-#, fuzzy
 msgid "Public institution"
-msgstr "All Projects"
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/poll_form.html
 msgid "Public voting"
@@ -12500,9 +12048,8 @@ msgid "Quality Education"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/motivation_question_inline.html
-#, fuzzy
 msgid "Question"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/utils/group.py
 msgid "Question about"
@@ -12550,19 +12097,16 @@ msgid "Re-Activate"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Re-activate Conference"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Re-activate Group"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Re-activate Project"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/list_object.html
 #: cosinnus_poll/templates/cosinnus_poll/poll_vote.html
@@ -12585,9 +12129,8 @@ msgid "Reactivate offer"
 msgstr ""
 
 #: cosinnus/admin.py
-#, fuzzy
 msgid "Reactivate user accounts"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/dashboard.html
 msgid "Rearrange"
@@ -12650,9 +12193,9 @@ msgid "Recording %s was not found, has already been deleted, or you do not have 
 msgstr ""
 
 #: cosinnus_conference/views.py
-#, fuzzy, python-format
+#, python-format
 msgid "Recording %s was successfully deleted."
-msgstr "Your activity feed was added successfully."
+msgstr ""
 
 #: cosinnus/version_history.py
 msgid "Redesign Update"
@@ -12675,9 +12218,8 @@ msgid "Reflected Object"
 msgstr ""
 
 #: cosinnus/models/tagged.py
-#, fuzzy
 msgid "Reflected Objects"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/admin.py
 msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
@@ -12723,9 +12265,8 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite.html
 #: cosinnus/utils/dashboard.py
-#, fuzzy
 msgid "Related Projects/Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/models/group.py
 msgid "Related Teams"
@@ -12744,19 +12285,16 @@ msgid "Reload chat"
 msgstr ""
 
 #: cosinnus_oauth_client/templates/socialaccount/connections.html
-#, fuzzy
 msgid "Remove"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Remove Admin"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_oauth_client/templates/cosinnus_oauth_client/connection_detail.html
-#, fuzzy
 msgid "Remove Connection"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 msgid "Remove Member"
@@ -12771,14 +12309,12 @@ msgid "Remove Social Media Account"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Remove User"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Remove all Users"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Remove button"
@@ -12798,29 +12334,24 @@ msgid "Remove location"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_participation_management_form.html
-#, fuzzy
 msgid "Remove option"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Remove organization"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy
 msgid "Remove project/group"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_participation_management_form.html
-#, fuzzy
 msgid "Remove question"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/fields/multi_address_field.html
-#, fuzzy
 msgid "Remove this Address"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/views/group.py
 #, python-format
@@ -12936,34 +12467,28 @@ msgid "Request about your project \"%(group_name)s\""
 msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Request contact option"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite_action_buttons.html
-#, fuzzy
 msgid "Request membership"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Request organization"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Request organizations"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Request organizations..."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "Request user information"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
@@ -12976,9 +12501,8 @@ msgid "Requested"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Requested organizations"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
 msgid "Require moderator approval before joning"
@@ -12990,14 +12514,12 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "Resend invitation"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_list.html
-#, fuzzy
 msgid "Resend login token"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 #: cosinnus/templates/cosinnus/idea/idea_form.html
@@ -13038,9 +12560,8 @@ msgstr ""
 
 #: cosinnus/models/conference.py
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
-#, fuzzy
 msgid "Result Project"
-msgstr "Create Project"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/models/conference.py
@@ -13059,9 +12580,8 @@ msgid "Retry %(export_title)s"
 msgstr ""
 
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
-#, fuzzy
 msgid "Retry migration"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/leftnav.html
 msgid "Return to Archived Event Polls"
@@ -13086,18 +12606,16 @@ msgid "Revoke Invitation for Member"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
-#, fuzzy
 msgid "Revoke invitation for project/group"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
 msgid "Revoke request"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "Revoke request for organization"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/models/wagtail_models.py
 msgid "Right banner (top)"
@@ -13145,23 +12663,20 @@ msgstr "Română"
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
 #: cosinnus_event/models.py
-#, fuzzy
 msgid "Room"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_statistics.html
-#, fuzzy
 msgid "Room Type"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
 msgid "Room is visible"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
-#, fuzzy
 msgid "Room type"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
 msgid "Rooms"
@@ -13235,9 +12750,8 @@ msgid "Save"
 msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
-#, fuzzy
 msgid "Save and create another"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_application_form.html
 #: cosinnus/templates/cosinnus/mitwirkomat/mitwirkomat_settings_form.html
@@ -13279,20 +12793,17 @@ msgid "Search"
 msgstr ""
 
 #: cosinnus/models/managed_tags.py
-#, fuzzy
 msgid "Search Synonyms"
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/views/expert_search.py
-#, fuzzy
 msgid "Search for Experts"
-msgstr "Create Project"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
-#, fuzzy
 msgid "Search for Ideas"
-msgstr "Create Project"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/map/map-controls.html
@@ -13307,9 +12818,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
-#, fuzzy
 msgid "Search for Organizations"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/search.html
 msgid "Search for Users"
@@ -13336,18 +12846,16 @@ msgid "Search in teams"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/search.html
-#, fuzzy
 msgid "Search options..."
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/search.html
 msgid "Search results from the Cloud app can currently only be displayed in the Cloud app itself."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/expert_search/user_list.html
-#, fuzzy
 msgid "Search term"
-msgstr "Create Project"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/map/pagination-controls.html
@@ -13377,9 +12885,8 @@ msgid "Select Group"
 msgstr "Select Group"
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#, fuzzy
 msgid "Select Projects/Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus_stream/templates/cosinnus_stream/stream_form.html
 msgid "Select Team"
@@ -13398,9 +12905,8 @@ msgid "Select one of your Facebook pages to connect to"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
-#, fuzzy
 msgid "Select one or more groups/projects..."
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/media_tags_group.html
 #: cosinnus/templates/cosinnus/media_tags_userprofile.html
@@ -13408,9 +12914,8 @@ msgid "Select or create tags"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#, fuzzy
 msgid "Select related Projects/Groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Select sustainable development goals"
@@ -13477,9 +12982,8 @@ msgid "Send Message"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/leftnav.html
-#, fuzzy
 msgid "Send Newsletter"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_reminders.html
 msgid "Send immediately"
@@ -13527,9 +13031,8 @@ msgid "Services"
 msgstr ""
 
 #: cosinnus_oauth_client/templates/cosinnus_oauth_client/connection_detail.html
-#, fuzzy
 msgid "Set Password"
-msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/password_set_initial_form.html
 msgid "Set a password to start using your account"
@@ -13540,9 +13043,8 @@ msgid "Set my password"
 msgstr ""
 
 #: cosinnus_oauth_client/templates/account/password_set.html
-#, fuzzy
 msgid "Set password"
-msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/doodle_vote.html
 #, python-format
@@ -13628,9 +13130,8 @@ msgstr ""
 
 #: docs-old/_build/html/_sources/hierarchy.rst.txt
 #: docs/_build/html/_sources/legacy/hierarchy.rst.txt
-#, fuzzy
 msgid "Show"
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "Show Call to Action Box"
@@ -13645,9 +13146,8 @@ msgid "Show Register Button"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user_2fa/user_2fa_settings.html
-#, fuzzy
 msgid "Show Tokens"
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/api_frontend/views/navigation.py
 #: cosinnus/templates/cosinnus/v2/navbar/navbar.html
@@ -13672,9 +13172,8 @@ msgid "Show all of the other %(more_count)s users..."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/managed_tags_newsletter_form.html
-#, fuzzy
 msgid "Show all recipients..."
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/models/conference.py
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
@@ -13691,14 +13190,12 @@ msgstr ""
 #: cosinnus/templates/cosinnus/common/reflect/reflected_object_select_link.html
 #: cosinnus_note/templates/cosinnus_note/single_note_detailed.html
 #: cosinnus_note/templates/cosinnus_note/widgets/detailed_news_content.html
-#, fuzzy
 msgid "Show in my projects..."
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/common/modal_box_group_select.html
-#, fuzzy
 msgid "Show in other projects/groups"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
 msgid "Show large map"
@@ -13707,26 +13204,22 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/notification-widget.html
 #: cosinnus/templates/cosinnus/universal/userdashboard/base-widget.html
-#, fuzzy
 msgid "Show more"
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/wagtail/widgets/random_projects.html
-#, fuzzy
 msgid "Show more Projects"
-msgstr "Other Projects"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/main-menu.html
 #: cosinnus/templates/cosinnus/universal/userdashboard/group-widget.html
-#, fuzzy
 msgid "Show more Projects of this Group"
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/media_tags.html
-#, fuzzy
 msgid "Show more options..."
-msgstr "Other Projects"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/map/map-controls.html
@@ -13743,9 +13236,8 @@ msgid "Show public items outside of your groups"
 msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
-#, fuzzy
 msgid "Show room chat in the event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
 msgid "Show the event's description on microsite"
@@ -13784,9 +13276,8 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/common/reflect/reflected_object_select_button.html
 #: cosinnus/templates/cosinnus/common/reflect/reflected_object_select_link.html
-#, fuzzy
 msgid "Shown in my projects..."
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
 msgid "Shows a list of all participants."
@@ -13887,9 +13378,8 @@ msgid "Smallest Files"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Social Media Accounts"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_oauth_client/templates/socialaccount/authentication_error.html
 msgid "Social Network Login Failure"
@@ -14062,9 +13552,8 @@ msgid "Special Group IDs"
 msgstr ""
 
 #: cosinnus_stream/models.py
-#, fuzzy
 msgid "Special Stream"
-msgstr "Delete activity feed"
+msgstr ""
 
 #: cosinnus/models/conference.py
 msgid "Stage"
@@ -14122,9 +13611,8 @@ msgid "Start-Time"
 msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/single_event_detailed.html
-#, fuzzy
 msgid "Start/join video conference for this event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/recorded_meeting_list_object.html
 msgid "Started"
@@ -14179,9 +13667,8 @@ msgid "Stream URL for the Event"
 msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
-#, fuzzy
 msgid "Stream this event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus_stream/models.py
 #: cosinnus_stream/templates/cosinnus_stream/base.html
@@ -14224,9 +13711,8 @@ msgid "Subtitle"
 msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "Subtitle used for conferences."
-msgstr "Enter a name for the project."
+msgstr ""
 
 #: announcements/models.py
 msgid "Success"
@@ -14337,9 +13823,8 @@ msgstr ""
 #: cosinnus_deck/templates/cosinnus_deck/base.html
 #: cosinnus_deck/templates/cosinnus_deck/deck.html
 #: cosinnus_deck/templates/cosinnus_deck/deck_migrate_todo.html
-#, fuzzy
 msgid "Task Board"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_todo/templates/cosinnus_todo/notifications/user_completed_my_todo_subject.txt
 #, python-format
@@ -14404,18 +13889,16 @@ msgid "Tell others something about you!"
 msgstr ""
 
 #: cosinnus/models/storage.py
-#, fuzzy
 msgid "Temporary Data"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/leftnav_group.html
 msgid "Temporary User Accounts"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Temporary Users"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/extra_signup_fields.html
 msgid "Terms and Services"
@@ -14611,20 +14094,14 @@ msgid "The complete request can only be sent via POST!"
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "The conference \"%(object_name)s\" was updated."
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "The conference %(object_name)s has been updated"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/templates/cosinnus/mail/conference_reminder_week_before_content.txt
 msgid ""
@@ -14661,12 +14138,8 @@ msgid ""
 msgstr ""
 
 #: cosinnus/models/conference.py
-#, fuzzy
 msgid "The conference has ended."
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/templates/cosinnus/fields/default_field.html
 msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
@@ -14797,33 +14270,29 @@ msgid "The following Users were added to this portal:"
 msgstr ""
 
 #: cosinnus/views/user_import.py
-#, fuzzy
 msgid "The following columns were not recognized and were ignored"
-msgstr "The following Groups were converted to Projects:"
+msgstr ""
 
 #: cosinnus/admin.py
-#, fuzzy
 msgid "The following items were activated:"
-msgstr "The following Projects were converted to Groups:"
+msgstr ""
 
 #: cosinnus/admin.py
-#, fuzzy, python-format
+#, python-format
 msgid "The following items were converted to %s:"
-msgstr "The following Projects were converted to Groups:"
+msgstr ""
 
 #: cosinnus/admin.py
-#, fuzzy
 msgid "The following items were deactivated:"
-msgstr "The following Projects were converted to Groups:"
+msgstr ""
 
 #: cosinnus/views/user.py
 msgid "The following roles could not be assigned to the account and need to be assigned manually:"
 msgstr ""
 
 #: cosinnus/views/user.py
-#, fuzzy
 msgid "The following roles were assigned to the account:"
-msgstr "The following Groups were converted to Projects:"
+msgstr ""
 
 #: cosinnus_conference/views.py
 #, python-format
@@ -14836,9 +14305,9 @@ msgid "The following users were declined: %s"
 msgstr ""
 
 #: cosinnus/views/group.py
-#, fuzzy, python-format
+#, python-format
 msgid "The following users were invited to apply: %s"
-msgstr "The following Projects were converted to Groups:"
+msgstr ""
 
 #: cosinnus_conference/views.py
 #, python-format
@@ -14913,9 +14382,8 @@ msgid "The maximum number of participants is "
 msgstr ""
 
 #: cosinnus_conference/views.py
-#, fuzzy
 msgid "The message was sent to the chosen participants."
-msgstr "Projects"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/admin/conference_setting_help_text_stacked_inline.html
 msgid "The next higher up object in the BBB hierarchy chain is"
@@ -15065,12 +14533,9 @@ msgid "The time of a conference you are attending has been updated"
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy, python-format
+#, python-format
 msgid "The time of conference %(object_name)s has been updated"
 msgstr ""
-"Hi %(admin_name)s,\n"
-"\n"
-"The user %(user_name)s wants to join project %(team_name)s."
 
 #: cosinnus/models/group.py
 msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
@@ -15197,27 +14662,24 @@ msgid "Then add a row for each account that you want to add. You have to add a u
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/user_dashboard_announcement_list.html
-#, fuzzy
 msgid "There are no announcements yet."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/doodle_list_detailed_archived.html
 msgid "There are no archived event polls."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user_import/user_import_archived_list.html
-#, fuzzy
 msgid "There are no archived imports yet."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/poll_list.html
 msgid "There are no archived polls."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "There are no assigned organizations."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/event_list_conference.html
 msgid "There are no conference events."
@@ -15249,20 +14711,17 @@ msgid "There are no groups."
 msgstr "There are no groups."
 
 #: cosinnus/templates/cosinnus/group/group_list_items.html
-#, fuzzy
 msgid "There are no invitations."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
-#, fuzzy
 msgid "There are no items to show."
-msgstr "There are no groups."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/userdashboard/base-widget.html
-#, fuzzy
 msgid "There are no items yet"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
@@ -15279,9 +14738,8 @@ msgid "There are no news posts yet"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/managed_tags_newsletter_list.html
-#, fuzzy
 msgid "There are no newsletters yet."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_list_standalone.html
 msgid "There are no offers"
@@ -15296,14 +14754,12 @@ msgid "There are no options for this poll yet!"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "There are no organization invitations."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_application_management_form.html
-#, fuzzy
 msgid "There are no participation applications yet."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/event_list_detailed_past.html
 msgid "There are no past events."
@@ -15312,14 +14768,12 @@ msgstr ""
 #: cosinnus/templates/cosinnus/group/group_detail.html
 #: cosinnus_organization/templates/cosinnus/organization/groups.html
 #: cosinnus_organization/templates/cosinnus/organization/organization_detail.html
-#, fuzzy
 msgid "There are no pending invitations."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/organizations.html
-#, fuzzy
 msgid "There are no pending organization requests."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/widgets/current.html
 msgid "There are no polls yet"
@@ -15338,14 +14792,12 @@ msgid "There are no public news posts"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_recorded_meetings.html
-#, fuzzy
 msgid "There are no recorded meetings yet."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_management.html
-#, fuzzy
 msgid "There are no rooms yet."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/poll_list.html
 msgid "There are no running polls."
@@ -15369,9 +14821,8 @@ msgid "There are no upcoming polls"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_list.html
-#, fuzzy
 msgid "There are no users yet."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_user_list.html
 #: cosinnus/templates/cosinnus/user/portal_admin_list.html
@@ -15393,14 +14844,13 @@ msgid "There is no description for this project yet."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user_import/user_import_form.html
-#, fuzzy
 msgid "There was a critical unexpected error during the import"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/views/profile.py
-#, fuzzy, python-format
+#, python-format
 msgid "There was an error blocking user %s."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/welcome_email.html
 #: cosinnus/templates/cosinnus/conference/conference_application_form.html
@@ -15430,28 +14880,25 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/navbar/notification-widget.html
 #: cosinnus/templates/cosinnus/universal/userdashboard/base-widget.html
-#, fuzzy
 msgid "There was an error loading the widget"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/views/profile.py
-#, fuzzy, python-format
+#, python-format
 msgid "There was an error unblocking user %s."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_message/utils/utils.py
 msgid "There was an error when processing your message text!"
 msgstr ""
 
 #: cosinnus/views/group.py
-#, fuzzy
 msgid "There was an error when trying to delete the invitation."
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/views/bbb_room.py
-#, fuzzy
 msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/views/mixins/avatar.py
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
@@ -15957,9 +15404,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-people.html
-#, fuzzy
 msgid "To Profile"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/admin/user/change_form.html
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
@@ -16301,9 +15747,8 @@ msgid "Type of video conference available for the event"
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_form.html
-#, fuzzy
 msgid "Type of your organization"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Type the names of files, events or pads from this conference to attach..."
@@ -16470,24 +15915,20 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/groups_newsletter_form.html
 #: cosinnus/templates/cosinnus/administration/managed_tags_newsletter_form.html
-#, fuzzy
 msgid "Update Newsletter"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_update_form.html
-#, fuzzy
 msgid "Update User"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_import/user_import_form.html
-#, fuzzy
 msgid "Upload CSV File"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "Upload File"
-msgstr "Convert selected Projects to Groups"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/media_tags.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/offer_form.html
@@ -16534,9 +15975,8 @@ msgid "Use Backup Token"
 msgstr ""
 
 #: cosinnus/models/group.py
-#, fuzzy
 msgid "Use invite token"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user_2fa/user_2fa_login.html
 msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
@@ -16672,9 +16112,8 @@ msgid "User Activity Timeline"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_list.html
-#, fuzzy
 msgid "User Administration"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/leftnav.html
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/user_dashboard_announcement_form.html
@@ -16828,9 +16267,9 @@ msgid "Users can filter their results in the Volunteer-O-Matic by distance so th
 msgstr ""
 
 #: cosinnus_organization/templates/cosinnus/organization/organization_user_list.html
-#, fuzzy, python-format
+#, python-format
 msgid "Users in organization %(group)s"
-msgstr "Users in project %(group)s"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_user_list.html
 #, python-format
@@ -16965,9 +16404,8 @@ msgstr ""
 #: cosinnus/templates/cosinnus/appsmenu.html
 #: cosinnus/templates/cosinnus/dashboard.html
 #: cosinnus_event/templates/cosinnus_event/single_event_detailed.html
-#, fuzzy
 msgid "Video conference"
-msgstr "About the project"
+msgstr ""
 
 #: cosinnus_file/filters.py
 msgid "Videos"
@@ -16978,19 +16416,16 @@ msgid "View"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite_action_buttons.html
-#, fuzzy
 msgid "View Group"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
-#, fuzzy
 msgid "View Past"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite_action_buttons.html
-#, fuzzy
 msgid "View Project"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
 msgid "View Upcoming"
@@ -17001,9 +16436,8 @@ msgid "View conference"
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy
 msgid "View invitation"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus_notifications/notifications.py
 #, python-format
@@ -17021,9 +16455,8 @@ msgid "View on page"
 msgstr ""
 
 #: cosinnus/admin.py cosinnus/templates/admin/user/change_form.html
-#, fuzzy
 msgid "View on site"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/admin/cosinnusreportedobject/change_form.html
 msgid "View reported item..."
@@ -17294,14 +16727,13 @@ msgid "Welcome"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
-#, fuzzy
 msgid "Welcome Message"
-msgstr "Create Group"
+msgstr ""
 
 #: cosinnus/views/user.py
-#, fuzzy, python-format
+#, python-format
 msgid "Welcome to %(portal_name)s!"
-msgstr "Edit project “%(team_name)s”"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/signup.html
 msgid "Welcome to the Community!"
@@ -17330,9 +16762,8 @@ msgid "What I wish to learn"
 msgstr ""
 
 #: cosinnus_message/templates/cosinnus_message/contact_message.html
-#, fuzzy
 msgid "What is your message?"
-msgstr "Create Group"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/texts/create_ideas_description.html
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
@@ -17399,9 +16830,8 @@ msgid "Where do you live?"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "Where is the conference active?"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Where is the group active?"
@@ -17726,9 +17156,8 @@ msgid "You are a member!"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "You are about to deactivate this conference!"
-msgstr "Are you sure you want to delete this prject?"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid ""
@@ -17738,9 +17167,8 @@ msgid ""
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "You are about to deactivate this group!"
-msgstr "Are you sure you want to delete this prject?"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid ""
@@ -17750,9 +17178,8 @@ msgid ""
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "You are about to deactivate this project!"
-msgstr "Are you sure you want to delete this prject?"
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid ""
@@ -17802,14 +17229,12 @@ msgid "You are an admin, but because you created this conference you have not ye
 msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
-#, fuzzy
 msgid "You are attending this conference"
-msgstr "Are you sure you want to delete this prject?"
+msgstr ""
 
 #: cosinnus_event/cosinnus_notifications.py
-#, fuzzy
 msgid "You are attending this event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/userprofile_detail.html
 msgid "You are blocking this user. Their content will not be visible to you."
@@ -17915,9 +17340,8 @@ msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
 msgstr ""
 
 #: cosinnus/views/group.py
-#, fuzzy
 msgid "You are not a member, but have access because you are an Administrator."
-msgstr "You're receiving this email because you are an administrator of this project."
+msgstr ""
 
 #: cosinnus_todo/forms.py cosinnus_todo/views.py
 msgid "You are not allowed to assign this Todo entry."
@@ -17977,9 +17401,8 @@ msgid "You are now located in %(group_name)s. You were redirected here from anot
 msgstr ""
 
 #: cosinnus/views/profile.py
-#, fuzzy
 msgid "You are only seeing this profile because you are an admin."
-msgstr "You're receiving this email because you are an administrator of this project."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-conferences.html
@@ -18203,9 +17626,8 @@ msgid "You cannot create or edit events until you are logged in!"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/guest_user_not_allowed.html
-#, fuzzy
 msgid "You cannot customize your user profile either."
-msgstr "Do you really want to leave project „%(title)s“?"
+msgstr ""
 
 #: cosinnus_stream/views.py
 msgid "You cannot delete the default stream!"
@@ -18237,9 +17659,9 @@ msgid "You cannot put this widget on a user dashboard."
 msgstr ""
 
 #: cosinnus/views/group.py
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
-msgstr "You cannot remove “%(username)s” form this project. Only one admin left."
+msgstr ""
 
 #: cosinnus/views/group.py
 #, python-format
@@ -18256,9 +17678,8 @@ msgid "You cannot request to be member of this group because at least one admin 
 msgstr ""
 
 #: cosinnus_etherpad/templates/cosinnus_etherpad/v2/dashboard/timeline_item.html
-#, fuzzy
 msgid "You created a pad"
-msgstr "A user created a new document"
+msgstr ""
 
 #: cosinnus_poll/templates/cosinnus_poll/v2/dashboard/timeline_item.html
 msgid "You created a poll"
@@ -18269,14 +17690,12 @@ msgid "You created a todo"
 msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/v2/dashboard/timeline_item.html
-#, fuzzy
 msgid "You created an event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/idea/dashboard/timeline_item.html
-#, fuzzy
 msgid "You created an idea"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/v2/dashboard/timeline_item.html
 msgid "You created an offer"
@@ -18304,9 +17723,8 @@ msgid "You do not have permission to access this stream."
 msgstr "You do not have permission to access this activity feed."
 
 #: cosinnus/models/bbb_room.py
-#, fuzzy
 msgid "You do not have permission to enter this room."
-msgstr "You do not have permission to access this activity feed."
+msgstr ""
 
 #: cosinnus/views/mixins/tagged.py
 #, python-format
@@ -18567,9 +17985,8 @@ msgid "You uploaded a file"
 msgstr ""
 
 #: cosinnus_event/cosinnus_notifications.py
-#, fuzzy
 msgid "You voted on this event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus_poll/cosinnus_notifications.py
 msgid "You voted on this poll"
@@ -18580,9 +17997,8 @@ msgid "You were made an admin of this team"
 msgstr ""
 
 #: cosinnus_deck/cosinnus_notifications.py
-#, fuzzy
 msgid "You were mentioned in a task comment"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
 #, python-format
@@ -18599,9 +18015,8 @@ msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
 msgstr ""
 
 #: cosinnus_event/cosinnus_notifications.py
-#, fuzzy
 msgid "You were tagged in this event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus_marketplace/cosinnus_notifications.py
 msgid "You were tagged in this offer"
@@ -18701,9 +18116,9 @@ msgid "You've matched!"
 msgstr ""
 
 #: cosinnus/views/user.py
-#, fuzzy, python-format
+#, python-format
 msgid "Your %(site_name)s Team"
-msgstr "%(team_name)s - Members"
+msgstr ""
 
 #: cosinnus/views/user_dashboard_announcement.py
 msgid "Your Announcement was activated successfully."
@@ -18738,9 +18153,8 @@ msgstr ""
 #: cosinnus/templates/cosinnus/group/group_activate_or_deactivate.html
 #: cosinnus/templates/cosinnus/group/group_list.html
 #: cosinnus/templates/cosinnus/user/leftnav.html
-#, fuzzy
 msgid "Your Deactivated Content"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/views/facebook_integration.py
 msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
@@ -18914,9 +18328,8 @@ msgid "Your email address %(email)s was successfully confirmed! However, you acc
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/user_change_email_pending.html
-#, fuzzy
 msgid "Your email address was successfully changed to:"
-msgstr "Your activity feed was added successfully."
+msgstr ""
 
 #: cosinnus/trans/group.py
 msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
@@ -18987,9 +18400,8 @@ msgid "Your membership request was declined"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_microsite.html
-#, fuzzy
 msgid "Your message"
-msgstr "Create Group"
+msgstr ""
 
 #: cosinnus_message/templates/postman/email_user.txt
 #: cosinnus_message/templates/postman/email_visitor.txt
@@ -19055,9 +18467,8 @@ msgid "Your offer has expired"
 msgstr ""
 
 #: cosinnus_organization/views/organization.py
-#, fuzzy
 msgid "Your organization was deleted successfully."
-msgstr "Your activity feed was deleted successfully."
+msgstr ""
 
 #: cosinnus/cosinnus_notifications.py
 #, python-format
@@ -19089,9 +18500,8 @@ msgstr ""
 #: cosinnus/forms/mixins.py
 #: cosinnus/templates/cosinnus/user/user_change_email_form.html
 #: cosinnus/templates/cosinnus/user_2fa/user_2fa_disable.html
-#, fuzzy
 msgid "Your password"
-msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/registration/password_change_done.html
 msgid "Your password has been changed successfully!"
@@ -19246,14 +18656,12 @@ msgid "Zero Hunger"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "activate"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "activate user accounts"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/list_object.html
@@ -19321,9 +18729,8 @@ msgid "conference"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_confirm_send_reminders.html
-#, fuzzy
 msgid "content"
-msgstr "All Projects"
+msgstr ""
 
 #: cosinnus/templates/admin/cms/page/menu_item.html
 msgid "copy"
@@ -19345,16 +18752,14 @@ msgid "created a todo"
 msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/v2/dashboard/timeline_item.html
-#, fuzzy
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an event"
-msgstr "%s - Events"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/idea/dashboard/timeline_item.html
-#, fuzzy
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an idea"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_marketplace/templates/cosinnus_marketplace/v2/dashboard/timeline_item.html
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
@@ -19366,14 +18771,12 @@ msgid "cut"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "deactivate"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "deactivate user accounts"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_deck/cosinnus_app.py
 msgctxt "the_app"
@@ -19502,10 +18905,9 @@ msgid "helptext_13_groupadministration"
 msgstr "The administration of Groups begins with managing its membership. Here you can decide who can join your Group and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal. "
 
 #: cosinnus/templates/cosinnus/common/modal_box_help_popup.html
-#, fuzzy
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
-msgstr "The administration of Groups begins with managing its membership. Here you can decide who can join your Group and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal. "
+msgstr ""
 
 #: cosinnus/templates/cosinnus/common/modal_box_help_popup.html
 msgctxt "Look up this ID in the help text register for the translation text!"
@@ -19620,14 +19022,12 @@ msgid "ignored"
 msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "in the Group Dashboard"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/trans/group.py
-#, fuzzy
 msgid "in the Project Dashboard"
-msgstr "Project Type"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/user/welcome_settings.html
 msgid "in the top right menu"
@@ -19768,9 +19168,8 @@ msgid "not going"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_application_management_form.html
-#, fuzzy
 msgid "not specified"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_note/cosinnus_app.py
 #: cosinnus_note/templates/cosinnus_note/note_list_standalone.html
@@ -19826,10 +19225,9 @@ msgid "or"
 msgstr ""
 
 #: cosinnus_organization/cosinnus_app.py
-#, fuzzy
 msgctxt "the_app"
 msgid "organization"
-msgstr "There are no groups."
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
 msgid "password"
@@ -19861,14 +19259,12 @@ msgid "previous"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "remove user"
-msgstr "Edit Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_temporary_users.html
-#, fuzzy
 msgid "remove user accounts"
-msgstr "Create Project"
+msgstr ""
 
 #: cosinnus_note/templates/cosinnus_note/note_form_modal.html
 msgid "request to join"
@@ -19887,9 +19283,8 @@ msgid "room name or title"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/conference_overview.html
-#, fuzzy
 msgid "running now!"
-msgstr "Join Project"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_list.html
 msgid "search"
@@ -19904,9 +19299,8 @@ msgid "send login token to all inactive users"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_application_management_form.html
-#, fuzzy
 msgid "show more ..."
-msgstr "Other Projects"
+msgstr ""
 
 #: cosinnus/views/statistics.py
 #, python-format
@@ -19947,10 +19341,10 @@ msgid "this user will enter the BBB presenter mode for this conversation"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/texts/welcome_frame_header.html
-#, fuzzy, python-format
+#, python-format
 msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "to %(portal_name)s"
-msgstr "Edit project “%(team_name)s”"
+msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_list.html
 msgid "to first page"
@@ -19998,15 +19392,7 @@ msgstr ""
 msgid "yes"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Active"
-#~ msgstr "Create Project"
-
 #~ msgid "All groups"
-#~ msgstr "All projects"
-
-#, fuzzy
-#~ msgid "All societies"
 #~ msgstr "All projects"
 
 #~ msgid "Arbeit und Recht"
@@ -20018,35 +19404,11 @@ msgstr ""
 #~ msgid "Bildung"
 #~ msgstr "Education"
 
-#, fuzzy
-#~ msgid "Conference Dashboard"
-#~ msgstr "Project Type"
-
-#, fuzzy
-#~ msgid "Deactivated Projects and Groups"
-#~ msgstr "Other Projects"
-
 #~ msgid "Deutsch"
 #~ msgstr "Deutsch"
 
-#, fuzzy
-#~ msgid "Direct Contact"
-#~ msgstr "Project Type"
-
-#, fuzzy
-#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
-#~ msgstr "Do you really want to leave project „%(title)s“?"
-
 #~ msgid "Do you really want to leave group „%(title)s“?"
 #~ msgstr "Do you really want to leave „%(title)s“?"
-
-#, fuzzy
-#~ msgid "Edit my Profile"
-#~ msgstr "Edit Project"
-
-#, fuzzy
-#~ msgid "Email to group administrator"
-#~ msgstr "There are no groups."
 
 #~ msgid "Enable this to allow users to create their own coffee tables"
 #~ msgstr "Enable this to allow users to create their own café tables"
@@ -20078,102 +19440,26 @@ msgstr ""
 #~ msgid "Help other members find you and use your real name."
 #~ msgstr "Help other members find you and use your real name."
 
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Create Group"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Create Group"
-
 #~ msgid "Klimaschutz"
 #~ msgstr "Climate Protection"
 
 #~ msgid "Kunst und Kultur"
 #~ msgstr "Art and Culture"
 
-#, fuzzy
-#~ msgid "Message Group"
-#~ msgstr "Create Group"
-
-#, fuzzy
-#~ msgid "Message Project"
-#~ msgstr "Create Project"
-
-#, fuzzy
-#~ msgid "Motivation"
-#~ msgstr "Groups"
-
-#, fuzzy
-#~ msgid "Name of educational institution"
-#~ msgstr "There are no groups."
-
-#, fuzzy
-#~ msgid "New etherpad by %(sender_name)s in %(team_name)s (which you follow)"
-#~ msgstr "A new Pad: \"%(object_name)s\" was uploaded in %(team_name)s."
-
 #~ msgid "No group found with this name"
 #~ msgstr "No project found with this name"
-
-#, fuzzy
-#~ msgid "Participation applications are currently disabled."
-#~ msgstr "There are no groups."
-
-#, fuzzy
-#~ msgid "Personal"
-#~ msgstr "Project Type"
 
 #~ msgid "Polish"
 #~ msgstr "Polski"
 
-#, fuzzy
-#~ msgid "Portal administrators"
-#~ msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
-
-#, fuzzy
-#~ msgid "Premium Bookings"
-#~ msgstr "Create Project"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Public Group"
-#~ msgstr "Select Group"
-
 #~ msgid "Russian"
 #~ msgstr "Русский"
-
-#, fuzzy
-#~ msgid "Search for email"
-#~ msgstr "Create Project"
-
-#, fuzzy
-#~ msgid "Set up your Profile"
-#~ msgstr "Edit Project"
 
 #~ msgid "Society"
 #~ msgstr "Group"
 
 #~ msgid "Society Menu"
 #~ msgstr "Group Menu"
-
-#, fuzzy
-#~ msgid "Start/join video chat for this event"
-#~ msgstr "%s - Events"
 
 #~ msgid "TODO: Room Type Coffee Tables description text"
 #~ msgstr "In the Café you can create as many tables as you want. There, the participants can meet and start a video conference directly with a webcam and microphone."
@@ -20196,35 +19482,11 @@ msgstr ""
 #~ msgid "TODO: Room Type Workshops description text"
 #~ msgstr "In Workshops each event has a video conference. Presenters are allowed to moderate those."
 
-#, fuzzy
-#~ msgid "Type of educational institution"
-#~ msgstr "Create Project"
-
 #~ msgid "Ukrainian"
 #~ msgstr "Українська"
 
 #~ msgid "Umwelt"
 #~ msgstr "Environment"
 
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "activate member"
-#~ msgstr "Create Project"
-
-#, fuzzy
-#~ msgid "deactivate member"
-#~ msgstr "Create Project"
-
 #~ msgid "join team"
 #~ msgstr "Join Project"
-
-#, fuzzy
-#~ msgid "not active"
-#~ msgstr "Create Project"
-
-#, fuzzy
-#~ msgid "participants"
-#~ msgstr "Projects"

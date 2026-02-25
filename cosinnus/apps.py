@@ -13,10 +13,8 @@ class CosinnusAppConfig(AppConfig):
         from cosinnus.models.group import replace_swapped_group_model
 
         replace_swapped_group_model()
-        from cosinnus.core.registries.urls import url_registry
 
-        # make sure, the CosinnusPortal-Object is always present, Tests will fail otherwise
-        post_migrate.connect(ensure_portal_and_site_exist, sender=self)
+        from cosinnus.core.registries.urls import url_registry
 
         url_registry.ready()
 
@@ -31,3 +29,6 @@ class CosinnusAppConfig(AppConfig):
 
         from cosinnus.api import hooks  # noqa
         from cosinnus import hooks  # noqa
+
+        # make sure, the CosinnusPortal-Object is always present, Tests will fail otherwise
+        post_migrate.connect(ensure_portal_and_site_exist, sender=self)
