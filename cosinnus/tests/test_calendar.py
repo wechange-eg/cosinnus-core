@@ -18,6 +18,7 @@ from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.tests.utils import CeleryTaskTestMixin
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_cloud.hooks import get_nc_user_id
 from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
 from cosinnus_event.models import Event
 
@@ -681,10 +682,19 @@ class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
         with cls.runCeleryTasks():
             cls.test_group.delete()
 
+    def _get_expected_user_calendar_url(self, user):
+        expected_user_calender_url = self.test_group.nextcloud_calendar_url
+        expected_user_calender_url = expected_user_calender_url.replace(
+            f'/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/',
+            f'/{get_nc_user_id(user)}/',
+        )
+        expected_user_calender_url = expected_user_calender_url[:-1]
+        expected_user_calender_url += f'_shared_by_{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/'
+        return expected_user_calender_url
+
     def test_calendar_view(self):
         div_data_group_id = f'data-group-id="{self.test_group.pk}"'
         div_data_calendar_url_empty = 'data-calendar-url=""'
-        div_data_calendar_url_set = f'data-calendar-url="{self.test_group.nextcloud_calendar_url}"'
 
         # test anonymous user has only access to group id for public events not the NC calendar
         res = self.client.get(self.calendar_view_url)
@@ -701,6 +711,7 @@ class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
 
         # test group user has access to group id for public events and NC calendar
         self.client.force_login(self.test_user)
+        div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_user)}"'
         res = self.client.get(self.calendar_view_url)
         self.assertEqual(res.status_code, 200)
         self.assertContains(res, div_data_group_id)
@@ -708,6 +719,7 @@ class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
 
         # test group admin has access to group id for public events and NC calendar
         self.client.force_login(self.test_admin)
+        div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_admin)}"'
         res = self.client.get(self.calendar_view_url)
         self.assertEqual(res.status_code, 200)
         self.assertContains(res, div_data_group_id)

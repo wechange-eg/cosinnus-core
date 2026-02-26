@@ -8,7 +8,7 @@
         {% if group.nextcloud_calendar_url %}
             <div id="calendar-group-root"
                 data-group-id="{{ group.pk }}"
-                data-calendar-url="{{ group.nextcloud_calendar_url }}">
+                data-calendar-url="{{ user_calendar_url }}">
             </div>
         {% else %}
             <p class="textfield transparent">

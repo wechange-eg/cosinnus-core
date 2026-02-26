@@ -4,8 +4,10 @@ from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 
+from cosinnus.conf import settings
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from cosinnus.views.mixins.group import DipatchGroupURLMixin
+from cosinnus_cloud.hooks import get_nc_user_id
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +32,18 @@ class CalendarView(DipatchGroupURLMixin, TemplateView):
             messages.warning(self.request, message)
         return super(CalendarView, self).get(request, *args, **kwargs)
 
+    def get_user_calendar_url(self, user, user_is_group_member):
+        """Convert the admin CalDAV URL to a user CalDAV URL, as NextCloud uses user specific CalDAV URLs."""
+        user_calendar_url = ''
+        if user_is_group_member and self.group.nextcloud_calendar_url:
+            user_calendar_url = self.group.nextcloud_calendar_url.replace(
+                f'/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/',
+                f'/{get_nc_user_id(self.request.user)}/',
+            )
+            user_calendar_url = user_calendar_url[:-1]
+            user_calendar_url += f'_shared_by_{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/'
+            return user_calendar_url
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         user = self.request.user
@@ -37,6 +51,7 @@ class CalendarView(DipatchGroupURLMixin, TemplateView):
         context.update(
             {
                 'private_events_available': user_is_group_member,
+                'user_calendar_url': self.get_user_calendar_url(user, user_is_group_member),
             }
         )
         return context
