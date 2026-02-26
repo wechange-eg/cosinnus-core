@@ -676,6 +676,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.cron.DeleteScheduledUserProfiles',
         'cosinnus.cron.UpdateConferencePremiumStatus',
         'cosinnus.cron.SwitchGroupPremiumFeatures',
+        'cosinnus.cron.SendGroupPremiumExpirationWarningEmails',
         'cosinnus.cron.DeleteTemporaryData',
         'cosinnus.cron.SendQueuedMassMails',
         'cosinnus.cron.DeleteOldGuestUsers',
