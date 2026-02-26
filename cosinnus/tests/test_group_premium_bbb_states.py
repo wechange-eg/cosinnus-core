@@ -18,6 +18,14 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 
 User = get_user_model()
 
+BASE_CONFIG = {
+    'COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS': True,
+    'COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED': True,
+    'COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS': 7,
+    'COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED': False,
+}
+"""Base config for this testmodule, used by all tests."""
+
 
 def html_normalize_text(html_content: str) -> str:
     unescaped = html.unescape(html_content)
@@ -50,11 +58,7 @@ class TestDataMixin:
         CosinnusGroupMembership.objects.create(user=cls.user, group=cls.project, status=MEMBERSHIP_ADMIN)
 
 
-@override_settings(
-    COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED=False,
-    COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=True,
-    COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS=7,
-)
+@override_settings(**BASE_CONFIG)
 class GroupPremiumBBBInfoBoxTest(TestDataMixin, TestCase):
     # Message strings to test for, can be multiple per state.
     MESSAGES = {
@@ -129,9 +133,7 @@ class SendHtmlMailCallArgs:
     topic: Optional[str]
 
 
-@override_settings(
-    COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=True, COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS=7
-)
+@override_settings(**BASE_CONFIG)
 class GroupPremiumStateChangeTest(TestDataMixin, TestCase):
     def _execute_scenario(
         self,
