@@ -1,3 +1,5 @@
+from unittest.mock import MagicMock, patch
+
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.urls import reverse
@@ -6,6 +8,7 @@ from rest_framework.test import APITestCase, override_settings
 
 from cosinnus.conf import settings
 from cosinnus.models import MEMBERSHIP_MEMBER, BaseTagObject
+from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
@@ -327,3 +330,77 @@ class RestrictedUsersTest(APITestCase):
             self.LOCKED_VISIBLITY_SETTING,
             '...and the user profile visibility is still set to the locked visiblity setting for that user',
         )
+
+    @patch('cosinnus.models.bbb_room.BBBRoom.restart')
+    def _restrict_bbb_room_creation_test(self, mock_bbb_restart: MagicMock = None, should_be_restricted=True):
+        """Tests restricting the creation of BBB Rooms if they aren't already running  for restricted and
+        non-restricted users."""
+
+        # create a group with two members
+        group = CosinnusProject.objects.create(name='Public group', public=True, type=CosinnusProject.TYPE_SOCIETY)
+        CosinnusGroupMembership.objects.create(
+            group_id=group.pk, user_id=self.test_user_unrestricted.pk, status=MEMBERSHIP_MEMBER
+        )
+        CosinnusGroupMembership.objects.create(
+            group_id=group.pk, user_id=self.test_user_restricted.pk, status=MEMBERSHIP_MEMBER
+        )
+
+        # soft-create a BBB-room (not backed by an actual BBB server) with the attendees
+        room = BBBRoom(
+            name='TestRoom',
+            meeting_id='TestMeetingId',
+            moderator_password='pwd',
+            attendee_password='pwd',
+        )
+        room.save()
+        room.attendees.add(self.test_user_unrestricted, self.test_user_restricted)
+        group.media_tag.bbb_room = room
+        group.media_tag.save()
+
+        # restricted users can't start a non-running room (they won't receive a join URL for it and see an error)
+        setattr(room, '_orig_is_running', room.restart)
+        setattr(BBBRoom, 'is_running', property(lambda self: False))
+        room_url = room.get_direct_room_url_for_user(self.test_user_restricted)
+        self.assertEqual(
+            room_url is None,
+            should_be_restricted,
+            'Restricted users cannot start a BBB room that is not running'
+            + (' (NEGATIVE)' if not should_be_restricted else ''),
+        )
+        # the room restart call should not have happened if a restriction is in place
+        if should_be_restricted:
+            mock_bbb_restart.assert_not_called()
+        else:
+            mock_bbb_restart.assert_called_once()
+        mock_bbb_restart.reset_mock()
+
+        # but regular users can start a non-running room (they will receive a join URL for it)
+        room_url = room.get_direct_room_url_for_user(self.test_user_unrestricted)
+        self.assertIsNotNone(room_url, 'Unrestricted users can start a BBB room that is not running')
+        # the room restart call should have happened if a restriction is in place
+        mock_bbb_restart.assert_called_once()
+
+        # consider the room started; now the restricted user will be able to join (they will receive a join URL for it)
+        setattr(BBBRoom, 'is_running', property(lambda self: True))
+        room_url = room.get_direct_room_url_for_user(self.test_user_restricted)
+        self.assertIsNotNone(
+            room_url,
+            'Restricted users can join a BBB room that is running'
+            + (' (NEGATIVE)' if not should_be_restricted else ''),
+        )
+
+    @override_settings(
+        COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS=[
+            RESTRICTED_TAG_SLUG,
+        ],
+    )
+    def test_restrict_bbb_room_creation(self):
+        """Tests restricting the creation of BBB Rooms if they aren't already running for restricted users."""
+        self._restrict_bbb_room_creation_test()
+
+    @override_settings(
+        COSINNUS_MANAGED_TAGS_RESTRICT_BBB_NO_CREATE_ROOMS=[],
+    )
+    def test_restrict_bbb_room_creation_negative(self):
+        """Tests restricting the creation of BBB Rooms if they aren't already running for non-restricted users"""
+        self._restrict_bbb_room_creation_test(should_be_restricted=False)
