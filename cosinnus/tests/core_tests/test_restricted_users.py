@@ -345,6 +345,12 @@ class RestrictedUsersTest(APITestCase):
             group_id=group.pk, user_id=self.test_user_restricted.pk, status=MEMBERSHIP_MEMBER
         )
 
+        # we cannot generate a real bbb join url since the bbb settings are incomplete
+        get_join_url_mock = patch('cosinnus.models.bbb_room.BBBRoom.get_join_url')
+        get_join_url_mock.return_value = 'https://dummy_bbb_url/'
+        get_join_url_mock.start()
+        self.addCleanup(get_join_url_mock.stop)
+
         # soft-create a BBB-room (not backed by an actual BBB server) with the attendees
         room = BBBRoom(
             name='TestRoom',
