@@ -309,8 +309,8 @@ class CalendarPublicEventBBBRoomActionSerializer(BBBRoomUrlsMixin, serializers.M
             'restricted',
             'premium',
             'enabled',
-            'url',
-            'guest_url',
+            'bbb_url',
+            'bbb_guest_url',
         )
 
     def get_available(self, obj):
@@ -340,7 +340,7 @@ class CalendarPublicEventBBBRoomActionSerializer(BBBRoomUrlsMixin, serializers.M
         return data
 
     def to_internal_value(self, data):
-        settings_data = data.pop('settings')
+        settings_data = data.pop('settings', None)
         if settings_data:
             settings_serializer = CosinnusConferenceSettingsSerializer(
                 data=settings_data, parent_object=self.instance, group=self.instance.group
