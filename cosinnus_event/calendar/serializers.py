@@ -359,6 +359,6 @@ class CalendarPublicEventBBBRoomUrlsActionSerializer(BBBRoomUrlsMixin, serialize
     class Meta:
         model = Event
         fields = (
-            'url',
-            'guest_url',
+            'bbb_url',
+            'bbb_guest_url',
         )
