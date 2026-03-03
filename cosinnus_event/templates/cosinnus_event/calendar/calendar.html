@@ -6,8 +6,8 @@
 {% block content %}
     {% if private_events_available %}
         {% if group.nextcloud_calendar_url %}
-            <div id="calendar-group-root"
-                data-group-id="{{ group.pk }}"
+            <div id="calendar-space-root"
+                data-space-id="{{ group.pk }}"
                 data-calendar-url="{{ user_calendar_url }}">
             </div>
         {% else %}
@@ -20,6 +20,6 @@
             </script>
         {% endif %}
     {% else %}
-        <div id="calendar-group-root" data-group-id="{{ group.pk }}" data-calendar-url=""></div>
+        <div id="calendar-space-root" data-space-id="{{ group.pk }}" data-calendar-url=""></div>
     {% endif %}
 {% endblock content %}
