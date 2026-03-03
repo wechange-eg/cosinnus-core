@@ -192,6 +192,11 @@ class BaseTagObject(models.Model):
         null=True, blank=True, verbose_name=_('External Video Conference URL')
     )
 
+    show_bbb_guest_access_outside_of_conference = models.BooleanField(
+        default=False,
+        verbose_name=_('Show BBB guest access outside of conference.'),
+    )
+
     def save(self, *args, **kwargs):
         # update like count
         if self.pk:

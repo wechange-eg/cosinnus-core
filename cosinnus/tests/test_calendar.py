@@ -18,6 +18,7 @@ from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.tests.utils import CeleryTaskTestMixin
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_cloud.hooks import get_nc_user_id
 from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
 from cosinnus_event.models import Event
 
@@ -256,6 +257,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
         event_list_url = None
         event_detail_url = None
         event_attendance_url = None
+        event_bbb_room_url = None
 
         # timezone for datetimes
         tz = timezone.get_current_timezone()
@@ -320,6 +322,10 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             )
             cls.event_attendance_url = reverse(
                 'cosinnus:frontend-api:calendar-api:calendar-event-attendance',
+                kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
+            )
+            cls.event_bbb_room_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-event-bbb-room',
                 kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
             )
 
@@ -388,10 +394,8 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'ical_url': self.test_event.get_feed_url(),
                 'attending': False,
                 'attendances': [],
-                'bbb_available': False,
-                'bbb_restricted': False,
-                'bbb_enabled': False,
                 'bbb_url': None,
+                'bbb_guest_url': None,
                 'image': None,
                 'attached_files': [],
             }
@@ -410,17 +414,17 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             }
 
             # anonymous user cant create events
-            res = self.client.post(self.event_list_url, data=event_post_data)
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
             self.assertEqual(res.status_code, 403)
 
             # non group user cant create events
             self.client.force_login(self.test_non_group_user)
-            res = self.client.post(self.event_list_url, data=event_post_data)
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
             self.assertEqual(res.status_code, 403)
 
             # group user can create events
             self.client.force_login(self.test_user)
-            res = self.client.post(self.event_list_url, data=event_post_data)
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
             self.assertEqual(res.status_code, 201)
             data = res.json()['data']
             self.assertIsNotNone(data['id'])
@@ -448,28 +452,28 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             }
 
             # anonymous user cant update event
-            res = self.client.patch(self.event_detail_url, data=event_update_data)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
             self.assertEqual(res.status_code, 403)
 
             # non group user cant update event
             self.client.force_login(self.test_non_group_user)
-            res = self.client.patch(self.event_detail_url, data=event_update_data)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
             self.assertEqual(res.status_code, 403)
 
             # group user cant update other users event
             self.client.force_login(self.test_second_group_user)
-            res = self.client.patch(self.event_detail_url, data=event_update_data)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
             self.assertEqual(res.status_code, 403)
 
             # event owner cant update other users event
             self.assertEqual(self.test_event.creator, self.test_user)
             self.client.force_login(self.test_user)
-            res = self.client.patch(self.event_detail_url, data=event_update_data)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
             self.assertEqual(res.status_code, 200)
 
             # group admin can update events
             self.client.force_login(self.test_admin)
-            res = self.client.patch(self.event_detail_url, data=event_update_data)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
             self.assertEqual(res.status_code, 200)
 
             # check that event was updated
@@ -515,7 +519,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
 
             # change location type and external_video_conference_url
             media_tag_data = {'location_type': BaseTagObject.LOCATION_TYPE_ONLINE}
-            res = self.client.patch(self.event_detail_url, data=media_tag_data)
+            res = self.client.patch(self.event_detail_url, data=media_tag_data, format='json')
             self.assertEqual(res.status_code, 200)
 
             # check changed location in detail API
@@ -525,15 +529,15 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
 
         def test_event_attendance(self):
             # anonymous user cant set attending
-            res = self.client.post(self.event_attendance_url, data={'attending': True})
+            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
             self.assertEqual(res.status_code, 403)
 
             # all logged-in users can set attendance for events
             self.client.force_login(self.test_non_group_user)
-            res = self.client.post(self.event_attendance_url, data={'attending': True})
+            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
             self.assertEqual(res.status_code, 200)
             self.client.force_login(self.test_user)
-            res = self.client.post(self.event_attendance_url, data={'attending': True})
+            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
             self.assertEqual(res.status_code, 200)
 
             # check attending in detail api
@@ -590,10 +594,10 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
 
             # remove attendance
             self.client.force_login(self.test_non_group_user)
-            res = self.client.post(self.event_attendance_url, data={'attending': False})
+            res = self.client.post(self.event_attendance_url, data={'attending': False}, format='json')
             self.assertEqual(res.status_code, 200)
             self.client.force_login(self.test_user)
-            res = self.client.post(self.event_attendance_url, data={'attending': False})
+            res = self.client.post(self.event_attendance_url, data={'attending': False}, format='json')
             self.assertEqual(res.status_code, 200)
 
             # check removed attending
@@ -617,35 +621,131 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             data = res.json()['data']
             self.assertEqual(data['attendances'], [])
 
-        @override_settings(COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=False)
-        def test_event_bbb_disabled(self):
-            res = self.client.get(self.event_detail_url)
-            self.assertEqual(res.status_code, 200)
-            data = res.json()['data']
-            self.assertFalse(data['bbb_available'])
-            self.assertTrue(data['bbb_restricted'])
-            self.assertFalse(data['bbb_enabled'])
-
         @override_settings(
             COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=True,
             COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
         )
-        def test_event_bbb_enabled(self):
-            res = self.client.get(self.event_detail_url)
-            self.assertEqual(res.status_code, 200)
-            data = res.json()['data']
-            self.assertTrue(data['bbb_available'])
-            self.assertFalse(data['bbb_restricted'])
-            self.assertFalse(data['bbb_enabled'])
-
-            # enable bbb
+        def test_event_bbb_room(self):
+            # check user permissions
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 403)
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 403)
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 403)
             self.client.force_login(self.test_user)
-            res = self.client.patch(self.event_detail_url, {'bbb_enabled': True})
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
+            self.client.force_login(self.test_admin)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
+
+            # check response
+            data = res.json()['data']
+            self.assertEqual(
+                data,
+                {
+                    'available': True,
+                    'restricted': False,
+                    'premium': False,
+                    'enabled': False,
+                    'bbb_url': None,
+                    'bbb_guest_url': None,
+                    'settings': {
+                        'bbb_params': {
+                            'mic_starts_on': False,
+                            'cam_starts_on': False,
+                            'waiting_room': False,
+                            'record_meeting': False,
+                            'welcome_message': None,
+                        },
+                        'premium_params': ['record_meeting'],
+                        'show_guest_access': False,
+                    },
+                },
+            )
+
+            # check that event has no conference settings
+            self.assertFalse(self.test_event.conference_settings_assignments.exists())
+
+            # check show_guest_access is disbaled media_tag setting
+            self.test_event.media_tag.refresh_from_db()
+            self.assertFalse(self.test_event.media_tag.show_bbb_guest_access_outside_of_conference)
+
+            # enable bbb and set some parameters
+            patch_data = {
+                'enabled': True,
+                'settings': {
+                    'bbb_params': {
+                        'mic_starts_on': True,
+                        'cam_starts_on': True,
+                        'waiting_room': True,
+                        'welcome_message': 'Test Welcome Message',
+                    },
+                    'show_guest_access': True,
+                },
+            }
+            res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
-            self.assertTrue(data['bbb_enabled'])
-            bbb_queue_url = reverse('cosinnus:bbb-room-queue', kwargs={'mt_id': self.test_event.media_tag.id})
-            self.assertEqual(data['bbb_url'], bbb_queue_url)
+            self.assertTrue(data['enabled'])
+            expected_bbb_params = patch_data['settings']['bbb_params']
+            expected_bbb_params['record_meeting'] = False
+            self.assertEqual(data['settings']['bbb_params'], expected_bbb_params)
+            self.assertTrue(data['settings']['show_guest_access'])
+
+            # check bbb params
+            conf_settings = self.test_event.conference_settings_assignments.first()
+            self.assertEqual(
+                conf_settings.bbb_params,
+                {
+                    'create': {
+                        'welcome': 'Test Welcome Message',
+                        'guestPolicy': 'ASK_MODERATOR',
+                        'muteOnStart': 'false',
+                    },
+                    'join': {'userdata-bbb_auto_share_webcam': 'true'},
+                },
+            )
+
+            # check show_guest_access media_tag setting
+            self.test_event.media_tag.refresh_from_db()
+            self.assertTrue(self.test_event.media_tag.show_bbb_guest_access_outside_of_conference)
+
+            # check bbb urls
+            res = self.client.get(self.event_bbb_room_url)
+            data = res.json()['data']
+            self.assertEqual(data['bbb_url'], self.test_event.media_tag.bbb_room.get_absolute_url())
+            expected_guest_url = reverse(
+                'cosinnus:bbb-room-guest-access',
+                kwargs={'guest_token': self.test_event.media_tag.bbb_room.get_guest_token()},
+            )
+            self.assertEqual(data['bbb_guest_url'], expected_guest_url)
+
+            # disable guest link
+            patch_data = {'settings': {'show_guest_access': False}}
+            res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
+            data = res.json()['data']
+            self.test_event.media_tag.refresh_from_db()
+            self.assertFalse(self.test_event.media_tag.show_bbb_guest_access_outside_of_conference)
+            self.assertIsNone(data['bbb_guest_url'])
+
+            # disable bbb
+            patch_data = {'enabled': False}
+            res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
+            data = res.json()['data']
+            self.assertFalse(data['enabled'])
+            self.assertIsNone(data['bbb_url'])
+
+        @override_settings(COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=False)
+        def test_event_bbb_room_with_bbb_disabled(self):
+            self.client.force_login(self.test_admin)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertFalse(data['available'])
 
 
 class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
@@ -681,10 +781,19 @@ class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
         with cls.runCeleryTasks():
             cls.test_group.delete()
 
+    def _get_expected_user_calendar_url(self, user):
+        expected_user_calender_url = self.test_group.nextcloud_calendar_url
+        expected_user_calender_url = expected_user_calender_url.replace(
+            f'/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/',
+            f'/{get_nc_user_id(user)}/',
+        )
+        expected_user_calender_url = expected_user_calender_url[:-1]
+        expected_user_calender_url += f'_shared_by_{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/'
+        return expected_user_calender_url
+
     def test_calendar_view(self):
         div_data_group_id = f'data-group-id="{self.test_group.pk}"'
         div_data_calendar_url_empty = 'data-calendar-url=""'
-        div_data_calendar_url_set = f'data-calendar-url="{self.test_group.nextcloud_calendar_url}"'
 
         # test anonymous user has only access to group id for public events not the NC calendar
         res = self.client.get(self.calendar_view_url)
@@ -701,6 +810,7 @@ class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
 
         # test group user has access to group id for public events and NC calendar
         self.client.force_login(self.test_user)
+        div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_user)}"'
         res = self.client.get(self.calendar_view_url)
         self.assertEqual(res.status_code, 200)
         self.assertContains(res, div_data_group_id)
@@ -708,6 +818,7 @@ class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
 
         # test group admin has access to group id for public events and NC calendar
         self.client.force_login(self.test_admin)
+        div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_admin)}"'
         res = self.client.get(self.calendar_view_url)
         self.assertEqual(res.status_code, 200)
         self.assertContains(res, div_data_group_id)

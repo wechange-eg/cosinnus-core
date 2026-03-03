@@ -101,7 +101,7 @@ urlpatterns += [
         VersionHistoryUnreadCountView.as_view(),
         name='api-navigation-unread-version-history',
     ),
-    path('api/v3/group/<int:group_id>/settings/', GroupSettingsView.as_view(), name='api-group-settings'),
+    path('api/v3/space/<int:group_id>/settings/', GroupSettingsView.as_view(), name='api-group-settings'),
 ]
 
 if settings.COSINNUS_ADMIN_USER_APIS_ENABLED:

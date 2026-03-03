@@ -13,6 +13,8 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_event.calendar.permissions import CalendarPublicEventPermissions
 from cosinnus_event.calendar.serializers import (
     CalendarPublicEventAttendanceActionSerializer,
+    CalendarPublicEventBBBRoomActionSerializer,
+    CalendarPublicEventBBBRoomUrlsActionSerializer,
     CalendarPublicEventListQueryParameterSerializer,
     CalendarPublicEventListSerializer,
     CalendarPublicEventSerializer,
@@ -47,6 +49,10 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
             return AttachFileSerializer
         elif self.action == 'delete_attached_file':
             return DeleteAttachedFileSerializer
+        elif self.action == 'bbb_room':
+            return CalendarPublicEventBBBRoomActionSerializer
+        elif self.action == 'bbb_room_urls':
+            return CalendarPublicEventBBBRoomUrlsActionSerializer
         return self.serializer_class
 
     def get_serializer_context(self):
@@ -151,3 +157,38 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response()
+
+    @action(
+        detail=True,
+        methods=['get', 'patch', 'post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CalendarPublicEventPermissions],
+    )
+    def bbb_room(self, request, group_id, pk=None):
+        """
+        BBB Room and conference settings API.
+        Serializer is set in get_serializer_class.
+        """
+        instance = self.get_object()
+        if request.method == 'GET':
+            serializer = self.get_serializer(instance)
+        else:
+            serializer = self.get_serializer(instance, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        return Response(serializer.data)
+
+    @action(
+        detail=True,
+        methods=['get'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CalendarPublicEventPermissions],
+    )
+    def bbb_room_urls(self, request, group_id, pk=None):
+        """
+        API for BBB room Urls, used for periodic pull during BBB room creation.
+        Serializer is set in get_serializer_class.
+        """
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
