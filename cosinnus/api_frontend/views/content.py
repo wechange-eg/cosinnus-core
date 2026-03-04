@@ -2,6 +2,7 @@ import itertools
 import logging
 import re
 from copy import copy
+from http.cookiejar import CookieJar
 from urllib.parse import urlparse
 
 import requests
@@ -364,16 +365,33 @@ class MainContentView(LanguageMenuItemMixin, APIView):
     def build_data_response(self, data, resolved_response=None):
         """Build a response from the given data package and set the cookies from the resolved target URL query."""
         rest_response = Response(data)
-        if resolved_response is not None:
-            for cookie in resolved_response.cookies:
-                rest_response.set_cookie(
-                    cookie.name,
-                    value=cookie.value,
-                    expires=cookie.expires,
-                    path=cookie.path,
-                    domain=cookie.domain,
-                    secure=cookie.secure,
-                )
+
+        # cached and queried responses have different data-types
+        if resolved_response is not None and resolved_response.cookies:
+            if isinstance(resolved_response.cookies, CookieJar):
+                for cookie in resolved_response.cookies:
+                    rest_response.set_cookie(
+                        cookie.name,
+                        value=cookie.value,
+                        expires=cookie.expires,
+                        path=cookie.path,
+                        domain=cookie.domain,
+                        secure=cookie.secure,
+                    )
+            elif hasattr(resolved_response.cookies, 'values'):
+                # SimpleCookie or Dict
+                for key, morsel in resolved_response.cookies.items():
+                    rest_response.set_cookie(
+                        key,
+                        value=morsel.value,
+                        expires=morsel['expires'],
+                        path=morsel['path'],
+                        domain=morsel['domain'],
+                        secure=morsel['secure'],
+                    )
+            else:
+                logger.error(f'Unexpected type for response cookies: {type(resolved_response.cookies)}')
+
         return rest_response
 
     def build_redirect_response(self, target_url, resolved_response=None):
