@@ -693,6 +693,12 @@ class CosinnusConf(AppConf):
     # switch to the German version of OpenStreetMap tileset
     MAP_USE_MODERN_TILESET = False
 
+    # OpenCage geocode api key. if unset, no location strings provided in v3 apis
+    # can be coded to actual location coordinates and thus will not be saved in v3 apis
+    # and the v3 onboarding process
+    # (Set this in .env via WECHANGE_COSINNUS_GEOCODE_OPENCAGE_KEY!)
+    GEOCODE_OPENCAGE_KEY = None
+
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False

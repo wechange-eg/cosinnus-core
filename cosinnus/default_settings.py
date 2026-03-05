@@ -989,6 +989,10 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # reconfigure the el_pagination label so we can identify it better
     EL_PAGINATION_PAGE_LABEL = 'endless_page'
 
+    COSINNUS_GEOCODE_OPENCAGE_KEY = env(
+        'WECHANGE_COSINNUS_GEOCODE_OPENCAGE_KEY', default=project_settings.get('COSINNUS_GEOCODE_OPENCAGE_KEY')
+    )
+
     return vars()
 
 

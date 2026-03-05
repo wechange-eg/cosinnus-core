@@ -132,7 +132,7 @@ setup(
         'easy-thumbnails==2.8.5',
         'elasticsearch==7.17.9',
         'ecdsa==0.18.0',
-        'geopy==1.11.0',
+        'geopy==2.4.1',
         'icalendar==6.3.2',
         'jsonfield==3.1.0',
         'l18n==2021.3',
