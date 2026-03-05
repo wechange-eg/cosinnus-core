@@ -693,6 +693,12 @@ class CosinnusConf(AppConf):
     # switch to the German version of OpenStreetMap tileset
     MAP_USE_MODERN_TILESET = False
 
+    # OpenCage geocode api key. if unset, no location strings provided in v3 apis
+    # can be coded to actual location coordinates and thus will not be saved in v3 apis
+    # and the v3 onboarding process
+    # (Set this in .env via WECHANGE_COSINNUS_GEOCODE_OPENCAGE_KEY!)
+    GEOCODE_OPENCAGE_KEY = None
+
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
@@ -1152,6 +1158,10 @@ class CosinnusConf(AppConf):
     # whether profile editing via the view and api should be possible
     DISABLE_PROFILE_EDITING = False
 
+    # "disables" the /setup/profile/ v3 view by blocking the v3 redirect with a redirect to the userprofile,
+    # and removing the links to it in the userprofile
+    DISABLE_V3_PROFILE_SETUP_VIEWS = False
+
     # if profile editing is disabled a url can be provided to redirect all profile edit requests
     EXTERNAL_PROFILE_EDITING_URL = None
 
@@ -1410,6 +1420,10 @@ class CosinnusConf(AppConf):
     SSO_ENABLE_CONNECTING_ACCOUNT = False
     # Send SSO welcome mails informing the user about the SSO signup
     SSO_SEND_WELCOME_MAIL = False
+
+    # when welcome email sending is enabled via the django admin portal checkbox,
+    # this subject will be used (if None, the default "Welcome to (PORTAL.NAME)!" string will be used.
+    WELCOME_EMAIL_SUBJECT = None
 
     # whether SDGs should be shown in group/project forms and detail templates
     ENABLE_SDGS = False

@@ -1,6 +1,14 @@
-from geopy.geocoders.osm import Nominatim
+import logging
+import random
 
+from geopy import OpenCage
+from geopy.exc import GeocoderInsufficientPrivileges, GeopyError
+from geopy.extra.rate_limiter import RateLimiter
+
+from cosinnus.conf import settings
 from cosinnus.utils.functions import is_number
+
+logger = logging.getLogger('cosinnus')
 
 
 class CosinnusMediaTagSerializerMixin:
@@ -51,15 +59,48 @@ class CosinnusMediaTagSerializerMixin:
                 media_tag.location = location_str.strip()
                 media_tag.location_lat = float(location_lat)
                 media_tag.location_lon = float(location_lon)
-            else:
-                # use nominatim service to determine an actual location from the given string
-                # TODO: extract nominatim URL and use ours for production!
-                geolocator = Nominatim(domain='nominatim.openstreetmap.org', user_agent='wechange')
-                location = geolocator.geocode(location_str.strip(), timeout=5)
+            elif settings.COSINNUS_GEOCODE_OPENCAGE_KEY:
+                # use OpenCage service to determine an actual location from the given string
+                geolocator = OpenCage(api_key=settings.COSINNUS_GEOCODE_OPENCAGE_KEY, timeout=5)
+                # retry max 10 times, after between 0.5 - 1 secs randomly
+                geocode = RateLimiter(
+                    geolocator.geocode,
+                    min_delay_seconds=0.5,
+                    max_retries=10,
+                    error_wait_seconds=0.5 + random.uniform(0.0, 0.5),
+                )
+
+                location = None
+                try:
+                    location = geocode(location_str.strip())
+                except (GeocoderInsufficientPrivileges, GeopyError, Exception) as e:
+                    extra = {
+                        'media_tag_id': media_tag.id,
+                        'location_str': location_str,
+                        'reason': type(e),
+                        'exc': str(e),
+                    }
+                    logger.error(
+                        (
+                            'Error: A user location could not be geoceded as nominatim, the request returned an error! '
+                            'User location was not saved.'
+                        ),
+                        extra=extra,
+                    )
                 if location:
                     media_tag.location = location_str
                     media_tag.location_lat = location.latitude
                     media_tag.location_lon = location.longitude
+            else:
+                # no opencage api key defined, log a waning that the location str was not saved!
+                extra = {
+                    'media_tag_id': media_tag.id,
+                    'location_str': location_str,
+                }
+                logger.warning(
+                    ('Warning: A user location could not be geoceded as nominatim as no geocode api key was set.'),
+                    extra=extra,
+                )
 
         # save location_type
         if 'location_type' in media_tag_data:
