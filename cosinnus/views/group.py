@@ -25,6 +25,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.defaultfilters import linebreaksbr
 from django.template.loader import render_to_string
 from django.urls import NoReverseMatch, reverse, reverse_lazy
+from django.utils import translation
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.html import escape
@@ -50,6 +51,7 @@ from cosinnus.core.decorators.views import (
     membership_required,
     redirect_to_403,
 )
+from cosinnus.core.mail import get_common_mail_context, send_html_mail_threaded
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.conference import CosinnusConferenceSettingsMultiForm
@@ -65,6 +67,7 @@ from cosinnus.forms.tagged import get_form
 from cosinnus.models import group as group_module  # noqa # circular import prevention
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import (
+    CosinnusBaseGroup,
     CosinnusGroup,
     CosinnusGroupCallToActionButton,
     CosinnusGroupGalleryImage,
@@ -86,7 +89,7 @@ from cosinnus.models.membership import (
 from cosinnus.models.profile import UserBlock
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
-from cosinnus.templatetags.cosinnus_tags import full_name, is_superuser
+from cosinnus.templatetags.cosinnus_tags import full_name, is_superuser, textfield
 from cosinnus.utils.compat import atomic
 from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.group import (
@@ -2389,6 +2392,28 @@ class RemoveGroupInviteFromGroup(RequireReadMixin, FormView):
                     invited_groups.remove(group_id)
                     self.group.save()
         return HttpResponseRedirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group}))
+
+
+def email_group_admins(
+    group: CosinnusBaseGroup, subject_template, html_template, topic_instead_of_subject=None, data=None
+):
+    admins = group.actual_admins
+
+    for admin in admins:
+        admin_data = get_common_mail_context(None, group, admin)
+        if data:
+            admin_data.update(data)
+
+        if admin.cosinnus_profile:
+            admin_language = admin.cosinnus_profile.language
+        else:
+            admin_language = None
+
+        with translation.override(admin_language):
+            subject = render_to_string(subject_template, admin_data).strip()
+            text = textfield(render_to_string(html_template, admin_data))
+
+        send_html_mail_threaded(admin, subject, text, topic_instead_of_subject)
 
 
 group_group_invite_delete = RemoveGroupInviteFromGroup.as_view()
