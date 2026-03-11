@@ -12,6 +12,7 @@ class CalendarPublicEventPermissions(BasePermission):
 
     # List of viewset actions that require write access to the event.
     EVENT_WRITE_ACTIONS = [
+        'create',
         'update',
         'partial_update',
         'destroy',
