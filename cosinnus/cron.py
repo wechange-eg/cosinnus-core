@@ -141,7 +141,7 @@ class SwitchGroupPremiumFeatures(CosinnusCronJobBase):
                     email_group_admins(
                         group,
                         'cosinnus/mail/group_premium_expired_notification_subj.txt',
-                        'cosinnus/mail/group_premium_expired_notification.html',
+                        'cosinnus/mail/group_premium_expiration_notification.html',
                         None,
                     )
                 except Exception as e:
@@ -203,7 +203,7 @@ class SendGroupPremiumExpirationWarningEmails(CosinnusCronJobBase):
                     email_group_admins(
                         group,
                         'cosinnus/mail/group_premium_expires_soon_notification_subj.txt',
-                        'cosinnus/mail/group_premium_expires_soon_notification.html',
+                        'cosinnus/mail/group_premium_expiration_notification.html',
                         None,
                     )
                 except Exception as e:

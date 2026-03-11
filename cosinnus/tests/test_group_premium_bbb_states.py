@@ -67,11 +67,11 @@ class GroupPremiumBBBInfoBoxTest(TestDataMixin, TestCase):
             'This {type} currently has Videoconference Pro booked until Feb. 20, 2026',
         ),
         CosinnusBaseGroup.GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON: (
-            'The booking for Videoconference Pro for this {type} ends after Feb. 5, 2026',
+            'The booked period for Video Conference Pro for this {type} ends after Feb. 5, 2026',
             '5 days',
         ),
         CosinnusBaseGroup.GROUP_PREMIUM_STATE_EXPIRED: (
-            'The booking for Videoconference Pro for this {type} ended on Jan. 15, 2026',
+            'The booked period for Video Conference Pro for this {type} has ended on Jan. 15, 2026',
         ),
     }
 
@@ -209,7 +209,7 @@ class GroupPremiumStateChangeTest(TestDataMixin, TestCase):
     def _get_mail_args_expiration(self) -> SendHtmlMailCallArgs:
         return SendHtmlMailCallArgs(
             user=self.user,
-            subject='The booking for Videoconference Pro for the group "testgroup" has ended.',
+            subject='The booked period for Video Conference Pro for the group "testgroup" has ended.',
             content_fragment=f'href="{self.group.get_absolute_url()}"',
             topic=None,
         )
@@ -220,7 +220,7 @@ class GroupPremiumStateChangeTest(TestDataMixin, TestCase):
         return SendHtmlMailCallArgs(
             user=self.user,
             subject=(
-                'The booking for Videoconference Pro for the group "testgroup"'
+                'The booked period for Video Conference Pro for the group "testgroup"'
                 f' ends after {date_str} ({days_left} days).'
             ),
             content_fragment=f'href="{self.group.get_absolute_url()}"',

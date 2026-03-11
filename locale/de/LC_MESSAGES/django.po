@@ -2724,14 +2724,12 @@ msgstr "Admins"
 msgid "Advanced BBB-Room Tools"
 msgstr "Erweiterte BBB-Raum Tools"
 
-#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
-#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
 #, python-format
 msgid "Affected Group: [%(group_name)s](%(group_url)s)"
 msgstr "Betroffene Gruppe: [%(group_name)s](%(group_url)s)"
 
-#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
-#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
 #, python-format
 msgid "Affected Project: [%(group_name)s](%(group_url)s)"
 msgstr "Betroffenes Projekt: [%(group_name)s](%(group_url)s)"
@@ -6762,8 +6760,7 @@ msgid "Export event feed"
 msgstr "Feed für Veranstaltungen"
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
-#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
 msgid "Extend Videoconference Pro"
 msgstr "Videokonferenz Pro verlängern"
 
@@ -8842,14 +8839,9 @@ msgid "If you would like to change your email address, you can do it here:"
 msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
-msgid "If you would like to extend your booking, please feel free to contact us using the following form:"
-msgstr "Wenn du deine Buchung verlängern möchtest, kannst du uns gerne über das folgende Formular kontaktieren:"
-
-#: cosinnus/templates/cosinnus/group/group_form.html
-#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
-msgid "If you would like to renew your booking, please feel free to contact us using the following form:"
-msgstr "Wenn du deine Buchung erneuern möchtest, kannst du uns gerne über das folgende Formular kontaktieren:"
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
+msgid "If you would like to extend the period, you are welcome to make a new booking using the following form:"
+msgstr "Wenn du den Zeitraum verlängern möchtest, kannst du gerne über das folgende Formular erneut eine Buchung vornehmen:"
 
 #: cosinnus/models/user_import.py
 msgid "Ignored/Failed Items"
@@ -14673,43 +14665,43 @@ msgstr "Die Profile der Administrator/innen sind aufgrund ihrer Sichtbarkeitsein
 
 #: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification_subj.txt
 #, python-format
-msgid "The booking for Videoconference Pro for the group \"%(group_name)s\" ends after %(last_day)s (%(days_left)s days)."
-msgstr "Die Buchung für Videokonferenz Pro für die Gruppe \"%(group_name)s\" endet nach dem %(last_day)s (%(days_left)s Tage)."
+msgid "The booked period for Video Conference Pro for the group \"%(group_name)s\" ends after %(last_day)s (%(days_left)s days)."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für deine Gruppe \"%(group_name)s\" endet nach dem %(last_day)s (%(days_left)s Tage)."
 
 #: cosinnus/templates/cosinnus/mail/group_premium_expired_notification_subj.txt
 #, python-format
-msgid "The booking for Videoconference Pro for the group \"%(group_name)s\" has ended."
-msgstr "Die Buchung für Videokonferenz Pro für die Gruppe \"%(group_name)s\" ist beendet."
+msgid "The booked period for Video Conference Pro for the group \"%(group_name)s\" has ended."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für deine Gruppe \"%(group_name)s\" ist abgelaufen."
 
 #: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification_subj.txt
 #, python-format
-msgid "The booking for Videoconference Pro for the project \"%(group_name)s\" ends after %(last_day)s (%(days_left)s days)."
-msgstr "Die Buchung für Videokonferenz Pro für das Projekt \"%(group_name)s\" endet nach dem %(last_day)s (%(days_left)s Tage)."
+msgid "The booked period for Video Conference Pro for the project \"%(group_name)s\" ends after %(last_day)s (%(days_left)s days)."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt \"%(group_name)s\" endet nach dem %(last_day)s (%(days_left)s Tage)."
 
 #: cosinnus/templates/cosinnus/mail/group_premium_expired_notification_subj.txt
 #, python-format
-msgid "The booking for Videoconference Pro for the project \"%(group_name)s\" has ended."
-msgstr "Die Buchung für Videokonferenz Pro für das Projekt \"%(group_name)s\" ist beendet."
+msgid "The booked period for Video Conference Pro for the project \"%(group_name)s\" has ended."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt \"%(group_name)s\" ist abgelaufen."
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 #, python-format
-msgid "The booking for Videoconference Pro for this group ended on %(end_date)s."
-msgstr "Die Buchung für Videokonferenz Pro für diese Gruppe endete am %(end_date)s."
+msgid "The booked period for Video Conference Pro for this group ends after %(last_day)s (%(days_left)s days)"
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für deine Gruppe endet nach dem %(last_day)s (%(days_left)s Tage)"
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 #, python-format
-msgid "The booking for Videoconference Pro for this group ends after %(last_day)s (%(days_left)s days)"
-msgstr "Die Buchung für Videokonferenz Pro für diese Gruppe endet nach dem %(last_day)s (%(days_left)s Tage)"
+msgid "The booked period for Video Conference Pro for this group has ended on %(end_date)s."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für deine Gruppe ist am %(end_date)s abgelaufen."
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 #, python-format
-msgid "The booking for Videoconference Pro for this project ended on %(end_date)s."
-msgstr "Die Buchung für Videokonferenz Pro für dieses Projekt endete am %(end_date)s."
+msgid "The booked period for Video Conference Pro for this project ends after %(last_day)s (%(days_left)s days)"
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt endet nach dem %(last_day)s (%(days_left)s Tage)"
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 #, python-format
-msgid "The booking for Videoconference Pro for this project ends after %(last_day)s (%(days_left)s days)"
-msgstr "Die Buchung für Videokonferenz Pro für dieses Projekt endet nach dem %(last_day)s (%(days_left)s Tage)"
+msgid "The booked period for Video Conference Pro for this project has ended on %(end_date)s."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt ist am %(end_date)s abgelaufen."
 
 #: cosinnus_event/views.py cosinnus_marketplace/views.py cosinnus_poll/views.py
 msgid "The complete request can only be sent via POST!"
@@ -16321,10 +16313,11 @@ msgstr "Thema"
 #: cosinnus/templates/cosinnus/universal/map/map-controls.html
 #: cosinnus/templates/cosinnus/universal/tiles/grid-tile-default.html
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-base.html
-#: cosinnus/templatetags/cosinnus_tags.py
+#: cosinnus/templatetags/cosinnus_tags.py cosinnus/views/expert_search.py
 msgid "Topics"
 msgstr "Themen"
 
+#: cosinnus/templates/cosinnus/expert_search/user_list_items.html
 #: cosinnus/templates/cosinnus/media_tags_userprofile_readonly.html
 msgid "Topics I am interested in"
 msgstr "Themen die mich interessieren"
@@ -18875,8 +18868,7 @@ msgstr "Sie erhalten diese E-Mail weil sie eine Passwortänderung ihres Benutzer
 msgid "You've matched!"
 msgstr "Ihr wurdet gematcht!"
 
-#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification.html
-#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
 #: cosinnus/views/user.py
 #, python-format
 msgid "Your %(site_name)s Team"

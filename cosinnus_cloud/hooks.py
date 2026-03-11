@@ -147,14 +147,12 @@ def update_user_profile_avatar(profile, retry=False):
     try:
         if profile.avatar:
             # avatar changed, using a thumbnail the same size as the avatar in NextCloud
-            avatar_file = profile.get_avatar_thumbnail(size=(512, 512))
-            with avatar_file.open() as file:
-                avatar_content = file.read()
+            avatar_file = profile.get_avatar_thumbnail(size=(512, 512)).path
         else:
             # avatar deleted, using jane-doe image as the nc plugin does not provide avatar deletion
             avatar_file = staticfiles_storage.path('images/jane-doe.png')
-            with open(avatar_file, 'rb') as file:
-                avatar_content = file.read()
+        with open(avatar_file, 'rb') as file:
+            avatar_content = file.read()
     except Exception as e:
         logger.warning('Could not update Nextcloud user avatar.', extra={'exc': e})
 

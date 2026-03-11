@@ -70,7 +70,7 @@
             </h4>
             <div class="v-offset-s">
                 <p>
-                    {% trans "If you would like to extend your booking, please feel free to contact us using the following form:" %}
+                    {% trans "If you would like to extend the period, you are welcome to make a new booking using the following form:" %}
                 </p>
                 <p>
                     <a href="https://wechange.de/cms/videokonferenz-pro/#formular"
@@ -84,19 +84,19 @@
             <h4>
                 {% with last_day=group.enable_user_premium_choices_until %}
                     {% if group.type == 0 %}
-                        {% blocktrans trimmed with days_left=group.group_premium_days_left %} The booking for
-                            Videoconference Pro for this project ends after {{ last_day }} ({{ days_left }} days)
+                        {% blocktrans trimmed with days_left=group.group_premium_days_left %} The booked period for
+                            Video Conference Pro for this project ends after {{ last_day }} ({{ days_left }} days)
                         {% endblocktrans %}
                     {% else %}
-                        {% blocktrans trimmed with days_left=group.group_premium_days_left %} The booking for
-                            Videoconference Pro for this group ends after {{ last_day }} ({{ days_left }} days)
+                        {% blocktrans trimmed with days_left=group.group_premium_days_left %} The booked period for
+                            Video Conference Pro for this group ends after {{ last_day }} ({{ days_left }} days)
                         {% endblocktrans %}
                     {% endif %}
                 {% endwith %}
             </h4>
             <div class="v-offset-s">
                 <p>
-                    {% trans "If you would like to extend your booking, please feel free to contact us using the following form:" %}
+                    {% trans "If you would like to extend the period, you are welcome to make a new booking using the following form:" %}
                 </p>
                 <p>
                     <a href="https://wechange.de/cms/videokonferenz-pro/#formular"
@@ -110,17 +110,17 @@
             <h4>
                 {% with end_date=group.group_premium_expired_on %}
                     {% if group.type == 0 %}
-                        {% blocktrans trimmed %}The booking for
-                            Videoconference Pro for this project ended on {{ end_date }}. {% endblocktrans %}
+                        {% blocktrans trimmed %}The booked period for Video Conference Pro for this project has ended on
+                            {{ end_date }}. {% endblocktrans %}
                     {% else %}
-                        {% blocktrans trimmed %}The booking for
-                            Videoconference Pro for this group ended on {{ end_date }}. {% endblocktrans %}
+                        {% blocktrans trimmed %}The booked period for Video Conference Pro for this group has ended on
+                            {{ end_date }}. {% endblocktrans %}
                     {% endif %}
                 {% endwith %}
             </h4>
             <div class="v-offset-s">
                 <p>
-                    {% trans "If you would like to renew your booking, please feel free to contact us using the following form:" %}
+                    {% trans "If you would like to extend the period, you are welcome to make a new booking using the following form:" %}
                 </p>
                 <p>
                     <a href="https://wechange.de/cms/videokonferenz-pro/#formular"
