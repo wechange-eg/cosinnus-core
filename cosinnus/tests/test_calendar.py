@@ -13,6 +13,7 @@ import cosinnus_cloud
 from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
+from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.models.group import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
@@ -746,6 +747,33 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertFalse(data['available'])
+
+        @override_settings(
+            COSINNUS_TAGGED_EXTRA_FIELDS={
+                'cosinnus_event.Event': {
+                    'test_field': dynamic_fields.CosinnusDynamicField(
+                        type=dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT,
+                        label='Dynamic Test Field',
+                        required=False,
+                    ),
+                }
+            }
+        )
+        def test_event_dynamic_fields(self):
+            # check dynamic field not set
+            self.assertEqual(self.test_event.media_tag.dynamic_fields, {})
+            # set dynamic field
+            self.client.force_login(self.test_user)
+            dynamic_field_data = {'test_field': 'Test Field Value'}
+            res = self.client.patch(self.event_detail_url, data=dynamic_field_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            # check dynamic field value in resonse
+            self.assertIn('test_field', data)
+            self.assertEqual(data['test_field'], dynamic_field_data['test_field'])
+            # check dynamic field is set in the events media_tag
+            self.test_event.media_tag.refresh_from_db()
+            self.assertEqual(self.test_event.media_tag.dynamic_fields, dynamic_field_data)
 
 
 class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
