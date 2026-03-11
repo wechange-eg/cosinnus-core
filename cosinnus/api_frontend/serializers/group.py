@@ -17,6 +17,7 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
     # Events app settings
     events_ical_url = serializers.SerializerMethodField()
     events_event_message = serializers.SerializerMethodField()
+    events_event_description_required = serializers.SerializerMethodField()
 
     class Meta(object):
         model = get_cosinnus_group_model()
@@ -26,6 +27,7 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
             'bbb_premium_booking_url',
             'events_ical_url',
             'events_event_message',
+            'events_event_description_required',
         ]
 
     def get_bbb_available(self, obj):
@@ -46,3 +48,6 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
 
     def get_events_event_message(self, obj):
         return settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_MESSAGE
+
+    def get_events_event_description_required(self, obj):
+        return settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED

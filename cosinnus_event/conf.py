@@ -33,3 +33,6 @@ class CosinnusEventConf(AppConf):
 
     # Defines a text shown in the create and edit view of private events in the v3 calendar.
     V3_CALENDAR_EVENT_MESSAGE = None
+
+    # Setting to make the description of events required.
+    V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED = False

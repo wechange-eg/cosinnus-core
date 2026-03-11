@@ -130,7 +130,9 @@ class CalendarPublicEventSerializer(
 
     from_date = serializers.DateTimeField(required=True)
     to_date = serializers.DateTimeField(required=True)
-    description = serializers.CharField(source='note', required=False)
+    description = serializers.CharField(
+        source='note', required=settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED
+    )
     creator = CalendarPublicEventCreatorSerializer(read_only=True)
     can_edit = serializers.SerializerMethodField()
     topics = serializers.MultipleChoiceField(
