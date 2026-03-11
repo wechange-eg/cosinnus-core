@@ -5,6 +5,7 @@ from rest_framework import serializers
 
 from cosinnus.api_frontend.serializers.attached_objects import AttachedFileSerializer
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
+from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusDynamicFieldsSerializerMixin
 from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializerMixin
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
@@ -120,7 +121,10 @@ class BBBRoomUrlsMixin:
 
 
 class CalendarPublicEventSerializer(
-    CosinnusMediaTagSerializerMixin, BBBRoomUrlsMixin, CalendarPublicEventListSerializer
+    CosinnusDynamicFieldsSerializerMixin,
+    CosinnusMediaTagSerializerMixin,
+    BBBRoomUrlsMixin,
+    CalendarPublicEventListSerializer,
 ):
     """Complete Serializer for events in the calendar API."""
 
@@ -188,6 +192,9 @@ class CalendarPublicEventSerializer(
     image = Base64ImageField(required=False, default=None, allow_null=True)
     attached_files = serializers.SerializerMethodField()
 
+    # dynamic field serializer parameters
+    dynamic_fields_source = 'media_tag.dynamic_fields'
+
     class Meta:
         model = Event
         fields = (
@@ -221,7 +228,9 @@ class CalendarPublicEventSerializer(
             data['attendances'] = []
         return data
 
-    def create(self, validated_data):
+    def create_or_update(self, validated_data, instance=None):
+        # copy validate_data for dynamic field serializer
+        complete_validated_data = validated_data.copy()
         # get nested media tag data
         media_tag_data = validated_data.pop('media_tag', {})
         # set group and creator
@@ -232,25 +241,35 @@ class CalendarPublicEventSerializer(
                 'state': Event.STATE_SCHEDULED,
             }
         )
-        instance = Event.objects.create(**validated_data)
+        if not instance:
+            # create event
+            validated_data.update(
+                {
+                    'group': self.context['group'],
+                    'creator': self.context['request'].user,
+                    'state': Event.STATE_SCHEDULED,
+                }
+            )
+            instance = Event.objects.create(**validated_data)
+        else:
+            # update event
+            for field, value in validated_data.items():
+                setattr(instance, field, value)
+            instance.save()
         # set event visibility to public
         instance.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
         # save media tag fields
         if media_tag_data:
             self.save_media_tag(instance.media_tag, media_tag_data)
+        # save dynamic fields data
+        self.save_dynamic_fields(complete_validated_data, instance.media_tag)
         return instance
 
+    def create(self, validated_data):
+        return self.create_or_update(validated_data)
+
     def update(self, instance, validated_data):
-        # get nested media tag data
-        media_tag_data = validated_data.pop('media_tag', {})
-        # update event fields
-        for field, value in validated_data.items():
-            setattr(instance, field, value)
-        instance.save()
-        # save media tag fields
-        if media_tag_data:
-            self.save_media_tag(instance.media_tag, media_tag_data)
-        return instance
+        return self.create_or_update(validated_data, instance=instance)
 
     def get_can_edit(self, obj):
         return check_object_write_access(obj, self.context['request'].user)
@@ -268,6 +287,12 @@ class CalendarPublicEventSerializer(
             serialized_attached_object = AttachedFileSerializer(attached_object).data
             attached_files.append(serialized_attached_object)
         return attached_files
+
+    def get_model(self):
+        return Event
+
+    def get_dynamic_field_settings(self):
+        return settings.COSINNUS_TAGGED_EXTRA_FIELDS['cosinnus_event.Event']
 
 
 class CalendarPublicEventAttendanceActionSerializer(serializers.Serializer):
