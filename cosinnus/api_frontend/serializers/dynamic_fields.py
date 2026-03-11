@@ -25,13 +25,18 @@ class OutputEmptyAsNoneCharField(serializers.CharField):
         return str(value)
 
 
-class CosinnusUserDynamicFieldsSerializerMixin(object):
-    """Dynamically adds serializer fields for the dynamic userprofile fields
-    to any DRF serializer.
+class CosinnusDynamicFieldsSerializerMixin:
+    """Dynamically adds serializer fields for the dynamic fields to any DRF serializer.
     (see `UserCreationFormDynamicFieldsMixin`)"""
 
-    # stub for overriding Forms, the dynamic field settings for this form
+    # stub for overriding the dynamic field settings
     DYNAMIC_FIELD_SETTINGS = None
+
+    # Base model instance of the API, e.g. User
+    model = None
+
+    # Used to access the dynamic field from the model instance, e.g "cosinnus_profile.dynamic_fields"
+    dynamic_fields_source = 'dynamic_fields'
 
     # if set to a string, will only include such fields in the form
     # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
@@ -42,12 +47,17 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
     # will instead become serializer fields that are required=False but may not be empty
     all_fields_optional = False
 
-    # set to true if this is used only for signup and should run unique checks on profile, ignoring own instance pk's
-    used_only_for_signup = False
+    # set to true to run custom unique checks before an object is created
+    # e.g. if this is used only for signup and should run unique checks on profile, ignoring own instance pk's
+    validate_unique_before_create = False
+
+    # validate required fields on partial updates
+    # e.g. for the user profile serializer we use partial POST requests and should validate all required fields.
+    validate_required_on_partial_update = False
 
     def __init__(self, *args, **kwargs):
         """Add serializer field for each dynamic field"""
-        for field_name, field_options in self.DYNAMIC_FIELD_SETTINGS.items():
+        for field_name, field_options in self.get_dynamic_field_settings().items():
             if self.filter_included_fields_by_option_name and not getattr(
                 field_options, self.filter_included_fields_by_option_name, False
             ):
@@ -77,7 +87,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                     required=field_options.required if not self.all_fields_optional else False,
                     allow_empty=not field_options.required if self.all_fields_optional else True,
                     default=drf_empty if field_options.required else field_options.default or list,
-                    source=f'cosinnus_profile.dynamic_fields.{field_name}',
+                    source=f'{self.dynamic_fields_source}.{field_name}',
                     help_text=f'This is a dynamic field of data type: <List>({field_options.type})',
                 )
             else:
@@ -92,7 +102,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                     'required': field_options.required if not self.all_fields_optional else False,
                     'allow_null': not field_options.required if self.all_fields_optional else True,
                     'default': drf_empty if field_options.required else field_options.default,
-                    'source': f'cosinnus_profile.dynamic_fields.{field_name}',
+                    'source': f'{self.dynamic_fields_source}.{field_name}',
                     'help_text': f'This is a dynamic field of data type: {field_options.type}',
                 }
                 if field_serializer == serializers.CharField:
@@ -102,38 +112,50 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                         }
                     )
                 field = field_serializer(**serializer_params)
+
+            # add field definition
             setattr(self, field_name, field)
             self._declared_fields[field_name] = field
+            if hasattr(self, 'Meta'):
+                meta_fields = getattr(self.Meta, 'fields', None)
+                if meta_fields:
+                    if isinstance(meta_fields, tuple):
+                        meta_fields += (field_name,)
+                    elif isinstance(meta_fields, list):
+                        meta_fields.append(field_name)
+                    setattr(self.Meta, 'fields', meta_fields)
 
             # Add serializer for translated dynamic fields
-            if (
-                settings.COSINNUS_TRANSLATED_FIELDS_ENABLED
-                and field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS
-            ):
-                for language_code, __ in settings.LANGUAGES:
-                    translated_field_name = f'{field_name}__{language_code}'
-                    # Using a profile function added by the TranslateableFieldsModelMixin as source.
-                    source = f'cosinnus_profile.get_{translated_field_name}'
-                    field = OutputEmptyAsNoneCharField(
-                        required=False,
-                        allow_null=True,
-                        allow_blank=True,
-                        source=source,
-                        default='',
-                        help_text=f'This is a dynamic field translation for {field_name}.',
-                    )
-                    setattr(self, translated_field_name, field)
-                    self._declared_fields[translated_field_name] = field
+            self.init_translated_fields(field_name)
 
         super().__init__(*args, **kwargs)
 
-    def _validate_unique_dynamic_field(self, dynamic_field_name, dynamic_field_value):
-        """Perform unique validation for a given field and field value of the dynamic userprofile fields.
-        This does NOT take into account the own userprofile!
-        @return an Error message if there was a unique error, None otherwise"""
-        from cosinnus.models.profile import get_user_profile_model
+    def get_dynamic_field_settings(self):
+        """Allows to dynamically overwrite the dynamic field settings, e.g. for TAGGED_EXTRA_FIELDS."""
+        return self.DYNAMIC_FIELD_SETTINGS
 
-        model_class = get_user_profile_model()
+    def get_model(self):
+        """Get the model where the dynamic fields are defined, used for custom unique check."""
+        raise NotImplementedError
+
+    def init_translated_fields(self, field_name):
+        """Custom initialization of translated fields."""
+        pass
+
+    def _get_dynamic_field_attr_dict(self, attrs):
+        """Get the dynamic field values from the serialized data using the source parameter."""
+        source_fields = self.dynamic_fields_source.split('.')
+        dynamic_field_attr_dict = attrs
+        for source_field in source_fields:
+            dynamic_field_attr_dict = dynamic_field_attr_dict.get(source_field, {})
+        return dynamic_field_attr_dict
+
+    def _validate_unique_dynamic_field(self, dynamic_field_name, dynamic_field_value):
+        """Perform unique validation for a given field and field value of the dynamic fields.
+        This does NOT take into account the own instance!
+        @return an Error message if there was a unique error, None otherwise"""
+
+        model_class = self.get_model()
         # ignore empty values
         if dynamic_field_value is None or dynamic_field_value == '':
             return None
@@ -151,14 +173,14 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
     def validate(self, attrs):
         """Validate dynamic fields: we build a temporary formfield and use it to
         run validation with the given data"""
-        for field_name, field_options in self.DYNAMIC_FIELD_SETTINGS.items():
+        for field_name, field_options in self.get_dynamic_field_settings().items():
             if self.filter_included_fields_by_option_name and not getattr(
                 field_options, self.filter_included_fields_by_option_name, False
             ):
                 continue
 
             errors = {}
-            dynamic_field_attr_dict = attrs.get('cosinnus_profile', {}).get('dynamic_fields', {})
+            dynamic_field_attr_dict = self._get_dynamic_field_attr_dict(attrs)
             # skip non required, non-existant fields
             if not field_options.required and field_name not in dynamic_field_attr_dict:
                 continue
@@ -179,12 +201,13 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                 if field_value in emtpy_field_values and (
                     not field_options.required
                     or (self.all_fields_optional and field_name not in dynamic_field_attr_dict)
+                    or (self.partial and not self.validate_required_on_partial_update)
                 ):
                     continue
                 formfield.validate(field_value)
                 formfield.run_validators(field_value)
                 # run unique validation (custom, to catch errors before a profile save - important for user creation)
-                if field_options.unique and self.used_only_for_signup:
+                if field_options.unique and self.validate_unique_before_create:
                     unique_error = self._validate_unique_dynamic_field(field_name, field_value)
                     if unique_error:
                         errors[field_name] = unique_error
@@ -199,25 +222,79 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
         attrs = super().validate(attrs)
         return attrs
 
-    def save_dynamic_fields(self, validated_data, userprofile, save=True):
-        """Saves any dynamic fields contained in the validated_data to the userprofile.
+    def save_dynamic_fields(self, validated_data, instance, save=True):
+        """Saves any dynamic fields contained in the validated_data to the instnace.
         To be called from within `create()` or `update()`"""
-        profile_changed = False
-        for field_name, field_options in self.DYNAMIC_FIELD_SETTINGS.items():
+        instance_changed = False
+        for field_name, field_options in self.get_dynamic_field_settings().items():
             if self.filter_included_fields_by_option_name and not getattr(
                 field_options, self.filter_included_fields_by_option_name, False
             ):
                 continue
 
-            dynamic_field_attr_dict = validated_data.get('cosinnus_profile', {}).get('dynamic_fields', {})
+            dynamic_field_attr_dict = self._get_dynamic_field_attr_dict(validated_data)
             if field_name not in dynamic_field_attr_dict:
                 continue
             # if the field key is actually in the data here, we can be sure that it needs to be saved
             field_value = dynamic_field_attr_dict.get(field_name, '')
-            userprofile.dynamic_fields[field_name] = field_value
-            profile_changed = True
+            instance.dynamic_fields[field_name] = field_value
+            instance_changed = True
 
         # Save dynamic field translations
+        self.save_dynamic_field_translations(instance, validated_data)
+
+        if instance_changed:
+            try:
+                if save:
+                    instance.save()
+                else:
+                    # if we aren't saving yet, still run unique validation
+                    instance.validate_unique()
+            except DjangoValidationError as exc:
+                errors = {'field_name': get_error_detail(exc)}
+                raise ValidationError(errors)
+
+    def save_dynamic_field_translations(self, instance, validated_data):
+        """Custom handling of translated dynamic fields"""
+        pass
+
+
+class CosinnusUserDynamicFieldsSerializerMixin(CosinnusDynamicFieldsSerializerMixin):
+    """Dynamically adds serializer fields for the dynamic userprofile fields to any DRF serializer.
+    (see `UserCreationFormDynamicFieldsMixin`)"""
+
+    dynamic_fields_source = 'cosinnus_profile.dynamic_fields'
+    validate_required_on_partial_update = True
+
+    def get_model(self):
+        from cosinnus.models.profile import get_user_profile_model
+
+        return get_user_profile_model()
+
+    def init_translated_fields(self, field_name):
+        """Initialize translated userprofile dynamic fields."""
+        if (
+            settings.COSINNUS_TRANSLATED_FIELDS_ENABLED
+            and field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS
+        ):
+            for language_code, __ in settings.LANGUAGES:
+                translated_field_name = f'{field_name}__{language_code}'
+                # Using a profile function added by the TranslateableFieldsModelMixin as source.
+                source = f'cosinnus_profile.get_{translated_field_name}'
+                field = OutputEmptyAsNoneCharField(
+                    required=False,
+                    allow_null=True,
+                    allow_blank=True,
+                    source=source,
+                    default='',
+                    help_text=f'This is a dynamic field translation for {field_name}.',
+                )
+                setattr(self, translated_field_name, field)
+                self._declared_fields[translated_field_name] = field
+
+    def save_dynamic_field_translations(self, userprofile, validated_data):
+        """Save translated userprofile dynamic fields."""
+        profile_changed = False
         if userprofile.has_dynamic_field_translations:
             translations_changed = False
             dynamic_field_translations = userprofile.translations.get('dynamic_fields', {})
@@ -225,7 +302,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
             # validated data.
             profile_attr_dict = validated_data.get('cosinnus_profile', {})
             for field_name in userprofile.translatable_dynamic_fields:
-                field_options = self.DYNAMIC_FIELD_SETTINGS.get('field_name')
+                field_options = self.get_dynamic_field_settings().get('field_name')
                 if self.filter_included_fields_by_option_name and not getattr(
                     field_options, self.filter_included_fields_by_option_name, False
                 ):
@@ -245,14 +322,4 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
             if translations_changed:
                 profile_changed = True
                 userprofile.translations['dynamic_fields'] = dynamic_field_translations
-
-        if profile_changed:
-            try:
-                if save:
-                    userprofile.save()
-                else:
-                    # if we aren't saving yet, still run unique validation
-                    userprofile.validate_unique()
-            except DjangoValidationError as exc:
-                errors = {'field_name': get_error_detail(exc)}
-                raise ValidationError(errors)
+        return profile_changed
