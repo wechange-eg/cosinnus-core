@@ -292,12 +292,9 @@ def generate_api_dict_for_dynamic_field(field_name, field_definition_dict, field
     return field_data
 
 
-class PortalUserprofileDynamicFieldsView(APIView):
-    """An endpoint that returns the configured topic choices for this portal"""
+class PortalDynamicFieldsBaseView(APIView):
+    """Base API dynamic field definitions."""
 
-    # disallow anonymous users if signup is disabled
-    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
-        permission_classes = (IsAuthenticated,)
     renderer_classes = (
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
@@ -309,7 +306,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
     description = """
         A list of objects containing the field name, meta info and "choices":
         a list of tuples of acceptable key/value pairs (or null if all values are acceptable)
-        for each dynamic userprofile field for this portal.
+        for each dynamic field.
 
         Field attributes:
         - "name": str, field name
@@ -333,7 +330,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
                 assigned
         - "choices": list or null, the choice tuples of (value, label) for choice fields
     """
-    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+    DYNAMIC_FIELD_SETTINGS = None
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -387,16 +384,35 @@ class PortalUserprofileDynamicFieldsView(APIView):
     )
     def get(self, request):
         field_data = []
-        for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
+        dynamic_field_settings = self.get_dynamic_field_settings()
+        for field_name in dynamic_field_settings.keys():
             items_for_field = generate_api_dict_for_dynamic_field(
-                field_name, self.DYNAMIC_FIELD_SETTINGS, field_option_filter=self.field_option_filter
+                field_name, dynamic_field_settings, field_option_filter=self.field_option_filter
             )
             field_data.extend(items_for_field)
 
         return Response(field_data)
 
+    def get_dynamic_field_settings(self):
+        """Allow to set dynamic field settings dynamically."""
+        return self.DYNAMIC_FIELD_SETTINGS
+
+
+class PortalUserprofileDynamicFieldsView(PortalDynamicFieldsBaseView):
+    """User profile dynamic field definitions."""
+
+    # disallow anonymous users if signup is disabled
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
+        permission_classes = (IsAuthenticated,)
+    description = (
+        PortalDynamicFieldsBaseView.description + ' This view shows the dynamic userprofile fields for this portal.'
+    )
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+
 
 class PortalUserprofileDynamicFieldsSignupView(PortalUserprofileDynamicFieldsView):
+    """User profile dynamic field definitions filtered by signup fields."""
+
     if settings.COSINNUS_USER_SIGNUP_ENABLED:
         # anyone can access this, as it is required for signup
         permission_classes = ()
@@ -711,3 +727,15 @@ class PortalSettingsView(APIView):
         """Clears the portal setting dict cache entries for all languages"""
         for language_code, __ in settings.LANGUAGES:
             cache.delete(cls.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % language_code)
+
+
+class PortalTaggedDynamicFieldsView(PortalDynamicFieldsBaseView):
+    """User profile dynamic field definitions."""
+
+    description = PortalDynamicFieldsBaseView.description + ' This view shows the dynamic fields for tagged objects.'
+
+    # tagged_model set via view parameter
+    tagged_model = None
+
+    def get_dynamic_field_settings(self):
+        return settings.COSINNUS_TAGGED_EXTRA_FIELDS[self.tagged_model]
