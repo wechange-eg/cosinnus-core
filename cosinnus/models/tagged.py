@@ -15,7 +15,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import validate_comma_separated_integer_list
 from django.db import models
-from django.db.models import Q
+from django.db.models import JSONField, Q
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.encoding import force_str
@@ -195,6 +195,14 @@ class BaseTagObject(models.Model):
     show_bbb_guest_access_outside_of_conference = models.BooleanField(
         default=False,
         verbose_name=_('Show BBB guest access outside of conference.'),
+    )
+
+    dynamic_fields = JSONField(
+        default=dict,
+        blank=True,
+        encoder=DjangoJSONEncoder,
+        verbose_name=_('Dynamic extra fields'),
+        help_text=('Extra tagged object fields for each portal, as defined in `settings.COSINNUS_TAGGED_EXTRA_FIELDS`'),
     )
 
     def save(self, *args, **kwargs):

@@ -22,6 +22,7 @@ from cosinnus.api_frontend.views.navigation import (
 from cosinnus.api_frontend.views.portal import (
     PortalManagedTagsView,
     PortalSettingsView,
+    PortalTaggedDynamicFieldsView,
     PortalTagsView,
     PortalTopicsView,
     PortalUserprofileDynamicFieldsSignupView,
@@ -76,6 +77,11 @@ urlpatterns += [
         'api/v3/portal/userprofile_dynamicfields/',
         PortalUserprofileDynamicFieldsView.as_view(),
         name='api-portal-userprofile-dynamicfields',
+    ),
+    path(
+        'api/v3/portal/tagged_dynamicfields/event/',
+        PortalTaggedDynamicFieldsView.as_view(tagged_model='cosinnus_event.Event'),
+        name='api-portal-event-dynamicfields',
     ),
     path('api/v3/portal/settings/', PortalSettingsView.as_view(), name='api-portal-settings'),
     path('api/v3/content/main/', MainContentView.as_view(), name='api-content-main'),

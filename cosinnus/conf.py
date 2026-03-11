@@ -1281,6 +1281,10 @@ class CosinnusConf(AppConf):
     # usage: see `USERPROFILE_EXTRA_FIELDS`
     GROUP_EXTRA_FIELDS = {}
 
+    # dynamic field settings (see `USERPROFILE_EXTRA_FIELDS`) for tagged objects by model.
+    # e.g. 'cosinnus_event.Event': {....},
+    TAGGED_EXTRA_FIELDS = {}
+
     # a i18n str that explains the special password rules to the user,
     # can be markdown.
     # will display default field legend if None
