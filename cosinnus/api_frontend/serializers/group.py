@@ -1,6 +1,7 @@
 from django.template.loader import render_to_string
 from rest_framework import serializers
 
+from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
 from cosinnus.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
@@ -12,6 +13,7 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
     # BBB settings
     bbb_available = serializers.SerializerMethodField()
     bbb_restricted = serializers.SerializerMethodField()
+    bbb_premium = serializers.SerializerMethodField()
     bbb_premium_booking_url = serializers.SerializerMethodField()
 
     # Events app settings
@@ -24,6 +26,7 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
         fields = [
             'bbb_available',
             'bbb_restricted',
+            'bbb_premium',
             'bbb_premium_booking_url',
             'events_ical_url',
             'events_event_message',
@@ -35,6 +38,9 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
 
     def get_bbb_restricted(self, obj):
         return obj.group_is_bbb_restricted
+
+    def get_bbb_premium(self, obj):
+        return obj.is_premium_ever
 
     def get_bbb_premium_booking_url(self, obj):
         if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
@@ -51,3 +57,9 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
 
     def get_events_event_description_required(self, obj):
         return settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        settings_serializer = CosinnusConferenceSettingsSerializer(parent_object=instance, group=self.instance)
+        data['bbb_settings'] = settings_serializer.data
+        return data
