@@ -294,7 +294,9 @@ class CalendarPublicEventSerializer(
         return Event
 
     def get_dynamic_field_settings(self):
-        return settings.COSINNUS_TAGGED_EXTRA_FIELDS['cosinnus_event.Event']
+        if settings.COSINNUS_TAGGED_EXTRA_FIELDS and 'cosinnus_event.Event' in settings.COSINNUS_TAGGED_EXTRA_FIELDS:
+            return settings.COSINNUS_TAGGED_EXTRA_FIELDS['cosinnus_event.Event']
+        return {}
 
 
 class CalendarPublicEventAttendanceActionSerializer(serializers.Serializer):
@@ -319,9 +321,6 @@ class CalendarPublicEventBBBEnabledField(serializers.BooleanField):
 class CalendarPublicEventBBBRoomActionSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
     """Serializer for event BBB room and conference settings."""
 
-    available = serializers.SerializerMethodField()
-    restricted = serializers.SerializerMethodField()
-    premium = serializers.SerializerMethodField()
     enabled = CalendarPublicEventBBBEnabledField(source='video_conference_type')
     bbb_url = serializers.SerializerMethodField()
     bbb_guest_url = serializers.SerializerMethodField()
@@ -332,24 +331,10 @@ class CalendarPublicEventBBBRoomActionSerializer(BBBRoomUrlsMixin, serializers.M
     class Meta:
         model = Event
         fields = (
-            'available',
-            'restricted',
-            'premium',
             'enabled',
             'bbb_url',
             'bbb_guest_url',
         )
-
-    def get_available(self, obj):
-        return settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS
-
-    def get_restricted(self, obj):
-        group = self.context['group']
-        return group.group_is_bbb_restricted
-
-    def get_premium(self, obj):
-        group = self.context['group']
-        return group.is_premium_ever
 
     def validate_enabled(self, value):
         if value == Event.BBB_MEETING:

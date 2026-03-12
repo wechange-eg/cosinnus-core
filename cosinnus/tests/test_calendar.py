@@ -244,6 +244,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             calendar = self.get_group_calendar(self.test_group)
             self.assertIsNotNone(calendar)
 
+    @override_settings(COSINNUS_TAGGED_EXTRA_FIELDS=None)
     class CalendarPublicEventAPITest(APITestCase):
         """Test public event calendar APIs"""
 
@@ -648,9 +649,6 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(
                 data,
                 {
-                    'available': True,
-                    'restricted': False,
-                    'premium': False,
                     'enabled': False,
                     'bbb_url': None,
                     'bbb_guest_url': None,
@@ -739,14 +737,6 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             data = res.json()['data']
             self.assertFalse(data['enabled'])
             self.assertIsNone(data['bbb_url'])
-
-        @override_settings(COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=False)
-        def test_event_bbb_room_with_bbb_disabled(self):
-            self.client.force_login(self.test_admin)
-            res = self.client.get(self.event_bbb_room_url)
-            self.assertEqual(res.status_code, 200)
-            data = res.json()['data']
-            self.assertFalse(data['available'])
 
         @override_settings(
             COSINNUS_TAGGED_EXTRA_FIELDS={
