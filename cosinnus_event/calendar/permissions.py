@@ -12,13 +12,17 @@ class CalendarPublicEventPermissions(BasePermission):
 
     # List of viewset actions that require write access to the event.
     EVENT_WRITE_ACTIONS = [
-        'create',
         'update',
         'partial_update',
         'destroy',
         'attach_file',
         'delete_attached_file',
         'bbb_room',
+    ]
+
+    # List of viewset actions that require the user to member of the group.
+    EVENT_READ_ACTIONS = [
+        'create',
     ]
 
     # List of viewset actions that require the user to be logged in.
@@ -45,6 +49,9 @@ class CalendarPublicEventPermissions(BasePermission):
         if view.action in self.EVENT_WRITE_ACTIONS:
             # Check write permissions
             return check_object_write_access(obj, request.user)
+        elif view.action in self.EVENT_READ_ACTIONS:
+            # Check read permissions
+            return check_group_create_objects_access(view.group, request.user)
         elif view.action in self.EVENT_LOGGED_IN_ACTIONS:
             # Check user is logged in
             return request.user.is_authenticated
