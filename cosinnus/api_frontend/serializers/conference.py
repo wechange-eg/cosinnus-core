@@ -2,7 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 
 from cosinnus.conf import settings
-from cosinnus.models.conference import CosinnusConferenceSettings
+from cosinnus.models.conference import CosinnusConferenceSettings, get_parent_object_in_conference_setting_chain
 
 
 class CosinnusConferenceBBBParamsSerializer(serializers.Serializer):
@@ -15,7 +15,7 @@ class CosinnusConferenceBBBParamsSerializer(serializers.Serializer):
     cam_starts_on = serializers.BooleanField(label='Turn on camera on entering')
     waiting_room = serializers.BooleanField(label='Require moderator approval before joning')
     record_meeting = serializers.BooleanField(label='Allow recording')
-    welcome_message = serializers.CharField(label='Define a custom welcome message')
+    welcome_message = serializers.CharField(allow_null=True, allow_blank=True, label='Define a custom welcome message')
 
     # initialized via kwargs
     parent_object = None
@@ -117,6 +117,13 @@ class CosinnusConferenceSettingsSerializer(serializers.Serializer):
         self.save_conference_settings()
         self.save_parent_settings()
 
+    def get_chain_parent_bbb_params(self):
+        """Get the bbb_params of the parent object in the conference settings chain."""
+        chain_parent = get_parent_object_in_conference_setting_chain(self.parent_object)
+        conference_settings = chain_parent.get_conference_settings_object()
+        bbb_params = conference_settings.get_bbb_preset_form_field_values()
+        return bbb_params
+
     def save_conference_settings(self):
         """Save BBB parameters in conference settings."""
         bbb_params = self.validated_data.get('bbb_params')
@@ -132,12 +139,14 @@ class CosinnusConferenceSettingsSerializer(serializers.Serializer):
                 conference_settings.is_premium_ever = getattr(self.group, 'is_premium_ever', False)
 
             # get preset choices from submitted data
+            parent_conference_settings = self.get_chain_parent_bbb_params()
             preset_choices = {}
             for bbb_param, value in bbb_params.items():
                 if isinstance(value, bool):
                     preset_choices[bbb_param] = 1 if value is True else 0
                 else:
-                    preset_choices[bbb_param] = value
+                    # handle text parameters using default from parent conference settings
+                    preset_choices[bbb_param] = value if value is not None else parent_conference_settings[bbb_param]
 
             # set BBB parameters from presets
             conference_settings.set_bbb_preset_form_field_values(preset_choices)
