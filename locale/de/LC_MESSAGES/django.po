@@ -13048,8 +13048,8 @@ msgid "Requested organizations"
 msgstr "Angefragte Organisationen"
 
 #: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
-msgid "Require moderator approval before joning"
-msgstr "Zum Betreten ist die Zustimmung eines Moderators erforderlich."
+msgid "Require moderator approval before joining"
+msgstr "Zulassung durch Moderator zum Beitritt erfordern"
 
 #: cosinnus/models/group.py
 msgid "Require participation applications for this conference"
@@ -16243,10 +16243,11 @@ msgstr "Thema"
 #: cosinnus/templates/cosinnus/universal/map/map-controls.html
 #: cosinnus/templates/cosinnus/universal/tiles/grid-tile-default.html
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-base.html
-#: cosinnus/templatetags/cosinnus_tags.py
+#: cosinnus/templatetags/cosinnus_tags.py cosinnus/views/expert_search.py
 msgid "Topics"
 msgstr "Themen"
 
+#: cosinnus/templates/cosinnus/expert_search/user_list_items.html
 #: cosinnus/templates/cosinnus/media_tags_userprofile_readonly.html
 msgid "Topics I am interested in"
 msgstr "Themen die mich interessieren"
@@ -20896,6 +20897,9 @@ msgstr "Ja"
 
 #~ msgid "Require applicants to answer questions about their motivation for applying"
 #~ msgstr "Antragsstellende müssen Fragen über ihre Motiviation für die Teilnahme beantworten"
+
+#~ msgid "Require moderator approval before joning"
+#~ msgstr "Zum Betreten ist die Zustimmung eines Moderators erforderlich."
 
 #~ msgid "Retry user export"
 #~ msgstr "Benutzer/innen-Export erneut starten"

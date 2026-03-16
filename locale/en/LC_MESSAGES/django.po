@@ -12505,7 +12505,7 @@ msgid "Requested organizations"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
-msgid "Require moderator approval before joning"
+msgid "Require moderator approval before joining"
 msgstr ""
 
 #: cosinnus/models/group.py
@@ -15637,10 +15637,11 @@ msgstr ""
 #: cosinnus/templates/cosinnus/universal/map/map-controls.html
 #: cosinnus/templates/cosinnus/universal/tiles/grid-tile-default.html
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-base.html
-#: cosinnus/templatetags/cosinnus_tags.py
+#: cosinnus/templatetags/cosinnus_tags.py cosinnus/views/expert_search.py
 msgid "Topics"
 msgstr ""
 
+#: cosinnus/templates/cosinnus/expert_search/user_list_items.html
 #: cosinnus/templates/cosinnus/media_tags_userprofile_readonly.html
 msgid "Topics I am interested in"
 msgstr ""
