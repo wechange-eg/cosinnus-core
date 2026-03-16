@@ -425,7 +425,7 @@ def compileless(_ctx):
         # This is a workaround, as not needing to compile JS bundles anymore means no lessc is installed.
         print('Installing lessc node_modules in cosinnus-core.')
         with c.cd(f'{env.cosinnus_src_path}'):
-            c.run('npm install less lessc clean-css')
+            c.run('npm install less@4.5.1 lessc@1.0.2 clean-css@5.3.3')
 
     with c.cd(env.path):
         c.run(
