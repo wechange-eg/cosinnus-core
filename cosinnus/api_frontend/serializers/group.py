@@ -37,13 +37,24 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
         return settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS
 
     def get_bbb_restricted(self, obj):
+        """
+        Flag indicating that BBB integration is admin restricted.
+        This is the case if COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED is enabled and the groups
+        enable_user_premium_choices_until is not set or in the past.
+        """
         return obj.group_is_bbb_restricted
 
     def get_bbb_premium(self, obj):
-        return obj.is_premium_ever
+        """
+        Flag indicating that BBB premium features are available and active.
+        This is the case if COSINNUS_PREMIUM_CONFERENCES_ENABLED is enabled and the group is currently or will at some
+        point ever be premium due to premium blocks.
+        """
+        return settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED and obj.is_premium_ever
 
     def get_bbb_premium_booking_url(self, obj):
-        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+        """Returns the premium conference booking url if enabled."""
+        if settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED:
             return render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html')
         return ''
 
