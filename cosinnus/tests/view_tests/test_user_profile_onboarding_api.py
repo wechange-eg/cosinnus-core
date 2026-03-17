@@ -1,10 +1,10 @@
 import json
-from unittest import SkipTest
 
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from geopy.exc import GeocoderInsufficientPrivileges, GeopyError
 from rest_framework.test import APIClient, APITestCase
+
+from cosinnus.conf import settings
 
 
 class UserProfileTestView(APITestCase):
@@ -83,17 +83,16 @@ class UserProfileTestView(APITestCase):
         user_location = 'Alabama'
         self.user_data.update({'location': user_location})
 
-        try:
-            response = self.client.post(self.user_profile_url, self.user_data, format='json')
-        except GeocoderInsufficientPrivileges:
-            raise SkipTest("'test_user_location_geocode' skipped because: Geocoding failed: 403 Forbidden.")
-        except GeopyError as e:
-            raise SkipTest(f"'test_user_location_geocode' skipped because: Geocoding service error: {e}")
+        response = self.client.post(self.user_profile_url, self.user_data, format='json')
         response_json = json.loads(response.content)
         self.user_profile.refresh_from_db()
 
         self.assertEqual(response_json['data']['user']['location'], user_location)
+        self.assertEqual(response_json['data']['user']['location_lat'], settings.TEST_GEOCODE_MOCKED_LAT)
+        self.assertEqual(response_json['data']['user']['location_lon'], settings.TEST_GEOCODE_MOCKED_LON)
         self.assertEqual(self.user_profile.media_tag.location, user_location)
+        self.assertEqual(self.user_profile.media_tag.location_lat, settings.TEST_GEOCODE_MOCKED_LAT)
+        self.assertEqual(self.user_profile.media_tag.location_lon, settings.TEST_GEOCODE_MOCKED_LON)
 
     def test_user_tags(self):
         user_tags = ['Alabama', 'Buenos Aires']

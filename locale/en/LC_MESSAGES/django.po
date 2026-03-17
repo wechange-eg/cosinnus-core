@@ -12525,7 +12525,7 @@ msgid "Requested organizations"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
-msgid "Require moderator approval before joning"
+msgid "Require moderator approval before joining"
 msgstr ""
 
 #: cosinnus/models/group.py
@@ -16727,6 +16727,11 @@ msgstr ""
 msgid "We prioritise the protection of your data, which is reflected in our privacy policy and terms of services. We encourage you to read and accept the terms."
 msgstr ""
 
+#: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_list.html
+#: cosinnus_etherpad/views.py
+msgid "We recommend using the spreadsheet feature in Nextcloud."
+msgstr ""
+
 #: cosinnus/templates/cosinnus/conference/conference_application_form.html
 msgid "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference."
 msgstr ""
@@ -17618,6 +17623,13 @@ msgstr ""
 #: cosinnus/core/middleware/cosinnus_middleware.py
 #, python-format
 msgid "You can migrate existing Todos %(here_link)s."
+msgstr ""
+
+#: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_list.html
+#: cosinnus_etherpad/views.py
+msgid ""
+"You can no longer create spreadsheets here, as the feature is technically outdated.\n"
+"However, you can still open and edit existing spreadsheets."
 msgstr ""
 
 #: cosinnus_message/templates/cosinnus_message/attachments_form.html
