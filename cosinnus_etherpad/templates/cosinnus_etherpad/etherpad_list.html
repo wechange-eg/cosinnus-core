@@ -89,18 +89,42 @@
 			                </ul>
 			            </button>
 			            {% if SETTINGS.COSINNUS_ETHERPAD_ENABLE_ETHERCALC %}
-			            <button type="submit" class="btn btn-emphasized large-space" title="{% trans "Create Ethercalc" %}" onclick="$('#input-etherpad-type').val('1');">
-			                <ul class="media-list">
-			                    <li class="media">
-			                        <span class="pull-left">
-			                            <i class="fa fa-table"></i>
-			                        </span>
-			                        <div class="media-body">
-			                            {% trans "Create Ethercalc" %}
-			                        </div>
-			                    </li>
-			                </ul>
-			            </button>
+                            {% if SETTINGS.COSINNUS_ETHERPAD_ETHERCALC_READONLY %}
+                                {% captureas ethercalc_tooltip %}
+                                    {% blocktrans %}You can no longer create spreadsheets here, as the feature is technically outdated.
+However, you can still open and edit existing spreadsheets.{% endblocktrans %}
+                                    {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
+                                        {% trans "We recommend using the spreadsheet feature in Nextcloud." %}
+                                    {% endif %}
+                                {% endcaptureas %}
+                                <div class="pull-right" title="{{ ethercalc_tooltip|remove_indentation }}" >
+                                <button type="button" class="btn btn-emphasized large-space disabled" title="{% trans "Create Ethercalc" %}" onclick="$('#input-etherpad-type').val('1');">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                                <span class="pull-left">
+                                                    <i class="fa fa-table"></i>
+                                                </span>
+                                            <div class="media-body">
+                                                {% trans "Create Ethercalc" %}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </button>
+                                </div>
+                            {% else %}
+                                <button type="submit" class="btn btn-emphasized large-space" title="{% trans "Create Ethercalc" %}" onclick="$('#input-etherpad-type').val('1');">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <span class="pull-left">
+                                                <i class="fa fa-table"></i>
+                                            </span>
+                                            <div class="media-body">
+                                                {% trans "Create Ethercalc" %}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </button>
+                            {% endif %}
 			            {% endif %}
 	            </div>
 		    </form>
