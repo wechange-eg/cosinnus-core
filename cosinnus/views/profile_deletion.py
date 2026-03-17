@@ -48,13 +48,12 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
         send_html_mail(user, _('Information about the deletion of your user account'), body_text, threaded=False)
     elif inactivity_deletion:
         # send notification for automatic deletion due to inactivity
-        subject = _('Attention: Your profile has been deactivated will be deleted due to inactivity')
+        subject = _('Attention: Your profile has been deactivated and will be deleted due to inactivity')
         text = _(
-            'Your platform profile stored under this email has been deactivated by us and released for deletion. We '
-            'will delete this account completely in 30 days.\n\nIf you change your mind  in the meantime, please '
-            'contact the portal administrators or the email address given in our imprint. Please note that the '
-            'response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would '
-            'like to keep your profile.'
+            'Your platform profile belonging to this email address has been deactivated by us. Your account '
+            'will be deleted completely in 30 days.\n\n'
+            'If you want to keep your profile, please contact the portal administrators. Please note that the response '
+            'time by e-mail may take longer in some cases.'
         )
         body_text = textfield(text)
         # When errors occur when sending the notification for inactivity deletions do not deactivate the user.

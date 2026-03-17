@@ -179,7 +179,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             self.assertEqual(self.test_user.cosinnus_profile.scheduled_for_deletion_at, expected_deletion)
             send_mail_mock.assert_called_once_with(
                 self.test_user,
-                'Attention: Your profile has been deactivated will be deleted due to inactivity',
+                'Attention: Your profile has been deactivated and will be deleted due to inactivity',
                 ANY,
                 threaded=False,
                 raise_on_error=True,
@@ -207,7 +207,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             self.assertIsNone(self.test_user.cosinnus_profile.scheduled_for_deletion_at)
             send_mail_mock.assert_called_once_with(
                 self.test_user,
-                'Attention: Your profile has been deactivated will be deleted due to inactivity',
+                'Attention: Your profile has been deactivated and will be deleted due to inactivity',
                 ANY,
                 threaded=False,
                 raise_on_error=True,
