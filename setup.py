@@ -132,7 +132,7 @@ setup(
         'easy-thumbnails==2.8.5',
         'elasticsearch==7.17.9',
         'ecdsa==0.18.0',
-        'geopy==1.11.0',
+        'geopy==2.4.1',
         'icalendar==5.0.12',
         'jsonfield==3.1.0',
         'l18n==2021.3',
@@ -172,6 +172,7 @@ setup(
         'pre-commit==3.5.0',
         'fcm-django==2.2.1',
         'tblib==3.0.0',
+        'django_extended_makemessages==1.7.1',
         # test requirements
         'freezegun==1.5.1',
         # requirements loaded in from github

@@ -194,83 +194,85 @@
 	<div class="dashboard-center-bar dashboard-column visible-panel-2">
 
 	    {% if show_welcome_screen %}
-			<div class="dashboard-welcome-frame" style="display: none">
-				<div class="aside-link text-small">
-					<a class="pale-color pale-with-highlight"
-						data-target="ui-pref" data-ui-pref="timeline__hide_welcome_screen"
-						data-ui-pref-value="1" data-hide-after=".dashboard-welcome-frame">
-						{% trans "Do not show this again" %}
-					</a>
-				</div>
-				<h1 class="headline headline-big no-side-margin">
-	                {% include 'cosinnus/v2/texts/welcome_frame_header.html' %}
-				</h1>
-				<div class="description margin-extra-large">
-	                {% include 'cosinnus/v2/texts/welcome_frame_text.html' %}
-				</div>
-				{% if not SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user|is_superuser %}
-				<div class="flex-row mobile-flex-column">
-					<div class="flex-grow margin-extra-large">
-						<h2 class="headline no-side-margin">{% trans "Projects" %}</h2>
-						<div class="description">
-	                        {% include 'cosinnus/v2/texts/create_projects_description.html' %}
-						</div>
-						<br/>
-						<a href="{% url 'cosinnus:group-add' %}" class="pale-color pale-with-highlight">
-							{% trans "Create new Project" %}
-						</a>
-					</div>
-					<div class="flex-grow margin-extra-large">
-						<h2 class="headline no-side-margin">{% trans "Groups" %}</h2>
-						<div class="description">
-	                        {% include 'cosinnus/v2/texts/create_groups_description.html' %}
-						</div>
-						<br/>
-						<a href="{% url 'cosinnus:group__group-add' %}" class="pale-color pale-with-highlight">
-							{% trans "Create new Group" %}
-						</a>
-					</div>
-				</div>
-				{% endif %}
-				<div class="flex-row mobile-flex-column">
-					{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
-					<div class="flex-grow margin-extra-large">
-						<h2 class="headline no-side-margin">{% trans "Ideas" %}</h2>
-						<div class="description">
-	                        {% include 'cosinnus/v2/texts/create_ideas_description.html' %}
-						</div>
-						<br/>
-						<a href="{% url "cosinnus:idea-create" %}" class="pale-color pale-with-highlight">
-							{% trans "Post new Idea" %}
-						</a>
-					</div>
-					{% endif %}
-					{% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
-						<div class="flex-grow margin-extra-large">
-							<h2 class="headline no-side-margin">{% trans "Events" %}</h2>
-							<div class="description">
-								{% include 'cosinnus/v2/texts/create_events_description.html' %}
-							</div>
-							<br/>
-							<a href="{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" class="pale-color pale-with-highlight">
-								{% trans "Add Event" %}
-							</a>
-						</div>
-					{% endif %}
-					{% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
-					<div class="flex-grow margin-extra-large">
-						<h2 class="headline no-side-margin">{% trans "Organizations" %}</h2>
-						<div class="description">
-							{% trans "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!" %}
-						</div>
-						<br/>
-						<a href="{% url "cosinnus:organization-create" %}" class="pale-color pale-with-highlight">
-							{% trans "Create new Organization" %}
-						</a>
-					</div>
-					{% endif %}
-				</div>
-			</div> {% comment %} end dashboard-welcome-frame {% endcomment %}
+            {% block welcome_frame %}
+                <div class="dashboard-welcome-frame" style="display: none">
+                    <div class="aside-link text-small">
+                        <a class="pale-color pale-with-highlight"
+                            data-target="ui-pref" data-ui-pref="timeline__hide_welcome_screen"
+                            data-ui-pref-value="1" data-hide-after=".dashboard-welcome-frame">
+                            {% trans "Do not show this again" %}
+                        </a>
+                    </div>
+                    <h1 class="headline headline-big no-side-margin">
+                        {% include 'cosinnus/v2/texts/welcome_frame_header.html' %}
+                    </h1>
+                    <div class="description margin-extra-large">
+                        {% include 'cosinnus/v2/texts/welcome_frame_text.html' %}
+                    </div>
+                    {% if not SETTINGS.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user|is_superuser %}
+                    <div class="flex-row mobile-flex-column">
+                        <div class="flex-grow margin-extra-large">
+                            <h2 class="headline no-side-margin">{% trans "Projects" %}</h2>
+                            <div class="description">
+                                {% include 'cosinnus/v2/texts/create_projects_description.html' %}
+                            </div>
+                            <br/>
+                            <a href="{% url 'cosinnus:group-add' %}" class="pale-color pale-with-highlight">
+                                {% trans "Create new Project" %}
+                            </a>
+                        </div>
+                        <div class="flex-grow margin-extra-large">
+                            <h2 class="headline no-side-margin">{% trans "Groups" %}</h2>
+                            <div class="description">
+                                {% include 'cosinnus/v2/texts/create_groups_description.html' %}
+                            </div>
+                            <br/>
+                            <a href="{% url 'cosinnus:group__group-add' %}" class="pale-color pale-with-highlight">
+                                {% trans "Create new Group" %}
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="flex-row mobile-flex-column">
+                        {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
+                        <div class="flex-grow margin-extra-large">
+                            <h2 class="headline no-side-margin">{% trans "Ideas" %}</h2>
+                            <div class="description">
+                                {% include 'cosinnus/v2/texts/create_ideas_description.html' %}
+                            </div>
+                            <br/>
+                            <a href="{% url "cosinnus:idea-create" %}" class="pale-color pale-with-highlight">
+                                {% trans "Post new Idea" %}
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if SETTINGS.NEWW_EVENTS_GROUP_SLUG %}
+                            <div class="flex-grow margin-extra-large">
+                                <h2 class="headline no-side-margin">{% trans "Events" %}</h2>
+                                <div class="description">
+                                    {% include 'cosinnus/v2/texts/create_events_description.html' %}
+                                </div>
+                                <br/>
+                                <a href="{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" class="pale-color pale-with-highlight">
+                                    {% trans "Add Event" %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}
+                        <div class="flex-grow margin-extra-large">
+                            <h2 class="headline no-side-margin">{% trans "Organizations" %}</h2>
+                            <div class="description">
+                                {% trans "Are you part of an interesting company, an NGO or an association? Put your organization on the map and create visibility!" %}
+                            </div>
+                            <br/>
+                            <a href="{% url "cosinnus:organization-create" %}" class="pale-color pale-with-highlight">
+                                {% trans "Create new Organization" %}
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div> {% comment %} end dashboard-welcome-frame {% endcomment %}
+            {% endblock welcome_frame %}
 		{% endif %}
 
         {% if SETTINGS.COSINNUS_DECK_ENABLED and SETTINGS.COSINNUS_DECK_MIGRATE_USER_DECKS and not deck_migration_hidden %}

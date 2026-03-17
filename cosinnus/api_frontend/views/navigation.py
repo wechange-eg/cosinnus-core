@@ -1088,11 +1088,15 @@ class MembershipAlertsView(APIView):
         projects_invited = CosinnusProject.objects.get_for_user_invited(user)
         conferences_invited = CosinnusConference.objects.get_for_user_invited(user)
 
-        groups_invited = [DashboardItem(group).as_menu_item() for group in societies_invited]
-        groups_invited += [DashboardItem(group).as_menu_item() for group in projects_invited]
+        groups_invited = [
+            DashboardItem(group, url=group.get_microsite_url()).as_menu_item() for group in societies_invited
+        ]
+        groups_invited += [
+            DashboardItem(group, url=group.get_microsite_url()).as_menu_item() for group in projects_invited
+        ]
         # for conferences, only show invites if becoming a member is currently possible
         groups_invited += [
-            DashboardItem(conference).as_menu_item()
+            DashboardItem(conference, url=conference.get_microsite_url()).as_menu_item()
             for conference in conferences_invited
             if conference.membership_applications_possible
         ]

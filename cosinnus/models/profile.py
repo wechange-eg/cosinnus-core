@@ -479,6 +479,7 @@ class BaseUserProfile(
         """Returns the rendered HTML of the userprofile's media tag fields detail template snippet"""
         data = {
             'object': self,
+            'SETTINGS': settings,
         }
         return render_to_string('cosinnus/media_tags_userprofile_readonly.html', data, request=request)
 

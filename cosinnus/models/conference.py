@@ -440,7 +440,12 @@ class CosinnusConferenceSettings(models.Model):
                     if self.bbb_nature:
                         call_key = f'{call_key}__{self.bbb_nature}'
                     update_dict[call_key] = call_param_dict
-                bbb_params.update(update_dict)
+                # merge field parameter into bbb_params
+                for call_key, call_param_dict in update_dict.items():
+                    if call_key in bbb_params:
+                        bbb_params[call_key].update(call_param_dict)
+                    else:
+                        bbb_params[call_key] = call_param_dict
             elif field_name in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS and choice_value is not None:
                 # Add text parameter.
                 call_key, call_param = settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS[field_name]

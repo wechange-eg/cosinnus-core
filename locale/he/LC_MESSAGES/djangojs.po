@@ -121,13 +121,8 @@ msgstr "מיון בהתאם למדינה"
 msgid "Happening now"
 msgstr "קורה עכשיו"
 
-msgid ""
-"If you click, you will leave the video conference. Are you sure you want to "
-"leave? Tip: Alternatively, you can open the link in a new tab or window and "
-"stay in the event."
-msgstr ""
-"אם תלחץ, תעזוב את ועידת הווידיאו. אתה בטוח שאתה רוצהלעזוב? טיפ: לחלופין, "
-"תוכלו לפתוח את הקישור בכרטיסייה או בחלון חדשולהישאר באירוע."
+msgid "If you click, you will leave the video conference. Are you sure you want to leave? Tip: Alternatively, you can open the link in a new tab or window and stay in the event."
+msgstr "אם תלחץ, תעזוב את ועידת הווידיאו. אתה בטוח שאתה רוצהלעזוב? טיפ: לחלופין, תוכלו לפתוח את הקישור בכרטיסייה או בחלון חדשולהישאר באירוע."
 
 #. [Manage conference]
 #. defaultMessage is:
@@ -285,12 +280,8 @@ msgstr "ממשמש ובא"
 msgid "Yes"
 msgstr "כן"
 
-msgid ""
-"You're currently attending an event. Are you sure you want to leave? Tip: You "
-"can open a new tab or window instead."
-msgstr ""
-"אתה משתתף כרגע באירוע. אתה בטוח שאתה רוצה לעזוב? טיפ: במקום זאת תוכלו לפתוח "
-"כרטיסייה או חלון חדשים."
+msgid "You're currently attending an event. Are you sure you want to leave? Tip: You can open a new tab or window instead."
+msgstr "אתה משתתף כרגע באירוע. אתה בטוח שאתה רוצה לעזוב? טיפ: במקום זאת תוכלו לפתוח כרטיסייה או חלון חדשים."
 
 #. [hidden]
 #. defaultMessage is:
@@ -325,9 +316,7 @@ msgstr "משתתפים"
 msgid "places left"
 msgstr "מקומות שנותרו"
 
-msgid ""
-"Your profile is not shown here or not displayed correctly? "
-"Add to your profile or make yourself visible to other conference participants."
+msgid "Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants."
 msgstr ""
 
 msgid "Edit Profile"

@@ -125,14 +125,8 @@ msgstr "Filtrer par pays"
 msgid "Happening now"
 msgstr "En ce moment même"
 
-msgid ""
-"If you click, you will leave the video conference. Are you sure you want to "
-"leave? Tip: Alternatively, you can open the link in a new tab or window and "
-"stay in the event."
-msgstr ""
-"Si vous cliquez, vous quitterez la vidéoconférence. Êtes-vous sûr de vouloir "
-"partir ? Conseil : Vous pouvez également ouvrir le lien dans un nouvel onglet "
-"ou une nouvelle fenêtre et rester dans l'événement."
+msgid "If you click, you will leave the video conference. Are you sure you want to leave? Tip: Alternatively, you can open the link in a new tab or window and stay in the event."
+msgstr "Si vous cliquez, vous quitterez la vidéoconférence. Êtes-vous sûr de vouloir partir ? Conseil : Vous pouvez également ouvrir le lien dans un nouvel onglet ou une nouvelle fenêtre et rester dans l'événement."
 
 #. [Manage conference]
 #. defaultMessage is:
@@ -270,9 +264,7 @@ msgstr "Organisations représentées"
 #. defaultMessage is:
 #. undefined
 msgid "The conference is being prepared, please try again at a later date."
-msgstr ""
-"La conférence est en cours de préparation, veuillez réessayer à une date "
-"ultérieure."
+msgstr "La conférence est en cours de préparation, veuillez réessayer à une date ultérieure."
 
 #. [Today]
 #. defaultMessage is:
@@ -343,14 +335,11 @@ msgstr "participants"
 msgid "places left"
 msgstr "places restantes"
 
-msgid ""
-"Your profile is not shown here or not displayed correctly? Add to your "
-"profile or make yourself visible to other conference participants."
+msgid "Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants."
 msgstr ""
 
 msgid "Edit Profile"
 msgstr ""
-
 
 msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
 msgstr ""

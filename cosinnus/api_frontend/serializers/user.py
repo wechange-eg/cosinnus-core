@@ -6,7 +6,9 @@ from django.contrib.auth import authenticate, get_user_model, password_validatio
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator, MinLengthValidator, URLValidator
 from drf_extra_fields.fields import Base64ImageField
-from geopy.geocoders.osm import Nominatim
+from geopy import OpenCage
+from geopy.exc import GeocoderInsufficientPrivileges, GeopyError
+from geopy.extra.rate_limiter import RateLimiter
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from taggit.serializers import TaggitSerializer, TagListSerializerField
@@ -430,15 +432,48 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
                 media_tag.location = location_str.strip()
                 media_tag.location_lat = float(location_lat)
                 media_tag.location_lon = float(location_lon)
-            else:
-                # use nominatim service to determine an actual location from the given string
-                # TODO: extract nominatim URL and use ours for production!
-                geolocator = Nominatim(domain='nominatim.openstreetmap.org', user_agent='wechange')
-                location = geolocator.geocode(location_str.strip(), timeout=5)
+            elif settings.COSINNUS_GEOCODE_OPENCAGE_KEY:
+                # use OpenCage service to determine an actual location from the given string
+                geolocator = OpenCage(api_key=settings.COSINNUS_GEOCODE_OPENCAGE_KEY, timeout=5)
+                # retry max 10 times, after between 0.5 - 1 secs randomly
+                geocode = RateLimiter(
+                    geolocator.geocode,
+                    min_delay_seconds=0.5,
+                    max_retries=10,
+                    error_wait_seconds=0.5 + random.uniform(0.0, 0.5),
+                )
+
+                location = None
+                try:
+                    location = geocode(location_str.strip())
+                except (GeocoderInsufficientPrivileges, GeopyError, Exception) as e:
+                    extra = {
+                        'user_id': user.id,
+                        'location_str': location_str,
+                        'reason': type(e),
+                        'exc': str(e),
+                    }
+                    logger.error(
+                        (
+                            'Error: A user location could not be geoceded as nominatim, the request returned an error! '
+                            'User location was not saved.'
+                        ),
+                        extra=extra,
+                    )
                 if location:
                     media_tag.location = location_str
                     media_tag.location_lat = location.latitude
                     media_tag.location_lon = location.longitude
+            else:
+                # no opencage api key defined, log a waning that the location str was not saved!
+                extra = {
+                    'user_id': user.id,
+                    'location_str': location_str,
+                }
+                logger.warning(
+                    ('Warning: A user location could not be geoceded as nominatim as no geocode api key was set.'),
+                    extra=extra,
+                )
 
         # for `CosinnusUserDynamicFieldsSerializerMixin`
         self.save_dynamic_fields(validated_data, profile, save=False)

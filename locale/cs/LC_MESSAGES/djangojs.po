@@ -128,14 +128,8 @@ msgstr "Filtrujte dle země"
 msgid "Happening now"
 msgstr "Odehrává se nyní"
 
-msgid ""
-"If you click, you will leave the video conference. Are you sure you want to "
-"leave? Tip: Alternatively, you can open the link in a new tab or window and "
-"stay in the event."
-msgstr ""
-"Kliknutím videokonferenci opustíte. Opravdu chcete odejít? Tip: Odkaz si "
-"můžete také otevřít v nové záložce nebo novém okně a zůstat k události "
-"připojeni."
+msgid "If you click, you will leave the video conference. Are you sure you want to leave? Tip: Alternatively, you can open the link in a new tab or window and stay in the event."
+msgstr "Kliknutím videokonferenci opustíte. Opravdu chcete odejít? Tip: Odkaz si můžete také otevřít v nové záložce nebo novém okně a zůstat k události připojeni."
 
 #. [Manage conference]
 #. defaultMessage is:
@@ -293,12 +287,8 @@ msgstr "Nastávající"
 msgid "Yes"
 msgstr "Ano"
 
-msgid ""
-"You're currently attending an event. Are you sure you want to leave? Tip: You "
-"can open a new tab or window instead."
-msgstr ""
-"V současnosti se účastníte eventu. Jste si jisti, že jej chcete opustit? Tip: "
-"Můžete namísto toho otevřít novou tabulku nebo okno."
+msgid "You're currently attending an event. Are you sure you want to leave? Tip: You can open a new tab or window instead."
+msgstr "V současnosti se účastníte eventu. Jste si jisti, že jej chcete opustit? Tip: Můžete namísto toho otevřít novou tabulku nebo okno."
 
 #. [hidden]
 #. defaultMessage is:
@@ -333,9 +323,7 @@ msgstr "účastníci"
 msgid "places left"
 msgstr "volná místa"
 
-msgid ""
-"Your profile is not shown here or not displayed correctly? Add to your "
-"profile or make yourself visible to other conference participants."
+msgid "Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants."
 msgstr ""
 
 msgid "Edit Profile"

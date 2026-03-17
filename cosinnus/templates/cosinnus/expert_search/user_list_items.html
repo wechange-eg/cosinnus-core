@@ -41,6 +41,11 @@
                                             {% endif %}
                                         {% endwith %}
                                     {% endfor %}
+                                    {% if show_cosinnus_topics_filter and filter.name == topics_field_name and profile.media_tag.topics %}
+                                        {% for profile_topic in profile.media_tag.topics|makelist %}
+                                            <span class="badge">{{ filter.topics_dict|dict_lookup:profile_topic }}</span>
+                                        {% endfor %}
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         {% endblock %}
@@ -53,32 +58,45 @@
 
             <div class="row">
                 {% if profile.user.username %}
-                <a href="{% url 'cosinnus:profile-detail' profile.user.username %}" target="_blank" type="button" class="btn btn-emphasized btn-small btn-autosize regular-space">
-                    <ul class="media-list">
-                        <li class="media">
-                            <span class="pull-left">
-                                <i class="fa fa-external-link"></i>
-                            </span>
-                            <div class="media-body">
-                                {% trans "Go to Profile" %}
-                            </div>
-                        </li>
-                    </ul>
-                </a>
-                <a href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=profile.user.username %}{% else %}{% url 'postman:write' recipients=profile.user.username %}?next={% url 'postman:sent' %}{% endif %}" type="button" class="btn btn-emphasized btn-small btn-autosize regular-space margin-right">
-                    <ul class="media-list">
-                        <li class="media">
-                            <span class="pull-left">
-                                <i class="fa fa-envelope"></i>
-                            </span>
-                            <div class="media-body">
-                                {% trans "Send Message" %}
-                            </div>
-                        </li>
-                    </ul>
-                </a>
+                    <a href="{% url 'cosinnus:profile-detail' profile.user.username %}" target="_blank" type="button" class="btn btn-emphasized btn-small btn-autosize regular-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-external-link"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Go to Profile" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </a>
+                    <a href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=profile.user.username %}{% else %}{% url 'postman:write' recipients=profile.user.username %}?next={% url 'postman:sent' %}{% endif %}" type="button" class="btn btn-emphasized btn-small btn-autosize regular-space margin-right">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Send Message" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </a>
                 {% endif %}
+
                 <div class="content-box">
+                    {% if show_cosinnus_topics_filter %}
+                        {% with topics=profile.media_tag_object.topics %}
+                            {% if topics %}
+                                <legend>{% trans "Topics I am interested in" %}</legend>
+                                <p class="transparent">
+                                    <i class="fa fa-fw fa-lightbulb-o"></i>
+                                    {% render_cosinnus_topics topics %}
+                                </p>
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %}
+
                     {% include 'cosinnus/user/user_profile_dynamic_fields.html' with profile_values=profile.dynamic_fields profile=profile extra_textfield=profile.description labels=SETTINGS.COSINNUS_USERPROFILE_EXTRA_FIELDS %}
                 </div>
             </div>
