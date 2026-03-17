@@ -315,6 +315,9 @@ class CosinnusConf(AppConf):
     # whose account is inactive or deleted. view-only is still possible.
     LOCK_ETHERPAD_WRITE_MODE_ON_CREATOR_DELETE = False
 
+    # if True, will prevent creation of new ethercalcs and refer to nextcloud
+    ETHERPAD_ETHERCALC_READONLY = True
+
     # a list of cosinnus apps that are installed but are disabled for the users, e.g. ['cosinnus_marketplace', ]
     # (they are still admin accessible)
     DISABLED_COSINNUS_APPS = []
