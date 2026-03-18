@@ -14951,6 +14951,11 @@ msgstr "Die Einladung wurde erfolgreich gelöscht."
 msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
 msgstr "Das Einladungs-Token, das du benutzt hast, scheint nicht zu existieren. Bitte wende dich an die verantwortliche Person, um einen gültigen Link zu erhalten!"
 
+#: cosinnus/views/group.py
+#, python-format
+msgid "The join request from \"%(username)s\" was declined successfully."
+msgstr "Die Beitrittsanfrage von “%(username)s” wurde erfolgreich abgelehnt."
+
 #: cosinnus_event/models.py
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
 msgid "The key for this specific stream session you created at your streaming provider"
@@ -19122,11 +19127,6 @@ msgstr "Deine Einladung an Benutzer/in \"%(username)s\" wurde erfolgreich zurüc
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgstr "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zurückgezogen."
-
-#: cosinnus/views/group.py
-#, python-format
 msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
 msgstr "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zurückgezogen."
 
@@ -21362,6 +21362,10 @@ msgstr "Ja"
 
 #~ msgid "Your invitation to organization “%(name)s” was declined successfully."
 #~ msgstr "Deine Einladung zu Organisation “%(name)s” wurde abgelehnt."
+
+#, python-format
+#~ msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+#~ msgstr "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zurückgezogen."
 
 #~ msgid "Your match with %(sender_name)s has just been established!"
 #~ msgstr "Deine Übereinstimmung mit %(sender_name)s wurde soeben festgestellt!"
