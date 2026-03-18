@@ -66,7 +66,7 @@
             				  						  force the cosinnus group resolution to check the group of this portal {% endcomment %}
                                         <form id="delete_comment_form_{{ comment.pk }}" action="{% group_url 'cosinnus:note:comment-delete' group=comment.note.group pk=comment.pk force_local_domain="True" %}" method="post" class="form-horizontal">
                                             {% csrf_token %}{% cosinnus_cross_portal_token comment.note.group.portal %}
-                                            <a class="pull-right" href="#" onclick="$('#delete_comment_form_{{ comment.pk }}').submit(); return false;" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                                            <a class="pull-right" href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#delete_comment_form_{{ comment.pk }}').submit();} return false;" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
                                         </form>
                                     {% endif %}
                                     <a href="{{ comment.get_absolute_url }}"><span class="moment-data-date" data-date="{{ comment.created_on|date:'c' }}" ></span></a>
