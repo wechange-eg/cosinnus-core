@@ -478,7 +478,7 @@ class GroupCreateView(
 
         messages.success(
             self.request,
-            self.message_success % {'group': self.object.name, 'team_type': self.object._meta.verbose_name},
+            self.message_success % {'group': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
         )
         return ret
 
@@ -979,7 +979,7 @@ class GroupUpdateView(
         # create admin logentry.
         admin_log_action(self.request.user, self.object, _('Edited.'))
 
-        messages.success(self.request, self.message_success % {'team_type': self.object._meta.verbose_name})
+        messages.success(self.request, self.message_success % {'team_type': self.object.trans.VERBOSE_NAME})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
 
@@ -1102,7 +1102,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
                 messages.success(
                     self.request,
                     _('You are now a member of %(team_type)s “%(team_name)s”. Welcome!')
-                    % {'team_name': self.object.name, 'team_type': self.object._meta.verbose_name},
+                    % {'team_name': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
                 )
             else:
                 self.membership_class.objects.create(
@@ -1116,7 +1116,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
                 )
                 messages.success(
                     self.request,
-                    self.message_success % {'team_name': self.object.name, 'team_type': self.object._meta.verbose_name},
+                    self.message_success % {'team_name': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
                 )
         self.referer = self.object.get_absolute_url()
 
@@ -1152,7 +1152,7 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembershi
         if not getattr(self, '_had_error', False):
             messages.success(
                 self.request,
-                self.message_success % {'team_name': self.object.name, 'team_type': self.object._meta.verbose_name},
+                self.message_success % {'team_name': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
             )
         return self.referer
 
@@ -1175,7 +1175,7 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembershi
             messages.error(
                 self.request,
                 _('You cannot leave this %(team_type)s. You are the only administrator left.')
-                % {'team_type': self.object._meta.verbose_name},
+                % {'team_type': self.object.trans.VERBOSE_NAME},
             )
 
 
@@ -1195,7 +1195,7 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, GroupMember
         if not getattr(self, '_had_error', False):
             messages.success(
                 self.request,
-                self.message_success % {'team_name': self.object.name, 'team_type': self.object._meta.verbose_name},
+                self.message_success % {'team_name': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
             )
         return self.referer
 
@@ -1596,7 +1596,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
 
     @atomic
     def form_valid(self, form):
-        self.object = self.get_object()
+        self.object: CosinnusGroupMembership = self.get_object()
         group = self.object.group
         user = self.object.user
         current_status = self.object.status
@@ -1623,8 +1623,8 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
             signals.user_group_join_declined.send(sender=self, obj=group, user=user, audience=[user])
             messages.success(
                 self.request,
-                _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.')
-                % {'team_type': self.object._meta.verbose_name, 'team_name': group.name},
+                _('The join request from "%(username)s" was declined successfully.')
+                % {'username': user.get_full_name()},
             )
         if current_status == MEMBERSHIP_INVITED_PENDING:
             messages.success(
