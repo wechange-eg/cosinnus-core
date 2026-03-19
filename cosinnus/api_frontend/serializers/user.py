@@ -19,7 +19,7 @@ from cosinnus.api_frontend.handlers.error_codes import (
     ERROR_SIGNUP_NAME_NOT_ACCEPTABLE,
 )
 from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusUserDynamicFieldsSerializerMixin
-from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializerMixin
+from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerMixin
 from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, UserSignupFinalizeMixin

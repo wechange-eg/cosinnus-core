@@ -26,7 +26,10 @@ class CalendarPublicEventPermissions(BasePermission):
     ]
 
     # List of viewset actions that require the user to be logged in.
-    EVENT_LOGGED_IN_ACTIONS = ['attendance']
+    EVENT_LOGGED_IN_ACTIONS = [
+        'attendance',
+        'bookmark',
+    ]
 
     # List of vieset actions allowed by anonymous users.
     EVENT_ANONYOUNS_ACTIONS = [

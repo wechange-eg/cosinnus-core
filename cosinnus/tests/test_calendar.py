@@ -259,6 +259,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
         event_list_url = None
         event_detail_url = None
         event_attendance_url = None
+        event_bookmark_url = None
         event_bbb_room_url = None
 
         # timezone for datetimes
@@ -324,6 +325,10 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             )
             cls.event_attendance_url = reverse(
                 'cosinnus:frontend-api:calendar-api:calendar-event-attendance',
+                kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
+            )
+            cls.event_bookmark_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-event-bookmark',
                 kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
             )
             cls.event_bbb_room_url = reverse(
@@ -396,6 +401,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'ical_url': self.test_event.get_feed_url(),
                 'attending': False,
                 'attendances': [],
+                'bookmarked': False,
                 'bbb_url': None,
                 'bbb_guest_url': None,
                 'image': None,
@@ -622,6 +628,34 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data['attendances'], [])
+
+        def test_event_bookmark(self):
+            # anonymous user cant bookmark
+            res = self.client.post(self.event_bookmark_url, data={'bookmarked': True}, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # all logged-in users can set attendance for events
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.post(self.event_bookmark_url, data={'bookmarked': True}, format='json')
+            self.assertEqual(res.status_code, 200)
+
+            # check event
+            self.assertTrue(self.test_event.is_user_starring(self.test_non_group_user))
+
+            # check bookmarked in event detail
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertTrue(data['bookmarked'])
+
+            # remove bookmark
+            res = self.client.post(self.event_bookmark_url, data={'bookmarked': False}, format='json')
+            self.assertEqual(res.status_code, 200)
+            self.assertFalse(self.test_event.is_user_starring(self.test_non_group_user))
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertFalse(data['bookmarked'])
 
         @override_settings(
             COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=True,

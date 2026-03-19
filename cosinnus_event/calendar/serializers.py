@@ -6,7 +6,7 @@ from rest_framework import serializers
 from cosinnus.api_frontend.serializers.attached_objects import AttachedFileSerializer
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
 from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusDynamicFieldsSerializerMixin
-from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializerMixin
+from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerMixin
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.models.tagged import get_tag_object_model
@@ -189,7 +189,7 @@ class CalendarPublicEventSerializer(
     ical_url = serializers.SerializerMethodField()
 
     attendances = CalendarPublicEventAttendancesSerializer(many=True, read_only=True)
-    # bookmarked = serializers.SerializerMethodField() TODO implement bookmarks
+    bookmarked = serializers.SerializerMethodField()
 
     image = Base64ImageField(required=False, default=None, allow_null=True)
     attached_files = serializers.SerializerMethodField()
@@ -218,6 +218,7 @@ class CalendarPublicEventSerializer(
             'ical_url',
             'attending',
             'attendances',
+            'bookmarked',
             'image',
             'attached_files',
         )
@@ -281,7 +282,7 @@ class CalendarPublicEventSerializer(
 
     def get_bookmarked(self, obj):
         user = self.context['request'].user
-        return user.id in obj.get_starred_user_ids()
+        return obj.is_user_starring(user)
 
     def get_attached_files(self, obj):
         attached_files = []

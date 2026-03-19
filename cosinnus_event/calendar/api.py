@@ -7,6 +7,7 @@ from rest_framework.response import Response
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.attached_objects import AttachFileSerializer, DeleteAttachedFileSerializer
+from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectBookmarkSerializer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -19,7 +20,7 @@ from cosinnus_event.calendar.serializers import (
     CalendarPublicEventListSerializer,
     CalendarPublicEventSerializer,
 )
-from cosinnus_event.models import Event, EventAttendance
+from cosinnus_event.models import Event
 
 
 class CalendarPublicEventViewSet(viewsets.ModelViewSet):
@@ -40,6 +41,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
     query_params = None
 
     def get_serializer_class(self):
+        """Get serializer based on vieset action."""
         if self.action == 'list':
             # use a different serializer for the list view, containing a subset of fields
             return CalendarPublicEventListSerializer
@@ -53,6 +55,8 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
             return CalendarPublicEventBBBRoomActionSerializer
         elif self.action == 'bbb_room_urls':
             return CalendarPublicEventBBBRoomUrlsActionSerializer
+        elif self.action == 'bookmark':
+            return CosinnusTagObjectBookmarkSerializer
         return self.serializer_class
 
     def get_serializer_context(self):
@@ -178,4 +182,24 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         """
         instance = self.get_object()
         serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+    @action(
+        detail=True,
+        methods=['get', 'post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CalendarPublicEventPermissions],
+    )
+    def bookmark(self, request, group_id, pk=None):
+        """
+        API to bookmark the event.
+        Serializer is set in get_serializer_class.
+        """
+        instance = self.get_object()
+        if request.method == 'GET':
+            serializer = self.get_serializer(instance)
+        else:
+            serializer = self.get_serializer(instance, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
         return Response(serializer.data)
