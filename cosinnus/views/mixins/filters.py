@@ -7,17 +7,13 @@ Created on 30.07.2014
 from builtins import str
 
 from django import forms
-from django.contrib import messages
 from django.http.request import QueryDict
-from django.utils.translation import gettext_lazy as _
 from django_filters.filters import OrderingFilter
 from django_filters.filterset import FilterSet
 from django_filters.views import FilterMixin
 
-from cosinnus.conf import settings
-from cosinnus.core.decorators.views import redirect_to_error_page
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
-from cosinnus.utils.permissions import check_user_blocks_user, filter_base_taggable_qs_for_blocked_user_content
+from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
 
 
 class CosinnusFilterMixin(FilterMixin):
@@ -112,21 +108,3 @@ class CosinnusOrderingFilter(OrderingFilter):
         if not value and self.default:
             return qs.order_by(self.default)
         return super(CosinnusOrderingFilter, self).filter(qs, value)
-
-
-class DisallowBlockedUserViewMixin(object):
-    """A mixin that adds functionality for redirecting the user to an error page if they are blocked by a user,
-    instead of following through to the actual URL.
-    Use by adding this mixin to the view, and defining `blocking_user_class_attr_name` to the class attribute
-    holding the user object that is checked for if they block the current request user."""
-
-    blocking_user_class_attr_name = False
-    user_is_blocked_error_message = _('You cannot do this because this user is blocking you.')
-
-    def dispatch(self, request, *args, **kwargs):
-        if settings.COSINNUS_ENABLE_USER_BLOCK:
-            user = getattr(self, self.blocking_user_class_attr_name)
-            if user and check_user_blocks_user(user, request.user):
-                messages.error(self.request, self.user_is_blocked_error_message)
-                return redirect_to_error_page(request, view=self)
-        return super().dispatch(request, *args, **kwargs)
