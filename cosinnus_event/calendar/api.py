@@ -90,7 +90,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=['post'],
+        methods=['get', 'post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CalendarPublicEventPermissions],
     )
@@ -102,26 +102,13 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
               Users with only read permissions to the event should be able to set it.
         """
         instance = self.get_object()
-        user = request.user
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        attending = serializer.validated_data['attending']
-        user_attendance = instance.attendances.filter(user=user).first()
-        if attending:
-            # user is attending
-            if user_attendance:
-                if user_attendance.state != EventAttendance.ATTENDANCE_GOING:
-                    # set state to "going" of existing event attendance
-                    user_attendance.state = EventAttendance.ATTENDANCE_GOING
-                    user_attendance.save()
-            else:
-                # no event attendance exists, create a new one
-                instance.attendances.create(user=user, state=EventAttendance.ATTENDANCE_GOING)
-        elif user_attendance and user_attendance.state != EventAttendance.ATTENDANCE_NOT_GOING:
-            # user not attending, but event attendance exists, set state to "not going"
-            user_attendance.state = EventAttendance.ATTENDANCE_NOT_GOING
-            user_attendance.save()
-        return Response()
+        if request.method == 'GET':
+            serializer = self.get_serializer(instance)
+        else:
+            serializer = self.get_serializer(instance, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        return Response(serializer.data)
 
     @action(
         detail=True,

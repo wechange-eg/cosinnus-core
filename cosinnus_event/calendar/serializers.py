@@ -304,6 +304,37 @@ class CalendarPublicEventAttendanceActionSerializer(serializers.Serializer):
 
     attending = serializers.BooleanField(required=True)
 
+    def to_representation(self, instance):
+        user = self.context['request'].user
+        attending = (
+            instance.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
+            if user.is_authenticated
+            else False
+        )
+        return {
+            'attending': attending,
+        }
+
+    def update(self, instance, validated_data):
+        user = self.context['request'].user
+        attending = validated_data['attending']
+        user_attendance = instance.attendances.filter(user=user).first()
+        if attending:
+            # user is attending
+            if user_attendance:
+                if user_attendance.state != EventAttendance.ATTENDANCE_GOING:
+                    # set state to "going" of existing event attendance
+                    user_attendance.state = EventAttendance.ATTENDANCE_GOING
+                    user_attendance.save()
+            else:
+                # no event attendance exists, create a new one
+                instance.attendances.create(user=user, state=EventAttendance.ATTENDANCE_GOING)
+        elif user_attendance and user_attendance.state != EventAttendance.ATTENDANCE_NOT_GOING:
+            # user not attending, but event attendance exists, set state to "not going"
+            user_attendance.state = EventAttendance.ATTENDANCE_NOT_GOING
+            user_attendance.save()
+        return instance
+
 
 class CalendarPublicEventBBBEnabledField(serializers.BooleanField):
     """Custom field that maps the video_conference_type field to bool for BBB meetings."""
