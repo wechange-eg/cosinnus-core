@@ -19247,11 +19247,11 @@ msgstr ""
 "\n"
 "Deine Pads, Neuigkeiten, hochgeladenen Dateien und sonstigen Inhalte bleiben auf der Website erhalten. Dein Name wird jedoch nicht mehr angezeigt und dein Profil wird nicht mehr mit den Inhalten verknüpft. In Rocket Chat werden deine Direktnachrichten gelöscht, die Inhalte in Diskussionen und Kanälen bleiben jedoch erhalten. Wenn du dennoch eigene Inhalte löschen möchtest, kannst du dies jetzt tun, indem du die Inhalte auf den entsprechenden Seiten löschst.\n"
 "\n"
-"Dein Profil wird zunächst deaktiviert und vollständig von der Plattform entfernt. Nach der Deaktivierung wird es nach %(deleted_after_days) Tagen aus unserer Datenbank gelöscht und erst dann endgültig entfernt.\n"
+"Dein Profil wird zunächst deaktiviert und vollständig von der Plattform entfernt. Nach der Deaktivierung wird es nach %(deleted_after_days)s Tagen aus unserer Datenbank gelöscht und erst dann endgültig entfernt.\n"
 "\n"
 "Dein Benutzerkonto kann nach der Löschung bis zu 6 Monate lang in unseren Backup-Systemen gespeichert bleiben. Sollte dies zu lange sein, wende dich bitte an den Support dieser Plattform, um eine sofortige Löschung zu veranlassen.\n"
 "\n"
-"In den %(deleted_after_days) Tagen nach der Löschung bleibt die E-Mail-Adresse deines Benutzerkontos reserviert und kann nicht zur Registrierung eines neuen Benutzerkontos verwendet werden."
+"In den %(deleted_after_days)s Tagen nach der Löschung bleibt die E-Mail-Adresse deines Benutzerkontos reserviert und kann nicht zur Registrierung eines neuen Benutzerkontos verwendet werden."
 
 #: cosinnus/trans/group.py
 msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
