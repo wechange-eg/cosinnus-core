@@ -61,13 +61,16 @@
                             <div class="media-body comment-background">
                                 <strong><a href="{{ comment.creator|profile_url }}">{{ comment.creator|full_name }}</a></strong>
                                 <div class="font11px regular-space">
+                                    <span class="pull-right">{% include 'cosinnus/feedback/report_button_a.html' with object=comment %}</span>
                                     {% if user|has_write_access:comment %}
-                                    	{% comment %} Force the URL of the POST to remain on this site because of CSRF checks, but
-            				  						  force the cosinnus group resolution to check the group of this portal {% endcomment %}
-                                        <form id="delete_comment_form_{{ comment.pk }}" action="{% group_url 'cosinnus:note:comment-delete' group=comment.note.group pk=comment.pk force_local_domain="True" %}" method="post" class="form-horizontal">
-                                            {% csrf_token %}{% cosinnus_cross_portal_token comment.note.group.portal %}
-                                            <a class="pull-right" href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#delete_comment_form_{{ comment.pk }}').submit();} return false;" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
-                                        </form>
+                                        <span class="pull-right">
+                                            {% comment %} Force the URL of the POST to remain on this site because of CSRF checks, but
+                                                          force the cosinnus group resolution to check the group of this portal {% endcomment %}
+                                            <form id="delete_comment_form_{{ comment.pk }}" action="{% group_url 'cosinnus:note:comment-delete' group=comment.note.group pk=comment.pk force_local_domain="True" %}" method="post" class="form-horizontal">
+                                                {% csrf_token %}{% cosinnus_cross_portal_token comment.note.group.portal %}
+                                                <a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#delete_comment_form_{{ comment.pk }}').submit();} return false;" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                                            </form>
+                                        </span>
                                     {% endif %}
                                     <a href="{{ comment.get_absolute_url }}"><span class="moment-data-date" data-date="{{ comment.created_on|date:'c' }}" ></span></a>
                                 </div>
