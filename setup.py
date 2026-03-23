@@ -164,9 +164,7 @@ setup(
         'clamd==1.0.2',
         # requirements for documentation
         'sphinx==7.1.2',
-        # dev requirements
-        'ruff==0.4.4',
-        'pre-commit==3.5.0',
+        # (dev requirements were moved to pyproject.toml dev-dependencies)
         'fcm-django==2.2.1',
         'tblib==3.0.0',
         'django_extended_makemessages==1.7.1',
