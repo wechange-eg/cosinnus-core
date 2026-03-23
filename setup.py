@@ -164,11 +164,7 @@ setup(
         'clamd==1.0.2',
         # requirements for documentation
         'sphinx==7.1.2',
-        # dev requirements
-        'ruff==0.4.4', # TODO move to pyproject dev deps
-        'pre-commit==3.5.0', # TODO move to pyproject dev deps
-        'tblib==3.0.0', # TODO move ???
-        'django_extended_makemessages==1.7.1', # TODO move to pyproject dev deps
+        # (dev requirements were moved to pyproject.toml dev-dependencies)
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django-update-4-2#egg=django-awesome-avatar',
         'django-multiform @ git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
