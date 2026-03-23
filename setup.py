@@ -86,33 +86,30 @@ setup(
     packages=find_packages(exclude=['tests']),
     data_files=data_files,
     install_requires=[
-        'Django<4.3',
-        #'Django<5.3',  # TODO needs python update
+        'Django>=5.2.12,<5.3',
         'MarkupSafe==2.1.5',
-        'Pillow==10.3.0',
-        'celery==5.2.7',
+        'Pillow==12.1.1',
+        'celery==5.6.2', # TODO: PY UPGRADE CHECK, 3.13 last supported
         'dataclasses',
         'beautifulsoup4==4.8.1',
         'chardet==3.0.4',
         'django-allauth==0.60.0',
         'django-annoying==0.7.6',
-        'django-appconf==1.0.3',
+        'django-appconf==1.2.0',  # TODO: PY UPGRADE CHECK
         'django-bootstrap3==21.1',
         'django-classy-tags==2.0.0',
         'django-countries==7.2.1',
-        'django-cron==0.6.0',
-        #'django-cron-django5==0.6.2', TODO needs python update
+        'django-cron-django5==0.6.2',
         'django-embed-video==1.4.9',
         'django-el-pagination==2.1.2',
-        'django-extensions==3.1.5',
-        # django-extensions==4.1', TODO needs python update
+        'django-extensions==4.1',
         'django-extra-views==0.14.0',
-        'django-filter==21.1',
+        'django-filter==25.2',  # TODO: PY UPGRADE CHECK, 3.13 last supported https://pypi.org/project/django-filter/25.2/
         'django-haystack==3.3.0',
         'django-honeypot==0.9.0',
         'django-ical==1.7.1',
         'django-mailbox==4.9.0',
-        'django-model-utils==1.5.0',
+        'django-model-utils==5.0.0',  # TODO: PY UPGRADE CHECK, 3.12 last supported
         'django-mptt==0.8.7',
         'django-oauth-toolkit==2.3.0',
         'django-otp==1.1.1',
@@ -123,19 +120,17 @@ setup(
         'django-simple-captcha==0.5.20',
         'django-taggit==6.1.0',
         'django-timezone-field==4.2.1',
-        'django-two-factor-auth==1.14.0',
-        #'django-two-factor-auth==1.18.1',  # TODO: needs python update
+        'django-two-factor-auth==1.18.1',
         'django-widget-tweaks==1.4.9',
-        'djangorestframework==3.15.2',
-        #'djangorestframework==3.16.1',  # TODO: needs python update
+        'djangorestframework==3.16.1',
         'djangorestframework-csv==2.1.1',
         'dnspython==2.6.1',
         'drf-extra-fields==3.4.0',
         'drf-yasg==1.21.7',
-        'easy-thumbnails==2.8.5',
-        #'easy-thumbnails==2.10.1',  # TODO: needs python update
+        'easy-thumbnails==2.10.1',
         'elasticsearch==7.17.9',
         'ecdsa==0.18.0',
+        'fcm-django==2.2.1',
         'geopy==2.4.1',
         'icalendar==5.0.12',
         'jsonfield==3.1.0',
@@ -148,15 +143,15 @@ setup(
         'paramiko==2.11.0',
         'pycountry==20.7.3',
         'raven==6.9.0',
-        'redis==5.0.1',
+        'redis==5.3.1',  # TODO: PY UPGRADE CHECK, 3.12 last supported  - required for celery
         'requests==2.32.4',
         'requests-oauthlib==0.8.0',
         'rocketchat-API==1.30.0',
         'six==1.12.0',
         'sqlparse==0.5.0',
         'sentry-sdk==1.14.0',
-        'python-dateutil==2.4.1',
-        'urllib3==1.26.19',
+        'python-dateutil==2.9.0.post0',   # TODO: PY UPGRADE CHECK, 3.12 last supported
+        'urllib3==2.6.3',
         'pytz==2022.6',
         'rdflib==5.0.0',
         'pymemcache==4.0.0',
@@ -170,11 +165,10 @@ setup(
         # requirements for documentation
         'sphinx==7.1.2',
         # dev requirements
-        'ruff==0.4.4',
-        'pre-commit==3.5.0',
-        'fcm-django==2.2.1',
-        'tblib==3.0.0',
-        'django_extended_makemessages==1.7.1',
+        'ruff==0.4.4', # TODO move to pyproject dev deps
+        'pre-commit==3.5.0', # TODO move to pyproject dev deps
+        'tblib==3.0.0', # TODO move ???
+        'django_extended_makemessages==1.7.1', # TODO move to pyproject dev deps
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django-update-4-2#egg=django-awesome-avatar',
         'django-multiform @ git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
@@ -193,7 +187,7 @@ setup(
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.12',
         'Framework :: Django',
     ],
     zip_safe=False,
