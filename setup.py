@@ -89,6 +89,7 @@ setup(
         'Django>=5.2.12,<5.3',
         'MarkupSafe==2.1.5',
         'Pillow==12.1.1',
+        'channels==4.3.2', # TODO: PY UPGRADE CHECK, # Moved from pyproject.toml
         'celery==5.6.2', # TODO: PY UPGRADE CHECK, 3.13 last supported
         'dataclasses',
         'beautifulsoup4==4.8.1',
@@ -101,6 +102,7 @@ setup(
         'django-countries==7.2.1',
         'django-cron-django5==0.6.2',
         'django-embed-video==1.4.9',
+        'django-environ==0.8.1',  # Moved from pyproject.toml
         'django-el-pagination==2.1.2',
         'django-extensions==4.1',
         'django-extra-views==0.14.0',
@@ -121,24 +123,25 @@ setup(
         'django-taggit==6.1.0',
         'django-timezone-field==4.2.1',
         'django-two-factor-auth==1.18.1',
-        'django-widget-tweaks==1.4.9',
+        'django-widget-tweaks==1.5.1',
         'djangorestframework==3.16.1',
         'djangorestframework-csv==2.1.1',
+        'djangorestframework-simplejwt==5.5.1',  # TODO: PY UPGRADE CHECK
         'dnspython==2.6.1',
         'drf-extra-fields==3.4.0',
         'drf-yasg==1.21.7',
         'easy-thumbnails==2.10.1',
-        'elasticsearch==7.17.9',
+        'elasticsearch==8.19.3',  # TODO: PY UPGRADE CHECK
         'ecdsa==0.18.0',
         'fcm-django==2.2.1',
         'geopy==2.4.1',
         'icalendar==5.0.12',
         'jsonfield==3.1.0',
         'l18n==2021.3',
-        'lxml==4.9.1',
+        'lxml==6.0.2',
         'html5lib',
         'html2text==2016.9.19',
-        'numpy==1.24.2',
+        'numpy==1.26.4',
         'oauthlib==3.2.2',
         'paramiko==2.11.0',
         'pycountry==20.7.3',
@@ -150,6 +153,7 @@ setup(
         'six==1.12.0',
         'sqlparse==0.5.0',
         'sentry-sdk==1.14.0',
+        'tblib==3.0.0',  # for parallelized testing
         'python-dateutil==2.9.0.post0',   # TODO: PY UPGRADE CHECK, 3.12 last supported
         'urllib3==2.6.3',
         'pytz==2022.6',
