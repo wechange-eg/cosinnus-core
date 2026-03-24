@@ -3623,15 +3623,15 @@ msgid "Check this to create an empty break event that shows up in the agenda and
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
+msgid "Check this to generate an invite link which allows a registered user to become a member of the conference directly. When enabled, the link will be displayed to conference admins on the members page."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
+msgid "Check this to generate an invite link which allows a registered user to become a member of the group directly. When enabled, the link will be displayed to group admins on the members page."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
+msgid "Check this to generate an invite link which allows a registered user to become a member of the project directly. When enabled, the link will be displayed to project admins on the members page."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
@@ -4655,7 +4655,11 @@ msgid "Create idea"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Create invite token"
+msgid "Create invite link"
+msgstr ""
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+msgid "Create link"
 msgstr ""
 
 #: cosinnus/trans/group.py
@@ -4685,10 +4689,6 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/administration/user_create_form.html
 msgid "Create new User"
-msgstr ""
-
-#: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Create token"
 msgstr ""
 
 #: cosinnus/models/wagtail_blocks.py
@@ -14150,7 +14150,7 @@ msgid "The content of the field above will will be shown, unless overriden by a 
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "The current token is: "
+msgid "The current link is: "
 msgstr ""
 
 #: cosinnus/models/profile.py
