@@ -307,6 +307,7 @@ class UserAuthInfoView(LoginViewAdditionalLogicMixin, APIView):
             'authenticated': user.is_authenticated,
         }
         if user.is_authenticated:
+            request.session.set_expiry(settings.COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS)
             user_tokens = get_tokens_for_user(user)
             data.update(
                 {
