@@ -17638,7 +17638,7 @@ msgstr "You cannot delete the default activity feed!"
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr ""
 
-#: cosinnus/views/mixins/filters.py
+#: cosinnus_message/views.py
 msgid "You cannot do this because this user is blocking you."
 msgstr ""
 
