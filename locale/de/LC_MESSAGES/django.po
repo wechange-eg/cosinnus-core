@@ -3763,16 +3763,16 @@ msgid "Check this to create an empty break event that shows up in the agenda and
 msgstr "Wähle dies aus, um eine leere Veranstaltung in der Agenda darzustellen"
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
-msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Tagung direkt beitreten kann."
+msgid "Check this to generate an invite link which allows a registered user to become a member of the conference directly. When enabled, the link will be displayed to conference admins on the members page."
+msgstr "Wähle dies aus, um einen Einladungslink zu erstellen, mit dem jeder der Tagung direkt beitreten kann. Wenn aktiviert, wird der Link den Tagungs-Admins auf der Mitglieder-Seite angezeigt."
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
-msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Gruppe direkt beitreten kann."
+msgid "Check this to generate an invite link which allows a registered user to become a member of the group directly. When enabled, the link will be displayed to group admins on the members page."
+msgstr "Wähle dies aus, um einen Einladungslink zu erstellen, mit dem jeder der Gruppe direkt beitreten kann. Wenn aktiviert, wird der Link den Gruppen-Admins auf der Mitglieder-Seite angezeigt."
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
-msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder dem Projekt direkt beitreten kann."
+msgid "Check this to generate an invite link which allows a registered user to become a member of the project directly. When enabled, the link will be displayed to project admins on the members page."
+msgstr "Wähle dies aus, um einen Einladungslink zu erstellen, mit dem jeder dem Projekt direkt beitreten kann. Wenn aktiviert, wird der Link den Projekt-Admins auf der Mitglieder-Seite angezeigt."
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
@@ -4802,8 +4802,12 @@ msgid "Create idea"
 msgstr "Idee erstellen"
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Create invite token"
-msgstr "Einladungstoken erstellen"
+msgid "Create invite link"
+msgstr "Einladungslink erstellen"
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+msgid "Create link"
+msgstr "Link erstellen"
 
 #: cosinnus/trans/group.py
 msgid "Create new Conference"
@@ -4834,11 +4838,6 @@ msgstr "Neues Projekt anlegen"
 #: cosinnus/templates/cosinnus/administration/user_create_form.html
 msgid "Create new User"
 msgstr "Benutzerkonto erstellen"
-
-#
-#: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Create token"
-msgstr "Token erstellen"
 
 #: cosinnus/models/wagtail_blocks.py
 msgid "Create-Project or Group Button"
@@ -14782,8 +14781,8 @@ msgid "The content of the field above will will be shown, unless overriden by a 
 msgstr "Der Inhalt des obigen Feldes wird angezeigt wenn er nicht anhand von einer bestimmten Übersetzung (unten) überschrieben wird."
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "The current token is: "
-msgstr "Der aktuelle Token ist: "
+msgid "The current link is: "
+msgstr "Der aktuelle Link ist: "
 
 #: cosinnus/models/profile.py
 msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
@@ -18392,7 +18391,7 @@ msgstr "Du kannst den Standard-Aktivitäten-Feed nicht löschen!"
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
 
-#: cosinnus/views/mixins/filters.py
+#: cosinnus_message/views.py
 msgid "You cannot do this because this user is blocking you."
 msgstr "Du kannst das nicht tun, weil diese/r Benutzer/in dich blockiert hat."
 
@@ -20394,6 +20393,15 @@ msgstr "Ja"
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "Ein Workshop mit dem Slug '{}' existiert nicht."
 
+#~ msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
+#~ msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Tagung direkt beitreten kann."
+
+#~ msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
+#~ msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Gruppe direkt beitreten kann."
+
+#~ msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
+#~ msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder dem Projekt direkt beitreten kann."
+
 #~ msgid "Check this to prevent public viewing of the event's description"
 #~ msgstr "Wähle dies aus, um die öffentliche Anzeige der Veranstaltungsbeschreibung zu verhindern"
 
@@ -20441,6 +20449,13 @@ msgstr "Ja"
 
 #~ msgid "Cosinnus conferences"
 #~ msgstr "Tagungen"
+
+#~ msgid "Create invite token"
+#~ msgstr "Einladungstoken erstellen"
+
+#
+#~ msgid "Create token"
+#~ msgstr "Token erstellen"
 
 #~ msgid "Created by"
 #~ msgstr "Erstellt durch"
@@ -21088,6 +21103,9 @@ msgstr "Ja"
 
 #~ msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
 #~ msgstr "Der CSV-Upload löst die Erstellung der Konten und Konto-Workshop-Mitgliedschaften aus und führt zu einem direkten CSV-Download mit den neu erstellten Konten und Passwörtern. Die Passwörter werden erst beim Anlegen des Kontos mit einbezogen. Bitte aktualisiere die Seite nach dem Download."
+
+#~ msgid "The current token is: "
+#~ msgstr "Der aktuelle Token ist: "
 
 #~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
 #~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
