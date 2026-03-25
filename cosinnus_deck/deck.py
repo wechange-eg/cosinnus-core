@@ -491,8 +491,8 @@ class DeckConnection:
                     )
                     card_id = response.json()['id']
 
-                    # assign user
-                    if todo.assigned_to:
+                    # assign user if user is group member
+                    if todo.assigned_to and todo.assigned_to.pk in group.members:
                         self.card_assign_user(
                             group_board_id=group.nextcloud_deck_board_id,
                             stack_id=stack_id,
