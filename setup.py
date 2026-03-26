@@ -99,9 +99,9 @@ setup(
         'django-appconf==1.2.0',  # TODO: PY UPGRADE CHECK
         'django-bootstrap3==21.1',
         'django-classy-tags==2.0.0',
-        'django-countries==7.2.1',
+        'django-countries==8.2.0',  # TODO: PY UPGRADE CHECK
         'django-cron-django5==0.6.2',
-        'django-embed-video==1.4.9',
+        'django-embed-video==1.4.10',   # TODO: PY UPGRADE CHECK
         'django-environ==0.8.1',  # Moved from pyproject.toml
         'django-el-pagination==2.1.2',
         'django-extensions==4.1',
@@ -129,9 +129,9 @@ setup(
         'djangorestframework-simplejwt==5.5.1',  # TODO: PY UPGRADE CHECK
         'dnspython==2.6.1',
         'drf-extra-fields==3.4.0',
-        'drf-yasg==1.21.7',
+        'drf-yasg==1.21.15', # TODO: PY UPGRADE CHECK
         'easy-thumbnails==2.10.1',
-        'elasticsearch==8.19.3',  # TODO: PY UPGRADE CHECK
+        'elasticsearch==7.17.13',  # TODO: PY UPGRADE CHECK
         'ecdsa==0.18.0',
         'fcm-django==2.2.1',
         'geopy==2.4.1',
@@ -146,11 +146,11 @@ setup(
         'paramiko==2.11.0',
         'pycountry==20.7.3',
         'raven==6.9.0',
-        'redis==5.3.1',  # TODO: PY UPGRADE CHECK, 3.12 last supported  - required for celery
+        'redis==5.3.1',  # TODO: PY UPGRADE CHECK, 3.12 last supported - required for celery
         'requests==2.32.4',
         'requests-oauthlib==0.8.0',
         'rocketchat-API==1.30.0',
-        'six==1.12.0',
+        'six==1.17.0',  # TODO: PY UPGRADE CHECK
         'sqlparse==0.5.0',
         'sentry-sdk==1.14.0',
         'tblib==3.0.0',  # for parallelized testing
@@ -159,7 +159,7 @@ setup(
         'pytz==2022.6',
         'rdflib==5.0.0',
         'pymemcache==4.0.0',
-        'qrcode==6.1',
+        'qrcode==8.2',  # TODO: PY UPGRADE CHECK
         'Unidecode==0.4.21',
         'XlsxWriter==1.3.7',
         'django-cors-headers<3.11.0',
