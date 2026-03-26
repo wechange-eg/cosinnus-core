@@ -79,7 +79,7 @@ class DeckIntegrationHandler(CosinnusBaseIntegrationHandler):
 
     def do_group_nextcloud_group_initialized(self, sender, group, **kwargs):
         """Create the Deck board."""
-        if self._is_app_enabled_for_group(group):
+        if self._is_app_enabled_for_group(group) and not group.nextcloud_deck_board_id:
             self._do_group_create.delay(group.pk)
 
     def do_group_update(self, group):
@@ -103,13 +103,14 @@ class DeckIntegrationHandler(CosinnusBaseIntegrationHandler):
             self._do_group_update.delay(group.pk)
 
     def do_group_app_activate(self, group):
-        """Deck app has been activated in the group."""
+        """
+        Deck app has been activated in the group.
+        Note: The creation of a board, when the deck app is activated for the first time, is done by the
+              do_group_nextcloud_group_initialized handler triggered by the cosinnus_cloud hooks.
+        """
         if group.nextcloud_deck_board_id:
             # Group board exists and will be reactivated by the update hook.
             self._do_group_update.delay(group.pk)
-        elif group.nextcloud_group_id:
-            # No group board, but nextcloud group initialized. Create the group board.
-            self._do_group_create.delay(group.pk)
 
     def do_group_app_deactivate(self, group):
         """Deck app has been deactivated in the group."""
