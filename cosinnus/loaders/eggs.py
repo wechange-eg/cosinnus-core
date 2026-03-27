@@ -5,9 +5,9 @@ from django.template import Origin, TemplateDoesNotExist
 from django.template.loaders.base import Loader as BaseLoader
 
 try:
-    from pkg_resources import resource_string
+    from importlib.resources import files
 except ImportError:
-    resource_string = None
+    files = None
 
 
 class EggOrigin(Origin):
@@ -19,13 +19,13 @@ class EggOrigin(Origin):
 
 class Loader(BaseLoader):
     def __init__(self, engine):
-        if resource_string is None:
+        if files is None:
             raise RuntimeError('Setuptools must be installed to use the egg loader')
         super(Loader, self).__init__(engine)
 
     def get_contents(self, origin):
         try:
-            source = resource_string(origin.app_name, origin.pkg_name)
+            source = (files(origin.app_name) / origin.pkg_name).read_bytes()
         except Exception:
             raise TemplateDoesNotExist(origin)
         source = source.decode(self.engine.file_charset)
