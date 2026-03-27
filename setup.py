@@ -145,14 +145,14 @@ setup(
         'oauthlib==3.2.2',
         'paramiko==2.11.0',
         'pycountry==20.7.3',
-        'raven==6.9.0',
+        'raven==6.10.0',
         'redis==5.3.1',  # TODO: PY UPGRADE CHECK, 3.12 last supported - required for celery
         'requests==2.32.4',
         'requests-oauthlib==0.8.0',
         'rocketchat-API==1.30.0',
         'six==1.17.0',  # TODO: PY UPGRADE CHECK
         'sqlparse==0.5.0',
-        'sentry-sdk==1.14.0',
+        'sentry-sdk==1.45.1',
         'tblib==3.0.0',  # for parallelized testing
         'python-dateutil==2.9.0.post0',   # TODO: PY UPGRADE CHECK, 3.12 last supported
         'urllib3==2.6.3',
