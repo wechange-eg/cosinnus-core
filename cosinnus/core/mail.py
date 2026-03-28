@@ -307,3 +307,25 @@ class MailThread(CosinnusWorkerThread):
                 self.bcc[i],
                 is_html=self.is_html[i],
             )
+
+
+def send_system_mail_to_support(subject, template, data, request=None, group=None, user=None, is_html=False):
+    """
+    Send system messages to current portal's support email.
+    Does nothing if no support email is set in the current portal.
+
+    Note: ``template`` can be None, if so we are looking for a ``content`` key in ``data`` to fill the email message.
+    """
+    support_email = CosinnusPortal.get_current().support_email
+    if not support_email:
+        return
+
+    context = get_common_mail_context(request=request, group=group, user=user)
+    context.update(data)
+    context.update(
+        {
+            'unsubscribe_url': None,
+        }
+    )
+
+    send_mail_or_fail(to=support_email, subject=subject, template=template, data=context, is_html=is_html)
