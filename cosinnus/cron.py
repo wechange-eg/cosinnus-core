@@ -10,12 +10,13 @@ from django.core.exceptions import ImproperlyConfigured
 from django.db.models import F, QuerySet, TextField, Value
 from django.db.models.fields.json import KeyTextTransform
 from django.db.models.functions import Cast, Coalesce
+from django.template.loader import render_to_string
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django_cron import CronJobBase, Schedule
 
 from cosinnus.conf import settings
-from cosinnus.core.mail import send_html_mail
+from cosinnus.core.mail import get_common_mail_context, send_html_mail, send_system_mail_to_support
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 from cosinnus.models.feedback import CosinnusSentEmailLog
 from cosinnus.models.group import CosinnusPortal
@@ -144,6 +145,20 @@ class SwitchGroupPremiumFeatures(CosinnusCronJobBase):
                         'cosinnus/mail/group_premium_expiration_notification.html',
                         None,
                     )
+                except Exception as e:
+                    logger.error(e, extra={'group': group, 'trace': traceback.format_exc()})
+
+                try:
+                    context = get_common_mail_context(request=None, group=group)
+                    subject = render_to_string('cosinnus/mail/group_premium_expired_notification_subj.txt', context)
+                    body = render_to_string('cosinnus/mail/group_premium_expiration_notification.html', context)
+                    content = '\n'.join((subject, body))
+                    context.update(
+                        {
+                            'content': content,
+                        }
+                    )
+                    send_system_mail_to_support(subject=subject, template=None, data=context, group=group)
                 except Exception as e:
                     logger.error(e, extra={'group': group, 'trace': traceback.format_exc()})
 
