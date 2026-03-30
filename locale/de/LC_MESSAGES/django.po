@@ -239,7 +239,7 @@ msgstr "%(count)d Benutzerkonten wurden erfolgreich deaktiviert. Sie werden in 3
 #: cosinnus/admin.py
 #, python-format
 msgid "%(count)d User account(s) were deleted successfully."
-msgstr ""
+msgstr "%(count)d Benutzerkonten wurden erfolgreich gelöscht."
 
 #: cosinnus/admin.py
 #, python-format
@@ -1536,7 +1536,7 @@ msgstr "(Abgesagt!)"
 
 #: cosinnus/admin.py
 msgid "(DEBUG ONLY) DELETE user instantly (TAKE CARE!)"
-msgstr ""
+msgstr "(DEBUG ONLY) LÖSCHE User sofort (ACHTUNG!)"
 
 #: cosinnus/models/profile.py
 msgid "(Deleted User)"
@@ -1610,6 +1610,14 @@ msgid ", for the following reason:"
 msgstr "aus folgendem Grund:"
 
 #: cosinnus/version_history.py
+msgid "- (Admin-Interface) Fixed a bug in the user administration interface that would cause a page error for some user profiles.\n"
+msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der auf manchen Benutzerprofilseiten zu einem Seitenfehler führte.\n"
+
+#: cosinnus/version_history.py
+msgid "- (Admin-Interface) Fixed a bug where download links in the administration would not start the download in some cases.\n"
+msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der bei manchen Benutzerprofilen zu einem Seitenfehler führte.\n"
+
+#: cosinnus/version_history.py
 msgid ""
 "- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n"
 "- Fixed a bug where group/project invite links would sometimes not work on signing up and could not be used by logged in users.\n"
@@ -1646,12 +1654,20 @@ msgid "- Added Firebase push integration for push notifications to mobile device
 msgstr "- Es wurde eine Firebase-Push-Integration für Push-Benachrichtigungen an mobile Geräte hinzugefügt.\n"
 
 #: cosinnus/version_history.py
+msgid "- Added numerous user interface and accessibility improvements throughout the site.\n"
+msgstr "- Zahlreiche Verbesserungen an der Benutzeroberfläche und der Barrierefreiheit wurden auf der gesamten Website vorgenommen.\n"
+
+#: cosinnus/version_history.py
 msgid ""
 "- Fixed a bug that prevented users from completing the intro tour on mobile devices running iOS 18.\n"
 "- Fixed a bug that sometimes prevented entries from being displayed in the lower part of the sidebar on mobile devices.\n"
 msgstr ""
 "- Es wurde ein Fehler behoben, der bei mobilen Geräten unter iOS 18 dazu führte, dass man die Introtour nicht abschließen konnte.\n"
 "- Es wurde ein Fehler behoben, bei dem auf mobilen Geräten Einträge im unteren Teil der Seitenleiste manchmal nicht angezeigt wurden.\n"
+
+#: cosinnus/version_history.py
+msgid "- Fixed a bug where certain types of malformed image links in markdown texts of news posts and events could cause a page error.\n"
+msgstr "- Es wurde ein Fehler behoben, bei dem durch bestimmte Arten von fehlerhaften Bildlinks in Markdown-Texten von Nachrichtenbeiträgen und Veranstaltungen ein Seitenfehler auftreten konnte.\n"
 
 #: cosinnus/version_history.py
 msgid ""
@@ -1704,6 +1720,26 @@ msgstr ""
 "- Als zusätzliche Kontosicherheitsmaßnahme werden nun alle Sitzungen außer der aktuellen ausgeloggt, wenn man das Kontopasswort oder die E-Mail ändert.\n"
 "- (RocketChat) Es wurden Verbesserrungen für mehr Stabilität und Geschwindigkeit der Integration mit RocketChat vorgenommen (falls aktiviert).\n"
 "- Die neuesten Sicherheitsupdates wurden eingespielt und weitere kleinere Fehlerbehebungen vorgenommen.\n"
+
+#: cosinnus/version_history.py
+msgid "- Fixed a bug where the password reset and password change pages would show a page error when a new password was entered that did not match the password requirements.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den auf den Seiten zum Zurücksetzen und Ändern des Passworts ein Seitenfehler auftrat, wenn ein neues Passwort eingegeben wurde, das nicht den Passwortanforderungen entsprach.\n"
+
+#: cosinnus/version_history.py
+msgid ""
+"- Fixed a bug where todo lists could not be migrated into the Deck app when there was a todo that was assigned to a deleted user account.\n"
+"- Fixed a bug where the deck could sometimes not be initialized for some groups and projects, preventing the Deck app from being used.\n"
+msgstr ""
+"- Es wurde ein Fehler behoben, durch den Aufgabenlisten nicht in die Deck-App migriert werden konnten, wenn eine Aufgabe einem gelöschten Benutzerkonto zugewiesen war.\n"
+"- Es wurde ein Fehler behoben, durch den das Deck bei einigen wenigen Gruppen und Projekten nicht initialisiert werden konnte, wodurch die Deck-App dort nicht genutzt werden konnte.\n"
+
+#: cosinnus/version_history.py
+msgid "- Fixed a page error during the profile setup when entering a profile location.\n"
+msgstr "- Es wurde ein Seitenfehler beim Eingeben eines Ortes im Profilsetup behoben.\n"
+
+#: cosinnus/version_history.py
+msgid "- Fixed an error with the profile avatar synchronisation with the Nextcloud.\n"
+msgstr "- Es wurde ein Fehler bei der Synchronisierung des Profil-Avatars mit Nextcloud behoben.\n"
 
 #: cosinnus/version_history.py
 msgid "- Fixed an inconsistency between the profile name fields on the profile edit page and the profile setup wizard.\n"
@@ -3136,6 +3172,11 @@ msgstr "Bist du sicher, dass du alle ausgewählten Elemente löschen willst?"
 
 #: cosinnus/templates/cosinnus/v2/dashboard/timeline_item_base.html
 #: cosinnus/templates/cosinnus/v2/dashboard/timeline_item_comment.html
+#: cosinnus_event/templates/cosinnus_event/event_comments.html
+#: cosinnus_marketplace/templates/cosinnus_marketplace/offer_comments.html
+#: cosinnus_note/templates/cosinnus_note/note_comments.html
+#: cosinnus_poll/templates/cosinnus_poll/poll_comments.html
+#: cosinnus_todo/templates/cosinnus_todo/todo_comments.html
 msgid "Are you sure you want to delete the item?"
 msgstr "Bist du sicher dass du diesen Inhalt löschen willst?"
 
@@ -15889,6 +15930,10 @@ msgid "This todo was completed:"
 msgstr "Diese Aufgabe wurde abgeschlossen:"
 
 #: cosinnus/version_history.py
+msgid "This update includes quality of life updates:"
+msgstr "Das Update enthält Verbesserungen zur Benutzerfreundlichkeit:"
+
+#: cosinnus/version_history.py
 msgid "This update includes security updates and small bugfixes:"
 msgstr "Das Update enthält Sicherheitsupdates kleine Bugfixes:"
 
@@ -15899,6 +15944,10 @@ msgstr "Das Update enthält mehrere Bugfixes:"
 #: cosinnus/version_history.py
 msgid "This update includes several features and bugfixes:"
 msgstr "Das Update enthält mehrere Features und Bugfixes:"
+
+#: cosinnus/version_history.py
+msgid "This update includes small bugfixes:"
+msgstr "Das Update enthält kleine Bugfixes:"
 
 #: cosinnus/version_history.py
 msgid "This update provides several small bugfixes and stability improvements."
@@ -18303,7 +18352,7 @@ msgstr "Du kannst den Standard-Aktivitäten-Feed nicht löschen!"
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
 
-#: cosinnus/views/mixins/filters.py
+#: cosinnus_message/views.py
 msgid "You cannot do this because this user is blocking you."
 msgstr "Du kannst das nicht tun, weil diese/r Benutzer/in dich blockiert hat."
 
@@ -20366,6 +20415,14 @@ msgstr "Ja"
 #~ msgid "Czech--NATIVE-LANGUAGE"
 #~ msgstr "Čeština"
 
+#, fuzzy
+#~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
+#~ msgstr "Optionen für den Raum, die in der bigbluebutton-API dargestellt werden"
+
+#, fuzzy
+#~ msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+#~ msgstr "die Begrüßungsmeldung, die den Teilnehmenden angezeigt wird"
+
 #~ msgid "Deactivate Project/Group"
 #~ msgstr "Projekt/Gruppe deaktivieren"
 
@@ -20647,6 +20704,10 @@ msgstr "Ja"
 #~ msgid "I accept the conditions"
 #~ msgstr "Ich akzeptiere die Bedingungen"
 
+#, fuzzy
+#~ msgid "I wish to receive RocketChat notification emails"
+#~ msgstr "Ich möchte Benachrichtigungs-Emails erhalten"
+
 #~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
 #~ msgstr "Wenn ein Gruppe als Tagung markiert wurde, ist es möglich Accounts für alle Teilnehmer automatisch zu generieren"
 
@@ -20808,6 +20869,10 @@ msgstr "Ja"
 #~ msgid "Ok"
 #~ msgstr "Ok"
 
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
+
 #~ msgid "Only content from my Groups and Projects"
 #~ msgstr "Nur Beiträge aus meinen Gruppen und Projekten"
 
@@ -20922,6 +20987,10 @@ msgstr "Ja"
 
 #~ msgid "Schedule an event"
 #~ msgstr "Termin finden"
+
+#, fuzzy
+#~ msgid "Search for email"
+#~ msgstr "Nach Ideen suchen"
 
 #~ msgid "Select the groups/projects for boards you want to migrate:"
 #~ msgstr "Wähle Gruppen/Projekte for Boards aus die migriert werden sollen:"
@@ -21327,6 +21396,10 @@ msgstr "Ja"
 
 #~ msgid "not active"
 #~ msgstr "inaktiv"
+
+#, fuzzy
+#~ msgid "nothing selected"
+#~ msgstr "Kein Tag ausgewählt"
 
 #~ msgid "participants"
 #~ msgstr "Teilnehmende"
