@@ -3,13 +3,11 @@ from __future__ import unicode_literals
 
 import logging
 import traceback
-from datetime import timedelta
+from datetime import date, timedelta
+from typing import List
 
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
-from django.db.models import F, QuerySet, TextField, Value
-from django.db.models.fields.json import KeyTextTransform
-from django.db.models.functions import Cast, Coalesce
 from django.template.loader import render_to_string
 from django.utils.encoding import force_str
 from django.utils.timezone import now
@@ -19,7 +17,7 @@ from cosinnus.conf import settings
 from cosinnus.core.mail import get_common_mail_context, send_html_mail, send_system_mail_to_support
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 from cosinnus.models.feedback import CosinnusSentEmailLog
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group import CosinnusBaseGroup, CosinnusPortal
 from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.storage import TemporaryData
@@ -182,30 +180,29 @@ class SendGroupPremiumExpirationWarningEmails(CosinnusCronJobBase):
     cosinnus_code = 'cosinnus.send_group_premium_expiration_warning_emails'
 
     @staticmethod
-    def _get_eligible_groups() -> QuerySet:
+    def _get_eligible_groups() -> List[CosinnusBaseGroup]:
         """Returns all groups, that are due for a warning email."""
 
         portal_groups = get_cosinnus_group_model().objects.all_in_portal()
         today = now().date()
         warning_threshold = today + timedelta(days=settings.COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS)
 
-        candidates = (
-            portal_groups
-            # in waring period
-            .filter(
-                enable_user_premium_choices_until__gte=today, enable_user_premium_choices_until__lte=warning_threshold
-            )
-            # marker-field does not match premium-end-date, compare both as isoformat string
-            .annotate(
-                premium_until_str=Cast('enable_user_premium_choices_until', TextField()),
-                last_warned_for_until_str=Coalesce(
-                    KeyTextTransform('last_warned_for_premium_choices_until', 'settings'),
-                    Value(''),
-                    output_field=TextField(),
-                ),
-            )
-            .exclude(last_warned_for_until_str=F('premium_until_str'))
+        threshold_groups = portal_groups.filter(
+            enable_user_premium_choices_until__gte=today, enable_user_premium_choices_until__lte=warning_threshold
         )
+
+        candidates = []
+        for group in threshold_groups:
+            last_warned_for_until: str = group.settings.get('last_warned_for_premium_choices_until', None)
+            premium_choices_until: date = group.enable_user_premium_choices_until
+
+            # ignore groups that we already sent a warning for
+            if last_warned_for_until and group.enable_user_premium_choices_until:
+                if last_warned_for_until == premium_choices_until.isoformat():
+                    continue
+
+            candidates.append(group)
+
         return candidates
 
     def do(self):
