@@ -1065,7 +1065,9 @@ class UserAdmin(DjangoUserAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        form.base_fields['first_name'].label = _('First name / Display name')
+        # fields are only available in change view, not readonly view
+        if 'first_name' in form.base_fields:
+            form.base_fields['first_name'].label = _('First name / Display name')
         return form
 
     def has_logged_in(self, obj):

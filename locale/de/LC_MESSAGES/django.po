@@ -186,13 +186,12 @@ msgstr "%(count)d Benutzerkonten wurden erfolgreich deaktiviert. Sie werden in 3
 msgid "DEACTIVATE user accounts and DELETE them after 30 days"
 msgstr "DEAKTIVIERE diese Benutzerkonten und LÖSCHE sie nach 30 Tagen"
 
-#, fuzzy, python-format
-#| msgid "%(count)d User account(s) were reactivated successfully."
+#, python-format
 msgid "%(count)d User account(s) were deleted successfully."
-msgstr "%(count)d Benutzerkonten wurden erfolgreich reaktiviert."
+msgstr "%(count)d Benutzerkonten wurden erfolgreich gelöscht."
 
 msgid "(DEBUG ONLY) DELETE user instantly (TAKE CARE!)"
-msgstr ""
+msgstr "(DEBUG ONLY) LÖSCHE User sofort (ACHTUNG!)"
 
 #, python-format
 msgid "%(count)d User account(s) were reactivated successfully."
@@ -8634,6 +8633,40 @@ msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 #, python-brace-format
 msgid "Version {version_number} released"
 msgstr "Version {version_number} veröffentlicht"
+
+msgid "This update includes small bugfixes:"
+msgstr "Das Update enthält kleine Bugfixes:"
+
+msgid ""
+"- Fixed a bug where todo lists could not be migrated into the Deck app when there was a todo that was assigned to a deleted user account.\n"
+"- Fixed a bug where the deck could sometimes not be initialized for some groups and projects, preventing the Deck app from being used.\n"
+msgstr ""
+"- Es wurde ein Fehler behoben, durch den Aufgabenlisten nicht in die Deck-App migriert werden konnten, wenn eine Aufgabe einem gelöschten Benutzerkonto zugewiesen war.\n"
+"- Es wurde ein Fehler behoben, durch den das Deck bei einigen wenigen Gruppen und Projekten nicht initialisiert werden konnte, wodurch die Deck-App dort nicht genutzt werden konnte.\n"
+
+msgid "- (Admin-Interface) Fixed a bug in the user administration interface that would cause a page error for some user profiles.\n"
+msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der auf manchen Benutzerprofilseiten zu einem Seitenfehler führte.\n"
+
+msgid "- Fixed an error with the profile avatar synchronisation with the Nextcloud.\n"
+msgstr "- Es wurde ein Fehler bei der Synchronisierung des Profil-Avatars mit Nextcloud behoben.\n"
+
+msgid "- Fixed a bug where the password reset and password change pages would show a page error when a new password was entered that did not match the password requirements.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den auf den Seiten zum Zurücksetzen und Ändern des Passworts ein Seitenfehler auftrat, wenn ein neues Passwort eingegeben wurde, das nicht den Passwortanforderungen entsprach.\n"
+
+msgid "- Fixed a page error during the profile setup when entering a profile location.\n"
+msgstr "- Es wurde ein Seitenfehler beim Eingeben eines Ortes im Profilsetup behoben.\n"
+
+msgid "- Fixed a bug where certain types of malformed image links in markdown texts of news posts and events could cause a page error.\n"
+msgstr "- Es wurde ein Fehler behoben, bei dem durch bestimmte Arten von fehlerhaften Bildlinks in Markdown-Texten von Nachrichtenbeiträgen und Veranstaltungen ein Seitenfehler auftreten konnte.\n"
+
+msgid "- (Admin-Interface) Fixed a bug where download links in the administration would not start the download in some cases.\n"
+msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der bei manchen Benutzerprofilen zu einem Seitenfehler führte.\n"
+
+msgid "This update includes quality of life updates:"
+msgstr "Das Update enthält Verbesserungen zur Benutzerfreundlichkeit:"
+
+msgid "- Added numerous user interface and accessibility improvements throughout the site.\n"
+msgstr "- Zahlreiche Verbesserungen an der Benutzeroberfläche und der Barrierefreiheit wurden auf der gesamten Website vorgenommen.\n"
 
 msgid "This update includes security updates and small bugfixes:"
 msgstr "Das Update enthält Sicherheitsupdates kleine Bugfixes:"

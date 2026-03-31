@@ -19,6 +19,89 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.7.10': {
+        'datetime': datetime(2026, 3, 31, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.7.10'),
+        'short_text': _('This update includes small bugfixes:'),
+        'full_text': [
+            _(
+                '- Fixed a bug where todo lists could not be migrated into the Deck app when there was a todo '
+                'that was assigned to a deleted user account.\n'
+                '- Fixed a bug where the deck could sometimes not be initialized for some groups and projects, '
+                'preventing the Deck app from being used.\n',
+            )
+            if settings.COSINNUS_DECK_ENABLED
+            else '',
+            _(
+                '- (Admin-Interface) Fixed a bug in the user administration interface that would cause a page error '
+                'for some user profiles.\n'
+            ),
+        ],
+    },
+    '2.7.9': {
+        'datetime': datetime(2026, 3, 21, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.7.9'),
+        'short_text': _('This update includes small bugfixes:'),
+        'full_text': [
+            _(
+                '- Fixed an error with the profile avatar synchronisation with the Nextcloud.\n'
+            ),
+        ],
+        'display_conditional': settings.COSINNUS_CLOUD_ENABLED,
+    },
+    '2.7.8': {
+        'datetime': datetime(2026, 3, 5, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.7.8'),
+        'short_text': _('This update includes small bugfixes:'),
+        'full_text': [
+            _(
+                '- Fixed a bug where the password reset and password change pages would show a page error '
+                'when a new password was entered that did not match the password requirements.\n'
+            ),
+        ],
+    },
+    '2.7.7': {
+        'datetime': datetime(2026, 3, 4, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.7.7'),
+        'short_text': _('This update includes small bugfixes:'),
+        'full_text': [
+            _(
+                '- Fixed a page error during the profile setup when entering a profile location.\n'
+            ),
+        ],
+    },
+    '2.7.6': {
+        'datetime': datetime(2026, 2, 26, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.7.6'),
+        'short_text': _('This update includes small bugfixes:'),
+        'full_text': [
+            _(
+                '- Fixed a bug where certain types of malformed image links in markdown texts of '
+                'news posts and events could cause a page error.\n'
+            ),
+        ],
+    },
+    '2.7.3': {
+        'datetime': datetime(2026, 1, 21, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.7.3'),
+        'short_text': _('This update includes small bugfixes:'),
+        'full_text': [
+            _(
+                '- (Admin-Interface) Fixed a bug where download links in the administration would not start the '
+                'download in some cases.\n'
+            ),
+        ],
+    },
+    '2.7.2': {
+        'datetime': datetime(2026, 1, 15, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.7.2'),
+        'short_text': _('This update includes quality of life updates:'),
+        'full_text': [
+            _(
+                '- Added numerous user interface and accessibility improvements throughout the site.\n'
+            ),
+        ],
+    },
     '2.7.0': {
         'datetime': datetime(2025, 12, 10, tzinfo=pytz.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.0'),
