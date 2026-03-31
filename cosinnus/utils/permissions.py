@@ -210,11 +210,14 @@ def check_object_likefollowstar_access(obj, user):
     return is_group or check_object_read_access(obj, user)
 
 
-def check_user_can_see_user(user, target_user):
-    """Checks if ``user`` is in any relation with ``target_user`` so that he can see them and
+def check_user_can_see_user(user, target_user, is_invite_selection=False):
+    """
+    Checks if ``user`` is in any relation with ``target_user`` so that he can see them and
     their profile, and can send him messages, etc.
-    This depends on the privacy settings of ``target_user`` and on whether they are members
-    of a same group/project."""
+    - This depends on the privacy settings of ``target_user`` and on whether they are members
+    of a same group/project.
+    - if `is_invite_selection` is True, return True ignoring the profile visibility setting
+    """
     # you can always see yourself
     if user.id == target_user.id:
         return True
@@ -226,6 +229,10 @@ def check_user_can_see_user(user, target_user):
         target_user_tagslugs = target_user.cosinnus_profile.get_managed_tag_slugs()
         if any([tagslug in target_user_tagslugs for tagslug in settings.COSINNUS_MANAGED_TAGS_RESTRICT_CONTACTING]):
             return False
+
+    # when selecting for invitations, we ignore visibility settings
+    if is_invite_selection:
+        return True
 
     visibility = target_user.cosinnus_profile.media_tag.visibility
     if visibility == BaseTagObject.VISIBILITY_ALL:
