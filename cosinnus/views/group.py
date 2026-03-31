@@ -103,6 +103,7 @@ from cosinnus.utils.permissions import (
     check_user_can_create_conferences,
     check_user_can_see_user,
     check_user_superuser,
+    filter_blocks_for_user,
 )
 from cosinnus.utils.urls import group_aware_reverse, redirect_next_or
 from cosinnus.utils.user import (
@@ -2228,11 +2229,13 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
 
         users = self.get_user_queryset(terms)
 
+        # filter out users who have active userblocks, both directions
+        users = filter_blocks_for_user(request.user, users)
+
         users = prioritize_suggestions_output(request, users)
 
-        # as a last filter, remove all users that that have their privacy setting to "only members of groups i am in",
-        # if they aren't in a group with the user
-        users = [user for user in users if check_user_can_see_user(request.user, user)]
+        # as a last filter, remove users we can not see
+        users = [user for user in users if check_user_can_see_user(request.user, user, is_invite_selection=True)]
 
         # check for a direct email match
         direct_email_user = get_user_by_email_safe(term)
