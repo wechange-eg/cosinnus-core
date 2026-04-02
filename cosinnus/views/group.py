@@ -1040,7 +1040,7 @@ class GroupConfirmMixin(object):
 
 class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembershipMixin, DetailView):
     message_success = _(
-        'You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team '
+        'You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as an '
         'administrator responds to your request.'
     )
     referer_url = reverse_lazy('cosinnus:group-list')
@@ -1618,7 +1618,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
         else:
             messages.error(
                 self.request,
-                _('You cannot remove "%(username)s" form this team. Only one admin left.')
+                _('You cannot remove "%(username)s" from this group/project. Only one admin left.')
                 % {'username': user.get_full_name()},
             )
             return HttpResponseRedirect(self.get_success_url())
@@ -2308,7 +2308,7 @@ class GroupOrganizationRequestView(RequireAdminMixin, GroupMembershipMixin, Form
     form_class = MultiOrganizationSelectForm
     template_name = 'cosinnus/group/group_detail.html'
     message_success = _(
-        'You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator '
+        'You have requested to join the organization “%(name)s”. You will receive an email as soon as an administrator '
         'responds to your request.'
     )
 
