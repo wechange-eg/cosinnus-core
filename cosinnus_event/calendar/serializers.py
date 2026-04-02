@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
+from django.utils.functional import cached_property
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 
@@ -8,8 +10,9 @@ from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSetti
 from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusDynamicFieldsSerializerMixin
 from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerMixin
 from cosinnus.conf import settings
-from cosinnus.models import BaseTagObject
-from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.models.group import CosinnusBaseGroup
+from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject, get_tag_object_model
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_object_write_access
 from cosinnus_event.models import Event, EventAttendance
 
@@ -35,11 +38,13 @@ class CalendarPublicEventListSerializer(serializers.ModelSerializer):
     """Serializer for events in the calendar list API view."""
 
     attending = serializers.SerializerMethodField()
+    group = serializers.IntegerField(source='group.id', read_only=True)
 
     class Meta:
         model = Event
         fields = (
             'id',
+            'group',
             'title',
             'from_date',
             'to_date',
@@ -406,3 +411,106 @@ class CalendarPublicEventBBBRoomUrlsActionSerializer(BBBRoomUrlsMixin, serialize
             'bbb_url',
             'bbb_guest_url',
         )
+
+
+class CalendarPublicEventGroupReflectionSerializer(serializers.Serializer):
+    """
+    Serializer for event group reflections used for validation.
+    Contains group info and flag if the event is reflected.
+    """
+
+    id = serializers.IntegerField()
+    name = serializers.CharField(required=False)
+    avatar = serializers.CharField(required=False)
+    reflected = serializers.BooleanField()
+
+    # contains user groups used for group id validation
+    user_group = None
+
+    def __init__(self, instance=None, group=None, reflected=None, user_groups=None, **kwargs):
+        self.user_groups = user_groups
+        super().__init__(instance, **kwargs)
+        if group and reflected is not None:
+            # initialize fields for GETs, for POSTs the required fields are automatically initialized from the POST data
+            self.fields['id'].initial = group.id
+            self.fields['name'].initial = group.name
+            self.fields['avatar'].initial = group.get_avatar_thumbnail_url()
+            self.fields['reflected'].initial = reflected
+
+    def validate_id(self, value):
+        """Check if the group id is a user group and reflections are allowed."""
+        if not any(user_group.pk == value for user_group in self.user_groups):
+            raise serializers.ValidationError('Invalid user group.')
+        return value
+
+
+class CalendarPublicEventReflectActionSerializer(serializers.Serializer):
+    """Serializer for event reflections.
+    Contains a list of all user groups with a writable flag, indicating if the event is reflected in the group.
+    Note: The reflection logic for the calendar events is different from the original v2 logic
+          (see group_assign_reflected_object). Here we allow reflections of an event into any user group.
+    """
+
+    groups = serializers.JSONField()
+
+    @cached_property
+    def reflection_user_groups(self):
+        """Helper to get user groups and projects excluding the event group."""
+        user = self.context['request'].user
+        group = self.context['group']
+        user_groups = get_cosinnus_group_model().objects.get_for_user(user)
+        user_groups = [
+            user_group
+            for user_group in user_groups
+            if user_group.pk != group.pk
+            and user_group.type in [CosinnusBaseGroup.TYPE_PROJECT, CosinnusBaseGroup.TYPE_SOCIETY]
+        ]
+        return user_groups
+
+    @property
+    def event_reflection_groups(self):
+        """Helper to get the groups where the event is reflected."""
+        return BaseTaggableObjectReflection.get_group_ids_for_object(self.instance)
+
+    def to_representation(self, instance):
+        group_reflections = []
+        for user_group in self.reflection_user_groups:
+            reflected_in_group = user_group.pk in self.event_reflection_groups
+            group_reflection_serializer = CalendarPublicEventGroupReflectionSerializer(
+                group=user_group, reflected=reflected_in_group
+            )
+            group_reflections.append(group_reflection_serializer.data)
+        data = {'groups': group_reflections}
+        return data
+
+    def validate(self, data):
+        """Validate data using the CalendarPublicEventGroupReflectionSerializer serializer."""
+        group_reflections_data = data.get('groups')
+        for group_reflection_data in group_reflections_data:
+            group_reflection_serializer = CalendarPublicEventGroupReflectionSerializer(
+                user_groups=self.reflection_user_groups, data=group_reflection_data, context=self.context
+            )
+            group_reflection_serializer.is_valid(raise_exception=True)
+        return data
+
+    def update(self, instance, validated_data):
+        """Save reflection changes."""
+        event_reflection_groups = self.event_reflection_groups
+        for group_reflection_data in validated_data['groups']:
+            reflection_group_id = group_reflection_data['id']
+            reflected = group_reflection_data['reflected']
+            event_content_type = ContentType.objects.get_for_model(Event)
+            if reflected and reflection_group_id not in event_reflection_groups:
+                # create event reflection
+                BaseTaggableObjectReflection.objects.create(
+                    content_type=event_content_type,
+                    object_id=self.instance.id,
+                    group_id=reflection_group_id,
+                    creator=self.context['request'].user,
+                )
+            elif not reflected and reflection_group_id in event_reflection_groups:
+                # delete existing event reflection
+                BaseTaggableObjectReflection.objects.get(
+                    content_type=event_content_type, object_id=self.instance.id, group_id=reflection_group_id
+                ).delete()
+        return instance

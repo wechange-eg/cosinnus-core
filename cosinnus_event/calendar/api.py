@@ -9,8 +9,10 @@ from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResp
 from cosinnus.api_frontend.serializers.attached_objects import AttachFileSerializer, DeleteAttachedFileSerializer
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectBookmarkSerializer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
+from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from cosinnus_event.calendar.permissions import CalendarPublicEventPermissions
 from cosinnus_event.calendar.serializers import (
     CalendarPublicEventAttendanceActionSerializer,
@@ -18,6 +20,7 @@ from cosinnus_event.calendar.serializers import (
     CalendarPublicEventBBBRoomUrlsActionSerializer,
     CalendarPublicEventListQueryParameterSerializer,
     CalendarPublicEventListSerializer,
+    CalendarPublicEventReflectActionSerializer,
     CalendarPublicEventSerializer,
 )
 from cosinnus_event.models import Event
@@ -39,24 +42,22 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
 
     group = None
     query_params = None
+    reflections_enabled = 'cosinnus_event.event' in settings.COSINNUS_REFLECTABLE_OBJECTS
 
     def get_serializer_class(self):
-        """Get serializer based on vieset action."""
-        if self.action == 'list':
-            # use a different serializer for the list view, containing a subset of fields
-            return CalendarPublicEventListSerializer
-        elif self.action == 'attendance':
-            return CalendarPublicEventAttendanceActionSerializer
-        elif self.action == 'attach_file':
-            return AttachFileSerializer
-        elif self.action == 'delete_attached_file':
-            return DeleteAttachedFileSerializer
-        elif self.action == 'bbb_room':
-            return CalendarPublicEventBBBRoomActionSerializer
-        elif self.action == 'bbb_room_urls':
-            return CalendarPublicEventBBBRoomUrlsActionSerializer
-        elif self.action == 'bookmark':
-            return CosinnusTagObjectBookmarkSerializer
+        """Get serializer based on viewset action."""
+        action_serializers = {
+            'list': CalendarPublicEventListSerializer,
+            'attendance': CalendarPublicEventAttendanceActionSerializer,
+            'attach_file': AttachFileSerializer,
+            'delete_attached_file': DeleteAttachedFileSerializer,
+            'bbb_room': CalendarPublicEventBBBRoomActionSerializer,
+            'bbb_room_urls': CalendarPublicEventBBBRoomUrlsActionSerializer,
+            'bookmark': CosinnusTagObjectBookmarkSerializer,
+            'reflections': CalendarPublicEventReflectActionSerializer,
+        }
+        if self.action in action_serializers:
+            return action_serializers[self.action]
         return self.serializer_class
 
     def get_serializer_context(self):
@@ -81,9 +82,11 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Event.objects.all()
+        queryset = queryset.filter(group=self.group)
+        if self.reflections_enabled:
+            queryset = MixReflectedObjectsMixin().mix_queryset(queryset, Event, self.group)
         queryset = queryset.prefetch_related('media_tag', 'attendances')
         queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
-        queryset = queryset.filter(group=self.group)
         queryset = queryset.filter(state=Event.STATE_SCHEDULED)
         if self.action == 'list':
             # apply query parameters
@@ -203,3 +206,26 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
         return Response(serializer.data)
+
+    @action(
+        detail=True,
+        methods=['get', 'patch', 'post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CalendarPublicEventPermissions],
+    )
+    def reflections(self, request, group_id, pk=None):
+        """
+        API to handle event reflection in user groups.
+        Serializer is set in get_serializer_class.
+        """
+        data = {}
+        if self.reflections_enabled:
+            instance = self.get_object()
+            if request.method == 'GET':
+                serializer = self.get_serializer(instance)
+            else:
+                serializer = self.get_serializer(instance, data=request.data)
+                serializer.is_valid(raise_exception=True)
+                serializer.save()
+            data = serializer.data
+        return Response(data)

@@ -29,6 +29,7 @@ class CalendarPublicEventPermissions(BasePermission):
     EVENT_LOGGED_IN_ACTIONS = [
         'attendance',
         'bookmark',
+        'reflections',
     ]
 
     # List of vieset actions allowed by anonymous users.

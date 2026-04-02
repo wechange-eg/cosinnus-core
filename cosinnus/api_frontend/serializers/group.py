@@ -17,20 +17,24 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
     bbb_premium_booking_url = serializers.SerializerMethodField()
 
     # Events app settings
+    events_enabled = serializers.SerializerMethodField()
     events_ical_url = serializers.SerializerMethodField()
     events_event_message = serializers.SerializerMethodField()
     events_event_description_required = serializers.SerializerMethodField()
+    events_reflections_enabled = serializers.SerializerMethodField()
 
-    class Meta(object):
+    class Meta:
         model = get_cosinnus_group_model()
         fields = [
             'bbb_available',
             'bbb_restricted',
             'bbb_premium',
             'bbb_premium_booking_url',
+            'events_enabled',
             'events_ical_url',
             'events_event_message',
             'events_event_description_required',
+            'events_reflections_enabled',
         ]
 
     def get_bbb_available(self, obj):
@@ -58,6 +62,13 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
             return render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html')
         return ''
 
+    def get_events_enabled(self, obj):
+        if 'cosinnus_event' in getattr(settings, 'COSINNUS_DISABLED_COSINNUS_APPS', []):
+            return False
+        if 'cosinnus_event' in obj.get_deactivated_apps():
+            return False
+        return True
+
     def get_events_ical_url(self, obj):
         if 'cosinnus_event' in obj.get_deactivated_apps():
             return ''
@@ -68,6 +79,9 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
 
     def get_events_event_description_required(self, obj):
         return settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED
+
+    def get_events_reflections_enabled(self, obj):
+        return 'cosinnus_event.event' in settings.COSINNUS_REFLECTABLE_OBJECTS
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
