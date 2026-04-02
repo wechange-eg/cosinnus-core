@@ -17725,7 +17725,7 @@ msgstr ""
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
+msgid "You cannot remove \"%(username)s\" from this group/project. Only one admin left."
 msgstr ""
 
 #: cosinnus/views/group.py
@@ -17922,12 +17922,12 @@ msgstr ""
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as an administrator responds to your request."
 msgstr ""
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as an administrator responds to your request."
 msgstr ""
 
 #: cosinnus/views/authentication.py

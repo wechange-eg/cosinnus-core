@@ -18394,8 +18394,8 @@ msgstr "Sie können dieses Widget nicht auf ihr Dashboard platzieren."
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
-msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der/die einzig übrige Administrator/in."
+msgid "You cannot remove \"%(username)s\" from this group/project. Only one admin left."
+msgstr "Sie können “%(username)s” nicht von diesem Projekt / dieser Gruppe entfernen. Er/sie ist der/die einzig übrige Administrator/in."
 
 #: cosinnus/views/group.py
 #, python-format
@@ -18591,13 +18591,13 @@ msgstr "Deine Mitgliedsschaftsanfrage bei %(site_name)s!"
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
-msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag bearbeitet."
+msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as an administrator responds to your request."
+msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Administrator den Antrag bearbeitet."
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
-msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhälst eine E-Mail, sobald ein Projektadministrator den Antrag bearbeitet."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as an administrator responds to your request."
+msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhältst eine E-Mail, sobald ein Administrator den Antrag bearbeitet."
 
 #: cosinnus/views/authentication.py
 msgid "You have successfully disabled two-factor authentication for your account."
@@ -21328,11 +21328,27 @@ msgstr "Ja"
 #~ msgid "You can't change your application anymore."
 #~ msgstr "Du kannst deine Anmeldung nicht mehr ändern."
 
+#, python-format
+#~ msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
+#~ msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der/die einzig übrige Administrator/in."
+
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Du hast deine E-Mail-Adresse geändert. Wir schicken dir eine E-Mail an diese Adresse, die einen Bestätigungslink enthält. Bis du diesen Link klickst wird dein Profil weiter unter der alten E-Mail-Adresse geführt!"
 
 #~ msgid "You have not uploaded an avatar yet"
 #~ msgstr "Du hast noch kein avatar hochgeladen"
+
+#, python-format
+#~ msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a  administrator responds to your request."
+#~ msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Administrator den Antrag bearbeitet."
+
+#, python-format
+#~ msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+#~ msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag bearbeitet."
+
+#, python-format
+#~ msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+#~ msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhältst eine E-Mail, sobald ein Administrator den Antrag bearbeitet."
 
 #~ msgid "You have to consent to being recorded to join this meeting."
 #~ msgstr "Du musst zustimmen, aufgezeichnet zu werden, um am Meeting teilzunehmen."
