@@ -101,13 +101,14 @@ class CalendarIntegrationHandler(CosinnusBaseIntegrationHandler):
             self._do_group_deactivate.delay(group.pk)
 
     def do_group_app_activate(self, group):
-        """app has been activated in the group."""
+        """
+        App has been activated in the group.
+        Note: Calendar creation when the app is activated for the first time is handled via the
+              do_group_nextcloud_group_initialized hook triggered by the NextCloud hooks.
+        """
         if group.nextcloud_calendar_url:
             # Group calendar exists and will be reactivated.
             self._do_group_activate.delay(group.pk)
-        elif group.nextcloud_group_id:
-            # No group calendar, but nextcloud group initialized. Create the group calendar.
-            self._do_group_create.delay(group.pk)
 
     def do_group_app_deactivate(self, group):
         """Events app has been deactivated in the group."""
