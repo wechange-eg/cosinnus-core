@@ -23,28 +23,7 @@
     {% captureas label %}{% trans "Create Idea" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with extra_classes="large-space" icon="fa-lightbulb-o" label=label href=href %}
     
-    {% if object %}
-        
-        <div type="button" class="btn w100 btn-default" data-toggle="modal" data-target="#deleteModal">
-            <ul class="media-list">
-                <li class="media">
-                    <span class="pull-left">
-                        <i class="fa fa-eraser"></i>
-                    </span>
-                    <div class="media-body">
-                        {% trans "Delete this idea" %}
-                    </div>
-                </li>
-            </ul>
-        </div>
-        {% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete idea „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
-        {% captureas title %}{% trans "Delete Idea" %}{% endcaptureas %}
-        {% trans "Yes" as submit_button_label %}
-        {% url "cosinnus:idea-delete" slug=object.slug as delete_url %}
-        {% include "cosinnus/modal_box.html" with id="deleteModal" label=label title=title form_action=delete_url submit_button_label=submit_button_label %}
-    
-    {% endif %}
-    
+
 {% endblock leftnav %}
 
 
@@ -200,7 +179,24 @@
             {% endif %}
                         
 	    </div>
-	    
+
+        {% if object %}
+
+            <button type="button" class="btn btn-emphasized pull-left" style="margin: 0px;" data-toggle="modal" data-target="#deleteModal">
+                <ul class="media-list">
+                    <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-eraser"></i>
+                    </span>
+                        <div class="media-body">
+                            {% trans "Delete" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+
+        {% endif %}
+
 	    <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
 	            <li class="media">
@@ -213,9 +209,14 @@
 	            </li>
 	        </ul>
 	    </button>
-    
+
     </form>
 
+    {% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete idea „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+    {% captureas title %}{% trans "Delete Idea" %}{% endcaptureas %}
+    {% trans "Yes" as submit_button_label %}
+    {% url "cosinnus:idea-delete" slug=object.slug as delete_url %}
+    {% include "cosinnus/modal_box.html" with id="deleteModal" label=label title=title form_action=delete_url submit_button_label=submit_button_label %}
 {% endblock %}
 
 {% block extrafooter %}
