@@ -1,3 +1,5 @@
+from unittest.mock import MagicMock
+
 from config.settings.base import *  # noqa
 
 SITE_ID = 1
@@ -56,6 +58,7 @@ COSINNUS_ROCKET_ENABLED = False
 COSINNUS_ETHERPAD_DISABLE_HOOKS = True
 COSINNUS_PAYMENTS_ENABLED = False
 COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS = False
+COSINNUS_DECK_ENABLED = False
 
 # enable tested features
 COSINNUS_USER_GUEST_ACCOUNTS_ENABLED = True
@@ -68,6 +71,12 @@ COSINNUS_ELASTIC_BACKEND_RUN_THREADED = False
 # turn off V3 Frontend to disable redirects on requests
 COSINNUS_V3_FRONTEND_ENABLED = False
 
+# Add dummy opencage key, as the API calls are mocked.
+COSINNUS_GEOCODE_OPENCAGE_KEY = 'dummy-test-key'
+
+# Add settings for mocked goecode latitude and longitude to be checked in tests (geocode for "Berlin")
+TEST_GEOCODE_MOCKED_LAT = 52.5173885
+TEST_GEOCODE_MOCKED_LON = 13.3951309
 
 # Use non-persistent process-local cache to start every test-run with clean cache
 # and not interfere with `normal` cache. This separates caches from parallel processes.
@@ -104,3 +113,18 @@ def monkey_patch_global_cache_cleanup():
 
 
 monkey_patch_global_cache_cleanup()
+
+
+def monkey_patch_geocode_opencage_api():
+    # Patch the OpenCage geocode function returning a mock with fixed latitude and longitude from test settings.
+    from geopy import OpenCage
+
+    OpenCage.geocode = MagicMock(
+        return_value=MagicMock(
+            latitude=TEST_GEOCODE_MOCKED_LAT,
+            longitude=TEST_GEOCODE_MOCKED_LON,
+        )
+    )
+
+
+monkey_patch_geocode_opencage_api()

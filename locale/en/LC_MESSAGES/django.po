@@ -1547,6 +1547,14 @@ msgid ", for the following reason:"
 msgstr ""
 
 #: cosinnus/version_history.py
+msgid "- (Admin-Interface) Fixed a bug in the user administration interface that would cause a page error for some user profiles.\n"
+msgstr ""
+
+#: cosinnus/version_history.py
+msgid "- (Admin-Interface) Fixed a bug where download links in the administration would not start the download in some cases.\n"
+msgstr ""
+
+#: cosinnus/version_history.py
 msgid ""
 "- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n"
 "- Fixed a bug where group/project invite links would sometimes not work on signing up and could not be used by logged in users.\n"
@@ -1571,9 +1579,17 @@ msgid "- Added Firebase push integration for push notifications to mobile device
 msgstr ""
 
 #: cosinnus/version_history.py
+msgid "- Added numerous user interface and accessibility improvements throughout the site.\n"
+msgstr ""
+
+#: cosinnus/version_history.py
 msgid ""
 "- Fixed a bug that prevented users from completing the intro tour on mobile devices running iOS 18.\n"
 "- Fixed a bug that sometimes prevented entries from being displayed in the lower part of the sidebar on mobile devices.\n"
+msgstr ""
+
+#: cosinnus/version_history.py
+msgid "- Fixed a bug where certain types of malformed image links in markdown texts of news posts and events could cause a page error.\n"
 msgstr ""
 
 #: cosinnus/version_history.py
@@ -1606,6 +1622,24 @@ msgid ""
 "- As an additional account security measure, all user sessions except the current one are now logged out after changing your account password or email.\n"
 "- (RocketChat) improved the stability and performance of the integration with RocketChat (if enabled).\n"
 "- The latest security updates have been applied and further minor bugfixes have been made.\n"
+msgstr ""
+
+#: cosinnus/version_history.py
+msgid "- Fixed a bug where the password reset and password change pages would show a page error when a new password was entered that did not match the password requirements.\n"
+msgstr ""
+
+#: cosinnus/version_history.py
+msgid ""
+"- Fixed a bug where todo lists could not be migrated into the Deck app when there was a todo that was assigned to a deleted user account.\n"
+"- Fixed a bug where the deck could sometimes not be initialized for some groups and projects, preventing the Deck app from being used.\n"
+msgstr ""
+
+#: cosinnus/version_history.py
+msgid "- Fixed a page error during the profile setup when entering a profile location.\n"
+msgstr ""
+
+#: cosinnus/version_history.py
+msgid "- Fixed an error with the profile avatar synchronisation with the Nextcloud.\n"
 msgstr ""
 
 #: cosinnus/version_history.py
@@ -3007,6 +3041,11 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/dashboard/timeline_item_base.html
 #: cosinnus/templates/cosinnus/v2/dashboard/timeline_item_comment.html
+#: cosinnus_event/templates/cosinnus_event/event_comments.html
+#: cosinnus_marketplace/templates/cosinnus_marketplace/offer_comments.html
+#: cosinnus_note/templates/cosinnus_note/note_comments.html
+#: cosinnus_poll/templates/cosinnus_poll/poll_comments.html
+#: cosinnus_todo/templates/cosinnus_todo/todo_comments.html
 msgid "Are you sure you want to delete the item?"
 msgstr ""
 
@@ -12505,7 +12544,7 @@ msgid "Requested organizations"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/conference_settings_formfields.html
-msgid "Require moderator approval before joning"
+msgid "Require moderator approval before joining"
 msgstr ""
 
 #: cosinnus/models/group.py
@@ -15283,6 +15322,10 @@ msgid "This todo was completed:"
 msgstr ""
 
 #: cosinnus/version_history.py
+msgid "This update includes quality of life updates:"
+msgstr ""
+
+#: cosinnus/version_history.py
 msgid "This update includes security updates and small bugfixes:"
 msgstr ""
 
@@ -15292,6 +15335,10 @@ msgstr ""
 
 #: cosinnus/version_history.py
 msgid "This update includes several features and bugfixes:"
+msgstr ""
+
+#: cosinnus/version_history.py
+msgid "This update includes small bugfixes:"
 msgstr ""
 
 #: cosinnus/version_history.py
@@ -15637,10 +15684,11 @@ msgstr ""
 #: cosinnus/templates/cosinnus/universal/map/map-controls.html
 #: cosinnus/templates/cosinnus/universal/tiles/grid-tile-default.html
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-base.html
-#: cosinnus/templatetags/cosinnus_tags.py
+#: cosinnus/templatetags/cosinnus_tags.py cosinnus/views/expert_search.py
 msgid "Topics"
 msgstr ""
 
+#: cosinnus/templates/cosinnus/expert_search/user_list_items.html
 #: cosinnus/templates/cosinnus/media_tags_userprofile_readonly.html
 msgid "Topics I am interested in"
 msgstr ""
@@ -17637,7 +17685,7 @@ msgstr "You cannot delete the default activity feed!"
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr ""
 
-#: cosinnus/views/mixins/filters.py
+#: cosinnus_message/views.py
 msgid "You cannot do this because this user is blocking you."
 msgstr ""
 

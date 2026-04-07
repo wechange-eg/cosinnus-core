@@ -44,7 +44,7 @@
 
                 {% if field_name == 'waiting_room' and form.waiting_room %}
                     {% captureas waiting_room_label %}
-                        {% trans "Require moderator approval before joning" %}
+                        {% trans "Require moderator approval before joining" %}
                         {% if premium_label %}{{ premium_label }}{% endif %}
                         ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.waiting_room }})</b>
                     {% endcaptureas %}
