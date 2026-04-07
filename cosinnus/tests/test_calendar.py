@@ -335,6 +335,10 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'cosinnus:frontend-api:calendar-api:calendar-event-bbb-room',
                 kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
             )
+            cls.event_reflections_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-event-reflections',
+                kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
+            )
 
         def test_event_list(self):
             # anonymous access not allowed
@@ -357,6 +361,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 [
                     {
                         'id': self.test_event.id,
+                        'group': self.test_group.id,
                         'title': self.test_event.title,
                         'from_date': self.test_event.from_date.astimezone(self.tz).isoformat(),
                         'to_date': self.test_event.to_date.astimezone(self.tz).isoformat(),
@@ -798,6 +803,58 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             # check dynamic field is set in the events media_tag
             self.test_event.media_tag.refresh_from_db()
             self.assertEqual(self.test_event.media_tag.dynamic_fields, dynamic_field_data)
+
+        def test_event_reflections(self):
+            # create another group for reflections
+            reflection_group_name = 'LocalCalendarAPITestGroup' + str(random.randint(1000, 9999))
+            reflection_group = CosinnusSociety.objects.create(name=reflection_group_name)
+
+            # no reflections for anonymous users
+            res = self.client.get(self.event_reflections_url)
+            self.assertEqual(res.status_code, 403)
+
+            # reflections are allowed only in user groups
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_reflections_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data['groups'], [])
+
+            reflection_data = {
+                'groups': [
+                    {
+                        'id': reflection_group.id,
+                        'reflected': True,
+                    }
+                ]
+            }
+            res = self.client.patch(self.event_reflections_url, data=reflection_data, format='json')
+            self.assertEqual(res.status_code, 400)
+
+            # check reflection in user group
+            CosinnusGroupMembership.objects.create(
+                user=self.test_user, group=reflection_group, status=MEMBERSHIP_MEMBER
+            )
+            res = self.client.get(self.event_reflections_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(
+                data['groups'],
+                [
+                    {
+                        'id': reflection_group.id,
+                        'name': reflection_group.name,
+                        'avatar': reflection_group.get_avatar_thumbnail_url(),
+                        'reflected': False,
+                    }
+                ],
+            )
+            res = self.client.patch(self.event_reflections_url, data=reflection_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            res = self.client.get(self.event_reflections_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertTrue(data['groups'][0]['reflected'])
 
 
 class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
