@@ -7,7 +7,7 @@ from cosinnus.utils.permissions import (
 )
 
 
-class CalendarPublicEventPermissions(BasePermission):
+class CosinnusCalendarPermissions(BasePermission):
     """Permissions for the calendar events viewset."""
 
     # List of viewset actions that require write access to the event.

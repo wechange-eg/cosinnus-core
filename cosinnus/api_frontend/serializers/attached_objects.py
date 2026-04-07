@@ -8,7 +8,7 @@ from cosinnus_cloud.models import CloudFile
 from cosinnus_file.models import FileEntry, get_or_create_attachment_folder
 
 
-class AttachedFileEntySerializer(serializers.ModelSerializer):
+class CosinnusAttachedFileEntySerializer(serializers.ModelSerializer):
     """Serializer for attached FileEntry instances. Used by AttachedFileSerializer."""
 
     name = serializers.CharField(source='title')
@@ -29,7 +29,7 @@ class AttachedFileEntySerializer(serializers.ModelSerializer):
         return obj.get_icon()
 
 
-class AttachedCloudFileSerializer(serializers.ModelSerializer):
+class CosinnusAttachedCloudFileSerializer(serializers.ModelSerializer):
     """Serializer for attached CloudFile instances. Used by AttachedFileSerializer."""
 
     name = serializers.CharField(source='title')
@@ -45,7 +45,7 @@ class AttachedCloudFileSerializer(serializers.ModelSerializer):
         )
 
 
-class AttachedFileSerializer(serializers.ModelSerializer):
+class CosinnusAttachedFileSerializer(serializers.ModelSerializer):
     """
     Serializer for file attachments.
 
@@ -70,9 +70,9 @@ class AttachedFileSerializer(serializers.ModelSerializer):
 
     def get_target_object_serializer(self, model_name):
         if model_name == 'cosinnus_file.FileEntry':
-            return AttachedFileEntySerializer
+            return CosinnusAttachedFileEntySerializer
         elif model_name == 'cosinnus_cloud.LinkedCloudFile':
-            return AttachedCloudFileSerializer
+            return CosinnusAttachedCloudFileSerializer
         raise NotImplementedError('Unsupported attached object model.')
 
     def get_file(self, obj):
@@ -80,7 +80,7 @@ class AttachedFileSerializer(serializers.ModelSerializer):
         return file_object_serializer(obj.target_object).data
 
 
-class AttachFileSerializer(serializers.Serializer):
+class CosinnusAttachFileSerializer(serializers.Serializer):
     """
     Serializer for attached file uploads.
     Validates the file upload and adds the file as FileEntry to attached_objects.
@@ -131,7 +131,7 @@ class AttachFileSerializer(serializers.Serializer):
         return instance
 
 
-class DeleteAttachedFileSerializer(serializers.Serializer):
+class CosinnusDeleteAttachedFileSerializer(serializers.Serializer):
     """
     Deletes an attached_object (not the linked FileEnty).
 

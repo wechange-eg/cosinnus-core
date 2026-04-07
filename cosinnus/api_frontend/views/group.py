@@ -7,13 +7,13 @@ from rest_framework.views import APIView
 
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.api_frontend.serializers.group import GroupSettingsSerializer
+from cosinnus.api_frontend.serializers.group import CosinnusGroupSettingsSerializer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import IsCosinnusGroupUser
 
 
-class GroupSettingsView(APIView):
+class CosinnusGroupSettingsView(APIView):
     """An endpoint that returns configured settings/properties for a group."""
 
     renderer_classes = (
@@ -52,5 +52,5 @@ class GroupSettingsView(APIView):
         }
     )
     def get(self, request, group_id):
-        serializer = GroupSettingsSerializer(self.group)
+        serializer = CosinnusGroupSettingsSerializer(self.group)
         return Response(serializer.data)

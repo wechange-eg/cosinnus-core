@@ -6,27 +6,30 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.api_frontend.serializers.attached_objects import AttachFileSerializer, DeleteAttachedFileSerializer
+from cosinnus.api_frontend.serializers.attached_objects import (
+    CosinnusAttachFileSerializer,
+    CosinnusDeleteAttachedFileSerializer,
+)
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectBookmarkSerializer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
-from cosinnus_event.calendar.permissions import CalendarPublicEventPermissions
+from cosinnus_event.calendar.permissions import CosinnusCalendarPermissions
 from cosinnus_event.calendar.serializers import (
-    CalendarPublicEventAttendanceActionSerializer,
-    CalendarPublicEventBBBRoomActionSerializer,
-    CalendarPublicEventBBBRoomUrlsActionSerializer,
-    CalendarPublicEventListQueryParameterSerializer,
-    CalendarPublicEventListSerializer,
-    CalendarPublicEventReflectActionSerializer,
-    CalendarPublicEventSerializer,
+    CosinnusCalendarBBBRoomUrlsSerializer,
+    CosinnusCalendarEventAttendanceSerializer,
+    CosinnusCalendarEventBBBRoomSerializer,
+    CosinnusCalendarEventReflectSerializer,
+    CosinnusCalendarEventSerializer,
+    CosinnusCalendarListQueryParameterSerializer,
+    CosinnusCalendarListSerializer,
 )
 from cosinnus_event.models import Event
 
 
-class CalendarPublicEventViewSet(viewsets.ModelViewSet):
+class CosinnusCalendarViewSet(viewsets.ModelViewSet):
     """
     Viewset for public events for the v3 calendar app.
     """
@@ -35,9 +38,9 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    serializer_class = CalendarPublicEventSerializer
+    serializer_class = CosinnusCalendarEventSerializer
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    permission_classes = (CalendarPublicEventPermissions,)
+    permission_classes = (CosinnusCalendarPermissions,)
     pagination_class = None
 
     group = None
@@ -47,14 +50,14 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         """Get serializer based on viewset action."""
         action_serializers = {
-            'list': CalendarPublicEventListSerializer,
-            'attendance': CalendarPublicEventAttendanceActionSerializer,
-            'attach_file': AttachFileSerializer,
-            'delete_attached_file': DeleteAttachedFileSerializer,
-            'bbb_room': CalendarPublicEventBBBRoomActionSerializer,
-            'bbb_room_urls': CalendarPublicEventBBBRoomUrlsActionSerializer,
+            'list': CosinnusCalendarListSerializer,
+            'attendance': CosinnusCalendarEventAttendanceSerializer,
+            'attach_file': CosinnusAttachFileSerializer,
+            'delete_attached_file': CosinnusDeleteAttachedFileSerializer,
+            'bbb_room': CosinnusCalendarEventBBBRoomSerializer,
+            'bbb_room_urls': CosinnusCalendarBBBRoomUrlsSerializer,
             'bookmark': CosinnusTagObjectBookmarkSerializer,
-            'reflections': CalendarPublicEventReflectActionSerializer,
+            'reflections': CosinnusCalendarEventReflectSerializer,
         }
         if self.action in action_serializers:
             return action_serializers[self.action]
@@ -75,7 +78,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         # validate and set query parameters
-        query_params_serializer = CalendarPublicEventListQueryParameterSerializer(data=request.query_params)
+        query_params_serializer = CosinnusCalendarListQueryParameterSerializer(data=request.query_params)
         query_params_serializer.is_valid(raise_exception=True)
         self.query_params = query_params_serializer.validated_data
         return super().list(request, *args, **kwargs)
@@ -99,7 +102,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['get', 'post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def attendance(self, request, group_id, pk=None):
         """
@@ -121,7 +124,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
         parser_classes=[MultiPartParser],
     )
     def attach_file(self, request, group_id, pk=None):
@@ -139,7 +142,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def delete_attached_file(self, request, group_id, pk=None):
         """
@@ -156,7 +159,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['get', 'patch', 'post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room(self, request, group_id, pk=None):
         """
@@ -176,7 +179,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['get'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room_urls(self, request, group_id, pk=None):
         """
@@ -191,7 +194,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['get', 'post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def bookmark(self, request, group_id, pk=None):
         """
@@ -211,7 +214,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['get', 'patch', 'post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def reflections(self, request, group_id, pk=None):
         """
@@ -221,6 +224,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         data = {}
         if self.reflections_enabled:
             instance = self.get_object()
+            # TODO: make action code more DRY.
             if request.method == 'GET':
                 serializer = self.get_serializer(instance)
             else:

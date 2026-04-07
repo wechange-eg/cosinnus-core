@@ -12,7 +12,7 @@ from cosinnus_cloud.hooks import get_nc_user_id
 logger = logging.getLogger(__name__)
 
 
-class CalendarView(DipatchGroupURLMixin, TemplateView):
+class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
     """Main calendar app view containing a div used for the frontend app initialization."""
 
     template_name = 'cosinnus_event/calendar/calendar.html'
@@ -30,7 +30,7 @@ class CalendarView(DipatchGroupURLMixin, TemplateView):
                 'If the problems persist, please contact the support. We apologize for the inconveniences!'
             )
             messages.warning(self.request, message)
-        return super(CalendarView, self).get(request, *args, **kwargs)
+        return super(CosinnusCalendarView, self).get(request, *args, **kwargs)
 
     def get_user_calendar_url(self, user, user_is_group_member):
         """Convert the admin CalDAV URL to a user CalDAV URL, as NextCloud uses user specific CalDAV URLs."""
@@ -57,4 +57,4 @@ class CalendarView(DipatchGroupURLMixin, TemplateView):
         return context
 
 
-calendar_view = CalendarView.as_view()
+calendar_view = CosinnusCalendarView.as_view()

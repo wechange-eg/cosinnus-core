@@ -28,7 +28,7 @@ class CalendarTask(CeleryThreadTask):
     retry_backoff_max = 24 * 60 * 60  # 24h
 
 
-class CalendarIntegrationHandler(CosinnusBaseIntegrationHandler):
+class CosinnusCalendarIntegrationHandler(CosinnusBaseIntegrationHandler):
     """Calendar integration."""
 
     # Enable group hooks.

@@ -7,7 +7,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
 
 
-class GroupSettingsSerializer(serializers.ModelSerializer):
+class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     """Serializer for group settings"""
 
     # BBB settings

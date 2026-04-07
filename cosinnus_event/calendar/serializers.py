@@ -5,7 +5,7 @@ from django.utils.functional import cached_property
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 
-from cosinnus.api_frontend.serializers.attached_objects import AttachedFileSerializer
+from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachedFileSerializer
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
 from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusDynamicFieldsSerializerMixin
 from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerMixin
@@ -17,7 +17,7 @@ from cosinnus.utils.permissions import check_object_write_access
 from cosinnus_event.models import Event, EventAttendance
 
 
-class CalendarPublicEventListQueryParameterSerializer(serializers.Serializer):
+class CosinnusCalendarListQueryParameterSerializer(serializers.Serializer):
     """Serializer for the list API query parameters."""
 
     from_date = serializers.DateField(required=True, error_messages={'required': 'This parameter is required'})
@@ -34,7 +34,7 @@ class CalendarPublicEventListQueryParameterSerializer(serializers.Serializer):
         return data
 
 
-class CalendarPublicEventListSerializer(serializers.ModelSerializer):
+class CosinnusCalendarListSerializer(serializers.ModelSerializer):
     """Serializer for events in the calendar list API view."""
 
     attending = serializers.SerializerMethodField()
@@ -66,7 +66,7 @@ class CalendarPublicEventAttendancesListSerializer(serializers.ListSerializer):
         return super().to_representation(data)
 
 
-class CalendarPublicEventAttendancesSerializer(serializers.ModelSerializer):
+class CosinnusCalendarEventAttendancesSerializer(serializers.ModelSerializer):
     """Readonly serializer to list the attendees of an event."""
 
     name = serializers.CharField(source='user.cosinnus_profile.get_full_name', read_only=True)
@@ -83,7 +83,7 @@ class CalendarPublicEventAttendancesSerializer(serializers.ModelSerializer):
         )
 
 
-class CalendarPublicEventCreatorSerializer(serializers.ModelSerializer):
+class CosinnusCalendarEventCreatorSerializer(serializers.ModelSerializer):
     """Readonly serializer for the creator of an event."""
 
     name = serializers.CharField(source='cosinnus_profile.get_full_name', read_only=True)
@@ -125,11 +125,11 @@ class BBBRoomUrlsMixin:
         return bbb_room_guest_url
 
 
-class CalendarPublicEventSerializer(
+class CosinnusCalendarEventSerializer(
     CosinnusDynamicFieldsSerializerMixin,
     CosinnusMediaTagSerializerMixin,
     BBBRoomUrlsMixin,
-    CalendarPublicEventListSerializer,
+    CosinnusCalendarListSerializer,
 ):
     """Complete Serializer for events in the calendar API."""
 
@@ -138,7 +138,7 @@ class CalendarPublicEventSerializer(
     description = serializers.CharField(
         source='note', required=settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED
     )
-    creator = CalendarPublicEventCreatorSerializer(read_only=True)
+    creator = CosinnusCalendarEventCreatorSerializer(read_only=True)
     can_edit = serializers.SerializerMethodField()
     topics = serializers.MultipleChoiceField(
         source='media_tag.get_topic_ids',
@@ -193,7 +193,7 @@ class CalendarPublicEventSerializer(
 
     ical_url = serializers.SerializerMethodField()
 
-    attendances = CalendarPublicEventAttendancesSerializer(many=True, read_only=True)
+    attendances = CosinnusCalendarEventAttendancesSerializer(many=True, read_only=True)
     bookmarked = serializers.SerializerMethodField()
 
     image = Base64ImageField(required=False, default=None, allow_null=True)
@@ -292,7 +292,7 @@ class CalendarPublicEventSerializer(
     def get_attached_files(self, obj):
         attached_files = []
         for attached_object in obj.file_attachments:
-            serialized_attached_object = AttachedFileSerializer(attached_object).data
+            serialized_attached_object = CosinnusAttachedFileSerializer(attached_object).data
             attached_files.append(serialized_attached_object)
         return attached_files
 
@@ -305,7 +305,7 @@ class CalendarPublicEventSerializer(
         return {}
 
 
-class CalendarPublicEventAttendanceActionSerializer(serializers.Serializer):
+class CosinnusCalendarEventAttendanceSerializer(serializers.Serializer):
     """Serializer for the post data of the attendance viewset action."""
 
     attending = serializers.BooleanField(required=True)
@@ -355,7 +355,7 @@ class CalendarPublicEventBBBEnabledField(serializers.BooleanField):
         return value == Event.BBB_MEETING
 
 
-class CalendarPublicEventBBBRoomActionSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
+class CosinnusCalendarEventBBBRoomSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
     """Serializer for event BBB room and conference settings."""
 
     enabled = CalendarPublicEventBBBEnabledField(source='video_conference_type')
@@ -399,7 +399,7 @@ class CalendarPublicEventBBBRoomActionSerializer(BBBRoomUrlsMixin, serializers.M
         return super().to_internal_value(data)
 
 
-class CalendarPublicEventBBBRoomUrlsActionSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
+class CosinnusCalendarBBBRoomUrlsSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
     """Serializer for BBB room urls, that is used by an API periodically pulled during BBB room creation."""
 
     bbb_url = serializers.SerializerMethodField()
@@ -413,7 +413,7 @@ class CalendarPublicEventBBBRoomUrlsActionSerializer(BBBRoomUrlsMixin, serialize
         )
 
 
-class CalendarPublicEventGroupReflectionSerializer(serializers.Serializer):
+class CosinnusCalendarGroupReflectionSerializer(serializers.Serializer):
     """
     Serializer for event group reflections used for validation.
     Contains group info and flag if the event is reflected.
@@ -444,7 +444,7 @@ class CalendarPublicEventGroupReflectionSerializer(serializers.Serializer):
         return value
 
 
-class CalendarPublicEventReflectActionSerializer(serializers.Serializer):
+class CosinnusCalendarEventReflectSerializer(serializers.Serializer):
     """Serializer for event reflections.
     Contains a list of all user groups with a writable flag, indicating if the event is reflected in the group.
     Note: The reflection logic for the calendar events is different from the original v2 logic
@@ -476,7 +476,7 @@ class CalendarPublicEventReflectActionSerializer(serializers.Serializer):
         group_reflections = []
         for user_group in self.reflection_user_groups:
             reflected_in_group = user_group.pk in self.event_reflection_groups
-            group_reflection_serializer = CalendarPublicEventGroupReflectionSerializer(
+            group_reflection_serializer = CosinnusCalendarGroupReflectionSerializer(
                 group=user_group, reflected=reflected_in_group
             )
             group_reflections.append(group_reflection_serializer.data)
@@ -487,7 +487,7 @@ class CalendarPublicEventReflectActionSerializer(serializers.Serializer):
         """Validate data using the CalendarPublicEventGroupReflectionSerializer serializer."""
         group_reflections_data = data.get('groups')
         for group_reflection_data in group_reflections_data:
-            group_reflection_serializer = CalendarPublicEventGroupReflectionSerializer(
+            group_reflection_serializer = CosinnusCalendarGroupReflectionSerializer(
                 user_groups=self.reflection_user_groups, data=group_reflection_data, context=self.context
             )
             group_reflection_serializer.is_valid(raise_exception=True)

@@ -9,12 +9,11 @@ def register():
         return
 
     # register system checks
-    import cosinnus_event.checks  # noqa: F401
-
     # Import here to prevent import side effects
     from django.utils.translation import gettext_lazy as _
     from django.utils.translation import pgettext_lazy
 
+    import cosinnus_event.checks  # noqa: F401
     from cosinnus.core.registries import app_registry, attached_object_registry, url_registry, widget_registry
 
     active_by_default = 'cosinnus_event' in settings.COSINNUS_DEFAULT_ACTIVE_GROUP_APPS
@@ -29,7 +28,7 @@ def register():
     name = pgettext_lazy('the_app', 'event')  # noqa
 
     if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
-        from cosinnus_event.calendar.integration import CalendarIntegrationHandler
+        from cosinnus_event.calendar.integration import CosinnusCalendarIntegrationHandler
 
         # initialize integration handler
-        CalendarIntegrationHandler(app_name='cosinnus_event')
+        CosinnusCalendarIntegrationHandler(app_name='cosinnus_event')
