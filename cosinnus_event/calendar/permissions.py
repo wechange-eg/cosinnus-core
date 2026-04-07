@@ -7,7 +7,7 @@ from cosinnus.utils.permissions import (
 )
 
 
-class CalendarPublicEventPermissions(BasePermission):
+class CosinnusCalendarPermissions(BasePermission):
     """Permissions for the calendar events viewset."""
 
     # List of viewset actions that require write access to the event.
@@ -26,7 +26,11 @@ class CalendarPublicEventPermissions(BasePermission):
     ]
 
     # List of viewset actions that require the user to be logged in.
-    EVENT_LOGGED_IN_ACTIONS = ['attendance']
+    EVENT_LOGGED_IN_ACTIONS = [
+        'attendance',
+        'bookmark',
+        'reflections',
+    ]
 
     # List of vieset actions allowed by anonymous users.
     EVENT_ANONYOUNS_ACTIONS = [

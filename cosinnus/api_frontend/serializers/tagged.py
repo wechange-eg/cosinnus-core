@@ -4,9 +4,11 @@ import random
 from geopy import OpenCage
 from geopy.exc import GeocoderInsufficientPrivileges, GeopyError
 from geopy.extra.rate_limiter import RateLimiter
+from rest_framework import serializers
 
 from cosinnus.conf import settings
 from cosinnus.utils.functions import is_number
+from cosinnus.views.common import apply_star_object
 
 logger = logging.getLogger('cosinnus')
 
@@ -113,3 +115,18 @@ class CosinnusMediaTagSerializerMixin:
         # save instance
         if save:
             media_tag.save()
+
+
+class CosinnusTagObjectBookmarkSerializer(serializers.Serializer):
+    """Serializer to handle bookmarking / starring of tagged objects."""
+
+    bookmarked = serializers.BooleanField(required=True)
+
+    def to_representation(self, instance):
+        user = self.context['request'].user
+        return {'bookmarked': instance.is_user_starring(user)}
+
+    def update(self, instance, validated_data):
+        user = self.context['request'].user
+        apply_star_object(instance, user, star=validated_data['bookmarked'])
+        return instance

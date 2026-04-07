@@ -7,7 +7,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
 
 
-class GroupSettingsSerializer(serializers.ModelSerializer):
+class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     """Serializer for group settings"""
 
     # BBB settings
@@ -17,35 +17,57 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
     bbb_premium_booking_url = serializers.SerializerMethodField()
 
     # Events app settings
+    events_enabled = serializers.SerializerMethodField()
     events_ical_url = serializers.SerializerMethodField()
     events_event_message = serializers.SerializerMethodField()
     events_event_description_required = serializers.SerializerMethodField()
+    events_reflections_enabled = serializers.SerializerMethodField()
 
-    class Meta(object):
+    class Meta:
         model = get_cosinnus_group_model()
         fields = [
             'bbb_available',
             'bbb_restricted',
             'bbb_premium',
             'bbb_premium_booking_url',
+            'events_enabled',
             'events_ical_url',
             'events_event_message',
             'events_event_description_required',
+            'events_reflections_enabled',
         ]
 
     def get_bbb_available(self, obj):
         return settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS
 
     def get_bbb_restricted(self, obj):
+        """
+        Flag indicating that BBB integration is admin restricted.
+        This is the case if COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED is enabled and the groups
+        enable_user_premium_choices_until is not set or in the past.
+        """
         return obj.group_is_bbb_restricted
 
     def get_bbb_premium(self, obj):
-        return obj.is_premium_ever
+        """
+        Flag indicating that BBB premium features are available and active.
+        This is the case if COSINNUS_PREMIUM_CONFERENCES_ENABLED is enabled and the group is currently or will at some
+        point ever be premium due to premium blocks.
+        """
+        return settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED and obj.is_premium_ever
 
     def get_bbb_premium_booking_url(self, obj):
-        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+        """Returns the premium conference booking url if enabled."""
+        if settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED:
             return render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html')
         return ''
+
+    def get_events_enabled(self, obj):
+        if 'cosinnus_event' in getattr(settings, 'COSINNUS_DISABLED_COSINNUS_APPS', []):
+            return False
+        if 'cosinnus_event' in obj.get_deactivated_apps():
+            return False
+        return True
 
     def get_events_ical_url(self, obj):
         if 'cosinnus_event' in obj.get_deactivated_apps():
@@ -57,6 +79,9 @@ class GroupSettingsSerializer(serializers.ModelSerializer):
 
     def get_events_event_description_required(self, obj):
         return settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED
+
+    def get_events_reflections_enabled(self, obj):
+        return 'cosinnus_event.event' in settings.COSINNUS_REFLECTABLE_OBJECTS
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

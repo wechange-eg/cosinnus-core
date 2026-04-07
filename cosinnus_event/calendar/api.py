@@ -6,23 +6,30 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.api_frontend.serializers.attached_objects import AttachFileSerializer, DeleteAttachedFileSerializer
+from cosinnus.api_frontend.serializers.attached_objects import (
+    CosinnusAttachFileSerializer,
+    CosinnusDeleteAttachedFileSerializer,
+)
+from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectBookmarkSerializer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
+from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus_event.calendar.permissions import CalendarPublicEventPermissions
+from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
+from cosinnus_event.calendar.permissions import CosinnusCalendarPermissions
 from cosinnus_event.calendar.serializers import (
-    CalendarPublicEventAttendanceActionSerializer,
-    CalendarPublicEventBBBRoomActionSerializer,
-    CalendarPublicEventBBBRoomUrlsActionSerializer,
-    CalendarPublicEventListQueryParameterSerializer,
-    CalendarPublicEventListSerializer,
-    CalendarPublicEventSerializer,
+    CosinnusCalendarBBBRoomUrlsSerializer,
+    CosinnusCalendarEventAttendanceSerializer,
+    CosinnusCalendarEventBBBRoomSerializer,
+    CosinnusCalendarEventReflectSerializer,
+    CosinnusCalendarEventSerializer,
+    CosinnusCalendarListQueryParameterSerializer,
+    CosinnusCalendarListSerializer,
 )
-from cosinnus_event.models import Event, EventAttendance
+from cosinnus_event.models import Event
 
 
-class CalendarPublicEventViewSet(viewsets.ModelViewSet):
+class CosinnusCalendarViewSet(viewsets.ModelViewSet):
     """
     Viewset for public events for the v3 calendar app.
     """
@@ -31,28 +38,29 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    serializer_class = CalendarPublicEventSerializer
+    serializer_class = CosinnusCalendarEventSerializer
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    permission_classes = (CalendarPublicEventPermissions,)
+    permission_classes = (CosinnusCalendarPermissions,)
     pagination_class = None
 
     group = None
     query_params = None
+    reflections_enabled = 'cosinnus_event.event' in settings.COSINNUS_REFLECTABLE_OBJECTS
 
     def get_serializer_class(self):
-        if self.action == 'list':
-            # use a different serializer for the list view, containing a subset of fields
-            return CalendarPublicEventListSerializer
-        elif self.action == 'attendance':
-            return CalendarPublicEventAttendanceActionSerializer
-        elif self.action == 'attach_file':
-            return AttachFileSerializer
-        elif self.action == 'delete_attached_file':
-            return DeleteAttachedFileSerializer
-        elif self.action == 'bbb_room':
-            return CalendarPublicEventBBBRoomActionSerializer
-        elif self.action == 'bbb_room_urls':
-            return CalendarPublicEventBBBRoomUrlsActionSerializer
+        """Get serializer based on viewset action."""
+        action_serializers = {
+            'list': CosinnusCalendarListSerializer,
+            'attendance': CosinnusCalendarEventAttendanceSerializer,
+            'attach_file': CosinnusAttachFileSerializer,
+            'delete_attached_file': CosinnusDeleteAttachedFileSerializer,
+            'bbb_room': CosinnusCalendarEventBBBRoomSerializer,
+            'bbb_room_urls': CosinnusCalendarBBBRoomUrlsSerializer,
+            'bookmark': CosinnusTagObjectBookmarkSerializer,
+            'reflections': CosinnusCalendarEventReflectSerializer,
+        }
+        if self.action in action_serializers:
+            return action_serializers[self.action]
         return self.serializer_class
 
     def get_serializer_context(self):
@@ -70,16 +78,18 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         # validate and set query parameters
-        query_params_serializer = CalendarPublicEventListQueryParameterSerializer(data=request.query_params)
+        query_params_serializer = CosinnusCalendarListQueryParameterSerializer(data=request.query_params)
         query_params_serializer.is_valid(raise_exception=True)
         self.query_params = query_params_serializer.validated_data
         return super().list(request, *args, **kwargs)
 
     def get_queryset(self):
         queryset = Event.objects.all()
+        queryset = queryset.filter(group=self.group)
+        if self.reflections_enabled:
+            queryset = MixReflectedObjectsMixin().mix_queryset(queryset, Event, self.group)
         queryset = queryset.prefetch_related('media_tag', 'attendances')
         queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
-        queryset = queryset.filter(group=self.group)
         queryset = queryset.filter(state=Event.STATE_SCHEDULED)
         if self.action == 'list':
             # apply query parameters
@@ -90,9 +100,9 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=['post'],
+        methods=['get', 'post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def attendance(self, request, group_id, pk=None):
         """
@@ -102,32 +112,19 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
               Users with only read permissions to the event should be able to set it.
         """
         instance = self.get_object()
-        user = request.user
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        attending = serializer.validated_data['attending']
-        user_attendance = instance.attendances.filter(user=user).first()
-        if attending:
-            # user is attending
-            if user_attendance:
-                if user_attendance.state != EventAttendance.ATTENDANCE_GOING:
-                    # set state to "going" of existing event attendance
-                    user_attendance.state = EventAttendance.ATTENDANCE_GOING
-                    user_attendance.save()
-            else:
-                # no event attendance exists, create a new one
-                instance.attendances.create(user=user, state=EventAttendance.ATTENDANCE_GOING)
-        elif user_attendance and user_attendance.state != EventAttendance.ATTENDANCE_NOT_GOING:
-            # user not attending, but event attendance exists, set state to "not going"
-            user_attendance.state = EventAttendance.ATTENDANCE_NOT_GOING
-            user_attendance.save()
-        return Response()
+        if request.method == 'GET':
+            serializer = self.get_serializer(instance)
+        else:
+            serializer = self.get_serializer(instance, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        return Response(serializer.data)
 
     @action(
         detail=True,
         methods=['post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
         parser_classes=[MultiPartParser],
     )
     def attach_file(self, request, group_id, pk=None):
@@ -145,7 +142,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def delete_attached_file(self, request, group_id, pk=None):
         """
@@ -162,7 +159,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['get', 'patch', 'post'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room(self, request, group_id, pk=None):
         """
@@ -182,7 +179,7 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['get'],
         authentication_classes=[CsrfExemptSessionAuthentication],
-        permission_classes=[CalendarPublicEventPermissions],
+        permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room_urls(self, request, group_id, pk=None):
         """
@@ -192,3 +189,47 @@ class CalendarPublicEventViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+    @action(
+        detail=True,
+        methods=['get', 'post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CosinnusCalendarPermissions],
+    )
+    def bookmark(self, request, group_id, pk=None):
+        """
+        API to bookmark the event.
+        Serializer is set in get_serializer_class.
+        """
+        instance = self.get_object()
+        if request.method == 'GET':
+            serializer = self.get_serializer(instance)
+        else:
+            serializer = self.get_serializer(instance, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        return Response(serializer.data)
+
+    @action(
+        detail=True,
+        methods=['get', 'patch', 'post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CosinnusCalendarPermissions],
+    )
+    def reflections(self, request, group_id, pk=None):
+        """
+        API to handle event reflection in user groups.
+        Serializer is set in get_serializer_class.
+        """
+        data = {}
+        if self.reflections_enabled:
+            instance = self.get_object()
+            # TODO: make action code more DRY.
+            if request.method == 'GET':
+                serializer = self.get_serializer(instance)
+            else:
+                serializer = self.get_serializer(instance, data=request.data)
+                serializer.is_valid(raise_exception=True)
+                serializer.save()
+            data = serializer.data
+        return Response(data)

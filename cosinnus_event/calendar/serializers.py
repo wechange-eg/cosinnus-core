@@ -1,20 +1,23 @@
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
+from django.utils.functional import cached_property
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 
-from cosinnus.api_frontend.serializers.attached_objects import AttachedFileSerializer
+from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachedFileSerializer
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
 from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusDynamicFieldsSerializerMixin
-from cosinnus.api_frontend.serializers.media_tag import CosinnusMediaTagSerializerMixin
+from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerMixin
 from cosinnus.conf import settings
-from cosinnus.models import BaseTagObject
-from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.models.group import CosinnusBaseGroup
+from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject, get_tag_object_model
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_object_write_access
 from cosinnus_event.models import Event, EventAttendance
 
 
-class CalendarPublicEventListQueryParameterSerializer(serializers.Serializer):
+class CosinnusCalendarListQueryParameterSerializer(serializers.Serializer):
     """Serializer for the list API query parameters."""
 
     from_date = serializers.DateField(required=True, error_messages={'required': 'This parameter is required'})
@@ -31,15 +34,17 @@ class CalendarPublicEventListQueryParameterSerializer(serializers.Serializer):
         return data
 
 
-class CalendarPublicEventListSerializer(serializers.ModelSerializer):
+class CosinnusCalendarListSerializer(serializers.ModelSerializer):
     """Serializer for events in the calendar list API view."""
 
     attending = serializers.SerializerMethodField()
+    group = serializers.IntegerField(source='group.id', read_only=True)
 
     class Meta:
         model = Event
         fields = (
             'id',
+            'group',
             'title',
             'from_date',
             'to_date',
@@ -61,7 +66,7 @@ class CalendarPublicEventAttendancesListSerializer(serializers.ListSerializer):
         return super().to_representation(data)
 
 
-class CalendarPublicEventAttendancesSerializer(serializers.ModelSerializer):
+class CosinnusCalendarEventAttendancesSerializer(serializers.ModelSerializer):
     """Readonly serializer to list the attendees of an event."""
 
     name = serializers.CharField(source='user.cosinnus_profile.get_full_name', read_only=True)
@@ -78,7 +83,7 @@ class CalendarPublicEventAttendancesSerializer(serializers.ModelSerializer):
         )
 
 
-class CalendarPublicEventCreatorSerializer(serializers.ModelSerializer):
+class CosinnusCalendarEventCreatorSerializer(serializers.ModelSerializer):
     """Readonly serializer for the creator of an event."""
 
     name = serializers.CharField(source='cosinnus_profile.get_full_name', read_only=True)
@@ -120,11 +125,11 @@ class BBBRoomUrlsMixin:
         return bbb_room_guest_url
 
 
-class CalendarPublicEventSerializer(
+class CosinnusCalendarEventSerializer(
     CosinnusDynamicFieldsSerializerMixin,
     CosinnusMediaTagSerializerMixin,
     BBBRoomUrlsMixin,
-    CalendarPublicEventListSerializer,
+    CosinnusCalendarListSerializer,
 ):
     """Complete Serializer for events in the calendar API."""
 
@@ -133,7 +138,7 @@ class CalendarPublicEventSerializer(
     description = serializers.CharField(
         source='note', required=settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED
     )
-    creator = CalendarPublicEventCreatorSerializer(read_only=True)
+    creator = CosinnusCalendarEventCreatorSerializer(read_only=True)
     can_edit = serializers.SerializerMethodField()
     topics = serializers.MultipleChoiceField(
         source='media_tag.get_topic_ids',
@@ -188,8 +193,8 @@ class CalendarPublicEventSerializer(
 
     ical_url = serializers.SerializerMethodField()
 
-    attendances = CalendarPublicEventAttendancesSerializer(many=True, read_only=True)
-    # bookmarked = serializers.SerializerMethodField() TODO implement bookmarks
+    attendances = CosinnusCalendarEventAttendancesSerializer(many=True, read_only=True)
+    bookmarked = serializers.SerializerMethodField()
 
     image = Base64ImageField(required=False, default=None, allow_null=True)
     attached_files = serializers.SerializerMethodField()
@@ -218,6 +223,7 @@ class CalendarPublicEventSerializer(
             'ical_url',
             'attending',
             'attendances',
+            'bookmarked',
             'image',
             'attached_files',
         )
@@ -281,12 +287,12 @@ class CalendarPublicEventSerializer(
 
     def get_bookmarked(self, obj):
         user = self.context['request'].user
-        return user.id in obj.get_starred_user_ids()
+        return obj.is_user_starring(user)
 
     def get_attached_files(self, obj):
         attached_files = []
         for attached_object in obj.file_attachments:
-            serialized_attached_object = AttachedFileSerializer(attached_object).data
+            serialized_attached_object = CosinnusAttachedFileSerializer(attached_object).data
             attached_files.append(serialized_attached_object)
         return attached_files
 
@@ -299,10 +305,41 @@ class CalendarPublicEventSerializer(
         return {}
 
 
-class CalendarPublicEventAttendanceActionSerializer(serializers.Serializer):
+class CosinnusCalendarEventAttendanceSerializer(serializers.Serializer):
     """Serializer for the post data of the attendance viewset action."""
 
     attending = serializers.BooleanField(required=True)
+
+    def to_representation(self, instance):
+        user = self.context['request'].user
+        attending = (
+            instance.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
+            if user.is_authenticated
+            else False
+        )
+        return {
+            'attending': attending,
+        }
+
+    def update(self, instance, validated_data):
+        user = self.context['request'].user
+        attending = validated_data['attending']
+        user_attendance = instance.attendances.filter(user=user).first()
+        if attending:
+            # user is attending
+            if user_attendance:
+                if user_attendance.state != EventAttendance.ATTENDANCE_GOING:
+                    # set state to "going" of existing event attendance
+                    user_attendance.state = EventAttendance.ATTENDANCE_GOING
+                    user_attendance.save()
+            else:
+                # no event attendance exists, create a new one
+                instance.attendances.create(user=user, state=EventAttendance.ATTENDANCE_GOING)
+        elif user_attendance and user_attendance.state != EventAttendance.ATTENDANCE_NOT_GOING:
+            # user not attending, but event attendance exists, set state to "not going"
+            user_attendance.state = EventAttendance.ATTENDANCE_NOT_GOING
+            user_attendance.save()
+        return instance
 
 
 class CalendarPublicEventBBBEnabledField(serializers.BooleanField):
@@ -318,7 +355,7 @@ class CalendarPublicEventBBBEnabledField(serializers.BooleanField):
         return value == Event.BBB_MEETING
 
 
-class CalendarPublicEventBBBRoomActionSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
+class CosinnusCalendarEventBBBRoomSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
     """Serializer for event BBB room and conference settings."""
 
     enabled = CalendarPublicEventBBBEnabledField(source='video_conference_type')
@@ -362,7 +399,7 @@ class CalendarPublicEventBBBRoomActionSerializer(BBBRoomUrlsMixin, serializers.M
         return super().to_internal_value(data)
 
 
-class CalendarPublicEventBBBRoomUrlsActionSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
+class CosinnusCalendarBBBRoomUrlsSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
     """Serializer for BBB room urls, that is used by an API periodically pulled during BBB room creation."""
 
     bbb_url = serializers.SerializerMethodField()
@@ -374,3 +411,106 @@ class CalendarPublicEventBBBRoomUrlsActionSerializer(BBBRoomUrlsMixin, serialize
             'bbb_url',
             'bbb_guest_url',
         )
+
+
+class CosinnusCalendarGroupReflectionSerializer(serializers.Serializer):
+    """
+    Serializer for event group reflections used for validation.
+    Contains group info and flag if the event is reflected.
+    """
+
+    id = serializers.IntegerField()
+    name = serializers.CharField(required=False)
+    avatar = serializers.CharField(required=False)
+    reflected = serializers.BooleanField()
+
+    # contains user groups used for group id validation
+    user_group = None
+
+    def __init__(self, instance=None, group=None, reflected=None, user_groups=None, **kwargs):
+        self.user_groups = user_groups
+        super().__init__(instance, **kwargs)
+        if group and reflected is not None:
+            # initialize fields for GETs, for POSTs the required fields are automatically initialized from the POST data
+            self.fields['id'].initial = group.id
+            self.fields['name'].initial = group.name
+            self.fields['avatar'].initial = group.get_avatar_thumbnail_url()
+            self.fields['reflected'].initial = reflected
+
+    def validate_id(self, value):
+        """Check if the group id is a user group and reflections are allowed."""
+        if not any(user_group.pk == value for user_group in self.user_groups):
+            raise serializers.ValidationError('Invalid user group.')
+        return value
+
+
+class CosinnusCalendarEventReflectSerializer(serializers.Serializer):
+    """Serializer for event reflections.
+    Contains a list of all user groups with a writable flag, indicating if the event is reflected in the group.
+    Note: The reflection logic for the calendar events is different from the original v2 logic
+          (see group_assign_reflected_object). Here we allow reflections of an event into any user group.
+    """
+
+    groups = serializers.JSONField()
+
+    @cached_property
+    def reflection_user_groups(self):
+        """Helper to get user groups and projects excluding the event group."""
+        user = self.context['request'].user
+        group = self.context['group']
+        user_groups = get_cosinnus_group_model().objects.get_for_user(user)
+        user_groups = [
+            user_group
+            for user_group in user_groups
+            if user_group.pk != group.pk
+            and user_group.type in [CosinnusBaseGroup.TYPE_PROJECT, CosinnusBaseGroup.TYPE_SOCIETY]
+        ]
+        return user_groups
+
+    @property
+    def event_reflection_groups(self):
+        """Helper to get the groups where the event is reflected."""
+        return BaseTaggableObjectReflection.get_group_ids_for_object(self.instance)
+
+    def to_representation(self, instance):
+        group_reflections = []
+        for user_group in self.reflection_user_groups:
+            reflected_in_group = user_group.pk in self.event_reflection_groups
+            group_reflection_serializer = CosinnusCalendarGroupReflectionSerializer(
+                group=user_group, reflected=reflected_in_group
+            )
+            group_reflections.append(group_reflection_serializer.data)
+        data = {'groups': group_reflections}
+        return data
+
+    def validate(self, data):
+        """Validate data using the CalendarPublicEventGroupReflectionSerializer serializer."""
+        group_reflections_data = data.get('groups')
+        for group_reflection_data in group_reflections_data:
+            group_reflection_serializer = CosinnusCalendarGroupReflectionSerializer(
+                user_groups=self.reflection_user_groups, data=group_reflection_data, context=self.context
+            )
+            group_reflection_serializer.is_valid(raise_exception=True)
+        return data
+
+    def update(self, instance, validated_data):
+        """Save reflection changes."""
+        event_reflection_groups = self.event_reflection_groups
+        for group_reflection_data in validated_data['groups']:
+            reflection_group_id = group_reflection_data['id']
+            reflected = group_reflection_data['reflected']
+            event_content_type = ContentType.objects.get_for_model(Event)
+            if reflected and reflection_group_id not in event_reflection_groups:
+                # create event reflection
+                BaseTaggableObjectReflection.objects.create(
+                    content_type=event_content_type,
+                    object_id=self.instance.id,
+                    group_id=reflection_group_id,
+                    creator=self.context['request'].user,
+                )
+            elif not reflected and reflection_group_id in event_reflection_groups:
+                # delete existing event reflection
+                BaseTaggableObjectReflection.objects.get(
+                    content_type=event_content_type, object_id=self.instance.id, group_id=reflection_group_id
+                ).delete()
+        return instance
