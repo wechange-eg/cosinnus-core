@@ -151,7 +151,7 @@ class FrontendMiddleware(MiddlewareMixin):
         #      `FrontendMiddleware.cached_content_key` cache key, does some validation for authenticity, and
         #      then uses the cached response's HTML for itself instead of performing a request to that URL by itself
         #   - we never filter out AJAX requests and those to exempted views with this method.
-        if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+        if settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
             if request.method == 'POST' and response.status_code == 200 and not is_ajax(request):
                 # do not redirect the POST if it was an ecempted frontend URL (API or necesseray direct calls)
                 if check_url_v3_everywhere_exempt(request.path, request):
