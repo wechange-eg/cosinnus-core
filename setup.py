@@ -92,7 +92,7 @@ setup(
         'channels==4.3.2', # TODO: PY UPGRADE CHECK, # Moved from pyproject.toml
         'celery==5.6.2', # TODO: PY UPGRADE CHECK, 3.13 last supported
         'dataclasses',
-        'beautifulsoup4==4.8.1',
+        'beautifulsoup4==4.14.3',
         'chardet==3.0.4',
         'django-allauth==0.60.0',
         'django-annoying==0.7.6',
