@@ -665,6 +665,16 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
         @override_settings(
             COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=True,
             COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
+            BBB_PRESET_USER_FORM_FIELDS=[
+                'mic_starts_on',
+                'cam_starts_on',
+                'record_meeting',
+                'waiting_room',
+                'welcome_message',
+            ],
+            BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY=[
+                'record_meeting',
+            ],
         )
         def test_event_bbb_room(self):
             # check user permissions
@@ -857,7 +867,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertTrue(data['groups'][0]['reflected'])
 
 
-class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
+class CalendarViewTest(CeleryTaskTestMixin, TestCase):
     """Test Frontend initialization view."""
 
     test_group = None
@@ -901,7 +911,7 @@ class CalendarPublicEventViewTest(CeleryTaskTestMixin, TestCase):
         return expected_user_calender_url
 
     def test_calendar_view(self):
-        div_data_group_id = f'data-group-id="{self.test_group.pk}"'
+        div_data_group_id = f'data-space-id="{self.test_group.pk}"'
         div_data_calendar_url_empty = 'data-calendar-url=""'
 
         # test anonymous user has only access to group id for public events not the NC calendar
