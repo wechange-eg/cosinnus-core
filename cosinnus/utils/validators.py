@@ -27,7 +27,7 @@ class BSISafePasswordValidator(object):
     MIN_LOWER_CASE = 1
 
     def validate(self, password, user=None):
-        if not re.findall('\d', password):
+        if not re.findall(r'\d', password):
             raise forms.ValidationError(
                 _('The password must contain at least 1 digit, 0-9.'),
                 code='password_no_number',

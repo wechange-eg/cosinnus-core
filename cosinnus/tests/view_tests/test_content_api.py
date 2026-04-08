@@ -62,11 +62,11 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertIn('<div class="x-v3-container', response.data['content_html'], 'Container html is present')
         self.assertIn('<div class="footer"', response.data['footer_html'], 'Footer html is present')
         self.assertTrue(
-            all([re.match('^.*\.js(\?.*)?$', js_item) for js_item in response.data['js_urls']]),
+            all([re.match(r'^.*\.js(\?.*)?$', js_item) for js_item in response.data['js_urls']]),
             'js_urls only contain .js items',
         )
         self.assertTrue(
-            all([re.match('^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
+            all([re.match(r'^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
             'css_urls only contain .css items',
         )
         self.assertIn('var ', response.data['scripts'], 'scripts response contains some JS')
@@ -105,11 +105,11 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertIn('<div class="x-v3-container', response.data['content_html'], 'Container html is present')
         self.assertIn('<div class="footer"', response.data['footer_html'], 'Footer html is present')
         self.assertTrue(
-            all([re.match('^.*\.js(\?.*)?$', js_item) for js_item in response.data['js_urls']]),
+            all([re.match(r'^.*\.js(\?.*)?$', js_item) for js_item in response.data['js_urls']]),
             'js_urls only contain .js items',
         )
         self.assertTrue(
-            all([re.match('^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
+            all([re.match(r'^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
             'css_urls only contain .css items',
         )
         self.assertIn('var ', response.data['scripts'], 'scripts response contains some JS')
