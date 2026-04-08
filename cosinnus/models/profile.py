@@ -29,6 +29,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext_lazy
 from django_countries.fields import CountryField
+from django_prometheus.models import ExportModelOperationsMixin
 from timezone_field import TimeZoneField
 
 from cosinnus.conf import settings
@@ -104,6 +105,7 @@ class BaseUserProfileManager(models.Manager):
 
 @six.python_2_unicode_compatible
 class BaseUserProfile(
+    ExportModelOperationsMixin('UserProfile'),
     IndexingUtilsMixin,
     FacebookIntegrationUserProfileMixin,
     CosinnusDynamicFieldsModelMixin,

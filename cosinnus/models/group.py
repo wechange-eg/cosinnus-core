@@ -36,6 +36,7 @@ from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+from django_prometheus.models import ExportModelOperationsMixin
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
 from osm_field.fields import LatitudeField, LongitudeField, OSMField
@@ -850,6 +851,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
 
 @six.python_2_unicode_compatible
 class CosinnusBaseGroup(
+    ExportModelOperationsMixin('CosinnusGroup'),
     HumanizedEventTimeMixin,
     TranslateableFieldsModelMixin,
     LastVisitedMixin,

@@ -133,7 +133,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     ALLOWED_HOSTS = env.list('WECHANGE_ALLOWED_HOSTS', default=['.' + project_settings['COSINNUS_PORTAL_URL']])
     DATABASES = {
-        'default': env.db('WECHANGE_DATABASE_URL'),
+        'default': env.db('WECHANGE_DATABASE_URL', engine='django_prometheus.db.backends.postgresql'),
     }
     ADMIN_URL = env('WECHANGE_ADMIN_URL', default='admin/')
 
@@ -143,6 +143,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
     MIDDLEWARE = [
+        'django_prometheus.middleware.PrometheusBeforeMiddleware',
         'django.middleware.common.CommonMiddleware',
         # enable this middleware to prevent all cookies for non-logged in users. this breaks
         # language switching while not logged in!
@@ -169,6 +170,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.frontend_middleware.FrontendMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware',
+        'django_prometheus.middleware.PrometheusAfterMiddleware',
     ]
 
     TEMPLATES = [
@@ -226,7 +228,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # use session based CSRF cookies
     CSRF_COOKIE_AGE = None
     CSRF_TRUSTED_ORIGINS = [f'https://*.{project_settings["COSINNUS_PORTAL_URL"]}']
-
+    
     # Cookie settings. We will let cookies expire browser-session-based for anonymous users, and keep them
     # for 90 days for logged in users
     SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -269,6 +271,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'django.contrib.sessions',
         'django.contrib.sites',
         'django.contrib.staticfiles',
+        'django_prometheus',
         'suit_overextends',
         'suit',
         'django.contrib.admin',
@@ -412,7 +415,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # memcached
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+            'BACKEND': 'django_prometheus.cache.backends.memcached.PyMemcacheCache',
             'LOCATION': env(
                 'WECHANGE_MEMCACHED_LOCATION',
                 default=f'unix:/srv/http/{project_settings["COSINNUS_PORTAL_URL"]}/run/memcached.socket',
@@ -467,6 +470,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         env('WECHANGE_COSINNUS_CLOUD_PASSWORD', default=''),
     )
     COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN = env('WECHANGE_COSINNUS_CLOUD_API_TOKEN', default='')
+    
+    # prometheus
+    PROMETHEUS_METRIC_NAMESPACE = f'portal_{project_settings["COSINNUS_PORTAL_NAME"]}'
 
     """ --------------- EXTERNAL SERVICES  ---------------- """
 

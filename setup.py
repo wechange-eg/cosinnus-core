@@ -117,6 +117,7 @@ setup(
         'django-otp==1.1.1',
         'django-phonenumber-field==6.4.0',
         'django-polymorphic==0.7.2',
+        'django-prometheus==2.4.1',
         'django-reverse-admin==2.9.4',
         'django-sekizai==2.0.0',
         'django-simple-captcha==0.5.20',

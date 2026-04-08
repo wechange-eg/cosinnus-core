@@ -87,6 +87,8 @@ class CosinnusConf(AppConf):
         # included services
         '/swagger/',
         '/redoc/',
+        # prometheus
+        '/prometheus/',
     ]
 
     #: A mapping of ``{'app1.Model1': ['app2.Model2', 'app3.Model3']}`` that
