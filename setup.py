@@ -98,7 +98,7 @@ setup(
         'django-annoying==0.7.6',
         'django-appconf==1.2.0',  # TODO: PY UPGRADE CHECK
         'django-bootstrap3==21.1',
-        'django-classy-tags==2.0.0',
+        # 'django-classy-tags==2.0.0',  # TODO: REMOVED!! check!
         'django-countries==8.2.0',  # TODO: PY UPGRADE CHECK
         'django-cron-django5==0.6.2',
         'django-embed-video==1.4.10',   # TODO: PY UPGRADE CHECK
@@ -112,11 +112,11 @@ setup(
         'django-ical==1.7.1',
         'django-mailbox==4.9.0',
         'django-model-utils==5.0.0',  # TODO: PY UPGRADE CHECK, 3.12 last supported
-        'django-mptt==0.8.7',
+        # 'django-mptt==0.8.7',  # TODO: REMOVED!! check!
         'django-oauth-toolkit==2.3.0',
         'django-otp==1.1.1',
         'django-phonenumber-field==6.4.0',
-        'django-polymorphic==0.7.2',
+        # 'django-polymorphic==0.7.2',  # TODO: REMOVED!! check!
         'django-prometheus==2.4.1',
         'django-reverse-admin==2.9.4',
         'django-sekizai==2.0.0',
@@ -143,13 +143,13 @@ setup(
         'html5lib',
         'html2text==2016.9.19',
         'numpy==1.26.4',
-        'oauthlib==3.2.2',
+        'oauthlib==3.3.1',
         'paramiko==2.11.0',
         'pycountry==20.7.3',
         'raven==6.10.0',
         'redis==5.3.1',  # TODO: PY UPGRADE CHECK, 3.12 last supported - required for celery
-        'requests==2.32.4',
-        'requests-oauthlib==0.8.0',
+        'requests==2.33.1', # TODO: PY UPGRADE CHECK (minor)
+        'requests-oauthlib==2.0.0', # TODO: PY UPGRADE CHECK
         'rocketchat-API==1.30.0',
         'six==1.17.0',  # TODO: PY UPGRADE CHECK
         'sqlparse==0.5.0',
@@ -158,7 +158,7 @@ setup(
         'python-dateutil==2.9.0.post0',   # TODO: PY UPGRADE CHECK, 3.12 last supported
         'urllib3==2.6.3',
         'pytz==2022.6',
-        'rdflib==5.0.0',
+        'rdflib==7.6.0', # TODO: PY UPGRADE CHECK
         'pymemcache==4.0.0',
         'qrcode==8.2',  # TODO: PY UPGRADE CHECK
         'Unidecode==0.4.21',
@@ -166,18 +166,18 @@ setup(
         'django-cors-headers<3.11.0',
         'phonenumbers==8.13.28',
         # virus file scan validator
-        'clamd==1.0.2',
+        'clamd==1.0.2',  # TODO: not upgraded yet, but check! (has no updates anyways)
         # requirements for documentation
         'sphinx==7.1.2',
         # (dev requirements were moved to pyproject.toml dev-dependencies)
         # requirements loaded in from github
-        'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django-update-4-2#egg=django-awesome-avatar',
+        'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@python-3-12#egg=django-awesome-avatar',
         'django-multiform @ git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
         'django-djajax @ git+https://github.com/wechange-eg/django-djajax.git@django-update-4-2#egg=django-djajax',
         'django_select2 @ git+https://github.com/wechange-eg/django-select2.git@django-update-4-2#egg=django-select2',
-        'django-osm-field @ git+https://github.com/wechange-eg/django-osm-field.git@django-update-4-2#egg=django-osm-field',
+        'django-osm-field @ git+https://github.com/wechange-eg/django-osm-field.git@python-3-12#egg=django-osm-field',
         'markdown2 @ git+https://github.com/wechange-eg/python-markdown2.git@2.4.8-WE#egg=markdown2',
-        'pydkim @ git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
+        'pydkim @ git+https://github.com/wechange-eg/pydkim.git@python-3-12#egg=pydkim',
         'django-suit @ git+https://github.com/wechange-eg/django-suit.git@django-update-5-2#egg=django-suit',
         'django-bootstrap3-datetimepicker-3 @ git+https://github.com/wechange-eg/django-bootstrap3-datetimepicker-3.git@django-update-4-2#egg=django-bootstrap3-datetimepicker-3',
         'django-clamd @ git+https://github.com/wechange-eg/django-clamd.git@master#egg=django-clamd',
