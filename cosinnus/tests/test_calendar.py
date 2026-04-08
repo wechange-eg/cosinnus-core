@@ -245,7 +245,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertIsNotNone(calendar)
 
     @override_settings(COSINNUS_TAGGED_EXTRA_FIELDS=None)
-    class CalendarPublicEventAPITest(APITestCase):
+    class CalendarAPITest(APITestCase):
         """Test public event calendar APIs"""
 
         # test data
@@ -764,6 +764,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
 
             # check bbb urls
             res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data['bbb_url'], self.test_event.media_tag.bbb_room.get_absolute_url())
             expected_guest_url = reverse(
@@ -775,6 +776,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             # disable guest link
             patch_data = {'settings': {'show_guest_access': False}}
             res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
+            self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.test_event.media_tag.refresh_from_db()
             self.assertFalse(self.test_event.media_tag.show_bbb_guest_access_outside_of_conference)
@@ -783,6 +785,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             # disable bbb
             patch_data = {'enabled': False}
             res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
+            self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertFalse(data['enabled'])
             self.assertIsNone(data['bbb_url'])

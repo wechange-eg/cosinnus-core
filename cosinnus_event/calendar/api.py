@@ -98,6 +98,20 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
             )
         return queryset
 
+    def _process_action(self, request, partial=False):
+        """
+        Generic helper to handle viewset actions using the serializer set in get_serializer_class.
+        @return: serialized data
+        """
+        instance = self.get_object()
+        if request.method == 'GET':
+            serializer = self.get_serializer(instance)
+        else:
+            serializer = self.get_serializer(instance, data=request.data, partial=partial)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        return serializer.data
+
     @action(
         detail=True,
         methods=['get', 'post'],
@@ -107,18 +121,11 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
     def attendance(self, request, group_id, pk=None):
         """
         Set event attendance for request user.
-        Serializer is set in get_serializer_class.
         Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
               Users with only read permissions to the event should be able to set it.
         """
-        instance = self.get_object()
-        if request.method == 'GET':
-            serializer = self.get_serializer(instance)
-        else:
-            serializer = self.get_serializer(instance, data=request.data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-        return Response(serializer.data)
+        data = self._process_action(request)
+        return Response(data)
 
     @action(
         detail=True,
@@ -128,15 +135,9 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         parser_classes=[MultiPartParser],
     )
     def attach_file(self, request, group_id, pk=None):
-        """
-        Action to upload an attachment for an event.
-        Serializer is set in get_serializer_class.
-        """
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response()
+        """Action to upload an attachment for an event."""
+        data = self._process_action(request)
+        return Response(data)
 
     @action(
         detail=True,
@@ -145,15 +146,9 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         permission_classes=[CosinnusCalendarPermissions],
     )
     def delete_attached_file(self, request, group_id, pk=None):
-        """
-        Action to delete an attachment.
-        Serializer is set in get_serializer_class.
-        """
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response()
+        """Action to delete an attachment."""
+        data = self._process_action(request)
+        return Response(data)
 
     @action(
         detail=True,
@@ -162,18 +157,9 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room(self, request, group_id, pk=None):
-        """
-        BBB Room and conference settings API.
-        Serializer is set in get_serializer_class.
-        """
-        instance = self.get_object()
-        if request.method == 'GET':
-            serializer = self.get_serializer(instance)
-        else:
-            serializer = self.get_serializer(instance, data=request.data, partial=True)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-        return Response(serializer.data)
+        """BBB Room and conference settings API."""
+        data = self._process_action(request, partial=True)
+        return Response(data)
 
     @action(
         detail=True,
@@ -182,13 +168,9 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room_urls(self, request, group_id, pk=None):
-        """
-        API for BBB room Urls, used for periodic pull during BBB room creation.
-        Serializer is set in get_serializer_class.
-        """
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        """API for BBB room Urls, used for periodic pull during BBB room creation"""
+        data = self._process_action(request)
+        return Response(data)
 
     @action(
         detail=True,
@@ -197,18 +179,9 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         permission_classes=[CosinnusCalendarPermissions],
     )
     def bookmark(self, request, group_id, pk=None):
-        """
-        API to bookmark the event.
-        Serializer is set in get_serializer_class.
-        """
-        instance = self.get_object()
-        if request.method == 'GET':
-            serializer = self.get_serializer(instance)
-        else:
-            serializer = self.get_serializer(instance, data=request.data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-        return Response(serializer.data)
+        """API to bookmark the event."""
+        data = self._process_action(request)
+        return Response(data)
 
     @action(
         detail=True,
@@ -217,19 +190,8 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         permission_classes=[CosinnusCalendarPermissions],
     )
     def reflections(self, request, group_id, pk=None):
-        """
-        API to handle event reflection in user groups.
-        Serializer is set in get_serializer_class.
-        """
+        """API to handle event reflection in user groups"""
         data = {}
         if self.reflections_enabled:
-            instance = self.get_object()
-            # TODO: make action code more DRY.
-            if request.method == 'GET':
-                serializer = self.get_serializer(instance)
-            else:
-                serializer = self.get_serializer(instance, data=request.data)
-                serializer.is_valid(raise_exception=True)
-                serializer.save()
-            data = serializer.data
+            data = self._process_action(request)
         return Response(data)
