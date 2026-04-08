@@ -97,7 +97,7 @@ However, you can still open and edit existing spreadsheets.{% endblocktrans %}
                                         {% trans "We recommend using the spreadsheet feature in Nextcloud." %}
                                     {% endif %}
                                 {% endcaptureas %}
-                                <div class="pull-right" title="{{ ethercalc_tooltip|remove_indentation }}" >
+                                <div class="pull-right" title="{{ ethercalc_tooltip|remove_indentation }}" onclick="if ($.cosinnus.isTouchDevice()) alert('{{ ethercalc_tooltip|remove_indentation|escapejs}}');">
                                 <button type="button" class="btn btn-emphasized large-space disabled" title="{% trans "Create Ethercalc" %}" onclick="$('#input-etherpad-type').val('1');">
                                     <ul class="media-list">
                                         <li class="media">
