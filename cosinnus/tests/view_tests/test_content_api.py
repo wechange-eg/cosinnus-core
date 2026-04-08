@@ -279,7 +279,7 @@ class MainContentViewTest(APILiveServerTestCase):
         response = self.client.get(self.api_url + f'?{encoded_url_param}')
         self.assertEqual(response.status_code, 200)
         self.assertIn(
-            '<ul class="errorlist"><li>test_field<ul class="errorlist"><li>This field is required.</li></ul></li></ul>',
+            '<ul class="errorlist"><li>test_field<ul class="errorlist" id="id_test_field_error"><li>This field is required.</li></ul></li></ul>',
             response.data['content_html'],
         )
 
