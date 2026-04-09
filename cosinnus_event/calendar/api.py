@@ -84,6 +84,9 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         return super().list(request, *args, **kwargs)
 
     def get_queryset(self):
+        if getattr(self, 'swagger_fake_view', False):
+            # queryset just for schema generation metadata
+            return Event.objects.none()
         queryset = Event.objects.all()
         queryset = queryset.filter(group=self.group)
         if self.reflections_enabled:
