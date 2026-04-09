@@ -2,12 +2,15 @@
 from __future__ import unicode_literals
 
 from builtins import str
+from typing import Union
 from uuid import uuid1
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ImproperlyConfigured
-from django.db.models import Q
+from django.db.models import Exists, OuterRef, Q, QuerySet
 from rest_framework.authentication import get_authorization_header
 from rest_framework.permissions import BasePermission, IsAdminUser
 
@@ -210,11 +213,14 @@ def check_object_likefollowstar_access(obj, user):
     return is_group or check_object_read_access(obj, user)
 
 
-def check_user_can_see_user(user, target_user):
-    """Checks if ``user`` is in any relation with ``target_user`` so that he can see them and
+def check_user_can_see_user(user, target_user, is_invite_selection=False):
+    """
+    Checks if ``user`` is in any relation with ``target_user`` so that he can see them and
     their profile, and can send him messages, etc.
-    This depends on the privacy settings of ``target_user`` and on whether they are members
-    of a same group/project."""
+    - This depends on the privacy settings of ``target_user`` and on whether they are members
+    of a same group/project.
+    - if `is_invite_selection` is True, return True ignoring the profile visibility setting
+    """
     # you can always see yourself
     if user.id == target_user.id:
         return True
@@ -226,6 +232,10 @@ def check_user_can_see_user(user, target_user):
         target_user_tagslugs = target_user.cosinnus_profile.get_managed_tag_slugs()
         if any([tagslug in target_user_tagslugs for tagslug in settings.COSINNUS_MANAGED_TAGS_RESTRICT_CONTACTING]):
             return False
+
+    # when selecting for invitations, we ignore visibility settings
+    if is_invite_selection:
+        return True
 
     visibility = target_user.cosinnus_profile.media_tag.visibility
     if visibility == BaseTagObject.VISIBILITY_ALL:
@@ -255,6 +265,34 @@ def check_user_can_see_user(user, target_user):
     if any([(user_group_pk in target_user_groups) for user_group_pk in user_groups]):
         return True
     return False
+
+
+def filter_blocks_for_user(
+    user: Union[AbstractBaseUser, AnonymousUser], users: QuerySet[AbstractBaseUser]
+) -> QuerySet[AbstractBaseUser]:
+    """
+    Filters a given Queryset so the result does not include any users,
+    who are blocked by or who have blocked the given user.
+
+    Returns the given QuerySet unchanged if
+    - user blocking is not active
+    - user argument is AnonymousUser
+    """
+    if not settings.COSINNUS_ENABLE_USER_BLOCK or isinstance(user, AnonymousUser):
+        return users
+
+    # we want this query but django uses one subquery per condition
+    # filtered = users.exclude(
+    #     Q(user_blocks__blocked_user=user) | Q(blocked_by__user=user)
+    # ).distinct()
+
+    # instead optimize the DB-Query to only have one subquery for both conditions
+    blocking_relations = UserBlock.objects.filter(
+        (Q(user=OuterRef('pk')) & Q(blocked_user=user)) | (Q(user=user) & Q(blocked_user=OuterRef('pk')))
+    )
+    filtered = users.filter(~Exists(blocking_relations))
+
+    return filtered
 
 
 def check_user_blocks_user(blocking_user, blocked_user):
