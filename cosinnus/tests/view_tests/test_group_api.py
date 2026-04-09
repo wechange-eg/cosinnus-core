@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.template.loader import render_to_string
 from django.urls import reverse
 from rest_framework.test import APITestCase, override_settings
 
@@ -62,18 +63,45 @@ class GroupSettingsAPITest(APITestCase):
     @override_settings(
         COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=False,
         COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
+        BBB_PRESET_USER_FORM_FIELDS=[
+            'mic_starts_on',
+            'cam_starts_on',
+            'record_meeting',
+            'waiting_room',
+            'welcome_message',
+        ],
+        BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY=[
+            'record_meeting',
+        ],
     )
     def test_basic_settings(self):
         self.client.force_login(self.test_user)
         res = self.client.get(self.group_settings_url)
         self.assertEqual(res.status_code, 200)
         data = res.json()['data']
+        self.maxDiff = None
         self.assertEqual(
             data,
             {
                 'bbb_available': False,
                 'bbb_restricted': False,
-                'bbb_premium_booking_url': '',
+                'bbb_premium': False,
+                'bbb_premium_booking_url': render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html'),
+                'events_enabled': True,
                 'events_ical_url': group_aware_reverse('cosinnus:team-feed', kwargs={'team_id': self.test_group.id}),
+                'events_event_message': None,
+                'events_event_description_required': False,
+                'events_reflections_enabled': True,
+                'bbb_settings': {
+                    'bbb_params': {
+                        'mic_starts_on': False,
+                        'cam_starts_on': False,
+                        'waiting_room': False,
+                        'record_meeting': False,
+                        'welcome_message': None,
+                    },
+                    'premium_params': ['record_meeting'],
+                    'show_guest_access': False,
+                },
             },
         )
