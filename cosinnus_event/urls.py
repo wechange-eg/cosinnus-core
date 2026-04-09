@@ -5,7 +5,6 @@ from django.urls import path, re_path
 
 from cosinnus.conf import settings
 from cosinnus_event import views
-from cosinnus_event.calendar import views as calendar_views
 
 app_name = 'event'
 
@@ -13,6 +12,8 @@ app_name = 'event'
 cosinnus_group_patterns = []
 
 if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+    from cosinnus_event.calendar import views as calendar_views
+
     # TODO: this is temporary, where the v3 calendar is included needs to be discussed.
     cosinnus_group_patterns += [
         re_path(r'^v3-calendar/$', calendar_views.calendar_view, name='calendar'),
