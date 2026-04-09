@@ -540,24 +540,24 @@
 
 						{# Checkbox field #}
 						{% if form.forms.obj.fields.use_invite_token and not form.forms.obj.fields.use_invite_token.disabled == True %}
-							{% trans "Create invite token" as use_invite_token_label %}
+							{% trans "Create invite link" as use_invite_token_label %}
 							{% captureas use_invite_token_legend %}
 								{% if group_model == "CosinnusSociety" %}
-								    {% trans "Check this to generate an invite token which allows a registered user to become a member of the group directly." %}
+								    {% trans "Check this to generate an invite link which allows a registered user to become a member of the group directly. When enabled, the link will be displayed to group admins on the members page." %}
 							    {% elif group_model == "CosinnusProject" %}
-							        {% trans "Check this to generate an invite token which allows a registered user to become a member of the project directly." %}
+							        {% trans "Check this to generate an invite link which allows a registered user to become a member of the project directly. When enabled, the link will be displayed to project admins on the members page." %}
 						        {% else %}
-						            {% trans "Check this to generate an invite token which allows a registered user to become a member of the conference directly." %}
+						            {% trans "Check this to generate an invite link which allows a registered user to become a member of the conference directly. When enabled, the link will be displayed to conference admins on the members page." %}
 						        {% endif %}
 						        <br>
 								{% if group.use_invite_token %}
-									{% trans "The current token is: " %}
+									{% trans "The current link is: " %}
 									   {% for invite_token in invite_tokens %}
 									       <a href="{{ invite_token.get_absolute_url }}" target="_blank">{{ invite_token.get_absolute_url }}</a>
 								       {% endfor %}
 								{% endif %}
 							{% endcaptureas %}
-							{% trans "Create token" as use_invite_token_box_label %}
+							{% trans "Create link" as use_invite_token_box_label %}
 							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_invite_token label=use_invite_token_label legend=use_invite_token_legend checkbox_label=use_invite_token_box_label %}
 						{% endif %}
 
