@@ -1617,7 +1617,7 @@ class CosinnusBaseGroup(
 
         # we stay in ACTIVE state until the cron-job deletes `enable_user_premium_choices_until`
         if self.enable_user_premium_choices_until:
-            if self.group_premium_days_left > getattr(settings, 'COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS', 7):
+            if self.group_premium_days_left > getattr(settings, 'COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS', 14):
                 return self.GROUP_PREMIUM_STATE_ACTIVE_FAR
             else:
                 return self.GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON
