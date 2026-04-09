@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ImproperlyConfigured
-from django.db.models import Exists, OuterRef, Q, QuerySet
+from django.db.models import Q, QuerySet
 from rest_framework.authentication import get_authorization_header
 from rest_framework.permissions import BasePermission, IsAdminUser
 
@@ -281,16 +281,7 @@ def filter_blocks_for_user(
     if not settings.COSINNUS_ENABLE_USER_BLOCK or isinstance(user, AnonymousUser):
         return users
 
-    # we want this query but django uses one subquery per condition
-    # filtered = users.exclude(
-    #     Q(user_blocks__blocked_user=user) | Q(blocked_by__user=user)
-    # ).distinct()
-
-    # instead optimize the DB-Query to only have one subquery for both conditions
-    blocking_relations = UserBlock.objects.filter(
-        (Q(user=OuterRef('pk')) & Q(blocked_user=user)) | (Q(user=user) & Q(blocked_user=OuterRef('pk')))
-    )
-    filtered = users.filter(~Exists(blocking_relations))
+    filtered = users.exclude(Q(user_blocks__blocked_user=user) | Q(blocked_by__user=user)).distinct()
 
     return filtered
 
