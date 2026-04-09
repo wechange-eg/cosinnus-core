@@ -14377,6 +14377,11 @@ msgstr ""
 msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
 msgstr ""
 
+#: cosinnus/views/group.py
+#, python-format
+msgid "The join request from \"%(username)s\" was declined successfully."
+msgstr ""
+
 #: cosinnus_event/models.py
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
 msgid "The key for this specific stream session you created at your streaming provider"
@@ -17720,7 +17725,7 @@ msgstr ""
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
+msgid "You cannot remove \"%(username)s\" from this group/project. Only one admin left."
 msgstr ""
 
 #: cosinnus/views/group.py
@@ -17917,12 +17922,12 @@ msgstr ""
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as an administrator responds to your request."
 msgstr ""
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as an administrator responds to your request."
 msgstr ""
 
 #: cosinnus/views/authentication.py
@@ -18420,11 +18425,6 @@ msgstr ""
 #: cosinnus/views/group.py
 #, python-format
 msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgstr ""
-
-#: cosinnus/views/group.py
-#, python-format
-msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
 msgstr ""
 
 #: cosinnus/views/group.py
