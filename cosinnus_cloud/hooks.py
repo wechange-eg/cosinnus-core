@@ -392,7 +392,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
             submit_with_retry(initialize_nextcloud_for_group, group)
 
     @receiver(signals.group_apps_activated)
-    def group_cloud_or_deck_app_activated_sub(sender, group, apps, **kwargs):
+    def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
         """Listen for the cloud app or cloud dependent app being activated"""
         if any(app in apps for app in CLOUD_DEPENDENT_APPS):
             if is_cloud_group_required_for_group(group):

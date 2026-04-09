@@ -451,7 +451,7 @@ class CosinnusCalendarEventReflectSerializer(serializers.Serializer):
           (see group_assign_reflected_object). Here we allow reflections of an event into any user group.
     """
 
-    groups = serializers.JSONField()
+    spaces = serializers.JSONField()
 
     @cached_property
     def reflection_user_groups(self):
@@ -480,12 +480,12 @@ class CosinnusCalendarEventReflectSerializer(serializers.Serializer):
                 group=user_group, reflected=reflected_in_group
             )
             group_reflections.append(group_reflection_serializer.data)
-        data = {'groups': group_reflections}
+        data = {'spaces': group_reflections}
         return data
 
     def validate(self, data):
         """Validate data using the CalendarPublicEventGroupReflectionSerializer serializer."""
-        group_reflections_data = data.get('groups')
+        group_reflections_data = data.get('spaces')
         for group_reflection_data in group_reflections_data:
             group_reflection_serializer = CosinnusCalendarGroupReflectionSerializer(
                 user_groups=self.reflection_user_groups, data=group_reflection_data, context=self.context
@@ -496,7 +496,7 @@ class CosinnusCalendarEventReflectSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         """Save reflection changes."""
         event_reflection_groups = self.event_reflection_groups
-        for group_reflection_data in validated_data['groups']:
+        for group_reflection_data in validated_data['spaces']:
             reflection_group_id = group_reflection_data['id']
             reflected = group_reflection_data['reflected']
             event_content_type = ContentType.objects.get_for_model(Event)
