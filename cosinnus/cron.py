@@ -2,25 +2,29 @@
 from __future__ import unicode_literals
 
 import logging
-from datetime import timedelta
+import traceback
+from datetime import date, timedelta
+from typing import List
 
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
+from django.template.loader import render_to_string
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django_cron import CronJobBase, Schedule
 
 from cosinnus.conf import settings
-from cosinnus.core.mail import send_html_mail
+from cosinnus.core.mail import get_common_mail_context, send_html_mail, send_system_mail_to_support
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 from cosinnus.models.feedback import CosinnusSentEmailLog
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group import CosinnusBaseGroup, CosinnusPortal
 from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.storage import TemporaryData
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.views.group import email_group_admins
 from cosinnus.views.profile import delete_userprofile
 from cosinnus_conference.utils import update_conference_premium_status
 from cosinnus_event.models import Event
@@ -132,8 +136,97 @@ class SwitchGroupPremiumFeatures(CosinnusCronJobBase):
                 # add marker field for expired premium features
                 group.settings['premium_features_expired_on'] = today
                 group.save()
+                try:
+                    email_group_admins(
+                        group,
+                        'cosinnus/mail/group_premium_expired_notification_subj.txt',
+                        'cosinnus/mail/group_premium_expiration_notification.html',
+                        None,
+                    )
+                except Exception as e:
+                    logger.error(e, extra={'group': group, 'trace': traceback.format_exc()})
+
+                try:
+                    context = get_common_mail_context(request=None, group=group)
+                    subject = render_to_string('cosinnus/mail/group_premium_expired_notification_subj.txt', context)
+                    body = render_to_string('cosinnus/mail/group_premium_expiration_notification.html', context)
+                    content = '\n'.join((subject, body))
+                    context.update(
+                        {
+                            'content': content,
+                        }
+                    )
+                    send_system_mail_to_support(subject=subject, template=None, data=context, group=group)
+                except Exception as e:
+                    logger.error(e, extra={'group': group, 'trace': traceback.format_exc()})
+
                 count += 1
             return f'Expired {count} premium groups.'
+        return 'Never ran, premium features are not enabled.'
+
+
+class SendGroupPremiumExpirationWarningEmails(CosinnusCronJobBase):
+    """
+    Send Warning Emails to Group Admins when the time remaining for `enable_user_premium_choices_until` is less or
+    equal than `BBB_GROUP_PREMIUM_WARNING_DAYS`.
+    Will set add a key 'premium_features_expiration_warning_sent_on' with the current date to the group['settings'].
+    Will only send one Email per warning-period. Will only run if relevant premium features for groups are enabled on
+    this portal.
+    """
+
+    RUN_EVERY_MINS = 60  # every 1 hour
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.send_group_premium_expiration_warning_emails'
+
+    @staticmethod
+    def _get_eligible_groups() -> List[CosinnusBaseGroup]:
+        """Returns all groups, that are due for a warning email."""
+
+        portal_groups = get_cosinnus_group_model().objects.all_in_portal()
+        today = now().date()
+        warning_threshold = today + timedelta(days=settings.COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS)
+
+        threshold_groups = portal_groups.filter(
+            enable_user_premium_choices_until__gte=today, enable_user_premium_choices_until__lte=warning_threshold
+        )
+
+        candidates = []
+        for group in threshold_groups:
+            last_warned_for_until: str = group.settings.get('last_warned_for_premium_choices_until', None)
+            premium_choices_until: date = group.enable_user_premium_choices_until
+
+            # ignore groups that we already sent a warning for
+            if last_warned_for_until and group.enable_user_premium_choices_until:
+                if last_warned_for_until == premium_choices_until.isoformat():
+                    continue
+
+            candidates.append(group)
+
+        return candidates
+
+    def do(self):
+        # currently the only setting that signifies premium features for groups.
+        # may need to add a better check in the future if more are to come
+        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+            count = 0
+            for group in self._get_eligible_groups():
+                try:
+                    email_group_admins(
+                        group,
+                        'cosinnus/mail/group_premium_expires_soon_notification_subj.txt',
+                        'cosinnus/mail/group_premium_expiration_notification.html',
+                        None,
+                    )
+                except Exception as e:
+                    logger.error(e, extra={'group': group, 'trace': traceback.format_exc()})
+                else:
+                    # add marker field
+                    group.settings['last_warned_for_premium_choices_until'] = group.enable_user_premium_choices_until
+                    group.save()
+                    count += 1
+
+            return f'Sent {count} warning emails.'
         return 'Never ran, premium features are not enabled.'
 
 

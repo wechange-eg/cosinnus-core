@@ -55,6 +55,81 @@
 
 
 {% block content %}
+    {# Infobox showing premium booking status #}
+    {% if group.group_premium_state == group.GROUP_PREMIUM_STATE_ACTIVE_FAR %}
+        <div class="alert alert-success">
+            <i class="fa fa-heart fa-2x fa-check-circle"></i>
+            <h4>
+                {% if group.type == 0 %}
+                    {% blocktrans trimmed with end_date=group.enable_user_premium_choices_until %}This project
+                        currently has Videoconference Pro booked until {{ end_date }} {% endblocktrans %}
+                {% else %}
+                    {% blocktrans trimmed with end_date=group.enable_user_premium_choices_until %}This group currently
+                        has Videoconference Pro booked until {{ end_date }} {% endblocktrans %}
+                {% endif %}
+            </h4>
+            <div class="v-offset-s">
+                <p>
+                    {% trans "If you would like to extend the period, you are welcome to make a new booking using the following form:" %}
+                </p>
+                <p>
+                    <a href="{% spaceless %}{% include "cosinnus/v2/urls/conference_premium_booking_url.html" %}{% endspaceless%}"
+                       target="_blank">{% trans "Extend Videoconference Pro" %}</a>
+                </p>
+            </div>
+        </div>
+    {% elif group.group_premium_state == group.GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON %}
+        <div class="alert alert-warning">
+            <i class="fa fa-heart fa-2x fa-info-circle"></i>
+            <h4>
+                {% with last_day=group.enable_user_premium_choices_until %}
+                    {% if group.type == 0 %}
+                        {% blocktrans trimmed with days_left=group.group_premium_days_left %} The booked period for
+                            Video Conference Pro for this project ends after {{ last_day }} ({{ days_left }} days)
+                        {% endblocktrans %}
+                    {% else %}
+                        {% blocktrans trimmed with days_left=group.group_premium_days_left %} The booked period for
+                            Video Conference Pro for this group ends after {{ last_day }} ({{ days_left }} days)
+                        {% endblocktrans %}
+                    {% endif %}
+                {% endwith %}
+            </h4>
+            <div class="v-offset-s">
+                <p>
+                    {% trans "If you would like to extend the period, you are welcome to make a new booking using the following form:" %}
+                </p>
+                <p>
+                    <a href="{% spaceless %}{% include "cosinnus/v2/urls/conference_premium_booking_url.html" %}{% endspaceless%}"
+                       target="_blank">{% trans "Extend Videoconference Pro" %}</a>
+                </p>
+            </div>
+        </div>
+    {% elif group.group_premium_state == group.GROUP_PREMIUM_STATE_EXPIRED %}
+        <div class="alert alert-warning">
+            <i class="fa fa-heart fa-2x fa-info-circle"></i>
+            <h4>
+                {% with end_date=group.group_premium_expired_on %}
+                    {% if group.type == 0 %}
+                        {% blocktrans trimmed %}The booked period for Video Conference Pro for this project has ended on
+                            {{ end_date }}. {% endblocktrans %}
+                    {% else %}
+                        {% blocktrans trimmed %}The booked period for Video Conference Pro for this group has ended on
+                            {{ end_date }}. {% endblocktrans %}
+                    {% endif %}
+                {% endwith %}
+            </h4>
+            <div class="v-offset-s">
+                <p>
+                    {% trans "If you would like to extend the period, you are welcome to make a new booking using the following form:" %}
+                </p>
+                <p>
+                    <a href="{% spaceless %}{% include "cosinnus/v2/urls/conference_premium_booking_url.html" %}{% endspaceless%}"
+                       target="_blank">{% trans "Extend Videoconference Pro" %}</a>
+                </p>
+            </div>
+        </div>
+    {% endif %}
+
 
     {# Info for creating a project from an idea #}
     {% if not object and request.GET.idea and group_model == "CosinnusProject" %}
