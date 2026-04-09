@@ -831,10 +831,10 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             res = self.client.get(self.event_reflections_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
-            self.assertEqual(data['groups'], [])
+            self.assertEqual(data['spaces'], [])
 
             reflection_data = {
-                'groups': [
+                'spaces': [
                     {
                         'id': reflection_group.id,
                         'reflected': True,
@@ -852,7 +852,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(
-                data['groups'],
+                data['spaces'],
                 [
                     {
                         'id': reflection_group.id,
@@ -867,7 +867,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             res = self.client.get(self.event_reflections_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
-            self.assertTrue(data['groups'][0]['reflected'])
+            self.assertTrue(data['spaces'][0]['reflected'])
 
 
 class CalendarViewTest(CeleryTaskTestMixin, TestCase):
