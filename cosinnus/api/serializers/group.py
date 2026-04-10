@@ -2,9 +2,8 @@
 from __future__ import unicode_literals
 
 from builtins import object
-from datetime import datetime
+from datetime import datetime, timezone
 
-import pytz
 from rest_framework import serializers
 
 from cosinnus.models import MEMBERSHIP_ADMIN, RelatedGroups, get_cosinnus_group_model
@@ -162,7 +161,7 @@ class CosinnusProjectGoodDBSerializer(serializers.HyperlinkedModelSerializer):
         )
 
     def _get_unixtime(self, datetime_obj):
-        epoch = datetime(1970, 1, 1, tzinfo=pytz.UTC)
+        epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
         return int((datetime_obj - epoch).total_seconds())
 
     def get_createdAt(self, obj):
