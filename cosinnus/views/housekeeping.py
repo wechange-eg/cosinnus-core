@@ -572,7 +572,8 @@ def print_settings(request):
     if not request:
         return setts
     return HttpResponse(
-        f'Portal {settings.COSINNUS_PORTAL_NAME} is running cosinnus version {settings.COSINNUS_VERSION}. '
+        f'Portal {settings.COSINNUS_PORTAL_NAME} is running cosinnus version {settings.COSINNUS_VERSION}.<br/> '
+        f'Server time is {now()}.<br/><br/>'
         f'Configured settings are:<br/><br/>' + setts
     )
 
