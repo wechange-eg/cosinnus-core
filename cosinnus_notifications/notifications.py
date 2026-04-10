@@ -686,10 +686,10 @@ class NotificationsThread(CosinnusWorkerThread):
             cur_time_zone = timezone.get_current_timezone()
             if hasattr(receiver, 'cosinnus_profile'):  # receiver can be a virtual user
                 translation.activate(getattr(receiver.cosinnus_profile, 'language', settings.LANGUAGES[0][0]))
-                timezone.activate(receiver.cosinnus_profile.timezone.zone)  # time zone of receiver
+                timezone.activate(receiver.cosinnus_profile.timezone.key)  # time zone of receiver
             elif hasattr(self.user, 'cosinnus_profile'):  # if receiver is a virtual user, set language to sender's
                 translation.activate(getattr(self.user.cosinnus_profile, 'language', settings.LANGUAGES[0][0]))
-                timezone.activate(self.user.cosinnus_profile.timezone.zone)  # time zone of sender
+                timezone.activate(self.user.cosinnus_profile.timezone.key)  # time zone of sender
 
             portal = CosinnusPortal.get_current()
             site = portal.site

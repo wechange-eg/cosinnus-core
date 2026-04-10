@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 import datetime
 import re
 from copy import copy
+from zoneinfo import ZoneInfo
 
-import pytz
 from django.db.models import Q
 from django.template.defaultfilters import date as django_date_filter
 from django.template.defaultfilters import linebreaksbr
@@ -1014,9 +1014,6 @@ def filter_event_searchqueryset_by_upcoming(sqs):
 
 def build_date_time(date_string, time_string):
     if date_string:
-        time_zone = timezone.get_current_timezone_name()
-        time_zone = pytz.timezone(time_zone)
-
         format_string = '%Y-%m-%d'
         if date_string and time_string:
             format_string = '%Y-%m-%d %H:%M'
@@ -1030,7 +1027,8 @@ def build_date_time(date_string, time_string):
         except ValueError:
             date_time = datetime.datetime.strptime(date_string, '%Y-%m-%d')
 
-        date_time = time_zone.localize(date_time)
+        time_zone = ZoneInfo(timezone.get_current_timezone_name())
+        date_time = date_time.replace(tzinfo=time_zone)
         return date_time
 
 

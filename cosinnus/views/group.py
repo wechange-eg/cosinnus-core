@@ -6,7 +6,6 @@ import logging
 from builtins import object, zip
 from copy import deepcopy
 
-import pytz
 import six
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -951,7 +950,7 @@ class GroupUpdateView(
             for field_name in field_names:
                 form_field_value = form_data.get(field_name)
                 if isinstance(form_field_value, datetime.datetime):
-                    form_field_value = form_field_value.astimezone(pytz.utc)
+                    form_field_value = form_field_value.astimezone(datetime.timezone.utc)
                 instance_field_value = getattr(obj, field_name)
                 if not form_field_value == instance_field_value:
                     return True

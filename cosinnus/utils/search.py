@@ -2,9 +2,9 @@
 from __future__ import print_function, unicode_literals
 
 from builtins import object
+from datetime import timezone
 
 import numpy
-import pytz
 import six
 from django.apps import apps
 from django.core.cache import cache
@@ -46,7 +46,7 @@ class TimezoneAwareHaystackDateTimeField(indexes.DateTimeField):
             return None
         if isinstance(value, six.string_types):
             try:
-                value = parse_datetime(value).astimezone(pytz.utc)
+                value = parse_datetime(value).astimezone(timezone.utc)
             except Exception:
                 raise SearchFieldError(
                     "Datetime provided to '%s' field doesn't appear to be a valid datetime string: '%s'"

@@ -135,7 +135,7 @@ def cosinnus(request):
         'COSINNUS_PROJECT_TRANS': get_group_trans_by_type(0),
         'COSINNUS_SOCIETY_TRANS': get_group_trans_by_type(1),
         'COSINNUS_CONFERENCE_TRANS': get_group_trans_by_type(2),
-        'COSINNUS_USER_TIMEZONE': user.is_authenticated and user.cosinnus_profile.timezone.zone or None,
+        'COSINNUS_USER_TIMEZONE': user.is_authenticated and user.cosinnus_profile.timezone.key or None,
         'COSINNUS_VERSION_HISTORY': version_history,
         'COSINNUS_VERSION_HISTORY_UNREAD_COUNT': version_history_unread_count,
         'COSINNUS_V3_API_CONTENT_ACTIVE': v3_api_content_active,

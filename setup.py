@@ -122,7 +122,7 @@ setup(
         'django-sekizai==2.0.0',
         'django-simple-captcha==0.5.20',
         'django-taggit==6.1.0',
-        'django-timezone-field==4.2.1',
+        'django-timezone-field==7.2.1',
         'django-two-factor-auth==1.18.1',
         'django-widget-tweaks==1.5.1',
         'djangorestframework==3.16.1',
@@ -136,7 +136,7 @@ setup(
         'ecdsa==0.18.0',
         'fcm-django==2.2.1',
         'geopy==2.4.1',
-        'icalendar==5.0.12',
+        'icalendar==7.0.3',  # TODO check updated
         'jsonfield==3.1.0',
         'l18n==2021.3',
         'lxml==6.0.2',
@@ -157,7 +157,6 @@ setup(
         'tblib==3.0.0',  # for parallelized testing
         'python-dateutil==2.9.0.post0',   # TODO: PY UPGRADE CHECK, 3.12 last supported
         'urllib3==2.6.3',
-        'pytz==2022.6',
         'rdflib==7.6.0', # TODO: PY UPGRADE CHECK
         'pymemcache==4.0.0',
         'qrcode==8.2',  # TODO: PY UPGRADE CHECK

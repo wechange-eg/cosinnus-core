@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 
-import pytz
 from django.template.defaultfilters import date as django_date_filter
 from django.template.loader import render_to_string
 from django.utils import dateformat
@@ -60,7 +59,7 @@ def timestamp_from_datetime(datetime_obj=None):
 
 def datetime_from_timestamp(timestamp):
     """Creates a datetime from a float timestamp"""
-    return datetime.fromtimestamp(timestamp, pytz.utc)
+    return datetime.fromtimestamp(timestamp, timezone.utc)
 
 
 def localize(value, format):
