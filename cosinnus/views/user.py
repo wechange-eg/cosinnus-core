@@ -1064,52 +1064,6 @@ def verifiy_user_email(request, email_verification_param):
         return redirect(redirect_url)
 
 
-class UserDetailView(DetailView):
-    model = USER_MODEL
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-    template_name = 'cosinnus/user/userprofile_detail.html'
-
-    @method_decorator(staff_required)
-    def dispatch(self, *args, **kwargs):
-        return super(UserDetailView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(UserDetailView, self).get_context_data(**kwargs)
-
-        profile = context['user'].cosinnus_profile
-        context['profile'] = profile
-        context['optional_fields'] = profile.get_optional_fields()
-
-        return context
-
-
-user_detail = UserDetailView.as_view()
-
-
-class UserUpdateView(UpdateView):
-    form_class = UserChangeForm
-    model = USER_MODEL
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-    template_name = 'cosinnus/registration/signup.html'
-
-    @method_decorator(staff_required)
-    def dispatch(self, *args, **kwargs):
-        return super(UserUpdateView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(UserUpdateView, self).get_context_data(**kwargs)
-        context['submit_label'] = _('Save')
-        return context
-
-    def get_success_url(self):
-        return reverse('cosinnus:profile-detail', kwargs={'username': self.object.username})
-
-
-user_update = UserUpdateView.as_view()
-
-
 class CosinnusPasswordChangeView(PasswordChangeView):
     """Overridden view that sends a password changed signal"""
 
