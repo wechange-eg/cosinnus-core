@@ -72,7 +72,6 @@ class DefaultUserProfileTest(TestCase):
             'website',
             'may_be_contacted',
             'dynamic_fields',
-            'scheduled_for_deletion_at',
             'description',
         }
         self.assertEqual(set(optional), expected_optional_fieldnames)

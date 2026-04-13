@@ -250,6 +250,8 @@ class BaseUserProfile(
         'settings',
         'managed_tag_assignments',
         'likes',
+        'inactivity_notification_sent_at',
+        'scheduled_for_deletion_at',
         'deletion_triggered_by_self',
         '_is_guest',
         'guest_access_object',
