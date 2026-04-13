@@ -64,7 +64,16 @@ class _UserProfileForm(
 
     class Meta(object):
         model = get_user_profile_model()
-        fields = model.get_optional_fieldnames()
+        fields = [
+            'avatar',
+            'description',
+            'dynamic_fields',
+            'language',
+            'may_be_contacted',
+            'timezone',
+            'translations',
+            'website',
+        ]
 
     def __init__(self, *args, **kwargs):
         super(_UserProfileForm, self).__init__(*args, **kwargs)

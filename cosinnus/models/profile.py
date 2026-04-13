@@ -238,9 +238,7 @@ class BaseUserProfile(
 
     objects = BaseUserProfileManager()
 
-    # These fields will not be changed upon `_UserProfileForm` changes via the profile edit view.
-    # Any fields not included in this list and not included in the HTML template form will be reverted
-    # to their modelfield defaults when the user profile edit view is POSTed.
+    # These fields will not be included in `get_optional_fields()` and `get_optional_fieldnames()`.
     SKIP_FIELDS = [
         'id',
         'user',
