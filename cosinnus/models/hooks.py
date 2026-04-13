@@ -31,7 +31,7 @@ from cosinnus.utils.dashboard import ensure_group_widget
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import assign_user_to_default_auth_group, ensure_user_to_default_portal_groups
-from cosinnus.views.profile import delete_guest_user
+from cosinnus.views.profile_deletion import delete_guest_user
 from cosinnus_conference.utils import update_conference_premium_status
 
 logger = logging.getLogger('cosinnus')
@@ -368,6 +368,23 @@ def handle_user_group_guest_access_logged_out(sender, user, **kwargs):
     because only one session per guest account may ever exist."""
     if user and getattr(user, 'cosinnus_profile') and user.is_guest:
         delete_guest_user(user, deactivate_only=True)
+
+
+@receiver(signals.user_activated)
+def abort_user_deletion(sender, user, **kwargs):
+    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile.scheduled_for_deletion_at:
+        profile = user.cosinnus_profile
+        type(profile).objects.filter(pk=profile.pk).update(
+            scheduled_for_deletion_at=None, deletion_triggered_by_self=False
+        )
+
+
+@receiver(signals.group_reactivated)
+def abort_group_deletion(sender, group, **kwargs):
+    type(group).objects.filter(pk=group.pk).update(
+        scheduled_for_deletion_at=None,
+        deletion_triggered_by=None,
+    )
 
 
 from cosinnus.apis.cleverreach import *  # noqa
