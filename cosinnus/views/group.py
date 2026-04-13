@@ -24,6 +24,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.defaultfilters import linebreaksbr
 from django.template.loader import render_to_string
 from django.urls import NoReverseMatch, reverse, reverse_lazy
+from django.utils import translation
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.html import escape
@@ -49,6 +50,7 @@ from cosinnus.core.decorators.views import (
     membership_required,
     redirect_to_403,
 )
+from cosinnus.core.mail import get_common_mail_context, send_html_mail_threaded
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.conference import CosinnusConferenceSettingsMultiForm
@@ -64,6 +66,7 @@ from cosinnus.forms.tagged import get_form
 from cosinnus.models import group as group_module  # noqa # circular import prevention
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import (
+    CosinnusBaseGroup,
     CosinnusGroup,
     CosinnusGroupCallToActionButton,
     CosinnusGroupGalleryImage,
@@ -85,7 +88,7 @@ from cosinnus.models.membership import (
 from cosinnus.models.profile import UserBlock
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject
 from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
-from cosinnus.templatetags.cosinnus_tags import full_name, is_superuser
+from cosinnus.templatetags.cosinnus_tags import full_name, is_superuser, textfield
 from cosinnus.utils.compat import atomic
 from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.group import (
@@ -102,6 +105,7 @@ from cosinnus.utils.permissions import (
     check_user_can_create_conferences,
     check_user_can_see_user,
     check_user_superuser,
+    filter_blocks_for_user,
 )
 from cosinnus.utils.urls import group_aware_reverse, redirect_next_or
 from cosinnus.utils.user import (
@@ -112,6 +116,7 @@ from cosinnus.utils.user import (
     get_user_select2_pills,
 )
 from cosinnus.views.attached_object import AttachableViewMixin
+from cosinnus.views.group_deletion import mark_group_for_deletion
 from cosinnus.views.microsite import GroupMicrositeView
 from cosinnus.views.mixins.ajax import AjaxableFormMixin, DetailAjaxableResponseMixin, ListAjaxableResponseMixin
 from cosinnus.views.mixins.avatar import AvatarFormMixin
@@ -477,7 +482,7 @@ class GroupCreateView(
 
         messages.success(
             self.request,
-            self.message_success % {'group': self.object.name, 'team_type': self.object._meta.verbose_name},
+            self.message_success % {'group': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
         )
         return ret
 
@@ -978,7 +983,7 @@ class GroupUpdateView(
         # create admin logentry.
         admin_log_action(self.request.user, self.object, _('Edited.'))
 
-        messages.success(self.request, self.message_success % {'team_type': self.object._meta.verbose_name})
+        messages.success(self.request, self.message_success % {'team_type': self.object.trans.VERBOSE_NAME})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
 
@@ -1035,7 +1040,7 @@ class GroupConfirmMixin(object):
 
 class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembershipMixin, DetailView):
     message_success = _(
-        'You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team '
+        'You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as an '
         'administrator responds to your request.'
     )
     referer_url = reverse_lazy('cosinnus:group-list')
@@ -1101,7 +1106,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
                 messages.success(
                     self.request,
                     _('You are now a member of %(team_type)s “%(team_name)s”. Welcome!')
-                    % {'team_name': self.object.name, 'team_type': self.object._meta.verbose_name},
+                    % {'team_name': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
                 )
             else:
                 self.membership_class.objects.create(
@@ -1115,7 +1120,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
                 )
                 messages.success(
                     self.request,
-                    self.message_success % {'team_name': self.object.name, 'team_type': self.object._meta.verbose_name},
+                    self.message_success % {'team_name': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
                 )
         self.referer = self.object.get_absolute_url()
 
@@ -1151,7 +1156,7 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembershi
         if not getattr(self, '_had_error', False):
             messages.success(
                 self.request,
-                self.message_success % {'team_name': self.object.name, 'team_type': self.object._meta.verbose_name},
+                self.message_success % {'team_name': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
             )
         return self.referer
 
@@ -1174,7 +1179,7 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembershi
             messages.error(
                 self.request,
                 _('You cannot leave this %(team_type)s. You are the only administrator left.')
-                % {'team_type': self.object._meta.verbose_name},
+                % {'team_type': self.object.trans.VERBOSE_NAME},
             )
 
 
@@ -1194,7 +1199,7 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, GroupMember
         if not getattr(self, '_had_error', False):
             messages.success(
                 self.request,
-                self.message_success % {'team_name': self.object.name, 'team_type': self.object._meta.verbose_name},
+                self.message_success % {'team_name': self.object.name, 'team_type': self.object.trans.VERBOSE_NAME},
             )
         return self.referer
 
@@ -1595,7 +1600,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
 
     @atomic
     def form_valid(self, form):
-        self.object = self.get_object()
+        self.object: CosinnusGroupMembership = self.get_object()
         group = self.object.group
         user = self.object.user
         current_status = self.object.status
@@ -1613,7 +1618,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
         else:
             messages.error(
                 self.request,
-                _('You cannot remove "%(username)s" form this team. Only one admin left.')
+                _('You cannot remove "%(username)s" from this group/project. Only one admin left.')
                 % {'username': user.get_full_name()},
             )
             return HttpResponseRedirect(self.get_success_url())
@@ -1622,8 +1627,8 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
             signals.user_group_join_declined.send(sender=self, obj=group, user=user, audience=[user])
             messages.success(
                 self.request,
-                _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.')
-                % {'team_type': self.object._meta.verbose_name, 'team_name': group.name},
+                _('The join request from "%(username)s" was declined successfully.')
+                % {'username': user.get_full_name()},
             )
         if current_status == MEMBERSHIP_INVITED_PENDING:
             messages.success(
@@ -1735,6 +1740,26 @@ class ActivateOrDeactivateGroupView(TemplateView):
             }
         )
         return context
+
+
+class GroupScheduleDeleteView(RequireAdminMixin, TemplateView):
+    template_name = 'cosinnus/group/group_schedule_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupScheduleDeleteView, self).get_context_data(**kwargs)
+        context.update(
+            {
+                'object': self.group,  # used in leftnav_group.html
+            }
+        )
+        return context
+
+    def post(self, request, *args, **kwargs):
+        mark_group_for_deletion(self.group, triggered_by_user=request.user)
+        success_message = _('%(team_name)s has been deactivated and will be deleted in 30 days!')
+        messages.success(request, success_message % {'team_name': self.group.name})
+        admin_log_action(request.user, self.group, _('Scheduled for deletion.'))
+        return redirect(reverse('cosinnus:user-dashboard'))
 
 
 class GroupStartpage(View):
@@ -2227,11 +2252,13 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
 
         users = self.get_user_queryset(terms)
 
+        # filter out users who have active userblocks, both directions
+        users = filter_blocks_for_user(request.user, users)
+
         users = prioritize_suggestions_output(request, users)
 
-        # as a last filter, remove all users that that have their privacy setting to "only members of groups i am in",
-        # if they aren't in a group with the user
-        users = [user for user in users if check_user_can_see_user(request.user, user)]
+        # as a last filter, remove users we can not see
+        users = [user for user in users if check_user_can_see_user(request.user, user, is_invite_selection=True)]
 
         # check for a direct email match
         direct_email_user = get_user_by_email_safe(term)
@@ -2301,7 +2328,7 @@ class GroupOrganizationRequestView(RequireAdminMixin, GroupMembershipMixin, Form
     form_class = MultiOrganizationSelectForm
     template_name = 'cosinnus/group/group_detail.html'
     message_success = _(
-        'You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator '
+        'You have requested to join the organization “%(name)s”. You will receive an email as soon as an administrator '
         'responds to your request.'
     )
 
@@ -2390,6 +2417,28 @@ class RemoveGroupInviteFromGroup(RequireReadMixin, FormView):
         return HttpResponseRedirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group}))
 
 
+def email_group_admins(
+    group: CosinnusBaseGroup, subject_template, html_template, topic_instead_of_subject=None, data=None
+):
+    admins = group.actual_admins
+
+    for admin in admins:
+        admin_data = get_common_mail_context(None, group, admin)
+        if data:
+            admin_data.update(data)
+
+        if admin.cosinnus_profile:
+            admin_language = admin.cosinnus_profile.language
+        else:
+            admin_language = None
+
+        with translation.override(admin_language):
+            subject = render_to_string(subject_template, admin_data).strip()
+            text = textfield(render_to_string(html_template, admin_data))
+
+        send_html_mail_threaded(admin, subject, text, topic_instead_of_subject)
+
+
 group_group_invite_delete = RemoveGroupInviteFromGroup.as_view()
 group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
@@ -2426,6 +2475,7 @@ group_user_delete = GroupUserDeleteView.as_view()
 group_user_delete_api = GroupUserDeleteView.as_view(is_ajax_request_url=True)
 group_export = GroupExportView.as_view()
 activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()
+group_schedule_delete = GroupScheduleDeleteView.as_view()
 group_startpage = GroupStartpage.as_view()
 user_group_member_invite_select2 = UserGroupMemberInviteSelect2View.as_view()
 group_invite_select2 = GroupInviteSelect2View.as_view()

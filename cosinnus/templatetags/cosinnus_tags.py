@@ -1147,6 +1147,14 @@ def remove_blank_lines(text):
 
 
 @register.filter
+def remove_indentation(text):
+    """Removes leading whitespace from each line while preserving line breaks."""
+    if not text:
+        return ''
+    return '\n'.join(line.lstrip() for line in text.splitlines())
+
+
+@register.filter
 def add_domain(url):
     """Adds the current domain to a given URL, unless it already starts with http"""
     return url if url.startswith('http') else CosinnusPortal.get_current().get_domain() + url

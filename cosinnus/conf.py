@@ -316,6 +316,9 @@ class CosinnusConf(AppConf):
     # whose account is inactive or deleted. view-only is still possible.
     LOCK_ETHERPAD_WRITE_MODE_ON_CREATOR_DELETE = False
 
+    # if True, will prevent creation of new ethercalcs and refer to nextcloud
+    ETHERPAD_ETHERCALC_READONLY = True
+
     # a list of cosinnus apps that are installed but are disabled for the users, e.g. ['cosinnus_marketplace', ]
     # (they are still admin accessible)
     DISABLED_COSINNUS_APPS = []
@@ -527,6 +530,9 @@ class CosinnusConf(AppConf):
     # Note! this is reflected in migration 0113! If the setting is changed afte the migration
     # has been run, previous values of all existing groups will remain unchanged!
     GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
+
+    # the duration in days from which a user deletes a group until its actual deletion is triggered
+    GROUP_DELETION_SCHEDULE_DAYS = 30
 
     # if True, enables an option to choose related groups/projects in the groups/projects
     # settings showing the chosen ones on microsite and dashboard
@@ -1590,6 +1596,14 @@ class CosinnusConf(AppConf):
     # using field `???` before the group admins can enable the BBB option
     BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED = False
 
+    # The number of days before premium expiry to send a warning email
+    # (only active if `BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED` is True).
+    BBB_GROUP_PREMIUM_WARNING_DAYS = 14
+
+    # Send Emails with an expiration warning, when the warning period starts (set by `BBB_GROUP_PREMIUM_WARNING_DAYS`).
+    # (only active if `BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED` is True).
+    BBB_GROUP_PREMIUM_SEND_EXPIRATION_WARNING_EMAILS = True
+
     STARRED_STAR_LABEL = _('Bookmark')
     STARRED_STARRING_LABEL = _('Bookmarked')
     STARRED_OBJECTS_LIST = _('Bookmark list')
@@ -1736,6 +1750,19 @@ class CosinnusConf(AppConf):
 
     # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
     DENY_ALL_ROBOTS = False
+    # Number of days before inactive groups and users are automatically deactivated for deletion.
+    # Note: Ignoring leap years to avoid calendar arithmetics as the exact duration is not crucial for the deactivation.
+    INACTIVE_DEACTIVATION_SCHEDULE = 365 * 10  # 10 years
+    INACTIVE_DEACTIVATION_SCHEDULE_TEXT = _('10 years')
+
+    # Notification intervals in days before automatic deactivation of users and groups.
+    # Dictionary with day value and the corresponding user text.
+    INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION = {
+        365: _('1 year'),
+        182: _('6 months'),
+        14: _('2 weeks'),
+        2: _('2 days'),
+    }
 
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False

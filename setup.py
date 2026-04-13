@@ -169,6 +169,8 @@ setup(
         # requirements for documentation
         'sphinx==7.1.2',
         # (dev requirements were moved to pyproject.toml dev-dependencies)
+        # test requirements
+        'freezegun==1.5.5',
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@python-3-12#egg=django-awesome-avatar',
         'django-multiform @ git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
