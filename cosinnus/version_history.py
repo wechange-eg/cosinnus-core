@@ -107,7 +107,7 @@ UPDATES = {
         'display_conditional': settings.COSINNUS_CLOUD_ENABLED,
     },
     '2.7.10': {
-        'datetime': datetime(2026, 3, 31, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 3, 31, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.10'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -126,7 +126,7 @@ UPDATES = {
         ],
     },
     '2.7.9': {
-        'datetime': datetime(2026, 3, 21, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 3, 21, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.9'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -135,7 +135,7 @@ UPDATES = {
         'display_conditional': settings.COSINNUS_CLOUD_ENABLED,
     },
     '2.7.8': {
-        'datetime': datetime(2026, 3, 5, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 3, 5, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.8'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -146,7 +146,7 @@ UPDATES = {
         ],
     },
     '2.7.7': {
-        'datetime': datetime(2026, 3, 4, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 3, 4, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.7'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -154,7 +154,7 @@ UPDATES = {
         ],
     },
     '2.7.6': {
-        'datetime': datetime(2026, 2, 26, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 2, 26, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.6'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -165,7 +165,7 @@ UPDATES = {
         ],
     },
     '2.7.3': {
-        'datetime': datetime(2026, 1, 21, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 1, 21, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.3'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -176,7 +176,7 @@ UPDATES = {
         ],
     },
     '2.7.2': {
-        'datetime': datetime(2026, 1, 15, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 1, 15, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.2'),
         'short_text': _('This update includes quality of life updates:'),
         'full_text': [
