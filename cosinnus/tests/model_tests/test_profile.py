@@ -65,15 +65,15 @@ class DefaultUserProfileTest(TestCase):
     def test_get_optional_fieldnames(self):
         optional = UserProfile.get_optional_fieldnames()
         expected_optional_fieldnames = {
-            'language',
-            'translations',
-            'timezone',
             'avatar',
-            'website',
-            'may_be_contacted',
-            'dynamic_fields',
             'description',
+            'dynamic_fields',
             'inactivity_notification_sent_at',
+            'language',
+            'may_be_contacted',
+            'timezone',
+            'translations',
+            'website',
         }
         self.assertEqual(set(optional), expected_optional_fieldnames)
 
