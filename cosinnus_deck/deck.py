@@ -91,10 +91,23 @@ class DeckConnection:
         }
         response = self._api_post(f'/boards/{board_id}/acl', data=data)
         if response.status_code != 200:
-            logger.warning(
-                'Deck: Adding group permissions to board failed!', extra={'response': response, 'board_id': board_id}
-            )
-            raise DeckConnectionException()
+            error_resolved = False
+            if response.status_code == 500:
+                # Workaround for nextcloud exceptions when setting acl, while the request still worked.
+                try:
+                    response = self._api_get(f'/boards/{board_id}')
+                    if response.status_code == 200:
+                        board_details = response.json()
+                        if board_details['acl'][0]['participant']['uid'] == group.nextcloud_group_id:
+                            error_resolved = True
+                except Exception:
+                    pass
+            if not error_resolved:
+                logger.warning(
+                    'Deck: Adding group permissions to board failed!',
+                    extra={'response': response, 'board_id': board_id},
+                )
+                raise DeckConnectionException()
 
         # create initial board content
         if initialize_board_content:
@@ -491,8 +504,8 @@ class DeckConnection:
                     )
                     card_id = response.json()['id']
 
-                    # assign user
-                    if todo.assigned_to:
+                    # assign user if user is group member
+                    if todo.assigned_to and todo.assigned_to.pk in group.members:
                         self.card_assign_user(
                             group_board_id=group.nextcloud_deck_board_id,
                             stack_id=stack_id,
