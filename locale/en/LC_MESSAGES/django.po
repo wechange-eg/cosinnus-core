@@ -6390,6 +6390,10 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
+#: cosinnus/utils/validators.py
+msgid "Error during image processing. Your image may be too large, in an unsupported format, or corrupt."
+msgstr ""
+
 #: cosinnus/templates/cosinnus/common/embed_flickr_field.html
 msgid "Error embedding a Flickr gallery"
 msgstr ""
