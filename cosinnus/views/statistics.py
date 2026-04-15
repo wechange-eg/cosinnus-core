@@ -12,6 +12,7 @@ from django.db.models.fields import DateField
 from django.db.models.functions.datetime import TruncBase, TruncDay, TruncMonth, TruncWeek, TruncYear
 from django.http import HttpResponseRedirect
 from django.utils.formats import localize
+from django.utils.timezone import now
 from django.utils.translation import gettext as _
 from django.views.generic.edit import FormView
 
@@ -469,8 +470,8 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
     def dispatch(self, request, *args, **kwargs):
         # add default date range if none is given
         if request.method == 'GET' and ('from' not in request.GET or 'to' not in request.GET):
-            date_to = datetime.now().replace(hour=23, minute=59)
-            date_from = (datetime.now() - timedelta(days=DATE_RANGE_DEFAULT_PAST_DAYS)).replace(hour=0, minute=0)
+            date_to = now().replace(hour=23, minute=59)
+            date_from = (now() - timedelta(days=DATE_RANGE_DEFAULT_PAST_DAYS)).replace(hour=0, minute=0)
 
             parameters = request.GET.copy()
             parameters['to'] = date_to.strftime(self.DATE_FORMAT)

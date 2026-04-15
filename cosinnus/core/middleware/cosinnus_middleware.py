@@ -6,6 +6,7 @@ import logging
 import re
 from builtins import object
 from functools import partial as curry
+from django.utils.timezone import now
 
 from annoying.functions import get_object_or_None
 from django.apps import apps
@@ -781,9 +782,9 @@ class UserOnlineStatisticsMiddleware(MiddlewareMixin):
                         # create user online statistics for today
                         UserOnlineOnDay.objects.get_or_create(user=user, date=datetime.date.today())
                         # set a mini cache entry
-                        now = datetime.datetime.now()
-                        _tomorrow = now + datetime.timedelta(days=1)
-                        seconds_until_tomorrow = (datetime.datetime.combine(_tomorrow, datetime.time.min) - now).seconds
+                        _now = now()
+                        _tomorrow = (_now + datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0)
+                        seconds_until_tomorrow = (_tomorrow - _now).seconds
                         cache.set(self.CACHE_KEY % user.id, True, seconds_until_tomorrow)
         return response
 

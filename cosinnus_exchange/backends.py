@@ -1,7 +1,7 @@
 import json
 import logging
 import urllib.parse
-from datetime import datetime
+from django.utils.timezone import now
 from importlib import import_module
 
 import requests
@@ -81,7 +81,7 @@ class ExchangeBackend:
         """
         if not self.token:
             self._authenticate()
-        elif self.expires_in < datetime.now():
+        elif self.expires_in and self.expires_in < now():
             self._authenticate()
 
     def _authenticate(self):
@@ -110,7 +110,7 @@ class ExchangeBackend:
         if 'errors' in data:
             raise ExchangeError(response.status_code, response.content)
         self.token = data['access']
-        self.expires_in = None  # datetime.now() + timedelta(seconds=data['expiresIn'])
+        self.expires_in = None  # now() + timedelta(seconds=data['expiresIn'])
 
     def _serialize_results(self, results):
         serialized_results = []
