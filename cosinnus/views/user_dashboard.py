@@ -222,7 +222,7 @@ class MyGroupsClusteredMixin(object):
             items_projects = []
             for i in range(len(projects) - 1, -1, -1):
                 project = projects[i]
-                if project.parent == society:
+                if project.parent_id == society.id:
                     items_projects.insert(0, DashboardItem(project))  # prepend because of reversed order
                     projects.pop(i)
                     project_dt = group_last_visited.get(project.id, default_date)
