@@ -234,7 +234,7 @@ class CosinnusGroupManager(models.Manager):
             )
         return slugs
 
-    def get_pks(self, portal_id=None, force=True):
+    def get_pks(self, portal_id=None, force=False):
         """
         Gets all group pks from the cache or, if the can has not been filled,
         gets the pks and slugs from the database and fills the cache.
