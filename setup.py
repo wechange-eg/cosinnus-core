@@ -89,29 +89,29 @@ setup(
         'Django>=5.2.12,<5.3',
         'MarkupSafe==2.1.5',
         'Pillow==12.2.0',
-        'channels==4.3.2', # TODO: PY UPGRADE CHECK, # Moved from pyproject.toml
-        'celery==5.6.2', # TODO: PY UPGRADE CHECK, 3.13 last supported
+        'channels==4.3.2',  # TODO: PY UPGRADE CHECK, # Moved from pyproject.toml
+        'celery==5.6.2',  # TODO: PY UPGRADE CHECK, 3.13 last supported
         'dataclasses',
         'beautifulsoup4==4.14.3',
         'chardet==3.0.4',
         'django-allauth==0.60.0',
         'django-annoying==0.7.6',
-        'django-appconf==1.2.0',  # TODO: PY UPGRADE CHECK
+        'django-appconf==1.2.0',
         'django-bootstrap3==21.1',
         # 'django-classy-tags==2.0.0',  # TODO: REMOVED!! check!
-        'django-countries==8.2.0',  # TODO: PY UPGRADE CHECK
+        'django-countries==8.2.0',
         'django-cron-django5==0.6.2',
-        'django-embed-video==1.4.10',   # TODO: PY UPGRADE CHECK
-        'django-environ==0.8.1',  # Moved from pyproject.toml
+        'django-embed-video==1.4.10',
+        'django-environ==0.8.1',
         'django-el-pagination==2.1.2',
         'django-extensions==4.1',
         'django-extra-views==0.14.0',
-        'django-filter==25.2',  # TODO: PY UPGRADE CHECK, 3.13 last supported https://pypi.org/project/django-filter/25.2/
+        'django-filter==25.2',
         'django-haystack==3.3.0',
         'django-honeypot==0.9.0',
         'django-ical==1.7.1',
         'django-mailbox==4.9.0',
-        'django-model-utils==5.0.0',  # TODO: PY UPGRADE CHECK, 3.12 last supported
+        'django-model-utils==5.0.0',
         # 'django-mptt==0.8.7',  # TODO: REMOVED!! check!
         'django-oauth-toolkit==2.3.0',
         'django-otp==1.1.1',
@@ -127,12 +127,12 @@ setup(
         'django-widget-tweaks==1.5.1',
         'djangorestframework==3.16.1',
         'djangorestframework-csv==2.1.1',
-        'djangorestframework-simplejwt==5.5.1',  # TODO: PY UPGRADE CHECK
+        'djangorestframework-simplejwt==5.5.1',
         'dnspython==2.6.1',
         'drf-extra-fields==3.4.0',
-        'drf-yasg==1.21.15', # TODO: PY UPGRADE CHECK
+        'drf-yasg==1.21.15',
         'easy-thumbnails==2.10.1',
-        'elasticsearch==7.17.13',  # TODO: PY UPGRADE CHECK
+        'elasticsearch==7.17.13',
         'ecdsa==0.18.0',
         'fcm-django==2.2.1',
         'geopy==2.4.1',
@@ -148,16 +148,16 @@ setup(
         'pycountry==20.7.3',
         'raven==6.10.0',
         'redis==5.3.1',  # TODO: PY UPGRADE CHECK, 3.12 last supported - required for celery
-        'requests==2.33.1', # TODO: PY UPGRADE CHECK (minor)
-        'requests-oauthlib==2.0.0', # TODO: PY UPGRADE CHECK
+        'requests==2.33.1',
+        'requests-oauthlib==2.0.0',  # TODO: PY UPGRADE CHECK
         'rocketchat-API==1.30.0',
-        'six==1.17.0',  # TODO: PY UPGRADE CHECK
+        'six==1.17.0',
         'sqlparse==0.5.0',
         'sentry-sdk==1.45.1',
         'tblib==3.0.0',  # for parallelized testing
-        'python-dateutil==2.9.0.post0',   # TODO: PY UPGRADE CHECK, 3.12 last supported
+        'python-dateutil==2.9.0.post0',
         'urllib3==2.6.3',
-        'rdflib==7.6.0', # TODO: PY UPGRADE CHECK
+        'rdflib==7.6.0',  # TODO: PY UPGRADE CHECK
         'pymemcache==4.0.0',
         'qrcode==8.2',  # TODO: PY UPGRADE CHECK
         'Unidecode==0.4.21',
