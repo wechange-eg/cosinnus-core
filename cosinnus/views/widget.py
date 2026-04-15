@@ -276,7 +276,10 @@ class DashboardWidgetMixin(object):
 
     def get_context_data(self, **kwargs):
         widget_filter = self.get_filter()
-        widgets_configs = WidgetConfig.objects.filter(**widget_filter).order_by('sort_field')
+        # Note: if widget config reading should ever be re-enabled, this query should
+        # get a .prefetch_related('items')
+        # and in that case, `WidgetConfig.__getitem__` should possibly receive logic to check prefetched items
+        widgets_configs = WidgetConfig.objects.filter(**widget_filter).order_by('sort_field').select_related('group')
 
         deactivated_apps = []
         if 'group_id' in widget_filter:
