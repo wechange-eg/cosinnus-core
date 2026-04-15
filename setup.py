@@ -88,7 +88,7 @@ setup(
     install_requires=[
         'Django>=5.2.12,<5.3',
         'MarkupSafe==2.1.5',
-        'Pillow==12.1.1',
+        'Pillow==12.2.0',
         'channels==4.3.2', # TODO: PY UPGRADE CHECK, # Moved from pyproject.toml
         'celery==5.6.2', # TODO: PY UPGRADE CHECK, 3.13 last supported
         'dataclasses',
