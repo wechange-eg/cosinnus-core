@@ -141,7 +141,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                 global_wanted = True  # user wants ALL events in his digest for this digest setting
 
         cur_time_zone = timezone.get_current_timezone()
-        user_time_zone = user.cosinnus_profile.timezone.key
+        user_time_zone = user.cosinnus_profile.timezone
         cur_language = translation.get_language()
         try:
             # only active users that have logged in before accepted the TOS get notifications

@@ -10,6 +10,6 @@ class TimezoneMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
         if request.user.is_authenticated:
-            timezone.activate(request.user.cosinnus_profile.timezone.key)
+            timezone.activate(request.user.cosinnus_profile.timezone)
         else:
             timezone.deactivate()
