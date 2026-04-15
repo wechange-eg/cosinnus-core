@@ -150,7 +150,9 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
 
     def get_preview_url(self):
         return (
-            get_domain_for_portal(self.portal) + reverse('cosinnus:user-dashboard') + '?show_announcement=%d' % self.id
+            get_domain_for_portal(self.portal_id)
+            + reverse('cosinnus:user-dashboard')
+            + '?show_announcement=%d' % self.id
         )
 
     def is_valid(self):
