@@ -1062,7 +1062,7 @@ def get_past_event_filter_expression(include_days_past=0):
     _now = now()
     if include_days_past > 0:
         _now = _now - datetime.timedelta(days=include_days_past)
-    event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
+    event_horizon = _now.replace(hour=0, minute=0, second=0)
     return Q(to_date__lt=event_horizon) | (Q(to_date__isnull=True) & Q(from_date__lt=event_horizon))
 
 

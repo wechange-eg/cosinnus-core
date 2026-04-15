@@ -105,7 +105,7 @@ def send_conference_reminder(group, recipients=None, field_name='week_before', u
     if update_setting:
         if not group.settings:
             group.settings = {}
-        group.settings[f'reminder_{field_name}_sent'] = force_str(datetime.now())
+        group.settings[f'reminder_{field_name}_sent'] = force_str(now())
         group.save(
             update_fields=[
                 'settings',
