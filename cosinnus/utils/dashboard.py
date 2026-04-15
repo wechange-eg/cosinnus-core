@@ -139,9 +139,11 @@ class DashboardWidget(object):
             {
                 'widget_conf_id': self.id,
                 'app_name': self.app_name,
-                'widget_title': self.config.get('widget_title', None),
-                'widget_icon': self.config.get('widget_icon', None),
-                'link_label': self.config.get('link_label', None),
+                # Removed these 3 config getters, as widgets are no longer configured dynamically by the user,
+                # and these getters cause 3 DB hits per widget
+                # 'widget_title': self.config.get('widget_title', None),
+                # 'widget_icon': self.config.get('widget_icon', None),
+                # 'link_label': self.config.get('link_label', None),
                 'sort_field': self.config.sort_field,
             }
         )
