@@ -104,7 +104,7 @@ class IdeaManager(models.Manager):
                 return []  # We rely on the slug and id maps being up to date
         return []
 
-    def get_pks(self, portal_id=None, force=True):
+    def get_pks(self, portal_id=None, force=False):
         """
         Gets the (pks -> slug) :class:`OrderedDict` from the cache or, if the can has not been filled,
         gets the pks and slugs from the database and fills the cache.
