@@ -26,7 +26,8 @@ UPDATES = {
             _(
                 '- Updated the backend codebase to Python 3.12 and the Django framework to version 5 for security '
                 'fixes and improvements.\n'
-                '- Fixed a bug where event polls where being shown on the map when filtering for an event time range\n'
+                '- Fixed a bug where event polls where being shown on the map when filtering for an event time range.\n'
+                '- Added many database optimisations to improve the loading speed of most pages.'
                 '- TODO add more!\n',
             )
         ],
@@ -55,9 +56,7 @@ UPDATES = {
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.9'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
-            _(
-                '- Fixed an error with the profile avatar synchronisation with the Nextcloud.\n'
-            ),
+            _('- Fixed an error with the profile avatar synchronisation with the Nextcloud.\n'),
         ],
         'display_conditional': settings.COSINNUS_CLOUD_ENABLED,
     },
@@ -77,9 +76,7 @@ UPDATES = {
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.7'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
-            _(
-                '- Fixed a page error during the profile setup when entering a profile location.\n'
-            ),
+            _('- Fixed a page error during the profile setup when entering a profile location.\n'),
         ],
     },
     '2.7.6': {
@@ -109,9 +106,7 @@ UPDATES = {
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.2'),
         'short_text': _('This update includes quality of life updates:'),
         'full_text': [
-            _(
-                '- Added numerous user interface and accessibility improvements throughout the site.\n'
-            ),
+            _('- Added numerous user interface and accessibility improvements throughout the site.\n'),
         ],
     },
     '2.7.0': {
