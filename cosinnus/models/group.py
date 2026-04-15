@@ -390,6 +390,8 @@ class CosinnusGroupManager(models.Manager):
         :returns: a list of primary keys to :class:`CosinnusGroup` the given
             user is a member or admin of, and not a pending member!.
         """
+        # FIXME cache!
+        print('>>>> now querying in which groups user is member of, causes a DB hit')
         qs = self.get_queryset()
         if not includeInactive:
             qs = qs.filter(is_active=True)
