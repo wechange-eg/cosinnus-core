@@ -23,8 +23,8 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
-from cosinnus.models import UserBlock
-from cosinnus.models.conference import CosinnusConferenceApplication
+from cosinnus.models import MEMBERSHIP_PENDING, UserBlock
+from cosinnus.models.conference import APPLICATION_STATES_PENDING, CosinnusConferenceApplication
 from cosinnus.models.group import (
     CosinnusGroupMembership,
     CosinnusPortal,
@@ -621,14 +621,23 @@ class UnreadAlertsView(APIView):
 
         # count membership requests and conference applications
         admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(user)
-        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
-        for admined_group in admined_groups:
+        admined_groups_with_membership_requests = (
+            get_cosinnus_group_model()
+            .objects.filter(pk__in=admined_group_ids, memberships__status=MEMBERSHIP_PENDING)
+            .distinct()
+        )
+        for admined_group in admined_groups_with_membership_requests:
             pending_membership_request_count = len(CosinnusGroupMembership.objects.get_pendings(group=admined_group))
             membership_alert_count += pending_membership_request_count
-            pending_conference_application_count = len(
-                CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
-            )
-            membership_alert_count += pending_conference_application_count
+        if settings.COSINNUS_CONFERENCES_ENABLED:
+            admined_groups_with_conference_applications = CosinnusConference.objects.filter(
+                pk__in=admined_group_ids, conference_applications__status__in=APPLICATION_STATES_PENDING
+            ).distinct()
+            for admined_group in admined_groups_with_conference_applications:
+                pending_conference_application_count = len(
+                    CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
+                )
+                membership_alert_count += pending_conference_application_count
 
         return membership_alert_count
 
@@ -1105,8 +1114,12 @@ class MembershipAlertsView(APIView):
     def _get_membership_requests(self, user):
         membership_requests = []
         admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(user)
-        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
-        for admined_group in admined_groups:
+        admined_groups_with_membership_requests = (
+            get_cosinnus_group_model()
+            .objects.filter(pk__in=admined_group_ids, memberships__status=MEMBERSHIP_PENDING)
+            .distinct()
+        )
+        for admined_group in admined_groups_with_membership_requests:
             pending_ids = CosinnusGroupMembership.objects.get_pendings(group=admined_group)
             if len(pending_ids) > 0:
                 membership_request_url = (
@@ -1128,8 +1141,10 @@ class MembershipAlertsView(APIView):
     def _get_conference_applications(self, user):
         conference_application_requests = []
         admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(user)
-        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
-        for admined_group in admined_groups:
+        admined_groups_with_conference_applications = CosinnusConference.objects.filter(
+            pk__in=admined_group_ids, conference_applications__status__in=APPLICATION_STATES_PENDING
+        ).distinct()
+        for admined_group in admined_groups_with_conference_applications:
             pending_ids = CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
             if len(pending_ids) > 0:
                 conference_application_icon = (

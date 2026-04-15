@@ -972,6 +972,8 @@ APPLICATION_WAITLIST = 3
 APPLICATION_ACCEPTED = 4
 APPLICATION_DECLINED = 5
 
+APPLICATION_STATES_PENDING = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST]
+
 APPLICATION_STATES = [
     (APPLICATION_INVALID, pgettext_lazy('a conference application status', 'Invalid')),
     (APPLICATION_SUBMITTED, pgettext_lazy('a conference application status', 'Submitted')),
@@ -1013,7 +1015,7 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
     def pending_current(self):
         """Returns all pending applications with conference to_date in the future"""
         now = timezone.now()
-        pending = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST]
+        pending = APPLICATION_STATES_PENDING
         return (
             self.active()
             .filter(conference__to_date__gte=now)
