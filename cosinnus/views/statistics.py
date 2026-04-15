@@ -12,7 +12,7 @@ from django.db.models.fields import DateField
 from django.db.models.functions.datetime import TruncBase, TruncDay, TruncMonth, TruncWeek, TruncYear
 from django.http import HttpResponseRedirect
 from django.utils.formats import localize
-from django.utils.timezone import now
+from django.utils.timezone import now, get_default_timezone
 from django.utils.translation import gettext as _
 from django.views.generic.edit import FormView
 
@@ -262,6 +262,8 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     """
     define metrics to be gathered as list items using helper functions
     - params from_date and to_date are datetime objects to make filtering querysets easier
+    @param from_date: timezone aware datetime
+    @param to_date: timezone aware datetime
     :return: list of metric-data as dicts
     """
 
@@ -500,6 +502,14 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
             # include all objects in filter queries with datetime-fields
             from_date: datetime = context['form'].initial['from_date']
             to_date: datetime = context['form'].initial['to_date']
+            
+            # convert request param datetimes to default server timezone aware datetimes
+            # Note: we're not using user profile timezones so the statistics are output as the same for every user,
+            #   to avoid confusion
+            tz = get_default_timezone()
+            from_date = from_date.astimezone(tz)
+            to_date = to_date.astimezone(tz)
+            
             context.update({'statistics': _get_statistics(from_date, to_date)})
         return context
 
