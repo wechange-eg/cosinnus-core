@@ -18,6 +18,19 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.8.0': {
+        'datetime': datetime(2026, 6, 1, tzinfo=timezone.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.8.0'),
+        'short_text': _('This update includes a django framework update and several improvements and fixes:'),
+        'full_text': [
+            _(
+                '- Updated the backend codebase to Python 3.12 and the Django framework to version 5 for security '
+                'fixes and improvements.\n'
+                '- Fixed a bug where event polls where being shown on the map when filtering for an event time range\n'
+                '- TODO add more!\n',
+            )
+        ],
+    },
     '2.7.10': {
         'datetime': datetime(2026, 3, 31, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.10'),
