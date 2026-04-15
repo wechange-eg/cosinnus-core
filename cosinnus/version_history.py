@@ -26,7 +26,8 @@ UPDATES = {
             _(
                 '- Updated the backend codebase to Python 3.12 and the Django framework to version 5 for security '
                 'fixes and improvements.\n'
-                '- Fixed a bug where event polls where being shown on the map when filtering for an event time range\n'
+                '- Fixed a bug where event polls where being shown on the map when filtering for an event time range.\n'
+                '- Added many database optimisations to improve the loading speed of most pages.'
                 '- TODO add more!\n',
             )
         ],
