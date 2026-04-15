@@ -2311,7 +2311,9 @@ class CosinnusGroupInviteToken(models.Model):
         self._token = self.token
 
     def get_absolute_url(self):
-        return get_domain_for_portal(self.portal) + reverse('cosinnus:group-invite-token', kwargs={'token': self.token})
+        return get_domain_for_portal(self.portal_id) + reverse(
+            'cosinnus:group-invite-token', kwargs={'token': self.token}
+        )
 
 
 class CosinnusPermanentRedirect(models.Model):

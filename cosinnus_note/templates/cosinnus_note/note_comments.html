@@ -67,7 +67,7 @@
                                             {% comment %} Force the URL of the POST to remain on this site because of CSRF checks, but
                                                           force the cosinnus group resolution to check the group of this portal {% endcomment %}
                                             <form id="delete_comment_form_{{ comment.pk }}" action="{% group_url 'cosinnus:note:comment-delete' group=comment.note.group pk=comment.pk force_local_domain="True" %}" method="post" class="form-horizontal">
-                                                {% csrf_token %}{% cosinnus_cross_portal_token comment.note.group.portal %}
+                                                {% csrf_token %}{% cosinnus_cross_portal_token comment.note.group.portal_id %}
                                                 <a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#delete_comment_form_{{ comment.pk }}').submit();} return false;" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
                                             </form>
                                         </span>
@@ -86,7 +86,7 @@
             	{% comment %} Force the URL of the POST to remain on this site because of CSRF checks, but
             				  force the cosinnus group resolution to check the group of this portal {% endcomment %}
                 <form action="{% group_url 'cosinnus:note:comment' group=note.group note_slug=note.slug force_local_domain="True" %}" method="post" class="form-horizontal">
-                    {% csrf_token %}{% cosinnus_cross_portal_token note.group.portal %}
+                    {% csrf_token %}{% cosinnus_cross_portal_token note.group.portal_id %}
             
                     <div type="button" class="{{ button_classes }}">
                         <ul class="media-list">
