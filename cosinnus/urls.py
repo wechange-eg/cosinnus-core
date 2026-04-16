@@ -783,7 +783,7 @@ if settings.COSINNUS_V3_FRONTEND_ENABLED:
         urlpatterns += [
             path(
                 'setup/profile/',
-                TemplateView.as_view(template_name='premium_info_page.html'),
+                TemplateView.as_view(template_name='cosinnus/common/404.html'),
                 name='v3-frontend-setup-profile',
             ),
         ]
