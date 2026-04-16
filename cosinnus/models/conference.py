@@ -253,10 +253,10 @@ class CosinnusConferenceSettings(models.Model):
             # find and return conference settings if attached to our current object
             conference_settings = None
             try:
-                conference_settings = obj.conference_settings_assignments.all()[0]
+                conference_settings = obj.conference_settings_assignments.first()
             except Exception as e:
                 if settings.DEBUG:
-                    logger.warn(f'DEBUG warning: {type(obj)} has no conference_settings_assignments. {e}')
+                    logger.warning(f'DEBUG warning: {type(obj)}:{obj.pk} has no conference_settings_assignments. {e}')
             if conference_settings:
                 setting_obj = conference_settings
 
