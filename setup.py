@@ -136,7 +136,7 @@ setup(
         'ecdsa==0.18.0',
         'fcm-django==2.2.1',
         'geopy==2.4.1',
-        'icalendar==7.0.3',  # TODO check updated
+        'icalendar==7.0.3',
         'jsonfield==3.1.0',
         'l18n==2021.3',
         'lxml==6.0.2',
@@ -157,15 +157,15 @@ setup(
         'tblib==3.0.0',  # for parallelized testing
         'python-dateutil==2.9.0.post0',
         'urllib3==2.6.3',
-        'rdflib==7.6.0',  # TODO: PY UPGRADE CHECK
+        'rdflib==7.6.0',
         'pymemcache==4.0.0',
-        'qrcode==8.2',  # TODO: PY UPGRADE CHECK
+        'qrcode==8.2',
         'Unidecode==0.4.21',
         'XlsxWriter==1.3.7',
         'django-cors-headers<3.11.0',
         'phonenumbers==8.13.28',
         # virus file scan validator
-        'clamd==1.0.2',  # TODO: not upgraded yet, but check! (has no updates anyways)
+        'clamd==1.0.2',
         # requirements for documentation
         'sphinx==7.1.2',
         # (dev requirements were moved to pyproject.toml dev-dependencies)
