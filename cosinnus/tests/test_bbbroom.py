@@ -11,11 +11,18 @@ from django.test import RequestFactory, TestCase
 
 import cosinnus_event
 from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
-from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
+from cosinnus.models import CosinnusGroup, CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.models.conference import CosinnusConferenceSettings
 from cosinnus.utils import bigbluebutton as bbb_utils
 from cosinnus.views.bbb_room import BBBRoomMeetingView
+
+
+class ConferenceSettingsExistTest(TestCase):
+    def test_conference_settings_exist_for_portal(self):
+        conference_settings = CosinnusConferenceSettings.get_for_object(CosinnusPortal.get_current())
+        self.assertIsNotNone(conference_settings, 'CosinnusConferenceSettingsObject is missing for current Portal')
+
 
 if settings.COSINNUS_CONFERENCES_ENABLED:
 
