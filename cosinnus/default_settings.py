@@ -220,6 +220,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # Make build_absolute_uri use "https" behind the proxy. E.g. this is needed for the OpenID auto-discovery view.
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+    # Django 6.0 ready: make URLFields use HTTPS
+    FORMS_URLFIELD_ASSUME_HTTPS = True
+
     """ --------------- SESSION/COOKIES ---------------- """
 
     # use session storage for CSRF instead of cookie
@@ -228,7 +231,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # use session based CSRF cookies
     CSRF_COOKIE_AGE = None
     CSRF_TRUSTED_ORIGINS = [f'https://*.{project_settings["COSINNUS_PORTAL_URL"]}']
-    
+
     # Cookie settings. We will let cookies expire browser-session-based for anonymous users, and keep them
     # for 90 days for logged in users
     SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -470,7 +473,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         env('WECHANGE_COSINNUS_CLOUD_PASSWORD', default=''),
     )
     COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN = env('WECHANGE_COSINNUS_CLOUD_API_TOKEN', default='')
-    
+
     # prometheus
     PROMETHEUS_METRIC_NAMESPACE = f'portal_{project_settings["COSINNUS_PORTAL_NAME"]}'
 
