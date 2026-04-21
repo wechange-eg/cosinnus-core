@@ -101,6 +101,13 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
             )
         return queryset
 
+    def get_object(self):
+        event = super().get_object()
+        # check that the event belongs to the group referenced in the url
+        if event.group_id != self.group.id:
+            raise NotFound()
+        return event
+
     def _process_action(self, request, partial=False):
         """
         Generic helper to handle viewset actions using the serializer set in get_serializer_class.
