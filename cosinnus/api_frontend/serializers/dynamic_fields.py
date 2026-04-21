@@ -196,12 +196,13 @@ class CosinnusDynamicFieldsSerializerMixin:
             # validate and convert data type
             try:
                 field_value = formfield.to_python(field_value)
+                field_not_submitted = field_name not in dynamic_field_attr_dict
                 # skip non-required, empty fields
                 emtpy_field_values = [None, '', False, []]
                 if field_value in emtpy_field_values and (
                     not field_options.required
-                    or (self.all_fields_optional and field_name not in dynamic_field_attr_dict)
-                    or (self.partial and not self.validate_required_on_partial_update)
+                    or (self.all_fields_optional and field_not_submitted)
+                    or (self.partial and not self.validate_required_on_partial_update and field_not_submitted)
                 ):
                     continue
                 formfield.validate(field_value)
