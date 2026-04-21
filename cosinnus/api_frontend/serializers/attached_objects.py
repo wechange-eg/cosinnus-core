@@ -130,6 +130,13 @@ class CosinnusAttachFileSerializer(serializers.Serializer):
         instance.attached_objects.add(attached_object)
         return instance
 
+    def to_representation(self, instance):
+        """
+        Handle rendering of the serializer data if called by the API logic.
+        Just return an empty dict as this Serializer is only for attaching files.
+        """
+        return {}
+
 
 class CosinnusDeleteAttachedFileSerializer(serializers.Serializer):
     """
