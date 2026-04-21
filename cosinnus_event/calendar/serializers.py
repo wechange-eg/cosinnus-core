@@ -241,14 +241,6 @@ class CosinnusCalendarEventSerializer(
         complete_validated_data = validated_data.copy()
         # get nested media tag data
         media_tag_data = validated_data.pop('media_tag', {})
-        # set group and creator
-        validated_data.update(
-            {
-                'group': self.context['group'],
-                'creator': self.context['request'].user,
-                'state': Event.STATE_SCHEDULED,
-            }
-        )
         if not instance:
             # create event
             validated_data.update(
