@@ -384,7 +384,13 @@ def get_groupfolder_groups(folder_id: int):
             auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
         )
     )
-    return response.data and response.data.get('groups', {}).keys() or None
+    groupfolder_groups = []
+    if response.data and 'groups' in response.data:
+        groups = response.data.get('groups')
+        # NOTE: NC returns an empy list if the folder has no groups and a dict (name, id) otherwise.
+        if groups and isinstance(groups, dict):
+            groupfolder_groups = groups.keys()
+    return groupfolder_groups
 
 
 def add_group_access_for_folder(group_id: str, folder_id: int) -> bool:
