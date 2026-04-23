@@ -8,6 +8,7 @@ from urllib.parse import quote
 
 import requests
 from bs4 import BeautifulSoup
+from dateutil import parser
 from oauth2_provider.models import Application
 
 from cosinnus.conf import settings
@@ -383,7 +384,13 @@ def get_groupfolder_groups(folder_id: int):
             auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
         )
     )
-    return response.data and response.data.get('groups', {}).keys() or None
+    groupfolder_groups = []
+    if response.data and 'groups' in response.data:
+        groups = response.data.get('groups')
+        # NOTE: NC returns an empy list if the folder has no groups and a dict (name, id) otherwise.
+        if groups and isinstance(groups, dict):
+            groupfolder_groups = groups.keys()
+    return groupfolder_groups
 
 
 def add_group_access_for_folder(group_id: str, folder_id: int) -> bool:
@@ -495,6 +502,38 @@ def files_search(
             data=utf8_encode(body),
         )
     )
+
+
+def get_group_folder_last_modified(groupfolder_name, timeout=settings.COSINNUS_CLOUD_NEXTCLOUD_REQUEST_TIMEOUT):
+    """Returns the last-modified timestamp of a group folder."""
+    last_modified = None
+    url = f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/remote.php/dav/files/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/{quote(groupfolder_name)}/'  # noqa
+    body = """\
+<?xml version="1.0" encoding="UTF-8"?>
+<d:propfind xmlns:d="DAV:" xmlns:oc="http://owncloud.org/ns" xmlns:nc="http://nextcloud.org/ns">
+  <d:prop>
+    <d:getlastmodified/>
+  </d:prop>              
+</d:propfind>"""
+    # We need just the last modified of the group folder itself
+    headers = WEBDAV_HEADERS.copy()
+    headers['Depth'] = '0'
+    response_text = _webdav_response_or_raise(
+        requests.request(
+            method='PROPFIND',
+            url=url,
+            auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+            headers=headers,
+            timeout=timeout,
+            data=utf8_encode(body),
+        )
+    )
+    soup = BeautifulSoup(response_text, 'xml')
+    last_modified_xml = soup.find('d:getlastmodified')
+    if last_modified_xml:
+        last_modified_string = last_modified_xml.get_text()
+        last_modified = parser.parse(last_modified_string)
+    return last_modified
 
 
 def list_group_folder_files(groupfolder_name, user=None):

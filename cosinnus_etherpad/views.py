@@ -264,8 +264,23 @@ class EtherpadHybridListView(
         return super(EtherpadHybridListView, self).get(request, *args, **kwargs)
 
     def form_valid(self, form):
+        etherpad_type = int(self.request.POST.get('etherpad_type', 0))
+
+        if getattr(settings, 'COSINNUS_ETHERPAD_ETHERCALC_READONLY', False) and etherpad_type == 1:
+            message_ethercalc_readonly = _(
+                'You can no longer create spreadsheets here, as the feature is technically outdated.\n'
+                'However, you can still open and edit existing spreadsheets.'
+            )
+            if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
+                message_ethercalc_readonly += '\n\n{}'.format(
+                    _('We recommend using the spreadsheet feature in Nextcloud.')
+                )
+
+            messages.error(self.request, message_ethercalc_readonly)
+            return self.form_invalid(form)
+
         # manually set the type of Etherpad or Ethercalc
-        form.instance.set_pad_type(int(self.request.POST.get('etherpad_type', 0)))
+        form.instance.set_pad_type(etherpad_type)
 
         try:
             # only commit changes to the database iff the etherpad has been created

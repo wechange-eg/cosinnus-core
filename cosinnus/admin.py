@@ -67,6 +67,11 @@ from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_event.models import Comment as EventComment
+from cosinnus_marketplace.models import Comment as OfferComment
+from cosinnus_note.models import Comment as NoteComment
+from cosinnus_poll.models import Comment as PollComment
+from cosinnus_todo.models import Comment as TodoComment
 
 logger = logging.getLogger('cosinnus')
 
@@ -321,6 +326,48 @@ class MembershipInline(admin.StackedInline):
     extra = 0
 
 
+class ProjectScheduledForDeletionAtFilter(admin.SimpleListFilter):
+    """Will show groups that are scheduled for deletion (or not)"""
+
+    title = _('Scheduled for Deletion?')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'groupscheduledfordeletion'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(scheduled_for_deletion_at__exact=None)
+        if self.value() == 'no':
+            return queryset.filter(scheduled_for_deletion_at__exact=None)
+
+
+class ProjectInactivityNotificationSentFilter(admin.SimpleListFilter):
+    """Will show projects where notification were sent about the pending deletion due to inactivity."""
+
+    title = _('Inactivity Notification Sent?')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'groupinactivitynotificationsent'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(inactivity_notification_sent_at__exact=None)
+        if self.value() == 'no':
+            return queryset.filter(inactivity_notification_sent_at__exact=None)
+
+
 class CosinnusProjectAdmin(admin.ModelAdmin):
     actions = [
         'convert_to_society',
@@ -348,6 +395,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'portal',
         'public',
         'is_active',
+        ProjectScheduledForDeletionAtFilter,
+        ProjectInactivityNotificationSentFilter,
     )
     search_fields = (
         'name',
@@ -360,6 +409,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'last_modified',
         'is_premium_currently',
         'attached_objects',
+        'last_activity',
+        'inactivity_notification_sent_at',
     ]
     raw_id_fields = ('parent',)
     exclude = [
@@ -806,6 +857,7 @@ class UserProfileInline(admin.StackedInline):
         'deletion_triggered_by_self',
         '_is_guest',
         'guest_access_object',
+        'inactivity_notification_sent_at',
     )
     show_change_link = True
     view_on_site = False
@@ -978,6 +1030,27 @@ class UserScheduledForDeletionAtFilter(admin.SimpleListFilter):
 _useradmin_excluded_list_filter = ['groups', 'is_staff']
 
 
+class UserInactivityNotificationSentFilter(admin.SimpleListFilter):
+    """Will show users that were notified on about the pending deletion due to inactivity."""
+
+    title = _('Inactivity Notification Sent?')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'usersinactivitynotificationsent'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.exclude(cosinnus_profile__inactivity_notification_sent_at__exact=None)
+        if self.value() == 'no':
+            return queryset.filter(cosinnus_profile__inactivity_notification_sent_at__exact=None)
+
+
 class UserAdmin(DjangoUserAdmin):
     PERMISSION_FIELDS = ('is_active', 'is_superuser', 'is_staff')
 
@@ -1056,8 +1129,9 @@ class UserAdmin(DjangoUserAdmin):
         'date_joined',
         UserHasLoggedInFilter,
         UserToSAcceptedFilter,
-        UserScheduledForDeletionAtFilter,
         EmailVerifiedFilter,
+        UserScheduledForDeletionAtFilter,
+        UserInactivityNotificationSentFilter,
         IsGuestFilter,
     ]
     search_fields = ['username', 'first_name', 'last_name', 'email', 'cosinnus_profile__dynamic_fields']
@@ -1113,7 +1187,7 @@ class UserAdmin(DjangoUserAdmin):
         return False
 
     def deactivate_users(self, request, queryset):
-        from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
+        from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion
 
         count = 0
         for user in queryset:
@@ -1148,7 +1222,7 @@ class UserAdmin(DjangoUserAdmin):
         instantly_delete_user.short_description = _('(DEBUG ONLY) DELETE user instantly (TAKE CARE!)')
 
     def reactivate_users(self, request, queryset):
-        from cosinnus.views.profile import reactivate_user
+        from cosinnus.views.profile_deletion import reactivate_user
 
         count = 0
         for user in queryset:
@@ -1179,7 +1253,8 @@ class UserAdmin(DjangoUserAdmin):
                     base_taggable_object_models.append(model)
             return base_taggable_object_models
 
-        models_to_hide_content = _get_registered_base_taggable_models() + [CosinnusIdea]
+        models_to_hide_content = _get_registered_base_taggable_models()
+        models_to_delete_content = [CosinnusIdea, EventComment, NoteComment, TodoComment, PollComment, OfferComment]
 
         # TODO: move this function to views/profile_deletion.py once the changes from 'dsgvo-deletion' PR are in!
         from cosinnus.models.tagged import BaseTagObject
@@ -1187,9 +1262,13 @@ class UserAdmin(DjangoUserAdmin):
         def _deactivate_or_hide_all_user_content(user):
             """Deactivate all groups a user is the only admin of,
             and hide all content from other groups and non-group-content ('visibility: only me').
+
+            Note: Ideas and Comments cannot be hidden and are deleted immediately!
+
             @return: returns a tuple of ints (num_deactivated_groups, hidden_content)"""
             deactivated_groups = 0
             hidden_content = 0
+            deleted_content = 0
             for group in CosinnusGroup.objects.get_for_user(user):
                 admins = CosinnusGroupMembership.objects.get_admins(group=group)
                 if [user.pk] == admins:
@@ -1202,10 +1281,7 @@ class UserAdmin(DjangoUserAdmin):
             # taggable objects (notes, events, ...) and ideas
             for model_to_hide in models_to_hide_content:
                 for object_to_hide in model_to_hide.objects.filter(creator=user):
-                    if model_to_hide == CosinnusIdea:
-                        # delete ideas directly (because they cannot be hidden as "only me")
-                        object_to_hide.delete()
-                    elif hasattr(object_to_hide, 'media_tag') and getattr(object_to_hide, 'media_tag', None):
+                    if hasattr(object_to_hide, 'media_tag') and getattr(object_to_hide, 'media_tag', None):
                         # set visibility to user-only for basetaggablemodels, let deletion be handled by the
                         # 30-day later user cleanup. this way admin errors aren't immediately fatal.
                         media_tag = object_to_hide.media_tag
@@ -1217,16 +1293,31 @@ class UserAdmin(DjangoUserAdmin):
                         post_delete.send(sender=model_to_hide, instance=object_to_hide, origin=object_to_hide)
                     # remove object from search index (always, just to be sure)
                     object_to_hide.remove_index()
-            return deactivated_groups, hidden_content
+
+            # delete some objects directly (because they cannot be hidden as "only me")
+            for model_to_delete in models_to_delete_content:
+                for object_to_delete in model_to_delete.objects.filter(creator=user):
+                    # remove object from search index if possible
+                    try:
+                        object_to_delete.remove_index()
+                    except AttributeError:
+                        # not all models have this
+                        pass
+
+                    object_to_delete.delete()
+                    deleted_content += 1
+
+            return deactivated_groups, hidden_content, deleted_content
 
         user_count = 0
         deactivated_groups_count = 0
         hidden_content_count = 0
+        deleted_content_count = 0
         for user in queryset:
             if check_user_superuser(user):
                 self.message_user(request, 'Skipping banning a user that is an admin! Careful who you select!')
                 continue
-            _group_count, _hidden_count = _deactivate_or_hide_all_user_content(user)
+            _group_count, _hidden_count, _deleted_count = _deactivate_or_hide_all_user_content(user)
             with elastic_threading_disabled():
                 deactivate_user_and_mark_for_deletion(user)
                 if hasattr(user, 'cosinnus_profile') and getattr(user, 'cosinnus_profile', None):
@@ -1234,16 +1325,19 @@ class UserAdmin(DjangoUserAdmin):
                     profile.remove_index()
             deactivated_groups_count += _group_count
             hidden_content_count += _hidden_count
+            deleted_content_count += _deleted_count
             user_count += 1
         message = _(
             '%(user_count)d User account(s) were deactivated successfully. \n'
             '%(deactivated_groups_count)d groups and projects have been deactivated. \n'
             '%(hidden_content_count)d contents have been set invisible. \n'
+            '%(deleted_content_count)d contents have been deleted immediately. \n'
             'The user(s) will be deleted after 30 days.'
         ) % {
             'user_count': user_count,
             'deactivated_groups_count': deactivated_groups_count,
             'hidden_content_count': hidden_content_count,
+            'deleted_content_count': deleted_content_count,
         }
         self.message_user(request, message)
 

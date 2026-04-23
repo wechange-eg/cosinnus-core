@@ -306,6 +306,64 @@ msgstr "%(event)s (Status unbekannt)"
 msgid "%(export_title)s finished"
 msgstr "%(export_title)s abgeschlossen"
 
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid "%(group_type)s %(group_name)s has been deactivated and will be deleted"
+msgstr "%(group_type)s %(group_name)s wurde deaktiviert und wird gelöscht"
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid ""
+"%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of inactivity.\n"
+"\n"
+"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+msgstr ""
+"%(group_type)s %(group_name)s wurde gerade deaktiviert nach %(deactivation_after)s Inaktivität.\n"
+"\n"
+"Deaktivierte/s Gruppe/Projekt wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid ""
+"%(group_type)s %(group_name)s has just been deactivated at the instigation of the admin %(deleted_by)s.\n"
+"\n"
+"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+msgstr ""
+"%(group_type)s %(group_name)s wurde gerade durch Administrator/in %(deleted_by)s deaktiviert.\n"
+"\n"
+"Deaktivierte/s Gruppe/Projekt wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid ""
+"%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity and then permanently deleted. This will happen in %(deactivation_in)s.\n"
+"\n"
+"If you do not wish for the group/project to be deactivated, just create some content there.\n"
+"\n"
+"If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s."
+msgstr ""
+"%(group_type)s %(group_name)s wird nach %(deactivation_after)s seit der letzten Aktivität deaktiviert und dann endgültig gelöscht. Das passiert in %(deactivation_in)s.\n"
+"\n"
+"Wenn du nicht möchtest dass die Gruppe/das Project gelöscht wird, erstelle einen Inhalt dort.\n"
+"\n"
+"Wenn eine frühere Löschen gewünscht ist, kann die Gruppe/das Project unter %(delete_group_url)s gelöscht werden."
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid ""
+"%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
+"\n"
+"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+msgstr ""
+"%(group_type)s %(group_name)s nach %(deactivation_after)s seit Deaktivierung gelöscht.\n"
+"\n"
+"Deaktivierte/s Gruppe/Projekt wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid "%(group_type)s %(group_name)s will be deleted due to inactivity"
+msgstr "%(group_type)s %(group_name)s wird wegen Inaktivität gelöscht"
+
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/single_offer_detailed.html
 #, python-format
@@ -1454,6 +1512,11 @@ msgstr "%(team_name)s - Mitglieder"
 
 #: cosinnus/views/group.py
 #, python-format
+msgid "%(team_name)s has been deactivated and will be deleted in 30 days!"
+msgstr "%(team_name)s wurde deaktiviert und wird in 30 Tagen gelöscht!"
+
+#: cosinnus/views/group.py
+#, python-format
 msgid ""
 "%(team_name)s was deactivated successfully!\n"
 "\n"
@@ -1479,12 +1542,9 @@ msgid ""
 "%(user_count)d User account(s) were deactivated successfully. \n"
 "%(deactivated_groups_count)d groups and projects have been deactivated. \n"
 "%(hidden_content_count)d contents have been set invisible. \n"
+"%(deleted_content_count)d contents have been deleted immediately. \n"
 "The user(s) will be deleted after 30 days."
 msgstr ""
-"%(user_count)d Benutzerkonten wurden erfolgreich deaktiviert. \n"
-"%(deactivated_groups_count)d Gruppen und Projekte wurden erfolgreich deaktivier. \n"
-"%(hidden_content_count)d Inhalte wurden unsichtbar gemacht. \n"
-"Die Benutzerkonten werden nach 30 Tagen gelöscht."
 
 #: cosinnus/admin.py
 #, python-format
@@ -1854,6 +1914,10 @@ msgstr "--- NICHTS (Vererbt) ---"
 msgid "1 %(object)s was deleted successfully"
 msgstr "1 %(object)s wurde erfolgreich gelöscht"
 
+#: cosinnus/conf.py
+msgid "1 year"
+msgstr "1 Jahr"
+
 #: cosinnus/models/wagtail_models.py
 msgid "1-Column Dashboard Page"
 msgstr "1-spaltige Dashboard Seite"
@@ -1886,6 +1950,18 @@ msgstr "1/4 + 1/2 + 1/4"
 msgid "1/4 + 1/4 + 1/2"
 msgstr "1/4 + 1/4 + 1/2"
 
+#: cosinnus/conf.py
+msgid "10 years"
+msgstr "10 Jahre"
+
+#: cosinnus/conf.py
+msgid "2 days"
+msgstr "2 Tage"
+
+#: cosinnus/conf.py
+msgid "2 weeks"
+msgstr "2 Wochen"
+
 #: cosinnus/models/wagtail_models.py
 msgid "2-Column Dashboard Page"
 msgstr "2-spaltige Dashboard Seite"
@@ -1913,6 +1989,10 @@ msgstr "3-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
 #: cosinnus/models/wagtail_blocks.py
 msgid "4 Random Projects Widget"
 msgstr "4 zufällige Projekte-Widget"
+
+#: cosinnus/conf.py
+msgid "6 months"
+msgstr "6 Monate"
 
 #: cosinnus/models/wagtail_blocks.py
 msgid "8 Random Projects Widget"
@@ -2760,6 +2840,16 @@ msgstr "Admins"
 msgid "Advanced BBB-Room Tools"
 msgstr "Erweiterte BBB-Raum Tools"
 
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
+#, python-format
+msgid "Affected Group: [%(group_name)s](%(group_url)s)"
+msgstr "Betroffene Gruppe: [%(group_name)s](%(group_url)s)"
+
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
+#, python-format
+msgid "Affected Project: [%(group_name)s](%(group_url)s)"
+msgstr "Betroffenes Projekt: [%(group_name)s](%(group_url)s)"
+
 #: cosinnus/models/group.py
 msgid "Affordable and Clean Energy"
 msgstr "Saubere und bezahlbare Energie"
@@ -3308,6 +3398,10 @@ msgstr "Teilnehmenden-Daten-Statistiken"
 msgid "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats."
 msgstr "Achtung: Die sichtbare Aktualisierung der freien Plätze ist noch in Bearbeitung. Daher empfehlen wir, die Begrenzung der einzelnen Kaffeetische nicht zu nutzen, um den virtuellen Kaffee nicht bei der Suche nach freien Plätzen kalt werden zu lassen."
 
+#: cosinnus/views/profile_deletion.py
+msgid "Attention: Your profile has been deactivated and will be deleted due to inactivity"
+msgstr "Achtung: Dein Profil wurde wegen Inaktivität deaktiviert und wird gelöscht."
+
 #: cosinnus_notifications/models.py
 msgid "Audience"
 msgstr "Publikum"
@@ -3598,6 +3692,60 @@ msgstr "Durchsuchen..."
 msgid "Business and Law"
 msgstr "Arbeit und Recht"
 
+#: cosinnus/trans/group.py
+msgid ""
+"By clicking on the button below, this conference and all content posted there will be irrevocably deleted.\n"
+"\n"
+"The pads, news, uploaded files and other content created by you and the members will no longer remain on the website. The channel created on Rocket Chat will be deleted. Profile direct messages with other members will remain. If you still wish to receive content, you can do so now by downloading the content from the relevant pages.\n"
+"\n"
+"The conference will first be deactivated and then completely removed from the platform. After 30 days and only then will it be permanently deleted from our database. The account may be stored in our backup systems for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion.\n"
+"\n"
+"During this 30-day period, the URL of your conference is reserved and cannot be used to register a new conference."
+msgstr ""
+"Wenn du auf den Button unten klickst, werden diese Tagung und alle darin veröffentlichten Inhalte unwiderruflich gelöscht.\n"
+"\n"
+"Die von dir und den Mitgliedern erstellten Pads, Nachrichten, hochgeladenen Dateien und sonstigen Inhalte bleiben nicht mehr auf der Website erhalten. Der auf Rocket Chat erstellte Kanal wird gelöscht. Direktnachrichten mit anderen Mitgliedern bleiben erhalten. Wenn du die Inhalte weiterhin erhalten möchtest, kannst du sie jetzt von den entsprechenden Seiten herunterladen.\n"
+"\n"
+"Die Tagung wird zunächst deaktiviert und anschließend vollständig von der Plattform entfernt. Erst nach 30 Tagen wird sie endgültig aus unserer Datenbank gelöscht. Das Konto kann bis zu 6 Monate lang in unseren Backup-Systemen gespeichert bleiben. Sollte dies zu lange sein, wende dich bitte an den Support dieser Plattform, um eine sofortige Löschung zu veranlassen.\n"
+"\n"
+"Während dieses Zeitraums von 30 Tagen ist die URL der Tagung reserviert und kann nicht zur Registrierung einer neuen Tagung verwendet werden."
+
+#: cosinnus/trans/group.py
+msgid ""
+"By clicking on the button below, this group and all content posted there will be irrevocably deleted.\n"
+"\n"
+"The pads, news, uploaded files and other content created by you and the members will no longer remain on the website. The channel created on Rocket Chat will be deleted. Profile direct messages with other members will remain. If you still wish to receive content, you can do so now by downloading the content from the relevant pages.\n"
+"\n"
+"The group will first be deactivated and then completely removed from the platform. After 30 days and only then will it be permanently deleted from our database. The account may be stored in our backup systems for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion.\n"
+"\n"
+"During this 30-day period, the URL of your group is reserved and cannot be used to register a new group."
+msgstr ""
+"Wenn du auf den Button unten klickst, werden diese Gruppe und alle darin veröffentlichten Inhalte unwiderruflich gelöscht.\n"
+"\n"
+"Die von dir und den Mitgliedern erstellten Pads, Nachrichten, hochgeladenen Dateien und sonstigen Inhalte bleiben nicht mehr auf der Website erhalten. Der auf Rocket Chat erstellte Kanal wird gelöscht. Direktnachrichten mit anderen Mitgliedern bleiben erhalten. Wenn du die Inhalte weiterhin erhalten möchtest, kannst du sie jetzt von den entsprechenden Seiten herunterladen.\n"
+"\n"
+"Die Gruppe wird zunächst deaktiviert und anschließend vollständig von der Plattform entfernt. Erst nach 30 Tagen wird sie endgültig aus unserer Datenbank gelöscht. Das Konto kann bis zu 6 Monate lang in unseren Backup-Systemen gespeichert bleiben. Sollte dies zu lange sein, wende dich bitte an den Support dieser Plattform, um eine sofortige Löschung zu veranlassen.\n"
+"\n"
+"Während dieses Zeitraums von 30 Tagen ist die URL der Gruppe reserviert und kann nicht zur Registrierung einer neuen Gruppe verwendet werden."
+
+#: cosinnus/trans/group.py
+msgid ""
+"By clicking on the button below, this project and all content posted there will be irrevocably deleted.\n"
+"\n"
+"The pads, news, uploaded files and other content created by you and the members will no longer remain on the website. The channel created on Rocket Chat will be deleted. Profile direct messages with other members will remain. If you still wish to receive content, you can do so now by downloading the content from the relevant pages.\n"
+"\n"
+"The project will first be deactivated and then completely removed from the platform. After 30 days and only then will it be permanently deleted from our database. The account may be stored in our backup systems for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion.\n"
+"\n"
+"During this 30-day period, the URL of your project is reserved and cannot be used to register a new project."
+msgstr ""
+"Wenn du auf den Button unten klickst, werden dieses Projekt und alle darin veröffentlichten Inhalte unwiderruflich gelöscht.\n"
+"\n"
+"Die von dir und den Mitgliedern erstellten Pads, Nachrichten, hochgeladenen Dateien und sonstigen Inhalte bleiben nicht mehr auf der Website erhalten. Der auf Rocket Chat erstellte Kanal wird gelöscht. Direktnachrichten mit anderen Mitgliedern bleiben erhalten. Wenn du die Inhalte weiterhin erhalten möchtest, kannst du sie jetzt von den entsprechenden Seiten herunterladen.\n"
+"\n"
+"Das Projekt wird zunächst deaktiviert und anschließend vollständig von der Plattform entfernt. Erst nach 30 Tagen wird sie endgültig aus unserer Datenbank gelöscht. Das Konto kann bis zu 6 Monate lang in unseren Backup-Systemen gespeichert bleiben. Sollte dies zu lange sein, wende dich bitte an den Support dieser Plattform, um eine sofortige Löschung zu veranlassen.\n"
+"\n"
+"Während dieses Zeitraums von 30 Tagen ist die URL des Projekt reserviert und kann nicht zur Registrierung eines neuen Projekts verwendet werden."
+
 #: cosinnus/templates/cosinnus/user/userprofile_delete.html
 msgid "By clicking the button below, you will irrevocably delete your user account, profile and personal information from this site."
 msgstr "Indem du auf den Button unten klickst, werden dein gesamtes Benutzer/innen-Konto, Benutzer/innen-Profil und deine persönlichen Informationen unwiderruflich gelöscht."
@@ -3794,16 +3942,16 @@ msgid "Check this to create an empty break event that shows up in the agenda and
 msgstr "Wähle dies aus, um eine leere Veranstaltung in der Agenda darzustellen"
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
-msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Tagung direkt beitreten kann."
+msgid "Check this to generate an invite link which allows a registered user to become a member of the conference directly. When enabled, the link will be displayed to conference admins on the members page."
+msgstr "Wähle dies aus, um einen Einladungslink zu erstellen, mit dem jeder der Tagung direkt beitreten kann. Wenn aktiviert, wird der Link den Tagungs-Admins auf der Mitglieder-Seite angezeigt."
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
-msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Gruppe direkt beitreten kann."
+msgid "Check this to generate an invite link which allows a registered user to become a member of the group directly. When enabled, the link will be displayed to group admins on the members page."
+msgstr "Wähle dies aus, um einen Einladungslink zu erstellen, mit dem jeder der Gruppe direkt beitreten kann. Wenn aktiviert, wird der Link den Gruppen-Admins auf der Mitglieder-Seite angezeigt."
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
-msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder dem Projekt direkt beitreten kann."
+msgid "Check this to generate an invite link which allows a registered user to become a member of the project directly. When enabled, the link will be displayed to project admins on the members page."
+msgstr "Wähle dies aus, um einen Einladungslink zu erstellen, mit dem jeder dem Projekt direkt beitreten kann. Wenn aktiviert, wird der Link den Projekt-Admins auf der Mitglieder-Seite angezeigt."
 
 #: cosinnus/templates/cosinnus/conference/conference_room_form.html
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
@@ -4833,8 +4981,12 @@ msgid "Create idea"
 msgstr "Idee erstellen"
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Create invite token"
-msgstr "Einladungstoken erstellen"
+msgid "Create invite link"
+msgstr "Einladungslink erstellen"
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+msgid "Create link"
+msgstr "Link erstellen"
 
 #: cosinnus/trans/group.py
 msgid "Create new Conference"
@@ -4865,11 +5017,6 @@ msgstr "Neues Projekt anlegen"
 #: cosinnus/templates/cosinnus/administration/user_create_form.html
 msgid "Create new User"
 msgstr "Benutzerkonto erstellen"
-
-#
-#: cosinnus/templates/cosinnus/group/group_form.html
-msgid "Create token"
-msgstr "Token erstellen"
 
 #: cosinnus/models/wagtail_blocks.py
 msgid "Create-Project or Group Button"
@@ -5136,6 +5283,7 @@ msgstr "Zusätzliche Optionen hinzufügen."
 #: cosinnus/templates/cosinnus/common/delete_element_modal.html
 #: cosinnus/templates/cosinnus/conference/conference_room_list_object.html
 #: cosinnus/templates/cosinnus/fields/avatar_field.html
+#: cosinnus/templates/cosinnus/group/group_schedule_delete.html
 #: cosinnus/templates/cosinnus/leftnav_button_editable_folder.html
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/list_object.html
 #: cosinnus/templates/cosinnus/user_import/user_import_archived_detail.html
@@ -5183,6 +5331,10 @@ msgstr "Konto löschen"
 msgid "Delete Archived User Import Entry"
 msgstr "Archivierten Benutzerimport-Eintrag löschen"
 
+#: cosinnus/trans/group.py
+msgid "Delete Conference"
+msgstr "Tagung löschen"
+
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_detail.html
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_edit.html
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_list.html
@@ -5193,6 +5345,10 @@ msgstr "Pad löschen"
 #: cosinnus_event/templates/cosinnus_event/single_event_detailed.html
 msgid "Delete Event"
 msgstr "Veranstaltung Löschen"
+
+#: cosinnus/trans/group.py
+msgid "Delete Group"
+msgstr "Gruppe löschen"
 
 #: cosinnus/templates/cosinnus/idea/idea_form.html
 msgid "Delete Idea"
@@ -5213,6 +5369,10 @@ msgstr "Premiumblock löschen"
 #: cosinnus/templates/cosinnus/user/userprofile_delete.html
 msgid "Delete Profile"
 msgstr "Profil löschen"
+
+#: cosinnus/trans/group.py
+msgid "Delete Project"
+msgstr "Projekt löschen"
 
 #
 #: cosinnus/templates/cosinnus/conference/recorded_meeting_list_object.html
@@ -6789,6 +6949,11 @@ msgstr "Exportiere Projekt “%(team_name)s”"
 #: cosinnus_event/templates/cosinnus_event/event_list.html
 msgid "Export event feed"
 msgstr "Feed für Veranstaltungen"
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
+msgid "Extend Videoconference Pro"
+msgstr "Videokonferenz Pro verlängern"
 
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/user_dashboard_announcement_form.html
 msgid "External Link for a \"Read more\" link"
@@ -8568,6 +8733,11 @@ msgstr "Ich möchte den Inhalt Liken"
 msgid "I wish to be a Moderator for this portal"
 msgstr "Ich möchte Moderator für dieses Portal sein"
 
+#: cosinnus/templates/cosinnus/group/group_schedule_delete.html
+#, python-format
+msgid "I wish to delete „%(title)s“."
+msgstr "I möchte „%(title)s“ löschen."
+
 #: cosinnus_notifications/templates/cosinnus_notifications/notifications_form.html
 msgid "I wish to receive notification emails"
 msgstr "Ich möchte Benachrichtigungs-Emails erhalten"
@@ -8864,6 +9034,11 @@ msgstr "Wenn du die Registrierung akzeptieren möchtest, klicke folgenden Link"
 msgid "If you would like to change your email address, you can do it here:"
 msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
 
+#: cosinnus/templates/cosinnus/group/group_form.html
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
+msgid "If you would like to extend the period, you are welcome to make a new booking using the following form:"
+msgstr "Wenn du den Zeitraum verlängern möchtest, kannst du gerne über das folgende Formular erneut eine Buchung vornehmen:"
+
 #: cosinnus/models/user_import.py
 msgid "Ignored/Failed Items"
 msgstr "Ignorierte/Fehlgeschlagene Einträge"
@@ -9009,6 +9184,14 @@ msgstr "In welchen Projekt- oder Gruppenkalendern soll die Tagung angezeigt werd
 msgid "Inactive"
 msgstr "Inaktiv"
 
+#: cosinnus/admin.py
+msgid "Inactivity Notification Sent?"
+msgstr "Inaktivitäts-Benachrichtigung versendet?"
+
+#: cosinnus/models/group.py cosinnus/models/profile.py
+msgid "Inactivity notification sent at"
+msgstr "Inaktivitäts-Benachrichtigung versendet am"
+
 #: cosinnus_message/templates/postman/inbox.html
 #: cosinnus_message/templates/postman/menu.html
 #: cosinnus_message/templates/postman/view.html
@@ -9066,7 +9249,7 @@ msgstr "Industrie, Innovation und Infrastruktur"
 msgid "Info"
 msgstr "Information"
 
-#: cosinnus/views/profile.py
+#: cosinnus/views/profile_deletion.py
 msgid "Information about the deletion of your user account"
 msgstr "Informationen zur Löschung deines Benutzer/innen-Kontos"
 
@@ -9515,6 +9698,10 @@ msgstr "Letzter Zugriff"
 #: cosinnus_etherpad/dashboard.py
 msgid "Last accessed Etherpads"
 msgstr "Zuletzt bearbeitete Pads"
+
+#: cosinnus/models/group.py
+msgid "Last activity"
+msgstr "Letzte Aktivität"
 
 #: cosinnus/models/bbb_room.py
 msgid "Last create-call parameters"
@@ -13360,13 +13547,21 @@ msgstr "Scanne den unten stehenden QR-Code."
 msgid "Scheduled"
 msgstr "Geplant"
 
-#: cosinnus/models/profile.py
+#: cosinnus/models/group.py cosinnus/models/profile.py
 msgid "Scheduled for Deletion at"
 msgstr "Zur Löschung geplant am"
+
+#: cosinnus/models/group.py
+msgid "Scheduled for Deletion by"
+msgstr "Zur Löschung geplant druch"
 
 #: cosinnus/admin.py
 msgid "Scheduled for Deletion?"
 msgstr "Zur Löschung geplant?"
+
+#: cosinnus/views/group.py
+msgid "Scheduled for deletion."
+msgstr "Zur Löschung geplant."
 
 #: cosinnus/api_frontend/views/navigation.py
 #: cosinnus/templates/cosinnus/administration/user_list.html
@@ -14684,6 +14879,46 @@ msgstr "Die Aktion, die du versucht hast auszuführen, ist für Gastkonten nicht
 msgid "The administrators' profiles are not visible due to their privacy settings."
 msgstr "Die Profile der Administrator/innen sind aufgrund ihrer Sichtbarkeitseinstellungen nicht sichtbar."
 
+#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification_subj.txt
+#, python-format
+msgid "The booked period for Video Conference Pro for the group \"%(group_name)s\" ends after %(last_day)s (%(days_left)s days)."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für deine Gruppe \"%(group_name)s\" endet nach dem %(last_day)s (%(days_left)s Tage)."
+
+#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification_subj.txt
+#, python-format
+msgid "The booked period for Video Conference Pro for the group \"%(group_name)s\" has ended."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für deine Gruppe \"%(group_name)s\" ist abgelaufen."
+
+#: cosinnus/templates/cosinnus/mail/group_premium_expires_soon_notification_subj.txt
+#, python-format
+msgid "The booked period for Video Conference Pro for the project \"%(group_name)s\" ends after %(last_day)s (%(days_left)s days)."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt \"%(group_name)s\" endet nach dem %(last_day)s (%(days_left)s Tage)."
+
+#: cosinnus/templates/cosinnus/mail/group_premium_expired_notification_subj.txt
+#, python-format
+msgid "The booked period for Video Conference Pro for the project \"%(group_name)s\" has ended."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt \"%(group_name)s\" ist abgelaufen."
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "The booked period for Video Conference Pro for this group ends after %(last_day)s (%(days_left)s days)"
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für deine Gruppe endet nach dem %(last_day)s (%(days_left)s Tage)"
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "The booked period for Video Conference Pro for this group has ended on %(end_date)s."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für deine Gruppe ist am %(end_date)s abgelaufen."
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "The booked period for Video Conference Pro for this project ends after %(last_day)s (%(days_left)s days)"
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt endet nach dem %(last_day)s (%(days_left)s Tage)"
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "The booked period for Video Conference Pro for this project has ended on %(end_date)s."
+msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt ist am %(end_date)s abgelaufen."
+
 #: cosinnus_event/views.py cosinnus_marketplace/views.py cosinnus_poll/views.py
 msgid "The complete request can only be sent via POST!"
 msgstr "The complete request can only be sent via POST!"
@@ -14763,8 +14998,12 @@ msgid "The content of the field above will will be shown, unless overriden by a 
 msgstr "Der Inhalt des obigen Feldes wird angezeigt wenn er nicht anhand von einer bestimmten Übersetzung (unten) überschrieben wird."
 
 #: cosinnus/templates/cosinnus/group/group_form.html
-msgid "The current token is: "
-msgstr "Der aktuelle Token ist: "
+msgid "The current link is: "
+msgstr "Der aktuelle Link ist: "
+
+#: cosinnus/models/group.py
+msgid "The date this group is scheduled for deletion. Will be deleted after this date (ONLY IF the group is set to inactive!)"
+msgstr "Der Zeitpunkt, zu dem die Löschung dieser Gruppe geplant ist. Die Löschung wird nach diesem Datum vorgenommen (NUR WENN die Gruppe auf inaktiv gestellt ist!)"
 
 #: cosinnus/models/profile.py
 msgid "The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)"
@@ -14950,6 +15189,11 @@ msgstr "Die Einladung wurde erfolgreich gelöscht."
 #: cosinnus/views/user.py
 msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
 msgstr "Das Einladungs-Token, das du benutzt hast, scheint nicht zu existieren. Bitte wende dich an die verantwortliche Person, um einen gültigen Link zu erhalten!"
+
+#: cosinnus/views/group.py
+#, python-format
+msgid "The join request from \"%(username)s\" was declined successfully."
+msgstr "Die Beitrittsanfrage von “%(username)s” wurde erfolgreich abgelehnt."
 
 #: cosinnus_event/models.py
 #: cosinnus_event/templates/cosinnus_event/conference_event_form.html
@@ -15721,6 +15965,11 @@ msgstr "Diese Funktion ist für diese Tagung nicht aktiviert."
 msgid "This function is not enabled for this group type."
 msgstr "Diese Funktion ist für diesen Gruppentyp nicht aktiviert."
 
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "This group currently has Videoconference Pro booked until %(end_date)s"
+msgstr "Diese Gruppe hat Videokonferenz Pro aktuell bis zum %(end_date)s gebucht"
+
 #: cosinnus/views/facebook_integration.py
 msgid "This group does not have a Facebook Fan-Page associated with it!"
 msgstr "Diese Gruppe hat keine Facebook Fan-Seite zugewiesen!"
@@ -15886,6 +16135,11 @@ msgstr "Die Umfrage ist archiviert und kann nicht mehr bearbeitet werden!"
 #: cosinnus/views/profile.py cosinnus_message/views.py
 msgid "This profile is not visible to you due to its privacy settings."
 msgstr "Dieses Profil ist aufgrund dessen Sichbarkeitseinstellungen für dich nicht sichtbar."
+
+#: cosinnus/templates/cosinnus/group/group_form.html
+#, python-format
+msgid "This project currently has Videoconference Pro booked until %(end_date)s"
+msgstr "Dieses Projekt hat Videokonferenz Pro aktuell bis zum %(end_date)s gebucht"
 
 #. Translators: __INCLUDE_JS_PO__
 #: cosinnus/templates/cosinnus/universal/tiles/tile-detail-projects.html
@@ -17267,6 +17521,7 @@ msgid "Warning"
 msgstr "Achtung!"
 
 #: cosinnus/templates/cosinnus/group/group_activate_or_deactivate.html
+#: cosinnus/templates/cosinnus/group/group_schedule_delete.html
 #: cosinnus/templates/cosinnus/user/userprofile_delete.html
 msgid "Warning!"
 msgstr "Achtung!"
@@ -17358,6 +17613,11 @@ msgstr "Da uns ein umfangreicher Schutz euer Daten sowie an die neue Rechtslage 
 #: cosinnus/templates/modal_box_updated_tos.html
 msgid "We prioritise the protection of your data, which is reflected in our privacy policy and terms of services. We encourage you to read and accept the terms."
 msgstr "Ein umfangreicher Schutz euer Daten sowie an die aktuelle Rechtslage angepasste Nutzungsbedingungen liegen uns am Herzen. Wir bitten euch die AGBs und Datenschutzbedingungen anzuschauen und zu akzeptieren."
+
+#: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_list.html
+#: cosinnus_etherpad/views.py
+msgid "We recommend using the spreadsheet feature in Nextcloud."
+msgstr "Wir empfehlen, die Tabellenfunktion in der Nextcloud zu nutzen."
 
 #: cosinnus/templates/cosinnus/conference/conference_application_form.html
 msgid "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference."
@@ -17903,6 +18163,18 @@ msgstr ""
 "\n"
 "Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann das Projekt durch dich und alle anderen Projektadministrator/innen wieder aktiviert werden."
 
+#: cosinnus/trans/group.py
+msgid "You are about to delete this conference from this website."
+msgstr "Du bist dabei diese Tagung von dieser Webseite zu löschen."
+
+#: cosinnus/trans/group.py
+msgid "You are about to delete this group from this website."
+msgstr "Du bist dabei diese Gruppe von dieser Webseite zu löschen."
+
+#: cosinnus/trans/group.py
+msgid "You are about to delete this project from this website."
+msgstr "Du bist dabei dieses Projekt von dieser Webseite zu löschen."
+
 #: cosinnus/templates/cosinnus/user/userprofile_delete.html
 msgid "You are about to delete your user account from the site!"
 msgstr "Du bist dabei dein Benutzer/innen-Profil von dieser Webseite zu löschen!"
@@ -18264,6 +18536,15 @@ msgstr "Du kannst nicht registrierte Menschen einladen, der Plattform sofort bei
 msgid "You can migrate existing Todos %(here_link)s."
 msgstr "Du kann bestehende Aufgaben %(here_link)s migrieren."
 
+#: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_list.html
+#: cosinnus_etherpad/views.py
+msgid ""
+"You can no longer create spreadsheets here, as the feature is technically outdated.\n"
+"However, you can still open and edit existing spreadsheets."
+msgstr ""
+"Tabellen können hier nicht mehr erstellt werden, da die Funktion technisch veraltet ist.\n"
+"Bestehende Tabellen können aber noch geöffnet und bearbeitet werden."
+
 #: cosinnus_message/templates/cosinnus_message/attachments_form.html
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Du kannst Dateien und Bilder nur anhängen, wenn du Mitglied im Forum bist. Du kannst hier beitreten:"
@@ -18375,8 +18656,8 @@ msgstr "Sie können dieses Widget nicht auf ihr Dashboard platzieren."
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
-msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der/die einzig übrige Administrator/in."
+msgid "You cannot remove \"%(username)s\" from this group/project. Only one admin left."
+msgstr "Sie können “%(username)s” nicht von diesem Projekt / dieser Gruppe entfernen. Er/sie ist der/die einzig übrige Administrator/in."
 
 #: cosinnus/views/group.py
 #, python-format
@@ -18572,13 +18853,13 @@ msgstr "Deine Mitgliedsschaftsanfrage bei %(site_name)s!"
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
-msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag bearbeitet."
+msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as an administrator responds to your request."
+msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Administrator den Antrag bearbeitet."
 
 #: cosinnus/views/group.py
 #, python-format
-msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
-msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhälst eine E-Mail, sobald ein Projektadministrator den Antrag bearbeitet."
+msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as an administrator responds to your request."
+msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhältst eine E-Mail, sobald ein Administrator den Antrag bearbeitet."
 
 #: cosinnus/views/authentication.py
 msgid "You have successfully disabled two-factor authentication for your account."
@@ -18847,6 +19128,7 @@ msgstr "Sie erhalten diese E-Mail weil sie eine Passwortänderung ihres Benutzer
 msgid "You've matched!"
 msgstr "Ihr wurdet gematcht!"
 
+#: cosinnus/templates/cosinnus/mail/group_premium_expiration_notification.html
 #: cosinnus/views/user.py
 #, python-format
 msgid "Your %(site_name)s Team"
@@ -18939,6 +19221,10 @@ msgstr "Dein Benutzerkonto \"%(user)s\" wurde erfolgreich registriert. Willkomme
 #, python-format
 msgid "Your account is currently connected with the Facebook account \"%(name)s\". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account."
 msgstr "Dein Benutzerkonto ist gerade mit dem Facebook-Konto \"%(name)s\". verbunden. Willst du dein Facebook-Konto wirklich trennen? Dies zieht auch alle Zugriffsrechte zurück, die du uns auf dein Facebook-Konto erteilt hast."
+
+#: cosinnus/views/profile_deletion.py
+msgid "Your account will be deleted due to inactivity"
+msgstr "Dein Benutzerkonto wird wegen Inaktivität gelöscht"
 
 #: cosinnus/cosinnus_notifications.py
 msgid "Your admin status for this team was revoked"
@@ -19075,6 +19361,33 @@ msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings 
 msgid "Your email address was successfully changed to:"
 msgstr "Deine E-Mail Adresse wurde erfolgreich geändert:"
 
+#: cosinnus/views/profile_deletion.py
+#, python-format
+msgid ""
+"Your entire account, profile and personal information will be deactivated and irrevocably deleted in %(deactivation_in)s.\n"
+"\n"
+"If you do not wish for you account to be deactivated, just log in once.\n"
+"\n"
+"Your pads, news, uploaded files and other content will remain on the website. However, your name will no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your profile direct messages will be deleted, but content within discussions and channels will remain. If you still want to delete content from yourself, you can do this now by deleting the content on the relevant pages.\n"
+"\n"
+"Your profile will first be deactivated and completely removed from the platform. After deactivation, it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n"
+"\n"
+"The account may be stored in our backup systems for up to 6 months after deletion. If this is too long for you, please contact the support team of this platform for immediate deletion.\n"
+"\n"
+"During this %(deleted_after_days)s-day period after deletion, the e-mail address of your account is reserved and cannot be used to register a new account."
+msgstr ""
+"Dein gesamtes Benutzerkonto, Profil und persönlichen Daten werden in %(deactivation_in)s deaktiviert und unwiderruflich gelöscht.\n"
+"\n"
+"Wenn du nicht möchtst, dass dein Benutzerkonto deaktiviert wird, melde dich sich einfach einmal an.\n"
+"\n"
+"Deine Pads, Neuigkeiten, hochgeladenen Dateien und sonstigen Inhalte bleiben auf der Website erhalten. Dein Name wird jedoch nicht mehr angezeigt und dein Profil wird nicht mehr mit den Inhalten verknüpft. In Rocket Chat werden deine Direktnachrichten gelöscht, die Inhalte in Diskussionen und Kanälen bleiben jedoch erhalten. Wenn du dennoch eigene Inhalte löschen möchtest, kannst du dies jetzt tun, indem du die Inhalte auf den entsprechenden Seiten löschst.\n"
+"\n"
+"Dein Profil wird zunächst deaktiviert und vollständig von der Plattform entfernt. Nach der Deaktivierung wird es nach %(deleted_after_days)s Tagen aus unserer Datenbank gelöscht und erst dann endgültig entfernt.\n"
+"\n"
+"Dein Benutzerkonto kann nach der Löschung bis zu 6 Monate lang in unseren Backup-Systemen gespeichert bleiben. Sollte dies zu lange sein, wende dich bitte an den Support dieser Plattform, um eine sofortige Löschung zu veranlassen.\n"
+"\n"
+"In den %(deleted_after_days)s Tagen nach der Löschung bleibt die E-Mail-Adresse deines Benutzerkontos reserviert und kann nicht zur Registrierung eines neuen Benutzerkontos verwendet werden."
+
 #: cosinnus/trans/group.py
 msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
 msgstr "Euer Eintrag im Mitwirk-O-Mat verlinkt auf die Microsite eurer Gruppe. Daher solltet ihr darauf achten, dass diese aktuell, informativ und ansprechend gestaltet ist. Ihr könnt von eurer Microsite auch auf eine externe Website verlinken."
@@ -19105,11 +19418,6 @@ msgstr "Deine Einladung zu Projekt/Gruppe \"%(name)s\" wurde erfolgreich zurück
 #, python-format
 msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
 msgstr "Deine Einladung an Benutzer/in \"%(username)s\" wurde erfolgreich zurückgezogen."
-
-#: cosinnus/views/group.py
-#, python-format
-msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgstr "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zurückgezogen."
 
 #: cosinnus/views/group.py
 #, python-format
@@ -19272,7 +19580,17 @@ msgstr "Dein Passwort wurde erfolgreich gesetzt! Du kannst dich nun mit deiner E
 msgid "Your phone number is only visible for registered users"
 msgstr "Deine Telefonnummer ist nur für registrierte Benutzer/innen sichtbar"
 
-#: cosinnus/views/profile.py
+#: cosinnus/views/profile_deletion.py
+msgid ""
+"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in 30 days.\n"
+"\n"
+"If you want to keep your profile, please contact the portal administrators. Please note that the response time by e-mail may take longer in some cases."
+msgstr ""
+"Das zu dieser E-Mail-Adresse gehörende Profil auf unserer Plattform wurde von uns deaktiviert. Dein Benutzerkonto wird in 30 Tagen vollständig gelöscht.\n"
+"\n"
+"Wenn du dein Profil behalten möchten, wende dich sich bitte an die Portaladministratoren. Bitte beachte, dass die Antwort per E-Mail in manchen Fällen etwas länger dauern kann."
+
+#: cosinnus/views/profile_deletion.py
 msgid ""
 "Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
 "\n"
@@ -20202,6 +20520,17 @@ msgstr "Ja"
 #~ msgid "%(team_name)s was deactivated successfully!"
 #~ msgstr "%(team_name)s wurde erfolgreich deaktiviert!"
 
+#~ msgid ""
+#~ "%(user_count)d User account(s) were deactivated successfully. \n"
+#~ "%(deactivated_groups_count)d groups and projects have been deactivated. \n"
+#~ "%(hidden_content_count)d contents have been set invisible. \n"
+#~ "The user(s) will be deleted after 30 days."
+#~ msgstr ""
+#~ "%(user_count)d Benutzerkonten wurden erfolgreich deaktiviert. \n"
+#~ "%(deactivated_groups_count)d Gruppen und Projekte wurden erfolgreich deaktivier. \n"
+#~ "%(hidden_content_count)d Inhalte wurden unsichtbar gemacht. \n"
+#~ "Die Benutzerkonten werden nach 30 Tagen gelöscht."
+
 #~ msgid "%s - Events"
 #~ msgstr "%s - Veranstaltungen"
 
@@ -20358,6 +20687,15 @@ msgstr "Ja"
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "Ein Workshop mit dem Slug '{}' existiert nicht."
 
+#~ msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
+#~ msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Tagung direkt beitreten kann."
+
+#~ msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
+#~ msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Gruppe direkt beitreten kann."
+
+#~ msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
+#~ msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder dem Projekt direkt beitreten kann."
+
 #~ msgid "Check this to prevent public viewing of the event's description"
 #~ msgstr "Wähle dies aus, um die öffentliche Anzeige der Veranstaltungsbeschreibung zu verhindern"
 
@@ -20405,6 +20743,13 @@ msgstr "Ja"
 
 #~ msgid "Cosinnus conferences"
 #~ msgstr "Tagungen"
+
+#~ msgid "Create invite token"
+#~ msgstr "Einladungstoken erstellen"
+
+#
+#~ msgid "Create token"
+#~ msgstr "Token erstellen"
 
 #~ msgid "Created by"
 #~ msgstr "Erstellt durch"
@@ -21073,6 +21418,9 @@ msgstr "Ja"
 #~ msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
 #~ msgstr "Der CSV-Upload löst die Erstellung der Konten und Konto-Workshop-Mitgliedschaften aus und führt zu einem direkten CSV-Download mit den neu erstellten Konten und Passwörtern. Die Passwörter werden erst beim Anlegen des Kontos mit einbezogen. Bitte aktualisiere die Seite nach dem Download."
 
+#~ msgid "The current token is: "
+#~ msgstr "Der aktuelle Token ist: "
+
 #~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
 #~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
 
@@ -21314,11 +21662,23 @@ msgstr "Ja"
 #~ msgid "You can't change your application anymore."
 #~ msgstr "Du kannst deine Anmeldung nicht mehr ändern."
 
+#~ msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
+#~ msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der/die einzig übrige Administrator/in."
+
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Du hast deine E-Mail-Adresse geändert. Wir schicken dir eine E-Mail an diese Adresse, die einen Bestätigungslink enthält. Bis du diesen Link klickst wird dein Profil weiter unter der alten E-Mail-Adresse geführt!"
 
 #~ msgid "You have not uploaded an avatar yet"
 #~ msgstr "Du hast noch kein avatar hochgeladen"
+
+#~ msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a  administrator responds to your request."
+#~ msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Administrator den Antrag bearbeitet."
+
+#~ msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
+#~ msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag bearbeitet."
+
+#~ msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as a administrator responds to your request."
+#~ msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhältst eine E-Mail, sobald ein Administrator den Antrag bearbeitet."
 
 #~ msgid "You have to consent to being recorded to join this meeting."
 #~ msgstr "Du musst zustimmen, aufgezeichnet zu werden, um am Meeting teilzunehmen."
@@ -21348,6 +21708,9 @@ msgstr "Ja"
 
 #~ msgid "Your invitation to organization “%(name)s” was declined successfully."
 #~ msgstr "Deine Einladung zu Organisation “%(name)s” wurde abgelehnt."
+
+#~ msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+#~ msgstr "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zurückgezogen."
 
 #~ msgid "Your match with %(sender_name)s has just been established!"
 #~ msgstr "Deine Übereinstimmung mit %(sender_name)s wurde soeben festgestellt!"

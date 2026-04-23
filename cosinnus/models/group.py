@@ -9,6 +9,7 @@ import re
 import shutil
 from builtins import object
 from collections import OrderedDict
+from typing import Optional
 
 import six
 from annoying.functions import get_object_or_None
@@ -894,6 +895,15 @@ class CosinnusBaseGroup(
 
     GROUP_MODEL_TYPE = TYPE_PROJECT
 
+    GROUP_PREMIUM_STATE_NONE = 0
+    """There is no active or expired booking."""
+    GROUP_PREMIUM_STATE_ACTIVE_FAR = 1
+    """There is an active booking with expiration far in the future."""
+    GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON = 2
+    """There is an active booking with expiration coming soon."""
+    GROUP_PREMIUM_STATE_EXPIRED = 3
+    """The booking has expired. There is no active booking. Expiration date may not yet be set."""
+
     NO_VIDEO_CONFERENCE = 0
     BBB_MEETING = 1
     FAIRMEETING = 2
@@ -1150,7 +1160,8 @@ class CosinnusBaseGroup(
     is_premium_permanently = models.BooleanField(
         _('Conference is permanently premium'),
         help_text=(
-            'If enabled, this will always be in premium mode, independent of any bookings. WARNING: changing this may '
+            'DOES NOT AFFECT GROUPS/PROJECTS: If enabled, this will always be in premium mode, '
+            'independent of any bookings. WARNING: changing this may '
             '(depending on the event/conference/portal settings) cause new meeting connections to use the new server, '
             'even for ongoing meetings on the old server, essentially splitting a running meeting in two!'
         ),
@@ -1202,6 +1213,36 @@ class CosinnusBaseGroup(
         _('Use invite token'),
         default=False,
         help_text='If enabled, allows the creation of invite tokens in non-admin area',
+    )
+    last_activity = models.DateTimeField(
+        _('Last activity'),
+        default=None,
+        blank=True,
+        null=True,
+    )
+    inactivity_notification_sent_at = models.DateTimeField(
+        _('Inactivity notification sent at'),
+        default=None,
+        blank=True,
+        null=True,
+    )
+    scheduled_for_deletion_at = models.DateTimeField(
+        _('Scheduled for Deletion at'),
+        default=None,
+        blank=True,
+        null=True,
+        help_text=_(
+            'The date this group is scheduled for deletion. Will be deleted after this date (ONLY IF the group is set '
+            'to inactive!)'
+        ),
+    )
+    deletion_triggered_by = models.ForeignKey(
+        get_user_model(),
+        verbose_name=_('Scheduled for Deletion by'),
+        related_name='+',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
     )
 
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
@@ -1577,6 +1618,88 @@ class CosinnusBaseGroup(
         return False
 
     @property
+    def group_premium_feature_enabled(self) -> bool:
+        """
+        Return `True` if group premium feature is enabled for this group.
+        Does not indicate, that premium-features are currently active.
+        """
+        if not self.group_is_group and not self.group_is_project:
+            return False
+        if not getattr(settings, 'COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS', False):
+            return False
+        if not getattr(settings, 'COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED', False):
+            return False
+
+        return True
+
+    @property
+    def group_premium_state(self):
+        """
+        Returns the current premium-state for this group.
+        """
+        if not self.group_premium_feature_enabled:
+            return self.GROUP_PREMIUM_STATE_NONE
+
+        if not self.enable_user_premium_choices_until and not self.group_premium_expired_on:
+            return self.GROUP_PREMIUM_STATE_NONE
+
+        # we are either ACTIVE or EXPIRED
+
+        # we stay in ACTIVE state until the cron-job deletes `enable_user_premium_choices_until`
+        if self.enable_user_premium_choices_until:
+            if self.group_premium_days_left > getattr(settings, 'COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS', 14):
+                return self.GROUP_PREMIUM_STATE_ACTIVE_FAR
+            else:
+                return self.GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON
+
+        # we are no longer active, so we are expired
+        return self.GROUP_PREMIUM_STATE_EXPIRED
+
+    @property
+    def group_premium_expired_on(self) -> Optional[datetime.date]:
+        """
+        Returns date, when the premium-state was disabled.
+        Returns `None` if
+        - premium is active or
+        - expiry date is unknown or
+        - premium restrictions are disabled
+        """
+        if not self.group_premium_feature_enabled:
+            return None
+
+        if self.group_premium_days_left:
+            return None
+
+        date_str = self.settings.get('premium_features_expired_on')
+        if date_str:
+            return datetime.date.fromisoformat(date_str)
+
+        return None
+
+    @property
+    def group_premium_days_left(self) -> int:
+        """
+        Returns number of days left for premium (`1` means "Today is the last day.")
+        Returns `0` if
+        - enable_user_premium_choices_until is in the past or
+        - premium is inactive or
+        - premium restrictions are disabled
+        """
+
+        if not self.group_premium_feature_enabled:
+            return 0
+
+        last_day = self.enable_user_premium_choices_until
+        if not last_day:
+            return 0
+
+        today = now().date()
+        if today > last_day:
+            return 0
+
+        return (last_day - today).days + 1
+
+    @property
     def conference_members(self):
         """
         Returns a User QS of *AUTO-INVITED* (!) conference member accounts of this group if it is a conference,
@@ -1701,17 +1824,24 @@ class CosinnusBaseGroup(
     def clear_cache(self):
         self._clear_cache(group=self)
 
-    def get_all_objects_for_group(self):
-        """Returns in a list all the BaseTaggableObjects for this group"""
+    def get_registered_base_taggable_models(self):
+        """Returns a list of all registered models that inherit from BaseTaggableObjects."""
         from cosinnus.models.tagged import BaseTaggableObjectModel
 
-        base_taggable_objects = []
+        base_taggable_object_models = []
         for full_model_name in attached_object_registry:
             app_label, model_name = full_model_name.split('.')
             model = apps.get_model(app_label, model_name)
             if issubclass(model, BaseTaggableObjectModel):
-                instances = model.objects.filter(group=self)
-                base_taggable_objects.extend(list(instances))
+                base_taggable_object_models.append(model)
+        return base_taggable_object_models
+
+    def get_all_objects_for_group(self):
+        """Returns in a list all the BaseTaggableObjects for this group"""
+        base_taggable_objects = []
+        for base_taggable_model in self.get_registered_base_taggable_models():
+            instances = base_taggable_model.objects.filter(group=self)
+            base_taggable_objects.extend(list(instances))
         return base_taggable_objects
 
     def remove_index_for_all_group_objects(self):
@@ -2499,7 +2629,7 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
 
     class UserGroupGuestAccessDeleteThread(CosinnusWorkerThread):
         def run(self):
-            from cosinnus.views.profile import delete_guest_user
+            from cosinnus.views.profile_deletion import delete_guest_user
 
             for user in get_user_model().objects.filter(id__in=user_ids):
                 try:
