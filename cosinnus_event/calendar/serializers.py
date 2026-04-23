@@ -136,7 +136,10 @@ class CosinnusCalendarEventSerializer(
     from_date = serializers.DateTimeField(required=True)
     to_date = serializers.DateTimeField(required=True)
     description = serializers.CharField(
-        source='note', required=settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED
+        source='note',
+        required=settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED,
+        allow_null=False if settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED else True,
+        allow_blank=False if settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED else True,
     )
     creator = CosinnusCalendarEventCreatorSerializer(read_only=True)
     can_edit = serializers.SerializerMethodField()
