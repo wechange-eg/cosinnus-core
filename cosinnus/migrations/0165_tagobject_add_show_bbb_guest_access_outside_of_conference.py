@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cosinnus', '0161_tagobject_add_location_type_and_external_video_conference_url'),
+        ('cosinnus', '0164_tagobject_add_location_type_and_external_video_conference_url'),
     ]
 
     operations = [

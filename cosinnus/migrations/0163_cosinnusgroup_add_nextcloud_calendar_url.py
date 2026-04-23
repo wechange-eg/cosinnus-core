@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cosinnus', '0159_mitwirkomatsettings_add_dynamicfields'),
+        ('cosinnus', '0162_group_activity_fields'),
     ]
 
     operations = [

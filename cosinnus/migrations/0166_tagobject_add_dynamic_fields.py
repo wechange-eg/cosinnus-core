@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cosinnus', '0162_tagobject_add_show_bbb_guest_access_outside_of_conference'),
+        ('cosinnus', '0165_tagobject_add_show_bbb_guest_access_outside_of_conference'),
     ]
 
     operations = [
