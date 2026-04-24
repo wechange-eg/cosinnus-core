@@ -139,7 +139,7 @@ setup(
         'icalendar==7.0.3',
         'jsonfield==3.1.0',
         'l18n==2021.3',
-        'lxml==6.0.2',
+        'lxml==6.1.0',
         'html5lib',
         'html2text==2016.9.19',
         'numpy==1.26.4',
