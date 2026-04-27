@@ -5292,8 +5292,8 @@ msgstr "Zusätzliche Optionen hinzufügen."
 #: cosinnus/templates/cosinnus/common/delete_element_modal.html
 #: cosinnus/templates/cosinnus/conference/conference_room_list_object.html
 #: cosinnus/templates/cosinnus/fields/avatar_field.html
-#: cosinnus/templates/cosinnus/idea/idea_form.html
 #: cosinnus/templates/cosinnus/group/group_schedule_delete.html
+#: cosinnus/templates/cosinnus/idea/idea_form.html
 #: cosinnus/templates/cosinnus/leftnav_button_editable_folder.html
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/list_object.html
 #: cosinnus/templates/cosinnus/user_import/user_import_archived_detail.html
