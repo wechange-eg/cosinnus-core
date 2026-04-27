@@ -581,6 +581,8 @@ class BBBRoom(models.Model):
         @param source_object: the source object from which the inheritance chain starts"""
         # add the source object's options from all inherited settings objects
         conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
+        if not isinstance(conference_settings, CosinnusConferenceSettings):
+            raise ValueError(f'CosinnusConferenceSettings not found for source_object: {str(source_object)}')
         # this is the merged params object containing the flattened hierarchy of inherited objects
         bbb_params = conference_settings.get_finalized_bbb_params()
         call_params = bbb_params.get(api_call_method, {})
