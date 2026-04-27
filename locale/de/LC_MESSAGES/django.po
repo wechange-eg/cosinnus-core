@@ -8644,6 +8644,9 @@ msgstr ""
 "- Es wurde ein Fehler behoben, durch den Aufgabenlisten nicht in die Deck-App migriert werden konnten, wenn eine Aufgabe einem gelöschten Benutzerkonto zugewiesen war.\n"
 "- Es wurde ein Fehler behoben, durch den das Deck bei einigen wenigen Gruppen und Projekten nicht initialisiert werden konnte, wodurch die Deck-App dort nicht genutzt werden konnte.\n"
 
+msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den der Nextcloud-Ordner einer Gruppe/eines Projekts nicht mehr zugänglich war, wenn die Cloud-App nach einer vorherigen Deaktivierung wieder aktiviert wurde.\n"
+
 msgid "- (Admin-Interface) Fixed a bug in the user administration interface that would cause a page error for some user profiles.\n"
 msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der auf manchen Benutzerprofilseiten zu einem Seitenfehler führte.\n"
 
