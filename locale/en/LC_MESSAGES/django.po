@@ -264,6 +264,50 @@ msgstr ""
 msgid "%(export_title)s finished"
 msgstr ""
 
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid "%(group_type)s %(group_name)s has been deactivated and will be deleted"
+msgstr ""
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid ""
+"%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of inactivity.\n"
+"\n"
+"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+msgstr ""
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid ""
+"%(group_type)s %(group_name)s has just been deactivated at the instigation of the admin %(deleted_by)s.\n"
+"\n"
+"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+msgstr ""
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid ""
+"%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity and then permanently deleted. This will happen in %(deactivation_in)s.\n"
+"\n"
+"If you do not wish for the group/project to be deactivated, just create some content there.\n"
+"\n"
+"If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s."
+msgstr ""
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid ""
+"%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
+"\n"
+"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+msgstr ""
+
+#: cosinnus/views/group_deletion.py
+#, python-format
+msgid "%(group_type)s %(group_name)s will be deleted due to inactivity"
+msgstr ""
+
 #: cosinnus_marketplace/templates/cosinnus_marketplace/list_object.html
 #: cosinnus_marketplace/templates/cosinnus_marketplace/single_offer_detailed.html
 #, python-format
@@ -1398,6 +1442,11 @@ msgstr "%(team_name)s - Members"
 
 #: cosinnus/views/group.py
 #, python-format
+msgid "%(team_name)s has been deactivated and will be deleted in 30 days!"
+msgstr ""
+
+#: cosinnus/views/group.py
+#, python-format
 msgid ""
 "%(team_name)s was deactivated successfully!\n"
 "\n"
@@ -1725,6 +1774,10 @@ msgstr ""
 msgid "1 %(object)s was deleted successfully"
 msgstr ""
 
+#: cosinnus/conf.py
+msgid "1 year"
+msgstr ""
+
 #: cosinnus/models/wagtail_models.py
 msgid "1-Column Dashboard Page"
 msgstr ""
@@ -1757,6 +1810,18 @@ msgstr ""
 msgid "1/4 + 1/4 + 1/2"
 msgstr ""
 
+#: cosinnus/conf.py
+msgid "10 years"
+msgstr ""
+
+#: cosinnus/conf.py
+msgid "2 days"
+msgstr ""
+
+#: cosinnus/conf.py
+msgid "2 weeks"
+msgstr ""
+
 #: cosinnus/models/wagtail_models.py
 msgid "2-Column Dashboard Page"
 msgstr ""
@@ -1783,6 +1848,10 @@ msgstr ""
 
 #: cosinnus/models/wagtail_blocks.py
 msgid "4 Random Projects Widget"
+msgstr ""
+
+#: cosinnus/conf.py
+msgid "6 months"
 msgstr ""
 
 #: cosinnus/models/wagtail_blocks.py
@@ -3192,6 +3261,10 @@ msgstr ""
 msgid "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats."
 msgstr ""
 
+#: cosinnus/views/profile_deletion.py
+msgid "Attention: Your profile has been deactivated and will be deleted due to inactivity"
+msgstr ""
+
 #: cosinnus_notifications/models.py
 msgid "Audience"
 msgstr ""
@@ -3479,6 +3552,39 @@ msgstr ""
 
 #: cosinnus/conf.py
 msgid "Business and Law"
+msgstr ""
+
+#: cosinnus/trans/group.py
+msgid ""
+"By clicking on the button below, this conference and all content posted there will be irrevocably deleted.\n"
+"\n"
+"The pads, news, uploaded files and other content created by you and the members will no longer remain on the website. The channel created on Rocket Chat will be deleted. Profile direct messages with other members will remain. If you still wish to receive content, you can do so now by downloading the content from the relevant pages.\n"
+"\n"
+"The conference will first be deactivated and then completely removed from the platform. After 30 days and only then will it be permanently deleted from our database. The account may be stored in our backup systems for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion.\n"
+"\n"
+"During this 30-day period, the URL of your conference is reserved and cannot be used to register a new conference."
+msgstr ""
+
+#: cosinnus/trans/group.py
+msgid ""
+"By clicking on the button below, this group and all content posted there will be irrevocably deleted.\n"
+"\n"
+"The pads, news, uploaded files and other content created by you and the members will no longer remain on the website. The channel created on Rocket Chat will be deleted. Profile direct messages with other members will remain. If you still wish to receive content, you can do so now by downloading the content from the relevant pages.\n"
+"\n"
+"The group will first be deactivated and then completely removed from the platform. After 30 days and only then will it be permanently deleted from our database. The account may be stored in our backup systems for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion.\n"
+"\n"
+"During this 30-day period, the URL of your group is reserved and cannot be used to register a new group."
+msgstr ""
+
+#: cosinnus/trans/group.py
+msgid ""
+"By clicking on the button below, this project and all content posted there will be irrevocably deleted.\n"
+"\n"
+"The pads, news, uploaded files and other content created by you and the members will no longer remain on the website. The channel created on Rocket Chat will be deleted. Profile direct messages with other members will remain. If you still wish to receive content, you can do so now by downloading the content from the relevant pages.\n"
+"\n"
+"The project will first be deactivated and then completely removed from the platform. After 30 days and only then will it be permanently deleted from our database. The account may be stored in our backup systems for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion.\n"
+"\n"
+"During this 30-day period, the URL of your project is reserved and cannot be used to register a new project."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/userprofile_delete.html
@@ -5015,6 +5121,7 @@ msgstr ""
 #: cosinnus/templates/cosinnus/conference/conference_room_list_object.html
 #: cosinnus/templates/cosinnus/fields/avatar_field.html
 #: cosinnus/templates/cosinnus/idea/idea_form.html
+#: cosinnus/templates/cosinnus/group/group_schedule_delete.html
 #: cosinnus/templates/cosinnus/leftnav_button_editable_folder.html
 #: cosinnus/templates/cosinnus/user_dashboard_announcement/list_object.html
 #: cosinnus/templates/cosinnus/user_import/user_import_archived_detail.html
@@ -5061,6 +5168,10 @@ msgstr ""
 msgid "Delete Archived User Import Entry"
 msgstr ""
 
+#: cosinnus/trans/group.py
+msgid "Delete Conference"
+msgstr ""
+
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_detail.html
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_edit.html
 #: cosinnus_etherpad/templates/cosinnus_etherpad/etherpad_list.html
@@ -5070,6 +5181,10 @@ msgstr "Delete Pad"
 
 #: cosinnus_event/templates/cosinnus_event/single_event_detailed.html
 msgid "Delete Event"
+msgstr ""
+
+#: cosinnus/trans/group.py
+msgid "Delete Group"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/idea/idea_form.html
@@ -5090,6 +5205,10 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/user/userprofile_delete.html
 msgid "Delete Profile"
+msgstr ""
+
+#: cosinnus/trans/group.py
+msgid "Delete Project"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/conference/recorded_meeting_list_object.html
@@ -8068,6 +8187,11 @@ msgstr ""
 msgid "I wish to be a Moderator for this portal"
 msgstr ""
 
+#: cosinnus/templates/cosinnus/group/group_schedule_delete.html
+#, python-format
+msgid "I wish to delete „%(title)s“."
+msgstr ""
+
 #: cosinnus_notifications/templates/cosinnus_notifications/notifications_form.html
 msgid "I wish to receive notification emails"
 msgstr ""
@@ -8526,6 +8650,14 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
+#: cosinnus/admin.py
+msgid "Inactivity Notification Sent?"
+msgstr ""
+
+#: cosinnus/models/group.py cosinnus/models/profile.py
+msgid "Inactivity notification sent at"
+msgstr ""
+
 #: cosinnus_message/templates/postman/inbox.html
 #: cosinnus_message/templates/postman/menu.html
 #: cosinnus_message/templates/postman/view.html
@@ -8583,7 +8715,7 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
-#: cosinnus/views/profile.py
+#: cosinnus/views/profile_deletion.py
 msgid "Information about the deletion of your user account"
 msgstr ""
 
@@ -9031,6 +9163,10 @@ msgstr ""
 
 #: cosinnus_etherpad/dashboard.py
 msgid "Last accessed Etherpads"
+msgstr ""
+
+#: cosinnus/models/group.py
+msgid "Last activity"
 msgstr ""
 
 #: cosinnus/models/bbb_room.py
@@ -12883,12 +13019,20 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
-#: cosinnus/models/profile.py
+#: cosinnus/models/group.py cosinnus/models/profile.py
 msgid "Scheduled for Deletion at"
+msgstr ""
+
+#: cosinnus/models/group.py
+msgid "Scheduled for Deletion by"
 msgstr ""
 
 #: cosinnus/admin.py
 msgid "Scheduled for Deletion?"
+msgstr ""
+
+#: cosinnus/views/group.py
+msgid "Scheduled for deletion."
 msgstr ""
 
 #: cosinnus/api_frontend/views/navigation.py
@@ -14303,6 +14447,10 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_form.html
 msgid "The current link is: "
+msgstr ""
+
+#: cosinnus/models/group.py
+msgid "The date this group is scheduled for deletion. Will be deleted after this date (ONLY IF the group is set to inactive!)"
 msgstr ""
 
 #: cosinnus/models/profile.py
@@ -16740,6 +16888,7 @@ msgid "Warning"
 msgstr ""
 
 #: cosinnus/templates/cosinnus/group/group_activate_or_deactivate.html
+#: cosinnus/templates/cosinnus/group/group_schedule_delete.html
 #: cosinnus/templates/cosinnus/user/userprofile_delete.html
 msgid "Warning!"
 msgstr ""
@@ -17367,6 +17516,18 @@ msgid ""
 "You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
 "\n"
 " Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator."
+msgstr ""
+
+#: cosinnus/trans/group.py
+msgid "You are about to delete this conference from this website."
+msgstr ""
+
+#: cosinnus/trans/group.py
+msgid "You are about to delete this group from this website."
+msgstr ""
+
+#: cosinnus/trans/group.py
+msgid "You are about to delete this project from this website."
 msgstr ""
 
 #: cosinnus/templates/cosinnus/user/userprofile_delete.html
@@ -18399,6 +18560,10 @@ msgstr ""
 msgid "Your account is currently connected with the Facebook account \"%(name)s\". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account."
 msgstr ""
 
+#: cosinnus/views/profile_deletion.py
+msgid "Your account will be deleted due to inactivity"
+msgstr ""
+
 #: cosinnus/cosinnus_notifications.py
 msgid "Your admin status for this team was revoked"
 msgstr ""
@@ -18520,6 +18685,22 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/user/user_change_email_pending.html
 msgid "Your email address was successfully changed to:"
+msgstr ""
+
+#: cosinnus/views/profile_deletion.py
+#, python-format
+msgid ""
+"Your entire account, profile and personal information will be deactivated and irrevocably deleted in %(deactivation_in)s.\n"
+"\n"
+"If you do not wish for you account to be deactivated, just log in once.\n"
+"\n"
+"Your pads, news, uploaded files and other content will remain on the website. However, your name will no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your profile direct messages will be deleted, but content within discussions and channels will remain. If you still want to delete content from yourself, you can do this now by deleting the content on the relevant pages.\n"
+"\n"
+"Your profile will first be deactivated and completely removed from the platform. After deactivation, it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n"
+"\n"
+"The account may be stored in our backup systems for up to 6 months after deletion. If this is too long for you, please contact the support team of this platform for immediate deletion.\n"
+"\n"
+"During this %(deleted_after_days)s-day period after deletion, the e-mail address of your account is reserved and cannot be used to register a new account."
 msgstr ""
 
 #: cosinnus/trans/group.py
@@ -18714,7 +18895,14 @@ msgstr ""
 msgid "Your phone number is only visible for registered users"
 msgstr ""
 
-#: cosinnus/views/profile.py
+#: cosinnus/views/profile_deletion.py
+msgid ""
+"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in 30 days.\n"
+"\n"
+"If you want to keep your profile, please contact the portal administrators. Please note that the response time by e-mail may take longer in some cases."
+msgstr ""
+
+#: cosinnus/views/profile_deletion.py
 msgid ""
 "Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
 "\n"

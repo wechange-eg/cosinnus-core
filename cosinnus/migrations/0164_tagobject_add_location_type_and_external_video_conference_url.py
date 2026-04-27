@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cosinnus', '0160_cosinnusgroup_add_nextcloud_calendar_url'),
+        ('cosinnus', '0163_cosinnusgroup_add_nextcloud_calendar_url'),
     ]
 
     operations = [

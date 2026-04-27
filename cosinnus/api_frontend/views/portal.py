@@ -738,4 +738,6 @@ class PortalTaggedDynamicFieldsView(PortalDynamicFieldsBaseView):
     tagged_model = None
 
     def get_dynamic_field_settings(self):
-        return settings.COSINNUS_TAGGED_EXTRA_FIELDS[self.tagged_model]
+        if not settings.COSINNUS_TAGGED_EXTRA_FIELDS:
+            return {}
+        return settings.COSINNUS_TAGGED_EXTRA_FIELDS.get(self.tagged_model, {})
