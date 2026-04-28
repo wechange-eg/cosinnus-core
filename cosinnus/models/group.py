@@ -1131,6 +1131,13 @@ class CosinnusBaseGroup(
         null=True,
         help_text='CalDAV URL of the nextcloud calendar for the group. Set after the calendar is created.',
     )
+    nextcloud_calendar_publish_url = models.URLField(
+        _('Nextcloud Group Calendar CalDAV Publish URL'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='CalDAV Publish URL of the nextcloud calendar for the group. Set after the calendar is created.',
+    )
 
     # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(

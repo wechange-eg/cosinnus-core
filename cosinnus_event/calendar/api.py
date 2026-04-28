@@ -92,8 +92,9 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         if self.reflections_enabled:
             queryset = MixReflectedObjectsMixin().mix_queryset(queryset, Event, self.group)
         queryset = queryset.prefetch_related('media_tag', 'attendances')
-        queryset = queryset.filter(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
-        queryset = queryset.filter(state=Event.STATE_SCHEDULED)
+        queryset = queryset.filter(
+            media_tag__visibility=BaseTagObject.VISIBILITY_ALL, state=Event.STATE_SCHEDULED, is_hidden_group_proxy=False
+        )
         if self.action == 'list':
             # apply query parameters
             queryset = queryset.filter(
