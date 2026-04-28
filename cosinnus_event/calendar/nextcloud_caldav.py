@@ -34,12 +34,19 @@ class NextcloudCaldavConnection:
             # share with group
             self.group_calendar_share(group, calendar_url=calendar.canonical_url)
 
+            # get publish url
+            publish_url = self.group_calender_get_publish_url(group, calendar_url=calendar.canonical_url)
+
             # save calendar url in group
             group.refresh_from_db()
             if not group.nextcloud_calendar_url:
-                # no board was created in parallel.
+                # no calendar was created in parallel
                 group.nextcloud_calendar_url = calendar.canonical_url
-                type(group).objects.filter(pk=group.pk).update(nextcloud_calendar_url=group.nextcloud_calendar_url)
+                group.nextcloud_calendar_publish_url = publish_url
+                type(group).objects.filter(pk=group.pk).update(
+                    nextcloud_calendar_url=group.nextcloud_calendar_url,
+                    nextcloud_calendar_publish_url=group.nextcloud_calendar_publish_url,
+                )
                 group.clear_cache()
         except Exception as e:
             logger.warning('NC Calendar: calendar creation failed!', extra={'exception': e})
@@ -92,6 +99,38 @@ class NextcloudCaldavConnection:
         except Exception as e:
             logger.warning('NC Calendar: calendar unshare failed!', extra={'exception': e})
             raise NextcloudCaldavConnectionException()
+
+    def group_calender_get_publish_url(self, group, calendar_url=None):
+        """Get the publish-URL of a NextCloud caldav calendar."""
+        if not calendar_url:
+            calendar_url = group.nextcloud_calendar_url
+
+        try:
+            # publish calendar
+            body = '<x5:publish-calendar xmlns:x5="http://calendarserver.org/ns/"/>'
+            response = self.caldav_client.request(calendar_url, 'POST', body)
+            if response.status != 202:
+                raise ResponseError()
+
+            # get publish url
+            body = (
+                '<x0:propfind xmlns:x0="DAV:">'
+                '   <x0:prop><x5:publish-url xmlns:x5="http://calendarserver.org/ns/"/>'
+                '</x0:prop></x0:propfind>'
+            )
+            response = self.caldav_client.request(calendar_url, 'PROPFIND', body)
+            if response.status != 207:
+                raise ResponseError()
+
+            publish_url = response.tree.findtext(
+                '{DAV:}response/{DAV:}propstat/{DAV:}prop/{http://calendarserver.org/ns/}publish-url/{DAV:}href'
+            )
+            if not publish_url:
+                raise Exception('Could not read publish-url.')
+        except Exception as e:
+            logger.warning('NC Calendar: calendar retrieving of publish-url failed!', extra={'exception': e})
+            raise NextcloudCaldavConnectionException()
+        return publish_url
 
     def group_calendar_rename(self, group):
         """Update the calendar name."""

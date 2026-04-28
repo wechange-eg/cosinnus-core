@@ -108,6 +108,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             """Test that a calendar is created for test group created in setUp."""
             self.assertIsNotNone(self.test_group.nextcloud_group_id)
             self.assertIsNotNone(self.test_group.nextcloud_calendar_url)
+            self.assertIsNotNone(self.test_group.nextcloud_calendar_publish_url)
             calendar = self.get_group_calendar(self.test_group)
             self.assertIsNotNone(calendar)
             self.assertEqual(calendar.get_display_name(), self.test_group.name)
