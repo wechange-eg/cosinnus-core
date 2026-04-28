@@ -429,6 +429,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     if not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
         exclude += [
             'nextcloud_calendar_url',
+            'nextcloud_calendar_publish_url',
         ]
     if settings.COSINNUS_CONFERENCES_ENABLED:
         inlines = [CosinnusConferenceSettingsInline]
