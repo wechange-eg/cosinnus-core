@@ -17,8 +17,8 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     bbb_premium_booking_url = serializers.SerializerMethodField()
 
     # Events app settings
-    events_enabled = serializers.SerializerMethodField()
     events_ical_url = serializers.SerializerMethodField()
+    events_publish_url = serializers.SerializerMethodField()
     events_event_message = serializers.SerializerMethodField()
     events_event_description_required = serializers.SerializerMethodField()
     events_reflections_enabled = serializers.SerializerMethodField()
@@ -30,8 +30,8 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
             'bbb_restricted',
             'bbb_premium',
             'bbb_premium_booking_url',
-            'events_enabled',
             'events_ical_url',
+            'events_publish_url',
             'events_event_message',
             'events_event_description_required',
             'events_reflections_enabled',
@@ -62,17 +62,15 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
             return render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html')
         return ''
 
-    def get_events_enabled(self, obj):
-        if 'cosinnus_event' in getattr(settings, 'COSINNUS_DISABLED_COSINNUS_APPS', []):
-            return False
-        if 'cosinnus_event' in obj.get_deactivated_apps():
-            return False
-        return True
-
     def get_events_ical_url(self, obj):
+        """Returns the group calendar public event ical feed."""
         if 'cosinnus_event' in obj.get_deactivated_apps():
             return ''
         return group_aware_reverse('cosinnus:team-feed', kwargs={'team_id': obj.id})
+
+    def get_events_publish_url(self, obj):
+        """Return the publish-url of the private NextCloud calendar."""
+        return obj.nextcloud_calendar_publish_url
 
     def get_events_event_message(self, obj):
         return settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_MESSAGE
