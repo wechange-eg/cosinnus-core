@@ -10,6 +10,7 @@ from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.integration import migrate_description
 from cosinnus_cloud.hooks import get_nc_user_id, initialize_nextcloud_for_group
 from cosinnus_cloud.utils.nextcloud import add_user_to_group
 from cosinnus_todo.models import TodoList
@@ -475,25 +476,7 @@ class DeckConnection:
 
                 for todo in todo_query:
                     # get description with comments and attached objects
-                    description = todo.note
-                    if todo.attached_objects.exists():
-                        attachments = '\n\nAttachments:\n\n'
-                        for attachment in todo.attached_objects.all():
-                            if hasattr(attachment.target_object, 'get_absolute_url'):
-                                url = attachment.target_object.get_absolute_url()
-                                attachments += f'- [{url}]({url})\n'
-                        attachments += '\n\n'
-                        description += attachments
-                    if todo.comments.exists():
-                        comments = '\n\nComments:\n\n'
-                        for comment in todo.comments.all():
-                            creator = comment.creator.get_full_name()
-                            comments += f'- {creator}:\n{comment.text}\n'
-                        description += comments
-
-                    # convert to html
-                    description = textfield(description)
-
+                    description = migrate_description(todo, todo.note)
                     response = self.card_create(
                         group_board_id=group.nextcloud_deck_board_id,
                         stack_id=stack_id,
