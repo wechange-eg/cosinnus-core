@@ -14,9 +14,9 @@ cosinnus_group_patterns = []
 if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
     from cosinnus_event.calendar import views as calendar_views
 
-    # TODO: this is temporary, where the v3 calendar is included needs to be discussed.
     cosinnus_group_patterns += [
         re_path(r'^v3-calendar/$', calendar_views.calendar_view, name='calendar'),
+        re_path(r'^v3-calendar/migrate/$', calendar_views.calendar_migrate_view, name='calendar-migrate'),
     ]
 
 # TODO: disable old views if the calendar is enabled, discuss which are replaced

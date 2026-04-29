@@ -1,0 +1,94 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail djajax_tags %}
+
+{% block page_title %}
+    {% trans "Migrate Private Events" %} - {{ block.super }}
+{% endblock page_title %}
+
+{% block content %}
+    <div class="content-box white-content">
+        <h2>{% trans "Migrate private Events to the new calendar app" %} - <i>{{ group.name }}</i></h2>
+        <div class="textfield transparent">
+            {% if not migration_status %}
+                {% if migration_required %}
+                    <p class="textfield transparent">
+                        {% trans "Start the migration of private events to the new calendar app in the background." %}
+                    </p>
+                    <p class="textfield transparent">
+                        {% trans "This page will automatically refresh when the process is done." %}
+                    </p>
+                    <p class="textfield transparent">
+                        {% trans "Past events dated before this year are not considered for migration." %}
+                    </p>
+                    <p class="textfield transparent">
+                        {% trans "You can dismiss the migration. Then the migratio hint want be shown anymore." %}
+                    </p>
+                {% else %}
+                    <p class="textfield transparent">
+                        {% trans "No events found that should be migrated." %}
+                    </p>
+                    <p class="textfield transparent">
+                        {% trans "Past events dated before this year are not considered for migration." %}
+                    </p>
+                {% endif %}
+            {% elif migration_status == 'started' or  migration_status == 'in_progress' %}
+                <p class="textfield transparent">
+                    {% trans "Migration is in progress..." %}
+                </p>
+            {% elif migration_status == 'failed' %}
+                <p class="textfield transparent">
+                    {% trans "An error occurred during the migration. Some events might not have been migrated." %}
+                </p>
+                <p class="textfield transparent">
+                    {% trans "Please try again later. If the error persists, please contact our support." %}
+                </p>
+            {% elif migration_status == 'success' %}
+                <p class="textfield transparent">
+                    {% captureas calendar_link %}<a href="{% group_url "cosinnus:event:calendar" group=group %}" class="transparent">{% trans "Calendar" %}</a>{% endcaptureas %}
+                    {% blocktrans %}Migration to {{ calendar_link }} successfully finished. {% endblocktrans %}
+                </p>
+            {% endif %}
+            <div class="clearfix v-spacer-s"></div>
+        </div>
+    </div><!-- content-box -->
+
+    {% if migration_required and migration_allowed %}
+        <form method="POST" action="." class="cosinnus-form form-horizontal">
+            {% csrf_token %}
+            <button type="submit" name="start" class="btn btn-emphasized btn-autosize">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        <div class="media-body">
+                            {% if not migration_status  %}
+                                {% trans "Start migration" %}
+                            {% else %}
+                                {% trans "Retry migration" %}
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+            <button type="submit" name="dismiss" class="btn btn-emphasized btn-autosize">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-times"></i>
+                        </span>
+                        <div class="media-body">
+                            {% trans "Dismiss" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        </form>
+    {% endif %}
+    {% if migration_status == 'started' or migration_status == 'in_progress' %}
+        {% comment %} Refresh every 10 seconds {% endcomment %}
+        <script type="text/javascript">
+            setTimeout(function () { location.reload(); }, 10000);
+        </script>
+    {% endif %}
+{% endblock content %}

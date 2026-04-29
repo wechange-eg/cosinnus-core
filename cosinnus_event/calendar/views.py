@@ -1,12 +1,14 @@
 import logging
 
 from django.contrib import messages
+from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 
 from cosinnus.conf import settings
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
-from cosinnus.views.mixins.group import DipatchGroupURLMixin
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.views.mixins.group import DipatchGroupURLMixin, RequireWriteMixin
 from cosinnus_cloud.hooks import get_nc_user_id, group_cloud_app_activated_sub
 from cosinnus_event.calendar.integration import CosinnusCalendarIntegrationHandler
 
@@ -68,3 +70,48 @@ class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
 
 
 calendar_view = CosinnusCalendarView.as_view()
+
+
+class CosinnusCalendarMigrateView(RequireWriteMixin, TemplateView):
+    """Allows users to migrate private events to the NextCloud group calendar."""
+
+    template_name = 'cosinnus_event/calendar/migrate.html'
+
+    USER_SETTING_MIGRATION_DISMISSED = 'calendar_migration_dismissed'
+
+    def post(self, request, *args, **kwargs):
+        if 'start' in request.POST:
+            # start the migration
+            if self.group.calendar_migration_allowed():
+                # start the migration task
+                self.group.calendar_migration_set_status(self.group.CALENDAR_MIGRATION_STATUS_STARTED)
+                try:
+                    from cosinnus_event.calendar.integration import CALENDAR_SINGLETON
+
+                    CALENDAR_SINGLETON.do_group_migrate_private_events(self.group)
+                except Exception as e:
+                    self.group.calendar_migration_set_status(self.group.CALENDAR_MIGRATION_STATUS_FAILED)
+                    logger.exception(e)
+        elif 'dismiss' in request.POST:
+            # dismiss the migration for the user
+            profile = request.user.cosinnus_profile
+            profile.settings[self.USER_SETTING_MIGRATION_DISMISSED] = True
+            profile.save(update_fields=['settings'])
+
+            # redirect to calendar
+            return redirect(group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group}))
+        return self.get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(CosinnusCalendarMigrateView, self).get_context_data(**kwargs)
+        context.update(
+            {
+                'migration_required': self.group.calendar_migration_required(),
+                'migration_allowed': self.group.calendar_migration_allowed(),
+                'migration_status': self.group.calendar_migration_status(),
+            }
+        )
+        return context
+
+
+calendar_migrate_view = CosinnusCalendarMigrateView.as_view()
