@@ -2,10 +2,7 @@
 from django.apps import AppConfig
 from django.db.models.signals import post_migrate
 
-from cosinnus.management.initialization import (
-    ensure_default_portal_conference_settings_exist,
-    ensure_portal_and_site_exist,
-)
+from cosinnus.management.initialization import ensure_current_portal_object
 
 
 class CosinnusAppConfig(AppConfig):
@@ -33,7 +30,5 @@ class CosinnusAppConfig(AppConfig):
         from cosinnus.api import hooks  # noqa
         from cosinnus import hooks  # noqa
 
-        # make sure, the CosinnusPortal and CosinnusConferenceSettings Objects are always present,
-        # Tests will fail otherwise
-        post_migrate.connect(ensure_portal_and_site_exist, sender=self)
-        post_migrate.connect(ensure_default_portal_conference_settings_exist, sender=self)
+        # make sure, the CosinnusPortal and related Objects are always present, Tests will fail otherwise
+        post_migrate.connect(ensure_current_portal_object, sender=self)
