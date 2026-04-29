@@ -92,6 +92,7 @@ class GroupSettingsAPITest(APITestCase):
                 'events_event_message': None,
                 'events_event_description_required': False,
                 'events_reflections_enabled': True,
+                'events_migration_url': None,
                 'bbb_settings': {
                     'bbb_params': {
                         'mic_starts_on': False,

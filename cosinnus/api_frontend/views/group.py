@@ -52,5 +52,5 @@ class CosinnusGroupSettingsView(APIView):
         }
     )
     def get(self, request, group_id):
-        serializer = CosinnusGroupSettingsSerializer(self.group)
+        serializer = CosinnusGroupSettingsSerializer(self.group, context={'request': request})
         return Response(serializer.data)
