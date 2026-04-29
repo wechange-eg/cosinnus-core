@@ -115,6 +115,11 @@ class CosinnusCalendarIntegrationHandler(CosinnusBaseIntegrationHandler):
         if group.nextcloud_calendar_url:
             self._do_group_deactivate.delay(group.pk)
 
+    def do_group_migrate_private_events(self, group):
+        """Migrate private events to NextCloud calendar."""
+        if group.nextcloud_calendar_url:
+            self._do_group_migrate_private_events.delay(group.pk)
+
     """
     Celery tasks
     """
@@ -172,3 +177,12 @@ class CosinnusCalendarIntegrationHandler(CosinnusBaseIntegrationHandler):
             # Calendar activation is done by adding the group permissions to the calendar.
             calendar = NextcloudCaldavConnection()
             calendar.group_calendar_unshare(group)
+
+    @staticmethod
+    @celery_app.task(base=CalendarTask)
+    def _do_group_migrate_private_events(group_id):
+        """Migrate private events to NextCloud calendar."""
+        group = CosinnusGroup.objects.filter(pk=group_id).first()
+        if group and group.nextcloud_calendar_url:
+            calendar = NextcloudCaldavConnection()
+            calendar.group_migrate_private_events(group)
