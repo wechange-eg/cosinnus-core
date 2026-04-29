@@ -5,10 +5,11 @@ from types import MethodType
 
 import six
 from django import VERSION
+from django.db.models.sql.compiler import SQLCompiler
 from django.db.models.sql.query import Query
 
 
-class Proxy(object):
+class Proxy:
     """
     Code base for an instance proxy.
     """
@@ -39,7 +40,7 @@ class Proxy(object):
         return self._target(name)
 
 
-class CompilerProxy(Proxy):
+class CompilerProxy(Proxy, SQLCompiler):
     """
     A proxy to a compiler.
     """
