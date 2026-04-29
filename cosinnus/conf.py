@@ -1033,66 +1033,66 @@ class CosinnusConf(AppConf):
         # any direct access to files and resources like "robots.txt"
         r'.*\.[\w\-_]+$',
         # blanket exempts, to reduce server-load for targets we know we never want to show in v3
-        '^/.well-known/',
-        '^/wp-',  # any wordpress prefixes
-        '^/language/',
-        '.*/api/.*',  # any paths with api calls
-        '^/o/',  # any oauth paths
-        '^/housekeeping/',
+        r'^/.well-known/',
+        r'^/wp-',  # any wordpress prefixes
+        r'^/language/',
+        r'.*/api/.*',  # any paths with api calls
+        r'^/o/',  # any oauth paths
+        r'^/housekeeping/',
         # user account service functions (can't blanket /account/ beacause PAYL uses them too)
-        '^/account/report/',
-        '^/account/accept_tos/',
-        '^/account/resend_email_validation/',
-        '^/account/accept_updated_tos/',
-        '^/account/list-unsubscribe/',
-        '^/account/verify_email/',
+        r'^/account/report/',
+        r'^/account/accept_tos/',
+        r'^/account/resend_email_validation/',
+        r'^/account/accept_updated_tos/',
+        r'^/account/list-unsubscribe/',
+        r'^/account/verify_email/',
         # PAYL API and downloads
-        '^/payments/',
-        '^/account/invoices/.*/',  # note: only subpaths of /invoices/!
-        '^/account/additional_invoices/.*/',
-        '^/account/payl_stats/',
+        r'^/payments/',
+        r'^/account/invoices/.*/',  # note: only subpaths of /invoices/!
+        r'^/account/additional_invoices/.*/',
+        r'^/account/payl_stats/',
         # integrations
-        '^/fb-integration/',
-        '^/two_factor_auth/qrcode/',  # QR code image generator
+        r'^/fb-integration/',
+        r'^/two_factor_auth/qrcode/',  # QR code image generator
         # django password reset (note: only initial redirect portion, this works!)
-        '^/reset/.*/(?!set-password)[\w\-_]+/',
+        r'^/reset/.*/(?!set-password)[\w\-_]+/',
         # API URLs that are not route-namespaced under "/api/":
-        '^/select2/',
-        '^/likefollowstar/',
-        '^/map/search/',
-        '^/map/detail/',
-        '^/widgets/',
-        '^/widget/',
-        '^/user_match_assign/',
-        '/.*/.*/event/.*/assign_attendance/',
-        '/.*/.*/attachmentselect/',
-        '/.*/.*/users/member-invite-select2/',
-        '/.*/.*/group-invite-select2/',
-        '^/.*/.*/file/.*/save',  # cosinnus file download
-        '^/.*/.*/file/.*/download',  # cosinnus file download
+        r'^/select2/',
+        r'^/likefollowstar/',
+        r'^/map/search/',
+        r'^/map/detail/',
+        r'^/widgets/',
+        r'^/widget/',
+        r'^/user_match_assign/',
+        r'/.*/.*/event/.*/assign_attendance/',
+        r'/.*/.*/attachmentselect/',
+        r'/.*/.*/users/member-invite-select2/',
+        r'/.*/.*/group-invite-select2/',
+        r'^/.*/.*/file/.*/save',  # cosinnus file download
+        r'^/.*/.*/file/.*/download',  # cosinnus file download
         # extra exemptions for views that do not work well with v3
-        '^/map/embed/',
-        '^/.*/.*/note/embed/',
-        '^/two_factor_auth/token_login/',
+        r'^/map/embed/',
+        r'^/.*/.*/note/embed/',
+        r'^/two_factor_auth/token_login/',
         # ethercalc download views
-        '^/.*/.*/document/.*/csv/',
-        '^/.*/.*/document/.*/xlsx/',
+        r'^/.*/.*/document/.*/csv/',
+        r'^/.*/.*/document/.*/xlsx/',
         # iCal feeds
-        '^/events/team/.*/feed/',
-        '^/events/team/.*/conference/feed/',
-        '^/events/feed/all/',
-        '^/events/.*/update/',
-        '^/.*/.*/event/feed/',
-        '^/.*/.*/event/feed/.*/',
-        '^/.*/.*/conference/feed/.*/',
+        r'^/events/team/.*/feed/',
+        r'^/events/team/.*/conference/feed/',
+        r'^/events/feed/all/',
+        r'^/events/.*/update/',
+        r'^/.*/.*/event/feed/',
+        r'^/.*/.*/event/feed/.*/',
+        r'^/.*/.*/conference/feed/.*/',
         # old captcha
-        '^/captcha/',
+        r'^/captcha/',
         # allauth provider urls
-        '^/oidc/*',
+        r'^/oidc/*',
         # firebase fcm-django urls
-        '^/fcm/*',
+        r'^/fcm/*',
         # user export downloads
-        '^/administration/model_export/.*/download/',
+        r'^/administration/model_export/.*/download/',
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
