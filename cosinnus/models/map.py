@@ -1038,4 +1038,6 @@ def filter_event_or_conference_happening_during(from_datetime, to_datetime, sqs)
     """Filters all events or conferences to retain those happening during the provided
     datetime range, either fully or in part."""
     sqs = sqs.exclude(to_date__lt=from_datetime).exclude(from_date__gt=to_datetime)
+    # only actual events, no doodles
+    sqs = sqs.exclude(Q(event_state__lt=1) | Q(event_state__gt=1))
     return sqs
