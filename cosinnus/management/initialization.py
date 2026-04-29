@@ -6,7 +6,6 @@ from django.db import DEFAULT_DB_ALIAS, connections, router
 from cosinnus.conf import settings
 
 
-# registered as receiver for `post_migration` in cosinnus.apps.CosinnusAppConfig.ready
 def ensure_portal_and_site_exist(
     app_config,
     verbosity=2,
@@ -16,7 +15,10 @@ def ensure_portal_and_site_exist(
     **kwargs,
 ):
     """
-    Creates the default CosinnusPortal object.
+    Creates the default CosinnusPortal object. An does a sequence reset to ensure a portal with pk==1 is always present.
+
+    - Is called during and after migrations.
+
     taken from django/contrib/sites/management and adapted for CosinnusPortal:
     https://github.com/django/django/blob/030c63d329c4814da221528e823a4aaaaa40e4f1/django/contrib/sites/management.py
     """
@@ -56,7 +58,6 @@ def ensure_portal_and_site_exist(
                     cursor.execute(command)
 
 
-# registered as receiver for `post_migration` in cosinnus.apps.CosinnusAppConfig.ready
 def ensure_default_portal_conference_settings_exist(
     app_config,
     verbosity=2,
@@ -65,6 +66,14 @@ def ensure_default_portal_conference_settings_exist(
     apps=global_apps,
     **kwargs,
 ):
+    """
+    Creates a CosinnusConferenceSettings Object for the current portal if it does not exist.
+    Sets the defaults to a valid state for the top-level CosinnusConferenceSettings
+    as far as the current Model state allows.
+
+    - Does not do a Sequence reset.
+    - Is called during and after migrations.
+    """
     CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
     CosinnusConferenceSettings = apps.get_model('cosinnus', 'CosinnusConferenceSettings')
     current_portal = CosinnusPortal.objects.using(using).get(site__id=settings.SITE_ID)
@@ -74,29 +83,35 @@ def ensure_default_portal_conference_settings_exist(
     if not current_portal or not portal_content_type:
         return
 
-    if CosinnusConferenceSettings.objects.using(using).filter(pk=1).exists():
-        return
+    # valid defaults need to be set explicitly; bbb-tests will fail otherwise
+    # defaults differ between dummy model and real model and not all default fields are available everytime
+    # determine applicable default fields from the current CosinnusConferenceSettings model
+    defaults = {'bbb_server_choice': 0, 'bbb_server_choice_premium': 0}
+    available_fields = {f.name for f in CosinnusConferenceSettings._meta.get_fields()}
+    applicable_defaults = {k: v for k, v in defaults.items() if k in available_fields}
 
-    obj = CosinnusConferenceSettings(
-        pk=1,
-        content_type=portal_content_type,
-        object_id=current_portal.id,
+    obj, created = CosinnusConferenceSettings.objects.using(using).get_or_create(
+        content_type=portal_content_type, object_id=current_portal.id, defaults=applicable_defaults
     )
 
-    # force saving for the overwritten save-method of the model, with fallback for fake-models during migrations
-    try:
-        obj.save(using=using, ignore_inherit_condition=True)
-    except TypeError:
-        obj.save(using=using)
+    # force saving for the overwritten save-method of the model
+    if created:
+        try:
+            obj.save(using=using, ignore_inherit_condition=True)
+        except TypeError:
+            # we have the dummy model, so the object is already saved
+            pass
 
-    # taken from django/contrib/sites/management and adapted for CosinnusConferenceSettings:
-    # https://github.com/django/django/blob/030c63d329c4814da221528e823a4aaaaa40e4f1/django/contrib/sites/management.py
-    # We set an explicit pk instead of relying on auto-incrementation,
-    # so we need to reset the database sequence. See #17415.
-    sequence_sql = connections[using].ops.sequence_reset_sql(no_style(), [CosinnusConferenceSettings])
-    if sequence_sql:
-        if verbosity >= 2:
-            print('Resetting sequence')
-        with connections[using].cursor() as cursor:
-            for command in sequence_sql:
-                cursor.execute(command)
+
+# registered as receiver for `post_migration` in cosinnus.apps.CosinnusAppConfig.ready
+def ensure_current_portal_object(
+    app_config,
+    verbosity=2,
+    interactive=True,
+    using=DEFAULT_DB_ALIAS,
+    apps=global_apps,
+    **kwargs,
+):
+    """make sure, the current portal object exists and do the same for related objects"""
+    ensure_portal_and_site_exist(app_config, verbosity, interactive, using, apps, **kwargs)
+    ensure_default_portal_conference_settings_exist(app_config, verbosity, interactive, using, apps, **kwargs)
