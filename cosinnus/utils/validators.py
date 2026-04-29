@@ -4,8 +4,11 @@ import re
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
+from django.utils.encoding import force_str
 from django.utils.translation import gettext as _
 from django_clamd.validators import validate_file_infection as clamd_validate_file_infection
+from PIL import Image, UnidentifiedImageError
+from PIL.Image import DecompressionBombError
 
 from cosinnus.conf import settings
 
@@ -79,6 +82,52 @@ def validate_file_infection(file):
                 'Error during file upload: django-clamd infection validation failed for uploaded file!',
                 extra={'uploaded-file': str(file), 'exception': e},
             )
+
+
+def validate_image_format(file):
+    """
+    :param file: File object or dict with item `'file': file-object`
+    """
+    # Image.open will raise an exception if dimensions exceed two times this limit
+    generic_error_message = _(
+        'Error during image processing. Your image may be too large, in an unsupported format, or corrupt.'
+    )
+    Image.MAX_IMAGE_PIXELS = 15_000_000  # abort if more than 2*15 MegaPixel
+    max_file_size = 20_971_520  # 20 MBytes
+
+    # awesome_avatar returns a dict with box coordinates and file
+    if isinstance(file, dict):
+        file = file.get('file', None)
+
+    if not file:
+        return
+
+    try:
+        file.seek(0)
+
+        # abort if file is larger than 20MBytes
+        if file.size > max_file_size:
+            raise ValueError('File too large')
+
+        # do preliminary checks on image format
+        pil_img = Image.open(file)
+        pil_img.verify()
+
+        # open the image again, since verify does make the object unusable
+        file.seek(0)
+        pil_img = Image.open(file)
+
+        # return "common" image modes
+        # see https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes
+        if pil_img.mode not in ['1', 'L', 'P', 'RGB', 'RGBA']:
+            raise ValueError('Unsupported Mode')
+    except (ValidationError, ValueError, DecompressionBombError, UnidentifiedImageError):
+        raise ValidationError(generic_error_message)
+    except Exception as e:
+        logger.error('Unexpected Error during image processing', extra={'exception': force_str(e)})
+        raise ValidationError(generic_error_message)
+    finally:
+        file.seek(0)
 
 
 class CleanFromToDateFieldsMixin(object):
