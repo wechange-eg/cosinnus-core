@@ -4,6 +4,7 @@ from rest_framework import serializers
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
 from cosinnus.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.permissions import check_object_write_access
 from cosinnus.utils.urls import group_aware_reverse
 
 
@@ -22,6 +23,7 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     events_event_message = serializers.SerializerMethodField()
     events_event_description_required = serializers.SerializerMethodField()
     events_reflections_enabled = serializers.SerializerMethodField()
+    events_migration_url = serializers.SerializerMethodField()
 
     class Meta:
         model = get_cosinnus_group_model()
@@ -35,6 +37,7 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
             'events_event_message',
             'events_event_description_required',
             'events_reflections_enabled',
+            'events_migration_url',
         ]
 
     def get_bbb_available(self, obj):
@@ -80,6 +83,18 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
 
     def get_events_reflections_enabled(self, obj):
         return 'cosinnus_event.event' in settings.COSINNUS_REFLECTABLE_OBJECTS
+
+    def get_events_migration_url(self, obj):
+        """Returns the calendar migration URL if it should be shown to the current user."""
+        migration_url = None
+        user = self.context['request'].user
+        if check_object_write_access(obj, user):
+            # only group admin can migrate
+            migration_dismissed = user.cosinnus_profile.settings.get('calendar_migration_dismissed', False)
+            if not migration_dismissed and obj.calendar_migration_required():
+                # migration is required and was not dismissed by current user
+                migration_url = group_aware_reverse('cosinnus:event:calendar-migrate', kwargs={'group': obj})
+        return migration_url
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

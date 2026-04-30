@@ -3,8 +3,11 @@ import logging
 from caldav.davclient import get_davclient
 from caldav.elements.dav import DisplayName
 from caldav.lib.error import ResponseError
+from django.utils.timezone import localtime
 
 from cosinnus.conf import settings
+from cosinnus.utils.integration import migrate_description
+from cosinnus_event.models import Event
 
 logger = logging.getLogger(__name__)
 
@@ -153,3 +156,56 @@ class NextcloudCaldavConnection:
         except Exception as e:
             logger.warning('NC Calendar: calendar deletion failed!', extra={'exception': e})
             raise NextcloudCaldavConnectionException()
+
+    def _to_caldav_time(self, event_time, is_all_day=False):
+        """Helper to localize event times considering all-daty events."""
+        event_time = localtime(event_time)
+        if is_all_day:
+            event_time = event_time.date()
+        return event_time
+
+    def group_migrate_private_events(self, group):
+        """Migrate private events to nextcloud calendar."""
+
+        # make sure that the migration is not already running
+        if group.calendar_migration_in_progress():
+            return
+
+        # set migration status
+        group.calendar_migration_set_status(group.CALENDAR_MIGRATION_STATUS_IN_PROGRESS)
+
+        try:
+            # get the group calendar
+            calendar = self.caldav_client.calendar(url=group.nextcloud_calendar_url)
+
+            # migrate events starting this year to the NC calendar
+            events = group.calendar_migration_queryset()
+            for event in events:
+                # get HTML description with attached objects and comments
+                description = migrate_description(event, event.note)
+
+                # create NextCloud calendar event
+                calendar.save_event(
+                    dtstart=self._to_caldav_time(event.from_date, event.is_all_day),
+                    dtend=self._to_caldav_time(event.to_date, event.is_all_day),
+                    summary=event.title,
+                    description=description,
+                )
+
+                # mark event as migrated and change state to synchronized event
+                event.state = Event.STATE_SYNCHRONIZED_EVENT
+                event.media_tag.migrated = True
+                event.media_tag.save()
+                event.save()
+
+            # set migration status
+            group.calendar_migration_set_status(group.CALENDAR_MIGRATION_STATUS_SUCCESS)
+
+            # clear group cache
+            group._clear_cache(group=group)
+        except Exception as e:
+            logger.warning(
+                'NC Calendar: Event migration failed!',
+                extra={'group': group.id, 'calendar': group.nextcloud_calendar_url, 'exception': e},
+            )
+            group.calendar_migration_set_status(group.CALENDAR_MIGRATION_STATUS_FAILED)

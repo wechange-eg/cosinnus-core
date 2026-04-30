@@ -85,6 +85,7 @@ from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus.utils.validators import validate_image_format
 from cosinnus.views.mixins.media import FlickrEmbedFieldMixin, VideoEmbedFieldMixin
 from cosinnus_deck.models import DeckMigrationMixin
+from cosinnus_event.calendar.models import CalendarMigrationMixin
 from cosinnus_event.mixins import BBBRoomMixin  # noqa
 
 logger = logging.getLogger('cosinnus')
@@ -863,6 +864,7 @@ class CosinnusBaseGroup(
     MembersManagerMixin,
     BBBRoomMixin,
     DeckMigrationMixin,
+    CalendarMigrationMixin,
     AttachableObjectModel,
 ):
     """Abstract base group model implementation. Provides common functionality for all groups."""

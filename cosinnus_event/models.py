@@ -72,12 +72,14 @@ class Event(
     STATE_VOTING_OPEN = 2
     STATE_CANCELED = 3
     STATE_ARCHIVED_DOODLE = 4
+    STATE_SYNCHRONIZED_EVENT = 5
 
     STATE_CHOICES = (
         (STATE_SCHEDULED, _('Scheduled')),
         (STATE_VOTING_OPEN, _('Voting open')),
         (STATE_CANCELED, _('Canceled')),
         (STATE_ARCHIVED_DOODLE, _('Archived Event Poll')),
+        (STATE_SYNCHRONIZED_EVENT, _('Synchronized Event')),
     )
 
     from_date = models.DateTimeField(_('Start'), default=None, blank=True, null=True, editable=True)
