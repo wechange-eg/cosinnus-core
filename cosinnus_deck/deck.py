@@ -477,6 +477,8 @@ class DeckConnection:
                 for todo in todo_query:
                     # get description with comments and attached objects
                     description = migrate_description(todo, todo.note)
+                    # convert to HTML
+                    description = textfield(description)
                     response = self.card_create(
                         group_board_id=group.nextcloud_deck_board_id,
                         stack_id=stack_id,

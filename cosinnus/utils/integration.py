@@ -1,10 +1,7 @@
-from cosinnus.templatetags.cosinnus_tags import textfield
-
-
 def migrate_description(obj, description):
     """
     Helper to get the description of an object migrated to another service.
-    Appends URLs to attached objects and comments to the description and converts it from Markdown to HTML.
+    Appends URLs to attached objects and comments to the description.
     Used to migrate todos and events to NextCloud for the v3 frontend.
     """
     if hasattr(obj, 'attached_objects') and obj.attached_objects.exists():
@@ -24,8 +21,5 @@ def migrate_description(obj, description):
             creator = comment.creator.get_full_name()
             comments += f'- {creator}:\n{comment.text}\n'
         description += comments
-
-    # convert to HTML
-    description = textfield(description)
 
     return description
