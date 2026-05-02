@@ -139,6 +139,13 @@ class LoginViewAdditionalLogicMixin(object):
         """Does additional validation checks for a user and may have effects like triggering sending a mail.
         @return None if no errors are found, else a str error message that should be displayed to the user.
             if this does not return None, the login attempt should be denied!"""
+
+        if user.is_authenticated and not user.is_account_login_approved:
+            return _("Your registration hasn't been confirmed yet. We'll let you know via email as soon as it's ready.")
+
+        if user.is_authenticated and not user.is_active:
+            return _('Please enter a correct email and password. Note that both fields may be case-sensitive.')
+
         if (
             settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN
             and CosinnusPortal.get_current().email_needs_verification
@@ -544,7 +551,7 @@ class RobotsTextView(View):
     def get(self, request, *args, **kwargs):
         if settings.COSINNUS_DENY_ALL_ROBOTS:
             # serve disallow all content
-            robots_text_content = 'User-agent: *\n' 'Disallow: /\n'
+            robots_text_content = 'User-agent: *\nDisallow: /\n'
         else:
             # read robots.txt from static directory. (Note: depends on collectstatic)
             robots_file = staticfiles_storage.path('robots.txt')
