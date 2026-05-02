@@ -317,6 +317,12 @@ class UserEmailLoginForm(AuthenticationForm):
         'inactive': _('This account is inactive.'),
     }
 
+    def confirm_login_allowed(self, user):
+        """
+        Allow inactive users at this validation stage so they can be handled separately in the View.
+        """
+        return None
+
 
 class ValidatedPasswordChangeForm(PasswordChangeForm):
     """For some reason the Django default SetPasswordForm does not use the default password validators.

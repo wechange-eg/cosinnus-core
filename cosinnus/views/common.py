@@ -139,6 +139,13 @@ class LoginViewAdditionalLogicMixin(object):
         """Does additional validation checks for a user and may have effects like triggering sending a mail.
         @return None if no errors are found, else a str error message that should be displayed to the user.
             if this does not return None, the login attempt should be denied!"""
+
+        if user.is_authenticated and not user.is_account_login_approved:
+            return _("Your registration hasn't been confirmed yet. We'll let you know via email as soon as it's ready.")
+
+        if user.is_authenticated and not user.is_active:
+            return _('Please enter a correct email and password. Note that both fields may be case-sensitive.')
+
         if (
             settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN
             and CosinnusPortal.get_current().email_needs_verification
