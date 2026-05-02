@@ -1,9 +1,8 @@
 import datetime
-from unittest import skip
 
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
-from django.test import Client, TestCase, override_settings
+from django.test import Client, TestCase
 from django.utils import translation
 
 from cosinnus.models import CosinnusPortal
@@ -109,8 +108,6 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
         self.assertMessages(response, [])
         self.assertFormError(response.context['form'], None, self.MSG_WRONG_CREDENTIALS)
 
-    @skip('bugfix pending')
-    @override_settings(DEBUG=True)
     def test_login_form_empty_data(self):
         self.user_data['password'] = ''
         self.user_data['username'] = ''
@@ -119,13 +116,14 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
         self.assertUserNotLoggedIn(response)
         self.assertMessages(response, [])
         self.assertFormError(response.context['form'], 'password', 'This field is required.')
+        self.assertFormError(response.context['form'], 'username', 'This field is required.')
 
-    @skip('bugfix pending')
-    @override_settings(DEBUG=True)
     def test_login_form_empty_email(self):
         self.user_data['username'] = ''
         response = self._do_login_and_form_tests(self.user_data)
         self.assertUserNotLoggedIn(response)
+        self.assertMessages(response, [])
+        self.assertFormError(response.context['form'], 'username', 'This field is required.')
 
     def test_login_form_empty_password(self):
         self.user_data['password'] = ''
