@@ -20,6 +20,7 @@ from django.contrib import messages
 from django.contrib.auth.signals import user_logged_in, user_login_failed
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.core.cache import cache
+from django.core.exceptions import SuspiciousFileOperation
 from django.http.response import HttpResponseRedirect
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.text import get_valid_filename
@@ -177,7 +178,12 @@ class LoginRateLimitMiddleware(MiddlewareMixin):
         for watch_url, username_field in list(_get_setting('LOGIN_RATELIMIT_LOGIN_URLS').items()):
             if request.path.startswith(watch_url) and request.method.lower() == 'post':
                 username = request.POST.get(username_field, None)
-                username = get_valid_filename(username)
+                # get_valid_filename raises SuspiciousFileOperation on '', '.', '..'
+                # we just set the username to None in this case
+                try:
+                    username = get_valid_filename(username)
+                except SuspiciousFileOperation:
+                    username = None
                 if username:
                     return self.check_ratelimit_for_username(request, username)
         return
