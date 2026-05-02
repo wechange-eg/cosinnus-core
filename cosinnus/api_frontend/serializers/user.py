@@ -15,7 +15,6 @@ from taggit.serializers import TaggitSerializer, TagListSerializerField
 
 from cosinnus.api_frontend.handlers.error_codes import (
     ERROR_LOGIN_INCORRECT_CREDENTIALS,
-    ERROR_LOGIN_USER_DISABLED,
     ERROR_SIGNUP_CAPTCHA_INVALID,
     ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN,
     ERROR_SIGNUP_EMAIL_IN_USE,
@@ -58,8 +57,11 @@ class CosinnusUserLoginSerializer(serializers.Serializer):
         user = authenticate(username=email, password=attrs['password'])
         if not user:
             raise ValidationError(ERROR_LOGIN_INCORRECT_CREDENTIALS)
-        if not user.is_active:
-            raise ValidationError(ERROR_LOGIN_USER_DISABLED)
+
+        # allowing inactive users here to handle them in the view
+        # if not user.is_active:
+        #     raise ValidationError(ERROR_LOGIN_USER_DISABLED)
+
         return {'user': user}
 
 
