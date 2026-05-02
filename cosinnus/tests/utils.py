@@ -9,11 +9,16 @@ from unittest import skipIf, skipUnless
 from unittest.mock import MagicMock
 
 import django.dispatch
+from django.contrib.messages import get_messages
 from django.urls import clear_url_caches
 
 from cosinnus.conf import settings
 
 T = TypeVar('T', bound=Callable)
+
+# hide the functions in this module from unittest Assert-Error Trace
+# Exceptions are still shown
+__unittest = True
 
 
 def skipIfFlag(flag: str) -> Callable[[T], T]:
@@ -98,3 +103,29 @@ def catch_signal(signal: django.dispatch.Signal, sender=None) -> MagicMock:
         yield handler
     finally:
         signal.disconnect(handler)
+
+
+# noinspection PyPep8Naming
+class CosinnusAssertsMixin:
+    def assertMessages(self, response, expected_messages, *, ordered=True):
+        """
+        adapted from
+        https://docs.djangoproject.com/en/5.0/_modules/django/contrib/messages/test/#MessagesTestMixin.assertMessages
+        """
+        request_messages = list(get_messages(response.wsgi_request))
+        string_messages = list(map(str, request_messages))
+        assertion = self.assertEqual if ordered else self.assertCountEqual
+        assertion(string_messages, expected_messages)
+
+    def assertUserLoggedIn(self, response, user_id):
+        self.assertTrue(response.wsgi_request.user.is_authenticated)
+        self.assertEqual(response.wsgi_request.user.id, user_id)
+
+    def assertUserNotLoggedIn(self, response):
+        self.assertFalse(response.wsgi_request.user.is_authenticated)
+        self.assertTrue(response.wsgi_request.user.is_anonymous)
+
+    def assertNoFormErrors(self, form):
+        errors = form.errors.as_data()
+        errors_flat = [f"'{field}': {error_list}" for field, error_list in errors.items()]
+        self.assertListEqual([], errors_flat)
