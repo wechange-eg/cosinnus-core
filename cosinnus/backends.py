@@ -74,7 +74,13 @@ class EmailAuthBackend(ModelBackend):
                         % {'portal_name': CosinnusPortal.get_current().name}
                     )
                 messages.error(request, message_parts)
-        elif user and not user.is_guest and user.check_password(password) and self.user_can_authenticate(user):
+
+            return None
+
+        # do not check `self.user_can_authenticate(user)`, this is done in
+        # cosinnus.views.common.LoginViewAdditionalLogicMixin.additional_user_validation_checks
+        # to provide better feedback to the user
+        elif user and not user.is_guest and user.check_password(password):
             return user
 
     def get_user(self, user_id):
