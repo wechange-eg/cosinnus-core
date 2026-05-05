@@ -104,6 +104,7 @@ setup(
         'django-embed-video==1.4.10',
         'django-environ==0.8.1',
         'django-el-pagination==2.1.2',
+        'django_extended_makemessages==1.7.1',
         'django-extensions==4.1',
         'django-extra-views==0.14.0',
         'django-filter==25.2',
