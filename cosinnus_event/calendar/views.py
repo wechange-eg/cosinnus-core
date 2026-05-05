@@ -3,7 +3,7 @@ import logging
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
-from django.views.generic.base import TemplateView
+from django.views.generic.base import RedirectView, TemplateView
 
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
@@ -39,6 +39,18 @@ class CalendarRedirectMixin:
         return super(CalendarRedirectMixin, self).dispatch(request, *args, **kwargs)
 
 
+class EventAppRedirectView(RedirectView):
+    """
+    Redirect /event/ urls to new /calendar/ urls, as we changed the event app url, if the new calendar app is enabled.
+    """
+
+    def get_redirect_url(self, *args, **kwargs):
+        return self.request.path.replace('/event/', '/calendar/', 1)
+
+
+event_app_redirect_view = EventAppRedirectView.as_view()
+
+
 class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
     """
     Main calendar app view containing a div used for the frontend app initialization.
@@ -48,9 +60,6 @@ class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
     template_name = 'cosinnus_event/calendar/calendar.html'
 
     def get(self, request, *args, **kwargs):
-        if request.GET.get('forcev2'):
-            # allow access to v2 calendar
-            return redirect(group_aware_reverse('cosinnus:event:list', kwargs={'group': self.group}))
         if request.user.is_authenticated and not self.group.nextcloud_calendar_url:
             # initialize Nextcloud calendar
             if not self.group.nextcloud_group_id:

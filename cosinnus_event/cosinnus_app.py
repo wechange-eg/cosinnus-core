@@ -21,7 +21,8 @@ def register():
         'cosinnus_event', 'event', _('Events'), deactivatable=True, active_by_default=active_by_default
     )
     attached_object_registry.register('cosinnus_event.Event', 'cosinnus_event.utils.renderer.EventRenderer')
-    url_registry.register_urlconf('cosinnus_event', 'cosinnus_event.urls')
+    url_app_name_override = 'calendar' if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED else None
+    url_registry.register_urlconf('cosinnus_event', 'cosinnus_event.urls', url_app_name_override=url_app_name_override)
     widget_registry.register('event', 'cosinnus_event.dashboard.UpcomingEvents')
 
     # makemessages replacement protection
