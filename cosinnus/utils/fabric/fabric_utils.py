@@ -93,11 +93,9 @@ def setup_env(
     portal_name,
     domain,
     pull_branch,
-    cosinnus_pull_branch,
     confirm=False,
     base_path=None,
     pull_remote='origin',
-    cosinnus_pull_remote='origin',
     frontend_pull_branch='main',
     frontend_pull_remote='origin',
     new_unit_commands=DEPRECATED,
@@ -112,12 +110,10 @@ def setup_env(
     @param domain: the URL domain for the portal, for SSH connections and
         on-server paths
     @param pull_branch: the branch that the main repo will be pulled from
-    @param cosinnus_pull_branch: the branch that the cosinnus repo will be pulled from on updates
         (see `hotdeploy()` for further explanations)
     @param base_path: if the on-server file location path for the portal
         is non-default, use this argument to override it
     @param pull_remote: used to override non-origin git pulls
-    @param cosinnus_pull_remote: used to override non-origin git pulls for the cosinnus-core repo
     @param new_unit_commands: DEPRECATED and ignored, the former True value is now default.
     @param command_unit_directly: default True (new method) of restarting the django backend by restarting
         the entire unit service instead of just the django backend (old method).
@@ -143,8 +139,6 @@ def setup_env(
     env.maintenance_mode_path = base_path
     env.pull_branch = pull_branch
     env.pull_remote = pull_remote
-    env.cosinnus_pull_branch = cosinnus_pull_branch
-    env.cosinnus_pull_remote = cosinnus_pull_remote
     env.frontend_pull_branch = frontend_pull_branch
     env.frontend_pull_remote = frontend_pull_remote
     env.lessc_binary = '~/node_modules/.bin/lessc'
@@ -168,7 +162,6 @@ def setup_env(
     env.db_name = portal_name
     env.db_username = portal_name
     env.confirm = confirm
-    env.legacy_mode = False
     env.uses_celery = uses_celery
 
     # poetry binary usage has changed for all post Server-Move servers
