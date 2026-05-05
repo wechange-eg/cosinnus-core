@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 
 from cosinnus.conf import settings
+from cosinnus.models import BaseTagObject
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import DipatchGroupURLMixin, RequireWriteMixin
@@ -13,6 +14,29 @@ from cosinnus_cloud.hooks import get_nc_user_id, group_cloud_app_activated_sub
 from cosinnus_event.calendar.integration import CosinnusCalendarIntegrationHandler
 
 logger = logging.getLogger(__name__)
+
+
+class CalendarRedirectMixin:
+    """
+    Mixin to redirect deprecated v2 event view to the v3 calendar.
+    Note: The redirect can be bypassed using the forcev2 parameter to still access the v2 event pages.
+    """
+
+    # Extra setting to disble the redirect in a view. Used to disable the redirect in the poll views.
+    v3_calendar_redirect_disabled = False
+
+    def dispatch(self, request, *args, **kwargs):
+        if (
+            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
+            and not self.v3_calendar_redirect_disabled
+            and not request.GET.get('forcev2')
+        ):
+            v3_calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
+            if hasattr(self, 'object') and self.object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL:
+                # open event in v3 calendar
+                v3_calendar_url += f'#public-{self.group.pk}-{self.object.pk}'
+            return redirect(v3_calendar_url)
+        return super(CalendarRedirectMixin, self).dispatch(request, *args, **kwargs)
 
 
 class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
@@ -24,6 +48,9 @@ class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
     template_name = 'cosinnus_event/calendar/calendar.html'
 
     def get(self, request, *args, **kwargs):
+        if request.GET.get('forcev2'):
+            # allow access to v2 calendar
+            return redirect(group_aware_reverse('cosinnus:event:list', kwargs={'group': self.group}))
         if request.user.is_authenticated and not self.group.nextcloud_calendar_url:
             # initialize Nextcloud calendar
             if not self.group.nextcloud_group_id:

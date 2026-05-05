@@ -61,6 +61,7 @@ from cosinnus.views.mixins.tagged import EditViewWatchChangesMixin, RecordLastVi
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 from cosinnus_conference.views import FilterConferenceRoomMixin
 from cosinnus_event import cosinnus_notifications
+from cosinnus_event.calendar.views import CalendarRedirectMixin
 from cosinnus_event.conf import settings
 from cosinnus_event.filters import EventFilter
 from cosinnus_event.forms import (
@@ -90,14 +91,16 @@ from cosinnus_event.models import (
 logger = logging.getLogger('cosinnus')
 
 
-class EventIndexView(RequireReadMixin, RedirectView):
+class EventIndexView(RequireReadMixin, CalendarRedirectMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, **kwargs):
         return group_aware_reverse('cosinnus:event:list', kwargs={'group': self.group})
 
 
-class EventListView(RequireReadMixin, CosinnusFilterMixin, MixReflectedObjectsMixin, FilterGroupMixin, ListView):
+class EventListView(
+    RequireReadMixin, CalendarRedirectMixin, CosinnusFilterMixin, MixReflectedObjectsMixin, FilterGroupMixin, ListView
+):
     model = Event
     filterset_class = EventFilter
     event_view = 'upcoming'
@@ -196,6 +199,7 @@ class ConferenceEventListView(RequireWriteMixin, FilterGroupMixin, ListView):
 class DoodleListView(EventListView):
     template_name = 'cosinnus_event/doodle_list.html'
     filterset_class = EventFilter
+    v3_calendar_redirect_disabled = True
 
     def get_queryset(self):
         """In the doodle list we only show events with open votings"""
@@ -209,6 +213,7 @@ class ArchivedDoodlesListView(EventListView):
     template_name = 'cosinnus_event/doodle_list_detailed_archived.html'
     event_view = 'archived'
     filterset_class = EventFilter
+    v3_calendar_redirect_disabled = True
 
     def get_queryset(self):
         """In the calendar we only show scheduled events"""
@@ -339,7 +344,7 @@ class DoodleFormMixin(EntryFormMixin):
         return group_aware_reverse(urlname, kwargs=kwargs)
 
 
-class EntryAddView(EntryFormMixin, AttachableViewMixin, CreateWithInlinesView):
+class EntryAddView(EntryFormMixin, CalendarRedirectMixin, AttachableViewMixin, CreateWithInlinesView):
     message_success = _('Event "%(title)s" was added successfully.')
     message_error = _('Event "%(title)s" could not be added.')
 
@@ -374,7 +379,9 @@ class DoodleAddView(DoodleFormMixin, AttachableViewMixin, CreateWithInlinesView)
         return ret
 
 
-class EntryEditView(EditViewWatchChangesMixin, EntryFormMixin, AttachableViewMixin, UpdateWithInlinesView):
+class EntryEditView(
+    EditViewWatchChangesMixin, EntryFormMixin, CalendarRedirectMixin, AttachableViewMixin, UpdateWithInlinesView
+):
     changed_attr_watchlist = [
         'title',
         'note',
@@ -468,7 +475,7 @@ class DoodleEditView(EditViewWatchChangesMixin, DoodleFormMixin, AttachableViewM
         return super(DoodleEditView, self).forms_valid(form, inlines)
 
 
-class EntryDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+class EntryDeleteView(RequireWriteMixin, CalendarRedirectMixin, FilterGroupMixin, DeleteView):
     model = Event
     message_success = _('Event "%(title)s" was deleted successfully.')
     message_error = _('Event "%(title)s" could not be deleted.')
@@ -494,6 +501,7 @@ class EntryDetailView(
     ReflectedObjectRedirectNoticeMixin,
     ReflectedObjectSelectMixin,
     RequireReadMixin,
+    CalendarRedirectMixin,
     RecordLastVisitedMixin,
     FilterGroupMixin,
     DetailView,
@@ -774,7 +782,7 @@ class BaseEventFeed(ICalFeed):
     categories = None
     localtime = True  # if given (?localtime=1), times will be converted to local server timezone time
     utc_offset = None  # in hours, taken from ?utc_offset=<number> optional param
-    filename = f"{_('Events')}.ics"
+    filename = f'{_("Events")}.ics'
 
     def __init__(self, *args, **kwargs):
         self.title = self.base_title
