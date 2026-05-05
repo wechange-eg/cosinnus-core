@@ -3,6 +3,10 @@
 
 {% block page_title %}{% trans "Calendar" %} - {{ group.name }}{% endblock page_title %}
 
+{% block leftnav %}
+    {% include "cosinnus_event/leftnav.html" %}
+{% endblock leftnav %}
+
 {% block content %}
     {% if private_events_available %}
         {% if group.nextcloud_calendar_url %}
