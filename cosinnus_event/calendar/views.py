@@ -10,7 +10,7 @@ from cosinnus.models import BaseTagObject
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import DipatchGroupURLMixin, RequireWriteMixin
-from cosinnus_cloud.hooks import get_nc_user_id, group_cloud_app_activated_sub
+from cosinnus_cloud.hooks import get_nc_user_id
 from cosinnus_event.calendar.integration import CosinnusCalendarIntegrationHandler
 
 logger = logging.getLogger(__name__)
@@ -54,6 +54,8 @@ class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
         if request.user.is_authenticated and not self.group.nextcloud_calendar_url:
             # initialize Nextcloud calendar
             if not self.group.nextcloud_group_id:
+                from cosinnus_cloud.hooks import group_cloud_app_activated_sub
+
                 # initialize cloud integration including calendar
                 group_cloud_app_activated_sub(sender=None, group=self.group, apps=['cosinnus_event'])
             else:
