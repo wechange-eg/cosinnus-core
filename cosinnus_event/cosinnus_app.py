@@ -17,16 +17,26 @@ def register():
     from cosinnus.core.registries import app_registry, attached_object_registry, url_registry, widget_registry
 
     active_by_default = 'cosinnus_event' in settings.COSINNUS_DEFAULT_ACTIVE_GROUP_APPS
+
+    # register app
     app_label = _('Calendar') if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED else _('Events')
     app_registry.register('cosinnus_event', 'event', app_label, deactivatable=True, active_by_default=active_by_default)
+
+    # register attached object renderer
     attached_object_registry.register('cosinnus_event.Event', 'cosinnus_event.utils.renderer.EventRenderer')
+
+    # register urls
     url_app_name_override = 'calendar' if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED else None
     url_registry.register_urlconf('cosinnus_event', 'cosinnus_event.urls', url_app_name_override=url_app_name_override)
-    widget_registry.register('event', 'cosinnus_event.dashboard.UpcomingEvents')
+
+    # register widgets
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        widget_registry.register('event', 'cosinnus_event.dashboard.UpcomingEvents')
 
     # makemessages replacement protection
     name = pgettext_lazy('the_app', 'event')  # noqa
 
+    # initialize integration hander
     if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
         from cosinnus_event.calendar.integration import CosinnusCalendarIntegrationHandler
 
