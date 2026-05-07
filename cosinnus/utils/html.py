@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import nh3
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -60,3 +61,13 @@ def render_html_with_variables(user, html, variables=None):
     for variable_name, variable_value in variables.items():
         html = html.replace('[[%s]]' % variable_name, str(variable_value))
     return mark_safe(html)
+
+
+def is_html(content):
+    """Check if content is HTML."""
+    return nh3.is_html(content)
+
+
+def sanitize_html(html):
+    """Sanitize HTML and mark is as safe."""
+    return mark_safe(nh3.clean(html))
