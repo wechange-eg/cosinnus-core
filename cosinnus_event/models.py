@@ -23,7 +23,7 @@ from django.utils.translation import pgettext_lazy
 from django.utils.translation import pgettext_lazy as p_
 from osm_field.fields import LatitudeField, LongitudeField, OSMField
 
-from cosinnus.models import BaseTaggableObjectModel
+from cosinnus.models import BaseTaggableObjectModel, BaseTagObject
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.mixins.tagged import RelayMessageMixin
@@ -272,6 +272,13 @@ class Event(
         elif self.is_hidden_group_proxy:
             # hidden proxy events redirect to the group
             return self.group.get_absolute_url()
+        elif (
+            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
+            and self.state == Event.STATE_SCHEDULED
+            and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+        ):
+            # redirect to event in v3 calendar
+            return self.get_calendar_url()
         return group_aware_reverse('cosinnus:event:event-detail', kwargs=kwargs)
 
     def get_edit_url(self):
@@ -281,6 +288,13 @@ class Event(
         elif self.is_hidden_group_proxy:
             # hidden proxy events redirect to the group
             return self.group.get_edit_url()
+        elif (
+            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
+            and self.state == Event.STATE_SCHEDULED
+            and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+        ):
+            # redirect to event in v3 calendar
+            return self.get_calendar_url()
         return group_aware_reverse('cosinnus:event:event-edit', kwargs=kwargs)
 
     def get_delete_url(self):
@@ -290,7 +304,19 @@ class Event(
         elif self.is_hidden_group_proxy:
             # hidden proxy events redirect to the group
             return self.group.get_delete_url()
+        elif (
+            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
+            and self.state == Event.STATE_SCHEDULED
+            and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+        ):
+            # redirect to event in v3 calendar
+            return self.get_calendar_url()
         return group_aware_reverse('cosinnus:event:event-delete', kwargs=kwargs)
+
+    def get_calendar_url(self):
+        calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
+        event_url = f'{calendar_url}#public-{self.group.pk}-{self.pk}'
+        return event_url
 
     def get_feed_url(self):
         """Returns the iCal feed url. A user token as to be appended using either
