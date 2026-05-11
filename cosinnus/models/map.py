@@ -21,6 +21,8 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield_with_html
+from cosinnus.models.tagged import BaseTagObject
+from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.dates import HumanizedEventTimeObject
 from cosinnus.utils.group import message_group_admins_url
 from cosinnus.utils.permissions import (
@@ -618,6 +620,8 @@ class DetailedIdeaMapResult(DetailedMapResult):
                 + ('?idea=%s&name=%s' % (itemid_from_searchresult(haystack_result), escape(haystack_result.title))),
                 'creator_name': obj.creator.get_full_name(),
                 'creator_slug': obj.creator.username,
+                'creator_is_public': obj.creator.cosinnus_profile.media_tag_object().visibility
+                == BaseTagObject.VISIBILITY_ALL,
                 'followed': obj.is_user_following(user),
                 'starred': obj.is_user_starring(user),
                 'created': django_date_filter(obj.created, 'SHORT_DATE_FORMAT'),
