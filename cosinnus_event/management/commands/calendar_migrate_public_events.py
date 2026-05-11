@@ -29,7 +29,7 @@ class Command(BaseCommand):
             event.note = textfield(event.note)
             # set header image
             if event.attached_image:
-                event.image = event.attached_image.file
+                event.image.name = event.attached_image.get_media_image_path()
             event.save(update_fields=['note', 'image'])
             event.media_tag.migrated = True
             event.media_tag.save(update_fields=['migrated'])
