@@ -152,7 +152,7 @@
                 <div class="tile-section">
                     {% if admins|length > 0 %}
                         {% for admin in admins %}
-                            {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
+                            {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user, is_public=admin.is_public) }}
                         {% endfor %}
                     {% else %}
                         {# Translators: __INCLUDE_JS_PO__ #}

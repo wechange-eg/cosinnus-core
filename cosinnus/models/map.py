@@ -20,6 +20,7 @@ from cosinnus.forms.search import filter_searchqueryset_for_read_access, get_vis
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.tagged import BaseTagObject
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.dates import HumanizedEventTimeObject
 from cosinnus.utils.group import message_group_admins_url
@@ -122,10 +123,7 @@ class HaystackMapCard(BaseMapCard):
 class HaystackUserMapCard(HaystackMapCard):
     def __init__(self, result, *args, **kwargs):
         kwargs.update(
-            {
-                'dataSlot1': None,
-                'dataSlot2': None,
-            }
+            {'dataSlot1': None, 'dataSlot2': None, 'is_public': result.mt_visibility == BaseTagObject.VISIBILITY_ALL}
         )
         return super(HaystackUserMapCard, self).__init__(result, *args, **kwargs)
 
@@ -618,6 +616,8 @@ class DetailedIdeaMapResult(DetailedMapResult):
                 + ('?idea=%s&name=%s' % (itemid_from_searchresult(haystack_result), escape(haystack_result.title))),
                 'creator_name': obj.creator.get_full_name(),
                 'creator_slug': obj.creator.username,
+                'creator_is_public': obj.creator.cosinnus_profile.media_tag_object().visibility
+                == BaseTagObject.VISIBILITY_ALL,
                 'followed': obj.is_user_following(user),
                 'starred': obj.is_user_starring(user),
                 'created': django_date_filter(obj.created, 'SHORT_DATE_FORMAT'),
@@ -705,7 +705,7 @@ class CloudfileMapCard(BaseMapCard):
         super().__init__(
             id=document['id'],
             type='cloudfile',
-            slug=f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{document['link']}",
+            slug=f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{document["link"]}',
             title=re.sub(query_regexp, r'<b>\g<0></b>', escape(document['title']), flags=re.IGNORECASE),
             mime=document['info']['mime'],
             size=document['info']['size'],
