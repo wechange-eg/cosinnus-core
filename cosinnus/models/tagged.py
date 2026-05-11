@@ -254,6 +254,28 @@ class BaseTagObject(models.Model):
             return None
         return 'https://openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
 
+    @property
+    def location_type_has_video_conference(self):
+        """Helper to check if location_type allows a video conference."""
+        return self.location_type in [self.LOCATION_TYPE_ONLINE, self.LOCATION_TYPE_HYBRID]
+
+    @property
+    def location_type_has_location(self):
+        """Helper to check if location_type allows an on-site location."""
+        return self.location_type in [self.LOCATION_TYPE_ONSITE, self.LOCATION_TYPE_HYBRID]
+
+    def get_video_conference_url(self):
+        """Get the video conference url considering BBB and external_video_conference_url."""
+        from cosinnus.models import CosinnusPortal, get_domain_for_portal
+
+        video_conference_url = None
+        if self.bbb_room:
+            domain = get_domain_for_portal(CosinnusPortal.get_current())
+            video_conference_url = domain + self.bbb_room.get_absolute_url()
+        elif self.external_video_conference_url:
+            video_conference_url = self.external_video_conference_url
+        return video_conference_url
+
     class Meta(object):
         abstract = True
 

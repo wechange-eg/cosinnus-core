@@ -830,6 +830,11 @@ class BaseEventFeed(ICalFeed):
         description = item.get_absolute_url()
         if item.note and item.note.strip():
             description += '\n\n' + item.note
+        # add video conference url
+        if item.media_tag.location_type_has_video_conference:
+            video_conference_url = item.media_tag.get_video_conference_url()
+            if video_conference_url:
+                description += '\n\n' + _('Video call: ') + video_conference_url
         # add website URL to description if set on event
         if item.url:
             description = description + '\n\n' + item.url if description else item.url
