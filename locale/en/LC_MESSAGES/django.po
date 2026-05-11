@@ -9447,6 +9447,11 @@ msgstr ""
 msgid "Login and Connect"
 msgstr ""
 
+#: cosinnus/templates/cosinnus/universal/include/macros.html
+#: cosinnus/templates/cosinnus/universal/tiles/tile-detail-ideas.html
+msgid "Login required"
+msgstr ""
+
 #: cosinnus/templates/cosinnus/administration/user_list.html
 #: cosinnus/views/administration.py
 #, python-format
