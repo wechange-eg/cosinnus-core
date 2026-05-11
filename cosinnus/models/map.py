@@ -124,10 +124,7 @@ class HaystackMapCard(BaseMapCard):
 class HaystackUserMapCard(HaystackMapCard):
     def __init__(self, result, *args, **kwargs):
         kwargs.update(
-            {
-                'dataSlot1': None,
-                'dataSlot2': None,
-            }
+            {'dataSlot1': None, 'dataSlot2': None, 'is_public': result.mt_visibility == BaseTagObject.VISIBILITY_ALL}
         )
         return super(HaystackUserMapCard, self).__init__(result, *args, **kwargs)
 
