@@ -10049,6 +10049,12 @@ msgstr "Anmeldung abgebrochen"
 msgid "Login and Connect"
 msgstr "Anmeldung und Verbindung"
 
+#: cosinnus/templates/cosinnus/universal/include/macros.html
+#: cosinnus/templates/cosinnus/universal/tiles/tile-detail-ideas.html
+#. Translators: __INCLUDE_JS_PO__
+msgid "Login required"
+msgstr "Login erforderlich"
+
 #: cosinnus/templates/cosinnus/administration/user_list.html
 #: cosinnus/views/administration.py
 #, python-format
