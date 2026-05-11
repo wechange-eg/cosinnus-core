@@ -24,8 +24,9 @@
         <span class="multi-span">
             <span class="pale-color">
                 {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Author" %}:
-            </span> 
+                {% trans "Author 2" %}:
+            </span>
+            {{ cosinnus_active_user }} {{ creator_is_public }}
             {% if not cosinnus_active_user and not creator_is_public %}
                 <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{%  trans "Login required" %}</a>
             {% else %}
