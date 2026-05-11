@@ -865,9 +865,14 @@ class BaseEventFeed(ICalFeed):
         return item.get_absolute_url()
 
     def item_location(self, item):
-        mt = item.media_tag
-        if mt and mt.location_lat and mt.location_lon and mt.location:
-            return mt.location
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            # for events created in the v3 calendar we consider location_type and ignore missing lat/lon.
+            if item.media_tag.location_type_has_location and item.media_tag.location:
+                return item.media_tag.location
+        else:
+            mt = item.media_tag
+            if mt and mt.location_lat and mt.location_lon and mt.location:
+                return mt.location
         return None
 
     def item_geolocation(self, item):
