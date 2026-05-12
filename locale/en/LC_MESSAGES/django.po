@@ -6388,6 +6388,10 @@ msgstr ""
 msgid "Enter a user name or email to find users to invite..."
 msgstr ""
 
+#: cosinnus/api_frontend/handlers/error_codes.py
+msgid "Enter a valid email address."
+msgstr ""
+
 #: cosinnus/models/group.py
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
@@ -8395,16 +8399,6 @@ msgstr ""
 msgid "If you have made a mistake and wish to change your new email address, you can go back and change it again:"
 msgstr ""
 
-#: cosinnus/backends.py
-#, python-format
-msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
-msgstr ""
-
-#: cosinnus/backends.py
-#, python-format
-msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
-msgstr ""
-
 #: cosinnus/templates/cosinnus/extra_body_header.html
 msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
 msgstr ""
@@ -10301,7 +10295,7 @@ msgstr ""
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
 msgstr ""
 
-#: cosinnus/views/common.py
+#: cosinnus/api_frontend/handlers/error_codes.py
 msgid "New verification email sent!"
 msgstr ""
 
@@ -11648,7 +11642,7 @@ msgid_plural "Please correct the errors below."
 msgstr[0] ""
 msgstr[1] ""
 
-#: cosinnus/forms/user.py
+#: cosinnus/api_frontend/handlers/error_codes.py
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr ""
 
@@ -14431,10 +14425,6 @@ msgstr ""
 msgid "The email address can be changed in the SSO provider."
 msgstr ""
 
-#: cosinnus/backends.py
-msgid "The email address for the account you are trying to use needs to be activated before you can log in."
-msgstr ""
-
 #: cosinnus/models/user_import.py
 msgid "The email address was not a valid email address!"
 msgstr ""
@@ -15214,10 +15204,6 @@ msgstr ""
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr ""
 
-#: cosinnus/forms/user.py
-msgid "This account is inactive."
-msgstr ""
-
 #: cosinnus/core/middleware/cosinnus_middleware.py
 msgid "This account is no longer active. You have been logged out."
 msgstr ""
@@ -15318,6 +15304,10 @@ msgstr ""
 
 #: cosinnus_event/templates/cosinnus_event/doodle_vote.html
 msgid "This event has been canceled. Voting is closed."
+msgstr ""
+
+#: cosinnus/api_frontend/handlers/error_codes.py
+msgid "This field may not be blank."
 msgstr ""
 
 #: cosinnus_conference/views.py
@@ -16892,7 +16882,7 @@ msgctxt "Facebook connect explanation box list header"
 msgid "We guarantee:"
 msgstr ""
 
-#: cosinnus/views/common.py
+#: cosinnus/api_frontend/handlers/error_codes.py
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
 msgstr ""
 
@@ -18167,7 +18157,7 @@ msgstr ""
 msgid "You have successfully disabled two-factor authentication for your account."
 msgstr ""
 
-#: cosinnus/api_frontend/views/user.py
+#: cosinnus/api_frontend/handlers/error_codes.py
 #: cosinnus/core/middleware/login_ratelimit_middleware.py cosinnus/utils/jwt.py
 #, python-format
 msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
@@ -18229,9 +18219,9 @@ msgstr ""
 msgid "You need to connect your user account to Facebook before you can link this group/project!"
 msgstr ""
 
+#: cosinnus/api_frontend/handlers/error_codes.py
 #: cosinnus/api_frontend/views/user.py
-#: cosinnus/core/middleware/cosinnus_middleware.py cosinnus/views/common.py
-#: cosinnus/views/user.py
+#: cosinnus/core/middleware/cosinnus_middleware.py cosinnus/views/user.py
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
 msgstr ""
 
@@ -18493,7 +18483,7 @@ msgstr ""
 msgid "Your Profile"
 msgstr ""
 
-#: cosinnus/forms/user.py
+#: cosinnus/api_frontend/handlers/error_codes.py
 msgid "Your Web browser doesn't appear to have cookies enabled. Cookies are required for logging in."
 msgstr ""
 
@@ -18884,6 +18874,10 @@ msgstr ""
 
 #: cosinnus/templates/cosinnus/v2/dashboard/user_dashboard.html
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
+msgstr ""
+
+#: cosinnus/api_frontend/handlers/error_codes.py
+msgid "Your registration hasn't been confirmed yet. We'll let you know via email as soon as it's ready."
 msgstr ""
 
 #: cosinnus_message/utils/utils.py
