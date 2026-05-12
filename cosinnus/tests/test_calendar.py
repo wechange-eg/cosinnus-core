@@ -450,6 +450,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(event.note, event_post_data['description'])
 
             # check media tag
+            self.assertEqual(event.media_tag.visibility, BaseTagObject.VISIBILITY_ALL)
             self.assertEqual(event.media_tag.topics, ','.join(str(topic) for topic in event_post_data['topics']))
             self.assertEqual(event.media_tag.location, event_post_data['location'])
             self.assertEqual(event.media_tag.location_lat, 52.5173885)

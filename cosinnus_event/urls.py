@@ -10,18 +10,35 @@ app_name = 'event'
 
 
 cosinnus_group_patterns = []
+cosinnus_root_patterns = []
 
 if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+    # v3 calendar urls
+
+    from cosinnus.core.registries.group_models import group_model_registry
     from cosinnus_event.calendar import views as calendar_views
 
     cosinnus_group_patterns += [
-        re_path(r'^v3-calendar/$', calendar_views.calendar_view, name='calendar'),
-        re_path(r'^v3-calendar/migrate/$', calendar_views.calendar_migrate_view, name='calendar-migrate'),
+        re_path(r'^$', calendar_views.calendar_view, name='calendar'),
+        re_path(r'^migrate/$', calendar_views.calendar_migrate_view, name='calendar-migrate'),
     ]
 
-# TODO: disable old views if the calendar is enabled, discuss which are replaced
+    # Add /event/ to /calendar/ redirect for all group types.
+    for group_url_key in group_model_registry:
+        cosinnus_root_patterns += [
+            re_path(
+                rf'^{group_url_key}/(?P<group>[^/]+)/event/',
+                calendar_views.event_app_redirect_view,
+                name='calendar-event-redirect',
+            ),
+        ]
+else:
+    # v2 event urls
+    cosinnus_group_patterns += [
+        re_path(r'^$', views.index_view, name='index-redirect'),
+    ]
+
 cosinnus_group_patterns += [
-    re_path(r'^$', views.index_view, name='index-redirect'),
     re_path(r'^calendar/$', views.list_view, name='index'),
     re_path(r'^calendar/$', views.list_view, name='list'),
     re_path(r'^calendar/(?P<tag>[^/]+)/$', views.list_view, name='list-filtered'),
@@ -124,7 +141,7 @@ cosinnus_group_patterns += [
 ]
 
 
-cosinnus_root_patterns = [
+cosinnus_root_patterns += [
     path('events/team/<int:team_id>/feed/', views.team_event_ical_feed, name='team-feed'),
     path('events/team/<int:team_id>/feed/<slug:slug>/', views.team_event_ical_feed_single, name='team-feed-entry'),
     path(

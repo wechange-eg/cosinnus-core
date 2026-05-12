@@ -646,9 +646,10 @@ class TimelineView(ModelRetrievalMixin, View):
         'todos',
         'files',
         'pads',
-        'events',
         'notes',
     ]
+    if not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        content_types += ['events']
 
     if settings.COSINNUS_IDEAS_ENABLED:
         content_types += ['ideas']

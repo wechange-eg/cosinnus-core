@@ -254,13 +254,14 @@ class CosinnusCalendarEventSerializer(
                 }
             )
             instance = Event.objects.create(**validated_data)
+            # set event visibility to public
+            instance.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
+            instance.media_tag.save()
         else:
             # update event
             for field, value in validated_data.items():
                 setattr(instance, field, value)
             instance.save()
-        # set event visibility to public
-        instance.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
         # save media tag fields
         if media_tag_data:
             self.save_media_tag(instance.media_tag, media_tag_data)
