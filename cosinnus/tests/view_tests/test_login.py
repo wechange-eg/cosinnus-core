@@ -3,19 +3,15 @@ import datetime
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.test import Client, TestCase
+from django.test.utils import override_settings
 from django.utils import translation
 
+from cosinnus.api_frontend.handlers import error_codes
 from cosinnus.models import CosinnusPortal
 from cosinnus.tests.utils import CosinnusAssertsMixin
 
 
 class UserLoginTest(CosinnusAssertsMixin, TestCase):
-    MSG_WRONG_CREDENTIALS = 'Please enter a correct email and password. Note that both fields may be case-sensitive.'
-    MSG_USER_DISABLED = MSG_WRONG_CREDENTIALS
-    MSG_USER_UNAPPROVED = (
-        "Your registration hasn't been confirmed yet. We'll let you know via email as soon as it's ready."
-    )
-
     @classmethod
     def setUpTestData(cls):
         cls.portal = CosinnusPortal.get_current()
@@ -64,7 +60,7 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
         response = self._do_login_and_view_tests(self.user_data)
 
         self.assertUserNotLoggedIn(response)
-        self.assertMessages(response, [self.MSG_USER_DISABLED])
+        self.assertMessages(response, [error_codes.ERROR_LOGIN_USER_DISABLED])
 
     def test_login_view_inactive_user_first_login(self):
         self.user.is_active = False
@@ -74,7 +70,7 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
         response = self._do_login_and_view_tests(self.user_data)
 
         self.assertUserNotLoggedIn(response)
-        self.assertMessages(response, [self.MSG_USER_DISABLED])
+        self.assertMessages(response, [error_codes.ERROR_LOGIN_USER_DISABLED])
 
     def test_login_view_admin_approval_inactive_user_first_login(self):
         self.portal.users_need_activation = True
@@ -86,7 +82,7 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
         response = self._do_login_and_view_tests(self.user_data)
 
         self.assertUserNotLoggedIn(response)
-        self.assertMessages(response, [self.MSG_USER_UNAPPROVED])
+        self.assertMessages(response, [error_codes.ERROR_LOGIN_USER_NOT_ADMIN_APPROVED])
 
     def test_login_view_admin_approval_inactive_user_later_login(self):
         self.portal.users_need_activation = True
@@ -98,7 +94,7 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
         response = self._do_login_and_view_tests(self.user_data)
 
         self.assertUserNotLoggedIn(response)
-        self.assertMessages(response, [self.MSG_USER_DISABLED])
+        self.assertMessages(response, [error_codes.ERROR_LOGIN_USER_DISABLED])
 
     def test_login_form_invalid_password(self):
         self.user_data['password'] = 'wrong'
@@ -106,7 +102,9 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
 
         self.assertUserNotLoggedIn(response)
         self.assertMessages(response, [])
-        self.assertFormError(response.context['form'], None, self.MSG_WRONG_CREDENTIALS)
+        self.assertFormError(
+            form=response.context['form'], field=None, errors=[error_codes.ERROR_LOGIN_INCORRECT_CREDENTIALS]
+        )
 
     def test_login_form_empty_data(self):
         self.user_data['password'] = ''
@@ -115,15 +113,15 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
 
         self.assertUserNotLoggedIn(response)
         self.assertMessages(response, [])
-        self.assertFormError(response.context['form'], 'password', 'This field is required.')
-        self.assertFormError(response.context['form'], 'username', 'This field is required.')
+        self.assertFormError(response.context['form'], 'password', error_codes.ERROR_LOGIN_FIELD_REQUIRED)
+        self.assertFormError(response.context['form'], 'username', error_codes.ERROR_LOGIN_FIELD_REQUIRED)
 
     def test_login_form_empty_email(self):
         self.user_data['username'] = ''
         response = self._do_login_and_form_tests(self.user_data)
         self.assertUserNotLoggedIn(response)
         self.assertMessages(response, [])
-        self.assertFormError(response.context['form'], 'username', 'This field is required.')
+        self.assertFormError(response.context['form'], 'username', error_codes.ERROR_LOGIN_FIELD_REQUIRED)
 
     def test_login_form_empty_password(self):
         self.user_data['password'] = ''
@@ -131,7 +129,7 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
 
         self.assertUserNotLoggedIn(response)
         self.assertMessages(response, [])
-        self.assertFormError(response.context['form'], 'password', 'This field is required.')
+        self.assertFormError(response.context['form'], 'password', error_codes.ERROR_LOGIN_FIELD_REQUIRED)
 
     def test_another_user_cannot_login_with_first_user_logged_in(self):
         self._do_login_and_form_tests(self.user_data)
@@ -143,3 +141,16 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
 
         # no messages are shown
         self.assertMessages(response_another_user, [])
+
+    @override_settings(COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN=True)
+    def test_unverified_email_cannot_login(self):
+        self.portal.users_need_activation = False
+        self.portal.email_needs_verification = True
+        self.portal.save()
+        self.user.email = f'__{self.user.email}'
+        self.user.save()
+
+        response = self._do_login_and_view_tests(self.user_data)
+
+        self.assertUserNotLoggedIn(response)
+        self.assertMessages(response, [error_codes.ERROR_LOGIN_USER_EMAIL_NOT_VERIFIED])

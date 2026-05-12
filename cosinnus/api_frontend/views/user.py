@@ -24,6 +24,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 
+import cosinnus.api_frontend.handlers.error_codes as error_codes
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
@@ -157,9 +158,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         if username:
             limit_expires = check_user_login_ratelimit(username)
             if limit_expires:
-                ratelimit_msg = (
-                    _('You have tried to log in too many times. You may try to log in again in: %(duration)s.')
-                ) % {'duration': naturaltime(limit_expires)}
+                ratelimit_msg = error_codes.ERROR_LOGIN_USER_RATELIMIT_HIT % {'duration': naturaltime(limit_expires)}
                 raise serializers.ValidationError({'non_field_errors': [ratelimit_msg]})
 
         serializer = CosinnusUserLoginSerializer(data=request.data)
