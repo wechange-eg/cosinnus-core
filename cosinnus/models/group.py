@@ -2185,10 +2185,8 @@ class CosinnusBaseGroup(
                 )
                 # if token exists and the token's state (active/inactive, name)
                 # is stale compared to the group settings, update it
-                if (
-                    existing_invite_token
-                    and existing_invite_token.title != self.name
-                    or existing_invite_token.is_active != self.use_invite_token
+                if existing_invite_token and (
+                    existing_invite_token.title != self.name or existing_invite_token.is_active != self.use_invite_token
                 ):
                     existing_invite_token.title = self.name
                     existing_invite_token.is_active = self.use_invite_token
