@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
-"MIME-Version: 1.0\n"
 "Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, python-format
@@ -38,21 +38,6 @@ msgstr ""
 "                            Bitte beachte: Das legt eine Veranstaltung für alle User im %(forum_name)s ein.<br>\n"
 "                            Falls du das nicht möchtest, nutze bitte ein Projekt oder eine Gruppe deiner Wahl.\n"
 "                            "
-
-msgid ""
-"\n"
-"                            Note: All upcoming appointments as well as past appointments from this year will be\n"
-"                            migrated. Appointments from 2025 and earlier will not be transferred to the new calendar.\n"
-"                            Please contact Support if you need this data.\n"
-"                        "
-msgstr ""
-
-msgid ""
-"\n"
-"                            The new calendar uses a new data type for internal events. You can migrate your existing\n"
-"                            events from the old calendar, which were only visible to group/project members, to the new calendar.\n"
-"                        "
-msgstr ""
 
 #, python-format
 msgid ""
@@ -2388,9 +2373,6 @@ msgstr "Bei der Migration ist ein Fehler aufgetreten. Manche Aufgaben wurden nic
 msgid "An error occurred during the migration. Some boards might not have been fully migrated."
 msgstr "Bei der Migration ist ein Fehler aufgetreten. Manche Boards wurden nicht vollständig migriert."
 
-msgid "An error occurred during the migration. Some events might not have been migrated."
-msgstr ""
-
 msgid "An error occurred while attempting to login via your social network account."
 msgstr "Beim Versuch, sich über dein soziales Netzwerkkonto anzumelden, ist ein Fehler aufgetreten."
 
@@ -2924,9 +2906,6 @@ msgstr "CSV-Zeile enthielt keine Daten für erforderliche Spalten: \"%(fields)s\
 
 msgid "Calendar"
 msgstr "Kalender"
-
-msgid "Calendar creation is in progress..."
-msgstr ""
 
 msgid "Call to Action"
 msgstr "Aufruf zum Handeln"
@@ -4173,9 +4152,6 @@ msgstr "Diskussion"
 msgid "Discussions"
 msgstr "Diskussionen"
 
-msgid "Dismiss"
-msgstr ""
-
 msgid "Display Name"
 msgstr "Anzeigename"
 
@@ -4796,6 +4772,10 @@ msgstr "Gib ein Einladungs-Token ein:"
 msgid "Enter a user name or email to find users to invite..."
 msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
 
+#, fuzzy
+msgid "Enter a valid email address."
+msgstr "Gib deine neue E-Mail-Adresse ein"
+
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
@@ -5072,9 +5052,6 @@ msgstr "Externe Ressource"
 
 msgid "External Resources"
 msgstr "Externe Ressourcen"
-
-msgid "External Video Conference URL"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "External contents"
@@ -6531,9 +6508,6 @@ msgstr "Es wird jedoch nicht gelöscht, da es noch aktiv ist."
 msgid "Http/Https Protocol (overrides settings)"
 msgstr "Http/Https Protokoll (overrides settings)"
 
-msgid "Hybrid"
-msgstr ""
-
 msgid "I accept the conditions in order to submit my application"
 msgstr "Ich akzeptiere die Bedingungen, um Teilnahme zu beantragen"
 
@@ -6665,9 +6639,6 @@ msgstr "Wenn ein Text hinterlegt wird, muss dieser von allen Benutzer/innen bei 
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr "Wenn aktiv, können Teilnahmeanträge nur während dieses Zeitraums eingereicht und bearbeitet werden. Du kannst diesen Zeitraum jederzeit ändern, um die Antragsstellung zu schließen oder zu verlängern."
 
-msgid "If the Calendar is not available withing a few minutes, some technical difficulties occurred with the calendar service. If the problems persist, please contact the support. We apologize for the inconveniences!"
-msgstr ""
-
 msgid "If the Task Board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the Task Board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
 msgstr "Wenn das Aufgaben-Board nicht innerhalb einiger Minuten verfügbar wird, gibt es technische Probleme mit dem Board-Service. Versuche die Aufgaben-Board App in den Einstellungen zu deaktivieren und zu reaktivieren. Falls das Problem bleibt, melde dich beim Support. Wir entschuldigen uns für die Unannehmlichkeiten!"
 
@@ -6735,14 +6706,6 @@ msgstr "Wenn du es dir später bei einigen Teilnahmeanträgen anders überlegt h
 msgid "If you have made a mistake and wish to change your new email address, you can go back and change it again:"
 msgstr "Falls du einen Fehler gemacht hast und die E-Mail Adresse erneut ändern willst, gehe einfach zurück und ändere sie erneut."
 
-#, python-format
-msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
-msgstr "Wenn du noch keine Mail mit einem Bestätigungslink von %(portal_name)s bekommen hast, schaue bitte in deinem Spam-Ordner nach oder versuche, dich erneutz zu registrieren!"
-
-#, python-format
-msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
-msgstr "Wenn du noch keine Mail mit einem Bestätigungslink bekommen hast, registriere dich bitte erneut oder kontaktiere unseren Support unter %(email)s!"
-
 msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
 msgstr "Wenn du Probleme mit dem Verifikationsvorgang hast, wende dich bitte an den Support!"
 
@@ -6793,12 +6756,6 @@ msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
 
 msgid "If you would like to extend the period, you are welcome to make a new booking using the following form:"
 msgstr "Wenn du den Zeitraum verlängern möchtest, kannst du gerne über das folgende Formular erneut eine Buchung vornehmen:"
-
-msgid "If you would like to extend your booking, please feel free to contact us using the following form:"
-msgstr ""
-
-msgid "If you would like to renew your booking, please feel free to contact us using the following form:"
-msgstr ""
 
 msgid "Ignored/Failed Items"
 msgstr "Ignorierte/Fehlgeschlagene Einträge"
@@ -7428,9 +7385,6 @@ msgstr "Lobby-Event"
 msgid "Location"
 msgstr "Standort"
 
-msgid "Location Type"
-msgstr ""
-
 msgid "Log in"
 msgstr "Einloggen"
 
@@ -7477,9 +7431,6 @@ msgstr "Anmeldung abgebrochen"
 
 msgid "Login and Connect"
 msgstr "Anmeldung und Verbindung"
-
-msgid "Login required"
-msgstr "Login erforderlich"
 
 #, python-format
 msgid "Login token was sent to %(email)s."
@@ -7789,17 +7740,11 @@ msgstr "Microsite Video"
 msgid "Migrate Nextcloud Boards"
 msgstr "Nextcloud-Boards Migrieren"
 
-msgid "Migrate Private Events"
-msgstr ""
-
 msgid "Migrate Todos"
 msgstr "Aufgaben migrieren"
 
 msgid "Migrate Todos to Task Board"
 msgstr "Migriere Aufgaben ins Aufgaben-Board"
-
-msgid "Migrate private Events to the new calendar app"
-msgstr ""
 
 msgid "Migrate your boards from the Nextcloud Deck app to your groups and projects!"
 msgstr "Migriere deine Boards aus der Nextcloud Deck App in deine Gruppen und Projekte!"
@@ -7812,10 +7757,6 @@ msgstr "Die Migration läuft..."
 
 msgid "Migration successfully finished. You can access the migrated boards in the Task Board of the selected groups/projects."
 msgstr "Die Migration war erfolgreich. Du findest die migrierten Boards im Aufgaben-Board der ausgewählten Gruppen/Projekte."
-
-#, python-format
-msgid "Migration to %(calendar_link)s successfully finished. "
-msgstr ""
 
 #, python-format
 msgid "Migration to %(deck_link)s successfully finished. "
@@ -8151,12 +8092,6 @@ msgstr "Nächste Woche"
 msgid "Nextcloud Deck Board ID"
 msgstr "Nextcloud Deck Board-ID"
 
-msgid "Nextcloud Group Calendar CalDAV Publish URL"
-msgstr ""
-
-msgid "Nextcloud Group Calendar CalDAV URL"
-msgstr ""
-
 msgid "Nextcloud Group ID"
 msgstr "Nextcloud Gruppen-ID"
 
@@ -8253,9 +8188,6 @@ msgstr "Keine Pads"
 
 msgid "No etherpads have been created yet."
 msgstr "Es wurden noch keine Pads erstellt."
-
-msgid "No events found that should be migrated."
-msgstr ""
 
 msgid "No files"
 msgstr "Keine Dateien vorhanden"
@@ -8613,9 +8545,6 @@ msgstr "Eins deiner Inserate ist abgelaufen"
 msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
 msgstr "Eins deiner Projekte/Gruppen wurde ins Portal \"%(portal_name)s\" verschoben! <br/><br/> Dein Benutzerkonto für das neue Portal ist das selbe wie für das Alte - du brauchst dich nicht neu zu Registrieren! <br/><br/>Alle alten URLs funktionieren weiterhin und leiten auf die korrekte Seite im neuen Portal um."
 
-msgid "Online"
-msgstr ""
-
 msgid "Online (has no location)"
 msgstr "Online (kein Standort)"
 
@@ -8667,9 +8596,6 @@ msgstr "Nur der Ersteller oder zugewiesene einer Aufgabe kann sie abschließen!"
 
 msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
 msgstr "Nur Nutzende, die das Newsletter-Opt-In in ihrem Profil aktiviert haben, erhalten den Newsletter."
-
-msgid "Onsite"
-msgstr ""
 
 msgid "Open"
 msgstr "Offen"
@@ -8909,9 +8835,6 @@ msgstr "Vergangene Veranstaltungen"
 
 msgid "Past Polls"
 msgstr "Archivierte Umfragen"
-
-msgid "Past events dated before this year are not considered for migration."
-msgstr ""
 
 msgid "Paste or type the link's URL here"
 msgstr "Füge oder tippe die URL des Links hier ein"
@@ -10194,9 +10117,6 @@ msgstr "Soll dein Projekt auch für nicht eingeloggte Benutzer/innen auffindbar 
 msgid "Show"
 msgstr "Anzeigen"
 
-msgid "Show BBB guest access outside of conference."
-msgstr ""
-
 msgid "Show Call to Action Box"
 msgstr "Zeige die Microsite-Box an"
 
@@ -10536,9 +10456,6 @@ msgstr "Import starten?"
 msgid "Start the migration of Todos to the Task Board in the background."
 msgstr "Starte die Migration von Aufgaben zum Aufgaben-Board im Hintergrund."
 
-msgid "Start the migration the new calendar in the background."
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Start-Time"
 msgstr "Start-Zeit"
@@ -10692,9 +10609,6 @@ msgstr "Nachhaltige Städte und Kommunen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Ziele für nachhaltige Entwicklung"
-
-msgid "Synchronized Event"
-msgstr ""
 
 msgid "Tag persons"
 msgstr "Personen markieren"
@@ -11025,9 +10939,6 @@ msgstr "Das Pad konnte nicht erstellt werden weil der Etherpad-Service falsch ko
 
 msgid "The email address can be changed in the SSO provider."
 msgstr "Die E-Mail-Adresse kann im SSO Anbieter geädert werden."
-
-msgid "The email address for the account you are trying to use needs to be activated before you can log in."
-msgstr "Die E-Mail-Adresse des Accounts, mit dem du versuchst einzuloggen, muss erst bestätigt werden."
 
 msgid "The email address was not a valid email address!"
 msgstr "Die E-Mail Adresse war keine gültige E-Mail Adresse!"
@@ -11630,9 +11541,6 @@ msgstr "Dies wird die Standardeinstellungen für alle Tagungseinstellungen."
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Diese Anwendung kann nur für eine Gruppe, aber nicht für ein Projekt aktiviert werden!"
 
-msgid "This account is inactive."
-msgstr "Dieses Benutzerkonto ist deaktiviert worden."
-
 msgid "This account is no longer active. You have been logged out."
 msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
@@ -11708,6 +11616,9 @@ msgstr "Die Terminfindung für diese Veranstaltung ist bereits beendet. Die Abst
 
 msgid "This event has been canceled. Voting is closed."
 msgstr "Diese Veranstaltung wurde abgesagt. Die Abstimmung ist geschlossen."
+
+msgid "This field may not be blank."
+msgstr ""
 
 msgid "This function is not enabled for this conference."
 msgstr "Diese Funktion ist für diese Tagung nicht aktiviert."
@@ -12733,9 +12644,6 @@ msgstr "Video"
 msgid "Video Conference Server"
 msgstr "VideoTagungs-Server"
 
-msgid "Video call: "
-msgstr ""
-
 msgid "Video conference"
 msgstr "Videokonferenz"
 
@@ -13558,9 +13466,6 @@ msgstr "Hier können Sie die Teilnehmer-Kapazitätenlimits des BBB-Servers für 
 
 msgid "You can directly create conference events for rooms from here by using the controls for each room's dropdown menu."
 msgstr "Du kannst von hier aus direkt Tagungsveranstaltungen für Räume erstellen, indem du die Steuerelemente für das Dropdown-Menü der einzelnen Räume verwendest."
-
-msgid "You can dismiss the migration, then the migration hint want be shown anymore."
-msgstr ""
 
 msgctxt "a link to click on"
 msgid "You can do this here"
@@ -15637,6 +15542,14 @@ msgstr "Ja"
 #~ msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
 #~ msgstr "Wenn du kein/keine Portaladministrator_in bist und Änderungen vornehmen möchtest, wende dich bitte an einen der unten aufgeführten Portaladministrator_innen, um diese Änderungen für dich vorzunehmen."
 
+#, python-format
+#~ msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
+#~ msgstr "Wenn du noch keine Mail mit einem Bestätigungslink von %(portal_name)s bekommen hast, schaue bitte in deinem Spam-Ordner nach oder versuche, dich erneutz zu registrieren!"
+
+#, python-format
+#~ msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
+#~ msgstr "Wenn du noch keine Mail mit einem Bestätigungslink bekommen hast, registriere dich bitte erneut oder kontaktiere unseren Support unter %(email)s!"
+
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Falls du noch Inhalte von dir löschen möchtest, tue dies bitte jetzt indem du die Inhalte auf den entsprechenden Seiten löscht. Sobald du dein Konto löschst wirst du absolut keinen Zugriff mehr auf übrig gebliebene Inhalte von dir auf dieser Seite haben."
 
@@ -15675,6 +15588,9 @@ msgstr "Ja"
 
 #~ msgid "Location (optional)."
 #~ msgstr "Ort (optional)."
+
+#~ msgid "Login required"
+#~ msgstr "Login erforderlich"
 
 #~ msgid "Low"
 #~ msgstr "Niedrig"
@@ -15996,6 +15912,9 @@ msgstr "Ja"
 #~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
 #~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
 
+#~ msgid "The email address for the account you are trying to use needs to be activated before you can log in."
+#~ msgstr "Die E-Mail-Adresse des Accounts, mit dem du versuchst einzuloggen, muss erst bestätigt werden."
+
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
 
@@ -16028,6 +15947,9 @@ msgstr "Ja"
 
 #~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
 #~ msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
+
+#~ msgid "This account is inactive."
+#~ msgstr "Dieses Benutzerkonto ist deaktiviert worden."
 
 #~ msgid "This conference shall be made publicly findable via other platforms."
 #~ msgstr "Diese Tagung soll über andere Plattformen öffentlich auffindbar gemacht werden."

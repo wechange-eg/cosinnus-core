@@ -179,7 +179,8 @@ class LoginRateLimitMiddleware(MiddlewareMixin):
             if request.path.startswith(watch_url) and request.method.lower() == 'post':
                 username = request.POST.get(username_field, None)
                 # get_valid_filename raises SuspiciousFileOperation on '', '.', '..'
-                # we just set the username to None in this case
+                # we just set the username to None in this case,
+                # since these are invalid usernames anyway so form validation will fail
                 try:
                     username = get_valid_filename(username)
                 except SuspiciousFileOperation:
