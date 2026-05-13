@@ -157,7 +157,7 @@ setup(
         'sentry-sdk==1.45.1',
         'tblib==3.0.0',  # for parallelized testing
         'python-dateutil==2.9.0.post0',
-        'urllib3==2.6.3',
+        'urllib3==2.7.0',
         'rdflib==7.6.0',
         'pymemcache==4.0.0',
         'qrcode==8.2',
