@@ -166,6 +166,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         serializer = CosinnusUserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
+        # data ist validated, so user is authenticated
 
         # deny login if additional validation checks fail
         additional_checks_error_message = self.additional_user_validation_checks(user)
