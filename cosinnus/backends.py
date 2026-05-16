@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 import logging
 import smtplib
-from contextlib import suppress
 
 import dkim
 from django.contrib.auth import get_user_model
@@ -16,7 +15,6 @@ from haystack.backends.elasticsearch7_backend import Elasticsearch7SearchBackend
 from urllib3.exceptions import ConnectionError, ProtocolError
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import get_user_by_email_safe
 
@@ -41,12 +39,6 @@ class EmailAuthBackend(ModelBackend):
         email = username.lower().strip()
         user = get_user_by_email_safe(email)
 
-        # find user by unverified email if email-verification is active
-        if not user and CosinnusPortal.get_current().email_needs_verification:
-            # look for a user with a non-activated emailaddress
-            with suppress(USER_MODEL.DoesNotExist):
-                user = USER_MODEL.objects.filter(is_active=True, email__iendswith='__%s' % email).latest('date_joined')
-
         # handle user not found
         if not user:
             # Run the default password hasher once to reduce the timing
@@ -58,7 +50,9 @@ class EmailAuthBackend(ModelBackend):
         if not user.check_password(password):
             return None
 
-        # after password-check, reject guest users
+        # password hasher ran once, so timing is balanced
+
+        # reject guest users
         if user.is_guest:
             return None
 

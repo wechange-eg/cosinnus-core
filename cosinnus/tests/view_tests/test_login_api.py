@@ -189,8 +189,7 @@ class LoginViewTest(APITestCase):
         self.portal.users_need_activation = False
         self.portal.email_needs_verification = True
         self.portal.save()
-        self.user.email = f'__{self.user.email}'
-        self.user.save()
+        self.assertFalse(self.user.cosinnus_profile.email_verified, 'For this test, `email_verified` needs to be False')
 
         response = self.client.post(
             self.login_url,
