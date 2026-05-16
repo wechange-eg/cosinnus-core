@@ -139,14 +139,18 @@ switch_language = SwitchLanguageView.as_view()
 
 class LoginViewAdditionalLogicMixin(object):
     def additional_user_validation_checks(self, user) -> Optional[Promise]:
-        """Does additional validation checks for a user and may have effects like triggering sending a mail.
-        @return None if no errors are found, else a str error message that should be displayed to the user.
-            if this does not return None, the login attempt should be denied!"""
+        """
+        Does additional validation checks for a user and may have effects like triggering sending a mail.
+        - assumes the user is already authenticated
 
-        if user.is_authenticated and not user.is_account_login_approved:
+        @return None if no errors are found, else a str error message that should be displayed to the user.
+            if this does not return None, the login attempt should be denied!
+        """
+
+        if not user.is_account_login_approved:
             return error_codes.ERROR_LOGIN_USER_NOT_ADMIN_APPROVED
 
-        if user.is_authenticated and not user.is_active:
+        if not user.is_active:
             return error_codes.ERROR_LOGIN_USER_DISABLED
 
         if (
@@ -182,6 +186,8 @@ class CosinnusLoginView(LoginViewAdditionalLogicMixin, LoginView):
         For email-verified-locked portals, refuse the login for users who haven't got their email verified.
         """
         user = form.get_user()
+        # form is valid, so user is authenticated
+
         # deny login if additional validation checks fail
         additional_checks_error_message = self.additional_user_validation_checks(user)
         if additional_checks_error_message:
