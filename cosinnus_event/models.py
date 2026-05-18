@@ -272,11 +272,7 @@ class Event(
         elif self.is_hidden_group_proxy:
             # hidden proxy events redirect to the group
             return self.group.get_absolute_url()
-        elif (
-            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
-            and self.state == Event.STATE_SCHEDULED
-            and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
-        ):
+        elif self.is_calendar_event:
             # redirect to event in v3 calendar
             return self.get_calendar_url()
         return group_aware_reverse('cosinnus:event:event-detail', kwargs=kwargs)
@@ -288,11 +284,7 @@ class Event(
         elif self.is_hidden_group_proxy:
             # hidden proxy events redirect to the group
             return self.group.get_edit_url()
-        elif (
-            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
-            and self.state == Event.STATE_SCHEDULED
-            and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
-        ):
+        elif self.is_calendar_event:
             # redirect to event in v3 calendar
             return self.get_calendar_url()
         return group_aware_reverse('cosinnus:event:event-edit', kwargs=kwargs)
@@ -304,14 +296,20 @@ class Event(
         elif self.is_hidden_group_proxy:
             # hidden proxy events redirect to the group
             return self.group.get_delete_url()
-        elif (
-            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
-            and self.state == Event.STATE_SCHEDULED
-            and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
-        ):
+        elif self.is_calendar_event:
             # redirect to event in v3 calendar
             return self.get_calendar_url()
         return group_aware_reverse('cosinnus:event:event-delete', kwargs=kwargs)
+
+    @property
+    def is_calendar_event(self):
+        return (
+            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
+            and self.state == Event.STATE_SCHEDULED
+            and hasattr(self, 'media_tag')
+            and self.media_tag
+            and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+        )
 
     def get_calendar_url(self):
         calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
