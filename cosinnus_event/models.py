@@ -315,7 +315,7 @@ class Event(
 
     def get_calendar_url(self):
         calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
-        event_url = f'{calendar_url}#public-{self.group.pk}-{self.pk}'
+        event_url = f'{calendar_url}?eventId={self.pk}&type=public&calId={self.group.pk}'
         return event_url
 
     def get_feed_url(self):
