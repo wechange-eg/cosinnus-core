@@ -8954,8 +8954,8 @@ msgid_plural "Please correct the errors below."
 msgstr[0] "Bitte korrigiere den Fehler unten."
 msgstr[1] "Bitte korrigiere die Fehler unten."
 
-msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
-msgstr "Bitte eine gültige E-Mail-Addresse und ein Passwort eingeben. Beide Felder berücksichtigen die Groß-/Kleinschreibung."
+msgid "Please enter a correct email and password."
+msgstr "Bitte eine gültige E-Mail-Adresse und ein Passwort eingeben."
 
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "Bitte beschreibe warum du diesen Inhalt meldest!"
@@ -14322,7 +14322,7 @@ msgid "Your recently visited Pads, Files, Events, Todos and other content will b
 msgstr "Hier findest du in Zukunft eine Übersicht über die von dir zuletzt genutzten Pads, Dateien, Termine, Aufgaben und andere Inhalte aus deinen Projekten und Gruppen."
 
 msgid "Your registration hasn't been confirmed yet. We'll let you know via email as soon as it's ready."
-msgstr ""
+msgstr "Deine Registrierung wurde noch nicht bestätigt. Wir geben dir per E-Mail Bescheid, sobald es losgehen kann."
 
 msgid "Your reply could not be matched to an existing message."
 msgstr "Für deine Antwort kontte die Urpsrungsnachricht nicht gefunden werden."
