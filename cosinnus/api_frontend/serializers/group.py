@@ -11,6 +11,9 @@ from cosinnus.utils.urls import group_aware_reverse
 class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     """Serializer for group settings"""
 
+    # group properties
+    name = serializers.CharField(read_only=True)
+
     # BBB settings
     bbb_available = serializers.SerializerMethodField()
     bbb_restricted = serializers.SerializerMethodField()
@@ -28,6 +31,7 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_cosinnus_group_model()
         fields = [
+            'name',
             'bbb_available',
             'bbb_restricted',
             'bbb_premium',
