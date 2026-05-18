@@ -362,7 +362,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 [
                     {
                         'id': self.test_event.id,
-                        'group': self.test_group.id,
+                        'space': self.test_group.id,
                         'title': self.test_event.title,
                         'from_date': self.test_event.from_date.astimezone(self.tz).isoformat(),
                         'to_date': self.test_event.to_date.astimezone(self.tz).isoformat(),

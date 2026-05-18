@@ -38,13 +38,13 @@ class CosinnusCalendarListSerializer(serializers.ModelSerializer):
     """Serializer for events in the calendar list API view."""
 
     attending = serializers.SerializerMethodField()
-    group = serializers.IntegerField(source='group.id', read_only=True)
+    space = serializers.IntegerField(source='group.id', read_only=True)
 
     class Meta:
         model = Event
         fields = (
             'id',
-            'group',
+            'space',
             'title',
             'from_date',
             'to_date',
