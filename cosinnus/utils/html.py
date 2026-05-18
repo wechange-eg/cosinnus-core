@@ -66,11 +66,13 @@ def render_html_with_variables(user, html, variables=None):
 
 def is_html(content):
     """Check if content is HTML."""
-    return nh3.is_html(content)
+    return content and nh3.is_html(content)
 
 
 def sanitize_html(html):
     """Sanitize HTML and mark is as safe."""
+    if not html:
+        return html
     return mark_safe(nh3.clean(html))
 
 
