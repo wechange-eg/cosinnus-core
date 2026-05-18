@@ -26,6 +26,21 @@ msgid ""
 "                            "
 msgstr ""
 
+msgid ""
+"\n"
+"                            Note: All upcoming appointments as well as past appointments from this year will be\n"
+"                            migrated. Appointments from 2025 and earlier will not be transferred to the new calendar.\n"
+"                            Please contact Support if you need this data.\n"
+"                        "
+msgstr ""
+
+msgid ""
+"\n"
+"                            The new calendar uses a new data type for internal events. You can migrate your existing\n"
+"                            events from the old calendar, which were only visible to group/project members, to the new calendar.\n"
+"                        "
+msgstr ""
+
 #, python-format
 msgid ""
 "\n"
@@ -2232,6 +2247,9 @@ msgstr ""
 msgid "An error occurred during the migration. Some boards might not have been fully migrated."
 msgstr ""
 
+msgid "An error occurred during the migration. Some events might not have been migrated."
+msgstr ""
+
 msgid "An error occurred while attempting to login via your social network account."
 msgstr ""
 
@@ -2742,6 +2760,9 @@ msgid "CSV row did not contain data for required columns: \"%(fields)s\""
 msgstr ""
 
 msgid "Calendar"
+msgstr ""
+
+msgid "Calendar creation is in progress..."
 msgstr ""
 
 msgid "Call to Action"
@@ -3975,6 +3996,9 @@ msgstr ""
 msgid "Discussions"
 msgstr ""
 
+msgid "Dismiss"
+msgstr ""
+
 msgid "Display Name"
 msgstr ""
 
@@ -4872,6 +4896,9 @@ msgid "External Resource"
 msgstr ""
 
 msgid "External Resources"
+msgstr ""
+
+msgid "External Video Conference URL"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5941,6 +5968,9 @@ msgstr ""
 msgid "Http/Https Protocol (overrides settings)"
 msgstr ""
 
+msgid "Hybrid"
+msgstr ""
+
 msgid "I accept the conditions in order to submit my application"
 msgstr ""
 
@@ -6072,6 +6102,9 @@ msgstr ""
 msgid "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications."
 msgstr ""
 
+msgid "If the Calendar is not available withing a few minutes, some technical difficulties occurred with the calendar service. If the problems persist, please contact the support. We apologize for the inconveniences!"
+msgstr ""
+
 msgid "If the Task Board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the Task Board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
 msgstr ""
 
@@ -6188,6 +6221,12 @@ msgid "If you would like to change your email address, you can do it here:"
 msgstr ""
 
 msgid "If you would like to extend the period, you are welcome to make a new booking using the following form:"
+msgstr ""
+
+msgid "If you would like to extend your booking, please feel free to contact us using the following form:"
+msgstr ""
+
+msgid "If you would like to renew your booking, please feel free to contact us using the following form:"
 msgstr ""
 
 msgid "Ignored/Failed Items"
@@ -6817,6 +6856,9 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
+msgid "Location Type"
+msgstr ""
+
 msgid "Log in"
 msgstr ""
 
@@ -6862,6 +6904,9 @@ msgid "Login Cancelled"
 msgstr ""
 
 msgid "Login and Connect"
+msgstr ""
+
+msgid "Login required"
 msgstr ""
 
 #, python-format
@@ -7170,10 +7215,16 @@ msgstr ""
 msgid "Migrate Nextcloud Boards"
 msgstr ""
 
+msgid "Migrate Private Events"
+msgstr ""
+
 msgid "Migrate Todos"
 msgstr ""
 
 msgid "Migrate Todos to Task Board"
+msgstr ""
+
+msgid "Migrate private Events to the new calendar app"
 msgstr ""
 
 msgid "Migrate your boards from the Nextcloud Deck app to your groups and projects!"
@@ -7186,6 +7237,10 @@ msgid "Migration is in progress..."
 msgstr ""
 
 msgid "Migration successfully finished. You can access the migrated boards in the Task Board of the selected groups/projects."
+msgstr ""
+
+#, python-format
+msgid "Migration to %(calendar_link)s successfully finished. "
 msgstr ""
 
 #, python-format
@@ -7520,6 +7575,12 @@ msgstr ""
 msgid "Nextcloud Deck Board ID"
 msgstr ""
 
+msgid "Nextcloud Group Calendar CalDAV Publish URL"
+msgstr ""
+
+msgid "Nextcloud Group Calendar CalDAV URL"
+msgstr ""
+
 msgid "Nextcloud Group ID"
 msgstr ""
 
@@ -7616,6 +7677,9 @@ msgstr "No Pads"
 
 msgid "No etherpads have been created yet."
 msgstr "No Pads have been created yet."
+
+msgid "No events found that should be migrated."
+msgstr ""
 
 msgid "No files"
 msgstr ""
@@ -7970,6 +8034,9 @@ msgstr ""
 msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
 msgstr ""
 
+msgid "Online"
+msgstr ""
+
 msgid "Online (has no location)"
 msgstr ""
 
@@ -8020,6 +8087,9 @@ msgid "Only the owner and assignee of a todo can finish it!"
 msgstr ""
 
 msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
+msgstr ""
+
+msgid "Onsite"
 msgstr ""
 
 msgid "Open"
@@ -8261,6 +8331,9 @@ msgstr ""
 msgid "Past Polls"
 msgstr ""
 
+msgid "Past events dated before this year are not considered for migration."
+msgstr ""
+
 msgid "Paste or type the link's URL here"
 msgstr ""
 
@@ -8380,7 +8453,7 @@ msgid_plural "Please correct the errors below."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
+msgid "Please enter a correct email and password."
 msgstr ""
 
 msgid "Please enter a description of why you are reporting this content!"
@@ -9540,6 +9613,9 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+msgid "Show BBB guest access outside of conference."
+msgstr ""
+
 msgid "Show Call to Action Box"
 msgstr ""
 
@@ -9879,6 +9955,9 @@ msgstr ""
 msgid "Start the migration of Todos to the Task Board in the background."
 msgstr ""
 
+msgid "Start the migration the new calendar in the background."
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Start-Time"
 msgstr ""
@@ -10027,6 +10106,9 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
+msgstr ""
+
+msgid "Synchronized Event"
 msgstr ""
 
 msgid "Tag persons"
@@ -11958,6 +12040,9 @@ msgstr ""
 msgid "Video Conference Server"
 msgstr ""
 
+msgid "Video call: "
+msgstr ""
+
 msgid "Video conference"
 msgstr ""
 
@@ -12767,6 +12852,9 @@ msgid "You can define BBB server participant capacity limits here for specific t
 msgstr ""
 
 msgid "You can directly create conference events for rooms from here by using the controls for each room's dropdown menu."
+msgstr ""
+
+msgid "You can dismiss the migration, then the migration hint want be shown anymore."
 msgstr ""
 
 msgctxt "a link to click on"
