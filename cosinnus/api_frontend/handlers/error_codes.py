@@ -6,9 +6,7 @@ from django.utils.translation import gettext_lazy as _
 #       counter. For example: any code in 1*** is login-related
 #     error_message: string that is only used as a display in the API and never shown to the user
 
-ERROR_LOGIN_INCORRECT_CREDENTIALS = _(
-    'Please enter a correct email and password. Note that both fields may be case-sensitive.'
-)
+ERROR_LOGIN_INCORRECT_CREDENTIALS = _('Please enter a correct email and password.')
 # ERROR_LOGIN_USER_DISABLED = 'User is disabled'
 ERROR_LOGIN_USER_DISABLED = ERROR_LOGIN_INCORRECT_CREDENTIALS  # we show disabled users as wrong credentials
 ERROR_LOGIN_USER_NOT_ADMIN_APPROVED = _(
