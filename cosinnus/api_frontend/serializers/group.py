@@ -13,6 +13,7 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
 
     # group properties
     name = serializers.CharField(read_only=True)
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
 
     # BBB settings
     bbb_available = serializers.SerializerMethodField()
@@ -21,6 +22,7 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     bbb_premium_booking_url = serializers.SerializerMethodField()
 
     # Events app settings
+    events_calendar_url = serializers.SerializerMethodField()
     events_ical_url = serializers.SerializerMethodField()
     events_publish_url = serializers.SerializerMethodField()
     events_event_message = serializers.SerializerMethodField()
@@ -32,10 +34,12 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
         model = get_cosinnus_group_model()
         fields = [
             'name',
+            'url',
             'bbb_available',
             'bbb_restricted',
             'bbb_premium',
             'bbb_premium_booking_url',
+            'events_calendar_url',
             'events_ical_url',
             'events_publish_url',
             'events_event_message',
@@ -68,6 +72,12 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
         if settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED:
             return render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html')
         return ''
+
+    def get_events_calendar_url(self, obj):
+        calendar_url = None
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': obj})
+        return calendar_url
 
     def get_events_ical_url(self, obj):
         """Returns the group calendar public event ical feed."""

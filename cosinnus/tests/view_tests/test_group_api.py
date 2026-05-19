@@ -84,10 +84,12 @@ class GroupSettingsAPITest(APITestCase):
             data,
             {
                 'name': self.test_group.name,
+                'url': self.test_group.get_absolute_url(),
                 'bbb_available': False,
                 'bbb_restricted': False,
                 'bbb_premium': False,
                 'bbb_premium_booking_url': render_to_string('cosinnus/v2/urls/conference_premium_booking_url.html'),
+                'events_calendar_url': None,
                 'events_ical_url': group_aware_reverse('cosinnus:team-feed', kwargs={'team_id': self.test_group.id}),
                 'events_publish_url': None,
                 'events_event_message': None,
