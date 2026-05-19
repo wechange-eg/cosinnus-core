@@ -250,6 +250,27 @@ def full_name_force(value):
 
 
 @register.filter
+def full_name_in_mail(value):
+    """Template filter to get a readable name for the given user.
+    Returns the users full name for use in emails which may have additional information.
+
+    .. code-block:: django
+
+        {{ user|full_name }}
+
+    :param AbstractBaseUser value: the user object
+    :return: either the full user name or the login user name, or (Deleted User) if the user is inactive.
+    """
+    from django.contrib.auth.models import AbstractBaseUser
+
+    if isinstance(value, AbstractBaseUser):
+        if hasattr(value, 'cosinnus_profile') and value.cosinnus_profile:
+            return value.cosinnus_profile.get_full_name_in_mail()
+        return value.get_full_name()
+    return ''
+
+
+@register.filter
 def profile_url(value):
     """Template filter to get the profile page url for a given user
 
