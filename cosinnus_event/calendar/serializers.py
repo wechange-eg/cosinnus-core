@@ -38,13 +38,13 @@ class CosinnusCalendarListSerializer(serializers.ModelSerializer):
     """Serializer for events in the calendar list API view."""
 
     attending = serializers.SerializerMethodField()
-    group = serializers.IntegerField(source='group.id', read_only=True)
+    space = serializers.IntegerField(source='group.id', read_only=True)
 
     class Meta:
         model = Event
         fields = (
             'id',
-            'group',
+            'space',
             'title',
             'from_date',
             'to_date',
@@ -197,6 +197,7 @@ class CosinnusCalendarEventSerializer(
     ical_url = serializers.SerializerMethodField()
 
     attendances = CosinnusCalendarEventAttendancesSerializer(many=True, read_only=True)
+    attendances_count = serializers.SerializerMethodField()
     bookmarked = serializers.SerializerMethodField()
 
     image = Base64ImageField(required=False, default=None, allow_null=True)
@@ -226,6 +227,7 @@ class CosinnusCalendarEventSerializer(
             'ical_url',
             'attending',
             'attendances',
+            'attendances_count',
             'bookmarked',
             'image',
             'attached_files',
@@ -280,6 +282,9 @@ class CosinnusCalendarEventSerializer(
 
     def get_ical_url(self, obj):
         return obj.get_feed_url()
+
+    def get_attendances_count(self, obj):
+        return obj.attendances.filter(state=EventAttendance.ATTENDANCE_GOING).count()
 
     def get_bookmarked(self, obj):
         user = self.context['request'].user

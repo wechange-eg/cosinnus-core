@@ -7,4 +7,4 @@ urlpatterns = []
 
 router = routers.SimpleRouter()
 router.register('events', CosinnusCalendarViewSet, 'calendar-event')
-urlpatterns += [path('api/v3/space/<int:group_id>/calendar/', include(router.urls))]
+urlpatterns += [path('api/v3/spaces/<int:group_id>/calendar/', include(router.urls))]

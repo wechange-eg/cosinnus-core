@@ -325,6 +325,8 @@ class HaystackMapResult(BaseMapResult):
         Return the description as safe HTML.
         Markdown descriptions are converted to HTML. HTML descriptions are sanitized.
         """
+        if not description:
+            return description
         if is_html(description):
             description = sanitize_html(description)
         else:

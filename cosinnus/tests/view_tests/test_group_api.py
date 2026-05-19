@@ -83,6 +83,7 @@ class GroupSettingsAPITest(APITestCase):
         self.assertEqual(
             data,
             {
+                'name': self.test_group.name,
                 'bbb_available': False,
                 'bbb_restricted': False,
                 'bbb_premium': False,

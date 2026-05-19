@@ -41,6 +41,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import ensure_group_type
 from cosinnus.utils.functions import ensure_list_of_ints, is_number, unique_aware_slugify
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.html import convert_html_to_plaintext
 from cosinnus.utils.http import is_ajax
 from cosinnus.utils.permissions import (
     check_object_read_access,
@@ -829,7 +830,10 @@ class BaseEventFeed(ICalFeed):
     def item_description(self, item):
         description = item.get_absolute_url()
         if item.note and item.note.strip():
-            description += '\n\n' + item.note
+            note = item.note
+            if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+                note = convert_html_to_plaintext(note)
+            description += '\n\n' + note
         # add video conference url
         if item.media_tag.location_type_has_video_conference:
             video_conference_url = item.media_tag.get_video_conference_url()

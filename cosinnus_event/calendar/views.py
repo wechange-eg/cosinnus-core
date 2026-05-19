@@ -34,7 +34,7 @@ class CalendarRedirectMixin:
             v3_calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
             if hasattr(self, 'object') and self.object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL:
                 # open event in v3 calendar
-                v3_calendar_url += f'#public-{self.group.pk}-{self.object.pk}'
+                v3_calendar_url += f'?eventId={self.object.pk}&type=public&calId={self.group.pk}'
             return redirect(v3_calendar_url)
         return super(CalendarRedirectMixin, self).dispatch(request, *args, **kwargs)
 
