@@ -232,7 +232,7 @@ class Event(
         created = bool(self.pk) is False
         super(Event, self).save(*args, **kwargs)
 
-        if created and not self.is_hidden_group_proxy:
+        if created and not self.is_hidden_group_proxy and not self.state == Event.STATE_SYNCHRONIZED_EVENT:
             # event/doodle was created or
             # event went from being a doodle to being a real event, so fire event created
             session_id = uuid1().int
