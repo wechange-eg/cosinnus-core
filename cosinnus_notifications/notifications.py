@@ -34,7 +34,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import GlobalUserNotificationSetting
 from cosinnus.models.tagged import BaseTaggableObjectModel
-from cosinnus.templatetags.cosinnus_tags import full_name, textfield
+from cosinnus.templatetags.cosinnus_tags import full_name, full_name_in_mail, textfield
 from cosinnus.utils.files import get_image_url_for_icon
 from cosinnus.utils.functions import ensure_dict_keys, resolve_attributes
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
@@ -771,7 +771,7 @@ class NotificationsThread(CosinnusWorkerThread):
                         'receiver': receiver,
                         'receiver_name': mark_safe(strip_tags(full_name(receiver))),
                         'sender': self.user,
-                        'sender_name': mark_safe(strip_tags(full_name(self.user))),
+                        'sender_name': mark_safe(strip_tags(full_name_in_mail(self.user))),
                         'object': self.obj,
                         'notification_settings_url': mark_safe(preference_url),
                     }
@@ -791,7 +791,7 @@ class NotificationsThread(CosinnusWorkerThread):
             # strip anything unusual from the sender's name and any formatting interfering with the header
             portal_name = force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
             username = (
-                strip_tags(full_name(notification_event.user))
+                strip_tags(full_name_in_mail(notification_event.user))
                 .replace(',', '')
                 .replace('.', '')
                 .replace('<', '')
@@ -946,12 +946,12 @@ def render_digest_item_for_notification_event(
             return '<div>stub: event "%s" with object "%s" from user "%s"</div>' % (
                 notification_event.notification_id,
                 getattr(obj, 'text', getattr(obj, 'title', getattr(obj, 'name', 'NOARGS'))),
-                notification_event.user.get_full_name(),
+                notification_event.user.get_full_name_in_mail(),
             )
             """
         data_attributes = options['data_attributes']
 
-        sender_name = mark_safe(strip_tags(full_name(notification_event.user)))
+        sender_name = mark_safe(strip_tags(full_name_in_mail(notification_event.user)))
         # add special attributes to object
         obj._sender_name = sender_name
         obj._sender = notification_event.user
