@@ -188,15 +188,17 @@ class NextcloudCaldavConnection:
                 description = migrate_description(event, event.note)
 
                 # create NextCloud calendar event
-                calendar.save_event(
+                caldav_event = calendar.save_event(
                     dtstart=self._to_caldav_time(event.from_date, event.is_all_day),
                     dtend=self._to_caldav_time(event.to_date, event.is_all_day),
                     summary=event.title,
                     description=description,
                 )
+                caldav_event_uid = str(caldav_event.icalendar_component['UID'])
 
                 # mark event as migrated and change state to synchronized event
                 event.state = Event.STATE_SYNCHRONIZED_EVENT
+                event.nextcloud_calendar_uid = caldav_event_uid
                 event.media_tag.migrated = True
                 event.media_tag.save()
                 event.save()
