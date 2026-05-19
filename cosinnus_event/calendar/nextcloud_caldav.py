@@ -1,11 +1,14 @@
+import datetime
 import logging
+import re
 
 from caldav.davclient import get_davclient
 from caldav.elements.dav import DisplayName
 from caldav.lib.error import ResponseError
-from django.utils.timezone import localtime
+from django.utils.timezone import localtime, make_aware, now
 
 from cosinnus.conf import settings
+from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.integration import migrate_description
 from cosinnus_event.models import Event
 
@@ -209,3 +212,104 @@ class NextcloudCaldavConnection:
                 extra={'group': group.id, 'calendar': group.nextcloud_calendar_url, 'exception': e},
             )
             group.calendar_migration_set_status(group.CALENDAR_MIGRATION_STATUS_FAILED)
+
+    def group_sync_private_events(self, group):
+        """Sync NexCloud caldav events for a group."""
+
+        if not group.nextcloud_calendar_url:
+            return
+        try:
+            calendar = self.caldav_client.calendar(url=group.nextcloud_calendar_url)
+
+            # get changed events, if sync-token is None, all events are fetched
+            sync_token = group.nextcloud_calendar_sync_token
+            caldav_events = calendar.objects_by_sync_token(sync_token=sync_token, load_objects=True)
+
+            # store next sync-token
+            sync_token = caldav_events.sync_token
+
+            # sync event changes
+            for caldav_event in caldav_events:
+                try:
+                    # get the event UID
+                    # note: extracting from url instead of using caldav data, as deleted events have no caldav data.
+                    event_caldav_uid = None
+                    match = re.search(r'/([^/]+)\.ics$', caldav_event.canonical_url)
+                    if match:
+                        event_caldav_uid = match.group(1)
+                    if not event_caldav_uid:
+                        raise Exception('Could not extract event UID!')
+
+                    synced_event = Event.objects.filter(
+                        state=Event.STATE_SYNCHRONIZED_EVENT, nextcloud_calendar_uid=event_caldav_uid
+                    ).first()
+                    if not caldav_event.data:
+                        # caldav event without data is returned when the event was deleted
+                        if synced_event:
+                            synced_event.delete()
+                    else:
+                        # sync existing caldav event
+
+                        # get event data and convert types
+                        dt_start = caldav_event.icalendar_component.get('DTSTART')
+                        if dt_start:
+                            dt_start = dt_start.dt
+                            # convert all day events
+                            if type(dt_start) is datetime.date:
+                                dt_start = make_aware(datetime.datetime(dt_start.year, dt_start.month, dt_start.day))
+
+                        dt_end = caldav_event.icalendar_component.get('DTEND')
+                        if dt_end:
+                            dt_end = dt_end.dt
+                            # convert all day events
+                            if type(dt_end) is datetime.date:
+                                dt_end = make_aware(datetime.datetime(dt_end.year, dt_end.month, dt_end.day, 23, 59))
+
+                        summary = caldav_event.icalendar_component.get('SUMMARY')
+                        if summary:
+                            summary = str(summary)
+
+                        description = caldav_event.icalendar_component.get('DESCRIPTION')
+                        if description:
+                            description = str(description)
+
+                        # check required data
+                        if not dt_start or not dt_end or not summary:
+                            raise Exception('Incomplete event data!')
+
+                        if not synced_event:
+                            # create event if not synced yet
+                            synced_event = Event.objects.create(
+                                group=group,
+                                state=Event.STATE_SYNCHRONIZED_EVENT,
+                                nextcloud_calendar_uid=event_caldav_uid,
+                                title=summary,
+                                from_date=dt_start,
+                                to_date=dt_end,
+                                note=description,
+                                nextcloud_calendar_last_sync=now(),
+                            )
+                            synced_event.media_tag.visibility = BaseTagObject.VISIBILITY_GROUP
+                            synced_event.media_tag.save()
+                        else:
+                            # update synced event
+                            synced_event.title = summary
+                            synced_event.from_date = dt_start
+                            synced_event.to_date = dt_end
+                            synced_event.note = description
+                            synced_event.nextcloud_calendar_last_sync = now()
+                            synced_event.save()
+                except Exception as e:
+                    logger.warning(
+                        'NC Calendar: calendar sync of event failed!',
+                        extra={'exception': e, 'event_url': caldav_event.canonical_url},
+                    )
+                    raise NextcloudCaldavConnectionException()
+
+            # save sync token and time after successful sync
+            group.nextcloud_calendar_sync_token = sync_token
+            group.nextcloud_calendar_last_sync = now()
+            group.save(update_fields=['nextcloud_calendar_sync_token', 'nextcloud_calendar_last_sync'])
+        except Exception as e:
+            logger.warning('NC Calendar: calendar sync failed!', extra={'exception': e})
+            raise NextcloudCaldavConnectionException()
