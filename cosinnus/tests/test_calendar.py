@@ -407,6 +407,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'ical_url': self.test_event.get_feed_url(),
                 'attending': False,
                 'attendances': [],
+                'attendances_count': 0,
                 'bookmarked': False,
                 'bbb_url': None,
                 'bbb_guest_url': None,
@@ -588,12 +589,14 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                     },
                 ],
             )
+            self.assertEqual(data['attendances_count'], 2)
 
             # check attendance readable by admin
             self.client.force_login(self.test_admin)
             res = self.client.get(self.event_detail_url)
             data = res.json()['data']
             self.assertEqual(len(data['attendances']), 2)
+            self.assertEqual(data['attendances_count'], 2)
 
             # check attendance not readable by group users
             self.client.force_login(self.test_second_group_user)
@@ -635,6 +638,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertEqual(data['attendances'], [])
+            self.assertEqual(data['attendances_count'], 0)
 
         def test_event_bookmark(self):
             # anonymous user cant bookmark
