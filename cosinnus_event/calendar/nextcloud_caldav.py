@@ -1,6 +1,7 @@
 import datetime
 import logging
 import re
+from typing import Optional
 
 from caldav.davclient import get_davclient
 from caldav.elements.dav import DisplayName
@@ -215,17 +216,26 @@ class NextcloudCaldavConnection:
             )
             group.calendar_migration_set_status(group.CALENDAR_MIGRATION_STATUS_FAILED)
 
-    def group_sync_private_events(self, group):
-        """Sync NexCloud caldav events for a group."""
+    def group_sync_private_events(self, group) -> Optional[str]:
+        """Sync NexCloud caldav events for a group.
+        @return: returns None if the sync was completed and a timestamp saved, str error message otherwise.
+        @raises: `NextcloudCaldavConnectionException` on connection errors, `Exception` on anything else."""
 
         if not group.nextcloud_calendar_url:
-            return
+            return f'Group {group.id} had no nextcloud_calendar_url.'
         try:
-            calendar = self.caldav_client.calendar(url=group.nextcloud_calendar_url)
+            try:
+                calendar = self.caldav_client.calendar(url=group.nextcloud_calendar_url)
 
-            # get changed events, if sync-token is None, all events are fetched
-            sync_token = group.nextcloud_calendar_sync_token
-            caldav_events = calendar.objects_by_sync_token(sync_token=sync_token, load_objects=True)
+                # get changed events, if sync-token is None, all events are fetched
+                sync_token = group.nextcloud_calendar_sync_token
+                caldav_events = calendar.objects_by_sync_token(sync_token=sync_token, load_objects=True)
+            except Exception as e:
+                logger.warning(
+                    'NC Calendar: calendar sync of event failed by caldav connection, aborting sync for group!',
+                    extra={'exception': e, 'group_id': group.id},
+                )
+                raise NextcloudCaldavConnectionException('Calendar sync of event failed by caldav connection!')
 
             # store next sync-token
             sync_token = caldav_events.sync_token
@@ -240,7 +250,11 @@ class NextcloudCaldavConnection:
                     if match:
                         event_caldav_uid = match.group(1)
                     if not event_caldav_uid:
-                        raise Exception('Could not extract event UID!')
+                        logger.warning(
+                            'NC Calendar: calendar sync of event failed for URL match, aborting sync for group!',
+                            extra={'event_url': caldav_event.canonical_url},
+                        )
+                        continue
 
                     synced_event = Event.objects.filter(
                         state=Event.STATE_SYNCHRONIZED_EVENT, nextcloud_calendar_uid=event_caldav_uid
@@ -277,7 +291,16 @@ class NextcloudCaldavConnection:
 
                         # check required data
                         if not dt_start or not dt_end or not summary:
-                            raise Exception('Incomplete event data!')
+                            logger.warning(
+                                'NC Calendar: calendar sync of event had incomplete data, aborting sync for group!',
+                                extra={
+                                    'event_url': caldav_event.canonical_url,
+                                    'dt_start': dt_start,
+                                    'dt_end': dt_end,
+                                    'summary': summary,
+                                },
+                            )
+                            continue
 
                         if not synced_event:
                             # create event if not synced yet
@@ -306,12 +329,13 @@ class NextcloudCaldavConnection:
                         'NC Calendar: calendar sync of event failed!',
                         extra={'exception': e, 'event_url': caldav_event.canonical_url},
                     )
-                    raise NextcloudCaldavConnectionException()
+                    continue
 
             # save sync token and time after successful sync
             group.nextcloud_calendar_sync_token = sync_token
             group.nextcloud_calendar_last_sync = now()
             group.save(update_fields=['nextcloud_calendar_sync_token', 'nextcloud_calendar_last_sync'])
+            return None  # return None as success
         except Exception as e:
-            logger.warning('NC Calendar: calendar sync failed!', extra={'exception': e})
-            raise NextcloudCaldavConnectionException()
+            logger.warning('NC Calendar: calendar sync of group failed!', extra={'exception': e, 'group_id': group.id})
+            raise
