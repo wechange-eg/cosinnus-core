@@ -64,9 +64,9 @@ def render_html_with_variables(user, html, variables=None):
     return mark_safe(html)
 
 
-def is_html(content):
+def is_html(content) -> bool:
     """Check if content is HTML."""
-    return content and nh3.is_html(content)
+    return content and nh3.is_html(content) or False
 
 
 def sanitize_html(html):
