@@ -318,15 +318,21 @@ class Event(
 
     @property
     def is_calendar_event(self):
-        return (
-            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
-            and self.state == Event.STATE_SCHEDULED
-            and hasattr(self, 'media_tag')
-            and self.media_tag
-            and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
-        )
+        """Returns true if this is a v3 frontend calendar item"""
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            if self.state == Event.STATE_SYNCHRONIZED_EVENT:
+                return True
+            elif (
+                self.state == Event.STATE_SCHEDULED
+                and hasattr(self, 'media_tag')
+                and self.media_tag
+                and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+            ):
+                return True
+        return False
 
     def get_calendar_url(self):
+        """Returns the v3 frontend calendar URL for this event"""
         calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
         event_url = f'{calendar_url}?eventId={self.pk}&type=public&calId={self.group.pk}'
         return event_url
