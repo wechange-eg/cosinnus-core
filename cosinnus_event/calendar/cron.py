@@ -1,9 +1,13 @@
+import logging
+
 from django_cron import Schedule
 
 from cosinnus.conf import settings
 from cosinnus.cron import CosinnusCronJobBase
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
+
+logger = logging.getLogger(__name__)
 
 
 class CalendarSyncCaldavEvents(CosinnusCronJobBase):
@@ -27,6 +31,12 @@ class CalendarSyncCaldavEvents(CosinnusCronJobBase):
                 error_msg = calendar.group_sync_private_events(group)
             except Exception as e:
                 error_msg = f'Sync of group (id {group.id}) failed: {e}'
+                logger.error(
+                    'CalendarSyncCaldavEvents: Sync of group failed!',
+                    extra={'exception': e, 'group_id': group.id},
+                )
+                if settings.DEBUG:
+                    raise
             if error_msg:
                 errors += error_msg + '\n'
             else:

@@ -24,6 +24,7 @@ from django.utils.html import escape, strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.timezone import localtime
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import pgettext_lazy
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
@@ -459,7 +460,7 @@ class NotificationsThread(CosinnusWorkerThread):
             self.already_emailed_user_emails = []
             self.already_alerted_user_ids = []
         self.sender = sender
-        self.user = user
+        self.user = user  # Note: may be `None`
         self.obj = obj
         self.audience = audience
         self.notification_id = notification_id
@@ -906,7 +907,7 @@ class NotificationsThread(CosinnusWorkerThread):
                 content_type=content_type,
                 object_id=self.obj.id,
                 group=self.group,
-                user=self.user,
+                user=self.user,  # Note: self.user may be None and still valid!
                 notification_id=self.notification_id,
                 audience=',%s,' % ','.join([str(receiver.id) for receiver in self.audience]),
             )
@@ -956,9 +957,16 @@ def render_digest_item_for_notification_event(
             """
         data_attributes = options['data_attributes']
 
-        sender_name = mark_safe(strip_tags(full_name(notification_event.user)))
-        # add special attributes to object
+        # `notification_event.user` may be `None` for a notification event that has no originating user
+        # hopefully the notification event is configured so sender_name is not used, but to prevent errors,
+        # we print it out as the "Unknown" user
+        if notification_event.user:
+            sender_name = mark_safe(strip_tags(full_name(notification_event.user)))
+        else:
+            sender_name = mark_safe(pgettext_lazy('An unknown user placeholder', 'Unknown'))
+        # add special attributes to object. these can be used in the cosinnus_notifications definition's properties
         obj._sender_name = sender_name
+        # even if `_sender` is `None`, `resolve_attributes()` will gracefully handle this if notifications reference it
         obj._sender = notification_event.user
 
         object_name = resolve_attributes(obj, data_attributes['object_name'], 'title')
@@ -1027,7 +1035,9 @@ def render_digest_item_for_notification_event(
             'object_text': object_text,
             'user_image_url': portal_url
             + (
-                notification_event.user.cosinnus_profile.get_avatar_thumbnail_url()
+                notification_event.user
+                and hasattr(notification_event.user, 'cosinnus_profile')
+                and notification_event.user.cosinnus_profile.get_avatar_thumbnail_url()
                 or static('images/jane-doe-small.png')
             ),
             'image_url': resolve_attributes(
@@ -1213,7 +1223,8 @@ notification_sessions = {}
 def notification_receiver(sender, user, obj, audience, session_id=None, end_session=False, **kwargs):
     """Generic receiver function for all notifications
     sender: the main object that is being updated / created
-    user: the user that modified the object and caused the event
+    user: the user that modified the object and caused the event. Note: may be `None` for notifications with no
+        originating source user, like CalDav notifications
     audience: a list of users that are potential targets for the event
 
     Feature: Physical event de-duplication and queuing: To achieve that a single physical event,
@@ -1251,7 +1262,7 @@ def notification_receiver(sender, user, obj, audience, session_id=None, end_sess
         aud_user for aud_user in audience if ((aud_user.is_active or not aud_user.is_authenticated) and aud_user.email)
     ]
     # support for user blocking, filter out all audience members that have the sending user blocked
-    if settings.COSINNUS_ENABLE_USER_BLOCK:
+    if settings.COSINNUS_ENABLE_USER_BLOCK and user is not None:
         audience = [aud_user for aud_user in audience if not check_user_blocks_user(aud_user, user)]
 
     if not session_id:
