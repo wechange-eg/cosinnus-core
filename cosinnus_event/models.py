@@ -232,45 +232,51 @@ class Event(
         created = bool(self.pk) is False
         super(Event, self).save(*args, **kwargs)
 
-        if created and not self.is_hidden_group_proxy and not self.state == Event.STATE_SYNCHRONIZED_EVENT:
+        if created and not self.is_hidden_group_proxy:
             # event/doodle was created or
             # event went from being a doodle to being a real event, so fire event created
             session_id = uuid1().int
             audience = get_user_model().objects.filter(id__in=self.group.members)
+
+            # self.creator may be None, for example for events of type STATE_SYNCHRONIZED_EVENT if no
+            # organizer or X-Creator was set in CalDav.
+            # if it IS set, filter the audience for the creator so they don't receive their own notification
             if self.creator:
                 audience = audience.exclude(id=self.creator.pk)
             group_followers_except_creator_ids = [
-                pk for pk in self.group.get_followed_user_ids() if pk not in [self.creator_id]
+                pk for pk in self.group.get_followed_user_ids() if pk != self.creator_id
             ]
             group_followers_except_creator = get_user_model().objects.filter(id__in=group_followers_except_creator_ids)
+
+            # switch signal types for specific event states
             if self.state == Event.STATE_SCHEDULED:
-                # followers for the group
-                cosinnus_notifications.followed_group_event_created.send(
-                    sender=self,
-                    user=self.creator,
-                    obj=self,
-                    audience=group_followers_except_creator,
-                    session_id=session_id,
-                )
-                # regular members
-                cosinnus_notifications.event_created.send(
-                    sender=self, user=self.creator, obj=self, audience=audience, session_id=session_id, end_session=True
-                )
+                group_followers_create_signal = cosinnus_notifications.followed_group_event_created
+                regular_member_create_signal = cosinnus_notifications.event_created
+            elif self.state == Event.STATE_VOTING_OPEN:
+                group_followers_create_signal = cosinnus_notifications.followed_group_doodle_created
+                regular_member_create_signal = cosinnus_notifications.doodle_created
+            elif self.state == Event.STATE_SYNCHRONIZED_EVENT:
+                group_followers_create_signal = None
+                regular_member_create_signal = None
             else:
+                group_followers_create_signal = None
+                regular_member_create_signal = None
+
+            if group_followers_create_signal and regular_member_create_signal:
                 # followers for the group
-                cosinnus_notifications.followed_group_doodle_created.send(
+                group_followers_create_signal.send(
                     sender=self,
-                    user=self.creator,
+                    user=self.creator,  # Note: creator may be None!
                     obj=self,
                     audience=group_followers_except_creator,
                     session_id=session_id,
                 )
                 # regular members
-                cosinnus_notifications.doodle_created.send(
+                regular_member_create_signal.send(
                     sender=self, user=self.creator, obj=self, audience=audience, session_id=session_id, end_session=True
                 )
 
-        # create a "going" attendance for the event's creator
+        # create a "going" attendance for the event's creator if the conf setting is active
         if settings.COSINNUS_EVENT_MARK_CREATOR_AS_GOING and created and self.state == Event.STATE_SCHEDULED:
             EventAttendance.objects.get_or_create(
                 event=self, user=self.creator, defaults={'state': EventAttendance.ATTENDANCE_GOING}
