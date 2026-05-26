@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import mixins, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound
 from rest_framework.parsers import MultiPartParser
@@ -15,6 +15,7 @@ from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.permissions import IsCosinnusGroupUser
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from cosinnus_event.calendar.permissions import CosinnusCalendarPermissions
 from cosinnus_event.calendar.serializers import (
@@ -25,11 +26,30 @@ from cosinnus_event.calendar.serializers import (
     CosinnusCalendarEventSerializer,
     CosinnusCalendarListQueryParameterSerializer,
     CosinnusCalendarListSerializer,
+    CosinnusCalendarSyncedEventSerializer,
 )
 from cosinnus_event.models import Event
 
 
-class CosinnusCalendarViewSet(viewsets.ModelViewSet):
+class ViewSetActionMixin:
+    """Viewset mixin for generic serializer based action processing."""
+
+    def process_action(self, request, partial=False):
+        """
+        Generic helper to handle viewset actions using the serializer set in get_serializer_class.
+        @return: serialized data
+        """
+        instance = self.get_object()
+        if request.method == 'GET':
+            serializer = self.get_serializer(instance)
+        else:
+            serializer = self.get_serializer(instance, data=request.data, partial=partial)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        return serializer.data
+
+
+class CosinnusCalendarViewSet(ViewSetActionMixin, viewsets.ModelViewSet):
     """
     Viewset for public events for the v3 calendar app.
     """
@@ -87,8 +107,7 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         if getattr(self, 'swagger_fake_view', False):
             # queryset just for schema generation metadata
             return Event.objects.none()
-        queryset = Event.objects.all()
-        queryset = queryset.filter(group=self.group)
+        queryset = Event.objects.filter(group=self.group)
         if self.reflections_enabled:
             queryset = MixReflectedObjectsMixin().mix_queryset(queryset, Event, self.group)
         queryset = queryset.prefetch_related('media_tag', 'attendances')
@@ -109,20 +128,6 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
             raise NotFound()
         return event
 
-    def _process_action(self, request, partial=False):
-        """
-        Generic helper to handle viewset actions using the serializer set in get_serializer_class.
-        @return: serialized data
-        """
-        instance = self.get_object()
-        if request.method == 'GET':
-            serializer = self.get_serializer(instance)
-        else:
-            serializer = self.get_serializer(instance, data=request.data, partial=partial)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-        return serializer.data
-
     @action(
         detail=True,
         methods=['get', 'post'],
@@ -135,7 +140,7 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
               Users with only read permissions to the event should be able to set it.
         """
-        data = self._process_action(request)
+        data = self.process_action(request)
         return Response(data)
 
     @action(
@@ -147,7 +152,7 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
     )
     def attach_file(self, request, group_id, pk=None):
         """Action to upload an attachment for an event."""
-        data = self._process_action(request)
+        data = self.process_action(request)
         return Response(data)
 
     @action(
@@ -158,7 +163,7 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
     )
     def delete_attached_file(self, request, group_id, pk=None):
         """Action to delete an attachment."""
-        data = self._process_action(request)
+        data = self.process_action(request)
         return Response(data)
 
     @action(
@@ -169,7 +174,7 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
     )
     def bbb_room(self, request, group_id, pk=None):
         """BBB Room and conference settings API."""
-        data = self._process_action(request, partial=True)
+        data = self.process_action(request, partial=True)
         return Response(data)
 
     @action(
@@ -180,7 +185,7 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
     )
     def bbb_room_urls(self, request, group_id, pk=None):
         """API for BBB room Urls, used for periodic pull during BBB room creation"""
-        data = self._process_action(request)
+        data = self.process_action(request)
         return Response(data)
 
     @action(
@@ -191,7 +196,7 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
     )
     def bookmark(self, request, group_id, pk=None):
         """API to bookmark the event."""
-        data = self._process_action(request)
+        data = self.process_action(request)
         return Response(data)
 
     @action(
@@ -204,5 +209,112 @@ class CosinnusCalendarViewSet(viewsets.ModelViewSet):
         """API to handle event reflection in user groups"""
         data = {}
         if self.reflections_enabled:
-            data = self._process_action(request)
+            data = self.process_action(request)
+        return Response(data)
+
+
+class CosinnusCalendarSyncedEventsViewSet(
+    ViewSetActionMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    viewsets.GenericViewSet,
+):
+    """
+    Viewset for synced private events for the v3 calendar app.
+    """
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    lookup_field = 'nextcloud_calendar_uid'
+    serializer_class = CosinnusCalendarSyncedEventSerializer
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsCosinnusGroupUser,)
+
+    group = None
+
+    def get_serializer_class(self):
+        """Get serializer based on viewset action."""
+        action_serializers = {
+            'attendance': CosinnusCalendarEventAttendanceSerializer,
+            'bbb_room': CosinnusCalendarEventBBBRoomSerializer,
+            'bbb_room_urls': CosinnusCalendarBBBRoomUrlsSerializer,
+        }
+        if self.action in action_serializers:
+            return action_serializers[self.action]
+        return self.serializer_class
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['group'] = self.group
+        return context
+
+    def initial(self, request, *args, **kwargs):
+        # get group from slug
+        group_id = kwargs.get('group_id')
+        self.group = get_cosinnus_group_model().objects.filter(is_active=True, pk=group_id).first()
+        if not self.group:
+            raise NotFound()
+        return super().initial(request, *args, **kwargs)
+
+    def get_queryset(self):
+        if getattr(self, 'swagger_fake_view', False):
+            # queryset just for schema generation metadata
+            return Event.objects.none()
+        queryset = Event.objects.filter(group=self.group)
+        queryset = queryset.prefetch_related('media_tag', 'attendances')
+        queryset = queryset.filter(
+            media_tag__visibility=BaseTagObject.VISIBILITY_GROUP,
+            state=Event.STATE_SYNCHRONIZED_EVENT,
+            is_hidden_group_proxy=False,
+        )
+        queryset = queryset.exclude(
+            nextcloud_calendar_uid=None,
+        )
+        return queryset
+
+    def get_object(self):
+        event = super().get_object()
+        # check that the event belongs to the group referenced in the url
+        if event.group_id != self.group.id:
+            raise NotFound()
+        return event
+
+    @action(
+        detail=True,
+        methods=['get', 'post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[IsCosinnusGroupUser],
+    )
+    def attendance(self, request, group_id, nextcloud_calendar_uid):
+        """
+        Set event attendance for request user.
+        Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
+              Users with only read permissions to the event should be able to set it.
+        """
+        data = self.process_action(request)
+        return Response(data)
+
+    @action(
+        detail=True,
+        methods=['get', 'patch', 'post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[IsCosinnusGroupUser],
+    )
+    def bbb_room(self, request, group_id, nextcloud_calendar_uid):
+        """BBB Room and conference settings API."""
+        data = self.process_action(request, partial=True)
+        return Response(data)
+
+    @action(
+        detail=True,
+        methods=['get'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[IsCosinnusGroupUser],
+    )
+    def bbb_room_urls(self, request, group_id, nextcloud_calendar_uid):
+        """API for BBB room Urls, used for periodic pull during BBB room creation"""
+        data = self.process_action(request)
         return Response(data)
