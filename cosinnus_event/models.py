@@ -440,7 +440,8 @@ class Event(
         """For BBBRoomMixin, overridable function to return a list of users that should be a moderator
         of this BBB room (with higher priviledges than a member)"""
         moderators = super().get_moderators_for_bbb_room()
-        moderators.append(self.creator)
+        if self.creator:
+            moderators.append(self.creator)
         return moderators
 
     def get_admin_change_url(self):
