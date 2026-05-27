@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
 from cosinnus.conf import settings
+from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_object_write_access
 from cosinnus.utils.urls import group_aware_reverse
@@ -14,6 +15,12 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     # group properties
     name = serializers.CharField(read_only=True)
     url = serializers.URLField(source='get_absolute_url', read_only=True)
+    topics = serializers.MultipleChoiceField(
+        source='media_tag.get_topic_ids',
+        default=list,
+        choices=get_tag_object_model().TOPIC_CHOICES,
+        read_only=True,
+    )
 
     # BBB settings
     bbb_available = serializers.SerializerMethodField()
@@ -35,6 +42,7 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
         fields = [
             'name',
             'url',
+            'topics',
             'bbb_available',
             'bbb_restricted',
             'bbb_premium',
