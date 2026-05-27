@@ -339,9 +339,14 @@ class Event(
 
     def get_calendar_url(self):
         """Returns the v3 frontend calendar URL for this event"""
-        calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
-        event_url = f'{calendar_url}?eventId={self.pk}&type=public&calId={self.group.pk}'
-        return event_url
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
+            if self.state == Event.STATE_SCHEDULED:
+                # public events
+                return f'{calendar_url}?eventId={self.pk}&type=public&calId={self.group.pk}'
+            elif self.state == Event.STATE_SYNCHRONIZED_EVENT and self.nextcloud_calendar_uid:
+                return f'{calendar_url}?eventId={self.nextcloud_calendar_uid}&type=internal&calId={self.group.pk}'
+        return ''
 
     def get_feed_url(self):
         """Returns the iCal feed url. A user token as to be appended using either
