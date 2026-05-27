@@ -1144,79 +1144,83 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             data = res.json()['data']
             self.assertFalse(data['enabled'])
 
+    class CalendarViewTest(CeleryTaskTestMixin, TestCase):
+        """Test Frontend initialization view."""
 
-class CalendarViewTest(CeleryTaskTestMixin, TestCase):
-    """Test Frontend initialization view."""
+        test_group = None
+        calendar_view_url = None
 
-    test_group = None
-    calendar_view_url = None
+        @classmethod
+        def setUpTestData(cls):
+            cls.test_group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
+            with cls.runCeleryTasks():
+                cls.test_group = CosinnusSociety.objects.create(name=cls.test_group_name)
+            cls.test_group.refresh_from_db()
 
-    @classmethod
-    def setUpTestData(cls):
-        cls.test_group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
-        with cls.runCeleryTasks():
-            cls.test_group = CosinnusSociety.objects.create(name=cls.test_group_name)
-        cls.test_group.refresh_from_db()
+            # create test users without triggering NC hooks
+            cosinnus_cloud.hooks.submit_with_retry = disabled_nc_call
+            cls.test_user = get_user_model().objects.create(
+                username=1, email='user@example.com', first_name='LocalUser'
+            )
+            cls.test_admin = get_user_model().objects.create(
+                username=2, email='admin@example.com', first_name='LocalAdmin'
+            )
+            cls.test_non_group_user = get_user_model().objects.create(
+                username=3, email='user2@example.com', first_name='LocalUser2'
+            )
+            CosinnusGroupMembership.objects.create(user=cls.test_user, group=cls.test_group, status=MEMBERSHIP_MEMBER)
+            CosinnusGroupMembership.objects.create(user=cls.test_admin, group=cls.test_group, status=MEMBERSHIP_ADMIN)
+            cosinnus_cloud.hooks.submit_with_retry = blocking_nc_call
 
-        # create test users without triggering NC hooks
-        cosinnus_cloud.hooks.submit_with_retry = disabled_nc_call
-        cls.test_user = get_user_model().objects.create(username=1, email='user@example.com', first_name='LocalUser')
-        cls.test_admin = get_user_model().objects.create(username=2, email='admin@example.com', first_name='LocalAdmin')
-        cls.test_non_group_user = get_user_model().objects.create(
-            username=3, email='user2@example.com', first_name='LocalUser2'
-        )
-        CosinnusGroupMembership.objects.create(user=cls.test_user, group=cls.test_group, status=MEMBERSHIP_MEMBER)
-        CosinnusGroupMembership.objects.create(user=cls.test_admin, group=cls.test_group, status=MEMBERSHIP_ADMIN)
-        cosinnus_cloud.hooks.submit_with_retry = blocking_nc_call
+            cls.calendar_view_url = (
+                group_aware_reverse('cosinnus:event:calendar', kwargs={'group': cls.test_group}, skip_domain=True)
+                + '?v=3'
+            )
 
-        cls.calendar_view_url = (
-            group_aware_reverse('cosinnus:event:calendar', kwargs={'group': cls.test_group}, skip_domain=True) + '?v=3'
-        )
+        @classmethod
+        def tearDownClass(cls):
+            with cls.runCeleryTasks():
+                cls.test_group.delete()
 
-    @classmethod
-    def tearDownClass(cls):
-        with cls.runCeleryTasks():
-            cls.test_group.delete()
+        def _get_expected_user_calendar_url(self, user):
+            expected_user_calender_url = self.test_group.nextcloud_calendar_url
+            expected_user_calender_url = expected_user_calender_url.replace(
+                f'/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/',
+                f'/{get_nc_user_id(user)}/',
+            )
+            expected_user_calender_url = expected_user_calender_url[:-1]
+            expected_user_calender_url += f'_shared_by_{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/'
+            return expected_user_calender_url
 
-    def _get_expected_user_calendar_url(self, user):
-        expected_user_calender_url = self.test_group.nextcloud_calendar_url
-        expected_user_calender_url = expected_user_calender_url.replace(
-            f'/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/',
-            f'/{get_nc_user_id(user)}/',
-        )
-        expected_user_calender_url = expected_user_calender_url[:-1]
-        expected_user_calender_url += f'_shared_by_{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/'
-        return expected_user_calender_url
+        def test_calendar_view(self):
+            div_data_group_id = f'data-space-id="{self.test_group.pk}"'
+            div_data_calendar_url_empty = 'data-calendar-url=""'
 
-    def test_calendar_view(self):
-        div_data_group_id = f'data-space-id="{self.test_group.pk}"'
-        div_data_calendar_url_empty = 'data-calendar-url=""'
+            # test anonymous user has only access to group id for public events not the NC calendar
+            res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 200)
+            self.assertContains(res, div_data_group_id)
+            self.assertContains(res, div_data_calendar_url_empty)
 
-        # test anonymous user has only access to group id for public events not the NC calendar
-        res = self.client.get(self.calendar_view_url)
-        self.assertEqual(res.status_code, 200)
-        self.assertContains(res, div_data_group_id)
-        self.assertContains(res, div_data_calendar_url_empty)
+            # test non-group user has only access to group id for public events not the NC calendar
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 200)
+            self.assertContains(res, div_data_group_id)
+            self.assertContains(res, div_data_calendar_url_empty)
 
-        # test non-group user has only access to group id for public events not the NC calendar
-        self.client.force_login(self.test_non_group_user)
-        res = self.client.get(self.calendar_view_url)
-        self.assertEqual(res.status_code, 200)
-        self.assertContains(res, div_data_group_id)
-        self.assertContains(res, div_data_calendar_url_empty)
+            # test group user has access to group id for public events and NC calendar
+            self.client.force_login(self.test_user)
+            div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_user)}"'
+            res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 200)
+            self.assertContains(res, div_data_group_id)
+            self.assertContains(res, div_data_calendar_url_set)
 
-        # test group user has access to group id for public events and NC calendar
-        self.client.force_login(self.test_user)
-        div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_user)}"'
-        res = self.client.get(self.calendar_view_url)
-        self.assertEqual(res.status_code, 200)
-        self.assertContains(res, div_data_group_id)
-        self.assertContains(res, div_data_calendar_url_set)
-
-        # test group admin has access to group id for public events and NC calendar
-        self.client.force_login(self.test_admin)
-        div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_admin)}"'
-        res = self.client.get(self.calendar_view_url)
-        self.assertEqual(res.status_code, 200)
-        self.assertContains(res, div_data_group_id)
-        self.assertContains(res, div_data_calendar_url_set)
+            # test group admin has access to group id for public events and NC calendar
+            self.client.force_login(self.test_admin)
+            div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_admin)}"'
+            res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 200)
+            self.assertContains(res, div_data_group_id)
+            self.assertContains(res, div_data_calendar_url_set)
