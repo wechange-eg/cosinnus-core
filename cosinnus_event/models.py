@@ -256,8 +256,6 @@ class Event(
                 group_followers_create_signal = cosinnus_notifications.followed_group_doodle_created
                 regular_member_create_signal = cosinnus_notifications.doodle_created
             elif self.state == Event.STATE_SYNCHRONIZED_EVENT:
-                group_followers_create_signal = None
-                regular_member_create_signal = None
                 group_followers_create_signal = cosinnus_notifications.followed_group_synced_event_created
                 regular_member_create_signal = cosinnus_notifications.synced_event_created
             else:
