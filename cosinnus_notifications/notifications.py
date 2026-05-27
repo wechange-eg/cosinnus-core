@@ -6,6 +6,7 @@ import logging
 from _collections import defaultdict
 from builtins import str
 from copy import copy
+from email.utils import formataddr
 from importlib import import_module
 
 import sentry_sdk
@@ -796,17 +797,11 @@ class NotificationsThread(CosinnusWorkerThread):
                 .replace('<', '')
                 .replace('>', '')
             )
-            username = username.encode('ascii', errors='ignore').decode().strip()
             if username:
-                # add from-email readable name (yes, this is how this works)
-                from_email = '%(username)s via %(portal_name)s <%(from_email)s>' % {
-                    'username': username,
-                    'portal_name': portal_name,
-                    'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL,
-                }
-                # Workaround: django 2.x does not support non-ascii chars in the from_email, so strip all non-ascii
-                # chars!
-                from_email = from_email.encode('ascii', errors='ignore').decode()
+                # generate a valid realname+address string with proper utf-8 encoding
+                realname = f'{username} via {portal_name}'
+                from_email = formataddr((realname, settings.COSINNUS_DEFAULT_FROM_EMAIL))
+
             send_mail_or_fail(receiver.email, subject, template, context, from_email=from_email, is_html=is_html)
 
         finally:
