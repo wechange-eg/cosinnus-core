@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.utils.functional import cached_property
+from django.utils.translation import gettext_lazy as _
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
@@ -567,8 +568,8 @@ class CosinnusCalendarSyncedEventSerializer(
         media_tag_data = validated_data.pop('media_tag', {})
         if not instance:
             # create event
-            # use uid for title until sync as title is required
-            title = str(validated_data.get('nextcloud_calendar_uid'))
+            # use fixed title until sync, as title is required
+            title = _('Untitled Meeting')
             validated_data.update(
                 {'group': self.context['group'], 'state': Event.STATE_SYNCHRONIZED_EVENT, 'title': title}
             )

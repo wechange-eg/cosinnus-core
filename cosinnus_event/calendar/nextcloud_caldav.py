@@ -7,6 +7,7 @@ from caldav.davclient import get_davclient
 from caldav.elements.dav import DisplayName
 from caldav.lib.error import ResponseError
 from django.utils.timezone import localtime, make_aware, now
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.tagged import BaseTagObject
@@ -284,13 +285,15 @@ class NextcloudCaldavConnection:
                         summary = caldav_event.icalendar_component.get('SUMMARY')
                         if summary:
                             summary = str(summary)
+                        else:
+                            summary = _('Untitled Meeting')
 
                         description = caldav_event.icalendar_component.get('DESCRIPTION')
                         if description:
                             description = str(description)
 
                         # check required data
-                        if not dt_start or not dt_end or not summary:
+                        if not dt_start or not dt_end:
                             logger.warning(
                                 'NC Calendar: calendar sync of event had incomplete data, aborting sync for group!',
                                 extra={
