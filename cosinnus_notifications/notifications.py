@@ -960,10 +960,12 @@ def render_digest_item_for_notification_event(
         # `notification_event.user` may be `None` for a notification event that has no originating user
         # hopefully the notification event is configured so sender_name is not used, but to prevent errors,
         # we print it out as the "Unknown" user
+        mark_sender_bold = True
         if notification_event.user:
             sender_name = mark_safe(strip_tags(full_name(notification_event.user)))
         else:
             sender_name = mark_safe(pgettext_lazy('An unknown user placeholder', 'Unknown'))
+            mark_sender_bold = False
         # add special attributes to object. these can be used in the cosinnus_notifications definition's properties
         obj._sender_name = sender_name
         # even if `_sender` is `None`, `resolve_attributes()` will gracefully handle this if notifications reference it
@@ -986,9 +988,10 @@ def render_digest_item_for_notification_event(
 
         # make the 'sender_name' variable in event_text bold
         if event_text is not None:
-            bolded_sender_name = copy(string_variables)
-            bolded_sender_name['sender_name'] = '<b>%s</b>' % escape(sender_name)
-            event_text = mark_safe(event_text % bolded_sender_name)
+            _string_vars = copy(string_variables)
+            if mark_sender_bold:
+                _string_vars['sender_name'] = '<b>%s</b>' % escape(sender_name)
+            event_text = mark_safe(event_text % _string_vars)
 
         object_url = resolve_attributes(obj, data_attributes['object_url'], 'get_absolute_url')
         portal_url = CosinnusPortal.get_current().get_domain()

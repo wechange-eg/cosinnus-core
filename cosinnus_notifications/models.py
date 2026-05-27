@@ -513,14 +513,16 @@ class SerializedNotificationAlert(DashboardItem):
         if action_user and not action_user_profile:
             action_user_profile = action_user.cosinnus_profile
 
+        mark_sender_bold = True
         if action_user:
             action_user_name = full_name(action_user)
         else:
             action_user_name = pgettext_lazy('An unknown user placeholder', 'Unknown')
+            mark_sender_bold = False
 
         # translate the label using current variables
         string_variables = {
-            'sender_name': '<b>%s</b>' % escape(action_user_name),
+            'sender_name': '<b>%s</b>' % escape(action_user_name) if mark_sender_bold else escape(action_user_name),
             'team_name': '<b>%s</b>' % (escape(alert.group.name) if alert.group else '*unknowngroup*'),
             'portal_name': escape(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)),
             'object_name': '<b>%s</b>' % escape(alert.target_title),
