@@ -65,7 +65,6 @@ class CosinnusCalendarIntegrationHandler(CosinnusBaseIntegrationHandler):
 
     def _is_app_enabled_for_group(self, group):
         events_app_enabled = super()._is_app_enabled_for_group(group)
-        # TODO: check additional setting if NC events are enabled
         return events_app_enabled
 
     def do_group_create(self, group):

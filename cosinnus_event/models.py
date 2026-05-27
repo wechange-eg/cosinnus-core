@@ -166,6 +166,19 @@ class Event(
         on_delete=models.SET_NULL,
     )
 
+    nextcloud_calendar_uid = models.UUIDField(
+        _('Event Nextcloud CalDAV UID'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='Used for synced events',
+    )
+    nextcloud_calendar_last_sync = models.DateTimeField(
+        _('Event Nextcloud Calendar CalDAV Last Sync Timestamp'),
+        blank=True,
+        null=True,
+    )
+
     objects = EventQuerySet.as_manager()
 
     timeline_template = 'cosinnus_event/v2/dashboard/timeline_item.html'
@@ -201,6 +214,8 @@ class Event(
             readable = _('%(event)s (pending)') % {'event': self.title}
         elif self.state == Event.STATE_ARCHIVED_DOODLE:
             readable = _('%(event)s (archived)') % {'event': self.title}
+        elif self.state == Event.STATE_SYNCHRONIZED_EVENT:
+            readable = _('%(event)s (synchronized)') % {'event': self.title}
         else:
             readable = _('%(event)s (state unknown)') % {'event': self.title}
 
@@ -217,7 +232,7 @@ class Event(
         created = bool(self.pk) is False
         super(Event, self).save(*args, **kwargs)
 
-        if created and not self.is_hidden_group_proxy:
+        if created and not self.is_hidden_group_proxy and not self.state == Event.STATE_SYNCHRONIZED_EVENT:
             # event/doodle was created or
             # event went from being a doodle to being a real event, so fire event created
             session_id = uuid1().int
@@ -425,7 +440,8 @@ class Event(
         """For BBBRoomMixin, overridable function to return a list of users that should be a moderator
         of this BBB room (with higher priviledges than a member)"""
         moderators = super().get_moderators_for_bbb_room()
-        moderators.append(self.creator)
+        if self.creator:
+            moderators.append(self.creator)
         return moderators
 
     def get_admin_change_url(self):

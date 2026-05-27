@@ -1140,6 +1140,18 @@ class CosinnusBaseGroup(
         null=True,
         help_text='CalDAV Publish URL of the nextcloud calendar for the group. Set after the calendar is created.',
     )
+    nextcloud_calendar_sync_token = models.CharField(
+        _('Nextcloud Group Calendar CalDAV Sync-Token'),
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text=_('Clear to enforce a re-sync off all events.'),
+    )
+    nextcloud_calendar_last_sync = models.DateTimeField(
+        _('Nextcloud Group Calendar CalDAV Last Sync Timestamp'),
+        blank=True,
+        null=True,
+    )
 
     # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(

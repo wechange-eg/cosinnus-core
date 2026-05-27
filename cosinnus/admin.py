@@ -412,6 +412,11 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'last_activity',
         'inactivity_notification_sent_at',
     ]
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        readonly_fields += [
+            'nextcloud_calendar_last_sync',
+        ]
+
     raw_id_fields = ('parent',)
     exclude = [
         'is_conference',
@@ -430,6 +435,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         exclude += [
             'nextcloud_calendar_url',
             'nextcloud_calendar_publish_url',
+            'nextcloud_calendar_sync_token',
+            'nextcloud_calendar_last_sync',
         ]
     if settings.COSINNUS_CONFERENCES_ENABLED:
         inlines = [CosinnusConferenceSettingsInline]

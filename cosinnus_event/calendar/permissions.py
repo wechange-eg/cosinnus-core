@@ -20,8 +20,8 @@ class CosinnusCalendarPermissions(BasePermission):
         'bbb_room',
     ]
 
-    # List of viewset actions that require the user to member of the group.
-    EVENT_READ_ACTIONS = [
+    # List of viewset actions that require the user to create group objects (member of the group).
+    EVENT_CREATE_ACTIONS = [
         'create',
     ]
 
@@ -53,8 +53,8 @@ class CosinnusCalendarPermissions(BasePermission):
         if view.action in self.EVENT_WRITE_ACTIONS:
             # Check write permissions
             return check_object_write_access(obj, request.user)
-        elif view.action in self.EVENT_READ_ACTIONS:
-            # Check read permissions
+        elif view.action in self.EVENT_CREATE_ACTIONS:
+            # Check create permissions
             return check_group_create_objects_access(view.group, request.user)
         elif view.action in self.EVENT_LOGGED_IN_ACTIONS:
             # Check user is logged in

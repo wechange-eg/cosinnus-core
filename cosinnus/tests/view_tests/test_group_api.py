@@ -32,6 +32,8 @@ class GroupSettingsAPITest(APITestCase):
         # create test group
         test_group_name = 'GroupSettingsTestGroup'
         cls.test_group = CosinnusSociety.objects.create(name=test_group_name)
+        cls.test_group.media_tag.topics = '1,2'
+        cls.test_group.media_tag.save()
         CosinnusGroupMembership.objects.create(user=cls.test_user, group=cls.test_group, status=MEMBERSHIP_MEMBER)
         CosinnusGroupMembership.objects.create(user=cls.test_admin, group=cls.test_group, status=MEMBERSHIP_ADMIN)
 
@@ -85,6 +87,7 @@ class GroupSettingsAPITest(APITestCase):
             {
                 'name': self.test_group.name,
                 'url': self.test_group.get_absolute_url(),
+                'topics': [1, 2],
                 'bbb_available': False,
                 'bbb_restricted': False,
                 'bbb_premium': False,

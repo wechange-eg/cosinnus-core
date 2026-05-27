@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.admin import BaseTaggableAdmin, CosinnusConferenceSettingsInline
+from cosinnus.conf import settings
 from cosinnus_event.models import ConferenceEvent, ConferenceEventAttendanceTracking, Event, Suggestion, Vote
 
 
@@ -66,6 +67,16 @@ class EventAdmin(BaseTaggableAdmin):
     list_filter = BaseTaggableAdmin.list_filter + ['state', 'is_hidden_group_proxy']
     inlines = BaseTaggableAdmin.inlines + [SuggestionInlineAdmin, CosinnusConferenceSettingsInline]
     actions = (restart_bbb_rooms,)
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        readonly_fields = [
+            'nextcloud_calendar_uid',
+            'nextcloud_calendar_last_sync',
+        ]
+    else:
+        exclude = [
+            'nextcloud_calendar_uid',
+            'nextcloud_calendar_last_sync',
+        ]
 
 
 admin.site.register(Event, EventAdmin)
