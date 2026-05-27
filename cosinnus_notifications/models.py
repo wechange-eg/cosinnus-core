@@ -478,13 +478,15 @@ class NotificationAlert(models.Model):
 
     def __str__(self):
         return (
-            '<NotificationAlert: %(user)s, group: %(group)s, item_hash: %(item_hash)s, last_event_at: '
-            '%(last_event_at)s>'
+            '<NotificationAlert %(id)s: %(user)s, group: %(group)s, item_hash: %(item_hash)s, last_event_at: '
+            '%(last_event_at)s, action_user: %(action_user)s>'
         ) % {
+            'id': str(self.id),
             'user': self.user,
             'group': str(self.group),
             'item_hash': self.item_hash,
             'last_event_at': str(self.last_event_at),
+            'action_user': str(self.action_user),
         }
 
 
