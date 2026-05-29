@@ -2,6 +2,7 @@ import datetime
 import logging
 import re
 from typing import Optional
+from uuid import uuid1
 
 from annoying.functions import get_object_or_None
 from caldav.davclient import get_davclient
@@ -16,7 +17,8 @@ from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.functions import get_int_or_None
 from cosinnus.utils.integration import migrate_description
 from cosinnus.utils.user import is_user_active
-from cosinnus_event.models import Event
+from cosinnus_event import cosinnus_notifications
+from cosinnus_event.models import Event, EventAttendance
 
 logger = logging.getLogger(__name__)
 
@@ -335,14 +337,27 @@ class NextcloudCaldavConnection:
                             synced_event.media_tag.visibility = BaseTagObject.VISIBILITY_GROUP
                             synced_event.media_tag.save()
                         else:
+                            event_was_changed = False
+
+                            def _check_for_change_and_update(attr_name, value):
+                                """A setter for attributes that flags whether the attribute changed"""
+                                if getattr(synced_event, attr_name, None) != value:
+                                    nonlocal event_was_changed
+                                    event_was_changed = True
+                                setattr(synced_event, attr_name, value)
+
                             # update synced event
-                            synced_event.creator = creator  # creator=None unless X-Creator was set in Dav object
-                            synced_event.title = summary
-                            synced_event.from_date = dt_start
-                            synced_event.to_date = dt_end
-                            synced_event.note = description
+                            # creator=None unless X-Creator was set in Dav object
+                            _check_for_change_and_update('creator', creator)
+                            _check_for_change_and_update('title', summary)
+                            _check_for_change_and_update('from_date', dt_start)
+                            _check_for_change_and_update('to_date', dt_end)
+                            _check_for_change_and_update('note', description)
                             synced_event.nextcloud_calendar_last_sync = now()
                             synced_event.save()
+
+                            if event_was_changed:
+                                self._notify_for_changed_synced_event(synced_event)
                 except Exception as e:
                     logger.error(
                         'NC Calendar: calendar sync of event failed!',
@@ -358,3 +373,33 @@ class NextcloudCaldavConnection:
         except Exception as e:
             logger.warning('NC Calendar: calendar sync of group failed!', extra={'exception': e, 'group_id': group.id})
             raise
+
+    def _notify_for_changed_synced_event(self, synced_event):
+        """Triggers notification signals when a synced private event was changed by a fresh sync."""
+        session_id = uuid1().int
+        # send out a notification to all attendees for the change
+        attendees_except_creator = [
+            attendance.user.pk
+            for attendance in synced_event.attendances.all()
+            if (attendance.state in [EventAttendance.ATTENDANCE_GOING, EventAttendance.ATTENDANCE_MAYBE_GOING])
+            and not attendance.user.pk == synced_event.creator_id
+        ]
+        cosinnus_notifications.attending_synced_event_changed.send(
+            sender=self,
+            user=synced_event.creator,
+            obj=synced_event,
+            audience=get_user_model().objects.filter(id__in=attendees_except_creator),
+            session_id=session_id,
+        )
+        # send out a notification to all followers for the change
+        followers_except_creator = [
+            pk for pk in synced_event.get_followed_user_ids() if pk not in [synced_event.creator_id]
+        ]
+        cosinnus_notifications.following_synced_event_changed.send(
+            sender=self,
+            user=synced_event.creator,
+            obj=synced_event,
+            audience=get_user_model().objects.filter(id__in=followers_except_creator),
+            session_id=session_id,
+            end_session=True,
+        )

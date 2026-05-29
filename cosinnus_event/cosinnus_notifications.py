@@ -24,6 +24,7 @@ followed_group_synced_event_created = dispatch.Signal()  # providing_args=["user
 followed_group_doodle_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 following_event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 following_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_synced_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 attending_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 attending_synced_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 following_doodle_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
@@ -355,6 +356,26 @@ notifications = {
             'event_meta': 'from_date',
         },
     },
+    'following_synced_event_changed': {
+        'label': _('A scheduled meeting was updated'),
+        'signals': [following_synced_event_changed],
+        'multi_preference_set': 'MULTI_followed_object_notification',
+        'requires_object_state_check': 'is_user_following',
+        'hidden': True,
+        'alert_text': format_lazy('{text_frag}: %(object_name)s', text_frag=_('A scheduled meeting was updated')),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are following this meeting'),
+        'is_html': True,
+        'event_text': _('A meeting you are following was updated'),
+        'subject_text': _('The meeting "%(object_name)s" was updated in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'title',
+            'object_url': 'get_absolute_url',
+            'object_text': 'note',
+            'image_url': 'attached_image.static_image_url_thumbnail',
+            'event_meta': 'from_date',
+        },
+    },
     'attending_event_changed': {
         'label': _('A user updated an event you are attending'),
         'signals': [attending_event_changed],
@@ -379,7 +400,9 @@ notifications = {
         'signals': [attending_synced_event_changed],
         'requires_object_state_check': 'is_user_attending',
         'default': True,
-        'alert_text': _('The meeting %(object_name)s was updated'),
+        'alert_text': format_lazy(
+            '{text_frag}: %(object_name)s', text_frag=_('A meeting you are attending was updated')
+        ),
         'alert_multi_type': 1,
         'alert_reason': _('You are attending this meeting'),
         'is_html': True,
