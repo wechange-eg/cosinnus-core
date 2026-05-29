@@ -1083,6 +1083,9 @@ def render_digest_item_for_notification_event(
         # add user profile url
         if notification_event.user and notification_event.user.cosinnus_profile:
             data['action_user_url'] = notification_event.user.cosinnus_profile.get_absolute_url()
+        else:
+            # if no notification source user is set, link to the object itself so we don't have empty links
+            data['action_user_url'] = object_url
 
         # generate or get object icon url
         if options['object_icon_url']:
