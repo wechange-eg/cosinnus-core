@@ -62,9 +62,7 @@ module.exports = ContentControlView.extend({
     // English / International version of the OpenStreetMap tileset based on CartoDB
     layers: {
         street: {
-            url: (util.protocol() === 'http:' ?
-                'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png' :
-                'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'),
+            url: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png',
             options: {
                 attribution: '<a href="https://carto.com" target="_blank">CartoDB</a> | <a href="https://www.openstreetmap.org" target="_blank">&copy; OpenStreetMap contributors</a>'
             }
@@ -74,9 +72,7 @@ module.exports = ContentControlView.extend({
     // German version of the OpenStreetMap tileset
     layersModernTileset: {
         street: {
-            url: (util.protocol() === 'https:' ?
-                'http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png' :
-                'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'),
+            url: 'https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png',
             options: {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }

@@ -82,6 +82,7 @@ from cosinnus.utils.functions import (
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
+from cosinnus.utils.validators import validate_image_format
 from cosinnus.views.mixins.media import FlickrEmbedFieldMixin, VideoEmbedFieldMixin
 from cosinnus_deck.models import DeckMigrationMixin
 from cosinnus_event.calendar.models import CalendarMigrationMixin
@@ -967,7 +968,14 @@ class CosinnusBaseGroup(
         blank=True,
     )
 
-    avatar = models.ImageField(_('Avatar'), null=True, blank=True, upload_to=get_group_avatar_filename, max_length=250)
+    avatar = models.ImageField(
+        _('Avatar'),
+        null=True,
+        blank=True,
+        upload_to=get_group_avatar_filename,
+        max_length=250,
+        validators=[validate_image_format],
+    )
     wallpaper = models.ImageField(
         _('Wallpaper image'),
         help_text=_('Shown as large banner image on the Microsite (1140 x 240 px)'),
@@ -975,6 +983,7 @@ class CosinnusBaseGroup(
         blank=True,
         upload_to=get_group_wallpaper_filename,
         max_length=250,
+        validators=[validate_image_format],
     )
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
@@ -2188,10 +2197,8 @@ class CosinnusBaseGroup(
                 )
                 # if token exists and the token's state (active/inactive, name)
                 # is stale compared to the group settings, update it
-                if (
-                    existing_invite_token
-                    and existing_invite_token.title != self.name
-                    or existing_invite_token.is_active != self.use_invite_token
+                if existing_invite_token and (
+                    existing_invite_token.title != self.name or existing_invite_token.is_active != self.use_invite_token
                 ):
                     existing_invite_token.title = self.name
                     existing_invite_token.is_active = self.use_invite_token

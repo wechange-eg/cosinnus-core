@@ -566,14 +566,18 @@ class IsNextCloudApiTokenValid(BasePermission):
 
 
 class IsCosinnusGroupUser(BasePermission):
-    """Check group read permissions"""
+    """Check group membership"""
 
     def has_permission(self, request, view):
-        return check_object_read_access(view.group, request.user)
+        user = request.user
+        group = view.group
+        return check_ug_membership(user, group) or check_ug_admin(user, group) or check_user_superuser(user)
 
 
 class IsCosinnusGroupAdmin(BasePermission):
-    """Check group write permissions"""
+    """Check group admin membership"""
 
     def has_permission(self, request, view):
-        return check_object_write_access(view.group, request.user)
+        user = request.user
+        group = view.group
+        return check_ug_admin(user, group) or check_user_superuser(user)

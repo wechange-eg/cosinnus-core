@@ -1,16 +1,11 @@
-"""
-Creates the default CosinnusPortal object.
-taken from django/contrib/sites/management and adapted for CosinnusPortal:
-https://github.com/django/django/blob/030c63d329c4814da221528e823a4aaaaa40e4f1/django/contrib/sites/management.py
-"""
-
 from django.apps import apps as global_apps
 from django.contrib.sites.management import create_default_site
 from django.core.management.color import no_style
 from django.db import DEFAULT_DB_ALIAS, connections, router
 
+from cosinnus.conf import settings
 
-# registered as receiver for `post_migration` in cosinnus.apps.CosinnusAppConfig.ready
+
 def ensure_portal_and_site_exist(
     app_config,
     verbosity=2,
@@ -19,6 +14,15 @@ def ensure_portal_and_site_exist(
     apps=global_apps,
     **kwargs,
 ):
+    """
+    Creates the default CosinnusPortal object. An does a sequence reset to ensure a portal with pk==1 is always present.
+
+    - Is called during and after migrations.
+
+    taken from django/contrib/sites/management and adapted for CosinnusPortal:
+    https://github.com/django/django/blob/030c63d329c4814da221528e823a4aaaaa40e4f1/django/contrib/sites/management.py
+    """
+
     # make sure, site exists
     create_default_site(app_config, verbosity=verbosity, interactive=interactive, using=using, apps=apps, **kwargs)
 
@@ -52,3 +56,62 @@ def ensure_portal_and_site_exist(
             with connections[using].cursor() as cursor:
                 for command in sequence_sql:
                     cursor.execute(command)
+
+
+def ensure_default_portal_conference_settings_exist(
+    app_config,
+    verbosity=2,
+    interactive=True,
+    using=DEFAULT_DB_ALIAS,
+    apps=global_apps,
+    **kwargs,
+):
+    """
+    Creates a CosinnusConferenceSettings Object for the current portal if it does not exist.
+    Sets the defaults to a valid state for the top-level CosinnusConferenceSettings
+    as far as the current Model state allows.
+
+    - Does not do a Sequence reset.
+    - Is called during and after migrations.
+    """
+    CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
+    CosinnusConferenceSettings = apps.get_model('cosinnus', 'CosinnusConferenceSettings')
+    current_portal = CosinnusPortal.objects.using(using).get(site__id=settings.SITE_ID)
+    ContentType = apps.get_model('contenttypes', 'ContentType')
+    portal_content_type = ContentType.objects.get_for_model(CosinnusPortal)
+
+    if not current_portal or not portal_content_type:
+        return
+
+    # valid defaults need to be set explicitly; bbb-tests will fail otherwise
+    # defaults differ between dummy model and real model and not all default fields are available everytime
+    # determine applicable default fields from the current CosinnusConferenceSettings model
+    defaults = {'bbb_server_choice': 0, 'bbb_server_choice_premium': 0}
+    available_fields = {f.name for f in CosinnusConferenceSettings._meta.get_fields()}
+    applicable_defaults = {k: v for k, v in defaults.items() if k in available_fields}
+
+    obj, created = CosinnusConferenceSettings.objects.using(using).get_or_create(
+        content_type=portal_content_type, object_id=current_portal.id, defaults=applicable_defaults
+    )
+
+    # force saving for the overwritten save-method of the model
+    if created:
+        try:
+            obj.save(using=using, ignore_inherit_condition=True)
+        except TypeError:
+            # we have the dummy model, so the object is already saved
+            pass
+
+
+# registered as receiver for `post_migration` in cosinnus.apps.CosinnusAppConfig.ready
+def ensure_current_portal_object(
+    app_config,
+    verbosity=2,
+    interactive=True,
+    using=DEFAULT_DB_ALIAS,
+    apps=global_apps,
+    **kwargs,
+):
+    """make sure, the current portal object exists and do the same for related objects"""
+    ensure_portal_and_site_exist(app_config, verbosity, interactive, using, apps, **kwargs)
+    ensure_default_portal_conference_settings_exist(app_config, verbosity, interactive, using, apps, **kwargs)

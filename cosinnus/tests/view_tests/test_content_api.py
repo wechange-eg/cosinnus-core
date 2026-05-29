@@ -10,7 +10,6 @@ from rest_framework.test import APILiveServerTestCase
 
 from cosinnus.conf import settings
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
-from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.tests.view_tests.views import MainContentFormTestView
@@ -41,10 +40,6 @@ class MainContentViewTest(APILiveServerTestCase):
         site.domain = f'{self.host}:{self.server_thread.port}'
         site.save()
         self.domain = f'http://{site.domain}'
-        # recreate portal, as objects created by migrations are droped by the TransactionTestCase teardown.
-        CosinnusPortal.objects.get_or_create(
-            id=1, defaults={'name': 'default portal', 'slug': 'default', 'public': True, 'site': site}
-        )
         self.test_user = User.objects.create(**TEST_USER_DATA)
         self.test_user_profile = self.test_user.cosinnus_profile
         self.test_group = CosinnusSociety.objects.create(name='Test Group')

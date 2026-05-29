@@ -2,8 +2,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.utils.functional import cached_property
+from django.utils.translation import gettext_lazy as _
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 
 from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachedFileSerializer
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
@@ -34,7 +36,20 @@ class CosinnusCalendarListQueryParameterSerializer(serializers.Serializer):
         return data
 
 
-class CosinnusCalendarListSerializer(serializers.ModelSerializer):
+class AttendingSerializerMixin:
+    """Mixin for the attending and attendances_count method field."""
+
+    def get_attending(self, obj):
+        user = self.context['request'].user
+        if not user.is_authenticated:
+            return False
+        return obj.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
+
+    def get_attendances_count(self, obj):
+        return obj.attendances.filter(state=EventAttendance.ATTENDANCE_GOING).count()
+
+
+class CosinnusCalendarListSerializer(AttendingSerializerMixin, serializers.ModelSerializer):
     """Serializer for events in the calendar list API view."""
 
     attending = serializers.SerializerMethodField()
@@ -50,12 +65,6 @@ class CosinnusCalendarListSerializer(serializers.ModelSerializer):
             'to_date',
             'attending',
         )
-
-    def get_attending(self, obj):
-        user = self.context['request'].user
-        if not user.is_authenticated:
-            return False
-        return obj.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
 
 
 class CalendarPublicEventAttendancesListSerializer(serializers.ListSerializer):
@@ -99,7 +108,7 @@ class CosinnusCalendarEventCreatorSerializer(serializers.ModelSerializer):
         )
 
 
-class BBBRoomUrlsMixin:
+class BBBRoomUrlsSerializerMixin:
     """A helper mixing to compute the BBB room url method field values used in multiple APIs."""
 
     def get_bbb_url(self, obj):
@@ -128,7 +137,7 @@ class BBBRoomUrlsMixin:
 class CosinnusCalendarEventSerializer(
     CosinnusDynamicFieldsSerializerMixin,
     CosinnusMediaTagSerializerMixin,
-    BBBRoomUrlsMixin,
+    BBBRoomUrlsSerializerMixin,
     CosinnusCalendarListSerializer,
 ):
     """Complete Serializer for events in the calendar API."""
@@ -283,9 +292,6 @@ class CosinnusCalendarEventSerializer(
     def get_ical_url(self, obj):
         return obj.get_feed_url()
 
-    def get_attendances_count(self, obj):
-        return obj.attendances.filter(state=EventAttendance.ATTENDANCE_GOING).count()
-
     def get_bookmarked(self, obj):
         user = self.context['request'].user
         return obj.is_user_starring(user)
@@ -356,7 +362,7 @@ class CalendarPublicEventBBBEnabledField(serializers.BooleanField):
         return value == Event.BBB_MEETING
 
 
-class CosinnusCalendarEventBBBRoomSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
+class CosinnusCalendarEventBBBRoomSerializer(BBBRoomUrlsSerializerMixin, serializers.ModelSerializer):
     """Serializer for event BBB room and conference settings."""
 
     enabled = CalendarPublicEventBBBEnabledField(source='video_conference_type')
@@ -400,7 +406,7 @@ class CosinnusCalendarEventBBBRoomSerializer(BBBRoomUrlsMixin, serializers.Model
         return super().to_internal_value(data)
 
 
-class CosinnusCalendarBBBRoomUrlsSerializer(BBBRoomUrlsMixin, serializers.ModelSerializer):
+class CosinnusCalendarBBBRoomUrlsSerializer(BBBRoomUrlsSerializerMixin, serializers.ModelSerializer):
     """Serializer for BBB room urls, that is used by an API periodically pulled during BBB room creation."""
 
     bbb_url = serializers.SerializerMethodField()
@@ -515,3 +521,74 @@ class CosinnusCalendarEventReflectSerializer(serializers.Serializer):
                     content_type=event_content_type, object_id=self.instance.id, group_id=reflection_group_id
                 ).delete()
         return instance
+
+
+class CosinnusCalendarSyncedEventSerializer(
+    CosinnusMediaTagSerializerMixin, AttendingSerializerMixin, BBBRoomUrlsSerializerMixin, serializers.ModelSerializer
+):
+    """Serializer for synced/internal events."""
+
+    uid = serializers.UUIDField(
+        source='nextcloud_calendar_uid',
+        validators=[UniqueValidator(queryset=Event.objects.all())],
+    )
+    attending = serializers.SerializerMethodField()
+    attendances = CosinnusCalendarEventAttendancesSerializer(many=True, read_only=True)
+    attendances_count = serializers.SerializerMethodField()
+    bbb_url = serializers.SerializerMethodField()
+    bbb_guest_url = serializers.SerializerMethodField()
+    external_video_conference_url = serializers.URLField(
+        source='media_tag.external_video_conference_url',
+        required=False,
+        default=None,
+        allow_blank=True,
+        allow_null=True,
+    )
+
+    class Meta:
+        model = Event
+        fields = (
+            'uid',
+            'bbb_url',
+            'bbb_guest_url',
+            'external_video_conference_url',
+            'attending',
+            'attendances',
+            'attendances_count',
+        )
+
+    def validate_uid(self, value):
+        """Make sure that uid is never changed via API."""
+        if self.instance and self.instance.nextcloud_calendar_uid != value:  #
+            raise serializers.ValidationError('UID can not be changed.')
+        return value
+
+    def create_or_update(self, validated_data, instance=None):
+        # get nested media tag data
+        media_tag_data = validated_data.pop('media_tag', {})
+        if not instance:
+            # create event
+            # use fixed title until sync, as title is required
+            title = _('Untitled Meeting')
+            validated_data.update(
+                {'group': self.context['group'], 'state': Event.STATE_SYNCHRONIZED_EVENT, 'title': title}
+            )
+            instance = Event.objects.create(**validated_data)
+            # set event visibility to public
+            instance.media_tag.visibility = BaseTagObject.VISIBILITY_GROUP
+            instance.media_tag.save()
+        else:
+            # update event
+            for field, value in validated_data.items():
+                setattr(instance, field, value)
+            instance.save()
+        # save media tag fields
+        if media_tag_data:
+            self.save_media_tag(instance.media_tag, media_tag_data)
+        return instance
+
+    def create(self, validated_data):
+        return self.create_or_update(validated_data)
+
+    def update(self, instance, validated_data):
+        return self.create_or_update(validated_data, instance=instance)
