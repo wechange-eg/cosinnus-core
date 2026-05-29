@@ -3,15 +3,19 @@ import logging
 import re
 from typing import Optional
 
+from annoying.functions import get_object_or_None
 from caldav.davclient import get_davclient
 from caldav.elements.dav import DisplayName
 from caldav.lib.error import ResponseError
+from django.contrib.auth import get_user_model
 from django.utils.timezone import localtime, make_aware, now
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.tagged import BaseTagObject
+from cosinnus.utils.functions import get_int_or_None
 from cosinnus.utils.integration import migrate_description
+from cosinnus.utils.user import is_user_active
 from cosinnus_event.models import Event
 
 logger = logging.getLogger(__name__)
@@ -305,12 +309,23 @@ class NextcloudCaldavConnection:
                             )
                             continue
 
+                        # try to find the creator if the 'X-CREATOR' property is set on the event.
+                        # only assign it if it matches an active user id who is a group member.
+                        # this is only used to avoid sending a notification to the creator of an event
+                        creator = None
+                        x_creator_id = get_int_or_None(caldav_event.icalendar_component.get('X_CREATOR'))
+                        if x_creator_id and x_creator_id in group.members:
+                            creator_cand = get_object_or_None(get_user_model(), id=x_creator_id)
+                            if creator_cand and is_user_active(creator_cand):
+                                creator = creator_cand
+
                         if not synced_event:
                             # create event if not synced yet
                             synced_event = Event.objects.create(
                                 group=group,
                                 state=Event.STATE_SYNCHRONIZED_EVENT,
                                 nextcloud_calendar_uid=event_caldav_uid,
+                                creator=creator,  # creator=None unless X-Creator was set in Dav object
                                 title=summary,
                                 from_date=dt_start,
                                 to_date=dt_end,
@@ -321,6 +336,7 @@ class NextcloudCaldavConnection:
                             synced_event.media_tag.save()
                         else:
                             # update synced event
+                            synced_event.creator = creator  # creator=None unless X-Creator was set in Dav object
                             synced_event.title = summary
                             synced_event.from_date = dt_start
                             synced_event.to_date = dt_end
@@ -328,7 +344,7 @@ class NextcloudCaldavConnection:
                             synced_event.nextcloud_calendar_last_sync = now()
                             synced_event.save()
                 except Exception as e:
-                    logger.warning(
+                    logger.error(
                         'NC Calendar: calendar sync of event failed!',
                         extra={'exception': e, 'event_url': caldav_event.canonical_url},
                     )
