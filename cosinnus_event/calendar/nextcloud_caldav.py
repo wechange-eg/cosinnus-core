@@ -43,7 +43,7 @@ class NextcloudCaldavConnection:
             self.group_calendar_share(group, calendar_url=calendar.canonical_url)
 
             # get publish url
-            publish_url = self.group_calender_get_publish_url(group, calendar_url=calendar.canonical_url)
+            publish_url = self.group_calendar_get_publish_url(group, calendar_url=calendar.canonical_url)
 
             # save calendar url in group
             group.refresh_from_db()
@@ -108,7 +108,7 @@ class NextcloudCaldavConnection:
             logger.warning('NC Calendar: calendar unshare failed!', extra={'exception': e})
             raise NextcloudCaldavConnectionException()
 
-    def group_calender_get_publish_url(self, group, calendar_url=None):
+    def group_calendar_get_publish_url(self, group, calendar_url=None):
         """Get the publish-URL of a NextCloud caldav calendar."""
         if not calendar_url:
             calendar_url = group.nextcloud_calendar_url
