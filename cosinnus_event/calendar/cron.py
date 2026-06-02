@@ -29,16 +29,13 @@ class CalendarSyncCaldavEvents(CosinnusCronJobBase):
         for group in groups:
             try:
                 error_msg = calendar.group_sync_private_events(group)
+                sync_count += 1
             except Exception as e:
-                error_msg = f'Sync of group (id {group.id}) failed: {e}'
+                error_msg = f'[Group {group.id}] ERROR: Sync failed: {e}'
                 logger.error(
                     'CalendarSyncCaldavEvents: Sync of group failed!',
                     extra={'exception': e, 'group_id': group.id},
                 )
-                if settings.DEBUG:
-                    raise
             if error_msg:
                 errors += error_msg + '\n'
-            else:
-                sync_count += 1
-        return f'{sync_count} groups synced.' + (f'\n\nErrors:\n\n{errors}' if errors else '')
+        return f'{sync_count}/{len(groups)} groups synced.' + (f'\n\nErrors/Messages:\n\n{errors}' if errors else '')
