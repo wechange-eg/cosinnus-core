@@ -384,6 +384,10 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             'force_redo_cloud_user_room_memberships',
             'force_update_group_names',
         ]
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        actions += [
+            'force_redo_calendar_group_shares',
+        ]
     list_display = (
         'name',
         'slug',
@@ -722,6 +726,28 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             self.message_user(request, message)
 
         force_update_group_names.short_description = _('Nextcloud: Update group names')
+
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+
+        def force_redo_calendar_group_shares(self, request, queryset):
+            count = 0
+            from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
+
+            try:
+                calendar = NextcloudCaldavConnection()
+                for group in queryset:
+                    if not group.nextcloud_calendar_url:
+                        message = _('Group "%(group)s" does not have a Nextcloud Calendar URL.') % {'group': group.name}
+                        self.message_user(request, message, level=messages.WARNING)
+                        continue
+                    calendar.group_calendar_share(group)
+                    count += 1
+            except Exception as e:
+                logger.warning('Could share group calendar with group.', extra={'exc': e})
+            message = _("%(count)d Groups' Nextcloud Calendar shares were re-done.") % {'count': count}
+            self.message_user(request, message)
+
+        force_redo_calendar_group_shares.short_description = _('Calendar: Fix missing Nextcloud group shares')
 
 
 admin.site.register(CosinnusProject, CosinnusProjectAdmin)

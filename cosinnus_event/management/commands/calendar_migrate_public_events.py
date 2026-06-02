@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 
 from cosinnus.models import BaseTagObject
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.html import is_html
 from cosinnus_event.models import Event
 
 logger = logging.getLogger('cosinnus')
@@ -13,7 +14,9 @@ class Command(BaseCommand):
     help = (
         'Migrate public events for the v3 calendar. '
         'Converts the markdown description to html and sets the image from attached_image.'
-        'Can be safly excecuted multiple times.'
+        'Should be run during the release of the v3 calendar.'
+        'If run after new events have been created, a side effect would be that the attached_image is set as the event'
+        'header image.'
     )
 
     def handle(self, *args, **options):
@@ -25,11 +28,23 @@ class Command(BaseCommand):
         ).prefetch_related('media_tag', 'attendances')
         self.stdout.write(f'Migrating {events.count()} public events ...')
         for event in events:
+            # skip events that have no description or image
+            if not event.note and not event.attached_image:
+                continue
+
+            # skip new events in case this command is run after the calendar activation
+            if event.note and is_html(event.note):
+                continue
+
             # convert description from Markdown to html
-            event.note = textfield(event.note)
+            if event.note and not is_html(event.note):
+                event.note = textfield(event.note)
+
             # set header image
-            if event.attached_image:
+            if event.attached_image and not event.image:
                 event.image.name = event.attached_image.get_media_image_path()
+
+            # save
             event.save(update_fields=['note', 'image'])
             event.media_tag.migrated = True
             event.media_tag.save(update_fields=['migrated'])

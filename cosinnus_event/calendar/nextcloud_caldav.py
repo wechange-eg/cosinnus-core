@@ -2,6 +2,7 @@ import datetime
 import logging
 import re
 from typing import Optional
+from urllib.parse import quote_plus
 
 from caldav.davclient import get_davclient
 from caldav.elements.dav import DisplayName
@@ -43,7 +44,7 @@ class NextcloudCaldavConnection:
             self.group_calendar_share(group, calendar_url=calendar.canonical_url)
 
             # get publish url
-            publish_url = self.group_calender_get_publish_url(group, calendar_url=calendar.canonical_url)
+            publish_url = self.group_calendar_get_publish_url(group, calendar_url=calendar.canonical_url)
 
             # save calendar url in group
             group.refresh_from_db()
@@ -60,6 +61,11 @@ class NextcloudCaldavConnection:
             logger.warning('NC Calendar: calendar creation failed!', extra={'exception': e})
             raise NextcloudCaldavConnectionException()
 
+    def get_group_principal(self, group):
+        """Return the url encoded group principal."""
+        group_id = quote_plus(group.nextcloud_group_id)
+        return f'principals/groups/{group_id}/'
+
     def group_calendar_share(self, group, calendar_url=None):
         """
         Share calendar with Nextcloud group.
@@ -69,11 +75,11 @@ class NextcloudCaldavConnection:
         if not calendar_url:
             calendar_url = group.nextcloud_calendar_url
         try:
-            caldav_group_id = group.nextcloud_group_id.replace(' ', '+')
+            group_principal = self.get_group_principal(group)
             body = (
                 '<x4:share xmlns:x4="http://owncloud.org/ns">'
                 '   <x4:set>'
-                f'       <x0:href xmlns:x0="DAV:">principal:principals/groups/{caldav_group_id}</x0:href>'
+                f'       <x0:href xmlns:x0="DAV:">principal:{group_principal}</x0:href>'
                 '       <x4:read-write/>'
                 '   </x4:set>'
                 '</x4:share>'
@@ -93,11 +99,11 @@ class NextcloudCaldavConnection:
         """
         calendar_url = group.nextcloud_calendar_url
         try:
-            caldav_group_id = group.nextcloud_group_id.replace(' ', '+')
+            group_principal = self.get_group_principal(group)
             body = (
                 '<x4:share xmlns:x4="http://owncloud.org/ns">'
                 '   <x4:remove>'
-                f'       <x0:href xmlns:x0="DAV:">principal:principals/groups/{caldav_group_id}</x0:href>'
+                f'       <x0:href xmlns:x0="DAV:">principal:{group_principal}</x0:href>'
                 '   </x4:remove>'
                 '</x4:share>'
             )
@@ -108,7 +114,7 @@ class NextcloudCaldavConnection:
             logger.warning('NC Calendar: calendar unshare failed!', extra={'exception': e})
             raise NextcloudCaldavConnectionException()
 
-    def group_calender_get_publish_url(self, group, calendar_url=None):
+    def group_calendar_get_publish_url(self, group, calendar_url=None):
         """Get the publish-URL of a NextCloud caldav calendar."""
         if not calendar_url:
             calendar_url = group.nextcloud_calendar_url

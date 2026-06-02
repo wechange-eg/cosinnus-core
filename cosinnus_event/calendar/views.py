@@ -92,7 +92,7 @@ class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
             )
             user_calendar_url = user_calendar_url[:-1]
             user_calendar_url += f'_shared_by_{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/'
-            return user_calendar_url
+        return user_calendar_url
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
