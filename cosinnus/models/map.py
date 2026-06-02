@@ -1017,6 +1017,8 @@ def itemid_from_searchresult(result):
 
 
 def filter_event_searchqueryset_by_upcoming(sqs):
+    """Excludes anything that isn't an upcoming scheduled platform-event state
+    (excludes `STATE_SYNCHRONIZED_EVENT` for example)."""
     # upcoming events
     _now = now()
     event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
@@ -1050,7 +1052,8 @@ def build_date_time(date_string, time_string):
 
 def filter_event_or_conference_happening_during(from_datetime, to_datetime, sqs):
     """Filters all events or conferences to retain those happening during the provided
-    datetime range, either fully or in part."""
+    datetime range, either fully or in part.
+    Excludes anything that isn't a scheduled platform-event state (excludes `STATE_SYNCHRONIZED_EVENT` for example)."""
     sqs = sqs.exclude(to_date__lt=from_datetime).exclude(from_date__gt=to_datetime)
     # only actual events, no doodles
     sqs = sqs.exclude(Q(event_state__lt=1) | Q(event_state__gt=1))
