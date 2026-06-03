@@ -83,6 +83,12 @@ class Event(
         (STATE_SYNCHRONIZED_EVENT, _('Synchronized Event')),
     )
 
+    # if this flag is in the settings, the event is an internal meeting without a title, which are usually
+    # not-yet-synced internal events with state STATE_SYNCHRONIZED_EVENT and not title.
+    # events with this flag do not cause notifications, and a changed-notification that adds a title is handled
+    # as a created notification instead.
+    SETTINGS_IS_UNTITLED_MEETING_KEY = 'is_untitled_meeting'
+
     from_date = models.DateTimeField(_('Start'), default=None, blank=True, null=True, editable=True)
 
     to_date = models.DateTimeField(_('End'), default=None, blank=True, null=True, editable=True)
@@ -231,11 +237,18 @@ class Event(
         else:
             return 'fa-calendar'
 
-    def save(self, created_from_doodle=False, *args, **kwargs):
+    def save(self, created_from_doodle=False, treat_as_created_for_notifications=False, *args, **kwargs):
         created = bool(self.pk) is False
         super(Event, self).save(*args, **kwargs)
 
-        if created and not self.is_hidden_group_proxy:
+        # untitled synced events do not cause notifications
+        skip_created_notifications = self.settings.get(Event.SETTINGS_IS_UNTITLED_MEETING_KEY, False)
+
+        if (
+            (created or treat_as_created_for_notifications)
+            and not skip_created_notifications
+            and not self.is_hidden_group_proxy
+        ):
             # event/doodle was created or
             # event went from being a doodle to being a real event, so fire event created
             session_id = uuid1().int

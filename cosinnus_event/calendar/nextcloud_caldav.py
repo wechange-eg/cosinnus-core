@@ -298,6 +298,7 @@ class NextcloudCaldavConnection:
                                 synced_event.delete()
                         else:
                             # sync existing caldav event
+                            event_settings = {}
 
                             # get event data and convert types
                             dt_start = caldav_event.icalendar_component.get('DTSTART')
@@ -323,6 +324,7 @@ class NextcloudCaldavConnection:
                                 summary = str(summary)
                             else:
                                 summary = _('Untitled Meeting')
+                                event_settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY] = 'true'
 
                             description = caldav_event.icalendar_component.get('DESCRIPTION')
                             if description:
@@ -365,6 +367,7 @@ class NextcloudCaldavConnection:
                                     from_date=dt_start,
                                     to_date=dt_end,
                                     note=description,
+                                    settings=event_settings,
                                     nextcloud_calendar_last_sync=now(),
                                 )
                                 synced_event.media_tag.visibility = BaseTagObject.VISIBILITY_GROUP
@@ -387,10 +390,16 @@ class NextcloudCaldavConnection:
                                 _check_for_change_and_update('to_date', dt_end)
                                 _check_for_change_and_update('note', description)
                                 synced_event.nextcloud_calendar_last_sync = now()
-                                synced_event.save()
 
-                                if event_was_changed:
-                                    self._notify_for_changed_synced_event(synced_event)
+                                # if a previously existing untitled event was changed to titled, notifications act as
+                                # if this event was just created, and on-change notifications are skipped.
+                                if summary and synced_event.settings.get(Event.SETTINGS_IS_UNTITLED_MEETING_KEY, False):
+                                    del synced_event.settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY]
+                                    synced_event.save(treat_as_created_for_notifications=True)
+                                else:
+                                    synced_event.save()
+                                    if event_was_changed:
+                                        self._notify_for_changed_synced_event(synced_event)
                     except Exception as e:
                         logger.error(
                             'NC Calendar: calendar sync of event failed!',
