@@ -31,6 +31,8 @@
 {% endblock %}
 
 {% block action_buttons %}
+    {# Action buttons for events are active only in the old calendar is enabled #}
+    {% if not SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
 	{% include 'cosinnus/v2/dashboard/timeline_button_like.html' with item=item %}
 	{% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
 	{% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
@@ -43,5 +45,6 @@
 			</a>
 		{% endif %}
 	{% endwith %}
+    {% endif %}
 {% endblock %}
 {% block delete_button_frame %}{% endblock %}

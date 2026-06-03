@@ -461,6 +461,11 @@ class Event(
             moderators.append(self.creator)
         return moderators
 
+    def show_comments_on_dashboard(self):
+        """From `BaseTaggableObjectModel`.
+        Do not show comments on user dashbaord if the new calendar is enabled."""
+        return not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
+
     def get_admin_change_url(self):
         """Returns the django admin edit page for this object."""
         return reverse('admin:cosinnus_event_event_change', kwargs={'object_id': self.id})

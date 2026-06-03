@@ -646,6 +646,11 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         that may not have a well-readable title."""
         return self.title
 
+    def show_comments_on_dashboard(self):
+        """Overridable in implementing models.
+        Whether to show comments on user dashbaord if the new calendar is enabled."""
+        return True
+
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """
