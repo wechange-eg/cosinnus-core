@@ -23,7 +23,11 @@ from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, UserSignupFinalizeMixin
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
-from cosinnus.models.profile import PROFILE_DYNAMIC_FIELDS_CONTACTS, PROFILE_SETTINGS_AVATAR_COLOR
+from cosinnus.models.profile import (
+    PROFILE_DYNAMIC_FIELDS_CONTACTS,
+    PROFILE_SETTINGS_AVATAR_COLOR,
+    GlobalUserNotificationSetting,
+)
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
@@ -508,3 +512,14 @@ class CosinnusSetInitialPasswordSerializer(serializers.Serializer):
     def validate_password(self, value):
         password_validation.validate_password(value)
         return value
+
+
+class CosinnusGlobalUserNotificationSettingSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the global user notification settings
+    - Only the fields `setting` and `portal_group_setting` are handled.
+    """
+
+    class Meta:
+        model = GlobalUserNotificationSetting
+        fields = ('setting', 'portal_group_setting')
