@@ -24,6 +24,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.profile import GlobalUserNotificationSetting
 from cosinnus.utils.files import get_image_url_for_icon
 from cosinnus.utils.functions import resolve_attributes
+from cosinnus.utils.group import get_default_user_group_ids
 from cosinnus.utils.permissions import check_object_read_access, check_user_can_receive_emails
 from cosinnus.utils.user import is_user_active
 from cosinnus_notifications.models import NotificationEvent, UserMultiNotificationPreference, UserNotificationPreference
@@ -61,7 +62,8 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
         and return it as html string. no portal modifications will be made
     """
     portal = CosinnusPortal.get_current()
-    portal_group_ids = portal.groups.all().filter(is_active=True).values_list('id', flat=True)
+    portal_wide_group_ids = portal.groups.all().filter(is_active=True).values_list('id', flat=True)
+    default_user_group_ids = get_default_user_group_ids()
 
     # read the time for the last sent digest of this time
     # (its saved as a string, but django QS will auto-box it when filtering on datetime fields)
@@ -96,6 +98,8 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
     for user in users:
         if debug_run_for_user and debug_force_show_all:
             global_wanted = True
+            use_individual_group_prefs = False
+            global_portal_group_wanted = True
             multi_prefs = list(
                 UserMultiNotificationPreference.objects.filter(
                     user=user, portal=CosinnusPortal.get_current(), setting=digest_setting
@@ -108,7 +112,6 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                 continue
 
             # get all of user's multi prefs for this digest setting
-            only_multi_prefs_wanted = False
             multi_prefs = list(
                 UserMultiNotificationPreference.objects.filter(
                     user=user, portal=CosinnusPortal.get_current(), setting=digest_setting
@@ -117,20 +120,26 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
             # check global blanket settings
             global_wanted = False  # flag to allow all events
             global_setting = GlobalUserNotificationSetting.objects.get_for_user(user)
+            use_individual_group_prefs = global_setting == GlobalUserNotificationSetting.SETTING_GROUP_INDIVIDUAL
+
+            global_portal_group_setting = GlobalUserNotificationSetting.objects.get_portal_group_setting_for_user(user)
+            # global_portal_group_wanted is simple to determine since for prortal default groups
+            # there is no INDIVIDUAL setting if the global_setting is NEVER, this must be forced to False
+            global_portal_group_wanted = (
+                global_setting != GlobalUserNotificationSetting.SETTING_NEVER
+                and global_portal_group_setting == digest_setting
+            )
 
             # check if global blanketing settings allow for sending this digest to the user
             if (
                 global_setting != digest_setting
-                and global_setting != GlobalUserNotificationSetting.SETTING_GROUP_INDIVIDUAL
+                and not use_individual_group_prefs
+                and not global_portal_group_wanted
+                and not multi_prefs
             ):
-                if not multi_prefs:
-                    # users who don't have the global setting AND the multi pref setting set to this digest never get
-                    # an email
-                    continue
-                else:
-                    # user still has a multi pref setting for this digest_setting, so go on and check
-                    only_multi_prefs_wanted = True
-
+                # users who don't have the global setting, the global_portal_group setting AND the multi pref setting
+                # set to this digest never get an email
+                continue
             if (
                 digest_setting == UserNotificationPreference.SETTING_DAILY
                 and global_setting == GlobalUserNotificationSetting.SETTING_DAILY
@@ -156,15 +165,14 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
 
             # get all notification events where the user is in the intended audience
             events = timescope_notification_events.filter(audience__contains=',%d,' % user.id)
+            # events for portal default user groups are excluded here, they are being handled separately below
+            events = events.exclude(group__id__in=default_user_group_ids)
 
             # if we have a blanket YES for this digest, filter events only by portal affiliance,
             # otherwise filter events by group notification settings
             if global_wanted:
-                events = events.filter(group_id__in=portal_group_ids)
-            elif only_multi_prefs_wanted:
-                # set the regular group events to none; mix in multi pref events later
-                events = NotificationEvent.objects.none()
-            else:
+                events = events.filter(group_id__in=portal_wide_group_ids)
+            elif use_individual_group_prefs:
                 # these groups will never get digest notifications because they have a blanketing NONE setting or
                 # ALL setting (of anything but this ``digest_setting``)
                 # (they may still have individual preferences in the DB, which are ignored because of the blanket
@@ -175,7 +183,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                     if key != digest_setting
                 ]
                 exclude_digest_groups = UserNotificationPreference.objects.filter(
-                    user=user, group_id__in=portal_group_ids
+                    user=user, group_id__in=portal_wide_group_ids
                 )
                 exclude_digest_groups = exclude_digest_groups.filter(
                     Q(notification_id=ALL_NOTIFICATIONS_ID, setting__in=unwanted_digest_settings)
@@ -187,17 +195,32 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                 # setting
                 # if he doesn't have any, we will not send a mail for them
                 prefs = UserNotificationPreference.objects.filter(
-                    user=user, group_id__in=portal_group_ids, setting=digest_setting
+                    user=user, group_id__in=portal_wide_group_ids, setting=digest_setting
                 )
                 prefs = prefs.exclude(notification_id=NO_NOTIFICATIONS_ID).exclude(group_id__in=exclude_digest_groups)
 
                 if len(prefs) == 0:
-                    continue
+                    # no individual group settings present
+                    events = NotificationEvent.objects.none()
+                else:
+                    # only for these groups does the user get any digest news at all
+                    pref_group_ids = list(set([pref.group for pref in prefs]))
+                    # so filter for these groups
+                    events = events.filter(group_id__in=pref_group_ids)
+            else:
+                # no global notifications and no individual notifications
+                # mix in multi pref events later
+                events = NotificationEvent.objects.none()
 
-                # only for these groups does the user get any digest news at all
-                pref_group_ids = list(set([pref.group for pref in prefs]))
-                # so filter for these groups
-                events = events.filter(group_id__in=pref_group_ids)
+            # main event aggregation and filtering is done
+            # now mix in global_group events and multi pref events
+
+            # add events for portal default user groups if wanted, only if user is in the intended audience
+            if global_portal_group_wanted:
+                portal_group_events = timescope_notification_events.filter(
+                    audience__contains=',%d,' % user.id, group__id__in=default_user_group_ids
+                )
+                events = events | portal_group_events
 
             # add multi pref events that the user wants to see to regular events
             if multi_prefs:
@@ -205,15 +228,18 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                 for multi_pref in multi_prefs:
                     multi_pref_notification_ids.extend(get_multi_preference_notification_ids(multi_pref))
                 # filter all notification events to fit multi prefs andbe in the current portal
+                # exclude portal default groups, since global_portal_group_wanted overrides multi-prefs
                 multi_pref_events = timescope_notification_events.filter(
-                    notification_id__in=multi_pref_notification_ids, group_id__in=portal_group_ids
-                )
+                    notification_id__in=multi_pref_notification_ids, group_id__in=portal_wide_group_ids
+                ).exclude(group_id__in=default_user_group_ids)
                 events = events | multi_pref_events
+
+            # event aggregation and filtering is done
 
             if events.count() == 0:
                 continue
 
-            if not global_wanted and not only_multi_prefs_wanted:
+            if use_individual_group_prefs:
                 # collect a comparable hash for all wanted user prefs
                 wanted_group_notifications = [
                     '%(group_id)d__%(notification_id)s'
@@ -283,8 +309,11 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                             # if user==None here, we have a generalized notification like from a CalDav event
                             continue
                         if (
-                            not is_multipref and not global_wanted and not only_multi_prefs_wanted
-                        ):  # skip finegrained preference check on blanket YES
+                            not is_multipref
+                            and use_individual_group_prefs
+                            and event.group_id not in default_user_group_ids
+                        ):  # when using individual group prefs, non-multipref and non-portal-group events must
+                            # match the users group notification prefs
                             if not (
                                 ('%d__%s' % (event.group_id, ALL_NOTIFICATIONS_ID) in wanted_group_notifications)
                                 or ('%d__%s' % (event.group_id, event.notification_id) in wanted_group_notifications)
