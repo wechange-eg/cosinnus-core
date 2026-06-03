@@ -3,17 +3,24 @@ import logging
 import re
 from typing import Optional
 from urllib.parse import quote_plus
+from uuid import uuid1
 
+from annoying.functions import get_object_or_None
 from caldav.davclient import get_davclient
 from caldav.elements.dav import DisplayName
 from caldav.lib.error import ResponseError
+from django.contrib.auth import get_user_model
 from django.utils.timezone import localtime, make_aware, now
 from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.tagged import BaseTagObject
+from cosinnus.utils.functions import get_int_or_None
 from cosinnus.utils.integration import migrate_description
-from cosinnus_event.models import Event
+from cosinnus.utils.threading import cosinnus_worker_thread_threading_disabled
+from cosinnus.utils.user import is_user_active
+from cosinnus_event import cosinnus_notifications
+from cosinnus_event.models import Event, EventAttendance
 
 logger = logging.getLogger(__name__)
 
@@ -227,124 +234,219 @@ class NextcloudCaldavConnection:
         """Sync NexCloud caldav events for a group.
         @return: returns None if the sync was completed and a timestamp saved, str error message otherwise.
         @raises: `NextcloudCaldavConnectionException` on connection errors, `Exception` on anything else."""
+        error_messages = ''
 
         if not group.nextcloud_calendar_url:
             return f'Group {group.id} had no nextcloud_calendar_url.'
-        try:
+
+        with cosinnus_worker_thread_threading_disabled():
             try:
-                calendar = self.caldav_client.calendar(url=group.nextcloud_calendar_url)
-
-                # get changed events, if sync-token is None, all events are fetched
-                sync_token = group.nextcloud_calendar_sync_token
-                caldav_events = calendar.objects_by_sync_token(sync_token=sync_token, load_objects=True)
-            except Exception as e:
-                logger.warning(
-                    'NC Calendar: calendar sync of event failed by caldav connection, aborting sync for group!',
-                    extra={'exception': e, 'group_id': group.id},
-                )
-                raise NextcloudCaldavConnectionException('Calendar sync of event failed by caldav connection!')
-
-            # store next sync-token
-            sync_token = caldav_events.sync_token
-
-            # sync event changes
-            for caldav_event in caldav_events:
                 try:
-                    # get the event UID
-                    # note: extracting from url instead of using caldav data, as deleted events have no caldav data.
-                    event_caldav_uid = None
-                    match = re.search(r'/([^/]+)\.ics$', caldav_event.canonical_url)
-                    if match:
-                        event_caldav_uid = match.group(1)
-                    if not event_caldav_uid:
-                        logger.warning(
-                            'NC Calendar: calendar sync of event failed for URL match, aborting sync for group!',
-                            extra={'event_url': caldav_event.canonical_url},
+                    calendar = self.caldav_client.calendar(url=group.nextcloud_calendar_url)
+
+                    # get changed events, if sync-token is None, all events are fetched
+                    sync_token = group.nextcloud_calendar_sync_token
+                    caldav_events = calendar.objects_by_sync_token(sync_token=sync_token, load_objects=True)
+
+                    # Handle sync token being outdated. This gives no exception, because Nextcloud is returning an HTTP
+                    # status code (likely a 207 Multi-Status or a 200 OK) because it wrapped its HTML error message in
+                    # a standard WebDAV XML envelope. Because the server didn't throw a standard 4xx or 5xx HTTP error,
+                    # the caldav package assumes the request was successful. It parses the XML XML element structure,
+                    # sees a data payload, treats the entire HTML error page as the "raw data" for a calendar event,
+                    # and hands back a list containing one corrupted "Event" object as the first object.
+                    # Sometimes there are other events appended as well, but it cannot be guaranteed, that this is a
+                    # complete list, so we do a full resync in any case when we see such an error object.
+                    if len(caldav_events) > 0:
+                        # Inspect the raw text of the first object
+                        raw_data = getattr(caldav_events.objects[0], 'data', '')
+                        if 'This is the WebDAV interface' in raw_data or '<html' in raw_data.lower():
+                            # sync token was invalid, do a full resync, record as OK error
+                            caldav_events = calendar.objects_by_sync_token(load_objects=True)
+                            error_messages += f'[Group {group.id}]: OK, but sync token expired so did a full resync.\n'
+                except Exception as e:
+                    logger.warning(
+                        'NC Calendar: calendar sync of event failed by caldav connection, aborting sync for group!',
+                        extra={'exception': e, 'group_id': group.id},
+                    )
+                    raise NextcloudCaldavConnectionException('Calendar sync of event failed by caldav connection!')
+
+                # store next sync-token
+                sync_token = caldav_events.sync_token
+
+                # sync event changes
+                for caldav_event in caldav_events:
+                    try:
+                        # get the event UID
+                        # note: extracting from url instead of using caldav data, as deleted events have no caldav data.
+                        event_caldav_uid = None
+                        match = re.search(r'/([^/]+)\.ics$', caldav_event.canonical_url)
+                        if match:
+                            event_caldav_uid = match.group(1)
+                        if not event_caldav_uid:
+                            logger.warning(
+                                'NC Calendar: calendar sync of event failed for URL match, aborting sync for group!',
+                                extra={'event_url': caldav_event.canonical_url},
+                            )
+                            return f'[Group {group.id}]: Event URL {caldav_event.canonical_url} could not be parsed.\n'
+
+                        synced_event = Event.objects.filter(
+                            state=Event.STATE_SYNCHRONIZED_EVENT, nextcloud_calendar_uid=event_caldav_uid
+                        ).first()
+                        if not caldav_event.data:
+                            # caldav event without data is returned when the event was deleted
+                            if synced_event:
+                                synced_event.delete()
+                        else:
+                            # sync existing caldav event
+                            event_settings = {}
+
+                            # get event data and convert types
+                            dt_start = caldav_event.icalendar_component.get('DTSTART')
+                            if dt_start:
+                                dt_start = dt_start.dt
+                                # convert all day events
+                                if type(dt_start) is datetime.date:
+                                    dt_start = make_aware(
+                                        datetime.datetime(dt_start.year, dt_start.month, dt_start.day)
+                                    )
+
+                            dt_end = caldav_event.icalendar_component.get('DTEND')
+                            if dt_end:
+                                dt_end = dt_end.dt
+                                # convert all day events
+                                if type(dt_end) is datetime.date:
+                                    dt_end = make_aware(
+                                        datetime.datetime(dt_end.year, dt_end.month, dt_end.day, 23, 59)
+                                    )
+
+                            summary = caldav_event.icalendar_component.get('SUMMARY')
+                            if summary:
+                                summary = str(summary)
+                            else:
+                                summary = _('Untitled Meeting')
+                                event_settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY] = 'true'
+
+                            description = caldav_event.icalendar_component.get('DESCRIPTION')
+                            if description:
+                                description = str(description)
+
+                            # check required data
+                            if not dt_start or not dt_end:
+                                logger.warning(
+                                    'NC Calendar: calendar sync of event had incomplete data, aborting sync for group!',
+                                    extra={
+                                        'event_url': caldav_event.canonical_url,
+                                        'dt_start': dt_start,
+                                        'dt_end': dt_end,
+                                        'summary': summary,
+                                    },
+                                )
+                                error_messages += (
+                                    f'[Group {group.id}]: Event URL {caldav_event.canonical_url} had incomplete data.\n'
+                                )
+                                continue
+
+                            # try to find the creator if the 'X-CREATOR' property is set on the event.
+                            # only assign it if it matches an active user id who is a group member.
+                            # this is only used to avoid sending a notification to the creator of an event
+                            creator = None
+                            x_creator_id = get_int_or_None(caldav_event.icalendar_component.get('X_CREATOR'))
+                            if x_creator_id and x_creator_id in group.members:
+                                creator_cand = get_object_or_None(get_user_model(), id=x_creator_id)
+                                if creator_cand and is_user_active(creator_cand):
+                                    creator = creator_cand
+
+                            if not synced_event:
+                                # create event if not synced yet
+                                synced_event = Event.objects.create(
+                                    group=group,
+                                    state=Event.STATE_SYNCHRONIZED_EVENT,
+                                    nextcloud_calendar_uid=event_caldav_uid,
+                                    creator=creator,  # creator=None unless X-Creator was set in Dav object
+                                    title=summary,
+                                    from_date=dt_start,
+                                    to_date=dt_end,
+                                    note=description,
+                                    settings=event_settings,
+                                    nextcloud_calendar_last_sync=now(),
+                                )
+                                synced_event.media_tag.visibility = BaseTagObject.VISIBILITY_GROUP
+                                synced_event.media_tag.save()
+                            else:
+                                event_was_changed = False
+
+                                def _check_for_change_and_update(attr_name, value):
+                                    """A setter for attributes that flags whether the attribute changed"""
+                                    if getattr(synced_event, attr_name, None) != value:
+                                        nonlocal event_was_changed
+                                        event_was_changed = True
+                                    setattr(synced_event, attr_name, value)
+
+                                # update synced event
+                                # creator=None unless X-Creator was set in Dav object
+                                _check_for_change_and_update('creator', creator)
+                                _check_for_change_and_update('title', summary)
+                                _check_for_change_and_update('from_date', dt_start)
+                                _check_for_change_and_update('to_date', dt_end)
+                                _check_for_change_and_update('note', description)
+                                synced_event.nextcloud_calendar_last_sync = now()
+
+                                # if a previously existing untitled event was changed to titled, notifications act as
+                                # if this event was just created, and on-change notifications are skipped.
+                                if summary and synced_event.settings.get(Event.SETTINGS_IS_UNTITLED_MEETING_KEY, False):
+                                    del synced_event.settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY]
+                                    synced_event.save(treat_as_created_for_notifications=True)
+                                else:
+                                    synced_event.save()
+                                    if event_was_changed:
+                                        self._notify_for_changed_synced_event(synced_event)
+                    except Exception as e:
+                        logger.error(
+                            'NC Calendar: calendar sync of event failed!',
+                            extra={'exception': e, 'event_url': caldav_event.canonical_url},
+                        )
+                        error_messages += (
+                            f'[Group {group.id}]: Event URL {caldav_event.canonical_url} had Exception: "{str(e)}".\n'
                         )
                         continue
 
-                    synced_event = Event.objects.filter(
-                        state=Event.STATE_SYNCHRONIZED_EVENT, nextcloud_calendar_uid=event_caldav_uid
-                    ).first()
-                    if not caldav_event.data:
-                        # caldav event without data is returned when the event was deleted
-                        if synced_event:
-                            synced_event.delete()
-                    else:
-                        # sync existing caldav event
+                # save sync token and time after successful sync
+                group.nextcloud_calendar_sync_token = sync_token
+                group.nextcloud_calendar_last_sync = now()
+                group.save(update_fields=['nextcloud_calendar_sync_token', 'nextcloud_calendar_last_sync'])
+                return error_messages or None  # return None as success
+            except Exception as e:
+                logger.warning(
+                    'NC Calendar: calendar sync of group failed!', extra={'exception': e, 'group_id': group.id}
+                )
+                raise
 
-                        # get event data and convert types
-                        dt_start = caldav_event.icalendar_component.get('DTSTART')
-                        if dt_start:
-                            dt_start = dt_start.dt
-                            # convert all day events
-                            if type(dt_start) is datetime.date:
-                                dt_start = make_aware(datetime.datetime(dt_start.year, dt_start.month, dt_start.day))
-
-                        dt_end = caldav_event.icalendar_component.get('DTEND')
-                        if dt_end:
-                            dt_end = dt_end.dt
-                            # convert all day events
-                            if type(dt_end) is datetime.date:
-                                dt_end = make_aware(datetime.datetime(dt_end.year, dt_end.month, dt_end.day, 23, 59))
-
-                        summary = caldav_event.icalendar_component.get('SUMMARY')
-                        if summary:
-                            summary = str(summary)
-                        else:
-                            summary = _('Untitled Meeting')
-
-                        description = caldav_event.icalendar_component.get('DESCRIPTION')
-                        if description:
-                            description = str(description)
-
-                        # check required data
-                        if not dt_start or not dt_end:
-                            logger.warning(
-                                'NC Calendar: calendar sync of event had incomplete data, aborting sync for group!',
-                                extra={
-                                    'event_url': caldav_event.canonical_url,
-                                    'dt_start': dt_start,
-                                    'dt_end': dt_end,
-                                    'summary': summary,
-                                },
-                            )
-                            continue
-
-                        if not synced_event:
-                            # create event if not synced yet
-                            synced_event = Event.objects.create(
-                                group=group,
-                                state=Event.STATE_SYNCHRONIZED_EVENT,
-                                nextcloud_calendar_uid=event_caldav_uid,
-                                title=summary,
-                                from_date=dt_start,
-                                to_date=dt_end,
-                                note=description,
-                                nextcloud_calendar_last_sync=now(),
-                            )
-                            synced_event.media_tag.visibility = BaseTagObject.VISIBILITY_GROUP
-                            synced_event.media_tag.save()
-                        else:
-                            # update synced event
-                            synced_event.title = summary
-                            synced_event.from_date = dt_start
-                            synced_event.to_date = dt_end
-                            synced_event.note = description
-                            synced_event.nextcloud_calendar_last_sync = now()
-                            synced_event.save()
-                except Exception as e:
-                    logger.warning(
-                        'NC Calendar: calendar sync of event failed!',
-                        extra={'exception': e, 'event_url': caldav_event.canonical_url},
-                    )
-                    continue
-
-            # save sync token and time after successful sync
-            group.nextcloud_calendar_sync_token = sync_token
-            group.nextcloud_calendar_last_sync = now()
-            group.save(update_fields=['nextcloud_calendar_sync_token', 'nextcloud_calendar_last_sync'])
-            return None  # return None as success
-        except Exception as e:
-            logger.warning('NC Calendar: calendar sync of group failed!', extra={'exception': e, 'group_id': group.id})
-            raise
+    def _notify_for_changed_synced_event(self, synced_event):
+        """Triggers notification signals when a synced private event was changed by a fresh sync."""
+        session_id = uuid1().int
+        # send out a notification to all attendees for the change
+        attendees_except_creator = [
+            attendance.user.pk
+            for attendance in synced_event.attendances.all()
+            if (attendance.state in [EventAttendance.ATTENDANCE_GOING, EventAttendance.ATTENDANCE_MAYBE_GOING])
+            and not attendance.user.pk == synced_event.creator_id
+        ]
+        cosinnus_notifications.attending_synced_event_changed.send(
+            sender=self,
+            user=synced_event.creator,
+            obj=synced_event,
+            audience=get_user_model().objects.filter(id__in=attendees_except_creator),
+            session_id=session_id,
+        )
+        # send out a notification to all followers for the change
+        followers_except_creator = [
+            pk for pk in synced_event.get_followed_user_ids() if pk not in [synced_event.creator_id]
+        ]
+        cosinnus_notifications.following_synced_event_changed.send(
+            sender=self,
+            user=synced_event.creator,
+            obj=synced_event,
+            audience=get_user_model().objects.filter(id__in=followers_except_creator),
+            session_id=session_id,
+            end_session=True,
+        )

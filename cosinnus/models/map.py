@@ -21,10 +21,9 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.templatetags.cosinnus_tags import textfield_with_html
 from cosinnus.utils.dates import HumanizedEventTimeObject
 from cosinnus.utils.group import message_group_admins_url
-from cosinnus.utils.html import is_html, sanitize_html
 from cosinnus.utils.permissions import (
     check_ug_invited_pending,
     check_ug_membership,
@@ -268,7 +267,7 @@ class HaystackMapResult(BaseMapResult):
             'iconImageUrl': result.icon_image_url,
             'backgroundImageSmallUrl': result.background_image_small_url,
             'backgroundImageLargeUrl': result.background_image_large_url,
-            'description': self.get_description_html(result.description),
+            'description': textfield_with_html(result.description),
             'relevance': result.score,
             'topics': result.mt_topics,
             'text_topics': result.mt_text_topics,
@@ -319,19 +318,6 @@ class HaystackMapResult(BaseMapResult):
         fields.update(**kwargs)
 
         super(HaystackMapResult, self).__init__(*args, **fields)
-
-    def get_description_html(self, description):
-        """
-        Return the description as safe HTML.
-        Markdown descriptions are converted to HTML. HTML descriptions are sanitized.
-        """
-        if not description:
-            return description
-        if is_html(description):
-            description = sanitize_html(description)
-        else:
-            description = textfield(description)
-        return description
 
 
 class DetailedMapResult(HaystackMapResult):
@@ -1017,6 +1003,8 @@ def itemid_from_searchresult(result):
 
 
 def filter_event_searchqueryset_by_upcoming(sqs):
+    """Excludes anything that isn't an upcoming scheduled platform-event state
+    (excludes `STATE_SYNCHRONIZED_EVENT` for example)."""
     # upcoming events
     _now = now()
     event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
@@ -1050,7 +1038,8 @@ def build_date_time(date_string, time_string):
 
 def filter_event_or_conference_happening_during(from_datetime, to_datetime, sqs):
     """Filters all events or conferences to retain those happening during the provided
-    datetime range, either fully or in part."""
+    datetime range, either fully or in part.
+    Excludes anything that isn't a scheduled platform-event state (excludes `STATE_SYNCHRONIZED_EVENT` for example)."""
     sqs = sqs.exclude(to_date__lt=from_datetime).exclude(from_date__gt=to_datetime)
     # only actual events, no doodles
     sqs = sqs.exclude(Q(event_state__lt=1) | Q(event_state__gt=1))

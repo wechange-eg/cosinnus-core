@@ -31,6 +31,7 @@ from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.models.tagged import LikeableObjectMixin
 from cosinnus.utils.dates import HumanizedEventTimeMixin, localize
 from cosinnus.utils.files import _get_avatar_filename, get_presentation_filename
+from cosinnus.utils.html import convert_html_to_plaintext
 from cosinnus.utils.permissions import check_object_read_access, filter_tagged_object_queryset_for_user
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.validators import validate_file_infection
@@ -81,6 +82,12 @@ class Event(
         (STATE_ARCHIVED_DOODLE, _('Archived Event Poll')),
         (STATE_SYNCHRONIZED_EVENT, _('Synchronized Event')),
     )
+
+    # if this flag is in the settings, the event is an internal meeting without a title, which are usually
+    # not-yet-synced internal events with state STATE_SYNCHRONIZED_EVENT and not title.
+    # events with this flag do not cause notifications, and a changed-notification that adds a title is handled
+    # as a created notification instead.
+    SETTINGS_IS_UNTITLED_MEETING_KEY = 'is_untitled_meeting'
 
     from_date = models.DateTimeField(_('Start'), default=None, blank=True, null=True, editable=True)
 
@@ -166,9 +173,11 @@ class Event(
         on_delete=models.SET_NULL,
     )
 
-    nextcloud_calendar_uid = models.UUIDField(
+    nextcloud_calendar_uid = models.CharField(
         _('Event Nextcloud CalDAV UID'),
+        max_length=255,
         unique=True,
+        db_index=True,
         blank=True,
         null=True,
         help_text='Used for synced events',
@@ -228,49 +237,62 @@ class Event(
         else:
             return 'fa-calendar'
 
-    def save(self, created_from_doodle=False, *args, **kwargs):
+    def save(self, created_from_doodle=False, treat_as_created_for_notifications=False, *args, **kwargs):
         created = bool(self.pk) is False
         super(Event, self).save(*args, **kwargs)
 
-        if created and not self.is_hidden_group_proxy and not self.state == Event.STATE_SYNCHRONIZED_EVENT:
+        # untitled synced events do not cause notifications
+        skip_created_notifications = self.settings.get(Event.SETTINGS_IS_UNTITLED_MEETING_KEY, False)
+
+        if (
+            (created or treat_as_created_for_notifications)
+            and not skip_created_notifications
+            and not self.is_hidden_group_proxy
+        ):
             # event/doodle was created or
             # event went from being a doodle to being a real event, so fire event created
             session_id = uuid1().int
             audience = get_user_model().objects.filter(id__in=self.group.members)
+
+            # self.creator may be None, for example for events of type STATE_SYNCHRONIZED_EVENT if no
+            # organizer or X-Creator was set in CalDav.
+            # if it IS set, filter the audience for the creator so they don't receive their own notification
             if self.creator:
                 audience = audience.exclude(id=self.creator.pk)
             group_followers_except_creator_ids = [
-                pk for pk in self.group.get_followed_user_ids() if pk not in [self.creator_id]
+                pk for pk in self.group.get_followed_user_ids() if pk != self.creator_id
             ]
             group_followers_except_creator = get_user_model().objects.filter(id__in=group_followers_except_creator_ids)
+
+            # switch signal types for specific event states
             if self.state == Event.STATE_SCHEDULED:
-                # followers for the group
-                cosinnus_notifications.followed_group_event_created.send(
-                    sender=self,
-                    user=self.creator,
-                    obj=self,
-                    audience=group_followers_except_creator,
-                    session_id=session_id,
-                )
-                # regular members
-                cosinnus_notifications.event_created.send(
-                    sender=self, user=self.creator, obj=self, audience=audience, session_id=session_id, end_session=True
-                )
+                group_followers_create_signal = cosinnus_notifications.followed_group_event_created
+                regular_member_create_signal = cosinnus_notifications.event_created
+            elif self.state == Event.STATE_VOTING_OPEN:
+                group_followers_create_signal = cosinnus_notifications.followed_group_doodle_created
+                regular_member_create_signal = cosinnus_notifications.doodle_created
+            elif self.state == Event.STATE_SYNCHRONIZED_EVENT:
+                group_followers_create_signal = cosinnus_notifications.followed_group_synced_event_created
+                regular_member_create_signal = cosinnus_notifications.synced_event_created
             else:
+                group_followers_create_signal = None
+                regular_member_create_signal = None
+
+            if group_followers_create_signal and regular_member_create_signal:
                 # followers for the group
-                cosinnus_notifications.followed_group_doodle_created.send(
+                group_followers_create_signal.send(
                     sender=self,
-                    user=self.creator,
+                    user=self.creator,  # Note: creator may be None!
                     obj=self,
                     audience=group_followers_except_creator,
                     session_id=session_id,
                 )
                 # regular members
-                cosinnus_notifications.doodle_created.send(
+                regular_member_create_signal.send(
                     sender=self, user=self.creator, obj=self, audience=audience, session_id=session_id, end_session=True
                 )
 
-        # create a "going" attendance for the event's creator
+        # create a "going" attendance for the event's creator if the conf setting is active
         if settings.COSINNUS_EVENT_MARK_CREATOR_AS_GOING and created and self.state == Event.STATE_SCHEDULED:
             EventAttendance.objects.get_or_create(
                 event=self, user=self.creator, defaults={'state': EventAttendance.ATTENDANCE_GOING}
@@ -318,18 +340,29 @@ class Event(
 
     @property
     def is_calendar_event(self):
-        return (
-            settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
-            and self.state == Event.STATE_SCHEDULED
-            and hasattr(self, 'media_tag')
-            and self.media_tag
-            and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
-        )
+        """Returns true if this is a v3 frontend calendar item"""
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            if self.state == Event.STATE_SYNCHRONIZED_EVENT:
+                return True
+            elif (
+                self.state == Event.STATE_SCHEDULED
+                and hasattr(self, 'media_tag')
+                and self.media_tag
+                and self.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+            ):
+                return True
+        return False
 
     def get_calendar_url(self):
-        calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
-        event_url = f'{calendar_url}?eventId={self.pk}&type=public&calId={self.group.pk}'
-        return event_url
+        """Returns the v3 frontend calendar URL for this event"""
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': self.group})
+            if self.state == Event.STATE_SCHEDULED:
+                # public events
+                return f'{calendar_url}?eventId={self.pk}&type=public&calId={self.group.pk}'
+            elif self.state == Event.STATE_SYNCHRONIZED_EVENT and self.nextcloud_calendar_uid:
+                return f'{calendar_url}?eventId={self.nextcloud_calendar_uid}&type=internal&calId={self.group.pk}'
+        return ''
 
     def get_feed_url(self):
         """Returns the iCal feed url. A user token as to be appended using either
@@ -444,6 +477,11 @@ class Event(
             moderators.append(self.creator)
         return moderators
 
+    def show_comments_on_dashboard(self):
+        """From `BaseTaggableObjectModel`.
+        Do not show comments on user dashbaord if the new calendar is enabled."""
+        return not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
+
     def get_admin_change_url(self):
         """Returns the django admin edit page for this object."""
         return reverse('admin:cosinnus_event_event_change', kwargs={'object_id': self.id})
@@ -462,8 +500,15 @@ class Event(
         if hasattr(self, 'media_tag') and self.media_tag and self.media_tag.location:
             text += f', {self.media_tag.location}'
         if self.note:
-            text += f'\n{self.note}'
+            text += f'\n{self.plaintext_note}'
         return text
+
+    @property
+    def plaintext_note(self):
+        # support html content for events when the v3 calendar is enabled, by removing the HTML tags
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            return convert_html_to_plaintext(self.note)
+        return self.note
 
 
 @six.python_2_unicode_compatible

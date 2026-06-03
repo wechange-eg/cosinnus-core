@@ -528,7 +528,7 @@ class CosinnusCalendarSyncedEventSerializer(
 ):
     """Serializer for synced/internal events."""
 
-    uid = serializers.UUIDField(
+    uid = serializers.CharField(
         source='nextcloud_calendar_uid',
         validators=[UniqueValidator(queryset=Event.objects.all())],
     )
@@ -569,9 +569,18 @@ class CosinnusCalendarSyncedEventSerializer(
         if not instance:
             # create event
             # use fixed title until sync, as title is required
-            title = _('Untitled Meeting')
+            event_settings = {}
+            if 'title' not in validated_data or not validated_data.get('title', None):
+                # add untitled title and settings flag
+                title = _('Untitled Meeting')
+                event_settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY] = 'true'
             validated_data.update(
-                {'group': self.context['group'], 'state': Event.STATE_SYNCHRONIZED_EVENT, 'title': title}
+                {
+                    'group': self.context['group'],
+                    'state': Event.STATE_SYNCHRONIZED_EVENT,
+                    'title': title,
+                    'settings': event_settings,
+                }
             )
             instance = Event.objects.create(**validated_data)
             # set event visibility to public

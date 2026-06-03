@@ -10,7 +10,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.core.cache import cache
 from django.db import transaction
-from django.db.models import Case, Count, When
+from django.db.models import Case, Count, Q, When
 from django.http.response import (
     HttpResponse,
     HttpResponseBadRequest,
@@ -456,8 +456,8 @@ class AlertsRetrievalView(BasePagedOffsetWidgetView):
 
     def get_queryset(self):
         alerts_qs = NotificationAlert.objects.filter(
-            portal=CosinnusPortal.get_current(), user=self.request.user, action_user__is_active=True
-        )
+            portal=CosinnusPortal.get_current(), user=self.request.user
+        ).filter(Q(action_user__is_active=True) | Q(action_user__isnull=True))
         # support for user blocking, filter out all audience members that have the sending user blocked
         if settings.COSINNUS_ENABLE_USER_BLOCK:
             blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(self.request.user)
@@ -482,15 +482,15 @@ class AlertsRetrievalView(BasePagedOffsetWidgetView):
             self.newest_timestamp = timestamp_from_datetime(alerts[0].last_event_at)
         # get (user_obj, profile_obj) for each user_id into a dict
         # to optimize and retrieve each user once, even if they are action_user of multiple alerts
-        user_ids = list(set([alert.action_user_id for alert in alerts]))
+        user_ids = list(set([alert.action_user_id for alert in alerts if alert.action_user_id]))
         users = get_user_model().objects.filter(id__in=user_ids).prefetch_related('cosinnus_profile')
         user_cache = dict(((user.id, (user, user.cosinnus_profile)) for user in users))
         # serialize items
         items = [
             SerializedNotificationAlert(
                 alert,
-                action_user=user_cache[alert.action_user_id][0],
-                action_user_profile=user_cache[alert.action_user_id][1],
+                action_user=user_cache[alert.action_user_id][0] if alert.action_user_id else None,
+                action_user_profile=user_cache[alert.action_user_id][1] if alert.action_user_id else None,
             )
             for alert in alerts
         ]

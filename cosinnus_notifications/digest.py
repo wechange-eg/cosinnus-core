@@ -304,8 +304,10 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
                         statecheck = get_requires_object_state_check(event.notification_id)
                         if user == event.user:
                             continue  # users don't receive infos about events they caused
-                        if not is_user_active(event.user):
-                            continue  # users who are inactive by now are probably banned, so ignore their content
+                        if user is not None and not is_user_active(event.user):
+                            # users who are inactive by now are probably banned, so ignore their content
+                            # if user==None here, we have a generalized notification like from a CalDav event
+                            continue
                         if (
                             not is_multipref
                             and use_individual_group_prefs
