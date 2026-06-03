@@ -69,23 +69,21 @@ def create_user_alert(obj, group, receiver, action_user, notification_id, reason
     # TODO: optionize the timeframe
     if alert.get_allowed_type() == NotificationAlert.TYPE_BUNDLE_ALERT:
         a_short_time_ago = now() - timedelta(hours=3)
-        bundle_qs = NotificationAlert.objects.filter(
-            portal=CosinnusPortal.get_current(),
-            user=alert.user,
-            last_event_at__gte=a_short_time_ago,
-            bundle_hash=alert.bundle_hash,
-            type__in=[NotificationAlert.TYPE_SINGLE_ALERT, NotificationAlert.TYPE_BUNDLE_ALERT],
-        )
-        bundle_qs = list(bundle_qs)
-        if len(bundle_qs) > 1:
-            logger.info(
-                'Inconsistency: Trying to match a bundle alert, but had a QS with more than 1 items!',
-                extra={'alert': str(alert)},
+        bundle_qs = (
+            NotificationAlert.objects.filter(
+                portal=CosinnusPortal.get_current(),
+                user=alert.user,
+                last_event_at__gte=a_short_time_ago,
+                bundle_hash=alert.bundle_hash,
+                type__in=[NotificationAlert.TYPE_SINGLE_ALERT, NotificationAlert.TYPE_BUNDLE_ALERT],
             )
-            if settings.DEBUG:
-                raise Exception('DEBUG ERROR: Bundle alert double inconsistency')
-        elif len(bundle_qs) == 1:
-            merge_new_alert_into_bundle_alert(alert, bundle_qs[0])
+            .order_by('-last_event_at')
+            .distinct()
+        )
+
+        bundle_alert = bundle_qs.first()
+        if bundle_alert:
+            merge_new_alert_into_bundle_alert(alert, bundle_alert)
             return
 
     # Case C: if the event caused neither a multi user alert or bundle alert, save alert as a new alert

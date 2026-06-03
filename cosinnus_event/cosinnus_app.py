@@ -30,8 +30,7 @@ def register():
     url_registry.register_urlconf('cosinnus_event', 'cosinnus_event.urls', url_app_name_override=url_app_name_override)
 
     # register widgets
-    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
-        widget_registry.register('event', 'cosinnus_event.dashboard.UpcomingEvents')
+    widget_registry.register('event', 'cosinnus_event.dashboard.UpcomingEvents')
 
     # makemessages replacement protection
     name = pgettext_lazy('the_app', 'event')  # noqa
