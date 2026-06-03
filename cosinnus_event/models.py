@@ -31,6 +31,7 @@ from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.models.tagged import LikeableObjectMixin
 from cosinnus.utils.dates import HumanizedEventTimeMixin, localize
 from cosinnus.utils.files import _get_avatar_filename, get_presentation_filename
+from cosinnus.utils.html import convert_html_to_plaintext
 from cosinnus.utils.permissions import check_object_read_access, filter_tagged_object_queryset_for_user
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.validators import validate_file_infection
@@ -484,8 +485,15 @@ class Event(
         if hasattr(self, 'media_tag') and self.media_tag and self.media_tag.location:
             text += f', {self.media_tag.location}'
         if self.note:
-            text += f'\n{self.note}'
+            text += f'\n{self.plaintext_note}'
         return text
+
+    @property
+    def plaintext_note(self):
+        # support html content for events when the v3 calendar is enabled, by removing the HTML tags
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            return convert_html_to_plaintext(self.note)
+        return self.note
 
 
 @six.python_2_unicode_compatible

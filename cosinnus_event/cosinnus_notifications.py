@@ -69,7 +69,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -91,7 +91,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -114,7 +114,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
         },
         'show_follow_button': True,
@@ -249,7 +249,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -273,7 +273,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -296,7 +296,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
         },
         'show_follow_button': True,
@@ -351,7 +351,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -371,7 +371,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -390,7 +390,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -411,7 +411,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -431,7 +431,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
         },
     },
@@ -455,7 +455,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
         },
     },
