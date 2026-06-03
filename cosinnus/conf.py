@@ -301,6 +301,11 @@ class CosinnusConf(AppConf):
     # the global notification setting for users on the plattform (3: weekly)
     DEFAULT_GLOBAL_NOTIFICATION_SETTING = 3
 
+    # the global notification setting for new users, specific for the portal-wide default groups
+    # like Forum, Events etc.
+    # (0 : never)
+    DEFAULT_GLOBAL_NOTIFICATION_SETTING_PORTAL_GROUP = 0
+
     # default rocketchat notification mails are on
     # (see `GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES`)
     DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING = 1
