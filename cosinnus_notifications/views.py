@@ -19,6 +19,7 @@ from django.http.response import (
     HttpResponseRedirect,
 )
 from django.urls import reverse_lazy
+from django.utils.functional import Promise
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
@@ -33,6 +34,7 @@ from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.profile import GlobalUserNotificationSetting, UserBlock
 from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetime
 from cosinnus.utils.functions import is_number
+from cosinnus.utils.group import get_default_user_group_ids
 from cosinnus.utils.permissions import check_user_portal_admin, check_user_portal_moderator
 from cosinnus.utils.user import get_unread_message_count_for_user
 from cosinnus.views.user_dashboard import BasePagedOffsetWidgetView
