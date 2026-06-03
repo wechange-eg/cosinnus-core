@@ -173,6 +173,7 @@ setup(
         'fcm-django==2.2.1',
         'tblib==3.0.0',
         'django_extended_makemessages==1.7.1',
+        'factory-boy==3.3.3',
         # test requirements
         'freezegun==1.5.1',
         # requirements loaded in from github
