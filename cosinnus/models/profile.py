@@ -786,6 +786,9 @@ class GlobalUserNotificationSettingManager(models.Manager):
     _NOTIFICATION_CACHE_KEY = (
         'cosinnus/core/portal/%d/user/%d/globalnotificationsetting'  # portal_id, user_id  --> setting value (int)
     )
+    _PORTAL_GROUP_NOTIFICATION_CACHE_KEY = (
+        'cosinnus/core/portal/%d/user/%d/portalgroupnotificationsetting'  # portal_id, user_id  --> setting value (int)
+    )
     _ROCKETCHAT_NOTIFICATION_CACHE_KEY = (
         'cosinnus/core/portal/%d/user/%d/rocketchatnotificationsetting'  # portal_id, user_id  --> setting value (int)
     )
@@ -797,6 +800,18 @@ class GlobalUserNotificationSettingManager(models.Manager):
             setting = self.get_object_for_user(user).setting
             cache.set(
                 self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id),
+                setting,
+                settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT,
+            )
+        return setting
+
+    def get_portal_group_setting_for_user(self, user):
+        """Returns the cached setting value for this user's global notification setting."""
+        setting = cache.get(self._PORTAL_GROUP_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
+        if setting is None:
+            setting = self.get_object_for_user(user).portal_group_setting
+            cache.set(
+                self._PORTAL_GROUP_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id),
                 setting,
                 settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT,
             )
@@ -825,6 +840,7 @@ class GlobalUserNotificationSettingManager(models.Manager):
 
     def clear_cache_for_user(self, user):
         cache.delete(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
+        cache.delete(self._PORTAL_GROUP_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
         cache.delete(self._ROCKETCHAT_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
 
 
