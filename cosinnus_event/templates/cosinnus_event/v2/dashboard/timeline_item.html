@@ -27,24 +27,28 @@
 {% endblock %}
 
 {% block body %}
-	{{ item.note|textfield }}
+    {% if SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
+	    {{ item.note|textfield_with_html }}
+    {% else %}
+        {{ item.note|textfield }}
+    {% endif %}
 {% endblock %}
 
 {% block action_buttons %}
     {# Action buttons for events are active only in the old calendar is enabled #}
     {% if not SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
-	{% include 'cosinnus/v2/dashboard/timeline_button_like.html' with item=item %}
-	{% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
-	{% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
-	{% with attendants_count=item.get_attendants_count %}
-		{% if attendants_count > 0 %}
-			<a href="{{ item.get_absolute_url }}" class="action-button action-button-non-interactive" 
-					title="{{ attendants_count }} {% blocktrans context "one or many people are going" count counter=attendants_count %}Going{% plural %}Going{% endblocktrans %}">
-				<i class="fas fa-fw fa-user"></i>
-				{{ attendants_count }}
-			</a>
-		{% endif %}
-	{% endwith %}
+        {% include 'cosinnus/v2/dashboard/timeline_button_like.html' with item=item %}
+        {% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
+        {% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
+        {% with attendants_count=item.get_attendants_count %}
+            {% if attendants_count > 0 %}
+                <a href="{{ item.get_absolute_url }}" class="action-button action-button-non-interactive"
+                        title="{{ attendants_count }} {% blocktrans context "one or many people are going" count counter=attendants_count %}Going{% plural %}Going{% endblocktrans %}">
+                    <i class="fas fa-fw fa-user"></i>
+                    {{ attendants_count }}
+                </a>
+            {% endif %}
+        {% endwith %}
     {% endif %}
 {% endblock %}
 {% block delete_button_frame %}{% endblock %}

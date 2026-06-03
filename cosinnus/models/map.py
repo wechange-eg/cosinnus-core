@@ -20,10 +20,9 @@ from cosinnus.forms.search import filter_searchqueryset_for_read_access, get_vis
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.templatetags.cosinnus_tags import textfield_with_html
 from cosinnus.utils.dates import HumanizedEventTimeObject
 from cosinnus.utils.group import message_group_admins_url
-from cosinnus.utils.html import is_html, sanitize_html
 from cosinnus.utils.permissions import (
     check_ug_invited_pending,
     check_ug_membership,
@@ -270,7 +269,7 @@ class HaystackMapResult(BaseMapResult):
             'iconImageUrl': result.icon_image_url,
             'backgroundImageSmallUrl': result.background_image_small_url,
             'backgroundImageLargeUrl': result.background_image_large_url,
-            'description': self.get_description_html(result.description),
+            'description': textfield_with_html(result.description),
             'relevance': result.score,
             'topics': result.mt_topics,
             'text_topics': result.mt_text_topics,
@@ -321,19 +320,6 @@ class HaystackMapResult(BaseMapResult):
         fields.update(**kwargs)
 
         super(HaystackMapResult, self).__init__(*args, **fields)
-
-    def get_description_html(self, description):
-        """
-        Return the description as safe HTML.
-        Markdown descriptions are converted to HTML. HTML descriptions are sanitized.
-        """
-        if not description:
-            return description
-        if is_html(description):
-            description = sanitize_html(description)
-        else:
-            description = textfield(description)
-        return description
 
 
 class DetailedMapResult(HaystackMapResult):

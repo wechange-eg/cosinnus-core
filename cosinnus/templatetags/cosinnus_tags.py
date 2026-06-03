@@ -64,7 +64,7 @@ from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.models.tagged import BaseTagObject, CosinnusTopicCategory, LikeObject, get_tag_object_model
 from cosinnus.utils.functions import convert_html_to_string, ensure_list_of_ints
-from cosinnus.utils.html import render_html_with_variables
+from cosinnus.utils.html import is_html, render_html_with_variables, sanitize_html
 from cosinnus.utils.permissions import (
     check_group_create_objects_access,
     check_object_likefollowstar_access,
@@ -1127,6 +1127,21 @@ def textfield(text, arg=''):
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
     return mark_safe(text)
+
+
+@register.filter
+def textfield_with_html(text, arg=''):
+    """
+    Return the text as safe HTML.
+    Markdown descriptions are converted to HTML. HTML descriptions are sanitized.
+    """
+    if not text:
+        return text
+    if is_html(text):
+        description = sanitize_html(text)
+    else:
+        description = textfield(text)
+    return description
 
 
 @register.filter
