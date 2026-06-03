@@ -528,7 +528,7 @@ class CosinnusCalendarSyncedEventSerializer(
 ):
     """Serializer for synced/internal events."""
 
-    uid = serializers.UUIDField(
+    uid = serializers.CharField(
         source='nextcloud_calendar_uid',
         validators=[UniqueValidator(queryset=Event.objects.all())],
     )

@@ -166,9 +166,11 @@ class Event(
         on_delete=models.SET_NULL,
     )
 
-    nextcloud_calendar_uid = models.UUIDField(
+    nextcloud_calendar_uid = models.CharField(
         _('Event Nextcloud CalDAV UID'),
+        max_length=255,
         unique=True,
+        db_index=True,
         blank=True,
         null=True,
         help_text='Used for synced events',
