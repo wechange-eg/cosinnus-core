@@ -69,8 +69,6 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
         super().__init__(*args, **kwargs)
 
         # message relay hooks
-        post_save.connect(self.do_relay_message_create_or_update, sender=Event, weak=False)
-        post_delete.connect(self.do_relay_message_delete, sender=Event, weak=False)
         post_save.connect(self.do_relay_message_create_or_update, sender=Note, weak=False)
         post_delete.connect(self.do_relay_message_delete, sender=Note, weak=False)
 

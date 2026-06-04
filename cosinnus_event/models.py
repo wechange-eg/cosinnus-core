@@ -26,7 +26,6 @@ from osm_field.fields import LatitudeField, LongitudeField, OSMField
 from cosinnus.models import BaseTaggableObjectModel, BaseTagObject
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.mixins.tagged import RelayMessageMixin
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.models.tagged import LikeableObjectMixin
 from cosinnus.utils.dates import HumanizedEventTimeMixin, localize
@@ -56,7 +55,6 @@ class Event(
     TranslateableFieldsModelMixin,
     LikeableObjectMixin,
     BBBRoomMixin,
-    RelayMessageMixin,
     BaseTaggableObjectModel,
 ):
     """Model for events."""
@@ -485,23 +483,6 @@ class Event(
     def get_admin_change_url(self):
         """Returns the django admin edit page for this object."""
         return reverse('admin:cosinnus_event_event_change', kwargs={'object_id': self.id})
-
-    def get_message_emote(self):
-        """Implementing `RelayMessageMixin`"""
-        return settings.COSINNUS_ROCKET_NEWS_BOT_EMOTE_EVENT
-
-    def get_message_title(self):
-        """Implementing `RelayMessageMixin`"""
-        return self.title
-
-    def get_message_text(self):
-        """Implementing `RelayMessageMixin`"""
-        text = self.get_period_with_time()
-        if hasattr(self, 'media_tag') and self.media_tag and self.media_tag.location:
-            text += f', {self.media_tag.location}'
-        if self.note:
-            text += f'\n{self.plaintext_note}'
-        return text
 
     @property
     def plaintext_note(self):
