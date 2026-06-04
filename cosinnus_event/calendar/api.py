@@ -26,6 +26,7 @@ from cosinnus_event.calendar.serializers import (
     CosinnusCalendarEventSerializer,
     CosinnusCalendarListQueryParameterSerializer,
     CosinnusCalendarListSerializer,
+    CosinnusCalendarSyncedEventListSerializer,
     CosinnusCalendarSyncedEventSerializer,
 )
 from cosinnus_event.models import Event
@@ -49,7 +50,26 @@ class ViewSetActionMixin:
         return serializer.data
 
 
-class CosinnusCalendarViewSet(ViewSetActionMixin, viewsets.ModelViewSet):
+class ListQueryParamsMixin:
+    """Filters the list view queryset by "from_date" and "to_date" query parameters."""
+
+    query_params = None
+
+    def list(self, request, *args, **kwargs):
+        # validate and set query parameters
+        query_params_serializer = CosinnusCalendarListQueryParameterSerializer(data=request.query_params)
+        query_params_serializer.is_valid(raise_exception=True)
+        self.query_params = query_params_serializer.validated_data
+        return super().list(request, *args, **kwargs)
+
+    def filter_by_query_params(self, queryset):
+        # apply query parameter to queryset
+        return queryset.filter(
+            from_date__date__gte=self.query_params['from_date'], to_date__date__lte=self.query_params['to_date']
+        )
+
+
+class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets.ModelViewSet):
     """
     Viewset for public events for the v3 calendar app.
     """
@@ -96,13 +116,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, viewsets.ModelViewSet):
             raise NotFound()
         return super().initial(request, *args, **kwargs)
 
-    def list(self, request, *args, **kwargs):
-        # validate and set query parameters
-        query_params_serializer = CosinnusCalendarListQueryParameterSerializer(data=request.query_params)
-        query_params_serializer.is_valid(raise_exception=True)
-        self.query_params = query_params_serializer.validated_data
-        return super().list(request, *args, **kwargs)
-
     def get_queryset(self):
         if getattr(self, 'swagger_fake_view', False):
             # queryset just for schema generation metadata
@@ -116,9 +129,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, viewsets.ModelViewSet):
         )
         if self.action == 'list':
             # apply query parameters
-            queryset = queryset.filter(
-                from_date__date__gte=self.query_params['from_date'], to_date__date__lte=self.query_params['to_date']
-            )
+            queryset = self.filter_by_query_params(queryset)
         return queryset
 
     def get_object(self):
@@ -215,9 +226,11 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, viewsets.ModelViewSet):
 
 class CosinnusCalendarSyncedEventsViewSet(
     ViewSetActionMixin,
+    ListQueryParamsMixin,
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
+    mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
     """
@@ -232,12 +245,14 @@ class CosinnusCalendarSyncedEventsViewSet(
     serializer_class = CosinnusCalendarSyncedEventSerializer
     authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsCosinnusGroupUser,)
+    pagination_class = None
 
     group = None
 
     def get_serializer_class(self):
         """Get serializer based on viewset action."""
         action_serializers = {
+            'list': CosinnusCalendarSyncedEventListSerializer,
             'attendance': CosinnusCalendarEventAttendanceSerializer,
             'bbb_room': CosinnusCalendarEventBBBRoomSerializer,
             'bbb_room_urls': CosinnusCalendarBBBRoomUrlsSerializer,
@@ -269,10 +284,12 @@ class CosinnusCalendarSyncedEventsViewSet(
             media_tag__visibility=BaseTagObject.VISIBILITY_GROUP,
             state=Event.STATE_SYNCHRONIZED_EVENT,
             is_hidden_group_proxy=False,
-        )
-        queryset = queryset.exclude(
+        ).exclude(
             nextcloud_calendar_uid=None,
         )
+        if self.action == 'list':
+            # apply query parameters
+            queryset = self.filter_by_query_params(queryset)
         return queryset
 
     def get_object(self):

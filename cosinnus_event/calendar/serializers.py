@@ -523,8 +523,24 @@ class CosinnusCalendarEventReflectSerializer(serializers.Serializer):
         return instance
 
 
+class CosinnusCalendarSyncedEventListSerializer(AttendingSerializerMixin, serializers.ModelSerializer):
+    """Serializer for synced/internal events list."""
+
+    uid = serializers.CharField(
+        source='nextcloud_calendar_uid',
+    )
+    attending = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Event
+        fields = (
+            'uid',
+            'attending',
+        )
+
+
 class CosinnusCalendarSyncedEventSerializer(
-    CosinnusMediaTagSerializerMixin, AttendingSerializerMixin, BBBRoomUrlsSerializerMixin, serializers.ModelSerializer
+    CosinnusMediaTagSerializerMixin, BBBRoomUrlsSerializerMixin, CosinnusCalendarSyncedEventListSerializer
 ):
     """Serializer for synced/internal events."""
 
