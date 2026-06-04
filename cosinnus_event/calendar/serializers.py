@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
+from django.db import IntegrityError
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
 
 from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachedFileSerializer
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
@@ -530,7 +530,6 @@ class CosinnusCalendarSyncedEventSerializer(
 
     uid = serializers.CharField(
         source='nextcloud_calendar_uid',
-        validators=[UniqueValidator(queryset=Event.objects.all())],
     )
     attending = serializers.SerializerMethodField()
     attendances = CosinnusCalendarEventAttendancesSerializer(many=True, read_only=True)
@@ -582,7 +581,11 @@ class CosinnusCalendarSyncedEventSerializer(
                     'settings': event_settings,
                 }
             )
-            instance = Event.objects.create(**validated_data)
+            try:
+                instance = Event.objects.create(**validated_data)
+            except IntegrityError:
+                # handle uid group constraint error
+                raise serializers.ValidationError('UID must be unique for group.')
             # set event visibility to public
             instance.media_tag.visibility = BaseTagObject.VISIBILITY_GROUP
             instance.media_tag.save()

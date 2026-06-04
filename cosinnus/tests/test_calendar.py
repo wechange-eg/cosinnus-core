@@ -963,6 +963,10 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             event = Event.objects.get(nextcloud_calendar_uid=new_event_uid)
             self.assertEqual(event.media_tag.visibility, BaseTagObject.VISIBILITY_GROUP)
 
+            # cant create another event with same uid in the same group
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
+            self.assertEqual(res.status_code, 400)
+
         def test_event_detail(self):
             # anonymous not allowed
             res = self.client.get(self.event_detail_url)

@@ -12,7 +12,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, UniqueConstraint
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from django.urls import reverse
@@ -176,7 +176,6 @@ class Event(
     nextcloud_calendar_uid = models.CharField(
         _('Event Nextcloud CalDAV UID'),
         max_length=255,
-        unique=True,
         db_index=True,
         blank=True,
         null=True,
@@ -196,6 +195,7 @@ class Event(
         ordering = ['from_date', 'to_date', 'title']
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
+        constraints = [UniqueConstraint('group', 'nextcloud_calendar_uid', name='unique_nextcloud_calendar_event_uid')]
 
     def __init__(self, *args, **kwargs):
         super(Event, self).__init__(*args, **kwargs)
