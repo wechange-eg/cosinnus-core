@@ -91,4 +91,6 @@ echo ">> Updating Cosinnus Core translations..."
 cd "$CORE_PATH"
 python3 "$MANAGE_PY" extendedmakemessages "${BASE_FLAGS[@]}" $SORTING_ARGS $LOCALE_ARGS
 
+echo "   Hint: If there are a lot of errors, consider deleting the node_modules package and trying again."
 echo ">> Done."
+
