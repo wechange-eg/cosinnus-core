@@ -567,20 +567,25 @@ class CosinnusCalendarSyncedEventSerializer(
         media_tag_data = validated_data.pop('media_tag', {})
         if not instance:
             # create event
-            # use fixed title until sync, as title is required
-            event_settings = {}
-            if 'title' not in validated_data or not validated_data.get('title', None):
-                # add untitled title and settings flag
-                title = _('Untitled Meeting')
-                event_settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY] = 'true'
             validated_data.update(
                 {
                     'group': self.context['group'],
                     'state': Event.STATE_SYNCHRONIZED_EVENT,
-                    'title': title,
-                    'settings': event_settings,
                 }
             )
+            # use fixed title until sync, as title is required
+            event_settings = {}
+            # check if title is set, just in case we add the title to the serializer fields later
+            if 'title' not in validated_data or not validated_data.get('title', None):
+                # add untitled title and settings flag
+                title = _('Untitled Meeting')
+                event_settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY] = 'true'
+                validated_data.update(
+                    {
+                        'title': title,
+                        'settings': event_settings,
+                    }
+                )
             try:
                 instance = Event.objects.create(**validated_data)
             except IntegrityError:

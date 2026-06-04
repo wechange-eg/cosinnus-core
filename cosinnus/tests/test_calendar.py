@@ -962,6 +962,8 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertTrue(Event.objects.filter(nextcloud_calendar_uid=new_event_uid).exists())
             event = Event.objects.get(nextcloud_calendar_uid=new_event_uid)
             self.assertEqual(event.media_tag.visibility, BaseTagObject.VISIBILITY_GROUP)
+            self.assertEqual(event.title, 'Untitled Meeting')
+            self.assertTrue(event.settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY])
 
             # cant create another event with same uid in the same group
             res = self.client.post(self.event_list_url, data=event_post_data, format='json')
