@@ -386,6 +386,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         ]
     if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
         actions += [
+            'force_sync_calendar_internal_events',
             'force_redo_calendar_group_shares',
         ]
     list_display = (
@@ -729,22 +730,49 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
 
     if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
 
+        def force_sync_calendar_internal_events(self, request, queryset):
+            count = 0
+            from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
+
+            calendar = NextcloudCaldavConnection()
+            for group in queryset:
+                try:
+                    errors = calendar.group_sync_private_events(group, force_resync=True)
+                    if errors:
+                        message = _('%(group)s: An error occurred during sync (%(errors)s).') % {
+                            'group': group.name,
+                            'errors': errors,
+                        }
+                        self.message_user(request, message, level=messages.WARNING)
+                    else:
+                        count += 1
+                except Exception:
+                    message = _('%(group)s: An unexpected error occurred during sync.') % {'group': group.name}
+                    self.message_user(request, message, level=messages.WARNING)
+            message = _("%(count)d groups' internal events synced.") % {'count': count}
+            self.message_user(request, message)
+
+        force_sync_calendar_internal_events.short_description = _('Calendar: Re-Sync internal events')
+
         def force_redo_calendar_group_shares(self, request, queryset):
             count = 0
             from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
 
-            try:
-                calendar = NextcloudCaldavConnection()
-                for group in queryset:
-                    if not group.nextcloud_calendar_url:
-                        message = _('Group "%(group)s" does not have a Nextcloud Calendar URL.') % {'group': group.name}
-                        self.message_user(request, message, level=messages.WARNING)
-                        continue
+            calendar = NextcloudCaldavConnection()
+            for group in queryset:
+                if not group.nextcloud_calendar_url:
+                    message = _('Group "%(group)s" does not have a Nextcloud Calendar URL.') % {'group': group.name}
+                    self.message_user(request, message, level=messages.WARNING)
+                    continue
+                try:
                     calendar.group_calendar_share(group)
                     count += 1
-            except Exception as e:
-                logger.warning('Could share group calendar with group.', extra={'exc': e})
-            message = _("%(count)d Groups' Nextcloud Calendar shares were re-done.") % {'count': count}
+                except Exception:
+                    message = _('An error occurred while sharing calendar with group "%(group)s".') % {
+                        'group': group.name
+                    }
+                    self.message_user(request, message, level=messages.WARNING)
+            message = _("%(count)d groups' Nextcloud calendar shares were re-done.") % {'count': count}
             self.message_user(request, message)
 
         force_redo_calendar_group_shares.short_description = _('Calendar: Fix missing Nextcloud group shares')
