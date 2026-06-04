@@ -291,7 +291,9 @@ class NextcloudCaldavConnection:
                             return f'[Group {group.id}]: Event URL {caldav_event.canonical_url} could not be parsed.\n'
 
                         synced_event = Event.objects.filter(
-                            state=Event.STATE_SYNCHRONIZED_EVENT, nextcloud_calendar_uid=event_caldav_uid
+                            group_id=group.id,
+                            state=Event.STATE_SYNCHRONIZED_EVENT,
+                            nextcloud_calendar_uid=event_caldav_uid,
                         ).first()
                         if not caldav_event.data:
                             # caldav event without data is returned when the event was deleted
