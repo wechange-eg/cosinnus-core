@@ -921,6 +921,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             cls.event_list_url = reverse(
                 'cosinnus:frontend-api:calendar-api:calendar-synced-event-list', kwargs={'group_id': cls.test_group.id}
             )
+            cls.event_list_url_with_params = f'{cls.event_list_url}?from_date=2026-01-01&to_date=2026-02-01'
             cls.event_detail_url = reverse(
                 'cosinnus:frontend-api:calendar-api:calendar-synced-event-detail',
                 kwargs={'group_id': cls.test_group.id, 'nextcloud_calendar_uid': cls.test_event_uid},
@@ -935,10 +936,36 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             )
 
         def test_event_list(self):
-            # list is not supported
-            self.client.force_login(self.test_admin)
+            # anonymous access not allowed
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 403)
+
+            # non group users are not allowed
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 403)
+
+            # event list is allowed for group user and contains test event
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(
+                data,
+                [
+                    {
+                        'uid': self.test_event.nextcloud_calendar_uid,
+                        'attending': False,
+                    }
+                ],
+            )
+
+            # event list requires from_date and to_date parameters
             res = self.client.get(self.event_list_url)
-            self.assertEqual(res.status_code, 405)
+            self.assertEqual(res.status_code, 400)
+            data = res.json()['data']
+            self.assertEqual(data['from_date'], ['This parameter is required'])
+            self.assertEqual(data['to_date'], ['This parameter is required'])
 
         def test_event_create(self):
             new_event_uid = '854028a8-649e-4e01-bbdc-e9008cce6ae7'
@@ -962,6 +989,12 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertTrue(Event.objects.filter(nextcloud_calendar_uid=new_event_uid).exists())
             event = Event.objects.get(nextcloud_calendar_uid=new_event_uid)
             self.assertEqual(event.media_tag.visibility, BaseTagObject.VISIBILITY_GROUP)
+            self.assertEqual(event.title, 'Untitled Meeting')
+            self.assertTrue(event.settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY])
+
+            # cant create another event with same uid in the same group
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
+            self.assertEqual(res.status_code, 400)
 
         def test_event_detail(self):
             # anonymous not allowed
@@ -1051,6 +1084,12 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 ],
             )
             self.assertEqual(data['attendances_count'], 1)
+
+            # check attending in list api
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertTrue(data[0]['attending'])
 
             # unset attendance
             res = self.client.post(self.event_attendance_url, data={'attending': False}, format='json')

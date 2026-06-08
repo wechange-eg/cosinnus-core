@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
+from django.db import IntegrityError
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
 
 from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachedFileSerializer
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
@@ -523,14 +523,29 @@ class CosinnusCalendarEventReflectSerializer(serializers.Serializer):
         return instance
 
 
+class CosinnusCalendarSyncedEventListSerializer(AttendingSerializerMixin, serializers.ModelSerializer):
+    """Serializer for synced/internal events list."""
+
+    uid = serializers.CharField(
+        source='nextcloud_calendar_uid',
+    )
+    attending = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Event
+        fields = (
+            'uid',
+            'attending',
+        )
+
+
 class CosinnusCalendarSyncedEventSerializer(
-    CosinnusMediaTagSerializerMixin, AttendingSerializerMixin, BBBRoomUrlsSerializerMixin, serializers.ModelSerializer
+    CosinnusMediaTagSerializerMixin, BBBRoomUrlsSerializerMixin, CosinnusCalendarSyncedEventListSerializer
 ):
     """Serializer for synced/internal events."""
 
     uid = serializers.CharField(
         source='nextcloud_calendar_uid',
-        validators=[UniqueValidator(queryset=Event.objects.all())],
     )
     attending = serializers.SerializerMethodField()
     attendances = CosinnusCalendarEventAttendancesSerializer(many=True, read_only=True)
@@ -568,21 +583,30 @@ class CosinnusCalendarSyncedEventSerializer(
         media_tag_data = validated_data.pop('media_tag', {})
         if not instance:
             # create event
-            # use fixed title until sync, as title is required
-            event_settings = {}
-            if 'title' not in validated_data or not validated_data.get('title', None):
-                # add untitled title and settings flag
-                title = _('Untitled Meeting')
-                event_settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY] = 'true'
             validated_data.update(
                 {
                     'group': self.context['group'],
                     'state': Event.STATE_SYNCHRONIZED_EVENT,
-                    'title': title,
-                    'settings': event_settings,
                 }
             )
-            instance = Event.objects.create(**validated_data)
+            # use fixed title until sync, as title is required
+            event_settings = {}
+            # check if title is set, just in case we add the title to the serializer fields later
+            if 'title' not in validated_data or not validated_data.get('title', None):
+                # add untitled title and settings flag
+                title = _('Untitled Meeting')
+                event_settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY] = 'true'
+                validated_data.update(
+                    {
+                        'title': title,
+                        'settings': event_settings,
+                    }
+                )
+            try:
+                instance = Event.objects.create(**validated_data)
+            except IntegrityError:
+                # handle uid group constraint error
+                raise serializers.ValidationError('UID must be unique for group.')
             # set event visibility to public
             instance.media_tag.visibility = BaseTagObject.VISIBILITY_GROUP
             instance.media_tag.save()

@@ -230,8 +230,9 @@ class NextcloudCaldavConnection:
             )
             group.calendar_migration_set_status(group.CALENDAR_MIGRATION_STATUS_FAILED)
 
-    def group_sync_private_events(self, group) -> Optional[str]:
+    def group_sync_private_events(self, group, force_resync=False) -> Optional[str]:
         """Sync NexCloud caldav events for a group.
+        :param force_resync: force complete re-sync ignoring the sync token
         @return: returns None if the sync was completed and a timestamp saved, str error message otherwise.
         @raises: `NextcloudCaldavConnectionException` on connection errors, `Exception` on anything else."""
         error_messages = ''
@@ -245,7 +246,7 @@ class NextcloudCaldavConnection:
                     calendar = self.caldav_client.calendar(url=group.nextcloud_calendar_url)
 
                     # get changed events, if sync-token is None, all events are fetched
-                    sync_token = group.nextcloud_calendar_sync_token
+                    sync_token = group.nextcloud_calendar_sync_token if not force_resync else None
                     caldav_events = calendar.objects_by_sync_token(sync_token=sync_token, load_objects=True)
 
                     # Handle sync token being outdated. This gives no exception, because Nextcloud is returning an HTTP
@@ -290,7 +291,9 @@ class NextcloudCaldavConnection:
                             return f'[Group {group.id}]: Event URL {caldav_event.canonical_url} could not be parsed.\n'
 
                         synced_event = Event.objects.filter(
-                            state=Event.STATE_SYNCHRONIZED_EVENT, nextcloud_calendar_uid=event_caldav_uid
+                            group_id=group.id,
+                            state=Event.STATE_SYNCHRONIZED_EVENT,
+                            nextcloud_calendar_uid=event_caldav_uid,
                         ).first()
                         if not caldav_event.data:
                             # caldav event without data is returned when the event was deleted
