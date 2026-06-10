@@ -6,6 +6,7 @@ import logging
 from django.conf import settings
 from django.db.models import Q
 from django.urls import reverse
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
@@ -169,7 +170,7 @@ def update_group_last_activity(group, precision_days=30):
     if group.slug in get_default_portal_group_slugs():
         return
 
-    # Get the cutoff time where the last_activity computation is aborted
+    # Get the cutoff time, where the last_activity computation is aborted
     last_activity_cutoff = now() - datetime.timedelta(days=precision_days)
     if group.last_activity and group.last_activity > last_activity_cutoff:
         # Ignore groups where last activity is under the cutoff time
@@ -215,19 +216,31 @@ def update_group_last_activity(group, precision_days=30):
 
     # RocketChat
     if settings.COSINNUS_ROCKET_ENABLED:
-        rocket_chat = RocketChatConnection()
-        last_rocket_chat_activity = rocket_chat.get_group_updated_at(group)
-        if last_rocket_chat_activity:
-            last_activity = max(last_activity, last_rocket_chat_activity)
-            if last_activity > last_activity_cutoff:
-                # Abort further computation
-                type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
-                return
+        try:
+            rocket_chat = RocketChatConnection()
+            last_rocket_chat_activity = rocket_chat.get_group_updated_at(group)
+            if last_rocket_chat_activity:
+                last_activity = max(last_activity, last_rocket_chat_activity)
+                if last_activity > last_activity_cutoff:
+                    # Abort further computation
+                    type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+                    return
+        except Exception as e:
+            logger.warning(
+                'update_group_last_activity: An error occurred when checking RocketChat! Exception in extra.',
+                extra={'group_id': group.id, 'exception': force_str(e)},
+            )
 
     # NextCloud
     if settings.COSINNUS_CLOUD_ENABLED and group.nextcloud_groupfolder_name:
-        last_next_cloud_activity = get_group_folder_last_modified(group.nextcloud_groupfolder_name)
-        last_activity = max(last_activity, last_next_cloud_activity)
+        try:
+            last_next_cloud_activity = get_group_folder_last_modified(group.nextcloud_groupfolder_name)
+            last_activity = max(last_activity, last_next_cloud_activity)
+        except Exception as e:
+            logger.warning(
+                'update_group_last_activity: An error occurred when checking NextCloud! Exception in extra.',
+                extra={'group_id': group.id, 'exception': force_str(e)},
+            )
 
     # update last_activity without updating last_modified
     type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
