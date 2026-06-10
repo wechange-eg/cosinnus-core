@@ -166,6 +166,11 @@ def update_group_last_activity(group, precision_days=30):
     :param precision_days: Precision of the last activity in days.
     """
 
+    def save_last_activity(group, last_activity):
+        """Save last activity. Ensure last_activity is never in the future."""
+        if last_activity <= now():
+            type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+
     # Ignore forum, events and default user groups
     if group.slug in get_default_portal_group_slugs():
         return
@@ -180,7 +185,7 @@ def update_group_last_activity(group, precision_days=30):
     last_activity = group.last_modified
     if last_activity > last_activity_cutoff:
         # Abort further computation
-        type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+        save_last_activity(group, last_activity)
         return
 
     # membership changes
@@ -189,7 +194,7 @@ def update_group_last_activity(group, precision_days=30):
         last_activity = max(last_activity, last_membership_activity)
         if last_activity > last_activity_cutoff:
             # Abort further computation
-            type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+            save_last_activity(group, last_activity)
             return
 
     # taggable objects (notes, events, ...)
@@ -202,7 +207,7 @@ def update_group_last_activity(group, precision_days=30):
             last_activity = max(last_activity, last_taggable_object_activity)
             if last_activity > last_activity_cutoff:
                 # Abort further computation
-                type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+                save_last_activity(group, last_activity)
                 return
 
     # Etherpad/Ethercalc
@@ -211,7 +216,7 @@ def update_group_last_activity(group, precision_days=30):
         last_activity = max(last_activity, last_etherpad_activity)
         if last_activity > last_activity_cutoff:
             # Abort further computation
-            type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+            save_last_activity(group, last_activity)
             return
 
     # RocketChat
@@ -223,7 +228,7 @@ def update_group_last_activity(group, precision_days=30):
                 last_activity = max(last_activity, last_rocket_chat_activity)
                 if last_activity > last_activity_cutoff:
                     # Abort further computation
-                    type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+                    save_last_activity(group, last_activity)
                     return
         except Exception as e:
             logger.warning(
@@ -243,7 +248,7 @@ def update_group_last_activity(group, precision_days=30):
             )
 
     # update last_activity without updating last_modified
-    type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+    save_last_activity(group, last_activity)
 
 
 def send_group_inactivity_deactivation_notifications():
