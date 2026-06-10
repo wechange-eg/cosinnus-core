@@ -136,6 +136,8 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
             Q(last_login__lt=inactivity_deactivation_threshold)
             | Q(last_login=None, date_joined__lt=inactivity_deactivation_threshold)
         )
+        # exclude superusers, as they should never be automatically deleted
+        inactive_users = inactive_users.exclude(is_superuser=True)
         for user in inactive_users:
             try:
                 reassign_admins_for_groups_of_deleted_user(user)
