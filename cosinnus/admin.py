@@ -423,6 +423,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
         readonly_fields += [
             'nextcloud_calendar_last_sync',
+            'nextcloud_calendar_sync_required',
         ]
 
     raw_id_fields = ('parent',)

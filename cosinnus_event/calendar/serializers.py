@@ -625,3 +625,15 @@ class CosinnusCalendarSyncedEventSerializer(
 
     def update(self, instance, validated_data):
         return self.create_or_update(validated_data, instance=instance)
+
+
+class CosinnusCalendarSynceRequiredSerializer(serializers.Serializer):
+    """Serializer for the sync_required action for internal events."""
+
+    required = serializers.BooleanField()
+
+    def save(self, **kwargs):
+        if self.validated_data.get('required'):
+            group = self.context['group']
+            group.nextcloud_calendar_sync_required = True
+            group.save(update_fields=['nextcloud_calendar_sync_required'])

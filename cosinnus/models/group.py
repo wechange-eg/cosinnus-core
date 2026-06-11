@@ -1152,6 +1152,10 @@ class CosinnusBaseGroup(
         blank=True,
         null=True,
     )
+    nextcloud_calendar_sync_required = models.BooleanField(
+        _('Nextcloud Group Calendar CalDAV Sync Required'),
+        default=False,
+    )
 
     # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(

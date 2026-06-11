@@ -28,6 +28,7 @@ from cosinnus_event.calendar.serializers import (
     CosinnusCalendarListSerializer,
     CosinnusCalendarSyncedEventListSerializer,
     CosinnusCalendarSyncedEventSerializer,
+    CosinnusCalendarSynceRequiredSerializer,
 )
 from cosinnus_event.models import Event
 
@@ -256,6 +257,7 @@ class CosinnusCalendarSyncedEventsViewSet(
             'attendance': CosinnusCalendarEventAttendanceSerializer,
             'bbb_room': CosinnusCalendarEventBBBRoomSerializer,
             'bbb_room_urls': CosinnusCalendarBBBRoomUrlsSerializer,
+            'sync_required': CosinnusCalendarSynceRequiredSerializer,
         }
         if self.action in action_serializers:
             return action_serializers[self.action]
@@ -335,3 +337,16 @@ class CosinnusCalendarSyncedEventsViewSet(
         """API for BBB room Urls, used for periodic pull during BBB room creation"""
         data = self.process_action(request)
         return Response(data)
+
+    @action(
+        detail=False,
+        methods=['post', 'put'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[IsCosinnusGroupUser],
+    )
+    def sync_required(self, request, group_id):
+        """API to inform the Backend that a Caldav sync is required due to changes to internal events."""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)

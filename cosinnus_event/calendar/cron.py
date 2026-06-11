@@ -11,19 +11,25 @@ logger = logging.getLogger(__name__)
 
 
 class CalendarSyncCaldavEvents(CosinnusCronJobBase):
-    """Syncs NextCloud CalDav events."""
+    """Syncs NextCloud CalDav events in all groups.
+    Syncs all groups, which is slow and should not be run often.
+    """
 
+    # TODO increase after FE adjustment to "nextcloud_calendar_sync_required", e.g. to every hour or even once a day.
     RUN_EVERY_MINS = 5
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus_event.calendar.sync_caldav_events'
+
+    def get_queryset(self):
+        return get_cosinnus_group_model().objects.filter(is_active=True).exclude(nextcloud_calendar_url=None)
 
     def do(self):
         if not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
             return
 
         calendar = NextcloudCaldavConnection()
-        groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(nextcloud_calendar_url=None)
+        groups = self.get_queryset()
         sync_count = 0
         errors = ''
 
@@ -40,3 +46,18 @@ class CalendarSyncCaldavEvents(CosinnusCronJobBase):
             if error_msg:
                 errors += error_msg + '\n'
         return f'{sync_count}/{len(groups)} groups synced.' + (f'\n\nErrors/Messages:\n\n{errors}' if errors else '')
+
+
+class CalendarSyncCaldavEventsOfFlaggedGroups(CalendarSyncCaldavEvents):
+    """Syncs NextCloud CalDav events For groups that have the "nextcloud_calendar_sync_required" Flag set.
+    The flag is set by the Frontend upon changing an internal event, to mark groups that need an update."""
+
+    RUN_EVERY_MINS = 5
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus_event.calendar.sync_caldav_events_of_flagged_groups'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(nextcloud_calendar_sync_required=True)
+        return queryset
