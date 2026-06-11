@@ -1249,6 +1249,7 @@ class CosinnusBaseGroup(
         default=None,
         blank=True,
         null=True,
+        help_text=_('Note: For performance reasons last activity is not tracked precisely within the last month.'),
     )
     inactivity_notification_sent_at = models.DateTimeField(
         _('Inactivity notification sent at'),

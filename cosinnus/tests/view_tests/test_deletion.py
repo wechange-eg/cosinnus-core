@@ -363,17 +363,27 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             self.test_group.refresh_from_db()
             self.assertEqual(self.test_group.last_activity, activity_time)
 
-        # test new memberships
+        # test last activity aborts computation if last modified is within the last month
         activity_time = datetime(2024, 1, 2, tzinfo=timezone.utc)
         with freeze_time(activity_time):
-            new_member = create_active_test_user('new')
+            new_member = create_active_test_user('new1')
+            CosinnusGroupMembership.objects.create(group=self.test_group, user=new_member, status=MEMBERSHIP_MEMBER)
+            UpdateGroupsLastActivity().do()
+            self.test_group.refresh_from_db()
+            self.assertNotEqual(self.test_group.last_activity, activity_time)
+            self.assertEqual(self.test_group.last_activity, self.test_group.last_modified)
+
+        # test new memberships (1 month after last activity)
+        activity_time = datetime(2024, 2, 1, tzinfo=timezone.utc)
+        with freeze_time(activity_time):
+            new_member = create_active_test_user('new2')
             CosinnusGroupMembership.objects.create(group=self.test_group, user=new_member, status=MEMBERSHIP_MEMBER)
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
             self.assertEqual(self.test_group.last_activity, activity_time)
 
-        # test tagged objects
-        activity_time = datetime(2024, 1, 3, tzinfo=timezone.utc)
+        # test tagged objects (1 month after last activity)
+        activity_time = datetime(2024, 3, 3, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             Note.objects.create(text='Test Note', group=self.test_group, creator=self.test_member)
             UpdateGroupsLastActivity().do()

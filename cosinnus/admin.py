@@ -395,6 +395,9 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'portal',
         'public',
         'is_active',
+        'last_activity',
+        'scheduled_for_deletion_at',
+        'inactivity_notification_sent_at',
     )
     list_filter = (
         'portal',

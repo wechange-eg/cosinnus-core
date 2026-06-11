@@ -33,7 +33,12 @@ def deactivate_user(user):
 
 
 def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactivity_deletion=False):
-    """Deacitvates a user account and marks them for deletion in 30 days"""
+    """Deactivates a user account and marks them for deletion in 30 days"""
+
+    # do not delete superusers due to inactivity as we might and up with a portal without any admins.
+    if user.is_superuser:
+        return
+
     if triggered_by_self:
         # send a notification email ignoring notification settings for a user triggered deletion
         text = _(
@@ -209,6 +214,8 @@ def send_user_inactivity_deactivation_notifications():
     """Sends notifications before automatic user deactivation due inactivity."""
     users_notified_count = 0
     users = get_user_model().objects.filter(is_active=True)
+    # exclude superuser, as they are never deleted
+    users = users.exclude(is_superuser=True)
     for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
         # get users that are notified according to the configured interval
         days_after_last_activity = settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before_deactivation
