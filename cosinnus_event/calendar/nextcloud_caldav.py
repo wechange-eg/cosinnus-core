@@ -416,7 +416,14 @@ class NextcloudCaldavConnection:
                 # save sync token and time after successful sync
                 group.nextcloud_calendar_sync_token = sync_token
                 group.nextcloud_calendar_last_sync = now()
-                group.save(update_fields=['nextcloud_calendar_sync_token', 'nextcloud_calendar_last_sync'])
+                group.nextcloud_calendar_sync_required = False
+                group.save(
+                    update_fields=[
+                        'nextcloud_calendar_sync_token',
+                        'nextcloud_calendar_last_sync',
+                        'nextcloud_calendar_sync_required',
+                    ]
+                )
                 return error_messages or None  # return None as success
             except Exception as e:
                 logger.warning(

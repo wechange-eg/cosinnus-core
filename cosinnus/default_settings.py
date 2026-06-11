@@ -689,6 +689,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus_conference.cron.SendConferenceReminders',
         'cosinnus_event.cron.TriggerBBBStreamers',
         'cosinnus_event.calendar.cron.CalendarSyncCaldavEvents',
+        # TODO enable after FE adjustment to "nextcloud_calendar_sync_required".
+        #'cosinnus_event.calendar.cron.CalendarSyncCaldavEventsOfFlaggedGroups',
         'cosinnus_marketplace.cron.DeactivateExpiredOffers',
         'cosinnus_message.cron.ProcessDirectReplyMails',
         'cosinnus_notifications.cron.DeleteOldNotificationAlerts',
