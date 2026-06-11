@@ -934,6 +934,10 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'cosinnus:frontend-api:calendar-api:calendar-synced-event-bbb-room',
                 kwargs={'group_id': cls.test_group.id, 'nextcloud_calendar_uid': cls.test_event_uid},
             )
+            cls.group_sync_required_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-synced-event-sync-required',
+                kwargs={'group_id': cls.test_group.id},
+            )
 
         def test_event_list(self):
             # anonymous access not allowed
@@ -1182,6 +1186,23 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertFalse(data['enabled'])
+
+        def test_group_sync_required(self):
+            # anonymous user cant set sync required flag
+            res = self.client.post(self.group_sync_required_url, data={'required': True}, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # non-group user cant set sync required flag
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.post(self.group_sync_required_url, data={'required': True}, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # check sync required flag
+            self.assertFalse(self.test_group.nextcloud_calendar_sync_required)
+            self.client.force_login(self.test_user)
+            res = self.client.post(self.group_sync_required_url, data={'required': True}, format='json')
+            self.test_group.refresh_from_db()
+            self.assertTrue(self.test_group.nextcloud_calendar_sync_required)
 
     class CalendarViewTest(CeleryTaskTestMixin, TestCase):
         """Test Frontend initialization view."""
