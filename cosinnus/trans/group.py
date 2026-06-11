@@ -46,9 +46,8 @@ class CosinnusProjectTransBase(object):
     )
     DEACTIVATE_EXPLANATION = _(
         'You are about to deactivate this project. When your project is deactivated, it is no longer accessible and '
-        'will be removed from the website. However, your data will still be retained.\n\n Please contact the '
-        'administrators of this portal if you would like to irrevocably delete all of the content. Until then the '
-        'project can be reactivated by your and any other project administrator.'
+        'will be removed from the website. Your data will still be retained. The project can be reactivated by you and '
+        'any other project administrator.'
     )
     DELETE = _('Delete Project')
     DELETE_WARNING = _('You are about to delete this project from this website.')
@@ -181,9 +180,8 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     )
     DEACTIVATE_EXPLANATION = _(
         'You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will '
-        'be removed from the website. However, your data will still be retained.\n\n Please contact the administrators '
-        'of this portal if you would like to irrevocably delete all of the content. Until then the group can be '
-        'reactivated by your and any other group administrator.'
+        'be removed from the website. Your data will still be retained. The group can be reactivated by you and any '
+        'other group administrator.'
     )
     DELETE = _('Delete Group')
     DELETE_WARNING = _('You are about to delete this group from this website.')
@@ -315,9 +313,8 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     )
     DEACTIVATE_EXPLANATION = _(
         'You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible '
-        'and will be removed from the website. However, your data will still be retained.\n\n Please contact the '
-        'administrators of this portal if you would like to irrevocably delete all of the content. Until then the '
-        'conference can be reactivated by your and any other conference organizer.'
+        'and will be removed from the website. Your data will still be retained. The conference can be reactivated by '
+        'you and any other conference organizer.'
     )
     DELETE = _('Delete Conference')
     DELETE_WARNING = _('You are about to delete this conference from this website.')
