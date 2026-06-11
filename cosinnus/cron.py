@@ -136,6 +136,8 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
             Q(last_login__lt=inactivity_deactivation_threshold)
             | Q(last_login=None, date_joined__lt=inactivity_deactivation_threshold)
         )
+        # exclude superusers, as they should never be automatically deleted
+        inactive_users = inactive_users.exclude(is_superuser=True)
         for user in inactive_users:
             try:
                 reassign_admins_for_groups_of_deleted_user(user)
@@ -448,6 +450,7 @@ class UpdateGroupsLastActivity(CosinnusCronJobBase):
         # update active groups periodically and inactive groups once.
         groups = get_cosinnus_group_model().objects.filter(Q(is_active=True) | Q(is_active=False, last_activity=None))
         groups = groups.exclude(slug__in=get_default_portal_group_slugs())
+        groups = groups.prefetch_related('memberships')
         for group in groups:
             try:
                 update_group_last_activity(group)
