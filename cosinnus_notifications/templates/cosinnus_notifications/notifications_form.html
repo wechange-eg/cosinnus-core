@@ -126,7 +126,8 @@
                         <div class="row">
 
                             <div class="col-md-4">
-                                <legend style="margin: 0;">{% trans "I wish to receive notification emails for the portal-groups" %}:</legend>
+                                <legend style="margin: 0;">
+                                    {% blocktranslate with group_links=portal_default_group_links %} For content in the groups that you join automatically ({{ group_links }}), I wish to receive email notifications: {% endblocktranslate %}
                             </div>
                             <div class="col-md-8">
                                 <p class="no-horizontal-padding no-vertical-padding">
