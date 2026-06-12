@@ -20,6 +20,7 @@ from django.http.response import (
 )
 from django.urls import reverse_lazy
 from django.utils.functional import Promise
+from django.utils.html import format_html_join
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
@@ -34,7 +35,7 @@ from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.profile import GlobalUserNotificationSetting, UserBlock
 from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetime
 from cosinnus.utils.functions import is_number
-from cosinnus.utils.group import get_default_user_group_ids
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids, get_default_user_group_slugs
 from cosinnus.utils.permissions import check_user_portal_admin, check_user_portal_moderator
 from cosinnus.utils.user import get_unread_message_count_for_user
 from cosinnus.views.user_dashboard import BasePagedOffsetWidgetView
@@ -351,6 +352,14 @@ class NotificationPreferenceView(ListView):
         portal_group_setting_selected = GlobalUserNotificationSetting.objects.get_portal_group_setting_for_user(
             self.request.user
         )
+        _portal_default_groups = list(
+            get_cosinnus_group_model().objects.filter(slug__in=get_default_user_group_slugs()).order_by('name')
+        )
+        portal_default_group_links = format_html_join(
+            ', ',
+            '<a href="{}" target="_blank">{}</a>',
+            ((group.get_absolute_url(), group.name) for group in _portal_default_groups),
+        )
         rocketchat_setting_choices = None
         rocketchat_setting_selected = None
         # refresh rocketchat setting if the feature is enabled
@@ -405,6 +414,7 @@ class NotificationPreferenceView(ListView):
                 'global_setting_selected': global_setting_selected,
                 'portal_group_setting_choices': portal_group_setting_choices,
                 'portal_group_setting_selected': portal_group_setting_selected,
+                'portal_default_group_links': portal_default_group_links,
                 'rocketchat_setting_choices': rocketchat_setting_choices,
                 'rocketchat_setting_selected': rocketchat_setting_selected,
                 'multi_notification_preferences': multi_notification_preferences,

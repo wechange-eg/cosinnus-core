@@ -117,4 +117,8 @@ def check_settings(app_configs, **kwargs):
                 'COSINNUS_USER_FORM_LAST_NAME_REQUIRED.'
             )
         )
+
+    if len(settings.NEWW_DEFAULT_USER_GROUPS) == 0:
+        errors.append(Warning('NEWW_DEFAULT_USER_GROUPS is empty. Expect UI breakage.'))
+
     return errors
