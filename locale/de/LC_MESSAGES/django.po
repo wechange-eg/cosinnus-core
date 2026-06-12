@@ -5349,6 +5349,10 @@ msgstr "Font-awesome Widget-Icon"
 msgid "Footer"
 msgstr "Footer"
 
+#, python-format
+msgid "For content in the groups that you join automatically (%(group_links)s), I wish to receive email notifications:"
+msgstr "Für Inhalte aus den Gruppen, in denen man automatisch Mitglied ist (%(group_links)s), möchte ich E‑Mail-Benachrichtigungen erhalten:"
+
 msgid "For content that I am following, I wish to receive notification emails"
 msgstr "Für Inhalte, denen ich folge, möchte ich Benachrichtigungs-Emails erhalten"
 
@@ -8729,6 +8733,9 @@ msgstr "Sobald du das Projekt erstellt hast, werden alle, die die Idee geliked h
 
 msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
 msgstr "Sobald Sie alle temporären Benutzerkonten hochgeladen und die Anmeldeinformationen verschickt haben, können Sie alle Benutzerkonten aktivieren. Das bedeutet, dass sich die Teilnehmer*innen tatsächlich mit ihren Anmeldedaten anmelden können."
+
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants. Passwords are not stored in the system and can be downloaded only once!"
+msgstr "Sobald Sie alle temporären Benutzerkonten hochgeladen haben, können Sie alle Benutzeranmeldeinformationen herunterladen und sie an die Teilnehmer*innen senden. Passwörter werden nicht im System gespeichert und können nur einmal heruntergeladen werden!"
 
 msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants. Passwords are not stored in the system and can be downloaded only once!"
 msgstr "Sobald Sie alle temporären Benutzerkonten hochgeladen haben, können Sie alle Benutzeranmeldeinformationen herunterladen und sie an die Teilnehmer*innen senden. Passwörter werden nicht im System gespeichert und können nur einmal heruntergeladen werden!"

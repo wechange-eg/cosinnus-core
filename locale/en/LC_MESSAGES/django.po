@@ -5154,6 +5154,10 @@ msgstr ""
 msgid "Footer"
 msgstr ""
 
+#, python-format
+msgid "For content in the groups that you join automatically (%(group_links)s), I wish to receive email notifications:"
+msgstr ""
+
 msgid "For content that I am following, I wish to receive notification emails"
 msgstr ""
 
@@ -8137,6 +8141,9 @@ msgid "Once you have created your project, everyone who liked (and followed) the
 msgstr ""
 
 msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants. Passwords are not stored in the system and can be downloaded only once!"
 msgstr ""
 
 msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants. Passwords are not stored in the system and can be downloaded only once!"
