@@ -91,7 +91,7 @@ MULTI_NOTIFICATION_IDS = {
 }
 # the option labels for the multi notifications:
 MULTI_NOTIFICATION_LABELS = {
-    'MULTI_followed_object_notification': _('For content that I am following, I wish to receive notification emails'),
+    'MULTI_followed_object_notification': _('For content that I am following, I wish to receive email notifications'),
 }
 
 NOTIFICATION_REASONS = {
