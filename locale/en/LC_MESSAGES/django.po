@@ -196,6 +196,18 @@ msgid "%(count)d Users' group memberships were refreshed."
 msgstr ""
 
 #, python-format
+msgid "%(count)d groups' Nextcloud calendar shares were re-done."
+msgstr ""
+
+#, python-format
+msgid "%(count)d groups' internal events synced."
+msgstr ""
+
+#, python-format
+msgid "%(count)d new meetings were scheduled"
+msgstr ""
+
+#, python-format
 msgid "%(count)d of your offers expired"
 msgstr ""
 
@@ -232,7 +244,19 @@ msgid "%(event)s (state unknown)"
 msgstr ""
 
 #, python-format
+msgid "%(event)s (synchronized)"
+msgstr ""
+
+#, python-format
 msgid "%(export_title)s finished"
+msgstr ""
+
+#, python-format
+msgid "%(group)s: An error occurred during sync (%(errors)s)."
+msgstr ""
+
+#, python-format
+msgid "%(group)s: An unexpected error occurred during sync."
 msgstr ""
 
 #, python-format
@@ -1190,10 +1214,7 @@ msgid "%(team_name)s has been deactivated and will be deleted in 30 days!"
 msgstr ""
 
 #, python-format
-msgid ""
-"%(team_name)s was deactivated successfully!\n"
-"\n"
-"Should you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request."
+msgid "%(team_name)s was deactivated successfully!"
 msgstr ""
 
 #, python-format
@@ -1540,6 +1561,12 @@ msgstr ""
 msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
 msgstr ""
 
+msgid "A meeting you are attending was updated"
+msgstr ""
+
+msgid "A meeting you are following was updated"
+msgstr ""
+
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr ""
@@ -1582,6 +1609,24 @@ msgstr ""
 
 #, python-format
 msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr ""
+
+msgid "A new meeting was scheduled"
+msgstr ""
+
+#, python-format
+msgid "A new meeting was scheduled in %(team_name)s (which you follow)"
+msgstr ""
+
+msgid "A new meeting was scheduled in a team you are following"
+msgstr ""
+
+#, python-format
+msgid "A new meeting: \"%(object_name)s\" was scheduled in %(team_name)s (which you follow)."
+msgstr ""
+
+#, python-format
+msgid "A new meeting: \"%(object_name)s\" was scheduled in %(team_name)s."
 msgstr ""
 
 #, python-format
@@ -1641,6 +1686,9 @@ msgid "A problem occurred when logging out from RocketChat. You might want to lo
 msgstr ""
 
 msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+msgid "A scheduled meeting was updated"
 msgstr ""
 
 msgid "A short description or topic for your room. Will be shown on top of the room page."
@@ -2253,6 +2301,10 @@ msgstr ""
 msgid "An error occurred while attempting to login via your social network account."
 msgstr ""
 
+#, python-format
+msgid "An error occurred while sharing calendar with group \"%(group)s\"."
+msgstr ""
+
 msgid "An internal error occured."
 msgstr ""
 
@@ -2765,6 +2817,12 @@ msgstr ""
 msgid "Calendar creation is in progress..."
 msgstr ""
 
+msgid "Calendar: Fix missing Nextcloud group shares"
+msgstr ""
+
+msgid "Calendar: Re-Sync internal events"
+msgstr ""
+
 msgid "Call to Action"
 msgstr ""
 
@@ -2939,6 +2997,9 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Clear Filters"
+msgstr ""
+
+msgid "Clear to enforce a re-sync off all events."
 msgstr ""
 
 #, python-format
@@ -4798,6 +4859,12 @@ msgstr ""
 msgid "Event Name"
 msgstr ""
 
+msgid "Event Nextcloud CalDAV UID"
+msgstr ""
+
+msgid "Event Nextcloud Calendar CalDAV Last Sync Timestamp"
+msgstr ""
+
 msgid "Event Polls"
 msgstr ""
 
@@ -5054,6 +5121,10 @@ msgstr ""
 msgid "Footer"
 msgstr ""
 
+#, python-format
+msgid "For content in the groups that you join automatically (%(group_links)s), I wish to receive email notifications:"
+msgstr ""
+
 msgid "For content that I am following, I wish to receive notification emails"
 msgstr ""
 
@@ -5208,6 +5279,10 @@ msgstr "Ελληνικά"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Group"
 msgstr "Group"
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud Calendar URL."
+msgstr ""
 
 #, python-format
 msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
@@ -7575,7 +7650,16 @@ msgstr ""
 msgid "Nextcloud Deck Board ID"
 msgstr ""
 
+msgid "Nextcloud Group Calendar CalDAV Last Sync Timestamp"
+msgstr ""
+
 msgid "Nextcloud Group Calendar CalDAV Publish URL"
+msgstr ""
+
+msgid "Nextcloud Group Calendar CalDAV Sync Required"
+msgstr ""
+
+msgid "Nextcloud Group Calendar CalDAV Sync-Token"
 msgstr ""
 
 msgid "Nextcloud Group Calendar CalDAV URL"
@@ -7801,6 +7885,9 @@ msgstr ""
 msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr ""
 
+msgid "Note: For performance reasons last activity is not tracked precisely within the last month."
+msgstr ""
+
 msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
 msgstr ""
 
@@ -8016,6 +8103,9 @@ msgid "Once you are ready to begin the import, please click \"%(submit_button_la
 msgstr ""
 
 msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
+msgstr ""
+
+msgid "Once you have joined some groups or projects, custom settings will be available here."
 msgstr ""
 
 msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
@@ -10568,6 +10658,14 @@ msgstr ""
 msgid "The maximum number of participants is "
 msgstr ""
 
+#, python-format
+msgid "The meeting \"%(object_name)s\" was updated in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid "The meeting \"%(object_name)s\" you are attending was updated in %(team_name)s."
+msgstr ""
+
 msgid "The message was sent to the chosen participants."
 msgstr ""
 
@@ -11614,6 +11712,10 @@ msgstr ""
 msgid "Unique, registered users that were active in this period"
 msgstr ""
 
+msgctxt "An unknown user placeholder"
+msgid "Unknown"
+msgstr ""
+
 msgid "Unknown POST action!"
 msgstr ""
 
@@ -11661,6 +11763,9 @@ msgid "Until when should the task be completed?"
 msgstr ""
 
 msgid "Untitled"
+msgstr ""
+
+msgid "Untitled Meeting"
 msgstr ""
 
 msgid "Unzip the file archive to a local folder on your hard drive"
@@ -12578,28 +12683,19 @@ msgstr ""
 msgid "You are about to deactivate this conference!"
 msgstr ""
 
-msgid ""
-"You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
-"\n"
-" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the conference can be reactivated by your and any other conference organizer."
+msgid "You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. Your data will still be retained. The conference can be reactivated by you and any other conference organizer."
 msgstr ""
 
 msgid "You are about to deactivate this group!"
 msgstr ""
 
-msgid ""
-"You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
-"\n"
-" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the group can be reactivated by your and any other group administrator."
+msgid "You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. Your data will still be retained. The group can be reactivated by you and any other group administrator."
 msgstr ""
 
 msgid "You are about to deactivate this project!"
 msgstr ""
 
-msgid ""
-"You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
-"\n"
-" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator."
+msgid "You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. Your data will still be retained. The project can be reactivated by you and any other project administrator."
 msgstr ""
 
 msgid "You are about to delete this conference from this website."
@@ -12647,6 +12743,9 @@ msgstr ""
 msgid "You are attending this event"
 msgstr ""
 
+msgid "You are attending this meeting"
+msgstr ""
+
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr ""
 
@@ -12666,6 +12765,9 @@ msgid "You are following this event poll"
 msgstr ""
 
 msgid "You are following this item"
+msgstr ""
+
+msgid "You are following this meeting"
 msgstr ""
 
 msgid "You are following this news post"

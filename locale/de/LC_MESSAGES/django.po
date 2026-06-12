@@ -238,6 +238,18 @@ msgid "%(count)d Users' group memberships were refreshed."
 msgstr "%(count)d Gruppenmitgliedschaften der Benutzer/innen wurden aktualisiert."
 
 #, python-format
+msgid "%(count)d groups' Nextcloud calendar shares were re-done."
+msgstr ""
+
+#, python-format
+msgid "%(count)d groups' internal events synced."
+msgstr ""
+
+#, python-format
+msgid "%(count)d new meetings were scheduled"
+msgstr ""
+
+#, python-format
 msgid "%(count)d of your offers expired"
 msgstr "%(count)d deiner Inserate sind abgelaufen"
 
@@ -274,8 +286,20 @@ msgid "%(event)s (state unknown)"
 msgstr "%(event)s (Status unbekannt)"
 
 #, python-format
+msgid "%(event)s (synchronized)"
+msgstr ""
+
+#, python-format
 msgid "%(export_title)s finished"
 msgstr "%(export_title)s abgeschlossen"
+
+#, python-format
+msgid "%(group)s: An error occurred during sync (%(errors)s)."
+msgstr ""
+
+#, python-format
+msgid "%(group)s: An unexpected error occurred during sync."
+msgstr ""
 
 #, python-format
 msgid "%(group_type)s %(group_name)s has been deactivated and will be deleted"
@@ -1260,14 +1284,8 @@ msgid "%(team_name)s has been deactivated and will be deleted in 30 days!"
 msgstr "%(team_name)s wurde deaktiviert und wird in 30 Tagen gelöscht!"
 
 #, python-format
-msgid ""
-"%(team_name)s was deactivated successfully!\n"
-"\n"
-"Should you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request."
-msgstr ""
-"%(team_name)s wurde nun deaktiviert. \n"
-"\n"
-"Um es endgültig zu löschen musst Du eine E-Mail an die Administrator/innen des Portales senden. Bitte verschicke die E-Mail von Deinem E-Mail-Account, mit dem Du bei dieser Plattform registriert bist und füge der E-Mail den exakten Namen hinzu, damit die Administrator/innen deine Anfrage verifizieren können."
+msgid "%(team_name)s was deactivated successfully!"
+msgstr "%(team_name)s wurde erfolgreich deaktiviert!"
 
 #, python-format
 msgid "%(team_name)s was re-activated successfully!"
@@ -1680,6 +1698,12 @@ msgstr "Ein font-awesome icon für das widget"
 msgid "A hex code color to use as main theme color for the conference layout (with or without leading '#')"
 msgstr "Farbe im Hex-Code, die als primäre Farbe für die Tagungsumgebung verwendet wird (mit oder ohne führendes '#')"
 
+msgid "A meeting you are attending was updated"
+msgstr ""
+
+msgid "A meeting you are following was updated"
+msgstr ""
+
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Nachricht von %(sender_full_name)s"
@@ -1723,6 +1747,24 @@ msgstr "Eine neue Datei: \"%(object_name)s\" wurde hochgeladen in %(team_name)s.
 #, python-format
 msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
 msgstr "Neue Datei: \"%(object_name)s\" wurde hochgeladen in %(team_name)s."
+
+msgid "A new meeting was scheduled"
+msgstr ""
+
+#, python-format
+msgid "A new meeting was scheduled in %(team_name)s (which you follow)"
+msgstr ""
+
+msgid "A new meeting was scheduled in a team you are following"
+msgstr ""
+
+#, python-format
+msgid "A new meeting: \"%(object_name)s\" was scheduled in %(team_name)s (which you follow)."
+msgstr ""
+
+#, python-format
+msgid "A new meeting: \"%(object_name)s\" was scheduled in %(team_name)s."
+msgstr ""
 
 #, python-format
 msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
@@ -1782,6 +1824,9 @@ msgstr "Beim Logout aus RocketChat ist ein Problem aufgetreten. Du kannst dich a
 
 msgid "A public contact form, which non-registered users can use to contact group admins of this group."
 msgstr "Ein öffentliches Kontaktformular, das von den nicht-registrierten Benutzer/innen zwecks Kontaktaufnahme mit den Gruppen-Administrator/innen benutzt werden kann."
+
+msgid "A scheduled meeting was updated"
+msgstr ""
 
 msgid "A short description or topic for your room. Will be shown on top of the room page."
 msgstr "Eine kurze Beschreibung oder ein Thema für deinen Raum. Wird oben auf der Raumseite angezeigt."
@@ -2394,6 +2439,10 @@ msgstr ""
 msgid "An error occurred while attempting to login via your social network account."
 msgstr "Beim Versuch, sich über dein soziales Netzwerkkonto anzumelden, ist ein Fehler aufgetreten."
 
+#, python-format
+msgid "An error occurred while sharing calendar with group \"%(group)s\"."
+msgstr ""
+
 msgid "An internal error occured."
 msgstr "Ein interner Fehler ist aufgetreten."
 
@@ -2928,6 +2977,12 @@ msgstr "Kalender"
 msgid "Calendar creation is in progress..."
 msgstr ""
 
+msgid "Calendar: Fix missing Nextcloud group shares"
+msgstr ""
+
+msgid "Calendar: Re-Sync internal events"
+msgstr ""
+
 msgid "Call to Action"
 msgstr "Aufruf zum Handeln"
 
@@ -3103,6 +3158,9 @@ msgstr "Sauberes Wasser und sanitäre Anlagen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Clear Filters"
 msgstr "Filter zurücksetzen"
+
+msgid "Clear to enforce a re-sync off all events."
+msgstr ""
 
 #, python-format
 msgid "Click \"%(download_label)s\" to download the file archive"
@@ -4977,6 +5035,12 @@ msgstr "Veranstaltung \"%(title)s\" wurde erfolgreich bearbeitet."
 msgid "Event Name"
 msgstr "Veranstaltungsname"
 
+msgid "Event Nextcloud CalDAV UID"
+msgstr ""
+
+msgid "Event Nextcloud Calendar CalDAV Last Sync Timestamp"
+msgstr ""
+
 msgid "Event Polls"
 msgstr "Terminabstimmungen"
 
@@ -5233,6 +5297,10 @@ msgstr "Font-awesome Widget-Icon"
 msgid "Footer"
 msgstr "Footer"
 
+#, python-format
+msgid "For content in the groups that you join automatically (%(group_links)s), I wish to receive email notifications:"
+msgstr "Für Inhalte aus den Gruppen, in denen man automatisch Mitglied ist (%(group_links)s), möchte ich E‑Mail-Benachrichtigungen erhalten:"
+
 msgid "For content that I am following, I wish to receive notification emails"
 msgstr "Für Inhalte, denen ich folge, möchte ich Benachrichtigungs-Emails erhalten"
 
@@ -5387,6 +5455,10 @@ msgstr "Ελληνικά"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Group"
 msgstr "Gruppe"
+
+#, python-format
+msgid "Group \"%(group)s\" does not have a Nextcloud Calendar URL."
+msgstr ""
 
 #, python-format
 msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
@@ -8147,7 +8219,16 @@ msgstr "Nächste Woche"
 msgid "Nextcloud Deck Board ID"
 msgstr "Nextcloud Deck Board-ID"
 
+msgid "Nextcloud Group Calendar CalDAV Last Sync Timestamp"
+msgstr ""
+
 msgid "Nextcloud Group Calendar CalDAV Publish URL"
+msgstr ""
+
+msgid "Nextcloud Group Calendar CalDAV Sync Required"
+msgstr ""
+
+msgid "Nextcloud Group Calendar CalDAV Sync-Token"
 msgstr ""
 
 msgid "Nextcloud Group Calendar CalDAV URL"
@@ -8373,6 +8454,9 @@ msgstr "Beachte: Änderung an einigen dieser Einstellungen kann den Neustart des
 msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr "Hinweis: Detaillierte Mitgliederlisten für plattformweite Inhalte werden nicht angezeigt."
 
+msgid "Note: For performance reasons last activity is not tracked precisely within the last month."
+msgstr ""
+
 msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
 msgstr "Hinweis: Wenn eine Folie nachträglich zu einer Veranstaltung hinzugefügt wird, erscheint diese nicht automatisch in der Veranstaltung, sofern diese Veranstaltung kürzlich besucht wurde und somit aktiv ist. Hierfür ist ein aktives Beenden der Veranstaltung notwendig oder ein 5 minütiges Leerlaufen ohne Teilnehmer, bis die Veranstaltung automatisch beendet wird. "
 
@@ -8592,6 +8676,9 @@ msgstr "Wenn du bereit bist, den Import zu beginnen, klicke bitte auf \"%(submit
 
 msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
 msgstr "Sobald du das Projekt erstellt hast, werden alle, die die Idee geliked haben (und ihr folgen), eine Benachrichtigung bekommen. Sie können dann sofort die Mitgliedschaft im Projekt beantragen. Du kannst natürlich bestimmen, wer Mitglied werden darf und wer nicht."
+
+msgid "Once you have joined some groups or projects, custom settings will be available here."
+msgstr ""
 
 msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
 msgstr "Sobald Sie alle temporären Benutzerkonten hochgeladen und die Anmeldeinformationen verschickt haben, können Sie alle Benutzerkonten aktivieren. Das bedeutet, dass sich die Teilnehmer*innen tatsächlich mit ihren Anmeldedaten anmelden können."
@@ -11173,6 +11260,14 @@ msgstr "Die maximale Anzahl von BBB-Teilnehmern, die für alle Premium-Tagungen 
 msgid "The maximum number of participants is "
 msgstr "Die maximale Anzahl der Teilnehmenden ist "
 
+#, python-format
+msgid "The meeting \"%(object_name)s\" was updated in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid "The meeting \"%(object_name)s\" you are attending was updated in %(team_name)s."
+msgstr ""
+
 msgid "The message was sent to the chosen participants."
 msgstr "Die Nachricht wurde an die gewählten Tagungsteilnehmer geschickt."
 
@@ -12253,6 +12348,10 @@ msgstr "Leider funktioniert der Ordner-Upload nicht in allen Browsern. Das liegt
 msgid "Unique, registered users that were active in this period"
 msgstr "Eindeutige registrierte Benutzer, die in diesem Zeitraum aktiv waren"
 
+msgctxt "An unknown user placeholder"
+msgid "Unknown"
+msgstr ""
+
 msgid "Unknown POST action!"
 msgstr "Unbekannte POST-Aktion!"
 
@@ -12301,6 +12400,9 @@ msgstr "Bis wann soll die Aufgabe erledigt sein?"
 
 msgid "Untitled"
 msgstr "Unbenannt"
+
+msgid "Untitled Meeting"
+msgstr ""
 
 msgid "Unzip the file archive to a local folder on your hard drive"
 msgstr "Entpacke das Archiv in ein lokales Verzeichnis auf deiner Festplatte"
@@ -13267,38 +13369,20 @@ msgstr "Du bist Mitglied!"
 msgid "You are about to deactivate this conference!"
 msgstr "Du bist dabei diese Tagung zu deaktivieren!"
 
-msgid ""
-"You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
-"\n"
-" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the conference can be reactivated by your and any other conference organizer."
+msgid "You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. Your data will still be retained. The conference can be reactivated by you and any other conference organizer."
 msgstr ""
-"Du bist dabei diese Tagung zu deaktivieren. Wenn Deine Tagung deaktiviert ist, ist sie nicht mehr zugänglich und wird von der Website entfernt. Allerdings bleiben Deine Daten weiterhin bestehen.\n"
-"\n"
-"Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann die Tagung durch dich und alle anderen Tagungsveranstalter/innen wieder aktiviert werden."
 
 msgid "You are about to deactivate this group!"
 msgstr "Du bist dabei diese Gruppe zu deaktivieren!"
 
-msgid ""
-"You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
-"\n"
-" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the group can be reactivated by your and any other group administrator."
+msgid "You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. Your data will still be retained. The group can be reactivated by you and any other group administrator."
 msgstr ""
-"Du bist dabei diese Gruppe zu deaktivieren. Wenn Deine Gruppe deaktiviert ist, ist sie nicht mehr zugänglich und wird von der Website entfernt. Allerdings bleiben Deine Daten weiterhin bestehen.\n"
-"\n"
-"Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann die Gruppe durch dich und alle anderen Gruppenaministrator/innen wieder aktiviert werden."
 
 msgid "You are about to deactivate this project!"
 msgstr "Du bist dabei dieses Projekt zu deaktivieren!"
 
-msgid ""
-"You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
-"\n"
-" Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator."
+msgid "You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. Your data will still be retained. The project can be reactivated by you and any other project administrator."
 msgstr ""
-"Du bist dabei dieses Projekt zu deaktivieren. Wenn Dein Projekt deaktiviert ist, ist es nicht mehr zugänglich und wird von der Website entfernt. Allerdings bleiben Deine Daten weiterhin bestehen.\n"
-"\n"
-"Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann das Projekt durch dich und alle anderen Projektadministrator/innen wieder aktiviert werden."
 
 msgid "You are about to delete this conference from this website."
 msgstr "Du bist dabei diese Tagung von dieser Webseite zu löschen."
@@ -13345,6 +13429,9 @@ msgstr "Sie nehmen an dieser Tagung teil"
 msgid "You are attending this event"
 msgstr "Du hast angegeben, dass du an dieser Veranstaltung teilnimmst"
 
+msgid "You are attending this meeting"
+msgstr ""
+
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Du blockierst diese/n Benutzer/in. Dessen/deren Inhalte sind für dich nicht sichtbar."
 
@@ -13365,6 +13452,9 @@ msgstr "Du folgst dieser Terminumfrage"
 
 msgid "You are following this item"
 msgstr "Du folgst diesem Inhalt"
+
+msgid "You are following this meeting"
+msgstr ""
 
 msgid "You are following this news post"
 msgstr "Du folgst dieser Neuigkeit"
@@ -15078,8 +15168,15 @@ msgstr "Ja"
 #~ msgid "%(sender_name)s voted in"
 #~ msgstr "%(sender_name)s hat abgestimmt"
 
-#~ msgid "%(team_name)s was deactivated successfully!"
-#~ msgstr "%(team_name)s wurde erfolgreich deaktiviert!"
+#, python-format
+#~ msgid ""
+#~ "%(team_name)s was deactivated successfully!\n"
+#~ "\n"
+#~ "Should you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request."
+#~ msgstr ""
+#~ "%(team_name)s wurde nun deaktiviert. \n"
+#~ "\n"
+#~ "Um es endgültig zu löschen musst Du eine E-Mail an die Administrator/innen des Portales senden. Bitte verschicke die E-Mail von Deinem E-Mail-Account, mit dem Du bei dieser Plattform registriert bist und füge der E-Mail den exakten Namen hinzu, damit die Administrator/innen deine Anfrage verifizieren können."
 
 #, python-format
 #~ msgid ""
@@ -16211,11 +16308,38 @@ msgstr "Ja"
 #~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Du bist dabei diese Tagung zu deaktivieren. Sie und all ihr Inhalt wird auf der Webseite unsichtbar sein."
 
+#~ msgid ""
+#~ "You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+#~ "\n"
+#~ " Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the conference can be reactivated by your and any other conference organizer."
+#~ msgstr ""
+#~ "Du bist dabei diese Tagung zu deaktivieren. Wenn Deine Tagung deaktiviert ist, ist sie nicht mehr zugänglich und wird von der Website entfernt. Allerdings bleiben Deine Daten weiterhin bestehen.\n"
+#~ "\n"
+#~ "Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann die Tagung durch dich und alle anderen Tagungsveranstalter/innen wieder aktiviert werden."
+
 #~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Du bist dabei diese Gruppe zu deaktivieren. Sie und all ihr Inhalt wird auf der Webseite unsichtbar sein."
 
+#~ msgid ""
+#~ "You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+#~ "\n"
+#~ " Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the group can be reactivated by your and any other group administrator."
+#~ msgstr ""
+#~ "Du bist dabei diese Gruppe zu deaktivieren. Wenn Deine Gruppe deaktiviert ist, ist sie nicht mehr zugänglich und wird von der Website entfernt. Allerdings bleiben Deine Daten weiterhin bestehen.\n"
+#~ "\n"
+#~ "Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann die Gruppe durch dich und alle anderen Gruppenaministrator/innen wieder aktiviert werden."
+
 #~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Du bist dabei dieses Projekt zu deaktivieren. Es und all sein Inhalt wird auf der Webseite unsichtbar sein."
+
+#~ msgid ""
+#~ "You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. However, your data will still be retained.\n"
+#~ "\n"
+#~ " Please contact the administrators of this portal if you would like to irrevocably delete all of the content. Until then the project can be reactivated by your and any other project administrator."
+#~ msgstr ""
+#~ "Du bist dabei dieses Projekt zu deaktivieren. Wenn Dein Projekt deaktiviert ist, ist es nicht mehr zugänglich und wird von der Website entfernt. Allerdings bleiben Deine Daten weiterhin bestehen.\n"
+#~ "\n"
+#~ "Bitte melde Dich bei den Administrator/innen des Portals falls Du eine endgültige Löschung aller Inhalte wünschst. Bis dahin kann das Projekt durch dich und alle anderen Projektadministrator/innen wieder aktiviert werden."
 
 #~ msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
 #~ msgstr "Du bist im Begriff, dein Sicherheitsniveau auf die nächste Ebene zu bringen. <br> Um die 2FA-Einstellung zu benutzen, brauchst du die ´free otp´ App auf dein Handy zu installieren und danach den QR- Code einzuscannen. Wir haben momentan keine weitere 2FA-Optionen, aber werden dich über eventuelle Änderungen informieren."
