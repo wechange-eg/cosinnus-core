@@ -873,17 +873,17 @@ class GlobalUserNotificationSetting(models.Model):
         (
             SETTING_NEVER,
             pgettext_lazy(
-                'answer to "i wish to receive notification emails:"', 'Never (we will not send you any emails)'
+                'answer to "i wish to receive email notifications:"', 'Never (we will not send you any emails)'
             ),
         ),
         (
             SETTING_NOW,
             pgettext_lazy(
-                'answer to "i wish to receive notification emails:"', 'Immediately (an individual email per event)'
+                'answer to "i wish to receive email notifications:"', 'Immediately (an individual email per event)'
             ),
         ),
-        (SETTING_DAILY, pgettext_lazy('answer to "i wish to receive notification emails:"', 'In a Daily Report')),
-        (SETTING_WEEKLY, pgettext_lazy('answer to "i wish to receive notification emails:"', 'In a Weekly Report')),
+        (SETTING_DAILY, pgettext_lazy('answer to "i wish to receive email notifications:"', 'In a Daily Report')),
+        (SETTING_WEEKLY, pgettext_lazy('answer to "i wish to receive email notifications:"', 'In a Weekly Report')),
     )
 
     # choices for user-created groups, acts as a global cut-off switch to disable all notifications
@@ -892,7 +892,7 @@ class GlobalUserNotificationSetting(models.Model):
         (
             SETTING_GROUP_INDIVIDUAL,
             pgettext_lazy(
-                'answer to "i wish to receive notification emails:"', 'Individual settings for each Project/Group...'
+                'answer to "i wish to receive email notifications:"', 'Individual settings for each Project/Group...'
             ),
         ),
     )
@@ -906,13 +906,13 @@ class GlobalUserNotificationSetting(models.Model):
         (
             ROCKETCHAT_SETTING_OFF,
             pgettext_lazy(
-                'answer to "i wish to receive rocketchat notification emails:"', 'No E-Mails for RocketChat messages'
+                'answer to "i wish to receive rocketchat email notifications:"', 'No E-Mails for RocketChat messages'
             ),
         ),
         (
             ROCKETCHAT_SETTING_MENTIONS,
             pgettext_lazy(
-                'answer to "i wish to receive rocketchat notification emails:"',
+                'answer to "i wish to receive rocketchat email notifications:"',
                 'E-Mails for all direct messages and mentions',
             ),
         ),
@@ -955,7 +955,7 @@ class GlobalUserNotificationSetting(models.Model):
     rocketchat_setting = models.PositiveSmallIntegerField(
         choices=ROCKETCHAT_SETTING_CHOICES,
         default=settings.COSINNUS_DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING,
-        help_text='Determines if the user wants rocketchat notification emails',
+        help_text='Determines if the user wants rocketchat email notifications',
     )
     last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
 
