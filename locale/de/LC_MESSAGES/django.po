@@ -4558,7 +4558,7 @@ msgstr "E-Mail"
 msgid "E-Mail Addresses"
 msgstr "E-Mail Adressen"
 
-msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgctxt "answer to \"i wish to receive rocketchat email notifications:\""
 msgid "E-Mails for all direct messages and mentions"
 msgstr "E-Mails für alle Direktnachrichten und Erwähnungen"
 
@@ -5301,8 +5301,8 @@ msgstr "Footer"
 msgid "For content in the groups that you join automatically (%(group_links)s), I wish to receive email notifications:"
 msgstr "Für Inhalte aus den Gruppen, in denen man automatisch Mitglied ist (%(group_links)s), möchte ich E‑Mail-Benachrichtigungen erhalten:"
 
-msgid "For content that I am following, I wish to receive notification emails"
-msgstr "Für Inhalte, denen ich folge, möchte ich Benachrichtigungs-Emails erhalten"
+msgid "For content that I am following, I wish to receive email notifications"
+msgstr "Für Inhalte, denen ich folge, möchte ich E-Mail-Benachrichtigungen erhalten"
 
 msgid "For example"
 msgstr "Zum Beispiel"
@@ -6649,8 +6649,8 @@ msgstr "Ich möchte Moderator für dieses Portal sein"
 msgid "I wish to delete „%(title)s“."
 msgstr "I möchte „%(title)s“ löschen."
 
-msgid "I wish to receive notification emails"
-msgstr "Ich möchte Benachrichtigungs-Emails erhalten"
+msgid "I wish to receive email notifications"
+msgstr "Ich möchte E-Mail-Benachrichtigungen erhalten"
 
 msgid "I would like to receive instant messages by email for RocketChat mentions and direct messages to me"
 msgstr "Ich möchte Sofort-Nachrichten per Email für RocketChat-Erwähnungen und Direktnachrichten an mich erhalten"
@@ -6884,7 +6884,7 @@ msgctxt "notification frequency"
 msgid "Immediately"
 msgstr "Sofort"
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "Immediately (an individual email per event)"
 msgstr "Sofort (eine einzelne E-Mail für jedes Ereignis)"
 
@@ -6930,11 +6930,11 @@ msgstr "In Diskussionen gibt es zu jeder Veranstaltung eine Videokonferenz. Prä
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
 msgstr "In Workshops gibt es zu jeder Veranstaltung eine Videokonferenz. Präsentatoren dürfen diese moderieren."
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "In a Daily Report"
 msgstr "In einem täglichen Report"
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "In a Weekly Report"
 msgstr "In einem wöchentlichen Report"
 
@@ -7011,7 +7011,7 @@ msgstr "Enthält das \"Was ist neu\" Feature, Buttons für das schnelle Kopieren
 msgid "Individual choice"
 msgstr "Indivuduelle Auswahl"
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "Individual settings for each Project/Group..."
 msgstr "Individuelle Einstellungen pro Projekt/Gruppe..."
 
@@ -8100,7 +8100,7 @@ msgctxt "notification frequency"
 msgid "Never"
 msgstr "Nie"
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "Never (we will not send you any emails)"
 msgstr "Niemals (wir schicken dir keine E-Mails)"
 
@@ -8265,7 +8265,7 @@ msgstr "Keine Auswahl"
 msgid "No Description set"
 msgstr "Keine Beschreibung erstellt"
 
-msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgctxt "answer to \"i wish to receive rocketchat email notifications:\""
 msgid "No E-Mails for RocketChat messages"
 msgstr "Keine E-Mails für RocketChat-Nachrichten"
 
@@ -9599,8 +9599,8 @@ msgstr "Umsortieren"
 msgid "Reason for rejection"
 msgstr "Ablehnungsgrund"
 
-msgid "Receive notification emails in this language"
-msgstr "Benachrichtigungs-Emails in dieser Sprache empfangen"
+msgid "Receive email notifications in this language"
+msgstr "E-Mail-Benachrichtigungen in dieser Sprache empfangen"
 
 msgid "Recipient"
 msgstr "Empfänger"
@@ -11364,8 +11364,8 @@ msgstr "Die gewählte Auswahl wurde nicht gefunden oder ist ungültig! Bitte wä
 msgid "The site administrator"
 msgstr "Siteadministrator/in"
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
-msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn eingesetllt). Kann mehrere Tage beinhalten."
+msgid "The start date and time are used for reminder email notifications (if set up). Can span multiple days."
+msgstr "Die Start- und Endzeit werden für E-Mail-Erinnerungen benutzt (wenn eingestellt). Kann mehrere Tage beinhalten."
 
 msgid "The start date must be before the end date"
 msgstr "Das Anfangsdatum muss vor dem Enddatum liegen"
@@ -12005,8 +12005,8 @@ msgstr "Dies wird die Standardeinstellungen für alle Inhalte sein, die von Mitg
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
 msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-E-Mails geschickt (wenn du das möchtest)"
 
-msgid "This will determine the time and date shown for events on the website and in your notification emails."
-msgstr "Dies bestimmt die Uhrzeit und das Datum, die für Veranstaltungen auf der Website und in Benachrichtigungs-E-Mails angezeigt werden."
+msgid "This will determine the time and date shown for events on the website and in your email notifications."
+msgstr "Dies bestimmt die Uhrzeit und das Datum, die für Veranstaltungen auf der Website und in E-Mail-Benachrichtigungen angezeigt werden."
 
 msgid "This will determine who can see your idea."
 msgstr "Dies bestimmt wer deine Idee sehen kann."
@@ -15487,6 +15487,10 @@ msgstr "Ja"
 #~ msgid "Dutch--NATIVE-LANGUAGE"
 #~ msgstr "Nederlands"
 
+#~ msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+#~ msgid "E-Mails for all direct messages and mentions"
+#~ msgstr "E-Mails für alle Direktnachrichten und Erwähnungen"
+
 #~ msgid "Edit Poll Option"
 #~ msgstr "Umfrage-Option bearbeiten"
 
@@ -15582,6 +15586,9 @@ msgstr "Ja"
 
 #~ msgid "Follow this link to see the comment:"
 #~ msgstr "Folge diesem Link um zum Kommentar zu gelangen:"
+
+#~ msgid "For content that I am following, I wish to receive notification emails"
+#~ msgstr "Für Inhalte, denen ich folge, möchte ich Benachrichtigungs-Emails erhalten"
 
 #~ msgid "French--NATIVE-LANGUAGE"
 #~ msgstr "Français"
@@ -15715,6 +15722,9 @@ msgstr "Ja"
 #~ msgid "I wish to receive RocketChat notification emails"
 #~ msgstr "Ich möchte Benachrichtigungs-Emails erhalten"
 
+#~ msgid "I wish to receive notification emails"
+#~ msgstr "Ich möchte Benachrichtigungs-Emails erhalten"
+
 #~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
 #~ msgstr "Wenn ein Gruppe als Tagung markiert wurde, ist es möglich Accounts für alle Teilnehmer automatisch zu generieren"
 
@@ -15738,6 +15748,10 @@ msgstr "Ja"
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Falls du noch Inhalte von dir löschen möchtest, tue dies bitte jetzt indem du die Inhalte auf den entsprechenden Seiten löscht. Sobald du dein Konto löschst wirst du absolut keinen Zugriff mehr auf übrig gebliebene Inhalte von dir auf dieser Seite haben."
 
+#~ msgctxt "answer to \"i wish to receive notification emails:\""
+#~ msgid "Immediately (an individual email per event)"
+#~ msgstr "Sofort (eine einzelne E-Mail für jedes Ereignis)"
+
 #~ msgid "Import Projects and Groups"
 #~ msgstr "Projekte und Gruppen importieren"
 
@@ -15750,8 +15764,20 @@ msgstr "Ja"
 #~ msgid "Important messages:"
 #~ msgstr "Wichtige Nachrichten:"
 
+#~ msgctxt "answer to \"i wish to receive notification emails:\""
+#~ msgid "In a Daily Report"
+#~ msgstr "In einem täglichen Report"
+
+#~ msgctxt "answer to \"i wish to receive notification emails:\""
+#~ msgid "In a Weekly Report"
+#~ msgstr "In einem wöchentlichen Report"
+
 #~ msgid "In my Cloud Files"
 #~ msgstr "In meinen Cloud-Dateien"
+
+#~ msgctxt "answer to \"i wish to receive notification emails:\""
+#~ msgid "Individual settings for each Project/Group..."
+#~ msgstr "Individuelle Einstellungen pro Projekt/Gruppe..."
 
 #~ msgid "Info messages:"
 #~ msgstr "Info-Meldungen:"
@@ -15818,6 +15844,10 @@ msgstr "Ja"
 #~ msgid "Name of educational institution"
 #~ msgstr "Name der Bildungseinrichtung"
 
+#~ msgctxt "answer to \"i wish to receive notification emails:\""
+#~ msgid "Never (we will not send you any emails)"
+#~ msgstr "Niemals (wir schicken dir keine E-Mails)"
+
 #~ msgid "New etherpad by %(sender_name)s"
 #~ msgstr "Neues Pad von %(sender_name)s"
 
@@ -15868,6 +15898,10 @@ msgstr "Ja"
 
 #~ msgid "Newsletter sent."
 #~ msgstr "Der Newsletter wurde abgeschickt."
+
+#~ msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+#~ msgid "No E-Mails for RocketChat messages"
+#~ msgstr "Keine E-Mails für RocketChat-Nachrichten"
 
 #~ msgid "No Interest"
 #~ msgstr "Kein Interesse"
@@ -15968,6 +16002,9 @@ msgstr "Ja"
 
 #~ msgid "Read more..."
 #~ msgstr "Mehr anzeigen..."
+
+#~ msgid "Receive notification emails in this language"
+#~ msgstr "Benachrichtigungs-Emails in dieser Sprache empfangen"
 
 #~ msgid "Recording of meetings is only available for premium conferences!"
 #~ msgstr "Aufzeichnung von Meetings ist nur für Premium-Tagungen verfügbar!"
@@ -16109,6 +16146,9 @@ msgstr "Ja"
 #~ msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
 #~ msgstr "Das Motivations-Textfeld wird mit dem Text vorausgefüllt, den du hier eingibst. Du kannst dies nutzen, um einen Hilfetext für das Verfassen des Motivationstextes zu hinterlegen oder eine Frageliste angeben, die die Antragssteller/innen beantworten sollen."
 
+#~ msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
+#~ msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn eingesetllt). Kann mehrere Tage beinhalten."
+
 #~ msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 #~ msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn eingesetllt). Kann mehrere Tage beinhalten."
 
@@ -16164,6 +16204,9 @@ msgstr "Ja"
 
 #~ msgid "This project shall be made publicly findable via other platforms."
 #~ msgstr "Dieses Projekt soll über andere Plattformen öffentlich auffindbar gemacht werden."
+
+#~ msgid "This will determine the time and date shown for events on the website and in your notification emails."
+#~ msgstr "Dies bestimmt die Uhrzeit und das Datum, die für Veranstaltungen auf der Website und in Benachrichtigungs-E-Mails angezeigt werden."
 
 #~ msgid "Timestamp of user export"
 #~ msgstr "Zeitstempel des Benutzer-Exports"
