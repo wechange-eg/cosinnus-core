@@ -59,6 +59,7 @@ def forwards(apps, schema_editor):
 class Migration(migrations.Migration):
     dependencies = [
         ('cosinnus', '0163_add_portal_group_setting'),
+        ('cosinnus_notifications', '0010_auto_20220117_1735'),
     ]
 
     # old values stay in the db, rollback is a NOP
