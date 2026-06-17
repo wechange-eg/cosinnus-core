@@ -6,6 +6,7 @@ import logging
 from _collections import defaultdict
 from builtins import str
 from copy import copy
+from email.utils import formataddr
 from importlib import import_module
 from threading import Thread
 
@@ -34,7 +35,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import GlobalUserNotificationSetting
 from cosinnus.models.tagged import BaseTaggableObjectModel
-from cosinnus.templatetags.cosinnus_tags import full_name, textfield
+from cosinnus.templatetags.cosinnus_tags import full_name, full_name_in_mail, textfield
 from cosinnus.utils.files import get_image_url_for_icon
 from cosinnus.utils.functions import ensure_dict_keys, resolve_attributes
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
@@ -770,7 +771,7 @@ class NotificationsThread(Thread):
                         'receiver': receiver,
                         'receiver_name': mark_safe(strip_tags(full_name(receiver))),
                         'sender': self.user,
-                        'sender_name': mark_safe(strip_tags(full_name(self.user))),
+                        'sender_name': mark_safe(strip_tags(full_name_in_mail(self.user))),
                         'object': self.obj,
                         'notification_settings_url': mark_safe(preference_url),
                     }
@@ -790,23 +791,17 @@ class NotificationsThread(Thread):
             # strip anything unusual from the sender's name and any formatting interfering with the header
             portal_name = force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
             username = (
-                strip_tags(full_name(notification_event.user))
+                strip_tags(full_name_in_mail(notification_event.user))
                 .replace(',', '')
                 .replace('.', '')
                 .replace('<', '')
                 .replace('>', '')
             )
-            username = username.encode('ascii', errors='ignore').decode().strip()
             if username:
-                # add from-email readable name (yes, this is how this works)
-                from_email = '%(username)s via %(portal_name)s <%(from_email)s>' % {
-                    'username': username,
-                    'portal_name': portal_name,
-                    'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL,
-                }
-                # Workaround: django 2.x does not support non-ascii chars in the from_email, so strip all non-ascii
-                # chars!
-                from_email = from_email.encode('ascii', errors='ignore').decode()
+                # generate a valid realname+address string with proper utf-8 encoding
+                realname = f'{username} via {portal_name}'
+                from_email = formataddr((realname, settings.COSINNUS_DEFAULT_FROM_EMAIL))
+
             send_mail_or_fail(receiver.email, subject, template, context, from_email=from_email, is_html=is_html)
 
         finally:
@@ -951,12 +946,12 @@ def render_digest_item_for_notification_event(
             return '<div>stub: event "%s" with object "%s" from user "%s"</div>' % (
                 notification_event.notification_id,
                 getattr(obj, 'text', getattr(obj, 'title', getattr(obj, 'name', 'NOARGS'))),
-                notification_event.user.get_full_name(),
+                notification_event.user.get_full_name_in_mail(),
             )
             """
         data_attributes = options['data_attributes']
 
-        sender_name = mark_safe(strip_tags(full_name(notification_event.user)))
+        sender_name = mark_safe(strip_tags(full_name_in_mail(notification_event.user)))
         # add special attributes to object
         obj._sender_name = sender_name
         obj._sender = notification_event.user
