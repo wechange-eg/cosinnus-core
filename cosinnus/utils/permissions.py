@@ -87,7 +87,7 @@ def check_object_read_access(obj, user):
         # is accessing the item, or the item's creator is accessing it
         if obj.media_tag:
             obj_is_visible = (
-                obj.creator == user
+                (obj.creator and obj.creator == user)
                 or obj.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
                 or (obj.media_tag.visibility == BaseTagObject.VISIBILITY_GROUP and (is_member or is_admin))
             )
@@ -113,7 +113,7 @@ def check_object_read_access(obj, user):
             extra_conditions = extra_conditions or obj.grant_extra_read_permissions(user)
             met_proper_object_conditions = True
         if hasattr(obj, 'creator'):
-            extra_conditions = extra_conditions or (obj.creator == user or check_user_superuser(user))
+            extra_conditions = extra_conditions or ((obj.creator and obj.creator == user) or check_user_superuser(user))
             met_proper_object_conditions = True
 
         if not met_proper_object_conditions:
@@ -563,3 +563,21 @@ class IsNextCloudApiTokenValid(BasePermission):
         if token == settings.COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN:
             return True
         return False
+
+
+class IsCosinnusGroupUser(BasePermission):
+    """Check group membership"""
+
+    def has_permission(self, request, view):
+        user = request.user
+        group = view.group
+        return check_ug_membership(user, group) or check_ug_admin(user, group) or check_user_superuser(user)
+
+
+class IsCosinnusGroupAdmin(BasePermission):
+    """Check group admin membership"""
+
+    def has_permission(self, request, view):
+        user = request.user
+        group = view.group
+        return check_ug_admin(user, group) or check_user_superuser(user)

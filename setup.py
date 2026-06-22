@@ -133,7 +133,7 @@ setup(
         'elasticsearch==7.17.9',
         'ecdsa==0.18.0',
         'geopy==2.4.1',
-        'icalendar==5.0.12',
+        'icalendar==6.3.2',
         'jsonfield==3.1.0',
         'l18n==2021.3',
         'lxml==4.9.1',
@@ -173,6 +173,8 @@ setup(
         'fcm-django==2.2.1',
         'tblib==3.0.0',
         'django_extended_makemessages==1.7.1',
+        'caldav==2.1.2',
+        'nh3==0.3.5',
         # test requirements
         'freezegun==1.5.1',
         # requirements loaded in from github

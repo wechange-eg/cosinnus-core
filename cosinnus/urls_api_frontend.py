@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.urls import include, path
 
 from cosinnus.api_frontend.views.content import MainContentView
+from cosinnus.api_frontend.views.group import CosinnusGroupSettingsView
 from cosinnus.api_frontend.views.navigation import (
     AlertsMarkAllReadView,
     AlertsView,
@@ -21,6 +22,7 @@ from cosinnus.api_frontend.views.navigation import (
 from cosinnus.api_frontend.views.portal import (
     PortalManagedTagsView,
     PortalSettingsView,
+    PortalTaggedDynamicFieldsView,
     PortalTagsView,
     PortalTopicsView,
     PortalUserprofileDynamicFieldsSignupView,
@@ -76,6 +78,11 @@ urlpatterns += [
         PortalUserprofileDynamicFieldsView.as_view(),
         name='api-portal-userprofile-dynamicfields',
     ),
+    path(
+        'api/v3/portal/tagged_dynamicfields/event/',
+        PortalTaggedDynamicFieldsView.as_view(tagged_model='cosinnus_event.Event'),
+        name='api-portal-event-dynamicfields',
+    ),
     path('api/v3/portal/settings/', PortalSettingsView.as_view(), name='api-portal-settings'),
     path('api/v3/content/main/', MainContentView.as_view(), name='api-content-main'),
     path('api/v3/navigation/main/', MainNavigationView.as_view(), name='api-navigation-main'),
@@ -100,6 +107,7 @@ urlpatterns += [
         VersionHistoryUnreadCountView.as_view(),
         name='api-navigation-unread-version-history',
     ),
+    path('api/v3/spaces/<int:group_id>/settings/', CosinnusGroupSettingsView.as_view(), name='api-group-settings'),
 ]
 
 if settings.COSINNUS_ADMIN_USER_APIS_ENABLED:
@@ -112,4 +120,10 @@ if settings.COSINNUS_ADMIN_USER_APIS_ENABLED:
 if settings.COSINNUS_DECK_ENABLED:
     urlpatterns += [
         path('', include(('cosinnus_deck.urls_api_frontend', 'cosinnus'), namespace='deck-api')),
+    ]
+
+
+if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+    urlpatterns += [
+        path('', include(('cosinnus_event.calendar.urls_api_frontend', 'cosinnus'), namespace='calendar-api')),
     ]

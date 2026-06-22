@@ -4,7 +4,6 @@ from __future__ import print_function, unicode_literals
 import logging
 import sys
 
-import html2text
 from django.core.mail import EmailMessage, get_connection
 from django.core.mail.message import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -16,7 +15,7 @@ from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.utils.html import replace_non_portal_urls
+from cosinnus.utils.html import convert_html_to_plaintext, replace_non_portal_urls
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import get_list_unsubscribe_url
 
@@ -104,25 +103,6 @@ def deliver_mail(to, subject, message, from_email, bcc=None, is_html=False, head
         ret = mail.send()
 
     return ret
-
-
-def convert_html_to_plaintext(html_message):
-    """Converts a cosinnus HTML rendered message to useful plaintext"""
-
-    htmler = html2text.HTML2Text()
-    htmler.ignore_images = True
-    htmler.body_width = 0
-    text_message = htmler.handle(html_message)
-    # clean text message from any lines containing ONLY '-' or '|' in any order, but preserve newlines
-    clean_text = ''
-    for line in text_message.split('\n'):
-        line = line.strip()
-        if len(line) > 0 and len(line.replace('|', '').replace('-', '').replace(' ', '')) == 0:
-            continue
-        if line.startswith('| '):
-            continue
-        clean_text += line + '\n'
-    return clean_text
 
 
 def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=False):

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from cosinnus.conf import settings
 from cosinnus_event.models import Event
 
 
@@ -54,9 +55,14 @@ class EventListSerializer(serializers.HyperlinkedModelSerializer):
         return location_lon
 
     def get_image(self, obj):
-        if not obj.attached_image:
+        image_url = None
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED and obj.image:
+            image_url = obj.image.url
+        elif obj.attached_image:
+            image_url = obj.attached_image.static_image_url()
+        if not image_url:
             return None
-        return self.context['request'].build_absolute_uri(obj.attached_image.static_image_url())
+        return self.context['request'].build_absolute_uri(image_url)
 
     def get_url(self, obj):
         return obj.get_absolute_url()

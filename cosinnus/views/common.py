@@ -339,6 +339,11 @@ def apply_follow_object(obj, user, follow):
     return apply_likefollowstar_object(obj, user, like=UNSPECIFIED, follow=follow)
 
 
+def apply_star_object(obj, user, star):
+    # create, change or delete the LikeObj, but take care that the STAR is false before deleting
+    return apply_likefollowstar_object(obj, user, star=star)
+
+
 @csrf_protect
 def do_likefollowstar(request, **kwargs):
     """Expected POST arguments:
@@ -544,7 +549,7 @@ class RobotsTextView(View):
     def get(self, request, *args, **kwargs):
         if settings.COSINNUS_DENY_ALL_ROBOTS:
             # serve disallow all content
-            robots_text_content = 'User-agent: *\n' 'Disallow: /\n'
+            robots_text_content = 'User-agent: *\nDisallow: /\n'
         else:
             # read robots.txt from static directory. (Note: depends on collectstatic)
             robots_file = staticfiles_storage.path('robots.txt')

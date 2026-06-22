@@ -41,6 +41,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import ensure_group_type
 from cosinnus.utils.functions import ensure_list_of_ints, is_number, unique_aware_slugify
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.html import convert_html_to_plaintext
 from cosinnus.utils.http import is_ajax
 from cosinnus.utils.permissions import (
     check_object_read_access,
@@ -61,6 +62,7 @@ from cosinnus.views.mixins.tagged import EditViewWatchChangesMixin, RecordLastVi
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 from cosinnus_conference.views import FilterConferenceRoomMixin
 from cosinnus_event import cosinnus_notifications
+from cosinnus_event.calendar.views import CalendarRedirectMixin
 from cosinnus_event.conf import settings
 from cosinnus_event.filters import EventFilter
 from cosinnus_event.forms import (
@@ -90,14 +92,16 @@ from cosinnus_event.models import (
 logger = logging.getLogger('cosinnus')
 
 
-class EventIndexView(RequireReadMixin, RedirectView):
+class EventIndexView(RequireReadMixin, CalendarRedirectMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, **kwargs):
         return group_aware_reverse('cosinnus:event:list', kwargs={'group': self.group})
 
 
-class EventListView(RequireReadMixin, CosinnusFilterMixin, MixReflectedObjectsMixin, FilterGroupMixin, ListView):
+class EventListView(
+    RequireReadMixin, CalendarRedirectMixin, CosinnusFilterMixin, MixReflectedObjectsMixin, FilterGroupMixin, ListView
+):
     model = Event
     filterset_class = EventFilter
     event_view = 'upcoming'
@@ -196,6 +200,7 @@ class ConferenceEventListView(RequireWriteMixin, FilterGroupMixin, ListView):
 class DoodleListView(EventListView):
     template_name = 'cosinnus_event/doodle_list.html'
     filterset_class = EventFilter
+    v3_calendar_redirect_disabled = True
 
     def get_queryset(self):
         """In the doodle list we only show events with open votings"""
@@ -209,6 +214,7 @@ class ArchivedDoodlesListView(EventListView):
     template_name = 'cosinnus_event/doodle_list_detailed_archived.html'
     event_view = 'archived'
     filterset_class = EventFilter
+    v3_calendar_redirect_disabled = True
 
     def get_queryset(self):
         """In the calendar we only show scheduled events"""
@@ -339,7 +345,7 @@ class DoodleFormMixin(EntryFormMixin):
         return group_aware_reverse(urlname, kwargs=kwargs)
 
 
-class EntryAddView(EntryFormMixin, AttachableViewMixin, CreateWithInlinesView):
+class EntryAddView(EntryFormMixin, CalendarRedirectMixin, AttachableViewMixin, CreateWithInlinesView):
     message_success = _('Event "%(title)s" was added successfully.')
     message_error = _('Event "%(title)s" could not be added.')
 
@@ -374,7 +380,9 @@ class DoodleAddView(DoodleFormMixin, AttachableViewMixin, CreateWithInlinesView)
         return ret
 
 
-class EntryEditView(EditViewWatchChangesMixin, EntryFormMixin, AttachableViewMixin, UpdateWithInlinesView):
+class EntryEditView(
+    EditViewWatchChangesMixin, EntryFormMixin, CalendarRedirectMixin, AttachableViewMixin, UpdateWithInlinesView
+):
     changed_attr_watchlist = [
         'title',
         'note',
@@ -468,7 +476,7 @@ class DoodleEditView(EditViewWatchChangesMixin, DoodleFormMixin, AttachableViewM
         return super(DoodleEditView, self).forms_valid(form, inlines)
 
 
-class EntryDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+class EntryDeleteView(RequireWriteMixin, CalendarRedirectMixin, FilterGroupMixin, DeleteView):
     model = Event
     message_success = _('Event "%(title)s" was deleted successfully.')
     message_error = _('Event "%(title)s" could not be deleted.')
@@ -494,6 +502,7 @@ class EntryDetailView(
     ReflectedObjectRedirectNoticeMixin,
     ReflectedObjectSelectMixin,
     RequireReadMixin,
+    CalendarRedirectMixin,
     RecordLastVisitedMixin,
     FilterGroupMixin,
     DetailView,
@@ -774,7 +783,7 @@ class BaseEventFeed(ICalFeed):
     categories = None
     localtime = True  # if given (?localtime=1), times will be converted to local server timezone time
     utc_offset = None  # in hours, taken from ?utc_offset=<number> optional param
-    filename = f"{_('Events')}.ics"
+    filename = f'{_("Events")}.ics'
 
     def __init__(self, *args, **kwargs):
         self.title = self.base_title
@@ -821,7 +830,15 @@ class BaseEventFeed(ICalFeed):
     def item_description(self, item):
         description = item.get_absolute_url()
         if item.note and item.note.strip():
-            description += '\n\n' + item.note
+            note = item.note
+            if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+                note = convert_html_to_plaintext(note)
+            description += '\n\n' + note
+        # add video conference url
+        if item.media_tag.location_type_has_video_conference:
+            video_conference_url = item.media_tag.get_video_conference_url()
+            if video_conference_url:
+                description += '\n\n' + _('Video call: ') + video_conference_url
         # add website URL to description if set on event
         if item.url:
             description = description + '\n\n' + item.url if description else item.url
@@ -852,9 +869,14 @@ class BaseEventFeed(ICalFeed):
         return item.get_absolute_url()
 
     def item_location(self, item):
-        mt = item.media_tag
-        if mt and mt.location_lat and mt.location_lon and mt.location:
-            return mt.location
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            # for events created in the v3 calendar we consider location_type and ignore missing lat/lon.
+            if item.media_tag.location_type_has_location and item.media_tag.location:
+                return item.media_tag.location
+        else:
+            mt = item.media_tag
+            if mt and mt.location_lat and mt.location_lon and mt.location:
+                return mt.location
         return None
 
     def item_geolocation(self, item):

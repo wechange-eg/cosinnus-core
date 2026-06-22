@@ -41,11 +41,16 @@ class TodoEntryUpdateFormTest(FormTestCase):
                 'text_topics',
                 'bbb_room',
                 'migrated',
+                'location_type',
+                'external_video_conference_url',
+                'show_bbb_guest_access_outside_of_conference',
+                'dynamic_fields',
                 'like',
             ],
         }
         form = TodoEntryUpdateForm(group=self.group)
         real = get_fieldnames_from_multiform(form)
+        self.maxDiff = None
         self.assertEqual(fields, real)
 
     def test_init(self):

@@ -384,6 +384,11 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             'force_redo_cloud_user_room_memberships',
             'force_update_group_names',
         ]
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        actions += [
+            'force_sync_calendar_internal_events',
+            'force_redo_calendar_group_shares',
+        ]
     list_display = (
         'name',
         'slug',
@@ -415,6 +420,12 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         'last_activity',
         'inactivity_notification_sent_at',
     ]
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        readonly_fields += [
+            'nextcloud_calendar_last_sync',
+            'nextcloud_calendar_sync_required',
+        ]
+
     raw_id_fields = ('parent',)
     exclude = [
         'is_conference',
@@ -428,6 +439,13 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     if not settings.COSINNUS_DECK_ENABLED:
         exclude += [
             'nextcloud_deck_board_id',
+        ]
+    if not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+        exclude += [
+            'nextcloud_calendar_url',
+            'nextcloud_calendar_publish_url',
+            'nextcloud_calendar_sync_token',
+            'nextcloud_calendar_last_sync',
         ]
     if settings.COSINNUS_CONFERENCES_ENABLED:
         inlines = [CosinnusConferenceSettingsInline]
@@ -713,6 +731,55 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             self.message_user(request, message)
 
         force_update_group_names.short_description = _('Nextcloud: Update group names')
+
+    if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+
+        def force_sync_calendar_internal_events(self, request, queryset):
+            count = 0
+            from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
+
+            calendar = NextcloudCaldavConnection()
+            for group in queryset:
+                try:
+                    errors = calendar.group_sync_private_events(group, force_resync=True)
+                    if errors:
+                        message = _('%(group)s: An error occurred during sync (%(errors)s).') % {
+                            'group': group.name,
+                            'errors': errors,
+                        }
+                        self.message_user(request, message, level=messages.WARNING)
+                    else:
+                        count += 1
+                except Exception:
+                    message = _('%(group)s: An unexpected error occurred during sync.') % {'group': group.name}
+                    self.message_user(request, message, level=messages.WARNING)
+            message = _("%(count)d groups' internal events synced.") % {'count': count}
+            self.message_user(request, message)
+
+        force_sync_calendar_internal_events.short_description = _('Calendar: Re-Sync internal events')
+
+        def force_redo_calendar_group_shares(self, request, queryset):
+            count = 0
+            from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
+
+            calendar = NextcloudCaldavConnection()
+            for group in queryset:
+                if not group.nextcloud_calendar_url:
+                    message = _('Group "%(group)s" does not have a Nextcloud Calendar URL.') % {'group': group.name}
+                    self.message_user(request, message, level=messages.WARNING)
+                    continue
+                try:
+                    calendar.group_calendar_share(group)
+                    count += 1
+                except Exception:
+                    message = _('An error occurred while sharing calendar with group "%(group)s".') % {
+                        'group': group.name
+                    }
+                    self.message_user(request, message, level=messages.WARNING)
+            message = _("%(count)d groups' Nextcloud calendar shares were re-done.") % {'count': count}
+            self.message_user(request, message)
+
+        force_redo_calendar_group_shares.short_description = _('Calendar: Fix missing Nextcloud group shares')
 
 
 admin.site.register(CosinnusProject, CosinnusProjectAdmin)

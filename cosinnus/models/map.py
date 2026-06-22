@@ -20,7 +20,7 @@ from cosinnus.forms.search import filter_searchqueryset_for_read_access, get_vis
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.templatetags.cosinnus_tags import textfield_with_html
 from cosinnus.utils.dates import HumanizedEventTimeObject
 from cosinnus.utils.group import message_group_admins_url
 from cosinnus.utils.permissions import (
@@ -269,7 +269,7 @@ class HaystackMapResult(BaseMapResult):
             'iconImageUrl': result.icon_image_url,
             'backgroundImageSmallUrl': result.background_image_small_url,
             'backgroundImageLargeUrl': result.background_image_large_url,
-            'description': textfield(result.description),
+            'description': textfield_with_html(result.description),
             'relevance': result.score,
             'topics': result.mt_topics,
             'text_topics': result.mt_text_topics,
@@ -319,7 +319,7 @@ class HaystackMapResult(BaseMapResult):
             kwargs.pop('request')
         fields.update(**kwargs)
 
-        return super(HaystackMapResult, self).__init__(*args, **fields)
+        super(HaystackMapResult, self).__init__(*args, **fields)
 
 
 class DetailedMapResult(HaystackMapResult):
@@ -705,7 +705,7 @@ class CloudfileMapCard(BaseMapCard):
         super().__init__(
             id=document['id'],
             type='cloudfile',
-            slug=f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{document['link']}",
+            slug=f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}{document["link"]}',
             title=re.sub(query_regexp, r'<b>\g<0></b>', escape(document['title']), flags=re.IGNORECASE),
             mime=document['info']['mime'],
             size=document['info']['size'],
@@ -1003,6 +1003,8 @@ def itemid_from_searchresult(result):
 
 
 def filter_event_searchqueryset_by_upcoming(sqs):
+    """Excludes anything that isn't an upcoming scheduled platform-event state
+    (excludes `STATE_SYNCHRONIZED_EVENT` for example)."""
     # upcoming events
     _now = now()
     event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
@@ -1036,7 +1038,8 @@ def build_date_time(date_string, time_string):
 
 def filter_event_or_conference_happening_during(from_datetime, to_datetime, sqs):
     """Filters all events or conferences to retain those happening during the provided
-    datetime range, either fully or in part."""
+    datetime range, either fully or in part.
+    Excludes anything that isn't a scheduled platform-event state (excludes `STATE_SYNCHRONIZED_EVENT` for example)."""
     sqs = sqs.exclude(to_date__lt=from_datetime).exclude(from_date__gt=to_datetime)
     # only actual events, no doodles
     sqs = sqs.exclude(Q(event_state__lt=1) | Q(event_state__gt=1))

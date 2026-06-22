@@ -306,6 +306,12 @@ class CosinnusConferenceSettings(models.Model):
 
         return setting_obj
 
+    @classmethod
+    def clear_get_for_object_cache(cls, source_object):
+        """Clear the cache for get_for_object."""
+        cache_key = cls.CACHE_KEY % (source_object.__class__.__name__, source_object.id)
+        cache.delete(cache_key)
+
     def merge_in_inherited_settings_object(self, inherit_target):
         """Merges this object "on top" of the `inherit_target` CosinnusConferenceSettings object
         to inherit all values from the target, that aren't set in this object

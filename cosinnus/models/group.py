@@ -85,6 +85,7 @@ from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus.utils.validators import validate_image_format
 from cosinnus.views.mixins.media import FlickrEmbedFieldMixin, VideoEmbedFieldMixin
 from cosinnus_deck.models import DeckMigrationMixin
+from cosinnus_event.calendar.models import CalendarMigrationMixin
 from cosinnus_event.mixins import BBBRoomMixin  # noqa
 
 logger = logging.getLogger('cosinnus')
@@ -863,6 +864,7 @@ class CosinnusBaseGroup(
     MembersManagerMixin,
     BBBRoomMixin,
     DeckMigrationMixin,
+    CalendarMigrationMixin,
     AttachableObjectModel,
 ):
     """Abstract base group model implementation. Provides common functionality for all groups."""
@@ -1123,6 +1125,36 @@ class CosinnusBaseGroup(
         blank=True,
         null=True,
         help_text='Internal ID of the nextcloud deck board for the group. Set after the deck is created.',
+    )
+    nextcloud_calendar_url = models.URLField(
+        _('Nextcloud Group Calendar CalDAV URL'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='CalDAV URL of the nextcloud calendar for the group. Set after the calendar is created.',
+    )
+    nextcloud_calendar_publish_url = models.URLField(
+        _('Nextcloud Group Calendar CalDAV Publish URL'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='CalDAV Publish URL of the nextcloud calendar for the group. Set after the calendar is created.',
+    )
+    nextcloud_calendar_sync_token = models.CharField(
+        _('Nextcloud Group Calendar CalDAV Sync-Token'),
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text=_('Clear to enforce a re-sync off all events.'),
+    )
+    nextcloud_calendar_last_sync = models.DateTimeField(
+        _('Nextcloud Group Calendar CalDAV Last Sync Timestamp'),
+        blank=True,
+        null=True,
+    )
+    nextcloud_calendar_sync_required = models.BooleanField(
+        _('Nextcloud Group Calendar CalDAV Sync Required'),
+        default=False,
     )
 
     # NOTE: deprecated, do not use!
@@ -1588,6 +1620,14 @@ class CosinnusBaseGroup(
             return True
         if self.group_can_be_bbb_enabled and self.video_conference_type == self.BBB_MEETING:
             return True
+        return False
+
+    @property
+    def group_is_bbb_restricted(self):
+        """Checks if BBB is restricted."""
+        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+            if not self.enable_user_premium_choices_until or now().date() > self.enable_user_premium_choices_until:
+                return True
         return False
 
     @property

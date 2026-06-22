@@ -35,3 +35,9 @@ def register():
         name = pgettext_lazy('the_app', 'message')  # noqa
 
     url_registry.register('cosinnus_message', cosinnus_root_patterns, cosinnus_group_patterns)
+
+    # initialize integration handler
+    if settings.COSINNUS_ROCKET_ENABLED:
+        from cosinnus_message.integration import RocketChatIntegrationHandler  # noqa
+
+        RocketChatIntegrationHandler(app_name='cosinnus_message')
