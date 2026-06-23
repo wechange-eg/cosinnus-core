@@ -71,18 +71,3 @@ class CalendarSyncCaldavEvents(CosinnusCronJobBase):
                 if error_msg:
                     errors += error_msg + '\n'
         return f'{sync_count}/{len(groups)} groups synced.' + (f'\n\nErrors/Messages:\n\n{errors}' if errors else '')
-
-
-class CalendarSyncCaldavEventsOfFlaggedGroups(CalendarSyncCaldavEvents):
-    """Syncs NextCloud CalDav events For groups that have the "nextcloud_calendar_sync_required" Flag set.
-    The flag is set by the Frontend upon changing an internal event, to mark groups that need an update."""
-
-    RUN_EVERY_MINS = 5
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-
-    cosinnus_code = 'cosinnus_event.calendar.sync_caldav_events_of_flagged_groups'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(nextcloud_calendar_sync_required=True)
-        return queryset
