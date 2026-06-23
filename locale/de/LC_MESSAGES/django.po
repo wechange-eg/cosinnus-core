@@ -46,6 +46,10 @@ msgid ""
 "                            Please contact Support if you need this data.\n"
 "                        "
 msgstr ""
+"\n"
+"Hinweis: Alle anstehenden Termine sowie vergangene Termine aus diesem Jahr werden\n"
+"                            übertragen. Termine aus dem Jahr 2025 und früher werden nicht in den neuen Kalender übernommen.\n"
+"                            Bitte wenden Sie dich an den Support, falls du diese Daten benötigst."
 
 msgid ""
 "\n"
@@ -53,6 +57,10 @@ msgid ""
 "                            events from the old calendar, which were only visible to group/project members, to the new calendar.\n"
 "                        "
 msgstr ""
+"\n"
+"                            Der neue Kalender verwendet einen neuen Datentyp für interne Termine. Du kannst deine bestehenden\n"
+"                            Termine aus dem alten Kalender, die nur für Gruppen-/Projektmitglieder sichtbar waren, in den neuen Kalender übertragen.\n"
+"                        "
 
 #, python-format
 msgid ""
@@ -239,15 +247,15 @@ msgstr "%(count)d Gruppenmitgliedschaften der Benutzer/innen wurden aktualisiert
 
 #, python-format
 msgid "%(count)d groups' Nextcloud calendar shares were re-done."
-msgstr ""
+msgstr "Die Nextcloud-Kalenderfreigaben von %(count)d wurden erneuert."
 
 #, python-format
 msgid "%(count)d groups' internal events synced."
-msgstr ""
+msgstr "Die internen Events von %(count)d Gruppen wurden neu synchronisiert."
 
 #, python-format
 msgid "%(count)d new meetings were scheduled"
-msgstr ""
+msgstr "%(count)d neue Termine wurden geplant"
 
 #, python-format
 msgid "%(count)d of your offers expired"
@@ -287,7 +295,7 @@ msgstr "%(event)s (Status unbekannt)"
 
 #, python-format
 msgid "%(event)s (synchronized)"
-msgstr ""
+msgstr "%(event)s (synchronisiert)"
 
 #, python-format
 msgid "%(export_title)s finished"
@@ -295,11 +303,11 @@ msgstr "%(export_title)s abgeschlossen"
 
 #, python-format
 msgid "%(group)s: An error occurred during sync (%(errors)s)."
-msgstr ""
+msgstr "%(group)s: Ein Fehler ist bei der Synchronisation aufgetreten (%(errors)s)."
 
 #, python-format
 msgid "%(group)s: An unexpected error occurred during sync."
-msgstr ""
+msgstr "%(group)s: Ein unerwarteter Fehler ist bei der Synchronisation aufgetreten."
 
 #, python-format
 msgid "%(group_type)s %(group_name)s has been deactivated and will be deleted"
@@ -1303,6 +1311,11 @@ msgid ""
 "%(deleted_content_count)d contents have been deleted immediately. \n"
 "The user(s) will be deleted after 30 days."
 msgstr ""
+"%(user_count)d Benutzerkonten wurden erfolgreich deaktiviert. \n"
+"%(deactivated_groups_count)d Gruppen und Projekte wurden deaktiviert. \n"
+"%(hidden_content_count)d Inhalte wurden ausgeblendet. \n"
+"%(deleted_content_count)d Inhalte wurden sofort gelöscht. \n"
+"Die Benutzer werden nach 30 Tagen gelöscht."
 
 #, python-format
 msgid "%d Users rocketchat accounts were checked."
@@ -1702,10 +1715,10 @@ msgid "A hex code color to use as main theme color for the conference layout (wi
 msgstr "Farbe im Hex-Code, die als primäre Farbe für die Tagungsumgebung verwendet wird (mit oder ohne führendes '#')"
 
 msgid "A meeting you are attending was updated"
-msgstr ""
+msgstr "Ein Termin, an dem du teilnimmst, wurde aktualisiert"
 
 msgid "A meeting you are following was updated"
-msgstr ""
+msgstr "Ein Termin, dem du folgst, wurde aktualisiert"
 
 #, python-format
 msgid "A message from %(sender_full_name)s"
@@ -1752,22 +1765,22 @@ msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
 msgstr "Neue Datei: \"%(object_name)s\" wurde hochgeladen in %(team_name)s."
 
 msgid "A new meeting was scheduled"
-msgstr ""
+msgstr "Ein neuer Termin wurde geplant"
 
 #, python-format
 msgid "A new meeting was scheduled in %(team_name)s (which you follow)"
-msgstr ""
+msgstr "Ein neuer Termin wurde geplant in %(team_name)s (dem du folgst)"
 
 msgid "A new meeting was scheduled in a team you are following"
-msgstr ""
+msgstr "Ein neuer Termin wurde geplant in einem Projekt oder Gruppe (dem du folgst)"
 
 #, python-format
 msgid "A new meeting: \"%(object_name)s\" was scheduled in %(team_name)s (which you follow)."
-msgstr ""
+msgstr "Ein neuer Termin \"%(object_name)s\" wurde geplant in %(team_name)s (dem du folgst)."
 
 #, python-format
 msgid "A new meeting: \"%(object_name)s\" was scheduled in %(team_name)s."
-msgstr ""
+msgstr "Ein neuer Termin \"%(object_name)s\" wurde geplant in %(team_name)s."
 
 #, python-format
 msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
@@ -1829,7 +1842,7 @@ msgid "A public contact form, which non-registered users can use to contact grou
 msgstr "Ein öffentliches Kontaktformular, das von den nicht-registrierten Benutzer/innen zwecks Kontaktaufnahme mit den Gruppen-Administrator/innen benutzt werden kann."
 
 msgid "A scheduled meeting was updated"
-msgstr ""
+msgstr "Ein geplanter Termin wurde aktualisiert"
 
 msgid "A short description or topic for your room. Will be shown on top of the room page."
 msgstr "Eine kurze Beschreibung oder ein Thema für deinen Raum. Wird oben auf der Raumseite angezeigt."
@@ -2437,14 +2450,14 @@ msgid "An error occurred during the migration. Some boards might not have been f
 msgstr "Bei der Migration ist ein Fehler aufgetreten. Manche Boards wurden nicht vollständig migriert."
 
 msgid "An error occurred during the migration. Some events might not have been migrated."
-msgstr ""
+msgstr "Bei der Migration ist ein Fehler aufgetreten. Möglicherweise wurden einige Veranstaltungen nicht migriert."
 
 msgid "An error occurred while attempting to login via your social network account."
 msgstr "Beim Versuch, sich über dein soziales Netzwerkkonto anzumelden, ist ein Fehler aufgetreten."
 
 #, python-format
 msgid "An error occurred while sharing calendar with group \"%(group)s\"."
-msgstr ""
+msgstr "Beim Freigeben des Kalenders für die Gruppe \"%(group)s\" ist ein Fehler aufgetreten."
 
 msgid "An internal error occured."
 msgstr "Ein interner Fehler ist aufgetreten."
@@ -2978,13 +2991,13 @@ msgid "Calendar"
 msgstr "Kalender"
 
 msgid "Calendar creation is in progress..."
-msgstr ""
+msgstr "Der Kalender wird gerade erstellt..."
 
 msgid "Calendar: Fix missing Nextcloud group shares"
-msgstr ""
+msgstr "Kalender: Fehlende Nextcloud-Gruppenfreigaben beheben"
 
 msgid "Calendar: Re-Sync internal events"
-msgstr ""
+msgstr "Kalender: Interne Termine neu synchronisieren"
 
 msgid "Call to Action"
 msgstr "Aufruf zum Handeln"
@@ -3163,7 +3176,7 @@ msgid "Clear Filters"
 msgstr "Filter zurücksetzen"
 
 msgid "Clear to enforce a re-sync off all events."
-msgstr ""
+msgstr "Löschen um Neusynchronisation aller Termine zu erzwingen."
 
 #, python-format
 msgid "Click \"%(download_label)s\" to download the file archive"
@@ -4235,7 +4248,7 @@ msgid "Discussions"
 msgstr "Diskussionen"
 
 msgid "Dismiss"
-msgstr ""
+msgstr "Schließen"
 
 msgid "Display Name"
 msgstr "Anzeigename"
@@ -5035,10 +5048,10 @@ msgid "Event Name"
 msgstr "Veranstaltungsname"
 
 msgid "Event Nextcloud CalDAV UID"
-msgstr ""
+msgstr "Veranstaltungs-Nextcloud CalDAV UID"
 
 msgid "Event Nextcloud Calendar CalDAV Last Sync Timestamp"
-msgstr ""
+msgstr "Veranstaltungs-Nextcloud Kalender CalDAV Letzter Sync Zeitstempel"
 
 msgid "Event Polls"
 msgstr "Terminabstimmungen"
@@ -5141,7 +5154,7 @@ msgid "External Resources"
 msgstr "Externe Ressourcen"
 
 msgid "External Video Conference URL"
-msgstr ""
+msgstr "Externe Videokonferenz-URL"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "External contents"
@@ -5367,7 +5380,7 @@ msgstr "Allgemein"
 
 msgctxt "Name of the default todo list for each group/project"
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 msgid "General profile information (e.g. name, topics, about me)"
 msgstr "Allgemeine Profilinformation (z.B. Name, Themen, Über mich)"
@@ -5453,7 +5466,7 @@ msgstr "Gruppe"
 
 #, python-format
 msgid "Group \"%(group)s\" does not have a Nextcloud Calendar URL."
-msgstr ""
+msgstr "Gruppe \"%(group)s\" hat keine Nextcloud-Kalender-URL."
 
 #, python-format
 msgid "Group \"%(group)s\" does not have a Nextcloud folder name set."
@@ -6603,7 +6616,7 @@ msgid "Http/Https Protocol (overrides settings)"
 msgstr "Http/Https Protokoll (overrides settings)"
 
 msgid "Hybrid"
-msgstr ""
+msgstr "Hybrid"
 
 msgid "I accept the conditions in order to submit my application"
 msgstr "Ich akzeptiere die Bedingungen, um Teilnahme zu beantragen"
@@ -6737,7 +6750,7 @@ msgid "If set, applications can only be submitted and edited during this time fr
 msgstr "Wenn aktiv, können Teilnahmeanträge nur während dieses Zeitraums eingereicht und bearbeitet werden. Du kannst diesen Zeitraum jederzeit ändern, um die Antragsstellung zu schließen oder zu verlängern."
 
 msgid "If the Calendar is not available withing a few minutes, some technical difficulties occurred with the calendar service. If the problems persist, please contact the support. We apologize for the inconveniences!"
-msgstr ""
+msgstr "Wenn der Kalender nicht in wenigen Minuten verfügbar ist, sind technische Probleme beim Kalenderdienst aufgetreten. Sollten die Probleme weiterhin bestehen, wende dich bitte an den Support. Wir entschuldigen uns für die Unannehmlichkeiten!"
 
 msgid "If the Task Board is not available withing a few minutes, some technical difficulties occurred with the board service. Try disabling and re-enabling the Task Board app in the settings. If the problems persist, please contact the support. We apologize for the inconveniences!"
 msgstr "Wenn das Aufgaben-Board nicht innerhalb einiger Minuten verfügbar wird, gibt es technische Probleme mit dem Board-Service. Versuche die Aufgaben-Board App in den Einstellungen zu deaktivieren und zu reaktivieren. Falls das Problem bleibt, melde dich beim Support. Wir entschuldigen uns für die Unannehmlichkeiten!"
@@ -7494,7 +7507,7 @@ msgid "Location"
 msgstr "Standort"
 
 msgid "Location Type"
-msgstr ""
+msgstr "Standorttyp"
 
 msgid "Log in"
 msgstr "Einloggen"
@@ -7852,7 +7865,7 @@ msgid "Migrate Nextcloud Boards"
 msgstr "Nextcloud-Boards Migrieren"
 
 msgid "Migrate Private Events"
-msgstr ""
+msgstr "Interne Veranstaltungen migrieren"
 
 msgid "Migrate Todos"
 msgstr "Aufgaben migrieren"
@@ -7861,7 +7874,7 @@ msgid "Migrate Todos to Task Board"
 msgstr "Migriere Aufgaben ins Aufgaben-Board"
 
 msgid "Migrate private Events to the new calendar app"
-msgstr ""
+msgstr "Interne Veranstaltungen in die neue Kalender-App migrieren"
 
 msgid "Migrate your boards from the Nextcloud Deck app to your groups and projects!"
 msgstr "Migriere deine Boards aus der Nextcloud Deck App in deine Gruppen und Projekte!"
@@ -7877,7 +7890,7 @@ msgstr "Die Migration war erfolgreich. Du findest die migrierten Boards im Aufga
 
 #, python-format
 msgid "Migration to %(calendar_link)s successfully finished. "
-msgstr ""
+msgstr "Migration nach %(calendar_link)s erfolgreich abgeschlossen. "
 
 #, python-format
 msgid "Migration to %(deck_link)s successfully finished. "
@@ -8214,19 +8227,19 @@ msgid "Nextcloud Deck Board ID"
 msgstr "Nextcloud Deck Board-ID"
 
 msgid "Nextcloud Group Calendar CalDAV Last Sync Timestamp"
-msgstr ""
+msgstr "Nextcloud Gruppenkalendar CalDAV Letzter Sync Timestamp"
 
 msgid "Nextcloud Group Calendar CalDAV Publish URL"
-msgstr ""
+msgstr "Nextcloud Gruppenkalendar CalDAV Veröffentlichungs-URL"
 
 msgid "Nextcloud Group Calendar CalDAV Sync Required"
-msgstr ""
+msgstr "Nextcloud Gruppenkalendar CalDAV Sync Benötigt"
 
 msgid "Nextcloud Group Calendar CalDAV Sync-Token"
-msgstr ""
+msgstr "Nextcloud Gruppenkalendar CalDAV Sync-Token"
 
 msgid "Nextcloud Group Calendar CalDAV URL"
-msgstr ""
+msgstr "Nextcloud Gruppenkalendar CalDAV URL"
 
 msgid "Nextcloud Group ID"
 msgstr "Nextcloud Gruppen-ID"
@@ -8326,7 +8339,7 @@ msgid "No etherpads have been created yet."
 msgstr "Es wurden noch keine Pads erstellt."
 
 msgid "No events found that should be migrated."
-msgstr ""
+msgstr "Keine Veranstaltungen gefunden, die migriert werden sollten."
 
 msgid "No files"
 msgstr "Keine Dateien vorhanden"
@@ -8449,7 +8462,7 @@ msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr "Hinweis: Detaillierte Mitgliederlisten für plattformweite Inhalte werden nicht angezeigt."
 
 msgid "Note: For performance reasons last activity is not tracked precisely within the last month."
-msgstr ""
+msgstr "Hinweis: Aus Performance-Gründen wird die letzte Aktivität nicht exakt innerhalb des letzten Monats erfasst."
 
 msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
 msgstr "Hinweis: Wenn eine Folie nachträglich zu einer Veranstaltung hinzugefügt wird, erscheint diese nicht automatisch in der Veranstaltung, sofern diese Veranstaltung kürzlich besucht wurde und somit aktiv ist. Hierfür ist ein aktives Beenden der Veranstaltung notwendig oder ein 5 minütiges Leerlaufen ohne Teilnehmer, bis die Veranstaltung automatisch beendet wird. "
@@ -8688,7 +8701,7 @@ msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"!
 msgstr "Eins deiner Projekte/Gruppen wurde ins Portal \"%(portal_name)s\" verschoben! <br/><br/> Dein Benutzerkonto für das neue Portal ist das selbe wie für das Alte - du brauchst dich nicht neu zu Registrieren! <br/><br/>Alle alten URLs funktionieren weiterhin und leiten auf die korrekte Seite im neuen Portal um."
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Online (has no location)"
 msgstr "Online (kein Standort)"
@@ -8743,7 +8756,7 @@ msgid "Only users who have the Newsletter opt-in enabled in their profile will r
 msgstr "Nur Nutzende, die das Newsletter-Opt-In in ihrem Profil aktiviert haben, erhalten den Newsletter."
 
 msgid "Onsite"
-msgstr ""
+msgstr "Präsenz"
 
 msgid "Open"
 msgstr "Offen"
@@ -8985,7 +8998,7 @@ msgid "Past Polls"
 msgstr "Archivierte Umfragen"
 
 msgid "Past events dated before this year are not considered for migration."
-msgstr ""
+msgstr "Veranstaltungen vor diesem Kalenderjahr werden bei der Migration nicht berücksichtigt."
 
 msgid "Paste or type the link's URL here"
 msgstr "Füge oder tippe die URL des Links hier ein"
@@ -10269,7 +10282,7 @@ msgid "Show"
 msgstr "Anzeigen"
 
 msgid "Show BBB guest access outside of conference."
-msgstr ""
+msgstr "BBB-Gästezugang außerhalb der Tagung anzeigen."
 
 msgid "Show Call to Action Box"
 msgstr "Zeige die Microsite-Box an"
@@ -10611,7 +10624,7 @@ msgid "Start the migration of Todos to the Task Board in the background."
 msgstr "Starte die Migration von Aufgaben zum Aufgaben-Board im Hintergrund."
 
 msgid "Start the migration the new calendar in the background."
-msgstr ""
+msgstr "Migration des neuen Kalenders im Hintergrund starten."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Start-Time"
@@ -10768,7 +10781,7 @@ msgid "Sustainable Development Goals"
 msgstr "Ziele für nachhaltige Entwicklung"
 
 msgid "Synchronized Event"
-msgstr ""
+msgstr "Synchronisierte Veranstaltung"
 
 msgid "Tag persons"
 msgstr "Personen markieren"
@@ -11256,11 +11269,11 @@ msgstr "Die maximale Anzahl der Teilnehmenden ist "
 
 #, python-format
 msgid "The meeting \"%(object_name)s\" was updated in %(team_name)s."
-msgstr ""
+msgstr "Der Termin \"%(object_name)s\", an dem du teilnimmst, wurde aktualisiert in %(team_name)s."
 
 #, python-format
 msgid "The meeting \"%(object_name)s\" you are attending was updated in %(team_name)s."
-msgstr ""
+msgstr "Der Termin \"%(object_name)s\", an dem du teilnimmst, wurde aktualisiert in %(team_name)s."
 
 msgid "The message was sent to the chosen participants."
 msgstr "Die Nachricht wurde an die gewählten Tagungsteilnehmer geschickt."
@@ -12344,7 +12357,7 @@ msgstr "Eindeutige registrierte Benutzer, die in diesem Zeitraum aktiv waren"
 
 msgctxt "An unknown user placeholder"
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 msgid "Unknown POST action!"
 msgstr "Unbekannte POST-Aktion!"
@@ -12393,10 +12406,10 @@ msgid "Until when should the task be completed?"
 msgstr "Bis wann soll die Aufgabe erledigt sein?"
 
 msgid "Untitled"
-msgstr "Unbenannt"
+msgstr "Ohne Titel"
 
 msgid "Untitled Meeting"
-msgstr ""
+msgstr "Termin ohne Titel"
 
 msgid "Unzip the file archive to a local folder on your hard drive"
 msgstr "Entpacke das Archiv in ein lokales Verzeichnis auf deiner Festplatte"
@@ -12823,7 +12836,7 @@ msgid "Video Conference Server"
 msgstr "VideoTagungs-Server"
 
 msgid "Video call: "
-msgstr ""
+msgstr "Videoanruf:"
 
 msgid "Video conference"
 msgstr "Videokonferenz"
@@ -13364,19 +13377,19 @@ msgid "You are about to deactivate this conference!"
 msgstr "Du bist dabei diese Tagung zu deaktivieren!"
 
 msgid "You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible and will be removed from the website. Your data will still be retained. The conference can be reactivated by you and any other conference organizer."
-msgstr ""
+msgstr "Du bist dabei, diese Tagung zu deaktivieren. Sobald die Tagung deaktiviert ist, ist sie nicht mehr zugänglich und wird von der Website entfernt. Deine Daten bleiben jedoch weiterhin gespeichert. Die Tagung kann von dir und jedem anderen Tagungsorganisator wieder aktiviert werden."
 
 msgid "You are about to deactivate this group!"
 msgstr "Du bist dabei diese Gruppe zu deaktivieren!"
 
 msgid "You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will be removed from the website. Your data will still be retained. The group can be reactivated by you and any other group administrator."
-msgstr ""
+msgstr "Du bist dabei, diese Gruppe zu deaktivieren. Sobald die Gruppe deaktiviert ist, ist sie nicht mehr zugänglich und wird von der Website entfernt. Deine Daten bleiben jedoch weiterhin gespeichert. Die Gruppe kann von dir und allen anderen Gruppen-Administrator/innen wieder aktiviert werden."
 
 msgid "You are about to deactivate this project!"
 msgstr "Du bist dabei dieses Projekt zu deaktivieren!"
 
 msgid "You are about to deactivate this project. When your project is deactivated, it is no longer accessible and will be removed from the website. Your data will still be retained. The project can be reactivated by you and any other project administrator."
-msgstr ""
+msgstr "Du bist dabei, dieses Projekt zu deaktivieren. Sobald das Projekt deaktiviert ist, ist es nicht mehr zugänglich und wird von der Website entfernt. Deine Daten bleiben jedoch weiterhin gespeichert. Das Projekt kann von dir und allen anderen Projekt-Administrator/innen wieder aktiviert werden."
 
 msgid "You are about to delete this conference from this website."
 msgstr "Du bist dabei diese Tagung von dieser Webseite zu löschen."
@@ -13424,7 +13437,7 @@ msgid "You are attending this event"
 msgstr "Du hast angegeben, dass du an dieser Veranstaltung teilnimmst"
 
 msgid "You are attending this meeting"
-msgstr ""
+msgstr "Du nimmst an diesem Termin teil"
 
 msgid "You are blocking this user. Their content will not be visible to you."
 msgstr "Du blockierst diese/n Benutzer/in. Dessen/deren Inhalte sind für dich nicht sichtbar."
@@ -13448,7 +13461,7 @@ msgid "You are following this item"
 msgstr "Du folgst diesem Inhalt"
 
 msgid "You are following this meeting"
-msgstr ""
+msgstr "Du folgst diesem Termin"
 
 msgid "You are following this news post"
 msgstr "Du folgst dieser Neuigkeit"
@@ -13637,7 +13650,7 @@ msgid "You can directly create conference events for rooms from here by using th
 msgstr "Du kannst von hier aus direkt Tagungsveranstaltungen für Räume erstellen, indem du die Steuerelemente für das Dropdown-Menü der einzelnen Räume verwendest."
 
 msgid "You can dismiss the migration, then the migration hint want be shown anymore."
-msgstr ""
+msgstr "Sie können die Migration ausblenden. Dann wird der Migrationshinweis nicht mehr angezeigt."
 
 msgctxt "a link to click on"
 msgid "You can do this here"
@@ -14588,7 +14601,7 @@ msgstr "hat eine Neuigkeit gepostet"
 
 msgctxt "cosinnus membership status"
 msgid "admin"
-msgstr ""
+msgstr "Admin"
 
 msgctxt "time"
 msgid "all day"
@@ -14728,7 +14741,7 @@ msgstr "direkt hier..."
 
 msgctxt "cosinnus membership status"
 msgid "going"
-msgstr ""
+msgstr "Nimmt teil"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_10_documentsetting"
@@ -14890,7 +14903,7 @@ msgstr "Like"
 
 msgctxt "cosinnus membership status"
 msgid "manager"
-msgstr ""
+msgstr "Manager"
 
 msgctxt "the_app"
 msgid "marketplace"
@@ -14905,11 +14918,11 @@ msgstr "max. 10 MB"
 
 msgctxt "cosinnus membership status"
 msgid "maybe going"
-msgstr ""
+msgstr "Nimmt vielleicht teil"
 
 msgctxt "cosinnus membership status"
 msgid "member"
-msgstr ""
+msgstr "Mitglied"
 
 # The Cosinnus App Name
 msgctxt "the_app"
@@ -14945,7 +14958,7 @@ msgstr "wird aktuell nicht angezeigt"
 
 msgctxt "cosinnus_event_attendance"
 msgid "not going"
-msgstr ""
+msgstr "Nimmt nicht teil"
 
 msgid "not specified"
 msgstr "nicht angegeben"
@@ -14995,11 +15008,11 @@ msgstr "Passwort"
 
 msgctxt "cosinnus membership status"
 msgid "pending"
-msgstr ""
+msgstr "Mitgliedschaft wurde beantragt..."
 
 msgctxt "cosinnus membership status"
 msgid "pending-invited"
-msgstr ""
+msgstr "Wurde eingeladen..."
 
 msgid "pin to enter for telephone participants"
 msgstr "Pin zur Eingabe für Telefonteilnehmende"
