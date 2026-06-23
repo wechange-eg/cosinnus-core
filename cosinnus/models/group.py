@@ -1152,6 +1152,7 @@ class CosinnusBaseGroup(
         blank=True,
         null=True,
     )
+    # TODO: remove unused feature, if ctag sync works
     nextcloud_calendar_sync_required = models.BooleanField(
         _('Nextcloud Group Calendar CalDAV Sync Required'),
         default=False,
