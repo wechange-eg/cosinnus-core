@@ -37,6 +37,9 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     events_reflections_enabled = serializers.SerializerMethodField()
     events_migration_url = serializers.SerializerMethodField()
 
+    # nextcloud
+    nextcloud_id = serializers.CharField(source='nextcloud_group_id', read_only=True)
+
     class Meta:
         model = get_cosinnus_group_model()
         fields = [
@@ -54,6 +57,7 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
             'events_event_description_required',
             'events_reflections_enabled',
             'events_migration_url',
+            'nextcloud_id',
         ]
 
     def get_bbb_available(self, obj):
