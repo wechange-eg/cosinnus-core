@@ -1156,6 +1156,13 @@ class CosinnusBaseGroup(
         _('Nextcloud Group Calendar CalDAV Sync Required'),
         default=False,
     )
+    nextcloud_calendar_ctag = models.CharField(
+        _('Nextcloud Group Calendar CalDAV CTag'),
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text=_('Clear to enforce a re-sync off group events.'),
+    )
 
     # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(
