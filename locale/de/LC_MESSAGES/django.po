@@ -1495,6 +1495,9 @@ msgstr ""
 "- (RocketChat) Es wurden Verbesserrungen für mehr Stabilität und Geschwindigkeit der Integration mit RocketChat vorgenommen (falls aktiviert).\n"
 "- Die neuesten Sicherheitsupdates wurden eingespielt und weitere kleinere Fehlerbehebungen vorgenommen.\n"
 
+msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den der Nextcloud-Ordner einer Gruppe/eines Projekts nicht mehr zugänglich war, wenn die Cloud-App nach einer vorherigen Deaktivierung wieder aktiviert wurde.\n"
+
 msgid "- Fixed a bug where the password reset and password change pages would show a page error when a new password was entered that did not match the password requirements.\n"
 msgstr "- Es wurde ein Fehler behoben, durch den auf den Seiten zum Zurücksetzen und Ändern des Passworts ein Seitenfehler auftrat, wenn ein neues Passwort eingegeben wurde, das nicht den Passwortanforderungen entsprach.\n"
 

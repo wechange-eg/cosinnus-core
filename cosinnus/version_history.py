@@ -19,6 +19,18 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.7.12': {
+        'datetime': datetime(2026, 4, 26, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.7.12'),
+        'short_text': _('This update includes small bugfixes:'),
+        'full_text': [
+            _(
+                '- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its '
+                'cloud app was reactivated after it had been deactivated before.\n'
+            ),
+        ],
+        'display_conditional': settings.COSINNUS_CLOUD_ENABLED,
+    },
     '2.7.10': {
         'datetime': datetime(2026, 3, 31, tzinfo=pytz.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.10'),
@@ -43,9 +55,7 @@ UPDATES = {
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.9'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
-            _(
-                '- Fixed an error with the profile avatar synchronisation with the Nextcloud.\n'
-            ),
+            _('- Fixed an error with the profile avatar synchronisation with the Nextcloud.\n'),
         ],
         'display_conditional': settings.COSINNUS_CLOUD_ENABLED,
     },
@@ -65,9 +75,7 @@ UPDATES = {
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.7'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
-            _(
-                '- Fixed a page error during the profile setup when entering a profile location.\n'
-            ),
+            _('- Fixed a page error during the profile setup when entering a profile location.\n'),
         ],
     },
     '2.7.6': {
@@ -97,9 +105,7 @@ UPDATES = {
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.2'),
         'short_text': _('This update includes quality of life updates:'),
         'full_text': [
-            _(
-                '- Added numerous user interface and accessibility improvements throughout the site.\n'
-            ),
+            _('- Added numerous user interface and accessibility improvements throughout the site.\n'),
         ],
     },
     '2.7.0': {

@@ -1391,6 +1391,9 @@ msgid ""
 "- The latest security updates have been applied and further minor bugfixes have been made.\n"
 msgstr ""
 
+msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
+msgstr ""
+
 msgid "- Fixed a bug where the password reset and password change pages would show a page error when a new password was entered that did not match the password requirements.\n"
 msgstr ""
 
