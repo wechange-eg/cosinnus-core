@@ -99,6 +99,7 @@ class GroupSettingsAPITest(APITestCase):
                 'events_event_description_required': False,
                 'events_reflections_enabled': True,
                 'events_migration_url': None,
+                'nextcloud_id': None,
                 'bbb_settings': {
                     'bbb_params': {
                         'mic_starts_on': False,

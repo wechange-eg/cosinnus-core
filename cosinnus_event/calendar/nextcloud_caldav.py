@@ -2,7 +2,7 @@ import datetime
 import logging
 import re
 from typing import Optional
-from urllib.parse import quote_plus
+from urllib.parse import quote_plus, urlparse
 from uuid import uuid1
 
 from annoying.functions import get_object_or_None
@@ -230,6 +230,45 @@ class NextcloudCaldavConnection:
             )
             group.calendar_migration_set_status(group.CALENDAR_MIGRATION_STATUS_FAILED)
 
+    def get_group_calendar_ctags(self, groups):
+        """Helper to receive calendar CTags for group calendars
+        :param  groups: groups list to check
+        @return: dictionary group-id x calendar-ctag
+        @raises: `NextcloudCaldavConnectionException` on connection errors, `Exception` on anything else."""
+        groups_ctags = {}
+
+        # make a dict caldav-path x group-id for calendar url matching
+        groups_by_caldav_path = {
+            urlparse(group.nextcloud_calendar_url).path: group.id for group in groups if group.nextcloud_calendar_url
+        }
+
+        try:
+            # make a raw propfind request with depth=1 on the admin home to the CTags of all calendars
+            props = """
+                <d:propfind xmlns:d="DAV:" xmlns:cs="http://calendarserver.org/ns/">
+                    <cs:getctag />
+                </d:propfind>
+            """
+            principal = self.caldav_client.principal()
+            response = self.caldav_client.propfind(url=principal.calendar_home_set.url, props=props, depth=1)
+
+            # parse the response
+            objects = response.find_objects_and_props()
+            for path, props in objects.items():
+                group_id = groups_by_caldav_path.get(path)
+                if group_id:
+                    # calendar is a group calendar, store the ctag
+                    ctag = props.get('{http://calendarserver.org/ns/}getctag')
+                    if hasattr(ctag, 'text') and ctag.text:
+                        groups_ctags[group_id] = ctag.text
+        except Exception as e:
+            logger.warning(
+                'NC Calendar: getting ctags for calendar sync failed by caldav connection!',
+                extra={'exception': e},
+            )
+            raise NextcloudCaldavConnectionException('Getting ctags for calendar sync failed by caldav connection!')
+        return groups_ctags
+
     def group_sync_private_events(self, group, force_resync=False) -> Optional[str]:
         """Sync NexCloud caldav events for a group.
         :param force_resync: force complete re-sync ignoring the sync token
@@ -260,7 +299,7 @@ class NextcloudCaldavConnection:
                     if len(caldav_events) > 0:
                         # Inspect the raw text of the first object
                         raw_data = getattr(caldav_events.objects[0], 'data', '')
-                        if 'This is the WebDAV interface' in raw_data or '<html' in raw_data.lower():
+                        if raw_data and ('This is the WebDAV interface' in raw_data or '<html' in raw_data.lower()):
                             # sync token was invalid, do a full resync, record as OK error
                             caldav_events = calendar.objects_by_sync_token(load_objects=True)
                             error_messages += f'[Group {group.id}]: OK, but sync token expired so did a full resync.\n'

@@ -423,7 +423,6 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
         readonly_fields += [
             'nextcloud_calendar_last_sync',
-            'nextcloud_calendar_sync_required',
         ]
 
     raw_id_fields = ('parent',)
@@ -446,6 +445,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             'nextcloud_calendar_publish_url',
             'nextcloud_calendar_sync_token',
             'nextcloud_calendar_last_sync',
+            'nextcloud_calendar_ctag',
         ]
     if settings.COSINNUS_CONFERENCES_ENABLED:
         inlines = [CosinnusConferenceSettingsInline]

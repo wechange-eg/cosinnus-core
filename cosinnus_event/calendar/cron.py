@@ -1,5 +1,6 @@
 import logging
 
+from django.utils.timezone import now
 from django_cron import Schedule
 
 from cosinnus.conf import settings
@@ -15,49 +16,58 @@ class CalendarSyncCaldavEvents(CosinnusCronJobBase):
     Syncs all groups, which is slow and should not be run often.
     """
 
-    # TODO increase after FE adjustment to "nextcloud_calendar_sync_required", e.g. to every hour or even once a day.
-    RUN_EVERY_MINS = 5
+    RUN_EVERY_MINS = 15
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
 
     cosinnus_code = 'cosinnus_event.calendar.sync_caldav_events'
-
-    def get_queryset(self):
-        return get_cosinnus_group_model().objects.filter(is_active=True).exclude(nextcloud_calendar_url=None)
 
     def do(self):
         if not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
             return
 
         calendar = NextcloudCaldavConnection()
-        groups = self.get_queryset()
+        groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(nextcloud_calendar_url=None)
         sync_count = 0
         errors = ''
 
+        # get ctags for all group calendars
+        try:
+            groups_ctags = calendar.get_group_calendar_ctags(groups)
+        except Exception as e:
+            # abort sync without ctags information
+            return f'ERROR: Sync aborted as no ctags could be retrieved: {e}'
+
         for group in groups:
-            try:
-                error_msg = calendar.group_sync_private_events(group)
-                sync_count += 1
-            except Exception as e:
-                error_msg = f'[Group {group.id}] ERROR: Sync failed: {e}'
-                logger.error(
-                    'CalendarSyncCaldavEvents: Sync of group failed!',
-                    extra={'exception': e, 'group_id': group.id},
-                )
-            if error_msg:
-                errors += error_msg + '\n'
+            sync_group_calendar = True
+            # check group ctag to decide if the group calendar should be synced
+            group_ctag = groups_ctags.get(group.id)
+            if group_ctag:
+                if group.nextcloud_calendar_ctag and group.nextcloud_calendar_ctag == group_ctag:
+                    # ctag did not change, no sync needed
+                    sync_group_calendar = False
+            else:
+                logger.warning('NC Calendar sync: No CTag received for group!', extra={'group_id': group.id})
+
+            if sync_group_calendar:
+                # ctag changed, syncing group calendar
+                try:
+                    # add a timestamp to group setting that a sync is attempted for debugging
+                    group.settings['calendar_last_sync_attempt'] = now()
+                    group.save(update_fields=['settings'])
+
+                    # sync group calendar
+                    error_msg = calendar.group_sync_private_events(group)
+                    if not error_msg:
+                        # sync success, save new ctag
+                        group.nextcloud_calendar_ctag = group_ctag
+                        group.save(update_fields=['nextcloud_calendar_ctag'])
+                    sync_count += 1
+                except Exception as e:
+                    error_msg = f'[Group {group.id}] ERROR: Sync failed: {e}'
+                    logger.error(
+                        'CalendarSyncCaldavEvents: Sync of group failed!',
+                        extra={'exception': e, 'group_id': group.id},
+                    )
+                if error_msg:
+                    errors += error_msg + '\n'
         return f'{sync_count}/{len(groups)} groups synced.' + (f'\n\nErrors/Messages:\n\n{errors}' if errors else '')
-
-
-class CalendarSyncCaldavEventsOfFlaggedGroups(CalendarSyncCaldavEvents):
-    """Syncs NextCloud CalDav events For groups that have the "nextcloud_calendar_sync_required" Flag set.
-    The flag is set by the Frontend upon changing an internal event, to mark groups that need an update."""
-
-    RUN_EVERY_MINS = 5
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-
-    cosinnus_code = 'cosinnus_event.calendar.sync_caldav_events_of_flagged_groups'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(nextcloud_calendar_sync_required=True)
-        return queryset

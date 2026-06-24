@@ -346,6 +346,7 @@ class CosinnusCalendarSyncedEventsViewSet(
     )
     def sync_required(self, request, group_id):
         """API to inform the Backend that a Caldav sync is required due to changes to internal events."""
+        # TODO: remove unused feature, if ctag sync works
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

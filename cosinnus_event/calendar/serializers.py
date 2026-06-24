@@ -630,6 +630,8 @@ class CosinnusCalendarSyncedEventSerializer(
 class CosinnusCalendarSynceRequiredSerializer(serializers.Serializer):
     """Serializer for the sync_required action for internal events."""
 
+    # TODO: remove unused feature, if ctag sync works
+
     required = serializers.BooleanField()
 
     def save(self, **kwargs):
