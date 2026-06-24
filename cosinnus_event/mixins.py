@@ -1,11 +1,11 @@
 import logging
-from threading import Thread
 
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models, transaction
 from django.urls import reverse
 
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus_event.conf import settings
 
 logger = logging.getLogger('cosinnus')
@@ -147,7 +147,7 @@ class BBBRoomMixin(models.Model):
 
             if threaded:
 
-                class CreateBBBRoomThread(Thread):
+                class CreateBBBRoomThread(CosinnusWorkerThread):
                     def run(self):
                         create_room()
 

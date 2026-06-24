@@ -8,11 +8,11 @@
         data-type="star" data-ct="{{ object.get_content_type }}" data-id="{{ object.id }}"
         {% if not user|can_likefollowstar:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% else %}href="#"{% endif %}>
     <span class="show-unselected">
-        <i class="far fa-star prevent-click"></i>
+        <i class="far fa-bookmark prevent-click"></i>
         {% get_setting "COSINNUS_STARRED_STAR_LABEL" %}
     </span>
     <span class="show-selected">
-        <i class="fas fa-star prevent-click"></i>
+        <i class="fas fa-bookmark prevent-click"></i>
         {% get_setting "COSINNUS_STARRED_STARRING_LABEL" %}
     </span>
 </a>

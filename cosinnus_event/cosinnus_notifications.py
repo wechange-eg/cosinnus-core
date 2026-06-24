@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
+from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext_lazy
 
@@ -12,16 +13,20 @@ from django.utils.translation import ngettext_lazy
 
 """ Signal definitions """
 event_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+synced_event_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 doodle_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 tagged_event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 voted_event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 attending_event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 followed_group_event_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+followed_group_synced_event_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 followed_group_doodle_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 following_event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 following_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_synced_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 attending_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+attending_synced_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 following_doodle_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 following_doodle_voted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
@@ -64,12 +69,34 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
         'show_like_button': True,
         'show_follow_button': True,
+    },
+    # Note: the creator and sender_name properties are missing in synced event notifications
+    'synced_event_created': {
+        'label': _('A new meeting was scheduled'),
+        'signals': [synced_event_created],
+        'default': True,
+        'moderatable_content': True,
+        'alert_text': format_lazy('{text_frag}: %(object_name)s', text_frag=_('A new meeting was scheduled')),
+        'alert_text_multi': _('%(count)d new meetings were scheduled'),
+        'alert_multi_type': 2,
+        'is_html': True,
+        'event_text': _('A new meeting was scheduled'),
+        'subject_text': _('A new meeting: "%(object_name)s" was scheduled in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'title',
+            'object_url': 'get_absolute_url',
+            'object_text': 'plaintext_note',
+            'image_url': 'attached_image.static_image_url_thumbnail',
+            'event_meta': 'from_date',
+        },
+        'show_like_button': False,  # synced events cannot be liked for now
+        'show_follow_button': False,  # synced events cannot be followed for now
     },
     'doodle_created': {
         'label': _('A user created a new event poll'),
@@ -87,7 +114,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
         },
         'show_follow_button': True,
@@ -222,12 +249,36 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
         'show_like_button': True,
         'show_follow_button': True,
+    },
+    # Note: the creator and sender_name properties are missing in synced event notifications
+    'followed_group_synced_event_created': {
+        'label': _('A new meeting was scheduled in a team you are following'),
+        'signals': [followed_group_synced_event_created],
+        'multi_preference_set': 'MULTI_followed_object_notification',
+        'supercedes_notifications': ['synced_event_created'],
+        'requires_object_state_check': 'group.is_user_following',
+        'hidden': True,
+        'alert_text': format_lazy('{text_frag}: %(object_name)s', text_frag=_('A new meeting was scheduled')),
+        'alert_text_multi': _('%(count)d new meetings were scheduled'),
+        'alert_multi_type': 2,
+        'is_html': True,
+        'event_text': _('A new meeting was scheduled in %(team_name)s (which you follow)'),
+        'subject_text': _('A new meeting: "%(object_name)s" was scheduled in %(team_name)s (which you follow).'),
+        'data_attributes': {
+            'object_name': 'title',
+            'object_url': 'get_absolute_url',
+            'object_text': 'plaintext_note',
+            'image_url': 'attached_image.static_image_url_thumbnail',
+            'event_meta': 'from_date',
+        },
+        'show_like_button': False,  # synced events cannot be liked for now
+        'show_follow_button': False,  # synced events cannot be followed for now
     },
     'followed_group_doodle_created': {
         'label': _('A user created a new event poll in a team you are following'),
@@ -245,7 +296,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
         },
         'show_follow_button': True,
@@ -300,7 +351,27 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
+            'image_url': 'attached_image.static_image_url_thumbnail',
+            'event_meta': 'from_date',
+        },
+    },
+    'following_synced_event_changed': {
+        'label': _('A scheduled meeting was updated'),
+        'signals': [following_synced_event_changed],
+        'multi_preference_set': 'MULTI_followed_object_notification',
+        'requires_object_state_check': 'is_user_following',
+        'hidden': True,
+        'alert_text': format_lazy('{text_frag}: %(object_name)s', text_frag=_('A scheduled meeting was updated')),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are following this meeting'),
+        'is_html': True,
+        'event_text': _('A meeting you are following was updated'),
+        'subject_text': _('The meeting "%(object_name)s" was updated in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'title',
+            'object_url': 'get_absolute_url',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -319,7 +390,28 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
+            'image_url': 'attached_image.static_image_url_thumbnail',
+            'event_meta': 'from_date',
+        },
+    },
+    'attending_synced_event_changed': {
+        'label': _('A meeting you are attending was updated'),
+        'signals': [attending_synced_event_changed],
+        'requires_object_state_check': 'is_user_attending',
+        'default': True,
+        'alert_text': format_lazy(
+            '{text_frag}: %(object_name)s', text_frag=_('A meeting you are attending was updated')
+        ),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are attending this meeting'),
+        'is_html': True,
+        'event_text': _('A meeting you are attending was updated'),
+        'subject_text': _('The meeting "%(object_name)s" you are attending was updated in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'title',
+            'object_url': 'get_absolute_url',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
             'event_meta': 'from_date',
         },
@@ -339,7 +431,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
         },
     },
@@ -363,7 +455,7 @@ notifications = {
         'data_attributes': {
             'object_name': 'title',
             'object_url': 'get_absolute_url',
-            'object_text': 'note',
+            'object_text': 'plaintext_note',
             'image_url': 'attached_image.static_image_url_thumbnail',
         },
     },

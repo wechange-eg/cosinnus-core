@@ -48,7 +48,7 @@ from wagtail.core.templatetags.wagtailcore_tags import richtext
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
-from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.core.registries.group_models import UnsupportedGroupTypeError, group_model_registry
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, CommaSeparatedSelect2MultipleWidget
 from cosinnus.models import UserBlock
 from cosinnus.models.conference import CosinnusConferenceApplication
@@ -64,7 +64,7 @@ from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.models.tagged import BaseTagObject, CosinnusTopicCategory, LikeObject, get_tag_object_model
 from cosinnus.utils.functions import convert_html_to_string, ensure_list_of_ints
-from cosinnus.utils.html import render_html_with_variables
+from cosinnus.utils.html import is_html, render_html_with_variables, sanitize_html
 from cosinnus.utils.permissions import (
     check_group_create_objects_access,
     check_object_likefollowstar_access,
@@ -490,11 +490,11 @@ def cosinnus_menu_v2(context, template='cosinnus/v2/navbar/navbar.html', request
         projects_invited = CosinnusProject.objects.get_for_user_invited(request.user)
         conferences_invited = CosinnusConference.objects.get_for_user_invited(request.user)
 
-        groups_invited = [DashboardItem(group) for group in societies_invited]
-        groups_invited += [DashboardItem(group) for group in projects_invited]
+        groups_invited = [DashboardItem(group, url=group.get_microsite_url()) for group in societies_invited]
+        groups_invited += [DashboardItem(group, url=group.get_microsite_url()) for group in projects_invited]
         # for conferences, only show invites if becoming a member is currently possible
         groups_invited += [
-            DashboardItem(conference)
+            DashboardItem(conference, url=conference.get_microsite_url())
             for conference in conferences_invited
             if conference.membership_applications_possible
         ]
@@ -827,7 +827,7 @@ def group_aware_url_name(view_name, group_or_group_slug, portal_id=None):
     # retrieve that type's prefix and add to URL viewname
     try:
         prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
-    except ImproperlyConfigured:
+    except UnsupportedGroupTypeError:
         # view_name can potentially be returned as None for unregistered groups, return None here as generating URLs
         # is not critical enough for a full server error
         return None
@@ -1151,6 +1151,21 @@ def textfield(text, arg=''):
 
 
 @register.filter
+def textfield_with_html(text, arg=''):
+    """
+    Return the text as safe HTML.
+    Markdown descriptions are converted to HTML. HTML descriptions are sanitized.
+    """
+    if not text:
+        return text
+    if is_html(text):
+        description = sanitize_html(text)
+    else:
+        description = textfield(text)
+    return description
+
+
+@register.filter
 def linebreaksoneline(text, arg=''):
     """Removes all linebreaks so the given text becomes a single line."""
     if not text:
@@ -1166,6 +1181,14 @@ def remove_blank_lines(text):
         return ''
     text = '\n'.join(filter(str.strip, text.splitlines()))
     return text
+
+
+@register.filter
+def remove_indentation(text):
+    """Removes leading whitespace from each line while preserving line breaks."""
+    if not text:
+        return ''
+    return '\n'.join(line.lstrip() for line in text.splitlines())
 
 
 @register.filter

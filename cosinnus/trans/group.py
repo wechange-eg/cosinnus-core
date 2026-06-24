@@ -46,9 +46,22 @@ class CosinnusProjectTransBase(object):
     )
     DEACTIVATE_EXPLANATION = _(
         'You are about to deactivate this project. When your project is deactivated, it is no longer accessible and '
-        'will be removed from the website. However, your data will still be retained.\n\n Please contact the '
-        'administrators of this portal if you would like to irrevocably delete all of the content. Until then the '
-        'project can be reactivated by your and any other project administrator.'
+        'will be removed from the website. Your data will still be retained. The project can be reactivated by you and '
+        'any other project administrator.'
+    )
+    DELETE = _('Delete Project')
+    DELETE_WARNING = _('You are about to delete this project from this website.')
+    DELETE_EXPLANATION = _(
+        'By clicking on the button below, this project and all content posted there will be irrevocably deleted.\n\n'
+        'The pads, news, uploaded files and other content created by you and the members will no longer remain on the '
+        'website. The channel created on Rocket Chat will be deleted. Profile direct messages with other members will '
+        'remain. If you still wish to receive content, you can do so now by downloading the content from the relevant '
+        'pages.\n\n'
+        'The project will first be deactivated and then completely removed from the platform. After 30 days and only '
+        'then will it be permanently deleted from our database. The account may be stored in our backup systems for up '
+        'to 6 months. If this is too long for you, please contact the support of this platform for immediate '
+        'deletion.\n\n'
+        'During this 30-day period, the URL of your project is reserved and cannot be used to register a new project.'
     )
     CONVERT_ITEMS_TO = _('Convert selected items to Projects')
     CONTACT_PERSON = _('Project administrator')
@@ -167,9 +180,22 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     )
     DEACTIVATE_EXPLANATION = _(
         'You are about to deactivate this group. When your group is deactivated, it is no longer accessible and will '
-        'be removed from the website. However, your data will still be retained.\n\n Please contact the administrators '
-        'of this portal if you would like to irrevocably delete all of the content. Until then the group can be '
-        'reactivated by your and any other group administrator.'
+        'be removed from the website. Your data will still be retained. The group can be reactivated by you and any '
+        'other group administrator.'
+    )
+    DELETE = _('Delete Group')
+    DELETE_WARNING = _('You are about to delete this group from this website.')
+    DELETE_EXPLANATION = _(
+        'By clicking on the button below, this group and all content posted there will be irrevocably deleted.\n\n'
+        'The pads, news, uploaded files and other content created by you and the members will no longer remain on the '
+        'website. The channel created on Rocket Chat will be deleted. Profile direct messages with other members will '
+        'remain. If you still wish to receive content, you can do so now by downloading the content from the relevant '
+        'pages.\n\n'
+        'The group will first be deactivated and then completely removed from the platform. After 30 days and only '
+        'then will it be permanently deleted from our database. The account may be stored in our backup systems for up '
+        'to 6 months. If this is too long for you, please contact the support of this platform for immediate '
+        'deletion.\n\n'
+        'During this 30-day period, the URL of your group is reserved and cannot be used to register a new group.'
     )
     CONVERT_ITEMS_TO = _('Convert selected items to Groups')
     CONTACT_PERSON = _('Group administrator')
@@ -287,9 +313,23 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     )
     DEACTIVATE_EXPLANATION = _(
         'You are about to deactivate this conference. When your conference is deactivated, it is no longer accessible '
-        'and will be removed from the website. However, your data will still be retained.\n\n Please contact the '
-        'administrators of this portal if you would like to irrevocably delete all of the content. Until then the '
-        'conference can be reactivated by your and any other conference organizer.'
+        'and will be removed from the website. Your data will still be retained. The conference can be reactivated by '
+        'you and any other conference organizer.'
+    )
+    DELETE = _('Delete Conference')
+    DELETE_WARNING = _('You are about to delete this conference from this website.')
+    DELETE_EXPLANATION = _(
+        'By clicking on the button below, this conference and all content posted there will be irrevocably deleted.\n\n'
+        'The pads, news, uploaded files and other content created by you and the members will no longer remain on the '
+        'website. The channel created on Rocket Chat will be deleted. Profile direct messages with other members will '
+        'remain. If you still wish to receive content, you can do so now by downloading the content from the relevant '
+        'pages.\n\n'
+        'The conference will first be deactivated and then completely removed from the platform. After 30 days and '
+        'only then will it be permanently deleted from our database. The account may be stored in our backup systems '
+        'for up to 6 months. If this is too long for you, please contact the support of this platform for immediate '
+        'deletion.\n\n'
+        'During this 30-day period, the URL of your conference is reserved and cannot be used to register a new '
+        'conference.'
     )
     CONVERT_ITEMS_TO = _('Convert selected items to Conferences')
     CONTACT_PERSON = _('Conference contact person')

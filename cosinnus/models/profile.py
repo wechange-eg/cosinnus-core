@@ -34,7 +34,7 @@ from timezone_field import TimeZoneField
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
-from cosinnus.core.mail import convert_html_to_plaintext, send_mail_or_fail_threaded
+from cosinnus.core.mail import send_mail_or_fail_threaded
 from cosinnus.dynamic_fields.dynamic_fields import CosinnusDynamicFieldsModelMixin
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignmentModelMixin
@@ -43,6 +43,7 @@ from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.models.tagged import LikeableObjectMixin, LikeObject
 from cosinnus.utils.files import get_avatar_filename, image_thumbnail, image_thumbnail_url
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.html import convert_html_to_plaintext
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
@@ -197,6 +198,12 @@ class BaseUserProfile(
         help_text=(
             'Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`'
         ),
+    )
+    inactivity_notification_sent_at = models.DateTimeField(
+        _('Inactivity notification sent at'),
+        default=None,
+        blank=True,
+        null=True,
     )
     scheduled_for_deletion_at = models.DateTimeField(
         _('Scheduled for Deletion at'),

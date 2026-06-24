@@ -19,355 +19,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Sender and Recipient cannot be both undefined."
-msgstr "Ο αποστολέας και ο παραλήπτης δεν μπορούν να είναι και οι δυο απροσδιόριστοι."
-
-msgid "Visitor's email is in excess."
-msgstr "Το e-mail του επισκέπτη είναι σε περίσσεια."
-
-msgid "Visitor's email is missing."
-msgstr "Το e-mail του επισκέπτη λείπει."
-
-msgid "Reading date must be later than sending date."
-msgstr "Η ημερομηνία ανάγνωσης πρέπει να είναι μεταγενέστερη της ημερομηνίας αποστολής."
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr "Η ημερομηνία διαγραφής πρέπει να είναι μεταγενέστερη της ημερομηνίας αποστολής."
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr "Η ημερομηνία διαγραφής από τον αποδέκτη πρέπει να είναι μεταγενέστερη της ημερομηνίας αποστολής."
-
-msgid "Response date must be later than sending date."
-msgstr "Η ημερομηνία ανταπόκρισης πρέπει να είναι μεταγενέστερη της ημερομηνίας αποστολής."
-
-msgid "The message cannot be replied without having been read."
-msgstr "Το μήνυμα δεν μπορεί να απαντηθεί χωρίς να έχει πρώτα διαβάσει."
-
-msgid "Response date must be later than reading date."
-msgstr "Η ημερομηνία της απόκρισης πρέπει να είναι μεταγενέστερη της ημερομηνίας ανάγνωσης."
-
-msgid "Response date cannot be set without at least one reply."
-msgstr "Η ημερομηνία της ανταπόκρισης δεν μπορεί να ρυθμιστεί χωρίς μια τουλάχιστον απάντηση."
-
-msgid "The message cannot be replied without being in a conversation."
-msgstr "Το μήνυμα δεν μπορεί να απαντηθεί χωρίς να είναι σε μια συνομιλία."
-
-msgid "Message"
-msgstr "Μήνυμα"
-
-msgid "Dates"
-msgstr "Ημερομηνίες"
-
-msgid "Moderation"
-msgstr "Τροποποίηση"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr "Μερικοί χρήστες είναι άγνωστοι ή δεν είναι πλεον ενεργοί: {users}."
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr "Βεβαιωθείτε ότι αυτή η τιμή έχει το πολύ {limit_value} διακριτές θέσεις (έχει {show_value})."
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr "Βεβαιωθείτε ότι αυτή η τιμή έχει τουλάχιστον {limit_value} διακριτές θέσεις (έχει {show_value})."
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr "Τα παρακάτω ονόματα απορρίπτονται: {users}."
-
-#, python-brace-format
-msgid "{username}"
-msgstr "{username}"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr "{username} ({reason})"
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr "Δεν ήταν εφικτή η αποστολή στους χρήστες: {users}."
-
-msgid "Recipients"
-msgstr "Αποδέκτες"
-
-msgid "Recipient"
-msgstr "Αποδέκτης"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "Undefined recipient."
-msgstr "Απροσδιόριστος παραλήπτης."
-
-msgid "Additional recipients"
-msgstr "Πρόσθετοι αποδέκτες"
-
-msgid "Additional recipient"
-msgstr "Πρόσθετος παραλήπτης"
-
-msgid "Message Rejected"
-msgstr "Το μήνυμα έχει απορριφθεί"
-
-msgid "Your message has been rejected"
-msgstr "Το μήνυμά σας έχει απορριφθεί"
-
-msgid "Message Received"
-msgstr "Μήνυμα Ελήφθη"
-
-msgid "You have received a message"
-msgstr "Έχετε ένα μήνυμα"
-
-msgid "Reply Received"
-msgstr "Απάντηση ελήφθη"
-
-msgid "You have received a reply"
-msgstr "Έχετε λάβει μια απάντηση"
-
-msgid "Pending"
-msgstr "Σε αναμονή"
-
-msgid "Accepted"
-msgstr "Αποδεκτά"
-
-msgid "Rejected"
-msgstr "Απορρίφθηκαν"
-
-msgid "subject"
-msgstr "θέμα"
-
-msgid "body"
-msgstr "σώμα"
-
-msgid "sender"
-msgstr "αποστολέας"
-
-msgid "recipient"
-msgstr "αποδέκτης"
-
-msgid "visitor"
-msgstr "επισκέπτης"
-
-msgid "parent message"
-msgstr "μήνυμα γονέας"
-
-msgid "root message"
-msgstr "αρχικό μήνυμα"
-
-msgid "sent at"
-msgstr "εστάλη στις"
-
-msgid "read at"
-msgstr "διαβάστηκε στις"
-
-msgid "replied at"
-msgstr "απαντήθηκε σε"
-
-msgid "archived by sender"
-msgstr "αρχειοθέτηση ανά αποστολέα"
-
-msgid "archived by recipient"
-msgstr "αρχειοθέτηση ανά παραλήπτη"
-
-msgid "deleted by sender at"
-msgstr "έχει διαγραφεί από τον αποστολέα στις"
-
-msgid "deleted by recipient at"
-msgstr "έχει διαγραφεί από τον αποδέκτη στις"
-
-msgid "status"
-msgstr "κατάσταση"
-
-msgid "moderator"
-msgstr "διαχειριστής"
-
-msgid "moderated at"
-msgstr "τροποποιήθηκε στις"
-
-msgid "rejection reason"
-msgstr "λόγος απόρριψης"
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-msgid "message"
-msgstr "μήνυμα"
-
-msgid "messages"
-msgstr "μηνύματα"
-
-msgid "Undefined sender."
-msgstr "Απροσδιόριστος αποστολέας."
-
-msgid "pending message"
-msgstr "μήνυμα εν αναμονή"
-
-msgid "pending messages"
-msgstr "μηνύματα που εκκρεμούν"
-
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] "Παρακαλούμε διορθώστε το παρακάτω λάθος."
-msgstr[1] "Παρακαλούμε διορθώστε τα παρακάτω λάθη."
-
-msgid "Accept"
-msgstr "Αποδοχή"
-
-msgid "Reject"
-msgstr "Απόρριψη"
-
-msgid "Archived Messages"
-msgstr "Αρχείο μηνυμάτων"
-
-msgid "Messages in this folder will never be removed. You can use this folder for long term storage."
-msgstr "Τα μηνύματα σε αυτό το φάκελο δεν θα αφαιρεθούν ποτέ. Μπορείτε να τον χρησιμοποιήσετε  για μακροχρόνια αποθήκευση."
-
-msgid "Messaging"
-msgstr "Μηνύματα"
-
-msgid "Inbox"
-msgstr "Εισερχόμενα"
-
-msgid "Sent Messages"
-msgstr "Απεσταλμένα"
-
-msgid "Write"
-msgstr "Γράψτε"
-
-msgid "Archives"
-msgstr "Αρχεία"
-
-msgid "Trash"
-msgstr "Σκουπίδια"
-
-msgid "Sorry, this page number is invalid."
-msgstr "Λυπούμαι, ο αριθμός αυτής της σελίδας δεν είναι έγκυρος."
-
-msgid "by conversation"
-msgstr "κατά συνομιλία"
-
-msgid "by message"
-msgstr "ανά μήνυμα"
-
-msgid "Delete"
-msgstr "Διαγράψτε"
-
-msgid "Archive"
-msgstr "Αρχείο"
-
-msgid "Undelete"
-msgstr "Ξεδιαγράψτε"
-
-msgid "Action"
-msgstr "Ενέργεια"
-
-msgid "Sender"
-msgstr "Αποστολέας"
-
-msgid "Subject"
-msgstr "Θέμα"
-
-msgid "Date"
-msgstr "Ημερομηνία"
-
-msgid "g:i A,M j,n/j/y"
-msgstr "g:i A,M j,n/j/y"
-
-msgid "No messages."
-msgstr "Δεν υπάρχουν μηνύματα."
-
-msgid "Send"
-msgstr "Αποστολή"
-
-msgid "Dear user,"
-msgstr "Αγαπητέ χρήστη,"
-
-#, python-format
-msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
-msgstr "Στις %(date)s , ζητήσατε να στείλετε ένα μήνυμα στον χρήστη '%(recipient)s'."
-
-msgid "Your message has been rejected by the moderator"
-msgstr "Το μήνυμά σας έχει απορριφθεί από το διαχειριστή"
-
-msgid ", for the following reason:"
-msgstr ", για τους ακόλουθους λόγους:"
-
-#, python-format
-msgid "On %(date)s, you sent a message to the user '%(sender)s'."
-msgstr "Στις %(date)s, στείλατε ένα μήνυμα στον χρήστη ' %(sender)s '."
-
-msgid "Your correspondent has given you an answer."
-msgstr "Ο συνομιλητής σας έχει δώσει μια απάντηση."
-
-#, python-format
-msgid "You have received a copy of a response from the user '%(sender)s'."
-msgstr "Έχετε λάβει ένα αντίγραφο της απάντησης από το χρήστη '%(sender)s'."
-
-#, python-format
-msgid "You have received a message from the user '%(sender)s'."
-msgstr "Έχετε λάβει ένα μήνυμα από το χρήστη '%(sender)s'."
-
-msgid "Thank you again for your interest in our services."
-msgstr "Ευχαριστούμε και πάλι για το ενδιαφέρον σας στις υπηρεσίες μας."
-
-msgid "The site administrator"
-msgstr "Ο διαχειριστής του site"
-
-msgid ""
-"Note: This message is issued by an automated system.\n"
-"Do not reply, this would not be taken into account."
-msgstr "Σημείωση: Το μήνυμα αυτό έχει αποσταλεί από αυτοματοποιημένο σύστημα. Μην απαντήσετε, καθώς το μήνυμα σας δεν θα ληφθεί υπόψη."
-
-#, python-format
-msgid "Message \"%(subject)s\" on the site %(sitename)s"
-msgstr "Το μήνυμα \" %(subject)s \" στον ιστοτόπο %(sitename)s "
-
-msgid "Dear visitor,"
-msgstr "Αγαπητέ επισκέπτη,"
-
-msgid "As a reminder, please find below the content of your message."
-msgstr "Σαν υπενθύμιση, μπορείτε να βρείτε παρακάτω το περιεχόμενο του μηνύματός σας."
-
-msgid "Please find below the answer from your correspondent."
-msgstr "Παρακάτω βρείτε την απάντηση από τον συνομιλητή σας."
-
-msgid "For more comfort, we encourage you to open an account on the site."
-msgstr "Για περισσότερη άνεση, σας προτείνουμε να ανοίξετε ένα λογαριασμό στη σελίδα."
-
-msgid "Received Messages"
-msgstr "Ληφθέντα μηνύματα"
-
-msgid "Received"
-msgstr "Παρελήφθη"
-
-msgid "Reply"
-msgstr "Απάντηση"
-
-msgid "Sent"
-msgstr "Εστάλη"
-
-msgid "Deleted Messages"
-msgstr "Διαγραμμένα μηνύματα"
-
-msgid "Messages in this folder can be removed from time to time. For long term storage, use instead the archive folder."
-msgstr "Τα μηνύματα σε αυτό το φάκελο ενδέχεται να αφαιρεθούν από καιρό σε καιρό. Για μακροχρόνια αποθήκευση, χρησιμοποιήστε το φάκελο αρχειοθέτησης."
-
-msgid "Conversation"
-msgstr "Συνομιλία"
-
-msgid ":"
-msgstr ":"
-
-msgid "Back"
-msgstr "Επιστροφή"
-
-msgid "<me>"
-msgstr "<me>"
-
-msgid "> "
-msgstr "> "
-
 #, python-brace-format
 msgid ""
 "\n"
@@ -380,21 +31,119 @@ msgstr ""
 "{sender} έγραψε:\n"
 "{body}\n"
 
-#, python-brace-format
-msgid "Re: {subject}"
-msgstr "Re: {subject}"
+msgid ", for the following reason:"
+msgstr ", για τους ακόλουθους λόγους:"
 
-msgid "Message successfully sent."
-msgstr "Το μήνυμα έχει αποσταλεί με επιτυχία."
+msgid ":"
+msgstr ":"
+
+msgid "<me>"
+msgstr "<me>"
+
+msgid "> "
+msgstr "> "
+
+msgid "Accept"
+msgstr "Αποδοχή"
+
+msgid "Accepted"
+msgstr "Αποδεκτά"
+
+msgid "Action"
+msgstr "Ενέργεια"
+
+msgid "Additional recipient"
+msgstr "Πρόσθετος παραλήπτης"
+
+msgid "Additional recipients"
+msgstr "Πρόσθετοι αποδέκτες"
+
+msgid "Archive"
+msgstr "Αρχείο"
+
+msgid "Archived Messages"
+msgstr "Αρχείο μηνυμάτων"
+
+msgid "Archives"
+msgstr "Αρχεία"
+
+msgid "As a reminder, please find below the content of your message."
+msgstr "Σαν υπενθύμιση, μπορείτε να βρείτε παρακάτω το περιεχόμενο του μηνύματός σας."
+
+msgid "Back"
+msgstr "Επιστροφή"
+
+msgid "Conversation"
+msgstr "Συνομιλία"
+
+msgid "Date"
+msgstr "Ημερομηνία"
+
+msgid "Dates"
+msgstr "Ημερομηνίες"
+
+msgid "Dear user,"
+msgstr "Αγαπητέ χρήστη,"
+
+msgid "Dear visitor,"
+msgstr "Αγαπητέ επισκέπτη,"
+
+msgid "Delete"
+msgstr "Διαγράψτε"
+
+msgid "Deleted Messages"
+msgstr "Διαγραμμένα μηνύματα"
+
+msgid "Deletion date by recipient must be later than sending date."
+msgstr "Η ημερομηνία διαγραφής από τον αποδέκτη πρέπει να είναι μεταγενέστερη της ημερομηνίας αποστολής."
+
+msgid "Deletion date by sender must be later than sending date."
+msgstr "Η ημερομηνία διαγραφής πρέπει να είναι μεταγενέστερη της ημερομηνίας αποστολής."
+
+msgid "Direct Reply Hash"
+msgstr ""
+
+msgid "Email"
+msgstr "Email"
+
+#, python-brace-format
+msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
+msgstr "Βεβαιωθείτε ότι αυτή η τιμή έχει τουλάχιστον {limit_value} διακριτές θέσεις (έχει {show_value})."
+
+#, python-brace-format
+msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
+msgstr "Βεβαιωθείτε ότι αυτή η τιμή έχει το πολύ {limit_value} διακριτές θέσεις (έχει {show_value})."
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr "Για περισσότερη άνεση, σας προτείνουμε να ανοίξετε ένα λογαριασμό στη σελίδα."
+
+msgid "Inbox"
+msgstr "Εισερχόμενα"
+
+msgid "Message"
+msgstr "Μήνυμα"
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr "Το μήνυμα \" %(subject)s \" στον ιστοτόπο %(sitename)s "
+
+msgid "Message Received"
+msgstr "Μήνυμα Ελήφθη"
+
+msgid "Message Rejected"
+msgstr "Το μήνυμα έχει απορριφθεί"
 
 msgid "Message rejected for at least one recipient."
 msgstr "Το μήνυμα έχει απορριφθεί για τουλάχιστον έναν παραλήπτη."
 
-msgid "Only Administrators may send a message to this project/group!"
-msgstr ""
+msgid "Message successfully sent."
+msgstr "Το μήνυμα έχει αποσταλεί με επιτυχία."
 
-msgid "Select at least one object."
-msgstr "Επιλέξτε τουλάχιστον ένα αντικείμενο."
+msgid "Messages in this folder can be removed from time to time. For long term storage, use instead the archive folder."
+msgstr "Τα μηνύματα σε αυτό το φάκελο ενδέχεται να αφαιρεθούν από καιρό σε καιρό. Για μακροχρόνια αποθήκευση, χρησιμοποιήστε το φάκελο αρχειοθέτησης."
+
+msgid "Messages in this folder will never be removed. You can use this folder for long term storage."
+msgstr "Τα μηνύματα σε αυτό το φάκελο δεν θα αφαιρεθούν ποτέ. Μπορείτε να τον χρησιμοποιήσετε  για μακροχρόνια αποθήκευση."
 
 msgid "Messages or conversations successfully archived."
 msgstr "Μηνύματα ή συνομιλίες που έχουν αρχειοθετηθεί."
@@ -404,3 +153,254 @@ msgstr "Μηνύματα ή συνομιλίες που έχουν διαγρα�
 
 msgid "Messages or conversations successfully recovered."
 msgstr "Μηνύματα ή συνομιλίες που έχουν ανακτηθεί."
+
+msgid "Messaging"
+msgstr "Μηνύματα"
+
+msgid "Moderation"
+msgstr "Τροποποίηση"
+
+msgid "No messages."
+msgstr "Δεν υπάρχουν μηνύματα."
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr "Σημείωση: Το μήνυμα αυτό έχει αποσταλεί από αυτοματοποιημένο σύστημα. Μην απαντήσετε, καθώς το μήνυμα σας δεν θα ληφθεί υπόψη."
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr "Στις %(date)s , ζητήσατε να στείλετε ένα μήνυμα στον χρήστη '%(recipient)s'."
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender)s'."
+msgstr "Στις %(date)s, στείλατε ένα μήνυμα στον χρήστη ' %(sender)s '."
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr ""
+
+msgid "Pending"
+msgstr "Σε αναμονή"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Παρακαλούμε διορθώστε το παρακάτω λάθος."
+msgstr[1] "Παρακαλούμε διορθώστε τα παρακάτω λάθη."
+
+msgid "Please find below the answer from your correspondent."
+msgstr "Παρακάτω βρείτε την απάντηση από τον συνομιλητή σας."
+
+#, python-brace-format
+msgid "Re: {subject}"
+msgstr "Re: {subject}"
+
+msgid "Reading date must be later than sending date."
+msgstr "Η ημερομηνία ανάγνωσης πρέπει να είναι μεταγενέστερη της ημερομηνίας αποστολής."
+
+msgid "Received"
+msgstr "Παρελήφθη"
+
+msgid "Received Messages"
+msgstr "Ληφθέντα μηνύματα"
+
+msgid "Recipient"
+msgstr "Αποδέκτης"
+
+msgid "Recipients"
+msgstr "Αποδέκτες"
+
+msgid "Reject"
+msgstr "Απόρριψη"
+
+msgid "Rejected"
+msgstr "Απορρίφθηκαν"
+
+msgid "Reply"
+msgstr "Απάντηση"
+
+msgid "Reply Received"
+msgstr "Απάντηση ελήφθη"
+
+msgid "Response date cannot be set without at least one reply."
+msgstr "Η ημερομηνία της ανταπόκρισης δεν μπορεί να ρυθμιστεί χωρίς μια τουλάχιστον απάντηση."
+
+msgid "Response date must be later than reading date."
+msgstr "Η ημερομηνία της απόκρισης πρέπει να είναι μεταγενέστερη της ημερομηνίας ανάγνωσης."
+
+msgid "Response date must be later than sending date."
+msgstr "Η ημερομηνία ανταπόκρισης πρέπει να είναι μεταγενέστερη της ημερομηνίας αποστολής."
+
+msgid "Select at least one object."
+msgstr "Επιλέξτε τουλάχιστον ένα αντικείμενο."
+
+msgid "Send"
+msgstr "Αποστολή"
+
+msgid "Sender"
+msgstr "Αποστολέας"
+
+msgid "Sender and Recipient cannot be both undefined."
+msgstr "Ο αποστολέας και ο παραλήπτης δεν μπορούν να είναι και οι δυο απροσδιόριστοι."
+
+msgid "Sent"
+msgstr "Εστάλη"
+
+msgid "Sent Messages"
+msgstr "Απεσταλμένα"
+
+#, python-brace-format
+msgid "Some usernames are rejected: {users}."
+msgstr "Τα παρακάτω ονόματα απορρίπτονται: {users}."
+
+#, python-brace-format
+msgid "Some usernames are unknown or no longer active: {users}."
+msgstr "Μερικοί χρήστες είναι άγνωστοι ή δεν είναι πλεον ενεργοί: {users}."
+
+msgid "Sorry, this page number is invalid."
+msgstr "Λυπούμαι, ο αριθμός αυτής της σελίδας δεν είναι έγκυρος."
+
+msgid "Subject"
+msgstr "Θέμα"
+
+msgid "Thank you again for your interest in our services."
+msgstr "Ευχαριστούμε και πάλι για το ενδιαφέρον σας στις υπηρεσίες μας."
+
+msgid "The message cannot be replied without being in a conversation."
+msgstr "Το μήνυμα δεν μπορεί να απαντηθεί χωρίς να είναι σε μια συνομιλία."
+
+msgid "The message cannot be replied without having been read."
+msgstr "Το μήνυμα δεν μπορεί να απαντηθεί χωρίς να έχει πρώτα διαβάσει."
+
+msgid "The site administrator"
+msgstr "Ο διαχειριστής του site"
+
+msgid "Trash"
+msgstr "Σκουπίδια"
+
+msgid "Undefined recipient."
+msgstr "Απροσδιόριστος παραλήπτης."
+
+msgid "Undefined sender."
+msgstr "Απροσδιόριστος αποστολέας."
+
+msgid "Undelete"
+msgstr "Ξεδιαγράψτε"
+
+msgid "Visitor's email is in excess."
+msgstr "Το e-mail του επισκέπτη είναι σε περίσσεια."
+
+msgid "Visitor's email is missing."
+msgstr "Το e-mail του επισκέπτη λείπει."
+
+msgid "Write"
+msgstr "Γράψτε"
+
+#, python-brace-format
+msgid "Writing to some users is not possible: {users}."
+msgstr "Δεν ήταν εφικτή η αποστολή στους χρήστες: {users}."
+
+#, python-format
+msgid "You have received a copy of a response from the user '%(sender)s'."
+msgstr "Έχετε λάβει ένα αντίγραφο της απάντησης από το χρήστη '%(sender)s'."
+
+msgid "You have received a message"
+msgstr "Έχετε ένα μήνυμα"
+
+#, python-format
+msgid "You have received a message from the user '%(sender)s'."
+msgstr "Έχετε λάβει ένα μήνυμα από το χρήστη '%(sender)s'."
+
+msgid "You have received a reply"
+msgstr "Έχετε λάβει μια απάντηση"
+
+msgid "Your correspondent has given you an answer."
+msgstr "Ο συνομιλητής σας έχει δώσει μια απάντηση."
+
+msgid "Your message has been rejected"
+msgstr "Το μήνυμά σας έχει απορριφθεί"
+
+msgid "Your message has been rejected by the moderator"
+msgstr "Το μήνυμά σας έχει απορριφθεί από το διαχειριστή"
+
+msgid "archived by recipient"
+msgstr "αρχειοθέτηση ανά παραλήπτη"
+
+msgid "archived by sender"
+msgstr "αρχειοθέτηση ανά αποστολέα"
+
+msgid "body"
+msgstr "σώμα"
+
+msgid "by conversation"
+msgstr "κατά συνομιλία"
+
+msgid "by message"
+msgstr "ανά μήνυμα"
+
+msgid "deleted by recipient at"
+msgstr "έχει διαγραφεί από τον αποδέκτη στις"
+
+msgid "deleted by sender at"
+msgstr "έχει διαγραφεί από τον αποστολέα στις"
+
+msgid "g:i A,M j,n/j/y"
+msgstr "g:i A,M j,n/j/y"
+
+msgid "message"
+msgstr "μήνυμα"
+
+msgid "messages"
+msgstr "μηνύματα"
+
+msgid "moderated at"
+msgstr "τροποποιήθηκε στις"
+
+msgid "moderator"
+msgstr "διαχειριστής"
+
+msgid "parent message"
+msgstr "μήνυμα γονέας"
+
+msgid "pending message"
+msgstr "μήνυμα εν αναμονή"
+
+msgid "pending messages"
+msgstr "μηνύματα που εκκρεμούν"
+
+msgid "read at"
+msgstr "διαβάστηκε στις"
+
+msgid "recipient"
+msgstr "αποδέκτης"
+
+msgid "rejection reason"
+msgstr "λόγος απόρριψης"
+
+msgid "replied at"
+msgstr "απαντήθηκε σε"
+
+msgid "root message"
+msgstr "αρχικό μήνυμα"
+
+msgid "sender"
+msgstr "αποστολέας"
+
+msgid "sent at"
+msgstr "εστάλη στις"
+
+msgid "status"
+msgstr "κατάσταση"
+
+msgid "subject"
+msgstr "θέμα"
+
+msgid "visitor"
+msgstr "επισκέπτης"
+
+#, python-brace-format
+msgid "{username}"
+msgstr "{username}"
+
+#, python-brace-format
+msgid "{username} ({reason})"
+msgstr "{username} ({reason})"

@@ -581,6 +581,8 @@ class BBBRoom(models.Model):
         @param source_object: the source object from which the inheritance chain starts"""
         # add the source object's options from all inherited settings objects
         conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
+        if not isinstance(conference_settings, CosinnusConferenceSettings):
+            raise ValueError(f'CosinnusConferenceSettings not found for source_object: {str(source_object)}')
         # this is the merged params object containing the flattened hierarchy of inherited objects
         bbb_params = conference_settings.get_finalized_bbb_params()
         call_params = bbb_params.get(api_call_method, {})
@@ -702,19 +704,20 @@ class BBBRoom(models.Model):
         """Returns the django admin edit page for this object."""
         return reverse('admin:cosinnus_bbbroom_change', kwargs={'object_id': self.id})
 
-    def get_direct_room_url_for_user(self, user, request):
+    def get_direct_room_url_for_user(self, user, request=None):
         """Returns the direct BBB-server URL. This logic is also used by the
         proxy-view used by `get_absolute_url`.
         This should be used as the boilerplate for the room-URL getter for a user,
         as it also handles creating statistics.
-        @param request: for sending error messages
+        @param request: for sending error messages, will not send messages if not supplied
         @return:  None if an error happened. In this case a message should bet set this case must be caught by the
         calling function, and the user redirected properly to an error page.
         """
 
         # check general permission to enter the room at all
         if not self.check_user_can_enter_room(user):
-            messages.error(request, _('You do not have permission to enter this room.'))
+            if request:
+                messages.error(request, _('You do not have permission to enter this room.'))
             return None
 
         # if the meeting is not running, restart it if the user has permissions, else deny them
@@ -736,13 +739,14 @@ class BBBRoom(models.Model):
                     ):
                         bbb_start_denied = True
                 if bbb_start_denied:
-                    messages.warning(
-                        request,
-                        _(
-                            'This meeting is currently not running and you do not have permission to start it. '
-                            'Please wait and try again once a moderator has started the meeting.'
-                        ),
-                    )
+                    if request:
+                        messages.warning(
+                            request,
+                            _(
+                                'This meeting is currently not running and you do not have permission to start it. '
+                                'Please wait and try again once a moderator has started the meeting.'
+                            ),
+                        )
                     return None
             try:
                 self.restart()

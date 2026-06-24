@@ -2,12 +2,27 @@
 from __future__ import unicode_literals
 
 import sys
+from contextlib import contextmanager
 from importlib import import_module, reload
+from typing import Callable, TypeVar
 from unittest import skipIf, skipUnless
+from unittest.mock import MagicMock
 
+import django.dispatch
 from django.urls import clear_url_caches
 
 from cosinnus.conf import settings
+
+T = TypeVar('T', bound=Callable)
+
+
+def skipIfFlag(flag: str) -> Callable[[T], T]:
+    """
+    Skip a test if a commandline flag is present.
+    :param flag: the commandline flag, with dashes, e.g. `--flag`
+    :return: skipIf with parameters filled in
+    """
+    return skipIf(flag in sys.argv, f'commandline argument "{flag}" is present')
 
 
 def _is_custom_userprofile():
@@ -65,6 +80,7 @@ def reload_urlconf(urlconf=None):
 class CeleryTaskTestMixin:
     """Mixin to run Celery Tasks in test cases."""
 
+    @classmethod
     def runCeleryTasks(cls):
         """
         Our CeleryThreadTasks use on_commit callbacks that are not triggered in (non-transitional) test-cases.
@@ -72,3 +88,14 @@ class CeleryTaskTestMixin:
         better test readability.
         """
         return cls.captureOnCommitCallbacks(execute=True)
+
+
+@contextmanager
+def catch_signal(signal: django.dispatch.Signal, sender=None) -> MagicMock:
+    """Catch signals temporarily and return them."""
+    handler = MagicMock()
+    signal.connect(handler)
+    try:
+        yield handler
+    finally:
+        signal.disconnect(handler)

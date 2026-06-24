@@ -62,11 +62,14 @@
                                 <strong><a href="{{ comment.creator|profile_url }}">{{ comment.creator|full_name }}</a></strong>
                                 <a href="{{ comment.get_absolute_url }}"><span class="annotation moment-data-date" data-date="{{ comment.created_on|date:'c' }}" ></span></a>
                                 <div class="font11px regular-space">
+                                    <span class="pull-right">{% include 'cosinnus/feedback/report_button_a.html' with object=comment %}</span>
                                     {% if user|has_write_access:comment %}
-                                        <form id="delete_comment_form_{{ comment.pk }}" action="{% group_url 'cosinnus:todo:comment-delete' group=comment.todo.group pk=comment.pk %}" method="post" class="form-horizontal">
-                                            {% csrf_token %}
-                                            <a class="pull-right" href="#" onclick="$('#delete_comment_form_{{ comment.pk }}').submit(); return false;" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
-                                        </form>
+                                        <span class="pull-right">
+                                            <form id="delete_comment_form_{{ comment.pk }}" action="{% group_url 'cosinnus:todo:comment-delete' group=comment.todo.group pk=comment.pk %}" method="post" class="form-horizontal">
+                                                {% csrf_token %}
+                                                <a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#delete_comment_form_{{ comment.pk }}').submit();} return false;" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                                            </form>
+                                        </span>
                                     {% endif %}
                                 </div>
                                 <div class="comment-background textfield">{{ comment.text|textfield }}</div>
