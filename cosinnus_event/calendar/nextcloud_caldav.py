@@ -64,6 +64,11 @@ class NextcloudCaldavConnection:
                     nextcloud_calendar_publish_url=group.nextcloud_calendar_publish_url,
                 )
                 group.clear_cache()
+            else:
+                # Delete the calendar, as a group calendar has been created by a concurrent hook.
+                # This can happen if the calendar view is opened while the groups nextcloud initialization is still in
+                # progress, or if multiple users trigger the calendar creation from the calendar view at the same time.
+                self.group_calendar_delete(calendar.canonical_url)
         except Exception as e:
             logger.warning('NC Calendar: calendar creation failed!', extra={'exception': e})
             raise NextcloudCaldavConnectionException()
