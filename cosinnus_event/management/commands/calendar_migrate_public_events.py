@@ -2,6 +2,7 @@ import logging
 
 from django.core.management.base import BaseCommand
 
+from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.html import is_html
@@ -20,6 +21,11 @@ class Command(BaseCommand):
     )
 
     def handle(self, *args, **options):
+        # abort if v3 calendar is disabled
+        if not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            self.stdout.write('Aborting, as v3 calendar is disabled.')
+            return
+
         events = Event.objects.filter(
             media_tag__visibility=BaseTagObject.VISIBILITY_ALL,
             media_tag__migrated=False,
