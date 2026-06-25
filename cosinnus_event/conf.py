@@ -31,7 +31,7 @@ class CosinnusEventConf(AppConf):
     # Enable v3 calendar, replacing v2 event pages.
     V3_CALENDAR_ENABLED = False
 
-    # Defines a text shown in the create and edit view of private events in the v3 calendar.
+    # Defines a text shown in the create and edit view of public events in the v3 calendar.
     V3_CALENDAR_EVENT_MESSAGE = None
 
     # Setting to make the description of events required.
