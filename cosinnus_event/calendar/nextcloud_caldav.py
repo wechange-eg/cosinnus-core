@@ -302,9 +302,14 @@ class NextcloudCaldavConnection:
                     # Sometimes there are other events appended as well, but it cannot be guaranteed, that this is a
                     # complete list, so we do a full resync in any case when we see such an error object.
                     if len(caldav_events) > 0:
-                        # Inspect the raw text of the first object
-                        raw_data = getattr(caldav_events.objects[0], 'data', '')
-                        if raw_data and ('This is the WebDAV interface' in raw_data or '<html' in raw_data.lower()):
+                        # Inspect the raw text of all objects
+                        caldav_events_raw_data = [getattr(caldav_event, 'data', '') for caldav_event in caldav_events]
+                        event_data_contains_error = any(
+                            ('This is the WebDAV interface' in raw_data or '<html' in raw_data.lower())
+                            for raw_data in caldav_events_raw_data
+                            if raw_data
+                        )
+                        if event_data_contains_error:
                             # sync token was invalid, do a full resync, record as OK error
                             caldav_events = calendar.objects_by_sync_token(load_objects=True)
                             error_messages += f'[Group {group.id}]: OK, but sync token expired so did a full resync.\n'
