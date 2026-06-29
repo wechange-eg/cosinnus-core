@@ -60,23 +60,26 @@
 
     {% if SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
         {# v3 event views #}
-        <button type="button" class="btn w100 btn-emphasized fine-space" href="{% group_url 'cosinnus:event:calendar' group=group %}{% add_current_params %}">
-            <ul class="media-list">
-                <li class="media">
-                    <span class="pull-left">
-                        <i class="fa fa-calendar"></i>
-                    </span>
-                    <span class="pull-right">
-                        {% if request.path == calendar_page %}
-                            <i class="fa fa-caret-right"></i>
-                        {% endif %}
-                    </span>
-                    <div class="media-body">
-                        {% trans "Calendar" %}
-                    </div>
-                </li>
-            </ul>
-        </button>
+
+        {% if user|has_read_access:group %}
+            <button type="button" class="btn w100 btn-emphasized fine-space" href="{% group_url 'cosinnus:event:calendar' group=group %}{% add_current_params %}">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        <span class="pull-right">
+                            {% if request.path == calendar_page %}
+                                <i class="fa fa-caret-right"></i>
+                            {% endif %}
+                        </span>
+                        <div class="media-body">
+                            {% trans "Calendar" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        {% endif %}
 
     {% else %}
         {# v2 event views #}
@@ -177,45 +180,47 @@
     {% endif %}
 
     {% if not group.group_is_conference %}
-		<button type="button" class="btn w100 btn-emphasized fine-space" href="{{ doodle_list_page }}{% add_current_params %}">
-		    <ul class="media-list">
-		        <li class="media">
-		            <span class="pull-left">
-		                {% if doodle_count %}
-	                        {{ doodle_count }}
-                            <i class="fa fa-calendar-check-o" style="display:none;"></i>
-	                    {% else %}
-	                        <i class="fa fa-calendar-check-o"></i>
-	                    {% endif %}
-		            </span>
-		            <span class="pull-right">
-		               {% if request.path == doodle_list_page %}
-		                    <i class="fa fa-caret-right"></i>
-	                    {% endif %}
-	                </span>
-		            <div class="media-body">
-		                {% trans "Event Polls" %}
-		            </div>
-		        </li>
-		    </ul>
-		</button>
-		
-		<button type="button" class="btn w100 btn-emphasized regular-space" href="{{ doodle_list_archived_page }}{% add_current_params %}">
-		    <ul class="media-list">
-		        <li class="media">
-		            <span class="pull-left">
-	                    <i class="fa fa-calendar-check-o"></i>
-		            </span>
-		            <span class="pull-right">
-		               {% if request.path == doodle_list_archived_page %}
-		                    <i class="fa fa-caret-right"></i>
-	                    {% endif %}
-	                </span>
-		            <div class="media-body">
-		                {% trans "Archived Event Polls" %}
-		            </div>
-		        </li>
-		    </ul>
-		</button>
-	{% endif %}
+        {% if user|has_read_access:group %}
+            <button type="button" class="btn w100 btn-emphasized fine-space" href="{{ doodle_list_page }}{% add_current_params %}">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            {% if doodle_count %}
+                                {{ doodle_count }}
+                                <i class="fa fa-calendar-check-o" style="display:none;"></i>
+                            {% else %}
+                                <i class="fa fa-calendar-check-o"></i>
+                            {% endif %}
+                        </span>
+                        <span class="pull-right">
+                           {% if request.path == doodle_list_page %}
+                                <i class="fa fa-caret-right"></i>
+                            {% endif %}
+                        </span>
+                        <div class="media-body">
+                            {% trans "Event Polls" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+
+            <button type="button" class="btn w100 btn-emphasized regular-space" href="{{ doodle_list_archived_page }}{% add_current_params %}">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-calendar-check-o"></i>
+                        </span>
+                        <span class="pull-right">
+                           {% if request.path == doodle_list_archived_page %}
+                                <i class="fa fa-caret-right"></i>
+                            {% endif %}
+                        </span>
+                        <div class="media-body">
+                            {% trans "Archived Event Polls" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        {% endif %}
+    {% endif %}
 {% endif %}

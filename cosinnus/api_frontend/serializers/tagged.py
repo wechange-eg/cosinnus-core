@@ -38,7 +38,7 @@ class CosinnusMediaTagSerializerMixin:
 
         # save topics
         topics = media_tag_data.get('get_topic_ids', None)
-        if topics:
+        if topics is not None:
             media_tag.topics = ','.join([str(topic) for topic in topics])
 
         # save tags

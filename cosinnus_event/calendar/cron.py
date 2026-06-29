@@ -52,6 +52,7 @@ class CalendarSyncCaldavEvents(CosinnusCronJobBase):
                 # ctag changed, syncing group calendar
                 try:
                     # add a timestamp to group setting that a sync is attempted for debugging
+                    group.refresh_from_db()
                     group.settings['calendar_last_sync_attempt'] = now()
                     group.save(update_fields=['settings'])
 

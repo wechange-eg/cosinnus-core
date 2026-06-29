@@ -7,7 +7,7 @@ from django.views.generic.base import RedirectView, TemplateView
 
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
-from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
+from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import DipatchGroupURLMixin, RequireWriteMixin
 from cosinnus_cloud.hooks import get_nc_user_id
@@ -59,7 +59,14 @@ class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
 
     template_name = 'cosinnus_event/calendar/calendar.html'
 
+    def _is_public_event_detail_request(self, request):
+        """Check it the request parameter match a request for a public event"""
+        return 'eventId' in request.GET and request.GET.get('type') == 'public'
+
     def get(self, request, *args, **kwargs):
+        if not check_object_read_access(self.group, request.user) and not self._is_public_event_detail_request(request):
+            # only calendars request for public event detail are allowed for non-group members, redirect to dashboard
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
         if request.user.is_authenticated and not self.group.nextcloud_calendar_url:
             # initialize Nextcloud calendar
             if not self.group.nextcloud_group_id:

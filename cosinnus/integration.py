@@ -96,7 +96,9 @@ class CosinnusBaseIntegrationHandler:
     def _has_instance_changed(self, instance):
         """Helper to check if a pre-save instance has changed and requires the update handler to be called."""
         instance_model = type(instance)
-        old_instance = instance_model.objects.get(pk=instance.pk)
+        old_instance = instance_model.objects.filter(pk=instance.pk).first()
+        if not old_instance:
+            return False
         has_field_changed = any(
             getattr(instance, field) != getattr(old_instance, field)
             for field in self.integrated_instance_fields[instance_model]
