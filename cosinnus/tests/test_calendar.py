@@ -1236,6 +1236,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 group_aware_reverse('cosinnus:event:calendar', kwargs={'group': cls.test_group}, skip_domain=True)
                 + '?v=3'
             )
+            cls.calendar_view_url_with_public_event_params = f'{cls.calendar_view_url}&type=public&eventId=123'
 
         @classmethod
         def tearDownClass(cls):
@@ -1256,15 +1257,29 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             div_data_group_id = f'data-space-id="{self.test_group.pk}"'
             div_data_calendar_url_empty = 'data-calendar-url=""'
 
-            # test anonymous user has only access to group id for public events not the NC calendar
+            # test anonymous user is redirected to dashboard if no parameters for a public event are provided
             res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 302)
+            self.assertEqual(
+                res.url, group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.test_group})
+            )
+
+            # test anonymous user has only access to group id for public events not the NC calendar
+            res = self.client.get(self.calendar_view_url_with_public_event_params)
             self.assertEqual(res.status_code, 200)
             self.assertContains(res, div_data_group_id)
             self.assertContains(res, div_data_calendar_url_empty)
 
-            # test non-group user has only access to group id for public events not the NC calendar
+            # test non-gorup user is redirected to dashboard if no parameters for a public event are provided
             self.client.force_login(self.test_non_group_user)
             res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 302)
+            self.assertEqual(
+                res.url, group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.test_group})
+            )
+
+            # test non-group user has only access to group id for public events not the NC calendar
+            res = self.client.get(self.calendar_view_url_with_public_event_params)
             self.assertEqual(res.status_code, 200)
             self.assertContains(res, div_data_group_id)
             self.assertContains(res, div_data_calendar_url_empty)
