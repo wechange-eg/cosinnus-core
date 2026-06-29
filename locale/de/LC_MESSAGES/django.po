@@ -4,6 +4,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid ""
@@ -1446,6 +1453,9 @@ msgstr ""
 msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
 msgstr "- Es wurde eine Firebase-Push-Integration für Push-Benachrichtigungen an mobile Geräte hinzugefügt.\n"
 
+msgid "- Added easy-to-use tools to ensure complete GDPR compliance for the platform. You can now permanently delete your user profile directly from your account settings and the groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
+msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um die vollständige DSGVO-Konformität der Plattform zu gewährleisten. Du kannst dein Benutzerprofil nun direkt über deine Benutzerkonteneinstellungen und die Gruppen/Projekte, in denen du Administrator bist, über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\n"
+
 msgid "- Added numerous user interface and accessibility improvements throughout the site.\n"
 msgstr "- Zahlreiche Verbesserungen an der Benutzeroberfläche und der Barrierefreiheit wurden auf der gesamten Website vorgenommen.\n"
 
@@ -1458,6 +1468,9 @@ msgstr ""
 
 msgid "- Fixed a bug where certain types of malformed image links in markdown texts of news posts and events could cause a page error.\n"
 msgstr "- Es wurde ein Fehler behoben, bei dem durch bestimmte Arten von fehlerhaften Bildlinks in Markdown-Texten von Nachrichtenbeiträgen und Veranstaltungen ein Seitenfehler auftreten konnte.\n"
+
+msgid "- Fixed a bug where event polls were sometimes shown in the map listings where only scheduled events should be shown.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den Terminabstimmungen manchmal auf der Karte angezeigt wurden, wo eigentlich nur geplante Veranstaltungen erscheinen sollten.\n"
 
 msgid ""
 "- Fixed a bug where guest access to BBB meetings was sometimes not possible.\n"
@@ -1511,6 +1524,9 @@ msgstr ""
 msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
 msgstr "- Es wurde ein Fehler behoben, durch den der Nextcloud-Ordner einer Gruppe/eines Projekts nicht mehr zugänglich war, wenn die Cloud-App nach einer vorherigen Deaktivierung wieder aktiviert wurde.\n"
 
+msgid "- Fixed a bug where the button to delete ideas was not shown. It can now always be found on the bottom of the \"Edit Idea\" page.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den die Schaltfläche zum Löschen von Ideen nicht angezeigt wurde. Sie befindet sich nun immer am unteren Rand der Seite „Idee bearbeiten“.\n"
+
 msgid "- Fixed a bug where the password reset and password change pages would show a page error when a new password was entered that did not match the password requirements.\n"
 msgstr "- Es wurde ein Fehler behoben, durch den auf den Seiten zum Zurücksetzen und Ändern des Passworts ein Seitenfehler auftrat, wenn ein neues Passwort eingegeben wurde, das nicht den Passwortanforderungen entsprach.\n"
 
@@ -1520,6 +1536,12 @@ msgid ""
 msgstr ""
 "- Es wurde ein Fehler behoben, durch den Aufgabenlisten nicht in die Deck-App migriert werden konnten, wenn eine Aufgabe einem gelöschten Benutzerkonto zugewiesen war.\n"
 "- Es wurde ein Fehler behoben, durch den das Deck bei einigen wenigen Gruppen und Projekten nicht initialisiert werden konnte, wodurch die Deck-App dort nicht genutzt werden konnte.\n"
+
+msgid "- Fixed a bug where usernames were sometimes not correctly formatted in notification e-mails.\n"
+msgstr "- Es wurde ein Fehler behoben, bei dem der Namen von Benutzer/innen in Benachrichtigungs-E-Mails nicht korrekt formatiert angezeigt wurden.\n"
+
+msgid "- Fixed a bug where users could sometimes not be invited to groups/projects depending on their profile visibility settings.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den Nutzer je nach den Sichtbarkeitseinstellungen ihres Profils manchmal nicht zu Gruppen/Projekten eingeladen werden konnten.\n"
 
 msgid "- Fixed a page error during the profile setup when entering a profile location.\n"
 msgstr "- Es wurde ein Seitenfehler beim Eingeben eines Ortes im Profilsetup behoben.\n"
@@ -1563,8 +1585,17 @@ msgstr ""
 "- Es wurde ein Problem mit dem Markdown-Texteditor in einigen Formularen behoben.\n"
 "- Es wurde ein Problem behoben, bei dem bestimmte Anmelde- oder Registrierungsabläufe gelegentlich nicht korrekt weitergeleitet wurden.\n"
 
+msgid "- Further minor bugfixes and stability improvements have been made."
+msgstr "- Weitere kleinere Fehlerbehebungen und Stabilitätsverbesserungen wurden vorgenommen."
+
+msgid "- Improved the error handling when uploading unsupported images types and formats. Trying to upload unsupported image types will now result in an informative error message.\n"
+msgstr "- Die Fehlerbehandlung beim Hochladen nicht unterstützter Bildtypen und -formate wurde verbessert. Beim Versuch, nicht unterstützte Bilddateien hochzuladen, wird nun eine aussagekräftige Fehlermeldung angezeigt.\n"
+
 msgid "- Introducing the task board. You can now enable the modern task board in your groups and projects, which replaces the todo app. You can migrate your todos from the todos app, as well as any personal nextcloud boards you might have had.\n"
 msgstr "- Das Aufgaben-Board wurde eingeführt. Das moderne Aufgaben-Board kann nun in Gruppen und Projekten aktiviert werden und ersetzt die Aufgaben-App. Aufgaben aus der Aufgaben-App sowie alle persönlichen Nextcloud-Boards können migriert werden.\n"
+
+msgid "- Membership requests for groups/projects by users who deleted their accounts are now no longer shown in the membership area.\n"
+msgstr "- Mitgliedschaftsanfragen für Gruppen/Projekte von Benutzer/innen, die ihr Konto gelöscht haben, werden nun nicht mehr im Mitgliederbereich angezeigt.\n"
 
 msgid ""
 "- Several improvements have been made to the redesign user interface, and an introductory tooltip tour has been added.\n"
@@ -1572,6 +1603,9 @@ msgid ""
 msgstr ""
 "- Mehrere Verbesserungen wurden an der Benutzeroberfläche des Redesigns vorgenommen und es wurde eine Tooltip-Tour zur Einführung hinzugefügt.\n"
 "- Weitere kleinere Fehlerbehebungen und Stabilitätsverbesserungen wurden vorgenommen."
+
+msgid "- The creation of new Ethercalcs is now disabled. Please use spreadsheets in the cloud app as a modern alternative. Your existing Ethercalcs can still be accessed and downloaded or exported.\n"
+msgstr "- Die Erstellung neuer Ethercalcs ist nun deaktiviert. Bitte nutzt stattdessen die Tabellenkalkulation in der Cloud-App als moderne Alternative. Auf eure bestehenden Ethercalcs könnt ihr weiterhin zugreifen und diese herunterladen oder exportieren.\n"
 
 msgid "- The password requirements have been changed: Now a password must consist of at least 12 characters. Otherwise, there are no further requirements regarding the chosen characters. Passwords are still checked against a list of frequently used passwords.\n"
 msgstr "- Die Anforderungen an Passwörtern wurden geändert: Nun muss ein Passwort aus mindestens 12 Zeichen bestehen. Ansonsten gibt es keine weiteren Anforderungen bezüglich der gewählten Zeichen. Passwörter werden weiterhin gegen eine Liste häufig verwendeter Passwörter geprüft.\n"
@@ -2990,6 +3024,9 @@ msgstr "CSV-Zeile enthielt keine Daten für erforderliche Spalten: \"%(fields)s\
 msgid "Calendar"
 msgstr "Kalender"
 
+msgid "Calendar Redesign"
+msgstr "Neugestaltung des Kalenders"
+
 msgid "Calendar creation is in progress..."
 msgstr "Der Kalender wird gerade erstellt..."
 
@@ -3177,6 +3214,9 @@ msgstr "Filter zurücksetzen"
 
 msgid "Clear to enforce a re-sync off all events."
 msgstr "Löschen um Neusynchronisation aller Termine zu erzwingen."
+
+msgid "Clear to enforce a re-sync off group events."
+msgstr "Löschen um die Resnynchronisierung von Gruppenevents zu erzwingen."
 
 #, python-format
 msgid "Click \"%(download_label)s\" to download the file archive"
@@ -8226,6 +8266,9 @@ msgstr "Nächste Woche"
 msgid "Nextcloud Deck Board ID"
 msgstr "Nextcloud Deck Board-ID"
 
+msgid "Nextcloud Group Calendar CalDAV CTag"
+msgstr "Nextcloud Gruppenkalendar CalDAV CTag"
+
 msgid "Nextcloud Group Calendar CalDAV Last Sync Timestamp"
 msgstr "Nextcloud Gruppenkalendar CalDAV Letzter Sync Timestamp"
 
@@ -11213,6 +11256,9 @@ msgstr "Die folgenden Benutzer/innen wurden eingeladen, Teilnahme zu beantragen:
 msgid "The following users were put on the wait list: %s"
 msgstr "Die folgenden Nutzer/innen wurden auf die Warteliste gesetzt: %s"
 
+msgid "The fully redesigned calendar with a mobile-optimized interface has been launched!"
+msgstr "Der komplett neu gestaltete Kalender mit einer optimierten Benutzeroberfläche für mobile Geräte wurde veröffentlicht!"
+
 msgid "The generated 6-digit code (for example: 123456)"
 msgstr "Der generierte 6-stellige Code (zum Beispiel: 123456)"
 
@@ -11277,6 +11323,9 @@ msgstr "Der Termin \"%(object_name)s\", an dem du teilnimmst, wurde aktualisiert
 
 msgid "The message was sent to the chosen participants."
 msgstr "Die Nachricht wurde an die gewählten Tagungsteilnehmer geschickt."
+
+msgid "The new calendar in groups and projects features enhanced public event sharing and advanced tools for internal scheduling, including recurring events and seamless CalDAV synchronization."
+msgstr "Der neue Kalender bietet in Gruppen und Projekten eine verbesserte Darstellung öffentlicher Veranstaltungen sowie erweiterte Funktionen für interne Termine, inklusive Serienterminen und CalDAV-Synchronisation."
 
 msgid "The next higher up object in the BBB hierarchy chain is"
 msgstr "Das nächste Objekt oberhalb der BBB-Hierarchiekette ist"
