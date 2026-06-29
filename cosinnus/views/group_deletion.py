@@ -172,7 +172,7 @@ def update_group_last_activity(group, precision_days=30):
             type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
         else:
             # unexpectedly got a last_activity in the future.
-            logger.warning(
+            logger.error(
                 'update_group_last_activity: Attempted to set a last_activity in the future (unexpected behaviour).',
                 extra={'group_id': group.id, 'last_activity': last_activity},
             )
