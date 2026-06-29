@@ -19,7 +19,7 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
-    'Calendar': {
+    '2.8.0-calendar': {
         'datetime': datetime(2026, 6, 30, tzinfo=pytz.utc),
         'title': _('Calendar Redesign'),
         'short_text': _('The fully redesigned calendar with a mobile-optimized interface has been launched!'),

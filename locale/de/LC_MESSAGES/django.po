@@ -56,7 +56,7 @@ msgstr ""
 "\n"
 "Hinweis: Alle anstehenden Termine sowie vergangene Termine aus diesem Jahr werden\n"
 "                            übertragen. Termine aus dem Jahr 2025 und früher werden nicht in den neuen Kalender übernommen.\n"
-"                            Bitte wenden Sie dich an den Support, falls du diese Daten benötigst."
+"                            Bitte an den Support wenden, falls ältere Daten benötigt werden."
 
 msgid ""
 "\n"
@@ -3025,7 +3025,7 @@ msgid "Calendar"
 msgstr "Kalender"
 
 msgid "Calendar Redesign"
-msgstr "Neugestaltung des Kalenders"
+msgstr "Kalender-Redesign"
 
 msgid "Calendar creation is in progress..."
 msgstr "Der Kalender wird gerade erstellt..."
@@ -7905,7 +7905,7 @@ msgid "Migrate Nextcloud Boards"
 msgstr "Nextcloud-Boards Migrieren"
 
 msgid "Migrate Private Events"
-msgstr "Interne Veranstaltungen migrieren"
+msgstr "Interne Termine migrieren"
 
 msgid "Migrate Todos"
 msgstr "Aufgaben migrieren"
@@ -7914,7 +7914,7 @@ msgid "Migrate Todos to Task Board"
 msgstr "Migriere Aufgaben ins Aufgaben-Board"
 
 msgid "Migrate private Events to the new calendar app"
-msgstr "Interne Veranstaltungen in die neue Kalender-App migrieren"
+msgstr "Interne Termine in die neue Kalender-App migrieren"
 
 msgid "Migrate your boards from the Nextcloud Deck app to your groups and projects!"
 msgstr "Migriere deine Boards aus der Nextcloud Deck App in deine Gruppen und Projekte!"
