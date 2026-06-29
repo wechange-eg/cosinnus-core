@@ -170,6 +170,12 @@ def update_group_last_activity(group, precision_days=30):
         """Save last activity. Ensure last_activity is never in the future."""
         if last_activity <= now():
             type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+        else:
+            # unexpectedly got a last_activity in the future.
+            logger.error(
+                'update_group_last_activity: Attempted to set a last_activity in the future (unexpected behaviour).',
+                extra={'group_id': group.id, 'last_activity': last_activity},
+            )
 
     # Ignore forum, events and default user groups
     if group.slug in get_default_portal_group_slugs():

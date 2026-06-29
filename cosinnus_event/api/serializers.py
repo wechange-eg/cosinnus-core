@@ -1,10 +1,11 @@
 from rest_framework import serializers
 
+from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusDynamicFieldsSerializerMixin
 from cosinnus.conf import settings
 from cosinnus_event.models import Event
 
 
-class EventListSerializer(serializers.HyperlinkedModelSerializer):
+class EventListSerializer(CosinnusDynamicFieldsSerializerMixin, serializers.HyperlinkedModelSerializer):
     id = serializers.URLField(source='get_absolute_url', read_only=True)
     timestamp = serializers.DateTimeField(source='last_modified')
     image = serializers.SerializerMethodField()
@@ -13,7 +14,13 @@ class EventListSerializer(serializers.HyperlinkedModelSerializer):
     location = serializers.SerializerMethodField()
     location_lat = serializers.SerializerMethodField()
     location_lon = serializers.SerializerMethodField()
+    location_type = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
+    group_name = serializers.SerializerMethodField()
+    group_url = serializers.SerializerMethodField()
+
+    # dynamic field serializer parameters
+    dynamic_fields_source = 'media_tag.dynamic_fields'
 
     class Meta(object):
         model = Event
@@ -27,6 +34,7 @@ class EventListSerializer(serializers.HyperlinkedModelSerializer):
             'location',
             'location_lat',
             'location_lon',
+            'location_type',
             'street',
             'zipcode',
             'city',
@@ -34,7 +42,14 @@ class EventListSerializer(serializers.HyperlinkedModelSerializer):
             'url',
             'topics',
             'tags',
+            'group_name',
+            'group_url',
         )
+
+    def get_dynamic_field_settings(self):
+        if settings.COSINNUS_TAGGED_EXTRA_FIELDS and 'cosinnus_event.Event' in settings.COSINNUS_TAGGED_EXTRA_FIELDS:
+            return settings.COSINNUS_TAGGED_EXTRA_FIELDS['cosinnus_event.Event']
+        return {}
 
     def get_location(self, obj):
         location = []
@@ -53,6 +68,12 @@ class EventListSerializer(serializers.HyperlinkedModelSerializer):
         if hasattr(obj, 'media_tag') and obj.media_tag:
             location_lon = obj.media_tag.location_lon or None
         return location_lon
+
+    def get_location_type(self, obj):
+        location_type = None
+        if hasattr(obj, 'media_tag') and obj.media_tag:
+            location_type = obj.media_tag.location_type
+        return location_type
 
     def get_image(self, obj):
         image_url = None
@@ -78,6 +99,12 @@ class EventListSerializer(serializers.HyperlinkedModelSerializer):
         if hasattr(obj, 'media_tag') and obj.media_tag and obj.media_tag.tags:
             tags = obj.media_tag.tags.values_list('name', flat=True)
         return tags
+
+    def get_group_name(self, obj):
+        return obj.group.name
+
+    def get_group_url(self, obj):
+        return obj.group.get_absolute_url()
 
 
 class EventRetrieveSerializer(EventListSerializer):
