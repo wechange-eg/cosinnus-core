@@ -185,6 +185,10 @@ class CosinnusCalendarEventSerializer(
             'string in `location`. If supplied, will only be saved if `location` is also supplied.'
         ),
     )
+    location_url = serializers.URLField(
+        source='media_tag.location_url',
+        read_only=True,
+    )
     location_type = serializers.ChoiceField(
         source='media_tag.location_type',
         required=False,
@@ -229,6 +233,7 @@ class CosinnusCalendarEventSerializer(
             'location',
             'location_lat',
             'location_lon',
+            'location_url',
             'location_type',
             'bbb_url',
             'bbb_guest_url',

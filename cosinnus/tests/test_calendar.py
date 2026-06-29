@@ -414,6 +414,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'location': 'Berlin',
                 'location_lat': None,
                 'location_lon': None,
+                'location_url': None,
                 'location_type': None,
                 'external_video_conference_url': None,
                 'ical_url': self.test_event.get_feed_url(),
