@@ -9,7 +9,7 @@ from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.views.mixins.group import DipatchGroupURLMixin, RequireWriteMixin
+from cosinnus.views.mixins.group import DipatchGroupURLMixin, RequireAdminMixin
 from cosinnus_cloud.hooks import get_nc_user_id
 from cosinnus_event.calendar.integration import CosinnusCalendarIntegrationHandler
 
@@ -117,7 +117,7 @@ class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
 calendar_view = CosinnusCalendarView.as_view()
 
 
-class CosinnusCalendarMigrateView(RequireWriteMixin, TemplateView):
+class CosinnusCalendarMigrateView(RequireAdminMixin, TemplateView):
     """Allows users to migrate private events to the NextCloud group calendar."""
 
     template_name = 'cosinnus_event/calendar/migrate.html'
