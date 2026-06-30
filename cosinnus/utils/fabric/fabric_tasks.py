@@ -136,8 +136,6 @@ def enablegitremoteoncore(_ctx):
         with c.cd(f'{env.cosinnus_src_path}'):
             c.run('git config --local --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*')
             c.run('git fetch')
-            c.run(f'git checkout {env.cosinnus_pull_branch}')
-            c.run('git pull')
 
 
 @task
