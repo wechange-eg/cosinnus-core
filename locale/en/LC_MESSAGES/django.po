@@ -1351,7 +1351,7 @@ msgstr ""
 msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
 msgstr ""
 
-msgid "- Added easy-to-use tools to ensure complete GDPR compliance for the platform. You can now permanently delete your user profile directly from your account settings and the groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
+msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
 msgstr ""
 
 msgid "- Added numerous user interface and accessibility improvements throughout the site.\n"
@@ -10703,7 +10703,7 @@ msgstr ""
 msgid "The message was sent to the chosen participants."
 msgstr ""
 
-msgid "The new calendar in groups and projects features enhanced public event sharing and advanced tools for internal scheduling, including recurring events and seamless CalDAV synchronization."
+msgid "The new calendar in groups and projects has improvements regarding displaying and sharing public events as well as advanced features for internal meetings, including recurring events and CalDAV synchronization."
 msgstr ""
 
 msgid "The next higher up object in the BBB hierarchy chain is"

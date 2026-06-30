@@ -24,9 +24,8 @@ UPDATES = {
         'title': _('Calendar Redesign'),
         'short_text': _('The fully redesigned calendar with a mobile-optimized interface has been launched!'),
         'full_text': _(
-            'The new calendar in groups and projects features enhanced public event sharing and advanced tools for '
-            'internal scheduling, including recurring events and seamless CalDAV synchronization.'
-            ''
+            'The new calendar in groups and projects has improvements regarding displaying and sharing public events '
+            'as well as advanced features for internal meetings, including recurring events and CalDAV synchronization.'
         ),
         'display_conditional': _REDESIGN_FULL_IS_ENABLED and settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED,
     },
@@ -36,9 +35,9 @@ UPDATES = {
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': [
             _(
-                '- Added easy-to-use tools to ensure complete GDPR compliance for the platform. '
-                'You can now permanently delete your user profile directly from your account settings and '
-                'the groups/projects you are an admin in from their respective settings pages. '
+                '- Added easy-to-use tools to simplify GDPR-related processes. '
+                'You can now permanently delete groups/projects you are an admin in from their respective '
+                'settings pages. '
                 'To honour the "Right to be forgotten", user accounts and groups/projects will now also '
                 'be deleted after a long period of inactivity. '
                 "Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
@@ -71,6 +70,7 @@ UPDATES = {
                 'Your existing Ethercalcs can still be accessed and downloaded or exported.\n'
             )
             if settings.COSINNUS_ETHERPAD_ETHERCALC_READONLY
+            and 'cosinnus_etherpad' not in settings.COSINNUS_DISABLED_COSINNUS_APPS
             else '',
             _('- Further minor bugfixes and stability improvements have been made.'),
         ],

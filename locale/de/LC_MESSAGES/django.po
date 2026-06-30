@@ -1453,8 +1453,8 @@ msgstr ""
 msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
 msgstr "- Es wurde eine Firebase-Push-Integration für Push-Benachrichtigungen an mobile Geräte hinzugefügt.\n"
 
-msgid "- Added easy-to-use tools to ensure complete GDPR compliance for the platform. You can now permanently delete your user profile directly from your account settings and the groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
-msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um die vollständige DSGVO-Konformität der Plattform zu gewährleisten. Du kannst dein Benutzerprofil nun direkt über deine Benutzerkonteneinstellungen und die Gruppen/Projekte, in denen du Administrator bist, über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\n"
+msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
+msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst Gruppen/Projekte, in denen du Administrator bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\\n\n"
 
 msgid "- Added numerous user interface and accessibility improvements throughout the site.\n"
 msgstr "- Zahlreiche Verbesserungen an der Benutzeroberfläche und der Barrierefreiheit wurden auf der gesamten Website vorgenommen.\n"
@@ -1538,7 +1538,7 @@ msgstr ""
 "- Es wurde ein Fehler behoben, durch den das Deck bei einigen wenigen Gruppen und Projekten nicht initialisiert werden konnte, wodurch die Deck-App dort nicht genutzt werden konnte.\n"
 
 msgid "- Fixed a bug where usernames were sometimes not correctly formatted in notification e-mails.\n"
-msgstr "- Es wurde ein Fehler behoben, bei dem der Namen von Benutzer/innen in Benachrichtigungs-E-Mails nicht korrekt formatiert angezeigt wurden.\n"
+msgstr "- Es wurde ein Fehler behoben, bei dem der Name von Benutzer/innen in Benachrichtigungs-E-Mails nicht korrekt formatiert angezeigt wurde.\n"
 
 msgid "- Fixed a bug where users could sometimes not be invited to groups/projects depending on their profile visibility settings.\n"
 msgstr "- Es wurde ein Fehler behoben, durch den Nutzer je nach den Sichtbarkeitseinstellungen ihres Profils manchmal nicht zu Gruppen/Projekten eingeladen werden konnten.\n"
@@ -11324,7 +11324,7 @@ msgstr "Der Termin \"%(object_name)s\", an dem du teilnimmst, wurde aktualisiert
 msgid "The message was sent to the chosen participants."
 msgstr "Die Nachricht wurde an die gewählten Tagungsteilnehmer geschickt."
 
-msgid "The new calendar in groups and projects features enhanced public event sharing and advanced tools for internal scheduling, including recurring events and seamless CalDAV synchronization."
+msgid "The new calendar in groups and projects has improvements regarding displaying and sharing public events as well as advanced features for internal meetings, including recurring events and CalDAV synchronization."
 msgstr "Der neue Kalender bietet in Gruppen und Projekten eine verbesserte Darstellung öffentlicher Veranstaltungen sowie erweiterte Funktionen für interne Termine, inklusive Serienterminen und CalDAV-Synchronisation."
 
 msgid "The next higher up object in the BBB hierarchy chain is"
@@ -12026,7 +12026,7 @@ msgid "This update includes quality of life updates:"
 msgstr "Das Update enthält Verbesserungen zur Benutzerfreundlichkeit:"
 
 msgid "This update includes security updates and small bugfixes:"
-msgstr "Das Update enthält Sicherheitsupdates kleine Bugfixes:"
+msgstr "Das Update enthält Sicherheitsupdates und kleine Bugfixes:"
 
 msgid "This update includes several bugfixes:"
 msgstr "Das Update enthält mehrere Bugfixes:"
@@ -15247,6 +15247,9 @@ msgstr "Ja"
 #~ msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
 #~ msgstr "**Mitglieder-Matching** ist deine Möglichkeit, mit gleichgesinnten Menschen auf der ganzen Welt zu kommunizieren und Erfahrungen auszutauschen. Wenn du vieles zu diskutieren hast und deine gewählten Menschen von dir das gleiche denken, wird automatisch ein Dialog zum Austausch gestartet.."
 
+#~ msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete your user profile directly from your account settings and the groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
+#~ msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst die Gruppen/Projekte, in denen du Administrator bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\n"
+
 #~ msgid "A user export is in progress. As soon as the export is finished it will be available here."
 #~ msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
 
@@ -16148,6 +16151,9 @@ msgstr "Ja"
 
 #~ msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
 #~ msgstr "Das Motivations-Textfeld wird mit dem Text vorausgefüllt, den du hier eingibst. Du kannst dies nutzen, um einen Hilfetext für das Verfassen des Motivationstextes zu hinterlegen oder eine Frageliste angeben, die die Antragssteller/innen beantworten sollen."
+
+#~ msgid "The new calendar in groups and projects features enhanced public event sharing and advanced tools for internal scheduling, including recurring events and seamless CalDAV synchronization."
+#~ msgstr "Der neue Kalender bietet in Gruppen und Projekten eine verbesserte Darstellung öffentlicher Veranstaltungen sowie erweiterte Funktionen für interne Termine, inklusive Serienterminen und CalDAV-Synchronisation."
 
 #~ msgid "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days."
 #~ msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn eingesetllt). Kann mehrere Tage beinhalten."
