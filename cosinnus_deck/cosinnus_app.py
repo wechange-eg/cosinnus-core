@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.exceptions import ImproperlyConfigured
-
 from cosinnus_deck.conf import settings
 
 
@@ -11,14 +9,16 @@ def register():
         return
     if not getattr(settings, 'COSINNUS_DECK_ENABLED', False):
         return
-    if not getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
-        raise ImproperlyConfigured('COSINNUS_CLOUD_ENABLED must be True if the cosinnus_deck app is enabled.')
+
+    # register system checks
+    import cosinnus_deck.checks  # noqa: F401
 
     # Import here to prevent import side effects
     from django.utils.translation import gettext_lazy as _
     from django.utils.translation import pgettext_lazy
 
     from cosinnus.core.registries import app_registry, url_registry
+    from cosinnus_deck.integration import DeckIntegrationHandler
 
     active_by_default = 'cosinnus_deck' in settings.COSINNUS_DEFAULT_ACTIVE_GROUP_APPS
     app_registry.register(
@@ -28,3 +28,6 @@ def register():
 
     # makemessages replacement protection
     name = pgettext_lazy('the_app', 'deck')  # noqa
+
+    # initialize integration handler
+    DeckIntegrationHandler(app_name='cosinnus_deck')

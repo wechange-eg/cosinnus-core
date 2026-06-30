@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from unittest.mock import patch
+
+from django.test import override_settings
 from django.urls import reverse
 
-from cosinnus_etherpad.models import Etherpad
+from cosinnus_etherpad.models import Ethercalc, Etherpad
 from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
@@ -61,3 +64,39 @@ class AddTest(ViewTestCase):
         # explicitly need to delete object, otherwise signals won't be fired
         # and pad on server will persist
         pad.delete()
+
+    @patch('cosinnus_etherpad.models.EtherCalcClient', autospec=True)
+    @override_settings(COSINNUS_ETHERPAD_ETHERCALC_READONLY=False)
+    def test_ethercalc_forbidden(self, mock_client):
+        """
+        Should return 302 to pad detail on successful POST and have a pad
+        with given title
+        """
+
+        self.client.login(username=self.credential, password=self.credential)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+        title = 'testcalc'
+
+        # just to be sure, try to delete the Ethercalc afterward
+        def _cleanup():
+            try:
+                pad = Ethercalc.objects.get(title=title)
+                pad.delete()
+            except Ethercalc.DoesNotExist:
+                pass
+
+        self.addCleanup(_cleanup)
+
+        params = {'title': title, 'etherpad_type': 1}
+        response = self.client.post(self.url, params)
+        self.assertFalse(mock_client.called)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'You can no longer create spreadsheets')
+
+        form = response.context['container_form']
+        self.assertFalse(form.is_valid())
+
+        with self.assertRaises(Etherpad.DoesNotExist):
+            Etherpad.objects.get(title=title)

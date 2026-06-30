@@ -79,8 +79,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     BASE_PATH = project_base_path
     COSINNUS_BASE_PATH = realpath(join(dirname(__file__), '..'))
 
+    env_file = project_settings.get('COSINNUS_ENV_FILE', '.env')
     env = environ.Env()
-    env.read_env(BASE_PATH('.env'))
+    env.read_env(BASE_PATH(env_file))
 
     # Absolute filesystem path to the directory that will hold user-uploaded files.
     # Example: "/home/media/media.lawrence.com/media/"
@@ -370,6 +371,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'django_clamd',
         'rest_framework_simplejwt.token_blacklist',
         'fcm_django',
+        'django_extended_makemessages',
     ]
 
     """ --------------- SENTRY/RAVEN LOGGING ---------------- """
@@ -672,13 +674,21 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # django-cron cronjob class definitions
     CRON_CLASSES = [
         'cosinnus.cron.DeleteScheduledUserProfiles',
+        'cosinnus.cron.SendUserInactivityNotifications',
+        'cosinnus.cron.MarkInactiveUsersForDeletion',
+        'cosinnus.cron.DeleteScheduledGroups',
+        'cosinnus.cron.UpdateGroupsLastActivity',
+        'cosinnus.cron.SendGroupsInactivityNotifications',
+        'cosinnus.cron.MarkInactiveGroupsForDeletion',
         'cosinnus.cron.UpdateConferencePremiumStatus',
         'cosinnus.cron.SwitchGroupPremiumFeatures',
+        'cosinnus.cron.SendGroupPremiumExpirationWarningEmails',
         'cosinnus.cron.DeleteTemporaryData',
         'cosinnus.cron.SendQueuedMassMails',
         'cosinnus.cron.DeleteOldGuestUsers',
         'cosinnus_conference.cron.SendConferenceReminders',
         'cosinnus_event.cron.TriggerBBBStreamers',
+        'cosinnus_event.calendar.cron.CalendarSyncCaldavEvents',
         'cosinnus_marketplace.cron.DeactivateExpiredOffers',
         'cosinnus_message.cron.ProcessDirectReplyMails',
         'cosinnus_notifications.cron.DeleteOldNotificationAlerts',

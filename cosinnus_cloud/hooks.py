@@ -6,7 +6,6 @@ import re
 from base64 import b64encode
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import wraps
-from threading import Thread
 from time import sleep
 
 from django.contrib.auth import get_user_model
@@ -21,8 +20,13 @@ from cosinnus.models import UserProfile
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import is_user_active
-from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group, is_cloud_group_required_for_group
+from cosinnus_cloud.utils.cosinnus import (
+    CLOUD_DEPENDENT_APPS,
+    is_cloud_enabled_for_group,
+    is_cloud_group_required_for_group,
+)
 from cosinnus_cloud.utils.nextcloud import rename_group_folder, set_group_display_name
 
 from .utils import nextcloud
@@ -359,7 +363,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
             return
 
         # run the update threaded because it is a very slow endpoint
-        class UpdateNCUserThread(Thread):
+        class UpdateNCUserThread(CosinnusWorkerThread):
             def run(self):
                 try:
                     # we should actually use `update_user_from_obj`, but since
@@ -388,9 +392,9 @@ if settings.COSINNUS_CLOUD_ENABLED:
             submit_with_retry(initialize_nextcloud_for_group, group)
 
     @receiver(signals.group_apps_activated)
-    def group_cloud_or_deck_app_activated_sub(sender, group, apps, **kwargs):
-        """Listen for the cloud app or deck app being activated"""
-        if 'cosinnus_cloud' in apps or 'cosinnus_deck' in apps:
+    def group_cloud_app_activated_sub(sender, group, apps, **kwargs):
+        """Listen for the cloud app or cloud dependent app being activated"""
+        if any(app in apps for app in CLOUD_DEPENDENT_APPS):
             if is_cloud_group_required_for_group(group):
 
                 def _conurrent_wrap():
@@ -526,6 +530,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
     @receiver(post_delete, sender=CosinnusProject)
     @receiver(post_delete, sender=CosinnusSociety)
     @receiver(post_delete, sender=CosinnusConference)
+    @receiver(post_delete, sender=get_cosinnus_group_model())
     def handle_group_deleted(sender, instance, **kwargs):
         """Trigger to completely delete a group folder when a group is deleted.
         We have CosinnusConference in here as backwards compatibility, because for some conferences,

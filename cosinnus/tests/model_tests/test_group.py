@@ -2,17 +2,29 @@
 from __future__ import unicode_literals
 
 from builtins import range, zip
+from typing import Set
 
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
-from django.test import TestCase
+from django.test import TestCase, TransactionTestCase
 
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager, CosinnusGroupMembership
-from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus import tasks
+from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
+from cosinnus.core.signals import user_deactivated
+from cosinnus.models.group import (
+    CosinnusGroup,
+    CosinnusGroupManager,
+    CosinnusGroupMembership,
+)
+from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_INVITED_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
+from cosinnus.tests.utils import catch_signal
 
 _GROUP_CACHE_KEY = CosinnusGroupManager._GROUP_CACHE_KEY % (1, 'CosinnusGroupManager', '%s')
 _GROUPS_PK_CACHE_KEY = CosinnusGroupManager._GROUPS_PK_CACHE_KEY % (1, 'CosinnusGroupManager')
 _GROUPS_SLUG_CACHE_KEY = CosinnusGroupManager._GROUPS_SLUG_CACHE_KEY % (1, 'CosinnusGroupManager')
+
+# load needed model hooks, since they are loaded in middleware during startup
+initialize_cosinnus_after_startup()
 
 User = get_user_model()
 
@@ -290,3 +302,69 @@ class MembershipCacheTest(TestCase):
         self.assertEqual(group.admins, [])
         self.assertEqual(group.members, [])
         self.assertEqual(group.pendings, [])
+
+
+class RemovePendingMembershipTestMixin:
+    @staticmethod
+    def get_memberships(user: User, status__in=None) -> Set[CosinnusGroupMembership]:
+        kwargs = dict()
+        if status__in is not None:
+            kwargs.update(status__in=status__in)
+        return set(CosinnusGroupMembership.objects.filter(user__id=user.id, **kwargs))
+
+    @classmethod
+    def setUpTestData(cls):
+        """Create test data once."""
+        cls.user_target = User.objects.create_user('user_target')
+        cls.user_other = User.objects.create_user('user_other')
+
+        # create the same group memberships for both users containing PENDING and MEMBER status
+        group1 = CosinnusGroup.objects.create(name='testgroup1')
+        group2 = CosinnusGroup.objects.create(name='testgroup2')
+        group3 = CosinnusGroup.objects.create(name='testgroup3')
+        CosinnusGroupMembership.objects.create(user=cls.user_target, group=group1, status=MEMBERSHIP_PENDING)
+        CosinnusGroupMembership.objects.create(user=cls.user_target, group=group2, status=MEMBERSHIP_INVITED_PENDING)
+        CosinnusGroupMembership.objects.create(user=cls.user_target, group=group3, status=MEMBERSHIP_MEMBER)
+        CosinnusGroupMembership.objects.create(user=cls.user_other, group=group1, status=MEMBERSHIP_PENDING)
+        CosinnusGroupMembership.objects.create(user=cls.user_other, group=group2, status=MEMBERSHIP_INVITED_PENDING)
+        CosinnusGroupMembership.objects.create(user=cls.user_other, group=group3, status=MEMBERSHIP_MEMBER)
+
+        # save membership sets for the expected state after the change
+        cls.user_target_memberships_expected = cls.get_memberships(cls.user_target, status__in=MEMBER_STATUS)
+        cls.user_other_memberships_expected = cls.get_memberships(cls.user_other)
+
+
+class RemovePendingMembershipsTaskTests(RemovePendingMembershipTestMixin, TestCase):
+    def test_removes_pending_memberships_for_target_user(self):
+        tasks.remove_pending_memberships_for_user_task(self.user_target.id)
+        self.assertEqual(self.get_memberships(user=self.user_target), self.user_target_memberships_expected)
+
+    def test_does_not_affect_other_users_memberships(self):
+        tasks.remove_pending_memberships_for_user_task(self.user_target.id)
+        self.assertEqual(self.get_memberships(user=self.user_other), self.user_other_memberships_expected)
+
+
+class RemovePendingMembersSignalIntegrationTests(RemovePendingMembershipTestMixin, TransactionTestCase):
+    def setUp(self):
+        self.setUpTestData()
+
+    def test_user_deactivation_emits_signal(self):
+        with catch_signal(user_deactivated) as handler:
+            self.user_target.is_active = False
+            self.user_target.save()
+
+        handler.assert_called_with(signal=user_deactivated, sender=User, user=self.user_target)
+
+    def test_removes_pending_memberships_for_target_user(self):
+        self.user_target.is_active = False
+        self.user_target.save()
+        self.assertEqual(
+            self.get_memberships(user=self.user_target),
+            self.user_target_memberships_expected,
+            msg='target user memberships were not deactivated',
+        )
+        self.assertEqual(
+            self.get_memberships(user=self.user_other),
+            self.user_other_memberships_expected,
+            msg='other user memberships were deactivated',
+        )

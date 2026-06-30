@@ -38,7 +38,7 @@
                 {% if not user|has_write_access:event or event.is_hidden_group_proxy %}
                 editable: false,
                 {% endif %}
-                url: '{{ event.get_absolute_url }}{% if not event.is_hidden_group_proxy and group != event.group %}?reflected_item_redirect=1{% endif %}'
+                url: '{{ event.get_absolute_url|safe }}{% if not event.is_hidden_group_proxy and group != event.group %}?reflected_item_redirect=1{% endif %}'
             },
             {% endif %}
         

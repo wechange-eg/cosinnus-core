@@ -27,3 +27,12 @@ class CosinnusEventConf(AppConf):
 
     # Hide event list filters (e.g. 'o', 'creator', see EventFilter class).
     EVENT_LIST_HIDDEN_FILTERS = []
+
+    # Enable v3 calendar, replacing v2 event pages.
+    V3_CALENDAR_ENABLED = False
+
+    # Defines a text shown in the create and edit view of public events in the v3 calendar.
+    V3_CALENDAR_EVENT_MESSAGE = None
+
+    # Setting to make the description of events required.
+    V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED = False

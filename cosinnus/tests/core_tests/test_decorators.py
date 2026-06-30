@@ -19,8 +19,8 @@ from cosinnus.core.decorators.views import (
     superuser_required,
 )
 from cosinnus.models import MEMBERSHIP_ADMIN, MEMBERSHIP_PENDING
-from cosinnus.models.group import CosinnusGroup as Group
 from cosinnus.models.group import CosinnusGroupMembership as Membership
+from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 
 
@@ -118,12 +118,12 @@ class TestRequireAdminAccessDecorator(TestCase):
         self.admin = User.objects.create_user('admin', 'admin@localhost', 'pw')
         self.superuser = User.objects.create_superuser('superuser', 'super@localhost', 'pw')
 
-        self.public = Group.objects.create(name='Public group', public=True, type=Group.TYPE_SOCIETY)
+        self.public = CosinnusSociety.objects.create(name='Public group', public=True)
         Membership.objects.create(group_id=self.public.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.public.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.public.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
-        self.private = Group.objects.create(name='Private group', type=Group.TYPE_SOCIETY)
+        self.private = CosinnusSociety.objects.create(name='Private group')
         Membership.objects.create(group_id=self.private.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.private.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.private.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
@@ -266,12 +266,12 @@ class TestRequireReadAccessDecorator(TestCase):
         self.admin = User.objects.create_user('admin', 'admin@localhost', 'pw')
         self.superuser = User.objects.create_superuser('superuser', 'super@localhost', 'pw')
 
-        self.public = Group.objects.create(name='Public group', public=True, type=Group.TYPE_SOCIETY)
+        self.public = CosinnusSociety.objects.create(name='Public group', public=True)
         Membership.objects.create(group_id=self.public.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.public.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.public.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
-        self.private = Group.objects.create(name='Private group', type=Group.TYPE_SOCIETY)
+        self.private = CosinnusSociety.objects.create(name='Private group')
         Membership.objects.create(group_id=self.private.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.private.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.private.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
@@ -421,12 +421,12 @@ class TestRequireWriteAccessDecorator(TestCase):
         self.admin = User.objects.create_user('admin', 'admin@localhost', 'pw')
         self.superuser = User.objects.create_superuser('superuser', 'super@localhost', 'pw')
 
-        self.public = Group.objects.create(name='Public group', public=True, type=Group.TYPE_SOCIETY)
+        self.public = CosinnusSociety.objects.create(name='Public group', public=True)
         Membership.objects.create(group_id=self.public.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.public.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.public.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
-        self.private = Group.objects.create(name='Private group', type=Group.TYPE_SOCIETY)
+        self.private = CosinnusSociety.objects.create(name='Private group')
         Membership.objects.create(group_id=self.private.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.private.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.private.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)

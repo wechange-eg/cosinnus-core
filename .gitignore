@@ -32,3 +32,5 @@ dev_settings.py
 cosinnus_conference/static/conference/
 
 !.eslintrc.json
+
+_trial_temp/

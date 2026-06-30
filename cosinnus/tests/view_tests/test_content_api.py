@@ -4,12 +4,12 @@ from urllib.parse import urlencode
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.core.cache import cache
+from django.test import override_settings
 from django.urls import reverse
 from rest_framework.test import APILiveServerTestCase
 
 from cosinnus.conf import settings
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
-from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.tests.view_tests.views import MainContentFormTestView
@@ -20,11 +20,8 @@ User = get_user_model()
 TEST_USER_DATA = {'username': '1', 'email': 'testuser@example.com', 'first_name': 'Test', 'last_name': 'User'}
 
 
+@override_settings(COSINNUS_V3_FRONTEND_ENABLED=True, COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED=True)
 class MainContentViewTest(APILiveServerTestCase):
-    # Not sure why, but setting available apps to installed apps fixes the database setup.
-    # Without this the test database setup fails unable to create wagtail tables.
-    available_apps = settings.INSTALLED_APPS
-
     @classmethod
     def setUpClass(cls):
         cache.clear()
@@ -43,10 +40,6 @@ class MainContentViewTest(APILiveServerTestCase):
         site.domain = f'{self.host}:{self.server_thread.port}'
         site.save()
         self.domain = f'http://{site.domain}'
-        # recreate portal, as objects created by migrations are droped by the TransactionTestCase teardown.
-        CosinnusPortal.objects.get_or_create(
-            id=1, defaults={'name': 'default portal', 'slug': 'default', 'public': True, 'site': site}
-        )
         self.test_user = User.objects.create(**TEST_USER_DATA)
         self.test_user_profile = self.test_user.cosinnus_profile
         self.test_group = CosinnusSociety.objects.create(name='Test Group')

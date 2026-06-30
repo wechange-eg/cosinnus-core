@@ -382,7 +382,15 @@
                       });
                 })
                 .on("fullCalendarSelect", function(event, date) {
-
+                    // for the v3 calendar, instantly redirect to the large v3 calendar url instead of asking the user
+                    if (cosinnus_v3_calendar_enabled) {
+                        var calendarTargetUrl = $('#calendarConfirmV3CalendarURLTarget').data('group-calendar-target-url');
+                        if (calendarTargetUrl) {
+                            window.location.href = calendarTargetUrl;
+                        }
+                        return
+                    }
+                    
                     // Dates have been selected. Now the user might want to add an event.
                     var startDateDataAttr = date.start.getFullYear() + "-"
                         + ((date.start.getMonth()+1).toString().length === 2
@@ -1776,6 +1784,10 @@
         connectRefreshAllCodeMirrors: function() {
             $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', $.cosinnus.refreshAllCodeMirrors);
         },
+
+        isTouchDevice: function () {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+        }
         
     };
 })( jQuery );

@@ -1,6 +1,10 @@
 {% load i18n static cosinnus_tags %}
 
-{% if request.user and request.user.is_authenticated %} 
+{% if SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
+    <span id="calendarConfirmV3CalendarURLTarget" style="display: none;" data-group-calendar-target-url="{% group_url 'cosinnus:event:calendar' group=group %}"></span>
+{% endif %}
+
+{% if request.user and request.user.is_authenticated %}
     <!-- Modal: Really sure you want to add the event? -->
     <div class="modal fade" id="confirmEventModal" tabindex="1" role="dialog" aria-labelledby="confirmEventModalLabel" aria-hidden="true">
         <div class="modal-dialog">

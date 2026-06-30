@@ -13,6 +13,7 @@ cosinnus_root_patterns = [
 
 cosinnus_group_patterns = [
     re_path(r'^stub/$', views.cloud_stub_view, name='stub'),
+    # Deprecated URL, do not assign any more! Use `cloud-oath2-profile` under `/cloud/oauth2/profile/` instead!
     re_path(r'^oauth2/$', views.oauth_view, name='oauth2'),
     re_path(r'^$', views.cloud_index_view, name='index'),
 ]
