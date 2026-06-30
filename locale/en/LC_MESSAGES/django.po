@@ -1351,6 +1351,9 @@ msgstr ""
 msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
 msgstr ""
 
+msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
+msgstr ""
+
 msgid "- Added numerous user interface and accessibility improvements throughout the site.\n"
 msgstr ""
 
@@ -1360,6 +1363,9 @@ msgid ""
 msgstr ""
 
 msgid "- Fixed a bug where certain types of malformed image links in markdown texts of news posts and events could cause a page error.\n"
+msgstr ""
+
+msgid "- Fixed a bug where event polls were sometimes shown in the map listings where only scheduled events should be shown.\n"
 msgstr ""
 
 msgid ""
@@ -1394,12 +1400,21 @@ msgstr ""
 msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
 msgstr ""
 
+msgid "- Fixed a bug where the button to delete ideas was not shown. It can now always be found on the bottom of the \"Edit Idea\" page.\n"
+msgstr ""
+
 msgid "- Fixed a bug where the password reset and password change pages would show a page error when a new password was entered that did not match the password requirements.\n"
 msgstr ""
 
 msgid ""
 "- Fixed a bug where todo lists could not be migrated into the Deck app when there was a todo that was assigned to a deleted user account.\n"
 "- Fixed a bug where the deck could sometimes not be initialized for some groups and projects, preventing the Deck app from being used.\n"
+msgstr ""
+
+msgid "- Fixed a bug where usernames were sometimes not correctly formatted in notification e-mails.\n"
+msgstr ""
+
+msgid "- Fixed a bug where users could sometimes not be invited to groups/projects depending on their profile visibility settings.\n"
 msgstr ""
 
 msgid "- Fixed a page error during the profile setup when entering a profile location.\n"
@@ -1432,12 +1447,24 @@ msgid ""
 "- Fixed an issue where certain login or signup flows were sometimes not redirecting properly.\n"
 msgstr ""
 
+msgid "- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+
+msgid "- Improved the error handling when uploading unsupported images types and formats. Trying to upload unsupported image types will now result in an informative error message.\n"
+msgstr ""
+
 msgid "- Introducing the task board. You can now enable the modern task board in your groups and projects, which replaces the todo app. You can migrate your todos from the todos app, as well as any personal nextcloud boards you might have had.\n"
+msgstr ""
+
+msgid "- Membership requests for groups/projects by users who deleted their accounts are now no longer shown in the membership area.\n"
 msgstr ""
 
 msgid ""
 "- Several improvements have been made to the redesign user interface, and an introductory tooltip tour has been added.\n"
 "- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+
+msgid "- The creation of new Ethercalcs is now disabled. Please use spreadsheets in the cloud app as a modern alternative. Your existing Ethercalcs can still be accessed and downloaded or exported.\n"
 msgstr ""
 
 msgid "- The password requirements have been changed: Now a password must consist of at least 12 characters. Otherwise, there are no further requirements regarding the chosen characters. Passwords are still checked against a list of frequently used passwords.\n"
@@ -2817,6 +2844,9 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
+msgid "Calendar Redesign"
+msgstr ""
+
 msgid "Calendar creation is in progress..."
 msgstr ""
 
@@ -3003,6 +3033,9 @@ msgid "Clear Filters"
 msgstr ""
 
 msgid "Clear to enforce a re-sync off all events."
+msgstr ""
+
+msgid "Clear to enforce a re-sync off group events."
 msgstr ""
 
 #, python-format
@@ -7645,6 +7678,9 @@ msgstr ""
 msgid "Nextcloud Deck Board ID"
 msgstr ""
 
+msgid "Nextcloud Group Calendar CalDAV CTag"
+msgstr ""
+
 msgid "Nextcloud Group Calendar CalDAV Last Sync Timestamp"
 msgstr ""
 
@@ -10599,6 +10635,9 @@ msgstr ""
 msgid "The following users were put on the wait list: %s"
 msgstr ""
 
+msgid "The fully redesigned calendar with a mobile-optimized interface has been launched!"
+msgstr ""
+
 msgid "The generated 6-digit code (for example: 123456)"
 msgstr ""
 
@@ -10662,6 +10701,9 @@ msgid "The meeting \"%(object_name)s\" you are attending was updated in %(team_n
 msgstr ""
 
 msgid "The message was sent to the chosen participants."
+msgstr ""
+
+msgid "The new calendar in groups and projects has improvements regarding displaying and sharing public events as well as advanced features for internal meetings, including recurring events and CalDAV synchronization."
 msgstr ""
 
 msgid "The next higher up object in the BBB hierarchy chain is"
