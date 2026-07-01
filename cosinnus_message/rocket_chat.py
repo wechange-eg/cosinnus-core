@@ -10,8 +10,8 @@ import six
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
-from django.utils.dateparse import parse_datetime
 from django.utils.crypto import get_random_string
+from django.utils.dateparse import parse_datetime
 from django.utils.translation import gettext_lazy as _
 from oauth2_provider.models import Application
 from requests.exceptions import ConnectionError, Timeout
@@ -1575,7 +1575,7 @@ class RocketChatConnection:
         if len(words) <= word_count:
             return text
         last_word = words[word_count - 1]
-        truncated_text = f'{text[:last_word.end()]} …'
+        truncated_text = f'{text[: last_word.end()]} …'
         return truncated_text
 
     def _format_relay_message(self, instance):
@@ -1630,7 +1630,9 @@ class RocketChatConnection:
             if response.get('error', None) == 'The room id provided does not match where the message is from.':
                 # if the room has moved, we cannot reach the note anymore, ignore this error
                 return
-            logger.error('RocketChat: notes_update did not return a success response', extra={'response': response})
+            logger.error(
+                'RocketChat: relay_message_update did not return a success response', extra={'response': response}
+            )
 
     def notes_attachments_update(self, note):
         """
