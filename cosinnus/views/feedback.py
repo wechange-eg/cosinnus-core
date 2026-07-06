@@ -8,6 +8,7 @@ from django.http.response import HttpResponseForbidden, HttpResponseNotAllowed
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_str
+from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_protect
 
 from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
@@ -58,7 +59,7 @@ def _notify_users_for_reported_objects(report_obj, request=None):
                 'object_name': title,
                 'report_admin_url': report_url,
                 'report_text': report_obj.text,
-                'object_url': report_obj.get_absolute_url(),
+                'object_url': mark_safe(report_obj.get_absolute_url()),
             }
         )
 
