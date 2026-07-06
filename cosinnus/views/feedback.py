@@ -66,6 +66,26 @@ def _notify_users_for_reported_objects(report_obj, request=None):
         send_mail_or_fail(receiver.email, subject, template, context)
 
 
+def submit_report(request, model_cls, obj_id, text):
+    """Create a reported-object and notify portal admins.
+    :param request: Request used to get creator and context for the email
+    :param model_cls: model-class for the report target
+    :param obj_id: object id of the report target
+    :param text: report text
+    :return: created report object
+    """
+
+    content_type = ContentType.objects.get_for_model(model_cls)
+    report_obj = CosinnusReportedObject.objects.create(
+        content_type=content_type, object_id=obj_id, text=text, creator=request.user
+    )
+
+    # notification to portal admins
+    _notify_users_for_reported_objects(report_obj, request)
+
+    return report_obj
+
+
 @csrf_protect
 def report_object(request):
     if not is_ajax(request) or not request.method == 'POST':
@@ -87,19 +107,8 @@ def report_object(request):
     else:
         model_cls = apps.get_model(app_label, model)
 
-    content_type = ContentType.objects.get_for_model(model_cls)
-    report_obj = CosinnusReportedObject.objects.create(
-        content_type=content_type, object_id=obj_id, text=text, creator=request.user
-    )
-
-    # notification to portal admins
-    _notify_users_for_reported_objects(report_obj, request)
-
-    """
-    data = {
-        'status': 'error',
-    }
-    """
+    # create report and send mails to portal admins
+    submit_report(request, model_cls, obj_id, text)
 
     data = {
         'status': 'success',
