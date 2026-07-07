@@ -1580,6 +1580,8 @@ class BaseTaggableAdmin(ReverseModelAdmin):
                     'topics',
                     'text_topics',
                     'bbb_room',
+                    'migrated',
+                    'dynamic_fields',
                 ]
             },
         ),
