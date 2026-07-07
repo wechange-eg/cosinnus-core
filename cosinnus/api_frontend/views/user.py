@@ -512,7 +512,8 @@ class UserProfileView(UserSerializationMixin, APIView):
         BrowsableAPIRenderer,
     )
     parser_classes = (JSONParser, MultiPartParser, FormParser)
-    authentication_classes = (CsrfExemptSessionAuthentication, JWTAuthentication)
+    # FIXME: Switched to auth with CSRF to test frontend integration.
+    authentication_classes = (authentication.SessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
