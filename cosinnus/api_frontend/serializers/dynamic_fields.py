@@ -96,6 +96,7 @@ class CosinnusDynamicFieldsSerializerMixin:
                 field_serializer_map = {
                     dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: serializers.BooleanField,
                     dynamic_fields.DYNAMIC_FIELD_TYPE_INT: serializers.IntegerField,
+                    dynamic_fields.DYNAMIC_FIELD_TYPE_FLOAT: serializers.FloatField,
                 }
                 field_serializer = field_serializer_map.get(field_options.type, default_serializer)
                 serializer_params = {
