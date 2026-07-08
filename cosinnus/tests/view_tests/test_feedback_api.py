@@ -37,8 +37,8 @@ class ReportAPITest(APITestCase):
         # set urls
         cls.report_api_url = reverse('cosinnus:frontend-api:api-report-event')
 
-    @patch('cosinnus.views.feedback.send_mail_or_fail')
-    def test_report_event(self, mock_send_mail_or_fail):
+    @patch('cosinnus.views.feedback.send_mail_or_fail_threaded')
+    def test_report_event(self, mock_send_mail_or_fail_threaded):
         # make sure no report exist
         self.assertFalse(CosinnusReportedObject.objects.exists())
 
@@ -65,7 +65,9 @@ class ReportAPITest(APITestCase):
         self.assertEqual(reported_object.text, repost_post_data['text'])
 
         # check email send to portal admin
-        self.assertEqual(mock_send_mail_or_fail.call_count, 1)
-        self.assertEqual(mock_send_mail_or_fail.call_args[0][0], self.test_admin.email)
-        self.assertIn('Offensive item reported:', mock_send_mail_or_fail.call_args[0][1])
-        self.assertEqual(mock_send_mail_or_fail.call_args[0][2], 'cosinnus/mail/reported_object_submitted.html')
+        self.assertEqual(mock_send_mail_or_fail_threaded.call_count, 1)
+        self.assertEqual(mock_send_mail_or_fail_threaded.call_args[0][0], self.test_admin.email)
+        self.assertIn('Offensive item reported:', mock_send_mail_or_fail_threaded.call_args[0][1])
+        self.assertEqual(
+            mock_send_mail_or_fail_threaded.call_args[0][2], 'cosinnus/mail/reported_object_submitted.html'
+        )

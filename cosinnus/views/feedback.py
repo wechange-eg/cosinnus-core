@@ -11,7 +11,7 @@ from django.utils.encoding import force_str
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_protect
 
-from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
+from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail_threaded
 from cosinnus.models.feedback import CosinnusReportedObject
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel
@@ -64,7 +64,7 @@ def _notify_users_for_reported_objects(report_obj, request=None):
         )
 
         subject = render_to_string(subj_template, context)
-        send_mail_or_fail(receiver.email, subject, template, context)
+        send_mail_or_fail_threaded(receiver.email, subject, template, context)
 
 
 def submit_report(request, model_cls, obj_id, text):
