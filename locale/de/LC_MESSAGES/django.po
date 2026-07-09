@@ -360,7 +360,7 @@ msgid ""
 "\n"
 "The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
 msgstr ""
-"%(group_type)s %(group_name)s nach %(deactivation_after)s seit Deaktivierung gelöscht.\n"
+"%(group_type)s %(group_name)s wird nach %(deactivation_after)s seit Deaktivierung gelöscht.\n"
 "\n"
 "%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
