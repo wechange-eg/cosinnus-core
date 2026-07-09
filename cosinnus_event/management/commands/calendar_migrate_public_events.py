@@ -50,8 +50,7 @@ class Command(BaseCommand):
             if event.attached_image and not event.image:
                 event.image.name = event.attached_image.get_media_image_path()
 
-            # save
-            event.save(update_fields=['note', 'image'])
-            event.media_tag.migrated = True
-            event.media_tag.save(update_fields=['migrated'])
+            # save without triggering hooks
+            type(event).objects.filter(pk=event.pk).update(note=event.note, image=event.image)
+            type(event.media_tag).objects.filter(pk=event.media_tag.pk).update(migrated=True)
         self.stdout.write('Done.')

@@ -243,7 +243,9 @@ def update_group_last_activity(group, precision_days=30):
             )
 
     # NextCloud
-    if settings.COSINNUS_CLOUD_ENABLED and group.nextcloud_groupfolder_name:
+    # Note: Only checking active groups, as the group-folder is detached from deactivated groups and can't be accessed
+    # with the implemented CalDav/API call.
+    if settings.COSINNUS_CLOUD_ENABLED and group.nextcloud_groupfolder_name and group.is_active:
         try:
             last_next_cloud_activity = get_group_folder_last_modified(group.nextcloud_groupfolder_name)
             last_activity = max(last_activity, last_next_cloud_activity)

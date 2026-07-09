@@ -7,7 +7,7 @@ from django.views.generic.base import RedirectView, TemplateView
 
 from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
-from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
+from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import DipatchGroupURLMixin, RequireAdminMixin
 from cosinnus_cloud.hooks import get_nc_user_id
@@ -64,7 +64,7 @@ class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
         return 'eventId' in request.GET and request.GET.get('type') == 'public'
 
     def get(self, request, *args, **kwargs):
-        if not check_object_read_access(self.group, request.user) and not self._is_public_event_detail_request(request):
+        if not check_ug_membership(request.user, self.group) and not self._is_public_event_detail_request(request):
             # only calendars request for public event detail are allowed for non-group members, redirect to dashboard
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
         if request.user.is_authenticated and not self.group.nextcloud_calendar_url:
@@ -104,7 +104,7 @@ class CosinnusCalendarView(DipatchGroupURLMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         user = self.request.user
-        user_is_group_member = check_ug_admin(user, self.group) or check_ug_membership(user, self.group)
+        user_is_group_member = check_ug_membership(user, self.group)
         context.update(
             {
                 'private_events_available': user_is_group_member,

@@ -8,9 +8,10 @@ from django.http.response import HttpResponseForbidden, HttpResponseNotAllowed
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_str
+from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_protect
 
-from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
+from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail_threaded
 from cosinnus.models.feedback import CosinnusReportedObject
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel
@@ -58,12 +59,32 @@ def _notify_users_for_reported_objects(report_obj, request=None):
                 'object_name': title,
                 'report_admin_url': report_url,
                 'report_text': report_obj.text,
-                'object_url': report_obj.get_absolute_url(),
+                'object_url': mark_safe(report_obj.get_absolute_url()),
             }
         )
 
         subject = render_to_string(subj_template, context)
-        send_mail_or_fail(receiver.email, subject, template, context)
+        send_mail_or_fail_threaded(receiver.email, subject, template, context)
+
+
+def submit_report(request, model_cls, obj_id, text):
+    """Create a reported-object and notify portal admins.
+    :param request: Request used to get creator and context for the email
+    :param model_cls: model-class for the report target
+    :param obj_id: object id of the report target
+    :param text: report text
+    :return: created report object
+    """
+
+    content_type = ContentType.objects.get_for_model(model_cls)
+    report_obj = CosinnusReportedObject.objects.create(
+        content_type=content_type, object_id=obj_id, text=text, creator=request.user
+    )
+
+    # notification to portal admins
+    _notify_users_for_reported_objects(report_obj, request)
+
+    return report_obj
 
 
 @csrf_protect
@@ -87,19 +108,8 @@ def report_object(request):
     else:
         model_cls = apps.get_model(app_label, model)
 
-    content_type = ContentType.objects.get_for_model(model_cls)
-    report_obj = CosinnusReportedObject.objects.create(
-        content_type=content_type, object_id=obj_id, text=text, creator=request.user
-    )
-
-    # notification to portal admins
-    _notify_users_for_reported_objects(report_obj, request)
-
-    """
-    data = {
-        'status': 'error',
-    }
-    """
+    # create report and send mails to portal admins
+    submit_report(request, model_cls, obj_id, text)
 
     data = {
         'status': 'success',

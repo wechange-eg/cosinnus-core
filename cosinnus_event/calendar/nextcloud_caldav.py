@@ -217,11 +217,10 @@ class NextcloudCaldavConnection:
                 caldav_event_uid = str(caldav_event.icalendar_component['UID'])
 
                 # mark event as migrated and change state to synchronized event
-                event.state = Event.STATE_SYNCHRONIZED_EVENT
-                event.nextcloud_calendar_uid = caldav_event_uid
-                event.media_tag.migrated = True
-                event.media_tag.save()
-                event.save()
+                type(event).objects.filter(pk=event.pk).update(
+                    state=Event.STATE_SYNCHRONIZED_EVENT, nextcloud_calendar_uid=caldav_event_uid
+                )
+                type(event.media_tag).objects.filter(pk=event.media_tag.pk).update(migrated=True)
 
             # set migration status
             group.calendar_migration_set_status(group.CALENDAR_MIGRATION_STATUS_SUCCESS)

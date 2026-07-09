@@ -117,6 +117,17 @@
                                 logoutSuccess(global_logout_success)
                             } else {
                                 // logout failed
+                                if (res.status == 401) {
+                                    // check if the error was the user already being logged out, and ignore that
+                                    const data = await res.json();
+                                    if (data?.message === "Current user is not logged in") {
+                                        // logout success because already logged out
+                                        console.log("Logout success: NC user already logged out.")
+                                        logoutSuccess(global_logout_success)
+                                        return
+                                    }
+                                }
+                                // else show an error to the user
                                 throw new Error('NC logout failed!')
                             }
                         } catch (error) {
