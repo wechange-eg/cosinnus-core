@@ -3,9 +3,28 @@
 
 {% block container_class %}timeline-item-event{% endblock %}
 
+{% block report_button_frame %}
+    {# Only show report button for calendar events and doodles, not synced events #}
+    {% if item.state <= 2 %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
+{% block avatar %}
+    {% if not item.creator %}
+        <a href="{{ item.get_absolute_url }}">
+            {% include "cosinnus/group/group_avatar_image.html" with group=item.group %}
+        </a>
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
 {% block creation_label %}
-	{% if item.creator == user %}
-		{% trans "You created an event" %}
+	{% if item.creator == user and not item.state == 5 %}
+        {% trans "You created an event" %}
+    {% elif item.state == 5 or not item.creator %}
+        {% trans "A new meeting was scheduled" %}
 	{% else %}
 		{% trans "created an event" context "This appears next to new items in the timeline, as in '<Jane> created a new item'" %}
 	{% endif %}

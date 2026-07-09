@@ -29,19 +29,23 @@
 				        </form>
 			        {% endblock %}
 	        	{% endif %}
-				<li>
-					<a href="#" {% cosinnus_report_object_action item %}>
-						{% trans "Report offensive content" %}
-					</a>
-				</li>
+                {% block report_button_frame %}
+                    <li>
+                        <a href="#" {% cosinnus_report_object_action item %}>
+                            {% trans "Report offensive content" %}
+                        </a>
+                    </li>
+                {% endblock %}
 	        </ul>
 		</div>
 		
 		<div class="timeline-item-row header flex-row">
 			<div class="avatar">
-				<a href="{{ item.creator|profile_url }}">
-					{% include "cosinnus/user/user_avatar_image.html" with user=item.creator %}
-				</a>
+                {% block avatar %}
+                    <a href="{{ item.creator|profile_url }}">
+                        {% include "cosinnus/user/user_avatar_image.html" with user=item.creator %}
+                    </a>
+                {% endblock %}
 			</div>
 			<div class="header-info flex-grow">
 				<div class="item-info">
