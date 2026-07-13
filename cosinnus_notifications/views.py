@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import logging
-from typing import Optional, Tuple, Union, cast
+from typing import List, Optional, Tuple, Union, cast
 
 import six
 from django.contrib import messages
@@ -63,7 +63,7 @@ def apply_global_notification_settings(
     global_setting: Optional[int] = None,
     portal_group_setting: Optional[int] = None,
     rocketchat_setting: Optional[int] = None,
-) -> Optional[MaybeLazyString]:
+) -> List[MaybeLazyString]:
     """
     Applies global notification settings for the given user. Handles system logic+side effects, enforces invariants.
     - Settings given as None or outside the valid choices will be ignored and not changed.
@@ -75,7 +75,7 @@ def apply_global_notification_settings(
             GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES
     :param rocketchat_setting: email notification setting for rocket chat, valid values in
             GlobalUserNotificationSetting.SETTING_CHOICES
-    :return: Error-Message as lazy-translated string-object on Error, None on success
+    :return: List of Error-Messages as lazy-translated string-object on Error, empty List on success
     """
     setting_obj = GlobalUserNotificationSetting.objects.get_object_for_user(user)
 
@@ -123,7 +123,7 @@ def apply_global_notification_settings(
             'the setting in the rocketchat user preferences manually!'
         )
 
-    return None
+    return []
 
 
 def refresh_global_notification_rocketchat_setting(user) -> Tuple[bool, Optional[MaybeLazyString]]:

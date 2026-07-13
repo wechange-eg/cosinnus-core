@@ -997,6 +997,31 @@ class GuestAccessTokenView(APIView):
 
 
 class UserNotificationSettingView(APIView):
+    """
+    Get or update the current user's global notification settings.
+
+    `setting` controls notifications for user-created projects and groups:
+
+    - `0`: Never
+    - `1`: Immediately
+    - `2`: Daily report
+    - `3`: Weekly report
+    - `4`: Individual settings for each project or group
+
+    Note: Value `4` cannot be set in this API endpoint. Use the Django Form instead.
+
+    `portal_group_setting` controls notifications for portal-wide groups:
+
+    - `0`: Never
+    - `1`: Immediately
+    - `2`: Daily report
+    - `3`: Weekly report
+
+    The response always contains a `warnings` list. It is empty when no
+    warnings occurred.
+    """
+
+    serializer_class = CosinnusGlobalUserNotificationSettingSerializer
     renderer_classes = (
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
@@ -1006,6 +1031,7 @@ class UserNotificationSettingView(APIView):
 
     def get(self, request):
         notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(request.user)
+        notification_setting.warnings = []
         serializer = CosinnusGlobalUserNotificationSettingSerializer(notification_setting)
         return Response(data=serializer.data)
 
@@ -1017,14 +1043,16 @@ class UserNotificationSettingView(APIView):
         serializer.is_valid(raise_exception=True)
 
         # do not call serializer.save(), we use our own function with side-effects
-        error_message = apply_global_notification_settings(request.user, serializer.validated_data.get('setting'))
+        warnings = apply_global_notification_settings(
+            request.user,
+            global_setting=serializer.validated_data.get('setting'),
+            portal_group_setting=serializer.validated_data.get('portal_group_setting'),
+        )
 
         notification_setting.refresh_from_db()
+        notification_setting.warnings = warnings
         response_serializer = CosinnusGlobalUserNotificationSettingSerializer(notification_setting)
 
         data = response_serializer.data
-
-        if error_message:
-            data['warning'] = str(error_message)
 
         return Response(data=data)

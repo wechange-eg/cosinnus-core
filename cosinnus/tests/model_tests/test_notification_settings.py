@@ -124,17 +124,57 @@ class UserNotificationSettingAPITest(APITestCase):
         self.assertEqual(response.data['portal_group_setting'], 0)
 
     def test_update_notification_setting_valid(self):
-        new_settings = {'setting': 4, 'portal_group_setting': 0}
+        new_settings = {'setting': 2, 'portal_group_setting': 1}
 
         self.client.force_authenticate(user=self.user)
         response = self.client.post(self.url, data=new_settings, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(new_settings, response.data)
+        self.assertEqual(response.data['portal_group_setting'], new_settings['portal_group_setting'])
+        self.assertEqual(response.data['setting'], new_settings['setting'])
 
         # data has been changed
         notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
         self.assertEqual(notification_setting.setting, new_settings['setting'])
+        self.assertEqual(notification_setting.portal_group_setting, new_settings['portal_group_setting'])
+
+    def test_update_notification_setting_invalid_value_4(self):
+        new_settings = {'setting': 4, 'portal_group_setting': 1}
+
+        self.client.force_authenticate(user=self.user)
+        response = self.client.post(self.url, data=new_settings, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # data has not been changed
+        notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
+        self.assertEqual(notification_setting.setting, 3)
+        self.assertEqual(notification_setting.portal_group_setting, 0)
+
+    def test_update_notification_setting_partial_global_valid(self):
+        new_settings = {'setting': 1}
+
+        self.client.force_authenticate(user=self.user)
+        response = self.client.post(self.url, data=new_settings, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['setting'], new_settings['setting'])
+
+        # data has been changed
+        notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
+        self.assertEqual(notification_setting.setting, new_settings['setting'])
+
+    def test_update_notification_setting_partial_portal_group_valid(self):
+        new_settings = {'portal_group_setting': 1}
+
+        self.client.force_authenticate(user=self.user)
+        response = self.client.post(self.url, data=new_settings, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['portal_group_setting'], new_settings['portal_group_setting'])
+
+        # data has been changed
+        notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
         self.assertEqual(notification_setting.portal_group_setting, new_settings['portal_group_setting'])
 
     def test_update_notification_setting_invalid(self):
@@ -161,7 +201,7 @@ class UserNotificationSettingAPITest(APITestCase):
 
         def apply_settings_and_return_error(*args, **kwargs):
             original_apply_settings(*args, **kwargs)
-            return ERROR_MESSAGE
+            return [ERROR_MESSAGE]
 
         with patch(
             'cosinnus.api_frontend.views.user.apply_global_notification_settings',
@@ -170,7 +210,7 @@ class UserNotificationSettingAPITest(APITestCase):
             response = self.client.post(self.url, data=new_settings, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['warning'], ERROR_MESSAGE)
+        self.assertListEqual(response.data['warnings'], [ERROR_MESSAGE])
 
         # local data has been changed
         notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
