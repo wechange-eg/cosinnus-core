@@ -328,7 +328,7 @@ msgid ""
 msgstr ""
 "%(group_type)s %(group_name)s wurde gerade deaktiviert nach %(deactivation_after)s Inaktivität.\n"
 "\n"
-"Deaktivierte/s Gruppe/Projekt wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
+"%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
 #, python-format
 msgid ""
@@ -338,7 +338,7 @@ msgid ""
 msgstr ""
 "%(group_type)s %(group_name)s wurde gerade durch Administrator/in %(deleted_by)s deaktiviert.\n"
 "\n"
-"Deaktivierte/s Gruppe/Projekt wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
+"%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
 #, python-format
 msgid ""
@@ -350,9 +350,9 @@ msgid ""
 msgstr ""
 "%(group_type)s %(group_name)s wird nach %(deactivation_after)s seit der letzten Aktivität deaktiviert und dann endgültig gelöscht. Das passiert in %(deactivation_in)s.\n"
 "\n"
-"Wenn du nicht möchtest dass die Gruppe/das Project gelöscht wird, erstelle einen Inhalt dort.\n"
+"Wenn du nicht möchtest, dass die Gruppe/das Projekt gelöscht wird, erstelle einen Inhalt dort.\n"
 "\n"
-"Wenn eine frühere Löschen gewünscht ist, kann die Gruppe/das Project unter %(delete_group_url)s gelöscht werden."
+"Wenn eine frühere Löschung gewünscht ist, kann die Gruppe/das Projekt unter %(delete_group_url)s gelöscht werden."
 
 #, python-format
 msgid ""
@@ -360,9 +360,9 @@ msgid ""
 "\n"
 "The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
 msgstr ""
-"%(group_type)s %(group_name)s nach %(deactivation_after)s seit Deaktivierung gelöscht.\n"
+"%(group_type)s %(group_name)s wird nach %(deactivation_after)s seit Deaktivierung gelöscht.\n"
 "\n"
-"Deaktivierte/s Gruppe/Projekt wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
+"%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
 #, python-format
 msgid "%(group_type)s %(group_name)s will be deleted due to inactivity"
