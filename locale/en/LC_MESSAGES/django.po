@@ -8140,10 +8140,10 @@ msgstr ""
 msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
 msgstr ""
 
-msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgid "Once you have joined some groups or projects, custom settings will be available here."
 msgstr ""
 
-msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants. Passwords are not stored in the system and can be downloaded only once!"
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
 msgstr ""
 
 msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants. Passwords are not stored in the system and can be downloaded only once!"
@@ -11399,6 +11399,9 @@ msgid "This user account is disabled. The user cannot log in or use the account.
 msgstr ""
 
 msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "This value cannot be selected via this API. Use the Django form instead."
 msgstr ""
 
 msgid "This website allows no anonymous access."
