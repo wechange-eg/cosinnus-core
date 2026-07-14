@@ -559,7 +559,7 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
         with transaction.atomic():
             # save global notification setting
             notification_setting = int(request.POST.get('notification_setting', '-1'))
-            # the error-message is ignored here
+            # the error-messages are ignored here
             _ = apply_global_notification_settings(request.user, global_setting=notification_setting)
 
             # save visibility setting:

@@ -77,6 +77,7 @@ def apply_global_notification_settings(
             GlobalUserNotificationSetting.SETTING_CHOICES
     :return: List of Error-Messages as lazy-translated string-object on Error, empty List on success
     """
+    error_messages = []
     setting_obj = GlobalUserNotificationSetting.objects.get_object_for_user(user)
 
     if global_setting is not None and global_setting in GlobalUserNotificationSetting.SETTING_VALID_VALUES:
@@ -88,7 +89,6 @@ def apply_global_notification_settings(
     ):
         setting_obj.portal_group_setting = portal_group_setting
 
-    success = True
     if settings.COSINNUS_ROCKET_ENABLED:
         from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
         from cosinnus_message.utils.utils import (
@@ -106,24 +106,26 @@ def apply_global_notification_settings(
             setting_obj.rocketchat_setting = rocketchat_setting
 
             # propagate the setting to RocktChat
+            rocketchat_setting_saved = False
             try:
-                success = save_rocketchat_mail_notification_preference_for_user_setting(user, rocketchat_setting)
+                rocketchat_setting_saved = save_rocketchat_mail_notification_preference_for_user_setting(
+                    user, rocketchat_setting
+                )
             except RocketChatDownException:
                 logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                success = False
             except Exception as e:
-                logging.exception(e)
-                success = False
+                logging.exception(f'Failed to save the RocketChat mail notification preference: {e}')
+
+            if not rocketchat_setting_saved:
+                error_messages.append(
+                    _(
+                        'Your rocketchat setting could not be saved. If this error persists, please configure '
+                        'the setting in the rocketchat user preferences manually!'
+                    )
+                )
 
     setting_obj.save()
-
-    if not success:
-        return _(
-            'Your rocketchat setting could not be saved. If this error persists, please configure '
-            'the setting in the rocketchat user preferences manually!'
-        )
-
-    return []
+    return error_messages
 
 
 def refresh_global_notification_rocketchat_setting(user) -> Tuple[bool, Optional[MaybeLazyString]]:
@@ -215,11 +217,12 @@ class NotificationPreferenceView(ListView):
             portal_group_setting = int(request.POST.get('portal-group-setting', '-1'))
             rocketchat_setting = int(request.POST.get('rocketchat_setting', '-1'))
 
-            error_message = apply_global_notification_settings(
+            error_messages = apply_global_notification_settings(
                 request.user, global_setting, portal_group_setting, rocketchat_setting
             )
-            if error_message:
-                messages.warning(request, cast(str, error_message))
+            if error_messages:
+                for message in error_messages:
+                    messages.warning(request, cast(str, message))
 
             """ TODO:
                 * initial setting on user rocketchat account creation, by their setting or portal default setting
