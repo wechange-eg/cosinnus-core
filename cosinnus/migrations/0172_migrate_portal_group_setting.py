@@ -9,6 +9,7 @@ SETTING_GROUP_INDIVIDUAL = 4
 
 
 def forwards(apps, schema_editor):
+    """Populate portal_group_setting values."""
     group_app_name, group_model_name = settings.COSINNUS_GROUP_OBJECT_MODEL.split('.')
     CosinnusGroupModel = apps.get_model(group_app_name, group_model_name)
 
@@ -58,7 +59,7 @@ def forwards(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('cosinnus', '0163_add_portal_group_setting'),
+        ('cosinnus', '0171_add_portal_group_setting'),
         ('cosinnus_notifications', '0010_auto_20220117_1735'),
     ]
 

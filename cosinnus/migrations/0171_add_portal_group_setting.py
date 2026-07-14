@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cosinnus', '0162_group_activity_fields'),
+        ('cosinnus', '0170_cosinnusgroup_add_nextcloud_calendar_ctag'),
     ]
 
     operations = [
