@@ -243,7 +243,7 @@ class ApplyGlobalNotificationSettingsTest(TestCase):
             rocketchat_setting=None,
         )
 
-        self.assertIsNone(result)
+        self.assertListEqual(result, [])
 
         setting_obj = self.get_setting_obj()
         self.assertEqual(setting_obj.setting, GlobalUserNotificationSetting.SETTING_DAILY)
@@ -267,7 +267,7 @@ class ApplyGlobalNotificationSettingsTest(TestCase):
             rocketchat_setting=None,
         )
 
-        self.assertIsNone(result)
+        self.assertListEqual(result, [])
 
         setting_obj.refresh_from_db()
         self.assertEqual(setting_obj.setting, GlobalUserNotificationSetting.SETTING_DAILY)
@@ -293,7 +293,7 @@ class ApplyGlobalNotificationSettingsTest(TestCase):
             rocketchat_setting=None,
         )
 
-        self.assertIsNone(result)
+        self.assertListEqual(result, [])
 
         setting_obj.refresh_from_db()
         self.assertEqual(setting_obj.setting, GlobalUserNotificationSetting.SETTING_NEVER)
@@ -313,7 +313,7 @@ class ApplyGlobalNotificationSettingsTest(TestCase):
             rocketchat_setting=999,
         )
 
-        self.assertIsNone(result)
+        self.assertListEqual(result, [])
 
         setting_obj.refresh_from_db()
         self.assertEqual(setting_obj.setting, GlobalUserNotificationSetting.SETTING_DAILY)
@@ -335,7 +335,7 @@ class ApplyGlobalNotificationSettingsTest(TestCase):
             rocketchat_setting=GlobalUserNotificationSetting.ROCKETCHAT_SETTING_MENTIONS,
         )
 
-        self.assertIsNone(result)
+        self.assertListEqual(result, [])
         mock_save_rocketchat.assert_not_called()
 
     @override_settings(COSINNUS_ROCKET_ENABLED=True)
@@ -347,7 +347,7 @@ class ApplyGlobalNotificationSettingsTest(TestCase):
             rocketchat_setting=GlobalUserNotificationSetting.ROCKETCHAT_SETTING_MENTIONS,
         )
 
-        self.assertIsNone(result)
+        self.assertListEqual(result, [])
 
         setting_obj = self.get_setting_obj()
         self.assertEqual(
@@ -370,7 +370,7 @@ class ApplyGlobalNotificationSettingsTest(TestCase):
             rocketchat_setting=GlobalUserNotificationSetting.ROCKETCHAT_SETTING_MENTIONS,
         )
 
-        self.assertIsNone(result)
+        self.assertListEqual(result, [])
 
         setting_obj = self.get_setting_obj()
         self.assertEqual(setting_obj.setting, GlobalUserNotificationSetting.SETTING_NEVER)
@@ -452,7 +452,7 @@ class ApplyGlobalNotificationSettingsTest(TestCase):
             rocketchat_setting=999,
         )
 
-        self.assertIsNone(result)
+        self.assertListEqual(result, [])
 
         setting_obj.refresh_from_db()
         self.assertEqual(
