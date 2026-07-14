@@ -76,7 +76,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
                     _(
                         '%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of '
                         'inactivity.\n\n'
-                        'The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. '
+                        'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                         'Until then, reactivation is possible by the admins under %(deactivated_groups_url)s.'
                     )
                     % mail_context
@@ -86,7 +86,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
                     _(
                         '%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since '
                         'deactivation.\n\n'
-                        'The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. '
+                        'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                         'Until then, reactivation is possible by the admins under %(deactivated_groups_url)s.'
                     )
                     % mail_context
@@ -99,9 +99,8 @@ def mark_group_for_deletion(group, triggered_by_user=None):
             )
             mail_content = (
                 _(
-                    '%(group_type)s %(group_name)s has just been deactivated at the instigation of the admin '
-                    '%(deleted_by)s.\n\n'
-                    'The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. '
+                    '%(group_type)s %(group_name)s has just been deactivated by the admin %(deleted_by)s.\n\n'
+                    'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
                     'Until then, reactivation is possible by the admins under %(deactivated_groups_url)s.'
                 )
                 % mail_context

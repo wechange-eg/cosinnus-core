@@ -267,14 +267,14 @@ msgstr ""
 msgid ""
 "%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of inactivity.\n"
 "\n"
-"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+"The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
 msgstr ""
 
 #, python-format
 msgid ""
-"%(group_type)s %(group_name)s has just been deactivated at the instigation of the admin %(deleted_by)s.\n"
+"%(group_type)s %(group_name)s has just been deactivated by the admin %(deleted_by)s.\n"
 "\n"
-"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+"The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
 msgstr ""
 
 #, python-format
@@ -290,7 +290,7 @@ msgstr ""
 msgid ""
 "%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
 "\n"
-"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+"The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
 msgstr ""
 
 #, python-format
@@ -13612,7 +13612,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your entire account, profile and personal information will be deactivated and irrevocably deleted in %(deactivation_in)s.\n"
+"Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and then irrevocably deleted.\n"
 "\n"
 "If you do not wish for you account to be deactivated, just log in once.\n"
 "\n"
@@ -13622,7 +13622,7 @@ msgid ""
 "\n"
 "The account may be stored in our backup systems for up to 6 months after deletion. If this is too long for you, please contact the support team of this platform for immediate deletion.\n"
 "\n"
-"During this %(deleted_after_days)s-day period after deletion, the e-mail address of your account is reserved and cannot be used to register a new account."
+"During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account is reserved and cannot be used to register a new account."
 msgstr ""
 
 msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
