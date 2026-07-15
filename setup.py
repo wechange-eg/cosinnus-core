@@ -175,6 +175,7 @@ setup(
         'django_extended_makemessages==1.7.1',
         'caldav==2.1.2',
         'nh3==0.3.5',
+        'factory-boy==3.3.3',
         # test requirements
         'freezegun==1.5.1',
         # requirements loaded in from github

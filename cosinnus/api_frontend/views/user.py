@@ -28,6 +28,7 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.user import (
+    CosinnusGlobalUserNotificationSettingSerializer,
     CosinnusGuestLoginSerializer,
     CosinnusHybridUserAdminCreateSerializer,
     CosinnusHybridUserAdminUpdateSerializer,
@@ -38,7 +39,7 @@ from cosinnus.api_frontend.serializers.user import (
 )
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
-from cosinnus.models import CosinnusPortal, get_domain_for_portal
+from cosinnus.models import CosinnusPortal, GlobalUserNotificationSetting, get_domain_for_portal
 from cosinnus.models.group import CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
@@ -56,6 +57,7 @@ from cosinnus.views.user import (
     UserSignupTriggerEventsMixin,
     email_first_login_token_to_user,
 )
+from cosinnus_notifications.views import apply_global_notification_settings
 
 logger = logging.getLogger('cosinnus')
 
@@ -991,4 +993,66 @@ class GuestAccessTokenView(APIView):
             'avatar': group.get_avatar_thumbnail_url() if group.avatar_url else None,
             'members': len(group.members),
         }
+        return Response(data=data)
+
+
+class UserNotificationSettingView(APIView):
+    """
+    Get or update the current user's global notification settings.
+
+    `setting` controls notifications for user-created projects and groups:
+
+    - `0`: Never
+    - `1`: Immediately
+    - `2`: Daily report
+    - `3`: Weekly report
+    - `4`: Individual settings for each project or group
+
+    Note: Value `4` cannot be set in this API endpoint. Use the Django Form instead.
+
+    `portal_group_setting` controls notifications for portal-wide default groups (forum etc.):
+
+    - `0`: Never
+    - `1`: Immediately
+    - `2`: Daily report
+    - `3`: Weekly report
+
+    The response always contains a `warnings` list. It is empty when no
+    warnings occurred.
+    """
+
+    serializer_class = CosinnusGlobalUserNotificationSettingSerializer
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(request.user)
+        notification_setting.warnings = []
+        serializer = CosinnusGlobalUserNotificationSettingSerializer(notification_setting)
+        return Response(data=serializer.data)
+
+    def post(self, request):
+        notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(request.user)
+        serializer = CosinnusGlobalUserNotificationSettingSerializer(
+            notification_setting, data=request.data, partial=True
+        )
+        serializer.is_valid(raise_exception=True)
+
+        # do not call serializer.save(), we use our own function with side-effects
+        warnings = apply_global_notification_settings(
+            request.user,
+            global_setting=serializer.validated_data.get('setting'),
+            portal_group_setting=serializer.validated_data.get('portal_group_setting'),
+        )
+
+        notification_setting.refresh_from_db()
+        notification_setting.warnings = warnings
+        response_serializer = CosinnusGlobalUserNotificationSettingSerializer(notification_setting)
+
+        data = response_serializer.data
+
         return Response(data=data)

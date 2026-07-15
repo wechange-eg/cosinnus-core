@@ -48,7 +48,7 @@
                     <div class="row"> 
                     
                         <div class="col-md-4">
-                            <legend style="margin: 0;">{% trans "I wish to receive notification emails" %}:</legend>
+                            <legend style="margin: 0;">{% trans "I wish to receive email notifications" %}:</legend>
                         </div>
 
                         <div class="col-md-8">
@@ -119,14 +119,37 @@
                     </div>
                 {% endfor %}
             </div>
-            
+
+            <div class="content-box large-space">
+                <div class="row">
+                    <div class="col-md-12"><!-- right column -->
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <legend style="margin: 0;">
+                                    {% blocktranslate with group_links=portal_default_group_links %}For content in the groups that you join automatically ({{ group_links }}), I wish to receive email notifications:{% endblocktranslate %}
+                            </div>
+                            <div class="col-md-8">
+                                <p class="no-horizontal-padding no-vertical-padding">
+                                    <select id="id-portal-group-setting" name="portal-group-setting" class="form-control">
+                                        {% for choice, label in portal_group_setting_choices %}
+                                            <option {% if portal_group_setting_selected == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 	        <div class="content-box large-space">
 	            <div class="row">
 	                <div class="col-md-12"><!-- right column -->
 	                    <div class="row"> 
 	                    
 	                        <div class="col-md-4">
-	                            <legend style="margin: 0;">{% trans "Receive notification emails in this language" %}:</legend>
+	                            <legend style="margin: 0;">{% trans "Receive email notifications in this language" %}:</legend>
 	                        </div>
 	                        <div class="col-md-8">
 	                            <p class="no-horizontal-padding no-vertical-padding">
@@ -194,6 +217,13 @@
     
 		<!-- a box with semi transparent background -->
 	    <div id="custom_settings_frame" class="content-box" style="display: none;"> {# toggled visible on load by JS, depending on global setting #}
+            {% if not grouped_notifications %}
+                <div class="row large-space">
+                    <div class="col-md-12"><!-- right column -->
+                        <legend>{% trans "Once you have joined some groups or projects, custom settings will be available here." %}</legend>
+                    </div>
+                </div>
+            {% endif %}
             {% for group, notifications, choice in grouped_notifications %}
                 <div class="row large-space">
 	                <div class="col-md-12"><!-- right column -->

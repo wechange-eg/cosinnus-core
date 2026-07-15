@@ -4419,7 +4419,7 @@ msgstr ""
 msgid "E-Mail Addresses"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgctxt "answer to \"i wish to receive rocketchat email notifications:\""
 msgid "E-Mails for all direct messages and mentions"
 msgstr ""
 
@@ -5154,7 +5154,11 @@ msgstr ""
 msgid "Footer"
 msgstr ""
 
-msgid "For content that I am following, I wish to receive notification emails"
+#, python-format
+msgid "For content in the groups that you join automatically (%(group_links)s), I wish to receive email notifications:"
+msgstr ""
+
+msgid "For content that I am following, I wish to receive email notifications"
 msgstr ""
 
 msgid "For example"
@@ -6114,7 +6118,7 @@ msgstr ""
 msgid "I wish to delete „%(title)s“."
 msgstr ""
 
-msgid "I wish to receive notification emails"
+msgid "I wish to receive email notifications"
 msgstr ""
 
 msgid "I would like to receive instant messages by email for RocketChat mentions and direct messages to me"
@@ -6351,7 +6355,7 @@ msgctxt "notification frequency"
 msgid "Immediately"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "Immediately (an individual email per event)"
 msgstr ""
 
@@ -6397,11 +6401,11 @@ msgstr ""
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "In a Daily Report"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "In a Weekly Report"
 msgstr ""
 
@@ -6478,7 +6482,7 @@ msgstr ""
 msgid "Individual choice"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "Individual settings for each Project/Group..."
 msgstr ""
 
@@ -7560,7 +7564,7 @@ msgctxt "notification frequency"
 msgid "Never"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "Never (we will not send you any emails)"
 msgstr ""
 
@@ -7727,7 +7731,7 @@ msgstr ""
 msgid "No Description set"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgctxt "answer to \"i wish to receive rocketchat email notifications:\""
 msgid "No E-Mails for RocketChat messages"
 msgstr ""
 
@@ -8134,6 +8138,9 @@ msgid "Once you are ready to begin the import, please click \"%(submit_button_la
 msgstr ""
 
 msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
+msgstr ""
+
+msgid "Once you have joined some groups or projects, custom settings will be available here."
 msgstr ""
 
 msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
@@ -9054,7 +9061,7 @@ msgstr ""
 msgid "Reason for rejection"
 msgstr ""
 
-msgid "Receive notification emails in this language"
+msgid "Receive email notifications in this language"
 msgstr ""
 
 msgid "Recipient"
@@ -10799,7 +10806,7 @@ msgstr ""
 msgid "The site administrator"
 msgstr ""
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
+msgid "The start date and time are used for reminder email notifications (if set up). Can span multiple days."
 msgstr ""
 
 msgid "The start date must be before the end date"
@@ -11394,6 +11401,9 @@ msgstr ""
 msgid "This user profile is scheduled for deletion at: "
 msgstr ""
 
+msgid "This value cannot be selected via this API. Use the Django form instead."
+msgstr ""
+
 msgid "This website allows no anonymous access."
 msgstr ""
 
@@ -11406,7 +11416,7 @@ msgstr ""
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
 msgstr ""
 
-msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgid "This will determine the time and date shown for events on the website and in your email notifications."
 msgstr ""
 
 msgid "This will determine who can see your idea."
