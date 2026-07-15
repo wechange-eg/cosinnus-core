@@ -61,3 +61,25 @@ def is_account_verified(self):
 
 
 setattr(get_user_model(), 'is_account_verified', property(is_account_verified))
+
+
+def is_account_login_approved(self):
+    """
+    Extend the user model with an `is_account_login_approved` property, that returns if the user account has been
+    approved by a portal admin.
+
+    - This distinguishes unapproved accounts from deactivated accounts by evaluating the `last_login` field.
+    - Always returns True if approval for new accounts is disabled
+      (`users_need_activation` in `cosinnus.models.group.CosinnusPortal` is set to False).
+    - If the check is disabled via the portal-setting, non-approved users are treated as disabled users.
+    """
+    from cosinnus.models import CosinnusPortal
+
+    if not CosinnusPortal.get_current().users_need_activation:
+        return True
+
+    # we do not have a dedicated is_approved field so we infer it from is_active and last_login
+    return self.is_active or self.last_login is not None
+
+
+setattr(get_user_model(), 'is_account_login_approved', property(is_account_login_approved))

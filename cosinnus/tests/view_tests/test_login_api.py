@@ -1,34 +1,38 @@
+import datetime
 import json
 
 from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework.test import APIClient, APITestCase, override_settings
 
+from cosinnus.api_frontend.handlers import error_codes
+from cosinnus.models import CosinnusPortal
 from cosinnus.models.group import UserGroupGuestAccess
 from cosinnus.models.group_extra import CosinnusSociety
 
 
 class LoginViewTest(APITestCase):
-    def setUp(self):
-        self.client = APIClient()
+    @classmethod
+    def setUpTestData(cls):
+        cls.portal = CosinnusPortal.get_current()
 
-        self.login_url = reverse('cosinnus:frontend-api:api-login')
+        cls.login_url = reverse('cosinnus:frontend-api:api-login')
 
-        self.user_data = {'username': 'testuser@mail.io', 'password': '12345'}
+        cls.user_data = {'username': 'testuser@mail.io', 'password': '12345'}
+        cls.another_user_data = {'username': 'another_user@mail.io', 'password': 'some_password'}
 
-        self.another_user_data = {'username': 'another_user@mail.io', 'password': 'some_password'}
-
-        self.user = User.objects.create_user(
+        cls.user = User.objects.create_user(
             username='testuser@mail.io', email='testuser@mail.io', password='12345', is_active=True
         )
-        self.user.save()
+        cls.user.save()
 
-        self.another_user = User.objects.create_user(
+        cls.another_user = User.objects.create_user(
             username='another_user@mail.io', email='another_user@mail.io', password='some_password', is_active=True
         )
-        self.another_user.save()
+        cls.another_user.save()
 
-        return super().setUp()
+    def setUp(self):
+        self.client = APIClient()
 
     def test_login_successful(self):
         """
@@ -49,8 +53,8 @@ class LoginViewTest(APITestCase):
         response = self.client.post(self.login_url, {'username': '', 'password': ''}, format='json')
         self.assertEqual(response.status_code, 400)
         response_json = json.loads(response.content)
-        self.assertIn('This field may not be blank.', response_json.get('data', {}).get('username'))
-        self.assertIn('This field may not be blank.', response_json.get('data', {}).get('password'))
+        self.assertIn(error_codes.ERROR_LOGIN_FIELD_REQUIRED, response_json.get('data', {}).get('username'))
+        self.assertIn(error_codes.ERROR_LOGIN_FIELD_REQUIRED, response_json.get('data', {}).get('password'))
         s = self.client.session.get('_auth_user_id')  # get the user's auth id, should be None because non authenticated
         self.assertEqual(s, None, 'user should not be logged in with no authentication')
 
@@ -63,7 +67,9 @@ class LoginViewTest(APITestCase):
         )
         self.assertEqual(response.status_code, 400)
         response_json = json.loads(response.content)
-        self.assertIn('Incorrect email or password', response_json.get('data', {}).get('non_field_errors'))
+        self.assertIn(
+            error_codes.ERROR_LOGIN_INCORRECT_CREDENTIALS, response_json.get('data', {}).get('non_field_errors')
+        )
         s = self.client.session.get('_auth_user_id')  # get the user's auth id, should be None because non authenticated
         self.assertEqual(s, None, 'user should not be logged in with an incorrect password')
 
@@ -78,7 +84,9 @@ class LoginViewTest(APITestCase):
         )
         self.assertEqual(response.status_code, 400)
         response_json = json.loads(response.content)
-        self.assertIn('Incorrect email or password', response_json.get('data', {}).get('non_field_errors'))
+        self.assertIn(
+            error_codes.ERROR_LOGIN_INCORRECT_CREDENTIALS, response_json.get('data', {}).get('non_field_errors')
+        )
         s = self.client.session.get('_auth_user_id')  # get the user's auth id, should be None because non authenticated
         self.assertEqual(s, None, 'user should not be logged in with an incorrect username')
 
@@ -92,13 +100,28 @@ class LoginViewTest(APITestCase):
         )
         self.assertEqual(response.status_code, 400)
         response_json = json.loads(response.content)
-        self.assertIn('Enter a valid email address.', response_json.get('data', {}).get('username'))
+        self.assertIn(error_codes.ERROR_LOGIN_INVALID_EMAIL_ADDRESS, response_json.get('data', {}).get('username'))
         s = self.client.session.get('_auth_user_id')  # get the user's auth id, should be None because non authenticated
         self.assertEqual(s, None, 'user should not be logged in with an invalid email')
 
-    def test_deactivated_user_cannot_login(self):
+    def test_deactivated_old_user_cannot_login(self):
         """
-        Ensure user cannot login being not active / beind deactivated
+        Ensure user cannot login being not active / beind deactivated  after logging in before
+        """
+        self.user.is_active = False
+        self.user.last_login = datetime.datetime.fromisoformat('2026-01-01 10:00')
+        self.user.save()
+
+        response = self.client.post(self.login_url, self.user_data, format='json')
+        self.assertEqual(response.status_code, 400)
+        response_json = json.loads(response.content)
+        self.assertIn(error_codes.ERROR_LOGIN_USER_DISABLED, response_json.get('data', {}).get('non_field_errors'))
+        s = self.client.session.get('_auth_user_id')  # get the user's auth id, should be None because non authenticated
+        self.assertEqual(s, None, 'deactivated user should not be logged in')
+
+    def test_deactivated_new_user_cannot_login(self):
+        """
+        Ensure user cannot login being not active / beind deactivated on first login
         """
         self.user.is_active = False
         self.user.save()
@@ -106,7 +129,7 @@ class LoginViewTest(APITestCase):
         response = self.client.post(self.login_url, self.user_data, format='json')
         self.assertEqual(response.status_code, 400)
         response_json = json.loads(response.content)
-        self.assertIn('Incorrect email or password', response_json.get('data', {}).get('non_field_errors'))
+        self.assertIn(error_codes.ERROR_LOGIN_USER_DISABLED, response_json.get('data', {}).get('non_field_errors'))
         s = self.client.session.get('_auth_user_id')  # get the user's auth id, should be None because non authenticated
         self.assertEqual(s, None, 'deactivated user should not be logged in')
 
@@ -123,6 +146,63 @@ class LoginViewTest(APITestCase):
         s = self.client.session.get('_auth_user_id')
         self.assertEqual(int(s), self.user.pk, 'this user should be logged in')
         self.assertNotEqual(int(s), self.another_user.pk, 'this user should not be logged in')
+
+    def test_admin_approval_new_unapproved_user_cannot_login(self):
+        self.portal.users_need_activation = True
+        self.portal.save()
+        self.user.is_active = False
+        self.user.save()
+
+        response = self.client.post(
+            self.login_url,
+            self.user_data,
+            format='json',
+        )
+        self.assertEqual(response.status_code, 400)
+        response_json = json.loads(response.content)
+        self.assertIn(
+            error_codes.ERROR_LOGIN_USER_NOT_ADMIN_APPROVED, response_json.get('data', {}).get('non_field_errors')
+        )
+        s = self.client.session.get('_auth_user_id')  # get the user's auth id, should be None because non authenticated
+        self.assertEqual(s, None, 'user should not be logged in with an incorrect username')
+
+    def test_admin_approval_old_disabled_user_cannot_login(self):
+        self.portal.users_need_activation = True
+        self.portal.save()
+        self.user.is_active = False
+        self.user.last_login = datetime.datetime.fromisoformat('2026-01-01 10:00')
+        self.user.save()
+
+        response = self.client.post(
+            self.login_url,
+            self.user_data,
+            format='json',
+        )
+        self.assertEqual(response.status_code, 400)
+        response_json = json.loads(response.content)
+        self.assertIn(error_codes.ERROR_LOGIN_USER_DISABLED, response_json.get('data', {}).get('non_field_errors'))
+        s = self.client.session.get('_auth_user_id')  # get the user's auth id, should be None because non authenticated
+        self.assertEqual(s, None, 'user should not be logged in with an incorrect username')
+
+    @override_settings(COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN=True)
+    def test_unverified_email_cannot_login(self):
+        self.portal.users_need_activation = False
+        self.portal.email_needs_verification = True
+        self.portal.save()
+        self.assertFalse(self.user.cosinnus_profile.email_verified, 'For this test, `email_verified` needs to be False')
+
+        response = self.client.post(
+            self.login_url,
+            self.user_data,
+            format='json',
+        )
+        self.assertEqual(response.status_code, 400)
+        response_json = json.loads(response.content)
+        self.assertIn(
+            error_codes.ERROR_LOGIN_USER_EMAIL_NOT_VERIFIED, response_json.get('data', {}).get('non_field_errors')
+        )
+        s = self.client.session.get('_auth_user_id')  # get the user's auth id, should be None because non authenticated
+        self.assertEqual(s, None, 'user should not be logged in with an unverified email-address')
 
 
 @override_settings(COSINNUS_USER_GUEST_ACCOUNTS_ENABLED=True)

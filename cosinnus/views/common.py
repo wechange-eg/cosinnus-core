@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import logging
+from typing import Optional
 
 import requests
 from annoying.functions import get_object_or_None
@@ -25,11 +26,13 @@ from django.http.response import (
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
+from django.utils.functional import Promise
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import RedirectView
 from django.views.generic.base import TemplateView, View
 
+import cosinnus.api_frontend.handlers.error_codes as error_codes
 from cosinnus.conf import settings
 from cosinnus.forms.user import UserEmailLoginForm
 from cosinnus.models.group import CosinnusPortal
@@ -135,10 +138,21 @@ switch_language = SwitchLanguageView.as_view()
 
 
 class LoginViewAdditionalLogicMixin(object):
-    def additional_user_validation_checks(self, user):
-        """Does additional validation checks for a user and may have effects like triggering sending a mail.
+    def additional_user_validation_checks(self, user) -> Optional[Promise]:
+        """
+        Does additional validation checks for a user and may have effects like triggering sending a mail.
+        - assumes the user is already authenticated
+
         @return None if no errors are found, else a str error message that should be displayed to the user.
-            if this does not return None, the login attempt should be denied!"""
+            if this does not return None, the login attempt should be denied!
+        """
+
+        if not user.is_account_login_approved:
+            return error_codes.ERROR_LOGIN_USER_NOT_ADMIN_APPROVED
+
+        if not user.is_active:
+            return error_codes.ERROR_LOGIN_USER_DISABLED
+
         if (
             settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN
             and CosinnusPortal.get_current().email_needs_verification
@@ -146,16 +160,7 @@ class LoginViewAdditionalLogicMixin(object):
         ):
             # send user another verification email
             send_user_email_to_verify(user, user.email, self.request)
-            msg = _('New verification email sent!')
-            msg += '\n\n' + _(
-                'You need to verify your email before logging in. We have just sent you an email with a verifcation '
-                "link. Please check your inbox, and if you haven't received an email, please check your spam folder."
-            )
-            msg += '\n\n' + _(
-                'We have just now sent another email with a new verification link to you. If the email still has not '
-                'arrived, you may log in again to receive yet another new email.'
-            )
-            return msg
+            return error_codes.ERROR_LOGIN_USER_EMAIL_NOT_VERIFIED
         return None
 
     def set_response_cookies(self, response):
@@ -181,6 +186,8 @@ class CosinnusLoginView(LoginViewAdditionalLogicMixin, LoginView):
         For email-verified-locked portals, refuse the login for users who haven't got their email verified.
         """
         user = form.get_user()
+        # form is valid, so user is authenticated
+
         # deny login if additional validation checks fail
         additional_checks_error_message = self.additional_user_validation_checks(user)
         if additional_checks_error_message:

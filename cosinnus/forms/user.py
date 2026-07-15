@@ -15,6 +15,7 @@ from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.utils.translation import gettext_lazy as _
 from osm_field.fields import LatitudeField, LongitudeField, OSMField
 
+from cosinnus.api_frontend.handlers import error_codes
 from cosinnus.conf import settings
 from cosinnus.forms.dynamic_fields import _DynamicFieldsBaseFormMixin
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
@@ -310,12 +311,22 @@ class UserChangeForm(forms.ModelForm):
 
 class UserEmailLoginForm(AuthenticationForm):
     error_messages = {
-        'invalid_login': _('Please enter a correct email and password. Note that both fields may be case-sensitive.'),
-        'no_cookies': _(
-            "Your Web browser doesn't appear to have cookies enabled. Cookies are required for logging in."
-        ),
-        'inactive': _('This account is inactive.'),
+        'invalid_login': error_codes.ERROR_LOGIN_INCORRECT_CREDENTIALS,
+        'no_cookies': error_codes.ERROR_LOGIN_NO_COOKIES,
+        'inactive': error_codes.ERROR_LOGIN_USER_DISABLED,
     }
+
+    def __init__(self, *args, **kwargs):
+        super(UserEmailLoginForm, self).__init__(*args, **kwargs)
+        self.fields['username'].error_messages['required'] = error_codes.ERROR_LOGIN_FIELD_REQUIRED
+        self.fields['password'].error_messages['required'] = error_codes.ERROR_LOGIN_FIELD_REQUIRED
+
+    def confirm_login_allowed(self, user):
+        """
+        Allow inactive users at this validation stage so they can be handled separately in the View.
+        Overriding django.contrib.auth.forms.AuthenticationForm.confirm_login_allowed()
+        """
+        return None
 
 
 class ValidatedPasswordChangeForm(PasswordChangeForm):
