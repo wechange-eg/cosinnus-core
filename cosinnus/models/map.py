@@ -578,6 +578,18 @@ class DetailedEventResult(DetailedMapResult):
             }
         )
 
+        # set creator
+        if obj.creator:
+            kwargs.update(
+                {
+                    'creator_name': obj.creator.get_full_name(),
+                    'creator_slug': obj.creator.username,
+                    'creator_is_public': (
+                        obj.creator.cosinnus_profile.media_tag_object().visibility == BaseTagObject.VISIBILITY_ALL
+                    ),
+                }
+            )
+
         # collect visible attending users
         sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['people'])
         sqs = sqs.filter_and(user_id__in=haystack_result.participants)

@@ -3728,6 +3728,7 @@ msgstr ""
 msgid "Created on: "
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Creator"
 msgstr ""
 
