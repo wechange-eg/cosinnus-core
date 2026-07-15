@@ -20,9 +20,8 @@ from cosinnus.forms.search import filter_searchqueryset_for_read_access, get_vis
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.templatetags.cosinnus_tags import textfield_with_html
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.templatetags.cosinnus_tags import textfield_with_html
 from cosinnus.utils.dates import HumanizedEventTimeObject
 from cosinnus.utils.group import message_group_admins_url
 from cosinnus.utils.permissions import (
@@ -275,6 +274,7 @@ class HaystackMapResult(BaseMapResult):
             'portal': portal,
             'group_slug': result.group_slug,
             'group_name': result.group_name,
+            'group_type': result.group_type,
             'participant_count': result.participant_count,
             'member_count': result.member_count,
             'content_count': result.content_count,
