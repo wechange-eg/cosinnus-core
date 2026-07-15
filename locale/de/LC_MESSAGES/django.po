@@ -14566,7 +14566,7 @@ msgid "Your registration hasn't been confirmed yet. We'll let you know via email
 msgstr "Deine Registrierung wurde noch nicht bestätigt. Wir geben dir per E-Mail Bescheid, sobald es losgehen kann."
 
 msgid "Your reply could not be matched to an existing message."
-msgstr "Für deine Antwort kontte die Urpsrungsnachricht nicht gefunden werden."
+msgstr "Für deine Antwort konnte die Ursprungsnachricht nicht gefunden werden."
 
 msgid "Your request seems to have come from an outdated version of this page. Please reload the page and try again!"
 msgstr "Deine Anfrage scheint von einer älteren Version dieser Seite gesendet worden zu sein. Bitte lade die Seite neu und versuche es erneut!"
