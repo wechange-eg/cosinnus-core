@@ -7016,6 +7016,10 @@ msgstr ""
 msgid "Login and Connect"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Login required"
+msgstr ""
+
 #, python-format
 msgid "Login token was sent to %(email)s."
 msgstr ""

@@ -26,8 +26,9 @@
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Author" %}:
             </span> 
-            {% if not cosinnus_active_user %}
-                <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{{ creator_name }}</a>
+            {% if not cosinnus_active_user and not creator_is_public %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{%  trans "Login required" %}</a>
             {% else %}
                 {{ macros.resultLink(portal, creator_slug, creator_name, "people") }}
             {% endif %}
