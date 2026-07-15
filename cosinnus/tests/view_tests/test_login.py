@@ -40,8 +40,7 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
 
     @translation.override(None)
     def _do_login_and_form_tests(self, user_data):
-        response = self.client.post(self.login_url, self.user_data, format='json', follow=True)
-        self.assertEqual(response.status_code, 200)
+        response = self.client.post(self.login_url, user_data, follow=False)
         self.assertMessages(response, [])
 
         return response
@@ -136,11 +135,9 @@ class UserLoginTest(CosinnusAssertsMixin, TestCase):
 
         # after trying to log in another user, the first user is still logged in, and we get redirected to dashboard
         response_another_user = self._do_login_and_form_tests(self.another_user_data)
-        self.assertEqual(response_another_user.wsgi_request.path, '/dashboard/')
         self.assertUserLoggedIn(response_another_user, self.user.pk)
-
-        # no messages are shown
-        self.assertMessages(response_another_user, [])
+        self.assertEqual(response_another_user.status_code, 302)
+        self.assertEqual(response_another_user.url, '/dashboard/')
 
     @override_settings(COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN=True)
     def test_unverified_email_cannot_login(self):
