@@ -206,6 +206,7 @@ class CosinnusConf(AppConf):
     }
 
     # list of BaseTaggableObjectModels that can be reflected from groups into projects
+    # DEPRECATED: The v3 calendar does not check this setting and always allows event reflections.
     REFLECTABLE_OBJECTS = [
         'cosinnus_note.note',
         'cosinnus_event.event',
