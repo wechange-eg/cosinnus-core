@@ -1010,7 +1010,7 @@ class UserNotificationSettingView(APIView):
 
     Note: Value `4` cannot be set in this API endpoint. Use the Django Form instead.
 
-    `portal_group_setting` controls notifications for portal-wide groups:
+    `portal_group_setting` controls notifications for portal-wide default groups (forum etc.):
 
     - `0`: Never
     - `1`: Immediately
