@@ -397,3 +397,6 @@ msgstr "Ein Fehler ist aufgetreten."
 
 msgid "Open Result Project"
 msgstr "Ergebnisprojekt öffnen"
+
+msgid "Creator"
+msgstr "Ersteller/in"

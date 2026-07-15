@@ -3917,8 +3917,9 @@ msgstr "Erstellte Projekte"
 msgid "Created on: "
 msgstr "Erstellt am: "
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Creator"
-msgstr "Ersteller"
+msgstr "Ersteller/in"
 
 msgid "Current Admins"
 msgstr "Aktuelle Admins"
