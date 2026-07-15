@@ -7600,6 +7600,10 @@ msgstr "Anmeldung abgebrochen"
 msgid "Login and Connect"
 msgstr "Anmeldung und Verbindung"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Login required"
+msgstr "Login erforderlich"
+
 #, python-format
 msgid "Login token was sent to %(email)s."
 msgstr "Login-Token wurde an %(email)s gesendet."

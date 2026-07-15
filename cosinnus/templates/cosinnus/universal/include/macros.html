@@ -195,6 +195,7 @@
         {% endif %}
         <div class="card-title">
             {% if type == "people" and not cosinnus_active_user and not is_public %}
+                {# Translators: __INCLUDE_JS_PO__ #}
                 <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{% trans "Login required" %}</a>
             {% else %}
                 {{ resultLink(portal, slug, title, type, group_slug=group_slug) }}
