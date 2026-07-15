@@ -4910,6 +4910,9 @@ msgstr "Gib ein Einladungs-Token ein:"
 msgid "Enter a user name or email to find users to invite..."
 msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
 
+msgid "Enter a valid email address."
+msgstr ""
+
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
@@ -6862,14 +6865,6 @@ msgstr "Wenn du es dir später bei einigen Teilnahmeanträgen anders überlegt h
 
 msgid "If you have made a mistake and wish to change your new email address, you can go back and change it again:"
 msgstr "Falls du einen Fehler gemacht hast und die E-Mail Adresse erneut ändern willst, gehe einfach zurück und ändere sie erneut."
-
-#, python-format
-msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
-msgstr "Wenn du noch keine Mail mit einem Bestätigungslink von %(portal_name)s bekommen hast, schaue bitte in deinem Spam-Ordner nach oder versuche, dich erneutz zu registrieren!"
-
-#, python-format
-msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
-msgstr "Wenn du noch keine Mail mit einem Bestätigungslink bekommen hast, registriere dich bitte erneut oder kontaktiere unseren Support unter %(email)s!"
 
 msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
 msgstr "Wenn du Probleme mit dem Verifikationsvorgang hast, wende dich bitte an den Support!"
@@ -9173,8 +9168,8 @@ msgid_plural "Please correct the errors below."
 msgstr[0] "Bitte korrigiere den Fehler unten."
 msgstr[1] "Bitte korrigiere die Fehler unten."
 
-msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
-msgstr "Bitte eine gültige E-Mail-Addresse und ein Passwort eingeben. Beide Felder berücksichtigen die Groß-/Kleinschreibung."
+msgid "Please enter a correct email and password."
+msgstr "Bitte eine gültige E-Mail-Adresse und ein Passwort eingeben."
 
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "Bitte beschreibe warum du diesen Inhalt meldest!"
@@ -11167,9 +11162,6 @@ msgstr "Das Pad konnte nicht erstellt werden weil der Etherpad-Service falsch ko
 msgid "The email address can be changed in the SSO provider."
 msgstr "Die E-Mail-Adresse kann im SSO Anbieter geädert werden."
 
-msgid "The email address for the account you are trying to use needs to be activated before you can log in."
-msgstr "Die E-Mail-Adresse des Accounts, mit dem du versuchst einzuloggen, muss erst bestätigt werden."
-
 msgid "The email address was not a valid email address!"
 msgstr "Die E-Mail Adresse war keine gültige E-Mail Adresse!"
 
@@ -11785,9 +11777,6 @@ msgstr "Dies wird die Standardeinstellungen für alle Tagungseinstellungen."
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Diese Anwendung kann nur für eine Gruppe, aber nicht für ein Projekt aktiviert werden!"
 
-msgid "This account is inactive."
-msgstr "Dieses Benutzerkonto ist deaktiviert worden."
-
 msgid "This account is no longer active. You have been logged out."
 msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
@@ -11863,6 +11852,9 @@ msgstr "Die Terminfindung für diese Veranstaltung ist bereits beendet. Die Abst
 
 msgid "This event has been canceled. Voting is closed."
 msgstr "Diese Veranstaltung wurde abgesagt. Die Abstimmung ist geschlossen."
+
+msgid "This field may not be blank."
+msgstr ""
 
 msgid "This function is not enabled for this conference."
 msgstr "Diese Funktion ist für diese Tagung nicht aktiviert."
@@ -14570,6 +14562,9 @@ msgstr "Dein Projekt/Gruppe ist jetzt der Organisation “%(name)s” zugeordnet
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
 msgstr "Hier findest du in Zukunft eine Übersicht über die von dir zuletzt genutzten Pads, Dateien, Termine, Aufgaben und andere Inhalte aus deinen Projekten und Gruppen."
 
+msgid "Your registration hasn't been confirmed yet. We'll let you know via email as soon as it's ready."
+msgstr "Deine Registrierung wurde noch nicht bestätigt. Wir geben dir per E-Mail Bescheid, sobald es losgehen kann."
+
 msgid "Your reply could not be matched to an existing message."
 msgstr "Für deine Antwort kontte die Urpsrungsnachricht nicht gefunden werden."
 
@@ -15835,6 +15830,14 @@ msgstr "Ja"
 #~ msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
 #~ msgstr "Wenn du kein/keine Portaladministrator_in bist und Änderungen vornehmen möchtest, wende dich bitte an einen der unten aufgeführten Portaladministrator_innen, um diese Änderungen für dich vorzunehmen."
 
+#, python-format
+#~ msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
+#~ msgstr "Wenn du noch keine Mail mit einem Bestätigungslink von %(portal_name)s bekommen hast, schaue bitte in deinem Spam-Ordner nach oder versuche, dich erneutz zu registrieren!"
+
+#, python-format
+#~ msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
+#~ msgstr "Wenn du noch keine Mail mit einem Bestätigungslink bekommen hast, registriere dich bitte erneut oder kontaktiere unseren Support unter %(email)s!"
+
 #~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 #~ msgstr "Falls du noch Inhalte von dir löschen möchtest, tue dies bitte jetzt indem du die Inhalte auf den entsprechenden Seiten löscht. Sobald du dein Konto löschst wirst du absolut keinen Zugriff mehr auf übrig gebliebene Inhalte von dir auf dieser Seite haben."
 
@@ -16030,6 +16033,9 @@ msgstr "Ja"
 #~ msgid "Phone number (optional)"
 #~ msgstr "Mobilnumer (optional)"
 
+#~ msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
+#~ msgstr "Bitte eine gültige E-Mail-Addresse und ein Passwort eingeben. Beide Felder berücksichtigen die Groß-/Kleinschreibung."
+
 #~ msgid "Please enter a title for the task!"
 #~ msgstr "Bitte gib einen Titel für die Aufgabe an!"
 
@@ -16221,6 +16227,9 @@ msgstr "Ja"
 #~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
 #~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
 
+#~ msgid "The email address for the account you are trying to use needs to be activated before you can log in."
+#~ msgstr "Die E-Mail-Adresse des Accounts, mit dem du versuchst einzuloggen, muss erst bestätigt werden."
+
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
 
@@ -16259,6 +16268,9 @@ msgstr "Ja"
 
 #~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
 #~ msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
+
+#~ msgid "This account is inactive."
+#~ msgstr "Dieses Benutzerkonto ist deaktiviert worden."
 
 #~ msgid "This conference shall be made publicly findable via other platforms."
 #~ msgstr "Diese Tagung soll über andere Plattformen öffentlich auffindbar gemacht werden."

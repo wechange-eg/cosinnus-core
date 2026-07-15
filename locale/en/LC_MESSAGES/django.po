@@ -4715,6 +4715,9 @@ msgstr ""
 msgid "Enter a user name or email to find users to invite..."
 msgstr ""
 
+msgid "Enter a valid email address."
+msgstr ""
+
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
@@ -6278,14 +6281,6 @@ msgid "If you have changed your mind for some applications later on, you can sim
 msgstr ""
 
 msgid "If you have made a mistake and wish to change your new email address, you can go back and change it again:"
-msgstr ""
-
-#, python-format
-msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
-msgstr ""
-
-#, python-format
-msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 msgstr ""
 
 msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
@@ -8582,7 +8577,7 @@ msgid_plural "Please correct the errors below."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
+msgid "Please enter a correct email and password."
 msgstr ""
 
 msgid "Please enter a description of why you are reporting this content!"
@@ -10546,9 +10541,6 @@ msgstr ""
 msgid "The email address can be changed in the SSO provider."
 msgstr ""
 
-msgid "The email address for the account you are trying to use needs to be activated before you can log in."
-msgstr ""
-
 msgid "The email address was not a valid email address!"
 msgstr ""
 
@@ -11130,9 +11122,6 @@ msgstr ""
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr ""
 
-msgid "This account is inactive."
-msgstr ""
-
 msgid "This account is no longer active. You have been logged out."
 msgstr ""
 
@@ -11207,6 +11196,9 @@ msgid "This event has already been scheduled. Voting is closed."
 msgstr ""
 
 msgid "This event has been canceled. Voting is closed."
+msgstr ""
+
+msgid "This field may not be blank."
 msgstr ""
 
 msgid "This function is not enabled for this conference."
@@ -13815,6 +13807,9 @@ msgid "Your project/group is now assigned to the organization “%(name)s”. We
 msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
+msgstr ""
+
+msgid "Your registration hasn't been confirmed yet. We'll let you know via email as soon as it's ready."
 msgstr ""
 
 msgid "Your reply could not be matched to an existing message."
