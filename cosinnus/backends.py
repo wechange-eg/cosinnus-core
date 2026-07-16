@@ -11,7 +11,7 @@ from django.core.mail.backends.smtp import EmailBackend
 from django.core.mail.message import sanitize_address
 from django.utils.encoding import force_str
 from elasticsearch.exceptions import TransportError
-from haystack.backends.elasticsearch7_backend import Elasticsearch7SearchBackend, Elasticsearch7SearchEngine
+from haystack.backends.elasticsearch_backend import ElasticsearchSearchBackend, ElasticsearchSearchEngine
 from urllib3.exceptions import ConnectionError, ProtocolError
 
 from cosinnus.conf import settings
@@ -154,7 +154,7 @@ def threaded_execution_and_catch_error(f):
     return error_wrapper
 
 
-class RobustElasticSearchBackend(Elasticsearch7SearchBackend):
+class RobustElasticSearchBackend(ElasticsearchSearchBackend):
     """A robust backend that doesn't crash when no connection is available"""
 
     MIN_GRAM = 2
@@ -229,5 +229,5 @@ class RobustElasticSearchBackend(Elasticsearch7SearchBackend):
         super(RobustElasticSearchBackend, self).clear(*args, **kwargs)
 
 
-class RobustElasticSearchEngine(Elasticsearch7SearchEngine):
+class RobustElasticSearchEngine(ElasticsearchSearchEngine):
     backend = RobustElasticSearchBackend
