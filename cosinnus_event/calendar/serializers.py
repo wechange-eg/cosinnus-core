@@ -15,7 +15,7 @@ from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusBaseGroup
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject, get_tag_object_model
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.permissions import check_object_write_access
+from cosinnus.utils.permissions import check_object_write_access, check_user_can_see_user
 from cosinnus_event.models import Event, EventAttendance
 
 
@@ -106,6 +106,12 @@ class CosinnusCalendarEventCreatorSerializer(serializers.ModelSerializer):
             'avatar',
             'profile_url',
         )
+
+    def to_representation(self, instance):
+        user = self.context['request'].user
+        if not check_user_can_see_user(user, instance):
+            return None
+        return super().to_representation(instance)
 
 
 class BBBRoomUrlsSerializerMixin:

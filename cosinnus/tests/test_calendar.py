@@ -387,11 +387,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'from_date': self.test_event.from_date.astimezone(self.tz).isoformat(),
                 'to_date': self.test_event.to_date.astimezone(self.tz).isoformat(),
                 'description': self.test_event.note,
-                'creator': {
-                    'name': self.test_user.cosinnus_profile.get_full_name(),
-                    'avatar': self.test_user.cosinnus_profile.get_avatar_thumbnail_url(),
-                    'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
-                },
+                'creator': None,
                 'can_edit': False,
                 'topics': [1, 2],
                 'location': 'Berlin',
@@ -409,6 +405,18 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'bbb_guest_url': None,
                 'image': None,
                 'attached_files': [],
+            }
+            self.assertEqual(data, expected_event_data)
+
+            # test registered user can access creator
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            expected_event_data['creator'] = {
+                'name': self.test_user.cosinnus_profile.get_full_name(),
+                'avatar': self.test_user.cosinnus_profile.get_avatar_thumbnail_url(),
+                'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
             }
             self.assertEqual(data, expected_event_data)
 
