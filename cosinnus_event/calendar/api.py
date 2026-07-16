@@ -216,9 +216,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     )
     def reflections(self, request, group_id, pk=None):
         """API to handle event reflection in user groups"""
-        data = {}
-        if self.reflections_enabled:
-            data = self.process_action(request)
+        data = self.process_action(request)
         return Response(data)
 
 
