@@ -54,16 +54,20 @@ class CosinnusCalendarListSerializer(AttendingSerializerMixin, serializers.Model
 
     attending = serializers.SerializerMethodField()
     space = serializers.IntegerField(source='group.id', read_only=True)
+    space_name = serializers.CharField(source='group.name', read_only=True)
+    space_url = serializers.URLField(source='group.get_absolute_url', read_only=True)
 
     class Meta:
         model = Event
         fields = (
             'id',
-            'space',
             'title',
             'from_date',
             'to_date',
             'attending',
+            'space',
+            'space_name',
+            'space_url',
         )
 
 
@@ -251,6 +255,9 @@ class CosinnusCalendarEventSerializer(
             'bookmarked',
             'image',
             'attached_files',
+            'space',
+            'space_name',
+            'space_url',
         )
 
     def to_representation(self, instance):
