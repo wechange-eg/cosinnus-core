@@ -42,12 +42,6 @@ class CosinnusBaseIntegrationHandler:
         UserProfile: [],
     }
 
-    # Store for changed instances and fields.
-    # As we cant trigger tasks in pre_save hooks but want to check changes. Changes to fields defined in
-    # "integrated_instance_fields" are checked in the pre_save hooks (e.g. _check_group_updated) and stored here.
-    # An update task is triggered only for changed instances in the post_save hooks  (e.g. _handle_group_updated).
-    _changed_instance_fields = {}
-
     # helper to populate integrated_group_types and active_group_types
     GROUP_TYPES_BY_MODEL = {
         CosinnusSociety: CosinnusBaseGroup.TYPE_SOCIETY,
@@ -67,10 +61,8 @@ class CosinnusBaseIntegrationHandler:
         if self.integrate_users:
             User = get_user_model()
             post_save.connect(self._handle_profile_created, sender=UserProfile, weak=False)
-            pre_save.connect(self._check_user_updated, sender=User, weak=False)
-            pre_save.connect(self._check_profile_updated, sender=UserProfile, weak=False)
-            post_save.connect(self._handle_user_updated, sender=User, weak=False)
-            post_save.connect(self._handle_profile_updated, sender=UserProfile, weak=False)
+            pre_save.connect(self._handle_user_updated, sender=User, weak=False)
+            pre_save.connect(self._handle_profile_updated, sender=UserProfile, weak=False)
             user_logged_in.connect(self._handle_user_logged_in, weak=False)
             signals.user_password_changed.connect(self._handle_user_password_changed, weak=False)
             signals.user_activated.connect(self._handle_user_activated, weak=False)
@@ -85,8 +77,7 @@ class CosinnusBaseIntegrationHandler:
             group_sender = [CosinnusGroup] + self.integrated_group_models
             for group_model in group_sender:
                 post_save.connect(self._handle_group_created, sender=group_model, weak=False)
-                pre_save.connect(self._check_group_updated, sender=group_model, weak=False)
-                post_save.connect(self._handle_group_updated, sender=group_model, weak=False)
+                pre_save.connect(self._handle_group_updated, sender=group_model, weak=False)
                 post_delete.connect(self._handle_group_deleted, sender=group_model, weak=False)
                 signals.group_reactivated.connect(self._handle_group_activated, sender=group_model, weak=False)
                 signals.group_deactivated.connect(self._handle_group_deactivated, sender=group_model, weak=False)
@@ -95,8 +86,7 @@ class CosinnusBaseIntegrationHandler:
 
             # membership hooks
             post_save.connect(self._handle_membership_created, sender=CosinnusGroupMembership, weak=False)
-            pre_save.connect(self._check_membership_updated, sender=CosinnusGroupMembership, weak=False)
-            post_save.connect(self._handle_membership_updated, sender=CosinnusGroupMembership, weak=False)
+            pre_save.connect(self._handle_membership_updated, sender=CosinnusGroupMembership, weak=False)
             post_delete.connect(self._handle_membership_deleted, sender=CosinnusGroupMembership, weak=False)
 
         # OAuth hooks
@@ -104,36 +94,16 @@ class CosinnusBaseIntegrationHandler:
             app_authorized.connect(self._handle_oauth_app_authorized, weak=False)
 
     def _has_instance_changed(self, instance):
-        """Helper to check if a pre-save instance has changed fields."""
+        """Helper to check if a pre-save instance has changed and requires the update handler to be called."""
         instance_model = type(instance)
         old_instance = instance_model.objects.filter(pk=instance.pk).first()
         if not old_instance:
             return False
-        changed_fields = [
-            field
+        has_field_changed = any(
+            getattr(instance, field) != getattr(old_instance, field)
             for field in self.integrated_instance_fields[instance_model]
-            if getattr(instance, field) != getattr(old_instance, field)
-        ]
-        return changed_fields
-
-    def _pop_change(self, instance):
-        """Pop instance changed fields of the instance."""
-        return self._changed_instance_fields.pop(instance, [])
-
-    def _store_changed_fields(self, instance, changed_fields):
-        """Store changed fields for the instance."""
-        if instance in self._changed_instance_fields:
-            for field in changed_fields:
-                if field not in self._changed_instance_fields[instance]:
-                    self._changed_instance_fields[instance].append(field)
-        else:
-            self._changed_instance_fields[instance] = changed_fields
-
-    def _store_change(self, instance):
-        """Check changed fields and store for later update hook trigger."""
-        changed_fields = self._has_instance_changed(instance)
-        if changed_fields:
-            self._store_changed_fields(instance, changed_fields)
+        )
+        return has_field_changed
 
     """
     User integration
@@ -141,12 +111,7 @@ class CosinnusBaseIntegrationHandler:
 
     def _is_integrated_user(self, user):
         """Checks if a user is considered for integration."""
-        return (
-            hasattr(user, 'cosinnus_profile')
-            and user.email
-            and not user.email.startswith('__deleted_user__')
-            and not user.is_guest
-        )
+        return hasattr(user, 'cosinnus_profile') and user.email and not user.is_guest
 
     def _handle_profile_created(self, sender, instance, created, **kwargs):
         """User create hook."""
@@ -157,34 +122,18 @@ class CosinnusBaseIntegrationHandler:
         """User create handler."""
         pass  # Implement me
 
-    def _check_user_updated(self, sender, instance, **kwargs):
-        """Check and store user updated fields."""
-        if instance.pk is not None and self._is_integrated_user(instance):
-            self._store_change(instance)
-
     def _handle_user_updated(self, sender, instance, **kwargs):
-        """Trigger update if user change has been stored."""
-        if instance.pk is not None and self._is_integrated_user(instance):
-            changed_fields = self._pop_change(instance)
-            if changed_fields:
-                self.do_user_update(instance, changed_fields=changed_fields)
-
-    def _check_profile_updated(self, sender, instance, **kwargs):
-        """Check and store profile updated fields."""
-        if instance.pk is not None and self._is_integrated_user(instance.user):
-            self._store_change(instance)
+        """User update hook."""
+        if instance.pk is not None and self._is_integrated_user(instance) and self._has_instance_changed(instance):
+            self.do_user_update(instance)
 
     def _handle_profile_updated(self, sender, instance, **kwargs):
-        """Trigger update if profile change has been stored."""
-        if instance.pk is not None and self._is_integrated_user(instance.user):
-            changed_fields = self._pop_change(instance)
-            if changed_fields:
-                self.do_user_update(instance.user, changed_fields=changed_fields)
+        """Profile update hook."""
+        if instance.pk is not None and self._is_integrated_user(instance.user) and self._has_instance_changed(instance):
+            self.do_user_update(instance.user)
 
-    def do_user_update(self, user, changed_fields=None):
-        """User update hook. Called for user or profile changes.
-        Note: changed_fields can contain user and profile fields.
-        """
+    def do_user_update(self, user):
+        """User update hook. Called for user or profile changes."""
         pass  # Implement me
 
     def _handle_user_logged_in(self, sender, user, **kwargs):
@@ -275,24 +224,14 @@ class CosinnusBaseIntegrationHandler:
         """Group create handler."""
         pass  # Implement me
 
-    def _check_group_updated(self, sender, instance, **kwargs):
-        """Check and store group updated fields."""
+    def _handle_group_updated(self, sender, instance, **kwargs):
+        """Group update hook."""
         if instance.pk is not None:
             instance = ensure_group_type(instance)
-            if self._is_group_type_integrated(instance):
-                # save the instance change, to be processed in the post_save _handle_group_updated hook
-                self._store_change(instance)
+            if self._is_group_type_integrated(instance) and self._has_instance_changed(instance):
+                self.do_group_update(instance)
 
-    def _handle_group_updated(self, sender, instance, created, **kwargs):
-        """Trigger update if group change has been stored."""
-        if not created:
-            instance = ensure_group_type(instance)
-            changed_fields = self._pop_change(instance)
-            if changed_fields:
-                # trigger update
-                self.do_group_update(instance, changed_fields=changed_fields)
-
-    def do_group_update(self, group, changed_fields=None):
+    def do_group_update(self, group):
         """Group update handler."""
         pass  # Implement me
 
@@ -358,42 +297,20 @@ class CosinnusBaseIntegrationHandler:
         """Membership create handler."""
         pass  # Implement me
 
-    def _check_membership_updated(self, sender, instance, **kwargs):
-        """Check group membership change.
-        If group or user changed, delete old membership and store the membership change to create a new membership in
-        the _handle_membership_updated hook.
-        If status changed store tghe change to update membership.
-        """
+    def _handle_membership_updated(self, sender, instance, **kwargs):
+        """Membership update hook."""
         if instance.pk is not None and self._is_integrated_membership(instance):
             old_instance = CosinnusGroupMembership.objects.get(pk=instance.id)
-            if old_instance:
-                delete_old_membership = False
-                if instance.user_id != old_instance.user_id:
-                    self._store_changed_fields(instance, ['user'])
-                    delete_old_membership = True
-                if instance.group_id != old_instance.group_id:
-                    self._store_changed_fields(instance, ['group'])
-                    delete_old_membership = True
-                if instance.status != old_instance.status:
-                    self._store_changed_fields(instance, ['status'])
-                if delete_old_membership:
-                    self.do_membership_delete(old_instance)
-
-    def _handle_membership_updated(self, sender, instance, **kwargs):
-        """Handle membership update depending on the storer changed fields.
-        If group or user has changed, the previous membership has been deleted, so create a new membership.
-        If status changed, tigger update task.
-        """
-        if instance.pk is not None and self._is_integrated_membership(instance):
-            changed_fields = self._pop_change(instance)
-            if 'group' in changed_fields or 'user' in changed_fields:
-                # create new membership
+            user_changed = instance.user_id != old_instance.user_id
+            group_changed = instance.group_id != old_instance.group_id
+            status_changed = instance.status != old_instance.status
+            if user_changed or group_changed:
+                self.do_membership_delete(old_instance)
                 self.do_membership_create(instance)
-            else:
-                # status change
-                self.do_membership_update(instance, changed_fields=changed_fields)
+            elif status_changed:
+                self.do_membership_update(instance)
 
-    def do_membership_update(self, membership, changed_fields=None):
+    def do_membership_update(self, membership):
         """Membership update handler."""
         pass  # Implement me
 

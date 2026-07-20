@@ -97,7 +97,7 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
         except Exception as e:
             logger.exception(e)
 
-    def do_user_update(self, user, changed_fields=None):
+    def do_user_update(self, user):
         """User update hook. Called for user or profile changes. Only update active users."""
         if user.is_active:
             self._do_user_update.delay(user.pk)
@@ -210,7 +210,7 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
         if not group.group_is_conference:
             self._do_group_create_or_update.delay(group.pk)
 
-    def do_group_update(self, group, changed_fields=None):
+    def do_group_update(self, group):
         """Group update handler."""
         self._do_group_create_or_update.delay(group.pk)
 
@@ -242,7 +242,7 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
         """Membership create handler."""
         self._membership_create_update_or_delete(membership)
 
-    def do_membership_update(self, membership, changed_fields=None):
+    def do_membership_update(self, membership):
         """Membership update handler."""
         self._membership_create_update_or_delete(membership)
 
