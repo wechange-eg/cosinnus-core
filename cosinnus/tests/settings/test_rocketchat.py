@@ -2,7 +2,7 @@ from .test import *  # noqa
 
 # enabled rocket chat
 COSINNUS_ROCKET_ENABLED = True
-COSINNUS_CHAT_BASE_URL = 'http://localhost:3000'
+COSINNUS_CHAT_BASE_URL = 'https://chat.dev.wechange.de/'
 
 # enable testing of Celery tasks. Eager tasks are executed immediately when delay is called.
 COSINNUS_USE_CELERY = True
