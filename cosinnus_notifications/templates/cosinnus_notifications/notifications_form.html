@@ -51,9 +51,9 @@
                             <legend style="margin: 0;">{% trans "I wish to receive email notifications" %}:</legend>
                         </div>
 
-                        <div class="col-md-8">
-                            <p class="no-horizontal-padding no-vertical-padding">
-                                <select id="id_global_setting" name="global_setting" class="form-control" onchange="toggleGlobalSettingsFrame();">
+                        <div class="col-md-8 cosinnus-field">
+                            <p class="no-horizontal-padding no-vertical-padding cosinnus-field-input">
+                                <select id="id_global_setting" name="global_setting" onchange="toggleGlobalSettingsFrame();">
                                     {% for choice, label in global_setting_choices %}
                                         <option {% if global_setting_selected == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
                                     {% endfor %}
@@ -81,9 +81,9 @@
 		                        <div class="col-md-4">
 		                            <legend style="margin: 0;">{% trans "I would like to receive instant messages by email for RocketChat mentions and direct messages to me" %}:</legend>
 		                        </div>
-		                        <div class="col-md-8">
-		                            <p class="no-horizontal-padding no-vertical-padding">
-		                                <select id="id_rocketchat_setting" name="rocketchat_setting" class="form-control">
+		                        <div class="col-md-8 cosinnus-field">
+		                            <p class="no-horizontal-padding no-vertical-padding cosinnus-field-input">
+		                                <select id="id_rocketchat_setting" name="rocketchat_setting">
 		                                    {% for choice, label in rocketchat_setting_choices %}
 		                                        <option {% if rocketchat_setting_selected == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
 		                                    {% endfor %}
@@ -105,9 +105,9 @@
                                 <div class="col-md-4">
                                     <legend style="margin: 0;">{{ multi_notification_preference.multi_notification_label }}:</legend>
                                 </div>
-                                <div class="col-md-8">
-                                    <p class="no-horizontal-padding no-vertical-padding">
-                                        <select id="id_multi_pref__{{ multi_notification_preference.multi_notification_id }}" name="multi_pref__{{ multi_notification_preference.multi_notification_id }}" class="form-control">
+                                <div class="col-md-8 cosinnus-field">
+                                    <p class="no-horizontal-padding no-vertical-padding cosinnus-field-input">
+                                        <select id="id_multi_pref__{{ multi_notification_preference.multi_notification_id }}" name="multi_pref__{{ multi_notification_preference.multi_notification_id }}">
                                             {% for choice, label in multi_notification_preference.multi_preference_choices %}
                                                 <option {% if multi_notification_preference.multi_preference_setting == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
                                             {% endfor %}
@@ -129,9 +129,9 @@
                                 <legend style="margin: 0;">
                                     {% blocktranslate with group_links=portal_default_group_links %}For content in the groups that you join automatically ({{ group_links }}), I wish to receive email notifications:{% endblocktranslate %}
                             </div>
-                            <div class="col-md-8">
-                                <p class="no-horizontal-padding no-vertical-padding">
-                                    <select id="id-portal-group-setting" name="portal-group-setting" class="form-control">
+                            <div class="col-md-8 cosinnus-field">
+                                <p class="no-horizontal-padding no-vertical-padding cosinnus-field-input">
+                                    <select id="id-portal-group-setting" name="portal-group-setting">
                                         {% for choice, label in portal_group_setting_choices %}
                                             <option {% if portal_group_setting_selected == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
                                         {% endfor %}
@@ -151,9 +151,9 @@
 	                        <div class="col-md-4">
 	                            <legend style="margin: 0;">{% trans "Receive email notifications in this language" %}:</legend>
 	                        </div>
-	                        <div class="col-md-8">
-	                            <p class="no-horizontal-padding no-vertical-padding">
-	                                <select id="id-language" name="language" class="form-control">
+	                        <div class="col-md-8 cosinnus-field">
+	                            <p class="no-horizontal-padding no-vertical-padding cosinnus-field-input">
+	                                <select id="id-language" name="language">
 	                                    {% for choice, label in language_choices %}
 	                                        <option {% if language_selected == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
 	                                    {% endfor %}
@@ -243,17 +243,17 @@
 		                                <legend>{{ group.name }}</legend>
 		                            </a>
 		                        </div>
-		                        <div class="col-md-8">
-		                            <p class="no-horizontal-padding no-vertical-padding">
-		                            <select id="notif_choice_{{group.pk}}" name="notif_choice:{{group.pk}}" class="form-control" onchange="toggleCustomNotificationPreferences({{group.pk}});" onmousedown="return toggleCustomNotificationHeader(event, {{group.pk}});">
-		                                <option {% if choice == "none" %}selected{% endif %} value="none">{% trans "No notifications" %}</option>
-		                                <option {% if choice == "all_1" %}selected{% endif %} value="all_1">{% trans "All notifications" %} ({% trans "Immediately" %})</option>
-		                                {% if not SETTINGS.COSINNUS_DIGEST_ONLY_FOR_ADMINS or user.is_superuser %}
-		                                <option {% if choice == "all_2" %}selected{% endif %} value="all_2">{% trans "All notifications" %} ({% trans "Daily" %})</option>
-		                                <option {% if choice == "all_3" %}selected{% endif %} value="all_3">{% trans "All notifications" %} ({% trans "Weekly" %})</option>
-		                                {% endif %}
-		                                <option default {% if choice == "custom" %}selected{% endif %} value="custom">{% trans "Custom" %}</option>
-		                            </select>
+		                        <div class="col-md-8 cosinnus-field">
+		                            <p class="no-horizontal-padding no-vertical-padding cosinnus-field-input">
+                                        <select id="notif_choice_{{group.pk}}" name="notif_choice:{{group.pk}}" onchange="toggleCustomNotificationPreferences({{group.pk}});" onmousedown="return toggleCustomNotificationHeader(event, {{group.pk}});">
+                                            <option {% if choice == "none" %}selected{% endif %} value="none">{% trans "No notifications" %}</option>
+                                            <option {% if choice == "all_1" %}selected{% endif %} value="all_1">{% trans "All notifications" %} ({% trans "Immediately" %})</option>
+                                            {% if not SETTINGS.COSINNUS_DIGEST_ONLY_FOR_ADMINS or user.is_superuser %}
+                                            <option {% if choice == "all_2" %}selected{% endif %} value="all_2">{% trans "All notifications" %} ({% trans "Daily" %})</option>
+                                            <option {% if choice == "all_3" %}selected{% endif %} value="all_3">{% trans "All notifications" %} ({% trans "Weekly" %})</option>
+                                            {% endif %}
+                                            <option default {% if choice == "custom" %}selected{% endif %} value="custom">{% trans "Custom" %}</option>
+                                        </select>
 		                            </p>
 		                        </div>
 		                    </div>
