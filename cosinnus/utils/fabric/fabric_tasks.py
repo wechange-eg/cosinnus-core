@@ -406,7 +406,7 @@ def updatedjango(_ctx):
 
 
 @task
-def updatepip27to28(_ctx):
+def updatepip27to29(_ctx):
     """A temporary task used to "silently" update the pip requirements introduced from cosinnus version 2.7.12
     to 2.7.8. Can be done before a portal hotdeploy so that no fulldeploy is neccessary.
     - python-dateutil==2.9.0.post0 was python-dateutil==2.4.1
@@ -426,7 +426,7 @@ def updatepip27to28(_ctx):
         # update/install new reqs from setup.py in diff from 2.7.12 --> 2.8.0
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run(
-                'pip install tblib==3.0.0 django_extended_makemessages==1.7.1 caldav==2.1.2 nh3==0.3.5 freezegun==1.5.1 python-dateutil==2.9.0.post0 icalendar==6.3.2'
+                'pip install tblib==3.0.0 django_extended_makemessages==1.7.1 caldav==2.1.2 nh3==0.3.5 freezegun==1.5.1 python-dateutil==2.9.0.post0 icalendar==6.3.2 factory-boy==3.3.3'
             )
             c.run('pip freeze | grep dateutil')
 
