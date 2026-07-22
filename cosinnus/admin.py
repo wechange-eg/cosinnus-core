@@ -1272,7 +1272,7 @@ class UserAdmin(DjangoUserAdmin):
     if settings.COSINNUS_DJANGO_ADMIN_ENABLE_INSTANT_USER_DELETE_ACTION:
 
         def instantly_delete_user(self, request, queryset):
-            from cosinnus.views.profile import delete_userprofile
+            from cosinnus.views.profile_deletion import delete_userprofile
 
             count = 0
             for user in queryset:
