@@ -27,10 +27,10 @@ class TestDigestSending(TestCase):
         cls.creator = ActiveUserFactory()
         cls.recipient = ActiveUserFactory()
 
-        cls.user_group = CosinnusSocietyFactory(members=[cls.user1, cls.user2])
+        cls.user_group = CosinnusSocietyFactory(members=[cls.creator, cls.recipient])
 
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
-        cls.forum = CosinnusSocietyFactory(name='Forum', slug=forum_slug, members=[cls.user1, cls.user2])
+        cls.forum = CosinnusSocietyFactory(name='Forum', slug=forum_slug, members=[cls.creator, cls.recipient])
 
         # clear the cache of the utility function to have the new forum group show up as a default group
         get_default_user_group_ids.cache_clear()
