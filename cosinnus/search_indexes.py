@@ -229,6 +229,7 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
         return obj.parent and obj.parent.name or None
 
     def prepare_group_type(self, obj):
+        """Return "groups" as the project parent is always a group."""
         return SEARCH_MODEL_NAMES.get(CosinnusSociety)
 
 

@@ -182,7 +182,7 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     group_slug = indexes.CharField(stored=True, indexed=True)
     # group name for linking, subject to implementing indexed
     group_name = indexes.CharField(stored=True, indexed=False)
-    # group type for linking
+    # group type of related group for linking (e.g. projects parent group, base-taggle-object project/group)
     group_type = indexes.CharField(stored=True, indexed=False)
     # attendees for events, projects for groups
     participant_count = indexes.IntegerField(stored=True, indexed=False)
@@ -212,7 +212,10 @@ class StoredDataIndexMixin(indexes.SearchIndex):
         return None
 
     def prepare_group_type(self, obj):
-        """Stub, overridden by individual indexes. Should return group search type as used in SEARCH_MODEL_NAMES."""
+        """
+        Stub, overridden by individual indexes.
+        Should return related group search type as used in SEARCH_MODEL_NAMES.
+        """
         return None
 
     def prepare_title(self, obj):
@@ -388,6 +391,7 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
         return obj.group.name
 
     def prepare_group_type(self, obj):
+        """Return the type of the taggable object group."""
         group_search_model_name = None
         group_models_by_type = {
             CosinnusGroup.TYPE_SOCIETY: CosinnusSociety,
