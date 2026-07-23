@@ -1157,6 +1157,12 @@ class CosinnusConf(AppConf):
     # Example: [{'login_url': '/oidc/keycloak/login/?process=login', 'name': 'Keycloak'}]
     V3_SSO_PROVIDER = []
 
+    # enable v3 user dashboard
+    USE_V3_PERSONAL_DASHBOARD = False
+
+    # v3 dashboard widget config, remove config to disable widgets
+    V3_PERSONAL_DASHBOARD_WIDGETS = {'dashboard.news': {}}
+
     # default CosinnusPortal logo image url, shown in the top left navigation bar
     # (will be used with a `static()`) call
     PORTAL_LOGO_NAVBAR_IMAGE_URL = 'img/v2_navbar_brand.png'
