@@ -1,13 +1,16 @@
 import logging
 import random
 
+from django.contrib.auth import get_user_model
 from geopy import OpenCage
 from geopy.exc import GeocoderInsufficientPrivileges, GeopyError
 from geopy.extra.rate_limiter import RateLimiter
 from rest_framework import serializers
 
 from cosinnus.conf import settings
+from cosinnus.models import BaseTaggableObjectModel
 from cosinnus.utils.functions import is_number
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.views.common import apply_star_object
 
 logger = logging.getLogger('cosinnus')
@@ -135,3 +138,48 @@ class CosinnusTagObjectBookmarkSerializer(serializers.Serializer):
         user = self.context['request'].user
         apply_star_object(instance, user, star=validated_data['bookmarked'])
         return instance
+
+
+class CosinnusTaggableObjectCreatorSerializer(serializers.ModelSerializer):
+    """Readonly serializer for the taggable object creator."""
+
+    name = serializers.CharField(source='cosinnus_profile.get_full_name', read_only=True)
+    avatar = serializers.URLField(source='cosinnus_profile.get_avatar_thumbnail_url', read_only=True)
+    profile_url = serializers.URLField(source='cosinnus_profile.get_absolute_url', read_only=True)
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'name',
+            'avatar',
+            'profile_url',
+        )
+
+
+class CosinnusTaggableObjectGroupSerializer(serializers.ModelSerializer):
+    """Readonly serializer for the taggable object group."""
+
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
+
+    class Meta(object):
+        model = get_cosinnus_group_model()
+        fields = ('name', 'url')
+
+
+class CosinnusBaseTaggableObjectSerializer(serializers.ModelSerializer):
+    """Readonly base serializer for taggable objects"""
+
+    creator = CosinnusTaggableObjectCreatorSerializer(read_only=True)
+    group = CosinnusTaggableObjectGroupSerializer(read_only=True)
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
+
+    class Meta:
+        model = BaseTaggableObjectModel
+        fields = (
+            'id',
+            'title',
+            'creator',
+            'created',
+            'group',
+            'url',
+        )
