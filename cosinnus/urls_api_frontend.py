@@ -20,6 +20,7 @@ from cosinnus.api_frontend.views.navigation import (
     VersionHistoryUnreadCountView,
     VersionHistoryView,
 )
+from cosinnus.api_frontend.views.personal_dashboard import CosinnusPersonalDashboardAPIView
 from cosinnus.api_frontend.views.portal import (
     PortalManagedTagsView,
     PortalSettingsView,
@@ -136,4 +137,10 @@ if settings.COSINNUS_DECK_ENABLED:
 if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
     urlpatterns += [
         path('', include(('cosinnus_event.calendar.urls_api_frontend', 'cosinnus'), namespace='calendar-api')),
+    ]
+
+if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
+    urlpatterns += [
+        path('api/v3/dashboard/', CosinnusPersonalDashboardAPIView.as_view(), name='api-peronsal-dashboard'),
+        path('', include('cosinnus_note.urls_api_frontend')),
     ]
