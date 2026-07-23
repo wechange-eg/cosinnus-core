@@ -1,0 +1,26 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags %}
+
+{% block page_title %}{% trans "Personal Dashboard" %}{% endblock page_title %}
+
+{% block leftnav %}
+    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% group_url 'cosinnus:event:calendar' group=group %}{% add_current_params %}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-dashboard"></i>
+                </span>
+                <span class="pull-right">
+                    <i class="fa fa-caret-right"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "Personal Dashboard" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+{% endblock leftnav %}
+
+{% block content %}
+    <div id="personal-dashboard-root"></div>
+{% endblock content %}

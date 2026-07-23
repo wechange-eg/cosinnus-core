@@ -413,7 +413,11 @@ if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
         path('administration/users/<int:pk>/edit/', administration.user_update, name='administration-user-update'),
     ]
 
-if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
+if getattr(settings, 'COSINNUS_USE_V3_PERSONAL_DASHBOARD', False):
+    urlpatterns += [
+        path('dashboard/', user_dashboard.personal_dashboard_view, name='user-dashboard'),
+    ]
+elif getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
     settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False
 ):
     dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
