@@ -33,7 +33,7 @@ from cosinnus.core.registries import app_registry
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.utils.dates import timestamp_from_datetime
 from cosinnus.utils.functions import clean_single_line_text, unique_aware_slugify
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
 from cosinnus.utils.lanugages import MultiLanguageFieldMagicMixin
 
 logger = logging.getLogger('cosinnus')
@@ -472,6 +472,27 @@ class LastVisitedMixin(object):
         return ContentType.objects.get_for_model(self)
 
 
+class BaseTaggableObjectManager(models.Manager):
+    def get_for_user(self, user):
+        """Returns tagged objects from the user groups, excluding default groups."""
+        from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
+
+        objects = self.filter(group__is_active=True)
+        objects = objects.prefetch_related('group', 'creator', 'media_tag')
+
+        # filter by user groups
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+        objects = objects.filter(group__pk__in=user_group_ids)
+
+        # exclude default groups
+        default_user_group_ids = get_default_user_group_ids()
+        objects = objects.exclude(group__pk__in=default_user_group_ids)
+
+        # consider blocked users
+        objects = filter_base_taggable_qs_for_blocked_user_content(objects, user)
+        return objects
+
+
 @six.python_2_unicode_compatible
 class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableObjectModel):
     """
@@ -521,6 +542,8 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
     )
 
     settings = models.JSONField(default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
+
+    objects = BaseTaggableObjectManager()
 
     class Meta(object):
         abstract = True
