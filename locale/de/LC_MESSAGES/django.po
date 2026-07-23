@@ -1453,6 +1453,9 @@ msgstr ""
 msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
 msgstr "- Es wurde eine Firebase-Push-Integration für Push-Benachrichtigungen an mobile Geräte hinzugefügt.\n"
 
+msgid "- Added a notification setting that allows users to configure different notification frequencies for portal-wide groups versus user-created groups and projects.\n"
+msgstr "- Es wurde eine Benachrichtigungseinstellung hinzugefügt, mit der man unterschiedliche Benachrichtigungshäufigkeiten für seitenweite Gruppen und von Benutzer/innen erstellte Gruppen und Projekte festlegen kann.\n"
+
 msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
 msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst Gruppen/Projekte, in denen du Administrator bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\\n\n"
 
@@ -1521,6 +1524,9 @@ msgstr ""
 "- (RocketChat) Es wurden Verbesserrungen für mehr Stabilität und Geschwindigkeit der Integration mit RocketChat vorgenommen (falls aktiviert).\n"
 "- Die neuesten Sicherheitsupdates wurden eingespielt und weitere kleinere Fehlerbehebungen vorgenommen.\n"
 
+msgid "- Fixed a bug where some linked user profiles were not accessible from content on the map. Also improved the display of creators for map content and of the groups/project they belong to.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den manche verlinkte Benutzerprofile über Inhalte auf der Karte nicht aufgerufen werden konnten. Außerdem wurde die Anzeige der Ersteller von Karteninhalten sowie der Gruppen und Projekte, zu denen sie gehören, verbessert.\n"
+
 msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
 msgstr "- Es wurde ein Fehler behoben, durch den der Nextcloud-Ordner einer Gruppe/eines Projekts nicht mehr zugänglich war, wenn die Cloud-App nach einer vorherigen Deaktivierung wieder aktiviert wurde.\n"
 
@@ -1585,8 +1591,17 @@ msgstr ""
 "- Es wurde ein Problem mit dem Markdown-Texteditor in einigen Formularen behoben.\n"
 "- Es wurde ein Problem behoben, bei dem bestimmte Anmelde- oder Registrierungsabläufe gelegentlich nicht korrekt weitergeleitet wurden.\n"
 
+msgid "- Fixed several small bugs and made some improvements to the redesigned calendar.\n"
+msgstr "- Es wurden mehrere kleinere Fehler behoben und einige Verbesserungen am neu gestalteten Kalender vorgenommen.\n"
+
+msgid "- Fixed several typos across the page. \n"
+msgstr "- Es wurden mehrere Tippfehler auf der Seite korrigiert.\n"
+
 msgid "- Further minor bugfixes and stability improvements have been made."
 msgstr "- Weitere kleinere Fehlerbehebungen und Stabilitätsverbesserungen wurden vorgenommen."
+
+msgid "- Improved some error messages on the login page to better explain the reason for failed login attempts.\n"
+msgstr "- Einige Fehlermeldungen auf der Anmeldeseite wurden verbessert, um den Grund für fehlgeschlagene Anmeldeversuche besser zu erklären.\n"
 
 msgid "- Improved the error handling when uploading unsupported images types and formats. Trying to upload unsupported image types will now result in an informative error message.\n"
 msgstr "- Die Fehlerbehandlung beim Hochladen nicht unterstützter Bildtypen und -formate wurde verbessert. Beim Versuch, nicht unterstützte Bilddateien hochzuladen, wird nun eine aussagekräftige Fehlermeldung angezeigt.\n"
@@ -4912,7 +4927,7 @@ msgid "Enter a user name or email to find users to invite..."
 msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
 
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "Gib eine gültige E-Mail-Adresse ein."
 
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
@@ -11855,7 +11870,7 @@ msgid "This event has been canceled. Voting is closed."
 msgstr "Diese Veranstaltung wurde abgesagt. Die Abstimmung ist geschlossen."
 
 msgid "This field may not be blank."
-msgstr ""
+msgstr "Dieses Feld darf nicht leer sein."
 
 msgid "This function is not enabled for this conference."
 msgstr "Diese Funktion ist für diese Tagung nicht aktiviert."
@@ -15201,7 +15216,6 @@ msgstr "Ja"
 #~ msgid " This data we received from your WECHANGE account"
 #~ msgstr " Diese Daten haben wir von deinem WECHANGE-Konto erhalten"
 
-#, python-format
 #~ msgid ""
 #~ "%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of inactivity.\n"
 #~ "\n"
@@ -15211,7 +15225,6 @@ msgstr "Ja"
 #~ "\n"
 #~ "%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
-#, python-format
 #~ msgid ""
 #~ "%(group_type)s %(group_name)s has just been deactivated by the admin %(deleted_by)s.\n"
 #~ "\n"
@@ -15221,7 +15234,6 @@ msgstr "Ja"
 #~ "\n"
 #~ "%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
-#, python-format
 #~ msgid ""
 #~ "%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
 #~ "\n"
@@ -15289,6 +15301,9 @@ msgstr "Ja"
 
 #~ msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete your user profile directly from your account settings and the groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
 #~ msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst die Gruppen/Projekte, in denen du Administrator bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\n"
+
+#~ msgid "- Made several small improvements to the user interface and look and feel of the redesigned calendar.\n"
+#~ msgstr "- Es wurden einige kleinere Verbesserungen an der Benutzeroberfläche und der optischen Gestaltung des neu Kalender-Redesigns vorgenommen.\n"
 
 #~ msgid "A user export is in progress. As soon as the export is finished it will be available here."
 #~ msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
@@ -15831,11 +15846,9 @@ msgstr "Ja"
 #~ msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
 #~ msgstr "Wenn du kein/keine Portaladministrator_in bist und Änderungen vornehmen möchtest, wende dich bitte an einen der unten aufgeführten Portaladministrator_innen, um diese Änderungen für dich vorzunehmen."
 
-#, python-format
 #~ msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 #~ msgstr "Wenn du noch keine Mail mit einem Bestätigungslink von %(portal_name)s bekommen hast, schaue bitte in deinem Spam-Ordner nach oder versuche, dich erneutz zu registrieren!"
 
-#, python-format
 #~ msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 #~ msgstr "Wenn du noch keine Mail mit einem Bestätigungslink bekommen hast, registriere dich bitte erneut oder kontaktiere unseren Support unter %(email)s!"
 
@@ -16552,7 +16565,6 @@ msgstr "Ja"
 #~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 #~ msgstr "Das Benutzerkonto wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
 
-#, python-format
 #~ msgid ""
 #~ "Your entire account, profile and personal information will be deactivated and irrevocably deleted in %(deactivation_in)s.\n"
 #~ "\n"
@@ -16578,7 +16590,6 @@ msgstr "Ja"
 #~ "\n"
 #~ "In den %(deleted_after_days)s Tagen nach der Deaktivierung bleibt die E-Mail-Adresse deines Benutzerkontos reserviert und kann nicht zur Registrierung eines neuen Benutzerkontos verwendet werden."
 
-#, python-format
 #~ msgid ""
 #~ "Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and then irrevocably deleted.\n"
 #~ "\n"

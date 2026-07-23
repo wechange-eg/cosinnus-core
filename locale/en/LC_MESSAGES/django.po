@@ -1351,6 +1351,9 @@ msgstr ""
 msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
 msgstr ""
 
+msgid "- Added a notification setting that allows users to configure different notification frequencies for portal-wide groups versus user-created groups and projects.\n"
+msgstr ""
+
 msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
 msgstr ""
 
@@ -1395,6 +1398,9 @@ msgid ""
 "- As an additional account security measure, all user sessions except the current one are now logged out after changing your account password or email.\n"
 "- (RocketChat) improved the stability and performance of the integration with RocketChat (if enabled).\n"
 "- The latest security updates have been applied and further minor bugfixes have been made.\n"
+msgstr ""
+
+msgid "- Fixed a bug where some linked user profiles were not accessible from content on the map. Also improved the display of creators for map content and of the groups/project they belong to.\n"
 msgstr ""
 
 msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
@@ -1447,7 +1453,16 @@ msgid ""
 "- Fixed an issue where certain login or signup flows were sometimes not redirecting properly.\n"
 msgstr ""
 
+msgid "- Fixed several small bugs and made some improvements to the redesigned calendar.\n"
+msgstr ""
+
+msgid "- Fixed several typos across the page. \n"
+msgstr ""
+
 msgid "- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+
+msgid "- Improved some error messages on the login page to better explain the reason for failed login attempts.\n"
 msgstr ""
 
 msgid "- Improved the error handling when uploading unsupported images types and formats. Trying to upload unsupported image types will now result in an informative error message.\n"
