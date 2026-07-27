@@ -100,9 +100,8 @@ def init_personal_dashboard_widgets():
     """Initialize dashboard widgets."""
     global personal_dashboard_widgets
     for widget_cls in PERSONAL_DASHBOARD_WIDGET_CLASSES:
-        if (
-            widget_cls.id in settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS
-            and widget_cls.cosinnus_app not in settings.COSINNUS_DISABLED_COSINNUS_APPS
+        if widget_cls.id in settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS and (
+            not widget_cls.cosinnus_app or widget_cls.cosinnus_app not in settings.COSINNUS_DISABLED_COSINNUS_APPS
         ):
             # widget enabled
             widget_conf = settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS.get(widget_cls.id)
