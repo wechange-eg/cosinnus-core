@@ -1164,6 +1164,7 @@ class CosinnusConf(AppConf):
     V3_PERSONAL_DASHBOARD_WIDGETS = {
         'dashboard.news': {},
         'dashboard.create_new': {},
+        'dashboard.offers': {},
     }
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar
