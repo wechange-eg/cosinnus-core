@@ -1322,7 +1322,7 @@ msgstr ""
 "%(deactivated_groups_count)d Gruppen und Projekte wurden deaktiviert. \n"
 "%(hidden_content_count)d Inhalte wurden ausgeblendet. \n"
 "%(deleted_content_count)d Inhalte wurden sofort gelöscht. \n"
-"Die Benutzer werden nach 30 Tagen gelöscht."
+"Die Benutzer/innen werden nach 30 Tagen gelöscht."
 
 #, python-format
 msgid "%d Users rocketchat accounts were checked."
@@ -1418,7 +1418,7 @@ msgid "- (Admin-Interface) Fixed a bug in the user administration interface that
 msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der auf manchen Benutzerprofilseiten zu einem Seitenfehler führte.\n"
 
 msgid "- (Admin-Interface) Fixed a bug where download links in the administration would not start the download in some cases.\n"
-msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der bei manchen Benutzerprofilen zu einem Seitenfehler führte.\n"
+msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der bei manchen Benutzer/innenprofilen zu einem Seitenfehler führte.\n"
 
 msgid ""
 "- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n"
@@ -1454,10 +1454,10 @@ msgid "- Added Firebase push integration for push notifications to mobile device
 msgstr "- Es wurde eine Firebase-Push-Integration für Push-Benachrichtigungen an mobile Geräte hinzugefügt.\n"
 
 msgid "- Added a notification setting that allows users to configure different notification frequencies for portal-wide groups versus user-created groups and projects.\n"
-msgstr "- Es wurde eine Benachrichtigungseinstellung hinzugefügt, mit der man unterschiedliche Benachrichtigungshäufigkeiten für seitenweite Gruppen und von Benutzer/innen erstellte Gruppen und Projekte festlegen kann.\n"
+msgstr "- Es wurde eine Benachrichtigungseinstellung hinzugefügt, mit der man unterschiedliche Benachrichtigungshäufigkeiten für plattformübergreifende Gruppen und für von Benutzer/innen erstellte Gruppen und Projekte festlegen kann.\n"
 
 msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
-msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst Gruppen/Projekte, in denen du Administrator bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\\n\n"
+msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst Gruppen/Projekte, in denen du Administrator/in bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht! \n"
 
 msgid "- Added numerous user interface and accessibility improvements throughout the site.\n"
 msgstr "- Zahlreiche Verbesserungen an der Benutzeroberfläche und der Barrierefreiheit wurden auf der gesamten Website vorgenommen.\n"
@@ -1525,7 +1525,7 @@ msgstr ""
 "- Die neuesten Sicherheitsupdates wurden eingespielt und weitere kleinere Fehlerbehebungen vorgenommen.\n"
 
 msgid "- Fixed a bug where some linked user profiles were not accessible from content on the map. Also improved the display of creators for map content and of the groups/project they belong to.\n"
-msgstr "- Es wurde ein Fehler behoben, durch den manche verlinkte Benutzerprofile über Inhalte auf der Karte nicht aufgerufen werden konnten. Außerdem wurde die Anzeige der Ersteller von Karteninhalten sowie der Gruppen und Projekte, zu denen sie gehören, verbessert.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den manche verlinkte Benutzer/innenprofile über Inhalte auf der Karte nicht aufgerufen werden konnten. Außerdem wurde die Anzeige der Ersteller/innen von Karteninhalten sowie der Gruppen und Projekte, zu denen sie gehören, verbessert.\n"
 
 msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
 msgstr "- Es wurde ein Fehler behoben, durch den der Nextcloud-Ordner einer Gruppe/eines Projekts nicht mehr zugänglich war, wenn die Cloud-App nach einer vorherigen Deaktivierung wieder aktiviert wurde.\n"
@@ -1547,7 +1547,7 @@ msgid "- Fixed a bug where usernames were sometimes not correctly formatted in n
 msgstr "- Es wurde ein Fehler behoben, bei dem der Name von Benutzer/innen in Benachrichtigungs-E-Mails nicht korrekt formatiert angezeigt wurde.\n"
 
 msgid "- Fixed a bug where users could sometimes not be invited to groups/projects depending on their profile visibility settings.\n"
-msgstr "- Es wurde ein Fehler behoben, durch den Nutzer je nach den Sichtbarkeitseinstellungen ihres Profils manchmal nicht zu Gruppen/Projekten eingeladen werden konnten.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den Benutzer/innen je nach den Sichtbarkeitseinstellungen ihres Profils manchmal nicht zu Gruppen/Projekten eingeladen werden konnten.\n"
 
 msgid "- Fixed a page error during the profile setup when entering a profile location.\n"
 msgstr "- Es wurde ein Seitenfehler beim Eingeben eines Ortes im Profilsetup behoben.\n"
@@ -5298,7 +5298,7 @@ msgid "Filter by Team?"
 msgstr "Nach Gruppe oder Projekt filtern?"
 
 msgid "Filter by authors, tags or other tagged properties?"
-msgstr "Nach Ersteller, Tags oder anderen Eigenschaften filtern?"
+msgstr "Nach Ersteller/in, Tags oder anderen Eigenschaften filtern?"
 
 msgid "Filter by item types?"
 msgstr "Nach Objekttyp filtern?"
@@ -6767,7 +6767,7 @@ msgid "If activated, newly registered users need to be approved by a portal admi
 msgstr "Wenn gewählt müssen neue Benutzerkonten nach dem Registrieren durch einen Portaladminstrator bestätigt werden bevor sich der/die Benutzer/in einloggen kann."
 
 msgid "If activated, newly registered users will not be able to post in the Forum and other autojoin until specifically approved by an admin (checkbox `account_verified` in the user profile)."
-msgstr "Wenn aktiviert, können neu registrierte Benutzer/innen erst dann Beiträge im Forum und anderen offenen Gruppen posten, wenn sie von einem Administrator freigegeben wurden (Häkchen \"account_verified\" im Benutzerprofil)."
+msgstr "Wenn aktiviert, können neu registrierte Benutzer/innen erst dann Beiträge im Forum und anderen offenen Gruppen posten, wenn sie von einem/einer Administrator/in freigegeben wurden (Häkchen \"account_verified\" im Benutzerprofil)."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -8815,7 +8815,7 @@ msgid "Only shown for registered users"
 msgstr "Nur für registrierte Mitglieder sichtbar"
 
 msgid "Only the owner and assignee of a todo can finish it!"
-msgstr "Nur der Ersteller oder zugewiesene einer Aufgabe kann sie abschließen!"
+msgstr "Nur der/die Ersteller/in oder zugewiesene einer Aufgabe kann sie abschließen!"
 
 msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
 msgstr "Nur Nutzende, die das Newsletter-Opt-In in ihrem Profil aktiviert haben, erhalten den Newsletter."
@@ -12519,7 +12519,7 @@ msgid "Upload a preview image for the Conference Event"
 msgstr "Lade ein Vorschaubild für die Tagungsveranstaltung hoch"
 
 msgid "Upload a user CSV file to import user profiles"
-msgstr "Hochladen einer Benutzer/innen-CSV-Datei zum Importieren von Benutzerprofilen"
+msgstr "Hochladen einer Benutzer/innen-CSV-Datei zum Importieren von Benutzer/innenprofilen"
 
 msgid "Upload an image."
 msgstr "Lade ein Bild hoch."
@@ -13994,11 +13994,11 @@ msgstr "Deine Mitgliedsschaftsanfrage bei %(site_name)s!"
 
 #, python-format
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as an administrator responds to your request."
-msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Administrator den Antrag bearbeitet."
+msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein/eine Administrator/in den Antrag bearbeitet."
 
 #, python-format
 msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as an administrator responds to your request."
-msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhältst eine E-Mail, sobald ein Administrator den Antrag bearbeitet."
+msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhältst eine E-Mail, sobald ein/eine Administrator/in den Antrag bearbeitet."
 
 msgid "You have successfully disabled two-factor authentication for your account."
 msgstr "Du hast die Zwei-Faktor-Authentifizierung für dein Benutzerkonto deaktiviert."

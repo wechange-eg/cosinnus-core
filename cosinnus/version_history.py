@@ -36,10 +36,6 @@ UPDATES = {
                 '- Improved some error messages on the login page to better explain the reason for '
                 'failed login attempts.\n'
             ),
-            # Ethercalcs disabled message
-            _('- Fixed several small bugs and made some improvements to the redesigned calendar.\n')
-            if _REDESIGN_FULL_IS_ENABLED and settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
-            else '',
             _('- Fixed several typos across the page. \n'),
         ],
     },
