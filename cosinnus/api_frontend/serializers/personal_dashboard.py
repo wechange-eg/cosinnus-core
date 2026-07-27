@@ -35,6 +35,7 @@ class CosinnusPersonalDashboardWidgetSerializer(serializers.Serializer):
                 'active': instance.is_active(user),
                 'display': instance.get_display(user),
                 'data': instance.get_data(user),
+                'conf': instance.get_conf(user),
             }
         )
         return ret

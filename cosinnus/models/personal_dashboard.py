@@ -73,6 +73,9 @@ class CosinnusPersonalDashboardWidget:
             return serializer.data
         return []
 
+    def get_conf(self, user):
+        return self.conf
+
 
 class CosinnusPersonalDashboardNewsWidget(CosinnusPersonalDashboardWidget):
     """News/notes widget"""
