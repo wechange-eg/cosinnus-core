@@ -43,6 +43,10 @@ class CosinnusPersonalDashboardWidget:
         profile.settings[self.PROFILE_SETTINGS_KEY] = widget_settings
         type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
 
+    def is_enabled(self, user):
+        """Allows to disable widgets for users."""
+        return True
+
     def is_active(self, user):
         """Check if the widget is active for the user."""
         widget_settings = self._get_widget_settings(user.cosinnus_profile)
