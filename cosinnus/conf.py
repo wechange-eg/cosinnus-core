@@ -1161,7 +1161,10 @@ class CosinnusConf(AppConf):
     USE_V3_PERSONAL_DASHBOARD = False
 
     # v3 dashboard widget config, remove config to disable widgets
-    V3_PERSONAL_DASHBOARD_WIDGETS = {'dashboard.news': {}}
+    V3_PERSONAL_DASHBOARD_WIDGETS = {
+        'dashboard.news': {},
+        'dashboard.create_new': {},
+    }
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar
     # (will be used with a `static()`) call

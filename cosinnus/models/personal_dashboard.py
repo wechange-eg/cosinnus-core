@@ -1,6 +1,7 @@
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 
 from cosinnus.conf import settings
+from cosinnus.utils.permissions import check_user_can_create_groups
 from cosinnus_note.api_frontend.serializers import CosinnusNoteSerializer
 from cosinnus_note.models import Note
 
@@ -87,9 +88,37 @@ class CosinnusPersonalDashboardNewsWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:personal-note-list')
 
 
+class CosinnusPersonalDashboardCreateNewWidget(CosinnusPersonalDashboardWidget):
+    """News/notes widget"""
+
+    id = 'dashboard.create_new'
+
+    def _get_create_new_urls(self, user):
+        create_new_urls = {}
+        if not settings.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user.is_superuser:
+            create_new_urls['project'] = reverse('cosinnus:group-add')
+            if (
+                not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED
+                or check_user_can_create_groups(user)
+            ):
+                create_new_urls['group'] = reverse('cosinnus:group__group-add')
+        if settings.COSINNUS_IDEAS_ENABLED:
+            create_new_urls['idea'] = reverse('cosinnus:idea-create')
+        return create_new_urls
+
+    def is_enabled(self, user):
+        return bool(self._get_create_new_urls(user))
+
+    def get_conf(self, user):
+        data = super().get_conf(user)
+        data['create_new_urls'] = self._get_create_new_urls(user)
+        return data
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
+    CosinnusPersonalDashboardCreateNewWidget,
 ]
 
 # initialized available dashboard widgets
