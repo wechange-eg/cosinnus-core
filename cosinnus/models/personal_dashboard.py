@@ -63,7 +63,7 @@ class CosinnusPersonalDashboardWidget:
 
     def get_data(self, user):
         """Get initial widget data."""
-        if self.user_queryset_function and self.serializer_class:
+        if self.user_queryset_function and self.serializer_class and self.is_active(user):
             queryset = self.user_queryset_function(user)[: self.DATA_LIMIT]
             serializer = self.serializer_class(queryset, many=True, context={'user': user})
             return serializer.data
