@@ -44,3 +44,11 @@ class EventManager(BaseTaggableObjectManager):
                 tag_names.append(ti.tag.name)
 
         return tag_names
+
+    def get_personal_open_polls(self, user):
+        queryset = super().get_personal(user)
+        # consider only open polls
+        queryset = queryset.filter(state=self.model.STATE_VOTING_OPEN)
+        # consider only polls where the user has not voted yet
+        queryset = queryset.exclude(suggestions__votes__voter__id=user.id)
+        return queryset
