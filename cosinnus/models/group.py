@@ -13,6 +13,7 @@ from typing import Optional
 
 import six
 from annoying.functions import get_object_or_None
+from dateutil.relativedelta import relativedelta
 from django.apps import apps
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -79,7 +80,7 @@ from cosinnus.utils.functions import (
     sort_key_strcoll_attr,
     unique_aware_slugify,
 )
-from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids, get_default_user_group_slugs
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus.utils.validators import validate_image_format
@@ -498,6 +499,45 @@ class CosinnusGroupManager(models.Manager):
             from_date__gt=now, from_date__lte=now + period[0], from_date__gte=now + period[0] - period[1]
         )
         return queryset
+
+    def get_personal(self, user):
+        """
+        Returns user groups, excluding default groups, ordered by last visit.
+        Based on MyGroupsClusteredMixin.
+        """
+        from cosinnus.models import LastVisitedObject
+
+        # get user groups
+        user_groups = self.get_for_user(user)
+
+        # ignore default groups
+        default_user_group_ids = get_default_user_group_ids()
+        user_groups = [group for group in user_groups if group.id not in default_user_group_ids]
+
+        # ignore managed tags groups
+        if (
+            settings.COSINNUS_V3_FRONTEND_ENABLED
+            and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
+        ):
+            managed_tags = user.cosinnus_profile.get_managed_tags()
+            paired_groups_ids = [tag.paired_group.id for tag in managed_tags if tag.paired_group]
+            user_groups = [group for group in user_groups if group.id not in paired_groups_ids]
+
+        # get group visits
+        group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
+        group_last_visited_qs = LastVisitedObject.objects.filter(
+            user=user, content_type=group_ct, portal=CosinnusPortal.get_current()
+        )
+        # a dict of group-id -> datetime
+        group_last_visited = dict(group_last_visited_qs.values_list('object_id', 'visited'))
+
+        # sort by last_visited
+        user_groups = list(user_groups)
+        default_date = now() - relativedelta(years=100)
+        user_groups = sorted(
+            user_groups, key=lambda group: group_last_visited.get(group.id, default_date), reverse=True
+        )
+        return user_groups
 
 
 class RelatedGroups(models.Model):

@@ -5,7 +5,7 @@ from django.urls import include, path
 
 from cosinnus.api_frontend.views.content import MainContentView
 from cosinnus.api_frontend.views.feedback import CosinnusReportView
-from cosinnus.api_frontend.views.group import CosinnusGroupSettingsView
+from cosinnus.api_frontend.views.group import CosinnusGroupPersonalView, CosinnusGroupSettingsView
 from cosinnus.api_frontend.views.navigation import (
     AlertsMarkAllReadView,
     AlertsView,
@@ -115,6 +115,7 @@ urlpatterns += [
         VersionHistoryUnreadCountView.as_view(),
         name='api-navigation-unread-version-history',
     ),
+    path('api/v3/spaces/personal/', CosinnusGroupPersonalView.as_view(), name='api-group-personal'),
     path('api/v3/spaces/<int:group_id>/settings/', CosinnusGroupSettingsView.as_view(), name='api-group-settings'),
     path(
         'api/v3/report/event/', CosinnusReportView.as_view(model_name='cosinnus_event.Event'), name='api-report-event'

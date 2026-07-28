@@ -122,3 +122,21 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
         settings_serializer = CosinnusConferenceSettingsSerializer(parent_object=instance, group=self.instance)
         data['bbb_settings'] = settings_serializer.data
         return data
+
+
+class CosinnusGroupSerializer(serializers.ModelSerializer):
+    """Group serializer, e.g. used by the CosinnusGroupPersonalView API."""
+
+    avatar = serializers.URLField(source='get_avatar_thumbnail_url', read_only=True)
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
+    members_count = serializers.IntegerField(source='member_count', read_only=True)
+
+    class Meta:
+        model = get_cosinnus_group_model()
+        fields = [
+            'id',
+            'name',
+            'avatar',
+            'url',
+            'members_count',
+        ]
