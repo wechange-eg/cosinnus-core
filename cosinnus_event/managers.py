@@ -5,12 +5,13 @@ from datetime import timedelta
 
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.contenttypes.models import ContentType
-from django.db import models
 from django.utils import timezone
 from taggit.models import TaggedItem
 
+from cosinnus.models import BaseTaggableObjectManager
 
-class EventQuerySet(models.QuerySet):
+
+class EventManager(BaseTaggableObjectManager):
     def public(self):
         from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 
