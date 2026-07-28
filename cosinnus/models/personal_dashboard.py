@@ -85,7 +85,7 @@ class CosinnusPersonalDashboardNewsWidget(CosinnusPersonalDashboardWidget):
 
     id = 'dashboard.news'
     cosinnus_app = 'cosinnus_note'
-    user_queryset_function = Note.objects.get_for_user
+    user_queryset_function = Note.objects.get_personal
     serializer_class = CosinnusNoteSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:personal-note-list')
 
@@ -122,7 +122,7 @@ class CosinnusPersonalDashboardOffersWidget(CosinnusPersonalDashboardWidget):
 
     id = 'dashboard.offers'
     cosinnus_app = 'cosinnus_marketplace'
-    user_queryset_function = Offer.objects.get_for_user
+    user_queryset_function = Offer.objects.get_personal
     serializer_class = CosinnusOfferSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:personal-offer-list')
 
