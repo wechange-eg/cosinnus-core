@@ -1,6 +1,8 @@
 from django.urls import reverse, reverse_lazy
 
+from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
 from cosinnus.conf import settings
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_can_create_groups
 from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerializer
 from cosinnus_marketplace.models import Offer
@@ -127,11 +129,21 @@ class CosinnusPersonalDashboardOffersWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:personal-offer-list')
 
 
+class CosinnusPersonalGroupsWidget(CosinnusPersonalDashboardWidget):
+    """Personal groups and projects widget"""
+
+    id = 'dashboard.my_spaces'
+    user_queryset_function = get_cosinnus_group_model().objects.get_personal
+    serializer_class = CosinnusGroupSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:api-group-personal')
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
     CosinnusPersonalDashboardCreateNewWidget,
     CosinnusPersonalDashboardOffersWidget,
+    CosinnusPersonalGroupsWidget,
 ]
 
 # initialized available dashboard widgets
