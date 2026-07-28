@@ -4,6 +4,8 @@ from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
 from cosinnus.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_can_create_groups
+from cosinnus_event.api_frontend.serializers import CosinnusEventSerializer
+from cosinnus_event.models import Event
 from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerializer
 from cosinnus_marketplace.models import Offer
 from cosinnus_note.api_frontend.serializers import CosinnusNoteSerializer
@@ -138,12 +140,23 @@ class CosinnusPersonalGroupsWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:api-group-personal')
 
 
+class CosinnusPersonalPollsWidget(CosinnusPersonalDashboardWidget):
+    """Personal open polls widget"""
+
+    id = 'dashboard.polls'
+    cosinnus_app = 'cosinnus_event'
+    user_queryset_function = Event.objects.get_personal_open_polls
+    serializer_class = CosinnusEventSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-poll-open')
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
     CosinnusPersonalDashboardCreateNewWidget,
     CosinnusPersonalDashboardOffersWidget,
     CosinnusPersonalGroupsWidget,
+    CosinnusPersonalPollsWidget,
 ]
 
 # initialized available dashboard widgets
