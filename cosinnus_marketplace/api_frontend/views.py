@@ -21,5 +21,5 @@ class CosinnusOfferViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Offer.objects.get_personal(user)
+        queryset = Offer.objects.get_personal_items(user)
         return queryset

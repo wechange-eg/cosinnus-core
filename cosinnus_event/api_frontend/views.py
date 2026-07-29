@@ -23,7 +23,7 @@ class CosinnusPollViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Event.objects.get_personal(user)
+        queryset = Event.objects.get_personal_items(user)
         return queryset
 
     @action(

@@ -50,5 +50,5 @@ class CosinnusGroupPersonalView(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = get_cosinnus_group_model().objects.get_personal(user)
+        queryset = get_cosinnus_group_model().objects.get_personal_items(user)
         return queryset

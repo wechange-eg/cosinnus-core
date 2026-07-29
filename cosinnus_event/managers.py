@@ -46,7 +46,7 @@ class EventManager(BaseTaggableObjectManager):
         return tag_names
 
     def get_personal_open_polls(self, user):
-        queryset = super().get_personal(user)
+        queryset = super().get_personal_items(user)
         # consider only open polls
         queryset = queryset.filter(state=self.model.STATE_VOTING_OPEN)
         # consider only polls where the user has not voted yet

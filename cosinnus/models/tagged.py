@@ -473,7 +473,7 @@ class LastVisitedMixin(object):
 
 
 class BaseTaggableObjectManager(models.Manager):
-    def get_personal(self, user):
+    def get_personal_items(self, user):
         """Returns tagged objects from the user groups, excluding default groups."""
         from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
 
@@ -487,6 +487,8 @@ class BaseTaggableObjectManager(models.Manager):
         # exclude default groups
         default_user_group_ids = get_default_user_group_ids()
         objects = objects.exclude(group__pk__in=default_user_group_ids)
+
+        # TODO exclude managed tags groups, see personal groups
 
         # consider blocked users
         objects = filter_base_taggable_qs_for_blocked_user_content(objects, user)

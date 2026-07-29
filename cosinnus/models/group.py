@@ -500,7 +500,7 @@ class CosinnusGroupManager(models.Manager):
         )
         return queryset
 
-    def get_personal(self, user):
+    def get_personal_items(self, user):
         """
         Returns user groups, excluding default groups, ordered by last visit.
         Based on MyGroupsClusteredMixin.

@@ -21,5 +21,5 @@ class CosinnusNoteViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Note.objects.get_personal(user)
+        queryset = Note.objects.get_personal_items(user)
         return queryset

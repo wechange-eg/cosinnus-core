@@ -89,7 +89,7 @@ class CosinnusPersonalDashboardNewsWidget(CosinnusPersonalDashboardWidget):
 
     id = 'dashboard.news'
     cosinnus_app = 'cosinnus_note'
-    user_queryset_function = Note.objects.get_personal
+    user_queryset_function = Note.objects.get_personal_items
     serializer_class = CosinnusNoteSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:personal-note-list')
 
@@ -126,7 +126,7 @@ class CosinnusPersonalDashboardOffersWidget(CosinnusPersonalDashboardWidget):
 
     id = 'dashboard.offers'
     cosinnus_app = 'cosinnus_marketplace'
-    user_queryset_function = Offer.objects.get_personal
+    user_queryset_function = Offer.objects.get_personal_items
     serializer_class = CosinnusOfferSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:personal-offer-list')
 
@@ -135,7 +135,7 @@ class CosinnusPersonalGroupsWidget(CosinnusPersonalDashboardWidget):
     """Personal groups and projects widget"""
 
     id = 'dashboard.my_spaces'
-    user_queryset_function = get_cosinnus_group_model().objects.get_personal
+    user_queryset_function = get_cosinnus_group_model().objects.get_personal_items
     serializer_class = CosinnusGroupSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:api-group-personal')
 

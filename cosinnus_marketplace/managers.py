@@ -24,8 +24,8 @@ class OfferManager(BaseTaggableObjectManager):
 
         return tag_names
 
-    def get_personal(self, user):
-        objects = super().get_personal(user)
+    def get_personal_items(self, user):
+        objects = super().get_personal_items(user)
         # consider only active offers
         objects = objects.filter(is_active=True)
         return objects
