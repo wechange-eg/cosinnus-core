@@ -500,13 +500,8 @@ class CosinnusGroupManager(models.Manager):
         )
         return queryset
 
-    def get_personal_items(self, user):
-        """
-        Returns user groups, excluding default groups, ordered by last visit.
-        Based on MyGroupsClusteredMixin.
-        """
-        from cosinnus.models import LastVisitedObject
-
+    def get_for_user_without_default_groups(self, user):
+        """Returns list of groups where the user is member or admin excluding default and manged tags groups."""
         # get user groups
         user_groups = self.get_for_user(user)
 
@@ -522,6 +517,17 @@ class CosinnusGroupManager(models.Manager):
             managed_tags = user.cosinnus_profile.get_managed_tags()
             paired_groups_ids = [tag.paired_group.id for tag in managed_tags if tag.paired_group]
             user_groups = [group for group in user_groups if group.id not in paired_groups_ids]
+        return user_groups
+
+    def get_personal_items(self, user):
+        """
+        Returns user groups, excluding default groups, ordered by last visit.
+        Based on MyGroupsClusteredMixin.
+        """
+        from cosinnus.models import LastVisitedObject
+
+        # get user groups exluding default groups
+        user_groups = self.get_for_user_without_default_groups(user)
 
         # get group visits
         group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
