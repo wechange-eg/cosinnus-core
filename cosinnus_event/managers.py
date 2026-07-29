@@ -55,3 +55,14 @@ class EventManager(BaseTaggableObjectManager):
         # consider only polls where the user has not voted yet
         queryset = queryset.exclude(suggestions__votes__voter__id=user.id)
         return queryset
+
+    def get_personal_attending_events(self, user):
+        """Return scheduled events where the user is attending."""
+        from cosinnus_event.models import EventAttendance
+
+        queryset = self.all_upcoming()
+        queryset = queryset.filter(group__is_active=True)
+        queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_event')
+        queryset = queryset.filter(state=self.model.STATE_SCHEDULED)
+        queryset = queryset.filter(attendances__state=EventAttendance.ATTENDANCE_GOING, attendances__user__id=user.id)
+        return queryset
