@@ -488,7 +488,14 @@ class BaseTaggableObjectManager(models.Manager):
         default_user_group_ids = get_default_user_group_ids()
         objects = objects.exclude(group__pk__in=default_user_group_ids)
 
-        # TODO exclude managed tags groups, see personal groups
+        # ignore managed tags groups
+        if (
+            settings.COSINNUS_V3_FRONTEND_ENABLED
+            and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
+        ):
+            managed_tags = user.cosinnus_profile.get_managed_tags()
+            paired_groups_ids = [tag.paired_group.id for tag in managed_tags if tag.paired_group]
+            objects = objects.exclude(group__pk__in=paired_groups_ids)
 
         # consider blocked users
         objects = filter_base_taggable_qs_for_blocked_user_content(objects, user)
