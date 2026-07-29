@@ -150,6 +150,31 @@ class CosinnusPersonalPollsWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:personal-poll-open')
 
 
+class CosinnusPersonalTasksWidget(CosinnusPersonalDashboardWidget):
+    """Personal deck tasks widget"""
+
+    id = 'dashboard.tasks'
+    cosinnus_app = 'cosinnus_deck'
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_DECK_ENABLED
+
+    def get_conf(self, user):
+        conf = super().get_conf(user)
+        # add user groups board ids
+        boards = []
+        user_deck_groups = get_cosinnus_group_model().objects.get_for_user_without_default_groups(user)
+        user_deck_groups = [
+            group
+            for group in user_deck_groups
+            if self.cosinnus_app not in group.get_deactivated_apps() and group.nextcloud_deck_board_id
+        ]
+        for group in user_deck_groups:
+            boards.append(group.nextcloud_deck_board_id)
+        conf['boards'] = boards
+        return conf
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
@@ -157,6 +182,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardOffersWidget,
     CosinnusPersonalGroupsWidget,
     CosinnusPersonalPollsWidget,
+    CosinnusPersonalTasksWidget,
 ]
 
 # initialized available dashboard widgets
