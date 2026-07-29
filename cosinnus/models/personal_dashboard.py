@@ -4,7 +4,7 @@ from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
 from cosinnus.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_can_create_groups
-from cosinnus_event.api_frontend.serializers import CosinnusEventSerializer
+from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer, CosinnusEventSerializer
 from cosinnus_event.models import Event
 from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerializer
 from cosinnus_marketplace.models import Offer
@@ -146,7 +146,7 @@ class CosinnusPersonalPollsWidget(CosinnusPersonalDashboardWidget):
     id = 'dashboard.polls'
     cosinnus_app = 'cosinnus_event'
     user_queryset_function = Event.objects.get_personal_open_polls
-    serializer_class = CosinnusEventSerializer
+    serializer_class = CosinnusEventPollSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:personal-poll-open')
 
 
@@ -161,17 +161,47 @@ class CosinnusPersonalTasksWidget(CosinnusPersonalDashboardWidget):
 
     def get_conf(self, user):
         conf = super().get_conf(user)
-        # add user groups board ids
-        boards = []
-        user_deck_groups = get_cosinnus_group_model().objects.get_for_user_without_default_groups(user)
-        user_deck_groups = [
-            group
-            for group in user_deck_groups
-            if self.cosinnus_app not in group.get_deactivated_apps() and group.nextcloud_deck_board_id
-        ]
-        for group in user_deck_groups:
-            boards.append(group.nextcloud_deck_board_id)
-        conf['boards'] = boards
+        if self.is_active(user):
+            # add user groups board ids
+            boards = []
+            user_deck_groups = get_cosinnus_group_model().objects.get_for_user_without_default_groups(user)
+            user_deck_groups = [
+                group
+                for group in user_deck_groups
+                if self.cosinnus_app not in group.get_deactivated_apps() and group.nextcloud_deck_board_id
+            ]
+            for group in user_deck_groups:
+                boards.append(group.nextcloud_deck_board_id)
+            conf['boards'] = boards
+        return conf
+
+
+class CosinnusPersonalEventsWidget(CosinnusPersonalDashboardWidget):
+    """Personal events widget"""
+
+    id = 'dashboard.events'
+    cosinnus_app = 'cosinnus_event'
+    user_queryset_function = Event.objects.get_personal_attending_events
+    serializer_class = CosinnusEventSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-event-attending')
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
+
+    def get_conf(self, user):
+        conf = super().get_conf(user)
+        if self.is_active(user):
+            # add user groups calendar urls
+            calendars = []
+            user_calendar_groups = get_cosinnus_group_model().objects.get_for_user_without_default_groups(user)
+            user_calendar_groups = [
+                group
+                for group in user_calendar_groups
+                if self.cosinnus_app not in group.get_deactivated_apps() and group.nextcloud_calendar_url
+            ]
+            for group in user_calendar_groups:
+                calendars.append(group.nextcloud_calendar_url)
+            conf['calendars'] = calendars
         return conf
 
 
@@ -183,6 +213,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalGroupsWidget,
     CosinnusPersonalPollsWidget,
     CosinnusPersonalTasksWidget,
+    CosinnusPersonalEventsWidget,
 ]
 
 # initialized available dashboard widgets

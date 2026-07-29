@@ -1168,6 +1168,7 @@ class CosinnusConf(AppConf):
         'dashboard.my_spaces': {},
         'dashboard.polls': {},
         'dashboard.tasks': {},
+        'dashboard.events': {},
     }
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar
