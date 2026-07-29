@@ -46,7 +46,10 @@ class EventManager(BaseTaggableObjectManager):
         return tag_names
 
     def get_personal_open_polls(self, user):
+        """Return open user polls where the has not voted yet."""
         queryset = super().get_personal_items(user)
+        # exclude groups with deactivated app
+        queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_event')
         # consider only open polls
         queryset = queryset.filter(state=self.model.STATE_VOTING_OPEN)
         # consider only polls where the user has not voted yet

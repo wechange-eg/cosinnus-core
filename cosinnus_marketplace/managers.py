@@ -25,7 +25,8 @@ class OfferManager(BaseTaggableObjectManager):
         return tag_names
 
     def get_personal_items(self, user):
-        objects = super().get_personal_items(user)
+        queryset = super().get_personal_items(user)
+        queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_marketplace')
         # consider only active offers
-        objects = objects.filter(is_active=True)
-        return objects
+        queryset = queryset.filter(is_active=True)
+        return queryset
