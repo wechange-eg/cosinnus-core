@@ -519,6 +519,9 @@ class CosinnusGroupManager(models.Manager):
             user_groups = [group for group in user_groups if group.id not in paired_groups_ids]
         return user_groups
 
+    def get_for_user_without_default_groups_pks(self, user):
+        return [group.pk for group in self.get_for_user_without_default_groups(user)]
+
     def get_personal_items(self, user):
         """
         Returns user groups, excluding default groups, ordered by last visit.

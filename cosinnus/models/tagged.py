@@ -33,7 +33,7 @@ from cosinnus.core.registries import app_registry
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.utils.dates import timestamp_from_datetime
 from cosinnus.utils.functions import clean_single_line_text, unique_aware_slugify
-from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.lanugages import MultiLanguageFieldMagicMixin
 
 logger = logging.getLogger('cosinnus')
@@ -477,29 +477,16 @@ class BaseTaggableObjectManager(models.Manager):
         """Returns tagged objects from the user groups, excluding default groups."""
         from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
 
-        objects = self.filter(group__is_active=True)
-        objects = objects.prefetch_related('group', 'creator', 'media_tag')
+        queryset = self.filter(group__is_active=True)
+        queryset = queryset.prefetch_related('group', 'creator', 'media_tag')
 
-        # filter by user groups
-        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
-        objects = objects.filter(group__pk__in=user_group_ids)
-
-        # exclude default groups
-        default_user_group_ids = get_default_user_group_ids()
-        objects = objects.exclude(group__pk__in=default_user_group_ids)
-
-        # ignore managed tags groups
-        if (
-            settings.COSINNUS_V3_FRONTEND_ENABLED
-            and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
-        ):
-            managed_tags = user.cosinnus_profile.get_managed_tags()
-            paired_groups_ids = [tag.paired_group.id for tag in managed_tags if tag.paired_group]
-            objects = objects.exclude(group__pk__in=paired_groups_ids)
+        # filter by user groups without default groups
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_without_default_groups_pks(user)
+        queryset = queryset.filter(group__pk__in=user_group_ids)
 
         # consider blocked users
-        objects = filter_base_taggable_qs_for_blocked_user_content(objects, user)
-        return objects
+        queryset = filter_base_taggable_qs_for_blocked_user_content(queryset, user)
+        return queryset
 
 
 @six.python_2_unicode_compatible
