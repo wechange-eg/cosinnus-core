@@ -7,6 +7,7 @@ from collections import OrderedDict
 
 import six
 from annoying.functions import get_object_or_None
+from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -18,7 +19,7 @@ from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
-from cosinnus.models.tagged import LikeableObjectMixin
+from cosinnus.models.tagged import LikeableObjectMixin, LikeObject
 from cosinnus.utils.files import get_idea_image_filename, image_thumbnail, image_thumbnail_url
 from cosinnus.utils.functions import clean_single_line_text, sort_key_strcoll_attr, unique_aware_slugify
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -150,6 +151,19 @@ class IdeaManager(models.Manager):
 
     def get_queryset(self):
         return CosinnusIdeaQS(self.model, using=self._db).select_related('portal')
+
+    def get_personal_items(self, user):
+        return self.filter(creator__id=user.pk).order_by('-created')
+
+    def get_personal_liked_items(self, user):
+        """Return ideas liked by the user, excluding own ideas"""
+        content_type = ContentType.objects.get_for_model(self.model)
+        user_idea_like_pks = LikeObject.objects.filter(content_type=content_type, user=user, liked=True).values_list(
+            'object_id', flat=True
+        )
+        queryset = self.filter(pk__in=user_idea_like_pks).order_by('-created')
+        queryset = queryset.exclude(creator__id=user.pk)
+        return queryset
 
 
 @six.python_2_unicode_compatible
