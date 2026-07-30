@@ -47,7 +47,7 @@ class CosinnusPersonalDashboardSerializer(serializers.Serializer):
     widgets = CosinnusPersonalDashboardWidgetSerializer(many=True)
 
     def __init__(self, instance=None, context=None, **kwargs):
-        if 'data' not in kwargs:
+        if 'data' not in kwargs and context:
             # initialize using widgets
             user = context['user']
             instance = {'widgets': [widget for widget in get_personal_dashboard_widgets() if widget.is_enabled(user)]}
