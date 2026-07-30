@@ -146,4 +146,5 @@ if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
         path('', include('cosinnus_note.urls_api_frontend')),
         path('', include('cosinnus_marketplace.urls_api_frontend')),
         path('', include('cosinnus_event.urls_api_frontend')),
+        path('', include('cosinnus_poll.urls_api_frontend')),
     ]
