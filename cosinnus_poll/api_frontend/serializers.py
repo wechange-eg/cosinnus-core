@@ -1,12 +1,12 @@
 from cosinnus.api_frontend.serializers.tagged import CosinnusBaseTaggableObjectSerializer
-from cosinnus_note.models import Note
+from cosinnus_poll.models import Poll
 
 
 class CosinnusPollSerializer(CosinnusBaseTaggableObjectSerializer):
     """Readonly v3 poll serializer."""
 
     class Meta:
-        model = Note
+        model = Poll
         fields = (
             'id',
             'title',
