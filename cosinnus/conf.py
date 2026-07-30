@@ -1169,6 +1169,7 @@ class CosinnusConf(AppConf):
         'dashboard.tasks': {},
         'dashboard.events': {},
         'dashboard.event_polls': {},
+        'dashboard.polls': {},
     }
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar

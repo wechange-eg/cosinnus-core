@@ -10,6 +10,8 @@ from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerialize
 from cosinnus_marketplace.models import Offer
 from cosinnus_note.api_frontend.serializers import CosinnusNoteSerializer
 from cosinnus_note.models import Note
+from cosinnus_poll.api_frontend.serializers import CosinnusPollSerializer
+from cosinnus_poll.models import Poll
 
 
 class CosinnusPersonalDashboardWidget:
@@ -205,6 +207,16 @@ class CosinnusPersonalEventsWidget(CosinnusPersonalDashboardWidget):
         return conf
 
 
+class CosinnusPersonalPollsWidget(CosinnusPersonalDashboardWidget):
+    """Personal polls widget"""
+
+    id = 'dashboard.polls'
+    cosinnus_app = 'cosinnus_poll'
+    user_queryset_function = Poll.objects.get_personal_open_polls
+    serializer_class = CosinnusPollSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-poll-open')
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
@@ -214,6 +226,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalEventPollsWidget,
     CosinnusPersonalTasksWidget,
     CosinnusPersonalEventsWidget,
+    CosinnusPersonalPollsWidget,
 ]
 
 # initialized available dashboard widgets
