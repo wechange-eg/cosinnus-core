@@ -1261,7 +1261,12 @@ class CosinnusBaseGroup(
         default=None,
         blank=True,
         null=True,
-        help_text=_('Note: For performance reasons last activity is not tracked precisely within the last month.'),
+        help_text=_(
+            'Note: For performance reasons last activity is only re-computed very late, when inactivity becomes '
+            'DSGVO-relevant (before groups are marked for deletion or preceding  member notifications about this). '
+            'E.g. the earliest point of recalculation is before the first notification of deletion goes out, about '
+            '9 years after the last activity, 1 year before scheduled deletion (on default settings).'
+        ),
     )
     inactivity_notification_sent_at = models.DateTimeField(
         _('Inactivity notification sent at'),
@@ -1384,6 +1389,10 @@ class CosinnusBaseGroup(
             self.conference_theme_color = self.conference_theme_color.replace('#', '')
 
         self.generate_or_update_invite_token(save_group=False)
+
+        # set last activity for new groups
+        if created:
+            self.last_activity = now()
 
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
 

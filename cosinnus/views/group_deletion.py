@@ -157,12 +157,19 @@ def delete_group(group):
     group.delete()
 
 
-def update_group_last_activity(group, precision_days=30):
+_COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW = None
+
+
+def update_group_last_activity(group, force_ignore_compution_window=False):
     """Updates the group activity field.
-    The complete computation is slow (especially the RC and NC APIs) it is aborted as soon as any activity is within
-    the "precision_days" parameter range.
+    - Groups without a last_activity date will always be calculated.
+    - Inactive groups will only be calculdated if the have not been before, and will never be re-calculdated.
+    - The complete computation is slow (especially the RC and NC APIs) and recalculation is aborted if we are not now()
+        in a timewindow (a few days) near before where *anything* would happen as a result of the recalculation of the
+        activity date, e.g. a notification would be sent out or the group would be marked as deleted.
     :param group: Group to be updated.
-    :param precision_days: Precision of the last activity in days.
+    :param force_ignore_compution_window: Ignore the computation window set with
+        `INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS` and do the computation regardless.
     """
 
     def save_last_activity(group, last_activity):
@@ -180,19 +187,59 @@ def update_group_last_activity(group, precision_days=30):
     if group.slug in get_default_portal_group_slugs():
         return
 
-    # Get the cutoff time, where the last_activity computation is aborted
-    last_activity_cutoff = now() - datetime.timedelta(days=precision_days)
-    if group.last_activity and group.last_activity > last_activity_cutoff:
-        # Ignore groups where last activity is under the cutoff time
+    # gather the timepoints as days from now() where any notification or deletion activity might happen to the group.
+    # only just before those timepoints will we actually re-calculate the last activity
+    global _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW
+    if _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW is None:
+        _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW = [
+            settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before
+            for days_before in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.keys()
+        ] + [settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE]
+
+    # Get the cutoff time, a bit before the closest point in time where any notification
+    # about the deactivation would happen. if any of the checks finds a younger datetime, we save it and stop checking
+    last_activity_cutoff_days_from_now = (
+        min(_COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW)
+        - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
+    )
+    last_activity_cutoff = now() - datetime.timedelta(days=last_activity_cutoff_days_from_now)
+
+    # ignore groups that have their activity calculated and are inactive themselves
+    # (nothing should happen to refresh those)
+    if group.last_activity and not group.is_active:
+        return
+
+    if not group.last_activity:
+        # always calculate activity on groups that have never been calculated before
+        is_within_recalculation_window = True
+    else:
+        # check if we're in a time window for recalculation
+        is_within_recalculation_window = False
+        for days_of_event in _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW:
+            a_bit_before_days_of_event = group.last_activity + datetime.timedelta(
+                days_of_event - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
+            )
+            time_of_event = group.last_activity + datetime.timedelta(days_of_event)
+            if a_bit_before_days_of_event <= now() <= time_of_event:
+                is_within_recalculation_window = True
+
+    # Ignore last acitivty computation for groups where last activity not in a timewindow near where *anything* would
+    # happen as a result of the recalculation of the activity date
+    if not is_within_recalculation_window:
+        print('not window, retting')
         return
 
     # Stating with group itself
+    print('groupitself', group.last_modified)
     last_activity = group.last_modified
     if last_activity > last_activity_cutoff:
         # Abort further computation
+
+        print('groupitself saving and retting 1', last_activity)
         save_last_activity(group, last_activity)
         return
 
+    print('nope! going on')
     # membership changes
     if group.memberships.exists():
         last_membership_activity = group.memberships.latest('date').date
@@ -200,6 +247,7 @@ def update_group_last_activity(group, precision_days=30):
         if last_activity > last_activity_cutoff:
             # Abort further computation
             save_last_activity(group, last_activity)
+            print('groupitself saving and retting 2')
             return
 
     # taggable objects (notes, events, ...)
@@ -213,6 +261,7 @@ def update_group_last_activity(group, precision_days=30):
             if last_activity > last_activity_cutoff:
                 # Abort further computation
                 save_last_activity(group, last_activity)
+                print('groupitself saving and retting 3')
                 return
 
     # Etherpad/Ethercalc
@@ -255,6 +304,7 @@ def update_group_last_activity(group, precision_days=30):
             )
 
     # update last_activity without updating last_modified
+    print('LAST save', last_activity)
     save_last_activity(group, last_activity)
 
 

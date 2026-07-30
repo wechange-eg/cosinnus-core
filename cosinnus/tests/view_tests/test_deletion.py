@@ -7,6 +7,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils.timezone import now
 from freezegun import freeze_time
+from rest_framework.test import override_settings
 
 import cosinnus_notifications
 from cosinnus.conf import settings
@@ -352,48 +353,166 @@ class GroupManualDeletionTest(TestGroupMixin, TestCase):
         self.assertEqual(self.test_group.scheduled_for_deletion_at, expected_deletion_at)
 
 
+_DEACTIVATION_DAYS = 365 * 10  # 10 years
+_NOTIFICATION_ONE_YEAR_DAYS = 365
+
+
 class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
+    """Test last activity calculation for groups with the cronjob `UpdateGroupsLastActivity` that should
+    only re-calculate group.last_activity very rarely before it becomes relevant.
+    """
+
+    @override_settings(INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS=3)
+    @override_settings(
+        INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION={
+            _NOTIFICATION_ONE_YEAR_DAYS: '1 year',
+            182: '6 months',
+            14: '2 weeks',
+            2: '2 days',
+        }
+    )
+    @override_settings(INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
     def test_group_last_activity_update(self):
-        # test last modified
-        activity_time = datetime(2024, 1, 1, tzinfo=timezone.utc)
-        with freeze_time(activity_time):
+        # newly created groups should always have last_activity set to their creation date
+        self.test_group.refresh_from_db()
+        self.assertIsNotNone(self.test_group.last_activity, 'newly created group last_activity is not None')
+
+        # set last activity to 01.01.2000
+        initial_activity_time = datetime(2020, 1, 1, tzinfo=timezone.utc)
+        self.test_group.last_activity = initial_activity_time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
+
+        # Test TLDR: we make a change to a group, then freeze time to outside of the windows of calculation and run
+        # UpdateGroupsLastActivity().do() and the date should not change and then freeze to within the windows of
+        # calculation and run UpdateGroupsLastActivity().do() and the date should change!
+
+        # test activity calculation with last modified: at a point time where we are not in the re-calculation time
+        activity_time_at_edit = datetime(2024, 1, 1, tzinfo=timezone.utc)
+        with freeze_time(activity_time_at_edit):
+            self.assertEqual(self.test_group.last_activity, initial_activity_time)
             self.test_group.name = 'edited'
             self.test_group.save()
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
-            self.assertEqual(self.test_group.last_activity, activity_time)
+            self.assertEqual(self.test_group.last_modified, activity_time_at_edit, 'group.last_modified was updated')
+            self.assertEqual(self.test_group.last_activity, initial_activity_time, 'last_activity was not recalculated')
 
-        # test last activity aborts computation if last modified is within the last month
-        activity_time = datetime(2024, 1, 2, tzinfo=timezone.utc)
+        # now test recalculation same while we're at a timepoint just before the deletion date,
+        # so re-calculation should happen
+        relevant_recalculation_time = initial_activity_time + timedelta(_DEACTIVATION_DAYS - 1)
+        with freeze_time(relevant_recalculation_time):
+            self.assertEqual(self.test_group.last_activity, initial_activity_time)
+            UpdateGroupsLastActivity().do()
+            self.test_group.refresh_from_db()
+            self.assertEqual(
+                self.test_group.last_modified, activity_time_at_edit, 'group.last_modified is still correct'
+            )
+            self.assertEqual(
+                self.test_group.last_activity,
+                activity_time_at_edit,
+                'last_activity was recalculated and is the time of the group name edit',
+            )
+
+        # a timeslot before deletion notification is also relevant
+        self.test_group.last_activity = initial_activity_time  # reset initial activity time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
+        notification_relevant_recalculation_time = initial_activity_time + timedelta(
+            (_DEACTIVATION_DAYS - _NOTIFICATION_ONE_YEAR_DAYS) - 1
+        )
+        with freeze_time(notification_relevant_recalculation_time):
+            self.assertEqual(self.test_group.last_activity, initial_activity_time)
+            print('>>>>>>>>> now')
+            UpdateGroupsLastActivity().do()
+            print('<<<<<<<<<<< done')
+            self.test_group.refresh_from_db()
+            print('>>>>>>>>>> RELEV', notification_relevant_recalculation_time)
+            self.assertEqual(
+                self.test_group.last_activity,
+                activity_time_at_edit,
+                'last_activity was recalculated near notification time and is the time of the edit',
+            )
+
+        # test new memberships (Calculation within recalcuation time period)
+        self.test_group.last_activity = initial_activity_time  # reset initial activity time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
+        activity_time = datetime(2024, 2, 1, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             new_member = create_active_test_user('new1')
             CosinnusGroupMembership.objects.create(group=self.test_group, user=new_member, status=MEMBERSHIP_MEMBER)
+        with freeze_time(relevant_recalculation_time):
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
-            self.assertNotEqual(self.test_group.last_activity, activity_time)
-            self.assertEqual(self.test_group.last_activity, self.test_group.last_modified)
+            # TODO continue here:
+            # der test failt, weil wegen dem `print('groupitself saving and retting 1', last_activity)`
+            # `last_activity_cutoff` wirklich die `update_group_last_activity()` nicht weiterläuft
+            # hier können wir entweder den cutoff rausnehmen und einen full check machen
+            # oder den test hier splitten und anpassen, einmal so testen dass der cutoff verhindert, dass weiter
+            # geupdated wird und im zweiten test dann das datum so einstellen, dass last_modified nicht den cutoff
+            # erwischt, sondern weiter läuft zur last_activity calculation via group member
+            self.assertEqual(
+                self.test_group.last_activity, activity_time, 'a new membership caused an updated last_activity'
+            )
 
-        # test new memberships (1 month after last activity)
-        activity_time = datetime(2024, 2, 1, tzinfo=timezone.utc)
-        with freeze_time(activity_time):
-            new_member = create_active_test_user('new2')
-            CosinnusGroupMembership.objects.create(group=self.test_group, user=new_member, status=MEMBERSHIP_MEMBER)
-            UpdateGroupsLastActivity().do()
-            self.test_group.refresh_from_db()
-            self.assertEqual(self.test_group.last_activity, activity_time)
-
-        # test tagged objects (1 month after last activity)
+        # test tagged objects (Calculation within recalcuation time period)
+        self.test_group.last_activity = initial_activity_time  # reset initial activity time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
         activity_time = datetime(2024, 3, 3, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             Note.objects.create(text='Test Note', group=self.test_group, creator=self.test_member)
+        with freeze_time(relevant_recalculation_time):
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
-            self.assertEqual(self.test_group.last_activity, activity_time)
+            self.assertEqual(
+                self.test_group.last_activity, activity_time, 'a new tagged object caused an updated last_activity'
+            )
+
+        # Constraint-test: no last_activity calculation for inactive groups if their activity is already set
+        self.test_group.is_active = False
+        self.test_group.last_activity = initial_activity_time  # reset initial activity time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(
+            last_activity=self.test_group.last_activity, is_active=self.test_group.is_active
+        )
+        self.assertFalse(self.test_group.is_active)
+        unchanged_activity_time = self.test_group.last_activity
+        activity_time = datetime(2024, 4, 1, tzinfo=timezone.utc)
+        with freeze_time(activity_time):
+            self.assertIsNotNone(self.test_group.last_activity)
+            self.assertIsNotEqual(self.test_group.last_activity, activity_time)
+            # adding a member would would cause an updated last_activity if recalculated, IF the group was active
+            new_member = create_active_test_user('new2')
+            CosinnusGroupMembership.objects.create(group=self.test_group, user=new_member, status=MEMBERSHIP_MEMBER)
+        with freeze_time(relevant_recalculation_time):
+            UpdateGroupsLastActivity().do()
+            self.test_group.refresh_from_db()
+            self.assertNotEqual(
+                self.test_group.last_activity, activity_time, 'no recalculation happened for an inactive group'
+            )
+            self.assertEqual(
+                self.test_group.last_activity,
+                unchanged_activity_time,
+                'group.last_activity stayed the same for an inactive group',
+            )
+
+        # but inactive groups ARE calculated if no last_activity is set
+        self.test_group.is_active = False
+        self.test_group.last_activity = None
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(
+            last_activity=self.test_group.last_activity, is_active=self.test_group.is_active
+        )
+        with freeze_time(relevant_recalculation_time):
+            UpdateGroupsLastActivity().do()
+            self.test_group.refresh_from_db()
+            self.assertEqual(
+                self.test_group.last_activity,
+                activity_time,
+                'recalculation has happened for an inactive group that had no last_activity set',
+            )
 
     @patch('cosinnus.views.group_deletion.update_group_last_activity')
     def test_group_last_activity_update_skips_forum(self, update_group_activity_mock):
         self.test_group.name = settings.NEWW_FORUM_GROUP_SLUG
         self.test_group.slug = settings.NEWW_FORUM_GROUP_SLUG
+        self.test_group.last_activity = None
         self.test_group.save()
         self.assertIsNone(self.test_group.last_activity)
         UpdateGroupsLastActivity().do()
@@ -431,6 +550,8 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 self.assertFalse(send_mail_mock.called)
 
             # no notification is sent the day after scheduled date, if not enabled by settings
+            # CHECKS BEFORE/AFTER
+
             if (days_before_deactivation - 1) not in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION:
                 day_after_notification = notification_date + timedelta(days=1)
                 with freeze_time(day_after_notification):

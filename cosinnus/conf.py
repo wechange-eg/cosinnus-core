@@ -1781,6 +1781,12 @@ class CosinnusConf(AppConf):
         2: _('2 days'),
     }
 
+    # the amount of days before any of the points in time indicated by
+    # `INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION` or `INACTIVE_DEACTIVATION_SCHEDULE`
+    # where `update_group_last_activity()` will actually run instead of skipping the
+    # expensive computation.
+    INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS = 3
+
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
 
