@@ -1,7 +1,9 @@
 from django.urls import reverse, reverse_lazy
 
 from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
+from cosinnus.api_frontend.serializers.idea import CosinnusIdeaSerializer
 from cosinnus.conf import settings
+from cosinnus.models.idea import CosinnusIdea
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_can_create_groups
 from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer, CosinnusEventSerializer
@@ -217,6 +219,30 @@ class CosinnusPersonalPollsWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:personal-poll-open')
 
 
+class CosinnusPersonalIdeasWidget(CosinnusPersonalDashboardWidget):
+    """Personal ideas widget"""
+
+    id = 'dashboard.ideas'
+    user_queryset_function = CosinnusIdea.objects.get_personal_items
+    serializer_class = CosinnusIdeaSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-idea-list')
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_IDEAS_ENABLED
+
+
+class CosinnusPersonalLikedIdeasWidget(CosinnusPersonalDashboardWidget):
+    """Personal liked ideas widget"""
+
+    id = 'dashboard.liked_ideas'
+    user_queryset_function = CosinnusIdea.objects.get_personal_liked_items
+    serializer_class = CosinnusIdeaSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-idea-liked')
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_IDEAS_ENABLED
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
@@ -227,6 +253,8 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalTasksWidget,
     CosinnusPersonalEventsWidget,
     CosinnusPersonalPollsWidget,
+    CosinnusPersonalIdeasWidget,
+    CosinnusPersonalLikedIdeasWidget,
 ]
 
 # initialized available dashboard widgets
