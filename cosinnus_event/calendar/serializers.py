@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.db import IntegrityError
 from django.urls import reverse
@@ -10,12 +9,15 @@ from rest_framework import serializers
 from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachedFileSerializer
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
 from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusDynamicFieldsSerializerMixin
-from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerMixin
+from cosinnus.api_frontend.serializers.tagged import (
+    CosinnusMediaTagSerializerMixin,
+    CosinnusTaggableObjectCreatorSerializer,
+)
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusBaseGroup
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject, get_tag_object_model
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.permissions import check_object_write_access, check_user_can_see_user
+from cosinnus.utils.permissions import check_object_write_access
 from cosinnus_event.models import Event, EventAttendance
 
 
@@ -96,28 +98,6 @@ class CosinnusCalendarEventAttendancesSerializer(serializers.ModelSerializer):
         )
 
 
-class CosinnusCalendarEventCreatorSerializer(serializers.ModelSerializer):
-    """Readonly serializer for the creator of an event."""
-
-    name = serializers.CharField(source='cosinnus_profile.get_full_name', read_only=True)
-    avatar = serializers.URLField(source='cosinnus_profile.get_avatar_thumbnail_url', read_only=True)
-    profile_url = serializers.URLField(source='cosinnus_profile.get_absolute_url', read_only=True)
-
-    class Meta:
-        model = get_user_model()
-        fields = (
-            'name',
-            'avatar',
-            'profile_url',
-        )
-
-    def to_representation(self, instance):
-        user = self.context['request'].user
-        if not check_user_can_see_user(user, instance):
-            return None
-        return super().to_representation(instance)
-
-
 class BBBRoomUrlsSerializerMixin:
     """A helper mixing to compute the BBB room url method field values used in multiple APIs."""
 
@@ -160,7 +140,7 @@ class CosinnusCalendarEventSerializer(
         allow_null=False if settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED else True,
         allow_blank=False if settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED else True,
     )
-    creator = CosinnusCalendarEventCreatorSerializer(read_only=True)
+    creator = CosinnusTaggableObjectCreatorSerializer(read_only=True)
     can_edit = serializers.SerializerMethodField()
     topics = serializers.MultipleChoiceField(
         source='media_tag.get_topic_ids',

@@ -11,6 +11,7 @@ from cosinnus.conf import settings
 from cosinnus.models import BaseTaggableObjectModel
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.permissions import check_user_can_see_user
 from cosinnus.views.common import apply_star_object
 
 logger = logging.getLogger('cosinnus')
@@ -154,6 +155,17 @@ class CosinnusTaggableObjectCreatorSerializer(serializers.ModelSerializer):
             'avatar',
             'profile_url',
         )
+
+    def to_representation(self, instance):
+        """Check view permissions for creator."""
+        user = None
+        if 'user' in self.context:
+            user = self.context['user']
+        if 'request' in self.context:
+            user = self.context['request'].user
+        if not user or not check_user_can_see_user(user, instance):
+            return None
+        return super().to_representation(instance)
 
 
 class CosinnusTaggableObjectGroupSerializer(serializers.ModelSerializer):
