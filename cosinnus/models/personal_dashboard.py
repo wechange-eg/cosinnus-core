@@ -140,14 +140,14 @@ class CosinnusPersonalGroupsWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:api-group-personal')
 
 
-class CosinnusPersonalPollsWidget(CosinnusPersonalDashboardWidget):
-    """Personal open polls widget"""
+class CosinnusPersonalEventPollsWidget(CosinnusPersonalDashboardWidget):
+    """Personal open event polls widget"""
 
-    id = 'dashboard.polls'
+    id = 'dashboard.event_polls'
     cosinnus_app = 'cosinnus_event'
     user_queryset_function = Event.objects.get_personal_open_polls
     serializer_class = CosinnusEventPollSerializer
-    api_url = reverse_lazy('cosinnus:frontend-api:personal-poll-open')
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-event-poll-open')
 
 
 class CosinnusPersonalTasksWidget(CosinnusPersonalDashboardWidget):
@@ -211,7 +211,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardCreateNewWidget,
     CosinnusPersonalDashboardOffersWidget,
     CosinnusPersonalGroupsWidget,
-    CosinnusPersonalPollsWidget,
+    CosinnusPersonalEventPollsWidget,
     CosinnusPersonalTasksWidget,
     CosinnusPersonalEventsWidget,
 ]

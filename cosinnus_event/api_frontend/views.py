@@ -10,8 +10,8 @@ from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer,
 from cosinnus_event.models import Event
 
 
-class CosinnusPollViewSet(viewsets.ReadOnlyModelViewSet):
-    """Poll api for v3."""
+class CosinnusEventPollViewSet(viewsets.ReadOnlyModelViewSet):
+    """Event poll api for v3."""
 
     renderer_classes = (
         CosinnusAPIFrontendJSONResponseRenderer,
