@@ -1,3 +1,5 @@
+from typing import TypeVar
+
 import factory
 from django.contrib.auth import get_user_model
 
@@ -20,7 +22,7 @@ from cosinnus_note.models import Note
 User = get_user_model()
 
 
-class ActiveUserFactory(factory.django.DjangoModelFactory):
+class ActiveUserFactory(factory.django.DjangoModelFactory[User]):
     class Meta:
         model = User
 
@@ -55,7 +57,13 @@ def add_users_with_status(group, users, status, **kwargs):
         )
 
 
-class CosinnusBaseGroupFactory(factory.django.DjangoModelFactory):
+TBaseGroup = TypeVar(
+    'TBaseGroup',
+    bound=CosinnusBaseGroup,
+)
+
+
+class CosinnusBaseGroupFactory(factory.django.DjangoModelFactory[TBaseGroup]):
     class Meta:
         model = CosinnusBaseGroup
         abstract = True
@@ -98,28 +106,28 @@ class CosinnusBaseGroupFactory(factory.django.DjangoModelFactory):
         add_users_with_status(self, extracted, MEMBERSHIP_PENDING, **kwargs)
 
 
-class CosinnusProjectFactory(CosinnusBaseGroupFactory):
+class CosinnusProjectFactory(CosinnusBaseGroupFactory[CosinnusProject]):
     class Meta:
         model = CosinnusProject
 
     name = factory.Sequence(lambda n: f'Test Project {n}')
 
 
-class CosinnusSocietyFactory(CosinnusBaseGroupFactory):
+class CosinnusSocietyFactory(CosinnusBaseGroupFactory[CosinnusSociety]):
     class Meta:
         model = CosinnusSociety
 
     name = factory.Sequence(lambda n: f'Test Society {n}')
 
 
-class CosinnusConferenceFactory(CosinnusBaseGroupFactory):
+class CosinnusConferenceFactory(CosinnusBaseGroupFactory[CosinnusConference]):
     class Meta:
         model = CosinnusConference
 
     name = factory.Sequence(lambda n: f'Test Conference {n}')
 
 
-class CosinnusMembershipFactory(factory.django.DjangoModelFactory):
+class CosinnusMembershipFactory(factory.django.DjangoModelFactory[CosinnusGroupMembership]):
     class Meta:
         model = CosinnusGroupMembership
 
@@ -128,7 +136,7 @@ class CosinnusMembershipFactory(factory.django.DjangoModelFactory):
     status = MEMBERSHIP_MEMBER
 
 
-class NoteFactory(factory.django.DjangoModelFactory):
+class NoteFactory(factory.django.DjangoModelFactory[Note]):
     class Meta:
         model = Note
 
