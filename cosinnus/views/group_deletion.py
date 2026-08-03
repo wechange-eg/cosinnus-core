@@ -14,6 +14,7 @@ from cosinnus.core.mail import send_html_mail
 from cosinnus.models import group as group_module  # noqa # circular import prevention
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import ensure_group_type
+from cosinnus.models.membership import MEMBER_STATUS
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_portal_group_slugs
 from cosinnus.utils.permissions import check_ug_admin, check_user_can_receive_emails
@@ -217,9 +218,9 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
         group.update_last_activity(group.last_modified)
 
     print('nope! going on')
-    # membership changes
+    # membership changes, only count actual memberships, not requests!
     if group.memberships.exists():
-        last_membership_activity = group.memberships.latest('date').date
+        last_membership_activity = group.memberships.filter(status__in=MEMBER_STATUS).latest('date').date
         last_activity = max(group.last_activity, last_membership_activity)
         if last_activity > group.last_activity:
             group.update_last_activity(last_activity)

@@ -378,8 +378,8 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         self.test_group.refresh_from_db()
         self.assertIsNotNone(self.test_group.last_activity, 'newly created group last_activity is not None')
 
-        # set last activity to 01.01.2000
-        initial_activity_time = datetime(2020, 1, 1, tzinfo=timezone.utc)
+        # set last activity to 01.01.2024 because the new creation of the group will have set it to the test's timestamp
+        initial_activity_time = datetime(2024, 1, 1, tzinfo=timezone.utc)
         self.test_group.last_activity = initial_activity_time
         type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
 
@@ -388,7 +388,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         # calculation and run UpdateGroupsLastActivity().do() and the date should change!
 
         # test activity calculation with last modified: at a point time where we are not in the re-calculation time
-        activity_time_at_edit = datetime(2024, 1, 1, tzinfo=timezone.utc)
+        activity_time_at_edit = datetime(2024, 6, 1, tzinfo=timezone.utc)
         with freeze_time(activity_time_at_edit):
             self.assertEqual(self.test_group.last_activity, initial_activity_time)
             self.test_group.name = 'edited'
@@ -430,10 +430,14 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 'last_activity was recalculated near notification time and is the time of the edit',
             )
 
+        # reset the group's last_modified date to test new object creations
+        self.test_group.last_modified = initial_activity_time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_modified=self.test_group.last_modified)
+
         # test new memberships (Calculation within recalcuation time period)
         self.test_group.last_activity = initial_activity_time  # reset initial activity time
         type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
-        activity_time = datetime(2024, 2, 1, tzinfo=timezone.utc)
+        activity_time = datetime(2024, 7, 1, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             new_member = create_active_test_user('new1')
             new_membership = CosinnusGroupMembership.objects.create(
@@ -444,10 +448,11 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             activity_time,
             'last activity was instantly updated via the new membership creation trigger',
         )
-        # reset to initial activity time to now the cronjob setting the last activity, instead of the save trigger
+        # reset to initial activity time to now test the cronjob setting the last activity, instead of the save trigger
         self.test_group.last_activity = initial_activity_time
         type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
         # test membership status changes
+        activity_time = datetime(2024, 7, 2, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             new_membership.save()
         self.assertEqual(
@@ -455,20 +460,20 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             initial_activity_time,
             'a membership save without status change does not cause last_activity to update',
         )
+        activity_time = datetime(2024, 7, 3, tzinfo=timezone.utc)
         with freeze_time(activity_time):
-            print('>>  p1')
             new_membership.status = MEMBERSHIP_PENDING
             new_membership.save()
-            print('>>  p2')
             new_membership.status = MEMBERSHIP_MEMBER
             new_membership.save()
-            print('>>  p3')
         self.assertEqual(
             self.test_group.last_activity,
             activity_time,
             'but a membership save that becomes a member does cause last_activity to update',
         )
-        # test cronjob
+        # test cronjob to recognize new memberships as update criteria, reset group's last_activity time
+        self.test_group.last_activity = initial_activity_time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
         with freeze_time(relevant_recalculation_time):
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
@@ -477,21 +482,19 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 activity_time,
                 'a new membership caused an updated last_activity via the cronjob',
             )
-        # test cronjob to recognize new memberships as update criteria
-        with freeze_time(relevant_recalculation_time):
-            UpdateGroupsLastActivity().do()
-            self.test_group.refresh_from_db()
-            self.assertEqual(
-                self.test_group.last_activity,
-                activity_time,
-                'a new *membership* caused an updated last_activity via the cronjob',
-            )
+
         # reset to initial activity time to test cronjob to NOT recognize new membership *requests* as update criteria
+        activity_time = datetime(2024, 8, 1, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             new_membership.status = MEMBERSHIP_PENDING
             new_membership.save()
         self.test_group.last_activity = initial_activity_time
         type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
+        self.assertEqual(
+            self.test_group.last_activity,
+            initial_activity_time,
+            'we have properly reset the initial time',
+        )
         with freeze_time(relevant_recalculation_time):
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
@@ -504,7 +507,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         # test tagged objects (Calculation within recalcuation time period)
         self.test_group.last_activity = initial_activity_time  # reset initial activity time
         type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
-        activity_time = datetime(2024, 3, 3, tzinfo=timezone.utc)
+        activity_time = datetime(2024, 8, 2, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             Note.objects.create(text='Test Note', group=self.test_group, creator=self.test_member)
         self.assertEqual(
@@ -532,7 +535,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         )
         self.assertFalse(self.test_group.is_active)
         unchanged_activity_time = self.test_group.last_activity
-        activity_time = datetime(2024, 4, 1, tzinfo=timezone.utc)
+        activity_time = datetime(2024, 9, 1, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             self.assertIsNotNone(self.test_group.last_activity)
             self.assertNotEqual(self.test_group.last_activity, activity_time)
