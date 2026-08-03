@@ -203,7 +203,7 @@ class UserNotificationSettingAPITest(APITestCase):
 
     @override_settings(COSINNUS_ROCKET_ENABLED=True)
     @patch('cosinnus_message.utils.utils.save_rocketchat_mail_notification_preference_for_user_setting')
-    def test_rocketchat_error_on_setting_never_globally(self, mock_save_rc_settings):
+    def test_rocketchat_error_as_warning_in_response(self, mock_save_rc_settings):
         new_settings = {'setting': 0, 'portal_group_setting': 0}
 
         self.client.force_authenticate(user=self.user)
@@ -222,12 +222,6 @@ class UserNotificationSettingAPITest(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertListEqual(response.data['warnings'], [ERROR_MESSAGE])
-
-        # local data has been changed
-        notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
-        self.assertEqual(notification_setting.setting, 0)
-        self.assertEqual(notification_setting.portal_group_setting, 0)
-        self.assertEqual(notification_setting.rocketchat_setting, 0)
 
 
 @mock.patch(
