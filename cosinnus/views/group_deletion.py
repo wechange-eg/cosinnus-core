@@ -172,18 +172,6 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
         `INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS` and do the computation regardless.
     """
 
-    def save_last_activity(group, last_activity):
-        """Save last activity. Ensure last_activity is never in the future."""
-        if last_activity <= now():
-            group.last_activity = last_activity
-            type(group).objects.filter(pk=group.pk).update(last_activity=group.last_activity)
-        else:
-            # unexpectedly got a last_activity in the future.
-            logger.error(
-                'update_group_last_activity: Attempted to set a last_activity in the future (unexpected behaviour).',
-                extra={'group_id': group.id, 'last_activity': last_activity},
-            )
-
     # Ignore forum, events and default user groups
     if group.slug in get_default_portal_group_slugs():
         return
@@ -226,7 +214,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     print('groupitself', group.last_modified)
     if not group.last_activity or group.last_modified > group.last_activity:
         print('groupitself saving', group.last_modified)
-        save_last_activity(group, group.last_modified)
+        group.update_last_activity(group.last_modified)
 
     print('nope! going on')
     # membership changes
@@ -234,7 +222,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
         last_membership_activity = group.memberships.latest('date').date
         last_activity = max(group.last_activity, last_membership_activity)
         if last_activity > group.last_activity:
-            save_last_activity(group, last_activity)
+            group.update_last_activity(last_activity)
             print('groupitself saving 2')
 
     # taggable objects (notes, events, ...)
@@ -246,7 +234,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             )
             last_activity = max(group.last_activity, last_taggable_object_activity)
             if last_activity > group.last_activity:
-                save_last_activity(group, last_activity)
+                group.update_last_activity(last_activity)
                 print('groupitself saving 3')
 
     # Etherpad/Ethercalc
@@ -255,7 +243,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
         last_activity = max(group.last_activity, last_etherpad_activity)
         if last_activity > group.last_activity:
             # Abort further computation
-            save_last_activity(group, last_activity)
+            group.update_last_activity(last_activity)
             print('groupitself saving 4')
 
     # To save the further expensive integration service checks, we get the cutoff time, a bit before the closest point
@@ -280,7 +268,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             if last_rocket_chat_activity:
                 last_activity = max(group.last_activity, last_rocket_chat_activity)
                 if last_activity > group.last_activity:
-                    save_last_activity(group, last_activity)
+                    group.update_last_activity(last_activity)
         except Exception as e:
             logger.warning(
                 'update_group_last_activity: An error occurred when checking RocketChat! Exception in extra.',
@@ -295,7 +283,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             last_next_cloud_activity = get_group_folder_last_modified(group.nextcloud_groupfolder_name)
             last_activity = max(group.last_activity, last_next_cloud_activity)
             if last_activity > group.last_activity:
-                save_last_activity(group, last_activity)
+                group.update_last_activity(last_activity)
         except Exception as e:
             logger.warning(
                 'update_group_last_activity: An error occurred when checking NextCloud! Exception in extra.',

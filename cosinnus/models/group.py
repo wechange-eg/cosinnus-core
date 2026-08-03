@@ -9,7 +9,7 @@ import re
 import shutil
 from builtins import object
 from collections import OrderedDict
-from typing import Optional
+from typing import Callable, Optional, Union
 
 import six
 from annoying.functions import get_object_or_None
@@ -542,6 +542,9 @@ class CosinnusGroupMembership(BaseMembership):
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership or force_joined_signal:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
+        print('>>> ch:', 'created_as_membership', created_as_membership, 'changed_to_membership', changed_to_membership)
+        if created_as_membership or changed_to_membership:
+            self.group.update_last_activity()
 
     def delete(self, *args, **kwargs):
         """Checks and fires `user_left_group` signal if a user has hereby left this group"""
@@ -1553,6 +1556,31 @@ class CosinnusBaseGroup(
             settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED
             and self.type in settings.COSINNUS_MITWIRKOMAT_ENABLED_FOR_GROUP_TYPES
         )
+
+    def update_last_activity(self, last_activity: Optional[Union[datetime.datetime, Callable]] = now):
+        """Update this group's `last_activity` to the given time or now if none supplied.
+        Performs a soft triggerless update() to not affect the group's `last_modified` field.
+        Ensures last_activity is never in the future.
+        @param last_activity: an optional DateTime, callable method or None (to reset the field). If not supplied,
+        updates this group's last_activity to now()."""
+        if callable(last_activity):
+            # evaluate if method is given
+            last_activity = last_activity()
+        if last_activity is None or last_activity <= now():
+            self.last_activity = last_activity
+            type(self).objects.filter(pk=self.pk).update(last_activity=self.last_activity)
+            print('>>>>>>>> soft saved last act', last_activity)
+        else:
+            # unexpectedly got a last_activity in the future.
+            logger.error(
+                'update_group_last_activity: Attempted to set a last_activity in the future or unexpected type '
+                '(unexpected behaviour).',
+                extra={'group_id': self.id, 'last_activity': last_activity},
+            )
+            # removeme
+            print('>>>>>> mow', {'group_id': self.id, 'last_activity': last_activity}, 'NOW', now())
+            print('  ch1', type(last_activity) is datetime.datetime, type(last_activity), '???', type(now()))
+            print('  ch2', last_activity <= now())
 
     def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER, is_late_invitation=False):
         """ "Makes the user a group member".

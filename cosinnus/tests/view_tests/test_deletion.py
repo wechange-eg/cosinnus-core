@@ -20,6 +20,7 @@ from cosinnus.cron import (
     SendUserInactivityNotifications,
     UpdateGroupsLastActivity,
 )
+from cosinnus.models import MEMBERSHIP_PENDING
 from cosinnus.models.group import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.utils.urls import group_aware_reverse
@@ -421,11 +422,8 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         )
         with freeze_time(notification_relevant_recalculation_time):
             self.assertEqual(self.test_group.last_activity, initial_activity_time)
-            print('>>>>>>>>> now')
             UpdateGroupsLastActivity().do()
-            print('<<<<<<<<<<< done')
             self.test_group.refresh_from_db()
-            print('>>>>>>>>>> RELEV', notification_relevant_recalculation_time)
             self.assertEqual(
                 self.test_group.last_activity,
                 activity_time_at_edit,
@@ -438,19 +436,69 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         activity_time = datetime(2024, 2, 1, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             new_member = create_active_test_user('new1')
-            CosinnusGroupMembership.objects.create(group=self.test_group, user=new_member, status=MEMBERSHIP_MEMBER)
+            new_membership = CosinnusGroupMembership.objects.create(
+                group=self.test_group, user=new_member, status=MEMBERSHIP_MEMBER
+            )
+        self.assertEqual(
+            self.test_group.last_activity,
+            activity_time,
+            'last activity was instantly updated via the new membership creation trigger',
+        )
+        # reset to initial activity time to now the cronjob setting the last activity, instead of the save trigger
+        self.test_group.last_activity = initial_activity_time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
+        # test membership status changes
+        with freeze_time(activity_time):
+            new_membership.save()
+        self.assertEqual(
+            self.test_group.last_activity,
+            initial_activity_time,
+            'a membership save without status change does not cause last_activity to update',
+        )
+        with freeze_time(activity_time):
+            print('>>  p1')
+            new_membership.status = MEMBERSHIP_PENDING
+            new_membership.save()
+            print('>>  p2')
+            new_membership.status = MEMBERSHIP_MEMBER
+            new_membership.save()
+            print('>>  p3')
+        self.assertEqual(
+            self.test_group.last_activity,
+            activity_time,
+            'but a membership save that becomes a member does cause last_activity to update',
+        )
+        # test cronjob
         with freeze_time(relevant_recalculation_time):
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
-            # TODO continue here:
-            # der test failt, weil wegen dem `print('groupitself saving and retting 1', last_activity)`
-            # `last_activity_cutoff` wirklich die `update_group_last_activity()` nicht weiterläuft
-            # hier können wir entweder den cutoff rausnehmen und einen full check machen
-            # oder den test hier splitten und anpassen, einmal so testen dass der cutoff verhindert, dass weiter
-            # geupdated wird und im zweiten test dann das datum so einstellen, dass last_modified nicht den cutoff
-            # erwischt, sondern weiter läuft zur last_activity calculation via group member
             self.assertEqual(
-                self.test_group.last_activity, activity_time, 'a new membership caused an updated last_activity'
+                self.test_group.last_activity,
+                activity_time,
+                'a new membership caused an updated last_activity via the cronjob',
+            )
+        # test cronjob to recognize new memberships as update criteria
+        with freeze_time(relevant_recalculation_time):
+            UpdateGroupsLastActivity().do()
+            self.test_group.refresh_from_db()
+            self.assertEqual(
+                self.test_group.last_activity,
+                activity_time,
+                'a new *membership* caused an updated last_activity via the cronjob',
+            )
+        # reset to initial activity time to test cronjob to NOT recognize new membership *requests* as update criteria
+        with freeze_time(activity_time):
+            new_membership.status = MEMBERSHIP_PENDING
+            new_membership.save()
+        self.test_group.last_activity = initial_activity_time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
+        with freeze_time(relevant_recalculation_time):
+            UpdateGroupsLastActivity().do()
+            self.test_group.refresh_from_db()
+            self.assertEqual(
+                self.test_group.last_activity,
+                initial_activity_time,
+                'a new membership *request* did not cause an updated last_activity via the cronjob',
             )
 
         # test tagged objects (Calculation within recalcuation time period)
@@ -459,11 +507,21 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         activity_time = datetime(2024, 3, 3, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             Note.objects.create(text='Test Note', group=self.test_group, creator=self.test_member)
+        self.assertEqual(
+            self.test_group.last_activity,
+            activity_time,
+            'last activity was instantly updated via the new tagged object creation trigger',
+        )
+        # reset to initial activity time to now the cronjob setting the last activity, instead of the save trigger
+        self.test_group.last_activity = initial_activity_time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
         with freeze_time(relevant_recalculation_time):
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
             self.assertEqual(
-                self.test_group.last_activity, activity_time, 'a new tagged object caused an updated last_activity'
+                self.test_group.last_activity,
+                activity_time,
+                'a new tagged object caused an updated last_activity via the cronjob',
             )
 
         # Constraint-test: no last_activity calculation for inactive groups if their activity is already set
@@ -481,6 +539,9 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             # adding a member would would cause an updated last_activity if recalculated, IF the group was active
             new_member = create_active_test_user('new2')
             CosinnusGroupMembership.objects.create(group=self.test_group, user=new_member, status=MEMBERSHIP_MEMBER)
+        # reset to initial activity time to now the cronjob setting the last activity, instead of the save trigger
+        self.test_group.last_activity = initial_activity_time
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
         with freeze_time(relevant_recalculation_time):
             UpdateGroupsLastActivity().do()
             self.test_group.refresh_from_db()
@@ -494,6 +555,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             )
 
         # but inactive groups ARE calculated if no last_activity is set
+        # (this update is caused from the new membership created with `create_active_test_user('new2')` above)
         self.test_group.is_active = False
         self.test_group.last_activity = None
         type(self.test_group).objects.filter(pk=self.test_group.pk).update(
