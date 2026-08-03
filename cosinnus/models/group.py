@@ -545,6 +545,8 @@ class CosinnusGroupMembership(BaseMembership):
         print('>>> ch:', 'created_as_membership', created_as_membership, 'changed_to_membership', changed_to_membership)
         if created_as_membership or changed_to_membership:
             self.group.update_last_activity()
+        # update cached field so it is not stale for next changes to this instance
+        self._status = self.status
 
     def delete(self, *args, **kwargs):
         """Checks and fires `user_left_group` signal if a user has hereby left this group"""
