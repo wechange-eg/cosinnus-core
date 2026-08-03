@@ -9,7 +9,7 @@ import re
 import shutil
 from builtins import object
 from collections import OrderedDict
-from typing import Optional
+from typing import Callable, Optional, Union
 
 import six
 from annoying.functions import get_object_or_None
@@ -542,6 +542,10 @@ class CosinnusGroupMembership(BaseMembership):
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership or force_joined_signal:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
+        if created_as_membership or changed_to_membership:
+            self.group.update_last_activity()
+        # update cached field so it is not stale for next changes to this instance
+        self._status = self.status
 
     def delete(self, *args, **kwargs):
         """Checks and fires `user_left_group` signal if a user has hereby left this group"""
@@ -1261,7 +1265,12 @@ class CosinnusBaseGroup(
         default=None,
         blank=True,
         null=True,
-        help_text=_('Note: For performance reasons last activity is not tracked precisely within the last month.'),
+        help_text=_(
+            'Note: For performance reasons last activity is only re-computed very rarely! Only when inactivity becomes '
+            'DSGVO-relevant (before groups are marked for deletion or preceding  member notifications about this), '
+            'e.g. the earliest point of recalculation is before the first notification of deletion goes out, about '
+            '9 years after the last activity, 1 year before scheduled deletion (on default settings).'
+        ),
     )
     inactivity_notification_sent_at = models.DateTimeField(
         _('Inactivity notification sent at'),
@@ -1384,6 +1393,10 @@ class CosinnusBaseGroup(
             self.conference_theme_color = self.conference_theme_color.replace('#', '')
 
         self.generate_or_update_invite_token(save_group=False)
+
+        # set last activity for new groups
+        if created:
+            self.last_activity = now()
 
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
 
@@ -1544,6 +1557,26 @@ class CosinnusBaseGroup(
             settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED
             and self.type in settings.COSINNUS_MITWIRKOMAT_ENABLED_FOR_GROUP_TYPES
         )
+
+    def update_last_activity(self, last_activity: Optional[Union[datetime.datetime, Callable]] = now):
+        """Update this group's `last_activity` to the given time or now if none supplied.
+        Performs a soft triggerless update() to not affect the group's `last_modified` field.
+        Ensures last_activity is never in the future.
+        @param last_activity: an optional DateTime, callable method or None (to reset the field). If not supplied,
+        updates this group's last_activity to now()."""
+        if callable(last_activity):
+            # evaluate if method is given
+            last_activity = last_activity()
+        if last_activity is None or last_activity <= now():
+            self.last_activity = last_activity
+            type(self).objects.filter(pk=self.pk).update(last_activity=self.last_activity)
+        else:
+            # unexpectedly got a last_activity in the future.
+            logger.error(
+                'update_group_last_activity: Attempted to set a last_activity in the future or unexpected type '
+                '(unexpected behaviour).',
+                extra={'group_id': self.id, 'last_activity': last_activity},
+            )
 
     def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER, is_late_invitation=False):
         """ "Makes the user a group member".

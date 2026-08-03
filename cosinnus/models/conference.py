@@ -739,6 +739,9 @@ class CosinnusConferenceRoom(
             if self.target_result_group and self.target_result_group != self._target_result_group:
                 self.refresh_memberships_for_result_group()
 
+        # update cached field so it is not stale for next changes to this instance
+        self._target_result_group = self.target_result_group
+
     def get_admin_change_url(self):
         """Returns the django admin edit page for this object."""
         return reverse('admin:cosinnus_cosinnusconferenceroom_change', kwargs={'object_id': self.id})

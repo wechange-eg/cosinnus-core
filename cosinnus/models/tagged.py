@@ -550,7 +550,7 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
             self.media_tag = get_tag_object_model().objects.create()
             self.save()
         if created:
-            pass
+            self.group.update_last_activity()
 
     def on_save_added_tagged_persons(self, set_users):
         """Called by the taggable form whenever this object is saved and -new- persons
