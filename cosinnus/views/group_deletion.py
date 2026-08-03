@@ -175,7 +175,8 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     def save_last_activity(group, last_activity):
         """Save last activity. Ensure last_activity is never in the future."""
         if last_activity <= now():
-            type(group).objects.filter(pk=group.pk).update(last_activity=last_activity)
+            group.last_activity = last_activity
+            type(group).objects.filter(pk=group.pk).update(last_activity=group.last_activity)
         else:
             # unexpectedly got a last_activity in the future.
             logger.error(
@@ -195,14 +196,6 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before
             for days_before in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.keys()
         ] + [settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE]
-
-    # Get the cutoff time, a bit before the closest point in time where any notification
-    # about the deactivation would happen. if any of the checks finds a younger datetime, we save it and stop checking
-    last_activity_cutoff_days_from_now = (
-        min(_COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW)
-        - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
-    )
-    last_activity_cutoff = now() - datetime.timedelta(days=last_activity_cutoff_days_from_now)
 
     # ignore groups that have their activity calculated and are inactive themselves
     # (nothing should happen to refresh those)
@@ -225,30 +218,24 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
 
     # Ignore last acitivty computation for groups where last activity not in a timewindow near where *anything* would
     # happen as a result of the recalculation of the activity date
-    if not is_within_recalculation_window:
+    if not is_within_recalculation_window and not force_ignore_compution_window:
         print('not window, retting')
         return
 
-    # Stating with group itself
+    # Stating with group itself. the absolute minimum last activity is the group's last modified flag
     print('groupitself', group.last_modified)
-    last_activity = group.last_modified
-    if last_activity > last_activity_cutoff:
-        # Abort further computation
-
-        print('groupitself saving and retting 1', last_activity)
-        save_last_activity(group, last_activity)
-        return
+    if not group.last_activity or group.last_modified > group.last_activity:
+        print('groupitself saving', group.last_modified)
+        save_last_activity(group, group.last_modified)
 
     print('nope! going on')
     # membership changes
     if group.memberships.exists():
         last_membership_activity = group.memberships.latest('date').date
-        last_activity = max(last_activity, last_membership_activity)
-        if last_activity > last_activity_cutoff:
-            # Abort further computation
+        last_activity = max(group.last_activity, last_membership_activity)
+        if last_activity > group.last_activity:
             save_last_activity(group, last_activity)
-            print('groupitself saving and retting 2')
-            return
+            print('groupitself saving 2')
 
     # taggable objects (notes, events, ...)
     base_taggable_models = group.get_registered_base_taggable_models()
@@ -257,21 +244,33 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             last_taggable_object_activity = (
                 base_taggable_model.objects.filter(group=group).latest('last_modified').last_modified
             )
-            last_activity = max(last_activity, last_taggable_object_activity)
-            if last_activity > last_activity_cutoff:
-                # Abort further computation
+            last_activity = max(group.last_activity, last_taggable_object_activity)
+            if last_activity > group.last_activity:
                 save_last_activity(group, last_activity)
-                print('groupitself saving and retting 3')
-                return
+                print('groupitself saving 3')
 
     # Etherpad/Ethercalc
     if Etherpad.objects.filter(group=group).exists():
         last_etherpad_activity = Etherpad.objects.filter(group=group).latest('last_accessed').last_accessed
-        last_activity = max(last_activity, last_etherpad_activity)
-        if last_activity > last_activity_cutoff:
+        last_activity = max(group.last_activity, last_etherpad_activity)
+        if last_activity > group.last_activity:
             # Abort further computation
             save_last_activity(group, last_activity)
-            return
+            print('groupitself saving 4')
+
+    # To save the further expensive integration service checks, we get the cutoff time, a bit before the closest point
+    # in time where any notification about the deactivation would happen.
+    # if any of the checks finds a younger datetime, we save it and stop checking further, because it would not result
+    # in any actions taken for the group anyways
+    last_activity_cutoff_days_from_now = (
+        min(_COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW)
+        - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
+    )
+    last_activity_cutoff = now() - datetime.timedelta(days=last_activity_cutoff_days_from_now)
+    if group.last_activity > last_activity_cutoff:
+        # Abort further computation
+        print('>>>> retting for cutoff!')
+        return
 
     # RocketChat
     if settings.COSINNUS_ROCKET_ENABLED:
@@ -279,11 +278,9 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             rocket_chat = RocketChatConnection()
             last_rocket_chat_activity = rocket_chat.get_group_updated_at(group)
             if last_rocket_chat_activity:
-                last_activity = max(last_activity, last_rocket_chat_activity)
-                if last_activity > last_activity_cutoff:
-                    # Abort further computation
+                last_activity = max(group.last_activity, last_rocket_chat_activity)
+                if last_activity > group.last_activity:
                     save_last_activity(group, last_activity)
-                    return
         except Exception as e:
             logger.warning(
                 'update_group_last_activity: An error occurred when checking RocketChat! Exception in extra.',
@@ -296,7 +293,9 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     if settings.COSINNUS_CLOUD_ENABLED and group.nextcloud_groupfolder_name and group.is_active:
         try:
             last_next_cloud_activity = get_group_folder_last_modified(group.nextcloud_groupfolder_name)
-            last_activity = max(last_activity, last_next_cloud_activity)
+            last_activity = max(group.last_activity, last_next_cloud_activity)
+            if last_activity > group.last_activity:
+                save_last_activity(group, last_activity)
         except Exception as e:
             logger.warning(
                 'update_group_last_activity: An error occurred when checking NextCloud! Exception in extra.',
@@ -304,8 +303,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             )
 
     # update last_activity without updating last_modified
-    print('LAST save', last_activity)
-    save_last_activity(group, last_activity)
+    print('NO LAST save', last_activity)
 
 
 def send_group_inactivity_deactivation_notifications():

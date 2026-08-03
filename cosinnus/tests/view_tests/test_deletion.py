@@ -477,7 +477,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         activity_time = datetime(2024, 4, 1, tzinfo=timezone.utc)
         with freeze_time(activity_time):
             self.assertIsNotNone(self.test_group.last_activity)
-            self.assertIsNotEqual(self.test_group.last_activity, activity_time)
+            self.assertNotEqual(self.test_group.last_activity, activity_time)
             # adding a member would would cause an updated last_activity if recalculated, IF the group was active
             new_member = create_active_test_user('new2')
             CosinnusGroupMembership.objects.create(group=self.test_group, user=new_member, status=MEMBERSHIP_MEMBER)
