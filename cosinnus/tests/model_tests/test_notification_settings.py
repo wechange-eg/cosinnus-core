@@ -2,6 +2,7 @@ from unittest import mock, skip
 from unittest.mock import patch
 
 import django
+from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.urls import reverse
@@ -15,12 +16,25 @@ from cosinnus.tests.factories import ActiveUserFactory
 from cosinnus_notifications.views import apply_global_notification_settings
 
 ERROR_MESSAGE = 'Error Message'
+User = get_user_model()
+
+
+def init_notification_settings_for_user(
+    user: User, *, setting: int, portal_group_setting: int, rocketchat_setting: int
+) -> None:
+    """init GlobalUserNotificationSetting for given user since override_settings has no effect on the model defaults"""
+    settings_obj: GlobalUserNotificationSetting = user.cosinnus_notification_settings.get()
+    settings_obj.setting = setting
+    settings_obj.portal_group_setting = portal_group_setting
+    settings_obj.rocketchat_setting = rocketchat_setting
+    settings_obj.save()
 
 
 class GlobalUserNotificationSettingsTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = ActiveUserFactory()
+        init_notification_settings_for_user(cls.user, setting=3, portal_group_setting=0, rocketchat_setting=0)
 
     @classmethod
     def tearDownClass(cls):
@@ -36,7 +50,9 @@ class GlobalUserNotificationSettingsTest(TestCase):
             GlobalUserNotificationSetting.objects.create(user=self.user, portal=portal)
 
     def test_creation_default_values(self):
-        notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
+        # not using user-object from test-data because we want the portal-configured default-settings
+        default_user = ActiveUserFactory()
+        notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=default_user)
 
         with self.subTest(setting='setting'):
             self.assertEqual(notification_setting.setting, settings.COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING)
@@ -45,14 +61,12 @@ class GlobalUserNotificationSettingsTest(TestCase):
                 notification_setting.rocketchat_setting, settings.COSINNUS_DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING
             )
 
-    @override_settings(COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING=0)
     def test_creation_valid_global_setting(self):
         notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
         notification_setting.setting = 1
         notification_setting.save()
         self.assertEqual(notification_setting.setting, 1)
 
-    @override_settings(COSINNUS_DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING=0)
     def test_creation_valid_rocketchat_setting(self):
         notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
         notification_setting.rocketchat_setting = 1
@@ -70,13 +84,11 @@ class GlobalUserNotificationSettingsTest(TestCase):
         patched_clear_cache_for_user.assert_called_once()
 
 
-@override_settings(
-    COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING_PORTAL_GROUP=0, COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING=3
-)
 class TestGlobalUserSerializer(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = ActiveUserFactory()
+        init_notification_settings_for_user(cls.user, setting=3, portal_group_setting=0, rocketchat_setting=0)
 
     def test_serialize_notification_setting(self):
         notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(user=self.user)
@@ -99,13 +111,12 @@ class TestGlobalUserSerializer(TestCase):
         self.assertEqual(notification_setting.rocketchat_setting, 5)
 
 
-@override_settings(
-    COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING_PORTAL_GROUP=0, COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING=3
-)
 class UserNotificationSettingAPITest(APITestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = ActiveUserFactory()
+        init_notification_settings_for_user(cls.user, setting=3, portal_group_setting=0, rocketchat_setting=0)
+
         cls.url = reverse('cosinnus:frontend-api:api-user-notification-setting')
 
         if not GlobalUserNotificationSetting.objects.filter(user=cls.user).exists():
@@ -227,6 +238,7 @@ class ApplyGlobalNotificationSettingsTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = ActiveUserFactory()
+        init_notification_settings_for_user(cls.user, setting=3, portal_group_setting=0, rocketchat_setting=0)
 
         if not GlobalUserNotificationSetting.objects.filter(user=cls.user).exists():
             raise AssertionError('GlobalUserNotificationSetting does not exist for user.')
