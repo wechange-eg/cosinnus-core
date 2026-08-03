@@ -542,7 +542,6 @@ class CosinnusGroupMembership(BaseMembership):
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership or force_joined_signal:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
-        print('>>> ch:', 'created_as_membership', created_as_membership, 'changed_to_membership', changed_to_membership)
         if created_as_membership or changed_to_membership:
             self.group.update_last_activity()
         # update cached field so it is not stale for next changes to this instance
@@ -1571,7 +1570,6 @@ class CosinnusBaseGroup(
         if last_activity is None or last_activity <= now():
             self.last_activity = last_activity
             type(self).objects.filter(pk=self.pk).update(last_activity=self.last_activity)
-            print('>>>>>>>> soft saved last act', last_activity)
         else:
             # unexpectedly got a last_activity in the future.
             logger.error(
@@ -1579,10 +1577,6 @@ class CosinnusBaseGroup(
                 '(unexpected behaviour).',
                 extra={'group_id': self.id, 'last_activity': last_activity},
             )
-            # removeme
-            print('>>>>>> mow', {'group_id': self.id, 'last_activity': last_activity}, 'NOW', now())
-            print('  ch1', type(last_activity) is datetime.datetime, type(last_activity), '???', type(now()))
-            print('  ch2', last_activity <= now())
 
     def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER, is_late_invitation=False):
         """ "Makes the user a group member".

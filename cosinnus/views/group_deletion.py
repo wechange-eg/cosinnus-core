@@ -208,23 +208,18 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     # Ignore last acitivty computation for groups where last activity not in a timewindow near where *anything* would
     # happen as a result of the recalculation of the activity date
     if not is_within_recalculation_window and not force_ignore_compution_window:
-        print('not window, retting')
         return
 
     # Stating with group itself. the absolute minimum last activity is the group's last modified flag
-    print('groupitself', group.last_modified)
     if not group.last_activity or group.last_modified > group.last_activity:
-        print('groupitself saving', group.last_modified)
         group.update_last_activity(group.last_modified)
 
-    print('nope! going on')
     # membership changes, only count actual memberships, not requests!
     if group.memberships.exists():
         last_membership_activity = group.memberships.filter(status__in=MEMBER_STATUS).latest('date').date
         last_activity = max(group.last_activity, last_membership_activity)
         if last_activity > group.last_activity:
             group.update_last_activity(last_activity)
-            print('groupitself saving 2')
 
     # taggable objects (notes, events, ...)
     base_taggable_models = group.get_registered_base_taggable_models()
@@ -236,7 +231,6 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             last_activity = max(group.last_activity, last_taggable_object_activity)
             if last_activity > group.last_activity:
                 group.update_last_activity(last_activity)
-                print('groupitself saving 3')
 
     # Etherpad/Ethercalc
     if Etherpad.objects.filter(group=group).exists():
@@ -245,7 +239,6 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
         if last_activity > group.last_activity:
             # Abort further computation
             group.update_last_activity(last_activity)
-            print('groupitself saving 4')
 
     # To save the further expensive integration service checks, we get the cutoff time, a bit before the closest point
     # in time where any notification about the deactivation would happen.
@@ -258,7 +251,6 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     last_activity_cutoff = now() - datetime.timedelta(days=last_activity_cutoff_days_from_now)
     if group.last_activity > last_activity_cutoff:
         # Abort further computation
-        print('>>>> retting for cutoff!')
         return
 
     # RocketChat
@@ -290,9 +282,6 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
                 'update_group_last_activity: An error occurred when checking NextCloud! Exception in extra.',
                 extra={'group_id': group.id, 'exception': force_str(e)},
             )
-
-    # update last_activity without updating last_modified
-    print('NO LAST save', last_activity)
 
 
 def send_group_inactivity_deactivation_notifications():

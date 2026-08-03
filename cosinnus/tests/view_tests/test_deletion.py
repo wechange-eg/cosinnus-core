@@ -380,6 +380,14 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
     )
     @override_settings(INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
     def test_group_last_activity_update_windows(self):
+        """A test that tests whether the `update_group_last_activity` updates properly only do their expensive
+          calculations via cronjob `UpdateGroupsLastActivity` at specific days and will not do anything at other times.
+
+        Test explanation: we make a change to a group, then freeze time to outside of the windows of calculation and run
+          UpdateGroupsLastActivity().do() and the date should not change, and then we freeze to within the intended time
+          windows of calculation and run UpdateGroupsLastActivity().do() and the last_activity date should change!
+        """
+
         # newly created groups should always have last_activity set to their creation date
         self.test_group.refresh_from_db()
         self.assertIsNotNone(self.test_group.last_activity, 'newly created group last_activity is not None')
@@ -387,10 +395,6 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         # set last activity to 01.01.2024 because the new creation of the group will have set it to the test's timestamp
         self.test_group.last_activity = self.initial_activity_time
         type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
-
-        # Test TLDR: we make a change to a group, then freeze time to outside of the windows of calculation and run
-        # UpdateGroupsLastActivity().do() and the date should not change and then freeze to within the windows of
-        # calculation and run UpdateGroupsLastActivity().do() and the date should change!
 
         # test activity calculation with last modified: at a point time where we are not in the re-calculation time
         activity_time_at_edit = datetime(2024, 6, 1, tzinfo=timezone.utc)
@@ -447,6 +451,10 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
     )
     @override_settings(INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
     def test_group_last_activity_calculation(self):
+        """A test that tests whether both the instant triggers and the `update_group_last_activity` updates
+        via cronjob `UpdateGroupsLastActivity` reflect the logic of updating a group's `last_activity` date field
+        when there was relevant activity within that group."""
+
         # test new memberships (Calculation within recalcuation time period)
         self.test_group.last_activity = self.initial_activity_time  # reset initial activity time
         type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=self.test_group.last_activity)
@@ -551,6 +559,9 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
     )
     @override_settings(INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
     def test_group_last_activity_constraints(self):
+        """A test that tests whether the `update_group_last_activity` updates run properly (or not) depending on
+        different group properties or states."""
+
         # Constraint-test: no last_activity calculation for inactive groups if their activity is already set
         self.test_group.is_active = False
         self.test_group.last_activity = self.initial_activity_time  # reset initial activity time
