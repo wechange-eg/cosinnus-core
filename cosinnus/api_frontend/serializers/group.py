@@ -129,7 +129,7 @@ class CosinnusGroupSerializer(serializers.ModelSerializer):
 
     avatar = serializers.URLField(source='get_avatar_thumbnail_url', read_only=True)
     url = serializers.URLField(source='get_absolute_url', read_only=True)
-    members_count = serializers.IntegerField(source='member_count', read_only=True)
+    member_count = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = get_cosinnus_group_model()
@@ -138,5 +138,5 @@ class CosinnusGroupSerializer(serializers.ModelSerializer):
             'name',
             'avatar',
             'url',
-            'members_count',
+            'member_count',
         ]
