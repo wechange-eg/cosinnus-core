@@ -1029,12 +1029,78 @@ class UserNotificationSettingView(APIView):
     authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
+    @swagger_auto_schema(
+        operation_description="""
+    Get the current user's global notification settings.
+
+    `setting` controls notifications for user-created projects and groups:
+
+    - `0`: Never
+    - `1`: Immediately
+    - `2`: Daily report
+    - `3`: Weekly report
+    - `4`: Individual settings for each project or group
+
+    `portal_group_setting` controls notifications for portal-wide default groups:
+
+    - `0`: Never
+    - `1`: Immediately
+    - `2`: Daily report
+    - `3`: Weekly report
+
+    The response always contains a `warnings` list. It is empty when no
+    warnings occurred.
+    """,
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'setting': 3,
+                            'portal_group_setting': 3,
+                            'warnings': [],
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1785762767.029545,
+                    },
+                },
+            ),
+        },
+    )
     def get(self, request):
         notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(request.user)
         notification_setting.warnings = []
         serializer = CosinnusGlobalUserNotificationSettingSerializer(notification_setting)
         return Response(data=serializer.data)
 
+    @swagger_auto_schema(
+        operation_description="""
+    Change the current user's global notification settings.
+    
+    **Note: The Value `4` cannot be set in this API endpoint. Use the Django Form instead.**
+    
+    The response always contains a `warnings` list. It is empty when no
+    warnings occurred.
+    """,
+        request_body=CosinnusGlobalUserNotificationSettingSerializer,
+        responses={
+            '200': openapi.Response(
+                description='WIP: Response info missing. Short example included',
+                examples={
+                    'application/json': {
+                        'data': {
+                            'setting': 3,
+                            'portal_group_setting': 3,
+                            'warnings': ['Some Settings were not applied.'],
+                        },
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1785762767.029545,
+                    },
+                },
+            ),
+        },
+    )
     def post(self, request):
         notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(request.user)
         serializer = CosinnusGlobalUserNotificationSettingSerializer(
