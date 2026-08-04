@@ -6,6 +6,7 @@ from cosinnus.conf import settings
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_can_create_groups
+from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer, CosinnusEventSerializer
 from cosinnus_event.models import Event
 from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerializer
@@ -166,7 +167,7 @@ class CosinnusPersonalTasksWidget(CosinnusPersonalDashboardWidget):
     def get_conf(self, user):
         conf = super().get_conf(user)
         if self.is_active(user):
-            # add user groups board ids
+            # add user groups board infos
             boards = []
             user_deck_groups = get_cosinnus_group_model().objects.get_for_user_without_default_groups(user)
             user_deck_groups = [
@@ -175,7 +176,12 @@ class CosinnusPersonalTasksWidget(CosinnusPersonalDashboardWidget):
                 if self.cosinnus_app not in group.get_deactivated_apps() and group.nextcloud_deck_board_id
             ]
             for group in user_deck_groups:
-                boards.append(group.nextcloud_deck_board_id)
+                boards.append(
+                    {
+                        'board_id': group.nextcloud_deck_board_id,
+                        'board_url': group_aware_reverse('cosinnus:deck:index', kwargs={'group': group}),
+                    }
+                )
             conf['boards'] = boards
         return conf
 
