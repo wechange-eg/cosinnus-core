@@ -33,6 +33,7 @@ from cosinnus.api_frontend.views.portal import (
     PortalUserprofileDynamicFieldsView,
 )
 from cosinnus.api_frontend.views.user import (
+    CosinnusGettingStartedAPIView,
     GroupInviteTokenView,
     GuestAccessTokenView,
     GuestLoginView,
@@ -143,8 +144,10 @@ if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
     ]
 
 if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
+    # TODO: check if apps are activated
     urlpatterns += [
         path('api/v3/dashboard/', CosinnusPersonalDashboardAPIView.as_view(), name='api-peronsal-dashboard'),
+        path('api/v3/user/getting_started/', CosinnusGettingStartedAPIView.as_view(), name='api-getting-started'),
         path('', include('cosinnus_note.urls_api_frontend')),
         path('', include('cosinnus_marketplace.urls_api_frontend')),
         path('', include('cosinnus_event.urls_api_frontend')),

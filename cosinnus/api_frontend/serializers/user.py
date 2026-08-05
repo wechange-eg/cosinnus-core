@@ -23,6 +23,7 @@ from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerM
 from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, UserSignupFinalizeMixin
+from cosinnus.models import PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.profile import (
     PROFILE_DYNAMIC_FIELDS_CONTACTS,
@@ -558,3 +559,26 @@ class CosinnusGlobalUserNotificationSettingSerializer(serializers.ModelSerialize
             )
 
         return value
+
+
+class CosinnusGettingStartedActionSerializer(serializers.Serializer):
+    """Serializer for getting actions."""
+
+    action_id = serializers.CharField()
+    cta_url = serializers.URLField(read_only=True)
+    completed = serializers.BooleanField(read_only=True)
+    dismissed = serializers.BooleanField()
+
+    def save(self, **kwargs):
+        # Save dismissed action is users profile settings.
+        profile = self.context['user'].cosinnus_profile
+        dismissed_actions = profile.settings.get(PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS, [])
+        action_id = self.validated_data['action_id']
+        if self.validated_data['dismissed']:
+            if action_id not in dismissed_actions:
+                dismissed_actions.append(action_id)
+        else:
+            if action_id in dismissed_actions:
+                dismissed_actions.remove(action_id)
+        profile.settings[PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS] = dismissed_actions
+        type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
