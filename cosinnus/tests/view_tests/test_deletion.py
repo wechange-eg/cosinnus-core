@@ -369,16 +369,16 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         self.relevant_recalculation_time = self.initial_activity_time + timedelta(_DEACTIVATION_DAYS - 1)
         super().setUp()
 
-    @override_settings(INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS=3)
+    @override_settings(COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS=3)
     @override_settings(
-        INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION={
+        COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION={
             _NOTIFICATION_ONE_YEAR_DAYS: '1 year',
             182: '6 months',
             14: '2 weeks',
             2: '2 days',
         }
     )
-    @override_settings(INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
+    @override_settings(COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
     def test_group_last_activity_update_windows(self):
         """A test that tests whether the `update_group_last_activity` updates properly only do their expensive
           calculations via cronjob `UpdateGroupsLastActivity` at specific days and will not do anything at other times.
@@ -440,16 +440,16 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 'last_activity was recalculated near notification time and is the time of the edit',
             )
 
-    @override_settings(INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS=3)
+    @override_settings(ICOSINNUS_NACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS=3)
     @override_settings(
-        INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION={
+        COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION={
             _NOTIFICATION_ONE_YEAR_DAYS: '1 year',
             182: '6 months',
             14: '2 weeks',
             2: '2 days',
         }
     )
-    @override_settings(INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
+    @override_settings(COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
     def test_group_last_activity_calculation(self):
         """A test that tests whether both the instant triggers and the `update_group_last_activity` updates
         via cronjob `UpdateGroupsLastActivity` reflect the logic of updating a group's `last_activity` date field
@@ -548,16 +548,16 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 'a new tagged object caused an updated last_activity via the cronjob',
             )
 
-    @override_settings(INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS=3)
+    @override_settings(COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS=3)
     @override_settings(
-        INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION={
+        COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION={
             _NOTIFICATION_ONE_YEAR_DAYS: '1 year',
             182: '6 months',
             14: '2 weeks',
             2: '2 days',
         }
     )
-    @override_settings(INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
+    @override_settings(COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE=_DEACTIVATION_DAYS)
     def test_group_last_activity_constraints(self):
         """A test that tests whether the `update_group_last_activity` updates run properly (or not) depending on
         different group properties or states."""
