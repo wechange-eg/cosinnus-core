@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.tests package &#8212; Cosinnus 2.8.0 documentation</title>
+    <title>cosinnus.tests package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4b85f8b1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -463,13 +463,18 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest"><code class="docutils literal notranslate"><span class="pre">LoginViewTest</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.setUpTestData"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.setUpTestData()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_admin_approval_new_unapproved_user_cannot_login"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_admin_approval_new_unapproved_user_cannot_login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_admin_approval_old_disabled_user_cannot_login"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_admin_approval_old_disabled_user_cannot_login()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_another_user_cannot_login_with_first_user_logged_in"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_another_user_cannot_login_with_first_user_logged_in()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_user_cannot_login"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_deactivated_user_cannot_login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_new_user_cannot_login"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_deactivated_new_user_cannot_login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_old_user_cannot_login"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_deactivated_old_user_cannot_login()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_successful"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_login_successful()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_empty_data"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_login_with_empty_data()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_false_username"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_login_with_false_username()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_incorrect_password"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_login_with_incorrect_password()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_non_email_like_username"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_login_with_non_email_like_username()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.tests.view_tests.html#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_unverified_email_cannot_login"><code class="docutils literal notranslate"><span class="pre">LoginViewTest.test_unverified_email_cannot_login()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1086,6 +1091,34 @@ object the first time, the query is executed.</p>
 For this case Django defines the captureOnCommitCallbacks contextmanagers. We just give it another name for
 better test readability.</p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.utils.CosinnusAssertsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.utils.</span></span><span class="sig-name descname"><span class="pre">CosinnusAssertsMixin</span></span><a class="headerlink" href="#cosinnus.tests.utils.CosinnusAssertsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.utils.CosinnusAssertsMixin.assertMessages">
+<span class="sig-name descname"><span class="pre">assertMessages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_messages</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.utils.CosinnusAssertsMixin.assertMessages" title="Permalink to this definition">¶</a></dt>
+<dd><p>adapted from
+<a class="reference external" href="https://docs.djangoproject.com/en/5.0/_modules/django/contrib/messages/test/#MessagesTestMixin.assertMessages">https://docs.djangoproject.com/en/5.0/_modules/django/contrib/messages/test/#MessagesTestMixin.assertMessages</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.utils.CosinnusAssertsMixin.assertNoFormErrors">
+<span class="sig-name descname"><span class="pre">assertNoFormErrors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.utils.CosinnusAssertsMixin.assertNoFormErrors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.utils.CosinnusAssertsMixin.assertUserLoggedIn">
+<span class="sig-name descname"><span class="pre">assertUserLoggedIn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.utils.CosinnusAssertsMixin.assertUserLoggedIn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.utils.CosinnusAssertsMixin.assertUserNotLoggedIn">
+<span class="sig-name descname"><span class="pre">assertUserNotLoggedIn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.utils.CosinnusAssertsMixin.assertUserNotLoggedIn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

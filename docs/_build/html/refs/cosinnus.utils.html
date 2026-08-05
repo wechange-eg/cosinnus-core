@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.utils package &#8212; Cosinnus 2.8.0 documentation</title>
+    <title>cosinnus.utils package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4b85f8b1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -2312,6 +2312,12 @@ so it should be average.</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.search.BaseTaggableObjectIndex.prepare_group_type">
+<span class="sig-name descname"><span class="pre">prepare_group_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.search.BaseTaggableObjectIndex.prepare_group_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the type of the taggable object group.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.utils.search.BaseTaggableObjectIndex.prepare_location">
 <span class="sig-name descname"><span class="pre">prepare_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.search.BaseTaggableObjectIndex.prepare_location" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -2465,7 +2471,7 @@ Override the prepare_&lt;field&gt; method for different implementing Models wher
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.utils.search.StoredDataIndexMixin.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'background_image_large_url':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'background_image_small_url':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'content_count':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_name':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_slug':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'icon_image_url':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'member_count':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'participant_count':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'slug':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'title':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'url':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus.utils.search.StoredDataIndexMixin.fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'background_image_large_url':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'background_image_small_url':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'content_count':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_name':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_slug':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_type':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'icon_image_url':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'member_count':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'participant_count':</span> <span class="pre">&lt;haystack.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'slug':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sort_field':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'title':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'url':</span> <span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus.utils.search.StoredDataIndexMixin.fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2494,6 +2500,11 @@ Override the prepare_&lt;field&gt; method for different implementing Models wher
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.utils.search.StoredDataIndexMixin.group_slug">
 <span class="sig-name descname"><span class="pre">group_slug</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.utils.search.StoredDataIndexMixin.group_slug" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.utils.search.StoredDataIndexMixin.group_type">
+<span class="sig-name descname"><span class="pre">group_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;haystack.fields.CharField</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.utils.search.StoredDataIndexMixin.group_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2549,6 +2560,13 @@ Override the prepare_&lt;field&gt; method for different implementing Models wher
 <dt class="sig sig-object py" id="cosinnus.utils.search.StoredDataIndexMixin.prepare_group_slug">
 <span class="sig-name descname"><span class="pre">prepare_group_slug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.search.StoredDataIndexMixin.prepare_group_slug" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stub, overridden by individual indexes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.search.StoredDataIndexMixin.prepare_group_type">
+<span class="sig-name descname"><span class="pre">prepare_group_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.search.StoredDataIndexMixin.prepare_group_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stub, overridden by individual indexes.
+Should return related group search type as used in SEARCH_MODEL_NAMES.</p>
 </dd></dl>
 
 <dl class="py method">

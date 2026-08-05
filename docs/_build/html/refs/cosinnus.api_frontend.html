@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.api_frontend package &#8212; Cosinnus 2.8.0 documentation</title>
+    <title>cosinnus.api_frontend package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4b85f8b1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -106,6 +106,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#module-cosinnus.api_frontend.serializers.user">cosinnus.api_frontend.serializers.user module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusGlobalUserNotificationSettingSerializer"><code class="docutils literal notranslate"><span class="pre">CosinnusGlobalUserNotificationSettingSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusGlobalUserNotificationSettingSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">CosinnusGlobalUserNotificationSettingSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusGlobalUserNotificationSettingSerializer.validate_setting"><code class="docutils literal notranslate"><span class="pre">CosinnusGlobalUserNotificationSettingSerializer.validate_setting()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusGuestLoginSerializer"><code class="docutils literal notranslate"><span class="pre">CosinnusGuestLoginSerializer</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusHybridUserAdminCreateSerializer"><code class="docutils literal notranslate"><span class="pre">CosinnusHybridUserAdminCreateSerializer</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusHybridUserAdminCreateSerializer.create"><code class="docutils literal notranslate"><span class="pre">CosinnusHybridUserAdminCreateSerializer.create()</span></code></a></li>
@@ -143,6 +148,7 @@
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusUserSignupSerializer.validate_unique_before_create"><code class="docutils literal notranslate"><span class="pre">CosinnusUserSignupSerializer.validate_unique_before_create</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.choices_help_text"><code class="docutils literal notranslate"><span class="pre">choices_help_text()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.validate_contact_info_pairs"><code class="docutils literal notranslate"><span class="pre">validate_contact_info_pairs()</span></code></a></li>
 </ul>
 </li>
@@ -409,6 +415,15 @@
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserAuthInfoView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">UserAuthInfoView.authentication_classes</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserAuthInfoView.get"><code class="docutils literal notranslate"><span class="pre">UserAuthInfoView.get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserAuthInfoView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">UserAuthInfoView.renderer_classes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserNotificationSettingView"><code class="docutils literal notranslate"><span class="pre">UserNotificationSettingView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserNotificationSettingView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">UserNotificationSettingView.authentication_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserNotificationSettingView.get"><code class="docutils literal notranslate"><span class="pre">UserNotificationSettingView.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserNotificationSettingView.permission_classes"><code class="docutils literal notranslate"><span class="pre">UserNotificationSettingView.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserNotificationSettingView.post"><code class="docutils literal notranslate"><span class="pre">UserNotificationSettingView.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserNotificationSettingView.renderer_classes"><code class="docutils literal notranslate"><span class="pre">UserNotificationSettingView.renderer_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserNotificationSettingView.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserNotificationSettingView.serializer_class</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.api_frontend.views.html#cosinnus.api_frontend.views.user.UserProfileView"><code class="docutils literal notranslate"><span class="pre">UserProfileView</span></code></a><ul>
