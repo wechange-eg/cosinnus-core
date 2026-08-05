@@ -38,7 +38,7 @@ from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.templatetags.cosinnus_tags import full_name, full_name_in_mail, textfield
 from cosinnus.utils.files import get_image_url_for_icon
 from cosinnus.utils.functions import ensure_dict_keys, resolve_attributes
-from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids, get_default_user_group_slugs
 from cosinnus.utils.html import replace_non_portal_urls
 from cosinnus.utils.permissions import (
     check_object_read_access,
@@ -91,7 +91,7 @@ MULTI_NOTIFICATION_IDS = {
 }
 # the option labels for the multi notifications:
 MULTI_NOTIFICATION_LABELS = {
-    'MULTI_followed_object_notification': _('For content that I am following, I wish to receive notification emails'),
+    'MULTI_followed_object_notification': _('For content that I am following, I wish to receive email notifications'),
 }
 
 NOTIFICATION_REASONS = {
@@ -567,7 +567,21 @@ class NotificationsThread(CosinnusWorkerThread):
             # for this special check, we cancel the rest here, because only the moderation check counts
             return False
 
+        global_setting = GlobalUserNotificationSetting.objects.get_for_user(user)
+
+        # portal default user-group check
+        if self.group.id in get_default_user_group_ids():
+            # if global_setting is set to `never`, the portal_group_setting is overridden
+            if global_setting == GlobalUserNotificationSetting.SETTING_NEVER:
+                return False
+            portal_group_setting = GlobalUserNotificationSetting.objects.get_portal_group_setting_for_user(user)
+            if portal_group_setting == GlobalUserNotificationSetting.SETTING_NOW:
+                return True
+            # do not check further, emails for portal_groups are only sent if configured here explicitly
+            return False
+
         # check the specific multi-preference if this notification belongs to it
+        # this comes after the portal_group check and before the global settings-check
         multi_preference_set = notifications[notification_id].get('multi_preference_set', None)
         if multi_preference_set:
             if (
@@ -581,7 +595,6 @@ class NotificationsThread(CosinnusWorkerThread):
                 return False
 
         # global settings check, blanketing the finer grained checks
-        global_setting = GlobalUserNotificationSetting.objects.get_for_user(user)
         if global_setting in [
             GlobalUserNotificationSetting.SETTING_NEVER,
             GlobalUserNotificationSetting.SETTING_DAILY,

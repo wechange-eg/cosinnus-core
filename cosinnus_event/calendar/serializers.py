@@ -15,7 +15,7 @@ from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusBaseGroup
 from cosinnus.models.tagged import BaseTaggableObjectReflection, BaseTagObject, get_tag_object_model
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.permissions import check_object_write_access
+from cosinnus.utils.permissions import check_object_write_access, check_user_can_see_user
 from cosinnus_event.models import Event, EventAttendance
 
 
@@ -54,16 +54,20 @@ class CosinnusCalendarListSerializer(AttendingSerializerMixin, serializers.Model
 
     attending = serializers.SerializerMethodField()
     space = serializers.IntegerField(source='group.id', read_only=True)
+    space_name = serializers.CharField(source='group.name', read_only=True)
+    space_url = serializers.URLField(source='group.get_absolute_url', read_only=True)
 
     class Meta:
         model = Event
         fields = (
             'id',
-            'space',
             'title',
             'from_date',
             'to_date',
             'attending',
+            'space',
+            'space_name',
+            'space_url',
         )
 
 
@@ -106,6 +110,12 @@ class CosinnusCalendarEventCreatorSerializer(serializers.ModelSerializer):
             'avatar',
             'profile_url',
         )
+
+    def to_representation(self, instance):
+        user = self.context['request'].user
+        if not check_user_can_see_user(user, instance):
+            return None
+        return super().to_representation(instance)
 
 
 class BBBRoomUrlsSerializerMixin:
@@ -245,6 +255,9 @@ class CosinnusCalendarEventSerializer(
             'bookmarked',
             'image',
             'attached_files',
+            'space',
+            'space_name',
+            'space_url',
         )
 
     def to_representation(self, instance):

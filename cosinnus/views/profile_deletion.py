@@ -233,8 +233,8 @@ def send_user_inactivity_deactivation_notifications():
             # send notification email
             mail_subject = _('Your account will be deleted due to inactivity')
             mail_content = _(
-                'Your entire account, profile and personal information will be deactivated and irrevocably deleted in '
-                '%(deactivation_in)s.\n\n'
+                'Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and '
+                'then irrevocably deleted.\n\n'
                 'If you do not wish for you account to be deactivated, just log in once.\n\n'
                 'Your pads, news, uploaded files and other content will remain on the website. However, your name will '
                 'no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your '
@@ -245,8 +245,8 @@ def send_user_inactivity_deactivation_notifications():
                 'it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n\n'
                 'The account may be stored in our backup systems for up to 6 months after deletion. If this is too '
                 'long for you, please contact the support team of this platform for immediate deletion.\n\n'
-                'During this %(deleted_after_days)s-day period after deletion, the e-mail address of your account is '
-                'reserved and cannot be used to register a new account.'
+                'During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account '
+                'is reserved and cannot be used to register a new account.'
             ) % {
                 'deleted_after_days': settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS,
                 'deactivation_in': time_message,

@@ -5,6 +5,7 @@ import requests
 from django.contrib.auth import authenticate, get_user_model, password_validation
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator, MinLengthValidator, URLValidator
+from django.utils.translation import gettext_lazy as _
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
@@ -12,7 +13,6 @@ from taggit.serializers import TaggitSerializer, TagListSerializerField
 
 from cosinnus.api_frontend.handlers.error_codes import (
     ERROR_LOGIN_INCORRECT_CREDENTIALS,
-    ERROR_LOGIN_USER_DISABLED,
     ERROR_SIGNUP_CAPTCHA_INVALID,
     ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN,
     ERROR_SIGNUP_EMAIL_IN_USE,
@@ -24,7 +24,11 @@ from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, UserSignupFinalizeMixin
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
-from cosinnus.models.profile import PROFILE_DYNAMIC_FIELDS_CONTACTS, PROFILE_SETTINGS_AVATAR_COLOR
+from cosinnus.models.profile import (
+    PROFILE_DYNAMIC_FIELDS_CONTACTS,
+    PROFILE_SETTINGS_AVATAR_COLOR,
+    GlobalUserNotificationSetting,
+)
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
@@ -55,8 +59,11 @@ class CosinnusUserLoginSerializer(serializers.Serializer):
         user = authenticate(username=email, password=attrs['password'])
         if not user:
             raise ValidationError(ERROR_LOGIN_INCORRECT_CREDENTIALS)
-        if not user.is_active:
-            raise ValidationError(ERROR_LOGIN_USER_DISABLED)
+
+        # allowing inactive users here to handle them in the view
+        # if not user.is_active:
+        #     raise ValidationError(ERROR_LOGIN_USER_DISABLED)
+
         return {'user': user}
 
 
@@ -505,4 +512,49 @@ class CosinnusSetInitialPasswordSerializer(serializers.Serializer):
 
     def validate_password(self, value):
         password_validation.validate_password(value)
+        return value
+
+
+def choices_help_text(description, choices):
+    """Build API documentation for a field with choices."""
+    values = '\n'.join(f'- `{value}`: {label}' for value, label in choices)
+    return f'{description}\n{values}'
+
+
+class CosinnusGlobalUserNotificationSettingSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the global user notification settings
+    - Only the fields `setting` and `portal_group_setting` are handled.
+    """
+
+    warnings = serializers.ListField(
+        child=serializers.CharField(),
+        read_only=True,
+        help_text=('Warnings generated while applying the settings. Empty if none occurred.'),
+    )
+
+    class Meta:
+        model = GlobalUserNotificationSetting
+        fields = ('setting', 'portal_group_setting', 'warnings')
+        extra_kwargs = {
+            'setting': {
+                'help_text': choices_help_text(
+                    'Notification setting for user-created projects and groups:',
+                    GlobalUserNotificationSetting.SETTING_CHOICES,
+                ),
+            },
+            'portal_group_setting': {
+                'help_text': choices_help_text(
+                    'Notification setting for portal-wide default groups:',
+                    GlobalUserNotificationSetting.PORTAL_GROUP_SETTING_CHOICES,
+                ),
+            },
+        }
+
+    def validate_setting(self, value):
+        if value == GlobalUserNotificationSetting.SETTING_GROUP_INDIVIDUAL:
+            raise serializers.ValidationError(
+                _('This value cannot be selected via this API. Use the Django form instead.')
+            )
+
         return value

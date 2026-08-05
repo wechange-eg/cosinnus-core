@@ -34,7 +34,6 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
     events_publish_url = serializers.SerializerMethodField()
     events_event_message = serializers.SerializerMethodField()
     events_event_description_required = serializers.SerializerMethodField()
-    events_reflections_enabled = serializers.SerializerMethodField()
     events_migration_url = serializers.SerializerMethodField()
 
     # nextcloud
@@ -55,7 +54,6 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
             'events_publish_url',
             'events_event_message',
             'events_event_description_required',
-            'events_reflections_enabled',
             'events_migration_url',
             'nextcloud_id',
         ]
@@ -106,9 +104,6 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
 
     def get_events_event_description_required(self, obj):
         return settings.COSINNUS_EVENT_V3_CALENDAR_EVENT_DESCRIPTION_REQUIRED
-
-    def get_events_reflections_enabled(self, obj):
-        return 'cosinnus_event.event' in settings.COSINNUS_REFLECTABLE_OBJECTS
 
     def get_events_migration_url(self, obj):
         """Returns the calendar migration URL if it should be shown to the current user."""

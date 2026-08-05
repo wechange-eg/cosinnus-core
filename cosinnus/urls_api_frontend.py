@@ -40,6 +40,7 @@ from cosinnus.api_frontend.views.user import (
     UserAdminCreateView,
     UserAdminUpdateView,
     UserAuthInfoView,
+    UserNotificationSettingView,
     UserProfileView,
     UserUIFlagsView,
 )
@@ -65,6 +66,11 @@ urlpatterns += [
     path('api/v3/set_initial_password/<str:token>/', SetInitialPasswordView.as_view(), name='api-set-initial-password'),
     path('api/v3/group_invite/<str:token>/', GroupInviteTokenView.as_view(), name='api-group-invite-token'),
     path('api/v3/user/profile/', UserProfileView.as_view(), name='api-user-profile'),
+    path(
+        'api/v3/user/notification_settings/',
+        UserNotificationSettingView.as_view(),
+        name='api-user-notification-setting',
+    ),
     path('api/v3/user/ui_flags/', UserUIFlagsView.as_view(), name='api-user-ui-flags'),
     path('api/v3/portal/topics/', PortalTopicsView.as_view(), name='api-portal-topics'),
     path('api/v3/portal/tags/', PortalTagsView.as_view(), name='api-portal-tags'),

@@ -44,7 +44,7 @@
 {% if not disable_location %}
     {% captureas loc_html %}
         {% trans "Place or adress" as loc_placeholder %}
-        {% render_field form.forms.media_tag.location placeholder=loc_placeholder class+="font14px" %}
+        {% render_field form.forms.media_tag.location placeholder=loc_placeholder class+="font16px" %}
         {{ form.forms.media_tag.location_lat }}
         {{ form.forms.media_tag.location_lon }}
         <div id="id_media_tag-location-map"></div>

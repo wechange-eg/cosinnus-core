@@ -60,15 +60,10 @@
             {% if address or (group_slug and group_name and portal) %}
                 <div class="tile-section top-line one-line {% if isSmall %}no-space{% else %}extra-space{% endif %}">
                     {% block top_line_group %}
-                        {% if group_slug and group_name and portal %}
+                        {% if group_slug and group_name and portal and group_type %}
                             <span class="pale-color">
-                                {% if type == "projects" %}
-                                    {{ macros.typeLabel("groups", singular=1, useStyles=0, colon=1, showIcon=0, COSINNUS_TRANS=COSINNUS_TRANS) }}
-                                    {{ macros.resultLink(portal, group_slug, group_name, "groups") }}
-                                {% else %}
-                                    {{ macros.typeLabel("projects", singular=1, useStyles=0, colon=1, showIcon=0, COSINNUS_TRANS=COSINNUS_TRANS) }}
-                                    {{ macros.resultLink(portal, group_slug, group_name, "projects") }}
-                                {% endif %}
+                                {{ macros.typeLabel(group_type, singular=1, useStyles=0, colon=1, showIcon=0, COSINNUS_TRANS=COSINNUS_TRANS) }}
+                                {{ macros.resultLink(portal, group_slug, group_name, group_type) }}
                             </span>
                             <span class="inline-spacer"></span>
                         {% endif %}

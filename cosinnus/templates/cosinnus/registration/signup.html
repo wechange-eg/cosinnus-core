@@ -142,7 +142,7 @@
                     <script type="text/javascript" src="{% static 'js/osm_field.js' %}"></script>
                     {% captureas loc_html %}
                         {% trans "Place or adress" as loc_placeholder %}
-                        {% render_field form.location placeholder=loc_placeholder class+="font14px" %}
+                        {% render_field form.location placeholder=loc_placeholder class+="font16px" %}
                         {{ form.location_lat }}
                         {{ form.location_lon }}
                     {% endcaptureas %}

@@ -5,19 +5,16 @@ import logging
 import smtplib
 
 import dkim
-from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.core.mail.backends.smtp import EmailBackend
 from django.core.mail.message import sanitize_address
 from django.utils.encoding import force_str
-from django.utils.translation import gettext_lazy as _
 from elasticsearch.exceptions import TransportError
 from haystack.backends.elasticsearch7_backend import Elasticsearch7SearchBackend, Elasticsearch7SearchEngine
 from urllib3.exceptions import ConnectionError, ProtocolError
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import get_user_by_email_safe
 
@@ -38,44 +35,29 @@ class EmailAuthBackend(ModelBackend):
 
     def authenticate(self, request, username=None, password=None):
         """Authenticate a user based on email address as the user name."""
+        # get find user by email
         email = username.lower().strip()
         user = get_user_by_email_safe(email)
 
+        # handle user not found
         if not user:
             # Run the default password hasher once to reduce the timing
             # difference between an existing and a nonexistent user (#20760).
             USER_MODEL().set_password(password)
-            # check if a non-activated user with that email exists (ie the user hasnt activated his email yet)
-            if (
-                CosinnusPortal.get_current().email_needs_verification
-                and USER_MODEL.objects.filter(is_active=True, email__iendswith='__%s' % email).count()
-            ):
-                message_parts = force_str(
-                    _(
-                        'The email address for the account you are trying to use needs to be activated before you can '
-                        'log in.'
-                    )
-                )
-                support_email = CosinnusPortal.get_current().support_email
-                if support_email:
-                    message_parts += ' ' + force_str(
-                        _(
-                            'If you have not received an activation email yet, please try signing up again or contact '
-                            'our support at %(email)s!'
-                        )
-                        % {'email': support_email}
-                    )
-                else:
-                    message_parts += ' ' + force_str(
-                        _(
-                            'If you have not received an activation email from %(portal_name)s within a few minutes '
-                            'please look in your spam folder or try signing up again!'
-                        )
-                        % {'portal_name': CosinnusPortal.get_current().name}
-                    )
-                messages.error(request, message_parts)
-        elif user and not user.is_guest and user.check_password(password) and self.user_can_authenticate(user):
-            return user
+            return None
+
+        # handle wrong password
+        if not user.check_password(password):
+            return None
+
+        # password hasher ran once, so timing is balanced
+
+        # reject guest users
+        if user.is_guest:
+            return None
+
+        # all checks passed
+        return user
 
     def get_user(self, user_id):
         """Get a User object from the user_id."""

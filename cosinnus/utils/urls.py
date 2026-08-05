@@ -182,14 +182,6 @@ def check_url_v3_everywhere_exempt(url_path, request):
     if request.GET.get(settings.EL_PAGINATION_PAGE_LABEL, None):
         return True
 
-    # do a special check for the login url if the '/o/authorize' request token is present
-    # currently do not affect login requests within the oauth flow
-    if (
-        '/o/authorize' in request_uri
-        or any(['/o/authorize' in urllib.parse.unquote(request_token) for request_token in request_tokens])
-    ) and not request_tokens[3] == 'signup':
-        return True
-
     # check if url_path is in exemption patterns
     for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
         if re.match(url_pattern, url_path):

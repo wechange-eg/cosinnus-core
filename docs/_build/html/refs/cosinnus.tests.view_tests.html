@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.tests.view_tests package &#8212; Cosinnus 2.8.0 documentation</title>
+    <title>cosinnus.tests.view_tests package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4b85f8b1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -245,15 +245,37 @@ JSONExportViewTest</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.setUpTestData">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.setUpTestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load initial data for the TestCase.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_admin_approval_new_unapproved_user_cannot_login">
+<span class="sig-name descname"><span class="pre">test_admin_approval_new_unapproved_user_cannot_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_admin_approval_new_unapproved_user_cannot_login" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_admin_approval_old_disabled_user_cannot_login">
+<span class="sig-name descname"><span class="pre">test_admin_approval_old_disabled_user_cannot_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_admin_approval_old_disabled_user_cannot_login" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_another_user_cannot_login_with_first_user_logged_in">
 <span class="sig-name descname"><span class="pre">test_another_user_cannot_login_with_first_user_logged_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_another_user_cannot_login_with_first_user_logged_in" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ensure that no user can login with another user being already logged in</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_user_cannot_login">
-<span class="sig-name descname"><span class="pre">test_deactivated_user_cannot_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_user_cannot_login" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ensure user cannot login being not active / beind deactivated</p>
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_new_user_cannot_login">
+<span class="sig-name descname"><span class="pre">test_deactivated_new_user_cannot_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_new_user_cannot_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user cannot login being not active / beind deactivated on first login</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_old_user_cannot_login">
+<span class="sig-name descname"><span class="pre">test_deactivated_old_user_cannot_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_deactivated_old_user_cannot_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure user cannot login being not active / beind deactivated  after logging in before</p>
 </dd></dl>
 
 <dl class="py method">
@@ -285,6 +307,11 @@ JSONExportViewTest</p>
 <span class="sig-name descname"><span class="pre">test_login_with_non_email_like_username</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_login_with_non_email_like_username" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ensure user cannot login using false username which is not an email</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_unverified_email_cannot_login">
+<span class="sig-name descname"><span class="pre">test_unverified_email_cannot_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.view_tests.test_login_api.LoginViewTest.test_unverified_email_cannot_login" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

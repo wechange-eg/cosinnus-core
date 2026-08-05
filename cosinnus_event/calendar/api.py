@@ -12,7 +12,6 @@ from cosinnus.api_frontend.serializers.attached_objects import (
 )
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectBookmarkSerializer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
-from cosinnus.conf import settings
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import IsCosinnusGroupUser
@@ -86,7 +85,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
 
     group = None
     query_params = None
-    reflections_enabled = 'cosinnus_event.event' in settings.COSINNUS_REFLECTABLE_OBJECTS
 
     def get_serializer_class(self):
         """Get serializer based on viewset action."""
@@ -122,8 +120,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
             # queryset just for schema generation metadata
             return Event.objects.none()
         queryset = Event.objects.filter(group=self.group)
-        if self.reflections_enabled:
-            queryset = MixReflectedObjectsMixin().mix_queryset(queryset, Event, self.group)
+        queryset = MixReflectedObjectsMixin().mix_queryset(queryset, Event, self.group)
         queryset = queryset.prefetch_related('media_tag', 'attendances')
         queryset = queryset.filter(
             media_tag__visibility=BaseTagObject.VISIBILITY_ALL, state=Event.STATE_SCHEDULED, is_hidden_group_proxy=False
@@ -219,9 +216,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     )
     def reflections(self, request, group_id, pk=None):
         """API to handle event reflection in user groups"""
-        data = {}
-        if self.reflections_enabled:
-            data = self.process_action(request)
+        data = self.process_action(request)
         return Response(data)
 
 

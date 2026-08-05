@@ -267,14 +267,14 @@ msgstr ""
 msgid ""
 "%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of inactivity.\n"
 "\n"
-"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+"The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
 msgstr ""
 
 #, python-format
 msgid ""
-"%(group_type)s %(group_name)s has just been deactivated at the instigation of the admin %(deleted_by)s.\n"
+"%(group_type)s %(group_name)s has just been deactivated by the admin %(deleted_by)s.\n"
 "\n"
-"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+"The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
 msgstr ""
 
 #, python-format
@@ -290,7 +290,7 @@ msgstr ""
 msgid ""
 "%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
 "\n"
-"The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
+"The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
 msgstr ""
 
 #, python-format
@@ -1351,6 +1351,9 @@ msgstr ""
 msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
 msgstr ""
 
+msgid "- Added a notification setting that allows users to configure different notification frequencies for portal-wide groups versus user-created groups and projects.\n"
+msgstr ""
+
 msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
 msgstr ""
 
@@ -1395,6 +1398,9 @@ msgid ""
 "- As an additional account security measure, all user sessions except the current one are now logged out after changing your account password or email.\n"
 "- (RocketChat) improved the stability and performance of the integration with RocketChat (if enabled).\n"
 "- The latest security updates have been applied and further minor bugfixes have been made.\n"
+msgstr ""
+
+msgid "- Fixed a bug where some linked user profiles were not accessible from content on the map. Also improved the display of creators for map content and of the groups/project they belong to.\n"
 msgstr ""
 
 msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
@@ -1447,7 +1453,16 @@ msgid ""
 "- Fixed an issue where certain login or signup flows were sometimes not redirecting properly.\n"
 msgstr ""
 
+msgid "- Fixed several small bugs and made some improvements to the redesigned calendar.\n"
+msgstr ""
+
+msgid "- Fixed several typos across the page. \n"
+msgstr ""
+
 msgid "- Further minor bugfixes and stability improvements have been made."
+msgstr ""
+
+msgid "- Improved some error messages on the login page to better explain the reason for failed login attempts.\n"
 msgstr ""
 
 msgid "- Improved the error handling when uploading unsupported images types and formats. Trying to upload unsupported image types will now result in an informative error message.\n"
@@ -3728,6 +3743,7 @@ msgstr ""
 msgid "Created on: "
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Creator"
 msgstr ""
 
@@ -4419,7 +4435,7 @@ msgstr ""
 msgid "E-Mail Addresses"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgctxt "answer to \"i wish to receive rocketchat email notifications:\""
 msgid "E-Mails for all direct messages and mentions"
 msgstr ""
 
@@ -4713,6 +4729,9 @@ msgid "Enter a token:"
 msgstr ""
 
 msgid "Enter a user name or email to find users to invite..."
+msgstr ""
+
+msgid "Enter a valid email address."
 msgstr ""
 
 msgid "Enter a valid name. Forward slash is not allowed."
@@ -5154,7 +5173,11 @@ msgstr ""
 msgid "Footer"
 msgstr ""
 
-msgid "For content that I am following, I wish to receive notification emails"
+#, python-format
+msgid "For content in the groups that you join automatically (%(group_links)s), I wish to receive email notifications:"
+msgstr ""
+
+msgid "For content that I am following, I wish to receive email notifications"
 msgstr ""
 
 msgid "For example"
@@ -6114,7 +6137,7 @@ msgstr ""
 msgid "I wish to delete „%(title)s“."
 msgstr ""
 
-msgid "I wish to receive notification emails"
+msgid "I wish to receive email notifications"
 msgstr ""
 
 msgid "I would like to receive instant messages by email for RocketChat mentions and direct messages to me"
@@ -6276,14 +6299,6 @@ msgstr ""
 msgid "If you have made a mistake and wish to change your new email address, you can go back and change it again:"
 msgstr ""
 
-#, python-format
-msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
-msgstr ""
-
-#, python-format
-msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
-msgstr ""
-
 msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
 msgstr ""
 
@@ -6351,7 +6366,7 @@ msgctxt "notification frequency"
 msgid "Immediately"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "Immediately (an individual email per event)"
 msgstr ""
 
@@ -6397,11 +6412,11 @@ msgstr ""
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "In a Daily Report"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "In a Weekly Report"
 msgstr ""
 
@@ -6478,7 +6493,7 @@ msgstr ""
 msgid "Individual choice"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "Individual settings for each Project/Group..."
 msgstr ""
 
@@ -7010,6 +7025,10 @@ msgid "Login Cancelled"
 msgstr ""
 
 msgid "Login and Connect"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Login required"
 msgstr ""
 
 #, python-format
@@ -7560,7 +7579,7 @@ msgctxt "notification frequency"
 msgid "Never"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive notification emails:\""
+msgctxt "answer to \"i wish to receive email notifications:\""
 msgid "Never (we will not send you any emails)"
 msgstr ""
 
@@ -7727,7 +7746,7 @@ msgstr ""
 msgid "No Description set"
 msgstr ""
 
-msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
+msgctxt "answer to \"i wish to receive rocketchat email notifications:\""
 msgid "No E-Mails for RocketChat messages"
 msgstr ""
 
@@ -8134,6 +8153,9 @@ msgid "Once you are ready to begin the import, please click \"%(submit_button_la
 msgstr ""
 
 msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
+msgstr ""
+
+msgid "Once you have joined some groups or projects, custom settings will be available here."
 msgstr ""
 
 msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
@@ -8571,7 +8593,7 @@ msgid_plural "Please correct the errors below."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
+msgid "Please enter a correct email and password."
 msgstr ""
 
 msgid "Please enter a description of why you are reporting this content!"
@@ -9054,7 +9076,7 @@ msgstr ""
 msgid "Reason for rejection"
 msgstr ""
 
-msgid "Receive notification emails in this language"
+msgid "Receive email notifications in this language"
 msgstr ""
 
 msgid "Recipient"
@@ -10535,9 +10557,6 @@ msgstr ""
 msgid "The email address can be changed in the SSO provider."
 msgstr ""
 
-msgid "The email address for the account you are trying to use needs to be activated before you can log in."
-msgstr ""
-
 msgid "The email address was not a valid email address!"
 msgstr ""
 
@@ -10799,7 +10818,7 @@ msgstr ""
 msgid "The site administrator"
 msgstr ""
 
-msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
+msgid "The start date and time are used for reminder email notifications (if set up). Can span multiple days."
 msgstr ""
 
 msgid "The start date must be before the end date"
@@ -11119,9 +11138,6 @@ msgstr ""
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr ""
 
-msgid "This account is inactive."
-msgstr ""
-
 msgid "This account is no longer active. You have been logged out."
 msgstr ""
 
@@ -11196,6 +11212,9 @@ msgid "This event has already been scheduled. Voting is closed."
 msgstr ""
 
 msgid "This event has been canceled. Voting is closed."
+msgstr ""
+
+msgid "This field may not be blank."
 msgstr ""
 
 msgid "This function is not enabled for this conference."
@@ -11394,6 +11413,9 @@ msgstr ""
 msgid "This user profile is scheduled for deletion at: "
 msgstr ""
 
+msgid "This value cannot be selected via this API. Use the Django form instead."
+msgstr ""
+
 msgid "This website allows no anonymous access."
 msgstr ""
 
@@ -11406,7 +11428,7 @@ msgstr ""
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
 msgstr ""
 
-msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgid "This will determine the time and date shown for events on the website and in your email notifications."
 msgstr ""
 
 msgid "This will determine who can see your idea."
@@ -13612,7 +13634,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your entire account, profile and personal information will be deactivated and irrevocably deleted in %(deactivation_in)s.\n"
+"Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and then irrevocably deleted.\n"
 "\n"
 "If you do not wish for you account to be deactivated, just log in once.\n"
 "\n"
@@ -13622,7 +13644,7 @@ msgid ""
 "\n"
 "The account may be stored in our backup systems for up to 6 months after deletion. If this is too long for you, please contact the support team of this platform for immediate deletion.\n"
 "\n"
-"During this %(deleted_after_days)s-day period after deletion, the e-mail address of your account is reserved and cannot be used to register a new account."
+"During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account is reserved and cannot be used to register a new account."
 msgstr ""
 
 msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
@@ -13801,6 +13823,9 @@ msgid "Your project/group is now assigned to the organization “%(name)s”. We
 msgstr ""
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
+msgstr ""
+
+msgid "Your registration hasn't been confirmed yet. We'll let you know via email as soon as it's ready."
 msgstr ""
 
 msgid "Your reply could not be matched to an existing message."

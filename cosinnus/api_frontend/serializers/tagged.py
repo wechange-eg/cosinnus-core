@@ -62,8 +62,10 @@ class CosinnusMediaTagSerializerMixin:
                 media_tag.location_lat = float(location_lat)
                 media_tag.location_lon = float(location_lon)
             else:
-                # save location string
+                # save location string and clear coordinates
                 media_tag.location = location_str
+                media_tag.location_lat = None
+                media_tag.location_lon = None
 
                 # use OpenCage service to determine an actual location from the given string
                 if settings.COSINNUS_GEOCODE_OPENCAGE_KEY:

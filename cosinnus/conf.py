@@ -206,6 +206,7 @@ class CosinnusConf(AppConf):
     }
 
     # list of BaseTaggableObjectModels that can be reflected from groups into projects
+    # DEPRECATED: The v3 calendar does not check this setting and always allows event reflections.
     REFLECTABLE_OBJECTS = [
         'cosinnus_note.note',
         'cosinnus_event.event',
@@ -300,6 +301,12 @@ class CosinnusConf(AppConf):
 
     # the global notification setting for users on the plattform (3: weekly)
     DEFAULT_GLOBAL_NOTIFICATION_SETTING = 3
+
+    # the global notification setting for new users, specific for the portal-wide default groups
+    # like Forum, Events etc.
+    # (0 : never)
+    # (3 : weekly)
+    DEFAULT_GLOBAL_NOTIFICATION_SETTING_PORTAL_GROUP = 3
 
     # default rocketchat notification mails are on
     # (see `GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES`)
@@ -1774,6 +1781,12 @@ class CosinnusConf(AppConf):
         14: _('2 weeks'),
         2: _('2 days'),
     }
+
+    # the amount of days before any of the points in time indicated by
+    # `INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION` or `INACTIVE_DEACTIVATION_SCHEDULE`
+    # where `update_group_last_activity()` will actually run instead of skipping the
+    # expensive computation.
+    INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS = 3
 
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False

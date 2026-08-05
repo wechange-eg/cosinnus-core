@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.views package &#8212; Cosinnus 2.8.0 documentation</title>
+    <title>cosinnus.views package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4b85f8b1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -1623,12 +1623,13 @@ Excpects <cite>element_ids[]</cite> as POST arguments.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.common.LoginViewAdditionalLogicMixin.additional_user_validation_checks">
-<span class="sig-name descname"><span class="pre">additional_user_validation_checks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.LoginViewAdditionalLogicMixin.additional_user_validation_checks" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">additional_user_validation_checks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Promise</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#cosinnus.views.common.LoginViewAdditionalLogicMixin.additional_user_validation_checks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Does additional validation checks for a user and may have effects like triggering sending a mail.
-&#64;return None if no errors are found, else a str error message that should be displayed to the user.</p>
-<blockquote>
-<div><p>if this does not return None, the login attempt should be denied!</p>
-</div></blockquote>
+- assumes the user is already authenticated</p>
+<dl class="simple">
+<dt>&#64;return None if no errors are found, else a str error message that should be displayed to the user.</dt><dd><p>if this does not return None, the login attempt should be denied!</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -2311,6 +2312,17 @@ See <a class="reference external" href="https://developers.facebook.com/docs/fac
 <dt class="sig sig-object py" id="cosinnus.views.feedback.report_object">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.feedback.</span></span><span class="sig-name descname"><span class="pre">report_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.feedback.report_object" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.views.feedback.submit_report">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.views.feedback.</span></span><span class="sig-name descname"><span class="pre">submit_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.feedback.submit_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a reported-object and notify portal admins.
+:param request: Request used to get creator and context for the email
+:param model_cls: model-class for the report target
+:param obj_id: object id of the report target
+:param text: report text
+:return: created report object</p>
+</dd></dl>
 
 </section>
 <section id="module-cosinnus.views.group">
@@ -3184,7 +3196,7 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.group.GroupOrganizationRequestView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dein</span> <span class="pre">Antrag</span> <span class="pre">auf</span> <span class="pre">Mitgliedschaft</span> <span class="pre">für</span> <span class="pre">die</span> <span class="pre">Organisation</span> <span class="pre">&quot;%(name)s&quot;</span> <span class="pre">wurde</span> <span class="pre">gestellt.</span> <span class="pre">Du</span> <span class="pre">erhältst</span> <span class="pre">eine</span> <span class="pre">E-Mail,</span> <span class="pre">sobald</span> <span class="pre">ein</span> <span class="pre">Administrator</span> <span class="pre">den</span> <span class="pre">Antrag</span> <span class="pre">bearbeitet.'</span></em><a class="headerlink" href="#cosinnus.views.group.GroupOrganizationRequestView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dein</span> <span class="pre">Antrag</span> <span class="pre">auf</span> <span class="pre">Mitgliedschaft</span> <span class="pre">für</span> <span class="pre">die</span> <span class="pre">Organisation</span> <span class="pre">&quot;%(name)s&quot;</span> <span class="pre">wurde</span> <span class="pre">gestellt.</span> <span class="pre">Du</span> <span class="pre">erhältst</span> <span class="pre">eine</span> <span class="pre">E-Mail,</span> <span class="pre">sobald</span> <span class="pre">ein/eine</span> <span class="pre">Administrator/in</span> <span class="pre">den</span> <span class="pre">Antrag</span> <span class="pre">bearbeitet.'</span></em><a class="headerlink" href="#cosinnus.views.group.GroupOrganizationRequestView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -3544,7 +3556,7 @@ may not be called if get_object() is overridden.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.group.GroupUserJoinView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dein</span> <span class="pre">Antrag</span> <span class="pre">auf</span> <span class="pre">Mitgliedschaft</span> <span class="pre">für</span> <span class="pre">%(team_type)s</span> <span class="pre">“%(team_name)s”</span> <span class="pre">wurde</span> <span class="pre">gestellt.</span> <span class="pre">Du</span> <span class="pre">erhältst</span> <span class="pre">eine</span> <span class="pre">E-Mail</span> <span class="pre">sobald</span> <span class="pre">ein</span> <span class="pre">Administrator</span> <span class="pre">den</span> <span class="pre">Antrag</span> <span class="pre">bearbeitet.'</span></em><a class="headerlink" href="#cosinnus.views.group.GroupUserJoinView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dein</span> <span class="pre">Antrag</span> <span class="pre">auf</span> <span class="pre">Mitgliedschaft</span> <span class="pre">für</span> <span class="pre">%(team_type)s</span> <span class="pre">“%(team_name)s”</span> <span class="pre">wurde</span> <span class="pre">gestellt.</span> <span class="pre">Du</span> <span class="pre">erhältst</span> <span class="pre">eine</span> <span class="pre">E-Mail</span> <span class="pre">sobald</span> <span class="pre">ein/eine</span> <span class="pre">Administrator/in</span> <span class="pre">den</span> <span class="pre">Antrag</span> <span class="pre">bearbeitet.'</span></em><a class="headerlink" href="#cosinnus.views.group.GroupUserJoinView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">

@@ -2,10 +2,12 @@
 from __future__ import unicode_literals
 
 import logging
+from typing import List, Optional, Tuple, Union, cast
 
 import six
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.core.cache import cache
 from django.db import transaction
 from django.db.models import Case, Count, Q, When
@@ -17,6 +19,8 @@ from django.http.response import (
     HttpResponseRedirect,
 )
 from django.urls import reverse_lazy
+from django.utils.functional import Promise
+from django.utils.html import format_html_join
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
@@ -31,6 +35,7 @@ from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.profile import GlobalUserNotificationSetting, UserBlock
 from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetime
 from cosinnus.utils.functions import is_number
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids, get_default_user_group_slugs
 from cosinnus.utils.permissions import check_user_portal_admin, check_user_portal_moderator
 from cosinnus.utils.user import get_unread_message_count_for_user
 from cosinnus.views.user_dashboard import BasePagedOffsetWidgetView
@@ -49,6 +54,120 @@ from cosinnus_notifications.notifications import (
     notifications,
     set_user_group_notifications_special,
 )
+
+MaybeLazyString = Union[str, Promise]
+
+
+def apply_global_notification_settings(
+    user: AbstractBaseUser,
+    global_setting: Optional[int] = None,
+    portal_group_setting: Optional[int] = None,
+    rocketchat_setting: Optional[int] = None,
+) -> List[MaybeLazyString]:
+    """
+    Applies global notification settings for the given user. Handles system logic+side effects, enforces invariants.
+    - Settings given as None or outside the valid choices will be ignored and not changed.
+    - The GlobalUserNotificationSetting object is saved before returning, regardless of any errors.
+    :param user: User-object
+    :param global_setting: global notification setting, valid values in
+            GlobalUserNotificationSetting.PORTAL_GROUP_SETTING_CHOICES
+    :param portal_group_setting: notification setting for portal default groups, valid values in
+            GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES
+    :param rocketchat_setting: email notification setting for rocket chat, valid values in
+            GlobalUserNotificationSetting.SETTING_CHOICES
+    :return: List of Error-Messages as lazy-translated string-object on Error, empty List on success
+    """
+    error_messages = []
+    setting_obj = GlobalUserNotificationSetting.objects.get_object_for_user(user)
+
+    if global_setting is not None and global_setting in GlobalUserNotificationSetting.SETTING_VALID_VALUES:
+        setting_obj.setting = global_setting
+
+    if (
+        portal_group_setting is not None
+        and portal_group_setting in GlobalUserNotificationSetting.PORTAL_GROUP_SETTING_VALID_VALUES
+    ):
+        setting_obj.portal_group_setting = portal_group_setting
+
+    if settings.COSINNUS_ROCKET_ENABLED:
+        from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
+        from cosinnus_message.utils.utils import (
+            save_rocketchat_mail_notification_preference_for_user_setting,  # noqa
+        )
+
+        # on a global "never", we always set the rocketchat setting to "off"
+        if global_setting == GlobalUserNotificationSetting.SETTING_NEVER:
+            rocketchat_setting = GlobalUserNotificationSetting.ROCKETCHAT_SETTING_OFF
+
+        if (
+            rocketchat_setting is not None
+            and rocketchat_setting in GlobalUserNotificationSetting.ROCKETCHAT_SETTING_VALID_VALUES
+        ):
+            setting_obj.rocketchat_setting = rocketchat_setting
+
+            # propagate the setting to RocktChat
+            rocketchat_setting_saved = False
+            try:
+                rocketchat_setting_saved = save_rocketchat_mail_notification_preference_for_user_setting(
+                    user, rocketchat_setting
+                )
+            except RocketChatDownException:
+                logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+            except Exception as e:
+                logging.exception(f'Failed to save the RocketChat mail notification preference: {e}')
+
+            if not rocketchat_setting_saved:
+                error_messages.append(
+                    _(
+                        'Your rocketchat setting could not be saved. If this error persists, please configure '
+                        'the setting in the rocketchat user preferences manually!'
+                    )
+                )
+
+    setting_obj.save()
+    return error_messages
+
+
+def refresh_global_notification_rocketchat_setting(user) -> Tuple[bool, Optional[MaybeLazyString]]:
+    """
+    refresh the setting from the rocketchat API, and if it differs, save it to our DB
+    :param user: The user object to act on.
+    :return: Tuple `(is_changed, error_message)`.
+        - `is_changed` is `True` if the setting was changed. Maybe update other references.
+        - `error_message` is `None` on success, otherwise an error message.
+    """
+    if not settings.COSINNUS_ROCKET_ENABLED:
+        # return no change, no Error message
+        return False, None
+
+    # get external value
+    from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
+    from cosinnus_message.utils.utils import (
+        get_rocketchat_mail_notification_setting_from_user_preference,  # noqa
+    )
+
+    try:
+        external_setting = get_rocketchat_mail_notification_setting_from_user_preference(user)
+    except RocketChatDownException:
+        logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+        # return no change, Error message
+        return False, RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE
+    except Exception as e:
+        logging.exception(e)
+        # return no change, Error message
+        return False, RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE
+
+    # update internal value if necessary
+    internal_setting = GlobalUserNotificationSetting.objects.get_rocketchat_setting_for_user(user)
+    if external_setting != internal_setting:
+        setting_obj = GlobalUserNotificationSetting.objects.get_object_for_user(user)
+        setting_obj.rocketchat_setting = external_setting
+        setting_obj.save(update_fields=['rocketchat_setting'])
+        # return change occurred, no Error message
+        return True, None
+
+    # return no change, no Error message
+    return False, None
 
 
 class NotificationPreferenceView(ListView):
@@ -75,6 +194,9 @@ class NotificationPreferenceView(ListView):
         Handles POST requests, instantiating a form instance with the passed
         POST variables and then checked for validity.
         """
+        # tell PyCharm about the type, this is never AnonymousUser
+        assert isinstance(request.user, AbstractBaseUser)
+
         with transaction.atomic():
             # save language preference:
             language = request.POST.get('language', None)
@@ -90,50 +212,17 @@ class NotificationPreferenceView(ListView):
                     membership.is_moderator = is_moderator
                     membership.save()
 
-            setting_obj = GlobalUserNotificationSetting.objects.get_object_for_user(request.user)
-
             # save global notification setting
             global_setting = int(request.POST.get('global_setting', '-1'))
-            if global_setting >= 0 and global_setting in (
-                sett for sett, label in GlobalUserNotificationSetting.SETTING_CHOICES
-            ):
-                setting_obj.setting = global_setting
+            portal_group_setting = int(request.POST.get('portal-group-setting', '-1'))
+            rocketchat_setting = int(request.POST.get('rocketchat_setting', '-1'))
 
-                # save rocketchat notification setting
-                if settings.COSINNUS_ROCKET_ENABLED:
-                    from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
-                    from cosinnus_message.utils.utils import (
-                        save_rocketchat_mail_notification_preference_for_user_setting,  # noqa
-                    )
-
-                    if global_setting == GlobalUserNotificationSetting.SETTING_NEVER:
-                        # on a global "never", we always set the rocketchat setting to "off"
-                        setting_obj.rocketchat_setting = GlobalUserNotificationSetting.ROCKETCHAT_SETTING_OFF
-                    else:
-                        rocketchat_setting = int(request.POST.get('rocketchat_setting', '-1'))
-                        if rocketchat_setting >= 0 and rocketchat_setting in (
-                            sett for sett, label in GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES
-                        ):
-                            setting_obj.rocketchat_setting = rocketchat_setting
-                    try:
-                        success = save_rocketchat_mail_notification_preference_for_user_setting(
-                            request.user, setting_obj.rocketchat_setting
-                        )
-                    except RocketChatDownException:
-                        logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                        success = False
-                    except Exception as e:
-                        logging.exception(e)
-                        success = False
-                    if not success:
-                        messages.warning(
-                            request,
-                            _(
-                                'Your rocketchat setting could not be saved. If this error persists, please configure '
-                                'the setting in the rocketchat user preferences manually!'
-                            ),
-                        )
-                setting_obj.save()
+            error_messages = apply_global_notification_settings(
+                request.user, global_setting, portal_group_setting, rocketchat_setting
+            )
+            if error_messages:
+                for message in error_messages:
+                    messages.warning(request, cast(str, message))
 
             """ TODO:
                 * initial setting on user rocketchat account creation, by their setting or portal default setting
@@ -157,6 +246,7 @@ class NotificationPreferenceView(ListView):
 
             # only update the individual group settings if user selected the individual global setting
             if global_setting == GlobalUserNotificationSetting.SETTING_GROUP_INDIVIDUAL:
+                portal_group_ids = set(get_default_user_group_ids())
                 for name, value in list(request.POST.items()):
                     # we go through all values POSTed to us. some of these are the settings from the dropdown
                     # box (all / none / custom), some of them are the individual custom preference choices
@@ -165,6 +255,9 @@ class NotificationPreferenceView(ListView):
                     # values, or if set to custom, delete any global all/none preference entries for that group
                     # and save the individual preference settings for that group
                     if not name.startswith('notif_'):
+                        continue
+                    if name.startswith('notif_') and int(name.split(':')[1]) in portal_group_ids:
+                        # skip individual settings for portal-default-groups
                         continue
                     if name.startswith('notif_choice:'):
                         group_id = int(name.split(':')[1])
@@ -216,8 +309,12 @@ class NotificationPreferenceView(ListView):
             prefs['%s:%s' % (pref.group.pk, pref.notification_id)] = pref.setting
 
         group_rows = []  # [(group, notification_rows, choice_selected), ...]
-        # get groups, grouped by their
+        # get groups
         groups = CosinnusGroup.objects.get_for_user(self.user)
+        # filter out the default portal groups - we do not show them in individual settings
+        portal_group_ids = get_default_user_group_ids()
+        groups = list(filter(lambda group: group.id not in portal_group_ids, groups))
+        # group by parent-group
         groups = sorted(
             groups, key=lambda group: ((group.parent.name + '_' if group.parent else '') + group.name).lower()
         )
@@ -254,34 +351,30 @@ class NotificationPreferenceView(ListView):
 
         global_setting_choices = GlobalUserNotificationSetting.SETTING_CHOICES
         global_setting_selected = GlobalUserNotificationSetting.objects.get_for_user(self.request.user)
+        portal_group_setting_choices = GlobalUserNotificationSetting.PORTAL_GROUP_SETTING_CHOICES
+        portal_group_setting_selected = GlobalUserNotificationSetting.objects.get_portal_group_setting_for_user(
+            self.request.user
+        )
+        _portal_default_groups = list(
+            get_cosinnus_group_model().objects.filter(slug__in=get_default_user_group_slugs()).order_by('name')
+        )
+        portal_default_group_links = format_html_join(
+            ', ',
+            '<a href="{}" target="_blank">{}</a>',
+            ((group.get_absolute_url(), group.name) for group in _portal_default_groups),
+        )
         rocketchat_setting_choices = None
         rocketchat_setting_selected = None
-
-        # get rocketchat email setting
+        # refresh rocketchat setting if the feature is enabled
         if settings.COSINNUS_ROCKET_ENABLED:
-            from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
-            from cosinnus_message.utils.utils import (
-                get_rocketchat_mail_notification_setting_from_user_preference,  # noqa
-            )
+            _, error_message = refresh_global_notification_rocketchat_setting(self.request.user)
+            if error_message:
+                messages.warning(self.request, error_message)
 
             rocketchat_setting_choices = GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES
             rocketchat_setting_selected = GlobalUserNotificationSetting.objects.get_rocketchat_setting_for_user(
                 self.request.user
             )
-            # refresh the setting from the rocketchat API, and if it differs, save it to our DB
-            try:
-                external_setting = get_rocketchat_mail_notification_setting_from_user_preference(self.request.user)
-                if external_setting != rocketchat_setting_selected:
-                    setting_obj = GlobalUserNotificationSetting.objects.get_object_for_user(self.request.user)
-                    setting_obj.rocketchat_setting = external_setting
-                    setting_obj.save(update_fields=['rocketchat_setting'])
-                    rocketchat_setting_selected = external_setting
-            except RocketChatDownException:
-                logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                messages.warning(self.request, RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE)
-            except Exception as e:
-                logging.exception(e)
-                messages.warning(self.request, RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE)
 
         multi_notification_preferences = []
         for multi_notification_id, __ in MULTI_NOTIFICATION_IDS.items():
@@ -322,6 +415,9 @@ class NotificationPreferenceView(ListView):
                 'language_selected': self.request.user.cosinnus_profile.language,
                 'global_setting_choices': global_setting_choices,
                 'global_setting_selected': global_setting_selected,
+                'portal_group_setting_choices': portal_group_setting_choices,
+                'portal_group_setting_selected': portal_group_setting_selected,
+                'portal_default_group_links': portal_default_group_links,
                 'rocketchat_setting_choices': rocketchat_setting_choices,
                 'rocketchat_setting_selected': rocketchat_setting_selected,
                 'multi_notification_preferences': multi_notification_preferences,

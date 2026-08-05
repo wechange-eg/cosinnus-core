@@ -20,6 +20,7 @@ from cosinnus.forms.search import filter_searchqueryset_for_read_access, get_vis
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.tagged import BaseTagObject
 from cosinnus.templatetags.cosinnus_tags import textfield_with_html
 from cosinnus.utils.dates import HumanizedEventTimeObject
 from cosinnus.utils.group import message_group_admins_url
@@ -122,10 +123,7 @@ class HaystackMapCard(BaseMapCard):
 class HaystackUserMapCard(HaystackMapCard):
     def __init__(self, result, *args, **kwargs):
         kwargs.update(
-            {
-                'dataSlot1': None,
-                'dataSlot2': None,
-            }
+            {'dataSlot1': None, 'dataSlot2': None, 'is_public': result.mt_visibility == BaseTagObject.VISIBILITY_ALL}
         )
         return super(HaystackUserMapCard, self).__init__(result, *args, **kwargs)
 
@@ -276,6 +274,7 @@ class HaystackMapResult(BaseMapResult):
             'portal': portal,
             'group_slug': result.group_slug,
             'group_name': result.group_name,
+            'group_type': result.group_type,
             'participant_count': result.participant_count,
             'member_count': result.member_count,
             'content_count': result.content_count,
@@ -579,6 +578,18 @@ class DetailedEventResult(DetailedMapResult):
             }
         )
 
+        # set creator
+        if obj.creator:
+            kwargs.update(
+                {
+                    'creator_name': obj.creator.get_full_name(),
+                    'creator_slug': obj.creator.username,
+                    'creator_is_public': (
+                        obj.creator.cosinnus_profile.media_tag_object().visibility == BaseTagObject.VISIBILITY_ALL
+                    ),
+                }
+            )
+
         # collect visible attending users
         sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['people'])
         sqs = sqs.filter_and(user_id__in=haystack_result.participants)
@@ -618,6 +629,8 @@ class DetailedIdeaMapResult(DetailedMapResult):
                 + ('?idea=%s&name=%s' % (itemid_from_searchresult(haystack_result), escape(haystack_result.title))),
                 'creator_name': obj.creator.get_full_name(),
                 'creator_slug': obj.creator.username,
+                'creator_is_public': obj.creator.cosinnus_profile.media_tag_object().visibility
+                == BaseTagObject.VISIBILITY_ALL,
                 'followed': obj.is_user_following(user),
                 'starred': obj.is_user_starring(user),
                 'created': django_date_filter(obj.created, 'SHORT_DATE_FORMAT'),

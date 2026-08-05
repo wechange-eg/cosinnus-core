@@ -19,6 +19,26 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.9.0': {
+        'datetime': datetime(2026, 8, 4, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.9.0'),
+        'short_text': _('This update includes several features and bugfixes:'),
+        'full_text': [
+            _(
+                '- Added a notification setting that allows users to configure different notification frequencies '
+                'for portal-wide groups versus user-created groups and projects.\n'
+            ),
+            _(
+                '- Fixed a bug where some linked user profiles were not accessible from content on the map. '
+                'Also improved the display of creators for map content and of the groups/project they belong to.\n'
+            ),
+            _(
+                '- Improved some error messages on the login page to better explain the reason for '
+                'failed login attempts.\n'
+            ),
+            _('- Fixed several typos across the page. \n'),
+        ],
+    },
     '2.8.0-calendar': {
         'datetime': datetime(2026, 6, 30, tzinfo=pytz.utc),
         'title': _('Calendar Redesign'),

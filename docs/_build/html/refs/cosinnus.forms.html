@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.forms package &#8212; Cosinnus 2.8.0 documentation</title>
+    <title>cosinnus.forms package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4b85f8b1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -2239,12 +2239,19 @@ JSON field instead of model fields, after user form save</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.forms.user.UserEmailLoginForm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.forms.user.</span></span><span class="sig-name descname"><span class="pre">UserEmailLoginForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.user.UserEmailLoginForm" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.forms.user.</span></span><span class="sig-name descname"><span class="pre">UserEmailLoginForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.user.UserEmailLoginForm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AuthenticationForm</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.forms.user.UserEmailLoginForm.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'username':</span> <span class="pre">&lt;django.contrib.auth.forms.UsernameField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#cosinnus.forms.user.UserEmailLoginForm.base_fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.forms.user.UserEmailLoginForm.confirm_login_allowed">
+<span class="sig-name descname"><span class="pre">confirm_login_allowed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.forms.user.UserEmailLoginForm.confirm_login_allowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow inactive users at this validation stage so they can be handled separately in the View.
+Overriding django.contrib.auth.forms.AuthenticationForm.confirm_login_allowed()</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.forms.user.UserEmailLoginForm.declared_fields">
@@ -2253,7 +2260,7 @@ JSON field instead of model fields, after user form save</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.forms.user.UserEmailLoginForm.error_messages">
-<span class="sig-name descname"><span class="pre">error_messages</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'inactive':</span> <span class="pre">'Dieses</span> <span class="pre">Benutzerkonto</span> <span class="pre">ist</span> <span class="pre">deaktiviert</span> <span class="pre">worden.',</span> <span class="pre">'invalid_login':</span> <span class="pre">'Bitte</span> <span class="pre">eine</span> <span class="pre">gültige</span> <span class="pre">E-Mail-Addresse</span> <span class="pre">und</span> <span class="pre">ein</span> <span class="pre">Passwort</span> <span class="pre">eingeben.</span> <span class="pre">Beide</span> <span class="pre">Felder</span> <span class="pre">berücksichtigen</span> <span class="pre">die</span> <span class="pre">Groß-/Kleinschreibung.',</span> <span class="pre">'no_cookies':</span> <span class="pre">'Anscheinend</span> <span class="pre">sind</span> <span class="pre">Cookies</span> <span class="pre">in</span> <span class="pre">deinem</span> <span class="pre">Browser</span> <span class="pre">deaktiviert.</span> <span class="pre">Diese</span> <span class="pre">werden</span> <span class="pre">zum</span> <span class="pre">Einloggen</span> <span class="pre">benötigt.'}</span></em><a class="headerlink" href="#cosinnus.forms.user.UserEmailLoginForm.error_messages" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">error_messages</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'inactive':</span> <span class="pre">'Bitte</span> <span class="pre">eine</span> <span class="pre">gültige</span> <span class="pre">E-Mail-Adresse</span> <span class="pre">und</span> <span class="pre">ein</span> <span class="pre">Passwort</span> <span class="pre">eingeben.',</span> <span class="pre">'invalid_login':</span> <span class="pre">'Bitte</span> <span class="pre">eine</span> <span class="pre">gültige</span> <span class="pre">E-Mail-Adresse</span> <span class="pre">und</span> <span class="pre">ein</span> <span class="pre">Passwort</span> <span class="pre">eingeben.',</span> <span class="pre">'no_cookies':</span> <span class="pre">'Anscheinend</span> <span class="pre">sind</span> <span class="pre">Cookies</span> <span class="pre">in</span> <span class="pre">deinem</span> <span class="pre">Browser</span> <span class="pre">deaktiviert.</span> <span class="pre">Diese</span> <span class="pre">werden</span> <span class="pre">zum</span> <span class="pre">Einloggen</span> <span class="pre">benötigt.'}</span></em><a class="headerlink" href="#cosinnus.forms.user.UserEmailLoginForm.error_messages" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">

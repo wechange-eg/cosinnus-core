@@ -533,7 +533,6 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         return '<tagged object {0} {1} (ID: {2})>'.format(self.__class__.__name__, self.title, self.pk)
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) is False
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
         self.title = clean_single_line_text(self.title)
         if hasattr(self, '_media_tag_cache'):
@@ -549,8 +548,9 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         if not getattr(self, 'media_tag', None):
             self.media_tag = get_tag_object_model().objects.create()
             self.save()
-        if created:
-            pass
+
+        # set last activity for the object's group on any update
+        self.group.update_last_activity()
 
     def on_save_added_tagged_persons(self, set_users):
         """Called by the taggable form whenever this object is saved and -new- persons
