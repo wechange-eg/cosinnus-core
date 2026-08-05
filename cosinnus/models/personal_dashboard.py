@@ -137,7 +137,7 @@ class CosinnusPersonalDashboardOffersWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:personal-offer-list')
 
 
-class CosinnusPersonalGroupsWidget(CosinnusPersonalDashboardWidget):
+class CosinnusPersonalDashboardGroupsWidget(CosinnusPersonalDashboardWidget):
     """Personal groups and projects widget"""
 
     id = 'dashboard.my_spaces'
@@ -146,7 +146,7 @@ class CosinnusPersonalGroupsWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:api-group-personal')
 
 
-class CosinnusPersonalEventPollsWidget(CosinnusPersonalDashboardWidget):
+class CosinnusPersonalDashboardEventPollsWidget(CosinnusPersonalDashboardWidget):
     """Personal open event polls widget"""
 
     id = 'dashboard.event_polls'
@@ -156,7 +156,7 @@ class CosinnusPersonalEventPollsWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:personal-event-poll-open')
 
 
-class CosinnusPersonalTasksWidget(CosinnusPersonalDashboardWidget):
+class CosinnusPersonalDashboardTasksWidget(CosinnusPersonalDashboardWidget):
     """Personal deck tasks widget"""
 
     id = 'dashboard.tasks'
@@ -187,7 +187,7 @@ class CosinnusPersonalTasksWidget(CosinnusPersonalDashboardWidget):
         return conf
 
 
-class CosinnusPersonalEventsWidget(CosinnusPersonalDashboardWidget):
+class CosinnusPersonalDashboardEventsWidget(CosinnusPersonalDashboardWidget):
     """Personal events widget"""
 
     id = 'dashboard.events'
@@ -216,7 +216,7 @@ class CosinnusPersonalEventsWidget(CosinnusPersonalDashboardWidget):
         return conf
 
 
-class CosinnusPersonalPollsWidget(CosinnusPersonalDashboardWidget):
+class CosinnusPersonalDashboardPollsWidget(CosinnusPersonalDashboardWidget):
     """Personal polls widget"""
 
     id = 'dashboard.polls'
@@ -226,7 +226,7 @@ class CosinnusPersonalPollsWidget(CosinnusPersonalDashboardWidget):
     api_url = reverse_lazy('cosinnus:frontend-api:personal-poll-open')
 
 
-class CosinnusPersonalIdeasWidget(CosinnusPersonalDashboardWidget):
+class CosinnusPersonalDashboardIdeasWidget(CosinnusPersonalDashboardWidget):
     """Personal ideas widget"""
 
     id = 'dashboard.ideas'
@@ -238,7 +238,7 @@ class CosinnusPersonalIdeasWidget(CosinnusPersonalDashboardWidget):
         return settings.COSINNUS_IDEAS_ENABLED
 
 
-class CosinnusPersonalLikedIdeasWidget(CosinnusPersonalDashboardWidget):
+class CosinnusPersonalDashboardLikedIdeasWidget(CosinnusPersonalDashboardWidget):
     """Personal liked ideas widget"""
 
     id = 'dashboard.liked_ideas'
@@ -255,13 +255,13 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
     CosinnusPersonalDashboardCreateNewWidget,
     CosinnusPersonalDashboardOffersWidget,
-    CosinnusPersonalGroupsWidget,
-    CosinnusPersonalEventPollsWidget,
-    CosinnusPersonalTasksWidget,
-    CosinnusPersonalEventsWidget,
-    CosinnusPersonalPollsWidget,
-    CosinnusPersonalIdeasWidget,
-    CosinnusPersonalLikedIdeasWidget,
+    CosinnusPersonalDashboardGroupsWidget,
+    CosinnusPersonalDashboardEventPollsWidget,
+    CosinnusPersonalDashboardTasksWidget,
+    CosinnusPersonalDashboardEventsWidget,
+    CosinnusPersonalDashboardPollsWidget,
+    CosinnusPersonalDashboardIdeasWidget,
+    CosinnusPersonalDashboardLikedIdeasWidget,
 ]
 
 # initialized available dashboard widgets
