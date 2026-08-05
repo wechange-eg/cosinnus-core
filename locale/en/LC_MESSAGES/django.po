@@ -1453,9 +1453,6 @@ msgid ""
 "- Fixed an issue where certain login or signup flows were sometimes not redirecting properly.\n"
 msgstr ""
 
-msgid "- Fixed several small bugs and made some improvements to the redesigned calendar.\n"
-msgstr ""
-
 msgid "- Fixed several typos across the page. \n"
 msgstr ""
 
@@ -7935,7 +7932,7 @@ msgstr ""
 msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr ""
 
-msgid "Note: For performance reasons last activity is not tracked precisely within the last month."
+msgid "Note: For performance reasons last activity may not be tracked precisely."
 msgstr ""
 
 msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "

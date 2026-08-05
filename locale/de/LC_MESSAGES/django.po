@@ -1591,9 +1591,6 @@ msgstr ""
 "- Es wurde ein Problem mit dem Markdown-Texteditor in einigen Formularen behoben.\n"
 "- Es wurde ein Problem behoben, bei dem bestimmte Anmelde- oder Registrierungsabläufe gelegentlich nicht korrekt weitergeleitet wurden.\n"
 
-msgid "- Fixed several small bugs and made some improvements to the redesigned calendar.\n"
-msgstr "- Es wurden mehrere kleinere Fehler behoben und einige Verbesserungen am neu gestalteten Kalender vorgenommen.\n"
-
 msgid "- Fixed several typos across the page. \n"
 msgstr "- Es wurden mehrere Tippfehler auf der Seite korrigiert.\n"
 
@@ -8523,8 +8520,8 @@ msgstr "Beachte: Änderung an einigen dieser Einstellungen kann den Neustart des
 msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr "Hinweis: Detaillierte Mitgliederlisten für plattformweite Inhalte werden nicht angezeigt."
 
-msgid "Note: For performance reasons last activity is not tracked precisely within the last month."
-msgstr "Hinweis: Aus Performance-Gründen wird die letzte Aktivität nicht exakt innerhalb des letzten Monats erfasst."
+msgid "Note: For performance reasons last activity may not be tracked precisely."
+msgstr "Hinweis: Aus Performance-Gründen wird die letzte Aktivität nicht ständig exakt erfasst."
 
 msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
 msgstr "Hinweis: Wenn eine Folie nachträglich zu einer Veranstaltung hinzugefügt wird, erscheint diese nicht automatisch in der Veranstaltung, sofern diese Veranstaltung kürzlich besucht wurde und somit aktiv ist. Hierfür ist ein aktives Beenden der Veranstaltung notwendig oder ein 5 minütiges Leerlaufen ohne Teilnehmer, bis die Veranstaltung automatisch beendet wird. "
@@ -15302,6 +15299,9 @@ msgstr "Ja"
 #~ msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete your user profile directly from your account settings and the groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
 #~ msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst die Gruppen/Projekte, in denen du Administrator bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\n"
 
+#~ msgid "- Fixed several small bugs and made some improvements to the redesigned calendar.\n"
+#~ msgstr "- Es wurden mehrere kleinere Fehler behoben und einige Verbesserungen am neu gestalteten Kalender vorgenommen.\n"
+
 #~ msgid "- Made several small improvements to the user interface and look and feel of the redesigned calendar.\n"
 #~ msgstr "- Es wurden einige kleinere Verbesserungen an der Benutzeroberfläche und der optischen Gestaltung des neu Kalender-Redesigns vorgenommen.\n"
 
@@ -16021,6 +16021,9 @@ msgstr "Ja"
 
 #~ msgid "Note: Attendance statistics might not include all attendees, as users may block tracking."
 #~ msgstr "Hinweis: Teilnahme-Statistiken könnten unvollständig sein, weil Teilnehmende Tracking blockieren können."
+
+#~ msgid "Note: For performance reasons last activity is not tracked precisely within the last month."
+#~ msgstr "Hinweis: Aus Performance-Gründen wird die letzte Aktivität nicht exakt innerhalb des letzten Monats erfasst."
 
 #~ msgid "Ok"
 #~ msgstr "Ok"
