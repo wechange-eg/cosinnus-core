@@ -9,7 +9,7 @@ import re
 import shutil
 from builtins import object
 from collections import OrderedDict
-from typing import Callable, Optional, Union
+from typing import Optional
 
 import six
 from annoying.functions import get_object_or_None
@@ -1396,7 +1396,7 @@ class CosinnusBaseGroup(
 
         # set last activity for new groups
         if created:
-            self.last_activity = now()
+            self.update_last_activity()
 
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
 
@@ -1558,16 +1558,16 @@ class CosinnusBaseGroup(
             and self.type in settings.COSINNUS_MITWIRKOMAT_ENABLED_FOR_GROUP_TYPES
         )
 
-    def update_last_activity(self, last_activity: Optional[Union[datetime.datetime, Callable]] = now):
+    def update_last_activity(self, last_activity: Optional[datetime.datetime] = None):
         """Update this group's `last_activity` to the given time or now if none supplied.
         Performs a soft triggerless update() to not affect the group's `last_modified` field.
         Ensures last_activity is never in the future.
-        @param last_activity: an optional DateTime, callable method or None (to reset the field). If not supplied,
+        @param last_activity: an optional DateTime or None. If not supplied, or None,
         updates this group's last_activity to now()."""
-        if callable(last_activity):
-            # evaluate if method is given
-            last_activity = last_activity()
-        if last_activity is None or last_activity <= now():
+        # set now if no datetime is supplied
+        if not last_activity:
+            last_activity = now()
+        if last_activity <= now():
             self.last_activity = last_activity
             type(self).objects.filter(pk=self.pk).update(last_activity=self.last_activity)
         else:
